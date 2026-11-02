@@ -93,8 +93,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 450,
 			name = "The First Landmark",
 			kind = "field",
-			objective = "Deploy the recorder in Marsh, leave it to record, then retrieve Numbered Data Module 0013."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Marsh, let it finish recording, then retrieve the "
+				.. "first Marsh survey recording. Bring it back to the issuing contact in Marsh."
+			),
 			requires = {"AT01"},
 			briefing = (
 				"Let's begin with a recording here in Marsh. Take the recorder to the assigned site, let it "
@@ -106,11 +108,15 @@ PLUGIN:Register("atlas", {
 				.. "think; I can check the recording while you catch your breath."
 			),
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. An initial "
+					.. "Marsh recording for comparison with the approach on foot."
+				),
 				kind = "sensor",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_module",
-				label = "The First Landmark - Numbered Data Module 0013",
+				label = "First Marsh survey recording",
 			},
 			benefits = {},
 		},
@@ -138,8 +144,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 650,
 			name = "The Route That Shifted",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0022 from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the route recorder from the assigned search area in Marsh. Bring it back to the issuing "
+				.. "contact in Marsh."
+			),
 			requires = {"AT02"},
 			briefing = (
 				"There's a recorder to recover from the assigned search area in Marsh. Bring it back here. I "
@@ -151,11 +159,15 @@ PLUGIN:Register("atlas", {
 				.. "comparison immediately; remind me to let you put your pack down first."
 			),
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. The surviving route "
+					.. "record Atlas wants to compare with present conditions."
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_module2",
-				label = "The Route That Shifted - Numbered Data Module 0022",
+				label = "route recorder",
 			},
 			benefits = {},
 		},
@@ -187,8 +199,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 850,
 			name = "Ballast's Shortcut",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Deliver it to 'Ballast'"
-				.. " in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the waterside journal for Ballast from the assigned search area in Marsh. Deliver it to "
+				.. "'Ballast' in Marsh, then come back to the issuing contact in Marsh."
+			),
 			requires = {"AT04"},
 			briefing = (
 				"Recover the waterside journal from the assigned area in Marsh and take it to Ballast, also "
@@ -201,11 +215,15 @@ PLUGIN:Register("atlas", {
 				.. "my account of somebody else's notes. That should remove at least one of his objections."
 			),
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. A waterside account for "
+					.. "Ballast to check against his local knowledge."
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_notebook",
-				label = "Ballast's Shortcut - Tied Leather Journal",
+				label = "Waterside journal for Ballast",
 				recipient = "ballast",
 			},
 			benefits = {
@@ -247,11 +265,13 @@ PLUGIN:Register("atlas", {
 			completionCash = 1050,
 			name = "The Missing Surveyor",
 			kind = "field",
-			objective = "Recover Scientist's Field Diary from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the missing surveyor's diary from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"AT06"},
 			briefing = (
-				"A surveyor's notebook is still out in the assigned Marsh search area. Recover it and bring "
+				"A surveyor's notebook is still out in the assigned Garbage search area. Recover it and bring "
 				.. "it here. I'd like to see what they actually wrote before deciding where their work was "
 				.. "leading. A missing record can acquire a remarkably elaborate story while nobody is reading "
 				.. "it."
@@ -262,11 +282,15 @@ PLUGIN:Register("atlas", {
 				.. "more interesting one."
 			),
 			field = {
+				description = (
+					"A thick blue diary with a label fixed to the front cover. The missing surveyor's surviving "
+					.. "notes, kept together for Atlas to examine."
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_diary",
-				label = "The Missing Surveyor - Scientist's Field Diary",
+				label = "Missing surveyor's diary",
 			},
 			benefits = {},
 		},
@@ -298,8 +322,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 1250,
 			name = "An Unfinished Map",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the unfinished survey cassette from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"AT08"},
 			briefing = (
 				"There's an audio cassette to recover in the assigned search area in Garbage. Bring it back "
@@ -311,11 +337,15 @@ PLUGIN:Register("atlas", {
 				.. "I'd like to hear it twice before I decide what the speaker meant."
 			),
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. A surviving audio "
+					.. "account intended to accompany the written survey notes."
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_tape",
-				label = "An Unfinished Map - Handwritten Audio Cassette",
+				label = "Unfinished survey cassette",
 			},
 			benefits = {},
 		},
@@ -343,8 +373,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 1450,
 			name = "The Freight Route",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the freight-route manifest for Ledger from the assigned search area in Marsh. Deliver it "
+				.. "to 'Ledger' in Waystation, then come back to the issuing contact in Marsh."
+			),
 			requires = {"AT10"},
 			briefing = (
 				"Recover the packing list from the assigned area in Marsh, deliver it to Ledger in "
@@ -358,11 +390,15 @@ PLUGIN:Register("atlas", {
 				.. "appreciate more every year."
 			),
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. The original "
+					.. "freight list Ledger needs to consult while checking the journey."
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_manifest",
-				label = "The Freight Route - Warehouse Packing List A",
+				label = "Freight-route manifest for Ledger",
 				recipient = "ledger",
 			},
 			benefits = {
@@ -404,8 +440,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 1650,
 			name = "The Wrong Coordinates",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the disputed coordinate file from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"AT12"},
 			briefing = (
 				"Recover the file folder from the assigned search area in Marsh and bring it here. I want to "
@@ -418,11 +456,15 @@ PLUGIN:Register("atlas", {
 				.. "the easy part; explaining which entry deserves confidence takes a little longer."
 			),
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. A source file Atlas wants to "
+					.. "examine before trusting copied coordinates."
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_official",
-				label = "The Wrong Coordinates - Official File Folder",
+				label = "Disputed coordinate file",
 			},
 			benefits = {},
 		},
@@ -449,8 +491,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 1850,
 			name = "The Lost Team's Cache",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Waystation. Deliver it to"
-				.. " 'Wake' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the survey team's case for Wake from the assigned search area in Waystation. Deliver it "
+				.. "to 'Wake' in Garbage, then come back to the issuing contact in Marsh."
+			),
 			requires = {"AT14"},
 			briefing = (
 				"Recover the team's equipment case from the assigned search area in Waystation. Take it to "
@@ -464,11 +508,15 @@ PLUGIN:Register("atlas", {
 				.. "intact."
 			),
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. The survey team's surviving "
+					.. "equipment, kept intact for Wake's checks."
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_equipment",
-				label = "The Lost Team's Cache - Striped Equipment Case",
+				label = "Survey team's case for Wake",
 				recipient = "wake",
 			},
 			benefits = {},
@@ -501,8 +549,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 2050,
 			name = "The First Pripyat Mark",
 			kind = "field",
-			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0013."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
+				.. "first Pripyat survey recording. Bring it back to the issuing contact in Marsh."
+			),
 			requires = {"AT16"},
 			briefing = (
 				"This recording is in Pripyat. Check your supplies and the assigned destination before "
@@ -516,11 +566,15 @@ PLUGIN:Register("atlas", {
 				.. "still standing with your pack on."
 			),
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. A Pripyat "
+					.. "survey recording for comparison with the earlier route work."
+				),
 				kind = "sensor",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module",
-				label = "The First Pripyat Mark - Numbered Data Module 0013",
+				label = "First Pripyat survey recording",
 			},
 			benefits = {
 				items = {
@@ -556,8 +610,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 2250,
 			name = "The Last Survey Station",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the last survey-station cassette from the assigned search area in Pripyat. Bring it back "
+				.. "to the issuing contact in Marsh."
+			),
 			requires = {"AT19"},
 			briefing = (
 				"There's a final audio cassette to recover from the assigned search area in Pripyat. Bring "
@@ -571,11 +627,15 @@ PLUGIN:Register("atlas", {
 				.. "the trouble to make the record; I can take the time to hear it."
 			),
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. The station's "
+					.. "surviving audio account, to be heard in full before the survey is concluded."
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_tape",
-				label = "The Last Survey Station - Handwritten Audio Cassette",
+				label = "Last survey-station cassette",
 			},
 			benefits = {},
 			stock = {
@@ -611,8 +671,10 @@ PLUGIN:Register("atlas", {
 			completionCash = 2450,
 			name = "Finish Their Route",
 			kind = "field",
-			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0022."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
+				.. "final route survey recording. Bring it back to the issuing contact in Marsh."
+			),
 			requires = {"AT21"},
 			briefing = (
 				"There's one last site to record in Pripyat. Deploy the recorder at the assigned location, "
@@ -627,11 +689,15 @@ PLUGIN:Register("atlas", {
 				.. "already halfway out the door when I finally put the pencil down."
 			),
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. The final assigned "
+					.. "survey recording, brought home to complete Atlas's comparison."
+				),
 				kind = "sensor",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module2",
-				label = "Finish Their Route - Numbered Data Module 0022",
+				label = "Final route survey recording",
 			},
 			benefits = {},
 			recognition = "Atlas's trusted contact",

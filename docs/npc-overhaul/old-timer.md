@@ -7,6 +7,14 @@ Edit [sh_old_timer.lua](../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_
 for requirements, targets, prerequisites, work prompts, briefings, benefits and finished-story greeting.
 Background dialogue remains in sh_tutorialnpc.lua.
 
+## Implemented voice direction — November 2026
+
+Stern, practical mentor with dry humour and faults he can acknowledge. Concern is expressed through preparation and attention to the return journey; familiarity and the companion story develop through the existing progression.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Sparse tree
 
 | Part | Nodes in order |

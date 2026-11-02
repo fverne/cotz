@@ -28,18 +28,20 @@ PLUGIN:Register("beanstalk", {
 			"Hello again. Keep clear of the tray, as usual. You know why I ask, which is a considerable "
 			.. "improvement on most conversations here."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the sampler run I'm protecting.",
+		offerPrompt = "Do you have research defence work?",
 		work = (
-			"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to protect "
-			.. "it. Protect the sampler for the whole run. Leaving early because it looks quiet is a particularly "
-			.. "frustrating way to lose a result."
+			"Defended sampler runs. Deploy at the assigned site, stay close enough to protect the sampler, let "
+			.. "the recording finish, then bring the results back. Prepare for the whole run. A quiet beginning is "
+			.. "not evidence that the equipment can be left alone. We need the completed record before discussing "
+			.. "how reassuring the conditions looked."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What needs comparing in the research records?",
 		progression = (
-			"There are supplies to collect and controls to check. We need the comparison before we can trust "
-			.. "the result. Supplies first where they're needed, comparisons where we have something to compare. "
-			.. "I'm not asking you to agree with me. I'm asking for enough evidence to check myself."
+			"I need supplies and controls, including records left by earlier work. A discrepancy is worth "
+			.. "investigating before either of us chooses a favourite explanation. Some orders are defended "
+			.. "recordings; others retrieve surviving evidence. Read the particular instruction before preparing. "
+			.. "I would rather clarify the method here than apologise for it after your return."
 		),
 	},
 	catalogue = {
@@ -108,13 +110,22 @@ PLUGIN:Register("beanstalk", {
 			name = "The First Baseline",
 			kind = "field",
 			objective = (
-				"Start the sampler, defend it until it finishes, and collect the results in Garbage. Return "
-				.. "to this contact to finish the assignment."
+				"Deploy and protect the sampler at the assigned site in Garbage until the run finishes, then "
+				.. "collect the results. Bring it back to the issuing contact in Garbage."
 			),
 			requires = {"BN01"},
-			briefing = "Defend a sampler at a Garbage contamination site.",
-			completion = "Give me the record before it gets mixed in with the others.",
+			briefing = (
+				"We need a defended recording at the contamination site. I want a complete run before we choose "
+				.. "which variation to explain. Deploy and protect the sampler at the assigned site in Garbage until "
+				.. "the run finishes, then collect the results. Bring it back to me in Garbage."
+			),
+			completion = "Thank you. I'll keep the result with its conditions before comparing it with anything else.",
 			field = {
+				description = (
+					"A field recording recovered from the completed sampler run. Beanstalk's note: \"We need a "
+					.. "defended recording at the contamination site.\""
+				),
+				label = "First contamination sampler results",
 				kind = "defence",
 				map = "mz_garbage",
 				tier = 1,
@@ -128,10 +139,10 @@ PLUGIN:Register("beanstalk", {
 			kind = "tracker",
 			requires = {"BN02"},
 			briefing = (
-				"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to "
-				.. "protect it."
+				"Continue the defended research recordings. Protect the sampler for the whole run and bring the "
+				.. "results back."
 			),
-			completion = "You've brought back a useful set of results. Please keep using the same care.",
+			completion = "A useful beginning. We have completed runs to compare.",
 			target = 2,
 			benefits = {},
 		},
@@ -140,17 +151,27 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 650,
 			name = "The Buried Meter",
 			kind = "field",
-			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the field meter from the assigned search area in Garbage. Bring it back to the issuing "
+				.. "contact in Garbage."
+			),
 			requires = {"BN03"},
-			briefing = "Recover a lost instrument case at a dump.",
-			completion = "Good. I'll compare it with the control.",
+			briefing = (
+				"There's an instrument left at the dump site. I want it inspected before its absence becomes the "
+				.. "explanation for every discrepancy. Recover the field meter from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Set it down carefully. I'll check the instrument against the account.",
 			field = {
+				description = (
+					"A finned grey control box with a red stripe and several round front connectors. Beanstalk's "
+					.. "note: \"There's an instrument left at the dump site.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_control",
-				label = "The Buried Meter - Red-Trimmed Control Unit",
+				label = "field meter",
 			},
 			benefits = {},
 		},
@@ -160,8 +181,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Keeping It Sealed",
 			kind = "delivery",
 			requires = {"BN03"},
-			briefing = "These are the supplies I need for the work. Keep them separate from anything contaminated.",
-			completion = "Thank you. I'll check it before use.",
+			briefing = "Bring the requested field supplies here. Keep them clear of anything contaminated in your pack.",
+			completion = "Thank you. I'll inspect the supplies before use.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -175,17 +196,27 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 850,
 			name = "Two Sides of the Heap",
 			kind = "field",
-			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the dump comparison log from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"BN04"},
-			briefing = "Recover the dump comparison record.",
-			completion = "Carefully, please. That still needs checking.",
+			briefing = (
+				"I'd like the comparison log recovered. The two sides of a site don't become comparable merely "
+				.. "because someone used the same heading. Recover the dump comparison log from the assigned search "
+				.. "area in Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Good. I'll read how they selected the observations.",
 			field = {
+				description = (
+					"A blue laboratory folder with loose printed record sheets extending from its edges. Beanstalk's "
+					.. "note: \"I'd like the comparison log recovered.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_lab",
-				label = "Two Sides of the Heap - Laboratory Log Folder",
+				label = "Dump comparison log",
 			},
 			benefits = {
 				items = {
@@ -208,11 +239,8 @@ PLUGIN:Register("beanstalk", {
 			name = "A Consistent Sample",
 			kind = "tracker",
 			requires = {"BN05"},
-			briefing = (
-				"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to "
-				.. "protect it."
-			),
-			completion = "You've brought back a useful set of results. Please keep using the same care.",
+			briefing = "More research defence work when prepared. The sampler needs protection until it finishes.",
+			completion = "Another set of intact results. Thank you for giving the ordinary run proper attention.",
 			target = 5,
 			benefits = {},
 		},
@@ -221,17 +249,28 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 1050,
 			name = "Vesper's Reading",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Deliver it to"
-				.. " 'Vesper' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the disputed field recorder for Vesper from the assigned search area in Garbage. Deliver "
+				.. "it to 'Vesper' in Garbage, then come back to the issuing contact in Garbage."
+			),
 			requires = {"BN06"},
-			briefing = "Recover a disputed recorder from an anomaly approach.",
-			completion = "They have the record now. We can stop comparing results from memory.",
+			briefing = (
+				"Vesper needs the disputed field record. She should be able to inspect the result without my "
+				.. "objections choosing the order for her. Recover the disputed field recorder for Vesper from the "
+				.. "assigned search area in Garbage. Deliver it to 'Vesper' in Garbage, then come back to me in "
+				.. "Garbage."
+			),
+			completion = "She has it. Good. I'll let her read it before asking which parts she disagrees with.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Beanstalk's "
+					.. "note: \"Vesper needs the disputed field record.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_module",
-				label = "Vesper's Reading - Numbered Data Module 0013",
+				label = "Disputed field recorder for Vesper",
 				recipient = "vesper",
 			},
 			benefits = {},
@@ -242,8 +281,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Clean Instruments",
 			kind = "delivery",
 			requires = {"BN07"},
-			briefing = "These are the supplies I need for the work. Keep them separate from anything contaminated.",
-			completion = "Good. Keep the packaging with it.",
+			briefing = "I need the listed material for the preparation. Clean packaging matters as well as the label.",
+			completion = "Good. Keep the packaging with the contents for now.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -258,13 +297,25 @@ PLUGIN:Register("beanstalk", {
 			name = "The Control Site",
 			kind = "field",
 			objective = (
-				"Start the sampler, defend it until it finishes, and collect the results in Garbage. Return "
-				.. "to this contact to finish the assignment."
+				"Deploy and protect the sampler at the assigned site in Garbage until the run finishes, then "
+				.. "collect the results. Bring it back to the issuing contact in Garbage."
 			),
 			requires = {"BN08"},
-			briefing = "Defend a sampler away from the contested field.",
-			completion = "Good. I'll compare it with the control.",
+			briefing = (
+				"We need another defended sampler run. A control deserves the same care as the result everyone "
+				.. "finds interesting. Deploy and protect the sampler at the assigned site in Garbage until the run "
+				.. "finishes, then collect the results. Bring it back to me in Garbage."
+			),
+			completion = (
+				"Complete results. Thank you. I'll check the recording conditions before interpreting the "
+				.. "difference."
+			),
 			field = {
+				description = (
+					"A field recording recovered from the completed sampler run. Beanstalk's note: \"We need another "
+					.. "defended sampler run.\""
+				),
+				label = "Control-site sampler results",
 				kind = "defence",
 				map = "mz_garbage",
 				tier = 2,
@@ -277,11 +328,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Enough to Compare",
 			kind = "tracker",
 			requires = {"BN09"},
-			briefing = (
-				"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to "
-				.. "protect it."
-			),
-			completion = "You've brought back a useful set of results. Please keep using the same care.",
+			briefing = "Keep completing the defended recordings while I review the controls.",
+			completion = "You've kept the results usable. That is important before any interpretation begins.",
 			target = 9,
 			benefits = {},
 		},
@@ -290,17 +338,27 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 1450,
 			name = "The Dirty Filter",
 			kind = "field",
-			objective = "Recover Clinical Records Folder I from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the field station exposure log from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"BN10"},
-			briefing = "Retrieve a field station's exposure record.",
-			completion = "Carefully, please. That still needs checking.",
+			briefing = (
+				"Recover the field station's exposure account. I want to know what was recorded rather than what "
+				.. "someone now thinks ought to have happened. Recover the field station exposure log from the "
+				.. "assigned search area in Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Here. I'll keep the entries in order while I compare them.",
 			field = {
+				description = (
+					"A blue-green folder with medical record sheets protruding from its cover. Beanstalk's note: "
+					.. "\"Recover the field station's exposure account.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_clinic",
-				label = "The Dirty Filter - Clinical Records Folder I",
+				label = "Field station exposure log",
 			},
 			benefits = {
 				items = {
@@ -342,13 +400,22 @@ PLUGIN:Register("beanstalk", {
 			name = "Beyond the Dumps",
 			kind = "field",
 			objective = (
-				"Start the sampler, defend it until it finishes, and collect the results in Garbage. Return "
-				.. "to this contact to finish the assignment."
+				"Deploy and protect the sampler at the assigned site in Garbage until the run finishes, then "
+				.. "collect the results. Bring it back to the issuing contact in Garbage."
 			),
 			requires = {"BN12"},
-			briefing = "Defend a sampler at a regional industrial site.",
-			completion = "Give me the record before it gets mixed in with the others.",
+			briefing = (
+				"The industrial-site comparison needs a defended recording. A useful method still has to survive "
+				.. "the place we're asking you to use it. Deploy and protect the sampler at the assigned site in "
+				.. "Garbage until the run finishes, then collect the results. Bring it back to me in Garbage."
+			),
+			completion = "Thank you for keeping the run intact. Now I can see what it actually recorded.",
 			field = {
+				description = (
+					"A field recording recovered from the completed sampler run. Beanstalk's note: \"The "
+					.. "industrial-site comparison needs a defended recording.\""
+				),
+				label = "Industrial-site sampler results",
 				kind = "defence",
 				map = "mz_garbage",
 				tier = 2,
@@ -361,11 +428,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Work Under Pressure",
 			kind = "tracker",
 			requires = {"BN13"},
-			briefing = (
-				"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to "
-				.. "protect it."
-			),
-			completion = "You've brought back a useful set of results. Please keep using the same care.",
+			briefing = "Continue the research defence assignments. Prepare to remain through the full recording.",
+			completion = "A considerable amount of work. I appreciate the care outside this room.",
 			target = 14,
 			benefits = {},
 		},
@@ -374,17 +438,28 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 1850,
 			name = "The Contradictory Result",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Deliver it to"
-				.. " 'Vesper' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the second control record for Vesper from the assigned search area in Waystation. Deliver "
+				.. "it to 'Vesper' in Garbage, then come back to the issuing contact in Garbage."
+			),
 			requires = {"BN14"},
-			briefing = "Recover a second control recorder in Waystation territory.",
-			completion = "They have the record now. We can stop comparing results from memory.",
+			briefing = (
+				"Vesper should examine the second control recorder. A contradiction is worth checking before "
+				.. "either of us gives it an explanation. Recover the second control record for Vesper from the "
+				.. "assigned search area in Waystation. Deliver it to 'Vesper' in Garbage, then come back to me in "
+				.. "Garbage."
+			),
+			completion = "Delivered. I'll wait for her reading instead of rehearsing my response to it.",
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. Beanstalk's note: "
+					.. "\"Vesper should examine the second control recorder.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_module2",
-				label = "The Contradictory Result - Numbered Data Module 0022",
+				label = "Second control record for Vesper",
 				recipient = "vesper",
 			},
 			benefits = {},
@@ -395,8 +470,14 @@ PLUGIN:Register("beanstalk", {
 			name = "Preparing the Comparison",
 			kind = "delivery",
 			requires = {"BN15"},
-			briefing = "These are the supplies I need for the work. Keep them separate from anything contaminated.",
-			completion = "Thank you. I'll check it before use.",
+			briefing = (
+				"There is another supply request. Please check it before replacing something with a "
+				.. "similar-looking object."
+			),
+			completion = (
+				"That's the requested material. I can finish the preparation without adapting the method around "
+				.. "it."
+			),
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -411,13 +492,25 @@ PLUGIN:Register("beanstalk", {
 			name = "Pripyat Baseline",
 			kind = "field",
 			objective = (
-				"Start the sampler, defend it until it finishes, and collect the results in Pripyat. Return "
-				.. "to this contact to finish the assignment."
+				"Deploy and protect the sampler at the assigned site in Pripyat until the run finishes, then "
+				.. "collect the results. Bring it back to the issuing contact in Garbage."
 			),
 			requires = {"BN16"},
-			briefing = "Defend a sampler at a Pripyat contamination site.",
-			completion = "Carefully, please. That still needs checking.",
+			briefing = (
+				"We need a defended baseline run in Pripyat. Prepare for the whole recording, not just getting the "
+				.. "equipment there. Deploy and protect the sampler at the assigned site in Pripyat until the run "
+				.. "finishes, then collect the results. Bring it back to me in Garbage."
+			),
+			completion = (
+				"You're back with the results. I'll start by checking the run, before I ask it to support a "
+				.. "comparison."
+			),
 			field = {
+				description = (
+					"A field recording recovered from the completed sampler run. Beanstalk's note: \"We need a "
+					.. "defended baseline run in Pripyat.\""
+				),
+				label = "Pripyat baseline sampler results",
 				kind = "defence",
 				map = "rp_pripyat_remaster",
 				tier = 3,
@@ -439,11 +532,11 @@ PLUGIN:Register("beanstalk", {
 			name = "Holding the Site",
 			kind = "tracker",
 			requires = {"BN17", "BN18"},
-			briefing = (
-				"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to "
-				.. "protect it."
+			briefing = "There are further defended sampler runs. Bring the completed results back intact.",
+			completion = (
+				"You've kept a consistent record through the work. I have better grounds for checking the "
+				.. "comparison."
 			),
-			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 20,
 			benefits = {},
 		},
@@ -452,17 +545,27 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 2250,
 			name = "The Abandoned Station",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the earlier station's research tape from the assigned search area in Pripyat. Bring it "
+				.. "back to the issuing contact in Garbage."
+			),
 			requires = {"BN19"},
-			briefing = "Recover an earlier team's recorder in Pripyat.",
-			completion = "Give me the record before it gets mixed in with the others.",
+			briefing = (
+				"The earlier team's recorder is still in Pripyat. Their account may qualify what we think we're "
+				.. "measuring. Recover the earlier station's research tape from the assigned search area in Pripyat. "
+				.. "Bring it back to me in Garbage."
+			),
+			completion = "Leave it beside the notes. I'll listen without assuming their question was the same as ours.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Beanstalk's note: "
+					.. "\"The earlier team's recorder is still in Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_tape",
-				label = "The Abandoned Station - Handwritten Audio Cassette",
+				label = "Earlier station's research tape",
 			},
 			benefits = {},
 		},
@@ -472,8 +575,11 @@ PLUGIN:Register("beanstalk", {
 			name = "A Clean Comparison",
 			kind = "delivery",
 			requires = {"BN20"},
-			briefing = "These are the supplies I need for the work. Keep them separate from anything contaminated.",
-			completion = "Good. Keep the packaging with it.",
+			briefing = (
+				"Bring the listed records here intact. I need the account as written, including the "
+				.. "qualifications."
+			),
+			completion = "Thank you. I'll read the whole record before selecting a passage.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -487,17 +593,27 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 2450,
 			name = "The Last Control",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0013 from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the final control recording from the assigned search area in Pripyat. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"BN21"},
-			briefing = "Complete the final defended Pripyat recording.",
-			completion = "Good. I'll compare it with the control.",
+			briefing = (
+				"There's a completed control recorder to recover. This order is a retrieval; bring the surviving "
+				.. "record home for inspection. Recover the final control recording from the assigned search area in "
+				.. "Pripyat. Bring it back to me in Garbage."
+			),
+			completion = "Good. I can compare the complete record instead of a remembered result.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Beanstalk's "
+					.. "note: \"There's a completed control recorder to recover.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module",
-				label = "The Last Control - Numbered Data Module 0013",
+				label = "Final control recording",
 			},
 			benefits = {},
 		},
@@ -507,11 +623,11 @@ PLUGIN:Register("beanstalk", {
 			name = "Findings Worth Keeping",
 			kind = "tracker",
 			requires = {"BN22"},
-			briefing = (
-				"Keep the sampler intact until it finishes, then bring me the results. Stay close enough to "
-				.. "protect it."
+			briefing = "Keep the research defence work going when you can prepare for it.",
+			completion = (
+				"You've stayed with the method through a long account. Thank you. Careful work deserves an answer "
+				.. "more substantial than my next request."
 			),
-			completion = "You've brought back a useful set of results. Please keep using the same care.",
 			target = 27,
 			benefits = {},
 		},
@@ -520,25 +636,31 @@ PLUGIN:Register("beanstalk", {
 			completionCash = 2650,
 			name = "A Result They Both Accept",
 			kind = "field",
-			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Deliver it to"
-				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the control comparison log for Carbon from the assigned search area in Garbage. Deliver "
+				.. "it to 'Carbon' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"BN23"},
 			briefing = (
-				"Recover missing control evidence and return the completed comparison. The folder goes to Carbon "
-				.. "in Waystation. Return here afterwards; I need to know the record reached the person who will keep "
-				.. "it."
+				"Carbon needs the missing control evidence. I want the record somewhere another reader can examine "
+				.. "it without relying on either researcher's account. Recover the control comparison log for Carbon "
+				.. "from the assigned search area in Garbage. Deliver it to 'Carbon' in Waystation, then come back to "
+				.. "me in Garbage."
 			),
 			completion = (
-				"They have the record now. We can stop comparing results from memory. Good. Now the record can be "
-				.. "checked without either of us standing over someone's shoulder. You have been patient with the "
-				.. "precautions. I realise that isn't always easy."
+				"He has the file. You've helped make this work open to checking, including the parts that remain "
+				.. "awkward. Thank you. We can talk about those without sending you out again today."
 			),
 			field = {
+				description = (
+					"A blue laboratory folder with loose printed record sheets extending from its edges. Beanstalk's "
+					.. "note: \"Carbon needs the missing control evidence.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_lab",
-				label = "A Result They Both Accept - Laboratory Log Folder",
+				label = "Control comparison log for Carbon",
 				recipient = "carbon",
 			},
 			benefits = {

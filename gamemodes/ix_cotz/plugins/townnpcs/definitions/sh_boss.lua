@@ -25,17 +25,20 @@ PLUGIN:Register("boss", {
 		completedGreeting = (
 			"Good to see you back. You've earned a proper hearing. What do you need?"
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About my current orders.",
+		offerPrompt = "Do you have an elimination assignment?",
 		work = (
-			"Bandits threatening the operation. The targets on the order. No freelancing. Stay with the "
-			.. "specified targets. I need a threat dealt with, not a fresh problem caused by someone improvising."
+			"Hostile elimination orders, against the targets specified. Read the assignment before accepting "
+			.. "it. I need a defined threat dealt with and an accurate return, rather than another problem created "
+			.. "by an expanded interpretation. Ask about anything that affects your decision while we can still "
+			.. "settle it here."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What needs checking in the operation's reports?",
 		progression = (
-			"Supplies and field reports. Tell me which assignment you can finish. Supplies keep the operation "
-			.. "moving. Field records let me check what happened outside this room. Neither is optional just "
-			.. "because the other sounds more interesting."
+			"Supplies and surviving field reports. I want the records recovered before we decide which "
+			.. "explanation is supported. Some evidence needs to go directly to another contact. Finish that "
+			.. "handover and return to me. You'll have a particular order to consider, not a general invitation to "
+			.. "improvise around the operation."
 		),
 	},
 	catalogue = {
@@ -104,17 +107,27 @@ PLUGIN:Register("boss", {
 			completionCash = 450,
 			name = "The Missing Patrol",
 			kind = "field",
-			objective = "Recover Military Records Folder I from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the missing patrol report from the assigned search area in Waystation. Bring it back to "
+				.. "the issuing contact in Waystation."
+			),
 			requires = {"BO01"},
-			briefing = "Recover a patrol report in Waystation territory.",
-			completion = "Hand it over. I'll review it.",
+			briefing = (
+				"The patrol report needs recovering. I want the surviving account before we decide which part of "
+				.. "the plan failed. Recover the missing patrol report from the assigned search area in Waystation. "
+				.. "Bring it back to me in Waystation."
+			),
+			completion = "Leave the complete report here. I'll establish what it supports before changing the account.",
 			field = {
+				description = (
+					"A buff-coloured folder with loose military record sheets extending beyond its cover. Boss's "
+					.. "note: \"The patrol report needs recovering.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_orders",
-				label = "The Missing Patrol - Military Records Folder I",
+				label = "Missing patrol report",
 			},
 			benefits = {},
 		},
@@ -124,8 +137,11 @@ PLUGIN:Register("boss", {
 			name = "Follow Instructions",
 			kind = "tracker",
 			requires = {"BO02"},
-			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
-			completion = "You've dealt with the assigned targets. Keep to the orders.",
+			briefing = (
+				"Continue the specified hostile elimination orders. Keep the target requirement clear before "
+				.. "accepting."
+			),
+			completion = "A sound beginning. You've followed the assignments.",
 			target = 2,
 			benefits = {},
 		},
@@ -134,17 +150,27 @@ PLUGIN:Register("boss", {
 			completionCash = 650,
 			name = "The Forward Record",
 			kind = "field",
-			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the forward position's orders from the assigned search area in Waystation. Bring it back "
+				.. "to the issuing contact in Waystation."
+			),
 			requires = {"BO03"},
-			briefing = "Recover an NPC outpost's field orders.",
-			completion = "Good. Keep the records together.",
+			briefing = (
+				"Recover the field orders. Knowing what was intended matters when we compare it with the report. "
+				.. "Recover the forward position's orders from the assigned search area in Waystation. Bring it back "
+				.. "to me in Waystation."
+			),
+			completion = "Orders received. I'll read them against the other records.",
 			field = {
+				description = (
+					"A buff-coloured document folder with printed sheets protruding at uneven angles. Boss's note: "
+					.. "\"Recover the field orders.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_military",
-				label = "The Forward Record - Military Records Folder II",
+				label = "Forward position's orders",
 			},
 			benefits = {},
 		},
@@ -154,8 +180,8 @@ PLUGIN:Register("boss", {
 			name = "Staying Equipped",
 			kind = "delivery",
 			requires = {"BO03"},
-			briefing = "Deliver the supplies on this list. Report back here when you have them.",
-			completion = "That covers the requirement.",
+			briefing = "The listed supplies are needed here. Verify the request before accepting the load.",
+			completion = "Delivery received. That closes the listed requirement.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -169,17 +195,27 @@ PLUGIN:Register("boss", {
 			completionCash = 850,
 			name = "The Interrupted Shipment",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the interrupted supply case from the assigned search area in Waystation. Bring it back to "
+				.. "the issuing contact in Waystation."
+			),
 			requires = {"BO04"},
-			briefing = "Recover a freight case along a regional route.",
-			completion = "I'll check this against the report.",
+			briefing = (
+				"The freight case needs bringing back. Don't convert the recovery into a search for an explanation "
+				.. "outside your assignment. Recover the interrupted supply case from the assigned search area in "
+				.. "Waystation. Bring it back to me in Waystation."
+			),
+			completion = "Case received. We can inspect it here without extending your exposure outside.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Boss's note: \"The freight "
+					.. "case needs bringing back.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_equipment",
-				label = "The Interrupted Shipment - Striped Equipment Case",
+				label = "Interrupted supply case",
 			},
 			benefits = {
 				items = {
@@ -202,8 +238,8 @@ PLUGIN:Register("boss", {
 			name = "Pressure on the Route",
 			kind = "tracker",
 			requires = {"BO05"},
-			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
-			completion = "You've dealt with the assigned targets. Keep to the orders.",
+			briefing = "More elimination work when prepared. The order defines the targets.",
+			completion = "You've kept to the terms. That matters when I allocate work.",
 			target = 5,
 			benefits = {},
 		},
@@ -212,17 +248,27 @@ PLUGIN:Register("boss", {
 			completionCash = 1050,
 			name = "The Supply Register",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Deliver it to"
-				.. " 'Quartermaster' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the supply register for Quartermaster from the assigned search area in Garbage. Deliver "
+				.. "it to 'Quartermaster' in Waystation, then come back to the issuing contact in Waystation."
+			),
 			requires = {"BO06"},
-			briefing = "Retrieve hostile supply records in Garbage.",
-			completion = "Delivery confirmed. That part of the operation is closed.",
+			briefing = (
+				"Quartermaster needs the supply records. Let him check the allocations from the original. Recover "
+				.. "the supply register for Quartermaster from the assigned search area in Garbage. Deliver it to "
+				.. "'Quartermaster' in Waystation, then come back to me in Waystation."
+			),
+			completion = "He has the register. That gives us an account we can compare rather than another estimate.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Boss's note: "
+					.. "\"Quartermaster needs the supply records.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_manifest",
-				label = "The Supply Register - Warehouse Packing List A",
+				label = "Supply register for Quartermaster",
 				recipient = "quartermaster",
 			},
 			benefits = {},
@@ -233,8 +279,8 @@ PLUGIN:Register("boss", {
 			name = "Orders and Receipts",
 			kind = "delivery",
 			requires = {"BO07"},
-			briefing = "Deliver the supplies on this list. Report back here when you have them.",
-			completion = "Good. Leave it with the stores.",
+			briefing = "Bring the requested documents here intact. We need the record before we rely on the summary.",
+			completion = "Received. I'll have the account checked.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -248,17 +294,27 @@ PLUGIN:Register("boss", {
 			completionCash = 1250,
 			name = "The Missing Names",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Waystation. Deliver it to"
-				.. " 'Wake' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the expedition record for Wake from the assigned search area in Waystation. Deliver it to "
+				.. "'Wake' in Garbage, then come back to the issuing contact in Waystation."
+			),
 			requires = {"BO08"},
-			briefing = "Recover expedition evidence related to Wake's search.",
-			completion = "Delivery confirmed. That part of the operation is closed.",
+			briefing = (
+				"Wake needs the expedition evidence. She should not have to work from a summary chosen for "
+				.. "operational convenience. Recover the expedition record for Wake from the assigned search area in "
+				.. "Waystation. Deliver it to 'Wake' in Garbage, then come back to me in Waystation."
+			),
+			completion = "Delivered. I'll let her examine it before asking which questions remain.",
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Boss's note: \"Wake "
+					.. "needs the expedition evidence.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_personnel",
-				label = "The Missing Names - Personnel File Folder",
+				label = "Expedition record for Wake",
 				recipient = "wake",
 			},
 			benefits = {},
@@ -269,8 +325,8 @@ PLUGIN:Register("boss", {
 			name = "A Smaller Network",
 			kind = "tracker",
 			requires = {"BO09"},
-			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
-			completion = "You've dealt with the assigned targets. Keep to the orders.",
+			briefing = "Keep completing the elimination requests while I review the reports.",
+			completion = "A reliable stretch of completed assignments. Acknowledged.",
 			target = 9,
 			benefits = {},
 		},
@@ -279,24 +335,27 @@ PLUGIN:Register("boss", {
 			completionCash = 1450,
 			name = "The Second Command Post",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the command-post field recording from the assigned search area in Waystation. Bring it "
+				.. "back to the issuing contact in Waystation."
+			),
 			requires = {"BO10"},
 			briefing = (
-				"Recover a field recorder from a hostile NPC position. Bring the recording back before "
-				.. "drawing conclusions from it. I need something I can review alongside the written "
-				.. "account."
+				"Recover the position's recording. We need an account we can review beside the written orders. "
+				.. "Recover the command-post field recording from the assigned search area in Waystation. Bring it "
+				.. "back to me in Waystation."
 			),
-			completion = (
-				"I'll check this against the report. Stay a moment while I check what you've brought. If "
-				.. "there is something relevant about the recovery, tell me plainly."
-			),
+			completion = "Recording received. Interpretation can wait until I've heard it in full.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Boss's note: "
+					.. "\"Recover the position's recording.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_tape",
-				label = "The Second Command Post - Handwritten Audio Cassette",
+				label = "Command-post field recording",
 			},
 			benefits = {
 				items = {
@@ -315,8 +374,11 @@ PLUGIN:Register("boss", {
 			name = "Packed for Contact",
 			kind = "delivery",
 			requires = {"BO11"},
-			briefing = "Deliver the supplies on this list. Report back here when you have them.",
-			completion = "Received.",
+			briefing = (
+				"Bring this order through as specified. If it cannot be filled, don't manufacture a substitute "
+				.. "agreement on the route."
+			),
+			completion = "Received. I'll account for it here.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -330,17 +392,27 @@ PLUGIN:Register("boss", {
 			completionCash = 1650,
 			name = "The Pripyat Outpost",
 			kind = "field",
-			objective = "Recover Military Records Folder I from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the Pripyat outpost orders from the assigned search area in Pripyat. Bring it back to the "
+				.. "issuing contact in Waystation."
+			),
 			requires = {"BO12"},
-			briefing = "Recover orders at a Pripyat NPC operation site.",
-			completion = "Hand it over. I'll review it.",
+			briefing = (
+				"The outpost's surviving orders are in Pripyat. Recover the record; do not extend the assignment "
+				.. "based on a name you find. Recover the Pripyat outpost orders from the assigned search area in "
+				.. "Pripyat. Bring it back to me in Waystation."
+			),
+			completion = "Leave it here. I'll compare the instructions before drawing conclusions about who followed them.",
 			field = {
+				description = (
+					"A buff-coloured folder with loose military record sheets extending beyond its cover. Boss's "
+					.. "note: \"The outpost's surviving orders are in Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_orders",
-				label = "The Pripyat Outpost - Military Records Folder I",
+				label = "Pripyat outpost orders",
 			},
 			benefits = {},
 		},
@@ -350,8 +422,8 @@ PLUGIN:Register("boss", {
 			name = "Holding the Initiative",
 			kind = "tracker",
 			requires = {"BO13"},
-			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
-			completion = "You've dealt with the assigned targets. Keep to the orders.",
+			briefing = "Continue the specified elimination work. Do not expand the targets on your own judgement.",
+			completion = "You've remained consistent under a longer account. I appreciate it.",
 			target = 14,
 			benefits = {},
 		},
@@ -360,17 +432,27 @@ PLUGIN:Register("boss", {
 			completionCash = 1850,
 			name = "The Handler's Orders",
 			kind = "field",
-			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the handler's command recording from the assigned search area in Pripyat. Bring it back "
+				.. "to the issuing contact in Waystation."
+			),
 			requires = {"BO14"},
-			briefing = "Retrieve a command recording in Pripyat.",
-			completion = "Good. Keep the records together.",
+			briefing = (
+				"I need the command recording intact. The surrounding instructions matter as much as the line "
+				.. "somebody remembers. Recover the handler's command recording from the assigned search area in "
+				.. "Pripyat. Bring it back to me in Waystation."
+			),
+			completion = "Good. We can review the complete sequence here.",
 			field = {
+				description = (
+					"A pale audio cassette with a broad blue printed label and twin spool windows. Boss's note: \"I "
+					.. "need the command recording intact.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_tape2",
-				label = "The Handler's Orders - Blue-Label Audio Cassette",
+				label = "Handler's command recording",
 			},
 			benefits = {},
 		},
@@ -380,8 +462,8 @@ PLUGIN:Register("boss", {
 			name = "A Report That Holds",
 			kind = "delivery",
 			requires = {"BO15"},
-			briefing = "Deliver the supplies on this list. Report back here when you have them.",
-			completion = "That covers the requirement.",
+			briefing = "The listed supplies are needed here. Verify the request before accepting the load.",
+			completion = "Delivery received. That closes the listed requirement.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -395,17 +477,27 @@ PLUGIN:Register("boss", {
 			completionCash = 2050,
 			name = "The Withheld Annex",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to 'Wake'"
-				.. " in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the missing annex for Wake from the assigned search area in Pripyat. Deliver it to 'Wake' "
+				.. "in Garbage, then come back to the issuing contact in Waystation."
+			),
 			requires = {"BO16"},
-			briefing = "Recover the missing expedition record in Pripyat.",
-			completion = "Delivery confirmed. That part of the operation is closed.",
+			briefing = (
+				"Wake needs the expedition annex. Restricting the rest of the file isn't a reason to leave her "
+				.. "without evidence relevant to the search. Recover the missing annex for Wake from the assigned "
+				.. "search area in Pripyat. Deliver it to 'Wake' in Garbage, then come back to me in Waystation."
+			),
+			completion = "She has the annex. I'll wait for her assessment instead of supplying it.",
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. Boss's note: \"Wake needs the "
+					.. "expedition annex.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_official",
-				label = "The Withheld Annex - Official File Folder",
+				label = "Missing annex for Wake",
 				recipient = "wake",
 			},
 			benefits = {
@@ -425,8 +517,8 @@ PLUGIN:Register("boss", {
 			name = "End of the Operation",
 			kind = "tracker",
 			requires = {"BO17", "BO18"},
-			briefing = "Bandits threatening the operation. The targets on the order. No freelancing.",
-			completion = "You've dealt with the assigned targets. Keep to the orders.",
+			briefing = "There are more target orders. Prepare for the assignment you accept.",
+			completion = "A substantial contribution. You have given me reason to rely on your judgement.",
 			target = 20,
 			benefits = {},
 		},
@@ -435,17 +527,27 @@ PLUGIN:Register("boss", {
 			completionCash = 2250,
 			name = "The Last Command",
 			kind = "field",
-			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the final command record from the assigned search area in Waystation. Bring it back to "
+				.. "the issuing contact in Waystation."
+			),
 			requires = {"BO19"},
-			briefing = "Recover the final command record.",
-			completion = "Hand it over. I'll review it.",
+			briefing = (
+				"Recover the final command record. Bring the original account back before attempting to reconcile "
+				.. "it in the field. Recover the final command record from the assigned search area in Waystation. "
+				.. "Bring it back to me in Waystation."
+			),
+			completion = "Received. I'll keep it alongside the earlier orders while I check the sequence.",
 			field = {
+				description = (
+					"A buff-coloured document folder with printed sheets protruding at uneven angles. Boss's note: "
+					.. "\"Recover the final command record.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_military",
-				label = "The Last Command - Military Records Folder II",
+				label = "Final command record",
 			},
 			benefits = {},
 			stock = {
@@ -459,8 +561,8 @@ PLUGIN:Register("boss", {
 			name = "Return to Readiness",
 			kind = "delivery",
 			requires = {"BO20"},
-			briefing = "Deliver the supplies on this list. Report back here when you have them.",
-			completion = "Good. Leave it with the stores.",
+			briefing = "There is another supply request. Keep it separate from the equipment needed for your own return.",
+			completion = "All requested material received.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -474,25 +576,30 @@ PLUGIN:Register("boss", {
 			completionCash = 2450,
 			name = "The Missing Patrol's Answer",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Waystation. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the patrol identification file from the assigned search area in Waystation. Bring it back "
+				.. "to the issuing contact in Waystation."
+			),
 			requires = {"BO21"},
 			briefing = (
-				"Recover the patrol's final record and return the complete report. Bring the personnel file back "
-				.. "complete. We will establish what it supports here. Do not turn a fragment into a patrol report on "
-				.. "the way home."
+				"Bring the personnel record back complete. A familiar name isn't enough to turn a fragment into a "
+				.. "patrol report. Recover the patrol identification file from the assigned search area in "
+				.. "Waystation. Bring it back to me in Waystation."
 			),
 			completion = (
-				"Good. Keep the records together. I'll review it myself. Your part is finished. You've followed "
-				.. "through on difficult work; I recognise that. Get some rest before you start looking for another "
-				.. "assignment."
+				"You've finished the work and kept the account intact. I appreciate the judgement that took. I'll "
+				.. "read this before closing the report. Get some rest; the next discussion can wait."
 			),
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Boss's note: \"Bring the "
+					.. "personnel record back complete.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_personnel",
-				label = "The Missing Patrol's Answer - Personnel File Folder",
+				label = "Patrol identification file",
 			},
 			benefits = {},
 			recognition = "Boss's trusted contact",

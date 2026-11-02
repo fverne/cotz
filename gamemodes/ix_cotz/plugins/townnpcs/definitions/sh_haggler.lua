@@ -25,18 +25,20 @@ PLUGIN:Register("haggler", {
 			"There you are. It's pleasant to see a customer whose promises don't need chasing all over "
 			.. "the Marsh."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the job I'm doing for you.",
+		offerPrompt = "Do you have an elimination job?",
 		work = (
-			"Bandits are bad for deliveries. Remove the ones on the order; I still need paying customers. Read "
-			.. "the order before you start shooting. A frightened courier isn't a bandit just because he's "
-			.. "carrying something valuable."
+			"Hostile elimination orders. The specified targets, before you become inspired by somebody else's "
+			.. "valuable-looking pack. I need the work done as agreed. Read the order, decide whether the payment "
+			.. "suits you, then prepare. We can have an entirely different conversation about buying things when "
+			.. "you return."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What needs doing about the trading accounts?",
 		progression = (
-			"Missing invoices, missing goods, people asking to be paid twice. Pick a problem. I can complain "
-			.. "about missing goods all day. Finding out where they went takes someone willing to walk. Bring me "
-			.. "something I can check and we can have an actual discussion."
+			"There are trading records to recover and ordinary supplies to bring in. Too many people remember "
+			.. "an agreement only after they've explained what it ought to have been. I'd like the originals. Some "
+			.. "go to other contacts for checking; deliver them and come back. I am capable of waiting for a "
+			.. "useful answer, despite what Ledger tells you."
 		),
 	},
 	catalogue = {
@@ -169,17 +171,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 450,
 			name = "The Missing Invoice",
 			kind = "field",
-			objective = "Recover Warehouse Packing List B from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the missing trading invoice from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"HG01"},
-			briefing = "Recover an invoice from a Marsh trading stop.",
-			completion = "Hand it over. I want to read the small print.",
+			briefing = (
+				"An invoice has gone missing. Everyone remembers the amount most favourable to them, so I'd like "
+				.. "the paper. Recover the missing trading invoice from the assigned search area in Marsh. Bring it "
+				.. "back to me in Marsh."
+			),
+			completion = "Ah, something with writing on it. A refreshing addition to the discussion.",
 			field = {
+				description = (
+					"A clipboard carrying a densely printed packing list and a stamped mark. Haggler's note: \"An "
+					.. "invoice has gone missing.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_receipt",
-				label = "The Missing Invoice - Warehouse Packing List B",
+				label = "Missing trading invoice",
 			},
 			benefits = {},
 		},
@@ -190,10 +202,10 @@ PLUGIN:Register("haggler", {
 			kind = "tracker",
 			requires = {"HG02"},
 			briefing = (
-				"Bandits are bad for deliveries. Remove the ones on the order; I still need paying "
-				.. "customers."
+				"Continue the hostile elimination orders. The specified armed targets, not people you've had a "
+				.. "disagreement with."
 			),
-			completion = "You've kept your end of the arrangement. I remember reliable people.",
+			completion = "A few completed orders. I appreciate a problem being dealt with as agreed.",
 			target = 2,
 			benefits = {},
 		},
@@ -202,17 +214,30 @@ PLUGIN:Register("haggler", {
 			completionCash = 650,
 			name = "Who Pays Twice",
 			kind = "field",
-			objective = "Recover Corporate Letter from the assigned search area in Marsh. Return it to this contact"
-				.. " to finish the assignment.",
+			objective = (
+				"Recover the extortion payment receipt from the assigned search area in Marsh. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"HG03"},
-			briefing = "Recover an extortion receipt from a hostile NPC camp.",
-			completion = "Let's see whose name is on this one.",
+			briefing = (
+				"There's a receipt connected with the payments being demanded. Bring it here before anybody "
+				.. "decides what I've agreed to. Recover the extortion payment receipt from the assigned search area "
+				.. "in Marsh. Bring it back to me in Marsh."
+			),
+			completion = (
+				"Let me see the wording. People become wonderfully precise when they're collecting and vague when "
+				.. "they're explaining."
+			),
 			field = {
+				description = (
+					"A creased printed letter with a corporate mark and several small blocks of text. Haggler's note: "
+					.. "\"There's a receipt connected with the payments being demanded.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_contract",
-				label = "Who Pays Twice - Corporate Letter",
+				label = "Extortion payment receipt",
 			},
 			benefits = {},
 		},
@@ -222,8 +247,11 @@ PLUGIN:Register("haggler", {
 			name = "Working Capital",
 			kind = "delivery",
 			requires = {"HG04"},
-			briefing = "Bring what's listed here. I'll check the goods before we settle this part of the deal.",
-			completion = "That settles this part of our business.",
+			briefing = (
+				"Bring the supplies on this list. I've got uses for them already, which is a very different thing "
+				.. "from having them."
+			),
+			completion = "There we are. A list becoming something useful.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -237,17 +265,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 850,
 			name = "The Wrong Seal",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the consignment seal record from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"HG04"},
-			briefing = "Retrieve a consignment seal record along a Marsh route.",
-			completion = "Good. I prefer an account I can check.",
+			briefing = (
+				"I'd like the consignment seal record. A seal described from memory is worth precisely what the "
+				.. "description costs. Recover the consignment seal record from the assigned search area in Marsh. "
+				.. "Bring it back to me in Marsh."
+			),
+			completion = "Good. Now we can discuss which shipment people actually mean.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Haggler's "
+					.. "note: \"I'd like the consignment seal record.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_manifest",
-				label = "The Wrong Seal - Warehouse Packing List A",
+				label = "Consignment seal record",
 			},
 			benefits = {
 				items = {
@@ -270,11 +308,8 @@ PLUGIN:Register("haggler", {
 			name = "Safer Roads",
 			kind = "tracker",
 			requires = {"HG05"},
-			briefing = (
-				"Bandits are bad for deliveries. Remove the ones on the order; I still need paying "
-				.. "customers."
-			),
-			completion = "You've kept your end of the arrangement. I remember reliable people.",
+			briefing = "More elimination work. Read the target request before accepting.",
+			completion = "You've kept to the terms. An excellent habit in a customer and an employee.",
 			target = 5,
 			benefits = {},
 		},
@@ -283,17 +318,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 1050,
 			name = "The Abandoned Stall",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the abandoned trader's account book from the assigned search area in Garbage. Bring it "
+				.. "back to the issuing contact in Marsh."
+			),
 			requires = {"HG06"},
-			briefing = "Recover a trader's account book in Garbage.",
-			completion = "Hand it over. I want to read the small print.",
+			briefing = (
+				"There's a trader's book left in Garbage. Accounts don't improve simply because their owner "
+				.. "stopped answering questions. Recover the abandoned trader's account book from the assigned search "
+				.. "area in Garbage. Bring it back to me in Marsh."
+			),
+			completion = "Set it down. I want the ordinary entries as well as the impressive totals.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Haggler's note: \"There's a "
+					.. "trader's book left in Garbage.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_notebook",
-				label = "The Abandoned Stall - Tied Leather Journal",
+				label = "Abandoned trader's account book",
 			},
 			benefits = {},
 		},
@@ -303,8 +348,11 @@ PLUGIN:Register("haggler", {
 			name = "Stock Worth Carrying",
 			kind = "delivery",
 			requires = {"HG07"},
-			briefing = "Bring what's listed here. I'll check the goods before we settle this part of the deal.",
-			completion = "Good. Something I can actually put to use.",
+			briefing = (
+				"I'd like this order filled correctly. Your ingenious substitution may be somebody else's purchase "
+				.. "waiting to disappoint them."
+			),
+			completion = "That's the requested lot. Excellent.",
 			requirements = {
 				{
 					pool = "canned_food",
@@ -318,17 +366,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 1250,
 			name = "Two Sets of Books",
 			kind = "field",
-			objective = "Recover Warehouse Packing List B from the assigned search area in Marsh. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the second freight ledger from the assigned search area in Marsh. Deliver it to 'Ledger' "
+				.. "in Waystation, then come back to the issuing contact in Marsh."
+			),
 			requires = {"HG08"},
-			briefing = "Retrieve a second ledger from a freight cache.",
-			completion = "In the right hands, finally. I was beginning to think delivery was an optional service.",
+			briefing = (
+				"Ledger gets the second book. If somebody has two accounts, I want them compared by a man who "
+				.. "enjoys finding the difference. Recover the second freight ledger from the assigned search area in "
+				.. "Marsh. Deliver it to 'Ledger' in Waystation, then come back to me in Marsh."
+			),
+			completion = "He's got it? Excellent. I can wait for an answer that comes with page numbers.",
 			field = {
+				description = (
+					"A clipboard carrying a densely printed packing list and a stamped mark. Haggler's note: \"Ledger "
+					.. "gets the second book.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_receipt",
-				label = "Two Sets of Books - Warehouse Packing List B",
+				label = "Second freight ledger",
 				recipient = "ledger",
 			},
 			benefits = {},
@@ -339,11 +397,8 @@ PLUGIN:Register("haggler", {
 			name = "Paying Customers",
 			kind = "tracker",
 			requires = {"HG09"},
-			briefing = (
-				"Bandits are bad for deliveries. Remove the ones on the order; I still need paying "
-				.. "customers."
-			),
-			completion = "You've kept your end of the arrangement. I remember reliable people.",
+			briefing = "Keep completing the specified elimination orders. I don't pay for creative interpretations.",
+			completion = "A steady run of finished work. We seem to understand one another.",
 			target = 9,
 			benefits = {},
 		},
@@ -352,17 +407,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 1450,
 			name = "The Collector's Route",
 			kind = "field",
-			objective = "Recover Loose Intelligence Dossier from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the collector's route notes from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"HG10"},
-			briefing = "Recover route notes at a hostile NPC staging site.",
-			completion = "Good. I prefer an account I can check.",
+			briefing = (
+				"I want the route notes from the staging site. It's become expensive listening to people explain "
+				.. "where they think the collectors go. Recover the collector's route notes from the assigned search "
+				.. "area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "That's useful. I'll read before deciding who has been wasting my time.",
 			field = {
+				description = (
+					"A brown document folder with loose sheets and slips protruding from its edges. Haggler's note: "
+					.. "\"I want the route notes from the staging site.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_intel",
-				label = "The Collector's Route - Loose Intelligence Dossier",
+				label = "Collector's route notes",
 			},
 			benefits = {
 				items = {
@@ -381,8 +446,11 @@ PLUGIN:Register("haggler", {
 			name = "An Honest Sample",
 			kind = "delivery",
 			requires = {"HG11"},
-			briefing = "Bring what's listed here. I'll check the goods before we settle this part of the deal.",
-			completion = "As agreed. Let me count it.",
+			briefing = (
+				"There's another delivery to make to me. Check the list before doing anything generous with your "
+				.. "carrying space."
+			),
+			completion = "Good. We can settle an actual delivery rather than a promising departure.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -396,23 +464,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 1650,
 			name = "A Broken Agreement",
 			kind = "field",
-			objective = "Recover Corporate Letter from the assigned search area in Garbage. Return it to this contact"
-				.. " to finish the assignment.",
+			objective = (
+				"Recover the supplier's broken agreement from the assigned search area in Garbage. Bring it back "
+				.. "to the issuing contact in Marsh."
+			),
 			requires = {"HG12"},
 			briefing = (
-				"Retrieve a supplier contract in Garbage. People are quite capable of losing things "
-				.. "without help. I want something I can check before I start pointing fingers."
+				"Bring the supplier contract intact. People lose things without help; I'd like evidence before I "
+				.. "spend money blaming anyone. Recover the supplier's broken agreement from the assigned search area "
+				.. "in Garbage. Bring it back to me in Marsh."
 			),
-			completion = (
-				"Hand it over. I want to read the small print. Now I have something firmer than a "
-				.. "complaint to work with. Makes a pleasant change from the usual business."
-			),
+			completion = "Let's read the terms. I'm prepared to be offended after I've established what was promised.",
 			field = {
+				description = (
+					"A creased printed letter with a corporate mark and several small blocks of text. Haggler's note: "
+					.. "\"Bring the supplier contract intact.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_contract",
-				label = "A Broken Agreement - Corporate Letter",
+				label = "Supplier's broken agreement",
 			},
 			benefits = {},
 		},
@@ -422,11 +494,8 @@ PLUGIN:Register("haggler", {
 			name = "No More Tolls",
 			kind = "tracker",
 			requires = {"HG13"},
-			briefing = (
-				"Bandits are bad for deliveries. Remove the ones on the order; I still need paying "
-				.. "customers."
-			),
-			completion = "You've kept your end of the arrangement. I remember reliable people.",
+			briefing = "There are more target orders. Pick work you can actually finish.",
+			completion = "You've kept returning with the work done. I find myself planning around that.",
 			target = 14,
 			benefits = {},
 		},
@@ -435,17 +504,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 1850,
 			name = "The Broker's Copy",
 			kind = "field",
-			objective = "Recover Corporate Letter from the assigned search area in Waystation. Deliver it to 'Carbon'"
-				.. " in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the broker's contract copy from the assigned search area in Waystation. Deliver it to "
+				.. "'Carbon' in Waystation, then come back to the issuing contact in Marsh."
+			),
 			requires = {"HG14"},
-			briefing = "Recover a duplicate contract in Waystation territory.",
-			completion = "In the right hands, finally. I was beginning to think delivery was an optional service.",
+			briefing = (
+				"Carbon should have the duplicate contract. He'll compare the wording without becoming distracted "
+				.. "by my commercial interests. Recover the broker's contract copy from the assigned search area in "
+				.. "Waystation. Deliver it to 'Carbon' in Waystation, then come back to me in Marsh."
+			),
+			completion = "Delivered. A man willing to read every clause is a useful acquaintance.",
 			field = {
+				description = (
+					"A creased printed letter with a corporate mark and several small blocks of text. Haggler's note: "
+					.. "\"Carbon should have the duplicate contract.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_contract",
-				label = "The Broker's Copy - Corporate Letter",
+				label = "Broker's contract copy",
 				recipient = "carbon",
 			},
 			benefits = {},
@@ -456,8 +535,8 @@ PLUGIN:Register("haggler", {
 			name = "Shelf Space",
 			kind = "delivery",
 			requires = {"HG15"},
-			briefing = "Bring what's listed here. I'll check the goods before we settle this part of the deal.",
-			completion = "That settles this part of our business.",
+			briefing = "Bring the requested stock through. I would like to spend one afternoon knowing where it is.",
+			completion = "Thank you. I'll resist selling it in my imagination until it's on the shelf.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -471,17 +550,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 2050,
 			name = "The Shipment List",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
-				.. " 'Brass' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the distributor's shipment manifest from the assigned search area in Marsh. Deliver it to "
+				.. "'Brass' in Garbage, then come back to the issuing contact in Marsh."
+			),
 			requires = {"HG16"},
-			briefing = "Recover a manifest identifying the racket's distributor.",
-			completion = "In the right hands, finally. I was beginning to think delivery was an optional service.",
+			briefing = (
+				"Brass needs the shipment manifest. I want the quantities checked by someone who won't be charmed "
+				.. "out of counting. Recover the distributor's shipment manifest from the assigned search area in "
+				.. "Marsh. Deliver it to 'Brass' in Garbage, then come back to me in Marsh."
+			),
+			completion = "Good. He'll count it, which is inconvenient right up until you need the correct figure.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Haggler's "
+					.. "note: \"Brass needs the shipment manifest.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_manifest",
-				label = "The Shipment List - Warehouse Packing List A",
+				label = "Distributor's shipment manifest",
 				recipient = "brass",
 			},
 			benefits = {
@@ -501,11 +590,8 @@ PLUGIN:Register("haggler", {
 			name = "A Wider Market",
 			kind = "tracker",
 			requires = {"HG17"},
-			briefing = (
-				"Bandits are bad for deliveries. Remove the ones on the order; I still need paying "
-				.. "customers."
-			),
-			completion = "You've kept your end of the arrangement. I remember reliable people.",
+			briefing = "Continue the elimination assignments while I compare the freight accounts.",
+			completion = "A useful amount of trouble dealt with. You've earned the acknowledgement.",
 			target = 20,
 			benefits = {},
 		},
@@ -514,17 +600,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 2250,
 			name = "The Empty Depot",
 			kind = "field",
-			objective = "Recover Corporate Records Folder from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the abandoned-depot records from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"HG18"},
-			briefing = "Retrieve shipment records from an abandoned depot.",
-			completion = "Hand it over. I want to read the small print.",
+			briefing = (
+				"There's paperwork left at the depot. Bring it back before someone begins selling an explanation "
+				.. "instead. Recover the abandoned-depot records from the assigned search area in Marsh. Bring it "
+				.. "back to me in Marsh."
+			),
+			completion = "Here, beside the other papers. I want to know which shipment each entry concerns.",
 			field = {
+				description = (
+					"A blue records folder with contrasting corporate lettering along the cover. Haggler's note: "
+					.. "\"There's paperwork left at the depot.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_archive",
-				label = "The Empty Depot - Corporate Records Folder",
+				label = "Abandoned-depot records",
 			},
 			benefits = {},
 		},
@@ -534,8 +630,11 @@ PLUGIN:Register("haggler", {
 			name = "Proof of Delivery",
 			kind = "delivery",
 			requires = {"HG19", "HG20"},
-			briefing = "Bring what's listed here. I'll check the goods before we settle this part of the deal.",
-			completion = "Good. Something I can actually put to use.",
+			briefing = (
+				"Bring the supplies on this list. I've got uses for them already, which is a very different thing "
+				.. "from having them."
+			),
+			completion = "There we are. A list becoming something useful.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -549,17 +648,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 2450,
 			name = "The Unpaid Supplier",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the unpaid supplier's file from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"HG21"},
-			briefing = "Recover a supplier's personal evidence at a remote cache.",
-			completion = "Let's see whose name is on this one.",
+			briefing = (
+				"The supplier's surviving evidence is still out on the route. I'd like an account from someone "
+				.. "besides the people demanding payment. Recover the unpaid supplier's file from the assigned search "
+				.. "area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "Keep the little papers with it. Small writing can have surprisingly expensive consequences.",
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Haggler's note: \"The "
+					.. "supplier's surviving evidence is still out on the route.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_personnel",
-				label = "The Unpaid Supplier - Personnel File Folder",
+				label = "Unpaid supplier's file",
 			},
 			benefits = {},
 		},
@@ -569,11 +678,11 @@ PLUGIN:Register("haggler", {
 			name = "Closing the Account",
 			kind = "tracker",
 			requires = {"HG22"},
-			briefing = (
-				"Bandits are bad for deliveries. Remove the ones on the order; I still need paying "
-				.. "customers."
+			briefing = "More of the specified elimination work when you're prepared.",
+			completion = (
+				"You've stayed reliable after the novelty wore off. That's when a business acquaintance becomes "
+				.. "valuable."
 			),
-			completion = "You've kept your end of the arrangement. I remember reliable people.",
 			target = 27,
 			benefits = {},
 		},
@@ -582,17 +691,27 @@ PLUGIN:Register("haggler", {
 			completionCash = 2650,
 			name = "The Last Ledger",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the collector's central ledger from the assigned search area in Marsh. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"HG23"},
-			briefing = "Recover the racket's central ledger at its final NPC outpost.",
-			completion = "Good. I prefer an account I can check.",
+			briefing = (
+				"Bring the last ledger from the outpost. I want the entries, not a confident description of who "
+				.. "owes whom. Recover the collector's central ledger from the assigned search area in Marsh. Bring "
+				.. "it back to me in Marsh."
+			),
+			completion = "A proper book at last. Let me read before you ask whether this makes me generous.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Haggler's note: \"Bring the "
+					.. "last ledger from the outpost.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_notebook",
-				label = "The Last Ledger - Tied Leather Journal",
+				label = "Collector's central ledger",
 			},
 			benefits = {
 				items = {
@@ -611,8 +730,11 @@ PLUGIN:Register("haggler", {
 			name = "A Shop That Lasts",
 			kind = "delivery",
 			requires = {"HG24"},
-			briefing = "Bring what's listed here. I'll check the goods before we settle this part of the deal.",
-			completion = "As agreed. Let me count it.",
+			briefing = (
+				"I'd like this order filled correctly. Your ingenious substitution may be somebody else's purchase "
+				.. "waiting to disappoint them."
+			),
+			completion = "That's the requested lot. Excellent.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -626,24 +748,30 @@ PLUGIN:Register("haggler", {
 			completionCash = 2850,
 			name = "Nobody Collects Here",
 			kind = "field",
-			objective = "Recover Corporate Letter from the assigned search area in Marsh. Return it to this contact"
-				.. " to finish the assignment.",
+			objective = (
+				"Recover the final trading agreement from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"HG25"},
 			briefing = (
-				"Recover the final contract evidence for comparison with the other contracts. Keep the whole "
-				.. "letter. People have a habit of remembering the generous half of an agreement and losing the rest."
+				"The final letter belongs with the contracts. Keep the whole thing; a favourable paragraph isn't "
+				.. "the whole agreement. Recover the final trading agreement from the assigned search area in Marsh. "
+				.. "Bring it back to me in Marsh."
 			),
 			completion = (
-				"Hand it over. I want to read the small print. There it is. Small print and all. You've been more "
-				.. "reliable than several people who insist I call them partners. Don't let that go to your head; I "
-				.. "still expect you to read your orders."
+				"You've done a considerable amount of work for me. I've paid for it, naturally. Doesn't prevent me "
+				.. "appreciating a person who finishes what we agreed. Pull up a chair while I read this."
 			),
 			field = {
+				description = (
+					"A creased printed letter with a corporate mark and several small blocks of text. Haggler's note: "
+					.. "\"The final letter belongs with the contracts.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_contract",
-				label = "Nobody Collects Here - Corporate Letter",
+				label = "Final trading agreement",
 			},
 			benefits = {},
 			recognition = "Haggler's trusted contact",

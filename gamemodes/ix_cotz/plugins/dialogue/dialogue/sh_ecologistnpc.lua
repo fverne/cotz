@@ -17,11 +17,14 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "What brought you from the university?",
 	response = (
-		"Sure. Overly intelligent, physics and nanotechnology PhD "
-		.. "student from Kiev, got tired of the older professors stealing "
-		.. "all my hard-earned work."
+		"An increasingly unproductive disagreement about whose work was whose. I was studying physics and "
+		.. "nanotechnology in Kiev; I expected rather more interest in my results than in my willingness to "
+		.. "accept a senior name above them. Eventually I was encouraged to gather research of my own. Here I "
+		.. "am. I may have overstated my enthusiasm for independence during the argument. Still, it's difficult "
+		.. "to stay indignant when somebody brings in an object that makes the next three questions more "
+		.. "interesting than the last complaint."
 	),
 	options = {
 		"BackgroundTopic2",
@@ -29,12 +32,11 @@ DIALOGUE.addTopic("BackgroundTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Yeah? But how did you end up here then?",
+	statement = "Do you receive any support?",
 	response = (
-		"They told me I was entitled, and after complaining to the "
-		.. "university dean, they evicted me to this hellhole, to 'gather "
-		.. "my own research'. And guess what - they don't even fund "
-		.. "me!"
+		"Rations and supplies, yes. Funding with which to pursue every interesting question, no. I complain "
+		.. "about the first because I spend too long thinking about the second. You'll find the available "
+		.. "supplies for sale here. My opinion of the university isn't a discount, before you ask."
 	),
 	options = {
 		"BackgroundTopic3",
@@ -42,12 +44,11 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "How do you make a living if you don't get any funding?",
+	statement = "You sell some of those supplies?",
 	response = (
-		"I guess they do fund me, in terms of rations, but they "
-		.. "are so tasteless. Hey, listen, here's a deal. If you want "
-		.. "to buy some shitty supplies from Kiev, let me know. I want "
-		.. "to fuck the professors over as much as possible."
+		"It keeps things moving. Someone needs equipment; I need room, money, and occasionally an object "
+		.. "worth examining. We can manage a useful exchange without resolving my academic grievances. Though "
+		.. "you're welcome to hear those at greater length if you've nothing urgent to do."
 	),
 	options = {
 		"BackgroundTopic4",
@@ -68,7 +69,7 @@ DIALOGUE.addTopic("BackgroundTopic4", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "What else is there to talk about?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -83,27 +84,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Don't trip into an anomaly!",
+	response = "Good journey. I'd be interested to hear what you notice.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Do you miss the university?",
 	response = (
-		"The equipment. A library where the book you need hasn't been used to level a table. "
-		.. "Occasionally the conversation. Then I remember spending an afternoon defending a result to "
-		.. "someone who hadn't read it. Here, at least, an objection sometimes arrives in a container and "
-		.. "does something interesting."
+		"The library. Equipment that arrived with instructions. An afternoon in which the most alarming "
+		.. "interruption was somebody asking for a signature. Then I remember defending a result to a man who "
+		.. "hadn't read it, and the longing becomes manageable. Here a disagreement can be put on the table "
+		.. "between us and examined. Sometimes with tongs. I find that arrangement quite refreshing."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Is admitting a mistake difficult?",
+	statement = "Is it difficult to admit you were wrong?",
 	response = (
-		"Less difficult than listening to Beanstalk identify it for me. Don't look so pleased. I'll "
-		.. "change an explanation when the evidence warrants it. I'd merely prefer the evidence to arrive "
-		.. "before the lecture. Finding out why I was wrong can be more interesting than being right in the "
-		.. "first place."
+		"Depends who notices first. Beanstalk enjoys a properly supported objection, and I enjoy finding a "
+		.. "flaw in it. On a good day we learn something before becoming unbearable. On a bad one, Intern has "
+		.. "to listen to both of us. If a result changes the explanation, I'll change it. I'd merely like five "
+		.. "minutes to enjoy the result before somebody begins recalling what they told me last week."
 	),
 	options = {"BackTopic"},
 })

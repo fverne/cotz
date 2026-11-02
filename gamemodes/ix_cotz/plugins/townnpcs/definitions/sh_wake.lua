@@ -29,18 +29,19 @@ PLUGIN:Register("wake", {
 			"Hello again. Thank you for coming back. If you have something to discuss, we can take our "
 			.. "time."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the effects case I'm recovering.",
+		offerPrompt = "Is there a case you need recovered?",
 		work = (
-			"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can learn "
-			.. "from it. Bring the effects back intact. Don't decide on the road that something small isn't worth "
-			.. "keeping; it may matter to someone else."
+			"Recover the marked personal-effects case and bring it back intact. Keep the little things with the "
+			.. "rest, even if you can't see why somebody would want them. We can examine what returned here. Check "
+			.. "the region before accepting; you deserve time to prepare for the journey too."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "Where can I help with the search records?",
 		progression = (
-			"I'm checking missing people's routes and belongings. Supplies help keep the searches going, too. "
-			.. "We need supplies for searches and records we can check. Finding a case is useful. Understanding "
-			.. "what it does and doesn't tell us takes a little more care."
+			"I'm comparing missing people's routes, records, and belongings. The supplies keep the work "
+			.. "possible; the recovered accounts let us ask better questions. Neither makes a promise that the "
+			.. "next case will settle a disappearance. Choose something you can bring through carefully, and we'll "
+			.. "work from what actually returns."
 		),
 	},
 	catalogue = {
@@ -103,17 +104,27 @@ PLUGIN:Register("wake", {
 			completionCash = 450,
 			name = "The Unmarked Camp",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the missing scavenger's records from the assigned search area in Garbage. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"WA01"},
-			briefing = "Recover a missing scavenger's personal-effects case in Garbage.",
-			completion = "Thank you for bringing it back intact.",
+			briefing = (
+				"I'd like the scavenger's surviving records brought back together. Finding belongings gives us "
+				.. "something to examine, not permission to settle the person's fate. Recover the missing scavenger's "
+				.. "records from the assigned search area in Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Thank you. I'll check which names and dates are actually here.",
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Wake's note: \"I'd like "
+					.. "the scavenger's surviving records brought back together.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_personnel",
-				label = "The Unmarked Camp - Personnel File Folder",
+				label = "Missing scavenger's records",
 			},
 			benefits = {},
 		},
@@ -123,11 +134,8 @@ PLUGIN:Register("wake", {
 			name = "Someone Goes Looking",
 			kind = "tracker",
 			requires = {"WA02"},
-			briefing = (
-				"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can "
-				.. "learn from it."
-			),
-			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
+			briefing = "Continue the personal-effects case recoveries. Bring back what the assignment identifies.",
+			completion = "A few cases home that would otherwise still be out there. Thank you.",
 			target = 2,
 			benefits = {},
 		},
@@ -136,17 +144,30 @@ PLUGIN:Register("wake", {
 			completionCash = 650,
 			name = "The Name on the Strap",
 			kind = "field",
-			objective = "Recover Old Photograph Album from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the camp photograph album from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"WA03"},
-			briefing = "Recover identifying evidence at a second camp.",
-			completion = "I'll open it here. Give me a little room.",
+			briefing = (
+				"There's an album to recover from the second camp. Keep the photographs together, even if some "
+				.. "seem unrelated. Recover the camp photograph album from the assigned search area in Garbage. Bring "
+				.. "it back to me in Garbage."
+			),
+			completion = (
+				"Let me set it somewhere clean. We can look at the pictures without deciding immediately who each "
+				.. "person must be."
+			),
 			field = {
+				description = (
+					"A thick worn photograph album with a small picture set into its brown cover. Wake's note: "
+					.. "\"There's an album to recover from the second camp.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_photo",
-				label = "The Name on the Strap - Old Photograph Album",
+				label = "Camp photograph album",
 			},
 			benefits = {},
 		},
@@ -156,8 +177,8 @@ PLUGIN:Register("wake", {
 			name = "A Searcher's Kit",
 			kind = "delivery",
 			requires = {"WA04"},
-			briefing = "I need these supplies to keep the searches going. Bring them here when you have them.",
-			completion = "Good. That saves another trip for basics.",
+			briefing = "Bring the listed search supplies here. Keep them separate from the belongings you recover.",
+			completion = "Thank you. I'll put them with the search equipment.",
 			requirements = {
 				{
 					pool = "canned_food",
@@ -171,17 +192,27 @@ PLUGIN:Register("wake", {
 			completionCash = 850,
 			name = "The Convoy List",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Deliver it to"
-				.. " 'Brass' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the convoy roster for Brass from the assigned search area in Garbage. Deliver it to "
+				.. "'Brass' in Garbage, then come back to the issuing contact in Garbage."
+			),
 			requires = {"WA04"},
-			briefing = "Retrieve a convoy roster near a vehicle graveyard.",
-			completion = "They have it now. Thank you. We can put this beside the rest of the search record.",
+			briefing = (
+				"Brass needs the convoy roster. He can compare the freight account with the people recorded as "
+				.. "travelling. Recover the convoy roster for Brass from the assigned search area in Garbage. Deliver "
+				.. "it to 'Brass' in Garbage, then come back to me in Garbage."
+			),
+			completion = "He has the roster. Thank you for carrying it through instead of giving him a summary.",
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Wake's note: \"Brass "
+					.. "needs the convoy roster.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_personnel",
-				label = "The Convoy List - Personnel File Folder",
+				label = "Convoy roster for Brass",
 				recipient = "brass",
 			},
 			benefits = {
@@ -205,11 +236,8 @@ PLUGIN:Register("wake", {
 			name = "Bring Back What You Can",
 			kind = "tracker",
 			requires = {"WA05"},
-			briefing = (
-				"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can "
-				.. "learn from it."
-			),
-			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
+			briefing = "More effects recoveries when you're prepared. Keep each case together.",
+			completion = "You've been careful with what returned. I appreciate that.",
 			target = 5,
 			benefits = {},
 		},
@@ -218,17 +246,27 @@ PLUGIN:Register("wake", {
 			completionCash = 1050,
 			name = "The Last Check-in",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the convoy check-in recording from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"WA06"},
-			briefing = "Recover a convoy recorder on its abandoned route.",
-			completion = "Thank you for bringing it back intact.",
+			briefing = (
+				"The convoy's check-in recording is still out on the route. I'd like to hear the complete account. "
+				.. "Recover the convoy check-in recording from the assigned search area in Garbage. Bring it back to "
+				.. "me in Garbage."
+			),
+			completion = "We'll listen here. You don't need to tell me what you think I should be prepared to hear.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Wake's note: \"The "
+					.. "convoy's check-in recording is still out on the route.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_tape",
-				label = "The Last Check-in - Handwritten Audio Cassette",
+				label = "Convoy check-in recording",
 			},
 			benefits = {},
 		},
@@ -238,8 +276,11 @@ PLUGIN:Register("wake", {
 			name = "Keeping the Record",
 			kind = "delivery",
 			requires = {"WA07"},
-			briefing = "I need these supplies to keep the searches going. Bring them here when you have them.",
-			completion = "Put it here, please.",
+			briefing = (
+				"I need the requested provisions before another search. Leave yourself enough for the return as "
+				.. "well."
+			),
+			completion = "Good. That takes care of the listed supplies.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -253,17 +294,27 @@ PLUGIN:Register("wake", {
 			completionCash = 1250,
 			name = "Atlas' Missing Mark",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Deliver it to 'Atlas'"
-				.. " in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the survey note for Atlas from the assigned search area in Garbage. Deliver it to 'Atlas' "
+				.. "in Marsh, then come back to the issuing contact in Garbage."
+			),
 			requires = {"WA08"},
-			briefing = "Recover a survey note that narrows the convoy route.",
-			completion = "They have it now. Thank you. We can put this beside the rest of the search record.",
+			briefing = (
+				"Atlas should have the survey note. A place described poorly can make the whole route look more "
+				.. "certain than it is. Recover the survey note for Atlas from the assigned search area in Garbage. "
+				.. "Deliver it to 'Atlas' in Marsh, then come back to me in Garbage."
+			),
+			completion = "Delivered. He can examine the description himself now.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Wake's note: \"Atlas should "
+					.. "have the survey note.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_notebook",
-				label = "Atlas' Missing Mark - Tied Leather Journal",
+				label = "Survey note for Atlas",
 				recipient = "atlas",
 			},
 			benefits = {},
@@ -274,11 +325,8 @@ PLUGIN:Register("wake", {
 			name = "A Longer Search",
 			kind = "tracker",
 			requires = {"WA09"},
-			briefing = (
-				"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can "
-				.. "learn from it."
-			),
-			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
+			briefing = "Keep bringing the marked recovery cases back. We can examine them here.",
+			completion = "You've stayed with the search work. That matters beyond this desk.",
 			target = 9,
 			benefits = {},
 		},
@@ -287,23 +335,27 @@ PLUGIN:Register("wake", {
 			completionCash = 1450,
 			name = "The Diverted Convoy",
 			kind = "field",
-			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the diverted convoy evidence from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"WA10"},
 			briefing = (
-				"Recover personal effects from the convoy's regional destination. Bring back what's "
-				.. "assigned without deciding what it proves on the way. We'll examine it somewhere quiet."
+				"Bring back the convoy evidence without rearranging it. We can ask what it supports once it is "
+				.. "somewhere safe. Recover the diverted convoy evidence from the assigned search area in Garbage. "
+				.. "Bring it back to me in Garbage."
 			),
-			completion = (
-				"Let me check it against the missing-person records. Thank you. I'll check it carefully. "
-				.. "You can put your pack down while I do; I won't need you to leave again this moment."
-			),
+			completion = "Thank you. I'll compare it carefully, including the parts that don't appear to fit.",
 			field = {
+				description = (
+					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Wake's note: "
+					.. "\"Bring back the convoy evidence without rearranging it.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_evidence",
-				label = "The Diverted Convoy - Orange Evidence Case",
+				label = "Diverted convoy evidence",
 			},
 			benefits = {
 				items = {
@@ -322,8 +374,11 @@ PLUGIN:Register("wake", {
 			name = "Ready to Follow",
 			kind = "delivery",
 			requires = {"WA11"},
-			briefing = "I need these supplies to keep the searches going. Bring them here when you have them.",
-			completion = "Thank you. I'll keep it with the search supplies.",
+			briefing = (
+				"There's a document request to fill. Keep the records together rather than sorting what seems "
+				.. "important on the way."
+			),
+			completion = "Thank you. I'll record the bundle before reading it.",
 			requirements = {
 				{
 					pool = "canned_food",
@@ -337,17 +392,27 @@ PLUGIN:Register("wake", {
 			completionCash = 1650,
 			name = "The Withheld Copy",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Garbage. Deliver it to"
-				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the restricted report's supporting file from the assigned search area in Garbage. Deliver "
+				.. "it to 'Carbon' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"WA12"},
-			briefing = "Recover field evidence corroborating a restricted report.",
-			completion = "They have it now. Thank you. We can put this beside the rest of the search record.",
+			briefing = (
+				"Carbon needs the evidence supporting that report. I want the missing information examined without "
+				.. "choosing a conclusion for him. Recover the restricted report's supporting file from the assigned "
+				.. "search area in Garbage. Deliver it to 'Carbon' in Waystation, then come back to me in Garbage."
+			),
+			completion = "He has the file. That's one fewer obstacle between the record and somebody willing to read it.",
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. Wake's note: \"Carbon needs the "
+					.. "evidence supporting that report.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_official",
-				label = "The Withheld Copy - Official File Folder",
+				label = "Restricted report's supporting file",
 				recipient = "carbon",
 			},
 			benefits = {},
@@ -358,11 +423,8 @@ PLUGIN:Register("wake", {
 			name = "No One Written Off",
 			kind = "tracker",
 			requires = {"WA13"},
-			briefing = (
-				"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can "
-				.. "learn from it."
-			),
-			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
+			briefing = "Continue the case recoveries while I compare the route records.",
+			completion = "A substantial amount brought home now. Thank you for treating the smaller returns carefully too.",
 			target = 14,
 			benefits = {},
 		},
@@ -371,17 +433,27 @@ PLUGIN:Register("wake", {
 			completionCash = 1850,
 			name = "The Pripyat Camp",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the Pripyat expedition case from the assigned search area in Pripyat. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"WA14"},
-			briefing = "Recover the expedition's camp case in Pripyat.",
-			completion = "I'll open it here. Give me a little room.",
+			briefing = (
+				"The expedition's equipment case is still in Pripyat. Keep the contents together; little things "
+				.. "are easily separated from their owners. Recover the Pripyat expedition case from the assigned "
+				.. "search area in Pripyat. Bring it back to me in Garbage."
+			),
+			completion = "Leave it here. I'll record what returned before I open anything further.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Wake's note: \"The "
+					.. "expedition's equipment case is still in Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_equipment",
-				label = "The Pripyat Camp - Striped Equipment Case",
+				label = "Pripyat expedition case",
 			},
 			benefits = {},
 		},
@@ -391,8 +463,8 @@ PLUGIN:Register("wake", {
 			name = "The Records Agree",
 			kind = "delivery",
 			requires = {"WA15"},
-			briefing = "I need these supplies to keep the searches going. Bring them here when you have them.",
-			completion = "Good. That saves another trip for basics.",
+			briefing = "Bring the requested supplies through intact. We can take time with the account once they're here.",
+			completion = "Put them here, please. I'll keep them with the relevant records.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -406,17 +478,27 @@ PLUGIN:Register("wake", {
 			completionCash = 2050,
 			name = "The Last Transmission",
 			kind = "field",
-			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the expedition's last transmission from the assigned search area in Pripyat. Bring it "
+				.. "back to the issuing contact in Garbage."
+			),
 			requires = {"WA16"},
-			briefing = "Recover a recorder deeper in Pripyat.",
-			completion = "Let me check it against the missing-person records.",
+			briefing = (
+				"I'd like the later recording brought home. A voice deserves a quieter hearing than a hurried "
+				.. "listen on the route. Recover the expedition's last transmission from the assigned search area in "
+				.. "Pripyat. Bring it back to me in Garbage."
+			),
+			completion = "We'll take our time with it. Thank you for bringing it all the way back.",
 			field = {
+				description = (
+					"A pale audio cassette with a broad blue printed label and twin spool windows. Wake's note: \"I'd "
+					.. "like the later recording brought home.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_tape2",
-				label = "The Last Transmission - Blue-Label Audio Cassette",
+				label = "Expedition's last transmission",
 			},
 			benefits = {
 				items = {
@@ -435,11 +517,8 @@ PLUGIN:Register("wake", {
 			name = "Still Looking",
 			kind = "tracker",
 			requires = {"WA17", "WA18"},
-			briefing = (
-				"Recover the marked personal-effects case and bring it back sealed. I'll handle what we can "
-				.. "learn from it."
-			),
-			completion = "You've brought back cases that would otherwise still be out there. I appreciate that.",
+			briefing = "There are more effects cases to recover. You don't have to take the next trip before resting.",
+			completion = "You've kept returning with the work. I haven't taken that for granted.",
 			target = 20,
 			benefits = {},
 		},
@@ -448,17 +527,27 @@ PLUGIN:Register("wake", {
 			completionCash = 2250,
 			name = "Personal Effects",
 			kind = "field",
-			objective = "Recover Old Photograph Album from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the team photograph collection from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"WA19"},
-			briefing = "Recover the missing team's final keepsake case.",
-			completion = "Thank you for bringing it back intact.",
+			briefing = (
+				"Recover the team's album intact. We don't need to decide what a photograph means to somebody "
+				.. "before keeping it safe. Recover the team photograph collection from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "I'll put it away from the other equipment. It can stay here until we're ready to examine it.",
 			field = {
+				description = (
+					"A thick worn photograph album with a small picture set into its brown cover. Wake's note: "
+					.. "\"Recover the team's album intact.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_photo",
-				label = "Personal Effects - Old Photograph Album",
+				label = "Team photograph collection",
 			},
 			benefits = {},
 			stock = {
@@ -472,8 +561,8 @@ PLUGIN:Register("wake", {
 			name = "A Place in the Ledger",
 			kind = "delivery",
 			requires = {"WA20"},
-			briefing = "I need these supplies to keep the searches going. Bring them here when you have them.",
-			completion = "Put it here, please.",
+			briefing = "Bring the listed search supplies here. Keep them separate from the belongings you recover.",
+			completion = "Thank you. I'll put them with the search equipment.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -487,24 +576,30 @@ PLUGIN:Register("wake", {
 			completionCash = 2450,
 			name = "The Final Name",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the final identification file from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"WA21"},
 			briefing = (
-				"Retrieve the final identification record and return the completed account. Keep the identifying "
-				.. "record together. Bring it here before drawing conclusions from a name you recognise on one page."
+				"The final identification record needs to come back complete. I don't want a familiar name on one "
+				.. "page deciding how we read the rest. Recover the final identification file from the assigned "
+				.. "search area in Garbage. Bring it back to me in Garbage."
 			),
 			completion = (
-				"I'll open it here. Give me a little room. Thank you. I'll read it carefully. You haven't treated "
-				.. "these as just things to collect, and I appreciate that. Give me a little time before we talk "
-				.. "about what the papers say."
+				"You've given the search something firmer than the stories we began with. Thank you for staying "
+				.. "with it. You can sit for a while; there is no next errand waiting in this conversation."
 			),
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Wake's note: \"The final "
+					.. "identification record needs to come back complete.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_personnel",
-				label = "The Final Name - Personnel File Folder",
+				label = "Final identification file",
 			},
 			benefits = {},
 			recognition = "Wake's trusted contact",

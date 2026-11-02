@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Implemented voice direction — November 2026
+
+Proud, sociable, self-serving cook who is defensive about his failed marriage and reluctant to admit fault. His care through food coexists with selfishness; the rewrite does not turn him into a kindly replacement character or excuse his past behaviour.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

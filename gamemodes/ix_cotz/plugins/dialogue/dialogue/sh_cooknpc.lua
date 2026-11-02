@@ -18,15 +18,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "How long have you known Old Timer?",
 	response = (
-		"Not a whole lot to say - I came here after consolidating "
-		.. "with 'Old Timer', as you know him as. We met each other "
-		.. "in a city nearby, back in the eighties, under different "
-		.. "circumstances than these. I worked at a volunteer at a "
-		.. "homeless shelter and... Well maybe the old guy will open "
-		.. "up about it at some point. Let's just say we have different "
-		.. "reasons for being here. "
+		"Since before either of us had these magnificent names. Eighties, a shelter kitchen, a lot of people "
+		.. "wanting something warm. I volunteered. Yes, me. You needn't look for a second Lemon. He had his own "
+		.. "difficulties; he can tell you those if he wants. We stayed in touch. When I started hearing about "
+		.. "this place, he was someone I could ask who might actually have seen what he was describing. That "
+		.. "counts for something, even if he still thinks seasoning means opening a tin beside a fire."
 	),
 	options = {
 		"BackgroundTopic2",
@@ -34,14 +32,12 @@ DIALOGUE.addTopic("BackgroundTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Well, what's your reason?",
+	statement = "Why did you leave home?",
 	response = (
-		"Things didn't work out back home. I was led by temptations "
-		.. "and my wife didn't take so kindly. But who cares, she was "
-		.. "kind of on the big side anyways and didn't want to cook "
-		.. "for me. Who would have believed, I had to cook by myself! "
-		.. "It's her own fault and was definitely something she had "
-		.. "coming. Stupid bitch."
+		"I had a wife, a job, people who expected me at certain times. I became difficult to expect. There "
+		.. "was always somewhere else I wanted to be, and I generally found a reason why that was somebody "
+		.. "else's fault. She had plenty to say about it. Some of it was even fair. Don't look so pleased; you "
+		.. "haven't heard my side."
 	),
 	options = {
 		"BackgroundTopic3",
@@ -49,15 +45,12 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Right... What made you come here, of all places?",
+	statement = "What is your side?",
 	response = (
-		"Well, I heard about the artifacts of course, from good "
-		.. "oldie! And I met some crazy people through my volunteer "
-		.. "work who are interested in astrology or whatever it's called, "
-		.. "they want to pay a big extra for whatever supernatural "
-		.. "elements I can get out of here. Apparently they have sources "
-		.. "who pay big. I don't care if you believe it, just trust "
-		.. "the cash when it flows in, alright?"
+		"Considerably longer. Usually improves after a drink. Look, I heard about artifacts, knew people "
+		.. "willing to pay for things they hadn't seen, and knew Old Timer. It sounded like a fresh start with "
+		.. "money attached. I didn't arrive dreaming of feeding everybody. That's what I found I could do here. "
+		.. "Want food, or are you planning to spend the afternoon enjoying my personal failures?"
 	),
 	options = {
 		"BackgroundTopic4",
@@ -65,16 +58,20 @@ DIALOGUE.addTopic("BackgroundTopic3", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "I'll keep that in mind.",
-	response = ("You're always welcome to trade here. And remember - I do " .. "the best meals in town!"),
+	statement = "Let's leave it there.",
+	response = "Good. I can give a much more convincing account of what's in the pot.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "Can you tell me something interesting?",
-	response = "Not really, no.",
+	statement = "What do you like cooking?",
+	response = (
+		"Something people sit down to eat. A meal they stop walking for. You spend all that time getting it "
+		.. "right and somebody wants to shovel it into a tin and leave. Sit down! Let it cool enough to taste. "
+		.. "And if you like it, say so before telling me how your mother would have made it."
+	),
 	options = {
 		"BackTopic",
 	},
@@ -161,7 +158,7 @@ DIALOGUE.addTopic("StartBarter", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "Very nice...",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -177,25 +174,28 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "See you soon...",
+	response = "See you. Bring the bowl back if you've borrowed one.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Why do you keep cooking for everyone?",
 	response = (
-		"Because you lot would eat cold tins until your teeth fell out. And because I'm good at it. "
-		.. "There, an honest answer. Back home, every meal came with an argument. Here they complain, "
-		.. "scrape the bowl clean, and bring it back. I find that arrangement suits me."
+		"Because I'm good at it, and people will pay for something they actually want to eat. I didn't come "
+		.. "here to run a charity. Still, you put a pot on and find yourself remembering who can't chew the "
+		.. "tough bits, who'll arrive late, who says they aren't hungry and then watches everyone else's bowl. "
+		.. "Old habits, perhaps. If I make a little extra, that's my decision. It doesn't mean everyone gets to "
+		.. "start explaining what a generous fellow I am."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "You notice who comes back for food?",
+	statement = "You notice who misses a meal?",
 	response = (
-		"Naturally. Someone has to know how much to make. Old Timer can remember a track for a week and "
-		.. "forget a meal standing beside it. If I put a bowl in his way, that's efficient management of "
-		.. "the kitchen. You can keep that explanation when you see him."
+		"I notice what's left in the pot. Old Timer gets distracted. Jitters says he'll eat after the next "
+		.. "patient, which is a fine plan if nobody ever gets hurt again. I put something aside. They can "
+		.. "collect it or I can complain until they do. Don't make a touching story out of it. I also notice "
+		.. "who brings the bowl back dirty."
 	),
 	options = {"BackTopic"},
 })

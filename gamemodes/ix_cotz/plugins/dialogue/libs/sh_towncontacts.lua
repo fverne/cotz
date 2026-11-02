@@ -58,6 +58,7 @@ local function configureWork(dialogue, contact)
 	if contact.job.kind ~= "arena" then
 		dialogue.addTopic("GetTaskByDifficulty", {
 			statement = contact.dialogue.offerPrompt,
+			response = contact.dialogue.work,
 			options = {"BackTopic"},
 			ShouldAdd = function(_, client, target) return not client:ixHasJobFromNPC(target:GetDisplayName()) end,
 		})

@@ -23,7 +23,7 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
-	response = "What would you like to know?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -39,12 +39,12 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you!",
-	response = "Take care, STALKER...",
+	response = "Come back with a question worth arguing about.",
 })
 
 DIALOGUE.addTopic("TutorialTopic", {
-	statement = "I have a few questions, I just arrived here.",
-	response = "What do you want to know?",
+	statement = "Can you explain a few things about the camp?",
+	response = "I can. Whether you believe the explanation seems to be a separate question these days. Go on, ask.",
 	options = {
 		"TutorialTopic1",
 		"TutorialTopic2",
@@ -65,14 +65,13 @@ DIALOGUE.addTopic("TutorialTopicBack", {
 })
 
 DIALOGUE.addTopic("TutorialTopic1", {
-	statement = "What is this place?",
+	statement = "How did this camp get started?",
 	response = (
-		"This is an area near the Chernobyl exclusion zone. More "
-		.. "specifically, we're in the great swamps. Until recently, "
-		.. "this area was completely abandoned, but me and another "
-		.. "local, 'Technut', set up camp here in this shithole. We "
-		.. "call it our 'Eastern Haven'. We could definitely use some "
-		.. "help getting this place in proper shape."
+		"Technut and I helped get the place standing when it was considerably less inviting. Eastern Haven, "
+		.. "we called it. You can judge how much of that was optimism. A camp begins looking established once "
+		.. "enough people forget the work of starting it. Then somebody asks where the spare tools are and you "
+		.. "discover how much establishing remains. Talk to the people doing the ordinary jobs. They'll give "
+		.. "you a different account of the place from the people admiring it."
 	),
 	options = {
 		"TutorialTopic1_1",
@@ -80,12 +79,12 @@ DIALOGUE.addTopic("TutorialTopic1", {
 })
 
 DIALOGUE.addTopic("TutorialTopic1_1", {
-	statement = "How can I help out?",
+	statement = "Who should I speak to about helping?",
 	response = (
-		"Talk to the people here and see what they need. Some will ask for supplies, some for work "
-		.. "outside. You'll have to decide who you trust and what you can manage. I can point you towards "
-		.. "a few useful conversations, but I won't pretend everyone here has the same reasons for "
-		.. "staying."
+		"Ask what people actually need. Gasket wants utility supplies, Technut handles workshop salvage, "
+		.. "Jitters looks after the clinic. Lemon will explain his requirements whether you ask or not. I "
+		.. "collect specimens and other things worth examining. Read a request before promising to fill it. A "
+		.. "successful first trip doesn't have to impress everyone in camp."
 	),
 	options = {
 		"TutorialTopicBack",
@@ -93,14 +92,12 @@ DIALOGUE.addTopic("TutorialTopic1_1", {
 })
 
 DIALOGUE.addTopic("TutorialTopic2", {
-	statement = "How dangerous is this place?",
+	statement = "What should I be most careful about?",
 	response = (
-		"There are two types of people here. The careful people, "
-		.. "and the dead people. As you can imagine, a place like this "
-		.. "where the laws of science do not apply as anywhere in the "
-		.. "world, can be quite unforgiving and dangerous. The dangers "
-		.. "are manyfold, but the biggest of your troubles will be "
-		.. "the mutants, and the anomalies."
+		"The thing you've decided is ordinary. People stare at the impossible and walk straight past a "
+		.. "warning they recognise. Mutants, anomalies, exposure, a bad return route - there are plenty of ways "
+		.. "to make a short journey longer than you intended. I can tell you what I've seen. Don't turn that "
+		.. "into permission to stop looking for yourself."
 	),
 	options = {
 		"TutorialTopic2_1",
@@ -110,18 +107,14 @@ DIALOGUE.addTopic("TutorialTopic2", {
 })
 
 DIALOGUE.addTopic("TutorialTopic2_1", {
-	statement = "Tell me about the anomalies.",
+	statement = "What should I know about anomalies?",
 	response = (
-		"The anomalies are a work of a merciless god. I've seen "
-		.. "animals being torn apart by sheer gravity, and those are "
-		.. "the lucky ones. Luckily, most are static, so if you watch "
-		.. "your step and don't fall into one, you should be alright. "
-		.. "It should be noted that sometimes, the merciless god seems "
-		.. "to be merciful, and he releases a part of scientific wonder "
-		.. "near them. They are artifacts that mostly are not dangerous "
-		.. "to the wielder, sometimes with benefits, but always worth "
-		.. "a lot to the scientific community outside the zone, and "
-		.. "hence worth quite a lot on the black market."
+		"Keep your distance until you understand the approach, and don't trust a quiet-looking patch because "
+		.. "it looks like one you crossed yesterday. I've watched an animal get lifted where I expected to see "
+		.. "it run. That persuaded me more effectively than any explanation since. Artifacts bring people close "
+		.. "to fields; sometimes they're valuable enough to make the risk sound smaller in the telling. Ask "
+		.. "about the particular object before assuming it is harmless to carry. Egghead enjoys that sort of "
+		.. "question."
 	),
 	options = {
 		"TutorialTopic2_2",
@@ -130,17 +123,13 @@ DIALOGUE.addTopic("TutorialTopic2_1", {
 })
 
 DIALOGUE.addTopic("TutorialTopic2_2", {
-	statement = "Tell me about the mutants.",
+	statement = "What should I know about the mutants?",
 	response = (
-		"After the first couple of emissions, many of the animals "
-		.. "here died, but those that survived had a worse fate. They "
-		.. "all turned into dangerous, aggressive, mutated versions "
-		.. "of their former selves, and are no longer good for anything "
-		.. "but having to be put down, as they will all try to take "
-		.. "you down, regardless of your intentions. Due to the mutations, "
-		.. "many of the mutants bodyparts have special properties that "
-		.. "are valuable to scientists. I suggest poaching the mutants "
-		.. "whenever possible, and sell off the dead parts."
+		"Watch what they're doing before you decide what they are about to do. A frightened account tends to "
+		.. "put every animal in the same bad temper. That won't help you judge the one in front of you. Old "
+		.. "Timer has hunting work, and Spoor in Garbage cares about what the ground can tell him. I examine "
+		.. "the parts that come back. There's useful work in that, provided you survive collecting them and "
+		.. "don't ruin them in your pack."
 	),
 	options = {
 		"TutorialTopic2_1",
@@ -149,15 +138,14 @@ DIALOGUE.addTopic("TutorialTopic2_2", {
 })
 
 DIALOGUE.addTopic("TutorialTopic3", {
-	statement = "What gear do you recommend I get my hands on?",
+	statement = "What should I carry before going out?",
 	response = (
-		"The most neccessary things are a geiger counter, some medical "
-		.. "items, and something to defend yourself with. Always carry "
-		.. "those three with you. Also, keep your weapons in good condition "
-		.. "always if you want them to shoot straight, and remember, "
-		.. "we don't have access to many spare parts here, so firearms "
-		.. "will not be maintainable forever. 'Technut' can help you "
-		.. "out."
+		"Water, food, medical supplies you know how to use, and something you can rely on to defend "
+		.. "yourself. A working Geiger counter is worth making room for. Check the condition of the equipment "
+		.. "before leaving; discovering a fault at the wrong end of a walk is an expensive way to become "
+		.. "familiar with it. Technut can discuss repairs. And leave space for the thing you went to collect. "
+		.. "People overlook that until they're standing over a case deciding which of their own belongings "
+		.. "became optional."
 	),
 	options = {
 		"TutorialTopicBack",
@@ -370,7 +358,7 @@ DIALOGUE.addTopic("NotEnoughMoneySuitVariantChange", {
 })
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "Can you tell me something interesting?",
+	statement = "Have you got a story to pass the time?",
 	response = "",
 	options = {
 		"InterestMoreTopic",
@@ -380,42 +368,39 @@ DIALOGUE.addTopic("InterestTopic", {
 		if CLIENT then
 			local tbl = {
 				(
-					"The Zone is a dangerous place. Anomalies are everywhere, "
-					.. "and all the mutants here are out to get you, I swear."
+					"Technut once tried to explain a fault using the sound it made. By the time he finished, three "
+					.. "people were offering diagnoses and nobody knew which machine he meant. I listened to the whole "
+					.. "performance. Free entertainment was less common than spare parts that week."
 				),
 				(
-					"Did you know people stash their stuff everywhere? If you "
-					.. "have a keen eye, you can find some interesting things."
+					"People ask whether I kept a record when I first came here. I did. Then I used a page to keep "
+					.. "something dry and another to start a fire. Carbon looks at me as if I've personally misplaced a "
+					.. "century. I tell him the fire was very good. He never enjoys that part."
 				),
 				(
-					"We STALKERS, as we call ourselves, are incredibly creative. "
-					.. "I don't think any other place in the world has our level "
-					.. "of craftiness and ability to survive even the harshest "
-					.. "conditions. Who would have thought of using cutlery as "
-					.. "makeshift digging tools, for instance?"
+					"A fellow asked me the safest way to travel with a heavy pack. I said to put some of it down. He "
+					.. "explained why every object was necessary, then asked the question again. We were both "
+					.. "disappointed by the conversation."
 				),
 				(
-					"I've heard rumours of creatures out there, who can mess "
-					.. "you up. Not in the sense that they gnaw and tear you apart, "
-					.. "but that they send even the strongest willed men into the "
-					.. "deepest hole - if they can make it away. I'm not going "
-					.. "out there..."
+					"I've heard descriptions of animals I wouldn't care to meet. Some from people who saw them, some "
+					.. "from people who improved the account at every table. Ask where the teller was standing. A "
+					.. "surprising number of the best stories were witnessed from a chair in camp."
 				),
 				(
-					"The mutants in here are, to nobodys surprise, very irradiated. "
-					.. "If you ever do plan to eat them, I suggest cooking them "
-					.. "first, as it takes away a lot of their radiation."
+					"Lemon tells me he can judge a person's appetite at a glance. I asked why he always makes enough "
+					.. "for another person. He explained stock management for so long I had time to finish the bowl. An "
+					.. "excellent cook. Could use a little practice at leaving a question unanswered."
 				),
 				(
-					"I'm still having trouble believing this place is not more "
-					.. "well known, but I assume it's because everyone in the surrounding "
-					.. "areas are being told not to say a word, and the military "
-					.. "are not too keen on rulebreakers around here."
+					"Spoor will spend half an evening asking what an animal was eating. I ask whether he wants the "
+					.. "rest of the story. He says that's the part he's asking for. We do eventually have a useful "
+					.. "conversation, provided neither of us objects to doing it in the wrong order."
 				),
 				(
-					"If you ever encounter something that shakes you up, I suggest "
-					.. "smoking a couple of cigarettes. They calm the mind, and "
-					.. "help you think clearer."
+					"I like a person who can say they don't remember. Gives you somewhere sensible to begin asking. "
+					.. "Of course, when I say it, people look delighted. You'd think I'd just handed them a rare "
+					.. "artifact instead of admitting where I put down a pair of gloves."
 				),
 			}
 
@@ -425,7 +410,7 @@ DIALOGUE.addTopic("InterestTopic", {
 })
 
 DIALOGUE.addTopic("InterestMoreTopic", {
-	statement = "Very nice, more?",
+	statement = "What else do you remember?",
 	response = "",
 	options = {
 		"InterestMoreTopic",
@@ -435,42 +420,39 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 		if CLIENT then
 			local tbl = {
 				(
-					"The Zone is a dangerous place. Anomalies are everywhere, "
-					.. "and all the mutants here are out to get you, I swear."
+					"Technut once tried to explain a fault using the sound it made. By the time he finished, three "
+					.. "people were offering diagnoses and nobody knew which machine he meant. I listened to the whole "
+					.. "performance. Free entertainment was less common than spare parts that week."
 				),
 				(
-					"Did you know people stash their stuff everywhere? If you "
-					.. "have a keen eye, you can find some interesting things."
+					"People ask whether I kept a record when I first came here. I did. Then I used a page to keep "
+					.. "something dry and another to start a fire. Carbon looks at me as if I've personally misplaced a "
+					.. "century. I tell him the fire was very good. He never enjoys that part."
 				),
 				(
-					"We STALKERS, as we call ourselves, are incredibly creative. "
-					.. "I don't think any other place in the world has our level "
-					.. "of craftiness and ability to survive even the harshest "
-					.. "conditions. Who would have thought of using cutlery as "
-					.. "makeshift digging tools, for instance?"
+					"A fellow asked me the safest way to travel with a heavy pack. I said to put some of it down. He "
+					.. "explained why every object was necessary, then asked the question again. We were both "
+					.. "disappointed by the conversation."
 				),
 				(
-					"I've heard rumours of creatures out there, who can mess "
-					.. "you up. Not in the sense that they gnaw and tear you apart, "
-					.. "but that they send even the strongest willed men into the "
-					.. "deepest hole - if they can make it away. I'm not going "
-					.. "out there..."
+					"I've heard descriptions of animals I wouldn't care to meet. Some from people who saw them, some "
+					.. "from people who improved the account at every table. Ask where the teller was standing. A "
+					.. "surprising number of the best stories were witnessed from a chair in camp."
 				),
 				(
-					"The mutants in here are, to nobodys surprise, very irradiated. "
-					.. "If you ever do plan to eat them, I suggest cooking them "
-					.. "first, as it takes away a lot of their radiation."
+					"Lemon tells me he can judge a person's appetite at a glance. I asked why he always makes enough "
+					.. "for another person. He explained stock management for so long I had time to finish the bowl. An "
+					.. "excellent cook. Could use a little practice at leaving a question unanswered."
 				),
 				(
-					"I'm still having trouble believing this place is not more "
-					.. "well known, but I assume it's because everyone in the surrounding "
-					.. "areas are being told not to say a word, and the military "
-					.. "are not too keen on rulebreakers around here."
+					"Spoor will spend half an evening asking what an animal was eating. I ask whether he wants the "
+					.. "rest of the story. He says that's the part he's asking for. We do eventually have a useful "
+					.. "conversation, provided neither of us objects to doing it in the wrong order."
 				),
 				(
-					"If you ever encounter something that shakes you up, I suggest "
-					.. "smoking a couple of cigarettes. They calm the mind, and "
-					.. "help you think clearer."
+					"I like a person who can say they don't remember. Gives you somewhere sensible to begin asking. "
+					.. "Of course, when I say it, people look delighted. You'd think I'd just handed them a rare "
+					.. "artifact instead of admitting where I put down a pair of gloves."
 				),
 			}
 
@@ -482,10 +464,11 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Does everyone believe you were first?",
 	response = (
-		"Everyone benefits from arguing about it, apparently. Ask them who was here first and suddenly "
-		.. "they're historians. Ask who helped get this place standing and they remember an appointment "
-		.. "elsewhere. You don't have to believe every word I say. Listen long enough to find the useful "
-		.. "ones."
+		"Believing isn't their favourite pastime. Arguing is. Carbon wants dates, Spoor wants tracks, Old "
+		.. "Timer remembers an entirely different conversation. Keeps them occupied. I don't mind a question "
+		.. "with something behind it. A man once told me he didn't believe an animal could move the way I "
+		.. "described, then asked which way he'd be safest walking. I answered the second question. You'd have "
+		.. "enjoyed his face."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -493,9 +476,10 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Would you admit remembering something wrong?",
 	response = (
-		"If you can show me, yes. Carbon wants every memory dated and signed. Mine didn't arrive that "
-		.. "way. Doesn't make an old account worthless, and it doesn't make it perfect either. Sit down "
-		.. "with the evidence and I'll hear you out. Just don't expect me to enjoy it."
+		"Show me. Don't wave a folder and expect the cover to settle it. We'll read the thing. I might have "
+		.. "put a name in the wrong place, or kept two bad nights as one. That happens. It doesn't mean the "
+		.. "person who wrote the report saw everything either. Bring both accounts to the table and we'll make "
+		.. "an evening of it. I reserve the right to complain."
 	),
 	options = {"BackTopic"},
 })

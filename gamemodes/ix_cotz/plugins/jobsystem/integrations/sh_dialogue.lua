@@ -120,7 +120,7 @@ local function configureJobPreview(dialogue)
 	local topic = dialogue.tree.GetTaskByDifficulty
 	if not topic then return end
 	topic.IsDynamic = true
-	topic.response = "Here is what needs doing."
+	topic.response = dialogue.townContact and topic.response or "Here is what needs doing."
 	topic.options = {"BackTopic"}
 	topic.preCallback = function(self, client, target)
 		if CLIENT then

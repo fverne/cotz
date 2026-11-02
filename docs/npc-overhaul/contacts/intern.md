@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Implemented voice direction — November 2026
+
+Capable junior colleague seeking responsibility for a complete survey. More confident checking records than interrupting a senior researcher; progression supports taking ownership of conclusions without claiming new authority.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

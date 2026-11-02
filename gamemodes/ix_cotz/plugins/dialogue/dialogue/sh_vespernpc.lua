@@ -22,10 +22,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "Why did you become a prospector?",
 	response = (
-		"I work near anomaly fields. Not because I think I'm lucky. Because I prepare, take the "
-		.. "reading, and leave while leaving is still an option."
+		"I liked the work before I became sensible enough to describe it as preparation. I still like it. A "
+		.. "reading changes, you find something you didn't expect, and for a little while the walk was worth "
+		.. "all the packing. Then you have to come back, clean everything, explain why you were late. That's "
+		.. "less glamorous. Beanstalk hears me enjoying the first part and thinks I've forgotten the rest. I'm "
+		.. "willing to admit I've occasionally made that impression very convincing."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -50,7 +53,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "You can admire the field from here. Closer costs preparation.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -66,15 +69,17 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Bring yourself back with the readings.",
+	response = "Good journey. Leave yourself time for the return.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Why keep going back?",
 	response = (
-		"Because I like finding something I haven't understood yet. There, you can tell Beanstalk I "
-		.. "admitted it. He thinks that's where the trouble starts. Sometimes he's right. I still want a "
-		.. "proper look. I just want enough supplies left to argue about it afterwards."
+		"Because I want another look. Sometimes I spend the return journey deciding what I'd do differently, "
+		.. "then get annoyed because I have to eat and sleep before trying it. There's pleasure in doing a trip "
+		.. "well too. Enough water left, equipment packed properly, no argument about which way we came. You "
+		.. "get home and discover you can still enjoy the discovery. That's a better evening than explaining "
+		.. "why someone else didn't return."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -82,9 +87,10 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Does Beanstalk think you take too many risks?",
 	response = (
-		"He worries aloud; I do the checks before I leave. We get on better when we discuss an actual "
-		.. "trip instead of whether caution is a virtue. He asks useful questions. I don't have to enjoy "
-		.. "all of them, and he doesn't have to enjoy all my answers."
+		"He worries aloud. I tend to start answering before he's finished. Neither habit improves the "
+		.. "discussion. If we talk about an actual trip, he asks useful things: what changed, what I left out, "
+		.. "why I chose that spot. I can answer those. 'Be more careful' is harder to pack. Intern has started "
+		.. "asking the useful questions too. I hope we let him finish them."
 	),
 	options = {"BackTopic"},
 })

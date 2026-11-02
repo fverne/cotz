@@ -25,18 +25,18 @@ PLUGIN:Register("spoor", {
 			"Hello. Seen anything worth a closer look? You know I'm happy to hear what you actually "
 			.. "noticed."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the hunt I've taken.",
+		offerPrompt = "Do you have a hunting order?",
 		work = (
-			"Mutants on the routes. The job is to clear them, not to chase a trophy into another pack. Don't "
-			.. "start firing before you've looked at the ground around you. There may be more using the area than "
-			.. "the animal you came for."
+			"Mutant hunting, against the quarry on the order. Check it before you leave. Don't turn the journey "
+			.. "into a trophy chase because you saw something larger. I'd rather you came back able to explain an "
+			.. "ordinary hunt than left someone else to explain where you went."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What are you checking in the hunting records?",
 		progression = (
-			"Supplies and field observations. I'd like to know why the animals are moving, too. Bring the "
-			.. "specimens we can examine and the observations left in the field. I'd like a clearer idea of what "
-			.. "moves through here, not a larger pile of trophies."
+			"I want to compare observations from the hunting grounds. Some of the accounts disagree; some may "
+			.. "simply describe different days. We'll need specimens, supplies, and recovered records. Choose a "
+			.. "piece of work you can prepare for. We can talk about what it shows after we've seen it."
 		),
 	},
 	catalogue = {
@@ -131,17 +131,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 450,
 			name = "The Scavenger's Camp",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the scavenging-ground observations from the assigned search area in Garbage. Bring it "
+				.. "back to the issuing contact in Garbage."
+			),
 			requires = {"SP01"},
-			briefing = "Recover observations beside a Garbage hunting ground.",
-			completion = "Where you found it is marked? Good.",
+			briefing = (
+				"I want the observations from the hunting ground. What was feeding there matters before we decide "
+				.. "what drove it away. Recover the scavenging-ground observations from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "I'll read the feeding notes first. See if they noticed what else was using the ground.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Spoor's note: \"I want the "
+					.. "observations from the hunting ground.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_notebook",
-				label = "The Scavenger's Camp - Tied Leather Journal",
+				label = "Scavenging-ground observations",
 			},
 			benefits = {},
 		},
@@ -151,8 +161,8 @@ PLUGIN:Register("spoor", {
 			name = "Clear the Approach",
 			kind = "tracker",
 			requires = {"SP02"},
-			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
-			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
+			briefing = "Continue the mutant hunting orders. Keep to the specified quarry.",
+			completion = "A few completed hunts. Enough to begin seeing how you work.",
 			target = 2,
 			benefits = {},
 		},
@@ -161,17 +171,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 650,
 			name = "Where They Feed",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the feeding-site recording from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"SP02"},
-			briefing = "Retrieve a recorder from a feeding site.",
-			completion = "Let me look at the observations.",
+			briefing = (
+				"There's a recorder left near a feeding site. I'd like to hear the observer before choosing an "
+				.. "explanation. Recover the feeding-site recording from the assigned search area in Garbage. Bring "
+				.. "it back to me in Garbage."
+			),
+			completion = "Put it here. I'll listen before looking for the part that agrees with me.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Spoor's note: "
+					.. "\"There's a recorder left near a feeding site.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_tape",
-				label = "Where They Feed - Handwritten Audio Cassette",
+				label = "Feeding-site recording",
 			},
 			benefits = {},
 		},
@@ -181,8 +201,8 @@ PLUGIN:Register("spoor", {
 			name = "Tools for the Field",
 			kind = "delivery",
 			requires = {"SP03"},
-			briefing = "Bring what's listed here. Keep it in good condition; I need to examine it.",
-			completion = "Good. Keep it out of the sun.",
+			briefing = "There's a supply list for field work. Keep your own return kit separate from the hand-in.",
+			completion = "Good. I'll put this with the field supplies.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -196,17 +216,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 850,
 			name = "Lemon's Complaint",
 			kind = "field",
-			objective = "Recover Scientist's Field Diary from the assigned search area in Garbage. Deliver it to"
-				.. " 'Jitters' in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the camp meat-handling notes from the assigned search area in Garbage. Deliver it to "
+				.. "'Jitters' in Marsh, then come back to the issuing contact in Garbage."
+			),
 			requires = {"SP04"},
-			briefing = "Recover meat-handling notes from an abandoned camp.",
-			completion = "Good. They have the record. Now we can compare what was actually found.",
+			briefing = (
+				"Jitters needs the meat-handling notes. He can judge the health concerns better with the account "
+				.. "in front of him. Recover the camp meat-handling notes from the assigned search area in Garbage. "
+				.. "Deliver it to 'Jitters' in Marsh, then come back to me in Garbage."
+			),
+			completion = "He has the notes. Let him read them before the argument returns to whose dinner it was.",
 			field = {
+				description = (
+					"A thick blue diary with a label fixed to the front cover. Spoor's note: \"Jitters needs the "
+					.. "meat-handling notes.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_diary",
-				label = "Lemon's Complaint - Scientist's Field Diary",
+				label = "Camp meat-handling notes",
 				recipient = "jitters",
 			},
 			benefits = {
@@ -230,8 +260,8 @@ PLUGIN:Register("spoor", {
 			name = "A Safer Yard",
 			kind = "tracker",
 			requires = {"SP05"},
-			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
-			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
+			briefing = "More hunting assignments when you're ready. Check the quarry before accepting.",
+			completion = "You've kept to the requests. That's useful work.",
 			target = 5,
 			benefits = {},
 		},
@@ -240,17 +270,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 1050,
 			name = "The Displaced Pack",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the displaced-pack notebook from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"SP06"},
-			briefing = "Recover observations from a second hunting ground.",
-			completion = "Where you found it is marked? Good.",
+			briefing = (
+				"I want the second hunting-ground account. A pack turning up somewhere new doesn't tell us why it "
+				.. "left the old ground. Recover the displaced-pack notebook from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Good. I'll check what they saw before the animals moved.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Spoor's note: \"I want the "
+					.. "second hunting-ground account.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_notebook",
-				label = "The Displaced Pack - Tied Leather Journal",
+				label = "Displaced-pack notebook",
 			},
 			benefits = {},
 		},
@@ -260,8 +300,8 @@ PLUGIN:Register("spoor", {
 			name = "Different Quarry",
 			kind = "delivery",
 			requires = {"SP07"},
-			briefing = "Bring what's listed here. Keep it in good condition; I need to examine it.",
-			completion = "That will be useful.",
+			briefing = "I'd like the requested material brought in without damage from the journey.",
+			completion = "That's usable. I'll take a closer look.",
 			requirements = {
 				{
 					pool = "common_parts",
@@ -275,17 +315,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 1250,
 			name = "Tracks in the Wrong Place",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0013 from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the disturbed-route recorder from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"SP08"},
-			briefing = "Collect a recorder along a disturbed regional route.",
-			completion = "Let me look at the observations.",
+			briefing = (
+				"The route recorder may help place the disturbance. Don't decide every noise on it must be the "
+				.. "quarry. Recover the disturbed-route recorder from the assigned search area in Garbage. Bring it "
+				.. "back to me in Garbage."
+			),
+			completion = "I'll take time with it. There's usually more than one thing moving out there.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Spoor's note: "
+					.. "\"The route recorder may help place the disturbance.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_module",
-				label = "Tracks in the Wrong Place - Numbered Data Module 0013",
+				label = "Disturbed-route recorder",
 			},
 			benefits = {},
 		},
@@ -295,8 +345,8 @@ PLUGIN:Register("spoor", {
 			name = "Patient Work",
 			kind = "tracker",
 			requires = {"SP09"},
-			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
-			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
+			briefing = "Keep completing the hunting orders. There is no need to invent a better story for the return.",
+			completion = "A steady amount of work. I'd sooner hear the plain account.",
 			target = 9,
 			benefits = {},
 		},
@@ -305,23 +355,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 1450,
 			name = "The Empty Hide",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the observation-hide field case from the assigned search area in Garbage. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"SP10"},
 			briefing = (
-				"Recover a hunter's case at a remote observation site. Check the order and bring what I "
-				.. "can use. Time spent preparing is easier to spare here than after you've left."
+				"There's a hunter's case to recover from the observation site. Bring it as it was left. Recover "
+				.. "the observation-hide field case from the assigned search area in Garbage. Bring it back to me in "
+				.. "Garbage."
 			),
-			completion = (
-				"Set it here. I'll compare the records. That helps. I'll check it properly before we "
-				.. "decide what comes next."
-			),
+			completion = "Set it down. I'll check the observations before judging how the position was used.",
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Spoor's note: \"There's "
+					.. "a hunter's case to recover from the observation site.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_personnel",
-				label = "The Empty Hide - Personnel File Folder",
+				label = "Observation-hide field case",
 			},
 			benefits = {
 				items = {
@@ -340,8 +394,8 @@ PLUGIN:Register("spoor", {
 			name = "Proof of Change",
 			kind = "delivery",
 			requires = {"SP11"},
-			briefing = "Bring what's listed here. Keep it in good condition; I need to examine it.",
-			completion = "Let me check the condition.",
+			briefing = "Bring this request through. A familiar specimen still deserves care getting it here.",
+			completion = "All here. Leave it where the light reaches.",
 			requirements = {
 				{
 					pool = "common_parts",
@@ -355,17 +409,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 1650,
 			name = "The Pattern Breaks",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Deliver it to"
-				.. " 'Atlas' in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the survey recorder for Atlas from the assigned search area in Waystation. Deliver it to "
+				.. "'Atlas' in Marsh, then come back to the issuing contact in Garbage."
+			),
 			requires = {"SP12"},
-			briefing = "Retrieve a survey recorder in Waystation territory.",
-			completion = "Good. They have the record. Now we can compare what was actually found.",
+			briefing = (
+				"Atlas needs the survey record. I'd like him to check the ground account without me selecting the "
+				.. "useful bits for him. Recover the survey recorder for Atlas from the assigned search area in "
+				.. "Waystation. Deliver it to 'Atlas' in Marsh, then come back to me in Garbage."
+			),
+			completion = "Delivered. He'll tell me where the account is uncertain. That's worth hearing.",
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. Spoor's note: \"Atlas "
+					.. "needs the survey record.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_module2",
-				label = "The Pattern Breaks - Numbered Data Module 0022",
+				label = "Survey recorder for Atlas",
 				recipient = "atlas",
 			},
 			benefits = {},
@@ -376,8 +440,8 @@ PLUGIN:Register("spoor", {
 			name = "No Easy Quarry",
 			kind = "tracker",
 			requires = {"SP13"},
-			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
-			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
+			briefing = "Continue the specified hunts. Prepare for the quarry, not the last successful trip.",
+			completion = "You've stayed patient with the work. I appreciate that.",
 			target = 14,
 			benefits = {},
 		},
@@ -386,17 +450,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 1850,
 			name = "The First Pripyat Trail",
 			kind = "field",
-			objective = "Recover Scientist's Field Diary from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the Pripyat observer's notebook from the assigned search area in Pripyat. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"SP14"},
-			briefing = "Recover an observer's notebook at a Pripyat hunting site.",
-			completion = "Let me look at the observations.",
+			briefing = (
+				"An observer's notebook is still in Pripyat. I want the whole sequence, including days when "
+				.. "nothing seemed to happen. Recover the Pripyat observer's notebook from the assigned search area "
+				.. "in Pripyat. Bring it back to me in Garbage."
+			),
+			completion = "Leave the pages in order. I'll start before the interesting sighting.",
 			field = {
+				description = (
+					"A thick blue diary with a label fixed to the front cover. Spoor's note: \"An observer's notebook "
+					.. "is still in Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_diary",
-				label = "The First Pripyat Trail - Scientist's Field Diary",
+				label = "Pripyat observer's notebook",
 			},
 			benefits = {},
 		},
@@ -406,8 +480,8 @@ PLUGIN:Register("spoor", {
 			name = "Preparing for the Worst",
 			kind = "delivery",
 			requires = {"SP15"},
-			briefing = "Bring what's listed here. Keep it in good condition; I need to examine it.",
-			completion = "Good. Keep it out of the sun.",
+			briefing = "There's a supply list for field work. Keep your own return kit separate from the hand-in.",
+			completion = "Good. I'll put this with the field supplies.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -421,17 +495,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 2050,
 			name = "The Survivor's Cache",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the abandoned hunter's case from the assigned search area in Pripyat. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"SP16"},
-			briefing = "Recover a hunter's abandoned case deeper in Pripyat.",
-			completion = "Set it here. I'll compare the records.",
+			briefing = (
+				"Recover the hunter's case. An abandoned load can mean several things; bring it home before we "
+				.. "choose one. Recover the abandoned hunter's case from the assigned search area in Pripyat. Bring "
+				.. "it back to me in Garbage."
+			),
+			completion = "Here. I'll see what belongs with the observations.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Spoor's note: \"Recover the "
+					.. "hunter's case.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_equipment",
-				label = "The Survivor's Cache - Striped Equipment Case",
+				label = "Abandoned hunter's case",
 			},
 			benefits = {
 				items = {
@@ -450,8 +534,8 @@ PLUGIN:Register("spoor", {
 			name = "The Dangerous Ones",
 			kind = "tracker",
 			requires = {"SP17", "SP18"},
-			briefing = "Mutants on the routes. The job is to clear them, not to chase a trophy into another pack.",
-			completion = "You've cleared enough trouble for now. Keep watching where the others go.",
+			briefing = "More hunting orders. Keep enough supplies for the way back.",
+			completion = "You've brought a lot of work home. Take time to put it down.",
 			target = 20,
 			benefits = {},
 		},
@@ -460,17 +544,27 @@ PLUGIN:Register("spoor", {
 			completionCash = 2250,
 			name = "The Last Observation",
 			kind = "field",
-			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the last species observation tape from the assigned search area in Pripyat. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"SP19"},
-			briefing = "Retrieve the target species' observation recorder in Pripyat.",
-			completion = "Where you found it is marked? Good.",
+			briefing = (
+				"I want the last observation recording. It may help us judge which behaviour was actually seen. "
+				.. "Recover the last species observation tape from the assigned search area in Pripyat. Bring it back "
+				.. "to me in Garbage."
+			),
+			completion = "Thank you. I'll listen to the account as it stands.",
 			field = {
+				description = (
+					"A pale audio cassette with a broad blue printed label and twin spool windows. Spoor's note: \"I "
+					.. "want the last observation recording.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_tape2",
-				label = "The Last Observation - Blue-Label Audio Cassette",
+				label = "Last species observation tape",
 			},
 			benefits = {},
 			stock = {
@@ -484,8 +578,8 @@ PLUGIN:Register("spoor", {
 			name = "What the Records Missed",
 			kind = "delivery",
 			requires = {"SP20"},
-			briefing = "Bring what's listed here. Keep it in good condition; I need to examine it.",
-			completion = "That will be useful.",
+			briefing = "I'd like the requested material brought in without damage from the journey.",
+			completion = "That's usable. I'll take a closer look.",
 			requirements = {
 				{
 					pool = "common_parts",
@@ -499,24 +593,30 @@ PLUGIN:Register("spoor", {
 			completionCash = 2450,
 			name = "The Hunter's Proof",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the final hunting journal from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"SP21"},
 			briefing = (
-				"Recover the final hunting observations in Garbage. Bring the journal back with "
-				.. "the pages in order; observations are harder to judge when somebody has helpfully rearranged them."
+				"The final observations are back in Garbage. I want them beside the rest before calling the "
+				.. "account complete. Recover the final hunting journal from the assigned search area in Garbage. "
+				.. "Bring it back to me in Garbage."
 			),
 			completion = (
-				"Let me look at the observations. I'll read these against what we've already got. You've kept "
-				.. "bringing back things worth looking at. That's useful work, even on the days when it doesn't give "
-				.. "us a neat answer."
+				"You've stayed with the work past the first good story. I appreciate that. Leave the journal here; "
+				.. "we can look through it without needing to prove anything for a moment."
 			),
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Spoor's note: \"The final "
+					.. "observations are back in Garbage.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_notebook",
-				label = "The Hunter's Proof - Tied Leather Journal",
+				label = "Final hunting journal",
 			},
 			benefits = {},
 			recognition = "Spoor's trusted contact",

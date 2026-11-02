@@ -19,10 +19,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "Have you always worked with freight?",
 	response = (
-		"Freight only moves reliably when somebody keeps track of both ends. I am usually that "
-		.. "somebody."
+		"Long enough to recognise the moment a straightforward delivery begins becoming an explanation. It "
+		.. "usually starts with someone saying they assumed. I keep both ends of the journey in writing. There "
+		.. "is a person waiting at each end, even when the sender has forgotten them. Some want their parcel, "
+		.. "some want their payment, and a few simply want to know they can go to bed without listening for a "
+		.. "knock. I find that worth getting right."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -47,7 +50,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "If it's arrived, I need the receipt. If it hasn't, I need a reason.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -63,26 +66,28 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Bring the receipt.",
+	response = "Good journey. I'll keep this end of the account.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "You remember every late parcel?",
 	response = (
-		"Most of them. The punctual ones leave fewer conversations behind. One involved three "
-		.. "explanations, two proposed destinations, and a man who insisted we'd never met. We had. He was "
-		.. "wearing the same borrowed coat. Would you like to discuss your delivery before it becomes "
-		.. "memorable?"
+		"The punctual ones leave fewer conversations behind. One involved three explanations, two proposed "
+		.. "destinations, and a man who insisted we had never met. We had. Same borrowed coat, same request to "
+		.. "keep this informal. I don't particularly enjoy catching somebody out. I would enjoy the original "
+		.. "receipt considerably more. If you've brought one, you may improve my afternoon without becoming "
+		.. "memorable yourself."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What happens when the two ends disagree?",
+	statement = "What if the two ends disagree?",
 	response = (
-		"I keep both accounts until I can check them. Haggler would prefer I remember only the most "
-		.. "recent conversation. Unfortunately for him, writing things down is rather the point of my being "
-		.. "here. Someone at the other end is making plans around that parcel, so a tidy answer matters."
+		"I retain both accounts and ask what each person actually saw. Often there is a dull explanation. A "
+		.. "changed time, a misunderstood name. Haggler tends to offer an exciting one before I've finished the "
+		.. "question. Writing it down allows us to return to what was agreed after everyone has had time to "
+		.. "calm down. A useful service, even for people who make fun of my handwriting."
 	),
 	options = {"BackTopic"},
 })

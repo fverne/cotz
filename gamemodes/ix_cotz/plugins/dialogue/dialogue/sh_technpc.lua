@@ -223,19 +223,24 @@ DIALOGUE.addTopic("NotEnoughMoneyPaint", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
-	response = "Hoho! Well, what is there to say? I live here, after... Well, deserting!",
+	statement = "What did you do before the workshop?",
+	response = (
+		"Army work. I left in 2007, after we were cut off. Deserted, if you want the word said properly. It "
+		.. "wasn't a grand decision I made with a speech ready. I wanted to leave and found a way. Here, "
+		.. "somebody brings a broken thing and I can usually do something about it. I like that. Doesn't answer "
+		.. "every question about what came before, but it gives me a reason to get up and open the toolbox."
+	),
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Really? Is that so?",
+	statement = "Do people here know you deserted?",
 	response = (
-		"Yeah, it happened back in 2007, after the first incident "
-		.. "we were all cut off, I didn't want to stick any longer "
-		.. "so I left."
+		"Some do. I tell them if they ask. Gasket is more interested in whether I've finished what I "
+		.. "borrowed his parts for. Fair enough. I can answer that question, although he doesn't always enjoy "
+		.. "the answer."
 	),
 	options = {
 		"BackgroundTopic3",
@@ -243,8 +248,8 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Sorry to hear that...",
-	response = "Dont worry about it. Anything else?",
+	statement = "Let's talk about something else.",
+	response = "All right, buddy. Something you need repaired, or are you simply keeping me company?",
 	options = {
 		"BackTopic",
 	},
@@ -252,7 +257,7 @@ DIALOGUE.addTopic("BackgroundTopic3", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
-	response = "Don't worry about it. Anything else?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -371,16 +376,17 @@ DIALOGUE.addTopic("PaintView", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
-	response = "Hey, come back soon!",
+	response = "See you, buddy. I'll try to have found that part by then.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you ever leave anything alone?",
+	statement = "Do you ever finish an improvement?",
 	response = (
-		"Certainly! Mute's things, mostly. He has become very clear about that. Gasket says I should "
-		.. "finish one improvement before beginning the next, which sounds reasonable until you see the "
-		.. "next one. Bring yours here. Tell me what you need it to do first, before I get myself into "
-		.. "trouble."
+		"Absolutely! Then someone says, 'Could it also do this?' and suddenly it's unfinished again. "
+		.. "Sometimes that someone is me. Gasket would prefer I stopped at working. Sensible man. Dreadfully "
+		.. "limiting conversation. Still, he can make a repair with whatever happens to be within reach, and I "
+		.. "occasionally spend an hour improving it before discovering why he did it that way. You may repeat "
+		.. "that to him once. Once, buddy."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -388,9 +394,11 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "What makes a repair satisfying?",
 	response = (
-		"When someone thinks the whole thing is finished and it only needs one stubborn part freed. Not "
-		.. "always, of course. Sometimes it really is finished. But let me look before you bury it! And if "
-		.. "I get carried away explaining, you can tell me. Gasket always does."
+		"The owner stops hovering. They've been watching every turn of the screwdriver, certain the thing is "
+		.. "finished, and then it works and they start talking about something else. Lovely moment. I'd like "
+		.. "them to admire the repair a little longer, naturally. But you can tell they trust it again. Bring "
+		.. "me what it actually does when it fails, by the way. 'It's broken' leaves me rather a lot of "
+		.. "possibilities to enjoy."
 	),
 	options = {"BackTopic"},
 })

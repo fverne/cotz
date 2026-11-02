@@ -24,18 +24,18 @@ PLUGIN:Register("old-timer", {
 			"Good to see you. Put the pack down if you're staying a while; you don't have to stand ready "
 			.. "to leave every minute."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the hunt I'm on.",
+		offerPrompt = "Do you have a mutant hunting job?",
 		work = (
-			"Mutants. Keep the approaches clear, and come back with enough ammunition to do it again. Don't "
-			.. "chase a wounded animal so far that you forget how you're getting back. I want the job done, but I "
-			.. "want you back too."
+			"Mutant hunting. Read the quarry on the order and prepare for the return as carefully as the hunt. "
+			.. "Don't chase a wounded animal so far you forget where you've left yourself room to go. I'll have "
+			.. "more work if you come back. I won't complain if you take time to make that likely."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What needs doing next?",
 		progression = (
-			"A few things before you wander off. After that, there's something I'd like you to look for. Some "
-			.. "of this is ordinary preparation. Some is paperwork I've put off asking anyone to fetch. Start with "
-			.. "what you can manage; I'll tell you what I need it for when we get there."
+			"There are supplies to bring in and field records I'd like recovered. We can start with something "
+			.. "manageable. I want you to learn the walks without pretending every trip needs to prove a point. "
+			.. "Where a record belongs with somebody else, the order says so. Deliver it, then come back here."
 		),
 	},
 	catalogue = {
@@ -102,17 +102,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 450,
 			name = "Know Your Ground",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the Marsh field notebook from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"OT01"},
-			briefing = "Recover a field notebook near a Marsh landmark.",
-			completion = "Let me have a look. Sit down while I read it.",
+			briefing = (
+				"There's a field notebook out in Marsh. I'd like you to pay attention to the walk as well as "
+				.. "bringing the book back. Recover the Marsh field notebook from the assigned search area in Marsh. "
+				.. "Bring it back to me in Marsh."
+			),
+			completion = "You found it and came home. Tell me where the walk became awkward, if it did.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Old Timer's note: \"There's "
+					.. "a field notebook out in Marsh.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_notebook",
-				label = "Know Your Ground - Tied Leather Journal",
+				label = "Marsh field notebook",
 			},
 			benefits = {},
 		},
@@ -122,8 +132,8 @@ PLUGIN:Register("old-timer", {
 			name = "Something With Teeth",
 			kind = "tracker",
 			requires = {"OT02"},
-			briefing = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
-			completion = "You came back. Good. I'll let you buy a better knife. Don't mistake it for experience.",
+			briefing = "Keep completing the mutant hunting orders. Read the quarry before setting off.",
+			completion = "A few hunts finished. Don't let that persuade you the next one needs less preparation.",
 			target = 2,
 			benefits = {},
 		},
@@ -132,17 +142,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 650,
 			name = "Bring Something Back",
 			kind = "field",
-			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the hunting-camp observations from the assigned search area in Marsh. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"OT03"},
-			briefing = "Investigate an abandoned hunting camp and recover its observations.",
-			completion = "You made it back. Show me what you found.",
+			briefing = (
+				"Bring the hunting camp's observations back. Read the ground while you're there, but leave the "
+				.. "longer inspection until you're safe. Recover the hunting-camp observations from the assigned "
+				.. "search area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "Let's see what they noticed. You can put your pack down before explaining the whole trip.",
 			field = {
+				description = (
+					"A thick blue diary with a label fixed to the front cover. Old Timer's note: \"Bring the hunting "
+					.. "camp's observations back.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_diary",
-				label = "Bring Something Back - Scientist's Field Diary",
+				label = "Hunting-camp observations",
 			},
 			benefits = {},
 		},
@@ -152,8 +172,8 @@ PLUGIN:Register("old-timer", {
 			name = "A Place to Hide",
 			kind = "delivery",
 			requires = {"OT04"},
-			briefing = "Bring the supplies on this list. Keep enough in your own pack for the walk back.",
-			completion = "That will do. Keep enough for yourself.",
+			briefing = "Bring the supplies on the list here. Keep enough of your own to walk home afterwards.",
+			completion = "Good. Put your own kit back in reach before we start talking.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -167,17 +187,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 850,
 			name = "Ready Enough",
 			kind = "field",
-			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the expedition supply case from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"OT04"},
-			briefing = "Recover a supply case beyond the Marsh camp outskirts.",
-			completion = "Leave it here. I want to go through it properly.",
+			briefing = (
+				"A supply case is still outside camp. Leave room to bring it home without throwing away what you "
+				.. "need for yourself. Recover the expedition supply case from the assigned search area in Marsh. "
+				.. "Bring it back to me in Marsh."
+			),
+			completion = "Both loads home, then. Good. Put it down before you start telling me it wasn't heavy.",
 			field = {
+				description = (
+					"A small yellow hard case with ribbed corners and a large label on its lid. Old Timer's note: \"A "
+					.. "supply case is still outside camp.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_case",
-				label = "Ready Enough - Small Yellow Transit Case",
+				label = "Expedition supply case",
 			},
 			benefits = {
 				items = {
@@ -200,8 +230,8 @@ PLUGIN:Register("old-timer", {
 			name = "Look After Your Kit",
 			kind = "tracker",
 			requires = {"OT05"},
-			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
-			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
+			briefing = "More specified hunts when you're ready. Bring enough supplies for the return.",
+			completion = "You've kept coming back with the work done. That's the part I like hearing.",
 			target = 5,
 			benefits = {},
 		},
@@ -211,17 +241,30 @@ PLUGIN:Register("old-timer", {
 			completionCash = 1050,
 			name = "Travel Light",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the scout's recovered pack from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"OT06"},
-			briefing = "Recover a scout pack from a Marsh search area.",
-			completion = "Let me have a look. Sit down while I read it.",
+			briefing = (
+				"There's a scout's load to recover. Think about carrying it back before you fill every corner of "
+				.. "your own pack. Recover the scout's recovered pack from the assigned search area in Marsh. Bring "
+				.. "it back to me in Marsh."
+			),
+			completion = (
+				"There. Unload it slowly. You learn more about carrying on the return than you do picking a thing "
+				.. "up."
+			),
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Old Timer's note: \"There's a "
+					.. "scout's load to recover.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_equipment",
-				label = "Travel Light - Striped Equipment Case",
+				label = "Scout's recovered pack",
 			},
 			benefits = {},
 		},
@@ -231,8 +274,8 @@ PLUGIN:Register("old-timer", {
 			name = "Bad Water",
 			kind = "delivery",
 			requires = {"OT07"},
-			briefing = "Bring the supplies on this list. Keep enough in your own pack for the walk back.",
-			completion = "You remembered the supplies. Good start.",
+			briefing = "I'd like this request filled. Read it before deciding something similar will do.",
+			completion = "That's what I asked for. I'll take it from here.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -246,17 +289,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 1250,
 			name = "Enough for the Walk Home",
 			kind = "field",
-			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the return-route provisions from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"OT08"},
-			briefing = "Retrieve a lost supply case along an exposed Marsh return route.",
-			completion = "You made it back. Show me what you found.",
+			briefing = (
+				"I want the lost supply case recovered. The return journey still needs food and water even when "
+				.. "the search went well. Recover the return-route provisions from the assigned search area in Marsh. "
+				.. "Bring it back to me in Marsh."
+			),
+			completion = "You're back. Keep your own supplies to hand while I check the case.",
 			field = {
+				description = (
+					"A small yellow hard case with ribbed corners and a large label on its lid. Old Timer's note: \"I "
+					.. "want the lost supply case recovered.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_case",
-				label = "Enough for the Walk Home - Small Yellow Transit Case",
+				label = "Return-route provisions",
 			},
 			benefits = {},
 		},
@@ -266,8 +319,8 @@ PLUGIN:Register("old-timer", {
 			name = "Old Habits",
 			kind = "tracker",
 			requires = {"OT09"},
-			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
-			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
+			briefing = "Continue the hunting orders. Leave room in the plan for turning back.",
+			completion = "A steady amount of work. You've had time to learn which preparations you actually use.",
 			target = 9,
 			benefits = {},
 		},
@@ -276,17 +329,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 1450,
 			name = "Keep Yourself Alive",
 			kind = "field",
-			objective = "Recover Worn Striped Equipment Case from the assigned search area in Marsh. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the survival expedition equipment from the assigned search area in Marsh. Bring it back "
+				.. "to the issuing contact in Marsh."
+			),
 			requires = {"OT10"},
-			briefing = "Recover the final equipment case from the Marsh survival expedition.",
-			completion = "Leave it here. I want to go through it properly.",
+			briefing = (
+				"One more equipment case from the Marsh expedition. Bring it whole, and don't treat familiarity "
+				.. "with the route as permission to stop looking. Recover the survival expedition equipment from the "
+				.. "assigned search area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "Set it down. You've had a proper amount of carrying to think about now.",
 			field = {
+				description = (
+					"A heavily worn hard case with faded strips running across its lid. Old Timer's note: \"One more "
+					.. "equipment case from the Marsh expedition.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_worncase",
-				label = "Keep Yourself Alive - Worn Striped Equipment Case",
+				label = "Survival expedition equipment",
 			},
 			benefits = {
 				items = {
@@ -305,8 +368,8 @@ PLUGIN:Register("old-timer", {
 			name = "Tracks at the Fence",
 			kind = "delivery",
 			requires = {"OT11"},
-			briefing = "Bring the supplies on this list. Keep enough in your own pack for the walk back.",
-			completion = "Good. Put it with the rest.",
+			briefing = "Bring the requested material back intact. The walk is still part of the work.",
+			completion = "Set it down. You can take the weight off now.",
 			requirements = {
 				{
 					pool = "common_parts",
@@ -320,17 +383,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 1650,
 			name = "Thin the Pack",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the pack observer's notes from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"OT12"},
-			briefing = "Recover observer notes from a Marsh hunting site.",
-			completion = "Let me have a look. Sit down while I read it.",
+			briefing = (
+				"There's an observer's account to recover from the hunting site. I'd like to compare what was seen "
+				.. "with what people remember hearing. Recover the pack observer's notes from the assigned search "
+				.. "area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "Good. I'll start with the observations before reading anybody's explanation.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Old Timer's note: \"There's "
+					.. "an observer's account to recover from the hunting site.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_notebook",
-				label = "Thin the Pack - Tied Leather Journal",
+				label = "Pack observer's notes",
 			},
 			benefits = {},
 		},
@@ -340,16 +413,8 @@ PLUGIN:Register("old-timer", {
 			name = "What They Leave Behind",
 			kind = "tracker",
 			requires = {"OT13"},
-			briefing = (
-				"Mutants. Keep the approaches clear, and come back with enough ammunition to do it "
-				.. "again. Look at the ground before you commit yourself. There's no prize for finding out "
-				.. "too late that you chose a bad way in."
-			),
-			completion = (
-				"You came back. Good. Don't let a few dead mutants convince you that you know "
-				.. "everything. Back already? Sit your pack down properly. You can tell me about it once "
-				.. "you've caught your breath."
-			),
+			briefing = "Keep at the assigned hunts. The last success doesn't pack the next bag.",
+			completion = "You've stayed with it. I hope you've been looking after yourself between trips too.",
 			target = 14,
 			benefits = {},
 		},
@@ -359,17 +424,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 1850,
 			name = "Not Normal Behaviour",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the disturbed feeding-ground tape from the assigned search area in Marsh. Bring it back "
+				.. "to the issuing contact in Marsh."
+			),
 			requires = {"OT14"},
-			briefing = "Retrieve a recorder from a disturbed feeding ground in Marsh.",
-			completion = "You made it back. Show me what you found.",
+			briefing = (
+				"I want the recording from the feeding ground. Something unusual deserves a closer account than a "
+				.. "frightened description over supper. Recover the disturbed feeding-ground tape from the assigned "
+				.. "search area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "Leave it here. I'll listen before telling you what I think it was.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Old Timer's note: "
+					.. "\"I want the recording from the feeding ground.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_tape",
-				label = "Not Normal Behaviour - Handwritten Audio Cassette",
+				label = "Disturbed feeding-ground tape",
 			},
 			benefits = {},
 		},
@@ -379,8 +454,8 @@ PLUGIN:Register("old-timer", {
 			name = "The Empty Camp",
 			kind = "delivery",
 			requires = {"OT15"},
-			briefing = "Bring the supplies on this list. Keep enough in your own pack for the walk back.",
-			completion = "That will do. Keep enough for yourself.",
+			briefing = "There's another hand-in to prepare. Take your time checking what you need before leaving.",
+			completion = "All here. Good. No need to tell me it was easy before you've sat down.",
 			requirements = {
 				{
 					pool = "common_parts",
@@ -394,17 +469,30 @@ PLUGIN:Register("old-timer", {
 			completionCash = 2050,
 			name = "Leave a Way Out",
 			kind = "field",
-			objective = "Recover Scientist's Field Diary from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the missing party's route notes from the assigned search area in Marsh. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"OT16"},
-			briefing = "Recover observations along a missing party route in Marsh.",
-			completion = "Leave it here. I want to go through it properly.",
+			briefing = (
+				"Recover the route observations. A party's intended path isn't always the one they managed to "
+				.. "walk. Recover the missing party's route notes from the assigned search area in Marsh. Bring it "
+				.. "back to me in Marsh."
+			),
+			completion = (
+				"Let's look at the whole account. I don't want a guess hardening into the route simply because we "
+				.. "keep repeating it."
+			),
 			field = {
+				description = (
+					"A thick blue diary with a label fixed to the front cover. Old Timer's note: \"Recover the route "
+					.. "observations.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_diary",
-				label = "Leave a Way Out - Scientist's Field Diary",
+				label = "Missing party's route notes",
 			},
 			benefits = {
 				items = {
@@ -423,8 +511,8 @@ PLUGIN:Register("old-timer", {
 			name = "An Old Name",
 			kind = "tracker",
 			requires = {"OT17"},
-			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
-			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
+			briefing = "More hunting work while I compare the records. Keep to the specified quarry.",
+			completion = "You've put a lot of walking behind those returns. I notice more than the total.",
 			target = 20,
 			benefits = {},
 		},
@@ -433,20 +521,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 2250,
 			name = "The Convoy That Never Arrived",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the convoy records for Ledger from the assigned search area in Garbage. Deliver it to "
+				.. "'Ledger' in Waystation, then come back to the issuing contact in Marsh."
+			),
 			requires = {"OT18"},
 			briefing = (
-				"There's a case from the missing convoy out in Garbage. Bring it back sealed. I want to see "
-				.. "what's left."
+				"Ledger needs the convoy record. Take it through intact, then come back here. I'd rather he read "
+				.. "it himself. Recover the convoy records for Ledger from the assigned search area in Garbage. "
+				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Marsh."
 			),
-			completion = "They have it now. Good. Sit down a moment before you head out again.",
+			completion = "He has it. Good. You can take your pack off while we wait for the papers to be read.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Old Timer's "
+					.. "note: \"Ledger needs the convoy record.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_manifest",
-				label = "The Convoy That Never Arrived - Warehouse Packing List A",
+				label = "Convoy records for Ledger",
 				recipient = "ledger",
 			},
 			benefits = {},
@@ -457,8 +552,8 @@ PLUGIN:Register("old-timer", {
 			name = "Someone Kept Records",
 			kind = "delivery",
 			requires = {"OT19"},
-			briefing = "Bring the supplies on this list. Keep enough in your own pack for the walk back.",
-			completion = "You remembered the supplies. Good start.",
+			briefing = "Bring the supplies on the list here. Keep enough of your own to walk home afterwards.",
+			completion = "Good. Put your own kit back in reach before we start talking.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -472,17 +567,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 2450,
 			name = "A Voice on Tape",
 			kind = "field",
-			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Deliver it to"
-				.. " 'Spool' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the recording for Spool from the assigned search area in Waystation. Deliver it to "
+				.. "'Spool' in Garbage, then come back to the issuing contact in Marsh."
+			),
 			requires = {"OT20"},
-			briefing = "Recover a recording from a remote signal site in Waystation territory.",
-			completion = "They have it now. Good. Sit down a moment before you head out again.",
+			briefing = (
+				"Spool should hear the recording. He listens more carefully than most people talk. Recover the "
+				.. "recording for Spool from the assigned search area in Waystation. Deliver it to 'Spool' in "
+				.. "Garbage, then come back to me in Marsh."
+			),
+			completion = "You delivered it and came back. That's what I asked. Let him listen before we ask for an answer.",
 			field = {
+				description = (
+					"A pale audio cassette with a broad blue printed label and twin spool windows. Old Timer's note: "
+					.. "\"Spool should hear the recording.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_tape2",
-				label = "A Voice on Tape - Blue-Label Audio Cassette",
+				label = "Recording for Spool",
 				recipient = "spool",
 			},
 			benefits = {},
@@ -493,8 +598,8 @@ PLUGIN:Register("old-timer", {
 			name = "What He Was Carrying",
 			kind = "tracker",
 			requires = {"OT21"},
-			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
-			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
+			briefing = "Continue the hunting assignments when you've rested and prepared.",
+			completion = "You've been dependable over time. I worry less when I know you've thought about the return.",
 			target = 27,
 			benefits = {},
 		},
@@ -503,17 +608,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 2650,
 			name = "The Last Address",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the Pripyat address file from the assigned search area in Pripyat. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"OT22"},
-			briefing = "The next case is in Pripyat. Take enough supplies to change your mind halfway there.",
-			completion = "You're back. Let me look at it before you tell me the rest.",
+			briefing = (
+				"The next record is in Pripyat. Take enough supplies to change your mind halfway there; having an "
+				.. "address doesn't oblige you to reach it today. Recover the Pripyat address file from the assigned "
+				.. "search area in Pripyat. Bring it back to me in Marsh."
+			),
+			completion = "Come in. Leave the file here and get the weight off your shoulders.",
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. Old Timer's note: \"The next "
+					.. "record is in Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_official",
-				label = "The Last Address - Official File Folder",
+				label = "Pripyat address file",
 			},
 			benefits = {
 				items = {
@@ -532,8 +647,8 @@ PLUGIN:Register("old-timer", {
 			name = "Past the Turn Back Point",
 			kind = "delivery",
 			requires = {"OT23", "OT24"},
-			briefing = "Bring the supplies on this list. Keep enough in your own pack for the walk back.",
-			completion = "Good. Put it with the rest.",
+			briefing = "I'd like this request filled. Read it before deciding something similar will do.",
+			completion = "That's what I asked for. I'll take it from here.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -547,17 +662,27 @@ PLUGIN:Register("old-timer", {
 			completionCash = 2850,
 			name = "He Made It This Far",
 			kind = "field",
-			objective = "Recover Old Photograph Album from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the companion's recovered equipment from the assigned search area in Pripyat. Bring it "
+				.. "back to the issuing contact in Marsh."
+			),
 			requires = {"OT25"},
-			briefing = "Recover the final equipment case and keepsake in Pripyat.",
-			completion = "Let me have a look. Sit down while I read it.",
+			briefing = (
+				"There's a final equipment case to collect. Keep the small things with it. I want to see what "
+				.. "survived together. Recover the companion's recovered equipment from the assigned search area in "
+				.. "Pripyat. Bring it back to me in Marsh."
+			),
+			completion = "Put it here. Don't rush to explain what you think it means. Give me a moment to look.",
 			field = {
+				description = (
+					"A thick worn photograph album with a small picture set into its brown cover. Old Timer's note: "
+					.. "\"There's a final equipment case to collect.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_photo",
-				label = "He Made It This Far - Old Photograph Album",
+				label = "Companion's recovered equipment",
 			},
 			benefits = {},
 		},
@@ -567,8 +692,8 @@ PLUGIN:Register("old-timer", {
 			name = "Bring Him Home",
 			kind = "tracker",
 			requires = {"OT26"},
-			briefing = "Mutants. Keep the approaches clear, and come back with enough ammunition to do it again.",
-			completion = "You came back. Good. Don't let a few dead mutants convince you that you know everything.",
+			briefing = "Keep completing the specified hunts. You're allowed a quiet day between them.",
+			completion = "Still coming home. Still doing the work carefully. I'm pleased to see both.",
 			target = 35,
 			benefits = {},
 		},
@@ -577,23 +702,30 @@ PLUGIN:Register("old-timer", {
 			completionCash = 3000,
 			name = "Nothing Left Unsaid",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the companion's last record from the assigned search area in Pripyat. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"OT27"},
 			briefing = (
-				"One last case in Pripyat. Bring it here. That's all I'm asking. Don't open it on the road to "
-				.. "satisfy your curiosity. Bring it back, get yourself somewhere safe, then we can take our time."
+				"One last record. Bring it home before opening it on the road. There'll be time to read when "
+				.. "you're back. Recover the companion's last record from the assigned search area in Pripyat. Bring "
+				.. "it back to me in Marsh."
 			),
 			completion = (
-				"Leave it here. And sit down a minute. There's no hurry. I've been finding reasons not to ask for "
-				.. "this for a long time. You went anyway. I haven't got a clever bit of advice for that. Thank you."
+				"Leave it beside me. You've carried enough for today. Sit down a minute. I'd rather you stayed "
+				.. "while I read it."
 			),
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Old Timer's note: \"One "
+					.. "last record.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_personnel",
-				label = "Nothing Left Unsaid - Personnel File Folder",
+				label = "Companion's last record",
 			},
 			benefits = {},
 			recognition = "Old Timer's trusted contact",

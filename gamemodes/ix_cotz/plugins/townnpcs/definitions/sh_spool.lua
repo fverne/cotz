@@ -29,18 +29,20 @@ PLUGIN:Register("spool", {
 			"Oh, hello. Nice to have someone here I don't need to ask to repeat themselves through the "
 			.. "interference."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the source I'm locating.",
+		offerPrompt = "Do you have a triangulation job?",
 		work = (
-			"Take the bearings, find the source, and bring the transmitter back. I'll listen to the recording "
-			.. "here. Take the bearings properly rather than choosing the one that looks convenient. I'm fond of "
-			.. "hearing people arrive where they meant to go."
+			"Take the required bearings, locate the source, and bring the transmitter back. I'll listen to the "
+			.. "recording here. Check the destination before accepting. I like hearing somebody arrive where they "
+			.. "meant to go; gives me a moment to enjoy the ordinary part before we discover what the equipment "
+			.. "has been doing."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What are you checking in the station recordings?",
 		progression = (
-			"I've got missing recordings and equipment to sort. Have a look while I finish listening. There are "
-			.. "recordings to recover and equipment to keep usable. We can work through them without deciding in "
-			.. "advance what every silence means."
+			"I'm comparing station records and messages that never made it back properly. There are parts to "
+			.. "bring in and sources to recover. I want to listen before deciding what a silence means. Some "
+			.. "recordings go to another contact; the order says who. Come back afterwards. I'd like to hear you "
+			.. "finished the trip too."
 		),
 	},
 	catalogue = {
@@ -83,17 +85,27 @@ PLUGIN:Register("spool", {
 			completionCash = 450,
 			name = "The Local Silence",
 			kind = "field",
-			objective = "Take the required bearings in Waystation and recover Red-Trimmed Control Unit. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Take the required bearings in Waystation, locate the source, and collect the local silent "
+				.. "transmitter. Bring it back to the issuing contact in Garbage."
+			),
 			requires = {"SO01"},
-			briefing = "Triangulate and recover a transmitter near Waystation.",
-			completion = "Give me a moment. I want to hear this properly.",
+			briefing = (
+				"There's a source we aren't hearing properly. I'd like it located and brought back before I blame "
+				.. "the equipment on this side. Take the required bearings in Waystation, locate the source, and "
+				.. "collect the local silent transmitter. Bring it back to me in Garbage."
+			),
+			completion = "You've brought it in. I'll start with what we actually received and work back from there.",
 			field = {
+				description = (
+					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
+					.. "\"There's a source we aren't hearing properly.\""
+				),
 				kind = "triangulation",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_control",
-				label = "The Local Silence - Red-Trimmed Control Unit",
+				label = "Local silent transmitter",
 			},
 			benefits = {},
 		},
@@ -104,10 +116,10 @@ PLUGIN:Register("spool", {
 			kind = "tracker",
 			requires = {"SO02"},
 			briefing = (
-				"Take the bearings, find the source, and bring the transmitter back. I'll listen to the "
-				.. "recording here."
+				"Continue the radio triangulation assignments. Take the required bearings, locate the source, and "
+				.. "bring it back."
 			),
-			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
+			completion = "A few sources recovered. I can start checking the records at this end.",
 			target = 2,
 			benefits = {},
 		},
@@ -116,17 +128,27 @@ PLUGIN:Register("spool", {
 			completionCash = 650,
 			name = "The Station Log",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the failed station's audio log from the assigned search area in Waystation. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"SO02"},
-			briefing = "Recover a failed station's recorder.",
-			completion = "You found it. Leave it beside the receiver.",
+			briefing = (
+				"The failed station's recording needs collecting. I want to hear the routine chatter too, before "
+				.. "somebody decided anything had gone wrong. Recover the failed station's audio log from the "
+				.. "assigned search area in Waystation. Bring it back to me in Garbage."
+			),
+			completion = "Leave it beside the receiver. I'll listen from the beginning.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Spool's note: \"The "
+					.. "failed station's recording needs collecting.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_tape",
-				label = "The Station Log - Handwritten Audio Cassette",
+				label = "Failed station's audio log",
 			},
 			benefits = {},
 		},
@@ -137,10 +159,10 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO03"},
 			briefing = (
-				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when you "
-				.. "put it down."
+				"I'd like the requested components brought here. I'm trying to finish one equipment list before "
+				.. "making a better one."
 			),
-			completion = "Good. That's something I was running short of.",
+			completion = "There we are. I'll put them beside the right notes before I forget.",
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -154,17 +176,27 @@ PLUGIN:Register("spool", {
 			completionCash = 850,
 			name = "The Crossed Bearings",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0013 from the assigned search area in Waystation. Deliver it to"
-				.. " 'Technut' in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the calibration file for Technut from the assigned search area in Waystation. Deliver it "
+				.. "to 'Technut' in Marsh, then come back to the issuing contact in Garbage."
+			),
 			requires = {"SO04"},
-			briefing = "Recover a calibration record disputed by Smartass.",
-			completion = "Good. I will let them know which entry it belongs with. Saves another call going in circles.",
+			briefing = (
+				"Technut needs the calibration record. He can check the hardware side without me making "
+				.. "increasingly elaborate sounds at him. Recover the calibration file for Technut from the assigned "
+				.. "search area in Waystation. Deliver it to 'Technut' in Marsh, then come back to me in Garbage."
+			),
+			completion = "He has it. Good. I was running out of ways to pronounce the fault.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Spool's note: "
+					.. "\"Technut needs the calibration record.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_module",
-				label = "The Crossed Bearings - Numbered Data Module 0013",
+				label = "Calibration file for Technut",
 				recipient = "technut",
 			},
 			benefits = {
@@ -189,10 +221,10 @@ PLUGIN:Register("spool", {
 			kind = "tracker",
 			requires = {"SO05"},
 			briefing = (
-				"Take the bearings, find the source, and bring the transmitter back. I'll listen to the "
-				.. "recording here."
+				"More triangulation work when you're prepared. Follow the bearings rather than the most convincing "
+				.. "guess."
 			),
-			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
+			completion = "Another useful set of returns. Thank you for bringing the sources all the way through.",
 			target = 5,
 			benefits = {},
 		},
@@ -201,17 +233,27 @@ PLUGIN:Register("spool", {
 			completionCash = 1050,
 			name = "The Absent Operator",
 			kind = "field",
-			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the absent operator's transmitter from the assigned search area in Waystation. Bring it "
+				.. "back to the issuing contact in Garbage."
+			),
 			requires = {"SO06"},
-			briefing = "Locate a source and retrieve its recorded message.",
-			completion = "Give me a moment. I want to hear this properly.",
+			briefing = (
+				"I'd like the operator's source located. A recorded message is something we can examine; silence "
+				.. "alone has been giving everyone too much room. Recover the absent operator's transmitter from the "
+				.. "assigned search area in Waystation. Bring it back to me in Garbage."
+			),
+			completion = "You found it. I'll put it here and listen when the bench is quiet.",
 			field = {
+				description = (
+					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
+					.. "\"I'd like the operator's source located.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_control",
-				label = "The Absent Operator - Red-Trimmed Control Unit",
+				label = "Absent operator's transmitter",
 			},
 			benefits = {},
 		},
@@ -222,10 +264,10 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO07"},
 			briefing = (
-				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when you "
-				.. "put it down."
+				"There's another supply request. Check it before setting off; I may have explained it less clearly "
+				.. "than I intended."
 			),
-			completion = "Set it here. Mind the leads.",
+			completion = "That's the requested lot. Thank you for reading the order as well as listening to me.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -239,17 +281,27 @@ PLUGIN:Register("spool", {
 			completionCash = 1250,
 			name = "Mute's Header",
 			kind = "field",
-			objective = "Recover Tape-Labelled Flash Drive from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the network header from the assigned search area in Marsh. Bring it back to the issuing "
+				.. "contact in Garbage."
+			),
 			requires = {"SO08"},
-			briefing = "Recover a damaged network record in Marsh.",
-			completion = "You found it. Leave it beside the receiver.",
+			briefing = (
+				"There's a damaged network record out in Marsh. I'd like to see what remains before deciding who "
+				.. "it connects to. Recover the network header from the assigned search area in Marsh. Bring it back "
+				.. "to me in Garbage."
+			),
+			completion = "Here we are. I'll keep the surviving record as it is while I check it.",
 			field = {
+				description = (
+					"A dark USB drive with a pale handwritten tape label around its body. Spool's note: \"There's a "
+					.. "damaged network record out in Marsh.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_drive",
-				label = "Mute's Header - Tape-Labelled Flash Drive",
+				label = "network header",
 			},
 			benefits = {},
 		},
@@ -259,11 +311,8 @@ PLUGIN:Register("spool", {
 			name = "Across the Static",
 			kind = "tracker",
 			requires = {"SO09"},
-			briefing = (
-				"Take the bearings, find the source, and bring the transmitter back. I'll listen to the "
-				.. "recording here."
-			),
-			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
+			briefing = "Keep locating and recovering the assigned transmitters.",
+			completion = "You've been consistent. That makes sorting the recordings a little less lonely.",
 			target = 9,
 			benefits = {},
 		},
@@ -272,24 +321,27 @@ PLUGIN:Register("spool", {
 			completionCash = 1450,
 			name = "The Garbage Relay",
 			kind = "field",
-			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the freight-route relay source from the assigned search area in Waystation. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"SO10"},
 			briefing = (
-				"Locate and retrieve a source near a freight route. Take the time to check what the "
-				.. "order actually needs. I'm tired enough to appreciate not sorting an avoidable mix-up "
-				.. "afterwards."
+				"There's a relay source near the freight route to locate. Please check the bearings; I'm tired "
+				.. "enough without sorting a source from the wrong conversation. Recover the freight-route relay "
+				.. "source from the assigned search area in Waystation. Bring it back to me in Garbage."
 			),
-			completion = (
-				"Thanks. I'll check the recording. Thanks for seeing it through. I'll finish the "
-				.. "checking before I let myself get distracted by the receiver again."
-			),
+			completion = "Good. The source is here. I'll make room before I forget which set of notes goes with it.",
 			field = {
+				description = (
+					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
+					.. "\"There's a relay source near the freight route to locate.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_control",
-				label = "The Garbage Relay - Red-Trimmed Control Unit",
+				label = "Freight-route relay source",
 			},
 			benefits = {
 				items = {
@@ -308,11 +360,8 @@ PLUGIN:Register("spool", {
 			name = "Packed to Listen",
 			kind = "delivery",
 			requires = {"SO11"},
-			briefing = (
-				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when you "
-				.. "put it down."
-			),
-			completion = "Thanks. I'll put that where I can find it.",
+			briefing = "Bring the listed supplies here. Leave yourself enough for the trip home too.",
+			completion = "Good. I'll keep these with the communications supplies.",
 			requirements = {
 				{
 					pool = "canned_food",
@@ -326,17 +375,27 @@ PLUGIN:Register("spool", {
 			completionCash = 1650,
 			name = "The Unsent Call",
 			kind = "field",
-			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Deliver it to"
-				.. " 'Wake' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the unsent check-in for Wake from the assigned search area in Waystation. Deliver it to "
+				.. "'Wake' in Garbage, then come back to the issuing contact in Garbage."
+			),
 			requires = {"SO12"},
-			briefing = "Recover an expedition check-in recording in regional ruins.",
-			completion = "Good. I will let them know which entry it belongs with. Saves another call going in circles.",
+			briefing = (
+				"Wake should have the check-in recording. She may recognise something about the journey that I'd "
+				.. "miss while concentrating on the voice. Recover the unsent check-in for Wake from the assigned "
+				.. "search area in Waystation. Deliver it to 'Wake' in Garbage, then come back to me in Garbage."
+			),
+			completion = "Delivered. Thank you. I'll let her listen before we compare what we think we heard.",
 			field = {
+				description = (
+					"A pale audio cassette with a broad blue printed label and twin spool windows. Spool's note: "
+					.. "\"Wake should have the check-in recording.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_tape2",
-				label = "The Unsent Call - Blue-Label Audio Cassette",
+				label = "Unsent check-in for Wake",
 				recipient = "wake",
 			},
 			benefits = {},
@@ -347,11 +406,8 @@ PLUGIN:Register("spool", {
 			name = "Still on Frequency",
 			kind = "tracker",
 			requires = {"SO13"},
-			briefing = (
-				"Take the bearings, find the source, and bring the transmitter back. I'll listen to the "
-				.. "recording here."
-			),
-			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
+			briefing = "Continue the triangulation orders while I compare the check-ins.",
+			completion = "A considerable amount of listening has started with your walking. I appreciate it.",
 			target = 14,
 			benefits = {},
 		},
@@ -360,17 +416,27 @@ PLUGIN:Register("spool", {
 			completionCash = 1850,
 			name = "The First Pripyat Call",
 			kind = "field",
-			objective = "Take the required bearings in Pripyat and recover Red-Trimmed Control Unit. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Take the required bearings in Pripyat, locate the source, and collect the Pripyat transmitter "
+				.. "source. Bring it back to the issuing contact in Garbage."
+			),
 			requires = {"SO14"},
-			briefing = "Triangulate and collect a transmitter in Pripyat.",
-			completion = "You found it. Leave it beside the receiver.",
+			briefing = (
+				"We need the source located in Pripyat. I can wait for a prepared trip; don't let a radio order "
+				.. "hurry you into a bad departure. Take the required bearings in Pripyat, locate the source, and "
+				.. "collect the Pripyat transmitter source. Bring it back to me in Garbage."
+			),
+			completion = "You're back with it. Give me a moment to put the right notes beside the receiver.",
 			field = {
+				description = (
+					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
+					.. "\"We need the source located in Pripyat.\""
+				),
 				kind = "triangulation",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_control",
-				label = "The First Pripyat Call - Red-Trimmed Control Unit",
+				label = "Pripyat transmitter source",
 			},
 			benefits = {},
 		},
@@ -381,10 +447,10 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO15"},
 			briefing = (
-				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when you "
-				.. "put it down."
+				"I need the requested material before the next round of checking. Ordinary preparation, I'm "
+				.. "afraid."
 			),
-			completion = "Good. That's something I was running short of.",
+			completion = "Thank you. That's one less thing to remember while somebody is talking.",
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -398,17 +464,27 @@ PLUGIN:Register("spool", {
 			completionCash = 2050,
 			name = "The Last Check-in",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
-				.. " 'Wake' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the later check-in for Wake from the assigned search area in Pripyat. Deliver it to "
+				.. "'Wake' in Garbage, then come back to the issuing contact in Garbage."
+			),
 			requires = {"SO16"},
-			briefing = "Recover a second expedition recorder deeper in Pripyat.",
-			completion = "Good. I will let them know which entry it belongs with. Saves another call going in circles.",
+			briefing = (
+				"The later expedition recording goes to Wake. She should hear it without my account standing "
+				.. "between her and the speaker. Recover the later check-in for Wake from the assigned search area in "
+				.. "Pripyat. Deliver it to 'Wake' in Garbage, then come back to me in Garbage."
+			),
+			completion = "She has it. Good. We can discuss the uncertainty after we've both heard the record.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Spool's note: \"The "
+					.. "later expedition recording goes to Wake.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_tape",
-				label = "The Last Check-in - Handwritten Audio Cassette",
+				label = "Later check-in for Wake",
 				recipient = "wake",
 			},
 			benefits = {
@@ -428,11 +504,8 @@ PLUGIN:Register("spool", {
 			name = "Nobody Left Calling",
 			kind = "tracker",
 			requires = {"SO17", "SO18"},
-			briefing = (
-				"Take the bearings, find the source, and bring the transmitter back. I'll listen to the "
-				.. "recording here."
-			),
-			completion = "You've brought back a useful set of sources. It's good to have something to listen to.",
+			briefing = "There are more sources to locate. Check the assignment before heading out.",
+			completion = "You've kept returning with something I can examine. I'm grateful for the care.",
 			target = 20,
 			benefits = {},
 		},
@@ -441,17 +514,27 @@ PLUGIN:Register("spool", {
 			completionCash = 2250,
 			name = "The Receiver That Stayed On",
 			kind = "field",
-			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the expedition's last signal source from the assigned search area in Waystation. Bring it "
+				.. "back to the issuing contact in Garbage."
+			),
 			requires = {"SO19"},
-			briefing = "Locate and retrieve the expedition's final source.",
-			completion = "Give me a moment. I want to hear this properly.",
+			briefing = (
+				"I'd like the expedition's last source brought home. Don't decide what it must mean while you're "
+				.. "still following the bearings. Recover the expedition's last signal source from the assigned "
+				.. "search area in Waystation. Bring it back to me in Garbage."
+			),
+			completion = "Leave it here. I'll listen properly before asking it to answer all our questions.",
 			field = {
+				description = (
+					"A finned grey control box with a red stripe and several round front connectors. Spool's note: "
+					.. "\"I'd like the expedition's last source brought home.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_control",
-				label = "The Receiver That Stayed On - Red-Trimmed Control Unit",
+				label = "Expedition's last signal source",
 			},
 			benefits = {},
 			stock = {
@@ -466,10 +549,10 @@ PLUGIN:Register("spool", {
 			kind = "delivery",
 			requires = {"SO20"},
 			briefing = (
-				"I'm short of what's on this list. Bring it over when you can. Mind the receiver when you "
-				.. "put it down."
+				"I'd like the requested components brought here. I'm trying to finish one equipment list before "
+				.. "making a better one."
 			),
-			completion = "Set it here. Mind the leads.",
+			completion = "There we are. I'll put them beside the right notes before I forget.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -483,24 +566,30 @@ PLUGIN:Register("spool", {
 			completionCash = 2450,
 			name = "The Message Home",
 			kind = "field",
-			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the unsent message cassette from the assigned search area in Waystation. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"SO21"},
 			briefing = (
-				"Recover the last unsent recording and return it to the station. Bring the cassette back here. "
-				.. "Don't try to play it in the middle of the trip; let's get it somewhere we can listen properly."
+				"Bring the last cassette back here. There'll be time to listen when neither of us has to keep one "
+				.. "ear on the journey. Recover the unsent message cassette from the assigned search area in "
+				.. "Waystation. Bring it back to me in Garbage."
 			),
 			completion = (
-				"You found it. Leave it beside the receiver. Thanks. I'll listen when it's quiet enough to give it "
-				.. "my attention. You spend enough time waiting for a call and you forget how strange it feels to "
-				.. "have something definite in your hand."
+				"You got it home. Thank you. I don't have a neat speech ready for this. Stay a moment if you can; "
+				.. "I'd rather not put the headphones on just yet."
 			),
 			field = {
+				description = (
+					"A pale audio cassette with a broad blue printed label and twin spool windows. Spool's note: "
+					.. "\"Bring the last cassette back here.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_tape2",
-				label = "The Message Home - Blue-Label Audio Cassette",
+				label = "Unsent message cassette",
 			},
 			benefits = {},
 			recognition = "Spool's trusted contact",

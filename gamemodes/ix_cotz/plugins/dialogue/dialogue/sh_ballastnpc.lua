@@ -19,10 +19,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "How did you get into moving freight?",
 	response = (
-		"I move cargo where the roads stop being useful. Most losses start with somebody deciding the "
-		.. "water looks shallow enough."
+		"Someone needed a load moved and didn't fancy the wet part. I did it. The next fellow had heard I "
+		.. "was willing, which is how a day's work acquires a career. I don't mind the pace. You load properly, "
+		.. "work out where your hands will be needed, leave yourself room. People can be nervous; that's all "
+		.. "right. I'd sooner explain something twice to a frightened person than have a confident one climbing "
+		.. "about while I'm trying to keep the load steady."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -47,7 +50,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "Water's patient. Be a shame to let it outlast you over a parcel.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -63,25 +66,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Watch your footing.",
+	response = "Watch your footing. I'll be here.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "You don't sound impressed by urgent work.",
+	statement = "You sound suspicious of urgent work.",
 	response = (
-		"Urgent usually means someone spent three days making it my problem. I'll hear them out. Might "
-		.. "be medicine. Might be Haggler remembering a promise he made while drinking. Either way, I'd "
-		.. "like to know what I'm carrying before I discover I need another pair of hands."
+		"I'll hear them out. Might be medicine. Might be Haggler remembering something he promised three "
+		.. "days ago. They begin with 'It's only a little parcel', then mention the rest when I've agreed. So I "
+		.. "ask a few dull questions. Weight, destination, who'll take it off my hands. If those ruin the "
+		.. "surprise, we were going to have an unpleasant conversation somewhere wetter."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What if they say the trip is perfectly safe?",
+	statement = "Does Atlas ask the same questions?",
 	response = (
-		"Then I ask why they're still standing beside me. Don't mistake that for refusing the work. I "
-		.. "just like the difficult bits explained before I've got both hands full. If a person knows the "
-		.. "route, they can tell me what made them choose it."
+		"More. Then he asks whether I meant left before the turn or left after it. We get there eventually. "
+		.. "I tease him because he'll listen to an answer even after he's spent an evening drawing something "
+		.. "different. Plenty of people would rather you walked into trouble than spoiled their neat work. "
+		.. "He'll get another sheet out."
 	),
 	options = {"BackTopic"},
 })

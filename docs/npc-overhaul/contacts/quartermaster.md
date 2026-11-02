@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Implemented voice direction — November 2026
+
+Stern procurement contact concerned with competing allocations and verifiable returns. Distinct from Brass through responsibility for who receives supplies; professional confidence grows without becoming sudden intimacy.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

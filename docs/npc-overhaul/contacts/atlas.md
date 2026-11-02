@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Implemented voice direction — November 2026
+
+Patient, inquisitive surveyor whose developed conversations and modest humour remain the reference for his own voice. His earlier candidate is retained in this pass, with cargo identity and incorrect task geography aligned to the installed definitions.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
@@ -95,10 +103,10 @@ or reset existing characters as a side effect of this plan.
 
 Trusts Ballast's local knowledge and Ledger's records. Cross-checks The Original's stories; works with Wake on missing routes.
 
-### Implemented voice candidate — awaiting review
+### Implemented voice direction
 
-Atlas's dialogue has been rewritten for an individual review before the other contacts.
-This candidate supersedes his earlier sample lines; its new anecdotes remain subject to user review.
+The roster rewrite retains Atlas's developed conversation voice and anecdotes.
+The earlier short samples are superseded by the implemented examples below.
 
 - Patient and gently inquisitive; he enjoys hearing something he has not noticed himself.
 - Meticulous without demanding polished accounts. He helps people describe uncertainty and admits

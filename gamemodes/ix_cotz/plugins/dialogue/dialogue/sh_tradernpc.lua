@@ -21,18 +21,25 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
-	response = "I just came here to do a good deal for all of us. Mostly me. ",
+	statement = "What brought you into trading here?",
+	response = (
+		"Customers. Back home a man can walk out of your shop and find six more selling the same thing. Here "
+		.. "he comes back and says, 'Haggler, nobody else has one.' Beautiful words. Of course, then I have to "
+		.. "find another, persuade someone to bring it through, and listen to the first man explain that I paid "
+		.. "too little for his. Everybody remembers the pleasant half of my business. You're welcome to "
+		.. "remember the rest when we discuss my prices."
+	),
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Uh, 'mostly you'?",
+	statement = "Do you ever get tired of bargaining?",
 	response = (
-		"Yes. I sell you gear, and you don't ask how I get it. You "
-		.. "pay the price and don't try to haggle. I do. How's that?"
+		"With Brass, yes. He counts everything before he becomes interested in my explanation. Ledger writes "
+		.. "it down afterwards. Very difficult men to have an enjoyable misunderstanding with. Fortunately most "
+		.. "people appreciate a little conversation while we establish what their goods are worth."
 	),
 	options = {
 		"BackgroundTopic3",
@@ -40,8 +47,12 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Sure. Is there another way to get gear out here?",
-	response = "Fuck off.",
+	statement = "Can you point me towards other suppliers?",
+	response = (
+		"Depends what you need. Lemon for food, Technut for repairs, Jitters if your next question concerns "
+		.. "bleeding. Brass handles ammunition in Garbage. Ask them their prices, by all means. I'll be here "
+		.. "when you've finished carrying your bargain home."
+	),
 	options = {
 		"BackTopic",
 	},
@@ -136,7 +147,7 @@ DIALOGUE.addTopic("StartBarter", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "Very nice...",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -152,25 +163,28 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "See you soon...",
+	response = "Come back when you need something. Or when you've found something I need.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Do you ever do someone a favour?",
 	response = (
-		"Frequently. They become terribly confused when the bill arrives. Oh, stop looking at me like "
-		.. "that. Sometimes a person needs another day to pay. I can usually tell who means it. The "
-		.. "difficult customers are the ones who mistake an extra day for a new business model."
+		"Frequently. People are less enthusiastic when I remember it afterwards. Oh, don't pull that face. "
+		.. "Sometimes I let a payment wait. You can usually tell who's embarrassed to ask and who's been "
+		.. "practising the explanation. I don't require a man to be cheerful about needing help. I do require "
+		.. "him to remember we had a conversation. Cleaner understands that perfectly. No speech, no "
+		.. "performance, just what we agreed."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Why give them another day?",
+	statement = "Why let the payment wait?",
 	response = (
-		"A customer who gets home can come back. Someone who feels cheated every time eventually finds "
-		.. "another seller, even if that seller charges more. I prefer you annoyed by my prices for years. "
-		.. "It's a much healthier relationship than most people manage."
+		"Because I expect him to come back. With money, ideally, but coming back is a useful start. You sell "
+		.. "someone his last bandage and then refuse him enough food to get home, you've made a remarkably "
+		.. "short investment. I prefer customers who complain about me for years. Some even start bringing "
+		.. "things I can sell. It becomes almost sociable."
 	),
 	options = {"BackTopic"},
 })

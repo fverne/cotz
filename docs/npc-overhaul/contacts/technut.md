@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Implemented voice direction — November 2026
+
+Enthusiastic, distractible technician who likes explaining and improving things. His desertion remains part of the existing background; the workshop offers useful work rather than an invented resolution of that history.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

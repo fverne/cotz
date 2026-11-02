@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Implemented voice direction — November 2026
+
+Irreverent specialist whose jokes can test a stranger or deflect his own curiosity. Technical interest sometimes interrupts the performance. Repeatable computer extraction remains distinct from finite signal-investigation commissions.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

@@ -84,11 +84,13 @@ DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What are you doing here?",
+	statement = "What is your group doing here?",
 	response = (
-		"Well, since you busted our location I might as well spill "
-		.. "the beans. We are part of an international research group "
-		.. "who has infiltrated the zone."
+		"Research and the work necessary to keep it going. International group, local problems. You can see "
+		.. "how easily an operation acquires more of the latter. I won't discuss everything with someone who "
+		.. "has walked through the door. If you want work, you'll get an assignment, the terms, and the risks I "
+		.. "can establish. Ask about anything you need to understand before accepting. My patience for "
+		.. "questions is considerably better here than after someone has gone out with the wrong idea."
 	),
 	options = {
 		"BackgroundTopic2",
@@ -96,11 +98,11 @@ DIALOGUE.addTopic("BackgroundTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "And what is your mission?",
+	statement = "What would you need from me?",
 	response = (
-		"Most of the details are classified, but if you help us "
-		.. "out, we'll let you know what we know about the zone so "
-		.. "far."
+		"Reliable work and an accurate account afterwards. I can pay for a particular assignment without "
+		.. "inviting you into every discussion behind it. If we continue working together, you'll have more "
+		.. "evidence on which to judge us. That applies in both directions."
 	),
 	options = {
 		"BackTopic",
@@ -109,7 +111,7 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
-	response = "Anything else?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -125,16 +127,17 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
-	response = "Bye.",
+	response = "Understood. Prepare before you leave.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "How am I supposed to work without the full picture?",
+	statement = "How can I work without the full picture?",
 	response = (
-		"Tell me which missing detail affects your decision. If it does, I'll address it. You're "
-		.. "entitled to understand the assignment and the risks we know about. You are also entitled to "
-		.. "refuse it. I'd rather settle that here than discover halfway through that we understood "
-		.. "different arrangements."
+		"Tell me which missing detail affects your decision. I may have an answer, or I may have to tell you "
+		.. "that we don't know. Secrecy is useful until it leaves the person carrying out an order guessing at "
+		.. "its purpose. I don't intend to explain the entire operation to settle every assignment. I do intend "
+		.. "you to understand what you're agreeing to. If the uncertainty is unacceptable, refuse before "
+		.. "leaving."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -142,9 +145,11 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Can I question an assignment?",
 	response = (
-		"Before you leave, certainly. Ask about something that affects the work and I'll answer what I "
-		.. "can. I won't discuss everything about the operation because you've found a polite way to ask. "
-		.. "If I don't know the answer, I'll tell you that too."
+		"Yes. Bring me a practical objection and we'll discuss it. Wake asks questions I would sometimes "
+		.. "rather leave until later. She has good reasons for refusing to wait. Doesn't mean every file "
+		.. "becomes hers to read. It means I have to decide what she needs instead of using 'restricted' to "
+		.. "finish a difficult conversation. You can expect the same consideration. It may not produce the "
+		.. "answer you want."
 	),
 	options = {"BackTopic"},
 })

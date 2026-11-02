@@ -45,15 +45,13 @@ DIALOGUE.addTopic("NicknameTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "Were you living near here before the Zone?",
 	response = (
-		"Well, I've lived in the outskirts of the now exclusion "
-		.. "zone for a long time. After the first emission hit, and "
-		.. "the area around Chernobyl became restricted, I decided "
-		.. "to check out the area myself. And I can tell you, friend, "
-		.. "that this area is not for the faint of heart. You're one "
-		.. "of the first people I see have seen succesfully sneek past "
-		.. "the military patrols."
+		"Near enough to know some of the country before everyone started giving it new names. Hunted "
+		.. "hereabouts. Thought that would stand me in good stead when I first came through. It helped, until I "
+		.. "began trusting what I expected to find more than what was in front of me. You can make that mistake "
+		.. "on familiar ground very easily. I still recognise bits of the place. A bend, a line of trees. "
+		.. "Sometimes I wish I didn't; takes a moment to stop looking for what used to be beside them."
 	),
 	options = {
 		"BackgroundTopic2",
@@ -61,15 +59,11 @@ DIALOGUE.addTopic("BackgroundTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Military? I didn't know they had the area under lockdown?",
+	statement = "How do you deal with the military?",
 	response = (
-		"Well, I would say you're lucky to be here. Usually the "
-		.. "military take tourists for a long walk out of here if they "
-		.. "find them, but I've heard gunshots coming from their encampments. "
-		.. "Not sure if they are bored guarding the exclusion zone, "
-		.. "or if they actually take care of intruders like us that "
-		.. "way. I suggest just dodging the military entirely if you "
-		.. "see any."
+		"Avoid them where you can. Don't assume a uniform means they're interested in your explanation. I've "
+		.. "heard enough stories about how they deal with intruders to leave the experiments to somebody else. "
+		.. "If you can make a quieter journey, do it. You don't need to establish which rumour was true."
 	),
 	options = {
 		"BackgroundTopic3",
@@ -77,15 +71,11 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Thanks for the advice. Why are you here?",
+	statement = "Why did you stay?",
 	response = (
-		"Not a lot for me to do back home. I made my living as a "
-		.. "hunter, but it's not something you can make a living off "
-		.. "anymore. Hit the bottle. Family left me and so I decided "
-		.. "to try my adventurelust and check out the rumours around "
-		.. "this place. As far as I'm aware, I was the first one to "
-		.. "succesfully make it past the military. And not get escorted "
-		.. "out. "
+		"Not much waiting for me at home by then. Hunting stopped paying, I drank more than I should, and my "
+		.. "family had enough of it. Here there was always something to do next. Don't confuse that with "
+		.. "putting things right. A person can stay very busy avoiding a question."
 	),
 	options = {
 		"BackgroundTopic4",
@@ -93,8 +83,8 @@ DIALOGUE.addTopic("BackgroundTopic3", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "Alright. We all have our demons.",
-	response = "Some bigger than others. Take care.",
+	statement = "Let's leave the past there.",
+	response = "All right. There's enough to be getting on with today.",
 	options = {
 		"BackTopic",
 	},
@@ -181,7 +171,7 @@ DIALOGUE.addTopic("StartBarter", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "All right.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -198,25 +188,28 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Come back soon, stranger...",
+	response = "Get yourself home. We can talk another time.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "When do you know someone is ready to go out?",
 	response = (
-		"Ready for what? First time something comes out of the reeds behind you, half of what I told you "
-		.. "may leave your head. Happens. What matters is whether you left yourself somewhere to go. Show "
-		.. "me you can turn back without making excuses, and I'll worry less about sending you out again."
+		"Depends where they're going. Show me your water, tell me how you're getting back, then we can "
+		.. "discuss how ready you are. People think I'm asking because I enjoy finding fault with their "
+		.. "packing. Sometimes I do. Mostly I want them to have an answer before something frightens it out of "
+		.. "their head. First walk needn't be a grand expedition. There's plenty to learn within a sensible "
+		.. "distance of supper."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Do you ever get it wrong yourself?",
+	statement = "Do you take your own advice?",
 	response = (
-		"Of course. I used to think admitting it would make people stop listening. Turns out they notice "
-		.. "anyway, and then they have to decide whether to tell you. I'd sooner have someone beside me who "
-		.. "says the path looks wrong than someone waiting politely for me to find out."
+		"More often than I used to. Lemon would enjoy giving you the exceptions. There are mornings I don't "
+		.. "want to carry the extra weight either, or I tell myself I've got time before dark. Knowing better "
+		.. "doesn't pack the bag for you. If you're walking with me and something looks wrong, say so. Don't "
+		.. "wait politely for me to notice."
 	),
 	options = {"BackTopic"},
 })

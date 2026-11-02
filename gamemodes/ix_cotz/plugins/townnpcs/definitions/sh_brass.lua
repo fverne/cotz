@@ -46,18 +46,20 @@ PLUGIN:Register("brass", {
 		completedGreeting = (
 			"Good to see you. An order to discuss, or have you brought something for us to count?"
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the supply order I'm filling.",
+		offerPrompt = "Do you have a delivery order?",
 		work = (
-			"Ammunition. Match the calibre and quantity on the order before bringing it over. Keep different "
-			.. "ammunition clearly separated. A hurried delivery just gives us both more sorting to do before we "
-			.. "know what arrived."
+			"Supply orders. Ammunition, freight goods, the requested stock on the page. Check the request "
+			.. "before packing, and keep different goods clearly separated. We count what arrives and settle the "
+			.. "delivery against that. If something doesn't match, say so before we both waste time defending the "
+			.. "wrong total."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "Which part of the depot account needs attention?",
 		progression = (
-			"We can count supplies here. Missing consignments need somebody to go and find the records. I want "
-			.. "the stock counted and the missing consignment records found. No extravagant claims about what "
-			.. "might be in a case will substitute for either."
+			"I need supplies and the records behind some uncertain consignments. There is no benefit in "
+			.. "bringing a convincing explanation without the requested material. We'll begin with work that can "
+			.. "be checked here. Where another contact needs an original, deliver it and return. I want the whole "
+			.. "movement accounted for."
 		),
 	},
 	catalogue = {
@@ -248,17 +250,27 @@ PLUGIN:Register("brass", {
 			completionCash = 450,
 			name = "The Broken Seal",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the depot seal register from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"BR01"},
-			briefing = "Recover depot packing records in Garbage.",
-			completion = "Let's check the consignment marks.",
+			briefing = (
+				"I need the packing record behind the broken seal. A damaged fastening doesn't tell us what was "
+				.. "counted before it closed. Recover the depot seal register from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "The record is here. I'll compare the totals before assigning responsibility.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Brass's "
+					.. "note: \"I need the packing record behind the broken seal.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_manifest",
-				label = "The Broken Seal - Warehouse Packing List A",
+				label = "Depot seal register",
 			},
 			benefits = {},
 		},
@@ -268,8 +280,8 @@ PLUGIN:Register("brass", {
 			name = "Reliable Quantities",
 			kind = "tracker",
 			requires = {"BR02"},
-			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
-			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
+			briefing = "Continue the supply deliveries. I want completed orders on which to base the next allocation.",
+			completion = "A sound beginning. Your deliveries are accounted for.",
 			target = 2,
 			benefits = {},
 		},
@@ -278,17 +290,27 @@ PLUGIN:Register("brass", {
 			completionCash = 650,
 			name = "The Missing Boxes",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the missing depot freight case from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"BR03"},
-			briefing = "Recover a sealed freight case near a vehicle graveyard.",
-			completion = "Put it here. I want the paperwork kept together.",
+			briefing = (
+				"A freight case is missing from the return. I'd like the case recovered before anyone writes its "
+				.. "contents into a loss total. Recover the missing depot freight case from the assigned search area "
+				.. "in Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Set it down with the markings facing me. We'll inspect what actually came back.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Brass's note: \"A freight "
+					.. "case is missing from the return.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_equipment",
-				label = "The Missing Boxes - Striped Equipment Case",
+				label = "Missing depot freight case",
 			},
 			benefits = {},
 		},
@@ -298,8 +320,8 @@ PLUGIN:Register("brass", {
 			name = "Another Chamber",
 			kind = "delivery",
 			requires = {"BR03"},
-			briefing = "Match the list. I'll check the quantity and condition when you return.",
-			completion = "Correct. Set it with the rest.",
+			briefing = "Bring the supplies specified on the order. We'll count what arrives before closing it.",
+			completion = "That matches the request. Thank you.",
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -313,17 +335,27 @@ PLUGIN:Register("brass", {
 			completionCash = 850,
 			name = "The Depot Register",
 			kind = "field",
-			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the depot inventory from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"BR04"},
-			briefing = "Retrieve a recovered depot inventory.",
-			completion = "Good. I'll compare it with my copy.",
+			briefing = (
+				"I need the depot inventory. People have been quoting totals without bringing the page they read "
+				.. "them from. Recover the depot inventory from the assigned search area in Garbage. Bring it back to "
+				.. "me in Garbage."
+			),
+			completion = "Thank you. Now I can count against the original entry.",
 			field = {
+				description = (
+					"A clipboard carrying a densely printed packing list and a stamped mark. Brass's note: \"I need "
+					.. "the depot inventory.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_receipt",
-				label = "The Depot Register - Warehouse Packing List B",
+				label = "depot inventory",
 			},
 			benefits = {
 				items = {
@@ -346,8 +378,8 @@ PLUGIN:Register("brass", {
 			name = "Not One Round Short",
 			kind = "tracker",
 			requires = {"BR05"},
-			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
-			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
+			briefing = "Keep the supply orders moving. Check the requested goods rather than guessing from the category.",
+			completion = "Another run completed. The account has been straightforward.",
 			target = 5,
 			benefits = {},
 		},
@@ -356,17 +388,27 @@ PLUGIN:Register("brass", {
 			completionCash = 1050,
 			name = "The Mixed Shipment",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the mislabelled consignment evidence from the assigned search area in Garbage. Bring it "
+				.. "back to the issuing contact in Garbage."
+			),
 			requires = {"BR06"},
-			briefing = "Recover evidence identifying a wrongly labelled consignment.",
-			completion = "Let's check the consignment marks.",
+			briefing = (
+				"There's evidence from a wrongly labelled consignment. I want to check the markings against the "
+				.. "paperwork. Recover the mislabelled consignment evidence from the assigned search area in Garbage. "
+				.. "Bring it back to me in Garbage."
+			),
+			completion = "Keep those pieces together. The mismatch is what I need to examine.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Brass's "
+					.. "note: \"There's evidence from a wrongly labelled consignment.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_manifest",
-				label = "The Mixed Shipment - Warehouse Packing List A",
+				label = "Mislabelled consignment evidence",
 			},
 			benefits = {},
 		},
@@ -376,8 +418,8 @@ PLUGIN:Register("brass", {
 			name = "Shot and Shell",
 			kind = "delivery",
 			requires = {"BR07"},
-			briefing = "Match the list. I'll check the quantity and condition when you return.",
-			completion = "That matches the order.",
+			briefing = "I need another delivery against this list. Keep the markings readable.",
+			completion = "Received. I'll keep the count with the order.",
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -391,17 +433,27 @@ PLUGIN:Register("brass", {
 			completionCash = 1250,
 			name = "The Supplier's Stamp",
 			kind = "field",
-			objective = "Recover Corporate Letter from the assigned search area in Garbage. Deliver it to 'Latch' in"
-				.. " Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the supplier papers for Latch from the assigned search area in Garbage. Deliver it to "
+				.. "'Latch' in Garbage, then come back to the issuing contact in Garbage."
+			),
 			requires = {"BR08"},
-			briefing = "Retrieve supplier paperwork in regional ruins.",
-			completion = "Received and accounted for. That is how a consignment ends.",
+			briefing = (
+				"Latch needs the supplier paperwork. He can check the part details more usefully than I can repeat "
+				.. "them. Recover the supplier papers for Latch from the assigned search area in Garbage. Deliver it "
+				.. "to 'Latch' in Garbage, then come back to me in Garbage."
+			),
+			completion = "He has the papers. That should settle which specification we're discussing.",
 			field = {
+				description = (
+					"A creased printed letter with a corporate mark and several small blocks of text. Brass's note: "
+					.. "\"Latch needs the supplier paperwork.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_contract",
-				label = "The Supplier's Stamp - Corporate Letter",
+				label = "Supplier papers for Latch",
 				recipient = "latch",
 			},
 			benefits = {},
@@ -412,8 +464,8 @@ PLUGIN:Register("brass", {
 			name = "Enough for the Shift",
 			kind = "tracker",
 			requires = {"BR09"},
-			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
-			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
+			briefing = "More delivery work when you're ready. I need quantities I can verify.",
+			completion = "You've kept a reliable account. That makes the next promise easier to judge.",
 			target = 9,
 			benefits = {},
 		},
@@ -422,17 +474,27 @@ PLUGIN:Register("brass", {
 			completionCash = 1450,
 			name = "Ledger's Missing Receipt",
 			kind = "field",
-			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the freight receipt for Ledger from the assigned search area in Garbage. Deliver it to "
+				.. "'Ledger' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"BR10"},
-			briefing = "Recover a freight receipt on a regional route.",
-			completion = "Received and accounted for. That is how a consignment ends.",
+			briefing = (
+				"Ledger needs the receipt from that route. I'd like both ends of the transaction working from the "
+				.. "same entry. Recover the freight receipt for Ledger from the assigned search area in Garbage. "
+				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Garbage."
+			),
+			completion = "Delivered. Good. I'll stop keeping a space for somebody else's version.",
 			field = {
+				description = (
+					"A clipboard carrying a densely printed packing list and a stamped mark. Brass's note: \"Ledger "
+					.. "needs the receipt from that route.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_receipt",
-				label = "Ledger's Missing Receipt - Warehouse Packing List B",
+				label = "Freight receipt for Ledger",
 				recipient = "ledger",
 			},
 			benefits = {
@@ -453,14 +515,10 @@ PLUGIN:Register("brass", {
 			kind = "delivery",
 			requires = {"BR11"},
 			briefing = (
-				"Match the list. I'll check the quantity and condition when you return. The quantity is "
-				.. "larger; the method is the same. Keep the ammunition separated and check it against the "
-				.. "order."
+				"Check what is requested before packing. Similar packaging doesn't make the contents "
+				.. "interchangeable."
 			),
-			completion = (
-				"Hold on while I count it. Yes. Wait until the count is finished before moving the "
-				.. "boxes. I prefer not to start again because somebody was being helpful."
-			),
+			completion = "The delivery checks out. You can put the empty packing aside.",
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -474,17 +532,27 @@ PLUGIN:Register("brass", {
 			completionCash = 1650,
 			name = "The Military Manifest",
 			kind = "field",
-			objective = "Recover Military Records Folder II from the assigned search area in Waystation. Deliver it"
-				.. " to 'Quartermaster' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the military depot manifest from the assigned search area in Waystation. Deliver it to "
+				.. "'Quartermaster' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"BR12"},
-			briefing = "Recover a military supply record in Waystation territory.",
-			completion = "Received and accounted for. That is how a consignment ends.",
+			briefing = (
+				"Quartermaster needs the military supply record. A usable account matters more than a reassuring "
+				.. "summary. Recover the military depot manifest from the assigned search area in Waystation. Deliver "
+				.. "it to 'Quartermaster' in Waystation, then come back to me in Garbage."
+			),
+			completion = "He has the manifest. We can each check our side without borrowing a memory.",
 			field = {
+				description = (
+					"A buff-coloured document folder with printed sheets protruding at uneven angles. Brass's note: "
+					.. "\"Quartermaster needs the military supply record.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_military",
-				label = "The Military Manifest - Military Records Folder II",
+				label = "Military depot manifest",
 				recipient = "quartermaster",
 			},
 			benefits = {},
@@ -495,8 +563,8 @@ PLUGIN:Register("brass", {
 			name = "A Working Depot",
 			kind = "tracker",
 			requires = {"BR13"},
-			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
-			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
+			briefing = "Continue bringing the requested supplies. Consistency matters after the introduction as well.",
+			completion = "A substantial amount of work now. Thank you for keeping it checkable.",
 			target = 14,
 			benefits = {},
 		},
@@ -505,17 +573,27 @@ PLUGIN:Register("brass", {
 			completionCash = 1850,
 			name = "The Empty Truck",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the freight driver's recording from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"BR14"},
-			briefing = "Recover a driver recorder at a remote supply site.",
-			completion = "Put it here. I want the paperwork kept together.",
+			briefing = (
+				"I want the driver's recording. There may be a useful detail between the departure and the missing "
+				.. "freight. Recover the freight driver's recording from the assigned search area in Garbage. Bring "
+				.. "it back to me in Garbage."
+			),
+			completion = "I'll listen to the whole thing. No point checking an account in selected pieces.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Brass's note: \"I "
+					.. "want the driver's recording.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_tape",
-				label = "The Empty Truck - Handwritten Audio Cassette",
+				label = "Freight driver's recording",
 			},
 			benefits = {},
 		},
@@ -525,8 +603,8 @@ PLUGIN:Register("brass", {
 			name = "Specialist Loads",
 			kind = "delivery",
 			requires = {"BR15"},
-			briefing = "Match the list. I'll check the quantity and condition when you return.",
-			completion = "Correct. Set it with the rest.",
+			briefing = "Bring the listed supplies here. A smaller correct load is more useful than a larger argument.",
+			completion = "Count agreed. I'll put it with the appropriate stock.",
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -540,17 +618,27 @@ PLUGIN:Register("brass", {
 			completionCash = 2050,
 			name = "The Pripyat Consignment",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the Pripyat consignment case from the assigned search area in Pripyat. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"BR16"},
-			briefing = "Recover a sealed case in Pripyat.",
-			completion = "Good. I'll compare it with my copy.",
+			briefing = (
+				"The sealed consignment is still out in Pripyat. Bring the case as it is; the inspection can wait "
+				.. "until it's here. Recover the Pripyat consignment case from the assigned search area in Pripyat. "
+				.. "Bring it back to me in Garbage."
+			),
+			completion = "Case received. Give me room to check the fastenings.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Brass's note: \"The sealed "
+					.. "consignment is still out in Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_equipment",
-				label = "The Pripyat Consignment - Striped Equipment Case",
+				label = "Pripyat consignment case",
 			},
 			benefits = {
 				items = {
@@ -569,8 +657,8 @@ PLUGIN:Register("brass", {
 			name = "Supply Under Pressure",
 			kind = "tracker",
 			requires = {"BR17"},
-			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
-			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
+			briefing = "Keep filling the supply orders while I reconcile the recovered records.",
+			completion = "I've been able to rely on those returns. That is worth more than a persuasive estimate.",
 			target = 20,
 			benefits = {},
 		},
@@ -579,17 +667,27 @@ PLUGIN:Register("brass", {
 			completionCash = 2250,
 			name = "The Wrong Recipient",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Pripyat. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the corrected destination record from the assigned search area in Pripyat. Deliver it to "
+				.. "'Ledger' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"BR18"},
-			briefing = "Recover a destination record in Pripyat.",
-			completion = "Received and accounted for. That is how a consignment ends.",
+			briefing = (
+				"Ledger needs the destination record. A plausible recipient isn't necessarily the one the sender "
+				.. "wrote down. Recover the corrected destination record from the assigned search area in Pripyat. "
+				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Garbage."
+			),
+			completion = "Ledger has it. If the destination needs correcting, he can do it from the record.",
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. Brass's note: \"Ledger needs "
+					.. "the destination record.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_official",
-				label = "The Wrong Recipient - Official File Folder",
+				label = "Corrected destination record",
 				recipient = "ledger",
 			},
 			benefits = {},
@@ -600,8 +698,8 @@ PLUGIN:Register("brass", {
 			name = "Rounds in Reserve",
 			kind = "delivery",
 			requires = {"BR19", "BR20"},
-			briefing = "Match the list. I'll check the quantity and condition when you return.",
-			completion = "That matches the order.",
+			briefing = "Bring the supplies specified on the order. We'll count what arrives before closing it.",
+			completion = "That matches the request. Thank you.",
 			requirements = {
 				{
 					pool = "town_ammunition",
@@ -615,17 +713,27 @@ PLUGIN:Register("brass", {
 			completionCash = 2450,
 			name = "The Final Receipt",
 			kind = "field",
-			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the final freight receipt from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"BR21"},
-			briefing = "Recover the shipment's final freight record.",
-			completion = "Put it here. I want the paperwork kept together.",
+			briefing = (
+				"I want the last freight entry. I'd rather keep an account open a little longer than close it "
+				.. "against an assumed receipt. Recover the final freight receipt from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "There it is. I'll reconcile the remaining entries against it.",
 			field = {
+				description = (
+					"A clipboard carrying a densely printed packing list and a stamped mark. Brass's note: \"I want "
+					.. "the last freight entry.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_receipt",
-				label = "The Final Receipt - Warehouse Packing List B",
+				label = "Final freight receipt",
 			},
 			benefits = {},
 		},
@@ -635,8 +743,8 @@ PLUGIN:Register("brass", {
 			name = "Every Box Accounted For",
 			kind = "tracker",
 			requires = {"BR22"},
-			briefing = "Ammunition. Match the calibre and quantity on the order before bringing it over.",
-			completion = "Your deliveries match the orders. That makes you easier to deal with than most.",
+			briefing = "There are further supply orders to complete. Keep checking them with the same care.",
+			completion = "You've stayed reliable across a long account. I appreciate it. No qualification attached.",
 			target = 27,
 			benefits = {},
 		},
@@ -645,24 +753,31 @@ PLUGIN:Register("brass", {
 			completionCash = 2650,
 			name = "The Depot's Copy",
 			kind = "field",
-			objective = "Recover Corporate Letter from the assigned search area in Garbage. Return it to this contact"
-				.. " to finish the assignment.",
+			objective = (
+				"Recover the supplier agreement letter from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"BR23"},
 			briefing = (
-				"Recover a supplier's surviving agreement and return it. Bring the supplier's letter back intact. "
-				.. "I want the terms they actually wrote, including anything that wasn't convenient to repeat aloud."
+				"The supplier's surviving letter belongs with the depot papers, including the terms nobody enjoyed "
+				.. "repeating. Recover the supplier agreement letter from the assigned search area in Garbage. Bring "
+				.. "it back to me in Garbage."
 			),
 			completion = (
-				"Good. I'll compare it with my copy. Yes. Let me finish reading before we call it settled. You've "
-				.. "stayed for the counting and brought back the paperwork. I have rather more use for that than for "
-				.. "assurances."
+				"I'll keep this with the agreement. You've given me an account I can check, and you've been paid "
+				.. "for the work it took. That suits me very well."
 			),
 			field = {
+				description = (
+					"A creased printed letter with a corporate mark and several small blocks of text. Brass's note: "
+					.. "\"The supplier's surviving letter belongs with the depot papers, including the terms nobody "
+					.. "enjoyed repeating.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_contract",
-				label = "The Depot's Copy - Corporate Letter",
+				label = "Supplier agreement letter",
 			},
 			benefits = {
 				items = {

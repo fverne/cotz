@@ -22,10 +22,14 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "How did you end up looking after this place?",
 	response = (
-		"Someone has to keep the generator fed and the water fit to drink. Apparently that someone is "
-		.. "me."
+		"Started with a leaking connection. I had a wrench, everyone else had advice. Next morning someone "
+		.. "brought me a filter. Then a fuel can. By the end of the week people were asking when I'd have the "
+		.. "lights back, as though we'd signed something. I complained. Still complain. But Jitters comes over "
+		.. "with an empty water container and says he's got someone on the table - what am I going to do, "
+		.. "explain that I'm only helping temporarily? Would be nice if they asked before borrowing the wrench, "
+		.. "though. That part hasn't improved."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -50,7 +54,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "If you've come to complain about the lights, bring fuel next time.",
+	response = "What else?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -66,25 +70,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Try leaving something running for once.",
+	response = "Close the lid if you borrowed anything. See you.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "What would make your day easier?",
 	response = (
-		"Put things back. Same shelf, same container, lid on. Nobody believes that's a serious answer. "
-		.. "They want me to name an expensive part they can heroically fetch. I spend half my morning "
-		.. "finding what somebody borrowed for five minutes. You want gratitude? Return a funnel."
+		"An uninterrupted breakfast. Doesn't sound ambitious, does it? I put the kettle on, somebody wants a "
+		.. "connection looked at. Sit down again, someone else has found a noise. By the time I get back, Lemon "
+		.. "is asking why I haven't eaten. I do know they're asking because they trust me to sort it. I'd just "
+		.. "like that trust to occasionally extend to leaving a thing alone when I've said it will last until "
+		.. "morning."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Does anyone notice when everything works?",
+	statement = "Do you tell them that?",
 	response = (
-		"They notice when I ask them not to touch it. That's close enough. Quiet machinery, people "
-		.. "complaining about something else, a cup I can finish while it's hot. I don't need applause over "
-		.. "the engine. Though I wouldn't refuse a little peace and quiet."
+		"At considerable volume. They remember the volume better than the instruction. Technut's the worst: "
+		.. "listens very carefully, understands every word, then explains why his idea is an exception. "
+		.. "Sometimes it even works. Don't tell him I said that. He'll bring drawings."
 	),
 	options = {"BackTopic"},
 })

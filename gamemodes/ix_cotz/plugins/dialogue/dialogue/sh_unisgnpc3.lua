@@ -18,8 +18,14 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
-	response = "Fuck off.",
+	statement = "What is your speciality?",
+	response = (
+		"Making the equipment do the thing somebody swears it was doing yesterday. Data, computers, the "
+		.. "uncomfortable interval between pressing a button and admitting you don't know what it did. I also "
+		.. "answer questions, when they're good. If you tell me what failed and what you tried, we may get "
+		.. "somewhere. If you start with 'I haven't touched anything', I'll assume we're spending the first ten "
+		.. "minutes establishing which part you touched."
+	),
 	options = {
 		"BackTopic",
 	},
@@ -233,7 +239,7 @@ DIALOGUE.addTopic("NotEnoughMoneySuitVariantChange", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
-	response = "Anything else?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -249,16 +255,17 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
-	response = "Bye.",
+	response = "Off you go. Try to remember what it did before you fixed it.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Can't you get the data yourself?",
+	statement = "Could you collect the data yourself?",
 	response = (
-		"Certainly. You stay here and explain my absence to Boss. Use the phrase 'valuable field "
-		.. "experience'; he enjoys that. Or we could divide the work sensibly. You reach the computers, I "
-		.. "deal with what comes back, and neither of us has to pretend your rifle makes you qualified to "
-		.. "repair a drive."
+		"Certainly. You can stay here and tell Boss I've gone for valuable field experience. Say it very "
+		.. "seriously; he enjoys that. Or we divide the work. You reach the computers, I deal with the "
+		.. "contents, and neither of us has to pretend it was a productive afternoon if I got shot carrying a "
+		.. "flash drive. I do want to see what comes back. That's the irritating part. Every sensible reason to "
+		.. "stay here still leaves me wondering what the machine looked like before it failed."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -266,9 +273,10 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "What makes a question worth answering?",
 	response = (
-		"What failed, what you tried, what happened next. Give me something to work with and I might "
-		.. "even manage an answer without an insult. No promises, though. Spool can manage a useful "
-		.. "description when he isn't busy arguing with the answer."
+		"Something specific. Spool can describe a fault well enough that I almost hear it. Then he adds his "
+		.. "explanation and we have a lovely argument. Mute supplies rather less commentary. Both approaches "
+		.. "have their merits. Start with what you actually noticed and I might even forget to insult you. "
+		.. "Don't wait around expecting an apology if I do."
 	),
 	options = {"BackTopic"},
 })

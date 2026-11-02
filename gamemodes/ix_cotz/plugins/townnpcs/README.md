@@ -267,3 +267,16 @@ and no-repeat coverage. Verify actual placement and facing after two map restart
 
 Progression notices use local named NPC chat within chatRange of the NPC. An absent NPC uses a
 private character notification. Mute's locked introduction uses gestures in his own conversation.
+
+## November 2026 dialogue pass
+
+The 27 town contacts now have expanded personal conversations, contact-specific work offers, and
+revised finite briefings and completion replies. Atlas retains his developed voice; Mute continues
+through gestures and written orders. Existing contact profiles record the accepted voice directions.
+All 316 field commissions have narrative cargo labels and descriptions, using the existing models.
+These are per-assignment overrides, not renamed item definitions. Jobs already accepted keep their
+saved identity; new labels and descriptions apply to new assignments without resetting progress.
+
+The dialogue pass preserves IDs, task kinds, locations, recipients, requirements, rewards, and access
+conditions. Briefings describe assigned sites rather than promising fixed structures or new actors.
+Verify text wrapping, long replies, incoming deliveries, work offers, and final greetings in multiplayer.

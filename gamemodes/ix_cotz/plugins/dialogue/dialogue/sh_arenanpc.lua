@@ -19,7 +19,7 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
-	response = "What would you like to know?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"HealTopic",
@@ -34,7 +34,7 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you!",
-	response = "Take care, STALKER...",
+	response = "Enjoy the rest while you're getting it.",
 })
 
 DIALOGUE.addTopic("JoinArena", {
@@ -521,11 +521,13 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Can you tell who's going to win?",
+	statement = "Can you tell who is going to win?",
 	response = (
-		"Sometimes. Then the favourite does something wonderfully stupid and earns everyone's attention. "
-		.. "I watch the quiet one while the loud one explains himself. Usually learn more. You thinking of "
-		.. "entering, or would you prefer to stand here and become an expert with the rest of us?"
+		"Sometimes. Then the favourite does something wonderfully stupid and everyone gets an afternoon to "
+		.. "remember. Watch the quiet one while the loud one explains how easy it will be. Don't put too much "
+		.. "faith in that either; some people are quiet because they have absolutely no plan. That's why we "
+		.. "hold the match. Are you considering entering, or would you like to become an expert beside the rest "
+		.. "of us first?"
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -533,9 +535,10 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "What makes a fighter worth watching?",
 	response = (
-		"They adapt. First plan goes wrong and they try another instead of getting furious with the "
-		.. "world. Doesn't hurt if they give the other contender a decent match, either. A foregone "
-		.. "conclusion is a dull afternoon, whatever the winner tells you afterwards."
+		"They adapt. First idea fails and you can see them considering the next. I enjoy that moment. They "
+		.. "may still lose, but they've given the other person a contest. Then they have to listen while every "
+		.. "spectator explains what they should have done. If they can survive that conversation without "
+		.. "demanding another bout immediately, there's hope for them."
 	),
 	options = {"BackTopic"},
 })

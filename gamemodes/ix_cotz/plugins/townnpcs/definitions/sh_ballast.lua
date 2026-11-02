@@ -28,18 +28,19 @@ PLUGIN:Register("ballast", {
 		completedGreeting = (
 			"Back with both boots, I see. Always a promising start to a conversation. What do you need?"
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the case I'm recovering.",
+		offerPrompt = "Do you have a recovery job?",
 		work = (
-			"Recover the marked case and bring it back intact. Think about the weight before you climb down for "
-			.. "it. Have a look at the way out before you load yourself down. Finding a case and getting it home "
-			.. "are two different amounts of effort."
+			"A marked case, brought back intact. Have a look at the return before you load yourself down. "
+			.. "People become inventive about routes once they've got both hands full, and the inventions rarely "
+			.. "improve my afternoon. Check the region before agreeing. I can wait while you prepare."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What needs sorting out along the freight route?",
 		progression = (
-			"There are stranded cases and missing freight records. Tell me which one you're going after. Some "
-			.. "freight needs collecting. Some needs records straightened out so it stops being everyone else's "
-			.. "responsibility. Neither improves by sitting here arguing about it."
+			"There's stranded freight and a crew's scattered records to bring through. I want the cases "
+			.. "recovered and the accounts read before anyone supplies an ending. Some deliveries go to somebody "
+			.. "who can check a particular part. Finish that handover, then come back here. I'll try to have "
+			.. "cleared somewhere dry by then."
 		),
 	},
 	catalogue = {
@@ -82,17 +83,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 450,
 			name = "The First Stranding",
 			kind = "field",
-			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the stranded freight case from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"BA01"},
-			briefing = "Recover a shipment case on a Marsh shore.",
-			completion = "Dry enough. Let's have a look.",
+			briefing = (
+				"A case has been left out along the route. Its owner has explained how urgent it is at greater "
+				.. "length than how it got there. Recover the stranded freight case from the assigned search area in "
+				.. "Marsh. Bring it back to me in Marsh."
+			),
+			completion = "You and the case, both here. Put it down gently; you've finished carrying it.",
 			field = {
+				description = (
+					"A small yellow hard case with ribbed corners and a large label on its lid. Ballast's note: \"A "
+					.. "case has been left out along the route.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_case",
-				label = "The First Stranding - Small Yellow Transit Case",
+				label = "Stranded freight case",
 			},
 			benefits = {},
 		},
@@ -102,11 +113,8 @@ PLUGIN:Register("ballast", {
 			name = "Nothing Left Behind",
 			kind = "tracker",
 			requires = {"BA02"},
-			briefing = (
-				"Recover the marked case and bring it back intact. Think about the weight before you climb "
-				.. "down for it."
-			),
-			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
+			briefing = "Keep bringing the marked recovery cases back. Finding them is the beginning of the carrying.",
+			completion = "A few good returns. You seem to think about the journey home.",
 			target = 2,
 			benefits = {},
 		},
@@ -115,17 +123,28 @@ PLUGIN:Register("ballast", {
 			completionCash = 650,
 			name = "The Rotten Landing",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the landing inspection journal from the assigned search area in Marsh. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"BA02"},
-			briefing = "Retrieve a landing inspection record.",
-			completion = "You and the case made it back. That's a start.",
+			briefing = (
+				"I'd like the inspection journal before anyone tells me that landing was perfectly sound when they "
+				.. "last used it. Recover the landing inspection journal from the assigned search area in Marsh. "
+				.. "Bring it back to me in Marsh."
+			),
+			completion = "Good. I'll read what the inspector actually checked.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Ballast's note: \"I'd like "
+					.. "the inspection journal before anyone tells me that landing was perfectly sound when they last "
+					.. "used it.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_notebook",
-				label = "The Rotten Landing - Tied Leather Journal",
+				label = "Landing inspection journal",
 			},
 			benefits = {},
 		},
@@ -135,8 +154,8 @@ PLUGIN:Register("ballast", {
 			name = "Fuel for the Return",
 			kind = "delivery",
 			requires = {"BA03"},
-			briefing = "I need these supplies. Bring them here, and leave yourself room to carry your own kit.",
-			completion = "That's what I asked for.",
+			briefing = "I need the listed supplies brought here. Leave enough room to carry your own kit home too.",
+			completion = "Put it down gently. That's a useful load.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -150,17 +169,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 850,
 			name = "A Missing Mooring",
 			kind = "field",
-			objective = "Recover Stickered Tool Case from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the landing maintenance tools from the assigned search area in Marsh. Bring it back to "
+				.. "the issuing contact in Marsh."
+			),
 			requires = {"BA04"},
-			briefing = "Recover a landing maintenance case.",
-			completion = "Leave it here. I'll check the contents.",
+			briefing = (
+				"There's a tool case left with the maintenance work. Tools are useful company, but only when "
+				.. "somebody remembers to bring them home. Recover the landing maintenance tools from the assigned "
+				.. "search area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "Handle's still attached. Better return than some I've seen.",
 			field = {
+				description = (
+					"A handled tool case covered in bright stickers and contrasting printed decoration. Ballast's "
+					.. "note: \"There's a tool case left with the maintenance work.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_tools",
-				label = "A Missing Mooring - Stickered Tool Case",
+				label = "Landing maintenance tools",
 			},
 			benefits = {
 				items = {
@@ -183,11 +212,8 @@ PLUGIN:Register("ballast", {
 			name = "A Reliable Pair of Hands",
 			kind = "tracker",
 			requires = {"BA05"},
-			briefing = (
-				"Recover the marked case and bring it back intact. Think about the weight before you climb "
-				.. "down for it."
-			),
-			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
+			briefing = "More recovery work. Leave yourself room for the case before you go looking.",
+			completion = "You've been dependable about getting the load all the way here.",
 			target = 5,
 			benefits = {},
 		},
@@ -196,17 +222,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 1050,
 			name = "The Crew List",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the missing crew roster from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"BA06"},
-			briefing = "Recover a missing crew's roster from a shore cache.",
-			completion = "Dry enough. Let's have a look.",
+			briefing = (
+				"I want the crew roster. People remember who was supposed to travel, then start treating that as "
+				.. "who actually went. Recover the missing crew roster from the assigned search area in Marsh. Bring "
+				.. "it back to me in Marsh."
+			),
+			completion = "Let me lay it flat. I'll go through the names without an audience at my shoulder.",
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Ballast's note: \"I want "
+					.. "the crew roster.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 1,
 				cargo = "town_quest_personnel",
-				label = "The Crew List - Personnel File Folder",
+				label = "Missing crew roster",
 			},
 			benefits = {},
 		},
@@ -216,8 +252,11 @@ PLUGIN:Register("ballast", {
 			name = "Names on the Manifest",
 			kind = "delivery",
 			requires = {"BA07"},
-			briefing = "I need these supplies. Bring them here, and leave yourself room to carry your own kit.",
-			completion = "Good. I'll stow it properly.",
+			briefing = (
+				"Bring the requested supplies. Packing them properly is worth the minute it takes before setting "
+				.. "off."
+			),
+			completion = "All here. I'll stow them before anyone starts moving the pile.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -231,17 +270,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 1250,
 			name = "The Floating Trail",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the crew route cassette from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"BA08"},
-			briefing = "Recover the crew's recorder near a remote Marsh water route.",
-			completion = "You and the case made it back. That's a start.",
+			briefing = (
+				"There's a recording from the crew's route. I'd rather hear their own account before listening to "
+				.. "another confident explanation. Recover the crew route cassette from the assigned search area in "
+				.. "Marsh. Bring it back to me in Marsh."
+			),
+			completion = "Leave it here. I'll listen from the beginning, including the bits that don't sound important.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Ballast's note: "
+					.. "\"There's a recording from the crew's route.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_tape",
-				label = "The Floating Trail - Handwritten Audio Cassette",
+				label = "Crew route cassette",
 			},
 			benefits = {},
 		},
@@ -251,11 +300,8 @@ PLUGIN:Register("ballast", {
 			name = "Recover What Matters",
 			kind = "tracker",
 			requires = {"BA09"},
-			briefing = (
-				"Recover the marked case and bring it back intact. Think about the weight before you climb "
-				.. "down for it."
-			),
-			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
+			briefing = "Continue the case recoveries. I prefer an intact return to an impressive departure.",
+			completion = "Another proper set of returns. Not much to complain about there.",
 			target = 9,
 			benefits = {},
 		},
@@ -264,25 +310,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 1450,
 			name = "The Disputed Cargo",
 			kind = "field",
-			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Deliver it to 'Brass'"
-				.. " in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the disputed freight evidence from the assigned search area in Garbage. Deliver it to "
+				.. "'Brass' in Garbage, then come back to the issuing contact in Marsh."
+			),
 			requires = {"BA10"},
 			briefing = (
-				"Retrieve shipment evidence at a Garbage freight site. Brass gets the case in Garbage. "
-				.. "Then come back here. He can argue the figures; I just want the delivery finished "
-				.. "properly."
+				"Brass can settle the disputed freight figures if he gets the case. I'd like to stop being asked "
+				.. "to choose a total by how convincing it sounds. Recover the disputed freight evidence from the "
+				.. "assigned search area in Garbage. Deliver it to 'Brass' in Garbage, then come back to me in Marsh."
 			),
-			completion = (
-				"Delivered dry, I hope. Good. That is one less parcel sitting between two names. Brass "
-				.. "can check what he has now. That saves me trying to settle an argument while the "
-				.. "evidence is still outside."
-			),
+			completion = "Brass has it now. If someone wants the figures argued over, they know where to stand.",
 			field = {
+				description = (
+					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Ballast's "
+					.. "note: \"Brass can settle the disputed freight figures if he gets the case.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_evidence",
-				label = "The Disputed Cargo - Orange Evidence Case",
+				label = "Disputed freight evidence",
 				recipient = "brass",
 			},
 			benefits = {
@@ -302,8 +350,11 @@ PLUGIN:Register("ballast", {
 			name = "Patch and Pack",
 			kind = "delivery",
 			requires = {"BA11"},
-			briefing = "I need these supplies. Bring them here, and leave yourself room to carry your own kit.",
-			completion = "Set it down. No need to throw it.",
+			briefing = (
+				"There are supplies to replace before the next recovery. Check the order, then decide what you can "
+				.. "carry."
+			),
+			completion = "Good. You can get the weight off your shoulders now.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -317,17 +368,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 1650,
 			name = "The Other Landing",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Marsh. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the landing freight manifest from the assigned search area in Marsh. Deliver it to "
+				.. "'Ledger' in Waystation, then come back to the issuing contact in Marsh."
+			),
 			requires = {"BA12"},
-			briefing = "Recover a landing record at a regional supply stop.",
-			completion = "Delivered dry, I hope. Good. That is one less parcel sitting between two names.",
+			briefing = (
+				"Ledger needs the landing record. He packs things properly and remembers where he sent them; I try "
+				.. "to return the courtesy. Recover the landing freight manifest from the assigned search area in "
+				.. "Marsh. Deliver it to 'Ledger' in Waystation, then come back to me in Marsh."
+			),
+			completion = "Delivered? Good. One fewer parcel balanced between two explanations.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Ballast's "
+					.. "note: \"Ledger needs the landing record.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_manifest",
-				label = "The Other Landing - Warehouse Packing List A",
+				label = "Landing freight manifest",
 				recipient = "ledger",
 			},
 			benefits = {},
@@ -338,11 +399,8 @@ PLUGIN:Register("ballast", {
 			name = "The Long Haul Back",
 			kind = "tracker",
 			requires = {"BA13"},
-			briefing = (
-				"Recover the marked case and bring it back intact. Think about the weight before you climb "
-				.. "down for it."
-			),
-			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
+			briefing = "There are still recovery orders worth taking. Pick the trip you can prepare for.",
+			completion = "You've kept finishing the return walk. I notice that.",
 			target = 14,
 			benefits = {},
 		},
@@ -351,17 +409,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 1850,
 			name = "A Voice From Shore",
 			kind = "field",
-			objective = "Recover Blue-Label Audio Cassette from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the crew's shore message from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"BA14"},
-			briefing = "Retrieve the crew's recorded message at an abandoned camp.",
-			completion = "You and the case made it back. That's a start.",
+			briefing = (
+				"There's another crew recording to collect. Don't spend the journey trying to decide what sort of "
+				.. "message it must be. Recover the crew's shore message from the assigned search area in Marsh. "
+				.. "Bring it back to me in Marsh."
+			),
+			completion = "You can sit while I put this away. No need to keep standing as if I'll send you straight back.",
 			field = {
+				description = (
+					"A pale audio cassette with a broad blue printed label and twin spool windows. Ballast's note: "
+					.. "\"There's another crew recording to collect.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_tape2",
-				label = "A Voice From Shore - Blue-Label Audio Cassette",
+				label = "Crew's shore message",
 			},
 			benefits = {},
 		},
@@ -371,8 +439,8 @@ PLUGIN:Register("ballast", {
 			name = "A Boat in Reserve",
 			kind = "delivery",
 			requires = {"BA15"},
-			briefing = "I need these supplies. Bring them here, and leave yourself room to carry your own kit.",
-			completion = "That's what I asked for.",
+			briefing = "I'd like the reserve brought up without turning your own return into a struggle.",
+			completion = "Thank you. I'll keep it dry from this end.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -386,17 +454,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 2050,
 			name = "The Last Mooring",
 			kind = "field",
-			objective = "Recover Personnel File Folder from the assigned search area in Marsh. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the crew personal records from the assigned search area in Marsh. Bring it back to the "
+				.. "issuing contact in Marsh."
+			),
 			requires = {"BA16"},
-			briefing = "Recover the crew's final personal case.",
-			completion = "Leave it here. I'll check the contents.",
+			briefing = (
+				"I want the crew's personal records kept together. Loose pages have a way of acquiring owners who "
+				.. "remember only the convenient parts. Recover the crew personal records from the assigned search "
+				.. "area in Marsh. Bring it back to me in Marsh."
+			),
+			completion = "I'll keep the papers dry. We can read them here.",
 			field = {
+				description = (
+					"A cardboard file folder with an emblem and printed wording on the front. Ballast's note: \"I want "
+					.. "the crew's personal records kept together.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_personnel",
-				label = "The Last Mooring - Personnel File Folder",
+				label = "Crew personal records",
 			},
 			benefits = {
 				items = {
@@ -415,11 +493,8 @@ PLUGIN:Register("ballast", {
 			name = "Safe to Bring Home",
 			kind = "tracker",
 			requires = {"BA17", "BA18"},
-			briefing = (
-				"Recover the marked case and bring it back intact. Think about the weight before you climb "
-				.. "down for it."
-			),
-			completion = "You've brought enough cargo back for me to know you can carry it without losing half of it.",
+			briefing = "Keep the recovery work going while I sort the freight records.",
+			completion = "I'd trust you to bring a load through. You've given me reason enough.",
 			target = 20,
 			benefits = {},
 		},
@@ -428,17 +503,27 @@ PLUGIN:Register("ballast", {
 			completionCash = 2250,
 			name = "The Missing Logbook",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Marsh. Deliver it to 'Carbon'"
-				.. " in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the landing log for Carbon from the assigned search area in Marsh. Deliver it to 'Carbon' "
+				.. "in Waystation, then come back to the issuing contact in Marsh."
+			),
 			requires = {"BA19"},
-			briefing = "Recover a regional landing log proving what happened.",
-			completion = "Delivered dry, I hope. Good. That is one less parcel sitting between two names.",
+			briefing = (
+				"Carbon should have the landing log to compare. I can remember a journey; he can put it beside "
+				.. "accounts I haven't seen. Recover the landing log for Carbon from the assigned search area in "
+				.. "Marsh. Deliver it to 'Carbon' in Waystation, then come back to me in Marsh."
+			),
+			completion = "He's got the book. Let him read it before anyone asks him for a tidy ending.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Ballast's note: \"Carbon "
+					.. "should have the landing log to compare.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_notebook",
-				label = "The Missing Logbook - Tied Leather Journal",
+				label = "Landing log for Carbon",
 				recipient = "carbon",
 			},
 			benefits = {},
@@ -453,8 +538,8 @@ PLUGIN:Register("ballast", {
 			name = "A Working Landing",
 			kind = "delivery",
 			requires = {"BA20"},
-			briefing = "I need these supplies. Bring them here, and leave yourself room to carry your own kit.",
-			completion = "Good. I'll stow it properly.",
+			briefing = "I need the listed supplies brought here. Leave enough room to carry your own kit home too.",
+			completion = "Put it down gently. That's a useful load.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -468,24 +553,30 @@ PLUGIN:Register("ballast", {
 			completionCash = 2450,
 			name = "The First Return Cargo",
 			kind = "field",
-			objective = "Recover Small Yellow Transit Case from the assigned search area in Marsh. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the return freight case from the assigned search area in Marsh. Deliver it to 'Ledger' in "
+				.. "Waystation, then come back to the issuing contact in Marsh."
+			),
 			requires = {"BA21"},
 			briefing = (
-				"Complete one recovery along the supply route. The case goes to Ledger in Waystation. After that, "
-				.. "come back here. I want to hear you've finished the return journey as well."
+				"Ledger is waiting for the recovered case. A route looks quite different when you have to finish "
+				.. "carrying the load. Recover the return freight case from the assigned search area in Marsh. "
+				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Marsh."
 			),
 			completion = (
-				"Delivered dry, I hope. Good. That is one less parcel sitting between two names. Good. Ledger has "
-				.. "the case and you're back to tell me. I can put that job down without wondering about either of "
-				.. "you. You'd be surprised how pleasant that is."
+				"You made it through and came back. I'd work with you again. Take a moment before you start "
+				.. "offering your shoulders to somebody else."
 			),
 			field = {
+				description = (
+					"A small yellow hard case with ribbed corners and a large label on its lid. Ballast's note: "
+					.. "\"Ledger is waiting for the recovered case.\""
+				),
 				kind = "recovery",
 				map = "rp_marsh_cs",
 				tier = 2,
 				cargo = "town_quest_case",
-				label = "The First Return Cargo - Small Yellow Transit Case",
+				label = "Return freight case",
 				recipient = "ledger",
 			},
 			benefits = {},

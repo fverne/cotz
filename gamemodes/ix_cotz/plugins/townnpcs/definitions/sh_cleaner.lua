@@ -29,17 +29,18 @@ PLUGIN:Register("cleaner", {
 			"You're here. Good. We can spare ourselves the usual discussion about whether instructions "
 			.. "need following."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the circuit I'm carrying.",
+		offerPrompt = "Do you have a parcel circuit?",
 		work = (
-			"Collect the parcel. Take it to the other drop. Leave it sealed. Check both ends of the route. Once "
-			.. "you're carrying it, curiosity won't make the package any easier to deliver."
+			"Collect the sealed parcel at the assigned pickup. Deliver it to the assigned cache. Come back "
+			.. "after finishing the delivery. Read both endpoints before accepting, and leave the package shut. If "
+			.. "you want to know whether that is all the arrangement requires, yes. That's why I wrote it down."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What else needs checking in the deliveries?",
 		progression = (
-			"Supplies. Missing records. Deliveries. Pick one, and keep the details to yourself. Some records "
-			.. "need finding. Some supplies need replacing. I will give you enough to do the work. Don't confuse "
-			.. "that with an invitation to discuss everyone involved."
+			"Some drops need checking and some records need recovering. The order gives the movement and the "
+			.. "return. Follow that. If another contact is receiving a file, give them the file; don't explain it "
+			.. "in place of delivering it. We can discuss a particular assignment once you've read it."
 		),
 	},
 	catalogue = {
@@ -86,17 +87,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 450,
 			name = "The Unattended Drop",
 			kind = "field",
-			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the first sealed drop parcel from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"CL01"},
-			briefing = "Complete a two-point drop in Garbage.",
-			completion = "Leave it. I'll check it later.",
+			briefing = (
+				"A sealed parcel needs moving between the assigned drops. Read both ends before you take "
+				.. "possession. Recover the first sealed drop parcel from the assigned search area in Garbage. Bring "
+				.. "it back to me in Garbage."
+			),
+			completion = "Delivered. That's the part I needed you to finish.",
 			field = {
+				description = (
+					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Cleaner's "
+					.. "note: \"A sealed parcel needs moving between the assigned drops.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_evidence",
-				label = "The Unattended Drop - Orange Evidence Case",
+				label = "First sealed drop parcel",
 			},
 			benefits = {},
 		},
@@ -106,8 +117,8 @@ PLUGIN:Register("cleaner", {
 			name = "On Time and Unopened",
 			kind = "tracker",
 			requires = {"CL02"},
-			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
-			completion = "The deliveries are counted. No need to tell me about them twice.",
+			briefing = "Complete the assigned dead-drop circuits. Collection alone doesn't finish a delivery.",
+			completion = "A few finished circuits. That's a useful start.",
 			target = 2,
 			benefits = {},
 		},
@@ -116,17 +127,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 650,
 			name = "The Wrong Marker",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the drop placement notebook from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"CL03"},
-			briefing = "Recover a drop's placement record.",
-			completion = "Seal looks intact. Good.",
+			briefing = (
+				"I want the placement record. A person remembering where the marker ought to be is how this became "
+				.. "a problem. Recover the drop placement notebook from the assigned search area in Garbage. Bring it "
+				.. "back to me in Garbage."
+			),
+			completion = "Leave the notebook here. I'll check the location against the account.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Cleaner's note: \"I want "
+					.. "the placement record.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_notebook",
-				label = "The Wrong Marker - Tied Leather Journal",
+				label = "Drop placement notebook",
 			},
 			benefits = {},
 		},
@@ -136,8 +157,8 @@ PLUGIN:Register("cleaner", {
 			name = "A Cleaner Way In",
 			kind = "delivery",
 			requires = {"CL04"},
-			briefing = "Bring what's on the list. Leave it with me.",
-			completion = "That's enough.",
+			briefing = "Bring the listed supplies here. Keep them separate from your own equipment.",
+			completion = "Received. Put them on that side.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -151,17 +172,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 850,
 			name = "An Empty Hiding Place",
 			kind = "field",
-			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the compromised cache evidence from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"CL04"},
-			briefing = "Recover evidence from a compromised cache.",
-			completion = "That's what I needed.",
+			briefing = (
+				"There's evidence to recover from a compromised cache. Bring the case unchanged. I don't need your "
+				.. "inspection marks mixed with theirs. Recover the compromised cache evidence from the assigned "
+				.. "search area in Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Set it down. I'll check it before deciding what needs changing.",
 			field = {
+				description = (
+					"A USB drive with a large rear loop and a handwritten paper label around its body. Cleaner's "
+					.. "note: \"There's evidence to recover from a compromised cache.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_security",
-				label = "An Empty Hiding Place - Tagged Security Flash Drive",
+				label = "Compromised cache evidence",
 			},
 			benefits = {
 				items = {
@@ -184,8 +215,8 @@ PLUGIN:Register("cleaner", {
 			name = "No Questions",
 			kind = "tracker",
 			requires = {"CL05"},
-			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
-			completion = "The deliveries are counted. No need to tell me about them twice.",
+			briefing = "Continue the circuit deliveries. Use the endpoint on the order.",
+			completion = "You've been consistent about finishing the drop.",
 			target = 5,
 			benefits = {},
 		},
@@ -194,17 +225,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 1050,
 			name = "The Missing Runner",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Garbage. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the runner's route recording from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"CL06"},
-			briefing = "Recover a runner's recorder at a freight route.",
-			completion = "Leave it. I'll check it later.",
+			briefing = (
+				"The runner's recording is still out along the freight route. I want what was recorded, including "
+				.. "the uninteresting part. Recover the runner's route recording from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Leave it. I'll listen without somebody explaining what I should hear.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Cleaner's note: "
+					.. "\"The runner's recording is still out along the freight route.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_tape",
-				label = "The Missing Runner - Handwritten Audio Cassette",
+				label = "Runner's route recording",
 			},
 			benefits = {},
 		},
@@ -214,8 +255,8 @@ PLUGIN:Register("cleaner", {
 			name = "Digging Deeper",
 			kind = "delivery",
 			requires = {"CL07"},
-			briefing = "Bring what's on the list. Leave it with me.",
-			completion = "Good. We're finished with that.",
+			briefing = "There's a supply order to fill. Read it before substituting something you already have.",
+			completion = "That's what I requested.",
 			requirements = {
 				{
 					pool = "basic_tools",
@@ -229,17 +270,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 1250,
 			name = "The Buried Register",
 			kind = "field",
-			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the distribution register from the assigned search area in Garbage. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"CL08"},
-			briefing = "Recover the distribution register from a hidden field site.",
-			completion = "Seal looks intact. Good.",
+			briefing = (
+				"I need the distribution register recovered. Too many people are relying on entries they haven't "
+				.. "looked at recently. Recover the distribution register from the assigned search area in Garbage. "
+				.. "Bring it back to me in Garbage."
+			),
+			completion = "That's the register. I'll keep the accounts together.",
 			field = {
+				description = (
+					"A clipboard carrying a densely printed packing list and a stamped mark. Cleaner's note: \"I need "
+					.. "the distribution register recovered.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_receipt",
-				label = "The Buried Register - Warehouse Packing List B",
+				label = "Distribution register",
 			},
 			benefits = {},
 		},
@@ -249,8 +300,8 @@ PLUGIN:Register("cleaner", {
 			name = "A Quiet Service",
 			kind = "tracker",
 			requires = {"CL09"},
-			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
-			completion = "The deliveries are counted. No need to tell me about them twice.",
+			briefing = "More sealed circuit work. Read the route before accepting it.",
+			completion = "The deliveries arrived. No further explanation needed.",
 			target = 9,
 			benefits = {},
 		},
@@ -259,17 +310,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 1450,
 			name = "The Duplicate Seal",
 			kind = "field",
-			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the duplicate-seal evidence from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"CL10"},
-			briefing = "Retrieve evidence from a second compromised drop.",
-			completion = "That's what I needed.",
+			briefing = (
+				"There's a second cache record to check. Similar seals don't save us the trouble of looking at "
+				.. "both. Recover the duplicate-seal evidence from the assigned search area in Garbage. Bring it back "
+				.. "to me in Garbage."
+			),
+			completion = "Good. I can compare the two without relying on somebody's description.",
 			field = {
+				description = (
+					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Cleaner's "
+					.. "note: \"There's a second cache record to check.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_evidence",
-				label = "The Duplicate Seal - Orange Evidence Case",
+				label = "Duplicate-seal evidence",
 			},
 			benefits = {
 				items = {
@@ -288,8 +349,8 @@ PLUGIN:Register("cleaner", {
 			name = "Safe and Dry",
 			kind = "delivery",
 			requires = {"CL11"},
-			briefing = "Bring what's on the list. Leave it with me.",
-			completion = "Put it there.",
+			briefing = "I need the supplies on this list. The delivery ends here.",
+			completion = "Fine. I'll put it away.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -304,17 +365,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 1650,
 			name = "Ledger's Missing Copy",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the freight copy for Ledger from the assigned search area in Garbage. Deliver it to "
+				.. "'Ledger' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"CL12"},
-			briefing = "Recover freight evidence from a regional cache.",
-			completion = "It arrived. Good. Leave the rest with me.",
+			briefing = (
+				"Ledger needs his missing freight copy. Deliver the original, then come back. He doesn't need a "
+				.. "courier's summary. Recover the freight copy for Ledger from the assigned search area in Garbage. "
+				.. "Deliver it to 'Ledger' in Waystation, then come back to me in Garbage."
+			),
+			completion = "He has it. That finishes your part of the delivery.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Cleaner's "
+					.. "note: \"Ledger needs his missing freight copy.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_manifest",
-				label = "Ledger's Missing Copy - Warehouse Packing List A",
+				label = "Freight copy for Ledger",
 				recipient = "ledger",
 			},
 			benefits = {},
@@ -325,15 +396,8 @@ PLUGIN:Register("cleaner", {
 			name = "Across the Boundary",
 			kind = "tracker",
 			requires = {"CL13"},
-			briefing = (
-				"Collect the parcel. Take it to the other drop. Leave it sealed. Keep doing the "
-				.. "deliveries as instructed. Changing the arrangement to make yourself comfortable leaves "
-				.. "somebody else wondering what happened."
-			),
-			completion = (
-				"The deliveries are counted. No need to tell me about them twice. Reliable work. No, "
-				.. "that doesn't mean you should start taking liberties with the next parcel."
-			),
+			briefing = "Keep completing the drop circuits. Familiarity doesn't change the destination.",
+			completion = "You've kept the arrangement straightforward.",
 			target = 14,
 			benefits = {},
 		},
@@ -342,17 +406,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 1850,
 			name = "The False Destination",
 			kind = "field",
-			objective = "Recover Tagged Security Flash Drive from the assigned search area in Garbage. Deliver it to"
-				.. " the assigned cache using Field work, then return here.",
+			objective = (
+				"Collect the corrected-route parcel at the assigned pickup in Garbage and deliver it to the "
+				.. "assigned cache. Come back to the issuing contact in Garbage."
+			),
 			requires = {"CL14"},
-			briefing = "Complete a delivery to a corrected cache endpoint.",
-			completion = "Seal looks intact. Good.",
+			briefing = (
+				"The parcel goes to the assigned cache endpoint. Use the destination on this order, not the one "
+				.. "someone remembers. Collect the corrected-route parcel at the assigned pickup in Garbage and "
+				.. "deliver it to the assigned cache. Come back to me in Garbage."
+			),
+			completion = "Delivered to the corrected endpoint. Fine. We can stop discussing the previous instruction.",
 			field = {
+				description = (
+					"A USB drive with a large rear loop and a handwritten paper label around its body. Cleaner's "
+					.. "note: \"The parcel goes to the assigned cache endpoint.\""
+				),
 				kind = "deadDrop",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_security",
-				label = "The False Destination - Tagged Security Flash Drive",
+				label = "Corrected-route parcel",
 			},
 			benefits = {},
 		},
@@ -362,8 +436,8 @@ PLUGIN:Register("cleaner", {
 			name = "A Better Reserve",
 			kind = "delivery",
 			requires = {"CL15"},
-			briefing = "Bring what's on the list. Leave it with me.",
-			completion = "That's enough.",
+			briefing = "Bring this lot through intact. No additional arrangements to make along the way.",
+			completion = "Received. Your part is finished.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -377,17 +451,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 2050,
 			name = "The Other Register",
 			kind = "field",
-			objective = "Recover Corporate Records Folder from the assigned search area in Waystation. Deliver it to"
-				.. " 'Ledger' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the distribution backup for Ledger from the assigned search area in Waystation. Deliver "
+				.. "it to 'Ledger' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"CL16"},
-			briefing = "Recover a distribution backup in Waystation territory.",
-			completion = "It arrived. Good. Leave the rest with me.",
+			briefing = (
+				"The backup register goes to Ledger. If the accounts disagree, he should have something more "
+				.. "useful than my opinion. Recover the distribution backup for Ledger from the assigned search area "
+				.. "in Waystation. Deliver it to 'Ledger' in Waystation, then come back to me in Garbage."
+			),
+			completion = "Delivered. I'll let him examine it before asking which entries need attention.",
 			field = {
+				description = (
+					"A blue records folder with contrasting corporate lettering along the cover. Cleaner's note: \"The "
+					.. "backup register goes to Ledger.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_archive",
-				label = "The Other Register - Corporate Records Folder",
+				label = "Distribution backup for Ledger",
 				recipient = "ledger",
 			},
 			benefits = {
@@ -407,8 +491,8 @@ PLUGIN:Register("cleaner", {
 			name = "Without a Trace",
 			kind = "tracker",
 			requires = {"CL17"},
-			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
-			completion = "The deliveries are counted. No need to tell me about them twice.",
+			briefing = "There are more circuits to complete. Keep the parcels closed.",
+			completion = "A reliable run of deliveries. I can work with that.",
 			target = 20,
 			benefits = {},
 		},
@@ -417,17 +501,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 2250,
 			name = "The Unmanned Depot",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the unmanned-depot case from the assigned search area in Pripyat. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"CL18"},
-			briefing = "Recover a case at a Pripyat supply cache.",
-			completion = "Leave it. I'll check it later.",
+			briefing = (
+				"There's a case at the Pripyat supply cache. Recover it intact. Don't improve the packaging to see "
+				.. "what's inside. Recover the unmanned-depot case from the assigned search area in Pripyat. Bring it "
+				.. "back to me in Garbage."
+			),
+			completion = "Case received. Leave it on that side.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Cleaner's note: \"There's a "
+					.. "case at the Pripyat supply cache.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_equipment",
-				label = "The Unmanned Depot - Striped Equipment Case",
+				label = "Unmanned-depot case",
 			},
 			benefits = {},
 		},
@@ -437,8 +531,8 @@ PLUGIN:Register("cleaner", {
 			name = "Nobody's Spare Key",
 			kind = "delivery",
 			requires = {"CL19"},
-			briefing = "Bring what's on the list. Leave it with me.",
-			completion = "Good. We're finished with that.",
+			briefing = "Bring the listed supplies here. Keep them separate from your own equipment.",
+			completion = "Received. Put them on that side.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -452,17 +546,26 @@ PLUGIN:Register("cleaner", {
 			completionCash = 2450,
 			name = "A Cache With Two Owners",
 			kind = "field",
-			objective = "Recover Corporate Letter from the assigned search area in Pripyat. Return it to this contact"
-				.. " to finish the assignment.",
+			objective = (
+				"Recover the cache ownership file from the assigned search area in Pripyat. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"CL20"},
-			briefing = "Recover the cache ownership record in Pripyat.",
-			completion = "Seal looks intact. Good.",
+			briefing = (
+				"I need the ownership record. Two people saying mine doesn't make two separate caches. Recover the "
+				.. "cache ownership file from the assigned search area in Pripyat. Bring it back to me in Garbage."
+			),
+			completion = "I'll read the claims. Nobody gets an answer before that.",
 			field = {
+				description = (
+					"A creased printed letter with a corporate mark and several small blocks of text. Cleaner's note: "
+					.. "\"I need the ownership record.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_contract",
-				label = "A Cache With Two Owners - Corporate Letter",
+				label = "Cache ownership file",
 			},
 			benefits = {},
 		},
@@ -472,8 +575,8 @@ PLUGIN:Register("cleaner", {
 			name = "The Last Circuit",
 			kind = "tracker",
 			requires = {"CL21"},
-			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
-			completion = "The deliveries are counted. No need to tell me about them twice.",
+			briefing = "Continue the assigned circuits. Return after the delivery is finished.",
+			completion = "You've done the work over time. That's what I judge.",
 			target = 27,
 			benefits = {},
 		},
@@ -482,17 +585,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 2650,
 			name = "The Burned Address",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the last routing record from the assigned search area in Pripyat. Bring it back to the "
+				.. "issuing contact in Garbage."
+			),
 			requires = {"CL22"},
-			briefing = "Recover the final routing record in Pripyat.",
-			completion = "That's what I needed.",
+			briefing = (
+				"Bring back the routing record from Pripyat. Keep the address pages with it; they are the reason "
+				.. "for the trip. Recover the last routing record from the assigned search area in Pripyat. Bring it "
+				.. "back to me in Garbage."
+			),
+			completion = "Good. I can trace the route from the papers now.",
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. Cleaner's note: \"Bring back "
+					.. "the routing record from Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_official",
-				label = "The Burned Address - Official File Folder",
+				label = "Last routing record",
 			},
 			benefits = {
 				items = {
@@ -511,8 +624,8 @@ PLUGIN:Register("cleaner", {
 			name = "Room to Keep It",
 			kind = "delivery",
 			requires = {"CL23", "CL24"},
-			briefing = "Bring what's on the list. Leave it with me.",
-			completion = "Put it there.",
+			briefing = "There's a supply order to fill. Read it before substituting something you already have.",
+			completion = "That's what I requested.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -526,17 +639,27 @@ PLUGIN:Register("cleaner", {
 			completionCash = 2850,
 			name = "The Cache That Stayed Closed",
 			kind = "field",
-			objective = "Recover Orange Evidence Case from the assigned search area in Garbage. Deliver it to the"
-				.. " assigned cache using Field work, then return here.",
+			objective = (
+				"Collect the final sealed circuit parcel at the assigned pickup in Garbage and deliver it to the "
+				.. "assigned cache. Come back to the issuing contact in Garbage."
+			),
 			requires = {"CL25"},
-			briefing = "Complete the network's last sealed delivery.",
-			completion = "Leave it. I'll check it later.",
+			briefing = (
+				"One more sealed circuit delivery. Finish the drop before coming back for the account to be "
+				.. "closed. Collect the final sealed circuit parcel at the assigned pickup in Garbage and deliver it "
+				.. "to the assigned cache. Come back to me in Garbage."
+			),
+			completion = "Delivery finished. You've been consistent. I have work for people who can stay that way.",
 			field = {
+				description = (
+					"A compact hard case with orange panels, dark protective ribs and a carrying handle. Cleaner's "
+					.. "note: \"One more sealed circuit delivery.\""
+				),
 				kind = "deadDrop",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_evidence",
-				label = "The Cache That Stayed Closed - Orange Evidence Case",
+				label = "Final sealed circuit parcel",
 			},
 			benefits = {},
 		},
@@ -546,8 +669,8 @@ PLUGIN:Register("cleaner", {
 			name = "Trusted With the Route",
 			kind = "tracker",
 			requires = {"CL26"},
-			briefing = "Collect the parcel. Take it to the other drop. Leave it sealed.",
-			completion = "The deliveries are counted. No need to tell me about them twice.",
+			briefing = "More drop circuits when you're prepared. The same delivery terms apply.",
+			completion = "You've earned my confidence in the work. Keep it that way.",
 			target = 35,
 			benefits = {},
 		},
@@ -556,23 +679,30 @@ PLUGIN:Register("cleaner", {
 			completionCash = 3000,
 			name = "No More Missing Parcels",
 			kind = "field",
-			objective = "Recover Warehouse Packing List B from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the closing freight manifest from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"CL27"},
 			briefing = (
-				"Recover closure evidence from the supply route and return. Bring the packing list back complete. "
-				.. "A missing line is enough to leave an argument open. I'd like this one finished."
+				"I need the final packing list complete. One missing line leaves a useful excuse for another "
+				.. "argument. Recover the closing freight manifest from the assigned search area in Garbage. Bring it "
+				.. "back to me in Garbage."
 			),
 			completion = (
-				"Seal looks intact. Good. That covers it. You did the work without making it everybody's business. "
-				.. "That's why I kept giving you work. Take the compliment; I'm not repeating it."
+				"Leave it here. The account can be checked all the way through now. You've done what I asked; I'm "
+				.. "satisfied with the arrangement."
 			),
 			field = {
+				description = (
+					"A clipboard carrying a densely printed packing list and a stamped mark. Cleaner's note: \"I need "
+					.. "the final packing list complete.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_receipt",
-				label = "No More Missing Parcels - Warehouse Packing List B",
+				label = "Closing freight manifest",
 			},
 			benefits = {},
 			recognition = "Cleaner's trusted contact",

@@ -22,10 +22,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "How did you end up at the radio?",
 	response = (
-		"I keep listening. You remember a voice after enough late check-ins. You remember it more when "
-		.. "it stops calling."
+		"I was the one who didn't mind staying to listen. Then everyone knew where to call, and leaving "
+		.. "became awkward. I like it, mostly. You learn who clears their throat before speaking, who calls "
+		.. "only when something is wrong, who has absolutely no reason to call and does anyway. The trouble is "
+		.. "sleeping afterwards. Someone says 'I'll try again later' and part of you stays awake to hear them. "
+		.. "Sorry. Have we met? If I've heard your voice before, it'll come to me."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -50,7 +53,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "Hold on. That's a voice I haven't heard in a while.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -66,26 +69,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Keep in touch.",
+	response = "Good journey. Nice to hear a voice without the static for once.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Does anyone call just to talk?",
 	response = (
-		"Oh, constantly. Weather, boots, somebody else's terrible cooking. One fellow described a whole "
-		.. "card game to me because nobody at his table would listen. You complain about it, then he misses "
-		.. "a check-in and you'd happily hear every hand again. Sit down, if you've got a minute. Tell me "
-		.. "something ordinary."
+		"Constantly. Boots, weather, a card game in terrible detail. One fellow kept telling me what he "
+		.. "should have played after the hand was finished. I could barely keep my eyes open. Next evening I "
+		.. "caught myself hoping he'd call. There's a long stretch between checking equipment and deciding you "
+		.. "might as well go to bed. Ordinary nonsense fills it quite nicely. If you've got some, take a seat."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What do you do when you stop hearing someone?",
+	statement = "What happens when someone stops calling?",
 	response = (
-		"Check before I decide what it means. Equipment fails. People change their plans. Wake "
-		.. "understands why I won't call silence an answer. We compare what we know and what we only heard "
-		.. "from somebody else. Doesn't make the waiting much easier for either of us."
+		"I check the equipment, then ask who last heard them. People change plans. Batteries fail. Sometimes "
+		.. "the person waiting for a call was the one who wrote the time down wrong. Wake helps me separate "
+		.. "what I heard myself from what somebody thinks they remember. I won't call silence an answer. "
+		.. "Doesn't mean I don't sit here trying to hear one."
 	),
 	options = {"BackTopic"},
 })

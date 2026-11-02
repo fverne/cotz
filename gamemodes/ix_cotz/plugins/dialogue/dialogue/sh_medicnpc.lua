@@ -18,7 +18,7 @@ DIALOGUE.addTopic("GREETING", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else.",
-	response = "What would you like to know?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -32,7 +32,7 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you!",
-	response = "Take care, STALKER...",
+	response = "Take care. Of yourself, I mean. Not just the supplies.",
 })
 
 DIALOGUE.addTopic("HealTopic", {
@@ -103,20 +103,22 @@ DIALOGUE.addTopic("NotEnoughMoneyHeal", {
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Are you always this nervous?",
 	response = (
-		"When there's nothing to do, yes. Plenty of time to think of what I've missed. When someone "
-		.. "comes in hurt, there's an order to things. I know the order. It's afterwards I start wondering "
-		.. "whether I should have— Anyway. Are you here because something hurts, or are we discussing my "
-		.. "charming manner?"
+		"You've caught me between things. That's the worst time. Someone comes through the door bleeding, I "
+		.. "can ask questions, wash my hands, start doing something useful. An empty doorway gives me rather "
+		.. "more possibilities. I rearranged that shelf yesterday because I thought the dressings would be "
+		.. "easier to reach. Spent this morning reaching where they used to be. Very productive improvement. "
+		.. "You can sit down, incidentally. You don't have to stand there waiting for me to become reassuring."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What helps you settle down?",
+	statement = "Want me to leave you to your work?",
 	response = (
-		"Clean water. Food while it's still warm. Someone else saying they've checked the door or "
-		.. "counted a shelf, and actually having done it. Gasket and Lemon can both be impossible, but they "
-		.. "remember those things. I don't have to think of absolutely everything myself."
+		"No, you're all right. Just tell me if you actually need treatment. I've been known to mistake "
+		.. "politeness for a symptom. Otherwise we can talk for a moment. Gasket was telling me about a "
+		.. "perfectly ordinary repair earlier. I understood perhaps half of it. Rather enjoyed having something "
+		.. "I didn't need to understand completely. He seemed surprised when I asked him to finish."
 	),
 	options = {"BackTopic"},
 })

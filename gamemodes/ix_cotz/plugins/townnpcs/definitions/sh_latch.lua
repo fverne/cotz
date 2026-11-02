@@ -57,18 +57,19 @@ PLUGIN:Register("latch", {
 			"Come in. You've earned the right to stand beside the bench without me wondering what "
 			.. "useless weight you've brought."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the salvage order.",
+		offerPrompt = "Do you need workshop salvage?",
 		work = (
-			"Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust. Leave the "
-			.. "useless weight where you find it. I need workable salvage, and you need your back for the next "
-			.. "trip."
+			"Mechanical salvage, tools, stock worth working with. Pick an order and read it before hauling a "
+			.. "sack across the region. If you don't know what you're looking at, ask while we're beside the "
+			.. "bench. I can explain a part here more easily than you can carry a useless one home."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What are you trying to put together?",
 		progression = (
-			"Parts first. Then there are machinery records worth recovering. Might stop us dragging back the "
-			.. "wrong thing. I'll sort the material if you bring it in. The older records need fetching too; a "
-			.. "proper specification can save a lot of cutting and swearing."
+			"I want to sort useful stock and compare the machinery records with the surviving pieces. Work "
+			.. "before claims. A good drawing doesn't mean the assembly matches it, and a rusty part isn't "
+			.. "automatically finished. We'll take a manageable request first. Any delivery to another workshop is "
+			.. "written on its order; come back after the handover."
 		),
 	},
 	catalogue = {
@@ -121,17 +122,27 @@ PLUGIN:Register("latch", {
 			completionCash = 450,
 			name = "The Missing Inventory",
 			kind = "field",
-			objective = "Recover Warehouse Packing List A from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the sorting-yard stock journal from the assigned search area in Garbage. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"LA01"},
-			briefing = "Recover a sorting-yard inventory in Garbage.",
-			completion = "Let's see the markings.",
+			briefing = (
+				"I want the sorting-yard inventory. Hard to recover useful stock when everyone remembers a "
+				.. "different pile. Recover the sorting-yard stock journal from the assigned search area in Garbage. "
+				.. "Bring it back to me in Garbage."
+			),
+			completion = "Put it where the filings won't get into it. I'll see how they sorted the stock.",
 			field = {
+				description = (
+					"A printed packing list on a small clipboard with a metal clip and a circular stamp. Latch's "
+					.. "note: \"I want the sorting-yard inventory.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_manifest",
-				label = "The Missing Inventory - Warehouse Packing List A",
+				label = "Sorting-yard stock journal",
 			},
 			benefits = {},
 		},
@@ -141,8 +152,8 @@ PLUGIN:Register("latch", {
 			name = "Worth Picking Up",
 			kind = "tracker",
 			requires = {"LA02"},
-			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
-			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
+			briefing = "Keep the industrial salvage deliveries coming. Useful pieces and tools, matched to the order.",
+			completion = "A good start. You haven't confused weight with usefulness.",
 			target = 2,
 			benefits = {},
 		},
@@ -151,17 +162,26 @@ PLUGIN:Register("latch", {
 			completionCash = 650,
 			name = "The Broken Bench",
 			kind = "field",
-			objective = "Recover Stickered Tool Case from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the bench tool kit from the assigned search area in Garbage. Bring it back to the issuing "
+				.. "contact in Garbage."
+			),
 			requires = {"LA03"},
-			briefing = "Recover a workshop tool case from wreckage.",
-			completion = "Set it down. I'll open it.",
+			briefing = (
+				"A workshop case is worth looking for. A decent tool can outlast the bench it was left on. Recover "
+				.. "the bench tool kit from the assigned search area in Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Let's see the tools before anyone decides which ones they need to borrow.",
 			field = {
+				description = (
+					"A handled tool case covered in bright stickers and contrasting printed decoration. Latch's note: "
+					.. "\"A workshop case is worth looking for.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_tools",
-				label = "The Broken Bench - Stickered Tool Case",
+				label = "bench tool kit",
 			},
 			benefits = {},
 		},
@@ -171,8 +191,11 @@ PLUGIN:Register("latch", {
 			name = "Useful Steel",
 			kind = "delivery",
 			requires = {"LA04"},
-			briefing = "This is what I need. Check its condition before you haul it back.",
-			completion = "That's sound enough.",
+			briefing = (
+				"Bring the listed workshop supplies here. I'd like to work with the proper pieces rather than keep "
+				.. "adapting around a shortage."
+			),
+			completion = "Good. I'll sort them before they become another mixed pile.",
 			requirements = {
 				{
 					pool = "basic_tools",
@@ -186,17 +209,27 @@ PLUGIN:Register("latch", {
 			completionCash = 850,
 			name = "A Machine With a Number",
 			kind = "field",
-			objective = "Recover Red-Trimmed Control Unit from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the machine identification file from the assigned search area in Garbage. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"LA04"},
-			briefing = "Retrieve a machinery identification plate.",
-			completion = "Good. This deserves a proper look.",
+			briefing = (
+				"I want the machinery identification record. Guessing from the outside wastes time once you start "
+				.. "looking for parts. Recover the machine identification file from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "There. Something we can check against the machine instead of recognising it by argument.",
 			field = {
+				description = (
+					"A finned grey control box with a red stripe and several round front connectors. Latch's note: \"I "
+					.. "want the machinery identification record.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_control",
-				label = "A Machine With a Number - Red-Trimmed Control Unit",
+				label = "Machine identification file",
 			},
 			benefits = {
 				items = {
@@ -219,8 +252,8 @@ PLUGIN:Register("latch", {
 			name = "Sorted Properly",
 			kind = "tracker",
 			requires = {"LA05"},
-			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
-			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
+			briefing = "Continue the salvage orders. Check the working surfaces before declaring a piece worth carrying.",
+			completion = "You've brought usable stock. That saves time at this end.",
 			target = 5,
 			benefits = {},
 		},
@@ -230,17 +263,27 @@ PLUGIN:Register("latch", {
 			completionCash = 1050,
 			name = "The Borrowed Specification",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Garbage. Deliver it to"
-				.. " 'Technut' in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the assembly drawing for Technut from the assigned search area in Garbage. Deliver it to "
+				.. "'Technut' in Marsh, then come back to the issuing contact in Garbage."
+			),
 			requires = {"LA06"},
-			briefing = "Recover an assembly drawing near an industrial cache.",
-			completion = "Right. Now they can look at the actual thing instead of guessing what I meant.",
+			briefing = (
+				"Technut should have the assembly drawing himself. He'll notice details I might leave out "
+				.. "describing it. Recover the assembly drawing for Technut from the assigned search area in Garbage. "
+				.. "Deliver it to 'Technut' in Marsh, then come back to me in Garbage."
+			),
+			completion = "He's got it? Good. If he wants to propose alterations, he can at least begin with the original.",
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. Latch's note: \"Technut should "
+					.. "have the assembly drawing himself.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_official",
-				label = "The Borrowed Specification - Official File Folder",
+				label = "Assembly drawing for Technut",
 				recipient = "technut",
 			},
 			benefits = {},
@@ -251,8 +294,8 @@ PLUGIN:Register("latch", {
 			name = "Moving Parts",
 			kind = "delivery",
 			requires = {"LA07"},
-			briefing = "This is what I need. Check its condition before you haul it back.",
-			completion = "Good. Somebody checked before carrying it.",
+			briefing = "There's another supply list. Check what will actually serve the job before hauling it over.",
+			completion = "That will do the work. Put it on the clear end.",
 			requirements = {
 				{
 					pool = "workshop_supplies",
@@ -266,17 +309,27 @@ PLUGIN:Register("latch", {
 			completionCash = 1250,
 			name = "The Wrong Replacement",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the failed replacement component from the assigned search area in Garbage. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"LA08"},
-			briefing = "Recover a failed component case for comparison.",
-			completion = "Set it down. I'll open it.",
+			briefing = (
+				"I want the failed replacement kept as it was found. Someone calling it defective doesn't explain "
+				.. "how it was fitted. Recover the failed replacement component from the assigned search area in "
+				.. "Garbage. Bring it back to me in Garbage."
+			),
+			completion = "Leave it assembled. I'll look at the wear before I move anything.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Latch's note: \"I want the "
+					.. "failed replacement kept as it was found.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_equipment",
-				label = "The Wrong Replacement - Striped Equipment Case",
+				label = "Failed replacement component",
 			},
 			benefits = {},
 		},
@@ -286,8 +339,8 @@ PLUGIN:Register("latch", {
 			name = "More Than Scrap",
 			kind = "tracker",
 			requires = {"LA09"},
-			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
-			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
+			briefing = "More salvage deliveries. I'd like the yard supplied while I inspect the machinery records.",
+			completion = "That's been steady work. I can make room for what you bring without expecting a surprise.",
 			target = 9,
 			benefits = {},
 		},
@@ -296,24 +349,27 @@ PLUGIN:Register("latch", {
 			completionCash = 1450,
 			name = "The Old Workshop",
 			kind = "field",
-			objective = "Recover Tied Leather Journal from the assigned search area in Garbage. Deliver it to"
-				.. " 'Technut' in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the workshop repair ledger from the assigned search area in Garbage. Deliver it to "
+				.. "'Technut' in Marsh, then come back to the issuing contact in Garbage."
+			),
 			requires = {"LA10"},
 			briefing = (
-				"Retrieve an engineer's repair ledger in regional ruins. Check what can be recovered "
-				.. "before committing yourself to a heavy load. You don't have to impress me with the "
-				.. "weight of it."
+				"The repair ledger goes to Technut. I'd like another pair of eyes on the old workshop methods. "
+				.. "Recover the workshop repair ledger from the assigned search area in Garbage. Deliver it to "
+				.. "'Technut' in Marsh, then come back to me in Garbage."
 			),
-			completion = (
-				"Right. Now they can look at the actual thing instead of guessing what I meant. Right. "
-				.. "I'll see what we can learn from this before I start pulling anything else apart."
-			),
+			completion = "Good. He can read it without me hovering and explaining what he ought to notice.",
 			field = {
+				description = (
+					"A thick brown journal held together by a narrow tie around its cover. Latch's note: \"The repair "
+					.. "ledger goes to Technut.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_notebook",
-				label = "The Old Workshop - Tied Leather Journal",
+				label = "Workshop repair ledger",
 				recipient = "technut",
 			},
 			benefits = {
@@ -333,8 +389,11 @@ PLUGIN:Register("latch", {
 			name = "Heavy Work",
 			kind = "delivery",
 			requires = {"LA11"},
-			briefing = "This is what I need. Check its condition before you haul it back.",
-			completion = "Useful. Put it by the bench.",
+			briefing = (
+				"I need the requested material for the bench work. Don't damage useful pieces packing them around "
+				.. "heavier scrap."
+			),
+			completion = "Thanks. I'll keep this apart from the rough stock.",
 			requirements = {
 				{
 					pool = "fasteners",
@@ -349,17 +408,27 @@ PLUGIN:Register("latch", {
 			completionCash = 1650,
 			name = "The Precision Crate",
 			kind = "field",
-			objective = "Recover Stickered Tool Case from the assigned search area in Waystation. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the precision machinery case from the assigned search area in Waystation. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"LA12"},
-			briefing = "Recover a machinery case in Waystation territory.",
-			completion = "Let's see the markings.",
+			briefing = (
+				"A machinery case is still out in Waystation territory. I want to inspect what's survived before "
+				.. "writing it off. Recover the precision machinery case from the assigned search area in Waystation. "
+				.. "Bring it back to me in Garbage."
+			),
+			completion = "That's the case. I'll check the contents on a clear bench.",
 			field = {
+				description = (
+					"A handled tool case covered in bright stickers and contrasting printed decoration. Latch's note: "
+					.. "\"A machinery case is still out in Waystation territory.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_tools",
-				label = "The Precision Crate - Stickered Tool Case",
+				label = "Precision machinery case",
 			},
 			benefits = {},
 		},
@@ -369,8 +438,8 @@ PLUGIN:Register("latch", {
 			name = "A Working Yard",
 			kind = "tracker",
 			requires = {"LA13"},
-			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
-			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
+			briefing = "Keep filling the salvage requests. There's ordinary work left after the interesting finds.",
+			completion = "You've kept at the sorting as well as the carrying. Good.",
 			target = 14,
 			benefits = {},
 		},
@@ -379,17 +448,28 @@ PLUGIN:Register("latch", {
 			completionCash = 1850,
 			name = "Where It Was Built",
 			kind = "field",
-			objective = "Recover Corporate Records Folder from the assigned search area in Pripyat. Deliver it to"
-				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the manufacturing records for Carbon from the assigned search area in Pripyat. Deliver it "
+				.. "to 'Carbon' in Waystation, then come back to the issuing contact in Garbage."
+			),
 			requires = {"LA14"},
-			briefing = "Recover manufacturing records from a Pripyat service site.",
-			completion = "Right. Now they can look at the actual thing instead of guessing what I meant.",
+			briefing = (
+				"Carbon can compare the manufacturing papers with other records. I want the history checked before "
+				.. "it becomes another workshop certainty. Recover the manufacturing records for Carbon from the "
+				.. "assigned search area in Pripyat. Deliver it to 'Carbon' in Waystation, then come back to me in "
+				.. "Garbage."
+			),
+			completion = "He has the file. We'll let him read it rather than supply the answer for him.",
 			field = {
+				description = (
+					"A blue records folder with contrasting corporate lettering along the cover. Latch's note: "
+					.. "\"Carbon can compare the manufacturing papers with other records.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_archive",
-				label = "Where It Was Built - Corporate Records Folder",
+				label = "Manufacturing records for Carbon",
 				recipient = "carbon",
 			},
 			benefits = {},
@@ -400,8 +480,11 @@ PLUGIN:Register("latch", {
 			name = "Parts Worth Carrying",
 			kind = "delivery",
 			requires = {"LA15"},
-			briefing = "This is what I need. Check its condition before you haul it back.",
-			completion = "That's sound enough.",
+			briefing = (
+				"Bring the supplies on this order. I'd like the preparation finished before I start assembling "
+				.. "anything."
+			),
+			completion = "All here. I can get on with the bench work now.",
 			requirements = {
 				{
 					pool = "basic_tools",
@@ -415,17 +498,27 @@ PLUGIN:Register("latch", {
 			completionCash = 2050,
 			name = "The Last Bearing",
 			kind = "field",
-			objective = "Recover Striped Equipment Case from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the specialist bearing case from the assigned search area in Pripyat. Bring it back to "
+				.. "the issuing contact in Garbage."
+			),
 			requires = {"LA16"},
-			briefing = "Recover a specialist machinery case in Pripyat.",
-			completion = "Good. This deserves a proper look.",
+			briefing = (
+				"There's a specialist component case to recover. I'd rather inspect the proper part than spend "
+				.. "another week making near enough fit. Recover the specialist bearing case from the assigned search "
+				.. "area in Pripyat. Bring it back to me in Garbage."
+			),
+			completion = "Keep the fittings together. I'll measure it before anybody starts celebrating.",
 			field = {
+				description = (
+					"A low hard case with long contrasting strips across its ribbed lid. Latch's note: \"There's a "
+					.. "specialist component case to recover.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_equipment",
-				label = "The Last Bearing - Striped Equipment Case",
+				label = "Specialist bearing case",
 			},
 			benefits = {
 				services = {
@@ -443,8 +536,8 @@ PLUGIN:Register("latch", {
 			name = "Nothing Wasted",
 			kind = "tracker",
 			requires = {"LA17", "LA18"},
-			briefing = "Mechanical salvage. Check the part before hauling it back; I can't mend a sack of rust.",
-			completion = "You've kept useful parts coming. I can tell you're looking before you pick things up.",
+			briefing = "Continue the workshop salvage orders. I want a reserve I can use, not a heap to argue over.",
+			completion = "You've given the bench work some breathing room. I appreciate it.",
 			target = 20,
 			benefits = {},
 		},
@@ -453,17 +546,27 @@ PLUGIN:Register("latch", {
 			completionCash = 2250,
 			name = "The Load Test",
 			kind = "field",
-			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0013."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
+				.. "machinery load-test recorder. Bring it back to the issuing contact in Garbage."
+			),
 			requires = {"LA19"},
-			briefing = "Deploy and retrieve a machinery recorder at its source site.",
-			completion = "Let's see the markings.",
+			briefing = (
+				"I want a recording from the machinery survey. An encouraging sound isn't much of a test. Deploy "
+				.. "the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
+				.. "machinery load-test recorder. Bring it back to me in Garbage."
+			),
+			completion = "All right. I'll go through the record before deciding what we can ask the assembly to do.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Latch's note: "
+					.. "\"I want a recording from the machinery survey.\""
+				),
 				kind = "sensor",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_module",
-				label = "The Load Test - Numbered Data Module 0013",
+				label = "Machinery load-test recorder",
 			},
 			benefits = {},
 			stock = {
@@ -477,8 +580,11 @@ PLUGIN:Register("latch", {
 			name = "Ready for Assembly",
 			kind = "delivery",
 			requires = {"LA20"},
-			briefing = "This is what I need. Check its condition before you haul it back.",
-			completion = "Good. Somebody checked before carrying it.",
+			briefing = (
+				"Bring the listed workshop supplies here. I'd like to work with the proper pieces rather than keep "
+				.. "adapting around a shortage."
+			),
+			completion = "Good. I'll sort them before they become another mixed pile.",
 			requirements = {
 				{
 					pool = "workshop_supplies",
@@ -493,23 +599,30 @@ PLUGIN:Register("latch", {
 			completionCash = 2450,
 			name = "The Commissioning Plate",
 			kind = "field",
-			objective = "Recover Official File Folder from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the machine commissioning papers from the assigned search area in Garbage. Bring it back "
+				.. "to the issuing contact in Garbage."
+			),
 			requires = {"LA21"},
 			briefing = (
-				"Recover the machine's commissioning evidence and return. Keep the commissioning papers together. "
-				.. "I want to see what was actually specified before I start congratulating anyone's workmanship."
+				"The commissioning record should show what they intended this machine to handle. I want that "
+				.. "beside our repair notes. Recover the machine commissioning papers from the assigned search area "
+				.. "in Garbage. Bring it back to me in Garbage."
 			),
 			completion = (
-				"Set it down. I'll open it. Right. That's something solid to work from. People see rust and decide "
-				.. "the whole lot's finished. You've been willing to look a bit closer. I appreciate that."
+				"Leave the papers here. You've done the carrying and the fetching without losing interest halfway "
+				.. "through. That's work I'd be pleased to share a bench over."
 			),
 			field = {
+				description = (
+					"A cardboard file folder with a small coloured crest on its cover. Latch's note: \"The "
+					.. "commissioning record should show what they intended this machine to handle.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_official",
-				label = "The Commissioning Plate - Official File Folder",
+				label = "Machine commissioning papers",
 			},
 			benefits = {},
 			recognition = "Latch's trusted contact",

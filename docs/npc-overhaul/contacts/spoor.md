@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Implemented voice direction — November 2026
+
+Quiet tracker who enjoys observation outside a paid hunt. He can admit a mistaken interpretation and leave uncertain ground unresolved; avoid turning every answer into an aphorism or trophy-hunting rebuke.
+
+Personal conversations, work explanations, and commission text live in the linked runtime definitions.
+Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
+prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

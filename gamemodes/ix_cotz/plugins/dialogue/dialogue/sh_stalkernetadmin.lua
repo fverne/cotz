@@ -22,24 +22,34 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Well... What's that on the table?",
-	response = (" ** The man hides the object behind his hands, shielding " .. "it from your view. **"),
+	statement = "What are you working on?",
+	response = (
+		"** He covers the open device with one hand. His eyes move to your PDA, then back to you. After a "
+		.. "moment, he takes a loose switch from the bench and presses it. Nothing happens. He presses it "
+		.. "again, harder, then looks at you expectantly. **"
+	),
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Right.",
-	response = " ** He looks down a bit.",
+	statement = "Is that what we look like when the network goes down?",
+	response = (
+		"** His mouth shifts slightly. He sets the switch aside and retrieves his screwdriver. The hand "
+		.. "covering the device remains where it is. **"
+	),
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "Eeh, Can you tell me something interesting?",
-	response = "...",
+	statement = "Would you rather I stayed quiet?",
+	response = (
+		"** He considers you, then moves a stool clear of the trailing leads. A tap on the seat, followed by "
+		.. "a finger laid briefly against his lips. **"
+	),
 	options = {
 		"BackTopic",
 	},
@@ -104,7 +114,7 @@ DIALOGUE.addTopic("RandomizePDAAvatarTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "So, anyways...",
-	response = "...",
+	response = "** He sets the screwdriver down and looks up. **",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -121,25 +131,24 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = " ** He nods frantically.",
+	response = "** He lifts two fingers from the bench in acknowledgement, then bends over the device again. **",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Can I watch?",
 	response = (
-		"** He looks from you to the open device. After a moment, he moves a stool away from the loose "
-		.. "components and taps its seat. ** ** You reach towards the bench. One finger rises. He waits "
-		.. "until your hand is back in your lap, then turns the device slightly so you can see. **"
+		"** He looks from you to the open device. After a pause, he turns it slightly. When his hand moves "
+		.. "away, the small components are visible in separate trays. He touches the rim of an empty tray, then "
+		.. "rests one finger across it and waits. **"
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Should I leave the tools alone?",
+	statement = "I can leave the tools alone.",
 	response = (
-		"** He gives you a level look, then moves an empty tray between you and the work. After a pause, "
-		.. "he places one loose screw in it and nudges it towards you. He watches until you set it down, "
-		.. "then returns to the device. **"
+		"** He gives a small nod and returns to work. A screw rolls towards the edge; he catches it without "
+		.. "looking up. After a moment he slides the tray underneath it, within easy reach, and continues. **"
 	),
 	options = {"BackTopic"},
 })

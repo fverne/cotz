@@ -19,10 +19,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "You worked in a depot?",
 	response = (
-		"I kept depot records. Still do. Ammunition doesn't become the right calibre because somebody "
-		.. "wrote nearly the right number on the box."
+		"Kept the stock and the records. Mostly ordinary work: damp packaging, bad totals, a box nobody "
+		.. "admits moving. You learn to check before accusing someone. Once you've made a public fuss over your "
+		.. "own addition, the lesson stays with you. Here I still count what arrives and what leaves. People "
+		.. "call it fussy until they're the person waiting for the last box. Then they'd like me to remember "
+		.. "every round personally."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -47,7 +50,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "Put the boxes down. We'll count them before we discuss payment.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -63,25 +66,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Count what you have before you leave.",
+	response = "Take your copy. Good journey.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "You think I'm shorting you?",
+	statement = "You think I would short you?",
 	response = (
-		"Haven't counted yet. You may have brought too much. People make that mistake as well, though "
-		.. "they're less offended when I notice. Put your total here beside mine. If they differ, we count "
-		.. "again. Nobody needs a character assessment over a pencil mark."
+		"Haven't counted yet. You may have brought too much. Happens often enough, particularly when someone "
+		.. "packed in a hurry. Put your total beside mine. If they differ, we go through it again. You don't "
+		.. "need to explain what sort of person you are while I'm holding a pencil. I'd rather settle the "
+		.. "number and pay you for what actually arrived."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Doesn't that make people think you distrust them?",
+	statement = "Would you tell me if I brought too much?",
 	response = (
-		"Some of them. Quartermaster understands. If we both count it, neither has to remember how "
-		.. "convincing the other fellow sounded. Honest suppliers tend to get used to it quickly. Once we "
-		.. "agree what's there, I know what I can promise the next person."
+		"Of course. If I keep quiet, I spend the next delivery wondering whether you noticed. Then you check "
+		.. "my payment, I check your explanation, and a simple transaction takes half the morning. "
+		.. "Quartermaster and I have enough to disagree over without adding that. Count it, correct it, get on "
+		.. "with the day."
 	),
 	options = {"BackTopic"},
 })

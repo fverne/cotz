@@ -22,10 +22,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "How did you start doing recovery work?",
 	response = (
-		"I keep track of people who don't come back. Sometimes we find them. Sometimes we find enough "
-		.. "to stop making somebody wait."
+		"Someone had a last location and nobody to ask. I helped write down what they knew. There were other "
+		.. "names afterwards. I don't have a special talent for saying the right thing. Usually I ask a small "
+		.. "question and let the person finish answering it. Sometimes what comes back is enough to identify a "
+		.. "journey. Sometimes all we have is a bag that belongs to someone who isn't here to collect it. It "
+		.. "still needs looking after."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -50,7 +53,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "A name, a last location, anything they were carrying. Start there.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -66,25 +69,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Let someone know you made it back.",
+	response = "Take care on the way. You can come back to talk.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What if I can't explain a disappearance properly?",
+	statement = "What if I cannot explain a disappearance?",
 	response = (
-		"We can do it slowly. Start with the last time you spoke to them yourself. Anything you heard "
-		.. "afterwards, we'll write separately. You don't have to make it sound sensible before you tell "
-		.. "me. That's part of what we're here to work out."
+		"We can take our time. Begin with the last conversation you had yourself. Put what you heard later "
+		.. "to one side; we'll come to that. You don't need to make the whole account fit before telling me. "
+		.. "People often leave out a detail because it sounds foolish, or because they're afraid it will make "
+		.. "somebody angry. I'd rather hear it in your words while you still remember how uncertain you were."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Can you promise you'll find them?",
+	statement = "Can you promise to find them?",
 	response = (
-		"No. I can promise to take the information seriously and be careful with what comes back. A last "
-		.. "location from someone who saw them is different from a story passed round a table. Both can "
-		.. "help, provided we don't dress one up as the other."
+		"No. I can promise to take the information seriously and handle what returns carefully. You can ask "
+		.. "me to stop reading something personal while you're here. You can come back another day. I won't "
+		.. "decide what a possession ought to mean to you. And I won't ask you to call a disappearance settled "
+		.. "because an incomplete answer would make the paperwork easier."
 	),
 	options = {"BackTopic"},
 })

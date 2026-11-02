@@ -21,12 +21,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What is this place?",
+	statement = "What are you studying here?",
 	response = (
-		"A research station. Some details are restricted, but you don't need a clearance to understand "
-		.. "why I want the samples left alone. One careless hand can give me a week's worth of consistent "
-		.. "rubbish, and then somebody makes a decision based on it. Ask if you're curious; just don't "
-		.. "open anything while we talk."
+		"Changes in the conditions outside. An unhelpfully broad answer, I know. We take a reading, compare "
+		.. "it with a control, then try to discover which of our assumptions accompanied us into the result. "
+		.. "The interesting part often begins when two careful people disagree. The tiresome part is persuading "
+		.. "everyone to keep the original notes long enough to find out why. You may ask about the work. Just "
+		.. "leave the containers shut while we discuss it; I become much less interesting company after that."
 	),
 	options = {
 		"BackgroundTopic2",
@@ -34,12 +35,12 @@ DIALOGUE.addTopic("BackgroundTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "What are you researching?",
+	statement = "Can you explain the method?",
 	response = (
-		"Conditions outside, and how they change. We collect readings and compare them with controls; "
-		.. "the difficult part is knowing what else changed while we were looking. I'm more willing to "
-		.. "discuss the method than hand over someone else's research. Which, before you ask, is a "
-		.. "distinction I apply to everyone."
+		"Take a reading under known conditions, keep the original notes, compare it with a control. Simple "
+		.. "to say, difficult to carry out when the conditions won't stay put. A discrepancy can be "
+		.. "interesting. A discrepancy whose records have been tidied until it disappears is mostly "
+		.. "frustrating. Tell me what happened, including the inconvenient part."
 	),
 	options = {
 		"BackTopic",
@@ -254,7 +255,7 @@ DIALOGUE.addTopic("NotEnoughMoneySuitVariantChange", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "Hmm? Spill the beans.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -270,25 +271,28 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "See you soon.",
+	response = "Take care. Ask if the preparation needs clarifying.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you think everyone outside the lab is an idiot?",
+	statement = "Do you think the field workers are careless?",
 	response = (
-		"No. I think experienced people become very inventive about explaining why a precaution applies "
-		.. "to somebody else. Vesper certainly does. She also notices things I would miss. We manage better "
-		.. "when she tells me what happened and I resist beginning with what I told her beforehand."
+		"Some are. So am I, occasionally. I once prepared a long explanation for a discrepancy before "
+		.. "checking which sheet I was reading. I'd prefer you didn't repeat that with my name attached. Vesper "
+		.. "is good at noticing the difference between what I asked for and what someone can actually do out "
+		.. "there. I need that objection. I would enjoy it more if she didn't look quite so pleased while "
+		.. "delivering it."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Is that why you ask so many questions?",
+	statement = "Why keep arguing with her, then?",
 	response = (
-		"I worry because they have to work where we cannot control the conditions. I'd rather someone "
-		.. "found my questions irritating than discovered one I should have asked too late. That doesn't "
-		.. "make every precaution practical. It does mean we should discuss the ones we're leaving out."
+		"Because the alternative is two perfectly consistent accounts that never meet. She tells me where a "
+		.. "precaution becomes impractical. I ask what we lose by leaving it out. Sometimes we change the "
+		.. "method; sometimes the result needs a qualification. Neither of us especially enjoys writing those. "
+		.. "But if I ask someone to work outside this room, I ought to listen when they describe it."
 	),
 	options = {"BackTopic"},
 })

@@ -11,9 +11,11 @@ Task prompts, briefings and completion text stay beside the contact's jobs/progr
 
 All 27 town contacts offer a two-part personality exchange through SpecialtyTopic and
 InterestTownFollowup in the questions menu. These are ordinary conversations available whenever
-the contact is accessible. Mute responds through gestures. Work introductions, first/middle/final
-milestone briefings and completion lines, and completed greetings have additional character dialogue
-in the contact definitions; the remaining milestone text retains its existing wording.
+the contact is accessible. Mute responds through gestures. Work explanations, finite briefings and completion replies, and completed greetings live in the
+contact definitions. The November 2026 roster pass replaces repetitive commission text and expands
+personal exchanges, while retaining developed Atlas dialogue and suitable existing introductory text.
+Work offers show the contact's explanation before difficulty selection; active work still shows the
+saved assignment details. Mute's work explanation and written field orders remain nonverbal.
 
 Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing loader discovers
 these shared files and registers their topics on both realms. Vendor templates bind to them

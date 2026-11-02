@@ -8,9 +8,9 @@ bouts, prerequisites and progression rewards remain unchanged.
 
 ## Authoring and acquisition
 
-Edit `field.cargo`, `field.label` and optional `field.recipient` in each contact definition.
+Edit `field.cargo`, `field.label`, optional `field.description`, and optional `field.recipient` in each contact definition.
 `cargo` is a registered item ID; `label` names this particular commission's inventory item;
-`recipient` is a town contact ID. Omit the recipient to return cargo to the issuer. Dead-drop
+`description` supplies narrative context alongside the model's physical appearance; `recipient` is a town contact ID. Omit the recipient to return cargo to the issuer. Dead-drop
 commissions use their assigned cache endpoint and cannot also have an NPC recipient.
 Current NPC recipients have no progression access gate, avoiding circular courier prerequisites.
 
@@ -18,7 +18,10 @@ The 33 concrete cargo definitions live in `townnpcs/items/jobcargo/`, inheriting
 `base_jobcargo`. They reuse selected quest-asset models, dimensions, weights and icon cameras,
 but have separate `town_quest_*` IDs and zero price. Existing valuable quest IDs and instances
 are unchanged. A cargo model can serve several stories; the saved commission label, character
-and claim distinguish each physical item. These are recoverable cargo, not usable equipment.
+and claim distinguish each physical item. All 316 field commissions now declare an assignment-specific label and description, including the four
+research-defence runs that retain the standard results item. For example, the leather-journal model
+serves as Gasket's "Generator service journal" and "Water-pump maintenance log" with different contextual
+descriptions. These are recoverable cargo, not usable equipment.
 Cargo is spawned only for an accepted assignment, using the existing configured field-site
 providers. Story locations in briefings do not create fixed camps, facilities or enemy outposts.
 
@@ -38,7 +41,8 @@ repeatable-job credit, restock or bonus is awarded for the intermediate NPC hand
 
 Progression and commission IDs are unchanged. Accepted jobs keep their saved cargo, mechanic,
 location and recipient, including old generic-case recoveries with no recipient. New assignments
-snapshot their description too. Older assignments derive instructions from their saved state.
+snapshot both the objective description and the separate cargo label/description. Existing carried items
+without a saved cargo-description override retain the concrete item description. Older assignments derive instructions from their saved state.
 No saves are reset and completed milestones are not reopened. Abandoning and accepting again
 creates a new assignment using the current definition and a new claim.
 

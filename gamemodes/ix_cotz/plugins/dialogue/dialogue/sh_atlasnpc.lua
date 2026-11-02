@@ -26,7 +26,7 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "What was survey work like before you came here?",
 	response = (
 		"I was a surveyor before I came here. Boundary lines, levels, long afternoons persuading "
 		.. "someone their fence was in the wrong place. I liked the work. You could settle a disagreement "

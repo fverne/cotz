@@ -28,18 +28,20 @@ PLUGIN:Register("intern", {
 			"Hello! I've been keeping my own notes in order. It's rather nice to know what I want to say "
 			.. "before anyone asks."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the survey I'm doing.",
+		offerPrompt = "Do you have a sensor survey?",
 		work = (
-			"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder back. "
-			.. "Please give the recorder the time it needs. I can check a full set of readings; I can't recreate "
-			.. "the missing part by staring at the page harder."
+			"Sensor surveys. Deploy the recorder at the assigned site, let the run finish, then retrieve it and "
+			.. "bring the results back. Check the destination before accepting. I can examine a complete "
+			.. "recording; I can't recreate the part we missed by looking increasingly worried at the page. I've "
+			.. "tested that approach rather thoroughly."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What needs checking in your survey work?",
 		progression = (
-			"I've got supplies to collect and readings to check. I can show you what I still need. I've got the "
-			.. "supply lists and field records here. I want to understand the whole survey, including the awkward "
-			.. "bits, before I ask anyone to take my conclusions seriously."
+			"I'd like to follow a survey through from preparation to comparison. There are supplies to collect "
+			.. "and earlier records to recover before I can explain the complete account. We can start with an "
+			.. "ordinary request. If a result disagrees, I'd rather discover that than arrange the notes until it "
+			.. "stops looking troublesome."
 		),
 	},
 	catalogue = {
@@ -83,17 +85,28 @@ PLUGIN:Register("intern", {
 			completionCash = 450,
 			name = "The Calibration Point",
 			kind = "field",
-			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
-				.. " 0013. Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Waystation, let it finish recording, then retrieve "
+				.. "the first calibration recorder. Bring it back to the issuing contact in Waystation."
+			),
 			requires = {"IN01"},
-			briefing = "Deploy and retrieve a sensor near Waystation.",
-			completion = "You got it back! Let me check the recording.",
+			briefing = (
+				"I'd like to start with a recording near Waystation. I want to check my preparation against a "
+				.. "complete return, not just an instrument on a shelf. Deploy the recorder at the assigned site in "
+				.. "Waystation, let it finish recording, then retrieve the first calibration recorder. Bring it back "
+				.. "to me in Waystation."
+			),
+			completion = "You brought it back. Good. I'll compare the setup notes before I look for the reading I expected.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Intern's note: "
+					.. "\"I'd like to start with a recording near Waystation.\""
+				),
 				kind = "sensor",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_module",
-				label = "The Calibration Point - Numbered Data Module 0013",
+				label = "First calibration recorder",
 			},
 			benefits = {},
 		},
@@ -103,11 +116,8 @@ PLUGIN:Register("intern", {
 			name = "Readings on Time",
 			kind = "tracker",
 			requires = {"IN02"},
-			briefing = (
-				"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder "
-				.. "back."
-			),
-			completion = "Those surveys have helped. I can account for the readings now.",
+			briefing = "Continue the survey recordings. Let each run finish, collect the results, and return them.",
+			completion = "A few complete runs. I can start comparing the preparation with the returns.",
 			target = 2,
 			benefits = {},
 		},
@@ -116,17 +126,27 @@ PLUGIN:Register("intern", {
 			completionCash = 650,
 			name = "The Mislabelled Sample",
 			kind = "field",
-			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the field label register from the assigned search area in Waystation. Bring it back to "
+				.. "the issuing contact in Waystation."
+			),
 			requires = {"IN02"},
-			briefing = "Recover a field label register.",
-			completion = "Thank you. I need to keep this one labelled.",
+			briefing = (
+				"There's a label register to recover. One uncertain label can make the rest of the figures look "
+				.. "much more interesting than they deserve. Recover the field label register from the assigned "
+				.. "search area in Waystation. Bring it back to me in Waystation."
+			),
+			completion = "Thank you. I'll check the entries against the labels before changing anything.",
 			field = {
+				description = (
+					"A blue laboratory folder with loose printed record sheets extending from its edges. Intern's "
+					.. "note: \"There's a label register to recover.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_lab",
-				label = "The Mislabelled Sample - Laboratory Log Folder",
+				label = "Field label register",
 			},
 			benefits = {},
 		},
@@ -137,10 +157,10 @@ PLUGIN:Register("intern", {
 			kind = "delivery",
 			requires = {"IN03"},
 			briefing = (
-				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list."
+				"There are supplies to bring through. I'd like to finish the preparation before calling the "
+				.. "instrument ready."
 			),
-			completion = "Thank you. I'll check it against the list.",
+			completion = "Good. That's the requested material accounted for.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -154,17 +174,27 @@ PLUGIN:Register("intern", {
 			completionCash = 850,
 			name = "Beanstalk's Control",
 			kind = "field",
-			objective = "Deploy the recorder in Garbage, leave it to record, then retrieve Numbered Data Module 0022."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
+				.. "Garbage control recorder. Bring it back to the issuing contact in Waystation."
+			),
 			requires = {"IN04"},
-			briefing = "Record at an accessible Garbage control site.",
-			completion = "Good. Give me a moment to compare the figures.",
+			briefing = (
+				"We need a recording at the Garbage control site. I'd like a comparison I can explain without "
+				.. "borrowing somebody else's confidence. Deploy the recorder at the assigned site in Garbage, let it "
+				.. "finish recording, then retrieve the Garbage control recorder. Bring it back to me in Waystation."
+			),
+			completion = "Here it is. I'll keep the control separate while I check the records.",
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. Intern's note: \"We need "
+					.. "a recording at the Garbage control site.\""
+				),
 				kind = "sensor",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_module2",
-				label = "Beanstalk's Control - Numbered Data Module 0022",
+				label = "Garbage control recorder",
 			},
 			benefits = {
 				items = {
@@ -187,11 +217,8 @@ PLUGIN:Register("intern", {
 			name = "Same Place Same Method",
 			kind = "tracker",
 			requires = {"IN05"},
-			briefing = (
-				"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder "
-				.. "back."
-			),
-			completion = "Those surveys have helped. I can account for the readings now.",
+			briefing = "More completed sensor surveys when you're ready. Check the destination first.",
+			completion = "Thank you. Another set of results I can check against the setup notes.",
 			target = 5,
 			benefits = {},
 		},
@@ -200,17 +227,30 @@ PLUGIN:Register("intern", {
 			completionCash = 1050,
 			name = "The Missing Interval",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Waystation. Deliver it"
-				.. " to 'Spool' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the interrupted recording for Spool from the assigned search area in Waystation. Deliver "
+				.. "it to 'Spool' in Garbage, then come back to the issuing contact in Waystation."
+			),
 			requires = {"IN06"},
-			briefing = "Recover an interrupted recording at a regional site.",
-			completion = "They have it? Good. I wrote the reference down so we can find it again.",
+			briefing = (
+				"Spool needs the interrupted recording. He may recognise something useful about the fault that I "
+				.. "would put down to the survey. Recover the interrupted recording for Spool from the assigned "
+				.. "search area in Waystation. Deliver it to 'Spool' in Garbage, then come back to me in Waystation."
+			),
+			completion = (
+				"Delivered? Thank you. I'll wait to hear what he can establish before trying to account for the "
+				.. "gap."
+			),
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Intern's note: "
+					.. "\"Spool needs the interrupted recording.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_tape",
-				label = "The Missing Interval - Handwritten Audio Cassette",
+				label = "Interrupted recording for Spool",
 				recipient = "spool",
 			},
 			benefits = {},
@@ -221,11 +261,8 @@ PLUGIN:Register("intern", {
 			name = "Something to Compare",
 			kind = "delivery",
 			requires = {"IN07"},
-			briefing = (
-				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list."
-			),
-			completion = "Yes, that's right. Put it here.",
+			briefing = "Bring the requested records together. I want to read the comparison before quoting it to anyone.",
+			completion = "Thank you. I'll take the time to check what they actually say.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -239,17 +276,27 @@ PLUGIN:Register("intern", {
 			completionCash = 1250,
 			name = "The Senior's Notebook",
 			kind = "field",
-			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the senior researcher's notebook from the assigned search area in Waystation. Bring it "
+				.. "back to the issuing contact in Waystation."
+			),
 			requires = {"IN08"},
-			briefing = "Recover an abandoned research note.",
-			completion = "Thank you. I need to keep this one labelled.",
+			briefing = (
+				"I'd like the research note brought back intact. It's difficult to ask a useful question about a "
+				.. "page everyone remembers differently. Recover the senior researcher's notebook from the assigned "
+				.. "search area in Waystation. Bring it back to me in Waystation."
+			),
+			completion = "Let me read what comes before the conclusion. I keep beginning at the end when I'm nervous.",
 			field = {
+				description = (
+					"A thick blue diary with a label fixed to the front cover. Intern's note: \"I'd like the research "
+					.. "note brought back intact.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_diary",
-				label = "The Senior's Notebook - Scientist's Field Diary",
+				label = "Senior researcher's notebook",
 			},
 			benefits = {},
 		},
@@ -259,11 +306,8 @@ PLUGIN:Register("intern", {
 			name = "A Wider Baseline",
 			kind = "tracker",
 			requires = {"IN09"},
-			briefing = (
-				"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder "
-				.. "back."
-			),
-			completion = "Those surveys have helped. I can account for the readings now.",
+			briefing = "Keep the survey assignments going. I want the comparisons to survive more than one careful trip.",
+			completion = "You've been consistent. That makes an awkward reading much more useful to discuss.",
 			target = 9,
 			benefits = {},
 		},
@@ -272,17 +316,27 @@ PLUGIN:Register("intern", {
 			completionCash = 1450,
 			name = "The Field Vesper Chose",
 			kind = "field",
-			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
-				.. " 0013. Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Waystation, let it finish recording, then retrieve "
+				.. "the anomaly approach survey recorder. Bring it back to the issuing contact in Waystation."
+			),
 			requires = {"IN10"},
-			briefing = "Deploy and retrieve a recorder near an anomaly approach.",
-			completion = "Good. Give me a moment to compare the figures.",
+			briefing = (
+				"This recording is from the anomaly approach. I've checked the order; please check the journey "
+				.. "before accepting it. Deploy the recorder at the assigned site in Waystation, let it finish "
+				.. "recording, then retrieve the anomaly approach survey recorder. Bring it back to me in Waystation."
+			),
+			completion = "Thank you. Now I can compare the preparation with what actually came back.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Intern's note: "
+					.. "\"This recording is from the anomaly approach.\""
+				),
 				kind = "sensor",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_module",
-				label = "The Field Vesper Chose - Numbered Data Module 0013",
+				label = "Anomaly approach survey recorder",
 			},
 			benefits = {
 				items = {
@@ -324,17 +378,27 @@ PLUGIN:Register("intern", {
 			completionCash = 1650,
 			name = "The Lost Calibration Case",
 			kind = "field",
-			objective = "Recover Marked Research Case from the assigned search area in Waystation. Deliver it to"
-				.. " 'Technut' in Marsh, then return here to finish the assignment.",
+			objective = (
+				"Recover the calibration case for Technut from the assigned search area in Waystation. Deliver it "
+				.. "to 'Technut' in Marsh, then come back to the issuing contact in Waystation."
+			),
 			requires = {"IN12"},
-			briefing = "Recover an instrument case in remote regional territory.",
-			completion = "They have it? Good. I wrote the reference down so we can find it again.",
+			briefing = (
+				"Technut should inspect the instrument case. I can describe the fault, but I'd rather he saw the "
+				.. "equipment himself. Recover the calibration case for Technut from the assigned search area in "
+				.. "Waystation. Deliver it to 'Technut' in Marsh, then come back to me in Waystation."
+			),
+			completion = "He's got it. That's a much better beginning than me attempting another drawing of the connector.",
 			field = {
+				description = (
+					"A dark reinforced case covered in pale symbols and contrasting trim. Intern's note: \"Technut "
+					.. "should inspect the instrument case.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_research",
-				label = "The Lost Calibration Case - Marked Research Case",
+				label = "Calibration case for Technut",
 				recipient = "technut",
 			},
 			benefits = {},
@@ -345,11 +409,8 @@ PLUGIN:Register("intern", {
 			name = "My Own Figures",
 			kind = "tracker",
 			requires = {"IN13"},
-			briefing = (
-				"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder "
-				.. "back."
-			),
-			completion = "Those surveys have helped. I can account for the readings now.",
+			briefing = "Continue the recording work while I examine the older notes.",
+			completion = "A proper run of work now. I'm beginning to know which questions I need to ask.",
 			target = 14,
 			benefits = {},
 		},
@@ -358,17 +419,28 @@ PLUGIN:Register("intern", {
 			completionCash = 1850,
 			name = "The First Pripyat Series",
 			kind = "field",
-			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0022."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
+				.. "first Pripyat survey recorder. Bring it back to the issuing contact in Waystation."
+			),
 			requires = {"IN14"},
-			briefing = "Deploy and retrieve a sensor in Pripyat.",
-			completion = "Thank you. I need to keep this one labelled.",
+			briefing = (
+				"I'd like a complete survey recording from Pripyat. I've written the requirements down so neither "
+				.. "of us has to remember my explanation under pressure. Deploy the recorder at the assigned site in "
+				.. "Pripyat, let it finish recording, then retrieve the first Pripyat survey recorder. Bring it back "
+				.. "to me in Waystation."
+			),
+			completion = "You're back. I'll put the record with the setup notes before doing anything clever with it.",
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. Intern's note: \"I'd like "
+					.. "a complete survey recording from Pripyat.\""
+				),
 				kind = "sensor",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module2",
-				label = "The First Pripyat Series - Numbered Data Module 0022",
+				label = "First Pripyat survey recorder",
 			},
 			benefits = {},
 		},
@@ -378,11 +450,8 @@ PLUGIN:Register("intern", {
 			name = "Without Missing Pages",
 			kind = "delivery",
 			requires = {"IN15"},
-			briefing = (
-				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list."
-			),
-			completion = "Thank you. I'll check it against the list.",
+			briefing = "Bring the requested records together. I want to read the comparison before quoting it to anyone.",
+			completion = "Thank you. I'll take the time to check what they actually say.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -396,17 +465,31 @@ PLUGIN:Register("intern", {
 			completionCash = 2050,
 			name = "The Contradictory Site",
 			kind = "field",
-			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0013."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
+				.. "contradictory-site recorder. Bring it back to the issuing contact in Waystation."
+			),
 			requires = {"IN16"},
-			briefing = "Record at a second Pripyat research location.",
-			completion = "Good. Give me a moment to compare the figures.",
+			briefing = (
+				"We need another recording from the disputed site. If it disagrees, I want to know that before I "
+				.. "start making the graph look tidy. Deploy the recorder at the assigned site in Pripyat, let it "
+				.. "finish recording, then retrieve the contradictory-site recorder. Bring it back to me in "
+				.. "Waystation."
+			),
+			completion = (
+				"Good. I'll keep the original readings, including whatever is going to make the discussion "
+				.. "awkward."
+			),
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Intern's note: "
+					.. "\"We need another recording from the disputed site.\""
+				),
 				kind = "sensor",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module",
-				label = "The Contradictory Site - Numbered Data Module 0013",
+				label = "Contradictory-site recorder",
 			},
 			benefits = {
 				items = {
@@ -425,11 +508,8 @@ PLUGIN:Register("intern", {
 			name = "Enough to Stand Behind",
 			kind = "tracker",
 			requires = {"IN17"},
-			briefing = (
-				"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder "
-				.. "back."
-			),
-			completion = "Those surveys have helped. I can account for the readings now.",
+			briefing = "There are more survey assignments. Bring the finished recordings back intact.",
+			completion = "You've given me enough to check the account without hiding the inconvenient results.",
 			target = 20,
 			benefits = {},
 		},
@@ -438,17 +518,27 @@ PLUGIN:Register("intern", {
 			completionCash = 2250,
 			name = "The Earlier Team",
 			kind = "field",
-			objective = "Recover Handwritten Audio Cassette from the assigned search area in Pripyat. Deliver it to"
-				.. " 'Wake' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the earlier survey recording for Wake from the assigned search area in Pripyat. Deliver "
+				.. "it to 'Wake' in Garbage, then come back to the issuing contact in Waystation."
+			),
 			requires = {"IN18"},
-			briefing = "Recover an earlier survey recorder in Pripyat.",
-			completion = "They have it? Good. I wrote the reference down so we can find it again.",
+			briefing = (
+				"Wake needs the earlier team's recording. I don't want a useful detail about the people lost "
+				.. "inside my technical summary. Recover the earlier survey recording for Wake from the assigned "
+				.. "search area in Pripyat. Deliver it to 'Wake' in Garbage, then come back to me in Waystation."
+			),
+			completion = "She has it. Thank you for giving her the account itself.",
 			field = {
+				description = (
+					"A pale audio cassette with a handwritten dedication above the spool windows. Intern's note: "
+					.. "\"Wake needs the earlier team's recording.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_tape",
-				label = "The Earlier Team - Handwritten Audio Cassette",
+				label = "Earlier survey recording for Wake",
 				recipient = "wake",
 			},
 			benefits = {},
@@ -459,11 +549,8 @@ PLUGIN:Register("intern", {
 			name = "The Last Calibration",
 			kind = "delivery",
 			requires = {"IN19", "IN20"},
-			briefing = (
-				"I've written down what I'm short of. Could you bring it here? I'll check it against the "
-				.. "list."
-			),
-			completion = "Yes, that's right. Put it here.",
+			briefing = "I need the supplies on this request. Keep enough for your own return too.",
+			completion = "All here. I'll put this lot aside before the cupboard acquires another explanation.",
 			requirements = {
 				{
 					pool = "field_maintenance",
@@ -477,17 +564,30 @@ PLUGIN:Register("intern", {
 			completionCash = 2450,
 			name = "The Independent Control",
 			kind = "field",
-			objective = "Deploy the recorder in Pripyat, leave it to record, then retrieve Numbered Data Module 0022."
-				.. " Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
+				.. "independent control recorder. Bring it back to the issuing contact in Waystation."
+			),
 			requires = {"IN21"},
-			briefing = "Deploy and retrieve the final independent Pripyat recorder.",
-			completion = "Thank you. I need to keep this one labelled.",
+			briefing = (
+				"One more control recording in Pripyat. I want to be able to explain this comparison in my own "
+				.. "words. Deploy the recorder at the assigned site in Pripyat, let it finish recording, then "
+				.. "retrieve the independent control recorder. Bring it back to me in Waystation."
+			),
+			completion = (
+				"All right. I can start checking the independent record now. I'm rather looking forward to that "
+				.. "part."
+			),
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. Intern's note: \"One more "
+					.. "control recording in Pripyat.\""
+				),
 				kind = "sensor",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module2",
-				label = "The Independent Control - Numbered Data Module 0022",
+				label = "Independent control recorder",
 			},
 			benefits = {},
 		},
@@ -497,11 +597,11 @@ PLUGIN:Register("intern", {
 			name = "Put My Name on It",
 			kind = "tracker",
 			requires = {"IN22"},
-			briefing = (
-				"Sensor surveys. Set it up at the marked site, wait for it to finish, and bring the recorder "
-				.. "back."
+			briefing = "Keep completing the sensor surveys when you're prepared.",
+			completion = (
+				"Thank you. I can stand behind the work and still say which part needs checking. That feels like "
+				.. "progress."
 			),
-			completion = "Those surveys have helped. I can account for the readings now.",
 			target = 27,
 			benefits = {},
 		},
@@ -510,25 +610,30 @@ PLUGIN:Register("intern", {
 			completionCash = 2650,
 			name = "The Missing Observation",
 			kind = "field",
-			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the missing survey observation log from the assigned search area in Waystation. Bring it "
+				.. "back to the issuing contact in Waystation."
+			),
 			requires = {"IN23"},
 			briefing = (
-				"Recover the last field record and present a complete independent survey. Bring the full log back. "
-				.. "If there's something missing from my account, I want to find it before I call the survey "
-				.. "complete."
+				"The last field record needs to come home whole. If I missed something, I want to find it before I "
+				.. "call the survey finished. Recover the missing survey observation log from the assigned search "
+				.. "area in Waystation. Bring it back to me in Waystation."
 			),
 			completion = (
-				"Good. Give me a moment to compare the figures. Let me check that once more. Yes, I'll write up "
-				.. "what the figures support. My own wording this time. Thank you for sticking with it; I know it "
-				.. "wasn't all exciting fieldwork."
+				"Those are my figures, with the awkward parts still attached. You've helped me finish work I can "
+				.. "answer questions about. Thank you. I think I can put my name on it without apologising first."
 			),
 			field = {
+				description = (
+					"A blue laboratory folder with loose printed record sheets extending from its edges. Intern's "
+					.. "note: \"The last field record needs to come home whole.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_lab",
-				label = "The Missing Observation - Laboratory Log Folder",
+				label = "Missing survey observation log",
 			},
 			benefits = {
 				items = {

@@ -19,10 +19,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "What sort of work did you do before?",
 	response = (
-		"I worked around machinery before this place started eating it. Rust doesn't mean useless. "
-		.. "Sometimes it means nobody looked properly."
+		"Industrial work. Keeping machinery useful after somebody decided maintenance could wait another "
+		.. "month. Usually a team job, though the fellow writing the report sometimes forgot that part. I miss "
+		.. "having someone at the other end of a bench who knows what I'm about to ask for. Here I spend more "
+		.. "time explaining why a part is worth carrying. Don't mind explaining if a person listens. I mind "
+		.. "watching them throw it into a sack while I'm explaining why they shouldn't."
 	),
 	options = {"BackTopic", "GOODBYE"},
 })
@@ -47,7 +50,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "If it still has a serial plate, it isn't just scrap.",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -63,15 +66,16 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Bring back something worth the weight.",
+	response = "Mind how you pack the useful bits.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "Can you teach me what to look for?",
 	response = (
-		"Yes. Pick it up. Tell me where you think it's worn. Don't look at me; look at the part. Being "
-		.. "wrong here costs us a minute. Better than carrying twenty kilos home because you were "
-		.. "embarrassed to ask. We'll see whether the surfaces that need to fit still do."
+		"Pick it up. Show me where you think it's worn. No, look at the part while you answer. Being wrong "
+		.. "here costs us a minute; better than carrying twenty kilos back because you were embarrassed to ask. "
+		.. "There. That surface needs to meet another one. Follow it round. We'll work out what you're seeing "
+		.. "before we decide whether the rust matters. You don't have to know the proper name yet."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
@@ -79,9 +83,10 @@ DIALOGUE.addTopic("SpecialtyTopic", {
 DIALOGUE.addTopic("InterestTownFollowup", {
 	statement = "Would Technut make the same choice?",
 	response = (
-		"Usually he'd agree it's useful. Then he'd explain what else it could do. I want a part that "
-		.. "fits the job in front of me. He wants three jobs and a better version by supper. I complain, "
-		.. "but when I can't make sense of something, he's worth asking."
+		"He'd agree it's useful, then explain three other things it could do. I'd like the first job "
+		.. "finished. Still, when I can't identify something, I'll ask him. He enjoys the puzzle enough to keep "
+		.. "looking after I've become annoyed with it. Suture's similar about material. Get them discussing a "
+		.. "fault and you can learn a fair bit, provided you're willing to wait for a gap."
 	),
 	options = {"BackTopic"},
 })

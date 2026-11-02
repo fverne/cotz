@@ -49,18 +49,20 @@ PLUGIN:Register("egghead", {
 			"Hello again. Something to compare, or simply a question? We can probably find time for "
 			.. "either."
 		),
-		workPrompt = "About the assignments.",
-		offerPrompt = "Do you have an assignment?",
+		workPrompt = "About the reference request I've taken.",
+		offerPrompt = "Do you have a specimen delivery request?",
 		work = (
-			"Artifacts. Bring the specimens requested on the order; I need to make a comparison. Keep to the "
-			.. "requested specimens. Something unusual is interesting, but it won't fill a particular gap just by "
-			.. "being unusual."
+			"Artifact and research supply requests. Bring what's listed; an unusual object won't fill a "
+			.. "particular reference gap simply by being unusual. I'll inspect the return before deciding what "
+			.. "comparison it supports. The ordinary containers and records matter too. Research accumulates "
+			.. "rather more packaging than the illustrations suggest."
 		),
-		progressionPrompt = "What else needs doing?",
+		progressionPrompt = "What are you comparing at the moment?",
 		progression = (
-			"There are specimens to collect and old field records to check. Which would you like to help with? "
-			.. "The collection needs context, which means old records as well as specimens. I would rather check a "
-			.. "dull detail now than discover later that we've been comparing quite different things."
+			"I'm building comparisons between artifacts and surviving field accounts. I need the specimens, the "
+			.. "working supplies, and the records that explain what somebody actually did. Choose a manageable "
+			.. "request first. We may finish with a better question instead of a grand explanation. I would "
+			.. "consider that a useful result."
 		),
 	},
 	catalogue = {
@@ -133,17 +135,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 450,
 			name = "The Control Notebook",
 			kind = "field",
-			objective = "Recover Scientist's Field Diary from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the reference field notebook from the assigned search area in Waystation. Bring it back "
+				.. "to the issuing contact in Waystation."
+			),
 			requires = {"EG01"},
-			briefing = "Recover a reference notebook near a regional field site.",
-			completion = "Let's look at the record before deciding what it means.",
+			briefing = (
+				"I'd like the reference notebook recovered. A careful result becomes rather less useful when "
+				.. "nobody can find the method. Recover the reference field notebook from the assigned search area in "
+				.. "Waystation. Bring it back to me in Waystation."
+			),
+			completion = "Excellent. I'll begin with the notes instead of the result somebody circled.",
 			field = {
+				description = (
+					"A thick blue diary with a label fixed to the front cover. Egghead's note: \"I'd like the "
+					.. "reference notebook recovered.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_diary",
-				label = "The Control Notebook - Scientist's Field Diary",
+				label = "Reference field notebook",
 			},
 			benefits = {},
 		},
@@ -153,8 +165,8 @@ PLUGIN:Register("egghead", {
 			name = "A Useful Assistant",
 			kind = "tracker",
 			requires = {"EG02"},
-			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
-			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
+			briefing = "Continue the artifact deliveries. I want completed requests we can actually compare.",
+			completion = "A useful beginning to the collection. Thank you.",
 			target = 2,
 			benefits = {},
 		},
@@ -163,17 +175,30 @@ PLUGIN:Register("egghead", {
 			completionCash = 650,
 			name = "The Old Field Station",
 			kind = "field",
-			objective = "Recover Marked Research Case from the assigned search area in Waystation. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the field-station calibration case from the assigned search area in Waystation. Bring it "
+				.. "back to the issuing contact in Waystation."
+			),
 			requires = {"EG03"},
-			briefing = "Recover a calibration case in accessible regional territory.",
-			completion = "Thank you. I'll keep that with the comparison material.",
+			briefing = (
+				"There's a calibration case left at the old field station. I'd like to inspect it before assuming "
+				.. "the measurements were comparable. Recover the field-station calibration case from the assigned "
+				.. "search area in Waystation. Bring it back to me in Waystation."
+			),
+			completion = (
+				"Set it on the clear side. The outside has survived; let's see what we can establish about the "
+				.. "rest."
+			),
 			field = {
+				description = (
+					"A dark reinforced case covered in pale symbols and contrasting trim. Egghead's note: \"There's a "
+					.. "calibration case left at the old field station.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_research",
-				label = "The Old Field Station - Marked Research Case",
+				label = "Field-station calibration case",
 			},
 			benefits = {},
 		},
@@ -183,8 +208,11 @@ PLUGIN:Register("egghead", {
 			name = "Different Origins",
 			kind = "delivery",
 			requires = {"EG04"},
-			briefing = "Bring the material listed here. I'd like to check it before putting it with the others.",
-			completion = "Good. Let me compare the condition.",
+			briefing = (
+				"I'd like the listed artifacts for comparison. Keep the request in mind before choosing what you "
+				.. "would most enjoy parting with."
+			),
+			completion = "Excellent. I'll examine the specimens before comparing them with the notes.",
 			requirements = {
 				{
 					pool = "common_artifacts",
@@ -198,17 +226,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 850,
 			name = "The Comparison Site",
 			kind = "field",
-			objective = "Deploy the recorder in Waystation, leave it to record, then retrieve Numbered Data Module"
-				.. " 0013. Return it to this contact to finish the assignment.",
+			objective = (
+				"Deploy the recorder at the assigned site in Waystation, let it finish recording, then retrieve "
+				.. "the artifact comparison recorder. Bring it back to the issuing contact in Waystation."
+			),
 			requires = {"EG04"},
-			briefing = "Deploy and retrieve a recorder near an anomaly field.",
-			completion = "Good. I can check this against the other records.",
+			briefing = (
+				"We need a recording at the comparison site. I'd enjoy being able to disagree about a reading we "
+				.. "both have in front of us. Deploy the recorder at the assigned site in Waystation, let it finish "
+				.. "recording, then retrieve the artifact comparison recorder. Bring it back to me in Waystation."
+			),
+			completion = "Here we are. I'll keep the raw record before attempting an elegant explanation.",
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Egghead's note: "
+					.. "\"We need a recording at the comparison site.\""
+				),
 				kind = "sensor",
 				map = "rp_waystation",
 				tier = 1,
 				cargo = "town_quest_module",
-				label = "The Comparison Site - Numbered Data Module 0013",
+				label = "Artifact comparison recorder",
 			},
 			benefits = {
 				items = {
@@ -231,8 +269,8 @@ PLUGIN:Register("egghead", {
 			name = "An Orderly Collection",
 			kind = "tracker",
 			requires = {"EG05"},
-			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
-			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
+			briefing = "More artifact requests when you're ready. Check the specimen before accepting.",
+			completion = "Another run completed. There is more here to examine than a first impression allows.",
 			target = 5,
 			benefits = {},
 		},
@@ -241,17 +279,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 1050,
 			name = "The Missing Calibration",
 			kind = "field",
-			objective = "Recover Laboratory Log Folder from the assigned search area in Garbage. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the detector calibration record from the assigned search area in Garbage. Bring it back "
+				.. "to the issuing contact in Waystation."
+			),
 			requires = {"EG06"},
-			briefing = "Recover a detector test record in Garbage.",
-			completion = "Let's look at the record before deciding what it means.",
+			briefing = (
+				"The detector test record is missing. It would be pleasant to know what was actually checked "
+				.. "before arguing about its accuracy. Recover the detector calibration record from the assigned "
+				.. "search area in Garbage. Bring it back to me in Waystation."
+			),
+			completion = "Thank you. I'll read the procedure as carefully as the figures.",
 			field = {
+				description = (
+					"A blue laboratory folder with loose printed record sheets extending from its edges. Egghead's "
+					.. "note: \"The detector test record is missing.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 1,
 				cargo = "town_quest_lab",
-				label = "The Missing Calibration - Laboratory Log Folder",
+				label = "Detector calibration record",
 			},
 			benefits = {},
 		},
@@ -261,8 +309,11 @@ PLUGIN:Register("egghead", {
 			name = "A Reliable Reading",
 			kind = "delivery",
 			requires = {"EG07"},
-			briefing = "Bring the material listed here. I'd like to check it before putting it with the others.",
-			completion = "Yes, that's what I asked for.",
+			briefing = (
+				"There is another reference request. Bring what is listed; the interesting difference may be less "
+				.. "impressive to look at."
+			),
+			completion = "Thank you. I'll keep this set separate while I inspect it.",
 			requirements = {
 				{
 					pool = "common_artifacts",
@@ -276,17 +327,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 1250,
 			name = "The Failed Trial",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0022 from the assigned search area in Waystation. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the failed-trial recording from the assigned search area in Waystation. Bring it back to "
+				.. "the issuing contact in Waystation."
+			),
 			requires = {"EG08"},
-			briefing = "Retrieve a test recorder at a remote research site.",
-			completion = "Thank you. I'll keep that with the comparison material.",
+			briefing = (
+				"I'd like the trial recording recovered. A failed experiment can be useful, provided nobody has "
+				.. "edited out the embarrassment. Recover the failed-trial recording from the assigned search area in "
+				.. "Waystation. Bring it back to me in Waystation."
+			),
+			completion = "Good. We can inspect what happened rather than what the report hoped to show.",
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. Egghead's note: \"I'd "
+					.. "like the trial recording recovered.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_module2",
-				label = "The Failed Trial - Numbered Data Module 0022",
+				label = "Failed-trial recording",
 			},
 			benefits = {},
 		},
@@ -296,8 +357,8 @@ PLUGIN:Register("egghead", {
 			name = "A Better Instrument",
 			kind = "tracker",
 			requires = {"EG09"},
-			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
-			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
+			briefing = "Keep the artifact orders moving while I compare the field records.",
+			completion = "You've given the comparison some substance. I appreciate it.",
 			target = 9,
 			benefits = {},
 		},
@@ -306,17 +367,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 1450,
 			name = "The Paired Samples",
 			kind = "field",
-			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the paired-sample comparison file from the assigned search area in Waystation. Bring it "
+				.. "back to the issuing contact in Waystation."
+			),
 			requires = {"EG10"},
-			briefing = "Recover a comparison record from the field.",
-			completion = "Good. I can check this against the other records.",
+			briefing = (
+				"Bring the comparison record back complete. I want to see how the two accounts were matched. "
+				.. "Recover the paired-sample comparison file from the assigned search area in Waystation. Bring it "
+				.. "back to me in Waystation."
+			),
+			completion = "That's the file. I'll keep both sides open while I read it.",
 			field = {
+				description = (
+					"A blue laboratory folder with loose printed record sheets extending from its edges. Egghead's "
+					.. "note: \"Bring the comparison record back complete.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_lab",
-				label = "The Paired Samples - Laboratory Log Folder",
+				label = "Paired-sample comparison file",
 			},
 			benefits = {
 				items = {
@@ -335,8 +406,11 @@ PLUGIN:Register("egghead", {
 			name = "Protection for the Work",
 			kind = "delivery",
 			requires = {"EG11"},
-			briefing = "Bring the material listed here. I'd like to check it before putting it with the others.",
-			completion = "Thank you. I'll label these before they get mixed in.",
+			briefing = (
+				"I'd like the listed artifacts for comparison. Keep the request in mind before choosing what you "
+				.. "would most enjoy parting with."
+			),
+			completion = "Excellent. I'll examine the specimens before comparing them with the notes.",
 			requirements = {
 				{
 					pool = "electrical_artifacts",
@@ -350,25 +424,28 @@ PLUGIN:Register("egghead", {
 			completionCash = 1650,
 			name = "Beanstalk's Objection",
 			kind = "field",
-			objective = "Recover Clinical Records Folder I from the assigned search area in Garbage. Deliver it to"
-				.. " 'Vesper' in Garbage, then return here to finish the assignment.",
+			objective = (
+				"Recover the environmental control for Vesper from the assigned search area in Garbage. Deliver it "
+				.. "to 'Vesper' in Garbage, then come back to the issuing contact in Waystation."
+			),
 			requires = {"EG12"},
 			briefing = (
-				"Recover environmental control evidence in Garbage. Take the records to Vesper in "
-				.. "Garbage, then return here. I would like the field perspective considered before we "
-				.. "settle the comparison."
+				"Vesper should examine the environmental control evidence. I'd like her field objections in the "
+				.. "comparison before I decide it is satisfactory. Recover the environmental control for Vesper from "
+				.. "the assigned search area in Garbage. Deliver it to 'Vesper' in Garbage, then come back to me in "
+				.. "Waystation."
 			),
-			completion = (
-				"Good. A comparison is rather easier when both people have the records. Good. Let her "
-				.. "examine the record without us supplying the conclusion in advance. I can survive a "
-				.. "little disagreement."
-			),
+			completion = "She has the records. Good. I'll leave room for an answer I may not enjoy.",
 			field = {
+				description = (
+					"A blue-green folder with medical record sheets protruding from its cover. Egghead's note: "
+					.. "\"Vesper should examine the environmental control evidence.\""
+				),
 				kind = "recovery",
 				map = "mz_garbage",
 				tier = 2,
 				cargo = "town_quest_clinic",
-				label = "Beanstalk's Objection - Clinical Records Folder I",
+				label = "Environmental control for Vesper",
 				recipient = "vesper",
 			},
 			benefits = {},
@@ -379,8 +456,8 @@ PLUGIN:Register("egghead", {
 			name = "A Collection With Context",
 			kind = "tracker",
 			requires = {"EG13"},
-			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
-			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
+			briefing = "Continue the specified artifact deliveries. Familiar examples can still qualify a theory.",
+			completion = "A considerable range of work now. I have rather better questions to ask of it.",
 			target = 14,
 			benefits = {},
 		},
@@ -389,17 +466,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 1850,
 			name = "The Archived Finding",
 			kind = "field",
-			objective = "Recover Blue Research Dossier from the assigned search area in Waystation. Deliver it to"
-				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the archived finding for Carbon from the assigned search area in Waystation. Deliver it "
+				.. "to 'Carbon' in Waystation, then come back to the issuing contact in Waystation."
+			),
 			requires = {"EG14"},
-			briefing = "Recover a research record for comparison with Carbon.",
-			completion = "Good. A comparison is rather easier when both people have the records.",
+			briefing = (
+				"Carbon needs the archived finding. He can check its context without relying on the quotation I "
+				.. "remembered liking. Recover the archived finding for Carbon from the assigned search area in "
+				.. "Waystation. Deliver it to 'Carbon' in Waystation, then come back to me in Waystation."
+			),
+			completion = "Delivered. I shall resist citing it any more confidently until he has read it.",
 			field = {
+				description = (
+					"A blue document folder with loose pages protruding from the edges. Egghead's note: \"Carbon needs "
+					.. "the archived finding.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_dossier",
-				label = "The Archived Finding - Blue Research Dossier",
+				label = "Archived finding for Carbon",
 				recipient = "carbon",
 			},
 			benefits = {},
@@ -410,8 +497,11 @@ PLUGIN:Register("egghead", {
 			name = "Before Pripyat",
 			kind = "delivery",
 			requires = {"EG15"},
-			briefing = "Bring the material listed here. I'd like to check it before putting it with the others.",
-			completion = "Good. Let me compare the condition.",
+			briefing = (
+				"I'd like the requested equipment brought here. Preparing the comparison includes the ordinary "
+				.. "supplies too."
+			),
+			completion = "Good. That's something I can stop borrowing from the next piece of work.",
 			requirements = {
 				{
 					pool = "small_electronics",
@@ -425,17 +515,30 @@ PLUGIN:Register("egghead", {
 			completionCash = 2050,
 			name = "The Pripyat Baseline",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0013 from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the earlier team's research tape from the assigned search area in Pripyat. Bring it back "
+				.. "to the issuing contact in Waystation."
+			),
 			requires = {"EG16"},
-			briefing = "Recover an earlier research team's recorder in Pripyat.",
-			completion = "Good. I can check this against the other records.",
+			briefing = (
+				"I'd like the earlier team's recording from Pripyat. Their questions may have been different from "
+				.. "ours. Recover the earlier team's research tape from the assigned search area in Pripyat. Bring it "
+				.. "back to me in Waystation."
+			),
+			completion = (
+				"Let me hear it from the beginning. An answer to another question can look quite misleading in "
+				.. "isolation."
+			),
 			field = {
+				description = (
+					"A flat dark electronic module with a printed number and a small circular emblem. Egghead's note: "
+					.. "\"I'd like the earlier team's recording from Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module",
-				label = "The Pripyat Baseline - Numbered Data Module 0013",
+				label = "Earlier team's research tape",
 			},
 			benefits = {
 				items = {
@@ -454,8 +557,8 @@ PLUGIN:Register("egghead", {
 			name = "Results That Repeat",
 			kind = "tracker",
 			requires = {"EG17"},
-			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
-			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
+			briefing = "More artifact deliveries. Keep the requested specimens distinct from the rest of your collection.",
+			completion = "You've kept providing something I can check instead of simply agreeing with my explanation.",
 			target = 20,
 			benefits = {},
 		},
@@ -464,17 +567,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 2250,
 			name = "The Unfinished Experiment",
 			kind = "field",
-			objective = "Recover Marked Research Case from the assigned search area in Pripyat. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the unfinished calibration case from the assigned search area in Pripyat. Bring it back "
+				.. "to the issuing contact in Waystation."
+			),
 			requires = {"EG18"},
-			briefing = "Retrieve a calibration case at a second Pripyat site.",
-			completion = "Let's look at the record before deciding what it means.",
+			briefing = (
+				"There's another calibration case still out in Pripyat. We should inspect it before treating that "
+				.. "trial as comparable. Recover the unfinished calibration case from the assigned search area in "
+				.. "Pripyat. Bring it back to me in Waystation."
+			),
+			completion = "Good. I'll put the case beside the trial papers and see what can be checked.",
 			field = {
+				description = (
+					"A dark reinforced case covered in pale symbols and contrasting trim. Egghead's note: \"There's "
+					.. "another calibration case still out in Pripyat.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_research",
-				label = "The Unfinished Experiment - Marked Research Case",
+				label = "Unfinished calibration case",
 			},
 			benefits = {},
 		},
@@ -484,8 +597,11 @@ PLUGIN:Register("egghead", {
 			name = "Precision at Last",
 			kind = "delivery",
 			requires = {"EG19", "EG20"},
-			briefing = "Bring the material listed here. I'd like to check it before putting it with the others.",
-			completion = "Yes, that's what I asked for.",
+			briefing = (
+				"I'd like the listed artifacts for comparison. Keep the request in mind before choosing what you "
+				.. "would most enjoy parting with."
+			),
+			completion = "Excellent. I'll examine the specimens before comparing them with the notes.",
 			requirements = {
 				{
 					pool = "common_artifacts",
@@ -499,17 +615,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 2450,
 			name = "The Family Resemblance",
 			kind = "field",
-			objective = "Recover Numbered Data Module 0022 from the assigned search area in Pripyat. Return it to"
-				.. " this contact to finish the assignment.",
+			objective = (
+				"Recover the final comparison recording from the assigned search area in Pripyat. Bring it back to "
+				.. "the issuing contact in Waystation."
+			),
 			requires = {"EG21"},
-			briefing = "Recover the final comparison recorder in Pripyat.",
-			completion = "Thank you. I'll keep that with the comparison material.",
+			briefing = (
+				"Bring the final comparison recorder home. I'm interested in the awkward readings as well as the "
+				.. "promising ones. Recover the final comparison recording from the assigned search area in Pripyat. "
+				.. "Bring it back to me in Waystation."
+			),
+			completion = "Here, safely back. Now we can find out which part of the explanation needs revisiting.",
 			field = {
+				description = (
+					"A flat dark electronic module marked with a number and three pale bars. Egghead's note: \"Bring "
+					.. "the final comparison recorder home.\""
+				),
 				kind = "recovery",
 				map = "rp_pripyat_remaster",
 				tier = 3,
 				cargo = "town_quest_module2",
-				label = "The Family Resemblance - Numbered Data Module 0022",
+				label = "Final comparison recording",
 			},
 			benefits = {},
 		},
@@ -519,8 +645,11 @@ PLUGIN:Register("egghead", {
 			name = "A Complete Reference",
 			kind = "tracker",
 			requires = {"EG22"},
-			briefing = "Artifacts. Bring the specimens requested on the order; I need to make a comparison.",
-			completion = "You've brought enough specimens for a useful comparison. Thank you for keeping at it.",
+			briefing = "Keep filling the artifact requests when you can prepare for them.",
+			completion = (
+				"You've stayed with the unglamorous collecting too. Research depends rather heavily on that "
+				.. "courtesy."
+			),
 			target = 27,
 			benefits = {},
 		},
@@ -529,17 +658,27 @@ PLUGIN:Register("egghead", {
 			completionCash = 2650,
 			name = "The Programme's Missing Page",
 			kind = "field",
-			objective = "Recover Corporate Records Folder from the assigned search area in Waystation. Deliver it to"
-				.. " 'Carbon' in Waystation, then return here to finish the assignment.",
+			objective = (
+				"Recover the programme archive for Carbon from the assigned search area in Waystation. Deliver it "
+				.. "to 'Carbon' in Waystation, then come back to the issuing contact in Waystation."
+			),
 			requires = {"EG23"},
-			briefing = "Recover a final archived research record.",
-			completion = "Good. A comparison is rather easier when both people have the records.",
+			briefing = (
+				"The archived research record goes to Carbon. I'd prefer he had the original while he checks the "
+				.. "missing references. Recover the programme archive for Carbon from the assigned search area in "
+				.. "Waystation. Deliver it to 'Carbon' in Waystation, then come back to me in Waystation."
+			),
+			completion = "Delivered. I owe him the courtesy of waiting until he's finished reading.",
 			field = {
+				description = (
+					"A blue records folder with contrasting corporate lettering along the cover. Egghead's note: \"The "
+					.. "archived research record goes to Carbon.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_archive",
-				label = "The Programme's Missing Page - Corporate Records Folder",
+				label = "Programme archive for Carbon",
 				recipient = "carbon",
 			},
 			benefits = {
@@ -559,8 +698,8 @@ PLUGIN:Register("egghead", {
 			name = "Preserve the Findings",
 			kind = "delivery",
 			requires = {"EG24"},
-			briefing = "Bring the material listed here. I'd like to check it before putting it with the others.",
-			completion = "Thank you. I'll label these before they get mixed in.",
+			briefing = "Bring the listed material intact. I want the working record as well as the attractive result.",
+			completion = "Here we are. I'll record what arrived before rearranging it.",
 			requirements = {
 				{
 					pool = "administrative_documents",
@@ -574,25 +713,31 @@ PLUGIN:Register("egghead", {
 			completionCash = 2850,
 			name = "The Last Control Record",
 			kind = "field",
-			objective = "Recover Laboratory Log Folder from the assigned search area in Waystation. Return it to this"
-				.. " contact to finish the assignment.",
+			objective = (
+				"Recover the final control log from the assigned search area in Waystation. Bring it back to the "
+				.. "issuing contact in Waystation."
+			),
 			requires = {"EG25"},
 			briefing = (
-				"Recover the final field control and return the complete programme. Bring the complete log back. A "
-				.. "control record is most useful when we can see what was done, rather than just the result someone "
-				.. "liked enough to underline."
+				"I'd like the complete control log, including the method and the dull intervals. Those have a "
+				.. "habit of becoming important later. Recover the final control log from the assigned search area in "
+				.. "Waystation. Bring it back to me in Waystation."
 			),
 			completion = (
-				"Let's look at the record before deciding what it means. Good. I can work with this. You have been "
-				.. "remarkably persistent about the less spectacular parts of research. I mean that kindly. Those are "
-				.. "usually the parts that let us trust the rest."
+				"We've got a collection someone else can examine and disagree with. That pleases me more than a "
+				.. "shelf of impressive objects. Thank you. If you've time, I'd like to show you which result is "
+				.. "still bothering me."
 			),
 			field = {
+				description = (
+					"A blue laboratory folder with loose printed record sheets extending from its edges. Egghead's "
+					.. "note: \"I'd like the complete control log, including the method and the dull intervals.\""
+				),
 				kind = "recovery",
 				map = "rp_waystation",
 				tier = 2,
 				cargo = "town_quest_lab",
-				label = "The Last Control Record - Laboratory Log Folder",
+				label = "Final control log",
 			},
 			benefits = {},
 			recognition = "Egghead's trusted contact",

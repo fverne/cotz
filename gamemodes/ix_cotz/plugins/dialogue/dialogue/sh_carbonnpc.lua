@@ -19,10 +19,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "Why collect all these records?",
 	response = (
-		"I keep records. A maintenance ledger can tell you why a building went quiet. "
-		.. "A story about a brave expedition usually leaves that part out."
+		"I enjoy reading them. That seems to surprise people; they assume I'm waiting for a page that "
+		.. "explains the whole Zone. Usually I find someone trying to get a delivery acknowledged or a damaged "
+		.. "roof repaired. A name turns up in two places and suddenly I can follow a little of their working "
+		.. "week. I don't know them. I wouldn't pretend to. But I can keep what they wrote together long enough "
+		.. "for someone else to recognise it."
 	),
 	options = {"BackTopic"},
 })
@@ -44,7 +47,7 @@ DIALOGUE.addTopic("ContactsTopic", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "What have you found?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"BackgroundTopic",
@@ -60,27 +63,28 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Keep the originals.",
+	response = "Good journey. Keep the pages together.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "What's so interesting about maintenance records?",
+	statement = "What can a maintenance record tell you?",
 	response = (
-		"Someone kept asking for the same replacement window latch. Three entries over two months. Then "
-		.. "another hand writes, 'Fixed it myself.' I don't know who either person was yet. But for a "
-		.. "moment you can hear them sharing a workplace. I'd like to preserve that before someone uses the "
-		.. "page to light a stove."
+		"Someone kept requesting the same window latch. Three entries over two months. Then another hand "
+		.. "writes, 'Fixed it myself.' I laughed when I found it. You can almost hear the conversation that "
+		.. "preceded that entry. It doesn't explain a disappearance or uncover an operation. It's simply a "
+		.. "moment that survived because a person had a pencil and was sufficiently annoyed. I'd hate to lose "
+		.. "it because the rest of the folder looked unimportant."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Do you think they expected anyone to read it?",
+	statement = "Do you collect stories as well?",
 	response = (
-		"Most probably wanted the next shift to stop asking the same question. Either way, I'd rather "
-		.. "understand what they meant than borrow a sentence to support a story I've already decided to "
-		.. "tell. If you find a page, remember where it came from. That can matter as much as what's "
-		.. "written on it."
+		"Gladly, if the teller lets me ask questions. The Original gets impatient when I want a date. I get "
+		.. "impatient when he supplies one with suspicious confidence. Neither is a good reason to throw his "
+		.. "account away. I put what he remembers beside what survives on paper. Sometimes the disagreement "
+		.. "tells me where to look next; sometimes we just have to leave it there."
 	),
 	options = {"BackTopic"},
 })

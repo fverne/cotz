@@ -144,12 +144,12 @@ DIALOGUE.addTopic("NotEnoughMoneyStorage", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
+	statement = "How did you get into this business?",
 	response = (
-		"I traded before I came here. Found people willing to pay for a secure place to leave their "
-		.. "things and for someone who knows when not to ask questions. That's enough history for a first "
-		.. "conversation. If you want to deal with me, tell me what you need and I'll tell you whether I "
-		.. "can help."
+		"People needed somewhere to leave things. I had space and knew how to keep my mouth shut. It worked. "
+		.. "You're waiting for a more interesting answer. There may be one, but we haven't done any business "
+		.. "yet. Tell me what you need stored or moved. I'll tell you what I can do, what it costs, and where "
+		.. "my responsibility ends. You can decide whether that suits you before handing anything over."
 	),
 	options = {
 		"BackTopic",
@@ -245,7 +245,7 @@ DIALOGUE.addTopic("StartBarter", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "All right.",
+	response = "Anything else concerning business?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -263,25 +263,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "Come back soon, STALKER...",
+	response = "All right. We're finished.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
 	statement = "How do I know I can trust you?",
 	response = (
-		"You don't. Start with something you can afford to lose. Check it when you get it back. Do that "
-		.. "a few times and make your own decision. If you need me to tell you what an honest man I am, "
-		.. "you're going to have an expensive stay here."
+		"Start small. Check what comes back. Decide for yourself. Haggler could spend an hour explaining why "
+		.. "he's trustworthy; I'd like to finish this conversation before lunch. If something matters to the "
+		.. "arrangement, ask. If you're asking because you're curious about someone else's parcel, get used to "
+		.. "being disappointed. You'll appreciate that when it's yours."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What if something goes wrong with a delivery?",
+	statement = "What if something goes wrong?",
 	response = (
-		"Tell me what affects the job. Wrong place, missing parcel, bad route. Don't improve the story "
-		.. "or leave out the part that makes you look foolish. I need enough to decide what happens next. "
-		.. "You can save the performance for someone who asked."
+		"Tell me early. Where it was, what you saw, what you actually did. Don't tidy up the part that makes "
+		.. "you look foolish. I've heard worse, and the story gets less useful every time someone improves it. "
+		.. "A bad route I can stop using. An imaginary safe one keeps costing people. That's the answer you "
+		.. "came for. Leave the names out unless I need them."
 	),
 	options = {"BackTopic"},
 })

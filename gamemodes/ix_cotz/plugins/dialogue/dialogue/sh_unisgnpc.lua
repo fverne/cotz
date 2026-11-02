@@ -18,8 +18,13 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
-	response = "No.",
+	statement = "What does your work involve?",
+	response = (
+		"Allocations, requisitions, and explaining why the equipment already promised to someone else is "
+		.. "unavailable. If you need something, be specific. What it must do matters more than how much you "
+		.. "like the look of it. I can discuss an order. My personal history is unlikely to help fill yours. If "
+		.. "that is what you intended to ask, consider this the shorter answer."
+	),
 	options = {
 		"BackTopic",
 	},
@@ -108,7 +113,7 @@ DIALOGUE.addTopic("StartBarter", {
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about another topic.",
-	response = "Anything else?",
+	response = "What else did you want to discuss?",
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
@@ -124,25 +129,27 @@ DIALOGUE.addTopic("BackTopic", {
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll talk to you later.",
-	response = "Bye.",
+	response = "Check your equipment before departure. Dismissed.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Why can't you make an exception?",
+	statement = "Can you make an exception?",
 	response = (
-		"Because I have already promised those supplies elsewhere. If your need has changed, explain it. "
-		.. "I can reconsider an allocation. I cannot issue the same equipment twice because both people "
-		.. "gave persuasive accounts of their difficulties."
+		"Explain what has changed. I can reconsider an allocation; I cannot issue the same equipment to two "
+		.. "people. Usually the person asking for an exception has thought very carefully about their own "
+		.. "difficulty and rather less about the next departure. That is understandable. Keeping track of both "
+		.. "is part of my work. Give me enough information to do it before you begin bargaining."
 	),
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What if an order can't be filled?",
+	statement = "What if an order cannot be filled?",
 	response = (
-		"Say so while there is time to make another arrangement. A shortage I know about can be planned "
-		.. "around. A shortage concealed by optimism becomes someone else's emergency. Brass understands "
-		.. "the distinction. You don't need a speech; I need the facts."
+		"Tell me while there is time to change arrangements. Brass will report a shortage even when he knows "
+		.. "I won't like hearing it. I can work with that. Optimism written into a stock return sends somebody "
+		.. "out expecting equipment that never arrived. If you bring me a problem early, I may still be "
+		.. "displeased. You should not mistake that for preferring a late surprise."
 	),
 	options = {"BackTopic"},
 })

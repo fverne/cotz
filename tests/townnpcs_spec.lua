@@ -96,6 +96,7 @@ local describedJob = ix.jobs.list["cotz/town/commission/gasket/" .. descriptionS
 check(describedJob.fieldCargoDescription == descriptionStep.field.description,
 	"commission registration carries the optional cargo description")
 descriptionStep.field.description = originalCargoDescription
+describedJob.fieldCargoDescription = originalCargoDescription
 local function request(contact, difficulty, item)
 	return ix.jobs.list["cotz/town/" .. contact .. "/" .. difficulty .. "/" .. item].numberRec
 end
@@ -184,6 +185,14 @@ check(contactCount == 27 and count == 646, "all contacts and proposed steps are 
 local cargoCount, recipientCount, dropCount = 0, 0, 0
 for _, contact in pairs(town.contacts) do
 	for _, step in ipairs(contact.progression) do
+		if step.field then
+			local job = ix.jobs.list["cotz/town/commission/" .. contact.id .. "/" .. step.id]
+			check(type(step.field.label) == "string" and step.field.label ~= ""
+				and type(step.field.description) == "string" and step.field.description ~= "",
+				"every field commission supplies its narrative cargo identity")
+			check(job.fieldCargoName == step.field.label and job.fieldCargoDescription == step.field.description,
+				"custom and standard-results commissions register their narrative cargo identity")
+		end
 		if step.field and step.field.cargo then
 			cargoCount = cargoCount + 1
 			local definition = ix.jobs.list["cotz/town/commission/" .. contact.id .. "/" .. step.id]
@@ -446,6 +455,14 @@ for _, contact in pairs(town.contacts) do
 		"superseded topics are deleted from the definition, not hidden")
 	check(tree.TradeTopic.postCallback == ix.dialogue.OpenVendor, "all town trading uses the owning shared handler")
 	check(contact.job.kind == "arena" or offered.GetTaskByDifficulty, "non-arena contacts offer their category")
+	if contact.job.kind ~= "arena" then
+		check(tree.GetTaskByDifficulty.response == contact.dialogue.work,
+			"work offers display their contact's explanation instead of a generic spoken line")
+		local dialogue = ix.dialogue.list[ix.npctemplates.templates[contact.template].dialogueid]
+		ix.dialogue.ConfigureTaskRewards(dialogue)
+		check(tree.GetTaskByDifficulty.response == contact.dialogue.work,
+			"reward reconfiguration preserves the contact's work explanation")
+	end
 	check(tree.TownView and tree.TownCommission and tree.TownHandIn, "finite commissions and hand-ins are wired")
 	check(offered.TownDeliveries and tree.TownDeliveries.ResolveDynamicOption,
 		"every contact exposes the conditional incoming-delivery action")
