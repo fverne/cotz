@@ -186,6 +186,7 @@ local ROSTER_STRINGS = {"name", "pdaavatar", "state", "map", "destination", "squ
 
 local function writeRecord(record)
 	net.WriteUInt(record.characterID, 32)
+	net.WriteString(record.profile or "{}")
 	for _, key in ipairs(ROSTER_STRINGS) do net.WriteString(record[key]) end
 	net.WriteUInt(record.squadColor.r, 8)
 	net.WriteUInt(record.squadColor.g, 8)
@@ -209,6 +210,8 @@ function cross.PublishRoster(rows)
 	local records = {}
 	for _, row in ipairs(rows) do
 		records[#records + 1] = {
+			profile = util.TableToJSON({leaderboardStats = (util.JSONToTable(row.profile or "{}") or {}).leaderboardStats,
+				reputation = tonumber(row.reputation) or 0}),
 			characterID = tonumber(row.character_id), name = row.name or "",
 			pdaavatar = row.pdaavatar or "vgui/icons/face_31.png", state = row.state,
 			map = row.map or "", destination = row.destination or "",
@@ -237,6 +240,9 @@ function cross.RefreshRoster()
 	cross.reading = true
 	local query = mysql:Select("ix_squads_presence"):Alias("p")
 	query:SelectAll("p")
+	query:Join("ix_characters", "leaderboard", mysql.Compare("leaderboard.id", "=", mysql.Column("p.character_id")))
+	query:SelectColumn("leaderboard.data", "profile")
+	query:SelectColumn("leaderboard.reputation", "reputation")
 	query:WhereExpr(mysql.All(mysql.Compare("p.scope", "=", scope()), mysql.Compare("p.hidden", "=", 0),
 		mysql.Compare("p.expires", ">", mysql.Now()), mysql.Any(mysql.Compare("p.state", "=", "online"),
 			mysql.Compare("p.state", "=", "travelling"))))

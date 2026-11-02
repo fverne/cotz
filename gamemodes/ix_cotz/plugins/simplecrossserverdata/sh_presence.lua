@@ -21,6 +21,7 @@ if (CLIENT) then
 		local count = net.ReadUInt(6)
 		for _ = 1, count do
 			local record = {characterID = net.ReadUInt(32)}
+			record.profile = util.JSONToTable(net.ReadString()) or {}
 			record.name = net.ReadString()
 			record.pdaavatar = net.ReadString()
 			record.state = net.ReadString()
@@ -61,6 +62,8 @@ if (CLIENT) then
 						squadID, squadName, squadColor = ix.squad.GetScoreboardGroup(client)
 					end
 					records[id] = {
+						profile = {reputation = client:getReputation(),
+							leaderboardStats = character:GetData("leaderboardStats", {})},
 						characterID = id, player = client, name = character:GetName(),
 						pdaavatar = character:GetPdaavatar(), map = game.GetMap(), fresh = true,
 						state = previous and fresh and previous.state == "travelling" and "travelling" or "online",

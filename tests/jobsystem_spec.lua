@@ -50,7 +50,11 @@ check(#jobs.getNPCJobs("Empty", {"missing"}, 2) == 0, "empty pools create no pla
 check(#jobs.getNPCJobs("Bounded", {"second"}, 9999) == jobs.settings.maxNPCOffers,
 	"NPC offer counts are bounded")
 
-local character = {}
+local statsData = {}
+local character = {
+	GetData = function(_, key, default) return statsData[key] or default end,
+	SetData = function(_, key, value) statsData[key] = value end,
+}
 local removed
 local client = {
 	GetCharacter = function() return character end,
@@ -162,3 +166,5 @@ check(events[client].mutantKilled == 1 and events[client].bloodsuckerKilled == 1
 	"species, family and general kill triggers preserved")
 
 print("PASS: " .. checks .. " jobsystem checks")
+
+check(statsData.leaderboardStats.mutantsKilled == 1, "personal mutant kill counted once")

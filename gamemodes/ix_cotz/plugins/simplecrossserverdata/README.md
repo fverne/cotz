@@ -58,3 +58,17 @@ row cleanup. SQL checks require Python 3. Mocks/SQLite do not establish Garry's 
 correctness. Verify two live servers: late joins, character switches, hidden players, loners, renames,
 travel/failure/reconnect, database loss/recovery, expiry after a crash, both filter settings, local
 voice actions and portrait/status layout at different resolutions.
+
+## Character leaderboard
+
+STALKERnet now lists active characters by descending reputation, with character ID breaking ties.
+Filters retain the overall position. Select a row for its PDA dossier; right-click local characters
+for voice mute and plugin context actions. The dossier moves below the list on narrow panels.
+
+Personal mutant and human NPC kills and successfully handed-in tasks are stored in character data
+under `leaderboardStats`. These counters begin with this update; nearby task kill credit does not
+increment personal kills. Town assignments count once through the existing guarded hand-in path.
+No historical totals are inferred from bonus progress. Existing saves need no reset or SQL migration.
+Remote profiles read saved character reputation and statistics; they can lag until character save
+and the next roster refresh. Only the public counters and reputation enter the roster payload.
+Deploy the updated roster reader and writer together on all maps.

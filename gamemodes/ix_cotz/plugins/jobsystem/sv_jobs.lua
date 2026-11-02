@@ -52,6 +52,9 @@ function playerMeta:ixJobComplete(npcidentifier)
 	claimed[npcidentifier] = job.progressionClaim
 	if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
 	character:SetData("jobClaimsPaid", claimed)
+	local stats = table.Copy(character:GetData("leaderboardStats", {}))
+	stats.tasksCompleted = (stats.tasksCompleted or 0) + 1
+	character:SetData("leaderboardStats", stats)
 	jobs[npcidentifier] = nil
 	character:SetJobs(jobs)
 	if ix.townNPCs and ix.townNPCs.installed then

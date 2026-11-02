@@ -27,7 +27,13 @@ local function serialize(value)
 	table.sort(entries)
 	return table.concat(entries, ";")
 end
-util = {AddNetworkString = function() end, SHA256 = function(value) return value end, TableToJSON = serialize}
+local jsonValues = {}
+local function encode(value)
+	local key = serialize(value)
+	jsonValues[key] = value
+	return key
+end
+util = {JSONToTable = function(value) return jsonValues[value] end, AddNetworkString = function() end, SHA256 = function(value) return value end, TableToJSON = encode}
 game = {GetIPAddress = function() return "test" end}
 local client = {GetCharacter = function() return {} end}
 player = {GetHumans = function() return {client} end}
