@@ -20,7 +20,7 @@
 			{"kit_event", 1}, 
 		},
 		pdabroadcast = "Zombies have been spotted at %s, proceed with caution.",
-		difficulty = {11, 12},
+		difficulty = {"swamps_outside_easy", "swamps_outside_hard"},
 		lootChance = 10, --percentage
 	}
 */
@@ -31,23 +31,7 @@
 --loot: like items, except each item has a chance to spawn
 
 
--- Explananation for difficulties:
--- First integer = Map
--- 1 = Swamps
--- 2 = Waystation
--- 3 = Pripyat
--- Second integer = location on map
--- 1 = Close to spawn in wilderness
--- 2 = Far from spawn in wilderness
--- 3 = In previous populated areas, such as buildings, intended for humanoid npcs
--- 4 = Sniper spots
--- 5 = Underground
--- Examples:
--- 12 - Swamps, far from spawn
--- 14 - Swamps, sniper spot (guard tower for instance)
--- 23 - Waystation, inside a building
--- 33 - Pripyat, inside a building
--- 35 - Pripyat, underground
+-- Location tags match the third field of event points (see README.md).
 
 --[[-------------------------------------------------------------------------
 dogs
@@ -57,7 +41,7 @@ PLUGIN.eventdefs["Dog1"] = {
 		{"npc_mutant_dog", 2},
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
-	difficulty = {11, 12, 21, 22},
+	difficulty = {"swamps_outside_easy", "swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 10,
 }
 
@@ -66,7 +50,7 @@ PLUGIN.eventdefs["Dog2"] = {
 		{"npc_mutant_dog", 3},
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 10,
 }
 
@@ -76,7 +60,7 @@ PLUGIN.eventdefs["Dog3"] = {
 		{"npc_mutant_pseudodog", 1},
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 15,
 }
 
@@ -85,7 +69,7 @@ PLUGIN.eventdefs["Dog4"] = {
 		{"npc_mutant_dog", 4},
 	},
 	pdabroadcast = "A pack of dogs have been seen wandering %s aimlessly, be alert, stalker.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 15,
 }
 
@@ -95,7 +79,7 @@ PLUGIN.eventdefs["Dog5"] = {
 		{"npc_mutant_pseudodog", 1},
 	},
 	pdabroadcast = "A pack of dogs have been seen wandering %s aimlessly, be alert, stalker.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 20,
 }
 
@@ -109,7 +93,13 @@ PLUGIN.eventdefs["bloodsucker1"] = {
 		{"npc_mutant_bloodsucker", 1}, 
 	},
 	pdabroadcast = "There's been sightings of a bloodsucker %s, any stalkers brave enough to take them out?",
-	difficulty = {12, 13, 21, 23, 25},
+	difficulty = {
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_building",
+		"waystation_underground",
+	},
 	lootChance = 10,
 }
 
@@ -118,7 +108,7 @@ PLUGIN.eventdefs["bloodsucker2"] = {
 		{"npc_mutant_bloodsucker", 2}, 
 	},
 	pdabroadcast = "There's been sightings of a couple bloodsuckers %s, any stalkers brave enough to take them out?",
-	difficulty = {21, 22, 23, 25},
+	difficulty = {"waystation_outside_easy", "waystation_outside_hard", "waystation_building", "waystation_underground"},
 	lootChance = 10, 
 }
 
@@ -132,7 +122,7 @@ PLUGIN.eventdefs["bloodsucker3"] = {
 	},
 	
 	pdabroadcast = "A group of stalkers %s has been massacred by a small pack of bloodsuckers, be careful, stalkers.",
-	difficulty = {23, 25, 31},
+	difficulty = {"waystation_building", "waystation_underground", "pripyat_outside_easy"},
 	lootChance = 15, 
 }
 
@@ -146,7 +136,7 @@ PLUGIN.eventdefs["bloodsucker4"] = {
 	},
 	
 	pdabroadcast = "A pack of bloodsuckers has been sighted %s, proceed with caution, stalker.",
-	difficulty = {32, 33, 35},
+	difficulty = {"pripyat_outside_hard", "pripyat_building", "pripyat_underground"},
 	lootChance = 20, 
 }
 
@@ -158,7 +148,14 @@ PLUGIN.eventdefs["rodent1"] = {
 		{"npc_mutant_rodent", 4},
 	},
 	pdabroadcast = "There is a bit of a mice problem %s, exterminate them stalker.",
-	difficulty = {11, 12, 13, 21, 22, 23},
+	difficulty = {
+		"swamps_outside_easy",
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+	},
 	lootChance = 10,
 }
 
@@ -168,7 +165,14 @@ PLUGIN.eventdefs["rodent2"] = {
 		{"npc_mutant_rodent", 5},
 	},
 	pdabroadcast = "Rodents are being a menace %s, deal with them with caution, stalker.",
-	difficulty = {11, 12, 13, 21, 22, 23},
+	difficulty = {
+		"swamps_outside_easy",
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+	},
 	lootChance = 15,
 }
 
@@ -177,7 +181,7 @@ PLUGIN.eventdefs["rodent2"] = {
 -- 		{"npc_mutant_rodent", 8},
 -- 	},
 -- 	pdabroadcast = "Rodents are overrunning %s, proceed with caution, stalker.",
--- 	difficulty = {11, 12, 13},
+-- 	difficulty = {"swamps_outside_easy", "swamps_outside_hard", "swamps_building"},
 -- 	lootChance = 20,
 -- }
 
@@ -186,7 +190,7 @@ PLUGIN.eventdefs["rodent2"] = {
 -- 		{"npc_mutant_rodent", 9},
 -- 	},
 -- 	pdabroadcast = "It seems %s is completely infested with swarms of rodents! Stay away, stalker!",
--- 	difficulty = {11, 12, 13},
+-- 	difficulty = {"swamps_outside_easy", "swamps_outside_hard", "swamps_building"},
 -- 	lootChance = 25,
 -- }
 
@@ -200,7 +204,7 @@ PLUGIN.eventdefs["pseudogiant1"] = {
 	},
 
 	pdabroadcast = "A pseudogiant has been spotted %s! Stay away from there, stalker.",
-	difficulty = {22},
+	difficulty = {"waystation_outside_hard"},
 	lootChance = 20, 
 }
 
@@ -211,7 +215,7 @@ PLUGIN.eventdefs["pseudogiant2"] = {
 	},
 	
 	pdabroadcast = "A pseudogiant has been spotted %s! Stay away from there, stalker.",
-	difficulty = {31, 32},
+	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard"},
 	lootChance = 20, 
 }
 
@@ -225,7 +229,7 @@ PLUGIN.eventdefs["pseudogiant3"] = {
 	},
 	
 	pdabroadcast = "Pseudogiants have been spotted %s! Evacuate the area for your safety, stalker.",
-	difficulty = {32},
+	difficulty = {"pripyat_outside_hard"},
 	lootChance = 30, 
 }
 
@@ -234,7 +238,7 @@ PLUGIN.eventdefs["pseudogiant4"] = {
 		{"npc_mutant_pseudogiant_fast", 1} 
 	},
 	pdabroadcast = "A hulking mass has been spotted leaping through the air %s! Get out of there if you value your lives.",
-	difficulty = {32},
+	difficulty = {"pripyat_outside_hard"},
 	lootChance = 30, 
 }
 
@@ -246,7 +250,7 @@ PLUGIN.eventdefs["boar0"] = {
 		{"npc_mutant_boar", 1},
 	},
 	pdabroadcast = "A boar is spotted %s, any stalkers up for boar stew should deal with it.",
-	difficulty = {11},
+	difficulty = {"swamps_outside_easy"},
 	lootChance = 10,
 }
 
@@ -255,7 +259,7 @@ PLUGIN.eventdefs["boar1"] = {
 		{"npc_mutant_boar", 2},
 	},
 	pdabroadcast = "A pair of boars are spotted %s, any stalkers up for boar stew should deal with them.",
-	difficulty = {11, 12, 21},
+	difficulty = {"swamps_outside_easy", "swamps_outside_hard", "waystation_outside_easy"},
 	lootChance = 10,
 }
 
@@ -264,7 +268,7 @@ PLUGIN.eventdefs["boar2"] = {
 		{"npc_mutant_boar", 3},
 	},
 	pdabroadcast = "Wild boars have been disrupting stalker activity %s, try to wipe them out, stalker.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 15,
 }
 
@@ -273,7 +277,7 @@ PLUGIN.eventdefs["boar3"] = {
 		{"npc_mutant_boar", 4},
 	},
 	pdabroadcast = "A pack of boars are running rampant %s, proceed with caution, stalker.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 20,
 }
 
@@ -290,7 +294,7 @@ PLUGIN.eventdefs["chimera1"] = {
 		{"models/Gibs/HGIBS_spine.mdl", 1},
 	},
 	pdabroadcast = "Stalkers has reported a Chimera %s! Avoid them, stalkers.",
-	difficulty = {22, 31, 32},
+	difficulty = {"waystation_outside_hard", "pripyat_outside_easy", "pripyat_outside_hard"},
 	lootChance = 20, 
 }
 
@@ -305,7 +309,7 @@ PLUGIN.eventdefs["chimera2"] = {
 	},
 	
 	pdabroadcast = "Stalkers has reported a Chimera %s! Avoid them, stalkers.",
-	difficulty = {31, 32},
+	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard"},
 	lootChance = 20, 
 }
 
@@ -319,7 +323,7 @@ PLUGIN.eventdefs["chimera3"] = {
 	},
 	
 	pdabroadcast = "Stalkers has reported multiple Chimeras %s! Avoid them, stalkers.",
-	difficulty = {31, 32},
+	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard"},
 	lootChance = 20, 
 }
 
@@ -328,7 +332,7 @@ PLUGIN.eventdefs["electrochimera1"] = {
 		{"npc_mutant_chimera_electro", 1},
 	},
 	pdabroadcast = "We have sightings of an electrically charged Chimera %s! Make sure you're properly prepared if you're taking it on, stalkers.",
-	difficulty = {32},
+	difficulty = {"pripyat_outside_hard"},
 	lootChance = 20, 
 }
 
@@ -342,7 +346,7 @@ PLUGIN.eventdefs["cat1"] = {
 	},
 	
 	pdabroadcast = "A cat has been spotted %s just now. Be careful, stalker.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 10, 
 }
 
@@ -355,7 +359,7 @@ PLUGIN.eventdefs["cat2"] = {
 	},
 	
 	pdabroadcast = "A cat has been spotted %s just now, chasing some birds. Take care, stalker.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 10, 
 }
 
@@ -368,7 +372,7 @@ PLUGIN.eventdefs["cat3"] = {
 	},
 	
 	pdabroadcast = "A pair of cats have been spotted %s just now, playing around. Don't mistake them for pettable, stalker.",
-	difficulty = {21, 22, 31, 32},
+	difficulty = {"waystation_outside_easy", "waystation_outside_hard", "pripyat_outside_easy", "pripyat_outside_hard"},
 	lootChance = 15, 
 }
 
@@ -423,7 +427,7 @@ PLUGIN.eventdefs["izlom1"] = {
 		{"npc_mutant_izlom", 1}, 
 	},
 	pdabroadcast = "One of those long-limbed Izloms has been seen %s.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 	lootChance = 10, 
 }
 
@@ -432,7 +436,7 @@ PLUGIN.eventdefs["izlom2"] = {
 		{"npc_mutant_izlom", 2}, 
 	},
 	pdabroadcast = "A pair of Izloms have just been seen %s.",
-	difficulty = {21, 22, 31, 32},
+	difficulty = {"waystation_outside_easy", "waystation_outside_hard", "pripyat_outside_easy", "pripyat_outside_hard"},
 	lootChance = 15, 
 }
 
@@ -444,7 +448,7 @@ PLUGIN.eventdefs["izlom3"] = {
 		{"models/crow.mdl", 1, 0, "000000000"},
 	},
 	pdabroadcast = "Just saw a pair of those hunchbacked izloms eat a crow %s.",
-	difficulty = {21, 22, 31, 32},
+	difficulty = {"waystation_outside_easy", "waystation_outside_hard", "pripyat_outside_easy", "pripyat_outside_hard"},
 	lootChance = 15, 
 }
 
@@ -456,7 +460,7 @@ PLUGIN.eventdefs["psydog1"] = {
 		{"npc_mutant_psydog", 1}, 
 	},
 	pdabroadcast = "A psydog has been reported deceiving stalkers %s, don't get too close, stalker.",
-	difficulty = {21, 22, 31},
+	difficulty = {"waystation_outside_easy", "waystation_outside_hard", "pripyat_outside_easy"},
 	lootChance = 10, 
 }
 
@@ -465,7 +469,7 @@ PLUGIN.eventdefs["psydog2"] = {
 		{"npc_mutant_psydog", 2}, 
 	},
 	pdabroadcast = "A psydog has been reported feasting on a dead stalker %s, don't add a body for it to eat, stalker",
-	difficulty = {31},
+	difficulty = {"pripyat_outside_easy"},
 	lootChance = 15, 
 }
 
@@ -475,7 +479,7 @@ PLUGIN.eventdefs["psydog3"] = {
 		{"npc_mutant_pseudodog", 2}, 
 	},
 	pdabroadcast = "A psydog has been reported feasting on a dead stalker %s, don't let it feast on another, stalker",
-	difficulty = {31},
+	difficulty = {"pripyat_outside_easy"},
 	lootChance = 20, 
 }
 
@@ -487,7 +491,7 @@ PLUGIN.eventdefs["burer1"] = {
 		{"npc_mutant_burer", 1}, 
 	},
 	pdabroadcast = "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {25},
+	difficulty = {"waystation_underground"},
 	lootChance = 10, 
 }
 
@@ -497,7 +501,7 @@ PLUGIN.eventdefs["burer2"] = {
 		{"npc_mutant_classiczombie", 2}, 
 	},
 	pdabroadcast =  "A burer has been spotted %s! Watch out for any figure in a trenchcoat, stalker.",
-	difficulty = {25, 35},
+	difficulty = {"waystation_underground", "pripyat_underground"},
 	lootChance = 15, 
 }
 
@@ -506,7 +510,7 @@ PLUGIN.eventdefs["burer3"] = {
 		{"npc_mutant_burer", 3}, 
 	},
 	pdabroadcast = "A trio of burers has been spotted %s! Avoid any hooded figures, stalkers.",
-	difficulty = {35},
+	difficulty = {"pripyat_underground"},
 	lootChance = 20, 
 }
 
@@ -518,7 +522,7 @@ PLUGIN.eventdefs["flesh1"] = {
 		{"npc_mutant_flesh", 2}, 
 	},
 	pdabroadcast = "A few flesh were spotted %s, up for an easy hunt, stalker?.",
-	difficulty = {11},
+	difficulty = {"swamps_outside_easy"},
 	lootChance = 10, 
 }
 
@@ -529,7 +533,7 @@ PLUGIN.eventdefs["flesh2"] = {
 		{"npc_mutant_boar", 1},
 	},
 	pdabroadcast = "A few flesh were spotted %s, up for an easy hunt, stalker?.",
-	difficulty = {11, 12},
+	difficulty = {"swamps_outside_easy", "swamps_outside_hard"},
 	lootChance = 10, 
 }
 
@@ -538,7 +542,7 @@ PLUGIN.eventdefs["flesh3"] = {
 		{"npc_mutant_flesh", 3}, 
 	},
 	pdabroadcast = "A few flesh were spotted %s, up for an easy hunt, stalker?.",
-	difficulty = {12},
+	difficulty = {"swamps_outside_hard"},
 	lootChance = 10, 
 }
 
@@ -549,7 +553,7 @@ PLUGIN.eventdefs["flesh4"] = {
 	},
 
 	pdabroadcast = "A small pack of flesh are wandering %s, we could always use more food, stalker.",
-	difficulty = {12},
+	difficulty = {"swamps_outside_hard"},
 	lootChance = 15, 
 }
 
@@ -559,7 +563,7 @@ PLUGIN.eventdefs["flesh5"] = {
 	},
 
 	pdabroadcast = "A small pack of flesh are wandering %s, we could always use more food, stalker.",
-	difficulty = {12},
+	difficulty = {"swamps_outside_hard"},
 	lootChance = 15, 
 }
 
@@ -570,7 +574,7 @@ PLUGIN.eventdefs["flesh6"] = {
 	},
 
 	pdabroadcast = "There has been sightings of aggressive fleshes %s, somebody put them down.",
-	difficulty = {12, 21},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy"},
 	lootChance = 20, 
 }
 
@@ -584,7 +588,7 @@ PLUGIN.eventdefs["snork1"] = {
 		{"npc_mutant_snork", 1}, 
 	},
 	pdabroadcast = "A snork has been sneaking about %s, careful stalker.",
-	difficulty = {13, 23, 25, 33},
+	difficulty = {"swamps_building", "waystation_building", "waystation_underground", "pripyat_building"},
 	lootChance = 10, 
 }
 
@@ -593,7 +597,7 @@ PLUGIN.eventdefs["snork2"] = {
 		{"npc_mutant_snork", 2}, 
 	},
 	pdabroadcast = "A couple of snorks have been heard growling %s, careful stalker.",
-	difficulty = {23, 25, 33, 35},
+	difficulty = {"waystation_building", "waystation_underground", "pripyat_building", "pripyat_underground"},
 	lootChance = 15, 
 }
 
@@ -602,7 +606,7 @@ PLUGIN.eventdefs["snork3"] = {
 		{"npc_mutant_snork", 3}, 
 	},
 	pdabroadcast = "A small group of snorks have been seen prowling %s, careful stalker.",
-	difficulty = {23, 25, 33, 35},
+	difficulty = {"waystation_building", "waystation_underground", "pripyat_building", "pripyat_underground"},
 	lootChance = 20, 
 }
 
@@ -615,7 +619,7 @@ PLUGIN.eventdefs["zombies0"] = {
 		{"npc_mutant_classiczombie", 2}, 
 	},
 	pdabroadcast = "There has been sightings of a few zombies %s, put them out of their misery, stalker.",
-	difficulty = {11},
+	difficulty = {"swamps_outside_easy"},
 	lootChance = 10, 
 }
 
@@ -625,7 +629,7 @@ PLUGIN.eventdefs["zombies1"] = {
 		{"npc_mutant_classiczombie", 3}, 
 	},
 	pdabroadcast = "There has been sightings of a few zombies %s, put them out of their misery, stalker.",
-	difficulty = {12, 13, 21},
+	difficulty = {"swamps_outside_hard", "swamps_building", "waystation_outside_easy"},
 	lootChance = 10, 
 }
 
@@ -634,7 +638,7 @@ PLUGIN.eventdefs["zombies2"] = {
 		{"npc_human_z_rookie_pistolman", 1},
 	},
 	pdabroadcast = "A pistol wielding zombie has appeared %s, watch yourself, stalker.",
-	difficulty = {11},
+	difficulty = {"swamps_outside_easy"},
 	lootChance = 15, 
 }
 
@@ -644,7 +648,7 @@ PLUGIN.eventdefs["zombies3"] = {
 		{"npc_mutant_classiczombie", 3}, 
 	},
 	pdabroadcast = "A small group of zombies have appeared %s, watch yourself, stalker.",
-	difficulty = {12, 13, 25},
+	difficulty = {"swamps_outside_hard", "swamps_building", "waystation_underground"},
 	lootChance = 15, 
 }
 
@@ -656,7 +660,7 @@ PLUGIN.eventdefs["zombies4"] = {
 		{"npc_human_z_rookie_rifleman", 1},
 	},
 	pdabroadcast = "There is a group of zombies %s, and has occupied it. Tread with caution, stalker.",
-	difficulty = {21, 23, 25},
+	difficulty = {"waystation_outside_easy", "waystation_building", "waystation_underground"},
 	lootChance = 20, 
 }
 
@@ -668,7 +672,7 @@ PLUGIN.eventdefs["tark1"] = {
 		{"npc_mutant_tark", 1},
 	},
 	pdabroadcast = "Horse-like creature spotted %s. Don't try to feed it, stalker.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 }
 
 PLUGIN.eventdefs["tark2"] = {
@@ -676,7 +680,7 @@ PLUGIN.eventdefs["tark2"] = {
 		{"npc_mutant_tark", 2},
 	},
 	pdabroadcast = "A pair of horse-like creatures spotted %s.",
-	difficulty = {12, 21, 22},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_outside_hard"},
 }
 
 PLUGIN.eventdefs["tark3"] = {
@@ -684,7 +688,7 @@ PLUGIN.eventdefs["tark3"] = {
 		{"npc_mutant_tark", 3},
 	},
 	pdabroadcast = "Small pack of horse-like creatures spotted %s.",
-	difficulty = {22},
+	difficulty = {"waystation_outside_hard"},
 }
 
 --[[-------------------------------------------------------------------------
@@ -695,7 +699,7 @@ PLUGIN.eventdefs["spider1"] = {
 		{"npc_mutant_spider", 1},
 	},
 	pdabroadcast = "Arachnid has been detected %s.",
-	difficulty = {12, 21, 23, 25},
+	difficulty = {"swamps_outside_hard", "waystation_outside_easy", "waystation_building", "waystation_underground"},
 }
 
 PLUGIN.eventdefs["spider2"] = {
@@ -703,7 +707,7 @@ PLUGIN.eventdefs["spider2"] = {
 		{"npc_mutant_spider", 2},
 	},
 	pdabroadcast = "Arachnid creatures spotted %s. Take care, stalker.",
-	difficulty = {21, 22, 23, 25},
+	difficulty = {"waystation_outside_easy", "waystation_outside_hard", "waystation_building", "waystation_underground"},
 }
 
 PLUGIN.eventdefs["spider3"] = {
@@ -711,7 +715,13 @@ PLUGIN.eventdefs["spider3"] = {
 		{"npc_mutant_spider", 3},
 	},
 	pdabroadcast = "A hunting pack of arachnid creatures spotted %s. Take care, stalker.",
-	difficulty = {21, 22, 32, 33, 35},
+	difficulty = {
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"pripyat_outside_hard",
+		"pripyat_building",
+		"pripyat_underground",
+	},
 }
 
 --[[-------------------------------------------------------------------------
@@ -722,7 +732,13 @@ PLUGIN.eventdefs["sprig1"] = {
 		{"npc_mutant_sprig", 1},
 	},
 	pdabroadcast = "Getting some motion detection readings %s, but we don't see anything. Take care, stalker.",
-	difficulty = {12, 21, 22, 31, 32},
+	difficulty = {
+		"swamps_outside_hard",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"pripyat_outside_easy",
+		"pripyat_outside_hard",
+	},
 }
 
 PLUGIN.eventdefs["sprig2"] = {
@@ -730,7 +746,13 @@ PLUGIN.eventdefs["sprig2"] = {
 		{"npc_mutant_sprig", 2},
 	},
 	pdabroadcast = "Motion sensors spike out %s, but we don't see anything. Take care, stalker.",
-	difficulty = {12, 21, 22, 31, 32},
+	difficulty = {
+		"swamps_outside_hard",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"pripyat_outside_easy",
+		"pripyat_outside_hard",
+	},
 }
 
 --[[-------------------------------------------------------------------------
@@ -743,7 +765,13 @@ PLUGIN.eventdefs["controllerswamp3"] = {
 		{"npc_human_z_rookie_rifleman", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Be very cautious, stalker.",
-	difficulty = {12, 13, 21, 22, 23},
+	difficulty = {
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+	},
 }
 
 --[[-------------------------------------------------------------------------
@@ -754,7 +782,15 @@ PLUGIN.eventdefs["controllerfast1"] = {
 		{"npc_mutant_controller_fast", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {21, 22, 23, 25, 31, 33, 35},
+	difficulty = {
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+		"waystation_underground",
+		"pripyat_outside_easy",
+		"pripyat_building",
+		"pripyat_underground",
+	},
 }
 
 PLUGIN.eventdefs["controllerfast2"] = {
@@ -762,7 +798,13 @@ PLUGIN.eventdefs["controllerfast2"] = {
 		{"npc_mutant_controller_fast", 2},
 	},
 	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
-	difficulty = {23, 31, 32, 33, 35},
+	difficulty = {
+		"waystation_building",
+		"pripyat_outside_easy",
+		"pripyat_outside_hard",
+		"pripyat_building",
+		"pripyat_underground",
+	},
 }
 
 
@@ -776,7 +818,7 @@ PLUGIN.eventdefs["controller1"] = {
 		{"npc_human_z_rookie_rifleman", 2},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {25, 33, 35},
+	difficulty = {"waystation_underground", "pripyat_building", "pripyat_underground"},
 }
 
 --[[-------------------------------------------------------------------------
@@ -787,7 +829,7 @@ PLUGIN.eventdefs["controllerelectric1"] = {
 		{"npc_mutant_controller_electro", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {32, 33, 35},
+	difficulty = {"pripyat_outside_hard", "pripyat_building", "pripyat_underground"},
 }
 
 --[[-------------------------------------------------------------------------
@@ -798,7 +840,7 @@ PLUGIN.eventdefs["karlik1"] = {
 		{"npc_mutant_karlik", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {32},
+	difficulty = {"pripyat_outside_hard"},
 }
 
 PLUGIN.eventdefs["karlik2"] = {
@@ -806,7 +848,7 @@ PLUGIN.eventdefs["karlik2"] = {
 		{"npc_mutant_karlik", 2},
 	},
 	pdabroadcast = "Getting multiple strange readings %s... Be very cautious, stalker.",
-	difficulty = {32},
+	difficulty = {"pripyat_outside_hard"},
 }
 
 --[[-------------------------------------------------------------------------
@@ -817,7 +859,7 @@ PLUGIN.eventdefs["vareshka1"] = {
 		{"npc_mutant_vareshka", 1},
 	},
 	pdabroadcast = "Vareshka detected %s... Take care, stalker.",
-	difficulty = {22},
+	difficulty = {"waystation_outside_hard"},
 }
 
 PLUGIN.eventdefs["vareshka2"] = {
@@ -825,7 +867,7 @@ PLUGIN.eventdefs["vareshka2"] = {
 		{"npc_mutant_vareshka", 2},
 	},
 	pdabroadcast = "A pair of Vareshkas has been detected %s... Be very cautious, stalker.",
-	difficulty = {22, 31, 32},
+	difficulty = {"waystation_outside_hard", "pripyat_outside_easy", "pripyat_outside_hard"},
 }
 
 PLUGIN.eventdefs["vareshka3"] = {
@@ -833,7 +875,7 @@ PLUGIN.eventdefs["vareshka3"] = {
 		{"npc_mutant_vareshka", 3},
 	},
 	pdabroadcast = "Getting information about multiple Vareshkas detected %s... Be extremely very cautious, stalker.",
-	difficulty = {31, 32},
+	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard"},
 }
 
 
@@ -845,7 +887,7 @@ Bear
 -- 		{"npc_mutant_bear", 1},
 -- 	},
 -- 	pdabroadcast = "Huge Bear detected %s, don't get too close, stalker.",
--- 	difficulty = {22, 31},
+-- 	difficulty = {"waystation_outside_hard", "pripyat_outside_easy"},
 -- }
 
 -- PLUGIN.eventdefs["bear2"] = {
@@ -853,7 +895,7 @@ Bear
 -- 		{"npc_mutant_bear", 2},
 -- 	},
 -- 	pdabroadcast = "A pair of Bears has been detected %s, I suggest legging it out of there, stalker.",
--- 	difficulty = {31, 32},
+-- 	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard"},
 -- }
 
 
@@ -867,7 +909,13 @@ PLUGIN.eventdefs["zombieradio1"] = {
 		{"npc_mutant_classiczombie", 3},
 	},
 	pdabroadcast = "Zombies detected %s... Getting some high radiation readings too. Be careful, stalker.",
-	difficulty = {12, 13, 21, 23, 25},
+	difficulty = {
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_building",
+		"waystation_underground",
+	},
 }
 
 PLUGIN.eventdefs["zombievolatile1"] = {
@@ -876,7 +924,15 @@ PLUGIN.eventdefs["zombievolatile1"] = {
 		{"npc_mutant_classiczombie", 3},
 	},
 	pdabroadcast = "Zombies detected %s... Getting some high radiation readings too. Be careful, stalker.",
-	difficulty = {21, 22, 23, 25, 31, 33, 35},
+	difficulty = {
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+		"waystation_underground",
+		"pripyat_outside_easy",
+		"pripyat_building",
+		"pripyat_underground",
+	},
 }
 
 PLUGIN.eventdefs["skeleton1"] = {
@@ -884,7 +940,7 @@ PLUGIN.eventdefs["skeleton1"] = {
 		{"npc_mutant_skeleton", 2},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {23, 25, 33, 35},
+	difficulty = {"waystation_building", "waystation_underground", "pripyat_building", "pripyat_underground"},
 }
 
 PLUGIN.eventdefs["skeleton2"] = {
@@ -893,7 +949,7 @@ PLUGIN.eventdefs["skeleton2"] = {
 		{"npc_mutant_classiczombie", 3},
 	},
 	pdabroadcast = "Getting strange readings %s... Take care, stalker.",
-	difficulty = {23, 25, 33, 35},
+	difficulty = {"waystation_building", "waystation_underground", "pripyat_building", "pripyat_underground"},
 }
 
 
@@ -903,7 +959,7 @@ PLUGIN.eventdefs["hellhound1"] = {
 		{"npc_mutant_dog", 3}
 	},
 	pdabroadcast = "A small pack of dogs have been spotted %s. I'm also getting increased heat signatures - strange.",
-	difficulty = {22, 31, 32},
+	difficulty = {"waystation_outside_hard", "pripyat_outside_easy", "pripyat_outside_hard"},
 }
 
 
@@ -916,7 +972,7 @@ PLUGIN.eventdefs["bandit0"] = {
 		{"npc_human_bandit_pistolman", 1},
 	},
 	pdabroadcast = "Bandit scout spotted %s. Take care.",
-	difficulty = {11},
+	difficulty = {"swamps_outside_easy"},
 }
 
 PLUGIN.eventdefs["bandit1"] = {
@@ -925,7 +981,13 @@ PLUGIN.eventdefs["bandit1"] = {
 		{"npc_human_bandit_shotgunner", 1}
 	},
 	pdabroadcast = "Bandits spotted %s. Take care.",
-	difficulty = {12, 13, 21, 22, 23},
+	difficulty = {
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+	},
 }
 
 PLUGIN.eventdefs["bandit2"] = {
@@ -935,7 +997,13 @@ PLUGIN.eventdefs["bandit2"] = {
 		{"npc_human_bandit_rifleman", 2},
 	},
 	pdabroadcast = "Bandits spotted %s. Take care.",
-	difficulty = {12, 13, 21, 22, 23},
+	difficulty = {
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+	},
 }
 
 PLUGIN.eventdefs["bandit3"] = {
@@ -944,7 +1012,14 @@ PLUGIN.eventdefs["bandit3"] = {
 		{"npc_human_bandit_rifleman", 2},
 	},
 	pdabroadcast = "Bandits spotted %s. Take care.",
-	difficulty = {12, 13, 21, 22, 23, 25},
+	difficulty = {
+		"swamps_outside_hard",
+		"swamps_building",
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+		"waystation_underground",
+	},
 }
 
 PLUGIN.eventdefs["banditsniper"] = {
@@ -952,7 +1027,7 @@ PLUGIN.eventdefs["banditsniper"] = {
 		{"npc_human_bandit_sniper", 1},		
 	},
 	pdabroadcast = "Bandit sniper spotted %s. Take care.",
-	difficulty = {14, 24},
+	difficulty = {"swamps_sniperspot", "waystation_sniperspot"},
 }
 
 PLUGIN.eventdefs["merc1"] = {
@@ -961,7 +1036,14 @@ PLUGIN.eventdefs["merc1"] = {
 		{"npc_human_merc_rifleman", 1},	
 	},
 	pdabroadcast = "Mercenaries spotted %s. Take care.",
-	difficulty = {21, 22, 23, 25, 31, 33},
+	difficulty = {
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+		"waystation_underground",
+		"pripyat_outside_easy",
+		"pripyat_building",
+	},
 }
 
 PLUGIN.eventdefs["merc2"] = {
@@ -971,7 +1053,14 @@ PLUGIN.eventdefs["merc2"] = {
 		{"npc_human_merc_rifleman", 2},	
 	},
 	pdabroadcast = "Mercenaries spotted %s. Take care.",
-	difficulty = {21, 22, 23, 25, 31, 33},
+	difficulty = {
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+		"waystation_underground",
+		"pripyat_outside_easy",
+		"pripyat_building",
+	},
 }
 
 PLUGIN.eventdefs["merc3"] = {
@@ -980,7 +1069,14 @@ PLUGIN.eventdefs["merc3"] = {
 		{"npc_human_merc_rifleman", 2},	
 	},
 	pdabroadcast = "Mercenaries spotted %s. Take care.",
-	difficulty = {21, 22, 23, 25, 31, 33},
+	difficulty = {
+		"waystation_outside_easy",
+		"waystation_outside_hard",
+		"waystation_building",
+		"waystation_underground",
+		"pripyat_outside_easy",
+		"pripyat_building",
+	},
 }
 
 PLUGIN.eventdefs["mercsniper"] = {
@@ -988,7 +1084,7 @@ PLUGIN.eventdefs["mercsniper"] = {
 		{"npc_human_merc_sniper", 1},	
 	},
 	pdabroadcast = "Mercenary sniper spotted %s. Take care.",
-	difficulty = {24},
+	difficulty = {"waystation_sniperspot"},
 }
 
 PLUGIN.eventdefs["mili1"] = {
@@ -997,7 +1093,7 @@ PLUGIN.eventdefs["mili1"] = {
 		{"npc_human_mili_pistolman", 1},	
 	},
 	pdabroadcast = "Military patrol spotted %s. Take good care.",
-	difficulty = {31, 32, 33, 35},
+	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard", "pripyat_building", "pripyat_underground"},
 }
 
 PLUGIN.eventdefs["mili2"] = {
@@ -1007,7 +1103,7 @@ PLUGIN.eventdefs["mili2"] = {
 		{"npc_human_mili_rifleman", 2},	
 	},
 	pdabroadcast = "Military patrol spotted %s. Take good care.",
-	difficulty = {31, 32, 33, 35},
+	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard", "pripyat_building", "pripyat_underground"},
 }
 
 PLUGIN.eventdefs["mili3"] = {
@@ -1016,7 +1112,7 @@ PLUGIN.eventdefs["mili3"] = {
 		{"npc_human_mili_rifleman", 2},	
 	},
 	pdabroadcast = "Military patrol spotted %s. Take good care.",
-	difficulty = {31, 32, 33, 35},
+	difficulty = {"pripyat_outside_easy", "pripyat_outside_hard", "pripyat_building", "pripyat_underground"},
 }
 
 -- PLUGIN.eventdefs["milisniper"] = {
@@ -1024,5 +1120,5 @@ PLUGIN.eventdefs["mili3"] = {
 -- 		{"npc_human_mili_rifleman", 1}, -- Create real entity.
 -- 	},
 -- 	pdabroadcast = "Military sniper spotted %s. Take good care.",
--- 	difficulty = {34}, --??
+-- 	difficulty = {"pripyat_sniperspot"}, --??
 -- }

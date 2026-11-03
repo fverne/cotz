@@ -7,6 +7,29 @@ PLUGIN.desc = (
 	.. "events are possible in eventcontrolleradv"
 )
 
+local LEGACY_LOCATION_TAGS = {
+	[11] = "swamps_outside_easy",
+	[12] = "swamps_outside_hard",
+	[13] = "swamps_building",
+	[14] = "swamps_sniperspot",
+	[15] = "swamps_underground",
+	[21] = "waystation_outside_easy",
+	[22] = "waystation_outside_hard",
+	[23] = "waystation_building",
+	[24] = "waystation_sniperspot",
+	[25] = "waystation_underground",
+	[31] = "pripyat_outside_easy",
+	[32] = "pripyat_outside_hard",
+	[33] = "pripyat_building",
+	[34] = "pripyat_sniperspot",
+	[35] = "pripyat_underground",
+}
+
+local LOCATION_TAGS = {}
+for _, locationTag in pairs(LEGACY_LOCATION_TAGS) do
+	LOCATION_TAGS[locationTag] = true
+end
+
 PLUGIN.eventdefs = PLUGIN.eventdefs or {}
 -- EVENTPOINT STRUCTURE table.insert( PLUGIN.eventpoints, { position, name, difficulty } )
 PLUGIN.eventpoints = PLUGIN.eventpoints or {}
@@ -132,6 +155,13 @@ if SERVER then
 
 	function PLUGIN:LoadData()
 		self.eventpoints = self:GetData() or {}
+
+		-- Migrate every stored map without changing positions or encounter assignments.
+		for _, eventpoints in pairs(self.eventpoints) do
+			for _, eventpoint in pairs(eventpoints) do
+				eventpoint[3] = LEGACY_LOCATION_TAGS[eventpoint[3]] or eventpoint[3]
+			end
+		end
 
 		self.eventpoints[game.GetMap()] = self.eventpoints[game.GetMap()] or {}
 	end
@@ -273,22 +303,19 @@ ix.command.Add("eventadd", {
 	superAdminOnly = true,
 	arguments = {
 		ix.type.string,
-		ix.type.number,
+		ix.type.string,
 	},
 	OnRun = function(self, client, name, difficulty)
+		if not LOCATION_TAGS[difficulty] then
+			return "Unknown location tag. Example: swamps_outside_easy. See eventcontroller/README.md."
+		end
+
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal * 5
-		local name = name or "UNNAMED AREA"
-		local difficulty = difficulty or 1
-
-		if isnumber(difficulty) then
-			table.insert(PLUGIN.eventpoints[game.GetMap()], { hitpos, name, difficulty })
-			client:Notify(
-				"Event area named '" .. name .. "' with difficulty " .. difficulty .. " succesfully added"
-			)
-		else
-			client:ChatPrint("Difficulty must be a number.")
-		end
+		local mapName = game.GetMap()
+		PLUGIN.eventpoints[mapName] = PLUGIN.eventpoints[mapName] or {}
+		table.insert(PLUGIN.eventpoints[mapName], {hitpos, name, difficulty})
+		client:Notify("Event area '" .. name .. "' added with location tag " .. difficulty)
 	end,
 })
 

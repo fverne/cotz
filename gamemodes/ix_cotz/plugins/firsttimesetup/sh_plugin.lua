@@ -87,7 +87,10 @@ if SERVER then
 			end
 		end,
 		["eventcontroller"] = function(id, data)
-			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" , "..data[3].." }, \n"
+			return string.format(
+				"{ Vector(%s,%s,%s), %q, %q }, \n",
+				data[1].x, data[1].y, data[1].z, data[2], data[3]
+			)
 		end,
 		["eventcontrolleradv"] = function(id, data)
 			return "[\""..id.."\"] = { Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" }, \n"
