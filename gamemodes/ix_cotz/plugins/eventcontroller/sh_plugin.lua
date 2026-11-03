@@ -309,10 +309,10 @@ ix.command.Add("eventadd", {
 	superAdminOnly = true,
 	arguments = {
 		ix.type.string,
-		ix.type.string,
+		ix.type.text,
 	},
-	OnRun = function(self, client, name, difficulty)
-		if not LOCATION_TAGS[difficulty] then
+	OnRun = function(self, client, pdamessage, spawngroup)
+		if not LOCATION_TAGS[spawngroup] then
 			return "Unknown location tag. Example: swamps_outside_easy. See eventcontroller/README.md."
 		end
 
@@ -320,8 +320,8 @@ ix.command.Add("eventadd", {
 		local hitpos = trace.HitPos + trace.HitNormal * 5
 		local mapName = game.GetMap()
 		PLUGIN.eventpoints[mapName] = PLUGIN.eventpoints[mapName] or {}
-		table.insert(PLUGIN.eventpoints[mapName], {hitpos, name, difficulty})
-		client:Notify("Event area '" .. name .. "' added with location tag " .. difficulty)
+		table.insert(PLUGIN.eventpoints[mapName], {hitpos, pdamessage, spawngroup})
+		client:Notify("Event area '" .. pdamessage .. "' added with spawngroup " .. spawngroup)
 	end,
 })
 
