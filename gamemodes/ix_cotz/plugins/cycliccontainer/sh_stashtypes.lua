@@ -1,5 +1,7 @@
 PLUGIN.stashTypes = 
 {
+	["empty"] = {},
+
 	["pistol_lo"] = {
 		"cache_weapons_pistol_tier1",
 		"cache_ammo_pistol_tier1",

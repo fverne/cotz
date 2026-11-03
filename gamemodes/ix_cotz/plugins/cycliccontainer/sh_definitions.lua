@@ -92,6 +92,12 @@ PLUGIN.categoryDefs =
 		}
 	},
 
+	["stash_map_garbage"] = {
+		appearTime = 1200,
+		disappearTime = 3600,
+		allowedStashTypes = {"empty"},
+	},
+
 	["stash_map1"] = {
 		appearTime = 1200,
 		disappearTime = 3600,

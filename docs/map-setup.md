@@ -93,6 +93,7 @@ item pool is not a cyclic category. Check pool IDs in
 [`randomitem/libs/sh_randomitems.lua`](../gamemodes/ix_cotz/plugins/randomitem/libs/sh_randomitems.lua)
 and cyclic categories (including `stash_map1`, `stash_map2`, and `stash_map3`) in
 [`cycliccontainer/sh_definitions.lua`](../gamemodes/ix_cotz/plugins/cycliccontainer/sh_definitions.lua).
+`stash_map_garbage` is an empty placeholder category: it cycles normally but refills with no loot.
 Choose rewards for the map's intended progression level rather than copying all
 of another map's loot.
 
