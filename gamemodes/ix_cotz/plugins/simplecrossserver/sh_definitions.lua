@@ -24,8 +24,8 @@ PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromoutskirts"] = {
 	desc = "The area ahead leads to the swamps."
 }
 
-PLUGIN.mapdata["rp_marsh_cs"].loadzones["fromtraintracks"] = {
-	pos = Vector(10233.159180, 12431.816406, 408.532898), --edit me
+PLUGIN.mapdata["rp_marsh_cs"].loadzones["northerntraintracks"] = {
+	pos = Vector(10153.159180, 12251.816406, 408.532898), --edit me
 	ang = Angle(0, -132.842041, 0.000000), --edit me
 	desc = "The area ahead leads to the swamps."
 }
@@ -82,6 +82,13 @@ PLUGIN.mapdata["rp_waystation"].loadzones["frompripyat"] = {
 	desc = "Your geigercounter tones down a little as you approach. The area ahead is clearly irradiated."
 }
 
+PLUGIN.mapdata["rp_waystation"].loadzones["northernsewerpipe"] = {
+	pos = Vector(7626.806641, 622.745728, 191.472168), --edit me
+	ang = Angle(0, 180, 0), --edit me
+	desc = "A hole leads to a dark and damp area. It will not be possible to crawl back up. Your geigercounter lights up as you approach."
+}
+
+
 PLUGIN.mapdata["rp_waystation"].loadzones["base"] = {
 	pos = Vector(-5359.798828, 6875.882812, 289.031250), --edit me
 	ang = Angle(0.000, -100.870, 0.000), --edit me
@@ -112,4 +119,26 @@ PLUGIN.mapdata["mz_garbage"].name = "Garbage"
 PLUGIN.mapdata["mz_garbage"].serverip = "93.163.14.129:27018"
 PLUGIN.mapdata["mz_garbage"].loadzones = PLUGIN.mapdata["mz_garbage"].loadzones or {}
 
--- to be continued with more maps and loadzones as needed
+PLUGIN.mapdata["mz_garbage"].loadzones["easternroad"] = {
+	pos = Vector(1607.783081, -12422.239258,  215.496277), --edit me
+	ang = Angle(0, 90, 0), --edit me
+	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."
+}
+
+PLUGIN.mapdata["mz_garbage"].loadzones["westernroad"] = {
+	pos = Vector(572.824951, 9383.897461,  210.491821), --edit me
+	ang = Angle(0, 0, 0), --edit me
+	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."
+}
+
+PLUGIN.mapdata["mz_garbage"].loadzones["traintunnel"] = {
+	pos = Vector(-8530.873047, 310.016937, 76.031250), --edit me
+	ang = Angle(0, -15, 0), --edit me
+	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."
+}
+
+PLUGIN.mapdata["mz_garbage"].loadzones["hiddenbasement"] = {
+	pos = Vector( 10403.541992, -1548.871948, -191.968750), --edit me
+	ang = Angle(0, 0, 0), --edit me
+	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."
+}
