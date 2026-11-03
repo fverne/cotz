@@ -146,8 +146,13 @@ Restart after updating the files. Existing entity positions are not guessed or a
 - Existing saved Pripyat vendors require manual removal and saving. Do not rerun first-time setup.
 
 Startup checks commission destinations on every map, including maps other than the current server's.
-Missing sites produce a setup warning and leave the affected commissions unavailable. For triangulation,
-the check needs at least one point from event/stash data or an authored triangulation point for that map.
+Missing sites produce a setup warning and leave the affected commissions unavailable.
+All five job types reuse existing event points, with stash or hazard pools also used where configured.
+Authored field points are optional additions. Missing destination-map provider entries fall back to
+the destination's FTS preset coordinates without running setup. Saved entries override presets,
+including empty tables. Custom maps without presets still need saved or authored points.
+For triangulation, the check needs at least one point from event/stash data or an authored triangulation
+point for that map.
 On each destination map, use `/TownNPCAddFieldPoint triangulation` at a playtested transmitter location.
 Export the points and merge the map entries into `definitions/sh_sites.lua` on every server, then restart.
 Adding a point on Garbage does not configure Waystation or Pripyat. These checks do not establish that

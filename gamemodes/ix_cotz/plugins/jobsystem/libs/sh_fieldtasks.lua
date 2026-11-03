@@ -23,7 +23,14 @@ function field.CollectPoints(names, map)
 		end
 		local plugin = ix.plugin.list[source.plugin]
 		local maps = plugin and plugin[source.key]
-		for _, row in pairs(maps and maps[map] or {}) do
+		local rows = maps and maps[map]
+		-- Read preset coordinates without deploying setup or replacing saved map edits.
+		if rows == nil then
+			local setup = ix.plugin.list.firsttimesetup
+			local preset = setup and setup.map_presets and setup.map_presets[map]
+			rows = preset and preset.plugindata and preset.plugindata[source.plugin]
+		end
+		for _, row in pairs(rows or {}) do
 			local point = row[1]
 			if isvector(point) and not positions[tostring(point)] then
 				positions[tostring(point)] = true

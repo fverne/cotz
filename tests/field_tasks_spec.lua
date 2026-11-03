@@ -126,6 +126,34 @@ local function points()
 	}
 end
 points()
+local providers = ix.plugin.list
+ix.plugin.list = {eventcontroller = {eventpoints = {[map] = {
+	{Vector(1000, 0, 0)}, {Vector(4000, 0, 0)},
+}}}}
+for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop"}) do
+	check(field.IsAvailable(ix.jobs.list["field_" .. kind .. "_easy"]),
+		kind .. " can use event points without stash or hazard providers")
+end
+local site, approaches = field.SelectDefenceSite(field.settings.defence, map)
+check(site and #approaches > 0, "event points provide defence sites and approaches")
+ix.plugin.list = providers
+local presetMap = "preset_destination"
+local presetRows = {{Vector(1000, 0, 0)}, {Vector(4000, 0, 0)}}
+ix.plugin.list.firsttimesetup = {map_presets = {[presetMap] = {
+	plugindata = {eventcontroller = presetRows},
+}}}
+check(#field.CollectPoints({"event"}, presetMap) == 2, "missing destination data reads FTS coordinates")
+check(field.IsAvailable({fieldType = "sensor", fieldMap = presetMap}), "FTS enables destination sensors")
+check(field.SelectRoute(field.settings.deadDrop, presetMap) ~= nil, "FTS enables destination routes")
+check(field.SelectDefenceSite(field.settings.defence, presetMap) ~= nil, "FTS enables destination defence")
+providers.eventcontroller.eventpoints[presetMap] = {}
+check(#field.CollectPoints({"event"}, presetMap) == 0, "explicitly empty saved map overrides FTS")
+providers.eventcontroller.eventpoints[presetMap] = {{Vector(7000, 0, 0)}}
+local savedPoints = field.CollectPoints({"event"}, presetMap)
+check(#savedPoints == 1 and savedPoints[1].x == 7000, "saved destination edits override FTS")
+check(#presetRows == 2 and presetRows[1][1].x == 1000, "FTS collection leaves presets unchanged")
+providers.eventcontroller.eventpoints[presetMap] = nil
+ix.plugin.list.firsttimesetup = nil
 field.pools.combined = {"packages", "rf", "gas", "combined"}
 check(#field.CollectPoints({"combined", "event"}, map) == 4, "pools combine, deduplicate and bound recursion")
 check(#field.CollectPoints({"combined"}, "missing") == 0, "missing maps are empty")

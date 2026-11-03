@@ -305,7 +305,10 @@ pairs. Each supported table is keyed by map, with the position at `row[1]`:
 
 `field.pools` provides composable aliases: `packages = {"stash"}`, `rf = {"event"}`,
 and `gas = {"anomaly", "radiation"}`. Each `field.settings` task has its own `sources`
-list. For example, change recovery to use both existing survey families:
+list. All five task types use existing event points by default. Sensors also use hazard points;
+recovery, triangulation and dead drops also use stash points. Dead drops still need endpoints at
+least 2,048 units apart, and defence still needs suitable nearby approaches.
+For example, change recovery to use both existing survey families:
 
 ```lua
 recovery = {sources = {"gas", "rf"}, cargo = "job_recovery_case", searchRadius = 384},
@@ -313,6 +316,10 @@ recovery = {sources = {"gas", "rf"}, cargo = "job_recovery_case", searchRadius =
 
 Lists can combine raw sources and pool aliases. Collection deduplicates positions,
 handles missing providers/maps and cyclic aliases, and never changes source tables.
+When a provider has no entry for the destination map, collection reads that provider's
+`firsttimesetup.map_presets[map].plugindata` coordinates. This does not run setup or write saved data.
+Saved map entries take precedence, including explicitly empty tables. Custom maps without a preset
+still need saved or authored points.
 All five tasks may share the same pools. Empty field pools are excluded from new
 offers, including cached previews while those providers are unavailable. Restoring the
 provider restores that preview without rerolling it. Existing non-field offers remain
