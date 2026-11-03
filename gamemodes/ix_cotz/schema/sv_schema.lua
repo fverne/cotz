@@ -13,6 +13,7 @@ resource.AddWorkshop( '2290895919' ) -- cotz_ui
 resource.AddWorkshop( '2547569131' ) -- cotz_projectstalker
 resource.AddWorkshop( '2315743109' ) -- cotz_humannpc
 resource.AddWorkshop( '2299516854' ) -- cotz_map_marsh
+resource.AddWorkshop( '3832898591' ) -- cotz_map_garbage
 -- resource.AddWorkshop( '2808595164' ) -- cotz_map_haven
 resource.AddWorkshop( '2872269374' ) -- cotz_map_waystation
 resource.AddWorkshop( '3161868673' ) -- cotz_map_pripyat
