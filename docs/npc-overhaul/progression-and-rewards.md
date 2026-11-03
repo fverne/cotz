@@ -44,8 +44,10 @@ it must not create duplicate job payments or advance unrelated NPC programmes.
 
 ## Reward granularity
 
-A completion should visibly provide an item, credit, purchase option, stock improvement, useful
-information, new authored activity, or personal recognition. Major equipment may require several steps.
+Every step must provide a functional purchase/conversion/service/capacity unlock, a meaningful stock
+improvement. Original cash, gifts and service credits remain supplementary. TODO plans alone
+do not satisfy reward coverage or prevent later progression. Existing objective and equipment prerequisites
+still apply. Major equipment may require several steps.
 Bundle splitting should produce meaningful choices, not dozens of empty prerequisites.
 
 | Reward | Intended use | Constraint |
@@ -67,8 +69,8 @@ The current [unlock ledger](unlock-ledger.md) supersedes the earlier 210-item al
 Sell base suits only; themed and looted versions require suit conversion unlocks. Exclude Radsuits,
 Exoskeleton suits, Nosorog and their variants, the exoskeleton frame, the three top helmets, and
 the eight reserved guns documented in the runtime guide. Other active guns have purchase routes.
-Ammunition may share one earned unlock across multiple sellers. Medicine instead has independent
-progression at each seller. The four most expensive backpacks are reserved. Each suit variant
+Ammunition and medicine both have independent purchase progression at each seller. Equipment
+tier dependencies use explicit canonical providers; medicine keeps local earlier-tier dependencies. The four most expensive backpacks are reserved. Each suit variant
 requires its own exact conversion milestone as well as its base suit unlock.
 New travel, exchange and information services remain [future work](reward-followups.md).
 
@@ -114,3 +116,32 @@ Keep physical NPC arrival, personal access, and travel permissions separate.
 Calibrate effort using actual supply, quantities, travel, hazard preparation, and competition.
 Adding Garbage requires re-evaluating the current Marsh/Waystation/Pripyat tier assumptions;
 do not insert a numeric tier and silently change existing assignments.
+
+## Regional overlap and current allocation
+
+Personality governs distribution; original seller assignments and current default stock are not constraints.
+Retain independent local routes for medicine at Jitters/Wake/Quartermaster and ammunition at
+Old Timer/Brass/Quartermaster. Basic bandages and 12gauge/22lr/9x18 remain ungated; introductory
+medkits, antirads, painkillers and ordinary calibre access require no external NPC progression.
+Haggler, Spoor, Arena Master and scientists provide appropriate additional overlap.
+
+Spread crowded purchase groups before using stock or TODO rewards. Stock tiers use highest-earned
+bonuses, not addition: +1 through +4 total per item/provider, with no redundant prerequisite tiers or
+instant refill. Default stock quantities, refill rates and prices will be reworked separately.
+
+Atlas owns the binoculars_2 → binoculars_1 → binoculars_4 → binoculars_3 chain at AT01/05/13/17.
+Mute has no binocular shop or bonus route. Other canonical equipment prerequisites remain explicit.
+
+Each `plannedUnlocks` entry requires an immediately preceding `-- TODO:` comment and concrete proposed
+benefit/terms. These entries remain outside runtime rewards and player-facing menus until separately
+implemented. The generated ledger separates functional unlocks from TODO-only unlock plans backed by real rewards.
+See [the current ledger](unlock-ledger.md) for all 624 active steps and regeneration commands.
+
+## Ammunition unlock ordering
+
+Use concrete box price divided by `ammoAmount` to rank ammunition, not box price or calibre names.
+Twelve global price bands contain regular and upgraded stages. Equal-priced AP and HP loads are
+parallel upgrades rather than an arbitrary AP-to-HP chain. Counterparts precede variants even when
+existing prices/box sizes make a variant cheaper per round. Local successive-stage prerequisites
+prevent branch bypasses without requiring another seller's progression. Basic ungated regional
+supplies remain. The [ammo report](ammo-progression.md) lists prices, units, exceptions and milestones.

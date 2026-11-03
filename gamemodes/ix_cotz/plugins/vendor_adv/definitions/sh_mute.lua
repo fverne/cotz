@@ -13,7 +13,6 @@ ix.npctemplates.templates["stalkernetnpc"] = {
 	items = {
 		["headlamp"] = {nil, 1, SELLANDBUY, 1, 48, 1},
 		["geigercounter"] = {nil, 1, SELLANDBUY, 1, 48, 1},
-		["binoculars_5"] = {nil, 1, SELLANDBUY, 1, 48, 1},
 		["compass"] = {nil, 1, SELLANDBUY, 1, 48, 1},
 		["gpstracker"] = {nil, 1, SELLANDBUY, 1, 48, 1},
 		["guitar"] = {nil, 1, SELLANDBUY, 1, 48, 1},

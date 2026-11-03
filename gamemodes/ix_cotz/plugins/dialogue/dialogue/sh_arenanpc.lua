@@ -13,7 +13,6 @@ DIALOGUE.addTopic("GREETING", {
 		"GOODBYE",
 		"TradeTopic",
 		"AboutWorkTopic",
-		"TownProgression",
 	},
 })
 
@@ -28,7 +27,6 @@ DIALOGUE.addTopic("BackTopic", {
 		"GOODBYE",
 		"TradeTopic",
 		"AboutWorkTopic",
-		"TownProgression",
 	}, -- Should be identical to GREETING's options
 })
 

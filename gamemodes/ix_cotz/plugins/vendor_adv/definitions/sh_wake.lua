@@ -2,7 +2,7 @@ ix.npctemplates.templates["wakenpc"] = {
 	name = "'Wake'",
 	description = "A composed search coordinator who keeps a careful record of names and belongings.",
 
-	model = "models/Humans/Group01/male_09.mdl",
+	model = "models/legends/grek.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

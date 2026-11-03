@@ -33,7 +33,7 @@ PLUGIN:Register("egghead", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Anomaly recovery",
@@ -65,23 +65,107 @@ PLUGIN:Register("egghead", {
 			.. "consider that a useful result."
 		),
 	},
+	-- Author-disabled suggestions must not be restored by catalogue or stock generation.
+	disabledItems = {
+		["accesscard_laboratory"] = true,
+	},
 	catalogue = {
-		["medic_psyheal_1"] = {step = "EG01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["medic_antirad_2"] = {step = "EG06",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_raisins"] = {step = "EG01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "EG01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "EG01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["accesscard_laboratory"] = {step = "EG01",
+		-- 	terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
+		["artifact_arachno"] = {step = "EG13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_battery"] = {step = "EG11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_blowncap"] = {step = "EG08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_bolt"] = {step = "EG01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_bonecluster"] = {step = "EG02",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_capacitor"] = {step = "EG20",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_cell"] = {step = "EG08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_compass"] = {step = "EG22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_crystal"] = {step = "EG16",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_droplet"] = {step = "EG03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_dwarfgalaxy"] = {step = "EG13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_eye"] = {step = "EG16",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_flame"] = {step = "EG24",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_flash"] = {step = "EG11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_gaia"] = {step = "EG19",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_galaxy"] = {step = "EG25",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_gmamasbeads"] = {step = "EG22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_grapes"] = {step = "EG06",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_halo"] = {step = "EG15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_kolobok"] = {step = "EG19",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_mamasbeads"] = {step = "EG17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_mementomori"] = {step = "EG07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_mica"] = {step = "EG14",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_midas"] = {step = "EG26",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_moon"] = {step = "EG23",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_moonlight"] = {step = "EG21",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_mycelia"] = {step = "EG10",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_panacea"] = {step = "EG18",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_photo"] = {step = "EG02",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_slime"] = {step = "EG05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_slug"] = {step = "EG12",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_sparkler"] = {step = "EG05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_storm"] = {step = "EG25",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_thorn"] = {step = "EG04",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["artifact_urchin"] = {step = "EG09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorbear"] = {step = "EG13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorecho"] = {step = "EG01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorveles"] = {step = "EG26",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_antipsychotic_1"] = {step = "EG07",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["accesscard_laboratory"] = {step = "EG01",
-			terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
-		["detectorbear"] = {step = "EG11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["detectorecho"] = {step = "EG03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["detectorveles"] = {step = "EG21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_antipsychotic_2"] = {step = "EG09",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_antipsychotic_3"] = {step = "EG13",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_antirad_1"] = {step = "EG02",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_psyheal_1"] = {step = "EG01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 		["medic_psyheal_2"] = {step = "EG03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_stimpak_1"] = {step = "EG07",
@@ -90,11 +174,9 @@ PLUGIN:Register("egghead", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_stimpak_3"] = {step = "EG15",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["quest_computeraccess"] = {step = "EG01",
-			terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
-		["suit_seva"] = {step = "EG19",
+		["suit_seva"] = {step = "EG26",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ssp99m"] = {step = "EG17",
+		["suit_ssp99m"] = {step = "EG08",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -316,6 +398,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG10",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 1250,
 			name = "The Failed Trial",
 			kind = "field",
@@ -356,6 +439,19 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG12",
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_anorak",
+					effect = "Apply artifact research colours to suit_anorak; appearance only, with no gameplay variant changes.",
+					finish = "egghead-eg12",
+					id = "egghead/EG12/future",
+					kind = "cosmetic",
+					name = "Restocking: artifact research colours",
+					provider = "egghead",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -420,6 +516,22 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG14",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering sample contamination; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "egghead/EG14/future",
+					kind = "information",
+					name = "Record: sample contamination",
+					provider = "egghead",
+					status = "unimplemented",
+					topic = "sample contamination",
+				},
+			},
 			completionCash = 1650,
 			name = "Beanstalk's Objection",
 			kind = "field",
@@ -447,7 +559,6 @@ PLUGIN:Register("egghead", {
 				label = "Environmental control for Vesper",
 				recipient = "vesper",
 			},
-			benefits = {},
 		},
 		{
 			id = "EG15",
@@ -462,6 +573,22 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG16",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering detector comparison; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "egghead/EG16/future",
+					kind = "information",
+					name = "Record: detector comparison",
+					provider = "egghead",
+					status = "unimplemented",
+					topic = "detector comparison",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -490,7 +617,6 @@ PLUGIN:Register("egghead", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "EG17",
@@ -521,6 +647,19 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG18",
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_io7a",
+					effect = "Apply artifact research colours to suit_io7a; appearance only, with no gameplay variant changes.",
+					finish = "egghead-eg18",
+					id = "egghead/EG18/future",
+					kind = "cosmetic",
+					name = "The Pripyat Baseline: artifact research colours",
+					provider = "egghead",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2050,
 			name = "The Pripyat Baseline",
 			kind = "field",
@@ -573,6 +712,22 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG20",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering electrical anomaly notes; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "egghead/EG20/future",
+					kind = "information",
+					name = "Record: electrical anomaly notes",
+					provider = "egghead",
+					status = "unimplemented",
+					topic = "electrical anomaly notes",
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -601,7 +756,6 @@ PLUGIN:Register("egghead", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "EG21",
@@ -675,6 +829,33 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG24",
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					id = "egghead/EG24/future",
+					provider = "egghead",
+					status = "unimplemented",
+					kind = "barter",
+					name = "medic_psyheal_1 exchange",
+					effect = "Permanent multi-input offer; consume inputs each time, enforce equipment tiers and audit resale value.",
+					inputs = {
+						{
+							item = "value_capacitors",
+							quantity = 3,
+						},
+						{
+							item = "value_9vbattery",
+							quantity = 2,
+						},
+					},
+					outputs = {
+						{
+							item = "medic_psyheal_1",
+							quantity = 1,
+						},
+					},
+				},
+			},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -751,6 +932,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG26",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2850,
 			name = "A full supply order",
 			kind = "delivery",

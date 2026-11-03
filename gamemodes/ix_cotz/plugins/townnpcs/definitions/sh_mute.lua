@@ -37,7 +37,7 @@ PLUGIN:Register("mute", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
 	rewards = {
 		packages = {
 			{label = "Components (trade goods)",
@@ -48,10 +48,6 @@ PLUGIN:Register("mute", {
 				items = {"drink_bottlewater", "medic_bandage_1"}},
 		},
 		bonusItems = {
-			"binoculars_2",
-			"binoculars_1",
-			"binoculars_4",
-			"binoculars_3",
 		},
 	},
 	dialogue = {
@@ -72,19 +68,32 @@ PLUGIN:Register("mute", {
 			.. "unobstructed. **"
 		),
 	},
+	-- Author-disabled suggestions must not be restored by catalogue or stock generation.
+	disabledItems = {
+		["pda"] = true,
+		["quest_flashdrive"] = true,
+	},
 	catalogue = {
-		["anomalydetector"] = {step = "MU03",
+		["food_raisins"] = {step = "MU01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_1"] = {step = "MU05",
+		["food_can_beans"] = {step = "MU01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_2"] = {step = "MU01",
+		["drug_caffeine"] = {step = "MU01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_3"] = {step = "MU17",
+		["drink_bottletea"] = {step = "MU01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_4"] = {step = "MU13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["quest_flashdrive"] = {step = "MU01",
-			terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
+		-- ["pda"] = {step = "MU01",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["quest_flashdrive"] = {step = "MU01",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
+		["value_9vbattery"] = {step = "MU05",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_capacitors"] = {step = "MU02",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_radio_repeater"] = {step = "MU07",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_tape_electric"] = {step = "MU04",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -149,6 +158,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU03",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 0,
 			name = "Signals Getting Through",
 			kind = "tracker",
@@ -263,6 +273,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU08",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -314,6 +325,22 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU10",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on repeater identification; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "mute/MU10/future",
+					kind = "information",
+					name = "Record: repeater identification",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "repeater identification",
+				},
+			},
 			completionCash = 1250,
 			name = "The Duplicate Message",
 			kind = "field",
@@ -339,10 +366,26 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_disc",
 				label = "Duplicate-message recording",
 			},
-			benefits = {},
 		},
 		{
 			id = "MU11",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on coverage gap register; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "mute/MU11/future",
+					kind = "information",
+					name = "Record: coverage gap register",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "coverage gap register",
+				},
+			},
 			completionCash = 0,
 			name = "A Stable Link",
 			kind = "tracker",
@@ -353,10 +396,25 @@ PLUGIN:Register("mute", {
 			),
 			completion = "** He adds the completed deliveries. The tally stays open beside the work. **",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "MU12",
+			stock = {item = "drug_caffeine", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on message authentication; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "mute/MU12/future",
+					kind = "information",
+					name = "Record: message authentication",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "message authentication",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -394,6 +452,23 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU13",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on lost operator records; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "mute/MU13/future",
+					kind = "information",
+					name = "Record: lost operator records",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "lost operator records",
+				},
+			},
 			completionCash = 1175,
 			name = "Looking Further",
 			kind = "delivery",
@@ -417,10 +492,26 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "MU14",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on battery budgeting; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "mute/MU14/future",
+					kind = "information",
+					name = "Record: battery budgeting",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "battery budgeting",
+				},
+			},
 			completionCash = 1650,
 			name = "The Second Copy",
 			kind = "field",
@@ -448,7 +539,6 @@ PLUGIN:Register("mute", {
 				label = "Second data copy for Spool",
 				recipient = "spool",
 			},
-			benefits = {},
 		},
 		{
 			id = "MU15",
@@ -463,6 +553,22 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU16",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on interference signatures; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "mute/MU16/future",
+					kind = "information",
+					name = "Record: interference signatures",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "interference signatures",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -491,10 +597,25 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "MU17",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on relay outage reports; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "mute/MU17/future",
+					kind = "information",
+					name = "Record: relay outage reports",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "relay outage reports",
+				},
+			},
 			completionCash = 1475,
 			name = "The Final Lens",
 			kind = "delivery",
@@ -518,10 +639,25 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "MU18",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on emergency signal protocol; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "mute/MU18/future",
+					kind = "information",
+					name = "Record: emergency signal protocol",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "emergency signal protocol",
+				},
+			},
 			completionCash = 2050,
 			name = "The Old Routing Table",
 			kind = "field",
@@ -562,6 +698,22 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU19",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on regional network comparison; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "mute/MU19/future",
+					kind = "information",
+					name = "Record: regional network comparison",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "regional network comparison",
+				},
+			},
 			completionCash = 0,
 			name = "No Lost Packets",
 			kind = "tracker",
@@ -572,10 +724,26 @@ PLUGIN:Register("mute", {
 			),
 			completion = "** He checks the entries twice, then clears a place for the next delivery. **",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "MU20",
+			stock = {item = "drink_bottletea", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on intrusion incident records; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "mute/MU20/future",
+					kind = "information",
+					name = "Record: intrusion incident records",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "intrusion incident records",
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -604,10 +772,26 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "MU21",
+			stock = {item = "drug_caffeine", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on Pripyat signal notes; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "mute/MU21/future",
+					kind = "information",
+					name = "Record: Pripyat signal notes",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "Pripyat signal notes",
+				},
+			},
 			completionCash = 1775,
 			name = "Parts for a Clean Link",
 			kind = "delivery",
@@ -635,10 +819,26 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "MU22",
+			stock = {item = "food_can_beans", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on operator handover procedure; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "mute/MU22/future",
+					kind = "information",
+					name = "Record: operator handover procedure",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "operator handover procedure",
+				},
+			},
 			completionCash = 2450,
 			name = "The Broken Handshake",
 			kind = "field",
@@ -668,10 +868,26 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_control",
 				label = "Failed connection controller",
 			},
-			benefits = {},
 		},
 		{
 			id = "MU23",
+			stock = {item = "food_raisins", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on offline network recovery; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "mute/MU23/future",
+					kind = "information",
+					name = "Record: offline network recovery",
+					provider = "mute",
+					status = "unimplemented",
+					topic = "offline network recovery",
+				},
+			},
 			completionCash = 0,
 			name = "Message Received",
 			kind = "tracker",
@@ -685,10 +901,10 @@ PLUGIN:Register("mute", {
 				.. "putting it away. **"
 			),
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "MU24",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",

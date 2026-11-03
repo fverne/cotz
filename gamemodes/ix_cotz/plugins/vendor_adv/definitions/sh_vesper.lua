@@ -2,7 +2,7 @@ ix.npctemplates.templates["vespernpc"] = {
 	name = "'Vesper'",
 	description = "A field prospector who checks protective equipment with deliberate care.",
 
-	model = "models/Humans/Group03/male_06.mdl",
+	model = "models/legends/hlupik.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

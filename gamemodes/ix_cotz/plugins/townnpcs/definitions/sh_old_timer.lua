@@ -8,7 +8,7 @@ PLUGIN:Register("old-timer", {
 		description = "Mutant hunting",
 		quantities = {5, 9, 15},
 	},
-	supplies = {"medic_bandage_1", "12gauge", "22lr", "food_bread"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "12gauge", "22lr", "drink_bottlewaterdirty", "9x18"},
 	rewards = {
 		packages = {
 			{label = "Hunting rounds",
@@ -39,29 +39,57 @@ PLUGIN:Register("old-timer", {
 		),
 	},
 	catalogue = {
-		["hatchet"] = {step = "OT08",
+		["sks"] = {step = "OT18",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["knife2"] = {step = "OT03",
+		["lowtiercookerfuel"] = {step = "OT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["knife3"] = {step = "OT12",
+		["food_raisins"] = {step = "OT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["ruger1022"] = {step = "OT03",
+		["food_can_beans"] = {step = "OT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85varmint"] = {step = "OT03",
+		["drink_bottletea"] = {step = "OT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sharpening_stone"] = {step = "OT07",
+		["45acp41"] = {step = "OT15",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["sharpening_stone_fine"] = {step = "OT19",
+		["762x54"] = {step = "OT22",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["suit_anorak"] = {step = "OT01",
+		["hatchet"] = {step = "OT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz106"] = {step = "OT03",
+		["ij600"] = {step = "OT11",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz34short"] = {step = "OT03",
+		["knife2"] = {step = "OT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz66short"] = {step = "OT03",
+		["knife3"] = {step = "OT15",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w9422"] = {step = "OT03",
+		["knife4"] = {step = "OT28",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["m1887"] = {step = "OT21",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mossberg500"] = {step = "OT23",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mp27"] = {step = "OT13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["rem870ae"] = {step = "OT26",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["ruger1022"] = {step = "OT16",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sharpening_stone"] = {step = "OT01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["sharpening_stone_fine"] = {step = "OT28",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["toz106"] = {step = "OT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz34"] = {step = "OT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz34short"] = {step = "OT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz34special"] = {step = "OT28",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz66"] = {step = "OT18",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["toz66short"] = {step = "OT06",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["w9422"] = {step = "OT08",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -96,6 +124,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT02",
+			stock = {item = "22lr", bonus = 1},
 			completionCash = 450,
 			name = "Know Your Ground",
 			kind = "field",
@@ -136,6 +165,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT04",
+			stock = {item = "9x18", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -158,6 +188,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT05",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 575,
 			name = "A Place to Hide",
 			kind = "delivery",
@@ -224,6 +255,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT07",
+			stock = {item = "12gauge", bonus = 1},
 			completionCash = 0,
 			name = "Look After Your Kit",
 			kind = "tracker",
@@ -265,6 +297,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT09",
+			stock = {item = "22lr", bonus = 2},
 			completionCash = 875,
 			name = "Bad Water",
 			kind = "delivery",
@@ -289,6 +322,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT10",
+			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 1250,
 			name = "Enough for the Walk Home",
 			kind = "field",
@@ -329,6 +363,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT12",
+			stock = {item = "drink_bottlewater", bonus = 1},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -395,6 +430,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT14",
+			stock = {item = "food_can_beans", bonus = 1},
 			completionCash = 1650,
 			name = "Thin the Pack",
 			kind = "field",
@@ -469,6 +505,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT17",
+			stock = {item = "food_raisins", bonus = 1},
 			completionCash = 1475,
 			name = "The Empty Camp",
 			kind = "delivery",
@@ -538,6 +575,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT19",
+			stock = {item = "hatchet", bonus = 1},
 			completionCash = 0,
 			name = "An Old Name",
 			kind = "tracker",
@@ -549,6 +587,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT20",
+			stock = {item = "12gauge", bonus = 2},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -582,6 +621,22 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT21",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on quarry signs; author actionable guidance tied to verified "
+						.. "mechanics and locations."
+					),
+					id = "old-timer/OT21/future",
+					kind = "information",
+					name = "Record: quarry signs",
+					provider = "old-timer",
+					status = "unimplemented",
+					topic = "quarry signs",
+				},
+			},
 			completionCash = 1775,
 			name = "Someone Kept Records",
 			kind = "delivery",
@@ -606,10 +661,26 @@ PLUGIN:Register("old-timer", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OT22",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on safe retreat planning; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "old-timer/OT22/future",
+					kind = "information",
+					name = "Record: safe retreat planning",
+					provider = "old-timer",
+					status = "unimplemented",
+					topic = "safe retreat planning",
+				},
+			},
 			completionCash = 2450,
 			name = "A Voice on Tape",
 			kind = "field",
@@ -636,10 +707,25 @@ PLUGIN:Register("old-timer", {
 				label = "Recording for Spool",
 				recipient = "spool",
 			},
-			benefits = {},
 		},
 		{
 			id = "OT23",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on wounded mutant trails; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "old-timer/OT23/future",
+					kind = "information",
+					name = "Record: wounded mutant trails",
+					provider = "old-timer",
+					status = "unimplemented",
+					topic = "wounded mutant trails",
+				},
+			},
 			completionCash = 0,
 			name = "What He Was Carrying",
 			kind = "tracker",
@@ -647,10 +733,25 @@ PLUGIN:Register("old-timer", {
 			briefing = "Continue the hunting assignments when you've rested and prepared.",
 			completion = "You've been dependable over time. I worry less when I know you've thought about the return.",
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "OT24",
+			stock = {item = "knife2", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on night hunting; author actionable guidance tied to verified "
+						.. "mechanics and locations."
+					),
+					id = "old-timer/OT24/future",
+					kind = "information",
+					name = "Record: night hunting",
+					provider = "old-timer",
+					status = "unimplemented",
+					topic = "night hunting",
+				},
+			},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -697,6 +798,23 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT25",
+			stock = {item = "knife3", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on companion expedition notes; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "old-timer/OT25/future",
+					kind = "information",
+					name = "Record: companion expedition notes",
+					provider = "old-timer",
+					status = "unimplemented",
+					topic = "companion expedition notes",
+				},
+			},
 			completionCash = 2000,
 			name = "Past the Turn Back Point",
 			kind = "delivery",
@@ -725,10 +843,25 @@ PLUGIN:Register("old-timer", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OT26",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on carcass handling; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "old-timer/OT26/future",
+					kind = "information",
+					name = "Record: carcass handling",
+					provider = "old-timer",
+					status = "unimplemented",
+					topic = "carcass handling",
+				},
+			},
 			completionCash = 2850,
 			name = "He Made It This Far",
 			kind = "field",
@@ -754,10 +887,26 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_photo",
 				label = "Companion's recovered equipment",
 			},
-			benefits = {},
 		},
 		{
 			id = "OT27",
+			stock = {item = "ij600", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on Pripyat return preparation; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "old-timer/OT27/future",
+					kind = "information",
+					name = "Record: Pripyat return preparation",
+					provider = "old-timer",
+					status = "unimplemented",
+					topic = "Pripyat return preparation",
+				},
+			},
 			completionCash = 0,
 			name = "Bring Him Home",
 			kind = "tracker",
@@ -765,10 +914,10 @@ PLUGIN:Register("old-timer", {
 			briefing = "Keep completing the specified hunts. You're allowed a quiet day between them.",
 			completion = "Still coming home. Still doing the work carefully. I'm pleased to see both.",
 			target = 35,
-			benefits = {},
 		},
 		{
 			id = "OT28",
+			stock = {item = "12gauge", bonus = 3},
 			completionCash = 3000,
 			name = "A full supply order",
 			kind = "delivery",

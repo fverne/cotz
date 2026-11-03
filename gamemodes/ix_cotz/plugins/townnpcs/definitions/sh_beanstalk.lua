@@ -12,7 +12,7 @@ PLUGIN:Register("beanstalk", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
 	rewards = {
 		packages = {
 			{label = "Research safety",
@@ -45,14 +45,46 @@ PLUGIN:Register("beanstalk", {
 		),
 	},
 	catalogue = {
-		["medic_psyheal_1"] = {step = "BN01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["food_raisins"] = {step = "BN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "BN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_1"] = {step = "BN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "BN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drug_caffeine"] = {step = "BN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["geigercounter"] = {step = "BN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_cloth"] = {step = "BN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_eo20"] = {step = "BN13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_gp5"] = {step = "BN10",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_halfmask"] = {step = "BN04",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_m40"] = {step = "BN21",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_m50"] = {step = "BN24",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_pmk3"] = {step = "BN15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_respirator"] = {step = "BN07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["mask_xm40"] = {step = "BN18",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_antipsychotic_1"] = {step = "BN07",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 		["medic_antipsychotic_2"] = {step = "BN09",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_antipsychotic_3"] = {step = "BN13",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_antirad_1"] = {step = "BN02",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_psyheal_1"] = {step = "BN01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 		["medic_psyheal_2"] = {step = "BN03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_stimpak_1"] = {step = "BN07",
@@ -61,13 +93,9 @@ PLUGIN:Register("beanstalk", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_stimpak_3"] = {step = "BN15",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_eo20"] = {step = "BN09",
+		["suit_nbc"] = {step = "BN01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_pmk3"] = {step = "BN11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_nbc"] = {step = "BN14",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ssp99"] = {step = "BN10",
+		["suit_ssp99"] = {step = "BN24",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -166,6 +194,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN05",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Keeping It Sealed",
 			kind = "delivery",
@@ -239,6 +268,21 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN08",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_anorak",
+					effect = "Apply environmental research colours to suit_anorak; appearance only, with no gameplay variant changes.",
+					finish = "beanstalk-bn08",
+					id = "beanstalk/BN08/future",
+					kind = "cosmetic",
+					name = "Restocking: environmental research colours",
+					provider = "beanstalk",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -264,7 +308,6 @@ PLUGIN:Register("beanstalk", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "BN09",
@@ -334,6 +377,23 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN12",
+			stock = {item = "medic_antirad_1", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_mailjacket",
+					effect = (
+						"Apply environmental research colours to suit_mailjacket; appearance only, with no "
+						.. "gameplay variant changes."
+					),
+					finish = "beanstalk-bn12",
+					id = "beanstalk/BN12/future",
+					kind = "cosmetic",
+					name = "Restocking: environmental research colours",
+					provider = "beanstalk",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -396,6 +456,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN14",
+			stock = {item = "drug_caffeine", bonus = 1},
 			completionCash = 1650,
 			name = "Beyond the Dumps",
 			kind = "field",
@@ -536,6 +597,24 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN19",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_sunrise",
+					effect = (
+						"Apply environmental research colours to suit_sunrise; appearance only, with no "
+						.. "gameplay variant changes."
+					),
+					finish = "beanstalk-bn19",
+					id = "beanstalk/BN19/future",
+					kind = "cosmetic",
+					name = "Holding the Site: environmental research colours",
+					provider = "beanstalk",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Holding the Site",
 			kind = "tracker",
@@ -546,10 +625,24 @@ PLUGIN:Register("beanstalk", {
 				.. "comparison."
 			),
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "BN20",
+			stock = {item = "geigercounter", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_io7a",
+					effect = "Apply environmental research colours to suit_io7a; appearance only, with no gameplay variant changes.",
+					finish = "beanstalk-bn20",
+					id = "beanstalk/BN20/future",
+					kind = "cosmetic",
+					name = "A full supply order: environmental research colours",
+					provider = "beanstalk",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2250,
 			name = "A full supply order",
 			kind = "delivery",
@@ -583,10 +676,23 @@ PLUGIN:Register("beanstalk", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "BN21",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_cs1",
+					effect = "Apply environmental research colours to suit_cs1; appearance only, with no gameplay variant changes.",
+					finish = "beanstalk-bn21",
+					id = "beanstalk/BN21/future",
+					kind = "cosmetic",
+					name = "A Clean Comparison: environmental research colours",
+					provider = "beanstalk",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1775,
 			name = "A Clean Comparison",
 			kind = "delivery",
@@ -615,10 +721,24 @@ PLUGIN:Register("beanstalk", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "BN22",
+			stock = {item = "mask_cloth", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_ps5m",
+					effect = "Apply environmental research colours to suit_ps5m; appearance only, with no gameplay variant changes.",
+					finish = "beanstalk-bn22",
+					id = "beanstalk/BN22/future",
+					kind = "cosmetic",
+					name = "The Last Control: environmental research colours",
+					provider = "beanstalk",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2450,
 			name = "The Last Control",
 			kind = "field",
@@ -644,10 +764,24 @@ PLUGIN:Register("beanstalk", {
 				cargo = "town_quest_module",
 				label = "Final control recording",
 			},
-			benefits = {},
 		},
 		{
 			id = "BN23",
+			stock = {item = "mask_eo20", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_nbc",
+					effect = "Apply environmental research colours to suit_nbc; appearance only, with no gameplay variant changes.",
+					finish = "beanstalk-bn23",
+					id = "beanstalk/BN23/future",
+					kind = "cosmetic",
+					name = "Findings Worth Keeping: environmental research colours",
+					provider = "beanstalk",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Findings Worth Keeping",
 			kind = "tracker",
@@ -658,10 +792,10 @@ PLUGIN:Register("beanstalk", {
 				.. "more substantial than my next request."
 			),
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "BN24",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",

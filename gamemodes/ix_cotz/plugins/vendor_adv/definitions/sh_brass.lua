@@ -2,7 +2,7 @@ ix.npctemplates.templates["brassnpc"] = {
 	name = "'Brass'",
 	description = "A meticulous depot worker who checks every container before setting it aside.",
 
-	model = "models/Humans/Group03/male_04.mdl",
+	model = "models/legends/lesnik.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

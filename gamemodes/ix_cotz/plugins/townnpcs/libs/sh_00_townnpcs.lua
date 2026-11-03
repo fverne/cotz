@@ -20,7 +20,10 @@ function PLUGIN:StepID(contact, step)
 end
 
 function PLUGIN:CanBuyItem(character, item, npcName)
+	local contact = self.byName[npcName]
+	if contact and contact.disabledItems and contact.disabledItems[item] then return false end
 	if self:IsPurchaseExcluded(item) then return false end
+	if npcName == "'Mute'" and item:match("^binoculars_") then return false end
 	local gate = self.itemGates[item]
 	if not gate then return end
 	if gate.sellers then
@@ -28,7 +31,7 @@ function PLUGIN:CanBuyItem(character, item, npcName)
 		if not gate then return false end
 	end
 
-	return ix.progression.IsCompleted(character, gate.id)
+	return character ~= nil and (gate.ungated == true or ix.progression.IsCompleted(character, gate.id))
 end
 
 function PLUGIN:CanInteract(client, target)

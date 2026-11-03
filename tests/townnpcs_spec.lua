@@ -149,7 +149,7 @@ for _, contact in pairs(town.contacts) do
 			end
 		end
 	end
-	check(root == 1 and forks > 0 and joins > 0, "each contact has a sparse tree, not a linear chain")
+	check(#contact.progression == 0 or (root == 1 and forks > 0 and joins > 0), "each contact has a sparse tree, not a linear chain")
 end
 local deliveryContacts = 0
 for id, contact in pairs(town.contacts) do
@@ -178,7 +178,7 @@ check(deliveryContacts == 12, "all twelve delivery contacts have regional additi
 check(not ix.jobs.list["cotz/town/mute/easy/value_field_laptop"], "Marsh easy work excludes laptops")
 check(ix.jobs.list["cotz/town/mute/hard/value_field_laptop"], "Mute can commission Pripyat computers")
 
-check(contactCount == 27 and count == 646, "all contacts and proposed steps are registered")
+check(contactCount == 27 and count == 624, "all contacts and proposed steps are registered")
 local convertedCount, remainingFields = 0, 0
 for _, contact in pairs(town.contacts) do
 	local converted, fields = 0, 0
@@ -196,7 +196,7 @@ for _, contact in pairs(town.contacts) do
 	check(math.abs(converted - fields) <= 1, "each contact converts half its field progressions, rounded")
 	convertedCount, remainingFields = convertedCount + converted, remainingFields + fields
 end
-check(convertedCount == 158 and remainingFields == 158, "exactly half the original field commissions convert")
+check(convertedCount == 156 and remainingFields == 156, "exactly half the original field commissions convert")
 local cargoCount, recipientCount, dropCount = 0, 0, 0
 for _, contact in pairs(town.contacts) do
 	for _, step in ipairs(contact.progression) do
@@ -228,7 +228,7 @@ for _, contact in pairs(town.contacts) do
 		end
 	end
 end
-check(cargoCount == 154 and recipientCount == 38 and dropCount == 3,
+check(cargoCount == 152 and recipientCount == 37 and dropCount == 3,
 	"authored commissions use custom recovery cargo, contact deliveries and field-cache deliveries")
 check(#town:ValidateContacts() == 0, "all current cargo and recipient declarations validate")
 check(town.contacts["arena-master"].map == "rp_marsh_cs", "arena stays with the Marsh dupe")
@@ -247,7 +247,7 @@ for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
 		"Spool retains triangulation")
 end
 local fullCount = ix.progression.AuditDefinitions()
-check(fullCount == 646 + standaloneCount, "town trees coexist only with separate non-town content")
+check(fullCount == 624 + standaloneCount, "town trees coexist only with separate non-town content")
 check(not ix.progression.definitions.oldTimerKillIntro, "superseded town definitions are absent")
 for item, gate in pairs(town.itemGates) do
 	check(ix.progression.definitions[gate.id], "each catalogue item has an explicit current progression gate")
@@ -354,17 +354,18 @@ check(not town:CanBuyItem(obsolete, "knife3"), "retired completions cannot unloc
 check(not obsolete:GetData("townNPCProgression").legacy, "initialization does not create legacy compatibility state")
 local qualified = character()
 town:InitializeTownCharacter(qualified)
-local qm = town:StepID("quartermaster", "QM11")
+local qm = town.itemGates.knife4.id
+local knifePrerequisite = town.itemGates.knife3.id
 local data = ix.progression.GetCharacterProgression(qualified)
 for _, required in ipairs(ix.progression.definitions[qm].prerequisites) do
-	if required ~= town:StepID("old-timer", "OT12") then data.lines[required] = {completed = true} end
+	if required ~= knifePrerequisite then data.lines[required] = {completed = true} end
 end
 data.lines[qm] = {active = true}
 ix.progression.SetCharacterProgression(qualified, data)
-check(not ix.progression.IsActive(qualified, qm), "Quartermaster cannot bypass the survival knife milestone")
-data.lines[town:StepID("old-timer", "OT12")] = {completed = true}
+check(not ix.progression.IsActive(qualified, qm), "advanced knife cannot bypass the survival knife milestone")
+data.lines[knifePrerequisite] = {completed = true}
 ix.progression.SetCharacterProgression(qualified, data)
-check(ix.progression.IsActive(qualified, qm), "cross-NPC prerequisite opens the bayonet milestone")
+check(ix.progression.IsActive(qualified, qm), "preceding knife prerequisite opens the bayonet milestone")
 
 local hunter = character()
 town:InitializeTownCharacter(hunter)
@@ -434,8 +435,8 @@ town:InitializeTownCharacter(arenaCharacter)
 local opponent = {SteamID64 = function() return "different-human" end, IsBot = function() return false end}
 town:ArenaCompleted(arenaCharacter.client, opponent)
 town:ArenaCompleted(arenaCharacter.client, opponent)
-check(arenaCharacter:GetData("townNPCProgression").counts["'Arena Master'"] == 1,
-	"arena counts distinct opponents even before an authored bout is active")
+check(arenaCharacter:GetData("townNPCProgression").counts["'Arena Master'"] == nil,
+	"removed arena progression does not accumulate opponents")
 local before = arenaCharacter:GetData("townNPCProgression").counts["'Arena Master'"]
 currentMap = "rp_garbage_cotz"
 town:ArenaCompleted(arenaCharacter.client, {SteamID64 = function() return "another-human" end,
@@ -504,7 +505,8 @@ for _, contact in pairs(town.contacts) do
 	local tree = ix.dialogue.list[ix.npctemplates.templates[contact.template].dialogueid].tree
 	local offered = {}
 	for _, option in ipairs(tree.GREETING.options) do offered[option] = true end
-	check(offered.TownProgression and offered.TradeTopic, "all contacts expose progression and trading")
+	check(offered.TradeTopic and (offered.TownProgression == true) == (#contact.progression > 0),
+		"only contacts with active milestones expose progression")
 	check(offered.AboutWorkTopic, "all contacts expose the work status menu")
 	check(not offered.AboutProgression, "only the current progression action is offered")
 	check(not tree.AboutProgression and not tree.GetTask and not tree.ConfirmTask and not tree.ViewProgression,
@@ -519,7 +521,8 @@ for _, contact in pairs(town.contacts) do
 		check(tree.GetTaskByDifficulty.response == contact.dialogue.work,
 			"reward reconfiguration preserves the contact's work explanation")
 	end
-	check(tree.TownView and tree.TownCommission and tree.TownHandIn, "finite commissions and hand-ins are wired")
+	check(#contact.progression == 0 or (tree.TownView and tree.TownCommission and tree.TownHandIn),
+		"active finite commissions and hand-ins are wired")
 	check(offered.TownDeliveries and tree.TownDeliveries.ResolveDynamicOption,
 		"every contact exposes the conditional incoming-delivery action")
 	check(tree.AboutWorkTopic.response == contact.job.description, "each callback belongs to its own contact")
@@ -814,5 +817,152 @@ check(upgrading:GetData("townNPCProgression").rewardVersion == 2, "existing save
 check(upgrading.money == 9000, "migration preserves accrued credit without retroactive commission cash")
 town:InitializeTownCharacter(upgrading)
 check(upgrading.money == 9000, "reconnect cannot repeat migrated rewards")
+
+-- Regional coverage and authoring-only future rewards.
+do
+	local services = {
+		["cotz/town/cleaner/CL01"] = true, ["cotz/town/technut/TN13"] = true,
+		["cotz/town/mute/MU09"] = true, ["cotz/town/mute/MU15"] = true,
+		["cotz/town/intern/IN15"] = true,
+	}
+	local liveCount, placeholderOnly, plannedCount = 0, 0, 0
+	local families = {}
+	local function ancestors(id, result)
+		result = result or {}
+		for _, parent in ipairs(ix.progression.definitions[id].prerequisites) do
+			if not result[parent] then
+				result[parent] = true
+				ancestors(parent, result)
+			end
+		end
+
+		return result
+	end
+	for id, step in pairs(town.steps) do
+		local definition = ix.progression.definitions[id]
+		local live = #definition.vendorUnlocks > 0 or #(definition.variantUnlocks or {}) > 0
+			or step.stock or step.capacity or #(step.discounts or {}) > 0 or services[id]
+		local planned = #(step.plannedUnlocks or {}) > 0
+				check(live,
+			"every milestone has an implemented reward: " .. id)
+		if live then liveCount = liveCount + 1 elseif planned then placeholderOnly = placeholderOnly + 1 end
+		check(not definition.plannedUnlocks, "planned metadata never enters the runtime reward definition")
+		local text = ix.progression.GetBenefitSummary(definition, character())
+		for _, reward in ipairs(step.plannedUnlocks or {}) do
+			plannedCount = plannedCount + 1
+			families[reward.kind] = true
+			check(reward.status == "unimplemented", "future rewards are explicitly inactive")
+			check(not text:find(reward.name, 1, true), "future reward is absent from the benefit summary")
+			check(not ix.progression.definitions[reward.id], "future reward creates no progression entitlement")
+		end
+		if step.stock then
+			local owner = character()
+			local record = ix.progression.GetCharacterProgression(owner)
+			for parent in pairs(ancestors(id)) do record.lines[parent] = {completed = true} end
+			ix.progression.SetCharacterProgression(owner, record)
+			local npc = definition.keyNpc
+			local before = ix.progression.GetStockBonus(owner, npc, step.stock.item)
+			record.lines[id] = {completed = true}
+			ix.progression.SetCharacterProgression(owner, record)
+			check(ix.progression.GetStockBonus(owner, npc, step.stock.item) > before,
+				"every stock reward improves its prerequisites' effective capacity: " .. id)
+			check(step.stock.bonus <= 4, "stock bonuses respect the allocation budget")
+		end
+	end
+	check(liveCount + placeholderOnly == 624 and placeholderOnly == 0,
+		"functional and placeholder-only coverage account for every step")
+	for _, kind in ipairs({"passage", "cosmetic", "storage", "barter", "supplyExchange", "information", "recipe"}) do
+		check(families[kind], "all planned mechanic families have authored allocations")
+	end
+	local todoCount = 0
+	for slug in pairs(town.contacts) do
+		local file = assert(io.open(base .. "townnpcs/definitions/sh_" .. slug:gsub("-", "_") .. ".lua"))
+		local source = file:read("*a")
+		source = source:match("^(.-)\tretiredProgression") or source
+		file:close()
+		for _ in source:gmatch("%-%- TODO:[^\n]+\n\t\t\t\t{") do todoCount = todoCount + 1 end
+	end
+	check(todoCount == plannedCount, "every planned entry has its own immediately preceding TODO")
+	for _, slug in ipairs({"jitters", "wake", "quartermaster"}) do
+		local contact = town.contacts[slug]
+		local owner = character()
+		check(town:CanBuyItem(owner, "medic_bandage_1", contact.name) ~= false,
+			"each inhabited map has ungated basic bandages")
+		for _, item in ipairs({"medic_medkit_1", "medic_antirad_1", "drug_painkillers"}) do
+			local route = contact.catalogue[item]
+			check(route and tonumber(route.step:sub(3)) <= 3, "basic medicine unlocks in the local introduction")
+			for parent in pairs(ancestors(town:StepID(slug, route.step))) do
+				check(ix.progression.definitions[parent].townContact == slug,
+					"introductory medicine has no external contact prerequisite")
+			end
+		end
+	end
+	for _, slug in ipairs({"old-timer", "brass", "quartermaster"}) do
+		local contact = town.contacts[slug]
+		for _, item in ipairs({"12gauge", "22lr", "9x18"}) do
+			local supplied = false
+			for _, supply in ipairs(contact.supplies) do if supply == item then supplied = true end end
+			check(supplied and ix.progression.CanBuyItem(character(), contact.name, item),
+				"regional providers have ungated basic ammunition")
+		end
+	end
+	local owner = character()
+	local record = ix.progression.GetCharacterProgression(owner)
+	local ammo = "545x39"
+	local brass = town.itemGates[ammo].sellers["'Brass'"]
+	local quartermaster = town.itemGates[ammo].sellers["'Quartermaster'"]
+	record.lines[brass.id] = {completed = true}
+	ix.progression.SetCharacterProgression(owner, record)
+	check(ix.progression.CanBuyItem(owner, "'Brass'", ammo), "Brass recognises his local ammunition milestone")
+	check(not ix.progression.CanBuyItem(owner, "'Quartermaster'", ammo),
+		"Brass does not unlock Quartermaster's ammunition")
+	check(not town:CanBuyItem(owner, ammo, "'Mute'"), "unlisted sellers cannot inherit another shop's gate")
+	record.lines = {[quartermaster.id] = {completed = true}}
+	ix.progression.SetCharacterProgression(owner, record)
+	check(ix.progression.CanBuyItem(owner, "'Quartermaster'", ammo), "Quartermaster's ordinary calibre is local")
+	check(not ix.progression.CanBuyItem(owner, "'Brass'", ammo), "local ammunition unlocks work independently both ways")
+	for _, chain in ipairs(town.upgradeChains) do
+		for index = 2, #chain do
+			local lower, higher = town.itemGates[chain[index - 1]], town.itemGates[chain[index]]
+			for npc, route in pairs(higher and higher.sellers or {}) do
+				local previous = lower
+				if chain[index]:sub(1, 6) == "medic_" then previous = lower and lower.sellers[npc] end
+				if previous and not previous.ungated and not route.ungated and previous.id ~= route.id then
+					check(ancestors(route.id)[previous.id], "every duplicate tier retains its canonical predecessor")
+				end
+			end
+		end
+	end
+	for item, slug in pairs(town.canonicalSellers) do
+		check(town.itemGates[item].npc == town.contacts[slug].name,
+			"canonical tier ownership follows authored data, not table iteration")
+	end
+	for item, step in pairs({binoculars_2 = "AT01", binoculars_1 = "AT05", binoculars_4 = "AT13",
+		binoculars_3 = "AT17"}) do
+		check(town.itemGates[item].id == town:StepID("atlas", step), "Atlas owns the canonical binocular chain")
+	end
+	for index = 1, 5 do
+		local item = "binoculars_" .. index
+		check(not town.contacts.mute.catalogue[item] and not ix.progression.CanBuyItem(owner, "'Mute'", item),
+			"Mute cannot sell binoculars, including stale saved vendor rows")
+		for _, candidate in ipairs(town.contacts.mute.rewards.bonusItems or {}) do
+			check(candidate ~= item, "Mute's future bonus offers contain no binoculars")
+		end
+	end
+	-- Completing a redistributed permanent entitlement never queues another consumable payout.
+	local existing = character()
+	local existingRecord = ix.progression.GetCharacterProgression(existing)
+	existingRecord.lines[town:StepID("atlas", "AT01")] = {
+		completed = true, completionRewardsPaid = true, benefitsClaimed = {completion = true},
+	}
+	ix.progression.SetCharacterProgression(existing, existingRecord)
+	town:InitializeTownCharacter(existing)
+	check(town:CanBuyItem(existing, "binoculars_2", "'Atlas'"), "completed saves derive their reassigned entitlement")
+	local pending = ix.progression.GetLine(existing, town:StepID("atlas", "AT01")).pendingRewards or {}
+	check(existing.money == 0 and #pending == 0,
+		"new permanent access does not replay completion gifts or cash")
+	print(string.format("Reward coverage: %d functional, %d placeholder-only, %d planned unlocks",
+		liveCount, placeholderOnly, plannedCount))
+end
 
 print(string.format("PASS: %d town NPC checks", checks))

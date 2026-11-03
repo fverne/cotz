@@ -12,7 +12,7 @@ PLUGIN:Register("cleaner", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Cache upkeep",
@@ -44,10 +44,34 @@ PLUGIN:Register("cleaner", {
 		),
 	},
 	catalogue = {
-		["hidestasher_cleaningkit"] = {step = "CL05",
+		["mp5k"] = {step = "CL12",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["hidestasher_shovel"] = {step = "CL09",
+		["fort12"] = {step = "CL06",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["makarov"] = {step = "CL03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_raisins"] = {step = "CL01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "CL01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "CL01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["9x19"] = {step = "CL03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cobrasuppressor"] = {step = "CL10",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["hidestasher_cleaningkit"] = {step = "CL01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["hidestasher_shovel"] = {step = "CL28",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["pbssuppressor"] = {step = "CL19",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sakersuppressor"] = {step = "CL28",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["tundrasuppressor"] = {step = "CL01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["value_tape_duct"] = {step = "CL03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -80,6 +104,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL02",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The Unattended Drop",
 			kind = "field",
@@ -120,6 +145,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL04",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -141,6 +167,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL05",
+			stock = {item = "9x19", bonus = 1},
 			completionCash = 575,
 			name = "A Cleaner Way In",
 			kind = "delivery",
@@ -206,6 +233,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL07",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 0,
 			name = "No Questions",
 			kind = "tracker",
@@ -217,6 +245,21 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL08",
+			stock = {item = "drink_bottlewater", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL08/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 3",
+					effect = "Unlock stored inventory width 3; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 3,
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -241,10 +284,10 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CL09",
+			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 875,
 			name = "Digging Deeper",
 			kind = "delivery",
@@ -268,6 +311,20 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL10",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL10/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory height 3",
+					effect = "Unlock stored inventory height 3; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "height",
+					target = 3,
+				},
+			},
 			completionCash = 1250,
 			name = "The Buried Register",
 			kind = "field",
@@ -293,10 +350,24 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_receipt",
 				label = "Distribution register",
 			},
-			benefits = {},
 		},
 		{
 			id = "CL11",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL11/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 4",
+					effect = "Unlock stored inventory width 4; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 4,
+				},
+			},
 			completionCash = 0,
 			name = "A Quiet Service",
 			kind = "tracker",
@@ -304,10 +375,23 @@ PLUGIN:Register("cleaner", {
 			briefing = "More sealed circuit work. Read the route before accepting it.",
 			completion = "The deliveries arrived. No further explanation needed.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "CL12",
+			stock = {item = "food_raisins", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL12/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory height 4",
+					effect = "Unlock stored inventory height 4; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "height",
+					target = 4,
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -345,6 +429,21 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL13",
+			stock = {item = "hidestasher_cleaningkit", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL13/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 5",
+					effect = "Unlock stored inventory width 5; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 5,
+				},
+			},
 			completionCash = 1175,
 			name = "Safe and Dry",
 			kind = "delivery",
@@ -368,7 +467,6 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CL14",
@@ -403,6 +501,21 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL15",
+			stock = {item = "tundrasuppressor", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL15/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory height 5",
+					effect = "Unlock stored inventory height 5; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "height",
+					target = 5,
+				},
+			},
 			completionCash = 0,
 			name = "Across the Boundary",
 			kind = "tracker",
@@ -410,10 +523,24 @@ PLUGIN:Register("cleaner", {
 			briefing = "Keep completing the drop circuits. Familiarity doesn't change the destination.",
 			completion = "You've kept the arrangement straightforward.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "CL16",
+			stock = {item = "cobrasuppressor", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL16/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 6",
+					effect = "Unlock stored inventory width 6; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 6,
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -442,10 +569,24 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CL17",
+			stock = {item = "drink_bottlewater", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL17/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory height 6",
+					effect = "Unlock stored inventory height 6; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "height",
+					target = 6,
+				},
+			},
 			completionCash = 1475,
 			name = "A Better Reserve",
 			kind = "delivery",
@@ -469,10 +610,23 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CL18",
+			stock = {item = "tundrasuppressor", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL18/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 7",
+					effect = "Unlock stored inventory width 7; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 7,
+				},
+			},
 			completionCash = 2050,
 			name = "The Other Register",
 			kind = "field",
@@ -512,6 +666,20 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL19",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL19/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory height 7",
+					effect = "Unlock stored inventory height 7; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "height",
+					target = 7,
+				},
+			},
 			completionCash = 0,
 			name = "Without a Trace",
 			kind = "tracker",
@@ -519,10 +687,24 @@ PLUGIN:Register("cleaner", {
 			briefing = "There are more circuits to complete. Keep the parcels closed.",
 			completion = "A reliable run of deliveries. I can work with that.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "CL20",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL20/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 8",
+					effect = "Unlock stored inventory width 8; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 8,
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -551,10 +733,24 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CL21",
+			stock = {item = "lowtiercookerfuel", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL21/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory height 8",
+					effect = "Unlock stored inventory height 8; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "height",
+					target = 8,
+				},
+			},
 			completionCash = 1775,
 			name = "Nobody's Spare Key",
 			kind = "delivery",
@@ -578,10 +774,24 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CL22",
+			stock = {item = "9x19", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL22/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 9",
+					effect = "Unlock stored inventory width 9; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 9,
+				},
+			},
 			completionCash = 2450,
 			name = "A Cache With Two Owners",
 			kind = "field",
@@ -606,10 +816,24 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_contract",
 				label = "Cache ownership file",
 			},
-			benefits = {},
 		},
 		{
 			id = "CL23",
+			stock = {item = "pbssuppressor", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL23/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "storage",
+					name = "Stored inventory width 10",
+					effect = "Unlock stored inventory width 10; preserve purchased space and contents, respect server dimension caps.",
+					dimension = "width",
+					target = 10,
+				},
+			},
 			completionCash = 0,
 			name = "The Last Circuit",
 			kind = "tracker",
@@ -617,10 +841,22 @@ PLUGIN:Register("cleaner", {
 			briefing = "Continue the assigned circuits. Return after the delivery is finished.",
 			completion = "You've done the work over time. That's what I judge.",
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "CL24",
+			stock = {item = "drink_bottletea", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL24/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "information",
+					name = "Record: cache concealment",
+					effect = "Persistent practical guide to cache concealment; author verified instructions before activation.",
+					topic = "cache concealment",
+				},
+			},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -666,6 +902,20 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL25",
+			stock = {item = "food_can_beans", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL25/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "information",
+					name = "Record: dead-drop inspection",
+					effect = "Persistent practical guide to dead-drop inspection; author verified instructions before activation.",
+					topic = "dead-drop inspection",
+				},
+			},
 			completionCash = 2000,
 			name = "Room to Keep It",
 			kind = "delivery",
@@ -693,10 +943,26 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CL26",
+			stock = {item = "food_raisins", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL26/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "information",
+					name = "Record: compromised stash recovery",
+					effect = (
+						"Persistent practical guide to compromised stash recovery; author verified "
+						.. "instructions before activation."
+					),
+					topic = "compromised stash recovery",
+				},
+			},
 			completionCash = 2850,
 			name = "The Cache That Stayed Closed",
 			kind = "field",
@@ -722,10 +988,23 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_evidence",
 				label = "Final sealed circuit parcel",
 			},
-			benefits = {},
 		},
 		{
 			id = "CL27",
+			stock = {item = "hidestasher_cleaningkit", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					id = "cleaner/CL27/future",
+					provider = "cleaner",
+					status = "unimplemented",
+					kind = "information",
+					name = "Record: secure packing",
+					effect = "Persistent practical guide to secure packing; author verified instructions before activation.",
+					topic = "secure packing",
+				},
+			},
 			completionCash = 0,
 			name = "Trusted With the Route",
 			kind = "tracker",
@@ -733,10 +1012,10 @@ PLUGIN:Register("cleaner", {
 			briefing = "More drop circuits when you're prepared. The same delivery terms apply.",
 			completion = "You've earned my confidence in the work. Keep it that way.",
 			target = 35,
-			benefits = {},
 		},
 		{
 			id = "CL28",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 3000,
 			name = "A full supply order",
 			kind = "delivery",

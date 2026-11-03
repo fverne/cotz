@@ -47,7 +47,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
-| MU01 | A Loose Connection | Hand-in | Deliver ordinary electronic components. | binoculars_2 purchase. |
+| MU01 | A Loose Connection | Hand-in | Deliver ordinary electronic components. | Flash-drive purchase; binoculars reassigned to Atlas. |
 | MU02 | The Silent Repeater | Authored | Recover a failed repeater's log in Marsh. | Network preparation supplies. |
 | MU03 | Signals Getting Through | Tracker | Cumulative checkpoint C1: maintain electronics deliveries. | Small electronics-stock improvement. |
 | MU04 | The Missing Address | Authored | Recover an address register from a local cache. | PDA information topic. |
@@ -56,7 +56,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
-| MU05 | A Clearer Picture | Hand-in | Supply optical and electronic service goods. | binoculars_1 purchase, after binoculars_2. |
+| MU05 | A Clearer Picture | Hand-in | Supply optical and electronic service goods. | 9V battery purchase; binoculars reassigned to Atlas. |
 | MU06 | A Line Through the Marsh | Authored | Retrieve a recorder along a broken network route. | Regional signal clue. |
 | MU07 | Not Just Static | Tracker | Cumulative checkpoint C2: reach the next electronics-delivery checkpoint. | One existing PDA service unlock. |
 | MU08 | Spool's Packet | Authored | Recover a sealed communications record in Garbage. | Spool relationship response. |
@@ -69,7 +69,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | --- | --- | --- | --- | --- |
 | MU11 | A Stable Link | Tracker | Cumulative checkpoint C3: maintain regional electronics orders. | First small PDA-service benefit. |
 | MU12 | The Unlisted Receiver | Authored | Locate and retrieve a source through finite triangulation. | Source-identification evidence. |
-| MU13 | Looking Further | Hand-in | Supply advanced optical components. | binoculars_4 purchase, after binoculars_1. |
+| MU13 | Looking Further | Hand-in | Supply advanced optical components. | Planned network record (TODO; not implemented). |
 | MU14 | The Second Copy | Authored | Recover a backup log in Waystation territory. | Network investigation lead. |
 
 ### Chapter 4: Unknown connection
@@ -78,7 +78,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | --- | --- | --- | --- | --- |
 | MU15 | Beyond Local Range | Tracker | Cumulative checkpoint C4: reach the next electronics checkpoint. | Selected electronics-stock increase. |
 | MU16 | A Message With No Sender | Authored | Retrieve a source recorder near a remote relay. | Pripyat signal clue. |
-| MU17 | The Final Lens | Hand-in | Deliver specialist optical service materials. | binoculars_3 purchase, after binoculars_4. |
+| MU17 | The Final Lens | Hand-in | Deliver specialist optical service materials. | Planned network record (TODO; not implemented). |
 | MU18 | The Old Routing Table | Authored | Recover a routing record at a Pripyat communications site. | Technical preparation package. |
 | MU19 | No Lost Packets | Tracker | Cumulative checkpoint C5: complete the next electronics checkpoint. | One additional PDA-service benefit. |
 | MU20 | Someone on the Line | Authored | Recover the unknown connection's recorder in Pripyat. | Intrusion evidence. |
@@ -94,7 +94,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 
 ## Upgrade gates and allocation
 
-Preserve current binocular order: MU01 binoculars_2 → MU05 binoculars_1 → MU13 binoculars_4 → MU17 binoculars_3. Numeric suffixes are not tier order. His current detectorecho route is a transfer candidate to Egghead EG03; any alternate route must obey the same detector chain. Check anomalydetector's different function before classifying it.
+Binoculars are no longer a Mute reward. Atlas owns the canonical AT01/05/13/17 chain, with a themed alternate seller at Spoor. Numeric suffixes are not tier order. Artifact detectors belong to Egghead's equipment progression. Mute's anomalydetector has a different function and remains separate from that chain.
 
 An unresolved lower-tier prerequisite is an implementation blocker for that reward, not permission
 to leave it ungated. Current catalogue milestones are the only equipment permissions. Check alternate
@@ -160,3 +160,12 @@ targets, stock benefits, discounts and catalogue access are now specified by the
 and unlock ledger. Field commissions use configured point pools; physical locations still need map
 authoring and multiplayer verification. No live rescue or bespoke multi-site investigation mechanic
 is implied by the narrative. Arena objectives count completed eligible bouts, not an unreported win.
+
+## Current reward allocation
+
+Purchase routes are local to this seller; equipment tier dependencies retain explicit canonical owners.
+The [generated unlock ledger](../unlock-ledger.md#every-progression-step) lists this contact's current
+purchases, conversions, stock tiers and supplementary rewards. Historical chapter tables above are story
+references, not the reward authority. 13 steps carry future `plannedUnlocks` metadata with adjacent TODO comments;
+these entries do not grant working benefits or appear as functional rewards in game. Current default
+stock quantities and refill settings are outside this redistribution pass.

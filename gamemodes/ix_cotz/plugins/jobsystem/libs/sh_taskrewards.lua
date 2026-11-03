@@ -160,7 +160,7 @@ local function townRewardUnlocked(character, npc, itemID)
 	local gate = town.itemGates[itemID]
 	if not gate then return not town:IsPurchaseExcluded(itemID) end
 	if not gate.sellers or gate.sellers[npc] then return town:CanBuyItem(character, itemID, npc) end
-	-- Support contacts can supply medicine after a real seller's personal milestone is earned.
+	-- A support reward may use an earned seller route without unlocking purchases at other contacts.
 	for seller in pairs(gate.sellers) do
 		if town:CanBuyItem(character, itemID, seller) then return true end
 	end

@@ -3,6 +3,9 @@
 This plugin owns character progression storage, persistent item requirements, numeric counters,
 prerequisite validation, purchase permissions, completion payouts, pending reward claims and services.
 Town content is authored in [townnpcs](../townnpcs/README.md); superseded town definition files are removed.
+Town purchases now use seller-specific gates for all catalogue items, including ammunition. Explicit
+canonical equipment owners supply tier prerequisites. Authoring-only `plannedUnlocks` are deliberately
+not copied into compiled reward definitions, so TODO entries cannot issue claims or grant permissions.
 
 ## Content and ownership
 

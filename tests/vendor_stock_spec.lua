@@ -271,12 +271,14 @@ check(
 )
 ix.item.list.ammo = {isAmmo = true}
 ix.item.list.drink_bottlewater = {category = "Consumables"}
+ix.item.list.drink_bottlewaterdirty = {category = "Consumables"}
 ix.item.list.medic_bandage_1 = {category = "Aid"}
 ix.item.list.drug_adrenaline = {category = "Aid"}
 ix.item.list.rifle = {isWeapon = true}
 local policies = {
 	ammo = {4, 12},
-	drink_bottlewater = {4, 12},
+	drink_bottlewater = {1, 12},
+	drink_bottlewaterdirty = {4, 12},
 	medic_bandage_1 = {3, 12},
 	drug_adrenaline = {2, 12},
 	value_kerosene = {2, 12},
@@ -376,8 +378,17 @@ local rankShop = vendor()
 rankShop.items = {ammo = {10, 4, VENDOR_SELLANDBUY, 4, 12, 1},
 	rifle = {10, 1, VENDOR_SELLANDBUY, 1, 48, 1}}
 ix.progression.GetStockBonus = function(owner, npc, id)
-	return id == "ammo" and (owner.rank or 0) or 0
+	return (id == "ammo" or id == "drink_bottlewater") and (owner.rank or 0) or 0
 end
+rankShop.items.drink_bottlewater = {nil, 1, VENDOR_SELLANDBUY, 1, 12, 1}
+local waterBuyer = character()
+local waterCount, waterMaximum = rankShop:GetStock("drink_bottlewater", waterBuyer)
+check(waterCount == 1 and waterMaximum == 1, "clean water starts at one bottle and one capacity")
+waterBuyer.rank = 1
+waterCount, waterMaximum = rankShop:GetStock("drink_bottlewater", waterBuyer)
+check(waterCount == 1 and waterMaximum == 2, "earned water capacity expands without a free refill")
+check(rankShop.items.drink_bottlewater[VENDOR_MAXSTOCK] == 1,
+	"earned water capacity leaves the starting maximum at one")
 check(rankShop:GetStock("ammo", ranked) == 4, "ranked shop starts at base stock")
 now = now + 120 * 3600
 ranked.rank = 1

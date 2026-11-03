@@ -69,6 +69,9 @@ function ix.vendorStock.FormatStock(count, maximum, fraction)
 end
 
 function ix.vendorStock.GetPolicy(uniqueID)
+	if uniqueID == "drink_bottlewater" then
+		return 1, 12
+	end
 	local item = ix.item.list[uniqueID] or {}
 	local prefix = uniqueID:match("^([^_]+)_")
 	if item.isAmmo then

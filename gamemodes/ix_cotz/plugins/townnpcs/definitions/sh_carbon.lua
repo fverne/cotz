@@ -32,7 +32,7 @@ PLUGIN:Register("carbon", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
 	rewards = {
 		packages = {
 			{label = "Archive supplies (trade goods)",
@@ -66,6 +66,18 @@ PLUGIN:Register("carbon", {
 		),
 	},
 	catalogue = {
+		["drug_caffeine"] = {step = "CA02",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_raisins"] = {step = "CA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "CA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "CA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["value_officepaper"] = {step = "CA01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_tape_duct"] = {step = "CA02",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -128,6 +140,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA03",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 0,
 			name = "A Useful Record",
 			kind = "tracker",
@@ -142,6 +155,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA04",
+			stock = {item = "drug_caffeine", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -164,6 +178,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA05",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "An Ordered Shelf",
 			kind = "delivery",
@@ -234,6 +249,23 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA07",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Marsh maintenance chronology; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA07/future",
+					kind = "information",
+					name = "Record: Marsh maintenance chronology",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "Marsh maintenance chronology",
+				},
+			},
 			completionCash = 0,
 			name = "Facts With Sources",
 			kind = "tracker",
@@ -241,10 +273,26 @@ PLUGIN:Register("carbon", {
 			briefing = "Keep bringing the requested documents. I want the context as well as the quotable sentence.",
 			completion = "You've kept records together that could easily have been scattered.",
 			target = 5,
-			benefits = {},
 		},
 		{
 			id = "CA08",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Garbage facility ownership; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA08/future",
+					kind = "information",
+					name = "Record: Garbage facility ownership",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "Garbage facility ownership",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -270,10 +318,26 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CA09",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Waystation freight chronology; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA09/future",
+					kind = "information",
+					name = "Record: Waystation freight chronology",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "Waystation freight chronology",
+				},
+			},
 			completionCash = 875,
 			name = "Names and Numbers",
 			kind = "delivery",
@@ -294,10 +358,26 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CA10",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Pripyat research chronology; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA10/future",
+					kind = "information",
+					name = "Record: Pripyat research chronology",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "Pripyat research chronology",
+				},
+			},
 			completionCash = 1250,
 			name = "Egghead's Citation",
 			kind = "field",
@@ -323,10 +403,26 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_lab",
 				label = "Cited research record",
 			},
-			benefits = {},
 		},
 		{
 			id = "CA11",
+			stock = {item = "drug_caffeine", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering expedition roster comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA11/future",
+					kind = "information",
+					name = "Record: expedition roster comparison",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "expedition roster comparison",
+				},
+			},
 			completionCash = 0,
 			name = "A History That Agrees",
 			kind = "tracker",
@@ -334,10 +430,25 @@ PLUGIN:Register("carbon", {
 			briefing = "More document orders when you're ready. Keep their sources distinct where the records allow it.",
 			completion = "A useful range of material. I'll take time to read it without forcing an agreement.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "CA12",
+			stock = {item = "drink_bottletea", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering equipment serial register; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA12/future",
+					kind = "information",
+					name = "Record: equipment serial register",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "equipment serial register",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -376,6 +487,23 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA13",
+			stock = {item = "food_can_beans", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering contamination report comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA13/future",
+					kind = "information",
+					name = "Record: contamination report comparison",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "contamination report comparison",
+				},
+			},
 			completionCash = 1175,
 			name = "Ready for the Archive",
 			kind = "delivery",
@@ -400,10 +528,26 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CA14",
+			stock = {item = "food_raisins", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering power-network history; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA14/future",
+					kind = "information",
+					name = "Record: power-network history",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "power-network history",
+				},
+			},
 			completionCash = 1650,
 			name = "The Pripyat Index",
 			kind = "field",
@@ -429,10 +573,26 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_archive",
 				label = "Pripyat archive index",
 			},
-			benefits = {},
 		},
 		{
 			id = "CA15",
+			stock = {item = "drink_bottlewaterdirty", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering missing shipment index; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA15/future",
+					kind = "information",
+					name = "Record: missing shipment index",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "missing shipment index",
+				},
+			},
 			completionCash = 0,
 			name = "Every Page Accounted For",
 			kind = "tracker",
@@ -440,10 +600,26 @@ PLUGIN:Register("carbon", {
 			briefing = "Continue the record deliveries while I examine the archive references.",
 			completion = "You've stayed with the ordinary collecting. That is how a comparison becomes possible.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "CA16",
+			stock = {item = "drug_caffeine", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering facility shutdown records; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA16/future",
+					kind = "information",
+					name = "Record: facility shutdown records",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "facility shutdown records",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -473,10 +649,26 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CA17",
+			stock = {item = "drink_bottletea", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering archive provenance guide; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA17/future",
+					kind = "information",
+					name = "Record: archive provenance guide",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "archive provenance guide",
+				},
+			},
 			completionCash = 1475,
 			name = "The Missing Context",
 			kind = "delivery",
@@ -501,10 +693,25 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CA18",
+			stock = {item = "food_can_beans", bonus = 3},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering conflicting witness register; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA18/future",
+					kind = "information",
+					name = "Record: conflicting witness register",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "conflicting witness register",
+				},
+			},
 			completionCash = 2050,
 			name = "The False Summary",
 			kind = "field",
@@ -543,6 +750,23 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA19",
+			stock = {item = "food_raisins", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering technical document cross-reference; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA19/future",
+					kind = "information",
+					name = "Record: technical document cross-reference",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "technical document cross-reference",
+				},
+			},
 			completionCash = 0,
 			name = "A Complete Dossier",
 			kind = "tracker",
@@ -550,7 +774,6 @@ PLUGIN:Register("carbon", {
 			briefing = "Keep the document deliveries going. New material can qualify an account we thought was settled.",
 			completion = "I've got enough beside me to ask better questions now. Thank you.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "CA20",
@@ -595,6 +818,23 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA21",
+			stock = {item = "drink_bottlewaterdirty", bonus = 4},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering recovered map annotations; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "carbon/CA21/future",
+					kind = "information",
+					name = "Record: recovered map annotations",
+					provider = "carbon",
+					status = "unimplemented",
+					topic = "recovered map annotations",
+				},
+			},
 			completionCash = 1775,
 			name = "Preserve the Originals",
 			kind = "delivery",
@@ -623,10 +863,10 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "CA22",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

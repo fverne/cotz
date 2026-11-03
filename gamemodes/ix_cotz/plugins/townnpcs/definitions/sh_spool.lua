@@ -12,7 +12,7 @@ PLUGIN:Register("spool", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
 	rewards = {
 		packages = {
 			{label = "Radio spares (trade goods)",
@@ -45,7 +45,47 @@ PLUGIN:Register("spool", {
 			.. "finished the trip too."
 		),
 	},
+	-- Author-disabled suggestions must not be restored by catalogue or stock generation.
+	disabledItems = {
+		["rfreceiver"] = true,
+	},
 	catalogue = {
+		["cassette_wickedrabbit"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cassette_true"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cassette_standart"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cassette_merc"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cassette_freedom"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cassette_firelake"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cassette_barman"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["cassette_bandits"] = {step = "SO08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_raisins"] = {step = "SO01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "SO01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drug_caffeine"] = {step = "SO01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "SO01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["rfreceiver"] = {step = "SO01",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["value_9vbattery"] = {step = "SO01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_capacitors"] = {step = "SO03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_radio_repeater"] = {step = "SO04",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_tape_electric"] = {step = "SO02",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["walkman"] = {step = "SO01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -144,6 +184,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO05",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Ground and Power",
 			kind = "delivery",
@@ -211,6 +252,23 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO07",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on operator call-sign register; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "spool/SO07/future",
+					kind = "information",
+					name = "Record: operator call-sign register",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "operator call-sign register",
+				},
+			},
 			completionCash = 0,
 			name = "A Voice Worth Finding",
 			kind = "tracker",
@@ -221,10 +279,26 @@ PLUGIN:Register("spool", {
 			),
 			completion = "Another useful set of returns. Thank you for bringing the sources all the way through.",
 			target = 5,
-			benefits = {},
 		},
 		{
 			id = "SO08",
+			stock = {item = "cassette_standart", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on Marsh relay bearings; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "spool/SO08/future",
+					kind = "information",
+					name = "Record: Marsh relay bearings",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "Marsh relay bearings",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -250,10 +324,26 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SO09",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on Garbage relay bearings; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "spool/SO09/future",
+					kind = "information",
+					name = "Record: Garbage relay bearings",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "Garbage relay bearings",
+				},
+			},
 			completionCash = 875,
 			name = "A Longer Cable",
 			kind = "delivery",
@@ -274,10 +364,26 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SO10",
+			stock = {item = "drug_caffeine", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on Waystation relay bearings; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "spool/SO10/future",
+					kind = "information",
+					name = "Record: Waystation relay bearings",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "Waystation relay bearings",
+				},
+			},
 			completionCash = 1250,
 			name = "Mute's Header",
 			kind = "field",
@@ -303,10 +409,26 @@ PLUGIN:Register("spool", {
 				cargo = "town_quest_drive",
 				label = "network header",
 			},
-			benefits = {},
 		},
 		{
 			id = "SO11",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on Pripyat transmission bearings; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "spool/SO11/future",
+					kind = "information",
+					name = "Record: Pripyat transmission bearings",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "Pripyat transmission bearings",
+				},
+			},
 			completionCash = 0,
 			name = "Across the Static",
 			kind = "tracker",
@@ -314,10 +436,25 @@ PLUGIN:Register("spool", {
 			briefing = "Keep locating and recovering the assigned transmitters.",
 			completion = "You've been consistent. That makes sorting the recordings a little less lonely.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "SO12",
+			stock = {item = "food_raisins", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on failed station chronology; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "spool/SO12/future",
+					kind = "information",
+					name = "Record: failed station chronology",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "failed station chronology",
+				},
+			},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -360,6 +497,22 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO13",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on missing operator recordings; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "spool/SO13/future",
+					kind = "information",
+					name = "Record: missing operator recordings",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "missing operator recordings",
+				},
+			},
 			completionCash = 1175,
 			name = "Packed to Listen",
 			kind = "delivery",
@@ -384,10 +537,26 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SO14",
+			stock = {item = "walkman", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on signal triangulation procedure; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "spool/SO14/future",
+					kind = "information",
+					name = "Record: signal triangulation procedure",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "signal triangulation procedure",
+				},
+			},
 			completionCash = 1650,
 			name = "The Unsent Call",
 			kind = "field",
@@ -414,10 +583,26 @@ PLUGIN:Register("spool", {
 				label = "Unsent check-in for Wake",
 				recipient = "wake",
 			},
-			benefits = {},
 		},
 		{
 			id = "SO15",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on antenna maintenance records; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "spool/SO15/future",
+					kind = "information",
+					name = "Record: antenna maintenance records",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "antenna maintenance records",
+				},
+			},
 			completionCash = 0,
 			name = "Still on Frequency",
 			kind = "tracker",
@@ -425,10 +610,26 @@ PLUGIN:Register("spool", {
 			briefing = "Continue the triangulation orders while I compare the check-ins.",
 			completion = "A considerable amount of listening has started with your walking. I appreciate it.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "SO16",
+			stock = {item = "cassette_standart", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on interference comparison; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "spool/SO16/future",
+					kind = "information",
+					name = "Record: interference comparison",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "interference comparison",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -458,10 +659,26 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SO17",
+			stock = {item = "drink_bottletea", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on emergency listening protocol; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "spool/SO17/future",
+					kind = "information",
+					name = "Record: emergency listening protocol",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "emergency listening protocol",
+				},
+			},
 			completionCash = 1475,
 			name = "Enough Power to Return",
 			kind = "delivery",
@@ -486,10 +703,25 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SO18",
+			stock = {item = "drug_caffeine", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on expedition radio checks; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "spool/SO18/future",
+					kind = "information",
+					name = "Record: expedition radio checks",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "expedition radio checks",
+				},
+			},
 			completionCash = 2050,
 			name = "The Last Check-in",
 			kind = "field",
@@ -529,6 +761,23 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO19",
+			stock = {item = "food_can_beans", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on recording provenance; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "spool/SO19/future",
+					kind = "information",
+					name = "Record: recording provenance",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "recording provenance",
+				},
+			},
 			completionCash = 0,
 			name = "Nobody Left Calling",
 			kind = "tracker",
@@ -536,7 +785,6 @@ PLUGIN:Register("spool", {
 			briefing = "There are more sources to locate. Check the assignment before heading out.",
 			completion = "You've kept returning with something I can examine. I'm grateful for the care.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "SO20",
@@ -581,6 +829,23 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO21",
+			stock = {item = "food_raisins", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on unidentified voice register; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "spool/SO21/future",
+					kind = "information",
+					name = "Record: unidentified voice register",
+					provider = "spool",
+					status = "unimplemented",
+					topic = "unidentified voice register",
+				},
+			},
 			completionCash = 1775,
 			name = "Keep the Channel Open",
 			kind = "delivery",
@@ -609,10 +874,10 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SO22",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "The Message Home",
 			kind = "field",

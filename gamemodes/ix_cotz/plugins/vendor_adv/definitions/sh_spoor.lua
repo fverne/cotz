@@ -2,7 +2,7 @@ ix.npctemplates.templates["spoornpc"] = {
 	name = "'Spoor'",
 	description = "A quiet hunter who seems more interested in distant sounds than conversation.",
 
-	model = "models/Humans/Group03/male_07.mdl",
+	model = "models/legends/greenov.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

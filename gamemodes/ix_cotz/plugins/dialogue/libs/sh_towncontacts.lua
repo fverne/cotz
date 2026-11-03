@@ -185,17 +185,18 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	assert(dialogue.townContact == contact.id, "Town conversation is bound to the wrong contact")
 	local greeting = dialogue.tree.GREETING
 	local originalResponse = greeting.response
-	local finalID = ix.townNPCs:StepID(contact.id, contact.progression[#contact.progression].id)
+	local finalStep = contact.progression[#contact.progression]
+	local finalID = finalStep and ix.townNPCs:StepID(contact.id, finalStep.id)
 	greeting.preCallback = function(self, client, target)
 		self.response = originalResponse
 		if SERVER then target:SetNetVar("possibleJobs", contact.categories) end
-		if CLIENT and contact.dialogue.completedGreeting
+		if CLIENT and finalID and contact.dialogue.completedGreeting
 			and ix.progression.IsCompleted(client:GetCharacter(), finalID) then
 			self.response = contact.dialogue.completedGreeting
 		end
 	end
 	configureWork(dialogue, contact)
-	configureProgression(dialogue, contact)
+	if finalID then configureProgression(dialogue, contact) end
 	configureDeliveries(dialogue, contact)
 	ix.dialogue.ConfigureTaskRewards(dialogue)
 end

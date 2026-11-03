@@ -33,7 +33,7 @@ PLUGIN:Register("gasket", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Fuel allowance",
@@ -67,14 +67,24 @@ PLUGIN:Register("gasket", {
 		),
 	},
 	catalogue = {
-		["mask_cloth"] = {step = "GK01",
+		["food_raisins"] = {step = "GK01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_gp5"] = {step = "GK07",
+		["food_can_beans"] = {step = "GK01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_halfmask"] = {step = "GK03",
+		["drink_bottletea"] = {step = "GK01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_respirator"] = {step = "GK05",
+		["flashlight"] = {step = "GK06",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["headlamp"] = {step = "GK16",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["lowtiercookerfuel"] = {step = "GK01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_kerosene"] = {step = "GK08",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_tape_duct"] = {step = "GK09",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["value_waterfilter"] = {step = "GK04",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -108,6 +118,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK02",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The Empty Service Shed",
 			kind = "field",
@@ -137,6 +148,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK03",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 0,
 			name = "The First Reserve",
 			kind = "tracker",
@@ -180,6 +192,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK05",
+			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 575,
 			name = "Water Before Comfort",
 			kind = "delivery",
@@ -246,6 +259,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK07",
+			stock = {item = "drink_bottlewater", bonus = 3},
 			completionCash = 0,
 			name = "A Steady Supply",
 			kind = "tracker",
@@ -313,6 +327,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK10",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 1250,
 			name = "The Scrap Specification",
 			kind = "field",
@@ -343,6 +358,34 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK11",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for lowtiercookerfuel; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK11/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: lowtiercookerfuel",
+					outputs = {
+						{
+							item = "lowtiercookerfuel",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "More Than One Tank",
 			kind = "tracker",
@@ -350,10 +393,36 @@ PLUGIN:Register("gasket", {
 			briefing = "Continue supplying the utility orders. I need the regular work as much as the unusual cases.",
 			completion = "That's been steady work. I appreciate not having to ask twice.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "GK12",
+			stock = {item = "food_raisins", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_waterfilter; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK12/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_waterfilter",
+					outputs = {
+						{
+							item = "value_waterfilter",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -396,6 +465,34 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK13",
+			stock = {item = "drink_bottlewaterdirty", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_kerosene; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK13/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_kerosene",
+					outputs = {
+						{
+							item = "value_kerosene",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1175,
 			name = "Before the Blowout",
 			kind = "delivery",
@@ -420,10 +517,37 @@ PLUGIN:Register("gasket", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "GK14",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_airfilter; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK14/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_airfilter",
+					outputs = {
+						{
+							item = "value_airfilter",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1650,
 			name = "The Shelter Circuit",
 			kind = "field",
@@ -449,10 +573,37 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_module2",
 				label = "Shelter service recorder",
 			},
-			benefits = {},
 		},
 		{
 			id = "GK15",
+			stock = {item = "lowtiercookerfuel", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_sparkplug; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK15/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_sparkplug",
+					outputs = {
+						{
+							item = "value_sparkplug",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Nothing Left Dry",
 			kind = "tracker",
@@ -460,10 +611,36 @@ PLUGIN:Register("gasket", {
 			briefing = "There's more utility supply work on the books. Choose an order you can actually bring back.",
 			completion = "You've kept at it. Plenty of people would have got bored of fuel by now.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "GK16",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_battery; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK16/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_battery",
+					outputs = {
+						{
+							item = "value_battery",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -493,10 +670,37 @@ PLUGIN:Register("gasket", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "GK17",
+			stock = {item = "drink_bottletea", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_9vbattery; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK17/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_9vbattery",
+					outputs = {
+						{
+							item = "value_9vbattery",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1475,
 			name = "A Season of Spares",
 			kind = "delivery",
@@ -521,10 +725,36 @@ PLUGIN:Register("gasket", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "GK18",
+			stock = {item = "flashlight", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_tape_electric; consume inputs each time, enforce "
+						.. "equipment tiers and audit resale value."
+					),
+					id = "gasket/GK18/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_tape_electric",
+					outputs = {
+						{
+							item = "value_tape_electric",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2050,
 			name = "The Original Manual",
 			kind = "field",
@@ -563,6 +793,34 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK19",
+			stock = {item = "food_can_beans", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_dryfuel; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK19/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_dryfuel",
+					outputs = {
+						{
+							item = "value_dryfuel",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "A Town That Runs",
 			kind = "tracker",
@@ -573,7 +831,6 @@ PLUGIN:Register("gasket", {
 				.. "shortage."
 			),
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "GK20",
@@ -611,13 +868,38 @@ PLUGIN:Register("gasket", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			stock = {item = "headlamp", bonus = 1},
 		},
 		{
 			id = "GK21",
+			stock = {item = "food_raisins", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for value_carbattery; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "gasket/GK21/future",
+					inputs = {
+						{
+							item = "value_kerosene",
+							quantity = 4,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: value_carbattery",
+					outputs = {
+						{
+							item = "value_carbattery",
+							quantity = 1,
+						},
+					},
+					provider = "gasket",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1775,
 			name = "Enough in Reserve",
 			kind = "delivery",
@@ -646,10 +928,10 @@ PLUGIN:Register("gasket", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "GK22",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

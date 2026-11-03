@@ -8,7 +8,7 @@ PLUGIN:Register("smartass", {
 		description = "Extract data from %d computer types using the issued flash drive.",
 		quantities = {1, 2, 5},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
 	rewards = {
 		packages = {
 			{label = "Electronics stock (trade goods)",
@@ -51,24 +51,47 @@ PLUGIN:Register("smartass", {
 			.. "I promise to complain about the data whichever way it gets here."
 		),
 	},
+	-- Author-disabled suggestions must not be restored by catalogue or stock generation.
+	disabledItems = {
+		["dataextractor"] = true,
+		["quest_computeraccess"] = true,
+	},
 	catalogue = {
-		["acog"] = {step = "SM03",
+		-- ["quest_computeraccess"] = {step = "SM20",
+		-- 	terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
+		["food_raisins"] = {step = "SM01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cmore"] = {step = "SM01",
+		["food_can_beans"] = {step = "SM01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cobrasuppressor"] = {step = "SM05",
+		["drug_caffeine"] = {step = "SM01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["nightforce"] = {step = "SM05",
+		["drink_energydrink_2"] = {step = "SM01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["pbssuppressor"] = {step = "SM05",
+		["drink_bottletea"] = {step = "SM01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["pso1"] = {step = "SM01",
+		["acog"] = {step = "SM21",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sakersuppressor"] = {step = "SM05",
+		["cmore"] = {step = "SM10",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["shortdot"] = {step = "SM03",
+		-- ["dataextractor"] = {step = "SM01",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["l115"] = {step = "SM24",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["tundrasuppressor"] = {step = "SM05",
+		["m14"] = {step = "SM07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["nightforce"] = {step = "SM24",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["pso1"] = {step = "SM15",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["shortdot"] = {step = "SM18",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sv98"] = {step = "SM01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["svd"] = {step = "SM13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["trg42"] = {step = "SM01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["vss"] = {step = "SM18",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -103,6 +126,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM02",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The Lost Beacon",
 			kind = "field",
@@ -132,6 +156,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM03",
+			stock = {item = "drug_caffeine", bonus = 1},
 			completionCash = 0,
 			name = "Three Bearings",
 			kind = "tracker",
@@ -168,6 +193,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM05",
+			stock = {item = "sv98", bonus = 1},
 			completionCash = 575,
 			name = "Mounts and Glass",
 			kind = "delivery",
@@ -277,6 +303,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM09",
+			stock = {item = "m14", bonus = 1},
 			completionCash = 875,
 			name = "An Honest Test",
 			kind = "delivery",
@@ -330,6 +357,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM11",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 0,
 			name = "Still on Bearing",
 			kind = "tracker",
@@ -341,6 +369,21 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM12",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on computer type identification; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "smartass/SM12/future",
+					kind = "information",
+					name = "Record: computer type identification",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "computer type identification",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -379,6 +422,22 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM13",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on flash drive provenance; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "smartass/SM13/future",
+					kind = "information",
+					name = "Record: flash drive provenance",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "flash drive provenance",
+				},
+			},
 			completionCash = 1175,
 			name = "Quiet Equipment",
 			kind = "delivery",
@@ -403,10 +462,26 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SM14",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on data integrity checks; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "smartass/SM14/future",
+					kind = "information",
+					name = "Record: data integrity checks",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "data integrity checks",
+				},
+			},
 			completionCash = 1650,
 			name = "Mute's Missing Packet",
 			kind = "field",
@@ -432,10 +507,25 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_drive",
 				label = "Relay diagnostic recording",
 			},
-			benefits = {},
 		},
 		{
 			id = "SM15",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on terminal power failures; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "smartass/SM15/future",
+					kind = "information",
+					name = "Record: terminal power failures",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "terminal power failures",
+				},
+			},
 			completionCash = 0,
 			name = "Better Than Luck",
 			kind = "tracker",
@@ -446,10 +536,26 @@ PLUGIN:Register("smartass", {
 				.. "alone."
 			),
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "SM16",
+			stock = {item = "drink_energydrink_2", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on archive access protocol; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "smartass/SM16/future",
+					kind = "information",
+					name = "Record: archive access protocol",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "archive access protocol",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -479,10 +585,26 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SM17",
+			stock = {item = "drug_caffeine", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on cross-system file comparison; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "smartass/SM17/future",
+					kind = "information",
+					name = "Record: cross-system file comparison",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "cross-system file comparison",
+				},
+			},
 			completionCash = 1475,
 			name = "Packed for the Roofs",
 			kind = "delivery",
@@ -507,10 +629,24 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SM18",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on damaged media handling; author actionable guidance tied to "
+						.. "verified mechanics and locations."
+					),
+					id = "smartass/SM18/future",
+					kind = "information",
+					name = "Record: damaged media handling",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "damaged media handling",
+				},
+			},
 			completionCash = 2050,
 			name = "The Rooftop Source",
 			kind = "field",
@@ -552,6 +688,23 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM19",
+			stock = {item = "pso1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on field extraction precautions; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "smartass/SM19/future",
+					kind = "information",
+					name = "Record: field extraction precautions",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "field extraction precautions",
+				},
+			},
 			completionCash = 0,
 			name = "No More False Positives",
 			kind = "tracker",
@@ -559,10 +712,26 @@ PLUGIN:Register("smartass", {
 			briefing = "There are more computer extraction orders. Bring the issued drive back after meeting the request.",
 			completion = "A useful body of work now. We can disagree over evidence instead of enthusiasm.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "SM20",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on research workstation records; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "smartass/SM20/future",
+					kind = "information",
+					name = "Record: research workstation records",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "research workstation records",
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -592,10 +761,25 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SM21",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on log timestamp comparison; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "smartass/SM21/future",
+					kind = "information",
+					name = "Record: log timestamp comparison",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "log timestamp comparison",
+				},
+			},
 			completionCash = 1775,
 			name = "The Last Calibration",
 			kind = "delivery",
@@ -624,10 +808,26 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "SM22",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on Pripyat terminal reports; author actionable guidance tied "
+						.. "to verified mechanics and locations."
+					),
+					id = "smartass/SM22/future",
+					kind = "information",
+					name = "Record: Pripyat terminal reports",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "Pripyat terminal reports",
+				},
+			},
 			completionCash = 2450,
 			name = "Two Signals One Source",
 			kind = "field",
@@ -653,10 +853,26 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_control",
 				label = "Second Pripyat signal source",
 			},
-			benefits = {},
 		},
 		{
 			id = "SM23",
+			stock = {item = "shortdot", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent reference on forged file identification; author actionable guidance "
+						.. "tied to verified mechanics and locations."
+					),
+					id = "smartass/SM23/future",
+					kind = "information",
+					name = "Record: forged file identification",
+					provider = "smartass",
+					status = "unimplemented",
+					topic = "forged file identification",
+				},
+			},
 			completionCash = 0,
 			name = "Found You",
 			kind = "tracker",
@@ -667,10 +883,10 @@ PLUGIN:Register("smartass", {
 				.. "That one can stand."
 			),
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "SM24",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",

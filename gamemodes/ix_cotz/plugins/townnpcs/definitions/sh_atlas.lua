@@ -12,7 +12,7 @@ PLUGIN:Register("atlas", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Survey provisions",
@@ -54,6 +54,30 @@ PLUGIN:Register("atlas", {
 		),
 	},
 	catalogue = {
+		["medic_antirad_1"] = {step = "AT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_raisins"] = {step = "AT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "AT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "AT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_sling"] = {step = "AT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_tourist"] = {step = "AT22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["binoculars_1"] = {step = "AT05",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["binoculars_2"] = {step = "AT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["binoculars_3"] = {step = "AT17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["binoculars_4"] = {step = "AT13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["compass"] = {step = "AT02",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["gpstracker"] = {step = "AT07",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -118,6 +142,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT03",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 0,
 			name = "Repeatable Ground",
 			kind = "tracker",
@@ -137,6 +162,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT04",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -247,6 +273,22 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT08",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
+				{
+					destination = "Garbage",
+					effect = "Optional Marsh–Garbage shortcut via Marsh survey trail; author distinct safe endpoints and permissions.",
+					id = "atlas/AT08/future",
+					kind = "passage",
+					name = "Marsh survey trail",
+					origin = "Marsh",
+					provider = "atlas",
+					status = "unimplemented",
+					route = "Marsh survey trail",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -271,10 +313,26 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "AT09",
+			stock = {item = "backpack_sling", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Marsh flooded detours; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT09/future",
+					kind = "information",
+					name = "Record: Marsh flooded detours",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "Marsh flooded detours",
+				},
+			},
 			completionCash = 875,
 			name = "Paper Trail",
 			kind = "delivery",
@@ -294,10 +352,26 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "AT10",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Garbage eastern approaches; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT10/future",
+					kind = "information",
+					name = "Record: Garbage eastern approaches",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "Garbage eastern approaches",
+				},
+			},
 			completionCash = 1250,
 			name = "An Unfinished Map",
 			kind = "field",
@@ -326,10 +400,26 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_tape",
 				label = "Unfinished survey cassette",
 			},
-			benefits = {},
 		},
 		{
 			id = "AT11",
+			stock = {item = "binoculars_1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Garbage western return route; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT11/future",
+					kind = "information",
+					name = "Record: Garbage western return route",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "Garbage western return route",
+				},
+			},
 			completionCash = 0,
 			name = "Ground Truth",
 			kind = "tracker",
@@ -345,10 +435,27 @@ PLUGIN:Register("atlas", {
 				.. "earth happened here?'"
 			),
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "AT12",
+			stock = {item = "binoculars_2", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
+				{
+					destination = "Garbage",
+					effect = (
+						"Optional Marsh–Garbage shortcut via Garbage overland detour; author distinct safe "
+						.. "endpoints and permissions."
+					),
+					id = "atlas/AT12/future",
+					kind = "passage",
+					name = "Garbage overland detour",
+					origin = "Marsh",
+					provider = "atlas",
+					status = "unimplemented",
+					route = "Garbage overland detour",
+				},
+			},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -417,6 +524,23 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT14",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Waystation shelter approaches; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT14/future",
+					kind = "information",
+					name = "Record: Waystation shelter approaches",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "Waystation shelter approaches",
+				},
+			},
 			completionCash = 1650,
 			name = "The Wrong Coordinates",
 			kind = "field",
@@ -446,10 +570,26 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_official",
 				label = "Disputed coordinate file",
 			},
-			benefits = {},
 		},
 		{
 			id = "AT15",
+			stock = {item = "binoculars_4", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Pripyat survey approaches; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT15/future",
+					kind = "information",
+					name = "Record: Pripyat survey approaches",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "Pripyat survey approaches",
+				},
+			},
 			completionCash = 0,
 			name = "Beyond the Margin",
 			kind = "tracker",
@@ -464,10 +604,26 @@ PLUGIN:Register("atlas", {
 				.. "I have to remind myself how much walking sits behind each neat entry."
 			),
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "AT16",
+			stock = {item = "compass", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Pripyat retreat planning; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT16/future",
+					kind = "information",
+					name = "Record: Pripyat retreat planning",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "Pripyat retreat planning",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -496,7 +652,6 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "AT17",
@@ -527,6 +682,24 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT18",
+			stock = {item = "food_raisins", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
+				{
+					destination = "Garbage",
+					effect = (
+						"Optional Marsh–Garbage shortcut via Waystation survey approach; author distinct "
+						.. "safe endpoints and permissions."
+					),
+					id = "atlas/AT18/future",
+					kind = "passage",
+					name = "Waystation survey approach",
+					origin = "Marsh",
+					provider = "atlas",
+					status = "unimplemented",
+					route = "Waystation survey approach",
+				},
+			},
 			completionCash = 2050,
 			name = "The First Pripyat Mark",
 			kind = "field",
@@ -570,6 +743,23 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT19",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering survey notebook comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT19/future",
+					kind = "information",
+					name = "Record: survey notebook comparison",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "survey notebook comparison",
+				},
+			},
 			completionCash = 0,
 			name = "A Map Worth Carrying",
 			kind = "tracker",
@@ -584,7 +774,6 @@ PLUGIN:Register("atlas", {
 				.. "this much completed fieldwork gives me a much better place to begin the final comparison."
 			),
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "AT20",
@@ -628,6 +817,23 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT21",
+			stock = {item = "lowtiercookerfuel", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering seasonal route changes; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "atlas/AT21/future",
+					kind = "information",
+					name = "Record: seasonal route changes",
+					provider = "atlas",
+					status = "unimplemented",
+					topic = "seasonal route changes",
+				},
+			},
 			completionCash = 1775,
 			name = "An Atlas With Names",
 			kind = "delivery",
@@ -655,10 +861,10 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "AT22",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

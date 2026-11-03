@@ -34,7 +34,7 @@ PLUGIN:Register("technut", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Bench supplies (trade goods)",
@@ -69,61 +69,17 @@ PLUGIN:Register("technut", {
 		),
 	},
 	catalogue = {
-		["helm_tanker"] = {step = "TN01",
+		["food_raisins"] = {step = "TN01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_steel_arab"] = {step = "TN03",
+		["food_can_beans"] = {step = "TN01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_steel_ger"] = {step = "TN03",
+		["drink_bottletea"] = {step = "TN01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_steel_rus"] = {step = "TN03",
+		["attachment_aluframe"] = {step = "TN01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_riot"] = {step = "TN05",
+		["attachment_steelframe"] = {step = "TN28",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_operator_rus_1"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_screen"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headwear_cs4"] = {step = "TN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_sphere08"] = {step = "TN17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["helm_sphere12"] = {step = "TN19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_aluframe"] = {step = "TN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_carbonfibre"] = {step = "TN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_ceramicplate_1"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
-		["attachment_ceramicplate_2"] = {step = "TN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_ceramicplate_3"] = {step = "TN19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_fabric_1"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
-		["attachment_fabric_2"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_kevlar_1"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_kevlar_2"] = {step = "TN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_steelframe"] = {step = "TN17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_steelplate_1"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
-		["attachment_steelplate_2"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_steelplate_3"] = {step = "TN17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs1"] = {step = "TN09",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs2"] = {step = "TN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs3"] = {step = "TN16",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_mailjacket"] = {step = "TN03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_sunrise"] = {step = "TN07",
+		["foregrip"] = {step = "TN01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -157,6 +113,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN02",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The Missing Toolbox",
 			kind = "field",
@@ -186,6 +143,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN03",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 0,
 			name = "Keeping Busy",
 			kind = "tracker",
@@ -197,6 +155,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN04",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -218,6 +177,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN05",
+			stock = {item = "attachment_aluframe", bonus = 1},
 			completionCash = 575,
 			name = "Something Accurate",
 			kind = "delivery",
@@ -283,6 +243,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN07",
+			stock = {item = "drink_bottlewater", bonus = 2},
 			completionCash = 0,
 			name = "Reliable Parts",
 			kind = "tracker",
@@ -294,6 +255,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN08",
+			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -322,6 +284,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN09",
+			stock = {item = "food_can_beans", bonus = 1},
 			completionCash = 875,
 			name = "Steel and Seals",
 			kind = "delivery",
@@ -345,6 +308,22 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN10",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent workshop procedure guidance for Latch's Find; author specific, "
+						.. "actionable checks before activation."
+					),
+					id = "technut/TN10/future",
+					kind = "information",
+					name = "Latch's Find: workshop procedure",
+					provider = "technut",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1250,
 			name = "Latch's Find",
 			kind = "field",
@@ -372,7 +351,6 @@ PLUGIN:Register("technut", {
 				label = "Machine identity record for Latch",
 				recipient = "latch",
 			},
-			benefits = {},
 		},
 		{
 			id = "TN11",
@@ -448,6 +426,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN14",
+			stock = {item = "foregrip", bonus = 1},
 			completionCash = 1650,
 			name = "Patterns in Metal",
 			kind = "field",
@@ -523,6 +502,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN17",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
 			completionCash = 1475,
 			name = "Instrument Grade",
 			kind = "delivery",
@@ -588,6 +568,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN19",
+			stock = {item = "lowtiercookerfuel", bonus = 2},
 			completionCash = 0,
 			name = "Holding Together",
 			kind = "tracker",
@@ -599,6 +580,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN20",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -631,6 +613,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN21",
+			stock = {item = "attachment_aluframe", bonus = 2},
 			completionCash = 1775,
 			name = "A Workshop in Reserve",
 			kind = "delivery",
@@ -658,6 +641,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN22",
+			stock = {item = "drink_bottlewater", bonus = 3},
 			completionCash = 2450,
 			name = "The Machine's Origin",
 			kind = "field",
@@ -687,6 +671,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN23",
+			stock = {item = "drink_bottletea", bonus = 2},
 			completionCash = 0,
 			name = "Precision Work",
 			kind = "tracker",
@@ -701,6 +686,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN24",
+			stock = {item = "food_can_beans", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -777,6 +763,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN26",
+			stock = {item = "food_raisins", bonus = 2},
 			completionCash = 2850,
 			name = "A Test Under Load",
 			kind = "field",
@@ -809,6 +796,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN27",
+			stock = {item = "foregrip", bonus = 2},
 			completionCash = 0,
 			name = "It Runs Again",
 			kind = "tracker",

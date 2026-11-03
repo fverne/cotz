@@ -12,7 +12,7 @@ PLUGIN:Register("wake", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
 	rewards = {
 		packages = {
 			{label = "Recovery medicine",
@@ -45,7 +45,19 @@ PLUGIN:Register("wake", {
 		),
 	},
 	catalogue = {
-		["medic_antirad_1"] = {step = "WA09",
+		["food_raisins"] = {step = "WA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_tushonka"] = {step = "WA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "WA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "WA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_sanitar"] = {step = "WA04",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drug_painkillers"] = {step = "WA03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["medic_antirad_1"] = {step = "WA02",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_antirad_2"] = {step = "WA21",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
@@ -53,7 +65,7 @@ PLUGIN:Register("wake", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_bandage_3"] = {step = "WA13",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_1"] = {step = "WA07",
+		["medic_medkit_1"] = {step = "WA01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_medkit_2"] = {step = "WA11",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
@@ -138,6 +150,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA04",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 650,
 			name = "Restocking",
 			kind = "delivery",
@@ -234,6 +247,31 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA07",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = "Unlock a repeatable exchange for medic_bandage_1; consume specified inputs on every exchange.",
+					id = "wake/WA07/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Bring Back What You Can: standing exchange",
+					outputs = {
+						{
+							item = "medic_bandage_1",
+							quantity = 1,
+						},
+					},
+					provider = "wake",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Bring Back What You Can",
 			kind = "tracker",
@@ -241,10 +279,26 @@ PLUGIN:Register("wake", {
 			briefing = "More effects recoveries when you're prepared. Keep each case together.",
 			completion = "You've been careful with what returned. I appreciate that.",
 			target = 5,
-			benefits = {},
 		},
 		{
 			id = "WA08",
+			stock = {item = "medic_antirad_1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering personal effects identification; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "wake/WA08/future",
+					kind = "information",
+					name = "Record: personal effects identification",
+					provider = "wake",
+					status = "unimplemented",
+					topic = "personal effects identification",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -270,10 +324,26 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "WA09",
+			stock = {item = "backpack_sanitar", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering failed convoy account; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "wake/WA09/future",
+					kind = "information",
+					name = "Record: failed convoy account",
+					provider = "wake",
+					status = "unimplemented",
+					topic = "failed convoy account",
+				},
+			},
 			completionCash = 875,
 			name = "Keeping the Record",
 			kind = "delivery",
@@ -294,10 +364,34 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "WA10",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = "Unlock a repeatable exchange for medic_bandage_1; consume specified inputs on every exchange.",
+					id = "wake/WA10/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Atlas' Missing Mark: standing exchange",
+					outputs = {
+						{
+							item = "medic_bandage_1",
+							quantity = 1,
+						},
+					},
+					provider = "wake",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1250,
 			name = "Atlas' Missing Mark",
 			kind = "field",
@@ -324,7 +418,6 @@ PLUGIN:Register("wake", {
 				label = "Survey note for Atlas",
 				recipient = "atlas",
 			},
-			benefits = {},
 		},
 		{
 			id = "WA11",
@@ -339,6 +432,22 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA12",
+			stock = {item = "drug_painkillers", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Garbage recovery approaches; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "wake/WA12/future",
+					kind = "information",
+					name = "Record: Garbage recovery approaches",
+					provider = "wake",
+					status = "unimplemented",
+					topic = "Garbage recovery approaches",
+				},
+			},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -409,6 +518,23 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA14",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Pripyat recovery approaches; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "wake/WA14/future",
+					kind = "information",
+					name = "Record: Pripyat recovery approaches",
+					provider = "wake",
+					status = "unimplemented",
+					topic = "Pripyat recovery approaches",
+				},
+			},
 			completionCash = 1650,
 			name = "The Withheld Copy",
 			kind = "field",
@@ -435,7 +561,6 @@ PLUGIN:Register("wake", {
 				label = "Restricted report's supporting file",
 				recipient = "carbon",
 			},
-			benefits = {},
 		},
 		{
 			id = "WA15",
@@ -450,6 +575,31 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA16",
+			stock = {item = "food_can_tushonka", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = "Unlock a repeatable exchange for medic_bandage_1; consume specified inputs on every exchange.",
+					id = "wake/WA16/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Building the reserve: standing exchange",
+					outputs = {
+						{
+							item = "medic_bandage_1",
+							quantity = 1,
+						},
+					},
+					provider = "wake",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -479,7 +629,6 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "WA17",
@@ -511,6 +660,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA18",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2050,
 			name = "The Last Transmission",
 			kind = "field",

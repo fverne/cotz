@@ -12,7 +12,7 @@ PLUGIN:Register("vesper", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Radiation supplies",
@@ -44,13 +44,27 @@ PLUGIN:Register("vesper", {
 		),
 	},
 	catalogue = {
-		["mask_m40"] = {step = "VE19",
+		["medic_medkit_1"] = {step = "VE01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_m50"] = {step = "VE21",
+		["medic_antirad_2"] = {step = "VE06",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_xm40"] = {step = "VE15",
+		["food_raisins"] = {step = "VE01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_wind"] = {step = "VE11",
+		["food_can_beans"] = {step = "VE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "VE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["anomalydetector"] = {step = "VE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorbear"] = {step = "VE13",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorecho"] = {step = "VE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorveles"] = {step = "VE24",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_antirad_1"] = {step = "VE03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_wind"] = {step = "VE10",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -85,6 +99,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE02",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The Quiet Edge",
 			kind = "field",
@@ -125,6 +140,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE04",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -147,6 +163,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE05",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Reliable Instruments",
 			kind = "delivery",
@@ -213,6 +230,23 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE07",
+			stock = {item = "anomalydetector", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering field boundary observations; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE07/future",
+					kind = "information",
+					name = "Record: field boundary observations",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "field boundary observations",
+				},
+			},
 			completionCash = 0,
 			name = "Same Method Twice",
 			kind = "tracker",
@@ -220,10 +254,26 @@ PLUGIN:Register("vesper", {
 			briefing = "More survey recordings when prepared. Check the return before accepting.",
 			completion = "You've kept the work consistent. That gives us something worth comparing.",
 			target = 5,
-			benefits = {},
 		},
 		{
 			id = "VE08",
+			stock = {item = "medic_antirad_2", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering detector preparation; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE08/future",
+					kind = "information",
+					name = "Record: detector preparation",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "detector preparation",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -249,10 +299,26 @@ PLUGIN:Register("vesper", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "VE09",
+			stock = {item = "detectorecho", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Marsh anomaly comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE09/future",
+					kind = "information",
+					name = "Record: Marsh anomaly comparison",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "Marsh anomaly comparison",
+				},
+			},
 			completionCash = 875,
 			name = "Keep It Sealed",
 			kind = "delivery",
@@ -273,10 +339,26 @@ PLUGIN:Register("vesper", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "VE10",
+			stock = {item = "drink_bottlewater", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Garbage anomaly comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE10/future",
+					kind = "information",
+					name = "Record: Garbage anomaly comparison",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "Garbage anomaly comparison",
+				},
+			},
 			completionCash = 1250,
 			name = "The Unstable Reading",
 			kind = "field",
@@ -302,10 +384,10 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_tape",
 				label = "Disputed-site audio record",
 			},
-			benefits = {},
 		},
 		{
 			id = "VE11",
+			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 0,
 			name = "Outside Familiar Ground",
 			kind = "tracker",
@@ -317,6 +399,22 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE12",
+			stock = {item = "food_can_beans", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Waystation anomaly comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE12/future",
+					kind = "information",
+					name = "Record: Waystation anomaly comparison",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "Waystation anomaly comparison",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -457,6 +555,23 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE17",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Pripyat anomaly comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE17/future",
+					kind = "information",
+					name = "Record: Pripyat anomaly comparison",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "Pripyat anomaly comparison",
+				},
+			},
 			completionCash = 1475,
 			name = "No Borrowed Luck",
 			kind = "delivery",
@@ -481,10 +596,25 @@ PLUGIN:Register("vesper", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "VE18",
+			stock = {item = "medic_antirad_1", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering weather and visibility; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE18/future",
+					kind = "information",
+					name = "Record: weather and visibility",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "weather and visibility",
+				},
+			},
 			completionCash = 2050,
 			name = "The Team's Cache",
 			kind = "field",
@@ -523,6 +653,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE19",
+			stock = {item = "detectorbear", bonus = 1},
 			completionCash = 0,
 			name = "A Measured Risk",
 			kind = "tracker",
@@ -534,6 +665,23 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE20",
+			stock = {item = "medic_medkit_1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering survey withdrawal criteria; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE20/future",
+					kind = "information",
+					name = "Record: survey withdrawal criteria",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "survey withdrawal criteria",
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -563,10 +711,10 @@ PLUGIN:Register("vesper", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "VE21",
+			stock = {item = "suit_wind", bonus = 1},
 			completionCash = 1775,
 			name = "Enough to Compare",
 			kind = "delivery",
@@ -599,6 +747,23 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE22",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering protective equipment checklist; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE22/future",
+					kind = "information",
+					name = "Record: protective equipment checklist",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "protective equipment checklist",
+				},
+			},
 			completionCash = 2450,
 			name = "A Different Explanation",
 			kind = "field",
@@ -625,10 +790,26 @@ PLUGIN:Register("vesper", {
 				label = "Control cassette for Carbon",
 				recipient = "carbon",
 			},
-			benefits = {},
 		},
 		{
 			id = "VE23",
+			stock = {item = "lowtiercookerfuel", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering artifact recovery notes; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "vesper/VE23/future",
+					kind = "information",
+					name = "Record: artifact recovery notes",
+					provider = "vesper",
+					status = "unimplemented",
+					topic = "artifact recovery notes",
+				},
+			},
 			completionCash = 0,
 			name = "Everyone Comes Back",
 			kind = "tracker",
@@ -639,10 +820,10 @@ PLUGIN:Register("vesper", {
 				.. "after we've enjoyed finishing these."
 			),
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "VE24",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",

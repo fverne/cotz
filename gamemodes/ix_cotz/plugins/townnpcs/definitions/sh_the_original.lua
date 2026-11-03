@@ -31,7 +31,7 @@ PLUGIN:Register("the-original", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Expedition provisions",
@@ -64,7 +64,179 @@ PLUGIN:Register("the-original", {
 			.. "triumphant expression until then."
 		),
 	},
+	-- Author-disabled suggestions must not be restored by catalogue or stock generation.
+	disabledItems = {
+		["hide_bear"] = true,
+		["hide_blinddog"] = true,
+		["hide_bloodsucker"] = true,
+		["hide_boar"] = true,
+		["hide_burer"] = true,
+		["hide_cat"] = true,
+		["hide_chimera"] = true,
+		["hide_controller"] = true,
+		["hide_electrocontroller"] = true,
+		["hide_flesh"] = true,
+		["hide_karlik"] = true,
+		["hide_pseudodog"] = true,
+		["hide_pseudogiant"] = true,
+		["hide_spider"] = true,
+		["hide_sprig"] = true,
+		["hide_swampcontroller"] = true,
+		["hide_tark"] = true,
+		["hide_tushkano"] = true,
+		["hide_vareshka"] = true,
+		["part_bear"] = true,
+		["part_blinddog"] = true,
+		["part_bloodsucker"] = true,
+		["part_boar"] = true,
+		["part_burer_1"] = true,
+		["part_burer_2"] = true,
+		["part_cat"] = true,
+		["part_chimera"] = true,
+		["part_controller_1"] = true,
+		["part_controller_2"] = true,
+		["part_electrocontroller_1"] = true,
+		["part_electrocontroller_2"] = true,
+		["part_flesh"] = true,
+		["part_hellhound"] = true,
+		["part_izlom"] = true,
+		["part_karlik_1"] = true,
+		["part_karlik_2"] = true,
+		["part_pseudodog"] = true,
+		["part_pseudogiant"] = true,
+		["part_psydog"] = true,
+		["part_skeleton"] = true,
+		["part_snork_1"] = true,
+		["part_snork_2"] = true,
+		["part_spider"] = true,
+		["part_sprig"] = true,
+		["part_swampcontroller_1"] = true,
+		["part_swampcontroller_2"] = true,
+		["part_tark"] = true,
+		["part_tushkano"] = true,
+		["part_vareshka"] = true,
+		["part_zombie_1"] = true,
+		["part_zombie_2"] = true,
+	},
 	catalogue = {
+		["food_raisins"] = {step = "OR01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_tushonka"] = {step = "OR01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "OR01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "OR01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["12gauge"] = {step = "OR09",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["diecup"] = {step = "OR01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["guitar"] = {step = "OR01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["harmonica"] = {step = "OR24",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_bear"] = {step = "OR16",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_blinddog"] = {step = "OR02",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_bloodsucker"] = {step = "OR10",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_boar"] = {step = "OR05",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_burer"] = {step = "OR20",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_cat"] = {step = "OR09",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_chimera"] = {step = "OR14",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_controller"] = {step = "OR21",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_electrocontroller"] = {step = "OR23",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_flesh"] = {step = "OR04",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_karlik"] = {step = "OR18",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_pseudodog"] = {step = "OR06",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_pseudogiant"] = {step = "OR24",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_spider"] = {step = "OR11",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_sprig"] = {step = "OR15",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_swampcontroller"] = {step = "OR19",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_tark"] = {step = "OR07",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_tushkano"] = {step = "OR01",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["hide_vareshka"] = {step = "OR13",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_bear"] = {step = "OR20",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_blinddog"] = {step = "OR02",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_bloodsucker"] = {step = "OR12",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_boar"] = {step = "OR03",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_burer_1"] = {step = "OR13",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_burer_2"] = {step = "OR21",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_cat"] = {step = "OR07",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_chimera"] = {step = "OR17",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_controller_1"] = {step = "OR18",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_controller_2"] = {step = "OR22",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_electrocontroller_1"] = {step = "OR24",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_electrocontroller_2"] = {step = "OR23",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_flesh"] = {step = "OR05",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_hellhound"] = {step = "OR11",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_izlom"] = {step = "OR10",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_karlik_1"] = {step = "OR14",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_karlik_2"] = {step = "OR17",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_pseudodog"] = {step = "OR08",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_pseudogiant"] = {step = "OR23",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_psydog"] = {step = "OR15",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_skeleton"] = {step = "OR14",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_snork_1"] = {step = "OR08",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_snork_2"] = {step = "OR11",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_spider"] = {step = "OR06",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_sprig"] = {step = "OR09",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_swampcontroller_1"] = {step = "OR16",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_swampcontroller_2"] = {step = "OR20",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_tark"] = {step = "OR05",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_tushkano"] = {step = "OR01",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_vareshka"] = {step = "OR19",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_zombie_1"] = {step = "OR02",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["part_zombie_2"] = {step = "OR04",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -130,6 +302,7 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR03",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 0,
 			name = "Proof in the Bag",
 			kind = "tracker",
@@ -247,6 +420,34 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR08",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					id = "the-original/OR08/future",
+					provider = "the-original",
+					status = "unimplemented",
+					kind = "barter",
+					name = "medic_bandage_1 exchange",
+					effect = "Permanent multi-input offer; consume inputs each time, enforce equipment tiers and audit resale value.",
+					inputs = {
+						{
+							item = "part_blinddog",
+							quantity = 2,
+						},
+						{
+							item = "value_tape_duct",
+							quantity = 1,
+						},
+					},
+					outputs = {
+						{
+							item = "medic_bandage_1",
+							quantity = 1,
+						},
+					},
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -272,10 +473,25 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OR09",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering unusual tissue handling; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR09/future",
+					kind = "information",
+					name = "Record: unusual tissue handling",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "unusual tissue handling",
+				},
+			},
 			completionCash = 875,
 			name = "What Changed",
 			kind = "delivery",
@@ -296,10 +512,25 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OR10",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering predator adaptation notes; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR10/future",
+					kind = "information",
+					name = "Record: predator adaptation notes",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "predator adaptation notes",
+				},
+			},
 			completionCash = 1250,
 			name = "A Story With Dates",
 			kind = "field",
@@ -326,10 +557,25 @@ PLUGIN:Register("the-original", {
 				label = "Dated expedition log for Carbon",
 				recipient = "carbon",
 			},
-			benefits = {},
 		},
 		{
 			id = "OR11",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering early expedition testimony; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR11/future",
+					kind = "information",
+					name = "Record: early expedition testimony",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "early expedition testimony",
+				},
+			},
 			completionCash = 0,
 			name = "Enough to Compare",
 			kind = "tracker",
@@ -337,10 +583,24 @@ PLUGIN:Register("the-original", {
 			briefing = "Keep the specimen orders moving while I compare the old accounts.",
 			completion = "There's enough here to make some of my first impressions uncomfortable. Good work.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "OR12",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering mutant habitat comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR12/future",
+					kind = "information",
+					name = "Record: mutant habitat comparison",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "mutant habitat comparison",
+				},
+			},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -383,6 +643,22 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR13",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering old encounter account; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR13/future",
+					kind = "information",
+					name = "Record: old encounter account",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "old encounter account",
+				},
+			},
 			completionCash = 1175,
 			name = "Old Wounds",
 			kind = "delivery",
@@ -407,10 +683,37 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OR14",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					id = "the-original/OR14/future",
+					provider = "the-original",
+					status = "unimplemented",
+					kind = "barter",
+					name = "lowtiercookerfuel exchange",
+					effect = "Permanent multi-input offer; consume inputs each time, enforce equipment tiers and audit resale value.",
+					inputs = {
+						{
+							item = "part_boar",
+							quantity = 2,
+						},
+						{
+							item = "value_tape_duct",
+							quantity = 1,
+						},
+					},
+					outputs = {
+						{
+							item = "lowtiercookerfuel",
+							quantity = 1,
+						},
+					},
+				},
+			},
 			completionCash = 1650,
 			name = "The Camp Before This One",
 			kind = "field",
@@ -436,10 +739,25 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_notebook",
 				label = "Earlier camp journal",
 			},
-			benefits = {},
 		},
 		{
 			id = "OR15",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering field kitchen safety; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR15/future",
+					kind = "information",
+					name = "Record: field kitchen safety",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "field kitchen safety",
+				},
+			},
 			completionCash = 0,
 			name = "A Hunter's Patience",
 			kind = "tracker",
@@ -447,10 +765,25 @@ PLUGIN:Register("the-original", {
 			briefing = "Continue the requested specimen deliveries. Small differences are worth carrying too.",
 			completion = "You've stayed patient with the comparisons. I notice that.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "OR16",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering survival equipment improvisation; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR16/future",
+					kind = "information",
+					name = "Record: survival equipment improvisation",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "survival equipment improvisation",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -480,10 +813,25 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OR17",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering conflicting expedition stories; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR17/future",
+					kind = "information",
+					name = "Record: conflicting expedition stories",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "conflicting expedition stories",
+				},
+			},
 			completionCash = 1475,
 			name = "A Different Kind of Proof",
 			kind = "delivery",
@@ -508,10 +856,24 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OR18",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering rare mutation observations; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR18/future",
+					kind = "information",
+					name = "Record: rare mutation observations",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "rare mutation observations",
+				},
+			},
 			completionCash = 2050,
 			name = "The Route He Remembers",
 			kind = "field",
@@ -551,6 +913,22 @@ PLUGIN:Register("the-original", {
 		},
 		{
 			id = "OR19",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Pripyat specimen comparison; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "the-original/OR19/future",
+					kind = "information",
+					name = "Record: Pripyat specimen comparison",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "Pripyat specimen comparison",
+				},
+			},
 			completionCash = 0,
 			name = "The Worst of It",
 			kind = "tracker",
@@ -558,10 +936,37 @@ PLUGIN:Register("the-original", {
 			briefing = "There are more specimens to bring through. Keep the requested material intact.",
 			completion = "You've given me something worth questioning instead of merely agreeing with me.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "OR20",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					id = "the-original/OR20/future",
+					provider = "the-original",
+					status = "unimplemented",
+					kind = "barter",
+					name = "medic_antirad_1 exchange",
+					effect = "Permanent multi-input offer; consume inputs each time, enforce equipment tiers and audit resale value.",
+					inputs = {
+						{
+							item = "part_bloodsucker",
+							quantity = 2,
+						},
+						{
+							item = "value_tape_duct",
+							quantity = 1,
+						},
+					},
+					outputs = {
+						{
+							item = "medic_antirad_1",
+							quantity = 1,
+						},
+					},
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -591,10 +996,22 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OR21",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = "Persistent field reference on specimen transport contamination; author practical, verified guidance.",
+					id = "the-original/OR21/future",
+					kind = "information",
+					name = "Record: specimen transport contamination",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "specimen transport contamination",
+				},
+			},
 			completionCash = 1775,
 			name = "No Two Alike",
 			kind = "delivery",
@@ -623,10 +1040,22 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "OR22",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = "Persistent field reference on mutant seasonal displacement; author practical, verified guidance.",
+					id = "the-original/OR22/future",
+					kind = "information",
+					name = "Record: mutant seasonal displacement",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "mutant seasonal displacement",
+				},
+			},
 			completionCash = 2450,
 			name = "The Place in the Story",
 			kind = "field",
@@ -652,10 +1081,22 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_tape",
 				label = "Encounter witness recording",
 			},
-			benefits = {},
 		},
 		{
 			id = "OR23",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = "Persistent field reference on early camp equipment accounts; author practical, verified guidance.",
+					id = "the-original/OR23/future",
+					kind = "information",
+					name = "Record: early camp equipment accounts",
+					provider = "the-original",
+					status = "unimplemented",
+					topic = "early camp equipment accounts",
+				},
+			},
 			completionCash = 0,
 			name = "First Does Not Mean Last",
 			kind = "tracker",
@@ -666,10 +1107,10 @@ PLUGIN:Register("the-original", {
 				.. "stubbornness."
 			),
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "OR24",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",

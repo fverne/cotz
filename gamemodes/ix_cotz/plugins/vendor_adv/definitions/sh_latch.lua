@@ -2,7 +2,7 @@ ix.npctemplates.templates["latchnpc"] = {
 	name = "'Latch'",
 	description = "A practical salvage worker who studies machinery before looking at its owner.",
 
-	model = "models/Humans/Group03/male_02.mdl",
+	model = "models/legends/osvedomitel.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

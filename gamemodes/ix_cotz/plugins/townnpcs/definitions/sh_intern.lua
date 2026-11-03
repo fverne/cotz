@@ -12,7 +12,7 @@ PLUGIN:Register("intern", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
 	rewards = {
 		packages = {
 			{label = "Routine survey",
@@ -44,7 +44,27 @@ PLUGIN:Register("intern", {
 			.. "stops looking troublesome."
 		),
 	},
+	-- Author-disabled suggestions must not be restored by catalogue or stock generation.
+	disabledItems = {
+		["gasanalyzer"] = true,
+	},
 	catalogue = {
+		["food_raisins"] = {step = "IN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "IN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drug_caffeine"] = {step = "IN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "IN01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		-- ["gasanalyzer"] = {step = "IN01",
+		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["geigercounter"] = {step = "IN24",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_antirad_1"] = {step = "IN02",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_psyheal_1"] = {step = "IN03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -118,6 +138,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN04",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -139,6 +160,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN05",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Clean Containers",
 			kind = "delivery",
@@ -204,6 +226,20 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN07",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_anorak",
+					effect = "Apply survey team colours to suit_anorak; appearance only, with no gameplay variant changes.",
+					finish = "intern-in07",
+					id = "intern/IN07/future",
+					kind = "cosmetic",
+					name = "Same Place Same Method: survey team colours",
+					provider = "intern",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Same Place Same Method",
 			kind = "tracker",
@@ -211,10 +247,26 @@ PLUGIN:Register("intern", {
 			briefing = "More completed sensor surveys when you're ready. Check the destination first.",
 			completion = "Thank you. Another set of results I can check against the setup notes.",
 			target = 5,
-			benefits = {},
 		},
 		{
 			id = "IN08",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Marsh baseline readings; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN08/future",
+					kind = "information",
+					name = "Record: Marsh baseline readings",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "Marsh baseline readings",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -239,10 +291,26 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "IN09",
+			stock = {item = "drug_caffeine", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Garbage baseline readings; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN09/future",
+					kind = "information",
+					name = "Record: Garbage baseline readings",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "Garbage baseline readings",
+				},
+			},
 			completionCash = 875,
 			name = "Something to Compare",
 			kind = "delivery",
@@ -262,10 +330,24 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "IN10",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_io7a",
+					effect = "Apply survey team colours to suit_io7a; appearance only, with no gameplay variant changes.",
+					finish = "intern-in10",
+					id = "intern/IN10/future",
+					kind = "cosmetic",
+					name = "The Senior's Notebook: survey team colours",
+					provider = "intern",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1250,
 			name = "The Senior's Notebook",
 			kind = "field",
@@ -291,10 +373,26 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_diary",
 				label = "Senior researcher's notebook",
 			},
-			benefits = {},
 		},
 		{
 			id = "IN11",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering Pripyat comparative readings; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN11/future",
+					kind = "information",
+					name = "Record: Pripyat comparative readings",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "Pripyat comparative readings",
+				},
+			},
 			completionCash = 0,
 			name = "A Wider Baseline",
 			kind = "tracker",
@@ -302,10 +400,24 @@ PLUGIN:Register("intern", {
 			briefing = "Keep the survey assignments going. I want the comparisons to survive more than one careful trip.",
 			completion = "You've been consistent. That makes an awkward reading much more useful to discuss.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "IN12",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering sensor placement errors; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN12/future",
+					kind = "information",
+					name = "Record: sensor placement errors",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "sensor placement errors",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -343,6 +455,21 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN13",
+			stock = {item = "medic_psyheal_1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_nbc",
+					effect = "Apply survey team colours to suit_nbc; appearance only, with no gameplay variant changes.",
+					finish = "intern-in13",
+					id = "intern/IN13/future",
+					kind = "cosmetic",
+					name = "Ready for the Distance: survey team colours",
+					provider = "intern",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1175,
 			name = "Ready for the Distance",
 			kind = "delivery",
@@ -366,10 +493,26 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "IN14",
+			stock = {item = "medic_antirad_1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering exposure log comparison; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN14/future",
+					kind = "information",
+					name = "Record: exposure log comparison",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "exposure log comparison",
+				},
+			},
 			completionCash = 1650,
 			name = "The Lost Calibration Case",
 			kind = "field",
@@ -396,7 +539,6 @@ PLUGIN:Register("intern", {
 				label = "Calibration case for Technut",
 				recipient = "technut",
 			},
-			benefits = {},
 		},
 		{
 			id = "IN15",
@@ -411,6 +553,23 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN16",
+			stock = {item = "drink_bottlewater", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering conflicting measurement review; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN16/future",
+					kind = "information",
+					name = "Record: conflicting measurement review",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "conflicting measurement review",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -439,10 +598,24 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "IN17",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_mailjacket",
+					effect = "Apply survey team colours to suit_mailjacket; appearance only, with no gameplay variant changes.",
+					finish = "intern-in17",
+					id = "intern/IN17/future",
+					kind = "cosmetic",
+					name = "Without Missing Pages: survey team colours",
+					provider = "intern",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1475,
 			name = "Without Missing Pages",
 			kind = "delivery",
@@ -466,10 +639,24 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "IN18",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering instrument failure signatures; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN18/future",
+					kind = "information",
+					name = "Record: instrument failure signatures",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "instrument failure signatures",
+				},
+			},
 			completionCash = 2050,
 			name = "The Contradictory Site",
 			kind = "field",
@@ -512,6 +699,23 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN19",
+			stock = {item = "drink_bottletea", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering return survey protocol; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN19/future",
+					kind = "information",
+					name = "Record: return survey protocol",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "return survey protocol",
+				},
+			},
 			completionCash = 0,
 			name = "Enough to Stand Behind",
 			kind = "tracker",
@@ -519,10 +723,24 @@ PLUGIN:Register("intern", {
 			briefing = "There are more survey assignments. Bring the finished recordings back intact.",
 			completion = "You've given me enough to check the account without hiding the inconvenient results.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "IN20",
+			stock = {item = "drug_caffeine", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_cs1",
+					effect = "Apply survey team colours to suit_cs1; appearance only, with no gameplay variant changes.",
+					finish = "intern-in20",
+					id = "intern/IN20/future",
+					kind = "cosmetic",
+					name = "Building the reserve: survey team colours",
+					provider = "intern",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -551,10 +769,26 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "IN21",
+			stock = {item = "food_can_beans", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering late-expedition sensor drift; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN21/future",
+					kind = "information",
+					name = "Record: late-expedition sensor drift",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "late-expedition sensor drift",
+				},
+			},
 			completionCash = 1775,
 			name = "The Last Calibration",
 			kind = "delivery",
@@ -582,10 +816,26 @@ PLUGIN:Register("intern", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "IN22",
+			stock = {item = "food_raisins", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering research-team handover protocol; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "intern/IN22/future",
+					kind = "information",
+					name = "Record: research-team handover protocol",
+					provider = "intern",
+					status = "unimplemented",
+					topic = "research-team handover protocol",
+				},
+			},
 			completionCash = 2450,
 			name = "The Independent Control",
 			kind = "field",
@@ -614,10 +864,23 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_module2",
 				label = "Independent control recorder",
 			},
-			benefits = {},
 		},
 		{
 			id = "IN23",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_seva",
+					effect = "Apply survey team colours to suit_seva; appearance only, with no gameplay variant changes.",
+					finish = "intern-in23",
+					id = "intern/IN23/future",
+					kind = "cosmetic",
+					name = "Put My Name on It: survey team colours",
+					provider = "intern",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Put My Name on It",
 			kind = "tracker",
@@ -628,10 +891,10 @@ PLUGIN:Register("intern", {
 				.. "progress."
 			),
 			target = 27,
-			benefits = {},
 		},
 		{
 			id = "IN24",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",

@@ -8,7 +8,7 @@ PLUGIN:Register("spoor", {
 		description = "Mutant hunting",
 		quantities = {5, 9, 15},
 	},
-	supplies = {"12gauge", "22lr", "medic_bandage_1", "drink_bottlewater"},
+	supplies = {"drink_bottlewaterdirty", "12gauge", "22lr", "medic_bandage_1", "drink_bottlewater"},
 	rewards = {
 		packages = {
 			{label = "Hunting ammunition",
@@ -40,57 +40,79 @@ PLUGIN:Register("spoor", {
 		),
 	},
 	catalogue = {
-		["12gaugedt"] = {unlockContact = "brass", step = "BR03",
+		["sharpening_stone_fine"] = {step = "SP01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sharpening_stone"] = {step = "SP01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["lowtiercookerfuel"] = {step = "SP01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_raisins"] = {step = "SP01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "SP01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_bread"] = {step = "SP03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "SP01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["12gaugedt"] = {step = "SP09",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugesg"] = {unlockContact = "brass", step = "BR09",
+		["12gaugemg"] = {step = "SP09",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugemg"] = {unlockContact = "brass", step = "BR15",
+		["12gaugesg"] = {step = "SP09",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugetr"] = {unlockContact = "brass", step = "BR21",
+		["12gaugetr"] = {step = "SP09",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["22lrap"] = {unlockContact = "brass", step = "BR09",
+		["22lrap"] = {step = "SP02",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["22lrhp"] = {unlockContact = "brass", step = "BR15",
+		["22lrhp"] = {step = "SP02",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapua"] = {unlockContact = "brass", step = "BR03",
+		["338lapua"] = {step = "SP17",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapuaap"] = {unlockContact = "brass", step = "BR09",
+		["338lapuaap"] = {step = "SP18",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapuahp"] = {unlockContact = "brass", step = "BR15",
+		["338lapuahp"] = {step = "SP18",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51"] = {unlockContact = "brass", step = "BR03",
+		["762x51"] = {step = "SP15",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51ap"] = {unlockContact = "brass", step = "BR09",
+		["762x51ap"] = {step = "SP16",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51hp"] = {unlockContact = "brass", step = "BR15",
+		["762x51hp"] = {step = "SP16",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54"] = {unlockContact = "brass", step = "BR03",
+		["762x54"] = {step = "SP17",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54ap"] = {unlockContact = "brass", step = "BR09",
+		["762x54ap"] = {step = "SP18",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54hp"] = {unlockContact = "brass", step = "BR15",
+		["762x54hp"] = {step = "SP18",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["acog"] = {step = "SP22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["binoculars_1"] = {step = "SP22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["binoculars_2"] = {step = "SP01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["lax44"] = {step = "SP17",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["machete"] = {step = "SP05",
+		["machete"] = {step = "SP01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mosin"] = {step = "SP11",
+		["mosin"] = {step = "SP15",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["obrez"] = {step = "SP07",
+		["obrez"] = {step = "SP03",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["saigasemi"] = {step = "SP11",
+		["pso1"] = {step = "SP01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85"] = {step = "SP11",
+		["saigasemi"] = {step = "SP13",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85nato"] = {step = "SP07",
+		["sako85"] = {step = "SP20",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["svt40"] = {step = "SP17",
+		["sako85nato"] = {step = "SP06",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sw500"] = {step = "SP17",
+		["sako85varmint"] = {step = "SP01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w1895"] = {step = "SP07",
+		["svt40"] = {step = "SP22",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w9422357"] = {step = "SP11",
+		["w1895"] = {step = "SP08",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["w9422357"] = {step = "SP10",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -124,6 +146,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP02",
+			stock = {item = "22lr", bonus = 1},
 			completionCash = 450,
 			name = "The Scavenger's Camp",
 			kind = "field",
@@ -153,6 +176,21 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP03",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering blind dog feeding grounds; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "spoor/SP03/future",
+					kind = "information",
+					name = "Record: blind dog feeding grounds",
+					provider = "spoor",
+					status = "unimplemented",
+					topic = "blind dog feeding grounds",
+				},
+			},
 			completionCash = 0,
 			name = "Clear the Approach",
 			kind = "tracker",
@@ -164,6 +202,22 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP04",
+			stock = {item = "drink_bottlewater", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering boar escape routes; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "spoor/SP04/future",
+					kind = "information",
+					name = "Record: boar escape routes",
+					provider = "spoor",
+					status = "unimplemented",
+					topic = "boar escape routes",
+				},
+			},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -185,6 +239,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP05",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Tools for the Field",
 			kind = "delivery",
@@ -244,13 +299,11 @@ PLUGIN:Register("spoor", {
 					},
 				},
 			},
-			stock = {
-				item = "12gauge",
-				bonus = 1,
-			},
+			stock = {item = "12gauge", bonus = 1},
 		},
 		{
 			id = "SP07",
+			stock = {item = "22lrap", bonus = 1},
 			completionCash = 0,
 			name = "A Safer Yard",
 			kind = "tracker",
@@ -290,6 +343,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP09",
+			stock = {item = "22lrhp", bonus = 1},
 			completionCash = 875,
 			name = "Different Quarry",
 			kind = "delivery",
@@ -342,6 +396,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP11",
+			stock = {item = "12gaugedt", bonus = 1},
 			completionCash = 0,
 			name = "Patient Work",
 			kind = "tracker",
@@ -353,6 +408,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP12",
+			stock = {item = "22lr", bonus = 2},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -421,6 +477,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP14",
+			stock = {item = "22lrap", bonus = 2},
 			completionCash = 1650,
 			name = "The Pattern Breaks",
 			kind = "field",
@@ -451,6 +508,21 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP15",
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering flesh herd signs; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "spoor/SP15/future",
+					kind = "information",
+					name = "Record: flesh herd signs",
+					provider = "spoor",
+					status = "unimplemented",
+					topic = "flesh herd signs",
+				},
+			},
 			completionCash = 0,
 			name = "No Easy Quarry",
 			kind = "tracker",
@@ -462,6 +534,22 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP16",
+			stock = {item = "22lrap", bonus = 3},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering predator displacement; author actionable "
+						.. "guidance tied to verified mechanics and locations."
+					),
+					id = "spoor/SP16/future",
+					kind = "information",
+					name = "Record: predator displacement",
+					provider = "spoor",
+					status = "unimplemented",
+					topic = "predator displacement",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -521,6 +609,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP18",
+			stock = {item = "binoculars_2", bonus = 1},
 			completionCash = 2050,
 			name = "The Survivor's Cache",
 			kind = "field",
@@ -559,6 +648,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP19",
+			stock = {item = "338lapua", bonus = 1},
 			completionCash = 0,
 			name = "The Dangerous Ones",
 			kind = "tracker",
@@ -603,13 +693,26 @@ PLUGIN:Register("spoor", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "12gauge",
-				bonus = 2,
-			},
+			stock = {item = "12gauge", bonus = 2},
 		},
 		{
 			id = "SP21",
+			stock = {item = "338lapuaap", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Persistent practical reference covering bloodsucker warning signs; author "
+						.. "actionable guidance tied to verified mechanics and locations."
+					),
+					id = "spoor/SP21/future",
+					kind = "information",
+					name = "Record: bloodsucker warning signs",
+					provider = "spoor",
+					status = "unimplemented",
+					topic = "bloodsucker warning signs",
+				},
+			},
 			completionCash = 1775,
 			name = "What the Records Missed",
 			kind = "delivery",
@@ -641,6 +744,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP22",
+			stock = {item = "22lr", bonus = 3},
 			completionCash = 2450,
 			name = "The Hunter's Proof",
 			kind = "field",

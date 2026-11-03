@@ -2,7 +2,7 @@ ix.npctemplates.templates["spoolnpc"] = {
 	name = "'Spool'",
 	description = "A tired radio operator who pauses whenever a distant sound resembles a voice.",
 
-	model = "models/Humans/Group01/male_08.mdl",
+	model = "models/legends/capitan.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

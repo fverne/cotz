@@ -36,7 +36,7 @@ PLUGIN:Register("latch", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Workshop stock (trade goods)",
@@ -73,16 +73,36 @@ PLUGIN:Register("latch", {
 		),
 	},
 	catalogue = {
-		["fireaxe"] = {step = "LA05",
+		["food_raisins"] = {step = "LA01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["fubar"] = {step = "LA13",
+		["food_can_tushonka"] = {step = "LA01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["lax410s"] = {step = "LA07",
+		["food_can_beans"] = {step = "LA01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["m3supershort"] = {step = "LA07",
+		["drug_painkillers"] = {step = "LA01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["stoegerddshort"] = {step = "LA07",
+		["drink_bottletea"] = {step = "LA01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["attachment_steelplate_1"] = {step = "LA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
+		["attachment_steelplate_2"] = {step = "LA11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["attachment_steelplate_3"] = {step = "LA22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["bat"] = {step = "LA06",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["crowbar"] = {step = "LA01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["fireaxe"] = {step = "LA17",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["fubar"] = {step = "LA22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["sharpening_stone"] = {step = "LA01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["sledgehammer"] = {step = "LA11",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["value_tape_duct"] = {step = "LA01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -115,6 +135,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA02",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The Missing Inventory",
 			kind = "field",
@@ -144,6 +165,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA03",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 0,
 			name = "Worth Picking Up",
 			kind = "tracker",
@@ -155,6 +177,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA04",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 650,
 			name = "Restocking",
 			kind = "delivery",
@@ -183,6 +206,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA05",
+			stock = {item = "attachment_steelplate_1", bonus = 1},
 			completionCash = 575,
 			name = "Useful Steel",
 			kind = "delivery",
@@ -248,6 +272,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA07",
+			stock = {item = "food_raisins", bonus = 1},
 			completionCash = 0,
 			name = "Sorted Properly",
 			kind = "tracker",
@@ -288,6 +313,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA09",
+			stock = {item = "sharpening_stone", bonus = 1},
 			completionCash = 875,
 			name = "Moving Parts",
 			kind = "delivery",
@@ -311,6 +337,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA10",
+			stock = {item = "bat", bonus = 1},
 			completionCash = 1250,
 			name = "The Wrong Replacement",
 			kind = "field",
@@ -340,6 +367,37 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA11",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for sharpening_stone; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "latch/LA11/future",
+					inputs = {
+						{
+							item = "value_bolts",
+							quantity = 1,
+						},
+						{
+							item = "value_screws",
+							quantity = 2,
+						},
+					},
+					kind = "barter",
+					name = "Standing exchange: sharpening_stone",
+					outputs = {
+						{
+							item = "sharpening_stone",
+							quantity = 1,
+						},
+					},
+					provider = "latch",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "More Than Scrap",
 			kind = "tracker",
@@ -347,10 +405,37 @@ PLUGIN:Register("latch", {
 			briefing = "More salvage deliveries. I'd like the yard supplied while I inspect the machinery records.",
 			completion = "That's been steady work. I can make room for what you bring without expecting a surprise.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "LA12",
+			stock = {item = "crowbar", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					effect = "Permanent offer for fireaxe; consume inputs each time, enforce equipment tiers and audit resale value.",
+					id = "latch/LA12/future",
+					inputs = {
+						{
+							item = "value_bolts",
+							quantity = 1,
+						},
+						{
+							item = "value_screws",
+							quantity = 3,
+						},
+					},
+					kind = "barter",
+					name = "Standing exchange: fireaxe",
+					outputs = {
+						{
+							item = "fireaxe",
+							quantity = 1,
+						},
+					},
+					provider = "latch",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -392,6 +477,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA13",
+			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 1175,
 			name = "Heavy Work",
 			kind = "delivery",
@@ -449,6 +535,35 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA15",
+			stock = {item = "drug_painkillers", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					effect = "Permanent offer for lax410s; consume inputs each time, enforce equipment tiers and audit resale value.",
+					id = "latch/LA15/future",
+					inputs = {
+						{
+							item = "value_bolts",
+							quantity = 1,
+						},
+						{
+							item = "value_screws",
+							quantity = 4,
+						},
+					},
+					kind = "barter",
+					name = "Standing exchange: lax410s",
+					outputs = {
+						{
+							item = "lax410s",
+							quantity = 1,
+						},
+					},
+					provider = "latch",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "A Working Yard",
 			kind = "tracker",
@@ -456,10 +571,41 @@ PLUGIN:Register("latch", {
 			briefing = "Keep filling the salvage requests. There's ordinary work left after the interesting finds.",
 			completion = "You've kept at the sorting as well as the carrying. Good.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "LA16",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for stoegerddshort; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "latch/LA16/future",
+					inputs = {
+						{
+							item = "value_bolts",
+							quantity = 2,
+						},
+						{
+							item = "value_screws",
+							quantity = 5,
+						},
+					},
+					kind = "barter",
+					name = "Standing exchange: stoegerddshort",
+					outputs = {
+						{
+							item = "stoegerddshort",
+							quantity = 1,
+						},
+					},
+					provider = "latch",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -488,10 +634,40 @@ PLUGIN:Register("latch", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LA17",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for m3supershort; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "latch/LA17/future",
+					inputs = {
+						{
+							item = "value_bolts",
+							quantity = 2,
+						},
+						{
+							item = "value_screws",
+							quantity = 6,
+						},
+					},
+					kind = "barter",
+					name = "Standing exchange: m3supershort",
+					outputs = {
+						{
+							item = "m3supershort",
+							quantity = 1,
+						},
+					},
+					provider = "latch",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1475,
 			name = "Parts Worth Carrying",
 			kind = "delivery",
@@ -515,10 +691,37 @@ PLUGIN:Register("latch", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LA18",
+			stock = {item = "food_can_beans", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					effect = "Permanent offer for fubar; consume inputs each time, enforce equipment tiers and audit resale value.",
+					id = "latch/LA18/future",
+					inputs = {
+						{
+							item = "value_bolts",
+							quantity = 2,
+						},
+						{
+							item = "value_screws",
+							quantity = 7,
+						},
+					},
+					kind = "barter",
+					name = "Standing exchange: fubar",
+					outputs = {
+						{
+							item = "fubar",
+							quantity = 1,
+						},
+					},
+					provider = "latch",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2050,
 			name = "The Last Bearing",
 			kind = "field",
@@ -556,6 +759,38 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA19",
+			stock = {item = "food_can_tushonka", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for sharpening_stone_fine; consume inputs each time, enforce "
+						.. "equipment tiers and audit resale value."
+					),
+					id = "latch/LA19/future",
+					inputs = {
+						{
+							item = "value_bolts",
+							quantity = 3,
+						},
+						{
+							item = "value_screws",
+							quantity = 8,
+						},
+					},
+					kind = "barter",
+					name = "Standing exchange: sharpening_stone_fine",
+					outputs = {
+						{
+							item = "sharpening_stone_fine",
+							quantity = 1,
+						},
+					},
+					provider = "latch",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Nothing Wasted",
 			kind = "tracker",
@@ -563,7 +798,6 @@ PLUGIN:Register("latch", {
 			briefing = "Continue the workshop salvage orders. I want a reserve I can use, not a heap to argue over.",
 			completion = "You've given the bench work some breathing room. I appreciate it.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "LA20",
@@ -607,6 +841,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA21",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 1775,
 			name = "Ready for Assembly",
 			kind = "delivery",

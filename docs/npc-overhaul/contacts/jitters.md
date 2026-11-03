@@ -162,3 +162,12 @@ targets, stock benefits, discounts and catalogue access are now specified by the
 and unlock ledger. Field commissions use configured point pools; physical locations still need map
 authoring and multiplayer verification. No live rescue or bespoke multi-site investigation mechanic
 is implied by the narrative. Arena objectives count completed eligible bouts, not an unreported win.
+
+## Current reward allocation
+
+Purchase routes are local to this seller; equipment tier dependencies retain explicit canonical owners.
+The [generated unlock ledger](../unlock-ledger.md#every-progression-step) lists this contact's current
+purchases, conversions, stock tiers and supplementary rewards. Historical chapter tables above are story
+references, not the reward authority. 12 steps carry future `plannedUnlocks` metadata with adjacent TODO comments;
+these entries do not grant working benefits or appear as functional rewards in game. Current default
+stock quantities and refill settings are outside this redistribution pass.

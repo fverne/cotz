@@ -12,7 +12,7 @@ PLUGIN:Register("ledger", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Short route",
@@ -46,6 +46,20 @@ PLUGIN:Register("ledger", {
 		),
 	},
 	catalogue = {
+		["food_raisins"] = {step = "LE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_tushonka"] = {step = "LE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "LE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "LE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_sling"] = {step = "LE01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_tourist"] = {step = "LE22",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_bread"] = {step = "LE03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -78,6 +92,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE02",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The First Route",
 			kind = "field",
@@ -111,6 +126,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE03",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 0,
 			name = "Delivered Intact",
 			kind = "tracker",
@@ -122,6 +138,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE04",
+			stock = {item = "backpack_sling", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -143,6 +160,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE05",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Stock for the Road",
 			kind = "delivery",
@@ -202,13 +220,29 @@ PLUGIN:Register("ledger", {
 					},
 				},
 			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			stock = {item = "lowtiercookerfuel", bonus = 3},
 		},
 		{
 			id = "LE07",
+			stock = {item = "medic_bandage_1", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
+				{
+					destination = "Garbage",
+					effect = (
+						"Optional Waystation–Garbage shortcut via settlement freight corridor; author "
+						.. "distinct safe endpoints and permissions."
+					),
+					id = "ledger/LE07/future",
+					kind = "passage",
+					name = "settlement freight corridor",
+					origin = "Waystation",
+					provider = "ledger",
+					status = "unimplemented",
+					route = "settlement freight corridor",
+				},
+			},
 			completionCash = 0,
 			name = "On Both Sides",
 			kind = "tracker",
@@ -216,10 +250,37 @@ PLUGIN:Register("ledger", {
 			briefing = "Continue the freight circuits. Read the delivery endpoint before taking the parcel.",
 			completion = "Another reliable run. There are fewer open lines waiting on an arrival.",
 			target = 5,
-			benefits = {},
 		},
 		{
 			id = "LE08",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for food_bread; consume inputs each time, enforce equipment tiers "
+						.. "and audit resale value."
+					),
+					id = "ledger/LE08/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: food_bread",
+					outputs = {
+						{
+							item = "food_bread",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -244,10 +305,37 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LE09",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for drink_bottlewater; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE09/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: drink_bottlewater",
+					outputs = {
+						{
+							item = "drink_bottlewater",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 875,
 			name = "Paperwork That Matches",
 			kind = "delivery",
@@ -267,10 +355,37 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LE10",
+			stock = {item = "food_can_tushonka", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for lowtiercookerfuel; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE10/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: lowtiercookerfuel",
+					outputs = {
+						{
+							item = "lowtiercookerfuel",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1250,
 			name = "The Duplicate Destination",
 			kind = "field",
@@ -296,10 +411,28 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_official",
 				label = "Conflicting destination records",
 			},
-			benefits = {},
 		},
 		{
 			id = "LE11",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
+				{
+					destination = "Garbage",
+					effect = (
+						"Optional Waystation–Garbage shortcut via recovered consignment corridor; author "
+						.. "distinct safe endpoints and permissions."
+					),
+					id = "ledger/LE11/future",
+					kind = "passage",
+					name = "recovered consignment corridor",
+					origin = "Waystation",
+					provider = "ledger",
+					status = "unimplemented",
+					route = "recovered consignment corridor",
+				},
+			},
 			completionCash = 0,
 			name = "More Than Local",
 			kind = "tracker",
@@ -307,10 +440,36 @@ PLUGIN:Register("ledger", {
 			briefing = "More completed circuit deliveries when you're prepared.",
 			completion = "You've kept the movements accounted for. That helps the next person plan.",
 			target = 9,
-			benefits = {},
 		},
 		{
 			id = "LE12",
+			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_bandage_1; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE12/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_bandage_1",
+					outputs = {
+						{
+							item = "medic_bandage_1",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -352,6 +511,34 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE13",
+			stock = {item = "lowtiercookerfuel", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for food_raisins; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE13/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: food_raisins",
+					outputs = {
+						{
+							item = "food_raisins",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1175,
 			name = "For the Remote Cache",
 			kind = "delivery",
@@ -375,10 +562,37 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LE14",
+			stock = {item = "backpack_sling", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for drink_bottletea; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE14/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: drink_bottletea",
+					outputs = {
+						{
+							item = "drink_bottletea",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1650,
 			name = "The Last Scheduled Drop",
 			kind = "field",
@@ -404,10 +618,28 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_evidence",
 				label = "Scheduled remote-drop parcel",
 			},
-			benefits = {},
 		},
 		{
 			id = "LE15",
+			stock = {item = "backpack_sling", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
+				{
+					destination = "Garbage",
+					effect = (
+						"Optional Waystation–Garbage shortcut via remote cache corridor; author distinct "
+						.. "safe endpoints and permissions."
+					),
+					id = "ledger/LE15/future",
+					kind = "passage",
+					name = "remote cache corridor",
+					origin = "Waystation",
+					provider = "ledger",
+					status = "unimplemented",
+					route = "remote cache corridor",
+				},
+			},
 			completionCash = 0,
 			name = "A Dependable Circuit",
 			kind = "tracker",
@@ -415,10 +647,37 @@ PLUGIN:Register("ledger", {
 			briefing = "Keep the freight circuits going while I examine the dispatch records.",
 			completion = "A substantial amount delivered. I haven't had to replace your returns with estimates.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "LE16",
+			stock = {item = "drink_bottletea", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for food_can_tushonka; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE16/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 4,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: food_can_tushonka",
+					outputs = {
+						{
+							item = "food_can_tushonka",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -447,10 +706,37 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LE17",
+			stock = {item = "food_can_beans", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for food_nuts_2; consume inputs each time, enforce equipment tiers "
+						.. "and audit resale value."
+					),
+					id = "ledger/LE17/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 4,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: food_nuts_2",
+					outputs = {
+						{
+							item = "food_nuts_2",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1475,
 			name = "Proof on Paper",
 			kind = "delivery",
@@ -474,10 +760,36 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LE18",
+			stock = {item = "food_can_tushonka", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for food_mre_russia; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE18/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 4,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: food_mre_russia",
+					outputs = {
+						{
+							item = "food_mre_russia",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2050,
 			name = "The Dispatcher's Detour",
 			kind = "field",
@@ -516,6 +828,25 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE19",
+			stock = {item = "food_raisins", bonus = 2},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
+				{
+					destination = "Garbage",
+					effect = (
+						"Optional Waystation–Garbage shortcut via expedition freight corridor; author "
+						.. "distinct safe endpoints and permissions."
+					),
+					id = "ledger/LE19/future",
+					kind = "passage",
+					name = "expedition freight corridor",
+					origin = "Waystation",
+					provider = "ledger",
+					status = "unimplemented",
+					route = "expedition freight corridor",
+				},
+			},
 			completionCash = 0,
 			name = "The Route Holds",
 			kind = "tracker",
@@ -523,7 +854,6 @@ PLUGIN:Register("ledger", {
 			briefing = "Continue the assigned circuit deliveries. Check the route even when the title is familiar.",
 			completion = "You've stayed dependable across the account. I appreciate that.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "LE20",
@@ -560,13 +890,38 @@ PLUGIN:Register("ledger", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
+			stock = {item = "drink_bottletea", bonus = 3},
 		},
 		{
 			id = "LE21",
+			stock = {item = "drink_bottlewaterdirty", bonus = 3},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for food_mre_ukraine; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "ledger/LE21/future",
+					inputs = {
+						{
+							item = "value_officepaper",
+							quantity = 5,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: food_mre_ukraine",
+					outputs = {
+						{
+							item = "food_mre_ukraine",
+							quantity = 1,
+						},
+					},
+					provider = "ledger",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1775,
 			name = "The Next Shipment",
 			kind = "delivery",
@@ -594,10 +949,10 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "LE22",
+			stock = {item = "drink_bottlewater", bonus = 1},
 			completionCash = 2450,
 			name = "The Last Receipt",
 			kind = "field",

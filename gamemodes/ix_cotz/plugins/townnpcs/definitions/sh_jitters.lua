@@ -32,7 +32,14 @@ PLUGIN:Register("jitters", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"medic_bandage_1", "medic_medkit_1", "medic_antirad_1", "drug_painkillers"},
+	supplies = {
+		"drink_bottlewaterdirty",
+		"drink_bottlewater",
+		"medic_bandage_1",
+		"medic_medkit_1",
+		"medic_antirad_1",
+		"drug_painkillers",
+	},
 	rewards = {
 		packages = {
 			{label = "Bleeding control",
@@ -66,7 +73,25 @@ PLUGIN:Register("jitters", {
 		),
 	},
 	catalogue = {
-		["medic_antirad_1"] = {step = "JT09",
+		["food_raisins"] = {step = "JT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_can_beans"] = {step = "JT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["food_bread"] = {step = "JT03",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drink_bottletea"] = {step = "JT01",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drug_adrenaline"] = {step = "JT13",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["drug_mints"] = {step = "JT01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["drug_morphine"] = {step = "JT20",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["drug_painkillers"] = {step = "JT03",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["medic_antipsychotic_1"] = {step = "JT01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["medic_antirad_1"] = {step = "JT02",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_antirad_2"] = {step = "JT21",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
@@ -74,7 +99,7 @@ PLUGIN:Register("jitters", {
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_bandage_3"] = {step = "JT13",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_1"] = {step = "JT07",
+		["medic_medkit_1"] = {step = "JT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_medkit_2"] = {step = "JT11",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
@@ -85,6 +110,10 @@ PLUGIN:Register("jitters", {
 		["medic_medkit_5"] = {step = "JT19",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_medkit_6"] = {step = "JT23",
+			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_psyheal_1"] = {step = "JT01",
+			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["miscaid_swampbrew"] = {step = "JT26",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
 	progression = {
@@ -162,6 +191,34 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT04",
+			stock = {item = "drug_painkillers", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_bandage_1; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT04/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_bandage_1",
+					outputs = {
+						{
+							item = "medic_bandage_1",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -180,7 +237,6 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "JT05",
@@ -246,6 +302,34 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT07",
+			stock = {item = "medic_antirad_1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for drug_painkillers; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT07/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: drug_painkillers",
+					outputs = {
+						{
+							item = "drug_painkillers",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "A Steady Clinic",
 			kind = "tracker",
@@ -253,7 +337,6 @@ PLUGIN:Register("jitters", {
 			briefing = "More medical orders when you're prepared. Check the requested supplies before leaving.",
 			completion = "Another steady run. Thank you for keeping the returns straightforward.",
 			target = 5,
-			benefits = {},
 		},
 		{
 			id = "JT08",
@@ -287,6 +370,34 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT09",
+			stock = {item = "medic_medkit_1", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_medkit_1; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT09/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 1,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_medkit_1",
+					outputs = {
+						{
+							item = "medic_medkit_1",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 875,
 			name = "Fever and Fallout",
 			kind = "delivery",
@@ -307,10 +418,37 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "JT10",
+			stock = {item = "drink_bottletea", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_antirad_1; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT10/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_antirad_1",
+					outputs = {
+						{
+							item = "medic_antirad_1",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1250,
 			name = "The Contaminated Batch",
 			kind = "field",
@@ -336,7 +474,6 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_tube",
 				label = "Suspect batch evidence",
 			},
-			benefits = {},
 		},
 		{
 			id = "JT11",
@@ -351,6 +488,33 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT12",
+			stock = {item = "drink_bottlewater", bonus = 1},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_bandage_2; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT12/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_bandage_2",
+					outputs = {
+						{
+							item = "medic_bandage_2",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -413,6 +577,34 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT14",
+			stock = {item = "food_raisins", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_medkit_2; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT14/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 2,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_medkit_2",
+					outputs = {
+						{
+							item = "medic_medkit_2",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1650,
 			name = "A Second Opinion",
 			kind = "field",
@@ -438,7 +630,6 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_lab",
 				label = "Exposure research note",
 			},
-			benefits = {},
 		},
 		{
 			id = "JT15",
@@ -453,6 +644,34 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT16",
+			stock = {item = "drug_mints", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_bandage_3; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT16/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_bandage_3",
+					outputs = {
+						{
+							item = "medic_bandage_3",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1850,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -482,7 +701,6 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "JT17",
@@ -514,6 +732,33 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT18",
+			stock = {item = "medic_bandage_1", bonus = 2},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_medkit_3; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT18/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_medkit_3",
+					outputs = {
+						{
+							item = "medic_medkit_3",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2050,
 			name = "The Field Ward",
 			kind = "field",
@@ -567,6 +812,33 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT20",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_antirad_2; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT20/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 3,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_antirad_2",
+					outputs = {
+						{
+							item = "medic_antirad_2",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -596,7 +868,6 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "JT21",
@@ -628,6 +899,34 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT22",
+			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_medkit_4; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT22/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 4,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_medkit_4",
+					outputs = {
+						{
+							item = "medic_medkit_4",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2450,
 			name = "The Patient's Route",
 			kind = "field",
@@ -656,7 +955,6 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_module2",
 				label = "Last exposure survey record",
 			},
-			benefits = {},
 		},
 		{
 			id = "JT23",
@@ -721,6 +1019,34 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT25",
+			stock = {item = "food_can_beans", bonus = 1},
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_medkit_5; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT25/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 4,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_medkit_5",
+					outputs = {
+						{
+							item = "medic_medkit_5",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2000,
 			name = "A Clinic That Holds",
 			kind = "delivery",
@@ -749,10 +1075,36 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "JT26",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+				{
+					effect = (
+						"Permanent offer for medic_medkit_6; consume inputs each time, enforce equipment "
+						.. "tiers and audit resale value."
+					),
+					id = "jitters/JT26/future",
+					inputs = {
+						{
+							item = "value_tape_duct",
+							quantity = 4,
+						},
+					},
+					kind = "supplyExchange",
+					name = "Standing exchange: medic_medkit_6",
+					outputs = {
+						{
+							item = "medic_medkit_6",
+							quantity = 1,
+						},
+					},
+					provider = "jitters",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 2850,
 			name = "The Case Closed",
 			kind = "field",
@@ -782,7 +1134,6 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_personnel",
 				label = "Final exposure identification file",
 			},
-			benefits = {},
 			recognition = "Jitters's trusted contact",
 		},
 	},

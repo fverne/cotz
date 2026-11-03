@@ -7,7 +7,7 @@ PLUGIN:Register("arena-master", {
 		category = "Arena bouts",
 		description = "Arena bouts",
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "food_bread", "lowtiercookerfuel"},
+	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
 	rewards = {
 		packages = {
 			{label = "Between rounds",
@@ -41,9 +41,12 @@ PLUGIN:Register("arena-master", {
 	},
 	catalogue = {
 	},
-	progression = {
+	progression = {},
+	-- Retained design reference only; these milestones are no longer registered.
+	retiredProgression = {
 		{
 			id = "AR01",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 275,
 			name = "Before the Bell",
 			kind = "delivery",
@@ -238,6 +241,20 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR10",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_anorak",
+					effect = "Apply arena colours to suit_anorak; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar10",
+					id = "arena-master/AR10/future",
+					kind = "cosmetic",
+					name = "Restocking: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1250,
 			name = "Restocking",
 			kind = "delivery",
@@ -262,7 +279,6 @@ PLUGIN:Register("arena-master", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "AR11",
@@ -327,6 +343,20 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR14",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_mailjacket",
+					effect = "Apply arena colours to suit_mailjacket; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar14",
+					id = "arena-master/AR14/future",
+					kind = "cosmetic",
+					name = "A Fighter's Effects: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1650,
 			name = "A Fighter's Effects",
 			kind = "field",
@@ -355,10 +385,23 @@ PLUGIN:Register("arena-master", {
 				cargo = "town_quest_personnel",
 				label = "Former contender's records",
 			},
-			benefits = {},
 		},
 		{
 			id = "AR15",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_sunrise",
+					effect = "Apply arena colours to suit_sunrise; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar15",
+					id = "arena-master/AR15/future",
+					kind = "cosmetic",
+					name = "Veteran Company: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Veteran Company",
 			kind = "tracker",
@@ -366,10 +409,23 @@ PLUGIN:Register("arena-master", {
 			briefing = "Continue the sanctioned bouts against eligible distinct opponents.",
 			completion = "A proper stretch of competition. Take the recognition before planning how to defend it.",
 			target = 14,
-			benefits = {},
 		},
 		{
 			id = "AR16",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_io7a",
+					effect = "Apply arena colours to suit_io7a; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar16",
+					id = "arena-master/AR16/future",
+					kind = "cosmetic",
+					name = "The Missing Result: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "The Missing Result",
 			kind = "arena",
@@ -380,10 +436,23 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "That settles the result. Take some time before answering anybody who wants an immediate repeat.",
 			target = 1,
-			benefits = {},
 		},
 		{
 			id = "AR17",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_cs1",
+					effect = "Apply arena colours to suit_cs1; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar17",
+					id = "arena-master/AR17/future",
+					kind = "cosmetic",
+					name = "Ready for the Final: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1475,
 			name = "Ready for the Final",
 			kind = "delivery",
@@ -407,10 +476,22 @@ PLUGIN:Register("arena-master", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "AR18",
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_ps5m",
+					effect = "Apply arena colours to suit_ps5m; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar18",
+					id = "arena-master/AR18/future",
+					kind = "cosmetic",
+					name = "A Place in the Record: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "A Place in the Record",
 			kind = "arena",
@@ -437,6 +518,20 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR19",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_nbc",
+					effect = "Apply arena colours to suit_nbc; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar19",
+					id = "arena-master/AR19/future",
+					kind = "cosmetic",
+					name = "Championship Form: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 0,
 			name = "Championship Form",
 			kind = "tracker",
@@ -444,7 +539,6 @@ PLUGIN:Register("arena-master", {
 			briefing = "There are more qualifying bouts to complete. Prepare rather than hurrying straight back in.",
 			completion = "You've earned your reputation over more than an afternoon. I appreciate the patience behind that.",
 			target = 20,
-			benefits = {},
 		},
 		{
 			id = "AR20",
@@ -469,6 +563,20 @@ PLUGIN:Register("arena-master", {
 		},
 		{
 			id = "AR21",
+			benefits = {},
+			plannedUnlocks = {
+				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
+				{
+					baseSuit = "suit_seva",
+					effect = "Apply arena colours to suit_seva; appearance only, with no gameplay variant changes.",
+					finish = "arena-master-ar21",
+					id = "arena-master/AR21/future",
+					kind = "cosmetic",
+					name = "The Next Season: arena colours",
+					provider = "arena-master",
+					status = "unimplemented",
+				},
+			},
 			completionCash = 1775,
 			name = "The Next Season",
 			kind = "delivery",
@@ -496,10 +604,10 @@ PLUGIN:Register("arena-master", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
 		},
 		{
 			id = "AR22",
+			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

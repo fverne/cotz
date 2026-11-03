@@ -1,6 +1,6 @@
 # Town NPCs
 
-The town plugin owns 27 contacts and 646 finite objectives. Arena Master lives in Marsh
+The town plugin owns 27 contacts and 624 active finite objectives. Arena Master lives in Marsh
 (rp_marsh_cs), Garbage uses rp_garbage_cotz, and Waystation uses rp_waystation. Pripyat
 (rp_pripyat_remaster) is a task destination without permanent town NPCs.
 
@@ -30,6 +30,42 @@ Purchase permission is distinct from a free item. Shared upgrade families enforc
 milestones even when sellers differ, including Old Timer OT12 before Quartermaster's knife4.
 The [equipment index](../../../../docs/npc-overhaul/unlock-ledger.md) lists current allocations.
 
+## Author-disabled suggestions
+
+Commented-out catalogue suggestions are deliberate exclusions. Each affected contact's `disabledItems`
+records the same item IDs so runtime code can enforce that intent. Do not uncomment, redistribute or
+restore them through ordinary supplies, stock bonuses or generated catalogues. The offline audit checks
+that the exclusions match the comments and that no active catalogue, supply or stock entry restores them.
+Update both the comment and exclusion only when explicitly authorised to restore that suggestion.
+
+The 61 current exclusions include mission/access equipment, human meat and The Original's proposed
+specimen/hide shop. Twelve remaining stock references to excluded equipment have been removed without
+replacement rewards. Existing gifts, accepted jobs, progression IDs and TODO plans are preserved.
+Template assembly and saved-vendor refresh remove excluded rows, and purchase checks also reject stale
+rows. Personal stock history and owned items are retained; no character data reset is performed.
+
+Run `luatex --luaonly tests/disabled_town_items_spec.lua` for exclusion enforcement and refresh checks.
+The broader reward audit currently reports a cycle through Beanstalk BN01, Boss BO11/BO06, Vesper VE10
+and Beanstalk BN24. The earlier coverage snapshot also predates the author's exclusions; 31 active
+milestones currently have no implemented unlock. These are review findings, not permission to restore
+excluded suggestions or automatically add filler stock.
+
+## Starting water and later provisions
+
+Every town contact starts with clean and dirty bottled water available without progression. Clean
+water has one bottle of initial stock and a base maximum of one under the vendor stock policy;
+dirty water replaces bread in ordinary starting supplies and keeps the existing drink policy.
+Earlier bread-capacity milestones now increase dirty-water capacity. Clean-water capacity milestones
+remain useful: earned bonuses can increase the personal maximum above one without an immediate refill.
+Water purchase gates are removed because both kinds are starting supplies. Existing bread purchase
+routes remain earned provisions, with former first-step routes moved to the third local milestone.
+Original item gifts, repeatable reward packages and future TODO terms are unchanged.
+
+The vendor policy applies to newly populated templates and saved vendor catalogues on load. Existing
+personal stock is clamped to the new base plus earned capacity through the existing stock system;
+no character or world data reset is required. Restart map servers to refresh the changed stock and
+starting supply rows. Verify fresh and progressed characters, depleted stock and refill in multiplayer.
+
 ## Loading and plugin structure
 
 Plugin methods use PLUGIN:MethodName and self. Libraries capture the owning PLUGIN for callbacks.
@@ -50,10 +86,10 @@ on their home maps immediately; task prerequisites, catalogue unlocks and servic
 Each contact has an explicit sparse tree: a short introduction, two narrow branches and a joined
 conclusion. The requires and crossRequires fields describe local and cross-contact prerequisites;
 equipment families can add further dependencies. Stable IDs look like cotz/town/quartermaster/QM11.
-The tree includes 158 field commissions after converting half of the original 316 to ordinary deliveries.
+The active trees include 156 field commissions after converting half of the original 316 to ordinary deliveries.
 Each contact converts half its field commissions, rounded where needed. Arena bouts are unchanged.
-Of the remaining field commissions, 154 declare custom bound quest cargo: 113 return it to the issuer,
-38 deliver it to another contact, and three use field caches. Four retain research-defence cargo.
+Of the remaining field commissions, 152 declare custom bound quest cargo: 112 return it to the issuer,
+37 deliver it to another contact, and three use field caches. Four retain research-defence cargo.
 See the [commission and delivery inventory](../../../../docs/npc-overhaul/quest-commissions.md)
 for every assignment and the converted steps' pools and quantities. Converted steps preserve their
 IDs, prerequisites, cash and benefits, and use the normal saved specific-item hand-in requirements.
@@ -242,10 +278,11 @@ Acquisition frequency and the smaller payouts on cheap additions still need mult
 ## Reward overhaul (November 2026)
 
 The [unlock ledger](../../../../docs/npc-overhaul/unlock-ledger.md) records current sellers,
-earned gates, master-branch price references, conversion unlocks, cash and capacity awards.
-Concrete contact files remain authoritative. Shared ammunition `unlockContact` allocations point to one canonical milestone. Medicine gates
-are keyed by seller, so completing one provider never unlocks medicine at another provider.
-Compilation rejects conflicting shared gates rather than depending on iteration order.
+earned gates, conversion unlocks, cash, capacity awards and future TODO allocations.
+Concrete contact files remain authoritative. All catalogue purchase gates are local to the seller,
+including ammunition. `canonicalSellers` in sh_equipment.lua identifies equipment-tier owners independently
+of seller iteration; it does not unlock other shops. Medicine retains local earlier-tier prerequisites.
+A contact's ordinary `supplies` remain ungated when that contact has no catalogue allocation for the item.
 
 All 130 gun definitions are accounted for: 122 purchase routes and eight reserved guns.
 Radsuits, Exoskeleton suits, Nosorog, the exoskeleton frame and the top three helmets are also
@@ -254,18 +291,31 @@ reserved: backpack_4 and backpack_5 (20,000 each), backpack_4_large (32,500), an
 backpack_5_large (34,500). Themed and looted suits are excluded even if a saved vendor
 still lists them. Existing stock rows are retained; authoritative purchase checks enforce exclusion.
 Suit and gear chains follow master prices. Equal-price backpack alternatives use carrying capacity.
-Trenchcoat colours share one equivalent purchase tier. Variants require both base and exact variant conversion
+Trenchcoat colours remain equivalent equipment with separate local purchase milestones. Variants require both base and exact variant conversion
 milestones; variants in the same family have separate milestones; existing conversion conversations enforce those checks on the server as well as previews.
 
 Medicine has independent local progressions at Jitters, Wake, Quartermaster and appropriate
-scientists, including local earlier-tier prerequisites. Ammunition and
-its variants share Brass's earned milestones at Quartermaster and, for hunting calibres, Spoor.
-Basic 12 gauge, .22 LR and 9x18 remain ungated. Variant ammunition progresses by master price within
-its family. Shared unlock permission does not waive NPC access or supply stock.
+scientists, including local earlier-tier prerequisites. Ammunition and its variants have local purchase
+milestones at each seller. Ammunition no longer uses Brass's cross-contact tier dependencies.
+All 66 loads are ranked from concrete `price / ammoAmount` values into twelve global price bands,
+with regular and upgraded stages in each band. This avoids comparing whole-box prices or starting
+every calibre at the first milestone. AP and HP at equal prices are parallel upgrades after the
+regular load; special shotgun loads are upgrades to buckshot. Variant-counterpart ordering takes
+precedence where existing box sizes/prices make the variant cheaper per round (14.5 mm and special
+12-gauge loads). `45acp41` is .410 bore, not a .45 ACP upgrade. No prices or ammunition effects change.
+Each seller's successive ammo stages are explicit local prerequisites, so sibling branches cannot
+skip cheaper stages. Ammo stock improvements apply to loads available at that milestone.
+See the [price-per-round report](../../../../docs/npc-overhaul/ammo-progression.md) for all loads and
+exact seller milestones. Regenerate/check with
+`python3 docs/npc-overhaul/tools/ammo_progression.py --write` or `--check`, then regenerate/check
+the main reward ledger. Ordinary weapon, medicine and non-ammunition upgrade chains are unchanged. Old Timer, Brass and Quartermaster provide ungated
+12 gauge, .22 LR and 9x18 on Marsh, Garbage and Waystation respectively. Jitters, Wake and Quartermaster
+provide ungated basic bandages and introductory local medkit, antirad and painkiller unlocks.
+Basic regional supplies require no external NPC progression. Other themed sellers retain useful overlap.
 
 Each step declares completionCash. Delivery payments range from 275 to 2,000 rubles; field payments
-from 450 to 3,000. Trackers and arena milestones pay zero extra cash. Gifts remain at introductory
-steps and every sixth step; selected stock benefits remain at steps 6 and 20. Only Jitters and
+from 450 to 3,000. Trackers and arena milestones pay zero extra cash. Existing gifts remain at introductory
+steps and every sixth step, with no temporary TODO provision gifts; stock rewards include further branch-specific improvements. Only Jitters and
 Technut retain permanent service discounts (5%, replaced by 10%). These are initial tuning values,
 not measured effort equivalence; acquisition and economy playtesting remain necessary.
 
@@ -283,14 +333,67 @@ hand-in credit, paid flags, assignments and pending item claims are preserved. N
 use the new payments. Conversion and purchase gates use current earned milestones; existing owned
 items are not removed. No database reset or first-time setup is required.
 
-### Deferred mechanics
+### Reward redistribution and TODO metadata
 
-As agreed, new travel passages, additional cosmetic skin services, storage expansion rewards,
-information archives, and new exchange offers are future mechanics. They are not displayed as
-functional milestone rewards in this release. See the [remaining reward work](../../../../docs/npc-overhaul/reward-followups.md).
-Restart all map servers together. Multiplayer verification must cover existing and fresh characters,
-shared vendors, conversions, expanded-grid sync/reconnect, weight enforcement, full inventories,
-and interrupted claims. Standalone specs cannot establish those runtime behaviours.
+All 646 milestones have an assigned functional unlock, stock tier or unimplemented unlock.
+The initial redistribution covered 624 milestones; the later author-disabled suggestions above
+supersede that coverage snapshot.
+Arena Master remains in Marsh as an arena organiser, with no active catalogue or finite progression.
+His 22 former milestones, including eight TODO entries, remain in `retiredProgression` as inactive
+reference data; none are registered, offered or counted. His former purchases now belong to
+Haggler, Brass and Jitters as appropriate.
+
+The personality-based redistribution assigns lighting to Gasket (flashlight GK06, headlamp GK16),
+mechanical upgrades to Technut, protective materials and clothing to Suture, steel plates and heavy
+tools to Latch, and specialist weapon families to their matching contacts. Atlas retains navigation
+and binoculars. Vesper supplies detectors and anomaly equipment; Egghead supplies artifacts. Existing
+food, meat, specimens and hides now have explicit thematic purchase routes. Bound mission cargo is
+not added to shops. Existing valuables routes are unchanged. Small regional provision catalogues
+support capped stock improvements on milestones without a new equipment purchase.
+
+The 179 temporary provision gifts have been removed. Original gifts, cash, pending claims and paid
+benefit tokens remain unchanged. No gifts are replayed or confiscated. Existing earned milestone IDs
+now determine the redistributed purchase permissions. Removed seller rows in saved vendors remain
+subject to authoritative seller checks; restart all map servers to refresh new catalogue rows.
+No first-time setup or database reset is required. Acquisition and economy tuning need playtesting.
+The [unlock ledger](../../../../docs/npc-overhaul/unlock-ledger.md) gives the exact order at each contact.
+The character-theme audit moves civilian carbines and the makeshift Mosin from Quartermaster to
+Haggler, and the SKS to Old Timer. Quartermaster owns basic tactical sights; Smartass keeps precision
+optics and gains the computer-access component formerly sold by Egghead. Cleaner has overlapping
+compact pistol/SMG routes, while Spool sells existing music cassettes alongside his receiver/player.
+Cooking-fuel purchases, ordinary supplies and stock rewards are removed from the clinic, archive,
+research/communications desks and outfitter. Their affected rewards now improve medical, measuring,
+computing, recording or textile equipment and appropriate working provisions. Field/camp contacts
+retain fuel where it supports expeditions or utilities. All stock increases remain capped at +4 and
+are usable at the earning milestone. Original gifts, TODO plans and progression IDs are unchanged.
+
+There are 234 active planned entries plus eight retained in Arena Master's inactive reference tree.
+Each `plannedUnlocks` entry has its own adjacent `-- TODO:` comment, stable ID, provider, kind,
+status and specific intended effect. This authoring metadata never enters compiled progression reward
+fields, claim queues, dialogue menus or entitlement checks. It is not an implemented service.
+The seven planned kinds are passage, cosmetic, storage, barter, supplyExchange, information and recipe.
+Proposed terms require implementation, acquisition and economy review before enabling consumers.
+Existing conversion rewards retain their gameplay distinctions; future painting is cosmetic only.
+
+Binoculars are removed from Mute, including future bonus offers, his base template and purchase checks
+against stale saved vendors. Atlas owns binoculars_2/1/4/3 at AT01/AT05/AT13/AT17; Spoor has alternate
+local routes. The canonical predecessor chain remains enforced.
+
+Stock bonuses are highest-earned **total bonuses**, capped by authoring policy at +4 per item/provider.
+Do not repeat an equal tier after its prerequisite: it grants no improvement. Existing quantities,
+refill intervals, refill amounts and prices are not retuned here. Default assortment/stock rework is separate.
+
+Generate or verify the full ledger from Lua definitions and their compiled gates:
+
+    python3 docs/npc-overhaul/tools/progression_rewards.py --write
+    python3 docs/npc-overhaul/tools/progression_rewards.py --check
+    python3 tests/progression_rewards_spec.py
+
+Reassigned permanent permissions derive from completed IDs. Owned items, cash ledgers, assignments,
+pending claims and paid benefits remain intact; gifts are not replayed and old shop access is not grandfathered.
+No save reset or first-time setup is needed. Restart map servers together and verify regional vendors,
+independent sellers, conversions, stock synchronization, pending claims and existing characters in multiplayer.
+Standalone specs cannot establish those runtime behaviours.
 
 ## Alternate spawn positions
 

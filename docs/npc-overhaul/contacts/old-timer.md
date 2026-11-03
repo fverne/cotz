@@ -109,3 +109,12 @@ presenting a Survival Knife as an equipment upgrade. Final substitute and value 
 
 These lines, objective briefings, partial-progress replies, completion responses, reward explanations,
 and conditional greetings belong in definitions. Shared mechanics must not contain Old Timer's story text.
+
+## Current reward allocation
+
+Purchase routes are local to this seller; equipment tier dependencies retain explicit canonical owners.
+The [generated unlock ledger](../unlock-ledger.md#every-progression-step) lists this contact's current
+purchases, conversions, stock tiers and supplementary rewards. Historical chapter tables above are story
+references, not the reward authority. 7 steps carry future `plannedUnlocks` metadata with adjacent TODO comments;
+these entries do not grant working benefits or appear as functional rewards in game. Current default
+stock quantities and refill settings are outside this redistribution pass.

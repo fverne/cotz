@@ -102,7 +102,8 @@ function PLUGIN:JobCompleted(client, npc, identifier)
 end
 
 function PLUGIN:ArenaCompleted(client, opponent)
-	if game.GetMap() ~= self.contacts["arena-master"].map then return end
+	local contact = self.contacts["arena-master"]
+	if #contact.progression == 0 or game.GetMap() ~= contact.map then return end
 	local character = client:GetCharacter()
 	if not character or not IsValid(opponent) or client:IsBot() or opponent:IsBot() then return end
 	if client:SteamID64() == opponent:SteamID64() then return end
