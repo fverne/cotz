@@ -311,7 +311,7 @@ ix.command.Add("eventadd", {
 		ix.type.string,
 		ix.type.text,
 	},
-	OnRun = function(self, client, pdamessage, spawngroup)
+	OnRun = function(self, client, spawngroup, pdamessage)
 		if not LOCATION_TAGS[spawngroup] then
 			return "Unknown location tag. Example: swamps_outside_easy. See eventcontroller/README.md."
 		end
