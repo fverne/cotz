@@ -35,6 +35,7 @@ PLUGIN = {eventdefs = {}, map_presets = {}}
 local definitions = read("eventcontroller/sh_eventdefs.lua"):gsub("/%*.-%*/", "")
 assert(load(definitions))()
 local valid = {}
+prefixes[#prefixes + 1] = "garbage"
 for _, prefix in ipairs(prefixes) do
 	for _, suffix in ipairs(suffixes) do
 		valid[prefix .. "_" .. suffix] = true
@@ -53,4 +54,50 @@ local text = export(1, {Vector(1, 2, 3), 'Area "quoted"', "swamps_building"})
 local restored = assert(load("return {" .. text .. "}"))()
 restored = restored[1]
 assert(restored[2] == 'Area "quoted"' and restored[3] == "swamps_building")
-print("Location tags, saved-point migration and FTS export checks passed")
+local function hasTag(key, tag)
+	for _, candidate in ipairs(PLUGIN.eventdefs[key].difficulty) do
+		if candidate == tag then return true end
+	end
+
+	return false
+end
+
+for _, key in ipairs({"Dog1", "Dog2", "Dog4", "rodent2", "cat1", "cat2", "izlom1", "zombies1", "tark1", "tark2", "spider1", "sprig1"}) do
+	assert(hasTag(key, "garbage_outside_easy"))
+	assert(not hasTag(key, "waystation_outside_easy"))
+	assert(not hasTag(key, "waystation_outside_hard"))
+end
+assert(hasTag("cat3", "waystation_outside_hard"))
+assert(hasTag("Dog2", "swamps_outside_hard"))
+assert(PLUGIN.eventdefs.garbage_dogs == nil)
+assert(PLUGIN.eventdefs.garbage_cat == nil)
+assert(PLUGIN.eventdefs.garbage_rodents == nil)
+assert(hasTag("garbage_bloodsucker", "garbage_outside_hard"))
+assert(not hasTag("bloodsucker1", "swamps_outside_hard"))
+assert(not hasTag("bloodsucker1", "swamps_building"))
+assert(not hasTag("Dog3", "swamps_outside_hard"))
+assert(not hasTag("boar3", "swamps_outside_hard"))
+assert(not hasTag("boar1", "waystation_outside_easy"))
+assert(hasTag("bloodsucker1", "waystation_building"))
+assert(PLUGIN.eventdefs.garbage_bloodsucker.entities[1][2] == 1)
+local garbageCount = 0
+for key, definition in pairs(PLUGIN.eventdefs) do
+	if key:match("^garbage_") then
+		garbageCount = garbageCount + 1
+		for _, tag in ipairs(definition.difficulty) do
+			assert(tag:match("^garbage_"))
+		end
+		for _, entity in ipairs(definition.entities) do
+			assert(not entity[1]:match("controller"))
+			assert(not entity[1]:match("chimera"))
+			assert(not entity[1]:match("pseudogiant"))
+			assert(not entity[1]:match("burer"))
+		end
+	end
+end
+assert(garbageCount == 11)
+local tags = assert(load(lookup .. "\nreturn LOCATION_TAGS"))()
+for _, suffix in ipairs(suffixes) do
+	assert(tags["garbage_" .. suffix])
+end
+print("Location tags, migration, FTS export and Garbage encounter tier checks passed")

@@ -1741,6 +1741,8 @@ PLUGIN.map_presets["mz_garbage"] = {
 			{ Vector(-2192.5522460938,-10862.115234375,46.173301696777) , 1 , "worldspawn_garbage_regular" }, 
 			{ Vector(5372.7788085938,7292.3505859375,13.4390001297) , 1 , "worldspawn_garbage_rare" }, 
 		},
+		-- Place NPC-safe points in-game and export them here; loot positions are not spawn points.
+		-- Tags: garbage_outside_easy, garbage_outside_hard, garbage_building, garbage_underground.
 		["eventcontroller"] = {},
 		["eventcontrolleradv"] = {},
 		["hidestashspawner"] = {

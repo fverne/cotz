@@ -25,7 +25,13 @@ local LEGACY_LOCATION_TAGS = {
 	[35] = "pripyat_underground",
 }
 
-local LOCATION_TAGS = {}
+local LOCATION_TAGS = {
+	garbage_outside_easy = true,
+	garbage_outside_hard = true,
+	garbage_building = true,
+	garbage_sniperspot = true,
+	garbage_underground = true,
+}
 for _, locationTag in pairs(LEGACY_LOCATION_TAGS) do
 	LOCATION_TAGS[locationTag] = true
 end
