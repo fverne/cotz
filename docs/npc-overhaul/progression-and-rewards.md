@@ -145,3 +145,7 @@ parallel upgrades rather than an arbitrary AP-to-HP chain. Counterparts precede 
 existing prices/box sizes make a variant cheaper per round. Local successive-stage prerequisites
 prevent branch bypasses without requiring another seller's progression. Basic ungated regional
 supplies remain. The [ammo report](ammo-progression.md) lists prices, units, exceptions and milestones.
+
+NBC is the introductory suit at Beanstalk BN01. It precedes all other suits in the upgrade chain;
+BN01 must not depend on a later suit milestone. This order is explicit design direction rather than
+a ranking inferred from suit prices.

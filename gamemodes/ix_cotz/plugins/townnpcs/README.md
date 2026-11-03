@@ -45,9 +45,9 @@ Template assembly and saved-vendor refresh remove excluded rows, and purchase ch
 rows. Personal stock history and owned items are retained; no character data reset is performed.
 
 Run `luatex --luaonly tests/disabled_town_items_spec.lua` for exclusion enforcement and refresh checks.
-The broader reward audit currently reports a cycle through Beanstalk BN01, Boss BO11/BO06, Vesper VE10
-and Beanstalk BN24. The earlier coverage snapshot also predates the author's exclusions; 31 active
-milestones currently have no implemented unlock. These are review findings, not permission to restore
+NBC is the introductory suit at Beanstalk BN01, with no suit prerequisites. It precedes the other
+suits in the upgrade chain, resolving the former Beanstalk/Boss/Vesper cycle. The earlier coverage
+snapshot predates the author's exclusions; 31 active milestones currently have no implemented unlock. These are review findings, not permission to restore
 excluded suggestions or automatically add filler stock.
 
 ## Starting water and later provisions

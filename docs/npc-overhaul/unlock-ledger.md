@@ -1,7 +1,7 @@
 # Current progression unlock ledger
 
 > This snapshot predates the author-disabled catalogue suggestions. Do not use it to restore them.
-> Regeneration is currently blocked by the dependency cycle documented in the town NPC README.
+> The suit dependency cycle is fixed. Regeneration is held by 31 milestones without unlocks after author exclusions.
 
 Generated from authoritative town definitions and their compiled purchase prerequisites.
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.

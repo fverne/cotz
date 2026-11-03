@@ -159,6 +159,25 @@ class ProgressionRewardsSpec(unittest.TestCase):
                 self.assertNotIn(step.get("stock", {}).get("item"), disabled, (slug, step["id"]))
         self.assertGreater(total, 0)
 
+    def test_nbc_is_the_introductory_suit(self):
+        chain = next(chain for chain in self.data["chains"] if "suit_nbc" in chain)
+        self.assertEqual(chain[0], "suit_nbc")
+        self.assertEqual(self.data["contacts"]["beanstalk"]["catalogue"]["suit_nbc"]["step"], "BN01")
+        self.assertFalse(self.data["compiled"]["cotz/town/beanstalk/BN01"]["prerequisites"])
+        # Walk every compiled dependency: an introductory suit must not close a later story loop.
+        visiting, done = set(), set()
+        def visit(identifier):
+            self.assertNotIn(identifier, visiting, identifier)
+            if identifier in done:
+                return
+            visiting.add(identifier)
+            for parent in self.data["compiled"][identifier]["prerequisites"]:
+                visit(parent)
+            visiting.remove(identifier)
+            done.add(identifier)
+        for identifier in self.data["compiled"]:
+            visit(identifier)
+
     def test_redundant_stock_is_detected(self):
         changed = copy.deepcopy(self.data)
         contact = changed["contacts"]["atlas"]

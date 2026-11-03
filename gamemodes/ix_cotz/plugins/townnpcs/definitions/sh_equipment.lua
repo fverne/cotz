@@ -13,6 +13,7 @@ PLUGIN.upgradeChains = {
 	{"taurusragingbull", "sw500"},
 	{"sv98", "vssk"},
 	{"toz34", "nitro"},
+	-- NBC is the introductory suit; its BN01 unlock must not depend on later suit milestones.
 	{"suit_anorak",
 		"suit_mailjacket",
 		"suit_trenchcoat_black",
@@ -22,8 +23,8 @@ PLUGIN.upgradeChains = {
 		"suit_ssp99",
 		"suit_wind",
 		"suit_ps5m",
-		"suit_cs2",
 		"suit_nbc",
+		"suit_cs2",
 		"suit_berill",
 		"suit_cs3",
 		"suit_ssp99m",
