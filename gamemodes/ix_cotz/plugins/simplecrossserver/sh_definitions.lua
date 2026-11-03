@@ -114,30 +114,30 @@ PLUGIN.mapdata["rp_pripyat_remaster"].loadzones["base"] = {
 }
 
 
-PLUGIN.mapdata["mz_garbage"] = {}
-PLUGIN.mapdata["mz_garbage"].name = "Garbage"
-PLUGIN.mapdata["mz_garbage"].serverip = "93.163.14.129:27018"
-PLUGIN.mapdata["mz_garbage"].loadzones = PLUGIN.mapdata["mz_garbage"].loadzones or {}
+PLUGIN.mapdata["rp_garbage_cotz"] = {}
+PLUGIN.mapdata["rp_garbage_cotz"].name = "Garbage"
+PLUGIN.mapdata["rp_garbage_cotz"].serverip = "93.163.14.129:27018"
+PLUGIN.mapdata["rp_garbage_cotz"].loadzones = PLUGIN.mapdata["rp_garbage_cotz"].loadzones or {}
 
-PLUGIN.mapdata["mz_garbage"].loadzones["easternroad"] = {
+PLUGIN.mapdata["rp_garbage_cotz"].loadzones["easternroad"] = {
 	pos = Vector(1607.783081, -12422.239258,  215.496277), --edit me
 	ang = Angle(0, 90, 0), --edit me
 	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."
 }
 
-PLUGIN.mapdata["mz_garbage"].loadzones["westernroad"] = {
+PLUGIN.mapdata["rp_garbage_cotz"].loadzones["westernroad"] = {
 	pos = Vector(572.824951, 9383.897461,  210.491821), --edit me
 	ang = Angle(0, 0, 0), --edit me
 	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."
 }
 
-PLUGIN.mapdata["mz_garbage"].loadzones["traintunnel"] = {
+PLUGIN.mapdata["rp_garbage_cotz"].loadzones["traintunnel"] = {
 	pos = Vector(-8530.873047, 310.016937, 76.031250), --edit me
 	ang = Angle(0, -15, 0), --edit me
 	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."
 }
 
-PLUGIN.mapdata["mz_garbage"].loadzones["hiddenbasement"] = {
+PLUGIN.mapdata["rp_garbage_cotz"].loadzones["hiddenbasement"] = {
 	pos = Vector( 10403.541992, -1548.871948, -191.968750), --edit me
 	ang = Angle(0, 0, 0), --edit me
 	desc = "Heaps of garbage and debris are strewn about. The area ahead is clearly a garbage dump."

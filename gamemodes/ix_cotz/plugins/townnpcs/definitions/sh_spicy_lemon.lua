@@ -360,7 +360,7 @@ PLUGIN:Register("spicy-lemon", {
 					.. "want the supplier's book.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_receipt",
 				label = "Food supplier's ledger",

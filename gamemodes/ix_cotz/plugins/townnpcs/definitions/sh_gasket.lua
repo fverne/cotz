@@ -333,7 +333,7 @@ PLUGIN:Register("gasket", {
 					.. "judge a replacement if he has the specification.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_official",
 				label = "Replacement-part specification",

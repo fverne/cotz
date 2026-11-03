@@ -30,8 +30,8 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
         self.assertEqual(sum(self.counts["rp_marsh_cs"]["world"].values()), 607)
         self.assertEqual(sum(self.counts["rp_waystation"]["world"].values()), 159)
         self.assertEqual(sum(self.counts["rp_pripyat_remaster"]["world"].values()), 525)
-        self.assertTrue(self.rates["mz_garbage"])
-        self.assertGreater(sum(self.counts["mz_garbage"]["boxes"].values()), 0)
+        self.assertTrue(self.rates["rp_garbage_cotz"])
+        self.assertGreater(sum(self.counts["rp_garbage_cotz"]["boxes"].values()), 0)
 
     def test_world_population_cap_is_shared_between_pools(self):
         for region in balance.MAPS:
@@ -52,7 +52,7 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
 
     def test_custom_box_pool_overrides_both_big_box_materials(self):
         fixture = {
-            "presets": {"mz_garbage": {"containers": [], "plugindata": {
+            "presets": {"rp_garbage_cotz": {"containers": [], "plugindata": {
                 "worlditemspawner": [], "boxspawner": [[[0, 0, 0], 2, "custom"]],
                 "hidestashspawner": [], "anomalycontroller": [],
             }}},
@@ -60,8 +60,8 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
             "items": {}, "batches": {}, "cyclic": {},
         }
         rates, _, missing = balance.estimate(fixture)
-        self.assertAlmostEqual(rates["mz_garbage"]["a"]["boxes"][0], 2.5)
-        self.assertAlmostEqual(rates["mz_garbage"]["b"]["boxes"][0], 7.5)
+        self.assertAlmostEqual(rates["rp_garbage_cotz"]["a"]["boxes"][0], 2.5)
+        self.assertAlmostEqual(rates["rp_garbage_cotz"]["b"]["boxes"][0], 7.5)
         self.assertEqual(missing, [])
 
     def test_cyclic_types_and_repeated_pool_rolls(self):
@@ -131,7 +131,7 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
         ratio = supply["value_bolts"][0] / supply["value_med_surgicaltools"][0]
         self.assertGreater(ratio, 40)
         self.assertLess(ratio, 55)
-        self.assertIn("worldspawn_garbage_regular", self.counts["mz_garbage"]["world"])
+        self.assertIn("worldspawn_garbage_regular", self.counts["rp_garbage_cotz"]["world"])
         self.assertIn("worldspawn_", self.missing)
 
 

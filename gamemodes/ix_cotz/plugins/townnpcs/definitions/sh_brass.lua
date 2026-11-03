@@ -1,7 +1,7 @@
 PLUGIN:Register("brass", {
 	name = "'Brass'",
 	template = "brassnpc",
-	map = "mz_garbage",
+	map = "rp_garbage_cotz",
 	job = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
@@ -263,7 +263,7 @@ PLUGIN:Register("brass", {
 					.. "note: \"I need the packing record behind the broken seal.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_manifest",
 				label = "Depot seal register",
@@ -354,7 +354,7 @@ PLUGIN:Register("brass", {
 					.. "the depot inventory.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_receipt",
 				label = "depot inventory",
@@ -458,7 +458,7 @@ PLUGIN:Register("brass", {
 					.. "\"Latch needs the supplier paperwork.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_contract",
 				label = "Supplier papers for Latch",
@@ -779,7 +779,7 @@ PLUGIN:Register("brass", {
 					.. "the last freight entry.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_receipt",
 				label = "Final freight receipt",

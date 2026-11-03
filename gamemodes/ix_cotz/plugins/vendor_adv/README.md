@@ -28,7 +28,7 @@ open its **Edit Vendor** property, select the contact, and click **Load**.
 
 Prefer **/TownNPCPlace <slug>**, for example **/TownNPCPlace arena-master**, on the contact's
 home map. It validates the map and duplicate identity, installs missing stock, and saves immediately.
-Arena Master belongs on rp_marsh_cs; Garbage is mz_garbage. The generic commands above remain
+Arena Master belongs on rp_marsh_cs; Garbage is rp_garbage_cotz. The generic commands above remain
 available for manual editing and do not enforce home maps. Existing saved contacts need to be
 moved manually. The overhaul does not guess positions or relocate vendors across servers.
 

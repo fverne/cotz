@@ -6,7 +6,7 @@ An event point stores `{position, name, locationTag}`. Matching and encounter qu
 | Map prefix | Map |
 | --- | --- |
 | `swamps` | `rp_marsh_cs` |
-| `garbage` | `mz_garbage` |
+| `garbage` | `rp_garbage_cotz` |
 | `waystation` | `rp_waystation` |
 | `pripyat` | `rp_pripyat_remaster` |
 
@@ -55,7 +55,7 @@ are retained, except `rodent2` moves its Waystation building assignment to Garba
 Garbage underground. Duplicate Garbage-only dog, cat and rodent definitions have been removed.
 Human encounters are unchanged. The intended map progression is Swamps < Garbage < Waystation.
 
-**FTS deployment:** `mz_garbage` still has no authored routine event points. Registering tags and
+**FTS deployment:** `rp_garbage_cotz` still has no authored routine event points. Registering tags and
 encounters alone does not populate the map. Place points with `/eventadd` in a multiplayer map
 session, verify navigation and safe placement, then export the eventcontroller data into the Garbage
 preset. Existing live worlds need those points added; do not rerun full FTS just for encounters.

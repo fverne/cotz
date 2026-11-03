@@ -123,7 +123,7 @@ PLUGIN:Register("smartass", {
 					.. "\"There's a beacon source to locate.\""
 				),
 				kind = "triangulation",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_control",
 				label = "beacon controller",
@@ -212,7 +212,7 @@ PLUGIN:Register("smartass", {
 					.. "\"I want the source behind that interference.\""
 				),
 				kind = "triangulation",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_control",
 				label = "Interference source record",
@@ -321,7 +321,7 @@ PLUGIN:Register("smartass", {
 					.. "\"There's another source to locate.\""
 				),
 				kind = "triangulation",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_control",
 				label = "Misleading beacon source",
@@ -427,7 +427,7 @@ PLUGIN:Register("smartass", {
 					.. "the diagnostic recording.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_drive",
 				label = "Relay diagnostic recording",

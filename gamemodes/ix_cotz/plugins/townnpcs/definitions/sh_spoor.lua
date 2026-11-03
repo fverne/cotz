@@ -1,7 +1,7 @@
 PLUGIN:Register("spoor", {
 	name = "'Spoor'",
 	template = "spoornpc",
-	map = "mz_garbage",
+	map = "rp_garbage_cotz",
 	job = {
 		kind = "hunting",
 		category = "Mutant hunting",
@@ -144,7 +144,7 @@ PLUGIN:Register("spoor", {
 					.. "observations from the hunting ground.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_notebook",
 				label = "Scavenging-ground observations",
@@ -228,7 +228,7 @@ PLUGIN:Register("spoor", {
 					.. "meat-handling notes.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_diary",
 				label = "Camp meat-handling notes",
@@ -333,7 +333,7 @@ PLUGIN:Register("spoor", {
 					.. "\"The route recorder may help place the disturbance.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_module",
 				label = "Disturbed-route recorder",
@@ -664,7 +664,7 @@ PLUGIN:Register("spoor", {
 					.. "observations are back in Garbage.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_notebook",
 				label = "Final hunting journal",

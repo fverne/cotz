@@ -441,7 +441,7 @@ PLUGIN:Register("egghead", {
 					.. "\"Vesper should examine the environmental control evidence.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_clinic",
 				label = "Environmental control for Vesper",

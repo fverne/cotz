@@ -1,13 +1,13 @@
 PLUGIN:Register("vesper", {
 	name = "'Vesper'",
 	template = "vespernpc",
-	map = "mz_garbage",
+	map = "rp_garbage_cotz",
 	job = {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",
 		description = "Sensor deployment and retrieval",
 		maps = {
-			easy = "mz_garbage",
+			easy = "rp_garbage_cotz",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},
@@ -105,7 +105,7 @@ PLUGIN:Register("vesper", {
 					.. "\"I'd like a recording from the field approach.\""
 				),
 				kind = "sensor",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_module",
 				label = "Anomaly approach survey recorder",
@@ -191,7 +191,7 @@ PLUGIN:Register("vesper", {
 					.. "\"We need another field recording.\""
 				),
 				kind = "sensor",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_module",
 				label = "Second field survey recorder",
@@ -297,7 +297,7 @@ PLUGIN:Register("vesper", {
 					.. "\"Recover the disputed site's recording.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_tape",
 				label = "Disputed-site audio record",
@@ -505,7 +505,7 @@ PLUGIN:Register("vesper", {
 					.. "team's equipment case intact.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_equipment",
 				label = "Lost team's equipment case",

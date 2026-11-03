@@ -1,7 +1,7 @@
 # Town NPCs
 
 The town plugin owns 27 contacts and 646 finite objectives. Arena Master lives in Marsh
-(rp_marsh_cs), Garbage uses mz_garbage, and Waystation uses rp_waystation. Pripyat
+(rp_marsh_cs), Garbage uses rp_garbage_cotz, and Waystation uses rp_waystation. Pripyat
 (rp_pripyat_remaster) is a task destination without permanent town NPCs.
 
 ## Definition ownership

@@ -8,7 +8,7 @@ PLUGIN:Register("atlas", {
 		description = "Sensor deployment and retrieval",
 		maps = {
 			easy = "rp_marsh_cs",
-			medium = "mz_garbage",
+			medium = "rp_garbage_cotz",
 			hard = "rp_pripyat_remaster",
 		},
 	},
@@ -321,7 +321,7 @@ PLUGIN:Register("atlas", {
 					.. "account intended to accompany the written survey notes."
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_tape",
 				label = "Unfinished survey cassette",

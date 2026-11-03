@@ -232,9 +232,9 @@ check(cargoCount == 154 and recipientCount == 38 and dropCount == 3,
 	"authored commissions use custom recovery cargo, contact deliveries and field-cache deliveries")
 check(#town:ValidateContacts() == 0, "all current cargo and recipient declarations validate")
 check(town.contacts["arena-master"].map == "rp_marsh_cs", "arena stays with the Marsh dupe")
-check(town.contacts.latch.map == "mz_garbage", "Garbage uses the supplied map ID")
+check(town.contacts.latch.map == "rp_garbage_cotz", "Garbage uses the supplied map ID")
 check(town.contacts.smartass.map == "rp_waystation", "Smartass lives in Waystation")
-check(town.contacts.spool.map == "mz_garbage", "Spool lives in Garbage")
+check(town.contacts.spool.map == "rp_garbage_cotz", "Spool lives in Garbage")
 for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
 	local id = "cotz/town/smartass/" .. difficulty .. "/dataExtract"
 	local job = ix.jobs.list[id]
@@ -437,7 +437,7 @@ town:ArenaCompleted(arenaCharacter.client, opponent)
 check(arenaCharacter:GetData("townNPCProgression").counts["'Arena Master'"] == 1,
 	"arena counts distinct opponents even before an authored bout is active")
 local before = arenaCharacter:GetData("townNPCProgression").counts["'Arena Master'"]
-currentMap = "mz_garbage"
+currentMap = "rp_garbage_cotz"
 town:ArenaCompleted(arenaCharacter.client, {SteamID64 = function() return "another-human" end,
 	IsBot = function() return false end})
 check(arenaCharacter:GetData("townNPCProgression").counts["'Arena Master'"] == before,
@@ -605,7 +605,7 @@ local savedPoints
 local sitePlugin = {
 	GetData = function(self, default, global, ignoreMap)
 		check(ignoreMap == true, "field sites load all map regions")
-		return {recovery = {mz_garbage = {{"saved-garbage-point"}}}}
+		return {recovery = {rp_garbage_cotz = {{"saved-garbage-point"}}}}
 	end,
 	SetData = function(self, data, global, ignoreMap)
 		check(ignoreMap == true, "field sites persist independently of the current map")
@@ -613,13 +613,13 @@ local sitePlugin = {
 	end,
 }
 PLUGIN = sitePlugin
-PLUGIN.siteDefinitions = {recovery = {rp_marsh_cs = {{"shared-marsh-point"}}, mz_garbage = {{"default"}}}}
+PLUGIN.siteDefinitions = {recovery = {rp_marsh_cs = {{"shared-marsh-point"}}, rp_garbage_cotz = {{"default"}}}}
 dofile(base .. "townnpcs/libs/sv_sites.lua")
 PLUGIN:LoadData()
 check(PLUGIN.recoveryPoints.rp_marsh_cs[1][1] == "shared-marsh-point", "shared definitions fill unsaved map regions")
-check(PLUGIN.recoveryPoints.mz_garbage[1][1] == "saved-garbage-point", "local authoring overrides shared map defaults")
+check(PLUGIN.recoveryPoints.rp_garbage_cotz[1][1] == "saved-garbage-point", "local authoring overrides shared map defaults")
 PLUGIN:SaveData()
-check(savedPoints.recovery.rp_marsh_cs and savedPoints.recovery.mz_garbage, "saving retains both map regions")
+check(savedPoints.recovery.rp_marsh_cs and savedPoints.recovery.rp_garbage_cotz, "saving retains both map regions")
 for _, name in ipairs({
 	"TownNPCPlace", "TownNPCAddFieldPoint", "TownNPCRemoveFieldPoint", "TownNPCExportFieldPoints",
 }) do
@@ -646,9 +646,9 @@ fieldStep.field.recipient = "atlas"
 check(#town:ValidateContacts() == 1, "a commission cannot name its own issuer as an intermediate recipient")
 fieldStep.field.recipient = savedRecipient
 local available = ix.jobs.field.IsAvailable
-ix.jobs.field.IsAvailable = function(definition) return definition.fieldMap ~= "mz_garbage" end
+ix.jobs.field.IsAvailable = function(definition) return definition.fieldMap ~= "rp_garbage_cotz" end
 local missing = town:GetMissingFieldSites()
-check(missing["recovery on mz_garbage"] > 0, "missing field sites are reported by mechanic and region")
+check(missing["recovery on rp_garbage_cotz"] > 0, "missing field sites are reported by mechanic and region")
 ix.jobs.field.IsAvailable = available
 local oldJobs, oldCategories = ix.jobs.list, ix.jobs.jobsbycategory
 ix.jobs.list, ix.jobs.jobsbycategory = {}, {}

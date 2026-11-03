@@ -8,7 +8,7 @@ PLUGIN:Register("ballast", {
 		description = "Equipment recovery",
 		maps = {
 			easy = "rp_marsh_cs",
-			medium = "mz_garbage",
+			medium = "rp_garbage_cotz",
 			hard = "rp_pripyat_remaster",
 		},
 	},

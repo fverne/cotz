@@ -480,7 +480,7 @@ PLUGIN:Register("haggler", {
 					.. "\"Bring the supplier contract intact.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_contract",
 				label = "Supplier's broken agreement",

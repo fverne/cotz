@@ -1,13 +1,13 @@
 PLUGIN:Register("wake", {
 	name = "'Wake'",
 	template = "wakenpc",
-	map = "mz_garbage",
+	map = "rp_garbage_cotz",
 	job = {
 		kind = "recovery",
 		category = "Equipment recovery",
 		description = "Equipment recovery",
 		maps = {
-			easy = "mz_garbage",
+			easy = "rp_garbage_cotz",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},
@@ -118,7 +118,7 @@ PLUGIN:Register("wake", {
 					.. "the scavenger's surviving records brought back together.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_personnel",
 				label = "Missing scavenger's records",
@@ -211,7 +211,7 @@ PLUGIN:Register("wake", {
 					.. "needs the convoy roster.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_personnel",
 				label = "Convoy roster for Brass",
@@ -318,7 +318,7 @@ PLUGIN:Register("wake", {
 					.. "have the survey note.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_notebook",
 				label = "Survey note for Atlas",
@@ -429,7 +429,7 @@ PLUGIN:Register("wake", {
 					.. "evidence supporting that report.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_official",
 				label = "Restricted report's supporting file",
@@ -656,7 +656,7 @@ PLUGIN:Register("wake", {
 					.. "identification record needs to come back complete.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_personnel",
 				label = "Final identification file",

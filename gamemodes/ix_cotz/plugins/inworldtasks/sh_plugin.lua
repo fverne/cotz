@@ -26,7 +26,7 @@ function ix.util.GetLongLatFromVector(pos, map)
 		["rp_marsh_cs"] 			= {0.0, 0.0},
 		["rp_waystation"] 			= {0.75, -1.2},
 		["rp_pripyat_remaster"] 	= {0.85, 0.8},
-		["mz_garbage"] 				= {0.25, 0.4},
+		["rp_garbage_cotz"] 				= {0.25, 0.4},
 	}
 
 	local xpos = pos[1]

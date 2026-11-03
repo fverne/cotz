@@ -182,7 +182,7 @@ PLUGIN:Register("intern", {
 					.. "a recording at the Garbage control site.\""
 				),
 				kind = "sensor",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_module2",
 				label = "Garbage control recorder",

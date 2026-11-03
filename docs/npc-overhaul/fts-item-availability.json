@@ -1,6 +1,6 @@
 {
   "counts": {
-    "mz_garbage": {
+    "rp_garbage_cotz": {
       "anomalies": 0,
       "boxes": {
         "1": 94,
@@ -84,7 +84,7 @@
     "hand_in_unit_index"
   ],
   "rates": {
-    "mz_garbage": {
+    "rp_garbage_cotz": {
       "value_antiinsect": {
         "boxes": [
           0.7257889447236195,

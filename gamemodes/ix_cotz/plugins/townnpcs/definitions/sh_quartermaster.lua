@@ -453,7 +453,7 @@ PLUGIN:Register("quartermaster", {
 					.. "\"Brass needs the depot copy.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_receipt",
 				label = "Depot register for Brass",

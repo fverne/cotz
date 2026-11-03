@@ -9,7 +9,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "docs/npc-overhaul"
-MAPS = ("rp_marsh_cs", "mz_garbage", "rp_waystation", "rp_pripyat_remaster")
+MAPS = ("rp_marsh_cs", "rp_garbage_cotz", "rp_waystation", "rp_pripyat_remaster")
 WORLD_CHANCE = 25 / 101
 WORLD_CAP = 76  # Runtime checks > 75 before the next attempt.
 BOX_CAP = 51  # Runtime checks > 50.
@@ -195,13 +195,13 @@ LABELS = {
     "trade": "Trading stock", "records": "Records and recording equipment", "military": "Military supplies",
     "research": "Research supplies", "textiles": "Textiles and protective materials", "collectibles": "Collectible finds",
 }
-REGION_LABELS = {"rp_marsh_cs": "Marsh", "mz_garbage": "Garbage", "rp_waystation": "Waystation",
+REGION_LABELS = {"rp_marsh_cs": "Marsh", "rp_garbage_cotz": "Garbage", "rp_waystation": "Waystation",
                  "rp_pripyat_remaster": "Pripyat"}
 QUANTITIES = ((1,), (2, 1), (3, 2, 1), (4, 3, 2, 1))
 
 
 def band_key(theme, home, tier):
-    region = {"rp_marsh_cs": "marsh", "mz_garbage": "garbage", "rp_waystation": "waystation"}[home]
+    region = {"rp_marsh_cs": "marsh", "rp_garbage_cotz": "garbage", "rp_waystation": "waystation"}[home]
     return f"town_delivery_{theme}_{region}_{tier}"
 
 
@@ -319,8 +319,8 @@ def build_report(data, rates, counts, missing, bands, manifests):
         regular = sum(n for pool, n in row["world"].items() if pool in ("worldspawn_1", "worldspawn_3", "worldspawn_5", "worldspawn_garbage_regular"))
         rare = sum(row["world"].values())-regular
         lines.append(f'| {REGION_LABELS[region]} | {regular} / {rare} | {row["boxes"].get("1",0)} / {row["boxes"].get("2",0)} | {sum(row["cyclic"].values())} | {row["hidden"]} | {row["anomalies"]} |')
-    lines += ["", f"Garbage has {sum(counts["mz_garbage"]["world"].values())} loose-item points and "
-              f"{sum(counts["mz_garbage"]["boxes"].values())} box points. Box custom pools are included in its supply.",
+    lines += ["", f"Garbage has {sum(counts["rp_garbage_cotz"]["world"].values())} loose-item points and "
+              f"{sum(counts["rp_garbage_cotz"]["boxes"].values())} box points. Box custom pools are included in its supply.",
               "Contacts use local thematic sources where configured; themes without local sources use Marsh for introductory acquisition.",
               "Live saved map data can differ from FTS and overrides these estimates.", "", "## Estimation method", "",
               "For each item and pool: P(item) = summed positive item weights / summed positive pool weights.",

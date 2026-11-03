@@ -1,6 +1,6 @@
--- Presets for mz_garbage
+-- Presets for rp_garbage_cotz
 
-PLUGIN.map_presets["mz_garbage"] = {
+PLUGIN.map_presets["rp_garbage_cotz"] = {
 	containers = {},
 	entities = {},
 	vendors = {},

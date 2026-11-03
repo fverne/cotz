@@ -1,13 +1,13 @@
 PLUGIN:Register("cleaner", {
 	name = "'Cleaner'",
 	template = "owlnpc",
-	map = "mz_garbage",
+	map = "rp_garbage_cotz",
 	job = {
 		kind = "deadDrop",
 		category = "Dead-drop circuits",
 		description = "Dead-drop circuits",
 		maps = {
-			easy = "mz_garbage",
+			easy = "rp_garbage_cotz",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},
@@ -100,7 +100,7 @@ PLUGIN:Register("cleaner", {
 					.. "note: \"A sealed parcel needs moving between the assigned drops.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_evidence",
 				label = "First sealed drop parcel",
@@ -184,7 +184,7 @@ PLUGIN:Register("cleaner", {
 					.. "note: \"There's evidence to recover from a compromised cache.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_security",
 				label = "Compromised cache evidence",
@@ -288,7 +288,7 @@ PLUGIN:Register("cleaner", {
 					.. "the distribution register recovered.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_receipt",
 				label = "Distribution register",
@@ -393,7 +393,7 @@ PLUGIN:Register("cleaner", {
 					.. "note: \"Ledger needs his missing freight copy.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_manifest",
 				label = "Freight copy for Ledger",
@@ -717,7 +717,7 @@ PLUGIN:Register("cleaner", {
 					.. "note: \"One more sealed circuit delivery.\""
 				),
 				kind = "deadDrop",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_evidence",
 				label = "Final sealed circuit parcel",

@@ -70,7 +70,7 @@ through different names. Runtime category IDs are generated per contact and diff
 ## Decisions still open
 
 1. Review the implemented unlock ledger and item-family pacing in live play.
-2. Garbage's identifier is mz_garbage; final landmarks, travel links, loot placement and NPC positions still need authoring.
+2. Garbage's identifier is rp_garbage_cotz; final landmarks, travel links, loot placement and NPC positions still need authoring.
 3. Playtest the configured quantities, cumulative job thresholds, prices and reward amounts.
 4. Final main-story travel gates, arrival rules, and cross-NPC prerequisites.
 5. Verify current character persistence and reward recovery in multiplayer.

@@ -1,7 +1,7 @@
 PLUGIN:Register("latch", {
 	name = "'Latch'",
 	template = "latchnpc",
-	map = "mz_garbage",
+	map = "rp_garbage_cotz",
 	job = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
@@ -135,7 +135,7 @@ PLUGIN:Register("latch", {
 					.. "note: \"I want the sorting-yard inventory.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_manifest",
 				label = "Sorting-yard stock journal",
@@ -226,7 +226,7 @@ PLUGIN:Register("latch", {
 					.. "want the machinery identification record.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 1,
 				cargo = "town_quest_control",
 				label = "Machine identification file",
@@ -331,7 +331,7 @@ PLUGIN:Register("latch", {
 					.. "failed replacement kept as it was found.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_equipment",
 				label = "Failed replacement component",
@@ -662,7 +662,7 @@ PLUGIN:Register("latch", {
 					.. "commissioning record should show what they intended this machine to handle.\""
 				),
 				kind = "recovery",
-				map = "mz_garbage",
+				map = "rp_garbage_cotz",
 				tier = 2,
 				cargo = "town_quest_official",
 				label = "Machine commissioning papers",

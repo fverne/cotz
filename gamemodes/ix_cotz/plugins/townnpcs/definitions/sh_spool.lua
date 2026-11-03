@@ -1,13 +1,13 @@
 PLUGIN:Register("spool", {
 	name = "'Spool'",
 	template = "spoolnpc",
-	map = "mz_garbage",
+	map = "rp_garbage_cotz",
 	job = {
 		kind = "triangulation",
 		category = "Radio triangulation",
 		description = "Radio triangulation",
 		maps = {
-			easy = "mz_garbage",
+			easy = "rp_garbage_cotz",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},
