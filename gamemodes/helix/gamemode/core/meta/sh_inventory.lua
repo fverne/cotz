@@ -102,19 +102,19 @@ end
 -- This function can be helpful for getting rid of those pesky errors.
 -- @realm shared
 function META:FindError()
-	for _, v in pairs(self:GetItems()) do
-		if (v.width == 1 and v.height == 1) then
+	for _, k in pairs(self:GetItems()) do
+		if (k.width == 1 and k.height == 1) then
 			continue
 		end
 
-		print("Finding error: " .. v.name)
-		print("Item Position: " .. v.gridX, v.gridY)
+		print("Finding error: " .. k.name)
+		print("Item Position: " .. k.gridX, k.gridY)
 
-		for x = v.gridX, v.gridX + v.width - 1 do
-			for y = v.gridY, v.gridY + v.height - 1 do
+		for x = k.gridX, k.gridX + k.width - 1 do
+			for y = k.gridY, k.gridY + k.height - 1 do
 				local item = self.slots[x][y]
 
-				if (item and item.id != v.id) then
+				if (item and item.id != k.id) then
 					print("Error Found: ".. item.name)
 				end
 			end
@@ -150,7 +150,7 @@ end
 -- @treturn[1] Player Owning player
 -- @treturn[2] nil If no connected player owns this inventory
 function META:GetOwner()
-	for _, v in ipairs(player.GetAll()) do
+	for _, v in player.Iterator() do
 		if (v:GetCharacter() and v:GetCharacter().id == self.owner) then
 			return v
 		end
@@ -170,7 +170,7 @@ function META:SetOwner(owner, fullUpdate)
 
 	if (SERVER) then
 		if (fullUpdate) then
-			for _, v in ipairs(player.GetAll()) do
+			for _, v in player.Iterator() do
 				if (v:GetNetVar("char") == owner) then
 					self:Sync(v, true)
 
@@ -559,23 +559,25 @@ end
 -- @realm shared
 -- @treturn function iterator
 function META:Iter()
-	local x, y, item = 1, 1
+	local x, y = 1, 1
+	local seen = {}
 
 	return function()
-		item = nil
+		while y <= self.h do
+			local item = self.slots[x] and self.slots[x][y]
+			local itemX, itemY = x, y
+			x = x + 1
 
-		repeat
-			if (x > self.w) then
+			if x > self.w then
 				x, y = 1, y + 1
-				if (y > self.h) then return nil end
 			end
 
-			item = self.slots[x] and self.slots[x][y]
-			x = x + 1
-		until item
+			-- Multi-slot items occupy several cells; reserved cells contain booleans.
+			if istable(item) and not seen[item] then
+				seen[item] = true
 
-		if (item) then
-			return item, x, y
+				return item, itemX, itemY
+			end
 		end
 	end
 end
@@ -619,12 +621,10 @@ end
 -- 	-- do something with the item table
 -- end
 function META:HasItem(targetID, data)
-	local items = self:GetItems()
-
-	for _, v in pairs(items) do
-		if (v.uniqueID == targetID) then
+	for _, k in pairs(self:GetItems()) do
+		if (k.uniqueID == targetID) then
 			if (data) then
-				local itemData = v.data
+				local itemData = k.data
 				local bFound = true
 
 				for dataKey, dataVal in pairs(data) do
@@ -639,7 +639,7 @@ function META:HasItem(targetID, data)
 				end
 			end
 
-			return v
+			return k
 		end
 	end
 
@@ -660,13 +660,12 @@ end
 -- if not Entity(1):GetCharacter():GetInventory():HasItems(itemFilter) then return end
 -- -- Filters out if this player has both a water, and a sparkling water.
 function META:HasItems(targetIDs)
-	local items = self:GetItems()
 	local count = #targetIDs -- assuming array
 	targetIDs = table.Copy(targetIDs)
 
-	for _, v in pairs(items) do
+	for _, item in pairs(self:GetItems()) do
 		for k, targetID in ipairs(targetIDs) do
-			if (v.uniqueID == targetID) then
+			if (item.uniqueID == targetID) then
 				table.remove(targetIDs, k)
 				count = count - 1
 
@@ -695,12 +694,10 @@ end
 -- end
 -- -- Notifies the player that they should get some more guns.
 function META:HasItemOfBase(baseID, data)
-	local items = self:GetItems()
-
-	for _, v in pairs(items) do
-		if (v.base == baseID) then
+	for _, k in pairs(self:GetItems()) do
+		if (k.base == baseID) then
 			if (data) then
-				local itemData = v.data
+				local itemData = k.data
 				local bFound = true
 
 				for dataKey, dataVal in pairs(data) do
@@ -715,7 +712,7 @@ function META:HasItemOfBase(baseID, data)
 				end
 			end
 
-			return v
+			return k
 		end
 	end
 
@@ -770,10 +767,9 @@ if (SERVER) then
 	-- Inventories that are marked to not save will not update in the Database, if they inventory is already saved,
 	-- it will not be deleted when unloaded.
 	-- @realm server
-	-- @treturn[1] bool Returns the field `noSave`.
-	-- @treturn[2] bool Returns true if the field `noSave` is not registered to this inventory.
+	-- @treturn bool Whether or not this inventory should save.
 	function META:GetShouldSave()
-		return self.noSave or true
+		return self.noSave != true
 	end
 
 	--- Add an item to the inventory.
@@ -960,8 +956,8 @@ if (SERVER) then
 			net.WriteTable(self.vars or {})
 		net.Send(receiver)
 
-		for _, v in pairs(self:GetItems()) do
-			v:Call("OnSendData", receiver)
+		for _, k in pairs(self:GetItems()) do
+			k:Call("OnSendData", receiver)
 		end
 	end
 end

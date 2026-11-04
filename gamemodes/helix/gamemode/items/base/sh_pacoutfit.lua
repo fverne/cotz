@@ -89,8 +89,8 @@ end)
 
 -- On player uneqipped the item, Removes a weapon from the player and keep the ammo in the item.
 ITEM.functions.EquipUn = { -- sorry, for name order.
-	name = "Unequip",
-	tip = "equipTip",
+	name = "unequip",
+	tip = "unequipTip",
 	icon = "icon16/cross.png",
 	OnRun = function(item)
 		item:RemovePart(item.player)
@@ -107,18 +107,17 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 
 -- On player eqipped the item, Gives a weapon to player and load the ammo data from the item.
 ITEM.functions.Equip = {
-	name = "Equip",
+	name = "equip",
 	tip = "equipTip",
 	icon = "icon16/tick.png",
 	OnRun = function(item)
 		local char = item.player:GetCharacter()
-		local items = char:GetInventory():GetItems()
 
-		for _, v in pairs(items) do
-			if (v.id != item.id) then
-				local itemTable = ix.item.instances[v.id]
+		for _, k in pairs(char:GetInventory():GetItems()) do
+			if (k.id != item.id) then
+				local itemTable = ix.item.instances[k.id]
 
-				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
+				if (itemTable.pacData and k.outfitCategory == item.outfitCategory and itemTable:GetData("equip")) then
 					item.player:NotifyLocalized(item.equippedNotify or "outfitAlreadyEquipped")
 
 					return false

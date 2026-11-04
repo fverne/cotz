@@ -368,6 +368,12 @@ function PLUGIN:PlayerDeath(victim, inflictor, attacker)
 				end
 			end
 
+			local first = arenaData.players[1].player
+			local second = arenaData.players[2].player
+			if arenaData.active and IsValid(first) and IsValid(second)
+				and (victim == first or victim == second) and (attacker == first or attacker == second) then
+				hook.Run("cotz/arena/match-completed", first, second)
+			end
 			self:EndArena(arenaName, attacker, victim)
 
 			break
@@ -408,7 +414,7 @@ function PLUGIN:CanPlayerUnequipItem(client, item)
 end
 
 function PLUGIN:CanPlayerInteractItem(client, action, item, data)
-	return not client:GetLocalVar("arenaSpectate", false)
+	if client:GetLocalVar("arenaSpectate", false) then return false end
 end
 
 function PLUGIN:CanPlayerHoldObject(client, entity)
@@ -424,7 +430,7 @@ function PLUGIN:EndArena(arenaName, winner, loser)
 	timer.Remove("ixArenaDurationTimer_" .. arenaName)
 
 	if IsValid(winner) and winner:IsPlayer() then
-		for k, ply in pairs( player.GetAll() ) do
+		for k, ply in player.Iterator() do
 			ix.chat.Send(ply, "eventpdainternal", Format("%s has defeated %s in the arena!", winner:GetName(), loser:GetName()), true, ply)
 		end
 

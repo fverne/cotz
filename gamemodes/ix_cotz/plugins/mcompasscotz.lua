@@ -131,6 +131,45 @@ if CLIENT then
         [360] = "N"
     }
 
+	local squadmates = {}
+	local nextSquadRefresh = 0
+	local cachedSquadID
+	local SQUAD_COLOR = Color(73, 140, 143)
+
+	local function drawSquadmates(client, x, y, width, height)
+		local character = client:GetCharacter()
+		local squadID = character and character:GetSquadID()
+		if not squadID or squadID == "NULL" then return end
+		if cachedSquadID ~= squadID or CurTime() >= nextSquadRefresh then
+			cachedSquadID = squadID
+			nextSquadRefresh = CurTime() + 1
+			squadmates = {}
+			for _, member in ipairs(player.GetAll()) do
+				local other = member:GetCharacter()
+				if member ~= client and other and other:GetSquadID() == squadID then
+					squadmates[#squadmates + 1] = member
+				end
+			end
+		end
+		for _, member in ipairs(squadmates) do
+			local other = IsValid(member) and member:GetCharacter()
+			if other and other:GetSquadID() == squadID then
+				local corpse = member:GetNWEntity("cotzSquadRagdoll")
+				local target = IsValid(corpse) and corpse or member
+				local bearing = (target:GetPos() - client:GetPos()):Angle().y
+				local difference = math.AngleDifference(client:EyeAngles().y, bearing)
+				local markerX = x + difference * (width * compass_style.spacing / 360)
+				if math.abs(markerX - x) <= width / 2 then
+					local distance = math.Round(client:GetPos():Distance(target:GetPos()) * 0.0254)
+					local label = other:GetName() .. " · " .. distance .. "m"
+					if IsValid(corpse) or not member:Alive() then label = label .. " · DEAD" end
+					draw.SimpleText(label, "ixSmallFont", markerX, y + height * 1.4,
+						SQUAD_COLOR, TEXT_ALIGN_CENTER)
+				end
+			end
+		end
+	end
+
     function PLUGIN:HUDPaint()
         local ply = LocalPlayer()
         if not ply:GetCharacter() or not ply:Alive() or ix.gui.characterMenu:IsVisible() or ix.option.Get("disablehud", false) then return end
@@ -179,6 +218,8 @@ if CLIENT then
                     end
                 end
             end
+
+			drawSquadmates(ply, compassX, compassY, width, height)
 
             if compass_style.heading then
                 -- Middle Triangle

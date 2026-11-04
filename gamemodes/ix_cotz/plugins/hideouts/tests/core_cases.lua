@@ -131,6 +131,16 @@ Test("schema inventory action override removes consumed floor items", function()
 		end,
 	} }
 	item.hooks, item.postHooks = {}, {}
+	assert(not ix.item.PerformInventoryAction(client, "consume", entity, 99999))
+	assert(entity.valid and DB.rows[item.id], "unknown inventories cannot consume items")
+	client.position = instance.origin + Vector(200, 0, 0)
+	assert(not ix.item.PerformInventoryAction(client, "consume", entity))
+	assert(entity.valid and DB.rows[item.id], "distant world items cannot be consumed")
+	client.position = instance.origin
+	client.useEntity = NewEntity(nil, instance.origin)
+	assert(not ix.item.PerformInventoryAction(client, "consume", entity))
+	assert(entity.valid and DB.rows[item.id], "another use target blocks world item actions")
+	client.useEntity = entity
 	assert(ix.item.PerformInventoryAction(client, "consume", entity))
 	assert(not entity.valid and not DB.rows[item.id] and not instance.items[item.id])
 end)

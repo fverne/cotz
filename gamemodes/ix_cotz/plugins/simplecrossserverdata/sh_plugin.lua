@@ -115,3 +115,7 @@ if (SERVER) then
 		end
 	end
 end
+
+ix.util.Include("sv_mysql.lua")
+ix.util.Include("sh_presence.lua")
+ix.util.Include("sv_presence.lua")

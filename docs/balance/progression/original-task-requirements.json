@@ -1,0 +1,17 @@
+{
+  "oldTimerKillIntro": [
+    15
+  ],
+  "boss_dataTasks": [
+    50
+  ],
+  "smartass_rfTasks": [
+    60
+  ],
+  "intern_gasAnalyzerReadings": [
+    90
+  ],
+  "computer_artifactTasks": [
+    100
+  ]
+}

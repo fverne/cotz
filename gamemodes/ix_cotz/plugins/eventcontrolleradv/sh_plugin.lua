@@ -104,21 +104,23 @@ if SERVER then
 	end
 	
 	function PLUGIN:spawnEvent(eventpoint, spawn)
+		if table.Count(self.currentEvents) >= ix.config.Get("eventControllerAdvThreshold", 5) then
+			return false
+		end
 		if isClear(eventpoint[1]) then
-			key = spawn.key
-			if(!self.currentEvents[key]) then
-				self.currentEvents[key] = {}
-				self.currentEvents[key].data = {}
-				self.currentEvents[key].eventpoint = eventpoint
-				self.currentEvents[key].eventDef = spawn.key
+			local key = spawn.key
+			if not self.currentEvents[key] then
+				local definition = self.eventdefs[key]
+				local event = {
+					data = {},
+					eventpoint = eventpoint,
+					eventDef = key,
+				}
 
-
-				local tmpfunc = self.eventdefs[spawn.key].funcPrestart
-				local data = tmpfunc(self.currentEvents[key])
-				self.currentEvents[key] = data
-				tmpfunc = self.eventdefs[spawn.key].funcStart
-				data = tmpfunc(self.currentEvents[key])
-				self.currentEvents[key] = data
+				-- Setup can fail while spawning external dupes; only track fully started events.
+				event = definition.funcPrestart(event)
+				event = definition.funcStart(event)
+				self.currentEvents[key] = event
 			end
 		end
 	end
@@ -142,30 +144,24 @@ if SERVER then
 	function PLUGIN:Think()
 
 		if self.populate then
-			for i = 1, self.populateAmount do
-				local spawn = table.Random(self.eventdefs)
-				local n = 0
-				while spawn.difficulty != self.MapToDifficultyMap[game.GetMap()] and n<15 do
-					spawn = table.Random(self.eventdefs)
-					n = n + 1
-				end
-				if( n == 15 ) then return end
+			self.cotzPopulateRemaining = (self.cotzPopulateRemaining or self.populateAmount) - 1
+			self.populate = self.cotzPopulateRemaining > 0
+			if not self.populate then self.cotzPopulateRemaining = nil end
 
-				--if !table.IsEmpty(self.eventpoints) then return end
-				local eventpoint = self.eventpoints[table.Random(spawn.allowedPoints)]
-
-				if (!eventpoint) then
-					print("No eventpoint found")
-					return
+			local candidates = {}
+			for _, definition in pairs(self.eventdefs) do
+				if definition.difficulty == self.MapToDifficultyMap[game.GetMap()] then
+					candidates[#candidates + 1] = definition
 				end
-				
-				print("spawned forced event")
-				self:spawnEvent(eventpoint,spawn)
 			end
-			
-			self.populate = false
+			if #candidates > 0 then
+				local spawn = candidates[math.random(#candidates)]
+				local pointID = table.Random(spawn.allowedPoints)
+				local point = self.eventpoints[pointID]
+				if point then self:spawnEvent(point, spawn) end
+			end
 		end
-		
+
 		if (self.updatetime < CurTime() ) then
 			for k,v in pairs( self.currentEvents) do
 				local tmpfunc = self.eventdefs[v.eventDef].funcUpdate
@@ -186,12 +182,12 @@ if SERVER then
 
 		if self.spawntime > CurTime() then return end
 
-		if #self.currentEvents >= ix.config.Get("maxActiveEvents", 5) then 
+		if table.Count(self.currentEvents) >= ix.config.Get("eventControllerAdvThreshold", 5) then
 			self.spawntime = CurTime() + self.noSpaceRate
 			return 
 		end
 
-		self.spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * #player.GetAll()))
+		self.spawntime = CurTime() + (self.spawnratebase - (self.spawnrateplayer * player.GetCount()))
 
 		local spawn = table.Random(self.eventdefs)
 		local n = 0

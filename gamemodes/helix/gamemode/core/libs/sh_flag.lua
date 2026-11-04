@@ -177,7 +177,7 @@ do
 end
 
 do
-	ix.flag.Add("p", "Access to the physgun.", function(client, isGiven)
+	ix.flag.Add("p", "flagPhysgun", function(client, isGiven)
 		if (isGiven) then
 			client:Give("weapon_physgun")
 			client:SelectWeapon("weapon_physgun")
@@ -186,7 +186,7 @@ do
 		end
 	end)
 
-	ix.flag.Add("t", "Access to the toolgun", function(client, isGiven)
+	ix.flag.Add("t", "flagToolgun", function(client, isGiven)
 		if (isGiven) then
 			client:Give("gmod_tool")
 			client:SelectWeapon("gmod_tool")
@@ -195,9 +195,9 @@ do
 		end
 	end)
 
-	ix.flag.Add("c", "Access to spawn chairs.")
-	ix.flag.Add("C", "Access to spawn vehicles.")
-	ix.flag.Add("r", "Access to spawn ragdolls.")
-	ix.flag.Add("e", "Access to spawn props.")
-	ix.flag.Add("n", "Access to spawn NPCs.")
+	ix.flag.Add("c", "flagSpawnChairs")
+	ix.flag.Add("C", "flagSpawnVehicles")
+	ix.flag.Add("r", "flagSpawnRagdolls")
+	ix.flag.Add("e", "flagSpawnProps")
+	ix.flag.Add("n", "flagSpawnNPCs")
 end

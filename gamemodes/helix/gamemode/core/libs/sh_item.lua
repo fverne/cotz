@@ -129,7 +129,7 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 		ITEM = (isBaseItem and ix.item.base or ix.item.list)[uniqueID] or setmetatable({}, meta)
 			ITEM.uniqueID = uniqueID
 			ITEM.base = baseID or ITEM.base
-			ITEM.isBase = isBaseItem
+			ITEM.isBase = isBaseItem or false
 			ITEM.hooks = ITEM.hooks or {}
 			ITEM.postHooks = ITEM.postHooks or {}
 			ITEM.functions = ITEM.functions or {}
@@ -587,6 +587,10 @@ do
 
 			local inventory = ix.item.inventories[invID or 0]
 
+			if (!inventory) then
+				return
+			end
+
 			if (hook.Run("CanPlayerInteractItem", client, action, item, data) == false) then
 				return
 			end
@@ -621,7 +625,12 @@ do
 			end
 
 			if (item.entity) then
-				if (item.entity:GetPos():Distance(client:GetPos()) > 96) then
+				if (client:GetShootPos():DistToSqr(item.entity:GetPos()) > 96 * 96) then
+					return
+				end
+
+				local useEntity = client:GetUseEntity()
+				if (IsValid(useEntity) and item.entity != useEntity) then
 					return
 				end
 			elseif (!inventory:GetItemByID(item.id)) then
@@ -707,8 +716,8 @@ do
 			if (character) then
 				local inventory = ix.item.inventories[invID]
 
-				if (!inventory or inventory == nil) then
-					inventory:Sync(client)
+				if (!inventory) then
+					return
 				end
 
 				if ((inventory.owner and inventory.owner == character:GetID()) or inventory:OnCheckAccess(client)) then
@@ -790,7 +799,7 @@ do
 
 					if (item) then
 						NetworkInventoryMove(
-							client, item.invID, item.invID, item:GetID(), item.gridX, item.gridY, item.gridX, item.gridY
+							client, item.invID, item:GetID(), item.gridX, item.gridY, item.gridX, item.gridY
 						)
 					end
 				end

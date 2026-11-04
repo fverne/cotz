@@ -8,23 +8,24 @@ DIALOGUE.addTopic("GREETING", {
 		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"GOODBYE"
+		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"artifactcollect_computer"}, 2)
-		if (SERVER) then
+		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(),
+		-- {"artifactcollect_computer"}, 2)
+		if SERVER then
 			if target:GetNetVar("possibleJobs") == nil then
 				local possibleJobs = {}
-				possibleJobs["any"] = {"artifactcollect_computer"}		
-	
+				possibleJobs["any"] = { "artifactcollect_computer" }
+
 				target:SetNetVar("possibleJobs", possibleJobs)
 			end
 		end
-		
-		if(CLIENT)then
+
+		if CLIENT then
 			surface.PlaySound("buttons/button18.wav")
 		end
-	end
+	end,
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
@@ -33,8 +34,8 @@ DIALOGUE.addTopic("BackgroundTopic", {
 	options = {
 		"BackgroundTopic2",
 	},
-	ShouldAdd = function()
-		return not ix.progression.IsActive("computerDelivery_activateItem")
+	ShouldAdd = function(self, client, target)
+		return not ix.progression.IsActive(client:GetCharacter(), "computerDelivery_activateItem")
 	end,
 })
 
@@ -43,7 +44,7 @@ DIALOGUE.addTopic("BackgroundTopic2", {
 	response = "Temp",
 	options = {
 		"BackgroundTopic3",
-	}
+	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
@@ -51,7 +52,7 @@ DIALOGUE.addTopic("BackgroundTopic3", {
 	response = "Temp",
 	options = {
 		"BackgroundTopic4",
-	}
+	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic4", {
@@ -59,7 +60,7 @@ DIALOGUE.addTopic("BackgroundTopic4", {
 	response = "Temp",
 	options = {
 		"BackTopic",
-	}
+	},
 })
 
 DIALOGUE.addTopic("AboutWorkTopic", {
@@ -67,23 +68,27 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 	response = "",
 	IsDynamic = true,
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
-	ShouldAdd = function()
-		return not ix.progression.IsActive("computerDelivery_activateItem")
+	ShouldAdd = function(self, client, target)
+		return not ix.progression.IsActive(client:GetCharacter(), "computerDelivery_activateItem")
 	end,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
+		local dynamicOptions = {}
 
-		if(client:ixHasJobFromNPC(target:GetDisplayName())) then
+		if client:ixHasJobFromNPC(target:GetDisplayName()) then
 			local jobs = client:GetCharacter():GetJobs()
 
 			-- If it's an item delivery quest
 			local itemuid = ix.jobs.isItemJob(jobs[target:GetDisplayName()].identifier)
 
 			if itemuid and not jobs[target:GetDisplayName()].isCompleted then
-				dynopts = {
-					{statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name), topicID = "AboutWorkTopic", dyndata = {identifier = itemuid}},
+				dynamicOptions = {
+					{
+						statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name),
+						topicID = "AboutWorkTopic",
+						dyndata = { identifier = itemuid },
+					},
 				}
 			end
 		end
@@ -92,42 +97,49 @@ DIALOGUE.addTopic("AboutWorkTopic", {
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
+
+		return dynamicOptions
 	end,
 	preCallback = function(self, client, target)
 		if client:ixHasJobFromNPC(target:GetDisplayName()) then
 			local jobs = client:GetCharacter():GetJobs()
-			if (jobs[target:GetDisplayName()].isCompleted) then
-				if (SERVER) then 
-					ix.dialogue.notifyTaskComplete(client, ix.jobs.getFormattedName(jobs[target:GetDisplayName()]))
-					client:ixJobComplete(target:GetDisplayName()) 
+			if jobs[target:GetDisplayName()].isCompleted then
+				if SERVER then
+					ix.dialogue.notifyTaskComplete(
+						client,
+						ix.jobs.getFormattedName(jobs[target:GetDisplayName()])
+					)
+					client:ixJobComplete(target:GetDisplayName())
 				end
-				if (CLIENT) then 
-					self.response = "** The computer beeps in an accepting manner **." 
+				if CLIENT then
+					self.response = "** The computer beeps in an accepting manner **."
 					surface.PlaySound("buttons/button3.wav") -- OK
 				end
 			else
-				if (CLIENT) then 
-					self.response = string.format("A message appears on the screen saying: '%s'", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) 
+				if CLIENT then
+					self.response = string.format(
+						"A message appears on the screen saying: '%s'",
+						ix.jobs.getFormattedName(jobs[target:GetDisplayName()])
+					)
 					surface.PlaySound("buttons/button18.wav")
 				end
 			end
 		else
-			if (CLIENT) then 
-				self.response = "** The computer beeps in a dismissive fashion **" 
+			if CLIENT then
+				self.response = "** The computer beeps in a dismissive fashion **"
 				surface.PlaySound("buttons/button8.wav") -- ERROR
 			end
 		end
-
 	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
+	ResolveDynamicOption = function(self, client, target, dynamicData)
 		netstream.Start("job_deliveritem", target:GetDisplayName())
 
 		-- Return the next topicID
+
 		return "BackTopic"
 	end,
-	ShouldAdd = function()
-		if (LocalPlayer():GetCharacter():GetJobs()["'Computer'"]) then
+	ShouldAdd = function(self, client, target)
+		if LocalPlayer():GetCharacter():GetJobs()["'Computer'"] then
 			return true
 		end
 	end,
@@ -138,44 +150,46 @@ DIALOGUE.addTopic("ConfirmTask", {
 	response = "",
 	IsDynamicFollowup = true,
 	IsDynamic = true,
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if(dyndata) then
-			if (CLIENT) then
-				self.response = dyndata.description
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		if dynamicData then
+			if CLIENT then
+				self.response = dynamicData.description
 			else
-				target.taskid = dyndata.identifier
+				target.taskid = dynamicData.identifier
 			end
 		end
 	end,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {
-			{statement = "** Press 'Y' **", topicID = "ConfirmTask", dyndata = {accepted = true}},
-			{statement = "** Press 'N' **.", topicID = "ConfirmTask", dyndata = {accepted = false}},
+		local dynamicOptions = {
+			{ statement = "** Press 'Y' **", topicID = "ConfirmTask", dyndata = { accepted = true } },
+			{ statement = "** Press 'N' **.", topicID = "ConfirmTask", dyndata = { accepted = false } },
 		}
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
+
+		return dynamicOptions
 	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		if (SERVER) then
-			if (dyndata.accepted) then
-				if (!ix.jobs.NPCHasJob(target:GetDisplayName(), target.taskid)) then
+	ResolveDynamicOption = function(self, client, target, dynamicData)
+		if SERVER then
+			if dynamicData.accepted then
+				if not ix.jobs.NPCHasJob(target:GetDisplayName(), target.taskid) then
 					client:Notify("Task was taken by somebody else!")
 				else
 					ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
-		
+
 					client:ixJobAdd(target.taskid, target:GetDisplayName())
-		
+
 					ix.jobs.setNPCJobTaken(target:GetDisplayName(), target.taskid)
 				end
 			end
-			
+
 			target.taskid = nil
 		end
-		
+
 		-- Return the next topicID
+
 		return "BackTopic"
 	end,
 })
@@ -184,10 +198,10 @@ DIALOGUE.addTopic("GetTask", {
 	statement = "** Query the computer for work **",
 	response = "** The computer beeps in confirmation **",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
-	ShouldAdd = function()
-		return not ix.progression.IsActive("computerDelivery_activateItem")
+	ShouldAdd = function(self, client, target)
+		return not ix.progression.IsActive(client:GetCharacter(), "computerDelivery_activateItem")
 	end,
 	preCallback = function(self, client, target)
 		if CLIENT then
@@ -201,29 +215,38 @@ DIALOGUE.addTopic("GetTask", {
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
+		local dynamicOptions = {}
 
 		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
 			local jobs = target:GetNetVar("jobs")
 
-			for k,v in pairs(jobs) do
-				table.insert(dynopts, {statement = ix.jobs.getFormattedNameInactive(v), topicID = "GetTask", dyndata = {identifier = v}})
+			for _, v in pairs(jobs) do
+				table.insert(dynamicOptions, {
+					statement = ix.jobs.getFormattedNameInactive(v),
+					topicID = "GetTask",
+					dyndata = { identifier = v },
+				})
 			end
 		end
-		
+
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
 
-		-- Return the next topicID
-		return "ConfirmTask", {description = ix.jobs.getFormattedDescInactive(dyndata.identifier), identifier = dyndata.identifier}
+		return dynamicOptions
 	end,
-	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Computer'"]) then
+	ResolveDynamicOption = function(self, client, target, dynamicData)
+		-- Return the next topicID
+
+		return "ConfirmTask",
+			{
+				description = ix.jobs.getFormattedDescInactive(dynamicData.identifier),
+				identifier = dynamicData.identifier,
+			}
+	end,
+	ShouldAdd = function(self, client, target)
+		if not LocalPlayer():GetCharacter():GetJobs()["'Computer'"] then
 			return true
 		end
 	end,
@@ -233,7 +256,7 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 	statement = "** Query the computer about work **",
 	response = "",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 	preCallback = function(self, client, target)
 		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
@@ -242,36 +265,42 @@ DIALOGUE.addTopic("GetTaskByDifficulty", {
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-		
+		local dynamicOptions = {}
+
 		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			table.insert(dynopts, {statement = "** Press the 'A' button **", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "any"}})
+			table.insert(dynamicOptions, {
+				statement = "** Press the 'A' button **",
+				topicID = "GetTaskByDifficulty",
+				dyndata = { difficulty = "any" },
+			})
 		end
-		
+
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
+
+		return dynamicOptions
 	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		if (SERVER) then
+	ResolveDynamicOption = function(self, client, target, dynamicData)
+		if SERVER then
 			local possibleJobs = target:GetNetVar("possibleJobs")
-			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
+			local jobCategories = table.Random(possibleJobs[dynamicData.difficulty])
 			local jobid = ix.jobs.getJobFromCategory(jobCategories)
 
-			if !client:ixJobAdd(jobid, target:GetDisplayName()) then
-				return "BackTopic", dynopts
+			if not client:ixJobAdd(jobid, target:GetDisplayName()) then
+				return "BackTopic", dynamicOptions
 			end
 			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
 			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
-		end		
+		end
 
 		-- Return the next topicID
-		return "BackTopic", dynopts
+
+		return "BackTopic", dynamicOptions
 	end,
-	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Computer'"]) then
+	ShouldAdd = function(self, client, target)
+		if not LocalPlayer():GetCharacter():GetJobs()["'Computer'"] then
 			return true
 		end
 	end,
@@ -281,60 +310,43 @@ DIALOGUE.addTopic("ViewProgression", {
 	statement = "",
 	response = "",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-
-		local identifier 	= self.tmp
+		local identifier = self.tmp
 		self.tmp = nil
-		local progstatus 	= ix.progression.GetComplexProgressionValue(identifier)
-		local progdef 		= ix.progression.definitions[identifier]
-		if(progdef.fnAddComplexProgression)then
-			local progitems 	= progdef.GetItemIds()
-			local missingitems  = {}
 
-			for progitem,cnt in pairs(progitems) do
-				local curcnt = 0
-				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
-
-				if(curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem))then
-					table.insert(missingitems, progitem)
-				end
-			end
-
-			for _, progitem in pairs(missingitems) do
-				table.insert(dynopts, {statement = "** Insert "..ix.item.list[progitem].name.." **", topicID = "ViewProgression", dyndata = {progid = identifier, itemid = progitem}})
-			end
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
+		return ix.progression.GetDeliveryOptions(client:GetCharacter(), identifier)
 	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-
+	ResolveDynamicOption = function(self, client, target, dynamicData)
 		-- Return the next topicID
-		return "HandInComplexProgressionItemTopic", dyndata
+
+		return "HandInComplexProgressionItemTopic", dynamicData
 	end,
 
 	IsDynamicFollowup = true,
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata) then
-			if(CLIENT)then
-				local progdef 		= ix.progression.definitions[dyndata.identifier]
-				local progstatus 	= ix.progression.status[dyndata.identifier]
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		if dynamicData then
+			if CLIENT then
+				local definition = ix.progression.definitions[dynamicData.identifier]
+				local progressionStatus =
+					ix.progression.GetLine(player:GetCharacter(), dynamicData.identifier)
 
-				if progdef.fnAddComplexProgression then
-					progstatus = ix.progression.GetComplexProgressionValue(dyndata.identifier)
+				if definition.requirementSlots then
+					progressionStatus = ix.progression.GetComplexProgressionValue(
+						player:GetCharacter(),
+						dynamicData.identifier
+					)
 				end
 
-				self.response = progdef:BuildResponse(progdef, progstatus)
-				self.tmp = dyndata.identifier
+				self.response = ix.progression.DescribeTask(definition,
+					target:GetDisplayName(),
+					progressionStatus,
+					player:GetCharacter()
+				)
+				self.tmp = dynamicData.identifier
 			end
 		end
 	end,
@@ -344,97 +356,55 @@ DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
 	statement = "",
 	response = "",
 	IsDynamicFollowup = true,
-	options = {
-		"BackTopic"
-	},
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata) then
-			if(CLIENT)then
-				if dyndata.itemid == "quest_computeraccess" then
-					self.response = "** The computer beeps as the component is inserted. **"
-					surface.PlaySound("buttons/button18.wav")
-				else
-					self.response = string.format("** The computer whirrs as the %s turns on. **", ix.item.list[dyndata.itemid].name)
-				end
-			else
-				if ix.progression.IsActive(dyndata.progid) then
-					
-					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
-
-					local dat = ix.progression.status[dyndata.progid].complexData
-					dat = dat or {}
-					local amtcur = dat[dyndata.itemid] or 0
-
-					local reqitems = ix.progression.GetComplexProgressionReqs(dyndata.progid)
-					local amtreq = reqitems[dyndata.itemid]
-
-					local amtneed = amtreq - amtcur
-
-					if(item)then
-						local amtavailable = item:GetData("quantity", item.quantity or 1)
-						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
-
-						--Adds reward
-						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
-						player:addReputation(repReward)
-						ix.dialogue.notifyReputationReceive(player, repReward)
-						player:GetCharacter():GiveMoney(monReward)
-						ix.dialogue.notifyMoneyReceive(player, monReward)
-						
-						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
-						
-						if(item:GetData("quantity", 0) < 1)then
-							item:Remove()
-						end
-
-						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
-					end
-				end
-			end	
-		end
+	options = { "BackTopic" },
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		ix.dialogue.ProgressionTurnIn(self, player, target, dynamicData)
 	end,
-} )
+})
 
 DIALOGUE.addTopic("AboutProgression", {
 	statement = "** Inspect the screen **",
 	response = "** The computer shows a list on the screen **",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 	preCallback = function(self, client, target)
-		if( CLIENT ) then
-			if #ix.progression.GetActiveProgressions("'Computer'") <= 0 then
+		if CLIENT then
+			if #ix.progression.GetActiveProgressions(client:GetCharacter(), "'Computer'") <= 0 then
 				self.response = "** The computer shows a blank screen**"
 			end
-
-			net.Start("progression_sync")
-			net.SendToServer()
 		end
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
+		local dynamicOptions = {}
 
-		for _, progid in pairs(ix.progression.GetActiveProgressions("'Computer'")) do
-			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
+		for _, progressionID in
+			pairs(ix.progression.GetActiveProgressions(client:GetCharacter(), "'Computer'"))
+		do
+			table.insert(dynamicOptions, {
+				statement = ix.progression.definitions[progressionID].name,
+				topicID = "AboutProgression",
+				dyndata = { identifier = progressionID },
+			})
 		end
 
 		-- Return table of options
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
 
-		-- Return the next topicID
-		return "ViewProgression", dyndata
+		return dynamicOptions
 	end,
-	ShouldAdd = function()
-		return #ix.progression.GetActiveProgressions("'Computer'") > 0
+	ResolveDynamicOption = function(self, client, target, dynamicData)
+		-- Return the next topicID
+
+		return "ViewProgression", dynamicData
+	end,
+	ShouldAdd = function(self, client, target)
+		return #ix.progression.GetActiveProgressions(client:GetCharacter(), "'Computer'") > 0
 	end,
 })
-
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "** Press 'Q' **",
@@ -445,14 +415,20 @@ DIALOGUE.addTopic("BackTopic", {
 		-- "GetTask",
 		"GetTaskByDifficulty",
 		"AboutProgression",
-		"GOODBYE"
+		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
-		netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"artifactcollect_computer"}, 2)
+		netstream.Start(
+			"job_updatenpcjobs",
+			target,
+			target:GetDisplayName(),
+			{ "artifactcollect_computer" },
+			2
+		)
 		if CLIENT then
 			surface.PlaySound("buttons/button18.wav")
 		end
-	end
+	end,
 })
 
 DIALOGUE.addTopic("GOODBYE", {
@@ -462,6 +438,5 @@ DIALOGUE.addTopic("GOODBYE", {
 		if CLIENT then
 			surface.PlaySound("buttons/button18.wav")
 		end
-	end
+	end,
 })
-

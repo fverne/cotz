@@ -42,17 +42,7 @@ GM.Author = "nebulous.cloud"
 GM.Website = "https://nebulous.cloud"
 GM.Version = "β"
 
--- Fix for client:SteamID64() returning nil when in single-player.
 do
-	local playerMeta = FindMetaTable("Player")
-	playerMeta.ixSteamID64 = playerMeta.ixSteamID64 or playerMeta.SteamID64
-
-	-- Overwrite the normal SteamID64 method.
-	function playerMeta:SteamID64()
-		-- Return 0 if the SteamID64 could not be found.
-		return self:ixSteamID64() or 0
-	end
-
 	-- luacheck: globals player_manager
 	player_manager.ixTranslateModel = player_manager.ixTranslateModel or player_manager.TranslateToPlayerModelName
 
@@ -127,9 +117,9 @@ function GM:OnReloaded()
 		for index, faction in ipairs(ix.faction.indices) do
 			for _, v in ipairs(team.GetPlayers(index)) do
 				if (faction.pay and faction.pay > 0) then
-					timer.Adjust("ixSalary"..v:UniqueID(), faction.payTime or 300, 0)
+					timer.Adjust("ixSalary"..v:SteamID64(), faction.payTime or 300, 0)
 				else
-					timer.Remove("ixSalary"..v:UniqueID())
+					timer.Remove("ixSalary"..v:SteamID64())
 				end
 			end
 		end

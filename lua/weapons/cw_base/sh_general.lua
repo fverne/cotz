@@ -894,7 +894,9 @@ if CLIENT then
 			return self.Owner:EyeAngles()
 		end
 
-		return self:getMuzzlePosition().Ang
+		local muzzle = self:getMuzzlePosition()
+
+		return muzzle and muzzle.Ang or self.Owner:EyeAngles()
 	end
 
 	function SWEP:getLaserAngles(model)

@@ -108,9 +108,31 @@ ITEM:Hook("drop", function(item)
 	item:UnEquip(item.player)
 end)
 
+ITEM.functions.TogglePower = {
+	name = "Toggle Power",
+	icon = "icon16/lightbulb.png",
+	OnRun = function(item)
+		if not item.functions.TogglePower.OnCanRun(item) then return false end
+		local client = item.player
+		if (client.cotzDeviceNextToggle or 0) > CurTime() then return false end
+		client.cotzDeviceNextToggle = CurTime() + 0.25
+		item:SetData("powered", not item:GetData("powered", true))
+		item:OnLoadout()
+		client:Notify(item:GetName() .. (item:GetData("powered", true) and " switched on." or " switched off."))
+
+		return false
+	end,
+	OnCanRun = function(item)
+		local client = item.player
+		local character = IsValid(client) and client:GetCharacter()
+
+		return character and client:Alive() and not IsValid(item.entity) and item:GetData("equip") == true
+			and item.invID == character:GetInventory():GetID()
+	end,
+}
+
 function ITEM:OnLoadout()
-	if self:GetData("equip", false) then
-		self.player:SetNetVar("ixhasgeiger", true)
-		self.player:SetData("ixhasgeiger", true)
-	end
+	local enabled = self:GetData("equip", false) and self:GetData("powered", true)
+	self.player:SetNetVar("ixhasgeiger", enabled)
+	self.player:SetData("ixhasgeiger", enabled)
 end

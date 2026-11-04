@@ -1,4 +1,8 @@
 function Schema:BuildBusinessMenu(panel)
+	if not ix.config.Get("allowBusiness", true) then
+		return false
+	end
+
 	local bHasItems = false
 
 	for k, _ in pairs(ix.item.list) do

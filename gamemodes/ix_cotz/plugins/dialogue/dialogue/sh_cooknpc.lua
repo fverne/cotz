@@ -1,426 +1,91 @@
-DIALOGUE.name = "Cook NPC"
+DIALOGUE.name = "Spicy Lemon"
+DIALOGUE.townContact = "spicy-lemon"
+
+ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Always - You looking for a good meal?")
 
 DIALOGUE.addTopic("GREETING", {
-	response = "What's up?",
+	response = "What's up? If you're hungry, say so. If you've come to tell me how to cook, take a number.",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
-		"BackgroundTopic",
-		--"InterestTopic",
-		"AboutWorkTopic",
-		-- "GetTask",
-		"GetTaskByDifficulty",
-		"AboutProgression",
 		"StartBarter",
-		"GOODBYE"
+		"BackgroundTopic",
+		"GOODBYE",
+		"AboutWorkTopic",
+		"TownProgression",
+		"GetTaskByDifficulty",
 	},
-	preCallback = function(self, client, target)
-		-- netstream.Start("job_updatenpcjobs", target, target:GetDisplayName(), {"mutantmeateasy", "mutantkillgroupeasy", "mutantmeatmedium"}, 4)
-		
-		if (SERVER) then
-			if target:GetNetVar("possibleJobs") == nil then
-				local possibleJobs = {}
-				possibleJobs["easy"] = {"item_meal_NPC_easy"} -- TODO: Make sure these are updated
-				possibleJobs["medium"] = {"item_meal_NPC_medium"}
-				possibleJobs["hard"] = {"item_meal_NPC_hard"}			
-	
-				target:SetNetVar("possibleJobs", possibleJobs)
-			end
-		end
-	end
-})
-
-DIALOGUE.addTopic("TradeTopic", {
-	statement = "Want to trade?",
-	response = "Always - You looking for a good meal?",
-	postCallback = function(self, client, target)
-		if (SERVER) then
-			local character = client:GetCharacter()
-
-			target.receivers[#target.receivers + 1] = client
-
-			local items = {}
-
-			-- Only send what is needed.
-			for k, v in pairs(target.items) do
-				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					items[k] = v
-				end
-			end
-
-			target.scale = target.scale or 0.5
-
-			client.ixVendorAdv = target
-
-			-- force sync to prevent outdated inventories while buying/selling
-			if (character) then
-				character:GetInventory():Sync(client, true)
-			end
-
-			net.Start("ixVendorAdvOpen")
-				net.WriteEntity(target)
-				net.WriteUInt(target.money or 0, 16)
-				net.WriteTable(items)
-				net.WriteFloat(target.scale or 0.5)
-			net.Send(client)
-
-			ix.log.Add(client, "vendorUse", target:GetDisplayName())
-		end
-	end,
-	options = {
-		"BackTopic",
-	}
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Tell me about yourself.",
-	response = "Not a whole lot to say - I came here after consolidating with 'Old Timer', as you know him as. We met each other in a city nearby, back in the eighties, under different circumstances than these. I worked at a volunteer at a homeless shelter and... Well maybe the old guy will open up about it at some point. Let's just say we have different reasons for being here. ",
+	statement = "How long have you known Old Timer?",
+	response = (
+		"Since before either of us had these magnificent names. Eighties, a shelter kitchen, a lot of people "
+		.. "wanting something warm. I volunteered. Yes, me. You needn't look for a second Lemon. He had his own "
+		.. "difficulties; he can tell you those if he wants. We stayed in touch. When I started hearing about "
+		.. "this place, he was someone I could ask who might actually have seen what he was describing. That "
+		.. "counts for something, even if he still thinks seasoning means opening a tin beside a fire."
+	),
 	options = {
 		"BackgroundTopic2",
-	}
+	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Well, what's your reason?",
-	response = "Things didn't work out back home. I was led by temptations and my wife didn't take so kindly. But who cares, she was kind of on the big side anyways and didn't want to cook for me. Who would have believed, I had to cook by myself! It's her own fault and was definitely something she had coming. Stupid bitch.",
+	statement = "Why did you leave home?",
+	response = (
+		"I had a wife, a job, people who expected me at certain times. I became difficult to expect. There "
+		.. "was always somewhere else I wanted to be, and I generally found a reason why that was somebody "
+		.. "else's fault. She had plenty to say about it. Some of it was even fair. Don't look so pleased; you "
+		.. "haven't heard my side."
+	),
 	options = {
 		"BackgroundTopic3",
-	}
+	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Right... What made you come here, of all places?",
-	response = "Well, I heard about the artifacts of course, from good oldie! And I met some crazy people through my volunteer work who are interested in astrology or whatever it's called, they want to pay a big extra for whatever supernatural elements I can get out of here. Apparently they have sources who pay big. I don't care if you believe it, just trust the cash when it flows in, alright?",
+	statement = "What is your side?",
+	response = (
+		"Considerably longer. Usually improves after a drink. Look, I heard about artifacts, knew people "
+		.. "willing to pay for things they hadn't seen, and knew Old Timer. It sounded like a fresh start with "
+		.. "money attached. I didn't arrive dreaming of feeding everybody. That's what I found I could do here. "
+		.. "Want food, or are you planning to spend the afternoon enjoying my personal failures?"
+	),
 	options = {
 		"BackgroundTopic4",
-	}
+	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "I'll keep that in mind.",
-	response = "You're always welcome to trade here. And remember - I do the best meals in town!",
+	statement = "Let's leave it there.",
+	response = "Good. I can give a much more convincing account of what's in the pot.",
 	options = {
 		"BackTopic",
-	}
+	},
 })
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "Can you tell me something interesting?",
-	response = "Not really, no.",
+	statement = "What do you like cooking?",
+	response = (
+		"Something people sit down to eat. A meal they stop walking for. You spend all that time getting it "
+		.. "right and somebody wants to shovel it into a tin and leave. Sit down! Let it cool enough to taste. "
+		.. "And if you like it, say so before telling me how your mother would have made it."
+	),
 	options = {
 		"BackTopic",
-	}
-})
-
-DIALOGUE.addTopic("AboutWorkTopic", {
-	statement = "About work...",
-	response = "",
-	IsDynamic = true,
-	options = {
-		"BackTopic"
 	},
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-
-		if(client:ixHasJobFromNPC(target:GetDisplayName())) then
-			local jobs = client:GetCharacter():GetJobs()
-
-			-- If it's an item delivery quest
-			local itemuid = ix.jobs.isItemJob(jobs[target:GetDisplayName()].identifier)
-
-			if itemuid and not jobs[target:GetDisplayName()].isCompleted then
-				dynopts = {
-					{statement = string.format("Hand over 1 %s", ix.item.list[itemuid].name), topicID = "AboutWorkTopic", dyndata = {identifier = itemuid}},
-				}
-			end
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC(target:GetDisplayName()) then
-			local jobs = client:GetCharacter():GetJobs()
-			if (jobs[target:GetDisplayName()].isCompleted) then
-				if (SERVER) then 
-					ix.dialogue.notifyTaskComplete(client, ix.jobs.getFormattedName(jobs[target:GetDisplayName()]))
-					client:ixJobComplete(target:GetDisplayName()) 
-				end
-				if (CLIENT) then self.response = "Very nice! This is for you, for your efforts." end
-			else
-				if (CLIENT) then self.response = string.format("Have you finished %s yet?", ix.jobs.getFormattedName(jobs[target:GetDisplayName()])) end
-			end
-		else
-			if (CLIENT) then self.response = "Uhh... I haven't talked to you about any tasks?" end
-		end
-
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		netstream.Start("job_deliveritem", target:GetDisplayName())
-
-		-- Return the next topicID
-		return "BackTopic"
-	end,
-	ShouldAdd = function()
-		if (LocalPlayer():GetCharacter():GetJobs()["'Spicy Lemon'"]) then
-			return true
-		end
-	end,
-})
-
-DIALOGUE.addTopic("ConfirmTask", {
-	statement = "",
-	response = "",
-	IsDynamicFollowup = true,
-	IsDynamic = true,
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if(dyndata) then
-			if (CLIENT) then
-				self.response = dyndata.description
-			else
-				target.taskid = dyndata.identifier
-			end
-		end
-	end,
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {
-			{statement = "I'll take it", topicID = "ConfirmTask", dyndata = {accepted = true}},
-			{statement = "I'll pass", topicID = "ConfirmTask", dyndata = {accepted = false}},
-		}
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		if (SERVER) then
-			if (dyndata.accepted) then
-				if (!ix.jobs.NPCHasJob(target:GetDisplayName(), target.taskid)) then
-					client:Notify("Task was taken by somebody else!")
-				else
-					ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(target.taskid))
-		
-					client:ixJobAdd(target.taskid, target:GetDisplayName())
-		
-					ix.jobs.setNPCJobTaken(target:GetDisplayName(), target.taskid)
-				end
-			end
-			
-			target.taskid = nil
-		end
-		
-		-- Return the next topicID
-		return "BackTopic"
-	end,
-})
-
-DIALOGUE.addTopic("GetTask", {
-	statement = "Do you have any work for me?",
-	response = "I do, actually. Check this out.",
-	options = {
-		"BackTopic"
-	},
-	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-			self.response = "You already have a task, which isn't completed yet..."
-		end
-	end,
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-
-		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			local jobs = target:GetNetVar("jobs")
-
-			for k,v in pairs(jobs) do
-				table.insert(dynopts, {statement = ix.jobs.getFormattedNameInactive(v), topicID = "GetTask", dyndata = {identifier = v}})
-			end
-		end
-		
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-
-		-- Return the next topicID
-		return "ConfirmTask", {description = ix.jobs.getFormattedDescInactive(dyndata.identifier), identifier = dyndata.identifier}
-	end,
-	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Spicy Lemon'"]) then
-			return true
-		end
-	end,
-})
-
-DIALOGUE.addTopic("GetTaskByDifficulty", {
-	statement = "Do you have any work for me?",
-	response = "I do actually, what difficulty task are you looking for?.",
-	options = {
-		"BackTopic"
-	},
-	preCallback = function(self, client, target)
-		if client:ixHasJobFromNPC(target:GetDisplayName()) and CLIENT then
-			self.response = "I already gave you some work."
-		end
-	end,
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-		
-		if not client:ixHasJobFromNPC(target:GetDisplayName()) then
-			table.insert(dynopts, {statement = "A trivial task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "easy"}})
-			table.insert(dynopts, {statement = "A challenging task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "medium"}})
-			table.insert(dynopts, {statement = "A hard task.", topicID = "GetTaskByDifficulty", dyndata = {difficulty = "hard"}})
-		end
-		
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-		if (SERVER) then
-			local possibleJobs = target:GetNetVar("possibleJobs")
-			local jobCategories = table.Random(possibleJobs[dyndata.difficulty])
-			local jobid = ix.jobs.getJobFromCategory(jobCategories)
-
-			if !client:ixJobAdd(jobid, target:GetDisplayName()) then
-				return "BackTopic", dynopts
-			end
-			ix.dialogue.notifyTaskGet(client, ix.jobs.getFormattedNameInactive(jobid))
-			ix.jobs.setNPCJobTaken(target:GetDisplayName(), jobid)
-		end		
-
-		-- Return the next topicID
-		return "BackTopic", dynopts
-	end,
-	ShouldAdd = function()
-		if (!LocalPlayer():GetCharacter():GetJobs()["'Spicy Lemon'"]) then
-			return true
-		end
-	end,
-})
-
-DIALOGUE.addTopic("ViewProgression", {
-	statement = "",
-	response = "",
-	options = {
-		"BackTopic"
-	},
-
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-
-		--disgusting
-		--local identifier = player:GetCharacter():GetData("curdialogprog")
-		local identifier 	= self.tmp
-		self.tmp = nil
-		local progstatus 	= ix.progression.GetComplexProgressionValue(identifier)
-		local progdef 		= ix.progression.definitions[identifier]
-		if(progdef.fnAddComplexProgression)then
-			local progitems 	= progdef.GetItemIds()
-			local missingitems  = {}
-
-			for progitem,cnt in pairs(progitems) do
-				local curcnt = 0
-				if(progstatus and progstatus[progitem]) then curcnt = progstatus[progitem] end
-
-				if(curcnt < cnt and client:GetCharacter():GetInventory():HasItem(progitem))then
-					table.insert(missingitems, progitem)
-				end
-			end
-
-			for _, progitem in pairs(missingitems) do
-				table.insert(dynopts, {statement = "Hand over "..ix.item.list[progitem].name, topicID = "ViewProgression", dyndata = {progid = identifier, itemid = progitem}})
-			end
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-
-		-- Return the next topicID
-		return "HandInComplexProgressionItemTopic", dyndata
-	end,
-
-	IsDynamicFollowup = true,
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata) then
-			if(CLIENT)then
-				local progdef 		= ix.progression.definitions[dyndata.identifier]
-				local progstatus 	= ix.progression.status[dyndata.identifier]
-
-				if progdef.fnAddComplexProgression then
-					progstatus = ix.progression.GetComplexProgressionValue(dyndata.identifier)
-				end
-
-				self.response = progdef:BuildResponse(progdef, progstatus)
-				self.tmp = dyndata.identifier
-			end
-		end
-	end,
-})
-DIALOGUE.addTopic("AboutProgression", {
-	statement = "Do you need help with anything?",
-	response = "I have a few things I need done.",
-	options = {
-		"BackTopic"
-	},
-	preCallback = function(self, client, target)
-		if( CLIENT ) then
-			if #ix.progression.GetActiveProgressions("'Spicy Lemon'") <= 0 then
-				self.response = "Nothing at the moment."
-			end
-
-			net.Start("progression_sync")
-			net.SendToServer()
-		end
-	end,
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
-
-		for _, progid in pairs(ix.progression.GetActiveProgressions("'Spicy Lemon'")) do
-			table.insert(dynopts, {statement = ix.progression.definitions[progid].name, topicID = "AboutProgression", dyndata = {identifier = progid}})
-		end
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
-
-		-- Return the next topicID
-		return "ViewProgression", dyndata
-	end,
-	ShouldAdd = function()
-		return #ix.progression.GetActiveProgressions("'Spicy Lemon'") > 0
-	end,
 })
 
 DIALOGUE.addTopic("StartBarter", {
 	statement = "I'd like to do some bartering.",
 	response = "Sure.",
 	options = {
-		"BackTopic"
+		"BackTopic",
 	},
 	preCallback = function(self, client, target)
-		if( CLIENT ) then
-			local barters = ix.npcbarter.GetActiveBartersForNPC("'Spicy Lemon'")
+		if CLIENT then
+			local barters = ix.npcbarter.GetActiveBartersForNPC(client:GetCharacter(), "'Spicy Lemon'")
 
 			if #barters <= 0 then
 				self.response = "Nothing at the moment."
@@ -432,27 +97,44 @@ DIALOGUE.addTopic("StartBarter", {
 
 				for _, barter in pairs(barters) do
 					local barterTable = ix.npcbarter.barterdict["'Spicy Lemon'"][barter]
-					self.response = self.response.."\n    "..string.format(barterTable.description, ix.item.list[barterTable.barterItem[1]].name, barterTable.reqItem[2], ix.item.list[barterTable.reqItem[1]].name)
+					self.response = self.response
+						.. "\n    "
+						.. string.format(
+							barterTable.description,
+							ix.item.list[barterTable.barterItem[1]].name,
+							barterTable.reqItem[2],
+							ix.item.list[barterTable.reqItem[1]].name
+						)
 				end
 			end
-
 		end
 	end,
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)
-		local dynopts = {}
+		local dynamicOptions = {}
 
-		for _, barterid in pairs(ix.npcbarter.GetActiveBartersForNPC("'Spicy Lemon'")) do
+		for _, barterid in pairs(ix.npcbarter.GetActiveBartersForNPC(client:GetCharacter(), "'Spicy Lemon'")) do
 			local barterstruct = ix.npcbarter.barterdict["'Spicy Lemon'"][barterid]
 
 			local barterItem = barterstruct.barterItem
 			local barterCnt = barterItem[2] or 1
 
 			-- for _, reqitem in pairs(barterstruct.reqItem) do
-				local reqitem = barterstruct.reqItem
-				local reqItemCnt = reqitem[2] or 1
+			local reqitem = barterstruct.reqItem
+			local reqItemCnt = reqitem[2] or 1
 
-				table.insert(dynopts, {statement = "I'd like "..barterCnt.."x "..ix.item.list[barterItem[1]].name.." for my "..reqItemCnt.."x "..ix.item.list[reqitem[1]].name, topicID = "StartBarter", dyndata = {npcname = "'Spicy Lemon'", identifier = barterid, reqitem = reqitem[1]}})
+			table.insert(dynamicOptions, {
+				statement = "I'd like "
+					.. barterCnt
+					.. "x "
+					.. ix.item.list[barterItem[1]].name
+					.. " for my "
+					.. reqItemCnt
+					.. "x "
+					.. ix.item.list[reqitem[1]].name,
+				topicID = "StartBarter",
+				dyndata = { npcname = "'Spicy Lemon'", identifier = barterid, reqitem = reqitem[1] },
+			})
 			-- end
 		end
 
@@ -460,89 +142,60 @@ DIALOGUE.addTopic("StartBarter", {
 		-- statement : String shown to player
 		-- topicID : should be identical to addTopic id
 		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-		return dynopts
-	end,
-	ResolveDynamicOption = function(self, client, target, dyndata)
 
+		return dynamicOptions
+	end,
+	ResolveDynamicOption = function(self, client, target, dynamicData)
 		if CLIENT then
-			ix.npcbarter.TryExecuteBarter(dyndata.npcname, dyndata.identifier, dyndata.reqitem)
+			ix.npcbarter.TryExecuteBarter(dynamicData.npcname, dynamicData.identifier, dynamicData.reqitem)
 		end
 
 		-- Return the next topicID
-		return "BackTopic", dyndata
+
+		return "BackTopic", dynamicData
 	end,
 })
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Let's talk about something else...",
-	response = "Very nice...",
+	response = "What else did you want to discuss?",
 	options = {
+		"SpecialtyTopic",
 		"TradeTopic",
-		"BackgroundTopic",
-		--"InterestTopic",
-		"AboutWorkTopic",
-		-- "GetTask",
-		"GetTaskByDifficulty",
-		"AboutProgression",
 		"StartBarter",
-		"GOODBYE"
+		"BackgroundTopic",
+		"GOODBYE",
+		"AboutWorkTopic",
+		"TownProgression",
+		"GetTaskByDifficulty",
 	},
-	preCallback = function(self, client, target)
-
-	end
+	preCallback = function(self, client, target) end,
 })
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "See you around.",
-	response = "See you soon..."
+	response = "See you. Bring the bowl back if you've borrowed one.",
 })
 
-DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
-	statement = "",
-	response = "",
-	IsDynamicFollowup = true,
-	options = {
-		"BackTopic"
-	},
-	DynamicPreCallback = function(self, player, target, dyndata)
-		if (dyndata) then
-			if(CLIENT)then
-				self.response = string.format("%s? I can work with that.", ix.item.list[dyndata.itemid].name)
-			else
-				if ix.progression.IsActive(dyndata.progid) then
-					
-					local item = player:GetCharacter():GetInventory():HasItem(dyndata.itemid)
+DIALOGUE.addTopic("SpecialtyTopic", {
+	statement = "Why do you keep cooking for everyone?",
+	response = (
+		"Because I'm good at it, and people will pay for something they actually want to eat. I didn't come "
+		.. "here to run a charity. Still, you put a pot on and find yourself remembering who can't chew the "
+		.. "tough bits, who'll arrive late, who says they aren't hungry and then watches everyone else's bowl. "
+		.. "Old habits, perhaps. If I make a little extra, that's my decision. It doesn't mean everyone gets to "
+		.. "start explaining what a generous fellow I am."
+	),
+	options = {"InterestTownFollowup", "BackTopic"},
+})
 
-					local dat = ix.progression.status[dyndata.progid].complexData
-					dat = dat or {}
-					local amtcur = dat[dyndata.itemid] or 0
-
-					local reqitems = ix.progression.GetComplexProgressionReqs(dyndata.progid)
-					local amtreq = reqitems[dyndata.itemid]
-
-					local amtneed = amtreq - amtcur
-
-					if(item)then
-						local amtavailable = item:GetData("quantity", item.quantity or 1)
-						local amtfinal = amtavailable >= amtneed and amtneed or amtavailable
-
-						--Adds reward
-						repReward, monReward = ix.util.GetValueFromProgressionTurnin(item, amtfinal)
-						player:addReputation(repReward)
-						ix.dialogue.notifyReputationReceive(player, repReward)
-						player:GetCharacter():GiveMoney(monReward)
-						ix.dialogue.notifyMoneyReceive(player, monReward)
-						
-						item:SetData("quantity", item:GetData("quantity",0) - amtfinal)
-						
-						if(item:GetData("quantity", 0) < 1)then
-							item:Remove()
-						end
-
-						ix.progression.AddComplexProgressionValue(dyndata.progid, {dyndata.itemid, amtfinal}, player:Name())
-					end
-				end
-			end	
-		end
-	end,
-} )
+DIALOGUE.addTopic("InterestTownFollowup", {
+	statement = "You notice who misses a meal?",
+	response = (
+		"I notice what's left in the pot. Old Timer gets distracted. Jitters says he'll eat after the next "
+		.. "patient, which is a fine plan if nobody ever gets hurt again. I put something aside. They can "
+		.. "collect it or I can complain until they do. Don't make a touching story out of it. I also notice "
+		.. "who brings the bowl back dirty."
+	),
+	options = {"BackTopic"},
+})

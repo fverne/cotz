@@ -1,0 +1,6287 @@
+{
+  "bossItemDelivery_1": {
+    "slots": [
+      {
+        "pool": "common_parts",
+        "quantity": 6.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "bossItemDelivery_2"
+    ],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "suit_io7a",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "bossItemDelivery_2": {
+    "slots": [
+      {
+        "pool": "small_parts",
+        "quantity": 10.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 12.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "bossItemDelivery_3"
+    ],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "suit_ps5m",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "bossItemDelivery_3": {
+    "slots": [
+      {
+        "pool": "rare_parts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "common_meat",
+        "quantity": 13.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "bossItemDelivery_4"
+    ],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "suit_berill",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "bossItemDelivery_4": {
+    "slots": [
+      {
+        "pool": "exotic_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 6.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "common_meat",
+        "quantity": 13.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "bossItemDelivery_5"
+    ],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "suit_skat10",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "bossItemDelivery_5": {
+    "slots": [
+      {
+        "pool": "elite_parts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "chimera_part",
+        "quantity": 5.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 6.0
+      },
+      {
+        "pool": "common_meat",
+        "quantity": 15.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "bossItemDelivery_6"
+    ],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "suit_skat9",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "bossItemDelivery_6": {
+    "slots": [
+      {
+        "pool": "brains",
+        "quantity": 2.0
+      },
+      {
+        "pool": "elite_parts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "rare_parts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "common_meat",
+        "quantity": 16.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 3.0
+      },
+      {
+        "pool": "predator_hides",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "bossItemDelivery_7"
+    ],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "suit_radsuit",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Boss'",
+        [
+          "headwear_rad",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "bossItemDelivery_7": {
+    "slots": [
+      {
+        "pool": "elite_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "hellhound_part",
+        "quantity": 12.0
+      },
+      {
+        "pool": "brains",
+        "quantity": 2.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "common_meat",
+        "quantity": 18.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 3.0
+      },
+      {
+        "pool": "predator_hides",
+        "quantity": 2.0
+      },
+      {
+        "pool": "elite_hides",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "suit_exoskeleton",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Boss'",
+        [
+          "headwear_spartan",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "cleanerItemDelivery_Storage": {
+    "slots": [
+      {
+        "pool": "common_artifacts",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Cleaner'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": []
+  },
+  "oldTimerKillIntro": {
+    "slots": [],
+    "thresholds": [
+      1.0
+    ],
+    "next": [
+      "oldTimerItemDelivery_mainMeat"
+    ],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": "",
+    "vendor": []
+  },
+  "oldTimerItemDelivery_mainMeat": {
+    "slots": [
+      {
+        "pool": "common_meat",
+        "quantity": 8.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Main"
+    ],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": []
+  },
+  "technutItemDelivery_Main": {
+    "slots": [
+      {
+        "pool": "repair_electrical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "heavy_electrical_map1",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "oldTimerItemDelivery_mainStatue"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "steelplate_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          3.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "ceramicplate_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          3.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "fabricplate_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          3.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "oldTimerItemDelivery_mainStatue": {
+    "slots": [
+      {
+        "pool": "statues",
+        "quantity": 1.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "stalkerNetAdminDelivery_mainRadioTower"
+    ],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": []
+  },
+  "stalkerNetAdminDelivery_mainRadioTower": {
+    "slots": [
+      {
+        "pool": "consumer_electronics",
+        "quantity": 1.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "heavy_electrical_map1",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Mute'",
+        [
+          "quest_flashdrive",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          3.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quarterMasterDelivery_activateItem": {
+    "slots": [
+      {
+        "pool": "flashdrive",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quarterMasterDelivery_main",
+      "quartermasterItemDelivery_1",
+      "quartermasterItemDelivery_2",
+      "bossItemDelivery_1"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": []
+  },
+  "quarterMasterDelivery_main": {
+    "slots": [
+      {
+        "pool": "spirits",
+        "quantity": 1.0
+      },
+      {
+        "pool": "premium_cigarettes",
+        "quantity": 1.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "boss_dataTasks"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": []
+  },
+  "boss_dataTasks": {
+    "slots": [],
+    "thresholds": [
+      4.0
+    ],
+    "next": [
+      "smartass_rfTasks"
+    ],
+    "npc": "'Boss'",
+    "map": "rp_waystation",
+    "ceiling": "",
+    "vendor": []
+  },
+  "smartass_rfTasks": {
+    "slots": [],
+    "thresholds": [
+      5.0
+    ],
+    "next": [],
+    "npc": "'Smartass'",
+    "map": "rp_waystation",
+    "ceiling": "",
+    "vendor": [
+      [
+        "'Boss'",
+        [
+          "accesscard_bunker",
+          null,
+          5.0,
+          "SELLANDBUY",
+          5.0,
+          1.0,
+          5.0
+        ]
+      ]
+    ]
+  },
+  "beanstalkItemDelivery_Documents": {
+    "slots": [
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_field",
+        "quantity": 4.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "eggheadItemDelivery_artifacts"
+    ],
+    "npc": "'Beanstalk'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": []
+  },
+  "eggheadItemDelivery_artifacts": {
+    "slots": [
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "burner_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 6.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "intern_gasAnalyzerReadings"
+    ],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": []
+  },
+  "intern_gasAnalyzerReadings": {
+    "slots": [],
+    "thresholds": [
+      17.0
+    ],
+    "next": [],
+    "npc": "'Intern'",
+    "map": "rp_marsh_cs",
+    "ceiling": "",
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "quest_computeraccess",
+          null,
+          5.0,
+          "SELLANDBUY",
+          5.0,
+          1.0,
+          5.0
+        ]
+      ],
+      [
+        "'Egghead'",
+        [
+          "accesscard_laboratory",
+          null,
+          5.0,
+          "SELLANDBUY",
+          5.0,
+          1.0,
+          5.0
+        ]
+      ]
+    ]
+  },
+  "computerDelivery_activateItem": {
+    "slots": [
+      {
+        "pool": "computer_case",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "computerDelivery_main"
+    ],
+    "npc": "'Computer'",
+    "map": "rp_pripyat_remaster",
+    "ceiling": 3.0,
+    "vendor": []
+  },
+  "computerDelivery_main": {
+    "slots": [
+      {
+        "pool": "radio_components",
+        "quantity": 1.0
+      },
+      {
+        "pool": "heavy_components",
+        "quantity": 1.0
+      },
+      {
+        "pool": "fuel",
+        "quantity": 1.0
+      },
+      {
+        "pool": "computer_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 3.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "computer_artifactTasks"
+    ],
+    "npc": "'Computer'",
+    "map": "rp_pripyat_remaster",
+    "ceiling": 3.0,
+    "vendor": []
+  },
+  "computer_artifactTasks": {
+    "slots": [],
+    "thresholds": [
+      14.0
+    ],
+    "next": [],
+    "npc": "'Computer'",
+    "map": "rp_pripyat_remaster",
+    "ceiling": "",
+    "vendor": []
+  },
+  "eggheadItemDelivery_Detector1": {
+    "slots": [
+      {
+        "pool": "common_artifacts",
+        "quantity": 21.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "eggheadItemDelivery_Detector2",
+      "eggheadItemDelivery_Suit1",
+      "eggheadItemDelivery_Aid1"
+    ],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "detectorecho",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Detector2": {
+    "slots": [
+      {
+        "pool": "rare_field_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "eggheadItemDelivery_Detector3"
+    ],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "detectorbear",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Detector3": {
+    "slots": [
+      {
+        "pool": "exceptional_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "bubble_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "burner_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "gravitational_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "detectorveles",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Suit1": {
+    "slots": [
+      {
+        "pool": "predator_hides",
+        "quantity": 3.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 4.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 17.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "eggheadItemDelivery_Suit2"
+    ],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "suit_ssp99",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Suit2": {
+    "slots": [
+      {
+        "pool": "predator_hides",
+        "quantity": 2.0
+      },
+      {
+        "pool": "elite_hides",
+        "quantity": 1.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 3.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "field_instruments",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "eggheadItemDelivery_Suit3"
+    ],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "suit_ssp99m",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Suit3": {
+    "slots": [
+      {
+        "pool": "elite_hides",
+        "quantity": 1.0
+      },
+      {
+        "pool": "predator_hides",
+        "quantity": 2.0
+      },
+      {
+        "pool": "brains",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "field_instruments",
+        "quantity": 2.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 7.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "suit_seva",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Aid1": {
+    "slots": [
+      {
+        "pool": "brains",
+        "quantity": 3.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 7.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "eggheadItemDelivery_Aid2"
+    ],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "medic_stimpak_1",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Egghead'",
+        [
+          "medic_antirad_2",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Egghead'",
+        [
+          "medic_psyheal_2",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Aid2": {
+    "slots": [
+      {
+        "pool": "brains",
+        "quantity": 2.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 3.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "field_instruments",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "eggheadItemDelivery_Aid3"
+    ],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "medic_stimpak_2",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Egghead'",
+        [
+          "medic_antipsychotic_2",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "eggheadItemDelivery_Aid3": {
+    "slots": [
+      {
+        "pool": "elite_parts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "brains",
+        "quantity": 2.0
+      },
+      {
+        "pool": "rare_field_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "exceptional_electrical_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "field_instruments",
+        "quantity": 2.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Egghead'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Egghead'",
+        [
+          "medic_stimpak_3",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Egghead'",
+        [
+          "medic_antipsychotic_3",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_1": {
+    "slots": [
+      {
+        "pool": "fasteners",
+        "quantity": 10.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_11",
+      "hagglerItemDelivery_12"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "fort12",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "m1911",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "brhp",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_11": {
+    "slots": [
+      {
+        "pool": "small_electronics",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_111",
+      "hagglerItemDelivery_112"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "lax410s",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "sten",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_111": {
+    "slots": [
+      {
+        "pool": "workshop_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 9.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_1111"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "lax410",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_1111": {
+    "slots": [
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      },
+      {
+        "pool": "cleaning",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "swmodel29",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "44magnum",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_112": {
+    "slots": [
+      {
+        "pool": "small_valuables",
+        "quantity": 1.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "sterling",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_12": {
+    "slots": [
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_121",
+      "hagglerItemDelivery_122"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "toz66",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "toz66short",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_121": {
+    "slots": [
+      {
+        "pool": "cleaning",
+        "quantity": 2.0
+      },
+      {
+        "pool": "statues",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_1211"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "sks",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "rugermini14",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_1211": {
+    "slots": [
+      {
+        "pool": "heavy_components",
+        "quantity": 2.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 13.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_12111"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "saigasemi",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_12111": {
+    "slots": [
+      {
+        "pool": "powder",
+        "quantity": 3.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "maintenance",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_121111"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "w9422357",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "357magnum",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_121111": {
+    "slots": [
+      {
+        "pool": "consumer_electronics",
+        "quantity": 3.0
+      },
+      {
+        "pool": "small_valuables",
+        "quantity": 2.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "g2contender500",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "500magnum",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_122": {
+    "slots": [
+      {
+        "pool": "cleaning",
+        "quantity": 2.0
+      },
+      {
+        "pool": "heavy_electrical_map1",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_1221"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "kiparis",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "kp31",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_1221": {
+    "slots": [
+      {
+        "pool": "filters",
+        "quantity": 2.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 12.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_12211"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "mac11",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_12211": {
+    "slots": [
+      {
+        "pool": "advanced_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "field_maintenance",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "m1911chic",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_2": {
+    "slots": [
+      {
+        "pool": "fasteners",
+        "quantity": 10.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_21",
+      "hagglerItemDelivery_22"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "toz34",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "toz34short",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_21": {
+    "slots": [
+      {
+        "pool": "powder",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_211",
+      "hagglerItemDelivery_212"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "sako85nato",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_211": {
+    "slots": [
+      {
+        "pool": "heavy_electrical_map1",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_2111"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "c96carbine",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_2111": {
+    "slots": [
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "ppsh",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_212": {
+    "slots": [
+      {
+        "pool": "batteries",
+        "quantity": 5.0
+      },
+      {
+        "pool": "engine_care",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_2121"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "toz194",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_2121": {
+    "slots": [
+      {
+        "pool": "heavy_electrical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_21211"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "m1887",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_21211": {
+    "slots": [
+      {
+        "pool": "small_electronics",
+        "quantity": 5.0
+      },
+      {
+        "pool": "batteries",
+        "quantity": 8.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "ithaca37",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_22": {
+    "slots": [
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_221",
+      "hagglerItemDelivery_222"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "saigasemi545",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "mp34",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_221": {
+    "slots": [
+      {
+        "pool": "workshop_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_2211"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "sako85",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Haggler'",
+        [
+          "w1895",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_2211": {
+    "slots": [
+      {
+        "pool": "field_maintenance",
+        "quantity": 2.0
+      },
+      {
+        "pool": "consumer_electronics",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_22111"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "mosin",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_22111": {
+    "slots": [
+      {
+        "pool": "adhesives",
+        "quantity": 3.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "svt40",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_222": {
+    "slots": [
+      {
+        "pool": "basic_tools",
+        "quantity": 1.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_2221"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "mp40",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_2221": {
+    "slots": [
+      {
+        "pool": "maintenance",
+        "quantity": 3.0
+      },
+      {
+        "pool": "powder",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "hagglerItemDelivery_22211"
+    ],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "aks74u",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "hagglerItemDelivery_22211": {
+    "slots": [
+      {
+        "pool": "maintenance",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fuel",
+        "quantity": 2.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Haggler'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Haggler'",
+        [
+          "akm",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "jittersItemDelivery_medical1": {
+    "slots": [
+      {
+        "pool": "tobacco",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "jittersItemDelivery_medical2"
+    ],
+    "npc": "'Jitters'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Jitters'",
+        [
+          "medic_medkit_1",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Jitters'",
+        [
+          "medic_medkit_2",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "jittersItemDelivery_medical2": {
+    "slots": [
+      {
+        "pool": "cigarettes",
+        "quantity": 1.0
+      },
+      {
+        "pool": "rare_drugs",
+        "quantity": 1.0
+      },
+      {
+        "pool": "antirad",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "jittersItemDelivery_medical3"
+    ],
+    "npc": "'Jitters'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Jitters'",
+        [
+          "medic_bandage_2",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Jitters'",
+        [
+          "medic_medkit_3",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Jitters'",
+        [
+          "medic_antirad_1",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "jittersItemDelivery_medical3": {
+    "slots": [
+      {
+        "pool": "premium_cigarettes",
+        "quantity": 1.0
+      },
+      {
+        "pool": "rare_drugs",
+        "quantity": 1.0
+      },
+      {
+        "pool": "stimulants",
+        "quantity": 1.0
+      },
+      {
+        "pool": "antirad",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 1.0
+      },
+      {
+        "pool": "cigarettes",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "jittersItemDelivery_medical4"
+    ],
+    "npc": "'Jitters'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Jitters'",
+        [
+          "medic_bandage_3",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Jitters'",
+        [
+          "medic_medkit_4",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "jittersItemDelivery_medical4": {
+    "slots": [
+      {
+        "pool": "cigar",
+        "quantity": 1.0
+      },
+      {
+        "pool": "rare_drugs",
+        "quantity": 1.0
+      },
+      {
+        "pool": "tobacco",
+        "quantity": 1.0
+      },
+      {
+        "pool": "antirad",
+        "quantity": 1.0
+      },
+      {
+        "pool": "stimulants",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 1.0
+      },
+      {
+        "pool": "cigarettes",
+        "quantity": 1.0
+      },
+      {
+        "pool": "premium_cigarettes",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Jitters'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Jitters'",
+        [
+          "medic_medkit_5",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Jitters'",
+        [
+          "medic_medkit_6",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Jitters'",
+        [
+          "medic_antirad_2",
+          null,
+          3.0,
+          "SELLANDBUY",
+          3.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "muteItemDelivery_Binoc1": {
+    "slots": [
+      {
+        "pool": "basic_tools",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "muteItemDelivery_Binoc2",
+      "muteItemDelivery_Anomaly",
+      "muteItemDelivery_BlowoutWarning"
+    ],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Mute'",
+        [
+          "binoculars_2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "muteItemDelivery_Binoc2": {
+    "slots": [
+      {
+        "pool": "basic_tools",
+        "quantity": 1.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "muteItemDelivery_Binoc3",
+      "muteItemDelivery_Broadcast"
+    ],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Mute'",
+        [
+          "binoculars_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "muteItemDelivery_Binoc3": {
+    "slots": [
+      {
+        "pool": "advanced_parts_map1",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 3.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 1.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "muteItemDelivery_Binoc4"
+    ],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Mute'",
+        [
+          "binoculars_4",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "muteItemDelivery_Binoc4": {
+    "slots": [
+      {
+        "pool": "advanced_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "consumer_electronics",
+        "quantity": 2.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 3.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 1.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "batteries",
+        "quantity": 6.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Mute'",
+        [
+          "binoculars_3",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "muteItemDelivery_Anomaly": {
+    "slots": [
+      {
+        "pool": "basic_tools",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 4.0
+      },
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "muteItemDelivery_Detector"
+    ],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Mute'",
+        [
+          "anomalydetector",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "muteItemDelivery_Detector": {
+    "slots": [
+      {
+        "pool": "detector",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 3.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 1.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "batteries",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Mute'",
+        [
+          "detectorecho",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "muteItemDelivery_Broadcast": {
+    "slots": [
+      {
+        "pool": "specialty_tools",
+        "quantity": 1.0
+      },
+      {
+        "pool": "consumer_electronics",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 3.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": []
+  },
+  "muteItemDelivery_BlowoutWarning": {
+    "slots": [
+      {
+        "pool": "consumer_electronics",
+        "quantity": 3.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 4.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Mute'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": []
+  },
+  "oldtimerItemDelivery_Knife1": {
+    "slots": [
+      {
+        "pool": "common_hides",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "oldtimerItemDelivery_Knife2",
+      "oldtimerItemDelivery_Hidestash1"
+    ],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Old Timer'",
+        [
+          "knife2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "oldtimerItemDelivery_Knife2": {
+    "slots": [
+      {
+        "pool": "predator_hides",
+        "quantity": 1.0
+      },
+      {
+        "pool": "brains",
+        "quantity": 1.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "oldtimerItemDelivery_Knife3"
+    ],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Old Timer'",
+        [
+          "knife3",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "oldtimerItemDelivery_Knife3": {
+    "slots": [
+      {
+        "pool": "elite_hides",
+        "quantity": 1.0
+      },
+      {
+        "pool": "brains",
+        "quantity": 1.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Old Timer'",
+        [
+          "knife4",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "oldtimerItemDelivery_Melee": {
+    "slots": [
+      {
+        "pool": "melee_tools",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Old Timer'",
+        [
+          "bat",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Old Timer'",
+        [
+          "fireaxe",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Old Timer'",
+        [
+          "fubar",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Old Timer'",
+        [
+          "hatchet",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Old Timer'",
+        [
+          "machete",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "oldtimerItemDelivery_Hidestash1": {
+    "slots": [
+      {
+        "pool": "common_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "oldtimerItemDelivery_Hidestash2"
+    ],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Old Timer'",
+        [
+          "hidestasher_cleaningkit",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "oldtimerItemDelivery_Hidestash2": {
+    "slots": [
+      {
+        "pool": "common_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "predator_hides",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Old Timer'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Old Timer'",
+        [
+          "hidestasher_shovel",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_1": {
+    "slots": [
+      {
+        "pool": "humanoid_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 6.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 6.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_11",
+      "quartermasterItemDelivery_12"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "mp5",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "mossberg500",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_11": {
+    "slots": [
+      {
+        "pool": "rimfire_rifles",
+        "quantity": 2.0
+      },
+      {
+        "pool": "maintenance",
+        "quantity": 3.0
+      },
+      {
+        "pool": "powder",
+        "quantity": 3.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_111",
+      "quartermasterItemDelivery_112"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "mateba",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "ak74",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "l85",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_111": {
+    "slots": [
+      {
+        "pool": "common_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "rare_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_1111"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "lax44",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "g36c",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_1111": {
+    "slots": [
+      {
+        "pool": "humanoid_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "rare_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "elite_parts",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "sg552",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_112": {
+    "slots": [
+      {
+        "pool": "documents_field",
+        "quantity": 4.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "field_instruments",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_1121"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "aek971",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "an94k",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_1121": {
+    "slots": [
+      {
+        "pool": "documents_field",
+        "quantity": 4.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      },
+      {
+        "pool": "field_instruments",
+        "quantity": 2.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 6.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_11211"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "rk95",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_11211": {
+    "slots": [
+      {
+        "pool": "powder",
+        "quantity": 5.0
+      },
+      {
+        "pool": "maintenance",
+        "quantity": 4.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 4.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 20.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 4.0
+      },
+      {
+        "pool": "batteries",
+        "quantity": 12.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "ak12",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_12": {
+    "slots": [
+      {
+        "pool": "stash_notes",
+        "quantity": 1.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_field",
+        "quantity": 3.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_121",
+      "quartermasterItemDelivery_122"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "m3super90",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "fiveseven",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_121": {
+    "slots": [
+      {
+        "pool": "elite_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 7.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 6.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "rare_parts",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "p90",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "ump45",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_122": {
+    "slots": [
+      {
+        "pool": "brains",
+        "quantity": 1.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 7.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 6.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_1221"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "lr300",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_1221": {
+    "slots": [
+      {
+        "pool": "mre",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 8.0
+      },
+      {
+        "pool": "spirits",
+        "quantity": 3.0
+      },
+      {
+        "pool": "canned_food",
+        "quantity": 5.0
+      },
+      {
+        "pool": "local_refreshments",
+        "quantity": 5.0
+      },
+      {
+        "pool": "local_beer",
+        "quantity": 4.0
+      },
+      {
+        "pool": "tobacco",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_12211"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "m16a4",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_12211": {
+    "slots": [
+      {
+        "pool": "elite_hides",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "rare_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "elite_parts",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "fnfal",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_2": {
+    "slots": [
+      {
+        "pool": "large_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "exotic_parts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 6.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_21",
+      "quartermasterItemDelivery_22"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "swr8",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_21": {
+    "slots": [
+      {
+        "pool": "stash_notes",
+        "quantity": 1.0
+      },
+      {
+        "pool": "veteran_stash",
+        "quantity": 1.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_field",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_211",
+      "quartermasterItemDelivery_212"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "taurusragingbull",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "mp9a1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_211": {
+    "slots": [
+      {
+        "pool": "common_meat",
+        "quantity": 12.0
+      },
+      {
+        "pool": "common_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "small_parts",
+        "quantity": 8.0
+      },
+      {
+        "pool": "humanoid_parts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "large_parts",
+        "quantity": 6.0
+      },
+      {
+        "pool": "rare_parts",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "uzi",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "pp1901vityaz",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_212": {
+    "slots": [
+      {
+        "pool": "mre",
+        "quantity": 1.0
+      },
+      {
+        "pool": "local_beer",
+        "quantity": 5.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 9.0
+      },
+      {
+        "pool": "canned_food",
+        "quantity": 5.0
+      },
+      {
+        "pool": "local_refreshments",
+        "quantity": 5.0
+      },
+      {
+        "pool": "spirits",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_2121"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "famas",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_2121": {
+    "slots": [
+      {
+        "pool": "computer_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "advanced_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_field",
+        "quantity": 5.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      },
+      {
+        "pool": "administrative_documents",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "aug",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_22": {
+    "slots": [
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "elite_parts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "gravitational_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_221",
+      "quartermasterItemDelivery_222"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "rem870ae",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Quartermaster'",
+        [
+          "mr96",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_221": {
+    "slots": [
+      {
+        "pool": "rare_field_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "hellhound_part",
+        "quantity": 6.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "gravitational_artifacts",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "mp153",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_222": {
+    "slots": [
+      {
+        "pool": "rare_field_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "gravitational_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_field",
+        "quantity": 3.0
+      },
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "quartermasterItemDelivery_2221"
+    ],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "sv98",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "quartermasterItemDelivery_2221": {
+    "slots": [
+      {
+        "pool": "rare_field_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "gravitational_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "bubble_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_research",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Quartermaster'",
+    "map": "rp_waystation",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Quartermaster'",
+        [
+          "svd",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Medical1": {
+    "slots": [
+      {
+        "pool": "common_meals",
+        "quantity": 8.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Medical2"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drug_mints",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Medical2": {
+    "slots": [
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "local_beer",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Medical3",
+      "spicylemonItemDelivery_Food"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drug_caffeine",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Medical3": {
+    "slots": [
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "predator_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "local_refreshments",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Medical4",
+      "spicylemonItemDelivery_Vodka"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "medic_psyheal_1",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Medical4": {
+    "slots": [
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "predator_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "spirits",
+        "quantity": 2.0
+      },
+      {
+        "pool": "exotic_meals",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Medical5"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "medic_antipsychotic_1",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Medical5": {
+    "slots": [
+      {
+        "pool": "predator_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "local_beer",
+        "quantity": 3.0
+      },
+      {
+        "pool": "exotic_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "elite_meals",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Medical6",
+      "spicylemonItemDelivery_Spirits"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drug_painkillers",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Medical6": {
+    "slots": [
+      {
+        "pool": "predator_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "exotic_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "spirits",
+        "quantity": 2.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "elite_meals",
+        "quantity": 3.0
+      },
+      {
+        "pool": "local_refreshments",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Medical7"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drug_adrenaline",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Medical7": {
+    "slots": [
+      {
+        "pool": "exotic_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "predator_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "energy_drinks",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "elite_meals",
+        "quantity": 3.0
+      },
+      {
+        "pool": "local_refreshments",
+        "quantity": 3.0
+      },
+      {
+        "pool": "local_beer",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Brew"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drug_morphine",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Food": {
+    "slots": [
+      {
+        "pool": "local_refreshments",
+        "quantity": 3.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "canned_food",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Vodka"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_bottlebeer_6",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_canwater",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_energydrink_4",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_energydrink_2",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "food_cheese_2",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "food_nuts_2",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "food_can_tomato",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "food_can_tushonka",
+          null,
+          4.0,
+          "SELLANDBUY",
+          4.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Vodka": {
+    "slots": [
+      {
+        "pool": "local_refreshments",
+        "quantity": 3.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "spirits",
+        "quantity": 2.0
+      },
+      {
+        "pool": "predator_meals",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Spirits"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_vodka_4",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_vodka_5",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_vodka_6",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Spirits": {
+    "slots": [
+      {
+        "pool": "local_refreshments",
+        "quantity": 3.0
+      },
+      {
+        "pool": "predator_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "local_beer",
+        "quantity": 3.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "exotic_meals",
+        "quantity": 4.0
+      },
+      {
+        "pool": "elite_meals",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "spicylemonItemDelivery_Brew"
+    ],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_spirit_1",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_spirit_2",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_spirit_3",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ],
+      [
+        "'Spicy Lemon'",
+        [
+          "drink_wine",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "spicylemonItemDelivery_Brew": {
+    "slots": [
+      {
+        "pool": "elite_meals",
+        "quantity": 3.0
+      },
+      {
+        "pool": "exotic_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "spirits",
+        "quantity": 3.0
+      },
+      {
+        "pool": "local_refreshments",
+        "quantity": 4.0
+      },
+      {
+        "pool": "common_meals",
+        "quantity": 6.0
+      },
+      {
+        "pool": "predator_meals",
+        "quantity": 5.0
+      },
+      {
+        "pool": "local_beer",
+        "quantity": 4.0
+      },
+      {
+        "pool": "canned_food",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Spicy Lemon'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Spicy Lemon'",
+        [
+          "miscaid_swampbrew",
+          null,
+          2.0,
+          "SELLANDBUY",
+          2.0,
+          12.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Suit1": {
+    "slots": [
+      {
+        "pool": "fasteners",
+        "quantity": 8.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Suit2"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_mailjacket",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Suit2": {
+    "slots": [
+      {
+        "pool": "field_maintenance",
+        "quantity": 1.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Suit3"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_trenchcoat_black",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "suit_trenchcoat_brown",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "suit_trenchcoat_green",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "suit_trenchcoat_tan",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Suit3": {
+    "slots": [
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 1.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_SuitNBC",
+      "technutItemDelivery_Suit4",
+      "technutItemDelivery_Helmet1"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_sunrise",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_SuitNBC": {
+    "slots": [
+      {
+        "pool": "filters",
+        "quantity": 2.0
+      },
+      {
+        "pool": "antirad",
+        "quantity": 4.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_nbc",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Suit4": {
+    "slots": [
+      {
+        "pool": "cigarettes",
+        "quantity": 3.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Suit5",
+      "technutItemDelivery_Attachment1"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_cs1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Suit5": {
+    "slots": [
+      {
+        "pool": "tobacco",
+        "quantity": 3.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 12.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Suit6",
+      "technutItemDelivery_AttachmentFabric1"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_wind",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Suit6": {
+    "slots": [
+      {
+        "pool": "spirits",
+        "quantity": 3.0
+      },
+      {
+        "pool": "beer",
+        "quantity": 2.0
+      },
+      {
+        "pool": "field_maintenance",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 12.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Suit7",
+      "technutItemDelivery_AttachmentKevlar1"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_cs2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Suit7": {
+    "slots": [
+      {
+        "pool": "wine",
+        "quantity": 4.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 13.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_AttachmentFrame1",
+      "technutItemDelivery_AttachmentCarbon"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "suit_cs3",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_SuitPainting": {
+    "slots": [
+      {
+        "pool": "adhesives",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": []
+  },
+  "technutItemDelivery_Helmet1": {
+    "slots": [
+      {
+        "pool": "adhesives",
+        "quantity": 3.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Helmet2"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "helm_steel_ger",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "helm_steel_rus",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "helm_steel_arab",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Helmet2": {
+    "slots": [
+      {
+        "pool": "heavy_electrical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "computer_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 12.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Helmet3"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "headwear_cs1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Helmet3": {
+    "slots": [
+      {
+        "pool": "common_artifacts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "electrical_artifacts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 13.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Helmet4"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "helm_operator_rus_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "helm_operator_rus_2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Helmet4": {
+    "slots": [
+      {
+        "pool": "common_artifacts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "rare_field_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 14.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Helmet5"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "headwear_cs2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "headwear_cs4",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Helmet5": {
+    "slots": [
+      {
+        "pool": "common_artifacts",
+        "quantity": 5.0
+      },
+      {
+        "pool": "exceptional_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 19.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Helmet6"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "helm_sphere08",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Helmet6": {
+    "slots": [
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "exceptional_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "burner_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "rare_electrical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 21.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 5.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 6.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Helmet7"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "helm_sphere12",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "headwear_psz12",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Helmet7": {
+    "slots": [
+      {
+        "pool": "rare_field_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "bubble_artifacts",
+        "quantity": 2.0
+      },
+      {
+        "pool": "exceptional_electrical_artifacts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "chemical_artifacts",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 26.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 6.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 7.0
+      },
+      {
+        "pool": "cleaning",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "helm_operator_nato",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Mask1": {
+    "slots": [
+      {
+        "pool": "heavy_components",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Mask2"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "mask_halfmask",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "mask_respirator",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Mask2": {
+    "slots": [
+      {
+        "pool": "fuel",
+        "quantity": 1.0
+      },
+      {
+        "pool": "filters",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Mask3"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "mask_gp5",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "mask_eo20",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Mask3": {
+    "slots": [
+      {
+        "pool": "fuel",
+        "quantity": 1.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 2.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 1.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Mask4"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 1.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "mask_pmk3",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "mask_xm40",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Mask4": {
+    "slots": [
+      {
+        "pool": "specialty_tools",
+        "quantity": 1.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 10.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "mask_m40",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "mask_m50",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Attachment1": {
+    "slots": [
+      {
+        "pool": "common_optics",
+        "quantity": 4.0
+      },
+      {
+        "pool": "attachments",
+        "quantity": 2.0
+      },
+      {
+        "pool": "maintenance",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 12.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Attachment2"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 2.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_steelplate_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "attachment_ceramicplate_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Attachment2": {
+    "slots": [
+      {
+        "pool": "suppressors",
+        "quantity": 2.0
+      },
+      {
+        "pool": "powder",
+        "quantity": 3.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 13.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_Attachment3"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_steelplate_2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "attachment_ceramicplate_2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_Attachment3": {
+    "slots": [
+      {
+        "pool": "suppressors",
+        "quantity": 2.0
+      },
+      {
+        "pool": "maintenance",
+        "quantity": 3.0
+      },
+      {
+        "pool": "computer_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 14.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_steelplate_3",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ],
+      [
+        "'Technut'",
+        [
+          "attachment_ceramicplate_3",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_AttachmentFabric1": {
+    "slots": [
+      {
+        "pool": "suit_materials",
+        "quantity": 2.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 2.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 12.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_AttachmentFabric2"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_fabric_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_AttachmentFabric2": {
+    "slots": [
+      {
+        "pool": "humanoid_parts",
+        "quantity": 4.0
+      },
+      {
+        "pool": "common_hides",
+        "quantity": 2.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 14.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 4.0
+      },
+      {
+        "pool": "cleaning",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_fabric_2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_AttachmentFrame1": {
+    "slots": [
+      {
+        "pool": "canned_food",
+        "quantity": 6.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 4.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 17.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 5.0
+      },
+      {
+        "pool": "cleaning",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_AttachmentFrame2"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_aluframe",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_AttachmentFrame2": {
+    "slots": [
+      {
+        "pool": "basic_tools",
+        "quantity": 2.0
+      },
+      {
+        "pool": "advanced_parts",
+        "quantity": 1.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 19.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 5.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 5.0
+      },
+      {
+        "pool": "cleaning",
+        "quantity": 4.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_steelframe",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_AttachmentCarbon": {
+    "slots": [
+      {
+        "pool": "cleaning",
+        "quantity": 4.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 5.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 4.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 17.0
+      },
+      {
+        "pool": "repair_electrical",
+        "quantity": 4.0
+      },
+      {
+        "pool": "small_electronics",
+        "quantity": 6.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_carbonfibre",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_AttachmentKevlar1": {
+    "slots": [
+      {
+        "pool": "batteries",
+        "quantity": 8.0
+      },
+      {
+        "pool": "industrial_supplies",
+        "quantity": 2.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 3.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 13.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 3.0
+      },
+      {
+        "pool": "cleaning",
+        "quantity": 3.0
+      }
+    ],
+    "thresholds": [],
+    "next": [
+      "technutItemDelivery_AttachmentKevlar2"
+    ],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_kevlar_1",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "technutItemDelivery_AttachmentKevlar2": {
+    "slots": [
+      {
+        "pool": "batteries",
+        "quantity": 11.0
+      },
+      {
+        "pool": "documents_technical",
+        "quantity": 1.0
+      },
+      {
+        "pool": "field_maintenance",
+        "quantity": 4.0
+      },
+      {
+        "pool": "fasteners",
+        "quantity": 17.0
+      },
+      {
+        "pool": "workshop_supplies",
+        "quantity": 4.0
+      },
+      {
+        "pool": "adhesives",
+        "quantity": 5.0
+      }
+    ],
+    "thresholds": [],
+    "next": [],
+    "npc": "'Technut'",
+    "map": "rp_marsh_cs",
+    "ceiling": 3.0,
+    "vendor": [
+      [
+        "'Technut'",
+        [
+          "attachment_kevlar_2",
+          null,
+          1.0,
+          "SELLANDBUY",
+          1.0,
+          48.0,
+          1.0
+        ]
+      ]
+    ]
+  }
+}

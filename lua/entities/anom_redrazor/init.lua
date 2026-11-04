@@ -2,7 +2,6 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 ENT.AutomaticFrameAdvance = true
-local delayTime = 0
 
 function ENT:SpawnFunction(ply, tr)
     if (not tr.Hit) then return end
@@ -16,6 +15,7 @@ function ENT:SpawnFunction(ply, tr)
 end
 
 function ENT:Initialize()
+	self.cotzNextDamage = CurTime() + (self:EntIndex() % 10) * 0.03
     self.Entity:SetModel("models/z-o-m-b-i-e/st/trees/st_bush_11.mdl") --Set its model.
     self.Entity:PhysicsInit(SOLID_VPHYSICS)
     self.Entity:SetMoveType(MOVETYPE_VPHYSICS) -- after all, gmod is a physics
@@ -34,8 +34,13 @@ function ENT:Initialize()
 end
 
 function ENT:Think()
-    if delayTime < CurTime() then
-        delayTime = CurTime() + 0.3
+	if ix and ix.eventController and not ix.eventController:HasPlayerNear(self:GetPos(), 2500) then
+		self:NextThink(CurTime() + 1)
+
+		return true
+	end
+    if CurTime() >= (self.cotzNextDamage or 0) then
+        self.cotzNextDamage = CurTime() + 0.3
         local min, max = self.Entity:GetModelBounds()
 
         for k, v in ipairs(ents.FindInBox(self:GetPos() + Vector(min.x + 100, min.y + 100, -10), self:GetPos() + Vector(max.x - 100, max.y - 100, max.z - 100))) do
@@ -51,7 +56,7 @@ function ENT:Think()
         end
     end
 
-    self:NextThink(CurTime())
+    self:NextThink(self.cotzNextDamage)
 
     return true
 end

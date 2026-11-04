@@ -6,7 +6,7 @@ function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
 		ITEM = (isBaseItem and ix.item.base or ix.item.list)[uniqueID] or setmetatable({}, meta)
 		ITEM.uniqueID = uniqueID
 		ITEM.base = baseID or ITEM.base
-		ITEM.isBase = isBaseItem
+		ITEM.isBase = isBaseItem or false
 		ITEM.hooks = ITEM.hooks or {}
 		ITEM.postHooks = ITEM.postHooks or {}
 		ITEM.functions = ITEM.functions or {}
@@ -189,6 +189,10 @@ if SERVER then
 
 		local inventory = ix.item.inventories[invID or 0]
 
+		if not inventory then
+			return
+		end
+
 		if hook.Run("CanPlayerInteractItem", client, action, item, data) == false then
 			return
 		end
@@ -223,7 +227,12 @@ if SERVER then
 		end
 
 		if item.entity then
-			if item.entity:GetPos():Distance(client:GetPos()) > 96 then
+			if client:GetShootPos():DistToSqr(item.entity:GetPos()) > 96 * 96 then
+				return
+			end
+
+			local useEntity = client:GetUseEntity()
+			if IsValid(useEntity) and item.entity ~= useEntity then
 				return
 			end
 		elseif not inventory:GetItemByID(item.id) then

@@ -9,10 +9,17 @@ function GM:PlayerInitialSpawn(client)
 		local index = math.random(1, table.Count(ix.faction.indices))
 		local faction = ix.faction.indices[index]
 
+        local models = faction:GetModels( client )
+
+        local model = models[ math.random( #models ) ]
+        if ( istable( model ) ) then model = model[ 1 ] end
+
+        if ( !isstring( model ) ) then model = "models/gman.mdl" end
+
 		local character = ix.char.New({
 			name = client:Name(),
 			faction = faction and faction.uniqueID or "unknown",
-			model = faction and table.Random(faction:GetModels(client)) or "models/gman.mdl"
+			model = model,
 		}, botID, client, client:SteamID64())
 		character.isBot = true
 
@@ -71,7 +78,7 @@ function GM:PlayerInitialSpawn(client)
 			client.ixLoaded = true
 			client:SetData("intro", true)
 
-			for _, v in ipairs(player.GetAll()) do
+			for _, v in player.Iterator() do
 				if (v:GetCharacter()) then
 					v:GetCharacter():Sync(client)
 				end
@@ -136,6 +143,10 @@ function GM:KeyRelease(client, key)
 	elseif (key == IN_USE) then
 		timer.Remove("ixCharacterInteraction" .. client:SteamID())
 	end
+end
+
+function GM:CanPlayerInteractEntity(client, entity, option, data)
+	return entity:GetPos():DistToSqr(client:GetPos()) <= 96 ^ 2
 end
 
 function GM:CanPlayerInteractItem(client, action, item, data)
@@ -279,7 +290,7 @@ function GM:PlayerLoadedCharacter(client, character, lastChar)
 	end
 
 	local faction = ix.faction.indices[character:GetFaction()]
-	local uniqueID = "ixSalary" .. client:UniqueID()
+	local uniqueID = "ixSalary" .. client:SteamID64()
 
 	if (faction and faction.pay and faction.pay > 0) then
 		timer.Create(uniqueID, faction.payTime or 300, 0, function()
@@ -451,7 +462,7 @@ local function CalcPlayerCanHearPlayersVoice(listener)
 	listener.ixVoiceHear = listener.ixVoiceHear or {}
 
 	local eyePos = listener:EyePos()
-	for _, speaker in ipairs(player.GetAll()) do
+	for _, speaker in player.Iterator() do
 		local speakerEyePos = speaker:EyePos()
 		listener.ixVoiceHear[speaker] = eyePos:DistToSqr(speakerEyePos) < voiceDistance
 	end
@@ -465,7 +476,7 @@ function GM:InitializedConfig()
 end
 
 function GM:VoiceToggled(bAllowVoice)
-	for _, v in ipairs(player.GetAll()) do
+	for _, v in player.Iterator() do
 		local uniqueID = v:SteamID64() .. "ixCanHearPlayersVoice"
 
 		if (bAllowVoice) then
@@ -564,12 +575,12 @@ function GM:PostPlayerLoadout(client)
 	local character = client:GetCharacter()
 
 	if (character:GetInventory()) then
-		for _, v in pairs(character:GetInventory():GetItems()) do
-			v:Call("OnLoadout", client)
+		for _, k in pairs(character:GetInventory():GetItems()) do
+			k:Call("OnLoadout", client)
 
-			if (v:GetData("equip") and v.attribBoosts) then
-				for attribKey, attribValue in pairs(v.attribBoosts) do
-					character:AddBoost(v.uniqueID, attribKey, attribValue)
+			if (k:GetData("equip") and k.attribBoosts) then
+				for attribKey, attribValue in pairs(k.attribBoosts) do
+					character:AddBoost(k.uniqueID, attribKey, attribValue)
 				end
 			end
 		end
@@ -724,7 +735,7 @@ function GM:PlayerDisconnected(client)
 		return
 	end
 
-	for _, v in ipairs(player.GetAll()) do
+	for _, v in player.Iterator() do
 		if (!v.ixVoiceHear) then
 			continue
 		end
@@ -771,7 +782,7 @@ function GM:ShutDown()
 
 	hook.Run("SaveData")
 
-	for _, v in ipairs(player.GetAll()) do
+	for _, v in player.Iterator() do
 		v:SaveData()
 
 		if (v:GetCharacter()) then
@@ -823,6 +834,9 @@ function GM:PlayerCanPickupWeapon(client, weapon)
 end
 
 function GM:OnPhysgunFreeze(weapon, physObj, entity, client)
+    -- Validate the physObj, to prevent errors on entities who have no physics object
+    if (!IsValid(physObj)) then return false end
+
 	-- Object is already frozen (!?)
 	if (!physObj:IsMoveable()) then return false end
 	if (entity:GetUnFreezable()) then return false end
@@ -867,9 +881,9 @@ end
 function GM:CharacterPreSave(character)
 	local client = character:GetPlayer()
 
-	for _, v in pairs(character:GetInventory():GetItems()) do
-		if (v.OnSave) then
-			v:Call("OnSave", client)
+	for _, k in pairs(character:GetInventory():GetItems()) do
+		if (k.OnSave) then
+			k:Call("OnSave", client)
 		end
 	end
 
@@ -877,7 +891,7 @@ function GM:CharacterPreSave(character)
 end
 
 timer.Create("ixLifeGuard", 1, 0, function()
-	for _, v in ipairs(player.GetAll()) do
+	for _, v in player.Iterator() do
 		if (v:GetCharacter() and v:Alive() and hook.Run("ShouldPlayerDrowned", v) != false) then
 			if (v:WaterLevel() >= 3) then
 				if (!v.drowningTime) then

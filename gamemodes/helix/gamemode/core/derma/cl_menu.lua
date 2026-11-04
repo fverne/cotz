@@ -64,7 +64,7 @@ function PANEL:Init()
 	self.guard:SetSize(self:GetPadding(), self:GetTall())
 
 	-- tabs
-	self.tabs = self.buttons:Add("Panel")
+	self.tabs = self.buttons:Add("DScrollPanel")
 	self.tabs.buttons = {}
 	self.tabs:Dock(FILL)
 	self:PopulateTabs()
@@ -386,6 +386,10 @@ function PANEL:Think()
 
 	if ((!self.anchorMode and !bTabDown) or gui.IsGameUIVisible()) then
 		self:Remove()
+
+		if (ix.option.Get("escCloseMenu", false)) then
+			gui.HideGameUI()
+		end
 	end
 end
 

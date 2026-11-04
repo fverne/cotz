@@ -452,6 +452,12 @@ function NewClient(id)
 	function client:GetPos()
 		return self.position
 	end
+	function client:GetShootPos()
+		return self.position
+	end
+	function client:GetUseEntity()
+		return self.useEntity
+	end
 	function client:SetPos(position)
 		self.position = position
 	end

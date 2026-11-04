@@ -773,13 +773,13 @@ hook.Add("CreateMenuButtons", "ixInventory", function(tabs)
 
 			ix.gui.inv1 = panel
 
-			if (ix.option.Get("openBags", true)) then
-				for _, v in pairs(inventory:GetItems()) do
-					if (!v.isBag) then
+			if (inventory and ix.option.Get("openBags", true)) then
+				for _, k in pairs(inventory:GetItems()) do
+					if (!k.isBag) then
 						continue
 					end
 
-					v.functions.View.OnClick(v)
+					k.functions.View.OnClick(k)
 				end
 			end
 

@@ -14,10 +14,13 @@ ENT.SleepTimer = 0
 ENT.IsSleeping = true --starts the anomaly out sleeping so it doesn't use a ton of server assets
 
 
-function ENT:ShouldWake( range )
-	local entities = ents.FindInSphere(self:GetPos(), range)
-	for _, v in pairs(entities) do
-		if v:IsPlayer() then
+function ENT:ShouldWake(range)
+	if ix and ix.eventController then
+		return ix.eventController:HasPlayerNear(self:GetPos(), range)
+	end
+
+	for _, client in player.Iterator() do
+		if self:GetPos():DistToSqr(client:GetPos()) <= range * range then
 			return true
 		end
 	end
@@ -34,14 +37,18 @@ function ENT:Think()
 	if self.SleepTimer < CurTime() then
 		if self:ShouldWake(self.WakeRange) then
 			self.IsSleeping = false
-			self.SleepTimer = CurTime() + 5
+			self.SleepTimer = CurTime() + 1
 		else
 			self.IsSleeping = true
-			self.SleepTimer = CurTime() + 5
+			self.SleepTimer = CurTime() + 1
 		end
 	end
 	
-	if self.IsSleeping then return end
+	if self.IsSleeping then
+		self:NextThink(CurTime() + 1)
+
+		return true
+	end
 
 	if self.shouldResetSequence then
 		self.shouldResetSequence = false
@@ -53,7 +60,7 @@ function ENT:Think()
 		end)
 	end
 
-	if self.damageCooldown < CurTime() then
+	if self.damageCooldown <= CurTime() then
 		self.damageCooldown = CurTime() + 0.3
 		for k, v in pairs( ents.FindInBox( self:GetPos() + Vector(-32,-32,0), self:GetPos() + Vector(32,32,180))) do
 			
@@ -71,6 +78,6 @@ function ENT:Think()
 		end
 	end
 	
-	self:NextThink(CurTime())
+	self:NextThink(CurTime() + 0.3)
 	return true
 end

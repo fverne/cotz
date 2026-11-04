@@ -1,0 +1,33 @@
+local SELLANDBUY = 1
+
+ix.npctemplates.templates["unisgnpc2"] = {
+	name = "'Boss'",
+	description = "The figure radiates authority.",
+	model = "models/mirotvor/mirotvor7.mdl",
+	skin = 0,
+	bubble = 0,
+	scale = 0.3,
+	dialogueid = "unisgnpc2",
+	soundgroup = "unisgnpc2",
+	idleanim = "idle_lider",
+	items = {
+		["9x18hp"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x19"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x19hp"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x21"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["45acp"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["357magnum"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["44magnum"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["556x45"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["545x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x51"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["762x54"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["9x39"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["57x28"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["12gauge"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["12gaugesg"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["12gaugetr"] = {nil, 4, SELLANDBUY, 4, 12, 1},
+		["headwear_altyn"] = {nil, 1, SELLANDBUY, 1, 48, 1},
+	},
+}

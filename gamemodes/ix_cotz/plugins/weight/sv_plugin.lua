@@ -30,11 +30,7 @@ function ix.weight.Update(character) -- Updates the specified character's curren
 				client:SetRunSpeed(ix.config.Get("walkSpeed") * sprintMult) 
 			else
 				client:SetWalkSpeed(ix.config.Get("walkSpeed"))
-				if !(client:GetNetVar("brth", false)) then
-					client:SetRunSpeed(ix.config.Get("runSpeed") * sprintMult)
-				else
-					client:SetRunSpeed(ix.config.Get("walkSpeed"))
-				end
+				client:SetRunSpeed(ix.config.Get("runSpeed") * sprintMult)
 			end
 		end
 	end)

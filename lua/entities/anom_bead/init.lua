@@ -58,6 +58,7 @@ end
 
 
 function ENT:PhysicsSimulate( phys, delta )
+	if self.IsSleeping then return SIM_NOTHING end
 
 	phys:Wake()
 
@@ -73,15 +74,6 @@ function ENT:PhysicsSimulate( phys, delta )
 	phys:ApplyForceCenter( ( pos - self.Entity:GetPos() ):GetNormal() * phys:GetMass() * 50 )
 
 	
-	if self.SleepTimer < CurTime() then
-		if self:ShouldWake(self.WakeRange) then
-			self.IsSleeping = false
-			self.SleepTimer = CurTime() + 5
-		else
-			self.IsSleeping = true
-			self.SleepTimer = CurTime() + 5
-		end
-	end
 end
 
 function ENT:GetRadiationRadius()
@@ -90,13 +82,17 @@ function ENT:GetRadiationRadius()
 
 end
 
-function ENT:ShouldWake( range )
-	local entities = ents.FindInSphere(self:GetPos(), range)
-	for _,v in pairs(entities) do
-		if v:IsPlayer() then
+function ENT:ShouldWake(range)
+	if ix and ix.eventController then
+		return ix.eventController:HasPlayerNear(self:GetPos(), range)
+	end
+
+	for _, client in player.Iterator() do
+		if self:GetPos():DistToSqr(client:GetPos()) <= range * range then
 			return true
 		end
 	end
+
 	return false
 end
 
@@ -106,7 +102,7 @@ end
 
 function ENT:OnRemove()
 
-	for k,v in pairs( player.GetAll() ) do
+	for k, v in player.Iterator() do
 
 		if IsValid( v ) and v:Alive() and self.Entity:GetPos():Distance( v:GetPos() ) < self.Distance then
 
@@ -137,17 +133,20 @@ function ENT:OnRemove()
 end
 
 function ENT:Think()
-
-	if self.IsSleeping then return end
-	
-	if self.SoundTime < CurTime() then
-
-		self.SoundTime = CurTime() + math.Rand( 0.5, 1.5 )
-
-		self.Entity:EmitSound( table.Random( self.Pain ), 100, math.random( 200, 220 ) )
-
+	self.IsSleeping = not self:ShouldWake(self.WakeRange)
+	local phys = self:GetPhysicsObject()
+	if IsValid(phys) then
+		phys:EnableMotion(not self.IsSleeping)
+		if not self.IsSleeping then phys:Wake() end
 	end
 
+	if not self.IsSleeping and self.SoundTime < CurTime() then
+		self.SoundTime = CurTime() + math.Rand(0.5, 1.5)
+		self:EmitSound(table.Random(self.Pain), 100, math.random(200, 220))
+	end
+	self:NextThink(CurTime() + (self.IsSleeping and 1 or 0.5))
+
+	return true
 end
 
 function ENT:Use( ply, caller )

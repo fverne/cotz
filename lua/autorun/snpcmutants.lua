@@ -659,8 +659,7 @@ hook.Add("Think","StalkerControllerPlayerPsyDamage",function()
 		end
 	end
 		
-	for P=1, #player.GetAll() do
-		local ply = player.GetAll()[P]
+	for _, ply in player.Iterator() do
 		
 		if(SERVER) then
 			if(ControllerPlayerPsyEffectTime<CurTime()) then

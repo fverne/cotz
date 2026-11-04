@@ -4,6 +4,10 @@ function Schema:CanDrive(client, entity)
 end
 
 function Schema:CanPlayerUseBusiness(client, uniqueID)
+	if not ix.config.Get("allowBusiness", true) then
+		return false
+	end
+
 	if !client:GetCharacter():HasFlags("1") then
     	return false
     end
@@ -165,4 +169,11 @@ function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
             client:SetNetVar("keepraised", client:IsWepRaised())
         end
     end
+end
+
+function Schema:CanPlayerInteractItem(client, action, item, data)
+	if client:Alive() or isentity(item) then return end
+	local instance = item
+	if isnumber(item) then instance = ix.item.instances[item] end
+	if instance and (instance.invID or 0) > 0 then return false end
 end

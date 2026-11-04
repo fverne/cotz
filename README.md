@@ -40,12 +40,14 @@ Features vary in maturity and may need configuration or external content to work
 │       ├── gamemode/          # Gamemode entry points
 │       └── ix_cotz.txt        # Gamemode definition
 ├── lua/                       # Shared Garry's Mod Lua resources
-├── !unused plugins/           # Archived/inactive plugin code
+├── archive/                   # Inactive plugins, item versions, and backup effects
 ├── addon.txt
 └── LICENSE
 ```
 
-**Note:** The `!unused plugins/` directory is not the active plugin directory and should not be treated as part of the standard installation.
+See [Repository layout](docs/repository-layout.md) for file ownership and loading rules. The `archive/` directory contains inactive reference code and is included in Git clones only.
+
+ZIP and tarball downloads omit development tools, tests, workflows, planning documents, and archived code. Clone the repository to get these files; downloads retain the runtime files, licenses, and setup and layout guides.
 
 ## Requirements
 
@@ -93,6 +95,14 @@ These are **starting points for experienced Garry's Mod server administrators**,
 
 The first-time setup plugin also contains presets for `rp_waystation` and `rp_pripyat_remaster`. Check their files before using them with a specific map or modified installation.
 
+For a new map, follow the [map setup guide](docs/map-setup.md). It covers building and exporting an FTS preset, configuring spawns and travel, plugin dependencies, and deployment checks.
+
+Use the companion [map content design guide](https://github.com/fverne/cotz/blob/master/docs/map-content-design.md) to plan new town NPCs, loot, artifacts, jobs, progression, encounters, and exploration, including the implementation work that connects them.
+
+The [town NPC references](docs/npc-overhaul/README.md) retain story proposals alongside links to
+implemented contact definitions. Read the [runtime guide](gamemodes/ix_cotz/plugins/townnpcs/README.md)
+for current mechanics, editing, migration and in-game setup still required.
+
 ## Multi-server configuration
 
 COTZ contains cross-server travel and data-sharing plugins. If you plan to run multiple maps as separate servers:
@@ -120,7 +130,7 @@ Follow each file's `cl_`, `sh_`, and `sv_` conventions when changing client, sha
 
 GitHub Actions can export item, weapon, mutant, and anomaly configuration into an
 Excel workbook and turn supported spreadsheet edits into a Lua pull request.
-See the [balancing workbook guide](docs/balance/README.md) for export/import
+See the [balancing workbook guide](https://github.com/fverne/cotz/blob/master/docs/balance/README.md) for export/import
 instructions, validation rules, and coverage limitations.
 
 ### Contributing
@@ -138,3 +148,5 @@ The repository contains an [MIT license](LICENSE). **That does not automatically
 S.T.A.L.K.E.R. is associated with GSC Game World. This is a community-made project and is not presented as an official S.T.A.L.K.E.R. release.
 
 ---
+
+Town NPC authoring: [runtime and editing guide](gamemodes/ix_cotz/plugins/townnpcs/README.md) · [design references](docs/npc-overhaul/README.md).

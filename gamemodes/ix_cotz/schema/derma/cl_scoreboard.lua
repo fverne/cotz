@@ -122,9 +122,10 @@ PANEL = {}
 AccessorFunc(PANEL, "paintFunction", "BackgroundPaintFunction")
 
 function PANEL:Init()
-	self:SetTall(64)
+	self:SetTall(80)
 
 	self.icon = self:Add("ixScoreboardIcon")
+	self.icon:SetWide(120)
 	self.icon:Dock(LEFT)
 	self.icon.DoRightClick = function()
 		local client = self.player
@@ -156,8 +157,8 @@ function PANEL:Init()
 	end)
 
 	self.icon.Paint = function(this, w, h)
-		local client = self.player
-		surface.SetMaterial(client:GetCharacter() and Material(client:GetCharacter():GetPdaavatar()) or Material("vgui/icons/face_31.png"))
+		if (not self.avatar) then return end
+		surface.SetMaterial(self.avatar)
 		surface.SetDrawColor(255, 255, 255)
 		surface.DrawTexturedRect(0, 0, w, h)
 	end
@@ -186,11 +187,38 @@ end
 	self.description:SetTextColor(color_white)
 	self.description:SetFont("stalkerregularinvfont")
 
+	self.status = self:Add("DLabel")
+	self.status:DockMargin(5, 0, 0, 0)
+	self.status:Dock(TOP)
+	self.status:SetTextColor(color_white)
+	self.status:SetFont("stalkerregularinvfont")
+
 	self.paintFunction = rowPaintFunctions[1]
 	self.nextThink = CurTime() + 1
 end
 
 function PANEL:Update()
+	local record = self.record
+	if (record) then
+		local avatar = record.pdaavatar or "vgui/icons/face_31.png"
+		if (self.avatarPath ~= avatar) then
+			self.avatarPath = avatar
+			self.avatar = Material(avatar, "smooth")
+		end
+		self.status:SetText(ix.crossserver.GetPresenceText(record, record.fresh, IsValid(self.player)))
+		self.status:SetTextColor(ix.crossserver.GetPresenceColor(record, record.fresh, IsValid(self.player)))
+		self.status:SizeToContents()
+		if (IsValid(self.mute)) then self.mute:SetVisible(IsValid(self.player) and self.player ~= LocalPlayer()) end
+		if (not IsValid(self.player)) then
+			self.name:SetText(record.name)
+			self.name:SizeToContents()
+			self.rep:SetText("")
+			self.rep:SizeToContents()
+			self.description:SetText("")
+			self.description:SizeToContents()
+			return
+		end
+	end
 	local client = self.player
 	local model = client:GetModel()
 	local skin = client:GetSkin()
@@ -211,7 +239,6 @@ function PANEL:Update()
 	end
 
 	self.icon:SetHidden(!bRecognize)
-	self:SetZPos(bRecognize and 1 or 2)
 
 	-- no easy way to check bodygroups so we'll just set them anyway
 	for _, v in pairs(client:GetBodyGroups()) do
@@ -263,17 +290,11 @@ function PANEL:Update()
 	end
 end
 
-function PANEL:Think()
-	if (CurTime() >= self.nextThink) then
-		local client = self.player
-
-		if (!IsValid(client) or !client:GetCharacter() or self.character != client:GetCharacter() or self.team != client:Team()) then
-			self:Remove()
-			self:GetParent():SizeToContents()
-		end
-
-		self.nextThink = CurTime() + 1
-	end
+function PANEL:SetRecord(record)
+	self.record = record
+	self.player = record.player
+	self.character = IsValid(self.player) and self.player:GetCharacter() or nil
+	self:Update()
 end
 
 function PANEL:SetPlayer(client)
@@ -290,114 +311,319 @@ end
 
 vgui.Register("ixScoreboardRow", PANEL, "EditablePanel")
 
--- faction grouping
-PANEL = {}
+local COLORS = {
+	card = Color(12, 13, 12, 215), border = Color(93, 94, 86, 180),
+	text = Color(216, 215, 201), muted = Color(116, 119, 107), teal = Color(73, 140, 143),
+	rank = Color(138, 43, 226), green = Color(105, 139, 87),
+	amber = Color(167, 143, 81), red = Color(184, 108, 92),
+}
+local FIELD_COLORS = {
+	rank = COLORS.rank, reputation = COLORS.rank, location = COLORS.teal,
+	favoriteContact = COLORS.amber, taskEarnings = COLORS.amber,
+	mutantsKilled = COLORS.red, humansKilled = COLORS.red, rareMutantsKilled = COLORS.red,
+	speciesKilled = COLORS.amber, tasksCompleted = COLORS.green, hardTasks = COLORS.green,
+	researchOperations = COLORS.teal, recoveryOperations = COLORS.teal,
+}
+local PANEL = {}
 
-AccessorFunc(PANEL, "faction", "Faction")
-
-function PANEL:Init()
-	self:DockMargin(0, 0, 0, 16)
-	self:SetTall(32)
-
-	self.nextThink = 0
-end
-
-function PANEL:AddPlayer(client, index)
-	if (!IsValid(client) or !client:GetCharacter() or hook.Run("ShouldShowPlayerOnScoreboard", client) == false) then
-		return false
+local function rankName(record)
+	if record.networkRanking == false then return "RANK LOCKED" end
+	if IsValid(record.player) then return record.player:getCurrentRankName() end
+	local plugin = ix.plugin.Get("karmarep")
+	local name = "Tourist"
+	for _, rank in ipairs(plugin and plugin.repDefs or {}) do
+		if (record.profile.reputation or 0) >= rank[2] then name = rank[1] end
 	end
 
-	local id = index % 2 == 0 and 1 or 2
-	local panel = self:Add("ixScoreboardRow")
-	panel:SetPlayer(client)
-	panel:Dock(TOP)
-	panel:SetZPos(2)
-	panel:SetBackgroundPaintFunction(rowPaintFunctions[id])
-
-	self:SizeToContents()
-	client.ixScoreboardSlot = panel
-
-	return true
+	return name
 end
 
-function PANEL:SetFaction(faction)
-	self:SetColor(faction.color)
-	self:SetText("Online Users: "..L(faction.name))
-
-	self.faction = faction
+local function paintCard(panel, width, height)
+	surface.SetDrawColor(COLORS.card)
+	surface.DrawRect(0, 0, width, height)
+	surface.SetDrawColor(panel.leaderboardInteractive and panel:IsHovered() and COLORS.teal or COLORS.border)
+	surface.DrawOutlinedRect(0, 0, width, height)
 end
 
-function PANEL:Update()
-	local faction = self.faction
+local DOSSIER_FIELDS = {
+	{"rank", "STALKER RANK"}, {"reputation", "REPUTATION"}, {"squad", "SQUAD"},
+	{"location", "LOCATION"}, {"favoriteContact", "FAVORITE CONTACT"},
+	{"mutantsPoached", "MUTANTS POACHED"}, {"mutantsKilled", "MUTANTS KILLED"}, {"humansKilled", "HUMAN NPCS KILLED"},
+	{"rareMutantsKilled", "RARE MUTANTS KILLED"}, {"speciesKilled", "SPECIES KILLED"},
+	{"tasksCompleted", "TASKS COMPLETED"}, {"hardTasks", "HARD TASKS"},
+	{"researchOperations", "RESEARCH OPERATIONS"}, {"recoveryOperations", "RECOVERY OPERATIONS"},
+	{"taskEarnings", "TASK EARNINGS"},
+}
 
-	if (team.NumPlayers(faction.index) == 0) then
-		self:SetVisible(false)
-		self:GetParent():InvalidateLayout()
-	else
-		local bHasPlayers
+local function dossierLabel(parent, text, font, color)
+	local label = parent:Add("DLabel")
+	label:Dock(TOP)
+	label:SetFont(font)
+	label:SetTextColor(color)
+	label:SetText(text)
+	label:SetWrap(true)
+	label:SetAutoStretchVertical(true)
 
-		local tab = team.GetPlayers(faction.index)
-		table.sort(tab, function(p1,p2) return p1:getReputation() < p2:getReputation() end)
+	return label
+end
 
-		for k, v in pairs(tab) do
-			if (!IsValid(v.ixScoreboardSlot)) then
-				if (self:AddPlayer(v, k)) then
-					bHasPlayers = true
-				end
-			else
-				v.ixScoreboardSlot:Update()
-				bHasPlayers = true
+function PANEL:Init()
+	if IsValid(ix.gui.scoreboard) then ix.gui.scoreboard:Remove() end
+	ix.gui.scoreboard = self
+	self:Dock(FILL)
+	self.controls = self:Add("DPanel")
+	self.controls:Dock(TOP)
+	self.controls:SetTall(36)
+	self.controls.Paint = paintCard
+	self.search = self.controls:Add("DTextEntry")
+	self.search:Dock(FILL)
+	self.search:SetPlaceholderText("Search stalker or squad")
+	self.search:DockMargin(0, 0, 8, 0)
+	self.search.Paint = function(entry, width, height)
+		paintCard(entry, width, height)
+		if entry:HasFocus() then
+			surface.SetDrawColor(COLORS.teal)
+			surface.DrawOutlinedRect(0, 0, width, height)
+		end
+		if entry:GetText() == "" and not entry:HasFocus() then
+			draw.SimpleText(entry:GetPlaceholderText(), "cotzLeaderboard", 10, height / 2,
+				COLORS.muted, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+		else
+			entry:DrawTextEntryText(COLORS.text, COLORS.teal, COLORS.text)
+		end
+	end
+	self.area = self.controls:Add("DButton")
+	self.area:Dock(RIGHT)
+	self.area:SetWide(140)
+	self.area:SetText("All maps")
+	self.area.DoClick = function(button)
+		self.localOnly = not self.localOnly
+		button:SetText(self.localOnly and "Local area" or "All maps")
+	end
+	self.squad = self.controls:Add("DButton")
+	self.squad:Dock(RIGHT)
+	self.squad:SetWide(140)
+	self.squad:SetText("My squad: OFF")
+	self.squad.DoClick = function(button)
+		self.squadOnly = not self.squadOnly
+		button:SetText(self.squadOnly and "My squad: ON" or "My squad: OFF")
+	end
+	for _, button in ipairs({self.area, self.squad}) do
+		button.leaderboardInteractive = true
+		button:DockMargin(4, 0, 0, 0)
+		button:SetTextColor(COLORS.text)
+		button.Paint = function(control, width, height)
+			paintCard(control, width, height)
+			local active = control == self.area and self.localOnly or control == self.squad and self.squadOnly
+			if active then
+				surface.SetDrawColor(COLORS.teal)
+				surface.DrawRect(0, height - 2, width, 2)
 			end
 		end
+	end
+	self.dossier = self:Add("DPanel")
+	self.dossier:Dock(RIGHT)
+	self.dossier:DockMargin(12, 12, 0, 0)
+	self.dossier.Paint = paintCard
+	self.detailScroll = self.dossier:Add("DScrollPanel")
+	self.detailScroll:Dock(FILL)
+	self.detailScroll:DockMargin(16, 16, 16, 16)
+	self.portrait = self.detailScroll:Add("DImage")
+	self.portrait:Dock(TOP)
+	self.portrait:DockMargin(0, 0, 0, 12)
+	self.portrait:SetTall(96)
+	self.portrait:SetKeepAspect(true)
+	self.details = dossierLabel(self.detailScroll, "Select a stalker", "ixMediumFont", COLORS.text)
+	self.details:DockMargin(0, 0, 0, 16)
+	self.dossierFields = {}
+	for _, definition in ipairs(DOSSIER_FIELDS) do
+		local card = self.detailScroll:Add("DPanel")
+		card:Dock(TOP)
+		card:DockMargin(0, 0, 0, 8)
+		card:DockPadding(10, 8, 10, 8)
+		card.Paint = paintCard
+		local caption = dossierLabel(card, definition[2], "ixSmallFont", COLORS.muted)
+		caption:DockMargin(0, 0, 0, 4)
+		local value = dossierLabel(card, "—", "ixMediumFont", COLORS.text)
+		card.PerformLayout = function(panel)
+			panel:SetTall(caption:GetTall() + value:GetTall() + 20)
+		end
+		self.dossierFields[definition[1]] = {caption = caption, value = value, card = card}
+	end
+	self.dossierNote = dossierLabel(self.detailScroll,
+		"Counters begin when tracking is enabled. Favorite contact includes saved progress.",
+		"ixSmallFont", COLORS.muted)
+	self.list = self:Add("DScrollPanel")
+	self.list:Dock(FILL)
+	self.list:DockMargin(0, 12, 0, 0)
+	self.rows = {}
+end
 
-		self:SetVisible(bHasPlayers)
+function PANEL:SelectRecord(record)
+	self.selected = record.characterID
+	self.portrait:SetImage(record.pdaavatar or "vgui/icons/face_31.png")
+	local stats = record.profile.leaderboardStats or {}
+	local access = self.networkAccess or {}
+	local location = access.location
+		and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
+	self.details:SetText(record.name)
+	local values = table.Copy(stats)
+	values.rank = rankName(record)
+	values.reputation = math.floor(record.profile.reputation or 0)
+	values.squad = record.squadName and record.squadName ~= "" and record.squadName or "Loner"
+	values.location = location
+	values.favoriteContact = stats.favoriteContact or "None"
+	values.taskEarnings = (stats.taskEarnings or 0) .. " RU"
+	for key, field in pairs(self.dossierFields) do
+		local basic = key == "tasksCompleted" or key == "mutantsKilled" or key == "humansKilled"
+		local visible = key == "squad" or access.dossier or (basic and access.activity)
+			or ((key == "rank" or key == "reputation") and access.ranking) or (key == "location" and access.location)
+		field.card:SetVisible(visible == true)
+		field.value:SetText(tostring(values[key] or 0))
+		local color = FIELD_COLORS[key] or COLORS.text
+		if key == "squad" then color = record.squadColor or COLORS.muted end
+		if key == "location" then
+			color = ix.crossserver.GetPresenceColor(record, record.fresh, IsValid(record.player))
+		end
+		field.value:SetTextColor(color)
+		field.card:InvalidateLayout(true)
 	end
 end
 
-vgui.Register("ixScoreboardFaction", PANEL, "ixCategoryPanel")
-
--- main scoreboard panel
-PANEL = {}
-
-function PANEL:Init()
-	if (IsValid(ix.gui.scoreboard)) then
-		ix.gui.scoreboard:Remove()
+function PANEL:PerformLayout(width, height)
+	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+	if self.fontScale ~= scale then
+		self.fontScale = scale
+		surface.CreateFont("cotzLeaderboard", {
+			font = "alsina", size = math.floor(19 * scale), weight = 500, extended = true,
+		})
+		surface.CreateFont("cotzDossierTitle", {
+			font = "alsina", size = math.floor(28 * scale), weight = 600, extended = true,
+		})
+		surface.CreateFont("cotzDossierValue", {
+			font = "alsina", size = math.floor(23 * scale), weight = 500, extended = true,
+		})
+		surface.CreateFont("cotzDossierCaption", {
+			font = "alsina", size = math.floor(16 * scale), weight = 500, extended = true,
+		})
+		self.details:SetFont("cotzDossierTitle")
+		self.portrait:SetTall(math.floor(96 * scale))
+		self.dossierNote:SetFont("cotzDossierCaption")
+		for _, field in pairs(self.dossierFields) do
+			field.caption:SetFont("cotzDossierCaption")
+			field.value:SetFont("cotzDossierValue")
+			field.card:InvalidateLayout(true)
+		end
+		self.search:SetFont("cotzLeaderboard")
+		self.area:SetFont("cotzLeaderboard")
+		self.squad:SetFont("cotzLeaderboard")
 	end
-
-	self:Dock(FILL)
-
-	self.factions = {}
-	self.nextThink = 0
-
-	for i = 1, #ix.faction.indices do
-		local faction = ix.faction.indices[i]
-
-		local panel = self:Add("ixScoreboardFaction")
-		panel:SetFaction(faction)
-		panel:Dock(TOP)
-
-		self.factions[i] = panel
-	end
-
-	ix.gui.scoreboard = self
+	local compact = width < 850
+	self.dossier:Dock(compact and BOTTOM or RIGHT)
+	self.dossier:SetWide(math.floor(width * 0.3))
+	self.dossier:SetTall(math.floor(height * 0.45))
 end
 
 function PANEL:Think()
-	if (CurTime() >= self.nextThink) then
-		for i = 1, #self.factions do
-			local factionPanel = self.factions[i]
+	if (self.nextRefresh or 0) > CurTime() then return end
+	self.nextRefresh = CurTime() + 0.5
+	local character = LocalPlayer():GetCharacter()
+	local access = ix.townNPCs and ix.townNPCs:GetNetworkAccess(character)
+		or {search = true, squads = true, ranking = true, activity = true, location = true, remote = true, dossier = true}
+	self.networkAccess = access
+	self.search:SetEnabled(access.search)
+	self.squad:SetEnabled(access.squads)
+	if not access.squads then self.squadOnly = false end
+	self.squad:SetText(not access.squads and "Squad filter: LOCKED"
+		or self.squadOnly and "My squad: ON" or "My squad: OFF")
+	self.area:SetEnabled(access.remote)
+	self.area:SetText(not access.remote and "Local area" or self.localOnly and "Local area" or "All maps")
+	self.dossierNote:SetText(access.dossier and "Counters begin when tracking is enabled."
+		or "Further STALKERnet tools unlock through Mute's progression.")
+	local records = ix.crossserver and ix.crossserver.GetScoreboardRoster(false) or {}
+	local ordered = {}
+	for _, record in pairs(records) do
+		record.profile = record.profile or {}
+		ordered[#ordered + 1] = record
+	end
+	table.sort(ordered, function(a, b)
+		if not access.ranking then
+			if a.name == b.name then return a.characterID < b.characterID end
 
-			factionPanel:Update()
+			return a.name < b.name
 		end
+		local first, second = a.profile.reputation or 0, b.profile.reputation or 0
+		if first == second then return a.characterID < b.characterID end
 
-		self.nextThink = CurTime() + 0.5
+		return first > second
+	end)
+	local present = {}
+	local query = access.search and self.search:GetValue():lower() or ""
+	for position, record in ipairs(ordered) do
+		local squad = record.squadName or ""
+		local matches = (record.name .. " " .. squad):lower():find(query, 1, true)
+		local area = not self.localOnly or (record.fresh and record.map == game.GetMap())
+		local member = not access.squads or not self.squadOnly or (character and record.squadID ~= "NULL"
+			and record.squadID == character:GetSquadID())
+		if matches and area and member then
+			local id = record.characterID
+			present[id] = true
+			local row = self.rows[id]
+			if not IsValid(row) then
+				row = self.list:Add("DButton")
+				row:Dock(TOP)
+				row:DockMargin(0, 0, 0, 6)
+				row:SetTall(76)
+				row.leaderboardInteractive = true
+				row:SetText("")
+				row.avatar = row:Add("DImage")
+				row.avatar:SetPos(44, 8)
+				row.avatar:SetSize(90, 60)
+				row.avatar:SetKeepAspect(true)
+				row.avatar:SetMouseInputEnabled(false)
+				self.rows[id] = row
+			end
+			row:SetZPos(position)
+			row.avatar:SetImage(record.pdaavatar or "vgui/icons/face_31.png")
+			row.Paint = function(button, width, height)
+				paintCard(button, width, height)
+				if access.ranking then draw.SimpleText("#" .. position, "ixSmallFont", 6, 28, COLORS.muted) end
+				draw.SimpleText(record.name, "cotzLeaderboard", 146, 8, COLORS.text)
+				local rankWidth = draw.SimpleText(rankName(record), "cotzLeaderboard", 146, 34, COLORS.rank)
+				draw.SimpleText(" · " .. (squad ~= "" and squad or "Loner"),
+					"cotzLeaderboard", 146 + rankWidth, 34, record.squadColor or COLORS.muted)
+				local presence = access.location
+					and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
+				draw.SimpleText(presence,
+					"cotzLeaderboard", 146, 54,
+					ix.crossserver.GetPresenceColor(record, record.fresh, IsValid(record.player)))
+			end
+			row.DoClick = function() self:SelectRecord(record) end
+			row.DoRightClick = function()
+				if not IsValid(record.player) then return end
+				local menu = DermaMenu()
+				menu:AddOption("Mute / unmute", function()
+					record.player:SetMuted(not record.player:IsMuted())
+				end)
+				hook.Run("PopulateScoreboardPlayerMenu", record.player, menu)
+				menu:Open()
+			end
+			if self.selected == id then self:SelectRecord(record) end
+		end
+	end
+	for id, row in pairs(self.rows) do
+		if not present[id] then row:Remove() self.rows[id] = nil end
+	end
+	if self.selected and not present[self.selected] then
+		self.selected = nil
+		self.portrait:SetImage("vgui/icons/face_31.png")
+		self.details:SetText("Select a stalker")
+		for _, field in pairs(self.dossierFields) do field.value:SetText("—") end
 	end
 end
 
-vgui.Register("ixScoreboard", PANEL, "DScrollPanel")
+vgui.Register("ixScoreboard", PANEL, "EditablePanel")
 
 hook.Add("CreateMenuButtons", "ixScoreboard", function(tabs)
-	tabs["STALKERnet"] = function(container)
-		container:Add("ixScoreboard")
-	end
+	tabs["STALKERnet"] = function(container) container:Add("ixScoreboard") end
 end)

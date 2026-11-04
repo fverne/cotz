@@ -1,0 +1,66 @@
+# NPC dialogue
+
+Each town conversation declares DIALOGUE.townContact and its root action IDs. At InitializedPlugins,
+[townnpcs](../townnpcs/README.md) binds its contact data through dialogue's
+libs/sh_towncontacts.lua. That file owns the shared work/progression handlers. Superseded per-NPC
+job and progression topics are deleted, rather than replaced or hidden at runtime.
+
+Ordinary dialogue, flavour and service responses stay in the conversation file. Shared trading uses
+ix.dialogue.AddTradeTopic from integrations/sh_trade.lua; it does not copy another NPC's tree.
+Task prompts, briefings and completion text stay beside the contact's jobs/progression definitions.
+
+All 27 town contacts offer a two-part personality exchange through SpecialtyTopic and
+InterestTownFollowup in the questions menu. These are ordinary conversations available whenever
+the contact is accessible. Mute responds through gestures. Work explanations, finite briefings and completion replies, and completed greetings live in the
+contact definitions. The November 2026 roster pass replaces repetitive commission text and expands
+personal exchanges, while retaining developed Atlas dialogue and suitable existing introductory text.
+Work offers show the contact's explanation before difficulty selection; active work still shows the
+saved assignment details. Mute's work explanation and written field orders remain nonverbal.
+
+Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing loader discovers
+these shared files and registers their topics on both realms. Vendor templates bind to them
+through dialogueid.
+
+## Main menu and questions
+
+The root contains trade, barter, services, repeatable work, progression, available reward/exchange actions,
+**Can I ask you something?**, and Goodbye, where those actions exist.
+
+The shared loader groups the offered BackgroundTopic, InterestTopic, TutorialTopic,
+SpecialtyTopic, AdviceTopic, and ContactsTopic entries into QuestionsTopic after task-reward
+integration. Keep text, callbacks, and ShouldAdd conditions in the NPC definition; there is no
+need to duplicate the grouping logic in every conversation file.
+
+Only topics actually offered by GREETING or BackTopic are collected. Commented-out or otherwise
+unoffered topics are not enabled. NPCs with no offered flavour topics get no empty submenu.
+When all collected topics are conditionally unavailable, the submenu entry is hidden.
+
+BackgroundTopic*, Interest*, and TutorialTopic* follow-up branches return through
+QuestionsBackTopic instead of the main BackTopic. The six entry topics above follow the same
+rule. Services, jobs, and progression continue to use BackTopic for the main menu. Questions
+include a main-menu return; Goodbye remains at the root. Actionable Introduction topics stay at root.
+
+New flavour topic families should be added deliberately to the shared classifier and regression
+checks. Do not classify topics by their player-facing text: a question can also be a service action.
+Keep a BackTopic main menu and GOODBYE in each complete conversation.
+
+The generated questions entries have empty responses so grouping does not add new spoken lines
+to silent characters. Personality and conversation text remain with the individual NPC.
+
+## Checks
+
+From the repository root:
+
+    luatex --luaonly tests/dialogue_order_spec.lua
+    luatex --luaonly tests/task_rewards_spec.lua
+    luatex --luaonly tests/progression_spec.lua
+
+The standalone checks cover root actions, question navigation and conditions, reward integration,
+and existing UI behaviour with mocks. In multiplayer, verify main menu → questions → a nested
+reply → question list → main menu, Goodbye/Escape, and normal trade/service/job flows for old and
+new NPCs. Also check an NPC whose questions are locked and one with no flavour topics.
+
+Assignment details appear only while the character has an assignment from that NPC. There is no
+Claim rewards submenu: available exchanges and recoverable stored items appear directly at the main
+menu, with the existing server validation and pending reward queues. Names appear above every reply.
+Option colors distinguish work (amber), trade/rewards (green), questions (teal), and navigation (muted).

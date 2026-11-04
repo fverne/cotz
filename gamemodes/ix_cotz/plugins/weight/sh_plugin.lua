@@ -37,7 +37,9 @@ function ix.weight.BaseWeight(character) -- gets total carry cap, not the base c
 	local base = ix.config.Get("maxWeight", 30)
 	local carryinc = character:GetTotalExtraCarry()
 
-	return base + carryinc
+	local progression = ix.townNPCs and ix.townNPCs:GetCapacityBonus(character, "weight") or 0
+
+	return base + carryinc + progression
 end
 
 function ix.weight.CanCarry(weight, carry, character) -- Calculate if you are able to carry something.

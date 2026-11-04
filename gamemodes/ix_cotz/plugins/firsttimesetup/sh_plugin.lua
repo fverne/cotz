@@ -4,9 +4,10 @@ PLUGIN.description = "A plugin that lets you spawn in a map preset of containers
 
 PLUGIN.map_presets = {}
 
-ix.util.Include("sh_rp_marsh_cs.lua")
-ix.util.Include("sh_rp_pripyat_remaster.lua")
-ix.util.Include("sh_rp_waystation.lua")
+ix.util.Include("presets/sh_rp_marsh_cs.lua")
+ix.util.Include("presets/sh_rp_pripyat_remaster.lua")
+ix.util.Include("presets/sh_rp_waystation.lua")
+ix.util.Include("presets/sh_rp_garbage_cotz.lua")
 
 if SERVER then
 
@@ -86,7 +87,10 @@ if SERVER then
 			end
 		end,
 		["eventcontroller"] = function(id, data)
-			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" , "..data[3].." }, \n"
+			return string.format(
+				"{ Vector(%s,%s,%s), %q, %q }, \n",
+				data[1].x, data[1].y, data[1].z, data[2], data[3]
+			)
 		end,
 		["eventcontrolleradv"] = function(id, data)
 			return "[\""..id.."\"] = { Vector("..data[1].x..","..data[1].y..","..data[1].z..") , \""..data[2].."\" }, \n"

@@ -12,7 +12,7 @@ if SERVER then
 	local spawntime = 1
 
 	function PLUGIN:cleanRadiation()
-		for k, v in pairs( ents.GetAll() ) do
+		for k, v in ents.Iterator() do
 			if (string.sub(v:GetClass(), 1, 4) == "rad_") then
 				v:Remove()
 			end

@@ -96,9 +96,9 @@ function playerMeta:getFlatRadResist()
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems(true)
 
-	for _, i in pairs(items) do
-		if i.flatRadProt and i:GetData("equip") == true then
-			res = res + i.flatRadProt
+	for j, i in pairs(items) do
+		if (i.flatRadProt and i:GetData("equip") == true) then
+			res = res + i.flatRadProt * (i.GetDurabilityScale and i:GetDurabilityScale() or 1)
 		end
 	end
 
@@ -118,14 +118,10 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 
 		return true
 	end
-	if
-		entity:IsPlayer()
-		and entity:Alive()
-		and entity:GetCharacter()
-		and dmgInfo:IsDamageType(DMG_RADIATION)
-		and entity:GetMoveType() ~= MOVETYPE_NOCLIP
-	then
-		local radAmount = (dmgInfo:GetDamage() / 10)
+	if entity:IsPlayer() and entity:Alive() and entity:GetCharacter()
+		and dmgInfo:IsDamageType(DMG_RADIATION) and entity:GetMoveType() ~= MOVETYPE_NOCLIP then
+		ix.util.DamageHeadgear(entity, dmgInfo)
+		local radAmount = (dmgInfo:GetDamage()/10)
 		local percentageRadResist = entity:getPercentageRadResist()
 		local flatRadResist = entity:getFlatRadResist()
 		local finalRadDamage = radAmount * percentageRadResist
@@ -191,8 +187,8 @@ else
 	local thinkTime = CurTime()
 	local damageTime = CurTime()
 	function PLUGIN:Think()
-		if thinkTime < CurTime() then
-			for _, v in player.Iterator() do
+		if (thinkTime < CurTime()) then
+			for k, v in player.Iterator() do
 				if v:GetNetVar("radiation", 0) == 100 then
 					if v:Alive() then
 						v:Kill()
@@ -202,11 +198,12 @@ else
 			end
 			thinkTime = CurTime() + 0.5
 		end
-
-		if damageTime < CurTime() then
-			for _, v in player.Iterator() do
-				if v:Alive() then
-					if v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75 then
+		
+		--damage
+		if (damageTime < CurTime()) then
+			for k, v in player.Iterator() do
+				if (v:Alive()) then
+					if (v:GetNetVar("radiation", 0) > 45 and v:GetNetVar("radiation", 0) < 75) then
 						v:addRadiation(-0.5)
 						v:SetHealth(v:Health() - 1)
 						if v:Health() <= 0 then

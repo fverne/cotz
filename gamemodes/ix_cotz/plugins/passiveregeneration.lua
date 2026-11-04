@@ -44,9 +44,9 @@ end
 
 function PLUGIN:PostLoadData()
 	-- bedrolls, vendors
-	for _, entity in ents.Iterator() do
-		if entity:GetClass() == "ix_spawnsaver" or entity:GetClass() == "ix_vendor_adv" then
-			table.insert(self.healingEntities, entity)
+	for k, v in ents.Iterator() do
+		if v:GetClass() == "ix_spawnsaver" or v:GetClass() == "ix_vendor_adv" then
+			table.insert(self.healingEntities, v)
 		end
 	end
 end

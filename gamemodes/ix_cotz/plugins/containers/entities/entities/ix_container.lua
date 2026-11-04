@@ -20,7 +20,8 @@ if (SERVER) then
 		self:SetUseType(SIMPLE_USE)
 		self.receivers = {}
 
-		local definition = ix.container.stored[self:GetModel():lower()]
+		local model = self:GetModel()
+		local definition = model and ix.container.stored[model:lower()]
 
 		if (definition) then
 			self:SetDisplayName(definition.name)
@@ -142,7 +143,8 @@ else
 
 	function ENT:OnPopulateEntityInfo(tooltip)
 		if self:GetNoDraw() then return end
-		local definition = ix.container.stored[self:GetModel():lower()]
+		local model = self:GetModel()
+		local definition = model and ix.container.stored[model:lower()]
 		local bLocked = self:GetLocked()
 
 		surface.SetFont("ixIconsSmall")

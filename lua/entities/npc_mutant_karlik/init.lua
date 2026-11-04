@@ -282,6 +282,11 @@ end
 
 
 function ENT:GetTeleportLocation( )
+	local enemy = self:GetEnemy()
+	-- The enemy can disappear during the teleport windup.
+	if not IsValid(enemy) then return self:GetPos() end
+
+	local enemyPos = enemy:GetPos()
 	local tracegood = false
 	local teleres
 	local tracecnt = 0
@@ -297,7 +302,7 @@ function ENT:GetTeleportLocation( )
 	repeat
 		local trace = util.TraceHull( {
 			start = firstTrace.HitPos - Vector(0,0,-64),
-			endpos = self:GetEnemy():GetPos() + Vector(math.random(-1200,1200),math.random(-1200,1200),-400),
+			endpos = enemyPos + Vector(math.random(-1200,1200),math.random(-1200,1200),-400),
 			mins = Vector( -32, -32, 0 ),
 			maxs = Vector( 32, 32, 64 ),
 			filter = "npc_mutant_karlik",
@@ -305,11 +310,9 @@ function ENT:GetTeleportLocation( )
 			ignoreworld = false
 		} )
 
-		if IsValid(self:GetEnemy()) then
-			if !trace.HitSky && trace.HitPos:Distance(self:GetEnemy():GetPos()) > 600 then
-				tracegood = true
-				teleres = trace.HitPos
-			end
+		if not trace.HitSky and trace.HitPos:Distance(enemyPos) > 600 then
+			tracegood = true
+			teleres = trace.HitPos
 		end
 
 		tracecnt = tracecnt + 1

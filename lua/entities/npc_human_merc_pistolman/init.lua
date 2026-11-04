@@ -9,7 +9,7 @@ ENT.PlayerFriendly = false
 ENT.flatbulletresistance = 25
 ENT.percentbulletresistance = 20
 ENT.lootChance = 33
-ENT.lootGroup = "bandit_pistol_loot"
+ENT.lootGroup = "merc_pistol_loot"
 ENT.selectedWeaponItem = nil 
 ENT.selectedWeaponSWEP = nil
 

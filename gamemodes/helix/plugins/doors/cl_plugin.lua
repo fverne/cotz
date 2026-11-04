@@ -169,9 +169,10 @@ net.Receive("ixDoorMenu", function()
 
 	local door = net.ReadEntity()
 	local access = net.ReadTable()
-	local entity = net.ReadEntity()
 
-	if (IsValid(door)) then
+	if (IsValid(door) and !table.IsEmpty(access)) then
+		local entity = net.ReadEntity()
+
 		ix.gui.door = vgui.Create("ixDoorMenu")
 		ix.gui.door:SetDoor(door, access, entity)
 	end
@@ -190,7 +191,7 @@ net.Receive("ixDoorPermission", function()
 	local panel = door.ixPanel
 
 	if (IsValid(panel) and IsValid(target)) then
-		panel.access[target] = access
+		panel.accessData[target] = access
 
 		for _, v in ipairs(panel.access:GetLines()) do
 			if (v.player == target) then

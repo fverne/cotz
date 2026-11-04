@@ -4,6 +4,7 @@ PLUGIN.author = "Subleader and Alexgrist and verne (Outfit base used)"
 PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage resistance"
 
 ix.util.Include("cl_plugin.lua")
+ix.util.Include("sh_durability.lua")
 
 ix.config.Add("disablePVP", true, "If true, disables player versus player damage.", nil, {
 	category = "pvp",
@@ -15,7 +16,8 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 
 		return true
 	end
-	-- disable pvp
+	if target:IsPlayer() and not target:Alive() then return end
+	--disable pvp
 	local attacker = dmginfo:GetAttacker()
 	if ix.config.Get("disablePVP", true) then
 		if target:IsPlayer() and attacker:IsPlayer() and (target ~= attacker) then
@@ -27,6 +29,12 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		if attacker:GetLocalVar("inArena", false) and target:GetLocalVar("inArena", false) then
 			return
 		end
+	end
+
+	-- Radiation and psychic damage are handled before their respective health overrides.
+	if target:IsPlayer() and not dmginfo:IsDamageType(DMG_RADIATION)
+		and not dmginfo:IsDamageType(DMG_SONIC) then
+		ix.util.DamageHeadgear(target, dmginfo)
 	end
 
 	-- Bullet resistance
@@ -132,6 +140,13 @@ end
 
 local playerMeta = FindMetaTable("Player")
 
+local function getGearProtection(item, field)
+	local protection = item[field]
+	if item.GetDurabilityScale then protection = protection * item:GetDurabilityScale() end
+
+	return protection
+end
+
 function playerMeta:getPercentageBulletRes()
 	local res = 1
 	local char = self:GetCharacter()
@@ -143,7 +158,7 @@ function playerMeta:getPercentageBulletRes()
 		end
 
 		if v.br ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res * (1 - v.br)
+			res = res * (1 - getGearProtection(v, "br"))
 		end
 	end
 
@@ -161,7 +176,7 @@ function playerMeta:getFlatBulletRes()
 		end
 
 		if v.fbr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res + v.fbr
+			res = res + getGearProtection(v, "fbr")
 		end
 	end
 
@@ -184,7 +199,7 @@ function playerMeta:getPercentageSlashRes()
 		end
 
 		if v.sr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res * (1 - v.sr)
+			res = res * (1 - getGearProtection(v, "sr"))
 		end
 	end
 
@@ -202,7 +217,7 @@ function playerMeta:getFlatSlashRes()
 		end
 
 		if v.fsr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res + v.fsr
+			res = res + getGearProtection(v, "fsr")
 		end
 	end
 
@@ -225,7 +240,7 @@ function playerMeta:getPercentageAnomalyRes()
 		end
 
 		if v.ar ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res * (1 - v.ar)
+			res = res * (1 - getGearProtection(v, "ar"))
 		end
 	end
 
@@ -243,7 +258,7 @@ function playerMeta:getFlatAnomalyRes()
 		end
 
 		if v.far ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res + v.far
+			res = res + getGearProtection(v, "far")
 		end
 	end
 
@@ -266,7 +281,7 @@ function playerMeta:getPercentagePsyRes()
 		end
 
 		if v.pr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res * (1 - v.pr)
+			res = res * (1 - getGearProtection(v, "pr"))
 		end
 	end
 
@@ -284,7 +299,7 @@ function playerMeta:getFlatPsyRes()
 		end
 
 		if v.fpr ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res + v.fpr
+			res = res + getGearProtection(v, "fpr")
 		end
 	end
 

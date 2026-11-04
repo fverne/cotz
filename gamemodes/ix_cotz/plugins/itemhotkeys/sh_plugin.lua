@@ -17,7 +17,15 @@ ix.char.RegisterVar("hotkeys", {
 })
 
 netstream.Hook("ixHotkeyChange", function(client, hotkey, value)
-	client:GetCharacter():SetHotkey(hotkey, value)
+	local character = client:GetCharacter()
+	if not character or not isnumber(hotkey) or hotkey % 1 ~= 0 or hotkey < 1 or hotkey > 4 then return end
+	if not isstring(value) or (value ~= "nil" and not PLUGIN.hotkeyitems[value]) then return end
+	local nextChanges = client.cotzHotkeyChanges or {}
+	client.cotzHotkeyChanges = nextChanges
+	if (nextChanges[hotkey] or 0) > CurTime() then return end
+	nextChanges[hotkey] = CurTime() + 0.25
+	if value ~= "nil" and not character:GetInventory():HasItem(value) then return end
+	character:SetHotkey(hotkey, value)
 end)
 
 if (CLIENT) then

@@ -59,7 +59,7 @@ function ENT:SpawnFunction( ply, tr )
 	ent:SetPos( SpawnPos )
 	ent:Spawn()
 	ent:Activate()
-	timer.Simple( 1800, function() ent:Remove() end ) 
+	timer.Simple(1800, function() if IsValid(ent) then ent:Remove() end end)
 	return ent
 end
 
@@ -100,37 +100,28 @@ function ENT:PhysicsSimulate( phys, delta )
 end
 
 function ENT:Think()
-
 	local active = false
-
-	for k,v in pairs( player.GetAll() ) do
-
-		if v:GetPos():Distance( self.Entity:GetPos() ) < 2000 then
-
-			active = true
-
-		end
-
-	end
-
-	self.Active = active
-
-	if active == false then
-
-		self.ReActivate = true
-
+	if ix and ix.eventController then
+		active = ix.eventController:HasPlayerNear(self:GetPos(), 2000)
 	else
-
-		local phys = self.Entity:GetPhysicsObject()
-
-		if IsValid( phys ) then
-
-			phys:Wake()
-
+		for _, client in player.Iterator() do
+			if self:GetPos():DistToSqr(client:GetPos()) <= 2000 ^ 2 then
+				active = true
+				break
+			end
 		end
-
 	end
+	self.Active = active
+	if not active then self.ReActivate = true end
 
+	local phys = self:GetPhysicsObject()
+	if IsValid(phys) then
+		phys:EnableMotion(active)
+		if active then phys:Wake() end
+	end
+	self:NextThink(CurTime() + (active and 0.5 or 1))
+
+	return true
 end
 
 function ENT:OnTakeDamage( dmg )

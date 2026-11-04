@@ -1,4 +1,4 @@
-﻿AddCSLuaFile( "cl_init.lua" )
+AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 include('shared.lua')
 include("STALKERNPCBaseVars.lua")
@@ -132,8 +132,8 @@ end
 
 function ENT:STALKERNPCThink()
 	if (self.farttimer < CurTime()) then
-		for _,v in pairs(ents.FindInSphere(self:GetPos(),512)) do
-			if v:IsPlayer() then
+		for _, v in player.Iterator() do
+			if self:GetPos():DistToSqr(v:GetPos()) <= 512 ^ 2 then
 				local distance = self:GetPos():Distance(v:GetPos())
 
 				local TEMP_TargetDamage = DamageInfo()

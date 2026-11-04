@@ -93,7 +93,7 @@ function PLUGIN:Think()
 	if checktime < CurTime() then
 		checktime = CurTime() + 3
 
-		for k, v in pairs(player.GetAll()) do
+		for k, v in player.Iterator() do
 			for j, c in pairs(self.loadpoints) do
 				if v:GetPos():Distance(c[1]) < 128 then
 					if v:GetCharacter() and !v:GetCharacter().inmenu then
@@ -188,12 +188,27 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 		ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 
 		-- If RedirectPlayer has been called, the character has been moved to the new map, and should no longer be usable
-		character:Save()
-		character:Kick()
-
-		ix.log.Add(client, "serverTransfer", map, tempip)
-		client:Notify(character:GetName().." has been asked to be sent to "..map)
-		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+		character:Save(function()
+			if (not IsValid(client) or client:GetCharacter() ~= character) then return end
+			local function redirect(success)
+				if (not IsValid(client) or client:GetCharacter() ~= character) then return end
+				if (not success) then
+					character:SetData("curmap", game.GetMap())
+					character:Save()
+					client:Notify("Transfer failed while updating character presence. Please try again.")
+					return
+				end
+				character:Kick()
+				ix.log.Add(client, "serverTransfer", map, tempip)
+				client:Notify(character:GetName() .. " has been asked to be sent to " .. map)
+				netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+			end
+			if (ix.crossserver and ix.crossserver.Enabled()) then
+				ix.crossserver.BeginTransfer(character, map, redirect)
+			else
+				redirect(true)
+			end
+		end)
 	else
 		client:Notify("Invalid map")
 	end
@@ -224,12 +239,27 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 		ix.crossserverchat.PostMessage("SYSTEM", message, newsicon)
 
 		-- If RedirectPlayerNoLoadZone has been called, the character has been moved to the new map, and should no longer be usable
-		character:Save()
-		character:Kick()
-
-		ix.log.Add(client, "serverTransfer", map, tempip)
-		client:Notify(character:GetName().." has been asked to be sent to "..map)
-		netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+		character:Save(function()
+			if (not IsValid(client) or client:GetCharacter() ~= character) then return end
+			local function redirect(success)
+				if (not IsValid(client) or client:GetCharacter() ~= character) then return end
+				if (not success) then
+					character:SetData("curmap", game.GetMap())
+					character:Save()
+					client:Notify("Transfer failed while updating character presence. Please try again.")
+					return
+				end
+				character:Kick()
+				ix.log.Add(client, "serverTransfer", map, tempip)
+				client:Notify(character:GetName() .. " has been asked to be sent to " .. map)
+				netstream.Start(client, "ixPlayerAskConnect", client, tempip)
+			end
+			if (ix.crossserver and ix.crossserver.Enabled()) then
+				ix.crossserver.BeginTransfer(character, map, redirect)
+			else
+				redirect(true)
+			end
+		end)
 	else
 		client:Notify("Invalid map")
 	end

@@ -176,14 +176,18 @@ function ENT:STALKERNPCThink()
 	if self.grabbing2 < CurTime() && self.IsGrabbing == 2 then
 		if(IsValid(self)&&self!=nil&&self!=NULL) and self.GrabTarget then
 
-			if(!IsValid(self.GrabTarget)) then
+			if not IsValid(self.GrabTarget) then
 				self.IsGrabbing = 0
 				self.GrabTarget = nil
+
+				return
 			end
 			self:STALKERNPCStopAllTimers()
 			self:STALKERNPCClearAnimation()
 
-			self.GrabTarget:Freeze(false)			
+			if self.GrabTarget:IsPlayer() then
+				self.GrabTarget:Freeze(false)
+			end
 			self.GrabTarget:SetLocalVelocity(((self.GrabTarget:GetPos() - self:GetPos()):GetNormal() + self:GetUp()*5)*120)
 			self.GrabTarget = nil
 			self.IsGrabbing = 0
@@ -218,7 +222,9 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 					local target = self:GetEnemy()
 					self.GrabTarget = target
-					target:Freeze(true)
+					if target:IsPlayer() then
+						target:Freeze(true)
+					end
 
 					self.grabbing1 = CurTime() + 0.1
 					self.grabbing2 = CurTime() + 2.1
@@ -230,13 +236,17 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 end
 
 function ENT:STALKERNPCOnKilled()
-	if self.GrabTarget then
+	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
 		self.GrabTarget:Freeze(false)
 	end
+	self.GrabTarget = nil
+	self.IsGrabbing = 0
 end
 
-function ENT:STALKERNPCRemove() 
-	if self.GrabTarget then
+function ENT:STALKERNPCRemove()
+	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
 		self.GrabTarget:Freeze(false)
 	end
+	self.GrabTarget = nil
+	self.IsGrabbing = 0
 end

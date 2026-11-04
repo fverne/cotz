@@ -147,6 +147,12 @@ else
 	end
 
 	net.Receive("ixRecognize", function(length, client)
+		local character = client:GetCharacter()
+
+		if (!character) then
+			return
+		end
+
 		local level = net.ReadUInt(2)
 
 		if (isnumber(level)) then
@@ -170,7 +176,7 @@ else
 
 				class = ix.chat.classes[class]
 
-				for _, v in ipairs(player.GetAll()) do
+				for _, v in player.Iterator() do
 					if (client != v and v:GetCharacter() and class:CanHear(client, v)) then
 						targets[#targets + 1] = v
 					end
@@ -178,7 +184,7 @@ else
 			end
 
 			if (#targets > 0) then
-				local id = client:GetCharacter():GetID()
+				local id = character:GetID()
 				local i = 0
 
 				for _, v in ipairs(targets) do

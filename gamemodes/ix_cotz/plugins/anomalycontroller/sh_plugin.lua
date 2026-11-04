@@ -108,7 +108,7 @@ if SERVER then
 
 	-- Function that cleans up all anomalies (Entities with names starting with "anom_")
 	function PLUGIN:cleanAnomalies()
-		for k, v in pairs( ents.GetAll() ) do
+		for k, v in ents.Iterator() do
 			if (string.sub(v:GetClass(), 1, 5) == "anom_") then
 				v:Remove()
 			end

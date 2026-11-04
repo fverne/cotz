@@ -110,7 +110,7 @@ ITEM.functions.Equip = {
 
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
-	tip = "equipTip",
+	tip = "unequipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
 		local char = item.player:GetCharacter()

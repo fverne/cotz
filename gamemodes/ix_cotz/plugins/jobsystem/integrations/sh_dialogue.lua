@@ -1,0 +1,332 @@
+ix.dialogue = ix.dialogue or {}
+
+local REWARD_DATA_KEY = "taskRewardOffers"
+local CLAIM_LINE = "taskRewardClaims"
+local INTERACTION_DISTANCE = 192
+local ACTION_INTERVAL = 0.15
+
+if SERVER then
+	util.AddNetworkString("cotz/dialogue/task-offer")
+	util.AddNetworkString("cotz/dialogue/task-list")
+	util.AddNetworkString("cotz/dialogue/task-rewards-refresh")
+else
+	net.Receive("cotz/dialogue/task-list", function()
+		local target = net.ReadEntity()
+		local options = {}
+		for index = 1, net.ReadUInt(2) do
+			local difficulty, label = net.ReadString(), net.ReadString()
+			options[index] = {statement = label, topicID = "GetTaskByDifficulty",
+				dyndata = {difficulty = difficulty}}
+		end
+		LocalPlayer().cotzTaskList = {target = target, options = options}
+		local panel = ix.gui.dialogue
+		if IsValid(panel) and panel.target == target and panel.currentTopicID == "GetTaskByDifficulty" then
+			panel.options:Clear()
+			local topic = panel.tree.GetTaskByDifficulty
+			panel:prepareDynamicOptions(topic.GetDynamicOptions(topic, LocalPlayer(), target), topic.options)
+		end
+	end)
+
+	net.Receive("cotz/dialogue/task-offer", function()
+		local target = net.ReadEntity()
+		local data = {difficulty = net.ReadString(), description = net.ReadString(), choices = {}}
+		for index = 1, net.ReadUInt(2) do data.choices[index] = {label = net.ReadString()} end
+		local panel = ix.gui.dialogue
+		if IsValid(panel) and panel.target == target and panel.tree.ConfirmSupplyTask then
+			panel:startTopic("ConfirmSupplyTask", data)
+		end
+	end)
+	net.Receive("cotz/dialogue/task-rewards-refresh", function()
+		local target = net.ReadEntity()
+		local panel = ix.gui.dialogue
+		if IsValid(panel) and panel.target == target and panel.tree.TaskRewardChoices then
+			if panel.currentTopicID == "GREETING" or panel.currentTopicID == "BackTopic" then
+				panel.options:Clear()
+				local topic = panel.tree[panel.currentTopicID]
+				panel:prepareDynamicOptions(topic.GetDynamicOptions(topic, LocalPlayer(), target), topic.options)
+			end
+		end
+	end)
+end
+
+local function canChoose(client, target)
+	local character = client:GetCharacter()
+
+	local allowed = character and IsValid(target) and target:GetClass() == "ix_vendor_adv"
+		and target:CanAccess(client)
+		and client:GetPos():DistToSqr(target:GetPos()) <= INTERACTION_DISTANCE * INTERACTION_DISTANCE
+		and ix.progression.CanUseNPC(character, target:GetDisplayName())
+	if not allowed then return false end
+	local now = CurTime()
+	if now < (client.cotzTaskRewardNext or 0) then return false end
+	client.cotzTaskRewardNext = now + ACTION_INTERVAL
+
+	return true
+end
+
+local function offerOptions(character, npc)
+	local options = {}
+	for key, offer in pairs(character:GetData(REWARD_DATA_KEY, {})) do
+		local isTask = key:match("^job:") or key:match("^bonus:")
+		if isTask and offer.earned and ix.taskRewards.CanSelectOffer(character, npc, key, offer) then
+			for index, choice in ipairs(offer.choices) do
+				options[#options + 1] = {
+					statement = offer.label .. "\nClaim: "
+						.. (offer.selected == index and "[Selected] " or "") .. choice.label,
+					topicID = "TaskRewardChoices",
+					dyndata = {kind = "offer", key = key, choice = index, label = choice.label},
+				}
+			end
+		end
+	end
+
+	return options
+end
+
+local function kitOptions(character, npc, options)
+	for id, item in pairs(character:GetInventory():GetItems()) do
+		if ix.taskRewards.IsTaskKit(item.uniqueID) and not item:GetData("taskRewardRedeemed", false) then
+			local choices = ix.taskRewards.BuildChoices(character, npc,
+				ix.taskRewards.ExpectedValue(item.uniqueID), "kit:" .. id)
+			for index, choice in ipairs(choices) do
+				options[#options + 1] = {
+					statement = "Redeem " .. item:GetName() .. ": " .. choice.label,
+					topicID = "TaskRewardChoices",
+					dyndata = {kind = "kit", item = id, choice = index, label = choice.label},
+				}
+			end
+		end
+	end
+end
+
+local function barterOptions(character, npc, options)
+	for id, barter in pairs(ix.npcbarter and ix.npcbarter.barterdict[npc] or {}) do
+		local reward = barter.barterItem
+		if ix.npcbarter.activebarters[id] and ix.taskRewards.IsTaskKit(reward[1]) then
+			local choices = ix.taskRewards.BarterChoices(character, npc, id, barter)
+			for index, choice in ipairs(choices) do
+				options[#options + 1] = {
+					statement = "Barter " .. (barter.reqItem[2] or 1) .. "x "
+						.. ix.item.list[barter.reqItem[1]].name .. " for " .. choice.label,
+					topicID = "TaskRewardChoices",
+					dyndata = {kind = "barter", key = id, choice = index, label = choice.label},
+				}
+			end
+		end
+	end
+end
+
+local function configureJobPreview(dialogue)
+	local topic = dialogue.tree.GetTaskByDifficulty
+	if not topic then return end
+	topic.IsDynamic = true
+	topic.response = dialogue.townContact and topic.response or "Here is what needs doing."
+	topic.options = {"BackTopic"}
+	topic.preCallback = function(self, client, target)
+		if CLIENT then
+			client.cotzTaskList = nil
+
+			return
+		end
+		if not canChoose(client, target) then return end
+		local character = client:GetCharacter()
+		local categories = target:GetNetVar("possibleJobs", {})
+		local rows = {}
+		for _, difficulty in ipairs({"easy", "medium", "hard"}) do
+			local pool = categories[difficulty]
+			if type(pool) == "table" and #pool > 0 then
+				local preview = ix.taskRewards.PreviewJob(character, target:GetDisplayName(), difficulty, pool)
+				if preview then
+					local definition = ix.jobs.list[preview.identifier]
+					local label = difficulty:gsub("^%l", string.upper) .. " — "
+						.. string.format(definition.name, preview.numberRec)
+						.. "\nPayment: " .. preview.moneyReward .. " rubles"
+					rows[#rows + 1] = {difficulty = difficulty, label = label}
+				end
+			end
+		end
+		net.Start("cotz/dialogue/task-list")
+		net.WriteEntity(target)
+		net.WriteUInt(#rows, 2)
+		for _, row in ipairs(rows) do
+			net.WriteString(row.difficulty)
+			net.WriteString(row.label)
+		end
+		net.Send(client)
+	end
+	topic.GetDynamicOptions = function(_, client, target)
+		local list = client.cotzTaskList
+		if client:GetCharacter():GetJobs()[target:GetDisplayName()] or not list or list.target ~= target then
+			return {}
+		end
+
+		local options = {}
+		for _, option in ipairs(list.options) do
+			if ix.taskRewards.CanTakeDifficulty(client:GetCharacter(), option.dyndata.difficulty) then
+				options[#options + 1] = option
+			end
+		end
+
+		return options
+	end
+	topic.ResolveDynamicOption = function(_, client, target, data)
+		if SERVER and canChoose(client, target) and type(data) == "table" then
+			local difficulty = data.difficulty
+			local categories = target:GetNetVar("possibleJobs", {})[difficulty]
+			if type(difficulty) ~= "string" or type(categories) ~= "table" then return "BackTopic" end
+			local preview = ix.taskRewards.PreviewJob(client:GetCharacter(), target:GetDisplayName(),
+				difficulty, categories)
+			if preview then
+				local definition = ix.jobs.list[preview.identifier]
+
+				local description = string.format(definition.desc, preview.numberRec) .. "\n\nPayment: " .. preview.moneyReward
+					.. " rubles."
+				if definition.requiredItem then
+					description = description .. "\nBetter-quality hand-ins can increase this payment."
+				end
+				local offer = client:GetCharacter():GetData(REWARD_DATA_KEY, {})[preview.rewardKey]
+				description = description .. "\nChoose your reward below. Paid on completion."
+				local choices = offer and offer.choices or {}
+				net.Start("cotz/dialogue/task-offer")
+				net.WriteEntity(target)
+				net.WriteString(difficulty)
+				net.WriteString(description)
+				net.WriteUInt(#choices, 2)
+				for _, choice in ipairs(choices) do net.WriteString(choice.label) end
+				net.Send(client)
+			end
+		end
+
+		return "BackTopic"
+	end
+	dialogue.addTopic("ConfirmSupplyTask", {
+		statement = "", response = "", IsDynamic = true, IsDynamicFollowup = true,
+		DynamicPreCallback = function(self, client, _, data)
+			if CLIENT and type(data) == "table" then
+				client.cotzTaskPreview = data
+				self.response = data.description
+			end
+		end,
+		GetDynamicOptions = function(_, client)
+			local preview = client.cotzTaskPreview or {}
+			local options = {}
+			for index, choice in ipairs(preview.choices or {}) do
+				options[#options + 1] = {statement = "Accept — " .. choice.label,
+					topicID = "ConfirmSupplyTask", dyndata = {difficulty = preview.difficulty, choice = index}}
+			end
+			if #options == 0 then
+				options[1] = {statement = "Accept task", topicID = "ConfirmSupplyTask",
+					dyndata = {difficulty = preview.difficulty}}
+			end
+			options[#options + 1] = {statement = "I'll pass.", topicID = "BackTopic"}
+
+			return options
+		end,
+		ResolveDynamicOption = function(_, client, target, data)
+			if SERVER and canChoose(client, target) and type(data) == "table" then
+				ix.taskRewards.AcceptJob(client, target:GetDisplayName(), data.difficulty, data.choice)
+			end
+
+			return "BackTopic"
+		end,
+	})
+end
+
+function ix.dialogue.ConfigureTaskRewards(dialogue)
+	if not dialogue.tree.GREETING then return end
+	configureJobPreview(dialogue)
+	dialogue.addTopic("TaskRewardChoices", {
+		statement = "",
+		ShouldAdd = function(_, client, target)
+			local character = client:GetCharacter()
+			local npc = target:GetDisplayName()
+			local options = offerOptions(character, npc)
+			kitOptions(character, npc, options)
+			barterOptions(character, npc, options)
+			local pending = ix.progression.GetLine(character, CLAIM_LINE).pendingRewards
+
+			return #options > 0 or (pending and #pending > 0) or false
+		end,
+		response = "",
+		IsDynamic = true,
+		options = {"BackTopic"},
+		GetDynamicOptions = function(_, client, target)
+			if not ix.taskRewards then return {} end
+			local character = client:GetCharacter()
+			local options = offerOptions(character, target:GetDisplayName())
+			kitOptions(character, target:GetDisplayName(), options)
+			barterOptions(character, target:GetDisplayName(), options)
+			local line = ix.progression.GetLine(character, CLAIM_LINE)
+			if line.pendingRewards and #line.pendingRewards > 0 then
+				options[#options + 1] = {
+					statement = "Collect stored items (" .. #line.pendingRewards .. " remaining)",
+					topicID = "TaskRewardChoices", dyndata = {kind = "claim"},
+				}
+			end
+			table.sort(options, function(first, second) return first.statement < second.statement end)
+
+			return options
+		end,
+		ResolveDynamicOption = function(_, client, target, data)
+			if SERVER and type(data) == "table" and canChoose(client, target) then
+				local character = client:GetCharacter()
+				local isOffer = data.kind == "offer" and type(data.key) == "string"
+				and (data.key:match("^job:") or data.key:match("^bonus:"))
+				if isOffer then
+					ix.taskRewards.SelectOffer(character, target:GetDisplayName(), data.key, data.choice, data.label)
+				elseif data.kind == "kit" then
+					ix.taskRewards.RedeemKit(character, target:GetDisplayName(), data.item, data.choice, data.label)
+				elseif data.kind == "barter" then
+					ix.taskRewards.ExecuteBarter(character, target:GetDisplayName(), data.key, data.choice, data.label)
+				elseif data.kind == "claim" then
+					ix.taskRewards.ClaimNext(character)
+				end
+				net.Start("cotz/dialogue/task-rewards-refresh")
+				net.WriteEntity(target)
+				net.Send(client)
+			end
+
+			return "BackTopic"
+		end,
+	})
+	for _, id in ipairs({"GREETING", "BackTopic", "AboutWorkTopic"}) do
+		local topic = dialogue.tree[id]
+		if topic then
+			local options = {}
+			for _, option in ipairs(topic.options or {}) do
+				if option ~= "TaskRewardChoices" then options[#options + 1] = option end
+			end
+			topic.options = ix.dialogue.OrderOptions(options, id == "GREETING" or id == "BackTopic")
+		end
+	end
+	for _, id in ipairs({"GREETING", "BackTopic"}) do
+		local root = dialogue.tree[id]
+		if root then
+			root.IsDynamic = true
+			if not root.cotzRewardOptions then
+				local previous = root.GetDynamicOptions
+				root.GetDynamicOptions = function(self, client, target)
+					local options = previous and previous(self, client, target) or {}
+					local rewards = dialogue.tree.TaskRewardChoices:GetDynamicOptions(client, target)
+					for _, option in ipairs(rewards) do options[#options + 1] = option end
+
+					return options
+				end
+				root.cotzRewardOptions = true
+			end
+			if root.preCallback ~= root.cotzRewardPreCallback or not root.cotzRewardPreCallback then
+				local previous = root.preCallback
+				root.preCallback = function(self, client, target)
+					if previous then previous(self, client, target) end
+					if SERVER and canChoose(client, target) then
+						ix.taskRewards.RefreshBonuses(client:GetCharacter(), target:GetDisplayName())
+						net.Start("cotz/dialogue/task-rewards-refresh")
+						net.WriteEntity(target)
+						net.Send(client)
+					end
+				end
+				root.cotzRewardPreCallback = root.preCallback
+			end
+		end
+	end
+end

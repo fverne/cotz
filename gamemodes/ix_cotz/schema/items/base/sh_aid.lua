@@ -60,3 +60,37 @@ end
 function ITEM:GetPrice()
 	return math.Round(self.price * self:GetData("quantity", self.quantity) / self.quantity)
 end
+
+function ITEM:CanUseBandage()
+	local client = self.player
+	if not IsValid(client) or not client:Alive() or IsValid(self.entity) then return false end
+
+	local character = client:GetCharacter()
+	if not character or self.invID ~= character:GetInventory():GetID() then return false end
+	if client:GetNetVar("ix_hasBlackScreen", false) then return false end
+
+	return self:GetData("quantity", self.quantity) >= 1
+end
+
+function ITEM:StartBandageTreatment()
+	if not self:CanUseBandage() then return false end
+
+	local client = self.player
+	local character = client:GetCharacter()
+	local restore, duration, bleedRestore = self.restore, self.restoreduration, self.bleedRestore
+	local token = {}
+	client.cotzBandageAction = token
+	ix.util.PlayerPerformBlackScreenAction(client, "Wrapping Bandages", 10, function(player)
+		if not IsValid(player) or not player:Alive() or player:GetCharacter() ~= character then return end
+		if player.cotzBandageAction ~= token then return end
+
+		player.cotzBandageAction = nil
+		player:AddBuff("buff_slowheal", duration, {amount = restore})
+		local buffs = ix.plugin.Get("buffs")
+		if buffs then
+			buffs:HealBleeding(player, bleedRestore)
+		end
+	end)
+
+	return true
+end

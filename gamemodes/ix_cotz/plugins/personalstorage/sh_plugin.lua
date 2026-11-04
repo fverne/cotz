@@ -91,7 +91,7 @@ if SERVER then
 		then
 			return false
 		end
-		-- Rebind an existing session when moving between Cleaner and a hideout.
+		-- Rebind an existing session when moving between Ballast and a hideout.
 		self:ClosePersonalInventory(inventory)
 		ix.storage.Open(client, inventory, {
 			entity = entity,

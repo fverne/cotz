@@ -257,7 +257,7 @@ SWEP.Dist = 150
 function SWEP:Think()
 	if self.LastScan < CurTime() then
 		self.Anomalies = {}
-		for k,v in pairs(ents.GetAll()) do
+		for k, v in ents.Iterator() do
 			if v:GetClass() == "ix_item" then
 				if anomalies[string.lower(v:GetModel())] then
 					table.insert(self.Anomalies, v)

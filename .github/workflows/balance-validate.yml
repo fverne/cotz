@@ -7,6 +7,8 @@ on:
       - 'lua/entities/**'
       - 'lua/weapons/**'
       - 'docs/balance/**'
+      - 'tests/progression_spec.lua'
+      - 'tests/vendor_stock_spec.lua'
       - '.github/workflows/balance-*.yml'
   workflow_dispatch:
 
@@ -26,6 +28,10 @@ jobs:
           cache: pip
           cache-dependency-path: docs/balance/requirements.txt
       - run: python -m pip install -r docs/balance/requirements.txt
+      - name: Install Lua for progression regression checks
+        run: sudo apt-get update && sudo apt-get install -y lua5.4
+      - run: lua5.4 tests/progression_spec.lua
+      - run: lua5.4 tests/vendor_stock_spec.lua
       - run: python -m unittest discover -s docs/balance/tests -v
       - run: python docs/balance/balance.py export
       - name: Verify unchanged workbook produces no edits

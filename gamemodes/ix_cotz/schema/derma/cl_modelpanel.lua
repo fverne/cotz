@@ -53,6 +53,10 @@ local PANEL = {}
 		local xRatio2 = x / scrW
 		local entity = self.Entity
 
+		if not IsValid(entity) then
+			return
+		end
+
 		entity:SetPoseParameter("head_pitch", yRatio*90 - 30)
 		entity:SetPoseParameter("head_yaw", (xRatio - xRatio2)*90 - 5)
 		entity:SetAngles(MODEL_ANGLE)

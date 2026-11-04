@@ -121,9 +121,9 @@ if (SERVER) then
 		if (curChar) then
 			local inv = curChar:GetInventory()
 
-			for _, v in pairs(inv:GetItems()) do
-				if (v:GetData("equip") == true and v.pacData) then
-					client:AddPart(v.uniqueID, v)
+			for _, k in pairs(inv:GetItems()) do
+				if (k:GetData("equip") == true and k.pacData) then
+					client:AddPart(k.uniqueID, k)
 				end
 			end
 		end
@@ -156,9 +156,9 @@ if (SERVER) then
 			local character = client:GetCharacter()
 			local inventory = character:GetInventory()
 
-			for _, v in pairs(inventory:GetItems()) do
-				if (v:GetData("equip") == true and v.pacData) then
-					client:AddPart(v.uniqueID, v)
+			for _, k in pairs(inventory:GetItems()) do
+				if (k:GetData("equip") == true and k.pacData) then
+					client:AddPart(k.uniqueID, k)
 				end
 			end
 		end
@@ -189,9 +189,15 @@ else
 	end
 
 	local function RemovePart(client, uniqueID)
+		local itemTable = ix.item.list[uniqueID]
 		local pacData = ix.pac.list[uniqueID]
 
 		if (pacData) then
+			if (itemTable and itemTable.pacAdjust) then
+				pacData = table.Copy(pacData)
+				pacData = itemTable:pacAdjust(pacData, client)
+			end
+
 			if (isfunction(client.RemovePACPart)) then
 				client:RemovePACPart(pacData)
 			else
@@ -207,7 +213,7 @@ else
 		end
 
 		if (IsValid(pac.LocalPlayer)) then
-			for _, v in ipairs(player.GetAll()) do
+			for _, v in player.Iterator() do
 				local character = v:GetCharacter()
 
 				if (character) then
@@ -302,7 +308,7 @@ else
 			end
 
 			if (class:find("HL2MPRagdoll")) then
-				for _, v in ipairs(player.GetAll()) do
+				for _, v in player.Iterator() do
 					if (v:GetRagdollEntity() == entity) then
 						entity.objCache = v
 					end

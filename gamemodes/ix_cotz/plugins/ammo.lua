@@ -2,114 +2,60 @@ PLUGIN.name = "Ammo"
 PLUGIN.author = "Lt. Taylor - modified by gumlefar"
 PLUGIN.desc = "Adds an ammo from inventory system - only takes ammo on reload"
 
-if (CLIENT) then return end
-
-local delay = 0
-
-function PLUGIN:WeaponReloadFinished(entity, isShotgunReload)
-    if entity:IsPlayer() then
-		local wep = entity:GetActiveWeapon()
-		local wepclass = wep:GetClass()
-		local wepitem
-		local ammo = {}
-		
-		for k,v in pairs(entity:GetChar():GetInv():GetItems()) do
-			if v.isAmmo == true then
-				if wep.Primary.Ammo == v.ammo then
-					table.insert(ammo, v)
-				end
-			end
-
-			if v.isWeapon && v.class == wepclass && v:GetData("equip",false) then
-				wepitem = v
+if SERVER then
+	local function getAmmoItems(client, weapon)
+		if not IsValid(weapon) or not weapon.CW20Weapon or not weapon.Primary then return end
+		if not client:IsPlayer() or not client:Alive() then return end
+		local character = client:GetCharacter()
+		if not character then return end
+		local ammoItems = {}
+		local ammoCount = 0
+		for _, item in pairs(character:GetInventory():GetItems()) do
+			if item.isAmmo and item.ammo == weapon.Primary.Ammo then
+				ammoItems[#ammoItems + 1] = item
+				ammoCount = ammoCount + item:GetData("quantity", item.ammoAmount or 0)
 			end
 		end
 
-		--Cheeky
-		if ( #ammo == 0 ) then
-			timer.Simple(0.5, function() wep:SetClip1(0) end)
-		end
+		return ammoItems, ammoCount
+	end
 
-		if not isShotgunReload then 
-			local ammoInMag = wep:Clip1()
-			local maxAmmoInMag = wep:GetMaxClip1()
-			local neededAmmo = maxAmmoInMag - ammoInMag
-			local foundAmmo = 0
-	
-			for k,v in pairs(ammo) do
-				local ammocount = v:GetData("quantity",0)
-	
-				if ammocount > neededAmmo then
-					v:SetData("quantity", ammocount-neededAmmo)
-					wepitem:SetData("ammo", ammoInMag+foundAmmo)
-					break
-				else
-					v:Remove()
-				end
-	
-				foundAmmo = foundAmmo + ammocount
-				neededAmmo = neededAmmo - ammocount
-			end
-		end
-    end
-end
-
-
-hook.Add("WeaponReloadFinished", "Weapon_ReloadFinished", WeaponReloadFinished)
-
-function PLUGIN:ProcessShotgunReload(entity)
-    if entity:IsPlayer() then
-		local wep = entity:GetActiveWeapon()
-		local wepclass = wep:GetClass()
-		local wepitem
-		local ammo = {}
-		
-		for k,v in pairs(entity:GetChar():GetInv():GetItems()) do
-			if v.isAmmo == true then
-				if wep.Primary.Ammo == v.ammo then
-					table.insert(ammo, v)
-				end
-			end
-
-			if v.isWeapon && v.class == wepclass && v:GetData("equip",false) then
-				wepitem = v
-			end
-		end
-	
-		for k,v in pairs(ammo) do
-			local ammocount = v:GetData("quantity",0)-1
-	
-			if ammocount > 0 then
-				v:SetData("quantity", ammocount)
-				wepitem:SetData("ammo", wepitem:GetData("ammo", 0))
-				break
+	local function consumeAmmo(client, weapon, amount)
+		local ammoItems = getAmmoItems(client, weapon)
+		if not ammoItems then return end
+		local remaining = amount
+		for _, item in ipairs(ammoItems) do
+			if remaining <= 0 then break end
+			local quantity = item:GetData("quantity", item.ammoAmount or 0)
+			local consumed = math.min(quantity, remaining)
+			remaining = remaining - consumed
+			if quantity == consumed then
+				item:Remove()
 			else
-				v:Remove()
-				break
+				item:SetData("quantity", quantity - consumed)
 			end
 		end
-    end
-end
-
-
-hook.Add("ProcessShotgunReload", "Process_ShotgunReload", ProcessShotgunReload)
-
-function PLUGIN:AmmoCheck(client, weapon)
-	local ammoCount = 0
-	local ammoType = weapon.Primary.Ammo
-	
-	for k,v in pairs(client:GetChar():GetInv():GetItems()) do
-		if v.isAmmo then
-			if ammoType == v.ammo then
-				ammoCount = ammoCount + v:GetData("quantity",0)
-			end
+		local item = weapon.ixItem
+		if item then
+			item:SetData("ammo", weapon:Clip1())
 		end
 	end
-	if ammoCount > 0 then
-		client:SetAmmo(ammoCount,ammoType)
-	else
-		client:SetAmmo(0,ammoType)
+
+	function PLUGIN:WeaponReloadFinished(client, isShotgunReload, weapon, loadedRounds)
+		if isShotgunReload or not loadedRounds then return end
+		consumeAmmo(client, weapon, loadedRounds)
+	end
+
+	function PLUGIN:ProcessShotgunReload(client, weapon)
+		consumeAmmo(client, weapon, 1)
+	end
+
+	function PLUGIN:AmmoCheck(client, weapon)
+		local ammoItems, ammoCount = getAmmoItems(client, weapon)
+		if not ammoItems then return end
+		local ammoType = weapon.Primary.Ammo
+		if client:GetAmmoCount(ammoType) ~= ammoCount then
+			client:SetAmmo(ammoCount, ammoType)
+		end
 	end
 end
-
-hook.Add("AmmoCheck", "Ammo_Check", AmmoCheck)

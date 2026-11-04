@@ -87,6 +87,7 @@ def main():
         ROOT / "ix_cotz/plugins/radiation/sh_plugin.lua",
         ROOT / "ix_cotz/plugins/suits/sh_plugin.lua",
         ROOT / "ix_cotz/plugins/dialogue/dialogue/sh_owlnpc.lua",
+        ROOT / "ix_cotz/plugins/townnpcs/libs/sv_services.lua",
         ROOT / "ix_cotz/plugins/saveitems.lua",
         ROOT / "ix_cotz/schema/libs/sh_item.lua",
         ROOT / "ix_cotz/schema/meta/sh_item.lua",
@@ -117,6 +118,11 @@ def main():
     lua.run("personalPlugin = PLUGIN; PLUGIN = {}", "regeneration setup")
     lua.run((ROOT / "ix_cotz/plugins/passiveregeneration.lua").read_text(), "passive regeneration plugin")
     lua.run("regenerationPlugin = PLUGIN; PLUGIN = hideoutPlugin", "restore hideouts")
+    lua.run('''PLUGIN = {settings = {actionInterval = 0},
+        CanInteract = function() return true end,
+        HasService = function() return true end}''', "town storage setup")
+    lua.run((ROOT / "ix_cotz/plugins/townnpcs/libs/sv_services.lua").read_text(), "town services")
+    lua.run("townPlugin = PLUGIN; PLUGIN = hideoutPlugin", "restore hideouts after town services")
     lua.run((HERE / "safezone_storage_cases.lua").read_text(), "safezone and personal storage cases")
     lua.run((ROOT / "ix_cotz/plugins/hideouts/sh_commands.lua").read_text(), "hideout commands")
     lua.run('''Test("every hideout command is admin-only", function()

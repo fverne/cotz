@@ -6,6 +6,7 @@ AddCSLuaFile( "shared.lua" )
 
 include( "STALKERNPCBaseVars.lua" )
 include( "shared.lua" )
+include("sv_performance.lua")
 include( "schedules.lua" )
 include( "tasks.lua" )
 
@@ -273,10 +274,12 @@ function ENT:STALKERNPCTryToFindEnemy()
 	local TEMP_NearEnemyCount = 0
 	local TEMP_PossibleTarget = NULL
 
-	local TEMP_NearestNpcDistance = 1500
+	local nearestDistanceSquared = 1500 ^ 2
+	local position = self:GetPos()
+	local facingYaw = self:GetAngles().Yaw
 	local TEMP_NearestNpc = self
 
-	local TEMP_MyNearbyTargets = ents.FindInSphere(self:GetPos(),TEMP_NearestNpcDistance)
+	local TEMP_MyNearbyTargets = ents.FindInSphere(position, 1500)
 
 	if (#TEMP_MyNearbyTargets>0) then
 		for T=1, #TEMP_MyNearbyTargets do
@@ -297,19 +300,16 @@ function ENT:STALKERNPCTryToFindEnemy()
 							self:STALKERNPCCheckingNPCOnEnemyFind(TEMP_NPC,TEMP_NPC:Disposition(self))
 						end
 
-						local TEMP_Ang = (TEMP_NPC:GetPos()-self:GetPos()):Angle().Yaw-self:GetAngles().Yaw
+						local candidatePosition = TEMP_NPC:GetPos()
+						local distanceSquared = position:DistToSqr(candidatePosition)
+						local TEMP_Ang = (candidatePosition - position):Angle().Yaw - facingYaw
 
 						if(math.abs(TEMP_Ang)<90) then
 
 							if(TEMP_NPC:IsPlayer()||TEMP_NPC:Disposition(self)==D_HT) then
-								if(T==1) then
-									TEMP_NearestNpcDistance = self:GetPos():Distance(TEMP_NPC:GetPos())
+								if distanceSquared < nearestDistanceSquared then
+									nearestDistanceSquared = distanceSquared
 									TEMP_NearestNpc = TEMP_NPC
-								else
-									if(self:GetPos():Distance(TEMP_NPC:GetPos())<TEMP_NearestNpcDistance) then
-										TEMP_NearestNpcDistance = self:GetPos():Distance(TEMP_NPC:GetPos())
-										TEMP_NearestNpc = TEMP_NPC
-									end
 								end
 
 								if(self.NearestEnemyFindDistance>0) then
@@ -429,7 +429,11 @@ function ENT:STALKERNPCKill(dmginfo)
 
 				TEMP_Ragdoll:TakeDamageInfo(dmginfo)
 
-				TEMP_Ragdoll:Fire("kill","",180)
+				if ix and ix.eventController and self:GetClass():sub(1, 11) == "npc_mutant_" then
+					ix.eventController:TrackCorpse(TEMP_Ragdoll)
+				else
+					TEMP_Ragdoll:Fire("kill", "", 180)
+				end
 				TEMP_KillTime = 0.1
 			end
 		else
@@ -944,17 +948,38 @@ end
 function ENT:ExpressionFinished( strExp )
 end
 
+local PENDING_TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping"}
+
+function ENT:STALKERNPCCancelPendingTargetAbilities()
+	if IsValid(self:GetEnemy()) then return end
+
+	local cancelled = false
+	for _, field in ipairs(PENDING_TARGET_ABILITIES) do
+		-- State 1 is the windup; later states must still run their landing/recovery cleanup.
+		if self[field] == 1 then
+			self[field] = 0
+			cancelled = true
+		end
+	end
+	if not cancelled then return end
+
+	self:STALKERNPCStopAllTimers()
+	self:STALKERNPCClearAnimation()
+end
+
 function ENT:Think()
+	if self.cotzSleeping then return end
 	if(GetConVar("ai_disabled"):GetInt()==0&&self.IsAlive==true) then
 
+		self:STALKERNPCCancelPendingTargetAbilities()
 		self:STALKERNPCThink()
 
 		if(self.PlayingAnimation==true) then
 			self:STALKERNPCAnimationIsPlaying()
 		end
 
-		if(self.NextTryingFindEnemy<CurTime()) then
-			self.NextTryingFindEnemy = CurTime()+2
+		if self:STALKERNPCTryEnemySearch() then
+			self.NextTryingFindEnemy = CurTime() + 2
 			local TEMP_NearEnemyCount = self:STALKERNPCTryToFindEnemy()
 			self:STALKERNPCOnEnemyCountFinded(TEMP_NearEnemyCount)
 		end
@@ -1008,12 +1033,13 @@ function ENT:Think()
 		end
 	end
 
-	self:NextThink( CurTime() )
+	self:NextThink(CurTime() + self:STALKERNPCGetThinkInterval())
 	return true
 
 end
 
 function ENT:OnTakeDamage(dmginfo)
+	self:STALKERNPCWake()
 	if(self.IsAlive==false) then return end
 
 	local TEMP_DMGMUL = 1

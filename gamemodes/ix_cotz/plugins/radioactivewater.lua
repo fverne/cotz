@@ -29,7 +29,7 @@ if SERVER then
 		end
 	
 		if(self.thinkTimer < CurTime()) then
-			for _, player in pairs(player.GetAll()) do
+			for _, player in player.Iterator() do
 				if(player:WaterLevel() > 0 and not movetypes[player:GetMoveType()]) then
 					local TEMP_TargetDamage = DamageInfo()
 									

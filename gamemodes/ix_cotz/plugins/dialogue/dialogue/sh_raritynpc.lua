@@ -4,8 +4,8 @@ DIALOGUE.addTopic("GREETING", {
 	response = " ** The entity spins in silence. **",
 	options = {
 		"TradeTopic",
-		-- "SpecialSaleTopic",
-		"GOODBYE"
+		"AboutProgression",
+		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
 		-- Special Sale
@@ -14,14 +14,23 @@ DIALOGUE.addTopic("GREETING", {
 		-- 	if cooldown < os.time() or !client:GetData("specialSaleItemsRarity") then
 		-- 		local randomItems = {}
 		-- 		local randomItemCategories = {
-		-- 			{itemCategory = "specialsale_raritynpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
-		-- 			{itemCategory = "specialsale_raritynpc_rifle_1", dialogue = "I'm looking weapons that can deal with a bit of everything.", reqRep = 282},
-		-- 			{itemCategory = "specialsale_raritynpc_longrifle_1", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
-		-- 			{itemCategory = "specialsale_raritynpc_heavy_1", dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
-		-- 			{itemCategory = "specialsale_raritynpc_shotgun_1", dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
-		-- 			{itemCategory = "specialsale_raritynpc_br_1", dialogue = "I'm looking for better protection against mutants.", reqRep = 50},
-		-- 			{itemCategory = "specialsale_raritynpc_headgear_1", dialogue = "I'm looking for better headwear.", reqRep = 50},
-		-- 			{itemCategory = "specialsale_raritynpc_ar_1", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
+		--                         {itemCategory = "specialsale_raritynpc_smg_1", dialogue = "I like to
+		-- run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
+		--                         {itemCategory = "specialsale_raritynpc_rifle_1", dialogue = "I'm
+		-- looking weapons that can deal with a bit of everything.", reqRep = 282},
+		--                         {itemCategory = "specialsale_raritynpc_longrifle_1", dialogue = "I'm
+		-- looking for a weapon to kill things from afar.", reqRep = 765},
+		--                         {itemCategory = "specialsale_raritynpc_heavy_1", dialogue = "I like to
+		-- keep shooting until there is nothing left to shoot at.", reqRep = 9338},
+		--                         {itemCategory = "specialsale_raritynpc_shotgun_1", dialogue = "I want
+		-- to fill mutants with pellets of lead.", reqRep = 1943},
+		--                         {itemCategory = "specialsale_raritynpc_br_1", dialogue = "I'm looking
+		-- for better protection against mutants.", reqRep = 50},
+		--                         {itemCategory = "specialsale_raritynpc_headgear_1", dialogue = "I'm
+		-- looking for better headwear.", reqRep = 50},
+		--                         {itemCategory = "specialsale_raritynpc_ar_1", dialogue = "I'm the
+		-- clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep =
+		-- 4254},
 		-- 		}
 
 		-- 		for k,v in pairs(randomItemCategories) do
@@ -36,14 +45,14 @@ DIALOGUE.addTopic("GREETING", {
 		-- 		target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 		-- 	end
 		-- end
-	end
+	end,
 })
 
 DIALOGUE.addTopic("TradeTopic", {
 	statement = "Uhm, do you have anything I can buy?",
 	response = "...",
 	postCallback = function(self, client, target)
-		if (SERVER) then
+		if SERVER then
 			local character = client:GetCharacter()
 
 			target.receivers[#target.receivers + 1] = client
@@ -51,26 +60,32 @@ DIALOGUE.addTopic("TradeTopic", {
 			local items = {}
 
 			-- Only send what is needed.
-			for k, v in pairs(target.items) do
-				if (!table.IsEmpty(v) and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])) then
-					items[k] = v
+			for k, v in pairs(ix.vendorStock.GetItems(character, target)) do
+				if
+					not table.IsEmpty(v)
+					and (CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or v[VENDOR_MODE])
+				then
+					if ix.progression.CanBuyItem(character, target:GetDisplayName(), k) then
+						items[k] = v
+					end
 				end
 			end
 
 			target.scale = target.scale or 0.5
 
 			client.ixVendorAdv = target
+			client.ixVendorAdvEditing = nil
 
 			-- force sync to prevent outdated inventories while buying/selling
-			if (character) then
+			if character then
 				character:GetInventory():Sync(client, true)
 			end
 
 			net.Start("ixVendorAdvOpen")
-				net.WriteEntity(target)
-				net.WriteUInt(target.money or 0, 16)
-				net.WriteTable(items)
-				net.WriteFloat(target.scale or 0.5)
+			net.WriteEntity(target)
+			net.WriteUInt(target.money or 0, 16)
+			net.WriteTable(items)
+			net.WriteFloat(target.scale or 0.5)
 			net.Send(client)
 
 			ix.log.Add(client, "vendorUse", target:GetDisplayName())
@@ -78,7 +93,7 @@ DIALOGUE.addTopic("TradeTopic", {
 	end,
 	options = {
 		"BackTopic",
-	}
+	},
 })
 
 -- DIALOGUE.addTopic("SpecialSaleTopic", {
@@ -91,12 +106,14 @@ DIALOGUE.addTopic("TradeTopic", {
 -- 	GetDynamicOptions = function(self, client, target)
 -- 		local dynopts = {}
 -- 		local randomItems = client:GetData("specialSaleItemsRarity", {})
-		
+
 -- 		for k,v in pairs(randomItems) do
 -- 			local item = ix.item.list[v[1]]
 -- 			local itemdata = ix.item.list[v[2]]
 -- 			local dialogue = v[3]
--- 			table.insert(dynopts, {statement = dialogue.. " (Price: " .. item.price*4.00 .. ")", topicID = "SpecialSaleTopic", dyndata = {itemuid = item.uniqueID, cost = item.price*4.00, itemdata = itemdata}})
+--                         table.insert(dynopts, {statement = dialogue.. " (Price: " .. item.price*4.00 ..
+-- ")", topicID = "SpecialSaleTopic", dyndata = {itemuid = item.uniqueID, cost = item.price*4.00, itemdata
+-- = itemdata}})
 -- 		end
 
 -- 		-- Return table of options
@@ -133,7 +150,8 @@ DIALOGUE.addTopic("TradeTopic", {
 
 -- 		local dynopts = {
 -- 			{statement = "Uhm, sure, here.", topicID = "ConfirmSpecialSale", dyndata = {accepted = true}},
--- 			{statement = "You're not getting my money.", topicID = "ConfirmSpecialSale", dyndata = {accepted = false}},
+--                         {statement = "You're not getting my money.", topicID = "ConfirmSpecialSale",
+-- dyndata = {accepted = false}},
 -- 		}
 
 -- 		-- Return table of options
@@ -143,7 +161,9 @@ DIALOGUE.addTopic("TradeTopic", {
 -- 		return dynopts
 -- 	end,
 -- 	ResolveDynamicOption = function(self, client, target, dyndata)
--- 		if( SERVER and dyndata.accepted and client:GetCharacter():GetInventory():Add(target.specialsalestruct[1], 1, target.specialsalestruct[3] or {})) then
+--                 if( SERVER and dyndata.accepted and
+-- client:GetCharacter():GetInventory():Add(target.specialsalestruct[1], 1, target.specialsalestruct[3] or
+-- {})) then
 -- 			ix.dialogue.notifyItemGet(client, ix.item.list[target.specialsalestruct[1]].name)
 -- 			ix.dialogue.notifyMoneyLost(client, target.specialsalestruct[2])
 -- 			client:GetCharacter():TakeMoney(target.specialsalestruct[2])
@@ -169,8 +189,8 @@ DIALOGUE.addTopic("BackTopic", {
 	response = "...",
 	options = {
 		"TradeTopic",
-		-- "SpecialSaleTopic",
-		"GOODBYE"
+		"AboutProgression",
+		"GOODBYE",
 	},
 	preCallback = function(self, client, target)
 		-- if (SERVER) then
@@ -178,14 +198,23 @@ DIALOGUE.addTopic("BackTopic", {
 		-- 	if cooldown < os.time() or !client:GetData("specialSaleItemsRarity") then
 		-- 		local randomItems = {}
 		-- 		local randomItemCategories = {
-		-- 			{itemCategory = "specialsale_raritynpc_smg_1", dialogue = "I like to run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
-		-- 			{itemCategory = "specialsale_raritynpc_rifle_1", dialogue = "I'm looking weapons that can deal with a bit of everything.", reqRep = 282},
-		-- 			{itemCategory = "specialsale_raritynpc_longrifle_1", dialogue = "I'm looking for a weapon to kill things from afar.", reqRep = 765},
-		-- 			{itemCategory = "specialsale_raritynpc_heavy_1", dialogue = "I like to keep shooting until there is nothing left to shoot at.", reqRep = 9338},
-		-- 			{itemCategory = "specialsale_raritynpc_shotgun_1", dialogue = "I want to fill mutants with pellets of lead.", reqRep = 1943},
-		-- 			{itemCategory = "specialsale_raritynpc_br_1", dialogue = "I'm looking for better protection against mutants.", reqRep = 50},
-		-- 			{itemCategory = "specialsale_raritynpc_headgear_1", dialogue = "I'm looking for better headwear.", reqRep = 50},
-		-- 			{itemCategory = "specialsale_raritynpc_ar_1", dialogue = "I'm the clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep = 4254},
+		--                         {itemCategory = "specialsale_raritynpc_smg_1", dialogue = "I like to
+		-- run and gun, and I'd like something small and fast-shooting.", reqRep = 0},
+		--                         {itemCategory = "specialsale_raritynpc_rifle_1", dialogue = "I'm
+		-- looking weapons that can deal with a bit of everything.", reqRep = 282},
+		--                         {itemCategory = "specialsale_raritynpc_longrifle_1", dialogue = "I'm
+		-- looking for a weapon to kill things from afar.", reqRep = 765},
+		--                         {itemCategory = "specialsale_raritynpc_heavy_1", dialogue = "I like to
+		-- keep shooting until there is nothing left to shoot at.", reqRep = 9338},
+		--                         {itemCategory = "specialsale_raritynpc_shotgun_1", dialogue = "I want
+		-- to fill mutants with pellets of lead.", reqRep = 1943},
+		--                         {itemCategory = "specialsale_raritynpc_br_1", dialogue = "I'm looking
+		-- for better protection against mutants.", reqRep = 50},
+		--                         {itemCategory = "specialsale_raritynpc_headgear_1", dialogue = "I'm
+		-- looking for better headwear.", reqRep = 50},
+		--                         {itemCategory = "specialsale_raritynpc_ar_1", dialogue = "I'm the
+		-- clumsy type, and often stumble into anomalous zones. I'm looking for protection.", reqRep =
+		-- 4254},
 		-- 		}
 
 		-- 		for k,v in pairs(randomItemCategories) do
@@ -200,11 +229,88 @@ DIALOGUE.addTopic("BackTopic", {
 		-- 		target:SetNetVar("lastSpecialSale", os.time() + ix.config.Get("specialSaleCooldown", 30))
 		-- 	end
 		-- end
-	end
+	end,
 })
 
 DIALOGUE.addTopic("GOODBYE", {
 	statement = "I'll be going.",
-	response = "..."
+	response = "...",
 })
 
+DIALOGUE.addTopic("HandInComplexProgressionItemTopic", {
+	statement = "",
+	response = "",
+	IsDynamicFollowup = true,
+	options = { "BackTopic" },
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		ix.dialogue.ProgressionTurnIn(self, player, target, dynamicData)
+	end,
+})
+
+DIALOGUE.addTopic("ViewProgression", {
+	statement = "",
+	response = "",
+	options = {
+		"BackTopic",
+	},
+
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local identifier = self.tmp
+		self.tmp = nil
+
+		return ix.progression.GetDeliveryOptions(client:GetCharacter(), identifier)
+	end,
+	ResolveDynamicOption = function(self, client, target, dynamicData)
+		-- Return the next topicID
+
+		return "HandInComplexProgressionItemTopic", dynamicData
+	end,
+
+	IsDynamicFollowup = true,
+	DynamicPreCallback = function(self, player, target, dynamicData)
+		if dynamicData then
+			if CLIENT then
+				local definition = ix.progression.definitions[dynamicData.identifier]
+				local progressionStatus =
+					ix.progression.GetLine(player:GetCharacter(), dynamicData.identifier)
+
+				if definition.requirementSlots then
+					progressionStatus = ix.progression.GetComplexProgressionValue(
+						player:GetCharacter(),
+						dynamicData.identifier
+					)
+				end
+
+				self.response = ix.progression.DescribeTask(definition,
+					target:GetDisplayName(),
+					progressionStatus,
+					player:GetCharacter()
+				)
+				self.tmp = dynamicData.identifier
+			end
+		end
+	end,
+})
+
+DIALOGUE.addTopic("AboutProgression", {
+	statement = "Do you need help with anything?",
+	response = "These are your available progression tasks and unclaimed rewards.",
+	options = {"BackTopic"},
+	IsDynamic = true,
+	GetDynamicOptions = function(self, client, target)
+		local options = {}
+		for _, id in ipairs(ix.progression.GetActiveProgressions(client:GetCharacter(), target:GetDisplayName())) do
+			options[#options + 1] = {
+				statement = ix.progression.definitions[id].name,
+				topicID = "AboutProgression",
+				dyndata = {identifier = id},
+			}
+		end
+
+		return options
+	end,
+	ResolveDynamicOption = function(self, client, target, data)
+		return "ViewProgression", data
+	end,
+})

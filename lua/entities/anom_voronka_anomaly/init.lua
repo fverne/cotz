@@ -39,21 +39,30 @@ function ENT:Initialize()
 end
 
 function ENT:Think()
-		for k,v in pairs(ents.FindInSphere(self:GetPos(),100)) do
-			if v:IsPlayer() then
-				v:SetVelocity( (self:GetPos() - v:GetPos()) * self.Power)
-			else
-				local phys = v:GetPhysicsObject()
-				if IsValid(phys) then
-					phys:ApplyForceCenter( (self:GetPos() - v:GetPos()) * phys:GetMass() )
-				end
+	if ix and ix.eventController and not ix.eventController:HasPlayerNear(self:GetPos(), 2500) then
+		self:NextThink(CurTime() + 1)
+
+		return true
+	end
+	for _, v in ipairs(ents.FindInSphere(self:GetPos(),100)) do
+		if v:IsPlayer() then
+			v:SetVelocity( (self:GetPos() - v:GetPos()) * self.Power)
+		else
+			local phys = v:GetPhysicsObject()
+			if IsValid(phys) then
+				phys:ApplyForceCenter( (self:GetPos() - v:GetPos()) * phys:GetMass() )
 			end
 		end
 	end
+	self:NextThink(CurTime() + 0.2)
+
+	return true
+end
 
 function ENT:StartTouch(ent)
 	if not self.Active then return end
-	timer.Create("voronka_activated_once", 0.01, 1, function()
+	timer.Create("voronka_activated_once" .. self:EntIndex(), 0.01, 1, function()
+		if not IsValid(self) then return end
 		self:EmitSound("voronka_blast");
 		ParticleEffect( "voronka_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		self:StopParticles()
@@ -62,10 +71,12 @@ function ENT:StartTouch(ent)
 		self.Power = Vector(4,4,4)
 	end)	
 	timer.Create("voronka_recharge"..self:EntIndex(), 4, 1, function()
+		if not IsValid(self) then return end
 		self:SetNWBool("StopParticle", false)
 		self.Active = true
 	end)
 	timer.Create("voronka_activated"..self:EntIndex(), 2.0, 1, function()
+		if not IsValid(self) then return end
 		ParticleEffect( "voronka_blast", self:GetPos(), Angle( 0, 0, 0 ) )
 		util.BlastDamage( self, self, self:GetPos(), 120, 150)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
@@ -95,9 +106,10 @@ function ENT:SpawnFunction( ply, tr, ClassName, activator )
 end
 
 function ENT:OnRemove()
+	timer.Remove("voronka_activated_once" .. self:EntIndex())
 	self:StopSound("voronka_idle")
 	self.Timer = "voronka_" .. self:EntIndex()
-	timer.Stop(self.Timer)
-	timer.Stop("voronka_recharge"..self:EntIndex())
-	timer.Stop("voronka_activated"..self:EntIndex())
+	timer.Remove(self.Timer)
+	timer.Remove("voronka_recharge"..self:EntIndex())
+	timer.Remove("voronka_activated"..self:EntIndex())
 end

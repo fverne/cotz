@@ -122,7 +122,7 @@ Test("simultaneous personal bank loads create one persistent inventory", functio
 	assert(first.owner == 1 and first.width == 2 and first.height == 2)
 end)
 
-Test("Cleaner and hideout open the same bank and guests keep private banks", function()
+Test("Ballast and hideout open the same bank and guests keep private banks", function()
 	Reset()
 	local instance = NewInstance()
 	instance.storage = NewEntity(nil, instance.origin)
@@ -143,13 +143,22 @@ Test("Cleaner and hideout open the same bank and guests keep private banks", fun
 		bank:SetSize(width, height)
 		callback(bank)
 	end
-	personalPlugin:OpenPersonalStorage(owner, owner) -- Cleaner's shared entry point.
-	assert(owner.ixOpenStorage == ownBank and ownBank.storageInfo.entity == owner)
+	local vendor = NewEntity(nil, instance.origin)
+	function vendor:GetDisplayName()
+		return "'Ballast'"
+	end
+	assert(townPlugin:OpenTownStorage(owner, vendor))
+	assert(owner.ixOpenStorage == ownBank and ownBank.storageInfo.entity == vendor)
 	PLUGIN:OpenStorage(owner, instance.storage)
 	PLUGIN:OpenStorage(guest, instance.storage)
 	assert(owner.ixOpenStorage == ownBank and guest.ixOpenStorage == guestBank)
 	assert(ownBank.width == 5 and restores == 1 and ownBank.storageInfo.entity == instance.storage)
+	assert(townPlugin:OpenTownStorage(owner, vendor))
+	assert(owner.ixOpenStorage == ownBank and ownBank.storageInfo.entity == vendor)
+	assert(guest.ixOpenStorage == guestBank and restores == 1)
 	assert(not ownBank.vars.hideout and not guestBank.vars.hideout)
+	Advance(1)
+	PLUGIN:OpenStorage(owner, instance.storage)
 	PLUGIN:CloseStorage(instance, owner)
 	assert(not owner.ixOpenStorage and guest.ixOpenStorage == guestBank)
 	PLUGIN:CloseStorage(instance)

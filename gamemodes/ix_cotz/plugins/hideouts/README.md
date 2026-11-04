@@ -116,7 +116,7 @@ seed instead of inserting it twice. Taking or consuming seeded loot does not
 replenish it on subsequent visits.
 
 Storage opens the visitor's character bank (bankID), using the same personal
-storage service and inventory as Cleaner. Bank width/height upgrades apply in
+storage service and inventory as Ballast. Bank width/height upgrades apply in
 both places. Each visitor sees their own bank, including invited guests. All
 hideouts belonging to a character access that same bank. Closing or deleting a
 hideout does not delete its owner's bank. It remains separate from generic

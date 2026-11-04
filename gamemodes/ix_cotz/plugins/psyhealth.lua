@@ -196,6 +196,7 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 		return true
 	end
 	if entity:IsPlayer() and entity:GetCharacter() and dmgInfo:IsDamageType(DMG_SONIC) then
+		ix.util.DamageHeadgear(entity, dmgInfo)
 		local damage = dmgInfo:GetDamage()
 		local perRes = entity:GetNWFloat("ixperpsyres")
 		local flatRes = entity:GetNWInt("ixflatpsyres")

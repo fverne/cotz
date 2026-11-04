@@ -79,7 +79,9 @@ function SWEP:GetTracerOrigin()
 		return self.CenterPos
 	end
 
-	return self:getMuzzlePosition() and self:getMuzzlePosition().Pos or vector_origin
+	local muzzle = self:getMuzzlePosition()
+
+	return muzzle and muzzle.Pos or self:GetPos()
 end
 
 function SWEP:FireAnimationEvent(pos, ang, event, name)
@@ -973,6 +975,8 @@ function SWEP:PostDrawViewModel()
 end
 
 function SWEP:getMuzzlePosition()
+	if not IsValid(self.CW_VM) then return end
+
 	return self.CW_VM:GetAttachment(self.MuzzleAttachment)
 end
 
@@ -988,6 +992,7 @@ function SWEP:drawInteractionMenu()
 
 	if self.CustomizeMenuAlpha > 0 then
 		local att = self:getMuzzlePosition()
+		if not att then return end
 		local ang = EyeAngles()
 		ang:RotateAroundAxis(ang:Right(), 90)
 		ang:RotateAroundAxis(ang:Up(), -90)
@@ -1501,9 +1506,28 @@ function SWEP:DrawWorldModel()
 	end
 
 	if self.DrawTraditionalWorldModel then
+		local owner = self:GetOwner()
+
+		-- A parented world model needs bone merging to follow the owner's hand.
+		if IsValid(owner) and self:GetParent() == owner and not self:IsEffectActive(EF_BONEMERGE) then
+			self:AddEffects(EF_BONEMERGE)
+			self:InvalidateBoneCache()
+		end
+
 		self:DrawModel()
 	else
 		local wm = self.WMEnt
+
+		-- Clientside models can disappear while the weapon entity remains valid.
+		if not IsValid(wm) and self.WM then
+			wm = ClientsideModel(self.WM, RENDERGROUP_BOTH)
+
+			if IsValid(wm) then
+				wm:SetNoDraw(true)
+				CustomizableWeaponry.cmodels:add(wm, self)
+				self.WMEnt = wm
+			end
+		end
 
 		if IsValid(wm) then
 			if IsValid(self.Owner) then

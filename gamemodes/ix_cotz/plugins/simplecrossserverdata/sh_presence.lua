@@ -1,0 +1,110 @@
+ix.crossserver = ix.crossserver or {}
+local cross = ix.crossserver
+
+local PRESENCE_COLORS = {
+	localMap = Color(105, 139, 87), remote = Color(73, 140, 143),
+	travelling = Color(167, 143, 81), unavailable = Color(116, 119, 107),
+}
+
+function cross.GetMapLabel(map)
+	local plugin = ix.plugin.Get("simplecrossserver")
+	local definition = plugin and plugin.mapdata and plugin.mapdata[map]
+
+	return string.upper(definition and definition.name or map or "UNKNOWN")
+end
+
+function cross.GetPresenceColor(info, fresh, localPlayer)
+	if fresh and info.state == "travelling" then return PRESENCE_COLORS.travelling end
+	if localPlayer then return PRESENCE_COLORS.localMap end
+	if fresh and info.state == "online" then return PRESENCE_COLORS.remote end
+
+	return PRESENCE_COLORS.unavailable
+end
+
+function cross.GetPresenceText(info, fresh, localPlayer)
+	if (fresh and info.state == "travelling") then return "TRAVELLING: " .. cross.GetMapLabel(info.destination) end
+	if (localPlayer) then return "ONLINE: " .. cross.GetMapLabel(game.GetMap()) end
+	if (not fresh or info.state == "unknown") then return "STATUS UNAVAILABLE" end
+	if (info.state == "online") then return "ONLINE: " .. cross.GetMapLabel(info.map) end
+	if (info.state == "offline") then return "OFFLINE" end
+
+	return "STATUS UNAVAILABLE"
+end
+
+if (CLIENT) then
+	local pending
+	net.Receive("cotz/crossserver/roster", function()
+		local changed = net.ReadBool()
+		if (not changed) then cross.rosterFresh = CurTime() return end
+		if (net.ReadBool()) then pending = {} end
+		local finished = net.ReadBool()
+		local count = net.ReadUInt(6)
+		for _ = 1, count do
+			local record = {characterID = net.ReadUInt(32)}
+			record.profile = util.JSONToTable(net.ReadString()) or {}
+			record.name = net.ReadString()
+			record.pdaavatar = net.ReadString()
+			record.state = net.ReadString()
+			record.map = net.ReadString()
+			record.destination = net.ReadString()
+			record.squadID = net.ReadString()
+			record.squadName = net.ReadString()
+			record.squadColor = Color(net.ReadUInt(8), net.ReadUInt(8), net.ReadUInt(8))
+			if record.squadID == "" or record.squadID == "NULL" then
+				record.squadColor = PRESENCE_COLORS.unavailable
+			end
+			if (pending) then pending[record.characterID] = record end
+		end
+		if (finished and pending) then
+			cross.roster = pending
+			cross.rosterFresh = CurTime()
+			pending = nil
+		end
+	end)
+
+	function cross.GetScoreboardRoster(localOnly)
+		local records = {}
+		local fresh = cross.rosterFresh ~= nil and CurTime() - cross.rosterFresh < 15
+		for id, info in pairs(cross.roster or {}) do
+			if (not localOnly or (fresh and info.map == game.GetMap())) then
+				local record = table.Copy(info)
+				record.fresh = fresh
+				records[id] = record
+			end
+		end
+		-- Local entities give immediate character/visibility changes and deduplicate the shared snapshot.
+		for _, client in ipairs(player.GetAll()) do
+			local character = client:GetCharacter()
+			if (character) then
+				local id = character:GetID()
+				local previous = records[id]
+				records[id] = nil
+				if (hook.Run("ShouldShowPlayerOnScoreboard", client) ~= false) then
+					local squadID, squadName, squadColor
+					if (ix.squad and ix.squad.GetScoreboardGroup) then
+						squadID, squadName, squadColor = ix.squad.GetScoreboardGroup(client)
+					end
+					records[id] = {
+						profile = {reputation = client:getReputation(),
+							leaderboardStats = ix.jobs.GetLeaderboardStats(character:GetData())},
+						characterID = id, player = client, name = character:GetName(),
+						pdaavatar = character:GetPdaavatar(), map = game.GetMap(), fresh = true,
+						state = previous and fresh and previous.state == "travelling" and "travelling" or "online",
+						destination = previous and previous.destination or "",
+						squadID = squadID, squadName = squadName, squadColor = squadColor,
+					}
+				end
+			end
+		end
+
+		if ix.townNPCs then
+			local character = LocalPlayer():GetCharacter()
+			local access = ix.townNPCs:GetNetworkAccess(character)
+			for id, record in pairs(records) do
+				records[id] = ix.townNPCs:FilterNetworkRecord(character, record, access)
+			end
+		end
+
+		return records
+	end
+end

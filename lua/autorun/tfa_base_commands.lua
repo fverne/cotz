@@ -1729,7 +1729,7 @@ hook.Add("PlayerSpawn","TFAExtinguishQOL", function(ply)
 end)
 
 hook.Add("PreDrawOpaqueRenderables","tfaweaponspredrawopaque",function()
-	for k,v in pairs(player.GetAll()) do
+	for k, v in player.Iterator() do
 		local wep = v:GetActiveWeapon()
 		if IsValid(wep) and wep.PreDrawOpaqueRenderables then
 			wep:PreDrawOpaqueRenderables()
