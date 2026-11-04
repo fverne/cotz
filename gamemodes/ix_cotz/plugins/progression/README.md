@@ -1,5 +1,13 @@
 # Progression engine
 
+The [approved town vendor plan](../../../../docs/npc-overhaul/vendor-plan.md) now uses 25 finite
+contact trees and 600 town milestones. The Original's tree is inactive. Town compilation scales
+new hand-in quantities, checkpoint targets and field-trip counts by the contact's effort multiplier.
+Saved requests and partial contributions keep their original quantities; no data reset is required.
+Ballast BA12 now provides the existing character bank. Its contents and size remain character-owned.
+Vesper provides paid suit conversions. Mute's existing STALKERnet features have explicit service gates.
+The town service labels are included in benefit summaries; optional `plannedUnlocks` remain inactive.
+
 This plugin owns character progression storage, persistent item requirements, numeric counters,
 prerequisite validation, purchase permissions, completion payouts, pending reward claims and services.
 Town content is authored in [townnpcs](../townnpcs/README.md); superseded town definition files are removed.
@@ -39,12 +47,15 @@ Whole-stack removal must succeed before progress/rewards are granted.
 Non-town completion cash uses 60% of consumed nominal value. Town milestones instead declare
 completionCash explicitly; trackers and arena checkpoints pay zero additional cash. Partial hand-ins
 do not pay early. Existing accrued credit is preserved as a minimum completion payment. Town
-completion does not trigger ordinary task restocking. Fixed benefits use token-backed pending claims;
-an inventory reservation is not acknowledgement of an asynchronous insert. Full inventories keep
-rewards pending. Task descriptions separate the title, briefing, required-item list and rewards with blank lines.
+completion does not trigger ordinary task restocking. Progression does not award item gifts at
+completion or checkpoints. Definitions containing gift items fail validation, and the runtime benefit
+handler only grants service credits. Old progression gift queues and saved `progression:` offers are
+retained as inactive history: they cannot be queued, selected, claimed or shown as reward actions.
+Already received inventory items are not removed. Repeatable job supplies still use the separate
+`taskRewardClaims` queue, including asynchronous insertion acknowledgement and full-inventory recovery. Task descriptions separate the title, briefing, required-item list and rewards with blank lines.
 The encyclopedia displays each task title once; required-item lists use a stable order.
 Task descriptions call completion payouts rewards; stock rewards explicitly
-describe purchase capacity. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain separate from item gifts.
+describe purchase capacity. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
 
 Only current registered definitions participate in task discovery and equipment gating. There is no
 town migration, old-ID permission fallback, completion alias or grandfathered prerequisite handling.

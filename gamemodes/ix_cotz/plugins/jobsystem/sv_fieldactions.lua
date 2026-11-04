@@ -27,9 +27,10 @@ function field.Status(client, npc, job)
 		return
 	end
 	if state.stage == "carrying" and state.recipient then
-		client:Notify("Deliver the cargo to " .. state.recipient .. " in " .. state.recipientMap
+		local recipientMap = field.GetRecipientMap(state)
+		client:Notify("Deliver the cargo to " .. state.recipient .. " in " .. recipientMap
 			.. ", then return to " .. npc .. ".")
-		if state.recipientMap == game.GetMap() then
+		if recipientMap == game.GetMap() then
 			local recipient = ix.progression.GetNPCFromName(state.recipient)
 			if IsValid(recipient) then marker(client, recipient:GetPos(), "Deliver to " .. state.recipient) end
 		end
@@ -78,7 +79,7 @@ function field.DeliverToContact(client, target, npc, claim)
 	if not character or not ix.townNPCs:CanInteract(client, target) then return false end
 	local state = job.fieldTask
 	if state.stage ~= "carrying" or state.recipient ~= target:GetDisplayName()
-		or state.recipientMap ~= game.GetMap() then return false end
+		or field.GetRecipientMap(state) ~= game.GetMap() then return false end
 	local cargo = field.FindCargo(character, job)
 	if not cargo or cargo:Remove() == false then return false end
 	state.stage, job.progress, job.isCompleted = "delivered", job.numberRec, true

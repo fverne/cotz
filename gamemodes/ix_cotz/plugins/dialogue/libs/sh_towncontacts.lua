@@ -198,5 +198,6 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	configureWork(dialogue, contact)
 	if finalID then configureProgression(dialogue, contact) end
 	configureDeliveries(dialogue, contact)
+	ix.dialogue.ConfigureTownServices(dialogue, contact)
 	ix.dialogue.ConfigureTaskRewards(dialogue)
 end

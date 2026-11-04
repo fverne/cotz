@@ -1,5 +1,14 @@
 # Cross-server data and presence
 
+With `townnpcs` enabled, the approved workbook plan gates STALKERnet tools through Mute.
+The initial directory shows local identities. Search, squad filtering, ranking, basic activity,
+location tracking, the remote directory and the full dossier unlock at MU01/03/07/11/15/19/23.
+The server filters every roster snapshot for the receiving character, including remote membership,
+reputation, activity and travel destinations. An entitlement change changes the filtered snapshot,
+so the next refresh replaces stale data. The client applies the same policy to local entity records.
+Local voice mute and ordinary squad functionality retain their existing access.
+The descriptions below of unrestricted all-map browsing apply after the corresponding unlocks.
+
 The existing key/value API remains available. The shared presence service (`ix.crossserver`) also
 owns character session claims, lease renewal, release and travel handoffs, SQL failure/timeout
 handling, STALKERnet snapshots and the status labels used by both STALKERnet and squads.

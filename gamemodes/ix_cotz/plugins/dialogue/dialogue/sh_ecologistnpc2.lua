@@ -11,7 +11,6 @@ DIALOGUE.addTopic("GREETING", {
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
-		"ChangeSuitVariant",
 		"BackgroundTopic",
 		"GOODBYE",
 		"AboutWorkTopic",
@@ -108,7 +107,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do
 			if target.selectedsuitstruct[3] == v.baseSuit and variants[v.suitVariant]
-				and ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), v.uniqueID) then
+				and ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), v.uniqueID, target:GetDisplayName()) then
 				table.insert(suitVariants, {
 					uniqueID = v.uniqueID,
 					name = v.name,
@@ -151,7 +150,9 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	end,
 	ResolveDynamicOption = function(self, client, target, dynamicData)
 		if SERVER and dynamicData.accepted then
-			if not ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), dynamicData.suitVariantUID) then
+			if not ix.townNPCs:CanChangeSuitVariant(
+				client:GetCharacter(), dynamicData.suitVariantUID, target:GetDisplayName()
+			) then
 				return "BackTopic"
 			end
 			local finalPrice = math.Round(ix.item.list[dynamicData.suitVariantUID].price / 10)
@@ -259,7 +260,6 @@ DIALOGUE.addTopic("BackTopic", {
 	options = {
 		"SpecialtyTopic",
 		"TradeTopic",
-		"ChangeSuitVariant",
 		"BackgroundTopic",
 		"GOODBYE",
 		"AboutWorkTopic",

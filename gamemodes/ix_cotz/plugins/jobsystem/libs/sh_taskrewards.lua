@@ -460,6 +460,7 @@ end
 
 function ix.taskRewards.CanSelectOffer(character, npc, key, offer)
 	if not offer or offer.npc ~= npc or type(key) ~= "string" then return false end
+	if key:match("^progression:") then return false end
 	if not key:match("^job:") then return true end
 	if offer.selected then return false end
 	if offer.earned then return true end

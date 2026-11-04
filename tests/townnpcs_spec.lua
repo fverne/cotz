@@ -174,11 +174,11 @@ for id, contact in pairs(town.contacts) do
 		end
 	end
 end
-check(deliveryContacts == 12, "all twelve delivery contacts have regional additions")
+check(deliveryContacts == 11, "research artifact requests replace Egghead's ordinary valuables additions")
 check(not ix.jobs.list["cotz/town/mute/easy/value_field_laptop"], "Marsh easy work excludes laptops")
 check(ix.jobs.list["cotz/town/mute/hard/value_field_laptop"], "Mute can commission Pripyat computers")
 
-check(contactCount == 27 and count == 624, "all contacts and proposed steps are registered")
+check(contactCount == 27 and count == 600, "The Original remains a contact without active progression")
 local convertedCount, remainingFields = 0, 0
 for _, contact in pairs(town.contacts) do
 	local converted, fields = 0, 0
@@ -196,7 +196,7 @@ for _, contact in pairs(town.contacts) do
 	check(math.abs(converted - fields) <= 1, "each contact converts half its field progressions, rounded")
 	convertedCount, remainingFields = convertedCount + converted, remainingFields + fields
 end
-check(convertedCount == 156 and remainingFields == 156, "exactly half the original field commissions convert")
+check(convertedCount == 150 and remainingFields == 150, "retained contacts preserve the field/delivery split")
 local cargoCount, recipientCount, dropCount = 0, 0, 0
 for _, contact in pairs(town.contacts) do
 	for _, step in ipairs(contact.progression) do
@@ -228,7 +228,7 @@ for _, contact in pairs(town.contacts) do
 		end
 	end
 end
-check(cargoCount == 152 and recipientCount == 37 and dropCount == 3,
+check(cargoCount == 146 and recipientCount == 35 and dropCount == 3,
 	"authored commissions use custom recovery cargo, contact deliveries and field-cache deliveries")
 check(#town:ValidateContacts() == 0, "all current cargo and recipient declarations validate")
 check(town.contacts["arena-master"].map == "rp_marsh_cs", "arena stays with the Marsh dupe")
@@ -247,7 +247,7 @@ for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
 		"Spool retains triangulation")
 end
 local fullCount = ix.progression.AuditDefinitions()
-check(fullCount == 624 + standaloneCount, "town trees coexist only with separate non-town content")
+check(fullCount == 600 + standaloneCount, "town trees coexist only with separate non-town content")
 check(not ix.progression.definitions.oldTimerKillIntro, "superseded town definitions are absent")
 for item, gate in pairs(town.itemGates) do
 	check(ix.progression.definitions[gate.id], "each catalogue item has an explicit current progression gate")
@@ -304,7 +304,7 @@ local savedDelivery = character({townNPCProgression = {
 local savedID = town:StepID("old-timer", "OT04")
 local savedRecord = {lines = {[savedID] = {active = true}}}
 for _, required in ipairs(ix.progression.definitions[savedID].prerequisites) do
-	savedRecord.lines[required] = {completed = true}
+	savedRecord.lines[required] = {completed = true, completionRewardsPaid = true}
 end
 ix.progression.SetCharacterProgression(savedDelivery, savedRecord)
 town:RecoverCompletions(savedDelivery)
@@ -334,7 +334,7 @@ for _, contact in pairs(town.contacts) do
 					"current delivery requirements complete without a retired definition")
 			end
 		else
-			check(ix.progression.SetProgressionValue(owner, id, step.target or 1),
+			check(ix.progression.SetProgressionValue(owner, id, definition.progressthresholds[1]),
 				"current counter/commission completes without compatibility callbacks")
 		end
 		check(ix.progression.IsCompleted(owner, id), "every current town objective can complete")
@@ -383,9 +383,14 @@ check(hunter:GetData("townNPCProgression").counts["'Old Timer'"] == 1, "repeated
 hunter:SetData("jobClaimsPaid", {["'Old Timer'"] = 2})
 town:JobCompleted(hunter.client, "'Old Timer'", "cotz/town/old-timer/easy")
 local firstKnife = town:StepID("old-timer", "OT03")
+check(not ix.progression.IsCompleted(hunter, firstKnife), "three-times effort requires six jobs instead of two")
+for claim = 3, 6 do
+	hunter:SetData("jobClaimsPaid", {["'Old Timer'"] = claim})
+	town:JobCompleted(hunter.client, "'Old Timer'", "cotz/town/old-timer/easy")
+end
 check(ix.progression.IsCompleted(hunter, firstKnife), "cumulative hunting checkpoint completes its active node")
 check(ix.progression.CanUseNPC(hunter, "'Haggler'"), "Haggler remains accessible after completing a milestone")
-check(#ix.progression.GetLine(hunter, firstKnife).pendingRewards == 0, "tracker does not duplicate job supplies")
+check(#(ix.progression.GetLine(hunter, firstKnife).pendingRewards or {}) == 0, "tracker does not duplicate job supplies")
 check(not town:CanAcceptJob(hunter, "'Old Timer'", ix.jobs.list["cotz/town/spoor/easy"]),
 	"another contact's job cannot be accepted through a forged identifier")
 check(not town:CanAcceptJob(hunter, "'Old Timer'", ix.jobs.list["cotz/town/old-timer/hard"]),
@@ -419,9 +424,9 @@ town:InitializeTownCharacter(interrupted)
 local recoveredID = town:StepID("ballast", "BA02")
 check(ix.progression.IsCompleted(interrupted, recoveredID), "reloading resumes the journaled commission")
 check(not interrupted:GetData("townNPCProgression").pending["'Ballast'"], "finished commission clears its journal")
-local rewards = #ix.progression.GetLine(interrupted, recoveredID).pendingRewards
+local rewards = #(ix.progression.GetLine(interrupted, recoveredID).pendingRewards or {})
 town:InitializeTownCharacter(interrupted)
-check(#ix.progression.GetLine(interrupted, recoveredID).pendingRewards == rewards,
+check(#(ix.progression.GetLine(interrupted, recoveredID).pendingRewards or {}) == rewards,
 	"repeated recovery cannot queue the same completion reward twice")
 local missingBenefit = character()
 town:InitializeTownCharacter(missingBenefit)
@@ -476,6 +481,7 @@ PLUGIN = vendorPlugin
 dofile(base .. "vendor_adv/libs/sh_towncontacts.lua")
 ix.plugin = {Get = function(id) if id == "vendor_adv" then return vendorPlugin end return town end}
 dofile(base .. "dialogue/libs/sh_towncontacts.lua")
+dofile(base .. "dialogue/libs/sh_townservices.lua")
 town:InstallContacts()
 local expectedModels = {
 	["owlnpc"] = "models/legends/chich.mdl",
@@ -581,8 +587,8 @@ vendor.AddItemToList = function(self, item, price, stock, mode, maximum, interva
 end
 check(vendorPlugin:RefreshTownVendor(vendor, town.contacts.jitters, town.catalogues["'Jitters'"] or {},
 	town.settings.supplyStock), "saved vendors receive missing catalogue and supply entries")
-check(vendor.items.medic_bandage_1 == originalEntry and originalEntry[1] == 321 and originalEntry[2] == 0,
-	"refresh preserves existing depleted stock and staff customisations")
+check(vendor.items.medic_bandage_1 ~= originalEntry and vendor.items.medic_bandage_1[3] == 1,
+	"the approved catalogue replaces stale policies without changing character-owned stock histories")
 check(not vendorPlugin:RefreshTownVendor(vendor, town.contacts.jitters, town.catalogues["'Jitters'"] or {},
 	town.settings.supplyStock), "repeated vendor refresh is idempotent")
 
@@ -691,7 +697,8 @@ town:InitializeTownCharacter(quiet)
 ix.progression.SetCompleted(quiet, town:StepID("old-timer", "OT19"))
 ix.progression.SetCompleted(quiet, town:StepID("mute", "MU02"))
 local quietCheckpoint = town:StepID("mute", "MU03")
-ix.progression.SetProgressionValue(quiet, quietCheckpoint, town.steps[quietCheckpoint].target)
+ix.progression.SetProgressionValue(quiet, quietCheckpoint,
+	ix.progression.definitions[quietCheckpoint].progressthresholds[1])
 check(message == quiet:GetName() .. ", " .. town.steps[quietCheckpoint].completion,
 	"town completion notifications identify the completing character, including gesture replies")
 ix.progression.Notify = notify
@@ -751,7 +758,7 @@ record.lines[wakeGate] = {completed = true}
 ix.progression.SetCharacterProgression(independent, record)
 check(town:CanBuyItem(independent, medkit, "'Wake'"), "Wake can unlock medicine independently")
 check(not town:CanBuyItem(independent, medkit, "'Jitters'"), "Wake cannot unlock Jitters's medicine")
-for _, seller in ipairs({"'Jitters'", "'Wake'", "'Quartermaster'"}) do
+for _, seller in ipairs({"'Jitters'", "'Wake'"}) do
 	local lower = town.itemGates.medic_medkit_1.sellers[seller]
 	local higher = town.itemGates.medic_medkit_2.sellers[seller]
 	local found = false
@@ -821,11 +828,11 @@ check(upgrading.money == 9000, "reconnect cannot repeat migrated rewards")
 -- Regional coverage and authoring-only future rewards.
 do
 	local services = {
-		["cotz/town/cleaner/CL01"] = true, ["cotz/town/technut/TN13"] = true,
+		["cotz/town/ballast/BA12"] = true, ["cotz/town/technut/TN13"] = true,
 		["cotz/town/mute/MU09"] = true, ["cotz/town/mute/MU15"] = true,
 		["cotz/town/intern/IN15"] = true,
 	}
-	local liveCount, placeholderOnly, plannedCount = 0, 0, 0
+	local liveCount, placeholderOnly, plannedCount, cashOnly = 0, 0, 0, 0
 	local families = {}
 	local function ancestors(id, result)
 		result = result or {}
@@ -842,10 +849,12 @@ do
 		local definition = ix.progression.definitions[id]
 		local live = #definition.vendorUnlocks > 0 or #(definition.variantUnlocks or {}) > 0
 			or step.stock or step.capacity or #(step.discounts or {}) > 0 or services[id]
+			or #(definition.townServices or {}) > 0
 		local planned = #(step.plannedUnlocks or {}) > 0
-				check(live,
-			"every milestone has an implemented reward: " .. id)
+		check(live or (step.completionCash or 0) > 0,
+			"every milestone grants an unlock or completion cash: " .. id)
 		if live then liveCount = liveCount + 1 elseif planned then placeholderOnly = placeholderOnly + 1 end
+		if not live then cashOnly = cashOnly + 1 end
 		check(not definition.plannedUnlocks, "planned metadata never enters the runtime reward definition")
 		local text = ix.progression.GetBenefitSummary(definition, character())
 		for _, reward in ipairs(step.plannedUnlocks or {}) do
@@ -869,8 +878,8 @@ do
 			check(step.stock.bonus <= 4, "stock bonuses respect the allocation budget")
 		end
 	end
-	check(liveCount + placeholderOnly == 624 and placeholderOnly == 0,
-		"functional and placeholder-only coverage account for every step")
+	check(liveCount + cashOnly == 600,
+		"functional unlocks and paid commissions account for every retained step")
 	for _, kind in ipairs({"passage", "cosmetic", "storage", "barter", "supplyExchange", "information", "recipe"}) do
 		check(families[kind], "all planned mechanic families have authored allocations")
 	end
@@ -883,12 +892,12 @@ do
 		for _ in source:gmatch("%-%- TODO:[^\n]+\n\t\t\t\t{") do todoCount = todoCount + 1 end
 	end
 	check(todoCount == plannedCount, "every planned entry has its own immediately preceding TODO")
-	for _, slug in ipairs({"jitters", "wake", "quartermaster"}) do
+	for _, slug in ipairs({"jitters", "wake"}) do
 		local contact = town.contacts[slug]
 		local owner = character()
-		check(town:CanBuyItem(owner, "medic_bandage_1", contact.name) ~= false,
-			"each inhabited map has ungated basic bandages")
-		for _, item in ipairs({"medic_medkit_1", "medic_antirad_1", "drug_painkillers"}) do
+		check(not town:CanBuyItem(owner, "medic_bandage_1", contact.name),
+			"starting bandages follow the planned purchase gate")
+		for _, item in ipairs({"medic_medkit_1", "medic_antirad_1"}) do
 			local route = contact.catalogue[item]
 			check(route and tonumber(route.step:sub(3)) <= 3, "basic medicine unlocks in the local introduction")
 			for parent in pairs(ancestors(town:StepID(slug, route.step))) do
@@ -899,12 +908,7 @@ do
 	end
 	for _, slug in ipairs({"old-timer", "brass", "quartermaster"}) do
 		local contact = town.contacts[slug]
-		for _, item in ipairs({"12gauge", "22lr", "9x18"}) do
-			local supplied = false
-			for _, supply in ipairs(contact.supplies) do if supply == item then supplied = true end end
-			check(supplied and ix.progression.CanBuyItem(character(), contact.name, item),
-				"regional providers have ungated basic ammunition")
-		end
+		check(#contact.supplies == 0, "planned providers have no starting sale ammunition")
 	end
 	local owner = character()
 	local record = ix.progression.GetCharacterProgression(owner)
@@ -937,8 +941,8 @@ do
 		check(town.itemGates[item].npc == town.contacts[slug].name,
 			"canonical tier ownership follows authored data, not table iteration")
 	end
-	for item, step in pairs({binoculars_2 = "AT01", binoculars_1 = "AT05", binoculars_4 = "AT13",
-		binoculars_3 = "AT17"}) do
+	for item, step in pairs({binoculars_2 = "AT01", binoculars_1 = "AT08", binoculars_4 = "AT15",
+		binoculars_3 = "AT22"}) do
 		check(town.itemGates[item].id == town:StepID("atlas", step), "Atlas owns the canonical binocular chain")
 	end
 	for index = 1, 5 do

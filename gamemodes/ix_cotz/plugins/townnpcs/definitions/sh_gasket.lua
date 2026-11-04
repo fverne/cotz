@@ -1,6 +1,8 @@
 PLUGIN:Register("gasket", {
 	name = "'Gasket'",
 	template = "gasketnpc",
+	difficultyMultiplier = 1,
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "delivery",
@@ -33,7 +35,7 @@ PLUGIN:Register("gasket", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Fuel allowance",
@@ -67,23 +69,17 @@ PLUGIN:Register("gasket", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "GK01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "GK01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "GK01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["flashlight"] = {step = "GK06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["headlamp"] = {step = "GK16",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["lowtiercookerfuel"] = {step = "GK01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_kerosene"] = {step = "GK08",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_tape_duct"] = {step = "GK09",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_waterfilter"] = {step = "GK04",
+		["flashlight"] = {step = "GK01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["headlamp"] = {step = "GK09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["hightiercooker"] = {step = "GK14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["lowtiercooker"] = {step = "GK18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["lowtiercookerfuel"] = {step = "GK05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["value_kerosene"] = {step = "GK22",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
@@ -105,20 +101,11 @@ PLUGIN:Register("gasket", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "flashlight", bonus = 1},
 			completionCash = 450,
 			name = "The Empty Service Shed",
 			kind = "field",
@@ -148,7 +135,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK03",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
+			stock = {item = "flashlight", bonus = 2},
 			completionCash = 0,
 			name = "The First Reserve",
 			kind = "tracker",
@@ -192,7 +179,6 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK05",
-			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 575,
 			name = "Water Before Comfort",
 			kind = "delivery",
@@ -217,6 +203,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK06",
+			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 850,
 			name = "The Pump Log",
 			kind = "field",
@@ -242,24 +229,11 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_notebook",
 				label = "Water-pump maintenance log",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "GK07",
-			stock = {item = "drink_bottlewater", bonus = 3},
+			stock = {item = "lowtiercookerfuel", bonus = 2},
 			completionCash = 0,
 			name = "A Steady Supply",
 			kind = "tracker",
@@ -327,7 +301,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK10",
-			stock = {item = "medic_bandage_1", bonus = 1},
+			stock = {item = "headlamp", bonus = 1},
 			completionCash = 1250,
 			name = "The Scrap Specification",
 			kind = "field",
@@ -358,7 +332,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK11",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "headlamp", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -396,7 +370,6 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK12",
-			stock = {item = "food_raisins", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -452,20 +425,10 @@ PLUGIN:Register("gasket", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK13",
-			stock = {item = "drink_bottlewaterdirty", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -520,7 +483,6 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK14",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -576,7 +538,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK15",
-			stock = {item = "lowtiercookerfuel", bonus = 2},
+			stock = {item = "hightiercooker", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -673,7 +635,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK17",
-			stock = {item = "drink_bottletea", bonus = 2},
+			stock = {item = "hightiercooker", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -728,7 +690,6 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK18",
-			stock = {item = "flashlight", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -780,20 +741,11 @@ PLUGIN:Register("gasket", {
 				cargo = "town_quest_official",
 				label = "Original utility manual",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "GK19",
-			stock = {item = "food_can_beans", bonus = 2},
+			stock = {item = "lowtiercooker", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -834,6 +786,7 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK20",
+			stock = {item = "lowtiercooker", bonus = 2},
 			completionCash = 2250,
 			name = "A full supply order",
 			kind = "delivery",
@@ -868,11 +821,9 @@ PLUGIN:Register("gasket", {
 				},
 			},
 			benefits = {},
-			stock = {item = "headlamp", bonus = 1},
 		},
 		{
 			id = "GK21",
-			stock = {item = "food_raisins", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -931,7 +882,6 @@ PLUGIN:Register("gasket", {
 		},
 		{
 			id = "GK22",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

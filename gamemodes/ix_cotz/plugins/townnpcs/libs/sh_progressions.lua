@@ -19,6 +19,7 @@ end
 
 function PLUGIN:BuildProgressions()
 	self.capacityMilestones = {}
+	self.serviceGates = {}
 	for slug, contact in pairs(self.contacts) do
 		if contact.access then
 			ix.progression.npcRequirements[contact.name] = self:StepID(contact.access.contact, contact.access.step)
@@ -45,7 +46,12 @@ function PLUGIN:BuildProgressions()
 				vendorUnlocks = {},
 				recognition = step.recognition,
 				serviceDiscounts = step.discounts,
+				townServices = step.services,
 			}
+			for _, service in ipairs(step.services or {}) do
+				assert(not self.serviceGates[service.id], "Duplicate town service: " .. service.id)
+				self.serviceGates[service.id] = {id = id, npc = contact.name}
+			end
 			if step.stock then
 				definition.stockUnlocks = {{npc = contact.name, items = {step.stock.item}, bonus = step.stock.bonus}}
 			end
@@ -54,9 +60,14 @@ function PLUGIN:BuildProgressions()
 				addDependency(definition, self:StepID(required.contact, required.step))
 			end
 			if step.kind == "delivery" then
-				definition.requirementSlots = step.requirements
+				definition.requirementSlots = {}
+				for _, slot in ipairs(step.requirements) do
+					definition.requirementSlots[#definition.requirementSlots + 1] = {
+						pool = slot.pool, quantity = self:ScaleProgressionEffort(contact, slot.quantity),
+					}
+				end
 			else
-				definition.progressthresholds = {step.target or 1}
+				definition.progressthresholds = {self:ScaleProgressionEffort(contact, step.target or 1)}
 				definition.progressfunctions = {}
 			end
 			if step.kind == "field" then definition.townCommission = "cotz/town/commission/" .. slug .. "/" .. step.id end

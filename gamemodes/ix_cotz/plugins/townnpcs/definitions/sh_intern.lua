@@ -1,18 +1,20 @@
 PLUGIN:Register("intern", {
 	name = "'Intern'",
 	template = "ecologistnpc3",
-	map = "rp_waystation",
+	difficultyMultiplier = 4,
+	enforceCatalogue = true,
+	map = "rp_marsh_cs",
 	job = {
 		kind = "sensor",
-		category = "Sensor deployment and retrieval",
+		category = "Bunker sensor deployment and retrieval",
 		description = "Sensor deployment and retrieval",
 		maps = {
-			easy = "rp_waystation",
+			easy = "rp_marsh_cs",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Routine survey",
@@ -49,22 +51,52 @@ PLUGIN:Register("intern", {
 		["gasanalyzer"] = true,
 	},
 	catalogue = {
-		["food_raisins"] = {step = "IN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "IN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_caffeine"] = {step = "IN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "IN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["gasanalyzer"] = {step = "IN01",
 		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["geigercounter"] = {step = "IN24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antirad_1"] = {step = "IN02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_psyheal_1"] = {step = "IN03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["338lapua"] = {step = "IN13",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["338lapuaap"] = {step = "IN15",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["338lapuahp"] = {step = "IN14",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39"] = {step = "IN01",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39ap"] = {step = "IN03",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39hp"] = {step = "IN02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["556x45"] = {step = "IN04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["556x45ap"] = {step = "IN06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["556x45hp"] = {step = "IN05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39"] = {step = "IN04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39ap"] = {step = "IN06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39hp"] = {step = "IN05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x51"] = {step = "IN10",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x51ap"] = {step = "IN12",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x51hp"] = {step = "IN11",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x54"] = {step = "IN13",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x54ap"] = {step = "IN15",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x54hp"] = {step = "IN14",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x39"] = {step = "IN07",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x39ap"] = {step = "IN09",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x39hp"] = {step = "IN08",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["accesscard_laboratory"] = {step = "IN24",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -80,20 +112,11 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN02",
@@ -102,7 +125,7 @@ PLUGIN:Register("intern", {
 			kind = "field",
 			objective = (
 				"Deploy the recorder at the assigned site in Waystation, let it finish recording, then retrieve "
-				.. "the first calibration recorder. Bring it back to the issuing contact in Waystation."
+				.. "the first calibration recorder. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"IN01"},
 			briefing = (
@@ -127,6 +150,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN03",
+			stock = {item = "545x39", bonus = 1},
 			completionCash = 0,
 			name = "Readings on Time",
 			kind = "tracker",
@@ -138,7 +162,6 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN04",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -152,7 +175,7 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 1,
 				},
 			},
@@ -160,7 +183,6 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Clean Containers",
 			kind = "delivery",
@@ -172,11 +194,11 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
@@ -189,7 +211,7 @@ PLUGIN:Register("intern", {
 			kind = "field",
 			objective = (
 				"Deploy the recorder at the assigned site in Garbage, let it finish recording, then retrieve the "
-				.. "Garbage control recorder. Bring it back to the issuing contact in Waystation."
+				.. "Garbage control recorder. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"IN04"},
 			briefing = (
@@ -209,23 +231,11 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_module2",
 				label = "Garbage control recorder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "IN07",
+			stock = {item = "545x39ap", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -250,7 +260,6 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN08",
-			stock = {item = "drink_bottletea", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -283,18 +292,17 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
 		},
 		{
 			id = "IN09",
-			stock = {item = "drug_caffeine", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -322,18 +330,17 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
 		},
 		{
 			id = "IN10",
-			stock = {item = "food_can_beans", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -353,7 +360,7 @@ PLUGIN:Register("intern", {
 			kind = "field",
 			objective = (
 				"Recover the senior researcher's notebook from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
+				.. "back to the issuing contact in Marsh."
 			),
 			requires = {"IN08"},
 			briefing = (
@@ -376,7 +383,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN11",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "545x39hp", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -434,28 +441,18 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN13",
-			stock = {item = "medic_psyheal_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -481,22 +478,21 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
 		},
 		{
 			id = "IN14",
-			stock = {item = "medic_antirad_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -518,7 +514,7 @@ PLUGIN:Register("intern", {
 			kind = "field",
 			objective = (
 				"Recover the calibration case for Technut from the assigned search area in Waystation. Deliver it "
-				.. "to 'Technut' in Marsh, then come back to the issuing contact in Waystation."
+				.. "to 'Technut' in Marsh, then come back to the issuing contact in Marsh."
 			),
 			requires = {"IN12"},
 			briefing = (
@@ -542,6 +538,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN15",
+			stock = {item = "556x45", bonus = 1},
 			completionCash = 0,
 			name = "My Own Figures",
 			kind = "tracker",
@@ -553,7 +550,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN16",
-			stock = {item = "drink_bottlewater", bonus = 2},
+			stock = {item = "556x45ap", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -586,22 +583,22 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
 		},
 		{
 			id = "IN17",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			stock = {item = "556x45hp", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -627,15 +624,15 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -662,7 +659,7 @@ PLUGIN:Register("intern", {
 			kind = "field",
 			objective = (
 				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
-				.. "contradictory-site recorder. Bring it back to the issuing contact in Waystation."
+				.. "contradictory-site recorder. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"IN16"},
 			briefing = (
@@ -686,20 +683,11 @@ PLUGIN:Register("intern", {
 				cargo = "town_quest_module",
 				label = "Contradictory-site recorder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "IN19",
-			stock = {item = "drink_bottletea", bonus = 2},
+			stock = {item = "762x39", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -726,7 +714,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN20",
-			stock = {item = "drug_caffeine", bonus = 2},
+			stock = {item = "762x39ap", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -757,22 +745,22 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
 		},
 		{
 			id = "IN21",
-			stock = {item = "food_can_beans", bonus = 2},
+			stock = {item = "762x39hp", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -800,26 +788,26 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},
 		},
 		{
 			id = "IN22",
-			stock = {item = "food_raisins", bonus = 2},
+			stock = {item = "9x39", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -841,7 +829,7 @@ PLUGIN:Register("intern", {
 			kind = "field",
 			objective = (
 				"Deploy the recorder at the assigned site in Pripyat, let it finish recording, then retrieve the "
-				.. "independent control recorder. Bring it back to the issuing contact in Waystation."
+				.. "independent control recorder. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"IN21"},
 			briefing = (
@@ -867,6 +855,7 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN23",
+			stock = {item = "9x39ap", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -894,7 +883,6 @@ PLUGIN:Register("intern", {
 		},
 		{
 			id = "IN24",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -911,32 +899,23 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Intern's trusted contact",
 		},
 	},

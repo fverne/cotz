@@ -186,7 +186,7 @@ local ROSTER_STRINGS = {"name", "pdaavatar", "state", "map", "destination", "squ
 
 local function writeRecord(record)
 	net.WriteUInt(record.characterID, 32)
-	net.WriteString(record.profile or "{}")
+	net.WriteString(type(record.profile) == "table" and util.TableToJSON(record.profile) or record.profile or "{}")
 	for _, key in ipairs(ROSTER_STRINGS) do net.WriteString(record[key]) end
 	net.WriteUInt(record.squadColor.r, 8)
 	net.WriteUInt(record.squadColor.g, 8)
@@ -222,11 +222,21 @@ function cross.PublishRoster(rows)
 				and string.ToColor(row.squad_color) or Color(116, 119, 107),
 		}
 	end
-	local signature = util.TableToJSON(records)
 	for _, client in ipairs(player.GetHumans()) do
-		if (client:GetCharacter()) then
+		local character = client:GetCharacter()
+		if (character) then
+			local visible = records
+			if ix.townNPCs then
+				visible = {}
+				local access = ix.townNPCs:GetNetworkAccess(character)
+				for _, record in ipairs(records) do
+					local filtered = ix.townNPCs:FilterNetworkRecord(character, record, access)
+					if filtered then visible[#visible + 1] = filtered end
+				end
+			end
+			local signature = util.TableToJSON(visible)
 			if (client.ixPresenceSnapshot ~= signature) then
-				sendSnapshot(client, records)
+				sendSnapshot(client, visible)
 				client.ixPresenceSnapshot = signature
 			else
 				net.Start("cotz/crossserver/roster")

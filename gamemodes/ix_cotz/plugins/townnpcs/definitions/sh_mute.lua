@@ -1,6 +1,8 @@
 PLUGIN:Register("mute", {
 	name = "'Mute'",
 	template = "stalkernetnpc",
+	difficultyMultiplier = 2,
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "delivery",
@@ -37,7 +39,7 @@ PLUGIN:Register("mute", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Components (trade goods)",
@@ -74,30 +76,15 @@ PLUGIN:Register("mute", {
 		["quest_flashdrive"] = true,
 	},
 	catalogue = {
-		["food_raisins"] = {step = "MU01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "MU01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_caffeine"] = {step = "MU01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "MU01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["pda"] = {step = "MU01",
 		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["quest_flashdrive"] = {step = "MU01",
 		-- 	terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
-		["value_9vbattery"] = {step = "MU05",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_capacitors"] = {step = "MU02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_radio_repeater"] = {step = "MU07",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_tape_electric"] = {step = "MU04",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
 	},
 	progression = {
 		{
 			id = "MU01",
+			services = {{id = "networkSearch", name = "STALKERnet search"}},
 			completionCash = 275,
 			name = "A Loose Connection",
 			kind = "delivery",
@@ -113,16 +100,7 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU02",
@@ -158,7 +136,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU03",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			services = {{id = "networkSquads", name = "STALKERnet squad filter"}},
 			completionCash = 0,
 			name = "Signals Getting Through",
 			kind = "tracker",
@@ -242,23 +220,11 @@ PLUGIN:Register("mute", {
 				cargo = "town_quest_module",
 				label = "Marsh connection record",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "MU07",
+			services = {{id = "networkRanking", name = "STALKERnet ranks and reputation"}},
 			completionCash = 0,
 			name = "Not Just Static",
 			kind = "tracker",
@@ -273,7 +239,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU08",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -369,7 +334,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU11",
-			stock = {item = "drink_bottletea", bonus = 1},
+			services = {{id = "networkActivity", name = "STALKERnet activity counters"}},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -399,7 +364,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU12",
-			stock = {item = "drug_caffeine", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -439,20 +403,10 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU13",
-			stock = {item = "food_can_beans", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -495,7 +449,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU14",
-			stock = {item = "food_raisins", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -542,6 +495,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU15",
+			services = {{id = "networkLocation", name = "STALKERnet location tracking"}},
 			completionCash = 0,
 			name = "Beyond Local Range",
 			kind = "tracker",
@@ -642,7 +596,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU18",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -685,19 +638,11 @@ PLUGIN:Register("mute", {
 				label = "Routing archive for Carbon",
 				recipient = "carbon",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "MU19",
+			services = {{id = "networkRemote", name = "STALKERnet cross-map directory"}},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -727,7 +672,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU20",
-			stock = {item = "drink_bottletea", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -775,7 +719,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU21",
-			stock = {item = "drug_caffeine", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -822,7 +765,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU22",
-			stock = {item = "food_can_beans", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -871,7 +813,7 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU23",
-			stock = {item = "food_raisins", bonus = 2},
+			services = {{id = "networkDossier", name = "STALKERnet full career dossier"}},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -904,7 +846,6 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU24",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -937,16 +878,7 @@ PLUGIN:Register("mute", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Mute's trusted contact",
 		},
 	},

@@ -76,10 +76,8 @@ end
 function ix.progression.GetActiveProgressions(character, npcIdentifier)
 	local result = {}
 	for progressionID, definition in pairs(ix.progression.definitions) do
-		local line = ix.progression.GetLine(character, progressionID)
-		local pending = line.pendingRewards and #line.pendingRewards > 0
 		if definition.keyNpc == npcIdentifier and ix.progression.CanUseNPC(character, npcIdentifier)
-			and (ix.progression.IsActive(character, progressionID) or pending) then
+			and ix.progression.IsActive(character, progressionID) then
 			result[#result + 1] = progressionID
 		end
 	end
@@ -331,11 +329,7 @@ if SERVER then
 		then
 			return false
 		end
-		if itemID == "claim" then
-			local accepted = ix.progression.ClaimRewards(character, progressionID)
-
-			return accepted, accepted and "Reward received." or "Make room in your inventory and claim again."
-		end
+		if itemID == "claim" then return false end
 		if not canAdvance(character, progressionID) then
 			return false
 		end

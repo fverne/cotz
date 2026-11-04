@@ -9,137 +9,12 @@ DIALOGUE.addTopic("GREETING", {
 		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
-		"StorageTopic",
 		"BackgroundTopic",
 		"InterestTopic",
 		"GOODBYE",
 		"AboutWorkTopic",
 		"TownProgression",
 		"GetTaskByDifficulty",
-	},
-})
-
-DIALOGUE.addTopic("StorageTopic", {
-	statement = "Do you have room to store my items?",
-	response = "Yes.",
-	options = {
-		"BackTopic",
-	},
-	preCallback = function(self, client, target)
-		if
-			not ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/cleaner/CL01") and CLIENT
-		then
-			self.response = "No, not for the moment."
-		end
-	end,
-	IsDynamic = true,
-	GetDynamicOptions = function(self, client, target)
-		return ix.progression.GetStorageOptions(client, target)
-	end,
-	ResolveDynamicOption = function(self, client, target, data)
-		return ix.progression.ResolveServiceOffer(client, target, "storage", data)
-	end,
-	ShouldAdd = function(self, client, target)
-		if ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/cleaner/CL01") then
-			return true
-		end
-	end,
-})
-
-DIALOGUE.addTopic("OpenStorage", {
-	statement = "",
-	response = "Here's your items I've been storing for you.",
-	postCallback = function(self, client, target)
-		if SERVER then
-			local character = client:GetCharacter()
-			local id = character:GetData("bankID")
-			local bank
-
-			if id then
-				local bankstruct = {}
-				bankstruct[id] = {
-					character:GetData("bankW", ix.config.Get("bankW", 2)),
-					character:GetData("bankH", ix.config.Get("bankH", 2)),
-				}
-				ix.inventory.Restore(
-					bankstruct,
-					ix.config.Get("bankW", 2),
-					ix.config.Get("bankH", 2),
-					function(inventory)
-						bank = inventory
-						bank:SetOwner(character:GetID())
-					end
-				)
-			else
-				bank = ix.inventory.Create(ix.config.Get("bankW", 2), ix.config.Get("bankH", 2), os.time())
-				bank:SetOwner(character:GetID())
-				bank:Sync(client)
-
-				character:SetData("bankID", bank:GetID())
-			end
-
-			timer.Simple(0.1, function()
-				ix.storage.Open(client, bank, {
-					entity = client,
-					name = "Personal Storage",
-					searchText = "Accessing personal storage...",
-					searchTime = ix.config.Get("containerOpenTime", 0),
-				})
-			end)
-		end
-	end,
-	options = {
-		"BackTopic",
-	},
-})
-
-DIALOGUE.addTopic("ConfirmStorageUpgrade", {
-	statement = "",
-	response = "",
-	IsDynamicFollowup = true,
-	IsDynamic = true,
-	DynamicPreCallback = function(self, client, target, data)
-		ix.progression.ConfirmService(self, client, target, "storage", data)
-	end,
-	GetDynamicOptions = function(self, client, target)
-		local dynamicOptions = {
-			{
-				statement = "Expensive, but alright. Upgrade my stash.",
-				topicID = "ConfirmStorageUpgrade",
-				dyndata = { accepted = true },
-			},
-			{
-				statement = "Eh, what's with that price? No thanks.",
-				topicID = "ConfirmStorageUpgrade",
-				dyndata = { accepted = false },
-			},
-		}
-
-		-- Return table of options
-		-- statement : String shown to player
-		-- topicID : should be identical to addTopic id
-		-- dyndata : arbitrary table that will be passed to ResolveDynamicOption
-
-		return dynamicOptions
-	end,
-	ResolveDynamicOption = function(self, client, target, data)
-		if SERVER then
-			local accepted = type(data) == "table" and data.accepted == true
-			local completed = ix.progression.ExecuteService(client, target, "storage", accepted)
-			if accepted and not completed then
-				client:Notify("That service could not be completed. Please request a fresh quote.")
-			end
-		end
-
-		return "BackTopic"
-	end,
-})
-
-DIALOGUE.addTopic("NotEnoughMoneyStorage", {
-	statement = "",
-	response = ("You lack the funds to upgrade your stash. Return to me " .. "once you get more funds."),
-	options = {
-		"BackTopic",
 	},
 })
 
@@ -250,7 +125,6 @@ DIALOGUE.addTopic("BackTopic", {
 		"SpecialtyTopic",
 		"TradeTopic",
 		"StartBarter",
-		"StorageTopic",
 		"BackgroundTopic",
 		"InterestTopic",
 		"GOODBYE",

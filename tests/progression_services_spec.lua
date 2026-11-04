@@ -119,7 +119,7 @@ local function repairItem(character, id, weapon)
 	return item
 end
 local tech, doctor, arena, cleaner, wish = vendor("'Technut'"), vendor("'Jitters'"),
-	vendor("'Arena Master'"), vendor("'Cleaner'"), vendor("'???'")
+	vendor("'Arena Master'"), vendor("'Ballast'"), vendor("'???'")
 local first, second = actor(), actor()
 local firstItem, secondItem = repairItem(first, 11, true), repairItem(second, 22, true)
 local credit = {services = {{npc = "'Technut'", service = "repair", amount = 100}}}
@@ -128,6 +128,20 @@ check(not api.GrantBenefits(first, "creditFixture", credit, "once"), "credit cla
 check(api.GetServiceCredit(first, "'Technut'", "repair") == 100, "credit has the stated face value")
 check(api.GetServiceCredit(first, "'Boss'", "repair") == 0, "credit belongs to the named provider")
 check(api.GetServiceCredit(second, "'Technut'", "repair") == 0, "another character has no credit")
+local noGiftOwner = actor()
+check(api.GrantBenefits(noGiftOwner, "noGiftFixture", {
+	items = {{item = "medic_bandage_1"}},
+	services = {{npc = "'Technut'", service = "repair", amount = 100}},
+}, "completion"), "non-item benefits still grant with stale gift fields")
+check(#noGiftOwner.inventory.rewards == 0
+	and #(api.GetLine(noGiftOwner, "noGiftFixture").pendingRewards or {}) == 0,
+	"completion benefits never deliver or queue gift items")
+check(api.GetServiceCredit(noGiftOwner, "'Technut'", "repair") == 100,
+	"removing item gifts preserves service credits")
+local giftSummary = api.GetBenefitSummary({id = "noGiftFixture", completionBenefits = {
+	items = {{item = "medic_bandage_1"}},
+}}, noGiftOwner)
+check(giftSummary == "", "progression descriptions do not advertise stale item gifts")
 local offer = api.BuildServiceOffer(first.client, tech, "repair", {itemid = 11, cost = 0, type = "hp"})
 check(offer.baseCost == 400 and offer.cost == 300 and offer.field == "wear", "repair ignores forged price and field")
 api.ConfirmService({}, first.client, tech, "repair", {itemid = 11, cost = 300})
@@ -183,17 +197,20 @@ api.Register("sameDiscount", {nextProgressions = {}, serviceDiscounts = {{npc = 
 api.SetCompleted(first, "sameDiscount")
 check(api.GetServiceDiscount(first, "'Arena Master'", "treatment") == 0.1, "alternative discounts do not add together")
 check(not api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}), "storage still requires its access milestone")
-complete(first, "cotz/town/cleaner/CL01")
-api.GrantBenefits(first, "storageFixture", {services = {{npc = "'Cleaner'", service = "storage", amount = 300}}}, "once")
+complete(first, "cotz/town/ballast/BA12")
+api.GrantBenefits(first, "storageFixture", {
+	services = {{npc = "'Ballast'", service = "storage", amount = 300}},
+}, "once")
 local expansion = api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally", cost = 0})
 check(expansion.baseCost == math.Round(120 ^ (1 + 2 / 5.5)), "storage retains its existing price curve")
 api.ConfirmService({}, first.client, cleaner, "storage", {direction = "horizontally"})
 check(api.ExecuteService(first.client, cleaner, "storage", true), "storage credit redeems through normal expansion")
 check(first:GetData("bankW") == 3, "storage grows only one step")
 first:SetData("bankW", 4)
-local retainedStorageCredit = api.GetServiceCredit(first, "'Cleaner'", "storage")
+local retainedStorageCredit = api.GetServiceCredit(first, "'Ballast'", "storage")
 check(not api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}), "maximum storage remains a hard limit")
-check(api.GetServiceCredit(first, "'Cleaner'", "storage") == retainedStorageCredit, "full storage does not convert credit to money")
+check(api.GetServiceCredit(first, "'Ballast'", "storage") == retainedStorageCredit,
+	"full storage does not convert credit to money")
 check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "hp"}), "wish contact still requires Computer completion")
 complete(first, "computer_artifactTasks")
 api.GrantBenefits(first, "wishFixture", {services = {{npc = "'???'", service = "wish", amount = 25000}}}, "once")
@@ -227,7 +244,7 @@ check(api.GetServiceCredit(restored, "'Jitters'", "treatment") == api.GetService
 	"remaining service credit survives character restoration")
 check(not api.GrantBenefits(restored, "treatmentFixture", {services = {{npc = "'Jitters'", service = "treatment", amount = 1000}}}, "once"),
 	"reconnect cannot replay a service-credit grant")
-check(not pcall(api.ValidateBenefits, {completionBenefits = {items = {{item = "missing_item"}}}}), "unknown reward items fail validation")
+check(not pcall(api.ValidateBenefits, {completionBenefits = {items = {{item = "missing_item"}}}}), "progression gift fields fail validation")
 check(not pcall(api.ValidateBenefits, {serviceDiscounts = {{npc = "'Arena Master'", service = "treatment", fraction = 1}}}),
 	"unbounded discounts fail validation")
 check(not pcall(api.ValidateBenefits, {completionBenefits = {services = {{npc = "'???'", service = "repair", amount = 50}}}}),

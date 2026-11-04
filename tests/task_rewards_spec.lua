@@ -208,14 +208,14 @@ check(ix.progression.DescribeItemReward({item = "22lr", data = {quantity = 7}}) 
 	"ammunition rewards show the awarded round count")
 local useOwner = actor()
 useOwner.inventory.full = true
-ix.progression.QueueReward(useOwner, "uses-test", {item = "reward_bandage", data = {quantity = 2}})
-check(not ix.progression.ClaimRewards(useOwner, "uses-test") and not useOwner.client.receivedLabels,
+ix.progression.QueueReward(useOwner, "taskRewardClaims", {item = "reward_bandage", data = {quantity = 2}})
+check(not ix.progression.ClaimRewards(useOwner, "taskRewardClaims") and not useOwner.client.receivedLabels,
 	"failed inventory insertion does not announce a received item")
 useOwner.inventory.full = false
-check(ix.progression.ClaimRewards(useOwner, "uses-test"), "quantity reward delivers when inventory has space")
+check(ix.progression.ClaimRewards(useOwner, "taskRewardClaims"), "quantity reward delivers when inventory has space")
 check(useOwner.client.receivedLabels[1] == "Reward Bandage (2 uses)",
 	"item-received message includes the exact awarded uses")
-check(not ix.progression.ClaimRewards(useOwner, "uses-test") and #useOwner.client.receivedLabels == 1,
+check(not ix.progression.ClaimRewards(useOwner, "taskRewardClaims") and #useOwner.client.receivedLabels == 1,
 	"replaying a delivered claim does not repeat its item notification")
 local function kit(actor, id)
 	local item = {uniqueID = "kit_reward_demo", data = {}}
@@ -794,6 +794,10 @@ local forgedOffers = copy(viewer:GetData("taskRewardOffers", {}))
 forgedOffers["progression:menu-test"] = {npc = "'Old Timer'", label = "Progression task", earned = true,
 	choices = {{label = "Old supplies", items = {{item = "medic_bandage_1", data = {quantity = 3}}}}}}
 viewer:SetData("taskRewardOffers", forgedOffers)
+check(not api.SelectOffer(viewer, "'Old Timer'", "progression:menu-test", 1),
+	"direct calls cannot select an old progression gift offer")
+check(not api.EarnOffer(viewer, "progression:menu-test"),
+	"saved progression offers cannot be paid through the job reward service")
 local menuOptions = dialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, viewer.client, target)
 local hasRepeatable = false
 for _, option in ipairs(menuOptions) do
@@ -828,11 +832,10 @@ check(api.ClaimNext(packageOwner) and #scheduledClaims == 1,
 scheduledClaims[1]()
 check(#packageOwner.inventory.received == 2 and #scheduledClaims == 1,
 	"jobsystem drains the package and stops when the claim queue is empty")
-ix.progression.QueueReward(packageOwner, "story-claim", {item = "medic_bandage_1"})
-ix.progression.QueueReward(packageOwner, "story-claim", {item = "medic_bandage_1"})
-ix.progression.ClaimRewards(packageOwner, "story-claim")
-check(#scheduledClaims == 1 and #ix.progression.GetLine(packageOwner, "story-claim").pendingRewards == 1,
-	"job supply continuation leaves progression claims player-driven")
+check(not ix.progression.QueueReward(packageOwner, "story-claim", {item = "medic_bandage_1"}),
+	"progression gifts cannot use the repeatable job claim queue")
+check(not ix.progression.ClaimRewards(packageOwner, "story-claim") and #scheduledClaims == 1,
+	"removed story gifts cannot schedule job reward delivery")
 timer.Simple = function() end
 
 SERVER, CLIENT = false, true

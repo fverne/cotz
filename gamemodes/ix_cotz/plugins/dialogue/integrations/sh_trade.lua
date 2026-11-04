@@ -7,8 +7,10 @@ function ix.dialogue.OpenVendor(_, client, target)
 	target.receivers[#target.receivers + 1] = client
 	for id, entry in pairs(ix.vendorStock.GetItems(character, target)) do
 		local allowed = CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) or entry[VENDOR_MODE]
-		if not table.IsEmpty(entry) and allowed
-			and ix.progression.CanBuyItem(character, target:GetDisplayName(), id) then
+		local canBuy = ix.progression.CanBuyItem(character, target:GetDisplayName(), id)
+		local canSell = ix.townNPCs and ix.townNPCs:CanSellItem(id, target:GetDisplayName()) == true
+		if not table.IsEmpty(entry) and allowed and (canBuy or canSell) then
+			if not canBuy then entry[VENDOR_MODE] = VENDOR_BUYONLY end
 			items[id] = entry
 		end
 	end

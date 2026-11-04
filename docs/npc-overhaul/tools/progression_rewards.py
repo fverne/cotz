@@ -11,7 +11,6 @@ LEDGER = ROOT / "docs/npc-overhaul/unlock-ledger.md"
 DEFINITIONS = ROOT / "gamemodes/ix_cotz/plugins/townnpcs/definitions"
 # Existing consumers check these exact milestones. These are functional, not future services.
 SERVICES = {
-    ("cleaner", "CL01"): "personal storage access",
     ("technut", "TN13"): "existing suit painting",
     ("mute", "MU09"): "emission warnings",
     ("mute", "MU15"): "event broadcasts",
@@ -48,6 +47,7 @@ def rewards(data, contact, step):
         capacity = step["capacity"]
         live.append(f"Carried capacity: +{capacity['amount']} {capacity['kind']}")
     live += [f"{d['service']} discount: {d['fraction'] * 100:g}%" for d in step.get("discounts", [])]
+    live += [service["name"] for service in step.get("services", [])]
     if (contact, step["id"]) in SERVICES:
         live.append(SERVICES[contact, step["id"]])
     return sorted(live), step.get("plannedUnlocks", [])
@@ -97,9 +97,11 @@ def validate(data):
                 errors.append(slug + ": purchase route is not local: " + item)
         for step in contact["progression"]:
             total += 1
+            if step.get("benefits", {}).get("items"):
+                errors.append(progression_id(slug, step["id"]) + ": progression item gifts are disabled")
             identifier = progression_id(slug, step["id"])
             live, planned = rewards(data, slug, step)
-            if not live:
+            if not live and step.get("completionCash", 0) <= 0:
                 errors.append(identifier + ": no implemented unlock")
             for p in planned:
                 if p.get("kind") not in KINDS or p.get("status") != "unimplemented" or p.get("provider") != slug:
@@ -138,8 +140,8 @@ def validate(data):
                     if (old and old["item"] == stock["item"] and old["bonus"] >= stock["bonus"]
                             and progression_id(slug, earlier["id"]) in ancestors[identifier]):
                         errors.append(identifier + ": redundant stock improvement")
-    if total != 624:
-        errors.append(f"Expected 624 steps, found {total}")
+    if total != 600:
+        errors.append(f"Expected 600 steps, found {total}")
     if kinds != KINDS:
         errors.append("Missing deferred reward families: " + str(KINDS - kinds))
     return errors
@@ -147,9 +149,6 @@ def validate(data):
 
 def bundle(benefits):
     parts = []
-    for item in benefits.get("items", []):
-        quantity = item.get("quantity", item.get("data", {}).get("quantity", 1))
-        parts.append(f"Gift: {item['item']} ({quantity})")
     for service in benefits.get("services", []):
         parts.append(f"{service['amount']} {service['service']} credit at {service['npc']}")
     return parts
@@ -159,9 +158,18 @@ def text(value):
     return str(value).replace("|", "\\|").replace("\n", " ")
 
 
-def render(data):
+def validation_issues(data):
+    try:
+        return validate(data)
+    except ValueError as error:
+        return [str(error) + "; remaining graph-dependent checks could not run"]
+
+
+def render(data, issues=None):
+    if issues is None:
+        issues = validation_issues(data)
     summaries, rows, details, purchases, conversions = [], [], [], [], []
-    total_live = total_planned_only = total_multiple = 0
+    total_steps = total_live = total_planned_only = total_multiple = 0
     for slug, contact in sorted(data["contacts"].items()):
         live_count = planned_only = multiple = 0
         for step in contact["progression"]:
@@ -179,6 +187,7 @@ def render(data):
                 details.append(f"| {p['id']} | {p['kind']} | {text(p['effect'])} | "
                                f"{text(json.dumps(terms, ensure_ascii=False, sort_keys=True))} |")
         summaries.append(f"| {slug} | {len(contact['progression'])} | {live_count} | {planned_only} | {multiple} |")
+        total_steps += len(contact["progression"])
         total_live += live_count
         total_planned_only += planned_only
         total_multiple += multiple
@@ -187,25 +196,34 @@ def render(data):
             purchases.append(f"| {item} | {slug} | {allocation['step']} | {canonical} |")
     for item, allocation in sorted(data["variants"].items()):
         conversions.append(f"| {item} | {allocation['contact']} | {allocation['step']} | {allocation['base']} |")
+    missing = total_steps - total_live - total_planned_only
+    if issues:
+        validation = ("## Validation findings\n\n"
+                      "This is a current-definition snapshot generated with `--write --allow-invalid`.\n"
+                      "The runtime configuration has unresolved errors; `--check` remains strict.\n\n"
+                      + "\n".join("- " + text(issue) for issue in issues) + "\n")
+    else:
+        validation = "Validation passed.\n"
     header = f"""# Current progression unlock ledger
 
 Generated from authoritative town definitions and their compiled purchase prerequisites.
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**624 / 624 steps assigned; {total_live} have functional unlocks; {total_planned_only} have TODO-only unlock plans;
-{total_multiple} have multiple assigned unlocks; 0 unassigned.**
+**{total_steps} active steps; {total_live} have functional unlocks; {total_planned_only} have TODO-only unlock plans;
+{total_multiple} have multiple assigned unlocks; {missing} have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
-Medicine uses local earlier-tier prerequisites. Basic regional supplies do not require another map's progression.
+Medicine uses local earlier-tier prerequisites. The approved plan has no starting sale supplies.
 Stock values are total bonuses above the future base capacity, not additive grants or automatic refills.
 Default vendor quantities, prices and refill policy are outside this allocation pass.
 
 TODO entries are authoring metadata only: no entitlement, menu, payout or system is implemented for them.
-Their proposed terms require implementation and balance review before activation. Existing cash, gifts and
-credits remain supplementary. Every active step has an implemented unlock; TODO plans alone
-never satisfy unlock coverage. Each cosmetic finish remains appearance-only.
+Their proposed terms require implementation and balance review before activation. Existing cash and
+service credits remain available; progression item gifts are disabled. Each active step grants an implemented unlock or completion cash.
+TODO plans alone never satisfy reward coverage. Empty steps are reported without restoring excluded items. Each cosmetic finish remains appearance-only.
 
+{validation}
 ## Coverage by contact
 
 | Contact | Steps | Functional coverage | Placeholder-only | Multiple unlocks |
@@ -228,17 +246,23 @@ def main():
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--write", action="store_true")
     action.add_argument("--check", action="store_true")
+    parser.add_argument("--allow-invalid", action="store_true",
+                        help="Write a current snapshot with validation findings; only valid with --write")
     args = parser.parse_args()
+    if args.allow_invalid and not args.write:
+        parser.error("--allow-invalid requires --write")
     data = snapshot()
-    errors = validate(data)
-    if errors:
+    errors = validation_issues(data)
+    if errors and not args.allow_invalid:
         raise SystemExit("\n".join(errors))
-    result = render(data)
+    result = render(data, errors)
     if args.write:
         LEDGER.write_text(result)
     elif LEDGER.read_text() != result:
         raise SystemExit("Reward ledger is stale; regenerate with --write")
     print(result.split("**")[1].replace("\n", " "))
+    if errors:
+        print("Snapshot written with unresolved validation findings:\n" + "\n".join(errors))
 
 
 if __name__ == "__main__":

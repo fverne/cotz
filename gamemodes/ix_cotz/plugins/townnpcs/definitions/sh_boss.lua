@@ -1,6 +1,8 @@
 PLUGIN:Register("boss", {
 	name = "'Boss'",
 	template = "unisgnpc2",
+	difficultyMultiplier = 3,
+	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
 		kind = "humans",
@@ -9,14 +11,7 @@ PLUGIN:Register("boss", {
 		description = "Hostile human elimination",
 		quantities = {5, 9, 15},
 	},
-	supplies = {
-		"drink_bottlewaterdirty",
-		"drink_bottlewater",
-		"545x39",
-		"556x45",
-		"medic_bandage_1",
-		"drug_painkillers",
-	},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Assault resupply",
@@ -53,50 +48,30 @@ PLUGIN:Register("boss", {
 		["accesscard_bunker"] = true,
 	},
 	catalogue = {
-		["lowtiercookerfuel"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_bread"] = {step = "BO03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_1"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_tushonka"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["9x39"] = {step = "BO13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["9a91"] = {step = "BO04",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["accesscard_bunker"] = {step = "BO01",
 			-- terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["asval"] = {step = "BO16",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["dp28"] = {step = "BO10",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["fnfal"] = {step = "BO13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["g3a3"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["pkm"] = {step = "BO22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["rpk"] = {step = "BO07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sr3m"] = {step = "BO19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_berill"] = {step = "BO17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs2"] = {step = "BO11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_cs3"] = {step = "BO22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_io7a"] = {step = "BO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ps5m"] = {step = "BO06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorecho"] = {step = "BO01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["headwear_cs4"] = {step = "BO09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["headwear_screen"] = {step = "BO05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_operator_nato"] = {step = "BO22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_operator_rus_1"] = {step = "BO01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_sphere08"] = {step = "BO14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_sphere12"] = {step = "BO18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_m40"] = {step = "BO15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_m50"] = {step = "BO22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_pmk3"] = {step = "BO01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_xm40"] = {step = "BO08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -116,20 +91,11 @@ PLUGIN:Register("boss", {
 					quantity = 9,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "545x39",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO02",
-			stock = {item = "556x45", bonus = 1},
+			stock = {item = "detectorecho", bonus = 1},
 			completionCash = 450,
 			name = "The Missing Patrol",
 			kind = "field",
@@ -159,7 +125,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO03",
-			stock = {item = "drug_painkillers", bonus = 1},
+			stock = {item = "mask_pmk3", bonus = 1},
 			completionCash = 0,
 			name = "Follow Instructions",
 			kind = "tracker",
@@ -202,7 +168,6 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Staying Equipped",
 			kind = "delivery",
@@ -226,6 +191,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO06",
+			stock = {item = "headwear_screen", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
 				{
@@ -265,20 +231,11 @@ PLUGIN:Register("boss", {
 				cargo = "town_quest_equipment",
 				label = "Interrupted supply case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "556x45",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {item = "545x39", bonus = 1},
+			benefits = {},
 		},
 		{
 			id = "BO07",
+			stock = {item = "helm_operator_rus_1", bonus = 1},
 			completionCash = 0,
 			name = "Pressure on the Route",
 			kind = "tracker",
@@ -290,7 +247,6 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO08",
-			stock = {item = "9a91", bonus = 1},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -319,7 +275,6 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO09",
-			stock = {item = "545x39", bonus = 2},
 			completionCash = 875,
 			name = "Orders and Receipts",
 			kind = "delivery",
@@ -386,6 +341,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO11",
+			stock = {item = "headwear_cs4", bonus = 1},
 			completionCash = 0,
 			name = "A Smaller Network",
 			kind = "tracker",
@@ -425,16 +381,7 @@ PLUGIN:Register("boss", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO13",
@@ -494,6 +441,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO15",
+			stock = {item = "helm_sphere08", bonus = 1},
 			completionCash = 0,
 			name = "Holding the Initiative",
 			kind = "tracker",
@@ -590,19 +538,11 @@ PLUGIN:Register("boss", {
 				label = "Missing annex for Wake",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "556x45",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BO19",
+			stock = {item = "mask_xm40", bonus = 1},
 			completionCash = 0,
 			name = "End of the Operation",
 			kind = "tracker",
@@ -614,6 +554,7 @@ PLUGIN:Register("boss", {
 		},
 		{
 			id = "BO20",
+			stock = {item = "helm_sphere12", bonus = 1},
 			completionCash = 2250,
 			name = "A full supply order",
 			kind = "delivery",
@@ -647,7 +588,6 @@ PLUGIN:Register("boss", {
 				},
 			},
 			benefits = {},
-			stock = {item = "545x39", bonus = 3},
 		},
 		{
 			id = "BO21",

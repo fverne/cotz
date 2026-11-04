@@ -49,16 +49,20 @@ function PLUGIN:RecoverCompletions(character)
 	for npc, event in pairs(state.pending or {}) do
 		local definition = ix.jobs.list[event.identifier]
 		local id = definition and definition.townProgression
-		assert(id and self.steps[id], "Unknown saved town commission: " .. event.identifier)
-		if ix.progression.IsActive(character, id) then
+		local contact = self.byName[npc]
+		local retired = contact and #contact.progression == 0
+		assert(retired or (id and self.steps[id]), "Unknown saved town commission: " .. event.identifier)
+		if not retired and ix.progression.IsActive(character, id) then
 			if self.steps[id].retiredCommission then
 				-- An already accepted field assignment can still settle the same milestone once.
 				ix.progression.SetCompleted(character, id)
 			else
-				ix.progression.SetProgressionValue(character, id, 1)
+				ix.progression.SetProgressionValue(character, id, event.value or 1)
 			end
+			state.pending[npc] = nil
+			changed = true
 		end
-		if ix.progression.IsCompleted(character, id) then
+		if not retired and ix.progression.IsCompleted(character, id) then
 			state.pending[npc] = nil
 			changed = true
 		end
@@ -91,7 +95,11 @@ function PLUGIN:JobCompleted(client, npc, identifier)
 	if not claim or (state.claims[npc] or 0) >= claim then return end
 	state.claims[npc] = claim
 	if definition.townProgression then
-		state.pending[npc] = {serial = claim, identifier = identifier}
+		local id = definition.townProgression
+		state.commissions = state.commissions or {}
+		local count = math.max(state.commissions[id] or 0, ix.progression.GetProgressionValue(character, id) or 0)
+		state.commissions[id] = count + 1
+		state.pending[npc] = {serial = claim, identifier = identifier, value = count + 1}
 	else
 		state.counts[npc] = (state.counts[npc] or 0) + 1
 	end

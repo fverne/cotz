@@ -207,6 +207,8 @@ def band_key(theme, home, tier):
 
 def contact_plan(contact):
     steps = {step["id"]: step for step in contact["progression"]}
+    if not steps:
+        return {}
     depths = {}
     def depth(identifier):
         if identifier not in depths:
@@ -261,6 +263,8 @@ def apply_plan(data, rates, bands):
         home = starting_region(contact, slug, data, rates)
         groups = bands[(theme, home)]
         plan = contact_plan(contact)
+        if not plan:
+            continue
         path = ROOT / f"gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_{slug.replace('-', '_')}.lua"
         source = path.read_text()
         example = next(step for step in contact["progression"] if step.get("retiredCommission"))
@@ -277,6 +281,11 @@ def apply_plan(data, rates, bands):
             if identifier not in plan:
                 return block
             tier, depth, maximum = plan[identifier]
+            current = next(step for step in contact["progression"] if step["id"] == identifier)
+            if any(not slot["pool"].startswith("town_delivery_") for slot in current["requirements"]):
+                manifests[slug][identifier] = {"tier": tier, "depth": depth, "max_depth": maximum,
+                                              "requirements": current["requirements"]}
+                return block
             requirements = []
             for index, amount in enumerate(QUANTITIES[tier-1]):
                 items = groups[index]

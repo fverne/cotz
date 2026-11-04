@@ -1,6 +1,8 @@
 PLUGIN:Register("carbon", {
 	name = "'Carbon'",
 	template = "carbonnpc",
+	difficultyMultiplier = 4,
+	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
 		kind = "delivery",
@@ -32,7 +34,7 @@ PLUGIN:Register("carbon", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Archive supplies (trade goods)",
@@ -66,18 +68,18 @@ PLUGIN:Register("carbon", {
 		),
 	},
 	catalogue = {
-		["drug_caffeine"] = {step = "CA02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "CA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "CA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "CA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["value_officepaper"] = {step = "CA01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_tape_duct"] = {step = "CA02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["accesscard_bunker"] = {step = "CA12",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["attachment_aluframe"] = {step = "CA08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["attachment_carbonfibre"] = {step = "CA15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["attachment_steelframe"] = {step = "CA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["headwear_pracs"] = {step = "CA01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["headwear_psz12"] = {step = "CA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -98,16 +100,7 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA02",
@@ -140,7 +133,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA03",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "headwear_pracs", bonus = 1},
 			completionCash = 0,
 			name = "A Useful Record",
 			kind = "tracker",
@@ -155,7 +148,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA04",
-			stock = {item = "drug_caffeine", bonus = 1},
+			stock = {item = "headwear_pracs", bonus = 2},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -178,7 +171,6 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "An Ordered Shelf",
 			kind = "delivery",
@@ -232,24 +224,11 @@ PLUGIN:Register("carbon", {
 				label = "Contemporary expedition diary",
 				recipient = "the-original",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "CA07",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "headwear_pracs", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -276,7 +255,6 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA08",
-			stock = {item = "food_can_beans", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -321,7 +299,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA09",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "attachment_aluframe", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -361,7 +339,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA10",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			stock = {item = "attachment_aluframe", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -406,7 +384,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA11",
-			stock = {item = "drug_caffeine", bonus = 2},
+			stock = {item = "attachment_aluframe", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -433,7 +411,6 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA12",
-			stock = {item = "drink_bottletea", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -474,20 +451,11 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA13",
-			stock = {item = "food_can_beans", bonus = 2},
+			stock = {item = "accesscard_bunker", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -531,7 +499,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA14",
-			stock = {item = "food_raisins", bonus = 2},
+			stock = {item = "accesscard_bunker", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -576,7 +544,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA15",
-			stock = {item = "drink_bottlewaterdirty", bonus = 3},
+			stock = {item = "attachment_carbonfibre", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -603,7 +571,7 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA16",
-			stock = {item = "drug_caffeine", bonus = 3},
+			stock = {item = "attachment_carbonfibre", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -652,7 +620,6 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA17",
-			stock = {item = "drink_bottletea", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -696,7 +663,6 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA18",
-			stock = {item = "food_can_beans", bonus = 3},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -737,20 +703,11 @@ PLUGIN:Register("carbon", {
 				cargo = "town_quest_dossier",
 				label = "Source of the altered summary",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CA19",
-			stock = {item = "food_raisins", bonus = 3},
+			stock = {item = "accesscard_bunker", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -811,14 +768,9 @@ PLUGIN:Register("carbon", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "CA21",
-			stock = {item = "drink_bottlewaterdirty", bonus = 4},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -866,7 +818,6 @@ PLUGIN:Register("carbon", {
 		},
 		{
 			id = "CA22",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

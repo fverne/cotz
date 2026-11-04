@@ -15,7 +15,7 @@ ix.progression.Register("communitySupport1", {
 		.. "through, and there will be a little water and tea for you."
 	),
 	completionMessage = "Useful things. Reliable person. The community remembers.",
-	completionBenefits = {items = {{item = "drink_bottlewater"}, {item = "drink_bottletea"}}},
+	completionBenefits = {},
 })
 
 ix.progression.Register("communitySupport2", {
@@ -35,7 +35,7 @@ ix.progression.Register("communitySupport2", {
 		.. "the workshop together and take a reward for the trouble."
 	),
 	completionMessage = "Useful things. Reliable person. The community remembers.",
-	completionBenefits = {items = {{item = "medic_bandage_1"}}},
+	completionBenefits = {},
 })
 
 ix.progression.Register("communitySupport3", {
@@ -55,6 +55,6 @@ ix.progression.Register("communitySupport3", {
 		.. "community will remember you as a dependable supplier."
 	),
 	completionMessage = "Useful things. Reliable person. The community remembers.",
-	completionBenefits = {items = {{item = "food_can_tushonka"}}},
+	completionBenefits = {},
 	recognition = "Trusted Community Supplier",
 })

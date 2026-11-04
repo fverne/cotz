@@ -34,6 +34,7 @@ end
 function PLUGIN:ValidateContacts()
 	local errors = {}
 	local plannedIDs = {}
+	local serviceIDs = {}
 	for slug, contact in pairs(self.contacts) do
 		local function report(message)
 			errors[#errors + 1] = slug .. ": " .. message
@@ -41,6 +42,9 @@ function PLUGIN:ValidateContacts()
 		local function isDisabled(item)
 			return contact.disabledItems and contact.disabledItems[item]
 		end
+		local multiplier = contact.difficultyMultiplier or 1
+		if type(multiplier) ~= "number" or multiplier ~= multiplier or multiplier <= 0
+			or multiplier == math.huge then report("invalid progression effort multiplier") end
 		for _, item in ipairs(contact.supplies) do
 			if isDisabled(item) then report("disabled item in supplies: " .. item) end
 		end
@@ -61,6 +65,14 @@ function PLUGIN:ValidateContacts()
 			end
 		end
 		for _, step in ipairs(contact.progression) do
+			for _, service in ipairs(step.services or {}) do
+				if type(service.id) ~= "string" or service.id == "" or serviceIDs[service.id]
+					or type(service.name) ~= "string" or service.name == "" then
+					report("invalid or duplicate service unlock on " .. step.id)
+				else
+					serviceIDs[service.id] = true
+				end
+			end
 			for _, reward in ipairs(step.plannedUnlocks or {}) do
 				validatePlannedUnlock(reward, contact, plannedIDs, report)
 			end

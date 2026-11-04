@@ -72,8 +72,8 @@ function PLUGIN:PopulateHelpMenu(tabs)
 				.. "Stock rewards increase your personal stock capacity without faster refills. "
 				.. "Finish every item requirement in a task to receive "
 				.. "the listed town completion payment. Non-town hand-ins retain their existing payout rules. "
-				.. "Commissions may also grant their listed item rewards, service credit or purchase access. "
-				.. "Any pending item rewards remain available to claim."
+				.. "Commissions may also grant service credit or purchase access. "
+				.. "Progression does not grant item gifts."
 			)
 		)
 		intro:Dock(TOP)

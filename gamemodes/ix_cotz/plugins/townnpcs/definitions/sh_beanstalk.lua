@@ -1,18 +1,20 @@
 PLUGIN:Register("beanstalk", {
 	name = "'Beanstalk'",
 	template = "ecologistnpc2",
-	map = "rp_garbage_cotz",
+	difficultyMultiplier = 5,
+	enforceCatalogue = true,
+	map = "rp_marsh_cs",
 	job = {
 		kind = "defence",
 		category = "Research defence",
 		description = "Research defence",
 		maps = {
-			easy = "rp_garbage_cotz",
+			easy = "rp_marsh_cs",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Research safety",
@@ -45,58 +47,124 @@ PLUGIN:Register("beanstalk", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_1"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_caffeine"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["geigercounter"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_cloth"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_eo20"] = {step = "BN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_gp5"] = {step = "BN10",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_halfmask"] = {step = "BN04",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_m40"] = {step = "BN21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_m50"] = {step = "BN24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_pmk3"] = {step = "BN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_respirator"] = {step = "BN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mask_xm40"] = {step = "BN18",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antipsychotic_1"] = {step = "BN07",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["medic_antipsychotic_2"] = {step = "BN09",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antipsychotic_3"] = {step = "BN13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antirad_1"] = {step = "BN02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_psyheal_1"] = {step = "BN01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["medic_psyheal_2"] = {step = "BN03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_stimpak_1"] = {step = "BN07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_stimpak_2"] = {step = "BN11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_stimpak_3"] = {step = "BN15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_nbc"] = {step = "BN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ssp99"] = {step = "BN24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["127x55"] = {step = "BN19",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["22lr"] = {step = "BN01",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["22lrap"] = {step = "BN03",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["22lrhp"] = {step = "BN02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["338lapua"] = {step = "BN19",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["338lapuaap"] = {step = "BN21",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["338lapuahp"] = {step = "BN20",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["357magnum"] = {step = "BN07",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["357magnumap"] = {step = "BN09",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["357magnumhp"] = {step = "BN08",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["44magnum"] = {step = "BN07",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["44magnumap"] = {step = "BN09",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["44magnumhp"] = {step = "BN08",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["45acp"] = {step = "BN04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["45acpap"] = {step = "BN06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["45acphp"] = {step = "BN05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["500magnum"] = {step = "BN16",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["500magnumap"] = {step = "BN18",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["500magnumhp"] = {step = "BN17",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["50ae"] = {step = "BN13",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["50aeap"] = {step = "BN15",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["50aehp"] = {step = "BN14",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39"] = {step = "BN07",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39ap"] = {step = "BN09",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39hp"] = {step = "BN08",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["556x45"] = {step = "BN10",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["556x45ap"] = {step = "BN12",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["556x45hp"] = {step = "BN11",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["57x28"] = {step = "BN04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["57x28ap"] = {step = "BN06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["57x28hp"] = {step = "BN05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x25"] = {step = "BN01",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x25ap"] = {step = "BN03",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x25hp"] = {step = "BN02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39"] = {step = "BN10",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39ap"] = {step = "BN12",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39hp"] = {step = "BN11",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x51"] = {step = "BN16",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x51ap"] = {step = "BN18",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x51hp"] = {step = "BN17",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x54"] = {step = "BN19",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x54ap"] = {step = "BN21",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x54hp"] = {step = "BN20",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["93x64"] = {step = "BN19",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x18"] = {step = "BN01",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x18ap"] = {step = "BN03",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x18hp"] = {step = "BN02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x19"] = {step = "BN04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x19ap"] = {step = "BN06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x19hp"] = {step = "BN05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x21"] = {step = "BN04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x21ap"] = {step = "BN06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x21hp"] = {step = "BN05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x39"] = {step = "BN13",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x39ap"] = {step = "BN15",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x39hp"] = {step = "BN14",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["suit_seva"] = {step = "BN24",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_ssp99"] = {step = "BN01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_ssp99m"] = {step = "BN13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -113,20 +181,11 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN02",
@@ -135,7 +194,7 @@ PLUGIN:Register("beanstalk", {
 			kind = "field",
 			objective = (
 				"Deploy and protect the sampler at the assigned site in Garbage until the run finishes, then "
-				.. "collect the results. Bring it back to the issuing contact in Garbage."
+				.. "collect the results. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"BN01"},
 			briefing = (
@@ -158,6 +217,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN03",
+			stock = {item = "22lr", bonus = 1},
 			completionCash = 0,
 			name = "Results That Survive",
 			kind = "tracker",
@@ -186,7 +246,7 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 1,
 				},
 			},
@@ -194,7 +254,6 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Keeping It Sealed",
 			kind = "delivery",
@@ -207,7 +266,7 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 1,
 				},
 			},
@@ -220,7 +279,7 @@ PLUGIN:Register("beanstalk", {
 			kind = "field",
 			objective = (
 				"Recover the dump comparison log from the assigned search area in Garbage. Bring it back to the "
-				.. "issuing contact in Garbage."
+				.. "issuing contact in Marsh."
 			),
 			requires = {"BN04"},
 			briefing = (
@@ -240,23 +299,11 @@ PLUGIN:Register("beanstalk", {
 				cargo = "town_quest_lab",
 				label = "Dump comparison log",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "BN07",
+			stock = {item = "22lrap", bonus = 1},
 			completionCash = 0,
 			name = "A Consistent Sample",
 			kind = "tracker",
@@ -268,7 +315,6 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN08",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -300,11 +346,11 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
@@ -323,11 +369,11 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
@@ -340,7 +386,7 @@ PLUGIN:Register("beanstalk", {
 			kind = "field",
 			objective = (
 				"Deploy and protect the sampler at the assigned site in Garbage until the run finishes, then "
-				.. "collect the results. Bring it back to the issuing contact in Garbage."
+				.. "collect the results. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"BN08"},
 			briefing = (
@@ -366,6 +412,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN11",
+			stock = {item = "22lrhp", bonus = 1},
 			completionCash = 0,
 			name = "Enough to Compare",
 			kind = "tracker",
@@ -377,7 +424,6 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN12",
-			stock = {item = "medic_antirad_1", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
 				{
@@ -411,24 +457,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN13",
@@ -444,11 +481,11 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
@@ -456,13 +493,12 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN14",
-			stock = {item = "drug_caffeine", bonus = 1},
 			completionCash = 1650,
 			name = "Beyond the Dumps",
 			kind = "field",
 			objective = (
 				"Deploy and protect the sampler at the assigned site in Garbage until the run finishes, then "
-				.. "collect the results. Bring it back to the issuing contact in Garbage."
+				.. "collect the results. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"BN12"},
 			briefing = (
@@ -485,6 +521,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN15",
+			stock = {item = "762x25", bonus = 1},
 			completionCash = 0,
 			name = "Work Under Pressure",
 			kind = "tracker",
@@ -513,15 +550,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -541,15 +578,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -562,7 +599,7 @@ PLUGIN:Register("beanstalk", {
 			kind = "field",
 			objective = (
 				"Deploy and protect the sampler at the assigned site in Pripyat until the run finishes, then "
-				.. "collect the results. Bring it back to the issuing contact in Garbage."
+				.. "collect the results. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"BN16"},
 			briefing = (
@@ -584,20 +621,11 @@ PLUGIN:Register("beanstalk", {
 				map = "rp_pripyat_remaster",
 				tier = 3,
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BN19",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "762x25ap", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -628,7 +656,6 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN20",
-			stock = {item = "geigercounter", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -660,19 +687,19 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_marsh_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},
@@ -705,26 +732,26 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_marsh_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},
 		},
 		{
 			id = "BN22",
-			stock = {item = "mask_cloth", bonus = 1},
+			stock = {item = "762x25hp", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -744,7 +771,7 @@ PLUGIN:Register("beanstalk", {
 			kind = "field",
 			objective = (
 				"Recover the final control recording from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Garbage."
+				.. "the issuing contact in Marsh."
 			),
 			requires = {"BN21"},
 			briefing = (
@@ -767,7 +794,7 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN23",
-			stock = {item = "mask_eo20", bonus = 1},
+			stock = {item = "9x18", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement cosmetic consumer; verify these proposed terms before enabling.
@@ -795,7 +822,6 @@ PLUGIN:Register("beanstalk", {
 		},
 		{
 			id = "BN24",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -813,32 +839,23 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_delivery_research_marsh_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_marsh_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_marsh_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_marsh_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Beanstalk's trusted contact",
 		},
 	},

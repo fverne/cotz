@@ -23,6 +23,24 @@ class ProgressionRewardsSpec(unittest.TestCase):
         self.assertEqual(rewards.validate(self.data), [])
         self.assertEqual(rewards.LEDGER.read_text(), rewards.render(self.data))
 
+    def test_current_snapshot_matches_definitions_even_with_validation_findings(self):
+        self.assertEqual(rewards.LEDGER.read_text(), rewards.render(self.data))
+
+    def test_snapshot_reports_actual_coverage_and_validation_failures(self):
+        total = live = planned_only = 0
+        for slug, contact in self.data["contacts"].items():
+            for step in contact["progression"]:
+                functional, planned = rewards.rewards(self.data, slug, step)
+                total += 1
+                live += bool(functional)
+                planned_only += bool(planned and not functional)
+        report = rewards.render(self.data, ["Example unresolved dependency"])
+        self.assertIn(f"{total} active steps; {live} have functional unlocks", report)
+        self.assertIn(f"{total - live - planned_only} have no assigned unlock", report)
+        self.assertIn("- Example unresolved dependency", report)
+        self.assertIn("`--check` remains strict", report)
+        self.assertNotIn("Validation passed", report)
+
     def test_every_placeholder_has_an_adjacent_todo(self):
         for slug, contact in self.data["contacts"].items():
             source = (rewards.DEFINITIONS / ("sh_" + slug.replace("-", "_") + ".lua")).read_text().split("\tretiredProgression = {")[0]
@@ -44,21 +62,20 @@ class ProgressionRewardsSpec(unittest.TestCase):
 
     def test_gasket_owns_lighting(self):
         catalogue = self.data["contacts"]["gasket"]["catalogue"]
-        self.assertEqual(catalogue["flashlight"]["step"], "GK06")
-        self.assertEqual(catalogue["headlamp"]["step"], "GK16")
+        self.assertLess(int(catalogue["flashlight"]["step"][2:]), int(catalogue["headlamp"]["step"][2:]))
         self.assertEqual(self.data["canonical"]["headlamp"], "gasket")
 
     def test_specialist_categories_are_redistributed(self):
         contacts = self.data["contacts"]
         for slug, items in {
-            "technut": ["foregrip", "attachment_steelframe"],
-            "suture": ["attachment_kevlar_1", "attachment_ceramicplate_1"],
-            "latch": ["attachment_steelplate_1", "crowbar"],
-            "haggler": ["mp5k", "striker"],
-            "quartermaster": ["mp40", "m1928"],
-            "jitters": ["drug_adrenaline", "medic_bandage_2"],
-            "cleaner": ["pbssuppressor"],
-            "egghead": ["artifact_battery"],
+            "technut": ["suit_anorak", "suit_nbc"],
+            "suture": ["attachment_kevlar_1", "suit_skat9"],
+            "latch": ["attachment_steelplate_1", "mask_cloth"],
+            "haggler": ["makarov", "ruger1022"],
+            "quartermaster": ["pkm", "svd"],
+            "jitters": ["drug_cigarette_1", "medic_medkit_1"],
+            "cleaner": ["mp5k", "mp40"],
+            "egghead": ["medic_stimpak_3", "detectorveles"],
         }.items():
             for item in items:
                 self.assertIn(item, contacts[slug]["catalogue"], (slug, item))
@@ -72,21 +89,24 @@ class ProgressionRewardsSpec(unittest.TestCase):
         for item, former, seller in [
             ("c96carbine", "quartermaster", "haggler"),
             ("rugermini14", "quartermaster", "haggler"),
-            ("saigasemi545", "quartermaster", "haggler"),
+            ("saigasemi545", "quartermaster", "cleaner"),
             ("obrezmalfunction", "quartermaster", "haggler"),
-            ("sks", "quartermaster", "old-timer"),
-            ("kobra", "smartass", "quartermaster"),
-            ("aimpoint", "smartass", "quartermaster"),
-            ("eotech", "smartass", "quartermaster"),
-            ("microt1", "smartass", "quartermaster"),
-            ("quest_computeraccess", "egghead", "smartass"),
+            ("sks", "quartermaster", "haggler"),
+            ("kobra", "smartass", "ledger"),
+            ("aimpoint", "smartass", "ledger"),
+            ("eotech", "smartass", "ledger"),
+            ("microt1", "smartass", "ledger"),
+            ("accesscard_bunker", "boss", "carbon"),
+            ("accesscard_laboratory", "egghead", "intern"),
         ]:
             self.assertNotIn(item, contacts[former]["catalogue"])
             if item in rewards.disabled_suggestions(seller):
                 self.assertNotIn(item, contacts[seller]["catalogue"])
             else:
                 self.assertIn(item, contacts[seller]["catalogue"])
-        for item in ["makarov", "fort12", "mp5k"]:
+        for item in ["ak74", "fort12"]:
+            self.assertNotIn(item, contacts["quartermaster"]["catalogue"])
+        for item in ["mp40", "mp5k"]:
             self.assertIn(item, contacts["cleaner"]["catalogue"])
         self.assertIn("cassette_standart", contacts["spool"]["catalogue"])
         for slug in ["carbon", "jitters", "wake", "beanstalk", "intern", "mute",
@@ -97,7 +117,7 @@ class ProgressionRewardsSpec(unittest.TestCase):
             self.assertFalse(any(s.get("stock", {}).get("item") == "lowtiercookerfuel"
                                  for s in contact["progression"]), slug)
 
-    def test_ammunition_price_order_and_parallel_upgrades(self):
+    def test_ammunition_price_order_and_hp_before_ap(self):
         authoring = runpy.run_path(str(ROOT / "docs/npc-overhaul/tools/ammo_progression.py"))
         ammo = authoring["ammunition"]()
         routes, orders = authoring["allocations"](self.data, ammo)
@@ -116,11 +136,11 @@ class ProgressionRewardsSpec(unittest.TestCase):
                 if regular in expected:
                     self.assertGreater(int(expected[variant][2:]), int(expected[regular][2:]))
                 sibling = variant[:-2] + ("hp" if variant.endswith("ap") else "ap")
-                if sibling in expected and ammo[variant]["cost"] == ammo[sibling]["cost"]:
-                    self.assertEqual(expected[variant], expected[sibling])
+                if variant.endswith("ap") and sibling in expected:
+                    self.assertGreater(int(expected[variant][2:]), int(expected[sibling][2:]))
         self.assertEqual(ammo["145x114"]["cost"], 2 * ammo["145x114ap"]["cost"])
         self.assertEqual(ammo["45acp41"]["regular"], "45acp41")
-        self.assertLess(int(routes["brass"]["9x19"][2:]), int(routes["brass"]["145x114"][2:]))
+        self.assertNotIn("145x114", routes["brass"])
 
     def test_ammunition_stage_dependencies_prevent_branch_bypass(self):
         compiled = self.data["compiled"]
@@ -134,18 +154,18 @@ class ProgressionRewardsSpec(unittest.TestCase):
                 if variant in catalogue and regular in catalogue:
                     self.assertIn(rewards.progression_id(slug, catalogue[regular]["step"]),
                                   compiled[rewards.progression_id(slug, catalogue[variant]["step"])]["prerequisites"])
+                if variant.endswith("ap") and variant in catalogue and regular + "hp" in catalogue:
+                    self.assertIn(rewards.progression_id(slug, catalogue[regular + "hp"]["step"]),
+                                  compiled[rewards.progression_id(slug, catalogue[variant]["step"])]["prerequisites"])
 
-    def test_starting_water_and_earned_bread(self):
+    def test_main_plan_has_no_starting_sale_stock(self):
         for slug, contact in self.data["contacts"].items():
-            self.assertIn("drink_bottlewater", contact["supplies"], slug)
-            self.assertIn("drink_bottlewaterdirty", contact["supplies"], slug)
-            self.assertNotIn("food_bread", contact["supplies"], slug)
-            self.assertNotIn("drink_bottlewater", contact["catalogue"], slug)
-            self.assertNotIn("drink_bottlewaterdirty", contact["catalogue"], slug)
-            if "food_bread" in contact["catalogue"]:
-                self.assertGreater(int(contact["catalogue"]["food_bread"]["step"][2:]), 1)
-            for step in contact["progression"]:
-                self.assertNotEqual(step.get("stock", {}).get("item"), "food_bread")
+            if contact.get("difficultyMultiplier"):
+                self.assertFalse(contact["supplies"], slug)
+                self.assertTrue(contact["enforceCatalogue"], slug)
+        food = self.data["contacts"]["spicy-lemon"]["catalogue"]
+        self.assertIn("drink_bottlewater", food)
+        self.assertFalse(any(item.startswith(("meal_", "meat_")) for item in food))
 
     def test_commented_out_suggestions_remain_disabled(self):
         total = 0
@@ -159,11 +179,12 @@ class ProgressionRewardsSpec(unittest.TestCase):
                 self.assertNotIn(step.get("stock", {}).get("item"), disabled, (slug, step["id"]))
         self.assertGreater(total, 0)
 
-    def test_nbc_is_the_introductory_suit(self):
+    def test_anorak_to_nbc_chain_has_no_cycles(self):
         chain = next(chain for chain in self.data["chains"] if "suit_nbc" in chain)
-        self.assertEqual(chain[0], "suit_nbc")
-        self.assertEqual(self.data["contacts"]["beanstalk"]["catalogue"]["suit_nbc"]["step"], "BN01")
-        self.assertFalse(self.data["compiled"]["cotz/town/beanstalk/BN01"]["prerequisites"])
+        self.assertEqual(chain[0], "suit_anorak")
+        self.assertEqual(chain[-1], "suit_nbc")
+        self.assertEqual(self.data["contacts"]["technut"]["catalogue"]["suit_nbc"]["step"], "TN28")
+        self.assertFalse(self.data["compiled"]["cotz/town/technut/TN01"]["prerequisites"])
         # Walk every compiled dependency: an introductory suit must not close a later story loop.
         visiting, done = set(), set()
         def visit(identifier):
@@ -178,10 +199,36 @@ class ProgressionRewardsSpec(unittest.TestCase):
         for identifier in self.data["compiled"]:
             visit(identifier)
 
+    def test_town_progression_has_no_item_gifts(self):
+        for slug, contact in self.data["contacts"].items():
+            for step in list(contact["progression"]) + list(contact.get("retiredProgression", [])):
+                self.assertFalse(step.get("benefits", {}).get("items"), (slug, step["id"]))
+
+    def test_introductions_have_an_implemented_reward(self):
+        for slug, contact in self.data["contacts"].items():
+            if not contact["progression"]:
+                continue
+            first = contact["progression"][0]["id"]
+            initial = [item for item, route in contact["catalogue"].items() if route["step"] == first]
+            functional, _ = rewards.rewards(self.data, slug, contact["progression"][0])
+            self.assertTrue(functional, slug)
+            if len(contact["catalogue"]) > 2:
+                self.assertTrue(any(route["step"] != first for route in contact["catalogue"].values()), slug)
+
+    def test_stock_rewards_follow_their_local_purchase(self):
+        for slug, contact in self.data["contacts"].items():
+            for step in contact["progression"]:
+                item = step.get("stock", {}).get("item")
+                route = contact["catalogue"].get(item)
+                if route and route["step"] != step["id"]:
+                    compiled = self.data["compiled"][rewards.progression_id(slug, step["id"])]
+                    self.assertIn(rewards.progression_id(slug, route["step"]), compiled["prerequisites"],
+                                  (slug, step["id"], item))
+
     def test_redundant_stock_is_detected(self):
         changed = copy.deepcopy(self.data)
         contact = changed["contacts"]["atlas"]
-        earlier = next(s for s in contact["progression"] if s["id"] == "AT06")
+        earlier = next(s for s in contact["progression"] if s["id"] == "AT04")
         later = next(s for s in contact["progression"] if s["id"] == "AT20")
         later["stock"] = copy.deepcopy(earlier["stock"])
         self.assertTrue(any("AT20: redundant stock" in e for e in rewards.validate(changed)))

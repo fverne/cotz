@@ -1,6 +1,7 @@
 PLUGIN:Register("the-original", {
 	name = "'The Original'",
 	template = "firststalkernpc",
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "delivery",
@@ -119,22 +120,6 @@ PLUGIN:Register("the-original", {
 		["part_zombie_2"] = true,
 	},
 	catalogue = {
-		["food_raisins"] = {step = "OR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_tushonka"] = {step = "OR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "OR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "OR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["12gauge"] = {step = "OR09",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["diecup"] = {step = "OR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["guitar"] = {step = "OR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["harmonica"] = {step = "OR24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["hide_bear"] = {step = "OR16",
 		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["hide_blinddog"] = {step = "OR02",
@@ -238,7 +223,8 @@ PLUGIN:Register("the-original", {
 		-- ["part_zombie_2"] = {step = "OR04",
 		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 	},
-	progression = {
+	progression = {},
+	retiredProgression = {
 		{
 			id = "OR01",
 			completionCash = 275,
@@ -257,16 +243,7 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR02",
@@ -392,16 +369,7 @@ PLUGIN:Register("the-original", {
 				cargo = "town_quest_tape",
 				label = "Disputed hunting recording",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 1,
@@ -630,16 +598,7 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR13",
@@ -900,16 +859,7 @@ PLUGIN:Register("the-original", {
 				label = "Old route file for Atlas",
 				recipient = "atlas",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OR19",
@@ -1144,16 +1094,7 @@ PLUGIN:Register("the-original", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "The Original's trusted contact",
 		},
 	},

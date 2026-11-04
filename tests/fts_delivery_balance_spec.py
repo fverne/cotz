@@ -103,6 +103,9 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
         deliveries = 0
         for slug, contact in self.data["contacts"].items():
             plan = balance.contact_plan(contact)
+            if not plan:
+                self.assertFalse(contact["progression"], slug)
+                continue
             home = balance.starting_region(contact, slug, self.data, self.rates)
             theme = balance.CONTACT_THEMES[slug]
             phases = set()
@@ -113,6 +116,11 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
                 tier, _, _ = plan[step["id"]]
                 phases.add(tier)
                 self.assertEqual(len(step["requirements"]), tier, (slug, step["id"]))
+                if slug in {"beanstalk", "egghead", "intern"}:
+                    for slot in step["requirements"]:
+                        self.assertTrue(all(candidate["item"].startswith("artifact_")
+                                            for candidate in self.data["pools"][slot["pool"]]["candidates"]))
+                    continue
                 for index, slot in enumerate(step["requirements"]):
                     key = balance.band_key(theme, home, index + 1)
                     self.assertEqual(slot["pool"], key)
@@ -124,7 +132,7 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
                     actual = [c["item"] for c in self.data["pools"][key]["candidates"]]
                     self.assertEqual(actual, group)
             self.assertEqual(phases, {1, 2, 3, 4}, slug)
-        self.assertEqual(deliveries, 327)
+        self.assertEqual(deliveries, 307)
 
     def test_rarity_examples_are_not_raw_pool_weights(self):
         supply = balance.totals(self.rates)

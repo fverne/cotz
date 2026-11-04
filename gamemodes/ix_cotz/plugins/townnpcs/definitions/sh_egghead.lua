@@ -1,39 +1,19 @@
 PLUGIN:Register("egghead", {
 	name = "'Egghead'",
 	template = "ecologistnpc",
-	map = "rp_waystation",
+	difficultyMultiplier = 3,
+	enforceCatalogue = true,
+	map = "rp_marsh_cs",
 	job = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Artifact deliveries",
 		description = "Artifact deliveries",
 		pools = {"common_artifacts", "electrical_artifacts"},
-		deliveryTiers = {
-			easy = {
-				pools = {
-					"valuables_sample_carriers",
-					"valuables_survey_equipment",
-				},
-				quantity = 1,
-			},
-			medium = {
-				pools = {
-					"valuables_research_samples",
-				},
-				quantity = 1,
-			},
-			hard = {
-				pools = {
-					"valuables_instruments",
-					"valuables_research_injectors_a",
-					"valuables_research_injectors_b",
-				},
-				quantity = 2,
-			},
-		},
+
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Anomaly recovery",
@@ -70,114 +50,28 @@ PLUGIN:Register("egghead", {
 		["accesscard_laboratory"] = true,
 	},
 	catalogue = {
-		["medic_antirad_2"] = {step = "EG06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "EG01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "EG01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "EG01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["accesscard_laboratory"] = {step = "EG01",
 		-- 	terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
-		["artifact_arachno"] = {step = "EG13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_battery"] = {step = "EG11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_blowncap"] = {step = "EG08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_bolt"] = {step = "EG01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_bonecluster"] = {step = "EG02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_capacitor"] = {step = "EG20",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_cell"] = {step = "EG08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_compass"] = {step = "EG22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_crystal"] = {step = "EG16",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_droplet"] = {step = "EG03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_dwarfgalaxy"] = {step = "EG13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_eye"] = {step = "EG16",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_flame"] = {step = "EG24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_flash"] = {step = "EG11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_gaia"] = {step = "EG19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_galaxy"] = {step = "EG25",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_gmamasbeads"] = {step = "EG22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_grapes"] = {step = "EG06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_halo"] = {step = "EG15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_kolobok"] = {step = "EG19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_mamasbeads"] = {step = "EG17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_mementomori"] = {step = "EG07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_mica"] = {step = "EG14",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_midas"] = {step = "EG26",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_moon"] = {step = "EG23",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_moonlight"] = {step = "EG21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_mycelia"] = {step = "EG10",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_panacea"] = {step = "EG18",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_photo"] = {step = "EG02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_slime"] = {step = "EG05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_slug"] = {step = "EG12",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_sparkler"] = {step = "EG05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_storm"] = {step = "EG25",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_thorn"] = {step = "EG04",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["artifact_urchin"] = {step = "EG09",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["detectorbear"] = {step = "EG13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["detectorecho"] = {step = "EG01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["detectorbear"] = {step = "EG01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["detectorveles"] = {step = "EG26",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antipsychotic_1"] = {step = "EG07",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["medic_antipsychotic_2"] = {step = "EG09",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antipsychotic_3"] = {step = "EG13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antirad_1"] = {step = "EG02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_psyheal_1"] = {step = "EG01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["medic_psyheal_2"] = {step = "EG03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_stimpak_1"] = {step = "EG07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_stimpak_2"] = {step = "EG11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_stimpak_3"] = {step = "EG15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_seva"] = {step = "EG26",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_ssp99m"] = {step = "EG08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_antipsychotic_3"] = {step = "EG01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_bandage_3"] = {step = "EG01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_medkit_5"] = {step = "EG01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_medkit_6"] = {step = "EG26",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_psyheal_2"] = {step = "EG01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_stimpak_1"] = {step = "EG01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_stimpak_2"] = {step = "EG13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_stimpak_3"] = {step = "EG26",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -193,20 +87,11 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG02",
@@ -215,7 +100,7 @@ PLUGIN:Register("egghead", {
 			kind = "field",
 			objective = (
 				"Recover the reference field notebook from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
+				.. "to the issuing contact in Marsh."
 			),
 			requires = {"EG01"},
 			briefing = (
@@ -239,6 +124,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG03",
+			stock = {item = "medic_bandage_3", bonus = 1},
 			completionCash = 0,
 			name = "A Useful Assistant",
 			kind = "tracker",
@@ -263,7 +149,7 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 1,
 				},
 			},
@@ -282,11 +168,11 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
@@ -294,12 +180,13 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG06",
+			stock = {item = "medic_stimpak_1", bonus = 1},
 			completionCash = 850,
 			name = "The Comparison Site",
 			kind = "field",
 			objective = (
 				"Deploy the recorder at the assigned site in Waystation, let it finish recording, then retrieve "
-				.. "the artifact comparison recorder. Bring it back to the issuing contact in Waystation."
+				.. "the artifact comparison recorder. Bring it back to the issuing contact in Marsh."
 			),
 			requires = {"EG04"},
 			briefing = (
@@ -319,23 +206,11 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_module",
 				label = "Artifact comparison recorder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "EG07",
+			stock = {item = "medic_psyheal_2", bonus = 1},
 			completionCash = 0,
 			name = "An Orderly Collection",
 			kind = "tracker",
@@ -363,11 +238,11 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
@@ -386,11 +261,11 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
@@ -398,13 +273,13 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG10",
-			stock = {item = "medic_bandage_1", bonus = 1},
+			stock = {item = "medic_medkit_5", bonus = 1},
 			completionCash = 1250,
 			name = "The Failed Trial",
 			kind = "field",
 			objective = (
 				"Recover the failed-trial recording from the assigned search area in Waystation. Bring it back to "
-				.. "the issuing contact in Waystation."
+				.. "the issuing contact in Marsh."
 			),
 			requires = {"EG08"},
 			briefing = (
@@ -428,6 +303,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG11",
+			stock = {item = "medic_antipsychotic_3", bonus = 1},
 			completionCash = 0,
 			name = "A Better Instrument",
 			kind = "tracker",
@@ -468,24 +344,15 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG13",
@@ -500,15 +367,15 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -537,7 +404,7 @@ PLUGIN:Register("egghead", {
 			kind = "field",
 			objective = (
 				"Recover the environmental control for Vesper from the assigned search area in Garbage. Deliver it "
-				.. "to 'Vesper' in Garbage, then come back to the issuing contact in Waystation."
+				.. "to 'Vesper' in Garbage, then come back to the issuing contact in Marsh."
 			),
 			requires = {"EG12"},
 			briefing = (
@@ -562,6 +429,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG15",
+			stock = {item = "medic_stimpak_2", bonus = 1},
 			completionCash = 0,
 			name = "A Collection With Context",
 			kind = "tracker",
@@ -605,15 +473,15 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -631,15 +499,15 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -665,7 +533,7 @@ PLUGIN:Register("egghead", {
 			kind = "field",
 			objective = (
 				"Recover the earlier team's research tape from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Waystation."
+				.. "to the issuing contact in Marsh."
 			),
 			requires = {"EG16"},
 			briefing = (
@@ -688,19 +556,11 @@ PLUGIN:Register("egghead", {
 				cargo = "town_quest_module",
 				label = "Earlier team's research tape",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG19",
+			stock = {item = "detectorbear", bonus = 1},
 			completionCash = 0,
 			name = "Results That Repeat",
 			kind = "tracker",
@@ -744,15 +604,15 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -770,15 +630,15 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 1,
 				},
 			},
@@ -791,7 +651,7 @@ PLUGIN:Register("egghead", {
 			kind = "field",
 			objective = (
 				"Recover the final comparison recording from the assigned search area in Pripyat. Bring it back to "
-				.. "the issuing contact in Waystation."
+				.. "the issuing contact in Marsh."
 			),
 			requires = {"EG21"},
 			briefing = (
@@ -815,6 +675,7 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG23",
+			stock = {item = "medic_bandage_3", bonus = 2},
 			completionCash = 0,
 			name = "A Complete Reference",
 			kind = "tracker",
@@ -872,32 +733,23 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "EG25",
@@ -912,19 +764,19 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},
@@ -932,7 +784,6 @@ PLUGIN:Register("egghead", {
 		},
 		{
 			id = "EG26",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2850,
 			name = "A full supply order",
 			kind = "delivery",
@@ -949,19 +800,19 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_delivery_research_waystation_1",
+					pool = "common_artifacts",
 					quantity = 4,
 				},
 				{
-					pool = "town_delivery_research_waystation_2",
+					pool = "electrical_artifacts",
 					quantity = 3,
 				},
 				{
-					pool = "town_delivery_research_waystation_3",
+					pool = "rare_field_artifacts",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_research_waystation_4",
+					pool = "exceptional_artifacts",
 					quantity = 1,
 				},
 			},

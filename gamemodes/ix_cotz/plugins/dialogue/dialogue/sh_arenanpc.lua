@@ -325,7 +325,7 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 		local suitVariants = {}
 		for _, v in pairs(ix.item.list) do
 			if target.selectedsuitstruct[4] == v.baseSuit and variants[v.suitVariant]
-				and ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), v.uniqueID) then
+				and ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), v.uniqueID, target:GetDisplayName()) then
 				table.insert(suitVariants, { uniqueID = v.uniqueID, name = v.name })
 			end
 		end
@@ -363,7 +363,9 @@ DIALOGUE.addTopic("ChangeSuitVariantP2", {
 	end,
 	ResolveDynamicOption = function(self, client, target, dynamicData)
 		if SERVER and dynamicData.accepted then
-			if not ix.townNPCs:CanChangeSuitVariant(client:GetCharacter(), dynamicData.suitVariantUID) then
+			if not ix.townNPCs:CanChangeSuitVariant(
+				client:GetCharacter(), dynamicData.suitVariantUID, target:GetDisplayName()
+			) then
 				return "BackTopic"
 			end
 			if client:GetCharacter():GetData("carry", 0) >= ix.weight.BaseWeight(client:GetCharacter()) then

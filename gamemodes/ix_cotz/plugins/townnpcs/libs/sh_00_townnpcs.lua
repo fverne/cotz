@@ -19,10 +19,46 @@ function PLUGIN:StepID(contact, step)
 	return "cotz/town/" .. contact .. "/" .. step
 end
 
+function PLUGIN:ScaleProgressionEffort(contact, amount)
+	return math.ceil(amount * (contact.difficultyMultiplier or 1))
+end
+
+function PLUGIN:HasService(character, service, npc)
+	local gate = (self.serviceGates or {})[service]
+
+	return character ~= nil and gate ~= nil and (not npc or gate.npc == npc)
+		and ix.progression.IsCompleted(character, gate.id)
+end
+
+function PLUGIN:BuildWantedItems(contact)
+	local wanted = {}
+	local function addPool(poolID)
+		local pool = assert(ix.progression.itemPools[poolID], "Unknown wanted-item pool: " .. poolID)
+		for _, candidate in ipairs(pool.candidates) do wanted[candidate.item] = true end
+	end
+	if contact.job.kind == "delivery" then
+		for _, poolID in ipairs(contact.job.pools or {}) do addPool(poolID) end
+		for _, tier in pairs(contact.job.deliveryTiers or {}) do
+			for _, poolID in ipairs(tier.pools) do addPool(poolID) end
+		end
+	end
+	for _, step in ipairs(contact.progression) do
+		for _, slot in ipairs(step.requirements or {}) do addPool(slot.pool) end
+	end
+	contact.wantedItems = wanted
+
+	return wanted
+end
+
 function PLUGIN:CanBuyItem(character, item, npcName)
 	local contact = self.byName[npcName]
 	if contact and contact.disabledItems and contact.disabledItems[item] then return false end
 	if self:IsPurchaseExcluded(item) then return false end
+	if contact and contact.enforceCatalogue and not contact.catalogue[item] then
+		local supplied = false
+		for _, itemID in ipairs(contact.supplies) do supplied = supplied or itemID == item end
+		if not supplied then return false end
+	end
 	if npcName == "'Mute'" and item:match("^binoculars_") then return false end
 	local gate = self.itemGates[item]
 	if not gate then return end
@@ -32,6 +68,11 @@ function PLUGIN:CanBuyItem(character, item, npcName)
 	end
 
 	return character ~= nil and (gate.ungated == true or ix.progression.IsCompleted(character, gate.id))
+end
+
+function PLUGIN:CanSellItem(item, npcName)
+	local contact = self.byName[npcName]
+	if contact and contact.enforceCatalogue then return (contact.wantedItems or {})[item] == true end
 end
 
 function PLUGIN:CanInteract(client, target)
@@ -112,7 +153,8 @@ function PLUGIN:IsPurchaseExcluded(itemID)
 	return false
 end
 
-function PLUGIN:CanChangeSuitVariant(character, itemID)
+function PLUGIN:CanChangeSuitVariant(character, itemID, npc)
+	if npc and not self:HasService(character, "suitVariants", npc) then return false end
 	local item = ix.item.list[itemID]
 	if not item or not item.baseSuit then return false end
 	for _, reserved in ipairs(self.reservedEquipment or {}) do

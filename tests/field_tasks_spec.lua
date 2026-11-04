@@ -834,6 +834,11 @@ deliveredCargo.Remove = function() return false end
 check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey)
 	and courier.jobs.Ballast.fieldTask.stage == "carrying", "failed removal grants no delivery credit")
 deliveredCargo.Remove = removeCargo
+courier.jobs.Ballast.fieldTask.recipientMap = "previous-home-map"
+ix.townNPCs.byName = {Ledger = {map = "rp_waystation"}}
+check(field.GetRecipientMap(courier.jobs.Ballast.fieldTask) == "rp_waystation"
+	and courier.jobs.Ballast.fieldTask.recipientMap == "previous-home-map",
+	"a relocated town recipient resolves its current home without rewriting the saved assignment")
 check(field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
 	"the named recipient accepts and consumes the matching cargo")
 check(deliveredCargo.removed and courier.jobs.Ballast.fieldTask.stage == "delivered"

@@ -1,6 +1,8 @@
 PLUGIN:Register("atlas", {
 	name = "'Atlas'",
 	template = "atlasnpc",
+	difficultyMultiplier = 1,
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "sensor",
@@ -12,7 +14,7 @@ PLUGIN:Register("atlas", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Survey provisions",
@@ -54,30 +56,32 @@ PLUGIN:Register("atlas", {
 		),
 	},
 	catalogue = {
-		["medic_antirad_1"] = {step = "AT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "AT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "AT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "AT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["anomalydetector"] = {step = "AT15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_duffle"] = {step = "AT06",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_sanitar"] = {step = "AT11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["backpack_sling"] = {step = "AT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_tbag"] = {step = "AT17",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["backpack_tourist"] = {step = "AT22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_1"] = {step = "AT05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["binoculars_1"] = {step = "AT08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["binoculars_2"] = {step = "AT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_3"] = {step = "AT17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_4"] = {step = "AT13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["compass"] = {step = "AT02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["gpstracker"] = {step = "AT07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["binoculars_3"] = {step = "AT22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["binoculars_4"] = {step = "AT15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["compass"] = {step = "AT08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["geigercounter"] = {step = "AT01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["gpstracker"] = {step = "AT22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -97,16 +101,7 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT02",
@@ -142,7 +137,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT03",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "geigercounter", bonus = 1},
 			completionCash = 0,
 			name = "Repeatable Ground",
 			kind = "tracker",
@@ -162,7 +157,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT04",
-			stock = {item = "medic_bandage_1", bonus = 1},
+			stock = {item = "backpack_sling", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -237,23 +232,11 @@ PLUGIN:Register("atlas", {
 				label = "Waterside journal for Ballast",
 				recipient = "ballast",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "AT07",
+			stock = {item = "backpack_duffle", bonus = 1},
 			completionCash = 0,
 			name = "Measured Twice",
 			kind = "tracker",
@@ -273,7 +256,6 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT08",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
@@ -316,7 +298,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT09",
-			stock = {item = "backpack_sling", bonus = 1},
+			stock = {item = "compass", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -355,7 +337,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT10",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "binoculars_2", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -403,7 +385,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT11",
-			stock = {item = "binoculars_1", bonus = 1},
+			stock = {item = "backpack_sanitar", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -438,7 +420,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT12",
-			stock = {item = "binoculars_2", bonus = 1},
+			stock = {item = "binoculars_1", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
 				{
@@ -484,16 +466,7 @@ PLUGIN:Register("atlas", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT13",
@@ -524,7 +497,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT14",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "geigercounter", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -573,7 +546,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT15",
-			stock = {item = "binoculars_4", bonus = 1},
+			stock = {item = "anomalydetector", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -607,7 +580,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT16",
-			stock = {item = "compass", bonus = 1},
+			stock = {item = "binoculars_4", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -682,7 +655,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT18",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "backpack_tbag", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
 				{
@@ -730,20 +703,11 @@ PLUGIN:Register("atlas", {
 				cargo = "town_quest_module",
 				label = "First Pripyat survey recording",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AT19",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			stock = {item = "compass", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -777,6 +741,7 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT20",
+			stock = {item = "backpack_duffle", bonus = 2},
 			completionCash = 2250,
 			name = "A full supply order",
 			kind = "delivery",
@@ -810,14 +775,10 @@ PLUGIN:Register("atlas", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "AT21",
-			stock = {item = "lowtiercookerfuel", bonus = 2},
+			stock = {item = "backpack_sanitar", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -864,7 +825,6 @@ PLUGIN:Register("atlas", {
 		},
 		{
 			id = "AT22",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

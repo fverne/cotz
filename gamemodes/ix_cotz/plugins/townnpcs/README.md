@@ -1,5 +1,45 @@
 # Town NPCs
 
+## Approved workbook plan, 4 November 2026
+
+The [vendor plan](../../../../docs/npc-overhaul/vendor-plan.md) supersedes the earlier seller,
+starting-supply and reward-allocation descriptions below. The optional workbook unlock ideas are not enabled.
+There are 25 finite contact trees and 600 active milestones. The Original and Arena Master remain
+contacts with ordinary work, but neither has finite progression or progression purchase routes.
+
+Concrete contacts declare `difficultyMultiplier`. Compilation multiplies delivery quantities and
+cumulative job targets, rounding up to whole units. Field milestones require that many separate trips.
+Repeatable job quantities, combat strength, recording duration, cash and item prices are unchanged.
+Existing assigned requirements and partial contributions keep their saved values. Completed milestones
+remain completed. Commission counts and pending completion values are saved with the existing claim journal.
+
+The 25 planned contacts have empty `supplies`. Their current delivery candidates become starting
+BUYONLY rows. A requested catalogue item is BUYONLY until its seller-specific milestone is earned;
+other earned catalogue items are SELLONLY. The server enforces both purchase and sale assortments,
+including stale vendor rows. Template assembly and saved-vendor refresh apply the approved catalogue.
+Character-owned stock histories are retained and clamped by the existing stock policy, not reset.
+
+Carbon sells `accesscard_bunker`; Intern sells `accesscard_laboratory`. Their existing physical-door
+actions are retained. Beanstalk, Egghead and Intern now have Marsh as their home, at the Eco Bunker.
+Place them there with `/TownNPCPlace <slug>` after removing and saving their old placements.
+NPC conversation access remains independent, so existing courier work does not acquire circular gates.
+Accepted deliveries resolve a named contact's current home while retaining their saved assignment.
+
+Ballast BA12 opens the existing character bank as hideout storage, retaining its inventory and paid size.
+Vesper owns suit conversion milestones and the paid conversion menu. Conversions require an owned,
+unequipped suit without attachments and temporary inventory room. The input, condition and money remain
+safe while item insertion is pending; failures permit a retry without consuming the suit or fee.
+
+Mute unlocks existing STALKERnet tools at MU01 (search), MU03 (squad filter), MU07 (ranking), MU11
+(basic activity), MU15 (locations), MU19 (remote roster) and MU23 (full dossier). Existing emission
+warnings and broadcasts retain MU09/MU15. Remote roster payloads are filtered for the receiving
+character on the server; the local roster and UI use the same gates. Voice mute remains available.
+
+Deploy all map servers together and restart. Do not rerun first-time setup or reset saves.
+Run the existing progression/vendor suites and `luatex --luaonly tests/vendor_plan_spec.lua`.
+Verify scientist placement, both access-card doors, all three trade modes, repeated commissions,
+conversion retries, personal storage and STALKERnet unlocks with fresh and existing characters in multiplayer.
+
 The town plugin owns 27 contacts and 624 active finite objectives. Arena Master lives in Marsh
 (rp_marsh_cs), Garbage uses rp_garbage_cotz, and Waystation uses rp_waystation. Pripyat
 (rp_pripyat_remaster) is a task destination without permanent town NPCs.
@@ -30,6 +70,33 @@ Purchase permission is distinct from a free item. Shared upgrade families enforc
 milestones even when sellers differ, including Old Timer OT12 before Quartermaster's knife4.
 The [equipment index](../../../../docs/npc-overhaul/unlock-ledger.md) lists current allocations.
 
+## Catalogue spacing
+
+The first milestone at each active trader unlocks one or two purchases. The 131 formerly crowded
+introductory purchases are spread through later milestones at the same seller, including provisions,
+weapons, tools and equipment. Starter water remains ungated. Ammunition keeps its generated price-band
+schedule, introductory regional medicine remains early, and author-disabled suggestions remain excluded.
+
+Existing stock rewards keep their items and amounts. Catalogue compilation makes each stock milestone
+require its own seller's purchase milestone when needed, including across sibling story branches.
+This prevents an early stock improvement from awarding unusable capacity after a purchase is moved.
+The authored objective requirements are retained; compiled purchase prerequisites may connect branches.
+Run `luatex --luaonly tests/catalogue_stock_order_spec.lua` for the sibling-branch stock gate regression.
+The unlock ledger lists the resulting purchase positions.
+
+## No progression item gifts
+
+Completion and checkpoint gifts are removed from all town and standalone progression, including
+inactive Arena Master references. Progression definitions cannot declare item gifts, and benefit
+handlers no longer queue them. Old saved progression gift queues and offers cannot be claimed or
+shown in progression menus; their stored history and already received inventory items are retained.
+Repeatable job packages, their pending claims and task bonuses are unchanged. Cash, service credits,
+discounts, purchase/conversion unlocks, stock and capacity upgrades remain.
+
+Restart servers to apply this policy. Validate gift suppression, service credits and repeatable job
+claims with `tests/progression_spec.lua`, `tests/progression_services_spec.lua` and
+`tests/task_rewards_spec.lua`. Multiplayer verification of old saves and UI remains required.
+
 ## Author-disabled suggestions
 
 Commented-out catalogue suggestions are deliberate exclusions. Each affected contact's `disabledItems`
@@ -40,14 +107,14 @@ Update both the comment and exclusion only when explicitly authorised to restore
 
 The 61 current exclusions include mission/access equipment, human meat and The Original's proposed
 specimen/hide shop. Twelve remaining stock references to excluded equipment have been removed without
-replacement rewards. Existing gifts, accepted jobs, progression IDs and TODO plans are preserved.
+replacement rewards. Accepted jobs, progression IDs and TODO plans are preserved.
 Template assembly and saved-vendor refresh remove excluded rows, and purchase checks also reject stale
 rows. Personal stock history and owned items are retained; no character data reset is performed.
 
 Run `luatex --luaonly tests/disabled_town_items_spec.lua` for exclusion enforcement and refresh checks.
 NBC is the introductory suit at Beanstalk BN01, with no suit prerequisites. It precedes the other
-suits in the upgrade chain, resolving the former Beanstalk/Boss/Vesper cycle. The earlier coverage
-snapshot predates the author's exclusions; 31 active milestones currently have no implemented unlock. These are review findings, not permission to restore
+suits in the upgrade chain, resolving the former Beanstalk/Boss/Vesper cycle. The current ledger reports actual coverage after the author's exclusions; 31 active milestones
+currently have no implemented unlock. These are review findings, not permission to restore
 excluded suggestions or automatically add filler stock.
 
 ## Starting water and later provisions
@@ -59,7 +126,7 @@ Earlier bread-capacity milestones now increase dirty-water capacity. Clean-water
 remain useful: earned bonuses can increase the personal maximum above one without an immediate refill.
 Water purchase gates are removed because both kinds are starting supplies. Existing bread purchase
 routes remain earned provisions, with former first-step routes moved to the third local milestone.
-Original item gifts, repeatable reward packages and future TODO terms are unchanged.
+Repeatable reward packages and future TODO terms are unchanged; progression gifts are removed.
 
 The vendor policy applies to newly populated templates and saved vendor catalogues on load. Existing
 personal stock is clamped to the new base plus earned capacity through the existing stock system;
@@ -314,8 +381,7 @@ provide ungated basic bandages and introductory local medkit, antirad and painki
 Basic regional supplies require no external NPC progression. Other themed sellers retain useful overlap.
 
 Each step declares completionCash. Delivery payments range from 275 to 2,000 rubles; field payments
-from 450 to 3,000. Trackers and arena milestones pay zero extra cash. Existing gifts remain at introductory
-steps and every sixth step, with no temporary TODO provision gifts; stock rewards include further branch-specific improvements. Only Jitters and
+from 450 to 3,000. Trackers and arena milestones pay zero extra cash. No progression steps award item gifts; stock rewards include further branch-specific improvements. Only Jitters and
 Technut retain permanent service discounts (5%, replaced by 10%). These are initial tuning values,
 not measured effort equivalence; acquisition and economy playtesting remain necessary.
 
@@ -351,8 +417,8 @@ food, meat, specimens and hides now have explicit thematic purchase routes. Boun
 not added to shops. Existing valuables routes are unchanged. Small regional provision catalogues
 support capped stock improvements on milestones without a new equipment purchase.
 
-The 179 temporary provision gifts have been removed. Original gifts, cash, pending claims and paid
-benefit tokens remain unchanged. No gifts are replayed or confiscated. Existing earned milestone IDs
+All progression provision gifts have been removed. Cash and paid benefit tokens remain unchanged.
+Old gift claim queues are inactive history; already owned items are not confiscated. Existing earned milestone IDs
 now determine the redistributed purchase permissions. Removed seller rows in saved vendors remain
 subject to authoritative seller checks; restart all map servers to refresh new catalogue rows.
 No first-time setup or database reset is required. Acquisition and economy tuning need playtesting.
@@ -365,7 +431,7 @@ Cooking-fuel purchases, ordinary supplies and stock rewards are removed from the
 research/communications desks and outfitter. Their affected rewards now improve medical, measuring,
 computing, recording or textile equipment and appropriate working provisions. Field/camp contacts
 retain fuel where it supports expeditions or utilities. All stock increases remain capped at +4 and
-are usable at the earning milestone. Original gifts, TODO plans and progression IDs are unchanged.
+are usable at the earning milestone. TODO plans and progression IDs are unchanged; progression gifts are removed.
 
 There are 234 active planned entries plus eight retained in Arena Master's inactive reference tree.
 Each `plannedUnlocks` entry has its own adjacent `-- TODO:` comment, stable ID, provider, kind,
@@ -430,3 +496,12 @@ saved identity; new labels and descriptions apply to new assignments without res
 The dialogue pass preserves IDs, task kinds, locations, recipients, requirements, rewards, and access
 conditions. Briefings describe assigned sites rather than promising fixed structures or new actors.
 Verify text wrapping, long replies, incoming deliveries, work offers, and final greetings in multiplayer.
+
+### Regenerating a ledger while definitions have validation errors
+
+`python3 docs/npc-overhaul/tools/progression_rewards.py --write --allow-invalid` writes a current
+definition snapshot with validation findings and actual coverage counts. It does not change runtime
+definitions, restore disabled items or add rewards. Plain `--write` and `--check` remain strict.
+The current snapshot includes the suit dependency cycle at Beanstalk BN01; 593 milestones have
+implemented unlocks, 25 have only TODO plans, and six have neither. A reported cycle stops the
+remaining graph-dependent validation, so a refreshed snapshot is not a successful runtime audit.

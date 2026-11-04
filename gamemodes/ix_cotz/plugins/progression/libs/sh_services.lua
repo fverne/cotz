@@ -7,7 +7,7 @@ local REPAIR_COST_MULTIPLIER = 2
 local SERVICE_CONTACTS = {
 	repair = { ["'Technut'"] = true, ["'Boss'"] = true },
 	treatment = { ["'Jitters'"] = true, ["'Arena Master'"] = true },
-	storage = { ["'Cleaner'"] = true },
+	storage = { ["'Ballast'"] = true },
 	wish = { ["'???'"] = true },
 }
 local CREDIT_LIMITS = {repair = 20000, treatment = 5000, storage = 50000, wish = 100000}
@@ -118,7 +118,7 @@ end
 
 local function storageOffer(client, data)
 	local character = client:GetCharacter()
-	if not ix.progression.IsCompleted(character, "cotz/town/cleaner/CL01") then
+	if not ix.progression.IsCompleted(character, "cotz/town/ballast/BA12") then
 		return
 	end
 	local horizontal = data.direction == "horizontally"
@@ -218,7 +218,8 @@ local SERVICE_TOPICS = {
 function ix.progression.ResolveServiceOffer(client, target, service, data)
 	if type(data) ~= "table" then return "BackTopic" end
 	if service == "storage" and data.option == "use" then
-		return ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/cleaner/CL01")
+		return target:GetDisplayName() == "'Ballast'"
+			and ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/ballast/BA12")
 			and "OpenStorage" or "BackTopic"
 	end
 	local offer = ix.progression.BuildServiceOffer(client, target, service, data)
@@ -279,6 +280,8 @@ function ix.progression.GetRepairOptions(client, target)
 end
 
 function ix.progression.GetStorageOptions(client, target)
+	if target:GetDisplayName() ~= "'Ballast'"
+		or not ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/ballast/BA12") then return {} end
 	local options = {{statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}}}
 	for _, direction in ipairs({"horizontally", "vertically"}) do
 		local data = {direction = direction}
@@ -321,9 +324,7 @@ end
 
 function ix.progression.ValidateBenefits(definition)
 	local function checkBenefits(benefits)
-		for _, reward in ipairs(benefits.items or {}) do
-			assert(ix.item.list[reward.item], "Unknown reward item: " .. tostring(reward.item))
-		end
+		assert(not benefits.items or next(benefits.items) == nil, "Progression item gifts are disabled")
 		for _, reward in ipairs(benefits.services or {}) do
 			assert(SERVICE_CONTACTS[reward.service] and SERVICE_CONTACTS[reward.service][reward.npc],
 				"Unsupported service reward")
@@ -355,17 +356,11 @@ if SERVER then
 			local key = benefit.npc .. "/" .. benefit.service
 			credits[key] = math.min(CREDIT_LIMITS[benefit.service], (credits[key] or 0) + benefit.amount)
 		end
-		line.pendingRewards = line.pendingRewards or {}
-		for _, reward in ipairs(benefits.items or {}) do
-			line.pendingRewards[#line.pendingRewards + 1] =
-				ix.progression.PrepareReward(character, progressionID, line, table.Copy(reward))
-		end
 		line.benefitsClaimed[claimID] = true
 		record.lines[progressionID] = line
 		character:SetData(CREDIT_KEY, credits)
 		ix.progression.SetCharacterProgression(character, record)
 		character:Save()
-		ix.progression.ClaimRewards(character, progressionID)
 
 		return true
 	end

@@ -1,6 +1,25 @@
 local PLUGIN = PLUGIN
 local TRADE_MODES = {SELLANDBUY = 1, SELLONLY = 2, BUYONLY = 3}
 
+local function plannedItems(contact, catalogue, stock)
+	local items = {}
+	for item in pairs(contact.wantedItems or {}) do items[item] = {nil, nil, TRADE_MODES.BUYONLY} end
+	for _, unlock in ipairs(catalogue) do
+		local args = unlock.args
+		local wanted = (contact.wantedItems or {})[args[1]]
+		items[args[1]] = {args[2], args[3], wanted and TRADE_MODES.SELLANDBUY or TRADE_MODES.SELLONLY,
+			args[5], args[6], args[7]}
+	end
+	for _, item in ipairs(contact.supplies) do
+		items[item] = items[item] or
+			{nil, stock.initial, TRADE_MODES.SELLANDBUY, stock.maximum, stock.interval, stock.amount}
+	end
+	for item in pairs(contact.disabledItems or {}) do items[item] = nil end
+	ix.vendorStock.ApplyDefaults(items)
+
+	return items
+end
+
 local function isDisabled(contact, item)
 	return contact.disabledItems and contact.disabledItems[item]
 end
@@ -19,6 +38,11 @@ end
 
 function PLUGIN:ConfigureTownTemplate(contact, catalogue, stock)
 	local template = assert(ix.npctemplates.templates[contact.template], "Missing town vendor template")
+	if contact.enforceCatalogue then
+		template.items = plannedItems(contact, catalogue, stock)
+
+		return
+	end
 	removeDisabledItems(template.items, contact)
 	for _, item in ipairs(contact.supplies) do
 		if not isDisabled(contact, item) then
@@ -38,6 +62,25 @@ end
 
 if SERVER then
 	function PLUGIN:RefreshTownVendor(vendor, contact, catalogue, stock)
+		if contact.enforceCatalogue then
+			local items = plannedItems(contact, catalogue, stock)
+			local changed = false
+			for item in pairs(vendor.items) do
+				if not items[item] then
+					vendor.items[item] = nil
+					changed = true
+				end
+			end
+			for item, expected in pairs(items) do
+				local row = vendor.items[item] or {}
+				for index = 1, 6 do
+					if row[index] ~= expected[index] then changed = true end
+				end
+				vendor.items[item] = expected
+			end
+
+			return changed
+		end
 		local changed = removeDisabledItems(vendor.items, contact)
 		for _, item in ipairs(contact.supplies) do
 			if not isDisabled(contact, item) and not vendor.items[item] then

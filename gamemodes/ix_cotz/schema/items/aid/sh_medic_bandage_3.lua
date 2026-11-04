@@ -11,7 +11,7 @@ ITEM.quantity = 3
 ITEM.bleedRestore = 90
 
 ITEM.sound = "stalkersound/inv_bandage_2p9.mp3"
-ITEM.price = 140
+ITEM.price = 320
 ITEM.weight = 0.015
 
 ITEM.exRender = true

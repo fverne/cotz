@@ -327,6 +327,7 @@ local FIELD_COLORS = {
 local PANEL = {}
 
 local function rankName(record)
+	if record.networkRanking == false then return "RANK LOCKED" end
 	if IsValid(record.player) then return record.player:getCurrentRankName() end
 	local plugin = ix.plugin.Get("karmarep")
 	local name = "Tourist"
@@ -462,7 +463,9 @@ function PANEL:SelectRecord(record)
 	self.selected = record.characterID
 	self.portrait:SetImage(record.pdaavatar or "vgui/icons/face_31.png")
 	local stats = record.profile.leaderboardStats or {}
-	local location = ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player))
+	local access = self.networkAccess or {}
+	local location = access.location
+		and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
 	self.details:SetText(record.name)
 	local values = table.Copy(stats)
 	values.rank = rankName(record)
@@ -472,6 +475,10 @@ function PANEL:SelectRecord(record)
 	values.favoriteContact = stats.favoriteContact or "None"
 	values.taskEarnings = (stats.taskEarnings or 0) .. " RU"
 	for key, field in pairs(self.dossierFields) do
+		local basic = key == "tasksCompleted" or key == "mutantsKilled" or key == "humansKilled"
+		local visible = key == "squad" or access.dossier or (basic and access.activity)
+			or ((key == "rank" or key == "reputation") and access.ranking) or (key == "location" and access.location)
+		field.card:SetVisible(visible == true)
 		field.value:SetText(tostring(values[key] or 0))
 		local color = FIELD_COLORS[key] or COLORS.text
 		if key == "squad" then color = record.squadColor or COLORS.muted end
@@ -520,6 +527,19 @@ end
 function PANEL:Think()
 	if (self.nextRefresh or 0) > CurTime() then return end
 	self.nextRefresh = CurTime() + 0.5
+	local character = LocalPlayer():GetCharacter()
+	local access = ix.townNPCs and ix.townNPCs:GetNetworkAccess(character)
+		or {search = true, squads = true, ranking = true, activity = true, location = true, remote = true, dossier = true}
+	self.networkAccess = access
+	self.search:SetEnabled(access.search)
+	self.squad:SetEnabled(access.squads)
+	if not access.squads then self.squadOnly = false end
+	self.squad:SetText(not access.squads and "Squad filter: LOCKED"
+		or self.squadOnly and "My squad: ON" or "My squad: OFF")
+	self.area:SetEnabled(access.remote)
+	self.area:SetText(not access.remote and "Local area" or self.localOnly and "Local area" or "All maps")
+	self.dossierNote:SetText(access.dossier and "Counters begin when tracking is enabled."
+		or "Further STALKERnet tools unlock through Mute's progression.")
 	local records = ix.crossserver and ix.crossserver.GetScoreboardRoster(false) or {}
 	local ordered = {}
 	for _, record in pairs(records) do
@@ -527,19 +547,23 @@ function PANEL:Think()
 		ordered[#ordered + 1] = record
 	end
 	table.sort(ordered, function(a, b)
+		if not access.ranking then
+			if a.name == b.name then return a.characterID < b.characterID end
+
+			return a.name < b.name
+		end
 		local first, second = a.profile.reputation or 0, b.profile.reputation or 0
 		if first == second then return a.characterID < b.characterID end
 
 		return first > second
 	end)
 	local present = {}
-	local query = self.search:GetValue():lower()
-	local character = LocalPlayer():GetCharacter()
+	local query = access.search and self.search:GetValue():lower() or ""
 	for position, record in ipairs(ordered) do
 		local squad = record.squadName or ""
 		local matches = (record.name .. " " .. squad):lower():find(query, 1, true)
 		local area = not self.localOnly or (record.fresh and record.map == game.GetMap())
-		local member = not self.squadOnly or (character and record.squadID ~= "NULL"
+		local member = not access.squads or not self.squadOnly or (character and record.squadID ~= "NULL"
 			and record.squadID == character:GetSquadID())
 		if matches and area and member then
 			local id = record.characterID
@@ -563,12 +587,14 @@ function PANEL:Think()
 			row.avatar:SetImage(record.pdaavatar or "vgui/icons/face_31.png")
 			row.Paint = function(button, width, height)
 				paintCard(button, width, height)
-				draw.SimpleText("#" .. position, "ixSmallFont", 6, 28, COLORS.muted)
+				if access.ranking then draw.SimpleText("#" .. position, "ixSmallFont", 6, 28, COLORS.muted) end
 				draw.SimpleText(record.name, "cotzLeaderboard", 146, 8, COLORS.text)
 				local rankWidth = draw.SimpleText(rankName(record), "cotzLeaderboard", 146, 34, COLORS.rank)
 				draw.SimpleText(" · " .. (squad ~= "" and squad or "Loner"),
 					"cotzLeaderboard", 146 + rankWidth, 34, record.squadColor or COLORS.muted)
-				draw.SimpleText(ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)),
+				local presence = access.location
+					and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
+				draw.SimpleText(presence,
 					"cotzLeaderboard", 146, 54,
 					ix.crossserver.GetPresenceColor(record, record.fresh, IsValid(record.player)))
 			end

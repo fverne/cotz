@@ -33,12 +33,14 @@ file:close()
 for path in source:gmatch([[ix%.util%.Include%("(definitions/[^"]+)"%)]]) do dofile(root .. path) end
 local contacts = PLUGIN.contacts
 ix = {item = {list = setmetatable({}, {__index = function() return {} end})}, progression = {
+	npcRequirements = {},
 	definitions = {}, Register = function(id, definition)
 		definition.id = id
 		ix.progression.definitions[id] = definition
 	end,
 }}
 dofile(root .. "libs/sh_00_townnpcs.lua")
+dofile("gamemodes/ix_cotz/plugins/progression/definitions/sh_requirementpools.lua")
 PLUGIN.contacts = contacts
 for _, contact in pairs(contacts) do PLUGIN.byName[contact.name] = contact end
 dofile(root .. "libs/sh_catalogue.lua")

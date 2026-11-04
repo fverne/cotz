@@ -372,26 +372,51 @@ api.definitions.reward_groups = nil
 api.definitions.reward_test = nil
 api.itemPools.reward_test = nil
 
-api.Register("asyncFixture", {keyNpc = "Tester", progMap = currentMap, defaultActive = false,
+local progressionPlugin = {}
+PLUGIN = progressionPlugin
+for _, name in ipairs({"computer_story", "computerprog", "hoarderprog", "noosphereprog", "communityprog"}) do
+	dofile("gamemodes/ix_cotz/plugins/progression/definitions/sh_" .. name .. ".lua")
+end
+for _, definition in pairs(api.definitions) do
+	check(not (definition.completionBenefits or {}).items, "standalone completion definitions have no gifts")
+	for _, benefits in ipairs(definition.checkpointBenefits or {}) do
+		check(not benefits.items, "standalone checkpoint definitions have no gifts")
+	end
+end
+
+local legacyGift = character()
+api.Register("removedGiftFixture", {keyNpc = "Tester", progMap = currentMap, defaultActive = false,
 	BuildResponse = api.BuildDeliveryResponse})
+local legacyRecord = api.GetCharacterProgression(legacyGift)
+legacyRecord.lines.removedGiftFixture = {completed = true,
+	pendingRewards = {{item = "medic_medkit_1", token = "old-gift"}}}
+api.SetCharacterProgression(legacyGift, legacyRecord)
+check(not api.QueueReward(legacyGift, "removedGiftFixture", {item = "medic_medkit_1"}),
+	"progression cannot queue new gift items")
+check(not api.ClaimRewards(legacyGift, "removedGiftFixture"), "old progression gifts cannot be claimed")
+check(#api.GetLine(legacyGift, "removedGiftFixture").pendingRewards == 1,
+	"disabling gifts retains historical pending data")
+check(#api.GetDeliveryOptions(legacyGift, "removedGiftFixture") == 0, "old gifts do not expose a claim action")
+check(#api.GetActiveProgressions(legacyGift, "Tester") == 0, "pending gifts cannot revive completed objectives")
+api.definitions.removedGiftFixture = nil
 -- Helix reserves slots before its database callback; claims remain pending until confirmation.
 local asyncOwner = character()
-api.QueueReward(asyncOwner, "asyncFixture", {item = "medic_medkit_1"})
+api.QueueReward(asyncOwner, "taskRewardClaims", {item = "medic_medkit_1"})
 local reservedData
 asyncOwner.inventory = {
 	owner = 4242,
 	Add = function(_, _, _, data) reservedData = data return 3 end,
 }
-check(api.ClaimRewards(asyncOwner, "asyncFixture"), "asynchronous inventory slot reserved")
-check(api.GetLine(asyncOwner, "asyncFixture").claiming, "in-flight reward blocks re-entry")
-check(#api.GetLine(asyncOwner, "asyncFixture").pendingRewards == 1,
+check(api.ClaimRewards(asyncOwner, "taskRewardClaims"), "asynchronous inventory slot reserved")
+check(api.GetLine(asyncOwner, "taskRewardClaims").claiming, "in-flight reward blocks re-entry")
+check(#api.GetLine(asyncOwner, "taskRewardClaims").pendingRewards == 1,
 	"slot reservation alone does not erase durable pending reward")
-check(not api.ClaimRewards(asyncOwner, "asyncFixture"), "duplicate in-flight claim rejected")
+check(not api.ClaimRewards(asyncOwner, "taskRewardClaims"), "duplicate in-flight claim rejected")
 local interruptedClaim = copy(asyncOwner.data)
 local insertedItem = {GetData = function(_, key) return reservedData[key] end}
 ix.char = {loaded = {[4242] = asyncOwner}}
 callbacks["cotz/progression/confirm-reward"](nil, asyncOwner.inventory, insertedItem)
-check(#api.GetLine(asyncOwner, "asyncFixture").pendingRewards == 0, "database insertion confirms delivery")
+check(#api.GetLine(asyncOwner, "taskRewardClaims").pendingRewards == 0, "database insertion confirms delivery")
 local claimRestored = character()
 claimRestored.data = interruptedClaim
 local attemptedDuplicate = 0
@@ -400,7 +425,7 @@ claimRestored.inventory = {
 	Add = function() attemptedDuplicate = attemptedDuplicate + 1 return true end,
 }
 api.InitializeCharacterProgression(claimRestored)
-check(api.ClaimRewards(claimRestored, "asyncFixture"), "restored claim recognizes already inserted item")
+check(api.ClaimRewards(claimRestored, "taskRewardClaims"), "restored claim recognizes already inserted item")
 check(attemptedDuplicate == 0, "restart between item insertion and acknowledgement cannot duplicate reward")
 ix.char = nil
 

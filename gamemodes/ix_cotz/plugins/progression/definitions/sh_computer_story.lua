@@ -88,14 +88,14 @@ ix.progression.Register("computer_artifactTasks", {
 		end},
 	},
 	progressthresholds = {3, 8, 14},
-	checkpointBenefits = {{items = {{item = "medic_antirad_1"}}}, {items = {{item = "medic_psyheal_2"}}}},
+	checkpointBenefits = {{}, {}},
 	checkpointMessages = {
 		(
-			"BATCH THREE VERIFIED. Field resupply authorised. Additional anomalous material "
+			"BATCH THREE VERIFIED. Additional anomalous material "
 			.. "required before the final energy analysis."
 		),
 		(
-			"BATCH EIGHT VERIFIED. Operator support authorised. Six additional batches required. "
+			"BATCH EIGHT VERIFIED. Six additional batches required. "
 			.. "Restricted functions remain closed."
 		),
 	},

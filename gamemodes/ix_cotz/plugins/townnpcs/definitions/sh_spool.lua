@@ -1,6 +1,8 @@
 PLUGIN:Register("spool", {
 	name = "'Spool'",
 	template = "spoolnpc",
+	difficultyMultiplier = 3.5,
+	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
 		kind = "triangulation",
@@ -12,7 +14,7 @@ PLUGIN:Register("spool", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Radio spares (trade goods)",
@@ -50,42 +52,38 @@ PLUGIN:Register("spool", {
 		["rfreceiver"] = true,
 	},
 	catalogue = {
-		["cassette_wickedrabbit"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cassette_true"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cassette_standart"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cassette_merc"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cassette_freedom"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cassette_firelake"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cassette_barman"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cassette_bandits"] = {step = "SO08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "SO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "SO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_caffeine"] = {step = "SO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "SO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["rfreceiver"] = {step = "SO01",
 		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["value_9vbattery"] = {step = "SO01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_capacitors"] = {step = "SO03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_radio_repeater"] = {step = "SO04",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["value_tape_electric"] = {step = "SO02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["walkman"] = {step = "SO01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["backpack_mbss"] = {step = "SO09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_pilgrim"] = {step = "SO18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_scavbackpack"] = {step = "SO22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_takedown_1"] = {step = "SO01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_takedown_2"] = {step = "SO05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_vkbo"] = {step = "SO14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_bandits"] = {step = "SO14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_barman"] = {step = "SO17",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_firelake"] = {step = "SO11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_freedom"] = {step = "SO09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_merc"] = {step = "SO19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_standart"] = {step = "SO06",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_true"] = {step = "SO01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cassette_wickedrabbit"] = {step = "SO04",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["walkman"] = {step = "SO22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -106,16 +104,7 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO02",
@@ -148,6 +137,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO03",
+			stock = {item = "backpack_takedown_1", bonus = 1},
 			completionCash = 0,
 			name = "Clear Enough to Hear",
 			kind = "tracker",
@@ -184,7 +174,6 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Ground and Power",
 			kind = "delivery",
@@ -235,24 +224,11 @@ PLUGIN:Register("spool", {
 				label = "Calibration file for Technut",
 				recipient = "technut",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "SO07",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "backpack_takedown_2", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -282,7 +258,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO08",
-			stock = {item = "cassette_standart", bonus = 1},
+			stock = {item = "cassette_true", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -327,7 +303,6 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO09",
-			stock = {item = "drink_bottletea", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -367,7 +342,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO10",
-			stock = {item = "drug_caffeine", bonus = 1},
+			stock = {item = "backpack_mbss", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -412,7 +387,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO11",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "cassette_wickedrabbit", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -439,7 +414,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO12",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "cassette_standart", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -484,16 +459,7 @@ PLUGIN:Register("spool", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO13",
@@ -540,7 +506,6 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO14",
-			stock = {item = "walkman", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -586,7 +551,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO15",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			stock = {item = "backpack_vkbo", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -613,7 +578,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO16",
-			stock = {item = "cassette_standart", bonus = 2},
+			stock = {item = "cassette_freedom", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -662,7 +627,6 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO17",
-			stock = {item = "drink_bottletea", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -706,7 +670,6 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO18",
-			stock = {item = "drug_caffeine", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -748,20 +711,11 @@ PLUGIN:Register("spool", {
 				label = "Later check-in for Wake",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SO19",
-			stock = {item = "food_can_beans", bonus = 2},
+			stock = {item = "backpack_pilgrim", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -788,6 +742,7 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO20",
+			stock = {item = "cassette_firelake", bonus = 1},
 			completionCash = 2250,
 			name = "A full supply order",
 			kind = "delivery",
@@ -822,14 +777,10 @@ PLUGIN:Register("spool", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "SO21",
-			stock = {item = "food_raisins", bonus = 2},
+			stock = {item = "cassette_bandits", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -877,7 +828,6 @@ PLUGIN:Register("spool", {
 		},
 		{
 			id = "SO22",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "The Message Home",
 			kind = "field",

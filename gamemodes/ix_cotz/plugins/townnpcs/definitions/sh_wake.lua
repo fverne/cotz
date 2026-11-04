@@ -1,6 +1,8 @@
 PLUGIN:Register("wake", {
 	name = "'Wake'",
 	template = "wakenpc",
+	difficultyMultiplier = 1.5,
+	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
 		kind = "recovery",
@@ -12,7 +14,7 @@ PLUGIN:Register("wake", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Recovery medicine",
@@ -45,38 +47,30 @@ PLUGIN:Register("wake", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "WA01",
+		["drug_caffeine"] = {step = "WA01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_marijuana"] = {step = "WA15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_morphine"] = {step = "WA08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_antirad_1"] = {step = "WA01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_antirad_2"] = {step = "WA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_bandage_1"] = {step = "WA22",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_tushonka"] = {step = "WA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "WA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "WA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["backpack_sanitar"] = {step = "WA04",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_painkillers"] = {step = "WA03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["medic_antirad_1"] = {step = "WA02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antirad_2"] = {step = "WA21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_bandage_2"] = {step = "WA05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_bandage_3"] = {step = "WA13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_bandage_2"] = {step = "WA01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["medic_medkit_1"] = {step = "WA01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_2"] = {step = "WA11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_2"] = {step = "WA08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["medic_medkit_3"] = {step = "WA15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_4"] = {step = "WA17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_5"] = {step = "WA19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_6"] = {step = "WA22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_medkit_4"] = {step = "WA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["miscaid_swampbrew"] = {step = "WA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -97,16 +91,7 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA02",
@@ -139,6 +124,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA03",
+			stock = {item = "medic_bandage_2", bonus = 1},
 			completionCash = 0,
 			name = "Someone Goes Looking",
 			kind = "tracker",
@@ -150,7 +136,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA04",
-			stock = {item = "medic_bandage_1", bonus = 1},
+			stock = {item = "medic_medkit_1", bonus = 1},
 			completionCash = 650,
 			name = "Restocking",
 			kind = "delivery",
@@ -204,6 +190,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA06",
+			stock = {item = "drug_caffeine", bonus = 1},
 			completionCash = 850,
 			name = "The Convoy List",
 			kind = "field",
@@ -230,24 +217,11 @@ PLUGIN:Register("wake", {
 				label = "Convoy roster for Brass",
 				recipient = "brass",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "WA07",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "medic_antirad_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -282,7 +256,6 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA08",
-			stock = {item = "medic_antirad_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -327,7 +300,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA09",
-			stock = {item = "backpack_sanitar", bonus = 1},
+			stock = {item = "medic_medkit_2", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -367,7 +340,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA10",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "drug_morphine", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -421,6 +394,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA11",
+			stock = {item = "medic_bandage_2", bonus = 2},
 			completionCash = 0,
 			name = "A Longer Search",
 			kind = "tracker",
@@ -432,7 +406,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA12",
-			stock = {item = "drug_painkillers", bonus = 1},
+			stock = {item = "medic_medkit_1", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -477,16 +451,7 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA13",
@@ -518,7 +483,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA14",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "drug_caffeine", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -564,6 +529,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA15",
+			stock = {item = "medic_medkit_3", bonus = 1},
 			completionCash = 0,
 			name = "No One Written Off",
 			kind = "tracker",
@@ -575,7 +541,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA16",
-			stock = {item = "food_can_tushonka", bonus = 1},
+			stock = {item = "drug_marijuana", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -660,7 +626,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA18",
-			stock = {item = "medic_bandage_1", bonus = 2},
+			stock = {item = "medic_medkit_2", bonus = 2},
 			completionCash = 2050,
 			name = "The Last Transmission",
 			kind = "field",
@@ -686,19 +652,11 @@ PLUGIN:Register("wake", {
 				cargo = "town_quest_tape2",
 				label = "Expedition's last transmission",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "WA19",
+			stock = {item = "medic_antirad_1", bonus = 2},
 			completionCash = 0,
 			name = "Still Looking",
 			kind = "tracker",
@@ -710,6 +668,7 @@ PLUGIN:Register("wake", {
 		},
 		{
 			id = "WA20",
+			stock = {item = "medic_medkit_3", bonus = 2},
 			completionCash = 2250,
 			name = "A full supply order",
 			kind = "delivery",
@@ -744,10 +703,6 @@ PLUGIN:Register("wake", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "WA21",

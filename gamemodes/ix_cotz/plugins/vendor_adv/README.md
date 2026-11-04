@@ -1,5 +1,13 @@
 # Advanced vendor definitions
 
+The [approved workbook plan](../../../../docs/npc-overhaul/vendor-plan.md) now owns the 25 planned
+contacts' assortments. They have no starting sale supplies. Hand-in candidates start as BUYONLY;
+seller-specific progression opens catalogue purchases. Overlapping requested/purchase items retain
+their BUYONLY action before the purchase unlock. Other purchased goods are SELLONLY.
+Saved town vendor rows are reconciled to this plan on load, including trade modes and removed routes.
+The server checks both sale and purchase eligibility. Existing personal stock history is not reset.
+The Original retains ordinary work and supplies without a finite progression catalogue.
+
 The 12 new town contacts have editable appearance definitions and conversations. The
 [town NPC plugin](../townnpcs/README.md) installs jobs, progression trees, catalogue gates,
 and task dialogue for all 27 contacts while preserving existing identities and services.

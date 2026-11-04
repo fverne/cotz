@@ -1,6 +1,8 @@
 PLUGIN:Register("vesper", {
 	name = "'Vesper'",
 	template = "vespernpc",
+	difficultyMultiplier = 2,
+	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
 		kind = "sensor",
@@ -12,7 +14,7 @@ PLUGIN:Register("vesper", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Radiation supplies",
@@ -44,32 +46,17 @@ PLUGIN:Register("vesper", {
 		),
 	},
 	catalogue = {
-		["medic_medkit_1"] = {step = "VE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antirad_2"] = {step = "VE06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "VE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "VE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "VE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["anomalydetector"] = {step = "VE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["detectorbear"] = {step = "VE13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["detectorecho"] = {step = "VE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["detectorveles"] = {step = "VE24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antirad_1"] = {step = "VE03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["suit_wind"] = {step = "VE10",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_cs1"] = {step = "VE01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_cs2"] = {step = "VE13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_cs3"] = {step = "VE24",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
 			id = "VE01",
+			services = {{id = "suitVariants", name = "Paid suit variant conversions"}},
 			completionCash = 275,
 			name = "Before the Field",
 			kind = "delivery",
@@ -86,20 +73,11 @@ PLUGIN:Register("vesper", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "suit_cs1", bonus = 1},
 			completionCash = 450,
 			name = "The Quiet Edge",
 			kind = "field",
@@ -129,6 +107,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE03",
+			stock = {item = "suit_cs1", bonus = 2},
 			completionCash = 0,
 			name = "Readings Worth Keeping",
 			kind = "tracker",
@@ -140,7 +119,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE04",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -163,7 +141,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Reliable Instruments",
 			kind = "delivery",
@@ -213,24 +190,11 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_module",
 				label = "Second field survey recorder",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "VE07",
-			stock = {item = "anomalydetector", bonus = 1},
+			stock = {item = "suit_cs1", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -257,7 +221,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE08",
-			stock = {item = "medic_antirad_2", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -302,7 +265,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE09",
-			stock = {item = "detectorecho", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -342,7 +304,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE10",
-			stock = {item = "drink_bottlewater", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -387,7 +348,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE11",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "suit_cs1", bonus = 4},
 			completionCash = 0,
 			name = "Outside Familiar Ground",
 			kind = "tracker",
@@ -399,7 +360,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE12",
-			stock = {item = "food_can_beans", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -440,16 +400,7 @@ PLUGIN:Register("vesper", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE13",
@@ -511,6 +462,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE15",
+			stock = {item = "suit_cs2", bonus = 1},
 			completionCash = 0,
 			name = "Know When to Leave",
 			kind = "tracker",
@@ -555,7 +507,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE17",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "suit_cs2", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -599,7 +551,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE18",
-			stock = {item = "medic_antirad_1", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -640,20 +591,11 @@ PLUGIN:Register("vesper", {
 				cargo = "town_quest_equipment",
 				label = "Lost team's equipment case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "VE19",
-			stock = {item = "detectorbear", bonus = 1},
+			stock = {item = "suit_cs2", bonus = 3},
 			completionCash = 0,
 			name = "A Measured Risk",
 			kind = "tracker",
@@ -665,7 +607,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE20",
-			stock = {item = "medic_medkit_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -714,7 +655,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE21",
-			stock = {item = "suit_wind", bonus = 1},
 			completionCash = 1775,
 			name = "Enough to Compare",
 			kind = "delivery",
@@ -747,7 +687,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE22",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -793,7 +732,7 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE23",
-			stock = {item = "lowtiercookerfuel", bonus = 2},
+			stock = {item = "suit_cs2", bonus = 4},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -823,7 +762,6 @@ PLUGIN:Register("vesper", {
 		},
 		{
 			id = "VE24",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -857,16 +795,7 @@ PLUGIN:Register("vesper", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Vesper's trusted contact",
 		},
 	},

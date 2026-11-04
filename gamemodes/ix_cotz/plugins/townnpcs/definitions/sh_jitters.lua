@@ -1,6 +1,8 @@
 PLUGIN:Register("jitters", {
 	name = "'Jitters'",
 	template = "medicnpc",
+	difficultyMultiplier = 1.5,
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "delivery",
@@ -32,14 +34,7 @@ PLUGIN:Register("jitters", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {
-		"drink_bottlewaterdirty",
-		"drink_bottlewater",
-		"medic_bandage_1",
-		"medic_medkit_1",
-		"medic_antirad_1",
-		"drug_painkillers",
-	},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Bleeding control",
@@ -73,48 +68,36 @@ PLUGIN:Register("jitters", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "JT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "JT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_bread"] = {step = "JT03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "JT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_adrenaline"] = {step = "JT13",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["drug_mints"] = {step = "JT01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["drug_morphine"] = {step = "JT20",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["drug_painkillers"] = {step = "JT03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["medic_antipsychotic_1"] = {step = "JT01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["medic_antirad_1"] = {step = "JT02",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_antirad_2"] = {step = "JT21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_bandage_2"] = {step = "JT05",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_bandage_3"] = {step = "JT13",
+		["drug_cigar"] = {step = "JT19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_cigarette_1"] = {step = "JT01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_cigarette_2"] = {step = "JT03",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_cigarette_3"] = {step = "JT09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_cigarette_4"] = {step = "JT16",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_cigarette_5"] = {step = "JT13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_cigarette_6"] = {step = "JT21",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_mints"] = {step = "JT06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["drug_painkillers"] = {step = "JT11",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["drug_tobacco_1"] = {step = "JT23",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_tobacco_2"] = {step = "JT26",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_antirad_1"] = {step = "JT01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_bandage_1"] = {step = "JT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		["medic_medkit_1"] = {step = "JT01",
 			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_2"] = {step = "JT11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_3"] = {step = "JT15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_4"] = {step = "JT17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_5"] = {step = "JT19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_6"] = {step = "JT23",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_psyheal_1"] = {step = "JT01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["miscaid_swampbrew"] = {step = "JT26",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["medic_medkit_2"] = {step = "JT26",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -135,16 +118,7 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT02",
@@ -177,6 +151,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT03",
+			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 0,
 			name = "Keep the Shelves Filled",
 			kind = "tracker",
@@ -191,7 +166,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT04",
-			stock = {item = "drug_painkillers", bonus = 1},
+			stock = {item = "drug_cigarette_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -285,24 +260,11 @@ PLUGIN:Register("jitters", {
 				cargo = "town_quest_clinic2",
 				label = "Field exposure observations",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "medic_bandage_1",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "JT07",
-			stock = {item = "medic_antirad_1", bonus = 1},
+			stock = {item = "drug_cigarette_2", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -370,7 +332,6 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT09",
-			stock = {item = "medic_medkit_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -421,7 +382,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT10",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "drug_mints", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -477,6 +438,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT11",
+			stock = {item = "drug_cigarette_3", bonus = 1},
 			completionCash = 0,
 			name = "The Long Queue",
 			kind = "tracker",
@@ -488,7 +450,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT12",
-			stock = {item = "drink_bottlewater", bonus = 1},
+			stock = {item = "drug_painkillers", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -540,16 +502,7 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT13",
@@ -577,7 +530,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT14",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "medic_medkit_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -633,6 +586,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT15",
+			stock = {item = "drug_cigarette_5", bonus = 1},
 			completionCash = 0,
 			name = "Cases From Outside",
 			kind = "tracker",
@@ -644,7 +598,6 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT16",
-			stock = {item = "drug_mints", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -732,7 +685,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT18",
-			stock = {item = "medic_bandage_1", bonus = 2},
+			stock = {item = "drug_cigarette_4", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -788,19 +741,11 @@ PLUGIN:Register("jitters", {
 				label = "Field treatment log for Wake",
 				recipient = "wake",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "JT19",
+			stock = {item = "medic_antirad_1", bonus = 1},
 			completionCash = 0,
 			name = "Ready for Returns",
 			kind = "tracker",
@@ -899,7 +844,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT22",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "drug_cigar", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -958,6 +903,7 @@ PLUGIN:Register("jitters", {
 		},
 		{
 			id = "JT23",
+			stock = {item = "drug_cigarette_6", bonus = 1},
 			completionCash = 0,
 			name = "Still Taking Patients",
 			kind = "tracker",
@@ -1005,21 +951,12 @@ PLUGIN:Register("jitters", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			discounts = {{npc = "'Jitters'", service = "treatment", fraction = 0.1}},
 		},
 		{
 			id = "JT25",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "drug_tobacco_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.

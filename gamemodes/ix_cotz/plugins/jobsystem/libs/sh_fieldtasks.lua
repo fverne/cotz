@@ -3,6 +3,13 @@ ix.jobs.field = ix.jobs.field or {}
 
 local field = ix.jobs.field
 
+function field.GetRecipientMap(state)
+	local contacts = ix.townNPCs and ix.townNPCs.byName
+	local contact = contacts and contacts[state.recipient]
+
+	return contact and contact.map or state.recipientMap
+end
+
 function field.Pack(position)
 	return {position.x, position.y, position.z}
 end

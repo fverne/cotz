@@ -1,6 +1,8 @@
 PLUGIN:Register("spoor", {
 	name = "'Spoor'",
 	template = "spoornpc",
+	difficultyMultiplier = 2,
+	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
 		kind = "hunting",
@@ -8,7 +10,7 @@ PLUGIN:Register("spoor", {
 		description = "Mutant hunting",
 		quantities = {5, 9, 15},
 	},
-	supplies = {"drink_bottlewaterdirty", "12gauge", "22lr", "medic_bandage_1", "drink_bottlewater"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Hunting ammunition",
@@ -40,80 +42,72 @@ PLUGIN:Register("spoor", {
 		),
 	},
 	catalogue = {
-		["sharpening_stone_fine"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sharpening_stone"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["lowtiercookerfuel"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_bread"] = {step = "SP03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["12gaugedt"] = {step = "SP09",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugemg"] = {step = "SP09",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugesg"] = {step = "SP09",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugetr"] = {step = "SP09",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["22lrap"] = {step = "SP02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["22lrhp"] = {step = "SP02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapua"] = {step = "SP17",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapuaap"] = {step = "SP18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapuahp"] = {step = "SP18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51"] = {step = "SP15",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51ap"] = {step = "SP16",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51hp"] = {step = "SP16",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54"] = {step = "SP17",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54ap"] = {step = "SP18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54hp"] = {step = "SP18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["acog"] = {step = "SP22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_1"] = {step = "SP22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["binoculars_2"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["lax44"] = {step = "SP17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["machete"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mosin"] = {step = "SP15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["obrez"] = {step = "SP03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["pso1"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["saigasemi"] = {step = "SP13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85"] = {step = "SP20",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85nato"] = {step = "SP06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sako85varmint"] = {step = "SP01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["svt40"] = {step = "SP22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w1895"] = {step = "SP08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w9422357"] = {step = "SP10",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["12gauge"] = {step = "SP01",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["12gaugedt"] = {step = "SP02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["12gaugemg"] = {step = "SP02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["12gaugesg"] = {step = "SP02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["12gaugetr"] = {step = "SP02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["45acp41"] = {step = "SP03",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["headwear_cs1"] = {step = "SP15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["headwear_cs2"] = {step = "SP22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["headwear_riot"] = {step = "SP01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_operator_rus_2"] = {step = "SP08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["ij600"] = {step = "SP04",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["ithaca37"] = {step = "SP17",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["lax410"] = {step = "SP12",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["lax410s"] = {step = "SP13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["m1887"] = {step = "SP10",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["m3super90"] = {step = "SP15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["m3supershort"] = {step = "SP06",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mossberg500"] = {step = "SP11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp153"] = {step = "SP14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp27"] = {step = "SP05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["rem870ae"] = {step = "SP18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["saiga12"] = {step = "SP19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["saiga410"] = {step = "SP20",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["stoegerdd"] = {step = "SP16",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["stoegerddshort"] = {step = "SP11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["striker"] = {step = "SP22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["toz106"] = {step = "SP01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["toz194"] = {step = "SP09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["toz34"] = {step = "SP07",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["toz34short"] = {step = "SP02",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["toz34special"] = {step = "SP21",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["toz66"] = {step = "SP08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["toz66short"] = {step = "SP03",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -133,20 +127,10 @@ PLUGIN:Register("spoor", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP02",
-			stock = {item = "22lr", bonus = 1},
 			completionCash = 450,
 			name = "The Scavenger's Camp",
 			kind = "field",
@@ -176,6 +160,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP03",
+			stock = {item = "12gaugedt", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -202,7 +187,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP04",
-			stock = {item = "drink_bottlewater", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -239,7 +223,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Tools for the Field",
 			kind = "delivery",
@@ -289,21 +272,11 @@ PLUGIN:Register("spoor", {
 				label = "Camp meat-handling notes",
 				recipient = "jitters",
 			},
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {item = "12gauge", bonus = 1},
+			benefits = {},
 		},
 		{
 			id = "SP07",
-			stock = {item = "22lrap", bonus = 1},
+			stock = {item = "45acp41", bonus = 1},
 			completionCash = 0,
 			name = "A Safer Yard",
 			kind = "tracker",
@@ -343,7 +316,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP09",
-			stock = {item = "22lrhp", bonus = 1},
 			completionCash = 875,
 			name = "Different Quarry",
 			kind = "delivery",
@@ -396,7 +368,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP11",
-			stock = {item = "12gaugedt", bonus = 1},
+			stock = {item = "12gaugesg", bonus = 1},
 			completionCash = 0,
 			name = "Patient Work",
 			kind = "tracker",
@@ -408,7 +380,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP12",
-			stock = {item = "22lr", bonus = 2},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -437,16 +408,7 @@ PLUGIN:Register("spoor", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP13",
@@ -477,7 +439,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP14",
-			stock = {item = "22lrap", bonus = 2},
 			completionCash = 1650,
 			name = "The Pattern Breaks",
 			kind = "field",
@@ -508,6 +469,7 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP15",
+			stock = {item = "12gaugemg", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -534,7 +496,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP16",
-			stock = {item = "22lrap", bonus = 3},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -609,7 +570,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP18",
-			stock = {item = "binoculars_2", bonus = 1},
 			completionCash = 2050,
 			name = "The Survivor's Cache",
 			kind = "field",
@@ -635,20 +595,11 @@ PLUGIN:Register("spoor", {
 				cargo = "town_quest_equipment",
 				label = "Abandoned hunter's case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "22lr",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SP19",
-			stock = {item = "338lapua", bonus = 1},
+			stock = {item = "12gaugetr", bonus = 1},
 			completionCash = 0,
 			name = "The Dangerous Ones",
 			kind = "tracker",
@@ -693,11 +644,9 @@ PLUGIN:Register("spoor", {
 				},
 			},
 			benefits = {},
-			stock = {item = "12gauge", bonus = 2},
 		},
 		{
 			id = "SP21",
-			stock = {item = "338lapuaap", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -744,7 +693,6 @@ PLUGIN:Register("spoor", {
 		},
 		{
 			id = "SP22",
-			stock = {item = "22lr", bonus = 3},
 			completionCash = 2450,
 			name = "The Hunter's Proof",
 			kind = "field",

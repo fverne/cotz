@@ -1,6 +1,8 @@
 PLUGIN:Register("ledger", {
 	name = "'Ledger'",
 	template = "ledgernpc",
+	difficultyMultiplier = 4,
+	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
 		kind = "deadDrop",
@@ -12,7 +14,7 @@ PLUGIN:Register("ledger", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Short route",
@@ -46,20 +48,48 @@ PLUGIN:Register("ledger", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "LE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_tushonka"] = {step = "LE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "LE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "LE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["backpack_sling"] = {step = "LE01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["backpack_tourist"] = {step = "LE22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_bread"] = {step = "LE03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["acog"] = {step = "LE19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["aimpoint"] = {step = "LE11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_1"] = {step = "LE01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_1_large"] = {step = "LE14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_2"] = {step = "LE09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_2_large"] = {step = "LE22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_3"] = {step = "LE05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["backpack_3_large"] = {step = "LE18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cmore"] = {step = "LE07",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["cobrasuppressor"] = {step = "LE10",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["eotech"] = {step = "LE05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["kingarmsmr"] = {step = "LE13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["kobra"] = {step = "LE03",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["microt1"] = {step = "LE04",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["nightforce"] = {step = "LE22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["pbssuppressor"] = {step = "LE17",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["pso1"] = {step = "LE15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["sakersuppressor"] = {step = "LE21",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["shortdot"] = {step = "LE16",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["trijiconrmr"] = {step = "LE01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["tundrasuppressor"] = {step = "LE09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -79,20 +109,11 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "backpack_1", bonus = 1},
 			completionCash = 450,
 			name = "The First Route",
 			kind = "field",
@@ -126,7 +147,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE03",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
+			stock = {item = "trijiconrmr", bonus = 1},
 			completionCash = 0,
 			name = "Delivered Intact",
 			kind = "tracker",
@@ -138,7 +159,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE04",
-			stock = {item = "backpack_sling", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -160,7 +180,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Stock for the Road",
 			kind = "delivery",
@@ -184,6 +203,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE06",
+			stock = {item = "backpack_3", bonus = 1},
 			completionCash = 850,
 			name = "Ballast's Landing Copy",
 			kind = "field",
@@ -210,21 +230,11 @@ PLUGIN:Register("ledger", {
 				label = "Landing manifest for Ballast",
 				recipient = "ballast",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {item = "lowtiercookerfuel", bonus = 3},
+			benefits = {},
 		},
 		{
 			id = "LE07",
-			stock = {item = "medic_bandage_1", bonus = 3},
+			stock = {item = "kobra", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
@@ -253,7 +263,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE08",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "microt1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -308,7 +318,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE09",
-			stock = {item = "food_can_beans", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -358,7 +367,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE10",
-			stock = {item = "food_can_tushonka", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -414,7 +422,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE11",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "backpack_2", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
@@ -443,7 +451,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE12",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			stock = {item = "eotech", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -498,20 +506,10 @@ PLUGIN:Register("ledger", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE13",
-			stock = {item = "lowtiercookerfuel", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -565,7 +563,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE14",
-			stock = {item = "backpack_sling", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -621,7 +618,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE15",
-			stock = {item = "backpack_sling", bonus = 3},
+			stock = {item = "cmore", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
@@ -650,7 +647,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE16",
-			stock = {item = "drink_bottletea", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -709,7 +705,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE17",
-			stock = {item = "food_can_beans", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -763,7 +758,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE18",
-			stock = {item = "food_can_tushonka", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -815,20 +809,11 @@ PLUGIN:Register("ledger", {
 				cargo = "town_quest_tape",
 				label = "Dispatcher's detour recording",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LE19",
-			stock = {item = "food_raisins", bonus = 2},
+			stock = {item = "tundrasuppressor", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
@@ -857,6 +842,7 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE20",
+			stock = {item = "cobrasuppressor", bonus = 1},
 			completionCash = 2250,
 			name = "A full supply order",
 			kind = "delivery",
@@ -890,11 +876,9 @@ PLUGIN:Register("ledger", {
 				},
 			},
 			benefits = {},
-			stock = {item = "drink_bottletea", bonus = 3},
 		},
 		{
 			id = "LE21",
-			stock = {item = "drink_bottlewaterdirty", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
@@ -952,7 +936,6 @@ PLUGIN:Register("ledger", {
 		},
 		{
 			id = "LE22",
-			stock = {item = "drink_bottlewater", bonus = 1},
 			completionCash = 2450,
 			name = "The Last Receipt",
 			kind = "field",

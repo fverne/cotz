@@ -45,7 +45,7 @@ it must not create duplicate job payments or advance unrelated NPC programmes.
 ## Reward granularity
 
 Every step must provide a functional purchase/conversion/service/capacity unlock, a meaningful stock
-improvement. Original cash, gifts and service credits remain supplementary. TODO plans alone
+improvement. Cash and service credits remain supplementary; progression item gifts are removed. TODO plans alone
 do not satisfy reward coverage or prevent later progression. Existing objective and equipment prerequisites
 still apply. Major equipment may require several steps.
 Bundle splitting should produce meaningful choices, not dozens of empty prerequisites.
@@ -54,7 +54,6 @@ Bundle splitting should produce meaningful choices, not dozens of empty prerequi
 | --- | --- | --- |
 | Purchase access | Unlock one item or a tightly related small set. | An unlock is permission to buy, not a free item. Catalogue, price, stock, and preparation support must exist. |
 | Personal stock capacity | Improve selected supplies a little at a time. | Capacity does not automatically fill shelves; inspect cumulative caps and competing branches. |
-| Fixed supplies | Help finance the next expedition. | Specify quantity/uses; retain pending claims when inventory is full. |
 | Service credit | Occasional treatment, repair, or storage benefit. | Name provider, respect access and balance caps; never cash out credit. |
 | Service discount | Small permanent relationship benefit. | Respect current service caps; do not stack all chapter discounts additively. |
 | Clue or recognition | Reward exploration or a personal story. | Supply useful authored information and visible feedback, not vague "trust" with no effect. |

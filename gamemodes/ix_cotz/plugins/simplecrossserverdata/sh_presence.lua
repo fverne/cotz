@@ -97,6 +97,14 @@ if (CLIENT) then
 			end
 		end
 
+		if ix.townNPCs then
+			local character = LocalPlayer():GetCharacter()
+			local access = ix.townNPCs:GetNetworkAccess(character)
+			for id, record in pairs(records) do
+				records[id] = ix.townNPCs:FilterNetworkRecord(character, record, access)
+			end
+		end
+
 		return records
 	end
 end

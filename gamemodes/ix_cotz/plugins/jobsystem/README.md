@@ -7,6 +7,12 @@ saved character keys remain stable. Existing accepted field jobs keep their save
 recording parameters, selected rewards and defence wave rolls; definition edits tune new assignments.
 No save reset or first-time setup is required.
 
+For deliveries addressed to a town contact, the PDA and hand-in checks resolve that contact's current
+home map. This keeps accepted commissions usable when the workbook plan moves the scientists to
+the Marsh Eco Bunker. Saved search sites, cargo identity, claim serials and delivery progress are retained.
+The town progression multiplier changes required commission trips and cumulative checkpoints, not the
+ordinary repeatable job's quantities or combat settings.
+
 | Change | Edit |
 | --- | --- |
 | Point providers/pools, sources per job, search radius, sensor timing, reading spacing, routes, defence waves/health/duration | `definitions/sh_fieldsettings.lua` |

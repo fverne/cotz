@@ -1,6 +1,8 @@
 PLUGIN:Register("technut", {
 	name = "'Technut'",
 	template = "technpc",
+	difficultyMultiplier = 3,
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "delivery",
@@ -34,7 +36,7 @@ PLUGIN:Register("technut", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Bench supplies (trade goods)",
@@ -69,18 +71,24 @@ PLUGIN:Register("technut", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_aluframe"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_steelframe"] = {step = "TN28",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["foregrip"] = {step = "TN01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["suit_anorak"] = {step = "TN01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_mailjacket"] = {step = "TN04",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_nbc"] = {step = "TN28",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_sunrise"] = {step = "TN21",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_trenchcoat_black"] = {step = "TN08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_trenchcoat_brown"] = {step = "TN11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_trenchcoat_green"] = {step = "TN15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_trenchcoat_tan"] = {step = "TN18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["suit_wind"] = {step = "TN25",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -100,20 +108,11 @@ PLUGIN:Register("technut", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "suit_anorak", bonus = 1},
 			completionCash = 450,
 			name = "The Missing Toolbox",
 			kind = "field",
@@ -143,7 +142,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN03",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
+			stock = {item = "suit_anorak", bonus = 2},
 			completionCash = 0,
 			name = "Keeping Busy",
 			kind = "tracker",
@@ -155,7 +154,6 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN04",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -177,7 +175,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN05",
-			stock = {item = "attachment_aluframe", bonus = 1},
+			stock = {item = "suit_mailjacket", bonus = 1},
 			completionCash = 575,
 			name = "Something Accurate",
 			kind = "delivery",
@@ -201,6 +199,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN06",
+			stock = {item = "suit_mailjacket", bonus = 2},
 			completionCash = 850,
 			name = "The Misaligned Jig",
 			kind = "field",
@@ -226,24 +225,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_official",
 				label = "Workshop calibration notes",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "TN07",
-			stock = {item = "drink_bottlewater", bonus = 2},
+			stock = {item = "suit_anorak", bonus = 3},
 			completionCash = 0,
 			name = "Reliable Parts",
 			kind = "tracker",
@@ -255,7 +241,6 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN08",
-			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -284,7 +269,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN09",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "suit_trenchcoat_black", bonus = 1},
 			completionCash = 875,
 			name = "Steel and Seals",
 			kind = "delivery",
@@ -308,7 +293,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN10",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "suit_trenchcoat_black", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -354,6 +339,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN11",
+			stock = {item = "suit_trenchcoat_brown", bonus = 1},
 			completionCash = 0,
 			name = "Proper Workshop",
 			kind = "tracker",
@@ -390,16 +376,7 @@ PLUGIN:Register("technut", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN13",
@@ -426,7 +403,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN14",
-			stock = {item = "foregrip", bonus = 1},
+			stock = {item = "suit_trenchcoat_brown", bonus = 2},
 			completionCash = 1650,
 			name = "Patterns in Metal",
 			kind = "field",
@@ -459,6 +436,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN15",
+			stock = {item = "suit_trenchcoat_green", bonus = 1},
 			completionCash = 0,
 			name = "More Than a Patch",
 			kind = "tracker",
@@ -502,7 +480,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN17",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
+			stock = {item = "suit_trenchcoat_green", bonus = 2},
 			completionCash = 1475,
 			name = "Instrument Grade",
 			kind = "delivery",
@@ -555,20 +533,11 @@ PLUGIN:Register("technut", {
 				cargo = "town_quest_research",
 				label = "test assembly",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "TN19",
-			stock = {item = "lowtiercookerfuel", bonus = 2},
+			stock = {item = "suit_trenchcoat_tan", bonus = 1},
 			completionCash = 0,
 			name = "Holding Together",
 			kind = "tracker",
@@ -580,7 +549,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN20",
-			stock = {item = "medic_bandage_1", bonus = 2},
+			stock = {item = "suit_trenchcoat_tan", bonus = 2},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -613,7 +582,6 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN21",
-			stock = {item = "attachment_aluframe", bonus = 2},
 			completionCash = 1775,
 			name = "A Workshop in Reserve",
 			kind = "delivery",
@@ -641,7 +609,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN22",
-			stock = {item = "drink_bottlewater", bonus = 3},
+			stock = {item = "suit_sunrise", bonus = 1},
 			completionCash = 2450,
 			name = "The Machine's Origin",
 			kind = "field",
@@ -671,7 +639,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN23",
-			stock = {item = "drink_bottletea", bonus = 2},
+			stock = {item = "suit_sunrise", bonus = 2},
 			completionCash = 0,
 			name = "Precision Work",
 			kind = "tracker",
@@ -686,7 +654,6 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN24",
-			stock = {item = "food_can_beans", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -763,7 +730,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN26",
-			stock = {item = "food_raisins", bonus = 2},
+			stock = {item = "suit_wind", bonus = 1},
 			completionCash = 2850,
 			name = "A Test Under Load",
 			kind = "field",
@@ -796,7 +763,7 @@ PLUGIN:Register("technut", {
 		},
 		{
 			id = "TN27",
-			stock = {item = "foregrip", bonus = 2},
+			stock = {item = "suit_wind", bonus = 2},
 			completionCash = 0,
 			name = "It Runs Again",
 			kind = "tracker",

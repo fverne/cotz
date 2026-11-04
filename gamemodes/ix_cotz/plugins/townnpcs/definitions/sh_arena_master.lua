@@ -62,16 +62,7 @@ PLUGIN:Register("arena-master", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR02",
@@ -170,16 +161,7 @@ PLUGIN:Register("arena-master", {
 				label = "Arena protective-equipment case",
 				recipient = "suture",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			stock = {
 				item = "drink_bottlewater",
 				bonus = 1,
@@ -303,16 +285,7 @@ PLUGIN:Register("arena-master", {
 			),
 			completion = "A finished result. I hope you had time to notice how you adapted, not just how it ended.",
 			target = 1,
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR13",
@@ -505,16 +478,7 @@ PLUGIN:Register("arena-master", {
 				.. "now."
 			),
 			target = 1,
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "AR19",

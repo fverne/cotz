@@ -1,6 +1,8 @@
 PLUGIN:Register("smartass", {
 	name = "'Smartass'",
 	template = "unisgnpc3",
+	difficultyMultiplier = 2.5,
+	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
 		kind = "dataExtract",
@@ -8,7 +10,7 @@ PLUGIN:Register("smartass", {
 		description = "Extract data from %d computer types using the issued flash drive.",
 		quantities = {1, 2, 5},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", },
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Electronics stock (trade goods)",
@@ -59,40 +61,32 @@ PLUGIN:Register("smartass", {
 	catalogue = {
 		-- ["quest_computeraccess"] = {step = "SM20",
 		-- 	terms = {nil, 5, "SELLANDBUY", 5, 1, 5}},
-		["food_raisins"] = {step = "SM01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "SM01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_caffeine"] = {step = "SM01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_energydrink_2"] = {step = "SM01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "SM01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["acog"] = {step = "SM21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cmore"] = {step = "SM10",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
 		-- ["dataextractor"] = {step = "SM01",
 		-- 	terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["l115"] = {step = "SM24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["m14"] = {step = "SM07",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["nightforce"] = {step = "SM24",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["pso1"] = {step = "SM15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["shortdot"] = {step = "SM18",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sv98"] = {step = "SM01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["svd"] = {step = "SM13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["trg42"] = {step = "SM01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["vss"] = {step = "SM18",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["drug_adrenaline"] = {step = "SM13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drug_glucose"] = {step = "SM24",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["food_mre_russia"] = {step = "SM07",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["food_mre_ukraine"] = {step = "SM01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["food_mre_usa"] = {step = "SM18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_antipsychotic_1"] = {step = "SM01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_antipsychotic_2"] = {step = "SM24",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_antirad_2"] = {step = "SM01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_bandage_2"] = {step = "SM01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_medkit_3"] = {step = "SM01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_medkit_4"] = {step = "SM24",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["medic_psyheal_1"] = {step = "SM01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -113,20 +107,11 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "medic_bandage_2", bonus = 1},
 			completionCash = 450,
 			name = "The Lost Beacon",
 			kind = "field",
@@ -156,7 +141,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM03",
-			stock = {item = "drug_caffeine", bonus = 1},
+			stock = {item = "medic_antipsychotic_1", bonus = 1},
 			completionCash = 0,
 			name = "Three Bearings",
 			kind = "tracker",
@@ -193,7 +178,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM05",
-			stock = {item = "sv98", bonus = 1},
+			stock = {item = "food_mre_ukraine", bonus = 1},
 			completionCash = 575,
 			name = "Mounts and Glass",
 			kind = "delivery",
@@ -218,6 +203,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM06",
+			stock = {item = "medic_psyheal_1", bonus = 1},
 			completionCash = 850,
 			name = "The Interference Site",
 			kind = "field",
@@ -243,23 +229,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_control",
 				label = "Interference source record",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "SM07",
+			stock = {item = "food_mre_russia", bonus = 1},
 			completionCash = 0,
 			name = "Less Guesswork",
 			kind = "tracker",
@@ -303,7 +277,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM09",
-			stock = {item = "m14", bonus = 1},
+			stock = {item = "medic_medkit_3", bonus = 1},
 			completionCash = 875,
 			name = "An Honest Test",
 			kind = "delivery",
@@ -357,7 +331,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM11",
-			stock = {item = "medic_bandage_1", bonus = 1},
+			stock = {item = "medic_antirad_2", bonus = 1},
 			completionCash = 0,
 			name = "Still on Bearing",
 			kind = "tracker",
@@ -409,16 +383,7 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM13",
@@ -465,7 +430,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM14",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "drug_adrenaline", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -510,6 +475,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM15",
+			stock = {item = "medic_bandage_2", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -539,7 +505,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM16",
-			stock = {item = "drink_energydrink_2", bonus = 1},
+			stock = {item = "medic_antipsychotic_1", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -588,7 +554,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM17",
-			stock = {item = "drug_caffeine", bonus = 2},
+			stock = {item = "food_mre_ukraine", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -675,20 +641,11 @@ PLUGIN:Register("smartass", {
 				cargo = "town_quest_control",
 				label = "Pripyat signal transmitter",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "SM19",
-			stock = {item = "pso1", bonus = 1},
+			stock = {item = "food_mre_usa", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -715,7 +672,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM20",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "medic_psyheal_1", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -811,7 +768,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM22",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "food_mre_russia", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -856,7 +813,7 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM23",
-			stock = {item = "shortdot", bonus = 1},
+			stock = {item = "medic_medkit_3", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -886,7 +843,6 @@ PLUGIN:Register("smartass", {
 		},
 		{
 			id = "SM24",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -920,16 +876,7 @@ PLUGIN:Register("smartass", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Smartass's trusted contact",
 		},
 	},

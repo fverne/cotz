@@ -481,6 +481,8 @@ if SERVER then
 		local isSellingToVendor = net.ReadBool()
 		local soldItem = isSellingToVendor and ix.item.instances[itemInstanceID]
 		if soldItem and soldItem.isFieldCargo then return end
+		if isSellingToVendor and ix.townNPCs
+			and ix.townNPCs:CanSellItem(uniqueID, entity:GetDisplayName()) == false then return end
 
 		if not ix.item.list[uniqueID] then
 			return

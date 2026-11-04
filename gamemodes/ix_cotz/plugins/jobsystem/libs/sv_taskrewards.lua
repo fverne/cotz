@@ -32,6 +32,7 @@ function ix.taskRewards.CreateOffer(character, key, npc, budget, label, jobTier)
 end
 
 local function paySelected(character, key, offers)
+	if key:match("^progression:") then return false end
 	local offer = offers[key]
 	if not offer or not offer.earned or not offer.selected then return false end
 	local choice = offer.choices[offer.selected]
@@ -73,6 +74,7 @@ local function paySelected(character, key, offers)
 end
 
 function ix.taskRewards.EarnOffer(character, key)
+	if key:match("^progression:") then return false end
 	local offers = offersFor(character)
 	if not offers[key] then return false end
 	offers[key].earned = true
@@ -394,7 +396,7 @@ function ix.taskRewards.AcceptJob(client, npc, difficulty, choice)
 	return true
 end
 
--- Task supply packages drain automatically; progression claims remain player-driven.
+-- Repeatable task supply packages drain automatically; progression item gifts are disabled.
 hook.Add("cotz/progression/reward-claimed", "cotz/jobsystem/claim-next-supply", function(character, lineID, line)
 	if lineID ~= CLAIM_LINE or #line.pendingRewards == 0 then return end
 	timer.Simple(0, function()

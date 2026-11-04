@@ -1,6 +1,8 @@
 PLUGIN:Register("cleaner", {
 	name = "'Cleaner'",
 	template = "owlnpc",
+	difficultyMultiplier = 3,
+	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
 		kind = "deadDrop",
@@ -12,7 +14,7 @@ PLUGIN:Register("cleaner", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Cache upkeep",
@@ -44,34 +46,72 @@ PLUGIN:Register("cleaner", {
 		),
 	},
 	catalogue = {
-		["mp5k"] = {step = "CL12",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["fort12"] = {step = "CL06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["makarov"] = {step = "CL03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "CL01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "CL01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "CL01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["9x19"] = {step = "CL03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["cobrasuppressor"] = {step = "CL10",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["hidestasher_cleaningkit"] = {step = "CL01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["hidestasher_shovel"] = {step = "CL28",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["pbssuppressor"] = {step = "CL19",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sakersuppressor"] = {step = "CL28",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["tundrasuppressor"] = {step = "CL01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["value_tape_duct"] = {step = "CL03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["ak74"] = {step = "CL20",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["akm"] = {step = "CL27",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["aks74u"] = {step = "CL14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["ar159mm"] = {step = "CL24",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["deagle"] = {step = "CL15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["deagle44"] = {step = "CL16",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["fiveseven"] = {step = "CL22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["gepardpdw"] = {step = "CL18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["glock18"] = {step = "CL06",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["kiparis"] = {step = "CL04",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["kp31"] = {step = "CL11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["m1911chic"] = {step = "CL28",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["m1928"] = {step = "CL25",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mac11"] = {step = "CL03",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp18"] = {step = "CL09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp34"] = {step = "CL05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp40"] = {step = "CL07",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp5"] = {step = "CL15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp5k"] = {step = "CL10",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mp9a1"] = {step = "CL13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["p90"] = {step = "CL26",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["pp19"] = {step = "CL20",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["pp1901vityaz"] = {step = "CL23",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["pp2000"] = {step = "CL17",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["ppsh"] = {step = "CL02",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["saigasemi545"] = {step = "CL21",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["skorpion"] = {step = "CL04",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["sr2"] = {step = "CL25",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["stechaps"] = {step = "CL08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["sten"] = {step = "CL01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["sterling"] = {step = "CL12",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["ump45"] = {step = "CL19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["uzi"] = {step = "CL09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -91,20 +131,10 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The Unattended Drop",
 			kind = "field",
@@ -134,6 +164,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL03",
+			stock = {item = "sten", bonus = 1},
 			completionCash = 0,
 			name = "On Time and Unopened",
 			kind = "tracker",
@@ -145,7 +176,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL04",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -167,7 +197,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL05",
-			stock = {item = "9x19", bonus = 1},
 			completionCash = 575,
 			name = "A Cleaner Way In",
 			kind = "delivery",
@@ -216,24 +245,11 @@ PLUGIN:Register("cleaner", {
 				cargo = "town_quest_security",
 				label = "Compromised cache evidence",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "CL07",
-			stock = {item = "medic_bandage_1", bonus = 1},
+			stock = {item = "ppsh", bonus = 1},
 			completionCash = 0,
 			name = "No Questions",
 			kind = "tracker",
@@ -245,7 +261,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL08",
-			stock = {item = "drink_bottlewater", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -287,7 +302,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL09",
-			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 875,
 			name = "Digging Deeper",
 			kind = "delivery",
@@ -353,7 +367,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL11",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "mac11", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -378,7 +392,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL12",
-			stock = {item = "food_raisins", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
 				{
@@ -416,20 +429,10 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL13",
-			stock = {item = "hidestasher_cleaningkit", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -501,7 +504,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL15",
-			stock = {item = "tundrasuppressor", bonus = 2},
+			stock = {item = "skorpion", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -526,7 +529,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL16",
-			stock = {item = "cobrasuppressor", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -572,7 +574,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL17",
-			stock = {item = "drink_bottlewater", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -613,7 +614,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL18",
-			stock = {item = "tundrasuppressor", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
 				{
@@ -653,19 +653,11 @@ PLUGIN:Register("cleaner", {
 				label = "Distribution backup for Ledger",
 				recipient = "ledger",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL19",
+			stock = {item = "kiparis", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -690,7 +682,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL20",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -736,7 +727,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL21",
-			stock = {item = "lowtiercookerfuel", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -777,7 +767,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL22",
-			stock = {item = "9x19", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -819,7 +808,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL23",
-			stock = {item = "pbssuppressor", bonus = 1},
+			stock = {item = "mp34", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement storage consumer; verify these proposed terms before enabling.
@@ -844,7 +833,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL24",
-			stock = {item = "drink_bottletea", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -889,20 +877,10 @@ PLUGIN:Register("cleaner", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "CL25",
-			stock = {item = "food_can_beans", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -946,7 +924,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL26",
-			stock = {item = "food_raisins", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -991,7 +968,7 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL27",
-			stock = {item = "hidestasher_cleaningkit", bonus = 2},
+			stock = {item = "glock18", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -1015,7 +992,6 @@ PLUGIN:Register("cleaner", {
 		},
 		{
 			id = "CL28",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 3000,
 			name = "A full supply order",
 			kind = "delivery",

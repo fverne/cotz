@@ -1,6 +1,8 @@
 PLUGIN:Register("brass", {
 	name = "'Brass'",
 	template = "brassnpc",
+	difficultyMultiplier = 2,
+	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
 		kind = "delivery",
@@ -30,15 +32,7 @@ PLUGIN:Register("brass", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {
-		"drink_bottlewaterdirty",
-		"drink_bottlewater",
-		"12gauge",
-		"9x18",
-		"9x19",
-		"medic_bandage_1",
-		"22lr",
-	},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Pistol allocation",
@@ -71,142 +65,72 @@ PLUGIN:Register("brass", {
 		),
 	},
 	catalogue = {
-		["lowtiercookerfuel"] = {step = "BR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "BR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "BR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_bread"] = {step = "BR03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "BR01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["127x55"] = {step = "BR21",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugedt"] = {step = "BR10",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugemg"] = {step = "BR10",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugesg"] = {step = "BR10",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["12gaugetr"] = {step = "BR10",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["145x114"] = {step = "BR23",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["145x114ap"] = {step = "BR24",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["145x114hp"] = {step = "BR24",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["22lrap"] = {step = "BR02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["22lrhp"] = {step = "BR02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapua"] = {step = "BR19",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapuaap"] = {step = "BR20",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["338lapuahp"] = {step = "BR20",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["357magnum"] = {step = "BR07",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["357magnumap"] = {step = "BR08",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["357magnumhp"] = {step = "BR08",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["44magnum"] = {step = "BR07",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["44magnumap"] = {step = "BR08",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["44magnumhp"] = {step = "BR08",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["45acp"] = {step = "BR05",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["45acp41"] = {step = "BR13",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["45acpap"] = {step = "BR06",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["45acphp"] = {step = "BR06",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["500magnum"] = {step = "BR17",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["500magnumap"] = {step = "BR18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["500magnumhp"] = {step = "BR18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["50ae"] = {step = "BR13",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["50aeap"] = {step = "BR14",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["50aehp"] = {step = "BR14",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["545x39"] = {step = "BR09",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["545x39ap"] = {step = "BR10",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["545x39hp"] = {step = "BR10",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["556x45"] = {step = "BR11",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["556x45ap"] = {step = "BR12",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["556x45hp"] = {step = "BR12",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["57x28"] = {step = "BR05",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["57x28ap"] = {step = "BR06",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["57x28hp"] = {step = "BR06",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["700nitro"] = {step = "BR21",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x25"] = {step = "BR01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x25ap"] = {step = "BR02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x25hp"] = {step = "BR02",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x39"] = {step = "BR11",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x39ap"] = {step = "BR12",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x39hp"] = {step = "BR12",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51"] = {step = "BR17",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51ap"] = {step = "BR18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x51hp"] = {step = "BR18",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54"] = {step = "BR19",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54ap"] = {step = "BR20",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["762x54ap"] = {step = "BR21",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
 		["762x54hp"] = {step = "BR20",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x54"] = {step = "BR19",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["44magnumap"] = {step = "BR09",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["44magnumhp"] = {step = "BR08",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["44magnum"] = {step = "BR07",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["45acp"] = {step = "BR04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["45acpap"] = {step = "BR06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["45acphp"] = {step = "BR05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["50ae"] = {step = "BR13",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["50aeap"] = {step = "BR15",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["50aehp"] = {step = "BR14",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39"] = {step = "BR07",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["93x64"] = {step = "BR21",
+		["545x39ap"] = {step = "BR09",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["545x39hp"] = {step = "BR08",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["57x28"] = {step = "BR04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["57x28ap"] = {step = "BR06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["57x28hp"] = {step = "BR05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x25"] = {step = "BR01",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x25ap"] = {step = "BR03",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x25hp"] = {step = "BR02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39"] = {step = "BR10",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39ap"] = {step = "BR12",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["762x39hp"] = {step = "BR11",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x18"] = {step = "BR01",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x18ap"] = {step = "BR04",
+		["9x18ap"] = {step = "BR03",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x18hp"] = {step = "BR02",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x19"] = {step = "BR04",
 			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x18hp"] = {step = "BR04",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x19"] = {step = "BR03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x19ap"] = {step = "BR04",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x19hp"] = {step = "BR04",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x21"] = {step = "BR03",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x21ap"] = {step = "BR04",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x21hp"] = {step = "BR04",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x39"] = {step = "BR15",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x39ap"] = {step = "BR16",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["9x39hp"] = {step = "BR16",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["9x19ap"] = {step = "BR06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x19hp"] = {step = "BR05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x21"] = {step = "BR04",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x21ap"] = {step = "BR06",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["9x21hp"] = {step = "BR05",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -226,16 +150,7 @@ PLUGIN:Register("brass", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR02",
@@ -268,6 +183,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR03",
+			stock = {item = "762x25", bonus = 1},
 			completionCash = 0,
 			name = "Reliable Quantities",
 			kind = "tracker",
@@ -279,7 +195,6 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR04",
-			stock = {item = "22lr", bonus = 1},
 			completionCash = 650,
 			name = "Restocking",
 			kind = "delivery",
@@ -356,21 +271,11 @@ PLUGIN:Register("brass", {
 				cargo = "town_quest_receipt",
 				label = "depot inventory",
 			},
-			benefits = {
-				items = {
-					{
-						item = "9x18",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {item = "12gauge", bonus = 1},
+			benefits = {},
 		},
 		{
 			id = "BR07",
-			stock = {item = "9x18", bonus = 1},
+			stock = {item = "762x25ap", bonus = 1},
 			completionCash = 0,
 			name = "Not One Round Short",
 			kind = "tracker",
@@ -382,7 +287,6 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR08",
-			stock = {item = "9x19", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -457,7 +361,6 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR10",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -511,7 +414,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR11",
-			stock = {item = "22lrap", bonus = 1},
+			stock = {item = "762x25hp", bonus = 1},
 			completionCash = 0,
 			name = "Enough for the Shift",
 			kind = "tracker",
@@ -523,7 +426,6 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR12",
-			stock = {item = "12gaugedt", bonus = 1},
 			completionCash = 1450,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -552,16 +454,7 @@ PLUGIN:Register("brass", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR13",
@@ -592,7 +485,6 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR14",
-			stock = {item = "357magnum", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -646,7 +538,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR15",
-			stock = {item = "12gaugesg", bonus = 1},
+			stock = {item = "9x18", bonus = 1},
 			completionCash = 0,
 			name = "A Working Depot",
 			kind = "tracker",
@@ -713,7 +605,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR17",
-			stock = {item = "22lrhp", bonus = 1},
+			stock = {item = "9x18ap", bonus = 1},
 			completionCash = 1475,
 			name = "Specialist Loads",
 			kind = "delivery",
@@ -741,7 +633,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR18",
-			stock = {item = "762x25", bonus = 1},
+			stock = {item = "9x18hp", bonus = 1},
 			completionCash = 2050,
 			name = "The Pripyat Consignment",
 			kind = "field",
@@ -767,20 +659,11 @@ PLUGIN:Register("brass", {
 				cargo = "town_quest_equipment",
 				label = "Pripyat consignment case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "9x18",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BR19",
-			stock = {item = "762x25ap", bonus = 1},
+			stock = {item = "9x19", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -815,7 +698,6 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR20",
-			stock = {item = "12gaugemg", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -871,7 +753,6 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR21",
-			stock = {item = "22lrap", bonus = 2},
 			completionCash = 1775,
 			name = "Rounds in Reserve",
 			kind = "delivery",
@@ -903,7 +784,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR22",
-			stock = {item = "357magnumap", bonus = 1},
+			stock = {item = "9x19ap", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -956,7 +837,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR23",
-			stock = {item = "338lapua", bonus = 1},
+			stock = {item = "9x19hp", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
 				{
@@ -991,7 +872,7 @@ PLUGIN:Register("brass", {
 		},
 		{
 			id = "BR24",
-			stock = {item = "9x18", bonus = 2},
+			stock = {item = "9x21", bonus = 1},
 			completionCash = 2650,
 			name = "A full supply order",
 			kind = "delivery",
@@ -1024,16 +905,7 @@ PLUGIN:Register("brass", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 			recognition = "Brass's trusted contact",
 		},
 	},

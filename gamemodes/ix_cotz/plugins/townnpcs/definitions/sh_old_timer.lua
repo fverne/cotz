@@ -1,6 +1,8 @@
 PLUGIN:Register("old-timer", {
 	name = "'Old Timer'",
 	template = "tutorialnpc",
+	difficultyMultiplier = 3,
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "hunting",
@@ -8,7 +10,7 @@ PLUGIN:Register("old-timer", {
 		description = "Mutant hunting",
 		quantities = {5, 9, 15},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "12gauge", "22lr", "drink_bottlewaterdirty", "9x18"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Hunting rounds",
@@ -39,58 +41,28 @@ PLUGIN:Register("old-timer", {
 		),
 	},
 	catalogue = {
-		["sks"] = {step = "OT18",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["lowtiercookerfuel"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_raisins"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["45acp41"] = {step = "OT15",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["762x54"] = {step = "OT22",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["hatchet"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["ij600"] = {step = "OT11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["hatchet"] = {step = "OT19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_steel_arab"] = {step = "OT10",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_steel_ger"] = {step = "OT19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_steel_rus"] = {step = "OT28",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["helm_tanker"] = {step = "OT01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["knife2"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["knife3"] = {step = "OT15",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["knife3"] = {step = "OT14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["knife4"] = {step = "OT28",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["m1887"] = {step = "OT21",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mossberg500"] = {step = "OT23",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["mp27"] = {step = "OT13",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["rem870ae"] = {step = "OT26",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["ruger1022"] = {step = "OT16",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["machete"] = {step = "OT28",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 		["sharpening_stone"] = {step = "OT01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["sharpening_stone_fine"] = {step = "OT28",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["toz106"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz34"] = {step = "OT03",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz34short"] = {step = "OT01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz34special"] = {step = "OT28",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz66"] = {step = "OT18",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["toz66short"] = {step = "OT06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["w9422"] = {step = "OT08",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
+		["sharpening_stone_fine"] = {step = "OT10",
+			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
 	},
 	progression = {
 		{
@@ -111,20 +83,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT02",
-			stock = {item = "22lr", bonus = 1},
+			stock = {item = "sharpening_stone", bonus = 1},
 			completionCash = 450,
 			name = "Know Your Ground",
 			kind = "field",
@@ -154,6 +117,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT03",
+			stock = {item = "helm_tanker", bonus = 1},
 			completionCash = 0,
 			name = "Something With Teeth",
 			kind = "tracker",
@@ -165,7 +129,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT04",
-			stock = {item = "9x18", bonus = 1},
+			stock = {item = "knife2", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -188,7 +152,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT05",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "sharpening_stone", bonus = 2},
 			completionCash = 575,
 			name = "A Place to Hide",
 			kind = "delivery",
@@ -213,6 +177,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT06",
+			stock = {item = "helm_tanker", bonus = 2},
 			completionCash = 850,
 			name = "Ready Enough",
 			kind = "field",
@@ -238,24 +203,11 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_case",
 				label = "Expedition supply case",
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "medic_bandage_1",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "OT07",
-			stock = {item = "12gauge", bonus = 1},
+			stock = {item = "knife2", bonus = 2},
 			completionCash = 0,
 			name = "Look After Your Kit",
 			kind = "tracker",
@@ -297,7 +249,6 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT09",
-			stock = {item = "22lr", bonus = 2},
 			completionCash = 875,
 			name = "Bad Water",
 			kind = "delivery",
@@ -322,7 +273,6 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT10",
-			stock = {item = "drink_bottletea", bonus = 1},
 			completionCash = 1250,
 			name = "Enough for the Walk Home",
 			kind = "field",
@@ -352,6 +302,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT11",
+			stock = {item = "sharpening_stone_fine", bonus = 1},
 			completionCash = 0,
 			name = "Old Habits",
 			kind = "tracker",
@@ -363,7 +314,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT12",
-			stock = {item = "drink_bottlewater", bonus = 1},
+			stock = {item = "helm_steel_arab", bonus = 1},
 			completionCash = 1450,
 			name = "Restocking",
 			kind = "delivery",
@@ -389,16 +340,7 @@ PLUGIN:Register("old-timer", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT13",
@@ -430,7 +372,6 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT14",
-			stock = {item = "food_can_beans", bonus = 1},
 			completionCash = 1650,
 			name = "Thin the Pack",
 			kind = "field",
@@ -460,6 +401,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT15",
+			stock = {item = "knife3", bonus = 1},
 			completionCash = 0,
 			name = "What They Leave Behind",
 			kind = "tracker",
@@ -505,7 +447,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT17",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "sharpening_stone_fine", bonus = 2},
 			completionCash = 1475,
 			name = "The Empty Camp",
 			kind = "delivery",
@@ -562,16 +504,7 @@ PLUGIN:Register("old-timer", {
 				cargo = "town_quest_diary",
 				label = "Missing party's route notes",
 			},
-			benefits = {
-				items = {
-					{
-						item = "12gauge",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT19",
@@ -587,7 +520,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT20",
-			stock = {item = "12gauge", bonus = 2},
+			stock = {item = "helm_steel_ger", bonus = 1},
 			completionCash = 2250,
 			name = "Building the reserve",
 			kind = "delivery",
@@ -664,7 +597,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT22",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
+			stock = {item = "hatchet", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -710,6 +643,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT23",
+			stock = {item = "helm_steel_arab", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -736,7 +670,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT24",
-			stock = {item = "knife2", bonus = 1},
+			stock = {item = "helm_steel_ger", bonus = 2},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -785,20 +719,11 @@ PLUGIN:Register("old-timer", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "food_bread",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "OT25",
-			stock = {item = "knife3", bonus = 1},
+			stock = {item = "knife3", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -890,7 +815,7 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT27",
-			stock = {item = "ij600", bonus = 1},
+			stock = {item = "sharpening_stone", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -917,7 +842,6 @@ PLUGIN:Register("old-timer", {
 		},
 		{
 			id = "OT28",
-			stock = {item = "12gauge", bonus = 3},
 			completionCash = 3000,
 			name = "A full supply order",
 			kind = "delivery",

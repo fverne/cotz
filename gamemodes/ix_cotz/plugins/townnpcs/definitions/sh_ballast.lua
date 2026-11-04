@@ -1,6 +1,8 @@
 PLUGIN:Register("ballast", {
 	name = "'Ballast'",
 	template = "ballastnpc",
+	difficultyMultiplier = 1,
+	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
 		kind = "recovery",
@@ -12,7 +14,7 @@ PLUGIN:Register("ballast", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Recovery provisions",
@@ -44,18 +46,68 @@ PLUGIN:Register("ballast", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "BA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "BA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_tushonka"] = {step = "BA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "BA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_painkillers"] = {step = "BA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["backpack_duffle"] = {step = "BA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
+		["bat"] = {step = "BA13",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["crowbar"] = {step = "BA11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_bottlebeer_1"] = {step = "BA09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_bottlebeer_2"] = {step = "BA07",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_bottlebeer_3"] = {step = "BA05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_bottlebeer_4"] = {step = "BA03",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_bottlebeer_5"] = {step = "BA08",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_bottlebeer_6"] = {step = "BA06",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_canbeer_1"] = {step = "BA02",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_canbeer_2"] = {step = "BA01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_canbeer_3"] = {step = "BA02",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_canbeer_4"] = {step = "BA04",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_canbeer_5"] = {step = "BA07",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_canbeer_6"] = {step = "BA05",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_moonshine"] = {step = "BA09",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_spirit_1"] = {step = "BA19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_spirit_2"] = {step = "BA20",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_spirit_3"] = {step = "BA21",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_vodka_1"] = {step = "BA12",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_vodka_2"] = {step = "BA11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_vodka_3"] = {step = "BA14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_vodka_4"] = {step = "BA16",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_vodka_5"] = {step = "BA19",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_vodka_6"] = {step = "BA15",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["drink_wine"] = {step = "BA14",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["fireaxe"] = {step = "BA17",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["fubar"] = {step = "BA21",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["hidestasher_cleaningkit"] = {step = "BA18",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["hidestasher_cutlery"] = {step = "BA10",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["hidestasher_shovel"] = {step = "BA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["sledgehammer"] = {step = "BA16",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -76,20 +128,10 @@ PLUGIN:Register("ballast", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
 			completionCash = 450,
 			name = "The First Stranding",
 			kind = "field",
@@ -119,7 +161,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA03",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
+			stock = {item = "drink_canbeer_2", bonus = 1},
 			completionCash = 0,
 			name = "Nothing Left Behind",
 			kind = "tracker",
@@ -131,7 +173,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA04",
-			stock = {item = "backpack_duffle", bonus = 1},
 			completionCash = 650,
 			name = "A small delivery",
 			kind = "delivery",
@@ -154,7 +195,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA05",
-			stock = {item = "medic_bandage_1", bonus = 1},
 			completionCash = 575,
 			name = "Fuel for the Return",
 			kind = "delivery",
@@ -204,24 +244,11 @@ PLUGIN:Register("ballast", {
 				cargo = "town_quest_tools",
 				label = "Landing maintenance tools",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "BA07",
-			stock = {item = "drug_painkillers", bonus = 1},
+			stock = {item = "drink_canbeer_3", bonus = 1},
 			completionCash = 0,
 			name = "A Reliable Pair of Hands",
 			kind = "tracker",
@@ -233,7 +260,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA08",
-			stock = {item = "food_can_beans", bonus = 1},
 			completionCash = 1050,
 			name = "Restocking",
 			kind = "delivery",
@@ -263,7 +289,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA09",
-			stock = {item = "food_can_tushonka", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
@@ -305,7 +330,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA10",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
 			completionCash = 1250,
 			name = "The Floating Trail",
 			kind = "field",
@@ -335,7 +359,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA11",
-			stock = {item = "lowtiercookerfuel", bonus = 2},
+			stock = {item = "drink_canbeer_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -362,7 +386,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA12",
-			stock = {item = "backpack_duffle", bonus = 2},
+			services = {{id = "storage", name = "Hideout storage access"}},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
@@ -407,20 +431,10 @@ PLUGIN:Register("ballast", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA13",
-			stock = {item = "drug_painkillers", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -464,7 +478,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA14",
-			stock = {item = "food_can_beans", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
@@ -512,7 +525,7 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA15",
-			stock = {item = "food_can_tushonka", bonus = 2},
+			stock = {item = "drink_bottlebeer_4", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -539,7 +552,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA16",
-			stock = {item = "drink_bottlewaterdirty", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -588,7 +600,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA17",
-			stock = {item = "lowtiercookerfuel", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -632,7 +643,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA18",
-			stock = {item = "backpack_duffle", bonus = 3},
 			plannedUnlocks = {
 				-- TODO: Implement passage consumer; verify these proposed terms before enabling.
 				{
@@ -675,20 +685,11 @@ PLUGIN:Register("ballast", {
 				cargo = "town_quest_personnel",
 				label = "Crew personal records",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "BA19",
-			stock = {item = "drug_painkillers", bonus = 3},
+			stock = {item = "drink_canbeer_4", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -749,14 +750,9 @@ PLUGIN:Register("ballast", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "BA21",
-			stock = {item = "food_can_beans", bonus = 3},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement information consumer; verify these proposed terms before enabling.
@@ -804,7 +800,6 @@ PLUGIN:Register("ballast", {
 		},
 		{
 			id = "BA22",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 2450,
 			name = "A full supply order",
 			kind = "delivery",

@@ -17,6 +17,7 @@ function PLUGIN:BuildCatalogue()
 		definition.variantUnlocks[#definition.variantUnlocks + 1] = itemID
 	end
 	for _, contact in pairs(self.contacts) do
+		if contact.enforceCatalogue then self:BuildWantedItems(contact) end
 		for item, allocation in pairs(contact.catalogue or {}) do
 			assert(not (contact.disabledItems and contact.disabledItems[item]), "Disabled town item: " .. item)
 			assert(ix.item.list[item], "Unknown town catalogue item: " .. item)
@@ -24,6 +25,9 @@ function PLUGIN:BuildCatalogue()
 			local definition = assert(ix.progression.definitions[id], "Unknown town catalogue step: " .. id)
 			local args = {item}
 			for index = 1, 6 do args[index + 1] = allocation.terms[index] end
+			if contact.enforceCatalogue then
+				args[4] = contact.wantedItems[item] and "SELLANDBUY" or "SELLONLY"
+			end
 			definition.vendorUnlocks[#definition.vendorUnlocks + 1] = {npc = contact.name, args = args}
 			local gate = self.itemGates[item] or {sellers = {}}
 			gate.sellers[contact.name] = {id = id, npc = contact.name}
@@ -75,6 +79,20 @@ function PLUGIN:BuildCatalogue()
 		local lower, higher = self.itemGates[regular], self.itemGates[variant]
 		for npc, gate in pairs(higher and higher.sellers or {}) do
 			requireGate(lower and lower.sellers[npc], gate)
+			if variant:sub(-2) == "ap" then
+				local hollowPoint = self.itemGates[regular .. "hp"]
+				requireGate(hollowPoint and hollowPoint.sellers[npc], gate)
+			end
+		end
+	end
+	-- Stock milestones must follow their own shop's purchase unlock, including across story branches.
+	for slug, contact in pairs(self.contacts) do
+		for _, step in ipairs(contact.progression) do
+			if step.stock then
+				local item = self.itemGates[step.stock.item]
+				local purchase = item and item.sellers[contact.name]
+				requireGate(purchase, {id = self:StepID(slug, step.id)})
+			end
 		end
 	end
 	-- Catalogue gates can cross NPCs; connect every prerequisite after all sellers are compiled.

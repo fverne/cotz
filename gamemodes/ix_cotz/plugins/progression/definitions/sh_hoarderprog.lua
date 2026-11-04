@@ -15,7 +15,7 @@ ix.progression.Register("hoarderCollection1", {
 		.. "ammunition for a weapon less ordinary than yours."
 	),
 	completionMessage = "Accepted. The interesting parts of our arrangement are now recorded.",
-	completionBenefits = {items = {{item = "500magnum"}}},
+	completionBenefits = {},
 })
 
 ix.progression.Register("hoarderCollection2", {
@@ -35,7 +35,7 @@ ix.progression.Register("hoarderCollection2", {
 		.. "attachments, and I will consider selling you the large revolver."
 	),
 	completionMessage = "Accepted. The interesting parts of our arrangement are now recorded.",
-	completionBenefits = {items = {{item = "500magnum"}}},
+	completionBenefits = {},
 	vendorUnlocks = {{npc = "'Hoarder'", args = {"sw500", nil, 1, "SELLANDBUY", 1, 48, 1}}},
 })
 
@@ -56,7 +56,7 @@ ix.progression.Register("hoarderCollection3", {
 		.. "will become available to purchase when our business is settled."
 	),
 	completionMessage = "Accepted. The interesting parts of our arrangement are now recorded.",
-	completionBenefits = {items = {{item = "127x55"}}},
+	completionBenefits = {},
 	vendorUnlocks = {{npc = "'Hoarder'", args = {"vssk", nil, 1, "SELLANDBUY", 1, 48, 1}}},
 })
 
@@ -77,6 +77,6 @@ ix.progression.Register("hoarderCollection4", {
 		.. "list. Then I will open the Nitro offer. You will still need to afford it."
 	),
 	completionMessage = "Accepted. The interesting parts of our arrangement are now recorded.",
-	completionBenefits = {items = {{item = "700nitro"}}},
+	completionBenefits = {},
 	vendorUnlocks = {{npc = "'Hoarder'", args = {"nitro", nil, 1, "SELLANDBUY", 1, 48, 1}}},
 })

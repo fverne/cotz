@@ -91,9 +91,6 @@ end
 
 local function benefitText(benefits)
 	local parts = {}
-	for _, reward in ipairs(benefits.items or {}) do
-		parts[#parts + 1] = "One " .. ix.progression.DescribeItemReward(reward)
-	end
 	for _, reward in ipairs(benefits.services or {}) do
 		parts[#parts + 1] = string.format("%d %s credit at %s", reward.amount, reward.service, reward.npc)
 	end
@@ -103,6 +100,7 @@ end
 
 function ix.progression.GetBenefitSummary(definition, character)
 	local parts = benefitText(definition.completionBenefits or {})
+	for _, service in ipairs(definition.townServices or {}) do parts[#parts + 1] = service.name end
 	for _, itemID in ipairs(definition.variantUnlocks or {}) do
 		parts[#parts + 1] = "Suit conversion access: " .. ix.item.list[itemID].name
 	end
@@ -162,9 +160,6 @@ function ix.progression.GetDeliveryOptions(character, progressionID)
 	local function addOption(label, data)
 		options[#options + 1] = {statement = label, topicID = "ViewProgression", dyndata = data}
 	end
-	if line.pendingRewards and #line.pendingRewards > 0 then
-		addOption("Claim pending reward", {progid = progressionID, itemid = "claim"})
-	end
 	if not ix.progression.IsActive(character, progressionID) then
 		return options
 	end
@@ -186,6 +181,7 @@ end
 
 if SERVER then
 	local CLAIM_DATA_KEY = "progressionRewardClaim"
+	local JOB_REWARD_LINE = "taskRewardClaims"
 
 	function ix.progression.PrepareReward(character, progressionID, line, reward)
 		line.rewardSerial = (line.rewardSerial or 0) + 1
@@ -196,6 +192,7 @@ if SERVER then
 	end
 
 	function ix.progression.QueueReward(character, progressionID, reward)
+		if progressionID ~= JOB_REWARD_LINE then return false end
 		local record = ix.progression.GetCharacterProgression(character)
 		local line = ix.progression.GetLine(character, progressionID)
 		line.pendingRewards = line.pendingRewards or {}
@@ -224,6 +221,8 @@ if SERVER then
 	end
 
 	function ix.progression.ClaimRewards(character, progressionID)
+		-- Repeatable jobs share this delivery API; old progression gift queues are no longer claimable.
+		if progressionID ~= JOB_REWARD_LINE then return false end
 		local line = ix.progression.GetLine(character, progressionID)
 		if line.claiming or not line.pendingRewards or #line.pendingRewards == 0 then
 			return false
@@ -268,12 +267,10 @@ if SERVER then
 			return
 		end
 		local record = ix.progression.GetCharacterProgression(character)
-		for id, line in pairs(record.lines) do
-			local reward = line.pendingRewards and line.pendingRewards[1]
-			if reward and reward.token == token then
-				finishClaim(character, id, token)
-				break
-			end
+		local line = record.lines[JOB_REWARD_LINE]
+		local reward = line and line.pendingRewards and line.pendingRewards[1]
+		if reward and reward.token == token then
+			finishClaim(character, JOB_REWARD_LINE, token)
 		end
 	end)
 end

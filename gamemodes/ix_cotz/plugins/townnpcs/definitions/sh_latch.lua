@@ -1,6 +1,8 @@
 PLUGIN:Register("latch", {
 	name = "'Latch'",
 	template = "latchnpc",
+	difficultyMultiplier = 2,
+	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
 		kind = "delivery",
@@ -36,7 +38,7 @@ PLUGIN:Register("latch", {
 		},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"drink_bottlewater", "medic_bandage_1", "drink_bottlewaterdirty", "lowtiercookerfuel"},
+	supplies = {},
 	rewards = {
 		packages = {
 			{label = "Workshop stock (trade goods)",
@@ -73,36 +75,22 @@ PLUGIN:Register("latch", {
 		),
 	},
 	catalogue = {
-		["food_raisins"] = {step = "LA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_tushonka"] = {step = "LA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["food_can_beans"] = {step = "LA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drug_painkillers"] = {step = "LA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["drink_bottletea"] = {step = "LA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_steelplate_1"] = {step = "LA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 3, 1}},
-		["attachment_steelplate_2"] = {step = "LA11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["attachment_steelplate_3"] = {step = "LA22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["bat"] = {step = "LA06",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["crowbar"] = {step = "LA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["fireaxe"] = {step = "LA17",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["fubar"] = {step = "LA22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["sharpening_stone"] = {step = "LA01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
-		["sledgehammer"] = {step = "LA11",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["value_tape_duct"] = {step = "LA01",
-			terms = {nil, 2, "SELLANDBUY", 2, 12, 1}},
+		["attachment_ceramicplate_1"] = {step = "LA01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["attachment_fabric_1"] = {step = "LA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["attachment_steelplate_1"] = {step = "LA11",
+			terms = {nil, 1, "SELLONLY", 1, 3, 1}},
+		["mask_cloth"] = {step = "LA01",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_eo20"] = {step = "LA22",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_gp5"] = {step = "LA17",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_halfmask"] = {step = "LA06",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		["mask_respirator"] = {step = "LA11",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
 	},
 	progression = {
 		{
@@ -122,20 +110,11 @@ PLUGIN:Register("latch", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "drink_bottlewater",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA02",
-			stock = {item = "drink_bottlewaterdirty", bonus = 1},
+			stock = {item = "mask_cloth", bonus = 1},
 			completionCash = 450,
 			name = "The Missing Inventory",
 			kind = "field",
@@ -165,7 +144,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA03",
-			stock = {item = "lowtiercookerfuel", bonus = 1},
+			stock = {item = "attachment_ceramicplate_1", bonus = 1},
 			completionCash = 0,
 			name = "Worth Picking Up",
 			kind = "tracker",
@@ -177,7 +156,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA04",
-			stock = {item = "medic_bandage_1", bonus = 1},
+			stock = {item = "mask_cloth", bonus = 2},
 			completionCash = 650,
 			name = "Restocking",
 			kind = "delivery",
@@ -206,7 +185,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA05",
-			stock = {item = "attachment_steelplate_1", bonus = 1},
+			stock = {item = "attachment_ceramicplate_1", bonus = 2},
 			completionCash = 575,
 			name = "Useful Steel",
 			kind = "delivery",
@@ -255,24 +234,11 @@ PLUGIN:Register("latch", {
 				cargo = "town_quest_control",
 				label = "Machine identification file",
 			},
-			benefits = {
-				items = {
-					{
-						item = "medic_bandage_1",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 1,
-			},
+			benefits = {},
 		},
 		{
 			id = "LA07",
-			stock = {item = "food_raisins", bonus = 1},
+			stock = {item = "mask_halfmask", bonus = 1},
 			completionCash = 0,
 			name = "Sorted Properly",
 			kind = "tracker",
@@ -313,7 +279,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA09",
-			stock = {item = "sharpening_stone", bonus = 1},
+			stock = {item = "mask_halfmask", bonus = 2},
 			completionCash = 875,
 			name = "Moving Parts",
 			kind = "delivery",
@@ -337,7 +303,6 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA10",
-			stock = {item = "bat", bonus = 1},
 			completionCash = 1250,
 			name = "The Wrong Replacement",
 			kind = "field",
@@ -367,6 +332,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA11",
+			stock = {item = "attachment_steelplate_1", bonus = 1},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
@@ -408,7 +374,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA12",
-			stock = {item = "crowbar", bonus = 1},
+			stock = {item = "mask_respirator", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
 				{
@@ -464,20 +430,11 @@ PLUGIN:Register("latch", {
 					quantity = 1,
 				},
 			},
-			benefits = {
-				items = {
-					{
-						item = "lowtiercookerfuel",
-						data = {
-							quantity = 1,
-						},
-					},
-				},
-			},
+			benefits = {},
 		},
 		{
 			id = "LA13",
-			stock = {item = "drink_bottletea", bonus = 1},
+			stock = {item = "attachment_steelplate_1", bonus = 2},
 			completionCash = 1175,
 			name = "Heavy Work",
 			kind = "delivery",
@@ -535,7 +492,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA15",
-			stock = {item = "drug_painkillers", bonus = 1},
+			stock = {item = "mask_respirator", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
@@ -574,7 +531,6 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA16",
-			stock = {item = "drink_bottlewaterdirty", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
@@ -694,7 +650,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA18",
-			stock = {item = "food_can_beans", bonus = 1},
+			stock = {item = "mask_gp5", bonus = 1},
 			plannedUnlocks = {
 				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
 				{
@@ -759,7 +715,7 @@ PLUGIN:Register("latch", {
 		},
 		{
 			id = "LA19",
-			stock = {item = "food_can_tushonka", bonus = 1},
+			stock = {item = "mask_gp5", bonus = 2},
 			benefits = {},
 			plannedUnlocks = {
 				-- TODO: Implement barter consumer; verify these proposed terms before enabling.
@@ -834,14 +790,9 @@ PLUGIN:Register("latch", {
 				},
 			},
 			benefits = {},
-			stock = {
-				item = "drink_bottlewater",
-				bonus = 2,
-			},
 		},
 		{
 			id = "LA21",
-			stock = {item = "medic_bandage_1", bonus = 2},
 			completionCash = 1775,
 			name = "Ready for Assembly",
 			kind = "delivery",
