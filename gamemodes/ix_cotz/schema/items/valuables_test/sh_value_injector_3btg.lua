@@ -1,8 +1,6 @@
 ITEM.name = "3-b-TG Research Injector"
 ITEM.description = "A green injector with a pale label and an orange-brown end cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "An orange-brown cap closes the green 3-b-TG injector. The contrasting colours make it easy to distinguish from similar research stock before the fine label is read. Its place in a laboratory inventory would depend on the designation and accompanying records."
 ITEM.valuableCategory = "research injectors a"
 
 ITEM.model = "models/cotz/eft/usable/syringe_3btg.mdl"

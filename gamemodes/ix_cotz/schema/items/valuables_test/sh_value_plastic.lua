@@ -1,7 +1,6 @@
 ITEM.name = "Polymer Repair Sheet"
 ITEM.description = "A folded dark polymer sheet with a shiny crumpled surface."
-ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
-	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "The polymer sheet has been folded into sharp, shiny creases. It is stock material rather than a moulded replacement part. Its usefulness in workshop work depends on the area and thickness available once the bundle is opened out."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/plastic.mdl"

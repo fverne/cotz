@@ -1,7 +1,6 @@
 ITEM.name = "Schmidt Shortdot"
 ITEM.description = "German optic sight. 2.5x magnification. Cross type sight."
-ITEM.longdesc = "The relatively short tube is less cumbersome than the long scopes favoured for distant targets."
-	.. " Its worn controls hint at frequent adjustments between open ground and built-up streets."
+ITEM.longdesc = "The Shortdot places modest magnification inside a conventional scope tube. Its proportions sit between a compact reflex sight and a larger precision optic. The cross-shaped reference gives a clear centre without relying on separate iron-sight posts."
 ITEM.category = "Attachments"
 ITEM.width = 2
 ITEM.height = 1

@@ -1,8 +1,6 @@
 ITEM.name = "Phased Antenna Array"
 ITEM.description = "A square electronics module carrying a dense grid of copper-coloured pins."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The phased antenna array repeats small elements in a dense square grid. Those regular rows are part of the antenna's construction, rather than a protective grille. It is specialised communications hardware shaped around a fixed mounting and the electronics that accompanied it."
 ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/illusion/eftcontainers/phaseantenna.mdl"

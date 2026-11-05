@@ -1,8 +1,6 @@
 ITEM.name = "Bleach"
 ITEM.description = "A plastic bleach bottle with a blue cap."
-ITEM.longdesc = "Grime has settled into the lettering and the tight corners around the handle. There is a sharp"
-	.. " chemical smell near the cap, strong enough to make the faded promises of household freshness"
-	.. " seem rather optimistic."
+ITEM.longdesc = "The bleach bottle is moulded for household cleaning stock, with a screw cap and a broad label. Its familiar shape would be at home beneath a sink. Keeping a shared washroom or treatment room clean involves supplies as ordinary as this one."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/illusion/eftcontainers/bleach.mdl"

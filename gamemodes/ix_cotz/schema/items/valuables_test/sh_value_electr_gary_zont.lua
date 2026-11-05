@@ -1,8 +1,6 @@
 ITEM.name = "Compact Radio Assembly"
 ITEM.description = "A compact dark radio assembly with a coiled lead and a round projecting fitting."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The compact radio assembly keeps its round fitting close to the body with a coiled lead. That arrangement allows movement without a long loose cable. It looks designed for a crowded operating position, with its controls and connections concentrated into a small space."
 ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/barter/electr_gary_zont.mdl"

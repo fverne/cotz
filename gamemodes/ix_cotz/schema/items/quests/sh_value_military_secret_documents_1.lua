@@ -1,8 +1,6 @@
 ITEM.name = "Military Records Folder I"
 ITEM.description = "A buff-coloured folder with loose military record sheets extending beyond its cover."
-ITEM.longdesc = "The exposed paper edges have softened, and a dry archive smell clings to the bundle. Detached"
-	.. " from its original filing system, it is difficult to place in any reliable sequence. A specialist"
-	.. " with the right background may be able to supply the missing context."
+ITEM.longdesc = "The first military records folder gathers loose sheets behind a buff cover. The format favours documents that can be filed or replaced separately. Its outwardly plain packaging gives much less information than the headings and references on the enclosed pages."
 
 ITEM.model = "models/cotz/eft/quest/military_secret_documents_1.mdl"
 

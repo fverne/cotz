@@ -1,7 +1,6 @@
 ITEM.name = "Tourist Ammo Box"
 ITEM.description= "The box rattles when you shake it."
-ITEM.longdesc = "The packed rounds are intended to replenish a working field load. The selection has the"
-	.. " practical feel of equipment put aside for someone who keeps coming back."
+ITEM.longdesc = "The Tourist Ammo Box is a compact supply entitlement in ammunition packaging. Its class identifies an entry-level allowance rather than one fixed calibre. A supplying contact's exchange preview identifies the available rounds before the box is redeemed."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

@@ -1,8 +1,6 @@
 ITEM.name = "Old Games Magazine"
 ITEM.description = "A thin magazine with a colourful illustrated cover and a contrasting spine."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "The games magazine gives screenshots, reviews and imagined adventures the urgency of current affairs. Its cover belongs to a world in which an evening's danger could be switched off. The hardware discussed inside is likely to matter less to a camp reader than the pictures."
 ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/quest/gamemagazine_01.mdl"

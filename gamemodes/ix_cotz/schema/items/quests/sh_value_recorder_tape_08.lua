@@ -1,8 +1,6 @@
 ITEM.name = "Black Audio Cassette"
 ITEM.description = "A black audio cassette with light handwritten markings across its face."
-ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
-	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
-	.. " equipment and a patient specialist to make sense of them."
+ITEM.longdesc = "Light handwriting crosses the black audio cassette's face. The contrast makes the label visible without the pale paper insert found on many tapes. It is a simple way to identify a personal recording while keeping the familiar shell unchanged."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_08.mdl"
 

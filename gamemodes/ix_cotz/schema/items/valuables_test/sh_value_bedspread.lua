@@ -1,7 +1,6 @@
 ITEM.name = "Rolled Bedspread"
 ITEM.description = "A rolled olive bedspread held together by a narrow strap."
-ITEM.longdesc = "Dust has worked into the folds and rough surfaces. It has the familiar, unglamorous shape of"
-	.. " camp stores, carried from one improvised shelter to the next."
+ITEM.longdesc = "The olive bedspread has been rolled and strapped into a compact bundle. It is bedding made portable, with broad folds rather than the shaped panels of a sleeping bag. Even tightly bound, the roll takes up an inconvenient amount of room beside hard equipment."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/bedspread.mdl"

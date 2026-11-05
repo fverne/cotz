@@ -1,7 +1,6 @@
 ITEM.name = "Professional Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "A full bundle set aside as payment for completed work. The bundle has passed through hands"
-	.. " accustomed to supplying people who make their living beyond the safe routes."
+ITEM.longdesc = "The large Professional Reward represents a substantial work payment kept in supply form. Its class and size distinguish it from lower or smaller packages. The offered inventory is identified at redemption instead of inferred from the weight of the bundle."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

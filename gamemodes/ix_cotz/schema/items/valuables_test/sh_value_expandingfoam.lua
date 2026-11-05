@@ -1,7 +1,6 @@
 ITEM.name = "Expanding Foam"
 ITEM.description = "A tall can of expanding foam."
-ITEM.longdesc = "The yellow wrapper is scuffed where a hand would naturally grip it. A stubborn chemical smell"
-	.. " hangs around the dark cap."
+ITEM.longdesc = "The foam canister packages building material for filling narrow gaps around fittings and openings. Its tall body belongs among sealants and other finishing supplies. In a completed room, most of the places such material occupies are hidden behind trim."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/polyurethane_foam.mdl"

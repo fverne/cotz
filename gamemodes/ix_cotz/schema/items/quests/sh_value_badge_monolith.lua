@@ -1,8 +1,6 @@
 ITEM.name = "Monolith Insignia"
 ITEM.description = "An oval insignia with an angular central design and contrasting lettering around the edge."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "An angular symbol stands within the Monolith patch's oval border. Contrasting lettering follows the edge around it. The loose insignia retains a clear group identity while leaving its previous wearer's name and circumstances unrecorded."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_monolith.mdl"
 

@@ -3,17 +3,16 @@ DIALOGUE.townContact = "atlas"
 
 ix.dialogue.AddTradeTopic(
 	DIALOGUE,
-	"What do you have for sale?",
-	"Of course. Let me move these papers so you can have a proper look."
+	"Let's see what supplies you're trading.",
+	"Of course. I'll move the notes; I don't want a good exchange becoming another mysterious stain on a survey."
 )
 
 DIALOGUE.addTopic("GREETING", {
-	response = (
-		"Hello. Come round this side; there's room. If you've just come in from outside, I'd like to "
-		.. "hear how you found the walk. But catch your breath first. What can I do for you?"
-	),
+	response = "Hello. There's room on this side of the papers. Catch your breath if you've just come in; I'd be glad to hear about the walk, or whatever else brought you.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -39,34 +38,24 @@ DIALOGUE.addTopic("BackgroundTopic", {
 })
 
 DIALOGUE.addTopic("AdviceTopic", {
-	statement = "Any advice before I head out?",
-	response = (
-		"Turn round occasionally while you're walking out. Actually stop and look. A gap you can see "
-		.. "easily from one direction may disappear completely from the other. I used to think "
-		.. "remembering the outward journey was enough. Then I'd find myself arguing with a perfectly "
-		.. "innocent stand of trees. And leave yourself time to be wrong. Finding the way back is much "
-		.. "less unpleasant when you're neither thirsty nor in a hurry."
-	),
+	statement = "What should I pay attention to on the way out?",
+	response = "Look back occasionally. Stop and turn round, rather than glancing over your shoulder. A gap that looked obvious on the outward walk can be remarkably hard to recognise from the other direction. I used to argue with the trees about that. You can also write down where you stopped, even if the reason was only lunch. It gives the return journey a familiar piece to work with when the impressive parts have filled your head.",
 	options = {"BackTopic", "GOODBYE"},
 })
 
 DIALOGUE.addTopic("ContactsTopic", {
-	statement = "Who do you know around here?",
-	response = (
-		"Ballast is worth listening to about the waterside, provided you let him finish complaining "
-		.. "about whatever you're carrying. We disagree about how much a map can tell you. Usually he "
-		.. "makes me go and look again, which is useful, if irritating. Ledger keeps the records I wish "
-		.. "everyone kept. Wake and I compare what we have when someone fails to return. She asks who "
-		.. "last saw them; I try to establish where. Neither question gets very far on its own."
-	),
+	statement = "Whose accounts do you find useful?",
+	response = "Ballast notices the footing before I finish discussing the shape of a bank. We've had some useful, irritating walks together. Ledger records the little details a tired traveller forgets to mention. Wake and I compare accounts when somebody hasn't returned: she begins with the person, I tend to begin with the journey. I try to remember which question she's asking before producing another sheet. Usually she lets me spread it out before pointing out the difference.",
 	options = {"BackTopic", "GOODBYE"},
 })
 
 DIALOGUE.addTopic("BackTopic", {
 	statement = "Something else.",
-	response = "Yes, of course. What did you want to ask?",
+	response = "Of course. What were you wondering?",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"BackgroundTopic",
 		"AdviceTopic",
 		"ContactsTopic",
@@ -79,11 +68,8 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you around.",
-	response = (
-		"Take your time out there. If something on the way surprises you, I'd be interested to hear "
-		.. "about it when you're back."
-	),
+	statement = "I'll let you get back to the maps.",
+	response = "Good journey. If you find a view worth stopping for, I'd enjoy hearing about that too.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
@@ -107,5 +93,23 @@ DIALOGUE.addTopic("InterestTownFollowup", {
 		.. "supplied the branches. That's why I ask rather a lot of questions. Do stop me if I begin "
 		.. "answering them myself."
 	),
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Do stalkers describe anomaly fields very differently?",
+	response = "Very. One begins with the sound, another with the ground, another with the argument about going round. I ask them to separate what they noticed from what they were told. Then, if they're willing, I ask about the argument. You learn something about a journey from where people disagree. Though I try to let them take their boots off first. Someone pointed out that my questions were becoming the longest part of their return.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Does Ballast ever ask you for a map?",
+	response = "He'll look at one, then put his finger on the part he thinks I've made too tidy. Sometimes that's the whole waterside. We had a pleasant ten minutes over a bank once, followed by a less pleasant walk to look at it. He was right about the footing. I was right about where the bend began. We both found room to mention our own contribution afterwards. I'd miss those discussions if he suddenly became agreeable.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Do you write down the parts that aren't useful?",
+	response = "Sometimes in the margin. A place someone stopped because the view surprised them, or because their companion finally stopped talking. I don't put every remark on a working sheet. I enjoy knowing the walk contained something besides difficulty. People are often surprised to be asked about that.",
 	options = {"BackTopic"},
 })

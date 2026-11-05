@@ -1,8 +1,6 @@
 ITEM.name = "Pocket Radio Receiver"
 ITEM.description = "A compact receiver with a round speaker grille and a small rectangular display."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "The pocket receiver gives most of its face to a round speaker grille. A smaller display occupies the remaining panel. Its compact design suits listening without the broad keyboard and controls of a communications desk."
 ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/lostsignalproject/items/devices/receiver1.mdl"

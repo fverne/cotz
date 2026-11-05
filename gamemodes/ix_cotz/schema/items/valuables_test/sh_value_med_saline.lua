@@ -1,8 +1,7 @@
 ITEM.name = "NaCl Saline Bottle"
 ITEM.description = "A pale bottle marked for sodium chloride solution, with a plain screw cap and a grubby"
 	.. " exterior."
-ITEM.longdesc = "The smaller print has suffered more than the shape of the bottle. There is a stale cupboard"
-	.. " smell around the neck, and nothing with it to explain which storeroom it was meant to reach."
+ITEM.longdesc = "The saline bottle carries sodium chloride identification on an otherwise plain container. Its grubby exterior contrasts with the controlled conditions normally associated with clinical fluids. The label identifies the stock, while the appearance of the bottle alone cannot establish its suitability for medical use."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_nacl.mdl"

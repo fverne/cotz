@@ -1,8 +1,6 @@
 ITEM.name = "Clinical Injection Device"
 ITEM.description = "A mechanical injection device with a broad grip and several projecting parts."
-ITEM.longdesc = "A small labelled section near one end adds the only obvious colour to the otherwise subdued"
-	.. " assembly. Dirt has collected around the moving-looking joints, leaving the impression of a"
-	.. " precise tool separated from the rest of its equipment."
+ITEM.longdesc = "The clinical injection device has a broad grip and several projecting mechanical parts. Its shape is more substantial than a disposable syringe, reflecting a purpose-built instrument. Detached from its clinical kit, the apparatus is an assembly to identify and inspect before it is put back into service."
 ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/usable/meds_medinjector.mdl"

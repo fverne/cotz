@@ -1,7 +1,6 @@
 ITEM.name = "PSO-1"
 ITEM.description = "Russian optic sight. 4.0x magnification. Delta type sight."
-ITEM.longdesc = "The offset body and rubber eyecup are familiar sights on surplus marksman equipment. Faded"
-	.. " adjustment markings remain just legible beneath the grime."
+ITEM.longdesc = "The PSO-1 uses a relatively long optical body above an offset mounting assembly. Its distinct outline is familiar beside eastern-pattern rifles. Magnification gives distant details more space in the view, while the sight remains a separate piece of fitted equipment."
 ITEM.category = "Attachments"
 ITEM.width = 2
 ITEM.height = 1

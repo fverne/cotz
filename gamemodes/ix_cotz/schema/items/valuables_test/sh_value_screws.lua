@@ -1,7 +1,6 @@
 ITEM.name = "Pack of Screws"
 ITEM.description = "A worn packet of screws."
-ITEM.longdesc = "The wrapper is rubbed cloudy beneath its blue and yellow header. Little dark marks show where"
-	.. " the metal has pressed against it during storage."
+ITEM.longdesc = "Threads turn each screw's rotation into a controlled pull through its matching material. The packet keeps several small fasteners together instead of losing them among larger fittings. Size and head shape matter far more than their shared metallic appearance."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/illusion/eftcontainers/packofscrews.mdl"

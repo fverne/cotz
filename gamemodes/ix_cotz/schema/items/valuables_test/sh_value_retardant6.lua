@@ -1,7 +1,6 @@
 ITEM.name = "Reddish Fabric Tape"
 ITEM.description = "Two rolls of reddish woven tape with a loose strip curled beside them."
-ITEM.longdesc = "The exposed edges feel dry and dusty. The weave and packaging offer a small reminder of careful"
-	.. " work done with needles, shears and a clear space on a table."
+ITEM.longdesc = "Reddish fibres give this fabric tape a colour distinct from the grey and green stock beside it. A loose strip curls away from the rolls. The narrow format suits measured lengths rather than the broad panels cut from an ordinary cloth bolt."
 ITEM.valuableCategory = "protective textiles"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant6.mdl"

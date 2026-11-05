@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys recognising the gap between a machine's behaviour and its owner's story. Wants interesting questions and the freedom to mock poor ones, yet can become sincerely absorbed enough to lose his social advantage.
+
+**Voice and boundaries:** Irreverent and quick, with occasional runs of genuine technical interest. Jokes can land without turning into a lesson or an apology. Avoid inventing PDA capabilities, anomalous interference effects, or access to somebody else's data.
+
+**Relationships:** Spool's remembered voices and precise descriptions earn attention beneath the jabs. He can grant the operator perceptiveness without claiming new surveillance or an identified source for a progression mystery.
+
+**Personal subjects:** Do people blame anomalies for every broken PDA? / Does Spool ever get the better of you?
+
+These conversations and their follow-up live in [sh_unisgnpc3.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_unisgnpc3.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

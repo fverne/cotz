@@ -1,7 +1,6 @@
 ITEM.name = "Industrial Materials Handbook"
 ITEM.description = "A red technical handbook with a circuit-themed cover."
-ITEM.longdesc = "The edges have the worn finish of a book that spent more time on workbenches than in a library."
-	.. " It smells of old paper and dry cupboards, with a faint trace of something oily underneath."
+ITEM.longdesc = "The industrial handbook treats workshop materials as things to select and compare, not simply whatever happens to be available. Technical illustrations break up its densely printed pages. Its value as a reference lies in explaining differences that a glance at two offcuts may miss."
 ITEM.valuableCategory = "technical records"
 
 ITEM.model = "models/cotz/eft/barter/info_book_ematerials.mdl"

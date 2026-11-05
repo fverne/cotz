@@ -1,7 +1,6 @@
 ITEM.name = "Spartan Helmet"
 ITEM.description = "A high-end helmet with gasmask."
-ITEM.longdesc = "The severe face profile is as recognisable as any insignia. Beneath it, straps and padding still"
-	.. " need the same patient adjustment as less imposing equipment."
+ITEM.longdesc = "The Spartan combines a heavily protective helmet with a fitted respiratory face assembly. Several substantial components share a compact outline around the head. Its construction brings ballistic and environmental protection together in equipment noticeably more elaborate than an open shell and separate mask."
 ITEM.model = "models/shtokerbox/ground_headgear_sam.mdl"
 
 ITEM.price = 600000

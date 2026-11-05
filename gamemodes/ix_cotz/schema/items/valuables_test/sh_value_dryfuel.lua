@@ -1,7 +1,6 @@
 ITEM.name = "Solid Fuel Tablets"
 ITEM.description = "A shallow tray carrying four squat solid-fuel tablets."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The solid-fuel tablets are arranged in a shallow tray to keep them together during packing. Their compact, regular shapes suit field stores where loose fuel would be inconvenient. The tray belongs to the small-scale equipment of ration heating and portable cooking."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/illusion/eftcontainers/dryfuel.mdl"

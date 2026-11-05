@@ -1,7 +1,6 @@
 ITEM.name = "Industrial Filter Cartridge"
 ITEM.description = "A round green filter cartridge with a raised dark neck and stamped markings."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The industrial filter cartridge packages its working material in a round green body. A raised neck provides the connection to a larger unit. Its stamped markings are a better guide to compatibility than the familiar resemblance to other protective-equipment filters."
 ITEM.valuableCategory = "filtration"
 
 ITEM.model = "models/cotz/eft/barter/other_filter.mdl"

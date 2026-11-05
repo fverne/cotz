@@ -1,7 +1,6 @@
 ITEM.name = "Kobra sight"
 ITEM.description = "Russian hybrid sight. T type sight."
-ITEM.longdesc = "The broad lens sits above a distinctly utilitarian body. Its controls are made to be found by"
-	.. " touch, with no concern for looking elegant on a trader's shelf."
+ITEM.longdesc = "The Kobra carries an open aiming window above a substantial mounting assembly. Its angular profile is readily distinguished from a small tubular dot sight. The sight provides its own aiming reference while leaving much of the view around the window unobstructed."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

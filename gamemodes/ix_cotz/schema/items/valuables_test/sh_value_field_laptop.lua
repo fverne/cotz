@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Field Laptop"
 ITEM.description = "An open laptop with a dark screen, compact keyboard and a broad palm rest."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "The field laptop brings a keyboard and screen together in a folding enclosure. A broad palm rest suggests extended use rather than quick readings from a handheld instrument. The open machine has a dark display, leaving its installed software and stored work out of view."
 ITEM.valuableCategory = "portable computers"
 
 ITEM.model = "models/lostsignalproject/items/quest/laptop.mdl"

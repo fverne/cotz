@@ -1,7 +1,6 @@
 ITEM.name = "Floral Matchbox"
 ITEM.description = "A small cardboard matchbox with a raspberry illustration and pale paper edging."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "A raspberry illustration decorates the little matchbox, giving an ordinary household supply a cheerful wrapper. The cardboard sleeve keeps the tray closed during handling. It is the kind of packaging normally discarded without a second look once the last match is gone."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/illusion/eftcontainers/matches.mdl"

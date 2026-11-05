@@ -1,8 +1,6 @@
 ITEM.name = "Compact Solid-State Drive"
 ITEM.description = "A slim dark solid-state drive with small printed markings on the casing."
-ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
-	.. " where it came from or whether its records survived storage. It is the sort of small object that"
-	.. " can leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "The solid-state drive stores data electronically rather than on spinning platters. Its slim housing fits easily among much larger salvaged components. The outside identifies a storage device, while leaving its records and their condition out of view."
 ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_ssd.mdl"

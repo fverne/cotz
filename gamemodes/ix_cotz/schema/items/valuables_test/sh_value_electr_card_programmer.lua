@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Card Programmer"
 ITEM.description = "A compact dark card-programming device with a contactless symbol on its broad face."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The card programmer's contactless symbol marks where a compatible card would be presented. Behind the plain face sits specialised electronics for handling identification media. It is recovered hardware, without the software and configured installation that would give the device a particular access-control role."
 ITEM.valuableCategory = "control electronics"
 
 ITEM.model = "models/cotz/eft/quest/electr_card_programmer.mdl"

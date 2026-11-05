@@ -1,7 +1,6 @@
 ITEM.name = "Workshop Hammer"
 ITEM.description = "A worn wooden-handled hammer with a dark rectangular metal head."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The hammer's wooden handle absorbs the shape of a palm worn into its grip. A plain rectangular head provides the striking face. It is a workshop tool whose balance matters more than its finish, with very little about its construction hidden from view."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/lostsignalproject/items/misc/hammer.mdl"

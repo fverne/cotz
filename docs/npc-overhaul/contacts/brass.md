@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Takes satisfaction in competent habits and dislikes haste making routine work needlessly uncertain. His fairness survives irritation; he can recognise care even in a person whose stories he distrusts.
+
+**Voice and boundaries:** Measured, exact about what he actually handled, sparing with praise. Allow preference and embarrassment beyond counting. Ammunition anecdotes must not create a new inspection, storage, or repair service.
+
+**Relationships:** Arena Master's tales irritate him less when the organiser pays proper attention to a practical detail. Quartermaster remains distinct through responsibility for allocation rather than Brass's concern with what physically arrived.
+
+**Personal subjects:** What do you notice first when a hunting party returns? / Does Arena Master listen to you?
+
+These conversations and their follow-up live in [sh_brassnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_brassnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

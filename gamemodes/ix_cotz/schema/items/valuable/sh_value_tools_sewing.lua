@@ -1,7 +1,6 @@
 ITEM.name = "Zipped Sewing Pouch"
 ITEM.description = "A blue zippered sewing pouch with pale lettering across its face."
-ITEM.longdesc = "The exposed edges feel dry and dusty. The weave and packaging offer a small reminder of careful"
-	.. " work done with needles, shears and a clear space on a table."
+ITEM.longdesc = "The blue sewing pouch closes with a zip around a small textile body. Pale lettering identifies the broad face among similar equipment bags. It is a soft carrier for supplies whose individual pieces would be awkward to keep together without one."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/cotz/eft/barter/tools_sewing.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Haemostatic Dressing Packet"
 ITEM.description = "A small yellow-green medical packet with dark printed markings across its face."
-ITEM.longdesc = "Its edges are creased and the wrapper has the slightly shiny finish of handled packaging. It"
-	.. " looks like one of many small supplies that used to disappear into the compartments of a much"
-	.. " larger medical bag."
+ITEM.longdesc = "The haemostatic dressing is packaged as a small, individually labelled medical supply. Its yellow-green wrapper keeps the contents together and separates them from loose equipment. The sealed packet is an item of clinical stock, rather than an instruction for treating a particular wound."
 ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/usable/meds_hemostatic.mdl"

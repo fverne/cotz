@@ -1,7 +1,6 @@
 ITEM.name = "Power Cable"
 ITEM.description = "A dark power lead gathered into a loose loop."
-ITEM.longdesc = "Dust and pale handling marks break up the plain insulation. It has kept the stubborn curves of"
-	.. " long storage even when lifted by one of its plugs."
+ITEM.longdesc = "The power lead joins a mains plug to an equipment connector through a length of insulated cable. Coiling has left persistent curves along its body. Its compatibility lies at the ends, where a familiar-looking lead may still have the wrong fitting for a particular device."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/powercord.mdl"

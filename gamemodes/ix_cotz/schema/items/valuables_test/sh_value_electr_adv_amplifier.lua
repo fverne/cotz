@@ -1,8 +1,6 @@
 ITEM.name = "Signal Amplifier"
 ITEM.description = "A dark box-shaped amplifier with recessed sockets and a broad inset upper panel."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "An amplifier raises a signal before it is passed onward through a circuit. This unit encloses its electronics in a dark box with recessed sockets, protecting the connection points from casual knocks. Its exact application depends on the equipment and signal levels it was designed to accompany."
 ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/cotz/eft/barter/electr_adv_amplifier.mdl"

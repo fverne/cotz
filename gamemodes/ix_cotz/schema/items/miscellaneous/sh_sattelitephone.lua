@@ -1,8 +1,6 @@
 ITEM.name = "Sattelite Phone"
 ITEM.description = "A sattelite phone used by traders to make connection to their contacts and their storage."
-ITEM.longdesc = "The bulky handset is built for conversations that ordinary camp gossip cannot arrange. To a"
-	.. " trader, a reliable contact outside the perimeter may matter more than anything currently on the"
-	.. " shelves."
+ITEM.longdesc = "The satellite phone gives a trader a dedicated handset for reaching contacts and arranging stored stock. Its enclosed electronics make the link a piece of carried equipment rather than a conversation across a counter. The plain body conceals more business than its few controls suggest."
 ITEM.model = "models/illusion/eftcontainers/gphone.mdl"
 ITEM.width = 1
 ITEM.height = 1

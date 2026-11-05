@@ -1,8 +1,6 @@
 ITEM.name = "Long Heavy Equipment Case"
 ITEM.description = "A long heavy transit case with ribbed panels and contrasting details around its catches."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "The heavy equipment case spreads its catches along a long reinforced shell. Its proportions suit lengthy assemblies rather than loose personal belongings. The casing contributes substantial bulk of its own, reflecting a design concerned with protected transport before convenient carrying."
 ITEM.valuableCategory = "military cases"
 
 ITEM.model = "models/cotz/eft/containers/container_weapon_thicc.mdl"

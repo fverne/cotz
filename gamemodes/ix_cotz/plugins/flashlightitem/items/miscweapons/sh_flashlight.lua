@@ -1,7 +1,6 @@
 ITEM.name = "Handheld Flashlight"
 ITEM.description = "A sturdy flashlight used to light your way in the dark."
-ITEM.longdesc = "The grip is scuffed from being carried alongside tools and spare magazines. Its beam is welcome"
-	.. " in a cellar, though every lit doorway also tells someone where you are."
+ITEM.longdesc = "The handheld flashlight puts its reflector and lamp at the end of a sturdy grip. Its separate body makes the direction of the beam independent of a weapon's muzzle. The same portability means one hand remains occupied with the light itself."
 ITEM.model = "models/weapons/w_flashlight_zm.mdl"
 
 ITEM.height = 1

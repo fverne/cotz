@@ -1,7 +1,6 @@
 ITEM.name = "Blue Metal Parts Case"
 ITEM.description = "A blue-grey metal parts case with a small top handle and worn corners."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The blue-grey parts case carries a small handle above its metal lid. Its broad panels and worn corners suggest repeated movement between storage and a workbench. The closed shell keeps loose components together without offering the organisation of an open parts tray."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/upgrades/upgrw2.mdl"

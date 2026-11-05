@@ -1,8 +1,6 @@
 ITEM.name = "SJ12 Research Injector"
 ITEM.description = "A dark injector with a pale label and a deep red end cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "The SJ12 research injector's deep red cap breaks up a dark cylindrical outline. A pale wrapper carries the designation in a form that can be checked against an inventory. The container is easier to recognise by label than by shape."
 ITEM.valuableCategory = "research injectors b"
 
 ITEM.model = "models/cotz/eft/usable/syringe_sj12.mdl"

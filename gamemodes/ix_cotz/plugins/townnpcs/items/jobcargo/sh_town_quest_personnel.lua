@@ -1,8 +1,6 @@
 ITEM.name = "Personnel File Folder"
 ITEM.description = "A cardboard file folder with an emblem and printed wording on the front."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "The personnel folder's cover carries an emblem and printed wording for filing identification. Its cardboard body keeps a group of papers together without permanent binding. A personnel record belongs to an individual entry in a larger system, rather than to the cover alone."
 
 ITEM.model = "models/cotz/eft/info/note_folder_closed_cardboard_personal.mdl"
 

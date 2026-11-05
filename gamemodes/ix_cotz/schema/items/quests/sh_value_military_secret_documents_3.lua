@@ -1,8 +1,6 @@
 ITEM.name = "Military Records Folder III"
 ITEM.description = "A buff-coloured records folder with a stack of loose sheets beneath the front cover."
-ITEM.longdesc = "The exposed paper edges have softened, and a dry archive smell clings to the bundle. Detached"
-	.. " from its original filing system, it is difficult to place in any reliable sequence. A specialist"
-	.. " with the right background may be able to supply the missing context."
+ITEM.longdesc = "The third military records folder contains a stack of loose papers beneath its front cover. The thickness makes the simple cardboard binding look inadequate. Numbering distinguishes the bundle without revealing whether it continues an earlier sequence or collects a different set of records."
 
 ITEM.model = "models/cotz/eft/quest/military_secret_documents_3.mdl"
 

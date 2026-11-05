@@ -1,7 +1,6 @@
 ITEM.name = "Camera Battery Pack"
 ITEM.description = "A small black rectangular battery pack with recessed contacts along one edge."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "The camera battery pack has recessed contacts along one edge to meet a particular battery bay. Its compact rectangular case gives the cells a shape that is easy to insert and remove as one unit. Compatibility depends on those fittings, not simply on its size."
 ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/energy_accum.mdl"

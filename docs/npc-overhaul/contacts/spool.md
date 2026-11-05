@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Likes the familiar sound of people carrying on with ordinary life in the Zone. His appetite for company competes with a tired operator's need for a break and a quiet channel.
+
+**Voice and boundaries:** Sociable and slightly rambling, capable of impatience without withdrawing all warmth. Use remembered speech habits and specific interruptions rather than repeated warnings about silence. No anecdote establishes an actual broadcast feature.
+
+**Relationships:** Mute's economy of expression gives him relief from explaining a technical problem and very little conversational company afterwards. Respect and mild disappointment can occupy the same account.
+
+**Personal subjects:** Do people argue about artifacts over the radio? / What is talking to Mute like for you?
+
+These conversations and their follow-up live in [sh_spoolnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_spoolnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

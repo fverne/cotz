@@ -1,8 +1,6 @@
 ITEM.name = "Green Audio Cassette"
 ITEM.description = "A green audio cassette with a pale label and contrasting writing above its windows."
-ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
-	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
-	.. " equipment and a patient specialist to make sense of them."
+ITEM.longdesc = "Green plastic surrounds the cassette's pale label and paired reel windows. Contrasting writing provides a reference above them. The colour makes the carrier distinctive without giving the recording any meaning beyond what its label and playback can supply."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_12.mdl"
 

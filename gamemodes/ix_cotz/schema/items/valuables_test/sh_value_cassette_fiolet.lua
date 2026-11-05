@@ -1,8 +1,6 @@
 ITEM.name = "Violet Audio Cassette"
 ITEM.description = "A dark audio cassette with a broad violet label and contrasting printed markings."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "A broad violet label makes this audio cassette easy to pick out from a row of dark shells. The tape itself remains enclosed between the two reels. The colourful wrapper identifies the physical cassette more readily than it identifies any recording it may contain."
 ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/kek1ch/cassette_fiolet.mdl"

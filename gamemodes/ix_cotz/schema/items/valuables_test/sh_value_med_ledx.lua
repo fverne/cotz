@@ -1,9 +1,7 @@
 ITEM.name = "Skin Transilluminator"
 ITEM.description = "A dark medical instrument built around a broad looped housing, with a red detail near the"
 	.. " edge."
-ITEM.longdesc = "The surfaces are plain and the small branding is easy to overlook. Dust has gathered in the"
-	.. " sheltered recesses, giving an otherwise carefully designed device the tired look of equipment"
-	.. " left waiting for its technician."
+ITEM.longdesc = "The transilluminator's broad looped housing gives the instrument a recognisable shape among straight-handled examination tools. A red detail marks one edge of the dark body. The specialised illumination assembly belongs to clinical equipment rather than ordinary room lighting."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/barter/medical_transilluminator.mdl"

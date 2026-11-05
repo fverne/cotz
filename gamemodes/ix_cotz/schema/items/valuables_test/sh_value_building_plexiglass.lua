@@ -1,7 +1,6 @@
 ITEM.name = "Opaque Acrylic Blank"
 ITEM.description = "A thick pale rectangular blank with a cloudy surface and squared edges."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The acrylic blank is a piece of stock material awaiting a final shape. Its squared edges have no frame, mounting holes or finished trim. The cloudy surface obscures detail behind it, setting it apart from the clear glazing normally associated with this material."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/building_plexiglass.mdl"

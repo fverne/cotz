@@ -1,7 +1,6 @@
 ITEM.name = "EO-20 Gasmask"
 ITEM.description = "A modern gasmask"
-ITEM.longdesc = "A close-fitting facepiece leaves little room for a careless adjustment. The rubber retains its"
-	.. " own smell even after the exterior has been thoroughly cleaned."
+ITEM.longdesc = "The EO-20 gives its eye openings and breathing assembly a compact fitted body. Flexible sealing material sits behind the harder visible components. It is dedicated respiratory equipment, worn separately from a helmet rather than built into a complete enclosed headpiece."
 ITEM.model = "models/shtokerbox/ground_mask_sunrise2.mdl"
 
 ITEM.price = 30000

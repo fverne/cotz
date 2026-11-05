@@ -1,8 +1,6 @@
 ITEM.name = "Packaged Syringe"
 ITEM.description = "A syringe laid in a pale moulded packet beneath a clear covering."
-ITEM.longdesc = "The edges are a little scuffed, and the wrapper has picked up a fine film of storage dust. Its"
-	.. " simple outline is immediately recognisable, even though the little details on the packaging are"
-	.. " much less forthcoming."
+ITEM.longdesc = "A clear covering holds the syringe in a moulded packet. The wrapper keeps its separate fittings together while leaving the outline visible. It is a familiar piece of clinical stock whose packaging carries much of the information absent from the plain syringe body."
 ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/illusion/eftcontainers/medsyringe.mdl"

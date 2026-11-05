@@ -1,8 +1,6 @@
 ITEM.name = "AHF1-M Research Injector"
 ITEM.description = "A dark injector with a pale label and a yellow end cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "The AHF1-M injector uses a yellow end cap against a dark body. The narrow label carries the identification that the outer shape cannot provide. It is packaged research stock, visually distinct from the ordinary medical supplies carried in a field kit."
 ITEM.valuableCategory = "research injectors a"
 
 ITEM.model = "models/cotz/eft/usable/syringe_ahf1.mdl"

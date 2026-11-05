@@ -1,7 +1,6 @@
 ITEM.name = "Unassigned Identification Card"
 ITEM.description = "A flat piece of plastic for identification."
-ITEM.longdesc = "The blank fields wait for a name, an affiliation, and whatever authority someone chooses to put"
-	.. " behind them. In the Zone, a convincing introduction can be worth as much as a full magazine."
+ITEM.longdesc = "The identification card provides a rigid surface for a name and descriptive details. Its unassigned form has yet to attach those fields to a particular person. The plastic is durable enough for repeated handling, while the authority behind the words remains a separate matter."
 ITEM.model = "models/lostsignalproject/items/quest/keycard.mdl"
 
 ITEM.price = "1000"

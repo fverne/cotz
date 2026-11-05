@@ -1,8 +1,6 @@
 ITEM.name = "SJ9 Research Injector"
 ITEM.description = "A dark blue injector with a pale label and a blue end cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "The SJ9 injector has a blue cap on a darker blue body. Its pale label is the clearest reference when several similar tubes are packed together. Research stock arranged by designation depends on details that would be easy to overlook in a hurried search."
 ITEM.valuableCategory = "research injectors b"
 
 ITEM.model = "models/cotz/eft/usable/syringe_sj9.mdl"

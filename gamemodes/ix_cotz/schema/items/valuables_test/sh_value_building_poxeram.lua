@@ -1,7 +1,6 @@
 ITEM.name = "Epoxy Adhesive Tube"
 ITEM.description = "A small white tube of adhesive with red printing and a ribbed red cap."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The epoxy tube carries its adhesive in a narrow, easily packed container. A ribbed red cap protects the small opening, while instructions occupy the limited space on the wrapper. It belongs among workshop consumables whose usefulness is easy to overlook until an assembly needs bonding."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/building_poxeram.mdl"

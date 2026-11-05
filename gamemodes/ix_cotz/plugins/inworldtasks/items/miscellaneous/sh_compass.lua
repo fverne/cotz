@@ -1,7 +1,6 @@
 ITEM.name = "Compass"
 ITEM.description = "A small device that keeps track of its heading."
-ITEM.longdesc = "The dial is best read while standing still, with enough time to compare it against the route"
-	.. " ahead. Remembering the way back becomes difficult once every ruined farmhouse looks alike."
+ITEM.longdesc = "The compass gives a heading reference in a body small enough to carry with the rest of a field load. It identifies a direction rather than a destination. Comparing that reading with remembered landmarks is still part of finding the way back."
 ITEM.model = "models/lostsignalproject/items/quest/gps.mdl"
 ITEM.price = 700
 ITEM.flag = "A"

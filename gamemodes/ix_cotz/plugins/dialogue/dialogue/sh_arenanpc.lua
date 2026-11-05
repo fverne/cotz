@@ -1,12 +1,18 @@
 DIALOGUE.name = "Arena Master"
 DIALOGUE.townContact = "arena-master"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Sure, I have some arena supplies.")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"What arena supplies are you trading?",
+	"Take a look. Easier to choose before the spectators begin offering their expertise."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Welcome. Looking for a match, or just somewhere to watch people make ambitious decisions?",
+	response = "Welcome. Here for a bout, supplies, or a seat among the people who know exactly what the fighters should have done?",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"HealTopic",
 		"JoinArena",
 		"TutorialTopic",
@@ -17,10 +23,12 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else.",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Go on. We've time for another question.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"HealTopic",
 		"JoinArena",
 		"TutorialTopic",
@@ -31,13 +39,13 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you!",
-	response = "Enjoy the rest while you're getting it.",
+	statement = "I'll look in another time.",
+	response = "Enjoy the afternoon. Come back with an opinion; we're rarely short, but there's always room for another.",
 })
 
 DIALOGUE.addTopic("JoinArena", {
-	statement = "I would like to join the arena.",
-	response = "Sure.",
+	statement = "I'd like to challenge someone to an arena bout.",
+	response = "Let's see who's here to challenge.",
 	options = {
 		"BackTopic",
 	},
@@ -58,9 +66,9 @@ DIALOGUE.addTopic("JoinArena", {
 			end
 
 			if #availablePlayers <= 0 then
-				self.response = "No players to challenge."
+				self.response = "Nobody else nearby to challenge just now. You can wait or come back later."
 			else
-				self.response = "Players:"
+				self.response = "Here are the people nearby. Choose who you'd like to challenge:"
 
 				for _, player in pairs(availablePlayers) do
 					self.response = self.response .. "\n    " .. player:GetName()
@@ -133,8 +141,8 @@ DIALOGUE.addTopic("JoinArena", {
 })
 
 DIALOGUE.addTopic("HealTopic", {
-	statement = "Can you patch me up?",
-	response = "I can restore your health, so you can get ready for the arena.",
+	statement = "Can I get treatment here?",
+	response = "Let's look at the treatment options and their prices before you decide.",
 	IsDynamic = true,
 	options = {
 		"BackTopic",
@@ -191,15 +199,15 @@ DIALOGUE.addTopic("ConfirmHeal", {
 
 DIALOGUE.addTopic("NotEnoughMoneyHeal", {
 	statement = "",
-	response = "Not enough money for that.",
+	response = "You haven't enough for that treatment. Leave the purchase for now.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("TutorialTopic", {
-	statement = "What do you do?",
-	response = "Well, I'm the arena master. I facilitate fights.",
+	statement = "How do you run the arena?",
+	response = "I arrange the bouts and try to get both fighters into the same contest they thought they agreed to. You'd be surprised how much conversation that can take. The spectators need less encouragement. Ask about entering or the rules before you commit; it's an easier discussion while everyone's still standing here.",
 	options = {
 		"TutorialTopic1",
 		"TutorialTopic2",
@@ -209,8 +217,8 @@ DIALOGUE.addTopic("TutorialTopic", {
 })
 
 DIALOGUE.addTopic("TutorialTopicBack", {
-	statement = "Alright, let me ask you something else.",
-	response = "Hmm?",
+	statement = "Another question about the arena.",
+	response = "Certainly. Better to ask now than argue about it afterwards.",
 	options = {
 		"TutorialTopic1",
 		"TutorialTopic2",
@@ -220,29 +228,16 @@ DIALOGUE.addTopic("TutorialTopicBack", {
 })
 
 DIALOGUE.addTopic("TutorialTopic1", {
-	statement = "How do I fight someone?",
-	response = (
-		"You can challenge anyone near us, and you both have to "
-		.. "confirm the fight after inspecting their gear. If you wait "
-		.. "too long, I assume you chicken out and the challenge is "
-		.. "no longer valid."
-	),
+	statement = "How do I arrange a bout?",
+	response = "Ask me to challenge someone nearby. You both get to inspect the other's equipment before confirming. Take a proper look; an enthusiastic introduction isn't a description of a loadout. The challenge expires if you leave it too long. You can decide against a match. I'd rather you did it here than spent the first exchange discovering you had entirely different ideas.",
 	options = {
 		"TutorialTopicBack",
 	},
 })
 
 DIALOGUE.addTopic("TutorialTopic2", {
-	statement = "What are the rules?",
-	response = (
-		"Well, its up to you to decide it. I just facilitate the "
-		.. "fights. But there are some basic rules. \n\n - The fight "
-		.. "ends when someone dies. \n - You have three minutes before "
-		.. "the match ends in a draw. \n - I will make sure your stuff "
-		.. "doesn't take damage if you are shot at in the arena. Your "
-		.. "guns, however, still get dirty from the shooting you are "
-		.. "doing."
-	),
+	statement = "What rules should I know before entering?",
+	response = "Agree on the contest with your opponent, but these limits apply: the bout ends when one fighter dies, and the three-minute time limit ends an unfinished match in a draw. Equipment is protected from damage caused by the other fighter in the arena. Firing still dirties your weapon. Don't count on the match to clean it for your next expedition. And settle any special understanding before you both confirm; I have heard quite enough inventive recollections afterwards.",
 	options = {
 		-- "TutorialTopic2_1",
 		-- "TutorialTopic2_2",
@@ -521,24 +516,31 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Can you tell who is going to win?",
-	response = (
-		"Sometimes. Then the favourite does something wonderfully stupid and everyone gets an afternoon to "
-		.. "remember. Watch the quiet one while the loud one explains how easy it will be. Don't put too much "
-		.. "faith in that either; some people are quiet because they have absolutely no plan. That's why we "
-		.. "hold the match. Are you considering entering, or would you like to become an expert beside the rest "
-		.. "of us first?"
-	),
+	statement = "Can you usually pick the winner?",
+	response = "I can usually pick somebody to be wrong about. Quiet fighter, patient feet, looks promising; turns out they're still deciding which way to go. Loud one makes a ridiculous first move, then adapts beautifully. That's the pleasure of watching. If their reputation settled it, we could save everyone the ammunition and let the audience compare stories. Though I suppose the argument would last longer than a bout.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What makes a fighter worth watching?",
-	response = (
-		"They adapt. First idea fails and you can see them considering the next. I enjoy that moment. They "
-		.. "may still lose, but they've given the other person a contest. Then they have to listen while every "
-		.. "spectator explains what they should have done. If they can survive that conversation without "
-		.. "demanding another bout immediately, there's hope for them."
-	),
+	statement = "What keeps a losing fighter interesting?",
+	response = "They try something after the first idea fails. You see the moment they've noticed, then they have to do it with another person interfering. I like that. Afterwards they get a whole audience explaining how obvious the answer was. Handle that without demanding an immediate rematch and they've done something else worth watching. Doesn't stop the spectators talking, unfortunately.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Are the spectators more trouble than the fighters?",
+	response = "They've more spare breath. You can be discussing a perfectly decent bout and somebody begins explaining how he'd have handled a bloodsucker. Wonderful creature for an argument: absent, difficult to interview, never complains about the account. I like hearing them, though. You learn who came to watch the fight and who came because the camp was getting quiet. Sometimes the second lot have the better evening.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Why does Jitters sound annoyed when your name comes up?",
+	response = "He hears the end of a story after the applause has stopped. I hear it while everyone's still enjoying the clever part. We do have different afternoons. He once asked me to finish describing a match while he washed a fighter's blood off his hands. I rather lost my place. No, we aren't enemies. I'd prefer him at a table with a drink and fewer reasons to look at me like that.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Do you ever get tired of the noise?",
+	response = "Afterwards, when one spectator is still explaining the first exchange. Everybody else has eaten, the subject has changed twice, and he's moving cups around to show us the footwork. I make a very poor audience when my supper's involved. Apparently this is hypocrisy.",
 	options = {"BackTopic"},
 })

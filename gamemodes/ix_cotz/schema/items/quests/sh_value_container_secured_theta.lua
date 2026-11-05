@@ -1,8 +1,6 @@
 ITEM.name = "Strapped Transit Case"
 ITEM.description = "A rounded equipment case with broad straps and contrasting lid strips."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "Broad straps wrap around the rounded transit case. Contrasting strips mark the lid beneath them. The visible fastening arrangement makes the closure part of the case's outline, rather than hiding every fitting inside a smooth shell."
 
 ITEM.model = "models/cotz/eft/containers/container_secured_theta.mdl"
 

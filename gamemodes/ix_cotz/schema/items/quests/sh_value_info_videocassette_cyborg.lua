@@ -1,8 +1,6 @@
 ITEM.name = "Labelled Video Cassette"
 ITEM.description = "A dark video cassette with twin spool windows and a printed label."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "The video cassette's printed label gives a title to an otherwise familiar dark shell. Two windows expose the recording reels without opening the case. Its contents belong to a playback format that requires more equipment than a simple paper document."
 
 ITEM.model = "models/cotz/eft/barter/info_videocassette_cyborg.mdl"
 

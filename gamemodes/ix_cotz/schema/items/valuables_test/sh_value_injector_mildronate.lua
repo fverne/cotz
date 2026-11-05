@@ -1,8 +1,6 @@
 ITEM.name = "Mildronate Research Injector"
 ITEM.description = "A pale blue injector with a printed label and a light-coloured cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "Pale blue plastic distinguishes the Mildronate research injector from the darker tubes in the same family. Its light cap and printed wrapper keep the unit identifiable while packed with similar specimens. The research designation is not a field treatment instruction."
 ITEM.valuableCategory = "research injectors a"
 
 ITEM.model = "models/cotz/eft/usable/syringe_mildronate.mdl"

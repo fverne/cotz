@@ -1,8 +1,6 @@
 ITEM.name = "Marked Research Case"
 ITEM.description = "A dark reinforced case covered in pale symbols and contrasting trim."
-ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
-	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
-	.. " with more history than explanation."
+ITEM.longdesc = "Pale symbols cover the research case's dark reinforced lid. Contrasting trim makes the markings look deliberately arranged rather than added as ordinary shipping notes. The case supplies a recognisable exterior without explaining the significance of the symbols or the material inside."
 
 ITEM.model = "models/cotz/eft/containers/container_cultic_kappa.mdl"
 

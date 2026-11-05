@@ -1,8 +1,6 @@
 ITEM.name = "Gas Torch Assembly"
 ITEM.description = "A gas canister with a torch head, a small control knob and a narrow nozzle."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The gas torch screws a narrow working head onto a compact fuel canister. A small control knob sits close to the nozzle. Its arrangement belongs to bench work requiring a localised flame, packaged as a portable assembly instead of a large fixed installation."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/spec/key_labyrinth_torch.mdl"

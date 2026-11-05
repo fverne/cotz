@@ -1,7 +1,6 @@
 ITEM.name = "Insulated Flathead Screwdriver"
 ITEM.description = "A flathead screwdriver with a dark insulated handle and a narrow metal shaft."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "A dark insulated handle surrounds the screwdriver's narrow metal shaft. The flat tip is intended for straight screw slots. Its plain appearance makes the size of the working end more important than the finish or colour of the handle."
 ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/cotz/eft/barter/tools_screwdriver_flat.mdl"

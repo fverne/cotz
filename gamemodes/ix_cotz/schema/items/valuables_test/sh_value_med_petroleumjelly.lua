@@ -1,8 +1,6 @@
 ITEM.name = "Petroleum Jelly Tin"
 ITEM.description = "A shallow round tin with an orange printed lid and a dark rim."
-ITEM.longdesc = "The lid carries more advertising than seems necessary for such a modest container. It smells"
-	.. " faintly of old ointment and dust, and the edge leaves a greasy impression on whatever it is"
-	.. " packed against."
+ITEM.longdesc = "The petroleum jelly tin has a wide opening beneath its orange lid. That shallow format gives access to a thick substance more readily than a narrow bottle neck would. It belongs among small household and clinical consumables rather than specialised instruments."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/usable/vaselin.mdl"

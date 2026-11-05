@@ -1,7 +1,6 @@
 ITEM.name = "Rechargeable Cell"
 ITEM.description = "A green cylindrical rechargeable cell with a pale printed label around its body."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "The rechargeable cell is wrapped in a green sleeve carrying its electrical identification. A familiar cylindrical shape does not make every cell interchangeable. The small printed rating is the useful distinction when the battery is separated from the equipment it once supplied."
 ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/energy_greenbat.mdl"

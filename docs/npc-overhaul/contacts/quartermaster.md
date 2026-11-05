@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants practical preparation taken seriously while retaining a few private preferences of his own. He dislikes being made a symbol of perfect discipline and rarely invites conversation about his life outside the current work.
+
+**Voice and boundaries:** Clipped and controlled, with precise concessions rather than sudden confession. A little dry humour can escape before he returns to business. Personal opinions about equipment do not change catalogue access or confer an exception.
+
+**Relationships:** Suture's close observation is useful and occasionally unwelcome when it turns on his own equipment. Boss receives practical objections before a decision is final, without implying a new disagreement or operation.
+
+**Personal subjects:** Is there anything in your own kit you keep out of habit? / Does Suture inspect your equipment too?
+
+These conversations and their follow-up live in [sh_unisgnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_unisgnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

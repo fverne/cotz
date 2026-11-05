@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants a functioning operation and enough quiet to consider a decision before everyone offers an opinion. He can enjoy other people's company, but his authority makes casual remarks carry more weight than he intends.
+
+**Voice and boundaries:** Direct, controlled, dryly amused when appropriate. Keep disclosures bounded. Small social mistakes can humanise him without manufacturing remorse, a secret mission, a changed allegiance, or an operational outcome.
+
+**Relationships:** Smartass is easier to appreciate when a concrete problem has caught his interest. Boss can recognise that interest without giving away restricted material or treating the specialist's irreverence as consequence-free intimacy.
+
+**Personal subjects:** Do you ever sit with the others between expeditions? / Does Smartass ever stop performing?
+
+These conversations and their follow-up live in [sh_unisgnpc2.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_unisgnpc2.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

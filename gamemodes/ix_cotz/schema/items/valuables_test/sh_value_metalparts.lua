@@ -1,8 +1,6 @@
 ITEM.name = "Metal Spare Parts"
 ITEM.description = "An assortment of rusty metal fittings."
-ITEM.longdesc = "An untidy collection of metal fittings, threaded pieces and washers. Rust has given the"
-	.. " exposed surfaces a patchwork of orange and brown, while darker grime remains in the"
-	.. " recesses. They knock together with a heavy, irregular clatter whenever the bundle is moved."
+ITEM.longdesc = "Rust marks the threads, washers and irregular fittings in this collection of spare metal parts. Different shapes have been gathered together rather than sorted by size. Their practical identity lies in dimensions and matching surfaces, not in the fact that they share a storage pile."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/cotz/eft/barter/building_metalparts.mdl"

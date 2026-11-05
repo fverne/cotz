@@ -1,7 +1,6 @@
 ITEM.name = "Machete"
 ITEM.description = "A machete made for cutting."
-ITEM.longdesc = "The long edge is marked by sharpening and hard use. Its grip has been wrapped to suit a previous"
-	.. " owner's hand, leaving a tacky seam beneath the thumb."
+ITEM.longdesc = "The machete carries a long cutting edge ahead of a compact grip. Its broad blade belongs to clearing and rough cutting rather than fine knife work. The length gives the tool a conspicuous outline when worn beside the rest of a field load."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_machete.mdl"
 ITEM.class = "tfa_nmrih_machete"
 ITEM.weaponCategory = "secondary"

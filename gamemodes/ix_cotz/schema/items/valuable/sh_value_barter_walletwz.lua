@@ -1,8 +1,6 @@
 ITEM.name = "Printed Pocket Wallet"
 ITEM.description = "A dark folded wallet with large contrasting print and a small fastening stud."
-ITEM.longdesc = "The small surfaces carry the dull polish of repeated handling. A little dust remains in the"
-	.. " sheltered edges. It is an unremarkable possession until someone notices it is missing, or"
-	.. " recognises whose pocket it used to live in."
+ITEM.longdesc = "Large print covers the pocket wallet's dark outer face. A small stud holds the folded body closed around flat compartments. The bold finish makes a commonplace personal possession easier to recognise than its anonymous shape would suggest."
 ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/containers/barter_walletwz.mdl"

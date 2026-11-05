@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Gas Cylinder"
 ITEM.description = "A stained metal cylinder with a protective ring around its upper valve area."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "The gas cylinder's upper ring takes the knocks that would otherwise reach its valve. A heavy metal body accounts for most of the container's bulk. Cylinders of this kind belong with labelled industrial equipment, where the fittings and contents can be identified together."
 ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/lostsignalproject/items/misc/balloon_poison_gas.mdl"

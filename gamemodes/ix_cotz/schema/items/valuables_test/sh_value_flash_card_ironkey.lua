@@ -1,8 +1,6 @@
 ITEM.name = "Metal Flash Drive"
 ITEM.description = "A slim metal USB drive with a small status window near one end."
-ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
-	.. " where it came from or whether its records survived storage. It is the sort of small object that"
-	.. " can leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "A metal shell surrounds the flash drive's small storage board. The narrow status window is its only obvious display feature. It is a compact data carrier whose contents cannot be inferred from the heavier, more substantial feel of its casing."
 ITEM.valuableCategory = "flash media"
 
 ITEM.model = "models/cotz/eft/info/flash_card_ironkey.mdl"

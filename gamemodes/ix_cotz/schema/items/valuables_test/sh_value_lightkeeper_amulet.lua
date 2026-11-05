@@ -1,8 +1,6 @@
 ITEM.name = "Tooth Pendant"
 ITEM.description = "A looped cord carrying several pale tooth-shaped pieces and small dark fittings."
-ITEM.longdesc = "The small surfaces carry the dull polish of repeated handling. A little dust remains in the"
-	.. " sheltered edges. It is an unremarkable possession until someone notices it is missing, or"
-	.. " recognises whose pocket it used to live in."
+ITEM.longdesc = "Several pale teeth or tooth-shaped pieces hang from the pendant's cord. Small dark fittings keep them arranged as an ornament rather than loose specimens. Whatever significance the wearer gave it is not explained by the materials alone."
 ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/spec/lightkeeper_amulet.mdl"

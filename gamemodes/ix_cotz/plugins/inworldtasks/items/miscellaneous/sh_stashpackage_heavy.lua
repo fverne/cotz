@@ -1,7 +1,6 @@
 ITEM.name = "Heavy Package"
 ITEM.description = "A small package."
-ITEM.longdesc = "The wrapping is stretched tight around a dense load. Carrying it for any distance soon makes the"
-	.. " promised payment more interesting than whatever might be inside."
+ITEM.longdesc = "The heavy courier package concentrates a dense load into a relatively compact wrapping. Its ten-kilogram mass makes the small outward size misleading. It is transport cargo, with the work of carrying it kept separate from any interest in what the recipient has ordered."
 ITEM.model = "models/lostsignalproject/items/repair/repair_helmet_repair.mdl"
 ITEM.price = 0
 ITEM.flag = "A"

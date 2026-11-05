@@ -1,7 +1,6 @@
 ITEM.name = "Very Heavy Package"
 ITEM.description = "A small package."
-ITEM.longdesc = "Its awkward density makes every lift a deliberate effort. Whoever packed it seems to have given"
-	.. " more thought to keeping the contents together than to the person carrying them."
+ITEM.longdesc = "The very heavy courier package gathers fifteen kilograms into one tightly packed consignment. Its broad wrapping keeps the load together without making it convenient to carry. Every lift reveals more about its weight than the closed package reveals about its contents."
 ITEM.model = "models/lostsignalproject/items/repair/repair_helmet_repair.mdl"
 ITEM.price = 0
 ITEM.flag = "A"

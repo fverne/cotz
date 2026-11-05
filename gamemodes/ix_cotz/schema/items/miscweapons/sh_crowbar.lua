@@ -1,7 +1,6 @@
 ITEM.name = "Crowbar"
 ITEM.description = "A crowbar for prying open objects."
-ITEM.longdesc = "The hooked end is polished bright where it has scraped against stubborn edges. It is a familiar"
-	.. " companion to anyone picking through buildings whose doors stopped opening years ago."
+ITEM.longdesc = "The crowbar uses a long steel shaft to put leverage behind a hooked working end. Wear follows the edges that meet gaps and stubborn fittings. Carried as a weapon, it remains visibly a demolition tool with a very direct purpose."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_crowbar.mdl"
 ITEM.class = "tfa_nmrih_crowbar"
 ITEM.weaponCategory = "secondary"

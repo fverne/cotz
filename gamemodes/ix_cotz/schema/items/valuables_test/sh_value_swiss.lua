@@ -1,7 +1,6 @@
 ITEM.name = "Pocket Tool Knife"
 ITEM.description = "A red folding pocket tool with a pale cross emblem and several closed metal implements."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "Several small implements fold into the red pocket tool's handle. A pale cross emblem identifies the familiar style before any blade is opened. Its design gives up the reach and leverage of larger tools in exchange for keeping several shapes in one pocket."
 ITEM.valuableCategory = "cutting tools"
 
 ITEM.model = "models/lostsignalproject/items/misc/swiss.mdl"

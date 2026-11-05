@@ -1,7 +1,6 @@
 ITEM.name = "Guitar"
 ITEM.description = "An acoustic guitar."
-ITEM.longdesc = "The finish has dulled where an arm rests against the body. Around a fire, a tune that everyone"
-	.. " half-remembers can make strangers feel like familiar company for a few minutes."
+ITEM.longdesc = "The acoustic guitar's hollow wooden body amplifies the vibration of its strings. A worn patch marks where an arm rests during playing. Around a campfire it carries something other than instructions or warnings, provided someone remembers more than the first few chords."
 ITEM.model = "models/lostsignalproject/items/misc/guitar.mdl"
 ITEM.class = "guitar"
 ITEM.weaponCategory = "primary"

@@ -1,8 +1,6 @@
 ITEM.name = "Pocket Survival Guide"
 ITEM.description = "A thin illustrated survival handbook with large contrasting lettering on the cover."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "The survival guide condenses practical subjects into a volume small enough for a pocket. Illustrations let the reader find a topic without working through every paragraph. A printed reference needs no screen or battery, although it still needs enough light to read the page."
 ITEM.valuableCategory = "technical records"
 
 ITEM.model = "models/lostsignalproject/items/misc/guide.mdl"

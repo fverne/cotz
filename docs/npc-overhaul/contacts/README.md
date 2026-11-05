@@ -16,6 +16,17 @@ Each contact has an explicitly authored introduction, two narrow branches, and a
 Introduction and conclusion lengths vary by contact; runtime sections show the actual structure.
 Per-contact runtime sections list the actual branch nodes; equipment cross-links remain mandatory.
 
+The November personality expansion adds a **Personality and personal conversation** section to every
+profile, including the linked Old Timer document. It records motivations, voice boundaries, relationship
+texture, and two new personal subjects with a contextual follow-up. These additions concern everyday life
+in the Zone and are labelled as newly authored characterization. Existing history and progression
+disclosures remain intact; the linked conversation files own the new in-game replies.
+
+The remaining non-progression conversations have also been revised against these profiles, including
+ordinary greetings, trade and service wording, background, advice, and existing relationship exchanges.
+These edits preserve the existing conversation links and gameplay checks. Work and progression dialogue
+are excluded from this pass.
+
 Exactly half the steps in these new drafts use ordinary hand-ins or job checkpoints, alternating
 hand-in and tracker across those slots. The other half are authored field or competitive objectives.
 This is an initial authoring pattern, not a requirement to preserve rigid alternation in final play.

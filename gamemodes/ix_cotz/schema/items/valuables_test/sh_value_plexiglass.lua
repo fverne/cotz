@@ -1,7 +1,6 @@
 ITEM.name = "Plexiglass Sheet"
 ITEM.description = "A thick sheet of plexiglass."
-ITEM.longdesc = "Handling marks collect across the flat faces, and the edges feel rougher than the centre."
-	.. " Nothing written on it explains which opening or machine it once belonged to."
+ITEM.longdesc = "The thick plexiglass sheet presents a flat surface without the frame of a finished window. Its edges expose the material's full depth. A raw sheet is easier to recognise as glazing stock than to assign to a particular opening or machine."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/illusion/eftcontainers/plexiglass.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Plain Envelope"
 ITEM.description = "A pale paper envelope with a folded triangular flap."
-ITEM.longdesc = "A little dust remains along the folds and edges. It has the stale smell of paper kept somewhere"
-	.. " damp and then allowed to dry. The object offers a small, incomplete reminder that somebody once"
-	.. " expected to come back for their things."
+ITEM.longdesc = "The envelope's folded flap closes a pocket large enough for a letter or a few flat papers. Its plain face leaves room for an address and postage. Until it is filled and marked, it remains stationery rather than correspondence with an identifiable sender."
 ITEM.valuableCategory = "office records"
 
 ITEM.model = "models/cotz/eft/quest/envelope.mdl"

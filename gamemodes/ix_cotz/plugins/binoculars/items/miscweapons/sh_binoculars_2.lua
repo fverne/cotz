@@ -1,7 +1,6 @@
 ITEM.name = "Explorer Binoculars"
 ITEM.description = "An older pair of binoculars."
-ITEM.longdesc = "The finish has worn away where fingers grip the barrels. There is still enough clarity in the"
-	.. " glass to study a route from cover before committing to open ground."
+ITEM.longdesc = "The Explorer glasses use an older binocular arrangement with a central hinge and paired eyepieces. The body is compact enough for a modest field load. Their purpose is straightforward observation, with fewer elaborate fittings than the more expensive modern instruments."
 ITEM.model = "models/weapons/w_binoculars_uk.mdl"
 
 ITEM.height = 1

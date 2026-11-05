@@ -1,7 +1,6 @@
 ITEM.name = "Foreign Ammunition Box"
 ITEM.description= "A box containing some less common types of ammunition, mostly of foreign origin."
-ITEM.longdesc = "Unfamiliar shipping marks crowd the outer panels. Such deliveries usually arrive by a longer and"
-	.. " less openly discussed route than local surplus."
+ITEM.longdesc = "The foreign ammunition box packages less usual loads as one consignment. Their original markings remain more useful than the plain outer carton for identifying the stock. It belongs to a supply exchange where the offered contents can be checked before the package changes hands."
 ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
 
 ITEM.width = 2

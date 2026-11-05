@@ -1,8 +1,6 @@
 ITEM.name = "Demolition Stock Crate"
 ITEM.description = "A small military crate with a reinforced lid and pale stencilled side markings."
-ITEM.longdesc = "Its outer surfaces carry the dust and handling marks of neglected stores. There is no matching"
-	.. " issue record or service history. It belongs on a specialist's inventory and inspection bench"
-	.. " before anyone can make sense of its condition or origin."
+ITEM.longdesc = "Pale stencilling identifies the demolition stock crate's reinforced sides. Its plain military packaging gives little outward detail about the consignment. The shell belongs to specialist ordnance stores, where markings and inventory records matter more than a familiar box shape."
 ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/lostsignalproject/items/misc/dynamite.mdl"

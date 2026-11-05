@@ -1,8 +1,6 @@
 ITEM.name = "Survey Map Bundle"
 ITEM.description = "A folded bundle of printed maps with uneven edges and a narrow binding strip."
-ITEM.longdesc = "The folds feel rough from repeated handling, and the surface smells faintly of dry paper and old"
-	.. " cupboards. It has the look of material kept for reference through several changes of plan. Its"
-	.. " markings would need to be checked against records that are not attached to it."
+ITEM.longdesc = "The survey maps have been folded into a single bound bundle. Their uneven edges make individual sheets awkward to separate without opening the whole set. Maps are most useful when their scale, dates and markings can be compared, not simply when the terrain looks familiar."
 ITEM.valuableCategory = "field records"
 
 ITEM.model = "models/cotz/eft/barter/info_maps.mdl"

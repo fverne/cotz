@@ -1,8 +1,6 @@
 ITEM.name = "Advanced Controller Board"
 ITEM.description = "A long circuit board carrying large chips and paired red terminal blocks."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The controller board combines large chips with paired terminal blocks for external wiring. That layout puts delicate processing components beside connections large enough to handle individually. It is the exposed centre of a control assembly, missing the enclosure and labelled controls of the finished machine."
 ITEM.valuableCategory = "control electronics"
 
 ITEM.model = "models/cotz/eft/barter/electr_adv_controller.mdl"

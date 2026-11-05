@@ -1,7 +1,6 @@
 ITEM.name = "Glowing Ceramic Plate"
 ITEM.description = "A ceramic plate with a faint glow, could absorb most impacts against a body armor."
-ITEM.longdesc = "The light is easiest to notice in a dark room, where it makes the surrounding fabric seem"
-	.. " slightly discoloured. Its origin is the subject of better stories than explanations."
+ITEM.longdesc = "A faint glow distinguishes the ceramic plate from conventional armour inserts. The light is most apparent around the otherwise ordinary covered panel in a dark room. Whatever produced that appearance has also left a particularly heavy piece of protective equipment."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic8.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

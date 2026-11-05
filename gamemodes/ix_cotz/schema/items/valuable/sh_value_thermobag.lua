@@ -1,8 +1,6 @@
 ITEM.name = "Insulated Sample Carrier"
 ITEM.description = "A blue insulated carrier with a top handle and a pale front panel."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "Insulation adds thickness to the sample carrier's blue walls. A top handle keeps the load upright, while a pale front panel leaves room for identification. The container was made around controlled transport, not the open access of an ordinary shopping bag."
 ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/illusion/eftcontainers/thermobag.mdl"

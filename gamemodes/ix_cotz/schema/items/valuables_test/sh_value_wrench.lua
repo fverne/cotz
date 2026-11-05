@@ -1,8 +1,6 @@
 ITEM.name = "Open-Ended Wrench"
 ITEM.description = "A metal wrench with an open head and a ring head."
-ITEM.longdesc = "Its surface is worn smooth in the middle and darker around the recesses. Several small scratches"
-	.. " cross the stamped markings, leaving just enough to suggest that somebody once cared which size"
-	.. " they were reaching for."
+ITEM.longdesc = "The wrench combines an open jaw with a ring head at the opposite end. Both are fixed shapes, giving the tool a slimmer outline than an adjustable wrench. Its stamped size is the useful detail when several similar spanners lie together on a bench."
 ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/illusion/eftcontainers/wrench.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Mercenary Insignia"
 ITEM.description = "A rectangular insignia with a large blue central emblem and a contrasting border."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "A blue emblem occupies most of the Mercenary patch's rectangular face. The border provides a clean edge against a larger garment. It is a detachable uniform detail, capable of outlasting the clothing to which it was sewn."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_merc.mdl"
 

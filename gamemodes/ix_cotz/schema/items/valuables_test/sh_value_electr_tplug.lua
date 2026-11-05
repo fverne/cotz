@@ -1,7 +1,6 @@
 ITEM.name = "Three-Way Socket Adapter"
 ITEM.description = "A red three-way socket adapter with round sockets and exposed plug pins."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Three round sockets share the adapter's small red moulding. A single set of plug pins sits on the opposite side. It is a familiar household fitting made conspicuous by its colour and by the amount of cable that would normally gather around it."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/electr_tplug.mdl"

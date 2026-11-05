@@ -1,7 +1,6 @@
 ITEM.name = "Cylindrical Battery Assembly"
 ITEM.description = "A paired cylindrical battery assembly held beneath a labelled rectangular top plate."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Two cylindrical cells sit beneath the battery assembly's labelled upper plate. The shared mounting holds them in a fixed arrangement for installation. It is bulkier than a loose household battery, with connections intended for a particular equipment layout."
 ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/energy_cyclon.mdl"

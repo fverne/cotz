@@ -31,7 +31,8 @@ ix.util.Include = function(path)
 	local isLocked = path:find("sh_locked.lua", 1, true)
 	local rootOptions
 	if isNew then
-		rootOptions = {"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic", "GOODBYE"}
+		rootOptions = {"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic",
+			"InterestZoneLifeTopic", "InterestTownRelationsTopic", "GOODBYE"}
 	elseif isOld then
 		rootOptions = {"TradeTopic", "RepairItems", "AboutWorkTopic", "AboutProgression", "BackgroundTopic",
 			"TutorialTopic", "GOODBYE"}
@@ -71,7 +72,8 @@ local newTree = ix.dialogue.list.newcontact.tree
 check(newTree.QuestionsTopic.statement == "Can I ask you something?", "flavour submenu has the requested label")
 for _, rootID in ipairs({"GREETING", "BackTopic"}) do
 	check(hasOption(newTree[rootID], "QuestionsTopic"), "both main menus link to questions")
-	for _, topicID in ipairs({"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic"}) do
+	for _, topicID in ipairs({"SpecialtyTopic", "BackgroundTopic", "AdviceTopic", "ContactsTopic",
+		"InterestZoneLifeTopic", "InterestTownRelationsTopic"}) do
 		check(not hasOption(newTree[rootID], topicID), "informational topics leave the root")
 		check(hasOption(newTree.QuestionsTopic, topicID), "informational topics remain reachable")
 		check(hasOption(newTree[topicID], "QuestionsBackTopic"), "flavour replies return to the question list")

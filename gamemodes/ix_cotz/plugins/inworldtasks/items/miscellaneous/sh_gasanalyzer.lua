@@ -1,8 +1,6 @@
 ITEM.name = "Gas Analyzer"
 ITEM.description = "A small device for measuring fluctuations in pressure, as well as gaseous impurities. The internal memory can store a couple of GPS-positions, letting the research team know where to go."
-ITEM.longdesc = "Grime gathers around the intake and the seams of the housing. Measurements taken out in the"
-	.. " field are only useful if the researchers can connect them to the places where they were"
-	.. " recorded."
+ITEM.longdesc = "The gas analyser combines an enclosed measuring assembly with field-recording functions. Its intake and housing belong to an instrument carried to several locations rather than left on a laboratory bench. Recording positions with the observations gives the research team a way to interpret where each result came from."
 ITEM.model = "models/illusion/eftcontainers/gasanalyser.mdl"
 ITEM.price = 0
 ITEM.flag = "A"

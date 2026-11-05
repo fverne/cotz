@@ -1,8 +1,6 @@
 ITEM.name = "Dark-Capped Research Tube"
 ITEM.description = "A long tinted research tube with dark caps at both ends."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "Dark caps close both ends of the tinted research tube. The long container protects a narrow enclosed space rather than the flat contents of a document case. Its exterior provides a transport form without exposing the research material or identifying its handling history."
 
 ITEM.model = "models/cotz/eft/quest/tg_vi_24.mdl"
 

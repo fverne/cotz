@@ -1,7 +1,6 @@
 ITEM.name = "Steel Frame"
 ITEM.description = "A steel frame to allow you to carry more. Makes you much more vulnerable to electric and heat anomalies."
-ITEM.longdesc = "The welded joints favour strength over elegance. Whoever made it expected the wearer to value a"
-	.. " dependable support more than a tidy finish."
+ITEM.longdesc = "The steel frame uses welded braces to support a heavier carried load through the suit's mounting points. Its own mass is readily apparent beside the aluminium version. The additional capacity is balanced by weight and reduced protection against anomalies."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic9.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 2

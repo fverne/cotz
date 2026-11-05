@@ -2,8 +2,7 @@ ITEM.name = "Exoskeleton"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
-ITEM.longdesc = "The external frame turns the silhouette of its wearer into something almost industrial. Hinges,"
-	.. " straps, and reinforced joints make getting ready a small maintenance job in itself."
+ITEM.longdesc = "The exoskeleton combines body armour with a substantial supporting frame. Braces, joints and attachment points turn the wearer into a much broader silhouette than an ordinary suit does. Its carrying allowance reflects that framework, with head and respiratory equipment still supplied separately."
 
 ITEM.width = 2
 ITEM.height = 3

@@ -1,7 +1,6 @@
 ITEM.name = "Medical Box"
 ITEM.description= "A box containing a few items usually used by doctors."
-ITEM.longdesc = "Individual packets press against one another beneath the lid. It looks as though somebody"
-	.. " cleared a treatment shelf into the nearest suitable container."
+ITEM.longdesc = "The medical box holds several pieces of clinical stock beneath a plain lid. A rigid shell keeps the collection in one place, although the individual packets still need sorting. It is the sort of reserve meant to replenish supplies rather than stand in for one treatment item."
 ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
 
 ITEM.width = 2

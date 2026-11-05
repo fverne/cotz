@@ -1,8 +1,6 @@
 ITEM.name = "Improvised Electronic Tool"
 ITEM.description = "An exposed electronic assembly with two long aerials and tape around its circuit board."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "Two long aerials project from the improvised electronic tool's exposed board. Tape holds parts of the assembly together where a manufactured device would usually have a fitted enclosure. The arrangement displays the hardware plainly while leaving its intended connections unexplained."
 
 ITEM.model = "models/cotz/eft/quest/hacktool_mechanic.mdl"
 

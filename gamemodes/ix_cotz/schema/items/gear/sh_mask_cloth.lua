@@ -1,7 +1,6 @@
 ITEM.name = "Cloth Mask"
 ITEM.description = "A piece of cloth to wrap your face with."
-ITEM.longdesc = "The fabric carries the smell of dust and repeated washing. It can hide an expression as readily"
-	.. " as it hides a face, which is reason enough for many stalkers to keep one close."
+ITEM.longdesc = "The cloth mask wraps a small amount of fabric around the lower face. Its simple layers lack the fitted body and filter assemblies of a dedicated gasmask. The modest protection matches equipment that can be folded into a pocket when removed."
 ITEM.model = "models/shtokerbox/ground_mask_arab.mdl"
 
 ITEM.price = 1000

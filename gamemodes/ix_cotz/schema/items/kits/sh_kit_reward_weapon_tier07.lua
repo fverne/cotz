@@ -1,7 +1,6 @@
 ITEM.name = "Expert Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The wrapping keeps a selected weapon out of sight until the supplies are redeemed. Nothing about"
-	.. " the exterior announces how much work went into earning it."
+ITEM.longdesc = "The Expert Weapon Box is an equipment allowance near the upper end of the package series. Its plain wooden shell provides a physical carrier for that entitlement. The actual return is identified by the supplying contact before the box changes hands."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

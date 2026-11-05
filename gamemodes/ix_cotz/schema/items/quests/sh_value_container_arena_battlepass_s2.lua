@@ -1,8 +1,6 @@
 ITEM.name = "Red Decorated Transit Box"
 ITEM.description = "A squat transit box with a mottled red finish and dark reinforced corners."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "Red panels distinguish this transit box from the blue version of the same squat design. Dark corner protection covers the edges most likely to meet the ground. The decoration changes the appearance of a transport shell without explaining what was packed inside."
 
 ITEM.model = "models/cotz/eft/containers/container_arena_battlepass_s2.mdl"
 

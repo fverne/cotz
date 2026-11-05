@@ -1,8 +1,6 @@
 ITEM.name = "Thermite Canister"
 ITEM.description = "A squat screw-top canister with a warning label on its side."
-ITEM.longdesc = "Its outer surfaces carry the dust and handling marks of neglected stores. There is no matching"
-	.. " issue record or service history. It belongs on a specialist's inventory and inspection bench"
-	.. " before anyone can make sense of its condition or origin."
+ITEM.longdesc = "The thermite canister uses a compact screw-top container for a specialised industrial mixture. Warning text takes priority over decorative labelling. It belongs to material stores where the contents are identified and handled as part of a planned operation."
 ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/cotz/eft/barter/flammable_thermite.mdl"

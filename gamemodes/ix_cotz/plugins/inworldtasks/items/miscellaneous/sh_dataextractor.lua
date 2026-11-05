@@ -1,7 +1,6 @@
 ITEM.name = "Data Extracting Flash Drive"
 ITEM.description = "A small flash drive made with the explicit purpose of extracting certain info from a PC. Just insert ."
-ITEM.longdesc = "The casing is plain enough to pass for somebody's forgotten office accessory. Its usefulness"
-	.. " depends on reaching the right terminal and leaving with the requested records intact."
+ITEM.longdesc = "The extraction drive packages its assignment in the shell of an ordinary USB carrier. It is meant to collect records from the designated computer types rather than serve as a general communications device. The remaining targets are tracked alongside the stored job information."
 ITEM.model = "models/lostsignalproject/items/quest/usb1.mdl"
 ITEM.price = 0
 ITEM.flag = "A"

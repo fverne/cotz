@@ -1,8 +1,6 @@
 ITEM.name = "Yellow-Label Audio Cassette"
 ITEM.description = "A dark audio cassette with a yellow label above its spool windows."
-ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
-	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
-	.. " equipment and a patient specialist to make sense of them."
+ITEM.longdesc = "A yellow label stands above the dark cassette's spool windows. The bright panel gives the carrier an easy visual reference when tapes are kept in a row. Any fuller identification would depend on the writing or recording associated with it."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_03.mdl"
 

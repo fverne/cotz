@@ -1,7 +1,6 @@
 ITEM.name = "PRACS"
 ITEM.description = "A high-end helmet with gasmask"
-ITEM.longdesc = "Closely fitted components leave little exposed around the face. Cleaning the joins and keeping"
-	.. " the headgear comfortable becomes part of the routine before every long patrol."
+ITEM.longdesc = "The PRACS combines a protective helmet with a fitted gasmask assembly. Hard outer surfaces surround the more flexible breathing and sealing components. The integrated form brings head and respiratory equipment together instead of leaving the wearer to arrange two unrelated pieces."
 ITEM.model = "models/shtokerbox/ground_headgear_pracs.mdl"
 
 ITEM.price = 250000

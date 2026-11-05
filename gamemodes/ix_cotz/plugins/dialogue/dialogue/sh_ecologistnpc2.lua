@@ -1,15 +1,18 @@
 DIALOGUE.name = "Beanstalk"
 DIALOGUE.townContact = "beanstalk"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Keep it down!")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"Can I look through your supplies?",
+	"Certainly. Keep the samples separate while we look at what can be exchanged."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = (
-		"Hello. Please don't touch the samples. You can stand there; I can still hear you perfectly "
-		.. "well."
-	),
+	response = "Hello. Leave the containers shut, please. I've just finished sorting them and would rather begin this conversation in a good mood.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"BackgroundTopic",
 		"GOODBYE",
@@ -20,27 +23,16 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What are you studying here?",
-	response = (
-		"Changes in the conditions outside. An unhelpfully broad answer, I know. We take a reading, compare "
-		.. "it with a control, then try to discover which of our assumptions accompanied us into the result. "
-		.. "The interesting part often begins when two careful people disagree. The tiresome part is persuading "
-		.. "everyone to keep the original notes long enough to find out why. You may ask about the work. Just "
-		.. "leave the containers shut while we discuss it; I become much less interesting company after that."
-	),
+	statement = "What interests you about the conditions here?",
+	response = "How difficult they make an apparently simple comparison. You return to a place, take another reading, and begin working out what else changed between the two visits. Sometimes a stalker mentions an ordinary detail at the end of a story and I have to ask them to go back. I enjoy that moment. Less enjoyable when they've thrown away the first notes because the second set looked neater. I can tolerate untidy paper remarkably well.",
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Can you explain the method?",
-	response = (
-		"Take a reading under known conditions, keep the original notes, compare it with a control. Simple "
-		.. "to say, difficult to carry out when the conditions won't stay put. A discrepancy can be "
-		.. "interesting. A discrepancy whose records have been tidied until it disappears is mostly "
-		.. "frustrating. Tell me what happened, including the inconvenient part."
-	),
+	statement = "How do you decide whether a strange reading matters?",
+	response = "Keep the original, check the conditions, compare it with a control. Then ask what you expected to see. That last question is uncomfortable. I've had a perfectly ordinary clerical mistake survive far too long because its explanation was interesting. If somebody disagrees, I want the awkward observation left in the account. We can argue over it. Difficult to argue usefully with a discrepancy someone has carefully erased.",
 	options = {
 		"BackTopic",
 	},
@@ -255,10 +247,12 @@ DIALOGUE.addTopic("NotEnoughMoneySuitVariantChange", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else...",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Yes? We can leave that question open for now.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"BackgroundTopic",
 		"GOODBYE",
@@ -270,29 +264,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you around.",
-	response = "Take care. Ask if the preparation needs clarifying.",
+	statement = "I'll leave you to the research.",
+	response = "Good journey. If you remember something you couldn't quite describe, don't feel you need a better explanation before mentioning it.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you think the field workers are careless?",
-	response = (
-		"Some are. So am I, occasionally. I once prepared a long explanation for a discrepancy before "
-		.. "checking which sheet I was reading. I'd prefer you didn't repeat that with my name attached. Vesper "
-		.. "is good at noticing the difference between what I asked for and what someone can actually do out "
-		.. "there. I need that objection. I would enjoy it more if she didn't look quite so pleased while "
-		.. "delivering it."
-	),
+	statement = "Do the field workers frustrate you?",
+	response = "Sometimes. Sometimes I'm the frustrating part of their day. Vesper can describe why an arrangement that looked sensible here became awkward beside an anomaly field. I need to hear that before I start defending it. Not always successful. She's learned to wait while I finish explaining the difficulty she's just told me about. I'd prefer you didn't repeat how much she enjoys that interval.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Why keep arguing with her, then?",
-	response = (
-		"Because the alternative is two perfectly consistent accounts that never meet. She tells me where a "
-		.. "precaution becomes impractical. I ask what we lose by leaving it out. Sometimes we change the "
-		.. "method; sometimes the result needs a qualification. Neither of us especially enjoys writing those. "
-		.. "But if I ask someone to work outside this room, I ought to listen when they describe it."
-	),
+	statement = "What makes those arguments worth having?",
+	response = "We eventually discuss the same trip. She tells me what she could actually observe; I explain which uncertainty still bothers me. Sometimes the work needs changing. Sometimes we simply have to qualify the result. I owe that conversation to somebody who went out there. Besides, I'd rather hear her describe the inconvenient part than spend the evening discovering I'd asked the wrong question again.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Is there anything you enjoy watching outside the research?",
+	response = "The birds, when I have a chance. No, that isn't a coded answer about sampling. I couldn't identify every one before coming here, and I certainly won't pretend to now. A stalker described a bird he'd seen near an anomaly and expected me to explain why it was there. I wanted to know what it sounded like. We had a rather pleasant conversation once he stopped expecting a finding at the end of it.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Can you and Egghead talk without arguing?",
+	response = "Certainly. We can spend several minutes agreeing that the coffee is dreadful. Then he remembers an artifact somebody showed him, and I ask one question too many. I enjoy his enthusiasm. It can make a thoroughly irritating day interesting again. I would enjoy it even more if he noticed when I'd put my coat on to leave. Apparently that's an excellent moment to describe another possibility.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Do you write those observations down too?",
+	response = "A few. I keep them apart from the readings. Sometimes the note is only a sound I couldn't place, which looks rather foolish in my handwriting. I like finding it later. Reminds me I was standing somewhere, instead of spending the whole day correcting a table.",
 	options = {"BackTopic"},
 })

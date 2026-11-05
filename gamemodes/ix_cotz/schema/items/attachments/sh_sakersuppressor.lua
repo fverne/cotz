@@ -1,7 +1,6 @@
 ITEM.name = "SAKER suppressor"
 ITEM.description = " A suppressor for larger caliber rifles of western origin."
-ITEM.longdesc = "The cylindrical body bears the marks of hot use and hurried handling. Its mounting end is the"
-	.. " first place a careful buyer looks for damage."
+ITEM.longdesc = "The SAKER encloses its gas-management chambers in a long muzzle-mounted body. On a compatible rifle, the cylinder becomes a conspicuous extension of the barrel. Reduced report still leaves the physical length and mass of the attachment to account for."
 ITEM.model = "models/cw2/attachments/cobra_m2.mdl"
 
 ITEM.width = 2

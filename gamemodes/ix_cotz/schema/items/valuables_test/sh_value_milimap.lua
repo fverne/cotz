@@ -1,8 +1,6 @@
 ITEM.name = "Military Map Sheet"
 ITEM.description = "A printed terrain map with a dark reinforced strip along one edge."
-ITEM.longdesc = "The folds feel rough from repeated handling, and the surface smells faintly of dry paper and old"
-	.. " cupboards. It has the look of material kept for reference through several changes of plan. Its"
-	.. " markings would need to be checked against records that are not attached to it."
+ITEM.longdesc = "The military map presents terrain as symbols, contours and printed reference marks. A reinforced edge protects one of the sheet's more vulnerable folds. Its intended reader would compare those markings with the ground, taking account of the map's scale and date."
 ITEM.valuableCategory = "field records"
 
 ITEM.model = "models/lostsignalproject/items/misc/milimap.mdl"

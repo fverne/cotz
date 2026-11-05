@@ -15,6 +15,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants a place in camp without having to be useful every moment. He enjoys the company of returning stalkers, yet his habit of checking their preparations can turn a welcome into an inspection.
+
+**Voice and boundaries:** Unhurried, specific, occasionally amused at himself. Let him discuss familiar ground, wet clothing, or a poor night's sleep without converting every observation into a lesson. Keep his companion's history behind its existing progression disclosures.
+
+**Relationships:** Lemon can interrupt his self-sufficiency through familiar domestic complaints. Their long acquaintance permits irritation and small concessions, without giving either man authority to reveal the other's private history.
+
+**Personal subjects:** What do you do when you aren't hunting? / Does Lemon ever let you cook?
+
+These conversations and their follow-up live in [sh_tutorialnpc.lua](../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_tutorialnpc.lua), under the existing questions menu.
+
 ## Sparse tree
 
 | Part | Nodes in order |

@@ -1,7 +1,6 @@
 ITEM.name = "Assorted Hand Tools"
 ITEM.description = "An assortment of screwdrivers, pliers, tape and small measuring tools laid together."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "Screwdrivers, pliers, tape and measuring tools have been laid together as a general hand-tool assortment. Their different grips and working ends cover several ordinary workshop jobs. The group is useful stock without the fitted arrangement that would make missing pieces immediately obvious."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/illusion/eftcontainers/toolset.mdl"

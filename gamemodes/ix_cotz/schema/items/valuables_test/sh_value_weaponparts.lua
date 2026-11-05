@@ -1,7 +1,6 @@
 ITEM.name = "Loose Weapon Mechanisms"
 ITEM.description = "A small heap of dark weapon mechanisms, brackets and loose metal fittings."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "Brackets, mechanisms and small fittings form a heap of loose weapon parts. Their dark finish conceals differences that become obvious only at the mating surfaces. The collection contains components from assembled firearms, rather than the complete, identified mechanism of one weapon."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/illusion/eftcontainers/weaponparts.mdl"

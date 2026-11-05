@@ -1,7 +1,6 @@
 ITEM.name = "Large Modern Military Backpack (Ukrainian)"
 ITEM.description = "A large backpack. Features compartments for easy storage of your valuables."
-ITEM.longdesc = "Extra canvas makes a tempting invitation to keep one more scavenged part. The broad harness has"
-	.. " the same workmanlike finish as smaller Ukrainian surplus packs."
+ITEM.longdesc = "The large Ukrainian military pack expands the same compartmented arrangement as the smaller version. More carrying room comes with a slightly heavier bag of its own. The familiar straps and pockets keep the design recognisable despite the greater load it accommodates."
 ITEM.model = "models/kek1ch/sumka1.mdl"
 
 ITEM.price = 12000

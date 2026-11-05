@@ -1,7 +1,6 @@
 ITEM.name = "Green Lining Bundle"
 ITEM.description = "A folded green fabric lining with mottled shading and worn creases."
-ITEM.longdesc = "The exposed edges feel dry and dusty. The weave and packaging offer a small reminder of careful"
-	.. " work done with needles, shears and a clear space on a table."
+ITEM.longdesc = "The green lining has a mottled surface and deep creases from folding. Its soft shape contrasts with rigid armour inserts stored nearby. It belongs to the inner construction of equipment, where fit and stitching matter as much as the cloth itself."
 ITEM.valuableCategory = "protective textiles"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant12.mdl"

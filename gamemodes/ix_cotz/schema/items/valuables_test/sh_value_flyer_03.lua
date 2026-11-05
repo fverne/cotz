@@ -1,8 +1,6 @@
 ITEM.name = "Worn Magazine Bundle"
 ITEM.description = "A bundle of printed magazines with weathered illustrated covers."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "The worn magazines preserve a mixture of illustrated features and densely printed articles. Several issues have been bundled together without matching their edges. Their covers remain easier to recognise than the small dates and issue numbers along the margins."
 ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/quest/flyer_03.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Green-Capped Research Tube"
 ITEM.description = "A long tinted research tube with green caps at both ends."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "Green end caps distinguish this research tube from the dark-capped version. The tinted body keeps the contents partly obscured. Its matching shape suggests the same general carrying format, while the different closures provide a simple visual way to separate the specimens."
 
 ITEM.model = "models/cotz/eft/quest/tg_vi_24_antivirus.mdl"
 

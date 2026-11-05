@@ -1,7 +1,6 @@
 ITEM.name = "Salvaged Valve Wheel"
 ITEM.description = "A rusted circular valve wheel with four spokes and a thick central hub."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "Four spokes connect the valve wheel's broad rim to a thick central hub. The wheel gives a hand room to turn a much smaller shaft. Rust covers a fitting whose original purpose was to make a stiff valve easier to operate."
 ITEM.valuableCategory = "filtration"
 
 ITEM.model = "models/cotz/eft/spec/labyrinth_valve.mdl"

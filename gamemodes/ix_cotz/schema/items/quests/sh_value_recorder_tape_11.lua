@@ -1,8 +1,6 @@
 ITEM.name = "Red Labelled Audio Cassette"
 ITEM.description = "A red audio cassette with a pale inset panel and small handwritten markings."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "The red cassette places small handwritten marks within a pale inset panel. Its bright shell is easy to recognise, while the finer writing requires a closer look. The combination keeps a personal reference attached to a mass-produced carrier."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_11.mdl"
 

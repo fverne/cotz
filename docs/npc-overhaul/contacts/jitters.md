@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys hearing how returning stalkers spent their time beyond getting hurt. Wants ordinary company and a meal he can finish; his clinical attention can interrupt both without making him helpless outside treatment.
+
+**Voice and boundaries:** Can be curious, dry, and briefly relaxed. Keep anxiety situational rather than adding a stammer to every sentence. Never discuss an identifiable patient's private treatment to entertain a stranger.
+
+**Relationships:** Arena Master's easy sociability attracts and irritates him. He can appreciate the man while objecting to the way injuries disappear from an entertaining account. Gasket and Lemon remain practical sources of everyday companionship.
+
+**Personal subjects:** Do people talk much while you treat them? / Would you ever go and watch the arena?
+
+These conversations and their follow-up live in [sh_medicnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_medicnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

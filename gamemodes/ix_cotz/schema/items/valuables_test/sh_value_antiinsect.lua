@@ -1,7 +1,6 @@
 ITEM.name = "Insecticide Spray"
 ITEM.description = "A red aerosol can with a black cap and a bright insect-control label."
-ITEM.longdesc = "Dust clings around the closure, and the label has the tired look of goods left on a storeroom"
-	.. " shelf. Someone keeping a camp clean might still find a place for it among their supplies."
+ITEM.longdesc = "The insecticide can packages pest control into a familiar aerosol dispenser. Its red body and bright label are easy to recognise among household stores. Such products belong to the routine work of keeping occupied rooms tolerable, rather than to the more conspicuous hazards outside them."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/antiinsect.mdl"

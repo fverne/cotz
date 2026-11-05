@@ -1,7 +1,6 @@
 ITEM.name = "Veteran Stalkers Stash"
 ITEM.description= "A rugged stash, contains the belongings of another stalker."
-ITEM.longdesc = "Careful knots and protected corners suggest a practiced hand. A long career in the Zone can"
-	.. " leave remarkably little behind for anyone else to sort through."
+ITEM.longdesc = "The veteran's stash keeps an established field load in a battered backpack shell. The carrier has survived as packaging for the supplies inside, rather than as reliable travelling equipment. Its assortment is the accumulated kit of someone accustomed to leaving camp prepared."
 ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 
 ITEM.width = 3

@@ -1,8 +1,6 @@
 ITEM.name = "Ribbed Signal Converter"
 ITEM.description = "A pale metal module with deep cooling fins and sockets at one end."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "Deep metal fins enlarge the converter's cooling surface around a compact electronic module. Sockets at one end keep its connections together. Much of the apparent size belongs to the heatsink, a practical concession to the heat produced during operation."
 ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/cotz/eft/barter/electr_adv_converter.mdl"

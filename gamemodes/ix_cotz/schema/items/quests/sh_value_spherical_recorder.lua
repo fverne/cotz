@@ -1,8 +1,6 @@
 ITEM.name = "Spherical Flight Recorder"
 ITEM.description = "A round orange recorder housing supported within a pale metal protective frame."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "A pale metal frame supports the flight recorder's round orange housing. The contrast makes the recording unit distinct from its protective mounting. Its compact, conspicuous body was designed to remain an identifiable object when separated from the aircraft around it."
 
 ITEM.model = "models/lostsignalproject/items/quest/black_box.mdl"
 

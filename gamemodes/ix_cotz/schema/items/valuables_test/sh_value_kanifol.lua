@@ -1,7 +1,6 @@
 ITEM.name = "Soldering Rosin"
 ITEM.description = "A shallow open tin holding amber-coloured lumps of soldering rosin."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "The soldering rosin has hardened into amber lumps inside a shallow tin. Rosin flux is associated with making clean soldered joints, rather than forming the joint itself. The open container belongs beside a soldering iron and small electronic parts."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/lostsignalproject/items/quest/kanifol.mdl"

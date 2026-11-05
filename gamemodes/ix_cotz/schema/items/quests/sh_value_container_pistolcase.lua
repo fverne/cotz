@@ -1,8 +1,6 @@
 ITEM.name = "Small Padded Equipment Case"
 ITEM.description = "A compact padded case with rounded corners, a handle and a stitched outer cover."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "Padding rounds the outline of this small equipment case. A stitched cover and carrying handle give it the form of soft luggage around a shaped load. It is transport packaging for a compact object, with the original contents kept out of sight."
 
 ITEM.model = "models/cotz/eft/containers/container_pistolcase.mdl"
 

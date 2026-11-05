@@ -1,8 +1,6 @@
 ITEM.name = "Renegade Insignia"
 ITEM.description = "A shield-shaped insignia with a dark field, pale border and animal-head emblem."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "An animal-head emblem faces out from the Renegade insignia's dark field. Its pale border gives the shield a recognisable outline even when folded. Stitch holes around the edge show where a patch like this would be fixed to clothing."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_renegade.mdl"
 

@@ -1,15 +1,18 @@
 DIALOGUE.name = "Haggler"
 DIALOGUE.townContact = "haggler"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Absolutely, here's what I have in stock.")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"Let's have a look at your goods.",
+	"With pleasure. Find what interests you, then we'll discover how far apart our ideas of its value are."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = (
-		"Welcome. Take a look, but don't start an argument about the price until you've found something "
-		.. "you want."
-	),
+	response = "Welcome! Put the pack down if it's dragging your shoulder off. I can wait until you've recovered enough to argue about prices.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -21,54 +24,40 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What brought you into trading here?",
-	response = (
-		"Customers. Back home a man can walk out of your shop and find six more selling the same thing. Here "
-		.. "he comes back and says, 'Haggler, nobody else has one.' Beautiful words. Of course, then I have to "
-		.. "find another, persuade someone to bring it through, and listen to the first man explain that I paid "
-		.. "too little for his. Everybody remembers the pleasant half of my business. You're welcome to "
-		.. "remember the rest when we discuss my prices."
-	),
+	statement = "Why set up a business in the Zone?",
+	response = "Because when a stalker needs something here, there's a reason. An empty magazine, a torn bag, an expedition tomorrow. Back home people spend all afternoon deciding whether they want a thing at all. Here they know. Sometimes they also know exactly how little they can afford, which makes the conversation interesting. I enjoy finding the point where we both decide the deal was our idea. Supplies still have to reach me, mind. You won't find the cost of that walk written on the label.",
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Do you ever get tired of bargaining?",
-	response = (
-		"With Brass, yes. He counts everything before he becomes interested in my explanation. Ledger writes "
-		.. "it down afterwards. Very difficult men to have an enjoyable misunderstanding with. Fortunately most "
-		.. "people appreciate a little conversation while we establish what their goods are worth."
-	),
+	statement = "Who gives you the hardest time over a deal?",
+	response = "Brass counts before I finish speaking. Ledger remembers the wording after I've improved it. Between them they could turn a lively transaction into an examination. Useful men, both. Very little romance in their approach to business. Cleaner says what he'll agree to and waits. You can spend a long afternoon trying to make a waiting man feel hurried. I recommend bringing your own lunch.",
 	options = {
 		"BackgroundTopic3",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Can you point me towards other suppliers?",
-	response = (
-		"Depends what you need. Lemon for food, Technut for repairs, Jitters if your next question concerns "
-		.. "bleeding. Brass handles ammunition in Garbage. Ask them their prices, by all means. I'll be here "
-		.. "when you've finished carrying your bargain home."
-	),
+	statement = "Who should I ask for things you don't carry?",
+	response = "Lemon for a meal he'll expect you to appreciate, Technut for repairs he'll want to explain, Jitters if you're hurt. Brass handles ammunition over in Garbage. Ask the right question and you'll hear more than a price. Just remember to count the journey when comparing bargains. People will cross mutant country to save a little money and then tell me I'm the unreasonable one.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "Can you tell me something interesting?",
-	response = "Not really, no.",
+	statement = "Heard any trading stories worth repeating?",
+	response = "A man tried to sell me his account of finding an artifact. The artifact had already gone to somebody else. Very vivid account, excellent hand movements, no obvious place to put it on the shelf. I suggested he tell it over supper and ask Lemon for an audience. Apparently I lack imagination. I did listen to the end. Wanted to hear what he thought the missing object was worth.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("StartBarter", {
-	statement = "I'd like to do some bartering.",
-	response = "Sure.",
+	statement = "What exchanges are you offering?",
+	response = "Take a look at the arrangements. You may discover something you've been carrying has finally become useful.",
 	options = {
 		"BackTopic",
 	},
@@ -146,10 +135,12 @@ DIALOGUE.addTopic("StartBarter", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else...",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Certainly. We were getting along so well.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -162,29 +153,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you around.",
-	response = "Come back when you need something. Or when you've found something I need.",
+	statement = "I'll look in another time.",
+	response = "Do. I enjoy a customer who has time to reconsider.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you ever do someone a favour?",
-	response = (
-		"Frequently. People are less enthusiastic when I remember it afterwards. Oh, don't pull that face. "
-		.. "Sometimes I let a payment wait. You can usually tell who's embarrassed to ask and who's been "
-		.. "practising the explanation. I don't require a man to be cheerful about needing help. I do require "
-		.. "him to remember we had a conversation. Cleaner understands that perfectly. No speech, no "
-		.. "performance, just what we agreed."
-	),
+	statement = "Does a regular customer get any sympathy?",
+	response = "They get remembered. What they're looking for, what they complain about, whether they bring back something they promised. Sympathy is harder to put a price on. I've let a payment wait when I expected the person back. I've also listened to a splendid explanation from a fellow who'd practised it on three other traders. You want me soft-hearted enough to help and sharp enough to have things left when you arrive. A demanding combination.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Why let the payment wait?",
-	response = (
-		"Because I expect him to come back. With money, ideally, but coming back is a useful start. You sell "
-		.. "someone his last bandage and then refuse him enough food to get home, you've made a remarkably "
-		.. "short investment. I prefer customers who complain about me for years. Some even start bringing "
-		.. "things I can sell. It becomes almost sociable."
-	),
+	statement = "What makes you expect someone to return?",
+	response = "They ask what they owe before explaining what they need next. I like that. And I like customers who keep finding reasons to curse my prices for years. They come in wet, tired, delighted with some scrap from beyond an anomaly field, and we have another argument. There's worse company. Naturally I'd enjoy it even more if they agreed with me sooner.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "What is the strangest thing someone has tried to sell you?",
+	response = "A bag he refused to open. Claimed the artifact inside was too valuable to expose. Very serious fellow. Held it as though he expected applause. I offered to buy the bag at the price of a used bag, and he became extremely concerned about my lack of imagination. Perhaps he had a fortune in there. Perhaps he had his lunch. Either way, I enjoyed the conversation more than he did.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Why does Brass annoy you so much?",
+	response = "He counts while you're talking. You make an excellent point about the cost of bringing ammunition through mutant country, and he says, 'Forty-seven.' Wonderful. We were approaching an understanding, now we're back at forty-seven. But if he says a box is short, I check it. He's caught mistakes that would have become much more expensive arguments elsewhere. Don't look so surprised. I can find a man useful and still wish he'd finish counting sooner.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Would you buy something you couldn't identify?",
+	response = "For the right price, with the uncertainty included. People want me to pay for every possibility they've imagined on the walk back. If I do that, I become the collector and they become the trader. A delightful arrangement for one of us.",
 	options = {"BackTopic"},
 })

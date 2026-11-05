@@ -1,7 +1,6 @@
 ITEM.name = "Fireaxe"
 ITEM.description = "A simple fireaxe."
-ITEM.longdesc = "The broad head carries chips in its paint and old marks along the edge. A tool made for"
-	.. " emergencies tends to acquire a wider job description once it reaches the Zone."
+ITEM.longdesc = "The fireaxe puts a broad cutting head on a handle long enough for both hands. Its shape comes from emergency work on timber and obstructed spaces. The substantial head makes the tool an imposing carried object even before its edge is considered."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_axe_fire.mdl"
 ITEM.class = "tfa_nmrih_fireaxe"
 ITEM.weaponCategory = "primary"

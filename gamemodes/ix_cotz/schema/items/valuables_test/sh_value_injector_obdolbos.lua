@@ -1,8 +1,6 @@
 ITEM.name = "Obdolbos Research Injector"
 ITEM.description = "A white injector with a printed label and a green end cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "The Obdolbos injector uses a white body and green cap, leaving its printed label easy to pick out. It belongs to a range of individually marked research units. Sorting such stock depends on keeping the identifying wrapper with the container."
 ITEM.valuableCategory = "research injectors a"
 
 ITEM.model = "models/cotz/eft/usable/syringe_obdolbos.mdl"

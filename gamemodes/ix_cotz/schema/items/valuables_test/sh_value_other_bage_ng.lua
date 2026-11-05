@@ -1,8 +1,6 @@
 ITEM.name = "Event Identification Badge"
 ITEM.description = "A printed identification card attached to a looped fabric lanyard."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "The event badge hangs from a fabric lanyard intended to keep identification visible on the chest. Printed panels give the card a more formal appearance than a handwritten name. Away from the event, the badge preserves an association rather than any current authority."
 ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/barter/other_bage_ng.mdl"

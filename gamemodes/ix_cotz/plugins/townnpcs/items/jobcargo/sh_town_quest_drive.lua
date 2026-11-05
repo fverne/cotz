@@ -1,8 +1,6 @@
 ITEM.name = "Tape-Labelled Flash Drive"
 ITEM.description = "A dark USB drive with a pale handwritten tape label around its body."
-ITEM.longdesc = "Dust has settled in the small recesses around the connector. The casing says very little about"
-	.. " what might remain inside. Its value to a specialist begins with questions that cannot be"
-	.. " answered by turning it over in the hand."
+ITEM.longdesc = "Handwritten tape gives the flash drive a personal label that its plain dark casing lacks. The strip wraps around the body rather than fitting neatly into a printed panel. It identifies the carrier for someone familiar with the handwriting or reference."
 
 ITEM.model = "models/cotz/eft/info/flash_card_slider_kerman.mdl"
 

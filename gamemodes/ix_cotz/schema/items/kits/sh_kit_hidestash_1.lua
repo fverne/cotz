@@ -1,7 +1,6 @@
 ITEM.name = "Rookie Stalkers Stash"
 ITEM.description= "A rugged stash, contains the belongings of another stalker."
-ITEM.longdesc = "The packing is hesitant, with small personal choices apparent in every fold. Someone was trying"
-	.. " to prepare for a place they had only heard about."
+ITEM.longdesc = "The rookie's stash keeps ordinary provisions and personal equipment inside a rugged backpack. The bundle is a cache to unpack, rather than a serviceable replacement for worn carrying gear. Its contents reflect the modest supplies of an early stay in the Zone."
 ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 
 ITEM.width = 3

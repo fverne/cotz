@@ -1,7 +1,6 @@
 ITEM.name = "Emergency First Aid Kit"
 ITEM.description= "A red emergency first aid kit."
-ITEM.longdesc = "A medkit and spare bandages are kept together for quick access. The bright exterior makes sense"
-	.. " in a treatment room, even if it stands out uncomfortably in a dark rucksack."
+ITEM.longdesc = "The red emergency kit keeps a medkit and spare bandages within one conspicuous carrier. Its bright shell favours quick recognition over discreet packing. The case organises a small reserve of treatment supplies rather than providing a single all-purpose remedy."
 ITEM.model = "models/illusion/eftcontainers/salewa.mdl"
 
 ITEM.width = 2

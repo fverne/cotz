@@ -1,7 +1,6 @@
 ITEM.name = "German Steel Helmet"
 ITEM.description = "A very old helmet."
-ITEM.longdesc = "A distinctive silhouette survives beneath scratches and an indifferent coat of paint. Whatever"
-	.. " history a collector might assign it, the current owner still has to live with its weight."
+ITEM.longdesc = "The German steel helmet's projecting rim gives its simple metal shell a distinctive profile. Protection depends on that shell and its internal support rather than an enclosed face assembly. The weight is more apparent than the complexity of the equipment."
 ITEM.model = "models/shtokerbox/ground_headgear_ger_ww2.mdl"
 
 ITEM.price = 15000

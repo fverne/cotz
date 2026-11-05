@@ -1,7 +1,6 @@
 ITEM.name = "Large Zone Survival Backpack (Camouflaged)"
 ITEM.description = "A large backpack. Featuring large compartments for storage of items, as well as being very comfortable."
-ITEM.longdesc = "The camouflaged body is broad enough to be conspicuous whatever its colours. A previous owner"
-	.. " has tightened and retightened the webbing until the folds became permanent."
+ITEM.longdesc = "The large camouflaged survival pack combines an expanded load allowance with patterned outer fabric. Its empty weight reflects the extra material in the larger version. Broad compartments retain the practical layout of the standard survival bag."
 ITEM.model = "models/kek1ch/sumka5.mdl"
 
 ITEM.price = 34500

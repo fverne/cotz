@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Plastic Charge"
 ITEM.description = "A strapped assembly of pale blocks with visible wiring across the top."
-ITEM.longdesc = "Its outer surfaces carry the dust and handling marks of neglected stores. There is no matching"
-	.. " issue record or service history. It belongs on a specialist's inventory and inspection bench"
-	.. " before anyone can make sense of its condition or origin."
+ITEM.longdesc = "Pale blocks of plastic charge material are strapped into a single assembly. Wiring crosses the top rather than disappearing into a finished enclosure. The exposed arrangement identifies it as specialist demolition stock, not a complete tool with an ordinary user interface."
 ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/lostsignalproject/items/quest/c4.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Analogue Sensor"
 ITEM.description = "A rectangular sensor housing with a printed upper panel and sockets along its lower edge."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The analogue sensor puts its connections along the lower edge of a rectangular housing. A printed upper panel identifies the recovered unit. Its readings originally belonged to a wider measuring installation, where the signal could be interpreted beside the rest of the equipment."
 ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/lostsignalproject/items/devices/sensor_a.mdl"

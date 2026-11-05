@@ -3,8 +3,7 @@ ITEM.model = "models/lostsignalproject/items/medical/glucose.mdl"
 ITEM.width = 1
 ITEM.height = 2
 ITEM.description = "A sealed emergency revival dose in a disposable syringe."
-ITEM.longdesc = "The sealed dose is kept for the moment a fallen companion needs one last chance. Anyone brought"
-	.. " back by it will still be in a desperate condition and needs immediate care."
+ITEM.longdesc = "The revival syringe keeps a single emergency dose in disposable packaging. It is intended for use on a fallen companion, not as an ordinary self-treatment supply. Revival leaves the recipient at the barest margin of survival, with further care still urgently needed."
 ITEM.price = 800
 ITEM.flag = "A"
 

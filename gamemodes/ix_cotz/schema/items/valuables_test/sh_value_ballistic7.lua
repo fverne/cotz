@@ -1,7 +1,6 @@
 ITEM.name = "Black Labelled Armour Insert"
 ITEM.description = "A dark rectangular armour insert with rounded corners and a pale identification label."
-ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
-	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "A black sleeve gives the rigid armour insert an unremarkable finish. The pale identification label stands out against it, offering a better reference than the colour alone. The insert is a loose protective component rather than an assembled piece of wearable armour."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic7.mdl"

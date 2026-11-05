@@ -1,7 +1,6 @@
 ITEM.name = "ACH Helmet"
 ITEM.description = "A modern helmet."
-ITEM.longdesc = "The shaped shell leaves room for other field equipment, with padding held close against the"
-	.. " head. Supply markings have been rubbed almost smooth by transport and use."
+ITEM.longdesc = "The ACH uses a compact protective shell without an integrated gasmask. Its shape leaves the face available for separately fitted equipment. The helmet's role is protection of the head, rather than providing a complete sealed environment around the wearer."
 ITEM.model = "models/shtokerbox/ground_headgear_operatorhelmet7.mdl"
 
 ITEM.price = 240000

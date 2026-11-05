@@ -1,8 +1,6 @@
 ITEM.name = "Professional Medical Box"
 ITEM.description= "A red first aid kit."
-ITEM.longdesc = "The treatment supplies have been kept together rather than scattered through a trader's drawers."
-	.. " Careful packing keeps the contents together through the sort of transport that ruins ordinary"
-	.. " luggage."
+ITEM.longdesc = "The Professional Medical Box is a treatment-supply entitlement for an established traveller. Its issue class separates it from the smaller medical packages despite the familiar red shell. A contact's preview identifies the actual supplies available at redemption."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

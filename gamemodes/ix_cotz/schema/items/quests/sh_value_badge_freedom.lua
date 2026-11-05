@@ -1,8 +1,6 @@
 ITEM.name = "Freedom Insignia"
 ITEM.description = "A green rectangular insignia with a central emblem and contrasting border."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "Green cloth forms the field of the Freedom patch. A contrasting border keeps the central emblem separate from the surrounding garment. The rectangular insignia is small enough to remove and carry without preserving much evidence of its original uniform."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_freedom.mdl"
 

@@ -1,8 +1,6 @@
 ITEM.name = "Leather Document Satchel"
 ITEM.description = "A brown document satchel with a shoulder strap and a small metal front clasp."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "The document satchel carries a broad flat body beneath a small front clasp. A shoulder strap frees the hands during travel. Its proportions were chosen for papers kept relatively flat, rather than the irregular equipment that strains a general-purpose pack."
 ITEM.valuableCategory = "equipment pouches"
 
 ITEM.model = "models/cotz/eft/info/docbag.mdl"

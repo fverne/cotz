@@ -1,8 +1,6 @@
 ITEM.name = "Cylindrical Chemical Carrier"
 ITEM.description = "A plain cylindrical carrier with dark end caps and a narrow label panel."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "Dark caps close the chemical carrier's cylindrical body at both ends. A narrow panel provides room for the identification that similar containers depend on. Its shape is transport packaging for a specimen or consignment, rather than a display of the contents."
 ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/cotz/eft/quest/chemcontainer.mdl"

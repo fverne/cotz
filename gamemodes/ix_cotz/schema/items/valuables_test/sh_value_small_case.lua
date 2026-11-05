@@ -1,8 +1,6 @@
 ITEM.name = "Weathered Courier Case"
 ITEM.description = "A small weathered case with panelled sides, corner straps and a front handle."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "Corner straps and panelled sides reinforce the courier case's compact body. A front handle lets it travel upright beside larger luggage. Its weathered finish reflects a container designed to be repeatedly carried and set down, with the contents kept out of view."
 ITEM.valuableCategory = "transit cases"
 
 ITEM.model = "models/lostsignalproject/items/misc/small_case.mdl"

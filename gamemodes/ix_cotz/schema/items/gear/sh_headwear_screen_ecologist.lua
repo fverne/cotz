@@ -1,7 +1,6 @@
 ITEM.name = "Ecologist Screen Helmet"
 ITEM.description = "A screen helmet with closed respiratory system."
-ITEM.longdesc = "Fingerprints show clearly across the viewing panel after a day of handling instruments."
-	.. " Researchers tend to clean it with more care than the rest of their field equipment."
+ITEM.longdesc = "The Ecologist Screen presents its large visor and closed breathing assembly as research equipment. The broad viewing panel contrasts with the smaller eye openings of conventional masks. Its distinctive finish identifies a variant of the same environmental headgear, rather than a different mechanical design."
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
 ITEM.price = 100000

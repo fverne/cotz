@@ -1,7 +1,6 @@
 ITEM.name = "Rookie Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "A full bundle set aside as payment for completed work. Familiar camp supplies have been gathered"
-	.. " with a little more confidence than a newcomer's first purchases."
+ITEM.longdesc = "The large Rookie Reward bundles a broader supply allowance into one piece of transport packaging. It belongs to the rookie issue class, distinct from the smaller package with the same label. The contact's exchange offer identifies the available contents."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

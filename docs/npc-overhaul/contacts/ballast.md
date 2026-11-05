@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Likes making a difficult load manageable and values company that can wait. Fear does not offend him; being hurried by somebody who has concealed an inconvenience does.
+
+**Voice and boundaries:** Patient, concrete, dryly amused. Let an account unfold at his pace, with room for someone else's nervousness. Waterside anecdotes describe his experience and establish no crossing service or safe water route.
+
+**Relationships:** Ledger's packing earns genuine praise, qualified by small practical complaints. Atlas invites teasing because he listens; Haggler invites suspicion because he understates a load.
+
+**Personal subjects:** What do stalkers do while they wait here? / Is Ledger really that good at packing freight?
+
+These conversations and their follow-up live in [sh_ballastnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_ballastnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

@@ -1,8 +1,6 @@
 ITEM.name = "Survey Instrument Case"
 ITEM.description = "A pale hard case with moulded edges, front catches and a printed survey marking."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "Survey markings identify the hard case as equipment luggage rather than a traveller's suitcase. Moulded edges and front catches keep the lid aligned with the body. The case provides a recognisable outer shell, but the marking alone does not establish which instruments once travelled inside it."
 ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/cotz/eft/quest/casezerogeo.mdl"

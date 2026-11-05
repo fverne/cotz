@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Hard Drive"
 ITEM.description = "A metal hard drive with a broad printed label across its upper face."
-ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
-	.. " where it came from or whether its records survived storage. It is the sort of small object that"
-	.. " can leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "A hard drive stores its records on enclosed magnetic platters. The broad label identifies the physical device without revealing its files. A recovered drive can preserve a large amount of information in a small space, provided the recorded material has survived with the hardware."
 ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_hdd_quest.mdl"

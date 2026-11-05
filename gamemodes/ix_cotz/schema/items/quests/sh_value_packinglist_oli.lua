@@ -1,8 +1,6 @@
 ITEM.name = "Warehouse Packing List C"
 ITEM.description = "A clipped packing list with small printed entries and a stamp near the edge."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "A stamp sits near the edge of the third packing list beside small printed entries. The clip leaves most of the page unobstructed. This is paperwork designed to accompany physical stock, with each line relying on a corresponding item or package."
 
 ITEM.model = "models/cotz/eft/quest/packinglist_oli.mdl"
 

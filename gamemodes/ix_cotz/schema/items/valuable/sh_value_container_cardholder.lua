@@ -1,8 +1,6 @@
 ITEM.name = "Metal Card Sleeve"
 ITEM.description = "A thin metal card sleeve with a thumb cut-out along one edge."
-ITEM.longdesc = "The small surfaces carry the dull polish of repeated handling. A little dust remains in the"
-	.. " sheltered edges. It is an unremarkable possession until someone notices it is missing, or"
-	.. " recognises whose pocket it used to live in."
+ITEM.longdesc = "The metal sleeve holds flat cards within a thin rigid shell. A thumb cut-out leaves part of the edge accessible instead of requiring a hinged lid. It is a compact personal carrier whose simple construction is visible at a glance."
 ITEM.valuableCategory = "equipment pouches"
 
 ITEM.model = "models/cotz/eft/containers/container_cardholder.mdl"

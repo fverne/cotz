@@ -1,8 +1,6 @@
 ITEM.name = "Light Equipment Debris"
 ITEM.description = "A scattered collection of worn equipment pieces and folded protective panels."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "The light equipment debris includes folded panels and worn fragments rather than one intact article. Thin sections overlap without matching into an obvious outline. The collection preserves material from old equipment while losing most of the fittings that once explained how it was worn."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/misc/waste_light.mdl"

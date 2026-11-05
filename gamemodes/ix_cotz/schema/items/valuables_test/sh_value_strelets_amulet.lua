@@ -1,8 +1,6 @@
 ITEM.name = "Tag and Wooden Token"
 ITEM.description = "A metal tag on a ball chain with a small wooden token resting beside it."
-ITEM.longdesc = "The small surfaces carry the dull polish of repeated handling. A little dust remains in the"
-	.. " sheltered edges. It is an unremarkable possession until someone notices it is missing, or"
-	.. " recognises whose pocket it used to live in."
+ITEM.longdesc = "The chain holds a metal tag beside a small wooden token. One object suggests identification, the other a more personal association. Together they form a keepsake whose meaning depends on the wearer rather than the material value of either part."
 ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/quest/strelets_amulet.mdl"

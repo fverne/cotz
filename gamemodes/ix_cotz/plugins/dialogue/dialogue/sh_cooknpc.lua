@@ -1,12 +1,18 @@
 DIALOGUE.name = "Spicy Lemon"
 DIALOGUE.townContact = "spicy-lemon"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Always - You looking for a good meal?")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"Let me see what you're selling.",
+	"Now you're asking a useful question. Have a look; perhaps you'll find something worth sitting down for."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = "What's up? If you're hungry, say so. If you've come to tell me how to cook, take a number.",
+	response = "Come in, then. Hungry, trading, or planning to stand there smelling the food until I ask?",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -18,68 +24,48 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "How long have you known Old Timer?",
-	response = (
-		"Since before either of us had these magnificent names. Eighties, a shelter kitchen, a lot of people "
-		.. "wanting something warm. I volunteered. Yes, me. You needn't look for a second Lemon. He had his own "
-		.. "difficulties; he can tell you those if he wants. We stayed in touch. When I started hearing about "
-		.. "this place, he was someone I could ask who might actually have seen what he was describing. That "
-		.. "counts for something, even if he still thinks seasoning means opening a tin beside a fire."
-	),
+	statement = "How did you and Old Timer meet?",
+	response = "Eighties. A shelter kitchen, more hungry people than anyone knew what to do with. I volunteered to cook. Look as surprised as you like; I was useful before I became expensive. He had his own troubles. We stayed in touch, which is how I had somebody to ask when the stories about artifacts started reaching me. Somebody who might have seen one, rather than somebody who knew a man who knew a man. He still ate terribly. Some things survive a change of country.",
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Why did you leave home?",
-	response = (
-		"I had a wife, a job, people who expected me at certain times. I became difficult to expect. There "
-		.. "was always somewhere else I wanted to be, and I generally found a reason why that was somebody "
-		.. "else's fault. She had plenty to say about it. Some of it was even fair. Don't look so pleased; you "
-		.. "haven't heard my side."
-	),
+	statement = "What were you leaving behind?",
+	response = "A wife who'd heard quite enough of my explanations. A job, people expecting me home, all sorts of small arrangements I found inconvenient when they applied to me. Naturally I considered myself misunderstood. I can hear what you're preparing to say. Save it. She was better at that conversation and had considerably more evidence.",
 	options = {
 		"BackgroundTopic3",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "What is your side?",
-	response = (
-		"Considerably longer. Usually improves after a drink. Look, I heard about artifacts, knew people "
-		.. "willing to pay for things they hadn't seen, and knew Old Timer. It sounded like a fresh start with "
-		.. "money attached. I didn't arrive dreaming of feeding everybody. That's what I found I could do here. "
-		.. "Want food, or are you planning to spend the afternoon enjoying my personal failures?"
-	),
+	statement = "Was coming here the fresh start you expected?",
+	response = "I expected artifacts and money. Had some notion I could connect the people finding one with the people spending the other. Turned out I understood hungry stalkers better than strange objects dug out of an anomaly field. I could cook something they'd come back for. There's money in that, and I like being good at it. Don't give me the look people get when they're about to call it a calling.",
 	options = {
 		"BackgroundTopic4",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "Let's leave it there.",
-	response = "Good. I can give a much more convincing account of what's in the pot.",
+	statement = "Let's talk about the kitchen.",
+	response = "Excellent. At last, a subject on which my judgement deserves respect.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "What do you like cooking?",
-	response = (
-		"Something people sit down to eat. A meal they stop walking for. You spend all that time getting it "
-		.. "right and somebody wants to shovel it into a tin and leave. Sit down! Let it cool enough to taste. "
-		.. "And if you like it, say so before telling me how your mother would have made it."
-	),
+	statement = "What makes a meal worth cooking for you?",
+	response = "Someone stops talking halfway through the first mouthful. That's good. Gives me a moment before they begin explaining how somebody at home would have done it. I like people sitting long enough to taste what I've made. If they've spent all day watching for mutants, they can spend ten minutes watching their bowl instead. Preferably without putting it on their knee and announcing they're in a hurry.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("StartBarter", {
-	statement = "I'd like to do some bartering.",
-	response = "Sure.",
+	statement = "What can I exchange for supplies?",
+	response = "Show me what you're offering. Admiring the cooking won't cover the difference.",
 	options = {
 		"BackTopic",
 	},
@@ -157,10 +143,12 @@ DIALOGUE.addTopic("StartBarter", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else...",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Go on. I can listen while I work.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -173,29 +161,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you around.",
-	response = "See you. Bring the bowl back if you've borrowed one.",
+	statement = "I'll leave you to the cooking.",
+	response = "See you. If someone asks what smelled good, you know whose name to give them.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Why do you keep cooking for everyone?",
-	response = (
-		"Because I'm good at it, and people will pay for something they actually want to eat. I didn't come "
-		.. "here to run a charity. Still, you put a pot on and find yourself remembering who can't chew the "
-		.. "tough bits, who'll arrive late, who says they aren't hungry and then watches everyone else's bowl. "
-		.. "Old habits, perhaps. If I make a little extra, that's my decision. It doesn't mean everyone gets to "
-		.. "start explaining what a generous fellow I am."
-	),
+	statement = "Do you like feeding the whole camp?",
+	response = "Depends which part of the camp has just asked for something. The fellow wanting more because he liked it, fine. The one explaining his expedition makes him too important to wait, less fine. I know who's likely to turn up late, who needs a softer piece, who'll pretend they aren't hungry. It gets into the cooking whether you intend it or not. I can care how somebody eats and still expect to be paid.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "You notice who misses a meal?",
-	response = (
-		"I notice what's left in the pot. Old Timer gets distracted. Jitters says he'll eat after the next "
-		.. "patient, which is a fine plan if nobody ever gets hurt again. I put something aside. They can "
-		.. "collect it or I can complain until they do. Don't make a touching story out of it. I also notice "
-		.. "who brings the bowl back dirty."
-	),
+	statement = "What about Old Timer and Jitters?",
+	response = "Those two can find a reason to miss any meal. Hunting, a patient, some necessary thing that apparently prevents a man from lifting a spoon. I put theirs aside, then they complain I'm fussing. Next time I'll let it go cold. Yes, I said that last time. You're remarkably well informed for someone who isn't helping with the washing-up.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Do artifact hunters make good customers?",
+	response = "They arrive convinced they've become wealthy, order like kings, then sit watching their bag instead of eating. One wanted me to admire his find halfway through serving. I told him Egghead was the one to impress with a strange lump; I had something cooling that I'd actually made myself. He laughed. Ate properly after that. Bought another helping, too. A little respect for the cook can be very good for the appetite.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "What do you and Spoor disagree about?",
+	response = "Which part of his day's work is the important part. He'll describe a mutant's last meal in considerable detail while mine waits to be prepared. I understand wanting a specimen intact. I also understand having people outside asking when they can eat. Sometimes he helps carry things in and stays to explain where he found them. That's better. I can work while he talks, and he eventually remembers to ask what's for supper.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Do you trust what he brings you?",
+	response = "I trust him to tell me what he knows. Then I decide what goes near the kitchen. He's allowed to find something fascinating; I'm allowed to want it off my table. We've had that conversation at a volume the whole camp found educational.",
 	options = {"BackTopic"},
 })

@@ -1,8 +1,6 @@
 ITEM.name = "Geiger Counter"
 ITEM.description = "A personal geiger counter that measures local radiation levels."
-ITEM.longdesc = "The casing has the practical wear of an instrument checked far more often than a watch."
-	.. " Experienced stalkers listen closely when its familiar chatter changes near an otherwise ordinary"
-	.. " patch of ground."
+ITEM.longdesc = "The Geiger counter turns local radiation readings into a reference that can be checked while travelling. Its compact housing keeps the measuring instrument close at hand. The ground ahead may look ordinary, which gives the small display a practical importance beyond the device's plain appearance."
 ITEM.model = "models/lostsignalproject/items/devices/geiger.mdl"
 ITEM.category = "Electronics"
 

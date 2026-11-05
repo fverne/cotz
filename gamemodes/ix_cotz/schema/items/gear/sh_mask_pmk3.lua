@@ -1,7 +1,6 @@
 ITEM.name = "PMK-3 Gasmask"
 ITEM.description = "A modern gasmask"
-ITEM.longdesc = "The harness spreads firmly across the back of the head. Adjusting it with cold fingers is a"
-	.. " small task best finished before the air starts to seem questionable."
+ITEM.longdesc = "The PMK-3 gathers its eye panels and filter fittings into a compact facepiece. Flexible material allows the mask body to sit behind the harder components. Its separate form lets the respiratory equipment remain distinct from whatever helmet is worn above it."
 ITEM.model = "models/shtokerbox/ground_mask_pmk3.mdl"
 
 ITEM.price = 75000

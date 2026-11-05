@@ -1,8 +1,6 @@
 ITEM.name = "Ophthalmoscope"
 ITEM.description = "A handheld examination instrument with a pale grip, a blue band and a dark angled head."
-ITEM.longdesc = "The casing is dull from handling, and grime remains in the joins between its sections. It is"
-	.. " carefully shaped for a precise task, with very little on the outside to explain itself to anyone"
-	.. " unfamiliar with the instrument."
+ITEM.longdesc = "The ophthalmoscope places a small examination head at an angle to its grip. A blue band separates sections of the pale handle. The compact instrument belongs to close examination work, with its optical fittings concentrated into a much smaller head than an ordinary torch."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/barter/medical_diagset_sanitar.mdl"

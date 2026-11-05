@@ -1,8 +1,6 @@
 ITEM.name = "Blue Research Dossier"
 ITEM.description = "A blue document folder with loose pages protruding from the edges."
-ITEM.longdesc = "The exposed paper edges have softened, and a dry archive smell clings to the bundle. Detached"
-	.. " from its original filing system, it is difficult to place in any reliable sequence. A specialist"
-	.. " with the right background may be able to supply the missing context."
+ITEM.longdesc = "Loose sheets project beyond the research dossier's blue cover. A folder allows reports and supporting papers to be rearranged without rebinding them. It also makes their order more dependent on whoever last handled the bundle."
 
 ITEM.model = "models/cotz/eft/barter/info_tgdocs.mdl"
 

@@ -1,8 +1,6 @@
 ITEM.name = "Defiance Insignia"
 ITEM.description = "A worn rectangular insignia with a large radiation symbol across its face."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "A large radiation symbol dominates the Defiance insignia. Its rectangular backing has worn more heavily around the edges than the centre. The design makes a broad statement with very little room for personal identification."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_defiance.mdl"
 

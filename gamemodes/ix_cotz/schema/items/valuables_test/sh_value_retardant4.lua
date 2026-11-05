@@ -1,7 +1,6 @@
 ITEM.name = "Black Labelled Fabric Tape"
 ITEM.description = "Two rolls of dark woven tape with a pale label on the loose end."
-ITEM.longdesc = "The exposed edges feel dry and dusty. The weave and packaging offer a small reminder of careful"
-	.. " work done with needles, shears and a clear space on a table."
+ITEM.longdesc = "A pale label marks the end of the black woven tape. Most of the long strip is wound away inside two compact rolls. The label gives an otherwise plain textile supply a reference that can be checked before it is cut or fitted."
 ITEM.valuableCategory = "protective textiles"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant4.mdl"

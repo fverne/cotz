@@ -1,8 +1,6 @@
 ITEM.name = "Labelled Parts Box"
 ITEM.description = "A small translucent parts box with a broad printed label on the lid."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "The translucent parts box gives a blurred view through its small rigid shell. A broad lid label supplies the more useful identification. It is packaging for keeping small pieces together, without the space or compartment layout of a full workshop organiser."
 ITEM.valuableCategory = "transit cases"
 
 ITEM.model = "models/cotz/eft/spec/knife_box_low.mdl"

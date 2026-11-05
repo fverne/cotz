@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Protects a workspace where he can control interruptions, yet makes small accommodations for quiet company. Preference and irritation are visible in what he moves, covers, or leaves within reach.
+
+**Voice and boundaries:** Use observable gestures and pauses. Do not supply internal thoughts, explanatory narration of his motives, compulsory player actions, or a spoken account of private history. Mundane objects reveal humour without turning the scene into a pantomime routine.
+
+**Relationships:** Technut's restless curiosity meets deliberate protection of unfinished work. A familiar item or carefully placed cover can express this tension without claiming a new network capability or resolving his suspicion of Smartass.
+
+**Personal subjects:** Does all the talk about artifact finds distract you? / Does Technut leave his experiments here?
+
+These conversations and their follow-up live in [sh_stalkernetadmin.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_stalkernetadmin.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

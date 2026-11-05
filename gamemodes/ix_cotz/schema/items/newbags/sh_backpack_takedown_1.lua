@@ -1,7 +1,6 @@
 ITEM.name = "Large Sling Backpack"
 ITEM.description = "An over-the-shoulder sling backpack. Features compartments for easy storage of your valuables."
-ITEM.longdesc = "The long body hangs from a single broad strap. Worn adjustment points show the effort of keeping"
-	.. " an uneven load sitting where its owner wants it."
+ITEM.longdesc = "The large sling pack stretches the one-shoulder format into a longer equipment bag. Its tall body accommodates considerably more than the smallest sling, while remaining narrower than a conventional backpack. The strap and reinforced fabric have a noticeable weight of their own."
 ITEM.model = "models/backpack_takedown_sling/backpack_takedown_sling_m.mdl"
 
 ITEM.price = 900

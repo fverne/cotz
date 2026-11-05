@@ -1,7 +1,6 @@
 ITEM.name = "Experienced Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The wrapping keeps a selected weapon out of sight until the supplies are redeemed. The wrapping"
-	.. " is plain, with the attention spent on what a returning field worker will actually carry away."
+ITEM.longdesc = "The Experienced Weapon Box packages an equipment allowance in a plain wooden shell. Its issue class matters more than the weathering of the lid. A contact's redemption preview specifies the available choice before the entitlement is used."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

@@ -1,8 +1,6 @@
 ITEM.name = "Equipment Magazine Bundle"
 ITEM.description = "A small stack of printed magazines with a large equipment photograph on the front."
-ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
-	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
-	.. " simply another object waiting for someone who recognises it."
+ITEM.longdesc = "Equipment photographs occupy most of the magazine bundle's front cover. Reviews promise to explain differences that are less obvious when the objects are seen alone. The appeal is familiar to anyone who has spent too long comparing two pieces of kit they cannot afford."
 ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/quest/flyer_02.mdl"

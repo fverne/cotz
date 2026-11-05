@@ -1,7 +1,6 @@
 ITEM.name = "Brass Skull Ring"
 ITEM.description = "A brass skull ring with a broad band."
-ITEM.longdesc = "Dark residue remains around the teeth and inside the eye sockets, making the expression look"
-	.. " more severe. Raised surfaces have been polished by ordinary handling."
+ITEM.longdesc = "The skull ring enlarges a small piece of brass into a conspicuous ornament. Dark recesses emphasise its teeth and eye sockets. A broad band supports the heavy face, giving the wearer something much less discreet than a plain wedding ring."
 ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/illusion/eftcontainers/skullring.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Coiled Flexible Conduit"
 ITEM.description = "A dark ribbed conduit wound into a tight coil with a short projecting end."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The conduit is wound into a tight helix, retaining its curve when set down. Ribs let a protective sleeve bend without becoming an ordinary loose tube. The short projecting end suggests a length cut from a larger run rather than a complete fitted assembly."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/helix.mdl"

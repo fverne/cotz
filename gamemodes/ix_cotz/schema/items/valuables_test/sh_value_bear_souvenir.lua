@@ -1,7 +1,6 @@
 ITEM.name = "Bear Souvenir"
 ITEM.description = "A small bear souvenir wearing a dark vest."
-ITEM.longdesc = "A bright blue nose stands out against the dusty fur. The fabric has the stale smell of a room"
-	.. " that has been closed for years. It is hard to guess what made somebody carry it this far."
+ITEM.longdesc = "The little bear wears a dark vest over its soft body. A bright nose and blunt paws undermine the serious appearance of the outfit. It is the sort of souvenir that makes sense on a shelf or a bunk, and looks conspicuously personal in a bag of salvage."
 ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/other_teddyb.mdl"

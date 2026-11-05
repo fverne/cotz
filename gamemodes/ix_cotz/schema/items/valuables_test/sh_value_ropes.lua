@@ -1,7 +1,6 @@
 ITEM.name = "Coiled Grey Rope"
 ITEM.description = "A broad coil of grey rope with tightly woven strands and loose overlapping loops."
-ITEM.longdesc = "Dust has worked into the folds and rough surfaces. It has the familiar, unglamorous shape of"
-	.. " camp stores, carried from one improvised shelter to the next."
+ITEM.longdesc = "The grey rope's tightly woven surface gives it a smoother feel than coarse natural fibre. Several loops overlap in the broad coil. Like any length of cordage, its dimensions and condition are more informative than the neatness of the bundle."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/ropes.mdl"

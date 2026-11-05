@@ -1,8 +1,6 @@
 ITEM.name = "Blue-Loop Flash Drive"
 ITEM.description = "A compact dark USB drive with a blue loop at the back of its casing."
-ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
-	.. " where it came from or whether its records survived storage. It is the sort of small object that"
-	.. " can leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "A blue loop gives the flash drive an attachment point for a ring or cord. The body is small enough to disappear among larger fittings. Its distinctive loop makes the physical carrier recognisable without giving any indication of the files it may hold."
 ITEM.valuableCategory = "flash media"
 
 ITEM.model = "models/cotz/eft/info/flash_card_slider.mdl"

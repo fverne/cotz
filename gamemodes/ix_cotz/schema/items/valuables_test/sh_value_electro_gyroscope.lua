@@ -1,9 +1,7 @@
 ITEM.name = "Boxed Inertial Sensor"
 ITEM.description = "A pale rectangular instrument housing with a projecting connector and a dark"
 	.. " identification plate."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The inertial sensor packages a precise measuring assembly inside a plain rectangular housing. A projecting connector carries its external connections. Instruments of this kind are mounted as parts of a larger system, leaving little on the enclosure for an unfamiliar operator to interpret."
 ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/cotz/eft/barter/electro_gyroscope.mdl"

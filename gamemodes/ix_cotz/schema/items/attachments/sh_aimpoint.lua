@@ -1,7 +1,6 @@
 ITEM.name = "Aimpoint CompM4"
 ITEM.description = "Swedish reflex sight. Dot type sight."
-ITEM.longdesc = "A broad front lens and simple aiming mark keep the view uncluttered. The casing shows the little"
-	.. " knocks that come from being carried on a working rifle."
+ITEM.longdesc = "The CompM4 places a luminous dot within an enclosed sight body. Its mounting keeps that reference above the weapon's receiver. The plain circular aiming point leaves the surrounding view relatively uncluttered compared with more elaborate reticle patterns."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

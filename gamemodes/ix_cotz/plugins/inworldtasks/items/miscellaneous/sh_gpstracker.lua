@@ -1,7 +1,6 @@
 ITEM.name = "GPS Tracker"
 ITEM.description = "A small sensor that keeps track of its own position. Moving North will increase your Latitude, and moving East will increase your Longtitude in the zone."
-ITEM.longdesc = "The display is easier to trust than a stranger's directions, though it cannot tell you whether"
-	.. " the next stretch of ground is safe. Survey teams keep written landmarks beside their readings."
+ITEM.longdesc = "The GPS tracker puts position readings into a small sensor body. Its display supplies a numerical reference where paths and landmarks may be difficult to distinguish. The reading identifies a location, leaving the condition of the route there to the person travelling it."
 ITEM.model = "models/lostsignalproject/items/devices/sensor_b.mdl"
 ITEM.price = 1800
 ITEM.flag = "A"

@@ -1,7 +1,6 @@
 ITEM.name = "Large Modern Military Backpack (Russian)"
 ITEM.description = "A large backpack. Features compartments for easy storage of your valuables."
-ITEM.longdesc = "The enlarged body makes it look almost square when fully packed. Surplus fittings and a plain"
-	.. " finish favour a working load over anything resembling civilian luggage."
+ITEM.longdesc = "The larger Russian military pack keeps the familiar straps and compartment layout while accommodating more load. The bag itself weighs slightly more than the standard version. It is an expanded field carrier rather than a different kind of storage system."
 ITEM.model = "models/kek1ch/sumka3.mdl"
 
 ITEM.price = 12750

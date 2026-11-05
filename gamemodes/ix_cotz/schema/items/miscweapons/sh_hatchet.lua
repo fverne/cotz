@@ -1,7 +1,6 @@
 ITEM.name = "Hatchet"
 ITEM.description = "A hatchet made for collecting wood."
-ITEM.longdesc = "The short handle fits easily beside the rest of a camp load. Resin and dirt have collected near"
-	.. " the head, with fresh scratches crossing older ones."
+ITEM.longdesc = "The hatchet puts a compact cutting head within easy reach of a one-handed grip. Its short handle makes it easier to pack than a full-sized axe. The practical shape belongs to camp woodwork even when it is carried among weapons."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_hatchet.mdl"
 ITEM.class = "tfa_nmrih_hatchet"
 ITEM.weaponCategory = "secondary"

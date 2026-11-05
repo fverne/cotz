@@ -1,8 +1,6 @@
 ITEM.name = "Orange Sewing Handbook"
 ITEM.description = "An orange illustrated handbook with small printed text across the cover."
-ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
-	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
-	.. " simply another object waiting for someone who recognises it."
+ITEM.longdesc = "The orange sewing handbook compresses a workshop's worth of reference material into a small volume. Its cover is crowded with print, favouring subject information over decoration. Books like this are consulted for a particular operation, then left open beside the work."
 ITEM.valuableCategory = "technical records"
 
 ITEM.model = "models/cotz/eft/quest/clothbook2.mdl"

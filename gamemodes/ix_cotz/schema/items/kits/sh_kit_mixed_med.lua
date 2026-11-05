@@ -1,7 +1,6 @@
 ITEM.name = "Stalkers Backpack"
 ITEM.description= "A backpack that most likely belonged to a prowler of the zone. It's almost falling apart, rendering it useless, but there still seems to be something inside."
-ITEM.longdesc = "Dust and grit fall from the seams whenever it is moved. The remaining contents have survived the"
-	.. " journey rather better than the fabric around them."
+ITEM.longdesc = "The stalker's backpack has become a cache of provisions, valuables and other field belongings. Fraying seams leave it unsuitable for another long trip as ordinary equipment. The remaining load can still be unpacked even though the carrier has reached the end of its working life."
 ITEM.model = "models/kek1ch/sumka5.mdl"
 
 ITEM.width = 2

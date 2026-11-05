@@ -1,7 +1,6 @@
 ITEM.name = "Weatherproof Matches"
 ITEM.description = "A flat sealed packet holding several long matches with dark red heads."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "Long match stems leave room between the grip and the coated head. A sealed packet keeps the matches together and separates them from other loose supplies. Their format belongs to outdoor equipment intended to survive being packed and carried before it is needed."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/cotz/eft/barter/flammable_huntermatches.mdl"

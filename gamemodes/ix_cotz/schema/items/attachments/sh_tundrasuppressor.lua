@@ -1,7 +1,6 @@
 ITEM.name = "Tundra suppressor"
 ITEM.description = "A suppressor for small arms, mostly pistols and sub machine guns."
-ITEM.longdesc = "The narrow body is easy to tuck into a pouch when it is off the weapon. Soot around the opening"
-	.. " records more about its recent use than the faded markings do."
+ITEM.longdesc = "The Tundra is proportioned for compatible pistols and compact automatic weapons. A narrow cylindrical body extends beyond the muzzle to contain its internal chambers. The attachment moderates the report, with its extra length remaining obvious even on a small firearm."
 ITEM.model = "models/cw2/attachments/cobra_m2.mdl"
 
 ITEM.width = 1

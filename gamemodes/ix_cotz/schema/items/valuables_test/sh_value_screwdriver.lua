@@ -1,7 +1,6 @@
 ITEM.name = "Flathead Screwdriver"
 ITEM.description = "A flathead screwdriver with a red handle."
-ITEM.longdesc = "The handle has the dull, grubby finish of a tool rarely put away with clean hands. There is"
-	.. " nothing distinctive about it until a repair leaves someone needing exactly this tip."
+ITEM.longdesc = "The screwdriver's flat tip fits a straight slot in a screw head. A red handle gives the small tool a visible grip among loose metal parts. Its narrow shaft provides reach into spaces where the hand itself cannot follow."
 ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/illusion/eftcontainers/screwdriver.mdl"

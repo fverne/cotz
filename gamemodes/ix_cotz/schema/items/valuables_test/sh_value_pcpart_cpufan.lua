@@ -1,7 +1,6 @@
 ITEM.name = "CPU Cooling Fan"
-ITEM.description = "A CPU fan mounted above metal cooling fins."
-ITEM.longdesc = "Old dust has settled deep between the fins, beyond the reach of a casual wipe. It has the stale,"
-	.. " warm-plastic smell that seems to linger in computer cases long after the machines are abandoned."
+ITEM.description = "A computer processor cooler consisting of a small fan and metal heatsink."
+ITEM.longdesc = "The fan forces air between the heatsink's closely spaced fins, carrying heat away from the processor beneath it. Dust has packed into those narrow passages. Removed from a computer, the cooler is a surprisingly bulky assembly beside the small chip it was built to keep cool."
 ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_cpufan.mdl"

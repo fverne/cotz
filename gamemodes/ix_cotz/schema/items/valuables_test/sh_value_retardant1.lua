@@ -1,7 +1,6 @@
 ITEM.name = "Orange Protective Tape"
 ITEM.description = "Two rolls of orange-backed protective tape with a loose textured strip."
-ITEM.longdesc = "The exposed edges feel dry and dusty. The weave and packaging offer a small reminder of careful"
-	.. " work done with needles, shears and a clear space on a table."
+ITEM.longdesc = "Orange backing makes the protective tape easy to distinguish in a pile of textile stock. The loose strip shows its woven structure more clearly than the rolls. It is material awaiting an application, without the construction of a finished protective garment."
 ITEM.valuableCategory = "protective textiles"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant1.mdl"

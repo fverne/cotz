@@ -1,8 +1,6 @@
 ITEM.name = "Raven Statuette"
 ITEM.description = "A dark raven statuette on a display base."
-ITEM.longdesc = "Its feather detail is easier to make out along the raised edges than in the dusty recesses."
-	.. " There is something quietly watchful about it, though that may simply be what happens when a room"
-	.. " contains a bird that never moves."
+ITEM.longdesc = "Feather details break up the raven statuette's dark surface. Its display base fixes the bird in a watchful pose. The ornament was made to be looked at from across a room, where its silhouette matters more than the finer work between the feathers."
 ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/valuable_raven.mdl"

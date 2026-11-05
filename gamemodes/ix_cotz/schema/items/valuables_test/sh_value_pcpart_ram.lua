@@ -1,7 +1,6 @@
 ITEM.name = "RAM Stick"
 ITEM.description = "A narrow memory module lined with dark chips."
-ITEM.longdesc = "Dust has worked into the spaces between the components, while the thin board feels almost"
-	.. " insubstantial. The exposed contacts have been handled more than a careful technician would like."
+ITEM.longdesc = "Rows of dark memory chips line the narrow RAM board above a strip of contacts. A notch in that edge helps distinguish its fitting. The module was made to sit upright in a motherboard socket, largely hidden once the computer case was closed."
 ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_ram.mdl"

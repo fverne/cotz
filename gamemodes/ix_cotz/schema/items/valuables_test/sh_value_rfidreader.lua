@@ -1,8 +1,6 @@
 ITEM.name = "RFID Reader Module"
 ITEM.description = "A grey ribbed reader module with a dark front panel and a small red display section."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The RFID reader's ribbed body encloses the electronics behind a dark front panel. A small red display section gives the face its only obvious colour. The module belongs to an identification system, with its original connections and configuration outside the recovered casing."
 ITEM.valuableCategory = "control electronics"
 
 ITEM.model = "models/illusion/eftcontainers/rfidreader.mdl"

@@ -1,12 +1,18 @@
 DIALOGUE.name = "Smartass"
 DIALOGUE.townContact = "smartass"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "I'm always looking to buy artifacts and mutant parts.")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"Let's see what you're buying and selling.",
+	"Certainly. Show me what interests you before I become distracted by something more difficult."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Hello there. If something's broken, tell me what it did before you started helping it.",
+	response = "Hello. If you've brought a problem, start before the part where you became absolutely certain what caused it. Much more entertaining that way.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"BackgroundTopic",
 		"GOODBYE",
@@ -17,14 +23,8 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What is your speciality?",
-	response = (
-		"Making the equipment do the thing somebody swears it was doing yesterday. Data, computers, the "
-		.. "uncomfortable interval between pressing a button and admitting you don't know what it did. I also "
-		.. "answer questions, when they're good. If you tell me what failed and what you tried, we may get "
-		.. "somewhere. If you start with 'I haven't touched anything', I'll assume we're spending the first ten "
-		.. "minutes establishing which part you touched."
-	),
+	statement = "What sort of work holds your attention?",
+	response = "Computers, data, a device doing something its owner swears it never did before. I like the gap between what happened and the account that arrives here. Sometimes there's a good problem in it. Sometimes there's a button nobody wants to admit pressing. Explain what you noticed and what you tried; we might reach the interesting part before I have to become unpleasantly thorough about the second question.",
 	options = {
 		"BackTopic",
 	},
@@ -239,10 +239,12 @@ DIALOGUE.addTopic("NotEnoughMoneySuitVariantChange", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about another topic.",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Go on. You've survived the first answer.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"BackgroundTopic",
 		"GOODBYE",
@@ -254,29 +256,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "I'll talk to you later.",
-	response = "Off you go. Try to remember what it did before you fixed it.",
+	statement = "I'll leave you to it.",
+	response = "Off you go. Remember the interesting part before you rehearse the impressive version.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Could you collect the data yourself?",
-	response = (
-		"Certainly. You can stay here and tell Boss I've gone for valuable field experience. Say it very "
-		.. "seriously; he enjoys that. Or we divide the work. You reach the computers, I deal with the "
-		.. "contents, and neither of us has to pretend it was a productive afternoon if I got shot carrying a "
-		.. "flash drive. I do want to see what comes back. That's the irritating part. Every sensible reason to "
-		.. "stay here still leaves me wondering what the machine looked like before it failed."
-	),
+	statement = "Wouldn't you rather collect the data yourself?",
+	response = "I'd like to see some of the machines before they're reduced to a description beginning 'old computer'. Also like being here when the contents arrive. Sensible division of labour, with the irritating consequence that someone else sees the interesting place. If I go wandering off for field experience, you can explain it to Boss. Give the phrase your full professional confidence. I'd be sorry to miss his expression.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What makes a question worth answering?",
-	response = (
-		"Something specific. Spool can describe a fault well enough that I almost hear it. Then he adds his "
-		.. "explanation and we have a lovely argument. Mute supplies rather less commentary. Both approaches "
-		.. "have their merits. Start with what you actually noticed and I might even forget to insult you. "
-		.. "Don't wait around expecting an apology if I do."
-	),
+	statement = "What makes you take a question seriously?",
+	response = "A detail the person hasn't already polished into a conclusion. Spool can describe a sound until I almost hear the fault. Then he supplies his theory and we enjoy a perfectly avoidable argument. Mute prefers to show me something and wait. That works too, though it's poor company if I'd prepared a particularly good objection. Tell me what you actually noticed. Curiosity occasionally gets the better of my manners.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Do people blame anomalies for every broken PDA?",
+	response = "Only after exhausting the manufacturer's incompetence and the possibility that I've personally arranged it. Ask when it stopped working and suddenly we're discussing a puddle. Fascinating anomaly, the puddle. Very well documented. Of course something stranger might have happened. I'd love to hear it. That's why I ask what the machine actually did before being appointed expert witness for the dramatic bit. Sometimes the answer's interesting enough that I forget to enjoy the owner's face.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Does Spool ever get the better of you?",
+	response = "He remembers things I've said. Unpleasant habit in a man who spends all day encouraging other people to talk. I'll dismiss a description, he'll repeat the exact noise I asked him about last time, and suddenly I owe the problem another look. He's good at it. There, a compliment. Don't take it over to him; he'll remember the wording and make the rest of my week unbearable.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Have you ever blamed something on an anomaly?",
+	response = "I've said 'unexpected behaviour' with considerable confidence. Bought myself enough time to find the setting I'd changed. You may appreciate the honesty while remembering this conversation has no witnesses prepared to support you.",
 	options = {"BackTopic"},
 })

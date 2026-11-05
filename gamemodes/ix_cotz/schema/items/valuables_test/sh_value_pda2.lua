@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Grey PDA"
 ITEM.description = "A grey handheld computer with a dark screen and buttons above the display."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The grey PDA places its buttons above a small dark display. It was designed for quick entries and portable records rather than the broad working surface of a laptop. As recovered hardware, its saved information remains less visible than the wear on the casing."
 ITEM.valuableCategory = "portable computers"
 
 ITEM.model = "models/lostsignalproject/items/devices/pda2.mdl"

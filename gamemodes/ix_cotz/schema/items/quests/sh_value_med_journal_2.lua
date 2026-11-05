@@ -1,8 +1,6 @@
 ITEM.name = "Clinical Records Folder II"
 ITEM.description = "A blue-green records folder with loose printed sheets and a marked cover."
-ITEM.longdesc = "Dust has worked into the edges and left the surface unpleasantly dry to the touch. The markings"
-	.. " suggest records assembled for a particular desk rather than general reading. Whatever made them"
-	.. " important would have to be established by someone who knows what to look for."
+ITEM.longdesc = "A marked cover distinguishes this clinical folder from its similarly coloured counterpart. Loose sheets remain gathered inside without a permanent binding. It is a record bundle whose identity matters alongside individual page headings and dates."
 
 ITEM.model = "models/cotz/eft/quest/med_journal_2.mdl"
 

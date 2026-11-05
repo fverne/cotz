@@ -1,7 +1,6 @@
 ITEM.name = "Ruble Coins"
 ITEM.description = "A few coins of Ukranian currency."
-ITEM.longdesc = "Their small denominations make them more useful for settling a trivial debt than paying for"
-	.. " equipment. Years of hands have rubbed the raised details smooth."
+ITEM.longdesc = "Raised designs and worn rims distinguish the loose coins from plain metal discs. Their small size makes individual pieces easy to lose among larger belongings. The collection is a remnant of everyday cash handling, with much less ceremony than bundled banknotes."
 ITEM.model = "models/lostsignalproject/items/misc/sack.mdl"
 
 ITEM.width = 1

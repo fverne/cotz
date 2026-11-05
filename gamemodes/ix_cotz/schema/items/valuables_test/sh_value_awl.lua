@@ -1,7 +1,6 @@
 ITEM.name = "Awl"
-ITEM.description = "A narrow metal awl with a wooden handle."
-ITEM.longdesc = "The grain is dark with age and handling, and the shaft carries a thin film of workshop grime. It"
-	.. " is a modest little object, easily overlooked until it catches on the lining of a pocket."
+ITEM.description = "A wooden-handled awl for piercing leather and heavy cloth."
+ITEM.longdesc = "The awl's steel point makes stitch holes in material too tough for a needle alone. Its rounded wooden handle sits against the palm, allowing steady pressure without much room to work. A simple tool associated with bootmaking, harness work and the less glamorous business of keeping straps attached to bags."
 ITEM.valuableCategory = "cutting tools"
 
 ITEM.model = "models/cotz/eft/barter/tools_awl.mdl"

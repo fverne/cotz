@@ -1,7 +1,6 @@
 ITEM.name = "Coffee Bean Jar"
 ITEM.description = "A clear jar of dark coffee beans with a broad brown lid and a dark side label."
-ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
-	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
+ITEM.longdesc = "Whole coffee beans are visible through the jar beneath a broad brown lid. The rigid container protects their shape during storage. Its contents belong to the stage before brewing, giving the jar a different place in a kitchen from a tin of ready-ground coffee."
 ITEM.valuableCategory = "provisions"
 
 ITEM.model = "models/cotz/eft/barter/other_lupo.mdl"

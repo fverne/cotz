@@ -497,6 +497,11 @@ The dialogue pass preserves IDs, task kinds, locations, recipients, requirements
 conditions. Briefings describe assigned sites rather than promising fixed structures or new actors.
 Verify text wrapping, long replies, incoming deliveries, work offers, and final greetings in multiplayer.
 
+The subsequent personality expansion adds everyday Zone conversations and relationship topics to all
+27 bound conversation files, with corresponding notes in the existing contact profiles. It changes no
+contact definition, work prompt, finite briefing, completion reply, or finished-story greeting. Personal
+subjects remain under the questions menu, with no additional progression requirements.
+
 ### Regenerating a ledger while definitions have validation errors
 
 `python3 docs/npc-overhaul/tools/progression_rewards.py --write --allow-invalid` writes a current

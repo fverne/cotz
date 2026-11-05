@@ -1,7 +1,6 @@
 ITEM.name = "Nightforce NXS"
 ITEM.description = "American optic sight. 8.0x magnification. Cross type sight."
-ITEM.longdesc = "The long optical tube and prominent adjustment turrets suggest careful, measured shooting. Lens"
-	.. " caps matter when a day's travel consists of mud, loose brick, and sudden rain."
+ITEM.longdesc = "The NXS places its magnified view within a long optical tube. The broad lenses and substantial mounting space distinguish it from short-range reflex sights. It belongs to a deliberate sighting arrangement, with the supporting weapon carrying considerably more glass above the receiver."
 ITEM.category = "Attachments"
 ITEM.width = 2
 ITEM.height = 1

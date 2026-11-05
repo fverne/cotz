@@ -1,8 +1,6 @@
 ITEM.name = "Small Yellow Transit Case"
 ITEM.description = "A small yellow hard case with ribbed corners and a large label on its lid."
-ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
-	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
-	.. " with more history than explanation."
+ITEM.longdesc = "The small yellow case places a broad label on its ribbed lid. Its bright panels make it easy to find among darker equipment boxes. The protective shell keeps a compact load together without revealing the contents through its exterior."
 
 ITEM.model = "models/cotz/eft/containers/container_secured_alpha.mdl"
 

@@ -1,8 +1,6 @@
 ITEM.name = "Tagged Security Flash Drive"
 ITEM.description = "A USB drive with a large rear loop and a handwritten paper label around its body."
-ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
-	.. " where it came from or whether its records survived storage. It is the sort of small object that"
-	.. " can leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "The security flash drive has a large rear loop and a handwritten paper tag. The loop offers a way to keep a small carrier attached to something easier to find. Its label identifies the object without establishing the permissions or records associated with it."
 
 ITEM.model = "models/cotz/eft/info/spec_tgflashkey.mdl"
 

@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants the camp's ordinary comforts respected and some say over his own time. He notices who needs help while resenting the expectation that he will always provide it.
+
+**Voice and boundaries:** Complaints should have a particular cause, a borrowed object, an interrupted meal, or somebody's thoughtless assumption. Allow pleasure when a routine goes smoothly. Do not promise utility repairs or emission protection as new mechanics.
+
+**Relationships:** He disputes Haggler's prices and presentation while acknowledging the supplies eventually arrive. The clinic keeps priority without making Jitters personally helpless or turning Gasket into the camp's saint.
+
+**Personal subjects:** What bothers you most after everyone comes back from an expedition? / Do you ever get a fair deal from Haggler?
+
+These conversations and their follow-up live in [sh_gasketnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_gasketnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

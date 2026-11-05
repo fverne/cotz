@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys reconstructing small parts of a working day and keeping the writer's uncertainty visible. His interest can outrun another person's patience; he sometimes has to put down a question he still wants answered.
+
+**Voice and boundaries:** Interested, persistent, quietly amused by mundane discoveries. Distinguish handwriting and marginal comments from proof of an event. Leave room for an unfinished account without making every document ominous.
+
+**Relationships:** Boss's restrictions provoke specific questions about context rather than a general accusation of conspiracy. Carbon can acknowledge an understandable limit and still dislike the answer.
+
+**Personal subjects:** Do you keep stalkers' accounts of mutant encounters? / What happens when Boss won't let you read a record?
+
+These conversations and their follow-up live in [sh_carbonnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_carbonnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

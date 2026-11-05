@@ -1,8 +1,6 @@
 ITEM.name = "ISG Insignia"
 ITEM.description = "A round insignia with a pale emblem and lettering around its border."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "Lettering follows the circular edge of the ISG insignia around a pale emblem. The round backing has no obvious upper corner once it lies loose. The printed association says more about the patch than it does about whoever last possessed it."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_isg.mdl"
 

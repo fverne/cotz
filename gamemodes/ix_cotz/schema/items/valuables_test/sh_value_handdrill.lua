@@ -1,8 +1,6 @@
 ITEM.name = "Hand Drill"
 ITEM.description = "A hand-operated drill with a green body and wooden grips."
-ITEM.longdesc = "The wood is darkened where it has been handled, while old grime clings around the gear teeth. It"
-	.. " belongs to a quieter sort of workshop, one where the work stopped whenever the person doing it"
-	.. " needed a rest."
+ITEM.longdesc = "A hand crank turns exposed gears to rotate the drill's chuck. Wooden grips give one hand a steady hold while the other supplies the motion. The mechanism makes its power source quite plain, without the motor housing or battery pack of a modern drill."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/barter/tools_handdrill.mdl"

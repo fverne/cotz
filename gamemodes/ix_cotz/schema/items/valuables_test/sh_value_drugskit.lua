@@ -1,7 +1,6 @@
 ITEM.name = "Medical Shipment Case"
 ITEM.description = "A pale rectangular field case with a carrying handle and a medical cross on its lid."
-ITEM.longdesc = "There is dust around the fittings and no accompanying inventory to explain its journey. Someone"
-	.. " responsible for specialist stores would want it inspected and accounted for."
+ITEM.longdesc = "A medical cross distinguishes the shipment case from similar field boxes. The carrying handle lets the contents travel as one consignment instead of a collection of loose packets. The closed case provides packaging and identification, rather than an inventory of what remains inside."
 ITEM.valuableCategory = "specialist cases"
 
 ITEM.model = "models/lostsignalproject/items/misc/drugskit.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Assorted Medical Stock"
 ITEM.description = "An untidy collection of medical packets, blister strips and small containers."
-ITEM.longdesc = "The packaging varies in shape and colour, with little of the careful arrangement usually"
-	.. " associated with a pharmacy counter. It smells of cardboard and shut cupboards. Somebody will"
-	.. " have to make sense of the collection before it belongs on a proper shelf again."
+ITEM.longdesc = "Blister strips, packets and small containers form an unsorted collection of medical stock. Their different wrappers preserve identities that the loose contents would not. The bundle needs counting and organising before it resembles the orderly compartments of a complete medical kit."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/medpile.mdl"

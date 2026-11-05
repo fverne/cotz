@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys the full occasion of an expedition, including anticipation and the untidy return. Her appetite for another look can make an ordinary evening feel slow, but she can laugh at that impatience.
+
+**Voice and boundaries:** Practical and lively, sometimes amused at how she sounds when excited. Describe personal reactions to an anomaly field without declaring a dependable pattern or giving new artifact-handling instructions.
+
+**Relationships:** Intern's questions earn attention when they begin with a genuine observation. She can enjoy teaching without claiming responsibility for his advancement or settling his disputes with senior researchers.
+
+**Personal subjects:** Which part of an expedition do you look forward to most? / Do you like taking questions from Intern?
+
+These conversations and their follow-up live in [sh_vespernpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_vespernpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

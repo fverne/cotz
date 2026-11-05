@@ -1,7 +1,6 @@
 ITEM.name = "Modern Military Backpack (USA)"
 ITEM.description = "A backpack. Features compartments for easy storage of your valuables."
-ITEM.longdesc = "Imported field gear tends to change hands several times before reaching a camp stall. The"
-	.. " fastenings and webbing remain recognisably different from the local surplus around it."
+ITEM.longdesc = "The American military backpack arranges several storage spaces within a compact two-strap body. Keeping small supplies separate makes the contents less dependent on unpacking the main compartment. Its broad fabric shell is designed around a carried load rather than a rigid equipment case."
 ITEM.model = "models/kek1ch/sumka2.mdl"
 
 ITEM.price = 1300

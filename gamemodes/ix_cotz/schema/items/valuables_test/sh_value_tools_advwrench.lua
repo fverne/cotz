@@ -1,7 +1,6 @@
 ITEM.name = "Adjustable Workshop Wrench"
 ITEM.description = "A long red-handled wrench with a dark adjustable jaw at one end."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The adjustable wrench changes the space between its jaws with a small screw mechanism. Its long red handle gives leverage without requiring a separate spanner for every size. The broader head is the practical cost of keeping that adjustment within one tool."
 ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/cotz/eft/barter/tools_advwrench.mdl"

@@ -506,10 +506,32 @@ local expectedModels = {
 for template, model in pairs(expectedModels) do
 	check(ix.npctemplates.templates[template].model == model, "splitting templates preserves existing models")
 end
+local function hasOption(topic, topicID)
+	for _, option in ipairs(topic.options) do
+		if option == topicID then return true end
+	end
+
+	return false
+end
 for _, contact in pairs(ix.townNPCs.contacts) do
 	local tree = ix.dialogue.list[ix.npctemplates.templates[contact.template].dialogueid].tree
 	local offered = {}
 	for _, option in ipairs(tree.GREETING.options) do offered[option] = true end
+	for _, topicID in ipairs({"InterestZoneLifeTopic", "InterestTownRelationsTopic"}) do
+		check(hasOption(tree.QuestionsTopic, topicID), "personal subjects are offered by each contact's questions menu")
+		check(not offered[topicID] and not hasOption(tree.BackTopic, topicID),
+			"personal subjects do not displace root actions")
+	end
+	check(hasOption(tree.InterestZoneLifeTopic, "InterestPersonalFollowup")
+		or hasOption(tree.InterestTownRelationsTopic, "InterestPersonalFollowup"),
+		"each contact's personal follow-up is reachable from its subject")
+	for _, topicID in ipairs({"InterestZoneLifeTopic", "InterestTownRelationsTopic", "InterestPersonalFollowup"}) do
+		check(hasOption(tree[topicID], "QuestionsBackTopic"), "personal replies return to the questions menu")
+		if contact.id == "mute" then
+			check(tree[topicID].response:sub(1, 2) == "**" and tree[topicID].response:sub(-2) == "**",
+				"Mute's new personal replies preserve nonverbal presentation")
+		end
+	end
 	check(offered.TradeTopic and (offered.TownProgression == true) == (#contact.progression > 0),
 		"only contacts with active milestones expose progression")
 	check(offered.AboutWorkTopic, "all contacts expose the work status menu")

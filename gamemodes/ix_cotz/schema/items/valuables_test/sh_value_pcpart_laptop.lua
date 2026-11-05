@@ -1,7 +1,6 @@
 ITEM.name = "Damaged Laptop"
 ITEM.description = "A damaged laptop with a distorted cover."
-ITEM.longdesc = "The warped surfaces make its original shape easier to imagine than to reconstruct. Dust sits in"
-	.. " the exposed joins, and the whole thing has the stale smell of electronics left in a damp room."
+ITEM.longdesc = "The laptop's distorted cover no longer closes with the neat alignment of an intact machine. A screen, keyboard and main electronics remain gathered into one damaged shell. The visible damage makes the whole assembly less predictable than a tray of separately identified parts."
 ITEM.valuableCategory = "portable computers"
 
 ITEM.model = "models/illusion/eftcontainers/laptop.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Package"
 ITEM.description = "A small package."
-ITEM.longdesc = "The wrapping gives little away about the contents. A courier is expected to remember the"
-	.. " destination and leave the recipient to satisfy their own curiosity."
+ITEM.longdesc = "The courier package keeps a small consignment beneath tightly closed wrapping. Its modest size conceals a load substantial enough to notice in a travelling bag. The destination belongs to the delivery assignment rather than to an invitation to inspect the contents."
 ITEM.model = "models/lostsignalproject/items/repair/repair_helmet_repair.mdl"
 ITEM.price = 0
 ITEM.flag = "A"

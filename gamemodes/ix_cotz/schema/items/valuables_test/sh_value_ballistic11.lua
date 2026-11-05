@@ -1,7 +1,6 @@
 ITEM.name = "Dense Armour Insert"
 ITEM.description = "A thick dark rectangular armour insert with a finely textured face."
-ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
-	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "The armour insert has a dense body beneath a finely textured cover. Its thickness is most apparent along the edges, where the rectangular form becomes a substantial block. Without its original carrier, the insert is easier to handle as a piece of material than to identify as a complete protective assembly."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic11.mdl"

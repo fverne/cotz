@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Blue PDA"
 ITEM.description = "A blue handheld computer with a dark screen and a raised control panel."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "A raised control panel gives the blue PDA a distinctive profile. The small screen and concentrated buttons favour one task at a time. The casing makes the handheld recognisable without revealing the contacts or notes it may once have carried."
 ITEM.valuableCategory = "portable computers"
 
 ITEM.model = "models/lostsignalproject/items/devices/pda3.mdl"

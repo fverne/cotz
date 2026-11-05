@@ -1,8 +1,6 @@
 ITEM.name = "Green Survey Equipment Case"
 ITEM.description = "A long green equipment case with a folded carrying handle and worn rectangular panels."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The long green survey case folds its handle flat against the shell. Rectangular panels divide the exterior into broad protected surfaces. Its proportions suggest a kit carried as one assembly, although the closed case alone cannot provide an inventory of the original instruments."
 ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/cotz/eft/spec/minedetector.mdl"

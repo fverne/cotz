@@ -1,7 +1,6 @@
 ITEM.name = "Large Modern Military Backpack (USA)"
 ITEM.description = "A large backpack. Features compartments for easy storage of your valuables."
-ITEM.longdesc = "The generous body and imported fittings suggest a long journey before this one began. Owners"
-	.. " usually discover that available room fills faster than they expected."
+ITEM.longdesc = "The large American military pack provides a greater allowance within the same general field-pack layout. Its additional material adds some weight before any supplies are packed. Separate compartments retain the organising role of the smaller version."
 ITEM.model = "models/kek1ch/sumka2.mdl"
 
 ITEM.price = 13500

@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Experimental Headset"
 ITEM.description = "An open-frame headset with dark ear pieces, a top band and small attached fittings."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "The experimental headset leaves much of its frame open around dark earpieces. Small fittings attach to the top band instead of disappearing inside a solid helmet shell. Its unusual arrangement identifies research equipment, without establishing what the recovered assembly can still do."
 
 ITEM.model = "models/lostsignalproject/items/misc/psi_helmet.mdl"
 

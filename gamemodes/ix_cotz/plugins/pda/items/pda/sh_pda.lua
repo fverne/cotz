@@ -1,8 +1,6 @@
 ITEM.name = "PDA"
 ITEM.description = "A personal digital assistant for the stalker communication network."
-ITEM.longdesc = "A chosen nickname and avatar are often the only introduction a stalker gives the wider network."
-	.. " The casing fits comfortably in a jacket pocket, close enough to check whenever a message"
-	.. " arrives."
+ITEM.longdesc = "The PDA gives a stalker's network identity a small handheld home. A chosen nickname and avatar accompany messages rather than a face-to-face introduction. Its screen brings contacts and information into a pocket-sized device, leaving the person behind the account less visible than the account itself."
 ITEM.model = "models/lostsignalproject/items/devices/pda.mdl"
 ITEM.width = 1
 ITEM.height = 1

@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants the people at each end of a delivery to be able to stop waiting. Finds satisfaction in a finished day, while his memory for unfinished business can intrude on an otherwise pleasant conversation.
+
+**Voice and boundaries:** Courteous, patient, dry about the particulars of an explanation. Let him remember an ordinary kindness alongside a late parcel. An emission can be part of an anecdote without defining a new shelter, route, or delivery event.
+
+**Relationships:** Cleaner's brevity is useful and occasionally socially awkward. Ledger respects a clear answer without needing private details and can enjoy the contrast between their manners.
+
+**Personal subjects:** Does an emission leave you with a lot of complaints? / How do you get along with Cleaner?
+
+These conversations and their follow-up live in [sh_ledgernpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_ledgernpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

@@ -1,8 +1,6 @@
 ITEM.name = "Warehouse Packing List B"
 ITEM.description = "A clipboard carrying a densely printed packing list and a stamped mark."
-ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
-	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
-	.. " simply another object waiting for someone who recognises it."
+ITEM.longdesc = "Densely printed entries cover the second warehouse packing list. A stamp adds a point of identification among the small rows of text. The clipboard keeps the paper manageable while individual packages are checked against the recorded quantities."
 
 ITEM.model = "models/cotz/eft/quest/packinglist_idea.mdl"
 

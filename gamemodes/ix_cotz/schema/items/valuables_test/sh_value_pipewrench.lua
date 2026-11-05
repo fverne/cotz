@@ -1,7 +1,6 @@
 ITEM.name = "Pipe Wrench"
 ITEM.description = "A heavy wrench with an adjustable jaw."
-ITEM.longdesc = "Dirt sits deep in the threads, and the exposed metal has the tired finish of an old maintenance"
-	.. " tool. It smells faintly of oil and wet iron, like a boiler room that has been shut for too long."
+ITEM.longdesc = "The pipe wrench's adjustable jaw closes against a fixed opposing surface. Its long handle provides leverage around a rounded fitting. The broad head and heavy construction suit plumbing work, where smooth pipe offers an ordinary spanner very little to hold."
 ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/cotz/eft/barter/tools_plumber_wrench.mdl"

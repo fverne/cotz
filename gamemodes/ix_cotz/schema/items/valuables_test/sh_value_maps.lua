@@ -1,8 +1,6 @@
 ITEM.name = "Weathered Map Roll"
 ITEM.description = "A tightly rolled bundle with a dark weathered outer surface."
-ITEM.longdesc = "The folds feel rough from repeated handling, and the surface smells faintly of dry paper and old"
-	.. " cupboards. It has the look of material kept for reference through several changes of plan. Its"
-	.. " markings would need to be checked against records that are not attached to it."
+ITEM.longdesc = "The map roll keeps broad sheets together at the cost of a tight curl. Its outer surface has taken the wear that would otherwise reach the inner pages. The contents need spreading out before routes and markings can be compared properly."
 ITEM.valuableCategory = "field records"
 
 ITEM.model = "models/lostsignalproject/items/misc/maps.mdl"

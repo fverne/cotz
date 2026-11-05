@@ -1,7 +1,6 @@
 ITEM.name = "Segmented Armour Panel"
 ITEM.description = "A dark segmented armour panel with stitched rectangular sections."
-ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
-	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "Stitching divides the armour panel into a row of smaller rectangular sections. That arrangement lets the sections sit together inside a larger carrier instead of forming one broad slab. The loose panel is a component of protective equipment, with its original garment and fitting absent."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic1.mdl"

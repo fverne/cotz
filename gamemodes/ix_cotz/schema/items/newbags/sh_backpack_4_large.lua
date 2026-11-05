@@ -1,7 +1,6 @@
 ITEM.name = "Large Zone Survival Backpack"
 ITEM.description = "A large backpack. Featuring large compartments for storage of items, as well as being very comfortable."
-ITEM.longdesc = "The expanded body suits someone who plans to be away from the camp table for a while. Mud has"
-	.. " settled into the stitching near the base, where it is hardest to brush away."
+ITEM.longdesc = "The large survival pack extends an already substantial carrying arrangement. Its broader load allowance is accompanied by a heavier empty bag. The same practical compartments keep smaller belongings from becoming indistinguishable layers at the bottom of the main space."
 ITEM.model = "models/kek1ch/sumka4.mdl"
 
 ITEM.price = 32500

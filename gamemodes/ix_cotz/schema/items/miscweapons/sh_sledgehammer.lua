@@ -1,7 +1,6 @@
 ITEM.name = "Sledgehammer"
 ITEM.description = "A Sledgehammer for use in demolition."
-ITEM.longdesc = "The head has battered corners and a handle polished by heavy gloves. Its weight is obvious"
-	.. " before the first swing, especially to the person carrying it all afternoon."
+ITEM.longdesc = "The sledgehammer's heavy head sits on a shaft long enough for a two-handed swing. Its plain construction is intended to put mass behind a broad impact. The same eight kilograms that make it substantial in use must be carried between uses."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_sledge.mdl"
 ITEM.class = "tfa_nmrih_sledge"
 ITEM.weaponCategory = "primary"

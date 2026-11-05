@@ -1,8 +1,6 @@
 ITEM.name = "Thick Pocket Diary"
 ITEM.description = "A thick dark diary with page markers projecting around the cover."
-ITEM.longdesc = "The edges have softened with handling, and there is a faint smell of old paper about it. It"
-	.. " feels like something that once had a habitual place among one person's belongings. Without its"
-	.. " owner, even an ordinary object acquires an uncomfortable weight of unanswered questions."
+ITEM.longdesc = "Page markers project from several places in the thick diary. Its small cover conceals a crowded block of paper, allowing a long sequence of entries to travel in a pocket. The markers suggest pages worth returning to rather than a volume read only in order."
 ITEM.valuableCategory = "field records"
 
 ITEM.model = "models/cotz/eft/info/thick_diary.mdl"

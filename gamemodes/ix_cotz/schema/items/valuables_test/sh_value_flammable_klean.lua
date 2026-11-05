@@ -1,7 +1,6 @@
 ITEM.name = "Lighter Fuel Bottle"
 ITEM.description = "A narrow dark refill bottle with a ribbed collar and a long dispensing nozzle."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The lighter-fuel bottle ends in a narrow dispensing nozzle. It is shaped to reach a small refill opening instead of pouring a broad stream. The ribbed collar gives the closure a better grip than the smooth sides of the bottle."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/cotz/eft/barter/flammable_klean.mdl"

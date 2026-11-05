@@ -1,7 +1,6 @@
 ITEM.name = "Cordless Drill"
 ITEM.description = "A blue cordless drill with a dark grip and a rectangular battery beneath the handle."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The cordless drill carries its battery beneath the grip, keeping the main body free of a trailing power lead. A chuck at the front holds the working bit. Its usefulness in a workshop depends on matching accessories as much as on the drill body itself."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/illusion/eftcontainers/electricdrill.mdl"

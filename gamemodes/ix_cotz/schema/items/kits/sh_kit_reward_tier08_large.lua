@@ -1,7 +1,6 @@
 ITEM.name = "Master Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "A full bundle set aside as payment for completed work. The unassuming finish is typical of"
-	.. " valuable supplies kept out of casual sight."
+ITEM.longdesc = "The large Master Reward represents the top issue class of the general supply-package series. Its size distinguishes it from the compact master package. The contact's offer lists the available contents before the entitlement is exchanged."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

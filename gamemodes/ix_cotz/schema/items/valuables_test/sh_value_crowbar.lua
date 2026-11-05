@@ -1,7 +1,6 @@
 ITEM.name = "Bent Crowbar"
 ITEM.description = "A long dark red crowbar with a forked upper hook and a flattened lower end."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The crowbar's forked hook and flattened foot offer two shapes for working against an edge. Its long steel shaft provides the leverage that a short hand tool lacks. The red finish has worn from the surfaces most likely to meet masonry or metal."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/lostsignalproject/items/misc/crowbar.mdl"

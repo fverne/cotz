@@ -1,8 +1,6 @@
 ITEM.name = "Striped Equipment Case"
 ITEM.description = "A low hard case with long contrasting strips across its ribbed lid."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "Long contrasting strips run across the equipment case's ribbed lid. The stripes help identify the broad face when the case is stacked among other luggage. Beneath the markings, the low rigid shell is built around protected transport rather than easy folding or packing away."
 
 ITEM.model = "models/cotz/eft/containers/container_gamma.mdl"
 

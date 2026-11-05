@@ -1,12 +1,18 @@
 DIALOGUE.name = "Old Timer"
 DIALOGUE.townContact = "old-timer"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"Let's see what we can trade.",
+	"Have a look. Think about what you'll use on the walk, as well as what you hope to bring back."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Still standing, I see. Good. What do you need?",
+	response = "Come over. There's room by the fire if you need a moment. Hunting, supplies, or something on your mind?",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"NicknameTopic",
@@ -19,8 +25,8 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("NicknameTopic", {
-	statement = "I'd like to change my nickname.",
-	response = "What would you like your nickname to be?",
+	statement = "I'd like to use a different nickname.",
+	response = "Your name to live with. What do you want people calling you?",
 	options = {
 		"BackTopic",
 	},
@@ -45,54 +51,40 @@ DIALOGUE.addTopic("NicknameTopic", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "Were you living near here before the Zone?",
-	response = (
-		"Near enough to know some of the country before everyone started giving it new names. Hunted "
-		.. "hereabouts. Thought that would stand me in good stead when I first came through. It helped, until I "
-		.. "began trusting what I expected to find more than what was in front of me. You can make that mistake "
-		.. "on familiar ground very easily. I still recognise bits of the place. A bend, a line of trees. "
-		.. "Sometimes I wish I didn't; takes a moment to stop looking for what used to be beside them."
-	),
+	statement = "Did you know this country before it became the Zone?",
+	response = "Hunted hereabouts. Used to know where I'd stop to eat and which stretch would soak my boots. Some of it still looks familiar. That's caught me out more than once: you start looking for a gap that used to be there instead of watching where you're putting your feet. I can enjoy remembering a place. Takes a little effort to stop the memory deciding what I'm seeing.",
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "How do you deal with the military?",
-	response = (
-		"Avoid them where you can. Don't assume a uniform means they're interested in your explanation. I've "
-		.. "heard enough stories about how they deal with intruders to leave the experiments to somebody else. "
-		.. "If you can make a quieter journey, do it. You don't need to establish which rumour was true."
-	),
+	statement = "What do you make of the military here?",
+	response = "I give them room. Heard enough accounts of men trying to explain themselves to a patrol, and I haven't much appetite for adding my own. People bring camp a new rumour about the soldiers every week. Some of it may be true. Ask who actually saw what happened before you decide a particular uniform will listen to you. I'd sooner spend the extra time walking round.",
 	options = {
 		"BackgroundTopic3",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Why did you stay?",
-	response = (
-		"Not much waiting for me at home by then. Hunting stopped paying, I drank more than I should, and my "
-		.. "family had enough of it. Here there was always something to do next. Don't confuse that with "
-		.. "putting things right. A person can stay very busy avoiding a question."
-	),
+	statement = "What made you stay?",
+	response = "Home had become a place where people were tired of waiting for me to put myself right. The hunting wasn't paying, I was drinking, and I had an answer ready for everyone except my family. Here I could get up and deal with something that needed doing. Still can. Doesn't make a grand story about finding my place. Lemon knows enough of it already; you needn't go asking him for the rest.",
 	options = {
 		"BackgroundTopic4",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic4", {
-	statement = "Let's leave the past there.",
-	response = "All right. There's enough to be getting on with today.",
+	statement = "We can leave that there.",
+	response = "Yes. Thank you. How are you finding the camp?",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("StartBarter", {
-	statement = "I'd like to do some bartering.",
-	response = "Sure.",
+	statement = "What can I exchange with you?",
+	response = "Let's see what you've got and what I can spare.",
 	options = {
 		"BackTopic",
 	},
@@ -170,10 +162,12 @@ DIALOGUE.addTopic("StartBarter", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else...",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Go on. I'm listening.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"NicknameTopic",
@@ -187,29 +181,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you around.",
-	response = "Get yourself home. We can talk another time.",
+	statement = "I'll be on my way.",
+	response = "All right. Don't let somebody else's hurry decide the length of your walk.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "When do you know someone is ready to go out?",
-	response = (
-		"Depends where they're going. Show me your water, tell me how you're getting back, then we can "
-		.. "discuss how ready you are. People think I'm asking because I enjoy finding fault with their "
-		.. "packing. Sometimes I do. Mostly I want them to have an answer before something frightens it out of "
-		.. "their head. First walk needn't be a grand expedition. There's plenty to learn within a sensible "
-		.. "distance of supper."
-	),
+	statement = "What do you look for in someone heading out?",
+	response = "Someone who can tell me what they're uncertain about. A new stalker asking where to stop is easier company than a confident one announcing how far they'll get before dark. I still ask about water and the return. Then I try to leave them room to answer. Lemon would tell you I need practice at that part. First trip out, you've already got enough people explaining what sort of stalker you ought to become.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Do you take your own advice?",
-	response = (
-		"More often than I used to. Lemon would enjoy giving you the exceptions. There are mornings I don't "
-		.. "want to carry the extra weight either, or I tell myself I've got time before dark. Knowing better "
-		.. "doesn't pack the bag for you. If you're walking with me and something looks wrong, say so. Don't "
-		.. "wait politely for me to notice."
-	),
+	statement = "Do you ever get tired of being the one giving advice?",
+	response = "Sometimes I'd like to hear the end of a journey before discussing the next one. Sit down, tell me what you found funny, let your boots dry. Then I notice somebody's left their bag open in the rain and off I go again. Habit. You can tell me I've started. Might even catch me early enough to finish your story.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "What do you do when you aren't hunting?",
+	response = "Sit somewhere I can get my socks dry without someone putting another log on. Everyone comes back from hunting mutants with a different idea of the correct fire. Usually a larger one. I mend a little, listen to whoever's returned. Sometimes there's a decent account of the walk between all the shouting about the kill. I like hearing which places people still stop at. Spent enough years passing through them myself.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Does Lemon ever let you cook?",
+	response = "He lets me explain how little cooking I require, then carries on doing whatever he intended. Apparently I've been ruining tinned meat for decades. We had a disagreement over a pot after a hunt. I said it was perfectly edible; he said that was a description of the pot. I ate his version. He's still waiting for a sufficiently elaborate admission that it was better.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Do you miss having the woods to yourself?",
+	response = "Some mornings. Then I hear movement where I wasn't expecting it and remember the company I might get instead. There are stalkers whose chatter I'd choose over another hour listening for a mutant. Don't tell them which ones. They've enough confidence already.",
 	options = {"BackTopic"},
 })

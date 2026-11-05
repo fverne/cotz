@@ -1,7 +1,6 @@
 ITEM.name = "Padded Armour Panel"
 ITEM.description = "A dark armour panel divided into four raised padded sections."
-ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
-	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "Four raised sections give this armour panel its padded profile. The fabric between them keeps the sections arranged as one piece. Removed from its carrier, the panel exposes the layered construction normally hidden beneath the outer garment."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic3.mdl"

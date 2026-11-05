@@ -1,7 +1,6 @@
 ITEM.name = "Metal Pocket Lighter"
 ITEM.description = "A rectangular metal lighter with an open hinged lid and a perforated wind guard."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The pocket lighter's hinged lid closes over a perforated metal wind guard. A rigid rectangular case gives it a different feel from a disposable plastic lighter. Its construction assumes repeated handling and refilling, with the outer shell kept as a personal possession."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/cotz/eft/barter/zibbo_0.mdl"

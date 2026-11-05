@@ -1,7 +1,6 @@
 ITEM.name = "Tourist Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "A compact bundle set aside as payment for completed work. The modest packing reflects someone"
-	.. " still learning what a trip beyond the cordon requires."
+ITEM.longdesc = "The small Tourist Reward is a compact supply package representing payment for work. Its introductory class describes the allowance rather than a guaranteed object inside. The redemption offer supplies the actual inventory before exchange."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

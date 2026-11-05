@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Survey Transmitter"
 ITEM.description = "A tall narrow electronic housing with small sockets and fittings on top."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The survey transmitter's tall housing leaves room for several fittings along the top. Those connections belong to a wider arrangement of instruments and cables. With only the enclosure present, its shape identifies a piece of survey equipment more clearly than it explains the measurements involved."
 ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/cotz/eft/spec/detector.mdl"

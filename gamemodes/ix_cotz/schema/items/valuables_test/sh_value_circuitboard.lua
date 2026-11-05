@@ -1,7 +1,6 @@
 ITEM.name = "Salvaged Circuit Board"
 ITEM.description = "A salvaged circuit board with a metal bracket."
-ITEM.longdesc = "Dust has gathered around the taller parts and in the tight gaps between them. Seen up close, it"
-	.. " resembles a tiny abandoned industrial district with every road leading somewhere obscure."
+ITEM.longdesc = "Copper paths connect rows of components across the circuit board. A metal bracket marks one point where the board met its original chassis. Removed from that machine, it remains a recognisable electronic assembly without the surrounding hardware that explained its exact role."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/illusion/eftcontainers/circuitboard.mdl"

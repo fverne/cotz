@@ -1,8 +1,6 @@
 ITEM.name = "Water-Purification Tablets"
 ITEM.description = "A small screw-top bottle with densely printed labelling."
-ITEM.longdesc = "Dust sits in the ridges of the cap and along the lower edge of the wrapper. The lettering"
-	.. " promises a very ordinary sort of preparedness, which makes the bottle feel unexpectedly"
-	.. " important among the contents of an abandoned supply room."
+ITEM.longdesc = "The purification tablets are packaged in a small bottle with densely printed identification. It belongs to medical and water-treatment stores, where the label matters more than the container's familiar shape. This recovered stock is distinct from a complete water-treatment installation."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_aquatabs.mdl"

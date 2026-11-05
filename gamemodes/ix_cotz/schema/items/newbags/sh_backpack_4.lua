@@ -1,7 +1,6 @@
 ITEM.name = "Zone Survival Backpack"
 ITEM.description = "A backpack. Featuring large compartments for storage of items, as well as being very comfortable."
-ITEM.longdesc = "Its construction reflects the small preferences acquired over many bad walks: accessible"
-	.. " buckles, sturdy seams, and little that catches unnecessarily on rubble."
+ITEM.longdesc = "The survival backpack favours broad storage spaces and comfortable carrying surfaces. Its shape is designed around days of moving with supplies rather than a short trip between buildings. The pack gives a travelling load a more deliberate arrangement than an improvised sack."
 ITEM.model = "models/kek1ch/sumka4.mdl"
 
 ITEM.price = 20000

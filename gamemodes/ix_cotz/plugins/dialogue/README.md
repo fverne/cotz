@@ -21,6 +21,19 @@ personal exchanges, while retaining developed Atlas dialogue and suitable existi
 Work offers show the contact's explanation before difficulty selection; active work still shows the
 saved assignment details. Mute's work explanation and written field orders remain nonverbal.
 
+The subsequent personality expansion adds two subjects per contact through InterestZoneLifeTopic and
+InterestTownRelationsTopic, with a contextual InterestPersonalFollowup. These explore everyday Zone
+experience and existing relationships, using the same questions menu and access as other personal topics.
+The existing contact profiles identify the newly authored characterization separately from established
+history. This expansion leaves all work and progression dialogue unchanged.
+
+The remaining ordinary dialogue now follows those expanded profiles: greetings, returns, farewells,
+trade and service wording, background questions, advice, contact discussions, and The Original's story
+pool. Atlas retains his established survey background and observation exchange. Mute's avatar service
+uses the same nonverbal presentation as his personal replies, including payment failures. Existing
+topic links, callbacks, fees, eligibility checks, and random-story selection are preserved; no dormant
+topic is enabled. Work prompts and progression text remain in their unchanged owning definitions.
+
 Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing loader discovers
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.
@@ -38,6 +51,9 @@ The shared loader groups the offered BackgroundTopic, InterestTopic, TutorialTop
 SpecialtyTopic, AdviceTopic, and ContactsTopic entries into QuestionsTopic after task-reward
 integration. Keep text, callbacks, and ShouldAdd conditions in the NPC definition; there is no
 need to duplicate the grouping logic in every conversation file.
+
+InterestZoneLifeTopic and InterestTownRelationsTopic are also explicit entries in that grouping list.
+Their InterestPersonalFollowup uses the existing Interest-prefix rule to return to the questions menu.
 
 Only topics actually offered by GREETING or BackTopic are collected. Commented-out or otherwise
 unoffered topics are not enabled. NPCs with no offered flavour topics get no empty submenu.

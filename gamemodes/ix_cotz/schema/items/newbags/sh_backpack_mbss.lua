@@ -1,7 +1,6 @@
 ITEM.name = "MBSS Backpack"
 ITEM.description = "An extra durable backpack. Features compartments for easy storage of your valuables."
-ITEM.longdesc = "The squat profile sits close to the back instead of towering above the shoulders. Its webbing is"
-	.. " darkened where it has rubbed against other equipment."
+ITEM.longdesc = "The MBSS uses a compact, durable field-pack body to keep a useful load close to the back. Its proportions are taller than a small shoulder bag without reaching the bulk of a large survival pack. Several compartments give everyday equipment a more manageable arrangement."
 ITEM.model = "models/backpack_baselard/backpack_baselard.mdl"
 
 ITEM.price = 900

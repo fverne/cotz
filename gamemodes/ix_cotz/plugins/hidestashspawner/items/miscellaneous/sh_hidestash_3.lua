@@ -3,8 +3,7 @@ ITEM.model = "models/lostsignalproject/items/devices/pda.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "The PDA of a lost stalker. It looks fairly used, and did probably belong to an experienced STALKER."
-ITEM.longdesc = "Personal shorthand fills the saved notes, with landmarks recorded as if their meaning were"
-	.. " obvious. Whoever carried this relied on experience rather than a tidy instruction manual."
+ITEM.longdesc = "The veteran's PDA has a worn body around a collection of personal route notes. Abbreviations assume familiarity with the landmarks being recorded. Its information belongs to the owner's working memory, making the saved directions less like a guidebook than a reminder to someone who already knew the ground."
 ITEM.price = 6000
 ITEM.flag = "A"
 ITEM.CustomSpawngroup = "hidestash_tier_3"

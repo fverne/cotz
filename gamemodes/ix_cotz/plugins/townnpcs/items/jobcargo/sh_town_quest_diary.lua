@@ -1,8 +1,6 @@
 ITEM.name = "Scientist's Field Diary"
 ITEM.description = "A thick blue diary with a label fixed to the front cover."
-ITEM.longdesc = "A little dust remains along the folds and edges. It has the stale smell of paper kept somewhere"
-	.. " damp and then allowed to dry. The object offers a small, incomplete reminder that somebody once"
-	.. " expected to come back for their things."
+ITEM.longdesc = "The field diary's thick blue cover keeps a long sequence of pages together. A label gives the volume an identity without requiring it to be opened. Observations kept in one notebook can preserve the order and working context that loose reports often lose."
 
 ITEM.model = "models/cotz/eft/quest/scientistdiary.mdl"
 

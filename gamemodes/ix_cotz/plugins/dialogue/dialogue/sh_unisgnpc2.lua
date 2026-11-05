@@ -1,12 +1,18 @@
 DIALOGUE.name = "Boss"
 DIALOGUE.townContact = "boss"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Sure.")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"What equipment can we trade?",
+	"Have a look at what's available. We can discuss the exchange without turning it into an operational briefing."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = "Look what the cat dragged in. What brings you to my part of the operation?",
+	response = "Come in. A practical matter, or a question you've been saving up? Let's hear it.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"RepairItems",
 		"BackgroundTopic",
@@ -18,8 +24,8 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("RepairItems", {
-	statement = "Can you fix my items?",
-	response = "What would you like me to look at?",
+	statement = "Can you arrange repairs for my equipment?",
+	response = "Choose what needs attention. Review the repair and its cost before confirming.",
 	IsDynamic = true,
 	options = {
 		"BackTopic",
@@ -77,43 +83,35 @@ DIALOGUE.addTopic("ConfirmRepair", {
 
 DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 	statement = "",
-	response = "You don't have enough money to repair that.",
+	response = "You don't have enough for that repair. Leave the purchase there.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What is your group doing here?",
-	response = (
-		"Research and the work necessary to keep it going. International group, local problems. You can see "
-		.. "how easily an operation acquires more of the latter. I won't discuss everything with someone who "
-		.. "has walked through the door. If you want work, you'll get an assignment, the terms, and the risks I "
-		.. "can establish. Ask about anything you need to understand before accepting. My patience for "
-		.. "questions is considerably better here than after someone has gone out with the wrong idea."
-	),
+	statement = "What is your group doing in the Zone?",
+	response = "Research, and the work required to keep it going. International group, local difficulties. Equipment still has to arrive, people still have to agree on what they're being asked to do. I won't discuss the whole operation with a visitor. If a particular question affects whether you'd accept an assignment, ask it here. I'd rather explain a relevant uncertainty now than hear what somebody assumed after returning.",
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "What would you need from me?",
-	response = (
-		"Reliable work and an accurate account afterwards. I can pay for a particular assignment without "
-		.. "inviting you into every discussion behind it. If we continue working together, you'll have more "
-		.. "evidence on which to judge us. That applies in both directions."
-	),
+	statement = "What do you expect from someone you hire?",
+	response = "An accurate account of what they've done, including the part that didn't go as intended. I can pay for a defined piece of work without offering access to every discussion behind it. Judge that arrangement on the terms. If we continue dealing with each other, we'll both have more to judge than an introduction. You don't have to make a declaration of loyalty to ask a useful question.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about another topic.",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Go ahead.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"RepairItems",
 		"BackgroundTopic",
@@ -126,30 +124,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "I'll talk to you later.",
-	response = "Understood. Prepare before you leave.",
+	statement = "I'll leave you to the operation.",
+	response = "Understood. Make your preparations before somebody else's urgency starts making them for you.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "How can I work without the full picture?",
-	response = (
-		"Tell me which missing detail affects your decision. I may have an answer, or I may have to tell you "
-		.. "that we don't know. Secrecy is useful until it leaves the person carrying out an order guessing at "
-		.. "its purpose. I don't intend to explain the entire operation to settle every assignment. I do intend "
-		.. "you to understand what you're agreeing to. If the uncertainty is unacceptable, refuse before "
-		.. "leaving."
-	),
+	statement = "How much should a contractor be told?",
+	response = "Enough to make an informed decision about the assignment. Tell me which missing detail matters. Sometimes I can explain it; sometimes the uncertainty is ours as well. I won't manufacture confidence to make a briefing more comfortable. Nor will I open the whole operation to settle a narrow question. You can decide the arrangement doesn't suit you. That conversation belongs here, before departure.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Can I question an assignment?",
-	response = (
-		"Yes. Bring me a practical objection and we'll discuss it. Wake asks questions I would sometimes "
-		.. "rather leave until later. She has good reasons for refusing to wait. Doesn't mean every file "
-		.. "becomes hers to read. It means I have to decide what she needs instead of using 'restricted' to "
-		.. "finish a difficult conversation. You can expect the same consideration. It may not produce the "
-		.. "answer you want."
-	),
+	statement = "Can a contractor challenge your judgement?",
+	response = "Bring a practical objection. Wake does, and seldom at a time I'd have chosen. I have to consider what she needs to know instead of treating a restriction as the end of the discussion. Some of the answer may still be restricted. You can expect me to distinguish that from a question I haven't bothered to consider. Don't assume being heard guarantees the decision you wanted.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Do you ever sit with the others between expeditions?",
+	response = "Occasionally. Last time, someone was describing a snork encounter in enough detail to make the meal last another hour. I asked a question. The story became an account of every decision they'd made since departure. I had wanted to know how they'd lost the cooking pot. Apparently I should announce when I'm only listening. Until then I find people easier company when somebody else has already started an argument.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Does Smartass ever stop performing?",
+	response = "Give him a fault he can't explain immediately. He'll forget the remark he was preparing and ask you three useful questions. I enjoy that interval. Then he solves enough of it to recover his audience and we hear why the original design offended him. He earns some of the latitude he takes. You shouldn't mistake that for an invitation to repeat everything he says in my hearing.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Did they ever explain what happened to the pot?",
+	response = "Yes. It had been left where they'd stopped to repack. No mutant involved, however much of the story was given over to one. I let them finish eating before asking the question again. Made the answer considerably shorter.",
 	options = {"BackTopic"},
 })

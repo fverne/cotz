@@ -1,8 +1,6 @@
 ITEM.name = "Blue-Strip Audio Cassette"
 ITEM.description = "A pale audio cassette with a blue printed strip running across its label."
-ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
-	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
-	.. " equipment and a patient specialist to make sense of them."
+ITEM.longdesc = "A blue printed strip runs across this cassette's pale label. The design gives it an identity even before any personal title is added. Two windows show the reels and their tape, but offer no equivalent view of the recording itself."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_10.mdl"
 

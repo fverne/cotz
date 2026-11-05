@@ -1,7 +1,6 @@
 ITEM.name = "Car First Aid Kit"
 ITEM.description= "A red first aid kit."
-ITEM.longdesc = "The familiar roadside packaging seems almost reassuring among the camp's improvised remedies."
-	.. " Inside are a basic medkit and a bandage for the sort of emergency that cannot wait for a doctor."
+ITEM.longdesc = "The car first-aid kit keeps a basic medkit and bandage together in familiar red roadside packaging. Its small selection reflects a reserve carried for an interruption to a journey. The case is a bundle of separate treatment supplies, not a medicine in its own right."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

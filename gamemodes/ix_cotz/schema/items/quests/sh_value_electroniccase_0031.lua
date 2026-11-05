@@ -1,8 +1,6 @@
 ITEM.name = "Numbered Data Module 0031"
 ITEM.description = "A flat dark electronic module with a printed number and a compact geometric emblem."
-ITEM.longdesc = "Dust has settled in the small recesses around the connector. The casing says very little about"
-	.. " what might remain inside. Its value to a specialist begins with questions that cannot be"
-	.. " answered by turning it over in the hand."
+ITEM.longdesc = "A compact geometric emblem marks the 0031 data module's dark face. The serial number remains readable without opening the enclosure. Such a carrier preserves a separate physical identity even when its electronic contents cannot be inspected at a glance."
 
 ITEM.model = "models/cotz/eft/quest/electroniccase_0031.mdl"
 

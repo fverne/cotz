@@ -1,7 +1,6 @@
 ITEM.name = "Large Lubricant Aerosol"
 ITEM.description = "A tall blue lubricant can with a red cap and a narrow pale label."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The tall lubricant can carries a larger supply in the same familiar blue-and-red format as the pocket-sized version. A narrow label leaves much of the body plain. It suits a bench or maintenance cupboard more readily than the smallest travelling kit."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/wd40_400ml.mdl"

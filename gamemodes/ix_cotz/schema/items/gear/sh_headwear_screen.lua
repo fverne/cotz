@@ -1,7 +1,6 @@
 ITEM.name = "Screen Helmet"
 ITEM.description = "A screen helmet with closed respiratory system."
-ITEM.longdesc = "The broad viewing surface gives the wearer a distant, impersonal appearance. Grime collects"
-	.. " around its joins, where a careful owner spends most of their cleaning time."
+ITEM.longdesc = "The Screen encloses the head behind a broad visor and connects to a closed respiratory assembly. The complete equipment occupies space beyond the helmet itself. Its emphasis is on environmental protection and a self-contained arrangement, rather than a thick ballistic shell."
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
 ITEM.price = 100000

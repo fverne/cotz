@@ -1,7 +1,6 @@
 ITEM.name = "Sealed Dead-Drop Parcel"
 ITEM.description = "A sealed parcel entrusted to you for delivery to an assigned dead drop."
-ITEM.longdesc = "The wrapping has been left undisturbed for the next pair of hands. Out here, a successful"
-	.. " delivery often ends without either party learning the other's name."
+ITEM.longdesc = "The dead-drop parcel keeps its assigned cargo inside a sealed wrapping. Its plain exterior suits a delivery completed without meeting the receiving party. The package is the part of the exchange that travels; the agreed location supplies the rest of the instructions."
 ITEM.model = "models/props_c17/briefcase001a.mdl"
 
 ITEM.price = 0

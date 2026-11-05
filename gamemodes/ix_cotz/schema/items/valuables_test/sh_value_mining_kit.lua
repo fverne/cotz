@@ -1,7 +1,6 @@
 ITEM.name = "Mining Tool Belt"
 ITEM.description = "A worn leather tool belt with a buckle, loose straps and metal fittings."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The mining belt distributes attachment points along a strip of heavy leather. A buckle and loose straps let its shape be adjusted around clothing. It was designed to carry tools at the waist, leaving its fittings more conspicuous than the worn leather between them."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/spec/mining_kit.mdl"

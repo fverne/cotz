@@ -1,7 +1,6 @@
 ITEM.name = "Infantry First Aid Kit"
 ITEM.description= "An infantry first aid kit."
-ITEM.longdesc = "Paired medkits and bandages sit alongside psychic recovery medication. Its compact packing"
-	.. " reflects the assumption that the owner will be carrying plenty of other equipment."
+ITEM.longdesc = "The infantry kit pairs medkits and bandages with psychic recovery medication. Its compact packing leaves less wasted space than a general medical box. The bundle is intended to travel alongside a soldier's other equipment, with the contents kept as separate supplies."
 ITEM.model = "models/illusion/eftcontainers/ifak.mdl"
 
 ITEM.width = 2

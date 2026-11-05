@@ -1,7 +1,6 @@
 ITEM.name = "Wallet"
 ITEM.description= "A place to store money and personal belongings."
-ITEM.longdesc = "The folds have taken the shape of a previous owner's pocket. A little loose change or a"
-	.. " forgotten personal detail is often all that survives inside such things."
+ITEM.longdesc = "The wallet keeps small personal belongings within a folded pocket-sized body. Its soft edges have taken the shape of repeated carrying. Opening it separates the surviving contents from a familiar personal container rather than providing a new piece of wearable equipment."
 ITEM.model = "models/lostsignalproject/items/misc/damaged_ammo.mdl"
 
 ITEM.width = 1

@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys the audience as much as the contest and wants a lively place people choose to return to. He is sensitive to boredom and less comfortable with criticism that interrupts an enjoyable account.
+
+**Voice and boundaries:** Relaxed, observant about people, capable of a joke at his own expense. Give him ordinary organisational annoyances alongside his showmanship. Maintain his evasiveness about injury without presenting it as the narrator's judgement.
+
+**Relationships:** Jitters makes him confront the unglamorous aftermath of competition. Suture's workmanship earns respect even when the accompanying complaints inconvenience him; no new medical or equipment arrangements are established.
+
+**Personal subjects:** Are the spectators more trouble than the fighters? / Why does Jitters sound annoyed when your name comes up?
+
+These conversations and their follow-up live in [sh_arenanpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_arenanpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

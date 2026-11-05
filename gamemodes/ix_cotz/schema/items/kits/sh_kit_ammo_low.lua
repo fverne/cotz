@@ -1,7 +1,6 @@
 ITEM.name = "Small Ammo Box"
 ITEM.description= "A small box containing some ammunition. It seems to mostly be smaller calibers."
-ITEM.longdesc = "The lid has been opened and closed often enough to polish its corners. Whatever its original"
-	.. " destination, it has become somebody's portable reserve."
+ITEM.longdesc = "The small ammunition box gives an assortment of packed rounds a single wooden carrier. Its practical size is suited to a modest reserve rather than a storehouse shipment. The outer box says less about the loads than their individual wrappers do."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 2

@@ -1,7 +1,6 @@
 ITEM.name = "Worn Grey Armour Insert"
 ITEM.description = "A rectangular grey armour insert with a worn mottled fabric cover."
-ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
-	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "A mottled grey fabric sleeve encloses the armour insert. The cover has worn unevenly, especially where its edges would rub against a carrier. That wear makes the outer layer easy to assess, while leaving the condition of the material inside much less apparent."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic4.mdl"

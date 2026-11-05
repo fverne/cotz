@@ -1,8 +1,6 @@
 ITEM.name = "Rugged Data Cartridge"
 ITEM.description = "A ribbed dark data cartridge with a small printed identification panel."
-ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
-	.. " where it came from or whether its records survived storage. It is the sort of small object that"
-	.. " can leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "Ribs protect the data cartridge's small identification panel from direct contact with a flat surface. The casing was built for repeated handling as one removable unit. Its label identifies the carrier, while any stored records remain inside the electronic assembly."
 ITEM.valuableCategory = "flash media"
 
 ITEM.model = "models/cotz/eft/barter/info_militaryflash.mdl"

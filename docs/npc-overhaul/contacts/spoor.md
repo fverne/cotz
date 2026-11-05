@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys seeing animals when a hunt does not demand a shot, and protects time to watch without an audience demanding an explanation. Can be quietly amused by his own absorption.
+
+**Voice and boundaries:** Quiet and concrete, with room for an incomplete observation or an ordinary frustration. Keep accounts of mutant behaviour local and tentative, never presented as universal rules or reliable gameplay instructions.
+
+**Relationships:** The Original earns attention when he gets a field detail right; Spoor need not accept the rest of a story to appreciate that. Disagreement should sometimes end in company rather than another correction.
+
+**Personal subjects:** What do you watch when you aren't on a hunt? / Is The Original ever right about the mutants?
+
+These conversations and their follow-up live in [sh_spoornpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_spoornpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

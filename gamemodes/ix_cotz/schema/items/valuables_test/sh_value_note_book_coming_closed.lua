@@ -1,8 +1,6 @@
 ITEM.name = "Embossed Hardback Book"
 ITEM.description = "A thick book with an embossed brown cover and a deeply textured spine."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "Embossing gives the hardback book's brown cover a decorative texture. The thick spine protects a substantial block of pages. It was made as a volume to keep, with more attention paid to its binding than a disposable booklet would warrant."
 ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/info/note_book_coming_closed.mdl"

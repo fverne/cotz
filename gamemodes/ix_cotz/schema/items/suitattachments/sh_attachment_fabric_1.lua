@@ -1,7 +1,6 @@
 ITEM.name = "Insulating Fabrics"
 ITEM.description = "High quality insulating fabrics, made to keep out heat and electricity."
-ITEM.longdesc = "Closely packed fibres give the folded material a stiff, springy feel. The edges have been"
-	.. " prepared for fitting beneath a suit's outer layers."
+ITEM.longdesc = "Closely packed insulating layers give this suit fabric a stiff, springy feel. It is prepared as an internal protective insert rather than loose textile stock. The material improves anomalous protection without relying on the heavy rigid shape of a ballistic plate."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant7.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

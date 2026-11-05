@@ -1,8 +1,6 @@
 ITEM.name = "Pocket Voice Recorder"
 ITEM.description = "A small dark recorder with side controls and a label on its broad face."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "The pocket recorder groups its controls along a narrow body that can be held in one hand. A label occupies the broad face. It is made to preserve spoken material without a full notebook, although the outside offers no transcript of any recording within."
 ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/cotz/eft/quest/spec_recorder.mdl"

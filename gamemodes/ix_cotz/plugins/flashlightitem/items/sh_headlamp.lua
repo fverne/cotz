@@ -1,7 +1,6 @@
 ITEM.name = "Headlamp"
 ITEM.description = "A headlamp with adjustable straps."
-ITEM.longdesc = "Keeping a light above your eyes leaves both hands free for a ladder, a weapon, or a stubborn"
-	.. " equipment buckle. Sweat and dust have worked their way into the webbing."
+ITEM.longdesc = "The headlamp holds its light above the face on adjustable webbing. Moving the head carries the beam with it, leaving both hands available for other equipment. The straps keep the small lamp in position without the rigid body of a helmet-mounted system."
 ITEM.model = "models/lostsignalproject/items/devices/tactical_torch.mdl"
 
 ITEM.width = 1

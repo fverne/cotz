@@ -1,7 +1,6 @@
 ITEM.name = "Small Doctors Bag"
 ITEM.description= "A bag containing some medical supplies."
-ITEM.longdesc = "The contents have been gathered with more care than the average camp medicine drawer. Opening it"
-	.. " will mean giving up the tidy bundle in exchange for the supplies inside."
+ITEM.longdesc = "The doctor's bag gathers medical stock into a compact travelling bundle. Packets and small containers occupy the soft body instead of a fitted treatment tray. It is a supply package rather than a single medicine, with its assortment kept together for transport."
 ITEM.model = "models/illusion/eftcontainers/docbag.mdl"
 
 ITEM.width = 2

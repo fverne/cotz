@@ -1,7 +1,6 @@
 ITEM.name = "Ibuprofen Bottle"
 ITEM.description = "A small white medicine bottle with an orange block on the label and a broad screw cap."
-ITEM.longdesc = "The larger lettering remains easier to read than the fine print beneath it. Grime has worked"
-	.. " into the cap ridges, leaving the bottle with the familiar look of neglected pharmacy stock."
+ITEM.longdesc = "The ibuprofen bottle uses a broad screw cap above a small labelled body. Orange printing makes its wrapper easy to distinguish from plainer pharmacy containers. It belongs to the routine end of medical stock, where keeping the original identification matters more than elaborate packaging."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_ibuprofen.mdl"

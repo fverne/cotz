@@ -1,7 +1,6 @@
 ITEM.name = "Table Salt"
 ITEM.description = "A tall cylindrical salt container with blue printing around its pale wrapper."
-ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
-	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
+ITEM.longdesc = "The salt container uses a tall cardboard body to hold a very ordinary kitchen ingredient. Blue printing occupies more space than the simple contents require. A store cupboard may be full of tins and grain packets while still feeling incomplete without this small seasoning supply."
 ITEM.valuableCategory = "provisions"
 
 ITEM.model = "models/cotz/eft/barter/household_salt.mdl"

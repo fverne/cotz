@@ -2,8 +2,7 @@ ITEM.name = "Mercenary Exoskeleton"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
-ITEM.longdesc = "The finish has the anonymous professionalism of equipment maintained for a contract. Whoever"
-	.. " pays for the work also has to account for spare fittings, worn straps, and workshop time."
+ITEM.longdesc = "The Mercenary exoskeleton places particularly substantial armour around the family's load-bearing framework. Its body has a greater weight of its own than the basic version. The contracted-equipment finish covers a system whose size is apparent at every joint and fastening."
 
 ITEM.width = 2
 ITEM.height = 3

@@ -1,7 +1,6 @@
 ITEM.name = "Coiled Natural Rope"
 ITEM.description = "A thick coil of tan rope with coarse twisted fibres."
-ITEM.longdesc = "Dust has worked into the folds and rough surfaces. It has the familiar, unglamorous shape of"
-	.. " camp stores, carried from one improvised shelter to the next."
+ITEM.longdesc = "Several coarse strands twist together along the natural rope. The coil stores a useful length without the tangles of a loose heap. Its exposed fibres make wear easier to see than on a smooth, enclosed piece of equipment."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/rope.mdl"

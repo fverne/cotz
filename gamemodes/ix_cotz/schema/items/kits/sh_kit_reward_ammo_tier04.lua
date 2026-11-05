@@ -1,7 +1,6 @@
 ITEM.name = "Master Ammo Box"
 ITEM.description= "The box rattles when you shake it."
-ITEM.longdesc = "The packed rounds are intended to replenish a working field load. The unassuming finish is"
-	.. " typical of valuable supplies kept out of casual sight."
+ITEM.longdesc = "The Master Ammo Box carries the highest issue class in this ammunition-package series. Its unremarkable exterior does not list a single guaranteed load. The supplying contact identifies the available ammunition when the package is presented for redemption."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

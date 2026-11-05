@@ -1,7 +1,6 @@
 ITEM.name = "Thermal Imaging Module"
 ITEM.description = "A compact imaging module in a metal housing."
-ITEM.longdesc = "The casing is dulled by handling, with grime following the narrow grooves around its optical"
-	.. " opening. Its rear connection needs equipment that is no longer beside it."
+ITEM.longdesc = "The thermal imaging module encloses a compact optical assembly in a metal housing. Its rear connection was intended for a larger instrument. The module is a component of imaging equipment, without the complete viewer and controls needed to make its original output accessible."
 ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/illusion/eftcontainers/thermalmodule.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Professional Ammo Box"
 ITEM.description= "The box rattles when you shake it."
-ITEM.longdesc = "The packed rounds are intended to replenish a working field load. Careful packing keeps the"
-	.. " contents together through the sort of transport that ruins ordinary luggage."
+ITEM.longdesc = "The Professional Ammo Box packages an ammunition allowance for an established field load. Its issue class distinguishes it from the smaller supply boxes. The available choice is settled through the contact's exchange preview, rather than by guessing from the rattle inside."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

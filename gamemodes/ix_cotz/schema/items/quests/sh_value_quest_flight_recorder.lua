@@ -1,9 +1,7 @@
 ITEM.name = "Recovered Flight Recorder"
 ITEM.description = "A battered orange recorder assembly with a cylindrical housing and a separate rectangular"
 	.. " section."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "The flight recorder joins a cylindrical housing to a separate rectangular section. Orange paint makes both parts conspicuous despite the battered finish. The construction was meant to preserve recorded information as a physical object that could be recovered after its normal installation was lost."
 
 ITEM.model = "models/cotz/eft/info/quest_flight_recorder.mdl"
 

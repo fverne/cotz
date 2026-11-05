@@ -1,8 +1,6 @@
 ITEM.name = "Ribbed Storage Drive"
 ITEM.description = "A flat black storage drive with a ribbed upper surface and sockets along one edge."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The storage drive's ribbed upper shell adds surface area to a compact enclosure. Sockets are concentrated along one edge for installation in a larger machine. Its physical label and fittings identify the hardware without revealing any stored records."
 ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/sas.mdl"

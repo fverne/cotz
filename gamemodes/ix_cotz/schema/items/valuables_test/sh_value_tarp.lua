@@ -1,7 +1,6 @@
 ITEM.name = "Folded Tarpaulin"
 ITEM.description = "A folded dark tarpaulin with rough creases and a mottled outer surface."
-ITEM.longdesc = "Dust has worked into the folds and rough surfaces. It has the familiar, unglamorous shape of"
-	.. " camp stores, carried from one improvised shelter to the next."
+ITEM.longdesc = "The tarpaulin's broad folds compress a large covering into a rough-edged bundle. Its coated surface differs from the softer cloth used for bedding. Creases preserve the shape of the last packing, making the true area difficult to judge before it is spread out."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/tarp.mdl"

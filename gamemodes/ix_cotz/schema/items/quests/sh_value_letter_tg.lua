@@ -1,8 +1,6 @@
 ITEM.name = "Corporate Letter"
 ITEM.description = "A creased printed letter with a corporate mark and several small blocks of text."
-ITEM.longdesc = "Dust has worked into the edges and left the surface unpleasantly dry to the touch. The markings"
-	.. " suggest records assembled for a particular desk rather than general reading. Whatever made them"
-	.. " important would have to be established by someone who knows what to look for."
+ITEM.longdesc = "A corporate mark heads the letter above several compact blocks of text. Its creases show that the printed sheet was folded for carrying or filing. The formal layout gives the correspondence an institutional appearance without establishing what authority it still carries."
 
 ITEM.model = "models/cotz/eft/quest/letter_tg.mdl"
 

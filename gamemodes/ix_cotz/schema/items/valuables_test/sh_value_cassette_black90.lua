@@ -1,8 +1,6 @@
 ITEM.name = "Black Ninety-Minute Cassette"
 ITEM.description = "A dark audio cassette with a pale inset label and two spool windows."
-ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
-	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
-	.. " equipment and a patient specialist to make sense of them."
+ITEM.longdesc = "The ninety-minute cassette holds magnetic tape on two small reels. Windows in the dark shell show how much tape sits on either side, while a pale label leaves room for a handwritten recording title. The format was made for ordinary audio decks."
 ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/kek1ch/cassette_black90.mdl"

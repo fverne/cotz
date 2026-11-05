@@ -60,6 +60,8 @@ end
 local FLAVOUR_TOPICS = {
 	BackgroundTopic = true,
 	InterestTopic = true,
+	InterestZoneLifeTopic = true,
+	InterestTownRelationsTopic = true,
 	TutorialTopic = true,
 	SpecialtyTopic = true,
 	AdviceTopic = true,

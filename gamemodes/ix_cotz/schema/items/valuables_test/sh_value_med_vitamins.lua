@@ -1,8 +1,6 @@
 ITEM.name = "Vitamin Bottle"
 ITEM.description = "A small pale bottle with a ribbed cap and a narrow green band around its label."
-ITEM.longdesc = "Much of the wrapper is occupied by tiny print. It smells faintly of dry cupboards and old"
-	.. " packaging, like something that was repeatedly counted during stocktaking but never quite reached"
-	.. " the front of the shelf."
+ITEM.longdesc = "A narrow green band identifies the vitamin bottle among similar pale pharmacy containers. The ribbed cap gives a grip on a body small enough to disappear in a larger medical bag. Its label is more informative than anything visible through the closed packaging."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_vitamins.mdl"

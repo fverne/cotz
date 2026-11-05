@@ -1,7 +1,6 @@
 ITEM.name = "USB Wall Adapter"
 ITEM.description = "A black wall adapter with two round plug pins and pale electrical markings."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Two round mains pins project from the USB adapter's black body. The small enclosure holds the conversion circuitry between a wall socket and a low-voltage device. Its printed electrical rating provides more useful identification than the familiar shape alone."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/usb_adapter.mdl"

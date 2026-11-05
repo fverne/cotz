@@ -1,8 +1,6 @@
 ITEM.name = "Blue-Label Audio Cassette"
 ITEM.description = "A pale audio cassette with a broad blue printed label and twin spool windows."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "The blue-label cassette packages magnetic tape between two visible reels. A broad printed panel identifies the shell more readily than the fine markings beneath it. The tape carries a recording medium, not an outward indication of the voices or music stored there."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_02.mdl"
 

@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants his cooking noticed and his kitchen treated as his domain. Feeding the camp gives him pleasure, status, and customers; generosity remains selective and does not erase his selfishness.
+
+**Voice and boundaries:** Expansive and opinionated about appetite, ingredients, and manners. A criticism can become an entertaining personal grievance. Keep his failed marriage's established evasions intact; avoid redeeming him through food.
+
+**Relationships:** Spoor's attention to specimens frustrates Lemon's attention to supper. He respects the hunter's effort while insisting his own skill deserves equal notice. Old Timer and Jitters remain familiar people whose missed meals he notices.
+
+**Personal subjects:** Do artifact hunters make good customers? / What do you and Spoor disagree about?
+
+These conversations and their follow-up live in [sh_cooknpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_cooknpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

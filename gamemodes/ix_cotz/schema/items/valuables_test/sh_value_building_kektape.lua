@@ -1,7 +1,6 @@
 ITEM.name = "Cloth Repair Tape"
 ITEM.description = "A broad roll of dark cloth tape with green markings inside the cardboard core."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "Cloth reinforcement gives the repair tape a thicker backing than ordinary packing tape. The broad roll was meant for rough working surfaces rather than tidy parcels. Green printing inside the cardboard core remains visible after the outside has become an anonymous dark cylinder."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/building_kektape.mdl"

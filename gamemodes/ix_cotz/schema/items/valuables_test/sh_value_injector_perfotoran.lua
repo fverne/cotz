@@ -1,8 +1,6 @@
 ITEM.name = "Perfotoran Research Injector"
 ITEM.description = "A blue injector with a pale label and a green end cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "The Perfotoran injector pairs a blue body with a green cap. Its pale label has room for far less information than a laboratory record. It is the kind of specimen container that needs its printed designation kept legible throughout transport."
 ITEM.valuableCategory = "research injectors b"
 
 ITEM.model = "models/cotz/eft/usable/syringe_perfotoran.mdl"

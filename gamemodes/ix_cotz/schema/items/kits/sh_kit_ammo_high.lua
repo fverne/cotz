@@ -1,7 +1,6 @@
 ITEM.name = "Ammo Crate"
 ITEM.description= "A small wooden box containing some ammunition. It seems to be a good variety of calibers."
-ITEM.longdesc = "Paper wrappers and dividers keep the contents from rubbing directly against the wood. Old"
-	.. " shipping marks have been crossed out rather than removed."
+ITEM.longdesc = "The ammunition crate keeps several packed loads within a small wooden shell. Paper wrapping separates the cartridges from the timber. Its mixed-stock character is more useful to a supply shelf than a label promising one particular calibre."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 2

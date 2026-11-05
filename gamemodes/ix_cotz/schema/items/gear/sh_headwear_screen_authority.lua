@@ -1,7 +1,6 @@
 ITEM.name = "Authority Screen Helmet"
 ITEM.description = "A screen helmet with closed respiratory system."
-ITEM.longdesc = "Its issued appearance makes even a silent wearer look as though they are expecting trouble. Dust"
-	.. " catches along the trim surrounding the viewing panel."
+ITEM.longdesc = "The Authority Screen gives its enclosed visor and breathing assembly an issued-equipment appearance. Much of the wearer's face disappears behind the broad panel. Beneath the finish, its layout remains the familiar Screen arrangement of headpiece and associated respiratory equipment."
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
 ITEM.price = 100000

@@ -1,7 +1,6 @@
 ITEM.name = "PBS suppressor"
 ITEM.description = " A suppressor for most AK variants and other larger caliber rifles of eastern european origin."
-ITEM.longdesc = "The finish is stained by heat and repeated cleaning. Even a familiar-looking mounting thread"
-	.. " deserves attention when the part has passed through several workshop drawers."
+ITEM.longdesc = "The PBS extends the muzzle of a compatible rifle with a substantial cylindrical assembly. Its length gives propellant gases a less direct path into the open air. The extra hardware is apparent both in the weapon's outline and in the load carried at its front end."
 ITEM.model = "models/cw2/attachments/cobra_m2.mdl"
 
 ITEM.width = 2

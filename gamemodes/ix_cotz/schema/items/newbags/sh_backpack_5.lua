@@ -1,7 +1,6 @@
 ITEM.name = "Zone Survival Backpack (Camouflaged)"
 ITEM.description = "A backpack. Featuring large compartments for storage of items, as well as being very comfortable."
-ITEM.longdesc = "The mottled finish breaks up the outline when it rests against brush or a ruined wall. Pale wear"
-	.. " around the buckles is the first part to stand out."
+ITEM.longdesc = "Camouflaged fabric breaks up the survival backpack's broad outer surfaces. Beneath that finish is the same emphasis on usable compartments and a comfortable carried load. The pattern changes the bag's appearance without creating a separate storage mechanism."
 ITEM.model = "models/kek1ch/sumka5.mdl"
 
 ITEM.price = 20000

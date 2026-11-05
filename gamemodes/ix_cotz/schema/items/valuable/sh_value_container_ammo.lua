@@ -1,8 +1,6 @@
 ITEM.name = "Ammunition Transit Can"
 ITEM.description = "A tall dark equipment can with a carrying handle and contrasting side markings."
-ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
-	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
-	.. " with more history than explanation."
+ITEM.longdesc = "The ammunition can groups a carrying handle and side markings around a tall rigid body. Its narrow footprint suits rows of stored military supplies. The can identifies a kind of packaging without proving what ammunition, if any, remains inside."
 ITEM.valuableCategory = "military cases"
 
 ITEM.model = "models/cotz/eft/containers/container_ammo.mdl"

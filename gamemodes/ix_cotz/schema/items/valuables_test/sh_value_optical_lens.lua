@@ -1,7 +1,6 @@
 ITEM.name = "Optical Lens Assembly"
 ITEM.description = "A cylindrical optical assembly with a dark barrel."
-ITEM.longdesc = "The glass catches a muted coloured reflection. Fine dust has settled in the rings around the"
-	.. " rim, and the lettering offers little help in identifying its former mounting."
+ITEM.longdesc = "The lens assembly keeps its glass aligned inside a cylindrical barrel. Rings and fittings give it a mounting surface within a larger optical instrument. It is a complete optical component, without the surrounding device that would establish its field of view and purpose."
 ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/illusion/eftcontainers/nixxorlens.mdl"

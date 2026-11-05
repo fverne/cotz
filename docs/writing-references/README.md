@@ -20,8 +20,11 @@ runtime definitions still govern continuity.
 | [AS-02](dialogue.md#as-02--gratitude-after-help) | Anomaly subtitles | Warm acknowledgement and invitation |
 | [AS-03](dialogue.md#as-03--a-guard-makes-conversation-conditional) | Anomaly subtitles | Purposeful brevity and a boundary |
 
-The item collection supplies four examples; the dialogue collection supplies four, including three
-contrasting subtitle situations. Detailed examples stay here; installed skills provide concise routing.
+The item collection supplies four external examples and the
+[four approved COTZ draft examples](items.md#approved-cotz-item-drafts); the dialogue collection supplies
+four, including three contrasting subtitle situations. The COTZ examples establish the current item
+writing direction and record the approved wording applied in the catalogue pass. Detailed examples stay here;
+installed skills provide concise routing.
 
 ## Translation and attribution
 
@@ -48,7 +51,8 @@ These are evidence limits, not reasons to invent missing context.
 
 ## Maintaining and using the collection
 
-Each entry records a source URL, exact file, string ID, repository revision where available, context,
+Each external reference entry records a source URL, exact file, string ID, repository revision where
+available, context,
 an explicitly labelled excerpt or paraphrase, and a COTZ-specific lesson with limits. Keep that provenance
 when adding examples. Quote only brief necessary passages; label translations and paraphrases accurately.
 Do not treat source grammar, repetition, or factual claims as an editorial standard.

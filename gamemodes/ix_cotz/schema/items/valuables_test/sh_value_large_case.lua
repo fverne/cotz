@@ -1,8 +1,6 @@
 ITEM.name = "Large Olive Transit Case"
 ITEM.description = "A large olive hard case with a broad lid and a substantial recessed handle."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "The olive transit case has a broad lid and recessed carrying handle. Its proportions favour bulky equipment over flat paperwork. A substantial shell keeps the box rigid, at the cost of occupying a considerable amount of room even before anything is packed inside."
 ITEM.valuableCategory = "reinforced cases"
 
 ITEM.model = "models/lostsignalproject/items/quest/large_case.mdl"

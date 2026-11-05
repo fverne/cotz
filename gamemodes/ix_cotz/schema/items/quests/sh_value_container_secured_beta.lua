@@ -1,8 +1,6 @@
 ITEM.name = "Flat Yellow Transit Case"
 ITEM.description = "A flat yellow case with dark edging and contrasting printed lid markings."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "The flat yellow case favours a shallow load rather than the depth of a general equipment box. Dark edging outlines the lid and body. Contrasting markings give the broad upper surface a more specific identity than its colour alone."
 
 ITEM.model = "models/cotz/eft/containers/container_secured_beta.mdl"
 

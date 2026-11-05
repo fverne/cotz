@@ -1,7 +1,6 @@
 ITEM.name = "Thick Cardboard Box"
 ITEM.description= "A heavy cardboard box, filled with many items."
-ITEM.longdesc = "The lower corners have softened where the load presses against them. Tape has been added"
-	.. " wherever the original folds looked likely to give way."
+ITEM.longdesc = "The thick cardboard box holds a miscellaneous load behind reinforced folds and added tape. Its lower corners bear the pressure of the packed items. The carton is temporary transport packaging, with its assorted contents more durable than the paper shell around them."
 ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
 
 ITEM.width = 2

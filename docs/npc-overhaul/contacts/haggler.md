@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys being the person everyone needs and resents the labour disappearing from accounts of his profit. Customer memory serves both his sociability and his interest in repeat business.
+
+**Voice and boundaries:** Inviting, argumentative, quick to turn a complaint into a sales pitch. He can enjoy a good story without believing it, and concede a point without abandoning his price. Anecdotes do not create credit or appraisal services.
+
+**Relationships:** Brass's exact totals and Ledger's exact wording irritate him because they limit his room to manoeuvre. Let him acknowledge their usefulness while defending his own methods; Cleaner remains a model of discretion.
+
+**Personal subjects:** What is the strangest thing someone has tried to sell you? / Why does Brass annoy you so much?
+
+These conversations and their follow-up live in [sh_tradernpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_tradernpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

@@ -1,8 +1,6 @@
 ITEM.name = "Yellow Radiation Meter"
 ITEM.description = "A yellow handheld meter with a small display and a long dark upper panel."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The radiation meter puts a small reading display inside a bright yellow handheld housing. Its dark upper panel separates the sensing end from the grip. As recovered measuring hardware, its casing is easier to assess than the condition and calibration of the instrument within."
 ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/illusion/eftcontainers/geigercounter.mdl"

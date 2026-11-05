@@ -1,7 +1,6 @@
 ITEM.name = "M40 Gasmask"
 ITEM.description = "A newer gasmask"
-ITEM.longdesc = "The facepiece has the practical layout of equipment expected to be worn for more than a few"
-	.. " minutes. Marks around the fittings show where it has been dismantled for cleaning."
+ITEM.longdesc = "The M40 combines a shaped face seal with an enclosed filter arrangement. Its eye panels and breathing fittings are designed as one mask, rather than improvised from separate pieces. The relatively substantial assembly puts respiratory protection ahead of the compactness of a simple face covering."
 ITEM.model = "models/shtokerbox/ground_mask_m40.mdl"
 
 ITEM.price = 195000

@@ -1,9 +1,6 @@
 ITEM.name = "Shampoo"
 ITEM.description = "A green bottle of shampoo."
-ITEM.longdesc = "A green shampoo bottle with a bright printed label and a matching cap. The smaller"
-	.. " instructions have suffered more than the cheerful advertising on the front. A faint, sweet"
-	.. " perfume lingers around the neck, strangely out of place among the usual smells of damp"
-	.. " concrete and old smoke."
+ITEM.longdesc = "The shampoo bottle's cheerful green label belongs to an ordinary washroom shelf. A matching cap closes the neck above the moulded body. Supplies this domestic can look oddly extravagant after several days of washing with whatever cold water is available."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/illusion/eftcontainers/shampoo.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Respirator"
 ITEM.description = "An old gasmask"
-ITEM.longdesc = "The facepiece is worn smooth where it rests against the skin. Every owner has their own ritual"
-	.. " for checking the straps before trusting it with another journey."
+ITEM.longdesc = "The older respirator encloses its breathing fittings in a comparatively plain mask body. Its design is recognisable as dedicated protective equipment, although less elaborate than newer gasmasks. The softer sealing parts are as much a part of the assembly as the more visible outer housing."
 ITEM.model = "models/shtokerbox/ground_mask_respirator.mdl"
 ITEM.skin = 1
 

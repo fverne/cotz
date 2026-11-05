@@ -1,8 +1,6 @@
 ITEM.name = "Corporate Records Folder"
 ITEM.description = "A blue records folder with contrasting corporate lettering along the cover."
-ITEM.longdesc = "The exposed paper edges have softened, and a dry archive smell clings to the bundle. Detached"
-	.. " from its original filing system, it is difficult to place in any reliable sequence. A specialist"
-	.. " with the right background may be able to supply the missing context."
+ITEM.longdesc = "Corporate lettering identifies the records folder's blue cover. The broad panels provide room for papers to remain flat during handling. Such a file is one small unit of an office archive, where titles and references matter more than the colour of the binding."
 
 ITEM.model = "models/cotz/eft/info/note_folder_closed_terragroup.mdl"
 

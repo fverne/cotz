@@ -3,8 +3,7 @@ ITEM.model = "models/lostsignalproject/items/quest/notes_letter_1.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "The note looks crumbled and dirty."
-ITEM.longdesc = "Someone has pressed the pencil hard enough to leave grooves in the paper. A few cramped lines"
-	.. " may mean more to a scavenger than the author ever intended."
+ITEM.longdesc = "The lost note compresses directions into a few pencil-written lines. Hard pressure has left grooves beneath the writing, making the paper feel rough along the marks. It is a personal route reference, with the sort of abbreviated landmarks that mean more once the place is found."
 ITEM.price = 500
 ITEM.flag = "A"
 ITEM.CustomSpawngroup = "hidestash_tier_1"

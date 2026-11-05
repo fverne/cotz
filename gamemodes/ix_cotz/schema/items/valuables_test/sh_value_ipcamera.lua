@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Wireless Camera"
 ITEM.description = "A pale wireless camera with a long aerial and a dark cylindrical lens housing."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "The wireless camera combines a cylindrical lens housing with a separate aerial. One part faces the scene being recorded while the other belongs to the communications hardware. Recovered without its configured installation, it is a camera assembly rather than a ready-made surveillance system."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/cotz/eft/spec/ipcamera.mdl"

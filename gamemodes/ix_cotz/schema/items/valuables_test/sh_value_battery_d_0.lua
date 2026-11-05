@@ -1,7 +1,6 @@
 ITEM.name = "D-Cell Battery"
 ITEM.description = "A thick cylindrical battery with a raised terminal and a green-and-white wrapper."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "The D-cell's broad cylindrical body fits larger battery compartments than the slim cells used in pocket electronics. A raised terminal marks one end of the wrapper. Its useful compatibility depends on that size and terminal arrangement, rather than on the colour of the packaging."
 ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/battery_d_0.mdl"

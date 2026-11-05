@@ -1,8 +1,6 @@
 ITEM.name = "Bandit Insignia"
 ITEM.description = "A dark cloth insignia with a pale stylised emblem."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "The Bandit patch uses pale stitching to make its emblem visible against dark cloth. Removed from clothing, the small insignia retains the association without identifying the person who wore it."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_bandit.mdl"
 

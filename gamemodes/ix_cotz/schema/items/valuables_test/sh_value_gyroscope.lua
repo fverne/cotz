@@ -1,8 +1,6 @@
 ITEM.name = "Precision Gyroscope"
 ITEM.description = "A precision instrument in a pale box-shaped housing."
-ITEM.longdesc = "Fine dirt traces the panel joins and the recesses around the fittings. It has the"
-	.. " self-contained, unhelpful appearance of specialist equipment separated from the one person who"
-	.. " understood its labels."
+ITEM.longdesc = "The gyroscope's pale housing encloses a precision assembly used as a reference for orientation. Its plain exterior favours mounting and identification over hand controls. Detached from the rest of its instruments, it is a component rather than a complete navigation station."
 ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/illusion/eftcontainers/gyroscope.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Wired Demolition Assembly"
 ITEM.description = "A wired assembly of wrapped cylindrical charges fixed to a small backing plate."
-ITEM.longdesc = "Its outer surfaces carry the dust and handling marks of neglected stores. There is no matching"
-	.. " issue record or service history. It belongs on a specialist's inventory and inspection bench"
-	.. " before anyone can make sense of its condition or origin."
+ITEM.longdesc = "Wrapped charge cylinders are fixed to a small backing plate, keeping the demolition assembly in one piece. Wiring runs across the exposed bundle. Its construction belongs to specialist explosive equipment, with little resemblance to a finished household or workshop tool."
 ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/lostsignalproject/items/quest/explosive_charge.mdl"

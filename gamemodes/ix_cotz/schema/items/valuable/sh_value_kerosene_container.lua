@@ -1,7 +1,6 @@
 ITEM.name = "Kerosene Container"
 ITEM.description = "A pale plastic kerosene container with a moulded handle and a yellow screw cap."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The kerosene container uses a moulded plastic body beneath a yellow screw cap. An integral handle leaves the broad sides free of loose fittings. It is lighter-looking household fuel packaging than the steel cans associated with larger equipment stores."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/kerosene.mdl"

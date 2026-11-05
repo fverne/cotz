@@ -1,8 +1,6 @@
 ITEM.name = "Red Audio Cassette"
 ITEM.description = "A red audio cassette with a pale handwritten label across its upper face."
-ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
-	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
-	.. " equipment and a patient specialist to make sense of them."
+ITEM.longdesc = "Red plastic makes the audio cassette conspicuous among plainer recording shells. A pale strip provides space for handwriting across its upper face. The handwritten identity is likely to have mattered more to its owner than the colourful casing."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_05.mdl"
 

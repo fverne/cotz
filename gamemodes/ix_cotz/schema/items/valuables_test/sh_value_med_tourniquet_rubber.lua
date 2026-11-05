@@ -1,8 +1,7 @@
 ITEM.name = "Rubber Tourniquet Roll"
 ITEM.description = "A flat strip of reddish rubber wound into a tight roll, with a small pale tag near the"
 	.. " loose end."
-ITEM.longdesc = "The exposed surfaces have a dull, slightly tacky feel. It carries the unmistakable stale-rubber"
-	.. " smell of equipment that has spent too long in a closed cupboard."
+ITEM.longdesc = "The rubber tourniquet forms a flat strip when unrolled, rather than a woven strap with a separate mechanism. Its reddish material has been wound tightly for storage. The small tag preserves an identification easily lost once such a plain strip is separated from its packaging."
 ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/usable/meds_esmarch.mdl"

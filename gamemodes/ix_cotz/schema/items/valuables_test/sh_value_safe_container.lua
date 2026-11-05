@@ -1,8 +1,6 @@
 ITEM.name = "Blue Protected Transit Case"
 ITEM.description = "A blue transit case with reinforced ribs, side fittings and a broad front panel."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "The blue transit case surrounds its broad panels with reinforcing ribs. Side fittings keep vulnerable connections within the shell's outline. It is packaging made for carrying equipment through repeated handling, rather than soft luggage shaped around a traveller's clothes."
 ITEM.valuableCategory = "secured cases"
 
 ITEM.model = "models/lostsignalproject/items/quest/safe_container.mdl"

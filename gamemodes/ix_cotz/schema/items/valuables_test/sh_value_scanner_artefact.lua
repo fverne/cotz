@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Specimen Survey Station"
 ITEM.description = "A narrow survey instrument with a sloping control face and a circular assembly on top."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "A sloping control face sits beneath the specimen station's circular upper assembly. The narrow body was built to stand within a larger survey arrangement. Its fittings suggest a deliberate measuring position, rather than an instrument meant to be waved around by hand."
 ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/lostsignalproject/items/quest/scanner_artefact.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "L1 Research Injector"
 ITEM.description = "An orange-brown injector with a narrow label near one end."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "The L1 injector's short designation leaves much of its orange-brown casing visually plain. A narrow label sits near one end. It is an individually packaged research item whose identity rests on that printed reference rather than on any visible difference in the contents."
 ITEM.valuableCategory = "research injectors a"
 
 ITEM.model = "models/cotz/eft/usable/syringe_l1.mdl"

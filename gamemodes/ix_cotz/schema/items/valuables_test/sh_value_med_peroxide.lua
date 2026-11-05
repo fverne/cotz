@@ -1,8 +1,6 @@
 ITEM.name = "Hydrogen Peroxide Bottle"
 ITEM.description = "A pale bottle with a yellow label and a tall plastic cap."
-ITEM.longdesc = "The print is crowded into the small panel, while handling marks have gathered around the neck."
-	.. " It has the slightly tacky feel of a bottle that spent too long in a cupboard with other"
-	.. " household and medical chemicals."
+ITEM.longdesc = "The hydrogen peroxide bottle has a tall plastic closure above a pale body. A yellow label identifies the contents among other clinical supplies. It is a familiar pharmacy container whose modest appearance makes the original printed identification particularly important."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/h2o2.mdl"

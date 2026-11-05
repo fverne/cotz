@@ -1,7 +1,6 @@
 ITEM.name = "Bare Circuit Boards"
 ITEM.description = "A pair of green bare circuit boards covered in fine copper traces and drilled holes."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Fine copper tracks run between drilled holes across the bare circuit boards. The empty mounting positions show where components would complete the design. These are the foundations of electronic assemblies, rather than finished boards ready to be identified by their installed parts."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/lostsignalproject/items/quest/textolite.mdl"

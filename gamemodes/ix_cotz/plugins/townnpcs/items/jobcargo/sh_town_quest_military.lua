@@ -1,8 +1,6 @@
 ITEM.name = "Military Records Folder II"
 ITEM.description = "A buff-coloured document folder with printed sheets protruding at uneven angles."
-ITEM.longdesc = "Dust has worked into the edges and left the surface unpleasantly dry to the touch. The markings"
-	.. " suggest records assembled for a particular desk rather than general reading. Whatever made them"
-	.. " important would have to be established by someone who knows what to look for."
+ITEM.longdesc = "Uneven sheets project from the second military records folder. The buff cover protects their broad faces while leaving corners exposed. Its numbered identity keeps it distinct from similar files, even when the page order needs checking."
 
 ITEM.model = "models/cotz/eft/quest/military_secret_documents_2.mdl"
 

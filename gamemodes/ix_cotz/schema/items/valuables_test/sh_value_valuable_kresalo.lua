@@ -1,7 +1,6 @@
 ITEM.name = "Steel Fire Striker"
 ITEM.description = "A worn red metal fire striker with a curved opening and curled ends."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The fire striker is a shaped piece of steel with an opening for the grip. Its curved ends put a working edge close to the hand. It belongs to an older form of fire-making equipment, much simpler in construction than a fuel lighter."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/cotz/eft/barter/valuable_kresalo.mdl"

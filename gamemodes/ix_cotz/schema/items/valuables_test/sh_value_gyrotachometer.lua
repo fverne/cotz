@@ -1,8 +1,6 @@
 ITEM.name = "Gyrotachometer Assembly"
 ITEM.description = "A tall cylindrical instrument assembly with upper fittings and recessed side panels."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The gyrotachometer combines a tall cylindrical instrument body with several upper fittings. Its proportions suit a fixed mounting more readily than handheld use. The exposed assembly preserves the measuring hardware without the panel and labelled connections of the original installation."
 ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/illusion/eftcontainers/gyrotachometer.mdl"

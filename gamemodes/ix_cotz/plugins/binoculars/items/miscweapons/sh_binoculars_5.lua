@@ -1,7 +1,6 @@
 ITEM.name = "Vintage Binoculars"
 ITEM.description = "An older pair of binoculars. Features two zoom levels."
-ITEM.longdesc = "The leatherette covering is lifting at the seams, but the hinges still hold their position."
-	.. " Someone has kept the lenses cleaner than the rest of the instrument."
+ITEM.longdesc = "The vintage binoculars retain a simple hinged body beneath worn outer covering. Paired eyepieces give them a familiar outline despite the age of the design. Their limited adjustment is less elaborate than the controls fitted to newer field glasses."
 ITEM.model = "models/weapons/w_binoculars_ger.mdl"
 
 ITEM.height = 1

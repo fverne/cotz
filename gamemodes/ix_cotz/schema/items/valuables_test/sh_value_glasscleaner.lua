@@ -1,8 +1,6 @@
 ITEM.name = "Glass Cleaner"
 ITEM.description = "A spray bottle of glass cleaner."
-ITEM.longdesc = "There are dirty fingerprints around the neck and an old detergent smell trapped beneath the"
-	.. " trigger. The illustration on the front still suggests a much cleaner world than the one the"
-	.. " bottle currently occupies."
+ITEM.longdesc = "The glass-cleaner bottle uses a trigger pump to spread its contents over a broad surface. The angled grip keeps the hand behind the nozzle. It belongs with cleaning cloths and window supplies, a small piece of domestic maintenance among much less ordinary equipment."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/household_wiper.mdl"

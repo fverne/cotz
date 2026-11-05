@@ -1,8 +1,6 @@
 ITEM.name = "Large Spiral Notebook"
 ITEM.description = "A dark notebook with a spiral binding running along one edge."
-ITEM.longdesc = "A little dust remains along the folds and edges. It has the stale smell of paper kept somewhere"
-	.. " damp and then allowed to dry. The object offers a small, incomplete reminder that somebody once"
-	.. " expected to come back for their things."
+ITEM.longdesc = "The large spiral notebook allows pages to turn without pulling against a tight sewn spine. Its broad cover provides space for notes and sketches made at a table. Metal binding makes the book practical to handle, while leaving the page edges exposed."
 ITEM.valuableCategory = "office records"
 
 ITEM.model = "models/cotz/eft/info/notepad_a5_closed_01.mdl"

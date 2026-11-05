@@ -1,8 +1,6 @@
 ITEM.name = "Heavy Equipment Debris"
 ITEM.description = "A heap of battered equipment panels, webbing and loose protective pieces."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "Broken panels, webbing and loose protective pieces form a heavy heap of equipment debris. Several materials remain fastened together, making individual parts difficult to separate by eye. It is the aftermath of assembled kit, with little of the original organisation left."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/misc/waste_heavy.mdl"

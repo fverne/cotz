@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Antenna Unit"
 ITEM.description = "A narrow electronic unit with several long aerials rising from the housing."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "Several long aerials rise from the recovered antenna unit. Their arrangement makes the electronics distinctive but awkward to pack without bending a fitting. The enclosure belongs to specialised radio hardware, separated from the power and controls of its original installation."
 ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/quest/electr_signal_jammer.mdl"

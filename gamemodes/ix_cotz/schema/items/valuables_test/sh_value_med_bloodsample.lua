@@ -1,8 +1,6 @@
 ITEM.name = "Laboratory Blood Sample"
 ITEM.description = "A red sample tube with a pale cap."
-ITEM.longdesc = "There is little visible information to distinguish it from any number of other tubes that once"
-	.. " passed through a laboratory. Its significance belongs to a set of records that has not travelled"
-	.. " with it, leaving a specialist with rather more questions than answers."
+ITEM.longdesc = "The blood sample is enclosed in a capped tube small enough for a laboratory rack. Its red body makes the specimen type conspicuous. Meaningful examination would depend on linking the tube to its collection details, rather than treating it as an anonymous vial."
 ITEM.valuableCategory = "research samples"
 
 ITEM.model = "models/illusion/eftcontainers/bloodsample.mdl"

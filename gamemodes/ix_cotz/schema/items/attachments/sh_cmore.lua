@@ -1,7 +1,6 @@
 ITEM.name = "CMore Railway"
 ITEM.description = "American reflex sight. Delta type sight."
-ITEM.longdesc = "The exposed lens gives an open view around the aiming mark, but leaves little between the glass"
-	.. " and a careless impact. A cloth wrap is a common precaution during travel."
+ITEM.longdesc = "The CMore Railway uses a small exposed viewing window above its mounting base. Much of the surrounding structure is kept below the line of sight. Its low, open profile distinguishes it from optics built around a long enclosed tube."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

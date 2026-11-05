@@ -1,7 +1,6 @@
 ITEM.name = "Heavy Military Battery"
 ITEM.description = "A large dark battery with worn metal panels and recessed fittings at one end."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "The heavy battery encloses its cells behind worn metal panels. Recessed fittings keep its connections within the outline of the case. It is built as a substantial equipment component, with much less concern for pocket-sized convenience than a household battery."
 ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/illusion/eftcontainers/militarybattery.mdl"

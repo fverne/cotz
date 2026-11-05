@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants an orderly working space and control over whose problems become his. He can tolerate quiet company or useful information without offering friendship or claiming universal knowledge.
+
+**Voice and boundaries:** Short, dismissive, precise when the question deserves precision. Leave some personal questions unanswered. Avoid making privacy a grand philosophy or inventing a secret biography to reward persistence.
+
+**Relationships:** Wake's persistence irritates him, but he distinguishes a narrowly answerable question from an invitation to discuss another person's business. Their friction can reveal consideration without adding a recovery lead or case.
+
+**Personal subjects:** Does anything people bring back still surprise you? / Does Wake ask you about missing stalkers?
+
+These conversations and their follow-up live in [sh_owlnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_owlnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

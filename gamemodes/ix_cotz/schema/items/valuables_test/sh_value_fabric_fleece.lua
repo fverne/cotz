@@ -1,7 +1,6 @@
 ITEM.name = "Folded Fleece Fabric"
 ITEM.description = "A folded length of muted green fleece."
-ITEM.longdesc = "The surface has a softer, more uneven texture than the tougher cloth usually found around"
-	.. " equipment stores. A faint storage smell lingers between the folds."
+ITEM.longdesc = "The fleece's soft pile holds a layer of air within the fabric, making it familiar in warm clothing and linings. It compresses readily beneath a hand. This length is uncut stock, with folded edges rather than the seams of a finished garment."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/cotz/eft/barter/other_cloth_fleece.mdl"

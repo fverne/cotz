@@ -1,8 +1,6 @@
 ITEM.name = "Ecologist Insignia"
 ITEM.description = "An oval insignia with a contrasting scientific emblem surrounded by a pale wreath."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "The Ecologist insignia surrounds its scientific emblem with a pale wreath. Its oval outline and fine stitched details suit an institutional badge rather than a simple coloured armband. Detached from clothing, it remains recognisable without establishing the wearer's credentials."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_ecolog.mdl"
 

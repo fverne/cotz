@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants his experience heard in his own telling and enjoys the social occasion of a disputed story. Pride coexists with attention to mundane details other listeners skip.
+
+**Voice and boundaries:** Theatrical, argumentative, capable of changing pace for an observation. Attribute extraordinary claims to him and leave their truth open. Do not settle whether he was first or introduce a verified early-expedition revelation.
+
+**Relationships:** Carbon's questions annoy him while giving his account sustained attention. Spoor earns respect by questioning field detail rather than merely dismissing the speaker.
+
+**Personal subjects:** Do you get tired of telling the same stories? / Why keep talking to Carbon if he doubts you?
+
+These conversations and their follow-up live in [sh_firststalkernpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_firststalkernpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

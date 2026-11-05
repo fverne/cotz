@@ -1,7 +1,6 @@
 ITEM.name = "Russian Steel Helmet"
 ITEM.description = "A very old helmet."
-ITEM.longdesc = "The rounded shell and simple suspension speak of vast stores of surplus equipment. Generations"
-	.. " of owners have left sweat stains and small repairs inside the rim."
+ITEM.longdesc = "The Russian steel helmet uses a rounded metal body and a separate internal suspension. Its open face and lower edge leave most other protective equipment to be arranged independently. The plain construction belongs to an older generation of military headgear."
 ITEM.model = "models/shtokerbox/ground_headgear_rus_ww2.mdl"
 
 ITEM.price = 15000

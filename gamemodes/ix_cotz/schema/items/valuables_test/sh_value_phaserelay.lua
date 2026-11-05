@@ -1,8 +1,6 @@
 ITEM.name = "Phase Relay Module"
 ITEM.description = "A pale rectangular relay module with recessed connectors and narrow green markings."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The phase relay module keeps recessed connectors within a pale rectangular housing. Narrow green markings separate it visually from otherwise similar industrial modules. It was intended to be recognised by a reference in an installation, not by a set of obvious hand controls."
 ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/illusion/eftcontainers/phaserelay.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Biohazard Transport Case"
 ITEM.description = "A low hard case with a yellow biohazard warning on its dark lid."
-ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
-	.. " that changed hands more often than its paperwork did."
+ITEM.longdesc = "A yellow biohazard symbol identifies the transport case before its small label can be read. The low, rigid shell keeps a consignment together during handling. The warning concerns the intended cargo; it is not an inventory of what remains inside."
 ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/cotz/eft/info/quest_biohazard_case.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Metal Slider Flash Drive"
 ITEM.description = "A metal USB drive with a circular sliding control on its upper face."
-ITEM.longdesc = "Dust has settled in the small recesses around the connector. The casing says very little about"
-	.. " what might remain inside. Its value to a specialist begins with questions that cannot be"
-	.. " answered by turning it over in the hand."
+ITEM.longdesc = "The flash drive's circular slider moves its connector within the metal body. Keeping the connector retractable avoids a separate cap that can be misplaced. The protective casing occupies more space than the small electronic storage board it encloses."
 ITEM.valuableCategory = "flash media"
 
 ITEM.model = "models/cotz/eft/info/flash_card_ironkey_slider.mdl"

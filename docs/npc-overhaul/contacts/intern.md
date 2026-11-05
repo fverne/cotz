@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants his competence to be visible without every small success becoming a test of whether he deserves more responsibility. He enjoys the physical preparation of a survey and is beginning to notice his own preferences.
+
+**Voice and boundaries:** Thoughtful and specific, occasionally correcting an unnecessary apology. Give him confidence in concrete work as well as discomfort in a senior colleague's conversation. Do not grant advancement or ownership reserved for progression.
+
+**Relationships:** Beanstalk's attention can feel supportive and intrusive within the same exchange. He respects that concern while wishing routine preparation did not always invite another inspection; Egghead's approval still matters to him.
+
+**Personal subjects:** Is there a part of fieldwork you actually enjoy? / Does Beanstalk worry about you too much?
+
+These conversations and their follow-up live in [sh_ecologistnpc3.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_ecologistnpc3.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

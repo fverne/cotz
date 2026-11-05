@@ -1,8 +1,6 @@
 ITEM.name = "Grey Tracking Case"
 ITEM.description = "A grey hard case with moulded ribs, dark catches and a small contrasting label."
-ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
-	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
-	.. " with more history than explanation."
+ITEM.longdesc = "The tracking case's raised ribs stiffen its grey shell without making every panel equally thick. Dark catches hold the lid against the body. A small contrasting label gives several otherwise similar equipment cases a way to be told apart during transport."
 ITEM.valuableCategory = "specialist cases"
 
 ITEM.model = "models/cotz/eft/containers/container_trackcase.mdl"

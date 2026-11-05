@@ -1,7 +1,6 @@
 ITEM.name = "Anarchist Screen Helmet"
 ITEM.description = "A screen helmet with closed respiratory system."
-ITEM.longdesc = "The faction finish sits over the same practical seams and fittings as the unmarked version. A"
-	.. " face hidden behind the viewing panel leaves the colours to do the introductions."
+ITEM.longdesc = "The Anarchist Screen carries a distinctive finish over the same broad visor and enclosed respiratory arrangement as the standard equipment. The large face panel dominates its outline. Its appearance changes the visible identity of the set without making it a different class of protective system."
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
 ITEM.price = 100000

@@ -1,7 +1,6 @@
 ITEM.name = "Cutting Nippers"
 ITEM.description = "A pair of dark cutting pliers with rounded grips and short heavy jaws."
-ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
-	.. " recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The cutting nippers bring short heavy jaws together near the pivot. Rounded grips give the hand a broad bearing surface. The compact head concentrates effort on a small working edge, making the tool distinct from long-jawed gripping pliers."
 ITEM.valuableCategory = "cutting tools"
 
 ITEM.model = "models/cotz/eft/barter/tools_nippers.mdl"

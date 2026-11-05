@@ -2,8 +2,9 @@
 
 [Writing guide](../writing-guide.md) · [Reference index](README.md) · [Dialogue collection](dialogue.md)
 
-These four examples use editorial paraphrases, not source quotations or proposed COTZ descriptions.
-All files and IDs were checked at the recorded commits. Read the guide's continuity rules before
+The four external examples use editorial paraphrases, not source quotations or proposed COTZ descriptions.
+Their files and IDs were checked at the recorded commits. The final section preserves the
+[approved COTZ draft direction](#approved-cotz-item-drafts). Read the guide's continuity rules before
 applying any technique. The two GAMMA files are supplied by the bundled **G.A.M.M.A. Massive Text
 Overhaul Project — SageDaHerb and Dr.Pr1nkos** in Grokitach's GAMMA repository. That identifies the
 contributing text component; the original authorship of each underlying passage was not independently
@@ -92,3 +93,54 @@ their bases and effect consumers. These local files were inspected for this star
 them again before drafting because they can change. They establish existing prose/configuration,
 not a blanket requirement to imitate every sentence. Bread's current text does not establish the
 Dead Air military supply route. Preserve current mechanics and label any proposed new provenance.
+
+## Approved COTZ item drafts
+
+These original drafts were presented to the user and accepted as the writing direction on
+**2026-11-05**, then applied in the subsequent authorised catalogue pass. The wording below preserves
+the approved examples; it introduces no gameplay features. All four items were introduced after the
+agreed `1aa477d9` cutoff. Check their current definitions, base chains and consumers again before
+future revisions; acceptance of the style does not replace mechanical review.
+
+### Awl
+
+Definition: [value_awl](../../gamemodes/ix_cotz/schema/items/valuables_test/sh_value_awl.lua).
+
+**Description:** A wooden-handled awl for piercing leather and heavy cloth.
+
+**Longdesc:** The awl's steel point makes stitch holes in material too tough for a needle alone. Its
+rounded wooden handle sits against the palm, allowing steady pressure without much room to work. A
+simple tool associated with bootmaking, harness work and the less glamorous business of keeping straps
+attached to bags.
+
+### CPU Cooling Fan
+
+Definition: [value_pcpart_cpufan](../../gamemodes/ix_cotz/schema/items/valuables_test/sh_value_pcpart_cpufan.lua).
+
+**Description:** A computer processor cooler consisting of a small fan and metal heatsink.
+
+**Longdesc:** The fan forces air between the heatsink's closely spaced fins, carrying heat away from
+the processor beneath it. Dust has packed into those narrow passages. Removed from a computer, the
+cooler is a surprisingly bulky assembly beside the small chip it was built to keep cool.
+
+### Folded Aramid Fabric
+
+Definition: [value_fabric_aramid](../../gamemodes/ix_cotz/schema/items/valuables_test/sh_value_fabric_aramid.lua).
+
+**Description:** A folded length of tan aramid cloth used in protective textiles.
+
+**Longdesc:** Aramid fabric supplies strong fibres without the weight of a solid metal panel.
+Protective garments use it in carefully arranged layers; this folded length is unfinished textile
+stock. The dense weave and stiff folds distinguish it from the softer cloth used for ordinary clothing
+and suit linings.
+
+### Flight Log Folder
+
+Definition: [value_air_journal](../../gamemodes/ix_cotz/schema/items/quests/sh_value_air_journal.lua).
+
+**Description:** A blue folder holding flight records and loose log sheets.
+
+**Longdesc:** Flight logs record departures, destinations, crew details and remarks that might
+otherwise disappear with the people involved. Several sheets protrude from this folder's cover,
+making the bundle awkward to keep in order. Dates and aircraft identifiers could connect its entries,
+though the folder alone offers no assurance that every page is still present.

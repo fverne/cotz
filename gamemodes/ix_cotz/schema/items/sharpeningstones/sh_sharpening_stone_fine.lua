@@ -1,7 +1,6 @@
 ITEM.base = "base_sharpeningstones"
 ITEM.name = "Fine Sharpening Stone"
 ITEM.description = "A fine whetstone with three uses. Each use restores 50% knife sharpness, up to 101%."
-ITEM.longdesc = "The close-grained surface is meant for more careful edge work than a rough field touch-up."
-	.. " Hunters who look after their knives tend to keep it wrapped away from grit."
+ITEM.longdesc = "The fine whetstone offers a prepared abrasive surface for maintaining poaching knives. Its higher restoration per use distinguishes it from the ordinary stone. The modest block keeps specialised edge maintenance compact enough to carry with the equipment it serves."
 ITEM.price = 275
 ITEM.sharpnessRestored = 50

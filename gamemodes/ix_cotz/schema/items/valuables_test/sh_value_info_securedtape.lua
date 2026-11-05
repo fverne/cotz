@@ -1,8 +1,6 @@
 ITEM.name = "Archive Tape Cartridge"
 ITEM.description = "A square dark tape cartridge with a circular centre and a contrasting edge latch."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "The archive cartridge keeps its recording tape within a square protective shell. A contrasting latch makes one edge easy to identify by touch. The format belongs to equipment that loads a complete cartridge, leaving the tape protected during ordinary handling."
 ITEM.valuableCategory = "data archives"
 
 ITEM.model = "models/cotz/eft/barter/info_securedtape.mdl"

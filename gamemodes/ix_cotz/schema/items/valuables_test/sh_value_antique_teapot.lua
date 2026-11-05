@@ -1,8 +1,6 @@
 ITEM.name = "Antique Teapot"
 ITEM.description = "An ornate antique teapot with a darkened surface."
-ITEM.longdesc = "Fine decoration disappears beneath tarnish in the deeper recesses around the handle and spout."
-	.. " It looks far too formal for a makeshift camp table, though that has probably never stopped"
-	.. " anyone from putting something inappropriate beside it."
+ITEM.longdesc = "The teapot's elaborate handle and spout were made for a table where appearance mattered. Tarnish darkens the ornament without concealing the work beneath it. It is an awkwardly delicate piece of luggage beside the enamel mugs and plain pots found around most camp stoves."
 ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/antique_teapot.mdl"

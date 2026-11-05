@@ -1,8 +1,6 @@
 ITEM.name = "Military Electronics Assembly"
 ITEM.description = "A squat green metal assembly with a raised housing and heavy fittings along its sides."
-ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from the"
-	.. " casing alone."
+ITEM.longdesc = "The military electronics assembly uses a squat green enclosure and substantial side fittings. Its mounting points suggest installation in a larger piece of equipment. The heavy housing protects the module but offers very little explanation of the circuitry inside."
 ITEM.valuableCategory = "control electronics"
 
 ITEM.model = "models/cotz/eft/barter/electr_countermeasure.mdl"

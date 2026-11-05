@@ -1,8 +1,6 @@
 ITEM.name = "Dial Probe Thermometer"
 ITEM.description = "A round metal dial with a long narrow probe extending from the housing."
-ITEM.longdesc = "The face is crowded with small markings, while dirt sits around the rim and the join at the base"
-	.. " of the probe. It has the compact, practical appearance of an instrument that was once stored"
-	.. " beside a much larger piece of equipment."
+ITEM.longdesc = "The thermometer's long probe separates its sensing end from the round dial. A pointer turns a measurement into a reading that can be checked without an electronic display. Its metal housing resembles an instrument from a tray of workshop or laboratory gauges."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/illusion/eftcontainers/thermometer.mdl"

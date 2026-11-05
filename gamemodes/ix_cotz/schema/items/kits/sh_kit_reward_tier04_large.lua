@@ -1,7 +1,6 @@
 ITEM.name = "Experienced Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "A full bundle set aside as payment for completed work. The wrapping is plain, with the attention"
-	.. " spent on what a returning field worker will actually carry away."
+ITEM.longdesc = "The large Experienced Reward carries an established supply allowance in a substantial package. Its label distinguishes the issue class without listing every possible item. The supplying contact provides the concrete redemption choice before exchange."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

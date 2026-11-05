@@ -1,8 +1,6 @@
 ITEM.name = "Bear Emblem Patch"
 ITEM.description = "A shield-shaped embroidered patch with a bear emblem and contrasting lettering."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "The bear emblem is built from dense embroidery on a shield-shaped backing. Contrasting lettering remains part of the design even after the patch has been removed from a sleeve. The loose insignia identifies an association without establishing who wore it or under what circumstances."
 ITEM.valuableCategory = "irregular patches"
 
 ITEM.model = "models/cotz/eft/quest/chevron_bear.mdl"

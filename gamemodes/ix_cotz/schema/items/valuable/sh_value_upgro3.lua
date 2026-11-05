@@ -1,7 +1,6 @@
 ITEM.name = "Blue Equipment Parts Pouch"
 ITEM.description = "A dark blue equipment pouch with a reinforced front panel and a broad zipper seam."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The dark blue parts pouch has the same broad, reinforced front found on other equipment carriers. Its zipper seam runs around the load rather than across a flat lid. The coloured cloth gives the closed pouch an identity beyond its otherwise practical shape."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/upgrades/upgro3.mdl"

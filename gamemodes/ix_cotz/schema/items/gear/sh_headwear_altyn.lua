@@ -1,7 +1,6 @@
 ITEM.name = "Altyn Helmet"
 ITEM.description = "A steel helmet."
-ITEM.longdesc = "The weight settles heavily onto the neck, and the lining has absorbed the smell of old storage."
-	.. " It is the sort of equipment bought with a particular bad afternoon in mind."
+ITEM.longdesc = "The Altyn surrounds the head with a heavy steel shell and a close-fitting face assembly. Its substantial construction favours impact protection over a light load. The helmet is a protective headpiece, without the radiation protection provided by more specialised enclosed systems."
 ITEM.model = "models/shtokerbox/ground_headgear_atlyn.mdl"
 
 ITEM.price = 400000

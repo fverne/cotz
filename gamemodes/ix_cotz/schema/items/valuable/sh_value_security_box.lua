@@ -1,8 +1,6 @@
 ITEM.name = "Metal Security Drawer"
 ITEM.description = "A shallow metal security box with a handle and a recessed front panel."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "The metal security drawer is shallow enough for flat contents beneath its broad upper panel. A handle occupies the recessed front. Its shape belongs to a fixed cabinet or organised storage area more readily than to soft personal luggage."
 ITEM.valuableCategory = "transit cases"
 
 ITEM.model = "models/cotz/eft/quest/security_box.mdl"

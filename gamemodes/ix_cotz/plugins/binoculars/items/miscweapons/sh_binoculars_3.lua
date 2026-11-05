@@ -1,7 +1,6 @@
 ITEM.name = "Night Vision Binoculars"
 ITEM.description = "A modern pair of binoculars. Features multiple zoom levels."
-ITEM.longdesc = "The enclosed optics and crowded controls look out of place beside the battered field glasses"
-	.. " sold at most camps. Their previous owner has marked the preferred settings with tiny scratches."
+ITEM.longdesc = "The night-vision binoculars enclose their optical and electronic assemblies in a substantial body. Extra controls distinguish them from plain field glasses. Their specialised viewing equipment comes with more weight than the simplest binoculars carried for daylight observation."
 ITEM.model = "models/weapons/w_nvbinoculars.mdl"
 
 ITEM.height = 1

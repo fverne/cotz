@@ -1,7 +1,6 @@
 ITEM.name = "Large Ammo Crate"
 ITEM.description= "A large crate containing a variety of ammunition seperated into different compartments."
-ITEM.longdesc = "The dividers show where different batches were packed together for transport. A faint smell of"
-	.. " oil and old wood escapes around the lid."
+ITEM.longdesc = "Partitions divide the large ammunition crate into spaces for separate packets. The arrangement keeps mixed stock from settling into one loose layer during transport. Its substantial body belongs to a supply consignment rather than a pocket-sized reserve."
 ITEM.model = "models/lostsignalproject/items/misc/damaged_ammo.mdl"
 
 ITEM.width = 2

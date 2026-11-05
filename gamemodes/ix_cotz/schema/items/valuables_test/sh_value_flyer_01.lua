@@ -1,8 +1,6 @@
 ITEM.name = "Shooting Magazine Bundle"
 ITEM.description = "A small stack of brightly illustrated shooting magazines with bold cover lettering."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "The shooting magazines fill their covers with firearms, targets and large headlines. Photographs make comparisons easy to follow even when the accompanying articles are out of date. A bundle like this is reference reading as often as it is something to pass around during a quiet evening."
 ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/quest/flyer_01.mdl"

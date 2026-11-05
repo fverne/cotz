@@ -1,8 +1,6 @@
 ITEM.name = "Unidentified Instrument Assembly"
 ITEM.description = "An exposed instrument assembly with upright fittings, cabling and a metal base plate."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "Cabling joins upright fittings to a metal base plate in the unidentified instrument assembly. Much of the construction remains exposed instead of enclosed behind a panel. The arrangement reveals separate components without supplying the labels that would connect them to a clear task."
 
 ITEM.model = "models/cotz/eft/quest/mysterious_device.mdl"
 

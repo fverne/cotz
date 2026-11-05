@@ -1,7 +1,6 @@
 ITEM.name = "Veteran Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "A full bundle set aside as payment for completed work. Careful packing keeps the contents"
-	.. " together through the sort of transport that ruins ordinary luggage."
+ITEM.longdesc = "The large Veteran Reward gives a high-class supply allowance a single packed form. Its greater bulk separates it from the small veteran package. The contact's redemption offer identifies what the entitlement can provide without relying on an unseen random assortment."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

@@ -1,7 +1,6 @@
 ITEM.name = "Carbon Fibre Layers"
 ITEM.description = "Very light and highly insulating material. Very hard to find in the Zone, but worth every penny for its effectiveness."
-ITEM.longdesc = "The dark weave catches the light differently as it is turned in the hand. Clean edges and"
-	.. " careful joins suggest workshop equipment rarely found on an ordinary camp bench."
+ITEM.longdesc = "Carbon-fibre layers put a dense dark weave into a very light suit insert. The thin material takes up less weight than the heavier fabric assemblies. Its value lies chiefly in improving anomalous protection, rather than replacing a substantial ballistic plate."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant5.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

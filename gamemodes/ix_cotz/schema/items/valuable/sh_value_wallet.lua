@@ -1,8 +1,6 @@
 ITEM.name = "Worn Leather Wallet"
 ITEM.description = "A brown folded wallet with a worn surface and softened corners."
-ITEM.longdesc = "The small surfaces carry the dull polish of repeated handling. A little dust remains in the"
-	.. " sheltered edges. It is an unremarkable possession until someone notices it is missing, or"
-	.. " recognises whose pocket it used to live in."
+ITEM.longdesc = "The leather wallet folds flat around compartments intended for money and small papers. Softened corners show where the closed edges have rubbed against a pocket. It is a personal carrier whose outside can remain familiar even after its contents have changed completely."
 ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/containers/wallet.mdl"

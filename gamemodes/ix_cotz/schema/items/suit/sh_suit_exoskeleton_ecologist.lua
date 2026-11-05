@@ -2,8 +2,7 @@ ITEM.name = "Scientific Exoskeleton"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
-ITEM.longdesc = "Field research markings look unusually small against the bulk of the frame. In a bunker corridor"
-	.. " it seems excessive; beside a ruined laboratory entrance it makes rather more sense."
+ITEM.longdesc = "The scientific exoskeleton carries research-associated colouring over an armoured body and support frame. Its elaborate joints and layered fittings are far removed from a simple protective coverall. The body system leaves head and respiratory equipment as separate parts of the complete outfit."
 
 ITEM.width = 2
 ITEM.height = 3

@@ -1,8 +1,6 @@
 ITEM.name = "Recovered Interference Unit"
 ITEM.description = "A dark rectangular electronic unit with short aerial fittings at one end."
-ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
-	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
-	.. " establish its condition before deciding where it belongs."
+ITEM.longdesc = "Short aerial fittings project from one end of the interference unit. Keeping them close to the rectangular housing makes the assembly easier to mount beside other radio equipment. The recovered module lacks the surrounding installation that would explain its operating setup."
 ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/spec/jamming.mdl"

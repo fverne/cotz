@@ -1,8 +1,6 @@
 ITEM.name = "Illustrated Newspaper"
 ITEM.description = "A folded newspaper with a large photograph printed above the columns."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "A large photograph takes space above the illustrated newspaper's columns. It gives the front page a subject that can be recognised before the small print is read. The folded sheet preserves one day's presentation of events, rather than a complete account of what followed."
 ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/info/note_newspaper_folded_02.mdl"

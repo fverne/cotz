@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants returned possessions handled without appropriating their owners' lives. She needs ordinary breaks and can enjoy company while refusing to turn every meal into another recovery discussion.
+
+**Voice and boundaries:** Compassionate, direct, willing to name a practical limit. Emotion can appear through what she leaves alone. Never present recovered equipment as proof of a death or disclose a private letter for atmosphere.
+
+**Relationships:** Spool offers conversation about people still going about their day. Atlas's questions complement hers, while Boss's restrictions remain a particular frustration rather than evidence of a new conspiracy.
+
+**Personal subjects:** Is it hard handling what stalkers leave behind? / What do you and Spool talk about away from work?
+
+These conversations and their follow-up live in [sh_wakenpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_wakenpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

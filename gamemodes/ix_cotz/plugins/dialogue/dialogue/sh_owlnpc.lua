@@ -1,12 +1,18 @@
 DIALOGUE.name = "Cleaner"
 DIALOGUE.townContact = "cleaner"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"Let's see what we can trade.",
+	"All right. Put the goods where I can see them."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = "What is it? If you've come to do business, get to the point.",
+	response = "Yes? Put the wet pack away from the table and tell me what you need.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -19,29 +25,24 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "How did you get into this business?",
-	response = (
-		"People needed somewhere to leave things. I had space and knew how to keep my mouth shut. It worked. "
-		.. "You're waiting for a more interesting answer. There may be one, but we haven't done any business "
-		.. "yet. Tell me what you need stored or moved. I'll tell you what I can do, what it costs, and where "
-		.. "my responsibility ends. You can decide whether that suits you before handing anything over."
-	),
+	statement = "How did you get into storage and moving goods?",
+	response = "Had space. Kept things where I put them. Didn't give visitors an account of who'd been here before them. People found that useful. You're looking for a more interesting beginning. Go and ask someone who wants to tell you one. If you need something stored or moved, we can discuss an arrangement before you hand it over.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("InterestTopic", {
-	statement = "Can you tell me something interesting?",
-	response = "Sure. How about you do business with me, or shut the fuck up?",
+	statement = "Any stories you're willing to share?",
+	response = "About other people's business? No. About my own? Also no. You've had two answers for the price of one question. Make the next one useful.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("StartBarter", {
-	statement = "I'd like to do some bartering.",
-	response = "Sure.",
+	statement = "What exchanges are available?",
+	response = "Have a look. Ask if the terms need explaining.",
 	options = {
 		"BackTopic",
 	},
@@ -119,10 +120,12 @@ DIALOGUE.addTopic("StartBarter", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else...",
-	response = "Anything else concerning business?",
+	statement = "Something else.",
+	response = "What is it?",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -136,28 +139,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you around.",
-	response = "All right. We're finished.",
+	statement = "That's all I needed.",
+	response = "All right. That's settled.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "How do I know I can trust you?",
-	response = (
-		"Start small. Check what comes back. Decide for yourself. Haggler could spend an hour explaining why "
-		.. "he's trustworthy; I'd like to finish this conversation before lunch. If something matters to the "
-		.. "arrangement, ask. If you're asking because you're curious about someone else's parcel, get used to "
-		.. "being disappointed. You'll appreciate that when it's yours."
-	),
+	statement = "How should I judge whether to trust you?",
+	response = "Do a small piece of business. Check the result. Haggler would be halfway through explaining his character by now; you can ask him if you miss the conversation. I prefer the terms understood before anybody leaves a parcel. That includes what I haven't agreed to do. You can decide whether it suits you without telling me what sort of person you believe I am.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What if something goes wrong?",
-	response = (
-		"Tell me early. Where it was, what you saw, what you actually did. Don't tidy up the part that makes "
-		.. "you look foolish. I've heard worse, and the story gets less useful every time someone improves it. "
-		.. "A bad route I can stop using. An imaginary safe one keeps costing people. That's the answer you "
-		.. "came for. Leave the names out unless I need them."
-	),
+	statement = "What if a journey goes wrong?",
+	response = "Tell me where, what you saw, and which part you did yourself. I can work with a stupid decision. An account improved to hide it wastes the time we might have spent avoiding the same mistake. Leave everybody else's names out until I ask. No, that isn't an invitation to sit down and tell me about your worst expedition.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Does anything people bring back still surprise you?",
+	response = "The smell sometimes. Wet packs, mutant parts, whatever they were using to keep a boot together. They stand there explaining the artifact they almost found while the bag drips. I ask them to put it down somewhere else. That's usually the surprising part for them.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Does Wake ask you about missing stalkers?",
+	response = "She asks. Sometimes I can answer a question. Sometimes she wants a name she has no reason to expect from me. I say so. She comes back with a better question. Persistent woman. You're waiting for me to explain why I bother answering. You can keep waiting.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Would you rather everyone left you alone?",
+	response = "I'd rather they knew why they'd come before they started talking. You're doing reasonably well. Don't turn it into a visit.",
 	options = {"BackTopic"},
 })

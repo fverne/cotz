@@ -1,8 +1,6 @@
 ITEM.name = "M.U.L.E. Research Injector"
 ITEM.description = "An olive-coloured injector with a red band and a red end cap."
-ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
-	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
-	.. " accompanied it has not stayed with the injector."
+ITEM.longdesc = "A red band and matching end cap stand out against the M.U.L.E. injector's olive body. The deliberately conspicuous marking suits stock that must be recognised among many similar containers. The abbreviation supplies an identity, not an explanation of the research behind it."
 ITEM.valuableCategory = "research injectors a"
 
 ITEM.model = "models/cotz/eft/usable/syringe_mule.mdl"

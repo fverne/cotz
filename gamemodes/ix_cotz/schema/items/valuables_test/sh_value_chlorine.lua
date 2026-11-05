@@ -1,7 +1,6 @@
 ITEM.name = "Chlorine Powder"
 ITEM.description = "A crumpled packet of chlorine powder."
-ITEM.longdesc = "The folds have worn pale lines through the blue printed panel, but the contents are still"
-	.. " plainly identified. Fine dust clings around the seams."
+ITEM.longdesc = "The chlorine powder is packed as maintenance stock rather than bottled as a ready-made household cleaner. Creases in the wrapper make the packet flatter than its original shape. Its labelling belongs to the practical inventory of washrooms, utility cupboards and cleaning stores."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/household_chlorine.mdl"

@@ -1,8 +1,7 @@
 ITEM.name = "Red Skin Transilluminator"
 ITEM.description = "A red medical instrument with a broad looped housing and restrained lettering on its upper"
 	.. " surface."
-ITEM.longdesc = "The bright casing makes it much easier to spot than most of the equipment around it. Fine dust"
-	.. " remains in the recesses, while the exposed edges have the smoother finish of repeated handling."
+ITEM.longdesc = "A red casing surrounds the transilluminator's looped working assembly. Restrained lettering leaves most of the upper surface plain. The bright finish distinguishes this instrument from the darker version without changing the recognisable outline of the equipment family."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/barter/medical_transilluminator_usa.mdl"

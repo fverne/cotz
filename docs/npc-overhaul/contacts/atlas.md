@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Enjoys accounts of a place even when they contribute nothing to a survey. Wants uncertainty described honestly, but can become so interested in the description that he forgets someone has just finished a tiring expedition.
+
+**Voice and boundaries:** Keep the established patient rhythm and modest self-correction. Let curiosity produce an ordinary question rather than a map metaphor. His notes describe reported observations, not guaranteed safe routes or anomaly predictions.
+
+**Relationships:** Ballast's practical objections can amuse him after the irritation has passed. Wake brings a different purpose to shared observations; do not turn a routine conversation into a new missing-person case.
+
+**Personal subjects:** Do stalkers describe anomaly fields very differently? / Does Ballast ever ask you for a map?
+
+These conversations and their follow-up live in [sh_atlasnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_atlasnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

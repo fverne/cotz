@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants returning equipment to retain signs of its owner's experience, and enjoys understanding an ingenious repair. His curiosity can outrun his consideration for someone waiting to leave.
+
+**Voice and boundaries:** Bright, eager, and liable to interrupt himself with a technical possibility. Keep field damage as reported experience rather than a new anomaly rule, and preserve the existing desertion background without adding a resolution.
+
+**Relationships:** Mute's orderly bench both impresses and frustrates him. His respect is clearest when he admits the operator has a reason for refusing a modification. Gasket's practicality and Latch's workmanship remain distinct points of comparison.
+
+**Personal subjects:** Do you keep anything people bring back from anomaly fields? / What happens when you visit Mute's bench?
+
+These conversations and their follow-up live in [sh_technpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_technpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.

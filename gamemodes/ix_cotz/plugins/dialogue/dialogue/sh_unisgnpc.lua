@@ -1,12 +1,18 @@
 DIALOGUE.name = "Quartermaster"
 DIALOGUE.townContact = "quartermaster"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "I have some spare equipment laying around, yes.")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"I'd like to look at the equipment available for trade.",
+	"All right. Consider what you need it to do before choosing."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = "State what you need. If this concerns an order, have the details ready.",
+	response = "What do you need? If this concerns supplies, begin with the equipment and the intended use. We'll reach the explanation afterwards.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -18,21 +24,16 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What does your work involve?",
-	response = (
-		"Allocations, requisitions, and explaining why the equipment already promised to someone else is "
-		.. "unavailable. If you need something, be specific. What it must do matters more than how much you "
-		.. "like the look of it. I can discuss an order. My personal history is unlikely to help fill yours. If "
-		.. "that is what you intended to ask, consider this the shorter answer."
-	),
+	statement = "What occupies most of your time here?",
+	response = "Making sure two departures don't depend on the same equipment. People arrive with very clear ideas about their own expedition and rather less interest in the next one. I understand that. I still need the intended use, the quantity, and an accurate account of what they already have. My personal history won't fill a shortage. If that's what you meant to ask about, you'll have to make do with the work.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("StartBarter", {
-	statement = "I'd like to do some bartering.",
-	response = "Fine.",
+	statement = "What equipment exchanges can I consider?",
+	response = "Review the available exchanges. Ask about the terms before committing.",
 	options = {
 		"BackTopic",
 	},
@@ -112,10 +113,12 @@ DIALOGUE.addTopic("StartBarter", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about another topic.",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Yes. Be specific.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"StartBarter",
 		"BackgroundTopic",
@@ -128,28 +131,36 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "I'll talk to you later.",
-	response = "Check your equipment before departure. Dismissed.",
+	statement = "That's everything for now.",
+	response = "Understood. Check what you've packed before departure.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Can you make an exception?",
-	response = (
-		"Explain what has changed. I can reconsider an allocation; I cannot issue the same equipment to two "
-		.. "people. Usually the person asking for an exception has thought very carefully about their own "
-		.. "difficulty and rather less about the next departure. That is understandable. Keeping track of both "
-		.. "is part of my work. Give me enough information to do it before you begin bargaining."
-	),
+	statement = "When will you reconsider an allocation?",
+	response = "When the circumstances have changed and someone can explain how. A difficult expedition deserves proper consideration. So does the departure whose supplies you're asking me to divert. Tell me the practical problem before arguing about the importance of your own journey. I can be persuaded by information. An extended account of how much you dislike waiting is unlikely to add any.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What if an order cannot be filled?",
-	response = (
-		"Tell me while there is time to change arrangements. Brass will report a shortage even when he knows "
-		.. "I won't like hearing it. I can work with that. Optimism written into a stock return sends somebody "
-		.. "out expecting equipment that never arrived. If you bring me a problem early, I may still be "
-		.. "displeased. You should not mistake that for preferring a late surprise."
-	),
+	statement = "What should someone do if they can't meet an order?",
+	response = "Report the shortage while arrangements can still change. Brass does that, including when he knows I'll be displeased. Useful man. We can disagree about what to do next with the same number in front of us. I am less interested in an optimistic account that becomes a surprise at departure. You may find the early conversation uncomfortable. Have it anyway.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Is there anything in your own kit you keep out of habit?",
+	response = "An old cup. Handle's awkward in gloves, takes up more room than it should. I've had several opportunities to replace it. There, you've discovered a failure of procurement. Stalkers return from an anomaly field and tell me every unnecessary thing they carried had a purpose. I don't need an expedition report to recognise an attachment. I would prefer them to admit it before we spend twenty minutes discussing the specifications.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Does Suture inspect your equipment too?",
+	response = "Without being asked. I adjusted a strap while we were discussing a supply request and the subject changed immediately. Apparently I'd been making the same adjustment throughout the conversation. Irritating to discover somebody else has been paying closer attention to your discomfort. The observation was sound. I said so. That should have been sufficient; Suture also wanted to know how long I'd been putting up with it.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Does Boss know about the cup?",
+	response = "We've had more pressing things to discuss. If your next question is whether I include it in the weight, yes. I can be fond of something and still count it.",
 	options = {"BackTopic"},
 })

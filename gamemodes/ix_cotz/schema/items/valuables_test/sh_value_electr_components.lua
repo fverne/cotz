@@ -1,7 +1,6 @@
 ITEM.name = "Loose Electronic Components"
 ITEM.description = "An assortment of small electronic components with loose leads and coloured bodies."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Resistors, capacitors and other small components overlap in a tangle of loose leads. Similar outlines can conceal very different electrical ratings. The assortment is workshop stock whose useful distinctions are found in tiny markings, rather than in the size of the pile."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/cotz/eft/barter/electr_components.mdl"

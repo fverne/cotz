@@ -1,8 +1,6 @@
 ITEM.name = "Worn Striped Equipment Case"
 ITEM.description = "A heavily worn hard case with faded strips running across its lid."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "The striped case retains its broad lid markings beneath heavy wear. Scrapes follow the raised ribs and exposed corners, leaving the lower panels less affected. Its unchanged outline makes the history of hard handling more apparent than any change in purpose."
 
 ITEM.model = "models/cotz/eft/containers/container_gamma_damaged.mdl"
 

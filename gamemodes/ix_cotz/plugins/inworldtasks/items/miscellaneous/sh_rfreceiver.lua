@@ -1,8 +1,6 @@
 ITEM.name = "RF Receiver"
 ITEM.description = "A device for detecting radio frequencies. Often used to find emitters of various nature. Has special use in the zone, as radioactive frequencies often take anomalous form."
-ITEM.longdesc = "The tuning controls bear the marks of repeated adjustment in the field. Following a signal"
-	.. " through broken buildings takes patience; a strong reading does not explain who left the source"
-	.. " behind."
+ITEM.longdesc = "The RF receiver places tuning and signal-reading equipment within a compact field housing. Its purpose is to compare readings while moving toward an assigned source. The instrument can help locate the transmission without explaining why the transmitter was left there."
 ITEM.model = "models/lostsignalproject/items/devices/receiver2.mdl"
 ITEM.price = 0
 ITEM.flag = "A"

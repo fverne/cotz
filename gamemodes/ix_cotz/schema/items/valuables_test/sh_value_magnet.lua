@@ -1,7 +1,6 @@
 ITEM.name = "Ring Magnet Assembly"
 ITEM.description = "A heavy circular magnet assembly with metal mounting tabs and a short blue lead."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "The ring magnet sits within a metal assembly carrying mounting tabs and a short lead. Its heavy circular form belongs to equipment designed around a fixed position. Removed from that mounting, it is a substantial component whose surrounding mechanism is missing."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/magnet.mdl"

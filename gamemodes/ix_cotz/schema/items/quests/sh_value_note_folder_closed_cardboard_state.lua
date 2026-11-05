@@ -1,8 +1,6 @@
 ITEM.name = "Official File Folder"
 ITEM.description = "A cardboard file folder with a small coloured crest on its cover."
-ITEM.longdesc = "Dust has worked into the edges and left the surface unpleasantly dry to the touch. The markings"
-	.. " suggest records assembled for a particular desk rather than general reading. Whatever made them"
-	.. " important would have to be established by someone who knows what to look for."
+ITEM.longdesc = "A small coloured crest gives the official folder a formal appearance. The cardboard cover is otherwise an ordinary means of gathering documents. Its authority, if any remains, depends on the paperwork and issuing institution rather than the decoration."
 
 ITEM.model = "models/cotz/eft/info/note_folder_closed_cardboard_state.mdl"
 

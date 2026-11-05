@@ -1,8 +1,6 @@
 ITEM.name = "Closed Metal Sample Carrier"
 ITEM.description = "A tall rectangular metal carrier with a flat lid and a folding handle."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "The closed sample carrier keeps a tall rectangular body beneath a flat metal lid. Its handle folds down when not being carried. The rigid shell packages a consignment upright, with the contents concealed rather than displayed through the sides."
 ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/lostsignalproject/items/misc/portable_container_closed.mdl"

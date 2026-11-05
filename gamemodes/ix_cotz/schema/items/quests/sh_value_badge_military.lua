@@ -1,8 +1,6 @@
 ITEM.name = "Military Insignia"
 ITEM.description = "An oval insignia with a central shield, surrounding foliage and small lettering."
-ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
-	.. " might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "The Military insignia places a shield within an oval surround of foliage and lettering. Fine stitching gives the small patch a formal appearance. Its design belongs to uniform identification, with none of the individual details carried by a personal identity document."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_military.mdl"
 

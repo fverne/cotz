@@ -1,8 +1,6 @@
 ITEM.name = "Military Circuit Board"
 ITEM.description = "A military circuit board with substantial connector banks."
-ITEM.longdesc = "The board carries the restrained markings of equipment never intended to be explained to a"
-	.. " casual user. A little dust remains in every sheltered corner, lending its precise layout a"
-	.. " strangely deserted appearance."
+ITEM.longdesc = "Large connector banks occupy the edges of the military circuit board. They give the exposed electronics a definite orientation within its original equipment. Removed from the enclosure, the board displays the connections normally hidden behind a panel of controls."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/illusion/eftcontainers/militaryboard.mdl"

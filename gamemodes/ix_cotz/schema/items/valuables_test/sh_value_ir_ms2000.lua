@@ -1,8 +1,6 @@
 ITEM.name = "Infrared Marker Unit"
 ITEM.description = "A compact rectangular marker unit with a recessed top panel and dark end fittings."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The infrared marker unit has a recessed upper panel and dark protective fittings at either end. Its compact outline suits equipment carried close to the body. The enclosure gives little outward indication of the specialised signalling hardware inside."
 ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/cotz/eft/spec/ir_ms2000.mdl"

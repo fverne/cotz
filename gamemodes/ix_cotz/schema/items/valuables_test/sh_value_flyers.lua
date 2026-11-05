@@ -1,8 +1,6 @@
 ITEM.name = "Illustrated Magazine Stack"
 ITEM.description = "A low stack of illustrated magazines with densely printed covers."
-ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
-	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
-	.. " simply another object waiting for someone who recognises it."
+ITEM.longdesc = "The magazine stack is a compact collection of illustrated articles and advertisements. Bold cover lines compete for attention before the reader reaches a page of ordinary text. Familiar pictures can keep old issues circulating long after the news inside has lost its relevance."
 ITEM.valuableCategory = "printed material"
 
 ITEM.model = "models/cotz/eft/quest/flyers.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Pilgrim Backpack"
 ITEM.description = "A backpack made for people finding themselves in the east. Features compartments for easy storage of your valuables."
-ITEM.longdesc = "The tall body recalls long-distance trails and nights spent far from a road. Here, its weathered"
-	.. " seams are more likely to collect brick dust than clean mountain grit."
+ITEM.longdesc = "The Pilgrim is a tall backpack with a substantial empty weight of its own. Its broad fabric body reflects a design built around carrying a load on foot. The extra material is apparent even before the main space is filled."
 ITEM.model = "models/backpack_pilgrim/backpack_pilgrim.mdl"
 
 ITEM.price = 900

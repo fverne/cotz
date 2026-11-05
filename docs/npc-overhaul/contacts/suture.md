@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants people to admit what they actually want from their gear, including comfort and appearance. Notices pride, embarrassment, and attachment through ordinary handling, but must not claim to read a person's history from a seam.
+
+**Voice and boundaries:** Fussy, perceptive, capable of tact and amused impatience. Be exact about an observed fault and cautious about its cause. Do not promise new fitting services, protective effects, or free repairs.
+
+**Relationships:** Quartermaster's practical standards earn respect; his reluctance to apply the same scrutiny to his own habits invites mild teasing. Latch's recovered materials remain a complementary interest rather than a guaranteed supply arrangement.
+
+**Personal subjects:** Can you tell where a stalker has been from their clothes? / Is Quartermaster as particular about his own gear?
+
+These conversations and their follow-up live in [sh_suturenpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_suturenpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

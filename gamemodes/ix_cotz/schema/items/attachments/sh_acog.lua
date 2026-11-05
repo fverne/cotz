@@ -1,7 +1,6 @@
 ITEM.name = "ACOG Sight"
 ITEM.description = "American optic sight. 4.0x magnification. Delta type sight."
-ITEM.longdesc = "The enclosed housing shields the glass from the knocks of field use. Its sight picture rewards a"
-	.. " deliberate aim across a clearing rather than a hurried glance around a doorway."
+ITEM.longdesc = "The ACOG combines a compact optical body with a fixed magnified view. Its aiming mark provides a single reference without the separate front and rear posts of iron sights. The short housing keeps the optic less cumbersome than a long precision scope."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

@@ -1,15 +1,18 @@
 DIALOGUE.name = "Technut"
 DIALOGUE.townContact = "technut"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Absolutely!")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"Let's see what you have for trade.",
+	"Certainly, buddy. Give me a moment to put the unfinished bits out of your way."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = (
-		"Hello, buddy! Come in, come in. Mind the little parts on the bench; I have only just found that "
-		.. "screw."
-	),
+	response = "Hello, buddy! Mind that loose lead. I know precisely where it belongs; the rest of the bench is still under discussion. What have you brought?",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"RepairItems",
 		"PaintSuit",
@@ -23,8 +26,8 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("CustomizeGear", {
-	statement = "Can you change the finish on my gear?",
-	response = "Absolutely! Keep it on a moment; let me see what we can do with it.",
+	statement = "Can you change the finish on my equipped gear?",
+	response = "Yes! Keep it equipped and we'll look at the finishes available. You can decide before anything's changed.",
 	options = {"BackTopic"},
 	preCallback = function(self, client, target)
 		local customization = ix.plugin.Get("gearcustomization")
@@ -36,8 +39,8 @@ DIALOGUE.addTopic("CustomizeGear", {
 })
 
 DIALOGUE.addTopic("RepairItems", {
-	statement = "Can you clean my guns, and repair my items?",
-	response = "Hoho! Sure! What would you like me to look at?",
+	statement = "Can you repair my equipment or clean my weapons?",
+	response = "Let's have a look. Tell me what needs attention; I'll show you the work and the price.",
 	IsDynamic = true,
 	options = {
 		"BackTopic",
@@ -95,15 +98,15 @@ DIALOGUE.addTopic("ConfirmRepair", {
 
 DIALOGUE.addTopic("NotEnoughMoneyRepair", {
 	statement = "",
-	response = "Oh no... You don't have enough money to fix that..",
+	response = "You're short for that repair, buddy. Leave that one for now.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("PaintSuit", {
-	statement = "Can you paint my equipped suit?",
-	response = "Absolutely! Which color would you like it to be?",
+	statement = "Can you repaint my equipped suit?",
+	response = "Certainly. Let's see which colours that suit can take.",
 	IsDynamic = true,
 	options = {
 		"BackTopic",
@@ -181,7 +184,7 @@ DIALOGUE.addTopic("ConfirmPaint", {
 		if dynamicData then
 			if CLIENT then
 				self.response = string.format(
-					"Alright friend, painting that %s will cost you %s, is that a a-okay?",
+					"Painting the %s will cost %s, buddy. Do you want to go ahead?",
 					ix.item.list[dynamicData.itemuid].name,
 					ix.currency.Get(dynamicData.cost)
 				)
@@ -230,50 +233,43 @@ DIALOGUE.addTopic("ConfirmPaint", {
 
 DIALOGUE.addTopic("NotEnoughMoneyPaint", {
 	statement = "",
-	response = "My painting services are not free, you know?",
+	response = "Not quite enough to cover the painting. The colour can wait, buddy.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What did you do before the workshop?",
-	response = (
-		"Army work. I left in 2007, after we were cut off. Deserted, if you want the word said properly. It "
-		.. "wasn't a grand decision I made with a speech ready. I wanted to leave and found a way. Here, "
-		.. "somebody brings a broken thing and I can usually do something about it. I like that. Doesn't answer "
-		.. "every question about what came before, but it gives me a reason to get up and open the toolbox."
-	),
+	statement = "What did you do before you opened the workshop?",
+	response = "Army work. Left in 2007, after we were cut off. Deserted. I can say the word; it doesn't explain the whole day. I wanted out and found a way. Here someone puts a broken thing on the bench and I get to make myself useful with my hands. I like the questions a repair gives me. What moved, what wore through, why the owner kept pushing that button. Easier questions to keep company with.",
 	options = {
 		"BackgroundTopic2",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic2", {
-	statement = "Do people here know you deserted?",
-	response = (
-		"Some do. I tell them if they ask. Gasket is more interested in whether I've finished what I "
-		.. "borrowed his parts for. Fair enough. I can answer that question, although he doesn't always enjoy "
-		.. "the answer."
-	),
+	statement = "Do people here know about that?",
+	response = "Some. If they ask, I tell them. Then Gasket arrives wanting the parts I borrowed, and we return to an argument I can actually finish. Well, finish my side of. He'd like to see the assembled result before considering the subject closed. Fair enough. I've promised him rather a lot of assembled results.",
 	options = {
 		"BackgroundTopic3",
 	},
 })
 
 DIALOGUE.addTopic("BackgroundTopic3", {
-	statement = "Let's talk about something else.",
-	response = "All right, buddy. Something you need repaired, or are you simply keeping me company?",
+	statement = "We can talk about the workshop instead.",
+	response = "Gladly. There's something on practically every inch of it I'd enjoy discussing.",
 	options = {
 		"BackTopic",
 	},
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about another topic.",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Go on. If I keep turning this over, I'm still listening.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"RepairItems",
 		"PaintSuit",
@@ -288,8 +284,8 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("PaintView", {
-	statement = "Can I see what the different paints look like?",
-	response = "Sure, sure! Take a look.",
+	statement = "Can I preview the suit colours?",
+	response = "Here we are. Have a look before you make up your mind.",
 	options = {
 		"PaintSuit",
 		"BackTopic",
@@ -390,30 +386,36 @@ DIALOGUE.addTopic("PaintView", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "I'll talk to you later.",
-	response = "See you, buddy. I'll try to have found that part by then.",
+	statement = "I'll let you get back to the bench.",
+	response = "See you, buddy. If you remember what it was doing before it failed, come and tell me. Those details keep me entertained.",
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Do you ever finish an improvement?",
-	response = (
-		"Absolutely! Then someone says, 'Could it also do this?' and suddenly it's unfinished again. "
-		.. "Sometimes that someone is me. Gasket would prefer I stopped at working. Sensible man. Dreadfully "
-		.. "limiting conversation. Still, he can make a repair with whatever happens to be within reach, and I "
-		.. "occasionally spend an hour improving it before discovering why he did it that way. You may repeat "
-		.. "that to him once. Once, buddy."
-	),
+	statement = "How do you decide an improvement is finished?",
+	response = "The sensible answer involves the owner needing the thing back. I can go on finding another adjustment indefinitely. Something comes back from an anomaly field held together with wire, and immediately I want to understand every turn of the wire. Its owner would like a repair and some supper. Gasket is excellent at reminding me which of us is waiting. Sometimes a little forcefully, considering how interesting the problem has become.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "What makes a repair satisfying?",
-	response = (
-		"The owner stops hovering. They've been watching every turn of the screwdriver, certain the thing is "
-		.. "finished, and then it works and they start talking about something else. Lovely moment. I'd like "
-		.. "them to admire the repair a little longer, naturally. But you can tell they trust it again. Bring "
-		.. "me what it actually does when it fails, by the way. 'It's broken' leaves me rather a lot of "
-		.. "possibilities to enjoy."
-	),
+	statement = "What is the best part of repairing something?",
+	response = "When they stop watching my hands. They've been leaning over the bench certain it's finished for good, then it works and they start telling me about the trip instead. I could do with another moment of admiration. But I like hearing the journey once the broken thing has stopped being the most important part of it. Usually there's a detail that explains the fault, too.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Do you keep anything people bring back from anomaly fields?",
+	response = "Broken fasteners, usually. Everyone else wants to see the artifact. I want the clasp the owner has held together with wire for three days. There's a decision in that repair! What they had, what they tried, which bit they were prepared to sacrifice. Sometimes I ask and get the whole expedition instead. Fine by me, buddy. Sit down. Although tell me before I take the wire off if it's the only thing keeping the rest together.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "What happens when you visit Mute's bench?",
+	response = "Depends how close my hands get. He's got a way of putting a tray down that ends a suggestion before I've finished making it. Very economical. I once spent a whole visit describing an arrangement he'd already tried. He let me reach the exciting part, then produced the rejected piece. Kept it labelled, too. I admired that. Would've admired it more if he'd shown me five minutes earlier.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Do you leave his equipment alone?",
+	response = "When he asks. Well, when he makes it sufficiently clear. Usually by moving it away. I like seeing work done differently, even if the owner won't allow a perfectly reasonable experiment. You should see how clean he leaves the bench. Almost discourages thought.",
 	options = {"BackTopic"},
 })

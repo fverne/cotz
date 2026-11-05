@@ -1,8 +1,6 @@
 ITEM.name = "Stained Sample Bag"
 ITEM.description = "A flattened translucent sample bag with mottled staining across its surface."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "The sample bag's translucent walls have flattened into overlapping folds. Mottled staining makes parts of the surface harder to see through. Its lightweight form suits containing a specimen without the rigidity and protection of a dedicated transport tube."
 ITEM.valuableCategory = "research samples"
 
 ITEM.model = "models/cotz/eft/info/plasticbag_labyrinth.mdl"

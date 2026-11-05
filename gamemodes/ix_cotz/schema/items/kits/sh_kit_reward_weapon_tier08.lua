@@ -1,7 +1,6 @@
 ITEM.name = "Master Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The wrapping keeps a selected weapon out of sight until the supplies are redeemed. The"
-	.. " unassuming finish is typical of valuable supplies kept out of casual sight."
+ITEM.longdesc = "The Master Weapon Box carries the top issue label in this equipment-package series. Its wooden body is little different from less ambitious transport boxes. The contact's available exchange offer establishes what the entitlement can provide, rather than the name promising a particular firearm."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

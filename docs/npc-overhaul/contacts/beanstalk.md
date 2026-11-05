@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Takes pleasure in small observations and wants field accounts left intact. He resents being treated as incapable of curiosity because he asks cautious questions, while his own fussiness can make people reluctant to tell him things.
+
+**Voice and boundaries:** Careful, interested, occasionally embarrassed or testy. Separate a personal observation from a scientific conclusion. Avoid making every answer about controls, danger, or the proper method.
+
+**Relationships:** Egghead's enthusiasm can restore his interest after a tiresome day and also consume the time he intended to spend resting. Their professional arguments should coexist with enjoyment of one another's company.
+
+**Personal subjects:** Is there anything you enjoy watching outside the research? / Can you and Egghead talk without arguing?
+
+These conversations and their follow-up live in [sh_ecologistnpc2.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_ecologistnpc2.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

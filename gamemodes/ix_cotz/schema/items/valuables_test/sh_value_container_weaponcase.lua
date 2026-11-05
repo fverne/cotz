@@ -1,8 +1,6 @@
 ITEM.name = "Long Weapons Transit Case"
 ITEM.description = "A long low equipment case with recessed lid panels and several edge catches."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "A low lid and long recessed panels give the weapons case a narrow profile. Several catches keep the length closed at more than one point. The empty shell remains recognisable as specialised transport packaging even when the equipment that determined its dimensions is absent."
 ITEM.valuableCategory = "military cases"
 
 ITEM.model = "models/cotz/eft/containers/container_weaponcase.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Arab Steel Helmet"
 ITEM.description = "A very old helmet."
-ITEM.longdesc = "The coating is rubbed thin around the rim, exposing dark metal beneath. Its journey to the Zone"
-	.. " is harder to explain than its continued usefulness to someone short of equipment."
+ITEM.longdesc = "The old steel helmet gives the head a broad metal cover supported by an internal suspension. Its plain shell has none of the integrated face and breathing assemblies of newer equipment. Considerable material is carried for a relatively modest level of protection."
 ITEM.model = "models/shtokerbox/ground_headgear_arab_helmet.mdl"
 
 ITEM.price = 15000

@@ -1,8 +1,6 @@
 ITEM.name = "Marked Data Disc II"
 ITEM.description = "A pale optical disc bearing a second handwritten numeral."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "The second data disc is identified with a handwritten II rather than a full title. Its plain face gives it little individual character beyond that mark. Keeping the numbering intact would matter to anyone comparing it with the other carrier in the set."
 
 ITEM.model = "models/cotz/eft/barter/info_cd_disk_ii.mdl"
 

@@ -1,7 +1,6 @@
 ITEM.name = "M50 Gasmask"
 ITEM.description = "A modern gasmask"
-ITEM.longdesc = "The broad lenses make the wearer's eyes easier to see than their expression. Fine dust still"
-	.. " finds its way into the seams during a long walk through abandoned buildings."
+ITEM.longdesc = "The M50 packages a modern respiratory assembly around a close-fitting mask body. The hard outer components leave the sealing surfaces hidden against the face. Its complete construction belongs near the upper end of the available gasmasks, rather than among improvised cloth coverings."
 ITEM.model = "models/shtokerbox/ground_mask_m50.mdl"
 
 ITEM.price = 270000

@@ -1,7 +1,6 @@
 ITEM.name = "Brown Fabric Bundle"
 ITEM.description = "A folded bundle of brown cloth with a coarse creased surface."
-ITEM.longdesc = "The exposed edges feel dry and dusty. The weave and packaging offer a small reminder of careful"
-	.. " work done with needles, shears and a clear space on a table."
+ITEM.longdesc = "The brown cloth has a coarse surface and deep creases from tight packing. Its loose bundle hides how much usable material remains between the folds. Spread across a cutting table, it would be easier to distinguish intact lengths from awkward offcuts."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/fabrics2.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Aluminium Frame"
 ITEM.description = "An aluminium frame to allow you to carry more. Makes you more vulnerable to electric and heat anomalies."
-ITEM.longdesc = "Tubing and braces spread the load across a suit's mounting points. Scratches around the joints"
-	.. " show how often it has been fitted, removed, and adjusted for another owner."
+ITEM.longdesc = "The aluminium frame uses braces and mounting points to spread a greater load across the suit. Its light metal construction adds relatively little weight of its own. The carrying improvement comes with reduced protection against anomalies, rather than a free increase in capacity."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic9.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 2

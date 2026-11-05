@@ -1,7 +1,6 @@
 ITEM.name = "Electronic Parts Box"
 ITEM.description = "A low dark metal parts box with a worn lid and a narrow recessed seam."
-ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
-	.. " run short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "The electronic parts box puts a low metal lid over a compact storage space. Its narrow recessed seam keeps the closure close to the body. A container this plain would normally be distinguished on a workshop shelf by its label or the components inside."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/lostsignalproject/items/quest/transistors.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Armour Plate Transit Case"
 ITEM.description = "A long reinforced equipment case with recessed handles and substantial end fittings."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "Recessed handles sit within the armour plate case's long reinforced body. Substantial end fittings protect the points most likely to take a knock during carrying. The shell was designed around a dense load, leaving the packaging itself noticeably substantial."
 
 ITEM.model = "models/cotz/eft/containers/container_plates_case.mdl"
 

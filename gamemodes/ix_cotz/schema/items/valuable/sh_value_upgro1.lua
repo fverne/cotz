@@ -1,7 +1,6 @@
 ITEM.name = "Strapped Parts Parcel"
 ITEM.description = "A paper-wrapped parcel held shut by broad dark straps."
-ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
-	.. " another ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "Broad straps hold the paper-wrapped parts consignment together. They provide more support than the wrapper alone could offer around a dense load. The parcel's identity belongs to its accompanying stock reference rather than to the plain packaging."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/upgrades/upgro1.mdl"

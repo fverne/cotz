@@ -1,7 +1,6 @@
 ITEM.name = "Experienced Stalkers Stash"
 ITEM.description= "A rugged stash, contains the belongings of another stalker."
-ITEM.longdesc = "The bundle is arranged with the economy of someone used to travelling light. There is little"
-	.. " ceremony to the way it has been closed."
+ITEM.longdesc = "The experienced stalker's stash is a packed cache rather than an empty bag waiting to be equipped. Its assortment includes field supplies gathered over more than a first outing. The rugged outer carrier keeps those separate belongings together until the cache is unpacked."
 ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 
 ITEM.width = 3

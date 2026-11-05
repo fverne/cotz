@@ -1,8 +1,6 @@
 ITEM.name = "Surgical Instrument Set"
 ITEM.description = "An assortment of slender metal surgical instruments with loops, jaws and narrow tips."
-ITEM.longdesc = "Their outlines overlap into a rather uninviting tangle when laid together. The metal carries the"
-	.. " dull finish of old equipment, and there is no surviving case or inventory card to say whether"
-	.. " the collection is complete."
+ITEM.longdesc = "Loops, narrow jaws and long tips distinguish the surgical instruments gathered into this set. Their forms are intended for controlled work at close range. Without an organised case, several similar-looking pieces overlap into a collection that needs sorting before its completeness can be judged."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/barter/meds_tools.mdl"

@@ -1,7 +1,6 @@
 ITEM.name = "Ultraviolet Lamp"
 ITEM.description = "A specialist lamp with purple tubes."
-ITEM.longdesc = "Dust collects where the tubes meet the base, and the small print has begun to fade. Its"
-	.. " particular purpose would be clearer beside the equipment it came from."
+ITEM.longdesc = "Purple tubes distinguish the ultraviolet lamp from ordinary room-lighting stock. Its specialised light source was intended for an appropriate fixture and task. The loose lamp is one component of that equipment, with the glass particularly exposed during transport."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/electr_uvlamp.mdl"

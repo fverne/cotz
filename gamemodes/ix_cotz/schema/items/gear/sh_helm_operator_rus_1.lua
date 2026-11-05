@@ -1,7 +1,6 @@
 ITEM.name = "PASGT"
 ITEM.description = "A modern helmet."
-ITEM.longdesc = "Its deep profile is familiar from photographs of soldiers far beyond the Zone. The suspension"
-	.. " has been adjusted often enough to polish the edges of its fittings."
+ITEM.longdesc = "The PASGT surrounds the top and sides of the head with a shaped protective shell. Its open front leaves facial equipment separate. The design is more substantial than a cloth head covering while avoiding the attached respiratory components of an enclosed headpiece."
 ITEM.model = "models/shtokerbox/ground_headgear_rus_helmet1c.mdl"
 
 ITEM.price = 100000

@@ -1,15 +1,18 @@
 DIALOGUE.name = "The Original"
 DIALOGUE.townContact = "the-original"
 
-ix.dialogue.AddTradeTopic(DIALOGUE, "Want to trade?", "Yes!")
+ix.dialogue.AddTradeTopic(
+	DIALOGUE,
+	"What are you willing to trade?",
+	"Let's see. Leave room on the table; I may want a closer look."
+)
 
 DIALOGUE.addTopic("GREETING", {
-	response = (
-		"You found me. They call me the Original. First stalker in the Zone, if you're asking. What can "
-		.. "I do for you?"
-	),
+	response = "The Original. Yes, that one. Sit if you're staying for the explanation; otherwise tell me what you need.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"TutorialTopic",
 		"InterestTopic",
@@ -20,10 +23,12 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackTopic", {
-	statement = "Let's talk about something else.",
-	response = "What else did you want to discuss?",
+	statement = "Something else.",
+	response = "Go on, then. You've still got my attention.",
 	options = {
 		"SpecialtyTopic",
+		"InterestZoneLifeTopic",
+		"InterestTownRelationsTopic",
 		"TradeTopic",
 		"TutorialTopic",
 		"InterestTopic",
@@ -34,13 +39,13 @@ DIALOGUE.addTopic("BackTopic", {
 })
 
 DIALOGUE.addTopic("GOODBYE", {
-	statement = "See you!",
-	response = "Come back with a question worth arguing about.",
+	statement = "I'll hear the rest another time.",
+	response = "Come back before you've improved your own version too much. I'd like to hear where it began.",
 })
 
 DIALOGUE.addTopic("TutorialTopic", {
-	statement = "Can you explain a few things about the camp?",
-	response = "I can. Whether you believe the explanation seems to be a separate question these days. Go on, ask.",
+	statement = "Can you tell me about the camp and the country around it?",
+	response = "Certainly. People occasionally confuse asking me with agreeing to believe me. You can decide about that after I've finished.",
 	options = {
 		"TutorialTopic1",
 		"TutorialTopic2",
@@ -50,8 +55,8 @@ DIALOGUE.addTopic("TutorialTopic", {
 })
 
 DIALOGUE.addTopic("TutorialTopicBack", {
-	statement = "Alright, let me ask you something else.",
-	response = "Sure.",
+	statement = "Another question about the camp.",
+	response = "Yes? You've let me get this far; might as well make use of it.",
 	options = {
 		"TutorialTopic1",
 		"TutorialTopic2",
@@ -61,40 +66,24 @@ DIALOGUE.addTopic("TutorialTopicBack", {
 })
 
 DIALOGUE.addTopic("TutorialTopic1", {
-	statement = "How did this camp get started?",
-	response = (
-		"Technut and I helped get the place standing when it was considerably less inviting. Eastern Haven, "
-		.. "we called it. You can judge how much of that was optimism. A camp begins looking established once "
-		.. "enough people forget the work of starting it. Then somebody asks where the spare tools are and you "
-		.. "discover how much establishing remains. Talk to the people doing the ordinary jobs. They'll give "
-		.. "you a different account of the place from the people admiring it."
-	),
+	statement = "How did the camp begin?",
+	response = "Technut and I helped get it standing. Eastern Haven, we called it, with rather more confidence than the place deserved at the time. You can tell a camp's becoming comfortable when people start complaining that something isn't where they expected it. There was a time we'd have been pleased the thing existed at all. Gasket would give you a long account of how much still needs doing. Ask him after he's eaten.",
 	options = {
 		"TutorialTopic1_1",
 	},
 })
 
 DIALOGUE.addTopic("TutorialTopic1_1", {
-	statement = "Who should I speak to about helping?",
-	response = (
-		"Ask what people actually need. Gasket wants utility supplies, Technut handles workshop salvage, "
-		.. "Jitters looks after the clinic. Lemon will explain his requirements whether you ask or not. I "
-		.. "collect specimens and other things worth examining. Read a request before promising to fill it. A "
-		.. "successful first trip doesn't have to impress everyone in camp."
-	),
+	statement = "Who should I ask about helping out?",
+	response = "Gasket for utility supplies, Technut for workshop salvage, Jitters for the clinic. Lemon has views on everything that might become a meal. I take an interest in specimens. Hear what someone needs before promising your whole pack to them. People come here expecting their first expedition to settle who they are. Usually it settles how much they enjoy walking in wet socks. You can make a useful beginning without impressing every person in camp.",
 	options = {
 		"TutorialTopicBack",
 	},
 })
 
 DIALOGUE.addTopic("TutorialTopic2", {
-	statement = "What should I be most careful about?",
-	response = (
-		"The thing you've decided is ordinary. People stare at the impossible and walk straight past a "
-		.. "warning they recognise. Mutants, anomalies, exposure, a bad return route - there are plenty of ways "
-		.. "to make a short journey longer than you intended. I can tell you what I've seen. Don't turn that "
-		.. "into permission to stop looking for yourself."
-	),
+	statement = "What catches new arrivals out?",
+	response = "They give the strange things all their attention. See an anomaly, spend ten minutes staring, then walk off without looking where they've decided to put their foot. Or hear a mutant and forget which way they came. I've had my share of foolish moments. Mine have the advantage of becoming stories told by me. Give yourself time to look around before somebody else's excitement decides what you're doing next.",
 	options = {
 		"TutorialTopic2_1",
 		"TutorialTopic2_2",
@@ -103,15 +92,8 @@ DIALOGUE.addTopic("TutorialTopic2", {
 })
 
 DIALOGUE.addTopic("TutorialTopic2_1", {
-	statement = "What should I know about anomalies?",
-	response = (
-		"Keep your distance until you understand the approach, and don't trust a quiet-looking patch because "
-		.. "it looks like one you crossed yesterday. I've watched an animal get lifted where I expected to see "
-		.. "it run. That persuaded me more effectively than any explanation since. Artifacts bring people close "
-		.. "to fields; sometimes they're valuable enough to make the risk sound smaller in the telling. Ask "
-		.. "about the particular object before assuming it is harmless to carry. Egghead enjoys that sort of "
-		.. "question."
-	),
+	statement = "What is worth knowing before approaching anomalies?",
+	response = "Get a good look at the approach before going closer. I've seen an animal lifted where I expected it to run. Whether you like my explanation of that hardly matters; it made me reconsider where I stood. A stalker with an artifact to sell may describe the return more cheerfully than the collection. Ask what they actually saw. And ask about the particular artifact before deciding to carry it. Egghead can happily spend an afternoon on that question.",
 	options = {
 		"TutorialTopic2_2",
 		"TutorialTopicBack",
@@ -119,14 +101,8 @@ DIALOGUE.addTopic("TutorialTopic2_1", {
 })
 
 DIALOGUE.addTopic("TutorialTopic2_2", {
-	statement = "What should I know about the mutants?",
-	response = (
-		"Watch what they're doing before you decide what they are about to do. A frightened account tends to "
-		.. "put every animal in the same bad temper. That won't help you judge the one in front of you. Old "
-		.. "Timer has hunting work, and Spoor in Garbage cares about what the ground can tell him. I examine "
-		.. "the parts that come back. There's useful work in that, provided you survive collecting them and "
-		.. "don't ruin them in your pack."
-	),
+	statement = "How do you judge the mutants out there?",
+	response = "I'd like to see where one was, how it moved, what it was doing before the shooting began. Most accounts arrive in the opposite order. Old Timer can discuss hunting; Spoor in Garbage will happily keep you talking about tracks. I examine what people bring back. We disagree often enough to keep supper interesting. Listen to the details that made somebody hesitate. They're usually more useful than the size of the thing in the final telling.",
 	options = {
 		"TutorialTopic2_1",
 		"TutorialTopicBack",
@@ -134,15 +110,8 @@ DIALOGUE.addTopic("TutorialTopic2_2", {
 })
 
 DIALOGUE.addTopic("TutorialTopic3", {
-	statement = "What should I carry before going out?",
-	response = (
-		"Water, food, medical supplies you know how to use, and something you can rely on to defend "
-		.. "yourself. A working Geiger counter is worth making room for. Check the condition of the equipment "
-		.. "before leaving; discovering a fault at the wrong end of a walk is an expensive way to become "
-		.. "familiar with it. Technut can discuss repairs. And leave space for the thing you went to collect. "
-		.. "People overlook that until they're standing over a case deciding which of their own belongings "
-		.. "became optional."
-	),
+	statement = "What should I pack for a first trip?",
+	response = "Food, water, medical supplies you understand, and a means of defending yourself that you've checked before leaving. Make room for a working Geiger counter. Technut can look at equipment that needs attention. Then leave some space in the pack. Saw a man spend ages choosing which belongings to abandon beside a find once. His companion ate while waiting. Sensible preparation from at least one member of the expedition.",
 	options = {
 		"TutorialTopicBack",
 	},
@@ -365,41 +334,13 @@ DIALOGUE.addTopic("InterestTopic", {
 	preCallback = function(self, client, target)
 		if CLIENT then
 			local tbl = {
-				(
-					"Technut once tried to explain a fault using the sound it made. By the time he finished, three "
-					.. "people were offering diagnoses and nobody knew which machine he meant. I listened to the whole "
-					.. "performance. Free entertainment was less common than spare parts that week."
-				),
-				(
-					"People ask whether I kept a record when I first came here. I did. Then I used a page to keep "
-					.. "something dry and another to start a fire. Carbon looks at me as if I've personally misplaced a "
-					.. "century. I tell him the fire was very good. He never enjoys that part."
-				),
-				(
-					"A fellow asked me the safest way to travel with a heavy pack. I said to put some of it down. He "
-					.. "explained why every object was necessary, then asked the question again. We were both "
-					.. "disappointed by the conversation."
-				),
-				(
-					"I've heard descriptions of animals I wouldn't care to meet. Some from people who saw them, some "
-					.. "from people who improved the account at every table. Ask where the teller was standing. A "
-					.. "surprising number of the best stories were witnessed from a chair in camp."
-				),
-				(
-					"Lemon tells me he can judge a person's appetite at a glance. I asked why he always makes enough "
-					.. "for another person. He explained stock management for so long I had time to finish the bowl. An "
-					.. "excellent cook. Could use a little practice at leaving a question unanswered."
-				),
-				(
-					"Spoor will spend half an evening asking what an animal was eating. I ask whether he wants the "
-					.. "rest of the story. He says that's the part he's asking for. We do eventually have a useful "
-					.. "conversation, provided neither of us objects to doing it in the wrong order."
-				),
-				(
-					"I like a person who can say they don't remember. Gives you somewhere sensible to begin asking. "
-					.. "Of course, when I say it, people look delighted. You'd think I'd just handed them a rare "
-					.. "artifact instead of admitting where I put down a pair of gloves."
-				),
+				"Technut tried to imitate a fault he'd heard in a piece of equipment. Excellent performance. By the time he reached the grinding noise, three people were explaining what it must be and nobody knew which machine he meant. I let them argue. Had spent the morning hearing about a mutant hunt; made a pleasant change to have the noises supplied by somebody sitting safely beside his supper.",
+				"Carbon asked why I hadn't kept better records of my first journeys. I had kept them. Then I needed a dry bit of paper for a fire and became interested in the practical value of a page. He looked at me as though I'd burnt the answer to everything. Good fire. Warmed my hands, dried a cuff. He's allowed to regret the notes; I reserve some affection for the evening they improved.",
+				"Met a fellow who wanted advice on travelling with a heavy pack. Suggested putting some of it down. He began explaining the importance of every scrap, including something from a wreck he couldn't identify. I became quite interested in seeing it. He'd packed it at the bottom. We had a long, inconvenient look, and afterwards he was much less attached to it. Difficult to persuade a man of anything while the object stays an idea in his bag.",
+				"Heard two accounts of the same mutant over supper. By the second, I was beginning to feel sorry for the men who'd faced it. Then the first teller asked where the second had been standing. 'Here,' he said, pointing at his chair. Good listener, poor witness. We let him finish anyway. He'd remembered the part about the lost boot better than the man who'd lost it.",
+				"Lemon objected to a fellow describing his cooking as adequate after an expedition. Thought we'd be there all night. Then the fellow asked for more, and suddenly adequate became evidence of a poor vocabulary rather than poor judgement. I enjoyed the meal and the explanation. Lemon could feed a camp on the energy he spends making sure the compliment arrives in the proper form.",
+				"Spoor wanted to know what a mutant had been eating. I wanted to describe the noise it made. We each considered the other an obstacle to a useful account. Eventually he asked whether the noise came before or after it stopped feeding, which let us both become interested. Pleasant evening after that. I can endure a question if somebody has actually listened long enough to think of it.",
+				"Told a man I couldn't remember where I'd put my gloves. Looked delighted, as though he'd caught the first stalker admitting the whole Zone was somebody else's idea. We searched the place together. Found them where I'd been drying my coat. He remembered the exact words of my admission; I remembered who'd helped find the gloves. Told him he could include that part when he took the story round camp.",
 			}
 
 			self.response = table.Random(tbl)
@@ -408,7 +349,7 @@ DIALOGUE.addTopic("InterestTopic", {
 })
 
 DIALOGUE.addTopic("InterestMoreTopic", {
-	statement = "What else do you remember?",
+	statement = "What else comes to mind?",
 	response = "",
 	options = {
 		"InterestMoreTopic",
@@ -417,41 +358,13 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 	preCallback = function(self, client, target)
 		if CLIENT then
 			local tbl = {
-				(
-					"Technut once tried to explain a fault using the sound it made. By the time he finished, three "
-					.. "people were offering diagnoses and nobody knew which machine he meant. I listened to the whole "
-					.. "performance. Free entertainment was less common than spare parts that week."
-				),
-				(
-					"People ask whether I kept a record when I first came here. I did. Then I used a page to keep "
-					.. "something dry and another to start a fire. Carbon looks at me as if I've personally misplaced a "
-					.. "century. I tell him the fire was very good. He never enjoys that part."
-				),
-				(
-					"A fellow asked me the safest way to travel with a heavy pack. I said to put some of it down. He "
-					.. "explained why every object was necessary, then asked the question again. We were both "
-					.. "disappointed by the conversation."
-				),
-				(
-					"I've heard descriptions of animals I wouldn't care to meet. Some from people who saw them, some "
-					.. "from people who improved the account at every table. Ask where the teller was standing. A "
-					.. "surprising number of the best stories were witnessed from a chair in camp."
-				),
-				(
-					"Lemon tells me he can judge a person's appetite at a glance. I asked why he always makes enough "
-					.. "for another person. He explained stock management for so long I had time to finish the bowl. An "
-					.. "excellent cook. Could use a little practice at leaving a question unanswered."
-				),
-				(
-					"Spoor will spend half an evening asking what an animal was eating. I ask whether he wants the "
-					.. "rest of the story. He says that's the part he's asking for. We do eventually have a useful "
-					.. "conversation, provided neither of us objects to doing it in the wrong order."
-				),
-				(
-					"I like a person who can say they don't remember. Gives you somewhere sensible to begin asking. "
-					.. "Of course, when I say it, people look delighted. You'd think I'd just handed them a rare "
-					.. "artifact instead of admitting where I put down a pair of gloves."
-				),
+				"Technut tried to imitate a fault he'd heard in a piece of equipment. Excellent performance. By the time he reached the grinding noise, three people were explaining what it must be and nobody knew which machine he meant. I let them argue. Had spent the morning hearing about a mutant hunt; made a pleasant change to have the noises supplied by somebody sitting safely beside his supper.",
+				"Carbon asked why I hadn't kept better records of my first journeys. I had kept them. Then I needed a dry bit of paper for a fire and became interested in the practical value of a page. He looked at me as though I'd burnt the answer to everything. Good fire. Warmed my hands, dried a cuff. He's allowed to regret the notes; I reserve some affection for the evening they improved.",
+				"Met a fellow who wanted advice on travelling with a heavy pack. Suggested putting some of it down. He began explaining the importance of every scrap, including something from a wreck he couldn't identify. I became quite interested in seeing it. He'd packed it at the bottom. We had a long, inconvenient look, and afterwards he was much less attached to it. Difficult to persuade a man of anything while the object stays an idea in his bag.",
+				"Heard two accounts of the same mutant over supper. By the second, I was beginning to feel sorry for the men who'd faced it. Then the first teller asked where the second had been standing. 'Here,' he said, pointing at his chair. Good listener, poor witness. We let him finish anyway. He'd remembered the part about the lost boot better than the man who'd lost it.",
+				"Lemon objected to a fellow describing his cooking as adequate after an expedition. Thought we'd be there all night. Then the fellow asked for more, and suddenly adequate became evidence of a poor vocabulary rather than poor judgement. I enjoyed the meal and the explanation. Lemon could feed a camp on the energy he spends making sure the compliment arrives in the proper form.",
+				"Spoor wanted to know what a mutant had been eating. I wanted to describe the noise it made. We each considered the other an obstacle to a useful account. Eventually he asked whether the noise came before or after it stopped feeding, which let us both become interested. Pleasant evening after that. I can endure a question if somebody has actually listened long enough to think of it.",
+				"Told a man I couldn't remember where I'd put my gloves. Looked delighted, as though he'd caught the first stalker admitting the whole Zone was somebody else's idea. We searched the place together. Found them where I'd been drying my coat. He remembered the exact words of my admission; I remembered who'd helped find the gloves. Told him he could include that part when he took the story round camp.",
 			}
 
 			self.response = table.Random(tbl)
@@ -460,24 +373,31 @@ DIALOGUE.addTopic("InterestMoreTopic", {
 })
 
 DIALOGUE.addTopic("SpecialtyTopic", {
-	statement = "Does everyone believe you were first?",
-	response = (
-		"Believing isn't their favourite pastime. Arguing is. Carbon wants dates, Spoor wants tracks, Old "
-		.. "Timer remembers an entirely different conversation. Keeps them occupied. I don't mind a question "
-		.. "with something behind it. A man once told me he didn't believe an animal could move the way I "
-		.. "described, then asked which way he'd be safest walking. I answered the second question. You'd have "
-		.. "enjoyed his face."
-	),
+	statement = "What do you say to people who doubt you were first?",
+	response = "Depends whether they've asked a question or arrived with the answer. Carbon brings dates. Spoor wants to know where I stood. Old Timer begins by disagreeing and eventually remembers something worth hearing. I can make an evening of any of those. A fellow once dismissed my account of a mutant, then asked which way he'd be safest walking. I answered the second question. He stayed for the rest of the story.",
 	options = {"InterestTownFollowup", "BackTopic"},
 })
 
 DIALOGUE.addTopic("InterestTownFollowup", {
-	statement = "Would you admit remembering something wrong?",
-	response = (
-		"Show me. Don't wave a folder and expect the cover to settle it. We'll read the thing. I might have "
-		.. "put a name in the wrong place, or kept two bad nights as one. That happens. It doesn't mean the "
-		.. "person who wrote the report saw everything either. Bring both accounts to the table and we'll make "
-		.. "an evening of it. I reserve the right to complain."
-	),
+	statement = "What would make you reconsider an account?",
+	response = "Something we can look at together. A page, a place, a detail I hadn't noticed. I won't promise to enjoy being corrected. Nor will I accept a folder's cover as evidence for everything inside. Sometimes I've mixed two nights together. Sometimes the writer wasn't where they claimed to be. We can keep both possibilities on the table while we talk. Carbon brings enough paper for that.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestZoneLifeTopic", {
+	statement = "Do you get tired of telling the same stories?",
+	response = "I get tired of the same interruptions. A man hears 'mutant' and immediately wants its size. I was describing the night we spent arguing over whose coat had fallen in the mud. Good coat. Much more important to us at the time than whatever made the noise outside. You let me finish and there might be something in the story you haven't heard. Even I notice a different part when the company changes.",
+	options = {"InterestPersonalFollowup", "BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestTownRelationsTopic", {
+	statement = "Why keep talking to Carbon if he doubts you?",
+	response = "Because he comes back with another question. Most people decide whether they believe you and consider the evening finished. Carbon wants to know why I mentioned a stove before I mentioned the building. I hadn't thought about the stove for years. Now we're arguing over where it stood. Annoying man. Listens properly. Those qualities occur together more often than you'd expect.",
+	options = {"BackTopic"},
+})
+
+DIALOGUE.addTopic("InterestPersonalFollowup", {
+	statement = "Was there actually a mutant outside?",
+	response = "Heard something. Nobody volunteered to go and establish its credentials. By morning everyone remembered a different noise, and one man remembered being asleep throughout. He told the most alarming version later. I should have charged him for the coat.",
 	options = {"BackTopic"},
 })

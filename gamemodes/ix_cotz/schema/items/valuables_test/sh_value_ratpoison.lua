@@ -1,7 +1,6 @@
 ITEM.name = "Rat Poison"
 ITEM.description = "A small bottle of rat poison."
-ITEM.longdesc = "The warning is much easier to make out than the fine print beneath it. Dust has collected around"
-	.. " the cap, lending the whole thing the air of something best left at the back of a cupboard."
+ITEM.longdesc = "The rat poison comes in a small labelled bottle that could be mistaken for any number of household products at a distance. Its original identification matters more than the modest packaging. It belongs to pest-control stores, kept apart from ordinary kitchen supplies."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/ratkiller.mdl"

@@ -1,9 +1,7 @@
 ITEM.name = "Recovered Handheld Radio"
 ITEM.description = "A dark handheld radio with front controls, a small display and a projecting aerial"
 	.. " fitting."
-ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
-	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
-	.. " original assignment can no longer be reconstructed."
+ITEM.longdesc = "The handheld radio groups a speaker, display and controls into a body shaped for one hand. An aerial fitting projects beyond the casing. It is recovered communications hardware, separated from the configured network and equipment that once gave its controls a particular routine."
 ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/lostsignalproject/items/devices/radio.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Warehouse Packing List A"
 ITEM.description = "A printed packing list on a small clipboard with a metal clip and a circular stamp."
-ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
-	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
-	.. " place it among the records it was separated from."
+ITEM.longdesc = "The packing list is clipped to a firm backing for reading away from a desk. A circular stamp marks the printed rows. Its purpose is to compare a consignment with a written account of what should have arrived."
 
 ITEM.model = "models/cotz/eft/quest/packinglist_goshan.mdl"
 

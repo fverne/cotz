@@ -1,7 +1,6 @@
 ITEM.name = "Rangefinder Binoculars"
 ITEM.description = "A pair of worn binoculars. Features multiple zoom levels."
-ITEM.longdesc = "The eyecups are polished by use, and the focus wheel turns with a reassuring resistance."
-	.. " Stalkers favour a distant look at a checkpoint over an unexpected conversation with its guards."
+ITEM.longdesc = "The rangefinder binoculars combine paired viewing barrels with controls for changing the view. Their worn outer surfaces contrast with the care needed around the glass. The instrument gives distant terrain a closer examination without requiring the observer to carry a rifle at eye level."
 ITEM.model = "models/weapons/w_binocularsbp.mdl"
 
 ITEM.height = 1

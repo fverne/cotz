@@ -40,8 +40,22 @@ Keep the field names and presentation already used by that family; this guide in
 
 The regular description identifies the object and its immediate practical role. The long description
 must add information beyond that identification. It should reward inspection with relevant detail,
-rather than repeat the short text with synonyms or restate the name. A single useful addition may be
-enough; there is no required length or list of subjects for every object.
+rather than repeat the short text with synonyms. Keep the object explicit: naming the awl, fan,
+fabric or flight log is useful when explaining it, and is not the same as repeating its identification.
+A single useful addition may be enough; there is no required length or list of subjects for every object.
+
+Use a grounded, varied voice. Explain what the particular object is made from, how its construction
+relates to its ordinary purpose, or what someone familiar with it would notice. The
+[approved COTZ drafts](writing-references/items.md#approved-cotz-item-drafts) establish the current
+direction: an awl's point and palm-sized handle, a cooler's fan and heatsink, aramid's use in layered
+textiles, and the information recorded in a flight log. These are examples of useful specificity,
+not a sentence pattern or a checklist every item must follow.
+
+Atmosphere should grow out of those details. Dust between cooling fins has a connection to the
+cooler's purpose; interchangeable passages about dust, scuffs, missing paperwork or an unknown
+previous owner usually add little. Avoid abstract reflections that could describe many unrelated
+objects. A longdesc should still make its subject clear when read without the item name above it.
+Humour, warmth and unease can fit, but do not give every object the same cynical narrator.
 
 Choose details that suit the item:
 
@@ -58,6 +72,47 @@ Use the [item examples](writing-references/items.md) to see how material detail,
 context can add substance. Borrow the relationship between details, not external stats or lore. Keep
 required usage instructions, live readings, and saved descriptions intact. Do not retune an item to
 match prose, or change rendering merely to accommodate a writing preference.
+
+Modest incidental fictional detail is allowed where it fits the established object and setting.
+Flag significant new history, named people or organisations, supply routes and other substantial lore
+separately for review. An explanation of an object's ordinary purpose does not establish a COTZ
+action: a valuable tool or component must not promise working repair, crafting, power or rescue
+mechanics merely because its real-world counterpart has those uses.
+
+### Catalogue preservation and review
+
+The current catalogue rewrite uses **`1aa477d9` (22 October 2026)**, the agreed `origin/master`
+snapshot, as its fixed historical cutoff. Do not substitute the older local `master` tip or a later
+moving branch tip.
+
+- For items present at the cutoff, preserve their current regular descriptions verbatim.
+- Preserve current substantive longdescs that were already present at the cutoff verbatim too.
+  Older items with no longdesc, a blank value or an explicit placeholder at that cutoff may receive
+  one. Longdescs added afterward may be revised within the requested scope, including additions to
+  older items. Treat explicit markers such as `PLACEHOLDER` as unfinished text; brevity or awkward
+  writing alone does not make an established longdesc a placeholder.
+- Newer items may have both fields rewritten. Track identity through IDs and history, accounting for
+  moved or renamed files and generated definitions. If eligibility is uncertain, preserve the text
+  until its history is established.
+- Preservation means leaving the text found before the rewrite unchanged, not restoring wording from
+  the cutoff commit. Record questionable protected claims for review instead of correcting them or
+  changing gameplay to match them.
+
+Begin a catalogue rewrite by presenting a few representative description/longdesc pairs for user
+approval before applying it. Keep them as drafts until approved; the wider rewrite must follow the
+agreed voice and scope.
+The four linked COTZ examples were accepted as the writing direction on 5 November 2026 and applied
+in the subsequent authorised catalogue pass. They remain references for the agreed style, not
+permission to alter protected text. The [catalogue review](item-prose-review.md) records coverage,
+preservation checks and remaining presentation checks for that pass.
+
+When integrating an authorised batch, keep a coverage checklist, compare related items for useful
+distinctions and repeated phrasing, and verify protected text against a pre-edit snapshot. Preserve
+names, IDs, tuning, actions, saved instance text and dynamic instructions. Keep archived and bundled
+Helix content outside this catalogue rewrite. Keep each Lua prose string literal on one source line,
+even when it exceeds the usual code line limit. Run the existing description check from the repository
+root with `luatex --luaonly tests/item_descriptions_spec.lua`; check representative inventory, world
+and dynamic descriptions in multiplayer when available, and report any display checks left unverified.
 
 ## NPC dialogue
 

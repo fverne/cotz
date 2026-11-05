@@ -1,8 +1,6 @@
 ITEM.name = "Anomalous Botanical Sample"
 ITEM.description = "A fleshy star-shaped plant specimen with irregular pointed leaves."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "The plant's fleshy leaves spread into a star around a dense central growth. Several points bend at different angles, making the specimen difficult to pack flat without crushing it. Its unusual shape is plain enough; a name for the sample does little to explain how it grew."
 ITEM.valuableCategory = "research samples"
 
 ITEM.model = "models/lostsignalproject/items/quest/anomaly_plant.mdl"

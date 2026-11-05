@@ -1,8 +1,6 @@
 ITEM.name = "Handwritten Audio Cassette"
 ITEM.description = "A pale audio cassette with a handwritten dedication above the spool windows."
-ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
-	.. " recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "A handwritten dedication sits above the cassette's two spool windows. It gives an ordinary audio carrier the appearance of a recording prepared for someone in particular. The words identify an intention without revealing the sound preserved on the tape."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_06.mdl"
 

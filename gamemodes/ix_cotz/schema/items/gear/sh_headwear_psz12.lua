@@ -1,7 +1,6 @@
 ITEM.name = "PSZ-12"
 ITEM.description = "A high-end helmet with gasmask."
-ITEM.longdesc = "The substantial shell and closely fitted face assembly make the wearer look more like issued"
-	.. " equipment than a traveller. The interior carries the persistent smell of rubber and sweat."
+ITEM.longdesc = "The PSZ-12 groups a substantial helmet shell and gasmask into one headpiece. Its hard panels and fitted face assembly give it a more enclosed outline than an open combat helmet. The arrangement favours integrated protection, at the cost of carrying both systems together."
 ITEM.model = "models/shtokerbox/ground_headgear_psz12.mdl"
 
 ITEM.price = 315000

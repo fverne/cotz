@@ -1,8 +1,6 @@
 ITEM.name = "Amber Sample Tube"
 ITEM.description = "An amber-coloured sample tube with a broad pale screw cap."
-ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
-	.. " somebody would have to sort out that missing history."
+ITEM.longdesc = "The amber sample tube limits the view through its walls. A broad screw cap gives the container a secure closure and a surface large enough to grip. In laboratory work, the label and collection record would distinguish one such tube from another."
 ITEM.valuableCategory = "research samples"
 
 ITEM.model = "models/cotz/eft/quest/chemicalsample.mdl"

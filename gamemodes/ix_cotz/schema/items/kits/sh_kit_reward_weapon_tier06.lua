@@ -1,7 +1,6 @@
 ITEM.name = "Veteran Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The wrapping keeps a selected weapon out of sight until the supplies are redeemed. Careful"
-	.. " packing keeps the contents together through the sort of transport that ruins ordinary luggage."
+ITEM.longdesc = "The Veteran Weapon Box keeps a high-class equipment entitlement behind an unremarkable wooden lid. Its label identifies the package category, not an automatic purchase permission. The contact's exchange preview supplies the available choice before redemption."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

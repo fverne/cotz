@@ -1,8 +1,6 @@
 ITEM.name = "Numbered Data Module 0048"
 ITEM.description = "A flat dark electronic module with a printed number and a curved pale symbol."
-ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
-	.. " where it came from or whether its records survived storage. It is the sort of small object that"
-	.. " can leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "The 0048 module uses a curved pale symbol beside its identification number. Most of the flat casing remains plain. The marking distinguishes it within a series of similar carriers without describing the information that may be stored inside."
 
 ITEM.model = "models/cotz/eft/quest/electroniccase_0048.mdl"
 

@@ -1,7 +1,6 @@
 ITEM.name = "Tourist Medical Box"
 ITEM.description= "A red first aid kit."
-ITEM.longdesc = "The treatment supplies have been kept together rather than scattered through a trader's drawers."
-	.. " The selection has the practical feel of equipment put aside for someone who keeps coming back."
+ITEM.longdesc = "The Tourist Medical Box represents a basic allowance of treatment supplies. Red first-aid packaging gives the entitlement a familiar physical form. Its actual redemption choice is shown by the supplying contact before the kit is surrendered."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

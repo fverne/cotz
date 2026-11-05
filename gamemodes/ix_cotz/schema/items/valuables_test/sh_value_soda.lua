@@ -1,7 +1,6 @@
 ITEM.name = "Baking Soda Carton"
 ITEM.description = "A red-and-yellow paper carton with a pale central label and folded upper corners."
-ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
-	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
+ITEM.longdesc = "The baking soda carton uses folded paperboard rather than a rigid jar. Its red-and-yellow wrapper keeps a common kitchen powder identifiable. The modest package belongs among the supplies that disappear into cupboards and are noticed chiefly when a cook reaches for an empty space."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/soda.mdl"

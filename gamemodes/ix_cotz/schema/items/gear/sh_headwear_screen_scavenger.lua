@@ -1,7 +1,6 @@
 ITEM.name = "Scavenger Screen Helmet"
 ITEM.description = "A screen helmet with closed respiratory system."
-ITEM.longdesc = "The finish is suited to someone who spends more time beneath broken roofs than at a supply desk."
-	.. " Pale rub marks gather around the fastenings and viewing panel."
+ITEM.longdesc = "The Scavenger Screen retains the enclosed visor and associated breathing equipment of the standard set. Its finish changes the appearance of the broad outer surfaces. The substantial assembly remains much more than an ordinary helmet, occupying the equipment space of a complete respiratory arrangement."
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
 ITEM.price = 100000

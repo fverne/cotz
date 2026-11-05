@@ -1,8 +1,6 @@
 ITEM.name = "Black-and-Orange Transit Case"
 ITEM.description = "A deep dark case with orange trim, reinforced edges and a side handle."
-ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
-	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
-	.. " with more history than explanation."
+ITEM.longdesc = "Orange trim follows the edges of the deep dark transit case. Its side handle provides a carrying point without occupying the lid. The depth sets it apart from flatter cases, giving a compact footprint around a comparatively bulky load."
 
 ITEM.model = "models/cotz/eft/containers/container_secured_kappa.mdl"
 

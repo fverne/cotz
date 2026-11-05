@@ -1,7 +1,6 @@
 ITEM.name = "Metal Fuel Can"
 ITEM.description = "A green metal fuel can with pressed side ribs and a worn carrying handle."
-ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
-	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "Pressed ribs stiffen the fuel can's broad metal sides. The handle and capped opening keep carrying and pouring points close to the top. Its green shell is recognisable as fuel packaging without establishing how much of its original contents remains."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/lostsignalproject/items/misc/gascan.mdl"

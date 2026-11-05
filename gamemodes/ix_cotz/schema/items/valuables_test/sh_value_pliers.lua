@@ -1,8 +1,6 @@
 ITEM.name = "Combination Pliers"
 ITEM.description = "A pair of combination pliers with yellow handles."
-ITEM.longdesc = "Dark residue has settled around the pivot and in the ridges of the grips. They have the"
-	.. " reassuring weight of an ordinary workshop tool, along with the less reassuring smell of somebody"
-	.. " else's old engine oil."
+ITEM.longdesc = "The combination pliers put gripping jaws and a cutting section into one pivoted tool. Yellow handles separate the working metal from the grip. Their compact shape makes them a common workshop companion to the larger tools needed for a specific job."
 ITEM.valuableCategory = "cutting tools"
 
 ITEM.model = "models/illusion/eftcontainers/pliers.mdl"

@@ -1,8 +1,6 @@
 ITEM.name = "Novice Medical Box"
 ITEM.description= "A red first aid kit."
-ITEM.longdesc = "The treatment supplies have been kept together rather than scattered through a trader's drawers."
-	.. " The wrapping is plain, with the attention spent on what a returning field worker will actually"
-	.. " carry away."
+ITEM.longdesc = "The Novice Medical Box belongs to the next issue class above the introductory medical package. Its red case keeps the allowance recognisable among other supply kits. The exchange offer specifies the supplies rather than leaving the contents to an unseen draw."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

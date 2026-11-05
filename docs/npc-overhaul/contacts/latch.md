@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Misses the ease of shared work and enjoys recognising someone else's ingenuity in recovered machinery. Pride in a useful object can make him carry something he would advise another scavenger to leave.
+
+**Voice and boundaries:** Blunt, physical, attentive to particular wear and workmanship. Humour grows out of stubborn practical choices. Recovered tools and workshop anecdotes must not imply anomaly decontamination or a new salvage action.
+
+**Relationships:** Suture recognises useful material he would overlook, and he respects being corrected by somebody who has examined it. Their exchanges are about complementary skills rather than a new barter entitlement.
+
+**Personal subjects:** Have you ever carried back something that wasn't worth the weight? / What does Suture see in the things you salvage?
+
+These conversations and their follow-up live in [sh_latchnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_latchnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.

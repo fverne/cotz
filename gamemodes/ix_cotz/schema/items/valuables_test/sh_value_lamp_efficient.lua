@@ -1,7 +1,6 @@
 ITEM.name = "Energy-Saving Lamp"
 ITEM.description = "An energy-saving lamp with pale folded tubes."
-ITEM.longdesc = "The base carries printed markings softened by handling and accumulated dust. It looks as though"
-	.. " somebody removed it carefully enough to hope it would be useful elsewhere."
+ITEM.longdesc = "Folded glass tubes let the energy-saving lamp fit a long light-producing surface into a compact shape. The base groups the electrical fittings beneath them. It is a distinctive piece of lighting hardware, noticeably more fragile than the solid equipment normally piled around it."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/electr_eslamp.mdl"

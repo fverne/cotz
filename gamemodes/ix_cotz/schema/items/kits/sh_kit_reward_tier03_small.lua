@@ -1,7 +1,6 @@
 ITEM.name = "Regular Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "A compact bundle set aside as payment for completed work. Its tidy arrangement suggests an"
-	.. " established routine between completed work and the next departure."
+ITEM.longdesc = "The small Regular Reward is a compact supply payment in the regular issue class. The bundle keeps the entitlement together through transport and handover. Its actual contents are identified in the contact's redemption offer."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

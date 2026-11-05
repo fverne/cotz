@@ -12,6 +12,20 @@ Personal conversations, work explanations, and commission text live in the linke
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
 prerequisites, or field-site placement. Earlier story tables and draft samples remain design references.
 
+## Personality and personal conversation — November 2026
+
+New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
+
+**Motivation and contradiction:** Wants both the pleasure of discovery and an audience capable of appreciating it. Can resent a collector's superficial interest while being quite susceptible to an artifact's appearance himself.
+
+**Voice and boundaries:** Conversational, expansive when curious, lightly vain about his explanations. Distinguish looking, liking, and knowing; no aesthetic reaction establishes an artifact effect or proves an anomaly theory.
+
+**Relationships:** Carbon's interest in the owner and circumstances of a notebook complements his own attention to its contents. Their exchanges can become enjoyable digressions rather than another debate about whose discipline matters.
+
+**Personal subjects:** Can you enjoy an artifact without studying it? / What do you and Carbon exchange besides research?
+
+These conversations and their follow-up live in [sh_ecologistnpc.lua](../../../gamemodes/ix_cotz/plugins/dialogue/dialogue/sh_ecologistnpc.lua), under the existing questions menu.
+
 ## Contact brief
 
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.

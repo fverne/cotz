@@ -1,7 +1,6 @@
 ITEM.name = "Folded Ripstop Fabric"
 ITEM.description = "A folded piece of dark ripstop fabric."
-ITEM.longdesc = "Sharp creases remain where it has been packed down, while dust softens the folded edges. Fine"
-	.. " reinforcement lines give the surface a regular texture."
+ITEM.longdesc = "Fine reinforcing threads form a regular grid through the ripstop cloth. The grid is part of the weave rather than a printed pattern. Lightweight equipment covers and outdoor garments use this construction, though the folded length has yet to be cut into any particular shape."
 ITEM.valuableCategory = "textile supplies"
 
 ITEM.model = "models/cotz/eft/barter/other_cloth_ripstop.mdl"

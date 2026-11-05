@@ -1,7 +1,6 @@
 ITEM.name = "Desktop Processor"
 ITEM.description = "A desktop processor with a square metal lid."
-ITEM.longdesc = "The printing on top remains readable beneath a dull film of handling marks. Such a small,"
-	.. " unassuming part once sat at the centre of a much larger machine."
+ITEM.longdesc = "The processor's metal lid covers a much smaller electronic die. Contacts beneath it link the chip to a matching motherboard socket. Several generations can look nearly identical from above, making the printed model reference more useful than the square outline."
 ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_cpu.mdl"

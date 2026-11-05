@@ -1,8 +1,6 @@
 ITEM.name = "Grey Ordnance Case"
 ITEM.description = "A grey moulded equipment case with lid ribs and a pair of front catches."
-ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
-	.. " has followed it here."
+ITEM.longdesc = "The ordnance case uses a moulded grey body with ribs across the lid. Two catches keep the front edge closed as one unit. Its military packaging format identifies the intended kind of stores, without establishing what remains inside this particular shell."
 
 ITEM.model = "models/cotz/eft/containers/container_grenadebox.mdl"
 

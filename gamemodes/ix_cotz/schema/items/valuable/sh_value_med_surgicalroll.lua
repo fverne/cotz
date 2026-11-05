@@ -1,9 +1,7 @@
 ITEM.name = "Rolled Surgical Kit"
 ITEM.description = "A dark rolled equipment case held together by straps, with a small printed patch on the"
 	.. " outside."
-ITEM.longdesc = "The layers of fabric make its outline look dense and awkwardly compact. Dust sits beneath the"
-	.. " straps and the material smells faintly of old canvas, as though it has spent years packed at the"
-	.. " bottom of somebody else's kit."
+ITEM.longdesc = "Straps hold the surgical carrier in a thick roll rather than a flat case. The arrangement packages a long spread of equipment pockets into a compact bundle. A small outer patch gives the closed roll an identity without exposing the clinical kit within."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/usable/meds_survival_first_aid_rollup_kit.mdl"

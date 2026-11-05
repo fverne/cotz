@@ -1,8 +1,6 @@
 ITEM.name = "Electrical Power Filter"
 ITEM.description = "An electrical filter in an industrial housing."
-ITEM.longdesc = "Grime is tucked around the fittings, and the broad surfaces have the dull finish of neglected"
-	.. " industrial equipment. Its markings assume a reader who already knows exactly what sort of"
-	.. " cabinet it came from."
+ITEM.longdesc = "The power filter encloses electrical components inside a practical industrial housing. It belongs between other parts of an installation rather than on a desk as a user-operated device. Its terminals and markings would make more sense alongside the equipment it served."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/powerfilter.mdl"
