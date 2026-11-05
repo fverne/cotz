@@ -43,6 +43,51 @@ Test("allocator reserves clearance and reports exhaustion", function()
 	assert(third == nil)
 end)
 
+Test("allocator distinguishes missing map areas from exhausted space", function()
+	Reset()
+	local template = {mins = Vector(-512, -512, -16), maxs = Vector(512, 512, 512)}
+	local origin, _, _, reason = PLUGIN:Allocate(template)
+	assert(not origin and reason:find("No hideout allocation area", 1, true))
+	assert(table.IsEmpty(PLUGIN.state.areas) and table.IsEmpty(PLUGIN.instances))
+end)
+
+Test("allocator reports full template dimensions including the below-anchor floor margin", function()
+	Reset()
+	local template = {mins = Vector(-512, -512, -16), maxs = Vector(512, 512, 512)}
+	PLUGIN.state.areas.remote = {mins = Vector(), maxs = Vector(1024, 1024, 512)}
+	local origin, _, _, reason = PLUGIN:Allocate(template)
+	assert(not origin and reason:find("1024 x 1024 x 528", 1, true))
+	PLUGIN.state.areas.remote.maxs.z = 528
+	local allocated, mins, maxs = PLUGIN:Allocate(template)
+	assert(allocated and allocated.z == 16 and mins.z == 0 and maxs.z == 528)
+end)
+
+Test("allocator retains geometry checks when an area has sufficient dimensions", function()
+	Reset()
+	PLUGIN.state.areas.remote = {mins = Vector(), maxs = Vector(1024, 1024, 528)}
+	local traceHull = util.TraceHull
+	util.TraceHull = function() return {StartSolid = true} end
+	local origin, _, _, reason = PLUGIN:Allocate({mins = Vector(), maxs = Vector(256, 256, 256)})
+	util.TraceHull = traceHull
+	assert(not origin and reason:find("No clear, unreserved", 1, true))
+end)
+
+Test("hideout loading forwards the missing-area setup error", function()
+	Reset()
+	local template = {mins = Vector(-512, -512, -16), maxs = Vector(512, 512, 512)}
+	PLUGIN.state.templates.room = template
+	local lookup = ix.plugin.Get
+	ix.plugin.Get = function(name)
+		if name == "advdupeint" then return {} end
+		return lookup(name)
+	end
+	local success, reason
+	PLUGIN:SpawnInstance({id = "1", template = "room"}, function(ok, message) success, reason = ok, message end)
+	ix.plugin.Get = lookup
+	assert(success == false and reason:find("No hideout allocation area", 1, true))
+	assert(table.IsEmpty(PLUGIN.instances))
+end)
+
 Test("standing template spawn records local feet position and facing", function()
 	Reset()
 	local instance = NewInstance()

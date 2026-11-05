@@ -12,6 +12,9 @@ remote map space, share occupancy across visitors, and retain failed saves for r
   bind actions to the character, role and appropriate physical interaction.
 - Personal storage uses independently identified, upgraded inventories. Every spot defaults private;
   its owner may share it with invited characters. Global personal banks stay separate.
+- Administrator-placed template markers carry interior roles, stable container slots and recipes in
+  the AdvDupe file. Each load resolves them to local runtime points without overwriting manual defaults;
+  slot recipe identities persist with the existing container state. Marker edits apply on the next load.
 - Squad building capabilities are contextual and limited to furnishings plus the movable vendor.
   Template geometry and fixed utilities are protected. Vendor reset never touches stock or money.
 - Stock items retain their authoritative Helix rows. Listings are instance data; only buyer-funded

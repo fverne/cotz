@@ -76,6 +76,10 @@ function PLUGIN:SetTemplatePoint(client, id, point, x, y, z)
 	for _, instance in pairs(self.instances) do
 		local record = self:GetHideout(instance.id)
 		if record and record.template == id then
+			local markerRoles = instance.template and instance.template.dupeMarkerRoles
+			if markerRoles and markerRoles[point] then
+				return false, "This point uses a dupe marker. Move it in the build, save the dupe and reload the hideout."
+			end
 			if instance.state ~= "active" or instance.saving then
 				return false, "Wait for hideouts using this template to finish loading or saving."
 			end
@@ -180,14 +184,29 @@ function PLUGIN:Allocate(template)
 	local gap = ix.config.Get("hideoutGap", 512)
 	local size = template.maxs - template.mins
 	if size.x <= 0 or size.y <= 0 or size.z <= 0 then
-		return
+		return nil, nil, nil, "The hideout template has invalid bounds."
 	end
+	if not self.state or table.IsEmpty(self.state.areas or {}) then
+		return nil, nil, nil, "No hideout allocation area is configured on this map. "
+			.. "An administrator must mark an empty map volume for hideouts."
+	end
+	local fitsArea = false
 	for _, area in pairs(self.state.areas) do
-		local origin, mins, maxs = allocateInArea(self, template, area, size, gap)
-		if origin then
-			return origin, mins, maxs
+		local available = area.maxs - area.mins
+		if size.x <= available.x and size.y <= available.y and size.z <= available.z then
+			fitsArea = true
+			local origin, mins, maxs = allocateInArea(self, template, area, size, gap)
+			if origin then return origin, mins, maxs end
 		end
 	end
+	if not fitsArea then
+		return nil, nil, nil, string.format(
+			"No configured hideout area can fit this template. Required space: %g x %g x %g units.",
+			size.x, size.y, size.z
+		)
+	end
+
+	return nil, nil, nil, "No clear, unreserved hideout placement was found in the configured areas."
 end
 
 function PLUGIN:FindSafePosition(client, candidates)
@@ -229,7 +248,8 @@ function PLUGIN:ValidateDupe(dupe, template)
 		return false, "The template exceeds the entity limit."
 	end
 	for _, data in pairs(dupe.Entities) do
-		if not self.allowedShellClasses[data.Class] and data.Class ~= "ix_dupedummyitem" then
+		if not self.allowedShellClasses[data.Class] and data.Class ~= "ix_dupedummyitem"
+			and data.Class ~= "ix_hideout_marker" then
 			return false, "Unsupported shell entity: " .. tostring(data.Class)
 		end
 	end
@@ -255,14 +275,14 @@ function PLUGIN:TagEntity(instance, entity)
 	end
 end
 
-function PLUGIN:CreateUtility(instance, class, localPosition, model)
+function PLUGIN:CreateUtility(instance, class, localPosition, model, localAngles)
 	local entity = ents.Create(class)
 	if not IsValid(entity) then
 		return
 	end
 	entity:SetModel(model)
 	entity:SetPos(instance.origin + localPosition)
-	entity:SetAngles(angle_zero)
+	entity:SetAngles(localAngles or angle_zero)
 	entity:Spawn()
 	self:TagEntity(instance, entity)
 	local physics = entity:GetPhysicsObject()
@@ -377,9 +397,9 @@ function PLUGIN:SpawnInstance(record, callback)
 
 		return
 	end
-	local origin, mins, maxs = self:Allocate(template)
+	local origin, mins, maxs, allocationReason = self:Allocate(template)
 	if not origin then
-		callback(false, "There is no free space for this hideout.")
+		callback(false, allocationReason)
 
 		return
 	end
@@ -430,6 +450,13 @@ function PLUGIN:SpawnInstance(record, callback)
 				return
 			end
 		end
+		local resolved, markerReason = self:ResolveTemplateMarkers(instance, source or {}, template)
+		if not resolved then
+			self:FailLoad(instance, markerReason)
+
+			return
+		end
+		instance.template = resolved
 		for key, entity in pairs(source or {}) do
 			if not IsValid(entity) then
 				continue
@@ -472,16 +499,21 @@ function PLUGIN:SpawnInstance(record, callback)
 		instance.exit = self:CreateUtility(
 			instance,
 			"ix_hideout_exit",
-			template.exit,
-			"models/props_c17/consolebox01a.mdl"
+			resolved.exit,
+			"models/props_c17/consolebox01a.mdl",
+			resolved.exitAngles
 		)
-		instance.storage = self:CreateUtility(
-			instance,
-			"ix_hideout_storage",
-			template.storage,
-			"models/props_junk/wood_crate001a.mdl"
-		)
-		if not IsValid(instance.exit) or not IsValid(instance.storage) then
+		local needsStorage = not resolved.dupeMarkerRoles or resolved.dupeMarkerRoles.storage or record.storageID
+		if needsStorage then
+			instance.storage = self:CreateUtility(
+				instance,
+				"ix_hideout_storage",
+				resolved.storage,
+				"models/props_junk/wood_crate001a.mdl",
+				resolved.storageAngles
+			)
+		end
+		if not IsValid(instance.exit) or needsStorage and not IsValid(instance.storage) then
 			self:FailLoad(instance, "Could not create hideout utilities.")
 
 			return
@@ -712,7 +744,7 @@ function PLUGIN:AdmitPlayer(client, request, instance)
 		self.members[client] = instance.id
 		client:SetLocalVar("hideout", instance.id)
 		client:SetPos(safe)
-		client:SetEyeAngles(template.facing or angle_zero)
+		client:SetEyeAngles(self:GetSpawnFacing(instance, safe))
 		local regeneration = ix.plugin.Get("passiveregeneration")
 		if regeneration then
 			regeneration:RegeneratePlayer(client, true)

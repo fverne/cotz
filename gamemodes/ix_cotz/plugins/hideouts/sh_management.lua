@@ -85,6 +85,10 @@ ix.command.Add("HideoutTemplateContainer", {
 			return "Use a stable slot ID (up to 32 letters/digits/_/-) and general, ammo, or medical."
 		end
 		for _, other in pairs(PLUGIN.instances) do
+			local markerRoles = other.template and other.template.dupeMarkerRoles
+			if PLUGIN:GetHideout(other.id).template == templateID and markerRoles and markerRoles.container then
+				return "This template uses container markers. Edit the build markers, save the dupe and reload it."
+			end
 			if PLUGIN:GetHideout(other.id).template == templateID
 				and (other.state ~= "active" or other.saving or (other.operations or 0) > 0) then
 				return "Wait for this template's hideouts to finish loading or saving."

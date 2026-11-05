@@ -66,6 +66,9 @@ function PLUGIN:GetHideout(id)
 end
 
 function PLUGIN:GetTemplate(record)
+	local instance = record and self.instances[record.id]
+	if instance and instance.template then return instance.template end
+
 	return record and self.state.templates[record.template]
 end
 

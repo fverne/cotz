@@ -82,7 +82,9 @@ function PLUGIN:RequestTeleportEntry(client, destination, callback, arrival)
 			client.ixHideoutPending = nil
 			client:SetLocalVar("hideout", instance.id)
 			client:SetPos(safe)
-			client:SetEyeAngles(isangle(destination.angles) and destination.angles or angle_zero)
+			local facing = isangle(destination.angles) and destination.angles or angle_zero
+			if safe:DistToSqr(bookmarked) >= 1 then facing = self:GetSpawnFacing(instance, safe) end
+			client:SetEyeAngles(facing)
 			character:SetData("jumppos", nil)
 			character:SetData("markedexploiter", nil)
 			if self.AuditBuildingTools then self:AuditBuildingTools() end

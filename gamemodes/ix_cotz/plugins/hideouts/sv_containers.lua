@@ -14,8 +14,11 @@ function PLUGIN:GetContainer(record, slotID)
 	if not definition then return end
 	record.containers = record.containers or {}
 	record.containers[slotID] = record.containers[slotID] or {tier = 0, public = false}
+	local slot = record.containers[slotID]
+	if slot.recipe and slot.recipe ~= definition.recipe then return end
+	slot.recipe = definition.recipe
 
-	return record.containers[slotID], definition
+	return slot, definition
 end
 
 function PLUGIN:CanUseContainer(client, record, slotID)
@@ -80,6 +83,7 @@ function PLUGIN:RestoreStorage(instance, callback)
 		instance.containers = {}
 		for slotID, definition in pairs(record.ownerType ~= "squad" and template.containers or {}) do
 			local slot = self:GetContainer(record, slotID)
+			if not slot then callback(false, "A saved container's recipe changed: " .. slotID) return end
 			local recipe = self.containerRecipes[definition.recipe]
 			local tier = recipe and recipe.tiers[slot.tier or 0]
 			local model = tier and ix.item.list[tier.item] and ix.item.list[tier.item].model

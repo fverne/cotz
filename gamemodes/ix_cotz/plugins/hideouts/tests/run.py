@@ -164,6 +164,11 @@ def main():
             lua.run(path.read_text(encoding="utf-8-sig"), str(path), execute=False)
     print(f"Syntax checked {len([p for p in paths if p.parent != HERE])} GLua files.")
     lua.run((HERE / "regression.lua").read_text(), "regression setup")
+    lua.run('duplicator = {RegisterEntityModifier = function(name, callback) '
+            'TEST_MARKER_MODIFIER = callback end}; util.AddNetworkString = function() end; '
+            'net = {Receive = function() end}', "marker engine boundaries")
+    for file in ("sh_definitions.lua", "sh_markers.lua", "sv_markers.lua"):
+        lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
     for file in ("sv_repository.lua", "sv_instances.lua", "sv_hooks.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
     lua.run((HERE / "cases.lua").read_text(), "hideouts cases")
@@ -221,6 +226,11 @@ def main():
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
     lua.run((HERE / "features_cases.lua").read_text(), "hideout feature cases")
     lua.run((HERE / "menus_cases.lua").read_text(), "hideout menu cases")
+    lua.run('ENT = {}; AddCSLuaFile = function() end', "marker entity setup")
+    lua.run((ROOT / "ix_cotz/plugins/hideouts/entities/entities/ix_hideout_marker.lua").read_text(),
+            "marker entity")
+    lua.run('TEST_MARKER_ENTITY = ENT; ENT = nil', "marker entity capture")
+    lua.run((HERE / "markers_cases.lua").read_text(), "hideout marker cases")
 
 
 if __name__ == "__main__":

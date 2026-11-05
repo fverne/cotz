@@ -22,7 +22,8 @@ are saved per map through PLUGIN:SetData; repeat setup for each map.
    empty space inside the world. Stay clear of arenas and other dynamic systems.
 2. Return to normal playable ground and run /HideoutRecovery. This is the
    fallback outside position if a player's original return point is blocked.
-3. Put an approved AdvDupe2 shell in the server's
+3. Build the shell with **Hideout Template Marker** entities (see below), then save the complete build.
+   Put the approved AdvDupe2 shell in the server's
    AdvDupe2.DataFolder/STALKERDupes/name.txt. Add a template, for example:
 
        /HideoutTemplateAdd cabin hideout_cabin 1024 1024 512
@@ -30,7 +31,7 @@ are saved per map through PLUGIN:SetData; repeat setup for each map.
    The example is a filename and size illustration, not a bundled dupe.
 4. The template uses the paste anchor as its origin. Bounds default to
    (-width/2, -depth/2, -16) through (width/2, depth/2, height). Spawn points
-   default to local (0,0,8), (48,0,8), and (-48,0,8). Configure the shell
+   default to local (0,0,8), (48,0,8), and (-48,0,8) when no spawn markers are supplied. Configure the shell
    so these are above its floor, with standing room. You can fine-tune the points
    by standing inside the loaded hideout after completing steps 5–7 below.
 5. Stand at a safe outside return location, look at a nearby wall or floor,
@@ -45,7 +46,46 @@ are saved per map through PLUGIN:SetData; repeat setup for each map.
    bounds, floor, spawn clearance, exit, and storage before provisioning players.
    Return using the exit entity or /HideoutLeave.
 
-While inside a loaded cabin hideout, stand where you want each point and run:
+### Place points in the build with markers
+
+As an administrator, spawn **Entities → Helix → Hideout Template Marker** beside your original shell
+build. Press **E** on a marker to choose its role, then position/rotate it with the physgun. Include all
+markers when copying and saving the shell in AdvDupe2. No point-placement commands are needed.
+
+| Marker role | Result when the hideout loads |
+| --- | --- |
+| Player spawn | Safe arrival candidate, with its own facing direction; up to 8 |
+| Exit / management | The exit entity and its player management menu; one |
+| Personal storage container | An independently installed/upgraded container; up to 32 unique slot IDs |
+| Squad vendor | The default/reset position and rotation of the movable squad vendor; one |
+| Legacy recovery storage | Optional administrator recovery fixture for old `storageID` inventories; one |
+
+Markers use their exact entity origins and angles relative to the paste anchor. Place utility previews
+where the real console/crate/register belongs. A spawn marker's origin marks the player's **feet**;
+its yaw sets facing. Keep spawn points above the floor with room for a standing player. Only personal
+hideouts instantiate container markers; only squad hideouts instantiate the vendor. One shell can contain both.
+
+For each personal container, choose a recipe and a permanent **slot ID** in its menu. New markers get
+an ID automatically; copied markers keep their ID, so rename copies to make separate containers.
+Keep the ID when moving/resaving a spot: its upgrades, sharing and inventory belong to that ID in each
+hideout. Do not reuse a slot for a different recipe; loading rejects recipe changes, duplicate slots,
+duplicate singleton roles and markers outside the bounds. `shop` is reserved for squad stock.
+Removed spots retain their saved inventories for `/HideoutRecoveryOpen ID SPOT`.
+
+Marker settings are saved by the duplicator, not in SQL. During hideout loading, markers are consumed
+and replaced with protected runtime utilities. Unmarked roles inherit manual template settings. If any
+personal container markers are present, they replace the entire manually configured container list.
+Marker-based shells omit an unused legacy fixture unless one is marked or an old inventory needs recovery.
+Saved vendor movement continues to take precedence until **Reset vendor position** uses the marked default.
+
+To change a marked point, edit the original build, overwrite the server dupe and let affected hideouts
+fully unload before entering again. Loaded instances keep their existing layout. Manual point commands
+reject roles currently supplied by markers. World allocation areas, exterior door keypads and template
+bounds remain separate administrator setup; interior markers do not create or relocate those.
+
+### Manual point placement (existing templates)
+
+For an unmarked role, while inside a loaded cabin hideout, stand where you want each point and run:
 
     /HideoutTemplatePoint cabin spawn
     /HideoutTemplatePoint cabin exit
@@ -70,6 +110,14 @@ reposition occupied hideouts. Area, entrance, and template-dimension edits requi
 all instances to be unloaded; point placement can be edited live as described
 above. An oversized or obstructed dupe is rejected without teleporting anyone.
 
+Template bounds and allocation areas are separate settings. Registering a template does not
+create an allocation area: the administrator must mark an empty world volume with
+`/HideoutAreaStart` and `/HideoutAreaFinish NAME` on each map. The area must contain the full
+`maxs - mins` size. For example, a 1024×1024×512 template uses a 16-unit below-anchor margin,
+so its allocation volume must be at least 1024×1024×528. The gap separates instances; it does
+not require extra border space around a single instance. Allocation errors distinguish missing
+areas, areas too small for the full bounds, and failure to find a clear/unreserved placement.
+
 ## Personal storage rooms
 
 Personal entrances remain administrator-placed keypads on fixed doors. Players cannot move them.
@@ -83,7 +131,8 @@ An invited guest can enter the room but cannot open its containers by default. E
 Making it private or revoking an invitation closes affected sessions and invalidates transfers.
 Only the owner installs/upgrades containers or changes sharing. Upgrades preserve sharing and contents.
 
-While standing at a container position inside a loaded personal hideout, an administrator runs:
+Container markers are the preferred way to place these spots in the shell. For templates without
+container markers, an administrator can still stand at a position inside a loaded personal hideout and run:
 
     /HideoutTemplateContainer cabin left general
     /HideoutTemplateContainer cabin ammo_shelf ammo
@@ -142,8 +191,9 @@ supported appearance tools. Its local transform survives unloading/reallocation.
 are blocked. **Reset vendor position** is available from the entrance or interior exit management
 menu; the vendor's own **Manage squad hideout** button also exposes it. This restores the template
 position or recreates a missing entity without requiring proximity to that vendor. Stock is retained.
-Use `/HideoutTemplatePoint cabin vendor` to configure the default reset point while inside a loaded
-instance. A blocked reset point reports failure. Vendor movement/reset closes shop sessions.
+Place a **Squad vendor** marker in the shell to configure its reset point. For an unmarked role,
+`/HideoutTemplatePoint cabin vendor` remains available inside a loaded instance. A blocked reset point
+reports failure. Vendor movement/reset closes shop sessions.
 
 Use the vendor to shop or manage stock:
 
@@ -267,9 +317,9 @@ protection uses physical bounds and ends when the player leaves those bounds;
 town-style buffs expire normally after their short duration.
 
 Shell templates accept prop_physics, prop_physics_multiplayer, prop_dynamic,
-prop_dynamic_override, and ix_dupedummyitem. Arbitrary scripted entities,
-NPCs, vehicles, and standard containers are not serialized. Use the dedicated
-storage entity. Shell props are fixed and protected; props spawned by permitted
+prop_dynamic_override, ix_dupedummyitem, and ix_hideout_marker. Arbitrary scripted entities,
+NPCs, vehicles, and standard containers are not serialized. Use template markers for interior
+utilities and storage spots. Shell props are fixed and protected; props spawned by permitted
 players inside the instance are tracked furnishings, with local transforms,
 model, skin, color, material, bodygroups, submaterials, and movable state.
 Other entities created inside an instance are tracked for runtime cleanup;
@@ -302,6 +352,9 @@ destinations and cross-map arrival/rejection, alongside existing allocation and 
 Menu cases load the actual menu server module and cover container hand-ins/sharing/opening, invitation
 updates, guest exit, initial entrance placement, vendor reset, role/location/character changes, and
 administrator-only command counterparts.
+Marker cases cover duplicator settings, exact transforms and spawn facings, replacement of markers
+in the full paste lifecycle, slot identity across cold reloads, recipe/duplicate/bounds validation,
+administrator editor sessions, tool permissions and marker-based vendor reset.
 
 A live server smoke test is still required for actual dupe coordinates, map
 geometry/PVS, model bounds, storage UI, database adapter behavior, and revive.
@@ -313,3 +366,5 @@ The feature smoke test additionally needs two real servers: verify invisible ent
 offline shopping, container sharing/revocation, temporary tools on exit/demotion, vendor movement/reset,
 artifact arrival into unloaded hideouts, character switches, delayed connections, and MySQL failures.
 No running Garry's Mod development session or server dupe assets were available during implementation.
+For markers, also save/reload a real AdvDupe2 file with all roles, edit and resave a container without
+changing its slot ID, verify exact preview placement/facing, and test vendor reset after unloading.

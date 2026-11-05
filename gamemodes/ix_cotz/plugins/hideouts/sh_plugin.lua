@@ -42,7 +42,9 @@ PLUGIN.allowedShellClasses = {
 }
 
 ix.util.Include("sh_definitions.lua")
+ix.util.Include("sh_markers.lua")
 ix.util.Include("sv_repository.lua")
+ix.util.Include("sv_markers.lua")
 ix.util.Include("sv_instances.lua")
 ix.util.Include("sv_hooks.lua")
 ix.util.Include("sv_operations.lua")
@@ -56,3 +58,4 @@ ix.util.Include("sh_management.lua")
 ix.util.Include("sv_menus.lua")
 ix.util.Include("cl_plugin.lua")
 ix.util.Include("cl_management.lua")
+ix.util.Include("cl_markers.lua")

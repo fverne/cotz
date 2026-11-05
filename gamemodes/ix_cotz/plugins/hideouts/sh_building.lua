@@ -14,6 +14,9 @@ function PLUGIN:GetHideoutEntityPermission(client, entity)
 	local id = SERVER and entity.ixHideout or entity:GetNetVar("cotzHideoutID")
 	local memberID = SERVER and self.members[client] or client:GetLocalVar("hideout")
 	if not id then
+		if entity:GetClass() == "ix_hideout_marker" then
+			return client:IsAdmin()
+		end
 		if entity:GetClass():find("^ix_hideout_") then return false end
 		if self:CanBuildInHideout(client) then return false end
 		return
@@ -42,7 +45,7 @@ function PLUGIN:PhysgunPickup(client, entity)
 	local allowed = self:GetHideoutEntityPermission(client, entity)
 	if allowed == false then return false end
 	if allowed == true then
-		if SERVER then
+		if SERVER and entity.ixHideout then
 			local instance = self.instances[entity.ixHideout]
 			if instance.vendor == entity then
 				entity.cotzVendorHeld = true
@@ -62,6 +65,7 @@ function PLUGIN:CanTool(client, trace, tool)
 	local allowed = self:GetHideoutEntityPermission(client, trace.Entity)
 	if allowed == false then return false end
 	if allowed == true then
+		if trace.Entity:GetClass() == "ix_hideout_marker" then return end
 		if not self.furnishingTools[tool] then return false end
 		if trace.Entity:GetClass() == "ix_hideout_vendor" and tool == "remover" then return false end
 		if SERVER then
@@ -75,6 +79,7 @@ function PLUGIN:CanProperty(client, property, entity)
 	local allowed = self:GetHideoutEntityPermission(client, entity)
 	if allowed == false then return false end
 	if allowed == true then
+		if entity:GetClass() == "ix_hideout_marker" then return end
 		-- Helix's final gamemode handler denies these for non-admins. This narrow override is intentional.
 		return self.furnishingProperties[property] == true
 	end
