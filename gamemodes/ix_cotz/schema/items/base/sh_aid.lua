@@ -81,7 +81,7 @@ function ITEM:StartBandageTreatment()
 	local restore, duration, bleedRestore = self.restore, self.restoreduration, self.bleedRestore
 	local token = {}
 	client.cotzBandageAction = token
-	ix.util.PlayerPerformBlackScreenAction(client, "Wrapping Bandages", 10, function(player)
+	ix.util.PlayerPerformBlackScreenAction(client, "Wrapping Bandages", 2, function(player)
 		if not IsValid(player) or not player:Alive() or player:GetCharacter() ~= character then return end
 		if player.cotzBandageAction ~= token then return end
 
