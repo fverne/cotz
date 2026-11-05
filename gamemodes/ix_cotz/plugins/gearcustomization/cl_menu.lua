@@ -62,9 +62,14 @@ function ix.gearAppearance.OpenMenu(target)
 	model.Entity:SetSequence(model.Entity:LookupSequence("idle_all_01"))
 	model.rotation = 0
 	model.LayoutEntity = function(panel, entity) entity:SetAngles(Angle(0, panel.rotation, 0)) end
-	model.PostDrawModel = function(_, entity)
+	model.PreDrawModel = function(_, entity)
 		pac.ShowEntityParts(entity)
+		-- Preview entities can be outside PAC's world draw distance; update their attachments explicitly.
+		pac.RenderOverride(entity, "update")
+		pac.RenderOverride(entity, "update_legacy_bones")
 		pac.SetupBones(entity)
+	end
+	model.PostDrawModel = function(_, entity)
 		pac.RenderOverride(entity, "opaque")
 		pac.RenderOverride(entity, "translucent", true)
 	end

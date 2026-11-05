@@ -172,37 +172,4 @@ check(entryFrame.closed and received == nil, "Cancel does not publish an edited 
 local message = ix.cotzUI.Message("Invalid slot", "Marker", "OK")
 find(message, "OK", "DButton"):DoClick()
 check(message.closed, "Validation messages remain dismissible")
-local indicators = {}
-local activeBuffs = {buff_slowheal = {15}, buff_radprotect = {50}, buff_townradprotect = {50}}
-local alive, character, disabled, characterMenu = true, {}, false, false
-local client = {
-	Alive = function() return alive end,
-	GetCharacter = function() return character end,
-	GetLocalVar = function() return 50 end,
-	HasBuff = function(_, id) return activeBuffs[id] end,
-}
-LocalPlayer = function() return client end
-IsValid = function(value) return type(value) == "table" end
-CurTime = function() return 10 end
-Lerp = function(fraction, low, high) return low + (high - low) * fraction end
-math.Round = function(value) return math.floor(value + 0.5) end
-ix.gui = {characterMenu = {IsVisible = function() return characterMenu end}}
-ix.option = {Get = function() return disabled end}
-ix.config = {Get = function() return 100 end}
-ix.util.DrawBuffIcon = function(icon, x, y, width, height, color, text)
-	indicators[#indicators + 1] = {icon = icon, text = text}
-end
-PLUGIN = {}
-dofile("gamemodes/ix_cotz/plugins/buffs/cl_hud.lua")
-PLUGIN:HUDPaint()
-check(#indicators == 4 and indicators[1].text == "50", "Bleeding severity and active effects remain visible")
-check(indicators[2].text == 6, "Timed effects retain their countdown meaning")
-check(indicators[3].text == nil and indicators[4].text == nil, "Untimed effects do not gain countdowns")
-for _, state in ipairs({"disabled", "dead", "noCharacter", "characterMenu"}) do
-	indicators = {}
-	disabled, alive, character, characterMenu = state == "disabled", state ~= "dead", {}, state == "characterMenu"
-	if state == "noCharacter" then character = nil end
-	PLUGIN:HUDPaint()
-	check(#indicators == 0, "Buff indicators respect " .. state .. " visibility")
-end
 print("PASS: " .. checks .. " COTZ UI layout and callback checks")

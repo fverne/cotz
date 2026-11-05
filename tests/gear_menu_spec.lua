@@ -95,8 +95,13 @@ ix.cotzUI.Query = function(text, _, _, accept, _, cancel)
 
 	return query
 end
-pac = {SetupENT = function() end, RenderOverride = function() end, SetupBones = function() end,
-	ShowEntityParts = function() end}
+local renderSteps = {}
+pac = {
+	SetupENT = function() end,
+	ShowEntityParts = function(entity) renderSteps[#renderSteps + 1] = {"show", entity} end,
+	RenderOverride = function(entity, pass) renderSteps[#renderSteps + 1] = {pass, entity} end,
+	SetupBones = function(entity) renderSteps[#renderSteps + 1] = {"bones", entity} end,
+}
 local item = {
 	id = 2, uniqueID = "helmet", data = {equip = true},
 	appearanceCustomization = {targets = {{1}}, defaultSkin = "green", bodygroups = {}, skins = {
@@ -140,6 +145,16 @@ local function receive(name, values)
 end
 ix.gearAppearance.OpenMenu(vendor)
 local frame, model = frames[#frames], find("DModelPanel")
+model:PreDrawModel(model.Entity)
+check(#renderSteps == 4 and renderSteps[1][1] == "show" and renderSteps[2][1] == "update"
+	and renderSteps[3][1] == "update_legacy_bones" and renderSteps[4][1] == "bones",
+	"PAC updates bonemerge parenting and bone modifiers before drawing the preview character")
+model:PostDrawModel(model.Entity)
+check(#renderSteps == 6 and renderSteps[5][1] == "opaque" and renderSteps[6][1] == "translucent",
+	"Both gear render passes follow character bone setup")
+for _, step in ipairs(renderSteps) do
+	check(step[2] == model.Entity, "PAC preview updates target the preview character rather than the player")
+end
 frame:Think()
 local apply = find("DButton", "Apply — 100 rubles")
 check(not apply.enabled and item.data.gearAppearance == nil, "Opening uses factory state without a purchase")

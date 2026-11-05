@@ -1,85 +1,81 @@
 local PLUGIN = PLUGIN
-local bleedingColor = Color(ix.cotzUI.colors.amber.r, ix.cotzUI.colors.amber.g, ix.cotzUI.colors.amber.b)
-local BUFFS = {
-	{
-		id = "buff_slowheal",
-		icon = "stalker/ui/heart.png",
-		column = 0,
-		row = 1,
-		color = ix.cotzUI.colors.teal,
-		timed = true,
-	},
-	{
-		id = "buff_rapidheal",
-		icon = "stalker/ui/heart.png",
-		column = 0,
-		row = 2,
-		color = ix.cotzUI.colors.green,
-		timed = true,
-	},
-	{id = "buff_staminarestore", icon = "stalker/ui/stamina.png", column = 1, row = 1, timed = true},
-	{id = "buff_radprotect", icon = "stalker/ui/art.png", column = 2, row = 2, color = ix.cotzUI.colors.teal},
-	{id = "buff_radiationremoval", icon = "stalker/ui/art.png", column = 2, row = 1, timed = true},
-	{
-		id = "debuff_radiation",
-		icon = "stalker/ui/art.png",
-		column = 2,
-		row = 0,
-		color = ix.cotzUI.colors.red,
-		timed = true,
-	},
-	{id = "buff_hijump", icon = "gui/arrow", column = 3, row = 1, color = ix.cotzUI.colors.amber, timed = true},
-	{id = "buff_lightningsprint", icon = "stalker/ui/stamina.png", column = 3, row = 2, color = ix.cotzUI.colors.amber},
-	{
-		id = "buff_psysuppress",
-		icon = "stalker/ui/psy.png",
-		column = 6,
-		row = 3,
-		color = ix.cotzUI.colors.green,
-		timed = true,
-	},
-	{
-		id = "buff_psyblock",
-		icon = "stalker/ui/psy.png",
-		column = 6,
-		row = 2,
-		color = ix.cotzUI.colors.teal,
-		timed = true,
-	},
-	{id = "buff_psyheal", icon = "stalker/ui/psy.png", column = 6, row = 1, timed = true},
-	{id = "debuff_psy", icon = "stalker/ui/psy.png", column = 6, row = 0, color = ix.cotzUI.colors.red, timed = true},
-	{
-		id = "buff_passivehealthregen",
-		icon = "stalker/ui/heart.png",
-		column = -1,
-		row = 1,
-		color = ix.cotzUI.colors.green,
-	},
-	{id = "buff_townradprotect", icon = "stalker/ui/art.png", column = -1, row = 2, color = ix.cotzUI.colors.green},
-}
+local posH = ScrH() * 0.75
+local posW = ScrW() * 0.82
+local incH = ScrH() * -0.035
+local incW = ScrW() * 0.02
+
+local bleedingColor = Color(255, 220, 0)
+
+function PLUGIN:OnScreenSizeChanged()
+	posH = ScrH() * 0.75
+	posW = ScrW() * 0.82
+	incH = ScrH() * -0.035
+	incW = ScrW() * 0.02
+end
 
 function PLUGIN:HUDPaint()
-	local client = LocalPlayer()
-	if not client:Alive() or not client:GetCharacter() or ix.option.Get("disablehud", false) then return end
-	if IsValid(ix.gui.characterMenu) and ix.gui.characterMenu:IsVisible() then return end
-	local x, y = ScrW() * 0.82, ScrH() * 0.75
-	local stepX, stepY = ScrW() * 0.02, ScrH() * 0.035
-	local width, height = ScrW() * 0.016, ScrH() * 0.032
-	local severity = client:GetLocalVar("bleedingSeverity", 0)
-	if severity > 0 then
+	local severity = LocalPlayer():GetLocalVar("bleedingSeverity", 0)
+	if LocalPlayer():Alive() and LocalPlayer():GetCharacter() and severity > 0 then
 		local fraction = math.Clamp(severity / ix.config.Get("bleedingMaximum", 100), 0, 1)
-		bleedingColor.r = Lerp(fraction, ix.cotzUI.colors.amber.r, ix.cotzUI.colors.red.r)
-		bleedingColor.g = Lerp(fraction, ix.cotzUI.colors.amber.g, ix.cotzUI.colors.red.g)
-		bleedingColor.b = Lerp(fraction, ix.cotzUI.colors.amber.b, ix.cotzUI.colors.red.b)
-		ix.util.DrawBuffIcon("stalker/ui/heart.png", x, y, width, height, bleedingColor, tostring(severity))
+		bleedingColor.r = 255
+		bleedingColor.g = math.Round(Lerp(fraction, 220, 0))
+
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH, ScrW() * 0.016, ScrH() * 0.032,
+			bleedingColor, tostring(severity))
 	end
 
-	for _, definition in ipairs(BUFFS) do
-		local buff = client:HasBuff(definition.id)
-		if buff then
-			local remaining = definition.timed and math.Round(buff[1] - CurTime() + 0.5) or nil
-			ix.util.DrawBuffIcon(definition.icon, x + stepX * definition.column, y - stepY * definition.row,
-				width, height, definition.color, remaining)
-		end
+	if LocalPlayer():HasBuff("buff_slowheal") then
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH+incH, ScrW()*0.016, ScrH()*0.032, Color(0, 190, 255), math.Round(LocalPlayer():HasBuff("buff_slowheal")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_rapidheal") then
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 190), math.Round(LocalPlayer():HasBuff("buff_rapidheal")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_staminarestore") then
+		ix.util.DrawBuffIcon("stalker/ui/stamina.png", posW+incW, posH+incH, ScrW()*0.016, ScrH()*0.032, nil, math.Round(LocalPlayer():HasBuff("buff_staminarestore")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_radprotect") then
+		ix.util.DrawBuffIcon("stalker/ui/art.png", posW+incW*2, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 190), nil, math.Round(LocalPlayer():HasBuff("buff_radprotect")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_radiationremoval") then
+		ix.util.DrawBuffIcon("stalker/ui/art.png", posW+incW*2, posH+incH, ScrW()*0.016, ScrH()*0.032,nil,math.Round(LocalPlayer():HasBuff("buff_radiationremoval")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("debuff_radiation") then
+		ix.util.DrawBuffIcon("stalker/ui/art.png", posW+incW*2, posH, ScrW()*0.016, ScrH()*0.032, Color(255, 0, 0, 255), math.Round(LocalPlayer():HasBuff("debuff_radiation")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_hijump") then
+		ix.util.DrawBuffIcon("gui/arrow", posW+incW*3, posH+incH, ScrW()*0.016, ScrH()*0.032, Color(255, 255, 150, 255), math.Round(LocalPlayer():HasBuff("buff_hijump")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_lightningsprint") then
+		ix.util.DrawBuffIcon("stalker/ui/stamina.png", posW+incW*3, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(255, 255, 150, 255))
+	end
+
+	if LocalPlayer():HasBuff("buff_psysuppress") then
+		ix.util.DrawBuffIcon("stalker/ui/psy.png", posW+incW*6, posH+incH*3, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 0), math.Round(LocalPlayer():HasBuff("buff_psysuppress")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_psyblock") then
+		ix.util.DrawBuffIcon("stalker/ui/psy.png", posW+incW*6, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 190), math.Round(LocalPlayer():HasBuff("buff_psyblock")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_psyheal") then
+		ix.util.DrawBuffIcon("stalker/ui/psy.png", posW+incW*6, posH+incH, ScrW()*0.016, ScrH()*0.032,nil , math.Round(LocalPlayer():HasBuff("buff_psyheal")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("debuff_psy") then
+		ix.util.DrawBuffIcon("stalker/ui/psy.png", posW+incW*6, posH, ScrW()*0.016, ScrH()*0.032, Color(255, 0, 0, 255), math.Round(LocalPlayer():HasBuff("debuff_psy")[1]-CurTime()+0.5))
+	end
+
+	if LocalPlayer():HasBuff("buff_passivehealthregen") then
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW-incW, posH+incH, ScrW()*0.016, ScrH()*0.032, Color(130, 200, 130, 150))
+	end
+	if LocalPlayer():HasBuff("buff_townradprotect") then
+		ix.util.DrawBuffIcon("stalker/ui/art.png", posW-incW, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(130, 200, 130, 150))
 	end
 end

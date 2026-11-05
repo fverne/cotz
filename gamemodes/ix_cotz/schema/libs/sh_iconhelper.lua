@@ -64,23 +64,27 @@ function ix.util.DrawStatusIcon(iconstring, value, posX, posY, padding)
 end
 
 
+-- draws buff icons, such as healing, psyblock, staminaregen with a white square background
 function ix.util.DrawBuffIcon(iconstring, posX, posY, sizeX, sizeY, col, text)
-	local padding = ix.cotzUI.Scale(3)
-	local color = col or ix.cotzUI.colors.text
-	local icon = ix.util.GetMaterial(iconstring, "noclamp smooth")
-	surface.SetDrawColor(ix.cotzUI.colors.card)
-	surface.DrawRect(posX, posY, sizeX, sizeY)
-	surface.SetDrawColor(color)
-	surface.DrawOutlinedRect(posX, posY, sizeX, sizeY)
-	surface.SetMaterial(icon)
-	surface.DrawTexturedRect(posX + padding, posY + padding, sizeX - padding * 2, sizeY - padding * 2)
-	if text then
-		text = tostring(text)
-		surface.SetFont("cotzUISmall")
-		local width, height = surface.GetTextSize(text)
-		local x, y = posX + sizeX - width - padding, posY + sizeY - height
-		surface.SetDrawColor(ix.cotzUI.colors.background)
-		surface.DrawRect(x - padding, y, width + padding * 2, height)
-		draw.SimpleText(text, "cotzUISmall", x, y, ix.cotzUI.colors.text)
-	end
+    local background = ix.util.GetMaterial("stalker/ui/square.png", "noclamp smooth")
+    local icon = ix.util.GetMaterial(iconstring, "noclamp smooth")
+    local padding = sizeX * 0.1
+    local color = col or Color(255, 255, 255)
+
+    --draw the square background, and color it accordingly
+    surface.SetMaterial(background)
+    surface.SetDrawColor(color)
+    surface.DrawTexturedRect(posX, posY, sizeX, sizeY)
+
+    --draw the icon on top of the background
+    surface.SetMaterial(icon)
+    surface.SetDrawColor(Color(0, 0, 0, 255))
+    surface.DrawTexturedRect(posX, posY + padding, sizeX, sizeY - (padding * 2))
+    --draw centered text if provided
+    if text then
+        surface.SetTextColor(255,255,255,255)
+        surface.SetFont("TargetIDSmall")
+        surface.SetTextPos( posX+sizeX/2-surface.GetTextSize(text)/2, posY+sizeY/2 )
+        surface.DrawText( text ) -- Draw the text
+    end
 end

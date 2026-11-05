@@ -25,8 +25,8 @@ fractions and scaled maximum widths. Shared frames update their existing control
 changes. Use `SetHeight` for fixed-height inputs/footer controls inside them; wrapping actions size
 to their content. Fill scroll panels dock after fixed footer controls. Descriptions, long names and
 confirmation text must remain readable without hiding actions. Shared world markers use a dark
-backing, a semantic border and viewport-clamped labels. Buffs retain their existing positions and
-state/timer meanings with matching cards, icons and colors.
+backing, a semantic border and viewport-clamped labels. Buff and debuff indicators retain their original
+HUD presentation and are excluded from the shared UI styling.
 
 ## Branch coverage
 
@@ -46,7 +46,7 @@ The UI audit used `git diff master...HEAD`, including client code inside shared 
 | New squad compass labels | Scaled `alsina` type with a contrasting outline |
 | Progression encyclopedia | Contact cards, warm text and muted metadata |
 | Dialogue choices and dynamic task/reward lists | Matching typography/scrollbars; wrapping and inherited label sizing |
-| Buff timers, bleeding and town-effect indicators | Dark cards, muted state colors and readable counters |
+| Buff timers, bleeding and town-effect indicators | Original HUD presentation retained |
 
 Moved item definitions, unchanged legacy interfaces and upstream Helix upgrade changes are not new
 COTZ surfaces. Existing vendor stock/tooltips continue using the COTZ inventory/vendor presentation.

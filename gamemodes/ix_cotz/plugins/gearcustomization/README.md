@@ -11,6 +11,8 @@ The window previews the selected gear on a copy of the player's current characte
 model. The rotation control turns the preview. Changes remain local until confirmed;
 Reset Preview and Cancel never alter the item or charge money. The preview deliberately
 shows the selected gear rather than copying all other worn PAC equipment.
+PAC parenting and bone modifiers update before the preview character is drawn, so
+bonemerged outfits follow its skeleton even outside PAC's world draw distance.
 
 ## Current assets
 

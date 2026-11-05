@@ -8,7 +8,7 @@ A successful roll adds the damage amount to severity (maximum 100). Blocked and 
 Every second, severity causes `severity * bleedingDamageScale` HP loss (default 0.04), with fractional HP
 accumulated until whole damage can be applied. Severity then falls by `bleedingClotRate` (default 1).
 Damage is world-attributed generic damage and can kill through normal death/revive handling.
-The HUD shows rounded-up severity in a heart icon, transitioning from muted amber to red at maximum severity. Settings are in Helix's Bleeding configuration category.
+The HUD shows rounded-up severity in a heart icon, transitioning from yellow to red (255, 0, 0) at maximum severity. Settings are in Helix's Bleeding configuration category.
 
 `ix.plugin.Get("buffs")` exposes server methods `GetBleeding(client)`, `AddBleeding(client, amount)` and
 `HealBleeding(client, amount)`. Add/Heal accept finite positive amounts; Add applies directly without a chance roll.
@@ -33,7 +33,3 @@ character switching, reconnect, and actual cross-server save/transfer.
 At defaults, severity 25/50/100 produces 1/2/4 HP per second before protection.
 A severity-100 bleed clots in 100 seconds without further hits. Existing explicit server configuration
 remains authoritative; set bleedingDamageScale to 0.04 and bleedingClotRate to 1 to adopt these defaults.
-
-Buff indicators use the shared [COTZ UI style](../../../../docs/ui-style.md): dark cards, state-colored
-icons/borders and warm text counters. Existing effect positions and timer/severity meanings remain.
-They respect the HUD toggle, character menu and living-character visibility.
