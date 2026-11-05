@@ -20,6 +20,9 @@ It is automatically distributed/included as a client schema library before gamep
 `Schema:LoadFonts` refreshes its fonts through the bundled Helix font/resolution lifecycle.
 Existing reference panels keep their own layouts; the helper does not replace the global Derma skin.
 
+The Q-menu Items tab uses `ix.util.GetItemIcon` for centered, aspect-preserving item previews,
+including custom images and cached model renders. Left-click spawns an item; right-click gives it to you.
+
 The reference scale is `Clamp(Min(ScrW()/1920, ScrH()/1080), 0.75, 2)`. Major windows use viewport
 fractions and scaled maximum widths. Shared frames update their existing controls on resolution
 changes. Use `SetHeight` for fixed-height inputs/footer controls inside them; wrapping actions size

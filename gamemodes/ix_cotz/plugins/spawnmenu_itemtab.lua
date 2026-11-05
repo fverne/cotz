@@ -122,7 +122,17 @@ else
         icon:InvalidateLayout(true)
         local t = ix.item.list
         local i = t[u]
-        icon:SetModel((i.GetModel and i:GetModel()) or i.model)
+		icon.Icon:SetVisible(false)
+		icon.Paint = function(_, width, height)
+			local material = ix.util.GetItemIcon(i)
+			if not material then return end
+
+			local scale = math.min(width / i.width, height / i.height)
+			local iconWidth, iconHeight = i.width * scale, i.height * scale
+			surface.SetMaterial(material)
+			surface.SetDrawColor(color_white)
+			surface.DrawTexturedRect((width - iconWidth) / 2, (height - iconHeight) / 2, iconWidth, iconHeight)
+		end
         icon:SetTooltip(n)
 
         icon.OnMousePressed = function(this, code)
