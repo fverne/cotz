@@ -123,8 +123,9 @@ else
         local t = ix.item.list
         local i = t[u]
 		icon.Icon:SetVisible(false)
+		local material = ix.util.GetItemIcon(i)
+
 		icon.Paint = function(_, width, height)
-			local material = ix.util.GetItemIcon(i)
 			if not material then return end
 
 			local scale = math.min(width / i.width, height / i.height)
