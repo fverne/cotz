@@ -43,32 +43,30 @@ dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_expansion.lua")
 dofile(base .. "libs/sh_services.lua")
-local api = ix.progression
-api.AssignActiveRequirements = function() end
-function api.Register(id, definition)
+ix.progression.AssignActiveRequirements = function() end
+function ix.progression.Register(id, definition)
 	definition.id = id
-	api.definitions[id] = definition
+	ix.progression.definitions[id] = definition
 end
-local meta = ix.meta.character
-meta.__index = meta
-function meta:GetData(key, default)
+ix.meta.character.__index = ix.meta.character
+function ix.meta.character:GetData(key, default)
 	local value = self.data[key]
 	if value == nil then return default end
 
 	return value
 end
-function meta:SetData(key, value) self.data[key] = value end
-function meta:GetInventory() return self.inventory end
-function meta:GetPlayer() return self.client end
-function meta:GetName() return "Service Tester" end
-function meta:GetID() return self.id end
-function meta:HasMoney(amount) return self.money >= amount end
-function meta:TakeMoney(amount) self.money = self.money - amount end
-function meta:Save() self.saves = self.saves + 1 end
+function ix.meta.character:SetData(key, value) self.data[key] = value end
+function ix.meta.character:GetInventory() return self.inventory end
+function ix.meta.character:GetPlayer() return self.client end
+function ix.meta.character:GetName() return "Service Tester" end
+function ix.meta.character:GetID() return self.id end
+function ix.meta.character:HasMoney(amount) return self.money >= amount end
+function ix.meta.character:TakeMoney(amount) self.money = self.money - amount end
+function ix.meta.character:Save() self.saves = self.saves + 1 end
 local nextID = 0
 local function actor()
 	nextID = nextID + 1
-	local character = setmetatable({id = nextID, data = {}, money = 2000000, saves = 0}, meta)
+	local character = setmetatable({id = nextID, data = {}, money = 2000000, saves = 0}, ix.meta.character)
 	character.inventory = {items = {}, rewards = {}}
 	function character.inventory:GetItems() return self.items end
 	function character.inventory:Add(item, _, data)
@@ -91,7 +89,7 @@ local function actor()
 	function client:GetWeapon() return {invalid = true} end
 	function client:RecalculateResistances() self.recalculated = true end
 	function client:Notify(text) self.notification = text end
-	api.InitializeCharacterProgression(character)
+	ix.progression.InitializeCharacterProgression(character)
 
 	return character
 end
@@ -100,8 +98,8 @@ local function vendor(name)
 		CanAccess = function() return true end}
 end
 local function complete(character, id)
-	api.Register(id, {nextProgressions = {}})
-	api.SetCompleted(character, id)
+	ix.progression.Register(id, {nextProgressions = {}})
+	ix.progression.SetCompleted(character, id)
 end
 local function repairItem(character, id, weapon)
 	local item = {id = id, canRepair = true, isWeapon = weapon, isBodyArmor = not weapon, data = {wear = 80, durability = 70}}
@@ -123,131 +121,212 @@ local tech, doctor, arena, cleaner, wish = vendor("'Technut'"), vendor("'Jitters
 local first, second = actor(), actor()
 local firstItem, secondItem = repairItem(first, 11, true), repairItem(second, 22, true)
 local credit = {services = {{npc = "'Technut'", service = "repair", amount = 100}}}
-check(api.GrantBenefits(first, "creditFixture", credit, "once"), "credit granted")
-check(not api.GrantBenefits(first, "creditFixture", credit, "once"), "credit claim is idempotent")
-check(api.GetServiceCredit(first, "'Technut'", "repair") == 100, "credit has the stated face value")
-check(api.GetServiceCredit(first, "'Boss'", "repair") == 0, "credit belongs to the named provider")
-check(api.GetServiceCredit(second, "'Technut'", "repair") == 0, "another character has no credit")
+check(ix.progression.GrantBenefits(first, "creditFixture", credit, "once"), "credit granted")
+check(not ix.progression.GrantBenefits(first, "creditFixture", credit, "once"), "credit claim is idempotent")
+check(ix.progression.GetServiceCredit(first, "'Technut'", "repair") == 100, "credit has the stated face value")
+check(ix.progression.GetServiceCredit(first, "'Boss'", "repair") == 0, "credit belongs to the named provider")
+check(ix.progression.GetServiceCredit(second, "'Technut'", "repair") == 0, "another character has no credit")
 local noGiftOwner = actor()
-check(api.GrantBenefits(noGiftOwner, "noGiftFixture", {
+check(ix.progression.GrantBenefits(noGiftOwner, "noGiftFixture", {
 	items = {{item = "medic_bandage_1"}},
 	services = {{npc = "'Technut'", service = "repair", amount = 100}},
 }, "completion"), "non-item benefits still grant with stale gift fields")
 check(#noGiftOwner.inventory.rewards == 0
-	and #(api.GetLine(noGiftOwner, "noGiftFixture").pendingRewards or {}) == 0,
+	and #(ix.progression.GetLine(noGiftOwner, "noGiftFixture").pendingRewards or {}) == 0,
 	"completion benefits never deliver or queue gift items")
-check(api.GetServiceCredit(noGiftOwner, "'Technut'", "repair") == 100,
+check(ix.progression.GetServiceCredit(noGiftOwner, "'Technut'", "repair") == 100,
 	"removing item gifts preserves service credits")
-local giftSummary = api.GetBenefitSummary({id = "noGiftFixture", completionBenefits = {
+local giftSummary = ix.progression.GetBenefitSummary({id = "noGiftFixture", completionBenefits = {
 	items = {{item = "medic_bandage_1"}},
 }}, noGiftOwner)
 check(giftSummary == "", "progression descriptions do not advertise stale item gifts")
-local offer = api.BuildServiceOffer(first.client, tech, "repair", {itemid = 11, cost = 0, type = "hp"})
+local offer = ix.progression.BuildServiceOffer(first.client, tech, "repair", {itemid = 11, cost = 0, type = "hp"})
 check(offer.baseCost == 400 and offer.cost == 300 and offer.field == "wear", "repair ignores forged price and field")
-api.ConfirmService({}, first.client, tech, "repair", {itemid = 11, cost = 300})
-api.ConfirmService({}, second.client, tech, "repair", {itemid = 22, cost = 400})
+ix.progression.ConfirmService({}, first.client, tech, "repair", {itemid = 11, cost = 300})
+ix.progression.ConfirmService({}, second.client, tech, "repair", {itemid = 22, cost = 400})
 local firstMoney, secondMoney = first.money, second.money
-check(api.ExecuteService(first.client, tech, "repair", true), "first concurrent quote executes")
+check(ix.progression.ExecuteService(first.client, tech, "repair", true), "first concurrent quote executes")
 check(firstItem.data.wear == 100 and secondItem.data.wear == 80, "one shopper cannot overwrite another shopper's repair")
 check(first.money == firstMoney - 300, "only the uncovered fee is charged")
-check(api.GetServiceCredit(first, "'Technut'", "repair") == 0, "actual credit is consumed once")
-check(not api.ExecuteService(first.client, tech, "repair", true), "confirmation cannot replay")
-check(api.ExecuteService(second.client, tech, "repair", true), "second shopper retains their own quote")
+check(ix.progression.GetServiceCredit(first, "'Technut'", "repair") == 0, "actual credit is consumed once")
+check(not ix.progression.ExecuteService(first.client, tech, "repair", true), "confirmation cannot replay")
+check(ix.progression.ExecuteService(second.client, tech, "repair", true), "second shopper retains their own quote")
 check(secondItem.data.wear == 100 and second.money == secondMoney - 400, "second shopper pays their own fee")
-check(not api.BuildServiceOffer(first.client, tech, "repair", {itemid = 22}), "another character's item rejected")
+check(
+	not ix.progression.BuildServiceOffer(first.client, tech, "repair", {itemid = 22}),
+	"another character's item rejected"
+)
 firstItem.data.wear = 50
-api.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
+ix.progression.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
 now = now + 61
-check(not api.ExecuteService(first.client, tech, "repair", true), "expired quote rejected")
+check(not ix.progression.ExecuteService(first.client, tech, "repair", true), "expired quote rejected")
 check(firstItem.data.wear == 50, "expired service changes no equipment")
-api.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
+ix.progression.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
 first.client.character = second
-check(not api.ExecuteService(first.client, tech, "repair", true), "switching characters invalidates quote")
+check(not ix.progression.ExecuteService(first.client, tech, "repair", true), "switching characters invalidates quote")
 first.client.character = first
-api.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
-check(not api.ExecuteService(first.client, vendor("'Technut'"), "repair", true), "different NPC instance cannot redeem quote")
-api.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
+ix.progression.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
+check(
+	not ix.progression.ExecuteService(first.client, vendor("'Technut'"), "repair", true),
+	"different NPC instance cannot redeem quote"
+)
+ix.progression.ConfirmService({}, first.client, tech, "repair", {itemid = 11})
 firstItem.data.wear = 40
-check(not api.ExecuteService(first.client, tech, "repair", true), "higher fee requires new consent")
-api.GrantBenefits(first, "treatmentFixture", {services = {{npc = "'Jitters'", service = "treatment", amount = 1000}}}, "once")
-local medical = api.GetTreatmentOptions(first.client, doctor)
+check(not ix.progression.ExecuteService(first.client, tech, "repair", true), "higher fee requires new consent")
+ix.progression.GrantBenefits(
+	first,
+	"treatmentFixture",
+	{services = {{npc = "'Jitters'", service = "treatment", amount = 1000}}},
+	"once"
+)
+local medical = ix.progression.GetTreatmentOptions(first.client, doctor)
 check(#medical == 4, "clinic retains all four treatment options")
-local allOffer = api.BuildServiceOffer(first.client, doctor, "treatment", {type = "all", cost = 0})
+local allOffer = ix.progression.BuildServiceOffer(first.client, doctor, "treatment", {type = "all", cost = 0})
 check(allOffer.baseCost == 260 and allOffer.credit == 260 and allOffer.cost == 0,
 	"combined treatment applies credit once and respects increased maximum health")
-local clinicBefore = api.GetServiceCredit(first, "'Jitters'", "treatment")
-api.ConfirmService({}, first.client, doctor, "treatment", {type = "all"})
-check(api.ExecuteService(first.client, doctor, "treatment", true), "credit can cover treatment")
+local clinicBefore = ix.progression.GetServiceCredit(first, "'Jitters'", "treatment")
+ix.progression.ConfirmService({}, first.client, doctor, "treatment", {type = "all"})
+check(ix.progression.ExecuteService(first.client, doctor, "treatment", true), "credit can cover treatment")
 check(first.client.health == 125 and first.client.radiation == 0 and first.client.psyHealth == 100,
 	"treatment restores the intended state without reducing wished health")
-check(api.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 260, "unused treatment credit is retained")
-api.ConfirmService({}, first.client, doctor, "treatment", {type = "all"})
-check(api.ExecuteService(first.client, doctor, "treatment", true), "zero-cost already-healthy treatment is safe")
-check(api.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 260, "zero fee consumes no credit")
-check(#api.GetTreatmentOptions(first.client, arena) == 1, "arena does not acquire clinic radiation/psy services")
-check(not api.BuildServiceOffer(first.client, cleaner, "treatment", {type = "hp"}), "unsupported service provider rejected")
-api.Register("arenaDiscount", {keyNpc = "'Arena Master'", nextProgressions = {},
+check(
+	ix.progression.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 260,
+	"unused treatment credit is retained"
+)
+ix.progression.ConfirmService({}, first.client, doctor, "treatment", {type = "all"})
+check(
+	ix.progression.ExecuteService(first.client, doctor, "treatment", true),
+	"zero-cost already-healthy treatment is safe"
+)
+check(
+	ix.progression.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 260,
+	"zero fee consumes no credit"
+)
+check(
+	#ix.progression.GetTreatmentOptions(first.client, arena) == 1,
+	"arena does not acquire clinic radiation/psy services"
+)
+check(
+	not ix.progression.BuildServiceOffer(first.client, cleaner, "treatment", {type = "hp"}),
+	"unsupported service provider rejected"
+)
+ix.progression.Register("arenaDiscount", {keyNpc = "'Arena Master'", nextProgressions = {},
 	serviceDiscounts = {{npc = "'Arena Master'", service = "treatment", fraction = 0.1}}})
-api.SetCompleted(first, "arenaDiscount")
+ix.progression.SetCompleted(first, "arenaDiscount")
 first.client.health = 25
-local discounted = api.BuildServiceOffer(first.client, arena, "treatment", {type = "hp"})
+local discounted = ix.progression.BuildServiceOffer(first.client, arena, "treatment", {type = "hp"})
 check(discounted.baseCost == 200 and discounted.cost == 180, "earned discount changes only the named fee")
-check(api.GetServiceDiscount(second, "'Arena Master'", "treatment") == 0, "discount is personal")
-api.Register("sameDiscount", {nextProgressions = {}, serviceDiscounts = {{npc = "'Arena Master'", service = "treatment", fraction = 0.1}}})
-api.SetCompleted(first, "sameDiscount")
-check(api.GetServiceDiscount(first, "'Arena Master'", "treatment") == 0.1, "alternative discounts do not add together")
-check(not api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}), "storage still requires its access milestone")
+check(ix.progression.GetServiceDiscount(second, "'Arena Master'", "treatment") == 0, "discount is personal")
+ix.progression.Register(
+	"sameDiscount",
+	{nextProgressions = {}, serviceDiscounts = {{npc = "'Arena Master'", service = "treatment", fraction = 0.1}}}
+)
+ix.progression.SetCompleted(first, "sameDiscount")
+check(
+	ix.progression.GetServiceDiscount(first, "'Arena Master'", "treatment") == 0.1,
+	"alternative discounts do not add together"
+)
+check(
+	not ix.progression.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}),
+	"storage still requires its access milestone"
+)
 complete(first, "cotz/town/ballast/BA12")
-api.GrantBenefits(first, "storageFixture", {
+ix.progression.GrantBenefits(first, "storageFixture", {
 	services = {{npc = "'Ballast'", service = "storage", amount = 300}},
 }, "once")
-local expansion = api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally", cost = 0})
+local expansion = ix.progression.BuildServiceOffer(
+	first.client,
+	cleaner,
+	"storage",
+	{direction = "horizontally", cost = 0}
+)
 check(expansion.baseCost == math.Round(120 ^ (1 + 2 / 5.5)), "storage retains its existing price curve")
-api.ConfirmService({}, first.client, cleaner, "storage", {direction = "horizontally"})
-check(api.ExecuteService(first.client, cleaner, "storage", true), "storage credit redeems through normal expansion")
+ix.progression.ConfirmService({}, first.client, cleaner, "storage", {direction = "horizontally"})
+check(
+	ix.progression.ExecuteService(first.client, cleaner, "storage", true),
+	"storage credit redeems through normal expansion"
+)
 check(first:GetData("bankW") == 3, "storage grows only one step")
 first:SetData("bankW", 4)
-local retainedStorageCredit = api.GetServiceCredit(first, "'Ballast'", "storage")
-check(not api.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}), "maximum storage remains a hard limit")
-check(api.GetServiceCredit(first, "'Ballast'", "storage") == retainedStorageCredit,
+local retainedStorageCredit = ix.progression.GetServiceCredit(first, "'Ballast'", "storage")
+check(
+	not ix.progression.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}),
+	"maximum storage remains a hard limit"
+)
+check(ix.progression.GetServiceCredit(first, "'Ballast'", "storage") == retainedStorageCredit,
 	"full storage does not convert credit to money")
-check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "hp"}), "wish contact still requires Computer completion")
+check(
+	not ix.progression.BuildServiceOffer(first.client, wish, "wish", {type = "hp"}),
+	"wish contact still requires Computer completion"
+)
 complete(first, "computer_artifactTasks")
-api.GrantBenefits(first, "wishFixture", {services = {{npc = "'???'", service = "wish", amount = 25000}}}, "once")
-api.ConfirmService({}, first.client, wish, "wish", {type = "hp", cost = 999999})
-check(api.ExecuteService(first.client, wish, "wish", true), "first wish retains zero price")
-check(api.GetServiceCredit(first, "'???'", "wish") == 25000, "free wish does not spend credit")
-local paidWish = api.BuildServiceOffer(first.client, wish, "wish", {type = "carryinc", cost = 0})
+ix.progression.GrantBenefits(
+	first,
+	"wishFixture",
+	{services = {{npc = "'???'", service = "wish", amount = 25000}}},
+	"once"
+)
+ix.progression.ConfirmService({}, first.client, wish, "wish", {type = "hp", cost = 999999})
+check(ix.progression.ExecuteService(first.client, wish, "wish", true), "first wish retains zero price")
+check(ix.progression.GetServiceCredit(first, "'???'", "wish") == 25000, "free wish does not spend credit")
+local paidWish = ix.progression.BuildServiceOffer(first.client, wish, "wish", {type = "carryinc", cost = 0})
 check(paidWish.baseCost == 1000000 and paidWish.cost == 975000, "later wish has a real fee before credit")
-api.ConfirmService({}, first.client, wish, "wish", {type = "carryinc"})
-check(api.ExecuteService(first.client, wish, "wish", true), "wish credit offsets a positive fee")
-check(api.GetServiceCredit(first, "'???'", "wish") == 0, "wish allowance cannot be reused")
-check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "carryinc"}), "existing permanent wish cannot repeat")
-check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "weapon", itemid = 22}), "wish cannot alter another character's item")
+ix.progression.ConfirmService({}, first.client, wish, "wish", {type = "carryinc"})
+check(ix.progression.ExecuteService(first.client, wish, "wish", true), "wish credit offsets a positive fee")
+check(ix.progression.GetServiceCredit(first, "'???'", "wish") == 0, "wish allowance cannot be reused")
+check(
+	not ix.progression.BuildServiceOffer(first.client, wish, "wish", {type = "carryinc"}),
+	"existing permanent wish cannot repeat"
+)
+check(
+	not ix.progression.BuildServiceOffer(first.client, wish, "wish", {type = "weapon", itemid = 22}),
+	"wish cannot alter another character's item"
+)
 local suit = repairItem(first, 33, false)
-check(not api.BuildServiceOffer(first.client, wish, "wish", {type = "weapon", itemid = 33}), "suit cannot masquerade as weapon wish")
-local suitOffer = api.BuildServiceOffer(first.client, tech, "repair", {itemid = 33})
+check(
+	not ix.progression.BuildServiceOffer(first.client, wish, "wish", {type = "weapon", itemid = 33}),
+	"suit cannot masquerade as weapon wish"
+)
+local suitOffer = ix.progression.BuildServiceOffer(first.client, tech, "repair", {itemid = 33})
 check(suitOffer.baseCost == 600 and suitOffer.field == "durability", "suit repair costs are doubled")
-local bossOffer = api.BuildServiceOffer(first.client, vendor("'Boss'"), "repair", {itemid = 33})
+local bossOffer = ix.progression.BuildServiceOffer(first.client, vendor("'Boss'"), "repair", {itemid = 33})
 check(bossOffer.baseCost == 600 and bossOffer.cost == 600, "Boss charges the same doubled repair price")
-api.Register("repairDiscount", {nextProgressions = {},
+ix.progression.Register("repairDiscount", {nextProgressions = {},
 	serviceDiscounts = {{npc = "'Technut'", service = "repair", fraction = 0.05}}})
 local discountCharacter = actor()
 repairItem(discountCharacter, 44, false)
-api.SetCompleted(discountCharacter, "repairDiscount")
-local discountedRepair = api.BuildServiceOffer(discountCharacter.client, tech, "repair", {itemid = 44})
+ix.progression.SetCompleted(discountCharacter, "repairDiscount")
+local discountedRepair = ix.progression.BuildServiceOffer(discountCharacter.client, tech, "repair", {itemid = 44})
 check(discountedRepair.baseCost == 600 and discountedRepair.cost == 570,
 	"earned repair discount applies after doubling the base price")
 local restored = actor()
 restored.data = copy(first.data)
-check(api.GetServiceCredit(restored, "'Jitters'", "treatment") == api.GetServiceCredit(first, "'Jitters'", "treatment"),
+check(ix.progression.GetServiceCredit(
+	restored,
+	"'Jitters'",
+	"treatment"
+) == ix.progression.GetServiceCredit(first, "'Jitters'", "treatment"),
 	"remaining service credit survives character restoration")
-check(not api.GrantBenefits(restored, "treatmentFixture", {services = {{npc = "'Jitters'", service = "treatment", amount = 1000}}}, "once"),
+check(not ix.progression.GrantBenefits(
+	restored,
+	"treatmentFixture",
+	{services = {{npc = "'Jitters'", service = "treatment", amount = 1000}}},
+	"once"
+),
 	"reconnect cannot replay a service-credit grant")
-check(not pcall(api.ValidateBenefits, {completionBenefits = {items = {{item = "missing_item"}}}}), "progression gift fields fail validation")
-check(not pcall(api.ValidateBenefits, {serviceDiscounts = {{npc = "'Arena Master'", service = "treatment", fraction = 1}}}),
+check(
+	not pcall(ix.progression.ValidateBenefits, {completionBenefits = {items = {{item = "missing_item"}}}}),
+	"progression gift fields fail validation"
+)
+check(not pcall(
+	ix.progression.ValidateBenefits,
+	{serviceDiscounts = {{npc = "'Arena Master'", service = "treatment", fraction = 1}}}
+),
 	"unbounded discounts fail validation")
-check(not pcall(api.ValidateBenefits, {completionBenefits = {services = {{npc = "'???'", service = "repair", amount = 50}}}}),
+check(not pcall(
+	ix.progression.ValidateBenefits,
+	{completionBenefits = {services = {{npc = "'???'", service = "repair", amount = 50}}}}
+),
 	"unsupported service rewards fail validation")
 
 -- Exercise actual NPC confirmation callbacks rather than only the helper API.
@@ -277,12 +356,17 @@ first.client.health = 75
 clinical:DynamicPreCallback(first.client, doctor, {type = "hp", cost = 0})
 clinical:ResolveDynamicOption(first.client, doctor, {accepted = true})
 check(first.client.health == 125, "real clinic confirmation uses the shared bounded service path")
-check(api.ResolveServiceOffer(first.client, tech, "repair", false) == "BackTopic",
+check(ix.progression.ResolveServiceOffer(first.client, tech, "repair", false) == "BackTopic",
 	"invalid service payload is rejected before indexing")
 firstItem.data.wear = 90
-local serviceTopic, serviceData = api.ResolveServiceOffer(first.client, tech, "repair", {itemid = 11, cost = 0})
+local serviceTopic, serviceData = ix.progression.ResolveServiceOffer(
+	first.client,
+	tech,
+	"repair",
+	{itemid = 11, cost = 0}
+)
 check(serviceTopic == "ConfirmRepair" and serviceData.cost == 200,
 	"service selection replaces a forged client price with the authoritative fee")
-check(api.ResolveServiceOffer(first.client, cleaner, "storage", {option = "use"}) == "OpenStorage",
+check(ix.progression.ResolveServiceOffer(first.client, cleaner, "storage", {option = "use"}) == "OpenStorage",
 	"unlocked storage remains available through the service menu")
 print(string.format("PASS: %d progression service checks", checks))

@@ -101,46 +101,45 @@ ix = {
 	type = { character = 1, string = 2 },
 	npctemplates = { templates = {} },
 }
-local meta = ix.meta.character
 local function addReward(inventory, itemID, amount, data)
 	inventory.rewards = inventory.rewards or {}
 	inventory.rewards[#inventory.rewards + 1] = { item = itemID, amount = amount, data = copy(data) }
 
 	return true
 end
-meta.__index = meta
-function meta:GetData(key, default)
+ix.meta.character.__index = ix.meta.character
+function ix.meta.character:GetData(key, default)
 	if self.data[key] == nil then return default end
 
 	return self.data[key]
 end
-function meta:SetData(key, value)
+function ix.meta.character:SetData(key, value)
 	self.data[key] = value
 	self.replications = self.replications + 1
 end
-function meta:GetJobs()
+function ix.meta.character:GetJobs()
 	return self.jobs or {}
 end
-function meta:SetJobs(jobs)
+function ix.meta.character:SetJobs(jobs)
 	self.jobs = jobs
 end
-function meta:GetPlayer()
+function ix.meta.character:GetPlayer()
 	return self.client
 end
-function meta:GetName()
+function ix.meta.character:GetName()
 	return self.name or "Test Stalker"
 end
-function meta:GetInventory()
+function ix.meta.character:GetInventory()
 	return self.inventory
 end
-function meta:GiveMoney(amount)
+function ix.meta.character:GiveMoney(amount)
 	self.money = self.money + amount
 end
-function meta:Save()
+function ix.meta.character:Save()
 	self.saves = self.saves + 1
 end
 local function character()
-	local char = setmetatable({ data = {}, replications = 0, saves = 0, money = 0 }, meta)
+	local char = setmetatable({ data = {}, replications = 0, saves = 0, money = 0 }, ix.meta.character)
 	char.inventory = { Add = addReward }
 	char.client = {
 		GetCharacter = function()
@@ -168,15 +167,14 @@ dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "libs/sh_rewards.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sv_taskrewards.lua")
 dofile(base .. "libs/sv_rewards.lua")
-local api = ix.progression
-function api.Register(id, definition)
+function ix.progression.Register(id, definition)
 	definition.id = id
-	api.definitions[id] = definition
+	ix.progression.definitions[id] = definition
 end
 
 dofile(base .. "definitions/sh_requirementpools.lua")
 return {
-	api = api,
+	api = ix.progression,
 	character = character,
 	callbacks = callbacks,
 	messages = messages,

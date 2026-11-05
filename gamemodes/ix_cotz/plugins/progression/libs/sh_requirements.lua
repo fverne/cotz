@@ -86,17 +86,16 @@ if SERVER then
 	function ix.progression.AuditDefinitions()
 		ix.progression.ValidateRequirementPools()
 		local visiting, complete = {}, {}
-		local definitions = ix.progression.definitions
 		local function visit(id)
 			if complete[id] then return end
 			assert(not visiting[id], "Progression dependency cycle at " .. tostring(id))
-			local definition = definitions[id]
+			local definition = ix.progression.definitions[id]
 			assert(definition, "Unknown progression dependency: " .. tostring(id))
 			visiting[id] = true
 			for _, required in ipairs(definition.prerequisites or {}) do visit(required) end
 			local gate = ix.progression.npcRequirements[definition.keyNpc]
 			if gate and gate ~= id then visit(gate) end
-			for predecessor, source in pairs(definitions) do
+			for predecessor, source in pairs(ix.progression.definitions) do
 				for _, successor in ipairs(source.nextProgressions or {}) do
 					if successor == id then visit(predecessor) end
 				end
@@ -105,7 +104,7 @@ if SERVER then
 			complete[id] = true
 		end
 		local count, contacts = 0, {}
-		for id, definition in pairs(definitions) do
+		for id, definition in pairs(ix.progression.definitions) do
 			visit(id)
 			count = count + 1
 			contacts[definition.keyNpc] = true

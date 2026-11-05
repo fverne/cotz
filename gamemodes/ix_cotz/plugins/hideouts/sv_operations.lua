@@ -118,10 +118,9 @@ function PLUGIN:PostLoadData()
 end
 
 function PLUGIN:InstallWalletSaveGuard()
-	local meta = ix.meta.character
-	meta.cotzHideoutSaveOriginal = meta.cotzHideoutSaveOriginal or meta.Save
-	self.originalCharacterSave = meta.cotzHideoutSaveOriginal
-	meta.Save = function(character, callback)
+	ix.meta.character.cotzHideoutSaveOriginal = ix.meta.character.cotzHideoutSaveOriginal or ix.meta.character.Save
+	self.originalCharacterSave = ix.meta.character.cotzHideoutSaveOriginal
+	ix.meta.character.Save = function(character, callback)
 		if character.cotzHideoutStale then return end
 		local pending = walletLocks[character:GetID()]
 		if pending then

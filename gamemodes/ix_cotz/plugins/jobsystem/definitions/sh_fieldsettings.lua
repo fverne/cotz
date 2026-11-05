@@ -1,20 +1,18 @@
-local field = ix.jobs.field
-
 -- Sources read existing plugin data. Pools can include sources and other pools.
-field.sources = {
+ix.jobs.field.sources = {
 	stash = {plugin = "hidestashspawner", key = "stashspawnpoints"},
 	event = {plugin = "eventcontroller", key = "eventpoints"},
 	anomaly = {plugin = "anomalycontroller", key = "anomalypoints"},
 	radiation = {plugin = "radiationcontroller", key = "radiationpoints"},
 }
 
-field.pools = {
+ix.jobs.field.pools = {
 	gas = {"anomaly", "radiation"},
 	rf = {"event"},
 	packages = {"stash"},
 }
 
-field.settings = {
+ix.jobs.field.settings = {
 	recovery = {sources = {"packages", "rf"}, cargo = "job_recovery_case", searchRadius = 384},
 	sensor = {sources = {"gas"}, cargo = "job_sensor_recorder", recordSeconds = 120,
 		leaveDistance = 512, deployDistance = 512},
@@ -40,15 +38,15 @@ field.settings = {
 	},
 }
 
-field.spawnDistance = 1024
-field.despawnDistance = 1536
-field.useDistance = 128
-field.actionInterval = 1
-field.updateInterval = 1
-field.maxDefences = 3
-field.defenceSpawnBudget = 2
+ix.jobs.field.spawnDistance = 1024
+ix.jobs.field.despawnDistance = 1536
+ix.jobs.field.useDistance = 128
+ix.jobs.field.actionInterval = 1
+ix.jobs.field.updateInterval = 1
+ix.jobs.field.maxDefences = 3
+ix.jobs.field.defenceSpawnBudget = 2
 
-field.runtimeSettings = {
+ix.jobs.field.runtimeSettings = {
 	groundUp = 32,
 	groundDown = 96,
 	groundClearance = 2,

@@ -7,9 +7,8 @@ ix.poaching.Sharpness = {
 }
 
 function ix.poaching.GetSharpness(knife)
-	local settings = ix.poaching.Sharpness
 
-	return math.Clamp(knife:GetData("sharpness", settings.default), 0, settings.maximum)
+	return math.Clamp(knife:GetData("sharpness", ix.poaching.Sharpness.default), 0, ix.poaching.Sharpness.maximum)
 end
 
 function ix.poaching.GetKnifeTier(knife)
@@ -19,7 +18,6 @@ function ix.poaching.GetKnifeTier(knife)
 end
 
 function ix.poaching.WearKnife(knife)
-	local settings = ix.poaching.Sharpness
-	local sharpness = math.min(ix.poaching.GetSharpness(knife), settings.default)
-	knife:SetData("sharpness", math.max(0, sharpness - settings.wearPerPoach))
+	local sharpness = math.min(ix.poaching.GetSharpness(knife), ix.poaching.Sharpness.default)
+	knife:SetData("sharpness", math.max(0, sharpness - ix.poaching.Sharpness.wearPerPoach))
 end

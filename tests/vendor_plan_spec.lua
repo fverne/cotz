@@ -1,7 +1,6 @@
 -- Run from the repository root: luatex --luaonly tests/vendor_plan_spec.lua
 local fixture = dofile("tests/helpers/progression.lua")
-local api = fixture.api
-api.Notify = function() end
+ix.progression.Notify = function() end
 local checks = 0
 local function check(value, message)
 	checks = checks + 1
@@ -28,7 +27,7 @@ for slug, multiplier in pairs(multipliers) do
 	check(contact.difficultyMultiplier == multiplier, "spreadsheet effort multiplier: " .. slug)
 	check(#contact.supplies == 0, "no starting sale supplies: " .. slug)
 	for _, step in ipairs(contact.progression) do
-		local definition = api.definitions[town:StepID(slug, step.id)]
+		local definition = ix.progression.definitions[town:StepID(slug, step.id)]
 		if step.kind == "delivery" then
 			for index, slot in ipairs(step.requirements) do
 				check(definition.requirementSlots[index].quantity == math.ceil(slot.quantity * multiplier),
@@ -41,7 +40,7 @@ for slug, multiplier in pairs(multipliers) do
 	end
 end
 check(#town.contacts["the-original"].progression == 0, "The Original has no finite progression")
-check(not api.definitions["cotz/town/the-original/OR01"], "retired milestones cannot grant entitlements")
+check(not ix.progression.definitions["cotz/town/the-original/OR01"], "retired milestones cannot grant entitlements")
 for _, variant in pairs(town.variantUnlocks) do
 	check(variant.contact == "vesper", "conversion milestones belong to Vesper")
 end
@@ -49,7 +48,7 @@ for _, slug in ipairs({"beanstalk", "egghead", "intern"}) do
 	check(town.contacts[slug].map == "rp_marsh_cs", "researchers use the Marsh Eco Bunker")
 	for _, step in ipairs(town.contacts[slug].progression) do
 		for _, slot in ipairs(step.requirements or {}) do
-			for _, candidate in ipairs(api.itemPools[slot.pool].candidates) do
+			for _, candidate in ipairs(ix.progression.itemPools[slot.pool].candidates) do
 				check(candidate.item:sub(1, 9) == "artifact_", "researcher hand-ins request artifacts")
 			end
 		end
@@ -59,11 +58,14 @@ check(town.contacts.carbon.catalogue.accesscard_bunker and town.contacts.intern.
 	"existing working access cards have the planned sellers")
 local saved = fixture.character()
 local savedID = town:StepID("jitters", "JT01")
-api.SetCharacterProgression(saved, {lines = {[savedID] = {active = true,
+ix.progression.SetCharacterProgression(saved, {lines = {[savedID] = {active = true,
 	requirements = {medic_bandage_1 = 7}, complexData = {medic_bandage_1 = 3}}}})
-api.AssignActiveRequirements(saved)
-check(api.GetRequirements(saved, savedID).medic_bandage_1 == 7, "new scaling preserves assigned requirements")
-check(api.GetComplexProgressionValue(saved, savedID).medic_bandage_1 == 3, "partial contributions survive")
+ix.progression.AssignActiveRequirements(saved)
+check(
+	ix.progression.GetRequirements(saved, savedID).medic_bandage_1 == 7,
+	"new scaling preserves assigned requirements"
+)
+check(ix.progression.GetComplexProgressionValue(saved, savedID).medic_bandage_1 == 3, "partial contributions survive")
 
 ix.jobs = {list = {}}
 fixture.SetMap("rp_garbage_cotz")
@@ -72,33 +74,36 @@ local progression = town:StepID("vesper", "VE02")
 ix.jobs.list[commission] = {townContact = "vesper", townProgression = progression}
 local owner = fixture.character()
 town:InitializeTownCharacter(owner)
-api.SetCompleted(owner, town:StepID("vesper", "VE01"))
+ix.progression.SetCompleted(owner, town:StepID("vesper", "VE01"))
 owner:SetData("jobClaimsPaid", {["'Vesper'"] = 1})
 town:JobCompleted(owner.client, "'Vesper'", commission)
-check(api.GetProgressionValue(owner, progression) == 1 and not api.IsCompleted(owner, progression),
+check(ix.progression.GetProgressionValue(
+	owner,
+	progression
+) == 1 and not ix.progression.IsCompleted(owner, progression),
 	"one trip advances a two-trip commission without completing it")
 town:JobCompleted(owner.client, "'Vesper'", commission)
 town:InitializeTownCharacter(owner)
-check(api.GetProgressionValue(owner, progression) == 1, "replay and reconnect cannot count a trip twice")
+check(ix.progression.GetProgressionValue(owner, progression) == 1, "replay and reconnect cannot count a trip twice")
 owner:SetData("jobClaimsPaid", {["'Vesper'"] = 2})
 town:JobCompleted(owner.client, "'Vesper'", commission)
-check(api.IsCompleted(owner, progression), "a second distinct trip completes the commission")
+check(ix.progression.IsCompleted(owner, progression), "a second distinct trip completes the commission")
 local paid = owner.money
 town:JobCompleted(owner.client, "'Vesper'", commission)
 check(owner.money == paid, "repeated completion cannot repay the commission")
 
 local interrupted = fixture.character()
 town:InitializeTownCharacter(interrupted)
-api.SetCompleted(interrupted, town:StepID("vesper", "VE01"))
+ix.progression.SetCompleted(interrupted, town:StepID("vesper", "VE01"))
 interrupted:SetData("jobClaimsPaid", {["'Vesper'"] = 31})
-local advance = api.SetProgressionValue
-api.SetProgressionValue = function() error("simulated interruption") end
+local advance = ix.progression.SetProgressionValue
+ix.progression.SetProgressionValue = function() error("simulated interruption") end
 local completed = pcall(function() town:JobCompleted(interrupted.client, "'Vesper'", commission) end)
-api.SetProgressionValue = advance
+ix.progression.SetProgressionValue = advance
 check(not completed, "fault injection interrupts advancement after journaling")
 town:InitializeTownCharacter(interrupted)
 town:InitializeTownCharacter(interrupted)
-check(api.GetProgressionValue(interrupted, progression) == 1, "recovery applies journaled count once")
+check(ix.progression.GetProgressionValue(interrupted, progression) == 1, "recovery applies journaled count once")
 local history = fixture.character()
 history:SetData("townNPCProgression", {counts = {}, pending = {
 	["'The Original'"] = {identifier = "cotz/town/commission/the-original/OR02", serial = 9},
@@ -118,12 +123,12 @@ local redacted = town:FilterNetworkRecord(viewer, localRecord)
 check(redacted.profile.reputation == 0 and not next(redacted.profile.leaderboardStats),
 	"unearned reputation and activity data are removed before publication")
 check(redacted.state == "unknown" and redacted.destination == "", "tracking destinations are redacted")
-api.SetCompleted(viewer, town:StepID("mute", "MU11"))
+ix.progression.SetCompleted(viewer, town:StepID("mute", "MU11"))
 redacted = town:FilterNetworkRecord(viewer, localRecord)
 check(redacted.profile.leaderboardStats.tasksCompleted == 30
 	and not redacted.profile.leaderboardStats.taskEarnings, "basic activity does not expose the full dossier")
-api.SetCompleted(viewer, town:StepID("mute", "MU19"))
-api.SetCompleted(viewer, town:StepID("mute", "MU23"))
+ix.progression.SetCompleted(viewer, town:StepID("mute", "MU19"))
+ix.progression.SetCompleted(viewer, town:StepID("mute", "MU23"))
 check(town:FilterNetworkRecord(viewer, full).profile.leaderboardStats.taskEarnings == 10000,
 	"earned remote and dossier services expose their fields")
 
@@ -152,7 +157,7 @@ dofile(root .. "dialogue/integrations/sh_trade.lua")
 ix.dialogue.OpenVendor(nil, shopper.client, vendor)
 check(payload.medic_bandage_1[3] == 3 and payload.value_med_peroxide[3] == 3,
 	"locked purchases remain visible only as BUYONLY when also requested")
-api.SetCompleted(shopper, town:StepID("jitters", town.contacts.jitters.catalogue.medic_bandage_1.step))
+ix.progression.SetCompleted(shopper, town:StepID("jitters", town.contacts.jitters.catalogue.medic_bandage_1.step))
 ix.dialogue.OpenVendor(nil, shopper.client, vendor)
 check(payload.medic_bandage_1[3] == 1, "earning the purchase milestone exposes the sale mode")
 check(not town:CanBuyItem(shopper, "medic_medkit_6", "'Jitters'"), "stale high-tier clinic sales remain blocked")
@@ -213,9 +218,9 @@ local function serviceVendor(name)
 		CanAccess = function() return true end, GetPos = function() return fixture.position end}
 end
 local provider = serviceVendor("'Vesper'")
-api.SetCompleted(converter, town.itemGates.suit_anorak.id)
-api.SetCompleted(converter, town.serviceGates.suitVariants.id)
-api.SetCompleted(converter, town:StepID("vesper", town.variantUnlocks.suit_anorak_anarchist.step))
+ix.progression.SetCompleted(converter, town.itemGates.suit_anorak.id)
+ix.progression.SetCompleted(converter, town.serviceGates.suitVariants.id)
+ix.progression.SetCompleted(converter, town:StepID("vesper", town.variantUnlocks.suit_anorak_anarchist.step))
 converter.money = 100000
 ix.item.Instance = function(_, _, data, _, _, callback)
 	inserts[#inserts + 1] = {data = table.Copy(data), callback = callback}
@@ -303,7 +308,7 @@ ix.plugin = {Get = function(id)
 	return personal
 end}
 check(not town:OpenTownStorage(converter.client, storage), "storage access requires its own milestone")
-api.SetCompleted(converter, town.serviceGates.storage.id)
+ix.progression.SetCompleted(converter, town.serviceGates.storage.id)
 converter:SetData("bankID", 51)
 converter:SetData("bankW", 3)
 converter:SetData("bankH", 4)
@@ -319,9 +324,8 @@ check(opened[2] == bank and bank.owner == 42 and bank.width == 3 and bank.height
 check(opened[3].entity == storage, "storage uses the real vendor for ongoing proximity checks")
 
 dofile(root .. "jobsystem/libs/sh_fieldtasks.lua")
-local field = ix.jobs.field
-field.runtimeSettings = {deployForwardDistance = 24}
-field.enabled = true
+ix.jobs.field.runtimeSettings = {deployForwardDistance = 24}
+ix.jobs.field.enabled = true
 net.Receive = function() end
 dofile(root .. "jobsystem/sv_fieldactions.lua")
 local courierJob = {rewardKey = "courier-before-move", numberRec = 1,
@@ -330,21 +334,21 @@ converter.jobs = {["'Atlas'"] = courierJob}
 function converter.client:Alive() return true end
 function converter.client:IsRestricted() return false end
 local cargoRemoved = 0
-field.FindCargo = function()
+ix.jobs.field.FindCargo = function()
 	return {Remove = function() cargoRemoved = cargoRemoved + 1 return true end}
 end
 local receiptSaved = 0
-field.SaveJob = function() receiptSaved = receiptSaved + 1 end
+ix.jobs.field.SaveJob = function() receiptSaved = receiptSaved + 1 end
 local receiver = serviceVendor("'Egghead'")
-check(field.GetRecipientMap(courierJob.fieldTask) == "rp_marsh_cs"
+check(ix.jobs.field.GetRecipientMap(courierJob.fieldTask) == "rp_marsh_cs"
 	and courierJob.fieldTask.recipientMap == "rp_waystation", "old deliveries resolve the relocated recipient")
-check(not field.DeliverToContact(converter.client, receiver, "'Atlas'", "stale-claim"),
+check(not ix.jobs.field.DeliverToContact(converter.client, receiver, "'Atlas'", "stale-claim"),
 	"relocation does not permit stale delivery claims")
-check(field.DeliverToContact(converter.client, receiver, "'Atlas'", courierJob.rewardKey),
+check(ix.jobs.field.DeliverToContact(converter.client, receiver, "'Atlas'", courierJob.rewardKey),
 	"a saved courier assignment can be handed in at the relocated scientist")
 check(cargoRemoved == 1 and receiptSaved == 1 and courierJob.isCompleted,
 	"the relocated hand-in consumes and saves once")
-check(not field.DeliverToContact(converter.client, receiver, "'Atlas'", courierJob.rewardKey),
+check(not ix.jobs.field.DeliverToContact(converter.client, receiver, "'Atlas'", courierJob.rewardKey),
 	"the relocated delivery cannot be replayed")
 
 print(string.format("PASS: %d approved vendor plan checks", checks))

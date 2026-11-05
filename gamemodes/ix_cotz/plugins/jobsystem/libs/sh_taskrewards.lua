@@ -1,26 +1,21 @@
 ix.taskRewards = ix.taskRewards or {}
-
-local settings = ix.taskRewards.settings
-local PROFILES = settings.profiles
-local SUPPLY_CATALOGUE_VERSION = settings.supplyCatalogueVersion
-local MAX_PACKAGE_ITEMS = settings.maxPackageItems
-local CHOICE_COUNT = settings.choiceCount
-local DIFFICULTY_REPUTATION = settings.difficultyReputation
-local JOB_SUPPLY_SHARE = settings.jobSupplyShare
-local JOB_MAX_SUPPLY_ITEMS = settings.jobMaxSupplyItems
-local JOB_MIN_SUPPLY_BUDGET = settings.jobMinSupplyBudget
-local BONUS_INTERVAL = settings.bonusInterval
-local CREDIT_PREMIUM = settings.creditPremium
-local JOB_SUPPLY_CASH_SHARE = settings.jobSupplyCashShare
-local JOB_CASH_RATE = settings.jobCashRate
-local JOB_REFERENCE_CASH_RATE = settings.jobReferenceCashRate
-local CASH_ROUNDING_EPSILON = settings.cashRoundingEpsilon
-local MAX_DEPTH = settings.maxDepth
-local GENERATED_QUANTITIES = settings.generatedQuantities
+local SUPPLY_CATALOGUE_VERSION = ix.taskRewards.settings.supplyCatalogueVersion
+local MAX_PACKAGE_ITEMS = ix.taskRewards.settings.maxPackageItems
+local CHOICE_COUNT = ix.taskRewards.settings.choiceCount
+local JOB_SUPPLY_SHARE = ix.taskRewards.settings.jobSupplyShare
+local JOB_MAX_SUPPLY_ITEMS = ix.taskRewards.settings.jobMaxSupplyItems
+local JOB_MIN_SUPPLY_BUDGET = ix.taskRewards.settings.jobMinSupplyBudget
+local BONUS_INTERVAL = ix.taskRewards.settings.bonusInterval
+local CREDIT_PREMIUM = ix.taskRewards.settings.creditPremium
+local JOB_SUPPLY_CASH_SHARE = ix.taskRewards.settings.jobSupplyCashShare
+local JOB_CASH_RATE = ix.taskRewards.settings.jobCashRate
+local JOB_REFERENCE_CASH_RATE = ix.taskRewards.settings.jobReferenceCashRate
+local CASH_ROUNDING_EPSILON = ix.taskRewards.settings.cashRoundingEpsilon
+local MAX_DEPTH = ix.taskRewards.settings.maxDepth
 local townProfiles = {}
 
 function ix.taskRewards.SetProfile(npc, items)
-	PROFILES[npc] = table.Copy(items)
+	ix.taskRewards.settings.profiles[npc] = table.Copy(items)
 end
 
 function ix.taskRewards.SetTownProfile(npc, profile)
@@ -70,7 +65,8 @@ expectedItem = function(itemID, data, depth)
 	assert(depth <= MAX_DEPTH, "Recursive task reward kit: " .. tostring(itemID))
 	local item = assert(ix.item.list[itemID], "Unknown task reward: " .. tostring(itemID))
 	if type(item.items) ~= "table" or #item.items == 0 then
-		local generated = GENERATED_QUANTITIES[itemID] or average(item.quantity or item.ammoAmount, 1)
+		local generated = ix.taskRewards.settings.generatedQuantities[itemID]
+			or average(item.quantity or item.ammoAmount, 1)
 		local quantity = average((data or {}).quantity, generated)
 		local condition = item.isWeapon and average((data or {}).durability, 100) / 100 or 1
 
@@ -155,14 +151,13 @@ function ix.taskRewards.IsConsumableSupply(itemID)
 end
 
 local function townRewardUnlocked(character, npc, itemID)
-	local town = ix.townNPCs
-	if not town or not town.installed then return true end
-	local gate = town.itemGates[itemID]
-	if not gate then return not town:IsPurchaseExcluded(itemID) end
-	if not gate.sellers or gate.sellers[npc] then return town:CanBuyItem(character, itemID, npc) end
+	if not ix.townNPCs or not ix.townNPCs.installed then return true end
+	local gate = ix.townNPCs.itemGates[itemID]
+	if not gate then return not ix.townNPCs:IsPurchaseExcluded(itemID) end
+	if not gate.sellers or gate.sellers[npc] then return ix.townNPCs:CanBuyItem(character, itemID, npc) end
 	-- A support reward may use an earned seller route without unlocking purchases at other contacts.
 	for seller in pairs(gate.sellers) do
-		if town:CanBuyItem(character, itemID, seller) then return true end
+		if ix.townNPCs:CanBuyItem(character, itemID, seller) then return true end
 	end
 
 	return false
@@ -207,7 +202,9 @@ function ix.taskRewards.SupplyCatalogue(character, npc)
 
 		return result
 	end
-	for _, itemID in ipairs(PROFILES[npc] or PROFILES["NPC"]) do consider(itemID) end
+	for _, itemID in ipairs(ix.taskRewards.settings.profiles[npc] or ix.taskRewards.settings.profiles["NPC"]) do
+		consider(itemID)
+	end
 	for _, definition in pairs(ix.progression.definitions) do
 		for _, unlock in ipairs(definition.vendorUnlocks or {}) do
 			if unlock.npc == npc then consider(unlock.args[1]) end
@@ -356,7 +353,8 @@ end
 
 function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, suppliesOnly)
 	local candidates = {}
-	for _, itemID in ipairs(catalogue or PROFILES[npc] or PROFILES["NPC"]) do
+	for _, itemID in ipairs(catalogue
+		or ix.taskRewards.settings.profiles[npc] or ix.taskRewards.settings.profiles["NPC"]) do
 		local item = ix.item.list[itemID]
 		local unit = item and ix.taskRewards.UnitValue(itemID) or 0
 		local eligible = suppliesOnly and canReceiveSupply(character, npc, itemID)
@@ -453,7 +451,7 @@ end
 
 function ix.taskRewards.CanTakeDifficulty(character, difficulty)
 	if difficulty == "easy" then return true end
-	local required = DIFFICULTY_REPUTATION[difficulty]
+	local required = ix.taskRewards.settings.difficultyReputation[difficulty]
 
 	return required ~= nil and character:GetPlayer():getReputation() >= required
 end
@@ -515,7 +513,7 @@ function ix.taskRewards.Validate()
 		end
 		for _, id in ipairs(profile.bonusItems or {}) do assert(ix.item.list[id], "Unknown town bonus: " .. id) end
 	end
-	for _, items in pairs(PROFILES) do
+	for _, items in pairs(ix.taskRewards.settings.profiles) do
 		for _, id in ipairs(items) do assert(ix.item.list[id], "Unknown contact supply: " .. id) end
 	end
 	for _, job in pairs(ix.jobs.list) do ix.taskRewards.JobBudget(job) end

@@ -1,5 +1,4 @@
 local PLUGIN = PLUGIN
-local rules = ix.jobs.killCredit
 
 local function matches(rule, class)
 	for _, name in ipairs(rule.classes or {}) do
@@ -31,7 +30,7 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	local character = attacker:GetCharacter()
 	if character then ix.jobs.RecordLeaderboardKill(character, class) end
 	local clients
-	for _, rule in ipairs(rules) do
+	for _, rule in ipairs(ix.jobs.killCredit) do
 		if matches(rule, class) then
 			clients = clients or recipients(entity, attacker)
 			for _, trigger in ipairs(rule.triggers) do

@@ -47,13 +47,12 @@ ix.meta.character = {Save = function(character, callback)
 	query:Callback(function() if callback then callback() end end)
 	query:Execute()
 end}
-local inventoryMeta = ix.meta.inventory
-function inventoryMeta:New(id, width, height)
+function ix.meta.inventory:New(id, width, height)
 	local inventory = setmetatable({}, {__index = self})
 	inventory:Initialize(id, width, height)
 	return inventory
 end
-inventoryMeta.SendSlot = function() end
+ix.meta.inventory.SendSlot = function() end
 ix.item.inventoryTypes = {}
 ix.type = {string = 1, optional = 2, player = 3, text = 4, bool = 5}
 bit = {bor = function(a, b) return a + b end}

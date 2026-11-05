@@ -1,5 +1,4 @@
 local PLUGIN = PLUGIN
-local UI = ix.cotzUI
 local REFRESH_INTERVAL = 5
 local CACHE_LIFETIME = REFRESH_INTERVAL * 2
 local DIM_DISTANCE = 1024
@@ -98,7 +97,7 @@ local function drawPoint(point, color, position)
 	color.a = alpha
 	surface.SetDrawColor(color.r, color.g, color.b, alpha)
 	surface.DrawOutlinedRect(screen.x - MARKER_SIZE / 2, screen.y - MARKER_SIZE / 2, MARKER_SIZE, MARKER_SIZE)
-	UI.DrawMarker(point.label, screen.x, screen.y - LABEL_OFFSET, color)
+	ix.cotzUI.DrawMarker(point.label, screen.x, screen.y - LABEL_OFFSET, color)
 end
 
 function PLUGIN:HUDPaint()

@@ -57,11 +57,10 @@ function ix.jobs.GetLeaderboardStats(data)
 	local favorites = {}
 	local mostCompleted = 0
 	local lines = (data.progression or {}).lines or {}
-	local town = ix.townNPCs
-	for slug, contact in pairs(town and town.contacts or {}) do
+	for slug, contact in pairs(ix.townNPCs and ix.townNPCs.contacts or {}) do
 		local completed = 0
 		for _, step in ipairs(contact.progression or {}) do
-			local line = lines[town:StepID(slug, step.id)]
+			local line = lines[ix.townNPCs:StepID(slug, step.id)]
 			if line and line.completed then completed = completed + 1 end
 		end
 		if completed > mostCompleted then

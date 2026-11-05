@@ -1,19 +1,18 @@
 ix.crossserver = ix.crossserver or {}
-local cross = ix.crossserver
 
 local PRESENCE_COLORS = {
 	localMap = Color(105, 139, 87), remote = Color(73, 140, 143),
 	travelling = Color(167, 143, 81), unavailable = Color(116, 119, 107),
 }
 
-function cross.GetMapLabel(map)
+function ix.crossserver.GetMapLabel(map)
 	local plugin = ix.plugin.Get("simplecrossserver")
 	local definition = plugin and plugin.mapdata and plugin.mapdata[map]
 
 	return string.upper(definition and definition.name or map or "UNKNOWN")
 end
 
-function cross.GetPresenceColor(info, fresh, localPlayer)
+function ix.crossserver.GetPresenceColor(info, fresh, localPlayer)
 	if fresh and info.state == "travelling" then return PRESENCE_COLORS.travelling end
 	if localPlayer then return PRESENCE_COLORS.localMap end
 	if fresh and info.state == "online" then return PRESENCE_COLORS.remote end
@@ -21,11 +20,13 @@ function cross.GetPresenceColor(info, fresh, localPlayer)
 	return PRESENCE_COLORS.unavailable
 end
 
-function cross.GetPresenceText(info, fresh, localPlayer)
-	if (fresh and info.state == "travelling") then return "TRAVELLING: " .. cross.GetMapLabel(info.destination) end
-	if (localPlayer) then return "ONLINE: " .. cross.GetMapLabel(game.GetMap()) end
+function ix.crossserver.GetPresenceText(info, fresh, localPlayer)
+	if (fresh and info.state == "travelling") then
+		return "TRAVELLING: " .. ix.crossserver.GetMapLabel(info.destination)
+	end
+	if (localPlayer) then return "ONLINE: " .. ix.crossserver.GetMapLabel(game.GetMap()) end
 	if (not fresh or info.state == "unknown") then return "STATUS UNAVAILABLE" end
-	if (info.state == "online") then return "ONLINE: " .. cross.GetMapLabel(info.map) end
+	if (info.state == "online") then return "ONLINE: " .. ix.crossserver.GetMapLabel(info.map) end
 	if (info.state == "offline") then return "OFFLINE" end
 
 	return "STATUS UNAVAILABLE"
@@ -35,7 +36,7 @@ if (CLIENT) then
 	local pending
 	net.Receive("cotz/crossserver/roster", function()
 		local changed = net.ReadBool()
-		if (not changed) then cross.rosterFresh = CurTime() return end
+		if (not changed) then ix.crossserver.rosterFresh = CurTime() return end
 		if (net.ReadBool()) then pending = {} end
 		local finished = net.ReadBool()
 		local count = net.ReadUInt(6)
@@ -56,16 +57,16 @@ if (CLIENT) then
 			if (pending) then pending[record.characterID] = record end
 		end
 		if (finished and pending) then
-			cross.roster = pending
-			cross.rosterFresh = CurTime()
+			ix.crossserver.roster = pending
+			ix.crossserver.rosterFresh = CurTime()
 			pending = nil
 		end
 	end)
 
-	function cross.GetScoreboardRoster(localOnly)
+	function ix.crossserver.GetScoreboardRoster(localOnly)
 		local records = {}
-		local fresh = cross.rosterFresh ~= nil and CurTime() - cross.rosterFresh < 15
-		for id, info in pairs(cross.roster or {}) do
+		local fresh = ix.crossserver.rosterFresh ~= nil and CurTime() - ix.crossserver.rosterFresh < 15
+		for id, info in pairs(ix.crossserver.roster or {}) do
 			if (not localOnly or (fresh and info.map == game.GetMap())) then
 				local record = table.Copy(info)
 				record.fresh = fresh

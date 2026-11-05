@@ -91,14 +91,13 @@ ix = {util = {WrapText = function(text, width, font)
 	return lines
 end}}
 dofile("gamemodes/ix_cotz/schema/libs/cl_cotzui.lua")
-local UI = ix.cotzUI
-local frame, scroll = UI.Frame("Management", 0.8, 0.75, 900)
+local frame, scroll = ix.cotzUI.Frame("Management", 0.8, 0.75, 900)
 check(fontCount == 3, "Shared fonts are created once for a screen scale")
-UI.Scale(1)
+ix.cotzUI.Scale(1)
 check(fontCount == 3, "Repeated drawing reuses fonts")
-local field = UI.StyleEntry(scroll:Add("DTextEntry"))
-UI.SetHeight(field, 34)
-local button = UI.Button(scroll, string.rep("Long item name ", 12), function() end)
+local field = ix.cotzUI.StyleEntry(scroll:Add("DTextEntry"))
+ix.cotzUI.SetHeight(field, 34)
+local button = ix.cotzUI.Button(scroll, string.rep("Long item name ", 12), function() end)
 button:PerformLayout(800, 34)
 local wideHeight = button:GetTall()
 button:PerformLayout(240, 34)
@@ -112,12 +111,12 @@ for _, resolution in ipairs({{1024, 768}, {1280, 720}, {1920, 1080}, {3440, 1440
 	frame:PerformLayout(frame:GetWide(), frame:GetTall())
 	check(frame.x >= 0 and frame.y >= 0 and frame.x + frame.width <= screenWidth
 		and frame.y + frame.height <= screenHeight, "Frame stays within the resized viewport")
-	check(field:GetTall() == UI.Scale(34), "Existing inputs resize with refreshed fonts")
-	check(scroll:GetVBar():GetWide() == UI.Scale(6), "Existing scrollbars resize with the frame")
+	check(field:GetTall() == ix.cotzUI.Scale(34), "Existing inputs resize with refreshed fonts")
+	check(scroll:GetVBar():GetWide() == ix.cotzUI.Scale(6), "Existing scrollbars resize with the frame")
 	check(frame.btnClose.x + frame.btnClose.width <= frame.width, "Close control remains inside its frame")
 	for _, position in ipairs({{-30, -30}, {screenWidth + 20, screenHeight + 20}}) do
 		rectangles = {}
-		UI.DrawMarker("Field assignment", position[1], position[2])
+		ix.cotzUI.DrawMarker("Field assignment", position[1], position[2])
 		local rect = rectangles[1]
 		check(rect[1] >= 0 and rect[2] >= 0 and rect[1] + rect[3] <= screenWidth
 			and rect[2] + rect[4] <= screenHeight, "Off-edge marker labels stay on screen")
@@ -144,33 +143,33 @@ DermaMenu = function()
 	return menu
 end
 local selected
-local menu = UI.Menu()
+local menu = ix.cotzUI.Menu()
 local option = menu:AddOption("Read signal", function() selected = "read" end)
 option:DoClick()
 check(selected == "read", "Menu styling preserves option callbacks")
-local combo = UI.StyleCombo(panel("DComboBox"))
+local combo = ix.cotzUI.StyleCombo(panel("DComboBox"))
 combo:OnMenuOpened(menu)
 option:DoClick()
 check(selected == "read" and option.font == "cotzUISmall", "Opened dropdown options retain their actions")
 local submissions = 0
-local query = UI.Query("Donate this item?", "Donation", "Donate", function() submissions = submissions + 1 end,
+local query = ix.cotzUI.Query("Donate this item?", "Donation", "Donate", function() submissions = submissions + 1 end,
 	"Cancel")
 find(query, "Cancel", "DButton"):DoClick()
 check(query.closed and submissions == 0, "Cancel closes a confirmation without submitting its action")
-query = UI.Query("Buy this item?", "Purchase", "Buy", function() submissions = submissions + 1 end, "Cancel")
+query = ix.cotzUI.Query("Buy this item?", "Purchase", "Buy", function() submissions = submissions + 1 end, "Cancel")
 find(query, "Buy", "DButton"):DoClick()
 check(query.closed and submissions == 1, "Confirmation runs its existing callback")
 local received
-local entryFrame = UI.StringRequest("Treasury", "Roubles", "0", function(value) received = value end)
+local entryFrame = ix.cotzUI.StringRequest("Treasury", "Roubles", "0", function(value) received = value end)
 local entry = find(entryFrame, nil, "DTextEntry")
 entry:SetText("1250")
 entry:OnEnter()
 check(entryFrame.closed and received == "1250", "Enter captures the value before destroying the entry")
 received = nil
-entryFrame = UI.StringRequest("Listing", "Price", "100", function(value) received = value end)
+entryFrame = ix.cotzUI.StringRequest("Listing", "Price", "100", function(value) received = value end)
 find(entryFrame, "Cancel", "DButton"):DoClick()
 check(entryFrame.closed and received == nil, "Cancel does not publish an edited price")
-local message = UI.Message("Invalid slot", "Marker", "OK")
+local message = ix.cotzUI.Message("Invalid slot", "Marker", "OK")
 find(message, "OK", "DButton"):DoClick()
 check(message.closed, "Validation messages remain dismissible")
 local indicators = {}

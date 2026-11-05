@@ -10,9 +10,9 @@ ix.char.RegisterVar("SherpaVendors", {
 	bNoDisplay = true,
 })
 
-local charMeta = ix.meta.character or {}
+ix.meta.character = ix.meta.character or {}
 
-function charMeta:HasSherpaVendor(sherpavendor)
+function ix.meta.character:HasSherpaVendor(sherpavendor)
   	local sherpaVendors = self:GetSherpaVendors()
 	for k, v in pairs(sherpaVendors) do
 		if sherpavendor == v then

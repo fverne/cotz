@@ -108,6 +108,10 @@ The remaining rules are proposed project defaults.
 - Use camelCase for locals and local helpers, SCREAMING_SNAKE for constants, and PascalCase for new
   public methods. Preserve existing framework names and externally referenced APIs.
 - Keep internal helpers and state local. Extend the existing feature namespace instead of adding globals.
+- Use full library paths directly in definitions and callers, such as `ix.cotzUI.Scale(...)`.
+  Do not assign libraries, sub-libraries, or their functions to convenience variables such as
+  `local UI = ix.cotzUI` or `local field = ix.jobs.field`. This overrides the GLua skill's
+  localization advice. Preserve necessary loader-table captures and original callbacks for detours.
 - Use early returns and small, focused functions. Keep nesting to three levels where practical.
 - Name meaningful tuning values. Keep balance data in definitions or configuration, separate from logic.
 - Comment non-obvious intent, compatibility constraints, or workarounds. Do not narrate obvious code.

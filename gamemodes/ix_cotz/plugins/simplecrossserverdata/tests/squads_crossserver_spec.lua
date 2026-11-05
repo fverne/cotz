@@ -137,14 +137,19 @@ local function client(char)
 	function value:Alive() return false end
 	return value
 end
-ix.crossserver = {}
-dofile("gamemodes/ix_cotz/plugins/simplecrossserverdata/sv_presence.lua")
-local presencePlugin = PLUGIN
-PLUGIN = {}
-dofile(root .. "sv_crossserver.lua")
-local serverA = ix.squad.cross
-serverA.Initialize()
-check(serverA.ready, "schema initializes using real SQL")
+-- A separate Lua environment preserves the first process's library namespace after loading the second.
+local serverAEnvironment = setmetatable({
+	ix = setmetatable({
+		crossserver = {},
+		squad = setmetatable({}, {__index = ix.squad}),
+	}, {__index = ix}),
+	PLUGIN = {},
+}, {__index = _G})
+assert(loadfile("gamemodes/ix_cotz/plugins/simplecrossserverdata/sv_presence.lua", "t", serverAEnvironment))()
+serverAEnvironment.PLUGIN = {}
+assert(loadfile(root .. "sv_crossserver.lua", "t", serverAEnvironment))()
+serverAEnvironment.ix.squad.cross.Initialize()
+check(serverAEnvironment.ix.squad.cross.ready, "schema initializes using real SQL")
 check(ix.char.vars.squadID.bSaveLoadInitialOnly and ix.char.vars.squadOfficer.bSaveLoadInitialOnly,
 	"Helix full saves cannot overwrite authoritative membership")
 check(query("SELECT member_rank FROM ix_squads_members WHERE scope='ix_cotz' AND character_id=1")[1].member_rank == "2",
@@ -155,12 +160,12 @@ alt.squad = "stale"
 local leaderClient, memberClient = client(leader), client(member)
 humans = {leaderClient, memberClient}
 ix.char.loaded = {[1] = leader, [2] = member, [3] = alt}
-serverA.Refresh()
+serverAEnvironment.ix.squad.cross.Refresh()
 check(leader:GetSquadID() == "char:1" and member:GetSquadID() == "char:1", "refresh updates Helix cached objects")
 check(alt:GetSquadID() == "NULL", "Helix account cache refreshes inactive alternatives without inheriting membership")
-serverA.Claim(leaderClient, leader)
-check(serverA.sessions[1].claimed, "presence session is claimed")
-local oldSession = serverA.sessions[1]
+serverAEnvironment.ix.squad.cross.Claim(leaderClient, leader)
+check(serverAEnvironment.ix.squad.cross.sessions[1].claimed, "presence session is claimed")
+local oldSession = serverAEnvironment.ix.squad.cross.sessions[1]
 -- Simulate another process, sharing SQL but with its own Helix character cache.
 map = "map_b"
 ix.crossserver = {}
@@ -168,39 +173,38 @@ PLUGIN = {}
 dofile("gamemodes/ix_cotz/plugins/simplecrossserverdata/sv_presence.lua")
 PLUGIN = {}
 dofile(root .. "sv_crossserver.lua")
-local serverB = ix.squad.cross
-serverB.Initialize()
+ix.squad.cross.Initialize()
 local remoteLeader = character(1)
 local remoteClient = client(remoteLeader)
 humans = {remoteClient}
 ix.char.loaded = {[1] = remoteLeader}
-serverB.Claim(remoteClient, remoteLeader)
+ix.squad.cross.Claim(remoteClient, remoteLeader)
 check(remoteLeader.kicked, "a second server cannot take over a live character lease")
 remoteLeader.kicked = nil
 map = "map_a"
 local handedOff
-serverA.BeginTransfer(leader, "map_b", function(success) handedOff = success end)
+serverAEnvironment.ix.squad.cross.BeginTransfer(leader, "map_b", function(success) handedOff = success end)
 check(handedOff, "transfer publishes its handoff after database success")
 map = "map_b"
-serverB.Claim(remoteClient, remoteLeader)
-check(serverB.sessions[1] and serverB.sessions[1].claimed, "destination acquires the transfer session")
-local newToken = serverB.sessions[1].token
+ix.squad.cross.Claim(remoteClient, remoteLeader)
+check(ix.squad.cross.sessions[1] and ix.squad.cross.sessions[1].claimed, "destination acquires the transfer session")
+local newToken = ix.squad.cross.sessions[1].token
 oldSession.travelling = false
-serverA.Heartbeat(1, oldSession)
+serverAEnvironment.ix.squad.cross.Heartbeat(1, oldSession)
 check(leader.kicked, "a source that lost its lease unloads its obsolete character session")
-serverA.Release(1, oldSession)
+serverAEnvironment.ix.squad.cross.Release(1, oldSession)
 check(query("SELECT session FROM ix_squads_presence WHERE character_id=1")[1].session == newToken,
 	"source disconnect cannot clear the destination session")
-serverB.Refresh()
+ix.squad.cross.Refresh()
 check(ix.squad.list["char:1"].memberInfo[1].map == "map_b", "roster includes remote presence map")
-serverB.ChangeRank(2, remoteClient)
+ix.squad.cross.ChangeRank(2, remoteClient)
 check(query("SELECT member_rank FROM ix_squads_members WHERE scope='ix_cotz' AND character_id=2")[1].member_rank == "1",
 	"remote promotion updates the exact authoritative character")
-serverB.ChangeRank(2, remoteClient, 1)
-serverB.ChangeRank(2, remoteClient, 1)
+ix.squad.cross.ChangeRank(2, remoteClient, 1)
+ix.squad.cross.ChangeRank(2, remoteClient, 1)
 check(query("SELECT member_rank FROM ix_squads_members WHERE scope='ix_cotz' AND character_id=2")[1].member_rank == "1",
 	"repeated desired-rank requests cannot toggle the target back")
-serverB.KickMember(2, remoteClient)
+ix.squad.cross.KickMember(2, remoteClient)
 check(query("SELECT squad_id FROM ix_squads_members WHERE scope='ix_cotz' AND character_id=2")[1].squad_id == "NULL",
 	"remote kick clears authoritative membership")
 check(query("SELECT squad_id FROM ix_characters WHERE id=2")[1].squad_id == "char:1",
@@ -209,57 +213,57 @@ check(query("SELECT squad_id FROM ix_characters WHERE id=2")[1].squad_id == "cha
 local inviteeClient = client(alt)
 humans = {remoteClient, inviteeClient}
 ix.char.loaded[3] = alt
-serverB.Invite(inviteeClient, remoteClient)
+ix.squad.cross.Invite(inviteeClient, remoteClient)
 check(remoteClient.notice:find("invitation sent", 1, true), "sender receives committed invite notification")
 check(inviteeClient.localizedNotice == "squad_invite", "target receives invite notification")
 check(inviteeClient.squad_invite ~= nil, "shared invitation is delivered to the target character")
-serverB.AcceptInvite(inviteeClient)
+ix.squad.cross.AcceptInvite(inviteeClient)
 check(query("SELECT squad_id FROM ix_squads_members WHERE character_id=3")[1].squad_id == "char:1",
 	"shared invitation acceptance joins the intended character")
-serverB.AcceptInvite(inviteeClient)
+ix.squad.cross.AcceptInvite(inviteeClient)
 check(alt:GetSquadID() == "char:1", "replayed acceptance does not alter membership")
-serverB.Leave(inviteeClient)
+ix.squad.cross.Leave(inviteeClient)
 check(alt:GetSquadID() == "NULL", "shared leave clears the exact cached character")
-serverB.SaveSettings(remoteClient, {name = "Shared name", description = "Shared message"})
+ix.squad.cross.SaveSettings(remoteClient, {name = "Shared name", description = "Shared message"})
 check(query("SELECT name FROM ix_squads_state WHERE squad_id='char:1'")[1].name == "Shared name",
 	"settings are persisted in the authoritative state")
 local message = "O'Brien'; DROP TABLE ix_squads_members; --"
-serverB.SaveSettings(remoteClient, {description = message})
+ix.squad.cross.SaveSettings(remoteClient, {description = message})
 check(query("SELECT description FROM ix_squads_state WHERE squad_id='char:1'")[1].description == message,
 	"wrapper escaping preserves apostrophes and SQL-like user text as data")
 check(#query("SELECT * FROM ix_squads_members") > 0, "SQL-like text cannot execute an additional statement")
 -- Simulate a demotion on another process while this server still has stale permissions cached.
 query("UPDATE ix_squads_members SET member_rank=0 WHERE character_id=1")
-serverB.SaveSettings(remoteClient, {name = "Unauthorized"})
+ix.squad.cross.SaveSettings(remoteClient, {name = "Unauthorized"})
 check(query("SELECT name FROM ix_squads_state WHERE squad_id='char:1'")[1].name == "Shared name",
 	"database permissions reject stale cached leadership")
 query("UPDATE ix_squads_members SET member_rank=2 WHERE character_id=1")
 query("UPDATE ix_squads_presence SET expires=0 WHERE character_id=1")
-serverB.Refresh()
+ix.squad.cross.Refresh()
 check(ix.squad.list["char:1"].memberInfo[1].state == "offline", "expired sessions are not reported online")
-serverB.Heartbeat(1, serverB.sessions[1])
+ix.squad.cross.Heartbeat(1, ix.squad.cross.sessions[1])
 local originalHook = hook.Run
 hook.Run = function() return false end
-serverB.Heartbeat(1, serverB.sessions[1])
-serverB.Refresh()
+ix.squad.cross.Heartbeat(1, ix.squad.cross.sessions[1])
+ix.squad.cross.Refresh()
 check(ix.squad.list["char:1"].memberInfo[1].state == "unknown"
 	and ix.squad.list["char:1"].memberInfo[1].map == "", "hidden characters do not expose remote presence")
 hook.Run = originalHook
 -- A stale cached leader cannot edit after disbanding in SQL.
-serverB.Disband("char:1", 1)
-serverB.SaveSettings(remoteClient, {name = "Should not survive"})
+ix.squad.cross.Disband("char:1", 1)
+ix.squad.cross.SaveSettings(remoteClient, {name = "Should not survive"})
 check(query("SELECT active FROM ix_squads_state WHERE squad_id='char:1'")[1].active == "0",
 	"disband leaves an authoritative tombstone")
 check(remoteLeader:GetSquadID() == "NULL", "remote disband clears loaded character mirrors")
-serverB.ready = false
-serverB.Initialize()
+ix.squad.cross.ready = false
+ix.squad.cross.Initialize()
 check(query("SELECT squad_id FROM ix_squads_members WHERE character_id=2")[1].squad_id == "NULL",
 	"restart migration cannot resurrect a kicked member")
 check(query("SELECT active FROM ix_squads_state WHERE squad_id='char:1'")[1].active == "0",
 	"restart migration cannot resurrect a disbanded squad")
 -- New squads use distinct keys; members can join after their previous squad was disbanded.
 local created
-serverB.New("New group", remoteLeader, function(value) created = value end)
+ix.squad.cross.New("New group", remoteLeader, function(value) created = value end)
 check(created and created.owner ~= "char:1", "creation makes a new stable key after disband")
 check(query("SELECT member_rank FROM ix_squads_members WHERE character_id=1")[1].member_rank == "2",
 	"new founder membership is authoritative")
@@ -312,7 +316,7 @@ mysql.Update = originalUpdate
 local gotFailure
 local broken = mysql:Select("ix_squads_state")
 broken:Select("deliberately_missing_column")
-serverB.Query(broken, function(_, failureText)
+ix.squad.cross.Query(broken, function(_, failureText)
 	gotFailure = failureText
 end)
 check(gotFailure and #errors == 1, "query errors are reported and delivered to the caller")
@@ -323,7 +327,7 @@ mysql.connection = {query = function() return fakeQuery end,
 	escape = function(_, value) return value:gsub("'", "''") end}
 local completions = 0
 local constant = mysql:Select():SelectValue(1)
-serverB.Query(constant, function() completions = completions + 1 end)
+ix.squad.cross.Query(constant, function() completions = completions + 1 end)
 timers[#timers]()
 fakeQuery.onSuccess(fakeQuery, {})
 check(completions == 1, "late query completion cannot run after the timeout callback")
@@ -335,7 +339,7 @@ ix.plugin = {Get = function(name)
 		return {state = {hideouts = {{ownerType = "squad", squadID = created.owner}}}}
 	end
 end}
-serverB.RefreshSquads()
+ix.squad.cross.RefreshSquads()
 check(ix.squad.list[created.owner] and ix.squad.list[created.owner].hideoutFresh == now,
 	"provisioned hideouts retain fresh squad authority while all members are offline")
 humans = previousHumans

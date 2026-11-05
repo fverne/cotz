@@ -2,7 +2,6 @@ local PLUGIN = PLUGIN
 local marker
 local nextRequest = 0
 local MARKER_SECONDS = ix.jobs.field.runtimeSettings.markerSeconds
-local UI = ix.cotzUI
 local METRES_PER_UNIT = 0.01905
 local MARKER_OFFSET = Vector(0, 0, 24)
 local ACTIONS = {status = "Show assignment", deploy = "Deploy sensor", read = "Take signal reading",
@@ -18,7 +17,7 @@ local function request(npc, action)
 end
 
 function ix.jobs.field.OpenMenu(npc, kind)
-	local menu = UI.Menu()
+	local menu = ix.cotzUI.Menu()
 	menu:AddOption(ACTIONS.status, function() request(npc, "status") end)
 	if kind == "sensor" then
 		menu:AddOption(ACTIONS.deploy, function() request(npc, "deploy") end)
@@ -47,5 +46,5 @@ function PLUGIN:HUDPaint()
 	if marker.radius > 0 then
 		label = label .. " (search within " .. math.ceil(marker.radius * METRES_PER_UNIT) .. " m)"
 	end
-	UI.DrawMarker(label, screen.x, screen.y, UI.colors.amber)
+	ix.cotzUI.DrawMarker(label, screen.x, screen.y, ix.cotzUI.colors.amber)
 end

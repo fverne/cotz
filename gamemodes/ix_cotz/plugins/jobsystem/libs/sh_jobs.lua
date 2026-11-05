@@ -3,9 +3,7 @@ ix.jobs.list = ix.jobs.list or {}
 ix.jobs.jobsbycategory = ix.jobs.jobsbycategory or {}
 ix.jobs.activejobs = ix.jobs.activejobs or {}
 
-local jobs = ix.jobs
-
-function jobs.isStructValid(definition)
+function ix.jobs.isStructValid(definition)
 	if type(definition) ~= "table" or type(definition.name) ~= "string" then return false end
 	local count = definition.numberRec
 	if type(count) == "table" then
@@ -16,34 +14,34 @@ function jobs.isStructValid(definition)
 	return type(count) == "number" and count > 0
 end
 
-function jobs.register(definition, identifier)
-	assert(type(identifier) == "string" and jobs.isStructValid(definition),
+function ix.jobs.register(definition, identifier)
+	assert(type(identifier) == "string" and ix.jobs.isStructValid(definition),
 		"Invalid job definition: " .. tostring(identifier))
 	-- Re-registering an ID must not leave stale or duplicate category entries.
-	if jobs.list[identifier] then
-		for _, category in pairs(jobs.jobsbycategory) do
+	if ix.jobs.list[identifier] then
+		for _, category in pairs(ix.jobs.jobsbycategory) do
 			for index = #category, 1, -1 do
 				if category[index] == identifier then table.remove(category, index) end
 			end
 		end
 	end
-	jobs.list[identifier] = definition
+	ix.jobs.list[identifier] = definition
 	local categories = definition.categories
 	if not categories or #categories == 0 then categories = {"miscjobs"} end
 	for _, category in ipairs(categories) do
-		jobs.jobsbycategory[category] = jobs.jobsbycategory[category] or {}
-		table.insert(jobs.jobsbycategory[category], identifier)
+		ix.jobs.jobsbycategory[category] = ix.jobs.jobsbycategory[category] or {}
+		table.insert(ix.jobs.jobsbycategory[category], identifier)
 	end
 end
 
 local function initialCount(identifier)
-	local count = jobs.list[identifier].numberRec
+	local count = ix.jobs.list[identifier].numberRec
 
 	return type(count) == "table" and count[1] or count
 end
 
-function jobs.getFormattedName(job)
-	return string.format(jobs.list[job.identifier].name, job.numberRec)
+function ix.jobs.getFormattedName(job)
+	return string.format(ix.jobs.list[job.identifier].name, job.numberRec)
 end
 
 function ix.jobs.getFormattedDesc(activejob)
@@ -63,23 +61,23 @@ function ix.jobs.getFormattedDesc(activejob)
 	return text
 end
 
-function jobs.getFormattedNameInactive(identifier)
-	return string.format(jobs.list[identifier].name, initialCount(identifier))
+function ix.jobs.getFormattedNameInactive(identifier)
+	return string.format(ix.jobs.list[identifier].name, initialCount(identifier))
 end
 
-function jobs.getFormattedDescInactive(identifier)
-	return string.format(jobs.list[identifier].desc, initialCount(identifier))
+function ix.jobs.getFormattedDescInactive(identifier)
+	return string.format(ix.jobs.list[identifier].desc, initialCount(identifier))
 end
 
-function jobs.isItemJob(identifier)
-	local definition = jobs.list[identifier]
+function ix.jobs.isItemJob(identifier)
+	local definition = ix.jobs.list[identifier]
 
 	return definition and definition.requiredItem or false
 end
 
-function jobs.getJobFromTier(tier)
+function ix.jobs.getJobFromTier(tier)
 	local available = {}
-	for identifier, definition in pairs(jobs.list) do
+	for identifier, definition in pairs(ix.jobs.list) do
 		if definition.tier == tier then available[#available + 1] = identifier end
 	end
 	if #available > 0 then return available[math.random(#available)] end

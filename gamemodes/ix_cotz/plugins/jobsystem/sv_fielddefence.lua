@@ -1,6 +1,5 @@
-local field = ix.jobs.field
 local encounters, attackers = {}, {}
-local spawnBudget = field.defenceSpawnBudget
+local spawnBudget = ix.jobs.field.defenceSpawnBudget
 local NPC_MIN, NPC_MAX = Vector(-32, -32, 0), Vector(32, 32, 96)
 local TRACE_UP, TRACE_DOWN, CLEARANCE = Vector(0, 0, 32), Vector(0, 0, 128), Vector(0, 0, 2)
 
@@ -15,7 +14,7 @@ local function encounterCount()
 	return count
 end
 
-function field.AssignDefence(state, settings, tier, approaches)
+function ix.jobs.field.AssignDefence(state, settings, tier, approaches)
 	local defence = {
 		spawnPoints = approaches, waves = {}, health = settings.samplerHealth, maxHealth = settings.samplerHealth,
 		guardedSeconds = 0, completedWaves = 0, attemptSeconds = 0,
@@ -30,7 +29,7 @@ function field.AssignDefence(state, settings, tier, approaches)
 	state.defence = defence
 end
 
-function field.StopDefence(character, job)
+function ix.jobs.field.StopDefence(character, job)
 	local key = claimKey(character, job)
 	local encounter = encounters[key]
 	if not encounter then return end
@@ -38,7 +37,7 @@ function field.StopDefence(character, job)
 	local active = character:GetJobs()[encounter.npc]
 	if active and active.rewardKey == encounter.claim and active.fieldTask.stage == "defending" then
 		active.fieldTask.defence.health = encounter.health
-		field.SaveJob(character, encounter.npc, active)
+		ix.jobs.field.SaveJob(character, encounter.npc, active)
 	end
 	for _, slot in ipairs(encounter.slots) do
 		if slot.entity then attackers[slot.entity] = nil end
@@ -58,53 +57,51 @@ local function createEncounter(character, npc, job, sampler)
 end
 
 local function failEncounter(client, character, npc, job, reason)
-	field.Cleanup(character, job)
+	ix.jobs.field.Cleanup(character, job)
 	local state = job.fieldTask
 	state.stage = "deploy"
 	state.defence.retryAt = os.time() + state.defence.retryDelay
-	field.SaveJob(character, npc, job)
+	ix.jobs.field.SaveJob(character, npc, job)
 	client:Notify(reason .. " Restart the sampler at the same site after the retry delay.")
 end
 
-function field.StartDefence(client, character, npc, job)
+function ix.jobs.field.StartDefence(client, character, npc, job)
 	local state, defence = job.fieldTask, job.fieldTask.defence
 	if state.stage ~= "deploy" then return end
 	if os.time() < (defence.retryAt or 0) then
 		client:Notify("The replacement sampler will be ready in " .. (defence.retryAt - os.time()) .. " seconds.")
 		return
 	end
-	if client:GetPos():DistToSqr(field.Unpack(state.point)) > field.useDistance ^ 2 then
+	if client:GetPos():DistToSqr(ix.jobs.field.Unpack(state.point)) > ix.jobs.field.useDistance ^ 2 then
 		client:Notify("Move closer to the research sampler site.")
 		return
 	end
-	local manager = ix.eventController
-	if not manager or not manager:CanSpawnMutant(field.Unpack(state.point), true)
-		or encounterCount() >= field.maxDefences then
+	if not ix.eventController or not ix.eventController:CanSpawnMutant(ix.jobs.field.Unpack(state.point), true)
+		or encounterCount() >= ix.jobs.field.maxDefences then
 		client:Notify("Research cannot start while the area is at its encounter or mutant limit. Try again shortly.")
 		return
 	end
 	defence.health, defence.completedWaves, defence.guardedSeconds = defence.maxHealth, 0, 0
 	defence.attemptSeconds, defence.nextWaveAt = 0, nil
-	local sampler = field.SpawnObject(character, npc, job)
+	local sampler = ix.jobs.field.SpawnObject(character, npc, job)
 	if not IsValid(sampler) then return end
 	state.stage = "defending"
 	createEncounter(character, npc, job, sampler)
-	field.SaveJob(character, npc, job)
+	ix.jobs.field.SaveJob(character, npc, job)
 	client:Notify("Research started. Stay near the sampler, clear the waves and keep mutants away from it.")
 end
 
 local function spawnPosition(defence)
-	local manager = ix.eventController
 	local points = table.Copy(defence.spawnPoints)
 	table.Shuffle(points)
 	for _, packed in ipairs(points) do
-		local position = field.Unpack(packed)
+		local position = ix.jobs.field.Unpack(packed)
 		local trace = util.TraceHull({start = position + TRACE_UP, endpos = position - TRACE_DOWN,
 			mins = NPC_MIN, maxs = NPC_MAX, mask = MASK_SOLID})
 		local point = trace.HitPos + CLEARANCE
 		if trace.Hit and not trace.StartSolid and trace.HitNormal.z >= 0.5 and util.IsInWorld(point)
-			and not manager:HasPlayerNear(point, defence.playerSafeDistance)
-			and manager:CanSpawnMutant(point, true) then
+			and not ix.eventController:HasPlayerNear(point, defence.playerSafeDistance)
+			and ix.eventController:CanSpawnMutant(point, true) then
 			return point
 		end
 	end
@@ -132,14 +129,14 @@ local function spawnAttacker(client, defence, encounter, slot)
 	attackers[npc] = {encounter = encounter, slot = slot}
 end
 
-function field.DefenceKilled(entity)
+function ix.jobs.field.DefenceKilled(entity)
 	local record = attackers[entity]
 	if not record then return end
 	record.slot.killed = true
 	attackers[entity] = nil
 end
 
-function field.DefenceDamage(entity, damage)
+function ix.jobs.field.DefenceDamage(entity, damage)
 	if not entity.fieldOwner or not entity.fieldClaim then return end
 	local encounter = encounters[entity.fieldOwner .. ":" .. entity.fieldClaim]
 	local record = attackers[damage:GetAttacker()]
@@ -178,23 +175,23 @@ local function updateWave(client, defence, encounter, elapsed)
 	return cleared
 end
 
-function field.UpdateDefence(client, character, npc, job, keep)
+function ix.jobs.field.UpdateDefence(client, character, npc, job, keep)
 	if not ix.eventController then return end
 	local state, defence = job.fieldTask, job.fieldTask.defence
 	local key = claimKey(character, job)
 	if client:IsRestricted() or IsValid(client.ixRagdoll)
-		or client:GetPos():DistToSqr(field.Unpack(state.point)) > defence.defendDistance ^ 2 then return end
+		or client:GetPos():DistToSqr(ix.jobs.field.Unpack(state.point)) > defence.defendDistance ^ 2 then return end
 	local encounter = encounters[key]
 	if not encounter then
-		if not ix.eventController or encounterCount() >= field.maxDefences then return end
-		local sampler = field.GetObject(character, job)
-		if not IsValid(sampler) then sampler = field.SpawnObject(character, npc, job) end
+		if not ix.eventController or encounterCount() >= ix.jobs.field.maxDefences then return end
+		local sampler = ix.jobs.field.GetObject(character, job)
+		if not IsValid(sampler) then sampler = ix.jobs.field.SpawnObject(character, npc, job) end
 		if not IsValid(sampler) then return end
 		encounter = createEncounter(character, npc, job, sampler)
 	end
-	if not IsValid(encounter.sampler) then field.StopDefence(character, job) return end
+	if not IsValid(encounter.sampler) then ix.jobs.field.StopDefence(character, job) return end
 	keep[key] = true
-	local elapsed = math.Clamp(CurTime() - encounter.lastTick, 0, field.updateInterval * 2)
+	local elapsed = math.Clamp(CurTime() - encounter.lastTick, 0, ix.jobs.field.updateInterval * 2)
 	encounter.lastTick = CurTime()
 	defence.guardedSeconds = math.min(defence.duration, defence.guardedSeconds + elapsed)
 	defence.attemptSeconds = defence.attemptSeconds + elapsed
@@ -220,21 +217,21 @@ function field.UpdateDefence(client, character, npc, job, keep)
 	end
 	if defence.completedWaves == #defence.waves and defence.guardedSeconds >= defence.duration then
 		state.stage = "ready"
-		field.StopDefence(character, job)
+		ix.jobs.field.StopDefence(character, job)
 		client:Notify("Research complete. Collect the recorder and return it to your contact.")
 	end
-	field.SaveJob(character, npc, job)
+	ix.jobs.field.SaveJob(character, npc, job)
 end
 
-function field.PruneDefences(keep)
+function ix.jobs.field.PruneDefences(keep)
 	for key, encounter in pairs(encounters) do
 		if not keep[key] then
-			field.StopDefence(encounter.character, {rewardKey = encounter.claim})
+			ix.jobs.field.StopDefence(encounter.character, {rewardKey = encounter.claim})
 			local client = encounter.character:GetPlayer()
 			if IsValid(client) and client:Alive() and client:GetCharacter() == encounter.character then
 				client:Notify("Research paused. Return to resume; the unfinished wave restarts.")
 			end
 		end
 	end
-	spawnBudget = field.defenceSpawnBudget
+	spawnBudget = ix.jobs.field.defenceSpawnBudget
 end

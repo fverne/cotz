@@ -1,8 +1,7 @@
 ix.cotzUI = ix.cotzUI or {}
-local UI = ix.cotzUI
 local fontScale
 
-UI.colors = {
+ix.cotzUI.colors = {
 	background = Color(19, 18, 20, 235),
 	card = Color(12, 13, 12, 215),
 	border = Color(93, 94, 86, 180),
@@ -14,14 +13,13 @@ UI.colors = {
 	red = Color(154, 84, 70),
 	track = Color(41, 43, 38),
 }
-local COLORS = UI.colors
 
 local function refreshLayout(panel)
 	if panel.cotzRefresh then panel:cotzRefresh() end
 	for _, child in ipairs(panel:GetChildren()) do refreshLayout(child) end
 end
 
-function UI.Scale(value)
+function ix.cotzUI.Scale(value)
 	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
 	if fontScale ~= scale then
 		fontScale = scale
@@ -35,94 +33,94 @@ function UI.Scale(value)
 	return math.ceil(value * scale)
 end
 
-function UI.SetHeight(panel, height)
-	panel.cotzRefresh = function(control) control:SetTall(UI.Scale(height)) end
+function ix.cotzUI.SetHeight(panel, height)
+	panel.cotzRefresh = function(control) control:SetTall(ix.cotzUI.Scale(height)) end
 	panel:cotzRefresh()
 end
 
-function UI.PaintCard(_, width, height)
-	surface.SetDrawColor(COLORS.card)
+function ix.cotzUI.PaintCard(_, width, height)
+	surface.SetDrawColor(ix.cotzUI.colors.card)
 	surface.DrawRect(0, 0, width, height)
-	surface.SetDrawColor(COLORS.border)
+	surface.SetDrawColor(ix.cotzUI.colors.border)
 	surface.DrawOutlinedRect(0, 0, width, height)
 end
 
-function UI.StyleButton(button)
+function ix.cotzUI.StyleButton(button)
 	button:SetFont("cotzUISmall")
-	button:SetTextColor(COLORS.text)
+	button:SetTextColor(ix.cotzUI.colors.text)
 	button.Paint = function(control, width, height)
 		local disabled = not control:IsEnabled()
-		control:SetTextColor(disabled and COLORS.muted or COLORS.text)
-		surface.SetDrawColor(control:IsHovered() and not disabled and COLORS.track or COLORS.card)
+		control:SetTextColor(disabled and ix.cotzUI.colors.muted or ix.cotzUI.colors.text)
+		surface.SetDrawColor(control:IsHovered() and not disabled and ix.cotzUI.colors.track or ix.cotzUI.colors.card)
 		surface.DrawRect(0, 0, width, height)
-		surface.SetDrawColor(control:IsHovered() and not disabled and COLORS.teal or COLORS.border)
+		surface.SetDrawColor(control:IsHovered() and not disabled and ix.cotzUI.colors.teal or ix.cotzUI.colors.border)
 		surface.DrawOutlinedRect(0, 0, width, height)
 	end
 
 	return button
 end
 
-function UI.StyleEntry(entry)
+function ix.cotzUI.StyleEntry(entry)
 	entry:SetFont("cotzUISmall")
 	entry.Paint = function(control, width, height)
-		surface.SetDrawColor(COLORS.card)
+		surface.SetDrawColor(ix.cotzUI.colors.card)
 		surface.DrawRect(0, 0, width, height)
-		surface.SetDrawColor(control:HasFocus() and COLORS.teal or COLORS.border)
+		surface.SetDrawColor(control:HasFocus() and ix.cotzUI.colors.teal or ix.cotzUI.colors.border)
 		surface.DrawOutlinedRect(0, 0, width, height)
-		control:DrawTextEntryText(COLORS.text, COLORS.teal, COLORS.text)
+		control:DrawTextEntryText(ix.cotzUI.colors.text, ix.cotzUI.colors.teal, ix.cotzUI.colors.text)
 	end
 
 	return entry
 end
 
-function UI.StyleScroll(scroll)
+function ix.cotzUI.StyleScroll(scroll)
 	local bar = scroll:GetVBar()
-	scroll.cotzRefresh = function() bar:SetWide(UI.Scale(6)) end
+	scroll.cotzRefresh = function() bar:SetWide(ix.cotzUI.Scale(6)) end
 	scroll:cotzRefresh()
 	bar:SetHideButtons(true)
 	bar.Paint = function(_, width, height)
-		surface.SetDrawColor(COLORS.track)
+		surface.SetDrawColor(ix.cotzUI.colors.track)
 		surface.DrawRect(0, 0, width, height)
 	end
 	bar.btnGrip.Paint = function(_, width, height)
-		surface.SetDrawColor(COLORS.border)
+		surface.SetDrawColor(ix.cotzUI.colors.border)
 		surface.DrawRect(0, 0, width, height)
 	end
 end
 
-function UI.StyleFrame(frame)
-	UI.Scale(1)
+function ix.cotzUI.StyleFrame(frame)
+	ix.cotzUI.Scale(1)
 	frame.lblTitle:SetFont("cotzUITitle")
-	frame.lblTitle:SetTextColor(COLORS.text)
+	frame.lblTitle:SetTextColor(ix.cotzUI.colors.text)
 	frame.Paint = function(_, width, height)
-		surface.SetDrawColor(COLORS.background)
+		surface.SetDrawColor(ix.cotzUI.colors.background)
 		surface.DrawRect(0, 0, width, height)
-		surface.SetDrawColor(COLORS.border)
+		surface.SetDrawColor(ix.cotzUI.colors.border)
 		surface.DrawOutlinedRect(0, 0, width, height)
-		surface.DrawLine(0, UI.Scale(32), width, UI.Scale(32))
+		surface.DrawLine(0, ix.cotzUI.Scale(32), width, ix.cotzUI.Scale(32))
 	end
 	frame.btnClose:SetText("×")
-	UI.StyleButton(frame.btnClose)
+	ix.cotzUI.StyleButton(frame.btnClose)
 	local performLayout = frame.PerformLayout
 	frame.PerformLayout = function(control, width, height)
 		performLayout(control, width, height)
-		local padding, header = UI.Scale(12), UI.Scale(40)
+		local padding, header = ix.cotzUI.Scale(12), ix.cotzUI.Scale(40)
 		control:DockPadding(padding, header, padding, padding)
 		control.lblTitle:SetPos(padding, 0)
-		control.lblTitle:SetSize(width - header - padding * 2, header - UI.Scale(8))
-		control.btnClose:SetSize(UI.Scale(26), UI.Scale(24))
-		control.btnClose:SetPos(width - UI.Scale(32), UI.Scale(4))
+		control.lblTitle:SetSize(width - header - padding * 2, header - ix.cotzUI.Scale(8))
+		control.btnClose:SetSize(ix.cotzUI.Scale(26), ix.cotzUI.Scale(24))
+		control.btnClose:SetPos(width - ix.cotzUI.Scale(32), ix.cotzUI.Scale(4))
 	end
 
 	return frame
 end
 
-function UI.Frame(title, widthFraction, heightFraction, maxWidth)
-	local frame = UI.StyleFrame(vgui.Create("DFrame"))
+function ix.cotzUI.Frame(title, widthFraction, heightFraction, maxWidth)
+	local frame = ix.cotzUI.StyleFrame(vgui.Create("DFrame"))
 	frame:SetTitle(title)
 	local function resize(control)
 		control.screenWidth, control.screenHeight = ScrW(), ScrH()
-		control:SetSize(math.min(ScrW() * widthFraction, UI.Scale(maxWidth)), ScrH() * heightFraction)
+		control:SetSize(math.min(ScrW() * widthFraction, ix.cotzUI.Scale(maxWidth)), ScrH() * heightFraction)
 		control:Center()
 		refreshLayout(control)
 		control:InvalidateLayout(true)
@@ -138,16 +136,16 @@ function UI.Frame(title, widthFraction, heightFraction, maxWidth)
 	local scroll = frame:Add("DScrollPanel")
 	scroll:SetZPos(1)
 	scroll:Dock(FILL)
-	UI.StyleScroll(scroll)
+	ix.cotzUI.StyleScroll(scroll)
 
 	return frame, scroll
 end
 
-function UI.Button(parent, text, callback)
-	local button = UI.StyleButton(parent:Add("DButton"))
+function ix.cotzUI.Button(parent, text, callback)
+	local button = ix.cotzUI.StyleButton(parent:Add("DButton"))
 	button:Dock(TOP)
 	button.cotzRefresh = function(control)
-		control:DockMargin(0, UI.Scale(4), UI.Scale(10), UI.Scale(4))
+		control:DockMargin(0, ix.cotzUI.Scale(4), ix.cotzUI.Scale(10), ix.cotzUI.Scale(4))
 	end
 	button:cotzRefresh()
 	button:SetText(text)
@@ -157,27 +155,27 @@ function UI.Button(parent, text, callback)
 	local performLayout = button.PerformLayout
 	button.PerformLayout = function(control, width, height)
 		performLayout(control, width, height)
-		local padding = UI.Scale(10)
+		local padding = ix.cotzUI.Scale(10)
 		local lines = ix.util.WrapText(control:GetText(), math.max(1, width - padding * 2), "cotzUISmall")
 		local _, lineHeight = surface.GetTextSize("W")
-		local tall = math.max(UI.Scale(34), #lines * lineHeight + padding * 2)
+		local tall = math.max(ix.cotzUI.Scale(34), #lines * lineHeight + padding * 2)
 		if control:GetTall() ~= tall then control:SetTall(tall) end
 	end
-	button:SetTall(UI.Scale(34))
+	button:SetTall(ix.cotzUI.Scale(34))
 
 	return button
 end
 
-function UI.Label(parent, text, heading)
-	UI.Scale(1)
+function ix.cotzUI.Label(parent, text, heading)
+	ix.cotzUI.Scale(1)
 	local label = parent:Add("DLabel")
 	label:Dock(TOP)
 	label.cotzRefresh = function(control)
-		control:DockMargin(0, UI.Scale(8), UI.Scale(10), UI.Scale(8))
+		control:DockMargin(0, ix.cotzUI.Scale(8), ix.cotzUI.Scale(10), ix.cotzUI.Scale(8))
 	end
 	label:cotzRefresh()
 	label:SetFont(heading and "cotzUILabel" or "cotzUISmall")
-	label:SetTextColor(heading and COLORS.text or COLORS.muted)
+	label:SetTextColor(heading and ix.cotzUI.colors.text or ix.cotzUI.colors.muted)
 	label:SetText(text)
 	label:SetWrap(true)
 	label:SetAutoStretchVertical(true)
@@ -185,19 +183,19 @@ function UI.Label(parent, text, heading)
 	return label
 end
 
-function UI.Card(parent)
+function ix.cotzUI.Card(parent)
 	local card = parent:Add("DPanel")
 	card:Dock(TOP)
 	card.cotzRefresh = function(control)
-		local padding = UI.Scale(12)
+		local padding = ix.cotzUI.Scale(12)
 		control.cotzPadding = padding
-		control:DockMargin(0, padding, UI.Scale(10), 0)
+		control:DockMargin(0, padding, ix.cotzUI.Scale(10), 0)
 		control:DockPadding(padding, padding, padding, padding)
 	end
 	card:cotzRefresh()
-	card.Paint = UI.PaintCard
+	card.Paint = ix.cotzUI.PaintCard
 	card.PerformLayout = function(control)
-		local padding = UI.Scale(12)
+		local padding = ix.cotzUI.Scale(12)
 		if control.cotzPadding ~= padding then control:cotzRefresh() end
 		local height = padding * 2
 		for _, child in ipairs(control:GetChildren()) do
@@ -210,27 +208,27 @@ function UI.Card(parent)
 	return card
 end
 
-function UI.StyleMenu(menu)
-	UI.Scale(1)
-	menu.Paint = UI.PaintCard
+function ix.cotzUI.StyleMenu(menu)
+	ix.cotzUI.Scale(1)
+	menu.Paint = ix.cotzUI.PaintCard
 	local addOption = menu.AddOption
 	menu.AddOption = function(control, ...)
-		return UI.StyleButton(addOption(control, ...))
+		return ix.cotzUI.StyleButton(addOption(control, ...))
 	end
 
 	return menu
 end
 
-function UI.Menu()
-	return UI.StyleMenu(DermaMenu())
+function ix.cotzUI.Menu()
+	return ix.cotzUI.StyleMenu(DermaMenu())
 end
 
-function UI.StyleCombo(combo)
-	UI.StyleButton(combo)
+function ix.cotzUI.StyleCombo(combo)
+	ix.cotzUI.StyleButton(combo)
 	combo.OnMenuOpened = function(_, menu)
-		UI.StyleMenu(menu)
+		ix.cotzUI.StyleMenu(menu)
 		for _, option in ipairs(menu:GetCanvas():GetChildren()) do
-			if option:GetClassName() == "DMenuOption" then UI.StyleButton(option) end
+			if option:GetClassName() == "DMenuOption" then ix.cotzUI.StyleButton(option) end
 		end
 		menu:InvalidateLayout(true)
 	end
@@ -239,14 +237,14 @@ function UI.StyleCombo(combo)
 end
 
 local function dialog(title, text)
-	local frame, body = UI.Frame(title, 0.65, 0.45, 720)
+	local frame, body = ix.cotzUI.Frame(title, 0.65, 0.45, 720)
 	frame:SetBackgroundBlur(true)
 	frame:SetDrawOnTop(true)
-	UI.Label(body, text, true)
+	ix.cotzUI.Label(body, text, true)
 	local actions = frame:Add("DPanel")
 	actions:Dock(BOTTOM)
-	UI.SetHeight(actions, 38)
-	actions:DockMargin(0, UI.Scale(8), 0, 0)
+	ix.cotzUI.SetHeight(actions, 38)
+	actions:DockMargin(0, ix.cotzUI.Scale(8), 0, 0)
 	actions.Paint = function() end
 	frame:DoModal()
 
@@ -254,18 +252,18 @@ local function dialog(title, text)
 end
 
 local function dialogButton(parent, text, callback)
-	local button = UI.StyleButton(parent:Add("DButton"))
+	local button = ix.cotzUI.StyleButton(parent:Add("DButton"))
 	button:Dock(LEFT)
-	button:DockMargin(0, 0, UI.Scale(8), 0)
+	button:DockMargin(0, 0, ix.cotzUI.Scale(8), 0)
 	button:SetText(text)
-	button.cotzRefresh = function(control) control:SizeToContentsX(UI.Scale(24)) end
+	button.cotzRefresh = function(control) control:SizeToContentsX(ix.cotzUI.Scale(24)) end
 	button:cotzRefresh()
 	button.DoClick = callback
 
 	return button
 end
 
-function UI.Query(text, title, ...)
+function ix.cotzUI.Query(text, title, ...)
 	local frame, _, actions = dialog(title, text)
 	local options = {...}
 	for index = 1, #options, 2 do
@@ -279,11 +277,11 @@ function UI.Query(text, title, ...)
 	return frame
 end
 
-function UI.StringRequest(title, text, default, onEnter, onCancel)
+function ix.cotzUI.StringRequest(title, text, default, onEnter, onCancel)
 	local frame, body, actions = dialog(title, text)
-	local entry = UI.StyleEntry(body:Add("DTextEntry"))
+	local entry = ix.cotzUI.StyleEntry(body:Add("DTextEntry"))
 	entry:Dock(TOP)
-	UI.SetHeight(entry, 34)
+	ix.cotzUI.SetHeight(entry, 34)
 	entry:SetText(default or "")
 	local function accept()
 		local value = entry:GetValue()
@@ -303,15 +301,15 @@ function UI.StringRequest(title, text, default, onEnter, onCancel)
 	return frame
 end
 
-function UI.Message(text, title, buttonText)
+function ix.cotzUI.Message(text, title, buttonText)
 	local frame, _, actions = dialog(title, text)
 	dialogButton(actions, buttonText or "OK", function() frame:Close() end)
 
 	return frame
 end
 
-function UI.DrawMarker(text, x, y, accent)
-	local padding = UI.Scale(6)
+function ix.cotzUI.DrawMarker(text, x, y, accent)
+	local padding = ix.cotzUI.Scale(6)
 	surface.SetFont("cotzUISmall")
 	local width, height = surface.GetTextSize(text)
 	local lines
@@ -324,17 +322,17 @@ function UI.DrawMarker(text, x, y, accent)
 	width, height = width + padding * 2, height + padding * 2
 	x = math.Clamp(x - width / 2, padding, ScrW() - width - padding)
 	y = math.Clamp(y - height, padding, ScrH() - height - padding)
-	surface.SetDrawColor(COLORS.background)
+	surface.SetDrawColor(ix.cotzUI.colors.background)
 	surface.DrawRect(x, y, width, height)
-	surface.SetDrawColor(accent or COLORS.teal)
+	surface.SetDrawColor(accent or ix.cotzUI.colors.teal)
 	surface.DrawOutlinedRect(x, y, width, height)
 	if lines then
 		for index, line in ipairs(lines) do
 			draw.SimpleText(line, "cotzUISmall", x + width / 2, y + padding + (index - 1) * lineHeight,
-				COLORS.text, TEXT_ALIGN_CENTER)
+				ix.cotzUI.colors.text, TEXT_ALIGN_CENTER)
 		end
 	else
 		draw.SimpleText(text, "cotzUISmall", x + width / 2, y + height / 2,
-			COLORS.text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			ix.cotzUI.colors.text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 end

@@ -1,4 +1,3 @@
-
 ix.util.text = ix.util.text or {}
 
 -- returns material of the given item - either img or the exIcon
@@ -62,12 +61,10 @@ end
 
 
 function ix.util.DrawBuffIcon(iconstring, posX, posY, sizeX, sizeY, col, text)
-	local UI = ix.cotzUI
-	local padding = UI.Scale(3)
-	local colors = UI.colors
-	local color = col or colors.text
+	local padding = ix.cotzUI.Scale(3)
+	local color = col or ix.cotzUI.colors.text
 	local icon = ix.util.GetMaterial(iconstring, "noclamp smooth")
-	surface.SetDrawColor(colors.card)
+	surface.SetDrawColor(ix.cotzUI.colors.card)
 	surface.DrawRect(posX, posY, sizeX, sizeY)
 	surface.SetDrawColor(color)
 	surface.DrawOutlinedRect(posX, posY, sizeX, sizeY)
@@ -78,8 +75,8 @@ function ix.util.DrawBuffIcon(iconstring, posX, posY, sizeX, sizeY, col, text)
 		surface.SetFont("cotzUISmall")
 		local width, height = surface.GetTextSize(text)
 		local x, y = posX + sizeX - width - padding, posY + sizeY - height
-		surface.SetDrawColor(colors.background)
+		surface.SetDrawColor(ix.cotzUI.colors.background)
 		surface.DrawRect(x - padding, y, width + padding * 2, height)
-		draw.SimpleText(text, "cotzUISmall", x, y, colors.text)
+		draw.SimpleText(text, "cotzUISmall", x, y, ix.cotzUI.colors.text)
 	end
 end

@@ -1,6 +1,6 @@
-local inventoryMeta = ix.meta.inventory or {}
+ix.meta.inventory = ix.meta.inventory or {}
 
-function inventoryMeta:GetItemCountNonSpecific(onlyMain)
+function ix.meta.inventory:GetItemCountNonSpecific(onlyMain)
 	local count = 0
 
 	for _ in pairs(self:GetItems(onlyMain)) do
@@ -104,7 +104,7 @@ if SERVER then
 		return x, y, targetInventory:GetID()
 	end
 
-	function inventoryMeta:Add(uniqueID, quantity, data, x, y, noReplication)
+	function ix.meta.inventory:Add(uniqueID, quantity, data, x, y, noReplication)
 		quantity = quantity or 1
 
 		if quantity < 1 then

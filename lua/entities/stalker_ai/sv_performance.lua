@@ -31,8 +31,7 @@ function ENT:STALKERNPCIsInCombat()
 end
 
 function ENT:STALKERNPCUpdateSleep()
-	local manager = ix and ix.eventController
-	if not manager then
+	if not ix or not ix.eventController then
 		if self.cotzSleeping then self:STALKERNPCWake() end
 		return
 	end
@@ -43,7 +42,7 @@ function ENT:STALKERNPCUpdateSleep()
 
 	local wakeRange = getConfig("mutantWakeRange", 5000)
 	local range = self.cotzSleeping and wakeRange or math.max(wakeRange, getConfig("mutantSleepRange", 6000))
-	if manager:HasPlayerNear(self:GetPos(), range) then
+	if ix.eventController:HasPlayerNear(self:GetPos(), range) then
 		if self.cotzSleeping then self:STALKERNPCWake() end
 		return
 	end
@@ -71,8 +70,7 @@ function ENT:STALKERNPCTryEnemySearch()
 	end
 	if now < self.cotzNextEnemySearch then return false end
 
-	local manager = ix and ix.eventController
-	if manager and not manager:TakeSearchBudget() then return false end
+	if ix and ix.eventController and not ix.eventController:TakeSearchBudget() then return false end
 
 	self.cotzNextEnemySearch = now + 2 + math.Rand(0, 0.3)
 

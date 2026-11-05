@@ -125,13 +125,15 @@ end
 
 function PLUGIN:InstallInventoryCompatibility()
 	if self.inventoryOriginals then return end
-	local meta = ix.meta.inventory
 	local originals = {
-		GetSize = meta.GetSize, CanItemFit = meta.CanItemFit, FindEmptySlot = meta.FindEmptySlot, Add = meta.Add,
+		GetSize = ix.meta.inventory.GetSize,
+		CanItemFit = ix.meta.inventory.CanItemFit,
+		FindEmptySlot = ix.meta.inventory.FindEmptySlot,
+		Add = ix.meta.inventory.Add,
 	}
 	self.inventoryOriginals = originals
 
-	function meta:GetSize()
+	function ix.meta.inventory:GetSize()
 		if self.vars.cotzEquipmentWidth then
 			local character = ix.char.loaded[self.owner]
 			local personal = character and character:GetInventory() == self
@@ -143,7 +145,7 @@ function PLUGIN:InstallInventoryCompatibility()
 		return originals.GetSize(self)
 	end
 
-	function meta:CanItemFit(x, y, width, height, item)
+	function ix.meta.inventory:CanItemFit(x, y, width, height, item)
 		if self.vars.cotzEquipmentWidth then
 			local backpackWidth, backpackHeight = self:GetSize()
 			if x < 1 or y < 1 or x + width - 1 > backpackWidth or y + height - 1 > backpackHeight then
@@ -156,7 +158,7 @@ function PLUGIN:InstallInventoryCompatibility()
 		return originals.CanItemFit(self, x, y, width, height, item)
 	end
 
-	function meta:FindEmptySlot(width, height, onlyMain)
+	function ix.meta.inventory:FindEmptySlot(width, height, onlyMain)
 		if not self.vars.cotzEquipmentWidth then
 			return originals.FindEmptySlot(self, width, height, onlyMain)
 		end
@@ -168,7 +170,7 @@ function PLUGIN:InstallInventoryCompatibility()
 	end
 
 	if SERVER then
-		function meta:Add(uniqueID, quantity, data, x, y, noReplication)
+		function ix.meta.inventory:Add(uniqueID, quantity, data, x, y, noReplication)
 			local item = isnumber(uniqueID) and ix.item.instances[uniqueID] or ix.item.list[uniqueID]
 			if self.vars.cotzEquipmentWidth and item and x and y
 				and not self:CanItemFit(x, y, item.width, item.height) then

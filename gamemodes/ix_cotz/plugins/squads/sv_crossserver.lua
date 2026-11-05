@@ -1,7 +1,5 @@
 local PLUGIN = PLUGIN
-local presence = ix.crossserver
-local cross = {ready = false, generation = 0, sessions = presence and presence.sessions or {}}
-ix.squad.cross = cross
+ix.squad.cross = {ready = false, generation = 0, sessions = ix.crossserver and ix.crossserver.sessions or {}}
 local POLL_INTERVAL = 5
 local CHUNK_SIZE = 128
 util.AddNetworkString("cotz/squads/presence-fresh")
@@ -10,15 +8,15 @@ ix.config.Add("squadCrossServer", true, "Share squad membership and presence thr
 	category = "Squads",
 })
 
-function cross.Enabled()
-	return cross.lockedEnabled or ix.config.Get("squadCrossServer", true)
+function ix.squad.cross.Enabled()
+	return ix.squad.cross.lockedEnabled or ix.config.Get("squadCrossServer", true)
 end
 
-local function scope() return presence.Scope() end
-local function token() return presence.Token() end
+local function scope() return ix.crossserver.Scope() end
+local function token() return ix.crossserver.Token() end
 
-function cross.Query(query, callback)
-	presence.Query(query, callback)
+function ix.squad.cross.Query(query, callback)
+	ix.crossserver.Query(query, callback)
 end
 
 local function sequence(queries, callback)
@@ -27,7 +25,7 @@ local function sequence(queries, callback)
 		if (failure) then callback(false) return end
 		index = index + 1
 		if (not queries[index]) then callback(true) return end
-		cross.Query(queries[index], nextQuery)
+		ix.squad.cross.Query(queries[index], nextQuery)
 	end
 	nextQuery()
 end
@@ -90,23 +88,23 @@ local function setMirror(character, id, rank, name, color)
 end
 
 local function mutate(query, callback)
-	if (not cross.ready) then return end
-	cross.generation = cross.generation + 1
-	cross.Query(query, function(rows, failure)
-		cross.generation = cross.generation + 1
+	if (not ix.squad.cross.ready) then return end
+	ix.squad.cross.generation = ix.squad.cross.generation + 1
+	ix.squad.cross.Query(query, function(rows, failure)
+		ix.squad.cross.generation = ix.squad.cross.generation + 1
 		if (callback) then callback(not failure, rows) end
-		cross.Refresh()
+		ix.squad.cross.Refresh()
 	end)
 end
 
-function cross.Initialize()
-	if (not cross.Enabled() or cross.starting or cross.ready) then return end
-	if (not presence) then return end
-	presence.Initialize()
-	if (not presence.ready) then return end
-	cross.sessions = presence.sessions
-	cross.starting = true
-	cross.lockedEnabled = true
+function ix.squad.cross.Initialize()
+	if (not ix.squad.cross.Enabled() or ix.squad.cross.starting or ix.squad.cross.ready) then return end
+	if (not ix.crossserver) then return end
+	ix.crossserver.Initialize()
+	if (not ix.crossserver.ready) then return end
+	ix.squad.cross.sessions = ix.crossserver.sessions
+	ix.squad.cross.starting = true
+	ix.squad.cross.lockedEnabled = true
 	-- These fields become explicit mirrors. Normal Helix saves must never restore stale remote ranks.
 	ix.char.vars.squadID.bSaveLoadInitialOnly = true
 	ix.char.vars.squadOfficer.bSaveLoadInitialOnly = true
@@ -137,17 +135,17 @@ function cross.Initialize()
 	import:InsertFrom(source, {"scope", "character_id", "squad_id", "member_rank"})
 	queries[#queries + 1] = import
 	sequence(queries, function(success)
-		if (not success) then cross.starting = false return end
-		cross.Query(mysql:Select("ix_squads_squads"), function(records, failure)
-			if (failure) then cross.starting = false return end
+		if (not success) then ix.squad.cross.starting = false return end
+		ix.squad.cross.Query(mysql:Select("ix_squads_squads"), function(records, failure)
+			if (failure) then ix.squad.cross.starting = false return end
 			local index = 0
 			local function importNext()
 				index = index + 1
 				local record = records and records[index]
 				if (not record) then
-					cross.starting = false
-					cross.ready = true
-					cross.Refresh()
+					ix.squad.cross.starting = false
+					ix.squad.cross.ready = true
+					ix.squad.cross.Refresh()
 					return
 				end
 				local members = mysql:Select("ix_characters")
@@ -155,8 +153,8 @@ function cross.Initialize()
 				members:Select("steamid")
 				members:Where("schema", scope())
 				members:Where("squad_id", record.owner)
-				cross.Query(members, function(rows, failure)
-					if (failure) then cross.starting = false return end
+				ix.squad.cross.Query(members, function(rows, failure)
+					if (failure) then ix.squad.cross.starting = false return end
 					local leader = ix.squad.ResolveLeader(record.owner, rows)
 					if (leader) then
 						local insert = mysql:InsertIgnore("ix_squads_state")
@@ -164,14 +162,14 @@ function cross.Initialize()
 							name = record.name, description = record.description or "", color = record.color or "NULL"}) do
 							insert:Insert(field, value)
 						end
-						cross.Query(insert, function(_, errorText)
-							if (errorText) then cross.starting = false return end
+						ix.squad.cross.Query(insert, function(_, errorText)
+							if (errorText) then ix.squad.cross.starting = false return end
 							local update = scopedQuery("Update", "ix_squads_members", record.owner)
 							update:Update("member_rank", 2)
 							update:Where("character_id", leader)
 							update:WhereExpr(activeCondition(record.owner))
-							cross.Query(update, function(_, rankError)
-								if (rankError) then cross.starting = false else importNext() end
+							ix.squad.cross.Query(update, function(_, rankError)
+								if (rankError) then ix.squad.cross.starting = false else importNext() end
 							end)
 						end)
 					else
@@ -185,20 +183,20 @@ function cross.Initialize()
 	end)
 end
 
-function cross.Claim(client, character)
-	presence.Claim(client, character)
+function ix.squad.cross.Claim(client, character)
+	ix.crossserver.Claim(client, character)
 end
 
-function cross.Release(id, session)
-	presence.Release(id, session)
+function ix.squad.cross.Release(id, session)
+	ix.crossserver.Release(id, session)
 end
 
-function cross.Heartbeat(id, session)
-	presence.Heartbeat(id, session)
+function ix.squad.cross.Heartbeat(id, session)
+	ix.crossserver.Heartbeat(id, session)
 end
 
-function cross.BeginTransfer(character, destination, callback)
-	presence.BeginTransfer(character, destination, callback)
+function ix.squad.cross.BeginTransfer(character, destination, callback)
+	ix.crossserver.BeginTransfer(character, destination, callback)
 end
 
 local function chunkedIDs(ids, callback, finished)
@@ -216,12 +214,12 @@ local function chunkedIDs(ids, callback, finished)
 	nextChunk()
 end
 
-function cross.Refresh()
-	if (not cross.ready) then return end
-	if (cross.reading) then cross.refreshAgain = true return end
-	cross.refreshAgain = false
-	cross.reading = true
-	local generation = cross.generation
+function ix.squad.cross.Refresh()
+	if (not ix.squad.cross.ready) then return end
+	if (ix.squad.cross.reading) then ix.squad.cross.refreshAgain = true return end
+	ix.squad.cross.refreshAgain = false
+	ix.squad.cross.reading = true
+	local generation = ix.squad.cross.generation
 	local ids, seen = {}, {}
 	local function addID(id)
 		if (ix.char.loaded[id] and not seen[id]) then
@@ -248,8 +246,8 @@ function cross.Refresh()
 			mysql.Compare("s.scope", "=", mysql.Column("m.scope"))), "LEFT")
 		query:WhereExpr(mysql.Compare("c.schema", "=", scope()))
 		query:WhereIn("id", chunk)
-		cross.Query(query, function(rows, failure)
-			if (not failure and generation == cross.generation) then
+		ix.squad.cross.Query(query, function(rows, failure)
+			if (not failure and generation == ix.squad.cross.generation) then
 				for _, row in ipairs(rows) do
 					local character = ix.char.loaded[tonumber(row.id)]
 					if (character) then
@@ -267,15 +265,18 @@ function cross.Refresh()
 			nextChunk()
 		end)
 	end, function()
-		cross.reading = false
-		if (generation ~= cross.generation or cross.refreshAgain) then cross.Refresh() return end
-		cross.RefreshSquads()
-		cross.RefreshInvites()
+		ix.squad.cross.reading = false
+		if (generation ~= ix.squad.cross.generation or ix.squad.cross.refreshAgain) then
+			ix.squad.cross.Refresh()
+			return
+		end
+		ix.squad.cross.RefreshSquads()
+		ix.squad.cross.RefreshInvites()
 	end)
 end
 
-function cross.RefreshSquads()
-	if (cross.squadReading) then return end
+function ix.squad.cross.RefreshSquads()
+	if (ix.squad.cross.squadReading) then return end
 	local ids = {}
 	for _, client in ipairs(player.GetHumans()) do
 		local character = client:GetCharacter()
@@ -288,25 +289,25 @@ function cross.RefreshSquads()
 	end
 	local ordered = {}
 	for id in pairs(ids) do ordered[#ordered + 1] = id end
-	cross.squadReading = true
+	ix.squad.cross.squadReading = true
 	local index = 0
 	local function nextSquad()
 		index = index + 1
 		local id = ordered[index]
 		if (not id) then
-			cross.squadReading = false
+			ix.squad.cross.squadReading = false
 			for cachedID in pairs(ix.squad.list) do
 				if (not ids[cachedID]) then
 					ix.squad.list[cachedID] = nil
-					if (cross.signatures) then cross.signatures[cachedID] = nil end
+					if (ix.squad.cross.signatures) then ix.squad.cross.signatures[cachedID] = nil end
 				end
 			end
 			return
 		end
-		local generation = cross.generation
+		local generation = ix.squad.cross.generation
 		local state = scopedQuery("Select", "ix_squads_state", id)
 		state:Where("active", 1)
-		cross.Query(state, function(records, failure)
+		ix.squad.cross.Query(state, function(records, failure)
 			if (failure or not records[1]) then
 				if (not failure) then ix.squad.list[id] = nil end
 				nextSquad()
@@ -334,8 +335,8 @@ function cross.RefreshSquads()
 				mysql.Compare("p.scope", "=", mysql.Column("m.scope")),
 				mysql.Compare("p.character_id", "=", mysql.Column("m.character_id"))), "LEFT")
 			query:WhereExpr(mysql.All(mysql.Compare("m.scope", "=", scope()), mysql.Compare("m.squad_id", "=", id)))
-			cross.Query(query, function(rows, errorText)
-				if (not errorText and generation == cross.generation) then
+			ix.squad.cross.Query(query, function(rows, errorText)
+				if (not errorText and generation == ix.squad.cross.generation) then
 					local hasLeader = false
 					for _, row in ipairs(rows) do
 						if (tonumber(row.character_id) == tonumber(record.leader_id)) then hasLeader = true end
@@ -359,9 +360,9 @@ function cross.RefreshSquads()
 						}
 					end
 					local signature = util.TableToJSON(squad:CollectData())
-					cross.signatures = cross.signatures or {}
-					if (cross.signatures[id] ~= signature) then
-						cross.signatures[id] = signature
+					ix.squad.cross.signatures = ix.squad.cross.signatures or {}
+					if (ix.squad.cross.signatures[id] ~= signature) then
+						ix.squad.cross.signatures[id] = signature
 						squad:Sync(nil, true)
 					end
 					for _, client in ipairs(squad:GetReceivers()) do
@@ -381,12 +382,12 @@ function cross.RefreshSquads()
 	nextSquad()
 end
 
-function cross.RefreshInvites()
-	cross.inviteReads = cross.inviteReads or {}
+function ix.squad.cross.RefreshInvites()
+	ix.squad.cross.inviteReads = ix.squad.cross.inviteReads or {}
 	for _, client in ipairs(player.GetHumans()) do
 		local character = client:GetCharacter()
-		if (character and character:GetSquadID() == "NULL" and not cross.inviteReads[character:GetID()]) then
-			cross.inviteReads[character:GetID()] = true
+		if (character and character:GetSquadID() == "NULL" and not ix.squad.cross.inviteReads[character:GetID()]) then
+			ix.squad.cross.inviteReads[character:GetID()] = true
 			local query = mysql:Select("ix_squads_invites"):Alias("i")
 			query:SelectAll("i")
 			query:SelectColumn("s.name", "name")
@@ -399,8 +400,8 @@ function cross.RefreshInvites()
 			query:WhereExpr(mysql.All(mysql.Compare("i.scope", "=", scope()),
 				mysql.Compare("i.character_id", "=", character:GetID()), mysql.Compare("s.active", "=", 1),
 				mysql.Compare("i.expires", ">", mysql.Now())))
-			cross.Query(query, function(rows, failure)
-				cross.inviteReads[character:GetID()] = nil
+			ix.squad.cross.Query(query, function(rows, failure)
+				ix.squad.cross.inviteReads[character:GetID()] = nil
 				if (failure or not IsValid(client) or client:GetCharacter() ~= character) then return end
 				local row = rows[1]
 				local inviteToken = row and row.token or ""
@@ -417,8 +418,8 @@ function cross.RefreshInvites()
 	end
 end
 
-function cross.New(name, character, callback)
-	if (not cross.ready) then return end
+function ix.squad.cross.New(name, character, callback)
+	if (not ix.squad.cross.ready) then return end
 	local id = "c:" .. character:GetID() .. ":" .. token():sub(1, 7)
 	local source = mysql:Select()
 	for _, value in ipairs({scope(), id, character:GetID(), name, "", "NULL"}) do source:SelectValue(value) end
@@ -427,9 +428,9 @@ function cross.New(name, character, callback)
 	insert:InsertFrom(source, {"scope", "squad_id", "leader_id", "name", "description", "color"})
 	mutate(insert, function(success)
 		if (not success) then return end
-		cross.EnsureMember(character:GetID(), function()
+		ix.squad.cross.EnsureMember(character:GetID(), function()
 			if (ix.char.loaded[character:GetID()] ~= character) then
-				cross.Query(scopedQuery("Delete", "ix_squads_state", id))
+				ix.squad.cross.Query(scopedQuery("Delete", "ix_squads_state", id))
 				return
 			end
 			local update = scopedQuery("Update", "ix_squads_members")
@@ -442,7 +443,7 @@ function cross.New(name, character, callback)
 				local read = scopedQuery("Select", "ix_squads_members")
 				read:Select("squad_id")
 				read:Where("character_id", character:GetID())
-				cross.Query(read, function(rows, failure)
+				ix.squad.cross.Query(read, function(rows, failure)
 						if (failure) then return end
 						if (rows[1] and rows[1].squad_id == id) then
 							if (ix.char.loaded[character:GetID()] ~= character) then return end
@@ -450,9 +451,9 @@ function cross.New(name, character, callback)
 							local squad = ix.squad.Register(id, name, {leaderID = character:GetID()})
 							squad.members[character:GetID()] = 2
 							if (callback) then callback(squad) end
-							cross.Refresh()
+							ix.squad.cross.Refresh()
 						else
-							cross.Query(scopedQuery("Delete", "ix_squads_state", id))
+							ix.squad.cross.Query(scopedQuery("Delete", "ix_squads_state", id))
 						end
 					end)
 			end)
@@ -460,15 +461,15 @@ function cross.New(name, character, callback)
 	end)
 end
 
-function cross.EnsureMember(characterID, callback)
+function ix.squad.cross.EnsureMember(characterID, callback)
 	local query = mysql:InsertIgnore("ix_squads_members")
 	for field, value in pairs({scope = scope(), character_id = characterID, squad_id = "NULL", member_rank = 0}) do
 		query:Insert(field, value)
 	end
-	cross.Query(query, function(_, failure) if (not failure) then callback() end end)
+	ix.squad.cross.Query(query, function(_, failure) if (not failure) then callback() end end)
 end
 
-function cross.ChangeRank(characterID, client, desiredRank)
+function ix.squad.cross.ChangeRank(characterID, client, desiredRank)
 	local actor = client:GetCharacter()
 	local squad = actor and ix.squad.list[actor:GetSquadID()]
 	local rank = squad and squad.members[characterID]
@@ -484,7 +485,7 @@ function cross.ChangeRank(characterID, client, desiredRank)
 	mutate(query)
 end
 
-function cross.KickMember(characterID, client)
+function ix.squad.cross.KickMember(characterID, client)
 	local actor = client:GetCharacter()
 	local squad = actor and ix.squad.list[actor:GetSquadID()]
 	local rank = squad and squad:GetRank(client)
@@ -499,7 +500,7 @@ function cross.KickMember(characterID, client)
 	mutate(query)
 end
 
-function cross.Leave(client)
+function ix.squad.cross.Leave(client)
 	local actor = client:GetCharacter()
 	local squad = actor and ix.squad.list[actor:GetSquadID()]
 	if (not squad or squad.leaderID == actor:GetID()) then return end
@@ -511,7 +512,7 @@ function cross.Leave(client)
 	mutate(query)
 end
 
-function cross.Disband(id, leaderID)
+function ix.squad.cross.Disband(id, leaderID)
 	if (not leaderID) then return end
 	local query = scopedQuery("Update", "ix_squads_state", id)
 	query:Update("active", 0)
@@ -521,7 +522,7 @@ function cross.Disband(id, leaderID)
 	mutate(query)
 end
 
-function cross.SaveSettings(client, data)
+function ix.squad.cross.SaveSettings(client, data)
 	local actor = client:GetCharacter()
 	if (not actor) then return end
 	local id = actor:GetSquadID()
@@ -548,7 +549,7 @@ function cross.SaveSettings(client, data)
 	mutate(query)
 end
 
-function cross.Invite(target, client)
+function ix.squad.cross.Invite(target, client)
 	local actor, character = client:GetCharacter(), target:GetCharacter()
 	local id = actor:GetSquadID()
 	local inviteToken = token()
@@ -565,7 +566,7 @@ function cross.Invite(target, client)
 		stored:Where("scope", scope())
 		stored:Where("character_id", character:GetID())
 		stored:Where("token", inviteToken)
-		cross.Query(stored, function(rows, failure)
+		ix.squad.cross.Query(stored, function(rows, failure)
 			if failure or not rows[1] then return end
 			if IsValid(client) and client:GetCharacter() == actor then
 				client:Notify("Squad invitation sent to " .. character:GetName() .. ".")
@@ -574,14 +575,14 @@ function cross.Invite(target, client)
 	end)
 end
 
-function cross.AcceptInvite(client)
+function ix.squad.cross.AcceptInvite(client)
 	local character = client:GetCharacter()
 	local invite = client.squad_invite
 	if (not character or not invite or tonumber(invite.character_id) ~= character:GetID()) then return end
 	client.squad_invite = nil
 	client.ixSquadInviteToken = nil
 	client:SetLocalVar("squadInvite", nil)
-	cross.EnsureMember(character:GetID(), function()
+	ix.squad.cross.EnsureMember(character:GetID(), function()
 		if (not IsValid(client) or client:GetCharacter() ~= character) then return end
 		local stored = scopedQuery("Select", "ix_squads_invites")
 		stored:SelectValue(1)
@@ -600,12 +601,12 @@ function cross.AcceptInvite(client)
 			local delete = scopedQuery("Delete", "ix_squads_invites")
 			delete:Where("character_id", character:GetID())
 			delete:Where("token", invite.token)
-			cross.Query(delete)
+			ix.squad.cross.Query(delete)
 		end)
 	end)
 end
 
-function cross.DeleteCharacter(character)
+function ix.squad.cross.DeleteCharacter(character)
 	local characterID = character:GetID()
 	local state = scopedQuery("Update", "ix_squads_state")
 	state:Update("active", 0)
@@ -617,27 +618,27 @@ function cross.DeleteCharacter(character)
 	member:Update("member_rank", 0)
 	member:Where("character_id", characterID)
 	mutate(member)
-	local session = cross.sessions[characterID]
-	if (session) then cross.Release(characterID, session) end
+	local session = ix.squad.cross.sessions[characterID]
+	if (session) then ix.squad.cross.Release(characterID, session) end
 end
 
 function PLUGIN:Think()
-	if (not cross.Enabled()) then return end
-	if (not cross.ready) then
-		if ((cross.nextInitialize or 0) < CurTime()) then
-			cross.nextInitialize = CurTime() + 30
-			cross.Initialize()
+	if (not ix.squad.cross.Enabled()) then return end
+	if (not ix.squad.cross.ready) then
+		if ((ix.squad.cross.nextInitialize or 0) < CurTime()) then
+			ix.squad.cross.nextInitialize = CurTime() + 30
+			ix.squad.cross.Initialize()
 		end
 		return
 	end
-	if ((cross.nextPoll or 0) > CurTime()) then return end
-	cross.nextPoll = CurTime() + POLL_INTERVAL
-	cross.Refresh()
+	if ((ix.squad.cross.nextPoll or 0) > CurTime()) then return end
+	ix.squad.cross.nextPoll = CurTime() + POLL_INTERVAL
+	ix.squad.cross.Refresh()
 end
 
 -- Extend the public roster with display metadata, never the private squad roster.
 PLUGIN["cotz/crossserver/roster-query"] = function(_, query)
-	if (not cross.ready) then return end
+	if (not ix.squad.cross.ready) then return end
 	query:SelectColumn("s.squad_id", "squad_id")
 	query:SelectColumn("s.name", "squad_name")
 	query:SelectColumn("s.color", "squad_color")

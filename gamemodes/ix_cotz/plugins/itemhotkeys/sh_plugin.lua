@@ -7,7 +7,7 @@ ix.util.Include("cl_plugin.lua")
 ix.util.Include("sh_hotkeyitems.lua")
 
 local playerMeta = FindMetaTable("Player")
-local charMeta = ix.meta.character or {}
+ix.meta.character = ix.meta.character or {}
 
 ix.char.RegisterVar("hotkeys", {
 	field = "hotkeys",
@@ -40,13 +40,13 @@ if (CLIENT) then
 	end)
 end
 
-function charMeta:GetHotkeyItemName(hotkeyindex)
+function ix.meta.character:GetHotkeyItemName(hotkeyindex)
 	local hotkeys = self:GetHotkeys()
 
 	return hotkeys[hotkeyindex]
 end
 
-function charMeta:SetHotkey(hotkeyindex, item)
+function ix.meta.character:SetHotkey(hotkeyindex, item)
 	local hotkeys = self:GetHotkeys()
 
 	hotkeys[hotkeyindex] = item
@@ -54,7 +54,7 @@ function charMeta:SetHotkey(hotkeyindex, item)
 	self:SetHotkeys(hotkeys)
 end
 
-function charMeta:ClearHotkeys()
+function ix.meta.character:ClearHotkeys()
 	local emptyhotkeys = {}
 
 	self:SetHotkeys(emptyhotkeys)

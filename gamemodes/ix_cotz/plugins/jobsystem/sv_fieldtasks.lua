@@ -1,9 +1,7 @@
 local PLUGIN = PLUGIN
-local field = ix.jobs.field
 local entities, pending = {}, {}
 local nextUpdate = 0
-local settings = field.runtimeSettings
-field.enabled = true
+ix.jobs.field.enabled = true
 
 util.AddNetworkString("cotz/jobsystem/field-action")
 util.AddNetworkString("cotz/jobsystem/field-marker")
@@ -12,37 +10,40 @@ local function keyFor(character, job)
 	return character:GetID() .. ":" .. job.rewardKey
 end
 
-function field.SaveJob(character, npc, job)
+function ix.jobs.field.SaveJob(character, npc, job)
 	local jobs = character:GetJobs()
 	jobs[npc] = job
 	character:SetJobs(jobs)
 	character:Save()
 end
 
-function field.Cleanup(character, job)
+function ix.jobs.field.Cleanup(character, job)
 	local key = keyFor(character, job)
 	if IsValid(entities[key]) then entities[key]:Remove() end
 	entities[key] = nil
 	pending[key] = nil
-	if job.fieldTask.kind == "defence" then field.StopDefence(character, job) end
+	if job.fieldTask.kind == "defence" then ix.jobs.field.StopDefence(character, job) end
 	-- In-flight item callbacks validate the active claim before transferring their result.
-	local cargo = field.FindCargo(character, job)
+	local cargo = ix.jobs.field.FindCargo(character, job)
 	while cargo do
 		cargo:Remove()
-		cargo = field.FindCargo(character, job)
+		cargo = ix.jobs.field.FindCargo(character, job)
 	end
 end
 
-function field.Collect(client, entity)
+function ix.jobs.field.Collect(client, entity)
 	if not IsValid(entity) then return end
 	local npc, claim = entity.fieldNPC, entity.fieldClaim
-	local character, job = field.ActiveJob(client, npc, claim)
+	local character, job = ix.jobs.field.ActiveJob(client, npc, claim)
 	if not character or character:GetID() ~= entity.fieldOwner then return end
 	local state = job.fieldTask
-	if state.map ~= game.GetMap() or client:GetPos():DistToSqr(entity:GetPos()) > field.useDistance ^ 2 then return end
+	if state.map ~= game.GetMap()
+		or client:GetPos():DistToSqr(entity:GetPos()) > ix.jobs.field.useDistance ^ 2 then return end
 	if CurTime() < (client.cotzFieldNext or 0) then return end
-	client.cotzFieldNext = CurTime() + field.actionInterval
-	if state.stage == "carrying" or state.stage == "delivered" or field.FindCargo(character, job) then return end
+	client.cotzFieldNext = CurTime() + ix.jobs.field.actionInterval
+	if state.stage == "carrying" or state.stage == "delivered" or ix.jobs.field.FindCargo(character, job) then
+		return
+	end
 	if state.kind == "defence" and state.stage ~= "ready" then
 		client:Notify("Finish the research operation before collecting the recorder.")
 		return
@@ -66,7 +67,7 @@ function field.Collect(client, entity)
 		client:Notify("Make room in your main inventory, then collect it again.")
 		return
 	end
-	local request = {expires = CurTime() + settings.pickupTimeout, client = client}
+	local request = {expires = CurTime() + ix.jobs.field.runtimeSettings.pickupTimeout, client = client}
 	pending[key] = request
 	-- Instance first, then transfer the existing item synchronously. Inventory:Add(string)
 	-- returns reserved coordinates before its database callback has created the item.
@@ -77,10 +78,10 @@ function field.Collect(client, entity)
 		0, 0, function(item)
 			if pending[key] ~= request then item:Remove() return end
 			pending[key] = nil
-			local current, active = field.ActiveJob(client, npc, claim)
+			local current, active = ix.jobs.field.ActiveJob(client, npc, claim)
 			if current ~= character or not IsValid(entity) or active.fieldTask.map ~= game.GetMap()
-				or active.fieldTask.stage == "carrying" or field.FindCargo(character, active)
-				or client:GetPos():DistToSqr(entity:GetPos()) > field.useDistance ^ 2 then
+				or active.fieldTask.stage == "carrying" or ix.jobs.field.FindCargo(character, active)
+				or client:GetPos():DistToSqr(entity:GetPos()) > ix.jobs.field.useDistance ^ 2 then
 				item:Remove()
 				return
 			end
@@ -96,9 +97,9 @@ function field.Collect(client, entity)
 				return
 			end
 			active.fieldTask.stage = "carrying"
-			active.isCompleted = not field.NeedsDelivery(active.fieldTask)
+			active.isCompleted = not ix.jobs.field.NeedsDelivery(active.fieldTask)
 			active.progress = active.isCompleted and active.numberRec or 0
-			field.SaveJob(character, npc, active)
+			ix.jobs.field.SaveJob(character, npc, active)
 			entity:Remove()
 			entities[key] = nil
 			if active.fieldTask.recipient then
@@ -112,12 +113,12 @@ function field.Collect(client, entity)
 		end, character:GetID(), client:SteamID64())
 end
 
-function field.SpawnObject(character, npc, job)
+function ix.jobs.field.SpawnObject(character, npc, job)
 	local client = character:GetPlayer()
-	local point = field.GroundPoint(field.Unpack(job.fieldTask.point), job.fieldTask.cargo, client)
+	local point = ix.jobs.field.GroundPoint(ix.jobs.field.Unpack(job.fieldTask.point), job.fieldTask.cargo, client)
 	if not point then
 		if IsValid(client) and CurTime() >= (client.cotzFieldBlockedNext or 0) then
-			client.cotzFieldBlockedNext = CurTime() + settings.blockedNotifyInterval
+			client.cotzFieldBlockedNext = CurTime() + ix.jobs.field.runtimeSettings.blockedNotifyInterval
 			client:Notify("The equipment site is obstructed. Clear movable objects nearby and try again.")
 		end
 		return
@@ -135,18 +136,18 @@ function field.SpawnObject(character, npc, job)
 	return entity
 end
 
-function field.GetObject(character, job)
+function ix.jobs.field.GetObject(character, job)
 	return entities[keyFor(character, job)]
 end
 
 function PLUGIN:Think()
-	if not field.enabled or CurTime() < nextUpdate then return end
-	nextUpdate = CurTime() + field.updateInterval
+	if not ix.jobs.field.enabled or CurTime() < nextUpdate then return end
+	nextUpdate = CurTime() + ix.jobs.field.updateInterval
 	local keep = {}
 	for _, client in player.Iterator() do
 		local character = client:Alive() and client:GetCharacter()
 		if character then
-			field.UpdateCharacter(client, character, keep)
+			ix.jobs.field.UpdateCharacter(client, character, keep)
 		end
 	end
 	for key, entity in pairs(entities) do
@@ -163,36 +164,36 @@ function PLUGIN:Think()
 			end
 		end
 	end
-	field.PruneDefences(keep)
+	ix.jobs.field.PruneDefences(keep)
 end
 
 function PLUGIN:OnUnload()
-	field.enabled = false
+	ix.jobs.field.enabled = false
 	for key, entity in pairs(entities) do
 		if IsValid(entity) then entity:Remove() end
 		entities[key] = nil
 	end
 	for key in pairs(pending) do pending[key] = nil end
-	field.PruneDefences({})
+	ix.jobs.field.PruneDefences({})
 end
 
-function field.UpdateCharacter(client, character, keep)
+function ix.jobs.field.UpdateCharacter(client, character, keep)
 	for npc, job in pairs(character:GetJobs()) do
-		if job.fieldTask then field.UpdateJob(client, character, npc, job, keep) end
+		if job.fieldTask then ix.jobs.field.UpdateJob(client, character, npc, job, keep) end
 	end
 end
 
-function field.UpdateJob(client, character, npc, job, keep)
+function ix.jobs.field.UpdateJob(client, character, npc, job, keep)
 	local state = job.fieldTask
 	if state.map ~= game.GetMap() then return end
 	if state.stage == "delivered" then return end
 	local key = keyFor(character, job)
 	local position = client:GetPos()
-	if field.FindCargo(character, job) then
-		local complete = not field.NeedsDelivery(state)
+	if ix.jobs.field.FindCargo(character, job) then
+		local complete = not ix.jobs.field.NeedsDelivery(state)
 		if state.stage ~= "carrying" or job.isCompleted ~= complete then
 			state.stage, job.progress, job.isCompleted = "carrying", complete and job.numberRec or 0, complete
-			field.SaveJob(character, npc, job)
+			ix.jobs.field.SaveJob(character, npc, job)
 		end
 		return
 	end
@@ -201,20 +202,22 @@ function field.UpdateJob(client, character, npc, job, keep)
 		state.stage = state.kind == "sensor" and "recording" or "search"
 		if state.kind == "defence" then state.stage = "ready" end
 		job.progress, job.isCompleted = 0, false
-		field.SaveJob(character, npc, job)
+		ix.jobs.field.SaveJob(character, npc, job)
 	end
 	if state.kind == "defence" and state.stage == "defending" then
-		field.UpdateDefence(client, character, npc, job, keep)
+		ix.jobs.field.UpdateDefence(client, character, npc, job, keep)
 		return
 	end
 	if state.kind == "sensor" and state.stage == "recording" and not state.departed
-		and position:DistToSqr(field.Unpack(state.point)) >= state.leaveDistance ^ 2 then
+		and position:DistToSqr(ix.jobs.field.Unpack(state.point)) >= state.leaveDistance ^ 2 then
 		state.departed = true
-		field.SaveJob(character, npc, job)
+		ix.jobs.field.SaveJob(character, npc, job)
 	end
 	if IsValid(entities[key]) then
-		if position:DistToSqr(field.Unpack(state.point)) <= field.despawnDistance ^ 2 then keep[key] = true end
-	elseif field.ShouldSpawn(state, position) then
-		keep[key] = field.SpawnObject(character, npc, job) ~= nil
+		if position:DistToSqr(ix.jobs.field.Unpack(state.point)) <= ix.jobs.field.despawnDistance ^ 2 then
+			keep[key] = true
+		end
+	elseif ix.jobs.field.ShouldSpawn(state, position) then
+		keep[key] = ix.jobs.field.SpawnObject(character, npc, job) ~= nil
 	end
 end

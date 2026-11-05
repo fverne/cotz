@@ -6,32 +6,32 @@ properties and behavior; instances hold unique data such as an item ID or a cust
 ]]
 -- @classmod Item
 
-local itemMeta = ix.meta.item or {}
+ix.meta.item = ix.meta.item or {}
 
 --- Returns the material of the item.
 -- @realm shared
 -- @treturn string The material of the item
-function itemMeta:GetMaterial()
+function ix.meta.item:GetMaterial()
 	return self.material or ""
 end
 
-function itemMeta:GetColor()
+function ix.meta.item:GetColor()
 	return self.color or Color(255, 255, 255, 255)
 end
 
 -- support for vanity/custom items
-function itemMeta:GetName()
+function ix.meta.item:GetName()
 	return self:GetData("name", self.name)
 end
 
-function itemMeta:GetDescription()
+function ix.meta.item:GetDescription()
 	return self:GetData("description", self.description)
 end
 
 -- Schema override of the Helix method: keep hideout persistence hooks
 -- here so the upstream framework remains unchanged.
 if SERVER then
-	function itemMeta:Transfer(invID, x, y, client, noReplication, isLogical)
+	function ix.meta.item:Transfer(invID, x, y, client, noReplication, isLogical)
 		invID = invID or 0
 
 		if self.invID == invID then

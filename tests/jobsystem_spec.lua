@@ -24,30 +24,29 @@ dofile(base .. "libs/sh_00_definitions.lua")
 dofile(base .. "libs/sh_jobs.lua")
 dofile(base .. "libs/sh_tooljobs.lua")
 dofile(base .. "sv_npcjobs.lua")
-local jobs = ix.jobs
-jobs.field.IsAvailable = function() return true end
+ix.jobs.field.IsAvailable = function() return true end
 
-check(jobs.getJobFromTier(100) == nil, "missing tiers return without retrying indefinitely")
-jobs.register({name = "First", numberRec = 1, tier = 1, categories = {"first"}}, "example")
-jobs.register({name = "Second", numberRec = 2, tier = 2, categories = {"second"}}, "example")
-check(#jobs.jobsbycategory.first == 0 and #jobs.jobsbycategory.second == 1,
+check(ix.jobs.getJobFromTier(100) == nil, "missing tiers return without retrying indefinitely")
+ix.jobs.register({name = "First", numberRec = 1, tier = 1, categories = {"first"}}, "example")
+ix.jobs.register({name = "Second", numberRec = 2, tier = 2, categories = {"second"}}, "example")
+check(#ix.jobs.jobsbycategory.first == 0 and #ix.jobs.jobsbycategory.second == 1,
 	"re-registration removes stale category memberships")
-check(jobs.getJobFromTier(2) == "example", "tier selection only returns matching jobs")
-check(jobs.getJobFromCategory("missing") == nil, "empty categories have no offer")
-check(not jobs.isStructValid({name = "Broken", numberRec = {5, 2}}), "invalid count ranges rejected")
-check(not jobs.isStructValid({name = "Broken", numberRec = "2"}), "invalid count types rejected")
+check(ix.jobs.getJobFromTier(2) == "example", "tier selection only returns matching jobs")
+check(ix.jobs.getJobFromCategory("missing") == nil, "empty categories have no offer")
+check(not ix.jobs.isStructValid({name = "Broken", numberRec = {5, 2}}), "invalid count ranges rejected")
+check(not ix.jobs.isStructValid({name = "Broken", numberRec = "2"}), "invalid count types rejected")
 check(not playerMeta.ixHasJobFromNPC({GetCharacter = function() end}, "Contact"),
 	"job queries tolerate missing characters")
 
-local offers = jobs.getNPCJobs("Contact", {"second"}, 2)
-check(#offers == 2 and jobs.NPCHasJob("Contact", "example"), "NPC offers register on the server")
-jobs.setNPCJobTaken("Contact", "example")
-check(#jobs.getNPCJobs("Contact", {"second"}, 2) == 2, "sparse taken offers refill correctly")
-check(not jobs.NPCHasJob("Unknown", "example"), "unknown NPC has no offer")
-jobs.activejobs.Contact = {{identifier = "example", expiration = 0}}
-check(not jobs.NPCHasJob("Contact", "example"), "expired offers cannot be claimed")
-check(#jobs.getNPCJobs("Empty", {"missing"}, 2) == 0, "empty pools create no placeholder offers")
-check(#jobs.getNPCJobs("Bounded", {"second"}, 9999) == jobs.settings.maxNPCOffers,
+local offers = ix.jobs.getNPCJobs("Contact", {"second"}, 2)
+check(#offers == 2 and ix.jobs.NPCHasJob("Contact", "example"), "NPC offers register on the server")
+ix.jobs.setNPCJobTaken("Contact", "example")
+check(#ix.jobs.getNPCJobs("Contact", {"second"}, 2) == 2, "sparse taken offers refill correctly")
+check(not ix.jobs.NPCHasJob("Unknown", "example"), "unknown NPC has no offer")
+ix.jobs.activejobs.Contact = {{identifier = "example", expiration = 0}}
+check(not ix.jobs.NPCHasJob("Contact", "example"), "expired offers cannot be claimed")
+check(#ix.jobs.getNPCJobs("Empty", {"missing"}, 2) == 0, "empty pools create no placeholder offers")
+check(#ix.jobs.getNPCJobs("Bounded", {"second"}, 9999) == ix.jobs.settings.maxNPCOffers,
 	"NPC offer counts are bounded")
 
 local statsData = {}
@@ -69,7 +68,7 @@ local target = {
 	GetPos = function() return {} end,
 	SetNetVar = function(_, key, value) published = value end,
 }
-jobs.register({name = "Computer", numberRec = 1, categories = {"artifactcollect_computer"}}, "computer")
+ix.jobs.register({name = "Computer", numberRec = 1, categories = {"artifactcollect_computer"}}, "computer")
 callbacks.job_updatenpcjobs(client, target, "'Computer'", {"second"}, 9999)
 check(#published == 2 and published[1] == "computer", "client cannot choose categories or offer count")
 published = nil
@@ -92,21 +91,21 @@ now = now + 1
 callbacks.job_removeplayerjob(client, "Contact")
 check(removed == "Contact", "valid abandonment reaches character lifecycle")
 
-jobs.list, jobs.jobsbycategory = {}, {}
+ix.jobs.list, ix.jobs.jobsbycategory = {}, {}
 for _, name in ipairs({"itemjobs_artifacts_pc", "itemjobs_artifacts", "itemjobs_meals", "itemjobs_parts",
 	"itemjobs_world", "killjobs_humans", "killjobs_mutants", "specialjobs", "fieldjobs"}) do
 	dofile(base .. "definitions/sh_" .. name .. ".lua")
 end
 local count = 0
-for identifier, definition in pairs(jobs.list) do
+for identifier, definition in pairs(ix.jobs.list) do
 	count = count + 1
-	check(jobs.isStructValid(definition), "valid registered definition: " .. identifier)
+	check(ix.jobs.isStructValid(definition), "valid registered definition: " .. identifier)
 end
 check(count == 337, "all 304 ordinary, 18 tool and 15 field definitions load")
-check(jobs.list.scanAreaEasy1.toolData.npoints == 1, "legacy tool count is editable data")
-check(jobs.list.stashPackageNpc_hard.toolItem == "stashpackage_heavy", "legacy tool ID preserved")
+check(ix.jobs.list.scanAreaEasy1.toolData.npoints == 1, "legacy tool count is editable data")
+check(ix.jobs.list.stashPackageNpc_hard.toolItem == "stashpackage_heavy", "legacy tool ID preserved")
 
-local tool = jobs.list.scanAreaEasy1
+local tool = ix.jobs.list.scanAreaEasy1
 local issued, removedTool
 local data = {finished = true, npoints = 1, finishedtrigger = "scanAreaEasyComplete"}
 local item = {
@@ -147,7 +146,7 @@ hook = {Run = function(_, recipient, trigger)
 	events[recipient][trigger] = (events[recipient][trigger] or 0) + 1
 end}
 PLUGIN = {}
-jobs.field.DefenceKilled = function() end
+ix.jobs.field.DefenceKilled = function() end
 local neighbour = {IsPlayer = function() return true end, GetCharacter = function() return {} end}
 client.IsPlayer = function() return true end
 client.GetPos = function() return {} end

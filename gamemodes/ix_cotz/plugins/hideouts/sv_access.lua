@@ -12,8 +12,8 @@ function PLUGIN:GetSquadRank(client, record)
 	local character = IsValid(client) and client:GetCharacter()
 	local squad = record and ix.squad and ix.squad.list[record.squadID]
 	if not character or not squad then return end
-	local cross = ix.squad.cross
-	if cross and cross.Enabled() and (not squad.hideoutFresh or CurTime() - squad.hideoutFresh > 15) then
+	if ix.squad.cross and ix.squad.cross.Enabled()
+		and (not squad.hideoutFresh or CurTime() - squad.hideoutFresh > 15) then
 		return
 	end
 
@@ -34,8 +34,7 @@ function PLUGIN:CanAccess(client, record)
 	if not character or not record or record.deleting or record.frozen then return false end
 	if record.ownerType == "squad" then
 		local squad = ix.squad and ix.squad.list[record.squadID]
-		local cross = ix.squad and ix.squad.cross
-		if not squad or cross and cross.Enabled()
+		if not squad or ix.squad.cross and ix.squad.cross.Enabled()
 			and (not squad.hideoutFresh or CurTime() - squad.hideoutFresh > 15) then return false end
 		if self:GetSquadRank(client, record) ~= nil then return true end
 		if record.access == "public" then return true end
@@ -48,13 +47,12 @@ end
 function PLUGIN:CheckSquadRole(client, record, minimum, callback)
 	local character = IsValid(client) and client:GetCharacter()
 	if not character or not record or record.ownerType ~= "squad" then callback(false) return end
-	local cross = ix.squad and ix.squad.cross
-	if not cross or not cross.Enabled() then
+	if not ix.squad or not ix.squad.cross or not ix.squad.cross.Enabled() then
 		local rank = self:GetSquadRank(client, record)
 		callback(rank ~= nil and rank >= minimum)
 		return
 	end
-	if not cross.ready then callback(false) return end
+	if not ix.squad.cross.ready then callback(false) return end
 	local query = mysql:Select("ix_squads_members"):Alias("m")
 	query:SelectColumn("m.member_rank", "rank")
 	query:Join("ix_squads_state", "s", mysql.All(
@@ -64,7 +62,7 @@ function PLUGIN:CheckSquadRole(client, record, minimum, callback)
 	query:WhereExpr(mysql.Compare("m.character_id", "=", character:GetID()))
 	query:WhereExpr(mysql.Compare("m.squad_id", "=", record.squadID))
 	query:WhereExpr(mysql.Compare("s.active", "=", 1))
-	cross.Query(query, function(rows, failure)
+	ix.squad.cross.Query(query, function(rows, failure)
 		local rank = not failure and rows and rows[1] and tonumber(rows[1].rank)
 		callback(IsValid(client) and client:GetCharacter() == character and rank ~= nil and rank >= minimum)
 	end)

@@ -1,5 +1,3 @@
-local jobs = ix.jobs
-
 local function inventoryFor(client)
 	local character = client:GetCharacter()
 
@@ -25,7 +23,7 @@ local function removeTool(client, definition, completed)
 	end
 end
 
-function jobs.RegisterToolJob(definition, identifier)
+function ix.jobs.RegisterToolJob(definition, identifier)
 	definition.CanAcceptTask = function(client)
 		local inventory = inventoryFor(client)
 		if not inventory then return false end
@@ -43,5 +41,5 @@ function jobs.RegisterToolJob(definition, identifier)
 		definition.OnTaskComplete = function(client) removeTool(client, definition, true) end
 	end
 	definition.OnTaskAbandon = function(client) removeTool(client, definition, false) end
-	jobs.register(definition, identifier)
+	ix.jobs.register(definition, identifier)
 end

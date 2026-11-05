@@ -91,7 +91,6 @@ for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredi
 	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
 end
 dofile(base .. "libs/sh_fieldtasks.lua")
-local field = ix.jobs.field
 dofile(base .. "libs/sh_jobs.lua")
 dofile(base .. "sv_jobs.lua")
 dofile(base .. "sv_fieldplacement.lua")
@@ -126,40 +125,43 @@ local function points()
 	}
 end
 points()
-local providers = ix.plugin.list
+local originalProviders = ix.plugin.list
 ix.plugin.list = {eventcontroller = {eventpoints = {[map] = {
 	{Vector(1000, 0, 0)}, {Vector(4000, 0, 0)},
 }}}}
 for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop"}) do
-	check(field.IsAvailable(ix.jobs.list["field_" .. kind .. "_easy"]),
+	check(ix.jobs.field.IsAvailable(ix.jobs.list["field_" .. kind .. "_easy"]),
 		kind .. " can use event points without stash or hazard providers")
 end
-local site, approaches = field.SelectDefenceSite(field.settings.defence, map)
+local site, approaches = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map)
 check(site and #approaches > 0, "event points provide defence sites and approaches")
-ix.plugin.list = providers
+ix.plugin.list = originalProviders
 local presetMap = "preset_destination"
 local presetRows = {{Vector(1000, 0, 0)}, {Vector(4000, 0, 0)}}
 ix.plugin.list.firsttimesetup = {map_presets = {[presetMap] = {
 	plugindata = {eventcontroller = presetRows},
 }}}
-check(#field.CollectPoints({"event"}, presetMap) == 2, "missing destination data reads FTS coordinates")
-check(field.IsAvailable({fieldType = "sensor", fieldMap = presetMap}), "FTS enables destination sensors")
-check(field.SelectRoute(field.settings.deadDrop, presetMap) ~= nil, "FTS enables destination routes")
-check(field.SelectDefenceSite(field.settings.defence, presetMap) ~= nil, "FTS enables destination defence")
+check(#ix.jobs.field.CollectPoints({"event"}, presetMap) == 2, "missing destination data reads FTS coordinates")
+check(ix.jobs.field.IsAvailable({fieldType = "sensor", fieldMap = presetMap}), "FTS enables destination sensors")
+check(ix.jobs.field.SelectRoute(ix.jobs.field.settings.deadDrop, presetMap) ~= nil, "FTS enables destination routes")
+check(
+	ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, presetMap) ~= nil,
+	"FTS enables destination defence"
+)
 providers.eventcontroller.eventpoints[presetMap] = {}
-check(#field.CollectPoints({"event"}, presetMap) == 0, "explicitly empty saved map overrides FTS")
+check(#ix.jobs.field.CollectPoints({"event"}, presetMap) == 0, "explicitly empty saved map overrides FTS")
 providers.eventcontroller.eventpoints[presetMap] = {{Vector(7000, 0, 0)}}
-local savedPoints = field.CollectPoints({"event"}, presetMap)
+local savedPoints = ix.jobs.field.CollectPoints({"event"}, presetMap)
 check(#savedPoints == 1 and savedPoints[1].x == 7000, "saved destination edits override FTS")
 check(#presetRows == 2 and presetRows[1][1].x == 1000, "FTS collection leaves presets unchanged")
 providers.eventcontroller.eventpoints[presetMap] = nil
 ix.plugin.list.firsttimesetup = nil
-field.pools.combined = {"packages", "rf", "gas", "combined"}
-check(#field.CollectPoints({"combined", "event"}, map) == 4, "pools combine, deduplicate and bound recursion")
-check(#field.CollectPoints({"combined"}, "missing") == 0, "missing maps are empty")
+ix.jobs.field.pools.combined = {"packages", "rf", "gas", "combined"}
+check(#ix.jobs.field.CollectPoints({"combined", "event"}, map) == 4, "pools combine, deduplicate and bound recursion")
+check(#ix.jobs.field.CollectPoints({"combined"}, "missing") == 0, "missing maps are empty")
 check(#ix.plugin.list.eventcontroller.eventpoints[map] == 2, "collection never changes source tables")
-check(field.IsAvailable(ix.jobs.list.field_recovery_easy), "configured job is available")
-check(not field.IsAvailable(ix.jobs.list.field_recovery_hard), "absent target-map data hides the offer")
+check(ix.jobs.field.IsAvailable(ix.jobs.list.field_recovery_easy), "configured job is available")
+check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_recovery_hard), "absent target-map data hides the offer")
 check(ix.jobs.getJobFromCategory({"missing"}) == nil, "empty categories do not crash preview generation")
 check(ix.jobs.getJobFromCategory({"field_recovery_hard"}) == nil, "unavailable field jobs are filtered")
 
@@ -235,7 +237,7 @@ local function assign(character, kind, npc)
 	npc = npc or "Contact"
 	local job = {identifier = "field_" .. kind .. "_easy", rewardKey = "job:" .. (#objects + now),
 		progressionClaim = now, numberRec = 1, progress = 0, moneyReward = 100}
-	check(field.Assign(character, npc, job), "assignment selects existing point: " .. kind)
+	check(ix.jobs.field.Assign(character, npc, job), "assignment selects existing point: " .. kind)
 	character.jobs[npc] = copy(job)
 
 	return job
@@ -249,72 +251,72 @@ local client, character, inventory = actor()
 local job = assign(character, "recovery")
 check(objects[#objects].class == "prop_dynamic" and objects[#objects].invalid,
 	"model bounds probe is removed after assignment")
-check(not field.CanComplete(character, job), "no cargo means no completion")
+check(not ix.jobs.field.CanComplete(character, job), "no cargo means no completion")
 client:ixJobEvaluate(job.identifier)
 check(not character.jobs.Contact.isCompleted, "generic completion triggers cannot finish field assignments")
 client.position = Vector(-4000, 0, 0)
 local count = #objects
 update(client, character)
 check(#objects == count, "recovery does not spawn while owner is distant")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 update(client, character)
 local entity = objects[#objects]
 check(#objects == count + 1, "recovery spawns when owner approaches")
 local stranger = actor()
 stranger.position = client.position
-field.Collect(stranger, entity)
+ix.jobs.field.Collect(stranger, entity)
 check(#callbacks == 0, "another character cannot collect the task object")
 map = "rp_waystation"
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 0, "wrong-map interaction cannot grant cargo")
 map = "rp_marsh_cs"
 inventory.full = true
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 0 and not entity.invalid, "full inventory leaves recovery available")
 inventory.full = false
 now = now + 2
 character.overweight = true
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 0 and not entity.invalid, "overweight owner leaves recovery available")
 character.overweight = false
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 client.position = Vector(-4000, 0, 0)
 flush()
 check(lastItem.removed and not entity.invalid, "moving away during item creation cannot grant cargo")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 now = now + 2
-field.Collect(client, entity)
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 1, "repeated collection has one in-flight item creation")
 inventory.full = true
 flush()
 check(lastItem.removed and not entity.invalid, "inventory becoming full during creation consumes no objective")
 inventory.full = false
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 character.overweight = true
 flush()
 check(lastItem.removed and not entity.invalid, "weight change during creation cannot grant cargo")
 character.overweight = false
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 flush()
 job = character.jobs.Contact
-check(job.isCompleted and field.CanComplete(character, job), "successful transfer completes the objective")
+check(job.isCompleted and ix.jobs.field.CanComplete(character, job), "successful transfer completes the objective")
 check(entity.invalid, "collected world object is removed")
 check(lastItem:CanTransfer(nil, stranger:GetCharacter():GetInventory()) == false, "cargo blocks another inventory")
 check(lastItem:CanTransfer(nil, nil) == false, "cargo cannot be dropped")
 check(PLUGIN:CanPlayerTakeItem(stranger, lastItem) == false, "foreign character pickup is denied")
 check(PLUGIN:CanPlayerTakeItem(client, lastItem) == nil, "owner pickup does not override other hooks")
 lastItem.data.fieldClaim = "another-job"
-check(not field.CanComplete(character, job), "cargo must match the exact active claim")
+check(not ix.jobs.field.CanComplete(character, job), "cargo must match the exact active claim")
 lastItem.data.fieldClaim = job.rewardKey
 local saved = copy(job.fieldTask.point)
-field.settings.recovery.sources = {"gas"}
+ix.jobs.field.settings.recovery.sources = {"gas"}
 update(client, character)
 check(character.jobs.Contact.fieldTask.point[1] == saved[1], "configuration edits do not reroll accepted assignments")
-field.settings.recovery.sources = {"packages", "rf"}
+ix.jobs.field.settings.recovery.sources = {"packages", "rf"}
 local earned = 0
 ix.taskRewards.RecordCompletion = function() earned = earned + 1 end
 ix.taskRewards.EarnOffer = function() end
@@ -323,11 +325,11 @@ client:ixJobComplete("Contact")
 check(character.money == 100 and earned == 1 and not next(inventory.items), "completion pays once and consumes cargo")
 
 job = assign(character, "recovery")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 update(client, character)
 entity = objects[#objects]
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 ix.taskRewards.RemoveJobOffer = function() end
 client:ixJobRemove("Contact")
 check(entity.invalid and not character.jobs.Contact, "abandonment removes the world object and active assignment")
@@ -337,7 +339,7 @@ job = assign(character, "recovery")
 update(client, character)
 entity = objects[#objects]
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 client.character = stranger:GetCharacter()
 flush()
 check(lastItem.removed, "character switch during callback cannot grant cargo")
@@ -355,36 +357,36 @@ client.dead = false
 update(client, character)
 check(not objects[#objects].invalid, "returning character respawns the same objective")
 entity = objects[#objects]
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 now = now + 31
 PLUGIN:Think()
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 2, "expired database requests can retry without abandoning the task")
 flush()
 check(character.jobs.Contact.isCompleted and #callbacks == 0, "late callback cannot duplicate a retried pickup")
 local cargoCount = 0
 for _ in pairs(inventory.items) do cargoCount = cargoCount + 1 end
 check(cargoCount == 1, "only the current pickup request can grant cargo")
-field.Cleanup(character, character.jobs.Contact)
+ix.jobs.field.Cleanup(character, character.jobs.Contact)
 character.jobs.Contact = nil
 
 job = assign(character, "sensor")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 count = #objects
 update(client, character)
 check(#objects == count, "sensor does not exist before deployment")
-field.Action(client, "Contact", "deploy")
+ix.jobs.field.Action(client, "Contact", "deploy")
 entity = objects[#objects]
 check(character.jobs.Contact.fieldTask.stage == "recording", "deploy starts persisted recording timer")
 local readyAt = character.jobs.Contact.fieldTask.readyAt
 client.position = client.position + Vector(600, 0, 0)
 update(client, character)
-client.position = field.Unpack(character.jobs.Contact.fieldTask.point)
-field.Collect(client, entity)
+client.position = ix.jobs.field.Unpack(character.jobs.Contact.fieldTask.point)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 0, "departure alone cannot bypass recording time")
 character.jobs.Contact.fieldTask.departed = false
 now = now + 200
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 0, "waiting at the sensor without leaving cannot complete it")
 client.position = client.position + Vector(600, 0, 0)
 update(client, character)
@@ -395,60 +397,60 @@ players = {stranger}
 update(client, character)
 check(entity.invalid, "disconnect removes the deployed world object")
 players = savedPlayers
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 update(client, character)
 entity = objects[#objects]
 check(character.jobs.Contact.fieldTask.readyAt == readyAt
 	and character.jobs.Contact.fieldTask.point[1] == sensorPoint[1], "reconnect keeps the sensor site and deadline")
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 flush()
 check(character.jobs.Contact.isCompleted, "departed and finished sensor can be retrieved")
-field.Cleanup(character, character.jobs.Contact)
+ix.jobs.field.Cleanup(character, character.jobs.Contact)
 check(not next(inventory.items), "cleanup removes bound cargo")
 character.jobs.Contact = nil
 
 job = assign(character, "triangulation")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 count = #objects
 update(client, character)
 check(#objects == count, "hidden transmitter waits for sufficient readings")
-check(not field.CanRead(job.fieldTask, client.position, job.fieldTask),
+check(not ix.jobs.field.CanRead(job.fieldTask, client.position, job.fieldTask),
 	"coincident signal positions cannot save a bearing that prevents later readings")
 client.position = Vector(0, 0, 0)
-field.Action(client, "Contact", "read")
+ix.jobs.field.Action(client, "Contact", "read")
 check(#character.jobs.Contact.fieldTask.readings == 1, "first reading is saved")
 now = now + 2
-field.Action(client, "Contact", "read")
+ix.jobs.field.Action(client, "Contact", "read")
 check(#character.jobs.Contact.fieldTask.readings == 1, "same position cannot farm readings")
 client.position = Vector(-1000, 0, 0)
 now = now + 2
-field.Action(client, "Contact", "read")
+ix.jobs.field.Action(client, "Contact", "read")
 check(#character.jobs.Contact.fieldTask.readings == 1, "collinear readings cannot solve the signal")
 client.position = Vector(0, 1000, 0)
 now = now + 2
-field.Action(client, "Contact", "read")
+ix.jobs.field.Action(client, "Contact", "read")
 client.position = Vector(2000, 1000, 0)
 now = now + 2
-field.Action(client, "Contact", "read")
+ix.jobs.field.Action(client, "Contact", "read")
 check(#character.jobs.Contact.fieldTask.readings == 3 and markers > 0,
 	"three separated bearings reveal the search site")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 update(client, character)
 entity = objects[#objects]
 check(#objects == count + 1, "solved transmitter spawns near assigned character")
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 flush()
 check(character.jobs.Contact.isCompleted, "transmitter recovery completes objective")
-field.Cleanup(character, character.jobs.Contact)
+ix.jobs.field.Cleanup(character, character.jobs.Contact)
 character.jobs.Contact = nil
 
 blocked = true
-check(not field.Assign(character, "Contact", {identifier = "field_recovery_easy"}),
+check(not ix.jobs.field.Assign(character, "Contact", {identifier = "field_recovery_easy"}),
 	"blocked sites are not assigned locally")
 blocked = false
 ix.plugin.list = {}
-check(not field.IsAvailable(ix.jobs.list.field_sensor_easy), "disabled point providers suppress offers")
+check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_sensor_easy), "disabled point providers suppress offers")
 points()
 ix.taskRewards.PrepareJob = function(_, _, active)
 	active.rewardKey, active.progressionClaim = "job:accepted", now + 1
@@ -458,26 +460,28 @@ ix.taskRewards.SelectOffer = function() end
 check(client:ixJobAdd("field_recovery_easy", "NewContact"), "normal acceptance path creates a field assignment")
 check(character.jobs.NewContact.fieldTask and not character.jobs.NewContact.isCompleted,
 	"acceptance saves field state alongside ordinary reward state")
-field.Cleanup(character, character.jobs.NewContact)
+ix.jobs.field.Cleanup(character, character.jobs.NewContact)
 character.jobs.NewContact = nil
 
 ix.plugin.list.hidestashspawner.stashspawnpoints[map][2] = {Vector(5000, 0, 0), "distant stash"}
-check(field.IsAvailable(ix.jobs.list.field_deadDrop_easy), "dead drops require a separated pair of existing points")
-local dropSettings = field.settings.deadDrop
-local sourcePoint, destination = field.SelectRoute(dropSettings, map)
-check(sourcePoint:DistToSqr(destination) >= dropSettings.minRouteDistance ^ 2,
+check(
+	ix.jobs.field.IsAvailable(ix.jobs.list.field_deadDrop_easy),
+	"dead drops require a separated pair of existing points"
+)
+local sourcePoint, destination = ix.jobs.field.SelectRoute(ix.jobs.field.settings.deadDrop, map)
+check(sourcePoint:DistToSqr(destination) >= ix.jobs.field.settings.deadDrop.minRouteDistance ^ 2,
 	"route selection enforces minimum travel distance")
-local originalDistance = dropSettings.minRouteDistance
-dropSettings.minRouteDistance = 100000
-check(not field.IsAvailable(ix.jobs.list.field_deadDrop_easy), "impossible dead-drop routes are hidden")
-dropSettings.minRouteDistance = originalDistance
+local originalDistance = ix.jobs.field.settings.deadDrop.minRouteDistance
+ix.jobs.field.settings.deadDrop.minRouteDistance = 100000
+check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_deadDrop_easy), "impossible dead-drop routes are hidden")
+ix.jobs.field.settings.deadDrop.minRouteDistance = originalDistance
 job = assign(character, "deadDrop")
 local route = copy(job.fieldTask)
-client.position = field.Unpack(route.point)
+client.position = ix.jobs.field.Unpack(route.point)
 update(client, character)
-entity = field.GetObject(character, character.jobs.Contact)
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(IsValid(entity), "parcel appears only at the saved pickup site")
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 flush()
 check(character.jobs.Contact.fieldTask.stage == "carrying" and not character.jobs.Contact.isCompleted,
 	"parcel pickup does not complete the circuit")
@@ -485,49 +489,55 @@ local moneyBefore = character.money
 client:ixJobComplete("Contact")
 check(character.money == moneyBefore, "pickup alone cannot earn payment")
 now = now + 2
-field.Action(client, "Contact", "status")
-check(lastMarker:DistToSqr(field.Unpack(route.destination)) == 0, "carried parcel directions show the destination")
+ix.jobs.field.Action(client, "Contact", "status")
+check(
+	lastMarker:DistToSqr(ix.jobs.field.Unpack(route.destination)) == 0,
+	"carried parcel directions show the destination"
+)
 now = now + 2
-field.Action(client, "Contact", "deliver")
-check(field.FindCargo(character, character.jobs.Contact), "delivery from the pickup site consumes nothing")
-client.position = field.Unpack(route.destination)
-local parcel = field.FindCargo(character, character.jobs.Contact)
+ix.jobs.field.Action(client, "Contact", "deliver")
+check(ix.jobs.field.FindCargo(character, character.jobs.Contact), "delivery from the pickup site consumes nothing")
+client.position = ix.jobs.field.Unpack(route.destination)
+local parcel = ix.jobs.field.FindCargo(character, character.jobs.Contact)
 inventory.items[parcel.id] = nil
 now = now + 2
-field.Action(client, "Contact", "deliver")
+ix.jobs.field.Action(client, "Contact", "deliver")
 check(character.jobs.Contact.fieldTask.stage == "carrying", "delivery requires the matching parcel")
 inventory.items[parcel.id] = parcel
 local originalRemove = parcel.Remove
 parcel.Remove = function() return false end
 now = now + 2
-field.Action(client, "Contact", "deliver")
+ix.jobs.field.Action(client, "Contact", "deliver")
 check(not character.jobs.Contact.isCompleted, "failed parcel removal cannot complete delivery")
 parcel.Remove = originalRemove
 now = now + 2
-field.Action(client, "Contact", "deliver")
+ix.jobs.field.Action(client, "Contact", "deliver")
 check(character.jobs.Contact.fieldTask.stage == "delivered" and character.jobs.Contact.isCompleted
 	and not next(inventory.items), "delivery consumes cargo and saves completion")
 now = now + 2
-field.Action(client, "Contact", "deliver")
+ix.jobs.field.Action(client, "Contact", "deliver")
 update(client, character)
 check(character.jobs.Contact.fieldTask.stage == "delivered", "completed delivery survives updates without cargo")
 client:ixJobComplete("Contact")
 client:ixJobComplete("Contact")
 check(character.money == moneyBefore + 100, "dead-drop completion pays exactly once")
 job = assign(character, "deadDrop")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 update(client, character)
-field.Collect(client, field.GetObject(character, character.jobs.Contact))
+ix.jobs.field.Collect(client, ix.jobs.field.GetObject(character, character.jobs.Contact))
 flush()
-field.FindCargo(character, character.jobs.Contact):Remove()
+ix.jobs.field.FindCargo(character, character.jobs.Contact):Remove()
 update(client, character)
 check(character.jobs.Contact.fieldTask.stage == "search"
 	and character.jobs.Contact.fieldTask.destination[1] == job.fieldTask.destination[1],
 	"lost parcel restores the same saved circuit")
-field.Cleanup(character, character.jobs.Contact)
+ix.jobs.field.Cleanup(character, character.jobs.Contact)
 character.jobs.Contact = nil
 
-check(not field.IsAvailable(ix.jobs.list.field_defence_easy), "defence is hidden without the population manager")
+check(
+	not ix.jobs.field.IsAvailable(ix.jobs.list.field_defence_easy),
+	"defence is hidden without the population manager"
+)
 local populationBlocked, spawnBlocked, checkedQueued, enforcedRegistration = false, false, false, false
 local registered = {}
 ix.eventController = {
@@ -547,11 +557,10 @@ ix.eventController = {
 		return false
 	end,
 }
-check(field.IsAvailable(ix.jobs.list.field_defence_easy), "defence uses existing sites and attack points")
-local defenceSettings = field.settings.defence
-local originalDefenceSettings = copy(defenceSettings)
-defenceSettings.duration, defenceSettings.waveInterval = 4, 0
-defenceSettings.waves[1] = {
+check(ix.jobs.field.IsAvailable(ix.jobs.list.field_defence_easy), "defence uses existing sites and attack points")
+local originalDefenceSettings = copy(ix.jobs.field.settings.defence)
+ix.jobs.field.settings.defence.duration, ix.jobs.field.settings.defence.waveInterval = 4, 0
+ix.jobs.field.settings.defence.waves[1] = {
 	{classes = {"npc_mutant_dog"}, count = 2}, {classes = {"npc_mutant_pseudodog"}, count = 1},
 }
 local function livingAttackers()
@@ -573,34 +582,34 @@ end
 job = assign(character, "defence")
 client.position = Vector(-4000, 0, 0)
 now = now + 2
-field.Action(client, "Contact", "start")
+ix.jobs.field.Action(client, "Contact", "start")
 check(character.jobs.Contact.fieldTask.stage == "deploy", "research cannot start remotely")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 populationBlocked = true
 now = now + 2
-field.Action(client, "Contact", "start")
+ix.jobs.field.Action(client, "Contact", "start")
 check(character.jobs.Contact.fieldTask.stage == "deploy", "population cap blocks research startup")
 populationBlocked = false
 now = now + 2
-field.Action(client, "Contact", "start")
-entity = field.GetObject(character, character.jobs.Contact)
+ix.jobs.field.Action(client, "Contact", "start")
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(IsValid(entity) and character.jobs.Contact.fieldTask.stage == "defending", "starting research creates a sampler")
-local originalEncounterLimit = field.maxDefences
-field.maxDefences = 1
+local originalEncounterLimit = ix.jobs.field.maxDefences
+ix.jobs.field.maxDefences = 1
 local otherCharacter = stranger:GetCharacter()
 assign(otherCharacter, "defence")
-stranger.position = field.Unpack(otherCharacter.jobs.Contact.fieldTask.point)
-field.Action(stranger, "Contact", "start")
+stranger.position = ix.jobs.field.Unpack(otherCharacter.jobs.Contact.fieldTask.point)
+ix.jobs.field.Action(stranger, "Contact", "start")
 check(otherCharacter.jobs.Contact.fieldTask.stage == "deploy", "concurrent encounter limit includes newly started research")
-field.Cleanup(otherCharacter, otherCharacter.jobs.Contact)
+ix.jobs.field.Cleanup(otherCharacter, otherCharacter.jobs.Contact)
 otherCharacter.jobs.Contact = nil
-field.maxDefences = originalEncounterLimit
+ix.jobs.field.maxDefences = originalEncounterLimit
 count = #objects
 now = now + 2
-field.Action(client, "Contact", "start")
+ix.jobs.field.Action(client, "Contact", "start")
 check(#objects == count, "repeated startup cannot create another encounter")
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 check(#callbacks == 0, "unfinished research cannot be collected")
 spawnBlocked = true
 update(client, character)
@@ -617,9 +626,15 @@ check(checkedQueued and enforcedRegistration, "attacker creation checks queued c
 local attackingNPC = livingAttackers()[1]
 check(attackingNPC:GetEnemy() == client, "attackers engage the assigned defender")
 local health = entity:Health()
-field.DefenceDamage(entity, {GetAttacker = function() return stranger end, GetDamage = function() return 999 end})
+ix.jobs.field.DefenceDamage(
+	entity,
+	{GetAttacker = function() return stranger end, GetDamage = function() return 999 end}
+)
 check(entity:Health() == health, "unrelated players cannot damage another character's sampler")
-field.DefenceDamage(entity, {GetAttacker = function() return attackingNPC end, GetDamage = function() return 10 end})
+ix.jobs.field.DefenceDamage(
+	entity,
+	{GetAttacker = function() return attackingNPC end, GetDamage = function() return 10 end}
+)
 check(entity:Health() == health - 10, "encounter attackers can damage their sampler")
 attackingNPC.position, attackingNPC.hidden = entity:GetPos(), true
 update(client, character)
@@ -632,7 +647,7 @@ attackingNPC:Remove()
 update(client, character)
 check(#livingAttackers() == 2 and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
 	"removed attackers are replaced rather than counted as kills")
-field.DefenceKilled(attackingNPC)
+ix.jobs.field.DefenceKilled(attackingNPC)
 update(client, character)
 check(character.jobs.Contact.fieldTask.defence.completedWaves == 0,
 	"late death events from replaced attackers cannot credit their replacements")
@@ -653,9 +668,9 @@ players = {stranger}
 now = now + 120
 PLUGIN:Think()
 players = activePlayers
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 update(client, character)
-entity = field.GetObject(character, character.jobs.Contact)
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(character.jobs.Contact.fieldTask.defence.guardedSeconds == checkpoint.defence.guardedSeconds,
 	"offline time cannot advance defended recording")
 check(#livingAttackers() == 1 and character.jobs.Contact.fieldTask.defence.completedWaves == 1,
@@ -665,21 +680,21 @@ update(client, character)
 check(character.jobs.Contact.fieldTask.stage == "ready" and not character.jobs.Contact.isCompleted,
 	"clearing all waves and recording prepares results without paying")
 now = now + 2
-field.Collect(client, entity)
+ix.jobs.field.Collect(client, entity)
 flush()
-check(character.jobs.Contact.isCompleted and field.CanComplete(character, character.jobs.Contact),
+check(character.jobs.Contact.isCompleted and ix.jobs.field.CanComplete(character, character.jobs.Contact),
 	"defender must retrieve the results before completing research")
 moneyBefore = character.money
 client:ixJobComplete("Contact")
 client:ixJobComplete("Contact")
 check(character.money == moneyBefore + 100, "research pays once through ordinary job completion")
 
-defenceSettings.duration, defenceSettings.samplerHealth = 90, 1
+ix.jobs.field.settings.defence.duration, ix.jobs.field.settings.defence.samplerHealth = 90, 1
 job = assign(character, "defence")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 now = now + 2
-field.Action(client, "Contact", "start")
-entity = field.GetObject(character, character.jobs.Contact)
+ix.jobs.field.Action(client, "Contact", "start")
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 update(client, character)
 local guardedBeforeDisconnect = character.jobs.Contact.fieldTask.defence.guardedSeconds
 activePlayers = players
@@ -689,7 +704,7 @@ now = now + 120
 PLUGIN:Think()
 players = activePlayers
 update(client, character)
-entity = field.GetObject(character, character.jobs.Contact)
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(character.jobs.Contact.fieldTask.defence.guardedSeconds == guardedBeforeDisconnect
 	and guardedBeforeDisconnect < character.jobs.Contact.fieldTask.defence.duration,
 	"unfinished recording cannot advance while the defender is disconnected")
@@ -699,30 +714,29 @@ check(character.jobs.Contact.fieldTask.stage == "deploy" and entity.invalid and 
 	"sampler destruction fails the attempt and removes its attackers")
 check(character.money == moneyBefore + 100, "failed defence grants no payment")
 now = now + 2
-field.Action(client, "Contact", "start")
+ix.jobs.field.Action(client, "Contact", "start")
 check(character.jobs.Contact.fieldTask.stage == "deploy", "failed attempts enforce a persistent retry delay")
-now = now + defenceSettings.retryDelay
-field.Action(client, "Contact", "start")
+now = now + ix.jobs.field.settings.defence.retryDelay
+ix.jobs.field.Action(client, "Contact", "start")
 check(character.jobs.Contact.fieldTask.stage == "defending"
 	and character.jobs.Contact.fieldTask.point[1] == job.fieldTask.point[1], "explicit retry keeps the assigned site")
 update(client, character)
 character.data.lastTaskAbandon = 0
 client:ixJobRemove("Contact")
 check(not character.jobs.Contact and #livingAttackers() == 0, "abandonment removes the entire defence encounter")
-field.settings.defence = originalDefenceSettings
+ix.jobs.field.settings.defence = originalDefenceSettings
 job = assign(character, "defence")
-client.position = field.Unpack(job.fieldTask.point)
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 now = now + 2
-field.Action(client, "Contact", "start")
+ix.jobs.field.Action(client, "Contact", "start")
 update(client, character)
-local manager = ix.eventController
 ix.eventController = nil
 update(client, character)
 check(#livingAttackers() == 0 and character.jobs.Contact.fieldTask.stage == "defending",
 	"population-manager removal pauses research without losing its assignment")
-ix.eventController = manager
+ix.eventController = ix.eventController
 update(client, character)
-entity = field.GetObject(character, character.jobs.Contact)
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(#livingAttackers() > 0, "restoring population management resumes the interrupted wave")
 
 Angle = function(...) return {...} end
@@ -739,7 +753,7 @@ local courierDefinition = {
 ix.jobs.list.courier_test = courierDefinition
 local courierJob = {identifier = "courier_test", rewardKey = "job:courier", progressionClaim = now,
 	numberRec = 1, progress = 0, moneyReward = 0}
-check(field.Assign(courier, "Ballast", courierJob), "custom cargo gets a usable assigned recovery site")
+check(ix.jobs.field.Assign(courier, "Ballast", courierJob), "custom cargo gets a usable assigned recovery site")
 courier.jobs.Ballast = copy(courierJob)
 check(courierJob.fieldTask.cargo == "town_quest_notebook"
 	and courierJob.fieldTask.recipient == "Ledger", "cargo and recipient are saved on acceptance")
@@ -754,22 +768,22 @@ local oldAssignment = copy(courierJob)
 oldAssignment.fieldTask.description, oldAssignment.fieldTask.recipient = nil, nil
 check(not ix.jobs.getFormattedDesc(oldAssignment):find("Ledger", 1, true),
 	"older saved recoveries do not inherit a newly authored recipient")
-courierClient.position = field.Unpack(courierJob.fieldTask.point)
+courierClient.position = ix.jobs.field.Unpack(courierJob.fieldTask.point)
 update(courierClient, courier)
-local courierObject = field.GetObject(courier, courierJob)
+local courierObject = ix.jobs.field.GetObject(courier, courierJob)
 check(courierObject.model == ix.item.list.town_quest_notebook.model,
 	"the world object uses the commission's custom cargo model")
 check(courierObject["cotz/jobsystem/cargo-name"] == "Landing maintenance log",
 	"world cargo displays the commission-specific name")
 courierInventory.full = true
-field.Collect(courierClient, courierObject)
+ix.jobs.field.Collect(courierClient, courierObject)
 flush()
-check(not field.FindCargo(courier, courierJob), "full inventories leave custom cargo recoverable at its site")
+check(not ix.jobs.field.FindCargo(courier, courierJob), "full inventories leave custom cargo recoverable at its site")
 courierInventory.full = false
 now = now + 2
-field.Collect(courierClient, courierObject)
+ix.jobs.field.Collect(courierClient, courierObject)
 flush()
-local deliveredCargo = field.FindCargo(courier, courierJob)
+local deliveredCargo = ix.jobs.field.FindCargo(courier, courierJob)
 check(courierJob.fieldTask.cargoDescription == "A water-stained maintenance log with a torn cover."
 	and deliveredCargo:GetData("fieldDescription") == courierJob.fieldTask.cargoDescription,
 	"recovered cargo retains the accepted description after definition changes")
@@ -797,7 +811,7 @@ check(parcel:GetDescription() == "A parcel wrapped in oilcloth." .. parcelInstru
 	"dead-drop description override keeps PDA instructions")
 parcel:SetData("fieldDescription", nil)
 check(parcel:GetDescription() == parcel.description .. parcelInstruction, "dead-drop description can be cleared")
-check(not courier.jobs.Ballast.isCompleted and not field.CanComplete(courier, courier.jobs.Ballast),
+check(not courier.jobs.Ballast.isCompleted and not ix.jobs.field.CanComplete(courier, courier.jobs.Ballast),
 	"collecting a delivery item does not complete its commission")
 courierClient:ixJobComplete("Ballast")
 check(courier.jobs.Ballast ~= nil, "issuer cannot complete a commission before the recipient receives cargo")
@@ -811,51 +825,54 @@ ix.townNPCs = {CanInteract = function(_, actor, target)
 	return IsValid(target) and not target.denied and actor:GetPos():DistToSqr(target:GetPos()) <= 128 ^ 2
 end}
 map = "rp_waystation"
-check(not field.DeliverToContact(courierClient, recipient, "Ballast", "job:expired"),
+check(not ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", "job:expired"),
 	"stale delivery claims are rejected")
 recipient.name = "Carbon"
-check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+check(not ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
 	"another contact cannot receive the consignment")
 recipient.name, recipient.denied = "Ledger", true
-check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+check(not ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
 	"recipient access checks apply to delivery")
 recipient.denied, recipient.position = false, courierClient.position + Vector(1000, 0, 0)
-check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+check(not ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
 	"remote recipient hand-ins are rejected")
 recipient.position = courierClient.position
 map = "rp_marsh_cs"
-check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+check(not ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
 	"the saved recipient map is enforced")
 map = "rp_waystation"
-check(not field.DeliverToContact(stranger, recipient, "Ballast", courierJob.rewardKey),
+check(not ix.jobs.field.DeliverToContact(stranger, recipient, "Ballast", courierJob.rewardKey),
 	"another character cannot deliver this consignment")
 local removeCargo = deliveredCargo.Remove
 deliveredCargo.Remove = function() return false end
-check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey)
+check(not ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey)
 	and courier.jobs.Ballast.fieldTask.stage == "carrying", "failed removal grants no delivery credit")
 deliveredCargo.Remove = removeCargo
 courier.jobs.Ballast.fieldTask.recipientMap = "previous-home-map"
 ix.townNPCs.byName = {Ledger = {map = "rp_waystation"}}
-check(field.GetRecipientMap(courier.jobs.Ballast.fieldTask) == "rp_waystation"
+check(ix.jobs.field.GetRecipientMap(courier.jobs.Ballast.fieldTask) == "rp_waystation"
 	and courier.jobs.Ballast.fieldTask.recipientMap == "previous-home-map",
 	"a relocated town recipient resolves its current home without rewriting the saved assignment")
-check(field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+check(ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
 	"the named recipient accepts and consumes the matching cargo")
 check(deliveredCargo.removed and courier.jobs.Ballast.fieldTask.stage == "delivered"
 	and courier.jobs.Ballast.isCompleted, "recipient receipt is saved before returning to the issuer")
-check(not field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
+check(not ix.jobs.field.DeliverToContact(courierClient, recipient, "Ballast", courierJob.rewardKey),
 	"repeated delivery cannot consume or credit twice")
 local receipt = copy(courier.jobs.Ballast)
-check(field.CanComplete(courier, receipt), "a restored delivered assignment completes without carrying consumed cargo")
+check(
+	ix.jobs.field.CanComplete(courier, receipt),
+	"a restored delivered assignment completes without carrying consumed cargo"
+)
 map = courierJob.fieldTask.map
 update(courierClient, courier)
-check(not field.GetObject(courier, courierJob), "delivered cargo cannot respawn at the original site")
+check(not ix.jobs.field.GetObject(courier, courierJob), "delivered cargo cannot respawn at the original site")
 ix.townNPCs = previousTown
 
 PLUGIN:OnUnload()
 check(entity.invalid and #livingAttackers() == 0, "plugin unload removes field objects and owned attackers")
 local markerCount = markers
 now = now + 2
-field.Action(client, "Contact", "status")
+ix.jobs.field.Action(client, "Contact", "status")
 check(markers == markerCount, "retained network callbacks cannot operate after plugin unload")
 print("PASS: " .. checks .. " field task checks")

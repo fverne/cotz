@@ -13,21 +13,20 @@ local character = {
 	GetData = function(_, key, default) return data[key] or default end,
 	SetData = function(_, key, value) data[key] = value end,
 }
-local jobs = ix.jobs
-jobs.RecordLeaderboardKill(character, "npc_mutant_controller")
-jobs.RecordLeaderboardKill(character, "npc_mutant_controller_swamp")
-jobs.RecordLeaderboardKill(character, "npc_mutant_chimera_electro")
-jobs.RecordLeaderboardKill(character, "npc_human_bandit")
-jobs.RecordLeaderboardKill(character, "prop_physics")
-local stats = jobs.GetLeaderboardStats(data)
+ix.jobs.RecordLeaderboardKill(character, "npc_mutant_controller")
+ix.jobs.RecordLeaderboardKill(character, "npc_mutant_controller_swamp")
+ix.jobs.RecordLeaderboardKill(character, "npc_mutant_chimera_electro")
+ix.jobs.RecordLeaderboardKill(character, "npc_human_bandit")
+ix.jobs.RecordLeaderboardKill(character, "prop_physics")
+local stats = ix.jobs.GetLeaderboardStats(data)
 assert(stats.mutantsKilled == 3 and stats.humansKilled == 1)
 assert(stats.rareMutantsKilled == 3, "overlapping groups must not multiply rare kills")
 assert(stats.speciesKilled == 2, "variants share species and human factions are excluded")
 assert(stats.species == nil, "public statistics omit the private species set")
-jobs.RecordLeaderboardTask(character, {tier = 3, fieldType = "sensor"}, {})
-jobs.RecordLeaderboardTask(character, {tier = 2, fieldType = "defence"}, {})
-jobs.RecordLeaderboardTask(character, {tier = 1, fieldType = "recovery"}, {})
-stats = jobs.GetLeaderboardStats(data)
+ix.jobs.RecordLeaderboardTask(character, {tier = 3, fieldType = "sensor"}, {})
+ix.jobs.RecordLeaderboardTask(character, {tier = 2, fieldType = "defence"}, {})
+ix.jobs.RecordLeaderboardTask(character, {tier = 1, fieldType = "recovery"}, {})
+stats = ix.jobs.GetLeaderboardStats(data)
 assert(stats.tasksCompleted == 3 and stats.hardTasks == 1)
 assert(stats.researchOperations == 2 and stats.recoveryOperations == 1)
 ix.townNPCs = {
@@ -35,15 +34,15 @@ ix.townNPCs = {
 	StepID = function(_, slug, step) return slug .. "/" .. step end,
 }
 data.progression = {lines = {["test/one"] = {completed = true}}}
-assert(jobs.GetLeaderboardStats(data).favoriteContact == "test", "partial progression establishes a favorite")
+assert(ix.jobs.GetLeaderboardStats(data).favoriteContact == "test", "partial progression establishes a favorite")
 data.progression.lines["test/two"] = {completed = true}
 ix.townNPCs.contacts.other = {name = "Other", progression = {{id = "one"}, {id = "two"}}}
 data.progression.lines["other/one"] = {completed = true}
-assert(jobs.GetLeaderboardStats(data).favoriteContact == "test", "most completed steps wins")
+assert(ix.jobs.GetLeaderboardStats(data).favoriteContact == "test", "most completed steps wins")
 data.progression.lines["other/two"] = {completed = true}
-assert(jobs.GetLeaderboardStats(data).favoriteContact == "Other, test", "ties list every name in stable order")
-assert(jobs.GetLeaderboardStats({}).favoriteContact == "None", "zero progress has no favorite")
-assert(jobs.GetLeaderboardStats({}).taskEarnings == 0, "old saves receive safe defaults")
-assert(jobs.GetLeaderboardStats({}).mutantsPoached == 0, "old saves default to zero poaches")
-assert(jobs.GetLeaderboardStats({leaderboardStats = {mutantsPoached = 7}}).mutantsPoached == 7)
+assert(ix.jobs.GetLeaderboardStats(data).favoriteContact == "Other, test", "ties list every name in stable order")
+assert(ix.jobs.GetLeaderboardStats({}).favoriteContact == "None", "zero progress has no favorite")
+assert(ix.jobs.GetLeaderboardStats({}).taskEarnings == 0, "old saves receive safe defaults")
+assert(ix.jobs.GetLeaderboardStats({}).mutantsPoached == 0, "old saves default to zero poaches")
+assert(ix.jobs.GetLeaderboardStats({leaderboardStats = {mutantsPoached = 7}}).mutantsPoached == 7)
 print("leaderboard statistics: 13 checks passed")

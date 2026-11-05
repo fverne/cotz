@@ -13,9 +13,8 @@ function ix.vendorStock.GetMaximum(character, vendor, uniqueID)
 	if (vendor.GetSherpa and vendor:GetSherpa()) or catalog[VENDOR_MODE] == VENDOR_BUYONLY or interval <= 0 or amount <= 0 then
 		return maximum
 	end
-	local progression = ix.progression
-	local bonus = progression and progression.GetStockBonus
-		and progression.GetStockBonus(character, vendor:GetDisplayName(), uniqueID) or 0
+	local bonus = ix.progression and ix.progression.GetStockBonus
+		and ix.progression.GetStockBonus(character, vendor:GetDisplayName(), uniqueID) or 0
 
 	return math.min(65535, maximum + bonus)
 end

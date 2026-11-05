@@ -1,12 +1,11 @@
 local PLUGIN = PLUGIN
-local UI = ix.cotzUI
 
 local function frame(title)
-	return UI.Frame(title, 0.8, 0.75, 900)
+	return ix.cotzUI.Frame(title, 0.8, 0.75, 900)
 end
 
 local function button(parent, text, callback)
-	return UI.Button(parent, text, callback)
+	return ix.cotzUI.Button(parent, text, callback)
 end
 
 local function sendManagement(panel, id, action, value, expectedTier)
@@ -38,13 +37,13 @@ net.Receive("cotz/hideouts/manage", function()
 	if count == 0 then
 		local message = scope == "squad" and "No squad hideout is available on this map."
 			or "No hideout management is available at this location."
-		UI.Label(scroll, message)
+		ix.cotzUI.Label(scroll, message)
 	end
 	for _ = 1, count do
 		local id, name = net.ReadString(), net.ReadString()
 		local squad, access = net.ReadBool(), net.ReadString()
 		local manage, canReset = net.ReadBool(), net.ReadBool()
-		UI.Label(scroll, name, true)
+		ix.cotzUI.Label(scroll, name, true)
 		if scope == "exit" then
 			button(scroll, "Leave hideout", function()
 				sendManagement(panel, id, 9)
@@ -54,7 +53,7 @@ net.Receive("cotz/hideouts/manage", function()
 		if manage then
 			for _, option in ipairs({{label = "Invite character", action = 6}, {label = "Revoke invitation", action = 7}}) do
 				button(scroll, option.label, function()
-					local menu = UI.Menu()
+					local menu = ix.cotzUI.Menu()
 					for _, target in ipairs(player.GetHumans()) do
 						local character = target:GetCharacter()
 						if character and target ~= LocalPlayer() then
@@ -74,7 +73,7 @@ net.Receive("cotz/hideouts/manage", function()
 					button(scroll, "Reset vendor position", function() sendManagement(panel, id, 2) end)
 				end
 				button(scroll, "Access: " .. access, function()
-					local menu = UI.Menu()
+					local menu = ix.cotzUI.Menu()
 					for _, mode in ipairs({"public", "invite", "squad"}) do
 						menu:AddOption(mode, function() sendManagement(panel, id, 3, mode) end)
 					end
@@ -100,16 +99,16 @@ net.Receive("cotz/hideouts/container", function()
 			panel:Remove()
 		end)
 	else
-		UI.Label(scroll, "Container not installed")
+		ix.cotzUI.Label(scroll, "Container not installed")
 	end
 	if hasUpgrade then
 		local label = tier == 0 and "Install" or "Upgrade"
 		button(scroll, label .. " with " .. required .. " (" .. nextWidth .. " × " .. nextHeight .. ")", function()
-			UI.Query("Hand in " .. required .. " for " .. nextWidth .. " × " .. nextHeight .. " storage?",
+			ix.cotzUI.Query("Hand in " .. required .. " for " .. nextWidth .. " × " .. nextHeight .. " storage?",
 				label .. " container", "Hand in", function() sendManagement(panel, id, 4, slot, tier) end, "Cancel")
 		end)
 	else
-		UI.Label(scroll, "Fully upgraded")
+		ix.cotzUI.Label(scroll, "Fully upgraded")
 	end
 	button(scroll, public and "Public: invited guests can access — make private"
 		or "Private: owner only — share with invited guests", function() sendManagement(panel, id, 5, slot) end)
@@ -147,13 +146,13 @@ net.Receive("cotz/hideouts/shop", function()
 		button(scroll, "Manage squad hideout", function() PLUGIN:RequestManagement(id, "vendor") end)
 	end
 	if rank >= 0 then
-		UI.Label(scroll, "Treasury: " .. balance .. " roubles — sale commission " .. commission .. "%", true)
+		ix.cotzUI.Label(scroll, "Treasury: " .. balance .. " roubles — sale commission " .. commission .. "%", true)
 		button(scroll, "Recent squad transactions", function() send(6) end)
 		button(scroll, "Donate item (becomes squad property; no payment)", function()
-			local menu = UI.Menu()
+			local menu = ix.cotzUI.Menu()
 			for _, item in pairs(LocalPlayer():GetCharacter():GetInventory():GetItems(true)) do
 				menu:AddOption(item:GetName(), function()
-					UI.Query("This donation becomes squad property and pays you nothing.", "Donate item",
+					ix.cotzUI.Query("This donation becomes squad property and pays you nothing.", "Donate item",
 						"Donate", function() send(2, item:GetID()) end, "Cancel")
 				end)
 			end
@@ -161,7 +160,7 @@ net.Receive("cotz/hideouts/shop", function()
 		end)
 		if rank == 2 then
 			button(scroll, "Withdraw treasury funds", function()
-				UI.StringRequest("Treasury", "Amount in roubles", "", function(value)
+				ix.cotzUI.StringRequest("Treasury", "Amount in roubles", "", function(value)
 					send(5, 0, math.Clamp(math.floor(tonumber(value) or 0), 0, 2147483647))
 				end)
 			end)
@@ -172,16 +171,16 @@ net.Receive("cotz/hideouts/shop", function()
 		local price, revision = net.ReadUInt(32), net.ReadUInt(32)
 		local control = button(scroll, itemName .. " — " .. (price > 0 and (price .. " roubles") or "Unlisted"),
 			function()
-				local menu = UI.Menu()
+				local menu = ix.cotzUI.Menu()
 				if price > 0 then
 					menu:AddOption("Buy whole item for " .. price, function()
-						UI.Query(description .. "\n\nTotal: " .. price .. " roubles", "Confirm purchase",
+						ix.cotzUI.Query(description .. "\n\nTotal: " .. price .. " roubles", "Confirm purchase",
 							"Buy", function() send(1, itemID, price, revision) end, "Cancel")
 					end)
 				end
 				if rank >= 1 then
 					menu:AddOption("Publish/reprice", function()
-						UI.StringRequest(
+						ix.cotzUI.StringRequest(
 							"Listing", "Whole item price (0 cancels listing)", tostring(price),
 							function(value)
 								local amount = math.Clamp(math.floor(tonumber(value) or 0), 0, 2147483647)
@@ -202,7 +201,7 @@ net.Receive("cotz/hideouts/history", function()
 	local labels = {sale = "Sale", withdraw = "Treasury withdrawal", donate = "Stock donation", recover = "Stock recovery"}
 	for _ = 1, net.ReadUInt(6) do
 		local timestamp, name, kind, delta = net.ReadUInt(32), net.ReadString(), net.ReadString(), net.ReadInt(32)
-		UI.Label(scroll, os.date("%Y-%m-%d %H:%M", timestamp) .. " — " .. name .. " — "
+		ix.cotzUI.Label(scroll, os.date("%Y-%m-%d %H:%M", timestamp) .. " — " .. name .. " — "
 			.. (labels[kind] or kind) .. " — treasury " .. (delta >= 0 and "+" or "") .. delta)
 	end
 end)

@@ -1,5 +1,4 @@
 local PLUGIN = PLUGIN
-local UI = ix.cotzUI
 
 net.Receive("cotz/equipment/admin-list", function()
 	local characterID = net.ReadUInt(32)
@@ -8,7 +7,7 @@ net.Receive("cotz/equipment/admin-list", function()
 	local frame = PLUGIN.adminInventory
 	if not IsValid(frame) then
 		local list
-		frame, list = UI.Frame("Take inventory", 0.65, 0.65, 850)
+		frame, list = ix.cotzUI.Frame("Take inventory", 0.65, 0.65, 850)
 		frame.list = list
 		PLUGIN.adminInventory = frame
 	end
@@ -18,7 +17,7 @@ net.Receive("cotz/equipment/admin-list", function()
 		local itemID = net.ReadUInt(32)
 		local itemName = net.ReadString()
 		local equipped = net.ReadBool()
-		UI.Button(frame.list, itemName .. " [" .. itemID .. "] - "
+		ix.cotzUI.Button(frame.list, itemName .. " [" .. itemID .. "] - "
 			.. (equipped and "Unequip, then take" or "Take"), function()
 			if (frame.nextTake or 0) > RealTime() then return end
 			frame.nextTake = RealTime() + 0.5

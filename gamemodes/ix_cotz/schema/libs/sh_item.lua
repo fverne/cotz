@@ -1,9 +1,8 @@
 -- adds support for "throw away" option
 function ix.item.Register(uniqueID, baseID, isBaseItem, path, luaGenerated)
-	local meta = ix.meta.item
 
 	if uniqueID then
-		ITEM = (isBaseItem and ix.item.base or ix.item.list)[uniqueID] or setmetatable({}, meta)
+		ITEM = (isBaseItem and ix.item.base or ix.item.list)[uniqueID] or setmetatable({}, ix.meta.item)
 		ITEM.uniqueID = uniqueID
 		ITEM.base = baseID or ITEM.base
 		ITEM.isBase = isBaseItem or false
