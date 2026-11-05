@@ -97,6 +97,12 @@ The remaining rules are proposed project defaults.
   When a framework change is necessary, explain why and preserve its upstream conventions and credits.
 - Preserve unrelated local changes. Do not commit, push, or publish unless the user requests it.
 
+## Writing
+
+- Before authoring or revising COTZ prose, read [the writing guide](docs/writing-guide.md) and
+  the relevant [item or dialogue examples](docs/writing-references/README.md), alongside the owning
+  definitions and existing contact profile where applicable. Code-only work does not require these references.
+
 ## Lua style
 
 - Use the installed `glua-style` skill when writing, reviewing, or refactoring Lua.
@@ -105,6 +111,10 @@ The remaining rules are proposed project defaults.
 - Use standard Lua operators and comments: `and`, `or`, `not`, `~=`, and `--`.
 - Keep parentheses and square brackets tight. Target about 110 characters per line; do not exceed 120
   in new code unless an indivisible value requires it.
+- Keep each prose string literal on one source line, including item descriptions, dialogue, and
+  notifications, even when it exceeds 120 characters. Do not split literal text using concatenation
+  solely to satisfy line-length limits. Concatenation for dynamic values is fine. This overrides the
+  `glua-style` line-length rule.
 - Use camelCase for locals and local helpers, SCREAMING_SNAKE for constants, and PascalCase for new
   public methods. Preserve existing framework names and externally referenced APIs.
 - Keep internal helpers and state local. Extend the existing feature namespace instead of adding globals.

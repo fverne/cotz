@@ -25,6 +25,10 @@ Moved Lua files retain their original contents; loaders, documentation, and tool
 The client schema library `schema/libs/cl_cotzui.lua` owns shared COTZ UI styling. It loads before
 gameplay plugins through the existing library loader. See [UI and HUD style](ui-style.md).
 
+For item descriptions and NPC prose, read the [writing guide](writing-guide.md) and its
+[curated references](writing-references/README.md). Detailed examples live in the repository;
+NPC-specific voice notes remain in the existing [contact profiles](npc-overhaul/contacts/README.md).
+
 ## Gameplay supporting files
 
 Paths below are relative to `gamemodes/ix_cotz/plugins/`.
