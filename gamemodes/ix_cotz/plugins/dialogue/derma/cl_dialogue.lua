@@ -1,6 +1,7 @@
 local PANEL = {}
 local gradient = ix.util.GetMaterial("vgui/gradient-d")
 local OPTION_INPUT_DELAY = 0.6
+local DIALOGUE_MATERIAL = ix.util.GetMaterial("cotz/panels/dialogue.png")
 
 local OPTION_COLORS = {
 	text = Color(216, 215, 201), hover = Color(255, 255, 255),
@@ -19,6 +20,7 @@ local function optionColor(topicID)
 end
 
 function PANEL:Init()
+	ix.cotzUI.Scale(1)
 	self.loading = true
 
 	self.ANIM_SPEED = 0
@@ -36,12 +38,14 @@ function PANEL:Init()
 	self.chatbox:Dock(TOP)
 	self.chatbox:SetTall(ScrH() * 0.52)
 	self.chatbox:DockMargin(ScrW() * 0.025, ScrH() * 0.048, ScrW() * 0.025, ScrH() * 0.02)
+	ix.cotzUI.StyleScroll(self.chatbox)
 	self:InvalidateLayout(true)
 	self:InvalidateChildren(true)
 
 	self.options = self:Add("DScrollPanel")
 	self.options:Dock(FILL)
 	self.options:DockMargin(ScrW() * 0.024, ScrH() * 0.03, ScrW() * 0.024, ScrH() * 0.063)
+	ix.cotzUI.StyleScroll(self.options)
 end
 
 function PANEL:Think()
@@ -159,7 +163,7 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 	self.nametitle = self.chatbox:Add("DLabel")
 	self.nametitle:Dock(TOP)
 	self.nametitle:DockMargin(0, 0, 0, 4)
-	self.nametitle:SetFont("stalkerregulartitlefont")
+	self.nametitle:SetFont("cotzUILabel")
 	self.nametitle:SetWrap(true)
 	self.nametitle:SetAutoStretchVertical(true)
 	self.nametitle:SetText(name)
@@ -168,7 +172,7 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 	self.message = self.chatbox:Add("DLabel")
 	self.message:Dock(TOP)
 	self.message:DockMargin(ScrW() * 0.01, 0, 0, 4)
-	self.message:SetFont("ixSmallFont")
+	self.message:SetFont("cotzUISmall")
 	self.message:SetWrap(true)
 	self.message:SetAutoStretchVertical(true)
 	self.message:SetText("")
@@ -276,9 +280,13 @@ function PANEL:prepareOptions(options)
 			self.buttonList[k]:DockMargin(4, 0, 4, 4)
 			self.buttonList[k]:SetText(k .. ". " .. topic.statement)
 			self.buttonList[k]:SetTextColor(optionColor(topicID))
-			self.buttonList[k]:SetFont("ixSmallFont")
+			self.buttonList[k]:SetFont("cotzUISmall")
+			self.buttonList[k]:SetWrap(true)
+			self.buttonList[k]:SetAutoStretchVertical(true)
 			self.buttonList[k]:SetMouseInputEnabled(true)
+			local baseThink = self.buttonList[k].Think
 			self.buttonList[k].Think = function()
+				baseThink(self.buttonList[k])
 				if self.buttonList[k]:IsHovered() then
 					self.buttonList[k]:SetTextColor(OPTION_COLORS.hover)
 				else
@@ -312,7 +320,7 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 			label:DockMargin(4, 0, 4, 4)
 			label:SetText(#self.buttonList .. ". " .. statement)
 			label:SetTextColor(optionColor(option.topicID))
-			label:SetFont("ixSmallFont")
+			label:SetFont("cotzUISmall")
 			label:SetWrap(true)
 			label:SetAutoStretchVertical(true)
 			label:SetMouseInputEnabled(true)
@@ -385,7 +393,7 @@ function PANEL:Paint(w, h)
 	surface.SetDrawColor(0, 0, 0, 180)
 	surface.DrawRect(30, 15, w - 60, h - 30)
 
-	surface.SetMaterial(Material("cotz/panels/dialogue.png"))
+	surface.SetMaterial(DIALOGUE_MATERIAL)
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.DrawTexturedRect(0, 0, w, h)
 end

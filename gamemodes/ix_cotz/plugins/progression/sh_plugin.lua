@@ -54,16 +54,20 @@ end
 
 function PLUGIN:PopulateHelpMenu(tabs)
 	tabs["progression"] = function(container)
+		local UI = ix.cotzUI
+		UI.Scale(1)
 		local title = container:Add("DLabel")
 		title:SetText("Your Progression")
-		title:SetFont("stalkerregularbigfont")
+		title:SetFont("cotzUITitle")
+		title:SetTextColor(UI.colors.text)
 		title:Dock(TOP)
 		title:InvalidateLayout(true)
 		title:SetAutoStretchVertical(true)
 
 		local intro = container:Add("DLabel")
 		intro:SetWrap(true)
-		intro:SetFont("stalkerregularfont")
+		intro:SetFont("cotzUISmall")
+		intro:SetTextColor(UI.colors.muted)
 		intro:SetText(
 			(
 				"Below is a list of known NPCs and what they need for various "
@@ -89,9 +93,11 @@ function PLUGIN:PopulateHelpMenu(tabs)
 		table.sort(npcIdentifiers)
 
 		for _, npcIdentifier in pairs(npcIdentifiers) do
-			local npcTitle = container:Add("DLabel")
+			local card = UI.Card(container)
+			local npcTitle = card:Add("DLabel")
 			npcTitle:SetWrap(true)
-			npcTitle:SetFont("stalkerregularbigfont")
+			npcTitle:SetFont("cotzUILabel")
+			npcTitle:SetTextColor(UI.colors.teal)
 			npcTitle:SetText(npcIdentifier)
 			npcTitle:Dock(TOP)
 			npcTitle:DockMargin(0, 16, 0, 0)
@@ -116,8 +122,9 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			end
 			table.sort(capacityText)
 			if #capacityText > 0 then
-				local label = container:Add("DLabel")
-				label:SetFont("stalkerregularfont")
+				local label = card:Add("DLabel")
+				label:SetFont("cotzUISmall")
+				label:SetTextColor(UI.colors.muted)
 				label:SetWrap(true)
 				label:SetText("Personal maximum-stock bonuses from base catalogue: "
 					.. table.concat(capacityText, "; ") .. ". Passive refill speed unchanged.")
@@ -127,8 +134,9 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
 			local earned = ix.progression.GetEarnedServiceText(LocalPlayer():GetCharacter(), npcIdentifier)
 			if earned ~= "" then
-				local label = container:Add("DLabel")
-				label:SetFont("stalkerregularfont")
+				local label = card:Add("DLabel")
+				label:SetFont("cotzUISmall")
+				label:SetTextColor(UI.colors.muted)
 				label:SetWrap(true)
 				label:SetText(earned)
 				label:Dock(TOP)
@@ -147,9 +155,10 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
 				activeProgressions = activeProgressions + 1
 
-				local progressionTitle = container:Add("DLabel")
+				local progressionTitle = card:Add("DLabel")
 				progressionTitle:SetWrap(true)
-				progressionTitle:SetFont("stalkerregularfont")
+				progressionTitle:SetFont("cotzUILabel")
+				progressionTitle:SetTextColor(UI.colors.text)
 				progressionTitle:SetText(definition.name)
 				progressionTitle:Dock(TOP)
 				progressionTitle:DockMargin(0, 16, 0, 0)
@@ -162,9 +171,10 @@ function PLUGIN:PopulateHelpMenu(tabs)
 					if descriptionText:sub(1, #heading) == heading then
 						descriptionText = descriptionText:sub(#heading + 1):gsub("^\n+", "")
 					end
-					local progressionDescription = container:Add("DLabel")
+					local progressionDescription = card:Add("DLabel")
 					progressionDescription:SetWrap(true)
-					progressionDescription:SetFont("stalkerregularsmallfont")
+					progressionDescription:SetFont("cotzUISmall")
+					progressionDescription:SetTextColor(UI.colors.text)
 					progressionDescription:SetText(descriptionText)
 					progressionDescription:Dock(TOP)
 					progressionDescription:DockMargin(0, 16, 0, 0)
@@ -173,7 +183,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 			end
 
 			if activeProgressions == 0 and #capacityText == 0 and earned == "" then
-				npcTitle:Remove()
+				card:Remove()
 			end
 		end
 	end

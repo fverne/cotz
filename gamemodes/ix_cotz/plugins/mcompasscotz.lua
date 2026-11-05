@@ -137,6 +137,7 @@ if CLIENT then
 	local SQUAD_COLOR = Color(73, 140, 143)
 
 	local function drawSquadmates(client, x, y, width, height)
+		ix.cotzUI.Scale(1)
 		local character = client:GetCharacter()
 		local squadID = character and character:GetSquadID()
 		if not squadID or squadID == "NULL" then return end
@@ -163,8 +164,8 @@ if CLIENT then
 					local distance = math.Round(client:GetPos():Distance(target:GetPos()) * 0.0254)
 					local label = other:GetName() .. " · " .. distance .. "m"
 					if IsValid(corpse) or not member:Alive() then label = label .. " · DEAD" end
-					draw.SimpleText(label, "ixSmallFont", markerX, y + height * 1.4,
-						SQUAD_COLOR, TEXT_ALIGN_CENTER)
+					draw.SimpleTextOutlined(label, "cotzUISmall", markerX, y + height * 1.4,
+						SQUAD_COLOR, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP, 1, color_black)
 				end
 			end
 		end

@@ -51,6 +51,8 @@ function Schema:ScoreboardShow()
 end
 
 function Schema:LoadFonts(font, genericFont)
+	ix.cotzUI.Scale(1)
+
 	surface.CreateFont("ixTypingIndicator", {
 		font = font,
 		size = 128,

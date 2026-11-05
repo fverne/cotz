@@ -7,6 +7,9 @@ slot, click anywhere on a card to choose a matching backpack item, or use its us
 Slot interiors use the same skin painting as backpack cells. Empty cards have no inset button or text. Equipped images have no inset background.
 An occupied slot must be unequipped before choosing a replacement.
 
+The admin item picker uses the shared [COTZ UI style](../../../../docs/ui-style.md), with a responsive
+frame, scrolling list and wrapped take actions. Server validation remains unchanged.
+
 Equipment appears only on the **You** tab, embedded immediately left of the backpack.
 It does not appear in storage windows (including Cleaner storage), containers, or
 standalone inventory windows. Tasks remain in their own main-menu tab.

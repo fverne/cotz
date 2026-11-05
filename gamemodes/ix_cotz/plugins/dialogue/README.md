@@ -5,6 +5,10 @@ Each town conversation declares DIALOGUE.townContact and its root action IDs. At
 libs/sh_towncontacts.lua. That file owns the shared work/progression handlers. Superseded per-NPC
 job and progression topics are deleted, rather than replaced or hidden at runtime.
 
+Dialogue text and choices use the shared [COTZ typography](../../../../docs/ui-style.md) and slim
+scrollbars. Static and dynamic choices both wrap and preserve inherited label height updates.
+The existing dialogue frame artwork and keyboard shortcuts are retained.
+
 Ordinary dialogue, flavour and service responses stay in the conversation file. Shared trading uses
 ix.dialogue.AddTradeTopic from integrations/sh_trade.lua; it does not copy another NPC's tree.
 Task prompts, briefings and completion text stay beside the contact's jobs/progression definitions.

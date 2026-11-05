@@ -2,6 +2,10 @@
 
 ## Editing definitions
 
+Field-work menus and temporary world labels use the shared
+[COTZ UI style](../../../../docs/ui-style.md). Assignment labels have a dark backing and amber border
+and stay within the viewport; marker duration, positions and server actions are unchanged.
+
 Restart after editing shared definitions. Job IDs, category IDs, cargo item IDs, network names and
 saved character keys remain stable. Existing accepted field jobs keep their saved destinations,
 recording parameters, selected rewards and defence wave rolls; definition edits tune new assignments.

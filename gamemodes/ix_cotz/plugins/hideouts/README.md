@@ -6,6 +6,10 @@ contents, and teleports inside. The last departure saves and removes the
 instance. A character may own several hideouts. Invited characters share the
 same instance and keep it loaded when the owner leaves.
 
+Player and marker-editor menus use the shared [COTZ UI style](../../../../docs/ui-style.md), including
+scrolling confirmations, wrapped actions and responsive fonts/controls. Network actions and access
+checks are unchanged. Shared client checks: `luatex --luaonly tests/cotz_ui_spec.lua`.
+
 All implementation changes live under ix_cotz. Item/inventory integration uses
 schema method overrides, and world-item persistence uses the schema's saveitems
 plugin override. The upstream helix directory remains unchanged.

@@ -22,6 +22,9 @@ Moved Lua files retain their original contents; loaders, documentation, and tool
 | `.github/workflows/` | Balance export, import, and validation automation. |
 | `archive/` | Inactive source retained for reference, outside runtime discovery directories. |
 
+The client schema library `schema/libs/cl_cotzui.lua` owns shared COTZ UI styling. It loads before
+gameplay plugins through the existing library loader. See [UI and HUD style](ui-style.md).
+
 ## Gameplay supporting files
 
 Paths below are relative to `gamemodes/ix_cotz/plugins/`.

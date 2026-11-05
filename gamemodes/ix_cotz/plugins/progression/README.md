@@ -8,6 +8,10 @@ Ballast BA12 now provides the existing character bank. Its contents and size rem
 Vesper provides paid suit conversions. Mute's existing STALKERnet features have explicit service gates.
 The town service labels are included in benefit summaries; optional `plannedUnlocks` remain inactive.
 
+The progression encyclopedia uses contact cards and the shared
+[COTZ typography and palette](../../../../docs/ui-style.md). Long task requirements and reward
+descriptions remain wrapped inside the existing scrolling encyclopedia.
+
 This plugin owns character progression storage, persistent item requirements, numeric counters,
 prerequisite validation, purchase permissions, completion payouts, pending reward claims and services.
 Town content is authored in [townnpcs](../townnpcs/README.md); superseded town definition files are removed.

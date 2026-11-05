@@ -1,28 +1,12 @@
 local PLUGIN = PLUGIN
-local openFrames = setmetatable({}, {__mode = "k"})
+local UI = ix.cotzUI
 
 local function frame(title)
-	local panel = vgui.Create("DFrame")
-	openFrames[panel] = true
-	panel:SetTitle(title)
-	panel:SetSize(math.min(ScrW() * 0.8, 900), ScrH() * 0.75)
-	panel:Center()
-	panel:MakePopup()
-	local scroll = panel:Add("DScrollPanel")
-	scroll:Dock(FILL)
-
-	return panel, scroll
+	return UI.Frame(title, 0.8, 0.75, 900)
 end
 
 local function button(parent, text, callback)
-	local control = parent:Add("DButton")
-	control:Dock(TOP)
-	control:DockMargin(4, 4, 4, 0)
-	control:SetTall(math.max(32, ScrH() * 0.035))
-	control:SetText(text)
-	control.DoClick = callback
-
-	return control
+	return UI.Button(parent, text, callback)
 end
 
 local function sendManagement(panel, id, action, value, expectedTier)
@@ -54,13 +38,13 @@ net.Receive("cotz/hideouts/manage", function()
 	if count == 0 then
 		local message = scope == "squad" and "No squad hideout is available on this map."
 			or "No hideout management is available at this location."
-		button(scroll, message, function() end)
+		UI.Label(scroll, message)
 	end
 	for _ = 1, count do
 		local id, name = net.ReadString(), net.ReadString()
 		local squad, access = net.ReadBool(), net.ReadString()
 		local manage, canReset = net.ReadBool(), net.ReadBool()
-		button(scroll, name, function() end)
+		UI.Label(scroll, name, true)
 		if scope == "exit" then
 			button(scroll, "Leave hideout", function()
 				sendManagement(panel, id, 9)
@@ -70,7 +54,7 @@ net.Receive("cotz/hideouts/manage", function()
 		if manage then
 			for _, option in ipairs({{label = "Invite character", action = 6}, {label = "Revoke invitation", action = 7}}) do
 				button(scroll, option.label, function()
-					local menu = DermaMenu()
+					local menu = UI.Menu()
 					for _, target in ipairs(player.GetHumans()) do
 						local character = target:GetCharacter()
 						if character and target ~= LocalPlayer() then
@@ -90,7 +74,7 @@ net.Receive("cotz/hideouts/manage", function()
 					button(scroll, "Reset vendor position", function() sendManagement(panel, id, 2) end)
 				end
 				button(scroll, "Access: " .. access, function()
-					local menu = DermaMenu()
+					local menu = UI.Menu()
 					for _, mode in ipairs({"public", "invite", "squad"}) do
 						menu:AddOption(mode, function() sendManagement(panel, id, 3, mode) end)
 					end
@@ -116,16 +100,16 @@ net.Receive("cotz/hideouts/container", function()
 			panel:Remove()
 		end)
 	else
-		button(scroll, "Container not installed", function() end)
+		UI.Label(scroll, "Container not installed")
 	end
 	if hasUpgrade then
 		local label = tier == 0 and "Install" or "Upgrade"
 		button(scroll, label .. " with " .. required .. " (" .. nextWidth .. " × " .. nextHeight .. ")", function()
-			Derma_Query("Hand in " .. required .. " for " .. nextWidth .. " × " .. nextHeight .. " storage?",
+			UI.Query("Hand in " .. required .. " for " .. nextWidth .. " × " .. nextHeight .. " storage?",
 				label .. " container", "Hand in", function() sendManagement(panel, id, 4, slot, tier) end, "Cancel")
 		end)
 	else
-		button(scroll, "Fully upgraded", function() end)
+		UI.Label(scroll, "Fully upgraded")
 	end
 	button(scroll, public and "Public: invited guests can access — make private"
 		or "Private: owner only — share with invited guests", function() sendManagement(panel, id, 5, slot) end)
@@ -163,13 +147,13 @@ net.Receive("cotz/hideouts/shop", function()
 		button(scroll, "Manage squad hideout", function() PLUGIN:RequestManagement(id, "vendor") end)
 	end
 	if rank >= 0 then
-		button(scroll, "Treasury: " .. balance .. " roubles — sale commission " .. commission .. "%", function() end)
+		UI.Label(scroll, "Treasury: " .. balance .. " roubles — sale commission " .. commission .. "%", true)
 		button(scroll, "Recent squad transactions", function() send(6) end)
 		button(scroll, "Donate item (becomes squad property; no payment)", function()
-			local menu = DermaMenu()
+			local menu = UI.Menu()
 			for _, item in pairs(LocalPlayer():GetCharacter():GetInventory():GetItems(true)) do
 				menu:AddOption(item:GetName(), function()
-					Derma_Query("This donation becomes squad property and pays you nothing.", "Donate item",
+					UI.Query("This donation becomes squad property and pays you nothing.", "Donate item",
 						"Donate", function() send(2, item:GetID()) end, "Cancel")
 				end)
 			end
@@ -177,7 +161,7 @@ net.Receive("cotz/hideouts/shop", function()
 		end)
 		if rank == 2 then
 			button(scroll, "Withdraw treasury funds", function()
-				Derma_StringRequest("Treasury", "Amount in roubles", "", function(value)
+				UI.StringRequest("Treasury", "Amount in roubles", "", function(value)
 					send(5, 0, math.Clamp(math.floor(tonumber(value) or 0), 0, 2147483647))
 				end)
 			end)
@@ -188,18 +172,22 @@ net.Receive("cotz/hideouts/shop", function()
 		local price, revision = net.ReadUInt(32), net.ReadUInt(32)
 		local control = button(scroll, itemName .. " — " .. (price > 0 and (price .. " roubles") or "Unlisted"),
 			function()
-				local menu = DermaMenu()
+				local menu = UI.Menu()
 				if price > 0 then
 					menu:AddOption("Buy whole item for " .. price, function()
-						Derma_Query(description .. "\n\nTotal: " .. price .. " roubles", "Confirm purchase",
+						UI.Query(description .. "\n\nTotal: " .. price .. " roubles", "Confirm purchase",
 							"Buy", function() send(1, itemID, price, revision) end, "Cancel")
 					end)
 				end
 				if rank >= 1 then
 					menu:AddOption("Publish/reprice", function()
-						Derma_StringRequest("Listing", "Whole item price (0 cancels listing)", tostring(price), function(value)
-							send(3, itemID, math.Clamp(math.floor(tonumber(value) or 0), 0, 2147483647), revision)
-						end)
+						UI.StringRequest(
+							"Listing", "Whole item price (0 cancels listing)", tostring(price),
+							function(value)
+								local amount = math.Clamp(math.floor(tonumber(value) or 0), 0, 2147483647)
+								send(3, itemID, amount, revision)
+							end
+						)
 					end)
 					menu:AddOption("Recover stock (no payout)", function() send(4, itemID) end)
 				end
@@ -209,22 +197,12 @@ net.Receive("cotz/hideouts/shop", function()
 	end
 end)
 
-function PLUGIN:OnScreenSizeChanged()
-	for panel in pairs(openFrames) do
-		if IsValid(panel) then
-			panel:SetSize(math.min(ScrW() * 0.8, 900), ScrH() * 0.75)
-			panel:Center()
-		end
-	end
-end
-
 net.Receive("cotz/hideouts/history", function()
 	local panel, scroll = frame("Recent squad transactions")
 	local labels = {sale = "Sale", withdraw = "Treasury withdrawal", donate = "Stock donation", recover = "Stock recovery"}
 	for _ = 1, net.ReadUInt(6) do
 		local timestamp, name, kind, delta = net.ReadUInt(32), net.ReadString(), net.ReadString(), net.ReadInt(32)
-		button(scroll, os.date("%Y-%m-%d %H:%M", timestamp) .. " — " .. name .. " — "
-			.. (labels[kind] or kind) .. " — treasury " .. (delta >= 0 and "+" or "") .. delta,
-			function() end)
+		UI.Label(scroll, os.date("%Y-%m-%d %H:%M", timestamp) .. " — " .. name .. " — "
+			.. (labels[kind] or kind) .. " — treasury " .. (delta >= 0 and "+" or "") .. delta)
 	end
 end)

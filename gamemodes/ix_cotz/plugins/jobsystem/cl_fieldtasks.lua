@@ -2,7 +2,7 @@ local PLUGIN = PLUGIN
 local marker
 local nextRequest = 0
 local MARKER_SECONDS = ix.jobs.field.runtimeSettings.markerSeconds
-local MARKER_COLOR = Color(235, 200, 100)
+local UI = ix.cotzUI
 local METRES_PER_UNIT = 0.01905
 local MARKER_OFFSET = Vector(0, 0, 24)
 local ACTIONS = {status = "Show assignment", deploy = "Deploy sensor", read = "Take signal reading",
@@ -18,7 +18,7 @@ local function request(npc, action)
 end
 
 function ix.jobs.field.OpenMenu(npc, kind)
-	local menu = DermaMenu()
+	local menu = UI.Menu()
 	menu:AddOption(ACTIONS.status, function() request(npc, "status") end)
 	if kind == "sensor" then
 		menu:AddOption(ACTIONS.deploy, function() request(npc, "deploy") end)
@@ -47,6 +47,5 @@ function PLUGIN:HUDPaint()
 	if marker.radius > 0 then
 		label = label .. " (search within " .. math.ceil(marker.radius * METRES_PER_UNIT) .. " m)"
 	end
-	draw.SimpleTextOutlined(label, "DermaDefault", screen.x, screen.y, MARKER_COLOR,
-		TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 1, color_black)
+	UI.DrawMarker(label, screen.x, screen.y, UI.colors.amber)
 end
