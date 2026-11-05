@@ -25,29 +25,11 @@ ITEM.functions.use = {
 	name = "Gaze upon",
 	icon = "icon16/help.png",
 	sound = "physics/metal/chain_impact_soft2.wav",
-    OnRun = function(item)
+	OnRun = function(item)
+		ix.util.UseTravelArtifact(item, item.player:GetCharacter():GetData("savedspawn"), "Looking at the Moon")
 
-        if (item:GetData("cooldown",0) < os.time()) then
-
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Looking at the Moon", 30, function(player) 
-        		item:SetData("cooldown", os.time()+(60*15) ) --15 minutes
-        		local character = player:GetCharacter()
-				local spawndata = character:GetData("savedspawn", nil)
-
-				if !spawndata then return end
-
-				if not (spawndata[3] == game.GetMap())then
-					character:SetData("newpos", spawndata)
-					ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(player, spawndata[3])
-					return
-				end
-
-				player:SetPos(spawndata[1])
-            end)
-        end
-
-        return false
-    end,
+		return false
+	end,
     OnCanRun = function(item)
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end

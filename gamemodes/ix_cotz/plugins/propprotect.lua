@@ -3,6 +3,13 @@ PLUGIN.name = "Basic Prop Protection"
 PLUGIN.author = "Chessnut - Small changes by gumlefar"
 PLUGIN.description = "Adds a simple prop protection system. Overridden to fix problems with automatic AdvDupe2 spawning"
 
+local function hideoutPermission(client, entity)
+	local hideouts = ix.plugin.Get("hideouts")
+	if hideouts and hideouts.GetHideoutEntityPermission and IsValid(entity) then
+		return hideouts:GetHideoutEntityPermission(client, entity)
+	end
+end
+
 CAMI.RegisterPrivilege({
 	Name = "Helix - Bypass Prop Protection",
 	MinAccess = "admin"
@@ -81,6 +88,11 @@ if (SERVER) then
 	end
 
 	function PLUGIN:PhysgunPickup(client, entity)
+		local permission = hideoutPermission(client, entity)
+		if permission ~= nil then
+			if permission == false then return false end
+			return
+		end
 		local characterID = client:GetCharacter():GetID()
 
 		if (entity:GetNetVar("owner", 0) != characterID
@@ -100,6 +112,11 @@ if (SERVER) then
 	end
 
 	function PLUGIN:CanProperty(client, property, entity)
+		local permission = hideoutPermission(client, entity)
+		if permission ~= nil then
+			if permission == false then return false end
+			return
+		end
 		local characterID = client:GetCharacter():GetID()
 
 		if (entity:GetNetVar("owner", 0) != characterID
@@ -109,6 +126,11 @@ if (SERVER) then
 	end
 
 	function PLUGIN:CanTool(client, trace, tool)
+		local permission = hideoutPermission(client, trace.Entity)
+		if permission ~= nil then
+			if permission == false then return false end
+			return
+		end
 		local entity = trace.Entity
 		local characterID = client:GetCharacter():GetID()
 
@@ -134,6 +156,11 @@ if (SERVER) then
 	PLUGIN.PlayerSpawnedVehicle = PLUGIN.PlayerSpawnedNPC
 else
 	function PLUGIN:PhysgunPickup(client, entity)
+		local permission = hideoutPermission(client, entity)
+		if permission ~= nil then
+			if permission == false then return false end
+			return
+		end
 		if (entity:GetNetVar("owner", 0) != client:GetCharacter():GetID()
 		and !CAMI.PlayerHasAccess(client, "Helix - Bypass Prop Protection", nil)) then
 			return false
@@ -141,6 +168,11 @@ else
 	end
 
 	function PLUGIN:CanProperty(client, property, entity)
+		local permission = hideoutPermission(client, entity)
+		if permission ~= nil then
+			if permission == false then return false end
+			return
+		end
 		local characterID = client:GetCharacter():GetID()
 
 		if (entity:GetNetVar("owner", 0) != characterID
@@ -150,6 +182,11 @@ else
 	end
 
 	function PLUGIN:CanTool(client, trace, tool)
+		local permission = hideoutPermission(client, trace.Entity)
+		if permission ~= nil then
+			if permission == false then return false end
+			return
+		end
 		local entity = trace.Entity
 		local characterID = client:GetCharacter():GetID()
 

@@ -194,15 +194,17 @@ ix.command.Add("HideoutInvite", {
 	arguments = { ix.type.string, ix.type.player },
 	OnRun = function(self, client, id, target)
 		local record = PLUGIN:GetHideout(id)
-		if not record or record.owner ~= client:GetCharacter():GetID() then
+		if not PLUGIN:CanManageHideout(client, record) then
 			return "You do not own that hideout."
 		end
 		local character = target:GetCharacter()
 		if not character then
 			return "The player has no active character."
 		end
+		local previous = record.guests[tostring(character:GetID())]
 		record.guests[tostring(character:GetID())] = true
 		if not PLUGIN:Persist() then
+			record.guests[tostring(character:GetID())] = previous
 			return "Could not save the invitation."
 		end
 		target:Notify("Your character can now enter " .. record.name .. ".")
@@ -216,17 +218,20 @@ ix.command.Add("HideoutRevoke", {
 	arguments = { ix.type.string, ix.type.player },
 	OnRun = function(self, client, id, target)
 		local record = PLUGIN:GetHideout(id)
-		if not record or record.owner ~= client:GetCharacter():GetID() then
+		if not PLUGIN:CanManageHideout(client, record) then
 			return "You do not own that hideout."
 		end
 		if not target:GetCharacter() then
 			return "The player has no active character."
 		end
-		record.guests[tostring(target:GetCharacter():GetID())] = nil
+		local key = tostring(target:GetCharacter():GetID())
+		local previous = record.guests[key]
+		record.guests[key] = nil
 		if not PLUGIN:Persist() then
+			record.guests[key] = previous
 			return "Could not save access changes."
 		end
-		if PLUGIN.members[target] == record.id then
+		if PLUGIN.members[target] == record.id and not PLUGIN:CanAccess(target, record) then
 			PLUGIN:LeaveHideout(target, true)
 		end
 

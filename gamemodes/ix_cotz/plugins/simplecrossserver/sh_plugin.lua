@@ -19,6 +19,15 @@ local checktime = 0
 
 ix.util.Include("sh_definitions.lua")
 
+if SERVER then
+	-- Another map may have changed character data (including an artifact arrival intent) since the last visit.
+	PLUGIN.originalCharacterRestore = PLUGIN.originalCharacterRestore or ix.char.Restore
+	function ix.char.Restore(client, callback, bNoCache, id)
+		local fresh = mysql.module == "mysqloo" and not client:GetCharacter()
+		return PLUGIN.originalCharacterRestore(client, callback, bNoCache or fresh, id)
+	end
+end
+
 function PLUGIN:CanPlayerUseCharacter(client, char)
 	local curmap = char:GetData("curmap", self.homemap)
 
@@ -215,7 +224,7 @@ function PLUGIN:RedirectPlayer(client, map, loadzone)
 end
 
 -- Used to redirect player to another map, but leaves setting the position to the caller
-function PLUGIN:RedirectPlayerNoLoadZone(client, map)
+function PLUGIN:RedirectPlayerNoLoadZone(client, map, onComplete)
 	local character = client:GetCharacter()
 
 	local mapdata = self.mapdata
@@ -247,8 +256,10 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 					character:SetData("curmap", game.GetMap())
 					character:Save()
 					client:Notify("Transfer failed while updating character presence. Please try again.")
+					if onComplete then onComplete(false) end
 					return
 				end
+				if onComplete then onComplete(true) end
 				character:Kick()
 				ix.log.Add(client, "serverTransfer", map, tempip)
 				client:Notify(character:GetName() .. " has been asked to be sent to " .. map)
@@ -262,6 +273,7 @@ function PLUGIN:RedirectPlayerNoLoadZone(client, map)
 		end)
 	else
 		client:Notify("Invalid map")
+		if onComplete then onComplete(false) end
 	end
 end
 

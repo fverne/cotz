@@ -28,9 +28,6 @@ if SERVER then
 		then
 			return
 		end
-		local ok, err = PLUGIN:LeaveHideout(client, true)
-		if not ok then
-			client:Notify(err)
-		end
+		PLUGIN:OpenManagementMenu(client, self.ixHideout, "exit")
 	end
 end

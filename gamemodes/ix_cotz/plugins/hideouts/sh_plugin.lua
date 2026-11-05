@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
-PLUGIN.name = "Character Hideouts"
+PLUGIN.name = "Hideouts"
 PLUGIN.author = "cotz"
-PLUGIN.description = "Character-owned interiors loaded only while occupied."
+PLUGIN.description = "Personal storage rooms and squad interiors loaded while occupied."
 
 ix.config.Add(
 	"hideoutGap",
@@ -41,8 +41,18 @@ PLUGIN.allowedShellClasses = {
 	prop_dynamic_override = true,
 }
 
+ix.util.Include("sh_definitions.lua")
 ix.util.Include("sv_repository.lua")
 ix.util.Include("sv_instances.lua")
 ix.util.Include("sv_hooks.lua")
+ix.util.Include("sv_operations.lua")
+ix.util.Include("sv_access.lua")
+ix.util.Include("sv_containers.lua")
+ix.util.Include("sv_trading.lua")
+ix.util.Include("sh_building.lua")
+ix.util.Include("sv_travel.lua")
 ix.util.Include("sh_commands.lua")
+ix.util.Include("sh_management.lua")
+ix.util.Include("sv_menus.lua")
 ix.util.Include("cl_plugin.lua")
+ix.util.Include("cl_management.lua")

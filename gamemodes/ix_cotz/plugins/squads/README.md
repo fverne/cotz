@@ -89,3 +89,14 @@ the roster, without a local compass bearing. Online status is green on this map,
 amber while travelling, and muted when unavailable/offline, matching STALKERnet. Status labels use
 simplecrossserver's map names, for example ONLINE: SWAMPS. Invitations notify both sender and recipient;
 shared invitation receipts are sent only after the stored invitation is confirmed.
+
+## Hideout ownership
+
+The hideouts plugin owns squad interiors, shared entrances, contextual officer building privileges,
+vendor stock and treasury. See its [runtime guide](../hideouts/README.md). The squad refresh also
+retains provisioned local hideout owners when every member is offline, with a freshness timestamp
+for hideout authorization. Disbanded squads lose access while their assets remain recoverable.
+
+Leaders/officers use **Tab → Squads → Squad hideout** to place or relocate their hideout entrance
+without chat commands. Entrance, interior exit and vendor menus provide the local management actions;
+container installation and sharing belong to the individual container's owner menu.

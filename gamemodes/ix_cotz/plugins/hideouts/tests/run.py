@@ -8,11 +8,12 @@ import ctypes
 import ctypes.util
 from pathlib import Path
 import re
+import sqlite3
 
 ROOT = Path(__file__).resolve().parents[4]
 HERE = Path(__file__).resolve().parent
 TOKEN = re.compile(
-    r'--\[(=*)\[.*?\]\1\]|--[^\n]*|\[(=*)\[.*?\]\2\]|'
+    r'--\[(=*)\[.*?\]\1\]|--[^\n]*|/\*.*?\*/|//[^\n]*|\[(=*)\[.*?\]\2\]|'
     r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|'
     r'\b[A-Za-z_]\w*\b|!=|&&|\|\||!|.',
     re.DOTALL,
@@ -44,6 +45,10 @@ def translate(source):
         elif token == "continue":
             block = next(b for b in reversed(stack) if "label" in b)
             token = f'goto {block["label"]}'
+        elif token.startswith("/*"):
+            token = "--[[" + token[2:-2] + "]]"
+        elif token.startswith("//"):
+            token = "--" + token[2:]
         else:
             token = {"!=": "~=", "!": "not ", "&&": " and ", "||": " or "}.get(token, token)
         output.append(token)
@@ -63,6 +68,53 @@ class Lua:
         self.lib.lua_tolstring.restype = ctypes.c_char_p
         self.lib.lua_settop.argtypes = [ctypes.c_void_p, ctypes.c_int]
 
+    def attach_sqlite(self):
+        self.database = sqlite3.connect(":memory:", isolation_level=None)
+        self.lib.lua_pushboolean.argtypes = [ctypes.c_void_p, ctypes.c_int]
+        self.lib.lua_pushinteger.argtypes = [ctypes.c_void_p, ctypes.c_longlong]
+        self.lib.lua_pushlstring.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_size_t]
+        self.lib.lua_pushnil.argtypes = [ctypes.c_void_p]
+        self.lib.lua_createtable.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int]
+        self.lib.lua_setfield.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_char_p]
+        self.lib.lua_rawseti.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_longlong]
+        self.lib.lua_setglobal.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+        callback_type = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p)
+        self.lib.lua_pushcclosure.argtypes = [ctypes.c_void_p, callback_type, ctypes.c_int]
+
+        def push(state, value):
+            if value is None:
+                self.lib.lua_pushnil(state)
+            elif isinstance(value, int):
+                self.lib.lua_pushinteger(state, value)
+            else:
+                encoded = str(value).encode()
+                self.lib.lua_pushlstring(state, encoded, len(encoded))
+
+        def query(state):
+            statement = self.lib.lua_tolstring(state, 1, None).decode()
+            try:
+                cursor = self.database.execute(statement)
+                if cursor.description is None:
+                    self.lib.lua_pushnil(state)
+                else:
+                    rows = cursor.fetchall()
+                    self.lib.lua_createtable(state, len(rows), 0)
+                    for index, row in enumerate(rows, 1):
+                        self.lib.lua_createtable(state, 0, len(row))
+                        for column, value in zip(cursor.description, row):
+                            push(state, value)
+                            self.lib.lua_setfield(state, -2, column[0].encode())
+                        self.lib.lua_rawseti(state, -2, index)
+            except sqlite3.Error as failure:
+                push(state, str(failure))
+                self.lib.lua_setglobal(state, b"PythonSqlError")
+                self.lib.lua_pushboolean(state, 0)
+            return 1
+
+        self.sqlite_callback = callback_type(query)
+        self.lib.lua_pushcclosure(self.state, self.sqlite_callback, 0)
+        self.lib.lua_setglobal(self.state, b"PythonSqlQuery")
+
     def run(self, source, name, execute=True):
         code = translate(source).encode()
         status = self.lib.luaL_loadbufferx(self.state, code, len(code), name.encode(), None)
@@ -78,6 +130,15 @@ def main():
     lua = Lua()
     paths = list((ROOT / "ix_cotz/plugins/hideouts").rglob("*.lua"))
     paths += [
+        ROOT / "ix_cotz/schema/libs/sh_savedtravel.lua",
+        ROOT / "ix_cotz/schema/items/artifacts/sh_artifact_compass.lua",
+        ROOT / "ix_cotz/schema/items/artifacts/sh_artifact_moon.lua",
+        ROOT / "ix_cotz/schema/items/artifacts/sh_artifact_photo.lua",
+        ROOT / "ix_cotz/plugins/propprotect.lua",
+        ROOT / "ix_cotz/plugins/simplecrossserver/sh_plugin.lua",
+        ROOT / "ix_cotz/plugins/spawnsavercheckpoint/sh_plugin.lua",
+        ROOT / "ix_cotz/plugins/spawnsavercheckpoint/entities/entities/ix_spawnsaver.lua",
+        ROOT / "ix_cotz/plugins/squads/sv_crossserver.lua",
         ROOT / "ix_cotz/plugins/advdupeint/sh_plugin.lua",
         ROOT / "ix_cotz/plugins/revive/items/sh_revivesyringe.lua",
         ROOT / "ix_cotz/plugins/spawnsaver.lua",
@@ -125,7 +186,7 @@ def main():
     lua.run("townPlugin = PLUGIN; PLUGIN = hideoutPlugin", "restore hideouts after town services")
     lua.run((HERE / "safezone_storage_cases.lua").read_text(), "safezone and personal storage cases")
     lua.run((ROOT / "ix_cotz/plugins/hideouts/sh_commands.lua").read_text(), "hideout commands")
-    lua.run('''Test("every hideout command is admin-only", function()
+    lua.run('''Test("hideout chat commands remain administrator-only", function()
         assert(TEST_COMMANDS.HideoutEnter and TEST_COMMANDS.HideoutLegacyStorage)
         for name, command in pairs(TEST_COMMANDS) do assert(command.adminOnly == true, name) end
     end)
@@ -146,6 +207,20 @@ def main():
     lua.run("PLUGIN = {}; SERVER = true", "advdupe setup")
     lua.run((ROOT / "ix_cotz/plugins/advdupeint/sh_plugin.lua").read_text(), "advdupe plugin")
     lua.run((HERE / "advdupe_cases.lua").read_text(), "advdupe cases")
+    lua.attach_sqlite()
+    lua.run((HERE / "features_setup.lua").read_text(), "feature engine boundaries")
+    for path in (
+        "helix/gamemode/core/libs/thirdparty/sv_mysql.lua",
+        "ix_cotz/plugins/simplecrossserverdata/sv_mysql.lua",
+        "helix/gamemode/core/libs/sh_inventory.lua",
+    ):
+        lua.run((ROOT / path).read_text(), path)
+    lua.run('mysql.module = "sqlite"', "SQLite adapter")
+    for file in ("sh_definitions.lua", "sv_operations.lua", "sv_access.lua", "sv_containers.lua",
+                 "sv_trading.lua", "sh_building.lua", "sv_travel.lua", "sh_management.lua", "sv_menus.lua"):
+        lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
+    lua.run((HERE / "features_cases.lua").read_text(), "hideout feature cases")
+    lua.run((HERE / "menus_cases.lua").read_text(), "hideout menu cases")
 
 
 if __name__ == "__main__":

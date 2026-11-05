@@ -19,6 +19,13 @@ function PLUGIN:LoadData()
 	self.state.templates = self:NormalizeIDKeys(self.state.templates)
 	self.state.areas = self:NormalizeIDKeys(self.state.areas)
 	self.state.entrances = self:NormalizeIDKeys(self.state.entrances)
+	self.state.retired = self:NormalizeIDKeys(self.state.retired)
+	for _, template in pairs(self.state.templates) do
+		template.containers = self:NormalizeIDKeys(template.containers)
+	end
+	for _, record in pairs(self.state.retired) do
+		record.containers = self:NormalizeIDKeys(record.containers)
+	end
 	local nextID = tonumber(self.state.nextID) or 1
 	for id, record in pairs(self.state.hideouts) do
 		record.id = id
@@ -28,11 +35,15 @@ function PLUGIN:LoadData()
 		record.shell = self:NormalizeIDKeys(record.shell)
 		record.seeds = self:NormalizeIDKeys(record.seeds)
 		record.furnishings = record.furnishings or {}
+		record.ownerType = record.ownerType or "character"
+		record.access = record.access or "squad"
+		record.containers = self:NormalizeIDKeys(record.containers)
 		if tonumber(id) then
 			nextID = math.max(nextID, tonumber(id) + 1)
 		end
 	end
 	self.state.nextID = nextID
+	self.state.version = 2
 	self.instances = self.instances or {}
 	self.members = self.members or {}
 	self.ready = true
@@ -104,6 +115,11 @@ function PLUGIN:DeleteHideout(id, callback)
 	if not record then
 		callback(false, "Unknown hideout.")
 
+		return
+	end
+	local active = self.instances[record.id]
+	if active and (active.operations or 0) > 0 then
+		callback(false, "Wait for the pending economic operation before deleting this hideout.")
 		return
 	end
 	record.deleting = true
@@ -185,6 +201,11 @@ function PLUGIN:DeleteHideoutRows(record, ids, callback)
 		query:Execute()
 
 		return
+	end
+	-- Keep inventory references recoverable after character deletion or explicit retirement.
+	if record.shop or next(record.containers or {}) then
+		self.state.retired = self.state.retired or {}
+		self.state.retired[record.id] = table.Copy(record)
 	end
 	self.state.hideouts[record.id] = nil
 	callback(self:Persist(), "Hideout deleted.")
@@ -459,6 +480,11 @@ function PLUGIN:ApplyPropData(entity, data, origin)
 end
 
 function PLUGIN:SaveInstance(instance, callback)
+	if (instance.operations or 0) > 0 then
+		if callback then callback(false) end
+		return
+	end
+	if self.AuditVendor then self:AuditVendor(instance) end
 	if instance.saving then
 		if callback then
 			callback(false)

@@ -42,6 +42,7 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `vendor_adv/definitions/` | Individual vendor appearances, identities, base items and dialogue bindings; explicit includes in libs/sh_npctemplates.lua. |
 | `dialogue/libs/sh_towncontacts.lua` | Shared current town work/progression actions; NPC root actions are declared in conversation files. |
 | `dialogue/dialogue/` | NPC conversation definitions, discovered by the custom dialogue loader. |
+| `hideouts/sv_*.lua` and `sh_*.lua` | Interior lifecycle, access, individual containers, squad shop, economic adapter and saved travel. |
 | Other plugin `items/`, `entities/`, `derma/`, `libs/` | Files owned by the corresponding gameplay feature. |
 
 Schema libraries formerly named after their authors now have functional names:

@@ -31,6 +31,7 @@ function PLUGIN:SpawnEntrances()
 		entity:SetModel("models/props_lab/keypad.mdl")
 		entity.ixEntranceID = id
 		entity:Spawn()
+		if definition.invisible then entity:SetNoDraw(true) end
 		self.entranceEntities[id] = entity
 	end
 end
@@ -46,67 +47,10 @@ function PLUGIN:ShowEntrance(client, entranceID)
 	local records = {}
 	for _, record in pairs(self.state.hideouts) do
 		if record.entrance == entranceID and self:CanAccess(client, record) then
-			records[#records + 1] = { id = record.id, name = record.name }
+			records[#records + 1] = {id = record.id, name = record.name, manage = self:CanManageHideout(client, record)}
 		end
 	end
 	netstream.Start(client, "ixHideoutMenu", entranceID, records)
-end
-
-function PLUGIN:OpenStorage(client, entity)
-	local instance = self.instances[entity.ixHideout]
-	if
-		not instance
-		or instance.state ~= "active"
-		or instance.saving
-		or self.members[client] ~= instance.id
-		or client:GetPos():DistToSqr(entity:GetPos()) > STORAGE_DISTANCE_SQUARED
-	then
-		return
-	end
-	if (client.ixNextHideoutStorage or 0) > CurTime() then
-		return
-	end
-	client.ixNextHideoutStorage = CurTime() + STORAGE_COOLDOWN
-	local personal = ix.plugin.Get("personalstorage")
-	if not personal then
-		client:Notify("Personal storage is unavailable.")
-
-		return
-	end
-	local character = client:GetCharacter()
-	personal:GetPersonalInventory(character, function(inventory)
-		if
-			not IsValid(client)
-			or client:GetCharacter() ~= character
-			or self.instances[instance.id] ~= instance
-			or instance.state ~= "active"
-			or instance.saving
-			or self.members[client] ~= instance.id
-			or not IsValid(entity)
-			or client:GetPos():DistToSqr(entity:GetPos()) > STORAGE_DISTANCE_SQUARED
-		then
-			return
-		end
-		-- Only the owner can migrate the former shared hideout stash. Items that
-		-- do not fit stay in that inventory for admin recovery, never deleted.
-		local record = self:GetHideout(instance.id)
-		if record.owner == character:GetID() and instance.inventory then
-			for _, item in pairs(instance.inventory:GetItems()) do
-				item:Transfer(inventory:GetID(), nil, nil, client)
-			end
-			if not table.IsEmpty(instance.inventory:GetItems()) then
-				client:Notify(
-					"Some old hideout items could not be moved to your personal storage. "
-						.. "An administrator can recover them with /HideoutLegacyStorage "
-						.. instance.id
-						.. "."
-				)
-			end
-		end
-		instance.personalInventories = instance.personalInventories or {}
-		instance.personalInventories[inventory:GetID()] = inventory
-		personal:OpenPersonalInventory(client, inventory, entity)
-	end)
 end
 
 function PLUGIN:OpenLegacyStorage(client, id)
@@ -310,7 +254,21 @@ function PLUGIN:CanPlayerInteractItem(client, action, value)
 	end
 end
 
-function PLUGIN:CanPlayerUseCharacter(client)
+function PLUGIN:CanPlayerUseCharacter(client, character)
+	if character and self.IsCharacterOperationPending and self:IsCharacterOperationPending(character) then
+		return false, "Wait for your pending storage or shop operation to finish."
+	end
+	if character and character.cotzHideoutStale then
+		if (client.cotzHideoutReloadAt or 0) <= CurTime() then
+			client.cotzHideoutReloadAt = CurTime() + 2
+			ix.char.Restore(client, function()
+				local restored = ix.char.loaded[character:GetID()]
+				if IsValid(client) and restored then restored:Sync(client) end
+			end, true, character:GetID())
+		end
+		return false, "Your character state is being refreshed. Select the character again shortly."
+	end
+	if client.cotzHideoutOperation then return false, "Wait for the storage or shop operation to finish." end
 	if client.ixHideoutPending then
 		return false, "Wait for hideout entry to finish."
 	end
@@ -349,7 +307,7 @@ end
 function PLUGIN:PreCharacterDeleted(client, character)
 	for _, id in ipairs(table.GetKeys(self.state.hideouts)) do
 		local record = self:GetHideout(id)
-		if record.owner == character:GetID() then
+		if record.ownerType ~= "squad" and record.owner == character:GetID() then
 			self:DeleteHideout(id, function(ok, reason)
 				if not ok then
 					ErrorNoHalt(

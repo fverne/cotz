@@ -281,6 +281,11 @@ function cross.RefreshSquads()
 		local character = client:GetCharacter()
 		if (character and character:GetSquadID() ~= "NULL") then ids[character:GetSquadID()] = true end
 	end
+	-- Keep offline shop owners authoritative while their local hideouts are provisioned.
+	local hideouts = ix.plugin and ix.plugin.Get("hideouts")
+	for _, record in pairs(hideouts and hideouts.state and hideouts.state.hideouts or {}) do
+		if record.ownerType == "squad" then ids[record.squadID] = true end
+	end
 	local ordered = {}
 	for id in pairs(ids) do ordered[#ordered + 1] = id end
 	cross.squadReading = true
@@ -302,7 +307,11 @@ function cross.RefreshSquads()
 		local state = scopedQuery("Select", "ix_squads_state", id)
 		state:Where("active", 1)
 		cross.Query(state, function(records, failure)
-			if (failure or not records[1]) then nextSquad() return end
+			if (failure or not records[1]) then
+				if (not failure) then ix.squad.list[id] = nil end
+				nextSquad()
+				return
+			end
 			local record = records[1]
 			local query = mysql:Select("ix_squads_members"):Alias("m")
 			for _, field in ipairs({"character_id", "member_rank"}) do query:SelectColumn("m." .. field, field) end
@@ -336,6 +345,7 @@ function cross.RefreshSquads()
 					local squad = ix.squad.Register(id, record.name, {
 						leaderID = tonumber(record.leader_id), description = record.description, color = color,
 					})
+					squad.hideoutFresh = CurTime()
 					for _, row in ipairs(rows) do
 						local memberID = tonumber(row.character_id)
 						squad.members[memberID] = memberID == squad.leaderID and 2 or tonumber(row.member_rank)

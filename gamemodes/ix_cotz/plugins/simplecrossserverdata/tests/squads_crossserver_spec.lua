@@ -28,6 +28,9 @@ query([[INSERT INTO ix_characters VALUES (2,'ix_cotz','other','Member','member.p
 query([[INSERT INTO ix_characters VALUES (3,'ix_cotz','account','Alt','alt.png','NULL',0)]])
 query([[INSERT INTO ix_characters VALUES (4,'another','other','Foreign','foreign.png','char:1',1)]])
 query([[INSERT INTO ix_squads_squads VALUES ('char:1','Legacy','Message','NULL')]])
+-- Public presence now selects these existing character columns for its leaderboard.
+query([[ALTER TABLE ix_characters ADD COLUMN data TEXT DEFAULT '{}']])
+query([[ALTER TABLE ix_characters ADD COLUMN reputation INTEGER DEFAULT 0]])
 local humans, sent, errors = {}, {}, {}
 local now, map = 100, "map_a"
 local hashes = 0
@@ -325,5 +328,16 @@ timers[#timers]()
 fakeQuery.onSuccess(fakeQuery, {})
 check(completions == 1, "late query completion cannot run after the timeout callback")
 mysql.module, mysql.connection = "sqlite", nil
+local previousHumans = humans
+humans = {}
+ix.plugin = {Get = function(name)
+	if name == "hideouts" then
+		return {state = {hideouts = {{ownerType = "squad", squadID = created.owner}}}}
+	end
+end}
+serverB.RefreshSquads()
+check(ix.squad.list[created.owner] and ix.squad.list[created.owner].hideoutFresh == now,
+	"provisioned hideouts retain fresh squad authority while all members are offline")
+humans = previousHumans
 for _, path in ipairs({statementPath, databasePath, resultPath, stem}) do os.remove(path) end
 print("squads cross-server: " .. checks .. " checks passed")

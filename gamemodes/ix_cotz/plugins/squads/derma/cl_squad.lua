@@ -296,6 +296,10 @@ function PANEL:BuildOverview()
 	addSection(card, "ACTIONS")
 	if (self.leader or self.officer) then
 		addButton(card, L("squad_menu_btn_invite"), function() self:InvitePlayer() end)
+		local hideouts = ix.plugin.Get("hideouts")
+		if hideouts and hideouts.RequestManagement then
+			addButton(card, "Squad hideout", function() hideouts:RequestManagement("", "squad") end)
+		end
 	end
 	local action = self.leader and "ixSquadDisband" or "ixSquadLeave"
 	local title = L(self.leader and "squad_menu_btn_disband" or "squad_menu_btn_leave")

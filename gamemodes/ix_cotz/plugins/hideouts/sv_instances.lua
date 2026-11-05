@@ -42,8 +42,8 @@ function PLUGIN:SetTemplatePoint(client, id, point, x, y, z)
 	if not template then
 		return false, "Unknown template."
 	end
-	if point ~= "spawn" and point ~= "exit" and point ~= "storage" then
-		return false, "Point must be spawn, exit, or storage."
+	if point ~= "spawn" and point ~= "exit" and point ~= "storage" and point ~= "vendor" then
+		return false, "Point must be spawn, exit, storage, or vendor."
 	end
 	local standing = x == nil and y == nil and z == nil
 	if not standing and (x == nil or y == nil or z == nil) then
@@ -242,6 +242,8 @@ end
 
 function PLUGIN:TagEntity(instance, entity)
 	entity.ixHideout = instance.id
+	entity:SetNetVar("cotzHideoutID", instance.id)
+	entity:SetNetVar("hideoutEditable", instance.props[entity] == true or entity:GetClass() == "ix_hideout_vendor")
 	entity.bNoPersist = true
 	instance.entities[entity] = true
 	local record = self:GetHideout(instance.id)
@@ -554,6 +556,7 @@ function PLUGIN:CloseInventoryStorage(inventory, onlyClient)
 end
 
 function PLUGIN:UnloadInstance(instance)
+	if (instance.operations or 0) > 0 then instance.unloadRequested = true return end
 	if instance.state ~= "active" and instance.state ~= "failed" then
 		return
 	end

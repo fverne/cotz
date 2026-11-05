@@ -23,7 +23,9 @@ if (SERVER) then
 	end
 
 	function ENT:Use(activator)
-		activator:GetCharacter():SetData("savedspawn", {self:GetPos() + Vector(0,0,20), Angle(), game.GetMap()})
+		local destination = ix.util.CaptureSavedLocation(activator)
+		if not destination then return end
+		activator:GetCharacter():SetData("savedspawn", destination)
         activator:Notify("Spawn Set")
 	end
 

@@ -58,20 +58,7 @@ if (SERVER) then
 
 			if !spawndata then return end
 
-			if not (spawndata[3] == game.GetMap())then
-				character:SetData("newpos", spawndata)
-				ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, spawndata[3])
-				return
-			end
-
-			client:SetPos(spawndata[1])
-
-            local positions = ix.util.FindEmptySpace(client, {client})
-
-            for _, v in ipairs(positions) do
-                client:SetPos(v)
-                if not client:IsStuck() then return end
-            end
+			ix.util.TravelToSavedLocation(client, spawndata)
 		end
 	end
 

@@ -122,79 +122,18 @@ Test("simultaneous personal bank loads create one persistent inventory", functio
 	assert(first.owner == 1 and first.width == 2 and first.height == 2)
 end)
 
-Test("Ballast and hideout open the same bank and guests keep private banks", function()
+Test("Ballast retains separate character banks after hideout storage changes", function()
 	Reset()
-	local instance = NewInstance()
-	instance.storage = NewEntity(nil, instance.origin)
-	instance.storage.ixHideout = instance.id
 	local owner, guest = NewClient(1), NewClient(2)
-	owner.position, guest.position = instance.origin, instance.origin
-	for _, client in ipairs({ owner, guest }) do
-		PLUGIN.members[client] = instance.id
-	end
 	local ownBank, guestBank = TestBank(301), TestBank(302)
 	owner:GetCharacter():SetData("bankID", 301)
 	guest:GetCharacter():SetData("bankID", 302)
-	owner:GetCharacter():SetData("bankW", 5)
-	local restores = 0
-	ix.inventory.Restore = function(id, width, height, callback)
-		restores = restores + 1
-		local bank = ix.item.inventories[id]
-		bank:SetSize(width, height)
-		callback(bank)
-	end
-	local vendor = NewEntity(nil, instance.origin)
-	function vendor:GetDisplayName()
-		return "'Ballast'"
-	end
+	local vendor = NewEntity(nil, owner:GetPos())
+	function vendor:GetDisplayName() return "'Ballast'" end
 	assert(townPlugin:OpenTownStorage(owner, vendor))
-	assert(owner.ixOpenStorage == ownBank and ownBank.storageInfo.entity == vendor)
-	PLUGIN:OpenStorage(owner, instance.storage)
-	PLUGIN:OpenStorage(guest, instance.storage)
+	assert(townPlugin:OpenTownStorage(guest, vendor))
 	assert(owner.ixOpenStorage == ownBank and guest.ixOpenStorage == guestBank)
-	assert(ownBank.width == 5 and restores == 1 and ownBank.storageInfo.entity == instance.storage)
-	assert(townPlugin:OpenTownStorage(owner, vendor))
-	assert(owner.ixOpenStorage == ownBank and ownBank.storageInfo.entity == vendor)
-	assert(guest.ixOpenStorage == guestBank and restores == 1)
 	assert(not ownBank.vars.hideout and not guestBank.vars.hideout)
-	Advance(1)
-	PLUGIN:OpenStorage(owner, instance.storage)
-	PLUGIN:CloseStorage(instance, owner)
-	assert(not owner.ixOpenStorage and guest.ixOpenStorage == guestBank)
-	PLUGIN:CloseStorage(instance)
-	assert(
-		not guest.ixOpenStorage
-			and ix.item.inventories[301] == ownBank
-			and ix.item.inventories[302] == guestBank
-	)
-end)
-
-Test("legacy stash migration leaves overflow safely recoverable", function()
-	Reset()
-	local instance = NewInstance()
-	instance.storage = NewEntity(nil, instance.origin)
-	instance.storage.ixHideout = instance.id
-	local owner = NewClient(1)
-	owner.position = instance.origin
-	PLUGIN.members[owner] = instance.id
-	local bank = TestBank(310)
-	owner:GetCharacter():SetData("bankID", 310)
-	local legacy = TestBank(311)
-	instance.inventory = legacy
-	local moved, overflow = {}, {}
-	legacy.items = { [1] = moved, [2] = overflow }
-	function moved:Transfer(id)
-		assert(id == bank.id)
-		bank.items[1], legacy.items[1] = self, nil
-
-		return true
-	end
-	function overflow:Transfer()
-		return false, "noFit"
-	end
-	PLUGIN:OpenStorage(owner, instance.storage)
-	assert(bank.items[1] == moved and legacy.items[2] == overflow)
-	assert(owner.ixOpenStorage == bank and owner.notification:find("HideoutLegacyStorage"))
 end)
 
 Test("new hideouts do not allocate another shared storage inventory", function()
@@ -203,7 +142,7 @@ Test("new hideouts do not allocate another shared storage inventory", function()
 	instance.state = "loading"
 	local new = ix.inventory.New
 	ix.inventory.New = function()
-		error("must use personal storage instead")
+		error("uninstalled spots must not allocate storage")
 	end
 	local complete
 	PLUGIN:RestoreStorage(instance, function(ok)

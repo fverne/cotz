@@ -27,28 +27,12 @@ ITEM.functions.use = {
 	name = "Stare",
     icon = "icon16/help.png",
     sound = "icon16/stalker/read.png",
-    OnRun = function(item)
-        if(item:GetData("cooldown",0) < os.time())then
+	OnRun = function(item)
+		local destination = {Vector(-7182.672852, -10445.850586, 4972.751465), Angle(), "rp_marsh_cs"}
+		ix.util.UseTravelArtifact(item, destination, "Reminiscing")
 
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Reminiscing", 30, function(player) 
-                item:SetData("cooldown", os.time() + (60*15) )
-
-                local client = item:GetOwner()
-                local character = client:GetCharacter()
-
-                local townspawndata = {Vector(-7182.672852, -10445.850586, 4972.751465), Angle(0,0,0), "rp_marsh_cs"}
-
-                if not (townspawndata[3] == game.GetMap())then
-                    character:SetData("newpos", townspawndata)
-                    ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(client, townspawndata[3])
-                end
-
-                client:SetPos(townspawndata[1])
-            end)
-        end
-
-        return false
-    end,
+		return false
+	end,
     OnCanRun = function(item)
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end

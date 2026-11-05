@@ -23,28 +23,11 @@ ITEM.functions.use = {
 	name = "Follow",
 	icon = "icon16/help.png",
 	sound = "physics/metal/chain_impact_soft2.wav",
-    OnRun = function(item)
+	OnRun = function(item)
+		ix.util.UseTravelArtifact(item, item:GetData("savedspawn"), "Following the Compass")
 
-        if (item:GetData("cooldown",0) < os.time()) then
-
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Following the Compass", 30, function(player) 
-        		item:SetData("cooldown", os.time()+(60*15) ) --15 minutes
-        		local character = player:GetCharacter()
-            	local spawndata = item:GetData("savedspawn", nil)
-				if !spawndata then return end
-
-				if not (spawndata[3] == game.GetMap())then
-					character:SetData("newpos", spawndata)
-					ix.plugin.list["simplecrossserver"]:RedirectPlayerNoLoadZone(player, spawndata[3])
-					return
-				end
-
-				player:SetPos(spawndata[1])
-            end)
-        end
-
-        return false
-    end,
+		return false
+	end,
     OnCanRun = function(item)
         return !IsValid(item.entity) and item:GetData("savedspawn", false) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
@@ -56,7 +39,9 @@ ITEM.functions.useSave = {
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
 
-		item:SetData("savedspawn", {item.player:GetPos(), Angle(), game.GetMap()})
+		local destination = ix.util.CaptureSavedLocation(item.player)
+		if not destination then return false end
+		item:SetData("savedspawn", destination)
         item.player:Notify("Location Set")
         return false
     end,

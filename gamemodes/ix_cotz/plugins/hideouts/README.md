@@ -1,6 +1,6 @@
-# Character hideouts
+# Personal and squad hideouts
 
-A Helix plugin for character-owned interiors. The first entrant reserves a space
+A Helix plugin for character-owned storage rooms and squad-owned interiors. The first entrant reserves a space
 in a configured remote map volume, pastes a shell using advdupeint, restores
 contents, and teleports inside. The last departure saves and removes the
 instance. A character may own several hideouts. Invited characters share the
@@ -70,27 +70,139 @@ reposition occupied hideouts. Area, entrance, and template-dimension edits requi
 all instances to be unloaded; point placement can be edited live as described
 above. An oversized or obstructed dupe is rejected without teleporting anyone.
 
-## Commands
+## Personal storage rooms
 
-| Command | Access | Purpose |
-| --- | --- | --- |
-| HideoutList | Admin | List accessible hideouts for this character |
-| HideoutEnter ID | Admin | Enter near the associated entrance |
-| HideoutLeave | Admin occupant | Return outside |
-| HideoutInvite ID PLAYER | Admin owner | Grant access to the target's active character |
-| HideoutRevoke ID PLAYER | Admin owner | Revoke that character's access and attempt evacuation |
-| HideoutStatus | Admin | Inspect loaded instances and occupants |
-| HideoutRetrySave ID | Admin | Retry a completed but unsuccessful save |
-| HideoutDelete ID | Admin | Delete the hideout and its remaining contents |
-| HideoutLegacyStorage ID | Admin occupant | Recover overflow from an old private stash near its storage entity |
+Personal entrances remain administrator-placed keypads on fixed doors. Players cannot move them.
+Owners use the entrance keypad's **Manage** button or the interior exit menu to invite/revoke
+characters. Using an individual container opens its owner menu: **Open storage**, **Install/Upgrade**,
+and **Private/Public** sharing. Hand-ins show the required item and resulting size, with confirmation.
+Invited guests use shared containers to open their ordinary storage interface; they receive no owner controls.
 
-All hideout commands are admin-only. Character access still controls normal
-entrance menus, exit entities, and storage use; players use those interactions.
+An invited guest can enter the room but cannot open its containers by default. Each spot is
+**Private** until the owner makes that particular spot **Public** (shared with invited guests only).
+Making it private or revoking an invitation closes affected sessions and invalidates transfers.
+Only the owner installs/upgrades containers or changes sharing. Upgrades preserve sharing and contents.
 
-Deletion also runs when the owner character is deleted. Items already exported
-to another inventory are retained. Failed deletion leaves a deletion marker
-that prevents further entry; resolve the problem and retry the command.
-Map setup commands are described above.
+While standing at a container position inside a loaded personal hideout, an administrator runs:
+
+    /HideoutTemplateContainer cabin left general
+    /HideoutTemplateContainer cabin ammo_shelf ammo
+    /HideoutTemplateContainer cabin medical_shelf medical
+
+Spot IDs are permanent per template. Reusing an ID moves that spot; it does not create a new
+inventory. Recipe changes in place are rejected. Removed spot definitions retain their saved
+inventories for explicit recovery. New spots start locked. Models lift 16 units from the marked feet
+position; inspect placement and clearance before giving players access.
+
+Recipes live in `sh_definitions.lua`; they explicitly define each tier's input and resulting capacity:
+
+| Recipe | Successive hand-ins | Storage sizes | Contents |
+| --- | --- | --- | --- |
+| general | Small Utility Pouch, Deep Utility Crate, Military Transit Crate | 3×3, 6×6, 10×8 | Ordinary storable items |
+| ammo | One Ammunition Transit Can per tier | 4×4, 6×6, 10×8 | Items marked `isAmmo` |
+| medical | One Injector Transport Pouch per tier | 3×3, 5×5, 8×6 | `base_aid` items |
+
+Each hand-in affects only that hideout's selected spot. These are starting balance values for
+administrators to review before provisioning. Existing installed capacities are saved; recipe edits
+cannot silently shrink them. Inventory-bearing bags are not accepted. There is no uninstall or refund.
+
+Existing banks and bank upgrades remain available through Ballast. Hideouts no longer open a bank
+or automatically move items between a former hideout stash and a bank. Old `storageID` stashes remain
+accessible to administrators through `/HideoutLegacyStorage ID` near the old recovery fixture.
+
+## Squad hideouts
+
+Provision a target character's squad as an administrator:
+
+    /HideoutSquadGrant "Player Name" cabin "Squad headquarters"
+
+One squad hideout may be provisioned per squad per map. The stable squad ID owns it, not its leader.
+Leaders/officers open **Tab → Squads → Squad hideout** to place the first entrance or relocate it.
+Aim at a nearby solid surface on the home map before opening the menu and choose **Place entrance
+where you are looking**. The same control is available when managing the existing entrance.
+This places its shared invisible interaction entity. Stand safely outside
+interior allocation areas. Everyone interacts with the same entity; it is not a private squad portal.
+Personal door keypads remain fixed. Relocation preserves occupied players' original return positions.
+
+Squad members always have entry. The hideout management menu's **Access** selector controls outsiders:
+public admits eligible characters, invite admits invited characters, and squad excludes outsiders.
+The default is squad-only. Offline squads remain in the authoritative squad refresh so their shops
+can be visited without members online. Unverifiable/stale membership closes privileged access;
+disbanding retains the hideout and assets for administrator recovery.
+
+Leaders/officers receive temporary prop/physgun/tool access inside their squad hideout, without
+saved flag changes. It permits shared furnishings, supported appearance properties, colour/material,
+and furnishing removal. Template geometry, fixed utilities, unsafe tools, duplicators and arbitrary
+scripted entity spawning remain protected. Privileges end on exit or loss of rank/membership.
+
+### Vendor and treasury
+
+The vendor is a movable utility. Leaders/officers can move/freeze it with the physgun and use
+supported appearance tools. Its local transform survives unloading/reallocation. Removal and duplication
+are blocked. **Reset vendor position** is available from the entrance or interior exit management
+menu; the vendor's own **Manage squad hideout** button also exposes it. This restores the template
+position or recreates a missing entity without requiring proximity to that vendor. Stock is retained.
+Use `/HideoutTemplatePoint cabin vendor` to configure the default reset point while inside a loaded
+instance. A blocked reset point reports failure. Vendor movement/reset closes shop sessions.
+
+Use the vendor to shop or manage stock:
+
+- Members donate actual items into squad-owned stock without payment. Donations are final squad property.
+- Leaders/officers publish prices, reprice, cancel listings (price zero), or recover stock without payout.
+- Every buyer, including members, pays the displayed whole-instance price. Quantity, durability,
+  custom names, bookmarks and other instance data stay on the original item row.
+- Only paid sales credit the shared squad treasury. Default commission is 5%, rounded down, controlled
+  by `hideoutSaleCommission`. A 1,000-rouble purchase credits 950; donations and cancellations credit zero.
+- Only the leader withdraws treasury funds to their own character. Members can view recent transactions.
+- Stock defaults to a 10×8 grid; `hideoutStockWidth`/`hideoutStockHeight` apply to new inventories.
+  Listed and unlisted stock share that capacity. Shop pages contain at most 20 entries.
+- Equipped, bound, non-transferable, field cargo and inventory-bearing items are rejected.
+  Normal NPC reward/progression callbacks are not invoked.
+
+## Player menus and administrator recovery
+
+Players do not need chat commands. All hideout commands are restricted to administrators.
+
+| Interaction | Available actions |
+| --- | --- |
+| Use the entrance keypad or squad entrance | Enter an accessible hideout; owners/officers can manage access and invitations |
+| Use the interior exit | Leave; owners/officers can manage invitations/access and reset the vendor |
+| Use a personal container | Owner: open, install/upgrade, change sharing; invited guests: open if Public |
+| Use the squad vendor | Shop, donate, manage listings, treasury/history; officers can open hideout management |
+| Tab → Squads → Squad hideout | Leaders/officers can place the first entrance or relocate it on this map |
+
+Management requests bind to the active character and the relevant entrance, exit, vendor, or container.
+Actions recheck the current role and location. Container actions apply only to the container whose
+menu is open; moving away or switching characters invalidates that session. A guest's exit menu
+allows leaving without granting management privileges. Vendor reset also remains accessible when
+the vendor itself is missing or unreachable. The squad-tab menu never permits remote container access.
+
+Setup, grant, status, deletion, retry-save and recovery commands remain available to administrators.
+The former player commands (`HideoutEnter`, `HideoutLeave`, `HideoutManage`, `HideoutInvite`,
+`HideoutRevoke`, `HideoutEntrancePlace`, `HideoutAccess`, `HideoutVendorReset`, and container commands)
+are administrator-only fallbacks.
+`/HideoutRecoveryOpen ID SPOT` opens an existing or retired container for withdrawal;
+use `shop` for squad stock. This also recovers assets after disbanding or character deletion.
+Recovery sessions bind to the administrator's character and position and permit withdrawal only.
+Banks are never deleted by hideout deletion. Legacy floor-item deletion behaviour is unchanged.
+
+## Artifact and cross-map travel
+
+Compass records a stable hideout reference (schema/map/hideout ID and local transform) when used
+inside an authorized interior. Moon, bedroll checkpoints and their respawn consumer support the same
+representation. Ordinary world-coordinate bookmarks remain supported. Artifacts retain their existing
+30-second channel and 15-minute cooldown. A failed hideout admission does not spend that cooldown.
+
+A bookmark does not grant permission: entry rechecks current invitations/squad access. The target
+instance loads if needed; a blocked local bookmark falls back to configured safe spawn points.
+Cross-map travel uses existing redirect and presence handoff APIs and a character-scoped, expiring
+arrival intent. MySQL connections restore fresh character data rather than replaying a previous map's
+Helix character cache. Destination admission registers occupancy and an outside return point, then clears
+that intent. Spawn Saver cannot restore raw coordinates over this admission. Cross-map exit uses the
+destination entrance/recovery point. Denied/expired arrivals remain outside. Deploy all maps together.
+
+Old raw bookmarks into reserved interior volumes must be recorded again. Their original instance
+cannot safely be inferred from whichever interior now occupies those coordinates.
 
 ## Persistence and duplication handling
 
@@ -115,18 +227,27 @@ of the inserted item row, allowing an interrupted first load to find an existing
 seed instead of inserting it twice. Taking or consuming seeded loot does not
 replenish it on subsequent visits.
 
-Storage opens the visitor's character bank (bankID), using the same personal
-storage service and inventory as Ballast. Bank width/height upgrades apply in
-both places. Each visitor sees their own bank, including invited guests. All
-hideouts belonging to a character access that same bank. Closing or deleting a
-hideout does not delete its owner's bank. It remains separate from generic
-ix_container persistence/removal. No bag-specific serialization is implemented.
+Container state, templates, access, entrance placement and vendor transforms use plugin data.
+Ordinary item data/inventory creation/restoration and storage sessions use Helix APIs. The narrow
+`sv_operations.lua` adapter coordinates economic commits through the existing structured query
+builder and native transactions. It adds only an operation journal and shared squad treasury table;
+it does not replace normal inventory/item persistence. MySQL requires mysqloo transaction support
+and InnoDB for `ix_items`, `ix_characters` and the two new tables. Engine compatibility is checked;
+this plugin never converts existing tables. SQLite transactions support local tests/development.
 
-Existing private hideout stashes remain saved. When the owner opens the hideout
-storage, their former stash contents transfer into their personal bank where
-possible. Items that cannot transfer remain in the original inventory. An admin
-inside that hideout can use /HideoutLegacyStorage ID near its storage entity to
-recover leftovers. Guests never automatically receive the owner's legacy items.
+Purchases, stock recovery/donation and upgrade hand-ins lock affected custody while committing.
+Outgoing money is reserved immediately; character saves are deferred until the outcome is known,
+then unrelated wallet changes are preserved while the character session remains active. Upgrade journal entries replay committed entitlements
+if the plugin-data projection was interrupted. An uncertain database outcome retains locks and logs
+its operation token rather than issuing a speculative refund or replay. Lost commit acknowledgements
+are checked against receipts. After disconnect/session loss, an old character object cannot save over
+a newer session; its next selection refreshes authoritative character data. Resolve the database issue
+and restart to restore authoritative rows; do not hot-reload during pending economic work.
+
+The version-2 migration labels existing records as character-owned and initializes container state
+without resetting banks, inventory IDs, furnishings, item data or invitations. Deleted records retain
+new inventory references under retired state for explicit administrator recovery. The journal is
+indexed for upgrade replay and recent squad history; retain it with database backups.
 
 Loose-item placement is checkpointed every hideoutCheckpoint seconds and on
 unload. Ordinary item data changes continue using Helix's own saves.
@@ -173,13 +294,22 @@ From the repository root:
 
     python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
 
-This syntax-checks changed GLua and runs the real server plugin methods against
-mocked engine/Helix boundaries using the system Lua shared library. It covers
-ownership, allocation, entry/exit, concurrent requests, item persistence,
-consumption, stale rows, save failures, initialization, and AdvDupe cleanup.
+This syntax-checks changed GLua and runs real server methods against mocked engine boundaries
+using the system Lua shared library. Feature cases use the installed query builder and real SQLite
+transactions. Coverage includes ownership/access, per-container sharing and upgrades, concurrent
+purchases, rollback, saved wallet changes, treasury overdrafts/demotion, vendor reset, stable artifact
+destinations and cross-map arrival/rejection, alongside existing allocation and item persistence cases.
+Menu cases load the actual menu server module and cover container hand-ins/sharing/opening, invitation
+updates, guest exit, initial entrance placement, vendor reset, role/location/character changes, and
+administrator-only command counterparts.
 
 A live server smoke test is still required for actual dupe coordinates, map
 geometry/PVS, model bounds, storage UI, database adapter behavior, and revive.
 Test at least two occupants, two instances using the same template, repeated
 item transfers/unloads, restart recovery, map cleanup, and a simulated database
 failure before enabling player access.
+
+The feature smoke test additionally needs two real servers: verify invisible entrance interaction,
+offline shopping, container sharing/revocation, temporary tools on exit/demotion, vendor movement/reset,
+artifact arrival into unloaded hideouts, character switches, delayed connections, and MySQL failures.
+No running Garry's Mod development session or server dupe assets were available during implementation.
