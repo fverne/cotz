@@ -1,7 +1,6 @@
 ITEM.name = "Recovered Experimental Headset"
 ITEM.description = "An open-frame headset with dark ear pieces, a top band and small attached fittings."
-ITEM.longdesc = "An open-frame headset with dark ear pieces, a top band and small attached fittings. Fine"
-	.. " grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
 	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 

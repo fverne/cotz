@@ -2,7 +2,8 @@ ITEM.name = "Weapon"
 ITEM.description = "A Weapon."
 ITEM.category = "Weapons"
 ITEM.model = "models/weapons/w_pistol.mdl"
-ITEM.longdesc = "No longer description available."
+ITEM.longdesc = "Handling marks and worn fittings record journeys that no inventory list can explain. Familiarity"
+	.. " with its condition matters more than a trader's assurances."
 
 ITEM.width = 2
 ITEM.height = 2

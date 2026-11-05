@@ -1,5 +1,7 @@
 ITEM.name = "Crowbar"
 ITEM.description = "A crowbar for prying open objects."
+ITEM.longdesc = "The hooked end is polished bright where it has scraped against stubborn edges. It is a familiar"
+	.. " companion to anyone picking through buildings whose doors stopped opening years ago."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_crowbar.mdl"
 ITEM.class = "tfa_nmrih_crowbar"
 ITEM.weaponCategory = "secondary"

@@ -1,6 +1,7 @@
 ITEM.name = "PAC Outfit"
 ITEM.description = "A PAC Outfit Base."
-ITEM.longdesc = "No Longer Description Available"
+ITEM.longdesc = "Straps, seams, and fastenings show how carefully a previous owner maintained their equipment. A"
+	.. " good fit matters most after several hours in the field."
 ITEM.category = "Outfit"
 ITEM.model = "models/Gibs/HGIBS.mdl"
 

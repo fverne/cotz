@@ -1,6 +1,9 @@
 ITEM.name = "Russian Cigarette Tobacco"
 ITEM.description = "A box of russian tobacco."
-ITEM.longdesc = "A hard box filled with tobacco. Produced in Russia, this box is still somewhat rare in the zone, and as such the price is somewhat steep.\nMany STALKERs are fans of this brand, as the taste is unmatched by anything else found in the zone."
+ITEM.longdesc = "Produced in Russia, this box is still somewhat rare in the zone, and as such the price is"
+	.. " somewhat steep.\n"
+	.. "Many STALKERs are fans of this brand, as the taste is unmatched by anything else found in the"
+	.. " zone."
 ITEM.model = "models/lostsignalproject/items/misc/tobacco.mdl"
 
 ITEM.sound = "stalkersound/inv_smoke.mp3"

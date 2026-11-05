@@ -1,5 +1,7 @@
 ITEM.name = "Professional Ammo Box"
 ITEM.description= "The box rattles when you shake it."
+ITEM.longdesc = "The packed rounds are intended to replenish a working field load. Careful packing keeps the"
+	.. " contents together through the sort of transport that ruins ordinary luggage."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

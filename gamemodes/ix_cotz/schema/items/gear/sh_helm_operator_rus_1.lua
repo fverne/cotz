@@ -1,5 +1,7 @@
 ITEM.name = "PASGT"
 ITEM.description = "A modern helmet."
+ITEM.longdesc = "Its deep profile is familiar from photographs of soldiers far beyond the Zone. The suspension"
+	.. " has been adjusted often enough to polish the edges of its fittings."
 ITEM.model = "models/shtokerbox/ground_headgear_rus_helmet1c.mdl"
 
 ITEM.price = 100000

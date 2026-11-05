@@ -20,6 +20,24 @@ ITEM.fpr = 0
 ITEM.radProt = 0.85
 ITEM.flatRadProt = 0.02
 
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "cs2_lone",
+	worldMaterialSlots = {},
+	worldNotice = "Some worn finishes have no matching ground-model surface.",
+	skins = {
+		{id = "cs2_lone", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "cs2_lone2", name = "Loner 2", skin = 1, worldSkin = 0},
+		{id = "cs2_blak", name = "Black", skin = 2, worldSkin = 0},
+		{id = "cs2_csky", name = "Clear Sky", skin = 3, worldSkin = 0},
+		{id = "cs2_free", name = "Freedom", skin = 4, worldSkin = 0},
+		{id = "cs2_merc", name = "Mercenary", skin = 5, worldSkin = 0},
+	},
+	bodygroups = {},
+}
+
 ITEM.exRender = true
 ITEM.iconCam = {
     pos = Vector(0, -182.33, 5),

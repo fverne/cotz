@@ -1,6 +1,7 @@
 ITEM.name = "Electric Tape"
 ITEM.description = "A roll of electrician's tape."
-ITEM.longdesc = "Electricians tape, used in electronics. Used by technicians when doing electric work."
+ITEM.longdesc = "The outer turns have collected grit from a tool pouch. A careful technician keeps the cleaner"
+	.. " layers for work that will be hidden inside a casing."
 ITEM.model = "models/illusion/eftcontainers/insulatingtape.mdl"
 
 ITEM.width = 1

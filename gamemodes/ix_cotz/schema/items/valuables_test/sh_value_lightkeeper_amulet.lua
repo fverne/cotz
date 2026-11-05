@@ -1,7 +1,6 @@
 ITEM.name = "Tooth Pendant"
 ITEM.description = "A looped cord carrying several pale tooth-shaped pieces and small dark fittings."
-ITEM.longdesc = "A looped cord carrying several pale tooth-shaped pieces and small dark fittings. The small"
-	.. " surfaces carry the dull polish of repeated handling. A little dust remains in the"
+ITEM.longdesc = "The small surfaces carry the dull polish of repeated handling. A little dust remains in the"
 	.. " sheltered edges. It is an unremarkable possession until someone notices it is missing, or"
 	.. " recognises whose pocket it used to live in."
 ITEM.valuableCategory = "personal effects"

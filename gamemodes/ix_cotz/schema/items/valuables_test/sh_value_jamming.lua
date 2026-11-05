@@ -1,8 +1,7 @@
 ITEM.name = "Recovered Interference Unit"
 ITEM.description = "A dark rectangular electronic unit with short aerial fittings at one end."
-ITEM.longdesc = "A dark rectangular electronic unit with short aerial fittings at one end. Fine grit has"
-	.. " gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
-	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "radio equipment"
 

@@ -1,5 +1,7 @@
 ITEM.name = "Personal Belongings"
 ITEM.description= "A bag with your possessions from back home. Contains the very basic neccessities from what you've heard from rumours about the zone."
+ITEM.longdesc = "A few familiar possessions carry the last smell of somewhere outside the perimeter. Everything"
+	.. " was packed before experience had a chance to correct the advice."
 ITEM.model = "models/lostsignalproject/items/misc/kithunt.mdl"
 
 ITEM.width = 3

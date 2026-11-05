@@ -1,5 +1,7 @@
 ITEM.name = "PMK-3 Gasmask"
 ITEM.description = "A modern gasmask"
+ITEM.longdesc = "The harness spreads firmly across the back of the head. Adjusting it with cold fingers is a"
+	.. " small task best finished before the air starts to seem questionable."
 ITEM.model = "models/shtokerbox/ground_mask_pmk3.mdl"
 
 ITEM.price = 75000

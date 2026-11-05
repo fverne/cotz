@@ -1,5 +1,7 @@
 ITEM.name = "Sling Backpack"
 ITEM.description = "A compact over-the-shoulder sling backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The single strap is quickly found when the bag has to come off in a cramped space. Its modest"
+	.. " silhouette suits short errands better than ambitious scavenging trips."
 ITEM.model = "models/backpack_molle/backpack_molle.mdl"
 
 ITEM.price = 900

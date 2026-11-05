@@ -1,8 +1,7 @@
 ITEM.name = "Sugar Carton"
 ITEM.description = "A red-and-white sugar carton with a broad folded top and cursive printing."
-ITEM.longdesc = "A red-and-white sugar carton with a broad folded top and cursive printing. The packaging"
-	.. " has picked up the stale smell of a neglected pantry. A cook sorting a delivery would"
-	.. " recognise the familiar shape, even here, far from any well-stocked kitchen."
+ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
+	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
 ITEM.valuableCategory = "provisions"
 
 ITEM.model = "models/illusion/eftcontainers/sugar.mdl"

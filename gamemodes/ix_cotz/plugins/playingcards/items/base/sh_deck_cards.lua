@@ -5,7 +5,8 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
 ITEM.description = ""
-ITEM.longdesc = ""
+ITEM.longdesc = "Repeated shuffling has softened the edges and left small marks on the backs. Poker, blackjack,"
+	.. " and locally invented games give the same well-used pack a place at many camp tables."
 ITEM.category = "Cards"
 
 function ITEM:GetDescription()

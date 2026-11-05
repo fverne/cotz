@@ -1,6 +1,7 @@
 ITEM.name = "Vareshka Meat"
 ITEM.description = "Uncooked meat from a Vareshka."
-ITEM.longdesc = "A chunk of vareshka meat. Meat from this hulking ape-like creature is tough and chewy, but it will fill you up, and will be a feast after taking one of them down."
+ITEM.longdesc = "Meat from this hulking ape-like creature is tough and chewy, but it will fill you up, and will"
+	.. " be a feast after taking one of them down."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
 ITEM.price = 1260

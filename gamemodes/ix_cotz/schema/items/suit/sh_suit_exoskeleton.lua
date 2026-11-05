@@ -2,6 +2,8 @@ ITEM.name = "Exoskeleton"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
+ITEM.longdesc = "The external frame turns the silhouette of its wearer into something almost industrial. Hinges,"
+	.. " straps, and reinforced joints make getting ready a small maintenance job in itself."
 
 ITEM.width = 2
 ITEM.height = 3

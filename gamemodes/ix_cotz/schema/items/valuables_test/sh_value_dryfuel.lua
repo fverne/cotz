@@ -1,8 +1,7 @@
 ITEM.name = "Solid Fuel Tablets"
 ITEM.description = "A shallow tray carrying four squat solid-fuel tablets."
-ITEM.longdesc = "A shallow tray carrying four squat solid-fuel tablets. The outer surfaces carry a little"
-	.. " storage dust and the marks of repeated handling. It belongs to the quiet inventory of"
-	.. " ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
+	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/illusion/eftcontainers/dryfuel.mdl"

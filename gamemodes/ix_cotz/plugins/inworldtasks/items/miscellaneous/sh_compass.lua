@@ -1,5 +1,7 @@
 ITEM.name = "Compass"
 ITEM.description = "A small device that keeps track of its heading."
+ITEM.longdesc = "The dial is best read while standing still, with enough time to compare it against the route"
+	.. " ahead. Remembering the way back becomes difficult once every ruined farmhouse looks alike."
 ITEM.model = "models/lostsignalproject/items/quest/gps.mdl"
 ITEM.price = 700
 ITEM.flag = "A"
@@ -36,7 +38,7 @@ function ITEM:GetDescription()
 	if(self:GetID() == 0) then return self.description end
 	if(!self:GetOwner()) then return self.description end
 
-	local desc = self.description.."\n\n"
+	local desc = self.description .. "\n\n" .. self.longdesc .. "\n\n"
 	desc = desc.."\nCurrent Heading: "..ix.util.GetHeadingFromAngle(self:GetOwner():GetAngles()).."\n"
 
 	return Format(desc)

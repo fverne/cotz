@@ -1,9 +1,8 @@
 ITEM.name = "Long Yellow Transit Case"
 ITEM.description = "An elongated yellow hard case with substantial catches and a moulded handle."
-ITEM.longdesc = "An elongated yellow hard case with substantial catches and a moulded handle. Fine dust"
-	.. " sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching"
-	.. " inventory has followed it here."
+ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
+	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
+	.. " has followed it here."
 
 ITEM.model = "models/cotz/eft/containers/container_secured_epsilon.mdl"
 

@@ -1,7 +1,6 @@
 ITEM.name = "Green Metal Parts Case"
 ITEM.description = "A green metal parts case with a small top handle and pale scuffs along its edges."
-ITEM.longdesc = "A green metal parts case with a small top handle and pale scuffs along its edges. The"
-	.. " surface carries the dull marks of storage and handling. On a workshop shelf it would be"
+ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
 	.. " another ordinary part, waiting for somebody who knows what belongs where."
 ITEM.valuableCategory = "repair parts"
 

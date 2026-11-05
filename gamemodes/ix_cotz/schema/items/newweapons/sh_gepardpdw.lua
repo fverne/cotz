@@ -1,6 +1,10 @@
 ITEM.name = "Gepard PDW"
-ITEM.description= "PLACEHOLDER. Fires 9x21mm."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 9x21mm\nMagazine Capacity: 22"
+ITEM.description = "A compact personal defence weapon chambered for 9x21mm."
+ITEM.longdesc = "The short body is easier to keep close in a cramped interior than a full-length rifle. Wear"
+	.. " around the controls suggests an owner who valued familiar handling over a pristine finish.\n"
+	.. "\n"
+	.. "Ammo: 9x21mm\n"
+	.. "Magazine Capacity: 22"
 ITEM.model = ("models/weapons/tfa_l4d2/w_gepard.mdl")
 ITEM.class = "cw_gepardpdw"
 ITEM.weaponCategory = "primary"

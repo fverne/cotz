@@ -1,8 +1,7 @@
 ITEM.name = "Padded Armour Panel"
 ITEM.description = "A dark armour panel divided into four raised padded sections."
-ITEM.longdesc = "A dark armour panel divided into four raised padded sections. The covering bears small"
-	.. " handling marks and embedded dust. No inspection record establishes its grade or condition;"
-	.. " a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
+	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic3.mdl"

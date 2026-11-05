@@ -1,5 +1,7 @@
 ITEM.name = "Guitar"
 ITEM.description = "An acoustic guitar."
+ITEM.longdesc = "The finish has dulled where an arm rests against the body. Around a fire, a tune that everyone"
+	.. " half-remembers can make strangers feel like familiar company for a few minutes."
 ITEM.model = "models/lostsignalproject/items/misc/guitar.mdl"
 ITEM.class = "guitar"
 ITEM.weaponCategory = "primary"

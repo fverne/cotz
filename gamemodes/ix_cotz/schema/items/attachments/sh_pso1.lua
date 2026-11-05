@@ -1,5 +1,7 @@
 ITEM.name = "PSO-1"
 ITEM.description = "Russian optic sight. 4.0x magnification. Delta type sight."
+ITEM.longdesc = "The offset body and rubber eyecup are familiar sights on surplus marksman equipment. Faded"
+	.. " adjustment markings remain just legible beneath the grime."
 ITEM.category = "Attachments"
 ITEM.width = 2
 ITEM.height = 1

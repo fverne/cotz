@@ -1,6 +1,7 @@
 ITEM.name = "Heavy Duty Cabling"
 ITEM.description = "A thick electric wire, used in military applications."
-ITEM.longdesc = "Thick, heavy wires. Rated for quite high voltages and amperages."
+ITEM.longdesc = "The thick insulation is stiff from storage and awkward to bend. Markings along its length"
+	.. " suggest it came from equipment built to carry a substantial electrical load."
 ITEM.model = "models/illusion/eftcontainers/militarycable.mdl"
 
 ITEM.width = 2

@@ -1,5 +1,7 @@
 ITEM.name = "Sledgehammer"
 ITEM.description = "A Sledgehammer for use in demolition."
+ITEM.longdesc = "The head has battered corners and a handle polished by heavy gloves. Its weight is obvious"
+	.. " before the first swing, especially to the person carrying it all afternoon."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_sledge.mdl"
 ITEM.class = "tfa_nmrih_sledge"
 ITEM.weaponCategory = "primary"

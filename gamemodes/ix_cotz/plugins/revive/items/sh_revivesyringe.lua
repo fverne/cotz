@@ -2,7 +2,9 @@ ITEM.name = "Revive Syringe"
 ITEM.model = "models/lostsignalproject/items/medical/glucose.mdl"
 ITEM.width = 1
 ITEM.height = 2
-ITEM.description = "Placeholder."
+ITEM.description = "A sealed emergency revival dose in a disposable syringe."
+ITEM.longdesc = "The sealed dose is kept for the moment a fallen companion needs one last chance. Anyone brought"
+	.. " back by it will still be in a desperate condition and needs immediate care."
 ITEM.price = 800
 ITEM.flag = "A"
 

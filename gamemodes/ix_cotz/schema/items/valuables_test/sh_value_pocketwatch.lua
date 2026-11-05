@@ -1,9 +1,7 @@
 ITEM.name = "Pocket Watch"
 ITEM.description = "A decorated pocket watch with an attached chain."
-ITEM.longdesc = "A pocket watch with a gold-coloured, relief-decorated case and an attached chain. Dirt has"
-	.. " settled between the links and around the ornament on the case. It has the air of a"
-	.. " possession that was once checked, handled and carefully put away at the same times every"
-	.. " day."
+ITEM.longdesc = "Dirt has settled between the links and around the ornament on the case. It has the air of a"
+	.. " possession that was once checked, handled and carefully put away at the same times every day."
 ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/watch_with_chain2.mdl"

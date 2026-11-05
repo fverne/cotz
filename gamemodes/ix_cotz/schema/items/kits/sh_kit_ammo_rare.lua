@@ -1,5 +1,7 @@
 ITEM.name = "Foreign Ammunition Box"
 ITEM.description= "A box containing some less common types of ammunition, mostly of foreign origin."
+ITEM.longdesc = "The markings suggest a shipment that travelled through several hands. Traders tend to remember"
+	.. " who asks after stock like this."
 ITEM.model = "models/illusion/eftcontainers/magbox.mdl"
 
 ITEM.width = 2

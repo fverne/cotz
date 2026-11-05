@@ -1,8 +1,7 @@
 ITEM.name = "Awl"
 ITEM.description = "A narrow metal awl with a wooden handle."
-ITEM.longdesc = "A narrow metal awl set into a rounded wooden handle. The grain is dark with age and"
-	.. " handling, and the shaft carries a thin film of workshop grime. It is a modest little"
-	.. " object, easily overlooked until it catches on the lining of a pocket."
+ITEM.longdesc = "The grain is dark with age and handling, and the shaft carries a thin film of workshop grime. It"
+	.. " is a modest little object, easily overlooked until it catches on the lining of a pocket."
 ITEM.valuableCategory = "cutting tools"
 
 ITEM.model = "models/cotz/eft/barter/tools_awl.mdl"

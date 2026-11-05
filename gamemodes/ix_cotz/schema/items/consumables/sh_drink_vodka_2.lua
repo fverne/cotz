@@ -1,6 +1,7 @@
 ITEM.name = "Zone-Produced Vodka"
 ITEM.description = "A hip flask with a clear substance inside."
-ITEM.longdesc = "This hip flask contains zone-produced vodka produced from relatively good ingredients."
+ITEM.longdesc = "Distilled locally from relatively respectable ingredients, it carries fewer mysteries than some"
+	.. " camp spirits. The first mouthful still makes its priorities quite clear."
 ITEM.model = "models/lostsignalproject/items/consumable/flask4.mdl"
 
 ITEM.price = 255

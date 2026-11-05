@@ -1,6 +1,7 @@
 ITEM.name = "Flight Helmet (CS-1)"
 ITEM.description = "Heavy assault helmet of Russian make."
-ITEM.longdesc = "Heavy assault helmet of Russian make, favored by FSB assault teams."
+ITEM.longdesc = "Favoured by assault teams, its substantial shell has the worn finish of equipment carried"
+	.. " through narrow doorways. The lining retains the smell of long shifts and closed storerooms."
 ITEM.model = "models/shtokerbox/ground_headgear_cs1.mdl"
 
 ITEM.price = 75000
@@ -19,6 +20,46 @@ ITEM.pr = 0.20
 ITEM.fpr = 0
 ITEM.radProt = 0.55
 ITEM.flatRadProt = 0.02
+
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "cs1_lone",
+	worldMaterialSlots = {0},
+	skins = {
+		{id = "cs1_lone", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "cs1_lone2", name = "Loner 2", skin = 1, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs1_lone2",
+			},
+		},
+		{id = "cs1_csky", name = "Clear Sky", skin = 2, worldSkin = 1},
+		{id = "cs1_csky2", name = "Clear Sky 2", skin = 3, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs1_csky2",
+			},
+		},
+		{id = "cs1_dawn", name = "Dawn", skin = 4, worldSkin = 3},
+		{id = "cs1_duty", name = "Duty", skin = 5, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs1_duty",
+			},
+		},
+		{id = "cs1_duty2", name = "Duty 2", skin = 6, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs1_duty2",
+			},
+		},
+		{id = "cs1_flek", name = "Flecktarn", skin = 7, worldSkin = 2},
+		{id = "cs1_free", name = "Freedom", skin = 8, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs1_free",
+			},
+		},
+	},
+	bodygroups = {},
+}
 
 ITEM.exRender = true
 ITEM.iconCam = {

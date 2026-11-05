@@ -1,5 +1,7 @@
 ITEM.name = "EO-20 Gasmask"
 ITEM.description = "A modern gasmask"
+ITEM.longdesc = "A close-fitting facepiece leaves little room for a careless adjustment. The rubber retains its"
+	.. " own smell even after the exterior has been thoroughly cleaned."
 ITEM.model = "models/shtokerbox/ground_mask_sunrise2.mdl"
 
 ITEM.price = 30000
@@ -14,6 +16,67 @@ ITEM.ar = 0
 ITEM.far = 0
 ITEM.radProt = 0.80
 ITEM.flatRadProt = 0.02
+
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+		{1, 1, 1},
+	},
+	defaultSkin = "sunrise_loner",
+	worldMaterialSlots = {},
+	skins = {
+		{id = "sunrise_loner", name = "Sunrise Loner", skin = 0, worldSkin = 0},
+		{id = "sunrise_camo", name = "Sunrise Camo", skin = 1, worldSkin = 1},
+		{id = "sunrise_mercenary", name = "Sunrise Mercenary", skin = 2, worldSkin = 2},
+		{id = "sunrise_military", name = "Sunrise Military", skin = 3, worldSkin = 3},
+		{id = "sunrise_military2", name = "Sunrise Military2", skin = 4, worldSkin = 4},
+		{id = "sunrise_monolith", name = "Sunrise Monolith", skin = 5, worldSkin = 5},
+		{id = "sunrise_bandit", name = "Sunrise Bandit", skin = 6, worldSkin = 6},
+		{id = "sunrise_black", name = "Sunrise Black", skin = 7, worldSkin = 7},
+		{id = "sunrise_flek", name = "Sunrise Flek", skin = 8, worldSkin = 8},
+		{id = "sunrise_urban", name = "Sunrise Urban", skin = 9, worldSkin = 9},
+		{id = "sunrise_duty", name = "Sunrise Duty", skin = 10, worldSkin = 10},
+		{id = "sunrise_scientific", name = "Sunrise Scientific", skin = 11, worldSkin = 11},
+		{id = "sunrise_neutral1", name = "Sunrise Neutral1", skin = 12, worldSkin = 12},
+		{id = "sunrise_neutral2", name = "Sunrise Neutral2", skin = 13, worldSkin = 13},
+		{id = "sunrise_neutral3", name = "Sunrise Neutral3", skin = 14, worldSkin = 14},
+		{id = "sunrise_neutral4", name = "Sunrise Neutral4", skin = 15, worldSkin = 15},
+		{id = "sunrise_neutral5", name = "Sunrise Neutral5", skin = 16, worldSkin = 16},
+		{id = "sunrise_neutral6", name = "Sunrise Neutral6", skin = 17, worldSkin = 17},
+		{id = "sunrise_neutral7", name = "Sunrise Neutral7", skin = 18, worldSkin = 18},
+		{id = "sunrise_neutral8", name = "Sunrise Neutral8", skin = 19, worldSkin = 19},
+		{id = "sunrise_neutral9", name = "Sunrise Neutral9", skin = 20, worldSkin = 20},
+		{id = "sunrise_neutral10", name = "Sunrise Neutral10", skin = 21, worldSkin = 21},
+		{id = "sunrise_neutral11", name = "Sunrise Neutral11", skin = 22, worldSkin = 22},
+		{id = "sunrise_neutral12", name = "Sunrise Neutral12", skin = 23, worldSkin = 23},
+		{id = "sunrise_loner2", name = "Sunrise Loner2", skin = 24, worldSkin = 24},
+		{id = "sunrise_loner3", name = "Sunrise Loner3", skin = 25, worldSkin = 25},
+		{id = "sunrise_loner4", name = "Sunrise Loner4", skin = 26, worldSkin = 26},
+		{id = "sunrise_loner5", name = "Sunrise Loner5", skin = 27, worldSkin = 27},
+		{id = "sunrise_loner6", name = "Sunrise Loner6", skin = 28, worldSkin = 28},
+		{id = "sunset_duty", name = "Sunset Duty", skin = 34, worldSkin = 34},
+		{id = "sunset_duty2", name = "Sunset Duty2", skin = 35, worldSkin = 35},
+		{id = "sunset_ecologist", name = "Sunset Ecologist", skin = 37, worldSkin = 37},
+		{id = "sunset_freedom", name = "Sunset Freedom", skin = 38, worldSkin = 38},
+		{id = "sunset_loner", name = "Sunset Loner", skin = 40, worldSkin = 40},
+		{id = "sunset_loner2", name = "Sunset Loner2", skin = 41, worldSkin = 41},
+		{id = "sunset_mercenary", name = "Sunset Mercenary", skin = 42, worldSkin = 42},
+		{id = "sunset_military", name = "Sunset Military", skin = 43, worldSkin = 43},
+		{id = "sunset_monolith", name = "Sunset Monolith", skin = 44, worldSkin = 44},
+		{id = "sunset_scientific", name = "Sunset Scientific", skin = 46, worldSkin = 46},
+		{id = "wild_bandit", name = "Wild Bandit", skin = 51, worldSkin = 51},
+		{id = "wild_bandit2", name = "Wild Bandit2", skin = 52, worldSkin = 52},
+		{id = "wild_beyond", name = "Wild Beyond", skin = 53, worldSkin = 53},
+		{id = "wild_duty", name = "Wild Duty", skin = 54, worldSkin = 54},
+		{id = "wild_duty2", name = "Wild Duty2", skin = 55, worldSkin = 55},
+		{id = "wild_finalday", name = "Wild Finalday", skin = 56, worldSkin = 56},
+		{id = "wild_freedom", name = "Wild Freedom", skin = 57, worldSkin = 57},
+		{id = "wild_mercenary", name = "Wild Mercenary", skin = 58, worldSkin = 58},
+		{id = "wild_monolith", name = "Wild Monolith", skin = 59, worldSkin = 59},
+		{id = "wild_monolith2", name = "Wild Monolith2", skin = 60, worldSkin = 60},
+	},
+	bodygroups = {},
+}
 
 ITEM.exRender = true
 ITEM.iconCam = {

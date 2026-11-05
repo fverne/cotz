@@ -1,6 +1,7 @@
 ITEM.name = "Bolts"
 ITEM.description = "A bunch of metal bolts."
-ITEM.longdesc = "Bolts, most often used in construction and maintenance work."
+ITEM.longdesc = "Threads are darkened with old oil, and a few heads bear hard spanner marks. Their value becomes"
+	.. " obvious when an otherwise repairable machine is missing one small fastening."
 ITEM.model = "models/illusion/eftcontainers/screwnutbolt.mdl"
 
 ITEM.width = 1

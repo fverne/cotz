@@ -1,7 +1,6 @@
 ITEM.name = "Clinical Injection Device"
 ITEM.description = "A mechanical injection device with a broad grip and several projecting parts."
-ITEM.longdesc = "A mechanical injection device with a broad grip and several projecting parts. A small"
-	.. " labelled section near one end adds the only obvious colour to the otherwise subdued"
+ITEM.longdesc = "A small labelled section near one end adds the only obvious colour to the otherwise subdued"
 	.. " assembly. Dirt has collected around the moving-looking joints, leaving the impression of a"
 	.. " precise tool separated from the rest of its equipment."
 ITEM.valuableCategory = "trauma supplies"

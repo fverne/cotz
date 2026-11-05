@@ -1,8 +1,7 @@
 ITEM.name = "Mildronate Research Injector"
 ITEM.description = "A pale blue injector with a printed label and a light-coloured cap."
-ITEM.longdesc = "A pale blue injector with a printed label and a light-coloured cap. The narrow wrapper"
-	.. " carries the sort of batch markings that mean much more beside a laboratory inventory than"
-	.. " on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
+ITEM.longdesc = "The narrow wrapper carries the sort of batch markings that mean much more beside a laboratory"
+	.. " inventory than on their own. Storage dust clings to the sheltered edges. Whatever paperwork once"
 	.. " accompanied it has not stayed with the injector."
 ITEM.valuableCategory = "research injectors a"
 

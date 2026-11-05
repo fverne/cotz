@@ -1,8 +1,7 @@
 ITEM.name = "Blood Transfusion Set"
 ITEM.description = "A flat medical packet with a printed label on its face and broad seams around the edges."
-ITEM.longdesc = "A flat medical packet with a printed label on its face and broad seams around the edges."
-	.. " The wrapper is creased from being packed beneath heavier supplies. Its tidy little"
-	.. " markings suggest a much more orderly inventory than the shelf it was found on."
+ITEM.longdesc = "The wrapper is creased from being packed beneath heavier supplies. Its tidy little markings"
+	.. " suggest a much more orderly inventory than the shelf it was found on."
 ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_bloodset.mdl"

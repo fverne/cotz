@@ -2,7 +2,8 @@ ITEM.name = "Armor"
 ITEM.description = "An Armor Base."
 ITEM.category = "Armor"
 ITEM.model = "models/Gibs/HGIBS.mdl"
-ITEM.longdesc = "No Longer Description Available"
+ITEM.longdesc = "Dust settles into every seam after a long journey. Patches and adjusted straps tell more about"
+	.. " life in the field than a clean supply label ever could."
 
 ITEM.width = 1
 ITEM.height = 1

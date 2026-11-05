@@ -1,6 +1,10 @@
 ITEM.name = "Sako 85 NATO"
 ITEM.description= "A bolt-action sniper rifle intended for hunting wildlife. Fires 5.56x45mm."
-ITEM.longdesc = "The Sako 85 is a Finnish bolt-action sniper rifle designed for hunting. It can be fitted with various telescopic sights.\n\nAmmo: 5.56x45mm\nMagazine Capacity: 5"
+ITEM.longdesc = "The familiar sporting profile seems almost domestic beside the camp's surplus assault weapons."
+	.. " Its owner has apparently taken more care over the sight fittings than the finish on the stock.\n"
+	.. "\n"
+	.. "Ammo: 5.56x45mm\n"
+	.. "Magazine Capacity: 5"
 ITEM.model = ("models/weapons/tfa_nmrih/w_fa_sako85_ironsights.mdl")
 ITEM.class = "cw_sako85nato"
 ITEM.weaponCategory = "primary"

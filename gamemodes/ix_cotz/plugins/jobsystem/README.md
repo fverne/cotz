@@ -64,6 +64,8 @@ item:SetData("fieldDescription", "A battered recorder with maintenance dates pen
 `GetName()` and `GetDescription()` read these keys with `GetData`, falling back to the concrete
 item's name and description. Clear either key with `SetData(key, nil)` to restore that fallback.
 Delivery/return instructions remain appended, including dead-drop parcels' PDA instructions.
+Inventory descriptions also append the concrete item's `longdesc` between the saved description and
+those instructions. World descriptions omit that extra prose. Saved overrides are not rewritten.
 Helix saves and synchronizes these overrides through its existing item data API.
 
 Town commissions may set `field.description` beside `field.cargo` and `field.label`.

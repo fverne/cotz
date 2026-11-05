@@ -1,5 +1,7 @@
 ITEM.name = "Handheld Flashlight"
 ITEM.description = "A sturdy flashlight used to light your way in the dark."
+ITEM.longdesc = "The grip is scuffed from being carried alongside tools and spare magazines. Its beam is welcome"
+	.. " in a cellar, though every lit doorway also tells someone where you are."
 ITEM.model = "models/weapons/w_flashlight_zm.mdl"
 
 ITEM.height = 1

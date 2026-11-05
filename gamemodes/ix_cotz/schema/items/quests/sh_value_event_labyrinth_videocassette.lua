@@ -1,9 +1,8 @@
 ITEM.name = "Stained Video Cassette"
 ITEM.description = "A dark video cassette with a large label and irregular stains across its casing."
-ITEM.longdesc = "A dark video cassette with a large label and irregular stains across its casing. It has"
-	.. " the dry cupboard smell of media kept long after the machine that used it disappeared."
-	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an"
-	.. " ordinary recording from something somebody would cross the Zone to recover."
+ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
+	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
+	.. " recording from something somebody would cross the Zone to recover."
 
 ITEM.model = "models/cotz/eft/quest/event_labyrinth_videocassette.mdl"
 

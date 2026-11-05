@@ -1,6 +1,6 @@
 ITEM.name = "Orange Juice, 1l"
 ITEM.description = "A carton of juice."
-ITEM.longdesc = "A liter of orange juice in a carton. Drinking it brings an air of refreshment and relaxation."
+ITEM.longdesc = "Drinking it brings an air of refreshment and relaxation."
 ITEM.model = "models/illusion/eftcontainers/juice.mdl"
 
 ITEM.price = 185

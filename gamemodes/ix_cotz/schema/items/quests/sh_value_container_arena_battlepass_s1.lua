@@ -1,9 +1,8 @@
 ITEM.name = "Blue Decorated Transit Box"
 ITEM.description = "A squat transit box with a mottled blue finish, a top handle and reinforced edges."
-ITEM.longdesc = "A squat transit box with a mottled blue finish, a top handle and reinforced edges. The"
-	.. " catches have picked up a dull film of grit, and the corners bear the small knocks of"
-	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an"
-	.. " object that changed hands more often than its paperwork did."
+ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
+	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
+	.. " that changed hands more often than its paperwork did."
 
 ITEM.model = "models/cotz/eft/containers/container_arena_battlepass_s1.mdl"
 

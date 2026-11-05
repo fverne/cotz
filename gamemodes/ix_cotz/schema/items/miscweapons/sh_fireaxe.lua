@@ -1,5 +1,7 @@
 ITEM.name = "Fireaxe"
 ITEM.description = "A simple fireaxe."
+ITEM.longdesc = "The broad head carries chips in its paint and old marks along the edge. A tool made for"
+	.. " emergencies tends to acquire a wider job description once it reaches the Zone."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_axe_fire.mdl"
 ITEM.class = "tfa_nmrih_fireaxe"
 ITEM.weaponCategory = "primary"

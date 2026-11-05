@@ -1,10 +1,9 @@
 ITEM.name = "Recovered Circuit Enclosure"
 ITEM.description = "A rectangular metal enclosure with exposed wiring and electronic components on its upper"
 	.. " face."
-ITEM.longdesc = "A rectangular metal enclosure with exposed wiring and electronic components on its upper"
-	.. " face. Handling marks and storage dust sit around its fittings. There is no service record"
-	.. " to explain when it was last checked. Its parts and construction may interest a specialist"
-	.. " even if the original assignment can no longer be reconstructed."
+ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
+	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
+	.. " original assignment can no longer be reconstructed."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/cotz/eft/spec/sz_1.mdl"

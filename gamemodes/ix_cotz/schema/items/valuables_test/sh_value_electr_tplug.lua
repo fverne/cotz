@@ -1,8 +1,7 @@
 ITEM.name = "Three-Way Socket Adapter"
 ITEM.description = "A red three-way socket adapter with round sockets and exposed plug pins."
-ITEM.longdesc = "A red three-way socket adapter with round sockets and exposed plug pins. Fine grit has"
-	.. " settled into the sheltered edges. It is the sort of small supply a workshop can run short"
-	.. " of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
+	.. " run short of without noticing until the bench is already covered in unfinished work."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/electr_tplug.mdl"

@@ -1,5 +1,7 @@
 ITEM.name = "Emergency Rescue Kit"
 ITEM.description= "A kit used in ambulances for emergency rescue and revival."
+ITEM.longdesc = "Medkit supplies, spare bandages, and psychic recovery medication share the fitted case. Its"
+	.. " ambulance origins are easier to recognise than the route by which it reached the Zone."
 ITEM.model = "models/illusion/eftcontainers/defib.mdl"
 
 ITEM.width = 2

@@ -1,9 +1,8 @@
 ITEM.name = "Pressure Gauge"
 ITEM.description = "A pressure gauge attached to a metal valve body."
-ITEM.longdesc = "A pressure gauge attached to a compact metal valve body. The pale dial and red needle stand"
-	.. " out against the darker housing, while grime gathers around the fittings below. It smells"
-	.. " faintly of old machinery, with no surviving note to say what pressure somebody was once so"
-	.. " interested in measuring."
+ITEM.longdesc = "The pale dial and red needle stand out against the darker housing, while grime gathers around"
+	.. " the fittings below. It smells faintly of old machinery, with no surviving note to say what"
+	.. " pressure somebody was once so interested in measuring."
 ITEM.valuableCategory = "instruments"
 
 ITEM.model = "models/illusion/eftcontainers/pressuregauge.mdl"

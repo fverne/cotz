@@ -1,7 +1,8 @@
 ITEM.name = "Artifact"
 ITEM.category = "Artifacts"
 ITEM.description = "An artifact. Valuable."
-ITEM.longdesc = "Longer description here."
+ITEM.longdesc = "Researchers and traders rarely agree on what a specimen is worth. Its place of origin is often"
+	.. " easier to establish than an explanation of how it behaves."
 
 ITEM.width = 1
 ITEM.height = 1

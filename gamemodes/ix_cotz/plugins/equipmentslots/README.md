@@ -45,6 +45,8 @@ Equipment icons use the existing `ix.util.GetItemIcon` material cache, including
 its `img` priority, rather than rebuilding spawn icons when the menu opens.
 Icons preserve their aspect ratio and shrink to fit each slot, capped at their
 owning backpack grid's display size so larger slots never enlarge an item image.
+[Vendor gear customization](../gearcustomization/README.md) uses appearance-specific
+rendered icons through that same helper, retaining explicit image overrides.
 Right-click equipped icons for the existing item actions. Use the × button,
 the Unequip action, or drag back onto the backpack to unequip. Dragging can start
 anywhere on the outer card, while the dragged image remains compact. Drag unequip

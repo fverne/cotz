@@ -1,5 +1,8 @@
 ITEM.name = "Red-Trimmed Control Unit"
 ITEM.description = "A finned grey control box with a red stripe and several round front connectors."
+ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
+	.. " construction may interest a technician, though its condition cannot be established from the"
+	.. " casing alone."
 
 ITEM.model = "models/cotz/eft/barter/electr_controller_quest.mdl"
 

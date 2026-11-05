@@ -1,9 +1,8 @@
 ITEM.name = "Folding Multitool"
 ITEM.description = "A silver folding multitool opened around its plier jaws with several handles splayed"
 	.. " apart."
-ITEM.longdesc = "A silver folding multitool opened around its plier jaws with several handles splayed"
-	.. " apart. The grip and working surfaces show ordinary handling wear, with a little grit"
-	.. " caught in the recesses. It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
+	.. " recesses. It looks at home among the clutter of a mechanic's bench."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/spec/multitul_0.mdl"

@@ -168,7 +168,9 @@ function PLUGIN:LoadedCards()
         local ITEM = ix.item.Register("cards_" .. k, "base_card", false, nil, true)
         ITEM.name = v
         ITEM.description = "An individual playing card that appears to be apart of a deck of 54 imported French playing cards."
-        ITEM.longdesc = "An individual playing card that appears to have one of its corners slightly bent with some of the pattern being scratched off a little. The card appears to be in not the best condition as it has came from a deck that has been used by various STALKERs."
+		ITEM.longdesc = "One corner is slightly bent, and scratches interrupt the printed pattern on the back. It"
+			.. " has passed through enough camp games for an observant player to recognise it without"
+			.. " seeing the face."
         ITEM.material = itemmat
         ITEM.img = ix.util.GetMaterial("materials/vgui/hud/misc/cards/" .. k .. ".png")
         ITEM.model = itemmdl
@@ -181,7 +183,9 @@ function PLUGIN:LoadedCards()
     local ITEM = ix.item.Register("cards_deck_cards", "base_deck_cards", false, nil, true)
     ITEM.name = "French Playing Cards"
     ITEM.description = "A deck of 54 imported French playing cards that use the french suits - clubs (♣), diamonds (♦), hearts (♥) and spades (♠)."
-    ITEM.longdesc = "A second hand deck of 54 French playing cards which were brought into the Zone and used by many STALKERs. Each suit contains three face cards and the deck sizes tend to vary. STALKERs tend to play various popular international card games such as Poker and Blackjack. Some STALKERs have managed to make their own card games, the games being local to the Zone."
+	ITEM.longdesc = "Softened edges and small marks on the backs betray years of camp games. Stalkers play"
+		.. " poker and blackjack with it, or argue over local rules invented somewhere between the"
+		.. " first deal and the last drink."
     ITEM.img = ix.util.GetMaterial("materials/vgui/hud/misc/cards/back.png")
     ITEM.model = "models/lostsignalproject/items/misc/cards.mdl"
     ITEM.width = 1

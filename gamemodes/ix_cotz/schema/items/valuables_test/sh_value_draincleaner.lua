@@ -1,9 +1,7 @@
 ITEM.name = "Drain Cleaner"
 ITEM.description = "A dark drain-cleaner bottle with an angled neck."
-ITEM.longdesc = "A dark drain-cleaner bottle with an angled neck and a red cap. Its label is crowded with"
-	.. " instructions that become less reassuring the longer you study them. The plastic feels"
-	.. " faintly greasy, as though it has spent years sharing a cupboard with leaking household"
-	.. " chemicals."
+ITEM.longdesc = "A red cap closes the bottle. Its label is crowded with instructions that become less reassuring"
+	.. " the longer you study them. The plastic feels faintly greasy around the grip."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/household_pipecleaner.mdl"

@@ -1,5 +1,7 @@
 ITEM.name = "Rookie Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
+ITEM.longdesc = "The wrapping keeps a selected weapon out of sight until the supplies are redeemed. Familiar camp"
+	.. " supplies have been gathered with a little more confidence than a newcomer's first purchases."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

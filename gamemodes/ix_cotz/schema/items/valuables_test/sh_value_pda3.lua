@@ -1,8 +1,7 @@
 ITEM.name = "Recovered Blue PDA"
 ITEM.description = "A blue handheld computer with a dark screen and a raised control panel."
-ITEM.longdesc = "A blue handheld computer with a dark screen and a raised control panel. Fine grit has"
-	.. " gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
-	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "portable computers"
 

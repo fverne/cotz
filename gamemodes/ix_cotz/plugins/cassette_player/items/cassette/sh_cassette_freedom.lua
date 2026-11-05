@@ -1,6 +1,7 @@
 ﻿ITEM.name = "Freedom Cassette Tape"
 ITEM.description = "Green Cassette Tape"
-ITEM.longdesc = "This green cassette tape features songs that you can relax to."
+ITEM.longdesc = "The selection favours relaxed listening around a quiet camp. Several fingerprints have worn the"
+	.. " label smooth near the edge."
 ITEM.price = 4424
 ITEM.model = "models/kek1ch/cassette_red1.mdl"
 

@@ -1,5 +1,7 @@
 ITEM.name = "Large Sling Backpack"
 ITEM.description = "An over-the-shoulder sling backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The long body hangs from a single broad strap. Worn adjustment points show the effort of keeping"
+	.. " an uneven load sitting where its owner wants it."
 ITEM.model = "models/backpack_takedown_sling/backpack_takedown_sling_m.mdl"
 
 ITEM.price = 900

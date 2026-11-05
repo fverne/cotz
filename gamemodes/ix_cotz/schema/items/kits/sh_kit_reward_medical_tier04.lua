@@ -1,5 +1,7 @@
 ITEM.name = "Master Medical Box"
 ITEM.description= "A red first aid kit."
+ITEM.longdesc = "The treatment supplies have been kept together rather than scattered through a trader's drawers."
+	.. " The unassuming finish is typical of valuable supplies kept out of casual sight."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

@@ -1,6 +1,7 @@
 ITEM.name = "Access Card (Bunker)"
 ITEM.description = "A small plastic card."
-ITEM.longdesc = "This small, slim card is meant to open a variety of doors."
+ITEM.longdesc = "The access markings associate it with the bunker rather than ordinary camp doors. Its worn"
+	.. " surface gives no account of who last carried it."
 ITEM.model = "models/lostsignalproject/items/quest/keycard.mdl"
 
 ITEM.width = 1

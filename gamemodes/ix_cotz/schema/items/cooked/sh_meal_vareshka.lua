@@ -1,6 +1,7 @@
 ITEM.name = "Vareshka Steak"
 ITEM.description = "A meal made from a vareshka, cooked in the zone."
-ITEM.longdesc = "A seared roast cut from a Vareshka. It's tough and chewy.."
+ITEM.longdesc = "Searing has browned the outside without doing much for the tough, chewy centre. Whoever cooked"
+	.. " it seems to have favoured getting fed over making a memorable supper."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
 ITEM.price = 2400

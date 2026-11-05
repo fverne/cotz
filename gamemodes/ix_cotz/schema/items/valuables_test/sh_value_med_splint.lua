@@ -1,10 +1,9 @@
 ITEM.name = "Rolled Aluminium Splint"
 ITEM.description = "A tightly rolled splint with an orange outer surface and contrasting layers visible at the"
 	.. " end."
-ITEM.longdesc = "A tightly rolled splint with an orange outer surface and contrasting layers visible at the"
-	.. " end. Its simple shape makes it look almost like an ordinary workshop offcut until examined"
-	.. " more closely. There are pale scuffs on the exposed material and a dry storage smell caught"
-	.. " between the turns."
+ITEM.longdesc = "Its simple shape makes it look almost like an ordinary workshop offcut until examined more"
+	.. " closely. There are pale scuffs on the exposed material and a dry storage smell caught between"
+	.. " the turns."
 ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/usable/meds_alusplint.mdl"

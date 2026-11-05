@@ -1,8 +1,7 @@
 ITEM.name = "Insect Repellent Bottle"
 ITEM.description = "A slender green bottle with a matching cap and a pale illustrated label."
-ITEM.longdesc = "A slender green bottle with a matching cap and a pale illustrated label. Dust clings"
-	.. " around the closure, and the label has the tired look of goods left on a storeroom shelf."
-	.. " Someone keeping a camp clean might still find a place for it among their supplies."
+ITEM.longdesc = "Dust clings around the closure, and the label has the tired look of goods left on a storeroom"
+	.. " shelf. Someone keeping a camp clean might still find a place for it among their supplies."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/household_repellent.mdl"

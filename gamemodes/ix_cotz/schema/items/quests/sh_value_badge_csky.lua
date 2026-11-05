@@ -1,9 +1,8 @@
 ITEM.name = "Clear Sky Insignia"
 ITEM.description = "A shield-shaped insignia with a pale border and a blue-and-yellow central design."
-ITEM.longdesc = "A shield-shaped insignia with a pale border and a blue-and-yellow central design. The"
-	.. " edges show ordinary handling wear and a little embedded dust. Detached from its original"
-	.. " owner, the emblem is a clue with very little context. An interested collector or records"
-	.. " clerk might know where it belongs, though possession alone proves little."
+ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
+	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
+	.. " might know where it belongs, though possession alone proves little."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_csky.mdl"
 

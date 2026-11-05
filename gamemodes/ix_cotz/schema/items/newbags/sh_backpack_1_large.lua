@@ -1,5 +1,7 @@
 ITEM.name = "Large Modern Military Backpack (Ukrainian)"
 ITEM.description = "A large backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "Extra canvas makes a tempting invitation to keep one more scavenged part. The broad harness has"
+	.. " the same workmanlike finish as smaller Ukrainian surplus packs."
 ITEM.model = "models/kek1ch/sumka1.mdl"
 
 ITEM.price = 12000

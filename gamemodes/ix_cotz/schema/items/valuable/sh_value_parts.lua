@@ -1,8 +1,7 @@
 ITEM.name = "Small Parts Tin"
 ITEM.description = "A low dark metal tin with a worn lid, a small clasp and rust along its edges."
-ITEM.longdesc = "A low dark metal tin with a worn lid, a small clasp and rust along its edges. The surface"
-	.. " carries the dull marks of storage and handling. On a workshop shelf it would be another"
-	.. " ordinary part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
+	.. " another ordinary part, waiting for somebody who knows what belongs where."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/misc/parts.mdl"

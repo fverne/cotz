@@ -1,8 +1,7 @@
 ITEM.name = "Worn Grey Armour Insert"
 ITEM.description = "A rectangular grey armour insert with a worn mottled fabric cover."
-ITEM.longdesc = "A rectangular grey armour insert with a worn mottled fabric cover. The covering bears"
-	.. " small handling marks and embedded dust. No inspection record establishes its grade or"
-	.. " condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
+	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic4.mdl"

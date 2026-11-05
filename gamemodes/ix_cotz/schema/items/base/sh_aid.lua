@@ -1,6 +1,7 @@
 ITEM.name = "aid"
 ITEM.description = "Helps your body survive in the zone - in one way or another."
-ITEM.longdesc = "Longer description here."
+ITEM.longdesc = "Supplies pass through many hands before reaching a camp treatment table. The original packaging"
+	.. " is often the only record left of where they came from."
 ITEM.category = "Aid"
 ITEM.quantdesc = "This item has %d uses left."
 

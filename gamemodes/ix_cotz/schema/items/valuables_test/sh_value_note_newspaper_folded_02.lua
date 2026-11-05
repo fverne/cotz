@@ -1,8 +1,7 @@
 ITEM.name = "Illustrated Newspaper"
 ITEM.description = "A folded newspaper with a large photograph printed above the columns."
-ITEM.longdesc = "A folded newspaper with a large photograph printed above the columns. The exposed edges"
-	.. " feel dry and slightly rough, with a faint smell of stale paper. Small handling marks"
-	.. " suggest it has passed through several pairs of hands. A careful reader might eventually"
+ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
+	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
 	.. " place it among the records it was separated from."
 ITEM.valuableCategory = "printed material"
 

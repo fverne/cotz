@@ -1,5 +1,7 @@
 ITEM.name = "Worn Sportsbag"
 ITEM.description = "An old sportsbag. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "Faded sports branding belongs to a much less demanding sort of journey. Repairs around the"
+	.. " handles show where its new owners have asked more of it."
 ITEM.model = "models/backpack_sportbag/backpack_sportbag.mdl"
 
 ITEM.price = 900

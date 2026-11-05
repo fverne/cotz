@@ -1,5 +1,7 @@
 ITEM.name = "Large Sling Backpack (Black)"
 ITEM.description = "An over-the-shoulder sling backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "Dust shows plainly against the dark fabric, especially along the seams. The long body and single"
+	.. " harness have the understated look of equipment chosen for a specific routine."
 ITEM.model = "models/backpack_takedown_sling/backpack_takedown_sling_b.mdl"
 
 ITEM.price = 900

@@ -1,6 +1,8 @@
 ITEM.name = "Medkit"
 ITEM.description = "A small general-purpose medkit."
-ITEM.longdesc = "A general purpose single-use medical kit. \nHandy for treating various injuries - wounds, bruises, regular and chemical burns and various types of poisoning. \nIn demand among stalkers."
+ITEM.longdesc = "Handy for treating various injuries - wounds, bruises, regular and chemical burns and various"
+	.. " types of poisoning.\n"
+	.. "In demand among stalkers."
 ITEM.model = "models/lostsignalproject/items/medical/medical_bag.mdl"
 
 ITEM.sound = "stalkersound/inv_bandage.mp3"

@@ -1,5 +1,7 @@
 ITEM.name = "Spartan Helmet"
 ITEM.description = "A high-end helmet with gasmask."
+ITEM.longdesc = "The severe face profile is as recognisable as any insignia. Beneath it, straps and padding still"
+	.. " need the same patient adjustment as less imposing equipment."
 ITEM.model = "models/shtokerbox/ground_headgear_sam.mdl"
 
 ITEM.price = 600000

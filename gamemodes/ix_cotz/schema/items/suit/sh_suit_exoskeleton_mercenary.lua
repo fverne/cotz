@@ -2,6 +2,8 @@ ITEM.name = "Mercenary Exoskeleton"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
+ITEM.longdesc = "The finish has the anonymous professionalism of equipment maintained for a contract. Whoever"
+	.. " pays for the work also has to account for spare fittings, worn straps, and workshop time."
 
 ITEM.width = 2
 ITEM.height = 3

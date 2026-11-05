@@ -1,8 +1,7 @@
 ITEM.name = "Cutting Nippers"
 ITEM.description = "A pair of dark cutting pliers with rounded grips and short heavy jaws."
-ITEM.longdesc = "A pair of dark cutting pliers with rounded grips and short heavy jaws. The grip and"
-	.. " working surfaces show ordinary handling wear, with a little grit caught in the recesses."
-	.. " It looks at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
+	.. " recesses. It looks at home among the clutter of a mechanic's bench."
 ITEM.valuableCategory = "cutting tools"
 
 ITEM.model = "models/cotz/eft/barter/tools_nippers.mdl"

@@ -1,8 +1,8 @@
 ITEM.name = "Surgical Instrument Pouch"
 ITEM.description = "A folded red medical pouch with dark edging and pale printed lettering."
-ITEM.longdesc = "A folded red medical pouch with dark edging and pale printed lettering. The fabric has"
-	.. " kept the creases of long storage, while dust softens the raised seams. It looks like the"
-	.. " sort of compact case that once occupied a very particular place in a larger equipment bag."
+ITEM.longdesc = "The fabric has kept the creases of long storage, while dust softens the raised seams. It looks"
+	.. " like the sort of compact case that once occupied a very particular place in a larger equipment"
+	.. " bag."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/usable/meds_core_medical_surgical_kit.mdl"

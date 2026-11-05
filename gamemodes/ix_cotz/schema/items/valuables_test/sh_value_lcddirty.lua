@@ -1,8 +1,7 @@
 ITEM.name = "Cracked Display Panel"
 ITEM.description = "A thin rectangular display panel with cracked glass and a pale border."
-ITEM.longdesc = "A thin rectangular display panel with cracked glass and a pale border. Fine grit has"
-	.. " settled into the sheltered edges. It is the sort of small supply a workshop can run short"
-	.. " of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
+	.. " run short of without noticing until the bench is already covered in unfinished work."
 ITEM.valuableCategory = "electronic components"
 
 ITEM.model = "models/illusion/eftcontainers/lcddirty.mdl"

@@ -1,5 +1,7 @@
 ITEM.name = "Russian Operator Helmet (old)"
 ITEM.description = "An older helmet."
+ITEM.longdesc = "The fittings belong to an earlier generation of field gear. Repairs to the lining suggest that"
+	.. " somebody preferred keeping a familiar fit to replacing it."
 ITEM.model = "models/shtokerbox/ground_headgear_rus_helmet2.mdl"
 
 ITEM.price = 60000

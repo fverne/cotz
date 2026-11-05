@@ -1,6 +1,11 @@
 ITEM.name = "MP-27"
 ITEM.description= "An MP-27 .410 Bore O/U Break Action Shotgun."
-ITEM.longdesc = "A classic shotgun design, firing .410 buckshot. \n\nAmmo: .410 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "The plain finish and straightforward fittings recall a working hunting gun rather than"
+	.. " specialised military equipment. It is easy to imagine it leaning in a farmhouse corner before"
+	.. " the Zone gave it another purpose.\n"
+	.. "\n"
+	.. "Ammo: .410 Gauge\n"
+	.. "Magazine Capacity: 2"
 ITEM.model = ("models/weapons/tfa_ins2/wpn_mp27_w.mdl")
 ITEM.class = "cw_mp27"
 ITEM.weaponCategory = "primary"

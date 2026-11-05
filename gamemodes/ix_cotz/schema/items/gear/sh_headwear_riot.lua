@@ -1,5 +1,7 @@
 ITEM.name = "Riot Helmet"
 ITEM.description = "A riot helmet"
+ITEM.longdesc = "The broad face shield is scratched where it has been wiped with a dirty glove. Equipment meant"
+	.. " for crowded streets has found a less predictable second career beyond the cordon."
 ITEM.model = "models/shtokerbox/ground_headgear_riothelmet2.mdl"
 
 ITEM.price = 18000

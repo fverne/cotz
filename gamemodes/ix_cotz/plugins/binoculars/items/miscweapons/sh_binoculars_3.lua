@@ -1,5 +1,7 @@
 ITEM.name = "Night Vision Binoculars"
 ITEM.description = "A modern pair of binoculars. Features multiple zoom levels."
+ITEM.longdesc = "The enclosed optics and crowded controls look out of place beside the battered field glasses"
+	.. " sold at most camps. Their previous owner has marked the preferred settings with tiny scratches."
 ITEM.model = "models/weapons/w_nvbinoculars.mdl"
 
 ITEM.height = 1

@@ -1,5 +1,7 @@
 ITEM.name = "Large Modern Military Backpack (Russian)"
 ITEM.description = "A large backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The enlarged body makes it look almost square when fully packed. Surplus fittings and a plain"
+	.. " finish favour a working load over anything resembling civilian luggage."
 ITEM.model = "models/kek1ch/sumka3.mdl"
 
 ITEM.price = 12750

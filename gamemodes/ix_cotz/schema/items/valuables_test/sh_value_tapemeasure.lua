@@ -1,8 +1,7 @@
 ITEM.name = "Tape Measure"
 ITEM.description = "A compact tape measure in a scuffed metal case."
-ITEM.longdesc = "A compact tape measure with a metal case and a round yellow-and-black label. The edges of"
-	.. " the case are scuffed, and dirt has found its way into the narrow joins. The large markings"
-	.. " on the label remain much clearer than the little manufacturer's text beneath them."
+ITEM.longdesc = "The edges of the case are scuffed, and dirt has found its way into the narrow joins. The large"
+	.. " markings on the label remain much clearer than the little manufacturer's text beneath them."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/barter/tools_roulette.mdl"

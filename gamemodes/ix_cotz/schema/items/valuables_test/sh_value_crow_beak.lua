@@ -1,8 +1,7 @@
 ITEM.name = "Recovered Bird Beak"
 ITEM.description = "A large dark bird beak with a ragged remnant of skin around its base."
-ITEM.longdesc = "A large dark bird beak with a ragged remnant of skin around its base. The dry surface has"
-	.. " retained a little dirt along its broken edges. Without a collection record, its origin"
-	.. " remains uncertain, though a researcher may have reason to examine it."
+ITEM.longdesc = "The dry surface has retained a little dirt along its broken edges. Without a collection record,"
+	.. " its origin remains uncertain, though a researcher may have reason to examine it."
 ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/lostsignalproject/items/parts/crow_beak.mdl"

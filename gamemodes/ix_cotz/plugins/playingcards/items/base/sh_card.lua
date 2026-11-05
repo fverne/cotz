@@ -6,7 +6,8 @@ ITEM.width = 1
 ITEM.height = 1
 ITEM.price = 0
 ITEM.description = ""
-ITEM.longdesc = ""
+ITEM.longdesc = "The corners are softened by repeated shuffling, and a little of the printed pattern has worn"
+	.. " away. Camp games leave their marks long before anyone agrees on the rules."
 ITEM.category = "Cards"
 ITEM.isCard = true
 

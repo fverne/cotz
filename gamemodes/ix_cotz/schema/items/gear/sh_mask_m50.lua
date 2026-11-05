@@ -1,5 +1,7 @@
 ITEM.name = "M50 Gasmask"
 ITEM.description = "A modern gasmask"
+ITEM.longdesc = "The broad lenses make the wearer's eyes easier to see than their expression. Fine dust still"
+	.. " finds its way into the seams during a long walk through abandoned buildings."
 ITEM.model = "models/shtokerbox/ground_mask_m50.mdl"
 
 ITEM.price = 270000

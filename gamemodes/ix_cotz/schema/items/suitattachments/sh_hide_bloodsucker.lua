@@ -1,7 +1,8 @@
 ITEM.name = "Bloodsucker Skin"
 ITEM.model ="models/lostsignalproject/items/parts/hide_bloodsucker.mdl"
 ITEM.description = "The thick skin of a bloodsucker."
-ITEM.longdesc = "The thickness of this hide is a decent explanation for why bloodsuckers take so much firepower to bring down."
+ITEM.longdesc = "The dense layers remain unpleasantly elastic after removal. Handling it recalls just how much"
+	.. " effort went into bringing its former owner down."
 
 ITEM.width = 2
 ITEM.height = 2

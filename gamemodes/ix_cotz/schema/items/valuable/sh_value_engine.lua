@@ -1,6 +1,7 @@
 ITEM.name = "Diesel Engine"
 ITEM.description = "A diesel engine, probably from a lawn mower."
-ITEM.longdesc = "A diesel engine. Very useful for generating power, or performing other tasks."
+ITEM.longdesc = "Old oil darkens the seams, and the mounting points bear the marks of removal. A mechanic would"
+	.. " want to inspect it before promising anyone an evening of reliable power."
 ITEM.model = "models/illusion/eftcontainers/engine.mdl"
 
 ITEM.width = 2

@@ -1,5 +1,7 @@
 ITEM.name = "Data Extracting Flash Drive"
 ITEM.description = "A small flash drive made with the explicit purpose of extracting certain info from a PC. Just insert ."
+ITEM.longdesc = "The casing is plain enough to pass for somebody's forgotten office accessory. Its usefulness"
+	.. " depends on reaching the right terminal and leaving with the requested records intact."
 ITEM.model = "models/lostsignalproject/items/quest/usb1.mdl"
 ITEM.price = 0
 ITEM.flag = "A"
@@ -62,7 +64,7 @@ ITEM.functions.use = {
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
 
-	local desc = self.description.."\n\n"
+	local desc = self.description .. "\n\n" .. self.longdesc .. "\n\n"
 	
 	desc = desc.."PC types remaining to scan:\n"
 	for k,v in pairs(self:GetData("types",{})) do

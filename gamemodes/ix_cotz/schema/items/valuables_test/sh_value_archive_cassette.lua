@@ -1,9 +1,7 @@
 ITEM.name = "Archive Cassette"
 ITEM.description = "A light-coloured cassette with a handwritten label."
-ITEM.longdesc = "A light-coloured cassette with a handwritten label and two dark reel windows. The casing is"
-	.. " scuffed around its edges, and the writing offers very little context to anyone unfamiliar"
-	.. " with the hand. Whatever its significance once was, nobody thought to leave a helpful"
-	.. " explanation with it."
+ITEM.longdesc = "Two dark reel windows interrupt the scuffed casing. The writing offers very little context to"
+	.. " anyone unfamiliar with the person who made the recording."
 ITEM.valuableCategory = "recording equipment"
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_01.mdl"

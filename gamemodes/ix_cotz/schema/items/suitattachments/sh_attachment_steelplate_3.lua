@@ -1,5 +1,7 @@
 ITEM.name = "Galvanized Steel Plate"
 ITEM.description = "An nickel-plated steel plate, could absorb most impacts against a body armor."
+ITEM.longdesc = "The pale finish is brightest along the face and duller around the mounting edges. It stands out"
+	.. " beside the rust-stained pieces found in most field workshops."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic10.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

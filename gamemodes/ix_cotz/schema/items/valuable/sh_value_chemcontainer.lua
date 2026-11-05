@@ -1,8 +1,7 @@
 ITEM.name = "Cylindrical Chemical Carrier"
 ITEM.description = "A plain cylindrical carrier with dark end caps and a narrow label panel."
-ITEM.longdesc = "A plain cylindrical carrier with dark end caps and a narrow label panel. A stale storage"
-	.. " smell clings to its outer surface. No accompanying record establishes how it was collected"
-	.. " or what has happened to it since. Before it meant anything useful to a laboratory,"
+ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
+	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
 	.. " somebody would have to sort out that missing history."
 ITEM.valuableCategory = "sample carriers"
 

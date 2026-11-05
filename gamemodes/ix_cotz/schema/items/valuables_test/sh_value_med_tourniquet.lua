@@ -1,8 +1,7 @@
 ITEM.name = "Windlass Tourniquet"
 ITEM.description = "A folded dark tourniquet with a broad strap and a small pale label near one end."
-ITEM.longdesc = "A folded dark tourniquet with a broad strap and a small pale label near one end. The"
-	.. " fastening and wound fabric give it an angular, crowded outline. Fine dust sits in the"
-	.. " weave, leaving the exposed edges darker where it has been handled."
+ITEM.longdesc = "The fastening and wound fabric give it an angular, crowded outline. Fine dust sits in the weave,"
+	.. " leaving the exposed edges darker where it has been handled."
 ITEM.valuableCategory = "trauma supplies"
 
 ITEM.model = "models/cotz/eft/usable/meds_cat.mdl"

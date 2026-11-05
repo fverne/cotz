@@ -1,8 +1,7 @@
 ITEM.name = "Wired Demolition Assembly"
 ITEM.description = "A wired assembly of wrapped cylindrical charges fixed to a small backing plate."
-ITEM.longdesc = "A wired assembly of wrapped cylindrical charges fixed to a small backing plate. Its outer"
-	.. " surfaces carry the dust and handling marks of neglected stores. There is no matching issue"
-	.. " record or service history. It belongs on a specialist's inventory and inspection bench"
+ITEM.longdesc = "Its outer surfaces carry the dust and handling marks of neglected stores. There is no matching"
+	.. " issue record or service history. It belongs on a specialist's inventory and inspection bench"
 	.. " before anyone can make sense of its condition or origin."
 ITEM.valuableCategory = "ordnance salvage"
 

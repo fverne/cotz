@@ -1,5 +1,7 @@
 ITEM.name = "Unassigned Identification Card"
 ITEM.description = "A flat piece of plastic for identification."
+ITEM.longdesc = "The blank fields wait for a name, an affiliation, and whatever authority someone chooses to put"
+	.. " behind them. In the Zone, a convincing introduction can be worth as much as a full magazine."
 ITEM.model = "models/lostsignalproject/items/quest/keycard.mdl"
 
 ITEM.price = "1000"
@@ -49,6 +51,10 @@ function ITEM:GetDescription()
 		desc = self:GetData("customDesc")
 	end
 	
+	if not self.entity then
+		desc = desc .. "\n\n" .. self.longdesc
+	end
+
 	return Format(desc)
 end
 

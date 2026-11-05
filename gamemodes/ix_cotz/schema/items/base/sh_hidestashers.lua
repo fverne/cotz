@@ -1,6 +1,7 @@
 ITEM.name = "hidestasher"
 ITEM.description = "hidestasher item."
-ITEM.longdesc = "No Longer Description Available"
+ITEM.longdesc = "A quiet hiding place can outlast its owner. The difficult part is remembering which"
+	.. " familiar-looking corner of the Zone was supposed to keep the secret."
 ITEM.model = "models/Gibs/HGIBS.mdl"
 ITEM.quantdesc = "This tool has %d uses left."
 ITEM.width = 1

@@ -1,7 +1,6 @@
 ITEM.name = "Coffee Bean Jar"
 ITEM.description = "A clear jar of dark coffee beans with a broad brown lid and a dark side label."
-ITEM.longdesc = "A clear jar of dark coffee beans with a broad brown lid and a dark side label. The"
-	.. " packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
+ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
 	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
 ITEM.valuableCategory = "provisions"
 

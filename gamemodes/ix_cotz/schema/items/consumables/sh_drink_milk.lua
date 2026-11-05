@@ -1,6 +1,6 @@
 ITEM.name = "Milk, 1l"
 ITEM.description = "A carton of milk"
-ITEM.longdesc = "A carton of UHT milk. Should probably be drunk quickly after opening, before it goes off. It still seems fresh."
+ITEM.longdesc = "Should probably be drunk quickly after opening, before it goes off. It still seems fresh."
 ITEM.model = "models/props_junk/garbage_milkcarton002a.mdl"
 
 ITEM.price = 90

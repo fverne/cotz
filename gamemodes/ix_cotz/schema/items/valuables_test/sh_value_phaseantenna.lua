@@ -1,9 +1,8 @@
 ITEM.name = "Phased Antenna Array"
 ITEM.description = "A square electronics module carrying a dense grid of copper-coloured pins."
-ITEM.longdesc = "A square electronics module carrying a dense grid of copper-coloured pins. Dust sits"
-	.. " around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from"
-	.. " the casing alone."
+ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
+	.. " construction may interest a technician, though its condition cannot be established from the"
+	.. " casing alone."
 ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/illusion/eftcontainers/phaseantenna.mdl"

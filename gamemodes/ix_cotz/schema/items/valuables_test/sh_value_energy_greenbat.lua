@@ -1,8 +1,7 @@
 ITEM.name = "Rechargeable Cell"
 ITEM.description = "A green cylindrical rechargeable cell with a pale printed label around its body."
-ITEM.longdesc = "A green cylindrical rechargeable cell with a pale printed label around its body. Fine grit"
-	.. " has settled into the sheltered edges. It is the sort of small supply a workshop can run"
-	.. " short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
+	.. " run short of without noticing until the bench is already covered in unfinished work."
 ITEM.valuableCategory = "portable power"
 
 ITEM.model = "models/cotz/eft/barter/energy_greenbat.mdl"

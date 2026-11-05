@@ -1,9 +1,8 @@
 ITEM.name = "Recovered Plastic Charge"
 ITEM.description = "A strapped assembly of pale blocks with visible wiring across the top."
-ITEM.longdesc = "A strapped assembly of pale blocks with visible wiring across the top. Its outer surfaces"
-	.. " carry the dust and handling marks of neglected stores. There is no matching issue record"
-	.. " or service history. It belongs on a specialist's inventory and inspection bench before"
-	.. " anyone can make sense of its condition or origin."
+ITEM.longdesc = "Its outer surfaces carry the dust and handling marks of neglected stores. There is no matching"
+	.. " issue record or service history. It belongs on a specialist's inventory and inspection bench"
+	.. " before anyone can make sense of its condition or origin."
 ITEM.valuableCategory = "ordnance salvage"
 
 ITEM.model = "models/lostsignalproject/items/quest/c4.mdl"

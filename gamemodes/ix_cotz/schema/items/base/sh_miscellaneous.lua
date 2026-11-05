@@ -1,6 +1,7 @@
 ITEM.name = "misc"
 ITEM.description = "misc item."
-ITEM.longdesc = "No Longer Description Available"
+ITEM.longdesc = "Ordinary belongings acquire unfamiliar histories beyond the perimeter. A former owner might"
+	.. " recognise something a casual buyer would overlook."
 ITEM.model = "models/Gibs/HGIBS.mdl"
 
 ITEM.width = 1

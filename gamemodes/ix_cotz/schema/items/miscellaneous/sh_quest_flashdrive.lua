@@ -1,6 +1,7 @@
 ITEM.name = "Flash Drive"
 ITEM.description = "A small plastic flash drive containing encrypted information."
-ITEM.longdesc = "A memory stick containing sensitive encrypted data for Quartermaster."
+ITEM.longdesc = "Quartermaster is expecting the contents, which offer little to a casual reader without the means"
+	.. " to decode them. The tiny casing gives no hint of why the information matters."
 ITEM.model = "models/lostsignalproject/items/quest/usb2.mdl"
 
 ITEM.width = 1

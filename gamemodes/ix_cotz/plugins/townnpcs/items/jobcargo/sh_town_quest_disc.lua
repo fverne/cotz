@@ -1,5 +1,8 @@
 ITEM.name = "Marked Data Disc I"
 ITEM.description = "A pale optical disc with a handwritten numeral beside the centre hole."
+ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
+	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
+	.. " equipment and a patient specialist to make sense of them."
 
 ITEM.model = "models/cotz/eft/barter/info_cd_disk_i.mdl"
 

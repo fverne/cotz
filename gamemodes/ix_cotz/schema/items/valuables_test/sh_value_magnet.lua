@@ -1,8 +1,7 @@
 ITEM.name = "Ring Magnet Assembly"
 ITEM.description = "A heavy circular magnet assembly with metal mounting tabs and a short blue lead."
-ITEM.longdesc = "A heavy circular magnet assembly with metal mounting tabs and a short blue lead. Fine grit"
-	.. " has settled into the sheltered edges. It is the sort of small supply a workshop can run"
-	.. " short of without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
+	.. " run short of without noticing until the bench is already covered in unfinished work."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/illusion/eftcontainers/magnet.mdl"

@@ -1,6 +1,7 @@
 ITEM.name = "Spark Plug"
 ITEM.description = "A spark plug from an engine."
-ITEM.longdesc = "A sparking plug for an engine. Useful for zone inhabitants that use generators to power their dwellings."
+ITEM.longdesc = "Dark residue marks the working end, and the flats show where a spanner has gripped it. A"
+	.. " generator owner is more likely to recognise its value than a casual visitor."
 ITEM.model = "models/illusion/eftcontainers/sparkplug.mdl"
 
 ITEM.width = 1

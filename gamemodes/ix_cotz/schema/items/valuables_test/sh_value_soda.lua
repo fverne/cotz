@@ -1,7 +1,6 @@
 ITEM.name = "Baking Soda Carton"
 ITEM.description = "A red-and-yellow paper carton with a pale central label and folded upper corners."
-ITEM.longdesc = "A red-and-yellow paper carton with a pale central label and folded upper corners. The"
-	.. " packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
+ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
 	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
 ITEM.valuableCategory = "cleaning supplies"
 

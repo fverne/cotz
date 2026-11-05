@@ -1,6 +1,8 @@
 ITEM.name = "Manufacture of Gear Wheels"
 ITEM.description = "Factory manual on creation of gears."
-ITEM.longdesc = "A quite new manual for factory workers on how to create a various assortion of gears, from start of production to the end product"
+ITEM.longdesc = "Diagrams follow the process from rough stock to a finished component, with workshop notes"
+	.. " crowded around the margins. The language assumes a reader who already knows the machines"
+	.. " involved."
 ITEM.model = "models/lostsignalproject/items/misc/book2.mdl"
 
 ITEM.width = 1

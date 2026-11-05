@@ -1,5 +1,7 @@
 ITEM.name = "Kevlar K119 Plates"
 ITEM.description = "Light and effective body armor plating."
+ITEM.longdesc = "The woven material sits beneath a plain protective covering. Worn attachment points show how it"
+	.. " was held inside a previous wearer's equipment."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic2.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

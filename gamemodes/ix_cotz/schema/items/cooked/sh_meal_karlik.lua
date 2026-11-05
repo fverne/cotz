@@ -1,6 +1,7 @@
 ITEM.name = "Cooked Karlik Meat"
 ITEM.description = "A meal made from karliks, cooked in the zone."
-ITEM.longdesc = "A small stew made from meat of a midget-like karlik. Has a bit of a psychoactive effect."
+ITEM.longdesc = "The thin broth does little to hide its unsettling aftertaste. Camp talk credits it with a"
+	.. " strange influence on the mind, which is hardly a recommendation at dinner."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
 ITEM.price = 1890

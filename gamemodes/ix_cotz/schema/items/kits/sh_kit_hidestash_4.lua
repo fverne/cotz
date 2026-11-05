@@ -1,5 +1,7 @@
 ITEM.name = "Veteran Stalkers Stash"
 ITEM.description= "A rugged stash, contains the belongings of another stalker."
+ITEM.longdesc = "Careful knots and protected corners suggest a practiced hand. A long career in the Zone can"
+	.. " leave remarkably little behind for anyone else to sort through."
 ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 
 ITEM.width = 3

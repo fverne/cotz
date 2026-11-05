@@ -1,8 +1,7 @@
 ITEM.name = "Worn Surgical Pouch"
 ITEM.description = "A darkened red medical pouch with worn printing and rough-looking fabric around the folds."
-ITEM.longdesc = "A darkened red medical pouch with worn printing and rough-looking fabric around the folds."
-	.. " Its colour is easier to recognise than the smaller lettering. It carries the stale smell"
-	.. " of an old equipment cupboard, with a little grit caught along the edges of the fastening."
+ITEM.longdesc = "Its colour is easier to recognise than the smaller lettering. It carries the stale smell of an"
+	.. " old equipment cupboard, with a little grit caught along the edges of the fastening."
 ITEM.valuableCategory = "medical equipment"
 
 ITEM.model = "models/cotz/eft/usable/meds_core_medical_surgical_kit_sanitar.mdl"

@@ -20,6 +20,40 @@ ITEM.fpr = 0
 ITEM.radProt = 0.90
 ITEM.flatRadProt = 0.02
 
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "radsuit_loner",
+	worldMaterialSlots = {},
+	skins = {
+		{id = "radsuit_loner", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "radsuit_loner2", name = "Loner 2", skin = 1, worldSkin = 1},
+		{id = "radsuit_loner3", name = "Loner 3", skin = 2, worldSkin = 2},
+		{id = "radsuit_loner4", name = "Loner 4", skin = 3, worldSkin = 3},
+		{id = "radsuit_loner5", name = "Loner 5", skin = 4, worldSkin = 4},
+		{id = "radsuit_loner6", name = "Loner 6", skin = 5, worldSkin = 5},
+		{id = "radsuit_loner7", name = "Loner 7", skin = 6, worldSkin = 6},
+		{id = "radsuit_bandit", name = "Bandit", skin = 7, worldSkin = 7},
+		{id = "radsuit_bandit2", name = "Bandit 2", skin = 8, worldSkin = 8},
+		{id = "radsuit_cs", name = "Clear Sky", skin = 9, worldSkin = 9},
+		{id = "radsuit_cs2", name = "Clear Sky 2", skin = 10, worldSkin = 10},
+		{id = "radsuit_duty", name = "Duty", skin = 11, worldSkin = 11},
+		{id = "radsuit_duty2", name = "Duty 2", skin = 12, worldSkin = 12},
+		{id = "radsuit_duty3", name = "Duty 3", skin = 13, worldSkin = 13},
+		{id = "radsuit_freedom", name = "Freedom", skin = 14, worldSkin = 14},
+		{id = "radsuit_freedom2", name = "Freedom 2", skin = 15, worldSkin = 15},
+		{id = "radsuit_merc", name = "Mercenary", skin = 16, worldSkin = 16},
+		{id = "radsuit_merc2", name = "Mercenary 2", skin = 17, worldSkin = 17},
+		{id = "radsuit_merc3", name = "Mercenary 3", skin = 18, worldSkin = 18},
+		{id = "radsuit_merc4", name = "Mercenary 4", skin = 19, worldSkin = 19},
+		{id = "radsuit_monolith", name = "Monolith", skin = 20, worldSkin = 20},
+		{id = "radsuit_monolith2", name = "Monolith 2", skin = 21, worldSkin = 21},
+		{id = "radsuit_renegade", name = "Renegade", skin = 22, worldSkin = 22},
+	},
+	bodygroups = {},
+}
+
 ITEM.exRender = true
 ITEM.iconCam = {
     pos = Vector(0, -182.33, 5),

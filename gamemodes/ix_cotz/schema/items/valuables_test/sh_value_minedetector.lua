@@ -1,9 +1,8 @@
 ITEM.name = "Green Survey Equipment Case"
 ITEM.description = "A long green equipment case with a folded carrying handle and worn rectangular panels."
-ITEM.longdesc = "A long green equipment case with a folded carrying handle and worn rectangular panels."
-	.. " Handling marks and storage dust sit around its fittings. There is no service record to"
-	.. " explain when it was last checked. Its parts and construction may interest a specialist"
-	.. " even if the original assignment can no longer be reconstructed."
+ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
+	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
+	.. " original assignment can no longer be reconstructed."
 ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/cotz/eft/spec/minedetector.mdl"

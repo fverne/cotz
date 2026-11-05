@@ -1,6 +1,7 @@
 ITEM.name = "Dog Chops"
 ITEM.description = "A meal made from a dog, cooked in the zone."
-ITEM.longdesc = "This meat has been cooked in the zone, and the meat originates from a dog. The meal is not very well-tasting, mostly due to the low fat content of the meat, and the meat not being very tender."
+ITEM.longdesc = "The low fat content leaves it dry, with a tough bite and little flavour to recommend it. At a"
+	.. " hungry camp, those objections rarely last long."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_dog.mdl"
 
 ITEM.price = 420

@@ -1,6 +1,7 @@
 ITEM.name = "Kerosene"
 ITEM.description = "A can of kerosene, can be used as fuel."
-ITEM.longdesc = "A big plastic canister of kerosene. Kerosene is used for much of the power generation in the zone."
+ITEM.longdesc = "A persistent fuel smell clings around the closure. In camps dependent on deliveries and salvaged"
+	.. " machinery, a familiar container can be a reassuring sight."
 ITEM.model = "models/illusion/eftcontainers/kerosine.mdl"
 
 ITEM.width = 2

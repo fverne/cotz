@@ -1,7 +1,6 @@
 ITEM.name = "Assorted Hand Tools"
 ITEM.description = "An assortment of screwdrivers, pliers, tape and small measuring tools laid together."
-ITEM.longdesc = "An assortment of screwdrivers, pliers, tape and small measuring tools laid together. The"
-	.. " grip and working surfaces show ordinary handling wear, with a little grit caught in the"
+ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
 	.. " recesses. It looks at home among the clutter of a mechanic's bench."
 ITEM.valuableCategory = "workshop tools"
 

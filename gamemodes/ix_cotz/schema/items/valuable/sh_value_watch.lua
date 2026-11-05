@@ -1,6 +1,7 @@
 ITEM.name = "Watch"
 ITEM.description = "A nice looking watch."
-ITEM.longdesc = "A nice watch. Seems to be made of gilded silver."
+ITEM.longdesc = "Gilding has worn thin at the points most often touched, exposing paler metal beneath. Someone"
+	.. " once cared enough about appearances to choose it over a plain field watch."
 ITEM.model = "models/illusion/eftcontainers/rolex.mdl"
 
 ITEM.width = 1

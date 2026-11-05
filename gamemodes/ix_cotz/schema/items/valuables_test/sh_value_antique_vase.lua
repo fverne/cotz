@@ -1,9 +1,8 @@
 ITEM.name = "Old Ceramic Vase"
 ITEM.description = "A blue decorative vase with gold-coloured ornament."
-ITEM.longdesc = "A decorative ceramic vase with a deep blue surface, gold-coloured ornament and a portrait"
-	.. " on its body. Dust has settled around the lid and pedestal, softening some of the finer"
-	.. " detail. Its old-fashioned elegance feels rather misplaced among the battered containers"
-	.. " that usually make it out of abandoned homes."
+ITEM.longdesc = "Dust has settled around the lid and pedestal, softening some of the finer detail. Its"
+	.. " old-fashioned elegance feels rather misplaced among the battered containers that usually make it"
+	.. " out of abandoned homes."
 ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/old_vase.mdl"

@@ -1,6 +1,7 @@
 ITEM.name = "Cup of dice"
 ITEM.description = "A cup of dice"
-ITEM.longdesc = "A plastic container with a blue lid on the top that contains a total of 6 dices inside. The dices appear to have circles representing numbers on each face of an individual die. Many STALKERS tend to keep a cup of dice on them just in case they wish to entertain themselves, gamble with them or settle a dispute with a good game of dice."
+ITEM.longdesc = "Six dice rattle beneath the blue lid, their faces marked with familiar numbered pips. Around a"
+	.. " camp table, a quick throw can settle a wager or start an argument that lasts all evening."
 ITEM.model = "models/lostsignalproject/items/misc/jar.mdl"
 
 ITEM.width = 1

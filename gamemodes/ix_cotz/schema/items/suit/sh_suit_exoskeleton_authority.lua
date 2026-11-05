@@ -2,6 +2,8 @@ ITEM.name = "PSZ-6k"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
+ITEM.longdesc = "The PSZ markings lend the frame the severe appearance of issued assault equipment. The wearer"
+	.. " disappears beneath layered fittings, leaving posture and voice to identify the person inside."
 
 ITEM.width = 2
 ITEM.height = 3

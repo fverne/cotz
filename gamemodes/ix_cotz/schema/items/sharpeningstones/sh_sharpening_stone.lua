@@ -1,3 +1,5 @@
 ITEM.base = "base_sharpeningstones"
 ITEM.name = "Sharpening Stone"
 ITEM.description = "A whetstone with three uses. Each use restores 25% knife sharpness, up to 101%."
+ITEM.longdesc = "The working surface is stained with fine metal residue from earlier blades. A little patient"
+	.. " edge work is part of the quiet routine between hunts."

@@ -1,5 +1,8 @@
 ITEM.name = "Gas Analyzer"
 ITEM.description = "A small device for measuring fluctuations in pressure, as well as gaseous impurities. The internal memory can store a couple of GPS-positions, letting the research team know where to go."
+ITEM.longdesc = "Grime gathers around the intake and the seams of the housing. Measurements taken out in the"
+	.. " field are only useful if the researchers can connect them to the places where they were"
+	.. " recorded."
 ITEM.model = "models/illusion/eftcontainers/gasanalyser.mdl"
 ITEM.price = 0
 ITEM.flag = "A"
@@ -91,7 +94,7 @@ ITEM.functions.zCheck = {
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
 
-	local desc = self.description.."\n\n"
+	local desc = self.description .. "\n\n" .. self.longdesc .. "\n\n"
 	
 	desc = desc.."Points needing measurement:\n"
 	for k,v in pairs(self:GetData("points",{})) do

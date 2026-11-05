@@ -1,5 +1,7 @@
 ITEM.name = "Tourist Medical Box"
 ITEM.description= "A red first aid kit."
+ITEM.longdesc = "The treatment supplies have been kept together rather than scattered through a trader's drawers."
+	.. " The selection has the practical feel of equipment put aside for someone who keeps coming back."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

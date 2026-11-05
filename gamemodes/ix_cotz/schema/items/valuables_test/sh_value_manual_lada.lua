@@ -1,8 +1,7 @@
 ITEM.name = "Vehicle Workshop Manual"
 ITEM.description = "A thick vehicle manual with a bright printed cover and an illustrated car."
-ITEM.longdesc = "A thick vehicle manual with a bright printed cover and an illustrated car. A dry cupboard"
-	.. " smell clings to the paper, and the edges have softened with handling. The printed material"
-	.. " belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
+ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
+	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
 	.. " simply another object waiting for someone who recognises it."
 ITEM.valuableCategory = "technical records"
 

@@ -1,5 +1,7 @@
 ITEM.name = "Ammo Crate"
 ITEM.description= "A small wooden box containing some ammunition. It seems to be a good variety of calibers."
+ITEM.longdesc = "The timber bears the scrapes of several journeys between storehouse and camp. Whoever packed it"
+	.. " cared more about a usable assortment than a matching set of labels."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 2

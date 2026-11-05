@@ -1,5 +1,7 @@
 ITEM.name = "Foregrip"
 ITEM.description = "A stabilizing grip for the front of your weapon."
+ITEM.longdesc = "The textured surface offers a firm purchase even when the handguard is slick with rain. Simple"
+	.. " fittings like this often show more wear than the weapon they are mounted on."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

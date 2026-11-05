@@ -8,6 +8,7 @@ local MENU_ORDER = {
 	RepairItems = 35,
 	StorageTopic = 40,
 	PaintSuit = 45,
+	CustomizeGear = 45,
 	ChangeSuitVariant = 46,
 	PDAAvatarTopic = 47,
 	NicknameTopic = 48,

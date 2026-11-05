@@ -1,8 +1,7 @@
 ITEM.name = "Pocket Radio Receiver"
 ITEM.description = "A compact receiver with a round speaker grille and a small rectangular display."
-ITEM.longdesc = "A compact receiver with a round speaker grille and a small rectangular display. Fine grit"
-	.. " has gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
-	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "radio equipment"
 

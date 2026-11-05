@@ -1,5 +1,7 @@
 ITEM.name = "MBSS Backpack"
 ITEM.description = "An extra durable backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The squat profile sits close to the back instead of towering above the shoulders. Its webbing is"
+	.. " darkened where it has rubbed against other equipment."
 ITEM.model = "models/backpack_baselard/backpack_baselard.mdl"
 
 ITEM.price = 900

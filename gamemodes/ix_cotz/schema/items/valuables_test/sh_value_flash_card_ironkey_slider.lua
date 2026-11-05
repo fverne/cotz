@@ -1,9 +1,8 @@
 ITEM.name = "Metal Slider Flash Drive"
 ITEM.description = "A metal USB drive with a circular sliding control on its upper face."
-ITEM.longdesc = "A metal USB drive with a circular sliding control on its upper face. Dust has settled in"
-	.. " the small recesses around the connector. The casing says very little about what might"
-	.. " remain inside. Its value to a specialist begins with questions that cannot be answered by"
-	.. " turning it over in the hand."
+ITEM.longdesc = "Dust has settled in the small recesses around the connector. The casing says very little about"
+	.. " what might remain inside. Its value to a specialist begins with questions that cannot be"
+	.. " answered by turning it over in the hand."
 ITEM.valuableCategory = "flash media"
 
 ITEM.model = "models/cotz/eft/info/flash_card_ironkey_slider.mdl"

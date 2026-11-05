@@ -1,9 +1,8 @@
 ITEM.name = "Red Sewing Handbook"
 ITEM.description = "A red illustrated handbook with a contrasting strip near the bottom of its cover."
-ITEM.longdesc = "A red illustrated handbook with a contrasting strip near the bottom of its cover. The"
-	.. " exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small"
-	.. " handling marks suggest it has passed through several pairs of hands. A careful reader"
-	.. " might eventually place it among the records it was separated from."
+ITEM.longdesc = "The exposed edges feel dry and slightly rough, with a faint smell of stale paper. Small handling"
+	.. " marks suggest it has passed through several pairs of hands. A careful reader might eventually"
+	.. " place it among the records it was separated from."
 ITEM.valuableCategory = "technical records"
 
 ITEM.model = "models/cotz/eft/quest/clothbook1.mdl"

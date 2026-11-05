@@ -1,8 +1,7 @@
 ITEM.name = "Segmented Armour Panel"
 ITEM.description = "A dark segmented armour panel with stitched rectangular sections."
-ITEM.longdesc = "A dark segmented armour panel with stitched rectangular sections. The covering bears small"
-	.. " handling marks and embedded dust. No inspection record establishes its grade or condition;"
-	.. " a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
+	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic1.mdl"

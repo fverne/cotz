@@ -1,6 +1,7 @@
 ITEM.name = "Karlik Meat"
 ITEM.description = "Uncooked meat from a karlik."
-ITEM.longdesc = "Meat from a karlik. The meat of this midget-like creature has a bit of a psychoactive effect, and as such is sometimes used recreationally by stalkers."
+ITEM.longdesc = "The meat of this midget-like creature has a bit of a psychoactive effect, and as such is"
+	.. " sometimes used recreationally by stalkers."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
 ITEM.price = 890

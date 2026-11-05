@@ -1,9 +1,8 @@
 ITEM.name = "Data Link Module"
 ITEM.description = "A low metal communications module with cooling ribs and a short attached lead."
-ITEM.longdesc = "A low metal communications module with cooling ribs and a short attached lead. Dust sits"
-	.. " around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from"
-	.. " the casing alone."
+ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
+	.. " construction may interest a technician, though its condition cannot be established from the"
+	.. " casing alone."
 ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/cotz/eft/barter/electr_adv_ultralink.mdl"

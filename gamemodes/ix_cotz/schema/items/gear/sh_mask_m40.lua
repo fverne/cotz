@@ -1,5 +1,7 @@
 ITEM.name = "M40 Gasmask"
 ITEM.description = "A newer gasmask"
+ITEM.longdesc = "The facepiece has the practical layout of equipment expected to be worn for more than a few"
+	.. " minutes. Marks around the fittings show where it has been dismantled for cleaning."
 ITEM.model = "models/shtokerbox/ground_mask_m40.mdl"
 
 ITEM.price = 195000

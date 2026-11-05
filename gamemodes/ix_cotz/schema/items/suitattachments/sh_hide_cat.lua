@@ -1,7 +1,8 @@
 ITEM.name = "Cat Hide"
 ITEM.model ="models/lostsignalproject/items/parts/hide_psy_dog.mdl"
 ITEM.description = "A hairy hide from a cat."
-ITEM.longdesc = "A long piece of hairy cat hide that appears to be quite thick and stretched out. The skin is rough in texture and can be used for suit designs, even as an attachment."
+ITEM.longdesc = "Rough texture remains beneath the fur, with the edges stretched unevenly during preparation."
+	.. " Camp craftsmen sometimes find a use for it in improvised suit work."
 
 ITEM.width = 1
 ITEM.height = 1

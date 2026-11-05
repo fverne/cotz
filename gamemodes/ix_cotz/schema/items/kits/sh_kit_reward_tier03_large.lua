@@ -1,5 +1,7 @@
 ITEM.name = "Regular Reward Large"
-ITEM.description= ""
+ITEM.description = "A large reward supply package."
+ITEM.longdesc = "A full bundle set aside as payment for completed work. Its tidy arrangement suggests an"
+	.. " established routine between completed work and the next departure."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

@@ -1,5 +1,7 @@
 ITEM.name = "Headlamp"
 ITEM.description = "A headlamp with adjustable straps."
+ITEM.longdesc = "Keeping a light above your eyes leaves both hands free for a ladder, a weapon, or a stubborn"
+	.. " equipment buckle. Sweat and dust have worked their way into the webbing."
 ITEM.model = "models/lostsignalproject/items/devices/tactical_torch.mdl"
 
 ITEM.width = 1

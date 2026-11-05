@@ -1,5 +1,7 @@
 ITEM.name = "Anarchist Screen Helmet"
 ITEM.description = "A screen helmet with closed respiratory system."
+ITEM.longdesc = "The faction finish sits over the same practical seams and fittings as the unmarked version. A"
+	.. " face hidden behind the viewing panel leaves the colours to do the introductions."
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
 ITEM.price = 100000
@@ -24,6 +26,23 @@ ITEM.pr = 0.45
 ITEM.fpr = 0
 ITEM.radProt = 0.98
 ITEM.flatRadProt = 0.02
+
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "seva_free",
+	worldMaterialSlots = {},
+	worldNotice = "Some worn finishes have no matching ground-model surface.",
+	skins = {
+		{id = "seva_lone", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "seva_duty", name = "Duty", skin = 1, worldSkin = 0},
+		{id = "seva_midn", name = "Midnight", skin = 2, worldSkin = 0},
+		{id = "seva_csky", name = "Clear Sky", skin = 3, worldSkin = 0},
+		{id = "seva_free", name = "Freedom", skin = 4, worldSkin = 0},
+	},
+	bodygroups = {},
+}
 
 ITEM.exRender = true
 ITEM.iconCam = {

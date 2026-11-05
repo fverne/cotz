@@ -1,9 +1,8 @@
 ITEM.name = "Military Transit Crate"
 ITEM.description = "A ribbed military transit crate with recessed fittings and heavy corner protection."
-ITEM.longdesc = "A ribbed military transit crate with recessed fittings and heavy corner protection. Fine"
-	.. " dust sits along the seams and around the fittings. There is a faint smell of old packaging"
-	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching"
-	.. " inventory has followed it here."
+ITEM.longdesc = "Fine dust sits along the seams and around the fittings. There is a faint smell of old packaging"
+	.. " about it. Its orderly shape suggests a place on a numbered shelf, though no matching inventory"
+	.. " has followed it here."
 ITEM.valuableCategory = "military cases"
 
 ITEM.model = "models/cotz/eft/barter/container_parls.mdl"

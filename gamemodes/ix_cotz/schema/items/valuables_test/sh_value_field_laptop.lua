@@ -1,8 +1,7 @@
 ITEM.name = "Recovered Field Laptop"
 ITEM.description = "An open laptop with a dark screen, compact keyboard and a broad palm rest."
-ITEM.longdesc = "An open laptop with a dark screen, compact keyboard and a broad palm rest. Fine grit has"
-	.. " gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
-	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "portable computers"
 

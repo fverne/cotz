@@ -1,5 +1,7 @@
 ITEM.name = "Russian Tank Helmet"
 ITEM.description = "A very old helmet."
+ITEM.longdesc = "Padded ridges and ear flaps were made for the cramped interior of an armoured vehicle. Outside"
+	.. " one, they give the wearer an unmistakable silhouette among the camp's steel helmets."
 ITEM.model = "models/shtokerbox/ground_headgear_tanker.mdl"
 
 ITEM.price = 2500

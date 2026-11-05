@@ -1,8 +1,7 @@
 ITEM.name = "Large Mechanical Parts"
 ITEM.description = "A spread of large metal mechanisms, springs and worn wooden fittings."
-ITEM.longdesc = "A spread of large metal mechanisms, springs and worn wooden fittings. The surface carries"
-	.. " the dull marks of storage and handling. On a workshop shelf it would be another ordinary"
-	.. " part, waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
+	.. " another ordinary part, waiting for somebody who knows what belongs where."
 ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/lostsignalproject/items/misc/large_parts.mdl"

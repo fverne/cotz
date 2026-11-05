@@ -1,5 +1,8 @@
 ITEM.name = "Orange Evidence Case"
 ITEM.description = "A compact hard case with orange panels, dark protective ribs and a carrying handle."
+ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
+	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
+	.. " that changed hands more often than its paperwork did."
 
 ITEM.model = "models/cotz/eft/containers/container_case_kompromat.mdl"
 

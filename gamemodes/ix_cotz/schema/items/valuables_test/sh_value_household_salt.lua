@@ -1,7 +1,6 @@
 ITEM.name = "Table Salt"
 ITEM.description = "A tall cylindrical salt container with blue printing around its pale wrapper."
-ITEM.longdesc = "A tall cylindrical salt container with blue printing around its pale wrapper. The"
-	.. " packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
+ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
 	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
 ITEM.valuableCategory = "provisions"
 

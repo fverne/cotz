@@ -1,6 +1,9 @@
 ITEM.name = "MP40"
 ITEM.description= "A submachinegun chambered for 9x19mm."
-ITEM.longdesc = "The MP 40 (Maschinenpistole 40) is a submachine gun chambered for the 9×19mm Parabellum cartridge. It was developed in Nazi Germany and used extensively by the Axis powers during World War II.  \n\nAmmo: 9x19mm \nMagazine Capacity: 32"
+ITEM.longdesc = "It was developed in Nazi Germany and used extensively by the Axis powers during World War II.\n"
+	.. "\n"
+	.. "Ammo: 9x19mm\n"
+	.. "Magazine Capacity: 32"
 ITEM.model = ("models/khrcw2/doipack/w_mp40.mdl")
 ITEM.class = "cw_mp40"
 ITEM.weaponCategory = "primary"

@@ -1,8 +1,7 @@
 ITEM.name = "TNT Block"
 ITEM.description = "A rectangular wrapped block with large printed lettering on the wrapper."
-ITEM.longdesc = "A rectangular wrapped block with large printed lettering on the wrapper. Its outer"
-	.. " surfaces carry the dust and handling marks of neglected stores. There is no matching issue"
-	.. " record or service history. It belongs on a specialist's inventory and inspection bench"
+ITEM.longdesc = "Its outer surfaces carry the dust and handling marks of neglected stores. There is no matching"
+	.. " issue record or service history. It belongs on a specialist's inventory and inspection bench"
 	.. " before anyone can make sense of its condition or origin."
 ITEM.valuableCategory = "ordnance salvage"
 

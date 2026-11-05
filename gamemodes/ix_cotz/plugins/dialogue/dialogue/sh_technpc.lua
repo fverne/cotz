@@ -13,12 +13,26 @@ DIALOGUE.addTopic("GREETING", {
 		"TradeTopic",
 		"RepairItems",
 		"PaintSuit",
+		"CustomizeGear",
 		"BackgroundTopic",
 		"GOODBYE",
 		"AboutWorkTopic",
 		"TownProgression",
 		"GetTaskByDifficulty",
 	},
+})
+
+DIALOGUE.addTopic("CustomizeGear", {
+	statement = "Can you change the finish on my gear?",
+	response = "Absolutely! Keep it on a moment; let me see what we can do with it.",
+	options = {"BackTopic"},
+	preCallback = function(self, client, target)
+		local customization = ix.plugin.Get("gearcustomization")
+		if SERVER and customization then customization:Open(client, target) end
+	end,
+	ShouldAdd = function()
+		return ix.plugin.Get("gearcustomization") ~= nil and ix.pac ~= nil
+	end,
 })
 
 DIALOGUE.addTopic("RepairItems", {
@@ -263,6 +277,7 @@ DIALOGUE.addTopic("BackTopic", {
 		"TradeTopic",
 		"RepairItems",
 		"PaintSuit",
+		"CustomizeGear",
 		"BackgroundTopic",
 		"GOODBYE",
 		"AboutWorkTopic",

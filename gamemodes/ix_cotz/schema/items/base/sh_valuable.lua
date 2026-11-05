@@ -1,6 +1,7 @@
 ITEM.name = "valuable"
 ITEM.description = "valuable item."
-ITEM.longdesc = "No Longer Description Available"
+ITEM.longdesc = "What looks ordinary in a storeroom can be difficult to replace beyond the perimeter. The right"
+	.. " buyer may recognise a use its finder never considered."
 ITEM.model = "models/Gibs/HGIBS.mdl"
 
 ITEM.width = 1

@@ -1,8 +1,7 @@
 ITEM.name = "Expanding Foam"
 ITEM.description = "A tall can of expanding foam."
-ITEM.longdesc = "A tall can of expanding foam with a dark cap and a yellow printed label. The wrapper is"
-	.. " scuffed along the places where a hand would naturally grip it. A stubborn chemical smell"
-	.. " hangs around the top, beneath the more familiar scent of an old building-supply cupboard."
+ITEM.longdesc = "The yellow wrapper is scuffed where a hand would naturally grip it. A stubborn chemical smell"
+	.. " hangs around the dark cap."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/cotz/eft/barter/polyurethane_foam.mdl"

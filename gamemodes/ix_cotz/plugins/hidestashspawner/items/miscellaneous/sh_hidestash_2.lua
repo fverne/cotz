@@ -3,6 +3,8 @@ ITEM.model = "models/lostsignalproject/items/devices/pda.mdl"
 ITEM.width = 1
 ITEM.height = 1
 ITEM.description = "The PDA of a lost stalker. It looks new, and did probably belong to a rookie STALKER."
+ITEM.longdesc = "The address book is sparse, and the owner appears to have saved every scrap of advice they"
+	.. " received. A careful look through the notes might explain what they were trying to find."
 ITEM.price = 2500
 ITEM.flag = "A"
 ITEM.CustomSpawngroup = "hidestash_tier_2"
@@ -18,12 +20,20 @@ ITEM.iconCam = {
 }
 
 function ITEM:GetDescription()
-	if self:GetData("stashtext", nil) == nil then
-		return self.description
-	else
-		local longlat = ix.util.GetLongLatFromVector(self:GetData("stashcoordinates", Vector(0,0,0)), self:GetData("map"))
-		return self.description.."\n\nThe note has a stash location. It reads: "..self:GetData("stashtext", nil).."\n\nA set of coordinates are also present:\n"..math.Round(longlat[1],4).." Latitude, "..math.Round(longlat[2],4).." Longtitude"
+	local description = self.description
+	if not self.entity then
+		description = description .. "\n\n" .. self.longdesc
 	end
+
+	if self:GetData("stashtext", nil) == nil then return description end
+
+	local coordinates = ix.util.GetLongLatFromVector(
+		self:GetData("stashcoordinates", Vector(0, 0, 0)), self:GetData("map")
+	)
+
+	return description .. "\n\nThe note has a stash location. It reads: " .. self:GetData("stashtext", nil)
+		.. "\n\nA set of coordinates are also present:\n" .. math.Round(coordinates[1], 4)
+		.. " Latitude, " .. math.Round(coordinates[2], 4) .. " Longtitude"
 end
 
 ITEM.functions.use = {

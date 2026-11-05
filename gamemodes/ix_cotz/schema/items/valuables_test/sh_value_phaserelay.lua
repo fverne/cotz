@@ -1,9 +1,8 @@
 ITEM.name = "Phase Relay Module"
 ITEM.description = "A pale rectangular relay module with recessed connectors and narrow green markings."
-ITEM.longdesc = "A pale rectangular relay module with recessed connectors and narrow green markings. Dust"
-	.. " sits around the fittings, and no service record accompanies the unit. Its specialised"
-	.. " construction may interest a technician, though its condition cannot be established from"
-	.. " the casing alone."
+ITEM.longdesc = "Dust sits around the fittings, and no service record accompanies the unit. Its specialised"
+	.. " construction may interest a technician, though its condition cannot be established from the"
+	.. " casing alone."
 ITEM.valuableCategory = "radio components"
 
 ITEM.model = "models/illusion/eftcontainers/phaserelay.mdl"

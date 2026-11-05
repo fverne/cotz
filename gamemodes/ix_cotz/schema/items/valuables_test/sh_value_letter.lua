@@ -1,8 +1,7 @@
 ITEM.name = "Stamped Letter"
 ITEM.description = "A creased pale letter with printed blocks, a stamp and an inset illustration."
-ITEM.longdesc = "A creased pale letter with printed blocks, a stamp and an inset illustration. The edges"
-	.. " have softened with handling, and there is a faint smell of old paper about it. It feels"
-	.. " like something that once had a habitual place among one person's belongings. Without its"
+ITEM.longdesc = "The edges have softened with handling, and there is a faint smell of old paper about it. It"
+	.. " feels like something that once had a habitual place among one person's belongings. Without its"
 	.. " owner, even an ordinary object acquires an uncomfortable weight of unanswered questions."
 ITEM.valuableCategory = "office records"
 

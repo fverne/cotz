@@ -1,10 +1,9 @@
 ITEM.name = "Recovered Anomaly Survey Station"
 ITEM.description = "A tall metal survey instrument with front controls and a small circular assembly above the"
 	.. " casing."
-ITEM.longdesc = "A tall metal survey instrument with front controls and a small circular assembly above the"
-	.. " casing. Handling marks and storage dust sit around its fittings. There is no service"
-	.. " record to explain when it was last checked. Its parts and construction may interest a"
-	.. " specialist even if the original assignment can no longer be reconstructed."
+ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
+	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
+	.. " original assignment can no longer be reconstructed."
 ITEM.valuableCategory = "survey equipment"
 
 ITEM.model = "models/lostsignalproject/items/quest/scanner_anomaly.mdl"

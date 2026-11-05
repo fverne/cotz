@@ -1,5 +1,7 @@
 ITEM.name = "Thick Cardboard Box"
 ITEM.description= "A heavy cardboard box, filled with many items."
+ITEM.longdesc = "The lower corners have softened where the load presses against them. Tape has been added"
+	.. " wherever the original folds looked likely to give way."
 ITEM.model = "models/lostsignalproject/items/misc/box_paper.mdl"
 
 ITEM.width = 2

@@ -1,5 +1,7 @@
 ITEM.name = "Very Heavy Package"
 ITEM.description = "A small package."
+ITEM.longdesc = "Its awkward density makes every lift a deliberate effort. Whoever packed it seems to have given"
+	.. " more thought to keeping the contents together than to the person carrying them."
 ITEM.model = "models/lostsignalproject/items/repair/repair_helmet_repair.mdl"
 ITEM.price = 0
 ITEM.flag = "A"
@@ -86,7 +88,7 @@ ITEM.functions.zCheck = {
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
 
-	local desc = self.description.."\n\n"
+	local desc = self.description .. "\n\n" .. self.longdesc .. "\n\n"
 	desc = desc.."Area to stash in:\n"
 
 	local stashdata = self:GetData("stashdata",{})

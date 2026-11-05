@@ -1,4 +1,8 @@
 ITEM.name = "PDA"
+ITEM.description = "A personal digital assistant for the stalker communication network."
+ITEM.longdesc = "A chosen nickname and avatar are often the only introduction a stalker gives the wider network."
+	.. " The casing fits comfortably in a jacket pocket, close enough to check whenever a message"
+	.. " arrives."
 ITEM.model = "models/lostsignalproject/items/devices/pda.mdl"
 ITEM.width = 1
 ITEM.height = 1
@@ -10,7 +14,11 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/pda1.png")
 ITEM.repairCost = ITEM.price/100*1
 
 function ITEM:GetDescription()
-	return "A PDA that encourages long range communication between individuals. Being the newest version of the PDA series, this allows the user to both select an avatar, but also select their own username." .. "\n\nAvatar: " .. self:GetData("avatar","vgui/icons/face_31.png") .. "\n\nNickname: " .. self:GetData("nickname", "meme")
+	if self.entity then return self.description end
+
+	return self.description .. "\n\n" .. self.longdesc
+		.. "\n\nAvatar: " .. self:GetData("avatar", "vgui/icons/face_31.png")
+		.. "\n\nNickname: " .. self:GetData("nickname", "meme")
 end
 
 ITEM.functions.setavatar = { -- sorry, for name order.

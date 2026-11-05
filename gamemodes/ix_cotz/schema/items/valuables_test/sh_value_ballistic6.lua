@@ -1,9 +1,7 @@
 ITEM.name = "Brown Labelled Armour Insert"
 ITEM.description = "A brown rectangular armour insert with rounded corners and a small pale label."
-ITEM.longdesc = "A brown rectangular armour insert with rounded corners and a small pale label. The"
-	.. " covering bears small handling marks and embedded dust. No inspection record establishes"
-	.. " its grade or condition; a suit technician would have to decide what could be salvaged from"
-	.. " it."
+ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
+	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic6.mdl"

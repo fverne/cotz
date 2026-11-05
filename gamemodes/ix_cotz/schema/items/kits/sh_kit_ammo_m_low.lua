@@ -1,5 +1,7 @@
 ITEM.name = "Large Ammo Crate"
 ITEM.description= "A large crate containing a variety of ammunition seperated into different compartments."
+ITEM.longdesc = "The dividers show where different batches were packed together for transport. A faint smell of"
+	.. " oil and old wood escapes around the lid."
 ITEM.model = "models/lostsignalproject/items/misc/damaged_ammo.mdl"
 
 ITEM.width = 2

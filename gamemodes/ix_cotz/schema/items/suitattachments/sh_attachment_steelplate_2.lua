@@ -1,5 +1,7 @@
 ITEM.name = "Steel Plate"
 ITEM.description = "A steel plate in decent condition, could absorb impacts against a body armor."
+ITEM.longdesc = "The edges have been rounded where they would otherwise catch against a carrier. A thin film of"
+	.. " oil clings to the metal beneath the handling marks."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic10.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

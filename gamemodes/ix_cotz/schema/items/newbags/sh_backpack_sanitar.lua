@@ -1,5 +1,7 @@
 ITEM.name = "Old Paramedic Bag"
 ITEM.description = "An old paramedic bag. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "Faint stains and worn fastenings hint at hurried stops beside patients. It has outlasted"
+	.. " whatever organised service first issued it."
 ITEM.model = "models/backpack_sanitar_medbag/backpack_sanitar_medbag.mdl"
 
 ITEM.price = 900

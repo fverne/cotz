@@ -1,5 +1,7 @@
 ITEM.name = "German Steel Helmet"
 ITEM.description = "A very old helmet."
+ITEM.longdesc = "A distinctive silhouette survives beneath scratches and an indifferent coat of paint. Whatever"
+	.. " history a collector might assign it, the current owner still has to live with its weight."
 ITEM.model = "models/shtokerbox/ground_headgear_ger_ww2.mdl"
 
 ITEM.price = 15000

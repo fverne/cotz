@@ -1,8 +1,7 @@
 ITEM.name = "Storm Lighter"
 ITEM.description = "An orange protective lighter housing with an open cap and a metal ignition head."
-ITEM.longdesc = "An orange protective lighter housing with an open cap and a metal ignition head. The outer"
-	.. " surfaces carry a little storage dust and the marks of repeated handling. It belongs to the"
-	.. " quiet inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
+	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/cotz/eft/barter/flammable_survlighter.mdl"

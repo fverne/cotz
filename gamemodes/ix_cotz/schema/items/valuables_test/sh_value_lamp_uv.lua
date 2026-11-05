@@ -1,9 +1,7 @@
 ITEM.name = "Ultraviolet Lamp"
 ITEM.description = "A specialist lamp with purple tubes."
-ITEM.longdesc = "A specialist lamp with purple tubes rising from a light-coloured base above a threaded"
-	.. " metal fitting. Dust collects where the tubes meet the base, and the small print has begun"
-	.. " to look rather tired. Its unusual colour makes it stand out among the more ordinary scraps"
-	.. " of electrical equipment."
+ITEM.longdesc = "Dust collects where the tubes meet the base, and the small print has begun to fade. Its"
+	.. " particular purpose would be clearer beside the equipment it came from."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/cotz/eft/barter/electr_uvlamp.mdl"

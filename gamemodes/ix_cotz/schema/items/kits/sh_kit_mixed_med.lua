@@ -1,5 +1,7 @@
 ITEM.name = "Stalkers Backpack"
 ITEM.description= "A backpack that most likely belonged to a prowler of the zone. It's almost falling apart, rendering it useless, but there still seems to be something inside."
+ITEM.longdesc = "Dust and grit fall from the seams whenever it is moved. The remaining contents have survived the"
+	.. " journey rather better than the fabric around them."
 ITEM.model = "models/kek1ch/sumka5.mdl"
 
 ITEM.width = 2

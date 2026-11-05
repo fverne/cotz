@@ -1,8 +1,7 @@
 ITEM.name = "Dense Armour Insert"
 ITEM.description = "A thick dark rectangular armour insert with a finely textured face."
-ITEM.longdesc = "A thick dark rectangular armour insert with a finely textured face. The covering bears"
-	.. " small handling marks and embedded dust. No inspection record establishes its grade or"
-	.. " condition; a suit technician would have to decide what could be salvaged from it."
+ITEM.longdesc = "The covering bears small handling marks and embedded dust. No inspection record establishes its"
+	.. " grade or condition; a suit technician would have to decide what could be salvaged from it."
 ITEM.valuableCategory = "armour panels"
 
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic11.mdl"

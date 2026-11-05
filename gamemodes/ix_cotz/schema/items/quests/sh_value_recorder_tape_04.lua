@@ -1,8 +1,7 @@
 ITEM.name = "White Audio Cassette"
 ITEM.description = "A pale audio cassette with a handwritten label and a contrasting central panel."
-ITEM.longdesc = "A pale audio cassette with a handwritten label and a contrasting central panel. It has the"
-	.. " dry cupboard smell of media kept long after the machine that used it disappeared. Small"
-	.. " scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
+ITEM.longdesc = "It has the dry cupboard smell of media kept long after the machine that used it disappeared."
+	.. " Small scuffs interrupt the surface. The outside provides few clues to distinguish an ordinary"
 	.. " recording from something somebody would cross the Zone to recover."
 
 ITEM.model = "models/cotz/eft/info/recorder_tape_04.mdl"

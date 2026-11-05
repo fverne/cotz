@@ -2,6 +2,9 @@ ITEM.name = "X-12 Exoskeleton"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
+ITEM.longdesc = "The X-12 designation offers little explanation of where it was assembled or who keeps it"
+	.. " running. Wear gathers around the same moving joints as on any other example of this demanding"
+	.. " equipment."
 
 ITEM.width = 2
 ITEM.height = 3

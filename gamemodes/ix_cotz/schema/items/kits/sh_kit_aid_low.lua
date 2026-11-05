@@ -1,5 +1,7 @@
 ITEM.name = "Small Doctors Bag"
 ITEM.description= "A bag containing some medical supplies."
+ITEM.longdesc = "Loose packets and small containers settle unevenly at the bottom. It is the sort of modest"
+	.. " reserve a traveller puts together before risking a long walk."
 ITEM.model = "models/illusion/eftcontainers/docbag.mdl"
 
 ITEM.width = 2

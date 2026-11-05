@@ -1,9 +1,8 @@
 ITEM.name = "Stained Sample Bag"
 ITEM.description = "A flattened translucent sample bag with mottled staining across its surface."
-ITEM.longdesc = "A flattened translucent sample bag with mottled staining across its surface. A stale"
-	.. " storage smell clings to its outer surface. No accompanying record establishes how it was"
-	.. " collected or what has happened to it since. Before it meant anything useful to a"
-	.. " laboratory, somebody would have to sort out that missing history."
+ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
+	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
+	.. " somebody would have to sort out that missing history."
 ITEM.valuableCategory = "research samples"
 
 ITEM.model = "models/cotz/eft/info/plasticbag_labyrinth.mdl"

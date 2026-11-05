@@ -1,5 +1,7 @@
 ITEM.name = "FUBar"
 ITEM.description = "A Functional Utility Bar for heavy demolition work."
+ITEM.longdesc = "Several working surfaces share one heavy head, each scarred from a different sort of abuse. It"
+	.. " is an awkward thing to carry until the moment a lighter tool proves inadequate."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_fubar.mdl"
 ITEM.class = "tfa_nmrih_fubar"
 ITEM.weaponCategory = "primary"

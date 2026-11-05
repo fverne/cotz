@@ -1,6 +1,7 @@
 ITEM.name = "Water Filter"
 ITEM.description = "A filter used for purifying water."
-ITEM.longdesc = "A device for filtrating water. Very handy in the zone, where uncontaminated water is hard to find."
+ITEM.longdesc = "Sediment has marked the casing around the fittings. In a camp supplied from questionable"
+	.. " sources, even an ordinary piece of treatment equipment attracts attention."
 ITEM.model = "models/illusion/eftcontainers/waterfilter.mdl"
 
 ITEM.width = 1

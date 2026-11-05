@@ -1,8 +1,7 @@
 ITEM.name = "Buckwheat Packet"
 ITEM.description = "A crumpled yellow grain packet with a red label and a transparent section near one end."
-ITEM.longdesc = "A crumpled yellow grain packet with a red label and a transparent section near one end."
-	.. " The packaging has picked up the stale smell of a neglected pantry. A cook sorting a"
-	.. " delivery would recognise the familiar shape, even here, far from any well-stocked kitchen."
+ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
+	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
 ITEM.valuableCategory = "provisions"
 
 ITEM.model = "models/cotz/eft/barter/other_grechka.mdl"

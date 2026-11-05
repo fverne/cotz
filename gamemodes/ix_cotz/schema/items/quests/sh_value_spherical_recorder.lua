@@ -1,8 +1,7 @@
 ITEM.name = "Spherical Flight Recorder"
 ITEM.description = "A round orange recorder housing supported within a pale metal protective frame."
-ITEM.longdesc = "A round orange recorder housing supported within a pale metal protective frame. Fine grit"
-	.. " has gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
-	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 
 ITEM.model = "models/lostsignalproject/items/quest/black_box.mdl"

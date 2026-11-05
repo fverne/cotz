@@ -1,6 +1,11 @@
 ITEM.name = "SVU-A"
-ITEM.description= "PLACEHOLDER."
-ITEM.longdesc = "PLACEHOLDER.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 20+1"
+ITEM.description = "A bullpup rifle chambered for 7.62x54mmR."
+ITEM.longdesc = "Placing the action behind the grip gives the weapon an unusual balance and an unmistakable"
+	.. " outline. Its compact arrangement is well suited to the broken interiors where conventional long"
+	.. " rifles become awkward.\n"
+	.. "\n"
+	.. "Ammo: 7.62x54mm\n"
+	.. "Magazine Capacity: 20+1"
 ITEM.model = ("models/weapons/w_snip_svu.mdl")
 ITEM.class = "cw_svu"
 ITEM.weaponCategory = "primary"

@@ -1,5 +1,7 @@
 ITEM.name = "Modern Military Backpack (USA)"
 ITEM.description = "A backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "Imported field gear tends to change hands several times before reaching a camp stall. The"
+	.. " fastenings and webbing remain recognisably different from the local surplus around it."
 ITEM.model = "models/kek1ch/sumka2.mdl"
 
 ITEM.price = 1300

@@ -1,8 +1,7 @@
 ITEM.name = "Haemostatic Dressing Packet"
 ITEM.description = "A small yellow-green medical packet with dark printed markings across its face."
-ITEM.longdesc = "A small yellow-green medical packet with dark printed markings across its face. Its edges"
-	.. " are creased and the wrapper has the slightly shiny finish of handled packaging. It looks"
-	.. " like one of many small supplies that used to disappear into the compartments of a much"
+ITEM.longdesc = "Its edges are creased and the wrapper has the slightly shiny finish of handled packaging. It"
+	.. " looks like one of many small supplies that used to disappear into the compartments of a much"
 	.. " larger medical bag."
 ITEM.valuableCategory = "trauma supplies"
 

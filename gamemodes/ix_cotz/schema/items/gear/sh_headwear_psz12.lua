@@ -1,5 +1,7 @@
 ITEM.name = "PSZ-12"
 ITEM.description = "A high-end helmet with gasmask."
+ITEM.longdesc = "The substantial shell and closely fitted face assembly make the wearer look more like issued"
+	.. " equipment than a traveller. The interior carries the persistent smell of rubber and sweat."
 ITEM.model = "models/shtokerbox/ground_headgear_psz12.mdl"
 
 ITEM.price = 315000
@@ -18,6 +20,28 @@ ITEM.pr = 0.35
 ITEM.fpr = 0
 ITEM.radProt = 0.85
 ITEM.flatRadProt = 0.02
+
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "act_diger_slemnew",
+	worldMaterialSlots = {0},
+	skins = {
+		{id = "act_diger_slemnew", name = "Standard", skin = 0, worldSkin = 0},
+		{id = "act_diger_slemnew2", name = "Alternate 1", skin = 1, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/headwear/act_diger_slemnew2",
+			},
+		},
+		{id = "act_diger_slemnew3", name = "Alternate 2", skin = 2, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/headwear/act_diger_slemnew3",
+			},
+		},
+	},
+	bodygroups = {},
+}
 
 ITEM.exRender = true
 ITEM.iconCam = {

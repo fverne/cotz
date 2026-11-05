@@ -1,7 +1,6 @@
 ITEM.name = "Bare Circuit Boards"
 ITEM.description = "A pair of green bare circuit boards covered in fine copper traces and drilled holes."
-ITEM.longdesc = "A pair of green bare circuit boards covered in fine copper traces and drilled holes. Fine"
-	.. " grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
+ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
 	.. " run short of without noticing until the bench is already covered in unfinished work."
 ITEM.valuableCategory = "electronic components"
 

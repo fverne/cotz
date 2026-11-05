@@ -1,9 +1,8 @@
 ITEM.name = "Slim Composite Briefcase"
 ITEM.description = "A slim dark briefcase with a textured lid and two metal catches."
-ITEM.longdesc = "A slim dark briefcase with a textured lid and two metal catches. Handling marks gather"
-	.. " around the edges while the broad panels retain their familiar industrial shape. It smells"
-	.. " faintly of shut storerooms. Whatever journey brought it here has left the case with more"
-	.. " history than explanation."
+ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
+	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
+	.. " with more history than explanation."
 ITEM.valuableCategory = "transit cases"
 
 ITEM.model = "models/cotz/eft/quest/carbon_case.mdl"

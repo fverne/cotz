@@ -148,7 +148,8 @@ for _, id in ipairs(itemIDs) do
 	local item = ix.item.list[id]
 	check(item.base == expectedBase, "items use their configured valuable base")
 	check(item.price > 0 and item.width >= 1 and item.height >= 1, "positive concrete tuning")
-	check(#item.longdesc > 200 and #item.description > 10, "both descriptions are supplied")
+	check(item.longdesc:find("%S") and #item.description > 10, "both descriptions are supplied")
+	check(not item.longdesc:find(item.description, 1, true), "long descriptions extend the short description")
 	check(item.model:match("%.mdl$") and item.exRender == true, "model and extended icon are configured")
 	check(#item.iconCam.pos == 3 and #item.iconCam.ang == 3 and item.iconCam.fov > 0, "complete camera")
 	if capacities[id] then

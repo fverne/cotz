@@ -25,7 +25,12 @@ function ix.meta.item:GetName()
 end
 
 function ix.meta.item:GetDescription()
-	return self:GetData("description", self.description)
+	local description = self:GetData("description", self.description)
+	if not self.entity and self.longdesc and self.longdesc ~= "" then
+		return description .. "\n\n" .. self.longdesc
+	end
+
+	return description
 end
 
 -- Schema override of the Helix method: keep hideout persistence hooks

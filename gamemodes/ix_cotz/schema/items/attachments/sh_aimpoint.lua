@@ -1,5 +1,7 @@
 ITEM.name = "Aimpoint CompM4"
 ITEM.description = "Swedish reflex sight. Dot type sight."
+ITEM.longdesc = "A broad front lens and simple aiming mark keep the view uncluttered. The casing shows the little"
+	.. " knocks that come from being carried on a working rifle."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

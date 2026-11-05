@@ -1,5 +1,7 @@
 ITEM.name = "Experienced Stalkers Stash"
 ITEM.description= "A rugged stash, contains the belongings of another stalker."
+ITEM.longdesc = "The bundle is arranged with the economy of someone used to travelling light. There is little"
+	.. " ceremony to the way it has been closed."
 ITEM.model = "models/lostsignalproject/items/misc/backpack.mdl"
 
 ITEM.width = 3

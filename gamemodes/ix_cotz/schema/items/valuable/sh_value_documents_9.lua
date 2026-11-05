@@ -1,6 +1,6 @@
 ITEM.name = "Swamps Research Documents"
 ITEM.description = "A file containing research documents about anomalous parts of the swamps."
-ITEM.longdesc = "This file contains some rather extensive research documents regarding parts of the swamps. There are surely someone willing to pay quite a bit for these."
+ITEM.longdesc = "There are surely someone willing to pay quite a bit for these."
 ITEM.model = "models/lostsignalproject/items/quest/document_03.mdl"
 
 ITEM.width = 1

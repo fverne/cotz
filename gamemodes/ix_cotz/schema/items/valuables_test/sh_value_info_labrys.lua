@@ -1,8 +1,7 @@
 ITEM.name = "Labrys Booklet"
 ITEM.description = "A dark printed booklet with a pale sheet protruding behind its cover."
-ITEM.longdesc = "A dark printed booklet with a pale sheet protruding behind its cover. A dry cupboard smell"
-	.. " clings to the paper, and the edges have softened with handling. The printed material"
-	.. " belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
+ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
+	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
 	.. " simply another object waiting for someone who recognises it."
 ITEM.valuableCategory = "printed material"
 

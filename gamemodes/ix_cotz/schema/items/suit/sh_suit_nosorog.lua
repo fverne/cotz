@@ -2,6 +2,8 @@ ITEM.name = "Nosorog"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "A behemoth exoskeleton suit"
+ITEM.longdesc = "The silhouette is broad enough to crowd an ordinary doorway. Every exposed fastening suggests a"
+	.. " workshop with proper tools, spare parts, and very little patience for improvised repairs."
 
 ITEM.width = 2
 ITEM.height = 3

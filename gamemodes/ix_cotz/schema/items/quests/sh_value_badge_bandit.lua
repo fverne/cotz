@@ -1,9 +1,8 @@
 ITEM.name = "Bandit Insignia"
 ITEM.description = "A dark cloth insignia with a pale stylised emblem."
-ITEM.longdesc = "A dark cloth insignia with a pale stylised emblem. The edges show ordinary handling wear"
-	.. " and a little embedded dust. Detached from its original owner, the emblem is a clue with"
-	.. " very little context. An interested collector or records clerk might know where it belongs,"
-	.. " though possession alone proves little."
+ITEM.longdesc = "The edges show ordinary handling wear and a little embedded dust. Detached from its original"
+	.. " owner, the emblem is a clue with very little context. An interested collector or records clerk"
+	.. " might know where it belongs, though possession alone proves little."
 
 ITEM.model = "models/lostsignalproject/items/badges/badge_bandit.mdl"
 

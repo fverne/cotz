@@ -1,7 +1,6 @@
 ITEM.name = "Recovered Specimen Survey Station"
 ITEM.description = "A narrow survey instrument with a sloping control face and a circular assembly on top."
-ITEM.longdesc = "A narrow survey instrument with a sloping control face and a circular assembly on top."
-	.. " Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
 	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "survey equipment"

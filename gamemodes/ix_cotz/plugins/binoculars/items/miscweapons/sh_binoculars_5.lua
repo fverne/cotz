@@ -1,5 +1,7 @@
 ITEM.name = "Vintage Binoculars"
 ITEM.description = "An older pair of binoculars. Features two zoom levels."
+ITEM.longdesc = "The leatherette covering is lifting at the seams, but the hinges still hold their position."
+	.. " Someone has kept the lenses cleaner than the rest of the instrument."
 ITEM.model = "models/weapons/w_binoculars_ger.mdl"
 
 ITEM.height = 1

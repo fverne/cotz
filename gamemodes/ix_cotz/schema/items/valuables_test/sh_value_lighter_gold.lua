@@ -1,9 +1,7 @@
 ITEM.name = "Gold-Plated Lighter"
 ITEM.description = "An open gold-plated lighter."
-ITEM.longdesc = "An open gold-plated lighter with a rectangular body, a hinged lid and the striker assembly"
-	.. " exposed. The finish has lost some of its shine, especially around the edges where it has"
-	.. " been handled most. A faint, stale fuel smell remains, mixed with the familiar scent of old"
-	.. " tobacco."
+ITEM.longdesc = "The finish has lost some of its shine, especially along the edges where it has been handled"
+	.. " most. Dark residue gathers around the exposed striker."
 ITEM.valuableCategory = "decorative valuables"
 
 ITEM.model = "models/cotz/eft/barter/zibbo_gold_0.mdl"

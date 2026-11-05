@@ -1,7 +1,8 @@
 ITEM.name = "Boar Hide"
 ITEM.model ="models/lostsignalproject/items/parts/hide_boar.mdl"
 ITEM.description = "A patch of tough boar skin."
-ITEM.longdesc = "Boars are quite resistant to bullets due to their tough and thick skin."
+ITEM.longdesc = "The coarse fibres are difficult to fold neatly, even after preparation. Hunters who have tried"
+	.. " to bring down the animal need little persuasion about how stubborn the material can be."
 
 ITEM.width = 2
 ITEM.height = 2

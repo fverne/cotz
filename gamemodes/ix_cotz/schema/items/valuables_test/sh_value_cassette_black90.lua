@@ -1,8 +1,7 @@
 ITEM.name = "Black Ninety-Minute Cassette"
 ITEM.description = "A dark audio cassette with a pale inset label and two spool windows."
-ITEM.longdesc = "A dark audio cassette with a pale inset label and two spool windows. The edges are dulled"
-	.. " from handling, and storage dust has settled into the recesses. Its markings offer only a"
-	.. " fragment of context. Any voices, images or records it once held would need suitable"
+ITEM.longdesc = "The edges are dulled from handling, and storage dust has settled into the recesses. Its markings"
+	.. " offer only a fragment of context. Any voices, images or records it once held would need suitable"
 	.. " equipment and a patient specialist to make sense of them."
 ITEM.valuableCategory = "recording equipment"
 

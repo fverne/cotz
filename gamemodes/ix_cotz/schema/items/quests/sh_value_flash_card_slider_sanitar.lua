@@ -1,9 +1,8 @@
 ITEM.name = "Blue-Taped Flash Drive"
 ITEM.description = "A compact USB drive with a strip of blue tape wrapped around its casing."
-ITEM.longdesc = "A compact USB drive with a strip of blue tape wrapped around its casing. The outer surface"
-	.. " carries a fine film of handling marks. No accompanying inventory explains where it came"
-	.. " from or whether its records survived storage. It is the sort of small object that can"
-	.. " leave a technician with a surprisingly long afternoon."
+ITEM.longdesc = "The outer surface carries a fine film of handling marks. No accompanying inventory explains"
+	.. " where it came from or whether its records survived storage. It is the sort of small object that"
+	.. " can leave a technician with a surprisingly long afternoon."
 
 ITEM.model = "models/cotz/eft/info/flash_card_slider_sanitar.mdl"
 

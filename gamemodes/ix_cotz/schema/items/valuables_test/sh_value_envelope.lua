@@ -1,9 +1,8 @@
 ITEM.name = "Plain Envelope"
 ITEM.description = "A pale paper envelope with a folded triangular flap."
-ITEM.longdesc = "A pale paper envelope with a folded triangular flap. A little dust remains along the folds"
-	.. " and edges. It has the stale smell of paper kept somewhere damp and then allowed to dry."
-	.. " The object offers a small, incomplete reminder that somebody once expected to come back"
-	.. " for their things."
+ITEM.longdesc = "A little dust remains along the folds and edges. It has the stale smell of paper kept somewhere"
+	.. " damp and then allowed to dry. The object offers a small, incomplete reminder that somebody once"
+	.. " expected to come back for their things."
 ITEM.valuableCategory = "office records"
 
 ITEM.model = "models/cotz/eft/quest/envelope.mdl"

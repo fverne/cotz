@@ -1,10 +1,9 @@
 ITEM.name = "Recovered Handheld Radio"
 ITEM.description = "A dark handheld radio with front controls, a small display and a projecting aerial"
 	.. " fitting."
-ITEM.longdesc = "A dark handheld radio with front controls, a small display and a projecting aerial"
-	.. " fitting. Handling marks and storage dust sit around its fittings. There is no service"
-	.. " record to explain when it was last checked. Its parts and construction may interest a"
-	.. " specialist even if the original assignment can no longer be reconstructed."
+ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
+	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
+	.. " original assignment can no longer be reconstructed."
 ITEM.valuableCategory = "radio equipment"
 
 ITEM.model = "models/lostsignalproject/items/devices/radio.mdl"

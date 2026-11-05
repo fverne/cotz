@@ -1,5 +1,7 @@
 ITEM.name = "Trijicon RMR"
 ITEM.description = "Tiny holographic sight for pistols. Dot type sight."
+ITEM.longdesc = "The little viewing window leaves scant room for dirt or a careless thumbprint. Its small"
+	.. " footprint appeals to shooters who want an aiming reference without a bulky tube."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

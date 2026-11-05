@@ -1,8 +1,7 @@
 ITEM.name = "Soldering Rosin"
 ITEM.description = "A shallow open tin holding amber-coloured lumps of soldering rosin."
-ITEM.longdesc = "A shallow open tin holding amber-coloured lumps of soldering rosin. Fine grit has settled"
-	.. " into the sheltered edges. It is the sort of small supply a workshop can run short of"
-	.. " without noticing until the bench is already covered in unfinished work."
+ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
+	.. " run short of without noticing until the bench is already covered in unfinished work."
 ITEM.valuableCategory = "electrical supplies"
 
 ITEM.model = "models/lostsignalproject/items/quest/kanifol.mdl"

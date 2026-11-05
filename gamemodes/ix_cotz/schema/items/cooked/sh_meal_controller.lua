@@ -1,6 +1,7 @@
 ITEM.name = "Cooked Controller Meat"
 ITEM.description = "A meal made from controllers, cooked in the zone."
-ITEM.longdesc = "A small stew made from meat of a Controller. Even cooked, the meat still carries powerful psychic energies."
+ITEM.longdesc = "Even after a long time over the fire, it carries a disquieting reminder of the creature's"
+	.. " psychic influence. The smell alone does little to encourage a second helping."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
 ITEM.price = 2300

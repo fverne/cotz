@@ -1,9 +1,8 @@
 ITEM.name = "Key with Souvenir Fob"
 ITEM.description = "A small metal key attached to a large decorative fabric fob."
-ITEM.longdesc = "A small metal key attached to a large decorative fabric fob. The small surfaces carry the"
-	.. " dull polish of repeated handling. A little dust remains in the sheltered edges. It is an"
-	.. " unremarkable possession until someone notices it is missing, or recognises whose pocket it"
-	.. " used to live in."
+ITEM.longdesc = "The small surfaces carry the dull polish of repeated handling. A little dust remains in the"
+	.. " sheltered edges. It is an unremarkable possession until someone notices it is missing, or"
+	.. " recognises whose pocket it used to live in."
 ITEM.valuableCategory = "personal effects"
 
 ITEM.model = "models/cotz/eft/barter/key_danexert.mdl"

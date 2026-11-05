@@ -1,9 +1,7 @@
 ITEM.name = "Flathead Screwdriver"
 ITEM.description = "A flathead screwdriver with a red handle."
-ITEM.longdesc = "A flathead screwdriver with a red handle and a long metal shaft. The handle has the dull,"
-	.. " grubby finish of a tool that was rarely put away with clean hands. There is nothing"
-	.. " distinctive about it, which somehow makes it easier to imagine its former owner's"
-	.. " workbench."
+ITEM.longdesc = "The handle has the dull, grubby finish of a tool rarely put away with clean hands. There is"
+	.. " nothing distinctive about it until a repair leaves someone needing exactly this tip."
 ITEM.valuableCategory = "drivers wrenches"
 
 ITEM.model = "models/illusion/eftcontainers/screwdriver.mdl"

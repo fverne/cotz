@@ -1,5 +1,7 @@
 ITEM.name = "Eotech holographic sight"
 ITEM.description = "American holographic sight. Circle cross type sight."
+ITEM.longdesc = "A protective hood surrounds the viewing window. The reticle is meant to be picked up quickly"
+	.. " while the shooter keeps the surrounding scene in view."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

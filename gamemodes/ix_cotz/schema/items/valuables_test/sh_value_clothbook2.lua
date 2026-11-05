@@ -1,8 +1,7 @@
 ITEM.name = "Orange Sewing Handbook"
 ITEM.description = "An orange illustrated handbook with small printed text across the cover."
-ITEM.longdesc = "An orange illustrated handbook with small printed text across the cover. A dry cupboard"
-	.. " smell clings to the paper, and the edges have softened with handling. The printed material"
-	.. " belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
+ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
+	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
 	.. " simply another object waiting for someone who recognises it."
 ITEM.valuableCategory = "technical records"
 

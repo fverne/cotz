@@ -1,5 +1,7 @@
 ITEM.name = "Rookie Reward Large"
-ITEM.description= ""
+ITEM.description = "A large reward supply package."
+ITEM.longdesc = "A full bundle set aside as payment for completed work. Familiar camp supplies have been gathered"
+	.. " with a little more confidence than a newcomer's first purchases."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

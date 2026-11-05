@@ -1,7 +1,6 @@
 ITEM.name = "Improvised Electronic Tool"
 ITEM.description = "An exposed electronic assembly with two long aerials and tape around its circuit board."
-ITEM.longdesc = "An exposed electronic assembly with two long aerials and tape around its circuit board."
-	.. " Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
 	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 

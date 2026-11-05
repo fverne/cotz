@@ -1,5 +1,7 @@
 ITEM.name = "Thick Insulating Fabrics"
 ITEM.description = "Thick high quality insulating fabrics, made to keep out heat and electricity."
+ITEM.longdesc = "Several layers are stitched closely together, leaving a substantial bundle in the hand. Small"
+	.. " repairs along the edges show where previous fittings were unpicked."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/retardant8.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

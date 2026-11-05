@@ -1,5 +1,7 @@
 ITEM.name = "Emergency Supplies Kit"
 ITEM.description= "A big kit with emergency supplies."
+ITEM.longdesc = "Several treatment supplies are packed beneath the broad cover, including medkits, a bandage, and"
+	.. " psychic recovery medication. The crowded arrangement rewards being sorted before an emergency."
 ITEM.model = "models/illusion/eftcontainers/grizzly.mdl"
 
 ITEM.width = 3

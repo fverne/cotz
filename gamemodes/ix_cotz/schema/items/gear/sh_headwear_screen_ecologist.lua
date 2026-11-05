@@ -1,5 +1,7 @@
 ITEM.name = "Ecologist Screen Helmet"
 ITEM.description = "A screen helmet with closed respiratory system."
+ITEM.longdesc = "Fingerprints show clearly across the viewing panel after a day of handling instruments."
+	.. " Researchers tend to clean it with more care than the rest of their field equipment."
 ITEM.model = "models/shtokerbox/ground_seva_visor.mdl"
 
 ITEM.price = 100000
@@ -24,6 +26,23 @@ ITEM.pr = 0.45
 ITEM.fpr = 0
 ITEM.radProt = 0.98
 ITEM.flatRadProt = 0.02
+
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "seva_csky",
+	worldMaterialSlots = {},
+	worldNotice = "Some worn finishes have no matching ground-model surface.",
+	skins = {
+		{id = "seva_lone", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "seva_duty", name = "Duty", skin = 1, worldSkin = 0},
+		{id = "seva_midn", name = "Midnight", skin = 2, worldSkin = 0},
+		{id = "seva_csky", name = "Clear Sky", skin = 3, worldSkin = 0},
+		{id = "seva_free", name = "Freedom", skin = 4, worldSkin = 0},
+	},
+	bodygroups = {},
+}
 
 ITEM.exRender = true
 ITEM.iconCam = {

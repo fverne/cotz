@@ -1,8 +1,7 @@
 ITEM.name = "Chlorine Powder"
 ITEM.description = "A crumpled packet of chlorine powder."
-ITEM.longdesc = "A crumpled packet of chlorine powder with a blue printed panel. The folds have worn pale"
-	.. " lines through the lettering, but the contents are still plainly identified. Fine dust"
-	.. " clings to the seams and gives the wrapper a dry, unpleasant feel."
+ITEM.longdesc = "The folds have worn pale lines through the blue printed panel, but the contents are still"
+	.. " plainly identified. Fine dust clings around the seams."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/cotz/eft/barter/household_chlorine.mdl"

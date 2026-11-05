@@ -27,7 +27,12 @@ ITEM.items = {
 
 function ITEM:GetDescription()
 	if ix.taskRewards and ix.taskRewards.IsTaskKit(self.uniqueID) then
-		return self.description .. "\nRedeem at an NPC's task supplies menu for visible contents. No upgrade fee."
+		local description = self.description
+		if not self.entity and self.longdesc and self.longdesc ~= "" then
+			description = description .. "\n\n" .. self.longdesc
+		end
+
+		return description .. "\nRedeem at an NPC's task supplies menu for visible contents. No upgrade fee."
 	end
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
 	local quantdesc = ""

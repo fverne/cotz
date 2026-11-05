@@ -1,7 +1,6 @@
 ITEM.name = "Cylindrical Battery Assembly"
 ITEM.description = "A paired cylindrical battery assembly held beneath a labelled rectangular top plate."
-ITEM.longdesc = "A paired cylindrical battery assembly held beneath a labelled rectangular top plate. Fine"
-	.. " grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
+ITEM.longdesc = "Fine grit has settled into the sheltered edges. It is the sort of small supply a workshop can"
 	.. " run short of without noticing until the bench is already covered in unfinished work."
 ITEM.valuableCategory = "portable power"
 

@@ -1,5 +1,7 @@
 ITEM.name = "Scouting Binoculars"
 ITEM.description = "A modern pair of binoculars. Features multiple zoom levels."
+ITEM.longdesc = "A broad focus wheel is easy to find without taking your eyes off the ridge ahead. Distant"
+	.. " movement is often the only warning a patient observer gets in the Zone."
 ITEM.model = "models/weapons/w_binoculars_usa.mdl"
 
 ITEM.height = 1

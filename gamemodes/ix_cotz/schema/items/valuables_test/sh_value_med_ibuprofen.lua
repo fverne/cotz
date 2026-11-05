@@ -1,9 +1,7 @@
 ITEM.name = "Ibuprofen Bottle"
 ITEM.description = "A small white medicine bottle with an orange block on the label and a broad screw cap."
-ITEM.longdesc = "A small white medicine bottle with an orange block on the label and a broad screw cap. The"
-	.. " larger lettering remains easier to read than the fine print beneath it. Grime has worked"
-	.. " into the cap ridges, leaving the bottle with the familiar look of neglected pharmacy"
-	.. " stock."
+ITEM.longdesc = "The larger lettering remains easier to read than the fine print beneath it. Grime has worked"
+	.. " into the cap ridges, leaving the bottle with the familiar look of neglected pharmacy stock."
 ITEM.valuableCategory = "clinical supplies"
 
 ITEM.model = "models/cotz/eft/barter/medical_ibuprofen.mdl"

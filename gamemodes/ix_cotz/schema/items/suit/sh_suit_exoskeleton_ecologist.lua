@@ -2,6 +2,8 @@ ITEM.name = "Scientific Exoskeleton"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
+ITEM.longdesc = "Field research markings look unusually small against the bulk of the frame. In a bunker corridor"
+	.. " it seems excessive; beside a ruined laboratory entrance it makes rather more sense."
 
 ITEM.width = 2
 ITEM.height = 3

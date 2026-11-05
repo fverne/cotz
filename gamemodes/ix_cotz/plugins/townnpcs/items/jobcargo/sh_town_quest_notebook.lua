@@ -1,5 +1,8 @@
 ITEM.name = "Tied Leather Journal"
 ITEM.description = "A thick brown journal held together by a narrow tie around its cover."
+ITEM.longdesc = "The edges have softened with handling, and there is a faint smell of old paper about it. It"
+	.. " feels like something that once had a habitual place among one person's belongings. Without its"
+	.. " owner, even an ordinary object acquires an uncomfortable weight of unanswered questions."
 
 ITEM.model = "models/cotz/eft/barter/info_diary_friend_mechanic.mdl"
 

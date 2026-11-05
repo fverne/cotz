@@ -1,8 +1,7 @@
 ITEM.name = "Bar of Soap"
 ITEM.description = "An unwrapped bar of pale soap."
-ITEM.longdesc = "An unwrapped bar of pale soap with rounded edges and a slightly uneven surface. It has"
-	.. " picked up a faint smell of damp cloth, though a trace of its original perfume remains. A"
-	.. " very ordinary thing to find yourself pleased about finding."
+ITEM.longdesc = "A faint smell of damp cloth has settled over the remains of its original perfume. Small comforts"
+	.. " like this tend to seem more valuable after a week away from a proper washroom."
 ITEM.valuableCategory = "cleaning supplies"
 
 ITEM.model = "models/illusion/eftcontainers/soap.mdl"

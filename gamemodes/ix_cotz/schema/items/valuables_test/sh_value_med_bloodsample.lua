@@ -1,9 +1,8 @@
 ITEM.name = "Laboratory Blood Sample"
 ITEM.description = "A red sample tube with a pale cap."
-ITEM.longdesc = "A red sample tube with a pale cap. There is little visible information to distinguish it"
-	.. " from any number of other tubes that once passed through a laboratory. Its significance"
-	.. " belongs to a set of records that has not travelled with it, leaving a specialist with"
-	.. " rather more questions than answers."
+ITEM.longdesc = "There is little visible information to distinguish it from any number of other tubes that once"
+	.. " passed through a laboratory. Its significance belongs to a set of records that has not travelled"
+	.. " with it, leaving a specialist with rather more questions than answers."
 ITEM.valuableCategory = "research samples"
 
 ITEM.model = "models/illusion/eftcontainers/bloodsample.mdl"

@@ -1,6 +1,7 @@
 ITEM.name = "Controller Meat"
 ITEM.description = "Uncooked meat from a Controller."
-ITEM.longdesc = "Meat from a controller. Incredibly dangerous to eat raw, as the latent psychic powers in the flesh will still affect the mind of the consumer."
+ITEM.longdesc = "Incredibly dangerous to eat raw, as the latent psychic powers in the flesh will still affect the"
+	.. " mind of the consumer."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
 ITEM.price = 1890

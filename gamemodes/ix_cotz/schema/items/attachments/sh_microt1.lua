@@ -1,5 +1,7 @@
 ITEM.name = "Aimpoint Micro T1"
 ITEM.description = "Swedish reflex sight. Tiny and easy to use. Dot type sight."
+ITEM.longdesc = "The short housing takes up little room above the receiver. A stalker fitting several accessories"
+	.. " to one weapon will appreciate anything that does not crowd the remaining space."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

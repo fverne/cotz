@@ -1,5 +1,7 @@
 ITEM.name = "Modern Military Backpack (Russian)"
 ITEM.description = "A backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The fabric has the stiff feel of gear made to spend years in a storeroom before being issued."
+	.. " Webbing loops offer plenty of places for a previous owner to leave their own adjustments."
 ITEM.model = "models/kek1ch/sumka3.mdl"
 
 ITEM.price = 1100

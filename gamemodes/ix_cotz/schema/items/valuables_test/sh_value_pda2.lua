@@ -1,8 +1,7 @@
 ITEM.name = "Recovered Grey PDA"
 ITEM.description = "A grey handheld computer with a dark screen and buttons above the display."
-ITEM.longdesc = "A grey handheld computer with a dark screen and buttons above the display. Handling marks"
-	.. " and storage dust sit around its fittings. There is no service record to explain when it"
-	.. " was last checked. Its parts and construction may interest a specialist even if the"
+ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
+	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
 	.. " original assignment can no longer be reconstructed."
 ITEM.valuableCategory = "portable computers"
 

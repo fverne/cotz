@@ -1,8 +1,7 @@
 ITEM.name = "Numbered Data Module 0052"
 ITEM.description = "A flat dark electronic module with a printed number and a ring-shaped symbol."
-ITEM.longdesc = "A flat dark electronic module with a printed number and a ring-shaped symbol. Dust has"
-	.. " settled in the small recesses around the connector. The casing says very little about what"
-	.. " might remain inside. Its value to a specialist begins with questions that cannot be"
+ITEM.longdesc = "Dust has settled in the small recesses around the connector. The casing says very little about"
+	.. " what might remain inside. Its value to a specialist begins with questions that cannot be"
 	.. " answered by turning it over in the hand."
 
 ITEM.model = "models/cotz/eft/quest/electroniccase_0052.mdl"

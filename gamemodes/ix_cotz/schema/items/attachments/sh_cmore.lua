@@ -1,5 +1,7 @@
 ITEM.name = "CMore Railway"
 ITEM.description = "American reflex sight. Delta type sight."
+ITEM.longdesc = "The exposed lens gives an open view around the aiming mark, but leaves little between the glass"
+	.. " and a careless impact. A cloth wrap is a common precaution during travel."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

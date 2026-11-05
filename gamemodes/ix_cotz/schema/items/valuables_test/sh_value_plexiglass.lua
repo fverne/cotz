@@ -1,8 +1,7 @@
 ITEM.name = "Plexiglass Sheet"
 ITEM.description = "A thick sheet of plexiglass."
-ITEM.longdesc = "A thick sheet of plexiglass with broad, flat faces and blunt edges. Handling marks collect"
-	.. " across the surface, and the edges feel rougher than the centre. There is nothing written on"
-	.. " it to explain whether it was spare stock or simply the last piece left behind."
+ITEM.longdesc = "Handling marks collect across the flat faces, and the edges feel rougher than the centre."
+	.. " Nothing written on it explains which opening or machine it once belonged to."
 ITEM.valuableCategory = "workshop consumables"
 
 ITEM.model = "models/illusion/eftcontainers/plexiglass.mdl"

@@ -65,21 +65,29 @@ if (SERVER) then
 	util.AddNetworkString("ixPartWear")
 	util.AddNetworkString("ixPartRemove")
 	util.AddNetworkString("ixPartReset")
+	util.AddNetworkString("cotz/gear-appearance/pac-ready")
 
 	function meta:AddPart(uniqueID, item)
 		if (!pac) then return end
 
 		local curParts = self:GetParts()
 
-		-- wear the parts.
+		local descriptor = true
+		if item and ix.gearAppearance and ix.gearAppearance.IsSupported(item) then
+			descriptor = {itemID = item:GetID(), appearance = ix.gearAppearance.Normalize(item)}
+		end
+		curParts[uniqueID] = descriptor
+		self:SetNetVar("parts", curParts)
+
 		net.Start("ixPartWear")
 			net.WriteEntity(self)
 			net.WriteString(uniqueID)
+			if ix.gearAppearance then
+				ix.gearAppearance.WriteDescriptor(descriptor)
+			else
+				net.WriteBool(false)
+			end
 		net.Broadcast()
-
-		curParts[uniqueID] = true
-
-		self:SetNetVar("parts", curParts)
 	end
 
 	function meta:RemovePart(uniqueID)
@@ -108,6 +116,25 @@ if (SERVER) then
 
 		self:SetNetVar("parts", {})
 	end
+
+	-- A client can finish loading after the original wear broadcasts were sent.
+	net.Receive("cotz/gear-appearance/pac-ready", function(_, client)
+		if CurTime() < (client.cotzPACNextSync or 0) then return end
+		client.cotzPACNextSync = CurTime() + 5
+		for _, wearer in player.Iterator() do
+			for uniqueID, descriptor in pairs(wearer:GetParts() or {}) do
+				net.Start("ixPartWear")
+				net.WriteEntity(wearer)
+				net.WriteString(uniqueID)
+				if ix.gearAppearance then
+					ix.gearAppearance.WriteDescriptor(descriptor)
+				else
+					net.WriteBool(false)
+				end
+				net.Send(client)
+			end
+		end
+	end)
 
 	function PLUGIN:PlayerLoadedCharacter(client, curChar, prevChar)
 		-- Reset the characters parts.
@@ -164,39 +191,60 @@ if (SERVER) then
 		end
 	end
 else
-	local function AttachPart(client, uniqueID)
-		local itemTable = ix.item.list[uniqueID]
-		local pacData = ix.pac.list[uniqueID]
+	local attached = setmetatable({}, {__mode = "k"})
+	local syncRetries, syncQueued = 0, false
 
-		if (pacData) then
-			if (itemTable and itemTable.pacAdjust) then
-				pacData = table.Copy(pacData)
-				pacData = itemTable:pacAdjust(pacData, client)
-			end
+	local function requestSync()
+		net.Start("cotz/gear-appearance/pac-ready")
+		net.SendToServer()
+	end
 
-			if (isfunction(client.AttachPACPart)) then
-				client:AttachPACPart(pacData)
-			else
-				pac.SetupENT(client)
-
-				timer.Simple(0.1, function()
-					if (IsValid(client) and isfunction(client.AttachPACPart)) then
-						client:AttachPACPart(pacData)
-					end
-				end)
-			end
-		end
+	local function retrySync()
+		if syncQueued or syncRetries >= 3 then return end
+		syncQueued = true
+		syncRetries = syncRetries + 1
+		-- Entity creation may lag behind a reliable wear message during a late join.
+		timer.Simple(5.1, function()
+			syncQueued = false
+			if pac and IsValid(pac.LocalPlayer) then requestSync() end
+		end)
 	end
 
 	local function RemovePart(client, uniqueID)
-		local pacData = ix.pac.list[uniqueID]
+		local parts = attached[client]
+		local entry = parts and parts[uniqueID]
+		local tree = entry and entry.tree or ix.pac.list[uniqueID]
+		if parts then parts[uniqueID] = nil end
+		if tree and isfunction(client.RemovePACPart) then client:RemovePACPart(tree) end
+	end
 
-		if (pacData) then
-			if (isfunction(client.RemovePACPart)) then
-				client:RemovePACPart(pacData)
-			else
-				pac.SetupENT(client)
-			end
+	local function AttachPart(client, uniqueID, descriptor)
+		if not IsValid(client) then return end
+		local itemTable = ix.item.list[uniqueID]
+		local pacData = ix.pac.list[uniqueID]
+		if not pacData then return end
+		attached[client] = attached[client] or {}
+		local previous = attached[client][uniqueID]
+		if previous then RemovePart(client, uniqueID) end
+		if itemTable and itemTable.pacAdjust then
+			pacData = itemTable:pacAdjust(table.Copy(pacData), client)
+		end
+		if type(descriptor) == "table" and itemTable and ix.gearAppearance then
+			local key = client:EntIndex() .. ":" .. descriptor.itemID
+			pacData = ix.gearAppearance.BuildPAC(itemTable, descriptor.appearance, key, pacData)
+		end
+		local entry = {tree = pacData}
+		attached[client][uniqueID] = entry
+		if isfunction(client.AttachPACPart) then
+			client:AttachPACPart(pacData)
+		else
+			pac.SetupENT(client)
+			timer.Simple(0.1, function()
+				if IsValid(client) and attached[client] and attached[client][uniqueID] == entry
+					and isfunction(client.AttachPACPart) then
+					client:AttachPACPart(pacData)
+				end
+			end)
 		end
 	end
 
@@ -213,12 +261,13 @@ else
 				if (character) then
 					local parts = v:GetParts()
 
-					for k2, _ in pairs(parts) do
-						AttachPart(v, k2)
+					for k2, descriptor in pairs(parts) do
+						AttachPart(v, k2, descriptor)
 					end
 				end
 			end
 
+			requestSync()
 			hook.Remove("Think", "ix_pacupdate")
 		end
 	end)
@@ -228,12 +277,16 @@ else
 
 		local wearer = net.ReadEntity()
 		local uid = net.ReadString()
+		local descriptor = true
+		if ix.gearAppearance then descriptor = ix.gearAppearance.ReadDescriptor() end
+		if not descriptor then return end
+		if not IsValid(wearer) then retrySync() return end
 
 		if (!wearer.pac_owner) then
 			pac.SetupENT(wearer)
 		end
 
-		AttachPart(wearer, uid)
+		AttachPart(wearer, uid, descriptor)
 	end)
 
 	net.Receive("ixPartRemove", function(length)
@@ -241,6 +294,7 @@ else
 
 		local wearer = net.ReadEntity()
 		local uid = net.ReadString()
+		if not IsValid(wearer) then return end
 
 		if (!wearer.pac_owner) then
 			pac.SetupENT(wearer)
@@ -254,6 +308,7 @@ else
 
 		local wearer = net.ReadEntity()
 		local uidList = net.ReadTable()
+		if not IsValid(wearer) then return end
 
 		if (!wearer.pac_owner) then
 			pac.SetupENT(wearer)

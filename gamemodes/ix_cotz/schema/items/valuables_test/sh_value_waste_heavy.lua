@@ -1,8 +1,7 @@
 ITEM.name = "Heavy Equipment Debris"
 ITEM.description = "A heap of battered equipment panels, webbing and loose protective pieces."
-ITEM.longdesc = "A heap of battered equipment panels, webbing and loose protective pieces. A stale storage"
-	.. " smell clings to its outer surface. No accompanying record establishes how it was collected"
-	.. " or what has happened to it since. Before it meant anything useful to a laboratory,"
+ITEM.longdesc = "A stale storage smell clings to its outer surface. No accompanying record establishes how it was"
+	.. " collected or what has happened to it since. Before it meant anything useful to a laboratory,"
 	.. " somebody would have to sort out that missing history."
 ITEM.valuableCategory = "repair parts"
 

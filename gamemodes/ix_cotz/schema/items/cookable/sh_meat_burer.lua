@@ -1,6 +1,7 @@
 ITEM.name = "Burer Meat"
 ITEM.description = "Uncooked meat from a Burer."
-ITEM.longdesc = "Meat from a Burer. Most STALKERs keep away from this meat, but it's extremely filling. Some STALKERs say it deterioates the mind."
+ITEM.longdesc = "Most stalkers keep their distance from this particular meal, however filling it might be."
+	.. " Stories about what it does to the mind travel faster than recipes."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
 ITEM.price = 960

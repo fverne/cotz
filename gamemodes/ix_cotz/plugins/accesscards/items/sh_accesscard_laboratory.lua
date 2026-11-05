@@ -1,6 +1,7 @@
 ITEM.name = "Access Card (Laboratory)"
 ITEM.description = "A small plastic card."
-ITEM.longdesc = "This small, slim card is meant to open a variety of doors."
+ITEM.longdesc = "The access markings belong to a laboratory security system. Scratches on the surface suggest it"
+	.. " has spent more time in pockets than on a visitor's lanyard."
 ITEM.model = "models/lostsignalproject/items/quest/keycard.mdl"
 
 ITEM.width = 1

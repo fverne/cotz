@@ -1,9 +1,7 @@
 ITEM.name = "Industrial Materials Handbook"
 ITEM.description = "A red technical handbook with a circuit-themed cover."
-ITEM.longdesc = "A red technical handbook with a circuit-themed illustration and a bold title on its cover."
-	.. " The edges have the worn finish of a book that spent more time on workbenches than in a"
-	.. " library. It smells of old paper and dry cupboards, with a faint trace of something oily"
-	.. " underneath."
+ITEM.longdesc = "The edges have the worn finish of a book that spent more time on workbenches than in a library."
+	.. " It smells of old paper and dry cupboards, with a faint trace of something oily underneath."
 ITEM.valuableCategory = "technical records"
 
 ITEM.model = "models/cotz/eft/barter/info_book_ematerials.mdl"

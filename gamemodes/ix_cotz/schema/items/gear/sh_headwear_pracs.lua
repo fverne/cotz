@@ -1,5 +1,7 @@
 ITEM.name = "PRACS"
 ITEM.description = "A high-end helmet with gasmask"
+ITEM.longdesc = "Closely fitted components leave little exposed around the face. Cleaning the joins and keeping"
+	.. " the headgear comfortable becomes part of the routine before every long patrol."
 ITEM.model = "models/shtokerbox/ground_headgear_pracs.mdl"
 
 ITEM.price = 250000
@@ -18,6 +20,36 @@ ITEM.pr = 0.32
 ITEM.fpr = 0
 ITEM.radProt = 0.80
 ITEM.flatRadProt = 0.02
+
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "skat_loner",
+	worldMaterialSlots = {},
+	skins = {
+		{id = "skat_loner", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "skat_loner2", name = "Loner 2", skin = 1, worldSkin = 1},
+		{id = "skat_bandit", name = "Bandit", skin = 2, worldSkin = 2},
+		{id = "skat_bandit2", name = "Bandit 2", skin = 3, worldSkin = 3},
+		{id = "skat_black", name = "Black", skin = 4, worldSkin = 4},
+		{id = "skat_duty", name = "Duty", skin = 5, worldSkin = 5},
+		{id = "skat_duty2", name = "Duty 2", skin = 6, worldSkin = 6},
+		{id = "skat_duty3", name = "Duty 3", skin = 7, worldSkin = 7},
+		{id = "skat_duty4", name = "Duty 4", skin = 8, worldSkin = 8},
+		{id = "skat_freedom", name = "Freedom", skin = 9, worldSkin = 9},
+		{id = "skat_freedom2", name = "Freedom 2", skin = 10, worldSkin = 10},
+		{id = "skat_merc", name = "Mercenary", skin = 11, worldSkin = 11},
+		{id = "skat_merc2", name = "Mercenary 2", skin = 12, worldSkin = 12},
+		{id = "skat_merc3", name = "Mercenary 3", skin = 13, worldSkin = 13},
+		{id = "skat_merc4", name = "Mercenary 4", skin = 14, worldSkin = 14},
+		{id = "skat_military", name = "Military", skin = 15, worldSkin = 15},
+		{id = "skat_military2", name = "Military 2", skin = 16, worldSkin = 16},
+		{id = "skat_monolith", name = "Monolith", skin = 17, worldSkin = 17},
+		{id = "skat_scientific", name = "Scientific", skin = 18, worldSkin = 18},
+	},
+	bodygroups = {},
+}
 
 ITEM.exRender = true
 ITEM.iconCam = {

@@ -1,5 +1,8 @@
 ITEM.name = "RF Receiver"
 ITEM.description = "A device for detecting radio frequencies. Often used to find emitters of various nature. Has special use in the zone, as radioactive frequencies often take anomalous form."
+ITEM.longdesc = "The tuning controls bear the marks of repeated adjustment in the field. Following a signal"
+	.. " through broken buildings takes patience; a strong reading does not explain who left the source"
+	.. " behind."
 ITEM.model = "models/lostsignalproject/items/devices/receiver2.mdl"
 ITEM.price = 0
 ITEM.flag = "A"
@@ -91,7 +94,7 @@ ITEM.functions.zCheck = {
 function ITEM:GetDescription()
 	if(self.entity) then return self.description end
 
-	local desc = self.description.."\n\n"
+	local desc = self.description .. "\n\n" .. self.longdesc .. "\n\n"
 	
 	desc = desc.."Points needing measurement:\n"
 	for k,v in pairs(self:GetData("points",{})) do

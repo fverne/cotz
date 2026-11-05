@@ -1,5 +1,7 @@
 ITEM.name = "Explorer Binoculars"
 ITEM.description = "An older pair of binoculars."
+ITEM.longdesc = "The finish has worn away where fingers grip the barrels. There is still enough clarity in the"
+	.. " glass to study a route from cover before committing to open ground."
 ITEM.model = "models/weapons/w_binoculars_uk.mdl"
 
 ITEM.height = 1

@@ -1,7 +1,6 @@
 ITEM.name = "Wooden Mantel Clock"
 ITEM.description = "A carved wooden clock framed by a double-headed eagle."
-ITEM.longdesc = "A carved wooden clock framed by a large double-headed eagle and decorative wings. Dust"
-	.. " rests in the deeper cuts, while the raised edges have a smoother, more handled finish."
+ITEM.longdesc = "Dust rests in the deeper cuts, while the raised edges have a smoother, more handled finish."
 	.. " Somebody once chose to give the time a very grand setting, even if the room around it was"
 	.. " nothing special."
 ITEM.valuableCategory = "decorative valuables"

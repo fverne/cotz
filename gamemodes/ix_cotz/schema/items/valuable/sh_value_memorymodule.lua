@@ -1,6 +1,8 @@
 ITEM.name = "Memory Module"
 ITEM.description = "A high tech memory module."
-ITEM.longdesc = "A high tech memory module used in scientific and military simulation applications."
+ITEM.longdesc = "Built for scientific and military simulation equipment, it is more likely to interest a"
+	.. " specialist than a casual scavenger. Its connectors deserve gentler handling than its casing"
+	.. " usually receives."
 ITEM.model = "models/lostsignalproject/items/quest/memory_module.mdl"
 
 ITEM.width = 2

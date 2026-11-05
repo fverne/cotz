@@ -1,9 +1,8 @@
 ITEM.name = "Addressed Parcel"
 ITEM.description = "A taped cardboard parcel with a large address label on its upper face."
-ITEM.longdesc = "A taped cardboard parcel with a large address label on its upper face. Handling marks"
-	.. " gather around the edges while the broad panels retain their familiar industrial shape. It"
-	.. " smells faintly of shut storerooms. Whatever journey brought it here has left the case with"
-	.. " more history than explanation."
+ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
+	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
+	.. " with more history than explanation."
 ITEM.valuableCategory = "transit cases"
 
 ITEM.model = "models/cotz/eft/quest/parcel.mdl"

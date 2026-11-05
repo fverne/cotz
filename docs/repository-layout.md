@@ -48,6 +48,11 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `hideouts/sv_*.lua` and `sh_*.lua` | Interior lifecycle, access, individual containers, squad shop, economic adapter and saved travel. |
 | Other plugin `items/`, `entities/`, `derma/`, `libs/` | Files owned by the corresponding gameplay feature. |
 
+`gearcustomization/` owns the vendor appearance service, shared appearance API, menu
+and icon rendering. Concrete `gear` and `newbags` items declare approved variants.
+The standalone schema PAC integration carries equipped instance descriptors; see the
+[gear customization guide](../gamemodes/ix_cotz/plugins/gearcustomization/README.md).
+
 Schema libraries formerly named after their authors now have functional names:
 `schema/libs/sh_gameplay.lua` contains general gameplay helpers and commands, and
 `schema/libs/sh_util.lua` contains shared utility overrides and turn-in valuation.
@@ -72,6 +77,13 @@ Item folders such as `newammo`, `newbags`, and `newweapons` retain their names b
 select `base_newammo`, `base_newbags`, and `base_newweapons`. Item files retain their names and
 base relationships. Entity and weapon framework paths likewise remain stable. New organizational
 folders inside `items/` cannot be assumed to load recursively.
+
+Each concrete item declares `ITEM.longdesc` beside its regular description. The regular description
+identifies the item; the long description adds background, sensory detail, or context without copying
+that identification. Keep item-specific prose in the definition, and preserve live readings, saved
+descriptions, and instructions when extending a custom `GetDescription()`. Inventory descriptions
+include the extra prose; world descriptions retain their existing shorter presentation.
+Check coverage and custom description rendering with `luatex --luaonly tests/item_descriptions_spec.lua`.
 
 The 378 implemented items listed in the combined valuables and supply/job workbook are split across
 `schema/items/valuables_test/`, `schema/items/valuable/`, and `schema/items/quests/`.

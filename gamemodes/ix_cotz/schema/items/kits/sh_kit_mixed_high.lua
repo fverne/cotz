@@ -1,5 +1,7 @@
 ITEM.name = "Hiking Backpack"
 ITEM.description= "The high quality of this backpack speaks about the wealth of its previous owner. The fine worksmanship did not protect it from the harsh conditions of the zone however, and it has almost completely disintegrated."
+ITEM.longdesc = "The only sensible task left for its fabric is holding the present contents together until they"
+	.. " can be unpacked. Expensive stitching has frayed just as thoroughly as the cheap kind."
 ITEM.model = "models/kek1ch/sumka4.mdl"
 
 ITEM.width = 2

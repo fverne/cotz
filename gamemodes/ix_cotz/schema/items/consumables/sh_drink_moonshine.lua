@@ -1,6 +1,7 @@
 ITEM.name = "Moonshine, 200ml"
 ITEM.description = "An old hip flask."
-ITEM.longdesc = "An extremely strong alcohol, made in the zone. Some STALKERs use it as radiation removal in a pinch. It's contained within an old hip flask, which smells of old leather." 
+ITEM.longdesc = "Distilled in the Zone and fiercely strong, it is sometimes carried as a last resort against"
+	.. " radiation. Old leather around the stopper adds its own persistent smell to the spirit."
 ITEM.model = "models/lostsignalproject/items/consumable/flask3.mdl"
 
 ITEM.price = 160

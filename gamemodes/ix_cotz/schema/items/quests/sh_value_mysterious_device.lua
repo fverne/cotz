@@ -1,7 +1,6 @@
 ITEM.name = "Unidentified Instrument Assembly"
 ITEM.description = "An exposed instrument assembly with upright fittings, cabling and a metal base plate."
-ITEM.longdesc = "An exposed instrument assembly with upright fittings, cabling and a metal base plate. Fine"
-	.. " grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
 	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 

@@ -1,8 +1,7 @@
 ITEM.name = "Boxed Loose Tea"
 ITEM.description = "A small red-and-white tea carton with printed panels and a folded top."
-ITEM.longdesc = "A small red-and-white tea carton with printed panels and a folded top. The packaging has"
-	.. " picked up the stale smell of a neglected pantry. A cook sorting a delivery would recognise"
-	.. " the familiar shape, even here, far from any well-stocked kitchen."
+ITEM.longdesc = "The packaging has picked up the stale smell of a neglected pantry. A cook sorting a delivery"
+	.. " would recognise the familiar shape, even here, far from any well-stocked kitchen."
 ITEM.valuableCategory = "provisions"
 
 ITEM.model = "models/cotz/eft/barter/other_tea.mdl"

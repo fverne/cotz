@@ -1,5 +1,7 @@
 ITEM.name = "King Arms MR"
 ITEM.description = "Taiwanese reflex sight. T type sight."
+ITEM.longdesc = "The compact frame leaves most of the view open around the aiming window. Its adjustment screws"
+	.. " carry the marks of several owners trying to find their preferred zero."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

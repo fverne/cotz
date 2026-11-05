@@ -26,5 +26,10 @@ function ITEM:GetDescription()
 	local instruction = recipient and "\nDeliver this to " .. recipient .. "."
 		or "\nReturn this to the contact who issued your assignment."
 
-	return self:GetData("fieldDescription", self.description) .. instruction
+	local description = self:GetData("fieldDescription", self.description)
+	if not self.entity and self.longdesc and self.longdesc ~= "" then
+		description = description .. "\n\n" .. self.longdesc
+	end
+
+	return description .. instruction
 end

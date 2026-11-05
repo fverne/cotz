@@ -1,5 +1,7 @@
 ITEM.name = "Old Backpack"
 ITEM.description= "An old backpack, well worn and tattered. Its weight betrays its contents."
+ITEM.longdesc = "The fastenings have been repaired in several different ways. Unpacking it is likely to reveal"
+	.. " more about its previous owner than trying to make the bag serviceable again."
 ITEM.model = "models/kek1ch/sumka1.mdl"
 
 ITEM.width = 2

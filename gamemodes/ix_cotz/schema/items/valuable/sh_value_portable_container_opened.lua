@@ -1,9 +1,8 @@
 ITEM.name = "Open Metal Sample Carrier"
 ITEM.description = "A tall rectangular metal carrier with its hinged lid standing open."
-ITEM.longdesc = "A tall rectangular metal carrier with its hinged lid standing open. Handling marks gather"
-	.. " around the edges while the broad panels retain their familiar industrial shape. It smells"
-	.. " faintly of shut storerooms. Whatever journey brought it here has left the case with more"
-	.. " history than explanation."
+ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
+	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
+	.. " with more history than explanation."
 ITEM.valuableCategory = "sample carriers"
 
 ITEM.model = "models/lostsignalproject/items/misc/portable_container_opened.mdl"

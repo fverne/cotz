@@ -1,5 +1,7 @@
 ITEM.name = "Lead Pipe"
 ITEM.description = "A pipe for use in plumbering."
+ITEM.longdesc = "Old deposits cling to the inside, and one end bears the marks of a rough removal. Someone"
+	.. " salvaged it long after the building's water stopped running."
 ITEM.model = "models/weapons/tfa_nmrih/w_me_pipe_lead.mdl"
 ITEM.class = "tfa_nmrih_lpipe"
 ITEM.weaponCategory = "secondary"

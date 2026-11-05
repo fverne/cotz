@@ -1,5 +1,7 @@
 ITEM.name = "Old Ceramic Plate"
 ITEM.description = "An old ceramic plate, could absorb some impacts against a body armor."
+ITEM.longdesc = "The covering is rubbed thin along the corners, with old pressure marks across the face. Its"
+	.. " history is impossible to read reliably from the surface alone."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic8.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

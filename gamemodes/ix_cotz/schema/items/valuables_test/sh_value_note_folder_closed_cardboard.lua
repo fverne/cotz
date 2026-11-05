@@ -1,9 +1,8 @@
 ITEM.name = "Plain Cardboard Folder"
 ITEM.description = "A plain cardboard document folder with folded flaps and a narrow closing strip."
-ITEM.longdesc = "A plain cardboard document folder with folded flaps and a narrow closing strip. A dry"
-	.. " cupboard smell clings to the paper, and the edges have softened with handling. The printed"
-	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here"
-	.. " it is simply another object waiting for someone who recognises it."
+ITEM.longdesc = "A dry cupboard smell clings to the paper, and the edges have softened with handling. The printed"
+	.. " material belongs to a much more orderly world of counters, desks and filing shelves. Here it is"
+	.. " simply another object waiting for someone who recognises it."
 ITEM.valuableCategory = "office records"
 
 ITEM.model = "models/cotz/eft/info/note_folder_closed_cardboard.mdl"

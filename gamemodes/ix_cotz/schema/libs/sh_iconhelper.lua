@@ -2,6 +2,10 @@ ix.util.text = ix.util.text or {}
 
 -- returns material of the given item - either img or the exIcon
 function ix.util.GetItemIcon(item)
+	if ix.gearAppearance and item.appearanceCustomization and item:GetData("gearAppearance")
+		and not item:GetData("img", item.img) then
+		return ix.gearAppearance.GetIcon(item)
+	end
     local icon
     local exIcon = ikon:GetIcon(item.uniqueID)
 

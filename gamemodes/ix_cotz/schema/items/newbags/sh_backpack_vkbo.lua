@@ -1,5 +1,7 @@
 ITEM.name = "Army Backpack"
 ITEM.description = "An old army backpack. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The plain fabric and simple fastenings reflect an older generation of issued gear. Its repairs"
+	.. " are easy to see, and apparently easy enough to repeat."
 ITEM.model = "models/backpack_vkbo/backpack_vkbo.mdl"
 
 ITEM.price = 900

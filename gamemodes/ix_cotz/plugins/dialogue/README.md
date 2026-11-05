@@ -25,6 +25,10 @@ Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing load
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.
 
+Technut's root also opens [gear customization](../gearcustomization/README.md).
+It costs 100 rubles per confirmed equipped-item appearance change and has no progression
+requirement. His separate suit-painting service retains its existing TN13 requirement.
+
 ## Main menu and questions
 
 The root contains trade, barter, services, repeatable work, progression, available reward/exchange actions,

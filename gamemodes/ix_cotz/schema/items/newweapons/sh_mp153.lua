@@ -1,6 +1,11 @@
 ITEM.name = "Baikal MP-153"
 ITEM.description= "A semi-automatic shotgun. Fires 12 gauge."
-ITEM.longdesc = "A 12 gauge gas operated semi-automatic shotgun, manufactured for the civilian market. Usually used for shooting skeet, or hunting small or medium game, however in the zone it becomes an excellent tool for survival.\n\nAmmo: 12 Gauge \nMagazine Capacity: 7"
+ITEM.longdesc = "Originally made for the civilian market, its gas-operated action has found a new audience beyond"
+	.. " the perimeter. Usually used for shooting skeet, or hunting small or medium game, however in the"
+	.. " zone it becomes an excellent tool for survival.\n"
+	.. "\n"
+	.. "Ammo: 12 Gauge\n"
+	.. "Magazine Capacity: 7"
 ITEM.model = ("models/wick/weapons/stalker/stcopwep/w_mp153_model.mdl")
 ITEM.class = "cw_mp153"
 ITEM.weaponCategory = "primary"

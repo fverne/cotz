@@ -1,8 +1,7 @@
 ITEM.name = "Recovered Wireless Camera"
 ITEM.description = "A pale wireless camera with a long aerial and a dark cylindrical lens housing."
-ITEM.longdesc = "A pale wireless camera with a long aerial and a dark cylindrical lens housing. Fine grit"
-	.. " has gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
-	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "electronic components"
 

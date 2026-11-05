@@ -1,8 +1,7 @@
 ITEM.name = "Optical Disc Drive"
 ITEM.description = "An optical disc drive in a flat metal housing."
-ITEM.longdesc = "A desktop optical drive in a flat metal housing with a dark front panel. The top label is"
-	.. " rubbed and the casing carries the marks of being slid in and out of a computer bay. A faint"
-	.. " smell of dust and old electronics remains around the narrow seams."
+ITEM.longdesc = "The top label is rubbed and the casing carries the marks of being slid in and out of a computer"
+	.. " bay. A faint smell of dust and old electronics remains around the narrow seams."
 ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_dvd.mdl"

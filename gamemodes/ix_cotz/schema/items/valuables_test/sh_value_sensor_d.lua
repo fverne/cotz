@@ -1,7 +1,6 @@
 ITEM.name = "Recovered Digital Sensor"
 ITEM.description = "A rectangular sensor housing with a printed upper panel and a small numeric display."
-ITEM.longdesc = "A rectangular sensor housing with a printed upper panel and a small numeric display. Fine"
-	.. " grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
 	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "instruments"

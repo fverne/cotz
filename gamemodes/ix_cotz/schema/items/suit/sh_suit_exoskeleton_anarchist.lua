@@ -2,6 +2,9 @@ ITEM.name = "Defender of Anarchists"
 ITEM.model = "models/kek1ch/exolight_outfit.mdl"
 ITEM.newModel = "models/stalkerisaac/playermodel/male_01_radsuit.mdl"
 ITEM.description= "An armored exoskeleton suit"
+ITEM.longdesc = "Faction colours spread across equipment that once would have belonged on a guarded supply"
+	.. " manifest. Each joint and fastening shows the attention needed to keep such a complex suit in"
+	.. " service."
 
 ITEM.width = 2
 ITEM.height = 3

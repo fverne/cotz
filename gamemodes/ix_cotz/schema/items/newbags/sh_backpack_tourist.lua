@@ -1,5 +1,7 @@
 ITEM.name = "Large School Backpack"
 ITEM.description = "A backpack meant for civilian purposes. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The expanded civilian design looks familiar to anyone who travelled here with more optimism than"
+	.. " equipment. Scuffed corners record the harder journeys that followed."
 ITEM.model = "models/backpack_redfox/backpack_redfox.mdl"
 
 ITEM.price = 900

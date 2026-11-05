@@ -1,5 +1,7 @@
 ITEM.name = "Ceramic Plate"
 ITEM.description = "A ceramic plate, could absorb some impacts against a body armor."
+ITEM.longdesc = "The smooth covering conceals the brittle material within. Owners tend to handle it more"
+	.. " carefully off the suit than its plain appearance might suggest."
 ITEM.model = "models/lostsignalproject/items/outfit_parts/ballistic8.mdl"
 ITEM.category = "Attachments"
 ITEM.width = 1

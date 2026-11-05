@@ -1,6 +1,7 @@
 ITEM.name = "Anomalous Material Report"
 ITEM.description = "A scientific report on the creation of artifacts."
-ITEM.longdesc = "This report is rather extensive, and covers the creation of certain artifacts in the zone at various locations."
+ITEM.longdesc = "Dense observations and references to collection sites fill the pages. The writer appears more"
+	.. " concerned with establishing a pattern than making the subject accessible to outsiders."
 ITEM.model = "models/lostsignalproject/items/quest/document_02.mdl"
 
 ITEM.width = 1

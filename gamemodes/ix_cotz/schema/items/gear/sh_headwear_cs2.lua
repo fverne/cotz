@@ -1,6 +1,7 @@
 ITEM.name = "Frag Helmet (CS-2)"
 ITEM.description = "Late production Soviet steel helmet."
-ITEM.longdesc = "Late production Soviet steel helmet paired with a respirator and protective goggles. Despite it's age, it seems to still be able to stop a pistol bullet."
+ITEM.longdesc = "A respirator and protective goggles complete the field arrangement. The fittings show their age"
+	.. " more readily than the carefully maintained shell."
 ITEM.model = "models/shtokerbox/ground_headgear_cs2.mdl"
 
 ITEM.price = 90000
@@ -19,6 +20,35 @@ ITEM.pr = 0.23
 ITEM.fpr = 0
 ITEM.radProt = 0.70
 ITEM.flatRadProt = 0.02
+
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "cs2_lone",
+	worldMaterialSlots = {0},
+	skins = {
+		{id = "cs2_lone", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "cs2_lone2", name = "Loner 2", skin = 1, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs2_lone2",
+			},
+		},
+		{id = "cs2_blak", name = "Black", skin = 2, worldSkin = 2},
+		{id = "cs2_csky", name = "Clear Sky", skin = 3, worldSkin = 1},
+		{id = "cs2_free", name = "Freedom", skin = 4, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs2_free",
+			},
+		},
+		{id = "cs2_merc", name = "Mercenary", skin = 5, worldSkin = 0,
+			worldMaterials = {
+				[0] = "models/projectpt/cs2_merc",
+			},
+		},
+	},
+	bodygroups = {},
+}
 
 ITEM.exRender = true
 ITEM.iconCam = {

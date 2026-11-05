@@ -20,6 +20,27 @@ ITEM.fpr = 0
 ITEM.radProt = 0
 ITEM.flatRadProt = 0
 
+ITEM.appearanceCustomization = {
+	targets = {
+		{1, 1},
+	},
+	defaultSkin = "beri_loner",
+	worldMaterialSlots = {},
+	skins = {
+		{id = "beri_loner", name = "Loner", skin = 0, worldSkin = 0},
+		{id = "beri_loner2", name = "Loner 2", skin = 1, worldSkin = 1},
+		{id = "beri_loner3", name = "Loner 3", skin = 2, worldSkin = 2},
+		{id = "beri_duty", name = "Duty", skin = 3, worldSkin = 3},
+		{id = "beri_duty2", name = "Duty 2", skin = 4, worldSkin = 4},
+		{id = "beri_freedom", name = "Freedom", skin = 5, worldSkin = 5},
+		{id = "beri_merc", name = "Mercenary", skin = 6, worldSkin = 6},
+		{id = "beri_merc2", name = "Mercenary 2", skin = 7, worldSkin = 7},
+		{id = "beri_military2", name = "Military 2", skin = 8, worldSkin = 8},
+		{id = "beri_usarmy", name = "Usarmy", skin = 9, worldSkin = 9},
+	},
+	bodygroups = {},
+}
+
 ITEM.exRender = true
 ITEM.iconCam = {
     pos = Vector(0, -182.33, 5),

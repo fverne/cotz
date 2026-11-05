@@ -1,5 +1,7 @@
 ITEM.name = "School Backpack"
 ITEM.description = "A backpack meant for civilian purposes. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "The everyday styling belongs on a bus seat or classroom hook. Beyond the perimeter it is a"
+	.. " reminder of how little separates a first trip from an ordinary morning at home."
 ITEM.model = "models/backpack_tactical/backpack_tactical.mdl"
 
 ITEM.price = 900

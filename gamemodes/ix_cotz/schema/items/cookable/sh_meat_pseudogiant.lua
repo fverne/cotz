@@ -1,6 +1,8 @@
 ITEM.name = "Pseudogiant Meat"
 ITEM.description = "Uncooked meat from a Pseudogiant."
-ITEM.longdesc = "A heavy chunk of pseudogiant meat. Since pseudogiants can easily be considered the apex predator of the Zone, their meat is highly valued by veteran stalkers who are willing to buy it for fairly high prices. Can be sold to the scientists."
+ITEM.longdesc = "Since pseudogiants can easily be considered the apex predator of the Zone, their meat is highly"
+	.. " valued by veteran stalkers who are willing to buy it for fairly high prices. Can be sold to the"
+	.. " scientists."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
 ITEM.price = 2800

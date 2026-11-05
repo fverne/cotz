@@ -1,9 +1,8 @@
 ITEM.name = "Hand Drill"
 ITEM.description = "A hand-operated drill with a green body and wooden grips."
-ITEM.longdesc = "A hand-operated drill with a green body, wooden grips and exposed gearing. The wood is"
-	.. " darkened where it has been handled, while old grime clings around the gear teeth. It"
-	.. " belongs to a quieter sort of workshop, one where the work stopped whenever the person doing"
-	.. " it needed a rest."
+ITEM.longdesc = "The wood is darkened where it has been handled, while old grime clings around the gear teeth. It"
+	.. " belongs to a quieter sort of workshop, one where the work stopped whenever the person doing it"
+	.. " needed a rest."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/barter/tools_handdrill.mdl"

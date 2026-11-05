@@ -1,8 +1,7 @@
 ITEM.name = "Workshop Sledgehammer"
 ITEM.description = "A heavy dark hammer head mounted on a long worn wooden handle."
-ITEM.longdesc = "A heavy dark hammer head mounted on a long worn wooden handle. The grip and working"
-	.. " surfaces show ordinary handling wear, with a little grit caught in the recesses. It looks"
-	.. " at home among the clutter of a mechanic's bench."
+ITEM.longdesc = "The grip and working surfaces show ordinary handling wear, with a little grit caught in the"
+	.. " recesses. It looks at home among the clutter of a mechanic's bench."
 ITEM.valuableCategory = "workshop tools"
 
 ITEM.model = "models/cotz/eft/barter/hultafors_db5000.mdl"

@@ -1,5 +1,7 @@
 ITEM.name = "MBSS Backpack (Upgraded)"
 ITEM.description = "An extra durable backpack. This backpack has been outfitted with extra survival gear. Features compartments for easy storage of your valuables."
+ITEM.longdesc = "Extra fittings have been added wherever the original design left room. The result has the"
+	.. " personal, slightly untidy look of gear altered after practical experience."
 ITEM.model = "models/backpack_baselardwild/backpack_baselardwild.mdl"
 
 ITEM.price = 900

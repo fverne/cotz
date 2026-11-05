@@ -1,5 +1,7 @@
 ITEM.name = "GPS Tracker"
 ITEM.description = "A small sensor that keeps track of its own position. Moving North will increase your Latitude, and moving East will increase your Longtitude in the zone."
+ITEM.longdesc = "The display is easier to trust than a stranger's directions, though it cannot tell you whether"
+	.. " the next stretch of ground is safe. Survey teams keep written landmarks beside their readings."
 ITEM.model = "models/lostsignalproject/items/devices/sensor_b.mdl"
 ITEM.price = 1800
 ITEM.flag = "A"
@@ -36,7 +38,7 @@ function ITEM:GetDescription()
 	if(self:GetID() == 0) then return self.description end
 	if(!self:GetOwner()) then return self.description end
 
-	local desc = self.description.."\n\n"
+	local desc = self.description .. "\n\n" .. self.longdesc .. "\n\n"
 	local ppos = ix.util.GetLongLatFromVector(self:GetOwner():GetPos())
 	desc = desc.."\nCurrent Position:\n  "..math.Round(ppos[1],4).." Latitude, "..math.Round(ppos[2],4).." Longtitude\n"
 

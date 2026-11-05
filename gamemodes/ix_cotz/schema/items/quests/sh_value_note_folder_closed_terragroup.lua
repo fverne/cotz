@@ -1,8 +1,7 @@
 ITEM.name = "Corporate Records Folder"
 ITEM.description = "A blue records folder with contrasting corporate lettering along the cover."
-ITEM.longdesc = "A blue records folder with contrasting corporate lettering along the cover. The exposed"
-	.. " paper edges have softened, and a dry archive smell clings to the bundle. Detached from its"
-	.. " original filing system, it is difficult to place in any reliable sequence. A specialist"
+ITEM.longdesc = "The exposed paper edges have softened, and a dry archive smell clings to the bundle. Detached"
+	.. " from its original filing system, it is difficult to place in any reliable sequence. A specialist"
 	.. " with the right background may be able to supply the missing context."
 
 ITEM.model = "models/cotz/eft/info/note_folder_closed_terragroup.mdl"

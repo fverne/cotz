@@ -1,8 +1,7 @@
 ITEM.name = "Emergency Locator Unit"
 ITEM.description = "A long orange locator unit with a cylindrical body and a projecting end tab."
-ITEM.longdesc = "A long orange locator unit with a cylindrical body and a projecting end tab. Fine grit has"
-	.. " gathered in the recessed parts, and the exterior has lost the tidy finish of freshly"
-	.. " issued equipment. No matching paperwork accompanies it. A technician would have to"
+ITEM.longdesc = "Fine grit has gathered in the recessed parts, and the exterior has lost the tidy finish of"
+	.. " freshly issued equipment. No matching paperwork accompanies it. A technician would have to"
 	.. " establish its condition before deciding where it belongs."
 ITEM.valuableCategory = "radio equipment"
 

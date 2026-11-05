@@ -1,8 +1,7 @@
 ITEM.name = "Dial Probe Thermometer"
 ITEM.description = "A round metal dial with a long narrow probe extending from the housing."
-ITEM.longdesc = "A round metal dial with a long narrow probe extending from the housing. The face is"
-	.. " crowded with small markings, while dirt sits around the rim and the join at the base of"
-	.. " the probe. It has the compact, practical appearance of an instrument that was once stored"
+ITEM.longdesc = "The face is crowded with small markings, while dirt sits around the rim and the join at the base"
+	.. " of the probe. It has the compact, practical appearance of an instrument that was once stored"
 	.. " beside a much larger piece of equipment."
 ITEM.valuableCategory = "medical equipment"
 

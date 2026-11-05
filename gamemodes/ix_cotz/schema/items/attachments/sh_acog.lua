@@ -1,5 +1,7 @@
 ITEM.name = "ACOG Sight"
 ITEM.description = "American optic sight. 4.0x magnification. Delta type sight."
+ITEM.longdesc = "The enclosed housing shields the glass from the knocks of field use. Its sight picture rewards a"
+	.. " deliberate aim across a clearing rather than a hurried glance around a doorway."
 ITEM.category = "Attachments"
 ITEM.width = 1
 ITEM.height = 1

@@ -1,6 +1,7 @@
 ITEM.name = "Nuts"
 ITEM.description = "A bunch of metal nuts."
-ITEM.longdesc = "Nuts for fastening bolts and screws."
+ITEM.longdesc = "The pieces are mixed by size and finish, with old grease caught in some threads. A workshop"
+	.. " drawer never seems to contain enough of the one a repair actually needs."
 ITEM.model = "models/illusion/eftcontainers/nuts.mdl"
 
 ITEM.width = 1

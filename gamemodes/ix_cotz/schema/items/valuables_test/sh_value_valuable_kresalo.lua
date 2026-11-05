@@ -1,8 +1,7 @@
 ITEM.name = "Steel Fire Striker"
 ITEM.description = "A worn red metal fire striker with a curved opening and curled ends."
-ITEM.longdesc = "A worn red metal fire striker with a curved opening and curled ends. The outer surfaces"
-	.. " carry a little storage dust and the marks of repeated handling. It belongs to the quiet"
-	.. " inventory of ordinary things that keep a camp supplied between expeditions."
+ITEM.longdesc = "The outer surfaces carry a little storage dust and the marks of repeated handling. It belongs to"
+	.. " the quiet inventory of ordinary things that keep a camp supplied between expeditions."
 ITEM.valuableCategory = "fuel supplies"
 
 ITEM.model = "models/cotz/eft/barter/valuable_kresalo.mdl"

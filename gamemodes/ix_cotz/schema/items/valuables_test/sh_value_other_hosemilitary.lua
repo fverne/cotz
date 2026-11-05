@@ -1,8 +1,7 @@
 ITEM.name = "Corrugated Equipment Hose"
 ITEM.description = "A loop of heavy corrugated hose with metal couplings at its ends."
-ITEM.longdesc = "A loop of heavy corrugated hose with metal couplings at its ends. The surface carries the"
-	.. " dull marks of storage and handling. On a workshop shelf it would be another ordinary part,"
-	.. " waiting for somebody who knows what belongs where."
+ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
+	.. " another ordinary part, waiting for somebody who knows what belongs where."
 ITEM.valuableCategory = "filtration"
 
 ITEM.model = "models/cotz/eft/barter/other_hosemilitary.mdl"

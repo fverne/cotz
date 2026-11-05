@@ -1,8 +1,7 @@
 ITEM.name = "Gas Torch Assembly"
 ITEM.description = "A gas canister with a torch head, a small control knob and a narrow nozzle."
-ITEM.longdesc = "A gas canister with a torch head, a small control knob and a narrow nozzle. Handling marks"
-	.. " and storage dust sit around its fittings. There is no service record to explain when it"
-	.. " was last checked. Its parts and construction may interest a specialist even if the"
+ITEM.longdesc = "Handling marks and storage dust sit around its fittings. There is no service record to explain"
+	.. " when it was last checked. Its parts and construction may interest a specialist even if the"
 	.. " original assignment can no longer be reconstructed."
 ITEM.valuableCategory = "workshop tools"
 

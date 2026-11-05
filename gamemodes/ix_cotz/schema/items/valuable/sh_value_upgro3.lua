@@ -1,7 +1,6 @@
 ITEM.name = "Blue Equipment Parts Pouch"
 ITEM.description = "A dark blue equipment pouch with a reinforced front panel and a broad zipper seam."
-ITEM.longdesc = "A dark blue equipment pouch with a reinforced front panel and a broad zipper seam. The"
-	.. " surface carries the dull marks of storage and handling. On a workshop shelf it would be"
+ITEM.longdesc = "The surface carries the dull marks of storage and handling. On a workshop shelf it would be"
 	.. " another ordinary part, waiting for somebody who knows what belongs where."
 ITEM.valuableCategory = "repair parts"
 

@@ -1,9 +1,8 @@
 ITEM.name = "Large Olive Transit Case"
 ITEM.description = "A large olive hard case with a broad lid and a substantial recessed handle."
-ITEM.longdesc = "A large olive hard case with a broad lid and a substantial recessed handle. The catches"
-	.. " have picked up a dull film of grit, and the corners bear the small knocks of repeated"
-	.. " journeys. A stale packing-room smell hangs around the joins. It looks like an object that"
-	.. " changed hands more often than its paperwork did."
+ITEM.longdesc = "The catches have picked up a dull film of grit, and the corners bear the small knocks of"
+	.. " repeated journeys. A stale packing-room smell hangs around the joins. It looks like an object"
+	.. " that changed hands more often than its paperwork did."
 ITEM.valuableCategory = "reinforced cases"
 
 ITEM.model = "models/lostsignalproject/items/quest/large_case.mdl"

@@ -1,6 +1,7 @@
 ITEM.name = "Ruble Coins"
 ITEM.description = "A few coins of Ukranian currency."
-ITEM.longdesc = ""
+ITEM.longdesc = "Their small denominations make them more useful for settling a trivial debt than paying for"
+	.. " equipment. Years of hands have rubbed the raised details smooth."
 ITEM.model = "models/lostsignalproject/items/misc/sack.mdl"
 
 ITEM.width = 1

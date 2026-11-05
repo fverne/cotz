@@ -1,5 +1,7 @@
 ITEM.name = "Master Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
+ITEM.longdesc = "The wrapping keeps a selected weapon out of sight until the supplies are redeemed. The"
+	.. " unassuming finish is typical of valuable supplies kept out of casual sight."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

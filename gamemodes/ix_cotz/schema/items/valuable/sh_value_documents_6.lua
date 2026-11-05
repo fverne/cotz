@@ -1,6 +1,7 @@
 ITEM.name = "Pump Station Checklist"
 ITEM.description = "A technicians checklist for the pump station in the swamps."
-ITEM.longdesc = "This small document contains a detailed checklist of how to turn on parts of the pump station in the swamps."
+ITEM.longdesc = "Checks and operating notes follow a sequence that means little without knowing the site. Someone"
+	.. " responsible for the machinery would recognise which details the writer thought worth recording."
 ITEM.model = "models/lostsignalproject/items/quest/notes_letter_3.mdl"
 
 ITEM.width = 1

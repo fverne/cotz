@@ -1,5 +1,7 @@
 ITEM.name = "Respirator"
 ITEM.description = "An old gasmask"
+ITEM.longdesc = "The facepiece is worn smooth where it rests against the skin. Every owner has their own ritual"
+	.. " for checking the straps before trusting it with another journey."
 ITEM.model = "models/shtokerbox/ground_mask_respirator.mdl"
 ITEM.skin = 1
 

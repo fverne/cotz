@@ -1,6 +1,7 @@
 ITEM.name = "mutantpart"
 ITEM.description = "mutantpart item."
-ITEM.longdesc = "No Longer Description Available"
+ITEM.longdesc = "Collectors and researchers judge a specimen differently from the hunter who brought it in."
+	.. " Keeping it intact on the return journey is its own small task."
 ITEM.category = "Mutant Parts"
 ITEM.model = "models/Gibs/HGIBS.mdl"
 

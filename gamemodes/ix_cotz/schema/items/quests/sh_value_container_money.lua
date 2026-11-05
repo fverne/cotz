@@ -1,9 +1,8 @@
 ITEM.name = "Cash Transit Case"
 ITEM.description = "A low dark briefcase with metal edging and a small printed mark on its lid."
-ITEM.longdesc = "A low dark briefcase with metal edging and a small printed mark on its lid. Handling marks"
-	.. " gather around the edges while the broad panels retain their familiar industrial shape. It"
-	.. " smells faintly of shut storerooms. Whatever journey brought it here has left the case with"
-	.. " more history than explanation."
+ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
+	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
+	.. " with more history than explanation."
 
 ITEM.model = "models/cotz/eft/containers/container_money.mdl"
 

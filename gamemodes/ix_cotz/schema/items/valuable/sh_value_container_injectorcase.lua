@@ -1,9 +1,8 @@
 ITEM.name = "Injector Transport Pouch"
 ITEM.description = "A small dark zippered pouch with stitched edging and a contrasting zipper pull."
-ITEM.longdesc = "A small dark zippered pouch with stitched edging and a contrasting zipper pull. Handling"
-	.. " marks gather around the edges while the broad panels retain their familiar industrial"
-	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the"
-	.. " case with more history than explanation."
+ITEM.longdesc = "Handling marks gather around the edges while the broad panels retain their familiar industrial"
+	.. " shape. It smells faintly of shut storerooms. Whatever journey brought it here has left the case"
+	.. " with more history than explanation."
 ITEM.valuableCategory = "equipment pouches"
 
 ITEM.model = "models/cotz/eft/containers/container_injectorcase.mdl"

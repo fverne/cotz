@@ -1,9 +1,7 @@
 ITEM.name = "Pack of Office Paper"
 ITEM.description = "A wrapped pack of office paper."
-ITEM.longdesc = "A wrapped pack of office paper with green branding and battered folds around the edges. It"
-	.. " carries the dry smell of an old filing room, with a little dampness underneath. An entire"
-	.. " stack of blank pages feels oddly extravagant in a place where even shopping lists tend to"
-	.. " be written on scraps."
+ITEM.longdesc = "The green-branded wrapper carries the dry smell of an old filing room, with a little dampness"
+	.. " underneath. An entire office routine once depended on supplies as ordinary as this."
 ITEM.valuableCategory = "office records"
 
 ITEM.model = "models/illusion/eftcontainers/copypaper.mdl"
