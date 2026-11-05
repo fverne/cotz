@@ -72,6 +72,42 @@ Test("allocator retains geometry checks when an area has sufficient dimensions",
 	assert(not origin and reason:find("No clear, unreserved", 1, true))
 end)
 
+Test("allocator ignores non-blocking trigger brushes and map logic entities", function()
+	Reset()
+	PLUGIN.state.areas.remote = {mins = Vector(), maxs = Vector(256, 256, 256)}
+	local soundscape = ents.Create("trigger_soundscape")
+	function soundscape:GetSolid() return SOLID_BSP end
+	function soundscape:IsSolid() return false end
+	local logic = ents.Create("env_soundscape")
+	function logic:GetSolid() return SOLID_NONE end
+	local invalid = NewEntity()
+	invalid.valid = false
+	local findInBox = ents.FindInBox
+	ents.FindInBox = function() return {soundscape, logic, invalid} end
+	local origin = PLUGIN:Allocate({mins = Vector(), maxs = Vector(256, 256, 256)})
+	ents.FindInBox = findInBox
+	assert(origin, "non-blocking map entities must not exhaust the only available placement")
+end)
+
+Test("allocator still rejects solid props, invisible collision brushes and non-solid players", function()
+	Reset()
+	PLUGIN.state.areas.remote = {mins = Vector(), maxs = Vector(256, 256, 256)}
+	local prop = ents.Create("prop_physics")
+	local invisible = ents.Create("func_brush")
+	function invisible:GetSolid() return SOLID_BSP end
+	function invisible:GetNoDraw() return true end
+	local player = NewClient(1)
+	function player:GetSolid() return SOLID_NONE end
+	function player:IsSolid() return false end
+	local findInBox = ents.FindInBox
+	for _, obstruction in ipairs({prop, invisible, player}) do
+		ents.FindInBox = function() return {obstruction} end
+		local origin, _, _, reason = PLUGIN:Allocate({mins = Vector(), maxs = Vector(256, 256, 256)})
+		assert(not origin and reason:find("No clear, unreserved", 1, true))
+	end
+	ents.FindInBox = findInBox
+end)
+
 Test("hideout loading forwards the missing-area setup error", function()
 	Reset()
 	local template = {mins = Vector(-512, -512, -16), maxs = Vector(512, 512, 512)}

@@ -114,6 +114,10 @@ reposition occupied hideouts. Area, entrance, and template-dimension edits requi
 all instances to be unloaded; point placement can be edited live as described
 above. An oversized or obstructed dupe is rejected without teleporting anyone.
 
+Allocation ignores non-blocking triggers and map logic entities, including `trigger_soundscape`.
+Players and solid entities still block placement, including invisible collision brushes. Entity
+visibility does not determine whether a volume is clear.
+
 Template bounds and allocation areas are separate settings. Registering a template does not
 create an allocation area: the administrator must mark an empty world volume with
 `/HideoutAreaStart` and `/HideoutAreaFinish NAME` on each map. The area must contain the full

@@ -87,6 +87,7 @@ end
 vector_origin, angle_zero, color_white = Vector(), Angle(), {}
 MASK_SOLID_BRUSHONLY, MASK_PLAYERSOLID, SOLID_NONE, MOVETYPE_NOCLIP = 1, 2, 0, 8
 SOLID_VPHYSICS = 6
+SOLID_BSP = 1
 local now = 100
 function CurTime()
 	return now
@@ -297,6 +298,9 @@ function entity:GetClass()
 end
 function entity:GetSolid()
 	return SOLID_VPHYSICS
+end
+function entity:IsSolid()
+	return self:GetSolid() ~= SOLID_NONE
 end
 function entity:SetNetVar(key, value)
 	self[key] = value

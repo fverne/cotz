@@ -150,7 +150,8 @@ local function isAllocationClear(instancePlugin, template, mins, maxs, clearance
 		return false
 	end
 	for _, entity in ipairs(ents.FindInBox(mins, maxs)) do
-		if IsValid(entity) and (entity:IsPlayer() or entity:GetSolid() ~= SOLID_NONE) then
+		-- Trigger brushes can have a solid type while their flags make them non-blocking.
+		if IsValid(entity) and (entity:IsPlayer() or entity:IsSolid()) then
 			return false
 		end
 	end
