@@ -6,8 +6,8 @@
 
 ## Current repeatable work — 6 November 2026
 
-Home/claim region: **Waystation**. Current specialty: **Specific mutant specimens**.
-The home change requires removing/saving the old placement and placing this contact on Waystation.
+Home/claim region: **Swamps, Eco Bunker (physical bunker-card access)**. Current specialty: **Specific mutant specimens**.
+Retain the existing Swamps bunker placement. Information couriers to this contact belong to Brass's hard tier.
 New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
 See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
 
@@ -36,7 +36,7 @@ These conversations and their follow-up live in [sh_ecologistnpc.lua](../../../g
 
 ## Contact brief
 
-- **Home and return point:** Waystation. Claims return to this contact; authored search regions remain unchanged.
+- **Home and return point:** Swamps Eco Bunker. Claims return to this contact; authored search regions remain unchanged.
 - **Identity:** Existing relaxed scientist.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Specific mutant specimens.

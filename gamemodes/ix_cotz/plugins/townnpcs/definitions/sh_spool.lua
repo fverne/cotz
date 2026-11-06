@@ -26,13 +26,12 @@ PLUGIN:Register("spool", {
 	},
 	supplies = {},
 	rewards = {
+		cashPerTier = 200,
 		packages = {
-			{label = "Radio spares (trade goods)",
-				items = {"value_battery", "value_capacitors", "value_tape_electric"}},
-			{label = "Night watch",
-				items = {"drug_caffeine", "drink_bottletea"}},
-			{label = "Field callout",
-				items = {"food_raisins", "medic_bandage_1"}},
+		},
+		bonusPackages = {
+			{label = "Euro notes", items = {"value_currency_euro"}},
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
 		},
 	},
 	dialogue = {

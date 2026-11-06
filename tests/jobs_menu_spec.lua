@@ -9,6 +9,7 @@ local methods = {}
 local clock = 0
 local activeJobs = {}
 local sent = {}
+local confirmation
 local notifications = {}
 local fieldActions = {}
 local character = {GetJobs = function() return activeJobs end, GetData = function() return 0 end}
@@ -74,7 +75,9 @@ netstream = {
 	Hook = function() end,
 	Start = function(name, npc) sent[#sent + 1] = {name = name, npc = npc} end,
 }
-ix = {jobs = {
+ix = {cotzUI = {Query = function(text, title, cancel, onCancel, accept, onAccept)
+	confirmation = {text = text, cancel = onCancel, accept = onAccept}
+end}, jobs = {
 	list = {hunt = {}, survey = {}},
 	getFormattedName = function(job) return "Task " .. job.identifier end,
 	getFormattedDesc = function(job) return "Description with reward " .. job.reward end,
@@ -101,11 +104,34 @@ card:PerformLayout()
 check(card:GetTall() > 200, "cards grow to fit a wrapped description")
 local actions = card.children[6]
 actions.children[1]:DoClick()
+check(#sent == 0 and confirmation.text:find("Task hunt", 1, true), "abandon asks for confirmation with the task name")
+confirmation.cancel()
+check(#sent == 0, "cancelling abandonment sends nothing")
+actions.children[1]:DoClick()
+confirmation.accept()
 check(sent[1].name == "job_removeplayerjob" and sent[1].npc == "Alpha", "abandon targets the correct contact")
 check(activeJobs.Alpha ~= nil, "abandon waits for authoritative state before removing the card")
 function character:GetData() return os.time() + 30 end
 actions.children[1]:DoClick()
 check(#sent == 1 and #notifications == 1, "abandon cooldown prevents repeat requests")
+function character:GetData() return 0 end
+actions.children[1]:DoClick()
+local oldJob = activeJobs.Alpha
+activeJobs.Alpha = {identifier = "survey", rewardKey = "replacement"}
+confirmation.accept()
+check(#sent == 1, "a stale confirmation cannot abandon a replacement assignment")
+activeJobs.Alpha = oldJob
+actions.children[1]:DoClick()
+function character:GetData() return os.time() + 30 end
+confirmation.accept()
+check(#sent == 1, "confirmation rechecks a cooldown that began while the popup was open")
+function character:GetData() return 0 end
+actions.children[1]:DoClick()
+local previousCharacter = character
+character = {GetJobs = function() return activeJobs end}
+confirmation.accept()
+check(#sent == 1, "confirmation cannot abandon after a character switch")
+character = previousCharacter
 local fieldButtons = menu.journal.children[2].children[6].children
 fieldButtons[2]:DoClick()
 check(fieldActions[1].npc == "Zulu" and fieldActions[1].kind == "sensor", "field action uses its own assignment")

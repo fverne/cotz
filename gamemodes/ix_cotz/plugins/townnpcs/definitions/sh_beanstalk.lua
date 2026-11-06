@@ -3,7 +3,8 @@ PLUGIN:Register("beanstalk", {
 	template = "ecologistnpc2",
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
-	map = "rp_waystation",
+	map = "rp_marsh_cs",
+	bunker = true,
 	job = {
 		kind = "defence",
 		category = "Research defence",
@@ -22,12 +23,13 @@ PLUGIN:Register("beanstalk", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Research safety",
-				items = {"medic_psyheal_1", "medic_antipsychotic_1"}},
-			{label = "Emergency response",
-				items = {"medic_medkit_1", "medic_stimpak_1"}},
-			{label = "Long watch",
-				items = {"drug_caffeine", "food_can_beans"}},
+			{label = "Emergency medicine", items = {"medic_stimpak_1"}},
+			{label = "Research safety", items = {"medic_psyheal_1", "medic_antipsychotic_1"}},
+			{label = "Canned provisions", items = {"food_can_tuna"}},
+		},
+		bonusPackages = {
+			{label = "Specialist medicine", items = {"medic_psyheal_2", "medic_stimpak_2"}},
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
 		},
 	},
 	dialogue = {

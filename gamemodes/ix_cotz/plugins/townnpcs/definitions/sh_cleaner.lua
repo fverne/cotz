@@ -27,12 +27,14 @@ PLUGIN:Register("cleaner", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Cache upkeep",
-				items = {"hidestasher_cleaningkit"}},
-			{label = "Courier supplies",
-				items = {"food_raisins", "drink_bottlewater"}},
-			{label = "Contingency",
-				items = {"9x19", "medic_bandage_1"}},
+			{label = "Digging tools", items = {"hidestasher_cutlery"}},
+			{label = "Cache tools", items = {"hidestasher_cleaningkit"}},
+			{label = "Canned provisions", items = {"food_can_beans"}},
+		},
+		bonusPackages = {
+			{label = "Swamps stash", items = {"hidestash_1"}},
+			{label = "Waystation stash", items = {"hidestash_2"}},
+			{label = "Pripyat stash", items = {"hidestash_3"}},
 		},
 	},
 	dialogue = {

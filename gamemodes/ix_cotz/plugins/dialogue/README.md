@@ -5,7 +5,8 @@ Each town conversation declares DIALOGUE.townContact and its root action IDs. At
 libs/sh_towncontacts.lua. That file owns the shared work/progression handlers. Superseded per-NPC
 job and progression topics are deleted, rather than replaced or hidden at runtime.
 
-Dialogue text and choices use the shared [COTZ typography](../../../../docs/ui-style.md) and slim
+Dialogue text and choices use the original ixSmallFont; speaker names use stalkerregulartitlefont,
+including their original font sizes. The shared [COTZ styling](../../../../docs/ui-style.md) supplies slim
 scrollbars. Static and dynamic choices both wrap and preserve inherited label height updates.
 The existing dialogue frame artwork and keyboard shortcuts are retained.
 
@@ -88,3 +89,9 @@ Assignment details appear only while the character has an assignment from that N
 Claim rewards submenu: available exchanges and recoverable stored items appear directly at the main
 menu, with the existing server validation and pending reward queues. Names appear above every reply.
 Option colors distinguish work (amber), trade/rewards (green), questions (teal), and navigation (muted).
+
+Repeatable task acceptance reveals no reward choices. Once the objective is complete, the issuing
+contact reveals choices through Complete the assignment; choosing one finishes the hand-in.
+Five-task bonuses appear only after they are earned. The root shows ready reward choices and
+recoverable earned claims, with the existing access, distance and action-rate checks. See the
+[jobsystem reward guide](../jobsystem/README.md#task-rewards-and-existing-kits).

@@ -24,13 +24,14 @@ PLUGIN:Register("haggler", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Sidearm stock",
-				items = {"9x18", "762x25", "9x19"}},
-			{label = "Cheap firepower",
-				items = {"12gauge", "45acp41", "762x39"}},
-			{label = "Road supplies",
-				items = {"food_can_beans", "drink_bottlewater"}},
+			{label = "Pistol ammunition", items = {"9x18", "9x19", "762x25"}},
+			{label = "Canned provisions", items = {"food_can_chilibeans"}},
+			{label = "Road drinks", items = {"drink_bottlewater"}},
 		},
+		bonusPackages = {
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
+		},
+		bonusCash = true,
 	},
 	dialogue = {
 		completedGreeting = (

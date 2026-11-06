@@ -50,7 +50,7 @@ The UI audit used `git diff master...HEAD`, including client code inside shared 
 | Spawn-point observer overlay | Shared marker labels; category colors/access retained |
 | New squad compass labels | Scaled `alsina` type with a contrasting outline |
 | Progression encyclopedia | Contact cards, warm text and muted metadata |
-| Dialogue choices and dynamic task/reward lists | Matching typography/scrollbars; wrapping and inherited label sizing |
+| Dialogue choices and dynamic task/reward lists | Original dialogue fonts and sizes; slim scrollbars, wrapping and inherited label sizing |
 | Buff timers, bleeding and town-effect indicators | Original HUD presentation retained |
 
 Moved item definitions, unchanged legacy interfaces and upstream Helix upgrade changes are not new

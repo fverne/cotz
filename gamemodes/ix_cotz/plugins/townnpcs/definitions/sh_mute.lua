@@ -5,9 +5,14 @@ PLUGIN:Register("mute", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
-		kind = "none",
-		category = "No ordinary repeatable work",
-		description = "No ordinary repeatable work",
+		kind = "triangulation",
+		category = "Radio triangulation",
+		description = "Radio triangulation",
+		maps = {
+			easy = "rp_marsh_cs",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
 	},
 	legacyJob = {
 		kind = "delivery",
@@ -46,15 +51,12 @@ PLUGIN:Register("mute", {
 	},
 	supplies = {},
 	rewards = {
+		cashPerTier = 200,
 		packages = {
-			{label = "Components (trade goods)",
-				items = {"value_battery", "value_capacitors", "value_pcpart_ram"}},
-			{label = "Night shift",
-				items = {"drug_caffeine", "drink_bottletea"}},
-			{label = "Field callout",
-				items = {"drink_bottlewater", "medic_bandage_1"}},
 		},
-		bonusItems = {
+		bonusPackages = {
+			{label = "Euro notes", items = {"value_currency_euro"}},
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
 		},
 	},
 	dialogue = {
@@ -62,12 +64,9 @@ PLUGIN:Register("mute", {
 			"** He looks up from the bench as you approach. He clears a space for your things, then "
 			.. "waits with his hands resting beside his tools. **"
 		),
-		workPrompt = "About the component order.",
-		offerPrompt = "May I see a delivery request?",
-		work = (
-			"** He lays a component list beside a clean tray. An example part is turned so the contacts face "
-			.. "you. He taps the list, then clears a place for the return. **"
-		),
+		workPrompt = "About the signal I am tracking.",
+		offerPrompt = "May I see a triangulation order?",
+		work = "** He turns a written order towards you: Take the required bearings, locate the signal, and bring the transmitter back here. He taps the destination, then clears a space beside the receiver. **",
 		progressionPrompt = "May I see the field orders?",
 		progression = (
 			"** He separates the supply requests from the field orders. The latter stay under his hand a moment "

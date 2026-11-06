@@ -82,10 +82,10 @@ end
 function ix.jobs.regional.AssignCourier(character, npc, job)
 	local definition = ix.jobs.list[job.identifier]
 	local recipients = {}
-	for slug, contact in pairs(ix.townNPCs.contacts) do
-		local allowed = definition.tier == 1 and contact.map == "rp_marsh_cs" and slug ~= "intern"
+	for _, contact in pairs(ix.townNPCs.contacts) do
+		local allowed = definition.tier == 1 and contact.map == "rp_marsh_cs" and not contact.bunker
 			or definition.tier == 2 and contact.map == "rp_waystation"
-			or definition.tier == 3 and (slug == "intern" or contact.map == "rp_waystation")
+			or definition.tier == 3 and (contact.bunker or contact.map == "rp_waystation")
 		if allowed then recipients[#recipients + 1] = contact.name end
 	end
 	if #recipients == 0 then return false end
@@ -97,7 +97,9 @@ function ix.jobs.regional.AssignCourier(character, npc, job)
 		cargo = cargo, cargoName = "Information parcel for " .. recipient,
 		cargoDescription = "Information entrusted to " .. character:GetName() .. " for delivery to " .. recipient .. ".",
 		recipient = recipient, recipientMap = ix.townNPCs.byName[recipient].map,
-		description = "Collect the information parcel from " .. npc .. ", deliver it to " .. recipient .. " in " .. ix.townNPCs.byName[recipient].map .. ", then return to " .. npc .. ". Use Field work near the issuer to collect a replacement if it is lost."}
+		description = "Collect the information parcel from " .. npc .. ", deliver it to " .. recipient
+			.. " in " .. ix.jobs.GetMapName(ix.townNPCs.byName[recipient].map) .. ", then return to " .. npc
+			.. ". Use Field work near the issuer to collect a replacement if it is lost."}
 
 	return true
 end
@@ -130,7 +132,7 @@ function ix.jobs.regional.RecordKill(client, class, map)
 	local species = ix.jobs.regional.Species(class)
 	if not character or not species then return end
 	local jobs, changed = character:GetJobs(), false
-	for _, job in pairs(jobs) do
+	for npc, job in pairs(jobs) do
 		if not job.isCompleted and job.targetMap == map then
 			local credit = job.targetWeights and job.targetWeights[species]
 			if job.targetSpecies == species then credit = 1 end
@@ -138,6 +140,7 @@ function ix.jobs.regional.RecordKill(client, class, map)
 				job.progress = math.min(job.numberRec, (job.progress or 0) + credit)
 				job.isCompleted = job.progress + 0.000000001 >= job.numberRec
 				if job.isCompleted then job.progress = job.numberRec end
+				ix.jobs.NotifyCompleted(client, npc, job)
 				changed = true
 			end
 		end
@@ -160,7 +163,7 @@ PLUGIN["cotz/camera/photo-taken"] = function(self, photo)
 	for _, definition in ipairs(anomalies and anomalies.anomalydefs or {}) do
 		anomalyClasses[definition.entityname] = true
 	end
-	for _, job in pairs(jobs) do
+	for npc, job in pairs(jobs) do
 		if job.photoKind and not job.isCompleted then
 			job.photoTypes = job.photoTypes or {}
 			for _, subject in ipairs(photo.subjects) do
@@ -175,6 +178,7 @@ PLUGIN["cotz/camera/photo-taken"] = function(self, photo)
 					job.photoTypes[key] = true
 					job.progress = (job.progress or 0) + 1
 					job.isCompleted = job.progress >= job.numberRec
+					ix.jobs.NotifyCompleted(client, npc, job)
 					changed = true
 				end
 			end
@@ -184,6 +188,7 @@ PLUGIN["cotz/camera/photo-taken"] = function(self, photo)
 end
 
 function PLUGIN:PlayerLoadedCharacter(client)
+	ix.taskRewards.ReconcileCharacter(client:GetCharacter())
 	timer.Simple(0, function() if IsValid(client) then ix.jobs.regional.ReconcileCamera(client) end end)
 end
 

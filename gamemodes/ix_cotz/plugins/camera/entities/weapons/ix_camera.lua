@@ -11,7 +11,7 @@ SWEP.DrawCrosshair = false
 SWEP.UseHands = true
 SWEP.ViewModel = "models/weapons/infra/c_camera.mdl"
 SWEP.WorldModel = "models/weapons/infra/w_camera.mdl"
-SWEP.ViewModelFOV = 90
+SWEP.ViewModelFOV = 45
 SWEP.HoldType = "pistol"
 -- Preserve the original camera pose when Helix lowers weapons, including its alternate lowering mode.
 -- SWEP.LowerAngles = angle_zero
@@ -64,9 +64,7 @@ function SWEP:FireAnimationEvent()
 end
 
 function SWEP:TranslateFOV(fov)
-	local plugin = ix.plugin.Get("camera")
-
-	return plugin and plugin.photoFOV or fov
+	return fov
 end
 
 if CLIENT then

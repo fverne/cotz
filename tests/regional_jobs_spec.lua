@@ -9,7 +9,19 @@ local active = 0
 for _, contact in pairs(ix.townNPCs.contacts) do
 	if contact.job.kind ~= "none" then active = active + 1 end
 end
-check(active == 19, "twenty rows use nineteen issuers because Atlas alternates photography")
+check(active == 20, "Mute adds triangulation alongside the existing nineteen issuers")
+for _, slug in ipairs({"beanstalk", "egghead", "intern"}) do
+	local contact = ix.townNPCs.contacts[slug]
+	check(contact.map == "rp_marsh_cs" and contact.bunker, "all three scientists remain in the Swamps Eco Bunker")
+end
+check(ix.townNPCs.contacts.egghead.job.category ~= ix.townNPCs.contacts.jitters.job.category,
+	"bunker and settlement specimen work have distinct home-map categories")
+check(ix.townNPCs.contacts.beanstalk.job.kind == "defence", "Beanstalk retains research defence")
+for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
+	check(ix.townNPCs.contacts.egghead.job.maps[difficulty]
+		== ({"rp_garbage_cotz", "rp_waystation", "rp_pripyat_remaster"})[tier],
+		"Egghead retains the later-region specimen progression from his bunker home")
+end
 check(ix.townNPCs.contacts.wake.job.kind == "none", "Wake is no longer assigned photography")
 check(ix.townNPCs.contacts["the-original"].job.kind == "none", "The Original has no new ordinary work")
 check(ix.townNPCs.contacts.jitters.job.kind == "regionalSpecimens", "Jitters owns the Swamps specimen requests")
@@ -79,6 +91,7 @@ end
 local root = "gamemodes/ix_cotz/plugins/jobsystem/"
 PLUGIN = {}
 local callbacks, timers = {}, {}
+netstream = {Start = function() end}
 timer = {Simple = function(_, callback) timers[#timers + 1] = callback end}
 local map, now = "rp_marsh_cs", 100
 game.GetMap = function() return map end
@@ -103,7 +116,8 @@ function char:CanCarry() return not self.overweight end
 function char:Save() end
 function client:GetCharacter() return char end
 function client:Alive() return true end
-function client:Notify() end
+local notices = {}
+function client:Notify(text) notices[#notices + 1] = text end
 function client:NotifyLocalized() end
 function client:HasWeapon(class) return self.weapons[class] ~= nil end
 function client:SteamID64() return "101" end
@@ -131,7 +145,36 @@ ix.item.Instance = function(_, itemID, data, _, _, callback)
 end
 dofile(root .. "sv_regionaljobs.lua")
 local server = PLUGIN
-char.jobs.test = {rewardKey = "photo:1", photoKind = "mutant", progress = 0, numberRec = 3}
+local originalRandom = math.random
+local contactCount = 0
+for _ in pairs(ix.townNPCs.contacts) do contactCount = contactCount + 1 end
+for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
+	local recipients = {}
+	for index = 1, contactCount do
+		math.random = function(limit) return math.min(index, limit) end
+		local job = {identifier = "cotz/town/v2/brass/" .. difficulty .. "/courier"}
+		local assigned = ix.jobs.regional.AssignCourier(char, "'Brass'", job)
+		math.random = originalRandom
+		check(assigned, "each information courier tier has an available recipient")
+		local state = job.fieldTask
+		local contact = ix.townNPCs.byName[state.recipient]
+		recipients[contact.id] = true
+		check(state.recipientMap == contact.map, "courier assignment saves the recipient's actual home")
+		if tier == 1 then
+			check(contact.map == "rp_marsh_cs" and not contact.bunker,
+				"easy couriers visit the Swamps settlement without requiring bunker access")
+		elseif tier == 2 then
+			check(contact.map == "rp_waystation", "medium couriers visit Waystation")
+		else
+			check(contact.bunker or contact.map == "rp_waystation", "hard couriers visit the bunker or Waystation")
+		end
+	end
+	for _, slug in ipairs({"beanstalk", "egghead", "intern"}) do
+		check((recipients[slug] == true) == (tier == 3), "all three bunker scientists are hard courier recipients only")
+	end
+end
+char.jobs.test = {identifier = "cotz/town/v2/atlas/easy/mutant", rewardKey = "photo:1",
+	photoKind = "mutant", progress = 0, numberRec = 3}
 char.inventory.full = true
 check(not ix.jobs.regional.CanStart(char, {photoKind = "mutant"}), "full inventory rejects acceptance")
 char.inventory.full = false
@@ -141,7 +184,8 @@ check(#callbacks == 1, "repeated requests share one pending camera insertion")
 callbacks[1]()
 check(client.weapons.ix_camera ~= nil, "camera insertion equips the existing SWEP")
 local camera = client.weapons.ix_camera
-char.jobs.anomaly = {rewardKey = "photo:2", photoKind = "anomaly", progress = 0, numberRec = 3}
+char.jobs.anomaly = {identifier = "cotz/town/v2/atlas/easy/anomaly", rewardKey = "photo:2",
+	photoKind = "anomaly", progress = 0, numberRec = 3}
 local function subject(class, health, kind)
 	return {kind = kind or "entity", class = class, entity = {Health = function() return health or 100 end}}
 end
@@ -182,4 +226,54 @@ check(ix.jobs.regional.CanOffer(char, {photoKind = "mutant"}), "initial photogra
 char:SetData("townPhotoNext", "anomaly")
 check(not ix.jobs.regional.CanOffer(char, {photoKind = "mutant"})
 	and ix.jobs.regional.CanOffer(char, {photoKind = "anomaly"}), "photography selection follows saved alternation")
+local completeNotices = 0
+for _, notice in ipairs(notices) do
+	if notice:find("Task completed:", 1, true) then completeNotices = completeNotices + 1 end
+end
+check(completeNotices == 1, "photography completion announces the transition once")
+check(ix.jobs.regional.PhotoSummary({photoKind = "mutant", photoTypes = {blinddog = true}, numberRec = 3})
+	:find("Blinddog", 1, true), "camera ledger names captured species")
+for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
+	local definition = ix.jobs.list["cotz/town/v2/mute/" .. difficulty .. "/triangulation"]
+	check(definition and definition.fieldSettings.readingCount == tier + 2, "Mute offers all triangulation tiers")
+end
+for _, contact in pairs(ix.townNPCs.contacts) do
+	local dialogue = ix.dialogue.list[ix.npctemplates.templates[contact.template].dialogueid]
+	if contact.job.kind == "none" then
+		for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+			for _, option in ipairs(dialogue.tree[rootID].options) do
+				check(option ~= "GetTaskByDifficulty", "inactive issuers have no dangling job option")
+			end
+		end
+	end
+end
+local receiverJobs = 0
+for id, definition in pairs(ix.jobs.list) do
+	if definition.alternateDelivery and not definition.completionOnly then
+		local names = ix.jobs.regional.EligibleReceivers(definition)
+		check(#names > 0, "valuable delivery lists eligible contacts")
+		local inactive = ix.jobs.getFormattedDescInactive(id)
+		local activeDescription = ix.jobs.getFormattedDesc({identifier = id, numberRec = definition.numberRec})
+		for _, name in ipairs(names) do
+			check(inactive:find(name, 1, true) and activeDescription:find(name, 1, true),
+				"both preview and journal name each eligible receiver")
+			check(ix.jobs.regional.ReceiverMatches(char, ix.townNPCs.byName[name], {identifier = id}),
+				"listed receiver passes authoritative eligibility")
+		end
+		check(not activeDescription:find("rp_", 1, true), "journal uses display region names")
+		receiverJobs = receiverJobs + 1
+	end
+end
+check(receiverJobs > 0, "receiver coverage exercises real generated valuable jobs")
+check(ix.jobs.FormatMapNames("rp_marsh_cs to rp_waystation") == "Swamps to Waystation",
+	"accepted descriptions containing BSP names use current display names")
+ix.jobs.list.testKill = {name = "Test hunt %d"}
+char.jobs = {kill = {identifier = "testKill", targetMap = map, targetSpecies = "pseudodog",
+	progress = 2, numberRec = 3}}
+local noticeCount = #notices
+ix.jobs.regional.RecordKill(client, "npc_mutant_pseudodog", map)
+check(#notices == noticeCount + 1 and notices[#notices]:find("Task completed:", 1, true),
+	"regional kill completion announces readiness")
+ix.jobs.regional.RecordKill(client, "npc_mutant_pseudodog", map)
+check(#notices == noticeCount + 1, "extra kills cannot repeat the completed notification")
 print("PASS: " .. checks .. " regional job checks")

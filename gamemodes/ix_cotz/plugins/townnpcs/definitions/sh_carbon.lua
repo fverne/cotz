@@ -42,8 +42,8 @@ PLUGIN:Register("carbon", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Archive supplies (trade goods)",
-				items = {"value_officepaper", "value_tape_duct"}},
+			{label = "Canned provisions",
+				items = {"food_can_beans", "food_can_tuna"}},
 			{label = "Reading provisions",
 				items = {"drink_bottletea", "food_bread"}},
 			{label = "Field research",

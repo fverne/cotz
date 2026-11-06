@@ -193,7 +193,7 @@ check(#result.subjects == 0 and not result.truncated, "Empty photo replaces prev
 SWEP = {Primary = {}, Secondary = {}}
 dofile(root .. "camera/entities/weapons/ix_camera.lua")
 check(SWEP.Primary.Ammo == "none" and SWEP.Primary.ClipSize == -1, "Camera needs no ammo")
-check(SWEP:TranslateFOV(90) == camera.photoFOV, "View and detection use same FOV")
+check(SWEP:TranslateFOV(75) == 75 and SWEP:TranslateFOV(100) == 100, "Camera preserves the player's world FOV")
 check(type(SWEP.PrimaryAttack) == "function", "SWEP registers without capturing loader PLUGIN")
 
 -- Client rendering must use the authoritative viewpoint and replace only the latest artifact pair.

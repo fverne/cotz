@@ -140,7 +140,19 @@ function PANEL:AddTask(npc, job)
 			LocalPlayer():Notify("You can abandon another task in " .. remaining .. " seconds.")
 			return
 		end
-		netstream.Start("job_removeplayerjob", npc)
+		local current = character:GetJobs()[npc]
+		ix.cotzUI.Query("Abandon " .. ix.jobs.getFormattedName(current) .. "? Your task progress will be lost.",
+			"Abandon task", "Cancel", function() end, "Abandon", function()
+				if LocalPlayer():GetCharacter() ~= character then return end
+				local active = character:GetJobs()[npc]
+				if not active or active.rewardKey ~= current.rewardKey or active.identifier ~= current.identifier then return end
+				local remaining = character:GetData("lastTaskAbandon", 0) - os.time()
+				if remaining >= 0 then
+					LocalPlayer():Notify("You can abandon another task in " .. remaining .. " seconds.")
+					return
+				end
+				netstream.Start("job_removeplayerjob", npc)
+			end)
 	end)
 	if job.fieldTask then
 		addButton(actions, "Field work", function() ix.jobs.field.OpenMenu(npc, job.fieldTask.kind) end)

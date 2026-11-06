@@ -41,16 +41,12 @@ PLUGIN:Register("suture", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Sewing stock (trade goods)",
-				items = {"value_sewingkit", "value_tools_sewing"}},
-			{label = "Reinforcement stock (trade goods)",
-				items = {"value_tape_duct", "value_tape_heavy"}},
+			{label = "Field dressings",
+				items = {"medic_bandage_1", "medic_bandage_2"}},
+			{label = "Pain relief",
+				items = {"drug_painkillers"}},
 			{label = "Expedition provisions",
 				items = {"food_raisins", "drink_bottlewater"}},
-		},
-		bonusItems = {
-			"attachment_fabric_1",
-			"attachment_fabric_2",
 		},
 	},
 	dialogue = {

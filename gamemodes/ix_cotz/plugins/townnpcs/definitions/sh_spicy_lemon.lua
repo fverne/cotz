@@ -45,13 +45,15 @@ PLUGIN:Register("spicy-lemon", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Packed lunch",
-				items = {"food_can_tushonka", "food_can_beans", "food_bread"}},
-			{label = "Drinks",
-				items = {"drink_bottlewater", "drink_bottletea", "drink_energydrink_2"}},
-			{label = "Camp cooking",
-				items = {"lowtiercookerfuel", "food_can_corn"}},
+			{label = "Cutlery", items = {"hidestasher_cutlery"}},
+			{label = "Canned provisions", items = {"food_can_chilibeans", "food_can_olive", "food_can_corn"}},
+			{label = "Cooking fuel", items = {"lowtiercookerfuel"}},
 		},
+		bonusPackages = {
+			{label = "Canned supplies", items = {"food_can_tushonka", "food_can_beans"}},
+			{label = "Cooking fuel", items = {"lowtiercookerfuel"}},
+		},
+		bonusCash = true,
 	},
 	dialogue = {
 		completedGreeting = (

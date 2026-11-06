@@ -23,12 +23,13 @@ PLUGIN:Register("spoor", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Hunting ammunition",
-				items = {"12gauge", "762x54", "762x51"}},
-			{label = "Edge upkeep",
-				items = {"sharpening_stone", "sharpening_stone_fine"}},
-			{label = "Long hunt",
-				items = {"food_raisins", "drink_bottlewater"}},
+			{label = "Hunting shells", items = {"12gauge"}},
+			{label = "Edge upkeep", items = {"sharpening_stone"}},
+			{label = "Canned provisions", items = {"food_can_tushonka"}},
+		},
+		bonusPackages = {
+			{label = "Fine edge upkeep", items = {"sharpening_stone_fine"}},
+			{label = "Pripyat stash", items = {"hidestash_3"}},
 		},
 	},
 	dialogue = {

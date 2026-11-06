@@ -25,11 +25,6 @@ net.Receive("cotz/camera/photo", function()
 
 	pendingPhoto = photo
 	surface.PlaySound("items/camera/snap.wav")
-	chat.AddText(ix.cotzUI.colors.text, "Camera: " .. count .. " subjects. Full list in the console.")
-	print("[COTZ Camera] " .. count .. " subjects" .. (photo.truncated and " (list limit reached)" or ""))
-	for _, subject in ipairs(photo.subjects) do
-		print("  " .. subject.kind .. " | " .. subject.id .. " | " .. subject.label)
-	end
 end)
 
 function PLUGIN:PostRender()
@@ -67,8 +62,6 @@ function PLUGIN:PostRender()
 	renderingFrame = false
 
 	if not image then
-		chat.AddText(ix.cotzUI.colors.red, "Camera: image capture failed. The subject list is in the console.")
-
 		return
 	end
 

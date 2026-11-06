@@ -24,14 +24,14 @@ PLUGIN:Register("boss", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Assault resupply",
-				items = {"545x39", "556x45", "9x39"}},
-			{label = "Casualty supplies",
-				items = {"medic_bandage_1", "medic_medkit_1", "drug_painkillers"}},
-			{label = "Operational provisions",
-				items = {"drink_bottlewater", "food_can_tushonka"}},
+			{label = "Combat ammunition", items = {"545x39"}},
+			{label = "Medical supplies", items = {"medic_medkit_1"}},
+			{label = "Canned provisions", items = {"food_can_tushonka"}},
 		},
-		bonusService = "repair",
+		bonusPackages = {
+			{label = "Specialist ammunition", items = {"545x39ap", "556x45ap"}},
+		},
+		bonusCash = true,
 	},
 	dialogue = {
 		completedGreeting = (

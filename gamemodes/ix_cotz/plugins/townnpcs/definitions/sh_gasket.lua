@@ -45,8 +45,8 @@ PLUGIN:Register("gasket", {
 		packages = {
 			{label = "Fuel allowance",
 				items = {"lowtiercookerfuel"}},
-			{label = "Utility stores (trade goods)",
-				items = {"value_battery", "value_waterfilter", "value_airfilter"}},
+			{label = "Field dressings",
+				items = {"medic_bandage_1", "medic_bandage_2"}},
 			{label = "Reserve provisions",
 				items = {"drink_bottlewater", "food_bread"}},
 		},

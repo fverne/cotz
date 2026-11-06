@@ -56,6 +56,7 @@ ix = {jobs = {list = {}, jobsbycategory = {}}, plugin = {list = {}},
 	item = {list = {}}, char = {loaded = {}}, taskRewards = {},
 	config = {Get = function(_, default) return default end}, progression = {GetNPCFromName = function() end},
 	dialogue = {notifyMoneyReceive = function() end, notifyReputationReceive = function() end}}
+ix.plugin.Get = function(id) return ix.plugin.list[id] end
 local players, objects, callbacks = {}, {}, {}
 player = {Iterator = function() return ipairs(players) end}
 ents = {Create = function(class)
@@ -305,8 +306,27 @@ flush()
 job = character.jobs.Contact
 check(job.isCompleted and ix.jobs.field.CanComplete(character, job), "successful transfer completes the objective")
 check(entity.invalid, "collected world object is removed")
+local function completionNoticeCount()
+	local count = 0
+	for _, notice in ipairs(client.notices) do
+		if notice:find("Task completed:", 1, true) then count = count + 1 end
+	end
+
+	return count
+end
+local completionNotices = completionNoticeCount()
+check(completionNotices == 1, "field recovery announces task completion")
+update(client, character)
+check(completionNoticeCount() == completionNotices, "field updates do not repeat the completion notification")
 check(lastItem:CanTransfer(nil, stranger:GetCharacter():GetInventory()) == false, "cargo blocks another inventory")
 check(lastItem:CanTransfer(nil, nil) == false, "cargo cannot be dropped")
+SERVER, CLIENT = false, true
+LocalPlayer = function() return client end
+check(lastItem:CanTransfer(inventory, nil) ~= false, "client can rearrange bound parcels inside the main inventory")
+check(lastItem:CanTransfer(inventory, stranger:GetCharacter():GetInventory()) == false,
+	"client still blocks parcel transfers out of the main inventory")
+SERVER, CLIENT = true, false
+check(lastItem:CanTransfer(inventory, nil) == false, "server still rejects nil-destination drops")
 check(PLUGIN:CanPlayerTakeItem(stranger, lastItem) == false, "foreign character pickup is denied")
 check(PLUGIN:CanPlayerTakeItem(client, lastItem) == nil, "owner pickup does not override other hooks")
 lastItem.data.fieldClaim = "another-job"
@@ -419,6 +439,12 @@ check(not ix.jobs.field.CanRead(job.fieldTask, client.position, job.fieldTask),
 client.position = Vector(0, 0, 0)
 ix.jobs.field.Action(client, "Contact", "read")
 check(#character.jobs.Contact.fieldTask.readings == 1, "first reading is saved")
+local reading = character.jobs.Contact.fieldTask.readings[1]
+check(reading.bearing ~= nil and reading[1] == client.position.x and reading[2] == client.position.y,
+	"reading persists its origin and bearing")
+local savedBearing = reading.bearing
+check(ix.jobs.field.ReadingBearing({point = {0, 100, 0}}, reading) == savedBearing,
+	"recorded bearing is used without recomputing the source")
 now = now + 2
 ix.jobs.field.Action(client, "Contact", "read")
 check(#character.jobs.Contact.fieldTask.readings == 1, "same position cannot farm readings")
@@ -476,11 +502,32 @@ ix.jobs.field.settings.deadDrop.minRouteDistance = 100000
 check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_deadDrop_easy), "impossible dead-drop routes are hidden")
 ix.jobs.field.settings.deadDrop.minRouteDistance = originalDistance
 job = assign(character, "deadDrop")
+local diggingTool = {base = "base_hidestashers", quantity = 0}
+function diggingTool:GetData(_, default) return default end
+local hasTool = false
+function inventory:GetItems()
+	local items = {}
+	for id, item in pairs(self.items) do items[id] = item end
+	if hasTool then items.diggingTool = diggingTool end
+
+	return items
+end
 local route = copy(job.fieldTask)
 client.position = ix.jobs.field.Unpack(route.point)
 update(client, character)
 entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(IsValid(entity), "parcel appears only at the saved pickup site")
+ix.jobs.field.Collect(client, entity)
+check(#callbacks == 0, "dead-drop pickup requires a digging tool")
+now, hasTool = now + 2, true
+ix.jobs.field.Collect(client, entity)
+check(#callbacks == 0, "an exhausted digging tool cannot dig up a parcel")
+diggingTool.quantity, now = 5, now + 2
+ix.jobs.field.Collect(client, entity)
+hasTool = false
+flush()
+check(not entity.invalid and not next(inventory.items), "tool loss during database work preserves the parcel")
+now, hasTool = now + 2, true
 ix.jobs.field.Collect(client, entity)
 flush()
 check(character.jobs.Contact.fieldTask.stage == "carrying" and not character.jobs.Contact.isCompleted,
@@ -510,7 +557,11 @@ now = now + 2
 ix.jobs.field.Action(client, "Contact", "deliver")
 check(not character.jobs.Contact.isCompleted, "failed parcel removal cannot complete delivery")
 parcel.Remove = originalRemove
+hasTool = false
 now = now + 2
+ix.jobs.field.Action(client, "Contact", "deliver")
+check(not character.jobs.Contact.isCompleted and not parcel.removed, "burial also requires a digging tool")
+now, hasTool = now + 2, true
 ix.jobs.field.Action(client, "Contact", "deliver")
 check(character.jobs.Contact.fieldTask.stage == "delivered" and character.jobs.Contact.isCompleted
 	and not next(inventory.items), "delivery consumes cargo and saves completion")
@@ -746,6 +797,7 @@ dofile("gamemodes/ix_cotz/plugins/townnpcs/items/jobcargo/sh_town_quest_notebook
 ix.item.list.town_quest_notebook = setmetatable(ITEM, {__index = cargoBase})
 local courierClient, courier, courierInventory = actor()
 local courierDefinition = {
+	name = "Recover the landing log",
 	fieldType = "recovery", fieldMap = map, fieldCargo = "town_quest_notebook",
 	fieldCargoDescription = "A water-stained maintenance log with a torn cover.",
 	fieldCargoName = "Landing maintenance log", fieldRecipient = "Ledger", fieldRecipientMap = "rp_waystation",
@@ -876,11 +928,18 @@ check(not ix.jobs.field.GetObject(courier, courierJob), "delivered cargo cannot 
 ix.townNPCs = previousTown
 
 -- Cross-map routes do not compare unrelated map coordinate systems.
-local routeClient, routeCharacter = actor()
+local routeClient, routeCharacter, routeInventory = actor()
+function routeInventory:GetItems()
+	local items = {}
+	for id, item in pairs(self.items) do items[id] = item end
+	items.diggingTool = diggingTool
+
+	return items
+end
 local pickupMap, destinationMap = "cross-map-pickup", "cross-map-destination"
 ix.plugin.list.hidestashspawner.stashspawnpoints[pickupMap] = {{Vector(1000, 0, 0)}}
 ix.plugin.list.hidestashspawner.stashspawnpoints[destinationMap] = {{Vector(1000, 0, 0)}}
-ix.jobs.list.crossMapDrop = {fieldType = "deadDrop", fieldMap = pickupMap,
+ix.jobs.list.crossMapDrop = {name = "Cross-map drop", fieldType = "deadDrop", fieldMap = pickupMap,
 	destinationMap = destinationMap, tier = 2}
 local routeJob = {identifier = "crossMapDrop", rewardKey = "cross-map:1", numberRec = 1,
 	progress = 0, progressionClaim = 99999}
@@ -911,6 +970,10 @@ sensorCharacter.jobs.Contact = sensorJob
 sensorClient.position = ix.jobs.field.Unpack(sensorJob.fieldTask.point)
 now = now + 2
 ix.jobs.field.Action(sensorClient, "Contact", "deploy")
+check(ix.jobs.field.GetObject(sensorCharacter, sensorCharacter.jobs.Contact).model
+	== "models/lostsignalproject/items/quest/scanner_anomaly.mdl", "sensor uses the requested scanner model")
+check(ix.jobs.field.GetObjectModel({kind = "sensor", cargo = "town_quest_notebook"})
+	== "models/lostsignalproject/items/quest/scanner_anomaly.mdl", "custom commission sensors use the scanner too")
 local savedReadyAt = sensorCharacter.jobs.Contact.fieldTask.readyAt
 check(savedReadyAt == now + 900, "new sensor stores a fifteen-minute real-time deadline")
 now = now + 901

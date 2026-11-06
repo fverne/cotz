@@ -18,24 +18,14 @@ PLUGIN:Register("smartass", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Electronics stock (trade goods)",
-				items = {"value_capacitors", "value_pcpart_ram", "value_pcpart_cpu"}},
-			{label = "Overtime",
-				items = {"drug_caffeine", "drink_energydrink_2"}},
-			{label = "Extraction provisions",
-				items = {"drink_bottlewater", "food_raisins"}},
+			{label = "Overtime", items = {"drug_caffeine"}},
+			{label = "Energy drinks", items = {"drink_energydrink_2"}},
+			{label = "Euro notes", items = {"value_currency_euro"}},
 		},
-		bonusItems = {
-			"pso1",
-			"cmore",
-			"acog",
-			"shortdot",
-			"nightforce",
-			"cobrasuppressor",
-			"pbssuppressor",
-			"sakersuppressor",
-			"tundrasuppressor",
+		bonusPackages = {
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
 		},
+		bonusCash = true,
 	},
 	dialogue = {
 		completedGreeting = (

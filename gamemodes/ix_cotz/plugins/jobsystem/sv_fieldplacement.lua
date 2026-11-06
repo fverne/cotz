@@ -6,8 +6,8 @@ local GROUND_UP = Vector(0, 0, ix.jobs.field.runtimeSettings.groundUp)
 local GROUND_DOWN = Vector(0, 0, ix.jobs.field.runtimeSettings.groundDown)
 local GROUND_CLEARANCE = Vector(0, 0, ix.jobs.field.runtimeSettings.groundClearance)
 
-function ix.jobs.field.GroundPoint(position, cargo, filter)
-	local model = ix.item.list[cargo].model
+function ix.jobs.field.GroundPoint(position, cargo, filter, model)
+	model = model or ix.item.list[cargo].model
 	if not modelBounds[model] then
 		local probe = ents.Create("prop_dynamic")
 		if not IsValid(probe) then return end

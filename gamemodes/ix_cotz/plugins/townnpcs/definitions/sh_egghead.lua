@@ -3,10 +3,11 @@ PLUGIN:Register("egghead", {
 	template = "ecologistnpc",
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
-	map = "rp_waystation",
+	map = "rp_marsh_cs",
+	bunker = true,
 	job = {
 		kind = "regionalSpecimens",
-		category = "Specific mutant specimens",
+		category = "Bunker mutant specimens",
 		description = "Specific mutant specimens",
 		maps = {
 			easy = "rp_garbage_cotz",
@@ -26,12 +27,13 @@ PLUGIN:Register("egghead", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Anomaly recovery",
-				items = {"medic_psyheal_1", "medic_psyheal_2"}},
-			{label = "Exposure treatment",
-				items = {"medic_antirad_1", "medic_antirad_2"}},
-			{label = "Emergency research supplies",
-				items = {"medic_antipsychotic_1", "medic_stimpak_1"}},
+			{label = "Exposure treatment", items = {"medic_antirad_1", "medic_antirad_2"}},
+			{label = "Emergency medicine", items = {"medic_stimpak_1"}},
+			{label = "Canned provisions", items = {"food_can_tuna"}},
+		},
+		bonusPackages = {
+			{label = "Specialist medicine", items = {"medic_psyheal_2", "medic_antipsychotic_2"}},
+			{label = "Euro notes", items = {"value_currency_euro"}},
 		},
 	},
 	dialogue = {

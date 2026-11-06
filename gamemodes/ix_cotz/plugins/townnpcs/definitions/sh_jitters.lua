@@ -47,12 +47,12 @@ PLUGIN:Register("jitters", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Bleeding control",
-				items = {"medic_bandage_1", "medic_bandage_2", "medic_bandage_3"}},
-			{label = "Trauma supplies",
-				items = {"medic_medkit_1", "medic_medkit_2", "drug_painkillers"}},
-			{label = "Exposure treatment",
-				items = {"medic_antirad_1", "medic_antirad_2"}},
+			{label = "Field dressings", items = {"medic_bandage_1", "medic_bandage_2"}},
+			{label = "Medical supplies", items = {"medic_medkit_1", "medic_medkit_2"}},
+			{label = "Canned provisions", items = {"food_can_beans"}},
+		},
+		bonusPackages = {
+			{label = "Medical supplies", items = {"medic_medkit_2", "medic_medkit_3"}},
 		},
 	},
 	dialogue = {

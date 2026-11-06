@@ -113,6 +113,37 @@ function ix.jobs.field.FindCargo(character, job)
 	end
 end
 
+function ix.jobs.field.GetObjectModel(state)
+	local cargo = state.kind == "sensor" and "job_sensor_recorder" or state.cargo
+
+	return ix.item.list[cargo].model
+end
+
+function ix.jobs.field.HasDiggingTool(character)
+	for _, item in pairs(character:GetInventory():GetItems()) do
+		if item.base == "base_hidestashers" and item:GetData("quantity", item.quantity or 0) > 0 then
+			return true
+		end
+	end
+
+	return false
+end
+
+function ix.jobs.field.RequireDiggingTool(client, character)
+	if ix.jobs.field.HasDiggingTool(character) then return true end
+	client:Notify("You need a usable stash digging tool to dig up or bury the parcel.")
+
+	return false
+end
+
+function ix.jobs.field.ReadingBearing(state, reading)
+	if reading.bearing ~= nil then return reading.bearing end
+	-- Accepted assignments used bare coordinate arrays before bearings were saved explicitly.
+	local delta = ix.jobs.field.Unpack(state.point) - ix.jobs.field.Unpack(reading)
+
+	return (math.deg(math.atan2(-delta.y, delta.x)) + 360) % 360
+end
+
 function ix.jobs.field.CanComplete(character, job)
 	if job.fieldTask and ix.jobs.field.NeedsDelivery(job.fieldTask) then return job.fieldTask.stage == "delivered" end
 	if job.fieldTask and job.fieldTask.kind == "defence" then

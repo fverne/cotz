@@ -31,7 +31,7 @@ function ix.jobs.field.Status(client, npc, job)
 	end
 	if state.stage == "carrying" and state.recipient then
 		local recipientMap = ix.jobs.field.GetRecipientMap(state)
-		client:Notify("Deliver the cargo to " .. state.recipient .. " in " .. recipientMap
+		client:Notify("Deliver the cargo to " .. state.recipient .. " in " .. ix.jobs.GetMapName(recipientMap)
 			.. ", then return to " .. npc .. ".")
 		if recipientMap == game.GetMap() then
 			local recipient = ix.progression.GetNPCFromName(state.recipient)
@@ -46,7 +46,7 @@ function ix.jobs.field.Status(client, npc, job)
 	local activeMap = state.kind == "deadDrop" and state.stage == "carrying"
 		and (state.destinationMap or state.map) or state.map
 	if activeMap ~= game.GetMap() then
-		client:Notify("This assignment is in " .. activeMap .. ". Your progress is saved.")
+		client:Notify("This assignment is in " .. ix.jobs.GetMapName(activeMap) .. ". Your progress is saved.")
 		return
 	end
 	if state.kind == "triangulation" and #state.readings < state.readingCount then
@@ -104,6 +104,7 @@ local function deliverDrop(client, character, npc, job)
 	end
 	local cargo = ix.jobs.field.FindCargo(character, job)
 	if not cargo then client:Notify("You need the assigned parcel to make this delivery.") return end
+	if not ix.jobs.field.RequireDiggingTool(client, character) then return end
 	if cargo:Remove() == false then return end
 	state.stage, job.progress, job.isCompleted = "delivered", job.numberRec, true
 	ix.jobs.field.SaveJob(character, npc, job)
@@ -139,7 +140,8 @@ function ix.jobs.field.Action(client, npc, action)
 			return
 		end
 		local deployed = ix.jobs.field.GroundPoint(
-			position + client:GetForward() * DEPLOY_FORWARD_DISTANCE, state.cargo, client
+			position + client:GetForward() * DEPLOY_FORWARD_DISTANCE, state.cargo, client,
+			ix.jobs.field.GetObjectModel(state)
 		)
 		if not deployed then
 			client:Notify("The deployment site is obstructed. Clear the obstruction and try again.")
@@ -151,10 +153,12 @@ function ix.jobs.field.Action(client, npc, action)
 		ix.jobs.field.SpawnObject(character, npc, job)
 		client:Notify("Sensor deployed. Leave the site while it records, then return to collect it.")
 	elseif action == "read" and ix.jobs.field.CanRead(state, position, state) then
-		state.readings[#state.readings + 1] = ix.jobs.field.Pack(position)
+		local reading = ix.jobs.field.Pack(position)
+		reading.bearing = ix.jobs.field.ReadingBearing(state, reading)
+		state.readings[#state.readings + 1] = reading
 		ix.jobs.field.SaveJob(character, npc, job)
 		local delta = ix.jobs.field.Unpack(state.point) - position
-		local bearing = (math.deg(math.atan2(-delta.y, delta.x)) + 360) % 360
+		local bearing = reading.bearing
 		client:Notify(string.format("Reading %d/%d: compass bearing %.0f degrees. Signal %s.",
 			#state.readings, state.readingCount, bearing, delta:LengthSqr() <= ix.jobs.field.spawnDistance ^ 2
 				and "strong" or "weak"))

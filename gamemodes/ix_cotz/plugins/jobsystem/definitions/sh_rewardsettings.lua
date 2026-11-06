@@ -60,7 +60,8 @@ ix.taskRewards.settings = {
 		["NPC"] = {"drink_bottlewater", "drink_bottletea", "medic_bandage_1"},
 	},
 
-	supplyCatalogueVersion = 4,
+	supplyCatalogueVersion = 5,
+	ammoRewardFraction = 0.5,
 	maxPackageItems = 64,
 	maxOffers = 512,
 	maxPendingRewards = 1024,
@@ -73,6 +74,7 @@ ix.taskRewards.settings = {
 	creditPremium = 1.3,
 	jobSupplyCashShare = 0.5,
 	jobCashRate = 0.50,
+	jobHandInBaseMoney = {500, 1000, 1500},
 	-- Preserve supply budgets and non-delivery cash independently of turn-in payouts.
 	jobReferenceCashRate = 0.55,
 	cashRoundingEpsilon = 0.000000001,

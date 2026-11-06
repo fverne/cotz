@@ -5,15 +5,48 @@
 The [current roster and implementation guide](../../../../docs/npc-overhaul/repeatable-jobs.md)
 supersedes the older town repeatable delivery/tier descriptions below. New work uses regional targets,
 alternate receivers, cross-map dead drops, information couriers and Atlas's alternating photography.
-Reference cash is 1,000/2,000/3,000; reputation is 15/25/35. Current reward packages and bonuses remain.
+Reference cash is 1,000/2,000/3,000; reputation is 15/25/35. Reward packages and completion-time choices are described below.
 Accepted old assignments retain completion-only definitions and their original reputation terms.
 Finite progression is unchanged and its rework is deferred, including stalled inactive-issuer checkpoints.
+
+Beanstalk, Egghead and Intern live in the Swamps Eco Bunker. Their town definitions declare
+`map = "rp_marsh_cs"` and `bunker = true`. Brass's easy information couriers exclude bunker contacts;
+hard couriers include all three scientists alongside Waystation recipients. Existing physical bunker
+access and the hard-tier card-purchase gate remain. Beanstalk offers research defence; Egghead's
+specimen requests retain Garbage/Waystation/Pripyat difficulty regions, with claims at the bunker.
 
 `definitions/sh_regionalcatalogue.lua` is static generated source data. `libs/sh_regionaljobs.lua`
 owns shared eligibility/identity helpers; `sv_regionaljobs.lua` owns authoritative progress and bound
 camera/courier issuance. Per-assignment field settings, both route maps and cargo variants are saved.
 Run `luatex --luaonly tests/regional_jobs_spec.lua` alongside the suites below.
 No server deployment, first-time setup or live-save reset is part of offline verification.
+
+## Task feedback and hand-ins
+
+Valuable couriers list every eligible receiving contact in the confirmation and task journal.
+Map references use the cross-server display names, with built-in names available before that plugin
+loads; accepted descriptions containing BSP names are formatted without changing saved locations.
+Every objective completion sends a task-completed notification and PDA sound once. Photography
+shows the saved captured species/anomaly list in the journal and while holding the loan camera.
+Triangulation saves the origin and compass bearing of each reading and marks those positions in
+world space until the transmitter is collected. Old coordinate-only readings remain supported.
+Mute now offers triangulation in Swamps / Waystation / Pripyat, with 3 / 4 / 5 readings.
+Contacts without repeatable work omit the root offer link while retaining active legacy job status.
+Abandoning a task requires confirmation; the callback rechecks the character, assignment and cooldown.
+
+Dead drops require a usable `base_hidestashers` digging tool at pickup and burial, including the
+asynchronous pickup callback. The tool is required but is not consumed. Bound parcels can be rearranged
+inside the main inventory and cannot leave it. Sensor world objects use
+`models/lostsignalproject/items/quest/scanner_anomaly.mdl`, including custom commission sensors.
+
+Hand-in cash is 500 / 1,000 / 1,500 rubles by tier, plus 50% of the required items' value.
+The chosen supply reward never reduces cash. The added item payment funds neither supplies nor the
+five-task bonus: hand-in supplies use only the tier base (with the existing 600-ruble minimum), and
+only unused supply allowance contributes to bonuses. Whole-item requests value whole meals/specimens;
+per-use requests retain unit valuation and higher-quality hand-ins retain their increased value.
+Accepted assignments retain their identity and progress. Unpaid reward offers migrate to the current
+completion-time catalogue; their bonus allowance is capped to the current tier basis.
+Previously completed hand-ins also receive the current cash formula at claim; paid claims stay paid.
 
 ## Editing definitions
 
@@ -23,7 +56,7 @@ and stay within the viewport; marker duration, positions and server actions are 
 
 Restart after editing shared definitions. Job IDs, category IDs, cargo item IDs, network names and
 saved character keys remain stable. Existing accepted field jobs keep their saved destinations,
-recording parameters, selected rewards and defence wave rolls; definition edits tune new assignments.
+recording parameters and defence wave rolls; definition edits tune new assignments.
 No save reset or first-time setup is required.
 
 For deliveries addressed to a town contact, the PDA and hand-in checks resolve that contact's current
@@ -128,6 +161,7 @@ From the addon root:
 luatex --luaonly tests/jobsystem_spec.lua
 luatex --luaonly tests/jobs_loading_spec.lua
 luatex --luaonly tests/field_tasks_spec.lua
+luatex --luaonly tests/job_overlays_spec.lua
 luatex --luaonly tests/task_rewards_spec.lua
 luatex --luaonly tests/jobs_menu_spec.lua
 luatex --luaonly tests/townnpcs_spec.lua
@@ -142,139 +176,113 @@ and finite field commissions from editable definitions. Server acceptance verifi
 reputation and active progression. Finite commissions pay only their progression reward and do not
 advance repeatable-job counters, reward bonuses or restock events. Only current town job definitions are used; there is no town preview or assignment migration.
 
-The main menu's **Tasks** tab contains the current task list, including descriptions, selected rewards, progress, Abandon and
+The main menu's **Tasks** tab contains the current task list, including descriptions, payment, progress, Abandon and
 Field work actions. The scrollable cards use the equipment menu palette, borders and scaled typography,
 and refresh when accepted tasks change. Tasks have their own page alongside Help and You, including when
 there are no active jobs. The You tab contains the backpack and equipment.
 
 ## Task rewards and existing kits
 
-Jobsystem owns repeatable job rewards, previews, acceptance, item delivery
-and automatic supply-claim continuation. Its post-data-load hook validates task rewards. The `ix.taskRewards` API and saved character
-keys remain unchanged. Progression owns story milestones and their completion payouts.
-Jobsystem uses progression's NPC access checks, purchase unlocks and token-backed reward-claim service.
+Jobsystem owns repeatable reward preparation, hand-in choices, bonus accounting and stored claims.
+Town contacts configure rewards beside their jobs in `townnpcs/definitions/sh_<contact>.lua`.
+Reward lists are independent of vendor stock and purchase unlocks. NPC conversation/access checks
+still apply. Finite progression retains its separate completion payments.
 
-`libs/sh_taskrewards.lua` defines contact profiles, nominal-value budgeting and visible
-packages. `libs/sv_taskrewards.lua` persists offers and transfers selected rewards into
-the existing token-backed claim queue. `integrations/sh_dialogue.lua` installs
-"Claim rewards" and an authoritative task preview. Contacts without a work topic show the main-menu entry only when a relevant reward,
-kit exchange, barter or pending reward claim is available.
-Pending rewards keep "About work" accessible even after the active job is finished.
-That menu lists repeatable job offers. Progression tasks pay money and reputation
-through their own completion flow, without selectable item rewards. Existing kit and
-barter exchanges remain available through the rewards menu.
+### Completion-time choices
 
-Medium repeatable tasks require 250 reputation; hard tasks require 1,600. Easy tasks
-have no reputation gate. Preview generation and acceptance both enforce the requirements,
-including when reputation changes after a preview was saved. Locked categories are hidden.
+Accepting a task shows its objective and ordinary cash payment. It does not select or reveal a
+reward. Preview packets transmit zero reward choices, and neither previews, active jobs nor their
+unrevealed offers store reward candidate details. The task journal shows ordinary payment and return
+instructions. Bonus progress shows the number of completions, without revealing the bonus value.
 
-The work menu shows a concrete saved offer from each unlocked difficulty with its
-task name and cash. Opening an offer shows its description, with up to three reward packages
-shown once on the acceptance buttons. Players select their reward package when
-accepting. That selection is then locked on the server, including while a completed reward awaits delivery.
-About work only offers claims for earned rewards and bonuses, kit exchanges and barters;
-it cannot change an accepted task reward. Saved selections and pending claims remain intact. Each ordinary package
-contains one or two existing supply items or explicitly selected trade goods, with exact quantities
-and no weapons or suits. Each town contact defines up to three named package families; one affordable,
-unlocked candidate per family is selected deterministically for each saved offer. Labels identify
-maintenance materials and electronics as trade goods, without promising new repair or power mechanics.
-A supply allowance uses the task's fixed reference cash payment at an independent
-55% rate, with a minimum of 600 rubles even for easy tasks; quantities
-respect that budget and normal stack capacities. Cash value alone determines the quantity,
-up to two full stacks, regardless of the easy/medium/hard category. Quantities fill the
-first item before spilling into the second; partial stacks show their exact uses/rounds. Unspent allowance is banked toward the
-same trader's five-task bonus. A catalogue with no affordable eligible items banks the whole allowance.
+Once the objective is ready, choose **Complete the assignment** at the issuing contact. This reveals
+up to three reward choices. Selecting one completes the hand-in, consumes any required cargo, pays
+cash/reputation, credits the task and restock once, and grants the selected reward. Selection is checked
+against the current character, active claim, completion state, cargo, NPC access and proximity.
+Walking away after revealing a reward preserves the job and choices; returning does not reroll them.
 
-Every five repeatable completions for the same trader earn a bonus at that trader.
-Each trader has a separate completion counter and accumulated bonus value. Progress persists without a time limit or streak reset. Only the unused portion of each task's supply allowance contributes to the bonus;
-there is no base contribution or percentage of ordinary cash added. Higher-quality hand-ins
-can increase ordinary cash but do not inflate the bonus. The rewards menu shows progress
-and the accumulated value. If five tasks leave no unused
-allowance, the cycle resets without creating an empty bonus offer. If positive value cannot yet buy
-an eligible themed reward, it remains banked and joins the next five-task cycle. Existing earned bonuses
-and previously accumulated value are preserved.
+A full inventory queues selected items with the existing progression reward tokens and exact quantities.
+A full claim queue keeps the chosen earned offer until space opens; its choice stays locked so
+retrying cannot change the allowance already credited to the bonus. Retrying it cannot pay ordinary
+cash or credit task/bonus progress again. Pending inventory insertions retain their existing callback
+and token recovery behaviour. Cash rewards require no inventory space.
 
-An earned bonus offers larger versions of that contact's themed packages. Only Technut and Boss
-add repair credit, bound to the issuing provider, with 30% more face value. Credit appears only when
-the whole award fits within the existing 20,000 balance cap and the provider is accessible.
-Claim-time checks prevent lost credit if capacity changes. Credit applies after repair discounts
-and cannot become cash. Other contacts do not offer Technut credit.
-Mute, Atlas, Latch, Suture and Smartass also have explicit equipment bonus lists: binoculars,
-a compass, industrial tools, fabric reinforcement and optics/suppressors respectively. These
-choices contain one item, fit the earned budget and respect existing personal purchase gates.
-They never grant purchase permission or add items to vendor stock.
-Bonus packages never include cash or ruble items, including rounding remainders.
-Unclaimed bonus choices refresh with the same earned budget. Kit and barter redemption retain
-their existing remainder handling. Full inventories retain token-backed claims.
+### Allowed items and quantities
 
-Town contact rewards are authored under `rewards.packages` in each contact definition. Each entry
-has a `label` and candidate `items`. Optional `bonusItems` and `bonusService` configure larger bonuses.
-These lists are separate from `supplies`, which still configures ordinary vendor stock and legacy
-kit redemption. Vendor unlock catalogues do not automatically expand town task rewards.
-Ordinary rewards include existing ammunition, food, drinks, medicine, charcoal, sharpening stones,
-the stash cleaning kit and selected mechanical, electronic, textile and archive trade goods.
-Existing town equipment/ammunition gates apply. Medicines use the contact's own seller milestone
-where present; support contacts without a medicine catalogue require a completed milestone at a
-real seller. Contact access always applies. Standalone non-town reward profiles retain their
-existing consumable catalogue behaviour.
-Unlocks never multiply the payment for identical work. Preview packages are saved and
-stable; already accepted jobs retain their assigned rewards. Cached unaccepted previews receive
-the increased allowance and catalogue revisions when reopened, preserving the task identity and requirements. Abandonment grants neither
-bonus progress nor payment. Finite story/progression tasks do not count toward the bonus.
+Town reward items must be consumable or have limited uses. Ammunition, medicine, food, drinks,
+charcoal, sharpening stones and stash digging tools qualify. Hidestash spawners are eligible because
+their stash-generation action is spent once. Euro Notes and Dollar Notes are the only valuable-item
+exceptions. Reusable equipment, attachments, other valuables and service credit are excluded from
+new town reward lists. These restrictions apply to ordinary and five-task bonus choices.
 
-Delivery cash is 50% of the required hand-in value, using the higher of catalogue value
-and configured/live trader sale quotes, multiplied by the actual requested count.
-Stackable requirements are priced per consumed use; ammunition boxes without `quantity`
-count as whole inventory items. Actual specimen quality/value is recorded before
-consumption. Non-delivery jobs pay 55% of their configured midpoint cash plus half the
-supply expected value. Both components are scaled together.
-A base Swamp Controller hand (catalogue value 6,700) pays 3,350 rubles from its repeatable
-job, plus its chosen supply package; progression credit for that hand is 4,020 rubles.
-`JOB_CASH_RATE` configures repeatable delivery payouts in `libs/sh_taskrewards.lua`.
-`JOB_REFERENCE_CASH_RATE` preserves supply budgets and non-delivery cash at their existing values.
-Cached unaccepted delivery previews refresh their cash without rerolling their supplies.
-Progression sets `PROGRESSION_CASH_RATE` separately in `../progression/libs/sh_rewards.lua`. Money is paid once on job completion, not during item delivery.
-A qualifying completion still earns its existing 20% personal vendor restock exactly once.
-Job previews save their cash and supplies when created; reopening and accepting reuse that offer.
+Every ammunition reward contains exactly half its normal pack, rounded down for an odd pack size.
+Its allowance must cover that half-pack. Larger allowances never increase ammunition quantities,
+including for bonus ammunition. Other consumables use explicit, budgeted quantities within their
+normal stack capacity; ordinary choices contain at most two inventory items. Bonus choices can
+contain larger consumable packages. No cash remainder is silently attached to an item choice.
 
-Kit redemption retains its original profiles and provider-specific purchase checks. Task-kit offers
-retain nominal-value budgeting. Higher-value offers of those types may
-include an already-authorised weapon or body armour from that provider, worth at least
-60% of the offer budget. Quantities are explicit; indivisible value and the package-size
-limit settle into a visible ruble remainder. Offers stay within one ruble of their nominal
-budget. Task variety and personal assignments provide variation without hidden jackpots.
-This preserves nominal catalogue value, not identical vendor resale proceeds or equipment
-utility; balancing still requires live playtesting.
+| Contact | Regular reward highlights | Five-task bonus highlights |
+| --- | --- | --- |
+| Old Timer | 10 .410 shells (`45acp41`), sharpening stones, canned tushonka | Fine stones, Swamps stash notes |
+| Cleaner | Cutlery, stash cleaning kits, canned beans | Lost Note, Lost Rookie PDA, Lost Veteran PDA |
+| Spicy Lemon | Cutlery, canned chili beans/olives/corn, charcoal | Canned supplies, charcoal, or cash |
+| Mute, Spool, Ballast | Cash only: 200 / 400 / 600 rubles for easy / medium / hard | Euro Notes or Dollar Notes |
+| Haggler, Smartass, Technut, Latch, Brass, Boss | Dedicated consumable/currency packages | Dedicated packages or cash |
+| Other contacts | Dedicated food, medical, ammunition and other consumable packages | Defined consumable/currency packages or stash information |
 
-The paid upgrade dialogue is removed. Recognised task-kit types, including shared ammo/
-aid kit types used by jobs, redeem at contacts for visible choices with no fee. These types
-redeem deterministically; unrelated starter, medical and world kits keep their opening
-behaviour. Reward definitions reference existing items and pools directly.
+Old Timer's only reward ammunition is .410. Cleaner has no ordinary stash-spawner reward.
+The three stash spawners generate caches in Swamps, Waystation and Pripyat respectively.
+Contact definitions list every candidate; `packages` configures ordinary choices, `bonusPackages`
+configures separate bonus choices (defaulting to ordinary packages), `cashPerTier` replaces ordinary
+items with cash, and `bonusCash` adds a cash alternative to the bonus choices.
 
-Kit-producing Haggler/Quartermaster barters appear in the task supplies menu as explicit
-ammunition selections from their original ammunition families. Their required items and
-quantities are unchanged. The old barter endpoint cannot issue those kits. Ordinary named
-barters remain in the normal barter menu. Failed input checks consume nothing.
+### Cash and five-task bonuses
 
-Offers use character data `taskRewardOffers`; preview assignments use `taskJobPreviews`.
-Pending supplies use progression line `taskRewardClaims`. Token acknowledgement and
-restart recovery are shared with existing fixed rewards. Offers and queues are bounded;
-paid choices are removed, and abandoned/unaccepted alternate offers are retired. Claiming
-continues while space permits; the menu can resume remaining claims later.
+Ordinary payment is independent of the selected reward. Hand-in cash adds 500 / 1,000 / 1,500 rubles
+by tier to 50% of the required items' value. Actual hand-in quality is recorded before consumption;
+whole-item requests use whole-item value, and per-use requests use consumed-unit value. Non-item
+jobs retain their ordinary 55% reference-cash payment. The 200 / 400 / 600 reward for cash-only
+contacts is paid in addition to that payment.
 
-Additional checks:
+Supply allowance retains its 600-ruble minimum. Item hand-ins use the tier base for that allowance;
+item reimbursement never funds supplies or bonuses. On reward selection, the chosen items' value or
+chosen cash reward is deducted from the allowance. Only the remainder enters that trader's five-task
+bonus. Each trader keeps a separate completion count and budget, without a time limit.
+
+Bonus choices are generated and revealed only after five completed hand-ins for that trader.
+A bonus cash choice pays the earned budget. Euro and dollar choices use their configured per-note
+values (52 and 38 rubles), rounding down with no ruble remainder. Five all-easy / all-medium /
+all-hard jobs at Mute, Spool or Ballast produce budgets of 2,000 / 3,500 / 5,250 rubles: a choice of
+38 / 67 / 100 euros or 52 / 92 / 138 dollars. Mixed difficulties combine the remaining allowances.
+Unaffordable bonus value carries into the next cycle; a zero-value cycle creates no empty reward.
+Revealed current-version bonus choices persist without rerolling on menu reopen or reconnect.
+
+### Compatibility and kit exchanges
+
+Catalogue version 5 retires old acceptance-time reward reservations. On character load and NPC
+interaction, active jobs and saved previews lose cached choices while keeping their IDs, quantities,
+progress, cargo, claim serials and ordinary cash terms. Already-earned unclaimed offers receive the
+current eligible catalogue with their earned budget preserved. Previously paid/token-queued rewards
+remain recoverable; this migration does not erase existing item claims or repay completed jobs.
+No database reset or first-time setup is required. Update all map servers together and restart.
+
+Task-kit and ammunition-barter redemption retain their existing exchange flow and item valuation.
+These legacy exchanges are separate from town job rewards. They continue to use bounded,
+token-backed pending claims and provider access checks. The paid upgrade dialogue remains removed.
+
+Checks:
 
 ```bash
 luatex --luaonly tests/task_rewards_spec.lua
 luatex --luaonly tests/jobs_menu_spec.lua
-python -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
+luatex --luaonly tests/jobs_loading_spec.lua
+python3 -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
 ```
 
-Legacy global partial progress is preserved at the most recently credited trader, using
-the greatest saved completion serial. Its earlier trader attribution cannot be recovered.
-Existing earned bonus offers retain their original trader and value. New progress is
-stored per trader under `taskCompletionBonus.traders`; `BonusStatus` calls the displayed
-amount "Bonus value earned" rather than "Banked" to distinguish it from spendable cash.
+The standalone checks cover hidden previews, completion choices, cash-only tasks, half-pack ammunition,
+allowed item types, currency quantities, duplicate claims, unavailable contacts, saved-offer migration,
+full inventories and full claim queues. Verify dialogue refresh, cargo hand-in, map travel, reconnect,
+restart and actual inventory insertion in multiplayer before deployment.
 
 ## Repeatable field assignments
 
@@ -308,8 +316,8 @@ No new map spawn-point definitions or per-assignment staff setup are required.
   and hard jobs have three waves with tougher configured compositions.
 
 Open **Field work** on an accepted job in the PDA task list for directions, readings
-or deployment, research startup, and parcel delivery. Markers last 30 seconds; Show
-assignment displays them again. A recovery
+or deployment, research startup, and parcel delivery. Assignment markers last 30 seconds; Show
+assignment displays them again. Recorded triangulation origins and bearings stay visible during the search. A recovery
 marker gives a search area rather than the exact case position. Wrong-map status reports
 the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
 following the existing field jobs' regional difficulty convention. Target maps, categories,
@@ -433,6 +441,7 @@ Regression checks:
 
 ```bash
 luatex --luaonly tests/field_tasks_spec.lua
+luatex --luaonly tests/job_overlays_spec.lua
 luatex --luaonly tests/task_rewards_spec.lua
 luatex --luaonly tests/population_performance_spec.lua
 ```

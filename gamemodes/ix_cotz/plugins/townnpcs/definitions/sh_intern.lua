@@ -4,6 +4,7 @@ PLUGIN:Register("intern", {
 	difficultyMultiplier = 4,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	bunker = true,
 	job = {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",
@@ -27,12 +28,13 @@ PLUGIN:Register("intern", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Routine survey",
-				items = {"drink_bottlewater", "medic_bandage_1"}},
-			{label = "Exposure precautions",
-				items = {"medic_antirad_1"}},
-			{label = "Overtime",
-				items = {"drug_caffeine", "food_raisins"}},
+			{label = "Exposure treatment", items = {"medic_antirad_1"}},
+			{label = "Overtime", items = {"drug_caffeine"}},
+			{label = "Canned provisions", items = {"food_can_corn"}},
+		},
+		bonusPackages = {
+			{label = "Emergency medicine", items = {"medic_stimpak_1"}},
+			{label = "Euro notes", items = {"value_currency_euro"}},
 		},
 	},
 	dialogue = {

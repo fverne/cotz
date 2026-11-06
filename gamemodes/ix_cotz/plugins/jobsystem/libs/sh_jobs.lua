@@ -34,6 +34,24 @@ function ix.jobs.register(definition, identifier)
 	end
 end
 
+function ix.jobs.GetMapName(map)
+	local travel = ix.plugin.Get("simplecrossserver")
+	local region = travel and travel.mapdata and travel.mapdata[map]
+
+	return region and region.name or ix.jobs.settings.mapNames[map] or "Unknown region"
+end
+
+function ix.jobs.FormatMapNames(text)
+	return (text:gsub("rp_[%w_]+", ix.jobs.GetMapName))
+end
+
+function ix.jobs.NotifyCompleted(client, npc, job)
+	if not SERVER or not job.isCompleted or job.completionNotified or not IsValid(client) then return end
+	job.completionNotified = true
+	client:Notify("Task completed: " .. ix.jobs.getFormattedName(job) .. " Return to " .. npc .. ".")
+	netstream.Start(client, "ix_COTZPlayPDASound", 2)
+end
+
 local function initialCount(identifier)
 	local count = ix.jobs.list[identifier].numberRec
 
@@ -41,32 +59,39 @@ local function initialCount(identifier)
 end
 
 function ix.jobs.getFormattedName(job)
-	return string.format(ix.jobs.list[job.identifier].name, job.numberRec)
+	return ix.jobs.FormatMapNames(string.format(ix.jobs.list[job.identifier].name, job.numberRec))
 end
 
-function ix.jobs.getFormattedDesc(activejob)
+function ix.jobs.getFormattedDesc(activejob, hideRewards)
 	local description = activejob.fieldTask and ix.jobs.field.DescribeAssignment(activejob)
 		or ix.jobs.list[activejob.identifier].desc
 	local text = string.format(description, activejob.numberRec)
 	local definition = ix.jobs.list[activejob.identifier]
 	local contact = ix.townNPCs and ix.townNPCs.contacts and ix.townNPCs.contacts[definition.townContact]
+	local assignmentMap = activejob.fieldTask and activejob.fieldTask.map or definition.fieldMap
+	if assignmentMap then text = text .. "\nAssignment region: " .. ix.jobs.GetMapName(assignmentMap) .. "." end
 	if activejob.fieldTask and contact then
 		text = text .. "\nCurrent issuer: " .. contact.name .. " in " .. contact.map .. "."
 		if activejob.fieldTask.recipient then
 			text = text .. "\nCurrent delivery region: " .. ix.jobs.field.GetRecipientMap(activejob.fieldTask) .. "."
 		end
 	end
-	if activejob.rewardChoices then
-		local selected = activejob.rewardChoices[activejob.supplyChoice or 0]
-		local supplies = selected and selected.label or ix.taskRewards.Summary({choices = activejob.rewardChoices})
-		text = text .. "\n\nReward: " .. supplies
-			.. "\n\nPayment: " .. activejob.moneyReward .. " rubles."
-		if ix.jobs.list[activejob.identifier].requiredItem then
-			text = text .. " Better-quality hand-ins can increase this payment."
-		end
+	if definition.alternateDelivery then
+		text = text .. "\nEligible hand-in contacts: "
+			.. table.concat(ix.jobs.regional.EligibleReceivers(definition), ", ") .. "."
+	end
+	if activejob.photoKind then text = text .. "\n" .. ix.jobs.regional.PhotoSummary(activejob) end
+	local fieldType = activejob.fieldTask and activejob.fieldTask.kind or definition.fieldType
+	if fieldType == "deadDrop" then
+		text = text .. "\nA usable stash digging tool is required for pickup and burial."
+	end
+	if activejob.moneyReward and not hideRewards then
+		text = text .. "\n\nPayment: " .. activejob.moneyReward .. " rubles."
+		if definition.requiredItem then text = text .. " Better-quality hand-ins can increase this payment." end
+		text = text .. "\nChoose your reward when handing in the completed assignment."
 	end
 
-	return text
+	return ix.jobs.FormatMapNames(text)
 end
 
 function ix.jobs.getFormattedNameInactive(identifier)
@@ -74,7 +99,7 @@ function ix.jobs.getFormattedNameInactive(identifier)
 end
 
 function ix.jobs.getFormattedDescInactive(identifier)
-	return string.format(ix.jobs.list[identifier].desc, initialCount(identifier))
+	return ix.jobs.getFormattedDesc({identifier = identifier, numberRec = initialCount(identifier)})
 end
 
 function ix.jobs.isItemJob(identifier)

@@ -48,7 +48,8 @@ end
 dofile(base .. "jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "progression/libs/sh_rewards.lua")
 dofile(base .. "progression/libs/sv_rewards.lua")
-ix.jobs = {regionalCatalogue = ix.jobs.regionalCatalogue, list = {}, jobsbycategory = {}, field = {
+ix.jobs = {settings = ix.jobs.settings, regionalCatalogue = ix.jobs.regionalCatalogue,
+	list = {}, jobsbycategory = {}, field = {
 	sources = {}, settings = {}, IsAvailable = function() return true end,
 }}
 for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop", "defence"}) do

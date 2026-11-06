@@ -42,12 +42,13 @@ PLUGIN:Register("quartermaster", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Rifle issue",
-				items = {"545x39", "556x45", "762x39", "762x51"}},
-			{label = "Sidearm issue",
-				items = {"9x19", "45acp", "57x28"}},
-			{label = "Field dressing",
-				items = {"medic_bandage_1", "medic_medkit_1", "medic_medkit_2"}},
+			{label = "Rifle issue", items = {"545x39", "556x45"}},
+			{label = "Field medicine", items = {"medic_bandage_1", "medic_medkit_1"}},
+			{label = "Canned provisions", items = {"food_can_tushonka"}},
+		},
+		bonusPackages = {
+			{label = "Specialist ammunition", items = {"545x39ap"}},
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
 		},
 	},
 	dialogue = {

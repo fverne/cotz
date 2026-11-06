@@ -68,14 +68,16 @@ local function offerOptions(character, npc)
 	local options = {}
 	for key, offer in pairs(character:GetData(REWARD_DATA_KEY, {})) do
 		local isTask = key:match("^job:") or key:match("^bonus:")
-		if isTask and offer.earned and ix.taskRewards.CanSelectOffer(character, npc, key, offer) then
+		if isTask and (offer.earned or offer.ready) and ix.taskRewards.CanSelectOffer(character, npc, key, offer) then
 			for index, choice in ipairs(offer.choices) do
-				options[#options + 1] = {
-					statement = offer.label .. "\nClaim: "
-						.. (offer.selected == index and "[Selected] " or "") .. choice.label,
-					topicID = "TaskRewardChoices",
-					dyndata = {kind = "offer", key = key, choice = index, label = choice.label},
-				}
+				if not offer.selected or offer.selected == index then
+					options[#options + 1] = {
+						statement = offer.label .. (offer.earned and "\nClaim: " or "\nComplete assignment: ")
+							.. (offer.selected == index and "[Selected] " or "") .. choice.label,
+						topicID = "TaskRewardChoices",
+						dyndata = {kind = "offer", key = key, choice = index, label = choice.label},
+					}
+				end
 			end
 		end
 	end
@@ -179,20 +181,17 @@ local function configureJobPreview(dialogue)
 			if preview then
 				local definition = ix.jobs.list[preview.identifier]
 
-				local description = string.format(definition.desc, preview.numberRec) .. "\n\nPayment: " .. preview.moneyReward
-					.. " rubles."
+				local description = ix.jobs.getFormattedDesc(preview, true)
+					.. "\n\nPayment: " .. preview.moneyReward .. " rubles."
 				if definition.requiredItem then
 					description = description .. "\nBetter-quality hand-ins can increase this payment."
 				end
-				local offer = client:GetCharacter():GetData(REWARD_DATA_KEY, {})[preview.rewardKey]
-				description = description .. "\nChoose your reward below. Paid on completion."
-				local choices = offer and offer.choices or {}
+				description = description .. "\nYour reward will be revealed when you complete the assignment."
 				net.Start("cotz/dialogue/task-offer")
 				net.WriteEntity(target)
 				net.WriteString(difficulty)
 				net.WriteString(description)
-				net.WriteUInt(#choices, 2)
-				for _, choice in ipairs(choices) do net.WriteString(choice.label) end
+				net.WriteUInt(0, 2)
 				net.Send(client)
 			end
 		end
@@ -210,21 +209,15 @@ local function configureJobPreview(dialogue)
 		GetDynamicOptions = function(_, client)
 			local preview = client.cotzTaskPreview or {}
 			local options = {}
-			for index, choice in ipairs(preview.choices or {}) do
-				options[#options + 1] = {statement = "Accept — " .. choice.label,
-					topicID = "ConfirmSupplyTask", dyndata = {difficulty = preview.difficulty, choice = index}}
-			end
-			if #options == 0 then
-				options[1] = {statement = "Accept task", topicID = "ConfirmSupplyTask",
-					dyndata = {difficulty = preview.difficulty}}
-			end
+			options[1] = {statement = "Accept task", topicID = "ConfirmSupplyTask",
+				dyndata = {difficulty = preview.difficulty}}
 			options[#options + 1] = {statement = "I'll pass.", topicID = "BackTopic"}
 
 			return options
 		end,
 		ResolveDynamicOption = function(_, client, target, data)
 			if SERVER and canChoose(client, target) and type(data) == "table" then
-				ix.taskRewards.AcceptJob(client, target:GetDisplayName(), data.difficulty, data.choice)
+				ix.taskRewards.AcceptJob(client, target:GetDisplayName(), data.difficulty)
 			end
 
 			return "BackTopic"

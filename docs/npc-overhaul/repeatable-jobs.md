@@ -8,9 +8,11 @@ the nuts example without changing the original note in F10.
 ## Roster and rewards
 
 Twenty workbook rows use nineteen issuers: Atlas alternates between the two photography tasks.
+Mute additionally offers triangulation, bringing the active issuer count to twenty.
 The Eco Bunker is within Swamps, is the final access area, and requires the physical bunker card.
-It is not a fifth map. Beanstalk and Egghead now have Waystation as their home region; Intern remains
-at the Swamps Eco Bunker. Physical NPC placement is a separate deployment step.
+It is not a fifth map. Beanstalk, Egghead and Intern all live in the Swamps Eco Bunker. Their home
+and claim map is `rp_marsh_cs`; retain their existing bunker placements. Beanstalk still offers
+research defence, Egghead requests Garbage/Waystation/Pripyat specimens, and Intern offers sensors.
 
 | Workbook row | Issuer | Work | Easy / medium / hard |
 | --- | --- | --- | --- |
@@ -32,16 +34,20 @@ at the Swamps Eco Bunker. Physical NPC placement is a separate deployment step.
 | 17 | Spoor | Mutant category hunting | Garbage / Waystation / Pripyat |
 | 18 | Boss | Hostile-human kills | Garbage / Waystation / Pripyat |
 | 22 | Spool | Triangulation | Garbage 3 / Waystation 4 / Pripyat 5 readings |
+| Additional | Mute | Triangulation | Swamps 3 / Waystation 4 / Pripyat 5 readings |
 | 23 | Atlas | Mutant photography | Any supported map; 3 / 5 / 7 distinct living species |
 | 24 | Atlas | Anomaly photography | Any supported map; 3 / 5 / 7 actual registered anomaly types |
 
 New reference cash budgets are 1,000 / 2,000 / 3,000 rubles; reputation is 15 / 25 / 35.
 Reference cash is not a guaranteed payout. Non-item jobs currently pay 55% of reference cash
-(550 / 1,100 / 1,650 rubles); hand-ins use the existing submitted-value calculation. Existing themed
-packages, five-job bonuses, medium/hard reputation gates and equipment purchase gates remain.
+(550 / 1,100 / 1,650 rubles); hand-ins pay 500 / 1,000 / 1,500 plus 50% of the required
+items' value. This added payment is separate from supplies and bonus allowance. Rewards are chosen
+at completed hand-in and remain hidden beforehand. The new consumable/currency packages and five-task
+bonuses are documented in the [jobsystem reward guide](../../gamemodes/ix_cotz/plugins/jobsystem/README.md#task-rewards-and-existing-kits).
+Medium/hard reputation gates and equipment purchase gates remain.
 Supply allowance minimums and rounding still apply independently to item packages.
 
-Arena Master, Carbon, Gasket, Ledger, Mute, Suture, The Original and Wake have no new ordinary offers.
+Arena Master, Carbon, Gasket, Ledger, Suture, The Original and Wake have no new ordinary offers.
 The Original is no longer used; Jitters now owns his specimen requests, using Jitters's existing
 medical reward packages. The other contacts retain their shops, services, incoming-delivery categories
 and finite progression.
@@ -51,7 +57,8 @@ and finite progression.
 Each concrete town contact declares its current `job`. `legacyJob` retains the former registration
 data solely to complete accepted work and preserve existing thematic receiver categories. Its IDs
 are marked `completionOnly`, removed from ordinary categories, and rejected on new acceptance.
-Reputation terms for accepted old work remain 15 / 30 / 45; its saved cash and cargo are retained.
+Reputation terms for accepted old work remain 15 / 30 / 45; its cargo and assignment progress are retained. Unpaid item hand-ins use the current cash formula;
+old acceptance-time reward reservations migrate to completion-time choices.
 New IDs are `cotz/town/v2/<contact>/<difficulty>/<target>`. Finite commission IDs are unchanged.
 The Original's `retiredRegionalJob` also retains the superseded v2 specimen definitions without
 offering them. Existing assignment identities are not erased or silently transferred between characters
@@ -103,6 +110,9 @@ Dead drops save both endpoint maps. Coordinate separation applies only on the sa
 appearance/name/description are chosen once, retained across travel and reused for lost-cargo recovery.
 Recovery uses three light variants (0.5 / 0.75 / 1 kg) or three heavy variants (3.5 / 3.75 / 4 kg).
 Brass issues information-only bound cargo, requires a named NPC handover and pays after return.
+Easy recipients are Swamps settlement contacts, excluding all three bunker scientists; medium
+recipients are in Waystation. Hard recipients include Beanstalk, Egghead and Intern in the Eco Bunker,
+as well as Waystation contacts. Contact definitions use `bunker = true` to identify the gated receivers.
 Hard courier previews and acceptance require permission to purchase `accesscard_bunker` from Carbon;
 temporary stock depletion does not relock the offer. Lost parcels are reissued near Brass through
 **Field work → Collect parcel from issuer**. Inventory/weight failures leave issuance retryable.
@@ -139,10 +149,11 @@ repeatable-job checkpoints can stall. This can also block progression-gated purc
 characters, including access required by later jobs. Resolve that in the planned progression pass
 before treating this roster as a complete fresh-character progression release.
 
-Deploy the same code to all map servers and restart together. Remove/save old Beanstalk/Egghead
-placements and use `/TownNPCPlace beanstalk` and `/TownNPCPlace egghead` on Waystation. Intern remains
-inside the gated Swamps Eco Bunker. No live placement, server restart or deployment was performed
-by the offline implementation. Do not rerun first-time setup.
+Deploy the same code to all map servers and restart together. Retain Beanstalk, Egghead and Intern
+inside the gated Swamps Eco Bunker. The existing Swamps setup preset already contains their bunker
+positions; do not rerun first-time setup. If a scientist is missing, use `/TownNPCPlace <slug>` at
+the intended bunker position on Swamps. Remove and save any erroneous Waystation duplicates
+separately. No live placement, server restart or deployment was performed by the offline implementation.
 
 Run the existing jobsystem, loading, field-task, task-reward, town-NPC, vendor-plan, camera and
 encounter-tag suites, plus `luatex --luaonly tests/regional_jobs_spec.lua`. The new coverage includes

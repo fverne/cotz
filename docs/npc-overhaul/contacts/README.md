@@ -1,7 +1,8 @@
 # Individual town contact designs
 
 **6 November repeatable roster:** see the [implemented job revision](../repeatable-jobs.md).
-Twenty job rows use nineteen issuers, including Atlas's alternating photography.
+Twenty workbook job rows use nineteen issuers, including Atlas's alternating photography.
+Mute additionally offers triangulation, bringing the active issuer count to twenty.
 Progression rework is deferred; current character profiles identify disabled ordinary work.
 
 
@@ -84,13 +85,15 @@ See the [balance report](../delivery-balance.md) for the current pools, quantiti
 | [Gasket](gasket.md) | Utility supply deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_gasket.lua) |
 | [Ballast](ballast.md) | Equipment recovery | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_ballast.lua) |
 | [Arena Master](arena-master.md) | Arena bouts | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_arena_master.lua) |
+| [Beanstalk](beanstalk.md) | Research defence (Eco Bunker) | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_beanstalk.lua) |
+| [Egghead](egghead.md) | Specific mutant specimens (Eco Bunker) | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_egghead.lua) |
+| [Intern](intern.md) | Sensor deployment and retrieval (Eco Bunker) | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_intern.lua) |
 
 ### Garbage
 
 | Contact | Repeatable category | Steps | Runtime definition |
 | --- | --- | ---: | --- |
 | [Cleaner](cleaner.md) | Dead-drop circuits | 28 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_cleaner.lua) |
-| [Beanstalk](beanstalk.md) | Research defence | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_beanstalk.lua) |
 | [Spool](spool.md) | Radio triangulation | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spool.lua) |
 | [Latch](latch.md) | Industrial salvage deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_latch.lua) |
 | [Spoor](spoor.md) | Mutant hunting | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spoor.lua) |
@@ -104,8 +107,6 @@ See the [balance report](../delivery-balance.md) for the current pools, quantiti
 | --- | --- | ---: | --- |
 | [Quartermaster](quartermaster.md) | Ammunition deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_quartermaster.lua) |
 | [Boss](boss.md) | Hostile human elimination | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_boss.lua) |
-| [Egghead](egghead.md) | Artifact deliveries | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_egghead.lua) |
-| [Intern](intern.md) | Sensor deployment and retrieval | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_intern.lua) |
 | [Suture](suture.md) | Textile supply deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_suture.lua) |
 | [Ledger](ledger.md) | Dead-drop circuits | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_ledger.lua) |
 | [Smartass](smartass.md) | Computer data extraction | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_smartass.lua) |

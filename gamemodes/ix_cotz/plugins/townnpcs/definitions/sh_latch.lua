@@ -46,17 +46,14 @@ PLUGIN:Register("latch", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Workshop stock (trade goods)",
-				items = {"value_bolts", "value_nuts", "value_guncleaner"}},
-			{label = "Salvage protection",
-				items = {"medic_bandage_1", "drug_painkillers"}},
-			{label = "Shift provisions",
-				items = {"food_can_tushonka", "drink_bottlewater"}},
+			{label = "Field dressings", items = {"medic_bandage_1"}},
+			{label = "Pain relief", items = {"drug_painkillers"}},
+			{label = "Canned provisions", items = {"food_can_tushonka"}},
 		},
-		bonusItems = {
-			"fireaxe",
-			"fubar",
+		bonusPackages = {
+			{label = "Digging equipment", items = {"hidestasher_shovel"}},
 		},
+		bonusCash = true,
 	},
 	dialogue = {
 		delivery = "Here. Keep the labels with it.",

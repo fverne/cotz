@@ -17,9 +17,9 @@ is not required. Restart after installing the assets and plugin.
 The camera currently uses a 90-degree horizontal field of view at 16:9, a range of 2,000 Source units,
 and 1366×768 JPEG output. These values are configured in `sh_plugin.lua`. Only the latest image and JSON
 subject list are kept in the photographing client's `garrysmod/data/cotz/camera/latest.jpg` and
-`latest.json`. The count appears in chat and the full subject list appears in that client's console,
-including an explicit message when the 128-subject limit is reached. Empty photos replace old results.
-Escape-menu capture failures are reported rather than saving an empty image.
+`latest.json`. The JSON records the subject list and whether the 128-subject limit was reached.
+Empty photos replace old results. The camera produces no chat messages or console prints.
+Capture failures, such as those caused by the Escape menu, preserve the previous saved files.
 
 The first-person model has a live screen using the original camera's control-panel attachments.
 The preview uses the photo's field of view and aspect ratio, letterboxed to fit the model's screen.
@@ -27,7 +27,9 @@ It refreshes a cached 512×512 render target only while the camera is active in 
 the HUD, hands or camera being rendered into that preview. The screen placement is adapted from
 akua's original SWEP; it does not require the original addon's screen materials, fonts or response system.
 The photographing client plays `items/camera/snap.wav` once when the server accepts a shot.
-Viewmodel FOV and Helix lowering angles remain configured on the SWEP itself.
+Holding the camera preserves the player's normal world FOV, like the hands SWEP, and uses the same
+45-degree viewmodel FOV. Photos and the live screen keep the configured photo FOV and aspect ratio.
+Helix lowering angles remain configured on the SWEP itself.
 
 The server builds the list from its own shoot position and eye angles, with rectangular framing and
 `MASK_VISIBLE` line-of-sight checks. Entity candidates are `ix_*`, `npc_mutant_*`, `npc_human_*`,

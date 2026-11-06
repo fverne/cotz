@@ -69,8 +69,16 @@ local function configureWork(dialogue, contact)
 			options = {"BackTopic"},
 			ShouldAdd = function(_, client, target) return not client:ixHasJobFromNPC(target:GetDisplayName()) end,
 		})
-	elseif dialogue.tree.GetTaskByDifficulty then
-		dialogue.tree.GetTaskByDifficulty.ShouldAdd = function() return false end
+	else
+		for _, id in ipairs({"GREETING", "BackTopic"}) do
+			local root = dialogue.tree[id]
+			for index = #(root and root.options or {}), 1, -1 do
+				if root.options[index] == "GetTaskByDifficulty" then table.remove(root.options, index) end
+			end
+		end
+		if dialogue.tree.GetTaskByDifficulty then
+			dialogue.tree.GetTaskByDifficulty.ShouldAdd = function() return false end
+		end
 	end
 
 end

@@ -27,12 +27,13 @@ PLUGIN:Register("vesper", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Radiation supplies",
-				items = {"medic_antirad_1", "medic_antirad_2"}},
-			{label = "Emergency extraction",
-				items = {"medic_bandage_1", "medic_medkit_1"}},
-			{label = "Prospecting provisions",
-				items = {"drink_bottlewater", "food_raisins"}},
+			{label = "Exposure treatment", items = {"medic_antirad_1", "medic_antirad_2"}},
+			{label = "Field dressings", items = {"medic_bandage_1"}},
+			{label = "Canned provisions", items = {"food_can_tuna"}},
+		},
+		bonusPackages = {
+			{label = "Medical supplies", items = {"medic_medkit_1", "medic_antirad_2"}},
+			{label = "Waystation stash", items = {"hidestash_2"}},
 		},
 	},
 	dialogue = {

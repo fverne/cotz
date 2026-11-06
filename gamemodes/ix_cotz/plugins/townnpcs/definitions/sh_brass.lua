@@ -40,13 +40,14 @@ PLUGIN:Register("brass", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Pistol allocation",
-				items = {"9x18", "9x19", "45acp"}},
-			{label = "Rifle allocation",
-				items = {"545x39", "556x45", "762x39", "762x51", "762x54"}},
-			{label = "Specialist allocation",
-				items = {"12gaugemg", "545x39ap", "556x45ap", "762x54ap"}},
+			{label = "Rifle ammunition", items = {"762x39", "762x51"}},
+			{label = "Pistol ammunition", items = {"9x19", "45acp"}},
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
 		},
+		bonusPackages = {
+			{label = "Specialist ammunition", items = {"762x54ap"}},
+		},
+		bonusCash = true,
 	},
 	dialogue = {
 		delivery = "Set it down. I will check the consignment against the entry.",

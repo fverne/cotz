@@ -3,9 +3,10 @@
 ## Repeatable roster, 6 November 2026
 
 The [implemented job revision](../../../../docs/npc-overhaul/repeatable-jobs.md) supersedes earlier
-repeatable categories, reward defaults and scientist homes below. Twenty workbook rows use nineteen
-issuers because Atlas alternates mutant/anomaly photography. Beanstalk and Egghead are now based in
-Waystation; Intern remains in the gated Swamps Eco Bunker. New reference cash is 1,000/2,000/3,000
+repeatable categories, reward defaults and scientist homes below. Mute additionally offers triangulation
+in Swamps / Waystation / Pripyat (3 / 4 / 5 readings). Twenty workbook rows use nineteen
+issuers because Atlas alternates mutant/anomaly photography. Beanstalk, Egghead and Intern remain
+in the gated Swamps Eco Bunker (`rp_marsh_cs`). New reference cash is 1,000/2,000/3,000
 and reputation 15/25/35. Shops, services, purchase restrictions and themed rewards remain.
 Jitters owns the Swamps specimen requests; The Original is unused and has no new offers.
 His superseded regional definitions remain completion-only without restoring his world placement.
@@ -16,8 +17,25 @@ pools also preserve thematic incoming receivers and starting buy assortments. Fi
 not remapped: inactive issuers' cumulative job checkpoints can stall until the separately deferred
 progression rework. The guide identifies those contacts and the resulting fresh-character limitation.
 
-Update every map server together and restart. Place the two moved scientists separately on Waystation;
-do not rerun first-time setup. Offline tests do not verify navigation, placement or live persistence.
+Update every map server together and restart. Retain all three scientists' existing bunker placements;
+do not rerun first-time setup. Missing scientists can be placed inside the Swamps bunker with
+`/TownNPCPlace <slug>`. Offline tests do not verify navigation, placement or live persistence.
+Beanstalk retains research defence; Egghead retains Garbage/Waystation/Pripyat specimen requests.
+All three declare `bunker = true`, excluding them from Brass's easy couriers and including them in hard
+couriers. Saved incoming deliveries resolve their current Swamps home without rerolling assignments.
+
+## Completion-time repeatable rewards
+
+Reward candidates are defined in each contact's `rewards` table, independently of shop stock.
+Regular choices are revealed at completed hand-in; bonus choices are revealed once earned.
+New town rewards contain consumables or limited-use items, stash spawners, euros and dollars.
+Reusable equipment, attachments, service credit and other valuables are excluded.
+Every ammunition reward is half its normal pack. Old Timer offers .410 rather than 12g or .22;
+Cleaner keeps cutlery and cleaning kits as regular choices and stash spawners as bonus choices.
+Spicy Lemon also offers cutlery. Mute, Spool and Ballast offer 200/400/600 rubles as their regular
+reward and euros/dollars as their bonus. Normal job payment remains separate.
+See the [jobsystem reward guide](../jobsystem/README.md#task-rewards-and-existing-kits) for the full
+policy, profile fields, bonus accounting, saved-offer migration and regression checks.
 
 ## Approved workbook plan, 4 November 2026
 
@@ -352,7 +370,7 @@ Delivery maps are acquisition guidance, not a restriction on where an item must 
 | Suture / Waystation | Textiles, pouches | Protective textiles | Armour panels |
 | Carbon / Waystation | Office/field records, printed material | Official/technical records | Research records, data archives |
 | Quartermaster / Waystation | Military cases, pouches | Ordnance salvage, official records | Secured cases, control electronics |
-| Egghead / Waystation | Sample carriers, survey gear | Research samples/records | Instruments, research injectors |
+| Egghead / Marsh Eco Bunker | Sample carriers, survey gear | Research samples/records | Instruments, research injectors |
 
 Easy additions favour home-region themes. Pools contain alternatives with different acquisition routes,
 so a particular request can still require travel. Medium workshop requests favour Garbage/Waystation;

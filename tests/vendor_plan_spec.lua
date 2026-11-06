@@ -45,8 +45,8 @@ for _, variant in pairs(town.variantUnlocks) do
 	check(variant.contact == "vesper", "conversion milestones belong to Vesper")
 end
 for _, slug in ipairs({"beanstalk", "egghead", "intern"}) do
-	local expected = slug == "intern" and "rp_marsh_cs" or "rp_waystation"
-	check(town.contacts[slug].map == expected, "researchers use their revised home regions")
+	check(town.contacts[slug].map == "rp_marsh_cs" and town.contacts[slug].bunker,
+		"all three researchers live in the Swamps Eco Bunker")
 	for _, step in ipairs(town.contacts[slug].progression) do
 		for _, slot in ipairs(step.requirements or {}) do
 			for _, candidate in ipairs(ix.progression.itemPools[slot.pool].candidates) do
@@ -330,8 +330,8 @@ ix.jobs.field.enabled = true
 net.Receive = function() end
 dofile(root .. "jobsystem/sv_fieldactions.lua")
 local courierJob = {rewardKey = "courier-before-move", numberRec = 1,
-	fieldTask = {stage = "carrying", recipient = "'Egghead'", recipientMap = "rp_marsh_cs"}}
-fixture.SetMap("rp_waystation")
+	fieldTask = {stage = "carrying", recipient = "'Egghead'", recipientMap = "rp_waystation"}}
+fixture.SetMap("rp_marsh_cs")
 converter.jobs = {["'Atlas'"] = courierJob}
 function converter.client:Alive() return true end
 function converter.client:IsRestricted() return false end
@@ -342,8 +342,8 @@ end
 local receiptSaved = 0
 ix.jobs.field.SaveJob = function() receiptSaved = receiptSaved + 1 end
 local receiver = serviceVendor("'Egghead'")
-check(ix.jobs.field.GetRecipientMap(courierJob.fieldTask) == "rp_waystation"
-	and courierJob.fieldTask.recipientMap == "rp_marsh_cs", "old deliveries resolve the relocated recipient")
+check(ix.jobs.field.GetRecipientMap(courierJob.fieldTask) == "rp_marsh_cs"
+	and courierJob.fieldTask.recipientMap == "rp_waystation", "old deliveries resolve the scientist's bunker home")
 check(not ix.jobs.field.DeliverToContact(converter.client, receiver, "'Atlas'", "stale-claim"),
 	"relocation does not permit stale delivery claims")
 check(ix.jobs.field.DeliverToContact(converter.client, receiver, "'Atlas'", courierJob.rewardKey),

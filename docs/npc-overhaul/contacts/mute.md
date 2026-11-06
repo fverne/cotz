@@ -6,8 +6,9 @@
 
 ## Current repeatable work — 6 November 2026
 
-Home/claim region: **Swamps**. No new ordinary repeatable offers.
-Shops, services, incoming deliveries and finite progression remain. Existing accepted work can finish; cumulative job checkpoints may stall until the deferred progression rework.
+Home/claim region: **Swamps**. Ordinary work: radio triangulation, with 3 / 4 / 5 bearings in
+Swamps / Waystation / Pripyat. Shops, services, incoming deliveries and finite progression remain.
+Existing accepted work can finish; the finite progression rework remains deferred.
 See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
 
 
@@ -38,7 +39,7 @@ These conversations and their follow-up live in [sh_stalkernetadmin.lua](../../.
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
 - **Identity:** Existing withdrawn, near-silent Stalkernet operator.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** None; ordinary offers disabled.
+- **Only repeatable category:** Radio triangulation.
 - **Finite plan:** 24 steps; **6 hand-ins, 6 job checkpoints, 12 authored objectives**.
 - **Step labels:** MU01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

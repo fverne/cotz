@@ -26,13 +26,12 @@ PLUGIN:Register("ballast", {
 	},
 	supplies = {},
 	rewards = {
+		cashPerTier = 200,
 		packages = {
-			{label = "Recovery provisions",
-				items = {"food_can_tushonka", "drink_bottlewater"}},
-			{label = "Wet-work injuries",
-				items = {"medic_bandage_1", "drug_painkillers"}},
-			{label = "Overnight supplies",
-				items = {"lowtiercookerfuel", "food_can_beans"}},
+		},
+		bonusPackages = {
+			{label = "Euro notes", items = {"value_currency_euro"}},
+			{label = "Dollar notes", items = {"value_currency_dollar"}},
 		},
 	},
 	dialogue = {

@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_ecologistnpc3.lua](../../../
 
 ## Contact brief
 
-- **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps Eco Bunker. Every hand-in and reward claim occurs here.
 - **Identity:** Existing junior scientist; retain current voice.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Sensor deployment and retrieval.

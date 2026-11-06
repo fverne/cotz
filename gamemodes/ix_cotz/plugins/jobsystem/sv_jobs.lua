@@ -27,13 +27,13 @@ function playerMeta:ixJobEvaluate(trigger)
 	if not character then return end
 	local jobs = character:GetJobs()
 	local changed = false
-	for _, job in pairs(jobs) do
+	for npc, job in pairs(jobs) do
 		if not job.fieldTask and not job.isCompleted
 			and (job.listenTrigger == trigger or job.identifier == trigger) then
 			job.progress = math.min((job.progress or 0) + 1, job.numberRec)
 			job.isCompleted = job.progress >= job.numberRec
 			changed = true
-			if job.isCompleted then netstream.Start(self, "ix_COTZPlayPDASound", 2) end
+			ix.jobs.NotifyCompleted(self, npc, job)
 		end
 	end
 	if changed then character:SetJobs(jobs) end
@@ -42,6 +42,7 @@ end
 function playerMeta:ixJobComplete(npcidentifier)
 	local character = self:GetCharacter()
 	if not character then return false end
+	if ix.taskRewards.ReconcileCharacter then ix.taskRewards.ReconcileCharacter(character) end
 	local jobs = character:GetJobs()
 	local job = jobs[npcidentifier]
 	local definition = job and ix.jobs.list[job.identifier]
@@ -50,7 +51,17 @@ function playerMeta:ixJobComplete(npcidentifier)
 	if job.fieldTask and not ix.jobs.field.CanComplete(character, job) then return end
 	local claimed = character:GetData("jobClaimsPaid", {})
 	if claimed[npcidentifier] and claimed[npcidentifier] >= job.progressionClaim then return end
+	if not definition.townProgression and ix.taskRewards.RevealJobOffer then
+		local offer = character:GetData("taskRewardOffers", {})[job.rewardKey]
+		if not offer or not offer.selected then
+			ix.taskRewards.RevealJobOffer(self, npcidentifier)
+			return false
+		end
+	end
 	claimed[npcidentifier] = job.progressionClaim
+	if definition.requiredItem and not definition.townProgression then
+		job.moneyReward = ix.taskRewards.FixedMoney(definition, job.numberRec, job.deliveredValue)
+	end
 	if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
 	character:SetData("jobClaimsPaid", claimed)
 	ix.jobs.RecordLeaderboardTask(character, definition)
@@ -83,6 +94,8 @@ function playerMeta:ixJobComplete(npcidentifier)
 	end
 	netstream.Start(self, "ix_COTZPlayPDASound", 1)
 	character:Save()
+
+	return true
 end
 
 function playerMeta:ixJobAdd(identifier, npcidentifier, preview)
@@ -117,7 +130,6 @@ function playerMeta:ixJobAdd(identifier, npcidentifier, preview)
 	end
 	jobs[npcidentifier] = job
 	character:SetJobs(jobs)
-	ix.taskRewards.SelectOffer(character, npcidentifier, job.rewardKey, job.supplyChoice or 1)
 	character:Save()
 	if definition.OnTaskGet then definition.OnTaskGet(self) end
 	if job.photoKind then ix.jobs.regional.ReconcileCamera(self) end

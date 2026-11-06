@@ -23,12 +23,13 @@ PLUGIN:Register("old-timer", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Hunting rounds",
-				items = {"12gauge", "22lr"}},
-			{label = "Field upkeep",
-				items = {"sharpening_stone", "sharpening_stone_fine"}},
-			{label = "Trail provisions",
-				items = {"food_bread", "medic_bandage_1"}},
+			{label = "Small-game shells", items = {"45acp41"}},
+			{label = "Edge upkeep", items = {"sharpening_stone"}},
+			{label = "Canned provisions", items = {"food_can_tushonka"}},
+		},
+		bonusPackages = {
+			{label = "Fine edge upkeep", items = {"sharpening_stone_fine"}},
+			{label = "Swamps stash", items = {"hidestash_1"}},
 		},
 	},
 	dialogue = {

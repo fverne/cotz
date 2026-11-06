@@ -22,15 +22,14 @@ PLUGIN:Register("atlas", {
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Survey provisions",
-				items = {"drink_bottlewater", "food_raisins"}},
-			{label = "Field safety",
-				items = {"medic_bandage_1", "medic_antirad_1"}},
-			{label = "Long survey",
-				items = {"food_can_beans", "drink_bottletea"}},
+			{label = "Survey provisions", items = {"drink_bottlewater", "food_can_tuna"}},
+			{label = "Field dressings", items = {"medic_bandage_1"}},
+			{label = "Exposure treatment", items = {"medic_antirad_1"}},
 		},
-		bonusItems = {
-			"compass",
+		bonusPackages = {
+			{label = "Swamps stash", items = {"hidestash_1"}},
+			{label = "Waystation stash", items = {"hidestash_2"}},
+			{label = "Pripyat stash", items = {"hidestash_3"}},
 		},
 	},
 	dialogue = {

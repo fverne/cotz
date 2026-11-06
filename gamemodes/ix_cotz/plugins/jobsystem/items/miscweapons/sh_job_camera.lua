@@ -21,6 +21,9 @@ ITEM.canRepair = false
 function ITEM:CanTransfer(oldInventory, inventory)
 	local character = SERVER and ix.char.loaded[self:GetData("fieldOwner")]
 		or CLIENT and LocalPlayer():GetCharacter()
+	if CLIENT and not inventory and character and oldInventory
+		and character:GetID() == self:GetData("fieldOwner")
+		and oldInventory:GetID() == character:GetInventory():GetID() then return end
 	if not character or character:GetID() ~= self:GetData("fieldOwner")
 		or not inventory or inventory:GetID() ~= character:GetInventory():GetID() then return false end
 end

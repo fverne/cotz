@@ -129,18 +129,24 @@ class TaskRewardAuditTests(unittest.TestCase):
             self.assertEqual(len(profiles), 1, path)
             contacts += 1
             profile = profiles[0]
-            self.assertEqual(len(profile['packages']), 3, path)
-            labels = set()
-            for package in profile['packages']:
-                self.assertNotIn(package['label'], labels, path)
-                labels.add(package['label'])
-                self.assertTrue(package['items'], path)
-                for item in package['items']:
-                    self.assertIn(item, self.items, path)
-                    self.assertFalse(item.startswith(('kit_', 'town_quest_', 'bagrubles')), path)
-            for item in profile.get('bonusItems', []):
-                self.assertIn(item, self.items, path)
-            if 'bonusService' in profile:
-                self.assertIn(path.stem, {'sh_technut', 'sh_boss'})
-                self.assertEqual(profile['bonusService'], 'repair')
+            cash_only = path.stem in {'sh_mute', 'sh_spool', 'sh_ballast'}
+            self.assertEqual(len(profile['packages']), 0 if cash_only else 3, path)
+            if cash_only:
+                self.assertEqual(profile['cashPerTier'], 200, path)
+            self.assertNotIn('bonusItems', profile, path)
+            self.assertNotIn('bonusService', profile, path)
+            for packages in (profile['packages'], profile.get('bonusPackages', profile['packages'])):
+                labels = set()
+                for package in packages:
+                    self.assertNotIn(package['label'], labels, path)
+                    labels.add(package['label'])
+                    self.assertTrue(package['items'], path)
+                    for item in package['items']:
+                        self.assertIn(item, self.items, path)
+                        self.assertFalse(item.startswith(('kit_', 'town_quest_', 'bagrubles')), path)
+                        if item.startswith('value_'):
+                            self.assertIn(item, {'value_currency_euro', 'value_currency_dollar'}, path)
+            if cash_only:
+                bonus_ids = {item for package in profile['bonusPackages'] for item in package['items']}
+                self.assertEqual(bonus_ids, {'value_currency_euro', 'value_currency_dollar'}, path)
         self.assertEqual(contacts, 27)

@@ -11,6 +11,8 @@ local function keyFor(character, job)
 end
 
 function ix.jobs.field.SaveJob(character, npc, job)
+	if not job.isCompleted then job.completionNotified = nil end
+	ix.jobs.NotifyCompleted(character:GetPlayer(), npc, job)
 	local jobs = character:GetJobs()
 	jobs[npc] = job
 	character:SetJobs(jobs)
@@ -44,6 +46,7 @@ function ix.jobs.field.Collect(client, entity)
 	if state.stage == "carrying" or state.stage == "delivered" or ix.jobs.field.FindCargo(character, job) then
 		return
 	end
+	if state.kind == "deadDrop" and not ix.jobs.field.RequireDiggingTool(client, character) then return end
 	if state.kind == "defence" and state.stage ~= "ready" then
 		client:Notify("Finish the research operation before collecting the recorder.")
 		return
@@ -85,6 +88,10 @@ function ix.jobs.field.Collect(client, entity)
 				item:Remove()
 				return
 			end
+			if active.fieldTask.kind == "deadDrop" and not ix.jobs.field.RequireDiggingTool(client, character) then
+				item:Remove()
+				return
+			end
 			if not character:CanCarry(item) then
 				item:Remove()
 				client:Notify("You are carrying too much weight to recover this equipment.")
@@ -115,7 +122,10 @@ end
 
 function ix.jobs.field.SpawnObject(character, npc, job)
 	local client = character:GetPlayer()
-	local point = ix.jobs.field.GroundPoint(ix.jobs.field.Unpack(job.fieldTask.point), job.fieldTask.cargo, client)
+	local model = ix.jobs.field.GetObjectModel(job.fieldTask)
+	local point = ix.jobs.field.GroundPoint(
+		ix.jobs.field.Unpack(job.fieldTask.point), job.fieldTask.cargo, client, model
+	)
 	if not point then
 		if IsValid(client) and CurTime() >= (client.cotzFieldBlockedNext or 0) then
 			client.cotzFieldBlockedNext = CurTime() + ix.jobs.field.runtimeSettings.blockedNotifyInterval
@@ -126,7 +136,7 @@ function ix.jobs.field.SpawnObject(character, npc, job)
 	local entity = ents.Create("ix_job_field_object")
 	if not IsValid(entity) then return end
 	entity.fieldOwner, entity.fieldNPC, entity.fieldClaim = character:GetID(), npc, job.rewardKey
-	entity:SetModel(ix.item.list[job.fieldTask.cargo].model)
+	entity:SetModel(model)
 	entity:SetNWString("cotz/jobsystem/cargo-name", job.fieldTask.cargoName or ix.item.list[job.fieldTask.cargo].name)
 	entity:SetPos(point)
 	entity:Spawn()

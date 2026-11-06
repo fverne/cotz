@@ -25,6 +25,43 @@ function ix.jobs.regional.CanOffer(character, definition)
 	return true
 end
 
+function ix.jobs.regional.EligibleReceivers(definition)
+	local recipients = {}
+	local issuer = ix.townNPCs.byName[definition.issuerName]
+	if not issuer then return recipients end
+	for _, receiver in pairs(ix.townNPCs.contacts) do
+		local disabled = receiver.disabledItems and receiver.disabledItems[definition.requiredItem]
+		if receiver.map == issuer.map and (receiver.wantedItems or {})[definition.requiredItem] and not disabled then
+			recipients[#recipients + 1] = receiver.name
+		end
+	end
+	table.sort(recipients)
+
+	return recipients
+end
+
+function ix.jobs.regional.PhotoNames(job)
+	local names = {}
+	local anomalies = ix.plugin.Get("anomalycontroller")
+	for key in pairs(job.photoTypes or {}) do
+		local name = key:gsub("_", " "):gsub("^%l", string.upper)
+		for _, definition in ipairs(anomalies and anomalies.anomalydefs or {}) do
+			if definition.entityname == key then name = definition.name or name break end
+		end
+		names[#names + 1] = name
+	end
+	table.sort(names)
+
+	return names
+end
+
+function ix.jobs.regional.PhotoSummary(job)
+	local names = ix.jobs.regional.PhotoNames(job)
+
+	return "Captured " .. job.photoKind .. " types (" .. #names .. "/" .. job.numberRec .. "): "
+		.. (#names > 0 and table.concat(names, ", ") or "None")
+end
+
 function ix.jobs.regional.ReceiverMatches(character, receiver, job)
 	local definition = ix.jobs.list[job.identifier]
 	if not definition or not definition.alternateDelivery or job.isCompleted then return false end
