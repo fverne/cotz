@@ -6,10 +6,12 @@ local MAX_LABEL_LENGTH = 180
 util.AddNetworkString("cotz/spawnpoint-esp/request")
 util.AddNetworkString("cotz/spawnpoint-esp/points")
 
-local function addPoint(points, position, label)
+local function addPoint(points, position, label, id, entity)
 	if not isvector(position) then return end
 
-	points[#points + 1] = {position = position, label = string.sub(label, 1, MAX_LABEL_LENGTH)}
+	points[#points + 1] = {
+		position = position, label = string.sub(label, 1, MAX_LABEL_LENGTH), id = tostring(id), entity = entity,
+	}
 end
 
 local function collectPlayerSpawns(points)
@@ -17,8 +19,9 @@ local function collectPlayerSpawns(points)
 
 	for faction, classes in pairs(plugin and plugin.spawns or {}) do
 		for class, positions in pairs(classes) do
-			for _, position in pairs(positions) do
-				addPoint(points, position, faction .. " / " .. class)
+			for id, position in pairs(positions) do
+				local label = faction .. " / " .. class
+				addPoint(points, position, label, label .. "/" .. id)
 			end
 		end
 	end
@@ -29,7 +32,7 @@ local function collectArrivals(points)
 	local mapData = plugin and plugin.mapdata and plugin.mapdata[game.GetMap()]
 
 	for name, data in pairs(mapData and mapData.loadzones or {}) do
-		addPoint(points, data.pos, name)
+		addPoint(points, data.pos, name, name)
 	end
 end
 
@@ -38,7 +41,7 @@ local function collectContainers(points, cyclic)
 		local category = cyclic and entity:GetCyclicalCategory() or entity:GetSpawnCategory()
 
 		if category and category ~= "" then
-			addPoint(points, entity:GetPos(), category)
+			addPoint(points, entity:GetPos(), category, entity:EntIndex(), entity)
 		end
 	end
 end
@@ -61,7 +64,7 @@ function PLUGIN:CollectSpawnPoints(category)
 				details[#details + 1] = tostring(record[index])
 			end
 
-			addPoint(points, record[1], table.concat(details, " / "))
+			addPoint(points, record[1], table.concat(details, " / "), id)
 		end
 	elseif category.key == "players" then
 		collectPlayerSpawns(points)
@@ -71,7 +74,7 @@ function PLUGIN:CollectSpawnPoints(category)
 		collectContainers(points, category.key == "cyclic")
 	elseif category.key == "checkpoints" then
 		for id, entity in ipairs(ents.FindByClass("ix_spawnsaver")) do
-			addPoint(points, entity:GetPos(), tostring(id))
+			addPoint(points, entity:GetPos(), tostring(id), entity:EntIndex(), entity)
 		end
 	end
 
