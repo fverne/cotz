@@ -193,3 +193,5 @@ ix.util.Include("sv_admin.lua")
 ix.util.Include("cl_admin.lua")
 ix.util.Include("cl_layout.lua")
 ix.util.Include("cl_plugin.lua")
+
+ix.util.Include("sh_commands.lua")

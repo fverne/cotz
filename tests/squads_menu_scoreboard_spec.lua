@@ -67,6 +67,9 @@ function methods:SetWide(value) self.width = value end
 function methods:GetWide() return self.width or 800 end
 function methods:SetSize(width, height) self.width, self.height = width, height end
 function methods:SetPos(x, y) self.x, self.y = x, y end
+function methods:SetKeepAspect(value) self.keepAspect = value end
+function methods:SetImage(value) self.image = value end
+function methods:GetValue() return self.text or "" end
 function methods:SetFont(value) self.font = value end
 function methods:GetText() return self.text or "" end
 function methods:DockMargin(...) self.margin = {...} end
@@ -80,6 +83,8 @@ for _, name in ipairs({"Dock", "DockPadding", "SetZPos", "SetBackgroundPaintFunc
 	"SetPaintBackground", "SetWrap", "SetAutoStretchVertical", "SetTextColor", "SetHideButtons", "SetMaterial",
 	"SetMultiline", "SetUpdateOnType", "SetPlaceholderText", "SetCursor", "SetModel", "SetTooltip",
 	"SetMouseInputEnabled", "SetEnabled", "InvalidateLayout", "SetHelixTooltip", "SetVisible"}) do methods[name] = function() end end
+function methods:SetVisible(value) self.visible = value end
+function methods:SetEnabled(value) self.enabled = value end
 function IsValid(value) return type(value) == "table" and not value.removed end
 function CurTime() return clock end
 function LocalPlayer() return localClient end
@@ -141,6 +146,7 @@ local nextCharacterID = 0
 local function client(id, name, reputation)
 	nextCharacterID = nextCharacterID + 1
 	local character = {id = id, name = name, characterID = nextCharacterID}
+	function character:GetData() return {} end
 	function character:GetID() return self.characterID end
 	function character:GetName() return "Name " .. self.characterID end
 	function character:GetPdaavatar() return "vgui/icons/face_31.png" end
@@ -153,6 +159,7 @@ local function client(id, name, reputation)
 	function value:GetLocalVar(key) return self[key] end
 	function value:GetCharacter() return self.character end
 	function value:getReputation() return reputation end
+	function value:getCurrentRankName() return "Tourist" end
 
 	return value
 end
@@ -163,6 +170,7 @@ local second = client("owner-a", "Alpha", 10)
 local hidden = client("owner-b", "Hidden", 0)
 hidden.hidden = true
 clients = {localClient, first, second, hidden}
+ix.jobs = {GetLeaderboardStats = function() return {tasksCompleted = 3, taskEarnings = 100} end}
 loadGLua("gamemodes/ix_cotz/schema/derma/cl_scoreboard.lua")
 -- Remote presentation must run without any player entity methods or local-only action menu.
 local remotePresentation = panel("ixScoreboardRow")
@@ -176,32 +184,19 @@ remotePresentation.icon:DoRightClick()
 remotePresentation.record.fresh = false
 remotePresentation:Update()
 check(remotePresentation.status.text == "STATUS UNAVAILABLE", "real row loses its online claim when stale")
--- Group lifecycle checks use simple rows for local entity presentation.
-classes.ixScoreboardRow = {}
+-- Current character leaderboard replaces the old grouped scoreboard.
 local scoreboard = panel("ixScoreboard")
 scoreboard:Init()
 scoreboard:Think()
-check(scoreboard.groups["owner-a"].color.r == 120, "scoreboard headings use public squad colors")
-check(scoreboard.groups.loners.color.r == nil, "loners retain the configured grey theme")
-check(scoreboard.groups.loners.text == "loners (1)", "unaffiliated players appear under loners")
-check(scoreboard.groups["owner-a"].text == "Alpha (2)", "squad name and online count are visible")
-check(not scoreboard.groups["owner-b"], "hidden players cannot expose an otherwise empty group")
-check(first.ixScoreboardSlot:GetParent() == scoreboard.groups["owner-a"], "members share their squad category")
-local previousRow = first.ixScoreboardSlot
-first.character.id, first.character.name = "NULL", ""
-clock = clock + 1
-scoreboard:Think()
-check(previousRow.removed, "changing squad removes the old row")
-check(first.ixScoreboardSlot:GetParent() == scoreboard.groups.loners, "leaving moves the player to loners")
-second.character.name = "Renamed"
-clock = clock + 1
-scoreboard:Think()
-check(scoreboard.groups["owner-a"].text == "Renamed (1)", "renaming refreshes the category title")
+check(scoreboard.selected == localClient.character:GetID(), "the dossier initially selects its owner")
+check(scoreboard.rows[first.character:GetID()] and scoreboard.rows[second.character:GetID()],
+	"visible local characters enter the leaderboard")
+check(not scoreboard.rows[hidden.character:GetID()], "hidden characters do not enter the leaderboard")
+local previousRow = scoreboard.rows[second.character:GetID()]
 second.hidden = true
 clock = clock + 1
 scoreboard:Think()
-check(not scoreboard.groups["owner-a"], "empty groups disappear")
-check(second.ixScoreboardSlot.removed, "hidden players lose existing rows")
+check(previousRow.removed, "hidden players lose existing rows")
 -- Shared records need no player entities, remain grouped, and are deduplicated by character ID.
 ix.crossserver.rosterFresh = clock
 ix.crossserver.roster = {
@@ -213,16 +208,17 @@ ix.crossserver.roster = {
 }
 clock = clock + 1
 scoreboard:Think()
-check(scoreboard.groups["owner-r"].text == "Remote squad (1)", "remote characters appear without a player entity")
-check(scoreboard.groups.loners.text == "loners (3)", "local characters deduplicate shared records and hidden locals stay hidden")
-local remoteGroup = scoreboard.groups["owner-r"]
-scoreboard.localArea:DoClick()
+check(scoreboard.rows[100], "remote characters appear without a player entity")
+local remoteRow = scoreboard.rows[100]
+scoreboard.area:DoClick()
+clock = clock + 1
 scoreboard:Think()
-check(not scoreboard.groups["owner-r"] and remoteGroup.removed, "local area excludes other maps and removes old rows")
-check(scoreboard.groups.loners.text == "loners (3)", "local area includes a traveller whose source is the current map")
-scoreboard.localArea:DoClick()
+check(not scoreboard.rows[100] and remoteRow.removed, "local-area filtering removes remote rows")
+check(scoreboard.rows[101], "travellers remain associated with their source map")
+scoreboard.area:DoClick()
+clock = clock + 1
 scoreboard:Think()
-check(scoreboard.groups["owner-r"] ~= nil, "toggling local area off restores all maps")
+check(scoreboard.rows[100], "all-maps restores remote characters")
 check(ix.crossserver.GetPresenceText(ix.crossserver.roster[101], true, false) == "TRAVELLING: MAP_B",
 	"scoreboard and squad share travelling destination labels")
 clock = clock + 16
@@ -233,7 +229,50 @@ check(not ix.crossserver.GetScoreboardRoster(true)[100], "stale remote maps cann
 ix.crossserver.roster = {}
 clock = clock + 1
 scoreboard:Think()
-check(not scoreboard.groups["owner-r"], "remote disconnect removes the last row and group")
+check(not scoreboard.rows[100], "remote disconnect removes the row")
+
+-- Owner access is independent of the viewer's unlocks and the list filters.
+local squadPlugin = PLUGIN
+PLUGIN = {HasService = function() return false end}
+dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sh_networkservices.lua")
+ix.townNPCs = PLUGIN
+PLUGIN = squadPlugin
+clock = clock + 1
+scoreboard:Think()
+check(scoreboard.selected == localClient.character:GetID(), "the owner remains selected without network unlocks")
+for _, field in pairs(scoreboard.dossierFields) do
+	check(field.card.visible == true, "every owner dossier field bypasses progression gates")
+end
+check(scoreboard.search.enabled == false and scoreboard.area.enabled == false,
+	"self access does not unlock global search or the remote directory")
+local otherRecord = ix.crossserver.GetScoreboardRoster(false)[first.character:GetID()]
+scoreboard:SelectRecord(otherRecord)
+check(not scoreboard.dossierFields.taskEarnings.card.visible
+	and not scoreboard.dossierFields.reputation.card.visible, "other characters retain their dossier gates")
+scoreboard:SelectRecord(ix.crossserver.GetScoreboardRoster(false)[localClient.character:GetID()])
+local lockedRoster = ix.crossserver.GetScoreboardRoster(false)
+check(lockedRoster[localClient.character:GetID()].profile.reputation == 0
+	and lockedRoster[localClient.character:GetID()].profile.leaderboardStats.tasksCompleted == 3,
+	"server-compatible filtering preserves all personal counters")
+check(next(lockedRoster[first.character:GetID()].profile.leaderboardStats) == nil,
+	"other characters' locked counters are removed from the data")
+ix.townNPCs.HasService = function() return true end
+scoreboard.search:SetText("does not match any character")
+clock = clock + 1
+scoreboard:Think()
+check(not scoreboard.rows[localClient.character:GetID()]
+	and scoreboard.selected == localClient.character:GetID(), "a list filter cannot clear the personal dossier")
+local previousCharacter = localClient.character
+localClient.character = client("NULL", "", 0).character
+clock = clock + 1
+scoreboard:Think()
+check(scoreboard.selected == localClient.character:GetID(), "character switching selects the new owner's dossier")
+localClient.character = nil
+clock = clock + 1
+scoreboard:Think()
+check(scoreboard.selected == nil and next(scoreboard.rows) == nil
+	and scoreboard.details.text == "Select a stalker", "unloading a character clears its personal dossier")
+localClient.character, ix.townNPCs = previousCharacter, nil
 
 -- Load the real UI helpers and exercise the wrapper's state transitions.
 dofile(root .. "derma/cl_squad.lua")

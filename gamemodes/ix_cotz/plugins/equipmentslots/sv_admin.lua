@@ -17,20 +17,15 @@ function PLUGIN:SendAdminInventory(client, character)
 	net.Send(client)
 end
 
-ix.command.Add("CharTakeInventory", {
-	description = "View a character's inventory and take items into your own backpack.",
-	adminOnly = true,
-	arguments = {ix.type.character},
-	OnRun = function(self, client, character)
-		if not client:GetCharacter() or character == client:GetCharacter() then
-			return "Choose another active character."
-		end
-		if not IsValid(character:GetPlayer()) or character:GetPlayer():GetCharacter() ~= character then
-			return "The target must be playing that character."
-		end
-		PLUGIN:SendAdminInventory(client, character)
-	end,
-})
+function PLUGIN:RunCommandCharTakeInventory(client, character)
+	if not client:GetCharacter() or character == client:GetCharacter() then
+		return "Choose another active character."
+	end
+	if not IsValid(character:GetPlayer()) or character:GetPlayer():GetCharacter() ~= character then
+		return "The target must be playing that character."
+	end
+	PLUGIN:SendAdminInventory(client, character)
+end
 
 function PLUGIN:TakeAdminItem(client, characterID, itemID)
 	if not ix.command.HasAccess(client, "CharTakeInventory") then return end

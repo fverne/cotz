@@ -47,10 +47,7 @@ check(markers[1].label:find("90°", 1, true), "world marker displays the recorde
 check(#lines == 0, "photography ledger is hidden while the camera is put away")
 weapon = {GetClass = function() return "ix_camera" end}
 PLUGIN:HUDPaint()
-local ledger = table.concat(lines, "\n")
-check(ledger:find("Boar", 1, true) and ledger:find("Blinddog", 1, true) and ledger:find("Burner", 1, true),
-	"camera ledger identifies captured mutants and anomaly names")
-check(ledger:find("2/3", 1, true) and ledger:find("1/3", 1, true), "camera shows both photography counts")
+check(#lines == 0, "camera HUD has no captured-types ledger for either photography job")
 jobs.Mute.fieldTask.stage = "carrying"
 now = now + 1
 markers = {}

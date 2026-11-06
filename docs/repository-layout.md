@@ -125,3 +125,9 @@ Sherpas moved from `plugins/sherpas.lua` into `plugins/sherpas/` under the same 
 now registers its derived entities/dialogue before standalone plugins; runtime access to hideouts and
 advanced vendors is resolved after all plugins load. Its client trading panel resolves `ixVendorAdv`
 when opening a window, after advanced vendor panels exist. See the [Sherpa guide](../gamemodes/ix_cotz/plugins/sherpas/README.md).
+
+Command registration metadata belongs in shared loading so Helix chat completion can discover it.
+Equipment, progression, job-reset and town command handlers remain server-side. `corechanges` owns
+shared deployment defaults; schema `libs/sh_spawnpolicy.lua` provides map-threshold registration and
+lookup. `eventcontroller/sv_combat.lua` owns encounter packs, combat eligibility and human regrouping;
+`sv_performance.lua` retains mutant population accounting, spawn queues and maintenance scheduling.

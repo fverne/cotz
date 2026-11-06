@@ -4,6 +4,12 @@ PLUGIN:Register("jitters", {
 	difficultyMultiplier = 1.5,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_cleaning_supplies",
+		"valuables_clinical_supplies",
+		"valuables_medical_equipment",
+		"valuables_trauma_supplies",
+	},
 	job = {
 		kind = "regionalSpecimens",
 		category = "Specific mutant specimens",

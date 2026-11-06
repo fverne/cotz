@@ -80,7 +80,7 @@ if (CLIENT) then
 				local id = character:GetID()
 				local previous = records[id]
 				records[id] = nil
-				if (hook.Run("ShouldShowPlayerOnScoreboard", client) ~= false) then
+				if (client == LocalPlayer() or hook.Run("ShouldShowPlayerOnScoreboard", client) ~= false) then
 					local squadID, squadName, squadColor
 					if (ix.squad and ix.squad.GetScoreboardGroup) then
 						squadID, squadName, squadColor = ix.squad.GetScoreboardGroup(client)

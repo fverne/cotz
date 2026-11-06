@@ -2,6 +2,12 @@ PLUGIN:Register("arena-master", {
 	name = "'Arena Master'",
 	template = "arenanpc",
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_protective_textiles",
+		"valuables_armour_panels",
+		"valuables_equipment_pouches",
+		"valuables_cleaning_supplies",
+	},
 	job = {
 		kind = "none",
 		category = "No ordinary repeatable work",

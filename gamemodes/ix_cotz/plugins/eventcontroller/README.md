@@ -59,8 +59,52 @@ Human encounters are unchanged. The intended map progression is Swamps < Garbage
 encounters alone does not populate the map. Place points with `/eventadd` in a multiplayer map
 session, verify navigation and safe placement, then export the eventcontroller data into the Garbage
 preset. Existing live worlds need those points added; do not rerun full FTS just for encounters.
-Garbage currently inherits the shared population target and caps.
+Garbage has independent population target/cap overrides; unset overrides inherit shared values.
 
 This defines an intended progression, not a measured difficulty score: NPC statistics and map geometry
 still determine actual combat difficulty. Chimeras, pseudogiants, burers, psy-dogs, hellhounds and
 controllers have not been added to Garbage.
+
+## Proximity combat and squads
+
+The activity manager tracks live `npc_mutant_*` and `npc_human_*` actors in spatial buckets.
+Human actors do not count toward mutant population caps. Town vendors and unrelated NPC classes
+remain outside this policy. `/PopulationStatus` reports awake/sleeping humans, mutant population,
+queued spawns, active pack conflicts, regroup schedules issued in the latest update and searches
+consumed in the latest search-budget tick.
+
+Both participants in an NPC fight must be awake and hostile. Sleeping rivals become neutral to
+engine targeting; target selection, retaliation, schedules and damage use the same server policy.
+Allied NPC damage is suppressed. Player damage wakes its victim. The existing wake/sleep distances
+are 5,000/6,000 units, with 15 seconds of grace after player proximity or external damage. NPC damage
+cannot extend that grace. Once players leave, grounded actors forget their targets, cancel offensive
+work and sleep even if they were fighting. Airborne actors finish their movement before sleeping.
+
+Bandits, mercenaries and military are internally allied and mutually hostile. Zombified humans ally
+with undead mutants. Spawned human squads share threats with nearby awake faction allies. Idle
+followers regroup beyond 512 units and stop within 256; the living member with the lowest entity
+index leads. Members outside 2,048 units return toward their encounter origin. Regrouping never
+teleports or follows a sleeping leader; blocked attempts retry after ten seconds. Actual movement
+requires the map's NPC navigation nodes.
+
+Routine encounters and advanced events share one session-only pack identity per spawn group,
+including queued mutants. Summoned creatures inherit their summoner's pack. Manual spawns get
+singleton packs. Each research-defence wave has an isolated pack and retains its task-owned lifecycle.
+Pack identities and feuds are not persisted or added to character data.
+
+Mutant packmates and separate packs of the same species stay friendly. Every 30 seconds, staggered
+by pack, awake predators can hunt nearby visible herbivores/rodents with a 50% chance; otherwise
+eligible different-species packs can feud with a 10% chance. One opponent pairing lasts 90 seconds,
+followed by a 120-second cooldown. Range is 1,500 units. Research waves cannot join ambient conflicts.
+The policy and tuning constants live in `sv_combat.lua`. `ai_disabled` stops ambient decisions and
+regrouping; existing `ai_ignoreplayers` behavior remains supported.
+
+Player positions are cached, spatial cells update during the existing half-second maintenance pass,
+and enemy searches/ambient decisions share the configured per-tick budget. There are no per-actor
+maintenance timers or routine all-world/all-pairs relationship scans. Relationship caches and empty
+packs/cells are cleaned through actor removal. Plugin unload wakes actors and restores recorded
+pre-policy dispositions.
+
+Run `luatex --luaonly tests/npc_combat_spec.lua` and the population/tag suites above. Multiplayer
+checks still need mixed factions and mutant packs, sleep boundaries during melee/projectiles,
+leader death and blocked navigation, task waves, and server frame cost at the configured caps.

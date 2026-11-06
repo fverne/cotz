@@ -13,6 +13,8 @@ ix.config.Add("artifactSpawnerThreshold", 5, "How many artifacts the anomalyspaw
 	category = "Spawning"
 })
 
+ix.spawnPolicy.Register("artifactSpawnerThreshold")
+
 ix.config.Add("artifactSpawnerRate", 900, "The time it takes for artifacts to be attempted to spawn.", nil, {
 	data = {min = 15, max = 3000},
 	category = "Spawning"
@@ -38,7 +40,7 @@ if SERVER then
 	function PLUGIN:trySpawnArtifacts()
 		for i, j in pairs(self.anomalypoints[game.GetMap()]) do
 			local numartifacts = self:GetNumSpawnedArtifacts()
-			if (numartifacts >= ix.config.Get("artifactSpawnerThreshold",5)) then return end
+			if (numartifacts >= ix.spawnPolicy.Get("artifactSpawnerThreshold", 5)) then return end
 
 			if (!j) then
 				continue

@@ -4,6 +4,12 @@ PLUGIN:Register("gasket", {
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_fuel_supplies",
+		"valuables_filtration",
+		"valuables_electrical_supplies",
+		"valuables_workshop_consumables",
+	},
 	job = {
 		kind = "none",
 		category = "No ordinary repeatable work",

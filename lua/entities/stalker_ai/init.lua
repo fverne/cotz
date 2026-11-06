@@ -230,6 +230,9 @@ function ENT:STALKERNPCCanAttackThis(ENT2)
 end
 
 function ENT:STALKERNPCIsEnemyNPC(ENT2)
+	if ix and ix.eventController and ix.eventController:IsCombatActor(ENT2) then
+		return ix.eventController:CanActorAttack(self, ENT2)
+	end
 	if(ENT2:IsNPC()&&ENT2:GetNPCState()!=NPC_STATE_DEAD&&(!self:STALKERNPCIsFriendlyClass(ENT2)||
 	(ENT2==self:GetEnemy()||self==ENT2:GetEnemy()))) then
 		return true
@@ -270,6 +273,11 @@ function ENT:STALKERNPCAnimEnemyIsValid()
 end
 
 function ENT:STALKERNPCTryToFindEnemy()
+	if ix and ix.eventController then
+		local _, count = ix.eventController:FindCombatEnemy(self, 1500, 90, true)
+
+		return count or 0
+	end
 	local TEMP_VisibleTargets = {}
 	local TEMP_NearEnemyCount = 0
 	local TEMP_PossibleTarget = NULL
@@ -969,6 +977,7 @@ end
 
 function ENT:Think()
 	if self.cotzSleeping then return end
+	if ix and ix.eventController then ix.eventController:ValidateCombatEnemy(self) end
 	if(GetConVar("ai_disabled"):GetInt()==0&&self.IsAlive==true) then
 
 		self:STALKERNPCCancelPendingTargetAbilities()
@@ -1039,7 +1048,10 @@ function ENT:Think()
 end
 
 function ENT:OnTakeDamage(dmginfo)
-	self:STALKERNPCWake()
+	if ix and ix.eventController and not ix.eventController:AllowCombatDamage(self, dmginfo) then return end
+	if not ix or not ix.eventController or not ix.eventController:GetCombatDamageActor(dmginfo) then
+		self:STALKERNPCWake()
+	end
 	if(self.IsAlive==false) then return end
 
 	local TEMP_DMGMUL = 1
@@ -1163,7 +1175,8 @@ function ENT:OnTakeDamage(dmginfo)
 		if(TEMP_RealAttacker!=game.GetWorld()&&IsValid(TEMP_RealAttacker)&&TEMP_RealAttacker!=nil&&TEMP_RealAttacker!=NULL&&
 		TEMP_RealAttacker!=self&&(!IsValid(self:GetEnemy())||self:GetEnemy()==nil||self:GetEnemy()==NULL||
 		self:GetEnemy():GetPos():Distance(self:GetPos())>TEMP_RealAttacker:GetPos():Distance(self:GetPos()))) then
-			if(TEMP_RealAttacker:IsPlayer()||(TEMP_RealAttacker:IsNPC())) then
+			if (TEMP_RealAttacker:IsPlayer() or TEMP_RealAttacker:IsNPC())
+				and (not ix or not ix.eventController or ix.eventController:CanActorAttack(self, TEMP_RealAttacker)) then
 				self:AddEntityRelationship( TEMP_RealAttacker, D_HT, self.Hate )
 				self:SetEnemy(TEMP_RealAttacker)
 				self.RegEnemy = TEMP_RealAttacker

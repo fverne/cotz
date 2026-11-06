@@ -648,6 +648,7 @@ local sitePlugin = {
 }
 PLUGIN = sitePlugin
 PLUGIN.siteDefinitions = {recovery = {rp_marsh_cs = {{"shared-marsh-point"}}, rp_garbage_cotz = {{"default"}}}}
+dofile(base .. "townnpcs/libs/sh_commands.lua")
 dofile(base .. "townnpcs/libs/sv_sites.lua")
 PLUGIN:LoadData()
 check(PLUGIN.recoveryPoints.rp_marsh_cs[1][1] == "shared-marsh-point", "shared definitions fill unsaved map regions")

@@ -24,7 +24,9 @@ function ix.jobs.field.Assign(character, npc, job)
 		point, approaches = ix.jobs.field.SelectDefenceSite(settings, map, usable)
 	else
 		for _, candidate in ipairs(points) do
-			if definition.fieldType == "sensor" or usable(candidate) then point = candidate break end
+			local hasClue = definition.fieldType ~= "recovery"
+				or ix.jobs.field.RecoveryClue(candidate, map, settings.searchRadius) ~= nil
+			if hasClue and (definition.fieldType == "sensor" or usable(candidate)) then point = candidate break end
 		end
 	end
 	if not point then return false end
@@ -48,6 +50,7 @@ function ix.jobs.field.Assign(character, npc, job)
 		job.fieldTask.cargoName = ix.item.list[cargo].name
 		job.fieldTask.cargoDescription = ix.item.list[cargo].description
 	end
+	ix.jobs.field.EnsureRecoveryClue(job.fieldTask)
 	if definition.fieldType == "defence" then
 		ix.jobs.field.AssignDefence(job.fieldTask, settings, definition.tier, approaches)
 		if definition.regionalWaves then

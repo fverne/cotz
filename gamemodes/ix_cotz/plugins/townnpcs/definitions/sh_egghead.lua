@@ -5,6 +5,12 @@ PLUGIN:Register("egghead", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	bunker = true,
+	courierPools = {
+		"valuables_research_samples",
+		"valuables_instruments",
+		"valuables_technical_records",
+		"valuables_recording_equipment",
+	},
 	job = {
 		kind = "regionalSpecimens",
 		category = "Bunker mutant specimens",

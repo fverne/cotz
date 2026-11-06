@@ -95,6 +95,7 @@ ix = {
 	util = {Include = function() end},
 }
 dofile(base .. "townnpcs/libs/sv_spawnpoints.lua")
+dofile(base .. "townnpcs/libs/sh_commands.lua")
 dofile(base .. "townnpcs/libs/sv_sites.lua")
 local output = {}
 local trace = {Entity = npc}

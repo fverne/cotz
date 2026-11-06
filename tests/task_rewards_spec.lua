@@ -408,7 +408,8 @@ local oldTown = ix.townNPCs
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_regionaljobs.lua")
 local themed = {map = "rp_marsh_cs", wantedItems = {food = true}}
 ix.townNPCs = {byName = {NPC = {map = "rp_marsh_cs"}, Themed = themed},
-	CanInteract = function(_, _, target) return not target.denied end}
+	CanInteract = function(_, _, target) return not target.denied end,
+	WantsCourierItem = function(_, contact, item) return contact.wantedItems[item] == true end}
 local receiver = {GetDisplayName = function() return "Themed" end}
 ix.jobs.list.alternate = {requiredItem = "food", alternateDelivery = true, issuerName = "NPC"}
 local alternativeOwner = actor()

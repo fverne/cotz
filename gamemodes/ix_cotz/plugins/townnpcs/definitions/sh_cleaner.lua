@@ -4,6 +4,12 @@ PLUGIN:Register("cleaner", {
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
+	courierPools = {
+		"valuables_cleaning_supplies",
+		"valuables_cutting_tools",
+		"valuables_secured_cases",
+		"valuables_flash_media",
+	},
 	job = {
 		kind = "deadDrop",
 		category = "Dead-drop circuits",

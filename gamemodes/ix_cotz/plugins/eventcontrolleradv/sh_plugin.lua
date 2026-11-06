@@ -13,6 +13,8 @@ ix.config.Add("eventControllerAdvThreshold", 5, "How many events can be active a
 	category = "Spawning"
 })
 
+ix.spawnPolicy.Register("eventControllerAdvThreshold")
+
 PLUGIN.updaterate = 5
 PLUGIN.noSpaceRate = 450
 
@@ -104,7 +106,7 @@ if SERVER then
 	end
 	
 	function PLUGIN:spawnEvent(eventpoint, spawn)
-		if table.Count(self.currentEvents) >= ix.config.Get("eventControllerAdvThreshold", 5) then
+		if table.Count(self.currentEvents) >= ix.spawnPolicy.Get("eventControllerAdvThreshold", 5) then
 			return false
 		end
 		if isClear(eventpoint[1]) then
@@ -113,6 +115,7 @@ if SERVER then
 				local definition = self.eventdefs[key]
 				local event = {
 					data = {},
+					combatPack = ix.eventController and ix.eventController:CreateCombatPack(eventpoint[1]),
 					eventpoint = eventpoint,
 					eventDef = key,
 				}
@@ -182,7 +185,7 @@ if SERVER then
 
 		if self.spawntime > CurTime() then return end
 
-		if table.Count(self.currentEvents) >= ix.config.Get("eventControllerAdvThreshold", 5) then
+		if table.Count(self.currentEvents) >= ix.spawnPolicy.Get("eventControllerAdvThreshold", 5) then
 			self.spawntime = CurTime() + self.noSpaceRate
 			return 
 		end

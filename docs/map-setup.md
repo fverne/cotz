@@ -234,6 +234,11 @@ on **every server** sharing configuration. Per-map `-1` inherits the default;
 Other useful settings include `worldSpawnerThreshold`, `boxSpawnerThreshold`,
 `artifactSpawnerThreshold`, `artifactSpawnerRate`, `artifactSpawnerChance`,
 `eventControllerAdvThreshold`, and the `containerSpawn*` settings.
+World-item, box, artifact and advanced-event thresholds also have `<key>_<map>` overrides for
+Swamps, Garbage, Waystation and Pripyat. `-1` inherits the shared value; `0` stops that spawner.
+Add further maps to `ix.spawnPolicy.maps` in the schema library on every server. Rates and chances
+remain shared. Repository defaults and saved-admin precedence are documented in
+[`corechanges/README.md`](../gamemodes/ix_cotz/plugins/corechanges/README.md).
 
 ## 5. Configure systems outside the preset
 

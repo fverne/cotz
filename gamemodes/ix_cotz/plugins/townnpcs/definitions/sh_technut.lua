@@ -4,6 +4,12 @@ PLUGIN:Register("technut", {
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_repair_parts",
+		"valuables_workshop_tools",
+		"valuables_electronic_components",
+		"valuables_control_electronics",
+	},
 	job = {
 		kind = "valuableCourier",
 		category = "Valuable delivery and courier work",

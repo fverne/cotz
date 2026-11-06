@@ -4,6 +4,12 @@ PLUGIN:Register("vesper", {
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
+	courierPools = {
+		"valuables_survey_equipment",
+		"valuables_filtration",
+		"valuables_protective_textiles",
+		"valuables_sample_carriers",
+	},
 	job = {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",

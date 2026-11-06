@@ -4,6 +4,12 @@ PLUGIN:Register("carbon", {
 	difficultyMultiplier = 4,
 	enforceCatalogue = true,
 	map = "rp_waystation",
+	courierPools = {
+		"valuables_office_records",
+		"valuables_technical_records",
+		"valuables_field_records",
+		"valuables_printed_material",
+	},
 	job = {
 		kind = "none",
 		category = "No ordinary repeatable work",

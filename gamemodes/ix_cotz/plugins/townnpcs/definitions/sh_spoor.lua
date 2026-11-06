@@ -4,6 +4,12 @@ PLUGIN:Register("spoor", {
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
+	courierPools = {
+		"valuables_survey_equipment",
+		"valuables_field_records",
+		"valuables_sample_carriers",
+		"valuables_cutting_tools",
+	},
 	job = {
 		kind = "categoryHunting",
 		category = "Mutant category hunting",

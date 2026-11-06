@@ -4,6 +4,12 @@ PLUGIN:Register("spool", {
 	difficultyMultiplier = 3.5,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
+	courierPools = {
+		"valuables_radio_equipment",
+		"valuables_radio_components",
+		"valuables_recording_equipment",
+		"valuables_portable_power",
+	},
 	job = {
 		kind = "triangulation",
 		category = "Radio triangulation",

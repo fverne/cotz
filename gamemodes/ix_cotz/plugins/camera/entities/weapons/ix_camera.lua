@@ -12,6 +12,8 @@ SWEP.UseHands = true
 SWEP.ViewModel = "models/weapons/infra/c_camera.mdl"
 SWEP.WorldModel = "models/weapons/infra/w_camera.mdl"
 SWEP.ViewModelFOV = 45
+SWEP.BobScale = 0
+SWEP.SwayScale = 0
 SWEP.HoldType = "pistol"
 -- Preserve the original camera pose when Helix lowers weapons, including its alternate lowering mode.
 -- SWEP.LowerAngles = angle_zero

@@ -4,6 +4,12 @@ PLUGIN:Register("ballast", {
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_transit_cases",
+		"valuables_reinforced_cases",
+		"valuables_equipment_pouches",
+		"valuables_protective_textiles",
+	},
 	job = {
 		kind = "recovery",
 		category = "Equipment recovery",

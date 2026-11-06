@@ -1,3 +1,5 @@
+local PLUGIN = PLUGIN
+
 function ix.jobs.getNPCJobs(npc, categories, amount)
 	amount = math.Clamp(math.floor(tonumber(amount) or 0), 0, ix.jobs.settings.maxNPCOffers)
 	local previous = ix.jobs.activejobs[npc] or {}
@@ -75,18 +77,14 @@ netstream.Hook("job_removeplayerjob", function(client, npc)
 	if canRequest(client) and type(npc) == "string" then client:ixJobRemove(npc) end
 end)
 
-ix.command.Add("CharResetJobs", {
-	adminOnly = true,
-	arguments = {ix.type.character},
-	OnRun = function(self, client, character)
-		for _, job in pairs(character:GetJobs()) do
-			ix.taskRewards.RemoveJobOffer(character, job)
-			if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
-		end
-		character:SetJobs({})
-		character:Save()
-		client:Notify("Reset the jobs of " .. character:GetName())
-		local target = character:GetPlayer()
-		if IsValid(target) then target:Notify("Jobs have been reset") end
-	end,
-})
+function PLUGIN:RunCommandCharResetJobs(client, character)
+	for _, job in pairs(character:GetJobs()) do
+		ix.taskRewards.RemoveJobOffer(character, job)
+		if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
+	end
+	character:SetJobs({})
+	character:Save()
+	client:Notify("Reset the jobs of " .. character:GetName())
+	local target = character:GetPlayer()
+	if IsValid(target) then target:Notify("Jobs have been reset") end
+end

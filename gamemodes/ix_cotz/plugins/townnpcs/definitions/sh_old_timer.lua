@@ -4,6 +4,12 @@ PLUGIN:Register("old-timer", {
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_workshop_tools",
+		"valuables_cutting_tools",
+		"valuables_protective_textiles",
+		"valuables_field_records",
+	},
 	job = {
 		kind = "regionalHunting",
 		category = "Specific mutant hunting",

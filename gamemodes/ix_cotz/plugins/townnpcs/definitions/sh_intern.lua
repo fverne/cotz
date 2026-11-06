@@ -5,6 +5,12 @@ PLUGIN:Register("intern", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	bunker = true,
+	courierPools = {
+		"valuables_survey_equipment",
+		"valuables_sample_carriers",
+		"valuables_portable_power",
+		"valuables_field_records",
+	},
 	job = {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",

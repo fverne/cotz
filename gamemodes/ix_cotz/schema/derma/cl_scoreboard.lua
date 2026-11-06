@@ -463,7 +463,14 @@ function PANEL:SelectRecord(record)
 	self.selected = record.characterID
 	self.portrait:SetImage(record.pdaavatar or "vgui/icons/face_31.png")
 	local stats = record.profile.leaderboardStats or {}
-	local access = self.networkAccess or {}
+	local access = table.Copy(self.networkAccess or {})
+	local character = LocalPlayer():GetCharacter()
+	local ownRecord = character and record.characterID == character:GetID()
+	if ownRecord then
+		access.dossier, access.activity, access.ranking, access.location = true, true, true, true
+	end
+	self.dossierNote:SetText(access.dossier and "Counters begin when tracking is enabled."
+		or "Further STALKERnet tools unlock through Mute's progression.")
 	local location = access.location
 		and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
 	self.details:SetText(record.name)
@@ -528,6 +535,17 @@ function PANEL:Think()
 	if (self.nextRefresh or 0) > CurTime() then return end
 	self.nextRefresh = CurTime() + 0.5
 	local character = LocalPlayer():GetCharacter()
+	if self.selectionCharacter ~= character then
+		self.selectionCharacter = character
+		self.selected = character and character:GetID()
+	end
+	if not character then
+		for id, row in pairs(self.rows) do row:Remove() self.rows[id] = nil end
+		self.portrait:SetImage("vgui/icons/face_31.png")
+		self.details:SetText("Select a stalker")
+		for _, field in pairs(self.dossierFields) do field.value:SetText("—") field.card:SetVisible(false) end
+		return
+	end
 	local access = ix.townNPCs and ix.townNPCs:GetNetworkAccess(character)
 		or {search = true, squads = true, ranking = true, activity = true, location = true, remote = true, dossier = true}
 	self.networkAccess = access
@@ -592,7 +610,7 @@ function PANEL:Think()
 				local rankWidth = draw.SimpleText(rankName(record), "cotzLeaderboard", 146, 34, COLORS.rank)
 				draw.SimpleText(" · " .. (squad ~= "" and squad or "Loner"),
 					"cotzLeaderboard", 146 + rankWidth, 34, record.squadColor or COLORS.muted)
-				local presence = access.location
+				local presence = (access.location or (character and record.characterID == character:GetID()))
 					and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
 				draw.SimpleText(presence,
 					"cotzLeaderboard", 146, 54,
@@ -614,7 +632,10 @@ function PANEL:Think()
 	for id, row in pairs(self.rows) do
 		if not present[id] then row:Remove() self.rows[id] = nil end
 	end
-	if self.selected and not present[self.selected] then
+	local ownRecord = character and records[character:GetID()]
+	if ownRecord and (self.selected == character:GetID() or not present[self.selected]) then
+		self:SelectRecord(ownRecord)
+	elseif self.selected and not present[self.selected] then
 		self.selected = nil
 		self.portrait:SetImage("vgui/icons/face_31.png")
 		self.details:SetText("Select a stalker")

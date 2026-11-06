@@ -4,6 +4,12 @@ PLUGIN:Register("haggler", {
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_decorative_valuables",
+		"valuables_personal_effects",
+		"valuables_portable_power",
+		"valuables_transit_cases",
+	},
 	job = {
 		kind = "regionalHumans",
 		category = "Regional human elimination",

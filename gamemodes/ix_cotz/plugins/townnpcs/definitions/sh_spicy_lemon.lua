@@ -4,6 +4,12 @@ PLUGIN:Register("spicy-lemon", {
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_provisions",
+		"valuables_cleaning_supplies",
+		"valuables_cutting_tools",
+		"valuables_fuel_supplies",
+	},
 	job = {
 		kind = "regionalMeals",
 		category = "Meal deliveries",

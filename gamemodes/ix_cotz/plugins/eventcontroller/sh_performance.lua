@@ -37,4 +37,5 @@ ix.config.Add("mutantCorpseLifetime", 180, "Mutant corpse lifetime in seconds.",
 	data = {min = 30, max = 1800, decimals = 0},
 })
 
+ix.util.Include("sv_combat.lua")
 ix.util.Include("sv_performance.lua")

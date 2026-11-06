@@ -166,6 +166,7 @@ local function retireJobs(prefix)
 end
 
 function PLUGIN:BuildJobs()
+	for _, contact in pairs(self.contacts) do self:BuildCourierItems(contact) end
 	collectSpawnBatches()
 	for _, contact in pairs(self.contacts) do
 		contact.categories = {}

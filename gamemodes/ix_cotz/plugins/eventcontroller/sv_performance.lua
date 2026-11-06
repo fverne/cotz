@@ -19,8 +19,10 @@ function PLUGIN:UpdatePlayerCache()
 	if now < nextPlayerCache then return end
 	nextPlayerCache = now + PLAYER_CACHE_INTERVAL
 	playerPositions = {}
+	self.combatPlayers = {}
 	for _, client in player.Iterator() do
 		playerPositions[#playerPositions + 1] = client:GetPos()
+		self.combatPlayers[#self.combatPlayers + 1] = client
 	end
 end
 
@@ -73,6 +75,7 @@ function PLUGIN:TakeSearchBudget()
 	if searches >= ix.config.Get("mutantSearchBudget", 4) then return false end
 
 	searches = searches + 1
+	self.combatSearches = searches
 
 	return true
 end
@@ -110,7 +113,7 @@ function PLUGIN:UpdateMutantCorpses()
 	self.corpses = remaining
 end
 
-function PLUGIN:RegisterMutant(entity, enforceLimit)
+function PLUGIN:RegisterMutant(entity, enforceLimit, pack)
 	local class = entity:GetClass()
 	if not entity:IsNPC() or class:sub(1, 11) ~= "npc_mutant_" then return end
 	if self.mutants[entity] or entity.cotzPopulationRejected then return end
@@ -122,18 +125,20 @@ function PLUGIN:RegisterMutant(entity, enforceLimit)
 		return
 	end
 	self.mutants[entity] = true
+	self:RegisterCombatActor(entity, pack)
 	if entity.farttimer ~= nil then
 		entity.farttimer = CurTime() + (entity:EntIndex() % 10) * 0.05
 	end
 end
 
-function PLUGIN:QueueMutant(class, position, safeRange, targetLimited)
+function PLUGIN:QueueMutant(class, position, safeRange, targetLimited, pack)
 	if spawnTail - spawnHead + 1 >= MAX_QUEUED_SPAWNS then return false end
 	if not self:CanQueueMutant(position, true, targetLimited) then return false end
 
 	spawnTail = spawnTail + 1
 	spawnQueue[spawnTail] = {
 		class = class,
+		pack = pack,
 		targetLimited = targetLimited,
 		position = position,
 		safeRange = safeRange,
@@ -156,6 +161,7 @@ function PLUGIN:ProcessMutantQueue()
 		if CurTime() < request.expires and not playerNearby and hasCapacity then
 			local entity = ents.Create(request.class)
 			if IsValid(entity) then
+				entity.cotzCombatPack = request.pack
 				entity:SetPos(request.position)
 				entity:Spawn()
 				entity:DropToFloor()
@@ -168,25 +174,29 @@ end
 
 function PLUGIN:OnEntityCreated(entity)
 	if ix.eventController ~= self then return end
-	if entity:GetClass():sub(1, 11) ~= "npc_mutant_" then return end
+	local class = entity:GetClass()
+	if class:sub(1, 11) ~= "npc_mutant_" and class:sub(1, 10) ~= "npc_human_" then return end
 
 	timer.Simple(0, function()
-		if IsValid(entity) and ix.eventController == self then self:RegisterMutant(entity, true) end
+		if IsValid(entity) and ix.eventController == self then
+			self:RegisterMutant(entity, true)
+			if not entity.cotzPopulationRejected then self:RegisterCombatActor(entity) end
+		end
 	end)
 end
 
 function PLUGIN:EntityRemoved(entity)
 	if ix.eventController ~= self then return end
 	self.mutants[entity] = nil
+	if self.combatActors[entity] then self:RemoveCombatActor(entity) end
 end
 
 function PLUGIN:EntityTakeDamage(entity, damage)
 	if ix.eventController ~= self then return end
-	if self.mutants[entity] and entity.STALKERNPCWake then
+	if not self:AllowCombatDamage(entity, damage) then return true end
+	if self.combatActors[entity] and entity.STALKERNPCWake and not self:GetCombatDamageActor(damage) then
 		entity:STALKERNPCWake()
 	end
-	local attacker = damage:GetAttacker()
-	if self.mutants[attacker] and attacker.STALKERNPCWake then attacker:STALKERNPCWake() end
 end
 
 function PLUGIN:UpdateMutantPerformance()
@@ -194,11 +204,7 @@ function PLUGIN:UpdateMutantPerformance()
 	self:ProcessMutantQueue()
 	if CurTime() < nextUpdate then return end
 	nextUpdate = CurTime() + PROXIMITY_INTERVAL
-	for entity in pairs(self.mutants) do
-		if IsValid(entity) and entity.IsSTALKERNPC and entity.IsAlive == true then
-			entity:STALKERNPCUpdateSleep()
-		end
-	end
+	self:UpdateCombatActors()
 	self:UpdateMutantCorpses()
 end
 
@@ -206,6 +212,7 @@ function PLUGIN:InitializeMutantPerformance()
 	nextPlayerCache = 0
 	for _, entity in ents.Iterator() do
 		self:RegisterMutant(entity, false)
+		self:RegisterCombatActor(entity)
 	end
 end
 
@@ -222,9 +229,18 @@ end
 
 function PLUGIN:OnUnload()
 	if ix.eventController ~= self then return end
-	for entity in pairs(self.mutants) do
+	for entity in pairs(self.combatActors) do
 		if IsValid(entity) and entity.cotzSleeping and entity.STALKERNPCWake then
 			entity:STALKERNPCWake()
+		end
+		if IsValid(entity) then
+			if entity.cotzHuman and entity.SetSquad then entity:SetSquad(entity.cotzOriginalSquad or nil) end
+			entity.cotzOriginalSquad = nil
+			for other, disposition in pairs(entity.cotzOriginalRelations or {}) do
+				if IsValid(other) then entity:AddEntityRelationship(other, disposition, 99) end
+			end
+			entity.cotzCombatPack, entity.cotzCombatCell = nil, nil
+			entity.cotzRelations, entity.cotzOriginalRelations = nil, nil
 		end
 	end
 	for _, record in ipairs(self.corpses) do
@@ -233,6 +249,7 @@ function PLUGIN:OnUnload()
 		end
 	end
 	spawnQueue, spawnHead, spawnTail = {}, 1, 0
+	self.combatActors, self.combatPacks, self.combatBuckets = {}, {}, {}
 	ix.eventController = nil
 end
 
@@ -246,5 +263,5 @@ function PLUGIN:GetMutantPerformanceStatus()
 	end
 
 	return string.format("Mutants: %d; sleeping: %d; corpses: %d; rejected: %d; queued: %d",
-		total, sleeping, #self.corpses, rejected, spawnTail - spawnHead + 1)
+		total, sleeping, #self.corpses, rejected, spawnTail - spawnHead + 1) .. self:GetCombatStatus()
 end

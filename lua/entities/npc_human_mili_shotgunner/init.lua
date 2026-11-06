@@ -1,6 +1,7 @@
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 include('shared.lua')
+include("entities/stalker_ai/sv_performance.lua")
 
 -- Preset
 ENT.bleeds      = true
@@ -127,6 +128,10 @@ function ENT:Initialize()
 end
    
 function ENT:OnTakeDamage(dmg)
+	if ix and ix.eventController and not ix.eventController:AllowCombatDamage(self, dmg) then return end
+	if not ix or not ix.eventController or not ix.eventController:GetCombatDamageActor(dmg) then
+		self:STALKERNPCWake()
+	end
   if(dmg:IsDamageType(DMG_BULLET)) then
 		dmg:SubtractDamage(self.flatbulletresistance)
 		dmg:SetDamage(dmg:GetDamage()*(1 - (self.percentbulletresistance/100)))
@@ -141,10 +146,12 @@ function ENT:OnTakeDamage(dmg)
     self:PlayRandomSound(self.hurtsounds)
   end
 
-  if (dmg:GetAttacker():GetClass() != self:GetClass() && dmg:IsDamageType(DMG_BULLET)) then
-    self:AddEntityRelationship( dmg:GetAttacker(), 1, 10 )
-    self:SetEnemy(dmg:GetAttacker())
-  end
+	local attacker = dmg:GetAttacker()
+	if IsValid(attacker) and attacker:GetClass() ~= self:GetClass() and dmg:IsDamageType(DMG_BULLET)
+		and (not ix or not ix.eventController or ix.eventController:CanActorAttack(self, attacker)) then
+		self:AddEntityRelationship(attacker, D_HT, 10)
+		self:SetEnemy(attacker)
+	end
 
   self.Alerted = true
   if self:Health() <= 0 && self.dead == false then
@@ -159,6 +166,10 @@ schedd:EngTask( "TASK_FACE_ENEMY",       0 )
 schedd:EngTask( "TASK_RANGE_ATTACK1",    0 )
 
 function ENT:InitEnemies()
+	if ix and ix.eventController then
+		ix.eventController:RegisterCombatActor(self)
+		return
+	end
   local zombifiedtable = ents.FindByClass("npc_human_z_*")
   local bandittable = ents.FindByClass("npc_human_bandit_*")
   local merctable = ents.FindByClass("npc_human_merc_*")
@@ -192,6 +203,8 @@ function ENT:InitEnemies()
 end
 
 function ENT:Think()
+	if self.cotzSleeping then return end
+	if ix and ix.eventController then ix.eventController:ValidateCombatEnemy(self) end
   if self:Health() > 0 then
 
     if (self.RecheckEnemyTimer or 0) < CurTime() then
@@ -210,15 +223,18 @@ function ENT:PlayRandomSound(soundtable)
 end
 
 function ENT:SelectSchedule()
+	if self.cotzSleeping then return end
+	if ix and ix.eventController then ix.eventController:ValidateCombatEnemy(self) end
+	if self.cotzRegrouping and not IsValid(self:GetEnemy()) then return end
   if self:Alive() then
     local haslos = self:HasLOS()
 
     local distance = 0
     local enemy_pos = 0
-    if self:GetEnemy() == nil then
+    if not IsValid(self:GetEnemy()) then
       self:FindEnemyDan()
       -- If there's still no enemy after looking for one, we patrol
-      if( self:GetEnemy() == nil) then
+      if not IsValid(self:GetEnemy()) then
         self:SetSchedule(SCHED_PATROL_WALK)
         self.TakingCover = false
         return
@@ -260,6 +276,10 @@ function ENT:SelectSchedule()
 end
 
 function ENT:FindEnemyDan()
+	if ix and ix.eventController then
+		ix.eventController:FindCombatEnemy(self, 7000, 45)
+		return
+	end
   local MyNearbyTargets = ents.FindInCone(self:GetPos(),self:GetForward(),7000,45)
 
   for k,v in pairs(MyNearbyTargets) do

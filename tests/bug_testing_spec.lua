@@ -88,6 +88,7 @@ table.Copy = function(value)
 	return result
 end
 util = {AddNetworkString = function() end}
+dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sh_commands.lua")
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_spawnpoints.lua")
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_sites.lua")
 check(commands.TownNPCGetSpawnPoint.adminOnly and commands.TownNPCClearSpawnPoints.adminOnly,

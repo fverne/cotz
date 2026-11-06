@@ -4,6 +4,12 @@ PLUGIN:Register("brass", {
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
+	courierPools = {
+		"valuables_ordnance_salvage",
+		"valuables_military_cases",
+		"valuables_equipment_pouches",
+		"valuables_technical_records",
+	},
 	job = {
 		kind = "courier",
 		category = "Information courier and return",

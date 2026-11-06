@@ -1,6 +1,6 @@
 net.Receive("cotz/townnpcs/capture-spawn", function()
 	local npc = net.ReadEntity()
-	if not IsValid(npc) or npc:GetClass() ~= "ix_vendor_adv" then
+	if not IsValid(npc) or (npc:GetClass() ~= "ix_vendor_adv" and npc:GetClass() ~= "ix_townnpc_preview") then
 		print("[Town NPCs] The advanced vendor is no longer available to capture.")
 
 		return

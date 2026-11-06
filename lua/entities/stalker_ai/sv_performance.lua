@@ -35,7 +35,7 @@ function ENT:STALKERNPCUpdateSleep()
 		if self.cotzSleeping then self:STALKERNPCWake() end
 		return
 	end
-	if not getConfig("mutantSleep", true) or self.cotzNoSleep or self:STALKERNPCIsInCombat() then
+	if not getConfig("mutantSleep", true) or self.cotzNoSleep then
 		if self.cotzSleeping then self:STALKERNPCWake() end
 		return
 	end
@@ -44,12 +44,18 @@ function ENT:STALKERNPCUpdateSleep()
 	local range = self.cotzSleeping and wakeRange or math.max(wakeRange, getConfig("mutantSleepRange", 6000))
 	if ix.eventController:HasPlayerNear(self:GetPos(), range) then
 		if self.cotzSleeping then self:STALKERNPCWake() end
+		self.cotzAwakeUntil = CurTime() + COMBAT_HOLD
 		return
 	end
+	if (self.cotzAwakeUntil or 0) > CurTime() then return end
 	if self.cotzSleeping or self:IsEFlagSet(EFL_NO_THINK_FUNCTION) or not self:IsOnGround() then return end
 
 	self.cotzPreviousState = self:GetNPCState()
 	self.cotzSleeping = true
+	ix.eventController:ClearCombatEnemy(self)
+	if self.STALKERNPCStopAllTimers then self:STALKERNPCStopAllTimers(true) end
+	if self.STALKERNPCClearAnimation then self:STALKERNPCClearAnimation() end
+	self.isAttacking, self.IsJumping, self.IsLongJumping, self.isBigJumping = 0, 0, 0, 0
 	self:StopMoving()
 	clearSchedules(self)
 	self:SetNPCState(NPC_STATE_IDLE)

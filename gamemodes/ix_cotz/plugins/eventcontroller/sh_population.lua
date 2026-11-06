@@ -18,7 +18,7 @@ ix.config.Add("mutantRegionRange", 4096, "Radius for the regional cap.", nil, {
 	data = {min = 512, max = 20000, decimals = 0},
 })
 
-local MAPS = {"rp_marsh_cs", "rp_waystation", "rp_pripyat_remaster"}
+local MAPS = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation", "rp_pripyat_remaster"}
 
 -- Register the same map keys on every server because Helix config is shared.
 for _, mapName in ipairs(MAPS) do

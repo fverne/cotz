@@ -4,6 +4,12 @@ PLUGIN:Register("smartass", {
 	difficultyMultiplier = 2.5,
 	enforceCatalogue = true,
 	map = "rp_waystation",
+	courierPools = {
+		"valuables_computer_parts",
+		"valuables_portable_computers",
+		"valuables_flash_media",
+		"valuables_data_archives",
+	},
 	job = {
 		kind = "dataExtract",
 		category = "Computer data extraction",

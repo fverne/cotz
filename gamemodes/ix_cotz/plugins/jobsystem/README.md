@@ -27,7 +27,7 @@ Valuable couriers list every eligible receiving contact in the confirmation and 
 Map references use the cross-server display names, with built-in names available before that plugin
 loads; accepted descriptions containing BSP names are formatted without changing saved locations.
 Every objective completion sends a task-completed notification and PDA sound once. Photography
-shows the saved captured species/anomaly list in the journal and while holding the loan camera.
+shows the saved captured species/anomaly list in the journal. There is no camera HUD ledger.
 Triangulation saves the origin and compass bearing of each reading and marks those positions in
 world space until the transmitter is collected. Old coordinate-only readings remain supported.
 Mute now offers triangulation in Swamps / Waystation / Pripyat, with 3 / 4 / 5 readings.
@@ -52,7 +52,7 @@ Previously completed hand-ins also receive the current cash formula at claim; pa
 
 Field-work menus and temporary world labels use the shared
 [COTZ UI style](../../../../docs/ui-style.md). Assignment labels have a dark backing and amber border
-and stay within the viewport; marker duration, positions and server actions are unchanged.
+and stay within the viewport. Recovery uses text directions instead of a world marker.
 
 Restart after editing shared definitions. Job IDs, category IDs, cargo item IDs, network names and
 saved character keys remain stable. Existing accepted field jobs keep their saved destinations,
@@ -291,7 +291,7 @@ dead-drop circuits and field research defence.
 Their runtime, cargo items, world entity and PDA controls all live in this plugin.
 No new map spawn-point definitions or per-assignment staff setup are required.
 
-- **Recovery:** search around an approximate marker, collect a 2x2, 2.5 kg case, and return it.
+- **Recovery:** search the named event-spawn area described in the PDA, collect the assigned cargo, and return it.
 - **Sensor:** choose a deployment position within 512 units of the assigned survey point,
   using the PDA's Field work menu. The sensor is placed in front of the player after a
   ground/clearance check. Leave at least 512 units from the deployed sensor and allow
@@ -317,9 +317,9 @@ No new map spawn-point definitions or per-assignment staff setup are required.
 
 Open **Field work** on an accepted job in the PDA task list for directions, readings
 or deployment, research startup, and parcel delivery. Assignment markers last 30 seconds; Show
-assignment displays them again. Recorded triangulation origins and bearings stay visible during the search. A recovery
-marker gives a search area rather than the exact case position. Wrong-map status reports
-the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
+assignment displays them again. Recorded triangulation origins and bearings stay visible during the search.
+Recovery uses the named event-spawn area, with a compass offset and approximate distance when needed,
+and never creates a world marker. Wrong-map status reports the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
 following the existing field jobs' regional difficulty convention. Target maps, categories,
 reference payments and reputation are in `definitions/sh_fieldjobs.lua`. Existing reputation
 gates, supply choices, completion bonuses and completion/restock handling still apply.
@@ -473,3 +473,24 @@ Only aggregate public statistics enter cross-map snapshots; species sets and pro
 
 Run `luatex --luaonly tests/leaderboard_stats_spec.lua` alongside the job and presence specs.
 Check the scrolling dossier and local/remote totals in a multiplayer session after character save.
+
+## Recovery location clues and courier interests
+
+Field point collection returns its existing vector list plus a position-keyed name lookup. Recovery
+clues use named routine event points from saved map data or undeployed FTS presets. New offers need
+a named clue. Accepted recovery sites retain their coordinates, cargo, description and claim; their
+optional `fieldTask.whereabouts` text is resolved lazily and saved through the existing jobs field.
+Missing providers leave existing jobs intact, with a temporary unavailable message and later retry.
+Show assignment and the journal display the same clue. Area names are literal text, including `%`.
+Other field types retain their current markers.
+
+Valuable couriers use explicit per-contact `courierPools`, separate from ordinary `wantedItems`
+shop assortments. The compiled courier index and previous receiver interests drive the same offer,
+journal and hand-in checks. Items still require an obtainable regional-catalogue source, existing
+difficulty rules and a permitted receiver. New offers require a placed receiver and exclude The
+Original; accepted work retains its previous permitted receivers. Disabled items remain excluded.
+Item-specific counts, partial-stack handling and payments are unchanged.
+
+Command metadata for CharResetJobs is shared in `libs/sh_commands.lua`; its implementation remains
+server-side. Run `tests/field_tasks_spec.lua`, `tests/job_overlays_spec.lua`,
+`tests/regional_jobs_spec.lua` and `tests/shared_commands_spec.lua` using `luatex --luaonly`.

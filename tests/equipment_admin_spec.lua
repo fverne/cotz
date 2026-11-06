@@ -51,6 +51,7 @@ ix.item.PerformInventoryAction = function(actor, action, id, inventoryID)
 		"Unequip uses the target's normal authoritative item action")
 	unequips = unequips + 1
 end
+dofile("gamemodes/ix_cotz/plugins/equipmentslots/sh_commands.lua")
 dofile("gamemodes/ix_cotz/plugins/equipmentslots/sv_admin.lua")
 function PLUGIN:GetPending() return pending end
 function PLUGIN:IsEquipmentCell(x) return x >= 32 end

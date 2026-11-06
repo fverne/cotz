@@ -43,6 +43,13 @@ function ix.jobs.field.Status(client, npc, job)
 		client:Notify("Return the recovered cargo to " .. npc .. ".")
 		return
 	end
+	if state.kind == "recovery" then
+		if ix.jobs.field.EnsureRecoveryClue(state) then
+			ix.jobs.field.SaveJob(client:GetCharacter(), npc, job)
+		end
+		client:Notify(ix.jobs.field.DescribeAssignment(job) .. " Region: " .. ix.jobs.GetMapName(state.map) .. ".")
+		return
+	end
 	local activeMap = state.kind == "deadDrop" and state.stage == "carrying"
 		and (state.destinationMap or state.map) or state.map
 	if activeMap ~= game.GetMap() then

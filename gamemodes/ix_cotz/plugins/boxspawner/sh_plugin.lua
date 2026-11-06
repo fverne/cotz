@@ -30,6 +30,8 @@ ix.config.Add("boxSpawnerThreshold", 50, "How many boxes should the controller k
 	category = "Spawning"
 })
 
+ix.spawnPolicy.Register("boxSpawnerThreshold")
+
 if SERVER then
 	local spawntime = 1
 	
@@ -53,10 +55,10 @@ if SERVER then
 	
 	function PLUGIN:spawnBoxes()
 		local n_boxes = self:GetNumBoxes()
-		local max_boxes = ix.config.Get("boxSpawnerThreshold",50)
+		local max_boxes = ix.spawnPolicy.Get("boxSpawnerThreshold", 50)
 
 		for _,v in RandomPairs(self.boxpoints) do
-			if (n_boxes > max_boxes) then return end
+			if (n_boxes >= max_boxes) then return end
 
 			local pos = v[1]
 			local boxtype
@@ -89,7 +91,7 @@ if SERVER then
 	function PLUGIN:Think()
 		if spawntime > CurTime() then return end
 		spawntime = CurTime() + self.spawnrate
-		if( self:GetNumBoxes() > ix.config.Get("boxSpawnerThreshold",50)) then return end
+		if self:GetNumBoxes() >= ix.spawnPolicy.Get("boxSpawnerThreshold", 50) then return end
 
 		self:spawnBoxes()
 	end	

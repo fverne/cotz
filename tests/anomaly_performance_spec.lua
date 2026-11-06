@@ -129,7 +129,7 @@ table.Count = function(value) local count = 0 for _ in pairs(value) do count = c
 local pluginEnvironment = {
 	PLUGIN = plugin,
 	isClear = function() return true end,
-	ix = {config = {Get = function(key)
+	ix = {spawnPolicy = {Get = function(key)
 		check(key == "eventControllerAdvThreshold", "event limit uses the registered setting")
 		return threshold
 	end}},

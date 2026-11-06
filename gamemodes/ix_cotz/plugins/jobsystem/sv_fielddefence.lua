@@ -117,6 +117,8 @@ local function spawnAttacker(client, defence, encounter, slot)
 		ErrorNoHalt("[COTZ jobsystem] Failed to create research attacker " .. slot.class .. "\n")
 		return
 	end
+	encounter.combatPack = encounter.combatPack or ix.eventController:CreateCombatPack(position, true)
+	npc.cotzCombatPack = encounter.combatPack
 	npc:SetPos(position)
 	npc:Spawn()
 	npc:DropToFloor()

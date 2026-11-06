@@ -54,6 +54,23 @@ function PLUGIN:BuildWantedItems(contact)
 	return wanted
 end
 
+function PLUGIN:BuildCourierItems(contact)
+	local wanted = {}
+	for _, poolID in ipairs(contact.courierPools or {}) do
+		local pool = assert(ix.progression.itemPools[poolID], "Unknown courier pool: " .. poolID)
+		for _, candidate in ipairs(pool.candidates) do wanted[candidate.item] = true end
+	end
+	contact.courierItems = wanted
+end
+
+function PLUGIN:WantsCourierItem(contact, item, includeLegacy)
+	if contact.disabledItems and contact.disabledItems[item] then return false end
+	local legacy = (contact.wantedItems or {})[item] == true
+	if contact.id == "the-original" then return includeLegacy == true and legacy end
+
+	return (contact.courierItems or {})[item] == true or legacy
+end
+
 function PLUGIN:CanBuyItem(character, item, npcName)
 	local contact = self.byName[npcName]
 	if contact and contact.disabledItems and contact.disabledItems[item] then return false end

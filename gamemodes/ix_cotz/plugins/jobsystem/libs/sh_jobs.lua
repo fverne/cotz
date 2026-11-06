@@ -65,7 +65,10 @@ end
 function ix.jobs.getFormattedDesc(activejob, hideRewards)
 	local description = activejob.fieldTask and ix.jobs.field.DescribeAssignment(activejob)
 		or ix.jobs.list[activejob.identifier].desc
-	local text = string.format(description, activejob.numberRec)
+	local text = description
+	if not activejob.fieldTask or activejob.fieldTask.kind ~= "recovery" then
+		text = string.format(description, activejob.numberRec)
+	end
 	local definition = ix.jobs.list[activejob.identifier]
 	local contact = ix.townNPCs and ix.townNPCs.contacts and ix.townNPCs.contacts[definition.townContact]
 	local assignmentMap = activejob.fieldTask and activejob.fieldTask.map or definition.fieldMap

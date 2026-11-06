@@ -4,6 +4,12 @@ PLUGIN:Register("mute", {
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_radio_equipment",
+		"valuables_radio_components",
+		"valuables_electronic_components",
+		"valuables_portable_power",
+	},
 	job = {
 		kind = "triangulation",
 		category = "Radio triangulation",

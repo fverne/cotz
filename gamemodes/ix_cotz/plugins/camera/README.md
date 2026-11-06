@@ -29,7 +29,9 @@ akua's original SWEP; it does not require the original addon's screen materials,
 The photographing client plays `items/camera/snap.wav` once when the server accepts a shot.
 Holding the camera preserves the player's normal world FOV, like the hands SWEP, and uses the same
 45-degree viewmodel FOV. Photos and the live screen keep the configured photo FOV and aspect ratio.
-Helix lowering angles remain configured on the SWEP itself.
+Helix lowering behavior remains on the SWEP itself. Viewmodel bob and sway are disabled
+with `BobScale = 0` and `SwayScale = 0`. Photography progress remains in the PDA journal;
+there is no captured-types HUD ledger.
 
 The server builds the list from its own shoot position and eye angles, with rectangular framing and
 `MASK_VISIBLE` line-of-sight checks. Entity candidates are `ix_*`, `npc_mutant_*`, `npc_human_*`,

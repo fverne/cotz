@@ -16,7 +16,7 @@ function ix.jobs.field.Unpack(position)
 end
 
 function ix.jobs.field.CollectPoints(names, map)
-	local points, visited, positions = {}, {}, {}
+	local points, visited, positions, pointNames = {}, {}, {}, {}
 	local function collect(name)
 		if visited[name] then return end
 		visited[name] = true
@@ -36,6 +36,9 @@ function ix.jobs.field.CollectPoints(names, map)
 		end
 		for _, row in pairs(rows or {}) do
 			local point = row[1]
+			if isvector(point) and type(row[2]) == "string" and row[2]:find("%S") then
+				pointNames[tostring(point)] = row[2]
+			end
 			if isvector(point) and not positions[tostring(point)] then
 				positions[tostring(point)] = true
 				points[#points + 1] = Vector(point.x, point.y, point.z)
@@ -44,7 +47,37 @@ function ix.jobs.field.CollectPoints(names, map)
 	end
 	for _, name in ipairs(names) do collect(name) end
 
-	return points
+	return points, pointNames
+end
+
+local COMPASS_DIRECTIONS = {"north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"}
+local METRES_PER_UNIT = 0.01905
+
+function ix.jobs.field.RecoveryClue(point, map, radius)
+	local points, names = ix.jobs.field.CollectPoints({"event"}, map)
+	local nearest, nearestDistance
+	for _, candidate in ipairs(points) do
+		local distance = point:DistToSqr(candidate)
+		if names[tostring(candidate)] and (not nearestDistance or distance < nearestDistance) then
+			nearest, nearestDistance = candidate, distance
+		end
+	end
+	if not nearest then return end
+	local name = names[tostring(nearest)]
+	if nearestDistance <= (radius or 384) ^ 2 then return "Search near " .. name .. "." end
+	local offset = point - nearest
+	local bearing = math.deg(math.atan2(-offset.y, offset.x))
+	local direction = COMPASS_DIRECTIONS[math.floor((bearing + 22.5) / 45) % 8 + 1]
+	local metres = math.max(10, math.floor(math.sqrt(nearestDistance) * METRES_PER_UNIT / 10 + 0.5) * 10)
+
+	return "Search about " .. metres .. " metres " .. direction .. " of " .. name .. "."
+end
+
+function ix.jobs.field.EnsureRecoveryClue(state)
+	if state.kind ~= "recovery" or state.whereabouts then return false end
+	state.whereabouts = ix.jobs.field.RecoveryClue(ix.jobs.field.Unpack(state.point), state.map, state.searchRadius)
+
+	return state.whereabouts ~= nil
 end
 
 function ix.jobs.field.SelectRoute(settings, map, usable, destinationMap)
@@ -89,6 +122,11 @@ function ix.jobs.field.IsAvailable(definition)
 	if not settings then return false end
 	if definition.fieldType == "courier" then return true end
 	local map = definition.fieldMap or game.GetMap()
+	if definition.fieldType == "recovery" then
+		local _, names = ix.jobs.field.CollectPoints({"event"}, map)
+
+		return next(names) ~= nil and #ix.jobs.field.CollectPoints(settings.sources, map) > 0
+	end
 	if definition.fieldType == "deadDrop" then
 		return ix.jobs.field.SelectRoute(settings, map, nil, definition.destinationMap) ~= nil
 	end
@@ -161,6 +199,16 @@ end
 
 function ix.jobs.field.DescribeAssignment(job)
 	local state = job.fieldTask
+	if state.kind == "recovery" then
+		local clue = state.whereabouts or "The location clue is temporarily unavailable. Check Field work again later."
+		local item = ix.item.list[state.cargo]
+		local target = state.recipient or "the issuing contact"
+		local description = state.description
+			or "Recover " .. (state.cargoName or item.name) .. ". Return the cargo to " .. target .. "."
+		if state.description then description = string.format(description, job.numberRec) end
+
+		return description .. " " .. clue
+	end
 	if state.description then return state.description end
 	-- Older accepted commissions have no description snapshot. Derive their instructions
 	-- from the saved assignment rather than a newly authored recipient or cargo definition.

@@ -4,6 +4,12 @@ PLUGIN:Register("suture", {
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
 	map = "rp_waystation",
+	courierPools = {
+		"valuables_textile_supplies",
+		"valuables_protective_textiles",
+		"valuables_equipment_pouches",
+		"valuables_cutting_tools",
+	},
 	job = {
 		kind = "none",
 		category = "No ordinary repeatable work",

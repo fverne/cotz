@@ -60,6 +60,8 @@
 				end
 
 				dat.data.zombies[i] = ents.Create("npc_mutant_classiczombie")
+
+				dat.data.zombies[i].cotzCombatPack = dat.combatPack
 				dat.data.zombies[i]:SetPos(position)
 				dat.data.zombies[i]:Spawn()
 			end
@@ -98,6 +100,7 @@
 						continue
 					end
 					dat.data.zombies[i] = ents.Create("npc_mutant_classiczombie")
+					dat.data.zombies[i].cotzCombatPack = dat.combatPack
 					dat.data.zombies[i]:SetPos(position)
 					dat.data.zombies[i]:Spawn()
 				end
@@ -180,6 +183,7 @@
 						continue
 					end
 					dat.data.dogs[i] = ents.Create("npc_mutant_dog")
+					dat.data.dogs[i].cotzCombatPack = dat.combatPack
 					dat.data.dogs[i]:SetPos(position)
 					dat.data.dogs[i]:Spawn()
 				end

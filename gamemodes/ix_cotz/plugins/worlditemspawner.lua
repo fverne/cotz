@@ -13,6 +13,8 @@ ix.config.Add("worldSpawnerThreshold", 75, "How many items the worldspawner shou
 	category = "Spawning"
 })
 
+ix.spawnPolicy.Register("worldSpawnerThreshold")
+
 if SERVER then
 	function PLUGIN:IsClear(position)
 		for i,j in pairs (ents.FindInSphere( position, PLUGIN.saferadius )) do
@@ -34,7 +36,7 @@ if SERVER then
 				return
 			end
 
-			if (numitems > ix.config.Get("worldSpawnerThreshold",75)) then return end
+			if numitems >= ix.spawnPolicy.Get("worldSpawnerThreshold", 75) then return end
 			if ( !self:IsClear(j[1]) ) then continue end
 	
 			local data = {}

@@ -1,3 +1,5 @@
+ix.util.Include("sh_defaults.lua")
+
 PLUGIN.name = "Core changes"
 PLUGIN.author = "verne"
 PLUGIN.desc = "Changes some core helix things"
@@ -203,6 +205,7 @@ end
 --removal of helix commands we dont use
 --removal of helix chats we dont use
 function PLUGIN:InitializedPlugins()
+	self:ApplyConfiguredDefaults()
 	ix.command.list["becomeclass"] = nil
 	ix.command.list["chardesc"] = nil
 	ix.command.list["eventpda"] = nil

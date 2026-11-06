@@ -4,6 +4,12 @@ PLUGIN:Register("quartermaster", {
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
 	map = "rp_waystation",
+	courierPools = {
+		"valuables_military_cases",
+		"valuables_armour_panels",
+		"valuables_protective_textiles",
+		"valuables_ordnance_salvage",
+	},
 	job = {
 		kind = "valuableCourier",
 		category = "Valuable delivery and courier work",

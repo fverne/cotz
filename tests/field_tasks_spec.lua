@@ -1,3 +1,4 @@
+function Angle(p, y, r) return {p = p, y = y, r = r} end
 -- Run from the addon root: luatex --luaonly tests/field_tasks_spec.lua
 local checks = 0
 local function check(value, message)
@@ -120,15 +121,15 @@ dofile(base .. "definitions/sh_fieldjobs.lua")
 local function points()
 	ix.plugin.list = {
 		hidestashspawner = {stashspawnpoints = {[map] = {{Vector(1000, 0, 0), "stash"}}}},
-		eventcontroller = {eventpoints = {[map] = {{Vector(1000, 0, 0)}, {Vector(2000, 0, 0)}}}},
-		radiationcontroller = {radiationpoints = {[map] = {{Vector(3000, 0, 0)}}}},
-		anomalycontroller = {anomalypoints = {[map] = {{Vector(4000, 0, 0)}}}},
+		eventcontroller = {eventpoints = {[map] = {{Vector(1000, 0, 0), "Test event area"}, {Vector(2000, 0, 0), "Test event area"}}}},
+		radiationcontroller = {radiationpoints = {[map] = {{Vector(3000, 0, 0), "Test event area"}}}},
+		anomalycontroller = {anomalypoints = {[map] = {{Vector(4000, 0, 0), "Test event area"}}}},
 	}
 end
 points()
 local originalProviders = ix.plugin.list
 ix.plugin.list = {eventcontroller = {eventpoints = {[map] = {
-	{Vector(1000, 0, 0)}, {Vector(4000, 0, 0)},
+	{Vector(1000, 0, 0), "Test event area"}, {Vector(4000, 0, 0), "Test event area"},
 }}}}
 for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop"}) do
 	check(ix.jobs.field.IsAvailable(ix.jobs.list["field_" .. kind .. "_easy"]),
@@ -138,7 +139,7 @@ local site, approaches = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.
 check(site and #approaches > 0, "event points provide defence sites and approaches")
 ix.plugin.list = originalProviders
 local presetMap = "preset_destination"
-local presetRows = {{Vector(1000, 0, 0)}, {Vector(4000, 0, 0)}}
+local presetRows = {{Vector(1000, 0, 0), "Test event area"}, {Vector(4000, 0, 0), "Test event area"}}
 ix.plugin.list.firsttimesetup = {map_presets = {[presetMap] = {
 	plugindata = {eventcontroller = presetRows},
 }}}
@@ -151,7 +152,7 @@ check(
 )
 originalProviders.eventcontroller.eventpoints[presetMap] = {}
 check(#ix.jobs.field.CollectPoints({"event"}, presetMap) == 0, "explicitly empty saved map overrides FTS")
-originalProviders.eventcontroller.eventpoints[presetMap] = {{Vector(7000, 0, 0)}}
+originalProviders.eventcontroller.eventpoints[presetMap] = {{Vector(7000, 0, 0), "Test event area"}}
 local savedPoints = ix.jobs.field.CollectPoints({"event"}, presetMap)
 check(#savedPoints == 1 and savedPoints[1].x == 7000, "saved destination edits override FTS")
 check(#presetRows == 2 and presetRows[1][1].x == 1000, "FTS collection leaves presets unchanged")
@@ -592,6 +593,7 @@ check(
 local populationBlocked, spawnBlocked, checkedQueued, enforcedRegistration = false, false, false, false
 local registered = {}
 ix.eventController = {
+	CreateCombatPack = function(_, origin, isolated) return {origin = origin, isolated = isolated} end,
 	CanSpawnMutant = function(_, _, includeQueued)
 		checkedQueued = includeQueued
 		return not populationBlocked
@@ -937,8 +939,8 @@ function routeInventory:GetItems()
 	return items
 end
 local pickupMap, destinationMap = "cross-map-pickup", "cross-map-destination"
-ix.plugin.list.hidestashspawner.stashspawnpoints[pickupMap] = {{Vector(1000, 0, 0)}}
-ix.plugin.list.hidestashspawner.stashspawnpoints[destinationMap] = {{Vector(1000, 0, 0)}}
+ix.plugin.list.hidestashspawner.stashspawnpoints[pickupMap] = {{Vector(1000, 0, 0), "Test event area"}}
+ix.plugin.list.hidestashspawner.stashspawnpoints[destinationMap] = {{Vector(1000, 0, 0), "Test event area"}}
 ix.jobs.list.crossMapDrop = {name = "Cross-map drop", fieldType = "deadDrop", fieldMap = pickupMap,
 	destinationMap = destinationMap, tier = 2}
 local routeJob = {identifier = "crossMapDrop", rewardKey = "cross-map:1", numberRec = 1,
@@ -988,4 +990,35 @@ local markerCount = markers
 now = now + 2
 ix.jobs.field.Action(client, "Contact", "status")
 check(markers == markerCount, "retained network callbacks cannot operate after plugin unload")
+-- Recovery clues are text, retain saved sites and do not depend on camera/HUD markers.
+map = "rp_marsh_cs"
+points()
+local recovery = {kind = "recovery", map = map, point = {1000, 0, 0}, searchRadius = 384,
+	cargo = "job_recovery_case", stage = "search"}
+check(ix.jobs.field.EnsureRecoveryClue(recovery) and recovery.whereabouts:find("Test event area", 1, true),
+	"existing saved recovery sites acquire a named event clue")
+check(recovery.point[1] == 1000 and not ix.jobs.field.EnsureRecoveryClue(recovery),
+	"clue resolution neither moves the accepted site nor resaves a resolved clue")
+local remoteClue = ix.jobs.field.RecoveryClue(Vector(8000, 0, 0), map, 384)
+check(remoteClue:find("north", 1, true) and remoteClue:find("metres", 1, true),
+	"distant sites describe a compass offset from a named area")
+local missing = copy(recovery)
+missing.whereabouts = nil
+ix.plugin.list.eventcontroller.eventpoints[map] = {}
+check(not ix.jobs.field.EnsureRecoveryClue(missing) and missing.point[1] == 1000,
+	"temporarily missing providers leave accepted recovery state intact")
+check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_recovery_easy),
+	"new recovery offers require named location clues")
+points()
+local named = ix.plugin.list.eventcontroller.eventpoints[map][1]
+named[2] = "50% Yard"
+local textJob = {identifier = "field_recovery_easy", numberRec = 1, fieldTask = copy(missing)}
+ix.jobs.field.EnsureRecoveryClue(textJob.fieldTask)
+check(ix.jobs.getFormattedDesc(textJob):find("50% Yard", 1, true),
+	"literal percent signs in event area names are safe in the PDA")
+local previousMarkers = markers
+local recoveryClient, recoveryOwner = actor()
+recoveryOwner.jobs.Clue = textJob
+ix.jobs.field.Status(recoveryClient, "Clue", textJob)
+check(markers == previousMarkers, "Show assignment gives recovery text without creating a world marker")
 print("PASS: " .. checks .. " field task checks")

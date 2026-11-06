@@ -4,6 +4,12 @@ PLUGIN:Register("wake", {
 	difficultyMultiplier = 1.5,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
+	courierPools = {
+		"valuables_personal_effects",
+		"valuables_field_records",
+		"valuables_transit_cases",
+		"valuables_recording_equipment",
+	},
 	job = {
 		kind = "none",
 		category = "No ordinary repeatable work",

@@ -588,3 +588,31 @@ definitions, restore disabled items or add rewards. Plain `--write` and `--check
 The current snapshot includes the suit dependency cycle at Beanstalk BN01; 593 milestones have
 implemented unlocks, 25 have only TODO plans, and six have neither. A reported cycle stops the
 remaining graph-dependent validation, so a refreshed snapshot is not a successful runtime audit.
+
+## Disposable posing previews
+
+Administrators can use `/TownNPCPreview <contact-slug-or-vendor-template> <sequence>`, for example
+`/TownNPCPreview jitters idle_all_01`, with a sequence supported by that contact's mounted model.
+The preview appears at the crosshair, faces your yaw and loops that sequence. Sequence index zero
+is valid. Use `/TownNPCGetSpawnPoint` on it to print the visible position, facing and animation for
+an alternate restart point. Existing point export/import behavior remains unchanged.
+
+Each administrator has at most one preview. Another valid invocation replaces it; invalid templates
+or sequences leave the previous preview intact. Undo, disconnect or plugin unload removes it.
+`ix_townnpc_preview` inherits advanced-vendor appearance/animation but cannot trade or talk. Its
+separate class excludes it from vendor saves, contact lookup and restart placement.
+
+Town commands now register on both realms in `libs/sh_commands.lua`; handlers, saved data and
+network registration remain server-side. Check permissions and chat completion with an admin and
+ordinary player. Run `tests/town_preview_spec.lua`, `tests/town_spawnpoints_spec.lua` and
+`tests/shared_commands_spec.lua` with `luatex --luaonly`.
+
+Concrete contacts declare `courierPools` using existing `valuables_` requirement categories, reflecting
+their established profiles. These interests broaden incoming valuable-courier deliveries without
+changing their repeatable specialty or ordinary shop stock. Jitters accepts cleaning/sanitation,
+clinical, medical equipment and trauma categories. All active contacts have four themed categories;
+The Original remains inactive. Regional sources and disabled-item exclusions still apply.
+
+STALKERnet opens on the current character. Personal statistics and location bypass Mute's dossier,
+activity, rank and location gates in both data filtering and display. Other characters and global
+search/remote tools keep their existing unlocks. List filters cannot clear the personal dossier.

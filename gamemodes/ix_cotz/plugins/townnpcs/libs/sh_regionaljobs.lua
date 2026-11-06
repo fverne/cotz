@@ -72,8 +72,7 @@ local function valuableDeliveries(contact, tier)
 		if tier == 3 then allowed = harderSource and not easierSource end
 		local receivers = false
 		for _, receiver in pairs(PLUGIN.contacts) do
-			local disabled = receiver.disabledItems and receiver.disabledItems[itemID]
-			if receiver.map == contact.map and (receiver.wantedItems or {})[itemID] and not disabled then
+			if receiver.map == contact.map and PLUGIN:WantsCourierItem(receiver, itemID, false) then
 				receivers = true
 			end
 		end

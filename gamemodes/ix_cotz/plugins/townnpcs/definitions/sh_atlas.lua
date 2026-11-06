@@ -4,6 +4,12 @@ PLUGIN:Register("atlas", {
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	courierPools = {
+		"valuables_survey_equipment",
+		"valuables_instruments",
+		"valuables_recording_equipment",
+		"valuables_field_records",
+	},
 	job = {
 		kind = "photography",
 		category = "Alternating mutant and anomaly photography",

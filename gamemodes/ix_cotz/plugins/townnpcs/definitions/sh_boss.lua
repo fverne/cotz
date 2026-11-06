@@ -4,6 +4,12 @@ PLUGIN:Register("boss", {
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
 	map = "rp_waystation",
+	courierPools = {
+		"valuables_secured_cases",
+		"valuables_military_cases",
+		"valuables_control_electronics",
+		"valuables_technical_records",
+	},
 	job = {
 		kind = "regionalHumans",
 		category = "Regional human elimination",

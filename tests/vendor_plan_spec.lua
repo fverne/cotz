@@ -114,6 +114,7 @@ check(history:GetData("townNPCProgression").pending["'The Original'"], "retired 
 
 fixture.SetMap("rp_marsh_cs")
 local viewer = fixture.character()
+function viewer:GetID() return 987 end
 local full = {characterID = 1, name = "Scout", map = "rp_waystation", state = "travelling",
 	destination = "rp_pripyat_remaster", profile = {reputation = 1000,
 		leaderboardStats = {tasksCompleted = 30, taskEarnings = 10000}}}

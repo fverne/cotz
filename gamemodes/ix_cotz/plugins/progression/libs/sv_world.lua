@@ -46,27 +46,20 @@ function PLUGIN:SetupProgressionWorld()
 	end
 end
 
-ix.command.Add("ProgressionGrant", {
-	adminOnly = true,
-	arguments = { ix.type.character, ix.type.string },
-	OnRun = function(self, client, character, progressionID)
-		if not ix.progression.definitions[progressionID] then
-			return "Unknown progression."
-		end
-		ix.progression.SetCompleted(character, progressionID)
-		character:Save()
+function PLUGIN:RunCommandProgressionGrant(client, character, progressionID)
+	if not ix.progression.definitions[progressionID] then
+		return "Unknown progression."
+	end
+	ix.progression.SetCompleted(character, progressionID)
+	character:Save()
 
-		return "Progression milestone granted."
-	end,
-})
+	return "Progression milestone granted."
+end
 
-ix.command.Add("ProgressionAudit", {
-	adminOnly = true,
-	OnRun = function()
-		local definitions, contacts = ix.progression.AuditDefinitions()
+function PLUGIN:RunCommandProgressionAudit()
+	local definitions, contacts = ix.progression.AuditDefinitions()
 
-		return string.format("Validated %d progression definitions across %d contacts on %s. "
-			.. "Live item definitions, service rewards, catalogue thresholds and dependency graph passed.",
-			definitions, contacts, game.GetMap())
-	end,
-})
+	return string.format("Validated %d progression definitions across %d contacts on %s. "
+		.. "Live item definitions, service rewards, catalogue thresholds and dependency graph passed.",
+		definitions, contacts, game.GetMap())
+end

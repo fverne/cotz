@@ -6,6 +6,7 @@ local function check(value, message)
 end
 local base = "gamemodes/ix_cotz/plugins/jobsystem/"
 local callbacks, commands = {}, {}
+PLUGIN = {}
 local now = 1000
 CurTime = function() return now end
 IsValid = function(value) return type(value) == "table" and not value.invalid end
@@ -23,6 +24,7 @@ netstream = {Hook = function(name, callback) callbacks[name] = callback end}
 dofile(base .. "libs/sh_00_definitions.lua")
 dofile(base .. "libs/sh_jobs.lua")
 dofile(base .. "libs/sh_tooljobs.lua")
+dofile(base .. "libs/sh_commands.lua")
 dofile(base .. "sv_npcjobs.lua")
 ix.jobs.field.IsAvailable = function() return true end
 

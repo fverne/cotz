@@ -5,6 +5,12 @@ PLUGIN:Register("beanstalk", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	bunker = true,
+	courierPools = {
+		"valuables_research_samples",
+		"valuables_sample_carriers",
+		"valuables_instruments",
+		"valuables_technical_records",
+	},
 	job = {
 		kind = "defence",
 		category = "Research defence",

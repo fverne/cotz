@@ -13,9 +13,10 @@ local includeRoot = "gamemodes/ix_cotz/plugins/eventcontroller/"
 PLUGIN = {}
 local clients, entities = {}, {}
 local function vector(x)
-	return {x = x, DistToSqr = function(self, other) return (self.x - other.x) ^ 2 end}
+	return {x = x, y = 0, z = 0, DistToSqr = function(self, other) return (self.x - other.x) ^ 2 end}
 end
 CurTime = function() return now end
+GetConVar = function() return {GetInt = function() return 0 end} end
 EFL_NO_THINK_FUNCTION, NPC_STATE_IDLE = 4194304, 1
 ix = {
 	config = {
@@ -57,6 +58,12 @@ local function mutant(index, position)
 	entity.GetPos = function(self) return self.position end
 	entity.EntIndex = function(self) return self.index end
 	entity.GetEnemy = function(self) return self.enemy end
+	entity.SetEnemy = function(self, enemy) self.enemy = enemy end
+	entity.ClearEnemyMemory = function(self) self.forgot = true end
+	entity.IsPlayer = function() return false end
+	entity.Visible = function() return true end
+	entity.AddEntityRelationship = function() end
+	entity.Disposition = function() return 4 end
 	entity.IsOnGround = function(self) return self.grounded end
 	entity.IsEFlagSet = function(self) return self.flags ~= 0 end
 	entity.AddEFlags = function(self, flag) self.flags = flag end
@@ -100,6 +107,7 @@ PLUGIN.eventpoints = {}
 check(ix.eventController == PLUGIN, "eventcontroller owns the AI services and population policy")
 local function reset()
 	performance.mutants = {}
+	performance.combatActors, performance.combatPacks, performance.combatBuckets = {}, {}, {}
 	performance.corpses = {}
 	clients = {}
 	now, tick = now + 20, tick + 1
@@ -138,7 +146,7 @@ entity:STALKERNPCUpdateSleep()
 check(entity.cotzSleeping and entity.flags ~= 0 and entity.stopped, "distant idle mutant stops engine Think")
 check(entity.CurrentSchedule == nil and entity.bDoingEngineSchedule == nil,
 	"sleep clears Lua and engine schedule bookkeeping")
-local damage = {GetAttacker = function() return {} end}
+local damage = {GetAttacker = function() return nil end, GetInflictor = function() end}
 PLUGIN:EntityTakeDamage(entity, damage)
 check(not entity.cotzSleeping and entity.flags == 0 and entity.state == 2,
 	"damage wakes immediately and restores state/engine thinking")
@@ -158,16 +166,18 @@ now = now + 1
 entity:STALKERNPCUpdateSleep()
 check(not entity.cotzSleeping, "hysteresis keeps an awake mutant awake between the two distances")
 clients = {}
-now = now + 1
+now = now + 16
 entity.enemy = mutant(2, 10000)
 entity:STALKERNPCUpdateSleep()
-check(not entity.cotzSleeping, "off-screen combat remains active")
+check(entity.cotzSleeping and entity.enemy == nil, "off-screen NPC combat pauses and forgets its target")
+entity:STALKERNPCWake()
 entity.enemy = nil
 entity.PlayingAnimation = true
 entity:STALKERNPCUpdateSleep()
 check(not entity.cotzSleeping, "animation/attack timing prevents sleep")
 check(entity:STALKERNPCGetThinkInterval() == 0, "active combat retains tick-rate Think")
 entity.PlayingAnimation = false
+entity.cotzAwakeUntil = 0
 check(entity:STALKERNPCGetThinkInterval() == 0.1, "idle Think is throttled")
 entity.grounded = false
 entity:STALKERNPCUpdateSleep()
@@ -295,7 +305,7 @@ for _, metadata in pairs(configMetadata) do
 	check(metadata.category:find("^Performance") or metadata.category:find("^Spawning"),
 		"config appears under its owning plugin category")
 end
-check(count == 21, "AI settings and event-controller map caps/targets are registered on every server")
+check(count == 24, "AI settings and event-controller map caps/targets are registered on every server")
 check(configMetadata.mutantIdleInterval.data.decimals == 2, "fractional idle intervals remain editable")
 -- Shared config must resolve only the current map's overrides, including zero values.
 local savedGlobal, savedRegion = configValues.mutantLimit, configValues.mutantRegionLimit
@@ -408,3 +418,8 @@ check(broadcasts[1][2] == "Mutants near Marsh" and broadcasts[1][3][1] == unlock
 	"event broadcast uses the event location and a private recipient list")
 
 print(string.format("PASS: %d population performance checks", checks))
+
+return {manager = eventPlugin, NewMutant = mutant, Reset = reset, config = configValues,
+	SetTime = function(value) now, tick = value, tick + 1 end,
+	GetTime = function() return now end,
+	SetPlayers = function(value) clients = value end}

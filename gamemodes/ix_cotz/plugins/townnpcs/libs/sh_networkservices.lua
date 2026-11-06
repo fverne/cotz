@@ -14,6 +14,9 @@ end
 
 function PLUGIN:FilterNetworkRecord(character, record, access)
 	access = access or self:GetNetworkAccess(character)
+	if character and tonumber(record.characterID) == character:GetID() then
+		access = {ranking = true, activity = true, location = true, remote = true, dossier = true}
+	end
 	if record.map ~= game.GetMap() and not access.remote then return end
 	local result = table.Copy(record)
 	local profile = result.profile or {}

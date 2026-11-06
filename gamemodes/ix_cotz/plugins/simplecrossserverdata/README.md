@@ -1,6 +1,9 @@
 # Cross-server data and presence
 
 With `townnpcs` enabled, the approved workbook plan gates STALKERnet tools through Mute.
+The current character always sees their own complete dossier and location. STALKERnet selects
+them on opening or character switch, even when list filters hide their row. Global tools and
+other characters retain the gates below.
 The initial directory shows local identities. Search, squad filtering, ranking, basic activity,
 location tracking, the remote directory and the full dossier unlock at MU01/03/07/11/15/19/23.
 The server filters every roster snapshot for the receiving character, including remote membership,

@@ -4,6 +4,12 @@ PLUGIN:Register("latch", {
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
+	courierPools = {
+		"valuables_workshop_tools",
+		"valuables_drivers_wrenches",
+		"valuables_repair_parts",
+		"valuables_workshop_consumables",
+	},
 	job = {
 		kind = "valuableCourier",
 		category = "Valuable delivery and courier work",

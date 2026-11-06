@@ -4,6 +4,12 @@ PLUGIN:Register("ledger", {
 	difficultyMultiplier = 4,
 	enforceCatalogue = true,
 	map = "rp_waystation",
+	courierPools = {
+		"valuables_office_records",
+		"valuables_transit_cases",
+		"valuables_reinforced_cases",
+		"valuables_printed_material",
+	},
 	job = {
 		kind = "none",
 		category = "No ordinary repeatable work",

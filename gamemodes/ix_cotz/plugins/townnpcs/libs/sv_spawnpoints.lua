@@ -11,39 +11,31 @@ local function getPoints(id)
 	return maps[game.GetMap()][id], maps[game.GetMap()]
 end
 
-ix.command.Add("TownNPCGetSpawnPoint", {
-	adminOnly = true,
-	description = "Print the aimed-at advanced vendor's current position, facing and animation to your console.",
-	OnRun = function(_, client)
-		if not IsValid(client) then return "Run this command as a player in game." end
-		local npc = client:GetEyeTraceNoCursor().Entity
-		if not IsValid(npc) or npc:GetClass() ~= "ix_vendor_adv" then
-			return "Look at an advanced vendor or town NPC."
-		end
-		-- Animation groups run on the client, so capture the sequence visible to the requesting admin there.
-		net.Start("cotz/townnpcs/capture-spawn")
-		net.WriteEntity(npc)
-		net.Send(client)
+function PLUGIN:RunCommandTownNPCGetSpawnPoint(client)
+	if not IsValid(client) then return "Run this command as a player in game." end
+	local npc = client:GetEyeTraceNoCursor().Entity
+	if not IsValid(npc) or (npc:GetClass() ~= "ix_vendor_adv" and npc:GetClass() ~= "ix_townnpc_preview") then
+		return "Look at an advanced vendor or town NPC."
+	end
+	-- Animation groups run on the client, so capture the sequence visible to the requesting admin there.
+	net.Start("cotz/townnpcs/capture-spawn")
+	net.WriteEntity(npc)
+	net.Send(client)
 
-		return "Spawn point printed to your console."
-	end,
-})
+	return "Spawn point printed to your console."
+end
 
-ix.command.Add("TownNPCClearSpawnPoints", {
-	adminOnly = true,
-	arguments = {ix.type.string},
-	OnRun = function(_, client, id)
-		local contact = PLUGIN.contacts[id]
-		if not contact or contact.map ~= game.GetMap() then return "Choose a contact on this map." end
-		local _, contacts = getPoints(id)
-		contacts[id] = nil
-		local previous = (PLUGIN.lastSpawnPositions or {})[game.GetMap()]
-		if previous then previous[id] = nil end
-		PLUGIN:SaveData()
+function PLUGIN:RunCommandTownNPCClearSpawnPoints(client, id)
+	local contact = PLUGIN.contacts[id]
+	if not contact or contact.map ~= game.GetMap() then return "Choose a contact on this map." end
+	local _, contacts = getPoints(id)
+	contacts[id] = nil
+	local previous = (PLUGIN.lastSpawnPositions or {})[game.GetMap()]
+	if previous then previous[id] = nil end
+	PLUGIN:SaveData()
 
-		return "Cleared alternate spawn points for " .. contact.name .. "."
-	end,
-})
+	return "Cleared alternate spawn points for " .. contact.name .. "."
+end
 
 function PLUGIN:FormatTownSpawnPoints(id, points)
 	local lines = {string.format("\t[%q] = {\n", id)}
@@ -59,20 +51,17 @@ function PLUGIN:FormatTownSpawnPoints(id, points)
 	return table.concat(lines)
 end
 
-ix.command.Add("TownNPCExportSpawnPoints", {
-	adminOnly = true,
-	OnRun = function(_, client)
-		client:PrintMessage(HUD_PRINTCONSOLE, "[\"townnpcs\"] = {\n")
-		for id, points in SortedPairs((PLUGIN.spawnPoints or {})[game.GetMap()] or {}) do
-			for line in PLUGIN:FormatTownSpawnPoints(id, points):gmatch("[^\n]+") do
-				client:PrintMessage(HUD_PRINTCONSOLE, line .. "\n")
-			end
+function PLUGIN:RunCommandTownNPCExportSpawnPoints(client)
+	client:PrintMessage(HUD_PRINTCONSOLE, "[\"townnpcs\"] = {\n")
+	for id, points in SortedPairs((PLUGIN.spawnPoints or {})[game.GetMap()] or {}) do
+		for line in PLUGIN:FormatTownSpawnPoints(id, points):gmatch("[^\n]+") do
+			client:PrintMessage(HUD_PRINTCONSOLE, line .. "\n")
 		end
-		client:PrintMessage(HUD_PRINTCONSOLE, "},\n")
+	end
+	client:PrintMessage(HUD_PRINTCONSOLE, "},\n")
 
-		return "Spawn point preset printed to your console. Paste it into this map's plugindata table."
-	end,
-})
+	return "Spawn point preset printed to your console. Paste it into this map's plugindata table."
+end
 
 function PLUGIN:ApplyTownSpawnPoints()
 	-- PostLoadData may also be called manually; never move contacts again during this session.

@@ -79,6 +79,7 @@ if SERVER then
 		if ix.eventController ~= self then return end
 		-- spawnents
 		if spawn.entities then
+			local pack = self:CreateCombatPack(eventpoint[1])
 			for k = 1, #spawn.entities do
 				for _ = 1, spawn.entities[k][2] do
 					local class = spawn.entities[k][1]
@@ -99,12 +100,14 @@ if SERVER then
 
 					if isMutant and not self:CanPopulateMutant(position, true) then continue end
 					if isMutant then
-						self:QueueMutant(class, position, self.saferadius, true)
+						self:QueueMutant(class, position, self.saferadius, true, pack)
 					else
 						local newNPC = ents.Create(class)
+						newNPC.cotzCombatPack = pack
 						newNPC:SetPos(position)
 						newNPC:Spawn()
 						newNPC:DropToFloor()
+						self:RegisterCombatActor(newNPC, pack)
 					end
 				end
 			end

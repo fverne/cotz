@@ -276,4 +276,31 @@ check(#notices == noticeCount + 1 and notices[#notices]:find("Task completed:", 
 	"regional kill completion announces readiness")
 ix.jobs.regional.RecordKill(client, "npc_mutant_pseudodog", map)
 check(#notices == noticeCount + 1, "extra kills cannot repeat the completed notification")
+local themedContacts, separateShopInterests = 0, 0
+for slug, contact in pairs(ix.townNPCs.contacts) do
+	if slug ~= "the-original" then
+		check(#contact.courierPools == 4, "every active contact declares four themed courier categories")
+		themedContacts = themedContacts + 1
+		for itemID in pairs(contact.courierItems) do
+			if not (contact.wantedItems or {})[itemID] and contact.enforceCatalogue
+				and not (contact.disabledItems or {})[itemID] then
+				check(ix.townNPCs:WantsCourierItem(contact, itemID, false)
+					and ix.townNPCs:CanSellItem(itemID, contact.name) == false,
+					"courier-only categories do not expand ordinary vendor assortments")
+				separateShopInterests = separateShopInterests + 1
+			end
+		end
+	end
+end
+check(themedContacts == 26 and separateShopInterests > 0, "category expansion covers the active roster")
+local sample
+for _, definition in pairs(ix.jobs.list) do
+	if definition.alternateDelivery and not definition.completionOnly then sample = definition break end
+end
+local previousLookup = ix.progression.GetNPCFromName
+ix.progression.GetNPCFromName = function() end
+check(not ix.jobs.regional.CanOffer(char, sample), "new couriers cannot rely on unplaced receivers")
+ix.progression.GetNPCFromName = function() return {} end
+check(ix.jobs.regional.CanOffer(char, sample), "placing an eligible contact restores courier availability")
+ix.progression.GetNPCFromName = previousLookup
 print("PASS: " .. checks .. " regional job checks")

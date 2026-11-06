@@ -15,6 +15,9 @@ end
 
 function ix.jobs.regional.CanOffer(character, definition)
 	if not definition or definition.completionOnly then return false end
+	if definition.alternateDelivery and #ix.jobs.regional.EligibleReceivers(definition, false, true) == 0 then
+		return false
+	end
 	if definition.bunkerGate and not ix.progression.CanBuyItem(character, "'Carbon'", "accesscard_bunker") then
 		return false
 	end
@@ -25,13 +28,14 @@ function ix.jobs.regional.CanOffer(character, definition)
 	return true
 end
 
-function ix.jobs.regional.EligibleReceivers(definition)
+function ix.jobs.regional.EligibleReceivers(definition, includeLegacy, requirePlaced)
 	local recipients = {}
 	local issuer = ix.townNPCs.byName[definition.issuerName]
 	if not issuer then return recipients end
 	for _, receiver in pairs(ix.townNPCs.contacts) do
-		local disabled = receiver.disabledItems and receiver.disabledItems[definition.requiredItem]
-		if receiver.map == issuer.map and (receiver.wantedItems or {})[definition.requiredItem] and not disabled then
+		if receiver.map == issuer.map
+			and ix.townNPCs:WantsCourierItem(receiver, definition.requiredItem, includeLegacy ~= false)
+			and (not requirePlaced or IsValid(ix.progression.GetNPCFromName(receiver.name))) then
 			recipients[#recipients + 1] = receiver.name
 		end
 	end
@@ -69,7 +73,7 @@ function ix.jobs.regional.ReceiverMatches(character, receiver, job)
 	if not issuer or receiver.map ~= issuer.map then return false end
 	if receiver.disabledItems and receiver.disabledItems[definition.requiredItem] then return false end
 
-	return (receiver.wantedItems or {})[definition.requiredItem] == true
+	return ix.townNPCs:WantsCourierItem(receiver, definition.requiredItem, true)
 end
 
 function ix.jobs.regional.DefenceWaves(map, tier)

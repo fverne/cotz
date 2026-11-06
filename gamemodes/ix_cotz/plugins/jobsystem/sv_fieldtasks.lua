@@ -195,6 +195,7 @@ end
 
 function ix.jobs.field.UpdateJob(client, character, npc, job, keep)
 	local state = job.fieldTask
+	if ix.jobs.field.EnsureRecoveryClue(state) then ix.jobs.field.SaveJob(character, npc, job) end
 	if state.stage == "delivered" then return end
 	local key = keyFor(character, job)
 	local position = client:GetPos()
