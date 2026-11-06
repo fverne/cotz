@@ -303,13 +303,9 @@ function PANEL:Init()
 	continueButton:SetTextInset(0, 0)
 	continueButton:SizeToContents()
 	continueButton.DoClick = function()
-		self:SetMouseInputEnabled(false)
-		self:Slide("down", self.animationTime, function()
-			net.Start("ixCharacterChoose")
-				net.WriteUInt(self.character:GetID(), 32)
-			net.SendToServer()
-		end, true)
+		self:ChooseCharacter()
 	end
+	self.continueButton = continueButton
 
 	local deleteButton = infoButtons:Add("ixMenuButton")
 	deleteButton:Dock(LEFT)
@@ -319,8 +315,11 @@ function PANEL:Init()
 	deleteButton:SizeToContents()
 	deleteButton:SetTextColor(derma.GetColor("Error", deleteButton))
 	deleteButton.DoClick = function()
-		self:SetActiveSubpanel("delete")
+		if self.character then
+			self:SetActiveSubpanel("delete")
+		end
 	end
+	self.deleteButton = deleteButton
 
 	self.carousel = infoPanel:Add("ixCharMenuCarousel")
 	self.carousel:Dock(FILL)
@@ -329,6 +328,11 @@ function PANEL:Init()
 	self.delete = self:AddSubpanel("delete")
 	self.delete:SetTitle(nil)
 	self.delete.OnSetActive = function()
+		if not self.character then
+			self:SetActiveSubpanel("main", 0)
+			return
+		end
+
 		self.deleteModel:SetModel(self.character:GetModel())
 		self:CreateAnimation(self.animationTime, {
 			index = 2,
@@ -359,7 +363,7 @@ function PANEL:Init()
 	deleteConfirm:DockMargin(ScrW()*0.3, 0, 0, 0)
 	deleteConfirm:SetTextColor(derma.GetColor("Error", deleteConfirm))
 	deleteConfirm.DoClick = function()
-		if not ix.config.Get("charloadremove", false) then
+		if self.character and not ix.config.Get("charloadremove", false) then
 			local id = self.character:GetID()
 
 			parent:ShowNotice(1, L("deleteComplete", self.character:GetName()))
@@ -400,9 +404,44 @@ function PANEL:Init()
 	self:SetActiveSubpanel("main", 0)
 end
 
+function PANEL:ChooseCharacter()
+	local character = self.character
+
+	if not character or not ix.char.loaded[character:GetID()] then
+		return
+	end
+
+	local id = character:GetID()
+	self:SetMouseInputEnabled(false)
+	self:Slide("down", self.animationTime, function(panel)
+		-- Deletion or a list refresh can invalidate the selection while the panel slides out.
+		if not ix.char.loaded[id] or not panel.character or panel.character:GetID() ~= id then
+			panel:Populate()
+
+			-- Restore immediately because Helix removes this slide's animation slot after the callback.
+			if panel.character then
+				panel:SlideUp(0)
+			else
+				panel:SlideDown(0)
+				panel:GetParent().mainPanel:Undim()
+			end
+
+			return
+		end
+
+		net.Start("ixCharacterChoose")
+		net.WriteUInt(id, 32)
+		net.SendToServer()
+	end, true)
+end
+
 function PANEL:OnCharacterDeleted(character)
-	if (self.bActive and #ix.characters == 0) then
+	self:Populate()
+	self:SetActiveSubpanel("main", 0)
+
+	if self.bActive and not self.character then
 		self:SlideDown()
+		self:GetParent().mainPanel:Undim()
 	end
 end
 
@@ -410,55 +449,53 @@ function PANEL:Populate(ignoreID)
 	self.characterList:Clear()
 	self.characterList.buttons = {}
 
-	local bSelected
+	local selected = false
 
-	-- loop backwards to preserve order since we're docking to the bottom
 	for i = 1, #ix.characters do
 		local id = ix.characters[i]
 		local character = ix.char.loaded[id]
 
-		if (!character or character:GetID() == ignoreID) then
-			continue
-		end
+		if character and character:GetID() ~= ignoreID then
+			local index = character:GetFaction()
+			local faction = ix.faction.indices[index]
+			local color = faction and faction.color or color_white
 
-		local index = character:GetFaction()
-		local faction = ix.faction.indices[index]
-		local color = faction and faction.color or color_white
+			local button = self.characterList:Add("ixMenuSelectionButton")
+			button:SetBackgroundColor(color)
+			button:SetText(character:GetName())
+			button:SizeToContents()
+			button:SetButtonList(self.characterList.buttons)
+			button.character = character
+			button.OnSelected = function(panel)
+				self:OnCharacterButtonSelected(panel)
+			end
 
-		local button = self.characterList:Add("ixMenuSelectionButton")
-		button:SetBackgroundColor(color)
-		button:SetText(character:GetName())
-		button:SizeToContents()
-		button:SetButtonList(self.characterList.buttons)
-		button.character = character
-		button.OnSelected = function(panel)
-			self:OnCharacterButtonSelected(panel)
-		end
+			local localCharacter = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
 
-		-- select currently loaded character if available
-		local localCharacter = LocalPlayer().GetCharacter and LocalPlayer():GetCharacter()
-
-		if (localCharacter and character:GetID() == localCharacter:GetID()) then
-			button:SetSelected(true)
-			self.characterList:ScrollToChild(button)
-
-			bSelected = true
+			if localCharacter and character:GetID() == localCharacter:GetID() then
+				button:SetSelected(true)
+				self.characterList:ScrollToChild(button)
+				selected = true
+			end
 		end
 	end
 
-	if (!bSelected) then
+	if not selected then
 		local buttons = self.characterList.buttons
 
-		if (#buttons > 0) then
+		if #buttons > 0 then
 			local button = buttons[#buttons]
 
 			button:SetSelected(true)
 			self.characterList:ScrollToChild(button)
 		else
 			self.character = nil
+			self.carousel:SetActiveCharacter(nil)
 		end
 	end
 
+	self.continueButton:SetDisabled(self.character == nil)
+	self.deleteButton:SetDisabled(self.character == nil)
 	self.characterList:SizeToContents()
 end
 

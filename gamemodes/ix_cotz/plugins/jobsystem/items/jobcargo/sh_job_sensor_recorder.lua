@@ -4,6 +4,13 @@ ITEM.longdesc = "The sensor recorder stores a set of field measurements within i
 ITEM.model = "models/lostsignalproject/items/quest/scanner_anomaly.mdl"
 
 ITEM.price = 0
-ITEM.width = 1
+ITEM.width = 2
 ITEM.height = 2
 ITEM.flatweight = 0.5
+
+ITEM.exRender = true
+ITEM.iconCam = {
+	pos = Vector(252.06344, -250.02058, 260.43342),
+	ang = Angle(35, 135, -18),
+	fov = 3.663,
+}

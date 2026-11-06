@@ -25,6 +25,15 @@ Moved Lua files retain their original contents; loaders, documentation, and tool
 The client schema library `schema/libs/cl_cotzui.lua` owns shared COTZ UI styling. It loads before
 gameplay plugins through the existing library loader. See [UI and HUD style](ui-style.md).
 
+`schema/meta/sv_character.lua` is explicitly included by `sh_schema.lua`. Its owner-sync override
+keeps saved personal vendor stock/history out of the initial character network payload; other
+recipients retain Helix's normal visibility rules. Persistence and vendor stock messages are unchanged.
+
+The schema character loader in `schema/derma/cl_charload.lua` disables character actions for an empty
+selection and revalidates selection after its slide animation. Deletion acknowledgements refresh the
+list and return an empty loader to the main menu. Run `luatex --luaonly tests/character_menu_spec.lua`;
+also verify last-character deletion, creation and deletion during selection transitions in multiplayer.
+
 For item descriptions and NPC prose, read the [writing guide](writing-guide.md) and its
 [curated references](writing-references/README.md). Detailed examples live in the repository;
 NPC-specific voice notes remain in the existing [contact profiles](npc-overhaul/contacts/README.md).
