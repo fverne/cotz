@@ -5,6 +5,16 @@ PLUGIN:Register("haggler", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
+		kind = "regionalHumans",
+		category = "Regional human elimination",
+		description = "Regional human elimination",
+		maps = {
+			easy = "rp_marsh_cs",
+			medium = "rp_garbage_cotz",
+			hard = "rp_waystation",
+		},
+	},
+	legacyJob = {
 		kind = "humans",
 		trigger = "banditKilled",
 		category = "Hostile human elimination",

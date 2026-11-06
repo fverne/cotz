@@ -47,15 +47,17 @@ function ix.jobs.field.CollectPoints(names, map)
 	return points
 end
 
-function ix.jobs.field.SelectRoute(settings, map, usable)
+function ix.jobs.field.SelectRoute(settings, map, usable, destinationMap)
 	local sources = ix.jobs.field.CollectPoints(settings.sources, map)
-	local destinations = ix.jobs.field.CollectPoints(settings.destinationSources, map)
+	destinationMap = destinationMap or map
+	local destinations = ix.jobs.field.CollectPoints(settings.destinationSources, destinationMap)
 	table.Shuffle(sources)
 	table.Shuffle(destinations)
 	for _, source in ipairs(sources) do
 		for _, destination in ipairs(destinations) do
-			if source:DistToSqr(destination) >= settings.minRouteDistance ^ 2
-				and source:DistToSqr(destination) > 0 and (not usable or usable(source)) then
+			local separated = destinationMap ~= map
+				or source:DistToSqr(destination) >= settings.minRouteDistance ^ 2
+			if separated and (not usable or usable(source)) then
 				return source, destination
 			end
 		end
@@ -82,10 +84,14 @@ function ix.jobs.field.SelectDefenceSite(settings, map, usable)
 end
 
 function ix.jobs.field.IsAvailable(definition)
+	if definition.fieldMaps then return ix.jobs.regional.SelectMap(definition) ~= nil end
 	local settings = ix.jobs.field.settings[definition.fieldType]
 	if not settings then return false end
+	if definition.fieldType == "courier" then return true end
 	local map = definition.fieldMap or game.GetMap()
-	if definition.fieldType == "deadDrop" then return ix.jobs.field.SelectRoute(settings, map) ~= nil end
+	if definition.fieldType == "deadDrop" then
+		return ix.jobs.field.SelectRoute(settings, map, nil, definition.destinationMap) ~= nil
+	end
 	if definition.fieldType == "defence" then
 		return ix.eventController ~= nil and ix.eventController.CanSpawnMutant ~= nil
 			and ix.eventController.RegisterMutant ~= nil
@@ -165,6 +171,7 @@ function ix.jobs.field.CanRead(state, position, settings)
 end
 
 function ix.jobs.field.ShouldSpawn(state, position)
+	if state.kind == "courier" then return false end
 	if state.map ~= game.GetMap() or state.stage == "carrying" or state.stage == "delivered" then return false end
 	if state.kind == "sensor" and state.stage ~= "recording" then return false end
 	if state.kind == "defence" and state.stage ~= "defending" and state.stage ~= "ready" then return false end

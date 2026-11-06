@@ -5,6 +5,11 @@ PLUGIN:Register("brass", {
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
+		kind = "courier",
+		category = "Information courier and return",
+		description = "Information courier and return",
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Ammunition deliveries",
@@ -48,14 +53,9 @@ PLUGIN:Register("brass", {
 		completedGreeting = (
 			"Good to see you. An order to discuss, or have you brought something for us to count?"
 		),
-		workPrompt = "About the supply order I'm filling.",
-		offerPrompt = "Do you have a delivery order?",
-		work = (
-			"Supply orders. Ammunition, freight goods, the requested stock on the page. Check the request "
-			.. "before packing, and keep different goods clearly separated. We count what arrives and settle the "
-			.. "delivery against that. If something doesn't match, say so before we both waste time defending the "
-			.. "wrong total."
-		),
+		workPrompt = "About the information parcel.",
+		offerPrompt = "Do you have a courier assignment?",
+		work = "A named recipient, a parcel, and a return here when it has been handed over. Check the destination before accepting. You collect the parcel from me; if you lose it, come back here for a replacement. The longer runs can include the Eco Bunker, so those wait until you have earned access to its card.",
 		progressionPrompt = "Which part of the depot account needs attention?",
 		progression = (
 			"I need supplies and the records behind some uncertain consignments. There is no benefit in "

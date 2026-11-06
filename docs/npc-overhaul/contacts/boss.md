@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Waystation**. Current specialty: **Regional human elimination**.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Authoritative operations contact who controls disclosure and can defend difficult decisions without being automatically right. Practical objections are heard before departure; existing affiliation is preserved without inventing operational outcomes.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_unisgnpc2.lua](../../../game
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
 - **Identity:** Existing authoritative operations contact.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Hostile human elimination.
+- **Only repeatable category:** Regional human elimination.
 - **Finite plan:** 22 steps; **6 hand-ins, 5 job checkpoints, 11 authored objectives**.
 - **Step labels:** BO01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

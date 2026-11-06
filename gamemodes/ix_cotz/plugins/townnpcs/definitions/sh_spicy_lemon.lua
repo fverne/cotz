@@ -5,6 +5,16 @@ PLUGIN:Register("spicy-lemon", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
+		kind = "regionalMeals",
+		category = "Meal deliveries",
+		description = "Meal deliveries",
+		maps = {
+			easy = "rp_marsh_cs",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Meal deliveries",

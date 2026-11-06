@@ -1,5 +1,10 @@
 # Town NPC overhaul design
 
+**6 November repeatable roster:** see the [implemented job revision](repeatable-jobs.md).
+Twenty job rows use nineteen issuers, including Atlas's alternating photography.
+Progression rework is deferred; current character profiles identify disabled ordinary work.
+
+
 Runtime and design reference, 31 October 2026. **Town NPC implementation is now present.**
 There are 27 town contacts (15 existing, 12 new) with 646 new finite nodes.
 Carbon is included in the new-contact definitions. Arena Master is based in Marsh.

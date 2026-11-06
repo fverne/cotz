@@ -1045,6 +1045,20 @@ PLUGIN.eventdefs["garbage_radioactive_zombies"] = {
 Human
 ---------------------------------------------------------------------------]]
 
+-- Temporary Garbage patrols until the map-specific human NPCs are supplied.
+PLUGIN.eventdefs["garbage_bandit_patrol"] = {
+	entities = {{"npc_human_bandit_pistolman", 2}, {"npc_human_bandit_shotgunner", 1}},
+	pdabroadcast = "Bandits spotted %s. Take care.",
+	difficulty = {"garbage_outside_easy", "garbage_building"},
+}
+
+PLUGIN.eventdefs["garbage_bandit_patrol_heavy"] = {
+	entities = {{"npc_human_bandit_pistolman", 1}, {"npc_human_bandit_shotgunner", 1},
+		{"npc_human_bandit_rifleman", 2}},
+	pdabroadcast = "An armed bandit patrol has been spotted %s.",
+	difficulty = {"garbage_outside_hard", "garbage_underground"},
+}
+
 PLUGIN.eventdefs["bandit0"] = {
 	entities = {
 		{"npc_human_bandit_pistolman", 1},

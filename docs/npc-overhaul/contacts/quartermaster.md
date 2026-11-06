@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Waystation**. Current specialty: **Valuable delivery and courier work**.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Stern procurement contact concerned with competing allocations and verifiable returns. Distinct from Brass through responsibility for who receives supplies; professional confidence grows without becoming sudden intimacy.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_unisgnpc.lua](../../../gamem
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
 - **Identity:** Existing stern procurement contact.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Ammunition deliveries.
+- **Only repeatable category:** Valuable delivery and courier work.
 - **Finite plan:** 24 steps; **6 hand-ins, 6 job checkpoints, 12 authored objectives**.
 - **Step labels:** QM01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

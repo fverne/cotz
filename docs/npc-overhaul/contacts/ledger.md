@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Waystation**. No new ordinary repeatable offers.
+Shops, services, incoming deliveries and finite progression remain. Existing accepted work can finish; cumulative job checkpoints may stall until the deferred progression rework.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Courteous, persistent dispatcher who remembers the people waiting at both ends of a movement. His humour comes from particular explanations and habits, while reliable deliveries earn unshowy appreciation.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_ledgernpc.lua](../../../game
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
 - **Identity:** New: methodical freight dispatcher who remembers every overdue parcel.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
-- **Only repeatable category:** Dead-drop circuits.
+- **Only repeatable category:** None; ordinary offers disabled.
 - **Finite plan:** 22 steps; **6 hand-ins, 5 job checkpoints, 11 authored objectives**.
 - **Step labels:** LE01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

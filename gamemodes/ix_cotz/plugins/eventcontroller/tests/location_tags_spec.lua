@@ -95,7 +95,9 @@ for key, definition in pairs(PLUGIN.eventdefs) do
 		end
 	end
 end
-assert(garbageCount == 11)
+assert(garbageCount == 13)
+assert(#PLUGIN.eventdefs.garbage_bandit_patrol.entities == 2)
+assert(#PLUGIN.eventdefs.garbage_bandit_patrol_heavy.entities == 3)
 local tags = assert(load(lookup .. "\nreturn LOCATION_TAGS"))()
 for _, suffix in ipairs(suffixes) do
 	assert(tags["garbage_" .. suffix])

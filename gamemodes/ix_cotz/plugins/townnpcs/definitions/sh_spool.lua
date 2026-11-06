@@ -14,6 +14,16 @@ PLUGIN:Register("spool", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
+	legacyJob = {
+		kind = "triangulation",
+		category = "Radio triangulation",
+		description = "Radio triangulation",
+		maps = {
+			easy = "rp_garbage_cotz",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
+	},
 	supplies = {},
 	rewards = {
 		packages = {

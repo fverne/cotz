@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Garbage**. Current specialty: **Mutant category hunting**.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Quiet tracker who enjoys observation outside a paid hunt. He can admit a mistaken interpretation and leave uncertain ground unresolved; avoid turning every answer into an aphorism or trophy-hunting rebuke.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_spoornpc.lua](../../../gamem
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.
 - **Identity:** New: quiet tracker interested in feeding patterns, dislikes trophy hunting.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
-- **Only repeatable category:** Mutant hunting.
+- **Only repeatable category:** Mutant category hunting.
 - **Finite plan:** 22 steps; **6 hand-ins, 5 job checkpoints, 11 authored objectives**.
 - **Step labels:** SP01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

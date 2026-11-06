@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Swamps**. Current specialty: **Valuable delivery and courier work**.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Enthusiastic, distractible technician who likes explaining and improving things. His desertion remains part of the existing background; the workshop offers useful work rather than an invented resolution of that history.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_technpc.lua](../../../gamemo
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
 - **Identity:** Existing enthusiastic technician.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Industrial salvage deliveries.
+- **Only repeatable category:** Valuable delivery and courier work.
 - **Finite plan:** 28 steps; **7 hand-ins, 7 job checkpoints, 14 authored objectives**.
 - **Step labels:** TN01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

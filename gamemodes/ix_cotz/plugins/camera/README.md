@@ -3,7 +3,10 @@
 `ix_camera` is a standalone job-tool SWEP. Give it with `give ix_camera` in a development session,
 or spawn **COTZ → Camera** from the weapons menu as an admin. It can be used by any character
 who has been given it. Left-click takes one picture; the server enforces a one-second cooldown
-across camera instances. There is no job registration, inventory item, battery mechanic or reward logic.
+across camera instances. Jobsystem now supplies Atlas's bound 1×1, 0.75 kg loan-camera item and
+alternating mutant/anomaly photography assignments. Camera itself remains usable without a job;
+standalone/admin cameras do not grant job credit. There is no battery mechanic.
+See the [job implementation guide](../../../../docs/npc-overhaul/repeatable-jobs.md).
 
 Merge the `models/`, `materials/` and `sound/` directories from
 `/home/fverne/Desktop/cotz_content_work/packs/infra_camera/addon_ready/cotz_camera_assets`
@@ -44,8 +47,10 @@ retain their entity for line-of-sight checks. No preset deployment or save mutat
 `weapon.lastPhoto`. It includes character ID, map, origin, angles, subjects and a truncation flag.
 Each subject has `kind`, `id`, `class`, `label` and `position`. Entity IDs are session-only entity indices;
 spawnpoint IDs combine category and the existing record key, which can change when points are edited.
-These are not persistent assignment identities. A future job integration must validate the result's
-character and define its own stable target identity. Client JPEG/JSON files are not authoritative.
+These are not persistent assignment identities. After an accepted shot the server emits
+`cotz/camera/photo-taken`; server entity subjects additionally contain their actual `entity` reference.
+Jobsystem validates the character and loan-camera item, then saves stable species/anomaly-type keys.
+The entity reference is not included in the client network payload. Client JPEG/JSON files are not authoritative.
 
 The client renders the server's shutter viewpoint on receipt. Moving actors may have moved slightly
 by then; the server's subject list is the shutter-time result. Use first-person framing for aiming.

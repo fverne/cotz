@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Swamps**. No new ordinary repeatable offers.
+Shops, services, incoming deliveries and finite progression remain. Existing accepted work can finish; cumulative job checkpoints may stall until the deferred progression rework.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Relaxed, sociable organiser with professional attention to arrangements and qualifying results. His enjoyment of competition coexists with evasiveness about its costs; each finite bout still uses the installed arena requirements.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_arenanpc.lua](../../../gamem
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
 - **Identity:** Existing relaxed arena organiser.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Arena bouts.
+- **Only repeatable category:** None; ordinary offers disabled.
 - **Finite plan:** 22 steps; **6 hand-ins, 5 job checkpoints, 11 authored objectives**.
 - **Step labels:** AR01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

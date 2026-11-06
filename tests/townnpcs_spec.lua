@@ -42,13 +42,13 @@ itemFiles:close()
 ix.jobs = ix.jobs or {}
 ix.jobs.field = ix.jobs.field or {}
 ix.taskRewards = ix.taskRewards or {}
-for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit"}) do
+for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit", "regionalcatalogue"}) do
 	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
 end
 dofile(base .. "jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "progression/libs/sh_rewards.lua")
 dofile(base .. "progression/libs/sv_rewards.lua")
-ix.jobs = {list = {}, jobsbycategory = {}, field = {
+ix.jobs = {regionalCatalogue = ix.jobs.regionalCatalogue, list = {}, jobsbycategory = {}, field = {
 	sources = {}, settings = {}, IsAvailable = function() return true end,
 }}
 for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop", "defence"}) do
@@ -57,10 +57,11 @@ end
 local originalFindMetaTable = FindMetaTable
 FindMetaTable = function() return {} end
 dofile(base .. "jobsystem/libs/sh_jobs.lua")
+dofile(base .. "jobsystem/libs/sh_regionaljobs.lua")
 FindMetaTable = originalFindMetaTable
 dofile(base .. "jobsystem/libs/sh_tooljobs.lua")
 dofile(base .. "townnpcs/libs/sh_00_townnpcs.lua")
-for _, name in ipairs({"sh_catalogue", "sh_jobs", "sh_progressions", "sh_sites", "sh_validation", "sv_runtime"}) do
+for _, name in ipairs({"sh_catalogue", "sh_jobs", "sh_regionaljobs", "sh_progressions", "sh_sites", "sh_validation", "sv_runtime"}) do
 	dofile(base .. "townnpcs/libs/" .. name .. ".lua")
 end
 local definitions = assert(io.popen("rg --files gamemodes/ix_cotz/plugins/townnpcs/definitions"))
@@ -104,7 +105,7 @@ check(request("latch", "hard", "value_bolts") == 9, "bolts hard exceeds maximum 
 check(request("gasket", "easy", "value_kerosene") == 2, "explicit spawn data overrides container capacity")
 check(request("jitters", "hard", "medic_bandage_1") > 3, "hard medical work exceeds spawned uses")
 for _, contact in pairs(ix.townNPCs.contacts) do
-	if contact.job.kind == "delivery" then
+	if contact.legacyJob.kind == "delivery" then
 		for _, difficulty in ipairs({"easy", "medium", "hard"}) do
 			local prefix = "cotz/town/" .. contact.id .. "/" .. difficulty .. "/"
 			for id, job in pairs(ix.jobs.list) do
@@ -132,6 +133,7 @@ local homeCategories = {}
 for _, contact in pairs(ix.townNPCs.contacts) do
 	contactCount = contactCount + 1
 	local key = contact.map .. "/" .. contact.job.category
+	if contact.job.kind == "none" then key = key .. "/" .. contact.id end
 	check(not homeCategories[key], "repeatable category must be unique per home map")
 	homeCategories[key] = true
 	check(contact.map ~= "rp_pripyat_remaster", "Pripyat has no home contact")
@@ -152,10 +154,10 @@ for _, contact in pairs(ix.townNPCs.contacts) do
 end
 local deliveryContacts = 0
 for id, contact in pairs(ix.townNPCs.contacts) do
-	if contact.job.deliveryTiers then
+	if contact.legacyJob.deliveryTiers then
 		deliveryContacts = deliveryContacts + 1
 		for _, difficulty in ipairs({"easy", "medium", "hard"}) do
-			local settings = contact.job.deliveryTiers[difficulty]
+			local settings = contact.legacyJob.deliveryTiers[difficulty]
 			local seen = {}
 			check(settings.quantity == (difficulty == "hard" and 2 or 1), "whole-item quantities stay small")
 			for _, poolID in ipairs(settings.pools) do
@@ -539,8 +541,8 @@ for _, contact in pairs(ix.townNPCs.contacts) do
 	check(not tree.AboutProgression and not tree.GetTask and not tree.ConfirmTask and not tree.ViewProgression,
 		"superseded topics are deleted from the definition, not hidden")
 	check(tree.TradeTopic.postCallback == ix.dialogue.OpenVendor, "all town trading uses the owning shared handler")
-	check(contact.job.kind == "arena" or offered.GetTaskByDifficulty, "non-arena contacts offer their category")
-	if contact.job.kind ~= "arena" then
+	check(contact.job.kind == "none" or offered.GetTaskByDifficulty, "assigned contacts offer their category")
+	if contact.job.kind ~= "none" then
 		check(tree.GetTaskByDifficulty.response == contact.dialogue.work,
 			"work offers display their contact's explanation instead of a generic spoken line")
 		local dialogue = ix.dialogue.list[ix.npctemplates.templates[contact.template].dialogueid]
@@ -689,9 +691,9 @@ ix.townNPCs.contacts.atlas.job.rewards = {
 	hard = {money = 23, reputation = 7},
 }
 ix.townNPCs:BuildJobs()
-check(ix.jobs.list["cotz/town/atlas/easy"].moneyReward == 17,
+check(ix.jobs.list["cotz/town/v2/atlas/easy/mutant"].moneyReward == 17,
 	"contact definitions can override default repeatable payouts")
-check(ix.jobs.list["cotz/town/atlas/hard"].repReward == 7,
+check(ix.jobs.list["cotz/town/v2/atlas/hard/anomaly"].repReward == 7,
 	"contact definitions can override reputation per difficulty")
 ix.townNPCs.contacts.atlas.job.rewards = nil
 ix.jobs.list, ix.jobs.jobsbycategory = oldJobs, oldCategories

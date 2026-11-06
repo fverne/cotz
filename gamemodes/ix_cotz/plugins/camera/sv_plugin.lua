@@ -69,6 +69,7 @@ function PLUGIN:CollectPhotoSubjects(photo)
 			and not entity:GetNoDraw() and self:IsPhotoEntityVisible(entity, photo) then
 			addSubject(photo, {
 				kind = "entity",
+				entity = entity,
 				id = tostring(entity:EntIndex()),
 				class = entity:GetClass(),
 				label = entity:GetClass() .. " #" .. entity:EntIndex(),
@@ -116,6 +117,7 @@ function PLUGIN:TakePhoto(client, weapon)
 	self:CollectPhotoSubjects(photo)
 	-- Only the latest result is retained. Entity IDs are session references, not persistent job identities.
 	weapon.lastPhoto = photo
+	hook.Run("cotz/camera/photo-taken", photo)
 	weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
 
 	net.Start("cotz/camera/photo")

@@ -1,5 +1,10 @@
 # Individual town contact designs
 
+**6 November repeatable roster:** see the [implemented job revision](../repeatable-jobs.md).
+Twenty job rows use nineteen issuers, including Atlas's alternating photography.
+Progression rework is deferred; current character profiles identify disabled ordinary work.
+
+
 [Design overview](../README.md) · [Roster](../roster.md) · [Progression rules](../progression-and-rewards.md)
 
 These 26 new documents cover the other **618** proposed steps. Together with the
@@ -71,10 +76,10 @@ See the [balance report](../delivery-balance.md) for the current pools, quantiti
 | [Old Timer](../old-timer.md) | Mutant hunting | 28 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_old_timer.lua) |
 | [Spicy Lemon](spicy-lemon.md) | Meal deliveries | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spicy_lemon.lua) |
 | [Haggler](haggler.md) | Hostile human elimination | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_haggler.lua) |
-| [Jitters](jitters.md) | Medical supply deliveries | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_jitters.lua) |
+| [Jitters](jitters.md) | Specific mutant specimens | 26 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_jitters.lua) |
 | [Technut](technut.md) | Industrial salvage deliveries | 28 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_technut.lua) |
 | [Mute](mute.md) | Electronics deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_mute.lua) |
-| [The Original](the-original.md) | Mutant specimen deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_the_original.lua) |
+| [The Original](the-original.md) | Unused; no ordinary work | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_the_original.lua) |
 | [Atlas](atlas.md) | Sensor deployment and retrieval | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_atlas.lua) |
 | [Gasket](gasket.md) | Utility supply deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_gasket.lua) |
 | [Ballast](ballast.md) | Equipment recovery | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_ballast.lua) |

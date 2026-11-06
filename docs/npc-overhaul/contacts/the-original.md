@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+**Inactive contact.** The Original is no longer used and offers no new ordinary work.
+His Swamps specimen-delivery specialty now belongs to Jitters. Historical definitions remain for saved assignment identity; no world placement is restored. The character material below is retained as reference.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Theatrical, argumentative claimant to being the first stalker, with useful field observations mixed into his stories. He can acknowledge uncertain memory while demanding that written evidence be examined just as carefully.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_firststalkernpc.lua](../../.
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
 - **Identity:** Existing self-proclaimed first stalker; retain his established voice.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Mutant specimen deliveries.
+- **Only repeatable category:** None; contact unused. Specimen requests moved to Jitters.
 - **Finite plan:** 24 steps; **6 hand-ins, 6 job checkpoints, 12 authored objectives**.
 - **Step labels:** OR01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

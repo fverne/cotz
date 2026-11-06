@@ -5,6 +5,11 @@ PLUGIN:Register("ledger", {
 	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
+		kind = "none",
+		category = "No ordinary repeatable work",
+		description = "No ordinary repeatable work",
+	},
+	legacyJob = {
 		kind = "deadDrop",
 		category = "Dead-drop circuits",
 		description = "Dead-drop circuits",

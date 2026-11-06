@@ -5,6 +5,11 @@ PLUGIN:Register("technut", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
+		kind = "valuableCourier",
+		category = "Valuable delivery and courier work",
+		description = "Valuable delivery and courier work",
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Industrial salvage deliveries",
@@ -54,14 +59,9 @@ PLUGIN:Register("technut", {
 			"Buddy! Come and have a look, if you've got a minute. No, you don't have to fetch anything "
 			.. "first."
 		),
-		workPrompt = "About the workshop order I've taken.",
-		offerPrompt = "Do you need salvage brought in?",
-		work = (
-			"Workshop salvage, tools, parts, the supplies on the request. Have a look at the actual list before "
-			.. "bringing your most exciting find. I'd love to examine it, buddy, but I may still need the ordinary "
-			.. "pieces afterwards. Keep what can be inspected together; enthusiasm doesn't make loose components "
-			.. "easier to identify."
-		),
+		workPrompt = "About the delivery I have taken.",
+		offerPrompt = "Do you have a delivery order?",
+		work = "I have delivery orders, buddy. Read the item and quantity, then take the goods to someone here who requests that sort of thing. It might be my bench, it might be somebody else's. Come back to me for payment after the handover. Existing stock counts; I would be delighted if you remembered the right pieces before setting off again.",
 		progressionPrompt = "What are you trying to restore?",
 		progression = (
 			"I'm collecting what survives of the machinery work: parts, records, the notes somebody thought "

@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Swamps**. Current specialty: **Specific mutant specimens**.
+Jitters takes over The Original's specimen requests, with Swamps/Garbage/Waystation species at easy/medium/hard and the same whole-item quantities. His medical reward packages remain his own.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses. His finite progression remains unchanged.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Nervous between tasks and competent when he has a concrete patient or preparation to attend to. Ordinary conversation, irritation, and humour accompany the worry; avoid making anxiety his only subject.
@@ -31,7 +39,7 @@ These conversations and their follow-up live in [sh_medicnpc.lua](../../../gamem
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
 - **Identity:** Existing jittery medic.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Medical supply deliveries.
+- **Only repeatable category:** Specific mutant specimens.
 - **Finite plan:** 26 steps; **7 hand-ins, 6 job checkpoints, 13 authored objectives**.
 - **Step labels:** JT01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

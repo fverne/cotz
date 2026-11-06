@@ -14,6 +14,16 @@ PLUGIN:Register("vesper", {
 			hard = "rp_pripyat_remaster",
 		},
 	},
+	legacyJob = {
+		kind = "sensor",
+		category = "Sensor deployment and retrieval",
+		description = "Sensor deployment and retrieval",
+		maps = {
+			easy = "rp_garbage_cotz",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
+	},
 	supplies = {},
 	rewards = {
 		packages = {

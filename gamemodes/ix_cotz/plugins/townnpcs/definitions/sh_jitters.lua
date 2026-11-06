@@ -5,6 +5,16 @@ PLUGIN:Register("jitters", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
+		kind = "regionalSpecimens",
+		category = "Specific mutant specimens",
+		description = "Specific mutant specimens",
+		maps = {
+			easy = "rp_marsh_cs",
+			medium = "rp_garbage_cotz",
+			hard = "rp_waystation",
+		},
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Medical supply deliveries",
@@ -51,14 +61,9 @@ PLUGIN:Register("jitters", {
 			"Oh, hello. No fresh injuries, I hope? It's nice when somebody visits and I can finish a "
 			.. "sentence before reaching for something."
 		),
-		workPrompt = "About the clinic request I'm filling.",
-		offerPrompt = "Do you need supplies brought in?",
-		work = (
-			"Medical supplies and the recovered goods on the request. Check the actual list before packing. "
-			.. "I'll inspect what comes in before deciding where it belongs; I'd rather do that here than trust a "
-			.. "reassuring label while someone is waiting for treatment. Please keep everything apart from the "
-			.. "dirty things in your pack."
-		),
+		workPrompt = "About the mutant specimens I'm collecting.",
+		offerPrompt = "Do you need mutant specimens?",
+		work = "I need mutant specimens to examine. Bring the exact part and number on the request, and please keep them separate from the rest of your pack. Check the suggested region before you leave. I'd much rather have a specimen to look at than another patient because I made the request sound hurried.",
 		progressionPrompt = "What needs checking for the clinic?",
 		progression = (
 			"I'm comparing the exposure accounts as well as trying to keep the clinic supplied. There are "

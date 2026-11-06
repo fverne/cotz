@@ -21,6 +21,10 @@ end
 
 function ix.jobs.field.Status(client, npc, job)
 	local state = job.fieldTask
+	if state.kind == "courier" and state.stage == "issue" then
+		client:Notify("Collect the parcel from " .. npc .. " using Field work while standing near the issuer.")
+		return
+	end
 	if state.stage == "delivered" then
 		client:Notify("Parcel delivered. Return to " .. npc .. " for payment.")
 		return
@@ -39,8 +43,10 @@ function ix.jobs.field.Status(client, npc, job)
 		client:Notify("Return the recovered cargo to " .. npc .. ".")
 		return
 	end
-	if state.map ~= game.GetMap() then
-		client:Notify("This assignment is in " .. state.map .. ". Your progress is saved.")
+	local activeMap = state.kind == "deadDrop" and state.stage == "carrying"
+		and (state.destinationMap or state.map) or state.map
+	if activeMap ~= game.GetMap() then
+		client:Notify("This assignment is in " .. activeMap .. ". Your progress is saved.")
 		return
 	end
 	if state.kind == "triangulation" and #state.readings < state.readingCount then
@@ -91,6 +97,7 @@ end
 local function deliverDrop(client, character, npc, job)
 	local state = job.fieldTask
 	if state.stage ~= "carrying" then return end
+	if (state.destinationMap or state.map) ~= game.GetMap() then return end
 	if client:GetPos():DistToSqr(ix.jobs.field.Unpack(state.destination)) > ix.jobs.field.useDistance ^ 2 then
 		client:Notify("Move closer to the assigned dead-drop destination.")
 		return
@@ -110,11 +117,16 @@ function ix.jobs.field.Action(client, npc, action)
 	client.cotzFieldNext = CurTime() + ix.jobs.field.actionInterval
 	local state = job.fieldTask
 	if action == "status" then ix.jobs.field.Status(client, npc, job) return end
-	if state.map ~= game.GetMap() or state.stage == "delivered" then return end
+	if state.stage == "delivered" then return end
+	if action == "issue" and state.kind == "courier" then
+		ix.jobs.regional.IssueCourier(client, npc, job)
+		return
+	end
 	if action == "deliver" and state.kind == "deadDrop" then
 		deliverDrop(client, character, npc, job)
 		return
 	end
+	if state.map ~= game.GetMap() then return end
 	if action == "start" and state.kind == "defence" then
 		ix.jobs.field.StartDefence(client, character, npc, job)
 		return

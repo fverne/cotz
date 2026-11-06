@@ -5,6 +5,16 @@ PLUGIN:Register("spoor", {
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
+		kind = "categoryHunting",
+		category = "Mutant category hunting",
+		description = "Mutant category hunting",
+		maps = {
+			easy = "rp_garbage_cotz",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
+	},
+	legacyJob = {
 		kind = "hunting",
 		category = "Mutant hunting",
 		description = "Mutant hunting",
@@ -27,13 +37,9 @@ PLUGIN:Register("spoor", {
 			"Hello. Seen anything worth a closer look? You know I'm happy to hear what you actually "
 			.. "noticed."
 		),
-		workPrompt = "About the hunt I've taken.",
+		workPrompt = "About the hunt I have taken.",
 		offerPrompt = "Do you have a hunting order?",
-		work = (
-			"Mutant hunting, against the quarry on the order. Check it before you leave. Don't turn the journey "
-			.. "into a trophy chase because you saw something larger. I'd rather you came back able to explain an "
-			.. "ordinary hunt than left someone else to explain where you went."
-		),
+		work = "These orders concern groups of quarry rather than one species. The request names the category and the region. Different animals contribute according to the size of their usual packs, so a handful of small scavengers does not count like a pack of larger predators. Watch the tally, and come back when the order is met.",
 		progressionPrompt = "What are you checking in the hunting records?",
 		progression = (
 			"I want to compare observations from the hunting grounds. Some of the accounts disagree; some may "

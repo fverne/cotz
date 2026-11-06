@@ -185,7 +185,6 @@ end
 
 function ix.jobs.field.UpdateJob(client, character, npc, job, keep)
 	local state = job.fieldTask
-	if state.map ~= game.GetMap() then return end
 	if state.stage == "delivered" then return end
 	local key = keyFor(character, job)
 	local position = client:GetPos()
@@ -203,6 +202,20 @@ function ix.jobs.field.UpdateJob(client, character, npc, job, keep)
 		if state.kind == "defence" then state.stage = "ready" end
 		job.progress, job.isCompleted = 0, false
 		ix.jobs.field.SaveJob(character, npc, job)
+	end
+	if state.kind == "courier" then
+		if state.stage ~= "issue" then
+			state.stage = "issue"
+			ix.jobs.field.SaveJob(character, npc, job)
+		end
+		return
+	end
+	if state.map ~= game.GetMap() then
+		if state.kind == "sensor" and state.stage == "recording" and not state.departed then
+			state.departed = true
+			ix.jobs.field.SaveJob(character, npc, job)
+		end
+		return
 	end
 	if state.kind == "defence" and state.stage == "defending" then
 		ix.jobs.field.UpdateDefence(client, character, npc, job, keep)

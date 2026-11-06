@@ -14,6 +14,12 @@ PLUGIN.settings = {
 		value_propanetank = {2, 3},
 	},
 	jobRewards = {
+		easy = {money = 1000, reputation = 15},
+		medium = {money = 2000, reputation = 25},
+		hard = {money = 3000, reputation = 35},
+	},
+	-- Completion-only definitions keep the reputation terms of already accepted work.
+	legacyJobRewards = {
 		easy = {money = 2500, reputation = 15},
 		medium = {money = 5000, reputation = 30},
 		hard = {money = 7500, reputation = 45},

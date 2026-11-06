@@ -5,6 +5,16 @@ PLUGIN:Register("boss", {
 	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
+		kind = "regionalHumans",
+		category = "Regional human elimination",
+		description = "Regional human elimination",
+		maps = {
+			easy = "rp_garbage_cotz",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
+	},
+	legacyJob = {
 		kind = "humans",
 		trigger = "banditKilled",
 		category = "Hostile human elimination",

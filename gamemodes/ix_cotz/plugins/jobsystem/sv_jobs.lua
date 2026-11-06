@@ -16,6 +16,7 @@ function playerMeta:ixJobRemove(npcidentifier)
 	if job.fieldTask then ix.jobs.field.Cleanup(character, job) end
 	jobs[npcidentifier] = nil
 	character:SetJobs(jobs)
+	if job.photoKind then ix.jobs.regional.ReconcileCamera(self) end
 	local cooldown = ix.config.Get("taskAbandonCooldown", ix.jobs.settings.abandonCooldown)
 	character:SetData("lastTaskAbandon", os.time() + cooldown)
 	character:Save()
@@ -76,6 +77,10 @@ function playerMeta:ixJobComplete(npcidentifier)
 		ix.vendorStock.TaskRestock(character, vendor, job.identifier, job.progressionClaim)
 	end
 	if definition.OnTaskComplete then definition.OnTaskComplete(self) end
+	if job.photoKind then
+		character:SetData("townPhotoNext", job.photoKind == "mutant" and "anomaly" or "mutant")
+		ix.jobs.regional.ReconcileCamera(self)
+	end
 	netstream.Start(self, "ix_COTZPlayPDASound", 1)
 	character:Save()
 end
@@ -89,6 +94,10 @@ function playerMeta:ixJobAdd(identifier, npcidentifier, preview)
 	if ix.townNPCs and ix.townNPCs.installed
 		and not ix.townNPCs:CanAcceptJob(character, npcidentifier, definition) then return false end
 	if definition.CanAcceptTask and not definition.CanAcceptTask(self) then return false end
+	if definition.regionalJob and not ix.jobs.regional.CanStart(character, definition) then
+		self:Notify("Make room in your main inventory and check your carrying weight before accepting.")
+		return false
+	end
 	local job = preview and table.Copy(preview) or {}
 	job.identifier = identifier
 	if not job.numberRec then
@@ -98,6 +107,9 @@ function playerMeta:ixJobAdd(identifier, npcidentifier, preview)
 	job.listenTrigger = definition.listenTrigger or identifier
 	job.progress = 0
 	job.isCompleted = false
+	job.photoKind = definition.photoKind
+	job.targetMap, job.targetSpecies = definition.targetMap, definition.targetSpecies
+	job.targetWeights = definition.targetWeights and table.Copy(definition.targetWeights)
 	if not ix.taskRewards.PrepareJob(character, npcidentifier, job) then return false end
 	if definition.fieldType and not ix.jobs.field.Assign(character, npcidentifier, job) then
 		self:Notify("No usable field task locations are available for this assignment.")
@@ -108,6 +120,8 @@ function playerMeta:ixJobAdd(identifier, npcidentifier, preview)
 	ix.taskRewards.SelectOffer(character, npcidentifier, job.rewardKey, job.supplyChoice or 1)
 	character:Save()
 	if definition.OnTaskGet then definition.OnTaskGet(self) end
+	if job.photoKind then ix.jobs.regional.ReconcileCamera(self) end
+	if job.fieldTask and job.fieldTask.kind == "courier" then ix.jobs.regional.IssueCourier(self, npcidentifier, job) end
 	netstream.Start(self, "ix_COTZPlayPDASound", 2)
 
 	return true

@@ -10,6 +10,16 @@ PLUGIN:Register("ballast", {
 		description = "Equipment recovery",
 		maps = {
 			easy = "rp_marsh_cs",
+			medium = "rp_marsh_cs",
+			hard = "rp_garbage_cotz",
+		},
+	},
+	legacyJob = {
+		kind = "recovery",
+		category = "Equipment recovery",
+		description = "Equipment recovery",
+		maps = {
+			easy = "rp_marsh_cs",
 			medium = "rp_garbage_cotz",
 			hard = "rp_pripyat_remaster",
 		},

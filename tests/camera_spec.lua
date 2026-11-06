@@ -26,6 +26,10 @@ isvector = function(value) return getmetatable(value) == vectorMeta end
 MASK_VISIBLE, ACT_VM_PRIMARYATTACK, ACT_VM_DRAW = 1, 2, 3
 bit = {band = function(value, flag) return math.floor(value / flag) % 2 == 1 and flag or 0 end}
 SERVER, CLIENT = true, false
+local photoEvents = {}
+hook = {Run = function(event, photo)
+	if event == "cotz/camera/photo-taken" then photoEvents[#photoEvents + 1] = photo end
+end}
 game = {GetMap = function() return "test_map" end}
 local root = "gamemodes/ix_cotz/plugins/"
 local plugins, candidates, sent, assets, included = {}, {}, 0, {}, {}

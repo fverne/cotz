@@ -32,7 +32,7 @@ for _, realm in ipairs({"server", "client"}) do
 		return dofile(path:sub(1, 8) == "ix_cotz/" and "gamemodes/" .. path or base .. path)
 	end
 	-- Helix discovers libs before the entry point, in filename order.
-	for _, name in ipairs({"sh_00_definitions", "sh_fieldtasks", "sh_jobs", "sh_taskrewards", "sh_tooljobs",
+	for _, name in ipairs({"sh_00_definitions", "sh_fieldtasks", "sh_regionaljobs", "sh_jobs", "sh_taskrewards", "sh_tooljobs",
 		"sv_taskrewards"}) do
 		ix.util.Include("libs/" .. name .. ".lua")
 	end

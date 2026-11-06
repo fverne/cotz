@@ -5,6 +5,11 @@ PLUGIN:Register("atlas", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
+		kind = "photography",
+		category = "Alternating mutant and anomaly photography",
+		description = "Alternating mutant and anomaly photography",
+	},
+	legacyJob = {
 		kind = "sensor",
 		category = "Sensor deployment and retrieval",
 		description = "Sensor deployment and retrieval",
@@ -37,15 +42,9 @@ PLUGIN:Register("atlas", {
 			"Hello again. I've made room beside the finished sheets. Sit down, if you have time. I'd like "
 			.. "to hear about a walk that didn't begin with me asking you to fetch something."
 		),
-		workPrompt = "Tell me about your survey work.",
-		offerPrompt = "Do you have a survey assignment?",
-		work = (
-			"I need recordings from assigned sites. You'll deploy the recorder, let it finish, collect "
-			.. "the results, and bring them back to me. The farther assignments take more preparation, so "
-			.. "have a look at the destination before you agree. And pay attention to your walk, if you can. "
-			.. "The recorder gives me a reading; it won't tell me why you had to double back three times to "
-			.. "reach it. We can talk about that when you're home."
-		),
+		workPrompt = "About the photographs I am taking.",
+		offerPrompt = "Do you need photographs?",
+		work = "Photographs, this time. We will alternate between living mutants and anomalies; the list tells you how many different types I need. I can lend you a camera. Take it out, frame the actual subject and bring the completed survey back to me. Another photograph of the same type will not give us another comparison, though you are welcome to keep looking.",
 		progressionPrompt = "What are you working on at the moment?",
 		progression = (
 			"I'm comparing our surveys with records left by other teams. Some entries are very careful. "

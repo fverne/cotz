@@ -1,5 +1,24 @@
 # Town NPCs
 
+## Repeatable roster, 6 November 2026
+
+The [implemented job revision](../../../../docs/npc-overhaul/repeatable-jobs.md) supersedes earlier
+repeatable categories, reward defaults and scientist homes below. Twenty workbook rows use nineteen
+issuers because Atlas alternates mutant/anomaly photography. Beanstalk and Egghead are now based in
+Waystation; Intern remains in the gated Swamps Eco Bunker. New reference cash is 1,000/2,000/3,000
+and reputation 15/25/35. Shops, services, purchase restrictions and themed rewards remain.
+Jitters owns the Swamps specimen requests; The Original is unused and has no new offers.
+His superseded regional definitions remain completion-only without restoring his world placement.
+
+Concrete contacts declare current `job` and completion-only `legacyJob` data. The regional job library
+builds new `cotz/town/v2/` offers and rejects new acceptance of old identities. The retained old delivery
+pools also preserve thematic incoming receivers and starting buy assortments. Finite progression is
+not remapped: inactive issuers' cumulative job checkpoints can stall until the separately deferred
+progression rework. The guide identifies those contacts and the resulting fresh-character limitation.
+
+Update every map server together and restart. Place the two moved scientists separately on Waystation;
+do not rerun first-time setup. Offline tests do not verify navigation, placement or live persistence.
+
 ## Approved workbook plan, 4 November 2026
 
 The [vendor plan](../../../../docs/npc-overhaul/vendor-plan.md) supersedes the earlier seller,

@@ -30,6 +30,7 @@ ix.util.Include("sv_cargo.lua")
 ix.util.Include("sv_fielddefence.lua")
 ix.util.Include("cl_fieldtasks.lua")
 ix.util.Include("sv_listeners.lua")
+ix.util.Include("sv_regionaljobs.lua")
 ix.util.Include("cl_plugin.lua")
 
 ix.config.Add("taskAbandonCooldown", ix.jobs.settings.abandonCooldown,

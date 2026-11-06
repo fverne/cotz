@@ -50,7 +50,7 @@ dofile(base .. "libs/sh_services.lua")
 ix.jobs = ix.jobs or {}
 ix.jobs.field = ix.jobs.field or {}
 ix.taskRewards = ix.taskRewards or {}
-for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit"}) do
+for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit", "regionalcatalogue"}) do
 	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
 end
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
@@ -387,6 +387,35 @@ check(not ix.taskRewards.DeliverJobItem(ammoOwner.client, "NPC") and ammoOwner.j
 	"failed ammunition removal awards no job progress")
 rounds.data.quantity = 0
 check(not ix.taskRewards.DeliverJobItem(ammoOwner.client, "NPC"), "empty ammunition stack cannot advance a job")
+local oldTown = ix.townNPCs
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_regionaljobs.lua")
+local themed = {map = "rp_marsh_cs", wantedItems = {food = true}}
+ix.townNPCs = {byName = {NPC = {map = "rp_marsh_cs"}, Themed = themed},
+	CanInteract = function(_, _, target) return not target.denied end}
+local receiver = {GetDisplayName = function() return "Themed" end}
+ix.jobs.list.alternate = {requiredItem = "food", alternateDelivery = true, issuerName = "NPC"}
+local alternativeOwner = actor()
+alternativeOwner.jobs.NPC = {identifier = "alternate", numberRec = 3, progress = 0}
+local supplies = copy(food)
+supplies.data.quantity, supplies.removed = 5, nil
+function alternativeOwner.inventory:HasItem(id) if id == "food" then return supplies end end
+check(not ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC"), "valuable orders require a receiver")
+receiver.denied = true
+check(not ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC", receiver), "receiver access is authoritative")
+receiver.denied, themed.map = false, "rp_waystation"
+check(not ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC", receiver), "receiver must share issuer map")
+themed.map, themed.wantedItems = "rp_marsh_cs", {}
+check(not ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC", receiver), "receiver must request the category")
+themed.wantedItems.food = true
+check(ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC", receiver), "eligible alternate receiver accepts goods")
+check(supplies.data.quantity == 2 and not supplies.removed, "alternate delivery preserves surplus units")
+check(not ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC", receiver), "completed alternate delivery cannot replay")
+ix.jobs.list.wholeMeal = {requiredItem = "food", wholeItems = true}
+alternativeOwner.jobs.NPC = {identifier = "wholeMeal", numberRec = 1, progress = 0}
+supplies.removed = nil
+check(ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC") and supplies.removed,
+	"whole-item requests consume one item rather than its saved use quantity")
+ix.townNPCs = oldTown
 local categoryOwner = actor()
 ix.progression.itemPools.deliveryTest = {candidates = {{item = "food"}, {item = "part_swampcontroller_1"}}}
 ix.jobs.list.categoryDelivery = copy(foodJob)

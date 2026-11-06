@@ -30,6 +30,10 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	local character = attacker:GetCharacter()
 	if character then ix.jobs.RecordLeaderboardKill(character, class) end
 	local clients
+	if ix.jobs.regional and ix.jobs.regional.Species(class) then
+		clients = recipients(entity, attacker)
+		for client in pairs(clients) do ix.jobs.regional.RecordKill(client, class, game.GetMap()) end
+	end
 	for _, rule in ipairs(ix.jobs.killCredit) do
 		if matches(rule, class) then
 			clients = clients or recipients(entity, attacker)

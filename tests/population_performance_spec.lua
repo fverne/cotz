@@ -389,7 +389,7 @@ local broadcastEnvironment = setmetatable({
 	ix = {
 		eventController = broadcastController,
 		progression = {IsCompleted = function(character, progressionID)
-			check(progressionID == "muteItemDelivery_Broadcast", "event chatter checks the broadcast milestone")
+			check(progressionID == "cotz/town/mute/MU15", "event chatter checks the current broadcast milestone")
 
 			return character == unlockedCharacter
 		end},

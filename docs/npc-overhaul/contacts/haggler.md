@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Swamps**. Current specialty: **Regional human elimination**.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Engaging salesman with convincing, self-serving explanations. He remembers customers and agreements, enjoys bargaining, and can allow practical consideration without presenting himself as a benefactor.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_tradernpc.lua](../../../game
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
 - **Identity:** Existing trader; retain his personality.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Hostile human elimination.
+- **Only repeatable category:** Regional human elimination.
 - **Finite plan:** 26 steps; **7 hand-ins, 6 job checkpoints, 13 authored objectives**.
 - **Step labels:** HG01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

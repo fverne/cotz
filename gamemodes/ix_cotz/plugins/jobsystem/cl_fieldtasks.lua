@@ -5,7 +5,7 @@ local MARKER_SECONDS = ix.jobs.field.runtimeSettings.markerSeconds
 local METRES_PER_UNIT = 0.01905
 local MARKER_OFFSET = Vector(0, 0, 24)
 local ACTIONS = {status = "Show assignment", deploy = "Deploy sensor", read = "Take signal reading",
-	start = "Start or restart research", deliver = "Deliver parcel"}
+	start = "Start or restart research", deliver = "Deliver parcel", issue = "Collect parcel from issuer"}
 
 local function request(npc, action)
 	if CurTime() < nextRequest then return end
@@ -27,6 +27,8 @@ function ix.jobs.field.OpenMenu(npc, kind)
 		menu:AddOption(ACTIONS.deliver, function() request(npc, "deliver") end)
 	elseif kind == "defence" then
 		menu:AddOption(ACTIONS.start, function() request(npc, "start") end)
+	elseif kind == "courier" then
+		menu:AddOption(ACTIONS.issue, function() request(npc, "issue") end)
 	end
 	menu:Open()
 end

@@ -4,6 +4,13 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Waystation**. No new ordinary repeatable offers.
+Shops, services, incoming deliveries and finite progression remain. Existing accepted work can finish; cumulative job checkpoints may stall until the deferred progression rework.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Historian who enjoys ordinary discoveries and preserving another person's working context. He welcomes stories as evidence to question alongside documents; he does not need every answer to condemn heroic accounts.
@@ -31,7 +38,7 @@ These conversations and their follow-up live in [sh_carbonnpc.lua](../../../game
 - **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
 - **Identity:** New: persistent historian who values maintenance ledgers over heroic tales.
 - **Model:** Replaceable Half-Life 2 placeholder in the appearance definition; choose the final mounted model in-game.
-- **Only repeatable category:** Document deliveries.
+- **Only repeatable category:** None; ordinary offers disabled.
 - **Finite plan:** 22 steps; **6 hand-ins, 5 job checkpoints, 11 authored objectives**.
 - **Step labels:** CA01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

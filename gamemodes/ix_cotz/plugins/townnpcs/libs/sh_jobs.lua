@@ -70,7 +70,9 @@ end
 
 local function registerRepeatable(contact, difficulty, tier)
 	local category = "cotz/town/" .. contact.id .. "/" .. difficulty
-	local rewards = (contact.job.rewards or PLUGIN.settings.jobRewards)[difficulty]
+	local rewards = (contact.job.rewards
+		or (contact.job == contact.legacyJob and PLUGIN.settings.legacyJobRewards)
+		or PLUGIN.settings.jobRewards)[difficulty]
 	local kind = contact.job.kind
 	local job = {
 		tier = tier,
@@ -151,13 +153,39 @@ local function registerCommission(contact, step)
 	registerJob(contact, "cotz/town/commission/" .. contact.id .. "/" .. step.id, definition)
 end
 
+local function retireJobs(prefix)
+	local retired = {}
+	for id, definition in pairs(ix.jobs.list) do
+		if id:sub(1, #prefix) == prefix then retired[id] = definition end
+	end
+	for id, definition in pairs(retired) do
+		definition.categories, definition.completionOnly = {}, true
+		definition.CanAcceptTask = function() return false end
+		ix.jobs.register(definition, id)
+	end
+end
+
 function PLUGIN:BuildJobs()
 	collectSpawnBatches()
 	for _, contact in pairs(self.contacts) do
 		contact.categories = {}
 		ix.taskRewards.SetProfile(contact.name, contact.supplies)
 		ix.taskRewards.SetTownProfile(contact.name, contact.rewards)
+		local currentJob = contact.job
+		contact.job = contact.legacyJob or contact.job
 		for tier, difficulty in ipairs(DIFFICULTIES) do registerRepeatable(contact, difficulty, tier) end
+		contact.job = currentJob
+		if contact.legacyJob then
+			retireJobs("cotz/town/" .. contact.id .. "/")
+			if contact.retiredRegionalJob then
+				contact.job = contact.retiredRegionalJob
+				self:RegisterRegionalJobs(contact)
+				retireJobs("cotz/town/v2/" .. contact.id .. "/")
+				contact.job = currentJob
+			end
+			contact.categories = {}
+			self:RegisterRegionalJobs(contact)
+		end
 		for _, step in ipairs(contact.progression) do
 			if step.kind == "field" then
 				registerCommission(contact, step)

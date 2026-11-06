@@ -1,0 +1,69 @@
+ix.jobs.regional = ix.jobs.regional or {}
+
+ix.jobs.regional.groups = {
+	herbivores = {boar = true, flesh = true, tark = true},
+	carnivores = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
+		chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true},
+	psychics = {psydog = true, burer = true, controller = true, swampcontroller = true,
+		electrocontroller = true, fastcontroller = true, karlik = true},
+	humanoids = {zombie = true, snork = true, izlom = true, skeleton = true},
+}
+
+function ix.jobs.regional.Species(class)
+	return ix.jobs.regionalCatalogue.classes[class]
+end
+
+function ix.jobs.regional.CanOffer(character, definition)
+	if not definition or definition.completionOnly then return false end
+	if definition.bunkerGate and not ix.progression.CanBuyItem(character, "'Carbon'", "accesscard_bunker") then
+		return false
+	end
+	if definition.photoKind then
+		return definition.photoKind == character:GetData("townPhotoNext", "mutant")
+	end
+
+	return true
+end
+
+function ix.jobs.regional.ReceiverMatches(character, receiver, job)
+	local definition = ix.jobs.list[job.identifier]
+	if not definition or not definition.alternateDelivery or job.isCompleted then return false end
+	local issuer = ix.townNPCs.byName[definition.issuerName]
+	if not issuer or receiver.map ~= issuer.map then return false end
+	if receiver.disabledItems and receiver.disabledItems[definition.requiredItem] then return false end
+
+	return (receiver.wantedItems or {})[definition.requiredItem] == true
+end
+
+function ix.jobs.regional.DefenceWaves(map, tier)
+	local encounters = ix.jobs.regionalCatalogue.encounters[map] or {}
+	if #encounters == 0 then return end
+	local encounter = encounters[math.random(#encounters)]
+	local multipliers = ({{1, 1, 1}, {1, 1, 1.25, 1.5}, {1, 1.25, 1.5, 1.75, 2}})[tier]
+	local waves = {}
+	for _, multiplier in ipairs(multipliers) do
+		local wave = {}
+		for _, entry in ipairs(encounter) do
+			for _ = 1, math.ceil(entry.count * multiplier) do wave[#wave + 1] = entry.class end
+		end
+		waves[#waves + 1] = wave
+	end
+
+	return waves
+end
+
+function ix.jobs.regional.SelectMap(definition)
+	if not definition.fieldMaps then return definition.fieldMap end
+	local available = {}
+	for _, map in ipairs(definition.fieldMaps) do
+		local candidate = table.Copy(definition)
+		candidate.fieldMaps, candidate.fieldMap = nil, map
+		if ix.jobs.field.IsAvailable(candidate) then available[#available + 1] = map end
+	end
+	if #available > 0 then return available[math.random(#available)] end
+end
+
+function ix.jobs.regional.CargoData(character, job, state)
+	return {fieldOwner = character:GetID(), fieldClaim = job.rewardKey,
+		fieldName = state.cargoName, fieldDescription = state.cargoDescription, fieldRecipient = state.recipient}
+end

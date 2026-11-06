@@ -3,8 +3,13 @@ PLUGIN:Register("beanstalk", {
 	template = "ecologistnpc2",
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
-	map = "rp_marsh_cs",
+	map = "rp_waystation",
 	job = {
+		kind = "defence",
+		category = "Research defence",
+		description = "Research defence",
+	},
+	legacyJob = {
 		kind = "defence",
 		category = "Research defence",
 		description = "Research defence",

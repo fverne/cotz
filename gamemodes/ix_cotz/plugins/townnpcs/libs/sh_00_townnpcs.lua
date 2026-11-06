@@ -1,5 +1,8 @@
 local PLUGIN = PLUGIN
 local town = PLUGIN
+local REGIONAL_KINDS = {none = true, valuableCourier = true, photography = true, courier = true,
+	regionalHunting = true, regionalHumans = true, regionalMeals = true, regionalSpecimens = true,
+	categoryHunting = true}
 ix.townNPCs = PLUGIN
 
 town.contacts = {}
@@ -36,9 +39,10 @@ function PLUGIN:BuildWantedItems(contact)
 		local pool = assert(ix.progression.itemPools[poolID], "Unknown wanted-item pool: " .. poolID)
 		for _, candidate in ipairs(pool.candidates) do wanted[candidate.item] = true end
 	end
-	if contact.job.kind == "delivery" then
-		for _, poolID in ipairs(contact.job.pools or {}) do addPool(poolID) end
-		for _, tier in pairs(contact.job.deliveryTiers or {}) do
+	local delivery = contact.legacyJob or contact.job
+	if delivery.kind == "delivery" then
+		for _, poolID in ipairs(delivery.pools or {}) do addPool(poolID) end
+		for _, tier in pairs(delivery.deliveryTiers or {}) do
 			for _, poolID in ipairs(tier.pools) do addPool(poolID) end
 		end
 	end
@@ -90,6 +94,8 @@ function PLUGIN:CanAcceptJob(character, npc, definition)
 	if definition.townProgression then
 		return ix.progression.IsActive(character, definition.townProgression)
 	end
+	if definition.completionOnly or contact.job.kind == "none" then return false end
+	if ix.jobs.regional and not ix.jobs.regional.CanOffer(character, definition) then return false end
 	local difficulty = ({"easy", "medium", "hard"})[definition.tier]
 
 	return difficulty ~= nil and ix.taskRewards.CanTakeDifficulty(character, difficulty)
@@ -104,11 +110,13 @@ function PLUGIN:Install()
 	for _, contact in pairs(self.contacts) do
 		assert(contact.map ~= "rp_pripyat_remaster", "Pripyat must not contain town contacts")
 		local key = contact.map .. "/" .. contact.job.category
+		if contact.job.kind == "none" then key = key .. "/" .. contact.id end
 		assert(not categories[key], "Duplicate town job category: " .. key)
 		categories[key] = true
 		local template = assert(ix.npctemplates.templates[contact.template], "Missing template: " .. contact.template)
 		assert(template.name == contact.name, "Town contact name differs from its saved vendor identity")
-		assert(contact.job.kind == "delivery" or contact.job.kind == "hunting" or contact.job.kind == "humans"
+		assert(REGIONAL_KINDS[contact.job.kind] or contact.job.kind == "delivery"
+			or contact.job.kind == "hunting" or contact.job.kind == "humans"
 			or contact.job.kind == "arena" or contact.job.kind == "dataExtract"
 			or ix.jobs.field.settings[contact.job.kind], "Unknown town job kind")
 	end

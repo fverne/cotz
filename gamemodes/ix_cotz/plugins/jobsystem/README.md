@@ -1,5 +1,20 @@
 # Job System
 
+## Revised repeatable jobs, 6 November 2026
+
+The [current roster and implementation guide](../../../../docs/npc-overhaul/repeatable-jobs.md)
+supersedes the older town repeatable delivery/tier descriptions below. New work uses regional targets,
+alternate receivers, cross-map dead drops, information couriers and Atlas's alternating photography.
+Reference cash is 1,000/2,000/3,000; reputation is 15/25/35. Current reward packages and bonuses remain.
+Accepted old assignments retain completion-only definitions and their original reputation terms.
+Finite progression is unchanged and its rework is deferred, including stalled inactive-issuer checkpoints.
+
+`definitions/sh_regionalcatalogue.lua` is static generated source data. `libs/sh_regionaljobs.lua`
+owns shared eligibility/identity helpers; `sv_regionaljobs.lua` owns authoritative progress and bound
+camera/courier issuance. Per-assignment field settings, both route maps and cargo variants are saved.
+Run `luatex --luaonly tests/regional_jobs_spec.lua` alongside the suites below.
+No server deployment, first-time setup or live-save reset is part of offline verification.
+
 ## Editing definitions
 
 Field-work menus and temporary world labels use the shared

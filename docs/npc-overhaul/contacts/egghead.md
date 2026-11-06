@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Waystation**. Current specialty: **Specific mutant specimens**.
+The home change requires removing/saving the old placement and placing this contact on Waystation.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Relaxed researcher whose curiosity repeatedly distracts him from his academic grievances. He enjoys explanation and unexpected results, can be vain about objections, and keeps uncertainty available for discussion.
@@ -28,10 +36,10 @@ These conversations and their follow-up live in [sh_ecologistnpc.lua](../../../g
 
 ## Contact brief
 
-- **Home and return point:** Waystation. Every hand-in and reward claim occurs here.
+- **Home and return point:** Waystation. Claims return to this contact; authored search regions remain unchanged.
 - **Identity:** Existing relaxed scientist.
 - **Model:** Preserve the installed template's model, skin, and presentation.
-- **Only repeatable category:** Artifact deliveries.
+- **Only repeatable category:** Specific mutant specimens.
 - **Finite plan:** 26 steps; **7 hand-ins, 6 job checkpoints, 13 authored objectives**.
 - **Step labels:** EG01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

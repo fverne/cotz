@@ -5,6 +5,11 @@ PLUGIN:Register("quartermaster", {
 	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
+		kind = "valuableCourier",
+		category = "Valuable delivery and courier work",
+		description = "Valuable delivery and courier work",
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Ammunition deliveries",
@@ -51,14 +56,9 @@ PLUGIN:Register("quartermaster", {
 			"You've established that you can follow through. State what you need, and we can deal with "
 			.. "it directly."
 		),
-		workPrompt = "About my current supply order.",
-		offerPrompt = "Do you have a supply order?",
-		work = (
-			"Supply deliveries. Ammunition and the other goods specified on the order. Verify the actual "
-			.. "request and bring the listed quantity. Similar packaging is not evidence of interchangeable "
-			.. "contents. We check what arrives before accepting the delivery. If an order cannot be filled, tell "
-			.. "me while there is time to choose another arrangement."
-		),
+		workPrompt = "About my delivery order.",
+		offerPrompt = "Do you have a delivery order?",
+		work = "The order specifies an item and a quantity. Deliver it to a contact here in Waystation who requests that category, then return to me for settlement. You may use stock you already own. The harder orders concern goods sourced beyond this region; check what you are committing to before you leave.",
 		progressionPrompt = "Which procurement records need attention?",
 		progression = (
 			"I need the supply account checked against surviving procurement records. There are deliveries and "

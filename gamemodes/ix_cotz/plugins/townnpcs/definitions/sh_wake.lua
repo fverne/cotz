@@ -5,6 +5,11 @@ PLUGIN:Register("wake", {
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
+		kind = "none",
+		category = "No ordinary repeatable work",
+		description = "No ordinary repeatable work",
+	},
+	legacyJob = {
 		kind = "recovery",
 		category = "Equipment recovery",
 		description = "Equipment recovery",

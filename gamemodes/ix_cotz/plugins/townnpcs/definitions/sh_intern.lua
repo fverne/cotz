@@ -6,6 +6,16 @@ PLUGIN:Register("intern", {
 	map = "rp_marsh_cs",
 	job = {
 		kind = "sensor",
+		category = "Sensor deployment and retrieval",
+		description = "Sensor deployment and retrieval",
+		maps = {
+			easy = "rp_marsh_cs",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
+	},
+	legacyJob = {
+		kind = "sensor",
 		category = "Bunker sensor deployment and retrieval",
 		description = "Sensor deployment and retrieval",
 		maps = {

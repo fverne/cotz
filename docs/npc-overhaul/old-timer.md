@@ -7,6 +7,13 @@ Edit [sh_old_timer.lua](../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_
 for requirements, targets, prerequisites, work prompts, briefings, benefits and finished-story greeting.
 Background dialogue remains in sh_tutorialnpc.lua.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Swamps**. Current specialty: **Specific mutant hunting**.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Stern, practical mentor with dry humour and faults he can acknowledge. Concern is expressed through preparation and attention to the return journey; familiarity and the companion story develop through the existing progression.

@@ -13,12 +13,13 @@ ix.jobs.field.pools = {
 }
 
 ix.jobs.field.settings = {
+	courier = {cargo = "town_quest_drive"},
 	recovery = {sources = {"packages", "rf"}, cargo = "job_recovery_case", searchRadius = 384},
-	sensor = {sources = {"gas"}, cargo = "job_sensor_recorder", recordSeconds = 120,
+	sensor = {sources = {"gas", "rf"}, cargo = "job_sensor_recorder", recordSeconds = 120,
 		leaveDistance = 512, deployDistance = 512},
 	triangulation = {sources = {"rf", "packages"}, cargo = "job_signal_transmitter",
 		readingCount = 3, readingDistance = 512, bearingAngle = 15},
-	deadDrop = {sources = {"packages"}, destinationSources = {"packages", "rf"},
+	deadDrop = {sources = {"packages", "rf"}, destinationSources = {"packages", "rf"},
 		cargo = "job_dead_drop_parcel", minRouteDistance = 2048},
 	defence = {
 		sources = {"rf"}, attackSources = {"rf"}, cargo = "job_research_results",

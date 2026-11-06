@@ -48,6 +48,14 @@ function ix.jobs.getFormattedDesc(activejob)
 	local description = activejob.fieldTask and ix.jobs.field.DescribeAssignment(activejob)
 		or ix.jobs.list[activejob.identifier].desc
 	local text = string.format(description, activejob.numberRec)
+	local definition = ix.jobs.list[activejob.identifier]
+	local contact = ix.townNPCs and ix.townNPCs.contacts and ix.townNPCs.contacts[definition.townContact]
+	if activejob.fieldTask and contact then
+		text = text .. "\nCurrent issuer: " .. contact.name .. " in " .. contact.map .. "."
+		if activejob.fieldTask.recipient then
+			text = text .. "\nCurrent delivery region: " .. ix.jobs.field.GetRecipientMap(activejob.fieldTask) .. "."
+		end
+	end
 	if activejob.rewardChoices then
 		local selected = activejob.rewardChoices[activejob.supplyChoice or 0]
 		local supplies = selected and selected.label or ix.taskRewards.Summary({choices = activejob.rewardChoices})
@@ -78,19 +86,23 @@ end
 function ix.jobs.getJobFromTier(tier)
 	local available = {}
 	for identifier, definition in pairs(ix.jobs.list) do
-		if definition.tier == tier then available[#available + 1] = identifier end
+		if definition.tier == tier and not definition.completionOnly then available[#available + 1] = identifier end
 	end
 	if #available > 0 then return available[math.random(#available)] end
 end
 
-function ix.jobs.getJobFromCategory(categories)
+function ix.jobs.getJobFromCategory(categories, character)
 	if not istable(categories) then categories = {categories} end
 	local pools = {}
 	for _, category in ipairs(categories) do
 		local available = {}
 		for _, id in ipairs(ix.jobs.jobsbycategory[category] or {}) do
 			local definition = ix.jobs.list[id]
-			if definition and (not definition.fieldType or ix.jobs.field.IsAvailable(definition)) then
+			local allowed = definition and not definition.completionOnly
+			if allowed and character and ix.jobs.regional then
+				allowed = ix.jobs.regional.CanOffer(character, definition)
+			end
+			if allowed and (not definition.fieldType or ix.jobs.field.IsAvailable(definition)) then
 				available[#available + 1] = id
 			end
 		end

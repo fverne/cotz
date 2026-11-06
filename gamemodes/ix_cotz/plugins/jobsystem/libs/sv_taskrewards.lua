@@ -206,12 +206,18 @@ function ix.taskRewards.RefreshBonuses(character, npc)
 	saveOffers(character, offers)
 end
 
-function ix.taskRewards.DeliverJobItem(client, npc)
+function ix.taskRewards.DeliverJobItem(client, npc, receiver)
 	local character = client:GetCharacter()
 	local job = character:GetJobs()[npc]
 	if not job or job.isCompleted then return false end
 	local definition = ix.jobs.list[job.identifier]
 	if not definition or not definition.requiredItem then return false end
+	if definition.alternateDelivery then
+		local contact = receiver and ix.townNPCs.byName[receiver:GetDisplayName()]
+		if not contact or not ix.townNPCs:CanInteract(client, receiver)
+			or not ix.jobs.regional.ReceiverMatches(character, contact, job)
+			or contact.map ~= game.GetMap() then return false end
+	end
 	local inventory = character:GetInventory()
 	local item, itemID
 	if definition.requiredPool then
@@ -230,7 +236,7 @@ function ix.taskRewards.DeliverJobItem(client, npc)
 	end
 	if not item then return false end
 	local remaining = job.numberRec - (job.progress or 0)
-	local quantity = item:GetData("quantity", item.quantity or item.ammoAmount or 1)
+	local quantity = definition.wholeItems and 1 or item:GetData("quantity", item.quantity or item.ammoAmount or 1)
 	if type(quantity) ~= "number" or quantity ~= quantity or quantity == math.huge then return false end
 	local amount = math.floor(math.min(remaining, quantity))
 	if amount <= 0 then return false end
@@ -321,6 +327,12 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 	local previews = table.Copy(character:GetData("taskJobPreviews", {}) or {})
 	previews[npc] = previews[npc] or {}
 	local preview = previews[npc][difficulty]
+	if preview and ix.jobs.regional
+		and not ix.jobs.regional.CanOffer(character, ix.jobs.list[preview.identifier]) then
+		ix.taskRewards.RemoveJobOffer(character, preview)
+		previews[npc][difficulty], preview = nil, nil
+		character:SetData("taskJobPreviews", previews)
+	end
 	if preview then
 		local definition = ix.jobs.list[preview.identifier]
 		if definition.fieldType and not ix.jobs.field.IsAvailable(definition) then return end
@@ -353,7 +365,7 @@ function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 
 		return preview
 	end
-	local id = ix.jobs.getJobFromCategory(categories)
+	local id = ix.jobs.getJobFromCategory(categories, character)
 	local definition = ix.jobs.list[id]
 	if not definition then return end
 	local count = definition.numberRec

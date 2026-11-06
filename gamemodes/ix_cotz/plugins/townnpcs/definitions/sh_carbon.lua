@@ -5,6 +5,11 @@ PLUGIN:Register("carbon", {
 	enforceCatalogue = true,
 	map = "rp_waystation",
 	job = {
+		kind = "none",
+		category = "No ordinary repeatable work",
+		description = "No ordinary repeatable work",
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Document deliveries",

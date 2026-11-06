@@ -5,6 +5,11 @@ PLUGIN:Register("latch", {
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	job = {
+		kind = "valuableCourier",
+		category = "Valuable delivery and courier work",
+		description = "Valuable delivery and courier work",
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Industrial salvage deliveries",
@@ -59,13 +64,9 @@ PLUGIN:Register("latch", {
 			"Come in. You've earned the right to stand beside the bench without me wondering what "
 			.. "useless weight you've brought."
 		),
-		workPrompt = "About the salvage order.",
-		offerPrompt = "Do you need workshop salvage?",
-		work = (
-			"Mechanical salvage, tools, stock worth working with. Pick an order and read it before hauling a "
-			.. "sack across the region. If you don't know what you're looking at, ask while we're beside the "
-			.. "bench. I can explain a part here more easily than you can carry a useless one home."
-		),
+		workPrompt = "About the delivery order.",
+		offerPrompt = "Do you have a delivery order?",
+		work = "Read the order before you carry anything. The named goods can go to someone here in Garbage who requests that category. Keep any surplus; the order only takes what is still needed. Come back to me once the delivery is complete. The harder requests mean finding goods supplied from farther north.",
 		progressionPrompt = "What are you trying to put together?",
 		progression = (
 			"I want to sort useful stock and compare the machinery records with the surviving pieces. Work "

@@ -10,6 +10,16 @@ PLUGIN:Register("cleaner", {
 		description = "Dead-drop circuits",
 		maps = {
 			easy = "rp_garbage_cotz",
+			medium = "rp_garbage_cotz",
+			hard = "rp_waystation",
+		},
+	},
+	legacyJob = {
+		kind = "deadDrop",
+		category = "Dead-drop circuits",
+		description = "Dead-drop circuits",
+		maps = {
+			easy = "rp_garbage_cotz",
 			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
 		},

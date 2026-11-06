@@ -87,7 +87,7 @@ local base = "gamemodes/ix_cotz/plugins/jobsystem/"
 ix.jobs = ix.jobs or {}
 ix.jobs.field = ix.jobs.field or {}
 ix.taskRewards = ix.taskRewards or {}
-for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit"}) do
+for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit", "regionalcatalogue"}) do
 	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
 end
 dofile(base .. "libs/sh_fieldtasks.lua")
@@ -148,13 +148,13 @@ check(
 	ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, presetMap) ~= nil,
 	"FTS enables destination defence"
 )
-providers.eventcontroller.eventpoints[presetMap] = {}
+originalProviders.eventcontroller.eventpoints[presetMap] = {}
 check(#ix.jobs.field.CollectPoints({"event"}, presetMap) == 0, "explicitly empty saved map overrides FTS")
-providers.eventcontroller.eventpoints[presetMap] = {{Vector(7000, 0, 0)}}
+originalProviders.eventcontroller.eventpoints[presetMap] = {{Vector(7000, 0, 0)}}
 local savedPoints = ix.jobs.field.CollectPoints({"event"}, presetMap)
 check(#savedPoints == 1 and savedPoints[1].x == 7000, "saved destination edits override FTS")
 check(#presetRows == 2 and presetRows[1][1].x == 1000, "FTS collection leaves presets unchanged")
-providers.eventcontroller.eventpoints[presetMap] = nil
+originalProviders.eventcontroller.eventpoints[presetMap] = nil
 ix.plugin.list.firsttimesetup = nil
 ix.jobs.field.pools.combined = {"packages", "rf", "gas", "combined"}
 check(#ix.jobs.field.CollectPoints({"combined", "event"}, map) == 4, "pools combine, deduplicate and bound recursion")
@@ -730,11 +730,12 @@ client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 now = now + 2
 ix.jobs.field.Action(client, "Contact", "start")
 update(client, character)
+local activePopulation = ix.eventController
 ix.eventController = nil
 update(client, character)
 check(#livingAttackers() == 0 and character.jobs.Contact.fieldTask.stage == "defending",
 	"population-manager removal pauses research without losing its assignment")
-ix.eventController = ix.eventController
+ix.eventController = activePopulation
 update(client, character)
 entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(#livingAttackers() > 0, "restoring population management resumes the interrupted wave")
@@ -873,6 +874,50 @@ map = courierJob.fieldTask.map
 update(courierClient, courier)
 check(not ix.jobs.field.GetObject(courier, courierJob), "delivered cargo cannot respawn at the original site")
 ix.townNPCs = previousTown
+
+-- Cross-map routes do not compare unrelated map coordinate systems.
+local routeClient, routeCharacter = actor()
+local pickupMap, destinationMap = "cross-map-pickup", "cross-map-destination"
+ix.plugin.list.hidestashspawner.stashspawnpoints[pickupMap] = {{Vector(1000, 0, 0)}}
+ix.plugin.list.hidestashspawner.stashspawnpoints[destinationMap] = {{Vector(1000, 0, 0)}}
+ix.jobs.list.crossMapDrop = {fieldType = "deadDrop", fieldMap = pickupMap,
+	destinationMap = destinationMap, tier = 2}
+local routeJob = {identifier = "crossMapDrop", rewardKey = "cross-map:1", numberRec = 1,
+	progress = 0, progressionClaim = 99999}
+check(ix.jobs.field.Assign(routeCharacter, "Contact", routeJob), "cross-map endpoints can share coordinates")
+check(routeJob.fieldTask.map == pickupMap and routeJob.fieldTask.destinationMap == destinationMap,
+	"both route maps are snapshotted")
+routeCharacter.jobs.Contact = copy(routeJob)
+map, routeClient.position = pickupMap, Vector(1000, 0, 0)
+update(routeClient, routeCharacter)
+local routeObject = ix.jobs.field.GetObject(routeCharacter, routeJob)
+ix.jobs.field.Collect(routeClient, routeObject)
+flush()
+check(routeCharacter.jobs.Contact.fieldTask.stage == "carrying", "parcel pickup works on the saved source map")
+now = now + 2
+ix.jobs.field.Action(routeClient, "Contact", "deliver")
+check(not routeCharacter.jobs.Contact.isCompleted, "same coordinates on the pickup map cannot deliver remotely")
+map = destinationMap
+now = now + 2
+ix.jobs.field.Action(routeClient, "Contact", "deliver")
+check(routeCharacter.jobs.Contact.isCompleted and routeCharacter.jobs.Contact.fieldTask.stage == "delivered",
+	"parcel delivers on the saved destination map")
+local sensorClient, sensorCharacter = actor()
+map = "rp_marsh_cs"
+ix.jobs.list.sensor900 = {fieldType = "sensor", fieldMap = map, fieldSettings = {recordSeconds = 900}}
+local sensorJob = {identifier = "sensor900", rewardKey = "sensor:900", numberRec = 1, progress = 0}
+check(ix.jobs.field.Assign(sensorCharacter, "Contact", sensorJob), "sensor accepts per-assignment settings")
+sensorCharacter.jobs.Contact = sensorJob
+sensorClient.position = ix.jobs.field.Unpack(sensorJob.fieldTask.point)
+now = now + 2
+ix.jobs.field.Action(sensorClient, "Contact", "deploy")
+local savedReadyAt = sensorCharacter.jobs.Contact.fieldTask.readyAt
+check(savedReadyAt == now + 900, "new sensor stores a fifteen-minute real-time deadline")
+now = now + 901
+map = "another-map"
+update(sensorClient, sensorCharacter)
+check(sensorCharacter.jobs.Contact.fieldTask.readyAt == savedReadyAt and os.time() >= savedReadyAt,
+	"deadline survives travel and continues passing without local simulation")
 
 PLUGIN:OnUnload()
 check(entity.invalid and #livingAttackers() == 0, "plugin unload removes field objects and owned attackers")

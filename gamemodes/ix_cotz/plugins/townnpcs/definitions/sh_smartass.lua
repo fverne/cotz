@@ -7,6 +7,11 @@ PLUGIN:Register("smartass", {
 	job = {
 		kind = "dataExtract",
 		category = "Computer data extraction",
+		description = "Computer data extraction",
+	},
+	legacyJob = {
+		kind = "dataExtract",
+		category = "Computer data extraction",
 		description = "Extract data from %d computer types using the issued flash drive.",
 		quantities = {1, 2, 5},
 	},

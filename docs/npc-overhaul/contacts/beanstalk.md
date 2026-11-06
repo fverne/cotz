@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Waystation**. Current specialty: **Research defence**.
+The home change requires removing/saving the old placement and placing this contact on Waystation.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Concerned scientist who wants enough evidence to check his own assumptions. He can be curious, embarrassed, and irritated as well as cautious, and takes practical objections seriously without surrendering the method.
@@ -28,7 +36,7 @@ These conversations and their follow-up live in [sh_ecologistnpc2.lua](../../../
 
 ## Contact brief
 
-- **Home and return point:** Garbage. Every hand-in and reward claim occurs here.
+- **Home and return point:** Waystation. Claims return to this contact; authored search regions remain unchanged.
 - **Identity:** Existing concerned scientist.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Research defence.

@@ -31,9 +31,14 @@ local function configureWork(dialogue, contact)
 			if job.isCompleted then
 				options[1] = {statement = "Complete the assignment.", topicID = "TownJobAction",
 					dyndata = {action = "complete", claim = job.progressionClaim}}
-			elseif ix.jobs.isItemJob(job.identifier) then
+			elseif ix.jobs.isItemJob(job.identifier)
+				and not ix.jobs.list[job.identifier].alternateDelivery then
 				options[1] = {statement = "Hand over the requested items.", topicID = "TownJobAction",
 					dyndata = {action = "deliver", claim = job.progressionClaim}}
+			end
+			if job.photoKind then
+				options[#options + 1] = {statement = "Collect or restore the loan camera.", topicID = "TownJobAction",
+					dyndata = {action = "camera", claim = job.progressionClaim}}
 			end
 
 			return options
@@ -48,6 +53,8 @@ local function configureWork(dialogue, contact)
 						client:ixJobComplete(target:GetDisplayName())
 					elseif data.action == "deliver" then
 						ix.taskRewards.DeliverJobItem(client, target:GetDisplayName())
+					elseif data.action == "camera" and job.photoKind then
+						ix.jobs.regional.ReconcileCamera(client)
 					end
 				end
 			end
@@ -55,14 +62,15 @@ local function configureWork(dialogue, contact)
 			return "BackTopic"
 		end,
 	})
-	if contact.job.kind ~= "arena" then
+	if contact.job.kind ~= "arena" and contact.job.kind ~= "none" then
 		dialogue.addTopic("GetTaskByDifficulty", {
 			statement = contact.dialogue.offerPrompt,
 			response = contact.dialogue.work,
 			options = {"BackTopic"},
 			ShouldAdd = function(_, client, target) return not client:ixHasJobFromNPC(target:GetDisplayName()) end,
 		})
-
+	elseif dialogue.tree.GetTaskByDifficulty then
+		dialogue.tree.GetTaskByDifficulty.ShouldAdd = function() return false end
 	end
 
 end
@@ -152,6 +160,9 @@ local function configureDeliveries(dialogue, contact)
 		IsDynamic = true,
 		ShouldAdd = function(_, client)
 			for _, job in pairs(client:GetCharacter():GetJobs()) do
+				if ix.jobs.regional and ix.jobs.regional.ReceiverMatches(client:GetCharacter(), contact, job) then
+					return true
+				end
 				local state = job.fieldTask
 				if state and state.recipient == contact.name and state.stage == "carrying" then return true end
 			end
@@ -161,6 +172,10 @@ local function configureDeliveries(dialogue, contact)
 		GetDynamicOptions = function(_, client)
 			local options = {}
 			for npc, job in SortedPairs(client:GetCharacter():GetJobs()) do
+				if ix.jobs.regional and ix.jobs.regional.ReceiverMatches(client:GetCharacter(), contact, job) then
+					options[#options + 1] = {statement = "Hand over items for " .. npc .. ".",
+						topicID = "TownDeliveries", dyndata = {npc = npc, claim = job.rewardKey, valuable = true}}
+				end
 				local state = job.fieldTask
 				if state and state.recipient == contact.name and state.stage == "carrying" then
 					options[#options + 1] = {statement = "Hand over " .. (state.cargoName or "the cargo") .. ".",
@@ -173,7 +188,12 @@ local function configureDeliveries(dialogue, contact)
 		ResolveDynamicOption = function(_, client, target, data)
 			if type(data) == "table" and type(data.npc) == "string" and type(data.claim) == "string"
 				and allowAction(client, target) then
-				ix.jobs.field.DeliverToContact(client, target, data.npc, data.claim)
+				local job = client:GetCharacter():GetJobs()[data.npc]
+				if data.valuable and job and job.rewardKey == data.claim then
+					ix.taskRewards.DeliverJobItem(client, data.npc, target)
+				else
+					ix.jobs.field.DeliverToContact(client, target, data.npc, data.claim)
+				end
 			end
 
 			return "BackTopic"

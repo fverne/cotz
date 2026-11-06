@@ -113,8 +113,10 @@ function PANEL:AddTask(npc, job)
 	addLabel(card, npc, "cotzTasksSmall", COLORS.muted)
 	addLabel(card, ix.jobs.getFormattedDesc(job), "cotzTasksSmall")
 	local completed = job.isCompleted or job.progress >= job.numberRec
-	local status = completed and "Complete — return to " .. npc
+	local progressText = job.targetWeights and string.format("Progress: %.2f / %d packs", job.progress, job.numberRec)
 		or string.format("Progress: %d / %d", job.progress, job.numberRec)
+	local status = completed and "Complete — return to " .. npc
+		or progressText
 	addLabel(card, status, "cotzTasksSmall", completed and COLORS.green or COLORS.text)
 	local progress = card:Add("DPanel")
 	progress:Dock(TOP)

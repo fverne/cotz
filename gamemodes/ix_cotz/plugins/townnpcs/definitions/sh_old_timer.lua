@@ -5,6 +5,16 @@ PLUGIN:Register("old-timer", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
+		kind = "regionalHunting",
+		category = "Specific mutant hunting",
+		description = "Specific mutant hunting",
+		maps = {
+			easy = "rp_marsh_cs",
+			medium = "rp_garbage_cotz",
+			hard = "rp_waystation",
+		},
+	},
+	legacyJob = {
 		kind = "hunting",
 		category = "Mutant hunting",
 		description = "Mutant hunting",

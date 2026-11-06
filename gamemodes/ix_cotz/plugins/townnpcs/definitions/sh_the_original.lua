@@ -4,6 +4,21 @@ PLUGIN:Register("the-original", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {
+		kind = "none",
+		category = "No ordinary repeatable work",
+		description = "No ordinary repeatable work",
+	},
+	retiredRegionalJob = {
+		kind = "regionalSpecimens",
+		category = "Specific mutant specimens",
+		description = "Specific mutant specimens",
+		maps = {
+			easy = "rp_marsh_cs",
+			medium = "rp_garbage_cotz",
+			hard = "rp_waystation",
+		},
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Mutant specimen deliveries",

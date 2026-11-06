@@ -3,8 +3,18 @@ PLUGIN:Register("egghead", {
 	template = "ecologistnpc",
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
-	map = "rp_marsh_cs",
+	map = "rp_waystation",
 	job = {
+		kind = "regionalSpecimens",
+		category = "Specific mutant specimens",
+		description = "Specific mutant specimens",
+		maps = {
+			easy = "rp_garbage_cotz",
+			medium = "rp_waystation",
+			hard = "rp_pripyat_remaster",
+		},
+	},
+	legacyJob = {
 		kind = "delivery",
 		minimumValue = {1200, 2400, 4000},
 		category = "Artifact deliveries",
@@ -29,14 +39,9 @@ PLUGIN:Register("egghead", {
 			"Hello again. Something to compare, or simply a question? We can probably find time for "
 			.. "either."
 		),
-		workPrompt = "About the reference request I've taken.",
-		offerPrompt = "Do you have a specimen delivery request?",
-		work = (
-			"Artifact and research supply requests. Bring what's listed; an unusual object won't fill a "
-			.. "particular reference gap simply by being unusual. I'll inspect the return before deciding what "
-			.. "comparison it supports. The ordinary containers and records matter too. Research accumulates "
-			.. "rather more packaging than the illustrations suggest."
-		),
+		workPrompt = "About the mutant specimens I am collecting.",
+		offerPrompt = "Do you need mutant specimens?",
+		work = "Mutant specimens. A particular part, from a particular species, in the number written on the request. An impressive substitute is still a substitute, however much we might enjoy examining it. You can bring specimens you already have. Check the suggested region before going out; some of these animals are rather less obliging than the illustrations.",
 		progressionPrompt = "What are you comparing at the moment?",
 		progression = (
 			"I'm building comparisons between artifacts and surviving field accounts. I need the specimens, the "

@@ -1,5 +1,8 @@
 # Roster and progression arcs
 
+Current repeatable work follows the [implemented job roster](repeatable-jobs.md).
+The Original is no longer used; Jitters owns the Swamps specimen-delivery specialty.
+
 [Design index](README.md). All rows below are proposals, not existing placement or finished quests.
 The index's requirements and exclusions govern this roster. Existing personalities and models
 must be checked against their current templates and dialogue before rewriting content.

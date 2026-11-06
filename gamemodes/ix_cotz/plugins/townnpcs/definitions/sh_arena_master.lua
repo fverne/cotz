@@ -3,6 +3,11 @@ PLUGIN:Register("arena-master", {
 	template = "arenanpc",
 	map = "rp_marsh_cs",
 	job = {
+		kind = "none",
+		category = "No ordinary repeatable work",
+		description = "No ordinary repeatable work",
+	},
+	legacyJob = {
 		kind = "arena",
 		category = "Arena bouts",
 		description = "Arena bouts",

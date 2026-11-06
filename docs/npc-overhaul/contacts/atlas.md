@@ -4,6 +4,14 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
+## Current repeatable work — 6 November 2026
+
+Home/claim region: **Swamps**. Current specialty: **Alternating mutant and anomaly photography**.
+Atlas alternates mutant and anomaly photography after completion, with 3/5/7 distinct types and one shared bound loan camera. He remains in Swamps.
+New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
+
+
 ## Implemented voice direction — November 2026
 
 Patient, inquisitive surveyor whose developed conversations and modest humour remain the reference for his own voice. His earlier candidate is retained in this pass, with cargo identity and incorrect task geography aligned to the installed definitions.
@@ -31,7 +39,7 @@ These conversations and their follow-up live in [sh_atlasnpc.lua](../../../gamem
 - **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
 - **Identity:** New: patient, meticulous former surveyor, concerned for missing explorers.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
-- **Only repeatable category:** Sensor deployment and retrieval.
+- **Only repeatable category:** Alternating mutant and anomaly photography.
 - **Finite plan:** 22 steps; **6 hand-ins, 5 job checkpoints, 11 authored objectives**.
 - **Step labels:** AT01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 
