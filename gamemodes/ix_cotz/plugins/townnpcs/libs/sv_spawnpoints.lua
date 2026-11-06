@@ -1,6 +1,7 @@
 local PLUGIN = PLUGIN
-local MAX_POINTS = 16
 local SAME_POSITION_SQUARED = 16 ^ 2
+
+util.AddNetworkString("cotz/townnpcs/capture-spawn")
 
 local function getPoints(id)
 	local maps = PLUGIN.spawnPoints or {}
@@ -10,42 +11,21 @@ local function getPoints(id)
 	return maps[game.GetMap()][id], maps[game.GetMap()]
 end
 
-ix.command.Add("TownNPCAddSpawnPoint", {
+ix.command.Add("TownNPCGetSpawnPoint", {
 	adminOnly = true,
-	description = "Save a town contact spawn at your feet, optionally with a model sequence or 'default'.",
-	arguments = {ix.type.string, bit.bor(ix.type.string, ix.type.optional)},
-	OnRun = function(_, client, id, animation)
-		local contact = PLUGIN.contacts[id]
-		if not contact or contact.map ~= game.GetMap() then return "Choose a contact on this map." end
-		local npc = ix.progression.GetNPCFromName(contact.name)
-		if not IsValid(npc) then return "Place the contact first." end
-		if animation == "default" then animation = "" end
-		if animation and animation ~= "" and npc:LookupSequence(animation) < 0 then
-			return "Unknown animation sequence for this contact's model."
+	description = "Print the aimed-at advanced vendor's current position, facing and animation to your console.",
+	OnRun = function(_, client)
+		if not IsValid(client) then return "Run this command as a player in game." end
+		local npc = client:GetEyeTraceNoCursor().Entity
+		if not IsValid(npc) or npc:GetClass() ~= "ix_vendor_adv" then
+			return "Look at an advanced vendor or town NPC."
 		end
-		local points, contacts = getPoints(id)
-		points = points or {{position = npc:GetPos(), angles = npc:GetAngles(), idleanim = ""}}
-		local position = client:GetPos()
-		for index, point in ipairs(points) do
-			if point.position:DistToSqr(position) < SAME_POSITION_SQUARED then
-				if animation == nil then return "A spawn point already exists nearby." end
-				point.idleanim = animation
-				contacts[id] = points
-				PLUGIN:SaveData()
+		-- Animation groups run on the client, so capture the sequence visible to the requesting admin there.
+		net.Start("cotz/townnpcs/capture-spawn")
+		net.WriteEntity(npc)
+		net.Send(client)
 
-				return "Updated animation for spawn point " .. index .. "; applies next map restart."
-			end
-		end
-		if #points >= MAX_POINTS then return "This contact already has 16 spawn points." end
-		points[#points + 1] = {
-			position = position,
-			angles = Angle(0, client:GetAngles().y, 0),
-			idleanim = animation or "",
-		}
-		contacts[id] = points
-		PLUGIN:SaveData()
-
-		return "Saved spawn point " .. #points .. " for " .. contact.name .. "; applies next map restart."
+		return "Spawn point printed to your console."
 	end,
 })
 

@@ -114,17 +114,18 @@ Each `vendors` entry needs `template`, `position`, and `angles`. Use
 with the template ID you chose. FTS has no vendor dump command, and it recreates
 vendors from templates rather than exporting their live edits or stock.
 
-Town contacts can also have several restart positions with individual animations. Place the contact,
-then stand at each intended location, face its desired direction and use
-`/TownNPCAddSpawnPoint <slug> [animation]`. The animation is a sequence supported by its model;
-`default` uses the normal vendor idle. Running the command near an existing point with an explicit
-animation updates that point. `/TownNPCExportSpawnPoints` prints the current map's complete
+Town contacts can also have several restart positions with individual animations. Aim at an advanced
+vendor or town NPC and run the admin-only `/TownNPCGetSpawnPoint`. It prints the NPC's position,
+facing and currently visible animation as a Lua record in your client console. Capture each desired
+placement and paste the records under the contact's slug in `plugindata["townnpcs"]`; capture does
+not save or move anything. Use `idleanim = ""` for normal vendor animation.
+`/TownNPCExportSpawnPoints` prints the current map's complete saved
 `plugindata["townnpcs"]` entry for the preset; `/FTSDumpPluginData` exports its records to
 `FTSDump/townnpcs.txt` on the server. Keep a matching `vendors` entry to create the NPC.
 FTS saves these points only for the current map, with selection beginning on the next restart.
 See [town spawn points](../gamemodes/ix_cotz/plugins/townnpcs/README.md#alternate-spawn-positions)
-for the format and animation fallback rules. Existing worlds can use the point commands without
-rerunning setup.
+for the format and animation fallback rules. Editing a preset does not update an existing world's
+saved points; use a deliberate data migration when applying a revised layout to an initialized world.
 
 ### Generic entities and persistence
 

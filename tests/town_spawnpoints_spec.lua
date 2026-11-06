@@ -41,12 +41,24 @@ bit = {bor = function(first, second) return first + second end}
 local map = "rp_marsh_cs"
 game = {GetMap = function() return map end}
 local commands, savedData, warnings = {}, {}, {}
+local saveCount = 0
+local messages, receivers, packet = {}, {}, nil
+util = {AddNetworkString = function(name) messages[name] = true end}
+net = {
+	Start = function(name) packet = {name = name} end,
+	WriteEntity = function(entity) packet.entity = entity end,
+	Send = function(recipient) packet.recipient = recipient end,
+	Receive = function(name, callback) receivers[name] = callback end,
+}
 ErrorNoHalt = function(message) warnings[#warnings + 1] = message end
 local base = "gamemodes/ix_cotz/plugins/"
 local contact = {id = "mute", name = "Mute", map = map}
 local townPlugin = {
 	contacts = {mute = contact}, byName = {Mute = contact}, siteDefinitions = {},
-	SetData = function(_, data) savedData = copy(data) end,
+	SetData = function(_, data)
+		saveCount = saveCount + 1
+		savedData = copy(data)
+	end,
 	GetData = function() return copy(savedData) end,
 }
 PLUGIN = townPlugin
@@ -59,6 +71,7 @@ function npc:SetPos(value) self.position = value end
 function npc:GetAngles() return self.angles end
 function npc:SetAngles(value) self.angles = value end
 function npc:GetDisplayName() return "Mute" end
+function npc:GetClass() return "ix_vendor_adv" end
 function npc:GetIdleAnim() return self.idle end
 function npc:GetTownSpawnAnim() return self.spawnAnim end
 function npc:SetTownSpawnAnim(value) self.spawnAnim = value end
@@ -83,34 +96,80 @@ ix = {
 }
 dofile(base .. "townnpcs/libs/sv_spawnpoints.lua")
 dofile(base .. "townnpcs/libs/sv_sites.lua")
-local position = Vector(0, 0, 0)
 local output = {}
+local trace = {Entity = npc}
 local client = {
-	GetPos = function() return position end,
-	GetAngles = function() return Angle(0, 90, 0) end,
+	GetPos = function() error("capture used the player's position") end,
+	GetAngles = function() error("capture used the player's facing") end,
+	GetEyeTraceNoCursor = function() return trace end,
 	PrintMessage = function(_, _, message) output[#output + 1] = message end,
 }
-for _, name in ipairs({"TownNPCAddSpawnPoint", "TownNPCClearSpawnPoints", "TownNPCExportSpawnPoints"}) do
+for _, name in ipairs({"TownNPCGetSpawnPoint", "TownNPCClearSpawnPoints", "TownNPCExportSpawnPoints"}) do
 	check(commands[name].adminOnly, name .. " requires administrator access")
 end
-local add = commands.TownNPCAddSpawnPoint.OnRun
-add(nil, client, "mute", "missing")
-check(townPlugin.spawnPoints == nil, "invalid animation cannot modify saved points")
-add(nil, client, "unknown", "sit")
-map = "another"
-add(nil, client, "mute", "sit")
-check(townPlugin.spawnPoints == nil, "unknown and foreign contacts cannot acquire points")
-map = contact.map
-add(nil, client, "mute", "sit")
-local points = townPlugin.spawnPoints[map].mute
-check(#points == 1 and points[1].idleanim == "sit", "original location can receive its own animation")
-position = Vector(1000, 0, 0)
-add(nil, client, "mute", "work")
-check(#points == 2 and points[2].idleanim == "work", "alternate accepts sequence ID zero")
-check(points[2].angles.y == 90 and points[1].angles.y == 45, "both points retain their own facing")
-check(npc:GetPos().x == 0 and npc:GetTownSpawnAnim() == "", "authoring does not change the live NPC")
-add(nil, client, "mute")
-check(#points == 2, "duplicate without an animation is rejected")
+check(commands.TownNPCAddSpawnPoint == nil, "player-position saving command has been replaced")
+check(commands.TownNPCGetSpawnPoint.arguments == nil, "capture needs only the aimed-at entity")
+local capture = commands.TownNPCGetSpawnPoint.OnRun
+capture(nil, client)
+check(messages[packet.name] and packet.entity == npc and packet.recipient == client,
+	"server sends the traced vendor only to the requesting administrator")
+check(townPlugin.spawnPoints == nil and saveCount == 0, "capture does not create or save spawn points")
+packet = nil
+capture(nil, nil)
+trace.Entity = nil
+capture(nil, client)
+trace.Entity = {GetClass = function() return "prop_physics" end}
+capture(nil, client)
+trace.Entity = {invalid = true}
+capture(nil, client)
+check(packet == nil, "invalid players, empty traces, props and removed vendors do not send capture requests")
+trace.Entity = {GetClass = function() return "ix_vendor_adv" end}
+capture(nil, client)
+check(packet.entity == trace.Entity, "generic advanced vendors can be captured without a town contact definition")
+
+local capturedVendor = {
+	GetClass = function() return "ix_vendor_adv" end,
+	GetDisplayName = function() return "Generic vendor" end,
+	GetPos = function() return Vector(123.25, -456.5, 789.75) end,
+	GetAngles = function() return Angle(12, -100, 3) end,
+	GetSequence = function() return 0 end,
+	GetSequenceName = function(_, sequence)
+		check(sequence == 0, "capture looks up the currently playing client sequence, including ID zero")
+
+		return "gesture_\"quoted\"\\pose"
+	end,
+	GetIdleAnim = function() error("capture used the configured idle instead of the displayed animation") end,
+}
+local readEntity = capturedVendor
+net.ReadEntity = function() return readEntity end
+dofile(base .. "townnpcs/libs/cl_spawncapture.lua")
+local console = {}
+local originalPrint = print
+print = function(message) console[#console + 1] = message end
+receivers["cotz/townnpcs/capture-spawn"]()
+local record = assert(load("return " .. table.concat(console, "\n", 2):gsub(",%s*$", "")))()
+check(record.position.x == 123.25 and record.position.y == -456.5 and record.position.z == 789.75,
+	"console record contains the vendor's exact position")
+check(record.angles.p == 12 and record.angles.y == -100 and record.angles.r == 3,
+	"console record preserves all three vendor angles")
+check(record.idleanim == "gesture_\"quoted\"\\pose", "current animation is escaped as valid preset Lua")
+check(townPlugin.spawnPoints == nil and saveCount == 0, "client printing does not write persistent data")
+readEntity = nil
+console = {}
+receivers["cotz/townnpcs/capture-spawn"]()
+check(#console == 1 and not console[1]:find("Vector", 1, true), "vendor removal before receipt is reported safely")
+readEntity = capturedVendor
+capturedVendor.GetSequenceName = function() return "" end
+console = {}
+receivers["cotz/townnpcs/capture-spawn"]()
+check(#console == 1 and not console[1]:find("Vector", 1, true), "missing sequence is reported without inventing an idle")
+print = originalPrint
+
+townPlugin.spawnPoints = {[map] = {mute = {
+	{position = Vector(0, 0, 0), angles = Angle(0, 45, 0), idleanim = "sit"},
+	{position = Vector(1000, 0, 0), angles = Angle(0, 90, 0), idleanim = "work"},
+}}}
+townPlugin:SaveData()
 commands.TownNPCExportSpawnPoints.OnRun(nil, client)
 local exported = assert(load("return {" .. table.concat(output) .. "}"))().townnpcs
 check(exported.mute[2].idleanim == "work", "console export is valid preset Lua with per-point animations")
@@ -150,17 +209,6 @@ townPlugin.spawnPositionsApplied = nil
 townPlugin:LoadData()
 townPlugin:ApplyTownSpawnPoints()
 check(npc.position.x == 0 and npc.spawnAnim == "", "legacy position-only points use normal vendor animation")
-position = Vector(0, 0, 0)
-add(nil, client, "mute", "default")
-check(townPlugin.spawnPoints[map].mute[1].idleanim == "", "default clears an existing point's animation override")
-for index = 3, 16 do
-	townPlugin.spawnPoints[map].mute[index] = {position = Vector(index * 1000, 0, 0), angles = Angle(0, 0, 0)}
-end
-add(nil, client, "mute", "sit")
-check(townPlugin.spawnPoints[map].mute[1].idleanim == "sit", "animation editing works at the point limit")
-position = Vector(17000, 0, 0)
-add(nil, client, "mute", "sit")
-check(#townPlugin.spawnPoints[map].mute == 16, "additional points cannot exceed the command limit")
 
 -- Load the real FTS entry point with only its legacy inequality spelling translated for standalone Lua.
 PLUGIN = {}

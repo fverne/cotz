@@ -72,8 +72,7 @@ function npc:GetNetVar(key, default) return self.vars[key] or default end
 function npc:SetNetVar(key, value) self.vars[key] = value end
 function npc:SetTownSpawnAnim(animation) self.spawnAnimation = animation end
 function npc:SetAnim() end
-bit = {bor = function(first, second) return first + second end}
-ix = {type = {string = 1, optional = 8}, command = {Add = function(name, data) commands[name] = data end},
+ix = {type = {string = 1}, command = {Add = function(name, data) commands[name] = data end},
 	progression = {GetNPCFromName = function() return npc end}}
 game = {GetMap = function() return "test" end}
 local contact = {id = "mute", name = "Mute", map = "test"}
@@ -88,25 +87,17 @@ table.Copy = function(value)
 
 	return result
 end
+util = {AddNetworkString = function() end}
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_spawnpoints.lua")
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_sites.lua")
-client.GetPos = function() return Vector(1000, 0, 0) end
-client.GetAngles = function() return Angle(0, 90) end
-check(commands.TownNPCAddSpawnPoint.adminOnly and commands.TownNPCClearSpawnPoints.adminOnly,
-	"spawn point edits require admin permission")
-commands.TownNPCAddSpawnPoint.OnRun(nil, client, "mute")
-local points = PLUGIN.spawnPoints.test.mute
-check(#points == 2 and points[1].position.x == 0, "first addition saves existing and alternate positions")
-check(npc.position.x == 0, "editing points does not move the NPC during play")
-check(points[2].angles.y == 90, "alternate spawn stores facing")
-commands.TownNPCAddSpawnPoint.OnRun(nil, client, "mute")
-check(#points == 2, "duplicate spawn positions are rejected")
-commands.TownNPCAddSpawnPoint.OnRun(nil, client, "unknown")
-check(#points == 2, "unknown contacts cannot add positions")
-game.GetMap = function() return "another" end
-commands.TownNPCAddSpawnPoint.OnRun(nil, client, "mute")
-check(not PLUGIN.spawnPoints.another, "points cannot be added outside a contact's home map")
-game.GetMap = function() return "test" end
+check(commands.TownNPCGetSpawnPoint.adminOnly and commands.TownNPCClearSpawnPoints.adminOnly,
+	"spawn point capture and edits require admin permission")
+local points = {
+	{position = Vector(0, 0, 0), angles = Angle(0, 0)},
+	{position = Vector(1000, 0, 0), angles = Angle(0, 90)},
+}
+PLUGIN.spawnPoints = {test = {mute = points}}
+PLUGIN:SaveData()
 PLUGIN.spawnPoints = nil
 PLUGIN:LoadData()
 check(#PLUGIN.spawnPoints.test.mute == 2, "spawn points survive save and reload")

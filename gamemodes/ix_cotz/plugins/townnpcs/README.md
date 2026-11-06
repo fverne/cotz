@@ -500,21 +500,24 @@ Standalone specs cannot establish those runtime behaviours.
 
 ## Alternate spawn positions
 
-Place a contact normally. Stand at each alternate location and run
-`/TownNPCAddSpawnPoint <slug> [animation]` (for example, `/TownNPCAddSpawnPoint mute idle`), facing the direction
-that NPC should face. The first addition also records the NPC's current position. Up to 16 points
-are saved per contact/map, anywhere on its home map. Use clear, suitable ground for each position.
-`/TownNPCClearSpawnPoints <slug>` removes the alternates while leaving the current NPC in place.
-Both commands require administrator access; editing points does not move the NPC during play.
+Aim at an advanced vendor or town NPC and run `/TownNPCGetSpawnPoint` as an administrator.
+It prints a copyable Lua record containing that entity's current `position`, `angles` and `idleanim`
+to your client console. The animation is the sequence currently visible on your client, including
+animation-group gestures, rather than the vendor's configured idle. Position and facing come from
+the NPC. The command takes no arguments and does not save points or change the world.
+It replaces the former player-position `/TownNPCAddSpawnPoint` command.
 
-The optional animation is a sequence name supported by that contact's current model. Invalid names
-are rejected. For a new point, omit it or use `default` to keep the vendor's normal idle and animation group.
-To change a saved point's animation, stand within 16 units of it and repeat the command with an
-explicit animation or `default`. This also works at the original position. The transform stays unchanged
-when updating a nearby point. Each selected override loops for the session and takes priority over
-random vendor gestures. It does not overwrite the vendor's ordinary saved animation settings.
-Old points without `idleanim` keep normal vendor animation. A sequence missing after a model change
-produces a server warning and falls back to normal vendor animation for that session.
+Capture each desired NPC placement and paste the records into the matching contact's table in
+the map preset described below. Include the original position explicitly if it should remain a choice.
+Any advanced vendor can be captured; automatic restart selection applies to registered town contacts
+on their home maps. Existing saved choices continue working.
+`/TownNPCClearSpawnPoints <slug>` remains admin-only and removes the saved choices while leaving
+the current NPC in place.
+
+Each selected animation override loops for the session and takes priority over random vendor gestures.
+It does not overwrite the vendor's ordinary saved animation settings. Set `idleanim = ""` or omit it
+to use normal vendor animation. A sequence missing after a model change produces a server warning
+and falls back to normal vendor animation for that session.
 
 After saved vendors load on each map restart, configured contacts choose a random saved point,
 excluding the previous restart's position when another distinct point exists. The previous selection
@@ -547,12 +550,13 @@ Use captured coordinates and sequences from the actual map/model. The preset sti
 `vendors` entry to create the contact; these records only configure its potential placements.
 FTS copies and saves the current map's points and clears that map's selection history. Other maps
 are retained. Omitted town data leaves existing points alone; an explicit empty table clears them.
-Imported placements first take effect on the next restart, after vendors load. For existing worlds,
-use the admin point commands directly; rerunning full FTS would also duplicate its world entities.
+Imported placements first take effect on the next restart, after vendors load. Capturing a record or
+editing a preset does not change an initialized world's saved choices; applying those edits to an
+existing world needs a deliberate data migration. Rerunning full FTS also duplicates its world entities.
 
-Check `luatex --luaonly tests/bug_testing_spec.lua` for point editing, save/reload, restart selection,
-and no-repeat coverage. Run `luatex --luaonly tests/town_spawnpoints_spec.lua` for animation validation,
-client looping, legacy defaults, and FTS import/export. Verify actual placement, facing, animation,
+Check `luatex --luaonly tests/bug_testing_spec.lua` for save/reload, restart selection and no-repeat coverage.
+Run `luatex --luaonly tests/town_spawnpoints_spec.lua` for admin-only capture, console output, current client
+animation, client looping, legacy defaults and FTS import/export. Verify actual placement, facing, animation,
 late-joining clients and ordinary dialogue/trade after two map restarts in multiplayer.
 
 Progression notices use local named NPC chat within chatRange of the NPC. An absent NPC uses a
