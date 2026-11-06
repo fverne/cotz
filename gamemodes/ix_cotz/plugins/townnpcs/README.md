@@ -501,11 +501,20 @@ Standalone specs cannot establish those runtime behaviours.
 ## Alternate spawn positions
 
 Place a contact normally. Stand at each alternate location and run
-`/TownNPCAddSpawnPoint <slug>` (for example, `/TownNPCAddSpawnPoint mute`), facing the direction
+`/TownNPCAddSpawnPoint <slug> [animation]` (for example, `/TownNPCAddSpawnPoint mute idle`), facing the direction
 that NPC should face. The first addition also records the NPC's current position. Up to 16 points
 are saved per contact/map, anywhere on its home map. Use clear, suitable ground for each position.
 `/TownNPCClearSpawnPoints <slug>` removes the alternates while leaving the current NPC in place.
 Both commands require administrator access; editing points does not move the NPC during play.
+
+The optional animation is a sequence name supported by that contact's current model. Invalid names
+are rejected. For a new point, omit it or use `default` to keep the vendor's normal idle and animation group.
+To change a saved point's animation, stand within 16 units of it and repeat the command with an
+explicit animation or `default`. This also works at the original position. The transform stays unchanged
+when updating a nearby point. Each selected override loops for the session and takes priority over
+random vendor gestures. It does not overwrite the vendor's ordinary saved animation settings.
+Old points without `idleanim` keep normal vendor animation. A sequence missing after a model change
+produces a server warning and falls back to normal vendor animation for that session.
 
 After saved vendors load on each map restart, configured contacts choose a random saved point,
 excluding the previous restart's position when another distinct point exists. The previous selection
@@ -515,8 +524,36 @@ Repeated PostLoadData calls do not move them again, and newly placed contacts wa
 Points recorded with the earlier patrol tool are retained as spawn positions on the next save.
 There is no walking, patrol timer, or walking-animation override.
 
+### First Time Setup presets
+
+`/TownNPCExportSpawnPoints` prints the current map's `plugindata["townnpcs"]` entry to the client
+console. `/FTSDumpPluginData` also writes these records to the server's `data/FTSDump/townnpcs.txt`;
+remove its heading and put the records inside the preset's `plugindata["townnpcs"]` table.
+All bundled map presets include an empty table ready for authored points. Example structure:
+
+```lua
+plugindata = {
+	["townnpcs"] = {
+		["mute"] = {
+			{position = Vector(100, 200, 300), angles = Angle(0, 90, 0), idleanim = "idle"},
+			{position = Vector(140, 200, 300), angles = Angle(0, 180, 0), idleanim = ""},
+		},
+	},
+	-- Other controller data remains here.
+},
+```
+
+Use captured coordinates and sequences from the actual map/model. The preset still needs a matching
+`vendors` entry to create the contact; these records only configure its potential placements.
+FTS copies and saves the current map's points and clears that map's selection history. Other maps
+are retained. Omitted town data leaves existing points alone; an explicit empty table clears them.
+Imported placements first take effect on the next restart, after vendors load. For existing worlds,
+use the admin point commands directly; rerunning full FTS would also duplicate its world entities.
+
 Check `luatex --luaonly tests/bug_testing_spec.lua` for point editing, save/reload, restart selection,
-and no-repeat coverage. Verify actual placement and facing after two map restarts in multiplayer.
+and no-repeat coverage. Run `luatex --luaonly tests/town_spawnpoints_spec.lua` for animation validation,
+client looping, legacy defaults, and FTS import/export. Verify actual placement, facing, animation,
+late-joining clients and ordinary dialogue/trade after two map restarts in multiplayer.
 
 Progression notices use local named NPC chat within chatRange of the NPC. An absent NPC uses a
 private character notification. Mute's locked introduction uses gestures in his own conversation.

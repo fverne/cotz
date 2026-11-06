@@ -2,16 +2,29 @@ PLUGIN.name = "First Time Setup"
 PLUGIN.author = "gumlefar"
 PLUGIN.description = "A plugin that lets you spawn in a map preset of containers and advanced vendors, and set initial plugin data."
 
+local PLUGIN = PLUGIN
+
 PLUGIN.map_presets = {}
 
 ix.util.Include("presets/sh_rp_marsh_cs.lua")
 ix.util.Include("presets/sh_rp_pripyat_remaster.lua")
 ix.util.Include("presets/sh_rp_waystation.lua")
 ix.util.Include("presets/sh_rp_garbage_cotz.lua")
+ix.util.Include("sv_entities.lua")
 
 if SERVER then
 
 	PLUGIN.PluginDataDeployFunctions = {
+		["townnpcs"] = function(payload, map)
+			if map ~= game.GetMap() or payload == nil then return end
+			local townPlugin = ix.plugin.Get("townnpcs")
+			if not townPlugin then return end
+			townPlugin.spawnPoints = townPlugin.spawnPoints or {}
+			townPlugin.spawnPoints[map] = table.Copy(payload)
+			townPlugin.lastSpawnPositions = townPlugin.lastSpawnPositions or {}
+			townPlugin.lastSpawnPositions[map] = nil
+			townPlugin:SaveData()
+		end,
 		["anomalycontroller"] = function(payload, map)
 			ix.plugin.list["anomalycontroller"].anomalypoints[map] = payload
 		end,
@@ -49,6 +62,11 @@ if SERVER then
 	}
 
 	PLUGIN.PluginDataGetFunctions = {
+		["townnpcs"] = function()
+			local townPlugin = ix.plugin.Get("townnpcs")
+
+			return townPlugin and (townPlugin.spawnPoints or {})[game.GetMap()] or {}
+		end,
 		["anomalycontroller"] = function()
 			return ix.plugin.list["anomalycontroller"].anomalypoints[game.GetMap()]
 		end,
@@ -76,6 +94,9 @@ if SERVER then
 	}
 
 	PLUGIN.PluginDataFormatFunctions = {
+		["townnpcs"] = function(id, data)
+			return ix.plugin.Get("townnpcs"):FormatTownSpawnPoints(id, data)
+		end,
 		["anomalycontroller"] = function(id, data)
 			return "{ Vector("..data[1].x..","..data[1].y..","..data[1].z..") , "..tostring(data[2]).." , \""..tostring(data[3]).."\" }, \n"
 		end,
@@ -127,7 +148,7 @@ if SERVER then
 			self:SpawnContainer(containerdata)
 		end
 
-		-- Spawn generic entities ; Another plugin needs to persist them
+		-- Exported records opt into Helix persistence; legacy records retain their existing plugin ownership.
 		for _, entitydata in pairs(self.map_presets[game.GetMap()].entities) do
 			self:SpawnEntity(entitydata)
 		end
@@ -187,20 +208,6 @@ if SERVER then
 		ix.util.SpawnAdvVendor(vendordata.template, vendordata.position, vendordata.angles)
 	end
 
-	function PLUGIN:SpawnEntity(entitydata)
-		local ent = ents.Create(entitydata.class)
-		ent:SetPos(entitydata.position)
-		ent:SetAngles(entitydata.angles)
-		ent:Spawn()
-
-		local physObject = ent:GetPhysicsObject()
-
-		if (IsValid(physObject)) then
-			physObject:Sleep()
-			physObject:EnableMotion(false)
-		end
-	end
-
 	function PLUGIN:SaveData()
 		self:SetData({self.firstTimeSetupRun} or {false})
 	end
@@ -209,6 +216,25 @@ if SERVER then
 		self.firstTimeSetupRun = self:GetData()[1] or false
 	end
 end
+
+ix.command.Add("FTSDumpPersistentEntities", {
+	description = "Export the map's Helix-persistent entities as an FTS entities table in the server data folder.",
+	adminOnly = true,
+	OnRun = function(self, client)
+		if SERVER then
+			local filename, count = PLUGIN:DumpPersistentEntities()
+
+			if not filename then
+				return count
+			end
+
+			local message = string.format("Exported %d persistent entities to garrysmod/data/%s.", count, filename)
+			print("[FTS] " .. message)
+
+			return message
+		end
+	end,
+})
 
 ix.command.Add("FTSGetEntityVars", {
 	adminOnly = true,

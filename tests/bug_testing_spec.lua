@@ -37,6 +37,7 @@ check(PLUGIN:CanPlayerInteractItem(client) == nil, "arena allows later item vali
 client.GetLocalVar = function() return true end
 check(PLUGIN:CanPlayerInteractItem(client) == false, "arena spectators remain blocked")
 method("gamemodes/ix_cotz/plugins/suits/sh_plugin.lua", "function PLUGIN:EntityTakeDamage(")
+hook = {Run = function() end}
 client.IsPlayer = function() return true end
 client.Alive = function() return false end
 PLUGIN:EntityTakeDamage(client, {GetAttacker = function() error("dead suit processing continued") end})
@@ -69,7 +70,10 @@ function npc:GetAngles() return self.angles end
 function npc:SetAngles(angles) self.angles = angles end
 function npc:GetNetVar(key, default) return self.vars[key] or default end
 function npc:SetNetVar(key, value) self.vars[key] = value end
-ix = {type = {string = 1}, command = {Add = function(name, data) commands[name] = data end},
+function npc:SetTownSpawnAnim(animation) self.spawnAnimation = animation end
+function npc:SetAnim() end
+bit = {bor = function(first, second) return first + second end}
+ix = {type = {string = 1, optional = 8}, command = {Add = function(name, data) commands[name] = data end},
 	progression = {GetNPCFromName = function() return npc end}}
 game = {GetMap = function() return "test" end}
 local contact = {id = "mute", name = "Mute", map = "test"}

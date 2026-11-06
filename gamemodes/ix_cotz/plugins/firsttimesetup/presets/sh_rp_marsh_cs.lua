@@ -1038,6 +1038,7 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
   },
 
   plugindata = {
+    ["townnpcs"] = {},
     ["anomalycontroller"] = {
       { Vector(8676.5146484375,-11845.803710938,69) , 256 , "0011" }, 
       { Vector(9183.0615234375,-8733.1484375,69) , 256 , "0011" }, 

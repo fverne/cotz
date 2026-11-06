@@ -1547,6 +1547,7 @@ PLUGIN.map_presets["rp_pripyat_remaster"] = {
   },
   vendors = {},
   plugindata = {
+    ["townnpcs"] = {},
     ["anomalycontroller"] = {
       { Vector(4441.7749023438,8094.9291992188,61.515701293945) , 256 , "000000011" }, 
       { Vector(4225.908203125,8069.3413085938,52.060501098633) , 256 , "000000011" }, 

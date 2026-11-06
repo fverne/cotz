@@ -16,6 +16,8 @@ function ENT:SetupDataTables()
 	self:NetworkVar("String", 1, "Description")
 	self:NetworkVar("String", 2, "IdleAnim")
 	self:NetworkVar("String", 3, "SoundGroup")
+	-- Session-only override; vendor saves keep the configured idle and animation group.
+	self:NetworkVar("String", 4, "TownSpawnAnim")
 	self:NetworkVar("Int", 0, "AnimGroupId")
 end
 
@@ -208,6 +210,22 @@ function ENT:HasMoney(amount)
 end
 
 function ENT:SetAnim()
+	-- A placement pose must take priority over random gestures from the vendor's animation group.
+	local spawnAnim = self:GetTownSpawnAnim()
+	self.townSpawnAnim = spawnAnim
+	if spawnAnim ~= "" then
+		local sequence = self:LookupSequence(spawnAnim)
+		if sequence >= 0 then
+			self.ShouldResetSequence = false
+			if self:GetSequence() ~= sequence or self:IsSequenceFinished() then
+				self:ResetSequence(sequence)
+				self:SetCycle(0)
+			end
+
+			return
+		end
+	end
+
 	if (math.random(1, 100) < 50) and self:GetAnimGroupId() > 0 and not self.ShouldResetSequence then
 		local tab =
 			ix.npctemplates.animtemplates[ix.npctemplates.animtemplatestranslation[self:GetAnimGroupId()]]
@@ -397,7 +415,9 @@ else
 			self:CreateBubble()
 		end
 
-		if (self.nextAnimCheck or 0) < CurTime() or self.ShouldResetSequence then
+		local spawnAnim = self:GetTownSpawnAnim()
+		if (self.nextAnimCheck or 0) < CurTime() or self.ShouldResetSequence
+			or self.townSpawnAnim ~= spawnAnim or (spawnAnim ~= "" and self:IsSequenceFinished()) then
 			self:SetAnim()
 			self.nextAnimCheck = CurTime() + 15
 		end

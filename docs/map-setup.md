@@ -49,6 +49,7 @@ PLUGIN.map_presets["rp_your_map"] = {
 		["radiationcontroller"] = {},
 		["simplecrossserver"] = {},
 		["worlditemspawner"] = {},
+		["townnpcs"] = {},
 	},
 }
 ```
@@ -113,6 +114,18 @@ Each `vendors` entry needs `template`, `position`, and `angles`. Use
 with the template ID you chose. FTS has no vendor dump command, and it recreates
 vendors from templates rather than exporting their live edits or stock.
 
+Town contacts can also have several restart positions with individual animations. Place the contact,
+then stand at each intended location, face its desired direction and use
+`/TownNPCAddSpawnPoint <slug> [animation]`. The animation is a sequence supported by its model;
+`default` uses the normal vendor idle. Running the command near an existing point with an explicit
+animation updates that point. `/TownNPCExportSpawnPoints` prints the current map's complete
+`plugindata["townnpcs"]` entry for the preset; `/FTSDumpPluginData` exports its records to
+`FTSDump/townnpcs.txt` on the server. Keep a matching `vendors` entry to create the NPC.
+FTS saves these points only for the current map, with selection beginning on the next restart.
+See [town spawn points](../gamemodes/ix_cotz/plugins/townnpcs/README.md#alternate-spawn-positions)
+for the format and animation fallback rules. Existing worlds can use the point commands without
+rerunning setup.
+
 ### Generic entities and persistence
 
 Spawn and position the required services, then use `/FTSGetEntityVars` and copy
@@ -120,8 +133,18 @@ the client-console record into `entities`. This format contains only `class`,
 `position`, and `angles`. It does not preserve a custom model, skin, entity
 settings, wiring, or arbitrary prop state.
 
-**FTS does not persist generic entities itself.** Use the owning plugin's save
-support. Existing examples include:
+For scenery marked with Helix's **Make Persistent** property, run
+`/FTSDumpPersistentEntities`. This writes the current map's live persistent
+entities to `garrysmod/data/ftsdump/<map>_persistent_entities.txt` on the server.
+The file contains an `entities = { ... },` field to replace or merge into the
+preset. It includes model, skin, RGBA color, render mode/effects, materials,
+bodygroups, scale, collision group, and movement state. Color-tool edits on
+`prop_physics`, including transparency, are restored by FTS. Exported records
+are registered with Helix persistence when spawned. The dump does not change
+the live map. See the [FTS plugin guide](../gamemodes/ix_cotz/plugins/firsttimesetup/README.md)
+for the field details, limitations, and verification steps.
+
+Other generic records still need their owning plugin's save support. Existing examples include:
 
 | Entity | Plugin that saves it |
 | --- | --- |
@@ -132,7 +155,7 @@ support. Existing examples include:
 
 For scenery or another unsupported entity, inspect its persistence mechanism.
 Helix's [`persistence`](../gamemodes/helix/plugins/persistence.lua) plugin provides
-a property-menu persistence action, but FTS does not automatically mark entities
+a property-menu persistence action; FTS marks exported `persistent = true` records
 for it. Avoid assigning two persistence systems to the same entity. Verify the
 result after restarting; a frozen entity alone is not a saved entity.
 
@@ -282,7 +305,7 @@ Run these on the map you are authoring:
 These write to the **server's** `garrysmod/data/FTSDump/` directory, overwriting
 previous dumps:
 
-- One `<pluginid>.txt` for each of the eight controller tables.
+- One `<pluginid>.txt` for each of the eight controller tables, plus `townnpcs.txt` for town spawn points.
 - `cycliccontainers.txt` for containers with a nonempty cyclic category only.
 
 They are text fragments, not automatically loadable preset files. Remove the
@@ -331,6 +354,8 @@ The data assignment also has wider scope than the current map:
 - `anomalycontroller`, `eventcontroller`, and `hidestashspawner` receive entries
   for **every included preset map** in their in-memory map-indexed tables.
 - The other five controllers receive only the current map's flat table.
+- Optional `townnpcs` data replaces and saves only the current map's potential NPC placements;
+  its per-point animations and transforms apply after vendors load on the next restart.
 - Assignments replace the relevant tables; they do not merge existing edits.
 
 These tables are subsequently saved by their owning plugins. Defaults use local
