@@ -106,3 +106,13 @@ branch, use Back and Goodbye, confirm ordinary players can talk, and save/restar
 and dialogue bindings. Check trading, the single job specialty, progression branches, services, and pending reward claims.
 
 Runtime and design reference: [NPC overhaul](../../../../docs/npc-overhaul/README.md).
+
+## Sherpa and squad vendors
+
+[Sherpas](../sherpas/README.md) reuse this entity's appearance/animation behavior, **Edit Vendor**
+property and trading panel. The editor now accepts an explicit idle sequence and resolves animation
+group names to their installed numeric IDs. Sherpas trade real item instances through their own
+server endpoint and share the hideout transaction journal, rather than using NPC catalogue counts,
+progression rewards or restocking. Appearance-only controls are shown when editing a Sherpa.
+Standalone `ix_sherpa_vendor` placements share this plugin's save/load path; transient
+`ix_hideout_vendor` entities remain exclusively owned by hideout saves.

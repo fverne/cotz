@@ -129,6 +129,8 @@ class Lua:
 def main():
     lua = Lua()
     paths = list((ROOT / "ix_cotz/plugins/hideouts").rglob("*.lua"))
+    paths += list((ROOT / "ix_cotz/plugins/sherpas").rglob("*.lua"))
+    paths += list((ROOT / "ix_cotz/plugins/vendor_adv").rglob("*.lua"))
     paths += [
         ROOT / "ix_cotz/schema/libs/sh_savedtravel.lua",
         ROOT / "ix_cotz/schema/items/artifacts/sh_artifact_compass.lua",
@@ -169,7 +171,7 @@ def main():
             'net = {Receive = function() end}', "marker engine boundaries")
     for file in ("sh_definitions.lua", "sh_markers.lua", "sv_markers.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
-    for file in ("sv_repository.lua", "sv_instances.lua", "sv_hooks.lua"):
+    for file in ("sv_repository.lua", "sv_instances.lua", "sv_hooks.lua", "sv_ownership.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
     lua.run((HERE / "cases.lua").read_text(), "hideouts cases")
     lua.run("ix.meta = {inventory = {}, item = {}}; hook = {Run = function(name, ...) if PLUGIN[name] then return PLUGIN[name](PLUGIN, ...) end end}", "core setup")
@@ -221,11 +223,16 @@ def main():
     ):
         lua.run((ROOT / path).read_text(), path)
     lua.run('mysql.module = "sqlite"', "SQLite adapter")
-    for file in ("sh_definitions.lua", "sv_operations.lua", "sv_access.lua", "sv_containers.lua",
+    for file in ("sh_definitions.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua", "sv_containers.lua",
                  "sv_trading.lua", "sh_building.lua", "sv_travel.lua", "sh_management.lua", "sv_menus.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
+    lua.run("PLUGIN = {}; ix.char.RegisterVar = function() end", "sherpa shared setup")
+    lua.run((ROOT / "ix_cotz/plugins/sherpas/sh_plugin.lua").read_text(), "sherpa shared")
+    lua.run((ROOT / "ix_cotz/plugins/sherpas/sv_stock.lua").read_text(), "sherpa stock")
+    lua.run("sherpaPlugin = PLUGIN; PLUGIN = hideoutPlugin", "restore hideouts after sherpas")
     lua.run((HERE / "features_cases.lua").read_text(), "hideout feature cases")
     lua.run((HERE / "menus_cases.lua").read_text(), "hideout menu cases")
+    lua.run((HERE / "shared_storage_cases.lua").read_text(), "shared storage and sherpa cases")
     lua.run('ENT = {}; AddCSLuaFile = function() end', "marker entity setup")
     lua.run((ROOT / "ix_cotz/plugins/hideouts/entities/entities/ix_hideout_marker.lua").read_text(),
             "marker entity")

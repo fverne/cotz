@@ -117,7 +117,7 @@ Test("squad menu permits initial entrance placement but not a remote vendor rese
 	assert(not PLUGIN:HandleManagementAction(officer, record.id, 2, "", 0))
 	assert(PLUGIN:HandleManagementAction(officer, record.id, 1, "", 0))
 	PLUGIN.SpawnEntrances = spawn
-	assert(spawned and PLUGIN.state.entrances[record.entrance].invisible)
+	assert(spawned and not PLUGIN.state.entrances[record.entrance].invisible)
 	ix.squad.list.squad1.members[1] = 0
 	assert(not PLUGIN:HandleManagementAction(officer, record.id, 1, "", 0))
 end)

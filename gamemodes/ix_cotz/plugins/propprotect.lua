@@ -3,10 +3,10 @@ PLUGIN.name = "Basic Prop Protection"
 PLUGIN.author = "Chessnut - Small changes by gumlefar"
 PLUGIN.description = "Adds a simple prop protection system. Overridden to fix problems with automatic AdvDupe2 spawning"
 
-local function hideoutPermission(client, entity)
+local function hideoutPermission(client, entity, property)
 	local hideouts = ix.plugin.Get("hideouts")
 	if hideouts and hideouts.GetHideoutEntityPermission and IsValid(entity) then
-		return hideouts:GetHideoutEntityPermission(client, entity)
+		return hideouts:GetHideoutEntityPermission(client, entity, property)
 	end
 end
 
@@ -112,7 +112,7 @@ if (SERVER) then
 	end
 
 	function PLUGIN:CanProperty(client, property, entity)
-		local permission = hideoutPermission(client, entity)
+		local permission = hideoutPermission(client, entity, property)
 		if permission ~= nil then
 			if permission == false then return false end
 			return
@@ -168,7 +168,7 @@ else
 	end
 
 	function PLUGIN:CanProperty(client, property, entity)
-		local permission = hideoutPermission(client, entity)
+		local permission = hideoutPermission(client, entity, property)
 		if permission ~= nil then
 			if permission == false then return false end
 			return

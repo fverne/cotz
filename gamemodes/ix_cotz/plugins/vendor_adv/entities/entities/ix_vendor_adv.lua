@@ -289,7 +289,7 @@ if SERVER then
 			return
 		end
 
-		activator:dialogue(self.dialogueid, self)
+		activator:dialogue(ix.sherpa and ix.sherpa.IsVendor(self) and "sherpa" or self.dialogueid, self)
 	end
 
 	function ENT:SetDialogueID(value)

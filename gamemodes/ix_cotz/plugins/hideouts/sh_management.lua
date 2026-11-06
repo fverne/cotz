@@ -13,8 +13,12 @@ ix.command.Add("HideoutSquadGrant", {
 	adminOnly = true,
 	arguments = {ix.type.player, ix.type.string, ix.type.text},
 	OnRun = function(self, client, target, template, name)
-		local ok, reason = PLUGIN:GrantSquadHideout(target, template, name)
-		return ok and ("Created squad hideout #" .. reason .. ". Officers can now place its entrance.") or reason
+		local _, reason = PLUGIN:GrantSquadHideout(target, template, name, function(ok, result)
+			if IsValid(client) then
+				client:Notify(ok and "Created squad hideout #" .. result .. ". Officers can place its entrance." or result)
+			end
+		end)
+		return reason
 	end,
 })
 
@@ -107,7 +111,7 @@ ix.command.Add("HideoutTemplateContainer", {
 		if not PLUGIN:Persist() then template.containers[slotID] = previous return "Could not save the slot." end
 		for _, other in pairs(PLUGIN.instances) do
 			local otherRecord = PLUGIN:GetHideout(other.id)
-			if otherRecord.template == templateID and otherRecord.ownerType ~= "squad" then
+			if otherRecord.template == templateID then
 				other.containers = other.containers or {}
 				local definition = template.containers[slotID]
 				local entity = other.containers[slotID]

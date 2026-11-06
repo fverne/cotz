@@ -47,16 +47,11 @@ function PANEL:Init()
 		self.animdrop:AddChoice(key, key)
 	end
 
-	self.name = self:Add("DTextEntry")
-	self.name:Dock(TOP)
-	self.name:DockMargin(0, 4, 0, 0)
-	self.name:SetText(entity:GetDisplayName())
-	self.name:SetPlaceholderText( "Name" )
-	self.name.OnEnter = function(this)
-		if (entity:GetDisplayName() != this:GetText()) then
-			self:updateVendor("name", this:GetText())
-		end
-	end
+	self.idleAnim = self:Add("DTextEntry")
+	self.idleAnim:Dock(TOP)
+	self.idleAnim:SetText(entity:GetIdleAnim())
+	self.idleAnim:SetPlaceholderText("Idle animation sequence (blank selects automatically)")
+	self.idleAnim.OnEnter = function(entry) self:updateVendor("idleanim", entry:GetText()) end
 
 	self.name = self:Add("DTextEntry")
 	self.name:Dock(TOP)
@@ -314,6 +309,11 @@ function PANEL:Init()
 	end
 
 	self.lines = {}
+	if ix.sherpa and ix.sherpa.IsVendor(entity) then
+		for _, control in ipairs({self.templatedrop, self.load, self.dialogueid, self.money,
+			self.useMoney, self.sellScale, self.faction, self.items}) do control:SetVisible(false) end
+		return
+	end
 
 	for k, v in SortedPairs(ix.item.list) do
 		local mode = entity.items[k] and entity.items[k][VENDOR_MODE]

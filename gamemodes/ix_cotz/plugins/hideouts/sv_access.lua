@@ -22,7 +22,7 @@ end
 
 function PLUGIN:CanManageHideout(client, record)
 	local character = IsValid(client) and client:GetCharacter()
-	if not character or not record or record.deleting then return false end
+	if not character or not record or record.deleting or record.homeConflict or record.homePending then return false end
 	if record.ownerType ~= "squad" then return record.owner == character:GetID() end
 	local rank = self:GetSquadRank(client, record)
 
@@ -31,7 +31,7 @@ end
 
 function PLUGIN:CanAccess(client, record)
 	local character = IsValid(client) and client:GetCharacter()
-	if not character or not record or record.deleting or record.frozen then return false end
+	if not character or not record or record.deleting or record.frozen or record.homeConflict or record.homePending then return false end
 	if record.ownerType == "squad" then
 		local squad = ix.squad and ix.squad.list[record.squadID]
 		if not squad or ix.squad.cross and ix.squad.cross.Enabled()
@@ -68,7 +68,8 @@ function PLUGIN:CheckSquadRole(client, record, minimum, callback)
 	end)
 end
 
-function PLUGIN:GrantSquadHideout(client, templateID, name)
+function PLUGIN:GrantSquadHideout(client, templateID, name, callback)
+	if not self.operationsReady then return false, "Hideout persistence is still initializing." end
 	local character = client:GetCharacter()
 	local squadID = character and character:GetSquadID()
 	if not squadID or squadID == "NULL" or not self.state.templates[templateID] then
@@ -81,14 +82,40 @@ function PLUGIN:GrantSquadHideout(client, templateID, name)
 	end
 	local id = tostring(self.state.nextID)
 	self.state.nextID = self.state.nextID + 1
-	self.state.hideouts[id] = {
+	local record = {
 		id = id, ownerType = "squad", squadID = squadID, access = "squad", name = name,
 		template = templateID, entrance = "squad:" .. id, guests = {}, containers = {},
 		furnishings = {}, shell = {}, seeds = {},
 	}
-	if not self:Persist() then self.state.hideouts[id] = nil return false, "Could not save hideout." end
+	-- Save an unusable pending record first so a crash cannot orphan a global ownership claim.
+	record.homePending = true
+	self.state.hideouts[id] = record
+	if not self:Persist() then
+		self.state.hideouts[id] = nil
+		return false, "Could not save the pending hideout."
+	end
+	self:ClaimSquadHome(record, function(ok, reason)
+		if self:GetHideout(id) ~= record or record.deleting then
+			if ok then self:ReleaseSquadHome(record, function() end) end
+			if callback then callback(false, "Squad hideout provisioning was cancelled.") end
+			return
+		end
+		if ok then
+			record.homePending = nil
+			ok = self:Persist()
+			if not ok then
+				self.state.hideouts[id] = nil
+				self:ReleaseSquadHome(record, function() end)
+				reason = "Could not save hideout."
+			end
+		else
+			self.state.hideouts[id] = nil
+			self:Persist()
+		end
+		if callback then callback(ok, ok and id or reason) end
+	end)
 
-	return true, id
+	return true, "Reserving the squad hideout."
 end
 
 function PLUGIN:PlaceSquadEntrance(client, record)
@@ -113,7 +140,7 @@ function PLUGIN:PlaceSquadEntrance(client, record)
 	local previous = self.state.entrances[record.entrance]
 	self.state.entrances[record.entrance] = {
 		pos = trace.HitPos + trace.HitNormal * 3, angles = trace.HitNormal:Angle(),
-		outside = client:GetPos(), invisible = true, hideout = record.id,
+		outside = client:GetPos(), invisible = false, hideout = record.id,
 	}
 	if not self:Persist() then
 		self.state.entrances[record.entrance] = previous
@@ -138,6 +165,7 @@ function PLUGIN:Think()
 	for _, instance in pairs(self.instances) do
 		if instance.state == "active" then
 			self:EnforceAccess(instance)
+			self:AuditContainerAccess(instance)
 			if self.AuditVendor then self:AuditVendor(instance) end
 		end
 	end

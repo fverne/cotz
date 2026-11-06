@@ -26,7 +26,33 @@ function PLUGIN:CanUseContainer(client, record, slotID)
 	local character = IsValid(client) and client:GetCharacter()
 	if not slot or not character or not self:CanAccess(client, record) then return false end
 
+	if record.ownerType == "squad" then
+		local rank = self:GetSquadRank(client, record)
+
+		return rank ~= nil and rank >= (slot.minimumRank or 0)
+	end
+
 	return record.owner == character:GetID() or slot.public == true
+end
+
+function PLUGIN:CanManageContainer(client, record, slotID)
+	return self:CanManageHideout(client, record) and self:CanUseContainer(client, record, slotID)
+end
+
+function PLUGIN:SetContainerRank(client, record, slotID, minimum)
+	if minimum ~= 0 and minimum ~= 1 and minimum ~= 2 then return false, "Invalid storage access." end
+	local slot = record and self:GetContainer(record, slotID)
+	if not slot or record.ownerType ~= "squad" or not self:CanManageContainer(client, record, slotID) then
+		return false, "Only authorized officers or leaders can change storage access."
+	end
+	if minimum > self:GetSquadRank(client, record) then return false, "That access requires the leader." end
+	local previous = slot.minimumRank
+	slot.minimumRank = minimum
+	if not self:Persist() then slot.minimumRank = previous return false, "Could not save storage access." end
+	local inventory = slot.inventoryID and ix.inventory.Get(slot.inventoryID)
+	if inventory then self:CloseInventoryStorage(inventory) end
+
+	return true, "Storage access updated."
 end
 
 function PLUGIN:IsNearUtility(client, entity)
@@ -38,7 +64,7 @@ function PLUGIN:IsNearUtility(client, entity)
 		and client:GetPos():DistToSqr(entity:GetPos()) <= USE_DISTANCE_SQUARED
 end
 
-function PLUGIN:LoadOwnedInventory(record, key, state, inventoryType, width, height, callback)
+function PLUGIN:LoadOwnedInventory(record, key, state, inventoryType, width, height, callback, saveAssignment)
 	local loadKey = record.id .. ":" .. key
 	if self.inventoryLoads[loadKey] then
 		if #self.inventoryLoads[loadKey] >= 64 then return end
@@ -59,7 +85,8 @@ function PLUGIN:LoadOwnedInventory(record, key, state, inventoryType, width, hei
 		loaded.vars.hideoutSlot = key
 		if not state.inventoryID then
 			state.inventoryID = loaded:GetID()
-			if not self:Persist() then
+			local saved = saveAssignment and saveAssignment() or not saveAssignment and self:Persist()
+			if not saved then
 				ErrorNoHalt("[Hideouts] Could not persist inventory assignment " .. loadKey .. "\n")
 				return
 			end
@@ -81,7 +108,7 @@ function PLUGIN:RestoreStorage(instance, callback)
 		local record = self:GetHideout(instance.id)
 		local template = self:GetTemplate(record)
 		instance.containers = {}
-		for slotID, definition in pairs(record.ownerType ~= "squad" and template.containers or {}) do
+		for slotID, definition in pairs(template.containers or {}) do
 			local slot = self:GetContainer(record, slotID)
 			if not slot then callback(false, "A saved container's recipe changed: " .. slotID) return end
 			local recipe = self.containerRecipes[definition.recipe]
@@ -136,7 +163,7 @@ end
 function PLUGIN:OpenStorage(client, entity)
 	if not self:IsNearUtility(client, entity) then return end
 	local record = self:GetHideout(entity.ixHideout)
-	if entity.ixHideoutSlot and record.owner == client:GetCharacter():GetID() then
+	if entity.ixHideoutSlot and self:CanManageContainer(client, record, entity.ixHideoutSlot) then
 		if (client.cotzHideoutMenuOpen or 0) > CurTime() then return end
 		client.cotzHideoutMenuOpen = CurTime() + 0.5
 		self:ShowContainerMenu(client, entity)
@@ -147,7 +174,9 @@ end
 
 function PLUGIN:SetContainerPublic(client, record, slotID, public)
 	local slot = self:GetContainer(record, slotID)
-	if not slot or record.owner ~= client:GetCharacter():GetID() then return false, "Only the owner can change this." end
+	if not slot or record.ownerType == "squad" or not self:CanManageContainer(client, record, slotID) then
+		return false, "Only the owner can change this."
+	end
 	local previous = slot.public
 	slot.public = public == true
 	if not self:Persist() then slot.public = previous return false, "Could not save access." end
@@ -161,8 +190,8 @@ function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
 	local slot, definition = self:GetContainer(record, slotID)
 	local instance = record and self.instances[record.id]
 	local entity = instance and instance.containers and instance.containers[slotID]
-	if not slot or record.owner ~= client:GetCharacter():GetID() or not self:IsNearUtility(client, entity) then
-		return false, "The owner must stand near that container."
+	if not slot or not self:CanManageContainer(client, record, slotID) or not self:IsNearUtility(client, entity) then
+		return false, "An authorized owner or squad officer must stand near that container."
 	end
 	if expectedTier ~= nil and expectedTier ~= (slot.tier or 0) then
 		return false, "That container has already changed. Reopen management."
@@ -182,10 +211,15 @@ function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
 	self:LoadOwnedInventory(record, slotID, slot, "cotzHideoutContainer", slot.width or 1, slot.height or 1,
 		function(storage)
 			if not IsValid(client) or client:GetCharacter() ~= character or not self:IsNearUtility(client, entity)
+				or not self:CanManageContainer(client, record, slotID)
 				or (slot.tier or 0) + 1 ~= tierNumber or input.invID ~= inventory:GetID() then return end
 			self:CloseInventoryStorage(storage)
 			self:CommitOperation(client, record, {
 				item = input, from = inventory, consume = true,
+				rank = record.ownerType == "squad" and math.max(1, slot.minimumRank or 0) or nil,
+				authorize = function()
+					return self:IsNearUtility(client, entity) and self:CanManageContainer(client, record, slotID)
+				end,
 				payload = {kind = "upgrade", slot = slotID, tier = tierNumber, width = tier.width, height = tier.height},
 			}, function(ok, reason)
 				if ok then
@@ -320,4 +354,18 @@ function PLUGIN:CloseStorage(instance, onlyClient)
 		if inventory then self:CloseInventoryStorage(inventory, onlyClient) end
 	end
 	if self.CloseShop then self:CloseShop(instance, onlyClient) end
+end
+
+function PLUGIN:AuditContainerAccess(instance)
+	local record = self:GetHideout(instance.id)
+	for slotID, slot in pairs(record and record.containers or {}) do
+		local inventory = slot.inventoryID and ix.inventory.Get(slot.inventoryID)
+		if inventory then
+			for _, client in ipairs(table.Copy(inventory:GetReceivers())) do
+				if not IsValid(client) or not self:CanUseContainer(client, record, slotID) then
+					self:CloseInventoryStorage(inventory, client)
+				end
+			end
+		end
+	end
 end

@@ -7,10 +7,14 @@ function PLUGIN:CanBuildInHideout(client)
 
 	return instance and instance.state == "active" and not instance.saving
 		and self:Contains(client:GetPos(), instance.mins, instance.maxs)
-		and record.ownerType == "squad" and self:CanManageHideout(client, record) or false
+		and self:CanManageHideout(client, record) or false
 end
 
-function PLUGIN:GetHideoutEntityPermission(client, entity)
+function PLUGIN:GetHideoutEntityPermission(client, entity, property)
+	if entity:GetClass() == "ix_hideout_vendor" then
+		if property == "vendor_edit" then return client:IsAdmin() end
+		if client:IsAdmin() and (property == "skin" or property == "bodygroups") then return true end
+	end
 	local id = SERVER and entity.ixHideout or entity:GetNetVar("cotzHideoutID")
 	local memberID = SERVER and self.members[client] or client:GetLocalVar("hideout")
 	if not id then
@@ -24,11 +28,6 @@ function PLUGIN:GetHideoutEntityPermission(client, entity)
 	if SERVER then
 		local instance = self.instances[id]
 		if not instance or instance.state ~= "active" or instance.saving or memberID ~= id then return false end
-		local record = self:GetHideout(id)
-		if record.ownerType ~= "squad" then
-			if instance.props[entity] then return nil end
-			return false
-		end
 		return self:CanBuildInHideout(client) and (instance.props[entity] == true or instance.vendor == entity)
 	end
 
@@ -76,7 +75,10 @@ function PLUGIN:CanTool(client, trace, tool)
 end
 
 function PLUGIN:CanProperty(client, property, entity)
-	local allowed = self:GetHideoutEntityPermission(client, entity)
+	if property == "vendor_edit" and entity:GetClass() == "ix_hideout_vendor" then
+		return client:IsAdmin()
+	end
+	local allowed = self:GetHideoutEntityPermission(client, entity, property)
 	if allowed == false then return false end
 	if allowed == true then
 		if entity:GetClass() == "ix_hideout_marker" then return end
@@ -98,7 +100,7 @@ if SERVER then
 	function PLUGIN:PlayerSpawnProp(client, model)
 		local instance = self.instances[self.members[client]]
 		local record = instance and self:GetHideout(instance.id)
-		if record and record.ownerType == "squad" and not self:CanBuildInHideout(client) then return false end
+		if record and not self:CanBuildInHideout(client) then return false end
 
 		return previousSpawn(self, client, model)
 	end

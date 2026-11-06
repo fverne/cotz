@@ -19,7 +19,7 @@ function PLUGIN:IsManagementLocation(client, record, scope, slotID)
 	if scope == "vendor" then return self:IsNearUtility(client, instance.vendor) end
 	if scope == "container" then
 		local entity = instance.containers and instance.containers[slotID]
-		return self:IsNearUtility(client, entity) and self:CanUseContainer(client, record, slotID)
+		return self:IsNearUtility(client, entity) and self:CanManageContainer(client, record, slotID)
 	end
 
 	return false
@@ -69,7 +69,7 @@ end
 function PLUGIN:ShowContainerMenu(client, entity)
 	if not self:IsNearUtility(client, entity) then return end
 	local record = self:GetHideout(entity.ixHideout)
-	if record.owner ~= client:GetCharacter():GetID() then return end
+	if not self:CanManageContainer(client, record, entity.ixHideoutSlot) then return end
 	local slot, definition = self:GetContainer(record, entity.ixHideoutSlot)
 	if not slot then return end
 	local recipe = self.containerRecipes[definition.recipe]
@@ -85,6 +85,9 @@ function PLUGIN:ShowContainerMenu(client, entity)
 	net.WriteString((recipe and recipe.name or "Storage container"):sub(1, 128))
 	net.WriteUInt(slot.tier or 0, 8)
 	net.WriteBool(slot.public == true)
+	net.WriteBool(record.ownerType == "squad")
+	net.WriteUInt(slot.minimumRank or 0, 2)
+	net.WriteUInt(self:GetSquadRank(client, record) or 0, 2)
 	net.WriteUInt(slot.width or 0, 6)
 	net.WriteUInt(slot.height or 0, 6)
 	net.WriteBool(item ~= nil)
@@ -124,7 +127,7 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier)
 		return ok
 	end
 	if not self:CanManageHideout(client, record) then return false end
-	local containerAction = action == 4 or action == 5 or action == 8
+	local containerAction = action == 4 or action == 5 or action == 8 or action >= 10 and action <= 12
 	if containerAction then
 		if scope ~= "container" or client.cotzHideoutMenu.slot ~= value then return false end
 	elseif scope == "container" then return false end
@@ -136,6 +139,8 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier)
 	elseif action == 5 then
 		local slot = self:GetContainer(record, value)
 		if slot then ok, reason = self:SetContainerPublic(client, record, value, not slot.public) end
+	elseif action >= 10 and action <= 12 then
+		ok, reason = self:SetContainerRank(client, record, value, action - 10)
 	elseif action == 8 then
 		local instance = self.instances[id]
 		self:OpenContainerInventory(client, instance.containers[value])

@@ -146,17 +146,26 @@ trade(clientA)
 check(first.received == 1 and shop:GetStock("rifle", first) == 1, "unaffordable purchase is rejected")
 first.sherpa = true
 trade(clientA)
-check(first.received == 2 and first.money == 0, "dev's existing Sherpa withdrawal stays free")
-check(shop:GetStock("rifle", first) == 0 and shop:GetStock("rifle", second) == 1,
-	"Sherpa withdrawal only consumes personal stock")
+check(first.received == 1 and first.money == 0, "Sherpa access grants cannot bypass ordinary vendor payment")
+local opened = 0
+environment.ix.sherpa = {
+	IsVendor = function(entity) return entity.sherpaMode == true end,
+	Open = function() opened = opened + 1 end,
+}
+shop.sherpaMode = true
+trade(clientA)
+check(opened == 1 and first.received == 1, "legacy trade requests to Sherpas use the instance trading endpoint")
+check(shop:GetStock("rifle", first) == 1, "Sherpa routing does not consume legacy counted stock")
+shop.sherpaMode = false
+first.sherpa = false
 trade(clientB)
 check(second.received == 2 and shop:GetStock("rifle", second) == 0,
-	"ordinary buyer retains stock after another character Sherpa withdrawal")
+	"ordinary buyers continue to consume their personal catalogue stock")
 trade(clientA)
-check(first.received == 2, "Sherpa cannot withdraw depleted personal stock")
+check(first.received == 1, "unaffordable purchases remain rejected after Sherpa routing")
 shop.items.rifle[4] = nil
 trade(clientA)
-check(first.received == 2, "Sherpa without explicit stock is not unlimited")
+check(first.received == 1, "unlimited catalogue stock still requires payment")
 trade(clientB)
 check(second.received == 3, "ordinary unlimited catalog entries still sell")
 clientB.ixVendorAdv = {invalid = true}
@@ -165,6 +174,6 @@ check(second.received == 3, "stale vendor sessions are rejected before dereferen
 clientB.GetCharacter = function() return nil end
 trade(clientB)
 check(second.received == 3, "characterless trade requests are rejected")
-check(saves == 5 and tradeEvents == 5, "rejected requests never trigger trade persistence/hooks")
+check(saves == 4 and tradeEvents == 4, "rejected requests never trigger trade persistence/hooks")
 
 print(string.format("PASS: %d personal-stock vendor trade checks", checks))

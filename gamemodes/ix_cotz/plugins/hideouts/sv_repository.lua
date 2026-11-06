@@ -92,6 +92,12 @@ function PLUGIN:GrantHideout(client, templateID, entranceID, name)
 	if not self.state.entrances[entranceID] then
 		return false, "Unknown entrance."
 	end
+	local limit = ix.config.Get("hideoutPersonalLimit", 0)
+	local owned = 0
+	for _, record in pairs(self.state.hideouts) do
+		if record.ownerType ~= "squad" and record.owner == character:GetID() then owned = owned + 1 end
+	end
+	if limit > 0 and owned >= limit then return false, "That character has reached the personal storage limit." end
 	local id = tostring(self.state.nextID or 1)
 	self.state.nextID = tonumber(id) + 1
 	self.state.hideouts[id] = {
@@ -211,7 +217,14 @@ function PLUGIN:DeleteHideoutRows(record, ids, callback)
 		self.state.retired[record.id] = table.Copy(record)
 	end
 	self.state.hideouts[record.id] = nil
-	callback(self:Persist(), "Hideout deleted.")
+	if not self:Persist() then
+		self.state.hideouts[record.id] = record
+		callback(false, "Could not save hideout deletion.")
+		return
+	end
+	self:ReleaseSquadHome(record, function(ok)
+		callback(ok, ok and "Hideout deleted." or "Hideout retired; its ownership claim could not be released.")
+	end)
 end
 
 function PLUGIN:GetItemLocation(item)

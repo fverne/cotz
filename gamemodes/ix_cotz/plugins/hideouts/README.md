@@ -3,7 +3,7 @@
 A Helix plugin for character-owned storage rooms and squad-owned interiors. The first entrant reserves a space
 in a configured remote map volume, pastes a shell using advdupeint, restores
 contents, and teleports inside. The last departure saves and removes the
-instance. A character may own several hideouts. Invited characters share the
+instance. A character may own several hideouts, subject to `hideoutPersonalLimit` (0 means unlimited). Invited characters share the
 same instance and keep it loaded when the owner leaves.
 
 Player and marker-editor menus use the shared [COTZ UI style](../../../../docs/ui-style.md), including
@@ -60,16 +60,16 @@ markers when copying and saving the shell in AdvDupe2. No point-placement comman
 | --- | --- |
 | Player spawn | Safe arrival candidate, with its own facing direction; up to 8 |
 | Exit / management | The exit entity and its player management menu; one |
-| Personal storage container | An independently installed/upgraded container; up to 32 unique slot IDs |
+| Storage container | An independently installed/upgraded container; up to 32 unique slot IDs |
 | Squad vendor | The default/reset position and rotation of the movable squad vendor; one |
 | Legacy recovery storage | Optional administrator recovery fixture for old `storageID` inventories; one |
 
 Markers use their exact entity origins and angles relative to the paste anchor. Place utility previews
 where the real console/crate/register belongs. A spawn marker's origin marks the player's **feet**;
-its yaw sets facing. Keep spawn points above the floor with room for a standing player. Only personal
-hideouts instantiate container markers; only squad hideouts instantiate the vendor. One shell can contain both.
+its yaw sets facing. Keep spawn points above the floor with room for a standing player. Both personal and squad
+hideouts instantiate storage container markers; only squad hideouts instantiate the vendor. One shell can contain both.
 
-For each personal container, choose a recipe and a permanent **slot ID** in its menu. New markers get
+For each storage container, choose a recipe and a permanent **slot ID** in its menu. New markers get
 an ID automatically; copied markers keep their ID, so rename copies to make separate containers.
 Keep the ID when moving/resaving a spot: its upgrades, sharing and inventory belong to that ID in each
 hideout. Do not reuse a slot for a different recipe; loading rejects recipe changes, duplicate slots,
@@ -78,7 +78,7 @@ Removed spots retain their saved inventories for `/HideoutRecoveryOpen ID SPOT`.
 
 Marker settings are saved by the duplicator, not in SQL. During hideout loading, markers are consumed
 and replaced with protected runtime utilities. Unmarked roles inherit manual template settings. If any
-personal container markers are present, they replace the entire manually configured container list.
+storage container markers are present, they replace the entire manually configured container list.
 Marker-based shells omit an unused legacy fixture unless one is marked or an old inventory needs recovery.
 Saved vendor movement continues to take precedence until **Reset vendor position** uses the marked default.
 
@@ -163,8 +163,9 @@ Each hand-in affects only that hideout's selected spot. These are starting balan
 administrators to review before provisioning. Existing installed capacities are saved; recipe edits
 cannot silently shrink them. Inventory-bearing bags are not accepted. There is no uninstall or refund.
 
-Existing banks and bank upgrades remain available through Ballast. Hideouts no longer open a bank
-or automatically move items between a former hideout stash and a bank. Old `storageID` stashes remain
+Existing banks and bank upgrades remain available through Ballast. The squad quartermaster also offers
+access to each visitor's existing personal bank. Bank contents remain separate from room containers
+and vendor stock; no items move automatically between them. Old `storageID` stashes remain
 accessible to administrators through `/HideoutLegacyStorage ID` near the old recovery fixture.
 
 ## Squad hideouts
@@ -173,11 +174,11 @@ Provision a target character's squad as an administrator:
 
     /HideoutSquadGrant "Player Name" cabin "Squad headquarters"
 
-One squad hideout may be provisioned per squad per map. The stable squad ID owns it, not its leader.
+A squad may own **one hideout across all maps sharing the schema database**. Provision it on its home map. The stable squad ID owns it, not its leader.
 Leaders/officers open **Tab → Squads → Squad hideout** to place the first entrance or relocate it.
 Aim at a nearby solid surface on the home map before opening the menu and choose **Place entrance
 where you are looking**. The same control is available when managing the existing entrance.
-This places its shared invisible interaction entity. Stand safely outside
+This places a shared, visible keypad entity. Existing invisible squad keypads become visible when entrances reload. Stand safely outside
 interior allocation areas. Everyone interacts with the same entity; it is not a private squad portal.
 Personal door keypads remain fixed. Relocation preserves occupied players' original return positions.
 
@@ -192,9 +193,23 @@ saved flag changes. It permits shared furnishings, supported appearance properti
 and furnishing removal. Template geometry, fixed utilities, unsafe tools, duplicators and arbitrary
 scripted entity spawning remain protected. Privileges end on exit or loss of rank/membership.
 
+### Shared containers and furnishings
+
+Squad rooms instantiate the same container slots, recipes, capacities and upgrade hand-ins as personal
+rooms. All members can use installed containers by default; outside visitors cannot use squad containers.
+An officer or leader uses a container to install/upgrade it and choose **Entire squad**, **Officers and
+leader**, or **Leader only** access for that slot. Officers cannot change or upgrade leader-only containers
+or set a restriction above their own rank. Leaders can change every slot. Changing access closes open
+sessions; transfers and periodic session audits recheck current membership and rank.
+
+Personal owners receive the same contextual furnishing tools as squad officers. Guests receive no
+building privileges. Personal containers keep their existing owner/private/invited-guest sharing rules.
+The personal room limit applies to new grants on this map and never removes rooms already owned.
+
 ### Vendor and treasury
 
-The vendor is a movable utility. Leaders/officers can move/freeze it with the physgun and use
+The vendor is an animated Sherpa quartermaster derived from the advanced vendor entity, using the
+shared [Sherpa implementation](../sherpas/README.md). It is a movable utility. Leaders/officers can move/freeze it with the physgun and use
 supported appearance tools. Its local transform survives unloading/reallocation. Removal and duplication
 are blocked. **Reset vendor position** is available from the entrance or interior exit management
 menu; the vendor's own **Manage squad hideout** button also exposes it. This restores the template
@@ -203,7 +218,18 @@ Place a **Squad vendor** marker in the shell to configure its reset point. For a
 `/HideoutTemplatePoint cabin vendor` remains available inside a loaded instance. A blocked reset point
 reports failure. Vendor movement/reset closes shop sessions.
 
-Use the vendor to shop or manage stock:
+Use the vendor's dialogue to trade, donate supplies, access the existing personal bank or manage stock.
+Stock opens in the advanced vendor's two-column trading window: vendor instances on the left, eligible
+player items on the right. Select an item and use Purchase/Donate; officers right-click vendor stock to
+set its whole-instance price or recover it. Options contains pages, transaction history, management and
+leader treasury withdrawals. The window does not remove rows optimistically when sending a request.
+
+Administrators use **Edit Vendor** for model, name, description, bubble, sound group, animation group and
+idle sequence. Skin/bodygroup properties remain available through the existing furnishing permissions.
+Appearance and movement survive unloading/reallocation. Reset vendor position preserves appearance.
+Catalogue/template/money controls do not apply to instance stock and are hidden for Sherpas.
+
+The stock rules remain:
 
 - Members donate actual items into squad-owned stock without payment. Donations are final squad property.
 - Leaders/officers publish prices, reprice, cancel listings (price zero), or recover stock without payout.
@@ -225,8 +251,8 @@ Players do not need chat commands. All hideout commands are restricted to admini
 | --- | --- |
 | Use the entrance keypad or squad entrance | Enter an accessible hideout; owners/officers can manage access and invitations |
 | Use the interior exit | Leave; owners/officers can manage invitations/access and reset the vendor |
-| Use a personal container | Owner: open, install/upgrade, change sharing; invited guests: open if Public |
-| Use the squad vendor | Shop, donate, manage listings, treasury/history; officers can open hideout management |
+| Use a container | Personal owner or authorized squad officer: open, install/upgrade, set sharing/rank; other permitted users: open |
+| Use the squad vendor | Dialogue opens trading, donations and personal bank; stock Options exposes authorized management and treasury actions |
 | Tab → Squads → Squad hideout | Leaders/officers can place the first entrance or relocate it on this map |
 
 Management requests bind to the active character and the relevant entrance, exit, vendor, or container.
@@ -288,7 +314,7 @@ replenish it on subsequent visits.
 Container state, templates, access, entrance placement and vendor transforms use plugin data.
 Ordinary item data/inventory creation/restoration and storage sessions use Helix APIs. The narrow
 `sv_operations.lua` adapter coordinates economic commits through the existing structured query
-builder and native transactions. It adds only an operation journal and shared squad treasury table;
+builder and native transactions. It uses an operation journal, treasury table and squad-home claim table;
 it does not replace normal inventory/item persistence. MySQL requires mysqloo transaction support
 and InnoDB for `ix_items`, `ix_characters` and the two new tables. Engine compatibility is checked;
 this plugin never converts existing tables. SQLite transactions support local tests/development.
@@ -301,6 +327,14 @@ its operation token rather than issuing a speculative refund or replay. Lost com
 are checked against receipts. After disconnect/session loss, an old character object cannot save over
 a newer session; its next selection refreshes authoritative character data. Resolve the database issue
 and restart to restore authoritative rows; do not hot-reload during pending economic work.
+
+The `ix_hideout_homes` registry has one primary key per schema/squad. New grants persist a disabled
+pending record before reserving that key. Startup registers existing squad homes; if older saves contain
+several homes across maps, the first successfully registered home remains usable and conflicting records
+are blocked and logged. Their inventories and furnishings are retained for administrator recovery. Recover
+assets, then explicitly retire unwanted homes with `/HideoutDelete`; deleting a conflicting record cannot
+release another map's claim. Deploy all maps together so older servers cannot bypass the new registry.
+No existing home is silently moved or overwritten.
 
 The version-2 migration labels existing records as character-owned and initializes container state
 without resetting banks, inventory IDs, furnishings, item data or invitations. Deleted records retain
@@ -359,7 +393,9 @@ purchases, rollback, saved wallet changes, treasury overdrafts/demotion, vendor 
 destinations and cross-map arrival/rejection, alongside existing allocation and item persistence cases.
 Menu cases load the actual menu server module and cover container hand-ins/sharing/opening, invitation
 updates, guest exit, initial entrance placement, vendor reset, role/location/character changes, and
-administrator-only command counterparts.
+administrator-only command counterparts. Shared-storage cases also exercise squad rank restrictions,
+demotion during upgrades, global home claims, personal limits, and individual Sherpa custody/earnings
+transactions, including full inventories and database failures.
 Marker cases cover duplicator settings, exact transforms and spawn facings, replacement of markers
 in the full paste lifecycle, slot identity across cold reloads, recipe/duplicate/bounds validation,
 administrator editor sessions, tool permissions and marker-based vendor reset.
@@ -370,8 +406,8 @@ Test at least two occupants, two instances using the same template, repeated
 item transfers/unloads, restart recovery, map cleanup, and a simulated database
 failure before enabling player access.
 
-The feature smoke test additionally needs two real servers: verify invisible entrance interaction,
-offline shopping, container sharing/revocation, temporary tools on exit/demotion, vendor movement/reset,
+The feature smoke test additionally needs two real servers: verify visible entrance interaction and global squad-home uniqueness,
+offline shopping, per-slot squad ranks, container sharing/revocation, temporary tools on exit/demotion, vendor appearance/movement/reset,
 artifact arrival into unloaded hideouts, character switches, delayed connections, and MySQL failures.
 No running Garry's Mod development session or server dupe assets were available during implementation.
 For markers, also save/reload a real AdvDupe2 file with all roles, edit and resave a container without

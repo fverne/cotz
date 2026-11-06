@@ -13,6 +13,10 @@ ix.config.Add("hideoutStockHeight", 8, "Squad vendor stock height (applies to ne
 	category = "Hideouts", data = {min = 4, max = 20},
 })
 
+ix.config.Add("hideoutPersonalLimit", 0, "Maximum personal storage rooms per character on this map (0 is unlimited).", nil, {
+	category = "Hideouts", data = {min = 0, max = 32},
+})
+
 -- Administrators choose a recipe for each template spot; these do not install themselves.
 PLUGIN.containerRecipes = {
 	general = {

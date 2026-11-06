@@ -88,7 +88,13 @@ function PLUGIN:InitializeOperations()
 		read(treasury, function(_, treasuryFailure)
 			if treasuryFailure then return end
 			self:CheckTransactionalTables(function(supported)
-				if supported then self:RecoverUpgradeEntitlements(function(ok) self.operationsReady = ok end) end
+				if supported then
+					self:InitializeSquadHomes(function(owned)
+						if owned then
+							self:RecoverUpgradeEntitlements(function(ok) self.operationsReady = ok end)
+						end
+					end)
+				end
 			end)
 		end)
 	end)
@@ -335,9 +341,11 @@ function PLUGIN:CommitOperation(client, record, spec, callback)
 		callback(ok, reason, token)
 	end
 	local function commit(row)
-		if not IsValid(client) or client:GetCharacter() ~= character or not self:CanAccess(client, record)
-			or self:GetHideout(record.id) ~= record or record.deleting then
-			finish(false, "Your character or hideout access changed.")
+		local current = spec.resolve and spec.resolve() or self:GetHideout(record.id)
+		local accessible = spec.resolve ~= nil or self:CanAccess(client, record)
+		if not IsValid(client) or client:GetCharacter() ~= character or not accessible
+			or current ~= record or record.deleting or spec.authorize and not spec.authorize() then
+			finish(false, "Your character or vendor access changed.")
 			return
 		end
 		local queries = self:BuildOperationQueries(character, record, spec, token, row)

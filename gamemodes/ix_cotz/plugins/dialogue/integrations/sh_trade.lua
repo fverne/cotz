@@ -2,6 +2,7 @@ ix.dialogue = ix.dialogue or {}
 
 function ix.dialogue.OpenVendor(_, client, target)
 	if not SERVER then return end
+	if ix.sherpa and ix.sherpa.IsVendor(target) then return ix.sherpa.Open(client, target) end
 	local character = client:GetCharacter()
 	local items = {}
 	target.receivers[#target.receivers + 1] = client

@@ -31,7 +31,8 @@ function PLUGIN:SpawnEntrances()
 		entity:SetModel("models/props_lab/keypad.mdl")
 		entity.ixEntranceID = id
 		entity:Spawn()
-		if definition.invisible then entity:SetNoDraw(true) end
+		-- Old squad entrances were invisible; keep their saved transform but expose the keypad.
+		if definition.invisible and not definition.hideout then entity:SetNoDraw(true) end
 		self.entranceEntities[id] = entity
 	end
 end

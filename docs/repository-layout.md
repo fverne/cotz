@@ -58,7 +58,8 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `vendor_adv/definitions/` | Individual vendor appearances, identities, base items and dialogue bindings; explicit includes in libs/sh_npctemplates.lua. |
 | `dialogue/libs/sh_towncontacts.lua` | Shared current town work/progression actions; NPC root actions are declared in conversation files. |
 | `dialogue/dialogue/` | NPC conversation definitions, discovered by the custom dialogue loader. |
-| `hideouts/sv_*.lua` and `sh_*.lua` | Interior lifecycle, access, individual containers, squad shop, economic adapter and saved travel. |
+| `hideouts/sv_*.lua` and `sh_*.lua` | Shared personal/squad interiors and containers, rank access, unique squad-home claims, squad shop, economic adapter and saved travel. |
+| `sherpas/` | Reusable player/squad quartermasters, instance trading panel, stock persistence and dialogue; retains plugin ID `sherpas`. |
 | Other plugin `items/`, `entities/`, `derma/`, `libs/` | Files owned by the corresponding gameplay feature. |
 
 `gearcustomization/` owns the vendor appearance service, shared appearance API, menu
@@ -119,3 +120,8 @@ The workbook's existing-item comparator tab is reference data, not part of this 
 Those nested item versions were already outside Helix's item discovery depth. They remain inactive.
 Do not restore archived code by copying the entire archive into a live item or plugin directory;
 review its identifiers and dependencies first.
+
+Sherpas moved from `plugins/sherpas.lua` into `plugins/sherpas/` under the same plugin ID. Folder loading
+now registers its derived entities/dialogue before standalone plugins; runtime access to hideouts and
+advanced vendors is resolved after all plugins load. Its client trading panel resolves `ixVendorAdv`
+when opening a window, after advanced vendor panels exist. See the [Sherpa guide](../gamemodes/ix_cotz/plugins/sherpas/README.md).

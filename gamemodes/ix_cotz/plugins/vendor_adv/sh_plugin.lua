@@ -136,7 +136,9 @@ if SERVER then
 	function PLUGIN:SaveData()
 		local data = {}
 
-		for _, entity in ipairs(ents.FindByClass("ix_vendor_adv")) do
+		local vendors = ents.FindByClass("ix_vendor_adv")
+		table.Add(vendors, ents.FindByClass("ix_sherpa_vendor"))
+		for _, entity in ipairs(vendors) do
 			local bodygroups = {}
 
 			for _, v in ipairs(entity:GetBodyGroups() or {}) do
@@ -144,6 +146,9 @@ if SERVER then
 			end
 
 			data[#data + 1] = {
+				class = entity:GetClass(),
+				sherpaID = entity.sherpaID,
+				sherpaRecord = entity.sherpaRecord,
 				name = entity:GetDisplayName(),
 				description = entity:GetDescription(),
 				pos = entity:GetPos(),
@@ -171,7 +176,8 @@ if SERVER then
 
 	function PLUGIN:LoadData()
 		for _, v in ipairs(self:GetData() or {}) do
-			local entity = ents.Create("ix_vendor_adv")
+			local class = v.class == "ix_sherpa_vendor" and v.class or "ix_vendor_adv"
+			local entity = ents.Create(class)
 			entity:SetPos(v.pos)
 			entity:SetAngles(v.angles)
 			entity:Spawn()
@@ -204,7 +210,9 @@ if SERVER then
 			entity:SetAnimGroupId(v.animgroup or 0)
 			entity:SetIdleAnim(v.idleanim or "")
 			entity:SetBuyAll(v.buyall or false)
-			entity:SetSherpa(v.sherpa or false)
+			entity:SetSherpa(v.sherpa or class == "ix_sherpa_vendor")
+			entity.sherpaID, entity.sherpaRecord = v.sherpaID, v.sherpaRecord
+			if entity:GetSherpa() then ix.sherpa.EnsureIdentity(entity) end
 			if not v.sherpa then
 				ix.vendorStock.ApplyDefaults(entity.items)
 			end
@@ -276,8 +284,10 @@ if SERVER then
 			return
 		end
 
+		if client.ixVendorAdvEditing ~= entity then return end
 		local key = net.ReadString()
 		local data = net.ReadType()
+		if ix.sherpa and ix.sherpa.IsVendor(entity) and not ix.sherpa.ValidateAppearanceEdit(client, entity, key, data) then return end
 		local feedback = true
 
 		if key == "name" then
@@ -427,9 +437,17 @@ if SERVER then
 		elseif key == "soundgroup" then
 			entity:SetSoundGroup(data)
 		elseif key == "animgroup" then
-			entity:SetAnimGroupId(data)
+			for id, name in pairs(ix.npctemplates.animtemplatestranslation) do
+				if data == name then data = id break end
+			end
+			entity:SetAnimGroupId(tonumber(data) or 0)
+			entity:SetAnim()
+		elseif key == "idleanim" then
+			entity:SetIdleAnim(data)
+			entity:SetAnim()
 		end
 
+		if ix.sherpa and ix.sherpa.IsVendor(entity) then ix.sherpa.SaveAppearance(entity) end
 		PLUGIN:SaveData()
 
 		if feedback then
@@ -453,7 +471,9 @@ if SERVER then
 
 		local templateName = net.ReadString()
 
-		if CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil) then
+		if IsValid(entity) and client.ixVendorAdvEditing == entity
+			and CAMI.PlayerHasAccess(client, "Helix - Manage Vendors", nil)
+			and not (ix.sherpa and ix.sherpa.IsVendor(entity)) then
 			entity:LoadTemplate(templateName)
 		end
 	end)
@@ -470,7 +490,9 @@ if SERVER then
 		if not character or not IsValid(entity) or not entity:CanAccess(client) then
 			return
 		end
-		local isSherpaClient = character:HasSherpaVendor(entity:GetDisplayName())
+		-- Sherpa stock uses real item instances and its own authoritative transaction endpoint.
+		if ix.sherpa and ix.sherpa.IsVendor(entity) then return ix.sherpa.Open(client, entity) end
+		local isSherpaClient = false
 
 		if not IsValid(entity) or client:GetPos():Distance(entity:GetPos()) > 192 then
 			return
@@ -950,7 +972,7 @@ properties.Add("vendor_edit", {
 		if not IsValid(entity) then
 			return false
 		end
-		if entity:GetClass() ~= "ix_vendor_adv" then
+		if entity:GetClass() ~= "ix_vendor_adv" and not (ix.sherpa and ix.sherpa.IsVendor(entity)) then
 			return false
 		end
 		if not gamemode.Call("CanProperty", client, "vendor_edit", entity) then

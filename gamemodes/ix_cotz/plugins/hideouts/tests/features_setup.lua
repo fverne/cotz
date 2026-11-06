@@ -6,7 +6,7 @@ util.AddNetworkString = function() end
 local serial = 0
 util.SHA256 = function(value) serial = serial + 1 return "token" .. serial end
 net.Receive = function() end
-for _, method in ipairs({"WriteString", "WriteInt", "WriteBool", "WriteType"}) do net[method] = function() end end
+for _, method in ipairs({"WriteString", "WriteInt", "WriteBool", "WriteType", "WriteEntity"}) do net[method] = function() end end
 ix.util.Include = function() end
 ix.command.Add = function(name, definition) TEST_COMMANDS[name] = definition end
 ix.squad = {list = {}, cross = {Enabled = function() return false end}}
@@ -114,7 +114,7 @@ function FeatureReset()
 	ix.item.inventories = {[0] = {}}
 	ix.char.loaded = {}
 	ix.db = true
-	local tables = {"ix_items", "ix_inventories", "ix_characters", "ix_hideout_operations", "ix_hideout_treasuries"}
+	local tables = {"ix_items", "ix_inventories", "ix_characters", "ix_hideout_operations", "ix_hideout_treasuries", "ix_hideout_homes"}
 	for _, name in ipairs(tables) do
 		sql.Query("DROP TABLE IF EXISTS " .. name)
 	end
@@ -142,4 +142,20 @@ function FeatureHome(client, squad)
 		returnPoint = {Vector(10000, 0, 8), Angle(), "testmap"}}
 	instance.containers = {}
 	return instance, record
+end
+
+local entityMeta = getmetatable(NewEntity())
+for _, key in ipairs({"DisplayName", "Description", "IdleAnim", "SoundGroup", "NoBubble", "Sherpa", "AnimGroupId"}) do
+	entityMeta["Get" .. key] = function(self) return self[key] or (key == "AnimGroupId" and 0 or "") end
+	entityMeta["Set" .. key] = function(self, value) self[key] = value end
+end
+entityMeta.InitPhysObj = function() end
+entityMeta.SetAnim = function() end
+entityMeta.CanAccess = function() return true end
+entityMeta.GetNetVar = function(self, key) return self[key] end
+entityMeta.SetNetVar = function(self, key, value) self[key] = value end
+local originalPluginGet = ix.plugin.Get
+ix.plugin.Get = function(name)
+	if name == "vendor_adv" then return {SaveData = function() end} end
+	return originalPluginGet(name)
 end

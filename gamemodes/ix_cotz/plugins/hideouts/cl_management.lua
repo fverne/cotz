@@ -88,6 +88,7 @@ net.Receive("cotz/hideouts/container", function()
 	if IsValid(ix.gui.hideoutContainer) then ix.gui.hideoutContainer:Remove() end
 	local id, slot, name = net.ReadString(), net.ReadString(), net.ReadString()
 	local tier, public = net.ReadUInt(8), net.ReadBool()
+	local squad, minimumRank, rank = net.ReadBool(), net.ReadUInt(2), net.ReadUInt(2)
 	local width, height, hasUpgrade = net.ReadUInt(6), net.ReadUInt(6), net.ReadBool()
 	local required, nextWidth, nextHeight
 	if hasUpgrade then required, nextWidth, nextHeight = net.ReadString(), net.ReadUInt(6), net.ReadUInt(6) end
@@ -110,89 +111,24 @@ net.Receive("cotz/hideouts/container", function()
 	else
 		ix.cotzUI.Label(scroll, "Fully upgraded")
 	end
-	button(scroll, public and "Public: invited guests can access — make private"
-		or "Private: owner only — share with invited guests", function() sendManagement(panel, id, 5, slot) end)
-end)
-
-net.Receive("cotz/hideouts/shop-close", function()
-	if IsValid(ix.gui.hideoutShop) then ix.gui.hideoutShop:Remove() end
-end)
-
-net.Receive("cotz/hideouts/shop", function()
-	if IsValid(ix.gui.hideoutShop) then ix.gui.hideoutShop:Remove() end
-	local id, name, rank, balance = net.ReadString(), net.ReadString(), net.ReadInt(3), net.ReadUInt(32)
-	local commission = net.ReadUInt(7)
-	local page, pages, count = net.ReadUInt(5), net.ReadUInt(5), net.ReadUInt(5)
-	local panel, scroll = frame(name .. " — Squad vendor")
-	ix.gui.hideoutShop = panel
-	local function send(action, itemID, amount, revision)
-		if (panel.nextRequest or 0) > CurTime() then return end
-		panel.nextRequest = CurTime() + 0.5
-		net.Start("cotz/hideouts/shop-action")
-		net.WriteString(id)
-		net.WriteUInt(action, 3)
-		net.WriteUInt(itemID or 0, 32)
-		net.WriteUInt(amount or 0, 32)
-		net.WriteUInt(revision or 0, 32)
-		net.SendToServer()
-	end
-	if pages > 1 then
-		button(scroll, "Page " .. page .. " / " .. pages .. " — previous", function()
-			send(7, 0, math.max(1, page - 1))
-		end)
-		button(scroll, "Next page", function() send(7, 0, math.min(pages, page + 1)) end)
-	end
-	if rank >= 1 then
-		button(scroll, "Manage squad hideout", function() PLUGIN:RequestManagement(id, "vendor") end)
-	end
-	if rank >= 0 then
-		ix.cotzUI.Label(scroll, "Treasury: " .. balance .. " roubles — sale commission " .. commission .. "%", true)
-		button(scroll, "Recent squad transactions", function() send(6) end)
-		button(scroll, "Donate item (becomes squad property; no payment)", function()
+	if squad then
+		local labels = {[0] = "Entire squad", [1] = "Officers and leader", [2] = "Leader only"}
+		button(scroll, "Storage access: " .. labels[minimumRank], function()
 			local menu = ix.cotzUI.Menu()
-			for _, item in pairs(LocalPlayer():GetCharacter():GetInventory():GetItems(true)) do
-				menu:AddOption(item:GetName(), function()
-					ix.cotzUI.Query("This donation becomes squad property and pays you nothing.", "Donate item",
-						"Donate", function() send(2, item:GetID()) end, "Cancel")
-				end)
+			for minimum = 0, rank do
+				menu:AddOption(labels[minimum], function() sendManagement(panel, id, 10 + minimum, slot) end)
 			end
 			menu:Open()
 		end)
-		if rank == 2 then
-			button(scroll, "Withdraw treasury funds", function()
-				ix.cotzUI.StringRequest("Treasury", "Amount in roubles", "", function(value)
-					send(5, 0, math.Clamp(math.floor(tonumber(value) or 0), 0, 2147483647))
-				end)
-			end)
-		end
+	else
+		button(scroll, public and "Public: invited guests can access — make private"
+			or "Private: owner only — share with invited guests", function() sendManagement(panel, id, 5, slot) end)
 	end
-	for _ = 1, count do
-		local itemID, itemName, description = net.ReadUInt(32), net.ReadString(), net.ReadString()
-		local price, revision = net.ReadUInt(32), net.ReadUInt(32)
-		local control = button(scroll, itemName .. " — " .. (price > 0 and (price .. " roubles") or "Unlisted"),
-			function()
-				local menu = ix.cotzUI.Menu()
-				if price > 0 then
-					menu:AddOption("Buy whole item for " .. price, function()
-						ix.cotzUI.Query(description .. "\n\nTotal: " .. price .. " roubles", "Confirm purchase",
-							"Buy", function() send(1, itemID, price, revision) end, "Cancel")
-					end)
-				end
-				if rank >= 1 then
-					menu:AddOption("Publish/reprice", function()
-						ix.cotzUI.StringRequest(
-							"Listing", "Whole item price (0 cancels listing)", tostring(price),
-							function(value)
-								local amount = math.Clamp(math.floor(tonumber(value) or 0), 0, 2147483647)
-								send(3, itemID, amount, revision)
-							end
-						)
-					end)
-					menu:AddOption("Recover stock (no payout)", function() send(4, itemID) end)
-				end
-				menu:Open()
-			end)
-		control:SetTooltip(description)
+end)
+
+net.Receive("cotz/hideouts/shop-close", function()
+	if IsValid(ix.gui.vendor) and ix.gui.vendor.entity:GetClass() == "ix_hideout_vendor" then
+		ix.gui.vendor:Remove()
 	end
 end)
 
