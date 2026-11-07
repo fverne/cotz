@@ -107,6 +107,101 @@ Purchase permission is distinct from a free item. Shared upgrade families enforc
 milestones even when sellers differ, including Old Timer OT12 before Quartermaster's knife4.
 The [equipment index](../../../../docs/npc-overhaul/unlock-ledger.md) lists current allocations.
 
+### Gun upgrade chains
+
+Five gun routes in `definitions/sh_equipment.lua` cover all 122 purchasable guns, including
+all 37 guns in Haggler's current catalogue. They add purchase-milestone prerequisites through the
+existing catalogue compiler. The eight reserved guns remain outside these five chains.
+
+| Route | Guns | Coverage |
+| --- | ---: | --- |
+| Sidearm | 30 | Every gun configured for the secondary slot, including the short .410 Henry |
+| Eastern close-range | 21 | Eastern SMGs, PDWs, shotguns and Obrez variants |
+| Eastern rifles | 21 | Eastern-pattern carbines, rifles, machine guns and precision rifles |
+| Western close-range | 27 | Western SMGs, PDWs, shotguns and pistol-calibre carbines |
+| Western rifles | 23 | Western sporting rifles, military rifles and precision rifles |
+
+Sidearm order (item IDs):
+
+```text
+nagantrev → g2contender → tokarev → m1917 → makarov → brhp →
+cz52 → fort12 → beretta92 → rugermk3 → c96 → lugerp08 →
+p99 → glock17 → m1911 → glock18 → taurusjudge → g2contender500 →
+stechaps → mr96 → lax410s → swr8 → swmodel29 → deagle →
+taurusragingbull → deagle44 → mateba → fiveseven → sw500 → m1911chic
+```
+
+Eastern close-range order (item IDs):
+
+```text
+toz106 → toz34short → ppsh → toz66short → mp27 → skorpion →
+kiparis → obrez → obrezmalfunction → toz34 → toz66 → toz194 →
+mp153 → pp2000 → gepardpdw → pp19 → pp1901vityaz → sr2 →
+saiga12 → saiga410 → toz34special
+```
+
+Eastern rifles order (item IDs):
+
+```text
+aks74u → sks → ak74 → saigasemi545 → akm → saigasemi →
+aek971 → rk95 → mosin → an94k → ak12 → svt40 →
+9a91 → rpk → dp28 → sv98 → asval → svd →
+sr3m → vss → pkm
+```
+
+Western close-range order (item IDs):
+
+```text
+sten → ij600 → mac11 → mp34 → c96carbine → mp40 →
+m3supershort → uzi → mp18 → mp5k → m1887 → stoegerddshort →
+mossberg500 → kp31 → sterling → lax410 → mp9a1 → m3super90 →
+stoegerdd → mp5 → ithaca37 → rem870ae → ump45 → ar159mm →
+m1928 → p90 → striker
+```
+
+Western rifles order (item IDs):
+
+```text
+sako85varmint → w9422 → ruger1022 → rugermini14 → sako85nato → w1895 →
+w9422357 → m16a4 → lr300 → famas → sg552 → l85 →
+g36c → aug → lax44 → sako85 → f2000 → hk416 →
+trg42 → g3a3 → fnfal → m14 → l115
+```
+
+Close-range groups shotguns, SMGs and PDWs with the pistol-calibre AR15 9mm/C96 carbine and
+the shortened Obrez rifles. The rifle chains retain rifle-calibre carbines such as AKS-74U and
+G36C, the 9x39mm assault rifles, precision rifles and machine guns. The short .410 Henry remains
+in the sidearm chain because its item definition uses the secondary slot. Within each regional
+pair, the split preserves relative order from the former combined chain.
+
+The reference is local `master` at `6b8d23e4`: Haggler's complete surplus/workshop progression
+and Quartermaster's military imports. Master's obsolete `g2500mag` and `rem870` references use the
+current `g2contender500` and `rem870ae` IDs. The weapon kits select `task_reward_weapon_*` pools;
+those weighted gun entries match master. Their overlapping bands inform the broad progression,
+but exact ordering must respect current authored milestone dependencies. Lower prices are preferred
+when both milestones are otherwise available; this is not a strict ranking of combat effectiveness.
+The Eastern route includes the Finnish RK 95 as an AK-pattern weapon, following master's AK branch.
+Other Finnish guns, including KP-31 and the Sako precision rifles, use the Western route.
+
+Each listed weapon requires the preceding weapon's canonical purchase milestone, followed by its
+own milestone. Weapons sharing a milestone unlock together. Owning, buying or handing in the
+preceding gun is not required. Reserved weapons remain excluded. Crate contents, prices,
+stock and saved progression records are unchanged.
+
+All five chains cross the existing contact story branches, so they are connected rather than
+independent specialisations. For example, the Western rifle route requires Haggler's Marlin (HG24)
+before Quartermaster's M16A4 (QM01); the Eastern rifle route requires Cleaner's AKM (CL27) before
+Quartermaster's semi-automatic Saiga (QM02). The former direct Saiga-410 (SP20) → semi-automatic
+Saiga (QM02) chain edge is removed by the close-range/rifle split. Shared milestones can still gate
+other equipment and services at those steps. Completed milestones keep their purchase permissions;
+new prerequisites govern unfinished milestones. Fully independent paths would also require changes
+to shared contact progression branches.
+
+Run `luatex --luaonly tests/townnpcs_spec.lua` for exhaustive gun/slot coverage, graph-cycle checks,
+canonical predecessors and cross-contact purchase transitions. In multiplayer, check fresh-character
+milestone access across Haggler, Cleaner, Spoor and Quartermaster, plus an existing character with
+completed purchase milestones.
+
 ## Catalogue spacing
 
 The first milestone at each active trader unlocks one or two purchases. The 131 formerly crowded

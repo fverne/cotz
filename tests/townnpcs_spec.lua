@@ -34,6 +34,7 @@ for path in itemFiles:lines() do
 			file:close()
 			local quantity = tonumber(source:match("ITEM.quantity = (%d+)"))
 			ix.item.list[id] = {name = id, price = 100, quantity = quantity,
+				weaponCategory = source:match([[ITEM.weaponCategory%s*=%s*"([^"]+)"]]),
 				isFieldCargo = path:find("/items/jobcargo/", 1, true) ~= nil}
 		end
 	end
@@ -750,6 +751,32 @@ end
 for id in pairs(ix.townNPCs.steps) do visit(id) end
 
 -- Reward overhaul: exhaustive acquisition coverage and shared, deterministic gates.
+local gunRoutes, gunRouteCount = {}, 0
+local gunSlotRoutes = {primary = 0, secondary = 0}
+for _, chain in ipairs(ix.townNPCs.upgradeChains) do
+	local firstItem = ix.item.list[chain[1]]
+	local slot = firstItem and firstItem.weaponCategory
+	if #chain > 2 and (slot == "primary" or slot == "secondary") then
+		gunRouteCount = gunRouteCount + 1
+		gunSlotRoutes[slot] = gunSlotRoutes[slot] + 1
+		for _, itemID in ipairs(chain) do
+			check(not gunRoutes[itemID], "each purchasable gun appears in exactly one full gun chain: " .. itemID)
+			check(not ix.townNPCs:IsPurchaseExcluded(itemID), "full gun chains exclude reserved weapons")
+			check(ix.item.list[itemID].weaponCategory == firstItem.weaponCategory,
+				"gun chains preserve the configured primary or secondary slot")
+			gunRoutes[itemID] = chain
+		end
+	end
+end
+check(gunRouteCount == 5, "there are five complete gun upgrade chains")
+check(gunSlotRoutes.primary == 4 and gunSlotRoutes.secondary == 1,
+	"four regional primary chains accompany one sidearm chain")
+for _, pair in ipairs({{"saiga410", "saigasemi"}, {"p90", "m16a4"}}) do
+	check(gunRoutes[pair[1]] ~= gunRoutes[pair[2]], "close-range weapons and rifles have separate chains")
+end
+for _, pair in ipairs({{"obrez", "toz106"}, {"ar159mm", "sten"}, {"aks74u", "ak74"}}) do
+	check(gunRoutes[pair[1]] == gunRoutes[pair[2]], "borderline weapons follow their documented role")
+end
 local gunFiles = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/newweapons"))
 local availableGuns, reservedGuns = 0, 0
 for path in gunFiles:lines() do
@@ -758,6 +785,7 @@ for path in gunFiles:lines() do
 		reservedGuns = reservedGuns + 1
 	else
 		check(ix.townNPCs.itemGates[itemID], "every non-reserved gun has a purchase route: " .. itemID)
+		check(gunRoutes[itemID], "every purchasable gun belongs to a full gun chain: " .. itemID)
 		availableGuns = availableGuns + 1
 	end
 end
@@ -974,6 +1002,29 @@ do
 				end
 			end
 		end
+	end
+	for _, transition in ipairs({{"akm", "saigasemi"}, {"w9422357", "m16a4"}}) do
+		local previous = ix.townNPCs.itemGates[transition[1]].id
+		local nextID = ix.townNPCs.itemGates[transition[2]].id
+		local buyer = character()
+		local state = ix.progression.GetCharacterProgression(buyer)
+		for parent in pairs(ancestors(nextID)) do
+			if parent ~= previous then state.lines[parent] = {completed = true} end
+		end
+		state.lines[nextID] = {active = true}
+		ix.progression.SetCharacterProgression(buyer, state)
+		check(not ix.progression.IsActive(buyer, nextID),
+			"Quartermaster's weapon milestone waits for the preceding seller's milestone")
+		state.lines[previous] = {completed = true}
+		ix.progression.SetCharacterProgression(buyer, state)
+		check(ix.progression.IsActive(buyer, nextID),
+			"completing the preceding seller's milestone opens the weapon milestone")
+		check(not ix.progression.CanBuyItem(buyer, "'Quartermaster'", transition[2]),
+			"the preceding weapon unlock does not grant the next purchase")
+		state.lines[nextID] = {completed = true}
+		ix.progression.SetCharacterProgression(buyer, state)
+		check(ix.progression.CanBuyItem(buyer, "'Quartermaster'", transition[2]),
+			"the next weapon becomes purchasable after its own milestone")
 	end
 	for item, slug in pairs(ix.townNPCs.canonicalSellers) do
 		check(ix.townNPCs.itemGates[item].npc == ix.townNPCs.contacts[slug].name,
