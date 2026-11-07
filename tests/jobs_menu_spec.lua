@@ -81,8 +81,14 @@ end}, jobs = {
 	list = {hunt = {}, survey = {}},
 	getFormattedName = function(job) return "Task " .. job.identifier end,
 	getFormattedDesc = function(job) return "Description with reward " .. job.reward end,
-	field = {OpenMenu = function(npc, kind) fieldActions[#fieldActions + 1] = {npc = npc, kind = kind} end},
+	field = {runtimeSettings = {markerSeconds = 10}},
 }}
+Vector = function() return {} end
+net = {Receive = function() end}
+dofile("gamemodes/ix_cotz/plugins/jobsystem/cl_fieldtasks.lua")
+ix.jobs.field.RequestAction = function(npc, action)
+	fieldActions[#fieldActions + 1] = {npc = npc, action = action}
+end
 dofile("gamemodes/ix_cotz/plugins/jobsystem/cl_plugin.lua")
 local menu = panel("ixCharacterJournalPanel")
 menu:Init()
@@ -90,7 +96,7 @@ check(menu.title.text == "TASKS · 0", "empty menu shows zero tasks")
 check(menu.journal.class == "DScrollPanel", "task list scrolls independently")
 check(menu.journal.children[1].text:find("No active tasks", 1, true), "empty menu explains how to find work")
 activeJobs = {
-	Zulu = {identifier = "survey", numberRec = 1, progress = 0, reward = "recorder", fieldTask = {kind = "sensor"}},
+	Zulu = {identifier = "survey", numberRec = 1, progress = 0, reward = "recorder", fieldTask = {kind = "sensor", stage = "deploy"}},
 	Alpha = {identifier = "hunt", numberRec = 4, progress = 2, reward = "bandages"},
 }
 menu:Think()
@@ -133,8 +139,8 @@ confirmation.accept()
 check(#sent == 1, "confirmation cannot abandon after a character switch")
 character = previousCharacter
 local fieldButtons = menu.journal.children[2].children[6].children
-fieldButtons[2]:DoClick()
-check(fieldActions[1].npc == "Zulu" and fieldActions[1].kind == "sensor", "field action uses its own assignment")
+fieldButtons[3]:DoClick()
+check(fieldActions[1].npc == "Zulu" and fieldActions[1].action == "deploy", "field action uses its own assignment")
 activeJobs.Alpha.progress = 4
 activeJobs.Alpha.isCompleted = true
 clock = 1

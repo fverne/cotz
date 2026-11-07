@@ -12,6 +12,7 @@ end
 SWEP.Author = "Chessnut"
 SWEP.Instructions = [[Primary Fire: Throw/Punch
 Secondary Fire: Knock/Pickup
+Secondary Fire on player (lowered): Pass through players for 60 seconds; right-click again to stop
 Secondary Fire + Mouse: Rotate Object
 Reload: Drop]]
 SWEP.Purpose = "Hitting things and knocking on doors."
@@ -450,6 +451,19 @@ function SWEP:SecondaryAttack()
 		data.filter = {self, self:GetOwner()}
 	local trace = util.TraceLine(data)
 	local entity = trace.Entity
+	local owner = self:GetOwner()
+	if not owner:IsWepRaised() and not self:IsHoldingObject()
+		and (owner.cotzHandsPassage or IsValid(entity) and entity:IsPlayer()) then
+		self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
+		if SERVER then
+			local enabled = not owner.cotzHandsPassage
+			owner:SetHandsPassage(enabled)
+			owner:Notify(enabled and "You can pass through other stalkers for one minute. Right-click to stop."
+				or "You will collide with other stalkers again.")
+		end
+
+		return
+	end
 
 	if CLIENT then
 		local viewModel = self:GetOwner():GetViewModel()

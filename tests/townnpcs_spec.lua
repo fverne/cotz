@@ -576,6 +576,12 @@ check(not incoming.ShouldAdd(nil, deliveryReader.client), "incoming delivery dia
 incomingJobs["'Ballast'"] = {rewardKey = "job:incoming", fieldTask = {
 	recipient = "'Ledger'", cargoName = "Landing record", stage = "carrying",
 }}
+SortedPairs = SortedPairs or pairs
+local previousFindCargo = ix.jobs.field.FindCargo
+ix.jobs.field.FindCargo = function() return nil end
+check(not incoming.ShouldAdd(nil, deliveryReader.client), "carrying state without the actual parcel stays hidden")
+check(#incoming.GetDynamicOptions(nil, deliveryReader.client) == 0, "missing cargo has no delivery option")
+ix.jobs.field.FindCargo = function() return {} end
 check(incoming.ShouldAdd(nil, deliveryReader.client), "the actual receiving contact exposes incoming cargo")
 local oldSortedPairs, oldCurTime = SortedPairs, CurTime
 SortedPairs, CurTime = pairs, function() return 100 end
@@ -599,6 +605,7 @@ incoming.ResolveDynamicOption(nil, deliveryReader.client, receivingVendor, incom
 check(deliveredCalls == 1, "incoming delivery dialogue rate-limits repeated requests on the server")
 incomingJobs["'Ballast'"].fieldTask.stage = "delivered"
 check(not incoming.ShouldAdd(nil, deliveryReader.client), "receipted cargo disappears from incoming delivery dialogue")
+ix.jobs.field.FindCargo = previousFindCargo
 ix.townNPCs.CanInteract, ix.jobs.field.DeliverToContact = previousInteract, previousDeliver
 SortedPairs, CurTime = oldSortedPairs, oldCurTime
 

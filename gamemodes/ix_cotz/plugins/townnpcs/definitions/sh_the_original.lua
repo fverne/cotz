@@ -59,6 +59,9 @@ PLUGIN:Register("the-original", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There is still that little matter we discussed. {details}",
+		jobReminder = "I haven't forgotten what we agreed. {details}",
+		jobFinished = "You see? Work worth doing. Now, what you're owed.",
 		delivery = "Bring it over. Let me have a look at what survived.",
 		completedGreeting = (
 			"Come to check another of my stories? All right. At least you usually bring a question worth "

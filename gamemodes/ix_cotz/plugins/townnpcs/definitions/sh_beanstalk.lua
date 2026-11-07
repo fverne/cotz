@@ -39,6 +39,9 @@ PLUGIN:Register("beanstalk", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "I need someone to stay with the equipment while it takes its readings. {details}",
+		jobReminder = "We still need those readings brought back. {details}",
+		jobFinished = "You brought it through. Thank you. I'll look at the recordings after we've settled your payment.",
 		completedGreeting = (
 			"Hello again. Keep clear of the tray, as usual. You know why I ask, which is a considerable "
 			.. "improvement on most conversations here."

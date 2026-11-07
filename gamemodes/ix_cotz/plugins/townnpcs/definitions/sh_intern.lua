@@ -44,6 +44,9 @@ PLUGIN:Register("intern", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "I have a survey I can use some help with. {details}",
+		jobReminder = "I'm keeping the rest of the survey together while you're out there. {details}",
+		jobFinished = "Thank you. I'll check it against my notes. Let's settle your payment first.",
 		completedGreeting = (
 			"Hello! I've been keeping my own notes in order. It's rather nice to know what I want to say "
 			.. "before anyone asks."

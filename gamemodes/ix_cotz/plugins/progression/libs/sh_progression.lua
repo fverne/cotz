@@ -7,6 +7,29 @@ ix.progression.npcRequirements = {
 	["'???'"] = "computer_artifactTasks",
 }
 
+function ix.progression.GetKnownActiveProgressions(character, npc)
+	local known = character:GetData("knownProgressionTopics", {})
+	local result = {}
+	for _, id in ipairs(ix.progression.GetActiveProgressions(character, npc)) do
+		if known[id] then result[#result + 1] = id end
+	end
+
+	return result
+end
+
+if SERVER then
+	function ix.progression.DiscoverTopics(character, npc)
+		local known = table.Copy(character:GetData("knownProgressionTopics", {}))
+		local changed = false
+		for _, id in ipairs(ix.progression.GetActiveProgressions(character, npc)) do
+			if not known[id] then known[id], changed = true, true end
+		end
+		if not changed then return end
+		character:SetData("knownProgressionTopics", known)
+		character:Save()
+	end
+end
+
 function ix.progression.GetLine(character, progressionID)
 	local line = ix.progression.GetCharacterProgressionLine(character, progressionID)
 	line.value = line.value or 0

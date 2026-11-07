@@ -34,6 +34,9 @@ PLUGIN:Register("smartass", {
 		bonusCash = true,
 	},
 	dialogue = {
+		jobBriefing = "I've got something for you to bring back. {details}",
+		jobReminder = "I'm still missing the interesting bit. {details}",
+		jobFinished = "You got it. Let me sort out your payment before curiosity gets the better of me.",
 		completedGreeting = (
 			"You again. At least I can reasonably expect something useful to come of the interruption. "
 			.. "What is it?"

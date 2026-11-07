@@ -22,7 +22,7 @@ end
 function ix.jobs.field.Status(client, npc, job)
 	local state = job.fieldTask
 	if state.kind == "courier" and state.stage == "issue" then
-		client:Notify("Collect the parcel from " .. npc .. " using Field work while standing near the issuer.")
+		client:Notify("Collect the parcel from " .. npc .. " using Collect parcel from issuer in your task list.")
 		return
 	end
 	if state.stage == "delivered" then
@@ -101,7 +101,7 @@ function ix.jobs.field.DeliverToContact(client, target, npc, claim)
 	return true
 end
 
-local function deliverDrop(client, character, npc, job)
+function ix.jobs.field.BuryDrop(client, character, npc, job)
 	local state = job.fieldTask
 	if state.stage ~= "carrying" then return end
 	if (state.destinationMap or state.map) ~= game.GetMap() then return end
@@ -131,7 +131,7 @@ function ix.jobs.field.Action(client, npc, action)
 		return
 	end
 	if action == "deliver" and state.kind == "deadDrop" then
-		deliverDrop(client, character, npc, job)
+		ix.jobs.field.DigDeadDrop(client, nil, npc)
 		return
 	end
 	if state.map ~= game.GetMap() then return end

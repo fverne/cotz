@@ -15,5 +15,5 @@ function ITEM:GetDescription()
 	end
 
 	return description
-		.. "\nUse Field work in your PDA task list to find the destination and deliver it."
+		.. "\nUse Show assignment on this parcel to find the destination, then Bury parcel with digging tool."
 end

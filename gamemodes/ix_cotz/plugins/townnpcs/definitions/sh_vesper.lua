@@ -43,6 +43,9 @@ PLUGIN:Register("vesper", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There's a site I'd like a closer look at. {details}",
+		jobReminder = "I still want a look at what that site is doing. {details}",
+		jobFinished = "Good to have you back with it. Let's settle up, then I can see what we found.",
 		delivery = "Put it where I can check the label. Tell me if it was damaged on the way.",
 		completedGreeting = (
 			"Good to see you on this side of the trip. We can talk for a moment before either of us "

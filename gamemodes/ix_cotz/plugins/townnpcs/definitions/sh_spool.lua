@@ -41,6 +41,9 @@ PLUGIN:Register("spool", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There's something out there I can't place from here. {details}",
+		jobReminder = "I still haven't got that source in front of me. {details}",
+		jobFinished = "There it is. I'll leave the listening for a moment and get your payment sorted.",
 		delivery = "Right, one moment. Let me find the matching entry.",
 		completedGreeting = (
 			"Oh, hello. Nice to have someone here I don't need to ask to repeat themselves through the "

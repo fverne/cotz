@@ -11,6 +11,11 @@ PLUGIN:Register("brass", {
 		"valuables_technical_records",
 	},
 	job = {
+		kind = "none",
+		category = "No ordinary repeatable work",
+		description = "No ordinary repeatable work",
+	},
+	retiredRegionalJob = {
 		kind = "courier",
 		category = "Information courier and return",
 		description = "Information courier and return",
@@ -56,13 +61,16 @@ PLUGIN:Register("brass", {
 		bonusCash = true,
 	},
 	dialogue = {
+		jobBriefing = "We still have that earlier arrangement. {details}",
+		jobReminder = "That consignment hasn't been accounted for yet. {details}",
+		jobFinished = "That accounts for the consignment. Let's settle what you're owed.",
 		delivery = "Set it down. I will check the consignment against the entry.",
 		completedGreeting = (
 			"Good to see you. An order to discuss, or have you brought something for us to count?"
 		),
-		workPrompt = "About the information parcel.",
+		workPrompt = "About our earlier consignment.",
 		offerPrompt = "Do you have a courier assignment?",
-		work = "A named recipient, a parcel, and a return here when it has been handed over. Check the destination before accepting. You collect the parcel from me; if you lose it, come back here for a replacement. The longer runs can include the Eco Bunker, so those wait until you have earned access to its card.",
+		work = "I haven't got any new runs for you. I'm occupied at the loading bench. If we already have a consignment between us, we can still settle it here.",
 		progressionPrompt = "Which part of the depot account needs attention?",
 		progression = (
 			"I need supplies and the records behind some uncertain consignments. There is no benefit in "

@@ -60,6 +60,9 @@ PLUGIN:Register("technut", {
 		bonusCash = true,
 	},
 	dialogue = {
+		jobBriefing = "Ah, yes, I can put you to work! {details}",
+		jobReminder = "I was about to ask how that was going. {details}",
+		jobFinished = "That got there? Excellent! Let me sort out what I owe you before I forget myself.",
 		delivery = "Over here, buddy. Let me see what we have got.",
 		completedGreeting = (
 			"Buddy! Come and have a look, if you've got a minute. No, you don't have to fetch anything "

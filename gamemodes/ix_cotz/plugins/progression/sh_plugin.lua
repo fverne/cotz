@@ -52,7 +52,7 @@ if SERVER then
 	end
 end
 
-function PLUGIN:PopulateHelpMenu(tabs)
+function PLUGIN:CreateMenuButtons(tabs)
 	tabs["progression"] = function(container)
 		ix.cotzUI.Scale(1)
 		local title = container:Add("DLabel")
@@ -69,7 +69,8 @@ function PLUGIN:PopulateHelpMenu(tabs)
 		intro:SetTextColor(ix.cotzUI.colors.muted)
 		intro:SetText(
 			(
-				"Below is a list of known NPCs and what they need for various "
+				"Discuss progression with a contact to add their current requests here. "
+				.. "Below is a list of known NPCs and what they need for various "
 				.. "progressions. Progress and unlocks belong to your current "
 				.. "character. "
 				.. "Stock rewards increase your personal stock capacity without faster refills. "
@@ -85,7 +86,14 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
 		local npcIdentifiers = {}
 		for name in pairs(ix.townNPCs and ix.townNPCs.byName or {}) do
-			if ix.progression.CanUseNPC(LocalPlayer():GetCharacter(), name) then
+			local character = LocalPlayer():GetCharacter()
+			local known = character:GetData("knownProgressionTopics", {})
+			local discovered = false
+			for id in pairs(known) do
+				local definition = ix.progression.definitions[id]
+				if definition and definition.keyNpc == name then discovered = true break end
+			end
+			if discovered and ix.progression.CanUseNPC(character, name) then
 				npcIdentifiers[#npcIdentifiers + 1] = name
 			end
 		end
@@ -144,7 +152,7 @@ function PLUGIN:PopulateHelpMenu(tabs)
 
 			local activeProgressions = 0
 			for _, v in
-				pairs(ix.progression.GetActiveProgressions(LocalPlayer():GetCharacter(), npcIdentifier))
+				pairs(ix.progression.GetKnownActiveProgressions(LocalPlayer():GetCharacter(), npcIdentifier))
 			do
 				local definition = ix.progression.definitions[v]
 				local character = LocalPlayer():GetCharacter()

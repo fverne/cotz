@@ -43,6 +43,9 @@ PLUGIN:Register("egghead", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "I have a comparison I'd like to make. {details}",
+		jobReminder = "I'm still missing material for that comparison. {details}",
+		jobFinished = "Ah, good. That gives me something to examine. Let's settle your payment before I get distracted.",
 		completedGreeting = (
 			"Hello again. Something to compare, or simply a question? We can probably find time for "
 			.. "either."

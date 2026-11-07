@@ -25,8 +25,8 @@ DIALOGUE.addTopic("GREETING", {
 })
 
 DIALOGUE.addTopic("BackgroundTopic", {
-	statement = "What did depot work teach you?",
-	response = "To count again before making an accusation. Mostly we dealt with damp packaging, bad sums, a box someone moved without mentioning it. Ordinary problems, until somebody needed what the record said was there. I made enough mistakes of my own to dislike a public performance over an unverified total. Bring your figure beside mine. We can settle a number without deciding which of us is insulted.",
+	statement = "How did you end up reloading ammunition?",
+	response = "Depot work put enough damaged ammunition in front of me to make me interested in what could still be used. Now I spend more time at the loading bench. Sorting cases, checking what belongs together, putting doubtful material aside. It suits me. Nobody benefits from my hurrying. I still count everything twice, including what I owe you; that habit has saved more arguments than it has started.",
 	options = {"BackTopic", "GOODBYE"},
 })
 

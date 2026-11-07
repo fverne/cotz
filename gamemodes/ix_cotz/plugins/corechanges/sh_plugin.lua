@@ -1,4 +1,5 @@
 ix.util.Include("sh_defaults.lua")
+ix.util.Include("sh_handspassage.lua")
 
 PLUGIN.name = "Core changes"
 PLUGIN.author = "verne"
@@ -37,10 +38,6 @@ function PLUGIN:PopulateItemTooltip(tooltip, item)
 		ix.util.MarkedDeletionDesc(tooltip)
 		-- ix.util.PropertyDesc(tooltip, "Marked for Deletion", Color(255, 0, 0), ix.util.GetMaterial("vgui/ui/stalker/armorupgrades/explosion.png"), 1000)
 	end
-end
-
-function PLUGIN:ShouldCollide(ent1, ent2)
-	if ( ent1.IsSTALKERNPC and ent2.IsSTALKERNPC ) then return false end
 end
 
 -- removes plugins we dont need
@@ -92,6 +89,7 @@ if (SERVER) then
     end
 
     function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
+		client:SetHandsPassage(false)
         -- wait for spawnsaver to setpos first
         timer.Simple(0.5, function()
             if not IsValid(client) then return end

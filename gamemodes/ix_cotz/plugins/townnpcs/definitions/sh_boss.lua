@@ -40,6 +40,9 @@ PLUGIN:Register("boss", {
 		bonusCash = true,
 	},
 	dialogue = {
+		jobBriefing = "There's a job I need carried out. {details}",
+		jobReminder = "Our arrangement still stands. {details}",
+		jobFinished = "The work is done. Your payment can be settled here.",
 		completedGreeting = (
 			"Good to see you back. You've earned a proper hearing. What do you need?"
 		),

@@ -145,7 +145,7 @@ function PLUGIN:RegisterRegionalJobs(contact)
 			end
 		elseif kind == "courier" then
 			register(contact, tier, "courier", {name = "Deliver an information parcel and return.",
-				desc = "Collect the information parcel from Brass, hand it to the named contact, then return to Brass. Use Field work to retry parcel collection if needed.",
+				desc = "Collect the information parcel from " .. contact.name .. ", hand it to the named contact, then return to " .. contact.name .. ". Collect a replacement from the issuer if needed.",
 				fieldType = "courier", bunkerGate = tier == 3})
 		else
 			fieldJob(contact, tier)

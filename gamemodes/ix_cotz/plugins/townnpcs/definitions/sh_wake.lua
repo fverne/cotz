@@ -11,9 +11,9 @@ PLUGIN:Register("wake", {
 		"valuables_recording_equipment",
 	},
 	job = {
-		kind = "none",
-		category = "No ordinary repeatable work",
-		description = "No ordinary repeatable work",
+		kind = "courier",
+		category = "Information courier and return",
+		description = "Information courier and return",
 	},
 	legacyJob = {
 		kind = "recovery",
@@ -37,18 +37,17 @@ PLUGIN:Register("wake", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "Someone is waiting for these records. {details}",
+		jobReminder = "I haven't heard from the recipient yet. {details}",
+		jobFinished = "Thank you for seeing it through. We can settle your payment now.",
 		delivery = "Put it here. I will keep it with the search records.",
 		completedGreeting = (
 			"Hello again. Thank you for coming back. If you have something to discuss, we can take our "
 			.. "time."
 		),
-		workPrompt = "About the effects case I'm recovering.",
-		offerPrompt = "Is there a case you need recovered?",
-		work = (
-			"Recover the marked personal-effects case and bring it back intact. Keep the little things with the "
-			.. "rest, even if you can't see why somebody would want them. We can examine what returned here. Check "
-			.. "the region before accepting; you deserve time to prepare for the journey too."
-		),
+		workPrompt = "About the parcel I'm taking for you.",
+		offerPrompt = "Do you need something delivered?",
+		work = "There are records I need to send to people outside Garbage. I can give you a sealed parcel and the name of the person waiting for it. Take it to them, then come back here. Please check where they are before agreeing; some of the longer journeys include the Eco Bunker, and you will need permission to buy its access card.",
 		progressionPrompt = "Where can I help with the search records?",
 		progression = (
 			"I'm comparing missing people's routes, records, and belongings. The supplies keep the work "

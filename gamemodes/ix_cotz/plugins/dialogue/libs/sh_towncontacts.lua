@@ -21,7 +21,7 @@ local function configureWork(dialogue, contact)
 		preCallback = function(self, client, target)
 			if CLIENT then
 				local job = client:GetCharacter():GetJobs()[target:GetDisplayName()]
-				self.response = job and ix.jobs.getFormattedDesc(job) or contact.dialogue.work
+				self.response = job and ix.jobs.GetDialogueDescription(job, contact.name) or contact.dialogue.work
 			end
 		end,
 		GetDynamicOptions = function(_, client, target)
@@ -31,7 +31,7 @@ local function configureWork(dialogue, contact)
 			if job.isCompleted then
 				options[1] = {statement = "Complete the assignment.", topicID = "TownJobAction",
 					dyndata = {action = "complete", claim = job.progressionClaim}}
-			elseif ix.jobs.isItemJob(job.identifier)
+			elseif ix.jobs.regional.FindHandIn(client:GetCharacter(), job)
 				and not ix.jobs.list[job.identifier].alternateDelivery then
 				options[1] = {statement = "Hand over the requested items.", topicID = "TownJobAction",
 					dyndata = {action = "deliver", claim = job.progressionClaim}}
@@ -87,6 +87,13 @@ local function configureProgression(dialogue, contact)
 	dialogue.addTopic("TownProgression", {
 		statement = contact.dialogue.progressionPrompt,
 		response = contact.dialogue.progression,
+		preCallback = function(_, client, target)
+			if not SERVER or not ix.townNPCs:CanInteract(client, target)
+				or target:GetDisplayName() ~= contact.name then return end
+			if CurTime() < (client.cotzTownDiscoveryNext or 0) then return end
+			client.cotzTownDiscoveryNext = CurTime() + ix.townNPCs.settings.actionInterval
+			ix.progression.DiscoverTopics(client:GetCharacter(), contact.name)
+		end,
 		IsDynamic = true,
 		options = {"BackTopic"},
 		GetDynamicOptions = function(_, client, target)
@@ -111,8 +118,7 @@ local function configureProgression(dialogue, contact)
 			local definition = ix.progression.definitions[data.identifier]
 			if not definition or definition.keyNpc ~= target:GetDisplayName() then return end
 			self.current = data.identifier
-			self.response = ix.progression.DescribeTask(definition, definition.keyNpc,
-				ix.progression.GetLine(client:GetCharacter(), data.identifier), client:GetCharacter())
+			self.response = definition.briefing
 		end,
 		GetDynamicOptions = function(self, client, target)
 			local id = self.current
@@ -168,11 +174,9 @@ local function configureDeliveries(dialogue, contact)
 		IsDynamic = true,
 		ShouldAdd = function(_, client)
 			for _, job in pairs(client:GetCharacter():GetJobs()) do
-				if ix.jobs.regional and ix.jobs.regional.ReceiverMatches(client:GetCharacter(), contact, job) then
+				if ix.jobs.regional and ix.jobs.regional.CanDeliver(client:GetCharacter(), contact, job) then
 					return true
 				end
-				local state = job.fieldTask
-				if state and state.recipient == contact.name and state.stage == "carrying" then return true end
 			end
 
 			return false
@@ -180,12 +184,14 @@ local function configureDeliveries(dialogue, contact)
 		GetDynamicOptions = function(_, client)
 			local options = {}
 			for npc, job in SortedPairs(client:GetCharacter():GetJobs()) do
-				if ix.jobs.regional and ix.jobs.regional.ReceiverMatches(client:GetCharacter(), contact, job) then
+				if ix.jobs.regional and ix.jobs.regional.ReceiverMatches(client:GetCharacter(), contact, job)
+					and ix.jobs.regional.FindHandIn(client:GetCharacter(), job) then
 					options[#options + 1] = {statement = "Hand over items on behalf of " .. npc .. ".",
 						topicID = "TownDeliveries", dyndata = {npc = npc, claim = job.rewardKey, valuable = true}}
 				end
 				local state = job.fieldTask
-				if state and state.recipient == contact.name and state.stage == "carrying" then
+				if state and state.recipient == contact.name and state.stage == "carrying"
+					and ix.jobs.field.FindCargo(client:GetCharacter(), job) then
 					options[#options + 1] = {statement = "Hand over " .. (state.cargoName or "the cargo") .. ".",
 						topicID = "TownDeliveries", dyndata = {npc = npc, claim = job.rewardKey}}
 				end

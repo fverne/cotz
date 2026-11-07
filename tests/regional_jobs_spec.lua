@@ -22,7 +22,7 @@ for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
 		== ({"rp_garbage_cotz", "rp_waystation", "rp_pripyat_remaster"})[tier],
 		"Egghead retains the later-region specimen progression from his bunker home")
 end
-check(ix.townNPCs.contacts.wake.job.kind == "none", "Wake is no longer assigned photography")
+check(ix.townNPCs.contacts.wake.job.kind == "courier", "Wake owns information deliveries")
 check(ix.townNPCs.contacts["the-original"].job.kind == "none", "The Original has no new ordinary work")
 check(ix.townNPCs.contacts.jitters.job.kind == "regionalSpecimens", "Jitters owns the Swamps specimen requests")
 check(next(ix.townNPCs.contacts["the-original"].categories) == nil, "The Original exposes no offer categories")
@@ -152,8 +152,8 @@ for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
 	local recipients = {}
 	for index = 1, contactCount do
 		math.random = function(limit) return math.min(index, limit) end
-		local job = {identifier = "cotz/town/v2/brass/" .. difficulty .. "/courier"}
-		local assigned = ix.jobs.regional.AssignCourier(char, "'Brass'", job)
+		local job = {identifier = "cotz/town/v2/wake/" .. difficulty .. "/courier"}
+		local assigned = ix.jobs.regional.AssignCourier(char, "'Wake'", job)
 		math.random = originalRandom
 		check(assigned, "each information courier tier has an available recipient")
 		local state = job.fieldTask

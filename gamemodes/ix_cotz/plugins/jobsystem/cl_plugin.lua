@@ -155,7 +155,9 @@ function PANEL:AddTask(npc, job)
 			end)
 	end)
 	if job.fieldTask then
-		addButton(actions, "Field work", function() ix.jobs.field.OpenMenu(npc, job.fieldTask.kind) end)
+		for _, option in ipairs(ix.jobs.field.GetActions(job)) do
+			addButton(actions, option.label, function() ix.jobs.field.RequestAction(npc, option.action) end)
+		end
 	end
 	card.PerformLayout = function(this)
 		local height = 24

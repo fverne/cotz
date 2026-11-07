@@ -41,6 +41,9 @@ PLUGIN:Register("ballast", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "Someone left a load out there and would very much like it back. {details}",
+		jobReminder = "I'm still waiting on that equipment. {details}",
+		jobFinished = "Back with the load. Good. Put it down before we start discussing payment.",
 		delivery = "Over here. If it is still dry, we are off to a good start.",
 		completedGreeting = (
 			"Back with both boots, I see. Always a promising start to a conversation. What do you need?"

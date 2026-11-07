@@ -66,6 +66,10 @@ PLUGIN:Register("mute", {
 		},
 	},
 	dialogue = {
+		jobTerms = "**Below the instruction: {money} rubles. Supplies to be agreed on return.**",
+		jobBriefing = "**He turns a written instruction toward you.** {details}",
+		jobReminder = "**He taps the instruction, then looks back at you.** {details}",
+		jobFinished = "**He checks the returned equipment, nods, and sets your payment beside the keyboard.**",
 		completedGreeting = (
 			"** He looks up from the bench as you approach. He clears a space for your things, then "
 			.. "waits with his hands resting beside his tools. **"

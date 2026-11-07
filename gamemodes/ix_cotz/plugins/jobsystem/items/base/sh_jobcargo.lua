@@ -37,3 +37,40 @@ function ITEM:GetDescription()
 
 	return description .. instruction
 end
+
+local function cargoJob(item)
+	local client = item.player
+	local character = IsValid(client) and client:GetCharacter()
+	if not character or IsValid(item.entity) or item.invID ~= character:GetInventory():GetID() then return end
+	for npc, job in pairs(character:GetJobs()) do
+		if ix.jobs.field.FindCargo(character, job) == item then return npc, job end
+	end
+end
+
+ITEM.functions.Assignment = {
+	name = "Show assignment",
+	icon = "icon16/map.png",
+	OnCanRun = function(item) return cargoJob(item) ~= nil end,
+	OnRun = function(item)
+		local npc = cargoJob(item)
+		if npc then ix.jobs.field.Action(item.player, npc, "status") end
+
+		return false
+	end,
+}
+
+ITEM.functions.BuryParcel = {
+	name = "Bury parcel with digging tool",
+	icon = "icon16/arrow_down.png",
+	OnCanRun = function(item)
+		local _, job = cargoJob(item)
+
+		return job ~= nil and job.fieldTask.kind == "deadDrop" and job.fieldTask.stage == "carrying"
+	end,
+	OnRun = function(item)
+		local npc, job = cargoJob(item)
+		if job and job.fieldTask.kind == "deadDrop" then ix.jobs.field.Action(item.player, npc, "deliver") end
+
+		return false
+	end,
+}

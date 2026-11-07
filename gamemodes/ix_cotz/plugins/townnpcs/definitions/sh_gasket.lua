@@ -58,6 +58,9 @@ PLUGIN:Register("gasket", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "I could use a hand with something. {details}",
+		jobReminder = "I'm still waiting for that material. {details}",
+		jobFinished = "That's what I needed. Let's settle up.",
 		delivery = "Put it on the clear bench. Not beside the fuel.",
 		completedGreeting = (
 			"Good to see you. Give me a moment to finish this before you tell me what somebody's been "

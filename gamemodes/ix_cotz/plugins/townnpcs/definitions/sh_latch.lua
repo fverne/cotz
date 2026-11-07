@@ -62,6 +62,9 @@ PLUGIN:Register("latch", {
 		bonusCash = true,
 	},
 	dialogue = {
+		jobBriefing = "There's useful material waiting on someone to carry it. {details}",
+		jobReminder = "I haven't heard that the material has arrived yet. {details}",
+		jobFinished = "Good. They've got what they needed, and you've saved me another round of asking. Let's settle up.",
 		delivery = "Here. Keep the labels with it.",
 		completedGreeting = (
 			"Come in. You've earned the right to stand beside the bench without me wondering what "

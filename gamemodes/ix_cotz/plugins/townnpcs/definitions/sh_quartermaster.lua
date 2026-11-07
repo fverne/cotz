@@ -58,6 +58,9 @@ PLUGIN:Register("quartermaster", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "I have a supply movement that needs covering. {details}",
+		jobReminder = "That supply movement is still outstanding. {details}",
+		jobFinished = "The delivery is accounted for. We can settle your payment.",
 		delivery = "Place the consignment here for inspection.",
 		completedGreeting = (
 			"You've established that you can follow through. State what you need, and we can deal with "

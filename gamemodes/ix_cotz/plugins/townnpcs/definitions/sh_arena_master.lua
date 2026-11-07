@@ -30,6 +30,9 @@ PLUGIN:Register("arena-master", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There's still our arrangement to finish. {details}",
+		jobReminder = "We're still waiting on that. {details}",
+		jobFinished = "There we are! Let's get you paid.",
 		completedGreeting = (
 			"Good to see you. Match on your mind, or are you giving yourself a well-earned afternoon "
 			.. "off?"

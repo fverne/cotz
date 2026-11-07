@@ -62,6 +62,9 @@ PLUGIN:Register("jitters", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "Yes, I could use your help. {details}",
+		jobReminder = "I still need those specimens. Take your time getting them here safely. {details}",
+		jobFinished = "Thank you. Leave them here; I'll check them properly. First, your payment.",
 		delivery = "Here, here. Let me check the label before you go.",
 		completedGreeting = (
 			"Oh, hello. No fresh injuries, I hope? It's nice when somebody visits and I can finish a "

@@ -57,6 +57,9 @@ PLUGIN:Register("carbon", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There's an arrangement we haven't finished. {details}",
+		jobReminder = "The arrangement hasn't changed. {details}",
+		jobFinished = "That will do. Your payment is ready.",
 		delivery = "On the clear part of the desk. Keep any loose pages with it.",
 		completedGreeting = (
 			"Hello again. I've got time if you want to talk. You've been patient enough with my "

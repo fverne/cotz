@@ -51,6 +51,8 @@ net = {Receive = function() end, Start = function() end, WriteVector = function(
 	WriteString = function() end, WriteUInt = function() end, Send = function() markers = markers + 1 end}
 netstream = {Start = function() end}
 hook = {Add = function() end, Run = function() end}
+timer = {Simple = function() end}
+SortedPairs = pairs
 local playerMeta = {}
 FindMetaTable = function() return playerMeta end
 ix = {jobs = {list = {}, jobsbycategory = {}}, plugin = {list = {}},
@@ -71,6 +73,9 @@ ents = {Create = function(class)
 		return Vector(-8, -8, 0), Vector(8, 8, 16)
 	end
 	function entity:Spawn() end
+	function entity:SetNoDraw(value) self.hidden = value end
+	function entity:SetNotSolid(value) self.notSolid = value end
+	function entity:DrawShadow(value) self.shadow = value end
 	function entity:Remove() self.invalid = true end
 	function entity:GetClass() return self.class end
 	function entity:SetHealth(health) self.health = health end
@@ -99,6 +104,7 @@ dofile(base .. "sv_fieldplacement.lua")
 dofile(base .. "sv_fieldassignment.lua")
 dofile(base .. "sv_fieldactions.lua")
 dofile(base .. "sv_fieldtasks.lua")
+dofile(base .. "sv_deaddrops.lua")
 dofile(base .. "sv_cargo.lua")
 dofile(base .. "sv_fielddefence.lua")
 ITEM = {functions = {}}
@@ -188,6 +194,7 @@ local function actor()
 	function client:GetCharacter() return self.character end
 	function client:GetPos() return self.position end
 	function client:GetForward() return Vector(1, 0, 0) end
+	function client:GetNetVar() return false end
 	function client:Alive() return not self.dead end
 	function client:IsRestricted() return false end
 	function client:SteamID64() return "owner" .. serial end
@@ -235,6 +242,8 @@ local function flush()
 	callbacks = {}
 	for _, callback in ipairs(pendingCallbacks) do callback() end
 end
+ix.util = {PlayerPerformBlackScreenAction = function(_, _, _, callback) callback() end}
+
 local function assign(character, kind, npc)
 	npc = npc or "Contact"
 	local job = {identifier = "field_" .. kind .. "_easy", rewardKey = "job:" .. (#objects + now),
@@ -517,19 +526,19 @@ local route = copy(job.fieldTask)
 client.position = ix.jobs.field.Unpack(route.point)
 update(client, character)
 entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
-check(IsValid(entity), "parcel appears only at the saved pickup site")
+check(IsValid(entity) and entity.hidden and entity.notSolid, "parcel is hidden and non-solid at the saved pickup site")
 ix.jobs.field.Collect(client, entity)
 check(#callbacks == 0, "dead-drop pickup requires a digging tool")
 now, hasTool = now + 2, true
-ix.jobs.field.Collect(client, entity)
+ix.jobs.field.DigDeadDrop(client)
 check(#callbacks == 0, "an exhausted digging tool cannot dig up a parcel")
 diggingTool.quantity, now = 5, now + 2
-ix.jobs.field.Collect(client, entity)
+ix.jobs.field.DigDeadDrop(client)
 hasTool = false
 flush()
 check(not entity.invalid and not next(inventory.items), "tool loss during database work preserves the parcel")
 now, hasTool = now + 2, true
-ix.jobs.field.Collect(client, entity)
+ix.jobs.field.DigDeadDrop(client)
 flush()
 check(character.jobs.Contact.fieldTask.stage == "carrying" and not character.jobs.Contact.isCompleted,
 	"parcel pickup does not complete the circuit")
@@ -576,7 +585,7 @@ check(character.money == moneyBefore + 100, "dead-drop completion pays exactly o
 job = assign(character, "deadDrop")
 client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 update(client, character)
-ix.jobs.field.Collect(client, ix.jobs.field.GetObject(character, character.jobs.Contact))
+ix.jobs.field.DigDeadDrop(client)
 flush()
 ix.jobs.field.FindCargo(character, character.jobs.Contact):Remove()
 update(client, character)
@@ -585,6 +594,55 @@ check(character.jobs.Contact.fieldTask.stage == "search"
 	"lost parcel restores the same saved circuit")
 ix.jobs.field.Cleanup(character, character.jobs.Contact)
 character.jobs.Contact = nil
+
+do
+	local immediateAction = ix.util.PlayerPerformBlackScreenAction
+	local finishDig
+	ix.util.PlayerPerformBlackScreenAction = function(_, _, duration, callback)
+		check(duration == 8, "digging takes eight seconds")
+		finishDig = callback
+	end
+	job = assign(character, "deadDrop")
+	client.position = ix.jobs.field.Unpack(job.fieldTask.point)
+	update(client, character)
+	entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
+	now = now + 2
+	ix.jobs.field.Collect(client, entity)
+	check(#callbacks == 0, "Use cannot collect a hidden parcel even with a usable tool")
+	ix.jobs.field.DigDeadDrop(client, diggingTool)
+	check(#callbacks == 0 and character.jobs.Contact.fieldTask.stage == "search",
+		"starting a dig does not grant cargo before the action finishes")
+	client.position = client.position + Vector(5000, 0, 0)
+	finishDig()
+	check(#callbacks == 0 and IsValid(entity), "moving away during digging preserves the hidden pickup")
+	client.position = ix.jobs.field.Unpack(job.fieldTask.point)
+	ix.jobs.field.DigDeadDrop(client, diggingTool)
+	client.character = stranger:GetCharacter()
+	finishDig()
+	check(#callbacks == 0 and IsValid(entity), "character changes during digging cannot collect old cargo")
+	client.character = character
+	ix.jobs.field.DigDeadDrop(client, diggingTool)
+	finishDig()
+	flush()
+	check(character.jobs.Contact.fieldTask.stage == "carrying" and diggingTool.quantity == 5,
+		"finishing a valid dig grants bound cargo without consuming the tool")
+	client.position = ix.jobs.field.Unpack(job.fieldTask.destination)
+	now = now + 2
+	local carried = ix.jobs.field.FindCargo(character, character.jobs.Contact)
+	carried.player, carried.invID = client, inventory:GetID()
+	check(cargoBase.functions.Assignment.OnCanRun(carried) and cargoBase.functions.BuryParcel.OnCanRun(carried),
+		"the carried parcel exposes directions and burial in its inventory menu")
+	check(cargoBase.functions.BuryParcel.OnRun(carried) == false,
+		"the burial action keeps the parcel while the dig is pending")
+	check(not character.jobs.Contact.isCompleted, "burial waits for its digging action")
+	hasTool = false
+	finishDig()
+	check(not character.jobs.Contact.isCompleted, "losing the tool during burial prevents completion")
+	hasTool = true
+	ix.jobs.field.Cleanup(character, character.jobs.Contact)
+	character.jobs.Contact = nil
+	ix.util.PlayerPerformBlackScreenAction = immediateAction
+end
 
 check(
 	not ix.jobs.field.IsAvailable(ix.jobs.list.field_defence_easy),
@@ -861,7 +919,7 @@ check(deliveredCargo:GetDescription() == deliveredCargo.description
 	"unaddressed cargo keeps return instructions")
 local parcel = setmetatable({data = {}}, {__index = ix.item.list.job_dead_drop_parcel})
 parcel.GetData, parcel.SetData = deliveredCargo.GetData, deliveredCargo.SetData
-local parcelInstruction = "\nUse Field work in your PDA task list to find the destination and deliver it."
+local parcelInstruction = "\nUse Show assignment on this parcel to find the destination, then Bury parcel with digging tool."
 local parcelBackground = "\n\n" .. parcel.longdesc
 check(parcel:GetDescription() == parcel.description .. parcelBackground .. parcelInstruction,
 	"dead-drop default keeps background and PDA instructions")
@@ -952,7 +1010,7 @@ routeCharacter.jobs.Contact = copy(routeJob)
 map, routeClient.position = pickupMap, Vector(1000, 0, 0)
 update(routeClient, routeCharacter)
 local routeObject = ix.jobs.field.GetObject(routeCharacter, routeJob)
-ix.jobs.field.Collect(routeClient, routeObject)
+ix.jobs.field.DigDeadDrop(routeClient)
 flush()
 check(routeCharacter.jobs.Contact.fieldTask.stage == "carrying", "parcel pickup works on the saved source map")
 now = now + 2

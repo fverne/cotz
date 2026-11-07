@@ -62,6 +62,9 @@ PLUGIN:Register("spicy-lemon", {
 		bonusCash = true,
 	},
 	dialogue = {
+		jobBriefing = "I've people to feed, and they have opinions about everything. {details}",
+		jobReminder = "I can't put an empty pot on the table. {details}",
+		jobFinished = "There, something I can work with. Let's get you paid before somebody asks for seconds.",
 		completedGreeting = (
 			"Back again? Good. Tell me what you need before everyone else discovers I'm taking a moment "
 			.. "to talk."

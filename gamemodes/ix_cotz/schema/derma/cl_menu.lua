@@ -358,8 +358,15 @@ function PANEL:PopulateTabs()
 
 	hook.Run("CreateMenuButtons", tabs)
 
-	for name, info in SortedPairs(tabs) do
-		local bDefault, button = self:SetupTab(name, info)
+	local names = {}
+	for name in SortedPairs(tabs) do
+		if name ~= "progression" then names[#names + 1] = name end
+		if name == "tasks" and tabs.progression then names[#names + 1] = "progression" end
+	end
+	if tabs.progression and not tabs.tasks then names[#names + 1] = "progression" end
+
+	for _, name in ipairs(names) do
+		local bDefault, button = self:SetupTab(name, tabs[name])
 
 		if (bDefault) then
 			default = button

@@ -56,6 +56,9 @@ PLUGIN:Register("suture", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There's something I can use your help with. {details}",
+		jobReminder = "I haven't got everything I need yet. {details}",
+		jobFinished = "Thank you. Put it here and let me settle your payment.",
 		delivery = "Set it down carefully. I want to see what condition it arrived in.",
 		completedGreeting = (
 			"Come in. Put your pack down carefully; I'd like to hear how the equipment has been treating "

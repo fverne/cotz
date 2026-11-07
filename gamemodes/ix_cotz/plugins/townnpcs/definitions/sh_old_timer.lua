@@ -39,6 +39,9 @@ PLUGIN:Register("old-timer", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There's work you can do if you're heading out. {details}",
+		jobReminder = "Still on your way out there? {details}",
+		jobFinished = "You made it back and did what we agreed. Let's see to your payment.",
 		completedGreeting = (
 			"Good to see you. Put the pack down if you're staying a while; you don't have to stand ready "
 			.. "to leave every minute."

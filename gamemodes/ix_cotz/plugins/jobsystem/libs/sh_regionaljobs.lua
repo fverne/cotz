@@ -66,6 +66,31 @@ function ix.jobs.regional.PhotoSummary(job)
 		.. (#names > 0 and table.concat(names, ", ") or "None")
 end
 
+function ix.jobs.regional.FindHandIn(character, job)
+	local definition = ix.jobs.list[job.identifier]
+	if not definition or not definition.requiredItem or job.isCompleted then return end
+	local pool = definition.requiredPool and ix.progression.itemPools[definition.requiredPool]
+	for _, item in pairs(character:GetInventory():GetItems()) do
+		local matches = item.uniqueID == definition.requiredItem and not definition.requiredPool
+		for _, candidate in ipairs(pool and pool.candidates or {}) do
+			if item.uniqueID == candidate.item then matches = true break end
+		end
+		local quantity = item:GetData("quantity", item.quantity or item.ammoAmount or 1)
+		if matches and type(quantity) == "number" and quantity == quantity and quantity < math.huge
+			and quantity >= 1 then return item, item.uniqueID end
+	end
+end
+
+function ix.jobs.regional.CanDeliver(character, receiver, job)
+	if ix.jobs.regional.ReceiverMatches(character, receiver, job) then
+		return ix.jobs.regional.FindHandIn(character, job) ~= nil
+	end
+	local state = job.fieldTask
+
+	return state and state.recipient == receiver.name and state.stage == "carrying"
+		and ix.jobs.field.FindCargo(character, job) ~= nil or false
+end
+
 function ix.jobs.regional.ReceiverMatches(character, receiver, job)
 	local definition = ix.jobs.list[job.identifier]
 	if not definition or not definition.alternateDelivery or job.isCompleted then return false end

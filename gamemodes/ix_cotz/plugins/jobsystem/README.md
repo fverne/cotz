@@ -10,7 +10,7 @@ Accepted old assignments retain completion-only definitions and their original r
 Finite progression is unchanged and its rework is deferred, including stalled inactive-issuer checkpoints.
 
 Beanstalk, Egghead and Intern live in the Swamps Eco Bunker. Their town definitions declare
-`map = "rp_marsh_cs"` and `bunker = true`. Brass's easy information couriers exclude bunker contacts;
+`map = "rp_marsh_cs"` and `bunker = true`. Wake's easy information couriers exclude bunker contacts;
 hard couriers include all three scientists alongside Waystation recipients. Existing physical bunker
 access and the hard-tier card-purchase gate remain. Beanstalk offers research defence; Egghead's
 specimen requests retain Garbage/Waystation/Pripyat difficulty regions, with claims at the bunker.
@@ -26,6 +26,9 @@ No server deployment, first-time setup or live-save reset is part of offline ver
 Valuable couriers list every eligible receiving contact in the confirmation and task journal.
 Map references use the cross-server display names, with built-in names available before that plugin
 loads; accepted descriptions containing BSP names are formatted without changing saved locations.
+Incoming delivery options require an actual nonempty matching item or bound parcel, rather than
+assignment state alone. Reward choices refresh immediately after the final hand-in at the issuer;
+completed field/combat work reveals its choices on returning to the issuer.
 Every objective completion sends a task-completed notification and PDA sound once. Photography
 shows the saved captured species/anomaly list in the journal. There is no camera HUD ledger.
 Triangulation saves the origin and compass bearing of each reading and marks those positions in
@@ -34,8 +37,11 @@ Mute now offers triangulation in Swamps / Waystation / Pripyat, with 3 / 4 / 5 r
 Contacts without repeatable work omit the root offer link while retaining active legacy job status.
 Abandoning a task requires confirmation; the callback rechecks the character, assignment and cooldown.
 
-Dead drops require a usable `base_hidestashers` digging tool at pickup and burial, including the
-asynchronous pickup callback. The tool is required but is not consumed. Bound parcels can be rearranged
+Dead drops use invisible, non-solid `bNoPersist` world objects. Use a usable `base_hidestashers`
+tool to dig up the pickup and bury the parcel, or use the carried parcel's burial action. Both use
+an eight-second action and revalidate character, claim, tool and location afterwards, including
+the asynchronous pickup callback. Cancelling leaves the pickup intact. Task digging does not consume
+tool uses and never writes to the permanent hidden-stash registry. Bound parcels can be rearranged
 inside the main inventory and cannot leave it. Sensor world objects use
 `models/lostsignalproject/items/quest/scanner_anomaly.mdl`, including custom commission sensors.
 
@@ -494,3 +500,10 @@ Item-specific counts, partial-stack handling and payments are unchanged.
 Command metadata for CharResetJobs is shared in `libs/sh_commands.lua`; its implementation remains
 server-side. Run `tests/field_tasks_spec.lua`, `tests/job_overlays_spec.lua`,
 `tests/regional_jobs_spec.lua` and `tests/shared_commands_spec.lua` using `luatex --luaonly`.
+
+### Interaction regression checks
+
+Run `luatex --luaonly tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec.lua`,
+`tests/field_tasks_spec.lua`, `tests/jobs_menu_spec.lua` and `tests/dialogue_order_spec.lua`
+with the same `luatex --luaonly` prefix for each file. Check hidden pickup, tool cancellation/loss,
+full inventory, parcel burial, reward timing and character switches in multiplayer as well.

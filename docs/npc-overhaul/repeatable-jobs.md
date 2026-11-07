@@ -30,7 +30,7 @@ research defence, Egghead requests Garbage/Waystation/Pripyat specimens, and Int
 | 13 | Spicy Lemon | Cooked mutant meals | Swamps / Waystation / Pripyat species |
 | 14 | Jitters | Specific mutant specimens | Swamps / Garbage / Waystation species |
 | 15 | Egghead | Specific mutant specimens | Garbage / Waystation / Pripyat species |
-| 16 | Brass | Information courier and return | Swamps settlement / Waystation / Eco Bunker or Waystation |
+| 16 | Wake | Information courier and return | Swamps settlement / Waystation / Eco Bunker or Waystation |
 | 17 | Spoor | Mutant category hunting | Garbage / Waystation / Pripyat |
 | 18 | Boss | Hostile-human kills | Garbage / Waystation / Pripyat |
 | 22 | Spool | Triangulation | Garbage 3 / Waystation 4 / Pripyat 5 readings |
@@ -47,7 +47,7 @@ bonuses are documented in the [jobsystem reward guide](../../gamemodes/ix_cotz/p
 Medium/hard reputation gates and equipment purchase gates remain.
 Supply allowance minimums and rounding still apply independently to item packages.
 
-Arena Master, Carbon, Gasket, Ledger, Suture, The Original and Wake have no new ordinary offers.
+Arena Master, Brass, Carbon, Gasket, Ledger, Suture and The Original have no new ordinary offers.
 The Original is no longer used; Jitters now owns his specimen requests, using Jitters's existing
 medical reward packages. The other contacts retain their shops, services, incoming-delivery categories
 and finite progression.
@@ -109,13 +109,13 @@ with the issuer; intermediate deliveries award none of them.
 Dead drops save both endpoint maps. Coordinate separation applies only on the same map. Cargo
 appearance/name/description are chosen once, retained across travel and reused for lost-cargo recovery.
 Recovery uses three light variants (0.5 / 0.75 / 1 kg) or three heavy variants (3.5 / 3.75 / 4 kg).
-Brass issues information-only bound cargo, requires a named NPC handover and pays after return.
+Wake issues information-only bound cargo, requires a named NPC handover and pays after return.
 Easy recipients are Swamps settlement contacts, excluding all three bunker scientists; medium
 recipients are in Waystation. Hard recipients include Beanstalk, Egghead and Intern in the Eco Bunker,
 as well as Waystation contacts. Contact definitions use `bunker = true` to identify the gated receivers.
 Hard courier previews and acceptance require permission to purchase `accesscard_bunker` from Carbon;
-temporary stock depletion does not relock the offer. Lost parcels are reissued near Brass through
-**Field work → Collect parcel from issuer**. Inventory/weight failures leave issuance retryable.
+temporary stock depletion does not relock the offer. Lost parcels are reissued near Wake through the task list's
+**Collect parcel from issuer** button. Inventory/weight failures leave issuance retryable.
 
 Vesper/Intern's new repeatable sensors snapshot a 900-second recording duration and an absolute
 `os.time()` completion deadline at deployment. They still require departure and retrieval.
@@ -163,3 +163,24 @@ alternate receivers, surplus preservation, cross-map parcel delivery and persist
 Multiplayer checks remain required for NPC placement, navmesh/approaches, physical bunker access,
 camera equipment/assets, full-inventory callbacks, map transfer, disconnect/restart and payment with
 fresh/existing characters. Standalone mocks do not establish runtime correctness.
+
+## Interaction update — 7 November 2026
+
+Wake now issues the information couriers. Brass is characterised as an ammunition reloader and
+has no new ordinary offers. Accepted Brass couriers retain completion-only definitions and their
+saved issuer, destination and reward identity.
+
+Spoken job offers and reminders use each contact's `jobBriefing`, `jobReminder` and `jobFinished`
+text, with actual goods, recipients and regions. The task journal keeps its formal descriptions.
+Incoming delivery dialogue requires the real usable item or matching bound parcel in inventory.
+Finishing the final hand-in reveals reward choices immediately at the issuer; other completed
+objectives reveal choices when speaking to the issuer. Reward selection still validates access,
+distance, completion and cargo on the server.
+
+Dead-drop pickup objects are invisible, non-solid and excluded from world persistence. A stash
+digging tool's inventory action digs up or buries task parcels after an eight-second action. The
+parcel also offers directions and burial in its inventory menu. Task digging does not consume tool
+uses. Cancelling, changing character, losing the tool or moving away prevents the operation; inventory
+failure leaves the saved pickup recoverable. These parcels never enter the permanent stash registry.
+Field work in the task journal shows directions directly, with separate buttons for actions that
+have no carried item, rather than opening another menu.

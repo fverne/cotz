@@ -33,12 +33,13 @@ function ix.jobs.field.Cleanup(character, job)
 	end
 end
 
-function ix.jobs.field.Collect(client, entity)
+function ix.jobs.field.Collect(client, entity, dugUp)
 	if not IsValid(entity) then return end
 	local npc, claim = entity.fieldNPC, entity.fieldClaim
 	local character, job = ix.jobs.field.ActiveJob(client, npc, claim)
 	if not character or character:GetID() ~= entity.fieldOwner then return end
 	local state = job.fieldTask
+	if state.kind == "deadDrop" and not dugUp then return end
 	if state.map ~= game.GetMap()
 		or client:GetPos():DistToSqr(entity:GetPos()) > ix.jobs.field.useDistance ^ 2 then return end
 	if CurTime() < (client.cotzFieldNext or 0) then return end
@@ -113,7 +114,7 @@ function ix.jobs.field.Collect(client, entity)
 				client:Notify("Cargo recovered. Deliver it to " .. active.fieldTask.recipient
 					.. ", then return to " .. npc .. ".")
 			elseif active.fieldTask.kind == "deadDrop" then
-				client:Notify("Parcel collected. Use Field work to locate the destination and deliver it.")
+				client:Notify("Parcel collected. Check its inventory actions for directions and burial.")
 			else
 				client:Notify("Cargo recovered. Return it to " .. npc .. " for payment.")
 			end
@@ -140,6 +141,11 @@ function ix.jobs.field.SpawnObject(character, npc, job)
 	entity:SetNWString("cotz/jobsystem/cargo-name", job.fieldTask.cargoName or ix.item.list[job.fieldTask.cargo].name)
 	entity:SetPos(point)
 	entity:Spawn()
+	if job.fieldTask.kind == "deadDrop" then
+		entity:SetNoDraw(true)
+		entity:SetNotSolid(true)
+		entity:DrawShadow(false)
+	end
 	if job.fieldTask.kind == "defence" then entity:SetHealth(job.fieldTask.defence.health) end
 	entities[keyFor(character, job)] = entity
 

@@ -19,21 +19,19 @@ local function request(npc, action)
 	net.SendToServer()
 end
 
-function ix.jobs.field.OpenMenu(npc, kind)
-	local menu = ix.cotzUI.Menu()
-	menu:AddOption(ACTIONS.status, function() request(npc, "status") end)
-	if kind == "sensor" then
-		menu:AddOption(ACTIONS.deploy, function() request(npc, "deploy") end)
-	elseif kind == "triangulation" then
-		menu:AddOption(ACTIONS.read, function() request(npc, "read") end)
-	elseif kind == "deadDrop" then
-		menu:AddOption(ACTIONS.deliver, function() request(npc, "deliver") end)
-	elseif kind == "defence" then
-		menu:AddOption(ACTIONS.start, function() request(npc, "start") end)
-	elseif kind == "courier" then
-		menu:AddOption(ACTIONS.issue, function() request(npc, "issue") end)
-	end
-	menu:Open()
+function ix.jobs.field.RequestAction(npc, action)
+	request(npc, action)
+end
+
+function ix.jobs.field.GetActions(job)
+	local state = job.fieldTask
+	local actions = {{action = "status", label = "Field work"}}
+	if state.stage == "carrying" or state.stage == "delivered" then return actions end
+	local action = ({sensor = "deploy", triangulation = "read", defence = "start", courier = "issue"})[state.kind]
+	if state.kind == "sensor" and state.stage ~= "deploy" then action = nil end
+	if action then actions[#actions + 1] = {action = action, label = ACTIONS[action]} end
+
+	return actions
 end
 
 net.Receive("cotz/jobsystem/field-marker", function()

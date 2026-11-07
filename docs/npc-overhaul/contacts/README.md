@@ -97,8 +97,8 @@ See the [balance report](../delivery-balance.md) for the current pools, quantiti
 | [Spool](spool.md) | Radio triangulation | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spool.lua) |
 | [Latch](latch.md) | Industrial salvage deliveries | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_latch.lua) |
 | [Spoor](spoor.md) | Mutant hunting | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_spoor.lua) |
-| [Brass](brass.md) | Ammunition deliveries | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_brass.lua) |
-| [Wake](wake.md) | Equipment recovery | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_wake.lua) |
+| [Brass](brass.md) | None for now; ammunition reloader | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_brass.lua) |
+| [Wake](wake.md) | Information courier and return | 22 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_wake.lua) |
 | [Vesper](vesper.md) | Sensor deployment and retrieval | 24 | [Edit](../../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_vesper.lua) |
 
 ### Waystation

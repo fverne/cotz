@@ -49,7 +49,7 @@ else
 	end)
 end
 
-local function canChoose(client, target)
+local function canChoose(client, target, refreshOnly)
 	local character = client:GetCharacter()
 
 	local allowed = character and IsValid(target) and target:GetClass() == "ix_vendor_adv"
@@ -57,9 +57,10 @@ local function canChoose(client, target)
 		and client:GetPos():DistToSqr(target:GetPos()) <= INTERACTION_DISTANCE * INTERACTION_DISTANCE
 		and ix.progression.CanUseNPC(character, target:GetDisplayName())
 	if not allowed then return false end
+	local nextKey = refreshOnly and "cotzTaskRewardRefreshNext" or "cotzTaskRewardNext"
 	local now = CurTime()
-	if now < (client.cotzTaskRewardNext or 0) then return false end
-	client.cotzTaskRewardNext = now + ACTION_INTERVAL
+	if now < (client[nextKey] or 0) then return false end
+	client[nextKey] = now + ACTION_INTERVAL
 
 	return true
 end
@@ -181,12 +182,17 @@ local function configureJobPreview(dialogue)
 			if preview then
 				local definition = ix.jobs.list[preview.identifier]
 
-				local description = ix.jobs.getFormattedDesc(preview, true)
-					.. "\n\nPayment: " .. preview.moneyReward .. " rubles."
-				if definition.requiredItem then
-					description = description .. "\nBetter-quality hand-ins can increase this payment."
+				local contact = ix.townNPCs and ix.townNPCs.byName[target:GetDisplayName()]
+				local description = ix.jobs.GetDialogueDescription(preview, target:GetDisplayName(), true)
+				if contact and contact.dialogue.jobTerms then
+					description = description .. "\n\n" .. contact.dialogue.jobTerms:gsub("{money}", preview.moneyReward)
+				else
+					description = description .. "\n\nI can pay you " .. preview.moneyReward .. " rubles for it."
+					if definition.requiredItem then
+						description = description .. "\nI can pay more for better-quality material."
+					end
+					description = description .. "\nWe can sort out the supplies for you when you come back with it done."
 				end
-				description = description .. "\nYour reward will be revealed when you complete the assignment."
 				net.Start("cotz/dialogue/task-offer")
 				net.WriteEntity(target)
 				net.WriteString(difficulty)
@@ -311,7 +317,8 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 				local previous = root.preCallback
 				root.preCallback = function(self, client, target)
 					if previous then previous(self, client, target) end
-					if SERVER and canChoose(client, target) then
+					if SERVER and canChoose(client, target, true) then
+						ix.taskRewards.RevealJobOffer(client, target:GetDisplayName())
 						ix.taskRewards.RefreshBonuses(client:GetCharacter(), target:GetDisplayName())
 						net.Start("cotz/dialogue/task-rewards-refresh")
 						net.WriteEntity(target)

@@ -27,3 +27,10 @@ Spawn rates and artifact chances remain shared. No saved spawner points are move
 Run `luatex --luaonly tests/config_defaults_spec.lua` and
 `luatex --luaonly tests/shared_commands_spec.lua`. Validate fresh/existing installs, hot reload and
 client config synchronization in multiplayer before deployment.
+
+Lowered hands right-click on a player now enables passage through other players for 60 seconds.
+Right-clicking again while lowered cancels it; death and character changes clear it too.
+`sh_handspassage.lua` maintains shared custom collision state through an NWBool proxy and calls
+`CollisionRulesChanged` whenever it changes. Only player/player pairs are ignored; props, NPCs,
+vehicles and world collisions retain their normal rules. Raised-hand pushing is unchanged.
+Run `luatex --luaonly tests/hands_passage_spec.lua`, then verify with two clients, props and doors.

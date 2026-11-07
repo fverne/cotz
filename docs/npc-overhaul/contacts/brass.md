@@ -4,16 +4,15 @@
 
 **Design reference with an implemented runtime definition.** See the runtime section below for authoritative requirements and rewards.
 
-## Current repeatable work — 6 November 2026
+## Current repeatable work — 7 November 2026
 
-Home/claim region: **Garbage**. Current specialty: **Information courier and return**.
-New work uses 1,000/2,000/3,000-ruble reference budgets and 15/25/35 reputation, with existing themed packages and five-job bonuses.
+Home/claim region: **Garbage**. No new ordinary repeatable work. Wake now offers the information courier runs. Accepted Brass assignments retain their original issuer and can still be finished.
 See the [current job implementation](../repeatable-jobs.md) for quantities, routes, rewards, compatibility and multiplayer checks. Earlier chapter tables below remain finite-progression design references.
 
 
 ## Implemented voice direction — November 2026
 
-Meticulous depot veteran whose counting is fair in both directions. Distrust is bounded by checkable accounts, and dependable work earns professional warmth without abandoning the habit of verification.
+Meticulous ammunition reloader with a depot background, whose counting is fair in both directions. Distrust is bounded by checkable accounts, and dependable work earns professional warmth without abandoning the habit of verification.
 
 Personal conversations, work explanations, and commission text live in the linked runtime definitions.
 Cargo names and descriptions are per assignment; these additions do not change jobs, rewards,
@@ -23,9 +22,9 @@ prerequisites, or field-site placement. Earlier story tables and draft samples r
 
 New everyday characterization authored for this expansion; established history and progression disclosures remain unchanged.
 
-**Motivation and contradiction:** Takes satisfaction in competent habits and dislikes haste making routine work needlessly uncertain. His fairness survives irritation; he can recognise care even in a person whose stories he distrusts.
+**Motivation and contradiction:** Takes satisfaction in careful work at the ammunition loading bench and competent habits and dislikes haste making routine work needlessly uncertain. His fairness survives irritation; he can recognise care even in a person whose stories he distrusts.
 
-**Voice and boundaries:** Measured, exact about what he actually handled, sparing with praise. Allow preference and embarrassment beyond counting. Ammunition anecdotes must not create a new inspection, storage, or repair service.
+**Voice and boundaries:** Measured, exact about what he actually handled, sparing with praise. Allow preference and embarrassment beyond counting. His present occupation is ammunition reloading: sorting cases, checking components and setting doubtful material aside. This establishes his personality and work, without promising a player-facing reloading, inspection, storage or repair service.
 
 **Relationships:** Arena Master's tales irritate him less when the organiser pays proper attention to a practical detail. Quartermaster remains distinct through responsibility for allocation rather than Brass's concern with what physically arrived.
 
@@ -36,9 +35,9 @@ These conversations and their follow-up live in [sh_brassnpc.lua](../../../gamem
 ## Contact brief
 
 - **Home and return point:** Garbage. Every hand-in and reward claim occurs here.
-- **Identity:** New: meticulous depot veteran who counts everything and distrusts extravagant claims.
+- **Identity:** Meticulous ammunition reloader and former depot worker who counts everything and distrusts extravagant claims.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
-- **Only repeatable category:** Information courier and return.
+- **Only repeatable category:** None for now; information courier work belongs to Wake.
 - **Finite plan:** 24 steps; **6 hand-ins, 6 job checkpoints, 12 authored objectives**.
 - **Step labels:** BR01 onward; runtime IDs prefix these labels with cotz/town/<contact-id>/. Keep deployed IDs stable.
 

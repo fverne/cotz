@@ -22,6 +22,7 @@ local callbacks = {}
 hook = {Add = function(event, _, callback) callbacks[event] = callback end,
 	Run = function(event, ...) if callbacks[event] then return callbacks[event](...) end end}
 timer = {Simple = function() end}
+net = {Start = function() end, WriteEntity = function() end, Send = function() end}
 netstream = {Start = function() end}
 ents = {FindByClass = function() return {} end}
 game = {GetMap = function() return "rp_marsh_cs" end}
@@ -55,6 +56,7 @@ for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredi
 end
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_taskrewards.lua")
 dofile(base .. "libs/sh_rewards.lua")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_regionaljobs.lua")
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sv_taskrewards.lua")
 ix.progression.AssignActiveRequirements = function() end
 ix.meta.character.__index = ix.meta.character
@@ -368,11 +370,12 @@ ix.jobs.list.ammoComparison = ammoJob
 check(math.abs(ix.progression.HandInUnitValue("22lr") * ix.item.list["22lr"].ammoAmount - 12) < 0.000001,
 	"progression ammunition pays sixty percent of a full box per consumed round")
 ix.jobs.list.ammoComparison = nil
-local food = {quantity = 5, data = {quantity = 5}, GetData = function(self, key, default)
+local food = {uniqueID = "food", quantity = 5, data = {quantity = 5}, GetData = function(self, key, default)
 	return self.data[key] or default
 end, SetData = function(self, key, value) self.data[key] = value end,
 	Remove = function(self) self.removed = true end}
 function foodOwner.inventory:HasItem(id) if id == "food" then return food end end
+foodOwner.inventory.items.food = food
 callbacks.ix_JobTrigger = function(client)
 	local jobs = client:GetCharacter():GetJobs()
 	jobs.NPC.progress = jobs.NPC.progress + 1
@@ -390,6 +393,8 @@ ix.jobs.list.ammoDelivery = {requiredItem = "22lr", numberRec = 3, reward = {}, 
 ammoOwner.jobs.NPC = {identifier = "ammoDelivery", numberRec = 3, progress = 0}
 local rounds = copy(food)
 rounds.quantity = nil
+rounds.uniqueID = "22lr"
+ammoOwner.inventory.items.rounds = rounds
 rounds.ammoAmount = ix.item.list["22lr"].ammoAmount
 rounds.data.quantity = 5
 function ammoOwner.inventory:HasItem(id) if id == "22lr" then return rounds end end
@@ -416,6 +421,7 @@ local alternativeOwner = actor()
 alternativeOwner.jobs.NPC = {identifier = "alternate", numberRec = 3, progress = 0}
 local supplies = copy(food)
 supplies.data.quantity, supplies.removed = 5, nil
+alternativeOwner.inventory.items.food = supplies
 function alternativeOwner.inventory:HasItem(id) if id == "food" then return supplies end end
 check(not ix.taskRewards.DeliverJobItem(alternativeOwner.client, "NPC"), "valuable orders require a receiver")
 receiver.denied = true
@@ -440,10 +446,11 @@ ix.jobs.list.categoryDelivery = copy(foodJob)
 ix.jobs.list.categoryDelivery.requiredPool = "deliveryTest"
 categoryOwner.jobs.NPC = {identifier = "categoryDelivery", numberRec = 2, progress = 0}
 local stock = {}
+categoryOwner.inventory.items = stock
 function categoryOwner.inventory:HasItem(id) return stock[id] end
 check(not ix.taskRewards.DeliverJobItem(categoryOwner.client, "NPC"), "unrelated inventory cannot satisfy a category")
 local function wholeItem(id)
-	local item = {GetData = function(_, _, default) return default end}
+	local item = {uniqueID = id, GetData = function(_, _, default) return default end}
 	function item:Remove() stock[id] = nil end
 	stock[id] = item
 
@@ -830,7 +837,7 @@ local shownPreview = viewer:GetData("taskJobPreviews")["'Old Timer'"].easy
 local shownOffer = viewer:GetData("taskRewardOffers")[shownPreview.rewardKey]
 check(#shownOffer.choices == 0 and shownPreview.rewardChoices == nil,
 	"replicated offer and preview contain no hidden reward details")
-check(previewPacket[3]:find("revealed", 1, true), "confirmation explains when rewards are revealed")
+check(previewPacket[3]:find("when you come back", 1, true), "confirmation explains when rewards are revealed")
 check(not ix.taskRewards.AcceptJob(viewer.client, "'Old Timer'", "easy", 999),
 	"acceptance rejects a supplied reward choice")
 local multiViewer = actor()
@@ -1508,4 +1515,23 @@ check(triggerOwner.client.message:find("Task completed:", 1, true)
 triggerOwner.client.message = nil
 triggerOwner.client:ixJobEvaluate("hunt")
 check(triggerOwner.client.message == nil, "repeated triggers do not announce a completed task again")
+do
+	local immediateOwner = actor()
+	ix.jobs.list.immediateHandIn = {name = "Deliver food", desc = "Deliver food", requiredItem = "food",
+		numberRec = 1, moneyReward = 1000, repReward = 15, reward = {}, tier = 1}
+	check(immediateOwner.client:ixJobAdd("immediateHandIn", "'Old Timer'"), "immediate reward fixture accepts")
+	local item = {uniqueID = "food", GetData = function(_, _, default) return default end}
+	function item:Remove() immediateOwner.inventory.items.food = nil end
+	immediateOwner.inventory.items.food = item
+	callbacks.ix_JobTrigger = function(client, trigger) client:ixJobEvaluate(trigger) end
+	local packetCount = #packets
+	check(ix.taskRewards.DeliverJobItem(immediateOwner.client, "'Old Timer'"), "last requested item is handed in")
+	local completed = immediateOwner:GetJobs()["'Old Timer'"]
+	local offer = immediateOwner:GetData("taskRewardOffers")[completed.rewardKey]
+	check(completed.isCompleted and offer.ready and #offer.choices > 0,
+		"last item reveals selectable rewards without another completion action")
+	check(#packets > packetCount and packets[#packets].name == "cotz/dialogue/task-rewards-refresh",
+		"last item immediately sends the dialogue reward refresh")
+end
+
 print("PASS: " .. checks .. " task reward checks")

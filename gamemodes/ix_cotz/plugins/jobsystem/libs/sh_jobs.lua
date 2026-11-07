@@ -50,6 +50,12 @@ function ix.jobs.NotifyCompleted(client, npc, job)
 	job.completionNotified = true
 	client:Notify("Task completed: " .. ix.jobs.getFormattedName(job) .. " Return to " .. npc .. ".")
 	netstream.Start(client, "ix_COTZPlayPDASound", 2)
+	local character, claim = client:GetCharacter(), job.rewardKey
+	timer.Simple(0, function()
+		if not IsValid(client) or client:GetCharacter() ~= character then return end
+		local current = character:GetJobs()[npc]
+		if current and current.rewardKey == claim then ix.taskRewards.RevealJobOffer(client, npc) end
+	end)
 end
 
 local function initialCount(identifier)
@@ -95,6 +101,87 @@ function ix.jobs.getFormattedDesc(activejob, hideRewards)
 	end
 
 	return ix.jobs.FormatMapNames(text)
+end
+
+local function spokenJobDetails(job, contact)
+	local definition = ix.jobs.list[job.identifier]
+	local state = job.fieldTask
+	local count = job.numberRec - (job.progress or 0)
+	local map = state and state.map or definition.targetMap or definition.fieldMap
+		or (contact.job.maps or {})[({"easy", "medium", "hard"})[definition.tier or 1]] or contact.map
+	local region = ix.jobs.GetMapName(map)
+	if definition.requiredItem then
+		local item = ix.item.list[definition.requiredItem]
+		local label = item and item.name or "the requested material"
+		if definition.requiredPool then label = ix.progression.itemPools[definition.requiredPool].name end
+		local items = (count == 1 and "" or count .. " ") .. label
+		if definition.alternateDelivery then
+			local receivers = ix.jobs.regional.EligibleReceivers(definition)
+			return "Take " .. items .. " to " .. table.concat(receivers, " or ") .. " in " .. region
+				.. ". Come back here once you've handed it over."
+		end
+
+		return "Bring me " .. items .. "."
+	end
+	if job.photoKind or definition.photoKind then
+		return "Bring me photographs of " .. job.numberRec .. " different " .. (job.photoKind or definition.photoKind)
+			.. " types. I need the real thing in view; another picture of the same kind won't help."
+	end
+	if definition.targetSpecies or definition.targetWeights then
+		local target = definition.targetSpecies or definition.name:match("of (.-)%.?$") or "those mutants"
+		local amount = definition.targetWeights and job.numberRec .. " packs' worth" or job.numberRec
+
+		return "Deal with " .. amount .. " of the " .. target .. " in " .. region .. ", then come back here."
+	end
+	local kind = state and state.kind or definition.fieldType
+	if kind == "courier" then
+		if state and state.recipient then
+			return "Take the parcel to " .. state.recipient .. " in "
+				.. ix.jobs.GetMapName(ix.jobs.field.GetRecipientMap(state)) .. ", then come back here."
+		end
+
+		return "I'll give you a sealed parcel and the recipient's name. Hand it to them yourself, then come back here."
+	elseif kind == "deadDrop" then
+		if state and state.stage == "carrying" then
+			return "Bury the parcel at the place I marked in "
+				.. ix.jobs.GetMapName(state.destinationMap or state.map) .. ". Bring a digging tool, then come back here."
+		end
+
+		return "Dig up the parcel at the place I marked in " .. region
+			.. ", then bury it at the other cache. You'll need a digging tool for both ends. Come back when it's done."
+	elseif kind == "sensor" then
+		return "Set the recorder down at the place I marked in " .. region
+			.. ". Leave it alone while it records, then go back and collect it. Bring it here afterwards."
+	elseif kind == "triangulation" then
+		return "Follow the signal in " .. region .. ". Take readings from "
+			.. (state and state.readingCount or definition.fieldSettings and definition.fieldSettings.readingCount or 3)
+			.. " separated positions, then find the transmitter and bring it here."
+	elseif kind == "defence" then
+		return "Start the sampler at the marked site in " .. region
+			.. " and stay close enough to protect it while it records. Bring the recorder back when it's finished."
+	elseif kind == "recovery" then
+		return "Look for " .. (state and state.cargoName or "the equipment") .. " in " .. region
+			.. ". I've left the directions in your PDA. Bring it back here when you find it."
+	end
+
+	return contact.dialogue.work
+end
+
+function ix.jobs.GetDialogueDescription(job, npc, preview)
+	local definition = ix.jobs.list[job.identifier]
+	local contact = ix.townNPCs and ix.townNPCs.byName[npc]
+	if not contact then return ix.jobs.getFormattedDesc(job, true) end
+	if definition.townProgression then
+		local progression = ix.progression.definitions[definition.townProgression]
+		if progression then
+			return job.isCompleted and progression.completionMessage or progression.briefing
+		end
+	end
+	if job.isCompleted then return contact.dialogue.jobFinished end
+	local template = preview and contact.dialogue.jobBriefing or contact.dialogue.jobReminder
+	local details = spokenJobDetails(job, contact)
+
+	return (template:gsub("{details}", function() return details end))
 end
 
 function ix.jobs.getFormattedNameInactive(identifier)

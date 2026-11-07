@@ -711,3 +711,13 @@ The Original remains inactive. Regional sources and disabled-item exclusions sti
 STALKERnet opens on the current character. Personal statistics and location bypass Mute's dossier,
 activity, rank and location gates in both data filtering and display. Other characters and global
 search/remote tools keep their existing unlocks. List filters cannot clear the personal dossier.
+
+## Conversation and discovery
+
+Repeatable spoken briefings/reminders are separate from formal journal descriptions. Each contact
+owns `dialogue.jobBriefing`, `jobReminder` and `jobFinished`; `{details}` inserts the actual goods,
+region and recipient instructions. Optional `jobTerms` replaces the spoken payment paragraph
+(with `{money}`), preserving Mute's written presentation. Progression conversations discover the
+contact's currently active topics for the character's separate Progression tab.
+Wake owns new information couriers; Brass has no new ordinary work and retains accepted assignments.
+See `tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec.lua` and `tests/progression_spec.lua`.

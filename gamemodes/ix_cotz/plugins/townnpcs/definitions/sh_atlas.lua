@@ -39,6 +39,9 @@ PLUGIN:Register("atlas", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "I'd like to see what you find out there. {details}",
+		jobReminder = "Have another look when you have the chance. {details}",
+		jobFinished = "That's enough to work with. Thank you. Let's settle what I owe you.",
 		delivery = (
 			"Here, beside the notes. Thank you for bringing it through; I'll check the details before I "
 			.. "file it."

@@ -40,6 +40,9 @@ PLUGIN:Register("haggler", {
 		bonusCash = true,
 	},
 	dialogue = {
+		jobBriefing = "There's a little trouble making journeys more expensive than they ought to be. {details}",
+		jobReminder = "I'm still waiting to hear that you've dealt with them. {details}",
+		jobFinished = "You've made that journey a little less troublesome. And yes, I remember our price.",
 		completedGreeting = (
 			"There you are. It's pleasant to see a customer whose promises don't need chasing all over "
 			.. "the Marsh."

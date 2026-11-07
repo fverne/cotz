@@ -39,6 +39,9 @@ PLUGIN:Register("spoor", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "I've been watching the movement out there. {details}",
+		jobReminder = "I still need you to cover that ground. {details}",
+		jobFinished = "You've done the hunting we agreed on. Let's settle up.",
 		delivery = "Set it down. Tell me if anything happened to it on the way.",
 		completedGreeting = (
 			"Hello. Seen anything worth a closer look? You know I'm happy to hear what you actually "

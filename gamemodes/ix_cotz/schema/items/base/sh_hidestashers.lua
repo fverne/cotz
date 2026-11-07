@@ -145,6 +145,9 @@ ITEM.functions.unhidestash = {
     tip = "equipTip",
     icon = "icon16/stalker/open.png",
     OnRun = function(item)
+		local character = item.player:GetCharacter()
+		if not character or item.invID ~= character:GetInventory():GetID() then return false end
+		if ix.jobs and ix.jobs.field and ix.jobs.field.DigDeadDrop(item.player, item) then return false end
         local quantity = item:GetData("quantity", item.quantity)
         ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
         ix.plugin.list["hidestash"]:StashUnhide(item.player)
@@ -165,4 +168,28 @@ ITEM.functions.unhidestash = {
 
         return not IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
+}
+
+ITEM.functions.JobCache = {
+	name = "Dig up / bury task parcel",
+	icon = "icon16/arrow_refresh.png",
+	OnCanRun = function(item)
+		local character = IsValid(item.player) and item.player:GetCharacter()
+		if not character or IsValid(item.entity) or item.invID ~= character:GetInventory():GetID() then return false end
+		if item:GetData("quantity", item.quantity or 0) <= 0 then return false end
+		for _, job in pairs(character:GetJobs()) do
+			if job.fieldTask and job.fieldTask.kind == "deadDrop" and job.fieldTask.stage ~= "delivered" then
+				return true
+			end
+		end
+
+		return false
+	end,
+	OnRun = function(item)
+		if not ix.jobs.field.DigDeadDrop(item.player, item) then
+			item.player:Notify("Move closer to the assigned cache before digging.")
+		end
+
+		return false
+	end,
 }

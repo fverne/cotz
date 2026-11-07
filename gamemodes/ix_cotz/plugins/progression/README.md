@@ -8,9 +8,12 @@ Ballast BA12 now provides the existing character bank. Its contents and size rem
 Vesper provides paid suit conversions. Mute's existing STALKERnet features have explicit service gates.
 The town service labels are included in benefit summaries; optional `plannedUnlocks` remain inactive.
 
-The progression encyclopedia uses contact cards and the shared
-[COTZ typography and palette](../../../../docs/ui-style.md). Long task requirements and reward
-descriptions remain wrapped inside the existing scrolling encyclopedia.
+Progression is a top-level menu tab beside Tasks, using contact cards and the shared
+[COTZ typography and palette](../../../../docs/ui-style.md). The list begins empty for each character.
+Opening a contact's progression conversation records its currently active topics in the character
+data key `knownProgressionTopics`; newly unlocked topics require another conversation before they
+appear. Discovery survives reconnects and does not change progression eligibility or saved progress.
+Long task requirements and rewards remain wrapped in the scrolling panel.
 
 This plugin owns character progression storage, persistent item requirements, numeric counters,
 prerequisite validation, purchase permissions, completion payouts, pending reward claims and services.

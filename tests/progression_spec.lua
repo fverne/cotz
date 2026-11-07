@@ -479,6 +479,27 @@ for _, townContact in ipairs({false, "atlas"}) do
 end
 ix.progression.Notify = notify
 
+local reader, stranger = character(), character()
+ix.progression.Register("discovery/first", {keyNpc = "Discovery", defaultActive = true})
+ix.progression.Register("discovery/second", {keyNpc = "Discovery"})
+check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 0,
+	"a new character has no discovered progression entries")
+ix.progression.DiscoverTopics(reader, "Discovery")
+check(ix.progression.GetKnownActiveProgressions(reader, "Discovery")[1] == "discovery/first",
+	"discussing a contact reveals its currently active topics")
+check(#ix.progression.GetKnownActiveProgressions(stranger, "Discovery") == 0,
+	"discovery belongs to the character")
+ix.progression.SetActive(reader, "discovery/second", true)
+check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 1,
+	"a newly unlocked topic remains hidden until discussed")
+ix.progression.DiscoverTopics(reader, "Discovery")
+check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 2,
+	"returning to the contact reveals the new topic")
+local reconnected = character()
+reconnected.data = copy(reader.data)
+check(#ix.progression.GetKnownActiveProgressions(reconnected, "Discovery") == 2,
+	"discovery survives character restoration")
+
 ix.progression = {definitions = ix.progression.definitions}
 SERVER, CLIENT = false, true
 for _, library in ipairs({"sh_storage", "sh_progression", "sh_requirements", "sh_expansion", "sh_services"}) do

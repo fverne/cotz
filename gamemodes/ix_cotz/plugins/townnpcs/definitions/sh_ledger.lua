@@ -37,6 +37,9 @@ PLUGIN:Register("ledger", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "There's something I need brought through. {details}",
+		jobReminder = "I still have someone waiting at this end. {details}",
+		jobFinished = "Thank you for bringing it through. Let me settle what you're owed.",
 		delivery = "The parcel first. Then I can close the entry.",
 		completedGreeting = (
 			"Good to see you. Your work has saved me a number of difficult enquiries. What can I help "

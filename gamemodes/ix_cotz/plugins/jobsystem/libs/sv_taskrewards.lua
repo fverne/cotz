@@ -131,6 +131,11 @@ function ix.taskRewards.RevealJobOffer(client, npc)
 		character:Save()
 	end
 
+	local target = ix.progression.GetNPCFromName(npc)
+	net.Start("cotz/dialogue/task-rewards-refresh")
+	net.WriteEntity(target)
+	net.Send(client)
+
 	return true
 end
 
@@ -320,22 +325,7 @@ function ix.taskRewards.DeliverJobItem(client, npc, receiver)
 			or not ix.jobs.regional.ReceiverMatches(character, contact, job)
 			or contact.map ~= game.GetMap() then return false end
 	end
-	local inventory = character:GetInventory()
-	local item, itemID
-	if definition.requiredPool then
-		local pool = ix.progression.itemPools[definition.requiredPool]
-		if not pool then return false end
-		for _, candidate in ipairs(pool.candidates) do
-			local available = inventory:HasItem(candidate.item)
-			if available then
-				item, itemID = available, candidate.item
-				break
-			end
-		end
-	else
-		itemID = definition.requiredItem
-		item = inventory:HasItem(itemID)
-	end
+	local item, itemID = ix.jobs.regional.FindHandIn(character, job)
 	if not item then return false end
 	local remaining = job.numberRec - (job.progress or 0)
 	local quantity = definition.wholeItems and 1 or item:GetData("quantity", item.quantity or item.ammoAmount or 1)
@@ -356,6 +346,7 @@ function ix.taskRewards.DeliverJobItem(client, npc, receiver)
 	character:SetJobs(jobs)
 	character:Save()
 	ix.dialogue.notifyItemLost(client, ix.item.list[itemID].name)
+	if job.isCompleted then ix.taskRewards.RevealJobOffer(client, npc) end
 
 	return true
 end

@@ -44,6 +44,9 @@ PLUGIN:Register("cleaner", {
 		},
 	},
 	dialogue = {
+		jobBriefing = "Apparently everyone remembers who carries things except the person who actually has to carry them. {details}",
+		jobReminder = "I still need that parcel moved. {details}",
+		jobFinished = "Buried where it belongs? Good. One less thing left for me to chase up.",
 		delivery = "Leave it here. Keep it closed.",
 		completedGreeting = (
 			"You're here. Good. We can spare ourselves the usual discussion about whether instructions "
