@@ -188,4 +188,84 @@ rootPanel.OnCharacterDeleted(parent, second)
 check(parent.mainPanel.createButton.visible, "last deletion exposes character creation")
 check(not parent.mainPanel.loadButton.visible, "last deletion hides the load button")
 
+-- The initial roster message can arrive before LocalPlayer() has player methods.
+local mainStart = assert(source:find("-- main character menu panel", 1, true))
+local mainFinish = assert(source:find("-- container panel", mainStart, true)) - 1
+local mainPlayer = {}
+local directLoad = false
+local mainEnvironment = setmetatable({
+	PANEL = {},
+	LocalPlayer = function() return mainPlayer end,
+	ScrW = function() return 1920 end,
+	ScrH = function() return 1080 end,
+	Color = function() return {} end,
+	L = function(value) return value end,
+	GAMEMODE = {Version = "test"},
+	Schema = {},
+	hook = {Run = function() end},
+}, {__index = _G})
+ix.config = {Get = function(key, default)
+	if key == "charloadremove" then return directLoad end
+
+	return default
+end}
+assert(load(source:sub(mainStart, mainFinish):gsub("!=", "~="):gsub("!", "not "),
+	"@cl_character.lua", "t", mainEnvironment))()
+local mainPanel = panels.ixCharMenuMain
+
+local function control()
+	local result = button()
+	result.visible = true
+	result.SetText = function(self, value) self.text = value end
+	result.GetWide = function() return 100 end
+	result.GetTall = function() return 20 end
+	result.Add = function() return control() end
+	result.SetTextColor = function() end
+	result.SetFont = function() end
+	result.SizeToContents = function() end
+	result.SetPos = function() end
+	result.SetSize = function() end
+	result.Dock = function() end
+	result.SetWide = function() end
+
+	return result
+end
+
+local function openMainMenu()
+	local result = setmetatable({
+		GetParent = function() return {} end,
+		GetPadding = function() return 16 end,
+		DockPadding = function() end,
+		Add = function() return control() end,
+	}, {__index = mainPanel})
+	result:Init()
+
+	return result
+end
+
+ix.characters, ix.char.loaded = {}, {}
+menu = openMainMenu()
+check(menu.createButton.visible, "an early empty roster exposes character creation")
+check(not menu.loadButton.visible, "an early empty roster hides character loading")
+check(menu.reloadMenuButton ~= nil, "an early empty roster finishes building recovery controls")
+check(menu.returnButton.text == "exit the zone", "an early menu finishes building its exit button")
+
+mainPlayer = {GetCharacter = function() return localCharacter end}
+localCharacter = nil
+menu = openMainMenu()
+check(menu.createButton.visible and not menu.loadButton.visible, "a ready player with no characters can create one")
+
+directLoad = true
+ix.characters, ix.char.loaded = {1}, {[1] = first}
+menu = openMainMenu()
+check(menu.reloadMenuButton ~= nil, "an unloaded existing character retains the search button")
+localCharacter = first
+menu = openMainMenu()
+check(menu.reloadMenuButton == nil, "a loaded single character does not get a search button")
+check(menu.returnButton.text == "return", "a loaded character retains the return button")
+
+ix.characters, ix.char.loaded = {1, 2}, {[1] = first, [2] = second}
+menu = openMainMenu()
+check(menu.reloadMenuButton ~= nil, "multiple characters retain the search button")
+
 print("character_menu_spec: " .. checks .. " checks passed")
