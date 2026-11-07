@@ -117,18 +117,23 @@ class ProgressionRewardsSpec(unittest.TestCase):
             self.assertFalse(any(s.get("stock", {}).get("item") == "lowtiercookerfuel"
                                  for s in contact["progression"]), slug)
 
-    def test_ammunition_price_order_and_hp_before_ap(self):
+    def test_ammunition_gun_order_and_hp_before_ap(self):
         authoring = runpy.run_path(str(ROOT / "docs/npc-overhaul/tools/ammo_progression.py"))
         ammo = authoring["ammunition"]()
         routes, orders = authoring["allocations"](self.data, ammo)
         self.assertEqual(self.data["ammoOrder"], orders)
+        regulars, first_uses = authoring["regular_order"](self.data, ammo)
+        self.assertEqual(self.data["regularAmmoChain"], regulars)
+        self.assertEqual(len(regulars), len(set(regulars)))
+        self.assertEqual(set(regulars), {item for item, entry in ammo.items() if entry["regular"] == item})
+        self.assertEqual(regulars[-4:], ["127x55", "145x114", "700nitro", "93x64"])
+        self.assertEqual(set(regulars[-4:]), set(regulars) - first_uses.keys())
+        self.assertFalse(set(regulars) & set(self.data["ammoVariants"]))
         for slug, expected in routes.items():
             catalogue = self.data["contacts"][slug]["catalogue"]
             for item, step in expected.items():
                 self.assertEqual(catalogue[item]["step"], step, (slug, item))
-            regulars = sorted((entry["cost"], item) for item, entry in ammo.items()
-                              if entry["regular"] == item and item in expected)
-            indices = [int(expected[item][2:]) for _, item in regulars]
+            indices = [int(expected[item][2:]) for item in regulars if item in expected]
             self.assertEqual(indices, sorted(indices), slug)
             for variant, regular in self.data["ammoVariants"].items():
                 if variant not in expected:
@@ -142,6 +147,19 @@ class ProgressionRewardsSpec(unittest.TestCase):
         self.assertEqual(ammo["45acp41"]["regular"], "45acp41")
         self.assertNotIn("145x114", routes["brass"])
 
+    def test_regular_ammunition_order_tracks_changed_gun_chains(self):
+        authoring = runpy.run_path(str(ROOT / "docs/npc-overhaul/tools/ammo_progression.py"))
+        ammo = authoring["ammunition"]()
+        changed = copy.deepcopy(self.data)
+        chain = next(chain for chain in changed["chains"] if "p90" in chain)
+        chain.remove("p90")
+        chain.insert(0, "p90")
+        regulars, first_uses = authoring["regular_order"](changed, ammo)
+        self.assertEqual(first_uses["57x28"][0], 1)
+        self.assertEqual(first_uses["57x28"][3], "p90")
+        self.assertLess(regulars.index("57x28"), regulars.index("12gauge"))
+        self.assertEqual(first_uses["762x25"][3], "nagantrev")
+
     def test_ammunition_stage_dependencies_prevent_branch_bypass(self):
         compiled = self.data["compiled"]
         for slug, steps in self.data["ammoOrder"].items():
@@ -150,6 +168,12 @@ class ProgressionRewardsSpec(unittest.TestCase):
                               compiled[rewards.progression_id(slug, higher)]["prerequisites"])
         for slug, contact in self.data["contacts"].items():
             catalogue = contact["catalogue"]
+            local_regulars = [item for item in self.data["regularAmmoChain"] if item in catalogue]
+            for lower, higher in zip(local_regulars, local_regulars[1:]):
+                before = rewards.progression_id(slug, catalogue[lower]["step"])
+                after = rewards.progression_id(slug, catalogue[higher]["step"])
+                if before != after:
+                    self.assertIn(before, compiled[after]["prerequisites"], (slug, lower, higher))
             for variant, regular in self.data["ammoVariants"].items():
                 if variant in catalogue and regular in catalogue:
                     self.assertIn(rewards.progression_id(slug, catalogue[regular]["step"]),

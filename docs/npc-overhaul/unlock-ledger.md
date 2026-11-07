@@ -4,7 +4,7 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**600 active steps; 501 have functional unlocks; 39 have TODO-only unlock plans;
+**600 active steps; 502 have functional unlocks; 38 have TODO-only unlock plans;
 312 have multiple assigned unlocks; 60 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
@@ -17,7 +17,12 @@ Their proposed terms require implementation and balance review before activation
 service credits remain available; progression item gifts are disabled. Each active step grants an implemented unlock or completion cash.
 TODO plans alone never satisfy reward coverage. Empty steps are reported without restoring excluded items. Each cosmetic finish remains appearance-only.
 
-Validation passed.
+## Validation findings
+
+This is a current-definition snapshot generated with `--write --allow-invalid`.
+The runtime configuration has unresolved errors; `--check` remains strict.
+
+- Progression cycle: cotz/town/spoor/SP07; remaining graph-dependent checks could not run
 
 ## Coverage by contact
 
@@ -26,14 +31,14 @@ Validation passed.
 | arena-master | 0 | 0 | 0 | 0 |
 | atlas | 22 | 19 | 0 | 13 |
 | ballast | 22 | 22 | 0 | 15 |
-| beanstalk | 24 | 24 | 0 | 23 |
+| beanstalk | 24 | 24 | 0 | 22 |
 | boss | 22 | 15 | 1 | 4 |
-| brass | 24 | 23 | 1 | 17 |
+| brass | 24 | 24 | 0 | 17 |
 | carbon | 22 | 15 | 3 | 12 |
 | cleaner | 28 | 28 | 0 | 23 |
 | egghead | 26 | 11 | 6 | 2 |
 | gasket | 22 | 16 | 4 | 6 |
-| haggler | 26 | 26 | 0 | 19 |
+| haggler | 26 | 26 | 0 | 20 |
 | intern | 24 | 23 | 1 | 20 |
 | jitters | 26 | 22 | 1 | 16 |
 | latch | 22 | 18 | 1 | 8 |
@@ -99,28 +104,28 @@ Validation passed.
 | ballast | BA20 | Purchase: drink_spirit_2 | — | 2250 rubles |
 | ballast | BA21 | Purchase: drink_spirit_3; Purchase: fubar | Record: Waystation cargo handover | 1775 rubles |
 | ballast | BA22 | Purchase: hidestasher_shovel | — | 2450 rubles; Recognition: Ballast's trusted contact |
-| beanstalk | BN01 | Purchase: 22lr; Purchase: 762x25; Purchase: 9x18; Purchase: suit_ssp99 | — | 275 rubles |
-| beanstalk | BN02 | Purchase: 22lrhp; Purchase: 762x25hp; Purchase: 9x18hp | — | 450 rubles |
-| beanstalk | BN03 | Purchase: 22lrap; Purchase: 762x25ap; Purchase: 9x18ap; Stock: 22lr +1 total | — | 0 rubles |
-| beanstalk | BN04 | Purchase: 45acp; Purchase: 57x28; Purchase: 9x19; Purchase: 9x21 | — | 650 rubles |
-| beanstalk | BN05 | Purchase: 45acphp; Purchase: 57x28hp; Purchase: 9x19hp; Purchase: 9x21hp | — | 575 rubles |
-| beanstalk | BN06 | Purchase: 45acpap; Purchase: 57x28ap; Purchase: 9x19ap; Purchase: 9x21ap | — | 850 rubles |
-| beanstalk | BN07 | Purchase: 357magnum; Purchase: 44magnum; Purchase: 545x39; Stock: 22lrap +1 total | — | 0 rubles |
-| beanstalk | BN08 | Purchase: 357magnumhp; Purchase: 44magnumhp; Purchase: 545x39hp | Restocking: environmental research colours | 1050 rubles |
-| beanstalk | BN09 | Purchase: 357magnumap; Purchase: 44magnumap; Purchase: 545x39ap | — | 875 rubles |
-| beanstalk | BN10 | Purchase: 556x45; Purchase: 762x39 | — | 1250 rubles |
-| beanstalk | BN11 | Purchase: 556x45hp; Purchase: 762x39hp; Stock: 22lrhp +1 total | — | 0 rubles |
-| beanstalk | BN12 | Purchase: 556x45ap; Purchase: 762x39ap | Restocking: environmental research colours | 1450 rubles |
-| beanstalk | BN13 | Purchase: 50ae; Purchase: 9x39; Purchase: suit_ssp99m | — | 1175 rubles |
-| beanstalk | BN14 | Purchase: 50aehp; Purchase: 9x39hp | — | 1650 rubles |
-| beanstalk | BN15 | Purchase: 50aeap; Purchase: 9x39ap; Stock: 762x25 +1 total | — | 0 rubles |
-| beanstalk | BN16 | Purchase: 500magnum; Purchase: 762x51 | — | 1850 rubles |
-| beanstalk | BN17 | Purchase: 500magnumhp; Purchase: 762x51hp | — | 1475 rubles |
-| beanstalk | BN18 | Purchase: 500magnumap; Purchase: 762x51ap | — | 2050 rubles |
-| beanstalk | BN19 | Purchase: 127x55; Purchase: 338lapua; Purchase: 762x54; Purchase: 93x64; Stock: 762x25ap +1 total | Holding the Site: environmental research colours | 0 rubles |
-| beanstalk | BN20 | Purchase: 338lapuahp; Purchase: 762x54hp | A full supply order: environmental research colours | 2250 rubles |
-| beanstalk | BN21 | Purchase: 338lapuaap; Purchase: 762x54ap | A Clean Comparison: environmental research colours | 1775 rubles |
-| beanstalk | BN22 | Stock: 762x25hp +1 total | The Last Control: environmental research colours | 2450 rubles |
+| beanstalk | BN01 | Purchase: 762x25; Purchase: 9x19; Purchase: suit_ssp99 | — | 275 rubles |
+| beanstalk | BN02 | Purchase: 45acp; Purchase: 762x25hp; Purchase: 9x19hp | — | 450 rubles |
+| beanstalk | BN03 | Purchase: 22lr; Purchase: 45acphp; Purchase: 762x25ap; Purchase: 9x19ap; Stock: 22lr +1 total | — | 0 rubles |
+| beanstalk | BN04 | Purchase: 22lrhp; Purchase: 45acpap; Purchase: 545x39 | — | 650 rubles |
+| beanstalk | BN05 | Purchase: 22lrap; Purchase: 545x39hp | — | 575 rubles |
+| beanstalk | BN06 | Purchase: 545x39ap | — | 850 rubles |
+| beanstalk | BN07 | Purchase: 762x39; Stock: 22lrap +1 total | — | 0 rubles |
+| beanstalk | BN08 | Purchase: 556x45; Purchase: 762x39hp | Restocking: environmental research colours | 1050 rubles |
+| beanstalk | BN09 | Purchase: 556x45hp; Purchase: 762x39ap; Purchase: 9x18 | — | 875 rubles |
+| beanstalk | BN10 | Purchase: 556x45ap; Purchase: 762x54; Purchase: 9x18hp | — | 1250 rubles |
+| beanstalk | BN11 | Purchase: 357magnum; Purchase: 762x54hp; Purchase: 9x18ap; Stock: 22lrhp +1 total | — | 0 rubles |
+| beanstalk | BN12 | Purchase: 357magnumhp; Purchase: 762x54ap; Purchase: 9x39 | Restocking: environmental research colours | 1450 rubles |
+| beanstalk | BN13 | Purchase: 357magnumap; Purchase: 44magnum; Purchase: 9x39hp; Purchase: suit_ssp99m | — | 1175 rubles |
+| beanstalk | BN14 | Purchase: 44magnumhp; Purchase: 9x21; Purchase: 9x39ap | — | 1650 rubles |
+| beanstalk | BN15 | Purchase: 44magnumap; Purchase: 762x51; Purchase: 9x21hp; Stock: 762x25 +1 total | — | 0 rubles |
+| beanstalk | BN16 | Purchase: 500magnum; Purchase: 762x51hp; Purchase: 9x21ap | — | 1850 rubles |
+| beanstalk | BN17 | Purchase: 338lapua; Purchase: 500magnumhp; Purchase: 762x51ap | — | 1475 rubles |
+| beanstalk | BN18 | Purchase: 338lapuahp; Purchase: 500magnumap; Purchase: 50ae | — | 2050 rubles |
+| beanstalk | BN19 | Purchase: 338lapuaap; Purchase: 50aehp; Purchase: 57x28; Stock: 762x25ap +1 total | Holding the Site: environmental research colours | 0 rubles |
+| beanstalk | BN20 | Purchase: 127x55; Purchase: 50aeap; Purchase: 57x28hp | A full supply order: environmental research colours | 2250 rubles |
+| beanstalk | BN21 | Purchase: 57x28ap | A Clean Comparison: environmental research colours | 1775 rubles |
+| beanstalk | BN22 | Purchase: 93x64; Stock: 762x25hp +1 total | The Last Control: environmental research colours | 2450 rubles |
 | beanstalk | BN23 | Stock: 9x18 +1 total | Findings Worth Keeping: environmental research colours | 0 rubles |
 | beanstalk | BN24 | Purchase: suit_seva | — | 2650 rubles; Recognition: Beanstalk's trusted contact |
 | boss | BO01 | Purchase: detectorecho; Purchase: helm_operator_rus_1; Purchase: mask_pmk3 | — | 275 rubles |
@@ -145,27 +150,27 @@ Validation passed.
 | boss | BO20 | Stock: helm_sphere12 +1 total | — | 2250 rubles |
 | boss | BO21 | — | — | 1775 rubles |
 | boss | BO22 | Purchase: helm_operator_nato; Purchase: mask_m50 | — | 2450 rubles; Recognition: Boss's trusted contact |
-| brass | BR01 | Purchase: 762x25; Purchase: 9x18 | — | 275 rubles |
-| brass | BR02 | Purchase: 762x25hp; Purchase: 9x18hp | — | 450 rubles |
-| brass | BR03 | Purchase: 762x25ap; Purchase: 9x18ap; Stock: 762x25 +1 total | — | 0 rubles |
-| brass | BR04 | Purchase: 45acp; Purchase: 57x28; Purchase: 9x19; Purchase: 9x21 | — | 650 rubles |
-| brass | BR05 | Purchase: 45acphp; Purchase: 57x28hp; Purchase: 9x19hp; Purchase: 9x21hp | — | 575 rubles |
-| brass | BR06 | Purchase: 45acpap; Purchase: 57x28ap; Purchase: 9x19ap; Purchase: 9x21ap | — | 850 rubles |
-| brass | BR07 | Purchase: 44magnum; Purchase: 545x39; Stock: 762x25ap +1 total | — | 0 rubles |
-| brass | BR08 | Purchase: 44magnumhp; Purchase: 545x39hp | Standing exchange: 12gauge | 1050 rubles |
-| brass | BR09 | Purchase: 44magnumap; Purchase: 545x39ap | — | 875 rubles |
-| brass | BR10 | Purchase: 762x39 | Standing exchange: 22lr | 1250 rubles |
-| brass | BR11 | Purchase: 762x39hp; Stock: 762x25hp +1 total | — | 0 rubles |
-| brass | BR12 | Purchase: 762x39ap | — | 1450 rubles |
-| brass | BR13 | Purchase: 50ae | — | 1175 rubles |
-| brass | BR14 | Purchase: 50aehp | Standing exchange: 9x18 | 1650 rubles |
-| brass | BR15 | Purchase: 50aeap; Stock: 9x18 +1 total | — | 0 rubles |
-| brass | BR16 | — | Standing exchange: 9x19 | 1850 rubles |
+| brass | BR01 | Purchase: 762x25; Purchase: 9x19 | — | 275 rubles |
+| brass | BR02 | Purchase: 45acp; Purchase: 762x25hp; Purchase: 9x19hp | — | 450 rubles |
+| brass | BR03 | Purchase: 45acphp; Purchase: 762x25ap; Purchase: 9x19ap; Stock: 762x25 +1 total | — | 0 rubles |
+| brass | BR04 | Purchase: 45acpap; Purchase: 545x39 | — | 650 rubles |
+| brass | BR05 | Purchase: 545x39hp | — | 575 rubles |
+| brass | BR06 | Purchase: 545x39ap | — | 850 rubles |
+| brass | BR07 | Purchase: 762x39; Stock: 762x25ap +1 total | — | 0 rubles |
+| brass | BR08 | Purchase: 762x39hp | Standing exchange: 12gauge | 1050 rubles |
+| brass | BR09 | Purchase: 762x39ap; Purchase: 9x18 | — | 875 rubles |
+| brass | BR10 | Purchase: 762x54; Purchase: 9x18hp | Standing exchange: 22lr | 1250 rubles |
+| brass | BR11 | Purchase: 762x54hp; Purchase: 9x18ap; Stock: 762x25hp +1 total | — | 0 rubles |
+| brass | BR12 | Purchase: 762x54ap | — | 1450 rubles |
+| brass | BR13 | Purchase: 44magnum | — | 1175 rubles |
+| brass | BR14 | Purchase: 44magnumhp; Purchase: 9x21 | Standing exchange: 9x18 | 1650 rubles |
+| brass | BR15 | Purchase: 44magnumap; Purchase: 9x21hp; Stock: 9x18 +1 total | — | 0 rubles |
+| brass | BR16 | Purchase: 9x21ap | Standing exchange: 9x19 | 1850 rubles |
 | brass | BR17 | Stock: 9x18ap +1 total | — | 1475 rubles |
-| brass | BR18 | Stock: 9x18hp +1 total | — | 2050 rubles |
-| brass | BR19 | Purchase: 762x54; Stock: 9x19 +1 total | Standing exchange: 545x39 | 0 rubles |
-| brass | BR20 | Purchase: 762x54hp | Standing exchange: 556x45 | 2250 rubles |
-| brass | BR21 | Purchase: 762x54ap | — | 1775 rubles |
+| brass | BR18 | Purchase: 50ae; Stock: 9x18hp +1 total | — | 2050 rubles |
+| brass | BR19 | Purchase: 50aehp; Purchase: 57x28; Stock: 9x19 +1 total | Standing exchange: 545x39 | 0 rubles |
+| brass | BR20 | Purchase: 50aeap; Purchase: 57x28hp | Standing exchange: 556x45 | 2250 rubles |
+| brass | BR21 | Purchase: 57x28ap | — | 1775 rubles |
 | brass | BR22 | Stock: 9x19ap +1 total | Standing exchange: 762x39 | 2450 rubles |
 | brass | BR23 | Stock: 9x19hp +1 total | Standing exchange: 762x54 | 0 rubles |
 | brass | BR24 | Stock: 9x21 +1 total | — | 2650 rubles; Recognition: Brass's trusted contact |
@@ -267,26 +272,26 @@ Validation passed.
 | gasket | GK20 | Stock: lowtiercooker +2 total | — | 2250 rubles |
 | gasket | GK21 | — | Standing exchange: value_carbattery | 1775 rubles |
 | gasket | GK22 | Purchase: value_kerosene | — | 2450 rubles; Recognition: Gasket's trusted contact |
-| haggler | HG01 | Purchase: 22lr; Purchase: 762x25; Purchase: 9x18; Purchase: nagantrev | — | 275 rubles |
-| haggler | HG02 | Purchase: g2contender; Purchase: tokarev | — | 450 rubles |
-| haggler | HG03 | Purchase: m1917; Stock: nagantrev +1 total | — | 0 rubles |
-| haggler | HG04 | Purchase: 45acp; Purchase: 9x19; Purchase: brhp; Purchase: makarov | lowtiercooker exchange | 650 rubles |
+| haggler | HG01 | Purchase: 762x25; Purchase: nagantrev | — | 275 rubles |
+| haggler | HG02 | Purchase: 9x19; Purchase: g2contender; Purchase: tokarev | — | 450 rubles |
+| haggler | HG03 | Purchase: 45acp; Purchase: m1917; Stock: nagantrev +1 total | — | 0 rubles |
+| haggler | HG04 | Purchase: 22lr; Purchase: brhp; Purchase: makarov | lowtiercooker exchange | 650 rubles |
 | haggler | HG05 | Purchase: cz52 | — | 575 rubles |
 | haggler | HG06 | Purchase: fort12 | — | 850 rubles |
-| haggler | HG07 | Purchase: 357magnum; Purchase: 44magnum; Purchase: beretta92; Purchase: rugermk3; Stock: 22lr +1 total | — | 0 rubles |
-| haggler | HG08 | Purchase: c96 | — | 1050 rubles |
-| haggler | HG09 | Purchase: lugerp08; Purchase: p99 | — | 875 rubles |
-| haggler | HG10 | Purchase: 556x45; Purchase: 762x39; Purchase: sako85varmint | — | 1250 rubles |
-| haggler | HG11 | Purchase: glock17; Purchase: w9422; Stock: 762x25 +1 total | — | 0 rubles |
-| haggler | HG12 | Purchase: m1911 | brhp exchange | 1450 rubles |
+| haggler | HG07 | Purchase: 45acp41; Purchase: beretta92; Purchase: rugermk3; Stock: 22lr +1 total | — | 0 rubles |
+| haggler | HG08 | Purchase: 762x39; Purchase: c96 | — | 1050 rubles |
+| haggler | HG09 | Purchase: 556x45; Purchase: lugerp08; Purchase: p99 | — | 875 rubles |
+| haggler | HG10 | Purchase: 9x18; Purchase: sako85varmint | — | 1250 rubles |
+| haggler | HG11 | Purchase: 762x54; Purchase: glock17; Purchase: w9422; Stock: 762x25 +1 total | — | 0 rubles |
+| haggler | HG12 | Purchase: 357magnum; Purchase: m1911 | brhp exchange | 1450 rubles |
 | haggler | HG13 | Purchase: c96carbine; Purchase: ruger1022 | — | 1175 rubles |
-| haggler | HG14 | Purchase: 45acp41; Purchase: taurusjudge | — | 1650 rubles |
+| haggler | HG14 | Purchase: 44magnum; Purchase: taurusjudge | — | 1650 rubles |
 | haggler | HG15 | Purchase: obrez; Stock: 45acp41 +1 total | — | 0 rubles |
-| haggler | HG16 | Purchase: g2contender500; Purchase: obrezmalfunction | — | 1850 rubles |
-| haggler | HG17 | Purchase: 500magnum; Purchase: 762x51; Purchase: mr96 | — | 1475 rubles |
+| haggler | HG16 | Purchase: 762x51; Purchase: g2contender500; Purchase: obrezmalfunction | — | 1850 rubles |
+| haggler | HG17 | Purchase: 500magnum; Purchase: mr96 | — | 1475 rubles |
 | haggler | HG18 | Purchase: swmodel29; Purchase: swr8 | — | 2050 rubles |
 | haggler | HG19 | Purchase: rugermini14; Stock: 9x18 +1 total | — | 0 rubles |
-| haggler | HG20 | Purchase: 762x54; Purchase: sako85nato; Purchase: sks | c96carbine exchange | 2250 rubles |
+| haggler | HG20 | Purchase: sako85nato; Purchase: sks | c96carbine exchange | 2250 rubles |
 | haggler | HG21 | Purchase: taurusragingbull | — | 1775 rubles |
 | haggler | HG22 | Purchase: mateba | — | 2450 rubles |
 | haggler | HG23 | Purchase: sw500; Purchase: w1895; Stock: g2contender +1 total | — | 0 rubles |
@@ -295,19 +300,19 @@ Validation passed.
 | haggler | HG26 | Purchase: sako85 | — | 2850 rubles; Recognition: Haggler's trusted contact |
 | intern | IN01 | Purchase: 545x39 | — | 275 rubles |
 | intern | IN02 | Purchase: 545x39hp | — | 450 rubles |
-| intern | IN03 | Purchase: 545x39ap; Stock: 545x39 +1 total | — | 0 rubles |
-| intern | IN04 | Purchase: 556x45; Purchase: 762x39 | — | 650 rubles |
-| intern | IN05 | Purchase: 556x45hp; Purchase: 762x39hp | — | 575 rubles |
-| intern | IN06 | Purchase: 556x45ap; Purchase: 762x39ap | — | 850 rubles |
-| intern | IN07 | Purchase: 9x39; Stock: 545x39ap +1 total | Same Place Same Method: survey team colours | 0 rubles |
-| intern | IN08 | Purchase: 9x39hp | Record: Marsh baseline readings | 1050 rubles |
-| intern | IN09 | Purchase: 9x39ap | Record: Garbage baseline readings | 875 rubles |
-| intern | IN10 | Purchase: 762x51 | The Senior's Notebook: survey team colours | 1250 rubles |
-| intern | IN11 | Purchase: 762x51hp; Stock: 545x39hp +1 total | Record: Pripyat comparative readings | 0 rubles |
-| intern | IN12 | Purchase: 762x51ap | Record: sensor placement errors | 1450 rubles |
-| intern | IN13 | Purchase: 338lapua; Purchase: 762x54 | Ready for the Distance: survey team colours | 1175 rubles |
-| intern | IN14 | Purchase: 338lapuahp; Purchase: 762x54hp | Record: exposure log comparison | 1650 rubles |
-| intern | IN15 | Computer access; Purchase: 338lapuaap; Purchase: 762x54ap; Stock: 556x45 +1 total | — | 0 rubles |
+| intern | IN03 | Purchase: 545x39ap; Purchase: 762x39; Stock: 545x39 +1 total | — | 0 rubles |
+| intern | IN04 | Purchase: 556x45; Purchase: 762x39hp | — | 650 rubles |
+| intern | IN05 | Purchase: 556x45hp; Purchase: 762x39ap | — | 575 rubles |
+| intern | IN06 | Purchase: 556x45ap; Purchase: 762x54 | — | 850 rubles |
+| intern | IN07 | Purchase: 762x54hp; Stock: 545x39ap +1 total | Same Place Same Method: survey team colours | 0 rubles |
+| intern | IN08 | Purchase: 762x54ap; Purchase: 9x39 | Record: Marsh baseline readings | 1050 rubles |
+| intern | IN09 | Purchase: 9x39hp | Record: Garbage baseline readings | 875 rubles |
+| intern | IN10 | Purchase: 9x39ap | The Senior's Notebook: survey team colours | 1250 rubles |
+| intern | IN11 | Purchase: 762x51; Stock: 545x39hp +1 total | Record: Pripyat comparative readings | 0 rubles |
+| intern | IN12 | Purchase: 762x51hp | Record: sensor placement errors | 1450 rubles |
+| intern | IN13 | Purchase: 338lapua; Purchase: 762x51ap | Ready for the Distance: survey team colours | 1175 rubles |
+| intern | IN14 | Purchase: 338lapuahp | Record: exposure log comparison | 1650 rubles |
+| intern | IN15 | Computer access; Purchase: 338lapuaap; Stock: 556x45 +1 total | — | 0 rubles |
 | intern | IN16 | Stock: 556x45ap +1 total | Record: conflicting measurement review | 1850 rubles |
 | intern | IN17 | Stock: 556x45hp +1 total | Without Missing Pages: survey team colours | 1475 rubles |
 | intern | IN18 | — | Record: instrument failure signatures | 2050 rubles |
@@ -441,17 +446,17 @@ Validation passed.
 | old-timer | OT28 | Purchase: helm_steel_rus; Purchase: knife4; Purchase: machete | — | 3000 rubles; Recognition: Old Timer's trusted contact |
 | quartermaster | QM01 | Purchase: 545x39; Purchase: m16a4 | — | 275 rubles |
 | quartermaster | QM02 | Purchase: saigasemi | — | 450 rubles |
-| quartermaster | QM03 | Purchase: famas; Purchase: lr300; Stock: 545x39 +1 total | — | 0 rubles |
-| quartermaster | QM04 | Purchase: 556x45; Purchase: 762x39; Purchase: sg552 | — | 650 rubles |
+| quartermaster | QM03 | Purchase: 762x39; Purchase: famas; Purchase: lr300; Stock: 545x39 +1 total | — | 0 rubles |
+| quartermaster | QM04 | Purchase: 556x45; Purchase: sg552 | — | 650 rubles |
 | quartermaster | QM05 | Purchase: aek971 | — | 575 rubles |
-| quartermaster | QM06 | Purchase: l85 | — | 850 rubles |
-| quartermaster | QM07 | Purchase: 9x39; Purchase: g36c; Stock: 556x45 +1 total | — | 0 rubles |
-| quartermaster | QM08 | Purchase: aug; Purchase: rk95 | — | 1050 rubles |
+| quartermaster | QM06 | Purchase: 762x54; Purchase: l85 | — | 850 rubles |
+| quartermaster | QM07 | Purchase: g36c; Stock: 556x45 +1 total | — | 0 rubles |
+| quartermaster | QM08 | Purchase: 9x39; Purchase: aug; Purchase: rk95 | — | 1050 rubles |
 | quartermaster | QM09 | Purchase: f2000 | — | 875 rubles |
-| quartermaster | QM10 | Purchase: 762x51; Purchase: an94k | — | 1250 rubles |
-| quartermaster | QM11 | Purchase: hk416; Stock: 762x39 +1 total | — | 0 rubles |
+| quartermaster | QM10 | Purchase: an94k | — | 1250 rubles |
+| quartermaster | QM11 | Purchase: 762x51; Purchase: hk416; Stock: 762x39 +1 total | — | 0 rubles |
 | quartermaster | QM12 | Purchase: ak12 | — | 1450 rubles |
-| quartermaster | QM13 | Purchase: 338lapua; Purchase: 762x54; Purchase: svt40; Purchase: trg42 | — | 1175 rubles |
+| quartermaster | QM13 | Purchase: 338lapua; Purchase: svt40; Purchase: trg42 | — | 1175 rubles |
 | quartermaster | QM14 | Purchase: g3a3 | — | 1650 rubles |
 | quartermaster | QM15 | Purchase: 9a91; Stock: 9x39 +1 total | — | 0 rubles |
 | quartermaster | QM16 | Purchase: rpk | — | 1850 rubles |
@@ -535,9 +540,9 @@ Validation passed.
 | spool | SO20 | Stock: cassette_firelake +1 total | — | 2250 rubles |
 | spool | SO21 | Stock: cassette_bandits +1 total | Record: unidentified voice register | 1775 rubles |
 | spool | SO22 | Purchase: backpack_scavbackpack; Purchase: walkman | — | 2450 rubles; Recognition: Spool's trusted contact |
-| spoor | SP01 | Purchase: 12gauge; Purchase: headwear_riot; Purchase: toz106 | — | 275 rubles |
+| spoor | SP01 | Purchase: 12gauge; Purchase: 45acp41; Purchase: headwear_riot; Purchase: toz106 | — | 275 rubles |
 | spoor | SP02 | Purchase: 12gaugedt; Purchase: 12gaugemg; Purchase: 12gaugesg; Purchase: 12gaugetr; Purchase: toz34short | — | 450 rubles |
-| spoor | SP03 | Purchase: 45acp41; Purchase: toz66short; Stock: 12gaugedt +1 total | Record: blind dog feeding grounds | 0 rubles |
+| spoor | SP03 | Purchase: toz66short; Stock: 12gaugedt +1 total | Record: blind dog feeding grounds | 0 rubles |
 | spoor | SP04 | Purchase: ij600 | Record: boar escape routes | 650 rubles |
 | spoor | SP05 | Purchase: mp27 | — | 575 rubles |
 | spoor | SP06 | Purchase: m3supershort | — | 850 rubles |
@@ -704,62 +709,62 @@ Validation passed.
 | hidestasher_cutlery | ballast | BA10 | ballast |
 | hidestasher_shovel | ballast | BA22 | ballast |
 | sledgehammer | ballast | BA16 | ballast |
-| 127x55 | beanstalk | BN19 | beanstalk |
-| 22lr | beanstalk | BN01 | haggler |
-| 22lrap | beanstalk | BN03 | beanstalk |
-| 22lrhp | beanstalk | BN02 | beanstalk |
-| 338lapua | beanstalk | BN19 | quartermaster |
-| 338lapuaap | beanstalk | BN21 | beanstalk |
-| 338lapuahp | beanstalk | BN20 | beanstalk |
-| 357magnum | beanstalk | BN07 | haggler |
-| 357magnumap | beanstalk | BN09 | beanstalk |
-| 357magnumhp | beanstalk | BN08 | beanstalk |
-| 44magnum | beanstalk | BN07 | haggler |
-| 44magnumap | beanstalk | BN09 | brass |
-| 44magnumhp | beanstalk | BN08 | brass |
-| 45acp | beanstalk | BN04 | haggler |
-| 45acpap | beanstalk | BN06 | brass |
-| 45acphp | beanstalk | BN05 | brass |
+| 127x55 | beanstalk | BN20 | beanstalk |
+| 22lr | beanstalk | BN03 | haggler |
+| 22lrap | beanstalk | BN05 | beanstalk |
+| 22lrhp | beanstalk | BN04 | beanstalk |
+| 338lapua | beanstalk | BN17 | quartermaster |
+| 338lapuaap | beanstalk | BN19 | beanstalk |
+| 338lapuahp | beanstalk | BN18 | beanstalk |
+| 357magnum | beanstalk | BN11 | haggler |
+| 357magnumap | beanstalk | BN13 | beanstalk |
+| 357magnumhp | beanstalk | BN12 | beanstalk |
+| 44magnum | beanstalk | BN13 | haggler |
+| 44magnumap | beanstalk | BN15 | brass |
+| 44magnumhp | beanstalk | BN14 | brass |
+| 45acp | beanstalk | BN02 | haggler |
+| 45acpap | beanstalk | BN04 | brass |
+| 45acphp | beanstalk | BN03 | brass |
 | 500magnum | beanstalk | BN16 | haggler |
 | 500magnumap | beanstalk | BN18 | beanstalk |
 | 500magnumhp | beanstalk | BN17 | beanstalk |
-| 50ae | beanstalk | BN13 | brass |
-| 50aeap | beanstalk | BN15 | brass |
-| 50aehp | beanstalk | BN14 | brass |
-| 545x39 | beanstalk | BN07 | brass |
-| 545x39ap | beanstalk | BN09 | brass |
-| 545x39hp | beanstalk | BN08 | brass |
-| 556x45 | beanstalk | BN10 | haggler |
-| 556x45ap | beanstalk | BN12 | beanstalk |
-| 556x45hp | beanstalk | BN11 | beanstalk |
-| 57x28 | beanstalk | BN04 | brass |
-| 57x28ap | beanstalk | BN06 | brass |
-| 57x28hp | beanstalk | BN05 | brass |
+| 50ae | beanstalk | BN18 | brass |
+| 50aeap | beanstalk | BN20 | brass |
+| 50aehp | beanstalk | BN19 | brass |
+| 545x39 | beanstalk | BN04 | brass |
+| 545x39ap | beanstalk | BN06 | brass |
+| 545x39hp | beanstalk | BN05 | brass |
+| 556x45 | beanstalk | BN08 | haggler |
+| 556x45ap | beanstalk | BN10 | beanstalk |
+| 556x45hp | beanstalk | BN09 | beanstalk |
+| 57x28 | beanstalk | BN19 | brass |
+| 57x28ap | beanstalk | BN21 | brass |
+| 57x28hp | beanstalk | BN20 | brass |
 | 762x25 | beanstalk | BN01 | haggler |
 | 762x25ap | beanstalk | BN03 | brass |
 | 762x25hp | beanstalk | BN02 | brass |
-| 762x39 | beanstalk | BN10 | haggler |
-| 762x39ap | beanstalk | BN12 | brass |
-| 762x39hp | beanstalk | BN11 | brass |
-| 762x51 | beanstalk | BN16 | haggler |
-| 762x51ap | beanstalk | BN18 | beanstalk |
-| 762x51hp | beanstalk | BN17 | beanstalk |
-| 762x54 | beanstalk | BN19 | haggler |
-| 762x54ap | beanstalk | BN21 | brass |
-| 762x54hp | beanstalk | BN20 | brass |
-| 93x64 | beanstalk | BN19 | beanstalk |
-| 9x18 | beanstalk | BN01 | haggler |
-| 9x18ap | beanstalk | BN03 | brass |
-| 9x18hp | beanstalk | BN02 | brass |
-| 9x19 | beanstalk | BN04 | haggler |
-| 9x19ap | beanstalk | BN06 | brass |
-| 9x19hp | beanstalk | BN05 | brass |
-| 9x21 | beanstalk | BN04 | brass |
-| 9x21ap | beanstalk | BN06 | brass |
-| 9x21hp | beanstalk | BN05 | brass |
-| 9x39 | beanstalk | BN13 | quartermaster |
-| 9x39ap | beanstalk | BN15 | beanstalk |
-| 9x39hp | beanstalk | BN14 | beanstalk |
+| 762x39 | beanstalk | BN07 | haggler |
+| 762x39ap | beanstalk | BN09 | brass |
+| 762x39hp | beanstalk | BN08 | brass |
+| 762x51 | beanstalk | BN15 | haggler |
+| 762x51ap | beanstalk | BN17 | beanstalk |
+| 762x51hp | beanstalk | BN16 | beanstalk |
+| 762x54 | beanstalk | BN10 | haggler |
+| 762x54ap | beanstalk | BN12 | brass |
+| 762x54hp | beanstalk | BN11 | brass |
+| 93x64 | beanstalk | BN22 | beanstalk |
+| 9x18 | beanstalk | BN09 | haggler |
+| 9x18ap | beanstalk | BN11 | brass |
+| 9x18hp | beanstalk | BN10 | brass |
+| 9x19 | beanstalk | BN01 | haggler |
+| 9x19ap | beanstalk | BN03 | brass |
+| 9x19hp | beanstalk | BN02 | brass |
+| 9x21 | beanstalk | BN14 | brass |
+| 9x21ap | beanstalk | BN16 | brass |
+| 9x21hp | beanstalk | BN15 | brass |
+| 9x39 | beanstalk | BN12 | quartermaster |
+| 9x39ap | beanstalk | BN14 | beanstalk |
+| 9x39hp | beanstalk | BN13 | beanstalk |
 | suit_seva | beanstalk | BN24 | beanstalk |
 | suit_ssp99 | beanstalk | BN01 | beanstalk |
 | suit_ssp99m | beanstalk | BN13 | beanstalk |
@@ -774,39 +779,39 @@ Validation passed.
 | mask_m50 | boss | BO22 | boss |
 | mask_pmk3 | boss | BO01 | boss |
 | mask_xm40 | boss | BO08 | boss |
-| 44magnum | brass | BR07 | haggler |
-| 44magnumap | brass | BR09 | brass |
-| 44magnumhp | brass | BR08 | brass |
-| 45acp | brass | BR04 | haggler |
-| 45acpap | brass | BR06 | brass |
-| 45acphp | brass | BR05 | brass |
-| 50ae | brass | BR13 | brass |
-| 50aeap | brass | BR15 | brass |
-| 50aehp | brass | BR14 | brass |
-| 545x39 | brass | BR07 | brass |
-| 545x39ap | brass | BR09 | brass |
-| 545x39hp | brass | BR08 | brass |
-| 57x28 | brass | BR04 | brass |
-| 57x28ap | brass | BR06 | brass |
-| 57x28hp | brass | BR05 | brass |
+| 44magnum | brass | BR13 | haggler |
+| 44magnumap | brass | BR15 | brass |
+| 44magnumhp | brass | BR14 | brass |
+| 45acp | brass | BR02 | haggler |
+| 45acpap | brass | BR04 | brass |
+| 45acphp | brass | BR03 | brass |
+| 50ae | brass | BR18 | brass |
+| 50aeap | brass | BR20 | brass |
+| 50aehp | brass | BR19 | brass |
+| 545x39 | brass | BR04 | brass |
+| 545x39ap | brass | BR06 | brass |
+| 545x39hp | brass | BR05 | brass |
+| 57x28 | brass | BR19 | brass |
+| 57x28ap | brass | BR21 | brass |
+| 57x28hp | brass | BR20 | brass |
 | 762x25 | brass | BR01 | haggler |
 | 762x25ap | brass | BR03 | brass |
 | 762x25hp | brass | BR02 | brass |
-| 762x39 | brass | BR10 | haggler |
-| 762x39ap | brass | BR12 | brass |
-| 762x39hp | brass | BR11 | brass |
-| 762x54 | brass | BR19 | haggler |
-| 762x54ap | brass | BR21 | brass |
-| 762x54hp | brass | BR20 | brass |
-| 9x18 | brass | BR01 | haggler |
-| 9x18ap | brass | BR03 | brass |
-| 9x18hp | brass | BR02 | brass |
-| 9x19 | brass | BR04 | haggler |
-| 9x19ap | brass | BR06 | brass |
-| 9x19hp | brass | BR05 | brass |
-| 9x21 | brass | BR04 | brass |
-| 9x21ap | brass | BR06 | brass |
-| 9x21hp | brass | BR05 | brass |
+| 762x39 | brass | BR07 | haggler |
+| 762x39ap | brass | BR09 | brass |
+| 762x39hp | brass | BR08 | brass |
+| 762x54 | brass | BR10 | haggler |
+| 762x54ap | brass | BR12 | brass |
+| 762x54hp | brass | BR11 | brass |
+| 9x18 | brass | BR09 | haggler |
+| 9x18ap | brass | BR11 | brass |
+| 9x18hp | brass | BR10 | brass |
+| 9x19 | brass | BR01 | haggler |
+| 9x19ap | brass | BR03 | brass |
+| 9x19hp | brass | BR02 | brass |
+| 9x21 | brass | BR14 | brass |
+| 9x21ap | brass | BR16 | brass |
+| 9x21hp | brass | BR15 | brass |
 | accesscard_bunker | carbon | CA12 | carbon |
 | attachment_aluframe | carbon | CA08 | carbon |
 | attachment_carbonfibre | carbon | CA15 | carbon |
@@ -862,19 +867,19 @@ Validation passed.
 | lowtiercooker | gasket | GK18 | gasket |
 | lowtiercookerfuel | gasket | GK05 | gasket |
 | value_kerosene | gasket | GK22 | gasket |
-| 22lr | haggler | HG01 | haggler |
-| 357magnum | haggler | HG07 | haggler |
-| 44magnum | haggler | HG07 | haggler |
-| 45acp | haggler | HG04 | haggler |
-| 45acp41 | haggler | HG14 | haggler |
+| 22lr | haggler | HG04 | haggler |
+| 357magnum | haggler | HG12 | haggler |
+| 44magnum | haggler | HG14 | haggler |
+| 45acp | haggler | HG03 | haggler |
+| 45acp41 | haggler | HG07 | haggler |
 | 500magnum | haggler | HG17 | haggler |
-| 556x45 | haggler | HG10 | haggler |
+| 556x45 | haggler | HG09 | haggler |
 | 762x25 | haggler | HG01 | haggler |
-| 762x39 | haggler | HG10 | haggler |
-| 762x51 | haggler | HG17 | haggler |
-| 762x54 | haggler | HG20 | haggler |
-| 9x18 | haggler | HG01 | haggler |
-| 9x19 | haggler | HG04 | haggler |
+| 762x39 | haggler | HG08 | haggler |
+| 762x51 | haggler | HG16 | haggler |
+| 762x54 | haggler | HG11 | haggler |
+| 9x18 | haggler | HG10 | haggler |
+| 9x19 | haggler | HG02 | haggler |
 | beretta92 | haggler | HG07 | haggler |
 | brhp | haggler | HG04 | haggler |
 | c96 | haggler | HG08 | haggler |
@@ -921,18 +926,18 @@ Validation passed.
 | 556x45 | intern | IN04 | haggler |
 | 556x45ap | intern | IN06 | beanstalk |
 | 556x45hp | intern | IN05 | beanstalk |
-| 762x39 | intern | IN04 | haggler |
-| 762x39ap | intern | IN06 | brass |
-| 762x39hp | intern | IN05 | brass |
-| 762x51 | intern | IN10 | haggler |
-| 762x51ap | intern | IN12 | beanstalk |
-| 762x51hp | intern | IN11 | beanstalk |
-| 762x54 | intern | IN13 | haggler |
-| 762x54ap | intern | IN15 | brass |
-| 762x54hp | intern | IN14 | brass |
-| 9x39 | intern | IN07 | quartermaster |
-| 9x39ap | intern | IN09 | beanstalk |
-| 9x39hp | intern | IN08 | beanstalk |
+| 762x39 | intern | IN03 | haggler |
+| 762x39ap | intern | IN05 | brass |
+| 762x39hp | intern | IN04 | brass |
+| 762x51 | intern | IN11 | haggler |
+| 762x51ap | intern | IN13 | beanstalk |
+| 762x51hp | intern | IN12 | beanstalk |
+| 762x54 | intern | IN06 | haggler |
+| 762x54ap | intern | IN08 | brass |
+| 762x54hp | intern | IN07 | brass |
+| 9x39 | intern | IN08 | quartermaster |
+| 9x39ap | intern | IN10 | beanstalk |
+| 9x39hp | intern | IN09 | beanstalk |
 | accesscard_laboratory | intern | IN24 | intern |
 | drug_cigar | jitters | JT19 | jitters |
 | drug_cigarette_1 | jitters | JT01 | jitters |
@@ -992,11 +997,11 @@ Validation passed.
 | 338lapua | quartermaster | QM13 | quartermaster |
 | 545x39 | quartermaster | QM01 | brass |
 | 556x45 | quartermaster | QM04 | haggler |
-| 762x39 | quartermaster | QM04 | haggler |
-| 762x51 | quartermaster | QM10 | haggler |
-| 762x54 | quartermaster | QM13 | haggler |
+| 762x39 | quartermaster | QM03 | haggler |
+| 762x51 | quartermaster | QM11 | haggler |
+| 762x54 | quartermaster | QM06 | haggler |
 | 9a91 | quartermaster | QM15 | quartermaster |
-| 9x39 | quartermaster | QM07 | quartermaster |
+| 9x39 | quartermaster | QM08 | quartermaster |
 | aek971 | quartermaster | QM05 | quartermaster |
 | ak12 | quartermaster | QM12 | quartermaster |
 | an94k | quartermaster | QM10 | quartermaster |
@@ -1090,7 +1095,7 @@ Validation passed.
 | 12gaugemg | spoor | SP02 | spoor |
 | 12gaugesg | spoor | SP02 | spoor |
 | 12gaugetr | spoor | SP02 | spoor |
-| 45acp41 | spoor | SP03 | haggler |
+| 45acp41 | spoor | SP01 | haggler |
 | headwear_cs1 | spoor | SP15 | spoor |
 | headwear_cs2 | spoor | SP22 | spoor |
 | headwear_riot | spoor | SP01 | spoor |

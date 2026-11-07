@@ -69,7 +69,19 @@ function PLUGIN:BuildCatalogue()
 			end
 		end
 	end
-	-- Ammunition follows each seller's authored price bands, independently of another shop.
+	-- Each shop follows the regular chain through the calibres it actually sells.
+	for _, contact in pairs(self.contacts) do
+		local previous
+		for _, itemID in ipairs(self.regularAmmoChain or {}) do
+			local item = self.itemGates[itemID]
+			local gate = item and item.sellers[contact.name]
+			if gate then
+				requireGate(previous, gate)
+				previous = gate
+			end
+		end
+	end
+	-- Local stages also retain the upgrade steps between regular calibres.
 	for slug, steps in pairs(self.ammoUnlockOrder or {}) do
 		for index = 2, #steps do
 			requireGate({id = self:StepID(slug, steps[index - 1])}, {id = self:StepID(slug, steps[index])})

@@ -55,4 +55,5 @@ for id, definition in pairs(ix.progression.definitions) do
 end
 print(encode({contacts = contacts, chains = PLUGIN.upgradeChains, compiled = compiled,
 	ammoOrder = PLUGIN.ammoUnlockOrder, ammoVariants = PLUGIN.ammoVariants,
+	regularAmmoChain = PLUGIN.regularAmmoChain,
 	canonical = PLUGIN.canonicalSellers, variants = PLUGIN.variantUnlocks, reserved = PLUGIN.reservedEquipment}))

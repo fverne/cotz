@@ -68,7 +68,7 @@ PLUGIN:Register("spoor", {
 			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
 		["12gaugetr"] = {step = "SP02",
 			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
-		["45acp41"] = {step = "SP03",
+		["45acp41"] = {step = "SP01",
 			terms = {nil, 2, "SELLONLY", 2, 12, 1}},
 		["headwear_cs1"] = {step = "SP15",
 			terms = {nil, 1, "SELLONLY", 1, 48, 1}},

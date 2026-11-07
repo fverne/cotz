@@ -87,7 +87,7 @@ The town plugin owns 27 contacts and 624 active finite objectives. Arena Master 
 | --- | --- |
 | Home map, contact access, jobs, reward items, catalogue, task dialogue and progression | definitions/sh_<contact>.lua in townnpcs |
 | Default payouts, stock and interaction limits | townnpcs/definitions/sh_config.lua |
-| Equipment upgrade families | townnpcs/definitions/sh_equipment.lua |
+| Equipment and regular-ammo upgrade chains | townnpcs/definitions/sh_equipment.lua |
 | Field-site defaults | townnpcs/definitions/sh_sites.lua |
 | Shared requirement pools | progression/definitions/sh_requirementpools.lua |
 | Introduction, background, advice, gossip, ordinary trade/service responses | dialogue/dialogue/sh_<dialogueid>.lua |
@@ -202,11 +202,39 @@ canonical predecessors and cross-contact purchase transitions. In multiplayer, c
 milestone access across Haggler, Cleaner, Spoor and Quartermaster, plus an existing character with
 completed purchase milestones.
 
+### Regular ammunition chain
+
+`definitions/sh_equipment.lua` also declares `regularAmmoChain`, generated from the five gun chains.
+For parallel chains, a calibre's first default SWEP use is ranked by chain position, then gun price,
+chain order and item ID. This compares authored positions rather than completion time through the
+shared prerequisite graph. SWEP ammo names are resolved through `schema/libs/sh_weapontables.lua`;
+descriptive text is not used to infer a gun's cartridge.
+
+The chain covers all 24 regular loads. AP, HP and special 12-gauge loads are excluded. Standard
+12-gauge buckshot and .410 bore (`45acp41`) are included as separate regular cartridges. The four
+loads without a default user in these gun chains are appended alphabetically: `127x55`, `145x114`,
+`700nitro` and `93x64`. Appending an unstocked load does not create a new vendor purchase route.
+
+Each seller follows the regular chain through the calibres it actually stocks; missing calibres are
+skipped. Purchase permissions remain local to that seller. Generated catalogue allocations replace
+the former price-band schedule, and local HP/AP/special-load upgrades retain their counterpart gates.
+Several regular loads can share a milestone when the tree has fewer steps than the full sequence.
+This orders ammo unlocks; it does not require completing the corresponding gun's purchase milestone.
+Ammo prices, quantities, stock terms and effects are unchanged. Existing saved milestone records are
+preserved, but ammo purchase permissions now derive from their new local allocations.
+
+Regenerate/check with `python3 docs/npc-overhaul/tools/ammo_progression.py --write` or `--check`.
+The [ammo report](../../../../docs/npc-overhaul/ammo-progression.md) lists the full chain, first guns
+and seller milestones. Run `luatex --luaonly tests/regular_ammo_spec.lua` and the ammunition tests
+in `tests/progression_rewards_spec.py`. The focused Lua fixture covers missing seller calibres,
+local purchase gates, variant prerequisites and already-completed milestones without loading saves.
+Verify fresh and existing characters' local ammo purchases in multiplayer.
+
 ## Catalogue spacing
 
 The first milestone at each active trader unlocks one or two purchases. The 131 formerly crowded
 introductory purchases are spread through later milestones at the same seller, including provisions,
-weapons, tools and equipment. Starter water remains ungated. Ammunition keeps its generated price-band
+weapons, tools and equipment. Starter water remains ungated. Ammunition uses its generated gun-order
 schedule, introductory regional medicine remains early, and author-disabled suggestions remain excluded.
 
 Existing stock rewards keep their items and amounts. Catalogue compilation makes each stock milestone
@@ -495,22 +523,14 @@ milestones; variants in the same family have separate milestones; existing conve
 
 Medicine has independent local progressions at Jitters, Wake, Quartermaster and appropriate
 scientists, including local earlier-tier prerequisites. Ammunition and its variants have local purchase
-milestones at each seller. Ammunition no longer uses Brass's cross-contact tier dependencies.
-All 66 loads are ranked from concrete `price / ammoAmount` values into twelve global price bands,
-with regular and upgraded stages in each band. This avoids comparing whole-box prices or starting
-every calibre at the first milestone. AP and HP at equal prices are parallel upgrades after the
-regular load; special shotgun loads are upgrades to buckshot. Variant-counterpart ordering takes
-precedence where existing box sizes/prices make the variant cheaper per round (14.5 mm and special
-12-gauge loads). `45acp41` is .410 bore, not a .45 ACP upgrade. No prices or ammunition effects change.
+milestones at each seller. The regular-ammo chain above replaces the former price bands. AP and HP
+remain local upgrades after regular ammunition, with AP also requiring local HP where available;
+special shotgun loads follow buckshot. `45acp41` is .410 bore, not a .45 ACP upgrade.
 Each seller's successive ammo stages are explicit local prerequisites, so sibling branches cannot
-skip cheaper stages. Ammo stock improvements apply to loads available at that milestone.
-See the [price-per-round report](../../../../docs/npc-overhaul/ammo-progression.md) for all loads and
-exact seller milestones. Regenerate/check with
-`python3 docs/npc-overhaul/tools/ammo_progression.py --write` or `--check`, then regenerate/check
-the main reward ledger. Ordinary weapon, medicine and non-ammunition upgrade chains are unchanged. Old Timer, Brass and Quartermaster provide ungated
-12 gauge, .22 LR and 9x18 on Marsh, Garbage and Waystation respectively. Jitters, Wake and Quartermaster
-provide ungated basic bandages and introductory local medkit, antirad and painkiller unlocks.
-Basic regional supplies require no external NPC progression. Other themed sellers retain useful overlap.
+skip earlier stages. The [ammo report](../../../../docs/npc-overhaul/ammo-progression.md) lists all
+66 loads, prices, quantities and exact seller milestones. Ordinary weapon, medicine and other
+equipment chains are unchanged by ammo generation. Current catalogue gates remain authoritative
+for regional medicine and ammunition; the approved plan has no starting sale supplies.
 
 Each step declares completionCash. Delivery payments range from 275 to 2,000 rubles; field payments
 from 450 to 3,000. Trackers and arena milestones pay zero extra cash. No progression steps award item gifts; stock rewards include further branch-specific improvements. Only Jitters and
@@ -680,9 +700,9 @@ subjects remain under the questions menu, with no additional progression require
 `python3 docs/npc-overhaul/tools/progression_rewards.py --write --allow-invalid` writes a current
 definition snapshot with validation findings and actual coverage counts. It does not change runtime
 definitions, restore disabled items or add rewards. Plain `--write` and `--check` remain strict.
-The current snapshot includes the suit dependency cycle at Beanstalk BN01; 593 milestones have
-implemented unlocks, 25 have only TODO plans, and six have neither. A reported cycle stops the
-remaining graph-dependent validation, so a refreshed snapshot is not a successful runtime audit.
+The current snapshot records a dependency cycle at Spoor SP07 and reports current coverage counts
+in its heading. A reported cycle stops the remaining graph-dependent validation, so a refreshed
+snapshot is not a successful runtime audit.
 
 ## Disposable posing previews
 
