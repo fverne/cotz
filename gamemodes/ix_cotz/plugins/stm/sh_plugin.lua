@@ -108,15 +108,17 @@ if (SERVER) then
 	function PLUGIN:CharacterPreSave(character)
 		local client = character:GetPlayer()
 
-		if (IsValid(client)) then
-			character:SetData("stamina", client:GetLocalVar("stm", 0))
+		-- Load-time saves can run before this character's player variables have been restored.
+		if not IsValid(client) or client:GetCharacter() ~= character or client.ixStaminaCharacter ~= character then
+			return
 		end
+
+		character:SetData("stamina", client:GetLocalVar("stm", character:GetData("stamina", 100)))
 	end
 
 	function PLUGIN:PlayerLoadedCharacter(client, character)
-		timer.Simple(0.25, function()
-			client:SetLocalVar("stm", character:GetData("stamina", 100))
-		end)
+		client:SetLocalVar("stm", character:GetData("stamina", 100))
+		client.ixStaminaCharacter = character
 	end
 
 	local playerMeta = FindMetaTable("Player")

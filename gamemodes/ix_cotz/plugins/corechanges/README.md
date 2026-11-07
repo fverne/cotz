@@ -2,6 +2,7 @@
 
 `sh_defaults.lua` contains the approved local installation's saved Helix settings as repository
 fallbacks, including its fonts, inventory dimensions, weight limit, starting date and spawn counts.
+The default inventory is 7 columns wide and 11 rows high.
 `webUrl` (Discord relay webhook) and `communityURL` remain deployment-owned; `communityText` remains
 "Discord". No endpoint values are copied into this repository.
 

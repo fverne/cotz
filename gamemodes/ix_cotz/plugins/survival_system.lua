@@ -9,13 +9,15 @@ if SERVER then
 	end
 
 	function PLUGIN:PlayerLoadedCharacter(client, character)
-		timer.Simple(0.25, function()
-			client:SetLocalVar("hunger", character:GetData("hunger", 100))
-			client:SetLocalVar("thirst", character:GetData("thirst", 100))
-
-		end)
+		client:SetLocalVar("hunger", character:GetData("hunger", 100))
+		client:SetLocalVar("thirst", character:GetData("thirst", 100))
+		client.ixSurvivalCharacter = character
 
 		timer.Simple(1, function()
+			if not IsValid(client) or client:GetCharacter() ~= character then
+				return
+			end
+
 			client:UpdateThirstState(client)
 			client:UpdateHungerState(client)
 		end)
@@ -24,10 +26,13 @@ if SERVER then
 	function PLUGIN:CharacterPreSave(character)
 		local client = character:GetPlayer()
 
-		if (IsValid(client)) then
-			character:SetData("hunger", client:GetLocalVar("hunger", 0))
-			character:SetData("thirst", client:GetLocalVar("thirst", 0))
+		-- Load-time saves can run before this character's player variables have been restored.
+		if not IsValid(client) or client:GetCharacter() ~= character or client.ixSurvivalCharacter ~= character then
+			return
 		end
+
+		character:SetData("hunger", client:GetLocalVar("hunger", character:GetData("hunger", 100)))
+		character:SetData("thirst", client:GetLocalVar("thirst", character:GetData("thirst", 100)))
 	end
 
 	local playerMeta = FindMetaTable("Player")

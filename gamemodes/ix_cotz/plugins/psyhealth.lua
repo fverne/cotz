@@ -20,11 +20,14 @@ if SERVER then
 	end
 
 	function PLUGIN:PlayerLoadedCharacter(client, character)
-		timer.Simple(0.25, function()
-			client:SetLocalVar("psyhealth", character:GetPsyHP())
-		end)
+		client:SetLocalVar("psyhealth", character:GetPsyHP())
+		client.ixPsyHealthCharacter = character
 
 		timer.Simple(1, function()
+			if not IsValid(client) or client:GetCharacter() ~= character then
+				return
+			end
+
 			client:UpdatePsyHealthState(client)
 		end)
 	end
@@ -32,9 +35,12 @@ if SERVER then
 	function PLUGIN:CharacterPreSave(character)
 		local client = character:GetPlayer()
 
-		if IsValid(client) then
-			character:SetPsyHP(client:GetLocalVar("psyhealth", 0))
+		-- Load-time saves can run before this character's player variables have been restored.
+		if not IsValid(client) or client:GetCharacter() ~= character or client.ixPsyHealthCharacter ~= character then
+			return
 		end
+
+		character:SetPsyHP(client:GetLocalVar("psyhealth", character:GetPsyHP()))
 	end
 
 	local playerMeta = FindMetaTable("Player")
