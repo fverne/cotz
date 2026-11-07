@@ -30,7 +30,9 @@ The photographing client plays `items/camera/snap.wav` once when the server acce
 Holding the camera preserves the player's normal world FOV, like the hands SWEP, and uses the same
 45-degree viewmodel FOV. Photos and the live screen keep the configured photo FOV and aspect ratio.
 Helix lowering behavior remains on the SWEP itself. Viewmodel bob and sway are disabled
-with `BobScale = 0` and `SwayScale = 0`. Photography progress remains in the PDA journal;
+with `BobScale = 0` and `SwayScale = 0`. The INFRA model's animated idle is held at its first
+frame immediately before drawing, after viewmodel interpolation, so the hands stay still.
+Draw and shutter animations retain their normal playback. Photography progress remains in the PDA journal;
 there is no captured-types HUD ledger.
 
 The server builds the list from its own shoot position and eye angles, with rectangular framing and
@@ -69,8 +71,10 @@ the source archive hash, selected files, Linux casing corrections and removal of
 
 Run `luatex --luaonly tests/camera_spec.lua` from the repository root. Mocks cover framing, occlusion,
 partial visibility, spawnpoint identity, ownership, cooldowns, bounded results, realm loading, local
-shutter playback and reusable preview rendering without recursion or leaked render state.
+shutter playback, a fixed idle pose with normal draw/shutter animation progress, and reusable preview
+rendering without recursion or leaked render state.
 Multiplayer verification still needs to confirm the models/materials/hands and sounds, a clean JPEG
 and an aligned live screen on 4:3 and widescreen clients, empty/occluded/multiple targets, reconnects,
-two photographers, weapon swaps, and spawnpoint capture without observer access. Disable the
-original Workshop addon while testing so it cannot hide missing dependencies.
+two photographers, a steady idle between draw/shutter animations, weapon swaps, and spawnpoint capture
+without observer access. Disable the original Workshop addon while testing so it cannot hide missing
+dependencies.

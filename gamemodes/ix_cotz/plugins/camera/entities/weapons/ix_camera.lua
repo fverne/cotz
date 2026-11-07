@@ -70,6 +70,13 @@ function SWEP:TranslateFOV(fov)
 end
 
 if CLIENT then
+	function SWEP:PreDrawViewModel(viewModel)
+		if viewModel:GetSequenceActivity(viewModel:GetSequence()) ~= ACT_VM_IDLE then return end
+
+		-- INFRA's idle animates the hands even without bob/sway. Pin it after viewmodel interpolation.
+		viewModel:SetCycle(0)
+	end
+
 	function SWEP:PostDrawViewModel(viewModel)
 		if self:GetOwner() ~= LocalPlayer() then return end
 		local plugin = ix.plugin.Get("camera")

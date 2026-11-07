@@ -23,7 +23,7 @@ local now, traceMode, traces = 10, "clear", 0
 CurTime = function() return now end
 IsValid = function(entity) return type(entity) == "table" and not entity.invalid end
 isvector = function(value) return getmetatable(value) == vectorMeta end
-MASK_VISIBLE, ACT_VM_PRIMARYATTACK, ACT_VM_DRAW = 1, 2, 3
+MASK_VISIBLE, ACT_VM_PRIMARYATTACK, ACT_VM_DRAW, ACT_VM_IDLE = 1, 2, 3, 4
 bit = {band = function(value, flag) return math.floor(value / flag) % 2 == 1 and flag or 0 end}
 SERVER, CLIENT = true, false
 local photoEvents = {}
@@ -196,8 +196,26 @@ check(SWEP.Primary.Ammo == "none" and SWEP.Primary.ClipSize == -1, "Camera needs
 check(SWEP:TranslateFOV(75) == 75 and SWEP:TranslateFOV(100) == 100, "Camera preserves the player's world FOV")
 check(type(SWEP.PrimaryAttack) == "function", "SWEP registers without capturing loader PLUGIN")
 
--- Client rendering must use the authoritative viewpoint and replace only the latest artifact pair.
 SERVER, CLIENT, PLUGIN = false, true, camera
+dofile(root .. "camera/entities/weapons/ix_camera.lua")
+local activity, cycle = ACT_VM_IDLE, 0.4
+local animatedViewModel = {
+	GetSequence = function() return 0 end,
+	GetSequenceActivity = function() return activity end,
+	SetCycle = function(_, value) cycle = value end,
+}
+check(SWEP:PreDrawViewModel(animatedViewModel) == nil, "Idle camera still allows the model and screen to render")
+check(cycle == 0, "Animated idle holds a fixed hand pose")
+cycle = 0.8
+SWEP:PreDrawViewModel(animatedViewModel)
+check(cycle == 0, "Idle pose stays fixed after each frame's viewmodel interpolation")
+for _, animation in ipairs({ACT_VM_DRAW, ACT_VM_PRIMARYATTACK}) do
+	activity, cycle = animation, 0.5
+	SWEP:PreDrawViewModel(animatedViewModel)
+	check(cycle == 0.5, "Draw and shutter animations keep their progress")
+end
+
+-- Client rendering must use the authoritative viewpoint and replace only the latest artifact pair.
 local receive, saved, renderView, renderDepth = nil, {}, nil, 0
 local captureFails = false
 local sounds, targets, screenViews = 0, 0, 0
