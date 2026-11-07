@@ -1,5 +1,8 @@
 # Job System
 
+`jobs` remains a persistent character var, with a `MEDIUMTEXT` SQL column for fresh databases.
+See [character storage](../../../../docs/database/README.md) for its definition and the other large character vars.
+
 ## Revised repeatable jobs, 6 November 2026
 
 The [current roster and implementation guide](../../../../docs/npc-overhaul/repeatable-jobs.md)

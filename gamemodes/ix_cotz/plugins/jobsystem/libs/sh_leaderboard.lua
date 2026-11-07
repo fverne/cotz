@@ -45,7 +45,7 @@ function ix.jobs.RecordLeaderboardTask(character, definition)
 	character:SetData("leaderboardStats", stats)
 end
 
-function ix.jobs.GetLeaderboardStats(data)
+function ix.jobs.GetLeaderboardStats(data, progression)
 	local saved = data.leaderboardStats or {}
 	local result = {}
 	for _, key in ipairs({"mutantsPoached", "mutantsKilled", "humansKilled", "tasksCompleted", "rareMutantsKilled",
@@ -56,7 +56,7 @@ function ix.jobs.GetLeaderboardStats(data)
 	for _ in pairs(saved.species or {}) do result.speciesKilled = result.speciesKilled + 1 end
 	local favorites = {}
 	local mostCompleted = 0
-	local lines = (data.progression or {}).lines or {}
+	local lines = (progression or {}).lines or {}
 	for slug, contact in pairs(ix.townNPCs and ix.townNPCs.contacts or {}) do
 		local completed = 0
 		for _, step in ipairs(contact.progression or {}) do

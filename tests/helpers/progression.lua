@@ -139,7 +139,7 @@ function ix.meta.character:Save()
 	self.saves = self.saves + 1
 end
 local function character()
-	local char = setmetatable({ data = {}, replications = 0, saves = 0, money = 0 }, ix.meta.character)
+	local char = setmetatable({ data = {}, vars = {}, replications = 0, saves = 0, money = 0 }, ix.meta.character)
 	char.inventory = { Add = addReward }
 	char.client = {
 		GetCharacter = function()
@@ -156,6 +156,7 @@ local function character()
 	return char
 end
 local base = "gamemodes/ix_cotz/plugins/progression/"
+dofile("tests/helpers/character_vars.lua")
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_requirements.lua")

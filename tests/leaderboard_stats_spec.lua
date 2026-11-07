@@ -33,16 +33,20 @@ ix.townNPCs = {
 	contacts = {test = {progression = {{id = "one"}, {id = "two"}}}},
 	StepID = function(_, slug, step) return slug .. "/" .. step end,
 }
-data.progression = {lines = {["test/one"] = {completed = true}}}
-assert(ix.jobs.GetLeaderboardStats(data).favoriteContact == "test", "partial progression establishes a favorite")
-data.progression.lines["test/two"] = {completed = true}
+local progression = {lines = {["test/one"] = {completed = true}}}
+assert(ix.jobs.GetLeaderboardStats(data, progression).favoriteContact == "test",
+	"partial progression establishes a favorite")
+progression.lines["test/two"] = {completed = true}
 ix.townNPCs.contacts.other = {name = "Other", progression = {{id = "one"}, {id = "two"}}}
-data.progression.lines["other/one"] = {completed = true}
-assert(ix.jobs.GetLeaderboardStats(data).favoriteContact == "test", "most completed steps wins")
-data.progression.lines["other/two"] = {completed = true}
-assert(ix.jobs.GetLeaderboardStats(data).favoriteContact == "Other, test", "ties list every name in stable order")
+progression.lines["other/one"] = {completed = true}
+assert(ix.jobs.GetLeaderboardStats(data, progression).favoriteContact == "test", "most completed steps wins")
+progression.lines["other/two"] = {completed = true}
+assert(ix.jobs.GetLeaderboardStats(data, progression).favoriteContact == "Other, test",
+	"ties list every name in stable order")
+assert(ix.jobs.GetLeaderboardStats({}, progression).favoriteContact == "Other, test",
+	"favorite contacts read the separate progression var without generic data")
 assert(ix.jobs.GetLeaderboardStats({}).favoriteContact == "None", "zero progress has no favorite")
 assert(ix.jobs.GetLeaderboardStats({}).taskEarnings == 0, "old saves receive safe defaults")
 assert(ix.jobs.GetLeaderboardStats({}).mutantsPoached == 0, "old saves default to zero poaches")
 assert(ix.jobs.GetLeaderboardStats({leaderboardStats = {mutantsPoached = 7}}).mutantsPoached == 7)
-print("leaderboard statistics: 13 checks passed")
+print("leaderboard statistics: 14 checks passed")

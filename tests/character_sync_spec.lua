@@ -43,6 +43,9 @@ ix = {
 		name = {},
 		data = {isLocal = true},
 		jobs = {},
+		progression = {isLocal = true},
+		vendorStock = {bNoNetworking = true},
+		vendorRestockClaims = {bNoNetworking = true},
 		money = {isLocal = true},
 		steamID = {bNoNetworking = true},
 	}},
@@ -94,6 +97,9 @@ local variables = {
 	name = "Example",
 	data = characterData,
 	jobs = {contact = {identifier = "example", progress = 2}},
+	progression = progression,
+	vendorStock = stock,
+	vendorRestockClaims = claims,
 	money = 100,
 	steamID = "private",
 	unregistered = "not a character variable",
@@ -111,6 +117,9 @@ check(message.integers[1][1] == 42 and message.integers[1][2] == 32, "character 
 check(message.integers[2][1] == 7 and message.integers[2][2] == 8, "player index retains its field width")
 check(message.data.data.vendorStock == nil, "initial sync excludes personal stock history")
 check(message.data.data.vendorRestockClaims == nil, "initial sync excludes stock claim history")
+check(message.data.vendorStock == nil and message.data.vendorRestockClaims == nil,
+	"private stock character vars are excluded from initial sync")
+check(message.data.progression.lines.example.active, "owner receives the separate progression var")
 check(message.data.data.progression.lines.example.active, "owner retains progression")
 check(message.data.data.skin == 2 and message.data.data.bleedingSeverity == 1, "other character data is retained")
 check(message.data.jobs.contact.progress == 2 and message.data.money == 100, "ordinary variables are retained")
@@ -124,6 +133,7 @@ character:Sync(observer)
 message = messages[2]
 check(message.receiver == observer and message.data.name == "Example", "observer sync reaches the original method")
 check(message.data.data == nil and message.data.money == nil, "observers cannot see owner-local state")
+check(message.data.progression == nil, "observers cannot see the separate progression var")
 check(message.data.steamID == nil, "observers cannot see non-networked variables")
 check(message.data.jobs.contact.progress == 2, "original public variable visibility is preserved")
 

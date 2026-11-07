@@ -39,6 +39,7 @@ ix = {
 	dialogue = {notifyMoneyLost = function() end}, chat = {Send = function() end},
 }
 local base = "gamemodes/ix_cotz/plugins/progression/"
+dofile("tests/helpers/character_vars.lua")
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
 dofile(base .. "libs/sh_expansion.lua")
@@ -66,7 +67,7 @@ function ix.meta.character:Save() self.saves = self.saves + 1 end
 local nextID = 0
 local function actor()
 	nextID = nextID + 1
-	local character = setmetatable({id = nextID, data = {}, money = 2000000, saves = 0}, ix.meta.character)
+	local character = setmetatable({id = nextID, data = {}, vars = {}, money = 2000000, saves = 0}, ix.meta.character)
 	character.inventory = {items = {}, rewards = {}}
 	function character.inventory:GetItems() return self.items end
 	function character.inventory:Add(item, _, data)
@@ -281,6 +282,7 @@ check(discountedRepair.baseCost == 600 and discountedRepair.cost == 570,
 	"earned repair discount applies after doubling the base price")
 local restored = actor()
 restored.data = copy(first.data)
+restored.vars = copy(first.vars)
 check(ix.progression.GetServiceCredit(
 	restored,
 	"'Jitters'",

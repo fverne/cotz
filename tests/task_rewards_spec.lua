@@ -41,6 +41,7 @@ ix = {
 }
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_leaderboard.lua")
 local base = "gamemodes/ix_cotz/plugins/progression/"
+dofile("tests/helpers/character_vars.lua")
 dofile(base .. "libs/sh_storage.lua")
 dofile(base .. "libs/sh_progression.lua")
 ix.progression.npcRequirements["'Mute'"] = "cotz/town/old-timer/OT19"
@@ -87,7 +88,7 @@ end
 local nextID = 0
 local function actor()
 	nextID = nextID + 1
-	local owner = setmetatable({id = nextID, data = {}, jobs = {}, money = 0, saves = 0}, ix.meta.character)
+	local owner = setmetatable({id = nextID, data = {}, vars = {}, jobs = {}, money = 0, saves = 0}, ix.meta.character)
 	owner.inventory = {items = {}, received = {}}
 	function owner.inventory:GetItems() return self.items end
 	function owner.inventory:Add(item, _, data)
@@ -208,6 +209,7 @@ check(#owner.inventory.received > 0, "reserved reward delivers on completion")
 check(not ix.taskRewards.EarnOffer(owner, "persistent"), "completion replay pays nothing")
 local restored = actor()
 restored.data = copy(owner.data)
+restored.vars = copy(owner.vars)
 check(
 	not ix.taskRewards.SelectOffer(restored, "'Old Timer'", "persistent", 1),
 	"save/load cannot replay a selected reward"
@@ -529,6 +531,7 @@ check(ix.taskRewards.AcceptJob(rewardChoiceOwner.client, "'Old Timer'", "easy"),
 local acceptedChoice = rewardChoiceOwner:GetJobs()["'Old Timer'"]
 local restoredChoice = actor()
 restoredChoice.data, restoredChoice.jobs = copy(rewardChoiceOwner.data), copy(rewardChoiceOwner.jobs)
+restoredChoice.vars = copy(rewardChoiceOwner.vars)
 check(not ix.taskRewards.SelectOffer(restoredChoice, "'Old Timer'", acceptedChoice.rewardKey, 1),
 	"reconnecting cannot reveal or reserve an unfinished task reward")
 local jobs = hunter:GetJobs()
@@ -760,6 +763,7 @@ local harder = {moneyReward = 10000, reward = {}}
 check(ix.taskRewards.SupplyBudget(harder, 1) > fixedAllowance, "more valuable work contributes more toward the bonus")
 local resumed = actor()
 resumed.data = copy(hunter.data)
+resumed.vars = copy(hunter.vars)
 check(
 	ix.taskRewards.BonusStatus(resumed, "'Old Timer'") == ix.taskRewards.BonusStatus(hunter, "'Old Timer'"),
 	"partial bonus progress survives character restoration"
@@ -1331,7 +1335,7 @@ do
 	for _, npc in ipairs({"'Mute'", "'Spool'", "'Ballast'"}) do
 		for tier = 1, 3 do
 			local cashOwner = actor()
-			cashOwner.data.progression = copy(recipient.data.progression)
+			cashOwner.vars.progression = copy(recipient.vars.progression)
 			local unlocked = ix.progression.GetCharacterProgression(cashOwner)
 			unlocked.lines["cotz/town/old-timer/OT19"] = {completed = true}
 			ix.progression.SetCharacterProgression(cashOwner, unlocked)
@@ -1406,6 +1410,7 @@ do
 	local revealed = hiddenOwner:GetData("taskRewardOffers")[key]
 	local restored = actor()
 	restored.data, restored.jobs = copy(hiddenOwner.data), copy(hiddenOwner.jobs)
+	restored.vars = copy(hiddenOwner.vars)
 	ix.taskRewards.ReconcileCharacter(restored)
 	check(restored:GetData("taskRewardOffers")[key].choices[1].label == revealed.choices[1].label,
 		"revealed choices survive reconnect without rerolling")

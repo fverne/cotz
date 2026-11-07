@@ -1,6 +1,5 @@
 ix.vendorStock = ix.vendorStock or {}
 
-local DATA_KEY = "vendorStock"
 local SECONDS_PER_HOUR = 3600
 
 function ix.vendorStock.GetMaximum(character, vendor, uniqueID)
@@ -46,7 +45,7 @@ local function sendStock(character, vendor, uniqueID, count, maximum, fraction)
 end
 
 local function getLine(character, vendor, uniqueID)
-	local data = character:GetData(DATA_KEY, {})
+	local data = character:GetVendorStock()
 	local key = game.GetMap() .. "/" .. vendor:GetDisplayName()
 	data[key] = data[key] or {}
 	local catalog = vendor.items[uniqueID]
@@ -75,7 +74,7 @@ local function getLine(character, vendor, uniqueID)
 		line.fraction = 0
 	end
 	line.maximum = maximum
-	character:SetData(DATA_KEY, data, true)
+	character:SetVendorStock(data)
 
 	return line, maximum, data
 end
@@ -98,7 +97,7 @@ function ix.vendorStock.Set(character, vendor, uniqueID, amount)
 	end
 	local line, _, data = getLine(character, vendor, uniqueID)
 	line.count = math.Clamp(math.floor(amount), 0, maximum)
-	character:SetData(DATA_KEY, data, true)
+	character:SetVendorStock(data)
 	sendStock(character, vendor, uniqueID, line.count, maximum, line.fraction)
 
 	return line.count
@@ -132,7 +131,7 @@ function ix.vendorStock.TaskRestock(character, vendor, claimID, jobSerial)
 		return false
 	end
 	local identity = game.GetMap() .. "/" .. vendor:GetDisplayName()
-	local claims = character:GetData("vendorRestockClaims", {})
+	local claims = character:GetVendorRestockClaims()
 	claims[identity] = claims[identity] or {milestones = {}, lastJob = 0}
 	local claim = claims[identity]
 	if jobSerial then
@@ -146,7 +145,7 @@ function ix.vendorStock.TaskRestock(character, vendor, claimID, jobSerial)
 		end
 		claim.milestones[claimID] = true
 	end
-	character:SetData("vendorRestockClaims", claims, true)
+	character:SetVendorRestockClaims(claims)
 	for uniqueID, catalog in pairs(vendor.items) do
 		local interval, amount = vendor:GetStockInterval(uniqueID)
 		local eligible = catalog[VENDOR_MAXSTOCK] and catalog[VENDOR_MAXSTOCK] > 0
@@ -163,7 +162,7 @@ function ix.vendorStock.TaskRestock(character, vendor, claimID, jobSerial)
 				if line.count == maximum then
 					line.updated = os.time()
 				end
-				character:SetData(DATA_KEY, data, true)
+				character:SetVendorStock(data)
 				sendStock(character, vendor, uniqueID, line.count, maximum, line.fraction)
 			end
 		end

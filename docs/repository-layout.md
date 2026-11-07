@@ -26,8 +26,12 @@ The client schema library `schema/libs/cl_cotzui.lua` owns shared COTZ UI stylin
 gameplay plugins through the existing library loader. See [UI and HUD style](ui-style.md).
 
 `schema/meta/sv_character.lua` is explicitly included by `sh_schema.lua`. Its owner-sync override
-keeps saved personal vendor stock/history out of the initial character network payload; other
-recipients retain Helix's normal visibility rules. Persistence and vendor stock messages are unchanged.
+keeps legacy personal vendor stock/history keys out of the initial character network payload;
+other recipients retain Helix's normal visibility rules.
+
+Progression and personal vendor stock now use separate large character vars. Their owning plugin
+libraries register them; `schema/sv_schema.lua` supplies the SQL type before plugins load.
+See [character storage](database/README.md) for the fresh-database deployment requirement.
 
 The schema character loader in `schema/derma/cl_charload.lua` disables character actions for an empty
 selection and revalidates selection after its slide animation. Deletion acknowledgements refresh the

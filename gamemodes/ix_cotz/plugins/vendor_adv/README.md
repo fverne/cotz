@@ -8,11 +8,11 @@ Saved town vendor rows are reconciled to this plan on load, including trade mode
 The server checks both sale and purchase eligibility. Existing personal stock history is not reset.
 The Original retains ordinary work and supplies without a finite progression catalogue.
 
-Personal `vendorStock` and `vendorRestockClaims` character data stays server-only, including during
-initial character synchronization. The schema's `meta/sv_character.lua` overrides the owning-client
-sync path because Helix's `SetData(..., true)` suppresses updates but still includes those keys on
-reconnect. Existing saves remain intact. Vendor menus receive their current stock through the vendor
-networking rather than the full history for every map and contact.
+Personal `vendorStock` and `vendorRestockClaims` are separate persistent character vars with
+`bNoNetworking = true`, including during initial synchronization. Each uses its own `MEDIUMTEXT`
+SQL column. Vendor menus receive their current stock through the vendor networking rather than
+the full history for every map and contact. This targets a fresh database; see
+[character storage](../../../../docs/database/README.md).
 
 The 12 new town contacts have editable appearance definitions and conversations. The
 [town NPC plugin](../townnpcs/README.md) installs jobs, progression trees, catalogue gates,
@@ -97,6 +97,7 @@ to place these contacts manually.
 Relevant standalone checks from the repository root:
 
     luatex --luaonly tests/vendor_stock_spec.lua
+    luatex --luaonly tests/character_storage_spec.lua
     luatex --luaonly tests/character_sync_spec.lua
     luatex --luaonly tests/dialogue_order_spec.lua
 

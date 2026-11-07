@@ -90,6 +90,8 @@ local function buyer()
 	}
 	character.GetData = function(self, key, default) return self.data[key] or default end
 	character.SetData = function(self, key, value) self.data[key] = value end
+	character.GetVendorStock = function(self) return self.stock or {} end
+	character.SetVendorStock = function(self, value) self.stock = value end
 	character.GetPlayer = function() return client end
 	character.Save = function() end
 	character.HasSherpaVendor = function(self) return self.sherpa == true end

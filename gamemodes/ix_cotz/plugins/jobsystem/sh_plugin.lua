@@ -6,7 +6,7 @@ PLUGIN.description = "Repeatable contact jobs, field assignments and persistent 
 
 ix.char.RegisterVar("jobs", {
 	field = "jobs",
-	fieldType = ix.type.text,
+	fieldType = "cotzMediumText",
 	default = {},
 	bNoDisplay = true,
 })

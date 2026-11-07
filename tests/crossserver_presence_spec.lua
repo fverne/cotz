@@ -51,6 +51,11 @@ for id = 1, 70 do
 	rows[id] = {character_id = id, name = "Scout " .. id, pdaavatar = "portrait.png", state = "online",
 		map = "map_b", squad_id = "squad", squad_name = "Scouts", squad_color = "105 139 87 255"}
 end
+ix.townNPCs = {contacts = {test = {name = "Tester", progression = {{id = "one"}}}},
+	StepID = function(_, slug, id) return slug .. "/" .. id end,
+	GetNetworkAccess = function() return {} end,
+	FilterNetworkRecord = function(_, _, record) return record end}
+rows[1].progression = encode({lines = {["test/one"] = {completed = true}}})
 ix.crossserver.PublishRoster(rows)
 check(#packets == 3, "large rosters use bounded typed network chunks")
 check(packets[1][4] == 32 and packets[3][4] == 6, "chunk record counts match the payload")
@@ -68,6 +73,8 @@ check(not ix.crossserver.roster, "partial snapshots never replace the visible ro
 receive(packets[2])
 check(not ix.crossserver.roster, "intermediate chunks remain pending")
 receive(packets[3])
+check(ix.crossserver.roster[1].profile.leaderboardStats.favoriteContact == "Tester",
+	"remote favorite contacts read the saved progression column")
 check(ix.crossserver.roster[1].name == "Scout 1" and ix.crossserver.roster[70].squadName == "Scouts",
 	"completed snapshot preserves character identity and public squad data")
 check(ix.crossserver.roster[70].squadColor.g == 139, "typed colors survive the round trip")

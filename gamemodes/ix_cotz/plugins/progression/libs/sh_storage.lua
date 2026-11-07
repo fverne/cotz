@@ -1,6 +1,12 @@
 ix.progression = ix.progression or {}
 
-local DATA_KEY = "progression"
+ix.char.RegisterVar("progression", {
+	field = "progression",
+	fieldType = "cotzMediumText",
+	default = {lines = {}},
+	isLocal = true,
+	bNoDisplay = true,
+})
 
 local function validateCharacter(character)
 	assert(
@@ -23,7 +29,7 @@ end
 local function readRecord(character)
 	validateCharacter(character)
 
-	local record = character:GetData(DATA_KEY)
+	local record = character:GetProgression()
 
 	if record == nil then
 		return newRecord()
@@ -45,20 +51,19 @@ function ix.progression.GetCharacterProgressionLine(character, progressionID)
 end
 
 if SERVER then
-	-- SetData replicates only to the owner; Helix's character save persists it.
 	function ix.progression.SetCharacterProgression(character, record)
 		validateCharacter(character)
 		validateRecord(record)
-		character:SetData(DATA_KEY, table.Copy(record))
+		character:SetProgression(table.Copy(record))
 	end
 
 	function ix.progression.InitializeCharacterProgression(character)
 		validateCharacter(character)
 
-		if character:GetData(DATA_KEY) == nil then
+		if character.vars.progression == nil then
 			ix.progression.SetCharacterProgression(character, newRecord())
 		else
-			validateRecord(character:GetData(DATA_KEY))
+			validateRecord(character:GetProgression())
 		end
 		local record = ix.progression.GetCharacterProgression(character)
 		local changed = false

@@ -31,6 +31,7 @@ query([[INSERT INTO ix_squads_squads VALUES ('char:1','Legacy','Message','NULL')
 -- Public presence now selects these existing character columns for its leaderboard.
 query([[ALTER TABLE ix_characters ADD COLUMN data TEXT DEFAULT '{}']])
 query([[ALTER TABLE ix_characters ADD COLUMN reputation INTEGER DEFAULT 0]])
+query([[ALTER TABLE ix_characters ADD COLUMN progression MEDIUMTEXT DEFAULT '{}']])
 local humans, sent, errors = {}, {}, {}
 local now, map = 100, "map_a"
 local hashes = 0
@@ -273,6 +274,8 @@ query("INSERT INTO ix_squads_presence (scope,character_id,session,map,state,expi
 	.. "('ix_cotz',3,'remote','map_c','travelling'," .. "CAST(strftime('%s', 'now') AS INTEGER)" .. "+45,0,'Remote loner'),"
 	.. "('another',4,'foreign','map_d','online'," .. "CAST(strftime('%s', 'now') AS INTEGER)" .. "+45,0,'Foreign')")
 local rosterRows
+ix.char.vars.progression = {field = "progression", default = {lines = {}}}
+query([[UPDATE ix_characters SET progression = '{"lines":{"fixture":{"completed":true}}}' WHERE id = 1]])
 local publish = ix.crossserver.PublishRoster
 ix.crossserver.PublishRoster = function(rows) rosterRows = rows end
 hook.Run = function(event, queryObject)
@@ -280,6 +283,8 @@ hook.Run = function(event, queryObject)
 end
 ix.crossserver.RefreshRoster()
 check(#rosterRows == 2, "public roster includes active characters across maps and excludes other schemas")
+check(rosterRows[1].progression == '{"lines":{"fixture":{"completed":true}}}',
+	"the real roster SQL selects the separate progression column")
 check(rosterRows[1].squad_name == "New group" and rosterRows[2].squad_id == nil,
 	"public roster joins authoritative squad display metadata and includes loners")
 query("UPDATE ix_squads_presence SET hidden=1 WHERE character_id=3")

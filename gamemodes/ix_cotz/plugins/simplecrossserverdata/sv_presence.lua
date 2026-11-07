@@ -215,8 +215,10 @@ end
 function ix.crossserver.PublishRoster(rows)
 	local records = {}
 	for _, row in ipairs(rows) do
+		local progression = row.progression and util.JSONToTable(row.progression)
 		records[#records + 1] = {
-			profile = util.TableToJSON({leaderboardStats = ix.jobs.GetLeaderboardStats(util.JSONToTable(row.profile or "{}") or {}),
+			profile = util.TableToJSON({leaderboardStats = ix.jobs.GetLeaderboardStats(
+				util.JSONToTable(row.profile or "{}") or {}, progression),
 				reputation = tonumber(row.reputation) or 0}),
 			characterID = tonumber(row.character_id), name = row.name or "",
 			pdaavatar = row.pdaavatar or "vgui/icons/face_31.png", state = row.state,
@@ -260,6 +262,9 @@ function ix.crossserver.RefreshRoster()
 	query:SelectAll("p")
 	query:Join("ix_characters", "leaderboard", mysql.Compare("leaderboard.id", "=", mysql.Column("p.character_id")))
 	query:SelectColumn("leaderboard.data", "profile")
+	if ix.char and ix.char.vars and ix.char.vars.progression then
+		query:SelectColumn("leaderboard.progression", "progression")
+	end
 	query:SelectColumn("leaderboard.reputation", "reputation")
 	query:WhereExpr(mysql.All(mysql.Compare("p.scope", "=", scope()), mysql.Compare("p.hidden", "=", 0),
 		mysql.Compare("p.expires", ">", mysql.Now()), mysql.Any(mysql.Compare("p.state", "=", "online"),

@@ -25,13 +25,14 @@ check(a.replications == 2, "initialization and requirement assignment are idempo
 check(not pcall(ix.progression.SetCharacterProgression, a, {lines = false}), "invalid record shape rejected")
 local snapshot = ix.progression.GetCharacterProgression(a)
 snapshot.lines.example = { value = 4 }
-check(a.data.progression.lines.example == nil, "reads return snapshots")
+check(a.vars.progression.lines.example == nil, "reads return snapshots")
 ix.progression.SetCharacterProgression(a, snapshot)
 snapshot.lines.example.value = 99
 check(ix.progression.GetCharacterProgression(a).lines.example.value == 4, "writes copy snapshots")
-check(b.data.progression.lines.example == nil, "storage is isolated")
+check(b.vars.progression.lines.example == nil, "storage is isolated")
 local restored = character()
 restored.data = copy(a.data)
+restored.vars = copy(a.vars)
 ix.progression.InitializeCharacterProgression(restored)
 check(
 	restored.replications == 0 and ix.progression.GetLine(restored, "example").value == 4,
@@ -303,6 +304,7 @@ check(string.find(response, "Still needed: 2.", 1, true), "partial delivery repo
 check(groupOwner.money == 0 and not groupOwner.reputation, "unfinished group task pays nothing")
 local reloadedOwner = character()
 reloadedOwner.data = copy(groupOwner.data)
+reloadedOwner.vars = copy(groupOwner.vars)
 groupOwner = reloadedOwner
 installInventory(groupOwner)
 ix.progression.InitializeCharacterProgression(groupOwner)
@@ -328,6 +330,7 @@ check(not ix.taskRewards.SelectOffer(groupOwner, "Tester", "progression:reward_g
 check(completionCalls == 1, "completion callback runs once alongside the rewards")
 local completedRestore = character()
 completedRestore.data = copy(groupOwner.data)
+completedRestore.vars = copy(groupOwner.vars)
 ix.progression.PayCompletionRewards(completedRestore, "reward_groups")
 check(completedRestore.money == 0 and not completedRestore.inventory.rewards, "save/load cannot replay rewards")
 
@@ -349,6 +352,7 @@ check(ix.progression.TurnIn(mixedOwner.client, rewardNPC, "reward_mixed", "rewar
 check(mixedOwner.money == 0 and not mixedOwner.inventory.rewards, "singleton bonus waits for completion")
 local mixedReload = character()
 mixedReload.data = copy(mixedOwner.data)
+mixedReload.vars = copy(mixedOwner.vars)
 mixedOwner = mixedReload
 installInventory(mixedOwner)
 supplyItem("reward_test", 1)
@@ -424,7 +428,7 @@ check(ix.progression.GetLine(asyncOwner, "taskRewardClaims").claiming, "in-fligh
 check(#ix.progression.GetLine(asyncOwner, "taskRewardClaims").pendingRewards == 1,
 	"slot reservation alone does not erase durable pending reward")
 check(not ix.progression.ClaimRewards(asyncOwner, "taskRewardClaims"), "duplicate in-flight claim rejected")
-local interruptedClaim = copy(asyncOwner.data)
+local interruptedClaim = copy(asyncOwner.vars)
 local insertedItem = {GetData = function(_, key) return reservedData[key] end}
 ix.char = {loaded = {[4242] = asyncOwner}}
 callbacks["cotz/progression/confirm-reward"](nil, asyncOwner.inventory, insertedItem)
@@ -433,7 +437,7 @@ check(
 	"database insertion confirms delivery"
 )
 local claimRestored = character()
-claimRestored.data = interruptedClaim
+claimRestored.vars = interruptedClaim
 local attemptedDuplicate = 0
 claimRestored.inventory = {
 	GetItems = function() return {insertedItem} end,
@@ -497,6 +501,7 @@ check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 2,
 	"returning to the contact reveals the new topic")
 local reconnected = character()
 reconnected.data = copy(reader.data)
+reconnected.vars = copy(reader.vars)
 check(#ix.progression.GetKnownActiveProgressions(reconnected, "Discovery") == 2,
 	"discovery survives character restoration")
 
@@ -523,6 +528,7 @@ check(not ix.progression.BuildDeliveryResponse(request, request.keyNpc, {}, jour
 
 ix.progression = {definitions = ix.progression.definitions}
 SERVER, CLIENT = false, true
+dofile("tests/helpers/character_vars.lua")
 for _, library in ipairs({"sh_storage", "sh_progression", "sh_requirements", "sh_expansion", "sh_services"}) do
 	dofile("gamemodes/ix_cotz/plugins/progression/libs/" .. library .. ".lua")
 end

@@ -110,6 +110,9 @@ ix = {
 	},
 }
 local base = "gamemodes/ix_cotz/plugins/vendor_adv/"
+ix.meta = {character = {}}
+dofile("tests/helpers/character_vars.lua")
+dofile(base .. "libs/sh_stockstorage.lua")
 dofile(base .. "sh_plugin.lua")
 PLUGIN.SaveData = function() end
 dofile(base .. "entities/entities/ix_vendor_adv.lua")
@@ -120,7 +123,8 @@ local position = {
 	end,
 }
 local function character()
-	local character = { data = {}, money = 1000, received = 0, saves = 0 }
+	local character = setmetatable({data = {}, vars = {}, money = 1000, received = 0, saves = 0},
+		{__index = ix.meta.character})
 	local client = {
 		GetCharacter = function()
 			return character
@@ -197,6 +201,7 @@ check(recipient == clientA and sentMessage == "ixVendorAdvStock", "updates targe
 check(shop.items.apple[VENDOR_STOCK] == 5, "trade does not mutate the NPC catalog")
 local restored = character()
 restored.data = copy(a.data)
+restored.vars = copy(a.vars)
 check(shop:GetStock("apple", restored) == 3, "stock survives character restoration")
 check(vendor():GetStock("apple", a) == 3, "NPC respawns do not reset personal stock")
 currentMap = "pripyat"

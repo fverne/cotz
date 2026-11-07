@@ -51,6 +51,9 @@ clients only read replicated state. Requirements are assigned once by the server
 for current assignments. Hand-ins validate character, NPC, access, map, inventory and remaining units.
 Whole-stack removal must succeed before progress/rewards are granted.
 
+Progression persists in its own owner-local `progression` character var and `MEDIUMTEXT` SQL column,
+outside generic character data. This targets a fresh database; see [character storage](../../../../docs/database/README.md).
+
 Non-town completion cash uses 60% of consumed nominal value. Town milestones instead declare
 completionCash explicitly; trackers and arena checkpoints pay zero additional cash. Partial hand-ins
 do not pay early. Existing accrued credit is preserved as a minimum completion payment. Town
@@ -81,6 +84,7 @@ ProgressionGrant marks a current milestone complete.
 World-arrival support remains for explicit worldNPC definitions; Pripyat town arrivals are suppressed.
 
     luatex --luaonly tests/progression_spec.lua
+    luatex --luaonly tests/character_storage_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua
     luatex --luaonly tests/progression_services_spec.lua
     luatex --luaonly tests/task_rewards_spec.lua
