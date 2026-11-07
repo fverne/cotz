@@ -64,7 +64,7 @@ function ix.jobs.field.RecoveryClue(point, map, radius)
 	end
 	if not nearest then return end
 	local name = names[tostring(nearest)]
-	if nearestDistance <= (radius or 384) ^ 2 then return "Search near " .. name .. "." end
+	if nearestDistance <= (radius or 384) ^ 2 then return "Search " .. name .. "." end
 	local offset = point - nearest
 	local bearing = math.deg(math.atan2(-offset.y, offset.x))
 	local direction = COMPASS_DIRECTIONS[math.floor((bearing + 22.5) / 45) % 8 + 1]
