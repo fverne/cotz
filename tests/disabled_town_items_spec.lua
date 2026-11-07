@@ -52,6 +52,8 @@ contact.supplies[2] = "pda"
 vendorPlugin:ConfigureTownTemplate(contact, catalogue, stock)
 check(not ix.npctemplates.templates.test.items.pda, "template assembly removes and never re-adds disabled items")
 local vendor = {items = {pda = {nil, 50, 1, 50, 12, 1}}}
+function vendor:GetBuyAll() return self.buyAll or false end
+function vendor:SetBuyAll(value) self.buyAll = value end
 function vendor:AddItemToList(item, ...)
 	self.items[item] = {...}
 end
@@ -69,4 +71,10 @@ vendorPlugin:RefreshTownVendors(town)
 check(not vendor.items.pda and saved == 1, "town refresh saves removal of disabled rows")
 vendorPlugin:RefreshTownVendors(town)
 check(saved == 1, "unchanged town refresh does not write again")
+contact.buyAll, contact.buyScale = true, 0.3
+check(vendorPlugin:RefreshTownVendor(vendor, contact, catalogue, stock),
+	"buyer policy changes are persisted even when item rows do not change")
+check(vendor:GetBuyAll() and vendor.scale == 0.3, "saved buyers receive the approved thirty-percent rate")
+check(not vendorPlugin:RefreshTownVendor(vendor, contact, catalogue, stock), "buyer policy refresh is idempotent")
+check(town:CanSellItem("unrequested", "Test"), "buy-all contacts accept goods outside their wanted pools")
 print("PASS: " .. checks .. " disabled town item checks")

@@ -34,28 +34,27 @@ function PLUGIN:BuildCatalogue()
 			self.itemGates[item] = gate
 		end
 	end
+	for _, contact in pairs(self.contacts) do
+		for _, item in ipairs(contact.supplies) do
+			if not contact.catalogue[item] then
+				local gate = self.itemGates[item] or {sellers = {}}
+				gate.sellers[contact.name] = {ungated = true, npc = contact.name}
+				self.itemGates[item] = gate
+			end
+		end
+	end
 	for item, gate in pairs(self.itemGates) do
 		local owner = (self.canonicalSellers or {})[item]
 		if owner then
 			local contact = assert(self.contacts[owner], "Unknown canonical contact: " .. owner)
 			local canonical = assert(gate.sellers[contact.name], "Missing canonical purchase: " .. item)
-			gate.id, gate.npc = canonical.id, canonical.npc
+			gate.id, gate.npc, gate.ungated = canonical.id, canonical.npc, canonical.ungated
 		else
-			local count = 0
 			for npc, seller in pairs(gate.sellers) do
-				count = count + 1
-				if not gate.id or seller.id < gate.id then gate.id, gate.npc = seller.id, npc end
+				if seller.id and (not gate.id or seller.id < gate.id) then gate.id, gate.npc = seller.id, npc end
 			end
-			assert(count == 1 or item:sub(1, 6) == "medic_", "Missing canonical seller: " .. item)
-		end
-	end
-	-- A new specialist route must not lock an existing contact's ordinary supply of that item.
-	for _, contact in pairs(self.contacts) do
-		for _, item in ipairs(contact.supplies) do
-			local gate = self.itemGates[item]
-			if gate and not contact.catalogue[item] then
-				gate.sellers[contact.name] = {ungated = true, npc = contact.name}
-			end
+			-- Multiple starter suppliers need no global purchase milestone.
+			if not gate.id then gate.ungated = true end
 		end
 	end
 	for _, chain in ipairs(self.upgradeChains) do

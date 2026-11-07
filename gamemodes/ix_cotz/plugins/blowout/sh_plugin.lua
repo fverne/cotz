@@ -206,7 +206,7 @@ if SERVER then
 		then
 			for _, ply in player.Iterator() do
 				local character = ply:GetCharacter()
-				if character and ix.progression.IsCompleted(character, "cotz/town/mute/MU09") then
+				if character and ix.townNPCs:HasService(character, "emissionWarnings") then
 					ix.chat.Send(
 						ply,
 						"eventpdainternal",

@@ -99,40 +99,29 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
                 previous = min(scores)
                 seen.update(items)
 
-    def test_current_definitions_match_depth_plan(self):
+    def test_current_branches_use_obtainable_themed_pools(self):
         deliveries = 0
         for slug, contact in self.data["contacts"].items():
-            plan = balance.contact_plan(contact)
-            if not plan:
-                self.assertFalse(contact["progression"], slug)
-                continue
-            home = balance.starting_region(contact, slug, self.data, self.rates)
-            theme = balance.CONTACT_THEMES[slug]
-            phases = set()
             for step in contact["progression"]:
-                if step["kind"] != "delivery":
-                    continue
+                self.assertEqual(step["kind"], "delivery")
                 deliveries += 1
-                tier, _, _ = plan[step["id"]]
-                phases.add(tier)
-                self.assertEqual(len(step["requirements"]), tier, (slug, step["id"]))
-                if slug in {"beanstalk", "egghead", "intern"}:
-                    for slot in step["requirements"]:
-                        self.assertTrue(all(candidate["item"].startswith("artifact_")
-                                            for candidate in self.data["pools"][slot["pool"]]["candidates"]))
-                    continue
+                tier = len(step["requirements"])
+                self.assertTrue(1 <= tier <= 4)
                 for index, slot in enumerate(step["requirements"]):
-                    key = balance.band_key(theme, home, index + 1)
-                    self.assertEqual(slot["pool"], key)
-                    group = self.bands[(theme, home)][index]
-                    expected = balance.QUANTITIES[tier - 1][index] * balance.batch_units(
-                        group, balance.totals(self.rates)
-                    )
-                    self.assertEqual(slot["quantity"], expected)
-                    actual = [c["item"] for c in self.data["pools"][key]["candidates"]]
-                    self.assertEqual(actual, group)
-            self.assertEqual(phases, {1, 2, 3, 4}, slug)
-        self.assertEqual(deliveries, 307)
+                    self.assertEqual(slot["quantity"], tier - index)
+                    candidates = self.data["pools"][slot["pool"]]["candidates"]
+                    self.assertTrue(candidates)
+                    for candidate in candidates:
+                        self.assertTrue(candidate["item"].startswith("artifact_") or any(self.rates[region].get(candidate["item"])
+                                            for region in balance.MAPS),
+                                        (slug, step["id"], candidate["item"]))
+                    if slug in {"beanstalk", "egghead", "intern"}:
+                        self.assertTrue(all(c["item"].startswith("artifact_") for c in candidates))
+        self.assertGreater(deliveries, 400)
+
+    def test_legacy_writer_cannot_overwrite_branch_requirements(self):
+        with self.assertRaisesRegex(ValueError, "authored directly"):
+            balance.apply_plan(self.data, self.rates, self.bands)
 
     def test_rarity_examples_are_not_raw_pool_weights(self):
         supply = balance.totals(self.rates)

@@ -36,16 +36,9 @@ if SERVER then
 			return
 		end
 		if
-			treeID == "owlnpc"
-			and string.find(topicID, "Storage", 1, true)
-			and not ix.progression.IsCompleted(character, "cotz/town/cleaner/CL01")
-		then
-			return
-		end
-		if
 			treeID == "technpc"
 			and string.find(topicID, "Paint", 1, true)
-			and not ix.progression.IsCompleted(character, "cotz/town/technut/TN13")
+			and not ix.townNPCs:HasService(character, "painting", target:GetDisplayName())
 		then
 			return
 		end

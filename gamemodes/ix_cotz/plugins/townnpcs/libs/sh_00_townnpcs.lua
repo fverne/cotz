@@ -22,6 +22,15 @@ function PLUGIN:StepID(contact, step)
 	return "cotz/town/" .. contact .. "/" .. step
 end
 
+function PLUGIN:IsContactCompleted(character, contact)
+	if not character or #contact.progression == 0 then return false end
+	for _, step in ipairs(contact.progression) do
+		if not ix.progression.IsCompleted(character, self:StepID(contact.id, step.id)) then return false end
+	end
+
+	return true
+end
+
 function PLUGIN:ScaleProgressionEffort(contact, amount)
 	return math.ceil(amount * (contact.difficultyMultiplier or 1))
 end
@@ -30,7 +39,19 @@ function PLUGIN:HasService(character, service, npc)
 	local gate = (self.serviceGates or {})[service]
 
 	return character ~= nil and gate ~= nil and (not npc or gate.npc == npc)
-		and ix.progression.IsCompleted(character, gate.id)
+		and (gate.ungated == true or ix.progression.IsCompleted(character, gate.id))
+end
+
+function PLUGIN:GetAmmoExchanges(character, npc)
+	local result = {}
+	for _, exchange in pairs(self.ammoExchanges or {}) do
+		if exchange.npc == npc and character and ix.progression.IsCompleted(character, exchange.id) then
+			result[#result + 1] = exchange
+		end
+	end
+	table.sort(result, function(first, second) return first.output < second.output end)
+
+	return result
 end
 
 function PLUGIN:BuildWantedItems(contact)
@@ -93,6 +114,7 @@ end
 
 function PLUGIN:CanSellItem(item, npcName)
 	local contact = self.byName[npcName]
+	if contact and contact.buyAll then return true end
 	if contact and contact.enforceCatalogue then return (contact.wantedItems or {})[item] == true end
 end
 
@@ -188,8 +210,9 @@ function PLUGIN:CanChangeSuitVariant(character, itemID, npc)
 	local gate = self.itemGates[item.baseSuit]
 
 	local variant = self.variantUnlocks[itemID]
-	local unlocked = itemID == item.baseSuit or (variant
-		and ix.progression.IsCompleted(character, self:StepID(variant.contact, variant.step)))
+	local id = variant and self:StepID(variant.contact, variant.step)
+		or itemID == item.baseSuit and (self.variantBaseGates or {})[item.baseSuit]
+	local unlocked = id and ix.progression.IsCompleted(character, id)
 
-	return gate ~= nil and unlocked and ix.progression.IsCompleted(character, gate.id)
+	return gate ~= nil and unlocked and (gate.ungated == true or ix.progression.IsCompleted(character, gate.id))
 end

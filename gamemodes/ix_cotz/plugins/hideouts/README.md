@@ -147,7 +147,8 @@ same entrance/template. `hideoutPersonalLimit` remains an optional map-wide cap 
 Enter a room once to resolve its dupe markers. The saved layout then supplies the exterior trader's
 barter offers even while that room is unloaded. Each room has its own paid levels and inventories;
 completing a contact milestone only unlocks permission to purchase. Offers show costs and locked gates.
-There are no new progression conversations, tasks, rewards or item gifts.
+The exterior contacts' [progression branches](../../../../docs/npc-overhaul/progression-overhaul.md)
+unlock purchase permissions; they do not grant free improvements or item gifts.
 
 ### Storage and sharing
 
@@ -185,21 +186,22 @@ Private starts with owner-only access; selected guest permissions work while all
 Room invitations never grant storage or building rights automatically. Revocation closes affected sessions,
 and transfers recheck current invitation and per-container access. Guests cannot change these controls.
 
-### Pilot progression and furnishings
+### Personal progression and furnishings
 
-These existing local milestones enable a few test purchases. Step IDs are BA01–03, CL01–03 and LE01–03;
-there are no new milestone IDs or progression dialogue. `personalUnlockSteps` is the editable gate table.
+Each local contact has twelve `v3/hideout/01`–`12` hand-in milestones. `personalUnlockSteps` is the
+editable gate table. The local contact is Ballast in Swamps, Cleaner in Garbage and Ledger in Waystation.
 
 | Local completed step | Purchases enabled for each owned room on this map |
 | --- | --- |
-| 01 | General container installation/level 2; ammo container installation |
-| 02 | Two separate loose-item upgrades: 4 → 6 → 8 (500 then 1,100 roubles) |
-| 03 | General level 3; ammo level 2; medical/weapon installation; props/PET access (5,000 roubles) |
+| 01 | Container installation at tier 1; the room's initial general crate is still free |
+| 02 | Container tier 2; first loose-item upgrade, 4 → 6 (500 roubles) |
+| 03 | Container tier 3; props/PET access (5,000 roubles) |
+| 04 | Container tier 4; second loose-item upgrade, 6 → 8 (1,100 roubles) |
+| 05–12 | Matching container tier |
 
-For testing, administrators may use `/ProgressionGrant <character> cotz/town/ballast/BA01` (or the matching
+For testing, administrators may use `/ProgressionGrant <character> cotz/town/ballast/v3/hideout/01` (or the matching
 contact/step), then buy the desired improvement. Existing progression grants do not purchase upgrades.
-The broader town progression audit currently has dependency cycles; resolve those separately before
-using the complete natural progression path as a deployment check.
+The rebuilt town graph passes the offline dependency audit. Verify the natural unlock path in multiplayer.
 
 A room permits four loose item entities by default; floor purchases increase this by two each time.
 Guests share the same allowance. Drop/throwaway and direct inventory-to-world transfers enforce the cap.
@@ -219,7 +221,7 @@ Existing installed personal storage retains its inventory, dimensions, sharing a
 entry it maps to the first compatible personal tier without resizing; oversized legacy containers stop
 upgrading rather than shrink. Old receipt recovery applies before this one-time conversion. New personal
 receipts recover paid levels independently of current progression/price changes, without another payment.
-Banks remain separate and Ballast's existing bank service is unchanged. Existing `storageID` inventories
+Banks remain stored separately; Ballast's bank service is retired by the progression overhaul. Existing `storageID` inventories
 remain available to administrators through `/HideoutLegacyStorage ID`.
 
 Purchases use the existing atomic item/rouble/receipt adapter. A per-room lock also protects asynchronous

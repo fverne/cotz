@@ -1,118 +1,117 @@
-# Ammunition progression from gun availability
+# Authored ammunition progression
 
 Generated with `python3 docs/npc-overhaul/tools/ammo_progression.py --write`.
 
 `PLUGIN.regularAmmoChain` contains every regular load, excluding AP, HP and special shotgun variants.
-The five parallel gun chains are compared by position, then gun price, chain order and item ID.
-The first default SWEP ammunition use determines each calibre's place. Unused calibres follow alphabetically.
-This compares definition positions, not completion time through the shared contact prerequisites.
-Regular ranks replace the previous price bands; regular, HP and AP stages are scaled to each seller's tree.
-HP requires regular ammunition. AP additionally requires local HP when available, including equal-price variants.
-Each vendor's ammunition stages require its preceding stage, so sibling story branches cannot bypass the order.
-The approved plan has no starting sale supplies. No box prices, round counts or damage values are changed.
+The manually authored regularAmmoChain is authoritative; gun first-use data is informational only.
+This report never rewrites equipment chains, calibre order or contact allocations.
+Brass owns regular-calibre and HP branches; Carbon owns the AP branch.
+Each HP milestone requires its matching regular milestone; AP requires the matching HP milestone at Brass.
+HP and AP have no town cash sale routes. Exchanges consume two or three regular boxes respectively.
+Boxes are measured using their standard round counts; partial stacks can be combined.
+Brass also starts with buckshot and slugs; special loads unlock in TR, DT, MG order after regular buckshot.
+Listed starter ammunition is ungated. Box prices, round counts and damage values are unchanged.
 
-AP, HP and special shotgun variants are outside the regular chain and retain local counterpart prerequisites.
-They share their regular load's rank, with later upgrade stages. Prices below are reference values only.
 The legacy ID `45acp41` is .410 bore, a separate cartridge rather than a .45 ACP upgrade.
 
 ## Regular chain
 
-762x25 → 9x19 → 45acp → 22lr → 545x39 → 12gauge → 45acp41 → 762x39 → 556x45 → 9x18 → 762x54 → 357magnum → 9x39 → 44magnum → 9x21 → 762x51 → 500magnum → 338lapua → 50ae → 57x28 → 127x55 → 145x114 → 700nitro → 93x64
+22lr → 762x25 → 45acp41 → 9x19 → 45acp → 545x39 → 12gauge → 762x39 → 556x45 → 9x18 → 762x54 → 357magnum → 9x39 → 44magnum → 9x21 → 762x51 → 500magnum → 338lapua → 50ae → 57x28 → 127x55 → 145x114 → 700nitro → 93x64
 
 | Regular load | First gun | Position |
 | --- | --- | ---: |
-| 762x25 | nagantrev | 1 |
-| 9x19 | sten | 1 |
+| 22lr | No gun in upgrade chains | — |
+| 762x25 | tokarev | 1 |
+| 45acp41 | mp27 | 2 |
+| 9x19 | sten | 3 |
 | 45acp | toz106 | 1 |
-| 22lr | sako85varmint | 1 |
-| 545x39 | aks74u | 1 |
-| 12gauge | toz34short | 2 |
-| 45acp41 | ij600 | 2 |
-| 762x39 | sks | 2 |
-| 556x45 | rugermini14 | 4 |
-| 9x18 | makarov | 5 |
-| 762x54 | w1895 | 6 |
-| 357magnum | w9422357 | 7 |
-| 9x39 | 9a91 | 13 |
-| 44magnum | lax44 | 15 |
-| 9x21 | gepardpdw | 16 |
-| 762x51 | sako85 | 16 |
-| 500magnum | g2contender500 | 18 |
-| 338lapua | trg42 | 19 |
-| 50ae | deagle | 24 |
-| 57x28 | p90 | 26 |
-| 127x55 | Unaccounted: appended | — |
-| 145x114 | Unaccounted: appended | — |
-| 700nitro | Unaccounted: appended | — |
-| 93x64 | Unaccounted: appended | — |
+| 545x39 | saigasemi545 | 1 |
+| 12gauge | stoegerddshort | 2 |
+| 762x39 | saigasemi | 2 |
+| 556x45 | rugermini14 | 1 |
+| 9x18 | makarov | 2 |
+| 762x54 | mp18 | 1 |
+| 357magnum | w9422357 | 4 |
+| 9x39 | vss | 12 |
+| 44magnum | lax44 | 10 |
+| 9x21 | gepardpdw | 14 |
+| 762x51 | sako85 | 6 |
+| 500magnum | g2contender500 | 15 |
+| 338lapua | l115 | 11 |
+| 50ae | deagle | 25 |
+| 57x28 | p90 | 23 |
+| 127x55 | No gun in upgrade chains | — |
+| 145x114 | No gun in upgrade chains | — |
+| 700nitro | No gun in upgrade chains | — |
+| 93x64 | No gun in upgrade chains | — |
 
 ## Seller allocations
 
 | Item | Box price | Rounds | Price per round | Regular counterpart | Seller: milestone |
 | --- | ---: | ---: | ---: | --- | --- |
-| 762x25 | 500 | 60 | 8.3333 | 762x25 | beanstalk: BN01; brass: BR01; haggler: HG01 |
-| 762x25ap | 500 | 60 | 8.3333 | 762x25 | beanstalk: BN03; brass: BR03 |
-| 762x25hp | 500 | 60 | 8.3333 | 762x25 | beanstalk: BN02; brass: BR02 |
-| 9x19 | 750 | 60 | 12.5000 | 9x19 | beanstalk: BN01; brass: BR01; haggler: HG02 |
-| 9x19ap | 750 | 60 | 12.5000 | 9x19 | beanstalk: BN03; brass: BR03 |
-| 9x19hp | 750 | 60 | 12.5000 | 9x19 | beanstalk: BN02; brass: BR02 |
-| 45acp | 950 | 60 | 15.8333 | 45acp | beanstalk: BN02; brass: BR02; haggler: HG03 |
-| 45acpap | 950 | 60 | 15.8333 | 45acp | beanstalk: BN04; brass: BR04 |
-| 45acphp | 950 | 60 | 15.8333 | 45acp | beanstalk: BN03; brass: BR03 |
-| 22lr | 450 | 60 | 7.5000 | 22lr | beanstalk: BN03; haggler: HG04 |
-| 22lrap | 450 | 60 | 7.5000 | 22lr | beanstalk: BN05 |
-| 22lrhp | 450 | 60 | 7.5000 | 22lr | beanstalk: BN04 |
-| 545x39 | 1500 | 60 | 25.0000 | 545x39 | beanstalk: BN04; brass: BR04; intern: IN01; quartermaster: QM01 |
-| 545x39ap | 1500 | 60 | 25.0000 | 545x39 | beanstalk: BN06; brass: BR06; intern: IN03 |
-| 545x39hp | 1500 | 60 | 25.0000 | 545x39 | beanstalk: BN05; brass: BR05; intern: IN02 |
-| 12gaugedt | 600 | 30 | 20.0000 | 12gauge | spoor: SP02 |
-| 12gaugesg | 700 | 30 | 23.3333 | 12gauge | spoor: SP02 |
-| 12gaugemg | 750 | 30 | 25.0000 | 12gauge | spoor: SP02 |
-| 12gaugetr | 750 | 30 | 25.0000 | 12gauge | spoor: SP02 |
-| 12gauge | 800 | 30 | 26.6667 | 12gauge | spoor: SP01 |
-| 45acp41 | 600 | 20 | 30.0000 | 45acp41 | haggler: HG07; spoor: SP01 |
-| 762x39 | 1700 | 60 | 28.3333 | 762x39 | beanstalk: BN07; brass: BR07; haggler: HG08; intern: IN03; quartermaster: QM03 |
-| 762x39ap | 1700 | 60 | 28.3333 | 762x39 | beanstalk: BN09; brass: BR09; intern: IN05 |
-| 762x39hp | 1700 | 60 | 28.3333 | 762x39 | beanstalk: BN08; brass: BR08; intern: IN04 |
-| 556x45 | 1650 | 60 | 27.5000 | 556x45 | beanstalk: BN08; haggler: HG09; intern: IN04; quartermaster: QM04 |
-| 556x45ap | 1650 | 60 | 27.5000 | 556x45 | beanstalk: BN10; intern: IN06 |
-| 556x45hp | 1650 | 60 | 27.5000 | 556x45 | beanstalk: BN09; intern: IN05 |
-| 9x18 | 600 | 60 | 10.0000 | 9x18 | beanstalk: BN09; brass: BR09; haggler: HG10 |
-| 9x18ap | 600 | 60 | 10.0000 | 9x18 | beanstalk: BN11; brass: BR11 |
-| 9x18hp | 600 | 60 | 10.0000 | 9x18 | beanstalk: BN10; brass: BR10 |
-| 762x54 | 2100 | 60 | 35.0000 | 762x54 | beanstalk: BN10; brass: BR10; haggler: HG11; intern: IN06; quartermaster: QM06 |
-| 762x54ap | 2100 | 60 | 35.0000 | 762x54 | beanstalk: BN12; brass: BR12; intern: IN08 |
-| 762x54hp | 2100 | 60 | 35.0000 | 762x54 | beanstalk: BN11; brass: BR11; intern: IN07 |
-| 357magnum | 1000 | 60 | 16.6667 | 357magnum | beanstalk: BN11; haggler: HG12 |
-| 357magnumap | 1000 | 60 | 16.6667 | 357magnum | beanstalk: BN13 |
-| 357magnumhp | 1000 | 60 | 16.6667 | 357magnum | beanstalk: BN12 |
-| 9x39 | 1900 | 60 | 31.6667 | 9x39 | beanstalk: BN12; intern: IN08; quartermaster: QM08 |
-| 9x39ap | 1900 | 60 | 31.6667 | 9x39 | beanstalk: BN14; intern: IN10 |
-| 9x39hp | 1900 | 60 | 31.6667 | 9x39 | beanstalk: BN13; intern: IN09 |
-| 44magnum | 1000 | 60 | 16.6667 | 44magnum | beanstalk: BN13; brass: BR13; haggler: HG14 |
-| 44magnumap | 1000 | 60 | 16.6667 | 44magnum | beanstalk: BN15; brass: BR15 |
-| 44magnumhp | 1000 | 60 | 16.6667 | 44magnum | beanstalk: BN14; brass: BR14 |
-| 9x21 | 750 | 60 | 12.5000 | 9x21 | beanstalk: BN14; brass: BR14 |
-| 9x21ap | 750 | 60 | 12.5000 | 9x21 | beanstalk: BN16; brass: BR16 |
-| 9x21hp | 750 | 60 | 12.5000 | 9x21 | beanstalk: BN15; brass: BR15 |
-| 762x51 | 1950 | 60 | 32.5000 | 762x51 | beanstalk: BN15; haggler: HG16; intern: IN11; quartermaster: QM11 |
-| 762x51ap | 1950 | 60 | 32.5000 | 762x51 | beanstalk: BN17; intern: IN13 |
-| 762x51hp | 1950 | 60 | 32.5000 | 762x51 | beanstalk: BN16; intern: IN12 |
-| 500magnum | 1000 | 30 | 33.3333 | 500magnum | beanstalk: BN16; haggler: HG17 |
-| 500magnumap | 1000 | 30 | 33.3333 | 500magnum | beanstalk: BN18 |
-| 500magnumhp | 1000 | 30 | 33.3333 | 500magnum | beanstalk: BN17 |
-| 338lapua | 3500 | 60 | 58.3333 | 338lapua | beanstalk: BN17; intern: IN13; quartermaster: QM13 |
-| 338lapuaap | 3500 | 60 | 58.3333 | 338lapua | beanstalk: BN19; intern: IN15 |
-| 338lapuahp | 3500 | 60 | 58.3333 | 338lapua | beanstalk: BN18; intern: IN14 |
-| 50ae | 1750 | 60 | 29.1667 | 50ae | beanstalk: BN18; brass: BR18 |
-| 50aeap | 1750 | 60 | 29.1667 | 50ae | beanstalk: BN20; brass: BR20 |
-| 50aehp | 1750 | 60 | 29.1667 | 50ae | beanstalk: BN19; brass: BR19 |
-| 57x28 | 850 | 60 | 14.1667 | 57x28 | beanstalk: BN19; brass: BR19 |
-| 57x28ap | 850 | 60 | 14.1667 | 57x28 | beanstalk: BN21; brass: BR21 |
-| 57x28hp | 850 | 60 | 14.1667 | 57x28 | beanstalk: BN20; brass: BR20 |
-| 127x55 | 3500 | 30 | 116.6667 | 127x55 | beanstalk: BN20 |
-| 145x114ap | 8000 | 60 | 133.3333 | 145x114 |  |
-| 145x114hp | 8000 | 60 | 133.3333 | 145x114 |  |
-| 145x114 | 8000 | 30 | 266.6667 | 145x114 |  |
-| 700nitro | 3500 | 16 | 218.7500 | 700nitro |  |
-| 93x64 | 3500 | 30 | 116.6667 | 93x64 | beanstalk: BN22 |
+| 22lr | 450 | 60 | 7.5000 | 22lr | brass: ungated; gasket: ungated; haggler: ungated |
+| 22lrap | 450 | 60 | 7.5000 | 22lr | carbon: v3/ap-ammo/22lrap (barter 3:1) |
+| 22lrhp | 450 | 60 | 7.5000 | 22lr | brass: v3/hp-ammo/22lrhp (barter 2:1) |
+| 762x25 | 500 | 60 | 8.3333 | 762x25 | brass: ungated; gasket: ungated; haggler: ungated |
+| 762x25ap | 500 | 60 | 8.3333 | 762x25 | carbon: v3/ap-ammo/762x25ap (barter 3:1) |
+| 762x25hp | 500 | 60 | 8.3333 | 762x25 | brass: v3/hp-ammo/762x25hp (barter 2:1) |
+| 45acp41 | 600 | 20 | 30.0000 | 45acp41 | brass: ungated; haggler: ungated |
+| 9x19 | 750 | 60 | 12.5000 | 9x19 | brass: ungated; haggler: ungated |
+| 9x19ap | 750 | 60 | 12.5000 | 9x19 | carbon: v3/ap-ammo/9x19ap (barter 3:1) |
+| 9x19hp | 750 | 60 | 12.5000 | 9x19 | brass: v3/hp-ammo/9x19hp (barter 2:1) |
+| 45acp | 950 | 60 | 15.8333 | 45acp | brass: ungated; gasket: ungated; haggler: ungated |
+| 45acpap | 950 | 60 | 15.8333 | 45acp | carbon: v3/ap-ammo/45acpap (barter 3:1) |
+| 45acphp | 950 | 60 | 15.8333 | 45acp | brass: v3/hp-ammo/45acphp (barter 2:1) |
+| 545x39 | 1500 | 60 | 25.0000 | 545x39 | brass: v3/regular-ammo/545x39 |
+| 545x39ap | 1500 | 60 | 25.0000 | 545x39 | carbon: v3/ap-ammo/545x39ap (barter 3:1) |
+| 545x39hp | 1500 | 60 | 25.0000 | 545x39 | brass: v3/hp-ammo/545x39hp (barter 2:1) |
+| 12gaugedt | 600 | 30 | 20.0000 | 12gauge | brass: v3/shotgun-loads/12gaugedt |
+| 12gaugesg | 700 | 30 | 23.3333 | 12gauge | brass: ungated |
+| 12gaugemg | 750 | 30 | 25.0000 | 12gauge | brass: v3/shotgun-loads/12gaugemg |
+| 12gaugetr | 750 | 30 | 25.0000 | 12gauge | brass: v3/shotgun-loads/12gaugetr |
+| 12gauge | 800 | 30 | 26.6667 | 12gauge | brass: ungated |
+| 762x39 | 1700 | 60 | 28.3333 | 762x39 | brass: v3/regular-ammo/762x39 |
+| 762x39ap | 1700 | 60 | 28.3333 | 762x39 | carbon: v3/ap-ammo/762x39ap (barter 3:1) |
+| 762x39hp | 1700 | 60 | 28.3333 | 762x39 | brass: v3/hp-ammo/762x39hp (barter 2:1) |
+| 556x45 | 1650 | 60 | 27.5000 | 556x45 | brass: v3/regular-ammo/556x45 |
+| 556x45ap | 1650 | 60 | 27.5000 | 556x45 | carbon: v3/ap-ammo/556x45ap (barter 3:1) |
+| 556x45hp | 1650 | 60 | 27.5000 | 556x45 | brass: v3/hp-ammo/556x45hp (barter 2:1) |
+| 9x18 | 600 | 60 | 10.0000 | 9x18 | brass: ungated; gasket: ungated; haggler: ungated |
+| 9x18ap | 600 | 60 | 10.0000 | 9x18 | carbon: v3/ap-ammo/9x18ap (barter 3:1) |
+| 9x18hp | 600 | 60 | 10.0000 | 9x18 | brass: v3/hp-ammo/9x18hp (barter 2:1) |
+| 762x54 | 2100 | 60 | 35.0000 | 762x54 | brass: v3/regular-ammo/762x54 |
+| 762x54ap | 2100 | 60 | 35.0000 | 762x54 | carbon: v3/ap-ammo/762x54ap (barter 3:1) |
+| 762x54hp | 2100 | 60 | 35.0000 | 762x54 | brass: v3/hp-ammo/762x54hp (barter 2:1) |
+| 357magnum | 1000 | 60 | 16.6667 | 357magnum | brass: v3/regular-ammo/357magnum |
+| 357magnumap | 1000 | 60 | 16.6667 | 357magnum | carbon: v3/ap-ammo/357magnumap (barter 3:1) |
+| 357magnumhp | 1000 | 60 | 16.6667 | 357magnum | brass: v3/hp-ammo/357magnumhp (barter 2:1) |
+| 9x39 | 1900 | 60 | 31.6667 | 9x39 | brass: v3/regular-ammo/9x39 |
+| 9x39ap | 1900 | 60 | 31.6667 | 9x39 | carbon: v3/ap-ammo/9x39ap (barter 3:1) |
+| 9x39hp | 1900 | 60 | 31.6667 | 9x39 | brass: v3/hp-ammo/9x39hp (barter 2:1) |
+| 44magnum | 1000 | 60 | 16.6667 | 44magnum | brass: v3/regular-ammo/44magnum |
+| 44magnumap | 1000 | 60 | 16.6667 | 44magnum | carbon: v3/ap-ammo/44magnumap (barter 3:1) |
+| 44magnumhp | 1000 | 60 | 16.6667 | 44magnum | brass: v3/hp-ammo/44magnumhp (barter 2:1) |
+| 9x21 | 750 | 60 | 12.5000 | 9x21 | brass: v3/regular-ammo/9x21 |
+| 9x21ap | 750 | 60 | 12.5000 | 9x21 | carbon: v3/ap-ammo/9x21ap (barter 3:1) |
+| 9x21hp | 750 | 60 | 12.5000 | 9x21 | brass: v3/hp-ammo/9x21hp (barter 2:1) |
+| 762x51 | 1950 | 60 | 32.5000 | 762x51 | brass: v3/regular-ammo/762x51 |
+| 762x51ap | 1950 | 60 | 32.5000 | 762x51 | carbon: v3/ap-ammo/762x51ap (barter 3:1) |
+| 762x51hp | 1950 | 60 | 32.5000 | 762x51 | brass: v3/hp-ammo/762x51hp (barter 2:1) |
+| 500magnum | 1000 | 30 | 33.3333 | 500magnum | brass: v3/regular-ammo/500magnum |
+| 500magnumap | 1000 | 30 | 33.3333 | 500magnum | carbon: v3/ap-ammo/500magnumap (barter 3:1) |
+| 500magnumhp | 1000 | 30 | 33.3333 | 500magnum | brass: v3/hp-ammo/500magnumhp (barter 2:1) |
+| 338lapua | 3500 | 60 | 58.3333 | 338lapua | brass: v3/regular-ammo/338lapua |
+| 338lapuaap | 3500 | 60 | 58.3333 | 338lapua | carbon: v3/ap-ammo/338lapuaap (barter 3:1) |
+| 338lapuahp | 3500 | 60 | 58.3333 | 338lapua | brass: v3/hp-ammo/338lapuahp (barter 2:1) |
+| 50ae | 1750 | 60 | 29.1667 | 50ae | brass: v3/regular-ammo/50ae |
+| 50aeap | 1750 | 60 | 29.1667 | 50ae | carbon: v3/ap-ammo/50aeap (barter 3:1) |
+| 50aehp | 1750 | 60 | 29.1667 | 50ae | brass: v3/hp-ammo/50aehp (barter 2:1) |
+| 57x28 | 850 | 60 | 14.1667 | 57x28 | brass: v3/regular-ammo/57x28 |
+| 57x28ap | 850 | 60 | 14.1667 | 57x28 | carbon: v3/ap-ammo/57x28ap (barter 3:1) |
+| 57x28hp | 850 | 60 | 14.1667 | 57x28 | brass: v3/hp-ammo/57x28hp (barter 2:1) |
+| 127x55 | 3500 | 30 | 116.6667 | 127x55 | brass: v3/regular-ammo/127x55 |
+| 145x114ap | 8000 | 60 | 133.3333 | 145x114 | carbon: v3/ap-ammo/145x114ap (barter 3:1) |
+| 145x114hp | 8000 | 60 | 133.3333 | 145x114 | brass: v3/hp-ammo/145x114hp (barter 2:1) |
+| 145x114 | 8000 | 30 | 266.6667 | 145x114 | brass: v3/regular-ammo/145x114 |
+| 700nitro | 3500 | 16 | 218.7500 | 700nitro | brass: v3/regular-ammo/700nitro |
+| 93x64 | 3500 | 30 | 116.6667 | 93x64 | brass: v3/regular-ammo/93x64 |

@@ -49,7 +49,25 @@ function PLUGIN:ValidateContacts()
 			if isDisabled(item) then report("disabled item in supplies: " .. item) end
 		end
 		local ids = {}
+		for _, service in ipairs(contact.startingServices or {}) do
+			if type(service.id) ~= "string" or service.id == "" or serviceIDs[service.id]
+				or type(service.name) ~= "string" or service.name == "" then
+				report("invalid or duplicate starting service")
+			else
+				serviceIDs[service.id] = true
+			end
+		end
 		for _, step in ipairs(contact.progression) do
+			if step.ammoExchange then
+				local exchange = step.ammoExchange
+				local input, output = ix.item.list[exchange.input], ix.item.list[exchange.output]
+				if not input or not output or (exchange.boxes ~= 2 and exchange.boxes ~= 3)
+					or not isnumber(input.ammoAmount) or not isnumber(output.ammoAmount)
+					or input.ammoAmount <= 0 or output.ammoAmount <= 0
+					or (self.ammoVariants or {})[exchange.output] ~= exchange.input then
+					report("invalid ammunition exchange on " .. step.id)
+				end
+			end
 			if ids[step.id] then report("duplicate step " .. step.id) end
 			ids[step.id] = true
 			if not KINDS[step.kind] then report("unknown objective kind on " .. step.id) end

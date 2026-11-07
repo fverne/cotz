@@ -100,6 +100,11 @@ end
 
 function ix.progression.GetBenefitSummary(definition, character)
 	local parts = benefitText(definition.completionBenefits or {})
+	if definition.ammoExchange then
+		local exchange = definition.ammoExchange
+		parts[#parts + 1] = string.format("Ammunition exchange: %d boxes of %s for one box of %s",
+			exchange.boxes, ix.item.list[exchange.input].name, ix.item.list[exchange.output].name)
+	end
 	for _, service in ipairs(definition.townServices or {}) do parts[#parts + 1] = service.name end
 	for _, itemID in ipairs(definition.variantUnlocks or {}) do
 		parts[#parts + 1] = "Suit conversion access: " .. ix.item.list[itemID].name

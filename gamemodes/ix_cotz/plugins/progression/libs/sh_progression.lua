@@ -3,7 +3,6 @@ ix.progression.definitions = ix.progression.definitions or {}
 
 -- World NPCs are shared entities; access to their services belongs to a character.
 ix.progression.npcRequirements = {
-	["'Computer'"] = "cotz/town/intern/IN15",
 	["'???'"] = "computer_artifactTasks",
 }
 
@@ -118,6 +117,7 @@ function ix.progression.GetNPCFromName(npcName)
 end
 
 function ix.progression.CanBuyItem(character, npcName, itemID)
+	if itemID:match("^meal_") or itemID:match("^meat_") then return false end
 	if not ix.progression.CanUseNPC(character, npcName) then
 		return false
 	end

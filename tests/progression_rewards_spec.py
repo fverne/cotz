@@ -1,287 +1,144 @@
-"""Offline checks for the generated town progression allocation ledger."""
+"""Regression checks for authored branches and report-only ammunition tooling."""
 import copy
 import importlib.util
 from pathlib import Path
-import re
-import runpy
+import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-SPEC = importlib.util.spec_from_file_location(
-    "progression_rewards", ROOT / "docs/npc-overhaul/tools/progression_rewards.py"
-)
-rewards = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(rewards)
+
+
+def module(name):
+    spec = importlib.util.spec_from_file_location(name, ROOT / f"docs/npc-overhaul/tools/{name}.py")
+    result = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(result)
+    return result
+
+
+rewards = module("progression_rewards")
+ammo = module("ammo_progression")
 
 
 class ProgressionRewardsSpec(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.data = rewards.snapshot()
+        cls.ammo = ammo.ammunition()
 
-    def test_current_ledger_matches_authoritative_definitions(self):
+    def test_ledger_matches_valid_definitions(self):
         self.assertEqual(rewards.validate(self.data), [])
         self.assertEqual(rewards.LEDGER.read_text(), rewards.render(self.data))
-
-    def test_current_snapshot_matches_definitions_even_with_validation_findings(self):
-        self.assertEqual(rewards.LEDGER.read_text(), rewards.render(self.data))
-
-    def test_snapshot_reports_actual_coverage_and_validation_failures(self):
-        total = live = planned_only = 0
         for slug, contact in self.data["contacts"].items():
             for step in contact["progression"]:
-                functional, planned = rewards.rewards(self.data, slug, step)
-                total += 1
-                live += bool(functional)
-                planned_only += bool(planned and not functional)
-        report = rewards.render(self.data, ["Example unresolved dependency"])
-        self.assertIn(f"{total} active steps; {live} have functional unlocks", report)
-        self.assertIn(f"{total - live - planned_only} have no assigned unlock", report)
-        self.assertIn("- Example unresolved dependency", report)
-        self.assertIn("`--check` remains strict", report)
-        self.assertNotIn("Validation passed", report)
+                self.assertTrue(rewards.rewards(self.data, slug, step)[0], (slug, step["id"]))
 
-    def test_every_placeholder_has_an_adjacent_todo(self):
-        for slug, contact in self.data["contacts"].items():
-            source = (rewards.DEFINITIONS / ("sh_" + slug.replace("-", "_") + ".lua")).read_text().split("\tretiredProgression = {")[0]
-            entries = re.findall(r"-- TODO:[^\n]+\n\t{4}\{\n", source)
-            planned = sum(len(s.get("plannedUnlocks", [])) for s in contact["progression"])
-            self.assertEqual(len(entries), planned, slug)
+    def test_fresh_ids_and_hand_in_objectives(self):
+        for contact in self.data["contacts"].values():
+            for step in contact["progression"]:
+                self.assertTrue(step["id"].startswith("v3/"))
+                self.assertEqual(step["kind"], "delivery")
+                self.assertFalse(step.get("benefits"))
+                self.assertFalse(step.get("discounts"))
 
-    def test_todos_alone_do_not_satisfy_unlock_coverage(self):
+    def test_gun_changes_never_reorder_authored_ammo(self):
         changed = copy.deepcopy(self.data)
-        step = next(s for s in changed["contacts"]["carbon"]["progression"] if s["id"] == "CA07")
-        step.pop("stock", None)
-        self.assertTrue(any("CA07: no implemented unlock" in e for e in rewards.validate(changed)))
-
-    def test_arena_has_no_active_progression_or_catalogue(self):
-        arena = self.data["contacts"]["arena-master"]
-        self.assertFalse(arena["progression"])
-        self.assertFalse(arena["catalogue"])
-        self.assertTrue(arena["retiredProgression"])
-
-    def test_gasket_owns_lighting(self):
-        catalogue = self.data["contacts"]["gasket"]["catalogue"]
-        self.assertLess(int(catalogue["flashlight"]["step"][2:]), int(catalogue["headlamp"]["step"][2:]))
-        self.assertEqual(self.data["canonical"]["headlamp"], "gasket")
-
-    def test_specialist_categories_are_redistributed(self):
-        contacts = self.data["contacts"]
-        for slug, items in {
-            "technut": ["suit_anorak", "suit_nbc"],
-            "suture": ["attachment_kevlar_1", "suit_skat9"],
-            "latch": ["attachment_steelplate_1", "mask_cloth"],
-            "haggler": ["makarov", "ruger1022"],
-            "quartermaster": ["pkm", "svd"],
-            "jitters": ["drug_cigarette_1", "medic_medkit_1"],
-            "cleaner": ["mp5k", "mp40"],
-            "egghead": ["medic_stimpak_3", "detectorveles"],
-        }.items():
-            for item in items:
-                self.assertIn(item, contacts[slug]["catalogue"], (slug, item))
-        planned = sum(len(s.get("plannedUnlocks", []))
-                      for c in contacts.values()
-                      for s in list(c["progression"]) + list(c.get("retiredProgression", [])))
-        self.assertEqual(planned, 242)
-
-    def test_character_theme_routes(self):
-        contacts = self.data["contacts"]
-        for item, former, seller in [
-            ("c96carbine", "quartermaster", "haggler"),
-            ("rugermini14", "quartermaster", "haggler"),
-            ("saigasemi545", "quartermaster", "cleaner"),
-            ("obrezmalfunction", "quartermaster", "haggler"),
-            ("sks", "quartermaster", "haggler"),
-            ("kobra", "smartass", "ledger"),
-            ("aimpoint", "smartass", "ledger"),
-            ("eotech", "smartass", "ledger"),
-            ("microt1", "smartass", "ledger"),
-            ("accesscard_bunker", "boss", "carbon"),
-            ("accesscard_laboratory", "egghead", "intern"),
-        ]:
-            self.assertNotIn(item, contacts[former]["catalogue"])
-            if item in rewards.disabled_suggestions(seller):
-                self.assertNotIn(item, contacts[seller]["catalogue"])
-            else:
-                self.assertIn(item, contacts[seller]["catalogue"])
-        for item in ["ak74", "fort12"]:
-            self.assertNotIn(item, contacts["quartermaster"]["catalogue"])
-        for item in ["mp40", "mp5k"]:
-            self.assertIn(item, contacts["cleaner"]["catalogue"])
-        self.assertIn("cassette_standart", contacts["spool"]["catalogue"])
-        for slug in ["carbon", "jitters", "wake", "beanstalk", "intern", "mute",
-                     "spool", "smartass", "suture"]:
-            contact = contacts[slug]
-            self.assertNotIn("lowtiercookerfuel", contact["supplies"])
-            self.assertNotIn("lowtiercookerfuel", contact["catalogue"])
-            self.assertFalse(any(s.get("stock", {}).get("item") == "lowtiercookerfuel"
-                                 for s in contact["progression"]), slug)
-
-    def test_ammunition_gun_order_and_hp_before_ap(self):
-        authoring = runpy.run_path(str(ROOT / "docs/npc-overhaul/tools/ammo_progression.py"))
-        ammo = authoring["ammunition"]()
-        routes, orders = authoring["allocations"](self.data, ammo)
-        self.assertEqual(self.data["ammoOrder"], orders)
-        regulars, first_uses = authoring["regular_order"](self.data, ammo)
-        self.assertEqual(self.data["regularAmmoChain"], regulars)
-        self.assertEqual(len(regulars), len(set(regulars)))
-        self.assertEqual(set(regulars), {item for item, entry in ammo.items() if entry["regular"] == item})
-        self.assertEqual(regulars[-4:], ["127x55", "145x114", "700nitro", "93x64"])
-        self.assertEqual(set(regulars[-4:]), set(regulars) - first_uses.keys())
-        self.assertFalse(set(regulars) & set(self.data["ammoVariants"]))
-        for slug, expected in routes.items():
-            catalogue = self.data["contacts"][slug]["catalogue"]
-            for item, step in expected.items():
-                self.assertEqual(catalogue[item]["step"], step, (slug, item))
-            indices = [int(expected[item][2:]) for item in regulars if item in expected]
-            self.assertEqual(indices, sorted(indices), slug)
-            for variant, regular in self.data["ammoVariants"].items():
-                if variant not in expected:
-                    continue
-                if regular in expected:
-                    self.assertGreater(int(expected[variant][2:]), int(expected[regular][2:]))
-                sibling = variant[:-2] + ("hp" if variant.endswith("ap") else "ap")
-                if variant.endswith("ap") and sibling in expected:
-                    self.assertGreater(int(expected[variant][2:]), int(expected[sibling][2:]))
-        self.assertEqual(ammo["145x114"]["cost"], 2 * ammo["145x114ap"]["cost"])
-        self.assertEqual(ammo["45acp41"]["regular"], "45acp41")
-        self.assertNotIn("145x114", routes["brass"])
-
-    def test_regular_ammunition_order_tracks_changed_gun_chains(self):
-        authoring = runpy.run_path(str(ROOT / "docs/npc-overhaul/tools/ammo_progression.py"))
-        ammo = authoring["ammunition"]()
-        changed = copy.deepcopy(self.data)
-        chain = next(chain for chain in changed["chains"] if "p90" in chain)
+        chain = next(c for c in changed["chains"] if "p90" in c)
         chain.remove("p90")
         chain.insert(0, "p90")
-        regulars, first_uses = authoring["regular_order"](changed, ammo)
-        self.assertEqual(first_uses["57x28"][0], 1)
-        self.assertEqual(first_uses["57x28"][3], "p90")
-        self.assertLess(regulars.index("57x28"), regulars.index("12gauge"))
-        self.assertEqual(first_uses["762x25"][3], "nagantrev")
+        order, uses = ammo.regular_order(changed, self.ammo)
+        self.assertEqual(order, self.data["regularAmmoChain"])
+        self.assertEqual(uses["57x28"][0], 1)
 
-    def test_ammunition_stage_dependencies_prevent_branch_bypass(self):
-        compiled = self.data["compiled"]
-        for slug, steps in self.data["ammoOrder"].items():
-            for lower, higher in zip(steps, steps[1:]):
-                self.assertIn(rewards.progression_id(slug, lower),
-                              compiled[rewards.progression_id(slug, higher)]["prerequisites"])
+    def test_missing_and_duplicate_calibres_fail_validation(self):
+        for invalid in (self.data["regularAmmoChain"][:-1], self.data["regularAmmoChain"] + ["22lr"]):
+            changed = copy.deepcopy(self.data)
+            changed["regularAmmoChain"] = invalid
+            with self.assertRaises(ValueError):
+                ammo.regular_order(changed, self.ammo)
+
+    def test_ammo_generation_only_writes_a_report(self):
+        files = list(rewards.DEFINITIONS.glob("sh_*.lua"))
+        before = {p: p.read_bytes() for p in files}
+        with tempfile.TemporaryDirectory() as folder:
+            report = Path(folder) / "ammo.md"
+            with patch.object(ammo, "REPORT", report), patch("sys.argv", ["ammo", "--write"]):
+                ammo.main()
+            self.assertIn("barter 2:1", report.read_text())
+            self.assertIn("barter 3:1", report.read_text())
+        self.assertEqual(before, {p: p.read_bytes() for p in files})
+
+    def test_no_cash_routes_for_meat_meals_or_variant_ammo(self):
+        for contact in self.data["contacts"].values():
+            for item in list(contact["catalogue"]) + list(contact["supplies"]):
+                self.assertFalse(item.startswith(("meal_", "meat_")))
+                self.assertFalse(item in self.ammo and item.endswith(("hp", "ap")))
+
+    def test_ammo_cross_trader_dependencies(self):
         for slug, contact in self.data["contacts"].items():
-            catalogue = contact["catalogue"]
-            local_regulars = [item for item in self.data["regularAmmoChain"] if item in catalogue]
-            for lower, higher in zip(local_regulars, local_regulars[1:]):
-                before = rewards.progression_id(slug, catalogue[lower]["step"])
-                after = rewards.progression_id(slug, catalogue[higher]["step"])
-                if before != after:
-                    self.assertIn(before, compiled[after]["prerequisites"], (slug, lower, higher))
-            for variant, regular in self.data["ammoVariants"].items():
-                if variant in catalogue and regular in catalogue:
-                    self.assertIn(rewards.progression_id(slug, catalogue[regular]["step"]),
-                                  compiled[rewards.progression_id(slug, catalogue[variant]["step"])]["prerequisites"])
-                if variant.endswith("ap") and variant in catalogue and regular + "hp" in catalogue:
-                    self.assertIn(rewards.progression_id(slug, catalogue[regular + "hp"]["step"]),
-                                  compiled[rewards.progression_id(slug, catalogue[variant]["step"])]["prerequisites"])
+            for step in contact["progression"]:
+                exchange = step.get("ammoExchange")
+                if not exchange:
+                    continue
+                regular = exchange["input"]
+                hp = exchange["output"].endswith("hp")
+                branch = "regular-ammo/" + regular if hp else "hp-ammo/" + regular + "hp"
+                self.assertEqual(slug, "brass" if hp else "carbon")
+                self.assertEqual(exchange["boxes"], 2 if hp else 3)
+                self.assertIn("cotz/town/brass/v3/" + branch,
+                              self.data["compiled"][rewards.progression_id(slug, step["id"])]["prerequisites"])
 
-    def test_main_plan_has_no_starting_sale_stock(self):
+    def test_only_wake_awards_capacity(self):
+        totals = {"weight": 0, "rows": 0}
         for slug, contact in self.data["contacts"].items():
-            if contact.get("difficultyMultiplier"):
-                self.assertFalse(contact["supplies"], slug)
-                self.assertTrue(contact["enforceCatalogue"], slug)
-        food = self.data["contacts"]["spicy-lemon"]["catalogue"]
-        self.assertIn("drink_bottlewater", food)
-        self.assertFalse(any(item.startswith(("meal_", "meat_")) for item in food))
+            for step in contact["progression"]:
+                if step.get("capacity"):
+                    self.assertEqual(slug, "wake")
+                    totals[step["capacity"]["kind"]] += step["capacity"]["amount"]
+        self.assertEqual(totals, {"weight": 5, "rows": 2})
 
-    def test_commented_out_suggestions_remain_disabled(self):
-        total = 0
+    def test_trenchcoat_colours_share_one_step(self):
+        catalogue = self.data["contacts"]["technut"]["catalogue"]
+        self.assertEqual(len({catalogue["suit_trenchcoat_" + c]["step"]
+                              for c in ("black", "brown", "green", "tan")}), 1)
+
+    def test_suture_variants_exclude_looted_finishes(self):
+        for item, allocation in self.data["variants"].items():
+            self.assertEqual(allocation["contact"], "suture")
+            self.assertFalse(item.endswith("_looted"))
+
+    def test_buyers_and_canned_job_rewards(self):
+        for slug in ("ballast", "cleaner", "ledger"):
+            self.assertTrue(self.data["contacts"][slug]["buyAll"])
+            self.assertEqual(self.data["contacts"][slug]["buyScale"], 0.3)
+        packages = self.data["contacts"]["spicy-lemon"]["rewards"]["packages"]
+        self.assertEqual(len({i for p in packages for i in p["items"] if i.startswith("food_can_")}), 8)
+
+    def test_deferred_or_job_awarded_items_have_no_sale_route(self):
+        deferred = {"ij600", "lax410", "ruger1022", "walkman", "cassette_standart",
+                    "sharpening_stone", "sharpening_stone_fine", "hidestasher_cutlery"}
+        for contact in self.data["contacts"].values():
+            self.assertFalse(deferred.intersection(contact["catalogue"]))
+            self.assertFalse(deferred.intersection(contact["supplies"]))
+
+    def test_disabled_items_remain_disabled(self):
         for slug, contact in self.data["contacts"].items():
             disabled = rewards.disabled_suggestions(slug)
-            total += len(disabled)
-            self.assertEqual(disabled, set(contact.get("disabledItems", {})), slug)
-            self.assertFalse(disabled & set(contact["catalogue"]), slug)
-            self.assertFalse(disabled & set(contact["supplies"]), slug)
-            for step in contact["progression"]:
-                self.assertNotIn(step.get("stock", {}).get("item"), disabled, (slug, step["id"]))
-        self.assertGreater(total, 0)
-
-    def test_anorak_to_nbc_chain_has_no_cycles(self):
-        chain = next(chain for chain in self.data["chains"] if "suit_nbc" in chain)
-        self.assertEqual(chain[0], "suit_anorak")
-        self.assertEqual(chain[-1], "suit_nbc")
-        self.assertEqual(self.data["contacts"]["technut"]["catalogue"]["suit_nbc"]["step"], "TN28")
-        self.assertFalse(self.data["compiled"]["cotz/town/technut/TN01"]["prerequisites"])
-        # Walk every compiled dependency: an introductory suit must not close a later story loop.
-        visiting, done = set(), set()
-        def visit(identifier):
-            self.assertNotIn(identifier, visiting, identifier)
-            if identifier in done:
-                return
-            visiting.add(identifier)
-            for parent in self.data["compiled"][identifier]["prerequisites"]:
-                visit(parent)
-            visiting.remove(identifier)
-            done.add(identifier)
-        for identifier in self.data["compiled"]:
-            visit(identifier)
-
-    def test_town_progression_has_no_item_gifts(self):
-        for slug, contact in self.data["contacts"].items():
-            for step in list(contact["progression"]) + list(contact.get("retiredProgression", [])):
-                self.assertFalse(step.get("benefits", {}).get("items"), (slug, step["id"]))
-
-    def test_introductions_have_an_implemented_reward(self):
-        for slug, contact in self.data["contacts"].items():
-            if not contact["progression"]:
-                continue
-            first = contact["progression"][0]["id"]
-            initial = [item for item, route in contact["catalogue"].items() if route["step"] == first]
-            functional, _ = rewards.rewards(self.data, slug, contact["progression"][0])
-            self.assertTrue(functional, slug)
-            if len(contact["catalogue"]) > 2:
-                self.assertTrue(any(route["step"] != first for route in contact["catalogue"].values()), slug)
-
-    def test_stock_rewards_follow_their_local_purchase(self):
-        for slug, contact in self.data["contacts"].items():
-            for step in contact["progression"]:
-                item = step.get("stock", {}).get("item")
-                route = contact["catalogue"].get(item)
-                if route and route["step"] != step["id"]:
-                    compiled = self.data["compiled"][rewards.progression_id(slug, step["id"])]
-                    self.assertIn(rewards.progression_id(slug, route["step"]), compiled["prerequisites"],
-                                  (slug, step["id"], item))
-
-    def test_redundant_stock_is_detected(self):
-        changed = copy.deepcopy(self.data)
-        contact = changed["contacts"]["atlas"]
-        earlier = next(s for s in contact["progression"] if s["id"] == "AT04")
-        later = next(s for s in contact["progression"] if s["id"] == "AT20")
-        later["stock"] = copy.deepcopy(earlier["stock"])
-        self.assertTrue(any("AT20: redundant stock" in e for e in rewards.validate(changed)))
-
-    def test_unimplemented_item_typos_are_detected(self):
-        changed = copy.deepcopy(self.data)
-        step = next(s for s in changed["contacts"]["haggler"]["progression"] if s.get("plannedUnlocks"))
-        step["plannedUnlocks"][0]["inputs"][0]["item"] = "does_not_exist"
-        self.assertTrue(any("invalid planned item terms" in e for e in rewards.validate(changed)))
-
-    def test_barter_requires_distinct_inputs(self):
-        changed = copy.deepcopy(self.data)
-        step = next(s for s in changed["contacts"]["latch"]["progression"] if s.get("plannedUnlocks"))
-        terms = step["plannedUnlocks"][0]["inputs"]
-        terms[1]["item"] = terms[0]["item"]
-        self.assertTrue(any("barter needs distinct" in e for e in rewards.validate(changed)))
+            self.assertEqual(disabled, set(contact.get("disabledItems", {})))
+            self.assertFalse(disabled.intersection(contact["catalogue"]))
+            self.assertFalse(disabled.intersection(contact["supplies"]))
 
     def test_cycles_are_rejected(self):
         changed = copy.deepcopy(self.data)
-        changed["compiled"]["cotz/town/atlas/AT01"]["prerequisites"] = ["cotz/town/atlas/AT17"]
+        identifier = next(iter(changed["compiled"]))
+        changed["compiled"][identifier]["prerequisites"] = [identifier]
         with self.assertRaisesRegex(ValueError, "Progression cycle"):
             rewards.validate(changed)
 
-    def test_storage_proposals_remain_bounded(self):
-        changed = copy.deepcopy(self.data)
-        step = next(s for s in changed["contacts"]["cleaner"]["progression"]
-                    if s.get("plannedUnlocks") and s["plannedUnlocks"][0]["kind"] == "storage")
-        step["plannedUnlocks"][0]["target"] = 100
-        self.assertTrue(any("storage proposal exceeds" in e for e in rewards.validate(changed)))
+    def test_reports_expose_validation_failures(self):
+        report = rewards.render(self.data, ["Example unresolved dependency"])
+        self.assertIn("- Example unresolved dependency", report)
+        self.assertNotIn("Validation passed", report)
 
 
 if __name__ == "__main__":

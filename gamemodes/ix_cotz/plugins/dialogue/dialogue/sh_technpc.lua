@@ -169,7 +169,7 @@ DIALOGUE.addTopic("PaintSuit", {
 		return "ConfirmPaint", dynamicData
 	end,
 	ShouldAdd = function(self, client, target)
-		if ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/technut/TN13") then
+		if ix.townNPCs:HasService(client:GetCharacter(), "painting", target:GetDisplayName()) then
 			return true
 		end
 	end,

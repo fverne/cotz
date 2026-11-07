@@ -50,7 +50,7 @@ function PLUGIN:RecoverCompletions(character)
 		local definition = ix.jobs.list[event.identifier]
 		local id = definition and definition.townProgression
 		local contact = self.byName[npc]
-		local retired = contact and #contact.progression == 0
+		local retired = (contact and #contact.progression == 0) or (definition and definition.retiredTownProgression)
 		assert(retired or (id and self.steps[id]), "Unknown saved town commission: " .. event.identifier)
 		if not retired and ix.progression.IsActive(character, id) then
 			if self.steps[id].retiredCommission then
@@ -96,6 +96,11 @@ function PLUGIN:JobCompleted(client, npc, identifier)
 	state.claims[npc] = claim
 	if definition.townProgression then
 		local id = definition.townProgression
+		if definition.retiredTownProgression then
+			character:SetData(STATE_KEY, state)
+			character:Save()
+			return
+		end
 		state.commissions = state.commissions or {}
 		local count = math.max(state.commissions[id] or 0, ix.progression.GetProgressionValue(character, id) or 0)
 		state.commissions[id] = count + 1

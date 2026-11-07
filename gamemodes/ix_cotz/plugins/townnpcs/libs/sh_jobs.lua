@@ -202,5 +202,13 @@ function PLUGIN:BuildJobs()
 				})
 			end
 		end
+		for _, step in ipairs(contact.retiredCommissions or {}) do
+			registerJob(contact, "cotz/town/commission/" .. contact.id .. "/" .. step.id, {
+				name = step.name, desc = step.briefing, numberRec = 1, categories = {},
+				completionOnly = true, retiredTownProgression = true,
+				townProgression = self:StepID(contact.id, step.id),
+				CanAcceptTask = function() return false end,
+			})
+		end
 	end
 end

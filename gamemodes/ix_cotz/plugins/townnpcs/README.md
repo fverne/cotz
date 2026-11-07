@@ -1,5 +1,41 @@
 # Town NPCs
 
+## Current progression, 7 November 2026
+
+The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
+the earlier progression, catalogue and service descriptions below. There are 417 hand-in milestones
+in 49 independent branches, with fresh `v3/` IDs. The authored equipment and regular-ammo chains are
+unchanged. Medicine has separate family branches; other branches follow the approved trader lines.
+
+Wake owns backpacks and +5 kg/+2 rows; Spool owns strong drugs. Technut keeps painting and all ordinary
+suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
+conversion menu and per-suit non-looted finishes. Intern owns artifact detectors. Brass/Carbon provide
+HP/AP barter only, gated by regular/HP completions respectively. Starter stock is explicitly declared.
+Ballast, Cleaner and Ledger buy all at 0.3 and provide twelve local hideout improvement stages.
+
+Bank/Computer progression access, town discounts and credit are removed; ordinary paid repair/treatment
+remain. Tools remain job rewards, music and three unassigned guns are deferred. Spicy Lemon's jobs
+cover all canned foods; meals/meat have no NPC sale routes. Existing inventories and paid hideout assets
+remain saved. Old commission journals are inactive history and cannot grant new progression.
+
+The ammo generator now writes reports only; the legacy FTS writer rejects these branches before writing.
+Regenerate reports with `progression_rewards.py --write` and `ammo_progression.py --write` under
+`docs/npc-overhaul/tools/`. Both support `--check`.
+
+    luatex --luaonly tests/townnpcs_spec.lua
+    luatex --luaonly tests/town_ammo_exchange_spec.lua
+    luatex --luaonly tests/vendor_plan_spec.lua
+    luatex --luaonly tests/regional_jobs_spec.lua
+    python3 tests/progression_rewards_spec.py
+    python3 tests/fts_delivery_balance_spec.py
+
+Deploy all map servers together and restart without resetting saves or running first-time setup.
+The linked overhaul guide records default quantities, current allocations, compatibility and live checks.
+
+## Earlier implementation notes
+
+These dated notes retain historical context and are superseded by the current guide where they differ.
+
 ## Repeatable roster, 6 November 2026
 
 The [implemented job revision](../../../../docs/npc-overhaul/repeatable-jobs.md) supersedes earlier
@@ -106,6 +142,29 @@ and six vendor terms: price, initial stock, trade mode, maximum stock, refill in
 Purchase permission is distinct from a free item. Shared upgrade families enforce earlier-tier
 milestones even when sellers differ, including Old Timer OT12 before Quartermaster's knife4.
 The [equipment index](../../../../docs/npc-overhaul/unlock-ledger.md) lists current allocations.
+
+### Suit attachment chain
+
+The non-hide suit attachments in `definitions/sh_equipment.lua` follow the families unlocked by
+Technut on local `master` at `6b8d23e4`. Master has parallel plate, fabric, Kevlar, frame and carbon
+branches; this single chain retains each family's tier order and uses current prices and catalogue
+milestones to place the branches relative to one another:
+
+```text
+Old Ceramic Plate → Well Worn Steel Plate → Insulating Fabrics → Steel Plate → Ceramic Plate →
+Thick Insulating Fabrics → Kevlar K119 Plates → Aluminium Frame → Galvanized Steel Plate →
+Carbon Fibre Layers → Steel Frame → Modern Ceramic Plate → Kevlar K29 Plates
+```
+
+All 13 standard attachments keep their current sellers: Latch, Suture and Carbon. Each purchase
+milestone requires its predecessor's canonical milestone, including across sellers. Completing
+an attachment's existing milestone still grants its purchase; installation and owned suits are
+unchanged. Hides and the anomalous `attachment_steelplate_4`/`attachment_ceramicplate_4` plates
+are excluded. The latter were not part of master's vendor unlocks and have no current town purchase.
+
+Run `luatex --luaonly tests/suit_attachment_chain_spec.lua` for coverage, family-tier order and
+cross-seller purchase gates. Verify milestone availability and purchases with fresh and existing
+characters at Latch, Suture and Carbon in multiplayer.
 
 ### Gun upgrade chains
 

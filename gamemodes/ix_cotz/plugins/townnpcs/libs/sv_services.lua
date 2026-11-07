@@ -1,5 +1,75 @@
 local PLUGIN = PLUGIN
 local CONVERSION_TIMEOUT = 15
+local AMMO_CREDIT_KEY = "townAmmoExchangeRounds"
+local CLAIM_LINE = "taskRewardClaims"
+
+local function exchangeAmmunition(character, exchange)
+	local inventory = character:GetInventory()
+	local credits = table.Copy(character:GetData(AMMO_CREDIT_KEY, {}))
+	local required = ix.item.list[exchange.input].ammoAmount * exchange.boxes
+	local balance = credits[exchange.input] or 0
+	local available, inputs = balance, {}
+	for _, item in pairs(inventory:GetItems(true)) do
+		if item.uniqueID == exchange.input and not item:GetData("equip", false) then
+			local quantity = item:GetData("quantity", item.ammoAmount)
+			if type(quantity) == "number" and quantity > 0 and quantity % 1 == 0 then
+				inputs[#inputs + 1] = {item = item, quantity = quantity}
+				available = available + quantity
+			end
+		end
+	end
+	local record = ix.progression.GetCharacterProgression(character)
+	local line = record.lines[CLAIM_LINE] or {}
+	line.pendingRewards = line.pendingRewards or {}
+	if available < required or #line.pendingRewards >= ix.taskRewards.settings.maxPendingRewards then return false end
+	table.sort(inputs, function(first, second) return first.item:GetID() < second.item:GetID() end)
+	for _, input in ipairs(inputs) do
+		if balance >= required then break end
+		local consumed = math.min(required - balance, input.quantity)
+		if consumed == input.quantity then
+			if not input.item:Remove() then return false end
+		else
+			input.item:SetData("quantity", input.quantity - consumed)
+		end
+		-- Save acknowledged debits so a failed later removal can be retried without losing earlier inputs.
+		balance = balance + consumed
+		credits[exchange.input] = balance
+		character:SetData(AMMO_CREDIT_KEY, credits)
+		character:Save()
+	end
+	record = ix.progression.GetCharacterProgression(character)
+	line = record.lines[CLAIM_LINE] or {}
+	line.pendingRewards = line.pendingRewards or {}
+	if #line.pendingRewards >= ix.taskRewards.settings.maxPendingRewards then return false end
+	credits[exchange.input] = balance - required
+	local reward = {item = exchange.output, quantity = ix.item.list[exchange.output].ammoAmount}
+	line.pendingRewards[#line.pendingRewards + 1] = ix.progression.PrepareReward(character, CLAIM_LINE, line, reward)
+	record.lines[CLAIM_LINE] = line
+	character:SetData(AMMO_CREDIT_KEY, credits)
+	ix.progression.SetCharacterProgression(character, record)
+	character:Save()
+	if not ix.progression.ClaimRewards(character, CLAIM_LINE) then
+		character:GetPlayer():Notify("Make room, then collect your ammunition from stored rewards.")
+	end
+
+	return true
+end
+
+function PLUGIN:ExchangeAmmo(client, target, output)
+	if type(output) ~= "string" or not self:CanInteract(client, target) then return false end
+	local character = client:GetCharacter()
+	local exchange = (self.ammoExchanges or {})[output]
+	if not exchange or exchange.npc ~= target:GetDisplayName()
+		or not ix.progression.IsCompleted(character, exchange.id) or character.cotzExchangingAmmo then return false end
+	local now = CurTime()
+	if now < (client.cotzTownNextAction or 0) then return false end
+	client.cotzTownNextAction = now + self.settings.actionInterval
+	character.cotzExchangingAmmo = true
+	local exchanged = exchangeAmmunition(character, exchange)
+	character.cotzExchangingAmmo = nil
+
+	return exchanged
+end
 
 local function serviceAction(client, target, service)
 	if not PLUGIN:CanInteract(client, target)

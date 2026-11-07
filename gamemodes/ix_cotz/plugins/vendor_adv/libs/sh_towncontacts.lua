@@ -38,6 +38,8 @@ end
 
 function PLUGIN:ConfigureTownTemplate(contact, catalogue, stock)
 	local template = assert(ix.npctemplates.templates[contact.template], "Missing town vendor template")
+	template.buyAll = contact.buyAll == true
+	if contact.buyScale then template.scale = contact.buyScale end
 	if contact.enforceCatalogue then
 		template.items = plannedItems(contact, catalogue, stock)
 
@@ -62,9 +64,13 @@ end
 
 if SERVER then
 	function PLUGIN:RefreshTownVendor(vendor, contact, catalogue, stock)
+		local settingsChanged = vendor:GetBuyAll() ~= (contact.buyAll == true)
+			or (contact.buyScale ~= nil and vendor.scale ~= contact.buyScale)
+		vendor:SetBuyAll(contact.buyAll == true)
+		if contact.buyScale then vendor.scale = contact.buyScale end
 		if contact.enforceCatalogue then
 			local items = plannedItems(contact, catalogue, stock)
-			local changed = false
+			local changed = settingsChanged
 			for item in pairs(vendor.items) do
 				if not items[item] then
 					vendor.items[item] = nil
@@ -81,7 +87,7 @@ if SERVER then
 
 			return changed
 		end
-		local changed = removeDisabledItems(vendor.items, contact)
+		local changed = removeDisabledItems(vendor.items, contact) or settingsChanged
 		for _, item in ipairs(contact.supplies) do
 			if not isDisabled(contact, item) and not vendor.items[item] then
 				vendor:AddItemToList(item, nil, stock.initial, "SELLANDBUY",

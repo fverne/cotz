@@ -11,89 +11,127 @@ PLUGIN:Register("wake", {
 		"valuables_recording_equipment",
 	},
 	job = {
-		kind = "courier",
 		category = "Information courier and return",
 		description = "Information courier and return",
+		kind = "courier",
 	},
 	legacyJob = {
-		kind = "recovery",
 		category = "Equipment recovery",
 		description = "Equipment recovery",
+		kind = "recovery",
 		maps = {
 			easy = "rp_garbage_cotz",
-			medium = "rp_waystation",
 			hard = "rp_pripyat_remaster",
+			medium = "rp_waystation",
 		},
 	},
-	supplies = {},
+	supplies = {"medic_bandage_1", "medic_medkit_1"},
 	rewards = {
 		packages = {
-			{label = "Recovery medicine",
-				items = {"medic_bandage_1", "medic_medkit_1"}},
-			{label = "Exposure supplies",
-				items = {"medic_antirad_1", "medic_antirad_2"}},
-			{label = "Search provisions",
-				items = {"food_can_tushonka", "drink_bottlewater"}},
+			{
+				items = {"medic_bandage_1", "medic_medkit_1"},
+				label = "Recovery medicine",
+			},
+			{
+				items = {"medic_antirad_1", "medic_antirad_2"},
+				label = "Exposure supplies",
+			},
+			{
+				items = {"food_can_tushonka", "drink_bottlewater"},
+				label = "Search provisions",
+			},
 		},
 	},
 	dialogue = {
-		jobBriefing = "Someone is waiting for these records. {details}",
-		jobReminder = "I haven't heard from the recipient yet. {details}",
-		jobFinished = "Thank you for seeing it through. We can settle your payment now.",
+		completedGreeting = "Hello again. Thank you for coming back. If you have something to discuss, we can take our time.",
 		delivery = "Put it here. I will keep it with the search records.",
-		completedGreeting = (
-			"Hello again. Thank you for coming back. If you have something to discuss, we can take our "
-			.. "time."
-		),
-		workPrompt = "About the parcel I'm taking for you.",
+		jobBriefing = "Someone is waiting for these records. {details}",
+		jobFinished = "Thank you for seeing it through. We can settle your payment now.",
+		jobReminder = "I haven't heard from the recipient yet. {details}",
 		offerPrompt = "Do you need something delivered?",
-		work = "There are records I need to send to people outside Garbage. I can give you a sealed parcel and the name of the person waiting for it. Take it to them, then come back here. Please check where they are before agreeing; some of the longer journeys include the Eco Bunker, and you will need permission to buy its access card.",
+		progression = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "Where can I help with the search records?",
-		progression = (
-			"I'm comparing missing people's routes, records, and belongings. The supplies keep the work "
-			.. "possible; the recovered accounts let us ask better questions. Neither makes a promise that the "
-			.. "next case will settle a disappearance. Choose something you can bring through carefully, and we'll "
-			.. "work from what actually returns."
-		),
+		work = "There are records I need to send to people outside Garbage. I can give you a sealed parcel and the name of the person waiting for it. Take it to them, then come back here. Please check where they are before agreeing; some of the longer journeys include the Eco Bunker, and you will need permission to buy its access card.",
+		workPrompt = "About the parcel I'm taking for you.",
 	},
 	catalogue = {
-		["drug_caffeine"] = {step = "WA01",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["drug_marijuana"] = {step = "WA15",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["drug_morphine"] = {step = "WA08",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["medic_antirad_1"] = {step = "WA01",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["medic_antirad_2"] = {step = "WA22",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["medic_bandage_1"] = {step = "WA22",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_bandage_2"] = {step = "WA01",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["medic_medkit_1"] = {step = "WA01",
-			terms = {nil, 1, "SELLANDBUY", 1, 48, 1}},
-		["medic_medkit_2"] = {step = "WA08",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["medic_medkit_3"] = {step = "WA15",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["medic_medkit_4"] = {step = "WA22",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["miscaid_swampbrew"] = {step = "WA22",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
+		backpack_sling = {
+			step = "v3/backpacks/backpack_sling",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_duffle = {
+			step = "v3/backpacks/backpack_duffle",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_sanitar = {
+			step = "v3/backpacks/backpack_sanitar",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_tbag = {
+			step = "v3/backpacks/backpack_tbag",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_tourist = {
+			step = "v3/backpacks/backpack_tourist",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_takedown_1 = {
+			step = "v3/backpacks/backpack_takedown_1",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_takedown_2 = {
+			step = "v3/backpacks/backpack_takedown_2",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_mbss = {
+			step = "v3/backpacks/backpack_mbss",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_vkbo = {
+			step = "v3/backpacks/backpack_vkbo",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_pilgrim = {
+			step = "v3/backpacks/backpack_pilgrim",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_scavbackpack = {
+			step = "v3/backpacks/backpack_scavbackpack",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_1 = {
+			step = "v3/backpacks/backpack_1",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_3 = {
+			step = "v3/backpacks/backpack_3",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_2 = {
+			step = "v3/backpacks/backpack_2",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_1_large = {
+			step = "v3/backpacks/backpack_1_large",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_3_large = {
+			step = "v3/backpacks/backpack_3_large",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
+		backpack_2_large = {
+			step = "v3/backpacks/backpack_2_large",
+			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+		},
 	},
 	progression = {
 		{
-			id = "WA01",
-			completionCash = 275,
-			name = "Names Before Numbers",
+			id = "v3/backpacks/backpack_sling",
+			branch = "backpacks",
+			name = "Sling Backpack",
 			kind = "delivery",
 			requires = {},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
@@ -101,201 +139,95 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
-		},
-		{
-			id = "WA02",
 			completionCash = 450,
-			name = "The Unmarked Camp",
-			kind = "field",
-			objective = (
-				"Recover the missing scavenger's records from the assigned search area in Garbage. Bring it back "
-				.. "to the issuing contact in Garbage."
-			),
-			requires = {"WA01"},
-			briefing = (
-				"I'd like the scavenger's surviving records brought back together. Finding belongings gives us "
-				.. "something to examine, not permission to settle the person's fate. Recover the missing scavenger's "
-				.. "records from the assigned search area in Garbage. Bring it back to me in Garbage."
-			),
-			completion = "Thank you. I'll check which names and dates are actually here.",
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Wake's note: \"I'd like "
-					.. "the scavenger's surviving records brought back together.\""
-				),
-				kind = "recovery",
-				map = "rp_garbage_cotz",
-				tier = 1,
-				cargo = "town_quest_personnel",
-				label = "Missing scavenger's records",
-			},
-			benefits = {},
 		},
 		{
-			id = "WA03",
-			stock = {item = "medic_bandage_2", bonus = 1},
-			completionCash = 0,
-			name = "Someone Goes Looking",
-			kind = "tracker",
-			requires = {"WA02"},
-			briefing = "Continue the personal-effects case recoveries. Bring back what the assignment identifies.",
-			completion = "A few cases home that would otherwise still be out there. Thank you.",
-			target = 2,
-			benefits = {},
-		},
-		{
-			id = "WA04",
-			stock = {item = "medic_medkit_1", bonus = 1},
-			completionCash = 650,
-			name = "Restocking",
+			id = "v3/backpacks/backpack_duffle",
+			branch = "backpacks",
+			name = "Worn Sportsbag",
 			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"WA03"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/backpacks/backpack_sling"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
 					pool = "town_delivery_medical_marsh_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_medical_marsh_2",
 					quantity = 1,
 				},
 			},
-			benefits = {},
+			completionCash = 600,
 		},
 		{
-			id = "WA05",
-			completionCash = 575,
-			name = "A Searcher's Kit",
+			id = "v3/backpacks/backpack_sanitar",
+			branch = "backpacks",
+			name = "Old Paramedic Bag",
 			kind = "delivery",
-			requires = {"WA04"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/backpacks/backpack_duffle"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
 					pool = "town_delivery_medical_marsh_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_medical_marsh_2",
 					quantity = 1,
 				},
 			},
-			benefits = {},
+			completionCash = 750,
 		},
 		{
-			id = "WA06",
-			stock = {item = "drug_caffeine", bonus = 1},
-			completionCash = 850,
-			name = "The Convoy List",
-			kind = "field",
-			objective = (
-				"Recover the convoy roster for Brass from the assigned search area in Garbage. Deliver it to "
-				.. "'Brass' in Garbage, then come back to the issuing contact in Garbage."
-			),
-			requires = {"WA04"},
-			briefing = (
-				"Brass needs the convoy roster. He can compare the freight account with the people recorded as "
-				.. "travelling. Recover the convoy roster for Brass from the assigned search area in Garbage. Deliver "
-				.. "it to 'Brass' in Garbage, then come back to me in Garbage."
-			),
-			completion = "He has the roster. Thank you for carrying it through instead of giving him a summary.",
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Wake's note: \"Brass "
-					.. "needs the convoy roster.\""
-				),
-				kind = "recovery",
-				map = "rp_garbage_cotz",
-				tier = 1,
-				cargo = "town_quest_personnel",
-				label = "Convoy roster for Brass",
-				recipient = "brass",
-			},
-			benefits = {},
-		},
-		{
-			id = "WA07",
-			stock = {item = "medic_antirad_1", bonus = 1},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
+			id = "v3/backpacks/backpack_tbag",
+			branch = "backpacks",
+			name = "School Backpack",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_sanitar"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
 				{
-					effect = "Unlock a repeatable exchange for medic_bandage_1; consume specified inputs on every exchange.",
-					id = "wake/WA07/future",
-					inputs = {
-						{
-							item = "value_tape_duct",
-							quantity = 1,
-						},
-					},
-					kind = "supplyExchange",
-					name = "Bring Back What You Can: standing exchange",
-					outputs = {
-						{
-							item = "medic_bandage_1",
-							quantity = 1,
-						},
-					},
-					provider = "wake",
-					status = "unimplemented",
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
 				},
 			},
-			completionCash = 0,
-			name = "Bring Back What You Can",
-			kind = "tracker",
-			requires = {"WA05"},
-			briefing = "More effects recoveries when you're prepared. Keep each case together.",
-			completion = "You've been careful with what returned. I appreciate that.",
-			target = 5,
+			completionCash = 900,
 		},
 		{
-			id = "WA08",
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+			id = "v3/backpacks/backpack_tourist",
+			branch = "backpacks",
+			name = "Large School Backpack",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_tbag"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
 				{
-					effect = (
-						"Persistent practical reference covering personal effects identification; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "wake/WA08/future",
-					kind = "information",
-					name = "Record: personal effects identification",
-					provider = "wake",
-					status = "unimplemented",
-					topic = "personal effects identification",
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
 				},
 			},
 			completionCash = 1050,
-			name = "Restocking",
+		},
+		{
+			id = "v3/backpacks/backpack_takedown_1",
+			branch = "backpacks",
+			name = "Large Sling Backpack",
 			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"WA06"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/backpacks/backpack_tourist"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
+				},
+			},
+			completionCash = 1200,
+		},
+		{
+			id = "v3/backpacks/backpack_takedown_2",
+			branch = "backpacks",
+			name = "Large Sling Backpack (Black)",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_takedown_1"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
@@ -307,35 +239,15 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
+			completionCash = 1400,
 		},
 		{
-			id = "WA09",
-			stock = {item = "medic_medkit_2", bonus = 1},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering failed convoy account; author actionable "
-						.. "guidance tied to verified mechanics and locations."
-					),
-					id = "wake/WA09/future",
-					kind = "information",
-					name = "Record: failed convoy account",
-					provider = "wake",
-					status = "unimplemented",
-					topic = "failed convoy account",
-				},
-			},
-			completionCash = 875,
-			name = "Keeping the Record",
+			id = "v3/backpacks/backpack_mbss",
+			branch = "backpacks",
+			name = "MBSS Backpack",
 			kind = "delivery",
-			requires = {"WA07"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/backpacks/backpack_takedown_2"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
@@ -347,249 +259,75 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
+			completionCash = 1550,
 		},
 		{
-			id = "WA10",
-			stock = {item = "drug_morphine", bonus = 1},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
-				{
-					effect = "Unlock a repeatable exchange for medic_bandage_1; consume specified inputs on every exchange.",
-					id = "wake/WA10/future",
-					inputs = {
-						{
-							item = "value_tape_duct",
-							quantity = 2,
-						},
-					},
-					kind = "supplyExchange",
-					name = "Atlas' Missing Mark: standing exchange",
-					outputs = {
-						{
-							item = "medic_bandage_1",
-							quantity = 1,
-						},
-					},
-					provider = "wake",
-					status = "unimplemented",
-				},
-			},
-			completionCash = 1250,
-			name = "Atlas' Missing Mark",
-			kind = "field",
-			objective = (
-				"Recover the survey note for Atlas from the assigned search area in Garbage. Deliver it to 'Atlas' "
-				.. "in Marsh, then come back to the issuing contact in Garbage."
-			),
-			requires = {"WA08"},
-			briefing = (
-				"Atlas should have the survey note. A place described poorly can make the whole route look more "
-				.. "certain than it is. Recover the survey note for Atlas from the assigned search area in Garbage. "
-				.. "Deliver it to 'Atlas' in Marsh, then come back to me in Garbage."
-			),
-			completion = "Delivered. He can examine the description himself now.",
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Wake's note: \"Atlas should "
-					.. "have the survey note.\""
-				),
-				kind = "recovery",
-				map = "rp_garbage_cotz",
-				tier = 2,
-				cargo = "town_quest_notebook",
-				label = "Survey note for Atlas",
-				recipient = "atlas",
-			},
-		},
-		{
-			id = "WA11",
-			stock = {item = "medic_bandage_2", bonus = 2},
-			completionCash = 0,
-			name = "A Longer Search",
-			kind = "tracker",
-			requires = {"WA09"},
-			briefing = "Keep bringing the marked recovery cases back. We can examine them here.",
-			completion = "You've stayed with the search work. That matters beyond this desk.",
-			target = 9,
-			benefits = {},
-		},
-		{
-			id = "WA12",
-			stock = {item = "medic_medkit_1", bonus = 2},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering Garbage recovery approaches; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "wake/WA12/future",
-					kind = "information",
-					name = "Record: Garbage recovery approaches",
-					provider = "wake",
-					status = "unimplemented",
-					topic = "Garbage recovery approaches",
-				},
-			},
-			completionCash = 1450,
-			name = "Building the reserve",
+			id = "v3/backpacks/backpack_vkbo",
+			branch = "backpacks",
+			name = "Army Backpack",
 			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"WA10"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/backpacks/backpack_mbss"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
 					pool = "town_delivery_medical_marsh_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_medical_marsh_2",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_medical_marsh_3",
+					pool = "town_delivery_medical_marsh_2",
 					quantity = 1,
 				},
 			},
-			benefits = {},
+			completionCash = 1700,
 		},
 		{
-			id = "WA13",
-			completionCash = 1175,
-			name = "Ready to Follow",
+			id = "v3/backpacks/backpack_pilgrim",
+			branch = "backpacks",
+			name = "Pilgrim Backpack",
 			kind = "delivery",
-			requires = {"WA11"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/backpacks/backpack_vkbo"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
 					pool = "town_delivery_medical_marsh_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_medical_marsh_2",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_medical_marsh_3",
+					pool = "town_delivery_medical_marsh_2",
 					quantity = 1,
-				},
-			},
-			benefits = {},
-		},
-		{
-			id = "WA14",
-			stock = {item = "drug_caffeine", bonus = 2},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering Pripyat recovery approaches; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "wake/WA14/future",
-					kind = "information",
-					name = "Record: Pripyat recovery approaches",
-					provider = "wake",
-					status = "unimplemented",
-					topic = "Pripyat recovery approaches",
-				},
-			},
-			completionCash = 1650,
-			name = "The Withheld Copy",
-			kind = "field",
-			objective = (
-				"Recover the restricted report's supporting file from the assigned search area in Garbage. Deliver "
-				.. "it to 'Carbon' in Waystation, then come back to the issuing contact in Garbage."
-			),
-			requires = {"WA12"},
-			briefing = (
-				"Carbon needs the evidence supporting that report. I want the missing information examined without "
-				.. "choosing a conclusion for him. Recover the restricted report's supporting file from the assigned "
-				.. "search area in Garbage. Deliver it to 'Carbon' in Waystation, then come back to me in Garbage."
-			),
-			completion = "He has the file. That's one fewer obstacle between the record and somebody willing to read it.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Wake's note: \"Carbon needs the "
-					.. "evidence supporting that report.\""
-				),
-				kind = "recovery",
-				map = "rp_garbage_cotz",
-				tier = 2,
-				cargo = "town_quest_official",
-				label = "Restricted report's supporting file",
-				recipient = "carbon",
-			},
-		},
-		{
-			id = "WA15",
-			stock = {item = "medic_medkit_3", bonus = 1},
-			completionCash = 0,
-			name = "No One Written Off",
-			kind = "tracker",
-			requires = {"WA13"},
-			briefing = "Continue the case recoveries while I compare the route records.",
-			completion = "A substantial amount brought home now. Thank you for treating the smaller returns carefully too.",
-			target = 14,
-			benefits = {},
-		},
-		{
-			id = "WA16",
-			stock = {item = "drug_marijuana", bonus = 1},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement supplyExchange consumer; verify these proposed terms before enabling.
-				{
-					effect = "Unlock a repeatable exchange for medic_bandage_1; consume specified inputs on every exchange.",
-					id = "wake/WA16/future",
-					inputs = {
-						{
-							item = "value_tape_duct",
-							quantity = 3,
-						},
-					},
-					kind = "supplyExchange",
-					name = "Building the reserve: standing exchange",
-					outputs = {
-						{
-							item = "medic_bandage_1",
-							quantity = 1,
-						},
-					},
-					provider = "wake",
-					status = "unimplemented",
 				},
 			},
 			completionCash = 1850,
-			name = "Building the reserve",
+		},
+		{
+			id = "v3/backpacks/backpack_scavbackpack",
+			branch = "backpacks",
+			name = "MBSS Backpack (Upgraded)",
 			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"WA14"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/backpacks/backpack_pilgrim"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
+				},
+			},
+			completionCash = 2000,
+		},
+		{
+			id = "v3/backpacks/backpack_1",
+			branch = "backpacks",
+			name = "Modern Military Backpack (Ukrainian)",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_scavbackpack"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
@@ -604,19 +342,204 @@ PLUGIN:Register("wake", {
 					pool = "town_delivery_medical_marsh_3",
 					quantity = 1,
 				},
+			},
+			completionCash = 2200,
+		},
+		{
+			id = "v3/backpacks/backpack_3",
+			branch = "backpacks",
+			name = "Modern Military Backpack (Russian)",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_1"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2350,
+		},
+		{
+			id = "v3/backpacks/backpack_2",
+			branch = "backpacks",
+			name = "Modern Military Backpack (USA)",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_3"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2500,
+		},
+		{
+			id = "v3/backpacks/backpack_1_large",
+			branch = "backpacks",
+			name = "Large Modern Military Backpack (Ukrainian)",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_2"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2650,
+		},
+		{
+			id = "v3/backpacks/backpack_3_large",
+			branch = "backpacks",
+			name = "Large Modern Military Backpack (Russian)",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_1_large"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2800,
+		},
+		{
+			id = "v3/backpacks/backpack_2_large",
+			branch = "backpacks",
+			name = "Large Modern Military Backpack (USA)",
+			kind = "delivery",
+			requires = {"v3/backpacks/backpack_3_large"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
+				},
+			},
+			completionCash = 3000,
+		},
+		{
+			id = "v3/carry-weight/01",
+			branch = "carry-weight",
+			name = "Carried weight +1 kg",
+			kind = "delivery",
+			requires = {},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
+				},
+			},
+			completionCash = 450,
+			capacity = {
+				kind = "weight",
+				amount = 1,
 			},
 		},
 		{
-			id = "WA17",
-			completionCash = 1475,
-			name = "The Records Agree",
+			id = "v3/carry-weight/02",
+			branch = "carry-weight",
+			name = "Carried weight +1 kg",
 			kind = "delivery",
-			requires = {"WA15"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
+			requires = {"v3/carry-weight/01"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
+				},
+			},
+			completionCash = 1050,
+			capacity = {
+				kind = "weight",
+				amount = 1,
+			},
+		},
+		{
+			id = "v3/carry-weight/03",
+			branch = "carry-weight",
+			name = "Carried weight +1 kg",
+			kind = "delivery",
+			requires = {"v3/carry-weight/02"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 1,
+				},
+			},
+			completionCash = 1700,
+			capacity = {
+				kind = "weight",
+				amount = 1,
+			},
+		},
+		{
+			id = "v3/carry-weight/04",
+			branch = "carry-weight",
+			name = "Carried weight +1 kg",
+			kind = "delivery",
+			requires = {"v3/carry-weight/03"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
 				{
@@ -632,152 +555,153 @@ PLUGIN:Register("wake", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
+			completionCash = 2350,
+			capacity = {
+				kind = "weight",
+				amount = 1,
+			},
+		},
+		{
+			id = "v3/carry-weight/05",
+			branch = "carry-weight",
+			name = "Carried weight +1 kg",
+			kind = "delivery",
+			requires = {"v3/carry-weight/04"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
+				},
+			},
+			completionCash = 3000,
+			capacity = {
+				kind = "weight",
+				amount = 1,
+			},
+		},
+		{
+			id = "v3/inventory-rows/01",
+			branch = "inventory-rows",
+			name = "Inventory +1 row",
+			kind = "delivery",
+			requires = {},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 1,
+				},
+			},
+			completionCash = 450,
+			capacity = {
+				kind = "rows",
+				amount = 1,
+			},
+		},
+		{
+			id = "v3/inventory-rows/02",
+			branch = "inventory-rows",
+			name = "Inventory +1 row",
+			kind = "delivery",
+			requires = {"v3/inventory-rows/01"},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. Leave those here so I can sort them carefully.",
+			requirements = {
+				{
+					pool = "town_delivery_medical_marsh_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_medical_marsh_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_medical_marsh_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_medical_marsh_4",
+					quantity = 1,
+				},
+			},
+			completionCash = 3000,
+			capacity = {
+				kind = "rows",
+				amount = 1,
+			},
+		},
+	},
+	startingServices = {},
+	retiredCommissions = {
+		{
+			id = "WA02",
+			name = "The Unmarked Camp",
+			briefing = "I'd like the scavenger's surviving records brought back together. Finding belongings gives us something to examine, not permission to settle the person's fate. Recover the missing scavenger's records from the assigned search area in Garbage. Bring it back to me in Garbage.",
+		},
+		{
+			id = "WA04",
+			name = "Restocking",
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+		},
+		{
+			id = "WA06",
+			name = "The Convoy List",
+			briefing = "Brass needs the convoy roster. He can compare the freight account with the people recorded as travelling. Recover the convoy roster for Brass from the assigned search area in Garbage. Deliver it to 'Brass' in Garbage, then come back to me in Garbage.",
+		},
+		{
+			id = "WA08",
+			name = "Restocking",
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+		},
+		{
+			id = "WA10",
+			name = "Atlas' Missing Mark",
+			briefing = "Atlas should have the survey note. A place described poorly can make the whole route look more certain than it is. Recover the survey note for Atlas from the assigned search area in Garbage. Deliver it to 'Atlas' in Marsh, then come back to me in Garbage.",
+		},
+		{
+			id = "WA12",
+			name = "Building the reserve",
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
+		},
+		{
+			id = "WA14",
+			name = "The Withheld Copy",
+			briefing = "Carbon needs the evidence supporting that report. I want the missing information examined without choosing a conclusion for him. Recover the restricted report's supporting file from the assigned search area in Garbage. Deliver it to 'Carbon' in Waystation, then come back to me in Garbage.",
+		},
+		{
+			id = "WA16",
+			name = "Building the reserve",
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 		},
 		{
 			id = "WA18",
-			stock = {item = "medic_medkit_2", bonus = 2},
-			completionCash = 2050,
 			name = "The Last Transmission",
-			kind = "field",
-			objective = (
-				"Recover the expedition's last transmission from the assigned search area in Pripyat. Bring it "
-				.. "back to the issuing contact in Garbage."
-			),
-			requires = {"WA16"},
-			briefing = (
-				"I'd like the later recording brought home. A voice deserves a quieter hearing than a hurried "
-				.. "listen on the route. Recover the expedition's last transmission from the assigned search area in "
-				.. "Pripyat. Bring it back to me in Garbage."
-			),
-			completion = "We'll take our time with it. Thank you for bringing it all the way back.",
-			field = {
-				description = (
-					"A pale audio cassette with a broad blue printed label and twin spool windows. Wake's note: \"I'd "
-					.. "like the later recording brought home.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_tape2",
-				label = "Expedition's last transmission",
-			},
-			benefits = {},
-		},
-		{
-			id = "WA19",
-			stock = {item = "medic_antirad_1", bonus = 2},
-			completionCash = 0,
-			name = "Still Looking",
-			kind = "tracker",
-			requires = {"WA17", "WA18"},
-			briefing = "There are more effects cases to recover. You don't have to take the next trip before resting.",
-			completion = "You've kept returning with the work. I haven't taken that for granted.",
-			target = 20,
-			benefits = {},
+			briefing = "I'd like the later recording brought home. A voice deserves a quieter hearing than a hurried listen on the route. Recover the expedition's last transmission from the assigned search area in Pripyat. Bring it back to me in Garbage.",
 		},
 		{
 			id = "WA20",
-			stock = {item = "medic_medkit_3", bonus = 2},
-			completionCash = 2250,
 			name = "A full supply order",
-			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"WA19"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
-			completion = "Thank you. Leave those here so I can sort them carefully.",
-			requirements = {
-				{
-					pool = "town_delivery_medical_marsh_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_medical_marsh_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_medical_marsh_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_medical_marsh_4",
-					quantity = 1,
-				},
-			},
-			benefits = {},
-		},
-		{
-			id = "WA21",
-			completionCash = 1775,
-			name = "A Place in the Ledger",
-			kind = "delivery",
-			requires = {"WA20"},
-			briefing = (
-				"I need supplies and recovered belongings brought here for sorting. Check the request, and keep "
-				.. "personal effects together while you carry them. Bring everything on the list back here; I need "
-				.. "the full delivery."
-			),
-			completion = "Thank you. Leave those here so I can sort them carefully.",
-			requirements = {
-				{
-					pool = "town_delivery_medical_marsh_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_medical_marsh_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_medical_marsh_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_medical_marsh_4",
-					quantity = 1,
-				},
-			},
-			benefits = {},
+			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 		},
 		{
 			id = "WA22",
-			completionCash = 2450,
 			name = "The Final Name",
-			kind = "field",
-			objective = (
-				"Recover the final identification file from the assigned search area in Garbage. Bring it back to "
-				.. "the issuing contact in Garbage."
-			),
-			requires = {"WA21"},
-			briefing = (
-				"The final identification record needs to come back complete. I don't want a familiar name on one "
-				.. "page deciding how we read the rest. Recover the final identification file from the assigned "
-				.. "search area in Garbage. Bring it back to me in Garbage."
-			),
-			completion = (
-				"You've given the search something firmer than the stories we began with. Thank you for staying "
-				.. "with it. You can sit for a while; there is no next errand waiting in this conversation."
-			),
-			field = {
-				description = (
-					"A cardboard file folder with an emblem and printed wording on the front. Wake's note: \"The final "
-					.. "identification record needs to come back complete.\""
-				),
-				kind = "recovery",
-				map = "rp_garbage_cotz",
-				tier = 2,
-				cargo = "town_quest_personnel",
-				label = "Final identification file",
-			},
-			benefits = {},
-			recognition = "Wake's trusted contact",
+			briefing = "The final identification record needs to come back complete. I don't want a familiar name on one page deciding how we read the rest. Recover the final identification file from the assigned search area in Garbage. Bring it back to me in Garbage.",
 		},
 	},
 })

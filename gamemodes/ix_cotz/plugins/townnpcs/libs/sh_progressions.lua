@@ -20,7 +20,12 @@ end
 function PLUGIN:BuildProgressions()
 	self.capacityMilestones = {}
 	self.serviceGates = {}
+	self.ammoExchanges = {}
+	self.variantBaseGates = {}
 	for slug, contact in pairs(self.contacts) do
+		for _, service in ipairs(contact.startingServices or {}) do
+			self.serviceGates[service.id] = {ungated = true, npc = contact.name}
+		end
 		if contact.access then
 			ix.progression.npcRequirements[contact.name] = self:StepID(contact.access.contact, contact.access.step)
 		end
@@ -35,6 +40,7 @@ function PLUGIN:BuildProgressions()
 				progMap = contact.map,
 				townContact = slug,
 				townKind = step.kind,
+				townBranch = step.branch,
 				defaultActive = #step.requires == 0 and #(step.crossRequires or {}) == 0,
 				nextProgressions = {},
 				prerequisites = {},
@@ -47,7 +53,15 @@ function PLUGIN:BuildProgressions()
 				recognition = step.recognition,
 				serviceDiscounts = step.discounts,
 				townServices = step.services,
+				ammoExchange = step.ammoExchange,
 			}
+			if step.ammoExchange then
+				self.ammoExchanges[step.ammoExchange.output] = {
+					id = id, npc = contact.name, input = step.ammoExchange.input,
+					output = step.ammoExchange.output, boxes = step.ammoExchange.boxes,
+				}
+			end
+			if step.variantBase then self.variantBaseGates[step.variantBase] = id end
 			for _, service in ipairs(step.services or {}) do
 				assert(not self.serviceGates[service.id], "Duplicate town service: " .. service.id)
 				self.serviceGates[service.id] = {id = id, npc = contact.name}

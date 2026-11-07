@@ -2,7 +2,8 @@
 
 **6 November repeatable roster:** see the [implemented job revision](repeatable-jobs.md).
 Twenty job rows use nineteen issuers, including Atlas's alternating photography.
-Progression rework is deferred; current character profiles identify disabled ordinary work.
+The [7 November progression overhaul](progression-overhaul.md) replaces the earlier finite graph with
+417 themed hand-in milestones across 49 branches. It is authoritative over the older story proposals below.
 
 
 Runtime and design reference, 31 October 2026. **Town NPC implementation is now present.**

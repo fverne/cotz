@@ -23,7 +23,9 @@ local function personalHome()
 end
 
 local function complete(client, step)
-	client:GetCharacter().completed["cotz/town/ballast/BA" .. string.format("%02d", step)] = true
+	for index = 1, step do
+		client:GetCharacter().completed["cotz/town/ballast/v3/hideout/" .. string.format("%02d", index)] = true
+	end
 end
 
 Test("locations claim one free room each while admin grants allow several at one entrance", function()
@@ -65,7 +67,7 @@ Test("unmarked personal templates get one starter crate at the configured storag
 	assert(table.Count(record.personalLayout) == 1)
 end)
 
-Test("three local milestones grant purchase permissions separately from each room's purchases", function()
+Test("local milestones grant purchase permissions separately from each room's purchases", function()
 	local owner, inventory, instance, record, target = personalHome()
 	local quote = PLUGIN:BuildPersonalOffer(owner, record, "container", "ammo")
 	assert(not quote.allowed and not PLUGIN:PurchasePersonalOffer(owner, target, quote))
@@ -83,6 +85,7 @@ Test("three local milestones grant purchase permissions separately from each roo
 	complete(owner, 2)
 	floor = PLUGIN:BuildPersonalOffer(owner, record, "floor")
 	assert(PLUGIN:PurchasePersonalOffer(owner, target, floor) and PLUGIN:GetPersonalFloorLimit(record) == 6)
+	complete(owner, 4)
 	assert(PLUGIN:PurchasePersonalOffer(owner, target, PLUGIN:BuildPersonalOffer(owner, record, "floor")))
 	assert(PLUGIN:GetPersonalFloorLimit(record) == 8)
 	assert(not PLUGIN:BuildPersonalOffer(owner, record, "floor").allowed)

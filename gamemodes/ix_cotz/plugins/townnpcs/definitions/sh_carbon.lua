@@ -11,102 +11,70 @@ PLUGIN:Register("carbon", {
 		"valuables_printed_material",
 	},
 	job = {
-		kind = "none",
 		category = "No ordinary repeatable work",
 		description = "No ordinary repeatable work",
+		kind = "none",
 	},
 	legacyJob = {
-		kind = "delivery",
-		minimumValue = {1200, 2400, 4000},
 		category = "Document deliveries",
-		description = "Document deliveries",
-		pools = {"administrative_documents", "documents_field", "documents_technical"},
 		deliveryTiers = {
 			easy = {
-				pools = {
-					"valuables_office_records",
-					"valuables_field_records",
-					"valuables_printed_material",
-				},
-				quantity = 1,
-			},
-			medium = {
-				pools = {
-					"valuables_technical_records",
-				},
+				pools = {"valuables_office_records", "valuables_field_records", "valuables_printed_material"},
 				quantity = 1,
 			},
 			hard = {
-				pools = {
-					"valuables_data_archives",
-				},
+				pools = {"valuables_data_archives"},
 				quantity = 2,
 			},
+			medium = {
+				pools = {"valuables_technical_records"},
+				quantity = 1,
+			},
 		},
+		description = "Document deliveries",
+		kind = "delivery",
+		minimumValue = {1200, 2400, 4000},
+		pools = {"administrative_documents", "documents_field", "documents_technical"},
 		quantities = {2, 4, 7},
 	},
 	supplies = {},
 	rewards = {
 		packages = {
-			{label = "Canned provisions",
-				items = {"food_can_beans", "food_can_tuna"}},
-			{label = "Reading provisions",
-				items = {"drink_bottletea", "food_bread"}},
-			{label = "Field research",
-				items = {"medic_bandage_1", "drink_bottlewater"}},
+			{
+				items = {"food_can_beans", "food_can_tuna"},
+				label = "Canned provisions",
+			},
+			{
+				items = {"drink_bottletea", "food_bread"},
+				label = "Reading provisions",
+			},
+			{
+				items = {"medic_bandage_1", "drink_bottlewater"},
+				label = "Field research",
+			},
 		},
 	},
 	dialogue = {
-		jobBriefing = "There's an arrangement we haven't finished. {details}",
-		jobReminder = "The arrangement hasn't changed. {details}",
-		jobFinished = "That will do. Your payment is ready.",
+		completedGreeting = "Hello again. I've got time if you want to talk. You've been patient enough with my questions.",
 		delivery = "On the clear part of the desk. Keep any loose pages with it.",
-		completedGreeting = (
-			"Hello again. I've got time if you want to talk. You've been patient enough with my "
-			.. "questions."
-		),
-		workPrompt = "About the records I'm collecting.",
+		jobBriefing = "There's an arrangement we haven't finished. {details}",
+		jobFinished = "That will do. Your payment is ready.",
+		jobReminder = "The arrangement hasn't changed. {details}",
 		offerPrompt = "Are there documents you need?",
-		work = (
-			"Surviving documents, kept intact and brought here. Check the request before choosing what looks "
-			.. "important. An ordinary record may help place a much more exciting account. Please keep loose pages "
-			.. "with the bundle they came from. I'd rather discover an uninteresting page myself than wonder "
-			.. "whether it was left behind."
-		),
+		progression = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "Which part of the archive are you examining?",
-		progression = (
-			"I'm comparing facility records and expedition accounts. Some references lead to surviving papers; "
-			.. "others leave a gap. I'd like help recovering what we can actually read before I try to explain the "
-			.. "absences. There are ordinary document requests too. We can begin there without making a promise "
-			.. "about what the last file will tell us."
-		),
+		work = "Surviving documents, kept intact and brought here. Check the request before choosing what looks important. An ordinary record may help place a much more exciting account. Please keep loose pages with the bundle they came from. I'd rather discover an uninteresting page myself than wonder whether it was left behind.",
+		workPrompt = "About the records I'm collecting.",
 	},
-	catalogue = {
-		["accesscard_bunker"] = {step = "CA12",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["attachment_aluframe"] = {step = "CA08",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["attachment_carbonfibre"] = {step = "CA15",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["attachment_steelframe"] = {step = "CA22",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["headwear_pracs"] = {step = "CA01",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-		["headwear_psz12"] = {step = "CA22",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1}},
-	},
+	catalogue = {},
 	progression = {
 		{
-			id = "CA01",
-			completionCash = 275,
-			name = "Somewhere to File It",
+			id = "v3/ap-ammo/22lrap",
+			branch = "ap-ammo",
+			name = ".22LR FMJ",
 			kind = "delivery",
 			requires = {},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
@@ -114,66 +82,26 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
-		},
-		{
-			id = "CA02",
 			completionCash = 450,
-			name = "The Maintenance Office",
-			kind = "field",
-			objective = (
-				"Recover the facility maintenance index from the assigned search area in Waystation. Bring it back "
-				.. "to the issuing contact in Waystation."
-			),
-			requires = {"CA01"},
-			briefing = (
-				"I'd like the facility index. An index often survives in conversation as a list of things someone "
-				.. "remembers being important. Recover the facility maintenance index from the assigned search area "
-				.. "in Waystation. Bring it back to me in Waystation."
-			),
-			completion = "Good. I'll keep its order while I work through the references.",
-			field = {
-				description = (
-					"A cardboard file folder with a small coloured crest on its cover. Carbon's note: \"I'd like the "
-					.. "facility index.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_official",
-				label = "Facility maintenance index",
+			ammoExchange = {
+				input = "22lr",
+				output = "22lrap",
+				boxes = 3,
 			},
-			benefits = {},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/22lrhp",
+				},
+			},
 		},
 		{
-			id = "CA03",
-			stock = {item = "headwear_pracs", bonus = 1},
-			completionCash = 0,
-			name = "A Useful Record",
-			kind = "tracker",
-			requires = {"CA02"},
-			briefing = (
-				"Continue the document deliveries. More surviving records give us something against which to check "
-				.. "an account."
-			),
-			completion = "A useful beginning. There is already more to compare.",
-			target = 2,
-			benefits = {},
-		},
-		{
-			id = "CA04",
-			stock = {item = "headwear_pracs", bonus = 2},
-			completionCash = 650,
-			name = "A small delivery",
+			id = "v3/ap-ammo/762x25ap",
+			branch = "ap-ammo",
+			name = "7.62x25mm Armor-Piercing",
 			kind = "delivery",
-			retiredCommission = true,
-			objective = "Bring all 1 listed item type to this contact. The request shows each selected item and required units.",
-			requires = {"CA02"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			requires = {"v3/ap-ammo/22lrap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
@@ -181,124 +109,134 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
+			completionCash = 550,
+			ammoExchange = {
+				input = "762x25",
+				output = "762x25ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/762x25hp",
+				},
+			},
 		},
 		{
-			id = "CA05",
-			completionCash = 575,
-			name = "An Ordered Shelf",
+			id = "v3/ap-ammo/9x19ap",
+			branch = "ap-ammo",
+			name = "9x19mm 7N21",
 			kind = "delivery",
-			requires = {"CA03"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			requires = {"v3/ap-ammo/762x25ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
 					pool = "town_delivery_records_waystation_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
 					quantity = 1,
 				},
 			},
-			benefits = {},
+			completionCash = 700,
+			ammoExchange = {
+				input = "9x19",
+				output = "9x19ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/9x19hp",
+				},
+			},
 		},
 		{
-			id = "CA06",
+			id = "v3/ap-ammo/45acpap",
+			branch = "ap-ammo",
+			name = ".45 ACP Armor-Piercing",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/9x19ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 1,
+				},
+			},
 			completionCash = 850,
-			name = "The Original's Account",
-			kind = "field",
-			objective = (
-				"Recover the contemporary expedition diary from the assigned search area in Waystation. Deliver it "
-				.. "to 'The Original' in Marsh, then come back to the issuing contact in Waystation."
-			),
-			requires = {"CA04"},
-			briefing = (
-				"The Original should read the expedition note himself. A detail may mean something to him that I "
-				.. "wouldn't think to ask about. Recover the contemporary expedition diary from the assigned search "
-				.. "area in Waystation. Deliver it to 'The Original' in Marsh, then come back to me in Waystation."
-			),
-			completion = (
-				"He has the diary. I'll wait to hear what he recognises before treating a disagreement as a "
-				.. "discovery."
-			),
-			field = {
-				description = (
-					"A thick brown journal held together by a narrow tie around its cover. Carbon's note: \"The "
-					.. "Original should read the expedition note himself.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 1,
-				cargo = "town_quest_notebook",
-				label = "Contemporary expedition diary",
-				recipient = "the-original",
+			ammoExchange = {
+				input = "45acp",
+				output = "45acpap",
+				boxes = 3,
 			},
-			benefits = {},
-		},
-		{
-			id = "CA07",
-			stock = {item = "headwear_pracs", bonus = 3},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+			crossRequires = {
 				{
-					effect = (
-						"Persistent practical reference covering Marsh maintenance chronology; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA07/future",
-					kind = "information",
-					name = "Record: Marsh maintenance chronology",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "Marsh maintenance chronology",
+					contact = "brass",
+					step = "v3/hp-ammo/45acphp",
 				},
 			},
-			completionCash = 0,
-			name = "Facts With Sources",
-			kind = "tracker",
-			requires = {"CA05"},
-			briefing = "Keep bringing the requested documents. I want the context as well as the quotable sentence.",
-			completion = "You've kept records together that could easily have been scattered.",
-			target = 5,
 		},
 		{
-			id = "CA08",
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering Garbage facility ownership; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA08/future",
-					kind = "information",
-					name = "Record: Garbage facility ownership",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "Garbage facility ownership",
-				},
-			},
-			completionCash = 1050,
-			name = "Restocking",
+			id = "v3/ap-ammo/545x39ap",
+			branch = "ap-ammo",
+			name = "5.45x39mm 7N22 AP",
 			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"CA06"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			requires = {"v3/ap-ammo/45acpap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 1,
+				},
+			},
+			completionCash = 1000,
+			ammoExchange = {
+				input = "545x39",
+				output = "545x39ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/545x39hp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/762x39ap",
+			branch = "ap-ammo",
+			name = "7.62x39mm MAI AP",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/545x39ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 1,
+				},
+			},
+			completionCash = 1150,
+			ammoExchange = {
+				input = "762x39",
+				output = "762x39ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/762x39hp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/556x45ap",
+			branch = "ap-ammo",
+			name = "5.56x45mm SS190",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/762x39ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
@@ -310,35 +248,26 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-		},
-		{
-			id = "CA09",
-			stock = {item = "attachment_aluframe", bonus = 1},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+			completionCash = 1300,
+			ammoExchange = {
+				input = "556x45",
+				output = "556x45ap",
+				boxes = 3,
+			},
+			crossRequires = {
 				{
-					effect = (
-						"Persistent practical reference covering Waystation freight chronology; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA09/future",
-					kind = "information",
-					name = "Record: Waystation freight chronology",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "Waystation freight chronology",
+					contact = "brass",
+					step = "v3/hp-ammo/556x45hp",
 				},
 			},
-			completionCash = 875,
-			name = "Names and Numbers",
+		},
+		{
+			id = "v3/ap-ammo/9x18ap",
+			branch = "ap-ammo",
+			name = "9x18mm JSP-AP",
 			kind = "delivery",
-			requires = {"CA07"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			requires = {"v3/ap-ammo/556x45ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
@@ -350,110 +279,26 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-		},
-		{
-			id = "CA10",
-			stock = {item = "attachment_aluframe", bonus = 2},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering Pripyat research chronology; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA10/future",
-					kind = "information",
-					name = "Record: Pripyat research chronology",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "Pripyat research chronology",
-				},
+			completionCash = 1400,
+			ammoExchange = {
+				input = "9x18",
+				output = "9x18ap",
+				boxes = 3,
 			},
-			completionCash = 1250,
-			name = "Egghead's Citation",
-			kind = "field",
-			objective = (
-				"Recover the cited research record from the assigned search area in Waystation. Bring it back to "
-				.. "the issuing contact in Waystation."
-			),
-			requires = {"CA08"},
-			briefing = (
-				"I'd like to find the record Egghead cited. Following a reference is more interesting when it "
-				.. "leads somewhere other than another person's summary. Recover the cited research record from the "
-				.. "assigned search area in Waystation. Bring it back to me in Waystation."
-			),
-			completion = "Excellent. I can begin with what the author actually wrote.",
-			field = {
-				description = (
-					"A blue laboratory folder with loose printed record sheets extending from its edges. Carbon's "
-					.. "note: \"I'd like to find the record Egghead cited.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_lab",
-				label = "Cited research record",
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/9x18hp",
+				},
 			},
 		},
 		{
-			id = "CA11",
-			stock = {item = "attachment_aluframe", bonus = 3},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering expedition roster comparison; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA11/future",
-					kind = "information",
-					name = "Record: expedition roster comparison",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "expedition roster comparison",
-				},
-			},
-			completionCash = 0,
-			name = "A History That Agrees",
-			kind = "tracker",
-			requires = {"CA09"},
-			briefing = "More document orders when you're ready. Keep their sources distinct where the records allow it.",
-			completion = "A useful range of material. I'll take time to read it without forcing an agreement.",
-			target = 9,
-		},
-		{
-			id = "CA12",
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering equipment serial register; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA12/future",
-					kind = "information",
-					name = "Record: equipment serial register",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "equipment serial register",
-				},
-			},
-			completionCash = 1450,
-			name = "Restocking",
+			id = "v3/ap-ammo/762x54ap",
+			branch = "ap-ammo",
+			name = "7.62x54mm 7N14",
 			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 2 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"CA10"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			requires = {"v3/ap-ammo/9x18ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
@@ -465,200 +310,119 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
-			benefits = {},
-		},
-		{
-			id = "CA13",
-			stock = {item = "accesscard_bunker", bonus = 1},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+			completionCash = 1550,
+			ammoExchange = {
+				input = "762x54",
+				output = "762x54ap",
+				boxes = 3,
+			},
+			crossRequires = {
 				{
-					effect = (
-						"Persistent practical reference covering contamination report comparison; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA13/future",
-					kind = "information",
-					name = "Record: contamination report comparison",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "contamination report comparison",
+					contact = "brass",
+					step = "v3/hp-ammo/762x54hp",
 				},
 			},
-			completionCash = 1175,
-			name = "Ready for the Archive",
+		},
+		{
+			id = "v3/ap-ammo/357magnumap",
+			branch = "ap-ammo",
+			name = ".357 Magnum Armor-Piercing",
 			kind = "delivery",
-			requires = {"CA11"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			requires = {"v3/ap-ammo/762x54ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
 					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
 					quantity = 2,
 				},
 				{
-					pool = "town_delivery_records_waystation_3",
+					pool = "town_delivery_records_waystation_2",
 					quantity = 1,
 				},
 			},
-		},
-		{
-			id = "CA14",
-			stock = {item = "accesscard_bunker", bonus = 2},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+			completionCash = 1700,
+			ammoExchange = {
+				input = "357magnum",
+				output = "357magnumap",
+				boxes = 3,
+			},
+			crossRequires = {
 				{
-					effect = (
-						"Persistent practical reference covering power-network history; author actionable "
-						.. "guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA14/future",
-					kind = "information",
-					name = "Record: power-network history",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "power-network history",
+					contact = "brass",
+					step = "v3/hp-ammo/357magnumhp",
 				},
 			},
-			completionCash = 1650,
-			name = "The Pripyat Index",
-			kind = "field",
-			objective = (
-				"Recover the Pripyat archive index from the assigned search area in Pripyat. Bring it back to the "
-				.. "issuing contact in Waystation."
-			),
-			requires = {"CA12"},
-			briefing = (
-				"The archive index may show how the records were arranged. I want to understand that before "
-				.. "borrowing its headings for my own account. Recover the Pripyat archive index from the assigned "
-				.. "search area in Pripyat. Bring it back to me in Waystation."
-			),
-			completion = "Thank you. An index gives me rather more to do than it appears to.",
-			field = {
-				description = (
-					"A blue records folder with contrasting corporate lettering along the cover. Carbon's note: \"The "
-					.. "archive index may show how the records were arranged.\""
-				),
-				kind = "recovery",
-				map = "rp_pripyat_remaster",
-				tier = 3,
-				cargo = "town_quest_archive",
-				label = "Pripyat archive index",
-			},
 		},
 		{
-			id = "CA15",
-			stock = {item = "attachment_carbonfibre", bonus = 1},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+			id = "v3/ap-ammo/9x39ap",
+			branch = "ap-ammo",
+			name = "9x39mm SP-6",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/357magnumap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
 				{
-					effect = (
-						"Persistent practical reference covering missing shipment index; author actionable "
-						.. "guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA15/future",
-					kind = "information",
-					name = "Record: missing shipment index",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "missing shipment index",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
 				},
-			},
-			completionCash = 0,
-			name = "Every Page Accounted For",
-			kind = "tracker",
-			requires = {"CA13"},
-			briefing = "Continue the record deliveries while I examine the archive references.",
-			completion = "You've stayed with the ordinary collecting. That is how a comparison becomes possible.",
-			target = 14,
-		},
-		{
-			id = "CA16",
-			stock = {item = "attachment_carbonfibre", bonus = 2},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
 				{
-					effect = (
-						"Persistent practical reference covering facility shutdown records; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA16/future",
-					kind = "information",
-					name = "Record: facility shutdown records",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "facility shutdown records",
+					pool = "town_delivery_records_waystation_2",
+					quantity = 1,
 				},
 			},
 			completionCash = 1850,
-			name = "Building the reserve",
-			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 3 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"CA14"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
-			completion = "Thank you. I will look through these before deciding where they belong.",
-			requirements = {
+			ammoExchange = {
+				input = "9x39",
+				output = "9x39ap",
+				boxes = 3,
+			},
+			crossRequires = {
 				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 1,
+					contact = "brass",
+					step = "v3/hp-ammo/9x39hp",
 				},
 			},
 		},
 		{
-			id = "CA17",
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
+			id = "v3/ap-ammo/44magnumap",
+			branch = "ap-ammo",
+			name = ".44 Magnum Armor-Piercing",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/9x39ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
 				{
-					effect = (
-						"Persistent practical reference covering archive provenance guide; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA17/future",
-					kind = "information",
-					name = "Record: archive provenance guide",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "archive provenance guide",
+					pool = "town_delivery_records_waystation_1",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 1,
 				},
 			},
-			completionCash = 1475,
-			name = "The Missing Context",
+			completionCash = 2000,
+			ammoExchange = {
+				input = "44magnum",
+				output = "44magnumap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/44magnumhp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/9x21ap",
+			branch = "ap-ammo",
+			name = "9x21mm Gyurza SP-10 (7N29)",
 			kind = "delivery",
-			requires = {"CA15", "CA16"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
+			requires = {"v3/ap-ammo/44magnumap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
 				{
@@ -674,199 +438,290 @@ PLUGIN:Register("carbon", {
 					quantity = 1,
 				},
 			},
+			completionCash = 2150,
+			ammoExchange = {
+				input = "9x21",
+				output = "9x21ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/9x21hp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/762x51ap",
+			branch = "ap-ammo",
+			name = "7.62x51mm M993 AP",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/9x21ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2250,
+			ammoExchange = {
+				input = "762x51",
+				output = "762x51ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/762x51hp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/500magnumap",
+			branch = "ap-ammo",
+			name = ".500 Magnum Armor Piercing",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/762x51ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2400,
+			ammoExchange = {
+				input = "500magnum",
+				output = "500magnumap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/500magnumhp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/338lapuaap",
+			branch = "ap-ammo",
+			name = ".338 Lapua Armor-Piercing",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/500magnumap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2550,
+			ammoExchange = {
+				input = "338lapua",
+				output = "338lapuaap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/338lapuahp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/50aeap",
+			branch = "ap-ammo",
+			name = ".50AE Armor-Piercing",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/338lapuaap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2700,
+			ammoExchange = {
+				input = "50ae",
+				output = "50aeap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/50aehp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/57x28ap",
+			branch = "ap-ammo",
+			name = "5.7x28mm SS190",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/50aeap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 1,
+				},
+			},
+			completionCash = 2850,
+			ammoExchange = {
+				input = "57x28",
+				output = "57x28ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/57x28hp",
+				},
+			},
+		},
+		{
+			id = "v3/ap-ammo/145x114ap",
+			branch = "ap-ammo",
+			name = "14.5x114mm B-32",
+			kind = "delivery",
+			requires = {"v3/ap-ammo/57x28ap"},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+			completion = "Thank you. I will look through these before deciding where they belong.",
+			requirements = {
+				{
+					pool = "town_delivery_records_waystation_1",
+					quantity = 4,
+				},
+				{
+					pool = "town_delivery_records_waystation_2",
+					quantity = 3,
+				},
+				{
+					pool = "town_delivery_records_waystation_3",
+					quantity = 2,
+				},
+				{
+					pool = "town_delivery_records_waystation_4",
+					quantity = 1,
+				},
+			},
+			completionCash = 3000,
+			ammoExchange = {
+				input = "145x114",
+				output = "145x114ap",
+				boxes = 3,
+			},
+			crossRequires = {
+				{
+					contact = "brass",
+					step = "v3/hp-ammo/145x114hp",
+				},
+			},
+		},
+	},
+	startingServices = {},
+	retiredCommissions = {
+		{
+			id = "CA02",
+			name = "The Maintenance Office",
+			briefing = "I'd like the facility index. An index often survives in conversation as a list of things someone remembers being important. Recover the facility maintenance index from the assigned search area in Waystation. Bring it back to me in Waystation.",
+		},
+		{
+			id = "CA04",
+			name = "A small delivery",
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+		},
+		{
+			id = "CA06",
+			name = "The Original's Account",
+			briefing = "The Original should read the expedition note himself. A detail may mean something to him that I wouldn't think to ask about. Recover the contemporary expedition diary from the assigned search area in Waystation. Deliver it to 'The Original' in Marsh, then come back to me in Waystation.",
+		},
+		{
+			id = "CA08",
+			name = "Restocking",
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+		},
+		{
+			id = "CA10",
+			name = "Egghead's Citation",
+			briefing = "I'd like to find the record Egghead cited. Following a reference is more interesting when it leads somewhere other than another person's summary. Recover the cited research record from the assigned search area in Waystation. Bring it back to me in Waystation.",
+		},
+		{
+			id = "CA12",
+			name = "Restocking",
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
+		},
+		{
+			id = "CA14",
+			name = "The Pripyat Index",
+			briefing = "The archive index may show how the records were arranged. I want to understand that before borrowing its headings for my own account. Recover the Pripyat archive index from the assigned search area in Pripyat. Bring it back to me in Waystation.",
+		},
+		{
+			id = "CA16",
+			name = "Building the reserve",
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 		},
 		{
 			id = "CA18",
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering conflicting witness register; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA18/future",
-					kind = "information",
-					name = "Record: conflicting witness register",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "conflicting witness register",
-				},
-			},
-			completionCash = 2050,
 			name = "The False Summary",
-			kind = "field",
-			objective = (
-				"Recover the source of the altered summary from the assigned search area in Waystation. Bring it "
-				.. "back to the issuing contact in Waystation."
-			),
-			requires = {"CA17"},
-			briefing = (
-				"I want the source record behind the summary. We need the surrounding text before deciding what "
-				.. "was changed and why. Recover the source of the altered summary from the assigned search area in "
-				.. "Waystation. Bring it back to me in Waystation."
-			),
-			completion = "I'll put the versions side by side. That is a better beginning than announcing a culprit.",
-			field = {
-				description = (
-					"A blue document folder with loose pages protruding from the edges. Carbon's note: \"I want the "
-					.. "source record behind the summary.\""
-				),
-				kind = "recovery",
-				map = "rp_waystation",
-				tier = 2,
-				cargo = "town_quest_dossier",
-				label = "Source of the altered summary",
-			},
-			benefits = {},
-		},
-		{
-			id = "CA19",
-			stock = {item = "accesscard_bunker", bonus = 3},
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering technical document cross-reference; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA19/future",
-					kind = "information",
-					name = "Record: technical document cross-reference",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "technical document cross-reference",
-				},
-			},
-			completionCash = 0,
-			name = "A Complete Dossier",
-			kind = "tracker",
-			requires = {"CA18"},
-			briefing = "Keep the document deliveries going. New material can qualify an account we thought was settled.",
-			completion = "I've got enough beside me to ask better questions now. Thank you.",
-			target = 20,
+			briefing = "I want the source record behind the summary. We need the surrounding text before deciding what was changed and why. Recover the source of the altered summary from the assigned search area in Waystation. Bring it back to me in Waystation.",
 		},
 		{
 			id = "CA20",
-			completionCash = 2250,
 			name = "A full supply order",
-			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"CA19"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
-			completion = "Thank you. I will look through these before deciding where they belong.",
-			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_4",
-					quantity = 1,
-				},
-			},
-			benefits = {},
-		},
-		{
-			id = "CA21",
-			benefits = {},
-			plannedUnlocks = {
-				-- TODO: Implement information consumer; verify these proposed terms before enabling.
-				{
-					effect = (
-						"Persistent practical reference covering recovered map annotations; author "
-						.. "actionable guidance tied to verified mechanics and locations."
-					),
-					id = "carbon/CA21/future",
-					kind = "information",
-					name = "Record: recovered map annotations",
-					provider = "carbon",
-					status = "unimplemented",
-					topic = "recovered map annotations",
-				},
-			},
-			completionCash = 1775,
-			name = "Preserve the Originals",
-			kind = "delivery",
-			requires = {"CA20"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
-			completion = "Thank you. I will look through these before deciding where they belong.",
-			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_4",
-					quantity = 1,
-				},
-			},
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 		},
 		{
 			id = "CA22",
-			completionCash = 2450,
 			name = "A full supply order",
-			kind = "delivery",
-			retiredCommission = true,
-			objective = (
-				"Bring all 4 listed item types to this contact. The request shows each selected item and required "
-				.. "units."
-			),
-			requires = {"CA21"},
-			briefing = (
-				"I would like some ordinary source material for the collection. Even a working record can tell us "
-				.. "what somebody thought was worth writing down. Bring everything on the list back here; I need the "
-				.. "full delivery."
-			),
-			completion = "Thank you. I will look through these before deciding where they belong.",
-			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_4",
-					quantity = 1,
-				},
-			},
-			benefits = {},
-			recognition = "Carbon's trusted contact",
+			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 		},
 	},
 })

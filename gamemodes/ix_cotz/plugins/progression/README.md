@@ -1,11 +1,11 @@
 # Progression engine
 
-The [approved town vendor plan](../../../../docs/npc-overhaul/vendor-plan.md) now uses 25 finite
-contact trees and 600 town milestones. The Original's tree is inactive. Town compilation scales
-new hand-in quantities, checkpoint targets and field-trip counts by the contact's effort multiplier.
-Saved requests and partial contributions keep their original quantities; no data reset is required.
-Ballast BA12 now provides the existing character bank. Its contents and size remain character-owned.
-Vesper provides paid suit conversions. Mute's existing STALKERnet features have explicit service gates.
+The [town progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) uses 25 finite
+contacts, 49 independent branches and 417 hand-in milestones. Town compilation scales new quantities
+by the contact's effort multiplier. Fresh `v3/` IDs do not inherit old completion permissions; old
+requests and contributions remain saved history. Inventory, money and paid hideout assets are retained.
+Ballast's bank service is retired with its data preserved. Suture provides paid suit conversions;
+Technut retains painting. Mute's existing STALKERnet features have explicit service gates.
 The town service labels are included in benefit summaries; optional `plannedUnlocks` remain inactive.
 
 Progression is a top-level menu tab beside Tasks, using contact cards and the shared

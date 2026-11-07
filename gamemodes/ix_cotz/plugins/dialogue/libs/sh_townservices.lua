@@ -112,10 +112,38 @@ local function addHideoutBarter(dialogue)
 end
 
 function ix.dialogue.ConfigureTownServices(dialogue, contact)
+	if contact.id == "brass" or contact.id == "carbon" then
+		dialogue.addTopic("AmmoExchange", {
+			statement = "Can we exchange ammunition?", response = "", IsDynamic = true,
+			options = {"BackTopic"},
+			GetDynamicOptions = function(_, client, target)
+				local options = {}
+				local credits = client:GetCharacter():GetData("townAmmoExchangeRounds", {})
+				for _, exchange in ipairs(ix.townNPCs:GetAmmoExchanges(client:GetCharacter(), target:GetDisplayName())) do
+					local credit = credits[exchange.input] or 0
+					options[#options + 1] = {
+						statement = string.format("%d boxes of %s for one box of %s", exchange.boxes,
+							ix.item.list[exchange.input].name, ix.item.list[exchange.output].name)
+							.. (credit > 0 and " (" .. credit .. " rounds already handed in)" or ""),
+						topicID = "AmmoExchange", dyndata = {output = exchange.output},
+					}
+				end
+
+				return options
+			end,
+			ResolveDynamicOption = function(_, client, target, data)
+				if SERVER and type(data) == "table" then ix.townNPCs:ExchangeAmmo(client, target, data.output) end
+
+				return "AmmoExchange"
+			end,
+		})
+		for _, root in ipairs({"GREETING", "BackTopic"}) do
+			dialogue.tree[root].options[#dialogue.tree[root].options + 1] = "AmmoExchange"
+		end
+	end
 	if contact.id == "ballast" or contact.id == "cleaner" or contact.id == "ledger" then addHideoutBarter(dialogue) end
 	local topic
-	if contact.id == "ballast" then addStorage(dialogue) topic = "StorageTopic" end
-	if contact.id == "vesper" then addConversions(dialogue) topic = "ChangeSuitVariant" end
+	if contact.id == "suture" then addConversions(dialogue) topic = "ChangeSuitVariant" end
 	if not topic then return end
 	for _, root in ipairs({"GREETING", "BackTopic"}) do
 		local options = dialogue.tree[root].options

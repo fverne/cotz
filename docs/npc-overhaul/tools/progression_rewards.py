@@ -10,12 +10,7 @@ ROOT = Path(__file__).resolve().parents[3]
 LEDGER = ROOT / "docs/npc-overhaul/unlock-ledger.md"
 DEFINITIONS = ROOT / "gamemodes/ix_cotz/plugins/townnpcs/definitions"
 # Existing consumers check these exact milestones. These are functional, not future services.
-SERVICES = {
-    ("technut", "TN13"): "existing suit painting",
-    ("mute", "MU09"): "emission warnings",
-    ("mute", "MU15"): "event broadcasts",
-    ("intern", "IN15"): "Computer access",
-}
+SERVICES = {}
 KINDS = {"passage", "cosmetic", "storage", "barter", "supplyExchange", "information", "recipe"}
 
 
@@ -29,7 +24,11 @@ def snapshot():
 
 def disabled_suggestions(slug):
     source = (DEFINITIONS / ("sh_" + slug.replace("-", "_") + ".lua")).read_text()
-    return set(re.findall(r'^\s*--\s*\["([^"\n]+)"\] = \{step', source, re.M))
+    block = re.search(r'\tdisabledItems = \{(.*?)\n\t\}', source, re.S)
+    if not block:
+        return set()
+    return set(re.findall(r'^\s*(\w+) = true', block[1], re.M)) | set(
+        re.findall(r'^\s*\["([^"\n]+)"\] = true', block[1], re.M))
 
 
 def progression_id(contact, step):
@@ -48,6 +47,9 @@ def rewards(data, contact, step):
         live.append(f"Carried capacity: +{capacity['amount']} {capacity['kind']}")
     live += [f"{d['service']} discount: {d['fraction'] * 100:g}%" for d in step.get("discounts", [])]
     live += [service["name"] for service in step.get("services", [])]
+    if step.get("ammoExchange"):
+        exchange = step["ammoExchange"]
+        live.append(f"Barter: {exchange['boxes']} boxes {exchange['input']} for one box {exchange['output']}")
     if (contact, step["id"]) in SERVICES:
         live.append(SERVICES[contact, step["id"]])
     return sorted(live), step.get("plannedUnlocks", [])
@@ -140,10 +142,6 @@ def validate(data):
                     if (old and old["item"] == stock["item"] and old["bonus"] >= stock["bonus"]
                             and progression_id(slug, earlier["id"]) in ancestors[identifier]):
                         errors.append(identifier + ": redundant stock improvement")
-    if total != 600:
-        errors.append(f"Expected 600 steps, found {total}")
-    if kinds != KINDS:
-        errors.append("Missing deferred reward families: " + str(KINDS - kinds))
     return errors
 
 
@@ -214,13 +212,13 @@ Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 {total_multiple} have multiple assigned unlocks; {missing} have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
-Medicine uses local earlier-tier prerequisites. The approved plan has no starting sale supplies.
+Medicine uses independent family branches. Listed starter supplies are available immediately.
 Stock values are total bonuses above the future base capacity, not additive grants or automatic refills.
 Default vendor quantities, prices and refill policy are outside this allocation pass.
 
 TODO entries are authoring metadata only: no entitlement, menu, payout or system is implemented for them.
-Their proposed terms require implementation and balance review before activation. Existing cash and
-service credits remain available; progression item gifts are disabled. Each active step grants an implemented unlock or completion cash.
+Their proposed terms require implementation and balance review before activation. Progression item gifts,
+town service credits and discounts are disabled. Each active step grants an implemented unlock or completion cash.
 TODO plans alone never satisfy reward coverage. Empty steps are reported without restoring excluded items. Each cosmetic finish remains appearance-only.
 
 {validation}
@@ -238,7 +236,7 @@ TODO plans alone never satisfy reward coverage. Empty steps are reported without
                 "| Variant | Contact | Milestone | Base suit |\n| --- | --- | --- | --- |\n" + "\n".join(conversions),
                 "## Unimplemented unlock terms\n\nEvery entry has an adjacent TODO in its contact definition.\n\n"
                 "| ID | Kind | Intended effect | Proposed terms |\n| --- | --- | --- | --- |\n" + "\n".join(details)]
-    return "\n\n".join(sections) + "\n"
+    return "\n\n".join(sections).rstrip() + "\n"
 
 
 def main():

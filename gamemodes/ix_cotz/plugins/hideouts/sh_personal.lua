@@ -7,8 +7,11 @@ PLUGIN.personalContacts = {
 }
 
 PLUGIN.personalUnlockSteps = {
-	general = {1, 1, 3}, ammo = {1, 3}, medical = {3}, weapon = {3},
-	floor = {2, 2}, furnishing = {3},
+	general = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	ammo = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	medical = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	weapon = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	floor = {2, 4}, furnishing = {3},
 }
 PLUGIN.personalPriceMultiplier = 2.2
 PLUGIN.personalUpgradePrices = {floor = 500, furnishing = 5000}
@@ -65,9 +68,9 @@ function PLUGIN:GetPersonalUnlock(character, feature, level)
 	local steps = self.personalUnlockSteps[feature]
 	local step = feature == "claim" and contact.claimStep or steps and steps[level]
 	if not step then return false, "Further progression is not enabled yet." end
-	local id = "cotz/town/" .. contact.id .. "/" .. contact.prefix .. string.format("%02d", step)
+	local id = "cotz/town/" .. contact.id .. "/v3/hideout/" .. string.format("%02d", step)
 
-	return ix.progression.IsCompleted(character, id), "Requires " .. contact.prefix .. string.format("%02d", step) .. "."
+	return ix.progression.IsCompleted(character, id), "Requires hideout improvement " .. step .. "."
 end
 
 function PLUGIN:GetPersonalFloorLimit(record)

@@ -1,5 +1,9 @@
 # Approved NPC vendor plan
 
+Historical 4 November plan. The [7 November progression overhaul](progression-overhaul.md) supersedes
+the allocations, starting stock, milestone IDs and service ownership below. Use its current table and
+the [unlock ledger](unlock-ledger.md) for implementation.
+
 Implemented from the main planning columns of the November 2026 workbook. Optional unlock ideas remain proposals.
 
 The scientist tier is the Marsh Eco Bunker. Carbon sells the existing physical bunker access card. Actual NPC positions still require administrator placement. NPC conversation access stays independent, so existing courier assignments do not gain circular prerequisites.

@@ -7,7 +7,6 @@ local REPAIR_COST_MULTIPLIER = 2
 local SERVICE_CONTACTS = {
 	repair = { ["'Technut'"] = true, ["'Boss'"] = true },
 	treatment = { ["'Jitters'"] = true, ["'Arena Master'"] = true },
-	storage = { ["'Ballast'"] = true },
 	wish = { ["'???'"] = true },
 }
 local CREDIT_LIMITS = {repair = 20000, treatment = 5000, storage = 50000, wish = 100000}
@@ -17,12 +16,14 @@ local MAX_WISH_PRICE = 4000000
 local WISH_TYPES = {carryinc = true, far = true, fbsr = true, hp = true, weapon = true, suit = true}
 
 function ix.progression.GetServiceCredit(character, npc, service)
+	if ix.townNPCs and ix.townNPCs.byName[npc] then return 0 end
 	local credits = character:GetData(CREDIT_KEY, {}) or {}
 
 	return credits[npc .. "/" .. service] or 0
 end
 
 function ix.progression.ServiceCreditCapacity(character, npc, service)
+	if ix.townNPCs and ix.townNPCs.byName[npc] then return 0 end
 	if not SERVICE_CONTACTS[service] or not SERVICE_CONTACTS[service][npc]
 		or not ix.progression.CanUseNPC(character, npc) then return 0 end
 
@@ -118,7 +119,7 @@ end
 
 local function storageOffer(client, data)
 	local character = client:GetCharacter()
-	if not ix.progression.IsCompleted(character, "cotz/town/ballast/BA12") then
+	if not ix.townNPCs or not ix.townNPCs:HasService(character, "storage", "'Ballast'") then
 		return
 	end
 	local horizontal = data.direction == "horizontally"
@@ -219,7 +220,7 @@ function ix.progression.ResolveServiceOffer(client, target, service, data)
 	if type(data) ~= "table" then return "BackTopic" end
 	if service == "storage" and data.option == "use" then
 		return target:GetDisplayName() == "'Ballast'"
-			and ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/ballast/BA12")
+			and ix.townNPCs and ix.townNPCs:HasService(client:GetCharacter(), "storage", "'Ballast'")
 			and "OpenStorage" or "BackTopic"
 	end
 	local offer = ix.progression.BuildServiceOffer(client, target, service, data)
@@ -281,7 +282,7 @@ end
 
 function ix.progression.GetStorageOptions(client, target)
 	if target:GetDisplayName() ~= "'Ballast'"
-		or not ix.progression.IsCompleted(client:GetCharacter(), "cotz/town/ballast/BA12") then return {} end
+		or not ix.townNPCs or not ix.townNPCs:HasService(client:GetCharacter(), "storage", "'Ballast'") then return {} end
 	local options = {{statement = "Can I please see my storage?", topicID = "StorageTopic", dyndata = {option = "use"}}}
 	for _, direction in ipairs({"horizontally", "vertically"}) do
 		local data = {direction = direction}

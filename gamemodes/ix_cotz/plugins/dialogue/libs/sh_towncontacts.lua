@@ -225,7 +225,7 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 		self.response = originalResponse
 		if SERVER then target:SetNetVar("possibleJobs", contact.categories) end
 		if CLIENT and finalID and contact.dialogue.completedGreeting
-			and ix.progression.IsCompleted(client:GetCharacter(), finalID) then
+			and ix.townNPCs:IsContactCompleted(client:GetCharacter(), contact) then
 			self.response = contact.dialogue.completedGreeting
 		end
 	end

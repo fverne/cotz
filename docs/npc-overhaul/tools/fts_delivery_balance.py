@@ -242,6 +242,8 @@ def lua_text(key, text, indent=3):
 
 def apply_plan(data, rates, bands):
     import re
+    if any(step.get("branch") for contact in data["contacts"].values() for step in contact["progression"]):
+        raise ValueError("Branch requirements are authored directly. Use --inspect to review availability; legacy --write is disabled.")
     supply = totals(rates)
     pool_path = ROOT / "gamemodes/ix_cotz/plugins/progression/definitions/sh_requirementpools.lua"
     source = pool_path.read_text().split("\n\t-- FTS delivery availability bands.")[0].rstrip()

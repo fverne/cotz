@@ -231,30 +231,10 @@ check(
 	"storage still requires its access milestone"
 )
 complete(first, "cotz/town/ballast/BA12")
-ix.progression.GrantBenefits(first, "storageFixture", {
-	services = {{npc = "'Ballast'", service = "storage", amount = 300}},
-}, "once")
-local expansion = ix.progression.BuildServiceOffer(
-	first.client,
-	cleaner,
-	"storage",
-	{direction = "horizontally", cost = 0}
-)
-check(expansion.baseCost == math.Round(120 ^ (1 + 2 / 5.5)), "storage retains its existing price curve")
-ix.progression.ConfirmService({}, first.client, cleaner, "storage", {direction = "horizontally"})
-check(
-	ix.progression.ExecuteService(first.client, cleaner, "storage", true),
-	"storage credit redeems through normal expansion"
-)
-check(first:GetData("bankW") == 3, "storage grows only one step")
 first:SetData("bankW", 4)
-local retainedStorageCredit = ix.progression.GetServiceCredit(first, "'Ballast'", "storage")
-check(
-	not ix.progression.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}),
-	"maximum storage remains a hard limit"
-)
-check(ix.progression.GetServiceCredit(first, "'Ballast'", "storage") == retainedStorageCredit,
-	"full storage does not convert credit to money")
+check(not ix.progression.BuildServiceOffer(first.client, cleaner, "storage", {direction = "horizontally"}),
+	"retired bank access stays disabled even with its old completion")
+check(first:GetData("bankW") == 4, "retiring bank service preserves paid storage dimensions")
 check(
 	not ix.progression.BuildServiceOffer(first.client, wish, "wish", {type = "hp"}),
 	"wish contact still requires Computer completion"
@@ -367,6 +347,6 @@ local serviceTopic, serviceData = ix.progression.ResolveServiceOffer(
 )
 check(serviceTopic == "ConfirmRepair" and serviceData.cost == 200,
 	"service selection replaces a forged client price with the authoritative fee")
-check(ix.progression.ResolveServiceOffer(first.client, cleaner, "storage", {option = "use"}) == "OpenStorage",
-	"unlocked storage remains available through the service menu")
+check(ix.progression.ResolveServiceOffer(first.client, cleaner, "storage", {option = "use"}) == "BackTopic",
+	"retired storage is unavailable through forged service-menu requests")
 print(string.format("PASS: %d progression service checks", checks))

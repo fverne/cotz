@@ -96,6 +96,7 @@ timer = {Simple = function(_, callback) timers[#timers + 1] = callback end}
 local map, now = "rp_marsh_cs", 100
 game.GetMap = function() return map end
 CurTime = function() return now end
+ix.plugin = ix.plugin or {}
 ix.plugin.Get = function(id)
 	if id == "anomalycontroller" then
 		return {anomalydefs = {{entityname = "anom_jarka"}, {entityname = "anom_par"}}}
@@ -283,7 +284,7 @@ for slug, contact in pairs(ix.townNPCs.contacts) do
 		themedContacts = themedContacts + 1
 		for itemID in pairs(contact.courierItems) do
 			if not (contact.wantedItems or {})[itemID] and contact.enforceCatalogue
-				and not (contact.disabledItems or {})[itemID] then
+				and not (contact.disabledItems or {})[itemID] and not contact.buyAll then
 				check(ix.townNPCs:WantsCourierItem(contact, itemID, false)
 					and ix.townNPCs:CanSellItem(itemID, contact.name) == false,
 					"courier-only categories do not expand ordinary vendor assortments")
