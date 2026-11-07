@@ -4,8 +4,8 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**417 active steps; 417 have functional unlocks; 0 have TODO-only unlock plans;
-17 have multiple assigned unlocks; 0 have no assigned unlock.**
+**417 active steps; 416 have functional unlocks; 0 have TODO-only unlock plans;
+17 have multiple assigned unlocks; 1 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
 Medicine uses independent family branches. Listed starter supplies are available immediately.
@@ -38,7 +38,7 @@ Validation passed.
 | jitters | 18 | 18 | 0 | 0 |
 | latch | 12 | 12 | 0 | 0 |
 | ledger | 12 | 12 | 0 | 0 |
-| mute | 9 | 9 | 0 | 0 |
+| mute | 9 | 8 | 0 | 0 |
 | old-timer | 9 | 9 | 0 | 3 |
 | quartermaster | 13 | 13 | 0 | 0 |
 | smartass | 26 | 26 | 0 | 0 |
@@ -286,7 +286,7 @@ Validation passed.
 | mute | v3/stalkernet/networkActivity | STALKERnet activity counters | — | 1700 rubles |
 | mute | v3/stalkernet/eventBroadcasts | Event broadcasts | — | 2000 rubles |
 | mute | v3/stalkernet/networkLocation | STALKERnet location tracking | — | 2350 rubles |
-| mute | v3/stalkernet/networkRemote | STALKERnet cross-map directory | — | 2650 rubles |
+| mute | v3/stalkernet/networkRemote | — | — | 2650 rubles |
 | mute | v3/stalkernet/networkDossier | STALKERnet full career dossier | — | 3000 rubles |
 | old-timer | v3/knives/knife2 | Purchase: knife2 | — | 450 rubles |
 | old-timer | v3/knives/knife3 | Purchase: knife3 | — | 1700 rubles |

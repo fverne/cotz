@@ -154,7 +154,7 @@ local function configureProgression(dialogue, contact)
 							client:Notify("Finish or abandon your current assignment with this contact first.")
 						end
 					else
-						client:Notify("No configured field sites are available for that region yet.")
+						client:Notify("There is nowhere suitable for that work in the region just now.")
 					end
 				end
 			end
@@ -166,7 +166,10 @@ local function configureProgression(dialogue, contact)
 end
 
 local function configureDeliveries(dialogue, contact)
-	dialogue.tree.GREETING.options[#dialogue.tree.GREETING.options + 1] = "TownDeliveries"
+	for _, id in ipairs({"GREETING", "BackTopic"}) do
+		local options = dialogue.tree[id].options
+		options[#options + 1] = "TownDeliveries"
+	end
 	dialogue.addTopic("TownDeliveries", {
 		statement = "I have a delivery for you.",
 		response = contact.dialogue.delivery or "Let me see what you've brought.",
@@ -234,4 +237,5 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	configureDeliveries(dialogue, contact)
 	ix.dialogue.ConfigureTownServices(dialogue, contact)
 	ix.dialogue.ConfigureTaskRewards(dialogue)
+	ix.dialogue.ConfigureCustomization(dialogue)
 end

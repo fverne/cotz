@@ -881,7 +881,7 @@ local hiddenChoices = workDialogue.tree.TaskRewardChoices.GetDynamicOptions(nil,
 check(#hiddenChoices == 0, "unaccepted previews are absent from the supplies menu")
 viewer.client.cotzTaskPreview = {difficulty = "easy", choices = {{label = "Preview supplies"}}}
 local confirmation = dialogue.tree.ConfirmSupplyTask.GetDynamicOptions(nil, viewer.client)
-check(#confirmation == 2 and confirmation[1].statement == "Accept task"
+check(#confirmation == 2 and confirmation[1].statement == "I'll take it."
 	and confirmation[1].dyndata.choice == nil, "acceptance screen displays one assigned supply without a choice index")
 check(not ix.taskRewards.AcceptJob(viewer.client, "'Old Timer'", "easy", 900),
 	"invalid preview supply choice cannot accept a job")

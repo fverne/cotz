@@ -133,6 +133,9 @@ function ix.cotzUI.Frame(title, widthFraction, heightFraction, maxWidth)
 	end
 	resize(frame)
 	frame:MakePopup()
+	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(ix.gui.dialogue) then
+		ix.dialogue.TrackRelatedPanel(frame)
+	end
 	local scroll = frame:Add("DScrollPanel")
 	scroll:SetZPos(1)
 	scroll:Dock(FILL)
@@ -266,6 +269,14 @@ end
 function ix.cotzUI.Query(text, title, ...)
 	local frame, _, actions = dialog(title, text)
 	local options = {...}
+	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(ix.gui.dialogue) then
+		ix.dialogue.TrackRelatedPanel(frame, function()
+			frame:Close()
+			for index = 1, #options, 2 do
+				if options[index] == "Cancel" and options[index + 1] then options[index + 1]() return end
+			end
+		end)
+	end
 	for index = 1, #options, 2 do
 		local callback = options[index + 1]
 		dialogButton(actions, options[index], function()
@@ -294,6 +305,13 @@ function ix.cotzUI.StringRequest(title, text, default, onEnter, onCancel)
 		frame:Close()
 		if onCancel then onCancel(value) end
 	end)
+	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(ix.gui.dialogue) then
+		ix.dialogue.TrackRelatedPanel(frame, function()
+			local value = entry:GetValue()
+			frame:Close()
+			if onCancel then onCancel(value) end
+		end)
+	end
 	entry.OnEnter = accept
 	entry:RequestFocus()
 	entry:SelectAllText(true)

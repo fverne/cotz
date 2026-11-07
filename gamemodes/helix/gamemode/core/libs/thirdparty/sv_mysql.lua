@@ -560,7 +560,8 @@ function mysql:RawQuery(query, callback, flags, ...)
 		end
 
 		queryObj.onError = function(queryObj, errorText)
-			ErrorNoHalt(string.format("[mysql] MySQL Query Error!\nQuery: %s\n%s\n", query, errorText))
+			-- Keep the failure visible when Garry's Mod truncates a long character-save query.
+			ErrorNoHalt(string.format("[mysql] MySQL Query Error!\n%s\nQuery: %s\n", errorText, query))
 		end
 
 		queryObj:start()
@@ -568,7 +569,7 @@ function mysql:RawQuery(query, callback, flags, ...)
 		local result = sql.Query(query)
 
 		if (result == false) then
-			error(string.format("[mysql] SQL Query Error!\nQuery: %s\n%s\n", query, sql.LastError()))
+			error(string.format("[mysql] SQL Query Error!\n%s\nQuery: %s\n", sql.LastError(), query))
 		else
 			if (callback) then
 				local bStatus, value = pcall(callback, result, true, tonumber(sql.QueryValue("SELECT last_insert_rowid()")))

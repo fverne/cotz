@@ -39,9 +39,11 @@ Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing load
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.
 
-Technut's root also opens [gear customization](../gearcustomization/README.md).
-It costs 100 rubles per confirmed equipped-item appearance change and has no progression
-requirement. His separate suit-painting service retains its existing TN13 requirement.
+Technut opens the combined [gear and suit customization window](../gearcustomization/README.md)
+from his root menu. Each confirmed change costs 100 rubles. Ordinary gear has no progression
+requirement; suits retain the current painting unlock. Suture's conversions and Mute's PDA
+appearance options sit under gear customization. Ammunition exchanges sit under barter.
+These menus retain the owning service's access checks.
 
 ## Main menu and questions
 
@@ -77,6 +79,7 @@ to silent characters. Personality and conversation text remain with the individu
 From the repository root:
 
     luatex --luaonly tests/dialogue_order_spec.lua
+    luatex --luaonly tests/town_dialogue_menus_spec.lua
     luatex --luaonly tests/task_rewards_spec.lua
     luatex --luaonly tests/progression_spec.lua
 
@@ -88,7 +91,16 @@ new NPCs. Also check an NPC whose questions are locked and one with no flavour t
 Assignment details appear only while the character has an assignment from that NPC. There is no
 Claim rewards submenu: available exchanges and recoverable stored items appear directly at the main
 menu, with the existing server validation and pending reward queues. Names appear above every reply.
-Option colors distinguish work (amber), trade/rewards (green), questions (teal), and navigation (muted).
+Option colors use inventory yellow for jobs and inventory purple for progression, red for services
+and barter, teal for trading, white for flavour and other dialogue, and grey for back/goodbye.
+Categories use explicit action identities rather than substrings of topic IDs. Dynamic barters sharing
+the reward resolver declare their service category. Hovering preserves the category color.
+
+Trading and Technut's customization window open without replacing the current dialogue choices.
+Escape cancels the foremost related window or returns through the dialogue's back choice; at the
+root it says goodbye. Holding Escape for one second closes the entire interaction. Shared COTZ
+frames opened during dialogue participate in this navigation, including confirmation cancellation.
+The Escape handler remains at the original Garry's Mod hook stage after Helix plugin dispatch.
 
 Repeatable task acceptance reveals no reward choices. Once the objective is complete, the issuing
 contact reveals choices through Complete the assignment; choosing one finishes the hand-in.

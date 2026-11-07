@@ -24,12 +24,13 @@ No server deployment, first-time setup or live-save reset is part of offline ver
 ## Task feedback and hand-ins
 
 Valuable couriers list every eligible receiving contact in the confirmation and task journal.
-Map references use the cross-server display names, with built-in names available before that plugin
+Map references, including saved BSP filenames with extensions, use the cross-server display names, with built-in names available before that plugin
 loads; accepted descriptions containing BSP names are formatted without changing saved locations.
 Incoming delivery options require an actual nonempty matching item or bound parcel, rather than
 assignment state alone. Reward choices refresh immediately after the final hand-in at the issuer;
 completed field/combat work reveals its choices on returning to the issuer.
-Every objective completion sends a task-completed notification and PDA sound once. Photography
+Every objective completion sends a task-completed notification and PDA sound once. The Tasks tab shows objectives and progress without payment or reward-choice instructions.
+Photography
 shows the saved captured species/anomaly list in the journal. There is no camera HUD ledger.
 Triangulation saves the origin and compass bearing of each reading and marks those positions in
 world space until the transmitter is collected. Old coordinate-only readings remain supported.

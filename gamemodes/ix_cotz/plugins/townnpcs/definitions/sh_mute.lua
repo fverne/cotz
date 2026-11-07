@@ -258,7 +258,7 @@ PLUGIN:Register("mute", {
 		{
 			id = "v3/stalkernet/networkRemote",
 			branch = "stalkernet",
-			name = "STALKERnet cross-map directory",
+			name = "STALKERnet directory maintenance",
 			kind = "delivery",
 			requires = {"v3/stalkernet/networkLocation"},
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
@@ -278,12 +278,7 @@ PLUGIN:Register("mute", {
 				},
 			},
 			completionCash = 2650,
-			services = {
-				{
-					id = "networkRemote",
-					name = "STALKERnet cross-map directory",
-				},
-			},
+			services = {},
 		},
 		{
 			id = "v3/stalkernet/networkDossier",

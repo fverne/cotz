@@ -59,7 +59,8 @@ function methods:Remove()
 end
 methods.Close = methods.Remove
 function methods:Clear() for _, child in ipairs(self.children) do child:Remove() end self.children = {} end
-function methods:SetModel() self.Entity = entity() end
+function methods:SetModel(model) self.model = model self.Entity = entity() end
+function methods:GetModel() return self.model end
 function methods:SetText(text) self.text = text end
 function methods:AddChoice(name, id, selected)
 	self.choices = self.choices or {}
@@ -120,7 +121,8 @@ local player = {GetCharacter = function() return currentCharacter end, GetModel 
 	GetSkin = function() return 0 end, GetBodyGroups = function() return {} end,
 	GetPos = function() return position end, Notify = function() end}
 LocalPlayer = function() return player end
-local vendor = {valid = true, GetPos = function() return {} end}
+local vendor = {valid = true, GetPos = function() return {} end,
+	GetDisplayName = function() return "'Technut'" end}
 net = {receivers = {}, sent = {}}
 net.Receive = function(name, callback) net.receivers[name] = callback end
 local data, cursor, message = {}, 1
@@ -209,5 +211,31 @@ frame = frames[#frames]
 frame:Think()
 check(not find("DButton", "Apply — 100 rubles").enabled and not frame.item,
 	"An empty eligible list cannot submit a purchase")
+frame:Close()
+item.data.equip = true
+local suit = {id = 3, uniqueID = "suit", isBodyArmor = true, newModel = "suit.mdl", newSkin = 0,
+	data = {equip = true}, skincustom = {{name = "Skin 0", skingroup = 0},
+		{name = "Skin 2", skingroup = 2, modelOverride = "suit_other.mdl"}},
+	GetData = item.GetData, GetID = item.GetID, GetName = function() return "Suit" end}
+inventory.GetItems = function() return {[2] = item, [3] = suit} end
+local paintAllowed = false
+ix.townNPCs = {HasService = function() return paintAllowed end}
+ix.gearAppearance.OpenMenu(vendor)
+frame = frames[#frames]
+check(frame.item == item,
+	"ordinary gear remains available before the painting unlock")
+frame:Close()
+paintAllowed = true
+ix.gearAppearance.OpenMenu(vendor)
+frame = frames[#frames]
+frame.SelectItem(suit)
+model = find("DModelPanel")
+check(model.model == "suit.mdl" and not model.gearTree, "a suit previews on the character model without a PAC part")
+local finish = find("DComboBox")
+finish.OnSelect(finish, 2, "Finish 2", "2")
+check(model.model == "suit_other.mdl" and suit:GetData("setSkin") == nil,
+	"suit finish/model previews leave saved appearance unchanged")
+frame.SelectItem(item)
+check(model.model == "player.mdl" and model.gearTree, "switching back to gear restores the worn character preview")
 frame:Close()
 print("Gear menu: " .. checks .. " checks passed")

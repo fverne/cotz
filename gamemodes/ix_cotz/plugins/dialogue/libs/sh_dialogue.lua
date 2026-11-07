@@ -9,6 +9,7 @@ local MENU_ORDER = {
 	StorageTopic = 40,
 	PaintSuit = 45,
 	CustomizeGear = 45,
+	GearCustomizationTopic = 45,
 	ChangeSuitVariant = 46,
 	PDAAvatarTopic = 47,
 	NicknameTopic = 48,
@@ -26,9 +27,37 @@ local MENU_ORDER = {
 	BackgroundTopic = 90,
 	InterestTopic = 95,
 	QuestionsBackTopic = 890,
+	TutorialTopicBack = 890,
+	GearCustomizationBackTopic = 890,
 	BackTopic = 900,
 	GOODBYE = 1000,
 }
+
+local TOPIC_CATEGORIES = {
+	TradeTopic = "trade",
+	StartBarter = "service", AmmoExchange = "service", HideoutBarter = "service",
+	HealTopic = "service", ConfirmHeal = "service", RepairItems = "service", ConfirmRepair = "service",
+	StorageTopic = "service", OpenStorage = "service", ConfirmStorageUpgrade = "service",
+	GearCustomizationTopic = "service", CustomizeGear = "service", PaintSuit = "service",
+	PaintView = "service", ConfirmPaint = "service", ChangeSuitVariant = "service",
+	ChangeSuitVariantP2 = "service", PDAAvatarTopic = "service", RandomizePDAAvatarTopic = "service",
+	NicknameTopic = "service", WishTopic = "service", ConfirmWish = "service", HasWish = "service",
+	SpecialSaleTopic = "trade", ConfirmSpecialSale = "trade", JoinArena = "service",
+	AboutWorkTopic = "job", GetTask = "job", GetTaskByDifficulty = "job", ConfirmTask = "job",
+	ConfirmSupplyTask = "job", TownJobAction = "job", TownDeliveries = "job", TaskRewardChoices = "job",
+	AboutProgression = "progression", TownProgression = "progression", TownView = "progression",
+	TownHandIn = "progression", TownCommission = "progression", ViewProgression = "progression",
+	HandInComplexProgressionItemTopic = "progression",
+	BackTopic = "back", QuestionsBackTopic = "back", GearCustomizationBackTopic = "back",
+	TutorialTopicBack = "back", GOODBYE = "back",
+}
+
+function ix.dialogue.GetOptionCategory(topicID, option)
+	if option and type(option.data) == "table" and option.data.accepted == false then return "back" end
+	if option and option.category then return option.category end
+
+	return TOPIC_CATEGORIES[topicID] or "text"
+end
 
 function ix.dialogue.OrderOptions(options, mainMenu)
 	local indexed = {}
@@ -37,7 +66,7 @@ function ix.dialogue.OrderOptions(options, mainMenu)
 		local rank = 0
 		if mainMenu then
 			rank = MENU_ORDER[id] or 200
-		elseif id == "GOODBYE" or id == "BackTopic" or id == "QuestionsBackTopic" then
+		elseif TOPIC_CATEGORIES[id] == "back" then
 			rank = MENU_ORDER[id]
 		end
 		indexed[#indexed + 1] = {option = option, rank = rank, index = index}
@@ -104,6 +133,7 @@ local function configureQuestions(dialogue)
 		local isFlavour = FLAVOUR_TOPICS[topicID] or topicID:match("^BackgroundTopic")
 			or topicID:match("^Interest") or topicID:match("^TutorialTopic")
 		if isFlavour then
+			topic.backTopic = "QuestionsBackTopic"
 			local options = {}
 			for _, option in ipairs(topic.options) do
 				options[#options + 1] = option == "BackTopic" and "QuestionsBackTopic" or option
@@ -142,6 +172,68 @@ local function configureQuestions(dialogue)
 	})
 end
 
+local CUSTOMIZATION_TOPICS = {
+	PaintSuit = true, CustomizeGear = true, ChangeSuitVariant = true, PDAAvatarTopic = true,
+}
+
+function ix.dialogue.ConfigureCustomization(dialogue)
+	local tree = dialogue.tree
+	local choices, included = {}, {}
+	for _, id in ipairs(tree.GearCustomizationTopic and tree.GearCustomizationTopic.options or {}) do
+		if CUSTOMIZATION_TOPICS[id] and tree[id] then
+			choices[#choices + 1] = id
+			included[id] = true
+		end
+	end
+	for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+		local root = tree[rootID]
+		for _, id in ipairs(root and root.options or {}) do
+			if CUSTOMIZATION_TOPICS[id] and tree[id] and not included[id] then
+				choices[#choices + 1] = id
+				included[id] = true
+			end
+		end
+	end
+	if #choices == 0 or (#choices == 1 and included.CustomizeGear) then return end
+
+	for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+		local root = tree[rootID]
+		if root then
+			local options = {"GearCustomizationTopic"}
+			for _, id in ipairs(root.options) do
+				if not included[id] and id ~= "GearCustomizationTopic" then options[#options + 1] = id end
+			end
+			root.options = ix.dialogue.OrderOptions(options, true)
+		end
+	end
+	for id, topic in pairs(tree) do
+		if included[id] or id == "ConfirmPaint" or id == "PaintView" or id == "NotEnoughMoneyPaint"
+			or id == "ChangeSuitVariantP2" or id == "NotEnoughMoneySuitVariantChange"
+			or id == "RandomizePDAAvatarTopic" then
+			topic.returnTopic = "GearCustomizationBackTopic"
+			for index, option in ipairs(topic.options or {}) do
+				if option == "BackTopic" then topic.options[index] = "GearCustomizationBackTopic" end
+			end
+		end
+	end
+	local options = ix.dialogue.OrderOptions(choices)
+	options[#options + 1] = "BackTopic"
+	dialogue.addTopic("GearCustomizationTopic", {
+		statement = "Can you customise my gear?",
+		options = options,
+		ShouldAdd = function(_, client, target)
+			for _, id in ipairs(choices) do
+				if tree[id]:ShouldAdd(client, target) then return true end
+			end
+
+			return false
+		end,
+	})
+	dialogue.addTopic("GearCustomizationBackTopic", {
+		statement = "Back to the gear.", options = options,
+	})
+end
+
 function ix.dialogue.LoadFromDir(directory)
 	for k, v in ipairs(file.Find(directory.."/*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
@@ -156,6 +248,8 @@ function ix.dialogue.LoadFromDir(directory)
 			DIALOGUE.addTopic = function(topicID, data)
 				local topicData = {
 					statement = data.statement or "",
+					category = data.category,
+					quickAction = data.quickAction or topicID == "TradeTopic",
 					response = data.response or "",
 					preCallback = data.preCallback,
 					postCallback = data.postCallback,
@@ -175,6 +269,7 @@ function ix.dialogue.LoadFromDir(directory)
 
 			if ix.dialogue.ConfigureTaskRewards then ix.dialogue.ConfigureTaskRewards(DIALOGUE) end
 			configureQuestions(DIALOGUE)
+			ix.dialogue.ConfigureCustomization(DIALOGUE)
 
 			DIALOGUE.name = DIALOGUE.name or "Unknown"
 

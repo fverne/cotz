@@ -32,7 +32,7 @@ DIALOGUE.addTopic("NicknameTopic", {
 	},
 	preCallback = function(self, client, target)
 		if CLIENT then
-			Derma_StringRequest(
+			ix.cotzUI.StringRequest(
 				"Edit Nickname",
 				"Edit your nickname. Length must be between 4 and 16 characters.",
 				"",

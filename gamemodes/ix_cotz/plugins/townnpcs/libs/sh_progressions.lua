@@ -2,7 +2,6 @@ local PLUGIN = PLUGIN
 
 local function buildResponse(self, npc, status, character)
 	local text = ix.progression.BuildDeliveryResponse(self, npc, status, character)
-	if self.townObjective then text = text .. "\n\nObjective: " .. self.townObjective end
 	local label = self.townKind == "field" and "Field commission completed:" or "Qualifying jobs completed:"
 	if self.townKind == "arena" then label = "Eligible bouts completed:" end
 

@@ -500,6 +500,27 @@ reconnected.data = copy(reader.data)
 check(#ix.progression.GetKnownActiveProgressions(reconnected, "Discovery") == 2,
 	"discovery survives character restoration")
 
+local journalOwner = character()
+ix.progression.Register("journalRewardsFixture", {
+	name = "Workshop request", briefing = "Bring the requested supplies.", keyNpc = "'Cleaner'",
+	progMap = currentMap, defaultActive = true,
+	requirementSlots = {{pool = "fixture", quantity = 1}},
+	BuildResponse = ix.progression.BuildDeliveryResponse,
+	vendorUnlocks = {{npc = "'Cleaner'", args = {"artifact_bolt"}}},
+	stockUnlocks = {{npc = "'Cleaner'", items = {"artifact_bolt"}, bonus = 2}}, completionCash = 200,
+})
+ix.progression.InitializeCharacterProgression(journalOwner)
+local request = ix.progression.definitions.journalRewardsFixture
+local journal = ix.progression.DescribeTask(request, request.keyNpc, {}, journalOwner)
+local requiredAt, rewardsAt = journal:find("REQUIRED ITEMS:", 1, true), journal:find("Rewards:", 1, true)
+check(requiredAt and rewardsAt and requiredAt < rewardsAt, "requirements precede a distinct Rewards section")
+check(journal:find("Purchase access:", 1, true) > rewardsAt
+	and journal:find("Stock capacity:", 1, true) > rewardsAt
+	and journal:find("200 rubles", 1, true) > rewardsAt,
+	"purchase access, stock capacity and money all appear under Rewards")
+check(not ix.progression.BuildDeliveryResponse(request, request.keyNpc, {}, journalOwner):find("Purchase access:", 1, true),
+	"required-item text never includes purchase rewards")
+
 ix.progression = {definitions = ix.progression.definitions}
 SERVER, CLIENT = false, true
 for _, library in ipairs({"sh_storage", "sh_progression", "sh_requirements", "sh_expansion", "sh_services"}) do

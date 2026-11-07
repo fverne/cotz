@@ -95,7 +95,7 @@ local function kitOptions(character, npc, options)
 				options[#options + 1] = {
 					statement = "Redeem " .. item:GetName() .. ": " .. choice.label,
 					topicID = "TaskRewardChoices",
-					dyndata = {kind = "kit", item = id, choice = index, label = choice.label},
+					category = "service", dyndata = {kind = "kit", item = id, choice = index, label = choice.label},
 				}
 			end
 		end
@@ -112,7 +112,7 @@ local function barterOptions(character, npc, options)
 					statement = "Barter " .. (barter.reqItem[2] or 1) .. "x "
 						.. ix.item.list[barter.reqItem[1]].name .. " for " .. choice.label,
 					topicID = "TaskRewardChoices",
-					dyndata = {kind = "barter", key = id, choice = index, label = choice.label},
+					category = "service", dyndata = {kind = "barter", key = id, choice = index, label = choice.label},
 				}
 			end
 		end
@@ -140,9 +140,8 @@ local function configureJobPreview(dialogue)
 			if type(pool) == "table" and #pool > 0 then
 				local preview = ix.taskRewards.PreviewJob(character, target:GetDisplayName(), difficulty, pool)
 				if preview then
-					local definition = ix.jobs.list[preview.identifier]
 					local label = difficulty:gsub("^%l", string.upper) .. " — "
-						.. string.format(definition.name, preview.numberRec)
+						.. ix.jobs.getFormattedName(preview)
 						.. "\nPayment: " .. preview.moneyReward .. " rubles"
 					rows[#rows + 1] = {difficulty = difficulty, label = label}
 				end
@@ -215,7 +214,7 @@ local function configureJobPreview(dialogue)
 		GetDynamicOptions = function(_, client)
 			local preview = client.cotzTaskPreview or {}
 			local options = {}
-			options[1] = {statement = "Accept task", topicID = "ConfirmSupplyTask",
+			options[1] = {statement = "I'll take it.", topicID = "ConfirmSupplyTask",
 				dyndata = {difficulty = preview.difficulty}}
 			options[#options + 1] = {statement = "I'll pass.", topicID = "BackTopic"}
 

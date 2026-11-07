@@ -34,6 +34,7 @@ dofile(base .. "jobsystem/libs/sh_regionaljobs.lua")
 dofile(base .. "jobsystem/libs/sh_fieldtasks.lua")
 ix.dialogue.ConfigureTownServices = function() end
 ix.dialogue.ConfigureTaskRewards = function() end
+ix.dialogue.ConfigureCustomization = function() end
 dofile(base .. "dialogue/libs/sh_towncontacts.lua")
 local inventory, jobs = {items = {}}, {}
 function inventory:GetItems() return self.items end
@@ -99,4 +100,9 @@ check(incoming.ShouldAdd(nil, client) and #incoming.GetDynamicOptions(nil, clien
 	"the bound parcel exposes exactly one physical delivery option")
 check(not incoming.GetDynamicOptions(nil, client)[1].dyndata.valuable,
 	"physical parcels use the cargo hand-in rather than the valuable hand-in")
+check(ix.jobs.FormatMapNames("Return to rp_marsh_cs.bsp, then rp_waystation.")
+	== "Return to Swamps, then Waystation.", "displayed map names hide BSP filenames and extensions")
+ix.jobs.list.journalFixture = {name = "Bring %d supplies", desc = "Bring %d supplies to Swamps."}
+local journal = ix.jobs.getFormattedDesc({identifier = "journalFixture", numberRec = 2, moneyReward = 1000}, true)
+check(journal == "Bring 2 supplies to Swamps.", "the task journal can show the objective without payment or reward instructions")
 print(string.format("PASS: %d contact job flow checks", checks))

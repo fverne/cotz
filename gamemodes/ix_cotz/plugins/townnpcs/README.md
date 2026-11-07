@@ -800,3 +800,20 @@ region and recipient instructions. Optional `jobTerms` replaces the spoken payme
 contact's currently active topics for the character's separate Progression tab.
 Wake owns new information couriers; Brass has no new ordinary work and retains accepted assignments.
 See `tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec.lua` and `tests/progression_spec.lua`.
+
+## Dialogue navigation and roster visibility
+
+Dialogue uses explicit action colors, with jobs/progression matching inventory yellow/purple.
+All 27 contacts keep flavour under questions, appearance services under customization, and ammunition
+exchanges under barter. Incoming deliveries remain on both root variants. Technut's existing gear
+window now also paints unlocked suits; Suture retains conversions and Mute retains PDA appearance work.
+Escape returns through menus, and a one-second hold closes the interaction.
+
+The scoreboard defaults to all servers and its local-area toggle is always available. Remote roster
+identities bypass the former networkRemote gate; search, squad, rank, activity, location and dossier
+gates remain independent. The saved networkRemote milestone ID and its cash reward remain, now titled
+directory maintenance, without advertising an already available directory as an unlock.
+Run `tests/town_dialogue_menus_spec.lua`, `tests/dialogue_order_spec.lua`,
+`tests/gear_customization_spec.lua` and `tests/squads_menu_scoreboard_spec.lua` with `luatex --luaonly`.
+Verify Escape presses/holds, modal focus, suit previews and confirmation, trade returns and fresh-character
+cross-server roster visibility in multiplayer after deploying matching server/client code.

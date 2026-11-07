@@ -39,12 +39,13 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 	local line = character and ix.progression.GetLine(character, self.id) or status or {}
 	local parts = {self.name .. "\n"}
 	if self.briefing then parts[#parts + 1] = self.briefing end
+	if self.townObjective then parts[#parts + 1] = "\nObjective: " .. self.townObjective end
 	if self.stageCount then
 		parts[#parts + 1] = string.format("Part %d of %d. "
 			.. "Final equipment authorisation requires the complete programme.", self.stageIndex, self.stageCount)
 	end
 	if line.completed then
-		parts[#parts + 1] = "Programme complete. Claim any pending item rewards below."
+		parts[#parts + 1] = "Request fulfilled."
 	elseif self.progressthresholds then
 		local value = line.value or 0
 		parts[#parts + 1] = string.format("Qualified matches completed: %d/%d.", value,
@@ -60,14 +61,6 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 		for _, requirement in ipairs(requirements) do
 			parts[#parts + 1] = requirement
 		end
-	end
-	for _, unlock in ipairs(self.vendorUnlocks or {}) do
-		parts[#parts + 1] = "Purchase access: " .. ix.item.list[unlock.args[1]].name
-	end
-	for _, unlock in ipairs(self.stockUnlocks or {}) do
-		parts[#parts + 1] = string.format("Stock reward: +%d maximum stock for selected items.",
-			unlock.bonus)
-		parts[#parts + 1] = "Refill speed unchanged; no automatic refill."
 	end
 
 	return table.concat(parts, "\n")
@@ -100,6 +93,13 @@ end
 
 function ix.progression.GetBenefitSummary(definition, character)
 	local parts = benefitText(definition.completionBenefits or {})
+	for _, unlock in ipairs(definition.vendorUnlocks or {}) do
+		parts[#parts + 1] = "Purchase access: " .. ix.item.list[unlock.args[1]].name
+	end
+	for _, unlock in ipairs(definition.stockUnlocks or {}) do
+		parts[#parts + 1] = string.format("Stock capacity: %d more of the selected goods; deliveries arrive as before",
+			unlock.bonus)
+	end
 	if definition.ammoExchange then
 		local exchange = definition.ammoExchange
 		parts[#parts + 1] = string.format("Ammunition exchange: %d boxes of %s for one box of %s",
@@ -111,8 +111,8 @@ function ix.progression.GetBenefitSummary(definition, character)
 	end
 	if definition.capacityReward then
 		local reward = definition.capacityReward
-		local unit = reward.kind == "weight" and "kg carry capacity" or "inventory row"
-		parts[#parts + 1] = string.format("Permanent character upgrade: +%d %s", reward.amount, unit)
+		parts[#parts + 1] = reward.kind == "weight"
+			and string.format("Carry %d kg more", reward.amount) or "More room in your pack"
 	end
 	if definition.completionCash and definition.completionCash > 0 then
 		parts[#parts + 1] = string.format("%d rubles on completion", definition.completionCash)
@@ -138,19 +138,11 @@ end
 
 function ix.progression.DescribeTask(definition, npcName, status, character)
 	local line = ix.progression.GetLine(character, definition.id)
-	if line.completed then
-		return ix.progression.BuildDeliveryResponse(definition, npcName, status, character)
-	end
-	local text = definition:BuildResponse(npcName, status, character)
+	local text = line.completed and ix.progression.BuildDeliveryResponse(definition, npcName, status, character)
+		or definition:BuildResponse(npcName, status, character)
 	local benefits = ix.progression.GetBenefitSummary(definition, character)
-	if benefits ~= "" then text = text .. "\n\nRewards: " .. benefits end
-	-- Town responses already include the shared stock reward summary.
-	if definition.BuildResponse ~= ix.progression.BuildDeliveryResponse and not definition.townContact then
-		for _, reward in ipairs(definition.stockUnlocks or {}) do
-			text = text .. string.format("\nStock reward: +%d maximum stock "
-				.. "for selected items; refill speed unchanged.", reward.bonus)
-		end
-	end
+	if benefits ~= "" then text = text .. "\n\nRewards:\n" .. benefits end
+	if ix.jobs and ix.jobs.FormatMapNames then text = ix.jobs.FormatMapNames(text) end
 
 	return text
 end

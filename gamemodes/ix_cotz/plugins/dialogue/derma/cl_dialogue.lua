@@ -3,20 +3,68 @@ local gradient = ix.util.GetMaterial("vgui/gradient-d")
 local OPTION_INPUT_DELAY = 0.6
 local DIALOGUE_MATERIAL = ix.util.GetMaterial("cotz/panels/dialogue.png")
 
+local ESCAPE_HOLD_TIME = 1
+local escapeStarted
+local escapePanel
+local relatedPanels = {}
 local OPTION_COLORS = {
-	text = Color(216, 215, 201), hover = Color(255, 255, 255),
-	work = Color(193, 164, 96), trade = Color(145, 179, 126),
-	question = Color(109, 176, 179), back = Color(153, 157, 145),
+	text = Color(255, 255, 255),
+	job = Color(255, 192, 0), progression = Color(127, 0, 255),
+	service = Color(206, 108, 86), trade = Color(109, 176, 179), back = Color(153, 153, 153),
 }
 
-local function optionColor(topicID)
-	if topicID == "GOODBYE" or topicID:find("Back", 1, true) then return OPTION_COLORS.back end
-	if topicID:find("Trade", 1, true) or topicID == "TaskRewardChoices" then return OPTION_COLORS.trade end
-	if topicID:find("Town", 1, true) or topicID:find("Task", 1, true)
-		or topicID == "AboutWorkTopic" then return OPTION_COLORS.work end
-	if topicID == "QuestionsTopic" then return OPTION_COLORS.question end
+local function optionColor(topicID, option)
+	return OPTION_COLORS[ix.dialogue.GetOptionCategory(topicID, option)] or OPTION_COLORS.text
+end
 
-	return OPTION_COLORS.text
+function ix.dialogue.TrackRelatedPanel(panel, cancel)
+	for index = #relatedPanels, 1, -1 do
+		local entry = relatedPanels[index]
+		if entry.panel == panel then entry.cancel = cancel return end
+		if not IsValid(entry.panel) then table.remove(relatedPanels, index) end
+	end
+	relatedPanels[#relatedPanels + 1] = {panel = panel, cancel = cancel}
+end
+
+local function restoreRelatedFocus()
+	for index = #relatedPanels, 1, -1 do
+		local panel = relatedPanels[index].panel
+		if IsValid(panel) then panel:MakePopup() return end
+	end
+	if IsValid(ix.gui.dialogue) then ix.gui.dialogue:MakePopup() end
+end
+
+local function closeRelated(force)
+	for index = #relatedPanels, 1, -1 do
+		local entry = relatedPanels[index]
+		if not IsValid(entry.panel) then
+			table.remove(relatedPanels, index)
+		elseif force or entry.panel:IsVisible() then
+			if entry.cancel then entry.cancel() else entry.panel:Close() end
+			table.remove(relatedPanels, index)
+			if not force then
+				restoreRelatedFocus()
+
+				return true
+			end
+		end
+	end
+end
+
+local function escapeThink()
+	if not escapeStarted then return end
+	if not input.IsKeyDown(KEY_ESCAPE) then
+		escapeStarted = nil
+		escapePanel = nil
+
+		return
+	end
+	if RealTime() - escapeStarted < ESCAPE_HOLD_TIME then return end
+	closeRelated(true)
+	if IsValid(ix.gui.vendor) then ix.gui.vendor:Close() end
+	if IsValid(escapePanel) and not escapePanel.exiting then escapePanel:exit() end
+	escapeStarted = nil
+	escapePanel = nil
 end
 
 function PANEL:Init()
@@ -79,6 +127,7 @@ function PANEL:SelectOption(optionIndex)
 end
 
 function PANEL:OnKeyCodePressed(keyCode)
+	if keyCode == KEY_ESCAPE then return end
 	if self.loading or self.exiting or not self.buttonList then return end
 
 	local digit
@@ -118,8 +167,31 @@ end
 function PANEL:startTopic(topicID, dynamicData)
 	if self.exiting then return end
 
+	local topic = self.tree[topicID]
+	if not topic then return end
+	if topic.quickAction then
+		if topic.preCallback then
+			topic.preCallback(topic, LocalPlayer(), self.target)
+			net.Start("ixPreCallback")
+			net.WriteString(self.treeID)
+			net.WriteString(topicID)
+			net.WriteEntity(self.target)
+			net.SendToServer()
+		end
+		self:dialogue(LocalPlayer():GetCharacter():GetName(), topic.statement, true)
+		self:dialogue(self:targetName(), topic.response, true)
+		if topic.postCallback then
+			topic.postCallback(topic, LocalPlayer(), self.target)
+			net.Start("ixPostCallback")
+			net.WriteString(self.treeID)
+			net.WriteString(topicID)
+			net.WriteEntity(self.target)
+			net.SendToServer()
+		end
+
+		return
+	end
 	self.currentTopicID = topicID
-	topic = self.tree[topicID]
 
 	self.options:Clear()
 	self.buttonList = {}
@@ -183,15 +255,9 @@ function PANEL:dialogue(name, message, instant, color, topicID)
 
 	scrollToBottom()
 
-	if name == LocalPlayer():GetCharacter():GetName() then
-		self.nametitle:SetTextColor(Color(150, 200, 150))
-	else
-		self.nametitle:SetTextColor(Color(206, 108, 86))
-	end
+	self.nametitle:SetTextColor(OPTION_COLORS.text)
 
-	if color then
-		self.message:SetTextColor(color)
-	end
+	self.message:SetTextColor(OPTION_COLORS.text)
 
 	local parseMessage = "''" .. message .. "''"
 
@@ -279,7 +345,7 @@ function PANEL:prepareOptions(options)
 			self.buttonList[k]:Dock(TOP)
 			self.buttonList[k]:DockMargin(4, 0, 4, 4)
 			self.buttonList[k]:SetText(k .. ". " .. topic.statement)
-			self.buttonList[k]:SetTextColor(optionColor(topicID))
+			self.buttonList[k]:SetTextColor(optionColor(topicID, topic))
 			self.buttonList[k]:SetFont("ixSmallFont")
 			self.buttonList[k]:SetWrap(true)
 			self.buttonList[k]:SetAutoStretchVertical(true)
@@ -287,12 +353,9 @@ function PANEL:prepareOptions(options)
 			local baseThink = self.buttonList[k].Think
 			self.buttonList[k].Think = function()
 				baseThink(self.buttonList[k])
-				if self.buttonList[k]:IsHovered() then
-					self.buttonList[k]:SetTextColor(OPTION_COLORS.hover)
-				else
-					self.buttonList[k]:SetTextColor(optionColor(topicID))
-				end
+				self.buttonList[k]:SetTextColor(optionColor(topicID, topic))
 			end
+			self.buttonList[k].topicID = topicID
 			self.buttonList[k].DoClick = function()
 				self:startTopic(topicID)
 			end
@@ -305,7 +368,7 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 	local combined = {}
 	for _, data in ipairs(dynamicOptions or {}) do
 		combined[#combined + 1] = {topicID = data.topicID, statement = data.statement,
-			data = data.dyndata, dynamic = true}
+			data = data.dyndata, category = data.category or (self.tree[data.topicID] or {}).category, dynamic = true}
 	end
 	for _, topicID in ipairs(normalOptions or {}) do
 		combined[#combined + 1] = {topicID = topicID}
@@ -319,7 +382,7 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 			label:Dock(TOP)
 			label:DockMargin(4, 0, 4, 4)
 			label:SetText(#self.buttonList .. ". " .. statement)
-			label:SetTextColor(optionColor(option.topicID))
+			label:SetTextColor(optionColor(option.topicID, option))
 			label:SetFont("ixSmallFont")
 			label:SetWrap(true)
 			label:SetAutoStretchVertical(true)
@@ -327,8 +390,9 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 			local baseThink = label.Think
 			label.Think = function()
 				baseThink(label)
-				label:SetTextColor(label:IsHovered() and OPTION_COLORS.hover or optionColor(option.topicID))
+				label:SetTextColor(optionColor(option.topicID, option))
 			end
+			label.topicID = option.topicID
 			label.DoClick = function()
 				if option.dynamic then
 					local nextTopic, data = self:ResolveDynamicOption(option.topicID,
@@ -357,7 +421,28 @@ function PANEL:ResolveDynamicOption(topicID, client, target, dynamicData)
 		net.SendToServer()
 	end
 
+	if ret == "BackTopic" and topic.returnTopic then ret = topic.returnTopic end
+
 	return ret, data
+end
+
+function PANEL:GoBack()
+	self.optionInput = nil
+	self.optionInputDeadline = nil
+	if self.loading or not self.tree then self:exit() return end
+	if self.currentTopicID == "GREETING" or self.currentTopicID == "BackTopic" then
+		if self.tree.GOODBYE then self:startTopic("GOODBYE") else self:exit() end
+
+		return
+	end
+	for _, id in ipairs({"QuestionsBackTopic", "GearCustomizationBackTopic", "BackTopic"}) do
+		for _, button in ipairs(self.buttonList or {}) do
+			if button.topicID == id then button:DoClick() return end
+		end
+	end
+	local current = self.tree[self.currentTopicID]
+	local backTopic = current and current.backTopic or "BackTopic"
+	if self.tree[backTopic] then self:startTopic(backTopic) else self:exit() end
 end
 
 function PANEL:exit()
@@ -400,21 +485,30 @@ end
 
 vgui.Register("ixDialogue", PANEL, "EditablePanel")
 
+-- Keep this at the original hook stage, after Helix plugins (including chatbox).
 hook.Add("OnPauseMenuShow", "cotz/dialogue/escape-exit", function()
+	if escapeStarted then return false end
+	local panel = ix.gui.dialogue
 	local vendor = ix.gui.vendor
+	if closeRelated(false) then
+		escapeStarted, escapePanel = RealTime(), panel
+
+		return false
+	end
 	if IsValid(vendor) and vendor:IsVisible() then
+		escapeStarted, escapePanel = RealTime(), panel
 		vendor:Close()
 
 		return false
 	end
-
-	local panel = ix.gui.dialogue
 	if not IsValid(panel) or panel.exiting or not panel:HasFocus() then return end
-
-	panel:exit()
+	escapeStarted, escapePanel = RealTime(), panel
+	panel:GoBack()
 
 	return false
 end)
+
+hook.Add("Think", "cotz/dialogue/escape-hold", escapeThink)
 
 net.Receive("ixDialogue", function()
 	local target = net.ReadEntity()

@@ -32,7 +32,7 @@ function PLUGIN:GetEligibleItem(client, target, itemID)
 	local item = inventory:GetItems()[itemID]
 	local equipment = ix.plugin.Get("equipmentslots")
 	if not item or item.invID ~= inventory:GetID() or not item:GetData("equip", false)
-		or not ix.gearAppearance.IsSupported(item) or IsValid(item.entity)
+		or not ix.gearAppearance.CanCustomize(item, character, target) or IsValid(item.entity)
 		or client:GetNetVar("ix_hasBlackScreen", false)
 		or (equipment and equipment:GetPending(client)) then return end
 
@@ -68,7 +68,8 @@ function PLUGIN:CreateQuote(client, target, itemID, state)
 	local quote = {
 		token = self.nextQuote, character = character, target = target, item = item, itemID = itemID,
 		appearance = appearance, before = before, expires = CurTime() + QUOTE_LIFETIME,
-		definition = util.CRC(util.TableToJSON(item.appearanceCustomization)),
+		suitSkin = item:GetData("setSkin"), suitModel = item:GetData("setSkinOverrideModel"),
+		definition = util.CRC(util.TableToJSON({ix.gearAppearance.GetConfiguration(item), item.newModel})),
 	}
 	self.quotes[client] = quote
 
@@ -83,19 +84,32 @@ function PLUGIN:Confirm(client, token, accepted)
 	if not accepted then return false, "Customization cancelled." end
 	local item, character = self:GetEligibleItem(client, quote.target, quote.itemID)
 	if item ~= quote.item or character ~= quote.character or quote.expires <= CurTime() then
-		return false, "Your gear or vendor session changed. Please try again."
+		return false, "Bring your gear back to Technut for another look."
 	end
-	if quote.definition ~= util.CRC(util.TableToJSON(item.appearanceCustomization))
+	if quote.definition ~= util.CRC(util.TableToJSON({ix.gearAppearance.GetConfiguration(item), item.newModel}))
 		or quote.before ~= ix.gearAppearance.Fingerprint(item)
+		or quote.suitSkin ~= item:GetData("setSkin")
+		or quote.suitModel ~= item:GetData("setSkinOverrideModel")
 		or not ix.gearAppearance.Normalize(item, quote.appearance, true) then
 		return false, "The appearance changed. Please preview it again."
 	end
 	if not character:HasMoney(ix.gearAppearance.price) then return false, "You need 100 rubles." end
-	item:SetData("gearAppearance", quote.appearance)
+	if item.isBodyArmor then
+		for _, paint in ipairs(ix.gearAppearance.GetConfiguration(item).skins) do
+			if paint.id == quote.appearance.skin then
+				item:SetData("setSkin", paint.skin)
+				item:SetData("setSkinOverrideModel", paint.model)
+				character:SetModel(paint.model or item.newModel)
+				client:SetSkin(paint.skin)
+			end
+		end
+	else
+		item:SetData("gearAppearance", quote.appearance)
+	end
 	character:TakeMoney(ix.gearAppearance.price)
 	character:Save()
 	-- Refresh the visual only; equip callbacks also change gameplay state.
-	client:AddPart(item.uniqueID, item)
+	if not item.isBodyArmor then client:AddPart(item.uniqueID, item) end
 
 	return true, "Gear customized for 100 rubles."
 end

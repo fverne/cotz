@@ -176,6 +176,56 @@ check(not service:Confirm(client, quote.token, true) and character.money == 400,
 	"Replaying a consumed confirmation cannot charge twice")
 check(not service:CreateQuote(client, vendor, 1, selected), "Unchanged selections cannot be purchased")
 
+-- Suit painting shares the quote boundary and keeps the existing saved skin fields.
+local paintAllowed = false
+ix.townNPCs = {HasService = function(_, _, name, npc)
+	return paintAllowed and name == "painting" and npc == "'Technut'"
+end}
+local function suitFixture()
+	local player, target, suit, owner, inv, data, pos = fixture()
+	suit.isBodyArmor, suit.newModel, suit.newSkin = true, "suit.mdl", 0
+	suit.appearanceCustomization, suit.pacData = nil, nil
+	suit.skincustom = {
+		[1] = {name = "Skin 0", skingroup = 0},
+		[5] = {name = "Skin 3", skingroup = 3, modelOverride = "alternate.mdl"},
+	}
+	owner.SetModel = function(self, model) self.model = model end
+	player.SetSkin = function(self, skin) self.skin = skin end
+
+	return player, target, suit, owner, inv, data, pos
+end
+local painter, workshop, suit, wearer, suitInventory, suitData = suitFixture()
+local paint = {skin = "3", bodygroups = {}}
+check(not ix.gearAppearance.IsSupported(suit), "suit paints do not enter PAC gear descriptor handling")
+check(not service:CreateQuote(painter, workshop, 1, paint), "suit painting retains its progression gate")
+paintAllowed = true
+check(ix.gearAppearance.Normalize(suit).skin == "0", "existing suits use their saved/default skin")
+check(not service:CreateQuote(painter, workshop, 1, {skin = "2", bodygroups = {}}),
+	"suit painting rejects finishes outside the item's sparse allowlist")
+local paintQuote = assert(service:CreateQuote(painter, workshop, 1, paint))
+check(suitData.setSkin == nil and wearer.money == 500, "suit preview and quoting preserve saved state and money")
+paintAllowed = false
+check(not service:Confirm(painter, paintQuote.token, true) and wearer.money == 500,
+	"confirmation rechecks the suit painting unlock")
+paintAllowed = true
+paintQuote = assert(service:CreateQuote(painter, workshop, 1, paint))
+check(service:Confirm(painter, paintQuote.token, true), "a confirmed approved suit finish is applied")
+check(suitData.setSkin == 3 and suitData.setSkinOverrideModel == "alternate.mdl"
+	and wearer.model == "alternate.mdl" and painter.skin == 3,
+	"painting preserves the suit's existing skin/model-override persistence")
+check(wearer.money == 400 and wearer.charges == 1 and painter.parts == 0 and suitData.gearAppearance == nil,
+	"painting charges once and never equips a suit as a PAC part")
+check(not service:Confirm(painter, paintQuote.token, true) and wearer.money == 400,
+	"suit paint confirmations cannot be replayed")
+paintQuote = assert(service:CreateQuote(painter, workshop, 1, {skin = "0", bodygroups = {}}))
+check(service:Confirm(painter, paintQuote.token, true) and suitData.setSkinOverrideModel == nil
+	and wearer.model == "suit.mdl" and painter.skin == 0,
+	"returning to a normal finish clears the old model override")
+paintQuote = assert(service:CreateQuote(painter, workshop, 1, paint))
+suitData.equip = false
+check(not service:Confirm(painter, paintQuote.token, true) and wearer.money == 300,
+	"unequipping a quoted suit prevents payment and changes")
+
 local failures = {
 	{"insufficient funds", function(_, _, _, char) char.money = 99 end},
 	{"lost vendor access", function(_, target) target.access = false end},

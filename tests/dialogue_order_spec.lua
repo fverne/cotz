@@ -107,13 +107,14 @@ check(not ix.dialogue.list.locked.tree.QuestionsTopic
 	and hasOption(ix.dialogue.list.locked.tree.GREETING, "Introduction"),
 	"actionable locked-access introductions remain at the root")
 net = {Receive = function() end}
-local pauseMenuHook
+local pauseMenuHook, escapeThink
 hook.Add = function(event, _, callback)
 	if event == "OnPauseMenuShow" then pauseMenuHook = callback end
+	if event == "Think" then escapeThink = callback end
 end
 local panelType
 vgui = {Register = function(_, panel) panelType = panel end}
-Color = function() return {} end
+Color = function(r, g, b) return {r = r, g = g, b = b} end
 dofile("gamemodes/ix_cotz/plugins/dialogue/derma/cl_dialogue.lua")
 LocalPlayer = function() return {} end
 Color = function() return {} end
@@ -127,7 +128,7 @@ local panel = setmetatable({
 	options = {Add = function()
 		local label = {
 			Dock = function() end, DockMargin = function() end,
-			SetTextColor = function() end, SetFont = function() end,
+			SetTextColor = function(self, color) self.color = color end, SetFont = function() end,
 			SetMouseInputEnabled = function() end,
 			SetWrap = function(self, value) self.wrap = value end,
 			SetAutoStretchVertical = function(self, value) self.autoStretch = value end,
@@ -167,6 +168,8 @@ check(clicked[1] == "GOODBYE", "the final dynamic exit still closes through GOOD
 KEY_0, KEY_9, KEY_PAD_0, KEY_PAD_9 = 1, 10, 37, 46
 IsValid = function(value) return type(value) == "table" end
 local now = 0
+local escapeDown = false
+input = {IsKeyDown = function() return escapeDown end}
 RealTime = function() return now end
 gui = {EnableScreenClicker = function() end}
 panel.HasFocus = function() return true end
@@ -283,6 +286,7 @@ closingPanel:dialogue("NPC", "late response", true)
 check(messages == 1 and animations == 1, "repeated close and late responses cannot restart a closing dialogue")
 finishClosing()
 check(removed, "the closing animation removes the dialogue panel")
+escapeThink()
 check(pauseMenuHook() == nil, "Escape leaves the pause menu available when dialogue is closed")
 ix.gui.dialogue = {HasFocus = function() return false end}
 check(pauseMenuHook() == nil, "Escape does not close dialogue behind another focused menu")
@@ -296,6 +300,7 @@ local dialogueFocused, dialogueClosed, tradeClosed = false, 0, 0
 ix.gui.dialogue = {
 	HasFocus = function() return dialogueFocused end,
 	RequestFocus = function() dialogueFocused = true end,
+	GoBack = function() dialogueClosed = dialogueClosed + 1 end,
 	exit = function() dialogueClosed = dialogueClosed + 1 end,
 }
 local closeMessage
@@ -312,6 +317,76 @@ check(pauseMenuHook() == false and tradeClosed == 1 and dialogueClosed == 0,
 check(closeMessage == "ixVendorAdvClose" and ix.gui.vendor == nil,
 	"closing trading runs its server cleanup and clears the vendor panel reference")
 check(dialogueFocused, "closing trading returns keyboard focus to the dialogue")
+escapeThink()
 check(pauseMenuHook() == false and dialogueClosed == 1 and tradeClosed == 1,
 	"the second Escape closes the dialogue without closing trading again")
+escapeThink()
+-- Categories are exact action identities: flavour topics containing Town stay white.
+check(ix.dialogue.GetOptionCategory("InterestTownRelationsTopic") == "text",
+	"town relationship flavour is ordinary white dialogue")
+check(ix.dialogue.GetOptionCategory("BackgroundTopic") == "text", "background is not a back action")
+check(ix.dialogue.GetOptionCategory("QuestionsTopic") == "text", "questions are white")
+check(ix.dialogue.GetOptionCategory("TownProgression") == "progression", "progression has its own category")
+check(ix.dialogue.GetOptionCategory("TaskRewardChoices", {category = "service"}) == "service",
+	"barters sharing the reward resolver retain service coloring")
+panel.tree = {InterestTownRelationsTopic = {statement = "Tell me more.", ShouldAdd = function() return true end},
+	TownProgression = {statement = "About that request.", ShouldAdd = function() return true end},
+	AboutWorkTopic = {statement = "About the job.", ShouldAdd = function() return true end}}
+labels = {}
+panel:prepareOptions({"InterestTownRelationsTopic", "TownProgression", "AboutWorkTopic"})
+check(labels[1].color.r == 255 and labels[1].color.g == 255 and labels[1].color.b == 255,
+	"flavour renders white")
+check(labels[2].color.r == 127 and labels[2].color.g == 0 and labels[2].color.b == 255,
+	"progression uses inventory purple")
+check(labels[3].color.r == 255 and labels[3].color.g == 192 and labels[3].color.b == 0,
+	"jobs use inventory yellow")
+local visited = {}
+local navigation = setmetatable({tree = {GOODBYE = {}, BackTopic = {}}, currentTopicID = "GREETING",
+	startTopic = function(self, id) visited[#visited + 1] = id self.currentTopicID = id end,
+	exit = function(self) self.exiting = true end,
+	HasFocus = function() return true end,
+	MakePopup = function() end,
+}, {__index = panelType})
+navigation:GoBack()
+check(visited[#visited] == "GOODBYE", "Escape at root says goodbye")
+navigation.currentTopicID = "InterestTownRelationsTopic"
+navigation.buttonList = {{topicID = "QuestionsBackTopic", DoClick = function()
+	visited[#visited + 1] = "QuestionsBackTopic"
+end}}
+navigation:GoBack()
+check(visited[#visited] == "QuestionsBackTopic", "Escape in flavour returns to questions")
+navigation.currentTopicID = "ConfirmRepair"
+navigation.buttonList = {}
+navigation:GoBack()
+check(visited[#visited] == "BackTopic", "Escape from a confirmation returns to the main choices")
+ix.gui.dialogue = navigation
+navigation.currentTopicID = "InterestTownRelationsTopic"
+escapeDown = true
+check(pauseMenuHook() == false, "Escape navigates back and suppresses pause")
+now = now + 0.5
+escapeThink()
+check(not navigation.exiting, "a short Escape leaves the conversation open")
+now = now + 0.51
+escapeThink()
+check(navigation.exiting, "holding Escape for a second closes the conversation")
+escapeDown = false
+escapeThink()
+local cancelled = false
+local overlay = {IsVisible = function() return true end, Close = function(self) self.closed = true end}
+ix.dialogue.TrackRelatedPanel(overlay, function() cancelled = true overlay:Close() end)
+navigation.exiting = false
+check(pauseMenuHook() == false and cancelled and overlay.closed,
+	"Escape cancels the front service overlay before navigating dialogue")
+escapeThink()
+-- Opening a trader must not replace the current choices or current topic.
+local exchanges = 0
+LocalPlayer = function() return {GetCharacter = function() return {GetName = function() return "Stalker" end} end} end
+net.Start, net.WriteString = function() end, function() end
+net.WriteEntity, net.SendToServer = function() end, function() end
+local trade = setmetatable({tree = {TradeTopic = {quickAction = true, statement = "Let's trade.", response = "Look.",
+	postCallback = function() exchanges = exchanges + 1 end}}, currentTopicID = "GREETING", buttonList = {"choices"},
+	dialogue = function() end, targetName = function() return "Trader" end}, {__index = panelType})
+trade:startTopic("TradeTopic")
+check(exchanges == 1 and trade.currentTopicID == "GREETING" and trade.buttonList[1] == "choices",
+	"trading opens directly and retains the current dialogue choices")
 print(string.format("PASS: %d dialogue ordering checks", checks))

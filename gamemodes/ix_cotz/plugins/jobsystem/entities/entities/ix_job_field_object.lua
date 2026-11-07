@@ -32,7 +32,7 @@ else
 		title:SetText(self:GetNWString("cotz/jobsystem/cargo-name", self.PrintName))
 		title:SizeToContents()
 		local description = tooltip:AddRow("description")
-		description:SetText("Assigned equipment. Only the stalker on this task can collect it with Use.")
+		description:SetText("Equipment left for the assigned stalker to pick up.")
 		description:SizeToContents()
 	end
 end

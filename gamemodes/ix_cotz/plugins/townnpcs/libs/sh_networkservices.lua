@@ -1,13 +1,15 @@
 local PLUGIN = PLUGIN
 local NETWORK_SERVICES = {
 	search = "networkSearch", squads = "networkSquads", ranking = "networkRanking",
-	activity = "networkActivity", location = "networkLocation", remote = "networkRemote", dossier = "networkDossier",
+	activity = "networkActivity", location = "networkLocation", dossier = "networkDossier",
 }
 local BASIC_COUNTERS = {"tasksCompleted", "mutantsKilled", "humansKilled"}
 
 function PLUGIN:GetNetworkAccess(character)
 	local access = {}
 	for key, service in pairs(NETWORK_SERVICES) do access[key] = self:HasService(character, service) end
+
+	access.remote = true
 
 	return access
 end
@@ -17,7 +19,6 @@ function PLUGIN:FilterNetworkRecord(character, record, access)
 	if character and tonumber(record.characterID) == character:GetID() then
 		access = {ranking = true, activity = true, location = true, remote = true, dossier = true}
 	end
-	if record.map ~= game.GetMap() and not access.remote then return end
 	local result = table.Copy(record)
 	local profile = result.profile or {}
 	if type(profile) == "string" then profile = util.JSONToTable(profile) or {} end

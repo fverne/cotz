@@ -126,8 +126,22 @@ local errorQuery = mysql:Select("members")
 errorQuery:OnError(function(value) driverFailure = value end)
 errorQuery:Execute()
 check(driverFailure == nil and #errors == 1, "upstream MySQL errors are logged; stalled completion uses timeout")
+local longStatement = "UPDATE `ix_characters` SET `jobs` = '" .. string.rep("x", 4096) .. "' WHERE `id` = '1'"
+local failedSaveCallback = false
+mysql:RawQuery(longStatement, function() failedSaveCallback = true end)
+check(errors[2]:sub(1, 256):find("simulated failure\nQuery: ", 1, true),
+	"MySQL failure reason survives truncation of a long character-save query")
+check(errors[2]:find(longStatement, 1, true), "MySQL diagnostics retain the complete query")
+check(not failedSaveCallback, "failed character saves never invoke the success callback")
 driverQuery.start = function(self) self.onSuccess(self, {{id = "1"}}) end
 errorQuery:Callback(function(rows, status, lastID) callbackID = status and lastID end)
 errorQuery:Execute()
 check(callbackID == 42, "existing MySQL success callback arguments are preserved")
+mysql.module = "sqlite"
+sql.Query = function() return false end
+sql.LastError = function() return "simulated SQLite failure" end
+local sqliteOK, sqliteFailure = pcall(mysql.RawQuery, mysql, longStatement)
+check(not sqliteOK and sqliteFailure:sub(1, 512):find("simulated SQLite failure\nQuery: ", 1, true),
+	"SQLite failure reason also precedes a long query")
+check(sqliteFailure:find(longStatement, 1, true), "SQLite diagnostics retain the complete query")
 print("mysql builder: " .. checks .. " checks passed")

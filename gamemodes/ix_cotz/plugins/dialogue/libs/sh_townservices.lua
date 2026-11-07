@@ -77,7 +77,7 @@ local function addConversions(dialogue)
 		ResolveDynamicOption = function(_, client, target, data)
 			if SERVER and type(data) == "table" then
 				if not ix.townNPCs:ConvertSuit(client, target, data.item, data.variant) then
-					client:Notify("Check the suit, its attachments, your unlocks and the conversion fee.")
+					client:Notify("Take off the suit and remove its attachments. Check that I can make that variant and that you can cover the fee.")
 				end
 			end
 
@@ -137,8 +137,15 @@ function ix.dialogue.ConfigureTownServices(dialogue, contact)
 				return "AmmoExchange"
 			end,
 		})
+		if not dialogue.tree.StartBarter then
+			dialogue.addTopic("StartBarter", {
+				statement = "What can we barter?", options = {"BackTopic"},
+			})
+		end
+		table.insert(dialogue.tree.StartBarter.options, 1, "AmmoExchange")
 		for _, root in ipairs({"GREETING", "BackTopic"}) do
-			dialogue.tree[root].options[#dialogue.tree[root].options + 1] = "AmmoExchange"
+			local options = dialogue.tree[root].options
+			options[#options + 1] = "StartBarter"
 		end
 	end
 	if contact.id == "ballast" or contact.id == "cleaner" or contact.id == "ledger" then addHideoutBarter(dialogue) end

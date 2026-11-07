@@ -237,7 +237,7 @@ DIALOGUE.addTopic("ViewProgression", {
 
 DIALOGUE.addTopic("AboutProgression", {
 	statement = "Do you need help with anything?",
-	response = "These are your available progression tasks and unclaimed rewards.",
+	response = "Here is what I still need.",
 	options = {"BackTopic"},
 	IsDynamic = true,
 	GetDynamicOptions = function(self, client, target)

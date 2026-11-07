@@ -200,7 +200,7 @@ end
 function ix.jobs.field.DescribeAssignment(job)
 	local state = job.fieldTask
 	if state.kind == "recovery" then
-		local clue = state.whereabouts or "The location clue is temporarily unavailable. Check Field work again later."
+		local clue = state.whereabouts or "The directions are missing. Check your notes again later."
 		local item = ix.item.list[state.cargo]
 		local target = state.recipient or "the issuing contact"
 		local description = state.description
@@ -213,18 +213,18 @@ function ix.jobs.field.DescribeAssignment(job)
 	-- Older accepted commissions have no description snapshot. Derive their instructions
 	-- from the saved assignment rather than a newly authored recipient or cargo definition.
 	local item = ix.item.list[state.cargo]
-	local text = "Use Field work to locate and collect " .. (state.cargoName or item.name) .. "."
+	local text = "Follow the directions to find and pick up " .. (state.cargoName or item.name) .. "."
 	if state.kind == "sensor" then
-		text = "Use Field work to deploy the sensor. Leave it to record, then collect it."
+		text = "Set up the sensor at the marked site. Leave it to record, then pick it up."
 	elseif state.kind == "triangulation" then
-		text = "Use Field work to take the required bearings, then collect the source."
+		text = "Take the required bearings, then find and pick up the source."
 	elseif state.kind == "defence" then
-		text = "Use Field work to start the sampler. Defend it until recording finishes, then collect the results."
+		text = "Start the sampler at the marked site. Defend it until recording finishes, then pick up the results."
 	end
 	if state.recipient then
 		text = text .. " Deliver it to " .. state.recipient .. "."
 	elseif state.kind == "deadDrop" then
-		text = text .. " Deliver it to the assigned cache using Field work."
+		text = text .. " Bury it at the marked cache."
 	end
 
 	return text .. " Return to the issuing contact to finish the assignment."

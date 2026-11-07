@@ -243,8 +243,15 @@ check(scoreboard.selected == localClient.character:GetID(), "the owner remains s
 for _, field in pairs(scoreboard.dossierFields) do
 	check(field.card.visible == true, "every owner dossier field bypasses progression gates")
 end
-check(scoreboard.search.enabled == false and scoreboard.area.enabled == false,
-	"self access does not unlock global search or the remote directory")
+check(scoreboard.search.enabled == false and scoreboard.area.enabled == true,
+	"the area filter is always available while search keeps its separate gate")
+check(ix.townNPCs:GetNetworkAccess(localClient.character).remote,
+	"fresh characters can see the cross-map roster")
+local filtered = ix.townNPCs:FilterNetworkRecord(localClient.character, {
+	characterID = 900, map = "remote_map", profile = {reputation = 500, leaderboardStats = {tasksCompleted = 8}},
+}, {remote = false})
+check(filtered and filtered.profile.reputation == 0 and not next(filtered.profile.leaderboardStats),
+	"remote identities remain visible without exposing gated rank or activity")
 local otherRecord = ix.crossserver.GetScoreboardRoster(false)[first.character:GetID()]
 scoreboard:SelectRecord(otherRecord)
 check(not scoreboard.dossierFields.taskEarnings.card.visible

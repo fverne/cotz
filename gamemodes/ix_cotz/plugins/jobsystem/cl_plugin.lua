@@ -54,7 +54,7 @@ local function jobSignature(jobs)
 	for npc, job in SortedPairs(jobs) do
 		if ix.jobs.list[job.identifier] then
 			parts[#parts + 1] = npc .. "\n" .. ix.jobs.getFormattedName(job) .. "\n"
-				.. ix.jobs.getFormattedDesc(job) .. "\n" .. tostring(job.progress) .. "/" .. job.numberRec
+				.. ix.jobs.getFormattedDesc(job, true) .. "\n" .. tostring(job.progress) .. "/" .. job.numberRec
 				.. tostring(job.isCompleted) .. tostring(job.fieldTask and job.fieldTask.kind)
 		end
 	end
@@ -111,7 +111,7 @@ function PANEL:AddTask(npc, job)
 	end
 	addLabel(card, ix.jobs.getFormattedName(job), "cotzTasksLabel")
 	addLabel(card, npc, "cotzTasksSmall", COLORS.muted)
-	addLabel(card, ix.jobs.getFormattedDesc(job), "cotzTasksSmall")
+	addLabel(card, ix.jobs.getFormattedDesc(job, true), "cotzTasksSmall")
 	local completed = job.isCompleted or job.progress >= job.numberRec
 	local progressText = job.targetWeights and string.format("Progress: %.2f / %d packs", job.progress, job.numberRec)
 		or string.format("Progress: %d / %d", job.progress, job.numberRec)

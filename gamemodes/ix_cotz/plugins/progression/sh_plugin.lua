@@ -67,19 +67,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 		intro:SetWrap(true)
 		intro:SetFont("cotzUISmall")
 		intro:SetTextColor(ix.cotzUI.colors.muted)
-		intro:SetText(
-			(
-				"Discuss progression with a contact to add their current requests here. "
-				.. "Below is a list of known NPCs and what they need for various "
-				.. "progressions. Progress and unlocks belong to your current "
-				.. "character. "
-				.. "Stock rewards increase your personal stock capacity without faster refills. "
-				.. "Finish every item requirement in a task to receive "
-				.. "the listed town completion payment. Non-town hand-ins retain their existing payout rules. "
-				.. "Commissions may also grant service credit or purchase access. "
-				.. "Progression does not grant item gifts."
-			)
-		)
+		intro:SetText("Speak with your contacts about what they need. Their requests and promised rewards will be recorded here.")
 		intro:Dock(TOP)
 		intro:DockMargin(0, 16, 0, 0)
 		intro:SetAutoStretchVertical(true)
@@ -133,8 +121,8 @@ function PLUGIN:CreateMenuButtons(tabs)
 				label:SetFont("cotzUISmall")
 				label:SetTextColor(ix.cotzUI.colors.muted)
 				label:SetWrap(true)
-				label:SetText("Personal maximum-stock bonuses from base catalogue: "
-					.. table.concat(capacityText, "; ") .. ". Passive refill speed unchanged.")
+				label:SetText("Extra stock reserved for you: "
+					.. table.concat(capacityText, "; ") .. ". New deliveries arrive as before.")
 				label:Dock(TOP)
 				label:SetAutoStretchVertical(true)
 			end

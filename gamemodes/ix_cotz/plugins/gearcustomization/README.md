@@ -1,16 +1,23 @@
 # Gear customization
 
-Technut offers **Can you change the finish on my gear?** beside suit painting.
-The service requires normal vendor access and an equipped, supported item in the
-character's main inventory, including its equipment cells. It has no progression,
-flag, paint-item, discount, or service-credit requirement. A confirmed change costs
-100 rubles per item, including all selected skin and bodygroup changes. Unchanged
-selections cannot be purchased. Existing suit painting and its TN13 gate are unchanged.
+Technut offers **Can you change the finish on my gear or suit?** at his main menu.
+The same window lists equipped supported gear and suits in the main inventory, including equipment
+cells. Gear retains its ungated service; suits retain Technut's existing painting unlock. Each confirmed
+appearance change costs 100 rubles. All choices preview before confirmation, and unchanged selections
+cannot be purchased. The old separate suit-painting dialogue and preview are removed.
+
+Suit finishes come from the existing sparse `skincustom` allowlist, including approved model overrides.
+They retain `setSkin` and `setSkinOverrideModel` persistence and ordinary suit equip behavior; they do
+not use PAC gear descriptors or a new saved appearance field. Confirmation rechecks the item, allowlist,
+painting permission, saved skin/model, equipped state, money and proximity. Existing saves need no migration.
+Suture's suit conversions remain his separate service under the gear customization dialogue submenu.
 
 The window previews the selected gear on a copy of the player's current character
 model. The rotation control turns the preview. Changes remain local until confirmed;
 Reset Preview and Cancel never alter the item or charge money. The preview deliberately
-shows the selected gear rather than copying all other worn PAC equipment.
+shows the selected gear rather than copying all other worn PAC equipment. Suit finishes preview on
+the character model. Escape cancels a confirmation before closing this window; holding it for one second
+closes the conversation and its related windows.
 PAC parenting and bone modifiers update before the preview character is drawn, so
 bonemerged outfits follow its skeleton even outside PAC's world draw distance.
 
@@ -84,7 +91,7 @@ declare `skins = {}` and omit `defaultSkin`.
 ## APIs and persistence
 
 The shared `ix.gearAppearance` API resolves/validates selections (`Normalize`,
-`ValidateDefinition`, `IsSupported`), builds isolated PAC trees (`BuildPAC`), applies
+`ValidateDefinition`, `IsSupported`, `GetConfiguration`, `CanCustomize`), builds isolated PAC trees (`BuildPAC`), applies
 ground mappings (`ApplyWorld`), and supplies descriptions, fingerprints and typed
 state/descriptor serialization. Client-only `OpenMenu` and `GetIcon` own the window
 and rendered icons. Shared initialization validates authored definitions.

@@ -35,12 +35,13 @@ end
 
 function ix.gearAppearance.OpenMenu(target)
 	if IsValid(activeFrame) then activeFrame:Remove() end
-	if not pac then LocalPlayer():Notify("PAC3 is required to preview gear.") return end
+	if not pac then LocalPlayer():Notify("The workshop preview is unavailable.") return end
 	local character = LocalPlayer():GetCharacter()
 	if not character then return end
 	local frame, unused = ix.cotzUI.Frame("Customize Gear", 0.9, 0.85, 1100)
 	unused:Remove()
 	activeFrame = frame
+	if ix.dialogue and ix.dialogue.TrackRelatedPanel then ix.dialogue.TrackRelatedPanel(frame) end
 	frame.character = character
 	frame.target = target
 	local actions = frame:Add("DPanel")
@@ -109,10 +110,28 @@ function ix.gearAppearance.OpenMenu(target)
 	frame.RefreshPreview = function(panel)
 		clearPreview(model)
 		if not panel.item then return end
-		local key = "preview:" .. panel.item:GetID()
-		model.gearTree = ix.gearAppearance.BuildPAC(panel.item, panel.selection, key)
-		model.Entity:AttachPACPart(model.gearTree)
-		local center = panel.item.isBackpack or panel.item.isExoskeleton
+		if panel.item.isBodyArmor then
+			for _, paint in ipairs(ix.gearAppearance.GetConfiguration(panel.item).skins) do
+				if paint.id == panel.selection.skin then
+					local previewModel = paint.model or panel.item.newModel
+					if model:GetModel() ~= previewModel then model:SetModel(previewModel) end
+					pac.SetupENT(model.Entity)
+					model.Entity:SetSequence(model.Entity:LookupSequence("idle_all_01"))
+					model.Entity:SetSkin(paint.skin)
+				end
+			end
+		else
+			if model:GetModel() ~= LocalPlayer():GetModel() then model:SetModel(LocalPlayer():GetModel()) end
+			model.Entity:SetSkin(LocalPlayer():GetSkin())
+			for _, group in ipairs(LocalPlayer():GetBodyGroups()) do
+				model.Entity:SetBodygroup(group.id, LocalPlayer():GetBodygroup(group.id))
+			end
+			pac.SetupENT(model.Entity)
+			local key = "preview:" .. panel.item:GetID()
+			model.gearTree = ix.gearAppearance.BuildPAC(panel.item, panel.selection, key)
+			model.Entity:AttachPACPart(model.gearTree)
+		end
+		local center = panel.item.isBodyArmor or panel.item.isBackpack or panel.item.isExoskeleton
 		model:SetLookAt(center and Vector(0, 0, 40) or Vector(0, 0, 65))
 		model:SetCamPos(center and Vector(110, 0, 55) or Vector(55, 0, 66))
 		if IsValid(panel.summary) then
@@ -120,12 +139,15 @@ function ix.gearAppearance.OpenMenu(target)
 				.. "\nPreview: " .. ix.gearAppearance.Describe(panel.item, panel.selection))
 		end
 		panel.currentAppearance = panel.item:GetData("gearAppearance")
+		panel.currentSuitSkin = panel.item:GetData("setSkin")
 		panel.changed = ix.gearAppearance.Fingerprint(panel.item)
 			~= ix.gearAppearance.Fingerprint(panel.item, panel.selection)
 	end
 	local items = {}
 	for _, item in pairs(character:GetInventory():GetItems()) do
-		if item:GetData("equip", false) and ix.gearAppearance.IsSupported(item) then items[#items + 1] = item end
+		if item:GetData("equip", false) and ix.gearAppearance.CanCustomize(item, character, target) then
+			items[#items + 1] = item
+		end
 	end
 	table.sort(items, function(first, second) return first:GetName() < second:GetName() end)
 	local chooseItem
@@ -139,8 +161,8 @@ function ix.gearAppearance.OpenMenu(target)
 			choices[#choices + 1] = {name = candidate:GetName(), id = candidate:GetID()}
 		end
 		if not item then
-			ix.cotzUI.Label(controls, "No equipped gear has approved appearance variants.", true)
-			ix.cotzUI.Label(controls, "Equip compatible gear, then ask Technut again.")
+			ix.cotzUI.Label(controls, "None of your worn gear has another finish available.", true)
+			ix.cotzUI.Label(controls, "Put on the gear you want changed, then ask Technut again.")
 
 			return
 		end
@@ -148,7 +170,7 @@ function ix.gearAppearance.OpenMenu(target)
 			local selected = character:GetInventory():GetItems()[id]
 			if selected and not frame.pending then chooseItem(selected) end
 		end)
-		local config = item.appearanceCustomization
+		local config = ix.gearAppearance.GetConfiguration(item)
 		if #config.skins > 1 then
 			combo(controls, "Finish", config.skins, frame.selection.skin, function(id)
 				if frame.pending or IsValid(frame.confirmation) then return end
@@ -191,10 +213,11 @@ function ix.gearAppearance.OpenMenu(target)
 			or LocalPlayer():GetPos():DistToSqr(target:GetPos()) > 192 ^ 2 then panel:Close() return end
 		if panel.pending and panel.pending <= RealTime() then
 			panel.pending = nil
-			LocalPlayer():Notify("The customization request expired. Please try again.")
+			LocalPlayer():Notify("Technut needs another look at your gear. Try again.")
 		end
 		local item = panel.item
-		if item and panel.currentAppearance ~= item:GetData("gearAppearance") then panel:RefreshPreview() end
+		if item and (panel.currentAppearance ~= item:GetData("gearAppearance")
+			or panel.currentSuitSkin ~= item:GetData("setSkin")) then panel:RefreshPreview() end
 		apply:SetEnabled(panel.changed and not panel.pending and not IsValid(panel.confirmation) or false)
 	end
 	frame.OnRemove = function(panel)
@@ -229,6 +252,12 @@ net.Receive("cotz/gear-appearance/quote", function()
 			.. " for " .. ix.currency.Get(price) .. "?",
 		"Confirm Gear Customization", "Apply", function() confirm(true) end, "Cancel", function() confirm(false) end
 	)
+	if ix.dialogue and ix.dialogue.TrackRelatedPanel then
+		ix.dialogue.TrackRelatedPanel(frame.confirmation, function()
+			if IsValid(frame.confirmation) then frame.confirmation:Close() end
+			confirm(false)
+		end)
+	end
 end)
 
 net.Receive("cotz/gear-appearance/result", function()

@@ -60,6 +60,29 @@ function ix.gearAppearance.ValidateDefinition(item)
 	return true
 end
 
+function ix.gearAppearance.GetConfiguration(item)
+	if not item.isBodyArmor then return item.appearanceCustomization end
+	if not item.skincustom or not next(item.skincustom) then return end
+	local skins = {}
+	for _, paint in pairs(item.skincustom) do
+		local name = paint.name:gsub("[Ss]kin", "Finish")
+		skins[#skins + 1] = {id = tostring(paint.skingroup), name = name, skin = paint.skingroup,
+			model = paint.modelOverride}
+	end
+	table.sort(skins, function(first, second) return first.skin < second.skin end)
+
+	return {skins = skins, defaultSkin = tostring(item.newSkin or 0), bodygroups = {}}
+end
+
+function ix.gearAppearance.CanCustomize(item, character, target)
+	if item.isBodyArmor then
+		return ix.gearAppearance.GetConfiguration(item) ~= nil
+			and ix.townNPCs:HasService(character, "painting", target:GetDisplayName())
+	end
+
+	return ix.gearAppearance.IsSupported(item)
+end
+
 function ix.gearAppearance.IsSupported(item)
 	local config = item.appearanceCustomization
 	if not config or not item.pacData or item.isBodyArmor then return false end
@@ -72,8 +95,11 @@ function ix.gearAppearance.IsSupported(item)
 end
 
 function ix.gearAppearance.Normalize(item, state, strict)
-	local config = item.appearanceCustomization
+	local config = ix.gearAppearance.GetConfiguration(item)
 	if not config then return end
+	if not state and item.isBodyArmor then
+		state = {skin = tostring(item:GetData("setSkin", item.newSkin or 0)), bodygroups = {}}
+	end
 	state = state or item:GetData("gearAppearance", {})
 	if type(state) ~= "table" or type(state.bodygroups or {}) ~= "table" then return end
 	local skin = findOption(config.skins, state.skin)
@@ -100,7 +126,7 @@ function ix.gearAppearance.Fingerprint(item, state)
 	local normalized = ix.gearAppearance.Normalize(item, state)
 	if not normalized then return "" end
 	local parts = {normalized.skin}
-	for _, group in ipairs(item.appearanceCustomization.bodygroups or {}) do
+	for _, group in ipairs(ix.gearAppearance.GetConfiguration(item).bodygroups or {}) do
 		parts[#parts + 1] = group.id .. "=" .. normalized.bodygroups[group.id]
 	end
 
@@ -111,9 +137,9 @@ function ix.gearAppearance.Describe(item, state)
 	local normalized = ix.gearAppearance.Normalize(item, state)
 	if not normalized then return "Factory appearance" end
 	local parts = {}
-	local skin = findOption(item.appearanceCustomization.skins, normalized.skin)
+	local skin = findOption(ix.gearAppearance.GetConfiguration(item).skins, normalized.skin)
 	if skin then parts[#parts + 1] = skin.name end
-	for _, group in ipairs(item.appearanceCustomization.bodygroups or {}) do
+	for _, group in ipairs(ix.gearAppearance.GetConfiguration(item).bodygroups or {}) do
 		local option = findOption(group.options, normalized.bodygroups[group.id])
 		if option then parts[#parts + 1] = group.name .. ": " .. option.name end
 	end

@@ -42,6 +42,8 @@ function ix.jobs.GetMapName(map)
 end
 
 function ix.jobs.FormatMapNames(text)
+	text = text:gsub("(rp_[%w_]+)%.bsp", ix.jobs.GetMapName)
+
 	return (text:gsub("rp_[%w_]+", ix.jobs.GetMapName))
 end
 
@@ -80,13 +82,13 @@ function ix.jobs.getFormattedDesc(activejob, hideRewards)
 	local assignmentMap = activejob.fieldTask and activejob.fieldTask.map or definition.fieldMap
 	if assignmentMap then text = text .. "\nAssignment region: " .. ix.jobs.GetMapName(assignmentMap) .. "." end
 	if activejob.fieldTask and contact then
-		text = text .. "\nCurrent issuer: " .. contact.name .. " in " .. contact.map .. "."
+		text = text .. "\nReturn to " .. contact.name .. " in " .. contact.map .. "."
 		if activejob.fieldTask.recipient then
-			text = text .. "\nCurrent delivery region: " .. ix.jobs.field.GetRecipientMap(activejob.fieldTask) .. "."
+			text = text .. "\nDeliver to " .. ix.jobs.field.GetRecipientMap(activejob.fieldTask) .. "."
 		end
 	end
 	if definition.alternateDelivery then
-		text = text .. "\nEligible hand-in contacts: "
+		text = text .. "\nDeliver to "
 			.. table.concat(ix.jobs.regional.EligibleReceivers(definition), ", ") .. "."
 	end
 	if activejob.photoKind then text = text .. "\n" .. ix.jobs.regional.PhotoSummary(activejob) end

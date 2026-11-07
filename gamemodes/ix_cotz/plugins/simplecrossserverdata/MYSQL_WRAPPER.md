@@ -1,10 +1,13 @@
 # Bundled MySQL query builder
 
-The bundled Helix wrapper is read-only. CotZ's compatibility extension lives in
+CotZ's compatibility extension lives in
 `gamemodes/ix_cotz/plugins/simplecrossserverdata/sv_mysql.lua`, loaded before the presence service.
 It extends the existing query object's metatable and uses the original wrapper's execution methods.
 Ordinary queries delegate to the original `Execute`, and single-string primary keys delegate to the
-original `PrimaryKey`. Helix files and their adapter implementations are unchanged.
+original `PrimaryKey`. Query construction and adapter execution retain their upstream behavior.
+The bundled wrapper has one diagnostic change: database failure messages precede the SQL query,
+so Garry's Mod log truncation cannot hide the reason behind a long character-save statement.
+This lives in the wrapper because ordinary Helix saves use it directly, bypassing the extension.
 
 The extension supplies structured joins, predicates, subqueries, database-time expressions and
 composite keys so cross-server checks remain conditional database mutations. Feature code builds
@@ -68,6 +71,11 @@ contract. Extended queries retain once-only completion when a late callback arri
 
 ## Verification
 
+When reporting a database failure, include the reason immediately after `MySQL Query Error!`
+or `SQL Query Error!`, ahead of `Query:`. Older builds print it after the SQL, where long character
+saves can cause it to be truncated. A failed character save also prevents hideout entry from
+completing, since admission waits for its outside return point to be saved successfully.
+
 ```sh
 luatex --luaonly gamemodes/ix_cotz/plugins/simplecrossserverdata/tests/mysql_builder_spec.lua
 luatex --luaonly gamemodes/ix_cotz/plugins/simplecrossserverdata/tests/squads_crossserver_spec.lua
@@ -75,6 +83,7 @@ luatex --luaonly gamemodes/ix_cotz/plugins/simplecrossserverdata/tests/squads_cr
 
 The builder spec checks legacy CRUD output, escaping, predicates, derived queries, adapter-specific
 clock/import/index generation, queued DDL, identifier rejection, and MySQL callback contracts with a
-mock driver. The squad spec loads this actual wrapper and executes its generated statements against
+mock driver, including error visibility for long character-save statements. The squad spec loads
+this actual wrapper and executes its generated statements against
 a temporary SQLite database through the Python bridge. These do not establish live MySQL contention
 or Garry's Mod networking correctness.

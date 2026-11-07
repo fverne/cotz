@@ -36,7 +36,8 @@ The service uses `OnError` and its own timeout guard to complete callbacks once.
 escaping, adapter selection and execution remain inside the wrapper. See the
 [wrapper extension guide](MYSQL_WRAPPER.md).
 
-STALKERnet defaults to all active maps. **Local area: ON** filters by the current map; a traveller stays
+STALKERnet defaults to all active maps. The local-area toggle and remote roster identities are
+available without progression; rank, activity, locations and other STALKERnet tools keep their separate gates. **Local area: ON** filters by the current map; a traveller stays
 associated with its source map until the destination claims the character. Shared online/map and
 travelling/destination labels match squads. Offline/expired sessions disappear from the scoreboard;
 private squad rosters retain offline members. After 15 seconds without a successful refresh, cached

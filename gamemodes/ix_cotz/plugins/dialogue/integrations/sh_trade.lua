@@ -30,6 +30,7 @@ end
 function ix.dialogue.AddTradeTopic(dialogue, statement, response)
 	dialogue.addTopic("TradeTopic", {
 		statement = statement,
+		quickAction = true,
 		response = response,
 		postCallback = ix.dialogue.OpenVendor,
 		options = {"BackTopic"},

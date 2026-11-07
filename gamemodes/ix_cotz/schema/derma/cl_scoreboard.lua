@@ -348,7 +348,7 @@ end
 local DOSSIER_FIELDS = {
 	{"rank", "STALKER RANK"}, {"reputation", "REPUTATION"}, {"squad", "SQUAD"},
 	{"location", "LOCATION"}, {"favoriteContact", "FAVORITE CONTACT"},
-	{"mutantsPoached", "MUTANTS POACHED"}, {"mutantsKilled", "MUTANTS KILLED"}, {"humansKilled", "HUMAN NPCS KILLED"},
+	{"mutantsPoached", "MUTANTS POACHED"}, {"mutantsKilled", "MUTANTS KILLED"}, {"humansKilled", "HUMANS KILLED"},
 	{"rareMutantsKilled", "RARE MUTANTS KILLED"}, {"speciesKilled", "SPECIES KILLED"},
 	{"tasksCompleted", "TASKS COMPLETED"}, {"hardTasks", "HARD TASKS"},
 	{"researchOperations", "RESEARCH OPERATIONS"}, {"recoveryOperations", "RECOVERY OPERATIONS"},
@@ -392,6 +392,7 @@ function PANEL:Init()
 			entry:DrawTextEntryText(COLORS.text, COLORS.teal, COLORS.text)
 		end
 	end
+	self.localOnly = false
 	self.area = self.controls:Add("DButton")
 	self.area:Dock(RIGHT)
 	self.area:SetWide(140)
@@ -451,7 +452,7 @@ function PANEL:Init()
 		self.dossierFields[definition[1]] = {caption = caption, value = value, card = card}
 	end
 	self.dossierNote = dossierLabel(self.detailScroll,
-		"Counters begin when tracking is enabled. Favorite contact includes saved progress.",
+		"Recorded encounters and completed work.",
 		"ixSmallFont", COLORS.muted)
 	self.list = self:Add("DScrollPanel")
 	self.list:Dock(FILL)
@@ -469,8 +470,8 @@ function PANEL:SelectRecord(record)
 	if ownRecord then
 		access.dossier, access.activity, access.ranking, access.location = true, true, true, true
 	end
-	self.dossierNote:SetText(access.dossier and "Counters begin when tracking is enabled."
-		or "Further STALKERnet tools unlock through Mute's progression.")
+	self.dossierNote:SetText(access.dossier and "Recorded encounters and completed work."
+		or "Ask Mute about the remaining STALKERnet tools.")
 	local location = access.location
 		and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
 	self.details:SetText(record.name)
@@ -554,10 +555,10 @@ function PANEL:Think()
 	if not access.squads then self.squadOnly = false end
 	self.squad:SetText(not access.squads and "Squad filter: LOCKED"
 		or self.squadOnly and "My squad: ON" or "My squad: OFF")
-	self.area:SetEnabled(access.remote)
-	self.area:SetText(not access.remote and "Local area" or self.localOnly and "Local area" or "All maps")
-	self.dossierNote:SetText(access.dossier and "Counters begin when tracking is enabled."
-		or "Further STALKERnet tools unlock through Mute's progression.")
+	self.area:SetEnabled(true)
+	self.area:SetText(self.localOnly and "Local area" or "All maps")
+	self.dossierNote:SetText(access.dossier and "Recorded encounters and completed work."
+		or "Ask Mute about the remaining STALKERnet tools.")
 	local records = ix.crossserver and ix.crossserver.GetScoreboardRoster(false) or {}
 	local ordered = {}
 	for _, record in pairs(records) do

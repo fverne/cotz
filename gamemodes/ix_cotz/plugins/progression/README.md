@@ -61,8 +61,10 @@ retained as inactive history: they cannot be queued, selected, claimed or shown 
 Already received inventory items are not removed. Repeatable job supplies still use the separate
 `taskRewardClaims` queue, including asynchronous insertion acknowledgement and full-inventory recovery. Task descriptions separate the title, briefing, required-item list and rewards with blank lines.
 The encyclopedia displays each task title once; required-item lists use a stable order.
-Task descriptions call completion payouts rewards; stock rewards explicitly
-describe purchase capacity. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
+Task descriptions place purchase access, stock capacity and all other benefits under Rewards,
+after the required items. Journal copy uses region names and addresses the player directly.
+The scoreboard's local/all-server filter and remote identities are always available; Mute's other
+tool permissions retain their gates. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
 
 Only current registered definitions participate in task discovery and equipment gating. There is no
 town migration, old-ID permission fallback, completion alias or grandfathered prerequisite handling.
