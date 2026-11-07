@@ -4,6 +4,9 @@ local previousEntry = PLUGIN.RequestEntry
 
 function PLUGIN:RequestEntry(client, id)
 	if not self.operationsReady then return false, "Hideout persistence is still initializing." end
+	if self.personalPurchases and self.personalPurchases[tostring(id)] then
+		return false, "Wait for the hideout purchase to finish."
+	end
 
 	return previousEntry(self, client, id)
 end
@@ -165,6 +168,7 @@ function PLUGIN:Think()
 	for _, instance in pairs(self.instances) do
 		if instance.state == "active" then
 			self:EnforceAccess(instance)
+			if self.AuditPersonalFloorItems then self:AuditPersonalFloorItems(instance) end
 			self:AuditContainerAccess(instance)
 			if self.AuditVendor then self:AuditVendor(instance) end
 		end

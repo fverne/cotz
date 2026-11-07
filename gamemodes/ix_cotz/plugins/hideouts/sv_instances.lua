@@ -505,6 +505,7 @@ function PLUGIN:SpawnInstance(record, callback)
 			resolved.exitAngles
 		)
 		local needsStorage = not resolved.dupeMarkerRoles or resolved.dupeMarkerRoles.storage or record.storageID
+		if record.ownerType ~= "squad" and not record.storageID then needsStorage = false end
 		if needsStorage then
 			instance.storage = self:CreateUtility(
 				instance,

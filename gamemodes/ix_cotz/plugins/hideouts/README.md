@@ -128,45 +128,118 @@ areas, areas too small for the full bounds, and failure to find a clear/unreserv
 
 ## Personal storage rooms
 
-Personal entrances remain administrator-placed keypads on fixed doors. Players cannot move them.
-Owners use the entrance keypad's **Manage** button or the interior exit menu to invite/revoke
-characters. Using an individual container opens its owner menu: **Open storage**, **Install/Upgrade**,
-and **Private/Public** sharing. Hand-ins show the required item and resulting size, with confirmation.
-Invited guests use shared containers to open their ordinary storage interface; they receive no owner controls.
+Ballast handles Marsh (`rp_marsh_cs`), Cleaner handles Garbage (`rp_garbage_cotz`), and Ledger
+handles Waystation (`rp_waystation`). Each map has one contact for all its personal hideout locations.
+After configuring a template and a fixed exterior entrance, register a location as an administrator:
 
-An invited guest can enter the room but cannot open its containers by default. Each spot is
-**Private** until the owner makes that particular spot **Public** (shared with invited guests only).
-Making it private or revoking an invitation closes affected sessions and invalidates transfers.
-Only the owner installs/upgrades containers or changes sharing. Upgrades preserve sharing and contents.
+    /HideoutLocationAdd village cabin village "Village room"
 
-Container markers are the preferred way to place these spots in the shell. For templates without
-container markers, an administrator can still stand at a position inside a loaded personal hideout and run:
+Arguments are location ID, template ID, entrance ID and display name. Bindings are permanent; a new
+entrance/template combination needs a new location ID. The command can rename an existing location.
+It does not place a shell, entrance or NPC. No preset or first-time setup is run automatically.
 
-    /HideoutTemplateContainer cabin left general
+At that contact, choose **Barter → Can I arrange a hideout or buy improvements?** Players can unlock
+one free room at each configured location. Access is unrestricted by progression for now; the shared
+contact definition's optional `claimStep` can gate future claims. Existing owned rooms also count toward
+the location claim. `/HideoutGrant` remains administrator-only and can create additional rooms using the
+same entrance/template. `hideoutPersonalLimit` remains an optional map-wide cap (default 0, unlimited).
+
+Enter a room once to resolve its dupe markers. The saved layout then supplies the exterior trader's
+barter offers even while that room is unloaded. Each room has its own paid levels and inventories;
+completing a contact milestone only unlocks permission to purchase. Offers show costs and locked gates.
+There are no new progression conversations, tasks, rewards or item gifts.
+
+### Storage and sharing
+
+New personal rooms receive exactly one free, private **general 2×3 crate**. The first general marker
+in slot-ID order is the starter; other markers start uninstalled and have no runtime entity until purchased.
+If no general marker exists, `personal_starter` uses the template's storage position. Reserve that slot
+ID for this fallback. Author general, ammo, medical and weapon markers for additional purchasable spots.
+The marker editor now includes weapon storage. Unmarked templates can add spots with:
+
     /HideoutTemplateContainer cabin ammo_shelf ammo
     /HideoutTemplateContainer cabin medical_shelf medical
+    /HideoutTemplateContainer cabin weapon_rack weapon
 
-Spot IDs are permanent per template. Reusing an ID moves that spot; it does not create a new
-inventory. Recipe changes in place are rejected. Removed spot definitions retain their saved
-inventories for explicit recovery. New spots start locked. Models lift 16 units from the marked feet
-position; inspect placement and clearance before giving players access.
+All purchases and upgrades happen at the contact's barter menu. An active room receives a new container
+immediately; unloaded rooms instantiate it on next entry. Container size and model can change per level.
+Allow clearance for the largest configured model when placing markers. Inventory IDs, contents and access
+survive upgrades. Removed markers retain their inventories for `/HideoutRecoveryOpen ID SPOT`.
 
-Recipes live in `sh_definitions.lua`; they explicitly define each tier's input and resulting capacity:
-
-| Recipe | Successive hand-ins | Storage sizes | Contents |
+| Recipe | Initial size | Permitted contents | Installation cost |
 | --- | --- | --- | --- |
-| general | Small Utility Pouch, Deep Utility Crate, Military Transit Crate | 3×3, 6×6, 10×8 | Ordinary storable items |
-| ammo | One Ammunition Transit Can per tier | 4×4, 6×6, 10×8 | Items marked `isAmmo` |
-| medical | One Injector Transport Pouch per tier | 3×3, 5×5, 8×6 | `base_aid` items |
+| general | 2×3 | Ordinary storable items | 600 roubles + Small Utility Pouch; starter is free |
+| ammo | 4×4 | `isAmmo == true` | 900 roubles + Ammunition Transit Can |
+| medical | 4×4 | `base_aid` | 1,000 roubles + Injector Transport Pouch |
+| weapon | 6×4 | `isWeapon == true` | 1,400 roubles + Military Transit Crate |
 
-Each hand-in affects only that hideout's selected spot. These are starting balance values for
-administrators to review before provisioning. Existing installed capacities are saved; recipe edits
-cannot silently shrink them. Inventory-bearing bags are not accepted. There is no uninstall or refund.
+Inventory-bearing bags are rejected by every recipe. `sh_personal.lua` defines 12 levels per recipe,
+with monotonically growing dimensions. General crates remain at most 40% of a specialized container's
+capacity at the same level. Prices multiply by 2.2 each level while slot gains remain modest; subsequent
+levels cost roubles only. Models switch at level 3 by default and may be configured per tier.
+Only the pilot levels below are purchasable; later levels remain explicitly locked.
 
-Existing banks and bank upgrades remain available through Ballast. The squad quartermaster also offers
-access to each visitor's existing personal bank. Bank contents remain separate from room containers
-and vendor stock; no items move automatically between them. Old `storageID` stashes remain
-accessible to administrators through `/HideoutLegacyStorage ID` near the old recovery fixture.
+Owners use the entrance keypad or exit menu to invite/revoke characters. Each installed container's
+owner menu opens storage, shares with all invited guests, or grants/revokes individual invited characters.
+Private starts with owner-only access; selected guest permissions work while all-guest sharing is off.
+Room invitations never grant storage or building rights automatically. Revocation closes affected sessions,
+and transfers recheck current invitation and per-container access. Guests cannot change these controls.
+
+### Pilot progression and furnishings
+
+These existing local milestones enable a few test purchases. Step IDs are BA01–03, CL01–03 and LE01–03;
+there are no new milestone IDs or progression dialogue. `personalUnlockSteps` is the editable gate table.
+
+| Local completed step | Purchases enabled for each owned room on this map |
+| --- | --- |
+| 01 | General container installation/level 2; ammo container installation |
+| 02 | Two separate loose-item upgrades: 4 → 6 → 8 (500 then 1,100 roubles) |
+| 03 | General level 3; ammo level 2; medical/weapon installation; props/PET access (5,000 roubles) |
+
+For testing, administrators may use `/ProgressionGrant <character> cotz/town/ballast/BA01` (or the matching
+contact/step), then buy the desired improvement. Existing progression grants do not purchase upgrades.
+The broader town progression audit currently has dependency cycles; resolve those separately before
+using the complete natural progression path as a deployment check.
+
+A room permits four loose item entities by default; floor purchases increase this by two each time.
+Guests share the same allowance. Drop/throwaway and direct inventory-to-world transfers enforce the cap.
+Scripted outputs, such as unloaded ammo when inventory is full, and excess legacy floor items keep their
+original saved rows in a waiting list. They reappear as capacity becomes free, including after restart;
+no inputs or existing assets are deleted to meet the cap. A failed persistence verification retains the
+live item for retry rather than risking loss. Waiting items do not occupy container slots.
+
+Props and contextual PET tools require the room's furnishing purchase. Only its owner receives these
+rights inside that room. Guests, including those allowed to use storage, cannot move furnishings or gain
+PET access. Rights end on exit; no character flags are saved or shared. Existing personal furnishings stay
+saved while the purchase is locked. Squad building permissions are unchanged.
+
+### Compatibility and transaction recovery
+
+Existing installed personal storage retains its inventory, dimensions, sharing and appearance. On first
+entry it maps to the first compatible personal tier without resizing; oversized legacy containers stop
+upgrading rather than shrink. Old receipt recovery applies before this one-time conversion. New personal
+receipts recover paid levels independently of current progression/price changes, without another payment.
+Banks remain separate and Ballast's existing bank service is unchanged. Existing `storageID` inventories
+remain available to administrators through `/HideoutLegacyStorage ID`.
+
+Purchases use the existing atomic item/rouble/receipt adapter. A per-room lock also protects asynchronous
+inventory creation, deletion and entry. Confirmation binds to character, NPC, quote revision, expiry and
+current upgrade level. Required container items must be unequipped, unbound instances in the main inventory.
+Inventory assignment failure prevents payment and retains that inventory ID for retry.
+
+### Progression ideas beyond the pilot (proposals only)
+
+The pilot deliberately shares a small test structure; these are directions for differentiating later trees,
+not additional implemented gates or promises of new quest mechanics.
+
+| Contact | Proposed later progression |
+| --- | --- |
+| Ballast | Dry freight hand-ins enable more general crate spots; recovered transit hardware enables middle storage levels; larger recovery milestones buy +2 floor allowances; late freight work opens heavy storage models. |
+| Cleaner | Successful dead-drop circuits enable ammunition compartments; recovered medical cases add medical spots; secured-case hand-ins open weapon racks; later circuits unlock expensive specialized levels and furnishing capacity. |
+| Ledger | Label and packaging hand-ins enable individually shared general crates; intact deliveries unlock reserve medical/ammo storage; reconciled freight milestones permit higher container levels; late dispatch work opens additional +2 allowances. |
+
+Keep each extra container tied to an authored permanent slot. Later gates should unlock a purchase,
+with increasing rouble/item costs, rather than grant storage or move existing items automatically.
 
 ## Squad hideouts
 
@@ -202,7 +275,7 @@ leader**, or **Leader only** access for that slot. Officers cannot change or upg
 or set a restriction above their own rank. Leaders can change every slot. Changing access closes open
 sessions; transfers and periodic session audits recheck current membership and rank.
 
-Personal owners receive the same contextual furnishing tools as squad officers. Guests receive no
+Personal owners who have purchased furnishing access receive the same contextual tools as squad officers. Guests receive no
 building privileges. Personal containers keep their existing owner/private/invited-guest sharing rules.
 The personal room limit applies to new grants on this map and never removes rooms already owned.
 
@@ -251,7 +324,7 @@ Players do not need chat commands. All hideout commands are restricted to admini
 | --- | --- |
 | Use the entrance keypad or squad entrance | Enter an accessible hideout; owners/officers can manage access and invitations |
 | Use the interior exit | Leave; owners/officers can manage invitations/access and reset the vendor |
-| Use a container | Personal owner or authorized squad officer: open, install/upgrade, set sharing/rank; other permitted users: open |
+| Use a container | Personal owner: open/set sharing; squad officer: open/install/upgrade/set rank; other permitted users: open |
 | Use the squad vendor | Dialogue opens trading, donations and personal bank; stock Options exposes authorized management and treasury actions |
 | Tab → Squads → Squad hideout | Leaders/officers can place the first entrance or relocate it on this map |
 
@@ -405,6 +478,10 @@ geometry/PVS, model bounds, storage UI, database adapter behavior, and revive.
 Test at least two occupants, two instances using the same template, repeated
 item transfers/unloads, restart recovery, map cleanup, and a simulated database
 failure before enabling player access.
+
+Personal pilot checks also cover free claims at multiple locations, extra admin grants, all three local contacts,
+locked/earned purchases, +2 floor steps, scripted floor overflow/recovery, per-character container sharing,
+model/size changes, and owner-only PET before/after entry. Reconnect and restart with inventories full.
 
 The feature smoke test additionally needs two real servers: verify visible entrance interaction and global squad-home uniqueness,
 offline shopping, per-slot squad ranks, container sharing/revocation, temporary tools on exit/demotion, vendor appearance/movement/reset,

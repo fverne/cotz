@@ -150,6 +150,7 @@ function PLUGIN:PrepareHideoutItemTransfer(item, oldInventory, inventory)
 		local entity = instance and instance.items[item:GetID()]
 		if instance then
 			instance.items[item:GetID()] = nil
+			if instance.queuedItems then instance.queuedItems[item:GetID()] = nil end
 		end
 		if IsValid(entity) then
 			entity.ixHideout = nil

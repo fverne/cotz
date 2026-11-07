@@ -43,6 +43,14 @@ PLUGIN.containerRecipes = {
 			{item = "value_container_injectorcase", width = 8, height = 6},
 		},
 	},
+	weapon = {
+		name = "Weapon storage", filter = "weapon",
+		tiers = {
+			{item = "value_container_parls", width = 6, height = 4},
+			{item = "value_container_parls", width = 8, height = 6},
+			{item = "value_container_parls", width = 10, height = 8},
+		},
+	},
 }
 
 PLUGIN.furnishingTools = {colour = true, material = true, remover = true}

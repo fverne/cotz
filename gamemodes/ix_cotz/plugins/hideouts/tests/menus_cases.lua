@@ -35,17 +35,14 @@ Test("using a personal container opens its owner controls without a command", fu
 	assert(record.containers.left.public == true)
 end)
 
-Test("container menu installs its selected spot and rejects a repeated stale hand-in", function()
+Test("personal container menus direct purchases to the trader without consuming items", function()
 	local owner, inventory, instance, record = containerHome()
 	ix.item.list.value_container_smallitems = {model = "case.mdl", name = "Case"}
 	local input = FeatureItem(inventory, {}, "value_container_smallitems")
 	PLUGIN:OpenStorage(owner, instance.containers.left)
-	assert(PLUGIN:HandleManagementAction(owner, record.id, 4, "left", 0))
-	assert(record.containers.left.tier == 1 and record.containers.right.tier == 0)
-	assert(not ix.item.instances[input:GetID()])
 	assert(not PLUGIN:HandleManagementAction(owner, record.id, 4, "left", 0))
-	assert(PLUGIN:HandleManagementAction(owner, record.id, 8, "left", 0))
-	assert(owner.ixOpenStorage:GetID() == record.containers.left.inventoryID)
+	assert(record.containers.left.tier == 0 and record.containers.right.tier == 0)
+	assert(ix.item.instances[input:GetID()] == input)
 end)
 
 Test("invited guests open shared storage but cannot obtain owner controls", function()

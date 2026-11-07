@@ -20,11 +20,14 @@ function PLUGIN:LoadData()
 	self.state.areas = self:NormalizeIDKeys(self.state.areas)
 	self.state.entrances = self:NormalizeIDKeys(self.state.entrances)
 	self.state.retired = self:NormalizeIDKeys(self.state.retired)
+	self.state.locations = self:NormalizeIDKeys(self.state.locations)
 	for _, template in pairs(self.state.templates) do
 		template.containers = self:NormalizeIDKeys(template.containers)
 	end
 	for _, record in pairs(self.state.retired) do
 		record.containers = self:NormalizeIDKeys(record.containers)
+		for _, slot in pairs(record.containers) do slot.guests = self:NormalizeIDKeys(slot.guests) end
+		record.personalLayout = self:NormalizeIDKeys(record.personalLayout)
 	end
 	local nextID = tonumber(self.state.nextID) or 1
 	for id, record in pairs(self.state.hideouts) do
@@ -38,6 +41,8 @@ function PLUGIN:LoadData()
 		record.ownerType = record.ownerType or "character"
 		record.access = record.access or "squad"
 		record.containers = self:NormalizeIDKeys(record.containers)
+		for _, slot in pairs(record.containers) do slot.guests = self:NormalizeIDKeys(slot.guests) end
+		record.personalLayout = self:NormalizeIDKeys(record.personalLayout)
 		if tonumber(id) then
 			nextID = math.max(nextID, tonumber(id) + 1)
 		end
@@ -81,7 +86,7 @@ function PLUGIN:CanAccess(client, record)
 		and (record.owner == character:GetID() or (record.guests or {})[tostring(character:GetID())] == true)
 end
 
-function PLUGIN:GrantHideout(client, templateID, entranceID, name)
+function PLUGIN:GrantHideout(client, templateID, entranceID, name, locationID)
 	local character = client:GetCharacter()
 	if not self.ready or not character then
 		return false, "Character data is not ready."
@@ -106,6 +111,8 @@ function PLUGIN:GrantHideout(client, templateID, entranceID, name)
 		template = templateID,
 		entrance = entranceID,
 		name = name,
+		location = locationID,
+		personalVersion = 1,
 		guests = {},
 		furnishings = {},
 		shell = {},
@@ -127,6 +134,10 @@ function PLUGIN:DeleteHideout(id, callback)
 		return
 	end
 	local active = self.instances[record.id]
+	if self.personalPurchases and self.personalPurchases[record.id] then
+		callback(false, "Wait for the pending personal hideout purchase.")
+		return
+	end
 	if active and (active.operations or 0) > 0 then
 		callback(false, "Wait for the pending economic operation before deleting this hideout.")
 		return
@@ -418,6 +429,11 @@ function PLUGIN:RestoreFloorItems(instance, callback)
 			item.characterID = tonumber(row.character_id)
 			item.playerID = row.player_id ~= "NULL" and row.player_id ~= "" and row.player_id or nil
 			ix.item.inventories[0][itemID] = item
+			if self.ShouldQueuePersonalFloorItem and self:ShouldQueuePersonalFloorItem(instance) then
+				instance.queuedItems = instance.queuedItems or {}
+				instance.queuedItems[itemID] = true
+				continue
+			end
 			local entity = item:Spawn(instance.origin + location.pos, location.angles)
 			if not IsValid(entity) then
 				callback(false, "Could not restore a hideout item.")
@@ -438,6 +454,14 @@ function PLUGIN:RestoreFloorItems(instance, callback)
 end
 
 function PLUGIN:DetachFloorItems(instance)
+	for id in pairs(instance.queuedItems or {}) do
+		local item = ix.item.instances[id]
+		if item and item.invID == 0 then
+			ix.item.inventories[0][id] = nil
+			ix.item.instances[id] = nil
+		end
+	end
+	instance.queuedItems = nil
 	for id, entity in pairs(instance.items) do
 		local item = ix.item.instances[id]
 		if item and item.invID == 0 and IsValid(entity) then

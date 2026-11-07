@@ -58,7 +58,7 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `vendor_adv/definitions/` | Individual vendor appearances, identities, base items and dialogue bindings; explicit includes in libs/sh_npctemplates.lua. |
 | `dialogue/libs/sh_towncontacts.lua` | Shared current town work/progression actions; NPC root actions are declared in conversation files. |
 | `dialogue/dialogue/` | NPC conversation definitions, discovered by the custom dialogue loader. |
-| `hideouts/sv_*.lua` and `sh_*.lua` | Shared personal/squad interiors and containers, rank access, unique squad-home claims, squad shop, economic adapter and saved travel. |
+| `hideouts/sv_*.lua` and `sh_*.lua` | Personal/squad interiors, trader location claims and progression purchases, specialized containers, floor allowances, rank access, squad shop, economic adapter and saved travel. |
 | `sherpas/` | Reusable player/squad quartermasters, instance trading panel, stock persistence and dialogue; retains plugin ID `sherpas`. |
 | Other plugin `items/`, `entities/`, `derma/`, `libs/` | Files owned by the corresponding gameplay feature. |
 

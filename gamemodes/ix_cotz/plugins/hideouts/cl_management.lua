@@ -8,7 +8,7 @@ local function button(parent, text, callback)
 	return ix.cotzUI.Button(parent, text, callback)
 end
 
-local function sendManagement(panel, id, action, value, expectedTier)
+local function sendManagement(panel, id, action, value, expectedTier, guestID)
 	if (panel.nextRequest or 0) > CurTime() then return end
 	panel.nextRequest = CurTime() + 0.5
 	net.Start("cotz/hideouts/manage-action")
@@ -16,6 +16,7 @@ local function sendManagement(panel, id, action, value, expectedTier)
 	net.WriteUInt(action, 4)
 	net.WriteString(value or "")
 	net.WriteUInt(expectedTier or 0, 8)
+	net.WriteUInt(guestID or 0, 32)
 	net.SendToServer()
 end
 
@@ -92,6 +93,10 @@ net.Receive("cotz/hideouts/container", function()
 	local width, height, hasUpgrade = net.ReadUInt(6), net.ReadUInt(6), net.ReadBool()
 	local required, nextWidth, nextHeight
 	if hasUpgrade then required, nextWidth, nextHeight = net.ReadString(), net.ReadUInt(6), net.ReadUInt(6) end
+	local guests = {}
+	for _ = 1, net.ReadUInt(7) do
+		guests[#guests + 1] = {id = net.ReadUInt(32), name = net.ReadString(), allowed = net.ReadBool()}
+	end
 	local panel, scroll = frame(name)
 	ix.gui.hideoutContainer = panel
 	if tier > 0 then
@@ -109,7 +114,7 @@ net.Receive("cotz/hideouts/container", function()
 				label .. " container", "Hand in", function() sendManagement(panel, id, 4, slot, tier) end, "Cancel")
 		end)
 	else
-		ix.cotzUI.Label(scroll, "Fully upgraded")
+		ix.cotzUI.Label(scroll, squad and "Fully upgraded" or "Upgrades are available at the local hideout trader's barter menu.")
 	end
 	if squad then
 		local labels = {[0] = "Entire squad", [1] = "Officers and leader", [2] = "Leader only"}
@@ -122,7 +127,18 @@ net.Receive("cotz/hideouts/container", function()
 		end)
 	else
 		button(scroll, public and "Public: invited guests can access — make private"
-			or "Private: owner only — share with invited guests", function() sendManagement(panel, id, 5, slot) end)
+			or "Private: selected guests only — share with all invited guests", function()
+				sendManagement(panel, id, 5, slot)
+			end)
+		if not public then
+			for _, guest in ipairs(guests) do
+				local action = guest.allowed and 14 or 13
+				local guestID = guest.id
+				button(scroll, (guest.allowed and "Revoke: " or "Allow: ") .. guest.name, function()
+					sendManagement(panel, id, action, slot, tier, guestID)
+				end)
+			end
+		end
 	end
 end)
 

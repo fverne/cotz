@@ -223,8 +223,9 @@ def main():
     ):
         lua.run((ROOT / path).read_text(), path)
     lua.run('mysql.module = "sqlite"', "SQLite adapter")
-    for file in ("sh_definitions.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua", "sv_containers.lua",
-                 "sv_trading.lua", "sh_building.lua", "sv_travel.lua", "sh_management.lua", "sv_menus.lua"):
+    for file in ("sh_definitions.lua", "sh_personal.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua",
+                 "sv_containers.lua", "sv_trading.lua", "sh_building.lua", "sv_travel.lua", "sh_management.lua",
+                 "sv_menus.lua", "sv_personal.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
     lua.run("PLUGIN = {}; ix.char.RegisterVar = function() end", "sherpa shared setup")
     lua.run((ROOT / "ix_cotz/plugins/sherpas/sh_plugin.lua").read_text(), "sherpa shared")
@@ -238,6 +239,7 @@ def main():
             "marker entity")
     lua.run('TEST_MARKER_ENTITY = ENT; ENT = nil', "marker entity capture")
     lua.run((HERE / "markers_cases.lua").read_text(), "hideout marker cases")
+    lua.run((HERE / "personal_cases.lua").read_text(), "personal hideout progression cases")
 
 
 if __name__ == "__main__":

@@ -214,6 +214,8 @@ Test("personal owners have the same furnishing privileges while invited guests c
 	local prop = NewEntity(nil, instance.origin)
 	instance.props[prop], prop.ixHideout = true, record.id
 	guest.position, PLUGIN.members[guest], record.guests["2"] = instance.origin, record.id, true
+	assert(not PLUGIN:CanBuildInHideout(owner))
+	record.furnishingLevel = 1
 	assert(PLUGIN:CanBuildInHideout(owner))
 	assert(PLUGIN:GetHideoutEntityPermission(owner, prop))
 	assert(not PLUGIN:CanBuildInHideout(guest))

@@ -73,7 +73,7 @@ function PLUGIN:ShowContainerMenu(client, entity)
 	local slot, definition = self:GetContainer(record, entity.ixHideoutSlot)
 	if not slot then return end
 	local recipe = self.containerRecipes[definition.recipe]
-	local tier = recipe and recipe.tiers[(slot.tier or 0) + 1]
+	local tier = record.ownerType == "squad" and recipe and recipe.tiers[(slot.tier or 0) + 1]
 	local item = tier and ix.item.list[tier.item]
 	client.cotzHideoutMenu = {
 		character = client:GetCharacter(), scope = "container", ids = {[record.id] = true},
@@ -96,6 +96,20 @@ function PLUGIN:ShowContainerMenu(client, entity)
 		net.WriteUInt(tier.width, 6)
 		net.WriteUInt(tier.height, 6)
 	end
+	local guests = {}
+	if record.ownerType ~= "squad" then
+		for id in SortedPairs(record.guests or {}) do
+			local character = ix.char.loaded[tonumber(id)]
+			guests[#guests + 1] = {id = tonumber(id), name = character and character:GetName() or "Character #" .. id}
+			if #guests >= 64 then break end
+		end
+	end
+	net.WriteUInt(#guests, 7)
+	for _, guest in ipairs(guests) do
+		net.WriteUInt(guest.id, 32)
+		net.WriteString(guest.name:sub(1, 128))
+		net.WriteBool((slot.guests or {})[tostring(guest.id)] == true)
+	end
 	net.Send(client)
 end
 
@@ -115,7 +129,7 @@ function PLUGIN:RefreshManagementMenu(client)
 	end
 end
 
-function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier)
+function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, guestID)
 	if not self:CanUseManagementMenu(client, id) then return false end
 	local record = self:GetHideout(id)
 	local scope = client.cotzHideoutMenu.scope
@@ -127,7 +141,7 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier)
 		return ok
 	end
 	if not self:CanManageHideout(client, record) then return false end
-	local containerAction = action == 4 or action == 5 or action == 8 or action >= 10 and action <= 12
+	local containerAction = action == 4 or action == 5 or action == 8 or action >= 10 and action <= 14
 	if containerAction then
 		if scope ~= "container" or client.cotzHideoutMenu.slot ~= value then return false end
 	elseif scope == "container" then return false end
@@ -141,6 +155,8 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier)
 		if slot then ok, reason = self:SetContainerPublic(client, record, value, not slot.public) end
 	elseif action >= 10 and action <= 12 then
 		ok, reason = self:SetContainerRank(client, record, value, action - 10)
+	elseif action == 13 or action == 14 then
+		ok, reason = self:SetContainerGuest(client, record, value, guestID, action == 13)
 	elseif action == 8 then
 		local instance = self.instances[id]
 		self:OpenContainerInventory(client, instance.containers[value])
@@ -174,5 +190,8 @@ net.Receive("cotz/hideouts/manage-action", function(_, client)
 	client.cotzManageAction = CurTime() + 0.5
 	local id, action, value = net.ReadString(), net.ReadUInt(4), net.ReadString()
 	local expectedTier = net.ReadUInt(8)
-	if #id <= 20 and #value <= 32 then PLUGIN:HandleManagementAction(client, id, action, value, expectedTier) end
+	local guestID = net.ReadUInt(32)
+	if #id <= 20 and #value <= 32 then
+		PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, guestID)
+	end
 end)

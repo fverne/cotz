@@ -125,7 +125,7 @@ end)
 Test("upgrade consumption recovers its entitlement without consuming a second container", function()
 	FeatureReset()
 	local owner, inventory = FeatureClient(1, 1000)
-	local instance, record = FeatureHome(owner)
+	local instance, record = FeatureHome(owner, true)
 	PLUGIN.state.templates.room.containers = {left = {recipe = "general", pos = Vector()},
 		right = {recipe = "general", pos = Vector(40, 0, 0)}}
 	ix.item.list.value_container_smallitems = {model = "case.mdl", name = "Case"}

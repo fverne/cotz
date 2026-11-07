@@ -213,8 +213,8 @@ Test("the full paste lifecycle replaces marker entities with protected utilities
 	ix.plugin.Get = lookup
 	assert(created and created.state == "active")
 	assert(created.exit:GetPos().x == created.origin.x + 64 and created.exit:GetAngles().y == 90)
-	assert(created.containers.left.ixHideoutSlot == "left" and created.containers.right.ixHideoutSlot == "right")
-	assert(record.containers.left.tier == 0 and record.containers.right.tier == 0)
+	assert(created.containers.left.ixHideoutSlot == "left" and not created.containers.right)
+	assert(record.containers.left.tier == 1 and record.containers.right.tier == 0)
 	assert(record.containers.left.recipe == "general" and record.containers.right.recipe == "ammo")
 	assert(record.containers.left.public == false and record.containers.right.public == false)
 	assert(not created.storage and not created.vendor)

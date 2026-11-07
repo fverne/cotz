@@ -8,9 +8,12 @@ PLUGIN.inventoryLoads = PLUGIN.inventoryLoads or {}
 PLUGIN.recoverySessions = PLUGIN.recoverySessions or {}
 
 function PLUGIN:GetContainer(record, slotID)
+	if not record then return end
 	slotID = tostring(slotID)
 	local template = self:GetTemplate(record)
-	local definition = template and template.containers and template.containers[slotID]
+	local savedLayout = record.personalLayout and next(record.personalLayout) and record.personalLayout
+	local definitions = not self.instances[record.id] and savedLayout or template and template.containers
+	local definition = definitions and definitions[slotID]
 	if not definition then return end
 	record.containers = record.containers or {}
 	record.containers[slotID] = record.containers[slotID] or {tier = 0, public = false}
@@ -33,6 +36,22 @@ function PLUGIN:CanUseContainer(client, record, slotID)
 	end
 
 	return record.owner == character:GetID() or slot.public == true
+		or (slot.guests or {})[tostring(character:GetID())] == true
+end
+
+function PLUGIN:SetContainerGuest(client, record, slotID, characterID, allowed)
+	local slot = record and self:GetContainer(record, slotID)
+	local key = tostring(characterID)
+	if not slot or record.ownerType == "squad" or not self:CanManageContainer(client, record, slotID)
+		or not (record.guests or {})[key] then return false, "Choose an invited character." end
+	slot.guests = slot.guests or {}
+	local previous = slot.guests[key]
+	slot.guests[key] = allowed == true or nil
+	if not self:Persist() then slot.guests[key] = previous return false, "Could not save container access." end
+	local inventory = slot.inventoryID and ix.inventory.Get(slot.inventoryID)
+	if inventory then self:CloseInventoryStorage(inventory) end
+
+	return true, "Container access updated."
 end
 
 function PLUGIN:CanManageContainer(client, record, slotID)
@@ -66,8 +85,13 @@ end
 
 function PLUGIN:LoadOwnedInventory(record, key, state, inventoryType, width, height, callback, saveAssignment)
 	local loadKey = record.id .. ":" .. key
+	if state.assignmentPending then
+		state.assignmentPending = nil
+		local saved = saveAssignment and saveAssignment() or not saveAssignment and self:Persist()
+		if not saved then state.assignmentPending = true callback(nil) return end
+	end
 	if self.inventoryLoads[loadKey] then
-		if #self.inventoryLoads[loadKey] >= 64 then return end
+		if #self.inventoryLoads[loadKey] >= 64 then callback(nil) return end
 		table.insert(self.inventoryLoads[loadKey], callback)
 		return
 	end
@@ -88,6 +112,11 @@ function PLUGIN:LoadOwnedInventory(record, key, state, inventoryType, width, hei
 			local saved = saveAssignment and saveAssignment() or not saveAssignment and self:Persist()
 			if not saved then
 				ErrorNoHalt("[Hideouts] Could not persist inventory assignment " .. loadKey .. "\n")
+				-- Keep the assignment for retry; never allocate another inventory over this one.
+				state.assignmentPending = true
+				local callbacks = self.inventoryLoads[loadKey]
+				self.inventoryLoads[loadKey] = nil
+				for _, complete in ipairs(callbacks) do complete(nil) end
 				return
 			end
 		end
@@ -111,9 +140,10 @@ function PLUGIN:RestoreStorage(instance, callback)
 		for slotID, definition in pairs(template.containers or {}) do
 			local slot = self:GetContainer(record, slotID)
 			if not slot then callback(false, "A saved container's recipe changed: " .. slotID) return end
-			local recipe = self.containerRecipes[definition.recipe]
+			local recipe = self:GetContainerRecipe(record, definition)
 			local tier = recipe and recipe.tiers[slot.tier or 0]
-			local model = tier and ix.item.list[tier.item] and ix.item.list[tier.item].model
+			if record.ownerType ~= "squad" and not tier then continue end
+			local model = slot.model or tier and (tier.model or ix.item.list[tier.item] and ix.item.list[tier.item].model)
 			local entity = self:CreateUtility(instance, "ix_hideout_storage", definition.pos,
 				model or "models/props_junk/wood_crate001a.mdl")
 			if not IsValid(entity) then callback(false, "Could not create a storage spot.") return end
@@ -152,6 +182,7 @@ function PLUGIN:OpenContainerInventory(client, entity)
 	local character = client:GetCharacter()
 	self:LoadOwnedInventory(record, slotID, slot, "cotzHideoutContainer", slot.width, slot.height,
 		function(inventory)
+			if not inventory then return end
 			if not IsValid(client) or client:GetCharacter() ~= character
 				or not self:IsNearUtility(client, entity) or not self:CanUseContainer(client, record, slotID) then return end
 			ix.storage.Open(client, inventory, {
@@ -187,6 +218,9 @@ function PLUGIN:SetContainerPublic(client, record, slotID, public)
 end
 
 function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
+	if record and record.ownerType ~= "squad" then
+		return false, "Purchase personal storage upgrades through the local hideout contact's barter menu."
+	end
 	local slot, definition = self:GetContainer(record, slotID)
 	local instance = record and self.instances[record.id]
 	local entity = instance and instance.containers and instance.containers[slotID]
@@ -210,6 +244,7 @@ function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
 	local character = client:GetCharacter()
 	self:LoadOwnedInventory(record, slotID, slot, "cotzHideoutContainer", slot.width or 1, slot.height or 1,
 		function(storage)
+			if not storage then return end
 			if not IsValid(client) or client:GetCharacter() ~= character or not self:IsNearUtility(client, entity)
 				or not self:CanManageContainer(client, record, slotID)
 				or (slot.tier or 0) + 1 ~= tierNumber or input.invID ~= inventory:GetID() then return end
@@ -248,10 +283,11 @@ end
 
 function PLUGIN:ContainerAccepts(record, slotID, item)
 	local _, definition = self:GetContainer(record, slotID)
-	local recipe = definition and self.containerRecipes[definition.recipe]
+	local recipe = definition and self:GetContainerRecipe(record, definition)
 	if not recipe or item.isBag or item:GetData("id") then return false end
 	if recipe.filter == "ammo" then return item.isAmmo == true end
 	if recipe.filter == "medical" then return item.base == "base_aid" end
+	if recipe.filter == "weapon" then return item.isWeapon == true end
 
 	return recipe.filter == "general"
 end
@@ -259,6 +295,10 @@ end
 function PLUGIN:CanTransferHideoutItem(item, current, target, client)
 	if self.applyingOperation then return end
 	if self:IsOperationLocked(item, current, target) then return false end
+	client = client or item.player or current and current.GetOwner and current:GetOwner()
+	local dropping = target and target == ix.item.inventories[0]
+	if dropping and IsValid(client) and self.CanDropPersonalItem
+		and self:CanDropPersonalItem(client, item) == false then return false end
 	if current and current.vars and current.vars.hideoutRecovery
 		or target and target.vars and target.vars.hideoutRecovery then
 		local session = self.recoverySessions[client]
@@ -306,6 +346,7 @@ function PLUGIN:OpenRecoveryInventory(client, id, slotID)
 	local position = client:GetPos()
 	self:LoadOwnedInventory(record, slotID, slot, "cotzHideoutContainer", slot.width or 1, slot.height or 1,
 		function(inventory)
+			if not inventory then return end
 			if not IsValid(client) or client:GetCharacter() ~= character then return end
 			self:CloseInventoryStorage(inventory)
 			inventory.vars.hideoutRecovery = true

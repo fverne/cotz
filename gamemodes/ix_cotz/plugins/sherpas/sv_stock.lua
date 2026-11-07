@@ -94,6 +94,7 @@ function ix.sherpa.LoadStock(entity, callback)
 	local hideouts = ix.plugin.Get("hideouts")
 	if not hideouts or not hideouts.operationsReady then return end
 	hideouts:LoadOwnedInventory(record, "sherpa", record.shop, "cotzSherpaStock", 10, 8, function(inventory)
+		if not inventory then return end
 		if not IsValid(entity) then return end
 		-- Generic inventory/storage requests cannot bypass the vendor transaction path.
 		inventory.vars.hideout, inventory.vars.hideoutSlot = nil, nil

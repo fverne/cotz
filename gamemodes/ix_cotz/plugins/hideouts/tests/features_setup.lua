@@ -1,6 +1,17 @@
 PLUGIN = hideoutPlugin
 getmetatable(NewEntity()).PhysicsInit = function() end
 SERVER, CLIENT = true, false
+function SortedPairs(values)
+	local keys = table.GetKeys(values)
+	table.sort(keys)
+	local index = 0
+
+	return function()
+		index = index + 1
+		local key = keys[index]
+		if key ~= nil then return key, values[key] end
+	end
+end
 math.Clamp = function(value, low, high) return math.max(low, math.min(high, value)) end
 util.AddNetworkString = function() end
 local serial = 0

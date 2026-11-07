@@ -7,6 +7,7 @@ function PLUGIN:CanBuildInHideout(client)
 
 	return instance and instance.state == "active" and not instance.saving
 		and self:Contains(client:GetPos(), instance.mins, instance.maxs)
+		and (record.ownerType == "squad" or record.furnishingLevel == 1)
 		and self:CanManageHideout(client, record) or false
 end
 

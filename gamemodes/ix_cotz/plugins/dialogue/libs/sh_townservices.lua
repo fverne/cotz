@@ -86,7 +86,33 @@ local function addConversions(dialogue)
 	})
 end
 
+local function addHideoutBarter(dialogue)
+	dialogue.addTopic("HideoutBarter", {
+		statement = "Can I arrange a hideout or buy improvements?",
+		response = "",
+		options = {"BackTopic"},
+		ShouldAdd = function() return ix.plugin.Get("hideouts") ~= nil end,
+		postCallback = function(_, client, target)
+			local hideouts = ix.plugin.Get("hideouts")
+			if SERVER and hideouts then hideouts:OpenPersonalBarter(client, target, 1) end
+		end,
+	})
+	if not dialogue.tree.StartBarter then
+		dialogue.addTopic("StartBarter", {
+			statement = "What can we barter?", response = "", options = {"BackTopic"},
+		})
+	end
+	local options = dialogue.tree.StartBarter.options
+	options[#options + 1] = "HideoutBarter"
+	for _, root in ipairs({"GREETING", "BackTopic"}) do
+		local found
+		for _, id in ipairs(dialogue.tree[root].options) do if id == "StartBarter" then found = true end end
+		if not found then table.insert(dialogue.tree[root].options, "StartBarter") end
+	end
+end
+
 function ix.dialogue.ConfigureTownServices(dialogue, contact)
+	if contact.id == "ballast" or contact.id == "cleaner" or contact.id == "ledger" then addHideoutBarter(dialogue) end
 	local topic
 	if contact.id == "ballast" then addStorage(dialogue) topic = "StorageTopic" end
 	if contact.id == "vesper" then addConversions(dialogue) topic = "ChangeSuitVariant" end

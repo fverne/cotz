@@ -25,6 +25,7 @@ function PLUGIN:RestoreShop(instance, callback)
 	}
 	self:LoadOwnedInventory(record, "shop", record.shop, "cotzHideoutStock",
 		record.shop.width, record.shop.height, function(inventory)
+			if not inventory then callback(false, "Could not persist squad inventory assignment.") return end
 			if self.instances[instance.id] ~= instance or instance.state ~= "loading" then return end
 			instance.stock = inventory
 			self:CreateVendor(instance)
