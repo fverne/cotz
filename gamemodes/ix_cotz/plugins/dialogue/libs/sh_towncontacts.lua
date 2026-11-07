@@ -181,7 +181,7 @@ local function configureDeliveries(dialogue, contact)
 			local options = {}
 			for npc, job in SortedPairs(client:GetCharacter():GetJobs()) do
 				if ix.jobs.regional and ix.jobs.regional.ReceiverMatches(client:GetCharacter(), contact, job) then
-					options[#options + 1] = {statement = "Hand over items for " .. npc .. ".",
+					options[#options + 1] = {statement = "Hand over items on behalf of " .. npc .. ".",
 						topicID = "TownDeliveries", dyndata = {npc = npc, claim = job.rewardKey, valuable = true}}
 				end
 				local state = job.fieldTask
