@@ -1,4 +1,44 @@
+local PLUGIN = PLUGIN
 local previews = {}
+local PREVIEW_DISTANCE_SQUARED = 192 ^ 2
+local PREVIEW_COOLDOWN = 0.15
+
+util.AddNetworkString("cotz/townnpcs/preview")
+util.AddNetworkString("cotz/townnpcs/preview-sequence")
+
+function PLUGIN:CanEditTownNPCPreview(client, npc)
+	return IsValid(client) and client:IsPlayer() and client:IsAdmin() and IsValid(npc)
+		and npc:GetClass() == "ix_townnpc_preview" and previews[client] == npc
+		and client:GetPos():DistToSqr(npc:GetPos()) <= PREVIEW_DISTANCE_SQUARED
+end
+
+function PLUGIN:OpenTownNPCPreview(client, npc)
+	if not self:CanEditTownNPCPreview(client, npc) then return end
+	if (client.cotzPreviewNextOpen or 0) > CurTime() then return end
+	client.cotzPreviewNextOpen = CurTime() + 0.5
+	net.Start("cotz/townnpcs/preview")
+	net.WriteEntity(npc)
+	net.Send(client)
+end
+
+function PLUGIN:SetTownNPCPreviewSequence(client, npc, index)
+	if not self:CanEditTownNPCPreview(client, npc) then return false end
+	if (client.cotzPreviewNextChange or 0) > CurTime() then return false end
+	client.cotzPreviewNextChange = CurTime() + PREVIEW_COOLDOWN
+	if index < 0 or index >= npc:GetSequenceCount() or index ~= math.floor(index) then return false end
+	local sequence = npc:GetSequenceName(index)
+	if sequence == "" or npc:LookupSequence(sequence) < 0 then return false end
+	npc:SetTownSpawnAnim(sequence)
+	npc:SetAnim()
+
+	return true
+end
+
+net.Receive("cotz/townnpcs/preview-sequence", function(_, client)
+	local npc = net.ReadEntity()
+	local index = net.ReadUInt(16)
+	PLUGIN:SetTownNPCPreviewSequence(client, npc, index)
+end)
 
 function PLUGIN:RunCommandTownNPCPreview(client, id, sequence)
 	if not IsValid(client) then return "Run this command as a player in game." end
@@ -13,6 +53,10 @@ function PLUGIN:RunCommandTownNPCPreview(client, id, sequence)
 	npc:SetAngles(Angle(0, client:EyeAngles().y, 0))
 	npc:Spawn()
 	npc:LoadTemplate(template)
+	if sequence == nil then
+		sequence = npc:GetIdleAnim()
+		if sequence == "" or npc:LookupSequence(sequence) < 0 then sequence = npc:GetSequenceName(0) end
+	end
 	if npc:LookupSequence(sequence) < 0 then
 		npc:Remove()
 
@@ -28,7 +72,7 @@ function PLUGIN:RunCommandTownNPCPreview(client, id, sequence)
 	undo.SetPlayer(client)
 	undo.Finish()
 
-	return "Preview ready. Aim at it and use /TownNPCGetSpawnPoint to capture its pose."
+	return "Preview ready. Press E on it to browse animations; use /TownNPCGetSpawnPoint to capture its pose."
 end
 
 function PLUGIN:PlayerDisconnected(client)

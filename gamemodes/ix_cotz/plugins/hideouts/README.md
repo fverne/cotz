@@ -19,6 +19,14 @@ plugin override. The upstream helix directory remains unchanged.
 Run these commands in game as an administrator. Configuration and hideout records
 are saved per map through PLUGIN:SetData; repeat setup for each map.
 
+Reusable setup can also be exported and deployed through
+[First Time Setup](../firsttimesetup/README.md#hideout-setup). `/FTSDumpPluginData` writes the setup
+fields to `garrysmod/data/FTSDump/hideouts.txt` for the map preset's `plugindata["hideouts"]` entry.
+Player-owned rooms and their contents are excluded, as are squad-placed entrances. Shell files and
+their template markers must be copied separately. Imports add missing setup IDs, preserve existing
+definitions and player state, and require every instance to be unloaded. The bundled presets start
+empty; author and verify each map's usable areas and entrances before exporting.
+
 1. Mark the usable remote area. Stand at its lower corner and run
    /HideoutAreaStart. Move to the diagonally opposite upper corner and run
    /HideoutAreaFinish remote. These are positions at your feet, not eye-trace
@@ -460,6 +468,7 @@ confirm behavior against the server's installed AdvDupe2 version.
 From the repository root:
 
     python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
+    luatex --luaonly tests/fts_hideouts_spec.lua
 
 This syntax-checks changed GLua and runs real server methods against mocked engine boundaries
 using the system Lua shared library. Feature cases use the installed query builder and real SQLite

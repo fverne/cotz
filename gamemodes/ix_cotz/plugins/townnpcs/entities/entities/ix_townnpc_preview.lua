@@ -14,7 +14,10 @@ function ENT:CanTalkTo()
 	return false
 end
 
-function ENT:Use()
+function ENT:Use(activator)
+	if SERVER then
+		ix.plugin.Get("townnpcs"):OpenTownNPCPreview(activator, self)
+	end
 end
 
 if CLIENT then

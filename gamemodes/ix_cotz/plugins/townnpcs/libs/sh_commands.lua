@@ -3,7 +3,7 @@ local PLUGIN = PLUGIN
 ix.command.Add("TownNPCPreview", {
 	adminOnly = true,
 	description = "Preview a town contact or advanced-vendor template playing an animation, without saving it.",
-	arguments = {ix.type.string, ix.type.string},
+	arguments = {ix.type.string, bit.bor(ix.type.string, ix.type.optional)},
 	argumentNames = {"contact or template", "sequence"},
 	OnRun = function(_, client, template, sequence)
 		return PLUGIN:RunCommandTownNPCPreview(client, template, sequence)

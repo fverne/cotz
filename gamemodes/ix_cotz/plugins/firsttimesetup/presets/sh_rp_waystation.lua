@@ -1142,6 +1142,7 @@ PLUGIN.map_presets["rp_waystation"] = {
     },
   },
   plugindata = {
+    ["hideouts"] = {},
     ["townnpcs"] = {},
     ["anomalycontroller"] = {
       { Vector(5662.943359375,2839.6801757812,9.5241003036499) , 512 , "0000111" }, 

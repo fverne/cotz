@@ -1121,6 +1121,7 @@ PLUGIN.map_presets["rp_garbage_cotz"] = {
 	},
 	vendors = {},
 	plugindata = {
+		["hideouts"] = {},
 		["townnpcs"] = {},
 		["anomalycontroller"] = {
 			{ Vector(-7838.0849609375,-6733.2446289062,-223.9541015625) , 512 , "0000111" }, 

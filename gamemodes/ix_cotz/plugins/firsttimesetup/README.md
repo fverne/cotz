@@ -4,6 +4,29 @@ Map presets in `presets/` are explicitly included by `sh_plugin.lua`. Each prese
 `containers`, `entities`, `vendors`, and `plugindata`. The server implementation of generic
 entity export and spawning lives in `sv_entities.lua`.
 
+## Hideout setup
+
+`/FTSDumpPluginData` includes reusable hideout setup in the server's
+`garrysmod/data/FTSDump/hideouts.txt`. Remove the `hideouts` heading and paste the remaining
+fields inside the map preset's `plugindata["hideouts"]` table. All four bundled presets provide
+an empty table for this data; no hideout coordinates or shells are shipped by this integration.
+
+The export includes allocation areas, template definitions and manual points/container recipes,
+fixed exterior entrances, personal trader locations, and the outside recovery position. It excludes
+owned rooms, inventories, guests, purchases, furnishings, squad-placed entrances, and allocation history.
+Template markers remain in the AdvDupe2 shell. Copy every referenced shell file separately to the
+destination server's `AdvDupe2.DataFolder/STALKERDupes/` directory.
+
+FTS imports only the current map's setup. Existing definition IDs and an existing recovery point win;
+missing IDs are added. This preserves bindings for owned rooms and saved storage slots. Omitted or
+empty hideout data changes nothing. To revise an existing definition, use the hideout setup commands.
+
+Nonempty imports require loaded hideout data and no loaded/loading/saving hideout instances. New
+definitions, references and shell files are validated before saving or populating FTS world entities.
+A failed save restores the previous in-memory setup and stops FTS. Successful imports immediately
+refresh exterior keypads. Refer to the [hideout setup guide](../hideouts/README.md) for placement and
+geometry checks. Do not rerun full FTS on an initialized map merely to update hideout setup.
+
 ## Export persistent map entities
 
 Run `/FTSDumpPersistentEntities` as an administrator. The command writes
@@ -41,11 +64,16 @@ Run from the repository root:
 
 ```sh
 luatex --luaonly tests/fts_entities_spec.lua
+luatex --luaonly tests/fts_hideouts_spec.lua
 ```
 
 The standalone spec checks generated Lua round trips, Color tool appearance, zero-indexed
 bodygroups/submaterials, movement, persistence registration/filtering, legacy presets,
 command registration, cooldowns, and failed writes/creation. It uses mocks.
+
+The hideout spec checks setup export/import and Lua round trips, ownership/inventory isolation,
+existing-ID preservation, unloaded-instance checks, malformed definitions, missing/rejected shell files,
+failed-save rollback, and stopping FTS before world population on invalid hideout data.
 
 In a multiplayer development session, mark a colored/translucent `prop_physics` persistent,
 dump it, and inspect the server-side file. On a disposable test map, restore an exported

@@ -765,9 +765,17 @@ snapshot is not a successful runtime audit.
 
 ## Disposable posing previews
 
-Administrators can use `/TownNPCPreview <contact-slug-or-vendor-template> <sequence>`, for example
-`/TownNPCPreview jitters idle_all_01`, with a sequence supported by that contact's mounted model.
-The preview appears at the crosshair, faces your yaw and loops that sequence. Sequence index zero
+Administrators can use `/TownNPCPreview <contact-slug-or-vendor-template> [sequence]`, for example
+`/TownNPCPreview jitters`, then press **E** on the preview to browse the model's available animations.
+The searchable list includes sequence index zero and lets you play an entry with one click. Previous
+and next buttons cycle through the filtered list, wrapping at either end. The current animation is
+shown above the list; the window sits to the right so the preview remains visible. Closing the window
+keeps the selected pose. Press E to reopen it. Only the administrator who created the preview can edit
+it, while nearby and still an administrator; the server validates and rate-limits every change.
+
+The optional sequence argument still works, for example `/TownNPCPreview jitters idle_all_01`.
+Without it, the preview uses the configured idle or the model's first sequence if that idle is missing.
+The preview appears at the crosshair, faces your yaw and loops the selected sequence. Sequence index zero
 is valid. Use `/TownNPCGetSpawnPoint` on it to print the visible position, facing and animation for
 an alternate restart point. Existing point export/import behavior remains unchanged.
 
@@ -779,7 +787,10 @@ separate class excludes it from vendor saves, contact lookup and restart placeme
 Town commands now register on both realms in `libs/sh_commands.lua`; handlers, saved data and
 network registration remain server-side. Check permissions and chat completion with an admin and
 ordinary player. Run `tests/town_preview_spec.lua`, `tests/town_spawnpoints_spec.lua` and
-`tests/shared_commands_spec.lua` with `luatex --luaonly`.
+`tests/shared_commands_spec.lua` with `luatex --luaonly`. Picker controls, filtering, sequence zero,
+navigation, lifecycle and resizing also have mock coverage in `tests/town_preview_ui_spec.lua`.
+In multiplayer, check E interaction, model sequence availability, visible looping, capture after
+switching, ownership/distance restrictions, and the picker at narrow, 1080p, ultrawide and 4K sizes.
 
 Concrete contacts declare `courierPools` using existing `valuables_` requirement categories, reflecting
 their established profiles. These interests broaden incoming valuable-courier deliveries without

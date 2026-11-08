@@ -36,13 +36,17 @@ local function serialize(value, depth)
 	local lines = {"{"}
 
 	for _, key in ipairs(keys) do
-		local name = isnumber(key) and ("[" .. key .. "]") or key
+		local name = isnumber(key) and ("[" .. key .. "]") or string.format("[%q]", key)
 		lines[#lines + 1] = string.rep("\t", depth + 1) .. name .. " = " .. serialize(value[key], depth + 1) .. ","
 	end
 
 	lines[#lines + 1] = string.rep("\t", depth) .. "}"
 
 	return table.concat(lines, "\n")
+end
+
+function PLUGIN:FormatPluginDataRecord(id, data)
+	return string.format("\t[%q] = %s,\n", id, serialize(data, 1))
 end
 
 function PLUGIN:GetPersistentEntityData(entity)

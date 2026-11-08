@@ -1000,25 +1000,17 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       angles = Angle(0.000, -33, 0.000)
     },
     {
-      template = "firststalkernpc",
-      position = Vector(-8142.958008, -11082.580078, 4939.861328),
-      angles = Angle(0.000, 179.194, 0.000)
-    },
-    {
       template = "technpc",
       position = Vector(-6006.653809, -11071.930664, 5026.031250),
       angles = Angle(0,-177.793,0)
-    },
-    {
-      template = "owlnpc",
-      position = Vector(-6728.806152, -9394.196289, 4962.929199),
-      angles = Angle(0.000, -89.888, 0.000)
     },
     {
       template = "medicnpc",
       position = Vector(-7328.550293, -9329.122070, 4973.031250),
       angles = Angle(0.000, -90, 0.000)
     },
+
+    --ecobunker npcs
     {
       template = "ecologistnpc",
       position = Vector(4341.8876953125,8572.70703125,-1084.96875),
@@ -1038,6 +1030,7 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
   },
 
   plugindata = {
+    ["hideouts"] = {},
     ["townnpcs"] = {},
     ["anomalycontroller"] = {
       { Vector(8676.5146484375,-11845.803710938,69) , 256 , "0011" }, 

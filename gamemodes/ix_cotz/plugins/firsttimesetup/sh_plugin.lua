@@ -15,6 +15,14 @@ ix.util.Include("sv_entities.lua")
 if SERVER then
 
 	PLUGIN.PluginDataDeployFunctions = {
+		["hideouts"] = function(payload, map)
+			if map ~= game.GetMap() or payload == nil then return true end
+			if istable(payload) and not next(payload) then return true end
+			local hideouts = ix.plugin.Get("hideouts")
+			if not hideouts then return false, "The hideouts plugin is not loaded." end
+
+			return hideouts:ImportFTSData(payload)
+		end,
 		["townnpcs"] = function(payload, map)
 			if map ~= game.GetMap() or payload == nil then return end
 			local townPlugin = ix.plugin.Get("townnpcs")
@@ -62,6 +70,11 @@ if SERVER then
 	}
 
 	PLUGIN.PluginDataGetFunctions = {
+		["hideouts"] = function()
+			local hideouts = ix.plugin.Get("hideouts")
+
+			return hideouts and hideouts:GetFTSData() or {}
+		end,
 		["townnpcs"] = function()
 			local townPlugin = ix.plugin.Get("townnpcs")
 
@@ -94,6 +107,9 @@ if SERVER then
 	}
 
 	PLUGIN.PluginDataFormatFunctions = {
+		["hideouts"] = function(id, data)
+			return PLUGIN:FormatPluginDataRecord(id, data)
+		end,
 		["townnpcs"] = function(id, data)
 			return ix.plugin.Get("townnpcs"):FormatTownSpawnPoints(id, data)
 		end,
@@ -143,6 +159,12 @@ if SERVER then
 	end
 
 	function PLUGIN:RunFirstTimeSetup()
+		local preset = self.map_presets[game.GetMap()]
+		if not preset then return false, "No FTS preset exists for this map." end
+		-- Validate and save hideout setup before spawning any of the preset's world entities.
+		local ok, reason = self.PluginDataDeployFunctions.hideouts(preset.plugindata.hideouts, game.GetMap())
+		if not ok then return false, "Hideout setup failed: " .. reason end
+
 		-- Spawn containers
 		for _, containerdata in pairs(self.map_presets[game.GetMap()].containers) do
 			self:SpawnContainer(containerdata)
@@ -162,12 +184,16 @@ if SERVER then
 
 		-- Init all plugin data; NOTE: plugins can get data from all maps as this might be needed (hidestashspawner etc.)
 		for pluginid, func in pairs(self.PluginDataDeployFunctions) do
-			for map, _ in pairs(self.map_presets) do
-				func(self.map_presets[map].plugindata[pluginid], map)
+			if pluginid ~= "hideouts" then
+				for map, _ in pairs(self.map_presets) do
+					func(self.map_presets[map].plugindata[pluginid], map)
+				end
 			end
 		end
 
 		self.firstTimeSetupRun = true
+
+		return true, "First time setup completed."
 	end
 
 	function PLUGIN:SpawnContainer(containerdata)
@@ -283,7 +309,9 @@ ix.command.Add("FTSRunFirstTimeSetup", {
 	arguments = bit.bor(ix.type.bool, ix.type.optional),
 	OnRun = function(self, client, override)
 		if (not ix.plugin.list["firsttimesetup"].firstTimeSetupRun) or override then
-			ix.plugin.list["firsttimesetup"]:RunFirstTimeSetup()
+			local _, message = ix.plugin.list["firsttimesetup"]:RunFirstTimeSetup()
+
+			return message
 		else
 			client:Notify("First time setup has already been run on this map, put 'true' as an argument to this function to override and run anyway")
 		end

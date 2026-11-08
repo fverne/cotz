@@ -6,9 +6,19 @@ function Vector(x, y, z) return {x = x, y = y, z = z} end
 function Angle(p, y, r) return {p = p, y = y, r = r} end
 IsValid = function(value) return type(value) == "table" and not value.invalid end
 local position = setmetatable(Vector(1, 2, 3), {__add = function(self) return self end})
+function position:DistToSqr(other) return other.distance or 0 end
 local client = {GetEyeTraceNoCursor = function() return {HitPos = position, HitNormal = position} end,
-	EyeAngles = function() return Angle(30, 45, 10) end}
+	EyeAngles = function() return Angle(30, 45, 10) end,
+	GetPos = function() return position end, IsPlayer = function() return true end,
+	IsAdmin = function(self) return not self.demoted end}
+local now = 0
+CurTime = function() return now end
+local packet, receiver
+util = {AddNetworkString = function() end}
+net = {Start = function() end, WriteEntity = function(npc) packet = npc end, Send = function() end,
+	Receive = function(_, callback) receiver = callback end}
 local created, undone = {}, {}
+local defaultIdle = "pose_zero"
 local function create(class)
 	local npc = {class = class}
 	function npc:GetClass() return self.class end
@@ -17,6 +27,10 @@ local function create(class)
 	function npc:Spawn() self.spawned = true end
 	function npc:LoadTemplate(value) self.template = value end
 	function npc:LookupSequence(value) return value == "pose_zero" and 0 or -1 end
+	function npc:GetPos() return self.position end
+	function npc:GetIdleAnim() return defaultIdle end
+	function npc:GetSequenceCount() return 1 end
+	function npc:GetSequenceName(index) return index == 0 and "pose_zero" or "" end
 	function npc:Remove() self.invalid = true end
 	function npc:SetNoBubble(value) self.noBubble = value end
 	function npc:SetTownSpawnAnim(value) self.animation = value end
@@ -52,15 +66,33 @@ town:RunCommandTownNPCPreview(client, "medicnpc", "missing")
 check(created[2].invalid and not first.invalid, "an invalid sequence removes only the rejected preview")
 town:RunCommandTownNPCPreview(client, "medicnpc", "pose_zero")
 check(first.invalid and not created[3].invalid, "a new pose replaces the administrator's previous preview")
-local secondClient = {GetEyeTraceNoCursor = client.GetEyeTraceNoCursor, EyeAngles = client.EyeAngles}
+local secondClient = setmetatable({}, {__index = client})
 town:RunCommandTownNPCPreview(secondClient, "jitters", "pose_zero")
 check(not created[3].invalid and not created[4].invalid, "administrators have independent previews")
 town:PlayerDisconnected(client)
 check(created[3].invalid and not created[4].invalid, "disconnect cleans up only the departing administrator")
 local preview = created[4]
-local packet
-util = {AddNetworkString = function() end}
-net = {Start = function() end, WriteEntity = function(npc) packet = npc end, Send = function() end}
+town:OpenTownNPCPreview(secondClient, preview)
+check(packet == preview, "owner can open their nearby preview picker")
+packet = nil
+town:OpenTownNPCPreview(secondClient, preview)
+check(packet == nil, "picker opens are rate limited")
+check(not town:SetTownNPCPreviewSequence(client, preview, 0), "another administrator cannot change this preview")
+check(town:SetTownNPCPreviewSequence(secondClient, preview, 0), "owner can select sequence index zero")
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, 0), "sequence changes are server rate limited")
+now = 1
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, 1), "out-of-range sequences are rejected")
+now = 2
+preview.position.distance = 192 ^ 2 + 1
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, 0), "distant preview changes are rejected")
+preview.position.distance = nil
+secondClient.demoted = true
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, 0), "permissions are rechecked after demotion")
+secondClient.demoted = nil
+net.ReadEntity = function() return preview end
+net.ReadUInt = function(bits) check(bits == 16, "sequence index has a bounded typed payload") return 0 end
+receiver(nil, secondClient)
+check(preview.animation == "pose_zero", "network handler applies a validated owner selection")
 function secondClient:GetEyeTraceNoCursor() return {Entity = preview} end
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_spawnpoints.lua")
 town:RunCommandTownNPCGetSpawnPoint(secondClient)
@@ -85,4 +117,10 @@ assert(load(lookup))()
 check(ix.progression.GetNPCFromName("Jitters") == nil, "posing copies cannot satisfy contact lookup")
 town:OnUnload()
 check(preview.invalid, "plugin unload removes remaining posing copies")
+town:RunCommandTownNPCPreview(client, "jitters")
+check(created[#created].animation == "pose_zero", "omitted sequence uses the model's configured idle")
+defaultIdle = "missing"
+town:RunCommandTownNPCPreview(client, "jitters")
+check(created[#created].animation == "pose_zero", "missing configured idle falls back to the first model sequence")
+town:OnUnload()
 print("PASS: " .. checks .. " town preview checks")

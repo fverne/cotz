@@ -21,6 +21,7 @@ function vectorMeta:DistToSqr(other)
 	return (self.x - other.x) ^ 2 + (self.y - other.y) ^ 2 + (self.z - other.z) ^ 2
 end
 function Angle(p, y, r) return {p = p, y = y, r = r} end
+function Color(r, g, b, a) return {r = r, g = g, b = b, a = a or 255} end
 function IsValid(value) return type(value) == "table" and not value.invalid end
 function SortedPairs(value)
 	local keys = {}

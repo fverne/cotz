@@ -2,7 +2,8 @@
 local checks = 0
 local function check(value, message) checks = checks + 1 assert(value, message) end
 SERVER, CLIENT = false, true
-ix = {type = {character = 1, string = 2}, command = {}}
+ix = {type = {character = 1, string = 2, optional = 4}, command = {}}
+bit = {bor = function(first, second) return first + second end}
 local commands = {}
 ix.command.Add = function(name, command) commands[name] = command end
 local groups = {
@@ -34,4 +35,5 @@ for path, names in pairs(groups) do
 end
 check(#commands.TownNPCPreview.arguments == 2 and commands.TownNPCPreview.argumentNames[2] == "sequence",
 	"posing syntax and typed arguments are visible in chat completion")
+check(commands.TownNPCPreview.arguments[2] == 6, "sequence is optional in shared chat completion")
 print("PASS: " .. checks .. " shared command checks")
