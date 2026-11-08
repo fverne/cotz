@@ -40,6 +40,9 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 	local parts = {self.name .. "\n"}
 	if self.briefing then parts[#parts + 1] = self.briefing end
 	if self.townObjective then parts[#parts + 1] = "\nObjective: " .. self.townObjective end
+	if self.acquisitionMaps then
+		parts[#parts + 1] = "Acquisition regions: " .. table.concat(self.acquisitionMaps, ", ")
+	end
 	if self.stageCount then
 		parts[#parts + 1] = string.format("Part %d of %d. "
 			.. "Final equipment authorisation requires the complete programme.", self.stageIndex, self.stageCount)
@@ -54,8 +57,10 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 		parts[#parts + 1] = "\nREQUIRED ITEMS:"
 		local requirements = {}
 		for itemID, amount in pairs(ix.progression.GetRequirements(character, self.id)) do
-			requirements[#requirements + 1] = string.format("%d %s",
-				amount - ((line.complexData or {})[itemID] or 0), ix.item.list[itemID].name)
+			local remaining = amount - ((line.complexData or {})[itemID] or 0)
+			if remaining > 0 then
+				requirements[#requirements + 1] = string.format("%d %s", remaining, ix.item.list[itemID].name)
+			end
 		end
 		table.sort(requirements)
 		for _, requirement in ipairs(requirements) do
@@ -93,15 +98,17 @@ end
 
 function ix.progression.GetBenefitSummary(definition, character)
 	local parts = benefitText(definition.completionBenefits or {})
-	if definition.completionCash and definition.completionCash > 0 then
-		parts[#parts + 1] = string.format("%d rubles on completion", definition.completionCash)
+	if definition.requirementSlots then
+		parts[#parts + 1] = "Payment on completion: 60% of the accepted hand-in value"
 	end
 	for _, unlock in ipairs(definition.vendorUnlocks or {}) do
 		parts[#parts + 1] = "Purchase access: " .. ix.item.list[unlock.args[1]].name
 	end
 	for _, unlock in ipairs(definition.stockUnlocks or {}) do
-		parts[#parts + 1] = string.format("Stock capacity: %d more of the selected goods; deliveries arrive as before",
-			unlock.bonus)
+		local names = {}
+		for _, itemID in ipairs(unlock.items) do names[#names + 1] = ix.item.list[itemID].name end
+		parts[#parts + 1] = string.format("Stock capacity: %s; +%d total; deliveries arrive as before",
+			table.concat(names, ", "), unlock.bonus)
 	end
 	if definition.ammoExchange then
 		local exchange = definition.ammoExchange

@@ -24,9 +24,7 @@ function ix.progression.AccrueTurnInRewards(character, progressionID, reputation
 	local line, group = rewardLedger(character, progressionID, record)
 	prepareCredit(line)
 	line.rewardCredit.reputation = line.rewardCredit.reputation + reputation
-	if not ix.progression.definitions[progressionID].townContact then
-		line.rewardCredit.money = line.rewardCredit.money + money
-	end
+	line.rewardCredit.money = line.rewardCredit.money + money
 	if not group then
 		record.lines[progressionID] = line
 	end
@@ -47,8 +45,7 @@ function ix.progression.PayCompletionRewards(character, progressionID)
 	local reputation = math.max(0,
 		math.floor(line.rewardCredit.reputation + 0.5 + REWARD_ROUNDING_EPSILON) - line.rewardsPaid.reputation)
 	local money = math.max(0,
-		math.ceil(math.max(line.rewardCredit.money, definition.completionCash or 0)
-			- REWARD_ROUNDING_EPSILON) - line.rewardsPaid.money)
+		math.ceil(line.rewardCredit.money - REWARD_ROUNDING_EPSILON) - line.rewardsPaid.money)
 	stage.completionRewardsPaid = true
 	line.rewardsPaid.reputation = line.rewardsPaid.reputation + reputation
 	line.rewardsPaid.money = line.rewardsPaid.money + money

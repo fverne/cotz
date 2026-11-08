@@ -241,6 +241,29 @@ check(
 )
 check(bulk.money == 1 and bulk.reputation == 11, "completion rounds cash up once and preserves reputation")
 check(not bulk.inventory.rewards, "singleton pools give money instead of items")
+
+ix.progression.definitions.reward_test.townContact = "atlas"
+ix.progression.definitions.reward_test.completionCash = 9999
+local townBulk, townSupply = rewardCharacter()
+local townSplit, townSplitSupply = rewardCharacter()
+townSupply(10)
+check(ix.progression.TurnIn(townBulk.client, rewardNPC, "reward_test", "reward_test"),
+	"town progression accepts the same authoritative valued hand-in")
+for _ = 1, 10 do
+	townSplitSupply(1)
+	check(ix.progression.TurnIn(townSplit.client, rewardNPC, "reward_test", "reward_test"),
+		"town progression accepts partial deliveries")
+	if not ix.progression.IsCompleted(townSplit, "reward_test") then
+		check(townSplit.money == 0, "town hand-in value is held until completion")
+	end
+end
+check(townBulk.money == 1 and townSplit.money == 1 and townBulk.reputation == townSplit.reputation,
+	"town payments use only accumulated value, rounded once, ignoring obsolete flat cash")
+ix.progression.PayCompletionRewards(townSplit, "reward_test")
+check(townSplit.money == 1, "town completion recovery cannot replay the payout")
+ix.progression.definitions.reward_test.townContact = nil
+ix.progression.definitions.reward_test.completionCash = nil
+
 local ammoOwner, supplyAmmo = rewardCharacter(true)
 supplyAmmo(10)
 check(ix.progression.TurnIn(ammoOwner.client, rewardNPC, "reward_test", "reward_test"), "ammo default stack accepted")
@@ -537,7 +560,7 @@ ix.progression.Register("journalRewardsFixture", {
 	requirementSlots = {{pool = "fixture", quantity = 1}},
 	BuildResponse = ix.progression.BuildDeliveryResponse,
 	vendorUnlocks = {{npc = "'Cleaner'", args = {"artifact_bolt"}}},
-	stockUnlocks = {{npc = "'Cleaner'", items = {"artifact_bolt"}, bonus = 2}}, completionCash = 200,
+	stockUnlocks = {{npc = "'Cleaner'", items = {"artifact_bolt"}, bonus = 2}},
 })
 ix.progression.InitializeCharacterProgression(journalOwner)
 local request = ix.progression.definitions.journalRewardsFixture
@@ -546,7 +569,7 @@ local requiredAt, rewardsAt = journal:find("REQUIRED ITEMS:", 1, true), journal:
 check(requiredAt and rewardsAt and requiredAt < rewardsAt, "requirements precede a distinct Rewards section")
 check(journal:find("Purchase access:", 1, true) > rewardsAt
 	and journal:find("Stock capacity:", 1, true) > rewardsAt
-	and journal:find("200 rubles", 1, true) > rewardsAt,
+	and journal:find("60% of the accepted hand-in value", 1, true) > rewardsAt,
 	"purchase access, stock capacity and money all appear under Rewards")
 check(not ix.progression.BuildDeliveryResponse(request, request.keyNpc, {}, journalOwner):find("Purchase access:", 1, true),
 	"required-item text never includes purchase rewards")

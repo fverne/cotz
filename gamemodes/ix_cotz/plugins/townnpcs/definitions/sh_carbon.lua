@@ -74,26 +74,19 @@ PLUGIN:Register("carbon", {
 			name = ".22LR FMJ",
 			kind = "delivery",
 			requires = {},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/22lrhp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_9f1389bb4fc8", quantity = 1},
 			},
-			completionCash = 450,
-			ammoExchange = {
-				input = "22lr",
-				output = "22lrap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/22lrhp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "22lr", output = "22lrap"},
+			branchIndex = 1,
+			branchLength = 19,
+			acquisitionMaps = {"rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/762x25ap",
@@ -101,26 +94,19 @@ PLUGIN:Register("carbon", {
 			name = "7.62x25mm Armor-Piercing",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/22lrap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/762x25hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_6fd371b9f765", quantity = 1},
 			},
-			completionCash = 550,
-			ammoExchange = {
-				input = "762x25",
-				output = "762x25ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/762x25hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "762x25", output = "762x25ap"},
+			branchIndex = 2,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/9x19ap",
@@ -128,26 +114,19 @@ PLUGIN:Register("carbon", {
 			name = "9x19mm 7N21",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/762x25ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/9x19hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_25b2bfa86bbf", quantity = 1},
 			},
-			completionCash = 700,
-			ammoExchange = {
-				input = "9x19",
-				output = "9x19ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/9x19hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "9x19", output = "9x19ap"},
+			branchIndex = 3,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/45acpap",
@@ -155,26 +134,19 @@ PLUGIN:Register("carbon", {
 			name = ".45 ACP Armor-Piercing",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/9x19ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/45acphp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_3a83224367ec", quantity = 1},
 			},
-			completionCash = 850,
-			ammoExchange = {
-				input = "45acp",
-				output = "45acpap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/45acphp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "45acp", output = "45acpap"},
+			branchIndex = 4,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/545x39ap",
@@ -182,26 +154,19 @@ PLUGIN:Register("carbon", {
 			name = "5.45x39mm 7N22 AP",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/45acpap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/545x39hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_00b462552751", quantity = 1},
 			},
-			completionCash = 1000,
-			ammoExchange = {
-				input = "545x39",
-				output = "545x39ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/545x39hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "545x39", output = "545x39ap"},
+			branchIndex = 5,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/762x39ap",
@@ -209,26 +174,19 @@ PLUGIN:Register("carbon", {
 			name = "7.62x39mm MAI AP",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/545x39ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/762x39hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_698c55e36371", quantity = 1},
 			},
-			completionCash = 1150,
-			ammoExchange = {
-				input = "762x39",
-				output = "762x39ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/762x39hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "762x39", output = "762x39ap"},
+			branchIndex = 6,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/556x45ap",
@@ -236,30 +194,20 @@ PLUGIN:Register("carbon", {
 			name = "5.56x45mm SS190",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/762x39ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/556x45hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_53c8d98c134e", quantity = 2},
+				{pool = "town_expansion_5a6ee4aca70c", quantity = 1},
 			},
-			completionCash = 1300,
-			ammoExchange = {
-				input = "556x45",
-				output = "556x45ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/556x45hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "556x45", output = "556x45ap"},
+			branchIndex = 7,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/9x18ap",
@@ -267,30 +215,20 @@ PLUGIN:Register("carbon", {
 			name = "9x18mm JSP-AP",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/556x45ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/9x18hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_f58d9881a38d", quantity = 2},
+				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
 			},
-			completionCash = 1400,
-			ammoExchange = {
-				input = "9x18",
-				output = "9x18ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/9x18hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "9x18", output = "9x18ap"},
+			branchIndex = 8,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/762x54ap",
@@ -298,30 +236,20 @@ PLUGIN:Register("carbon", {
 			name = "7.62x54mm 7N14",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/9x18ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/762x54hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_917b8fb961d3", quantity = 2},
+				{pool = "town_expansion_f76f539072e2", quantity = 1},
 			},
-			completionCash = 1550,
-			ammoExchange = {
-				input = "762x54",
-				output = "762x54ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/762x54hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "762x54", output = "762x54ap"},
+			branchIndex = 9,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/357magnumap",
@@ -329,30 +257,20 @@ PLUGIN:Register("carbon", {
 			name = ".357 Magnum Armor-Piercing",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/762x54ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/357magnumhp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_267028468a2f", quantity = 2},
+				{pool = "town_expansion_0da47dd4f95b", quantity = 1},
 			},
-			completionCash = 1700,
-			ammoExchange = {
-				input = "357magnum",
-				output = "357magnumap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/357magnumhp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "357magnum", output = "357magnumap"},
+			branchIndex = 10,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/9x39ap",
@@ -360,30 +278,20 @@ PLUGIN:Register("carbon", {
 			name = "9x39mm SP-6",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/357magnumap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/9x39hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_dda5a73e27a0", quantity = 2},
+				{pool = "town_expansion_84052fb593e1", quantity = 1},
 			},
-			completionCash = 1850,
-			ammoExchange = {
-				input = "9x39",
-				output = "9x39ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/9x39hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "9x39", output = "9x39ap"},
+			branchIndex = 11,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/44magnumap",
@@ -391,30 +299,20 @@ PLUGIN:Register("carbon", {
 			name = ".44 Magnum Armor-Piercing",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/9x39ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/44magnumhp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_f3ba8c0648cf", quantity = 2},
+				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
 			},
-			completionCash = 2000,
-			ammoExchange = {
-				input = "44magnum",
-				output = "44magnumap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/44magnumhp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "44magnum", output = "44magnumap"},
+			branchIndex = 12,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/9x21ap",
@@ -422,34 +320,21 @@ PLUGIN:Register("carbon", {
 			name = "9x21mm Gyurza SP-10 (7N29)",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/44magnumap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/9x21hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_9f1389bb4fc8", quantity = 3},
+				{pool = "town_expansion_7b968b06488a", quantity = 2},
+				{pool = "town_expansion_651e87048748", quantity = 1},
 			},
-			completionCash = 2150,
-			ammoExchange = {
-				input = "9x21",
-				output = "9x21ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/9x21hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "9x21", output = "9x21ap"},
+			branchIndex = 13,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/762x51ap",
@@ -457,34 +342,21 @@ PLUGIN:Register("carbon", {
 			name = "7.62x51mm M993 AP",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/9x21ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/762x51hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_738a3098b192", quantity = 3},
+				{pool = "town_expansion_ff17fd8b112a", quantity = 2},
+				{pool = "town_expansion_33716461332d", quantity = 1},
 			},
-			completionCash = 2250,
-			ammoExchange = {
-				input = "762x51",
-				output = "762x51ap",
-				boxes = 3,
-			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/762x51hp",
-				},
-			},
+			ammoExchange = {boxes = 3, input = "762x51", output = "762x51ap"},
+			branchIndex = 14,
+			branchLength = 19,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/500magnumap",
@@ -492,34 +364,26 @@ PLUGIN:Register("carbon", {
 			name = ".500 Magnum Armor Piercing",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/762x51ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/500magnumhp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_2ebb1070f409", quantity = 3},
+				{pool = "town_expansion_953fc3f79c23", quantity = 2},
+				{pool = "town_expansion_75c99ce321bb", quantity = 1},
 			},
-			completionCash = 2400,
-			ammoExchange = {
-				input = "500magnum",
-				output = "500magnumap",
-				boxes = 3,
+			ammoExchange = {boxes = 3, input = "500magnum", output = "500magnumap"},
+			branchIndex = 15,
+			branchLength = 19,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
 			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/500magnumhp",
-				},
-			},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/338lapuaap",
@@ -527,34 +391,26 @@ PLUGIN:Register("carbon", {
 			name = ".338 Lapua Armor-Piercing",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/500magnumap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/338lapuahp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_c0a68236b0e3", quantity = 3},
+				{pool = "town_expansion_cdb389d2dbed", quantity = 2},
+				{pool = "town_expansion_50c359fedf1b", quantity = 1},
 			},
-			completionCash = 2550,
-			ammoExchange = {
-				input = "338lapua",
-				output = "338lapuaap",
-				boxes = 3,
+			ammoExchange = {boxes = 3, input = "338lapua", output = "338lapuaap"},
+			branchIndex = 16,
+			branchLength = 19,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
 			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/338lapuahp",
-				},
-			},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/50aeap",
@@ -562,34 +418,26 @@ PLUGIN:Register("carbon", {
 			name = ".50AE Armor-Piercing",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/338lapuaap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/50aehp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_50823fd9b548", quantity = 3},
+				{pool = "town_expansion_84ea62849c8a", quantity = 2},
+				{pool = "town_expansion_755dc589f9af", quantity = 1},
 			},
-			completionCash = 2700,
-			ammoExchange = {
-				input = "50ae",
-				output = "50aeap",
-				boxes = 3,
+			ammoExchange = {boxes = 3, input = "50ae", output = "50aeap"},
+			branchIndex = 17,
+			branchLength = 19,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
 			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/50aehp",
-				},
-			},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/57x28ap",
@@ -597,34 +445,26 @@ PLUGIN:Register("carbon", {
 			name = "5.7x28mm SS190",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/50aeap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/57x28hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_a8eee82d13b5", quantity = 3},
+				{pool = "town_expansion_0080d0807602", quantity = 2},
+				{pool = "town_expansion_118f2ce6b2df", quantity = 1},
 			},
-			completionCash = 2850,
-			ammoExchange = {
-				input = "57x28",
-				output = "57x28ap",
-				boxes = 3,
+			ammoExchange = {boxes = 3, input = "57x28", output = "57x28ap"},
+			branchIndex = 18,
+			branchLength = 19,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
 			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/57x28hp",
-				},
-			},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/ap-ammo/145x114ap",
@@ -632,38 +472,27 @@ PLUGIN:Register("carbon", {
 			name = "14.5x114mm B-32",
 			kind = "delivery",
 			requires = {"v3/ap-ammo/57x28ap"},
+			crossRequires = {
+				{contact = "brass", step = "v3/hp-ammo/145x114hp"},
+			},
 			briefing = "I would like some ordinary source material for the collection. Even a working record can tell us what somebody thought was worth writing down. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will look through these before deciding where they belong.",
 			requirements = {
-				{
-					pool = "town_delivery_records_waystation_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_records_waystation_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_records_waystation_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_records_waystation_4",
-					quantity = 1,
-				},
+				{pool = "town_expansion_53c8d98c134e", quantity = 4},
+				{pool = "town_expansion_bf7b90a99fd7", quantity = 3},
+				{pool = "town_expansion_0afe99a3b951", quantity = 2},
+				{pool = "town_expansion_896e6b1a62f9", quantity = 1},
 			},
-			completionCash = 3000,
-			ammoExchange = {
-				input = "145x114",
-				output = "145x114ap",
-				boxes = 3,
+			ammoExchange = {boxes = 3, input = "145x114", output = "145x114ap"},
+			branchIndex = 19,
+			branchLength = 19,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
 			},
-			crossRequires = {
-				{
-					contact = "brass",
-					step = "v3/hp-ammo/145x114hp",
-				},
-			},
+			requirementPolicy = 3,
 		},
 	},
 	startingServices = {},

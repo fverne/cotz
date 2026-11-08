@@ -32,14 +32,14 @@ class ProgressionRewardsSpec(unittest.TestCase):
         for slug, contact in self.data["contacts"].items():
             for step in contact["progression"]:
                 unlocks = rewards.rewards(self.data, slug, step)[0]
-                self.assertTrue(unlocks or step.get("completionCash", 0) > 0, (slug, step["id"]))
+                self.assertTrue(unlocks, (slug, step["id"]))
+                self.assertNotIn("completionCash", step)
 
-    def test_directory_maintenance_preserves_cash_without_a_roster_gate(self):
-        maintenance = next(step for step in self.data["contacts"]["mute"]["progression"]
-                           if step["id"] == "v3/stalkernet/networkRemote")
-        self.assertEqual(maintenance["completionCash"], 2650)
-        self.assertFalse(maintenance.get("services"))
-        self.assertEqual(maintenance["requires"], ["v3/stalkernet/networkLocation"])
+    def test_directory_maintenance_removed_without_a_roster_gate(self):
+        steps = {step["id"]: step for step in self.data["contacts"]["mute"]["progression"]}
+        self.assertNotIn("v3/stalkernet/networkRemote", steps)
+        self.assertEqual(steps["v3/stalkernet/networkDossier"]["requires"],
+                         ["v3/stalkernet/networkLocation"])
 
     def test_fresh_ids_and_hand_in_objectives(self):
         for contact in self.data["contacts"].values():

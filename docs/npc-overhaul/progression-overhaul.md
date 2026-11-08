@@ -1,8 +1,8 @@
-# Town progression overhaul, 7 November 2026
+# Town progression overhaul, 8 November 2026
 
-This replaces the former 600-milestone town graph with 417 hand-in milestones across 49 independent
-branches. The author's `upgradeChains` and `regularAmmoChain` in `sh_equipment.lua` retain their exact
-order. Where one branch combines families, cheaper available items come first without reversing an
+This replaces the former 600-milestone town graph with 639 hand-in milestones across 49 independent
+branches, including 223 stock-preparation intermissions. The authored `upgradeChains` and
+`regularAmmoChain` in `sh_equipment.lua` retain their exact order. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
 introduction or joined ending. The Original and Arena Master retain no finite progression.
 
@@ -46,11 +46,42 @@ wine and spirits; the cheapest vodka also remains a Spicy Lemon starter.
 
 ## Unlocks, exchanges and retained assets
 
-Each branch uses the contact's existing thematic requirement pools. Definitions explicitly declare
-one to four pools with descending quantities `1`, `2/1`, `3/2/1` or `4/3/2/1` as branch rank increases.
-The existing contact effort multiplier applies once, rounding upward. Researcher requirements remain
-artifact requests. Completion cash ranges from 450 to 3,000 roubles by branch rank. Item prices,
-effects, ammunition pack sizes and repeatable job mechanics are unchanged. Progression gives no item gifts.
+Town requirements contain only valuables and artifacts, validated through item inheritance and actual
+checked-in world/box/cycling acquisition sources. Currency and bound quest assets are excluded.
+Scientists retain artifact deliveries at equipment milestones; their preparation stages request ordinary
+research and technical valuables. Garbage introductions borrow locally available textiles, workshop
+supplies, trail supplies and military salvage. Later stages can recover their specialist themes.
+Other contacts' thematic pools are shared as appropriate, with disjoint slots and varied consecutive requests.
+
+Original equipment rank determines regional access, using `(index - 1) / (branch length - 1)`:
+
+| Branch position | Eligible acquisition maps |
+| --- | --- |
+| First milestone, or a single-step branch | Contact's home map only |
+| After introduction, below 45% | Home map, Marsh and Garbage |
+| 45% to below 75% | Also Waystation |
+| 75% onward | Also Pripyat |
+
+The home map always remains eligible. Newly regional goods enter the lowest-quantity slots: at most one
+expanded slot before the final quarter and two afterward. Other slots remain local. Intermissions inherit
+the following original milestone's rank and maps; extra graph depth never accelerates this ramp.
+Main deliveries retain their base quantities `1`, `2/1`, `3/2/1` or `4/3/2/1`. Contact difficulty applies
+once, rounding upward; Ledger uses 3×. Branches are optional, so the catalogue total is not one playthrough.
+
+From the third original unlock onward, stock preparation precedes repeated requirement patterns and
+three-/four-slot requests where the previous milestone has eligible shop stock. Intern, Egghead and
+Beanstalk have preparation between every equipment tier. A preparation delivery requests half the next
+milestone's base units, rounded upward with minimum one, before applying contact difficulty once.
+Its reward increases personal capacity for the previous purchase group, including grouped equipment.
+Highest-earned bonuses apply once, up to +4 total; current stock, refill interval and amount stay unchanged.
+Existing single-item `stock.item` definitions and grouped `stock.items` are both supported.
+Mute's cash-only directory maintenance is removed; location tracking now leads directly to the dossier.
+
+Finite progression has no flat completion cash. Accepted hand-ins accrue the existing 60% valuation,
+including instance pricing and the existing vendor valuation rules. Cash is rounded upward once at
+completion; partial deliveries pay nothing. Reputation remains unchanged. No item gifts are awarded,
+and town completion does not trigger ordinary job restocking. Repeatable job rewards and standalone
+progression requirements are unchanged.
 
 Brass's matching regular milestone makes HP progression eligible; completing its HP milestone enables
 the 2:1 exchange and makes Carbon's matching AP progression eligible. Completing AP enables a 3:1
@@ -79,11 +110,20 @@ Rare/reserved equipment retains its existing non-purchase policy.
 
 ## Saves, tooling and verification
 
-New IDs use `cotz/town/<contact>/v3/<branch>/<entry>`. Old completions, rolled requirements and partial
-hand-ins remain stored as history and do not unlock the new graph. Old commission identities remain
-completion-only; their pending journals cannot advance new branches. Money, owned items, ordinary
-accepted jobs and paid hideout assets are not reset. Deploy every map server together and restart;
-do not rerun first-time setup.
+Current IDs remain `cotz/town/<contact>/v3/<branch>/<entry>`. New intermissions append `/stock`
+to the following unlock's ID. Existing completions, owned items, ordinary jobs and paid hideout assets
+remain saved. New intermissions gate unfinished unlocks, including requests with partial contributions;
+completed purchases are not revoked. When an intermission's parents were completed before deployment,
+character initialization activates it without completing it or awarding any benefit automatically.
+
+Requirement policy 3 converts only outstanding ineligible or out-of-region saved inputs. Eligible saved
+requests retain their exact items and quantities. Completed contributions remain credited; converted
+remaining units and their replacement are saved in `requirementConversions`, so reconnects cannot reroll
+or repeat the operation. Completed requests are untouched. Recorded unpaid monetary/reputation credit
+is preserved; suppressed historical cash is not retrospectively reconstructed. Paid rewards never replay.
+Old pre-v3 completion IDs and retired commission journals remain inactive history.
+
+Deploy every map server together and restart without resetting saves or rerunning first-time setup.
 
 The ammo report tool now reads the authored chain and only writes its report. It cannot rewrite
 equipment or seller allocations. The legacy FTS delivery writer rejects branch definitions before
@@ -95,3 +135,16 @@ Run the town/progression, ammo exchange, vendor plan, regional jobs, task reward
 and report checks. Multiplayer verification must cover discovery, fresh/existing character gates,
 painting/conversions, barter with partial stacks/full inventories, saved vendor refresh and paid hideout
 upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or client presentation.
+
+## Authoring and regression checks
+
+`python3 docs/npc-overhaul/tools/expand_progression.py --write` reproduces the expanded definitions and
+source-audited pools. `--check` verifies them without writing. Candidate/source changes affect new
+assignments; bump the saved requirement policy deliberately only when another conversion is intended.
+The offline JSON snapshot preserves sparse vendor terms and numeric object keys.
+
+Regenerate the reward ledger with `progression_rewards.py --write`; check it with `--check`.
+Run `python3 tests/progression_expansion_spec.py` and
+`luatex --luaonly tests/progression_expansion_spec.lua` alongside the existing progression, town,
+stock/vendor, ammunition exchange, task-reward and report suites. Real multiplayer/MySQL recovery,
+map transfers, shop refresh and acquisition timing still need live verification.

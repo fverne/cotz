@@ -95,11 +95,15 @@ function PLUGIN:ValidateContacts()
 				validatePlannedUnlock(reward, contact, plannedIDs, report)
 			end
 			if step.stock then
-				if isDisabled(step.stock.item) then report("disabled stock item on " .. step.id) end
 				local bonus = step.stock.bonus
-				if not ix.item.list[step.stock.item] or type(bonus) ~= "number"
+				local items = step.stock.items or {step.stock.item}
+				if #items == 0 or type(bonus) ~= "number"
 					or bonus < 1 or bonus > 4 or bonus % 1 ~= 0 then
 					report("invalid stock tier on " .. step.id)
+				end
+				for _, itemID in ipairs(items) do
+					if isDisabled(itemID) then report("disabled stock item on " .. step.id) end
+					if not ix.item.list[itemID] then report("invalid stock item on " .. step.id) end
 				end
 			end
 			for _, required in ipairs(step.requires) do

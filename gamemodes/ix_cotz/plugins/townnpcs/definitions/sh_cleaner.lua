@@ -86,19 +86,16 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_0df586f574fd", quantity = 1},
 			},
-			completionCash = 450,
-			hideoutLevel = 1,
 			services = {
-				{
-					id = "cleanerHideout1",
-					name = "Hideout improvements 1",
-				},
+				{id = "cleanerHideout1", name = "Hideout improvements 1"},
 			},
+			branchIndex = 1,
+			branchLength = 12,
+			acquisitionMaps = {"rp_garbage_cotz"},
+			requirementPolicy = 3,
+			hideoutLevel = 1,
 		},
 		{
 			id = "v3/hideout/02",
@@ -109,19 +106,16 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
 			},
-			completionCash = 650,
-			hideoutLevel = 2,
 			services = {
-				{
-					id = "cleanerHideout2",
-					name = "Hideout improvements 2",
-				},
+				{id = "cleanerHideout2", name = "Hideout improvements 2"},
 			},
+			branchIndex = 2,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 3,
+			hideoutLevel = 2,
 		},
 		{
 			id = "v3/hideout/03",
@@ -132,19 +126,16 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_506b825a5348", quantity = 1},
 			},
-			completionCash = 900,
-			hideoutLevel = 3,
 			services = {
-				{
-					id = "cleanerHideout3",
-					name = "Hideout improvements 3",
-				},
+				{id = "cleanerHideout3", name = "Hideout improvements 3"},
 			},
+			branchIndex = 3,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 3,
+			hideoutLevel = 3,
 		},
 		{
 			id = "v3/hideout/04",
@@ -155,19 +146,16 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_3f523d0ae565", quantity = 1},
 			},
-			completionCash = 1100,
-			hideoutLevel = 4,
 			services = {
-				{
-					id = "cleanerHideout4",
-					name = "Hideout improvements 4",
-				},
+				{id = "cleanerHideout4", name = "Hideout improvements 4"},
 			},
+			branchIndex = 4,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 3,
+			hideoutLevel = 4,
 		},
 		{
 			id = "v3/hideout/05",
@@ -178,23 +166,17 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
+				{pool = "town_expansion_eb1bb26bd44d", quantity = 1},
 			},
-			completionCash = 1350,
-			hideoutLevel = 5,
 			services = {
-				{
-					id = "cleanerHideout5",
-					name = "Hideout improvements 5",
-				},
+				{id = "cleanerHideout5", name = "Hideout improvements 5"},
 			},
+			branchIndex = 5,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 3,
+			hideoutLevel = 5,
 		},
 		{
 			id = "v3/hideout/06",
@@ -205,23 +187,17 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
+				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
 			},
-			completionCash = 1600,
-			hideoutLevel = 6,
 			services = {
-				{
-					id = "cleanerHideout6",
-					name = "Hideout improvements 6",
-				},
+				{id = "cleanerHideout6", name = "Hideout improvements 6"},
 			},
+			branchIndex = 6,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
+			hideoutLevel = 6,
 		},
 		{
 			id = "v3/hideout/07",
@@ -232,23 +208,17 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
+				{pool = "town_expansion_9c8532df83b7", quantity = 1},
 			},
-			completionCash = 1800,
-			hideoutLevel = 7,
 			services = {
-				{
-					id = "cleanerHideout7",
-					name = "Hideout improvements 7",
-				},
+				{id = "cleanerHideout7", name = "Hideout improvements 7"},
 			},
+			branchIndex = 7,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
+			hideoutLevel = 7,
 		},
 		{
 			id = "v3/hideout/08",
@@ -259,23 +229,17 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_72bea88b313c", quantity = 2},
+				{pool = "town_expansion_386837cd3695", quantity = 1},
 			},
-			completionCash = 2050,
-			hideoutLevel = 8,
 			services = {
-				{
-					id = "cleanerHideout8",
-					name = "Hideout improvements 8",
-				},
+				{id = "cleanerHideout8", name = "Hideout improvements 8"},
 			},
+			branchIndex = 8,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
+			hideoutLevel = 8,
 		},
 		{
 			id = "v3/hideout/09",
@@ -286,27 +250,18 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_72bea88b313c", quantity = 3},
+				{pool = "town_expansion_97e4c64a5cd7", quantity = 2},
+				{pool = "town_expansion_70eb62f6e9de", quantity = 1},
 			},
-			completionCash = 2300,
-			hideoutLevel = 9,
 			services = {
-				{
-					id = "cleanerHideout9",
-					name = "Hideout improvements 9",
-				},
+				{id = "cleanerHideout9", name = "Hideout improvements 9"},
 			},
+			branchIndex = 9,
+			branchLength = 12,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
+			hideoutLevel = 9,
 		},
 		{
 			id = "v3/hideout/10",
@@ -317,27 +272,23 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_23e0b64e4fa5", quantity = 3},
+				{pool = "town_expansion_05fc3ad8f3c7", quantity = 2},
+				{pool = "town_expansion_e5cb4c69f573", quantity = 1},
 			},
-			completionCash = 2500,
-			hideoutLevel = 10,
 			services = {
-				{
-					id = "cleanerHideout10",
-					name = "Hideout improvements 10",
-				},
+				{id = "cleanerHideout10", name = "Hideout improvements 10"},
 			},
+			branchIndex = 10,
+			branchLength = 12,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
+			},
+			requirementPolicy = 3,
+			hideoutLevel = 10,
 		},
 		{
 			id = "v3/hideout/11",
@@ -348,27 +299,23 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_60eb1035aaa9", quantity = 3},
+				{pool = "town_expansion_b6425e8074a3", quantity = 2},
+				{pool = "town_expansion_6256123f00d1", quantity = 1},
 			},
-			completionCash = 2750,
-			hideoutLevel = 11,
 			services = {
-				{
-					id = "cleanerHideout11",
-					name = "Hideout improvements 11",
-				},
+				{id = "cleanerHideout11", name = "Hideout improvements 11"},
 			},
+			branchIndex = 11,
+			branchLength = 12,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
+			},
+			requirementPolicy = 3,
+			hideoutLevel = 11,
 		},
 		{
 			id = "v3/hideout/12",
@@ -379,31 +326,24 @@ PLUGIN:Register("cleaner", {
 			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 			completion = "Leave them here. That settles this request.",
 			requirements = {
-				{
-					pool = "town_delivery_trail_garbage_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_trail_garbage_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_trail_garbage_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_trail_garbage_4",
-					quantity = 1,
-				},
+				{pool = "town_expansion_a874feaf7962", quantity = 4},
+				{pool = "town_expansion_f2e48b89e0d3", quantity = 3},
+				{pool = "town_expansion_1eeb97a7a53a", quantity = 2},
+				{pool = "town_expansion_2f1adee2ea00", quantity = 1},
 			},
-			completionCash = 3000,
-			hideoutLevel = 12,
 			services = {
-				{
-					id = "cleanerHideout12",
-					name = "Hideout improvements 12",
-				},
+				{id = "cleanerHideout12", name = "Hideout improvements 12"},
 			},
+			branchIndex = 12,
+			branchLength = 12,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
+			},
+			requirementPolicy = 3,
+			hideoutLevel = 12,
 		},
 	},
 	startingServices = {},

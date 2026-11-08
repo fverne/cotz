@@ -16,11 +16,24 @@ local function addDependency(definition, id)
 	definition.prerequisites[#definition.prerequisites + 1] = id
 end
 
+local function buildAllowedRequirements(maps)
+	local regions, allowed = {}, {}
+	for _, region in ipairs(maps) do regions[region] = true end
+	for itemID, source in pairs(ix.progression.townRequirementSources or {}) do
+		for _, region in ipairs(source.maps) do
+			if regions[region] then allowed[itemID] = true break end
+		end
+	end
+
+	return allowed
+end
+
 function PLUGIN:BuildProgressions()
 	self.capacityMilestones = {}
 	self.serviceGates = {}
 	self.ammoExchanges = {}
 	self.variantBaseGates = {}
+	local allowedByMaps = {}
 	for slug, contact in pairs(self.contacts) do
 		for _, service in ipairs(contact.startingServices or {}) do
 			self.serviceGates[service.id] = {ungated = true, npc = contact.name}
@@ -46,7 +59,9 @@ function PLUGIN:BuildProgressions()
 				BuildResponse = buildResponse,
 				completionMessage = step.completion,
 				completionBenefits = step.benefits,
-				completionCash = step.completionCash,
+				acquisitionMaps = step.acquisitionMaps,
+				requirementPolicy = step.requirementPolicy,
+				intermissionFor = step.intermissionFor,
 				capacityReward = step.capacity,
 				vendorUnlocks = {},
 				recognition = step.recognition,
@@ -54,6 +69,13 @@ function PLUGIN:BuildProgressions()
 				townServices = step.services,
 				ammoExchange = step.ammoExchange,
 			}
+			if step.acquisitionMaps then
+				local key = table.concat(step.acquisitionMaps, "/")
+				if not allowedByMaps[key] then
+					allowedByMaps[key] = buildAllowedRequirements(step.acquisitionMaps)
+				end
+				definition.allowedRequirements = allowedByMaps[key]
+			end
 			if step.ammoExchange then
 				self.ammoExchanges[step.ammoExchange.output] = {
 					id = id, npc = contact.name, input = step.ammoExchange.input,
@@ -66,7 +88,8 @@ function PLUGIN:BuildProgressions()
 				self.serviceGates[service.id] = {id = id, npc = contact.name}
 			end
 			if step.stock then
-				definition.stockUnlocks = {{npc = contact.name, items = {step.stock.item}, bonus = step.stock.bonus}}
+				definition.stockUnlocks = {{npc = contact.name,
+					items = step.stock.items or {step.stock.item}, bonus = step.stock.bonus}}
 			end
 			for _, required in ipairs(step.requires) do addDependency(definition, self:StepID(slug, required)) end
 			for _, required in ipairs(step.crossRequires or {}) do

@@ -1,0 +1,108 @@
+"""Run from the addon root: python3 tests/progression_expansion_spec.py."""
+from pathlib import Path
+import sys
+import unittest
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "docs/npc-overhaul/tools"))
+import expand_progression as expansion
+import fts_delivery_balance as supply
+import progression_rewards as rewards
+
+
+class ProgressionExpansionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.data = supply.snapshot()
+        cls.rates, _, _ = supply.estimate(cls.data)
+        cls.families = expansion.eligible_items()
+        cls.compiled = rewards.snapshot()
+
+    def test_counts_and_regeneration(self):
+        steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
+        self.assertEqual(len(steps), 639)
+        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 223)
+        output, count = expansion.outputs()
+        self.assertEqual(count, 223)
+        for path, content in output.items():
+            self.assertEqual(path.read_text(), content, str(path))
+
+    def test_local_introductions_and_explicit_boundary_examples(self):
+        contacts = self.data["contacts"]
+        for contact in contacts.values():
+            for step in contact["progression"]:
+                if step["branchIndex"] == 1:
+                    self.assertEqual(step["acquisitionMaps"], [contact["map"]])
+        intern = {s["name"]: s for s in contacts["intern"]["progression"] if not s.get("intermissionFor")}
+        self.assertNotIn("rp_waystation", intern["Artifact Detector (Echo)"]["acquisitionMaps"])
+        self.assertIn("rp_waystation", intern["Artifact Detector (Bear)"]["acquisitionMaps"])
+        self.assertNotIn("rp_pripyat_remaster", intern["Artifact Detector (Bear)"]["acquisitionMaps"])
+        self.assertIn("rp_pripyat_remaster", intern["Artifact Detector (Veles)"]["acquisitionMaps"])
+        self.assertEqual(contacts["ledger"]["difficultyMultiplier"], 3)
+
+    def test_each_candidate_has_an_eligible_real_regional_source(self):
+        for contact in self.data["contacts"].values():
+            for step in contact["progression"]:
+                phase = (step["branchIndex"] - 1) / max(1, step["branchLength"] - 1)
+                maximum = 0 if step["branchIndex"] == 1 else 2 if phase >= 0.75 else 1
+                nonlocal_slots, used = 0, set()
+                for slot in step["requirements"]:
+                    ids = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
+                    self.assertTrue(ids)
+                    self.assertFalse(used & ids, (step["id"], ids & used))
+                    used |= ids
+                    nonlocal_slot = False
+                    for item in ids:
+                        self.assertIn(self.families.get(item), {"valuable", "artifact"}, item)
+                        self.assertTrue(any(self.rates[m].get(item) for m in step["acquisitionMaps"]), item)
+                        if not self.rates[contact["map"]].get(item):
+                            nonlocal_slot = True
+                    nonlocal_slots += nonlocal_slot
+                self.assertLessEqual(nonlocal_slots, maximum, step["id"])
+
+    def test_intermission_pacing_stock_and_dependencies(self):
+        for slug, contact in self.data["contacts"].items():
+            by_id = {s["id"]: s for s in contact["progression"]}
+            for step in contact["progression"]:
+                self.assertNotIn("completionCash", step)
+                if not step.get("intermissionFor"):
+                    continue
+                target = by_id[step["intermissionFor"]]
+                self.assertEqual(step["branchIndex"], target["branchIndex"])
+                self.assertEqual(step["branchLength"], target["branchLength"])
+                self.assertEqual(step["acquisitionMaps"], target["acquisitionMaps"])
+                self.assertEqual([s["quantity"] for s in step["requirements"]],
+                                 [(s["quantity"] + 1) // 2 for s in target["requirements"]])
+                self.assertIn(step["id"], target["requires"])
+                self.assertTrue(1 <= step["stock"]["bonus"] <= 4)
+                identifier = rewards.progression_id(slug, step["id"])
+                parents = self.compiled["compiled"][identifier]["prerequisites"]
+                for item in expansion.stock_items(step["stock"]):
+                    if item in contact["catalogue"]:
+                        allocation = contact["catalogue"][item]
+                        self.assertIn(rewards.progression_id(slug, allocation["step"]), parents)
+                        self.assertTrue(all(allocation["terms"][i] > 0 for i in (3, 4, 5)))
+                    else:
+                        self.assertIn(item, contact["supplies"])
+
+    def test_consecutive_requests_are_actually_varied(self):
+        for contact in self.data["contacts"].values():
+            previous = {}
+            for step in contact["progression"]:
+                signature = [(tuple(c["item"] for c in self.data["pools"][s["pool"]]["candidates"]), s["quantity"])
+                             for s in step["requirements"]]
+                self.assertNotEqual(previous.get(step["branch"]), signature, step["id"])
+                previous[step["branch"]] = signature
+
+    def test_snapshot_preserves_sparse_terms_and_numeric_object_keys(self):
+        # Vendor terms start with nil; dropping that slot changes every policy field's meaning.
+        terms = self.data["contacts"]["old-timer"]["catalogue"]["knife2"]["terms"]
+        self.assertEqual(len(terms), 6)
+        self.assertIsNone(terms[0])
+        self.assertTrue(any(entity.get("bodygroups", {}).get("0") == 0
+                            for preset in self.data["presets"].values()
+                            for entity in preset.get("entities", [])))
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

@@ -1,11 +1,17 @@
 # Town NPCs
 
-## Current progression, 7 November 2026
+## Current progression, 8 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 417 hand-in milestones
-in 49 independent branches, with fresh `v3/` IDs. The authored equipment and regular-ammo chains are
-unchanged. Medicine has separate family branches; other branches follow the approved trader lines.
+the earlier progression, catalogue and service descriptions below. There are 639 hand-in milestones
+in 49 independent branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
+Each branch starts locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and
+finally Pripyat sources. Requests use valuables and artifacts only. Completion pays accumulated hand-in
+value at 60%, with no flat cash. Stock bonuses increase personal capacity without refilling it.
+Ledger uses 3× difficulty. Policy 3 converts outstanding invalid saved inputs while preserving credited
+contributions and completed unlocks. Inserted stages gate unfinished unlocks; Mute's redundant directory
+maintenance is removed. See the authoritative guide for regional thresholds and save handling.
+The authored equipment and regular-ammo chains are unchanged. Medicine has separate family branches; other branches follow the approved trader lines.
 
 Wake owns backpacks and +5 kg/+2 rows; Spool owns strong drugs. Technut keeps painting and all ordinary
 suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
@@ -26,6 +32,8 @@ Regenerate reports with `progression_rewards.py --write` and `ammo_progression.p
     luatex --luaonly tests/town_ammo_exchange_spec.lua
     luatex --luaonly tests/vendor_plan_spec.lua
     luatex --luaonly tests/regional_jobs_spec.lua
+    python3 tests/progression_expansion_spec.py
+    luatex --luaonly tests/progression_expansion_spec.lua
     python3 tests/progression_rewards_spec.py
     python3 tests/fts_delivery_balance_spec.py
 

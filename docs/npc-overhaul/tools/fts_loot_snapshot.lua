@@ -8,6 +8,7 @@ local function readFile(path)
 end
 
 local function encode(value)
+	if value == nil then return "null" end
 	if type(value) == "string" then
 		return "\"" .. value:gsub("\\", "\\\\"):gsub("\"", "\\\""):gsub("\n", "\\n")
 			:gsub("\r", "\\r"):gsub("\t", "\\t") .. "\""
@@ -15,14 +16,14 @@ local function encode(value)
 	if type(value) ~= "table" then return tostring(value) end
 	local parts = {}
 	if #value > 0 then
-		for _, child in ipairs(value) do parts[#parts + 1] = encode(child) end
+		for index = 1, #value do parts[#parts + 1] = encode(value[index]) end
 
 		return "[" .. table.concat(parts, ",") .. "]"
 	end
 	local keys = {}
 	for key in pairs(value) do keys[#keys + 1] = key end
 	table.sort(keys)
-	for _, key in ipairs(keys) do parts[#parts + 1] = encode(key) .. ":" .. encode(value[key]) end
+	for _, key in ipairs(keys) do parts[#parts + 1] = encode(tostring(key)) .. ":" .. encode(value[key]) end
 
 	return "{" .. table.concat(parts, ",") .. "}"
 end

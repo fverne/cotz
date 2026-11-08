@@ -1,7 +1,7 @@
 # Progression engine
 
 The [town progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) uses 25 finite
-contacts, 49 independent branches and 417 hand-in milestones. Town compilation scales new quantities
+contacts, 49 independent branches and 639 hand-in milestones (including 223 stock intermissions). Town compilation scales new quantities
 by the contact's effort multiplier. Fresh `v3/` IDs do not inherit old completion permissions; old
 requests and contributions remain saved history. Inventory, money and paid hideout assets are retained.
 Ballast's bank service is retired with its data preserved. Suture provides paid suit conversions;
@@ -51,16 +51,17 @@ these alternatives are not promises of equal availability on every map. Tool tie
 remain distinct. Pool IDs, quantities and saved progression selections are preserved.
 
 libs/sh_storage.lua exposes character-owned snapshots. Server mutations commit through the setter;
-clients only read replicated state. Requirements are assigned once by the server and remain stable
-for current assignments. Hand-ins validate character, NPC, access, map, inventory and remaining units.
+clients only read replicated state. Requirements are assigned once by the server. Policy 3 converts outstanding ineligible/out-of-region
+town inputs once while preserving fulfilled contributions and eligible saved requests. Hand-ins validate
+character, NPC, access, map, inventory and remaining units.
 Whole-stack removal must succeed before progress/rewards are granted.
 
 Progression persists in its own owner-local `progression` character var and `MEDIUMTEXT` SQL column,
 outside generic character data. This targets a fresh database; see [character storage](../../../../docs/database/README.md).
 
-Non-town completion cash uses 60% of consumed nominal value. Town milestones instead declare
-completionCash explicitly; trackers and arena checkpoints pay zero additional cash. Partial hand-ins
-do not pay early. Existing accrued credit is preserved as a minimum completion payment. Town
+All finite progression pays only accumulated hand-in value at the existing 60% rate, rounded up once
+on completion. Town hand-ins now accrue monetary credit too; flat completion cash is removed.
+Partial hand-ins pay nothing. Existing recorded cash/reputation credit remains intact. Town
 completion does not trigger ordinary task restocking. Progression does not award item gifts at
 completion or checkpoints. Definitions containing gift items fail validation, and the runtime benefit
 handler only grants service credits. Old progression gift queues and saved `progression:` offers are
@@ -74,8 +75,8 @@ The scoreboard's local/all-server filter and remote identities are always availa
 tool permissions retain their gates. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
 
 Only current registered definitions participate in task discovery and equipment gating. There is no
-town migration, old-ID permission fallback, completion alias or grandfathered prerequisite handling.
-Old database rows are not rewritten or erased by loading the plugin.
+old-ID permission import or completion alias. The explicit policy-3 request conversion and activation
+of inserted intermissions preserve existing completions; unfinished unlocks require the new stages.
 
 Completion speech prefixes the authored reply with the completing character's current name for
 both town and standalone contacts. Nearby listeners can identify who the NPC is addressing.
@@ -87,6 +88,8 @@ plugin hook. ProgressionAudit validates registered requirements, rewards and gra
 ProgressionGrant marks a current milestone complete.
 World-arrival support remains for explicit worldNPC definitions; Pripyat town arrivals are suppressed.
 
+    luatex --luaonly tests/progression_expansion_spec.lua
+    python3 tests/progression_expansion_spec.py
     luatex --luaonly tests/progression_spec.lua
     luatex --luaonly tests/character_storage_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua

@@ -100,9 +100,11 @@ function PLUGIN:BuildCatalogue()
 	for slug, contact in pairs(self.contacts) do
 		for _, step in ipairs(contact.progression) do
 			if step.stock then
-				local item = self.itemGates[step.stock.item]
-				local purchase = item and item.sellers[contact.name]
-				requireGate(purchase, {id = self:StepID(slug, step.id)})
+				for _, itemID in ipairs(step.stock.items or {step.stock.item}) do
+					local item = self.itemGates[itemID]
+					local purchase = item and item.sellers[contact.name]
+					requireGate(purchase, {id = self:StepID(slug, step.id)})
+				end
 			end
 		end
 	end

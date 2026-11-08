@@ -90,18 +90,15 @@ PLUGIN:Register("mute", {
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_9e2312c2d277", quantity = 1},
 			},
-			completionCash = 450,
 			services = {
-				{
-					id = "networkSearch",
-					name = "STALKERnet search",
-				},
+				{id = "networkSearch", name = "STALKERnet search"},
 			},
+			branchIndex = 1,
+			branchLength = 8,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/stalkernet/networkSquads",
@@ -112,18 +109,15 @@ PLUGIN:Register("mute", {
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
 			},
-			completionCash = 750,
 			services = {
-				{
-					id = "networkSquads",
-					name = "STALKERnet squad filter",
-				},
+				{id = "networkSquads", name = "STALKERnet squad filter"},
 			},
+			branchIndex = 2,
+			branchLength = 8,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/stalkernet/networkRanking",
@@ -134,18 +128,15 @@ PLUGIN:Register("mute", {
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 1,
-				},
+				{pool = "town_expansion_3f523d0ae565", quantity = 1},
 			},
-			completionCash = 1050,
 			services = {
-				{
-					id = "networkRanking",
-					name = "STALKERnet ranks and reputation",
-				},
+				{id = "networkRanking", name = "STALKERnet ranks and reputation"},
 			},
+			branchIndex = 3,
+			branchLength = 8,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/stalkernet/emissionWarnings",
@@ -156,22 +147,16 @@ PLUGIN:Register("mute", {
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_397d1a310030", quantity = 2},
+				{pool = "town_expansion_04986547505f", quantity = 1},
 			},
-			completionCash = 1400,
 			services = {
-				{
-					id = "emissionWarnings",
-					name = "Emission warnings",
-				},
+				{id = "emissionWarnings", name = "Emission warnings"},
 			},
+			branchIndex = 4,
+			branchLength = 8,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/stalkernet/networkActivity",
@@ -182,22 +167,16 @@ PLUGIN:Register("mute", {
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_a89613693736", quantity = 2},
+				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
 			},
-			completionCash = 1700,
 			services = {
-				{
-					id = "networkActivity",
-					name = "STALKERnet activity counters",
-				},
+				{id = "networkActivity", name = "STALKERnet activity counters"},
 			},
+			branchIndex = 5,
+			branchLength = 8,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/stalkernet/eventBroadcasts",
@@ -208,22 +187,16 @@ PLUGIN:Register("mute", {
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_2",
-					quantity = 1,
-				},
+				{pool = "town_expansion_af7deb03df13", quantity = 2},
+				{pool = "town_expansion_9c8532df83b7", quantity = 1},
 			},
-			completionCash = 2000,
 			services = {
-				{
-					id = "eventBroadcasts",
-					name = "Event broadcasts",
-				},
+				{id = "eventBroadcasts", name = "Event broadcasts"},
 			},
+			branchIndex = 6,
+			branchLength = 8,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/stalkernet/networkLocation",
@@ -234,85 +207,49 @@ PLUGIN:Register("mute", {
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_3",
-					quantity = 1,
-				},
+				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 3},
+				{pool = "town_expansion_ec3627c2f4f5", quantity = 2},
+				{pool = "town_expansion_0afe99a3b951", quantity = 1},
 			},
-			completionCash = 2350,
 			services = {
-				{
-					id = "networkLocation",
-					name = "STALKERnet location tracking",
-				},
+				{id = "networkLocation", name = "STALKERnet location tracking"},
 			},
-		},
-		{
-			id = "v3/stalkernet/networkRemote",
-			branch = "stalkernet",
-			name = "STALKERnet directory maintenance",
-			kind = "delivery",
-			requires = {"v3/stalkernet/networkLocation"},
-			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
-			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
-			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_2",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_3",
-					quantity = 1,
-				},
+			branchIndex = 7,
+			branchLength = 8,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
 			},
-			completionCash = 2650,
-			services = {},
+			requirementPolicy = 3,
 		},
 		{
 			id = "v3/stalkernet/networkDossier",
 			branch = "stalkernet",
 			name = "STALKERnet full career dossier",
 			kind = "delivery",
-			requires = {"v3/stalkernet/networkRemote"},
+			requires = {"v3/stalkernet/networkLocation"},
 			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
 			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
 			requirements = {
-				{
-					pool = "town_delivery_electronics_marsh_1",
-					quantity = 4,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_2",
-					quantity = 3,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_3",
-					quantity = 2,
-				},
-				{
-					pool = "town_delivery_electronics_marsh_4",
-					quantity = 1,
-				},
+				{pool = "town_expansion_a30821abc425", quantity = 4},
+				{pool = "town_expansion_9c982c714006", quantity = 3},
+				{pool = "town_expansion_c9b4e5432709", quantity = 2},
+				{pool = "town_expansion_87c2038d9c43", quantity = 1},
 			},
-			completionCash = 3000,
 			services = {
-				{
-					id = "networkDossier",
-					name = "STALKERnet full career dossier",
-				},
+				{id = "networkDossier", name = "STALKERnet full career dossier"},
 			},
+			branchIndex = 8,
+			branchLength = 8,
+			acquisitionMaps = {
+				"rp_marsh_cs",
+				"rp_garbage_cotz",
+				"rp_waystation",
+				"rp_pripyat_remaster",
+			},
+			requirementPolicy = 3,
 		},
 	},
 	startingServices = {},

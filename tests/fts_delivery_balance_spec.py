@@ -108,14 +108,14 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
                 tier = len(step["requirements"])
                 self.assertTrue(1 <= tier <= 4)
                 for index, slot in enumerate(step["requirements"]):
-                    self.assertEqual(slot["quantity"], tier - index)
+                    self.assertEqual(slot["quantity"], (tier - index + 1) // 2 if step.get("intermissionFor") else tier - index)
                     candidates = self.data["pools"][slot["pool"]]["candidates"]
                     self.assertTrue(candidates)
                     for candidate in candidates:
                         self.assertTrue(candidate["item"].startswith("artifact_") or any(self.rates[region].get(candidate["item"])
                                             for region in balance.MAPS),
                                         (slug, step["id"], candidate["item"]))
-                    if slug in {"beanstalk", "egghead", "intern"}:
+                    if slug in {"beanstalk", "egghead", "intern"} and not step.get("intermissionFor"):
                         self.assertTrue(all(c["item"].startswith("artifact_") for c in candidates))
         self.assertGreater(deliveries, 400)
 

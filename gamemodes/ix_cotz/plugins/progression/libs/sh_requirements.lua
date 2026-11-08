@@ -79,7 +79,13 @@ if SERVER then
 				assert(#definition.requirementSlots > 0, "Empty delivery requirements: " .. progressionID)
 			end
 			for _, slot in ipairs(definition.requirementSlots or {}) do
-				validateSlot(slot)
+				local pool = validateSlot(slot)
+				if definition.requirementPolicy then
+					for _, candidate in ipairs(pool.candidates) do
+						assert(definition.allowedRequirements[candidate.item],
+							"Ineligible town requirement: " .. progressionID .. "/" .. candidate.item)
+					end
+				end
 			end
 		end
 	end
@@ -160,9 +166,77 @@ if SERVER then
 		return requirements, selections
 	end
 
+	local function replacementCandidates(definition, line, used, itemID, index)
+		local slotIndex = math.min(index, #definition.requirementSlots)
+		for selectionIndex, selection in ipairs(line.selections or {}) do
+			if selection.item == itemID then slotIndex = selectionIndex break end
+		end
+		-- Keep the corresponding slot when possible, then search the other disjoint slots.
+		for offset = 0, #definition.requirementSlots - 1 do
+			local slot = definition.requirementSlots[(slotIndex + offset - 1) % #definition.requirementSlots + 1]
+			local candidates = {}
+			for _, candidate in ipairs(validateSlot(slot).candidates) do
+				if not used[candidate.item] then candidates[#candidates + 1] = candidate.item end
+			end
+			if #candidates > 0 then return candidates end
+		end
+
+		error("No eligible replacement for saved requirement: " .. definition.id)
+	end
+
+	local function convertRequirements(definition, line)
+		if not definition.requirementPolicy or line.requirementPolicy == definition.requirementPolicy
+			or line.completed or not line.requirements then return false end
+		local used, pending = {}, {}
+		for itemID, quantity in pairs(line.requirements) do
+			local supplied = (line.complexData or {})[itemID] or 0
+			if supplied < quantity and not definition.allowedRequirements[itemID] then
+				pending[#pending + 1] = {item = itemID, remaining = quantity - supplied, supplied = supplied}
+			else
+				used[itemID] = true
+			end
+		end
+		table.sort(pending, function(first, second) return first.item < second.item end)
+		line.requirementConversions = line.requirementConversions or {}
+		for index, old in ipairs(pending) do
+			local candidates = replacementCandidates(definition, line, used, old.item, index)
+			local replacement = candidates[math.random(1, #candidates)]
+			used[replacement] = true
+			line.requirements[old.item] = old.supplied > 0 and old.supplied or nil
+			line.requirements[replacement] = (line.requirements[replacement] or 0) + old.remaining
+			line.requirementConversions[#line.requirementConversions + 1] = {
+				from = old.item, to = replacement, quantity = old.remaining, policy = definition.requirementPolicy,
+			}
+		end
+		line.requirementPolicy = definition.requirementPolicy
+
+		return true
+	end
+
+	local function canActivateIntermission(character, definition, line)
+		if not definition.intermissionFor or (line and (line.completed or line.active)) then return false end
+		for _, required in ipairs(definition.prerequisites or {}) do
+			if not ix.progression.IsCompleted(character, required) then return false end
+		end
+
+		return true
+	end
+
 	function ix.progression.AssignActiveRequirements(character)
 		local record = ix.progression.GetCharacterProgression(character)
 		local identifiers, activeGroups = {}, {}
+		local changed = false
+		for progressionID, definition in pairs(ix.progression.definitions) do
+			local line = record.lines[progressionID]
+			if canActivateIntermission(character, definition, line) then
+				line = line or {}
+				line.active = true
+				record.lines[progressionID] = line
+				changed = true
+			end
+			if line and convertRequirements(definition, line) then changed = true end
+		end
+		if changed then ix.progression.SetCharacterProgression(character, record) end
 		for progressionID, definition in pairs(ix.progression.definitions) do
 			if definition.requirementSlots then
 				identifiers[#identifiers + 1] = progressionID
@@ -172,7 +246,6 @@ if SERVER then
 			end
 		end
 		table.sort(identifiers)
-		local changed = false
 		for _, progressionID in ipairs(identifiers) do
 			local line = record.lines[progressionID] or {}
 			local definition = ix.progression.definitions[progressionID]
@@ -180,6 +253,7 @@ if SERVER then
 				or activeGroups[definition.milestoneGroup]
 			if not line.requirements and accessible then
 				line.requirements, line.selections = rollRequirements(definition, character, record)
+				line.requirementPolicy = definition.requirementPolicy
 				record.lines[progressionID] = line
 				changed = true
 			end

@@ -35,13 +35,17 @@ def progression_id(contact, step):
     return f"cotz/town/{contact}/{step}"
 
 
+def stock_items(stock):
+    return stock.get("items", [stock["item"]] if "item" in stock else [])
+
+
 def rewards(data, contact, step):
     compiled = data["compiled"][progression_id(contact, step["id"])]
     live = ["Purchase: " + u["args"][0] for u in compiled.get("vendorUnlocks", [])]
     live += ["Conversion: " + item for item in compiled.get("variantUnlocks", [])]
     if step.get("stock"):
         stock = step["stock"]
-        live.append(f"Stock: {stock['item']} +{stock['bonus']} total")
+        live += [f"Stock: {item} +{stock['bonus']} total" for item in stock_items(stock)]
     if step.get("capacity"):
         capacity = step["capacity"]
         live.append(f"Carried capacity: +{capacity['amount']} {capacity['kind']}")
@@ -103,7 +107,7 @@ def validate(data):
                 errors.append(progression_id(slug, step["id"]) + ": progression item gifts are disabled")
             identifier = progression_id(slug, step["id"])
             live, planned = rewards(data, slug, step)
-            if not live and step.get("completionCash", 0) <= 0:
+            if not live:
                 errors.append(identifier + ": no implemented unlock")
             for p in planned:
                 if p.get("kind") not in KINDS or p.get("status") != "unimplemented" or p.get("provider") != slug:
@@ -130,18 +134,19 @@ def validate(data):
                     if not 2 < p.get("target", 0) <= maximum:
                         errors.append(identifier + ": storage proposal exceeds default bounds")
             stock = step.get("stock")
-            if stock and stock["item"] in disabled:
-                errors.append(identifier + ": disabled suggestion received stock")
             if stock:
-                if not 1 <= stock["bonus"] <= 4 or stock["item"] not in items:
-                    errors.append(identifier + ": invalid stock tier")
-                if stock["item"] not in contact["supplies"] and stock["item"] not in contact["catalogue"]:
-                    errors.append(identifier + ": stock target has no intended assortment route")
-                for earlier in contact["progression"]:
-                    old = earlier.get("stock")
-                    if (old and old["item"] == stock["item"] and old["bonus"] >= stock["bonus"]
-                            and progression_id(slug, earlier["id"]) in ancestors[identifier]):
-                        errors.append(identifier + ": redundant stock improvement")
+                for item in stock_items(stock):
+                    if item in disabled:
+                        errors.append(identifier + ": disabled suggestion received stock")
+                    if not 1 <= stock["bonus"] <= 4 or item not in items:
+                        errors.append(identifier + ": invalid stock tier")
+                    if item not in contact["supplies"] and item not in contact["catalogue"]:
+                        errors.append(identifier + ": stock target has no intended assortment route")
+                    for earlier in contact["progression"]:
+                        old = earlier.get("stock")
+                        if (old and item in stock_items(old) and old["bonus"] >= stock["bonus"]
+                                and progression_id(slug, earlier["id"]) in ancestors[identifier]):
+                            errors.append(identifier + ": redundant stock improvement")
     return errors
 
 
@@ -175,7 +180,8 @@ def render(data, issues=None):
             live_count += bool(live)
             planned_only += bool(planned and not live)
             multiple += len(live) + len(planned) > 1
-            extra = [f"{step['completionCash']} rubles"] + bundle(step.get("benefits", {}))
+            extra = ["60% of accepted hand-in value on completion"] + bundle(step.get("benefits", {}))
+            extra += ["Sources: " + ", ".join(step.get("acquisitionMaps", []))]
             if step.get("recognition"):
                 extra.append("Recognition: " + step["recognition"])
             rows.append(f"| {slug} | {step['id']} | {text('; '.join(live) or '—')} | "
@@ -218,7 +224,7 @@ Default vendor quantities, prices and refill policy are outside this allocation 
 
 TODO entries are authoring metadata only: no entitlement, menu, payout or system is implemented for them.
 Their proposed terms require implementation and balance review before activation. Progression item gifts,
-town service credits and discounts are disabled. Each active step grants an implemented unlock or completion cash.
+town service credits and discounts are disabled. Each active step grants an implemented unlock; cash comes only from accepted hand-in value.
 TODO plans alone never satisfy reward coverage. Empty steps are reported without restoring excluded items. Each cosmetic finish remains appearance-only.
 
 {validation}

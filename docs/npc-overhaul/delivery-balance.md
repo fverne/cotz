@@ -2,6 +2,11 @@
 
 Generated from the checked-in FTS presets and active loot definitions. No FTS command is run.
 
+The source estimates below remain useful. The November 8 [progression policy](progression-overhaul.md)
+and [current reward ledger](unlock-ledger.md) supersede the historical delivery tuning, counts and
+requirement table below. Generate/check the current 639 stages with `tools/expand_progression.py`;
+the legacy FTS writer cannot overwrite authored branches.
+
 ## Spawnpoint inventory
 
 | Map | Loose regular / rare | Small / big boxes | Cycling containers | Hidden locations | Anomaly points |
