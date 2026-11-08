@@ -993,10 +993,125 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       cyclicalCategory = "stash_map1",
     },
   },
-  vendors = {},
+  vendors = {
+    {
+      template = "tutorialnpc",
+      position = Vector(-8281.687500, -9627.593750, 4972.750000),
+      angles = Angle(0, -93.284912, 0),
+    },
+  },
   plugindata = {
     ["hideouts"] = {},
-    ["townnpcs"] = {},
+    ["townnpcs"] = {
+      ["old-timer"] = {
+        { -- standing, fireplace
+          position = Vector(-8281.687500, -9627.593750, 4972.750000),
+          angles = Angle(0.000000, -93.284912, 0.000000),
+          idleanim = "idle_lider",
+        },
+        { -- chair, desk
+          position = Vector(-8451.718750, -9387.062500, 4973.031250),
+          angles = Angle(0.000000, -8.613281, 0.000000),
+          idleanim = "sidit",
+        },
+        { -- standing, desk
+          position = Vector(-8432.031250, -9392.125000, 4972.531250),
+          angles = Angle(0.000000, -7.042236, 0.000000),
+          idleanim = "idle_lider",
+        },
+      },
+      ["technut"] = {
+        {
+          position = Vector(-6006.625000, -11071.906250, 5026.031250),
+          angles = Angle(0.000000, -177.791748, 0.000000),
+          idleanim = "trader_idle2",
+        },
+      },
+      ["spicy-lemon"] = {
+        {
+          position = Vector(-6118.687500, -9755.218750, 4959.031250),
+          angles = Angle(0.000000, 179.983521, 0.000000),
+          idleanim = "doctor_idle",
+        },
+      },
+      ["haggler"] = {
+        {
+          position = Vector(-8229.625000, -11676.406250, 4944.406250),
+          angles = Angle(0.000000, 90.010986, 0.000000),
+          idleanim = "bandit2_idle2",
+        },
+        {
+          position = Vector(-8286.125000, -11679.375000, 4944.531250),
+          angles = Angle(0.000000, 81.573486, 0.000000),
+          idleanim = "sidit2",
+        },
+      },
+      ["jitters"] = {
+        {
+          position = Vector(-7328.531250, -9329.093750, 4973.031250),
+          angles = Angle(0.000000, -90.000000, 0.000000),
+          idleanim = "sidit",
+        },
+        {
+          position = Vector(-7168.625000, -9389.093750, 4973.031250),
+          angles = Angle(0.000000, -175.495605, 0.000000),
+          idleanim = "new_sidit",
+        },
+        {
+          position = Vector(-7209.531250, -9357.937500, 4973.031250),
+          angles = Angle(0.000000, -86.528320, 0.000000),
+          idleanim = "sidit2",
+        },
+      },
+      ["mute"] = {
+        {
+          position = Vector(-7467.468750, -9369.718750, 4972.468750),
+          angles = Angle(0.000000, 44.923096, -0.060425),
+          idleanim = "sidit3",
+        },
+      },
+      ["ballast"] = {
+        {
+          position = Vector(-5976.500000, -9892.375000, 4961.156250),
+          angles = Angle(0.000000, -96.833496, 0.000000),
+          idleanim = "idle_lider",
+        },
+      },
+      ["gasket"] = {
+        {
+          position = Vector(-6354.937500, -9423.343750, 4964.375000),
+          angles = Angle(0.000000, -97.492676, 0.000000),
+          idleanim = "pistolidle1",
+        },
+        {
+          position = Vector(-6488.812500, -9439.312500, 4963.656250),
+          angles = Angle(0.000000, -90.000000, 0.000000),
+          idleanim = "pistolidle1",
+        },
+        {
+          position = Vector(-6682.718750, -9559.562500, 4963.968750),
+          angles = Angle(-0.241699, -91.043701, -0.093384),
+          idleanim = "pistolidle1",
+        },
+      },
+      ["atlas"] = {
+        {
+          position = Vector(-6367.218750, -9492.531250, 4964.375000),
+          angles = Angle(0.000000, 83.210449, 0.000000),
+          idleanim = "trader_idle2",
+        },
+        {
+          position = Vector(-6497.937500, -9516.468750, 4963.937500),
+	        angles = Angle(0.000000, 90.000000, 0.000000),
+          idleanim = "trader_idle2",
+        },
+        {
+          position = Vector(-6733.468750, -9486.093750, 4963.625000),
+          angles = Angle(0.000000, 90.000000, 0.000000),
+          idleanim = "trader_idle2",
+        },
+      },
+    },
     ["anomalycontroller"] = {
       { Vector(8676.5146484375,-11845.803710938,69) , 256 , "0011" }, 
       { Vector(9183.0615234375,-8733.1484375,69) , 256 , "0011" }, 
