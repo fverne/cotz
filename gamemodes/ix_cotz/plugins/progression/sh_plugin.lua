@@ -55,7 +55,11 @@ end
 function PLUGIN:CreateMenuButtons(tabs)
 	tabs["progression"] = function(container)
 		ix.cotzUI.Scale(1)
-		local title = container:Add("DLabel")
+		local scroll = container:Add("DScrollPanel")
+		scroll:Dock(FILL)
+		ix.cotzUI.StyleScroll(scroll)
+
+		local title = scroll:Add("DLabel")
 		title:SetText("Your Progression")
 		title:SetFont("cotzUITitle")
 		title:SetTextColor(ix.cotzUI.colors.text)
@@ -63,7 +67,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 		title:InvalidateLayout(true)
 		title:SetAutoStretchVertical(true)
 
-		local intro = container:Add("DLabel")
+		local intro = scroll:Add("DLabel")
 		intro:SetWrap(true)
 		intro:SetFont("cotzUISmall")
 		intro:SetTextColor(ix.cotzUI.colors.muted)
@@ -88,7 +92,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 		table.sort(npcIdentifiers)
 
 		for _, npcIdentifier in pairs(npcIdentifiers) do
-			local card = ix.cotzUI.Card(container)
+			local card = ix.cotzUI.Card(scroll)
 			local npcTitle = card:Add("DLabel")
 			npcTitle:SetWrap(true)
 			npcTitle:SetFont("cotzUILabel")
@@ -150,13 +154,24 @@ function PLUGIN:CreateMenuButtons(tabs)
 
 				activeProgressions = activeProgressions + 1
 
+				local spacer = card:Add("DPanel")
+				spacer:Dock(TOP)
+				spacer.cotzRefresh = function(control)
+					control:SetTall(ix.cotzUI.Scale(1))
+					control:DockMargin(0, ix.cotzUI.Scale(16), 0, ix.cotzUI.Scale(12))
+				end
+				spacer:cotzRefresh()
+				spacer.Paint = function(_, width, height)
+					surface.SetDrawColor(ix.cotzUI.colors.border)
+					surface.DrawRect(0, 0, width, height)
+				end
+
 				local progressionTitle = card:Add("DLabel")
 				progressionTitle:SetWrap(true)
 				progressionTitle:SetFont("cotzUILabel")
 				progressionTitle:SetTextColor(ix.cotzUI.colors.text)
 				progressionTitle:SetText(definition.name)
 				progressionTitle:Dock(TOP)
-				progressionTitle:DockMargin(0, 16, 0, 0)
 				progressionTitle:SetAutoStretchVertical(true)
 
 				if definition.BuildResponse then

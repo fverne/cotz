@@ -15,7 +15,9 @@ data key `knownProgressionTopics`; newly unlocked topics require another convers
 appear. Discovery survives reconnects and does not change progression eligibility or saved progress.
 Purple inventory backgrounds and Progression tooltip labels use the same discovery rules: only
 outstanding items for active, discussed topics are highlighted. Ordinary task highlighting is unchanged.
-Long task requirements and rewards remain wrapped in the scrolling panel.
+The tab uses a fill-docked scrolling list with one card per contact. Within each card, spaced
+dividers separate the heading and earned benefits from each progression section. Long task
+requirements and rewards wrap inside the card.
 
 This plugin owns character progression storage, persistent item requirements, numeric counters,
 prerequisite validation, purchase permissions, completion payouts, pending reward claims and services.
