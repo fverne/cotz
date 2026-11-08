@@ -93,6 +93,9 @@ end
 
 function ix.progression.GetBenefitSummary(definition, character)
 	local parts = benefitText(definition.completionBenefits or {})
+	if definition.completionCash and definition.completionCash > 0 then
+		parts[#parts + 1] = string.format("%d rubles on completion", definition.completionCash)
+	end
 	for _, unlock in ipairs(definition.vendorUnlocks or {}) do
 		parts[#parts + 1] = "Purchase access: " .. ix.item.list[unlock.args[1]].name
 	end
@@ -114,9 +117,6 @@ function ix.progression.GetBenefitSummary(definition, character)
 		parts[#parts + 1] = reward.kind == "weight"
 			and string.format("Carry %d kg more", reward.amount) or "More room in your pack"
 	end
-	if definition.completionCash and definition.completionCash > 0 then
-		parts[#parts + 1] = string.format("%d rubles on completion", definition.completionCash)
-	end
 	for _, reward in ipairs(definition.serviceDiscounts or {}) do
 		parts[#parts + 1] = string.format("%g%% %s discount at %s", reward.fraction * 100,
 			reward.service, reward.npc)
@@ -133,7 +133,7 @@ function ix.progression.GetBenefitSummary(definition, character)
 		end
 	end
 
-	return table.concat(parts, "; ")
+	return table.concat(parts, ";\n")
 end
 
 function ix.progression.DescribeTask(definition, npcName, status, character)
