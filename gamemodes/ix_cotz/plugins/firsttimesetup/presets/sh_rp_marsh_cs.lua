@@ -993,13 +993,53 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       cyclicalCategory = "stash_map1",
     },
   },
-  vendors = {
-    {
-      template = "tutorialnpc",
-      position = Vector(-8281.687500, -9627.593750, 4972.750000),
-      angles = Angle(0, -93.284912, 0),
-    },
-  },
+	vendors = {
+		{
+			template = "tutorialnpc",
+			position = Vector(-8281.687500, -9627.593750, 4972.750000),
+			angles = Angle(0, -93.284912, 0),
+		},
+		{
+			template = "technpc",
+			position = Vector(-6006.625000, -11071.906250, 5026.031250),
+			angles = Angle(0, -177.791748, 0),
+		},
+		{
+			template = "cooknpc",
+			position = Vector(-6118.687500, -9755.218750, 4959.031250),
+			angles = Angle(0, 179.983521, 0),
+		},
+		{
+			template = "tradernpc",
+			position = Vector(-8229.625000, -11676.406250, 4944.406250),
+			angles = Angle(0, 90.010986, 0),
+		},
+		{
+			template = "medicnpc",
+			position = Vector(-7328.531250, -9329.093750, 4973.031250),
+			angles = Angle(0, -90, 0),
+		},
+		{
+			template = "stalkernetnpc",
+			position = Vector(-7467.468750, -9369.718750, 4972.468750),
+			angles = Angle(0, 44.923096, -0.060425),
+		},
+		{
+			template = "ballastnpc",
+			position = Vector(-5976.500000, -9892.375000, 4961.156250),
+			angles = Angle(0, -96.833496, 0),
+		},
+		{
+			template = "gasketnpc",
+			position = Vector(-6354.937500, -9423.343750, 4964.375000),
+			angles = Angle(0, -97.492676, 0),
+		},
+		{
+			template = "atlasnpc",
+			position = Vector(-6367.218750, -9492.531250, 4964.375000),
+			angles = Angle(0, 83.210449, 0),
+		},
+	},
   plugindata = {
     ["hideouts"] = {},
     ["townnpcs"] = {

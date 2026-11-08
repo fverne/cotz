@@ -107,7 +107,7 @@ function ix.progression.GetBenefitSummary(definition, character)
 	for _, unlock in ipairs(definition.stockUnlocks or {}) do
 		local names = {}
 		for _, itemID in ipairs(unlock.items) do names[#names + 1] = ix.item.list[itemID].name end
-		parts[#parts + 1] = string.format("Stock capacity: %s; +%d total; deliveries arrive as before",
+		parts[#parts + 1] = string.format("Stock capacity: %s; +%d total",
 			table.concat(names, ", "), unlock.bonus)
 	end
 	if definition.ammoExchange then

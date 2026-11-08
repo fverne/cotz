@@ -191,6 +191,7 @@ if SERVER then
 			end
 		end
 
+		ix.plugin.Get("vendor_adv"):SaveData()
 		self.firstTimeSetupRun = true
 
 		return true, "First time setup completed."

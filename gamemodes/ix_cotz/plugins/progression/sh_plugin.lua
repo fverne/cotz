@@ -126,7 +126,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 				label:SetTextColor(ix.cotzUI.colors.muted)
 				label:SetWrap(true)
 				label:SetText("Extra stock reserved for you: "
-					.. table.concat(capacityText, "; ") .. ". New deliveries arrive as before.")
+					.. table.concat(capacityText, "; ") .. ".")
 				label:Dock(TOP)
 				label:SetAutoStretchVertical(true)
 			end

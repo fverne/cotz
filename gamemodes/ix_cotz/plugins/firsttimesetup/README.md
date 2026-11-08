@@ -4,6 +4,24 @@ Map presets in `presets/` are explicitly included by `sh_plugin.lua`. Each prese
 `containers`, `entities`, `vendors`, and `plugindata`. The server implementation of generic
 entity export and spawning lives in `sv_entities.lua`.
 
+## Town vendor placements
+
+The Marsh preset lists all nine contacts with authored alternate positions in `vendors` as well as
+`plugindata["townnpcs"]`. Alternate positions alone do not create NPCs. FTS saves its vendor snapshot
+before returning, so a restart before the normal autosave does not lose newly spawned vendors.
+
+Preset edits do not update an initialized server. To restore missing preset vendors on an existing
+Marsh server after deploying these files, run this once in its server console:
+
+```lua
+lua_run local f = ix.plugin.Get("firsttimesetup") for _, v in ipairs(f.map_presets[game.GetMap()].vendors) do if not ix.progression.GetNPCFromName(ix.npctemplates.templates[v.template].name) then f:SpawnVendor(v) end end ix.plugin.Get("vendor_adv"):SaveData()
+```
+
+This creates only absent preset vendors at their authored starting positions and saves the result.
+Existing vendors, field sites, containers and progression remain in place. Recovered vendors use their
+current template appearance and stock. Existing saved alternate choices apply on the next restart;
+the command does not import newer point definitions from the preset. Do not rerun full FTS to recover NPCs.
+
 ## Hideout setup
 
 `/FTSDumpPluginData` includes reusable hideout setup in the server's
@@ -65,6 +83,7 @@ Run from the repository root:
 ```sh
 luatex --luaonly tests/fts_entities_spec.lua
 luatex --luaonly tests/fts_hideouts_spec.lua
+luatex --luaonly tests/fts_vendors_spec.lua
 ```
 
 The standalone spec checks generated Lua round trips, Color tool appearance, zero-indexed
@@ -74,6 +93,10 @@ command registration, cooldowns, and failed writes/creation. It uses mocks.
 The hideout spec checks setup export/import and Lua round trips, ownership/inventory isolation,
 existing-ID preservation, unloaded-instance checks, malformed definitions, missing/rejected shell files,
 failed-save rollback, and stopping FTS before world population on invalid hideout data.
+
+The vendor spec checks that every Marsh contact with alternate positions has a unique vendor placement,
+that its template exists, that its starting transform matches the authored point, and that FTS saves
+all spawned vendors before returning. Verify recovery and an immediate restart in multiplayer as well.
 
 In a multiplayer development session, mark a colored/translucent `prop_physics` persistent,
 dump it, and inspect the server-side file. On a disposable test map, restore an exported
