@@ -2,13 +2,13 @@ ix.npctemplates.templates["atlasnpc"] = {
 	name = "'Atlas'",
 	description = "A careful surveyor who keeps checking the notes in his hands.",
 
-	model = "models/Humans/Group01/male_07.mdl",
+	model = "models/legends/hlupik.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",
 	animgroup = 0,
 	soundgroup = "nosound",
-	bubble = false,
+	bubble = 0,
 
 	dialogueid = "atlasnpc",
 	factions = {},

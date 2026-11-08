@@ -8,7 +8,7 @@ ix.npctemplates.templates["latchnpc"] = {
 	idleanim = "",
 	animgroup = 0,
 	soundgroup = "nosound",
-	bubble = false,
+	bubble = 0,
 
 	dialogueid = "latchnpc",
 	factions = {},

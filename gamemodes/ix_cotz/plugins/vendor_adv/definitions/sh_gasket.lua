@@ -2,13 +2,13 @@ ix.npctemplates.templates["gasketnpc"] = {
 	name = "'Gasket'",
 	description = "A tired caretaker with the look of a man listening for a failing generator.",
 
-	model = "models/Humans/Group01/male_02.mdl",
+	model = "models/legends/freeman.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",
 	animgroup = 0,
 	soundgroup = "nosound",
-	bubble = false,
+	bubble = 0,
 
 	dialogueid = "gasketnpc",
 	factions = {},

@@ -8,7 +8,7 @@ ix.npctemplates.templates["spoornpc"] = {
 	idleanim = "",
 	animgroup = 0,
 	soundgroup = "nosound",
-	bubble = false,
+	bubble = 0,
 
 	dialogueid = "spoornpc",
 	factions = {},
