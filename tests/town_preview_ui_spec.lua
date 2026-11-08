@@ -19,7 +19,7 @@ net = {
 	ReadEntity = function() return npc end,
 	Start = function(name) packet = {name = name} end,
 	WriteEntity = function(entity) packet.entity = entity end,
-	WriteUInt = function(index, bits) packet.index, packet.bits = index, bits end,
+	WriteString = function(name) packet.sequence = name end,
 	SendToServer = function() sends = sends + 1 end,
 }
 local function panel(kind, parent)
@@ -70,7 +70,7 @@ receiver()
 check(#body.children == 3, "all model sequences are listed, including sequence index zero")
 check(body.children[1].text == "sit" and body.children[3].text == "zero", "sequences sort by name")
 body.children[3]:DoClick()
-check(packet.entity == npc and packet.index == 0 and packet.bits == 16, "index zero sends a typed selection")
+check(packet.entity == npc and packet.sequence == "zero", "sequence zero sends its name rather than relying on the client model index")
 body.children[1]:DoClick()
 check(sends == 1, "rapid repeated clicks are debounced")
 now = 1
@@ -83,17 +83,17 @@ end
 check(search.updateOnType and previousButton.dock == BOTTOM and nextButton.dock == BOTTOM,
 	"search updates while typing and navigation stays outside the scrolling list")
 nextButton:DoClick()
-check(packet.index == 1, "next wraps from the last alphabetic entry to the first")
+check(packet.sequence == "sit", "next wraps from the last alphabetic entry to the first")
 now = 2
 animation = "sit"
 previousButton:DoClick()
-check(packet.index == 0, "previous wraps to the final entry")
+check(packet.sequence == "zero", "previous wraps to the final entry")
 search:SetText("WAL")
 search:OnValueChange()
 check(#body.children == 1 and body.children[1].text == "walk", "search matches case-insensitively")
 now = 3
 nextButton:DoClick()
-check(packet.index == 2, "navigation uses the filtered list")
+check(packet.sequence == "walk", "navigation uses the filtered list")
 search:SetText("[")
 search:OnValueChange()
 check(#body.children == 1 and body.children[1].kind == "label", "search is literal and empty results are explained")

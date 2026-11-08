@@ -73,7 +73,7 @@ function ENT:Touch(ent)
 	timer.Create(self:EntIndex().."_par_sound_cooldown", 11, 1, function()
 		self:StopSound("par_blast")
 		self:StopParticles()
-		ParticleEffect("jarka_inactive", self:GetPos(), Angle(0,0,0), self)
+		-- The client owns the idle effect so it can stop it outside visual range.
 		self.ActiveOnce = true
 	end)
 end

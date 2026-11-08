@@ -2,28 +2,28 @@
 
 PLUGIN.map_presets["rp_marsh_cs"] = {
   containers = {
-    --communitychests
-    {
-      model = "models/props_forest/footlocker01_closed.mdl",
-      position = Vector(-6159.7724609375,-9435.3583984375,4970.3862304688),
-      angles = Angle(-0.0010346689959988,-179.97814941406,-0.0054931640625),
-      spawnCategory = "",
-      cyclicalCategory = "",
-    },
-    {
-      model = "models/props_forest/footlocker01_closed.mdl",
-      position = Vector(-6160.6552734375,-9504.5498046875,4970.5258789063),
-      angles = Angle(-0.018871011212468,-179.86129760742,-0.009033203125),
-      spawnCategory = "",
-      cyclicalCategory = "",
-    },
-    {
-      model = "models/props_forest/footlocker01_closed.mdl",
-      position = Vector(-6161.037109375,-9565.6552734375,4970.5258789063),
-      angles = Angle(0.00014697267033625,-179.93852233887,3.0517578125e-05),
-      spawnCategory = "",
-      cyclicalCategory = "",
-    },
+    -- --communitychests
+    -- {
+    --   model = "models/props_forest/footlocker01_closed.mdl",
+    --   position = Vector(-6159.7724609375,-9435.3583984375,4970.3862304688),
+    --   angles = Angle(-0.0010346689959988,-179.97814941406,-0.0054931640625),
+    --   spawnCategory = "",
+    --   cyclicalCategory = "",
+    -- },
+    -- {
+    --   model = "models/props_forest/footlocker01_closed.mdl",
+    --   position = Vector(-6160.6552734375,-9504.5498046875,4970.5258789063),
+    --   angles = Angle(-0.018871011212468,-179.86129760742,-0.009033203125),
+    --   spawnCategory = "",
+    --   cyclicalCategory = "",
+    -- },
+    -- {
+    --   model = "models/props_forest/footlocker01_closed.mdl",
+    --   position = Vector(-6161.037109375,-9565.6552734375,4970.5258789063),
+    --   angles = Angle(0.00014697267033625,-179.93852233887,3.0517578125e-05),
+    --   spawnCategory = "",
+    --   cyclicalCategory = "",
+    -- },
 
     --cyclic containers
     {
@@ -993,42 +993,7 @@ PLUGIN.map_presets["rp_marsh_cs"] = {
       cyclicalCategory = "stash_map1",
     },
   },
-  vendors = {
-    {
-      template = "tutorialnpc",
-      position = Vector(-8453.006836, -9419.748047, 4973.031250),
-      angles = Angle(0.000, -33, 0.000)
-    },
-    {
-      template = "technpc",
-      position = Vector(-6006.653809, -11071.930664, 5026.031250),
-      angles = Angle(0,-177.793,0)
-    },
-    {
-      template = "medicnpc",
-      position = Vector(-7328.550293, -9329.122070, 4973.031250),
-      angles = Angle(0.000, -90, 0.000)
-    },
-
-    --ecobunker npcs
-    {
-      template = "ecologistnpc",
-      position = Vector(4341.8876953125,8572.70703125,-1084.96875),
-      angles = Angle(0,-131.54287719727,0),
-    },
-
-    {
-      template = "ecologistnpc2",
-      position = Vector(3295.4357910156,7937.0366210938,-1084.96875),
-      angles = Angle(0,95.927917480469,0),
-    },
-    {
-      template = "ecologistnpc3",
-      position = Vector(3950.6247558594,8041.3276367188,-1084.96875),
-      angles = Angle(0,178.52531433105,0),
-    },
-  },
-
+  vendors = {},
   plugindata = {
     ["hideouts"] = {},
     ["townnpcs"] = {},

@@ -21,13 +21,18 @@ function PLUGIN:OpenTownNPCPreview(client, npc)
 	net.Send(client)
 end
 
-function PLUGIN:SetTownNPCPreviewSequence(client, npc, index)
-	if not self:CanEditTownNPCPreview(client, npc) then return false end
+function PLUGIN:SetTownNPCPreviewSequence(client, npc, sequence)
+	if not self:CanEditTownNPCPreview(client, npc) then
+		return false, "Move closer to your own preview while logged in as an administrator."
+	end
 	if (client.cotzPreviewNextChange or 0) > CurTime() then return false end
 	client.cotzPreviewNextChange = CurTime() + PREVIEW_COOLDOWN
-	if index < 0 or index >= npc:GetSequenceCount() or index ~= math.floor(index) then return false end
-	local sequence = npc:GetSequenceName(index)
-	if sequence == "" or npc:LookupSequence(sequence) < 0 then return false end
+	if not isstring(sequence) or #sequence > 128 or sequence == "" then
+		return false, "Invalid animation sequence name."
+	end
+	if npc:LookupSequence(sequence) < 0 then
+		return false, "The server does not have this sequence on the preview model: " .. sequence
+	end
 	npc:SetTownSpawnAnim(sequence)
 	npc:SetAnim()
 
@@ -36,8 +41,9 @@ end
 
 net.Receive("cotz/townnpcs/preview-sequence", function(_, client)
 	local npc = net.ReadEntity()
-	local index = net.ReadUInt(16)
-	PLUGIN:SetTownNPCPreviewSequence(client, npc, index)
+	local sequence = net.ReadString()
+	local ok, reason = PLUGIN:SetTownNPCPreviewSequence(client, npc, sequence)
+	if not ok and reason then client:Notify(reason) end
 end)
 
 function PLUGIN:RunCommandTownNPCPreview(client, id, sequence)

@@ -772,6 +772,8 @@ and next buttons cycle through the filtered list, wrapping at either end. The cu
 shown above the list; the window sits to the right so the preview remains visible. Closing the window
 keeps the selected pose. Press E to reopen it. Only the administrator who created the preview can edit
 it, while nearby and still an administrator; the server validates and rate-limits every change.
+Selections send sequence names for server lookup. Rejected access or unavailable server sequences
+produce a notification; a rejected selection leaves the current animation unchanged.
 
 The optional sequence argument still works, for example `/TownNPCPreview jitters idle_all_01`.
 Without it, the preview uses the configured idle or the model's first sequence if that idle is missing.

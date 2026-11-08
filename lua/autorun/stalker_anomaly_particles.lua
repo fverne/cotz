@@ -1,3 +1,19 @@
+if SERVER then
+	AddCSLuaFile("cotz/anomalies/cl_idle.lua")
+else
+	-- These resource entities also run outside Helix, so use the engine hook dispatcher.
+	hook.Add("NotifyShouldTransmit", "cotz/anomalies/idle-transmission", function(entity, shouldTransmit)
+		if not entity.StopAnomalyIdleEffects then return end
+
+		if not shouldTransmit then
+			entity:StopAnomalyIdleEffects()
+			entity.IsSleeping = true
+		else
+			entity:SetNextClientThink(CurTime())
+		end
+	end)
+end
+
 game.AddParticles("particles/stalker_anomaly.pcf")
 PrecacheParticleSystem("electra")
 PrecacheParticleSystem("electra_activated")

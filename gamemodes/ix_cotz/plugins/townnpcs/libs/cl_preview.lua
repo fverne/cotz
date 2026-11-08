@@ -28,7 +28,7 @@ net.Receive("cotz/townnpcs/preview", function()
 		frame.nextChange = CurTime() + 0.15
 		net.Start("cotz/townnpcs/preview-sequence")
 		net.WriteEntity(npc)
-		net.WriteUInt(entry.index, 16)
+		net.WriteString(entry.name)
 		net.SendToServer()
 	end
 	local function step(direction)

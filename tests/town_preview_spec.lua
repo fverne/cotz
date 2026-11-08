@@ -2,6 +2,7 @@
 local checks = 0
 local function check(value, message) checks = checks + 1 assert(value, message) end
 SERVER, CLIENT = true, false
+isstring = function(value) return type(value) == "string" end
 function Vector(x, y, z) return {x = x, y = y, z = z} end
 function Angle(p, y, r) return {p = p, y = y, r = r} end
 IsValid = function(value) return type(value) == "table" and not value.invalid end
@@ -10,7 +11,8 @@ function position:DistToSqr(other) return other.distance or 0 end
 local client = {GetEyeTraceNoCursor = function() return {HitPos = position, HitNormal = position} end,
 	EyeAngles = function() return Angle(30, 45, 10) end,
 	GetPos = function() return position end, IsPlayer = function() return true end,
-	IsAdmin = function(self) return not self.demoted end}
+	IsAdmin = function(self) return not self.demoted end,
+	Notify = function(self, message) self.notice = message end}
 local now = 0
 CurTime = function() return now end
 local packet, receiver
@@ -77,21 +79,26 @@ check(packet == preview, "owner can open their nearby preview picker")
 packet = nil
 town:OpenTownNPCPreview(secondClient, preview)
 check(packet == nil, "picker opens are rate limited")
-check(not town:SetTownNPCPreviewSequence(client, preview, 0), "another administrator cannot change this preview")
-check(town:SetTownNPCPreviewSequence(secondClient, preview, 0), "owner can select sequence index zero")
-check(not town:SetTownNPCPreviewSequence(secondClient, preview, 0), "sequence changes are server rate limited")
+check(not town:SetTownNPCPreviewSequence(client, preview, "pose_zero"), "another administrator cannot change this preview")
+check(town:SetTownNPCPreviewSequence(secondClient, preview, "pose_zero"), "owner can select the sequence by name without depending on client/server indices")
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, "pose_zero"), "sequence changes are server rate limited")
 now = 1
-check(not town:SetTownNPCPreviewSequence(secondClient, preview, 1), "out-of-range sequences are rejected")
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, "missing"), "unknown sequence names are rejected")
 now = 2
 preview.position.distance = 192 ^ 2 + 1
-check(not town:SetTownNPCPreviewSequence(secondClient, preview, 0), "distant preview changes are rejected")
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, "pose_zero"), "distant preview changes are rejected")
 preview.position.distance = nil
 secondClient.demoted = true
-check(not town:SetTownNPCPreviewSequence(secondClient, preview, 0), "permissions are rechecked after demotion")
+check(not town:SetTownNPCPreviewSequence(secondClient, preview, "pose_zero"), "permissions are rechecked after demotion")
 secondClient.demoted = nil
 net.ReadEntity = function() return preview end
-net.ReadUInt = function(bits) check(bits == 16, "sequence index has a bounded typed payload") return 0 end
+net.ReadString = function() return "pose_zero" end
 receiver(nil, secondClient)
+now = 3
+net.ReadString = function() return "missing" end
+receiver(nil, secondClient)
+check(secondClient.notice and secondClient.notice:find("server does not have", 1, true),
+	"unavailable server sequences produce visible feedback instead of failing silently")
 check(preview.animation == "pose_zero", "network handler applies a validated owner selection")
 function secondClient:GetEyeTraceNoCursor() return {Entity = preview} end
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_spawnpoints.lua")

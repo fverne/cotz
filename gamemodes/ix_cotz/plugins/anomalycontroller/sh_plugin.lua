@@ -8,6 +8,14 @@ PLUGIN.anomalypoints = PLUGIN.anomalypoints or {} -- ANOMALYPOINTS STRUCTURE tab
 
 ix.util.Include("sh_anomalydefs.lua")
 
+if CLIENT then
+	ix.option.Add("anomalyLights", ix.type.bool, true, {
+		phrase = "Anomaly Lights",
+		description = "Enable dynamic lighting from anomaly fields.",
+		category = "Performance",
+	})
+end
+
 ix.config.Add("artifactSpawnerThreshold", 5, "How many artifacts the anomalyspawner should keep the map populated with.", nil, {
 	data = {min = 0, max = 50},
 	category = "Spawning"
