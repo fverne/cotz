@@ -16,9 +16,16 @@ function ENT:SetupDataTables()
 	self:NetworkVar("String", 1, "Description")
 	self:NetworkVar("String", 2, "IdleAnim")
 	self:NetworkVar("String", 3, "SoundGroup")
-	-- Session-only override; vendor saves keep the configured idle and animation group.
-	self:NetworkVar("String", 4, "TownSpawnAnim")
 	self:NetworkVar("Int", 0, "AnimGroupId")
+end
+
+-- String datatable slots 0-3 are already occupied by vendor identity and defaults.
+function ENT:GetTownSpawnAnim()
+	return self:GetNWString("cotz/townnpcs/spawn-animation", "")
+end
+
+function ENT:SetTownSpawnAnim(animation)
+	self:SetNWString("cotz/townnpcs/spawn-animation", animation)
 end
 
 function ENT:Initialize()

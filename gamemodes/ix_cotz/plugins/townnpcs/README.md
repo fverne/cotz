@@ -774,6 +774,10 @@ keeps the selected pose. Press E to reopen it. Only the administrator who create
 it, while nearby and still an administrator; the server validates and rate-limits every change.
 Selections send sequence names for server lookup. Rejected access or unavailable server sequences
 produce a notification; a rejected selection leaves the current animation unchanged.
+The session animation uses a separate NWString because the vendor already occupies all four string
+datatable slots. Restart the map after updating this registration; existing entities keep old accessors.
+Run `luatex --luaonly tests/town_animation_network_spec.lua` for slot limits, identity isolation,
+networked pose switching and the actual vendor animation consumer.
 
 The optional sequence argument still works, for example `/TownNPCPreview jitters idle_all_01`.
 Without it, the preview uses the configured idle or the model's first sequence if that idle is missing.
