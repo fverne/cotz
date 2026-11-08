@@ -484,26 +484,51 @@ end
 ix.progression.Notify = notify
 
 local reader, stranger = character(), character()
-ix.progression.Register("discovery/first", {keyNpc = "Discovery", defaultActive = true})
-ix.progression.Register("discovery/second", {keyNpc = "Discovery"})
+ix.progression.Register("discovery/first", {keyNpc = "Discovery", defaultActive = true,
+	requirementSlots = {{pool = "fixture", quantity = 3}}})
+ix.progression.Register("discovery/second", {keyNpc = "Discovery",
+	requirementSlots = {{pool = "fixture", quantity = 5}}})
 check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 0,
 	"a new character has no discovered progression entries")
+check(next(ix.progression.GetNeededItems(reader)) == nil,
+	"undiscussed progression requests do not highlight inventory items")
 ix.progression.DiscoverTopics(reader, "Discovery")
 check(ix.progression.GetKnownActiveProgressions(reader, "Discovery")[1] == "discovery/first",
 	"discussing a contact reveals its currently active topics")
+check(ix.progression.GetNeededItems(reader).artifact_bolt == 3,
+	"only the discussed request contributes to progression highlighting")
 check(#ix.progression.GetKnownActiveProgressions(stranger, "Discovery") == 0,
 	"discovery belongs to the character")
+check(next(ix.progression.GetNeededItems(stranger)) == nil,
+	"another character's conversations do not reveal inventory highlights")
 ix.progression.SetActive(reader, "discovery/second", true)
 check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 1,
 	"a newly unlocked topic remains hidden until discussed")
+check(ix.progression.GetNeededItems(reader).artifact_bolt == 3,
+	"a newly unlocked but undiscussed request does not add highlighted requirements")
 ix.progression.DiscoverTopics(reader, "Discovery")
 check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 2,
 	"returning to the contact reveals the new topic")
+check(ix.progression.GetNeededItems(reader).artifact_bolt == 8,
+	"discussed active requests combine their remaining item counts")
 local reconnected = character()
 reconnected.data = copy(reader.data)
 reconnected.vars = copy(reader.vars)
 check(#ix.progression.GetKnownActiveProgressions(reconnected, "Discovery") == 2,
 	"discovery survives character restoration")
+check(ix.progression.GetNeededItems(reconnected).artifact_bolt == 8,
+	"discovered inventory highlights survive character restoration")
+local discoveryRecord = ix.progression.GetCharacterProgression(reader)
+discoveryRecord.lines["discovery/first"].complexData = {artifact_bolt = 2}
+ix.progression.SetCharacterProgression(reader, discoveryRecord)
+check(ix.progression.GetNeededItems(reader).artifact_bolt == 6,
+	"progression highlights count only outstanding contributions")
+ix.progression.SetCompleted(reader, "discovery/first")
+check(ix.progression.GetNeededItems(reader).artifact_bolt == 5,
+	"completed discussed requests stop contributing to inventory highlights")
+ix.progression.SetCompleted(reader, "discovery/second")
+check(next(ix.progression.GetNeededItems(reader)) == nil,
+	"items stop being highlighted once every discussed request is complete")
 
 local journalOwner = character()
 ix.progression.Register("journalRewardsFixture", {

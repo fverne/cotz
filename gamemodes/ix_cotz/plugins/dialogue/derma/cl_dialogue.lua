@@ -8,13 +8,26 @@ local escapeStarted
 local escapePanel
 local relatedPanels = {}
 local OPTION_COLORS = {
-	text = Color(255, 255, 255),
-	job = Color(255, 192, 0), progression = Color(127, 0, 255),
-	service = Color(206, 108, 86), trade = Color(109, 176, 179), back = Color(153, 153, 153),
+	text = Color(216, 215, 201),
+	job = Color(190, 173, 123),
+	progression = Color(173, 151, 190),
+	service = Color(190, 146, 134),
+	trade = Color(135, 177, 179),
+	back = Color(153, 153, 153),
 }
+local OPTION_HOVER_BRIGHTNESS = 20
+local OPTION_HOVER_COLORS = {}
 
-local function optionColor(topicID, option)
-	return OPTION_COLORS[ix.dialogue.GetOptionCategory(topicID, option)] or OPTION_COLORS.text
+for category, color in pairs(OPTION_COLORS) do
+	OPTION_HOVER_COLORS[category] = Color(color.r + OPTION_HOVER_BRIGHTNESS,
+		color.g + OPTION_HOVER_BRIGHTNESS, color.b + OPTION_HOVER_BRIGHTNESS)
+end
+
+local function optionColor(topicID, option, hovered)
+	local category = ix.dialogue.GetOptionCategory(topicID, option)
+	if hovered then return OPTION_HOVER_COLORS[category] or OPTION_HOVER_COLORS.text end
+
+	return OPTION_COLORS[category] or OPTION_COLORS.text
 end
 
 function ix.dialogue.TrackRelatedPanel(panel, cancel)
@@ -353,7 +366,7 @@ function PANEL:prepareOptions(options)
 			local baseThink = self.buttonList[k].Think
 			self.buttonList[k].Think = function()
 				baseThink(self.buttonList[k])
-				self.buttonList[k]:SetTextColor(optionColor(topicID, topic))
+				self.buttonList[k]:SetTextColor(optionColor(topicID, topic, self.buttonList[k]:IsHovered()))
 			end
 			self.buttonList[k].topicID = topicID
 			self.buttonList[k].DoClick = function()
@@ -390,7 +403,7 @@ function PANEL:prepareDynamicOptions(dynamicOptions, normalOptions)
 			local baseThink = label.Think
 			label.Think = function()
 				baseThink(label)
-				label:SetTextColor(optionColor(option.topicID, option))
+				label:SetTextColor(optionColor(option.topicID, option, label:IsHovered()))
 			end
 			label.topicID = option.topicID
 			label.DoClick = function()

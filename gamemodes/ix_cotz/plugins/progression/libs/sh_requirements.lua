@@ -16,8 +16,9 @@ end
 
 function ix.progression.GetNeededItems(character)
 	local result = {}
+	local known = character:GetData("knownProgressionTopics", {})
 	for progressionID in pairs(ix.progression.definitions) do
-		if ix.progression.IsActive(character, progressionID) then
+		if known[progressionID] and ix.progression.IsActive(character, progressionID) then
 			local contributed = ix.progression.GetComplexProgressionValue(character, progressionID)
 			for item, amount in pairs(ix.progression.GetRequirements(character, progressionID)) do
 				local remaining = amount - (contributed[item] or 0)

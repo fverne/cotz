@@ -13,6 +13,8 @@ Progression is a top-level menu tab beside Tasks, using contact cards and the sh
 Opening a contact's progression conversation records its currently active topics in the character
 data key `knownProgressionTopics`; newly unlocked topics require another conversation before they
 appear. Discovery survives reconnects and does not change progression eligibility or saved progress.
+Purple inventory backgrounds and Progression tooltip labels use the same discovery rules: only
+outstanding items for active, discussed topics are highlighted. Ordinary task highlighting is unchanged.
 Long task requirements and rewards remain wrapped in the scrolling panel.
 
 This plugin owns character progression storage, persistent item requirements, numeric counters,

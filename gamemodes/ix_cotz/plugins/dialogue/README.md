@@ -91,10 +91,11 @@ new NPCs. Also check an NPC whose questions are locked and one with no flavour t
 Assignment details appear only while the character has an assignment from that NPC. There is no
 Claim rewards submenu: available exchanges and recoverable stored items appear directly at the main
 menu, with the existing server validation and pending reward queues. Names appear above every reply.
-Option colors use inventory yellow for jobs and inventory purple for progression, red for services
-and barter, teal for trading, white for flavour and other dialogue, and grey for back/goodbye.
+Option colors use muted amber for jobs, lavender for progression, red for services and barter,
+teal for trading, warm off-white for flavour and other dialogue, and grey for back/goodbye.
 Categories use explicit action identities rather than substrings of topic IDs. Dynamic barters sharing
-the reward resolver declare their service category. Hovering preserves the category color.
+the reward resolver declare their service category. Static and dynamic options brighten slightly on
+mouseover while preserving their category tint.
 
 Trading and Technut's customization window open without replacing the current dialogue choices.
 Escape cancels the foremost related window or returns through the dialogue's back choice; at the

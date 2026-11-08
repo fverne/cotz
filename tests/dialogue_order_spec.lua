@@ -334,12 +334,12 @@ panel.tree = {InterestTownRelationsTopic = {statement = "Tell me more.", ShouldA
 	AboutWorkTopic = {statement = "About the job.", ShouldAdd = function() return true end}}
 labels = {}
 panel:prepareOptions({"InterestTownRelationsTopic", "TownProgression", "AboutWorkTopic"})
-check(labels[1].color.r == 255 and labels[1].color.g == 255 and labels[1].color.b == 255,
-	"flavour renders white")
-check(labels[2].color.r == 127 and labels[2].color.g == 0 and labels[2].color.b == 255,
-	"progression uses inventory purple")
-check(labels[3].color.r == 255 and labels[3].color.g == 192 and labels[3].color.b == 0,
-	"jobs use inventory yellow")
+check(labels[1].color.r == 216 and labels[1].color.g == 215 and labels[1].color.b == 201,
+	"flavour renders warm off-white")
+check(labels[2].color.r == 173 and labels[2].color.g == 151 and labels[2].color.b == 190,
+	"progression uses muted lavender")
+check(labels[3].color.r == 190 and labels[3].color.g == 173 and labels[3].color.b == 123,
+	"jobs use muted amber")
 local visited = {}
 local navigation = setmetatable({tree = {GOODBYE = {}, BackTopic = {}}, currentTopicID = "GREETING",
 	startTopic = function(self, id) visited[#visited + 1] = id self.currentTopicID = id end,
