@@ -133,6 +133,7 @@ end
 net.Start = function(name) message, data, cursor = name, {}, 1 end
 net.SendToServer = function() net.sent[#net.sent + 1] = {name = message, data = data} end
 local root = "gamemodes/ix_cotz/plugins/gearcustomization/"
+ix.townNPCs = {HasService = function() return true end}
 dofile(root .. "sh_appearance.lua")
 dofile(root .. "cl_menu.lua")
 local function find(class, text)
@@ -222,8 +223,8 @@ local paintAllowed = false
 ix.townNPCs = {HasService = function() return paintAllowed end}
 ix.gearAppearance.OpenMenu(vendor)
 frame = frames[#frames]
-check(frame.item == item,
-	"ordinary gear remains available before the painting unlock")
+check(frame.item == nil,
+	"neither ordinary gear nor suits can be selected before the painting unlock")
 frame:Close()
 paintAllowed = true
 ix.gearAppearance.OpenMenu(vendor)

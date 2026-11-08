@@ -33,8 +33,9 @@ DIALOGUE.addTopic("CustomizeGear", {
 		local customization = ix.plugin.Get("gearcustomization")
 		if SERVER and customization then customization:Open(client, target) end
 	end,
-	ShouldAdd = function()
+	ShouldAdd = function(_, client, target)
 		return ix.plugin.Get("gearcustomization") ~= nil and ix.pac ~= nil
+			and ix.townNPCs:HasService(client:GetCharacter(), "painting", target:GetDisplayName())
 	end,
 })
 

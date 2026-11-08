@@ -1,49 +1,90 @@
 local PASSAGE_KEY = "cotz/hands/player-passage"
-local PASSAGE_SECONDS = 60
+local RESTORE_INTERVAL = 0.25
 local playerMeta = FindMetaTable("Player")
 
-local function applyPassage(client, enabled)
-	client.cotzHandsPassage = enabled == true
-	client:SetCustomCollisionCheck(true)
-	client:CollisionRulesChanged()
+function playerMeta:GetHandsPassage()
+	return self:GetNWBool(PASSAGE_KEY, false)
 end
 
 function PLUGIN:ShouldCollide(ent1, ent2)
-	if ent1:IsPlayer() and ent2:IsPlayer() and (ent1.cotzHandsPassage or ent2.cotzHandsPassage) then
-		return false
-	end
 	if ent1.IsSTALKERNPC and ent2.IsSTALKERNPC then return false end
 end
 
 if SERVER then
-	function playerMeta:SetHandsPassage(enabled)
-		timer.Remove("cotz/hands/player-passage/" .. self:EntIndex())
-		applyPassage(self, enabled)
-		self:SetNWBool(PASSAGE_KEY, enabled == true)
-		if enabled then
-			timer.Create("cotz/hands/player-passage/" .. self:EntIndex(), PASSAGE_SECONDS, 1, function()
-				if IsValid(self) then self:SetHandsPassage(false) end
-			end)
+	local function getHull(client)
+		if client:Crouching() then return client:GetHullDuck() end
+
+		return client:GetHull()
+	end
+
+	local function canRestoreCollision(client)
+		local position = client:GetPos()
+		local mins, maxs = getHull(client)
+		local trace = util.TraceHull({
+			start = position, endpos = position, mins = mins, maxs = maxs,
+			filter = client, mask = MASK_PLAYERSOLID, collisiongroup = COLLISION_GROUP_PLAYER_MOVEMENT,
+		})
+		if trace.StartSolid or trace.AllSolid then return false end
+		local worldMins, worldMaxs = position + mins, position + maxs
+		-- A movement trace ignores other passable players, so check their hulls explicitly too.
+		for _, other in player.Iterator() do
+			if other ~= client and other:Alive() and other:IsSolid() then
+				local otherMins, otherMaxs = getHull(other)
+				otherMins, otherMaxs = other:GetPos() + otherMins, other:GetPos() + otherMaxs
+				if worldMins.x < otherMaxs.x and worldMaxs.x > otherMins.x
+					and worldMins.y < otherMaxs.y and worldMaxs.y > otherMins.y
+					and worldMins.z < otherMaxs.z and worldMaxs.z > otherMins.z then return false end
+			end
 		end
+
+		return true
 	end
 
-	function PLUGIN:PlayerDeath(client)
-		client:SetHandsPassage(false)
+	local function applyPassage(client, enabled)
+		local group = client:GetCollisionGroup()
+		if enabled then
+			if group ~= COLLISION_GROUP_PASSABLE_DOOR then client.cotzHandsCollisionGroup = group end
+			client:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
+		elseif group == COLLISION_GROUP_PASSABLE_DOOR then
+			client:SetCollisionGroup(client.cotzHandsCollisionGroup or COLLISION_GROUP_PLAYER)
+			client.cotzHandsCollisionGroup = nil
+		end
+		client:SetNWBool(PASSAGE_KEY, enabled)
 	end
-else
-	local function watchPlayer(entity)
-		if not entity:IsPlayer() then return end
-		entity:SetNWVarProxy(PASSAGE_KEY, function(client, _, _, enabled)
+
+	function playerMeta:SetHandsPassage(enabled)
+		local character = self:GetCharacter()
+		if not character then return false end
+		enabled = enabled == true
+		if not enabled and self:GetHandsPassage() and not canRestoreCollision(self) then return false end
+		timer.Remove("cotz/hands/restore-collision/" .. self:EntIndex())
+		applyPassage(self, enabled)
+		character:SetData("cotzHandsPassage", enabled)
+		character:Save()
+
+		return true
+	end
+
+	function PLUGIN:PostPlayerLoadout(client)
+		local character = client:GetCharacter()
+		local key = "cotz/hands/restore-collision/" .. client:EntIndex()
+		timer.Remove(key)
+		if not character then return end
+		local enabled = character:GetData("cotzHandsPassage", false) == true
+		if enabled or not client:GetHandsPassage() or canRestoreCollision(client) then
 			applyPassage(client, enabled)
+
+			return
+		end
+		-- A character switch can request solid collisions while still overlapping another player.
+		applyPassage(client, true)
+		timer.Create(key, RESTORE_INTERVAL, 0, function()
+			if not IsValid(client) or client:GetCharacter() ~= character then
+				timer.Remove(key)
+			elseif canRestoreCollision(client) then
+				applyPassage(client, false)
+				timer.Remove(key)
+			end
 		end)
-		applyPassage(entity, entity:GetNWBool(PASSAGE_KEY, false))
-	end
-
-	function PLUGIN:NetworkEntityCreated(entity)
-		watchPlayer(entity)
-	end
-
-	function PLUGIN:InitPostEntity()
-		for _, client in player.Iterator() do watchPlayer(client) end
 	end
 end

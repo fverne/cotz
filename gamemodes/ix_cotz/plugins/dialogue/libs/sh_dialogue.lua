@@ -234,6 +234,28 @@ function ix.dialogue.ConfigureCustomization(dialogue)
 	})
 end
 
+function ix.dialogue.ConfigureBarterVisibility(dialogue)
+	local tree = dialogue.tree
+	local barter = tree.StartBarter
+	if not barter then return end
+	local originalShouldAdd = barter.originalShouldAdd or barter.ShouldAdd
+	barter.originalShouldAdd = originalShouldAdd
+	barter.ShouldAdd = function(self, client, target)
+		if not originalShouldAdd(self, client, target) then return false end
+		if ix.npcbarter and #ix.npcbarter.GetActiveBartersForNPC(client:GetCharacter(), target:GetDisplayName()) > 0 then
+			return true
+		end
+		for _, id in ipairs(self.options) do
+			local topic = tree[id]
+			if id ~= "BackTopic" and topic and topic.statement ~= "" and topic:ShouldAdd(client, target) then
+				return true
+			end
+		end
+
+		return false
+	end
+end
+
 function ix.dialogue.LoadFromDir(directory)
 	for k, v in ipairs(file.Find(directory.."/*.lua", "LUA")) do
 		local niceName = v:sub(4, -5)
@@ -270,6 +292,7 @@ function ix.dialogue.LoadFromDir(directory)
 			if ix.dialogue.ConfigureTaskRewards then ix.dialogue.ConfigureTaskRewards(DIALOGUE) end
 			configureQuestions(DIALOGUE)
 			ix.dialogue.ConfigureCustomization(DIALOGUE)
+			ix.dialogue.ConfigureBarterVisibility(DIALOGUE)
 
 			DIALOGUE.name = DIALOGUE.name or "Unknown"
 

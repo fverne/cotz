@@ -2,14 +2,15 @@
 
 Technut offers **Can you change the finish on my gear or suit?** at his main menu.
 The same window lists equipped supported gear and suits in the main inventory, including equipment
-cells. Gear retains its ungated service; suits retain Technut's existing painting unlock. Each confirmed
-appearance change costs 100 rubles. All choices preview before confirmation, and unchanged selections
-cannot be purchased. The old separate suit-painting dialogue and preview are removed.
+cells. The combined service requires Technut's painting progression unlock for both gear and suits.
+Each confirmed appearance change costs 100 rubles. All choices preview before confirmation, and
+unchanged selections cannot be purchased. The old separate suit-painting dialogue and preview are removed.
 
 Suit finishes come from the existing sparse `skincustom` allowlist, including approved model overrides.
 They retain `setSkin` and `setSkinOverrideModel` persistence and ordinary suit equip behavior; they do
 not use PAC gear descriptors or a new saved appearance field. Confirmation rechecks the item, allowlist,
-painting permission, saved skin/model, equipped state, money and proximity. Existing saves need no migration.
+painting permission for both gear and suits, saved skin/model, equipped state, money and proximity.
+Existing saves need no migration.
 Suture's suit conversions remain his separate service under the gear customization dialogue submenu.
 
 The window previews the selected gear on a copy of the player's current character

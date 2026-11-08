@@ -238,4 +238,5 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	ix.dialogue.ConfigureTownServices(dialogue, contact)
 	ix.dialogue.ConfigureTaskRewards(dialogue)
 	ix.dialogue.ConfigureCustomization(dialogue)
+	ix.dialogue.ConfigureBarterVisibility(dialogue)
 end

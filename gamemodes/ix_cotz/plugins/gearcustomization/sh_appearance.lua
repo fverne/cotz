@@ -75,9 +75,9 @@ function ix.gearAppearance.GetConfiguration(item)
 end
 
 function ix.gearAppearance.CanCustomize(item, character, target)
+	if not ix.townNPCs:HasService(character, "painting", target:GetDisplayName()) then return false end
 	if item.isBodyArmor then
 		return ix.gearAppearance.GetConfiguration(item) ~= nil
-			and ix.townNPCs:HasService(character, "painting", target:GetDisplayName())
 	end
 
 	return ix.gearAppearance.IsSupported(item)

@@ -12,7 +12,7 @@ end
 SWEP.Author = "Chessnut"
 SWEP.Instructions = [[Primary Fire: Throw/Punch
 Secondary Fire: Knock/Pickup
-Secondary Fire on player (lowered): Pass through players for 60 seconds; right-click again to stop
+Secondary Fire on player (lowered): Toggle persistent passage through players; move clear before switching off
 Secondary Fire + Mouse: Rotate Object
 Reload: Drop]]
 SWEP.Purpose = "Hitting things and knocking on doors."
@@ -453,13 +453,16 @@ function SWEP:SecondaryAttack()
 	local entity = trace.Entity
 	local owner = self:GetOwner()
 	if not owner:IsWepRaised() and not self:IsHoldingObject()
-		and (owner.cotzHandsPassage or IsValid(entity) and entity:IsPlayer()) then
+		and (owner:GetHandsPassage() or IsValid(entity) and entity:IsPlayer()) then
 		self:SetNextSecondaryFire(CurTime() + self.Secondary.Delay)
 		if SERVER then
-			local enabled = not owner.cotzHandsPassage
-			owner:SetHandsPassage(enabled)
-			owner:Notify(enabled and "You can pass through other stalkers for one minute. Right-click to stop."
-				or "You will collide with other stalkers again.")
+			local enabled = not owner:GetHandsPassage()
+			if owner:SetHandsPassage(enabled) then
+				owner:Notify(enabled and "You can pass through other stalkers. Right-click again to switch it off."
+					or "You will collide with other stalkers again.")
+			else
+				owner:Notify("Move clear of other stalkers and solid objects before switching passage off.")
+			end
 		end
 
 		return

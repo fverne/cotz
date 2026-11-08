@@ -89,7 +89,6 @@ if (SERVER) then
     end
 
     function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
-		client:SetHandsPassage(false)
         -- wait for spawnsaver to setpos first
         timer.Simple(0.5, function()
             if not IsValid(client) then return end

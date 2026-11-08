@@ -29,9 +29,15 @@ Run `luatex --luaonly tests/config_defaults_spec.lua` and
 `luatex --luaonly tests/shared_commands_spec.lua`. Validate fresh/existing installs, hot reload and
 client config synchronization in multiplayer before deployment.
 
-Lowered hands right-click on a player now enables passage through other players for 60 seconds.
-Right-clicking again while lowered cancels it; death and character changes clear it too.
-`sh_handspassage.lua` maintains shared custom collision state through an NWBool proxy and calls
-`CollisionRulesChanged` whenever it changes. Only player/player pairs are ignored; props, NPCs,
-vehicles and world collisions retain their normal rules. Raised-hand pushing is unchanged.
-Run `luatex --luaonly tests/hands_passage_spec.lua`, then verify with two clients, props and doors.
+Lowered hands right-click on a player toggles passage through other players. Right-click again
+while lowered to switch it off. The `cotzHandsPassage` character data flag is saved immediately and
+restored after loadout, including reconnects, respawns and server restarts. Existing characters default
+to disabled; no saved data migration is needed. Switching characters uses that character's own setting.
+`sh_handspassage.lua` uses `COLLISION_GROUP_PASSABLE_DOOR` and restores the previous collision group.
+The NWBool only replicates the toggle; player passage no longer uses `ShouldCollide` or a client proxy.
+Disabling is refused while a normal movement hull trace starts solid or another living, solid player's
+standing/crouched hull overlaps, including players with passage enabled. Move clear and try again.
+If a loadout requests disabling while overlapping, a short retry restores collisions once clear without
+changing the saved preference. There is no expiry timer. Raised-hand pushing is unchanged.
+Run `luatex --luaonly tests/hands_passage_spec.lua`, then verify with two clients, props, doors and NPCs,
+both movement directions, crouching, character switches and reconnect/restart persistence.

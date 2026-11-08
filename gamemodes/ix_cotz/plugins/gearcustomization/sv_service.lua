@@ -14,6 +14,7 @@ function PLUGIN:CanUseVendor(client, target)
 	return client:GetCharacter() ~= nil and client:Alive() and ix.pac ~= nil and IsValid(target)
 		and target:GetClass() == "ix_vendor_adv" and target.dialogueid == "technpc"
 		and target:GetDisplayName() == "'Technut'" and target:CanAccess(client)
+		and ix.townNPCs:HasService(client:GetCharacter(), "painting", target:GetDisplayName())
 		and client:GetPos():DistToSqr(target:GetPos()) <= INTERACTION_DISTANCE ^ 2
 end
 

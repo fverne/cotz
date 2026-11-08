@@ -58,12 +58,26 @@ local function appendVariants(options, character, target, item, id)
 	end
 end
 
+local function hasSuitConversions(client, target)
+	local character = client:GetCharacter()
+	local npc = target:GetDisplayName()
+	if not serviceVisible(client, target, "suitVariants") then return false end
+	for id in pairs(ix.townNPCs.variantUnlocks or {}) do
+		if ix.townNPCs:CanChangeSuitVariant(character, id, npc) then return true end
+	end
+	for id in pairs(ix.townNPCs.variantBaseGates or {}) do
+		if ix.townNPCs:CanChangeSuitVariant(character, id, npc) then return true end
+	end
+
+	return false
+end
+
 local function addConversions(dialogue)
 	dialogue.addTopic("ChangeSuitVariant", {
 		statement = "Can you change my suit to another variant?",
 		response = "Take it off and remove the attachments first. I'll show you which changes are available.",
 		IsDynamic = true, options = {"BackTopic"},
-		ShouldAdd = function(_, client, target) return serviceVisible(client, target, "suitVariants") end,
+		ShouldAdd = function(_, client, target) return hasSuitConversions(client, target) end,
 		GetDynamicOptions = function(_, client, target)
 			local options = {}
 			local character = client:GetCharacter()
@@ -115,6 +129,9 @@ function ix.dialogue.ConfigureTownServices(dialogue, contact)
 	if contact.id == "brass" or contact.id == "carbon" then
 		dialogue.addTopic("AmmoExchange", {
 			statement = "Can we exchange ammunition?", response = "", IsDynamic = true,
+			ShouldAdd = function(_, client, target)
+				return #ix.townNPCs:GetAmmoExchanges(client:GetCharacter(), target:GetDisplayName()) > 0
+			end,
 			options = {"BackTopic"},
 			GetDynamicOptions = function(_, client, target)
 				local options = {}

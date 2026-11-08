@@ -35,6 +35,10 @@ CurTime = function() return now end
 IsValid = function(value) return type(value) == "table" and value.valid == true end
 util = {AddNetworkString = function() end, TableToJSON = serialize, CRC = function(value) return value end}
 ix = {pac = {}, plugin = {}, util = {GetMaterial = function() end}}
+local paintAllowed = true
+ix.townNPCs = {HasService = function(_, _, name, npc)
+	return paintAllowed and name == "painting" and npc == "'Technut'"
+end}
 local equipment = {GetPending = function() end}
 ix.plugin.Get = function(id) if id == "equipmentslots" then return equipment end end
 net = {callbacks = {}}
@@ -167,7 +171,7 @@ local character, inventory, state, position
 client, vendor, item, character, inventory, state, position = fixture()
 local quote = assert(service:CreateQuote(client, vendor, 1, selected))
 check(character.money == 500 and item.writes == nil, "Quoting and previewing never charge or save changes")
-check(service:Confirm(client, quote.token, true), "An accessible Technut can customize without progression data")
+check(service:Confirm(client, quote.token, true), "Technut customizes after the painting unlock")
 check(character.money == 400 and character.charges == 1 and character.saves == 1,
 	"One confirmed multi-control change charges 100 rubles once")
 check(item:GetData("gearAppearance").skin == "black" and state.equip and client.parts == 1,
@@ -177,10 +181,14 @@ check(not service:Confirm(client, quote.token, true) and character.money == 400,
 check(not service:CreateQuote(client, vendor, 1, selected), "Unchanged selections cannot be purchased")
 
 -- Suit painting shares the quote boundary and keeps the existing saved skin fields.
-local paintAllowed = false
-ix.townNPCs = {HasService = function(_, _, name, npc)
-	return paintAllowed and name == "painting" and npc == "'Technut'"
-end}
+paintAllowed = false
+local lockedClient, lockedVendor = fixture()
+check(not service:CanUseVendor(lockedClient, lockedVendor), "the combined service is inaccessible before painting")
+check(not service:CreateQuote(lockedClient, lockedVendor, 1, selected), "ordinary gear also requires the unlock")
+paintAllowed = true
+local lockedQuote = assert(service:CreateQuote(lockedClient, lockedVendor, 1, selected))
+paintAllowed = false
+check(not service:Confirm(lockedClient, lockedQuote.token, true), "gear confirmation rechecks progression")
 local function suitFixture()
 	local player, target, suit, owner, inv, data, pos = fixture()
 	suit.isBodyArmor, suit.newModel, suit.newSkin = true, "suit.mdl", 0
