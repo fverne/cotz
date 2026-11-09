@@ -135,3 +135,12 @@ Equipment, progression, job-reset and town command handlers remain server-side. 
 shared deployment defaults; schema `libs/sh_spawnpolicy.lua` provides map-threshold registration and
 lookup. `eventcontroller/sv_combat.lua` owns encounter packs, combat eligibility and human regrouping;
 `sv_performance.lua` retains mutant population accounting, spawn queues and maintenance scheduling.
+
+Mutant attacks in `lua/entities/npc_mutant_*/` must support NPC enemies and target loss during windup.
+Camera, stamina and freeze effects require player targets; grabs retain their own victim reference and
+validate it before delayed effects or release. Controllers and spiders finish recovery after target loss;
+Karlik projectiles use a local forward aim point when their target disappears.
+Run `luatex --luaonly tests/mutant_target_safety_spec.lua`,
+`luatex --luaonly tests/burer_stamina_spec.lua`, `luatex --luaonly tests/karlik_teleport_spec.lua` and
+`luatex --luaonly tests/npc_combat_spec.lua`. Also verify mutant-versus-NPC fights, target removal during
+windup, and player release after grabs or mutant death in multiplayer.

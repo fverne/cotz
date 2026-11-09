@@ -172,7 +172,7 @@ function ENT:STALKERNPCThink()
 		self.spitting = CurTime() + 0.5
 
 		local TEMP_POORGUY = self:GetEnemy()
-		if(TEMP_POORGUY:Visible(self)) then	
+		if IsValid(TEMP_POORGUY) and TEMP_POORGUY:Visible(self) then
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 			local TEMP_ShootPoint = TEMP_POORGUY:GetPos()+TEMP_POORGUY:OBBCenter()+Vector(0,0,distance/8)
 

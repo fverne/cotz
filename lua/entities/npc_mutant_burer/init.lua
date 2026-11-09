@@ -132,12 +132,13 @@ function ENT:STALKERNPCThink()
 	-- SHIELDING END
 
 	-- STAMINA ATTACK
-	if self.stam1 < CurTime() && self.IsStamAttack == 1 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:GetEnemy():ViewPunch(Angle(math.random(-1,1)*40,math.random(-1,1)*40,math.random(-1,1)*40))
-			self:GetEnemy():RestoreStamina(-80)
-			self.IsStamAttack = 2
+	if self.stam1 < CurTime() and self.IsStamAttack == 1 then
+		local enemy = self:GetEnemy()
+		if IsValid(enemy) and enemy:IsPlayer() then
+			enemy:ViewPunch(Angle(math.random(-1, 1) * 40, math.random(-1, 1) * 40, math.random(-1, 1) * 40))
+			enemy:RestoreStamina(-80)
 		end
+		self.IsStamAttack = 2
 	end
 
 	if self.stam2 < CurTime() && self.IsStamAttack == 2 then 
@@ -203,7 +204,9 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			local TEMP_Rand = math.random(1,5)
 		
 			if(TEMP_Rand==1) then
-				if(IsValid(self:GetEnemy():GetActiveWeapon())&&self:GetEnemy():GetActiveWeapon():GetNoDraw()==false) then
+				local enemy = self:GetEnemy()
+				if IsValid(enemy) and enemy:IsPlayer()
+					and IsValid(enemy:GetActiveWeapon()) and enemy:GetActiveWeapon():GetNoDraw() == false then
 					
 					self.CanGrab = CurTime()+15
 					

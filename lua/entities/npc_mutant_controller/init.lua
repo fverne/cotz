@@ -196,8 +196,8 @@ function ENT:STALKERNPCThink()
 				TEMP_POORGUY:TakeDamageInfo(TEMP_TargetDamage)
 			end
 
-			self.SpecialAttack = 2
 		end
+		self.SpecialAttack = 2
 	end
 
 	if (self.special2 < CurTime() and self.SpecialAttack == 2) then

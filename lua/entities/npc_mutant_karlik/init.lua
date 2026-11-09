@@ -122,7 +122,7 @@ function ENT:STALKERNPCThink()
 		self:STALKERNPCClearAnimation()
 	end
 
-	if self:GetEnemy() then
+	if IsValid(self:GetEnemy()) then
 		local dist = self:GetPos():Distance(self:GetEnemy():GetPos())
 
 		if dist < self.MinRangeDist/2 then
@@ -133,8 +133,9 @@ function ENT:STALKERNPCThink()
 	if self.throw1_1 < CurTime() && self.IsThrow1 == 1 then
 		self.IsThrow1 = 0
 
+		local shootPoint = self:GetPos() + self:GetForward() * 1000
 		if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-			TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
+			shootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
 		end
 
 		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
@@ -143,12 +144,12 @@ function ENT:STALKERNPCThink()
 					
 		local TEMP_Grav = ents.Create("ent_karlik_ball")
 		TEMP_Grav:SetPos(TEMP_ShootPos)
-		TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
+		TEMP_Grav:SetAngles((shootPoint-TEMP_ShootPos):Angle())
 		TEMP_Grav:Spawn()
 							
 		TEMP_Grav:SetOwner(self)
 							
-		TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2000)
+		TEMP_Grav:GetPhysicsObject():SetVelocity((shootPoint-TEMP_ShootPos):GetNormalized()*2000)
 
 		self:STALKERNPCClearAnimation()
 
@@ -157,8 +158,9 @@ function ENT:STALKERNPCThink()
 	if self.throw2_1 < CurTime() && self.IsThrow2 == 1 then
 		self.IsThrow2 = 2
 
+		local shootPoint = self:GetPos() + self:GetForward() * 1000
 		if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-			TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
+			shootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
 		end
 
 		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
@@ -167,20 +169,21 @@ function ENT:STALKERNPCThink()
 					
 		local TEMP_Grav = ents.Create("ent_karlik_ball")
 		TEMP_Grav:SetPos(TEMP_ShootPos)
-		TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
+		TEMP_Grav:SetAngles((shootPoint-TEMP_ShootPos):Angle())
 		TEMP_Grav:Spawn()
 							
 		TEMP_Grav:SetOwner(self)
 							
-		TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2000)
+		TEMP_Grav:GetPhysicsObject():SetVelocity((shootPoint-TEMP_ShootPos):GetNormalized()*2000)
 
 	end
 
 	if self.throw2_2 < CurTime() && self.IsThrow2 == 2 then
 		self.IsThrow2 = 0
 
+		local shootPoint = self:GetPos() + self:GetForward() * 1000
 		if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-			TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
+			shootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
 		end
 
 		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
@@ -189,12 +192,12 @@ function ENT:STALKERNPCThink()
 					
 		local TEMP_Grav = ents.Create("ent_karlik_ball")
 		TEMP_Grav:SetPos(TEMP_ShootPos)
-		TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
+		TEMP_Grav:SetAngles((shootPoint-TEMP_ShootPos):Angle())
 		TEMP_Grav:Spawn()
 							
 		TEMP_Grav:SetOwner(self)
 							
-		TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2000)
+		TEMP_Grav:GetPhysicsObject():SetVelocity((shootPoint-TEMP_ShootPos):GetNormalized()*2000)
 
 		self:STALKERNPCClearAnimation()
 	end

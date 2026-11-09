@@ -137,8 +137,8 @@ function ENT:STALKERNPCThink()
 				TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2500)
 			end
 
-			self.SpecialAttack = 2
 		end
+		self.SpecialAttack = 2
 	end
 
 	if (self.special2 < CurTime() and self.SpecialAttack == 2) then

@@ -142,8 +142,8 @@ function ENT:STALKERNPCThink()
 				self:STALKERNPCClearAnimation()
 			end
 
-			self.SpecialAttack = 2
 		end
+		self.SpecialAttack = 2
 	end
 
 	if (self.special2 < CurTime() and self.SpecialAttack == 2) then
