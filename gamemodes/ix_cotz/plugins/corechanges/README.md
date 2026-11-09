@@ -33,8 +33,11 @@ Lowered hands right-click on a player toggles passage through other players. Rig
 while lowered to switch it off. The `cotzHandsPassage` character data flag is saved immediately and
 restored after loadout, including reconnects, respawns and server restarts. Existing characters default
 to disabled; no saved data migration is needed. Switching characters uses that character's own setting.
-`sh_handspassage.lua` uses `COLLISION_GROUP_PASSABLE_DOOR` and restores the previous collision group.
-The NWBool only replicates the toggle; player passage no longer uses `ShouldCollide` or a client proxy.
+`sh_handspassage.lua` uses a shared `ShouldCollide` rule for player pairs when either player has passage
+enabled. Collision groups stay unchanged: changing only the mover's group does not change the group
+used by player movement traces. The server and client cache the toggle and call `CollisionRulesChanged`
+when it changes. A client NWBool proxy applies incoming values before invalidating the collision cache;
+newly networked players initialize from their replicated value. Existing saved preferences are retained.
 Disabling is refused while a normal movement hull trace starts solid or another living, solid player's
 standing/crouched hull overlaps, including players with passage enabled. Move clear and try again.
 If a loadout requests disabling while overlapping, a short retry restores collisions once clear without
