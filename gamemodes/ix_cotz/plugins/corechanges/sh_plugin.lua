@@ -1,5 +1,6 @@
 ix.util.Include("sh_defaults.lua")
 ix.util.Include("sh_handspassage.lua")
+ix.util.Include("sv_vendorcash.lua")
 
 PLUGIN.name = "Core changes"
 PLUGIN.author = "verne"

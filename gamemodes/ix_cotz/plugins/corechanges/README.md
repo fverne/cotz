@@ -1,5 +1,12 @@
 # COTZ configuration defaults
 
+`sv_vendorcash.lua` disables NPC cash limits through the existing vendor use/trade hooks, including
+standard Helix vendors with legacy saved balances. Both endpoints dispatch the trade hook before
+checking vendor funds. The hooks clear the NPC balance and return nothing, preserving access and
+weight checks. Advanced vendors also disable cash accounting in their owning implementation.
+Player purchase costs and sale payouts remain active. Verify both vendor classes with
+`luatex --luaonly tests/helix_vendor_trade_spec.lua` and live multiplayer selling after restart.
+
 `sh_defaults.lua` contains the approved local installation's saved Helix settings as repository
 fallbacks, including its fonts, inventory dimensions, weight limit, starting date and spawn counts.
 The default inventory is 7 columns wide and 11 rows high.

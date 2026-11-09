@@ -11,6 +11,13 @@ Saved town vendor rows are reconciled to this plan on load, including trade mode
 The server checks both sale and purchase eligibility. Existing personal stock history is not reset.
 The Original retains ordinary work and supplies without a finite progression catalogue.
 
+NPC traders have no cash balance or payout limit. Advanced vendors ignore legacy saved/template
+balances, reject attempts to enable cash accounting and hide the cash controls in the editor.
+Players still pay purchase prices and receive normal sale payouts. Item eligibility, ownership,
+equipped-item restrictions and personal stock limits still apply. Sherpa/squad earnings accounts
+remain managed by their own transaction system; they are separate from NPC cash limits.
+Run `luatex --luaonly tests/helix_vendor_trade_spec.lua` for zero-balance sales and player payment checks.
+
 Personal `vendorStock` and `vendorRestockClaims` are separate persistent character vars with
 `bNoNetworking = true`, including during initial synchronization. Each uses its own `MEDIUMTEXT`
 SQL column. Vendor menus receive their current stock through the vendor networking rather than

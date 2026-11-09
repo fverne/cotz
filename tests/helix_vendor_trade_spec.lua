@@ -21,6 +21,7 @@ local function execute(source, environment)
 end
 
 local now, requestedItem, handler = 100, "rifle", nil
+local selling = false
 local saves, tradeEvents, vendorMoney = 0, 0, 0
 local entityMeta = {}
 math.Clamp = function(value, minimum, maximum)
@@ -50,7 +51,7 @@ local environment = setmetatable({
 		Receive = function(_, callback) handler = callback end,
 		ReadString = function() return requestedItem end,
 		ReadUInt = function() return 99 end,
-		ReadBool = function() return false end,
+		ReadBool = function() return selling end,
 		Start = function() end, WriteString = function() end,
 		WriteUInt = function() end, Send = function() end,
 		WriteBool = function() end, WriteFloat = function() end,
@@ -59,7 +60,8 @@ local environment = setmetatable({
 local base = "gamemodes/ix_cotz/plugins/vendor_adv/"
 execute(read(base .. "libs/sv_stock.lua"), environment)
 local entitySource = read(base .. "entities/entities/ix_vendor_adv.lua")
-for _, name in ipairs({"GetStock", "GetStockInterval", "GetPrice", "CanSellToPlayer", "SetStock", "AddStock", "TakeStock"}) do
+for _, name in ipairs({"GetStock", "GetStockInterval", "GetPrice", "CanSellToPlayer", "SetStock", "AddStock",
+	"TakeStock", "HasMoney", "GetMoney", "SetMoney", "GiveMoney", "TakeMoney"}) do
 	local start = assert(entitySource:find("function ENT:" .. name .. "(", 1, true))
 	local serverMethod = entitySource:sub(start - 1, start - 1) == "\t"
 	local finish = assert(entitySource:find(serverMethod and "\n\tend" or "\nend", start, true))
@@ -111,7 +113,8 @@ local first, clientA = buyer()
 local second, clientB = buyer()
 trade(clientA)
 check(first.received == 1 and first.money == 90, "purchase grants one item and charges catalog price")
-check(shop:GetStock("rifle", first) == 0 and vendorMoney == 10, "purchase consumes personal stock")
+check(shop:GetStock("rifle", first) == 0 and vendorMoney == 0,
+	"purchase consumes personal stock without funding a vendor balance")
 check(shop:GetStock("rifle", second) == 1, "purchase leaves another character stock intact")
 check(shop.items.rifle[2] == 1, "purchase leaves catalog seed stock intact")
 trade(clientB)
@@ -177,5 +180,53 @@ clientB.GetCharacter = function() return nil end
 trade(clientB)
 check(second.received == 3, "characterless trade requests are rejected")
 check(saves == 4 and tradeEvents == 4, "rejected requests never trigger trade persistence/hooks")
+
+clientA.GetCharacter = function() return first end
+local owned = {}
+local sold = {uniqueID = "rifle", name = "Rifle", id = 99}
+function sold:GetID() return self.id end
+function sold:GetData(_, default) return default end
+function sold:Remove() owned[self.id] = nil return true end
+owned[99] = sold
+environment.ix.item.instances[99] = sold
+environment.ix.item.list.rifle.GetData = sold.GetData
+first.GetInventory = function() return {GetItems = function() return owned end} end
+first.GiveMoney = function(self, amount) self.money = self.money + amount end
+environment.timer = {Simple = function() end}
+shop.money = 0
+selling = true
+trade(clientA)
+check(first.money == 5 and not owned[99], "A vendor with a saved zero balance pays for an accepted sale")
+trade(clientA)
+check(first.money == 5, "Repeated sale requests cannot pay for an already removed instance")
+shop.money = -100
+check(shop:HasMoney(1000000), "Even negative legacy balances cannot limit payouts")
+shop:SetMoney(1)
+check(shop.money == nil and shop:GetMoney() == nil, "Cash setters cannot re-enable a vendor balance")
+entityMeta.GiveMoney(shop, 100)
+shop:TakeMoney(100)
+check(shop.money == nil, "Vendor cash credits and debits remain disabled")
+
+local policy = {}
+local policyEnvironment = setmetatable({PLUGIN = policy}, {__index = environment})
+execute(read("gamemodes/ix_cotz/plugins/corechanges/sv_vendorcash.lua"), policyEnvironment)
+local standardMeta = {}
+policyEnvironment.ENT = standardMeta
+local standardSource = read("gamemodes/helix/plugins/vendor/entities/entities/ix_vendor.lua")
+for _, name in ipairs({"HasMoney", "SetMoney"}) do
+	local firstLine = assert(standardSource:find("function ENT:" .. name .. "(", 1, true))
+	local closing = name == "SetMoney" and "\n\tend" or "\nend"
+	local lastLine = assert(standardSource:find(closing, firstLine, true))
+	execute(standardSource:sub(firstLine, lastLine + #closing - 1), policyEnvironment)
+end
+local standard = setmetatable({money = 0, receivers = {}}, {__index = standardMeta})
+check(policy:CanPlayerUseVendor(clientA, standard) == nil,
+	"The cash policy preserves access-hook dispatch")
+check(standard.money == nil and standard:HasMoney(1000000), "Standard vendors open without a cash limit")
+standard.money = 1
+check(policy:CanPlayerTradeWithVendor(clientA, standard, "rifle", true) == nil,
+	"The cash policy preserves trade-hook dispatch")
+check(standard.money == nil and standard:HasMoney(1000000),
+	"Standard vendor trades ignore balances re-enabled through the legacy editor")
 
 print(string.format("PASS: %d personal-stock vendor trade checks", checks))
