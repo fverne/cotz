@@ -35,6 +35,15 @@ uses the same nonverbal presentation as his personal replies, including payment 
 topic links, callbacks, fees, eligibility checks, and random-story selection are preserved; no dormant
 topic is enabled. Work prompts and progression text remain in their unchanged owning definitions.
 
+The subsequent progression dialogue pass authors individual briefings and completion replies for all
+635 active town milestones, including 223 stock-preparation requests. Text stays in the contact's
+`townnpcs/definitions/sh_<contact>.lua` progression entries. Shared menu rendering still adds the assigned
+items, remaining quantities and actual benefits; it contains no NPC-specific request prose. Town
+completion notifications use the complete authored reply without a player-name prefix so Mute's
+gestures remain nonverbal. Existing jobs, ordinary conversations and non-town progression are unchanged.
+The expansion tool preserves existing stock-step text by ID. Run `tests/progression_dialogue_spec.lua`
+and the normal dialogue/progression checks after editing.
+
 Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing loader discovers
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.

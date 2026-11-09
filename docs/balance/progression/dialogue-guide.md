@@ -1,5 +1,13 @@
 # NPC dialogue sources
 
+For the current town graph, the owning source is
+`gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_<contact>.lua`. All 635 active steps have individual
+`briefing` and `completion` replies there, including 223 stock-preparation deliveries. The
+[current overhaul guide](../../npc-overhaul/progression-overhaul.md#authoring-and-regression-checks)
+describes editing and regeneration. The old per-NPC progression file inventory below is historical;
+it does not identify the owners of current town dialogue. Separate non-town progression remains in
+the progression plugin's standalone definitions.
+
 Conversation flavour (greetings, information, service responses and GOODBYE) lives in `gamemodes/ix_cotz/plugins/dialogue/dialogue/`:
 
 | Contact | Conversation file |

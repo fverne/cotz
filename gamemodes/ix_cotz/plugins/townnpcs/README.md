@@ -20,6 +20,20 @@ Ballast's initial hideout access consumes one unequipped crowbar or bat before n
 existing rooms/upgrades remain saved. Haggler's gunpowder barters are removed.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 
+All 635 active milestones have individual authored `briefing` and `completion` replies in their
+contact definitions, including the 223 stock-preparation deliveries. Read each contact's existing
+profile and bound conversation before editing its voice. The current requirements, catalogue and
+benefits determine what a reply can promise; the older story tables and retired commissions do not.
+Requests leave assigned item names/counts to the existing objective display so valid saved deliveries
+remain accurately described. Mute's five requests and completions use gestures and written orders.
+Town completion messages render the authored text without adding the player's name.
+
+`expand_progression.py` preserves existing stock-step briefings and completions by step ID when
+rebuilding their requirements. A newly generated stock step initially copies the following unlock's
+text and needs its own authored replies before delivery; do not reuse the unlock's purchase wording
+for a stock-capacity benefit. Check coverage with `luatex --luaonly tests/progression_dialogue_spec.lua`
+and preservation with `python3 tests/progression_expansion_spec.py`.
+
 Scoreboard tools and dossier data are immediately available. Mute instead unlocks mutant PDA reports for
 Swamps, Garbage, Waystation, then Pripyat, retaining emission warnings before Pripyat. Retained milestone IDs
 and delivery terms preserve existing completions and assignments; redundant activity/location/dossier stages

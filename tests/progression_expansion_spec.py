@@ -1,5 +1,6 @@
 """Run from the addon root: python3 tests/progression_expansion_spec.py."""
 from pathlib import Path
+from copy import deepcopy
 import sys
 import unittest
 
@@ -26,6 +27,22 @@ class ProgressionExpansionTests(unittest.TestCase):
         self.assertEqual(count, 223)
         for path, content in output.items():
             self.assertEqual(path.read_text(), content, str(path))
+
+    def test_stock_dialogue_survives_regeneration_by_id(self):
+        contacts = deepcopy(self.data["contacts"])
+        expected = {}
+        for slug, contact in contacts.items():
+            for step in contact["progression"]:
+                if not step.get("intermissionFor"):
+                    continue
+                step["briefing"] = "Reserve request: " + slug + "/" + step["id"]
+                step["completion"] = "Reserve complete: " + slug + "/" + step["id"]
+                expected[slug, step["id"]] = (step["briefing"], step["completion"])
+        expansion.expand_contacts(contacts)
+        actual = {(slug, step["id"]): (step["briefing"], step["completion"])
+                  for slug, contact in contacts.items() for step in contact["progression"]
+                  if step.get("intermissionFor")}
+        self.assertEqual(actual, expected)
 
     def test_local_introductions_and_explicit_boundary_examples(self):
         contacts = self.data["contacts"]

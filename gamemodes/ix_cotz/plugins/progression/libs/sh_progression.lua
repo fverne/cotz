@@ -263,7 +263,8 @@ if SERVER then
 				ix.progression.GrantBenefits(character, progressionID, definition.completionBenefits, "completion")
 			end
 			if definition.completionMessage then
-				local message = character:GetName() .. ", " .. definition.completionMessage
+				local message = definition.completionMessage
+				if not definition.townContact then message = character:GetName() .. ", " .. message end
 				ix.progression.Notify(character, definition.keyNpc,
 					message)
 			end
@@ -327,7 +328,8 @@ if SERVER then
 				definition.OnComplete(character)
 			end
 			if definition.completionMessage then
-				local message = character:GetName() .. ", " .. definition.completionMessage
+				local message = definition.completionMessage
+				if not definition.townContact then message = character:GetName() .. ", " .. message end
 				ix.progression.Notify(character, definition.keyNpc,
 					message)
 			end

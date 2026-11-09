@@ -493,17 +493,26 @@ for _, townContact in ipairs({false, "atlas"}) do
 		townContact = townContact, progressthresholds = {1}, progressfunctions = {},
 		completionMessage = "Thank you."})
 	ix.progression.AddProgressionValue(owner, numericID, 1)
-	check(completionNotice == "Named Completer, Thank you.",
-		"numeric completions identify the character for " .. suffix)
+	local numericNotice = townContact and "Thank you." or "Named Completer, Thank you."
+	check(completionNotice == numericNotice,
+		"numeric completions preserve authored town text and standalone addressing for " .. suffix)
 	local deliveryID = "namedDelivery/" .. suffix
 	ix.progression.Register(deliveryID, {keyNpc = "Tester", progMap = currentMap, defaultActive = true,
 		townContact = townContact, requirementSlots = {{pool = "fixture", quantity = 1}},
 		completionMessage = "Delivery received."})
 	completionNotice = nil
 	ix.progression.AddComplexProgressionValue(owner, deliveryID, {"artifact_bolt", 1})
-	check(completionNotice == "Named Completer, Delivery received.",
-		"delivery completions identify the character for " .. suffix)
+	local deliveryNotice = townContact and "Delivery received." or "Named Completer, Delivery received."
+	check(completionNotice == deliveryNotice,
+		"delivery completions preserve authored town text and standalone addressing for " .. suffix)
 end
+local silentOwner = character()
+local silentNotice = "** He checks the list and nods. **"
+ix.progression.Register("silentDelivery", {keyNpc = "Tester", progMap = currentMap, defaultActive = true,
+	townContact = "mute", requirementSlots = {{pool = "fixture", quantity = 1}},
+	completionMessage = silentNotice})
+ix.progression.AddComplexProgressionValue(silentOwner, "silentDelivery", {"artifact_bolt", 1})
+check(completionNotice == silentNotice, "Mute's completion remains an unprefixed nonverbal reply")
 ix.progression.Notify = notify
 
 local reader, stranger = character(), character()

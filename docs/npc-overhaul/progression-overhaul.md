@@ -193,6 +193,19 @@ upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or 
 
 ## Authoring and regression checks
 
+Each active step owns its authored `briefing` and `completion` in the contact definition, including
+stock intermissions. All 635 pairs are individually written against the contact's profile and current
+benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
+conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
+Keep exact assigned items and quantities in the generated objective display rather than hard-coding
+them into speech, since valid saved requests can differ from newly rolled requests.
+
+The expansion tool retains existing stock-step text by stable ID when rebuilding requirements. New
+intermissions start with the following unlock's text and need their own replies. Verify all 635 pairs
+and their compiled fields with `luatex --luaonly tests/progression_dialogue_spec.lua`; the Python
+expansion suite also checks that regeneration preserves distinct stock conversations. Editorial review
+of voice, continuity and promises is still required; uniqueness checks cannot assess writing quality.
+
 `python3 docs/npc-overhaul/tools/expand_progression.py --write` reproduces the expanded definitions and
 source-audited pools. `--check` verifies them without writing. Candidate/source changes affect new
 assignments; bump the saved requirement policy deliberately only when another conversion is intended.

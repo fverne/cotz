@@ -139,8 +139,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Tundra suppressor",
 			kind = "delivery",
 			requires = {},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The Tundra suppressor is the first purchase arrangement in this line. I'd like the research supplies listed here in return. I find it easier to discuss the equipment once the practical request is on paper; otherwise I begin explaining a comparison and forget somebody is trying to decide whether to leave.",
+			completion = "The Tundra is available to purchase. Thank you for bringing the order back intact.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -159,8 +159,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: Tundra suppressor",
 			kind = "delivery",
 			requires = {"v3/suppressors/tundrasuppressor"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "I'd like the Tundra reserve settled before the Cobra arrangement. This smaller research delivery increases your stock allowance. It is a rather quiet part of preparation, which may explain why I can usually finish discussing it.",
+			completion = "Your Tundra capacity is increased. We'll let the normal refill supply it.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
@@ -184,8 +184,8 @@ PLUGIN:Register("beanstalk", {
 				"v3/suppressors/tundrasuppressor",
 				"v3/suppressors/cobrasuppressor/stock",
 			},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "For the Cobra M2, bring the research materials in this order. I'm interested in what people choose to take into the field, though I sometimes make a simple preference sound like the beginning of an examination. You can make the delivery without defending your choice.",
+			completion = "The Cobra M2 purchase route is open. I will try to let you choose without supplying a questionnaire.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -209,8 +209,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: Cobra M2 suppressor",
 			kind = "delivery",
 			requires = {"v3/suppressors/cobrasuppressor"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The Cobra reserve needs these supplies. Completing the list increases how many can be held for you. I ought to be clear that I mean capacity; I have already been accused of making an empty shelf sound very well organised.",
+			completion = "Cobra stock capacity is increased. The shelf still needs its ordinary refill.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
 				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
@@ -232,8 +232,8 @@ PLUGIN:Register("beanstalk", {
 			name = "PBS suppressor",
 			kind = "delivery",
 			requires = {"v3/suppressors/cobrasuppressor", "v3/suppressors/pbssuppressor/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The PBS purchase arrangement uses this research order. Please keep to the assigned list; my interest in a different sample doesn't change what we're agreeing on. I can be distracted after the delivery has been checked.",
+			completion = "That settles access to the PBS. Everything required has been received, including the entries I almost talked past.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -262,8 +262,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: PBS suppressor",
 			kind = "delivery",
 			requires = {"v3/suppressors/pbssuppressor"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "Before the SAKER, I'd like the PBS reserve expanded. This delivery does that, rather than opening another suppressor by itself. Keeping the two orders distinct saves me explaining my own notes later.",
+			completion = "The PBS stock allowance is larger now. This order can be filed without an amendment.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
 				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
@@ -291,8 +291,8 @@ PLUGIN:Register("beanstalk", {
 			name = "SAKER suppressor",
 			kind = "delivery",
 			requires = {"v3/suppressors/pbssuppressor", "v3/suppressors/sakersuppressor/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The SAKER is the last suppressor arrangement here. Bring the full research request back to the bunker. I would enjoy hearing about the collection afterwards, particularly what surprised you; you needn't improve the account to make it sound like research.",
+			completion = "SAKER purchase access is ready. The order is finished; now I can be curious without holding up the transaction.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -331,8 +331,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Trijicon RMR",
 			kind = "delivery",
 			requires = {},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "For the RMR, this is the supply request. A sight is a small object around which people can develop very large preferences. I find those interesting until somebody mistakes my questions for an invitation to settle the subject for everybody else.",
+			completion = "You can purchase the RMR here now. Your delivery is complete, whatever the next equipment debate decides.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -351,8 +351,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: Trijicon RMR",
 			kind = "delivery",
 			requires = {"v3/red-dots/trijiconrmr"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The RMR allowance needs its own reserve order. Bring these research materials and I'll increase the capacity. I appreciate a request small enough to finish discussing without losing the original question.",
+			completion = "RMR stock capacity increased. A reserve arranged, with the usual refill still to follow.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 			},
@@ -372,8 +372,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Kobra sight",
 			kind = "delivery",
 			requires = {"v3/red-dots/trijiconrmr", "v3/red-dots/kobra/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The Kobra purchase route is next. Complete the research delivery listed here. You're welcome to prefer the sight without giving me a theory of why every other choice is mistaken; I get enough of that when Egghead and I agree on the result.",
+			completion = "The Kobra is available to purchase. That was a useful delivery and a mercifully uncomplicated agreement.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -392,8 +392,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: Kobra sight",
 			kind = "delivery",
 			requires = {"v3/red-dots/kobra"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "I'd like to put more room in the Kobra reserve before the Micro T1. The list covers that capacity increase. No fresh sight appears just because I've found a better place to write the allowance.",
+			completion = "Your Kobra allowance has increased. The stock itself will refill normally.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
@@ -414,8 +414,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Aimpoint Micro T1",
 			kind = "delivery",
 			requires = {"v3/red-dots/kobra", "v3/red-dots/microt1/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The Micro T1 is available through this research order. I like small equipment until I need to find it under a stack of notes. Bring the supplies listed here and we can open the purchase arrangement without adding to that particular experiment.",
+			completion = "Micro T1 purchase access is complete. I'll keep this delivery somewhere less ambitious than the paper pile.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -439,8 +439,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: Aimpoint Micro T1",
 			kind = "delivery",
 			requires = {"v3/red-dots/microt1"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "This order concerns the Micro T1 reserve. Complete it and the stock capacity rises. I've put the heading first so neither of us confuses it with the Eotech request while discussing something more interesting.",
+			completion = "The Micro T1 reserve is larger now. Heading and result agree, which is always pleasing.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 				{pool = "town_expansion_0acc14dfa866", quantity = 1},
@@ -461,8 +461,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Eotech holographic sight",
 			kind = "delivery",
 			requires = {"v3/red-dots/microt1", "v3/red-dots/eotech/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "For the Eotech, bring this delivery. I have no objection to enthusiasm about equipment; I share it often enough. I'd simply like us to establish the supplies before enthusiasm becomes an assumption that an arrangement has already been made.",
+			completion = "The Eotech purchase arrangement is ready. The required materials are all here.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -486,8 +486,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: Eotech holographic sight",
 			kind = "delivery",
 			requires = {"v3/red-dots/eotech"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The Eotech reserve could use these research supplies. This increases your allowance rather than changing the sight. It is perfectly acceptable to want a dependable reserve of something you already like.",
+			completion = "Your Eotech stock capacity has increased. Refill remains as usual.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
 				{pool = "town_expansion_983c927640d1", quantity = 1},
@@ -514,8 +514,8 @@ PLUGIN:Register("beanstalk", {
 			name = "CMore Railway",
 			kind = "delivery",
 			requires = {"v3/red-dots/eotech", "v3/red-dots/cmore/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The CMore Railway is the next sight I can make available. Bring the listed research order here. When you return, put it beside the trays rather than on the notes, please; I have finally reached a stage where the order of both makes sense to me.",
+			completion = "You can purchase the CMore now. And I can still read the notes underneath the delivery, thank you.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -549,8 +549,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: CMore Railway",
 			kind = "delivery",
 			requires = {"v3/red-dots/cmore"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "I'd like to expand the CMore reserve before the final sight order. These supplies provide the larger allowance. I should resist the temptation to call it a small request before you've read it; you're the one bringing it back.",
+			completion = "CMore capacity increased. You have the larger allowance, with normal restocking.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
 				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
@@ -578,8 +578,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Aimpoint CompM4",
 			kind = "delivery",
 			requires = {"v3/red-dots/cmore", "v3/red-dots/aimpoint/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The CompM4 closes this sight line. This is the complete research delivery for its purchase access. There's satisfaction in finishing a sequence properly, even if I immediately think of another question. You are under no obligation to stay for that question.",
+			completion = "The CompM4 is available to buy. The sight arrangements are complete; I will leave that fact unqualified for a moment.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -618,8 +618,8 @@ PLUGIN:Register("beanstalk", {
 			name = "King Arms MR",
 			kind = "delivery",
 			requires = {},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The King Arms MR begins the optics arrangements. I need this research delivery before opening purchase access. Looking more closely is usually rewarding, though occasionally it only reveals how much of the original account was my assumption. I try to keep that part in the notes as well.",
+			completion = "King Arms MR purchase access is ready. The supply list, at least, has a definite answer.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -638,8 +638,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: King Arms MR",
 			kind = "delivery",
 			requires = {"v3/optics/kingarmsmr"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "Before the PSO-1, there's the King Arms reserve. Bring the supplies here and the capacity will increase. I like a little room for an ordinary replacement without having to turn it into a new discussion of equipment.",
+			completion = "Your King Arms stock allowance is larger. Actual stock will follow its normal refill.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 			},
@@ -659,8 +659,8 @@ PLUGIN:Register("beanstalk", {
 			name = "PSO-1",
 			kind = "delivery",
 			requires = {"v3/optics/kingarmsmr", "v3/optics/pso1/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "For the PSO-1, complete the research order below. I sometimes spend too long on the interesting equipment and too little on the practical request. This is my attempt to put the list where you can finish reading it before I begin again.",
+			completion = "The PSO-1 purchase route is open. I'll take the completed list before explaining anything further.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -679,8 +679,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: PSO-1",
 			kind = "delivery",
 			requires = {"v3/optics/pso1"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The PSO-1 reserve needs these supplies. This is the allowance for an optic already available to you. I have kept it separate from the Shortdot arrangement because my earlier notes were beginning to read like two conversations at once.",
+			completion = "PSO-1 stock capacity is increased. One conversation successfully concluded.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 				{pool = "town_expansion_0acc14dfa866", quantity = 1},
@@ -701,8 +701,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Schmidt Shortdot",
 			kind = "delivery",
 			requires = {"v3/optics/pso1", "v3/optics/shortdot/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The Shortdot is the next optic on offer through a research delivery. Bring what's listed here. You can tell me how you chose it afterwards, if you wish; an equipment preference needn't be defended before it becomes a purchase.",
+			completion = "The Shortdot can be purchased here now. The delivery is settled, so the preference can remain yours.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -726,8 +726,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: Schmidt Shortdot",
 			kind = "delivery",
 			requires = {"v3/optics/shortdot"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "This smaller order increases the Shortdot reserve. It does not put another optic into current stock immediately. I prefer mentioning the dull limitation here to discovering it during somebody's otherwise carefully prepared departure.",
+			completion = "Shortdot stock allowance increased. Current availability still depends on the shelf.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
 				{pool = "town_expansion_fc138e40849a", quantity = 1},
@@ -754,8 +754,8 @@ PLUGIN:Register("beanstalk", {
 			name = "ACOG Sight",
 			kind = "delivery",
 			requires = {"v3/optics/shortdot", "v3/optics/acog/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "For the ACOG, I need the complete research request. Take a moment to check every entry. I have been known to follow an interesting object away from a nearly finished task, so I won't criticise the extra minute you spend being thorough.",
+			completion = "ACOG purchase access is ready. Every entry is received; I can stop hovering over the request.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",
@@ -789,8 +789,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Stock preparation: ACOG Sight",
 			kind = "delivery",
 			requires = {"v3/optics/acog"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The ACOG reserve comes before the Nightforce purchase arrangement. These research supplies increase your allowance for the optic already unlocked. There's no need to bring an extra sample merely because I looked interested.",
+			completion = "Your ACOG reserve capacity has increased. Exactly the delivery we agreed, thank you.",
 			requirements = {
 				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
 				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
@@ -818,8 +818,8 @@ PLUGIN:Register("beanstalk", {
 			name = "Nightforce NXS",
 			kind = "delivery",
 			requires = {"v3/optics/acog", "v3/optics/nightforce/stock"},
-			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check what we can use for the next set of samples.",
+			briefing = "The Nightforce is the final optic arrangement here. Bring the research materials on this list. I'd like to finish the practical terms plainly, then leave room for your account of the journey instead of turning the return into another explanation of mine.",
+			completion = "The Nightforce purchase route is open. That's the optics line completed. Please, take your time putting the pack down.",
 			requirements = {
 				{
 					pool = "town_expansion_2f0b6e78417d",

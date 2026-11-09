@@ -110,8 +110,8 @@ PLUGIN:Register("egghead", {
 			name = "SSP-99",
 			kind = "delivery",
 			requires = {},
-			briefing = "I need material for the research bench. Yes, there is a list; I remembered to write it before getting distracted this time. Bring everything on the list back here; I need the full delivery.",
-			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			briefing = "An SSP-99 makes a rather more persuasive addition to an expedition than my assurance that the research is interesting. I can make the suit available for purchase in exchange for the delivery listed here. Bring the requested materials back to the bunker. We can discuss what caught your eye after we've established what actually arrived.",
+			completion = "The delivery is complete. You can purchase the SSP-99 now; my enthusiasm isn't part of its specification.",
 			requirements = {
 				{
 					pool = "town_expansion_6ab242e44564",
@@ -130,8 +130,8 @@ PLUGIN:Register("egghead", {
 			name = "Stock preparation: SSP-99",
 			kind = "delivery",
 			requires = {"v3/science-suits/suit_ssp99"},
-			briefing = "I need material for the research bench. Yes, there is a list; I remembered to write it before getting distracted this time. Bring everything on the list back here; I need the full delivery.",
-			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			briefing = "I'd like a larger SSP-99 reserve before opening the next suit arrangement. Supplies have an irritating habit of demanding attention just as a comparison becomes interesting. Bring this order in and your stock allowance will rise. It won't refill the suits immediately, even if I explain the desirability of doing so at length.",
+			completion = "Your SSP-99 stock capacity has increased. A satisfactorily practical result; Beanstalk would approve of me noticing it.",
 			requirements = {
 				{pool = "town_expansion_41f7e321426e", quantity = 1},
 				{pool = "town_expansion_c50fe0412bf4", quantity = 1},
@@ -152,8 +152,8 @@ PLUGIN:Register("egghead", {
 			name = "SSP-99M",
 			kind = "delivery",
 			requires = {"v3/science-suits/suit_ssp99", "v3/science-suits/suit_ssp99m/stock"},
-			briefing = "I need material for the research bench. Yes, there is a list; I remembered to write it before getting distracted this time. Bring everything on the list back here; I need the full delivery.",
-			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			briefing = "The SSP-99M is the next suit I can arrange. There is a research delivery to complete first, detailed here. I enjoy discussing the equipment, but I ought to let you read the requirements before I occupy the whole afternoon. Come back with the full list and you can buy the suit.",
+			completion = "That settles the SSP-99M purchase access. Yes, I've checked the delivery before beginning the interesting questions.",
 			requirements = {
 				{
 					pool = "town_expansion_6ab242e44564",
@@ -177,8 +177,8 @@ PLUGIN:Register("egghead", {
 			name = "Stock preparation: SSP-99M",
 			kind = "delivery",
 			requires = {"v3/science-suits/suit_ssp99m"},
-			briefing = "I need material for the research bench. Yes, there is a list; I remembered to write it before getting distracted this time. Bring everything on the list back here; I need the full delivery.",
-			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			briefing = "The SSP-99M reserve needs its own supplies. This request increases how many I can keep available for you; it isn't the SEVA purchase arrangement yet. I'd rather say that plainly now than discover we've conducted two entirely different negotiations over the same table.",
+			completion = "The SSP-99M allowance is larger. The SEVA arrangement remains a separate matter, and the shelves refill normally.",
 			requirements = {
 				{pool = "town_expansion_651dbe68491b", quantity = 2},
 				{pool = "town_expansion_f23b91a4c88c", quantity = 2},
@@ -206,8 +206,8 @@ PLUGIN:Register("egghead", {
 			name = "SEVA Suit",
 			kind = "delivery",
 			requires = {"v3/science-suits/suit_ssp99m", "v3/science-suits/suit_seva/stock"},
-			briefing = "I need material for the research bench. Yes, there is a list; I remembered to write it before getting distracted this time. Bring everything on the list back here; I need the full delivery.",
-			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
+			briefing = "The SEVA is available through this research order. By now you know my weakness for following an interesting specimen straight past a practical concern. I'm trying to reverse that sequence here: read the list, complete the delivery, then choose whether to purchase the suit. We can enjoy the discussion after the arrangement is clear.",
+			completion = "The research order is complete. You can buy the SEVA suit here now. Thank you; I'll try to keep the next explanation seated.",
 			requirements = {
 				{
 					pool = "town_expansion_6ab242e44564",

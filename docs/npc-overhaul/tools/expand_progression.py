@@ -107,6 +107,7 @@ def expand_contacts(contacts):
             count += sum(bool(step.get("intermissionFor")) for step in contact["progression"])
             continue
         branches = defaultdict(list)
+        existing = {step["id"]: step for step in contact["progression"]}
         authored = [s for s in contact["progression"] if s.get("requirementAlternatives")]
         for step in contact["progression"]:
             if step in authored:
@@ -149,6 +150,11 @@ def expand_contacts(contacts):
                         "branchIndex": index + 1, "branchLength": len(branch),
                         "acquisitionMaps": step["acquisitionMaps"], "requirementPolicy": POLICY,
                     }
+                    # Rebuilding requirements must not replace an authored stock conversation.
+                    authored_text = existing.get(intermission["id"], {})
+                    for field in ("briefing", "completion"):
+                        if field in authored_text:
+                            intermission[field] = authored_text[field]
                     for item in targets:
                         ranks[item] = bonus
                     output.append(intermission)

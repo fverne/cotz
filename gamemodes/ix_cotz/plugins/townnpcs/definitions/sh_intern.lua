@@ -103,8 +103,8 @@ PLUGIN:Register("intern", {
 			name = "Artifact Detector (Echo)",
 			kind = "delivery",
 			requires = {},
-			briefing = "I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely on the readings. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thanks. I will check these against my preparation list.",
+			briefing = "I can arrange access to an Echo detector if you bring the research materials on this list. I've kept the request with the work we can supply from the Swamps. You don't need to explain what you think I want to hear about the samples; the delivery itself is what we're agreeing to. I can handle the instrument arrangements.",
+			completion = "That's the full delivery. You can purchase an Echo here now. I'll put the materials away myself.",
 			requirements = {
 				{
 					pool = "town_expansion_a9a6a4663f7e",
@@ -123,8 +123,8 @@ PLUGIN:Register("intern", {
 			name = "Stock preparation: Artifact Detector (Echo)",
 			kind = "delivery",
 			requires = {"v3/artifact-detectors/detectorecho"},
-			briefing = "I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely on the readings. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thanks. I will check these against my preparation list.",
+			briefing = "Before the next detector, I'd like to increase your Echo stock allowance. Keeping instruments available is part of preparation too, even if it's less interesting to discuss. This is the order for that reserve; it won't produce another detector immediately.",
+			completion = "Your Echo allowance has increased. The stock itself still follows the usual refill.",
 			requirements = {
 				{pool = "town_expansion_8619904d9216", quantity = 1},
 				{pool = "town_expansion_eb7056313562", quantity = 1},
@@ -148,8 +148,8 @@ PLUGIN:Register("intern", {
 				"v3/artifact-detectors/detectorecho",
 				"v3/artifact-detectors/detectorbear/stock",
 			},
-			briefing = "I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely on the readings. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thanks. I will check these against my preparation list.",
+			briefing = "The Bear is next in the detector line. I know where the request belongs; you don't have to wait for me to find a senior colleague. Bring the listed research materials back here and I'll make it available for purchase. I rather like being able to finish that sentence without an apology.",
+			completion = "All received. You can buy the Bear detector now. That arrangement is complete.",
 			requirements = {
 				{
 					pool = "town_expansion_a9a6a4663f7e",
@@ -173,8 +173,8 @@ PLUGIN:Register("intern", {
 			name = "Stock preparation: Artifact Detector (Bear)",
 			kind = "delivery",
 			requires = {"v3/artifact-detectors/detectorbear"},
-			briefing = "I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely on the readings. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thanks. I will check these against my preparation list.",
+			briefing = "I'd like to get the Bear reserve settled before the final detector request. These supplies increase the amount I can hold for you. It is still a stock allowance, so please check what's actually on sale before packing around a spare.",
+			completion = "I've increased your Bear stock capacity. The reserve is arranged; the refill timing hasn't changed.",
 			requirements = {
 				{pool = "town_expansion_96f10f2d5514", quantity = 2},
 				{pool = "town_expansion_7056d335ecb3", quantity = 2},
@@ -205,8 +205,8 @@ PLUGIN:Register("intern", {
 				"v3/artifact-detectors/detectorbear",
 				"v3/artifact-detectors/detectorveles/stock",
 			},
-			briefing = "I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely on the readings. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thanks. I will check these against my preparation list.",
+			briefing = "For the Veles, this is the full research order. There are more kinds of material to account for, so take a moment with the list rather than trusting my enthusiasm for the equipment. I'd be interested to hear about your search afterwards, if you feel like talking. The purchase access depends on completing the delivery.",
+			completion = "Everything is accounted for. You can purchase the Veles now. Thank you for seeing the detector orders through with me.",
 			requirements = {
 				{
 					pool = "town_expansion_a9a6a4663f7e",

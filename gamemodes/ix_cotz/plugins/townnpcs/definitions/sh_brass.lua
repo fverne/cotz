@@ -173,8 +173,8 @@ PLUGIN:Register("brass", {
 			name = ".22LR",
 			kind = "delivery",
 			requires = {},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The .22 is already on sale. This order raises your personal stock allowance for it. Bring the loading-bench and storage supplies listed here; I will check the delivery against the page, including what I owe you. Starting with a small cartridge doesn't make careful work less worthwhile.",
+			completion = "Your .22 stock allowance has increased. The delivery is complete; the shelf refills normally.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 1},
 			},
@@ -190,8 +190,8 @@ PLUGIN:Register("brass", {
 			name = "7.62x25mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/22lr"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For a larger 7.62x25 allowance, bring this supply request. It is already part of my starting stock. A reserve arrangement needs its own materials, and I prefer getting that clear before a customer counts on more than is actually available.",
+			completion = "Your 7.62x25 capacity is larger. Current stock still follows the ordinary refill.",
 			requirements = {
 				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
@@ -207,8 +207,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 7.62x25mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x25"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This further reserve order supports 7.62x25 before the .410 arrangement. Complete the smaller delivery and the total allowance rises again. I count an increase as part of the existing reserve, not a fresh pile appearing alongside it.",
+			completion = "The 7.62x25 reserve has the higher total capacity. Refill timing is unchanged.",
 			requirements = {
 				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
@@ -228,8 +228,8 @@ PLUGIN:Register("brass", {
 			name = ".410 Magnum Buck",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x25", "v3/regular-ammo/45acp41/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The .410 buckshot is already available. This delivery increases how much can be held for you. Bring the listed bench supplies and let me account for them before we start discussing the next calibre.",
+			completion = "Your .410 buckshot stock capacity is increased. Every supply entry has been received.",
 			requirements = {
 				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
@@ -245,8 +245,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .410 Magnum Buck",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/45acp41"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Before the 9x19 reserve, there's a further .410 allowance to arrange. The request is here. Finishing it raises total capacity; it does not put new shells on the shelf today.",
+			completion = "The .410 reserve has increased again. Actual stock still needs its regular refill.",
 			requirements = {
 				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
@@ -266,8 +266,8 @@ PLUGIN:Register("brass", {
 			name = "9x19mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/45acp41", "v3/regular-ammo/9x19/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For 9x19, this order expands the stock allowance. The cartridges are already sold here. People sometimes apologise for asking about an ordinary calibre; it is a perfectly sensible thing to want available.",
+			completion = "Your 9x19 allowance is larger. An ordinary request, properly completed.",
 			requirements = {
 				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
@@ -283,8 +283,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 9x19mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x19"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The next 9x19 reserve increase needs these supplies before the .45 arrangement. Bring the full smaller request. I'll check it without assuming a familiar customer's delivery must be right or wrong.",
+			completion = "Your 9x19 reserve has the larger total capacity. The check is complete and refill remains normal.",
 			requirements = {
 				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
@@ -304,8 +304,8 @@ PLUGIN:Register("brass", {
 			name = ".45 ACP",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x19", "v3/regular-ammo/45acp/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The .45 ACP request here is for additional stock capacity. It is already part of the starting selection. Bring the materials listed; a regular customer's preference deserves a clear allowance rather than a vague assurance.",
+			completion = "Your .45 ACP stock allowance is increased. The arrangement is recorded and the delivery settled.",
 			requirements = {
 				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
@@ -321,8 +321,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .45 ACP",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/45acp"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This further order raises the .45 reserve before 5.45 access. I want the supplies listed, not loose ammunition substituted because the heading mentions a calibre. The request and its result are different things.",
+			completion = "The .45 reserve has increased again. Supplies received as requested, with ordinary refill to follow.",
 			requirements = {
 				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
@@ -342,8 +342,8 @@ PLUGIN:Register("brass", {
 			name = "5.45x39mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/45acp", "v3/regular-ammo/545x39/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For 5.45x39, complete this bench-supply delivery. It opens purchase access to the regular ammunition. I appreciate someone reading the current order rather than assuming every cartridge on the sheet has the same arrangement.",
+			completion = "Regular 5.45x39 is available to purchase. Your full supply order is received.",
 			requirements = {
 				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
@@ -358,8 +358,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 5.45x39mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/545x39"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "I'd like the regular 5.45 reserve increased before the buckshot allowance. These supplies raise stock capacity. A number written beside a calibre is only useful if both of us understand whether it means current stock or capacity.",
+			completion = "Your 5.45 stock allowance is larger. The number is capacity; the refill still has to arrive.",
 			requirements = {
 				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
@@ -379,8 +379,8 @@ PLUGIN:Register("brass", {
 			name = "12g Buckshot",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/545x39", "v3/regular-ammo/12gauge/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Twelve-gauge buckshot is already sold here. This delivery gives you a larger personal reserve. Bring the bench and storage supplies in the order; there's no need to bring a story proving how urgently you expect to use the shells.",
+			completion = "Your buckshot stock capacity is increased. The delivery is complete without an urgency allowance attached.",
 			requirements = {
 				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
@@ -396,8 +396,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 12g Buckshot",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/12gauge"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This is the next buckshot reserve request before 7.62x39. It raises the total capacity, with normal refill. Put the supplies on the clear side so I can check the last order before setting out another.",
+			completion = "The buckshot reserve has its higher total allowance. The clear side of the bench is clear again.",
 			requirements = {
 				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
@@ -417,8 +417,8 @@ PLUGIN:Register("brass", {
 			name = "7.62x39mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/12gauge", "v3/regular-ammo/762x39/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For regular 7.62x39 purchase access, bring this supply request. I like receiving a delivery while we can both sit and check it. Hurrying the count because the return was tiring rarely saves an argument.",
+			completion = "Regular 7.62x39 is open for purchase. We've checked every part of the delivery.",
 			requirements = {
 				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
@@ -433,8 +433,8 @@ PLUGIN:Register("brass", {
 			name = "5.56x45mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x39"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The 5.56x45 purchase arrangement needs these materials. Bring the full list back here. I keep the requests distinct because a familiar-looking label can make somebody stop looking before the useful part.",
+			completion = "Regular 5.56x45 is available to buy. This order is complete on its own terms.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_5af1c64d6805", quantity = 1},
@@ -450,8 +450,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 5.56x45mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/556x45"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Before the 9x18 reserve, support the 5.56 allowance with this delivery. It raises capacity for the ammunition you've opened. I won't claim the shelves have refilled merely because the account looks better.",
+			completion = "Your 5.56 stock capacity is increased. The actual refill remains a separate event.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 1},
 				{pool = "town_expansion_345e9482a19c", quantity = 1},
@@ -472,8 +472,8 @@ PLUGIN:Register("brass", {
 			name = "9x18mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/556x45", "v3/regular-ammo/9x18/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The 9x18 is already in the starting selection. This order increases your stock allowance. Bring the listed bench supplies. A quieter piece of reserve work can still make a return to the counter less uncertain.",
+			completion = "Your 9x18 allowance is larger. The delivery is received and normal refill applies.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_3c9eef7969b7", quantity = 1},
@@ -490,8 +490,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 9x18mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x18"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This further 9x18 order raises the reserve before 7.62x54 access. Complete the smaller list. There is room for a higher allowance without pretending every increase is another fresh reserve to add together.",
+			completion = "The 9x18 reserve has increased to the higher total capacity. Stock still refills normally.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
 				{pool = "town_expansion_5af1c64d6805", quantity = 1},
@@ -512,8 +512,8 @@ PLUGIN:Register("brass", {
 			name = "7.62x54mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x18", "v3/regular-ammo/762x54/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Regular 7.62x54 has this purchase request. Bring the loading-bench supplies here in full. People have plenty to say about the rifles using it; I would like the delivery to receive a little of that attention before we discuss them.",
+			completion = "Regular 7.62x54 is open for purchase. The supplies are all accounted for.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 2},
 				{pool = "town_expansion_345e9482a19c", quantity = 1},
@@ -529,8 +529,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 7.62x54mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x54"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The 7.62x54 reserve needs these materials before the .357 arrangement. Capacity increases when the list is complete. I don't expect a customer to remember an allowance I haven't put into a clear agreement.",
+			completion = "Your 7.62x54 capacity is larger. The reserve arrangement is clear, with ordinary refill.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
 				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
@@ -551,8 +551,8 @@ PLUGIN:Register("brass", {
 			name = ".357 Magnum",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x54", "v3/regular-ammo/357magnum/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For regular .357, bring this supply order. I'll open purchase access once it is complete. A preference for one cartridge needn't become an argument about someone else's; I can keep more than one sort of account.",
+			completion = "Regular .357 is available to buy. The full bench-supply delivery is received.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
@@ -568,8 +568,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .357 Magnum",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/357magnum"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Before 9x39, there's a .357 reserve order. These supplies increase the allowance. You don't need to buy a box to demonstrate interest before arranging its capacity.",
+			completion = "Your .357 stock allowance is increased. Actual stock still follows the refill schedule.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 1},
 				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
@@ -590,8 +590,8 @@ PLUGIN:Register("brass", {
 			name = "9x39mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/357magnum", "v3/regular-ammo/9x39/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Regular 9x39 comes through this delivery. Bring the list here and we can open its purchase route. I prefer knowing what arrived before hearing which description of the cartridge somebody found most convincing.",
+			completion = "Regular 9x39 purchase access is ready. The delivery matches the actual request.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
@@ -607,8 +607,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 9x39mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x39"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This order raises the regular 9x39 reserve. It doesn't open an exchange or put special ammunition in your pack. We are arranging stock capacity for the regular rounds already available.",
+			completion = "Your regular 9x39 capacity is larger. The reserve refills in the usual way.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
 				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
@@ -629,8 +629,8 @@ PLUGIN:Register("brass", {
 			name = ".44 Magnum",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x39", "v3/regular-ammo/44magnum/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For regular .44 Magnum, complete this request. Bring the bench and storage supplies listed. I don't judge a returning delivery by the size of the pack; a small missing entry can still keep an order unfinished.",
+			completion = "Regular .44 Magnum is open for purchase. None of the smaller entries is missing.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 2},
 				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
@@ -646,8 +646,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .44 Magnum",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/44magnum"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The .44 reserve needs these supplies before 9x21 access. This increases the stock allowance. I'll check it in the same manner as the first delivery; familiarity is a good reason to remain fair, not stop counting.",
+			completion = "Your .44 stock capacity is increased. The account is checked and refill remains ordinary.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
 				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
@@ -668,8 +668,8 @@ PLUGIN:Register("brass", {
 			name = "9x21mm Gyurza SP-11 (7N28)",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/44magnum", "v3/regular-ammo/9x21/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The regular Gyurza round has its own purchase arrangement. Bring this supply request. Keep the label on the current order in mind; a related name is not the same ammunition, however quickly somebody says it.",
+			completion = "Regular 9x21 Gyurza purchase access is ready. This specific order is complete.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
@@ -685,8 +685,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 9x21mm Gyurza SP-11 (7N28)",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x21"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "I'd like more capacity for the regular Gyurza before 7.62x51. Bring these supplies. It raises the allowance rather than changing the cartridge or producing a special load.",
+			completion = "Your regular Gyurza reserve is larger. Its stock will refill normally.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 1},
 				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
@@ -707,8 +707,8 @@ PLUGIN:Register("brass", {
 			name = "7.62x51mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x21", "v3/regular-ammo/762x51/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For regular 7.62x51, this is the bench-supply order. Complete the list and I can open purchase access. I appreciate a straightforward return even if it gives neither of us an impressive story.",
+			completion = "Regular 7.62x51 is available to buy. A straightforward delivery has finished the arrangement.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
@@ -724,8 +724,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 7.62x51mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x51"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This delivery increases 7.62x51 stock capacity before the .500. Bring the smaller order in full. Current stock and a larger allowance will remain separate figures after we're finished.",
+			completion = "Your 7.62x51 stock allowance is larger. Current stock still depends on the usual refill.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_06e3662846a9", quantity = 1},
@@ -747,8 +747,8 @@ PLUGIN:Register("brass", {
 			name = ".500 Magnum",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x51", "v3/regular-ammo/500magnum/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The .500 Magnum purchase request uses these supplies. Bring the full delivery. You can want a less common cartridge without asking me to guess which part of the supply agreement you thought might be optional.",
+			completion = "Regular .500 Magnum is open for purchase. Every required entry has arrived.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 3},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
@@ -765,8 +765,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .500 Magnum",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/500magnum"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Before the Lapua, I'd like the .500 reserve supported. This smaller delivery raises its stock capacity. An allowance can be practical without a promise that a box will be waiting the instant you return.",
+			completion = "Your .500 reserve capacity is increased. Normal refill still determines when stock is there.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 1},
@@ -788,8 +788,8 @@ PLUGIN:Register("brass", {
 			name = ".338 Lapua",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/500magnum", "v3/regular-ammo/338lapua/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For regular .338 Lapua, complete this bench-supply order. I can arrange purchase access after the full delivery. I have no need to hear a claim about the expedition to make the terms clear.",
+			completion = "Regular .338 Lapua purchase access is ready. The agreed supplies have been received.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_06e3662846a9", quantity = 2},
@@ -806,8 +806,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .338 Lapua",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/338lapua"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The Lapua reserve needs this request before .50AE. Capacity rises on completion. Put the last supplies where we can both see them; a careful count should be something you can check too.",
+			completion = "Your Lapua stock allowance is larger. The delivery has been checked in the open.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 2},
 				{pool = "town_expansion_b04346bae92d", quantity = 1},
@@ -834,8 +834,8 @@ PLUGIN:Register("brass", {
 			name = ".50AE",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/338lapua", "v3/regular-ammo/50ae/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Regular .50AE comes through this supply arrangement. Bring the list back here. I want the request as written; familiarity with another .50 label won't finish a different order.",
+			completion = "Regular .50AE is available to buy. The correct delivery is complete.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_d4935d240567", quantity = 2},
@@ -857,8 +857,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .50AE",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/50ae"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This order increases the .50AE reserve before 5.7x28. Bring the smaller supply request. We can support the existing stock without turning the conversation into a contest over which cartridge deserves the most space.",
+			completion = "Your .50AE capacity is increased. Refill still takes place normally.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_0b8f25f6d80e", quantity = 1},
@@ -885,8 +885,8 @@ PLUGIN:Register("brass", {
 			name = "5.7x28mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/50ae", "v3/regular-ammo/57x28/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For regular 5.7x28, complete this delivery. The bench materials are listed here. I enjoy finishing an order where the customer knows exactly what they brought and gives me time to confirm it.",
+			completion = "Regular 5.7x28 purchase access is open. Your account of the delivery matches mine.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 3},
 				{pool = "town_expansion_b04346bae92d", quantity = 2},
@@ -908,8 +908,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 5.7x28mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/57x28"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Before 12.7x55, there's a 5.7 reserve order. This raises stock capacity for the regular ammunition. Do not count it as the special-load exchange; that is a different agreement.",
+			completion = "Your regular 5.7 stock allowance is larger. The reserve will refill as usual.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_d4935d240567", quantity = 1},
@@ -936,8 +936,8 @@ PLUGIN:Register("brass", {
 			name = "12.7x55mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/57x28", "v3/regular-ammo/127x55/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Regular 12.7x55 has this purchase request. Bring every listed supply here. A substantial cartridge still depends on small bench materials being where they belong; those tend to receive less admiration.",
+			completion = "Regular 12.7x55 is open for purchase. The unadmired supplies have arrived complete.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_0b8f25f6d80e", quantity = 2},
@@ -959,8 +959,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 12.7x55mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/127x55"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This request increases the 12.7x55 reserve before 14.5 access. Bring the smaller list and capacity rises. I will leave current stock out of the promise until the actual boxes are here.",
+			completion = "Your 12.7x55 stock capacity is increased. Actual stock still arrives through normal refill.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 2},
 				{pool = "town_expansion_b04346bae92d", quantity = 1},
@@ -987,8 +987,8 @@ PLUGIN:Register("brass", {
 			name = "14.5x114mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/127x55", "v3/regular-ammo/145x114/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For regular 14.5x114, bring this supply order. Read all the entries before deciding how to carry them. I can wait for a proper delivery more easily than I can account for something still described as nearly here.",
+			completion = "Regular 14.5x114 purchase access is ready. Nothing in the order remains nearly delivered.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_d4935d240567", quantity = 2},
@@ -1010,8 +1010,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 14.5x114mm",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/145x114"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The 14.5 reserve needs these supplies before Nitro Express. Capacity increases with the full request. I would rather state the exact arrangement than let the next impressive name do the explaining.",
+			completion = "Your 14.5 stock allowance is larger. Normal refill applies to that allowance.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_0b8f25f6d80e", quantity = 1},
@@ -1038,8 +1038,8 @@ PLUGIN:Register("brass", {
 			name = ".700 Nitro Express",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/145x114", "v3/regular-ammo/700nitro/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the Nitro Express purchase route, this is the delivery. Bring the bench supplies listed. You can enjoy discussing an unusual cartridge after we've dealt with the rather ordinary work that made it available.",
+			completion = "Nitro Express is open for purchase. The ordinary work on this order is finished.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 3},
 				{pool = "town_expansion_b04346bae92d", quantity = 2},
@@ -1061,8 +1061,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: .700 Nitro Express",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/700nitro"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "One final regular-ammunition reserve before 9.3x64. Complete this list to increase Nitro Express capacity. It raises the allowance; there isn't a box included as a closing gesture.",
+			completion = "Your Nitro Express reserve is larger. It will refill normally, without an item gift attached.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
@@ -1090,8 +1090,8 @@ PLUGIN:Register("brass", {
 			name = "9.3x64mm 7N33",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/700nitro", "v3/regular-ammo/93x64/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Regular 9.3x64 closes this supply line. Bring the full bench request. I appreciate seeing a long series of arrangements completed without anybody asking me to stop checking because we've done business before.",
+			completion = "Regular 9.3x64 is available to buy. The regular-ammunition arrangements are complete and fully checked.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 4},
 				{pool = "town_expansion_06e3662846a9", quantity = 3},
@@ -1117,8 +1117,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/22lr"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the special .22 load, first complete this bench-supply request. It opens a barter: two standard boxes' worth of regular .22 for one standard box of the special load. The delivery earns access to that exchange, not ammunition handed over at completion.",
+			completion = "The special .22 exchange is open. Regular .22 goes in at two boxes' worth for one box out.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 1},
 			},
@@ -1137,8 +1137,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/762x25"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The 7.62x25 special-load exchange needs this supply order. Complete it and you can trade two standard boxes' worth of regular 7.62x25 for one box of the variant. I'll count the rounds, so partial stacks can contribute.",
+			completion = "Your 7.62x25 exchange is available. The terms are two regular boxes' worth for one special box.",
 			requirements = {
 				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
@@ -1157,8 +1157,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/9x19"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the 9x19 variant, bring the listed supplies. The result is access to its two-for-one regular-ammunition barter. The supply order and the later ammunition payment are separate; I want both understood before you leave.",
+			completion = "The 9x19 special-load barter is open. It takes two regular boxes' worth for one box of the variant.",
 			requirements = {
 				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
@@ -1177,8 +1177,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/45acp"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Hydro-Shok access requires this delivery. Bring the bench supplies here and you can use the .45 exchange afterwards. It consumes two standard boxes' worth of regular .45 per special box; this request contains no free ammunition.",
+			completion = "The Hydro-Shok exchange is ready. Two regular .45 boxes' worth buy one special box.",
 			requirements = {
 				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
@@ -1197,8 +1197,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/545x39"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The 5.45 variant has this supply request. Completing it opens the barter using regular 5.45, at two standard boxes' worth for one variant box. I don't sell that special load for cash through this arrangement.",
+			completion = "The special 5.45 exchange is open. Bring regular ammunition for the two-for-one barter when you're ready.",
 			requirements = {
 				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
@@ -1217,8 +1217,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/762x39"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the 7.62x39 variant, complete this bench order. Then you can exchange two standard boxes' worth of regular rounds for one special box. I will check the actual ammunition rather than the number of stacks you bring.",
+			completion = "The 7.62x39 special-load exchange is available. The two-for-one terms count rounds in standard-box equivalents.",
 			requirements = {
 				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
@@ -1237,8 +1237,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/556x45"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "This supply request opens the special 5.56 exchange. Bring the full order before expecting the barter option. Afterwards the price is two boxes' worth of regular 5.56 for one variant box, not a cash sale.",
+			completion = "Special 5.56 barter access is ready. Its ammunition cost remains two regular boxes' worth per special box.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 2},
 				{pool = "town_expansion_345e9482a19c", quantity = 1},
@@ -1258,8 +1258,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/9x18"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For 9x18 +P, the bench-supply delivery comes first. Completing it opens the exchange, using two standard boxes' worth of regular 9x18 for one variant box. You needn't combine partial stacks yourself to make the total count.",
+			completion = "The 9x18 +P exchange is open. The agreed two-for-one barter will count the rounds you supply.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_3c9eef7969b7", quantity = 1},
@@ -1279,8 +1279,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/762x54"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The 7.62x54 special load requires this order for barter access. Bring the listed supplies here. Then regular ammunition pays for the output: two standard boxes' worth for one special box, with no output included in today's delivery.",
+			completion = "Your 7.62x54 special-load barter is ready. Two regular boxes' worth are required for each special box.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_5af1c64d6805", quantity = 1},
@@ -1300,8 +1300,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/357magnum"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the .357 JHP exchange, complete this bench request. Access is what the delivery grants. The exchange itself takes two standard boxes' worth of regular .357 and provides one special box; those are separate accounts.",
+			completion = "The .357 JHP exchange is open. Its regular-ammunition payment remains two boxes' worth per special box.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 2},
 				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
@@ -1321,8 +1321,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/9x39"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "PAB-9 has a supply order before the exchange becomes available. Bring this list back complete. The later barter uses regular 9x39 at two standard boxes' worth for one box of PAB-9, rather than cash.",
+			completion = "PAB-9 barter access is ready. Two regular 9x39 boxes' worth pay for one special box.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
@@ -1342,8 +1342,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/44magnum"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The Black Talon arrangement needs this bench-supply delivery. Complete it to open the .44 barter. I'll accept the required round total across partial stacks: two regular standard boxes' worth for one special box.",
+			completion = "Your Black Talon exchange is open. The two-for-one terms use regular .44 ammunition.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
@@ -1363,8 +1363,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/9x21"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the Gyurza SP-12 exchange, complete the request here. Keep it distinct from regular Gyurza purchase access. This delivery opens a barter taking two standard boxes' worth of regular 9x21 for one special box.",
+			completion = "SP-12 exchange access is ready. The barter uses regular 9x21 at two boxes' worth for one box out.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 3},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
@@ -1385,8 +1385,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/762x51"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The M118 variant comes through an exchange after this supply order. Bring the bench materials first. Then two standard boxes' worth of regular 7.62x51 can be traded for one special box; I won't confuse the access delivery with its ammunition cost.",
+			completion = "The M118 exchange is open. Two regular 7.62x51 boxes' worth pay for a special box.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
@@ -1407,8 +1407,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/500magnum"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the .500 DPX barter, bring this supply request. Access follows the complete delivery. The barter requires two standard boxes' worth of regular .500 per special box, with partial stacks counted by their rounds.",
+			completion = "DPX exchange access is ready. Its ammunition price is two regular .500 boxes' worth for one special box.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_0b8f25f6d80e", quantity = 2},
@@ -1434,8 +1434,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/338lapua"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The Lapua TAC-X exchange needs these bench supplies. Completing the order opens the barter rather than putting ammunition into your pack. The later cost is two standard boxes' worth of regular Lapua for one special box.",
+			completion = "TAC-X barter access is open. Two regular Lapua boxes' worth buy one special box.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 3},
 				{pool = "town_expansion_b04346bae92d", quantity = 2},
@@ -1461,8 +1461,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/50ae"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For .50AE XTP, complete this supply delivery. It opens the two-for-one regular-ammunition exchange. I don't expect the heading alone to explain whether you are purchasing stock or arranging a barter, so I'm saying which it is.",
+			completion = "The XTP exchange is ready. It takes two standard boxes' worth of regular .50AE for one special box.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_d4935d240567", quantity = 2},
@@ -1488,8 +1488,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/57x28"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The FN R37.F barter needs this order first. Bring all the supplies here. Then you can exchange two standard boxes' worth of regular 5.7x28 for one box of the variant; the access request awards no box of its own.",
+			completion = "Your FN R37.F exchange is open. Two regular 5.7 boxes' worth pay for each special box.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
 				{pool = "town_expansion_0b8f25f6d80e", quantity = 2},
@@ -1515,8 +1515,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/145x114"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "The BZT exchange is the last special-load agreement here. Complete this bench-supply request, then the barter uses two standard boxes' worth of regular 14.5 for one special box. A long line still deserves clear final terms.",
+			completion = "BZT barter access is ready. The special-load agreements are complete, with the usual two-for-one regular-ammunition terms.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 4},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 3},
@@ -1543,8 +1543,8 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/12gauge"},
 			},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Tri-Ball has a separate purchase request. Bring the supplies listed here. This one opens a cash purchase route for the shotgun load, unlike the special-load barters; I would rather explain the difference before checking your order.",
+			completion = "Tri-Ball is available to purchase. Your bench-supply delivery is complete.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
 			},
@@ -1559,8 +1559,8 @@ PLUGIN:Register("brass", {
 			name = "12g Dart Rounds",
 			kind = "delivery",
 			requires = {"v3/shotgun-loads/12gaugetr"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "For the dart rounds, complete this supply delivery. They become available to buy once the request is finished. I can discuss a different load without pretending its name tells you every property worth checking.",
+			completion = "Dart rounds are open for purchase. All requested supplies have arrived.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
 				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
@@ -1576,8 +1576,8 @@ PLUGIN:Register("brass", {
 			name = "Stock preparation: 12g Dart Rounds",
 			kind = "delivery",
 			requires = {"v3/shotgun-loads/12gaugedt"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Before the Magnum buckshot, support the dart-round reserve with this smaller order. It increases stock capacity, with ordinary refill. No shells are included merely for finishing the reserve arrangement.",
+			completion = "Your dart-round allowance is larger. Actual shells still have to come into stock normally.",
 			requirements = {
 				{pool = "town_expansion_14486da7a41d", quantity = 2},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
@@ -1605,8 +1605,8 @@ PLUGIN:Register("brass", {
 			name = "12g Magnum Buckshot",
 			kind = "delivery",
 			requires = {"v3/shotgun-loads/12gaugedt", "v3/shotgun-loads/12gaugemg/stock"},
-			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
-			completion = "That matches the request. I will enter it on my side as well.",
+			briefing = "Magnum buckshot closes this shotgun-load line. Bring the full bench-supply request and I'll open its purchase route. We can finish the last account with the same care as the first; I see no reason to hurry it now.",
+			completion = "Magnum buckshot is available to buy. The shotgun-load arrangements are finished and the deliveries checked.",
 			requirements = {
 				{pool = "town_expansion_e03ae53c14f9", quantity = 4},
 				{pool = "town_expansion_dd64d6ff04ac", quantity = 3},
