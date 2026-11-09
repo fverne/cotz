@@ -91,6 +91,18 @@ PLUGIN:Register("egghead", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Laboratory containment and research reagents",
+		core = {
+			"valuables_medical_equipment",
+			"valuables_filtration",
+			"valuables_research_injectors_a",
+			"valuables_research_injectors_b",
+			"valuables_research_samples",
+		},
+		support = {"valuables_instruments"},
+	},
+
 	progression = {
 		{
 			id = "v3/science-suits/suit_ssp99",
@@ -102,7 +114,7 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_6ab242e44564",
 					quantity = 1,
 					artifactPool = "common_artifacts",
 				},
@@ -110,7 +122,7 @@ PLUGIN:Register("egghead", {
 			branchIndex = 1,
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/science-suits/suit_ssp99m/stock",
@@ -121,8 +133,8 @@ PLUGIN:Register("egghead", {
 			briefing = "I need material for the research bench. Yes, there is a list; I remembered to write it before getting distracted this time. Bring everything on the list back here; I need the full delivery.",
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
-				{pool = "town_expansion_c72e02d3eea4", quantity = 1},
+				{pool = "town_expansion_41f7e321426e", quantity = 1},
+				{pool = "town_expansion_c50fe0412bf4", quantity = 1},
 			},
 			stock = {
 				items = {"suit_ssp99"},
@@ -131,8 +143,8 @@ PLUGIN:Register("egghead", {
 			intermissionFor = "v3/science-suits/suit_ssp99m",
 			branchIndex = 2,
 			branchLength = 3,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/science-suits/suit_ssp99m",
@@ -144,20 +156,20 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_6ab242e44564",
 					quantity = 2,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_184da1a90e1f",
+					pool = "town_expansion_b42cfd993705",
 					quantity = 1,
 					artifactPool = "electrical_artifacts",
 				},
 			},
 			branchIndex = 2,
 			branchLength = 3,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/science-suits/suit_seva/stock",
@@ -168,10 +180,10 @@ PLUGIN:Register("egghead", {
 			briefing = "I need material for the research bench. Yes, there is a list; I remembered to write it before getting distracted this time. Bring everything on the list back here; I need the full delivery.",
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_b4b1617dad8f", quantity = 2},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
-				{pool = "town_expansion_b29bf8ba53a6", quantity = 1},
+				{pool = "town_expansion_651dbe68491b", quantity = 2},
+				{pool = "town_expansion_f23b91a4c88c", quantity = 2},
+				{pool = "town_expansion_7a865395e36d", quantity = 1},
+				{pool = "town_expansion_9580fee61c88", quantity = 1},
 			},
 			stock = {
 				items = {"suit_ssp99m"},
@@ -186,7 +198,7 @@ PLUGIN:Register("egghead", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/science-suits/suit_seva",
@@ -198,22 +210,22 @@ PLUGIN:Register("egghead", {
 			completion = "Excellent. Let me put these aside before I start explaining what I want to compare.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_6ab242e44564",
 					quantity = 4,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_585a30ca3e50",
+					pool = "town_expansion_b42cfd993705",
 					quantity = 3,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_58ae5705a90d",
+					pool = "town_expansion_9e467e82494b",
 					quantity = 2,
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_db45db685698",
+					pool = "town_expansion_f2eb34f40bc8",
 					quantity = 1,
 					artifactPool = "exceptional_artifacts",
 				},
@@ -226,7 +238,7 @@ PLUGIN:Register("egghead", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

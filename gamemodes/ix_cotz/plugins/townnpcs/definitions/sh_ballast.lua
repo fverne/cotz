@@ -60,6 +60,12 @@ PLUGIN:Register("ballast", {
 		workPrompt = "About the case I'm recovering.",
 	},
 	catalogue = {},
+	progressionIdentity = {
+		name = "Freight cases and cargo packing",
+		core = {"town_textiles", "valuables_transit_cases", "valuables_reinforced_cases"},
+		support = {"valuables_textile_supplies", "valuables_fuel_supplies"},
+	},
+
 	progression = {
 		{
 			id = "v3/hideout/01",
@@ -70,7 +76,7 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout1", name = "Hideout improvements 1"},
@@ -78,7 +84,7 @@ PLUGIN:Register("ballast", {
 			branchIndex = 1,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 1,
 		},
 		{
@@ -90,15 +96,15 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_5678ca47eff1", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout2", name = "Hideout improvements 2"},
 			},
 			branchIndex = 2,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 			hideoutLevel = 2,
 		},
 		{
@@ -110,15 +116,15 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout3", name = "Hideout improvements 3"},
 			},
 			branchIndex = 3,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 			hideoutLevel = 3,
 		},
 		{
@@ -130,15 +136,15 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_5678ca47eff1", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout4", name = "Hideout improvements 4"},
 			},
 			branchIndex = 4,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 			hideoutLevel = 4,
 		},
 		{
@@ -150,16 +156,16 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_04986547505f", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 2},
+				{pool = "town_expansion_16eadd0282a9", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout5", name = "Hideout improvements 5"},
 			},
 			branchIndex = 5,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 			hideoutLevel = 5,
 		},
 		{
@@ -171,8 +177,8 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 2},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 2},
+				{pool = "town_expansion_26349e00c296", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout6", name = "Hideout improvements 6"},
@@ -180,7 +186,7 @@ PLUGIN:Register("ballast", {
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 6,
 		},
 		{
@@ -192,8 +198,8 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 2},
+				{pool = "town_expansion_74ccfb2736e2", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout7", name = "Hideout improvements 7"},
@@ -201,7 +207,7 @@ PLUGIN:Register("ballast", {
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 7,
 		},
 		{
@@ -213,8 +219,8 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 2},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 2},
+				{pool = "town_expansion_d24f6e6806cb", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout8", name = "Hideout improvements 8"},
@@ -222,7 +228,7 @@ PLUGIN:Register("ballast", {
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 8,
 		},
 		{
@@ -234,9 +240,9 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 3},
-				{pool = "town_expansion_fda4dd4ef7cc", quantity = 2},
-				{pool = "town_expansion_e0932fd3c709", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 3},
+				{pool = "town_expansion_16eadd0282a9", quantity = 2},
+				{pool = "town_expansion_85356b44df05", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout9", name = "Hideout improvements 9"},
@@ -244,7 +250,7 @@ PLUGIN:Register("ballast", {
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 9,
 		},
 		{
@@ -256,9 +262,9 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 3},
-				{pool = "town_expansion_fb83a12fe519", quantity = 2},
-				{pool = "town_expansion_fa83b0f0448a", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 3},
+				{pool = "town_expansion_f5c0a28eb987", quantity = 2},
+				{pool = "town_expansion_4f6e339e6499", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout10", name = "Hideout improvements 10"},
@@ -271,7 +277,7 @@ PLUGIN:Register("ballast", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 10,
 		},
 		{
@@ -283,9 +289,9 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 3},
-				{pool = "town_expansion_932cad484c99", quantity = 2},
-				{pool = "town_expansion_3fe1d9dec611", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 3},
+				{pool = "town_expansion_c37905912f9c", quantity = 2},
+				{pool = "town_expansion_cab385be9728", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout11", name = "Hideout improvements 11"},
@@ -298,7 +304,7 @@ PLUGIN:Register("ballast", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 11,
 		},
 		{
@@ -310,10 +316,10 @@ PLUGIN:Register("ballast", {
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 4},
-				{pool = "town_expansion_e1c07ad932da", quantity = 3},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 2},
-				{pool = "town_expansion_2f1adee2ea00", quantity = 1},
+				{pool = "town_expansion_3697657ea4c2", quantity = 4},
+				{pool = "town_expansion_16eadd0282a9", quantity = 3},
+				{pool = "town_expansion_4758fc5afaa5", quantity = 2},
+				{pool = "town_expansion_5a1a3b84317a", quantity = 1},
 			},
 			services = {
 				{id = "ballastHideout12", name = "Hideout improvements 12"},
@@ -326,7 +332,7 @@ PLUGIN:Register("ballast", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 			hideoutLevel = 12,
 		},
 	},

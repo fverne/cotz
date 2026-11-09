@@ -19,7 +19,7 @@ POOL_FILE = ROOT / "gamemodes/ix_cotz/plugins/progression/definitions/sh_require
 MARKER = "-- Generated town expansion pools; see docs/npc-overhaul/tools/expand_progression.py.\n"
 SCIENCE = {"intern", "egghead", "beanstalk"}
 MAP_LABELS = supply.REGION_LABELS
-POLICY = 3
+POLICY = 4
 
 
 def lua(value, indent=0):
@@ -85,6 +85,9 @@ def allowed_maps(home, index, length):
     if index == 0 or length == 1:
         return [home]
     phase = index / (length - 1)
+    # Opening Marsh work must never roll a later-map-only item, including on short branches.
+    if home == "rp_marsh_cs" and (index < 2 or phase < 0.45):
+        return [home]
     maps = {home, "rp_marsh_cs", "rp_garbage_cotz"}
     if phase >= 0.45:
         maps.add("rp_waystation")
@@ -163,25 +166,44 @@ def build_sources(data, rates, families):
 
 def author_requirements(data, rates, sources):
     pools, lookup = {}, {}
-    themes = {theme: {row["item"] for pool in ids for row in data["pools"][pool]["candidates"]
-                      if row["item"] in sources and sources[row["item"]]["kind"] == "valuable"}
-              for theme, ids in supply.THEMES.items()}
-    # Borrow practical local supplies before specialist themes on Garbage.
-    primary = {"wake": "textiles", "spool": "workshop", "vesper": "military"}
 
-    def get_pool(items, theme, maps, band):
-        key = (tuple(sorted(items)), theme, tuple(maps), band)
+    def get_pool(items, label, maps, band):
+        key = (tuple(sorted(items)), label, tuple(maps), band)
         if key not in lookup:
             identifier = "town_expansion_" + hashlib.sha256(json.dumps(key).encode()).hexdigest()[:12]
             lookup[key] = identifier
             pools[identifier] = {
-                "name": supply.LABELS[theme] + " (" + ", ".join(MAP_LABELS[m] for m in maps) + ")",
+                "name": label + " (" + ", ".join(MAP_LABELS[m] for m in maps) + ")",
                 "tier": ("common", "uncommon", "rare", "rare")[band],
                 "candidates": [{"item": item} for item in sorted(items)],
             }
         return lookup[key]
 
+    def select_group(names, maps, band, used, seed, variant):
+        for offset in range(len(names)):
+            name = names[(seed + offset) % len(names)]
+            candidates = {row["item"] for row in data["pools"][name]["candidates"]}
+            candidates = [item for item in candidates - used if item in sources
+                          and sources[item]["kind"] == "valuable"
+                          and any(m in sources[item]["maps"] for m in maps)]
+            if not candidates:
+                continue
+            def score(item):
+                return sum(sum(v[0] for v in rates[m].get(item, {}).values()) for m in maps)
+            candidates.sort(key=lambda item: (-score(item), item))
+            width = max(1, min(8, (len(candidates) + 3) // 4))
+            start = (len(candidates) * band // 4 + variant) % len(candidates)
+            items = set(candidates[start:start + width])
+            return items, data["pools"][name]["name"]
+        return set(), ""
+
     for slug, contact in sorted(data["contacts"].items()):
+        if not contact["progression"]:
+            continue
+        identity = contact["progressionIdentity"]
+        assert identity["core"] and identity["support"], slug
+        for name in identity["core"] + identity["support"]:
+            assert name in data["pools"], (slug, name)
         previous_by_branch = {}
         for ordinal, step in enumerate(contact["progression"]):
             maps = step["acquisitionMaps"]
@@ -190,48 +212,45 @@ def author_requirements(data, rates, sources):
             cap = 0 if original_index == 0 else (2 if phase >= 0.75 else 1)
             count = len(step["requirements"])
             expanded = min(cap, count)
-            used, slots = set(), []
-            # Direct equipment science milestones retain artifact identities and quantities.
             science = slug in SCIENCE and not step.get("intermissionFor")
-            theme = primary.get(slug, supply.CONTACT_THEMES[slug])
-            cycle = list(dict.fromkeys([theme] + sorted(themes)))
-            for index, slot in enumerate(step["requirements"]):
-                slot_maps = maps if index >= count - expanded else [contact["map"]]
-                if science:
-                    # On regeneration use the original family stored beside the generated pool.
-                    source_pool = slot.get("artifactPool", slot["pool"])
-                    items = {c["item"] for c in data["pools"][source_pool]["candidates"]
-                             if c["item"] in sources and any(m in sources[c["item"]]["maps"] for m in slot_maps)}
-                    assert items and all(sources[i]["kind"] == "artifact" for i in items)
-                    pool = get_pool(items, "research", slot_maps, index)
-                    slots.append({"pool": pool, "quantity": slot["quantity"], "artifactPool": source_pool})
+            attempts = max(len(identity["core"]), len(identity["support"]))
+            for attempt in range(attempts * 8):
+                used, slots, signature = set(), [], []
+                for index, slot in enumerate(step["requirements"]):
+                    slot_maps = maps if index >= count - expanded else [contact["map"]]
+                    artifact_pool = None
+                    if science:
+                        artifact_pool = slot.get("artifactPool", slot["pool"])
+                        items = {c["item"] for c in data["pools"][artifact_pool]["candidates"]
+                                 if c["item"] in sources
+                                 and any(m in sources[c["item"]]["maps"] for m in slot_maps)}
+                        assert items and all(sources[i]["kind"] == "artifact" for i in items)
+                        label = data["pools"][artifact_pool]["name"]
+                    else:
+                        # Core work owns every high-quantity slot. Only the smallest slot may borrow support.
+                        names = identity["support"] if count >= 3 and index == count - 1 else identity["core"]
+                        seed, variant = ordinal + index + attempt, attempt // attempts
+                        items, label = select_group(names, slot_maps, index, used, seed, variant)
+                        if not items and names is identity["support"]:
+                            items, label = select_group(identity["core"], slot_maps, index, used, seed, variant)
+                        if not items:
+                            break
                     used.update(items)
-                    continue
-                items = set()
-                for offset in range(len(cycle)):
-                    candidate_theme = cycle[(ordinal + index + offset) % len(cycle)]
-                    candidates = [i for i in themes[candidate_theme] - used
-                                  if any(m in sources[i]["maps"] for m in slot_maps)]
-                    if not candidates:
-                        continue
-                    def score(item):
-                        return sum(sum(v[0] for v in rates[m].get(item, {}).values()) for m in slot_maps)
-                    candidates.sort(key=lambda item: (-score(item), item))
-                    start = len(candidates) * index // 4
-                    end = max(start + 1, len(candidates) * (index + 1) // 4)
-                    items = set(candidates[start:end][:8])
-                    # A repeated single-slot request must actually offer different materials.
-                    previous = previous_by_branch.get(step["branch"])
-                    if count == 1 and previous == items:
-                        continue
+                    pool = get_pool(items, identity["name"] + ": " + label, slot_maps, index)
+                    requirement = {"pool": pool, "quantity": slot["quantity"]}
+                    if artifact_pool:
+                        requirement["artifactPool"] = artifact_pool
+                    slots.append(requirement)
+                    signature.append((tuple(sorted(items)), slot["quantity"]))
+                if len(slots) == count and signature != previous_by_branch.get(step["branch"]):
                     break
-                assert items, (slug, step["id"], index)
-                used.update(items)
-                slots.append({"pool": get_pool(items, candidate_theme, slot_maps, index),
-                              "quantity": slot["quantity"]})
+            else:
+                raise ValueError(f"No varied, disjoint specialty request for {slug}: {step['id']}")
             step["requirements"] = slots
-            previous_by_branch[step["branch"]] = used
-    return pools
+            previous_by_branch[step["branch"]] = signature
+    referenced = {slot["pool"] for contact in data["contacts"].values()
+                  for step in contact["progression"] for slot in step["requirements"]}
+    return {name: pool for name, pool in pools.items() if name in referenced}
 
 
 def render_contact(source, steps):

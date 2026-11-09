@@ -86,6 +86,16 @@ PLUGIN:Register("intern", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Detector calibration and survey equipment",
+		core = {
+			"field_instruments",
+			"valuables_survey_equipment",
+			"valuables_sample_carriers",
+		},
+		support = {"batteries", "valuables_technical_records"},
+	},
+
 	progression = {
 		{
 			id = "v3/artifact-detectors/detectorecho",
@@ -97,7 +107,7 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_a9a6a4663f7e",
 					quantity = 1,
 					artifactPool = "common_artifacts",
 				},
@@ -105,7 +115,7 @@ PLUGIN:Register("intern", {
 			branchIndex = 1,
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/artifact-detectors/detectorbear/stock",
@@ -116,8 +126,8 @@ PLUGIN:Register("intern", {
 			briefing = "I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely on the readings. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
-				{pool = "town_expansion_c72e02d3eea4", quantity = 1},
+				{pool = "town_expansion_8619904d9216", quantity = 1},
+				{pool = "town_expansion_eb7056313562", quantity = 1},
 			},
 			stock = {
 				items = {"detectorecho"},
@@ -126,8 +136,8 @@ PLUGIN:Register("intern", {
 			intermissionFor = "v3/artifact-detectors/detectorbear",
 			branchIndex = 2,
 			branchLength = 3,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/artifact-detectors/detectorbear",
@@ -142,20 +152,20 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_a9a6a4663f7e",
 					quantity = 2,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_184da1a90e1f",
+					pool = "town_expansion_6af4f494aa60",
 					quantity = 1,
 					artifactPool = "electrical_artifacts",
 				},
 			},
 			branchIndex = 2,
 			branchLength = 3,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/artifact-detectors/detectorveles/stock",
@@ -166,10 +176,10 @@ PLUGIN:Register("intern", {
 			briefing = "I am preparing my own survey supplies. I want to check them myself before I ask anyone to rely on the readings. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_b4b1617dad8f", quantity = 2},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
-				{pool = "town_expansion_b29bf8ba53a6", quantity = 1},
+				{pool = "town_expansion_96f10f2d5514", quantity = 2},
+				{pool = "town_expansion_7056d335ecb3", quantity = 2},
+				{pool = "town_expansion_e010d2b94975", quantity = 1},
+				{pool = "town_expansion_52c92cccdf1a", quantity = 1},
 			},
 			stock = {
 				items = {"detectorbear"},
@@ -184,7 +194,7 @@ PLUGIN:Register("intern", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/artifact-detectors/detectorveles",
@@ -199,22 +209,22 @@ PLUGIN:Register("intern", {
 			completion = "Thanks. I will check these against my preparation list.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_a9a6a4663f7e",
 					quantity = 4,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_585a30ca3e50",
+					pool = "town_expansion_6af4f494aa60",
 					quantity = 3,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_58ae5705a90d",
+					pool = "town_expansion_9ee1d71f61fc",
 					quantity = 2,
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_db45db685698",
+					pool = "town_expansion_eb5fb8c496fa",
 					quantity = 1,
 					artifactPool = "exceptional_artifacts",
 				},
@@ -227,7 +237,7 @@ PLUGIN:Register("intern", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

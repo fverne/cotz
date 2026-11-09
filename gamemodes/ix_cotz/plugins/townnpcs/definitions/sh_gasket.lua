@@ -216,6 +216,12 @@ PLUGIN:Register("gasket", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Generator parts and camp electrics",
+		core = {"heavy_components", "engine_care", "valuables_electrical_supplies"},
+		support = {"fuel", "repair_electrical"},
+	},
+
 	progression = {
 		{
 			id = "v3/sidearms/tokarev",
@@ -226,12 +232,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/makarov",
@@ -242,12 +248,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/lugerp08/stock",
@@ -258,7 +264,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
 			},
 			stock = {
 				items = {"makarov"},
@@ -267,8 +273,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/lugerp08",
 			branchIndex = 3,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/lugerp08",
@@ -279,12 +285,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/cz52/stock",
@@ -295,7 +301,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
 			},
 			stock = {
 				items = {"lugerp08"},
@@ -304,8 +310,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/cz52",
 			branchIndex = 4,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/cz52",
@@ -316,12 +322,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/c96/stock",
@@ -332,7 +338,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			stock = {
 				items = {"cz52"},
@@ -341,8 +347,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/c96",
 			branchIndex = 5,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/c96",
@@ -353,12 +359,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_79ec06859af2", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/lax410s/stock",
@@ -369,7 +375,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_1040d77788e5", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
 			},
 			stock = {
 				items = {"c96"},
@@ -378,8 +384,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/lax410s",
 			branchIndex = 6,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/lax410s",
@@ -390,12 +396,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_205de1f97475", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/fort12/stock",
@@ -406,7 +412,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_ff9221acd69b", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
 			},
 			stock = {
 				items = {"lax410s"},
@@ -415,8 +421,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/fort12",
 			branchIndex = 7,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/fort12",
@@ -427,12 +433,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_b21cf405c5c4", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/brhp/stock",
@@ -443,7 +449,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_d15882f78941", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			stock = {
 				items = {"fort12"},
@@ -452,8 +458,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/brhp",
 			branchIndex = 8,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/brhp",
@@ -464,12 +470,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/beretta92/stock",
@@ -480,7 +486,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
 			},
 			stock = {
 				items = {"brhp"},
@@ -489,8 +495,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/beretta92",
 			branchIndex = 9,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/beretta92",
@@ -501,12 +507,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/p99",
@@ -517,13 +523,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_04986547505f", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_d6c5d23e18c2", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/glock17/stock",
@@ -534,8 +540,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 1},
-				{pool = "town_expansion_d24081910c9c", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
+				{pool = "town_expansion_fc74b146585d", quantity = 1},
 			},
 			stock = {
 				items = {"p99"},
@@ -544,8 +550,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/glock17",
 			branchIndex = 11,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/glock17",
@@ -556,13 +562,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 2},
-				{pool = "town_expansion_0a6023934ee5", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_788e192251f9", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/m1911/stock",
@@ -573,8 +579,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 1},
-				{pool = "town_expansion_39848af619f5", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
+				{pool = "town_expansion_d6c5d23e18c2", quantity = 1},
 			},
 			stock = {
 				items = {"glock17"},
@@ -583,8 +589,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/sidearms/m1911",
 			branchIndex = 12,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/m1911",
@@ -595,13 +601,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 2},
-				{pool = "town_expansion_1d05891dc677", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 2},
+				{pool = "town_expansion_fc74b146585d", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 26,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/stechaps/stock",
@@ -612,8 +618,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 1},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
+				{pool = "town_expansion_e16ed7fa1263", quantity = 1},
 			},
 			stock = {
 				items = {"m1911"},
@@ -623,7 +629,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 13,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/stechaps",
@@ -634,13 +640,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 2},
-				{pool = "town_expansion_84052fb593e1", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_60b912ae02db", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/glock18/stock",
@@ -651,8 +657,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 1},
-				{pool = "town_expansion_c7a9e23ca4f1", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
+				{pool = "town_expansion_f50b2e529bc8", quantity = 1},
 			},
 			stock = {
 				items = {"stechaps"},
@@ -662,7 +668,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 14,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/glock18",
@@ -673,13 +679,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_e16ed7fa1263", quantity = 1},
 			},
 			branchIndex = 14,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/g2contender500/stock",
@@ -690,8 +696,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
-				{pool = "town_expansion_c72e02d3eea4", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
+				{pool = "town_expansion_60b912ae02db", quantity = 1},
 			},
 			stock = {
 				items = {"glock18"},
@@ -701,7 +707,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 15,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/g2contender500",
@@ -712,13 +718,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 2},
-				{pool = "town_expansion_a2ba92d63b91", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 2},
+				{pool = "town_expansion_f50b2e529bc8", quantity = 1},
 			},
 			branchIndex = 15,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/mr96/stock",
@@ -729,8 +735,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 1},
-				{pool = "town_expansion_6e7fa9e45a6a", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
+				{pool = "town_expansion_e16ed7fa1263", quantity = 1},
 			},
 			stock = {
 				items = {"g2contender500"},
@@ -740,7 +746,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 16,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/mr96",
@@ -751,13 +757,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_dc60e627422e", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_60b912ae02db", quantity = 1},
 			},
 			branchIndex = 16,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/swr8/stock",
@@ -768,8 +774,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 1},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
+				{pool = "town_expansion_f50b2e529bc8", quantity = 1},
 			},
 			stock = {
 				items = {"mr96"},
@@ -779,7 +785,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 17,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/swr8",
@@ -790,13 +796,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_e16ed7fa1263", quantity = 1},
 			},
 			branchIndex = 17,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/taurusjudge/stock",
@@ -807,9 +813,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 2},
-				{pool = "town_expansion_e1c07ad932da", quantity = 1},
-				{pool = "town_expansion_770c3ee71133", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_d6c5d23e18c2", quantity = 1},
+				{pool = "town_expansion_6c9760b93b21", quantity = 1},
 			},
 			stock = {
 				items = {"swr8"},
@@ -819,7 +825,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 18,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/taurusjudge",
@@ -830,14 +836,14 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 3},
-				{pool = "town_expansion_9c982c714006", quantity = 2},
-				{pool = "town_expansion_b2529eb81b13", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 3},
+				{pool = "town_expansion_fc74b146585d", quantity = 2},
+				{pool = "town_expansion_3271fccf8909", quantity = 1},
 			},
 			branchIndex = 18,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/swmodel29/stock",
@@ -848,9 +854,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 2},
-				{pool = "town_expansion_fda4dd4ef7cc", quantity = 1},
-				{pool = "town_expansion_1d9fa9f71a1a", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_788e192251f9", quantity = 1},
+				{pool = "town_expansion_6c9760b93b21", quantity = 1},
 			},
 			stock = {
 				items = {"taurusjudge"},
@@ -860,7 +866,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 19,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/swmodel29",
@@ -871,14 +877,14 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 3},
-				{pool = "town_expansion_7d28c2c9e8f6", quantity = 2},
-				{pool = "town_expansion_e0932fd3c709", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 3},
+				{pool = "town_expansion_d6c5d23e18c2", quantity = 2},
+				{pool = "town_expansion_3271fccf8909", quantity = 1},
 			},
 			branchIndex = 19,
 			branchLength = 26,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/taurusragingbull/stock",
@@ -889,9 +895,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 2},
-				{pool = "town_expansion_841e33ce1093", quantity = 1},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 2},
+				{pool = "town_expansion_3c5d3a21e4ac", quantity = 1},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			stock = {
 				items = {"swmodel29"},
@@ -906,7 +912,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/taurusragingbull",
@@ -917,9 +923,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 3},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 2},
-				{pool = "town_expansion_ef51ae31f87b", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 3},
+				{pool = "town_expansion_f8f7d2716425", quantity = 2},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			branchIndex = 20,
 			branchLength = 26,
@@ -929,7 +935,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/mateba/stock",
@@ -940,9 +946,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 2},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 1},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_0f35527c9565", quantity = 1},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			stock = {
 				items = {"taurusragingbull"},
@@ -957,7 +963,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/mateba",
@@ -968,9 +974,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 3},
-				{pool = "town_expansion_953fc3f79c23", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 3},
+				{pool = "town_expansion_3c5d3a21e4ac", quantity = 2},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			branchIndex = 21,
 			branchLength = 26,
@@ -980,7 +986,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/deagle44/stock",
@@ -991,9 +997,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_f8f7d2716425", quantity = 1},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			stock = {
 				items = {"mateba"},
@@ -1008,7 +1014,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/deagle44",
@@ -1019,9 +1025,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 3},
-				{pool = "town_expansion_84ea62849c8a", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 3},
+				{pool = "town_expansion_0f35527c9565", quantity = 2},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			branchIndex = 22,
 			branchLength = 26,
@@ -1031,7 +1037,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/m1911chic/stock",
@@ -1042,9 +1048,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 2},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 1},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 2},
+				{pool = "town_expansion_3c5d3a21e4ac", quantity = 1},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			stock = {
 				items = {"deagle44"},
@@ -1059,7 +1065,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/m1911chic",
@@ -1070,9 +1076,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 3},
-				{pool = "town_expansion_0080d0807602", quantity = 2},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 3},
+				{pool = "town_expansion_f8f7d2716425", quantity = 2},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			branchIndex = 23,
 			branchLength = 26,
@@ -1082,7 +1088,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/fiveseven/stock",
@@ -1093,9 +1099,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 2},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 1},
-				{pool = "town_expansion_0afe99a3b951", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_0f35527c9565", quantity = 1},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			stock = {
 				items = {"m1911chic"},
@@ -1110,7 +1116,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/fiveseven",
@@ -1121,9 +1127,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 3},
-				{pool = "town_expansion_6e9c8b03f6ea", quantity = 2},
-				{pool = "town_expansion_c9b4e5432709", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 3},
+				{pool = "town_expansion_3c5d3a21e4ac", quantity = 2},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			branchIndex = 24,
 			branchLength = 26,
@@ -1133,7 +1139,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/deagle/stock",
@@ -1144,9 +1150,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 2},
-				{pool = "town_expansion_9234fbb8b48d", quantity = 1},
-				{pool = "town_expansion_ac820c4fc1eb", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_f8f7d2716425", quantity = 1},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			stock = {
 				items = {"fiveseven"},
@@ -1161,7 +1167,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/deagle",
@@ -1172,9 +1178,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 3},
-				{pool = "town_expansion_2d4c7e727210", quantity = 2},
-				{pool = "town_expansion_f76b76c8c0ff", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 3},
+				{pool = "town_expansion_0f35527c9565", quantity = 2},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			branchIndex = 25,
 			branchLength = 26,
@@ -1184,7 +1190,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/sw500/stock",
@@ -1195,10 +1201,10 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 2},
-				{pool = "town_expansion_81f71d78a240", quantity = 2},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
-				{pool = "town_expansion_2f1adee2ea00", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 2},
+				{pool = "town_expansion_fc74b146585d", quantity = 2},
+				{pool = "town_expansion_82e6ecac5721", quantity = 1},
+				{pool = "town_expansion_db0030055af8", quantity = 1},
 			},
 			stock = {
 				items = {"deagle"},
@@ -1213,7 +1219,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/sidearms/sw500",
@@ -1224,10 +1230,10 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 4},
-				{pool = "town_expansion_fbb4d32b63fa", quantity = 3},
-				{pool = "town_expansion_ef51ae31f87b", quantity = 2},
-				{pool = "town_expansion_b050bc99fb5c", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 4},
+				{pool = "town_expansion_788e192251f9", quantity = 3},
+				{pool = "town_expansion_0472c56bce94", quantity = 2},
+				{pool = "town_expansion_7cff415a04b7", quantity = 1},
 			},
 			branchIndex = 26,
 			branchLength = 26,
@@ -1237,7 +1243,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_moonshine",
@@ -1248,12 +1254,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 11,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_2",
@@ -1264,12 +1270,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 11,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_1/stock",
@@ -1280,7 +1286,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			stock = {
 				items = {"drink_vodka_2"},
@@ -1289,8 +1295,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/strong-alcohol/drink_vodka_1",
 			branchIndex = 3,
 			branchLength = 11,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_1",
@@ -1304,12 +1310,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 11,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_3/stock",
@@ -1320,7 +1326,7 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
 			},
 			stock = {
 				items = {"drink_vodka_1"},
@@ -1329,8 +1335,8 @@ PLUGIN:Register("gasket", {
 			intermissionFor = "v3/strong-alcohol/drink_vodka_3",
 			branchIndex = 4,
 			branchLength = 11,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_3",
@@ -1344,12 +1350,12 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 11,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_wine",
@@ -1360,13 +1366,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 2},
-				{pool = "town_expansion_39848af619f5", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_d6c5d23e18c2", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 11,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_6/stock",
@@ -1377,8 +1383,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 1},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 1},
+				{pool = "town_expansion_f50b2e529bc8", quantity = 1},
 			},
 			stock = {
 				items = {"drink_wine"},
@@ -1388,7 +1394,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 6,
 			branchLength = 11,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_6",
@@ -1399,13 +1405,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 2},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_e16ed7fa1263", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 11,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_4/stock",
@@ -1416,8 +1422,8 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 1},
-				{pool = "town_expansion_84052fb593e1", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 1},
+				{pool = "town_expansion_60b912ae02db", quantity = 1},
 			},
 			stock = {
 				items = {"drink_vodka_6"},
@@ -1427,7 +1433,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 7,
 			branchLength = 11,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_4",
@@ -1441,13 +1447,13 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 2},
-				{pool = "town_expansion_c7a9e23ca4f1", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 2},
+				{pool = "town_expansion_f50b2e529bc8", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 11,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_spirit_1/stock",
@@ -1458,9 +1464,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 2},
-				{pool = "town_expansion_fbb4d32b63fa", quantity = 1},
-				{pool = "town_expansion_ac21a20d9c77", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_788e192251f9", quantity = 1},
+				{pool = "town_expansion_3271fccf8909", quantity = 1},
 			},
 			stock = {
 				items = {"drink_vodka_4"},
@@ -1470,7 +1476,7 @@ PLUGIN:Register("gasket", {
 			branchIndex = 8,
 			branchLength = 11,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_spirit_1",
@@ -1484,14 +1490,14 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 3},
-				{pool = "town_expansion_6087c7d97b09", quantity = 2},
-				{pool = "town_expansion_33716461332d", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 3},
+				{pool = "town_expansion_d6c5d23e18c2", quantity = 2},
+				{pool = "town_expansion_6c9760b93b21", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 11,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_5/stock",
@@ -1502,9 +1508,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 2},
-				{pool = "town_expansion_953fc3f79c23", quantity = 1},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 2},
+				{pool = "town_expansion_3c5d3a21e4ac", quantity = 1},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			stock = {
 				items = {"drink_spirit_1"},
@@ -1519,7 +1525,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_vodka_5",
@@ -1533,9 +1539,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 3},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 2},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 3},
+				{pool = "town_expansion_f8f7d2716425", quantity = 2},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 11,
@@ -1545,7 +1551,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_spirit_2/stock",
@@ -1556,9 +1562,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_84ea62849c8a", quantity = 1},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 2},
+				{pool = "town_expansion_0f35527c9565", quantity = 1},
+				{pool = "town_expansion_69bc1d002826", quantity = 1},
 			},
 			stock = {
 				items = {"drink_vodka_5"},
@@ -1573,7 +1579,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_spirit_2",
@@ -1587,9 +1593,9 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 3},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_4bfccdaafb2b", quantity = 3},
+				{pool = "town_expansion_3c5d3a21e4ac", quantity = 2},
+				{pool = "town_expansion_c985d902ec49", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 11,
@@ -1599,7 +1605,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_spirit_3/stock",
@@ -1610,10 +1616,10 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 2},
-				{pool = "town_expansion_80df732e12c0", quantity = 2},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
-				{pool = "town_expansion_fa02a76a2a16", quantity = 1},
+				{pool = "town_expansion_8f7eb7df4c4a", quantity = 2},
+				{pool = "town_expansion_788e192251f9", quantity = 2},
+				{pool = "town_expansion_0472c56bce94", quantity = 1},
+				{pool = "town_expansion_7cff415a04b7", quantity = 1},
 			},
 			stock = {
 				items = {"drink_spirit_2"},
@@ -1628,7 +1634,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-alcohol/drink_spirit_3",
@@ -1642,10 +1648,10 @@ PLUGIN:Register("gasket", {
 			briefing = "There are supplies missing again. Everybody notices when something stops working; fewer people notice what it takes to keep it going. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Leave those where I can reach them. Someone will need them soon enough.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 4},
-				{pool = "town_expansion_e1c07ad932da", quantity = 3},
-				{pool = "town_expansion_0afe99a3b951", quantity = 2},
-				{pool = "town_expansion_a491d73ec5f1", quantity = 1},
+				{pool = "town_expansion_2945fb1eda72", quantity = 4},
+				{pool = "town_expansion_d6c5d23e18c2", quantity = 3},
+				{pool = "town_expansion_ac72c1e686ce", quantity = 2},
+				{pool = "town_expansion_db0030055af8", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 11,
@@ -1655,7 +1661,7 @@ PLUGIN:Register("gasket", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

@@ -51,25 +51,57 @@ Validation passed.
 | vesper | 31 | 31 | 0 | 0 |
 | wake | 38 | 38 | 0 | 0 |
 
+## Request specialties
+
+At least 75% of requested units stay with the contact's core work. Only the smallest slot of three-/four-slot requests may use related support goods. Scientist equipment research retains its artifact requirements. Marsh openings remain fully locally obtainable.
+
+| Contact | Specialty | Core pools | Related support pools |
+| --- | --- | --- | --- |
+| atlas | Survey notes and measuring instruments | valuables_field_records, valuables_instruments | valuables_survey_equipment, valuables_recording_equipment |
+| ballast | Freight cases and cargo packing | town_textiles, valuables_transit_cases, valuables_reinforced_cases | valuables_textile_supplies, valuables_fuel_supplies |
+| beanstalk | Field samples and laboratory containment | valuables_research_samples, valuables_sample_carriers | valuables_filtration, documents_research |
+| boss | Ordnance and protective equipment | valuables_ordnance_salvage, valuables_armour_panels | valuables_secured_cases, valuables_military_cases |
+| brass | Reloading components and ammunition storage | powder, valuables_military_cases, maintenance | valuables_drivers_wrenches, valuables_equipment_pouches |
+| carbon | Historical documents and technical records | documents_field, documents_technical, documents_research, valuables_technical_records | valuables_printed_material, valuables_recording_equipment |
+| cleaner | Storage upkeep and discreet containers | valuables_cleaning_supplies, valuables_secured_cases | valuables_transit_cases, valuables_workshop_consumables |
+| egghead | Laboratory containment and research reagents | valuables_medical_equipment, valuables_filtration, valuables_research_injectors_a, valuables_research_injectors_b, valuables_research_samples | valuables_instruments |
+| gasket | Generator parts and camp electrics | heavy_components, engine_care, valuables_electrical_supplies | fuel, repair_electrical |
+| haggler | Resale curios and small valuables | small_valuables, valuables_decorative_valuables, statues | valuables_personal_effects, valuables_transit_cases |
+| intern | Detector calibration and survey equipment | field_instruments, valuables_survey_equipment, valuables_sample_carriers | batteries, valuables_technical_records |
+| jitters | Clinical supplies and trauma equipment | valuables_clinical_supplies, valuables_trauma_supplies, valuables_medical_equipment | valuables_filtration, valuables_research_samples |
+| latch | Workshop tools and fabrication materials | valuables_workshop_tools, valuables_cutting_tools, valuables_workshop_consumables | valuables_armour_panels, valuables_protective_textiles |
+| ledger | Consignment paperwork and secure dispatches | valuables_office_records, administrative_documents, valuables_secured_cases | valuables_transit_cases, valuables_field_records |
+| mute | Radio infrastructure and network components | valuables_radio_components, valuables_radio_equipment, small_electronics | valuables_flash_media, valuables_portable_power |
+| old-timer | Trail repairs and camp supplies | field_maintenance, valuables_fuel_supplies | valuables_cutting_tools, valuables_textile_supplies |
+| quartermaster | Field issue kits and military packing | valuables_equipment_pouches, valuables_protective_textiles, valuables_military_cases | administrative_documents, valuables_armour_panels |
+| smartass | Computer hardware and data media | small_electronics, valuables_computer_parts, valuables_portable_computers, valuables_control_electronics, valuables_flash_media | valuables_electronic_components, valuables_technical_records |
+| spicy-lemon | Kitchen stores and cooking fuel | valuables_provisions, fuel | cleaning, valuables_fuel_supplies |
+| spool | Receivers, communications parts and recordings | consumer_electronics, radio_components, valuables_recording_equipment | valuables_portable_power, valuables_electrical_supplies |
+| spoor | Hunting equipment care and field observations | maintenance, valuables_field_records | valuables_cutting_tools, valuables_instruments |
+| suture | Cloth, protective layers and sewing supplies | valuables_textile_supplies, valuables_protective_textiles | valuables_cutting_tools, valuables_armour_panels |
+| technut | Precision tools and mechanical repair parts | valuables_repair_parts, valuables_drivers_wrenches, basic_tools, advanced_parts, specialty_tools | valuables_workshop_consumables, valuables_electrical_supplies |
+| vesper | Expedition instruments and field preparation | valuables_instruments, valuables_survey_equipment, field_maintenance | valuables_sample_carriers, valuables_equipment_pouches |
+| wake | Personal effects and recovered belongings | valuables_equipment_pouches, valuables_personal_effects, small_valuables | valuables_office_records, valuables_transit_cases |
+
 ## Every progression step
 
 | Contact | Step | Functional unlocks | TODO unlocks | Supplementary rewards |
 | --- | --- | --- | --- | --- |
 | atlas | v3/binoculars/binoculars_2 | Purchase: binoculars_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| atlas | v3/binoculars/binoculars_1 | Purchase: binoculars_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| atlas | v3/binoculars/binoculars_1 | Purchase: binoculars_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | atlas | v3/binoculars/binoculars_4/stock | Stock: binoculars_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | atlas | v3/binoculars/binoculars_4 | Purchase: binoculars_4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | atlas | v3/binoculars/binoculars_3/stock | Stock: binoculars_4 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | atlas | v3/binoculars/binoculars_3 | Purchase: binoculars_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | atlas | v3/instruments/geigercounter | Purchase: geigercounter | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| atlas | v3/instruments/gpstracker | Purchase: gpstracker | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| atlas | v3/instruments/gpstracker | Purchase: gpstracker | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | atlas | v3/anomaly-detector/anomalydetector | Purchase: anomalydetector | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | atlas | v3/headlamp/headlamp | Purchase: headlamp | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | ballast | v3/hideout/01 | Hideout improvements 1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| ballast | v3/hideout/02 | Hideout improvements 2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| ballast | v3/hideout/03 | Hideout improvements 3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| ballast | v3/hideout/04 | Hideout improvements 4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| ballast | v3/hideout/05 | Hideout improvements 5 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| ballast | v3/hideout/02 | Hideout improvements 2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| ballast | v3/hideout/03 | Hideout improvements 3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| ballast | v3/hideout/04 | Hideout improvements 4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| ballast | v3/hideout/05 | Hideout improvements 5 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | ballast | v3/hideout/06 | Hideout improvements 6 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | ballast | v3/hideout/07 | Hideout improvements 7 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | ballast | v3/hideout/08 | Hideout improvements 8 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -78,17 +110,17 @@ Validation passed.
 | ballast | v3/hideout/11 | Hideout improvements 11 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | ballast | v3/hideout/12 | Hideout improvements 12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | beanstalk | v3/suppressors/tundrasuppressor | Purchase: tundrasuppressor | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| beanstalk | v3/suppressors/cobrasuppressor/stock | Stock: tundrasuppressor +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| beanstalk | v3/suppressors/cobrasuppressor | Purchase: cobrasuppressor | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| beanstalk | v3/suppressors/cobrasuppressor/stock | Stock: tundrasuppressor +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| beanstalk | v3/suppressors/cobrasuppressor | Purchase: cobrasuppressor | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | beanstalk | v3/suppressors/pbssuppressor/stock | Stock: cobrasuppressor +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | beanstalk | v3/suppressors/pbssuppressor | Purchase: pbssuppressor | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | beanstalk | v3/suppressors/sakersuppressor/stock | Stock: pbssuppressor +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | beanstalk | v3/suppressors/sakersuppressor | Purchase: sakersuppressor | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | beanstalk | v3/red-dots/trijiconrmr | Purchase: trijiconrmr | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| beanstalk | v3/red-dots/kobra/stock | Stock: trijiconrmr +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| beanstalk | v3/red-dots/kobra | Purchase: kobra | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| beanstalk | v3/red-dots/microt1/stock | Stock: kobra +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| beanstalk | v3/red-dots/microt1 | Purchase: microt1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| beanstalk | v3/red-dots/kobra/stock | Stock: trijiconrmr +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| beanstalk | v3/red-dots/kobra | Purchase: kobra | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| beanstalk | v3/red-dots/microt1/stock | Stock: kobra +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| beanstalk | v3/red-dots/microt1 | Purchase: microt1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | beanstalk | v3/red-dots/eotech/stock | Stock: microt1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | beanstalk | v3/red-dots/eotech | Purchase: eotech | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | beanstalk | v3/red-dots/cmore/stock | Stock: eotech +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -96,8 +128,8 @@ Validation passed.
 | beanstalk | v3/red-dots/aimpoint/stock | Stock: cmore +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | beanstalk | v3/red-dots/aimpoint | Purchase: aimpoint | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | beanstalk | v3/optics/kingarmsmr | Purchase: kingarmsmr | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| beanstalk | v3/optics/pso1/stock | Stock: kingarmsmr +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| beanstalk | v3/optics/pso1 | Purchase: pso1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| beanstalk | v3/optics/pso1/stock | Stock: kingarmsmr +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| beanstalk | v3/optics/pso1 | Purchase: pso1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | beanstalk | v3/optics/shortdot/stock | Stock: pso1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | beanstalk | v3/optics/shortdot | Purchase: shortdot | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | beanstalk | v3/optics/acog/stock | Stock: shortdot +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -217,31 +249,31 @@ Validation passed.
 | cleaner | v3/hideout/11 | Hideout improvements 11 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | cleaner | v3/hideout/12 | Hideout improvements 12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | egghead | v3/science-suits/suit_ssp99 | Purchase: suit_ssp99 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| egghead | v3/science-suits/suit_ssp99m/stock | Stock: suit_ssp99 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| egghead | v3/science-suits/suit_ssp99m | Purchase: suit_ssp99m | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| egghead | v3/science-suits/suit_ssp99m/stock | Stock: suit_ssp99 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| egghead | v3/science-suits/suit_ssp99m | Purchase: suit_ssp99m | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | egghead | v3/science-suits/suit_seva/stock | Stock: suit_ssp99m +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | egghead | v3/science-suits/suit_seva | Purchase: suit_seva | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/tokarev | Purchase: tokarev | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| gasket | v3/sidearms/makarov | Purchase: makarov | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/lugerp08/stock | Stock: makarov +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/lugerp08 | Purchase: lugerp08 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/cz52/stock | Stock: lugerp08 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/cz52 | Purchase: cz52 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/c96/stock | Stock: cz52 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/c96 | Purchase: c96 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/lax410s/stock | Stock: c96 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/lax410s | Purchase: lax410s | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/fort12/stock | Stock: lax410s +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/fort12 | Purchase: fort12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/brhp/stock | Stock: fort12 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/brhp | Purchase: brhp | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/beretta92/stock | Stock: brhp +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/beretta92 | Purchase: beretta92 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/p99 | Purchase: p99 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/glock17/stock | Stock: p99 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/glock17 | Purchase: glock17 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/m1911/stock | Stock: glock17 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/sidearms/m1911 | Purchase: m1911 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| gasket | v3/sidearms/makarov | Purchase: makarov | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/lugerp08/stock | Stock: makarov +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/lugerp08 | Purchase: lugerp08 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/cz52/stock | Stock: lugerp08 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/cz52 | Purchase: cz52 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/c96/stock | Stock: cz52 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/c96 | Purchase: c96 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/lax410s/stock | Stock: c96 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/lax410s | Purchase: lax410s | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/fort12/stock | Stock: lax410s +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/fort12 | Purchase: fort12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/brhp/stock | Stock: fort12 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/brhp | Purchase: brhp | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/beretta92/stock | Stock: brhp +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/beretta92 | Purchase: beretta92 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/p99 | Purchase: p99 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/glock17/stock | Stock: p99 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/glock17 | Purchase: glock17 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/m1911/stock | Stock: glock17 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/m1911 | Purchase: m1911 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | gasket | v3/sidearms/stechaps/stock | Stock: m1911 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/stechaps | Purchase: stechaps | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/glock18/stock | Stock: stechaps +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -271,12 +303,12 @@ Validation passed.
 | gasket | v3/sidearms/sw500/stock | Stock: deagle +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/sw500 | Purchase: sw500 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/strong-alcohol/drink_moonshine | Purchase: drink_moonshine | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| gasket | v3/strong-alcohol/drink_vodka_2 | Purchase: drink_vodka_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/strong-alcohol/drink_vodka_1/stock | Stock: drink_vodka_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/strong-alcohol/drink_vodka_1 | Purchase: drink_vodka_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/strong-alcohol/drink_vodka_3/stock | Stock: drink_vodka_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/strong-alcohol/drink_vodka_3 | Purchase: drink_vodka_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| gasket | v3/strong-alcohol/drink_wine | Purchase: drink_wine | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| gasket | v3/strong-alcohol/drink_vodka_2 | Purchase: drink_vodka_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/strong-alcohol/drink_vodka_1/stock | Stock: drink_vodka_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/strong-alcohol/drink_vodka_1 | Purchase: drink_vodka_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/strong-alcohol/drink_vodka_3/stock | Stock: drink_vodka_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/strong-alcohol/drink_vodka_3 | Purchase: drink_vodka_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/strong-alcohol/drink_wine | Purchase: drink_wine | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | gasket | v3/strong-alcohol/drink_vodka_6/stock | Stock: drink_wine +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/strong-alcohol/drink_vodka_6 | Purchase: drink_vodka_6 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/strong-alcohol/drink_vodka_4/stock | Stock: drink_vodka_6 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -290,20 +322,20 @@ Validation passed.
 | gasket | v3/strong-alcohol/drink_spirit_3/stock | Stock: drink_spirit_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/strong-alcohol/drink_spirit_3 | Purchase: drink_spirit_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | haggler | v3/pact-cqb/toz106 | Purchase: toz106 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| haggler | v3/pact-cqb/mp27 | Purchase: mp27 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/toz66short/stock | Stock: mp27 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/toz66short | Purchase: toz66short | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/skorpion/stock | Stock: toz66short +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/skorpion | Purchase: skorpion | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/toz34short/stock | Stock: skorpion +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/toz34short | Purchase: toz34short | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/kiparis/stock | Stock: toz34short +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/kiparis | Purchase: kiparis | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/toz66 | Purchase: toz66 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/ppsh/stock | Stock: toz66 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/ppsh | Purchase: ppsh | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/toz34/stock | Stock: ppsh +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| haggler | v3/pact-cqb/toz34 | Purchase: toz34 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| haggler | v3/pact-cqb/mp27 | Purchase: mp27 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz66short/stock | Stock: mp27 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz66short | Purchase: toz66short | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/skorpion/stock | Stock: toz66short +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/skorpion | Purchase: skorpion | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz34short/stock | Stock: skorpion +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz34short | Purchase: toz34short | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/kiparis/stock | Stock: toz34short +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/kiparis | Purchase: kiparis | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz66 | Purchase: toz66 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/ppsh/stock | Stock: toz66 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/ppsh | Purchase: ppsh | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz34/stock | Stock: ppsh +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz34 | Purchase: toz34 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | haggler | v3/pact-cqb/pp2000/stock | Stock: toz34 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | haggler | v3/pact-cqb/pp2000 | Purchase: pp2000 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | haggler | v3/pact-cqb/toz194/stock | Stock: pp2000 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -325,23 +357,23 @@ Validation passed.
 | haggler | v3/pact-cqb/saiga12/stock | Stock: toz34special +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | haggler | v3/pact-cqb/saiga12 | Purchase: saiga12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | intern | v3/artifact-detectors/detectorecho | Purchase: detectorecho | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| intern | v3/artifact-detectors/detectorbear/stock | Stock: detectorecho +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| intern | v3/artifact-detectors/detectorbear | Purchase: detectorbear | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| intern | v3/artifact-detectors/detectorbear/stock | Stock: detectorecho +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| intern | v3/artifact-detectors/detectorbear | Purchase: detectorbear | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | intern | v3/artifact-detectors/detectorveles/stock | Stock: detectorbear +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | intern | v3/artifact-detectors/detectorveles | Purchase: detectorveles | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | jitters | v3/antipsychotics/medic_antipsychotic_1 | Purchase: medic_antipsychotic_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| jitters | v3/antipsychotics/medic_antipsychotic_2 | Purchase: medic_antipsychotic_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| jitters | v3/antipsychotics/medic_antipsychotic_2 | Purchase: medic_antipsychotic_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antipsychotics/medic_antipsychotic_3/stock | Stock: medic_antipsychotic_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | jitters | v3/antipsychotics/medic_antipsychotic_3 | Purchase: medic_antipsychotic_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | jitters | v3/psy-healing/medic_psyheal_1 | Purchase: medic_psyheal_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| jitters | v3/psy-healing/medic_psyheal_2 | Purchase: medic_psyheal_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| jitters | v3/psy-healing/medic_psyheal_2 | Purchase: medic_psyheal_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/stimpaks/medic_stimpak_1 | Purchase: medic_stimpak_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| jitters | v3/stimpaks/medic_stimpak_2 | Purchase: medic_stimpak_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| jitters | v3/stimpaks/medic_stimpak_2 | Purchase: medic_stimpak_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/stimpaks/medic_stimpak_3/stock | Stock: medic_stimpak_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | jitters | v3/stimpaks/medic_stimpak_3 | Purchase: medic_stimpak_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | jitters | v3/medkits/medic_medkit_1 | Stock: medic_medkit_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| jitters | v3/medkits/medic_medkit_2 | Purchase: medic_medkit_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| jitters | v3/medkits/medic_medkit_3 | Purchase: medic_medkit_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| jitters | v3/medkits/medic_medkit_2 | Purchase: medic_medkit_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| jitters | v3/medkits/medic_medkit_3 | Purchase: medic_medkit_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/medkits/medic_medkit_4/stock | Stock: medic_medkit_3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | jitters | v3/medkits/medic_medkit_4 | Purchase: medic_medkit_4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | jitters | v3/medkits/medic_medkit_5/stock | Stock: medic_medkit_4 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -349,9 +381,9 @@ Validation passed.
 | jitters | v3/medkits/medic_medkit_6/stock | Stock: medic_medkit_5 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | jitters | v3/medkits/medic_medkit_6 | Purchase: medic_medkit_6 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | jitters | v3/bandages/medic_bandage_2 | Purchase: medic_bandage_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| jitters | v3/bandages/medic_bandage_3 | Purchase: medic_bandage_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| jitters | v3/bandages/medic_bandage_3 | Purchase: medic_bandage_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antirad/medic_antirad_1 | Purchase: medic_antirad_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| jitters | v3/antirad/medic_antirad_2 | Purchase: medic_antirad_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| jitters | v3/antirad/medic_antirad_2 | Purchase: medic_antirad_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | latch | v3/masks-headwear/mask_cloth | Purchase: mask_cloth | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_halfmask | Purchase: mask_halfmask | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_respirator/stock | Stock: mask_halfmask +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
@@ -386,24 +418,24 @@ Validation passed.
 | ledger | v3/hideout/11 | Hideout improvements 11 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | ledger | v3/hideout/12 | Hideout improvements 12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | mute | v3/stalkernet/networkSearch | STALKERnet search | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| mute | v3/stalkernet/networkSquads | STALKERnet squad filter | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| mute | v3/stalkernet/networkRanking | STALKERnet ranks and reputation | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| mute | v3/stalkernet/emissionWarnings | Emission warnings | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| mute | v3/stalkernet/networkSquads | STALKERnet squad filter | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| mute | v3/stalkernet/networkRanking | STALKERnet ranks and reputation | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| mute | v3/stalkernet/emissionWarnings | Emission warnings | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | mute | v3/stalkernet/networkActivity | STALKERnet activity counters | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | mute | v3/stalkernet/eventBroadcasts | Event broadcasts | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | mute | v3/stalkernet/networkLocation | STALKERnet location tracking | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | mute | v3/stalkernet/networkDossier | STALKERnet full career dossier | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/knives/knife2 | Purchase: knife2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| old-timer | v3/knives/knife3 | Purchase: knife3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| old-timer | v3/knives/knife3 | Purchase: knife3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/knives/knife4/stock | Stock: knife3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/knives/knife4 | Purchase: knife4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/melee/crowbar | Purchase: bat; Purchase: crowbar | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| old-timer | v3/melee/hatchet | Purchase: hatchet; Purchase: machete | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| old-timer | v3/melee/hatchet | Purchase: hatchet; Purchase: machete | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/melee/sledgehammer/stock | Stock: hatchet +1 total; Stock: machete +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/melee/sledgehammer | Purchase: fireaxe; Purchase: fubar; Purchase: sledgehammer | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/cooking/hightiercooker | Purchase: hightiercooker | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/hidestashers/hidestasher_cleaningkit | Purchase: hidestasher_cleaningkit | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| old-timer | v3/hidestashers/hidestasher_shovel | Purchase: hidestasher_shovel | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| old-timer | v3/hidestashers/hidestasher_shovel | Purchase: hidestasher_shovel | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | quartermaster | v3/nato-rifles/rugermini14 | Purchase: rugermini14 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | quartermaster | v3/nato-rifles/famas | Purchase: famas | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | quartermaster | v3/nato-rifles/l85/stock | Stock: famas +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -475,12 +507,12 @@ Validation passed.
 | smartass | v3/access-cards/accesscard_bunker | Purchase: accesscard_bunker | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | smartass | v3/access-cards/accesscard_laboratory | Purchase: accesscard_laboratory | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spicy-lemon | v3/weak-drugs/drug_cigarette_1 | Stock: drug_cigarette_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| spicy-lemon | v3/weak-drugs/drug_cigarette_2 | Purchase: drug_cigarette_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-drugs/drug_mints/stock | Stock: drug_cigarette_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-drugs/drug_mints | Purchase: drug_mints | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-drugs/drug_cigarette_3/stock | Stock: drug_mints +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-drugs/drug_cigarette_3 | Purchase: drug_cigarette_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-drugs/drug_painkillers | Purchase: drug_painkillers | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| spicy-lemon | v3/weak-drugs/drug_cigarette_2 | Purchase: drug_cigarette_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-drugs/drug_mints/stock | Stock: drug_cigarette_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-drugs/drug_mints | Purchase: drug_mints | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-drugs/drug_cigarette_3/stock | Stock: drug_mints +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-drugs/drug_cigarette_3 | Purchase: drug_cigarette_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-drugs/drug_painkillers | Purchase: drug_painkillers | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | spicy-lemon | v3/weak-drugs/drug_cigarette_5/stock | Stock: drug_painkillers +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spicy-lemon | v3/weak-drugs/drug_cigarette_5 | Purchase: drug_cigarette_5 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spicy-lemon | v3/weak-drugs/drug_caffeine/stock | Stock: drug_cigarette_5 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -496,12 +528,12 @@ Validation passed.
 | spicy-lemon | v3/weak-drugs/drug_tobacco_2/stock | Stock: drug_tobacco_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spicy-lemon | v3/weak-drugs/drug_tobacco_2 | Purchase: drug_tobacco_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spicy-lemon | v3/weak-alcohol/drink_canbeer_2 | Purchase: drink_canbeer_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| spicy-lemon | v3/weak-alcohol/drink_canbeer_3 | Purchase: drink_canbeer_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-alcohol/drink_canbeer_1/stock | Stock: drink_canbeer_3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-alcohol/drink_canbeer_1 | Purchase: drink_canbeer_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-alcohol/drink_bottlebeer_4/stock | Stock: drink_canbeer_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-alcohol/drink_bottlebeer_4 | Purchase: drink_bottlebeer_4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/weak-alcohol/drink_canbeer_4 | Purchase: drink_canbeer_4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| spicy-lemon | v3/weak-alcohol/drink_canbeer_3 | Purchase: drink_canbeer_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-alcohol/drink_canbeer_1/stock | Stock: drink_canbeer_3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-alcohol/drink_canbeer_1 | Purchase: drink_canbeer_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-alcohol/drink_bottlebeer_4/stock | Stock: drink_canbeer_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-alcohol/drink_bottlebeer_4 | Purchase: drink_bottlebeer_4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/weak-alcohol/drink_canbeer_4 | Purchase: drink_canbeer_4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | spicy-lemon | v3/weak-alcohol/drink_canbeer_6/stock | Stock: drink_canbeer_4 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spicy-lemon | v3/weak-alcohol/drink_canbeer_6 | Purchase: drink_canbeer_6 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spicy-lemon | v3/weak-alcohol/drink_bottlebeer_3/stock | Stock: drink_canbeer_6 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -517,8 +549,8 @@ Validation passed.
 | spicy-lemon | v3/weak-alcohol/drink_bottlebeer_1/stock | Stock: drink_bottlebeer_5 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spicy-lemon | v3/weak-alcohol/drink_bottlebeer_1 | Purchase: drink_bottlebeer_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spicy-lemon | v3/energy-drinks/drink_energydrink_4 | Stock: drink_energydrink_4 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| spicy-lemon | v3/energy-drinks/drink_energydrink_2 | Purchase: drink_energydrink_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| spicy-lemon | v3/energy-drinks/drink_energydrink_1 | Purchase: drink_energydrink_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| spicy-lemon | v3/energy-drinks/drink_energydrink_2 | Purchase: drink_energydrink_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| spicy-lemon | v3/energy-drinks/drink_energydrink_1 | Purchase: drink_energydrink_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | spicy-lemon | v3/energy-drinks/drink_energydrink_5/stock | Stock: drink_energydrink_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spicy-lemon | v3/energy-drinks/drink_energydrink_5 | Purchase: drink_energydrink_5 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spicy-lemon | v3/energy-drinks/drink_energydrink_6/stock | Stock: drink_energydrink_5 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -600,14 +632,14 @@ Validation passed.
 | suture | v3/suit-variants/suit_skat10 | Conversion: suit_skat10_anarchist; Conversion: suit_skat10_authority; Conversion: suit_skat10_ecologist; Conversion: suit_skat10_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-variants/suit_skat9 | Conversion: suit_skat9_anarchist; Conversion: suit_skat9_authority; Conversion: suit_skat9_ecologist; Conversion: suit_skat9_fanatic; Conversion: suit_skat9_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_anorak | Stock: suit_anorak +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_mailjacket | Purchase: suit_mailjacket | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| technut | v3/suits/suit_trenchcoat_black/stock | Stock: suit_mailjacket +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| technut | v3/suits/suit_trenchcoat_black | Purchase: suit_trenchcoat_black; Purchase: suit_trenchcoat_brown; Purchase: suit_trenchcoat_green; Purchase: suit_trenchcoat_tan | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| technut | v3/suits/suit_sunrise/stock | Stock: suit_trenchcoat_black +1 total; Stock: suit_trenchcoat_brown +1 total; Stock: suit_trenchcoat_green +1 total; Stock: suit_trenchcoat_tan +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| technut | v3/suits/suit_sunrise | Purchase: suit_sunrise | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| technut | v3/suits/suit_io7a/stock | Stock: suit_sunrise +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| technut | v3/suits/suit_io7a | Purchase: suit_io7a | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| technut | v3/suits/suit_cs1 | Purchase: suit_cs1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| technut | v3/suits/suit_mailjacket | Purchase: suit_mailjacket | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_trenchcoat_black/stock | Stock: suit_mailjacket +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_trenchcoat_black | Purchase: suit_trenchcoat_black; Purchase: suit_trenchcoat_brown; Purchase: suit_trenchcoat_green; Purchase: suit_trenchcoat_tan | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_sunrise/stock | Stock: suit_trenchcoat_black +1 total; Stock: suit_trenchcoat_brown +1 total; Stock: suit_trenchcoat_green +1 total; Stock: suit_trenchcoat_tan +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_sunrise | Purchase: suit_sunrise | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_io7a/stock | Stock: suit_sunrise +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_io7a | Purchase: suit_io7a | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_cs1 | Purchase: suit_cs1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_wind/stock | Stock: suit_cs1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_wind | Purchase: suit_wind | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_ps5m/stock | Stock: suit_wind +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |

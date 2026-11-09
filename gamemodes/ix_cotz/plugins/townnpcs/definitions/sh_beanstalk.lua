@@ -126,6 +126,12 @@ PLUGIN:Register("beanstalk", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Field samples and laboratory containment",
+		core = {"valuables_research_samples", "valuables_sample_carriers"},
+		support = {"valuables_filtration", "documents_research"},
+	},
+
 	progression = {
 		{
 			id = "v3/suppressors/tundrasuppressor",
@@ -137,7 +143,7 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 1,
 					artifactPool = "common_artifacts",
 				},
@@ -145,7 +151,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 1,
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suppressors/cobrasuppressor/stock",
@@ -156,8 +162,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
-				{pool = "town_expansion_159977c37e75", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
+				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
 			},
 			stock = {
 				items = {"tundrasuppressor"},
@@ -166,8 +172,8 @@ PLUGIN:Register("beanstalk", {
 			intermissionFor = "v3/suppressors/cobrasuppressor",
 			branchIndex = 2,
 			branchLength = 4,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suppressors/cobrasuppressor",
@@ -182,20 +188,20 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 2,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_c1a060f8a769",
+					pool = "town_expansion_fef409d4796e",
 					quantity = 1,
 					artifactPool = "electrical_artifacts",
 				},
 			},
 			branchIndex = 2,
 			branchLength = 4,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suppressors/pbssuppressor/stock",
@@ -206,9 +212,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_b4b1617dad8f", quantity = 1},
-				{pool = "town_expansion_0bd4d793ebe1", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
+				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
+				{pool = "town_expansion_e4f1dcc8ca40", quantity = 1},
 			},
 			stock = {
 				items = {"cobrasuppressor"},
@@ -218,7 +224,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 3,
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suppressors/pbssuppressor",
@@ -230,17 +236,17 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 3,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_585a30ca3e50",
+					pool = "town_expansion_fef409d4796e",
 					quantity = 2,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_51ae0b722186",
+					pool = "town_expansion_bb9312c017ca",
 					quantity = 1,
 					artifactPool = "rare_field_artifacts",
 				},
@@ -248,7 +254,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 3,
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suppressors/sakersuppressor/stock",
@@ -259,10 +265,10 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 2},
-				{pool = "town_expansion_098e2c9ef360", quantity = 2},
-				{pool = "town_expansion_7132b2c6f076", quantity = 1},
-				{pool = "town_expansion_fa02a76a2a16", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
+				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
+				{pool = "town_expansion_e7519d375461", quantity = 1},
+				{pool = "town_expansion_eed76cf208ae", quantity = 1},
 			},
 			stock = {
 				items = {"pbssuppressor"},
@@ -277,7 +283,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suppressors/sakersuppressor",
@@ -289,22 +295,22 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 4,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_585a30ca3e50",
+					pool = "town_expansion_fef409d4796e",
 					quantity = 3,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_58ae5705a90d",
+					pool = "town_expansion_12b8f67992a1",
 					quantity = 2,
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_db45db685698",
+					pool = "town_expansion_4fde50b2ea01",
 					quantity = 1,
 					artifactPool = "exceptional_artifacts",
 				},
@@ -317,7 +323,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/trijiconrmr",
@@ -329,7 +335,7 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 1,
 					artifactPool = "common_artifacts",
 				},
@@ -337,7 +343,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 1,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/kobra/stock",
@@ -348,7 +354,7 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_205de1f97475", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 			},
 			stock = {
 				items = {"trijiconrmr"},
@@ -357,8 +363,8 @@ PLUGIN:Register("beanstalk", {
 			intermissionFor = "v3/red-dots/kobra",
 			branchIndex = 2,
 			branchLength = 6,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/kobra",
@@ -370,15 +376,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_a645dda239d9",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 1,
 					artifactPool = "common_artifacts",
 				},
 			},
 			branchIndex = 2,
 			branchLength = 6,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/microt1/stock",
@@ -389,8 +395,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 1},
-				{pool = "town_expansion_24154206efad", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
+				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
 			},
 			stock = {
 				items = {"kobra"},
@@ -399,8 +405,8 @@ PLUGIN:Register("beanstalk", {
 			intermissionFor = "v3/red-dots/microt1",
 			branchIndex = 3,
 			branchLength = 6,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/microt1",
@@ -412,20 +418,20 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 2,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_c1a060f8a769",
+					pool = "town_expansion_fef409d4796e",
 					quantity = 1,
 					artifactPool = "electrical_artifacts",
 				},
 			},
 			branchIndex = 3,
 			branchLength = 6,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/eotech/stock",
@@ -436,8 +442,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 1},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
+				{pool = "town_expansion_0acc14dfa866", quantity = 1},
 			},
 			stock = {
 				items = {"microt1"},
@@ -447,7 +453,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 4,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/eotech",
@@ -459,12 +465,12 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 2,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_184da1a90e1f",
+					pool = "town_expansion_f7313298a439",
 					quantity = 1,
 					artifactPool = "electrical_artifacts",
 				},
@@ -472,7 +478,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 4,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/cmore/stock",
@@ -483,9 +489,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 2},
-				{pool = "town_expansion_953fc3f79c23", quantity = 1},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
+				{pool = "town_expansion_983c927640d1", quantity = 1},
+				{pool = "town_expansion_293e6c43ac71", quantity = 1},
 			},
 			stock = {
 				items = {"eotech"},
@@ -500,7 +506,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/cmore",
@@ -512,17 +518,17 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 3,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_1460ca313230",
+					pool = "town_expansion_dc4e5278ad7b",
 					quantity = 2,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_58ae5705a90d",
+					pool = "town_expansion_12b8f67992a1",
 					quantity = 1,
 					artifactPool = "rare_field_artifacts",
 				},
@@ -535,7 +541,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/aimpoint/stock",
@@ -546,10 +552,10 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_58f7217b7bb0", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
-				{pool = "town_expansion_e5352994a906", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
+				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
+				{pool = "town_expansion_3c54dfc0a0bc", quantity = 1},
+				{pool = "town_expansion_95306e3a7624", quantity = 1},
 			},
 			stock = {
 				items = {"cmore"},
@@ -564,7 +570,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/red-dots/aimpoint",
@@ -576,22 +582,22 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 4,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_585a30ca3e50",
+					pool = "town_expansion_fef409d4796e",
 					quantity = 3,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_58ae5705a90d",
+					pool = "town_expansion_12b8f67992a1",
 					quantity = 2,
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_db45db685698",
+					pool = "town_expansion_4fde50b2ea01",
 					quantity = 1,
 					artifactPool = "exceptional_artifacts",
 				},
@@ -604,7 +610,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/kingarmsmr",
@@ -616,7 +622,7 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 1,
 					artifactPool = "common_artifacts",
 				},
@@ -624,7 +630,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 1,
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/pso1/stock",
@@ -635,7 +641,7 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_1040d77788e5", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
 			},
 			stock = {
 				items = {"kingarmsmr"},
@@ -644,8 +650,8 @@ PLUGIN:Register("beanstalk", {
 			intermissionFor = "v3/optics/pso1",
 			branchIndex = 2,
 			branchLength = 5,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/pso1",
@@ -657,15 +663,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_a645dda239d9",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 1,
 					artifactPool = "common_artifacts",
 				},
 			},
 			branchIndex = 2,
 			branchLength = 5,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/shortdot/stock",
@@ -676,8 +682,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 1},
-				{pool = "town_expansion_1b1929d23880", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
+				{pool = "town_expansion_0acc14dfa866", quantity = 1},
 			},
 			stock = {
 				items = {"pso1"},
@@ -687,7 +693,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 3,
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/shortdot",
@@ -699,12 +705,12 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 2,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_184da1a90e1f",
+					pool = "town_expansion_f7313298a439",
 					quantity = 1,
 					artifactPool = "electrical_artifacts",
 				},
@@ -712,7 +718,7 @@ PLUGIN:Register("beanstalk", {
 			branchIndex = 3,
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/acog/stock",
@@ -723,9 +729,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 2},
-				{pool = "town_expansion_0080d0807602", quantity = 1},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
+				{pool = "town_expansion_fc138e40849a", quantity = 1},
+				{pool = "town_expansion_c1b2fc0c25e2", quantity = 1},
 			},
 			stock = {
 				items = {"shortdot"},
@@ -740,7 +746,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/acog",
@@ -752,17 +758,17 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 3,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_1460ca313230",
+					pool = "town_expansion_dc4e5278ad7b",
 					quantity = 2,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_58ae5705a90d",
+					pool = "town_expansion_12b8f67992a1",
 					quantity = 1,
 					artifactPool = "rare_field_artifacts",
 				},
@@ -775,7 +781,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/nightforce/stock",
@@ -786,10 +792,10 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 2},
-				{pool = "town_expansion_6087c7d97b09", quantity = 2},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
-				{pool = "town_expansion_f1b1040d27b9", quantity = 1},
+				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
+				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
+				{pool = "town_expansion_e7519d375461", quantity = 1},
+				{pool = "town_expansion_eed76cf208ae", quantity = 1},
 			},
 			stock = {
 				items = {"acog"},
@@ -804,7 +810,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/optics/nightforce",
@@ -816,22 +822,22 @@ PLUGIN:Register("beanstalk", {
 			completion = "Thank you. I will check what we can use for the next set of samples.",
 			requirements = {
 				{
-					pool = "town_expansion_5688bed445da",
+					pool = "town_expansion_2f0b6e78417d",
 					quantity = 4,
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_585a30ca3e50",
+					pool = "town_expansion_fef409d4796e",
 					quantity = 3,
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_58ae5705a90d",
+					pool = "town_expansion_12b8f67992a1",
 					quantity = 2,
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_db45db685698",
+					pool = "town_expansion_4fde50b2ea01",
 					quantity = 1,
 					artifactPool = "exceptional_artifacts",
 				},
@@ -844,7 +850,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

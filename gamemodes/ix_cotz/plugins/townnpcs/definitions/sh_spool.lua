@@ -106,6 +106,12 @@ PLUGIN:Register("spool", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Receivers, communications parts and recordings",
+		core = {"consumer_electronics", "radio_components", "valuables_recording_equipment"},
+		support = {"valuables_portable_power", "valuables_electrical_supplies"},
+	},
+
 	progression = {
 		{
 			id = "v3/steel-headwear/helm_tanker",
@@ -116,12 +122,12 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 5,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/steel-headwear/helm_steel_arab",
@@ -132,12 +138,12 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_9efea0eef6c6", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/steel-headwear/helm_steel_ger",
@@ -148,13 +154,13 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_059350d44279", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 2},
+				{pool = "town_expansion_d437c0469824", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/steel-headwear/helm_steel_rus/stock",
@@ -165,9 +171,9 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 2},
+				{pool = "town_expansion_530dff3d628b", quantity = 1},
+				{pool = "town_expansion_0cce463eebee", quantity = 1},
 			},
 			stock = {
 				items = {"helm_steel_ger"},
@@ -182,7 +188,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/steel-headwear/helm_steel_rus",
@@ -196,9 +202,9 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 3},
-				{pool = "town_expansion_7d3b07ef7678", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_7914e6c50148", quantity = 3},
+				{pool = "town_expansion_20f057c98d77", quantity = 2},
+				{pool = "town_expansion_8bf779b73bc7", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 5,
@@ -208,7 +214,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/steel-headwear/headwear_riot/stock",
@@ -219,10 +225,10 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
-				{pool = "town_expansion_0f26e1fa21b6", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
-				{pool = "town_expansion_7b9c149c7dd7", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 2},
+				{pool = "town_expansion_ef8a7d1f4def", quantity = 2},
+				{pool = "town_expansion_ba0835726338", quantity = 1},
+				{pool = "town_expansion_666ff7869369", quantity = 1},
 			},
 			stock = {
 				items = {"helm_steel_rus"},
@@ -237,7 +243,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/steel-headwear/headwear_riot",
@@ -251,10 +257,10 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 4},
-				{pool = "town_expansion_3aef95ba7916", quantity = 3},
-				{pool = "town_expansion_da8b01ace95f", quantity = 2},
-				{pool = "town_expansion_fa02a76a2a16", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 4},
+				{pool = "town_expansion_35961f2d890a", quantity = 3},
+				{pool = "town_expansion_6e035a7a3694", quantity = 2},
+				{pool = "town_expansion_499861fb2c79", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 5,
@@ -264,7 +270,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/drug_adrenaline",
@@ -275,12 +281,12 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 1},
+				{pool = "town_expansion_7914e6c50148", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 6,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/drug_morphine",
@@ -291,12 +297,12 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_1040d77788e5", quantity = 1},
+				{pool = "town_expansion_a190d6ad9305", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/drug_marijuana",
@@ -307,13 +313,13 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 2},
-				{pool = "town_expansion_3dee44724bce", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 2},
+				{pool = "town_expansion_630c76282136", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/miscaid_swampbrew/stock",
@@ -324,8 +330,8 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 1},
-				{pool = "town_expansion_416dc2126ac2", quantity = 1},
+				{pool = "town_expansion_7914e6c50148", quantity = 1},
+				{pool = "town_expansion_8fc53c13e31b", quantity = 1},
 			},
 			stock = {
 				items = {"drug_marijuana"},
@@ -335,7 +341,7 @@ PLUGIN:Register("spool", {
 			branchIndex = 4,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/miscaid_swampbrew",
@@ -349,13 +355,13 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 2},
-				{pool = "town_expansion_b4ef035b35ed", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 2},
+				{pool = "town_expansion_d437c0469824", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/drug_glucose/stock",
@@ -366,9 +372,9 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 2},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 1},
-				{pool = "town_expansion_926153587190", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 2},
+				{pool = "town_expansion_530dff3d628b", quantity = 1},
+				{pool = "town_expansion_8bf779b73bc7", quantity = 1},
 			},
 			stock = {
 				items = {"miscaid_swampbrew"},
@@ -383,7 +389,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/drug_glucose",
@@ -397,9 +403,9 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 3},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 2},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_7914e6c50148", quantity = 3},
+				{pool = "town_expansion_20f057c98d77", quantity = 2},
+				{pool = "town_expansion_0cce463eebee", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 6,
@@ -409,7 +415,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/drug_cocaine/stock",
@@ -420,10 +426,10 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_319a165c05e4", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
-				{pool = "town_expansion_1c04489bf81a", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 2},
+				{pool = "town_expansion_ef8a7d1f4def", quantity = 2},
+				{pool = "town_expansion_ba0835726338", quantity = 1},
+				{pool = "town_expansion_499861fb2c79", quantity = 1},
 			},
 			stock = {
 				items = {"drug_glucose"},
@@ -438,7 +444,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/strong-drugs/drug_cocaine",
@@ -449,10 +455,10 @@ PLUGIN:Register("spool", {
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 4},
-				{pool = "town_expansion_8495d702694c", quantity = 3},
-				{pool = "town_expansion_49d2c987eab4", quantity = 2},
-				{pool = "town_expansion_b29bf8ba53a6", quantity = 1},
+				{pool = "town_expansion_db9a2caaa58c", quantity = 4},
+				{pool = "town_expansion_35961f2d890a", quantity = 3},
+				{pool = "town_expansion_6e035a7a3694", quantity = 2},
+				{pool = "town_expansion_666ff7869369", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 6,
@@ -462,7 +468,7 @@ PLUGIN:Register("spool", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

@@ -35,10 +35,27 @@ class ProgressionExpansionTests(unittest.TestCase):
                     self.assertEqual(step["acquisitionMaps"], [contact["map"]])
         intern = {s["name"]: s for s in contacts["intern"]["progression"] if not s.get("intermissionFor")}
         self.assertNotIn("rp_waystation", intern["Artifact Detector (Echo)"]["acquisitionMaps"])
-        self.assertIn("rp_waystation", intern["Artifact Detector (Bear)"]["acquisitionMaps"])
+        self.assertEqual(intern["Artifact Detector (Bear)"]["acquisitionMaps"], ["rp_marsh_cs"])
         self.assertNotIn("rp_pripyat_remaster", intern["Artifact Detector (Bear)"]["acquisitionMaps"])
         self.assertIn("rp_pripyat_remaster", intern["Artifact Detector (Veles)"]["acquisitionMaps"])
         self.assertEqual(contacts["ledger"]["difficultyMultiplier"], 3)
+
+    def test_opening_marsh_work_never_rolls_later_map_only_inputs(self):
+        protected = 0
+        for slug, contact in self.data["contacts"].items():
+            if contact["map"] != "rp_marsh_cs":
+                continue
+            for step in contact["progression"]:
+                index, length = step["branchIndex"] - 1, step["branchLength"]
+                if index >= 2 and index / max(1, length - 1) >= 0.45:
+                    continue
+                protected += 1
+                self.assertEqual(step["acquisitionMaps"], ["rp_marsh_cs"], (slug, step["id"]))
+                for slot in step["requirements"]:
+                    for candidate in self.data["pools"][slot["pool"]]["candidates"]:
+                        self.assertTrue(self.rates["rp_marsh_cs"].get(candidate["item"]),
+                                        (slug, step["id"], candidate["item"]))
+        self.assertGreater(protected, 100)
 
     def test_each_candidate_has_an_eligible_real_regional_source(self):
         for contact in self.data["contacts"].values():
@@ -93,6 +110,47 @@ class ProgressionExpansionTests(unittest.TestCase):
                              for s in step["requirements"]]
                 self.assertNotEqual(previous.get(step["branch"]), signature, step["id"])
                 previous[step["branch"]] = signature
+
+    def test_requests_stay_with_the_contact_specialty(self):
+        for slug, contact in self.data["contacts"].items():
+            if not contact["progression"]:
+                continue
+            identity = contact["progressionIdentity"]
+            core = {c["item"] for name in identity["core"]
+                    for c in self.data["pools"][name]["candidates"]}
+            support = {c["item"] for name in identity["support"]
+                       for c in self.data["pools"][name]["candidates"]}
+            for step in contact["progression"]:
+                if slug in expansion.SCIENCE and not step.get("intermissionFor"):
+                    continue
+                core_units, total_units = 0, 0
+                for index, slot in enumerate(step["requirements"]):
+                    items = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
+                    self.assertLessEqual(items, core | support, (slug, step["id"]))
+                    if index < len(step["requirements"]) - 1 or len(step["requirements"]) <= 2:
+                        self.assertLessEqual(items, core, (slug, step["id"], "core slot"))
+                    total_units += slot["quantity"]
+                    if items <= core:
+                        core_units += slot["quantity"]
+                self.assertGreaterEqual(core_units / total_units, 0.75, (slug, step["id"]))
+
+    def test_unrelated_npcs_no_longer_share_generic_shopping_lists(self):
+        def requested(slug):
+            return {c["item"] for step in self.data["contacts"][slug]["progression"]
+                    for slot in step["requirements"] for c in self.data["pools"][slot["pool"]]["candidates"]}
+        brass, medic = requested("brass"), requested("jitters")
+        self.assertTrue(any(item.startswith("value_gunpowder_") for item in brass))
+        self.assertNotIn("value_med_peroxide", brass)
+        self.assertNotIn("value_gunpowder_green", medic)
+        self.assertIn("value_med_peroxide", medic)
+        self.assertNotIn("value_ballistic4", requested("spicy-lemon"))
+        self.assertNotIn("value_coffee", requested("smartass"))
+        self.assertNotIn("value_chemicalsample", requested("ledger"))
+        # The broad all-theme rotation previously produced 45% mean roster overlap.
+        from itertools import combinations
+        sets = [requested(slug) for slug, contact in self.data["contacts"].items() if contact["progression"]]
+        overlap = [len(a & b) / len(a | b) for a, b in combinations(sets, 2)]
+        self.assertLess(sum(overlap) / len(overlap), 0.10)
 
     def test_snapshot_preserves_sparse_terms_and_numeric_object_keys(self):
         # Vendor terms start with nil; dropping that slot changes every policy field's meaning.

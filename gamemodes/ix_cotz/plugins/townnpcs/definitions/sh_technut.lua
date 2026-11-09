@@ -139,6 +139,18 @@ PLUGIN:Register("technut", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Precision tools and mechanical repair parts",
+		core = {
+			"valuables_repair_parts",
+			"valuables_drivers_wrenches",
+			"basic_tools",
+			"advanced_parts",
+			"specialty_tools",
+		},
+		support = {"valuables_workshop_consumables", "valuables_electrical_supplies"},
+	},
+
 	progression = {
 		{
 			id = "v3/suits/suit_anorak",
@@ -149,13 +161,13 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 1},
 			},
 			stock = {bonus = 1, item = "suit_anorak"},
 			branchIndex = 1,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_mailjacket",
@@ -166,12 +178,12 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_31108a33b52e", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_trenchcoat_black/stock",
@@ -182,7 +194,7 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 1},
 			},
 			stock = {
 				items = {"suit_mailjacket"},
@@ -191,8 +203,8 @@ PLUGIN:Register("technut", {
 			intermissionFor = "v3/suits/suit_trenchcoat_black",
 			branchIndex = 3,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_trenchcoat_black",
@@ -203,12 +215,12 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_31108a33b52e", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_sunrise/stock",
@@ -219,7 +231,7 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_5680557761a2", quantity = 1},
 			},
 			stock = {
 				items = {
@@ -233,8 +245,8 @@ PLUGIN:Register("technut", {
 			intermissionFor = "v3/suits/suit_sunrise",
 			branchIndex = 4,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_sunrise",
@@ -245,12 +257,12 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_io7a/stock",
@@ -261,7 +273,7 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_31108a33b52e", quantity = 1},
 			},
 			stock = {
 				items = {"suit_sunrise"},
@@ -270,8 +282,8 @@ PLUGIN:Register("technut", {
 			intermissionFor = "v3/suits/suit_io7a",
 			branchIndex = 5,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_io7a",
@@ -282,12 +294,12 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_79ec06859af2", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_cs1",
@@ -298,13 +310,13 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 2},
-				{pool = "town_expansion_1d05891dc677", quantity = 1},
+				{pool = "town_expansion_31108a33b52e", quantity = 2},
+				{pool = "town_expansion_0edc942bcdb2", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 14,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_wind/stock",
@@ -315,8 +327,8 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 1},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_5680557761a2", quantity = 1},
+				{pool = "town_expansion_c4ef1c490cad", quantity = 1},
 			},
 			stock = {
 				items = {"suit_cs1"},
@@ -326,7 +338,7 @@ PLUGIN:Register("technut", {
 			branchIndex = 7,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_wind",
@@ -337,13 +349,13 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 2},
-				{pool = "town_expansion_1b1929d23880", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 2},
+				{pool = "town_expansion_76a98e0d58b3", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_ps5m/stock",
@@ -354,8 +366,8 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 1},
-				{pool = "town_expansion_b4ef035b35ed", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 1},
+				{pool = "town_expansion_682820bbf4fb", quantity = 1},
 			},
 			stock = {
 				items = {"suit_wind"},
@@ -365,7 +377,7 @@ PLUGIN:Register("technut", {
 			branchIndex = 8,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_ps5m",
@@ -376,13 +388,13 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 2},
+				{pool = "town_expansion_682820bbf4fb", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_cs2/stock",
@@ -393,8 +405,8 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
-				{pool = "town_expansion_c72e02d3eea4", quantity = 1},
+				{pool = "town_expansion_31108a33b52e", quantity = 1},
+				{pool = "town_expansion_4bfcbfdd8522", quantity = 1},
 			},
 			stock = {
 				items = {"suit_ps5m"},
@@ -404,7 +416,7 @@ PLUGIN:Register("technut", {
 			branchIndex = 9,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_cs2",
@@ -415,13 +427,13 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 2},
-				{pool = "town_expansion_a2ba92d63b91", quantity = 1},
+				{pool = "town_expansion_5680557761a2", quantity = 2},
+				{pool = "town_expansion_c4ef1c490cad", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_nbc/stock",
@@ -432,9 +444,9 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_b4b1617dad8f", quantity = 1},
-				{pool = "town_expansion_0bd4d793ebe1", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 2},
+				{pool = "town_expansion_dc8a21b56c89", quantity = 1},
+				{pool = "town_expansion_667359aa6e51", quantity = 1},
 			},
 			stock = {
 				items = {"suit_cs2"},
@@ -444,7 +456,7 @@ PLUGIN:Register("technut", {
 			branchIndex = 10,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_nbc",
@@ -455,14 +467,14 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 3},
-				{pool = "town_expansion_58f7217b7bb0", quantity = 2},
-				{pool = "town_expansion_af91afc5dac0", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 3},
+				{pool = "town_expansion_dc8a21b56c89", quantity = 2},
+				{pool = "town_expansion_2de85c7b6370", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_berill/stock",
@@ -473,9 +485,9 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 2},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 1},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 2},
+				{pool = "town_expansion_61616ce759ce", quantity = 1},
+				{pool = "town_expansion_0f652b49711c", quantity = 1},
 			},
 			stock = {
 				items = {"suit_nbc"},
@@ -490,7 +502,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_berill",
@@ -501,9 +513,9 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 3},
-				{pool = "town_expansion_0080d0807602", quantity = 2},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_31108a33b52e", quantity = 3},
+				{pool = "town_expansion_b17ea956ec2c", quantity = 2},
+				{pool = "town_expansion_02e3f0c99b9e", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 14,
@@ -513,7 +525,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_cs3/stock",
@@ -524,9 +536,9 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 2},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 1},
-				{pool = "town_expansion_0afe99a3b951", quantity = 1},
+				{pool = "town_expansion_5680557761a2", quantity = 2},
+				{pool = "town_expansion_051370659b7c", quantity = 1},
+				{pool = "town_expansion_0f652b49711c", quantity = 1},
 			},
 			stock = {
 				items = {"suit_berill"},
@@ -541,7 +553,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_cs3",
@@ -552,9 +564,9 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 3},
-				{pool = "town_expansion_6e9c8b03f6ea", quantity = 2},
-				{pool = "town_expansion_c9b4e5432709", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 3},
+				{pool = "town_expansion_89c6fbb6476c", quantity = 2},
+				{pool = "town_expansion_02e3f0c99b9e", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 14,
@@ -564,7 +576,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_skat10/stock",
@@ -575,9 +587,9 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 2},
-				{pool = "town_expansion_9234fbb8b48d", quantity = 1},
-				{pool = "town_expansion_f0012a3b3266", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 2},
+				{pool = "town_expansion_61616ce759ce", quantity = 1},
+				{pool = "town_expansion_0f652b49711c", quantity = 1},
 			},
 			stock = {
 				items = {"suit_cs3"},
@@ -592,7 +604,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_skat10",
@@ -603,9 +615,9 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 3},
-				{pool = "town_expansion_fb83a12fe519", quantity = 2},
-				{pool = "town_expansion_fa83b0f0448a", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 3},
+				{pool = "town_expansion_61616ce759ce", quantity = 2},
+				{pool = "town_expansion_02e3f0c99b9e", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 14,
@@ -615,7 +627,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_skat9/stock",
@@ -626,10 +638,10 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 2},
-				{pool = "town_expansion_7ad50c950b81", quantity = 2},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
-				{pool = "town_expansion_2f1adee2ea00", quantity = 1},
+				{pool = "town_expansion_31108a33b52e", quantity = 2},
+				{pool = "town_expansion_0edc942bcdb2", quantity = 2},
+				{pool = "town_expansion_1e469de7d680", quantity = 1},
+				{pool = "town_expansion_415a473489fd", quantity = 1},
 			},
 			stock = {
 				items = {"suit_skat10"},
@@ -644,7 +656,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suits/suit_skat9",
@@ -655,10 +667,10 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 4},
-				{pool = "town_expansion_fbb4d32b63fa", quantity = 3},
-				{pool = "town_expansion_926153587190", quantity = 2},
-				{pool = "town_expansion_b050bc99fb5c", quantity = 1},
+				{pool = "town_expansion_5680557761a2", quantity = 4},
+				{pool = "town_expansion_6328803b4ceb", quantity = 3},
+				{pool = "town_expansion_4246ebd62271", quantity = 2},
+				{pool = "town_expansion_095bf8a6b392", quantity = 1},
 			},
 			branchIndex = 14,
 			branchLength = 14,
@@ -668,7 +680,7 @@ PLUGIN:Register("technut", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/painting/painting",
@@ -679,7 +691,7 @@ PLUGIN:Register("technut", {
 			briefing = "I need supplies for the workshop. I wrote down what I actually need, before the interesting possibilities got in the way. Bring everything on the list back here; I need the full delivery.",
 			completion = "Lovely. Let me sort these before I get distracted by what I could build with them.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
+				{pool = "town_expansion_74da25801b3a", quantity = 1},
 			},
 			services = {
 				{id = "painting", name = "Suit painting"},
@@ -687,7 +699,7 @@ PLUGIN:Register("technut", {
 			branchIndex = 1,
 			branchLength = 1,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

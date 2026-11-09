@@ -224,6 +224,12 @@ PLUGIN:Register("spicy-lemon", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Kitchen stores and cooking fuel",
+		core = {"valuables_provisions", "fuel"},
+		support = {"cleaning", "valuables_fuel_supplies"},
+	},
+
 	progression = {
 		{
 			id = "v3/weak-drugs/drug_cigarette_1",
@@ -234,13 +240,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
 			},
 			stock = {bonus = 1, item = "drug_cigarette_1"},
 			branchIndex = 1,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_2",
@@ -251,12 +257,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_mints/stock",
@@ -267,7 +273,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
 			},
 			stock = {
 				items = {"drug_cigarette_2"},
@@ -276,8 +282,8 @@ PLUGIN:Register("spicy-lemon", {
 			intermissionFor = "v3/weak-drugs/drug_mints",
 			branchIndex = 3,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_mints",
@@ -288,12 +294,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_3/stock",
@@ -304,7 +310,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
 			},
 			stock = {
 				items = {"drug_mints"},
@@ -313,8 +319,8 @@ PLUGIN:Register("spicy-lemon", {
 			intermissionFor = "v3/weak-drugs/drug_cigarette_3",
 			branchIndex = 4,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_3",
@@ -325,12 +331,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_painkillers",
@@ -341,13 +347,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 2},
-				{pool = "town_expansion_39848af619f5", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_ad8a38d74ac4", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_5/stock",
@@ -358,8 +364,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 1},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_c93f929960fd", quantity = 1},
 			},
 			stock = {
 				items = {"drug_painkillers"},
@@ -369,7 +375,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_5",
@@ -383,13 +389,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 2},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_caffeine/stock",
@@ -400,8 +406,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 1},
-				{pool = "town_expansion_1b1929d23880", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_c93f929960fd", quantity = 1},
 			},
 			stock = {
 				items = {"drug_cigarette_5"},
@@ -411,7 +417,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_caffeine",
@@ -422,13 +428,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 2},
-				{pool = "town_expansion_b4ef035b35ed", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_4/stock",
@@ -439,8 +445,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 1},
-				{pool = "town_expansion_a2ba92d63b91", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_c93f929960fd", quantity = 1},
 			},
 			stock = {
 				items = {"drug_caffeine"},
@@ -450,7 +456,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_4",
@@ -461,13 +467,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigar/stock",
@@ -478,9 +484,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 2},
-				{pool = "town_expansion_6087c7d97b09", quantity = 1},
-				{pool = "town_expansion_82bc95261189", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_504bedd659bc", quantity = 1},
+				{pool = "town_expansion_7957e159e3ce", quantity = 1},
 			},
 			stock = {
 				items = {"drug_cigarette_4"},
@@ -490,7 +496,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigar",
@@ -501,14 +507,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 3},
-				{pool = "town_expansion_b4b1617dad8f", quantity = 2},
-				{pool = "town_expansion_0bd4d793ebe1", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 3},
+				{pool = "town_expansion_ad8a38d74ac4", quantity = 2},
+				{pool = "town_expansion_b13ea47418ea", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_6/stock",
@@ -519,9 +525,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_84ea62849c8a", quantity = 1},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_b7713ce2aa55", quantity = 1},
+				{pool = "town_expansion_3e9f1370e922", quantity = 1},
 			},
 			stock = {
 				items = {"drug_cigar"},
@@ -536,7 +542,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_6",
@@ -547,9 +553,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 3},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 3},
+				{pool = "town_expansion_71271652e722", quantity = 2},
+				{pool = "town_expansion_c279546a695f", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 12,
@@ -559,7 +565,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_1/stock",
@@ -570,9 +576,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 2},
-				{pool = "town_expansion_0080d0807602", quantity = 1},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_b7713ce2aa55", quantity = 1},
+				{pool = "town_expansion_3e9f1370e922", quantity = 1},
 			},
 			stock = {
 				items = {"drug_cigarette_6"},
@@ -587,7 +593,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_1",
@@ -598,9 +604,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 3},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 2},
-				{pool = "town_expansion_0afe99a3b951", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 3},
+				{pool = "town_expansion_71271652e722", quantity = 2},
+				{pool = "town_expansion_c279546a695f", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 12,
@@ -610,7 +616,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_2/stock",
@@ -621,10 +627,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 2},
-				{pool = "town_expansion_9c982c714006", quantity = 2},
-				{pool = "town_expansion_c9b4e5432709", quantity = 1},
-				{pool = "town_expansion_87c2038d9c43", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_504bedd659bc", quantity = 2},
+				{pool = "town_expansion_89ebb7471428", quantity = 1},
+				{pool = "town_expansion_3b10ddedc65b", quantity = 1},
 			},
 			stock = {
 				items = {"drug_tobacco_1"},
@@ -639,7 +645,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_2",
@@ -650,10 +656,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 4},
-				{pool = "town_expansion_fda4dd4ef7cc", quantity = 3},
-				{pool = "town_expansion_8c883451bbe3", quantity = 2},
-				{pool = "town_expansion_dd51cce6af9e", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 4},
+				{pool = "town_expansion_ad8a38d74ac4", quantity = 3},
+				{pool = "town_expansion_4eccdfd3dca1", quantity = 2},
+				{pool = "town_expansion_d658a702f753", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 12,
@@ -663,7 +669,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_2",
@@ -674,12 +680,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_3",
@@ -690,12 +696,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_d15882f78941", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_1/stock",
@@ -706,7 +712,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_b21cf405c5c4", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
 			},
 			stock = {
 				items = {"drink_canbeer_3"},
@@ -715,8 +721,8 @@ PLUGIN:Register("spicy-lemon", {
 			intermissionFor = "v3/weak-alcohol/drink_canbeer_1",
 			branchIndex = 3,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_1",
@@ -730,12 +736,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_4/stock",
@@ -746,7 +752,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
 			},
 			stock = {
 				items = {"drink_canbeer_1"},
@@ -755,8 +761,8 @@ PLUGIN:Register("spicy-lemon", {
 			intermissionFor = "v3/weak-alcohol/drink_bottlebeer_4",
 			branchIndex = 4,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_4",
@@ -770,12 +776,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_4",
@@ -786,13 +792,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_04986547505f", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_504bedd659bc", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_6/stock",
@@ -803,8 +809,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 1},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
 			},
 			stock = {
 				items = {"drink_canbeer_4"},
@@ -814,7 +820,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_6",
@@ -828,13 +834,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_c93f929960fd", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_3/stock",
@@ -845,8 +851,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 1},
-				{pool = "town_expansion_5a6ee4aca70c", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
 			},
 			stock = {
 				items = {"drink_canbeer_6"},
@@ -856,7 +862,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_3",
@@ -870,13 +876,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 2},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_c93f929960fd", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_6/stock",
@@ -887,8 +893,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 1},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
 			},
 			stock = {
 				items = {"drink_bottlebeer_3"},
@@ -898,7 +904,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_6",
@@ -912,13 +918,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 2},
-				{pool = "town_expansion_1b1929d23880", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_c93f929960fd", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_5/stock",
@@ -929,9 +935,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 2},
-				{pool = "town_expansion_7ad50c950b81", quantity = 1},
-				{pool = "town_expansion_33716461332d", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_ad8a38d74ac4", quantity = 1},
+				{pool = "town_expansion_b13ea47418ea", quantity = 1},
 			},
 			stock = {
 				items = {"drink_bottlebeer_6"},
@@ -941,7 +947,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_5",
@@ -955,14 +961,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 3},
-				{pool = "town_expansion_c8e56a0e3469", quantity = 2},
-				{pool = "town_expansion_36c804cf42b4", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 3},
+				{pool = "town_expansion_504bedd659bc", quantity = 2},
+				{pool = "town_expansion_7957e159e3ce", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_2/stock",
@@ -973,9 +979,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 1},
-				{pool = "town_expansion_926153587190", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_71271652e722", quantity = 1},
+				{pool = "town_expansion_c279546a695f", quantity = 1},
 			},
 			stock = {
 				items = {"drink_canbeer_5"},
@@ -990,7 +996,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_2",
@@ -1004,9 +1010,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 3},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 3},
+				{pool = "town_expansion_b7713ce2aa55", quantity = 2},
+				{pool = "town_expansion_3e9f1370e922", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 12,
@@ -1016,7 +1022,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_5/stock",
@@ -1027,9 +1033,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_71271652e722", quantity = 1},
+				{pool = "town_expansion_c279546a695f", quantity = 1},
 			},
 			stock = {
 				items = {"drink_bottlebeer_2"},
@@ -1044,7 +1050,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_5",
@@ -1058,9 +1064,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 3},
-				{pool = "town_expansion_84ea62849c8a", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 3},
+				{pool = "town_expansion_b7713ce2aa55", quantity = 2},
+				{pool = "town_expansion_3e9f1370e922", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 12,
@@ -1070,7 +1076,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_1/stock",
@@ -1081,10 +1087,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 2},
-				{pool = "town_expansion_098e2c9ef360", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
-				{pool = "town_expansion_e5352994a906", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_ad8a38d74ac4", quantity = 2},
+				{pool = "town_expansion_4eccdfd3dca1", quantity = 1},
+				{pool = "town_expansion_d658a702f753", quantity = 1},
 			},
 			stock = {
 				items = {"drink_bottlebeer_5"},
@@ -1099,7 +1105,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_1",
@@ -1113,10 +1119,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 4},
-				{pool = "town_expansion_80df732e12c0", quantity = 3},
-				{pool = "town_expansion_f75ad78c791c", quantity = 2},
-				{pool = "town_expansion_fa02a76a2a16", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 4},
+				{pool = "town_expansion_504bedd659bc", quantity = 3},
+				{pool = "town_expansion_89ebb7471428", quantity = 2},
+				{pool = "town_expansion_3b10ddedc65b", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 12,
@@ -1126,7 +1132,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_4",
@@ -1137,13 +1143,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 1},
 			},
 			stock = {bonus = 1, item = "drink_energydrink_4"},
 			branchIndex = 1,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_2",
@@ -1154,12 +1160,12 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_1040d77788e5", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 6,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_1",
@@ -1170,13 +1176,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 2},
-				{pool = "town_expansion_5e2f3ac3637b", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_ad8a38d74ac4", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 6,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_5/stock",
@@ -1187,8 +1193,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 1},
-				{pool = "town_expansion_1b1929d23880", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_c93f929960fd", quantity = 1},
 			},
 			stock = {
 				items = {"drink_energydrink_1"},
@@ -1198,7 +1204,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchIndex = 4,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_5",
@@ -1212,13 +1218,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 2},
-				{pool = "town_expansion_b4ef035b35ed", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 2},
+				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_6/stock",
@@ -1229,9 +1235,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 2},
-				{pool = "town_expansion_953fc3f79c23", quantity = 1},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_b7713ce2aa55", quantity = 1},
+				{pool = "town_expansion_3e9f1370e922", quantity = 1},
 			},
 			stock = {
 				items = {"drink_energydrink_5"},
@@ -1246,7 +1252,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_6",
@@ -1260,9 +1266,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 3},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 2},
-				{pool = "town_expansion_926153587190", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 3},
+				{pool = "town_expansion_71271652e722", quantity = 2},
+				{pool = "town_expansion_c279546a695f", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 6,
@@ -1272,7 +1278,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_3/stock",
@@ -1283,10 +1289,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 2},
-				{pool = "town_expansion_6087c7d97b09", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
-				{pool = "town_expansion_1c04489bf81a", quantity = 1},
+				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
+				{pool = "town_expansion_504bedd659bc", quantity = 2},
+				{pool = "town_expansion_89ebb7471428", quantity = 1},
+				{pool = "town_expansion_3b10ddedc65b", quantity = 1},
 			},
 			stock = {
 				items = {"drink_energydrink_6"},
@@ -1301,7 +1307,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_3",
@@ -1315,10 +1321,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I need supplies for the kitchen. Read the list; I have enough people explaining what I should cook without bringing me anything to cook with. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. Put those over here. I will decide where they go in the kitchen.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 4},
-				{pool = "town_expansion_b4b1617dad8f", quantity = 3},
-				{pool = "town_expansion_50c359fedf1b", quantity = 2},
-				{pool = "town_expansion_b29bf8ba53a6", quantity = 1},
+				{pool = "town_expansion_53138dbbce3c", quantity = 4},
+				{pool = "town_expansion_ad8a38d74ac4", quantity = 3},
+				{pool = "town_expansion_4eccdfd3dca1", quantity = 2},
+				{pool = "town_expansion_d658a702f753", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 6,
@@ -1328,7 +1334,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

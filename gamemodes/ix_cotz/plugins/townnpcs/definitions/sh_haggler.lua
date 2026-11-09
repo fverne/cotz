@@ -140,6 +140,12 @@ PLUGIN:Register("haggler", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Resale curios and small valuables",
+		core = {"small_valuables", "valuables_decorative_valuables", "statues"},
+		support = {"valuables_personal_effects", "valuables_transit_cases"},
+	},
+
 	progression = {
 		{
 			id = "v3/pact-cqb/toz106",
@@ -150,12 +156,12 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/mp27",
@@ -166,12 +172,12 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz66short/stock",
@@ -182,7 +188,7 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
 			},
 			stock = {
 				items = {"mp27"},
@@ -191,8 +197,8 @@ PLUGIN:Register("haggler", {
 			intermissionFor = "v3/pact-cqb/toz66short",
 			branchIndex = 3,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz66short",
@@ -203,12 +209,12 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/skorpion/stock",
@@ -219,7 +225,7 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
 			},
 			stock = {
 				items = {"toz66short"},
@@ -228,8 +234,8 @@ PLUGIN:Register("haggler", {
 			intermissionFor = "v3/pact-cqb/skorpion",
 			branchIndex = 4,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/skorpion",
@@ -240,12 +246,12 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz34short/stock",
@@ -256,7 +262,7 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
 			},
 			stock = {
 				items = {"skorpion"},
@@ -265,8 +271,8 @@ PLUGIN:Register("haggler", {
 			intermissionFor = "v3/pact-cqb/toz34short",
 			branchIndex = 5,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz34short",
@@ -277,12 +283,12 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_79ec06859af2", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/kiparis/stock",
@@ -293,7 +299,7 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_1040d77788e5", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
 			},
 			stock = {
 				items = {"toz34short"},
@@ -302,8 +308,8 @@ PLUGIN:Register("haggler", {
 			intermissionFor = "v3/pact-cqb/kiparis",
 			branchIndex = 6,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/kiparis",
@@ -314,12 +320,12 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_ff9221acd69b", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz66",
@@ -330,13 +336,13 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 2},
-				{pool = "town_expansion_24154206efad", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
+				{pool = "town_expansion_cc3bbd9b289f", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/ppsh/stock",
@@ -347,8 +353,8 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 1},
-				{pool = "town_expansion_1d05891dc677", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
+				{pool = "town_expansion_638378a25387", quantity = 1},
 			},
 			stock = {
 				items = {"toz66"},
@@ -357,8 +363,8 @@ PLUGIN:Register("haggler", {
 			intermissionFor = "v3/pact-cqb/ppsh",
 			branchIndex = 8,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/ppsh",
@@ -369,13 +375,13 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 2},
-				{pool = "town_expansion_d38ea7bb1014", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
+				{pool = "town_expansion_15fff9ec4117", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz34/stock",
@@ -386,8 +392,8 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 1},
-				{pool = "town_expansion_159977c37e75", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
+				{pool = "town_expansion_cc3bbd9b289f", quantity = 1},
 			},
 			stock = {
 				items = {"ppsh"},
@@ -396,8 +402,8 @@ PLUGIN:Register("haggler", {
 			intermissionFor = "v3/pact-cqb/toz34",
 			branchIndex = 9,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz34",
@@ -408,13 +414,13 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 2},
-				{pool = "town_expansion_e5dc90e607e4", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
+				{pool = "town_expansion_638378a25387", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 19,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/pp2000/stock",
@@ -425,8 +431,8 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 1},
-				{pool = "town_expansion_6e7fa9e45a6a", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
+				{pool = "town_expansion_152de158b4a1", quantity = 1},
 			},
 			stock = {
 				items = {"toz34"},
@@ -436,7 +442,7 @@ PLUGIN:Register("haggler", {
 			branchIndex = 10,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/pp2000",
@@ -447,13 +453,13 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 2},
-				{pool = "town_expansion_dc60e627422e", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
+				{pool = "town_expansion_bdc28c49496b", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz194/stock",
@@ -464,8 +470,8 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 1},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
+				{pool = "town_expansion_f7f42b02f574", quantity = 1},
 			},
 			stock = {
 				items = {"pp2000"},
@@ -475,7 +481,7 @@ PLUGIN:Register("haggler", {
 			branchIndex = 11,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz194",
@@ -486,13 +492,13 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
+				{pool = "town_expansion_152de158b4a1", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/pp1901vityaz/stock",
@@ -503,8 +509,8 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 1},
-				{pool = "town_expansion_5a6ee4aca70c", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
+				{pool = "town_expansion_bdc28c49496b", quantity = 1},
 			},
 			stock = {
 				items = {"toz194"},
@@ -514,7 +520,7 @@ PLUGIN:Register("haggler", {
 			branchIndex = 12,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/pp1901vityaz",
@@ -525,13 +531,13 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 2},
-				{pool = "town_expansion_c1e7b548cd21", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
+				{pool = "town_expansion_f7f42b02f574", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/saiga410/stock",
@@ -542,9 +548,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 2},
-				{pool = "town_expansion_3bb48219881c", quantity = 1},
-				{pool = "town_expansion_7d57f08cb0c3", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
+				{pool = "town_expansion_15fff9ec4117", quantity = 1},
+				{pool = "town_expansion_b16633a45e5e", quantity = 1},
 			},
 			stock = {
 				items = {"pp1901vityaz"},
@@ -554,7 +560,7 @@ PLUGIN:Register("haggler", {
 			branchIndex = 13,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/saiga410",
@@ -565,14 +571,14 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 3},
-				{pool = "town_expansion_7ad50c950b81", quantity = 2},
-				{pool = "town_expansion_770c3ee71133", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 3},
+				{pool = "town_expansion_cc3bbd9b289f", quantity = 2},
+				{pool = "town_expansion_b87c057c55a9", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/gepardpdw/stock",
@@ -583,9 +589,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_d62868232b8f", quantity = 2},
-				{pool = "town_expansion_9c982c714006", quantity = 1},
-				{pool = "town_expansion_8682e40afef8", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
+				{pool = "town_expansion_638378a25387", quantity = 1},
+				{pool = "town_expansion_b16633a45e5e", quantity = 1},
 			},
 			stock = {
 				items = {"saiga410"},
@@ -595,7 +601,7 @@ PLUGIN:Register("haggler", {
 			branchIndex = 14,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/gepardpdw",
@@ -606,14 +612,14 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_53face243c26", quantity = 3},
-				{pool = "town_expansion_fbb4d32b63fa", quantity = 2},
-				{pool = "town_expansion_651e87048748", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 3},
+				{pool = "town_expansion_15fff9ec4117", quantity = 2},
+				{pool = "town_expansion_b87c057c55a9", quantity = 1},
 			},
 			branchIndex = 14,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/pp19/stock",
@@ -624,9 +630,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_656f7b466bb6", quantity = 2},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 1},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
+				{pool = "town_expansion_2db70b6fbf88", quantity = 1},
+				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
 			},
 			stock = {
 				items = {"gepardpdw"},
@@ -641,7 +647,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/pp19",
@@ -652,9 +658,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_9e2312c2d277", quantity = 3},
-				{pool = "town_expansion_953fc3f79c23", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 3},
+				{pool = "town_expansion_d8d65e086eac", quantity = 2},
+				{pool = "town_expansion_df5cad80abc3", quantity = 1},
 			},
 			branchIndex = 15,
 			branchLength = 19,
@@ -664,7 +670,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/mp153/stock",
@@ -675,9 +681,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_9bc67d4d277f", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
+				{pool = "town_expansion_cbdcbe001335", quantity = 1},
+				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
 			},
 			stock = {
 				items = {"pp19"},
@@ -692,7 +698,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/mp153",
@@ -703,9 +709,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_397d1a310030", quantity = 3},
-				{pool = "town_expansion_84ea62849c8a", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 3},
+				{pool = "town_expansion_2db70b6fbf88", quantity = 2},
+				{pool = "town_expansion_df5cad80abc3", quantity = 1},
 			},
 			branchIndex = 16,
 			branchLength = 19,
@@ -715,7 +721,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/sr2/stock",
@@ -726,9 +732,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_a89613693736", quantity = 2},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 1},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
+				{pool = "town_expansion_d8d65e086eac", quantity = 1},
+				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
 			},
 			stock = {
 				items = {"mp153"},
@@ -743,7 +749,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/sr2",
@@ -754,9 +760,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_af7deb03df13", quantity = 3},
-				{pool = "town_expansion_0080d0807602", quantity = 2},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 3},
+				{pool = "town_expansion_cbdcbe001335", quantity = 2},
+				{pool = "town_expansion_df5cad80abc3", quantity = 1},
 			},
 			branchIndex = 17,
 			branchLength = 19,
@@ -766,7 +772,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz34special/stock",
@@ -777,9 +783,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_3d3e1a9f3c7b", quantity = 2},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 1},
-				{pool = "town_expansion_2bbd6b8f931b", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
+				{pool = "town_expansion_2db70b6fbf88", quantity = 1},
+				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
 			},
 			stock = {
 				items = {"sr2"},
@@ -794,7 +800,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/toz34special",
@@ -805,9 +811,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_a30821abc425", quantity = 3},
-				{pool = "town_expansion_b881775cb3a8", quantity = 2},
-				{pool = "town_expansion_e96819c6b492", quantity = 1},
+				{pool = "town_expansion_e86e7b663cc7", quantity = 3},
+				{pool = "town_expansion_d8d65e086eac", quantity = 2},
+				{pool = "town_expansion_df5cad80abc3", quantity = 1},
 			},
 			branchIndex = 18,
 			branchLength = 19,
@@ -817,7 +823,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/saiga12/stock",
@@ -828,10 +834,10 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_65df4d342f27", quantity = 2},
-				{pool = "town_expansion_3bb48219881c", quantity = 2},
-				{pool = "town_expansion_b19adc2297ab", quantity = 1},
-				{pool = "town_expansion_fa02a76a2a16", quantity = 1},
+				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
+				{pool = "town_expansion_15fff9ec4117", quantity = 2},
+				{pool = "town_expansion_be2bc316f977", quantity = 1},
+				{pool = "town_expansion_ae4f451666e5", quantity = 1},
 			},
 			stock = {
 				items = {"toz34special"},
@@ -846,7 +852,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-cqb/saiga12",
@@ -857,10 +863,10 @@ PLUGIN:Register("haggler", {
 			briefing = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 			completion = "There we are. A straightforward agreement, carried through.",
 			requirements = {
-				{pool = "town_expansion_8a6ed40a0fd0", quantity = 4},
-				{pool = "town_expansion_7ad50c950b81", quantity = 3},
-				{pool = "town_expansion_0afe99a3b951", quantity = 2},
-				{pool = "town_expansion_8061076607e6", quantity = 1},
+				{pool = "town_expansion_b5741c6c2f68", quantity = 4},
+				{pool = "town_expansion_cc3bbd9b289f", quantity = 3},
+				{pool = "town_expansion_0226ddbdcca9", quantity = 2},
+				{pool = "town_expansion_ee70748a5af1", quantity = 1},
 			},
 			branchIndex = 19,
 			branchLength = 19,
@@ -870,7 +876,7 @@ PLUGIN:Register("haggler", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

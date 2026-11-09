@@ -1,4 +1,4 @@
-# Town progression overhaul, 8 November 2026
+# Town progression overhaul, 9 November 2026
 
 This replaces the former 600-milestone town graph with 639 hand-in milestones across 49 independent
 branches, including 223 stock-preparation intermissions. The authored `upgradeChains` and
@@ -49,9 +49,21 @@ wine and spirits; the cheapest vodka also remains a Spicy Lemon starter.
 Town requirements contain only valuables and artifacts, validated through item inheritance and actual
 checked-in world/box/cycling acquisition sources. Currency and bound quest assets are excluded.
 Scientists retain artifact deliveries at equipment milestones; their preparation stages request ordinary
-research and technical valuables. Garbage introductions borrow locally available textiles, workshop
-supplies, trail supplies and military salvage. Later stages can recover their specialist themes.
-Other contacts' thematic pools are shared as appropriate, with disjoint slots and varied consecutive requests.
+research and technical valuables. Garbage introductions use locally available members of each
+contact's specialty; later stages add harder regional materials within the same specialty.
+Each contact declares `progressionIdentity` beside its progression: a named specialty, explicit core
+pools and a small list of related support pools. The generator no longer rotates through every town
+theme. All high-quantity slots stay with the contact's core work; only the smallest slot of a three-
+or four-slot request may borrow support goods. This keeps at least 75% of requested units within the
+core specialty, including preparation stages. Source availability never triggers an unrelated-theme
+fallback: missing specialty supplies are an authoring error. Shared items remain appropriate between
+related professions; scientist equipment milestones retain their established artifact families.
+
+Examples: Brass requests powder, ammunition cases and weapon-care supplies; Jitters requests clinical,
+trauma and medical-equipment salvage; Ledger needs dispatch paperwork and secure cases. Smartass
+focuses on computers and data media, Gasket on generator parts and electrics, Spicy Lemon on kitchen
+stores and cooking fuel. The [request specialty table](unlock-ledger.md#request-specialties) lists all
+25 allocations, whose characterization comes from the existing contact profiles.
 
 Original equipment rank determines regional access, using `(index - 1) / (branch length - 1)`:
 
@@ -61,6 +73,11 @@ Original equipment rank determines regional access, using `(index - 1) / (branch
 | After introduction, below 45% | Home map, Marsh and Garbage |
 | 45% to below 75% | Also Waystation |
 | 75% onward | Also Pripyat |
+
+**Marsh exception:** the first two original milestones of every Marsh branch, and all other milestones
+below 45%, stay wholly local. This includes preparation stages attached to those milestones. Every
+candidate must have a positive checked-in Marsh source; simply retaining Marsh among several possible
+maps is insufficient. Short branches cannot make their second request Pripyat-only.
 
 The home map always remains eligible. Newly regional goods enter the lowest-quantity slots: at most one
 expanded slot before the final quarter and two afterward. Other slots remain local. Intermissions inherit
@@ -116,8 +133,11 @@ remain saved. New intermissions gate unfinished unlocks, including requests with
 completed purchases are not revoked. When an intermission's parents were completed before deployment,
 character initialization activates it without completing it or awarding any benefit automatically.
 
-Requirement policy 3 converts only outstanding ineligible or out-of-region saved inputs. Eligible saved
-requests retain their exact items and quantities. Completed contributions remain credited; converted
+Requirement policy 4 converts only outstanding ineligible or out-of-region saved inputs. It upgrades
+policy-3 assignments so that opening Marsh work cannot retain later-map-only demands. Eligible saved
+requests retain their exact items and quantities, including locally available requests that predate the
+new specialties. Specialties apply to new rolls without rerolling valid saved assignments.
+Completed contributions remain credited; converted
 remaining units and their replacement are saved in `requirementConversions`, so reconnects cannot reroll
 or repeat the operation. Completed requests are untouched. Recorded unpaid monetary/reputation credit
 is preserved; suppressed historical cash is not retrospectively reconstructed. Paid rewards never replay.

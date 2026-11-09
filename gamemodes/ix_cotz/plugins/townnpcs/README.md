@@ -1,14 +1,17 @@
 # Town NPCs
 
-## Current progression, 8 November 2026
+## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
 the earlier progression, catalogue and service descriptions below. There are 639 hand-in milestones
 in 49 independent branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
-Each branch starts locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and
-finally Pripyat sources. Requests use valuables and artifacts only. Completion pays accumulated hand-in
+Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
+of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
+locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
+Marsh branches keep their first two original milestones and all work below 45% fully Marsh-obtainable,
+including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts only. Completion pays accumulated hand-in
 value at 60%, with no flat cash. Stock bonuses increase personal capacity without refilling it.
-Ledger uses 3× difficulty. Policy 3 converts outstanding invalid saved inputs while preserving credited
+Ledger uses 3× difficulty. Policy 4 converts outstanding invalid or out-of-region saved inputs while preserving credited
 contributions and completed unlocks. Inserted stages gate unfinished unlocks; Mute's redundant directory
 maintenance is removed. See the authoritative guide for regional thresholds and save handling.
 The authored equipment and regular-ammo chains are unchanged. Medicine has separate family branches; other branches follow the approved trader lines.

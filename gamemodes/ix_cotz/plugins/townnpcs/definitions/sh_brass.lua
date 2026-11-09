@@ -160,6 +160,12 @@ PLUGIN:Register("brass", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Reloading components and ammunition storage",
+		core = {"powder", "valuables_military_cases", "maintenance"},
+		support = {"valuables_drivers_wrenches", "valuables_equipment_pouches"},
+	},
+
 	progression = {
 		{
 			id = "v3/regular-ammo/22lr",
@@ -170,13 +176,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 1},
 			},
 			stock = {bonus = 1, item = "22lr"},
 			branchIndex = 1,
 			branchLength = 24,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/762x25",
@@ -187,13 +193,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
 			stock = {bonus = 1, item = "762x25"},
 			branchIndex = 2,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/45acp41/stock",
@@ -204,7 +210,7 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
 			stock = {
 				items = {"762x25"},
@@ -214,7 +220,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 3,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/45acp41",
@@ -225,13 +231,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
 			stock = {bonus = 1, item = "45acp41"},
 			branchIndex = 3,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x19/stock",
@@ -242,7 +248,7 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
 			stock = {
 				items = {"45acp41"},
@@ -252,7 +258,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 4,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x19",
@@ -263,13 +269,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
 			stock = {bonus = 1, item = "9x19"},
 			branchIndex = 4,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/45acp/stock",
@@ -280,7 +286,7 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_79ec06859af2", quantity = 1},
+				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
 			stock = {
 				items = {"9x19"},
@@ -290,7 +296,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 5,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/45acp",
@@ -301,13 +307,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_1040d77788e5", quantity = 1},
+				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
 			stock = {bonus = 1, item = "45acp"},
 			branchIndex = 5,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/545x39/stock",
@@ -318,7 +324,7 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_205de1f97475", quantity = 1},
+				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
 			stock = {
 				items = {"45acp"},
@@ -328,7 +334,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 6,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/545x39",
@@ -339,12 +345,12 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_ff9221acd69b", quantity = 1},
+				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/12gauge/stock",
@@ -355,7 +361,7 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_d15882f78941", quantity = 1},
+				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
 			stock = {
 				items = {"545x39"},
@@ -365,7 +371,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 7,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/12gauge",
@@ -376,13 +382,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_b21cf405c5c4", quantity = 1},
+				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
 			stock = {bonus = 1, item = "12gauge"},
 			branchIndex = 7,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/762x39/stock",
@@ -393,7 +399,7 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
 			stock = {
 				items = {"12gauge"},
@@ -403,7 +409,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 8,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/762x39",
@@ -414,12 +420,12 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/556x45",
@@ -430,13 +436,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_a7ac9e78d0db", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_5af1c64d6805", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x18/stock",
@@ -447,8 +453,8 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 1},
-				{pool = "town_expansion_556b24d69b4e", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 1},
+				{pool = "town_expansion_345e9482a19c", quantity = 1},
 			},
 			stock = {
 				items = {"556x45"},
@@ -458,7 +464,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 10,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x18",
@@ -469,14 +475,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_d24081910c9c", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_3c9eef7969b7", quantity = 1},
 			},
 			stock = {bonus = 1, item = "9x18"},
 			branchIndex = 10,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/762x54/stock",
@@ -487,8 +493,8 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 1},
-				{pool = "town_expansion_0a6023934ee5", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
+				{pool = "town_expansion_5af1c64d6805", quantity = 1},
 			},
 			stock = {
 				items = {"9x18"},
@@ -498,7 +504,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 11,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/762x54",
@@ -509,13 +515,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_cd0e60bdcd1b", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 2},
+				{pool = "town_expansion_345e9482a19c", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/357magnum/stock",
@@ -526,8 +532,8 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 1},
-				{pool = "town_expansion_ea517e420001", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
+				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
 			},
 			stock = {
 				items = {"762x54"},
@@ -537,7 +543,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 12,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/357magnum",
@@ -548,13 +554,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 2},
-				{pool = "town_expansion_c1e7b548cd21", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x39/stock",
@@ -565,8 +571,8 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 1},
-				{pool = "town_expansion_416dc2126ac2", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 1},
+				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
 			},
 			stock = {
 				items = {"357magnum"},
@@ -576,7 +582,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 13,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x39",
@@ -587,13 +593,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 2},
-				{pool = "town_expansion_b4ef035b35ed", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/44magnum/stock",
@@ -604,8 +610,8 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 1},
-				{pool = "town_expansion_dc60e627422e", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
+				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
 			},
 			stock = {
 				items = {"9x39"},
@@ -615,7 +621,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 14,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/44magnum",
@@ -626,13 +632,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 2},
+				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
 			},
 			branchIndex = 14,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x21/stock",
@@ -643,8 +649,8 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 1},
-				{pool = "town_expansion_c72e02d3eea4", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
+				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
 			},
 			stock = {
 				items = {"44magnum"},
@@ -654,7 +660,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 15,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/9x21",
@@ -665,13 +671,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_059350d44279", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
 			},
 			branchIndex = 15,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/762x51/stock",
@@ -682,8 +688,8 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 1},
-				{pool = "town_expansion_6e7fa9e45a6a", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 1},
+				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
 			},
 			stock = {
 				items = {"9x21"},
@@ -693,7 +699,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 16,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/762x51",
@@ -704,13 +710,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_674310f36256", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
 			},
 			branchIndex = 16,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/500magnum/stock",
@@ -721,9 +727,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_3aef95ba7916", quantity = 1},
-				{pool = "town_expansion_826912a32717", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_06e3662846a9", quantity = 1},
+				{pool = "town_expansion_cf32b67b5763", quantity = 1},
 			},
 			stock = {
 				items = {"762x51"},
@@ -733,7 +739,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 17,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/500magnum",
@@ -744,14 +750,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 3},
-				{pool = "town_expansion_97c27c1b560c", quantity = 2},
-				{pool = "town_expansion_00e5308b6f5a", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 3},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
+				{pool = "town_expansion_ebe78cb232b8", quantity = 1},
 			},
 			branchIndex = 17,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/338lapua/stock",
@@ -762,9 +768,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_97e4c64a5cd7", quantity = 1},
-				{pool = "town_expansion_55ee63501684", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 1},
+				{pool = "town_expansion_cf32b67b5763", quantity = 1},
 			},
 			stock = {
 				items = {"500magnum"},
@@ -774,7 +780,7 @@ PLUGIN:Register("brass", {
 			branchIndex = 18,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/338lapua",
@@ -785,14 +791,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 3},
-				{pool = "town_expansion_a4c8a72d0d48", quantity = 2},
-				{pool = "town_expansion_70eb62f6e9de", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_06e3662846a9", quantity = 2},
+				{pool = "town_expansion_ebe78cb232b8", quantity = 1},
 			},
 			branchIndex = 18,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/50ae/stock",
@@ -803,9 +809,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 2},
-				{pool = "town_expansion_05fc3ad8f3c7", quantity = 1},
-				{pool = "town_expansion_e5cb4c69f573", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 2},
+				{pool = "town_expansion_b04346bae92d", quantity = 1},
+				{pool = "town_expansion_55404b5c18da", quantity = 1},
 			},
 			stock = {
 				items = {"338lapua"},
@@ -820,7 +826,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/50ae",
@@ -831,9 +837,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 3},
-				{pool = "town_expansion_b6425e8074a3", quantity = 2},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_d4935d240567", quantity = 2},
+				{pool = "town_expansion_1d9c2a6cebe2", quantity = 1},
 			},
 			branchIndex = 19,
 			branchLength = 24,
@@ -843,7 +849,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/57x28/stock",
@@ -854,9 +860,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 2},
-				{pool = "town_expansion_84ea62849c8a", quantity = 1},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_0b8f25f6d80e", quantity = 1},
+				{pool = "town_expansion_55404b5c18da", quantity = 1},
 			},
 			stock = {
 				items = {"50ae"},
@@ -871,7 +877,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/57x28",
@@ -882,9 +888,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 3},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 2},
-				{pool = "town_expansion_926153587190", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 3},
+				{pool = "town_expansion_b04346bae92d", quantity = 2},
+				{pool = "town_expansion_1d9c2a6cebe2", quantity = 1},
 			},
 			branchIndex = 20,
 			branchLength = 24,
@@ -894,7 +900,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/127x55/stock",
@@ -905,9 +911,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 2},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 1},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_d4935d240567", quantity = 1},
+				{pool = "town_expansion_55404b5c18da", quantity = 1},
 			},
 			stock = {
 				items = {"57x28"},
@@ -922,7 +928,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/127x55",
@@ -933,9 +939,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 3},
-				{pool = "town_expansion_92cc72445fea", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_0b8f25f6d80e", quantity = 2},
+				{pool = "town_expansion_1d9c2a6cebe2", quantity = 1},
 			},
 			branchIndex = 21,
 			branchLength = 24,
@@ -945,7 +951,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/145x114/stock",
@@ -956,9 +962,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 2},
+				{pool = "town_expansion_b04346bae92d", quantity = 1},
+				{pool = "town_expansion_55404b5c18da", quantity = 1},
 			},
 			stock = {
 				items = {"127x55"},
@@ -973,7 +979,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/145x114",
@@ -984,9 +990,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 3},
-				{pool = "town_expansion_0b5abb416e5e", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_d4935d240567", quantity = 2},
+				{pool = "town_expansion_1d9c2a6cebe2", quantity = 1},
 			},
 			branchIndex = 22,
 			branchLength = 24,
@@ -996,7 +1002,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/700nitro/stock",
@@ -1007,9 +1013,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_0080d0807602", quantity = 1},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_0b8f25f6d80e", quantity = 1},
+				{pool = "town_expansion_55404b5c18da", quantity = 1},
 			},
 			stock = {
 				items = {"145x114"},
@@ -1024,7 +1030,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/700nitro",
@@ -1035,9 +1041,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 3},
-				{pool = "town_expansion_8b1ab5a676e4", quantity = 2},
-				{pool = "town_expansion_2e863004b9b0", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 3},
+				{pool = "town_expansion_b04346bae92d", quantity = 2},
+				{pool = "town_expansion_1d9c2a6cebe2", quantity = 1},
 			},
 			branchIndex = 23,
 			branchLength = 24,
@@ -1047,7 +1053,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/93x64/stock",
@@ -1058,10 +1064,10 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_97e4c64a5cd7", quantity = 2},
-				{pool = "town_expansion_6256123f00d1", quantity = 1},
-				{pool = "town_expansion_87c2038d9c43", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
+				{pool = "town_expansion_f721acc320b1", quantity = 1},
+				{pool = "town_expansion_f9b71240e016", quantity = 1},
 			},
 			stock = {
 				items = {"700nitro"},
@@ -1076,7 +1082,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/regular-ammo/93x64",
@@ -1087,10 +1093,10 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 4},
-				{pool = "town_expansion_a4c8a72d0d48", quantity = 3},
-				{pool = "town_expansion_55bca795ed4e", quantity = 2},
-				{pool = "town_expansion_dd51cce6af9e", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 4},
+				{pool = "town_expansion_06e3662846a9", quantity = 3},
+				{pool = "town_expansion_5f4e0b141b01", quantity = 2},
+				{pool = "town_expansion_b2bb8a451905", quantity = 1},
 			},
 			branchIndex = 24,
 			branchLength = 24,
@@ -1100,7 +1106,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/22lrhp",
@@ -1114,13 +1120,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "22lr", output = "22lrhp"},
 			branchIndex = 1,
 			branchLength = 19,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/762x25hp",
@@ -1134,13 +1140,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_d15882f78941", quantity = 1},
+				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "762x25", output = "762x25hp"},
 			branchIndex = 2,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/9x19hp",
@@ -1154,13 +1160,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_b21cf405c5c4", quantity = 1},
+				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "9x19", output = "9x19hp"},
 			branchIndex = 3,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/45acphp",
@@ -1174,13 +1180,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_3cc48f833d47", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "45acp", output = "45acphp"},
 			branchIndex = 4,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/545x39hp",
@@ -1194,13 +1200,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_f85eacc17ffe", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "545x39", output = "545x39hp"},
 			branchIndex = 5,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/762x39hp",
@@ -1214,13 +1220,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_7f8b02402f29", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "762x39", output = "762x39hp"},
 			branchIndex = 6,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/556x45hp",
@@ -1234,14 +1240,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_556b24d69b4e", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 2},
+				{pool = "town_expansion_345e9482a19c", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "556x45", output = "556x45hp"},
 			branchIndex = 7,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/9x18hp",
@@ -1255,14 +1261,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_d24081910c9c", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_3c9eef7969b7", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "9x18", output = "9x18hp"},
 			branchIndex = 8,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/762x54hp",
@@ -1276,14 +1282,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_0a6023934ee5", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_5af1c64d6805", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "762x54", output = "762x54hp"},
 			branchIndex = 9,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/357magnumhp",
@@ -1297,14 +1303,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_386837cd3695", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 2},
+				{pool = "town_expansion_fdb6ddf2c7c8", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "357magnum", output = "357magnumhp"},
 			branchIndex = 10,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/9x39hp",
@@ -1318,14 +1324,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_ea517e420001", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_9a1c3a23af99", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "9x39", output = "9x39hp"},
 			branchIndex = 11,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/44magnumhp",
@@ -1339,14 +1345,14 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 2},
-				{pool = "town_expansion_c1e7b548cd21", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "44magnum", output = "44magnumhp"},
 			branchIndex = 12,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/9x21hp",
@@ -1360,15 +1366,15 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 3},
-				{pool = "town_expansion_0d0843660b6f", quantity = 2},
-				{pool = "town_expansion_7d57f08cb0c3", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 3},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
+				{pool = "town_expansion_cf32b67b5763", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "9x21", output = "9x21hp"},
 			branchIndex = 13,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/762x51hp",
@@ -1382,15 +1388,15 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 3},
-				{pool = "town_expansion_f361db1df6dc", quantity = 2},
-				{pool = "town_expansion_0bd4d793ebe1", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
+				{pool = "town_expansion_ebe78cb232b8", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "762x51", output = "762x51hp"},
 			branchIndex = 14,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/500magnumhp",
@@ -1404,9 +1410,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 3},
-				{pool = "town_expansion_84ea62849c8a", quantity = 2},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_0b8f25f6d80e", quantity = 2},
+				{pool = "town_expansion_55404b5c18da", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "500magnum", output = "500magnumhp"},
 			branchIndex = 15,
@@ -1417,7 +1423,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/338lapuahp",
@@ -1431,9 +1437,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 3},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 2},
-				{pool = "town_expansion_926153587190", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 3},
+				{pool = "town_expansion_b04346bae92d", quantity = 2},
+				{pool = "town_expansion_1d9c2a6cebe2", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "338lapua", output = "338lapuahp"},
 			branchIndex = 16,
@@ -1444,7 +1450,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/50aehp",
@@ -1458,9 +1464,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 3},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 2},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_d4935d240567", quantity = 2},
+				{pool = "town_expansion_55404b5c18da", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "50ae", output = "50aehp"},
 			branchIndex = 17,
@@ -1471,7 +1477,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/57x28hp",
@@ -1485,9 +1491,9 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 3},
-				{pool = "town_expansion_92cc72445fea", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 3},
+				{pool = "town_expansion_0b8f25f6d80e", quantity = 2},
+				{pool = "town_expansion_1d9c2a6cebe2", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "57x28", output = "57x28hp"},
 			branchIndex = 18,
@@ -1498,7 +1504,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/hp-ammo/145x114hp",
@@ -1512,10 +1518,10 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 4},
-				{pool = "town_expansion_0f26e1fa21b6", quantity = 3},
-				{pool = "town_expansion_d2c91fff38b8", quantity = 2},
-				{pool = "town_expansion_47ce687524bf", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 4},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 3},
+				{pool = "town_expansion_480c3fdbad1c", quantity = 2},
+				{pool = "town_expansion_f9b71240e016", quantity = 1},
 			},
 			ammoExchange = {boxes = 2, input = "145x114", output = "145x114hp"},
 			branchIndex = 19,
@@ -1526,7 +1532,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/shotgun-loads/12gaugetr",
@@ -1540,12 +1546,12 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 3,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/shotgun-loads/12gaugedt",
@@ -1556,13 +1562,13 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 2},
+				{pool = "town_expansion_74c4f70d66c7", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/shotgun-loads/12gaugemg/stock",
@@ -1573,10 +1579,10 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_97c27c1b560c", quantity = 2},
-				{pool = "town_expansion_2e863004b9b0", quantity = 1},
-				{pool = "town_expansion_896e6b1a62f9", quantity = 1},
+				{pool = "town_expansion_14486da7a41d", quantity = 2},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 2},
+				{pool = "town_expansion_480c3fdbad1c", quantity = 1},
+				{pool = "town_expansion_b2bb8a451905", quantity = 1},
 			},
 			stock = {
 				items = {"12gaugedt"},
@@ -1591,7 +1597,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/shotgun-loads/12gaugemg",
@@ -1602,10 +1608,10 @@ PLUGIN:Register("brass", {
 			briefing = "I have a depot request to fill. Read the list; anything outside it will only complicate the count. Bring everything on the list back here; I need the full delivery.",
 			completion = "That matches the request. I will enter it on my side as well.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 4},
-				{pool = "town_expansion_97e4c64a5cd7", quantity = 3},
-				{pool = "town_expansion_6256123f00d1", quantity = 2},
-				{pool = "town_expansion_87c2038d9c43", quantity = 1},
+				{pool = "town_expansion_e03ae53c14f9", quantity = 4},
+				{pool = "town_expansion_dd64d6ff04ac", quantity = 3},
+				{pool = "town_expansion_f721acc320b1", quantity = 2},
+				{pool = "town_expansion_f9b71240e016", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 3,
@@ -1615,7 +1621,7 @@ PLUGIN:Register("brass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

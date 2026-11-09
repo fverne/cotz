@@ -49,12 +49,34 @@ local introduction = "cotz/town/old-timer/v3/knives/knife2"
 local traveller = context.fixture.character()
 check(not ix.progression.definitions[introduction].allowedRequirements.value_controller,
 	"Pripyat-only salvage is outside the local introduction")
-putLine(traveller, introduction, {active = true, requirements = {value_controller = 5},
+putLine(traveller, introduction, {active = true, requirementPolicy = 3, requirements = {value_controller = 5},
 	complexData = {value_controller = 1}})
 ix.progression.AssignActiveRequirements(traveller)
 local converted = ix.progression.GetLine(traveller, introduction)
 check(converted.requirementConversions[1].quantity == 4 and converted.requirements.value_controller == 1,
 	"a valuable from an unavailable region is converted while its old contribution stays credited")
+check(converted.requirementPolicy == 4, "policy-three saves upgrade to the protected Marsh request policy")
+local secondStep = "cotz/town/old-timer/v3/knives/knife3"
+local returning = context.fixture.character()
+putLine(returning, introduction, {completed = true, completionRewardsPaid = true})
+putLine(returning, secondStep, {active = true, requirementPolicy = 3,
+	requirements = {value_sensor_d = 4}, complexData = {value_sensor_d = 1}})
+ix.progression.AssignActiveRequirements(returning)
+local localRequest = ix.progression.GetLine(returning, secondStep)
+check(localRequest.requirementConversions[1].quantity == 3 and localRequest.requirements.value_sensor_d == 1,
+	"the second Marsh milestone replaces only outstanding later-region goods")
+local localItem = localRequest.requirementConversions[1].to
+check(ix.progression.definitions[secondStep].allowedRequirements[localItem],
+	"the replacement is obtainable within the protected Marsh introduction")
+local existing = context.fixture.character()
+local brassIntro = "cotz/town/brass/v3/regular-ammo/22lr"
+putLine(existing, brassIntro, {active = true, requirementPolicy = 3,
+	requirements = {value_coffee = 4}, complexData = {value_coffee = 1}})
+ix.progression.AssignActiveRequirements(existing)
+local saved = ix.progression.GetLine(existing, brassIntro)
+check(saved.requirements.value_coffee == 4 and saved.complexData.value_coffee == 1
+	and #saved.requirementConversions == 0,
+	"a valid saved assignment is not rerolled merely to match the new contact specialty")
 local veteran = context.fixture.character()
 putLine(veteran, introduction, {completed = true, completionRewardsPaid = true,
 	requirements = {medic_bandage_1 = 2}, complexData = {medic_bandage_1 = 2}})

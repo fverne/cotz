@@ -130,6 +130,16 @@ PLUGIN:Register("quartermaster", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Field issue kits and military packing",
+		core = {
+			"valuables_equipment_pouches",
+			"valuables_protective_textiles",
+			"valuables_military_cases",
+		},
+		support = {"administrative_documents", "valuables_armour_panels"},
+	},
+
 	progression = {
 		{
 			id = "v3/nato-rifles/rugermini14",
@@ -140,12 +150,12 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 13,
 			acquisitionMaps = {"rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/famas",
@@ -156,12 +166,12 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_6fd371b9f765", quantity = 1},
+				{pool = "town_expansion_a3c072e455ad", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/l85/stock",
@@ -172,7 +182,7 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_25b2bfa86bbf", quantity = 1},
+				{pool = "town_expansion_463c5c67dde4", quantity = 1},
 			},
 			stock = {
 				items = {"famas"},
@@ -182,7 +192,7 @@ PLUGIN:Register("quartermaster", {
 			branchIndex = 3,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/l85",
@@ -193,12 +203,12 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_3a83224367ec", quantity = 1},
+				{pool = "town_expansion_10c474c21e20", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/m16a4/stock",
@@ -209,7 +219,7 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_00b462552751", quantity = 1},
+				{pool = "town_expansion_a3c072e455ad", quantity = 1},
 			},
 			stock = {
 				items = {"l85"},
@@ -219,7 +229,7 @@ PLUGIN:Register("quartermaster", {
 			branchIndex = 4,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/m16a4",
@@ -230,12 +240,12 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_cfffafec5791", quantity = 1},
+				{pool = "town_expansion_463c5c67dde4", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/lr300",
@@ -246,13 +256,13 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 2},
-				{pool = "town_expansion_5a6ee4aca70c", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 2},
+				{pool = "town_expansion_92ac3f54b2b1", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/sg552/stock",
@@ -263,8 +273,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 1},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 1},
+				{pool = "town_expansion_50ea2160bbed", quantity = 1},
 			},
 			stock = {
 				items = {"lr300"},
@@ -274,7 +284,7 @@ PLUGIN:Register("quartermaster", {
 			branchIndex = 6,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/sg552",
@@ -285,13 +295,13 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 2},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_7087504fe790", quantity = 2},
+				{pool = "town_expansion_81a46c42fa94", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/g36c/stock",
@@ -302,8 +312,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 1},
-				{pool = "town_expansion_0da47dd4f95b", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 1},
+				{pool = "town_expansion_92ac3f54b2b1", quantity = 1},
 			},
 			stock = {
 				items = {"sg552"},
@@ -313,7 +323,7 @@ PLUGIN:Register("quartermaster", {
 			branchIndex = 7,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/g36c",
@@ -324,13 +334,13 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 2},
-				{pool = "town_expansion_84052fb593e1", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 2},
+				{pool = "town_expansion_50ea2160bbed", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/aug/stock",
@@ -341,8 +351,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_f3ba8c0648cf", quantity = 1},
-				{pool = "town_expansion_dc60e627422e", quantity = 1},
+				{pool = "town_expansion_7087504fe790", quantity = 1},
+				{pool = "town_expansion_81a46c42fa94", quantity = 1},
 			},
 			stock = {
 				items = {"g36c"},
@@ -352,7 +362,7 @@ PLUGIN:Register("quartermaster", {
 			branchIndex = 8,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/aug",
@@ -363,13 +373,13 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 2},
+				{pool = "town_expansion_92ac3f54b2b1", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/f2000/stock",
@@ -380,9 +390,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_738a3098b192", quantity = 2},
-				{pool = "town_expansion_ff17fd8b112a", quantity = 1},
-				{pool = "town_expansion_33716461332d", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 2},
+				{pool = "town_expansion_5b1ac2e506f4", quantity = 1},
+				{pool = "town_expansion_962502868086", quantity = 1},
 			},
 			stock = {
 				items = {"aug"},
@@ -392,7 +402,7 @@ PLUGIN:Register("quartermaster", {
 			branchIndex = 9,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/f2000",
@@ -403,14 +413,14 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_2ebb1070f409", quantity = 3},
-				{pool = "town_expansion_e742a60964e7", quantity = 2},
-				{pool = "town_expansion_82bc95261189", quantity = 1},
+				{pool = "town_expansion_7087504fe790", quantity = 3},
+				{pool = "town_expansion_476ccec31a60", quantity = 2},
+				{pool = "town_expansion_f40192100445", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/hk416/stock",
@@ -421,9 +431,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_c0a68236b0e3", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 2},
+				{pool = "town_expansion_067f2ff858b4", quantity = 1},
+				{pool = "town_expansion_5e7755153dea", quantity = 1},
 			},
 			stock = {
 				items = {"f2000"},
@@ -438,7 +448,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/hk416",
@@ -449,9 +459,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_50823fd9b548", quantity = 3},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 2},
-				{pool = "town_expansion_755dc589f9af", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 3},
+				{pool = "town_expansion_c494fa44da6f", quantity = 2},
+				{pool = "town_expansion_58b845df3a69", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 13,
@@ -461,7 +471,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/g3a3/stock",
@@ -472,9 +482,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 2},
-				{pool = "town_expansion_0080d0807602", quantity = 1},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_7087504fe790", quantity = 2},
+				{pool = "town_expansion_80a92a643d83", quantity = 1},
+				{pool = "town_expansion_5e7755153dea", quantity = 1},
 			},
 			stock = {
 				items = {"hk416"},
@@ -489,7 +499,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/g3a3",
@@ -500,9 +510,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 3},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 2},
-				{pool = "town_expansion_0afe99a3b951", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 3},
+				{pool = "town_expansion_067f2ff858b4", quantity = 2},
+				{pool = "town_expansion_58b845df3a69", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 13,
@@ -512,7 +522,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/fnfal/stock",
@@ -523,9 +533,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 2},
-				{pool = "town_expansion_6e9c8b03f6ea", quantity = 1},
-				{pool = "town_expansion_2bbd6b8f931b", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 2},
+				{pool = "town_expansion_c494fa44da6f", quantity = 1},
+				{pool = "town_expansion_5e7755153dea", quantity = 1},
 			},
 			stock = {
 				items = {"g3a3"},
@@ -540,7 +550,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/fnfal",
@@ -551,9 +561,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 3},
-				{pool = "town_expansion_9234fbb8b48d", quantity = 2},
-				{pool = "town_expansion_f0012a3b3266", quantity = 1},
+				{pool = "town_expansion_7087504fe790", quantity = 3},
+				{pool = "town_expansion_80a92a643d83", quantity = 2},
+				{pool = "town_expansion_58b845df3a69", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 13,
@@ -563,7 +573,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/m14/stock",
@@ -574,10 +584,10 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 2},
-				{pool = "town_expansion_460818c83f7c", quantity = 2},
-				{pool = "town_expansion_b19adc2297ab", quantity = 1},
-				{pool = "town_expansion_1c04489bf81a", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 2},
+				{pool = "town_expansion_0a4fdf872aca", quantity = 2},
+				{pool = "town_expansion_71529337098d", quantity = 1},
+				{pool = "town_expansion_6700ef70fe69", quantity = 1},
 			},
 			stock = {
 				items = {"fnfal"},
@@ -592,7 +602,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-rifles/m14",
@@ -603,10 +613,10 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I need this supply request filled before I can settle the allocations. Bring the listed material here for checking. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will enter the delivery before assigning it elsewhere.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 4},
-				{pool = "town_expansion_3e9c17aa86ae", quantity = 3},
-				{pool = "town_expansion_50c359fedf1b", quantity = 2},
-				{pool = "town_expansion_c69d67a05252", quantity = 1},
+				{pool = "town_expansion_41e00477b4e5", quantity = 4},
+				{pool = "town_expansion_5b1ac2e506f4", quantity = 3},
+				{pool = "town_expansion_098b8203558b", quantity = 2},
+				{pool = "town_expansion_e2d8cb597d6e", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 13,
@@ -616,7 +626,7 @@ PLUGIN:Register("quartermaster", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

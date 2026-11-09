@@ -124,6 +124,16 @@ PLUGIN:Register("wake", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Personal effects and recovered belongings",
+		core = {
+			"valuables_equipment_pouches",
+			"valuables_personal_effects",
+			"small_valuables",
+		},
+		support = {"valuables_office_records", "valuables_transit_cases"},
+	},
+
 	progression = {
 		{
 			id = "v3/backpacks/backpack_sling",
@@ -134,12 +144,12 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 17,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_duffle",
@@ -150,12 +160,12 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_758357f56716", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_sanitar/stock",
@@ -166,7 +176,7 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_1a2d0c87676d", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_duffle"},
@@ -176,7 +186,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 3,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_sanitar",
@@ -187,12 +197,12 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_696e2dd3f211", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_tbag/stock",
@@ -203,7 +213,7 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_758357f56716", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_sanitar"},
@@ -213,7 +223,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 4,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_tbag",
@@ -224,12 +234,12 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_1a2d0c87676d", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_tourist/stock",
@@ -240,7 +250,7 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_696e2dd3f211", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_tbag"},
@@ -250,7 +260,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 5,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_tourist",
@@ -261,12 +271,12 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_79ec06859af2", quantity = 1},
+				{pool = "town_expansion_758357f56716", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_takedown_1/stock",
@@ -277,7 +287,7 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_205de1f97475", quantity = 1},
+				{pool = "town_expansion_1a2d0c87676d", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_tourist"},
@@ -287,7 +297,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 6,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_takedown_1",
@@ -301,12 +311,12 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_ff9221acd69b", quantity = 1},
+				{pool = "town_expansion_696e2dd3f211", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_takedown_2",
@@ -317,13 +327,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 2},
-				{pool = "town_expansion_6497cb91015d", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 2},
+				{pool = "town_expansion_0529adf6c5d2", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_mbss/stock",
@@ -334,8 +344,8 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 1},
-				{pool = "town_expansion_39848af619f5", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 1},
+				{pool = "town_expansion_bd9e589d4158", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_takedown_2"},
@@ -345,7 +355,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 8,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_mbss",
@@ -356,13 +366,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_d38ea7bb1014", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 2},
+				{pool = "town_expansion_beeb2b5e9d7a", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_vkbo/stock",
@@ -373,8 +383,8 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 1},
-				{pool = "town_expansion_c72e02d3eea4", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 1},
+				{pool = "town_expansion_d6d65d00aefc", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_mbss"},
@@ -384,7 +394,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 9,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_vkbo",
@@ -395,13 +405,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_059350d44279", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 2},
+				{pool = "town_expansion_ca75e0783950", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_pilgrim/stock",
@@ -412,8 +422,8 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 1},
-				{pool = "town_expansion_6e7fa9e45a6a", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 1},
+				{pool = "town_expansion_208adaa6e28d", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_vkbo"},
@@ -423,7 +433,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 10,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_pilgrim",
@@ -434,13 +444,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
-				{pool = "town_expansion_c214d1c085b4", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 2},
+				{pool = "town_expansion_d6d65d00aefc", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_scavbackpack/stock",
@@ -451,8 +461,8 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 1},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 1},
+				{pool = "town_expansion_ca75e0783950", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_pilgrim"},
@@ -462,7 +472,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 11,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_scavbackpack",
@@ -476,13 +486,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 2},
+				{pool = "town_expansion_208adaa6e28d", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_1/stock",
@@ -493,9 +503,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 2},
-				{pool = "town_expansion_e74dd947b2b9", quantity = 1},
-				{pool = "town_expansion_55ee63501684", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 2},
+				{pool = "town_expansion_5efeace8d008", quantity = 1},
+				{pool = "town_expansion_89d21f3fe241", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_scavbackpack"},
@@ -505,7 +515,7 @@ PLUGIN:Register("wake", {
 			branchIndex = 12,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_1",
@@ -516,14 +526,14 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 3},
-				{pool = "town_expansion_a4c8a72d0d48", quantity = 2},
-				{pool = "town_expansion_70eb62f6e9de", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 3},
+				{pool = "town_expansion_1929f33f5a02", quantity = 2},
+				{pool = "town_expansion_c39f19f09d27", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_3/stock",
@@ -534,9 +544,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 2},
-				{pool = "town_expansion_05fc3ad8f3c7", quantity = 1},
-				{pool = "town_expansion_e5cb4c69f573", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 2},
+				{pool = "town_expansion_02d5f2de227d", quantity = 1},
+				{pool = "town_expansion_b087f3b2b5c6", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_1"},
@@ -551,7 +561,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_3",
@@ -562,9 +572,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 3},
-				{pool = "town_expansion_b6425e8074a3", quantity = 2},
-				{pool = "town_expansion_3fe1d9dec611", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 3},
+				{pool = "town_expansion_86feb8fa1ef4", quantity = 2},
+				{pool = "town_expansion_3c094aff05b6", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 17,
@@ -574,7 +584,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_2/stock",
@@ -585,9 +595,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 2},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 1},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 2},
+				{pool = "town_expansion_3dac069fdbb3", quantity = 1},
+				{pool = "town_expansion_b087f3b2b5c6", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_3"},
@@ -602,7 +612,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_2",
@@ -613,9 +623,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 3},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 2},
-				{pool = "town_expansion_926153587190", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 3},
+				{pool = "town_expansion_02d5f2de227d", quantity = 2},
+				{pool = "town_expansion_3c094aff05b6", quantity = 1},
 			},
 			branchIndex = 14,
 			branchLength = 17,
@@ -625,7 +635,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_1_large/stock",
@@ -636,9 +646,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 2},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 1},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 2},
+				{pool = "town_expansion_86feb8fa1ef4", quantity = 1},
+				{pool = "town_expansion_b087f3b2b5c6", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_2"},
@@ -653,7 +663,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_1_large",
@@ -664,9 +674,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 3},
-				{pool = "town_expansion_92cc72445fea", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 3},
+				{pool = "town_expansion_3dac069fdbb3", quantity = 2},
+				{pool = "town_expansion_3c094aff05b6", quantity = 1},
 			},
 			branchIndex = 15,
 			branchLength = 17,
@@ -676,7 +686,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_3_large/stock",
@@ -687,9 +697,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 2},
+				{pool = "town_expansion_02d5f2de227d", quantity = 1},
+				{pool = "town_expansion_b087f3b2b5c6", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_1_large"},
@@ -704,7 +714,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_3_large",
@@ -715,9 +725,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 3},
-				{pool = "town_expansion_7d3b07ef7678", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 3},
+				{pool = "town_expansion_86feb8fa1ef4", quantity = 2},
+				{pool = "town_expansion_3c094aff05b6", quantity = 1},
 			},
 			branchIndex = 16,
 			branchLength = 17,
@@ -727,7 +737,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_2_large/stock",
@@ -738,10 +748,10 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
-				{pool = "town_expansion_0f26e1fa21b6", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
-				{pool = "town_expansion_fa02a76a2a16", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 2},
+				{pool = "town_expansion_1929f33f5a02", quantity = 2},
+				{pool = "town_expansion_de6782916b35", quantity = 1},
+				{pool = "town_expansion_5b9bf3ce5bab", quantity = 1},
 			},
 			stock = {
 				items = {"backpack_3_large"},
@@ -756,7 +766,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/backpacks/backpack_2_large",
@@ -767,10 +777,10 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 4},
-				{pool = "town_expansion_ed96d6c4f5cd", quantity = 3},
-				{pool = "town_expansion_95f1c40613bd", quantity = 2},
-				{pool = "town_expansion_fae55626b0bd", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 4},
+				{pool = "town_expansion_b33ad10ab3c4", quantity = 3},
+				{pool = "town_expansion_0301e3f19be4", quantity = 2},
+				{pool = "town_expansion_01ffc26eb395", quantity = 1},
 			},
 			branchIndex = 17,
 			branchLength = 17,
@@ -780,7 +790,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/carry-weight/01",
@@ -791,13 +801,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 1},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 1,
 			branchLength = 5,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/carry-weight/02",
@@ -808,13 +818,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_205de1f97475", quantity = 1},
+				{pool = "town_expansion_696e2dd3f211", quantity = 1},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 2,
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/carry-weight/03",
@@ -825,14 +835,14 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 2},
-				{pool = "town_expansion_416dc2126ac2", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 2},
+				{pool = "town_expansion_208adaa6e28d", quantity = 1},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 3,
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/carry-weight/04",
@@ -843,9 +853,9 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 3},
-				{pool = "town_expansion_b6425e8074a3", quantity = 2},
-				{pool = "town_expansion_3fe1d9dec611", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 3},
+				{pool = "town_expansion_86feb8fa1ef4", quantity = 2},
+				{pool = "town_expansion_3c094aff05b6", quantity = 1},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 4,
@@ -856,7 +866,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/carry-weight/05",
@@ -867,10 +877,10 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 4},
-				{pool = "town_expansion_3aef95ba7916", quantity = 3},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 2},
-				{pool = "town_expansion_2f1adee2ea00", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 4},
+				{pool = "town_expansion_1929f33f5a02", quantity = 3},
+				{pool = "town_expansion_de6782916b35", quantity = 2},
+				{pool = "town_expansion_5b9bf3ce5bab", quantity = 1},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 5,
@@ -881,7 +891,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/inventory-rows/01",
@@ -892,13 +902,13 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 1},
+				{pool = "town_expansion_03117c97ec1f", quantity = 1},
 			},
 			capacity = {amount = 1, kind = "rows"},
 			branchIndex = 1,
 			branchLength = 2,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/inventory-rows/02",
@@ -909,10 +919,10 @@ PLUGIN:Register("wake", {
 			briefing = "I need supplies and recovered belongings brought here for sorting. Check the request, and keep personal effects together while you carry them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave those here so I can sort them carefully.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 4},
-				{pool = "town_expansion_8771e41ba0f9", quantity = 3},
-				{pool = "town_expansion_ec531a954c30", quantity = 2},
-				{pool = "town_expansion_f1b1040d27b9", quantity = 1},
+				{pool = "town_expansion_7cdeea797da2", quantity = 4},
+				{pool = "town_expansion_5efeace8d008", quantity = 3},
+				{pool = "town_expansion_ea7d5eddcaf8", quantity = 2},
+				{pool = "town_expansion_5b9bf3ce5bab", quantity = 1},
 			},
 			capacity = {amount = 1, kind = "rows"},
 			branchIndex = 2,
@@ -923,7 +933,7 @@ PLUGIN:Register("wake", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

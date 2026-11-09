@@ -115,6 +115,12 @@ PLUGIN:Register("spoor", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Hunting equipment care and field observations",
+		core = {"maintenance", "valuables_field_records"},
+		support = {"valuables_cutting_tools", "valuables_instruments"},
+	},
+
 	progression = {
 		{
 			id = "v3/slow-rifles/mp18",
@@ -125,12 +131,12 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 12,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/sako85nato",
@@ -141,12 +147,12 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_8eca1366600b", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/obrez/stock",
@@ -157,7 +163,7 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_c724ce18a083", quantity = 1},
 			},
 			stock = {
 				items = {"sako85nato"},
@@ -167,7 +173,7 @@ PLUGIN:Register("spoor", {
 			branchIndex = 3,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/obrez",
@@ -178,12 +184,12 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_8eca1366600b", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/w9422357/stock",
@@ -194,7 +200,7 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_c724ce18a083", quantity = 1},
 			},
 			stock = {
 				items = {"obrez"},
@@ -204,7 +210,7 @@ PLUGIN:Register("spoor", {
 			branchIndex = 4,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/w9422357",
@@ -215,12 +221,12 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_8eca1366600b", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/mosin",
@@ -231,13 +237,13 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_0a6023934ee5", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_a58336d646ec", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/sako85/stock",
@@ -248,8 +254,8 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 1},
-				{pool = "town_expansion_386837cd3695", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 1},
+				{pool = "town_expansion_050652679f9e", quantity = 1},
 			},
 			stock = {
 				items = {"mosin"},
@@ -259,7 +265,7 @@ PLUGIN:Register("spoor", {
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/sako85",
@@ -270,13 +276,13 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_ea517e420001", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_b1cead5a9f71", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/w1895/stock",
@@ -287,8 +293,8 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 1},
-				{pool = "town_expansion_416dc2126ac2", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 1},
+				{pool = "town_expansion_050652679f9e", quantity = 1},
 			},
 			stock = {
 				items = {"sako85"},
@@ -298,7 +304,7 @@ PLUGIN:Register("spoor", {
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/w1895",
@@ -309,13 +315,13 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 2},
-				{pool = "town_expansion_b4ef035b35ed", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_b1cead5a9f71", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/obrezmalfunction/stock",
@@ -326,8 +332,8 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 1},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 1},
+				{pool = "town_expansion_050652679f9e", quantity = 1},
 			},
 			stock = {
 				items = {"w1895"},
@@ -337,7 +343,7 @@ PLUGIN:Register("spoor", {
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/obrezmalfunction",
@@ -348,13 +354,13 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_b1cead5a9f71", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/sv98/stock",
@@ -365,9 +371,9 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 2},
-				{pool = "town_expansion_8771e41ba0f9", quantity = 1},
-				{pool = "town_expansion_089cde350b28", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_d1ec24e83ba7", quantity = 1},
+				{pool = "town_expansion_46a6739fbe52", quantity = 1},
 			},
 			stock = {
 				items = {"obrezmalfunction"},
@@ -377,7 +383,7 @@ PLUGIN:Register("spoor", {
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/sv98",
@@ -388,14 +394,14 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 3},
-				{pool = "town_expansion_319a165c05e4", quantity = 2},
-				{pool = "town_expansion_82bc95261189", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 3},
+				{pool = "town_expansion_d1ec24e83ba7", quantity = 2},
+				{pool = "town_expansion_fb1034610700", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/lax44/stock",
@@ -406,9 +412,9 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_2c143c0d71d7", quantity = 1},
+				{pool = "town_expansion_d274ef0cff31", quantity = 1},
 			},
 			stock = {
 				items = {"sv98"},
@@ -423,7 +429,7 @@ PLUGIN:Register("spoor", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/lax44",
@@ -434,9 +440,9 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 3},
-				{pool = "town_expansion_7d3b07ef7678", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 3},
+				{pool = "town_expansion_e4d21b743b7b", quantity = 2},
+				{pool = "town_expansion_3b29bbed01c1", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 12,
@@ -446,7 +452,7 @@ PLUGIN:Register("spoor", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/l115/stock",
@@ -457,9 +463,9 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 1},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_2c143c0d71d7", quantity = 1},
+				{pool = "town_expansion_d274ef0cff31", quantity = 1},
 			},
 			stock = {
 				items = {"lax44"},
@@ -474,7 +480,7 @@ PLUGIN:Register("spoor", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/l115",
@@ -485,9 +491,9 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 3},
-				{pool = "town_expansion_0080d0807602", quantity = 2},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 3},
+				{pool = "town_expansion_e4d21b743b7b", quantity = 2},
+				{pool = "town_expansion_3b29bbed01c1", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 12,
@@ -497,7 +503,7 @@ PLUGIN:Register("spoor", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/trg42/stock",
@@ -508,10 +514,10 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_97c27c1b560c", quantity = 2},
-				{pool = "town_expansion_2e863004b9b0", quantity = 1},
-				{pool = "town_expansion_87c2038d9c43", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 2},
+				{pool = "town_expansion_d1ec24e83ba7", quantity = 2},
+				{pool = "town_expansion_8017b623b0fa", quantity = 1},
+				{pool = "town_expansion_47c04d62f149", quantity = 1},
 			},
 			stock = {
 				items = {"l115"},
@@ -526,7 +532,7 @@ PLUGIN:Register("spoor", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/slow-rifles/trg42",
@@ -537,10 +543,10 @@ PLUGIN:Register("spoor", {
 			briefing = "I need supplies for the hunting kit. Check the list and bring them back here when you have them. Bring everything on the list back here; I need the full delivery.",
 			completion = "Good. I will look these over before the next walk.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 4},
-				{pool = "town_expansion_97e4c64a5cd7", quantity = 3},
-				{pool = "town_expansion_55bca795ed4e", quantity = 2},
-				{pool = "town_expansion_dd51cce6af9e", quantity = 1},
+				{pool = "town_expansion_5969fddbb2ec", quantity = 4},
+				{pool = "town_expansion_d1ec24e83ba7", quantity = 3},
+				{pool = "town_expansion_de712ebb8e1f", quantity = 2},
+				{pool = "town_expansion_2587b90a129f", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 12,
@@ -550,7 +556,7 @@ PLUGIN:Register("spoor", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

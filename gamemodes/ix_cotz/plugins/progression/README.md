@@ -19,6 +19,11 @@ The tab uses a fill-docked scrolling list with one card per contact. Within each
 dividers separate the heading and earned benefits from each progression section. Long task
 requirements and rewards wrap inside the card.
 
+Town requests use each contact's explicit core/support specialty pools rather than a global theme
+rotation. Marsh branches' first two original milestones and all work below 45% use only Marsh-sourced
+candidates. Policy 4 replaces remaining later-region demands in those openings without discarding
+fulfilled contributions. Valid saved requests stay fixed; new requests receive the revised specialties.
+
 This plugin owns character progression storage, persistent item requirements, numeric counters,
 prerequisite validation, purchase permissions, completion payouts, pending reward claims and services.
 Town content is authored in [townnpcs](../townnpcs/README.md); superseded town definition files are removed.
@@ -51,7 +56,7 @@ these alternatives are not promises of equal availability on every map. Tool tie
 remain distinct. Pool IDs, quantities and saved progression selections are preserved.
 
 libs/sh_storage.lua exposes character-owned snapshots. Server mutations commit through the setter;
-clients only read replicated state. Requirements are assigned once by the server. Policy 3 converts outstanding ineligible/out-of-region
+clients only read replicated state. Requirements are assigned once by the server. Policy 4 converts outstanding ineligible/out-of-region
 town inputs once while preserving fulfilled contributions and eligible saved requests. Hand-ins validate
 character, NPC, access, map, inventory and remaining units.
 Whole-stack removal must succeed before progress/rewards are granted.
@@ -75,7 +80,7 @@ The scoreboard's local/all-server filter and remote identities are always availa
 tool permissions retain their gates. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
 
 Only current registered definitions participate in task discovery and equipment gating. There is no
-old-ID permission import or completion alias. The explicit policy-3 request conversion and activation
+old-ID permission import or completion alias. The explicit policy-4 request conversion and activation
 of inserted intermissions preserve existing completions; unfinished unlocks require the new stages.
 
 Completion speech prefixes the authored reply with the completing character's current name for

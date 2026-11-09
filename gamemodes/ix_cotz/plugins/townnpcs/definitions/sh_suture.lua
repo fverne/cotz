@@ -120,6 +120,12 @@ PLUGIN:Register("suture", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Cloth, protective layers and sewing supplies",
+		core = {"valuables_textile_supplies", "valuables_protective_textiles"},
+		support = {"valuables_cutting_tools", "valuables_armour_panels"},
+	},
+
 	progression = {
 		{
 			id = "v3/suit-attachments/attachment_ceramicplate_1",
@@ -130,12 +136,12 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 13,
 			acquisitionMaps = {"rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_steelplate_1",
@@ -146,12 +152,12 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_6fd371b9f765", quantity = 1},
+				{pool = "town_expansion_048d305d8d4f", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_fabric_1/stock",
@@ -162,7 +168,7 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_25b2bfa86bbf", quantity = 1},
+				{pool = "town_expansion_5679d68e5005", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_steelplate_1"},
@@ -172,7 +178,7 @@ PLUGIN:Register("suture", {
 			branchIndex = 3,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_fabric_1",
@@ -186,12 +192,12 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_3a83224367ec", quantity = 1},
+				{pool = "town_expansion_048d305d8d4f", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_steelplate_2/stock",
@@ -202,7 +208,7 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_00b462552751", quantity = 1},
+				{pool = "town_expansion_5679d68e5005", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_fabric_1"},
@@ -212,7 +218,7 @@ PLUGIN:Register("suture", {
 			branchIndex = 4,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_steelplate_2",
@@ -226,12 +232,12 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_698c55e36371", quantity = 1},
+				{pool = "town_expansion_048d305d8d4f", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_ceramicplate_2",
@@ -242,13 +248,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 2},
+				{pool = "town_expansion_fab53bd418b1", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_fabric_2/stock",
@@ -259,8 +265,8 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 1},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 1},
+				{pool = "town_expansion_51ee174f50e7", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_ceramicplate_2"},
@@ -270,7 +276,7 @@ PLUGIN:Register("suture", {
 			branchIndex = 6,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_fabric_2",
@@ -284,13 +290,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 2},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 2},
+				{pool = "town_expansion_fab53bd418b1", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_kevlar_1/stock",
@@ -301,8 +307,8 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 1},
-				{pool = "town_expansion_0da47dd4f95b", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 1},
+				{pool = "town_expansion_51ee174f50e7", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_fabric_2"},
@@ -312,7 +318,7 @@ PLUGIN:Register("suture", {
 			branchIndex = 7,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_kevlar_1",
@@ -326,13 +332,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 2},
-				{pool = "town_expansion_84052fb593e1", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 2},
+				{pool = "town_expansion_fab53bd418b1", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_aluframe/stock",
@@ -343,8 +349,8 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_f3ba8c0648cf", quantity = 1},
-				{pool = "town_expansion_5a6ee4aca70c", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 1},
+				{pool = "town_expansion_51ee174f50e7", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_kevlar_1"},
@@ -354,7 +360,7 @@ PLUGIN:Register("suture", {
 			branchIndex = 8,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_aluframe",
@@ -368,13 +374,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 2},
+				{pool = "town_expansion_fab53bd418b1", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_steelplate_3/stock",
@@ -385,9 +391,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_738a3098b192", quantity = 2},
-				{pool = "town_expansion_ff17fd8b112a", quantity = 1},
-				{pool = "town_expansion_33716461332d", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 2},
+				{pool = "town_expansion_3fd11750344a", quantity = 1},
+				{pool = "town_expansion_14fcc4940e19", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_aluframe"},
@@ -397,7 +403,7 @@ PLUGIN:Register("suture", {
 			branchIndex = 9,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_steelplate_3",
@@ -411,14 +417,14 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_2ebb1070f409", quantity = 3},
-				{pool = "town_expansion_e742a60964e7", quantity = 2},
-				{pool = "town_expansion_82bc95261189", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 3},
+				{pool = "town_expansion_cff51d14bda1", quantity = 2},
+				{pool = "town_expansion_b8ec7ec2bfb0", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 13,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_carbonfibre/stock",
@@ -429,9 +435,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_c0a68236b0e3", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 2},
+				{pool = "town_expansion_36829349e2ed", quantity = 1},
+				{pool = "town_expansion_c83f1ce5faf1", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_steelplate_3"},
@@ -446,7 +452,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_carbonfibre",
@@ -460,9 +466,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_50823fd9b548", quantity = 3},
-				{pool = "town_expansion_84ea62849c8a", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 3},
+				{pool = "town_expansion_aa30d1c57da1", quantity = 2},
+				{pool = "town_expansion_93f3224bace7", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 13,
@@ -472,7 +478,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_steelframe/stock",
@@ -483,9 +489,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 2},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 1},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 2},
+				{pool = "town_expansion_36829349e2ed", quantity = 1},
+				{pool = "town_expansion_c83f1ce5faf1", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_carbonfibre"},
@@ -500,7 +506,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_steelframe",
@@ -514,9 +520,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 3},
-				{pool = "town_expansion_0080d0807602", quantity = 2},
-				{pool = "town_expansion_0afe99a3b951", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 3},
+				{pool = "town_expansion_aa30d1c57da1", quantity = 2},
+				{pool = "town_expansion_93f3224bace7", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 13,
@@ -526,7 +532,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_ceramicplate_3/stock",
@@ -537,9 +543,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 2},
-				{pool = "town_expansion_6e9c8b03f6ea", quantity = 1},
-				{pool = "town_expansion_c9b4e5432709", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 2},
+				{pool = "town_expansion_36829349e2ed", quantity = 1},
+				{pool = "town_expansion_c83f1ce5faf1", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_steelframe"},
@@ -554,7 +560,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_ceramicplate_3",
@@ -568,9 +574,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 3},
-				{pool = "town_expansion_9234fbb8b48d", quantity = 2},
-				{pool = "town_expansion_f0012a3b3266", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 3},
+				{pool = "town_expansion_aa30d1c57da1", quantity = 2},
+				{pool = "town_expansion_93f3224bace7", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 13,
@@ -580,7 +586,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_kevlar_2/stock",
@@ -591,10 +597,10 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 2},
-				{pool = "town_expansion_460818c83f7c", quantity = 2},
-				{pool = "town_expansion_b19adc2297ab", quantity = 1},
-				{pool = "town_expansion_7b9c149c7dd7", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 2},
+				{pool = "town_expansion_3fd11750344a", quantity = 2},
+				{pool = "town_expansion_d9c9cb52db5a", quantity = 1},
+				{pool = "town_expansion_6f6747ac6817", quantity = 1},
 			},
 			stock = {
 				items = {"attachment_ceramicplate_3"},
@@ -609,7 +615,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-attachments/attachment_kevlar_2",
@@ -623,10 +629,10 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 4},
-				{pool = "town_expansion_3e9c17aa86ae", quantity = 3},
-				{pool = "town_expansion_f75ad78c791c", quantity = 2},
-				{pool = "town_expansion_c69d67a05252", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 4},
+				{pool = "town_expansion_cff51d14bda1", quantity = 3},
+				{pool = "town_expansion_81231bc1480c", quantity = 2},
+				{pool = "town_expansion_343719b6bebf", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 13,
@@ -636,7 +642,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_anorak",
@@ -648,13 +654,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_f3ba8c0648cf", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 1},
 			},
 			variantBase = "suit_anorak",
 			branchIndex = 1,
 			branchLength = 14,
 			acquisitionMaps = {"rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_mailjacket",
@@ -668,13 +674,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_48c249f6ed1b", quantity = 1},
+				{pool = "town_expansion_5679d68e5005", quantity = 1},
 			},
 			variantBase = "suit_mailjacket",
 			branchIndex = 2,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_sunrise",
@@ -688,13 +694,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_6fd371b9f765", quantity = 1},
+				{pool = "town_expansion_048d305d8d4f", quantity = 1},
 			},
 			variantBase = "suit_sunrise",
 			branchIndex = 3,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_io7a",
@@ -708,13 +714,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_25b2bfa86bbf", quantity = 1},
+				{pool = "town_expansion_5679d68e5005", quantity = 1},
 			},
 			variantBase = "suit_io7a",
 			branchIndex = 4,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_cs1",
@@ -728,13 +734,13 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_3a83224367ec", quantity = 1},
+				{pool = "town_expansion_048d305d8d4f", quantity = 1},
 			},
 			variantBase = "suit_cs1",
 			branchIndex = 5,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_wind",
@@ -748,14 +754,14 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_50823fd9b548", quantity = 2},
-				{pool = "town_expansion_dc60e627422e", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 2},
+				{pool = "town_expansion_fab53bd418b1", quantity = 1},
 			},
 			variantBase = "suit_wind",
 			branchIndex = 6,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_ps5m",
@@ -769,14 +775,14 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 2},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 2},
+				{pool = "town_expansion_51ee174f50e7", quantity = 1},
 			},
 			variantBase = "suit_ps5m",
 			branchIndex = 7,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_cs2",
@@ -790,14 +796,14 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 2},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 2},
+				{pool = "town_expansion_fab53bd418b1", quantity = 1},
 			},
 			variantBase = "suit_cs2",
 			branchIndex = 8,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_nbc",
@@ -811,14 +817,14 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 2},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 2},
+				{pool = "town_expansion_51ee174f50e7", quantity = 1},
 			},
 			variantBase = "suit_nbc",
 			branchIndex = 9,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_berill",
@@ -832,15 +838,15 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 3},
-				{pool = "town_expansion_0b7095416bc4", quantity = 2},
-				{pool = "town_expansion_70eb62f6e9de", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 3},
+				{pool = "town_expansion_cff51d14bda1", quantity = 2},
+				{pool = "town_expansion_b8ec7ec2bfb0", quantity = 1},
 			},
 			variantBase = "suit_berill",
 			branchIndex = 10,
 			branchLength = 14,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_cs3",
@@ -854,9 +860,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 3},
-				{pool = "town_expansion_f0f43cbc766e", quantity = 2},
-				{pool = "town_expansion_fa83b0f0448a", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 3},
+				{pool = "town_expansion_36829349e2ed", quantity = 2},
+				{pool = "town_expansion_c83f1ce5faf1", quantity = 1},
 			},
 			variantBase = "suit_cs3",
 			branchIndex = 11,
@@ -867,7 +873,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_seva",
@@ -881,9 +887,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 3},
-				{pool = "town_expansion_2d4c7e727210", quantity = 2},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 3},
+				{pool = "town_expansion_aa30d1c57da1", quantity = 2},
+				{pool = "town_expansion_93f3224bace7", quantity = 1},
 			},
 			variantBase = "suit_seva",
 			branchIndex = 12,
@@ -894,7 +900,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_skat10",
@@ -908,9 +914,9 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_f3ba8c0648cf", quantity = 3},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 2},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_4d315dcc0c03", quantity = 3},
+				{pool = "town_expansion_36829349e2ed", quantity = 2},
+				{pool = "town_expansion_c83f1ce5faf1", quantity = 1},
 			},
 			variantBase = "suit_skat10",
 			branchIndex = 13,
@@ -921,7 +927,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/suit-variants/suit_skat9",
@@ -935,10 +941,10 @@ PLUGIN:Register("suture", {
 			briefing = "I need material for the work here. Check the list before you bring a bundle; I have to see what I am working with before promising a fit. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Leave them flat while I inspect the material.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 4},
-				{pool = "town_expansion_7b968b06488a", quantity = 3},
-				{pool = "town_expansion_926153587190", quantity = 2},
-				{pool = "town_expansion_b050bc99fb5c", quantity = 1},
+				{pool = "town_expansion_44b54d5a5d6f", quantity = 4},
+				{pool = "town_expansion_cff51d14bda1", quantity = 3},
+				{pool = "town_expansion_81231bc1480c", quantity = 2},
+				{pool = "town_expansion_343719b6bebf", quantity = 1},
 			},
 			variantBase = "suit_skat9",
 			branchIndex = 14,
@@ -949,7 +955,7 @@ PLUGIN:Register("suture", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {

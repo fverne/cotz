@@ -139,6 +139,12 @@ PLUGIN:Register("vesper", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Expedition instruments and field preparation",
+		core = {"valuables_instruments", "valuables_survey_equipment", "field_maintenance"},
+		support = {"valuables_sample_carriers", "valuables_equipment_pouches"},
+	},
+
 	progression = {
 		{
 			id = "v3/pact-rifles/saigasemi545",
@@ -149,12 +155,12 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 17,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/saigasemi",
@@ -165,12 +171,12 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_cd11d535e099", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/aks74u/stock",
@@ -181,7 +187,7 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_31aa6af310c4", quantity = 1},
 			},
 			stock = {
 				items = {"saigasemi"},
@@ -191,7 +197,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 3,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/aks74u",
@@ -202,12 +208,12 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_cd11d535e099", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/sks/stock",
@@ -218,7 +224,7 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_31aa6af310c4", quantity = 1},
 			},
 			stock = {
 				items = {"aks74u"},
@@ -228,7 +234,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 4,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/sks",
@@ -239,12 +245,12 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_5eae2916cfcd", quantity = 1},
+				{pool = "town_expansion_cd11d535e099", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/ak74/stock",
@@ -255,7 +261,7 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_79ec06859af2", quantity = 1},
+				{pool = "town_expansion_31aa6af310c4", quantity = 1},
 			},
 			stock = {
 				items = {"sks"},
@@ -265,7 +271,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 5,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/ak74",
@@ -276,12 +282,12 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_1040d77788e5", quantity = 1},
+				{pool = "town_expansion_cd11d535e099", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/an94k/stock",
@@ -292,7 +298,7 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_205de1f97475", quantity = 1},
+				{pool = "town_expansion_31aa6af310c4", quantity = 1},
 			},
 			stock = {
 				items = {"ak74"},
@@ -302,7 +308,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 6,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/an94k",
@@ -313,12 +319,12 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_ff9221acd69b", quantity = 1},
+				{pool = "town_expansion_cd11d535e099", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/akm",
@@ -329,13 +335,13 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 2},
-				{pool = "town_expansion_6497cb91015d", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_169456c5a6ea", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/aek971/stock",
@@ -346,8 +352,8 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 1},
-				{pool = "town_expansion_04986547505f", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 1},
+				{pool = "town_expansion_6c0be0da7f74", quantity = 1},
 			},
 			stock = {
 				items = {"akm"},
@@ -357,7 +363,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 8,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/aek971",
@@ -368,13 +374,13 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
-				{pool = "town_expansion_d38ea7bb1014", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_169456c5a6ea", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/ak12/stock",
@@ -385,8 +391,8 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 1},
-				{pool = "town_expansion_c72e02d3eea4", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 1},
+				{pool = "town_expansion_2b040924a19a", quantity = 1},
 			},
 			stock = {
 				items = {"aek971"},
@@ -396,7 +402,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 9,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/ak12",
@@ -407,13 +413,13 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_059350d44279", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_4777dfe47cd5", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/rk95/stock",
@@ -424,8 +430,8 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 1},
-				{pool = "town_expansion_6e7fa9e45a6a", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 1},
+				{pool = "town_expansion_458b58ebabd1", quantity = 1},
 			},
 			stock = {
 				items = {"ak12"},
@@ -435,7 +441,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 10,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/rk95",
@@ -446,13 +452,13 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_674310f36256", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_2b040924a19a", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/svt40/stock",
@@ -463,8 +469,8 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 1},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 1},
+				{pool = "town_expansion_4777dfe47cd5", quantity = 1},
 			},
 			stock = {
 				items = {"rk95"},
@@ -474,7 +480,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 11,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/svt40",
@@ -485,13 +491,13 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_386837cd3695", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_458b58ebabd1", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/vss/stock",
@@ -502,9 +508,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_97e4c64a5cd7", quantity = 1},
-				{pool = "town_expansion_55ee63501684", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_119ad6a6ed32", quantity = 1},
+				{pool = "town_expansion_df3f70017022", quantity = 1},
 			},
 			stock = {
 				items = {"svt40"},
@@ -514,7 +520,7 @@ PLUGIN:Register("vesper", {
 			branchIndex = 12,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/vss",
@@ -525,14 +531,14 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 3},
-				{pool = "town_expansion_a4c8a72d0d48", quantity = 2},
-				{pool = "town_expansion_70eb62f6e9de", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 3},
+				{pool = "town_expansion_119ad6a6ed32", quantity = 2},
+				{pool = "town_expansion_e52e3677bfae", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 17,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/rpk/stock",
@@ -543,9 +549,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 2},
-				{pool = "town_expansion_05fc3ad8f3c7", quantity = 1},
-				{pool = "town_expansion_e5cb4c69f573", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_b4a04d746ba4", quantity = 1},
+				{pool = "town_expansion_4c7e0ea7658e", quantity = 1},
 			},
 			stock = {
 				items = {"vss"},
@@ -560,7 +566,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/rpk",
@@ -571,9 +577,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 3},
-				{pool = "town_expansion_b6425e8074a3", quantity = 2},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 3},
+				{pool = "town_expansion_cbdef0a9717f", quantity = 2},
+				{pool = "town_expansion_cc6fce7f3517", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 17,
@@ -583,7 +589,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/9a91/stock",
@@ -594,9 +600,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 2},
-				{pool = "town_expansion_84ea62849c8a", quantity = 1},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_7405a88d3f95", quantity = 1},
+				{pool = "town_expansion_4c7e0ea7658e", quantity = 1},
 			},
 			stock = {
 				items = {"rpk"},
@@ -611,7 +617,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/9a91",
@@ -622,9 +628,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 3},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 2},
-				{pool = "town_expansion_926153587190", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 3},
+				{pool = "town_expansion_b4a04d746ba4", quantity = 2},
+				{pool = "town_expansion_cc6fce7f3517", quantity = 1},
 			},
 			branchIndex = 14,
 			branchLength = 17,
@@ -634,7 +640,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/asval/stock",
@@ -645,9 +651,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 2},
-				{pool = "town_expansion_0572bbcff6f7", quantity = 1},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_cbdef0a9717f", quantity = 1},
+				{pool = "town_expansion_4c7e0ea7658e", quantity = 1},
 			},
 			stock = {
 				items = {"9a91"},
@@ -662,7 +668,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/asval",
@@ -673,9 +679,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 3},
-				{pool = "town_expansion_92cc72445fea", quantity = 2},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 3},
+				{pool = "town_expansion_7405a88d3f95", quantity = 2},
+				{pool = "town_expansion_cc6fce7f3517", quantity = 1},
 			},
 			branchIndex = 15,
 			branchLength = 17,
@@ -685,7 +691,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/svd/stock",
@@ -696,9 +702,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_b4a04d746ba4", quantity = 1},
+				{pool = "town_expansion_4c7e0ea7658e", quantity = 1},
 			},
 			stock = {
 				items = {"asval"},
@@ -713,7 +719,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/svd",
@@ -724,9 +730,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 3},
-				{pool = "town_expansion_0b5abb416e5e", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 3},
+				{pool = "town_expansion_cbdef0a9717f", quantity = 2},
+				{pool = "town_expansion_cc6fce7f3517", quantity = 1},
 			},
 			branchIndex = 16,
 			branchLength = 17,
@@ -736,7 +742,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/dp28/stock",
@@ -747,10 +753,10 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_3aef95ba7916", quantity = 2},
-				{pool = "town_expansion_da8b01ace95f", quantity = 1},
-				{pool = "town_expansion_fa02a76a2a16", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 2},
+				{pool = "town_expansion_119ad6a6ed32", quantity = 2},
+				{pool = "town_expansion_300ffedb3793", quantity = 1},
+				{pool = "town_expansion_52c183ffae00", quantity = 1},
 			},
 			stock = {
 				items = {"svd"},
@@ -765,7 +771,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/pact-rifles/dp28",
@@ -776,10 +782,10 @@ PLUGIN:Register("vesper", {
 			briefing = "I need supplies for the next trip. Check the list; I would like to spend the walk looking at the field rather than regretting what I packed. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. I will check these with the rest of the kit before leaving.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 4},
-				{pool = "town_expansion_97c27c1b560c", quantity = 3},
-				{pool = "town_expansion_2e863004b9b0", quantity = 2},
-				{pool = "town_expansion_896e6b1a62f9", quantity = 1},
+				{pool = "town_expansion_719a84c9c632", quantity = 4},
+				{pool = "town_expansion_119ad6a6ed32", quantity = 3},
+				{pool = "town_expansion_dc34b895ad93", quantity = 2},
+				{pool = "town_expansion_b3c10e8e5eff", quantity = 1},
 			},
 			branchIndex = 17,
 			branchLength = 17,
@@ -789,7 +795,7 @@ PLUGIN:Register("vesper", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

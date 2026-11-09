@@ -123,6 +123,16 @@ PLUGIN:Register("latch", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Workshop tools and fabrication materials",
+		core = {
+			"valuables_workshop_tools",
+			"valuables_cutting_tools",
+			"valuables_workshop_consumables",
+		},
+		support = {"valuables_armour_panels", "valuables_protective_textiles"},
+	},
+
 	progression = {
 		{
 			id = "v3/masks-headwear/mask_cloth",
@@ -133,12 +143,12 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 1},
+				{pool = "town_expansion_212709036b69", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 12,
 			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_halfmask",
@@ -149,12 +159,12 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_c9b00a5b4fc9", quantity = 1},
+				{pool = "town_expansion_41f538caa035", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_respirator/stock",
@@ -165,7 +175,7 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_506b825a5348", quantity = 1},
+				{pool = "town_expansion_e18f75122fe4", quantity = 1},
 			},
 			stock = {
 				items = {"mask_halfmask"},
@@ -175,7 +185,7 @@ PLUGIN:Register("latch", {
 			branchIndex = 3,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_respirator",
@@ -189,12 +199,12 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_3f523d0ae565", quantity = 1},
+				{pool = "town_expansion_1471bc11fe57", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_gp5/stock",
@@ -205,7 +215,7 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_57791acacdd3", quantity = 1},
+				{pool = "town_expansion_41f538caa035", quantity = 1},
 			},
 			stock = {
 				items = {"mask_respirator"},
@@ -215,7 +225,7 @@ PLUGIN:Register("latch", {
 			branchIndex = 4,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_gp5",
@@ -226,12 +236,12 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_307e41bc5d0b", quantity = 1},
+				{pool = "town_expansion_e18f75122fe4", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_eo20",
@@ -242,13 +252,13 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 2},
-				{pool = "town_expansion_0a6023934ee5", quantity = 1},
+				{pool = "town_expansion_212709036b69", quantity = 2},
+				{pool = "town_expansion_a21ee578ab49", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/helm_operator_rus_2/stock",
@@ -259,8 +269,8 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 1},
-				{pool = "town_expansion_386837cd3695", quantity = 1},
+				{pool = "town_expansion_2495e76a77c6", quantity = 1},
+				{pool = "town_expansion_9cfb06e3c81a", quantity = 1},
 			},
 			stock = {
 				items = {"mask_eo20"},
@@ -270,7 +280,7 @@ PLUGIN:Register("latch", {
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/helm_operator_rus_2",
@@ -284,13 +294,13 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_ea517e420001", quantity = 1},
+				{pool = "town_expansion_c0cc6dee0372", quantity = 2},
+				{pool = "town_expansion_797ca99a5240", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/headwear_cs1/stock",
@@ -301,8 +311,8 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_23e0b64e4fa5", quantity = 1},
-				{pool = "town_expansion_c1e7b548cd21", quantity = 1},
+				{pool = "town_expansion_212709036b69", quantity = 1},
+				{pool = "town_expansion_30019582aa26", quantity = 1},
 			},
 			stock = {
 				items = {"helm_operator_rus_2"},
@@ -312,7 +322,7 @@ PLUGIN:Register("latch", {
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/headwear_cs1",
@@ -326,13 +336,13 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_0df586f574fd", quantity = 2},
-				{pool = "town_expansion_416dc2126ac2", quantity = 1},
+				{pool = "town_expansion_2495e76a77c6", quantity = 2},
+				{pool = "town_expansion_9cfb06e3c81a", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_pmk3/stock",
@@ -343,8 +353,8 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_60eb1035aaa9", quantity = 1},
-				{pool = "town_expansion_b4ef035b35ed", quantity = 1},
+				{pool = "town_expansion_c0cc6dee0372", quantity = 1},
+				{pool = "town_expansion_797ca99a5240", quantity = 1},
 			},
 			stock = {
 				items = {"headwear_cs1"},
@@ -354,7 +364,7 @@ PLUGIN:Register("latch", {
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_pmk3",
@@ -365,13 +375,13 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_a874feaf7962", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_212709036b69", quantity = 2},
+				{pool = "town_expansion_30019582aa26", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/headwear_cs2/stock",
@@ -382,9 +392,9 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_73c3b1781d93", quantity = 2},
-				{pool = "town_expansion_8771e41ba0f9", quantity = 1},
-				{pool = "town_expansion_089cde350b28", quantity = 1},
+				{pool = "town_expansion_2495e76a77c6", quantity = 2},
+				{pool = "town_expansion_c6e6ecaa4152", quantity = 1},
+				{pool = "town_expansion_5e784bdc0b14", quantity = 1},
 			},
 			stock = {
 				items = {"mask_pmk3"},
@@ -394,7 +404,7 @@ PLUGIN:Register("latch", {
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/headwear_cs2",
@@ -405,14 +415,14 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 3},
-				{pool = "town_expansion_319a165c05e4", quantity = 2},
-				{pool = "town_expansion_82bc95261189", quantity = 1},
+				{pool = "town_expansion_c0cc6dee0372", quantity = 3},
+				{pool = "town_expansion_ef58c520937a", quantity = 2},
+				{pool = "town_expansion_c2679bfc6052", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_xm40/stock",
@@ -423,9 +433,9 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_31455caa6711", quantity = 2},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 1},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_212709036b69", quantity = 2},
+				{pool = "town_expansion_25cf944befdf", quantity = 1},
+				{pool = "town_expansion_5c4d31f42806", quantity = 1},
 			},
 			stock = {
 				items = {"headwear_cs2"},
@@ -440,7 +450,7 @@ PLUGIN:Register("latch", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_xm40",
@@ -451,9 +461,9 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 3},
-				{pool = "town_expansion_7d3b07ef7678", quantity = 2},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_2495e76a77c6", quantity = 3},
+				{pool = "town_expansion_f48d14c96131", quantity = 2},
+				{pool = "town_expansion_a015f4f15fdf", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 12,
@@ -463,7 +473,7 @@ PLUGIN:Register("latch", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_m40/stock",
@@ -474,9 +484,9 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_a51fbcea5c34", quantity = 2},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 1},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_c0cc6dee0372", quantity = 2},
+				{pool = "town_expansion_36d5d4605fb5", quantity = 1},
+				{pool = "town_expansion_5c4d31f42806", quantity = 1},
 			},
 			stock = {
 				items = {"mask_xm40"},
@@ -491,7 +501,7 @@ PLUGIN:Register("latch", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_m40",
@@ -502,9 +512,9 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_5fcb0ec4ca94", quantity = 3},
-				{pool = "town_expansion_0080d0807602", quantity = 2},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_212709036b69", quantity = 3},
+				{pool = "town_expansion_25cf944befdf", quantity = 2},
+				{pool = "town_expansion_a015f4f15fdf", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 12,
@@ -514,7 +524,7 @@ PLUGIN:Register("latch", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_m50/stock",
@@ -525,10 +535,10 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 2},
-				{pool = "town_expansion_97c27c1b560c", quantity = 2},
-				{pool = "town_expansion_2e863004b9b0", quantity = 1},
-				{pool = "town_expansion_896e6b1a62f9", quantity = 1},
+				{pool = "town_expansion_2495e76a77c6", quantity = 2},
+				{pool = "town_expansion_c6e6ecaa4152", quantity = 2},
+				{pool = "town_expansion_c3f25b91c64e", quantity = 1},
+				{pool = "town_expansion_c5ff89355dd8", quantity = 1},
 			},
 			stock = {
 				items = {"mask_m40"},
@@ -543,7 +553,7 @@ PLUGIN:Register("latch", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/masks-headwear/mask_m50",
@@ -554,10 +564,10 @@ PLUGIN:Register("latch", {
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
-				{pool = "town_expansion_72bea88b313c", quantity = 4},
-				{pool = "town_expansion_97e4c64a5cd7", quantity = 3},
-				{pool = "town_expansion_6256123f00d1", quantity = 2},
-				{pool = "town_expansion_87c2038d9c43", quantity = 1},
+				{pool = "town_expansion_c0cc6dee0372", quantity = 4},
+				{pool = "town_expansion_ef58c520937a", quantity = 3},
+				{pool = "town_expansion_e5b62323f846", quantity = 2},
+				{pool = "town_expansion_d34115d4d8cf", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 12,
@@ -567,7 +577,7 @@ PLUGIN:Register("latch", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

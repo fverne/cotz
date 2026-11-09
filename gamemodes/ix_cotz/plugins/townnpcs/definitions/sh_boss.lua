@@ -99,6 +99,12 @@ PLUGIN:Register("boss", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Ordnance and protective equipment",
+		core = {"valuables_ordnance_salvage", "valuables_armour_panels"},
+		support = {"valuables_secured_cases", "valuables_military_cases"},
+	},
+
 	progression = {
 		{
 			id = "v3/helmets/helm_operator_rus_1",
@@ -109,12 +115,12 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 8,
 			acquisitionMaps = {"rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/headwear_cs4",
@@ -125,12 +131,12 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_6fd371b9f765", quantity = 1},
+				{pool = "town_expansion_1f9d8bab9a75", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/headwear_screen/stock",
@@ -141,7 +147,7 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_25b2bfa86bbf", quantity = 1},
+				{pool = "town_expansion_790b007656b6", quantity = 1},
 			},
 			stock = {
 				items = {"headwear_cs4"},
@@ -151,7 +157,7 @@ PLUGIN:Register("boss", {
 			branchIndex = 3,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/headwear_screen",
@@ -162,12 +168,12 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_3a83224367ec", quantity = 1},
+				{pool = "town_expansion_1f9d8bab9a75", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/helm_sphere08",
@@ -178,13 +184,13 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_50823fd9b548", quantity = 2},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 2},
+				{pool = "town_expansion_bd81cfe55ca1", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/helm_sphere12/stock",
@@ -195,8 +201,8 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 1},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 1},
+				{pool = "town_expansion_df37ded8c685", quantity = 1},
 			},
 			stock = {
 				items = {"helm_sphere08"},
@@ -206,7 +212,7 @@ PLUGIN:Register("boss", {
 			branchIndex = 5,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/helm_sphere12",
@@ -217,13 +223,13 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 2},
-				{pool = "town_expansion_5a6ee4aca70c", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 2},
+				{pool = "town_expansion_bd81cfe55ca1", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/helm_operator_nato/stock",
@@ -234,9 +240,9 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 2},
-				{pool = "town_expansion_c127f2afb1fb", quantity = 1},
-				{pool = "town_expansion_a25c4aa2f1ef", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 2},
+				{pool = "town_expansion_890ed75f7176", quantity = 1},
+				{pool = "town_expansion_c0bc28545056", quantity = 1},
 			},
 			stock = {
 				items = {"helm_sphere12"},
@@ -246,7 +252,7 @@ PLUGIN:Register("boss", {
 			branchIndex = 6,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/helm_operator_nato",
@@ -257,14 +263,14 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 3},
-				{pool = "town_expansion_0b7095416bc4", quantity = 2},
-				{pool = "town_expansion_70eb62f6e9de", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 3},
+				{pool = "town_expansion_890ed75f7176", quantity = 2},
+				{pool = "town_expansion_5d857668f5c5", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 8,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/headwear_pracs/stock",
@@ -275,9 +281,9 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 2},
-				{pool = "town_expansion_f0f43cbc766e", quantity = 1},
-				{pool = "town_expansion_fa83b0f0448a", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 2},
+				{pool = "town_expansion_7d7b39875604", quantity = 1},
+				{pool = "town_expansion_4ec5cfac4520", quantity = 1},
 			},
 			stock = {
 				items = {"helm_operator_nato"},
@@ -292,7 +298,7 @@ PLUGIN:Register("boss", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/headwear_pracs",
@@ -303,9 +309,9 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 3},
-				{pool = "town_expansion_2d4c7e727210", quantity = 2},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 3},
+				{pool = "town_expansion_4f5c7cc73e80", quantity = 2},
+				{pool = "town_expansion_903667c30c7a", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 8,
@@ -315,7 +321,7 @@ PLUGIN:Register("boss", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/headwear_psz12/stock",
@@ -326,10 +332,10 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_f3ba8c0648cf", quantity = 2},
-				{pool = "town_expansion_9920a9e1d270", quantity = 2},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
-				{pool = "town_expansion_2f1adee2ea00", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 2},
+				{pool = "town_expansion_890ed75f7176", quantity = 2},
+				{pool = "town_expansion_cf3438a79162", quantity = 1},
+				{pool = "town_expansion_403c750c317a", quantity = 1},
 			},
 			stock = {
 				items = {"headwear_pracs"},
@@ -344,7 +350,7 @@ PLUGIN:Register("boss", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/helmets/headwear_psz12",
@@ -355,10 +361,10 @@ PLUGIN:Register("boss", {
 			briefing = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 			completion = "Received. I will account for these with the other supplies.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 4},
-				{pool = "town_expansion_7b968b06488a", quantity = 3},
-				{pool = "town_expansion_926153587190", quantity = 2},
-				{pool = "town_expansion_b050bc99fb5c", quantity = 1},
+				{pool = "town_expansion_5f620bc089f7", quantity = 4},
+				{pool = "town_expansion_890ed75f7176", quantity = 3},
+				{pool = "town_expansion_afa7e8fb8a61", quantity = 2},
+				{pool = "town_expansion_77ca5be069a0", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 8,
@@ -368,7 +374,7 @@ PLUGIN:Register("boss", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},

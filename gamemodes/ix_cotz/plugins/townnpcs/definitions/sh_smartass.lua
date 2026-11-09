@@ -166,6 +166,18 @@ PLUGIN:Register("smartass", {
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
 	},
+	progressionIdentity = {
+		name = "Computer hardware and data media",
+		core = {
+			"small_electronics",
+			"valuables_computer_parts",
+			"valuables_portable_computers",
+			"valuables_control_electronics",
+			"valuables_flash_media",
+		},
+		support = {"valuables_electronic_components", "valuables_technical_records"},
+	},
+
 	progression = {
 		{
 			id = "v3/nato-cqb/c96carbine",
@@ -176,12 +188,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_2ebb1070f409", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 24,
 			acquisitionMaps = {"rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/stoegerddshort",
@@ -192,12 +204,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_6fd371b9f765", quantity = 1},
+				{pool = "town_expansion_2f4f2e976cab", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/sten/stock",
@@ -208,7 +220,7 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_3a83224367ec", quantity = 1},
+				{pool = "town_expansion_42f407abc18a", quantity = 1},
 			},
 			stock = {
 				items = {"stoegerddshort"},
@@ -218,7 +230,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 3,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/sten",
@@ -229,12 +241,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_00b462552751", quantity = 1},
+				{pool = "town_expansion_2f4f2e976cab", quantity = 1},
 			},
 			branchIndex = 3,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/stoegerdd/stock",
@@ -245,7 +257,7 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_698c55e36371", quantity = 1},
+				{pool = "town_expansion_42f407abc18a", quantity = 1},
 			},
 			stock = {
 				items = {"sten"},
@@ -255,7 +267,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 4,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/stoegerdd",
@@ -266,12 +278,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_cfffafec5791", quantity = 1},
+				{pool = "town_expansion_2f4f2e976cab", quantity = 1},
 			},
 			branchIndex = 4,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mac11/stock",
@@ -282,7 +294,7 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_fbbda916eea8", quantity = 1},
+				{pool = "town_expansion_42f407abc18a", quantity = 1},
 			},
 			stock = {
 				items = {"stoegerdd"},
@@ -292,7 +304,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 5,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mac11",
@@ -303,12 +315,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_48c249f6ed1b", quantity = 1},
+				{pool = "town_expansion_2f4f2e976cab", quantity = 1},
 			},
 			branchIndex = 5,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp34/stock",
@@ -319,7 +331,7 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_4c4e9c793751", quantity = 1},
+				{pool = "town_expansion_42f407abc18a", quantity = 1},
 			},
 			stock = {
 				items = {"mac11"},
@@ -329,7 +341,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 6,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp34",
@@ -340,12 +352,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_8272bd41ee4e", quantity = 1},
+				{pool = "town_expansion_2f4f2e976cab", quantity = 1},
 			},
 			branchIndex = 6,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m3supershort/stock",
@@ -356,7 +368,7 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_33d833756b9e", quantity = 1},
+				{pool = "town_expansion_42f407abc18a", quantity = 1},
 			},
 			stock = {
 				items = {"mp34"},
@@ -366,7 +378,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 7,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m3supershort",
@@ -377,12 +389,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_06c4f21158e1", quantity = 1},
+				{pool = "town_expansion_2f4f2e976cab", quantity = 1},
 			},
 			branchIndex = 7,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp40/stock",
@@ -393,7 +405,7 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_25b2bfa86bbf", quantity = 1},
+				{pool = "town_expansion_42f407abc18a", quantity = 1},
 			},
 			stock = {
 				items = {"m3supershort"},
@@ -403,7 +415,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 8,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp40",
@@ -414,12 +426,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_6fd371b9f765", quantity = 1},
+				{pool = "town_expansion_2f4f2e976cab", quantity = 1},
 			},
 			branchIndex = 8,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/kp31",
@@ -430,13 +442,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_c0a68236b0e3", quantity = 2},
-				{pool = "town_expansion_6e7fa9e45a6a", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 9,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mossberg500/stock",
@@ -447,8 +459,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_50823fd9b548", quantity = 1},
-				{pool = "town_expansion_dc60e627422e", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			stock = {
 				items = {"kp31"},
@@ -458,7 +470,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 10,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mossberg500",
@@ -469,13 +481,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 2},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 10,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/ar159mm/stock",
@@ -486,8 +498,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 1},
-				{pool = "town_expansion_9c8532df83b7", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			stock = {
 				items = {"mossberg500"},
@@ -497,7 +509,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 11,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/ar159mm",
@@ -508,13 +520,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 2},
-				{pool = "town_expansion_5a6ee4aca70c", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 11,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp5k/stock",
@@ -525,8 +537,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 1},
-				{pool = "town_expansion_2e21aa279ab0", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			stock = {
 				items = {"ar159mm"},
@@ -536,7 +548,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 12,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp5k",
@@ -547,13 +559,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 2},
-				{pool = "town_expansion_f76f539072e2", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 12,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/uzi/stock",
@@ -564,8 +576,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 1},
-				{pool = "town_expansion_0da47dd4f95b", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			stock = {
 				items = {"mp5k"},
@@ -575,7 +587,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 13,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/uzi",
@@ -586,13 +598,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 2},
-				{pool = "town_expansion_84052fb593e1", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 13,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/ithaca37/stock",
@@ -603,8 +615,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_f3ba8c0648cf", quantity = 1},
-				{pool = "town_expansion_619b9c103c40", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			stock = {
 				items = {"uzi"},
@@ -614,7 +626,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 14,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/ithaca37",
@@ -625,13 +637,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_2ebb1070f409", quantity = 2},
-				{pool = "town_expansion_e758c6b5795a", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 14,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/sterling/stock",
@@ -642,8 +654,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_738a3098b192", quantity = 1},
-				{pool = "town_expansion_a2ba92d63b91", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			stock = {
 				items = {"ithaca37"},
@@ -653,7 +665,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 15,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/sterling",
@@ -664,13 +676,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_c0a68236b0e3", quantity = 2},
-				{pool = "town_expansion_6e7fa9e45a6a", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 15,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp5/stock",
@@ -681,8 +693,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_50823fd9b548", quantity = 1},
-				{pool = "town_expansion_dc60e627422e", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			stock = {
 				items = {"sterling"},
@@ -692,7 +704,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 16,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp5",
@@ -703,13 +715,13 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 2},
-				{pool = "town_expansion_1f7dc6db7557", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_ee6797fbcfef", quantity = 1},
 			},
 			branchIndex = 16,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m1887/stock",
@@ -720,9 +732,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 2},
-				{pool = "town_expansion_ba0837830aaa", quantity = 1},
-				{pool = "town_expansion_2de2a09114cd", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_7506c43b0a0c", quantity = 1},
+				{pool = "town_expansion_acd5ff8fdb88", quantity = 1},
 			},
 			stock = {
 				items = {"mp5"},
@@ -732,7 +744,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 17,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m1887",
@@ -743,14 +755,14 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 3},
-				{pool = "town_expansion_bf7b90a99fd7", quantity = 2},
-				{pool = "town_expansion_770c3ee71133", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 3},
+				{pool = "town_expansion_7506c43b0a0c", quantity = 2},
+				{pool = "town_expansion_acd5ff8fdb88", quantity = 1},
 			},
 			branchIndex = 17,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/ump45/stock",
@@ -761,9 +773,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 2},
-				{pool = "town_expansion_c127f2afb1fb", quantity = 1},
-				{pool = "town_expansion_a25c4aa2f1ef", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_7506c43b0a0c", quantity = 1},
+				{pool = "town_expansion_acd5ff8fdb88", quantity = 1},
 			},
 			stock = {
 				items = {"m1887"},
@@ -773,7 +785,7 @@ PLUGIN:Register("smartass", {
 			branchIndex = 18,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/ump45",
@@ -784,14 +796,14 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 3},
-				{pool = "town_expansion_0b7095416bc4", quantity = 2},
-				{pool = "town_expansion_70eb62f6e9de", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 3},
+				{pool = "town_expansion_7506c43b0a0c", quantity = 2},
+				{pool = "town_expansion_acd5ff8fdb88", quantity = 1},
 			},
 			branchIndex = 18,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/rem870ae/stock",
@@ -802,9 +814,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 2},
-				{pool = "town_expansion_f0f43cbc766e", quantity = 1},
-				{pool = "town_expansion_fa83b0f0448a", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_9cbace0a2778", quantity = 1},
+				{pool = "town_expansion_ac5afb9a51ec", quantity = 1},
 			},
 			stock = {
 				items = {"ump45"},
@@ -819,7 +831,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/rem870ae",
@@ -830,9 +842,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 3},
-				{pool = "town_expansion_2d4c7e727210", quantity = 2},
-				{pool = "town_expansion_ef51ae31f87b", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 3},
+				{pool = "town_expansion_632a89229735", quantity = 2},
+				{pool = "town_expansion_3dd39b851016", quantity = 1},
 			},
 			branchIndex = 19,
 			branchLength = 24,
@@ -842,7 +854,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m3super90/stock",
@@ -853,9 +865,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_f3ba8c0648cf", quantity = 2},
-				{pool = "town_expansion_de9b8c9d7c4e", quantity = 1},
-				{pool = "town_expansion_1eeb97a7a53a", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_1059b60105b8", quantity = 1},
+				{pool = "town_expansion_ac5afb9a51ec", quantity = 1},
 			},
 			stock = {
 				items = {"rem870ae"},
@@ -870,7 +882,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m3super90",
@@ -881,9 +893,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_2ebb1070f409", quantity = 3},
-				{pool = "town_expansion_3c374cf7d39b", quantity = 2},
-				{pool = "town_expansion_a8adc74334f5", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 3},
+				{pool = "town_expansion_040731918dd5", quantity = 2},
+				{pool = "town_expansion_3dd39b851016", quantity = 1},
 			},
 			branchIndex = 20,
 			branchLength = 24,
@@ -893,7 +905,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp9a1/stock",
@@ -904,9 +916,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_738a3098b192", quantity = 2},
-				{pool = "town_expansion_953fc3f79c23", quantity = 1},
-				{pool = "town_expansion_75c99ce321bb", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_2fca8d096e56", quantity = 1},
+				{pool = "town_expansion_ac5afb9a51ec", quantity = 1},
 			},
 			stock = {
 				items = {"m3super90"},
@@ -921,7 +933,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/mp9a1",
@@ -932,9 +944,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_c0a68236b0e3", quantity = 3},
-				{pool = "town_expansion_cdb389d2dbed", quantity = 2},
-				{pool = "town_expansion_50c359fedf1b", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 3},
+				{pool = "town_expansion_9cbace0a2778", quantity = 2},
+				{pool = "town_expansion_3dd39b851016", quantity = 1},
 			},
 			branchIndex = 21,
 			branchLength = 24,
@@ -944,7 +956,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m1928/stock",
@@ -955,9 +967,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_50823fd9b548", quantity = 2},
-				{pool = "town_expansion_84ea62849c8a", quantity = 1},
-				{pool = "town_expansion_8c1436b59a6d", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_632a89229735", quantity = 1},
+				{pool = "town_expansion_ac5afb9a51ec", quantity = 1},
 			},
 			stock = {
 				items = {"mp9a1"},
@@ -972,7 +984,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/m1928",
@@ -983,9 +995,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_a8eee82d13b5", quantity = 3},
-				{pool = "town_expansion_41ed6ccda3d7", quantity = 2},
-				{pool = "town_expansion_8df8a3938bca", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 3},
+				{pool = "town_expansion_1059b60105b8", quantity = 2},
+				{pool = "town_expansion_3dd39b851016", quantity = 1},
 			},
 			branchIndex = 22,
 			branchLength = 24,
@@ -995,7 +1007,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/p90/stock",
@@ -1006,9 +1018,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_9f1389bb4fc8", quantity = 2},
-				{pool = "town_expansion_0080d0807602", quantity = 1},
-				{pool = "town_expansion_f75ad78c791c", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_040731918dd5", quantity = 1},
+				{pool = "town_expansion_ac5afb9a51ec", quantity = 1},
 			},
 			stock = {
 				items = {"m1928"},
@@ -1023,7 +1035,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/p90",
@@ -1034,9 +1046,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_53c8d98c134e", quantity = 3},
-				{pool = "town_expansion_ec3627c2f4f5", quantity = 2},
-				{pool = "town_expansion_0afe99a3b951", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 3},
+				{pool = "town_expansion_2fca8d096e56", quantity = 2},
+				{pool = "town_expansion_3dd39b851016", quantity = 1},
 			},
 			branchIndex = 23,
 			branchLength = 24,
@@ -1046,7 +1058,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/striker/stock",
@@ -1057,10 +1069,10 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_f58d9881a38d", quantity = 2},
-				{pool = "town_expansion_c127f2afb1fb", quantity = 2},
-				{pool = "town_expansion_2bbd6b8f931b", quantity = 1},
-				{pool = "town_expansion_87c2038d9c43", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 2},
+				{pool = "town_expansion_7506c43b0a0c", quantity = 2},
+				{pool = "town_expansion_a86d9c791015", quantity = 1},
+				{pool = "town_expansion_b748a2804bf3", quantity = 1},
 			},
 			stock = {
 				items = {"p90"},
@@ -1075,7 +1087,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/nato-cqb/striker",
@@ -1086,10 +1098,10 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_917b8fb961d3", quantity = 4},
-				{pool = "town_expansion_0b7095416bc4", quantity = 3},
-				{pool = "town_expansion_55bca795ed4e", quantity = 2},
-				{pool = "town_expansion_dd51cce6af9e", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 4},
+				{pool = "town_expansion_7506c43b0a0c", quantity = 3},
+				{pool = "town_expansion_a078cf2f4ea8", quantity = 2},
+				{pool = "town_expansion_235965473ee1", quantity = 1},
 			},
 			branchIndex = 24,
 			branchLength = 24,
@@ -1099,7 +1111,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/access-cards/accesscard_bunker",
@@ -1110,12 +1122,12 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_267028468a2f", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 1},
 			},
 			branchIndex = 1,
 			branchLength = 2,
 			acquisitionMaps = {"rp_waystation"},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 		{
 			id = "v3/access-cards/accesscard_laboratory",
@@ -1126,10 +1138,10 @@ PLUGIN:Register("smartass", {
 			briefing = "I need parts. The list should spare us the performance where you bring something vaguely technical and I explain why it is useless. Bring everything on the list back here; I need the full delivery.",
 			completion = "These I can use. Give me a moment to get them away from the pile that only looks useful.",
 			requirements = {
-				{pool = "town_expansion_dda5a73e27a0", quantity = 4},
-				{pool = "town_expansion_3e9c17aa86ae", quantity = 3},
-				{pool = "town_expansion_ef51ae31f87b", quantity = 2},
-				{pool = "town_expansion_c69d67a05252", quantity = 1},
+				{pool = "town_expansion_24a8e4e72abc", quantity = 4},
+				{pool = "town_expansion_7506c43b0a0c", quantity = 3},
+				{pool = "town_expansion_906e9e62e58d", quantity = 2},
+				{pool = "town_expansion_235965473ee1", quantity = 1},
 			},
 			branchIndex = 2,
 			branchLength = 2,
@@ -1139,7 +1151,7 @@ PLUGIN:Register("smartass", {
 				"rp_waystation",
 				"rp_pripyat_remaster",
 			},
-			requirementPolicy = 3,
+			requirementPolicy = 4,
 		},
 	},
 	startingServices = {},
