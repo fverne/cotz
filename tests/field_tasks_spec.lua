@@ -337,8 +337,20 @@ check(lastItem:CanTransfer(inventory, stranger:GetCharacter():GetInventory()) ==
 	"client still blocks parcel transfers out of the main inventory")
 SERVER, CLIENT = true, false
 check(lastItem:CanTransfer(inventory, nil) == false, "server still rejects nil-destination drops")
-check(PLUGIN:CanPlayerTakeItem(stranger, lastItem) == false, "foreign character pickup is denied")
-check(PLUGIN:CanPlayerTakeItem(client, lastItem) == nil, "owner pickup does not override other hooks")
+ix.item.instances = {[101] = lastItem}
+local cargoEntity = {ixItemID = 101}
+check(PLUGIN:CanPlayerTakeItem(stranger, cargoEntity) == false, "foreign character pickup is denied")
+check(PLUGIN:CanPlayerTakeItem(client, cargoEntity) == nil, "owner pickup does not override other hooks")
+ix.item.instances[102] = {}
+check(PLUGIN:CanPlayerDropItem(client, 102) == nil, "ordinary persistent drops accept Helix's numeric item ID")
+check(PLUGIN:CanPlayerDropItem(client, 101) == false, "numeric cargo IDs still block persistent drops")
+check(PLUGIN:CanPlayerDropItem(client, 999) == nil, "a missing drop instance does not crash the hook")
+check(PLUGIN:CanPlayerTakeItem(stranger, {ixItemID = 102}) == nil,
+	"ordinary world-item pickup does not override other hooks")
+check(PLUGIN:CanPlayerTakeItem(client, {ixItemID = 999}) == nil,
+	"a missing pickup instance does not crash the hook")
+check(PLUGIN:CanPlayerTakeItem({GetCharacter = function() end}, cargoEntity) == false,
+	"cargo pickup requires a loaded character")
 lastItem.data.fieldClaim = "another-job"
 check(not ix.jobs.field.CanComplete(character, job), "cargo must match the exact active claim")
 lastItem.data.fieldClaim = job.rewardKey

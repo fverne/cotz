@@ -156,6 +156,10 @@ The dialogue plugin still loads `integrations/sh_dialogue.lua` early to register
 - `libs/sh_taskrewards.lua` and `libs/sv_taskrewards.lua`: reward calculations, saved offers and claims.
 - `cl_plugin.lua` and `cl_fieldtasks.lua`: Tasks menu and field markers.
 
+Cargo protection resolves the numeric instance ID supplied to `CanPlayerDropItem` and the world
+entity's `ixItemID` supplied to `CanPlayerTakeItem` through `ix.item.instances`. Pickup ownership uses
+saved instance data; ordinary persistent drops and pickups continue through the remaining hooks.
+
 Public legacy job/player API names remain available for existing dialogue and item callers. The
 `ix_JobTrigger` callback retains its original `hook.Add` dispatch stage; it is server-only and is not
 also registered as a plugin method. The existing reward-claim continuation hook retains its stage too.

@@ -1,11 +1,13 @@
 # Equipment slots
 
 Adds suit, helmet, gasmask, backpack, exoskeleton, primary weapon, secondary weapon,
-knife, artifact detector, binoculars, Geiger counter, anomaly detector, headlamp,
+knife, artifact detector, binoculars, Geiger counter, anomaly detector, light,
 compass, and GPS tracker slots. Drag an item from the backpack onto a compatible
 slot, click anywhere on a card to choose a matching backpack item, or use its usual Equip action.
 Slot interiors use the same skin painting as backpack cells. Empty cards have no inset button or text. Equipped images have no inset background.
 An occupied slot must be unequipped before choosing a replacement.
+Headlamps and handheld flashlights share the Light slot; only one can be equipped at a time.
+The slot retains its existing `headlamp` ID and saved position.
 
 The admin item picker uses the shared [COTZ UI style](../../../../docs/ui-style.md), with a responsive
 frame, scrolling list and wrapped take actions. Server validation remains unchanged.

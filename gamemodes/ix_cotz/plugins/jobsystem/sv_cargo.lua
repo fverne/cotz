@@ -7,13 +7,15 @@ function PLUGIN:CanTransferItem(item, oldInventory, inventory)
 	if not character or not inventory or inventory:GetID() ~= character:GetInventory():GetID() then return false end
 end
 
-function PLUGIN:CanPlayerTakeItem(client, item)
-	if item.isFieldCargo and (not client:GetCharacter()
+function PLUGIN:CanPlayerTakeItem(client, entity)
+	local item = ix.item.instances[entity.ixItemID]
+	if item and item.isFieldCargo and (not client:GetCharacter()
 		or item:GetData("fieldOwner") ~= client:GetCharacter():GetID()) then return false end
 end
 
-function PLUGIN:CanPlayerDropItem(client, item)
-	if item.isFieldCargo then return false end
+function PLUGIN:CanPlayerDropItem(client, itemID)
+	local item = ix.item.instances[itemID]
+	if item and item.isFieldCargo then return false end
 end
 
 function PLUGIN:PhysgunPickup(client, entity)
