@@ -40,9 +40,9 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 	local parts = {self.name .. "\n"}
 	if self.briefing then parts[#parts + 1] = self.briefing end
 	if self.townObjective then parts[#parts + 1] = "\nObjective: " .. self.townObjective end
-	if self.acquisitionMaps then
-		parts[#parts + 1] = "Acquisition regions: " .. table.concat(self.acquisitionMaps, ", ")
-	end
+	-- if self.acquisitionMaps then
+	-- 	parts[#parts + 1] = "Acquisition regions: " .. table.concat(self.acquisitionMaps, ", ")
+	-- end
 	if self.stageCount then
 		parts[#parts + 1] = string.format("Part %d of %d. "
 			.. "Final equipment authorisation requires the complete programme.", self.stageIndex, self.stageCount)
