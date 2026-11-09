@@ -3,6 +3,11 @@ PLUGIN:Register("spicy-lemon", {
 	template = "cooknpc",
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
+	buyItems = {
+		"drink_moonshine", "drink_wine",
+		"drink_vodka_1", "drink_vodka_2", "drink_vodka_3", "drink_vodka_4", "drink_vodka_5", "drink_vodka_6",
+		"drink_spirit_1", "drink_spirit_2", "drink_spirit_3",
+	},
 	map = "rp_marsh_cs",
 	courierPools = {
 		"valuables_provisions",

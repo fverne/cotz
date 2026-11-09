@@ -3,16 +3,18 @@ local TRADE_MODES = {SELLANDBUY = 1, SELLONLY = 2, BUYONLY = 3}
 
 local function plannedItems(contact, catalogue, stock)
 	local items = {}
-	for item in pairs(contact.wantedItems or {}) do items[item] = {nil, nil, TRADE_MODES.BUYONLY} end
+	for item in pairs(contact.buyingItems or contact.wantedItems or {}) do
+		items[item] = {nil, nil, TRADE_MODES.BUYONLY}
+	end
 	for _, unlock in ipairs(catalogue) do
 		local args = unlock.args
-		local wanted = (contact.wantedItems or {})[args[1]]
-		items[args[1]] = {args[2], args[3], wanted and TRADE_MODES.SELLANDBUY or TRADE_MODES.SELLONLY,
+		items[args[1]] = {args[2], args[3], TRADE_MODES.SELLANDBUY,
 			args[5], args[6], args[7]}
 	end
 	for _, item in ipairs(contact.supplies) do
-		items[item] = items[item] or
-			{nil, stock.initial, TRADE_MODES.SELLANDBUY, stock.maximum, stock.interval, stock.amount}
+		if not items[item] or items[item][3] == TRADE_MODES.BUYONLY then
+			items[item] = {nil, stock.initial, TRADE_MODES.SELLANDBUY, stock.maximum, stock.interval, stock.amount}
+		end
 	end
 	for item in pairs(contact.disabledItems or {}) do items[item] = nil end
 	ix.vendorStock.ApplyDefaults(items)

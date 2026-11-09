@@ -283,7 +283,7 @@ for slug, contact in pairs(ix.townNPCs.contacts) do
 		check(#contact.courierPools == 4, "every active contact declares four themed courier categories")
 		themedContacts = themedContacts + 1
 		for itemID in pairs(contact.courierItems) do
-			if not (contact.wantedItems or {})[itemID] and contact.enforceCatalogue
+			if not (contact.buyingItems or {})[itemID] and contact.enforceCatalogue
 				and not (contact.disabledItems or {})[itemID] and not contact.buyAll then
 				check(ix.townNPCs:WantsCourierItem(contact, itemID, false)
 					and ix.townNPCs:CanSellItem(itemID, contact.name) == false,

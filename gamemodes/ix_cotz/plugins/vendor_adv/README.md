@@ -1,9 +1,12 @@
 # Advanced vendor definitions
 
 The [approved workbook plan](../../../../docs/npc-overhaul/vendor-plan.md) now owns the 25 planned
-contacts' assortments. They have no starting sale supplies. Hand-in candidates start as BUYONLY;
-seller-specific progression opens catalogue purchases. Overlapping requested/purchase items retain
-their BUYONLY action before the purchase unlock. Other purchased goods are SELLONLY.
+contacts' assortments. Vendors buy their hand-in candidates, catalogue goods and ordinary supplies.
+Additional `buyItems` IDs and `buyCategories` category lookups are configured on town contacts;
+Haggler buys ammunition/weapons and Spicy Lemon also buys all strong alcohol.
+Buying lists are separate from progression and courier requests. Buying-only goods use BUYONLY;
+catalogue goods and supplies use SELLANDBUY, with catalogue purchases gated by seller-specific progression.
+Before a purchase unlock, the trade menu retains the BUYONLY action.
 Saved town vendor rows are reconciled to this plan on load, including trade modes and removed routes.
 The server checks both sale and purchase eligibility. Existing personal stock history is not reset.
 The Original retains ordinary work and supplies without a finite progression catalogue.
@@ -97,6 +100,7 @@ to place these contacts manually.
 Relevant standalone checks from the repository root:
 
     luatex --luaonly tests/vendor_stock_spec.lua
+    luatex --luaonly tests/town_vendor_buying_spec.lua
     luatex --luaonly tests/character_storage_spec.lua
     luatex --luaonly tests/character_sync_spec.lua
     luatex --luaonly tests/dialogue_order_spec.lua

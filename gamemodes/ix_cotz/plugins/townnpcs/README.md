@@ -128,10 +128,13 @@ Repeatable job quantities, combat strength, recording duration, cash and item pr
 Existing assigned requirements and partial contributions keep their saved values. Completed milestones
 remain completed. Commission counts and pending completion values are saved with the existing claim journal.
 
-The 25 planned contacts have empty `supplies`. Their current delivery candidates become starting
-BUYONLY rows. A requested catalogue item is BUYONLY until its seller-specific milestone is earned;
-other earned catalogue items are SELLONLY. The server enforces both purchase and sale assortments,
-including stale vendor rows. Template assembly and saved-vendor refresh apply the approved catalogue.
+Contacts buy their delivery candidates, catalogue goods and ordinary supplies independently of purchase
+unlocks. Extra buying IDs (`buyItems`) and category lookups (`buyCategories`) live in contact definitions:
+Haggler accepts ammunition and weapons, and Spicy Lemon accepts every strong alcohol item.
+These additions do not change progression requirements or courier candidates. Buying-only goods use
+BUYONLY rows; catalogue goods remain BUYONLY in the menu until their seller-specific purchase milestone
+is earned, then become SELLANDBUY. The server enforces both purchase and sale assortments, including
+stale vendor rows. Template assembly and saved-vendor refresh apply the current buying lists and catalogue.
 Character-owned stock histories are retained and clamped by the existing stock policy, not reset.
 
 Carbon sells `accesscard_bunker`; Intern sells `accesscard_laboratory`. Their existing physical-door
@@ -538,6 +541,7 @@ New NPC models remain replaceable placeholders. Place and playtest sites before 
 Run from the repository root:
 
     luatex --luaonly tests/townnpcs_spec.lua
+    luatex --luaonly tests/town_vendor_buying_spec.lua
     luatex --luaonly tests/town_delivery_sources_spec.lua
     luatex --luaonly tests/progression_spec.lua
     luatex --luaonly tests/dialogue_order_spec.lua

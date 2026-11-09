@@ -84,6 +84,23 @@ function PLUGIN:BuildCourierItems(contact)
 	contact.courierItems = wanted
 end
 
+function PLUGIN:BuildBuyingItems(contact)
+	local buying = {}
+	local categories = contact.buyCategories or {}
+	for item in pairs(contact.wantedItems or {}) do buying[item] = true end
+	for item in pairs(contact.catalogue or {}) do buying[item] = true end
+	for _, item in ipairs(contact.supplies or {}) do buying[item] = true end
+	for _, item in ipairs(contact.buyItems or {}) do
+		assert(ix.item.list[item], "Unknown town buying item: " .. item)
+		buying[item] = true
+	end
+	for item, definition in pairs(ix.item.list) do
+		if categories[definition.category] then buying[item] = true end
+	end
+	for item in pairs(contact.disabledItems or {}) do buying[item] = nil end
+	contact.buyingItems = buying
+end
+
 function PLUGIN:WantsCourierItem(contact, item, includeLegacy)
 	if contact.disabledItems and contact.disabledItems[item] then return false end
 	local legacy = (contact.wantedItems or {})[item] == true
@@ -115,7 +132,7 @@ end
 function PLUGIN:CanSellItem(item, npcName)
 	local contact = self.byName[npcName]
 	if contact and contact.buyAll then return true end
-	if contact and contact.enforceCatalogue then return (contact.wantedItems or {})[item] == true end
+	if contact and contact.enforceCatalogue then return (contact.buyingItems or {})[item] == true end
 end
 
 function PLUGIN:CanInteract(client, target)

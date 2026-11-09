@@ -3,6 +3,7 @@ PLUGIN:Register("haggler", {
 	template = "tradernpc",
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
+	buyCategories = {Ammunition = true, Weapons = true},
 	map = "rp_marsh_cs",
 	courierPools = {
 		"valuables_decorative_valuables",

@@ -17,7 +17,10 @@ function PLUGIN:BuildCatalogue()
 		definition.variantUnlocks[#definition.variantUnlocks + 1] = itemID
 	end
 	for _, contact in pairs(self.contacts) do
-		if contact.enforceCatalogue then self:BuildWantedItems(contact) end
+		if contact.enforceCatalogue then
+			self:BuildWantedItems(contact)
+			self:BuildBuyingItems(contact)
+		end
 		for item, allocation in pairs(contact.catalogue or {}) do
 			assert(not (contact.disabledItems and contact.disabledItems[item]), "Disabled town item: " .. item)
 			assert(ix.item.list[item], "Unknown town catalogue item: " .. item)
@@ -26,7 +29,7 @@ function PLUGIN:BuildCatalogue()
 			local args = {item}
 			for index = 1, 6 do args[index + 1] = allocation.terms[index] end
 			if contact.enforceCatalogue then
-				args[4] = contact.wantedItems[item] and "SELLANDBUY" or "SELLONLY"
+				args[4] = "SELLANDBUY"
 			end
 			definition.vendorUnlocks[#definition.vendorUnlocks + 1] = {npc = contact.name, args = args}
 			local gate = self.itemGates[item] or {sellers = {}}
