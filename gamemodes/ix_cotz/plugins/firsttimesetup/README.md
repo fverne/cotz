@@ -14,7 +14,9 @@ Preset edits do not update an initialized server. To restore missing preset vend
 Marsh server after deploying these files, run this once in its server console:
 
 ```lua
-lua_run local f = ix.plugin.Get("firsttimesetup") for _, v in ipairs(f.map_presets[game.GetMap()].vendors) do if not ix.progression.GetNPCFromName(ix.npctemplates.templates[v.template].name) then f:SpawnVendor(v) end end ix.plugin.Get("vendor_adv"):SaveData()
+lua_run local f = ix.plugin.Get("firsttimesetup") for _, v in ipairs(f.map_presets[game.GetMap()].vendors) do if not ix.progression.GetNPCFromName(ix.npctemplates.templates[v.template].name) then f:SpawnVendor(v) end end 
+lua_run local f = ix.plugin.Get("firsttimesetup") f.PluginDataDeployFunctions.townnpcs(f.map_presets[game.GetMap()].plugindata.townnpcs, game.GetMap())
+ix.plugin.Get("vendor_adv"):SaveData()
 ```
 
 This creates only absent preset vendors at their authored starting positions and saves the result.
