@@ -20,7 +20,7 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 639)
+        self.assertEqual(len(steps), 635)
         self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 223)
         output, count = expansion.outputs()
         self.assertEqual(count, 223)
@@ -63,6 +63,10 @@ class ProgressionExpansionTests(unittest.TestCase):
                 phase = (step["branchIndex"] - 1) / max(1, step["branchLength"] - 1)
                 maximum = 0 if step["branchIndex"] == 1 else 2 if phase >= 0.75 else 1
                 nonlocal_slots, used = 0, set()
+                if step.get("requirementAlternatives"):
+                    self.assertEqual(step["id"], "v3/hideout/access")
+                    self.assertEqual(step["requirementAlternatives"], {"bat": "crowbar"})
+                    continue
                 for slot in step["requirements"]:
                     ids = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
                     self.assertTrue(ids)
@@ -121,7 +125,7 @@ class ProgressionExpansionTests(unittest.TestCase):
             support = {c["item"] for name in identity["support"]
                        for c in self.data["pools"][name]["candidates"]}
             for step in contact["progression"]:
-                if slug in expansion.SCIENCE and not step.get("intermissionFor"):
+                if step.get("requirementAlternatives") or slug in expansion.SCIENCE and not step.get("intermissionFor"):
                     continue
                 core_units, total_units = 0, 0
                 for index, slot in enumerate(step["requirements"]):

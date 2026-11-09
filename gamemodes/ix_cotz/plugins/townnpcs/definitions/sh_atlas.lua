@@ -276,7 +276,7 @@ PLUGIN:Register("atlas", {
 			branch = "anomaly-detector",
 			name = "Anomaly Detector",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/instruments/geigercounter"},
 			briefing = "I am putting together supplies for the survey work. A useful measurement starts with having the right things in the pack. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. I will check these over before taking them out.",
 			requirements = {

@@ -76,8 +76,10 @@ Already received inventory items are not removed. Repeatable job supplies still 
 The encyclopedia displays each task title once; required-item lists use a stable order.
 Task descriptions place purchase access, stock capacity and all other benefits under Rewards,
 after the required items. Journal copy uses region names and addresses the player directly.
-The scoreboard's local/all-server filter and remote identities are always available; Mute's other
-tool permissions retain their gates. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
+All scoreboard tools, dossier fields and remote roster data are available immediately. Mute's progression
+instead grants map-specific mutant spawn PDA reports. Town dialogue uses the full task description, including
+assigned required items and remaining quantities. A definition's `requirementAlternatives` maps an accepted
+alternative item to its canonical requirement; both choices share one saved contribution and completion. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
 
 Only current registered definitions participate in task discovery and equipment gating. There is no
 old-ID permission import or completion alias. The explicit policy-4 request conversion and activation

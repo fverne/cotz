@@ -59,7 +59,11 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 		for itemID, amount in pairs(ix.progression.GetRequirements(character, self.id)) do
 			local remaining = amount - ((line.complexData or {})[itemID] or 0)
 			if remaining > 0 then
-				requirements[#requirements + 1] = string.format("%d %s", remaining, ix.item.list[itemID].name)
+				local names = {}
+				for _, choice in ipairs(ix.progression.GetRequirementChoices(self.id, itemID)) do
+					names[#names + 1] = ix.item.list[choice].name
+				end
+				requirements[#requirements + 1] = string.format("%d %s", remaining, table.concat(names, " or "))
 			end
 		end
 		table.sort(requirements)
@@ -168,8 +172,12 @@ function ix.progression.GetDeliveryOptions(character, progressionID)
 		return options
 	end
 	for itemID, amount in pairs(ix.progression.GetRequirements(character, progressionID)) do
-		if (line.complexData[itemID] or 0) < amount and character:GetInventory():HasItem(itemID) then
-			addOption("Hand over " .. ix.item.list[itemID].name, {progid = progressionID, itemid = itemID})
+		if (line.complexData[itemID] or 0) < amount then
+			for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, itemID)) do
+				if character:GetInventory():HasItem(choice) then
+					addOption("Hand over " .. ix.item.list[choice].name, {progid = progressionID, itemid = choice})
+				end
+			end
 		end
 	end
 

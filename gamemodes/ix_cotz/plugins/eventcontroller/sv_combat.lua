@@ -35,6 +35,18 @@ function PLUGIN:IsCombatActor(entity)
 	return class:sub(1, 11) == "npc_mutant_" or class:sub(1, 10) == "npc_human_"
 end
 
+function PLUGIN:EntityFireBullets(entity, data)
+	if not entity:IsNPC() or entity:GetClass():sub(1, 10) ~= "npc_human_" then return end
+	local enemy = entity:GetEnemy()
+	if not living(enemy) or enemy:GetClass():sub(1, 11) ~= "npc_mutant_" then return end
+	if not self:CanActorAttack(entity, enemy) then return false end
+
+	-- Engine eye targets can sit above short mutants. Keep the weapon's spread around the body instead.
+	data.Dir = (enemy:WorldSpaceCenter() - data.Src):GetNormalized()
+
+	return true
+end
+
 function PLUGIN:CreateCombatPack(origin, isolated)
 	nextPackID = nextPackID + 1
 

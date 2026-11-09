@@ -346,66 +346,6 @@ ix.npcbarter.Register("'Cleaner'", "stashbartercleaner3", {
 	reqItem = {"value_currency_euro", 100},
 })
 
-ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler1", {
-	name = "Ammo",
-	description = "I'll give you a box of low tier ammo for some red gunpowder.",
-	defaultActive = true,
-
-	-- Item that will awarded when barter is completed
-	barterItem = {"kit_reward_ammo_tier01", 1},
-
-	-- Only one type of item can be required at a time
-	reqItem = {"value_gunpowder_red", 1},
-})
-
-ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler2", {
-	name = "Ammo",
-	description = "I'll give you a box of mid tier ammo for some green gunpowder.",
-	defaultActive = true,
-
-	-- Item that will awarded when barter is completed
-	barterItem = {"kit_reward_ammo_tier02", 1},
-
-	-- Only one type of item can be required at a time
-	reqItem = {"value_gunpowder_green", 1},
-})
-
-ix.npcbarter.Register("'Haggler'", "newbiebarterhaggler3", {
-	name = "Ammo",
-	description = "I'll give you a box of high tier ammo for some blue gunpowder.",
-	defaultActive = true,
-
-	-- Item that will awarded when barter is completed
-	barterItem = {"kit_reward_ammo_tier03", 1},
-
-	-- Only one type of item can be required at a time
-	reqItem = {"value_gunpowder_blue", 1},
-})
-
-ix.npcbarter.Register("'Quartermaster'", "foreignammobarterquartermaster1", {
-	name = "ForeignAmmo",
-	description = "I'll give you a box of foreign ammo for some green gunpowder.",
-	defaultActive = true,
-
-	-- Item that will awarded when barter is completed
-	barterItem = {"kit_ammo_rare", 1},
-
-	-- Only one type of item can be required at a time
-	reqItem = {"value_gunpowder_green", 3},
-})
-
-ix.npcbarter.Register("'Quartermaster'", "foreignammobarterquartermaster2", {
-	name = "ForeignAmmo",
-	description = "I'll give you a large box of foreign ammo for some blue gunpowder.",
-	defaultActive = true,
-
-	-- Item that will awarded when barter is completed
-	barterItem = {"kit_ammo_m_rare", 1},
-
-	-- Only one type of item can be required at a time
-	reqItem = {"value_gunpowder_blue", 3},
-})
-
 ix.npcbarter.Register("'Quartermaster'", "rareammobarterquartermaster1", {
 	name = "RareAmmo",
 	description = "I'll give you a box of 5.56 SS190 for 20 dollar.",

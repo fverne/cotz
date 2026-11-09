@@ -118,7 +118,7 @@ local function configureProgression(dialogue, contact)
 			local definition = ix.progression.definitions[data.identifier]
 			if not definition or definition.keyNpc ~= target:GetDisplayName() then return end
 			self.current = data.identifier
-			self.response = definition.briefing
+			self.response = ix.progression.DescribeTask(definition, contact.name, nil, client:GetCharacter())
 		end,
 		GetDynamicOptions = function(self, client, target)
 			local id = self.current

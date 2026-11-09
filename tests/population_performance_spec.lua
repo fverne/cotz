@@ -398,8 +398,8 @@ local broadcastEnvironment = setmetatable({
 	player = {Iterator = function() return ipairs({unlockedPlayer, lockedPlayer, loadingPlayer}) end},
 	ix = {
 		eventController = broadcastController,
-		progression = {IsCompleted = function(character, progressionID)
-			check(progressionID == "cotz/town/mute/MU15", "event chatter checks the current broadcast milestone")
+		townNPCs = {CanReceiveMutantReports = function(_, character, map)
+			check(map == currentMap, "event chatter checks the current map's mutant report permission")
 
 			return character == unlockedCharacter
 		end},

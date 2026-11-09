@@ -297,7 +297,8 @@ if SERVER then
 		if not canAdvance(character, progressionID) or not istable(data) then
 			return false
 		end
-		local itemID, amount = data[1], data[2]
+		local itemID = ix.progression.GetRequirementKey(progressionID, data[1])
+		local amount = data[2]
 		local required = ix.progression.GetRequirements(character, progressionID)[itemID]
 		if not required or not isnumber(amount) or amount ~= amount or amount <= 0 or amount == math.huge then
 			return false
@@ -356,12 +357,13 @@ if SERVER then
 		if not canAdvance(character, progressionID) then
 			return false
 		end
-		local required = ix.progression.GetRequirements(character, progressionID)[itemID]
+		local requirementKey = ix.progression.GetRequirementKey(progressionID, itemID)
+		local required = ix.progression.GetRequirements(character, progressionID)[requirementKey]
 		if not required then
 			return false
 		end
 		local remaining = required
-			- (ix.progression.GetComplexProgressionValue(character, progressionID)[itemID] or 0)
+			- (ix.progression.GetComplexProgressionValue(character, progressionID)[requirementKey] or 0)
 		local item = character:GetInventory():HasItem(itemID)
 		if not item or remaining <= 0 or item:GetData("equip", false) == true then
 			return false

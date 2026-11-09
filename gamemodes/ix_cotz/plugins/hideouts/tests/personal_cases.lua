@@ -33,6 +33,8 @@ Test("locations claim one free room each while admin grants allow several at one
 	PLUGIN.state.hideouts = {}
 	PLUGIN.instances, PLUGIN.members = {}, {}
 	assert(PLUGIN:AddPersonalLocation("village", "room", "gate", "Village room"):find("registered"))
+	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "village"))
+	owner:GetCharacter().completed["cotz/town/ballast/v3/hideout/access"] = true
 	assert(PLUGIN:ClaimPersonalLocation(owner, target, "village"))
 	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "village"))
 	assert(PLUGIN:GrantHideout(owner, "room", "gate", "Admin extra"))
@@ -303,21 +305,26 @@ Test("scripted overflow keeps original rows, waits for room and restores safely 
 	util.TableToJSON, util.JSONToTable = encode, decode
 end)
 
-Test("each map checks only its local contact milestones and the claim gate stays optional", function()
+Test("each map checks local improvements and Ballast requires initial claim access", function()
 	local owner = personalHome()
 	local currentMap = game.GetMap
 	for _, map in ipairs({"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"}) do
 		game.GetMap = function() return map end
 		local contact = PLUGIN.personalContacts[map]
 		owner:GetCharacter().completed = {}
-		assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
+		local originalClaimStep = contact.claimStep
+		assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1) == (map ~= "rp_marsh_cs"))
+		if map == "rp_marsh_cs" then
+			owner:GetCharacter().completed["cotz/town/ballast/v3/hideout/access"] = true
+			assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
+		end
 		assert(not PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "ammo", 1))
-		local id = "cotz/town/" .. contact.id .. "/" .. contact.prefix .. "01"
+		local id = "cotz/town/" .. contact.id .. "/v3/hideout/01"
 		owner:GetCharacter().completed[id] = true
 		assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "ammo", 1))
 		contact.claimStep = 2
 		assert(not PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
-		contact.claimStep = nil
+		contact.claimStep = originalClaimStep
 	end
 	game.GetMap = currentMap
 end)

@@ -218,7 +218,7 @@ Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 {total_multiple} have multiple assigned unlocks; {missing} have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
-Medicine uses independent family branches. Listed starter supplies are available immediately.
+Medicine retains family branches; Jitters gates antirads, Asenapine/Modafines and stimpaks after medkits 2, 4 and 6. Listed starter supplies are available immediately.
 Stock values are total bonuses above the future base capacity, not additive grants or automatic refills.
 Default vendor quantities, prices and refill policy are outside this allocation pass.
 

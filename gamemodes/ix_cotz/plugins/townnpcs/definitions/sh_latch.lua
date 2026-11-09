@@ -3,6 +3,7 @@ PLUGIN:Register("latch", {
 	template = "latchnpc",
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
+	preserveProgression = true,
 	map = "rp_garbage_cotz",
 	courierPools = {
 		"valuables_workshop_tools",
@@ -37,7 +38,7 @@ PLUGIN:Register("latch", {
 		pools = {"fasteners", "basic_tools", "workshop_supplies"},
 		quantities = {2, 4, 7},
 	},
-	supplies = {},
+	supplies = {"mask_cloth"},
 	rewards = {
 		bonusCash = true,
 		bonusPackages = {
@@ -74,10 +75,6 @@ PLUGIN:Register("latch", {
 		workPrompt = "About the delivery order.",
 	},
 	catalogue = {
-		mask_cloth = {
-			step = "v3/masks-headwear/mask_cloth",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
 		mask_halfmask = {
 			step = "v3/masks-headwear/mask_halfmask",
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
@@ -135,27 +132,11 @@ PLUGIN:Register("latch", {
 
 	progression = {
 		{
-			id = "v3/masks-headwear/mask_cloth",
-			branch = "masks-headwear",
-			name = "Cloth Mask",
-			kind = "delivery",
-			requires = {},
-			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
-			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
-			requirements = {
-				{pool = "town_expansion_212709036b69", quantity = 1},
-			},
-			branchIndex = 1,
-			branchLength = 12,
-			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 4,
-		},
-		{
 			id = "v3/masks-headwear/mask_halfmask",
 			branch = "masks-headwear",
 			name = "Halfmask",
 			kind = "delivery",
-			requires = {"v3/masks-headwear/mask_cloth"},
+			requires = {},
 			briefing = "I need stock for the bench. Bring what is on the list; being nearly the right part does not make a repair hold. Bring everything on the list back here; I need the full delivery.",
 			completion = "Right. I can work with these. Leave them clear of the tools I am using.",
 			requirements = {
@@ -163,7 +144,7 @@ PLUGIN:Register("latch", {
 			},
 			branchIndex = 2,
 			branchLength = 12,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			acquisitionMaps = {"rp_garbage_cotz"},
 			requirementPolicy = 4,
 		},
 		{

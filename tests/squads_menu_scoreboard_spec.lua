@@ -243,26 +243,26 @@ check(scoreboard.selected == localClient.character:GetID(), "the owner remains s
 for _, field in pairs(scoreboard.dossierFields) do
 	check(field.card.visible == true, "every owner dossier field bypasses progression gates")
 end
-check(scoreboard.search.enabled == false and scoreboard.area.enabled == true,
-	"the area filter is always available while search keeps its separate gate")
+check(scoreboard.search.enabled == true and scoreboard.area.enabled == true,
+	"search and area filters are always available")
 check(ix.townNPCs:GetNetworkAccess(localClient.character).remote,
 	"fresh characters can see the cross-map roster")
 local filtered = ix.townNPCs:FilterNetworkRecord(localClient.character, {
 	characterID = 900, map = "remote_map", profile = {reputation = 500, leaderboardStats = {tasksCompleted = 8}},
 }, {remote = false})
-check(filtered and filtered.profile.reputation == 0 and not next(filtered.profile.leaderboardStats),
-	"remote identities remain visible without exposing gated rank or activity")
+check(filtered and filtered.profile.reputation == 500 and filtered.profile.leaderboardStats.tasksCompleted == 8,
+	"remote identities, rank and activity are available without progression")
 local otherRecord = ix.crossserver.GetScoreboardRoster(false)[first.character:GetID()]
 scoreboard:SelectRecord(otherRecord)
-check(not scoreboard.dossierFields.taskEarnings.card.visible
-	and not scoreboard.dossierFields.reputation.card.visible, "other characters retain their dossier gates")
+check(scoreboard.dossierFields.taskEarnings.card.visible
+	and scoreboard.dossierFields.reputation.card.visible, "other characters have fully available dossiers")
 scoreboard:SelectRecord(ix.crossserver.GetScoreboardRoster(false)[localClient.character:GetID()])
 local lockedRoster = ix.crossserver.GetScoreboardRoster(false)
 check(lockedRoster[localClient.character:GetID()].profile.reputation == 0
 	and lockedRoster[localClient.character:GetID()].profile.leaderboardStats.tasksCompleted == 3,
 	"server-compatible filtering preserves all personal counters")
-check(next(lockedRoster[first.character:GetID()].profile.leaderboardStats) == nil,
-	"other characters' locked counters are removed from the data")
+check(next(lockedRoster[first.character:GetID()].profile.leaderboardStats) ~= nil,
+	"other characters' counters remain available in roster data")
 ix.townNPCs.HasService = function() return true end
 scoreboard.search:SetText("does not match any character")
 clock = clock + 1

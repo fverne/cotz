@@ -103,11 +103,17 @@ def stock_items(stock):
 def expand_contacts(contacts):
     count = 0
     for slug, contact in contacts.items():
+        if contact.get("preserveProgression"):
+            count += sum(bool(step.get("intermissionFor")) for step in contact["progression"])
+            continue
         branches = defaultdict(list)
+        authored = [s for s in contact["progression"] if s.get("requirementAlternatives")]
         for step in contact["progression"]:
+            if step in authored:
+                continue
             if not step.get("intermissionFor") and step["id"] != "v3/stalkernet/networkRemote":
                 branches[step["branch"]].append(step)
-        output = []
+        output = list(authored)
         ranks = defaultdict(int)
         for branch in branches.values():
             for index, step in enumerate(branch):
@@ -117,7 +123,8 @@ def expand_contacts(contacts):
                 if slug == "mute" and step["id"] == "v3/stalkernet/networkDossier":
                     step["requires"] = ["v3/stalkernet/networkLocation"]
                 step["branchIndex"], step["branchLength"] = index + 1, len(branch)
-                step["acquisitionMaps"] = allowed_maps(contact["map"], index, len(branch))
+                if slug != "mute":
+                    step["acquisitionMaps"] = allowed_maps(contact["map"], index, len(branch))
                 step["requirementPolicy"] = POLICY
                 previous = branch[index - 1] if index else None
                 quantities = lambda s: [x["quantity"] for x in s["requirements"]]
@@ -205,7 +212,14 @@ def author_requirements(data, rates, sources):
         for name in identity["core"] + identity["support"]:
             assert name in data["pools"], (slug, name)
         previous_by_branch = {}
-        for ordinal, step in enumerate(contact["progression"]):
+        generated_steps = [s for s in contact["progression"] if not s.get("requirementAlternatives")]
+        for ordinal, step in enumerate(generated_steps):
+            # Approved layout changes retain their delivery terms and saved assignments.
+            if slug == "mute" or contact.get("preserveProgression"):
+                for slot in step["requirements"]:
+                    pool = data["pools"][slot["pool"]]
+                    pools[slot["pool"]] = {key: pool[key] for key in ("name", "tier", "candidates")}
+                continue
             maps = step["acquisitionMaps"]
             original_index, length = step["branchIndex"] - 1, step["branchLength"]
             phase = original_index / max(1, length - 1)
@@ -250,6 +264,9 @@ def author_requirements(data, rates, sources):
             previous_by_branch[step["branch"]] = signature
     referenced = {slot["pool"] for contact in data["contacts"].values()
                   for step in contact["progression"] for slot in step["requirements"]}
+    for name in referenced:
+        if name.startswith("town_expansion_") and name not in pools:
+            pools[name] = data["pools"][name]
     return {name: pool for name, pool in pools.items() if name in referenced}
 
 
@@ -275,7 +292,8 @@ def outputs():
         if not contact["progression"]:
             continue
         path = rewards.DEFINITIONS / ("sh_" + slug.replace("-", "_") + ".lua")
-        output[path] = render_contact(path.read_text(), contact["progression"])
+        source = path.read_text()
+        output[path] = source if contact.get("preserveProgression") else render_contact(source, contact["progression"])
     original = POOL_FILE.read_text().split(MARKER)[0].rstrip()
     generated = [original, MARKER.rstrip(), "ix.progression.townRequirementSources = " + lua(sources)]
     for name, pool in pools.items():

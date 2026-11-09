@@ -1,0 +1,131 @@
+-- Run from the addon root: luatex --luaonly tests/contact_progression_changes_spec.lua
+local context = dofile("tests/helpers/townnpcs.lua")
+ix.plugin = {Get = function() end}
+local checks = 0
+local function check(value, message)
+	checks = checks + 1
+	assert(value, message)
+end
+local function id(contact, step)
+	return ix.townNPCs:StepID(contact, "v3/" .. step)
+end
+local function complete(character, identifier)
+	local record = ix.progression.GetCharacterProgression(character)
+	record.lines[identifier] = {completed = true}
+	ix.progression.SetCharacterProgression(character, record)
+end
+
+for step, prerequisite in pairs({
+	["stimpaks/medic_stimpak_1"] = "medkits/medic_medkit_6",
+	["antirad/medic_antirad_1"] = "medkits/medic_medkit_2",
+	["antipsychotics/medic_antipsychotic_1"] = "medkits/medic_medkit_4",
+	["psy-healing/medic_psyheal_1"] = "medkits/medic_medkit_4",
+	["anomaly-detector/anomalydetector"] = "instruments/geigercounter",
+}) do
+	local contact = step:find("anomaly", 1, true) and "atlas" or "jitters"
+	local character = context.fixture.character()
+	local identifier = id(contact, step)
+	check(not ix.progression.IsActive(character, identifier), "the new parent gates " .. step)
+	complete(character, id(contact, prerequisite))
+	check(ix.progression.IsActive(character, identifier), "completing the parent opens " .. step)
+	complete(character, identifier)
+	check(ix.progression.IsCompleted(character, identifier), "completed unlocks remain completed")
+end
+
+local accessID = id("ballast", "hideout/access")
+local target = {
+	GetClass = function() return "ix_vendor_adv" end,
+	GetDisplayName = function() return "'Ballast'" end,
+	GetPos = function() return context.fixture.position end,
+	CanAccess = function() return true end,
+}
+for _, choice in ipairs({"crowbar", "bat"}) do
+	local character = context.fixture.character()
+	local item = {name = choice}
+	function item:GetData(key, default) return self[key] or default end
+	function item:Remove() self.removed = true end
+	character.client.Notify = function() end
+	character.inventory = {
+		HasItem = function(_, itemID) return itemID == choice and not item.removed and item end,
+	}
+	check(not ix.progression.IsActive(character, id("ballast", "hideout/01")),
+		"initial access precedes unfinished improvements")
+	ix.progression.AssignActiveRequirements(character)
+	local text = ix.progression.DescribeTask(ix.progression.definitions[accessID], "'Ballast'", nil, character)
+	check(text:find("1 bat or crowbar", 1, true), "the request describes a single alternative hand-in")
+	local options = ix.progression.GetDeliveryOptions(character, accessID)
+	check(#options == 1 and options[1].dyndata.itemid == choice, "either inventory choice gets a hand-in action")
+	item.equip = true
+	check(not ix.progression.TurnIn(character.client, target, accessID, choice), "equipped tools cannot be consumed")
+	item.equip = nil
+	check(not ix.progression.TurnIn(character.client, target, accessID, "knife1"), "unlisted tools are rejected")
+	check(ix.progression.TurnIn(character.client, target, accessID, choice), "either tool completes access")
+	check(item.removed and ix.progression.IsCompleted(character, accessID), "one tool is consumed for access")
+	check(ix.progression.IsActive(character, id("ballast", "hideout/01")), "improvements open after access")
+	check(not ix.progression.TurnIn(character.client, target, accessID, choice), "duplicate requests cannot pay twice")
+	check(ix.progression.GetLine(character, accessID).complexData.crowbar == 1,
+		"both alternatives share the same saved contribution")
+end
+
+PLUGIN = ix.townNPCs
+dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sh_networkservices.lua")
+local character = context.fixture.character()
+for _, allowed in pairs(ix.townNPCs:GetNetworkAccess(character)) do
+	check(allowed, "all scoreboard features start available")
+end
+local returning = context.fixture.character()
+for _, step in ipairs({"networkSearch", "networkSquads", "networkRanking", "emissionWarnings"}) do
+	complete(returning, id("mute", "stalkernet/" .. step))
+end
+check(ix.progression.IsActive(returning, id("mute", "stalkernet/eventBroadcasts")),
+	"retained emission completion opens Pripyat reports without completing retired activity work")
+local maps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation", "rp_pripyat_remaster"}
+local steps = {"networkSearch", "networkSquads", "networkRanking", "eventBroadcasts"}
+for index, map in ipairs(maps) do
+	check(not ix.townNPCs:CanReceiveMutantReports(character, map), "reports require the regional milestone")
+	complete(character, id("mute", "stalkernet/" .. steps[index]))
+	check(ix.townNPCs:CanReceiveMutantReports(character, map), "retained milestone IDs unlock regional reports")
+	for later = index + 1, #maps do
+		check(not ix.townNPCs:CanReceiveMutantReports(character, maps[later]), "later regions remain locked")
+	end
+end
+check(not ix.townNPCs:CanReceiveMutantReports(character, "unknown"), "unknown maps get no mutant reports")
+
+local hagglerBarters = 0
+ix.npcbarter = {Register = function(npc)
+	if npc == "'Haggler'" then hagglerBarters = hagglerBarters + 1 end
+end}
+dofile("gamemodes/ix_cotz/plugins/npcbarter/sh_definitions.lua")
+check(hagglerBarters == 0, "Haggler registers no barters")
+
+local town = PLUGIN
+PLUGIN = {}
+ix.command = {Add = function() end}
+ix.type = {string = 1, text = 2}
+dofile("gamemodes/ix_cotz/plugins/hideouts/sh_personal.lua")
+local fresh = context.fixture.character()
+check(not PLUGIN:GetPersonalUnlock(fresh, "claim", 1), "Ballast enforces initial access on new room claims")
+complete(fresh, accessID)
+check(PLUGIN:GetPersonalUnlock(fresh, "claim", 1), "completing access allows room claims")
+complete(fresh, id("ballast", "hideout/01"))
+check(PLUGIN:GetPersonalUnlock(fresh, "ammo", 1), "existing improvement IDs keep their storage gates")
+PLUGIN = town
+
+CLIENT, SERVER = true, false
+local dialogue = {townContact = "ballast", tree = {
+	GREETING = {options = {}}, BackTopic = {options = {}},
+}}
+function dialogue.addTopic(name, topic) dialogue.tree[name] = topic end
+for _, method in ipairs({"ConfigureTownServices", "ConfigureTaskRewards",
+	"ConfigureCustomization", "ConfigureBarterVisibility"}) do
+	ix.dialogue[method] = function() end
+end
+dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_towncontacts.lua")
+ix.dialogue.ConfigureTownContact(dialogue, ix.townNPCs.contacts.ballast)
+local viewer = context.fixture.character()
+ix.progression.GetRequirements = function() return {crowbar = 1} end
+dialogue.tree.TownView:DynamicPreCallback(viewer.client, target, {identifier = accessID})
+check(dialogue.tree.TownView.response:find("REQUIRED ITEMS:", 1, true)
+	and dialogue.tree.TownView.response:find("1 bat or crowbar", 1, true),
+	"the dialogue menu itself includes required names and quantities")
+print("PASS: " .. checks .. " contact progression changes checks")

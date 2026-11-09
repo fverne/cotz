@@ -3,20 +3,35 @@
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 639 hand-in milestones
-in 49 independent branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
+the earlier progression, catalogue and service descriptions below. There are 635 hand-in milestones
+in 50 branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
 locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
 Marsh branches keep their first two original milestones and all work below 45% fully Marsh-obtainable,
-including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts only. Completion pays accumulated hand-in
+including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts, except for Ballast's initial crowbar-or-bat hand-in. Completion pays accumulated hand-in
 value at 60%, with no flat cash. Stock bonuses increase personal capacity without refilling it.
 Ledger uses 3× difficulty. Policy 4 converts outstanding invalid or out-of-region saved inputs while preserving credited
 contributions and completed unlocks. Inserted stages gate unfinished unlocks; Mute's redundant directory
 maintenance is removed. See the authoritative guide for regional thresholds and save handling.
-The authored equipment and regular-ammo chains are unchanged. Medicine has separate family branches; other branches follow the approved trader lines.
+The authored equipment and regular-ammo chains are unchanged. Jitters' stimpaks follow medkit 6,
+antirads follow medkit 2, and Asenapine/Modafines follow medkit 4. Atlas' anomaly detector follows his Geiger counter.
+Ballast's initial hideout access consumes one unequipped crowbar or bat before new room claims and improvements;
+existing rooms/upgrades remain saved. Haggler's gunpowder barters are removed.
+All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 
-Wake owns backpacks and +5 kg/+2 rows; Spool owns strong drugs. Technut keeps painting and all ordinary
+Scoreboard tools and dossier data are immediately available. Mute instead unlocks mutant PDA reports for
+Swamps, Garbage, Waystation, then Pripyat, retaining emission warnings before Pripyat. Retained milestone IDs
+and delivery terms preserve existing completions and assignments; redundant activity/location/dossier stages
+remain saved history. See the overhaul guide for the exact compatibility mapping.
+
+Wake owns backpacks and +5 kg/+2 rows. Capacity upgrades are optional one-depth side branches revealed at
+the existing backpack milestones; each requires only its assigned backpack. Players can finish the backpack
+route and return for any capacity upgrades later.
+Spool's Russian tank helmet and Latch's cloth mask start in vendor stock; their old purchase steps are retired.
+Spool owns strong drugs. Quartermaster retains six regular ammunition barters; his two main-menu kit exchanges
+are removed. Suture's conversion milestones explicitly say "variants". Spool/Latch/Wake declare
+`preserveProgression = true` so the authoring tool retains their ordering, request tuning and stock stages. Technut keeps painting and all ordinary
 suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
 conversion menu and per-suit non-looted finishes. Intern owns artifact detectors. Brass/Carbon provide
 HP/AP barter only, gated by regular/HP completions respectively. Starter stock is explicitly declared.
@@ -31,6 +46,8 @@ The ammo generator now writes reports only; the legacy FTS writer rejects these 
 Regenerate reports with `progression_rewards.py --write` and `ammo_progression.py --write` under
 `docs/npc-overhaul/tools/`. Both support `--check`.
 
+    luatex --luaonly tests/contact_stock_and_capacity_spec.lua
+    luatex --luaonly tests/contact_progression_changes_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua
     luatex --luaonly tests/town_ammo_exchange_spec.lua
     luatex --luaonly tests/vendor_plan_spec.lua

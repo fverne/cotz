@@ -42,8 +42,9 @@ through dialogueid.
 Technut opens the combined [gear and suit customization window](../gearcustomization/README.md)
 from his root menu after the painting progression unlock. Each confirmed gear or suit change costs
 100 rubles. The server checks the unlock when opening, quoting and confirming customization.
-Suture's conversions and Mute's PDA appearance options sit under gear customization. Ammunition exchanges sit under barter.
-These menus retain the owning service's access checks. Barter roots are hidden until an active legacy
+Suture's conversions and Mute's PDA appearance options sit under gear customization. Suture's progression labels distinguish suit variants from suit purchases. Ammunition exchanges sit under barter.
+Quartermaster's two gunpowder-for-ammunition-kit exchanges are removed from the main menu. His six regular
+currency-for-ammunition barters remain under barter. These menus retain the owning service's access checks. Barter roots are hidden until an active legacy
 barter or an available child service exists; ammunition exchanges require at least one unlocked recipe.
 Suture's conversion root also stays hidden until a variant is unlocked, regardless of carried suits.
 Free hideout claims and ordinary paid repair/treatment retain their existing starting access.

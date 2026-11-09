@@ -1,36 +1,28 @@
 local PLUGIN = PLUGIN
-local NETWORK_SERVICES = {
-	search = "networkSearch", squads = "networkSquads", ranking = "networkRanking",
-	activity = "networkActivity", location = "networkLocation", dossier = "networkDossier",
+local MUTANT_REPORT_SERVICES = {
+	rp_marsh_cs = "mutantReportsSwamps",
+	rp_garbage_cotz = "mutantReportsGarbage",
+	rp_waystation = "mutantReportsWaystation",
+	rp_pripyat_remaster = "mutantReportsPripyat",
 }
-local BASIC_COUNTERS = {"tasksCompleted", "mutantsKilled", "humansKilled"}
 
 function PLUGIN:GetNetworkAccess(character)
-	local access = {}
-	for key, service in pairs(NETWORK_SERVICES) do access[key] = self:HasService(character, service) end
+	return {search = true, squads = true, ranking = true, activity = true,
+		location = true, dossier = true, remote = true}
+end
 
-	access.remote = true
+function PLUGIN:CanReceiveMutantReports(character, map)
+	local service = MUTANT_REPORT_SERVICES[map]
 
-	return access
+	return service ~= nil and self:HasService(character, service)
 end
 
 function PLUGIN:FilterNetworkRecord(character, record, access)
-	access = access or self:GetNetworkAccess(character)
-	if character and tonumber(record.characterID) == character:GetID() then
-		access = {ranking = true, activity = true, location = true, remote = true, dossier = true}
-	end
 	local result = table.Copy(record)
 	local profile = result.profile or {}
 	if type(profile) == "string" then profile = util.JSONToTable(profile) or {} end
-	local stats = {}
-	if access.dossier then
-		stats = profile.leaderboardStats or {}
-	elseif access.activity then
-		for _, key in ipairs(BASIC_COUNTERS) do stats[key] = (profile.leaderboardStats or {})[key] end
-	end
-	result.profile = {reputation = access.ranking and profile.reputation or 0, leaderboardStats = stats}
-	result.networkRanking = access.ranking
-	if not access.location then result.state = "unknown" result.destination = "" end
+	result.profile = {reputation = profile.reputation or 0, leaderboardStats = profile.leaderboardStats or {}}
+	result.networkRanking = true
 
 	return result
 end

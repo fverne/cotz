@@ -1,6 +1,12 @@
 ix.progression = ix.progression or {}
 
 ix.progression.itemPools = {
+	hideout_access_tool = {
+		name = "Hideout access tool",
+		tier = "common",
+		evidence = "Crowbar or bat; existing melee items obtainable in Marsh.",
+		candidates = {{item = "crowbar"}},
+	},
 	fasteners = {
 		name = "Common fasteners",
 		tier = "common",
@@ -5955,16 +5961,6 @@ ix.progression.itemPools.town_expansion_4a896182c775 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_212709036b69 = {
-	name = "Workshop tools and fabrication materials: Workshop tools and tool sets (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_hultafors_db5000"},
-		{item = "value_mining_kit"},
-		{item = "value_tapemeasure"},
-	},
-}
-
 ix.progression.itemPools.town_expansion_41f538caa035 = {
 	name = "Workshop tools and fabrication materials: Cutting and gripping tools (Marsh, Garbage)",
 	tier = "common",
@@ -5985,6 +5981,16 @@ ix.progression.itemPools.town_expansion_e18f75122fe4 = {
 
 ix.progression.itemPools.town_expansion_1471bc11fe57 = {
 	name = "Workshop tools and fabrication materials: Workshop tools and tool sets (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_hultafors_db5000"},
+		{item = "value_mining_kit"},
+		{item = "value_tapemeasure"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_212709036b69 = {
+	name = "Workshop tools and fabrication materials: Workshop tools and tool sets (Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_hultafors_db5000"},
@@ -6322,62 +6328,12 @@ ix.progression.itemPools.town_expansion_a36be0defe80 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_b20fc4b451ad = {
-	name = "Radio infrastructure and network components: Common electrical components (Marsh, Garbage, Waystation)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_capacitors"},
-	},
-}
-
 ix.progression.itemPools.town_expansion_21e05a8284d2 = {
 	name = "Radio infrastructure and network components: Recovered radio and signalling equipment (Marsh, Garbage, Waystation)",
 	tier = "uncommon",
 	candidates = {
 		{item = "value_ais_sart"},
 		{item = "value_radio"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_275533068337 = {
-	name = "Radio infrastructure and network components: Recovered radio and signalling equipment (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_ais_sart"},
-		{item = "value_radio"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_0364fbb6bdd8 = {
-	name = "Radio infrastructure and network components: Recovered flash drives (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "rare",
-	candidates = {
-		{item = "value_flash_card_ironkey"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_8a5e752fb15d = {
-	name = "Radio infrastructure and network components: Common electrical components (Marsh)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_wire_copper"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_5758512c1acf = {
-	name = "Radio infrastructure and network components: Signal processing components (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "rare",
-	candidates = {
-		{item = "value_electr_adv_amplifier"},
-		{item = "value_electr_adv_ultralink"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_0a2e115f2d62 = {
-	name = "Radio infrastructure and network components: Recovered flash drives (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "rare",
-	candidates = {
-		{item = "value_flash_card_ironkey_slider"},
 	},
 }
 
@@ -6959,19 +6915,19 @@ ix.progression.itemPools.town_expansion_d658a702f753 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_db9a2caaa58c = {
-	name = "Receivers, communications parts and recordings: Communications salvage (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_wirelesstrans"},
-	},
-}
-
 ix.progression.itemPools.town_expansion_9efea0eef6c6 = {
 	name = "Receivers, communications parts and recordings: Scientific radio modules (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_frequencymodulator"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_db9a2caaa58c = {
+	name = "Receivers, communications parts and recordings: Communications salvage (Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_wirelesstrans"},
 	},
 }
 
@@ -7799,6 +7755,14 @@ ix.progression.itemPools.town_expansion_758357f56716 = {
 	},
 }
 
+ix.progression.itemPools.town_expansion_7cdeea797da2 = {
+	name = "Personal effects and recovered belongings: Personal valuables (Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_watch"},
+	},
+}
+
 ix.progression.itemPools.town_expansion_1a2d0c87676d = {
 	name = "Personal effects and recovered belongings: Personal valuables (Marsh, Garbage)",
 	tier = "common",
@@ -7813,14 +7777,6 @@ ix.progression.itemPools.town_expansion_696e2dd3f211 = {
 	candidates = {
 		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_7cdeea797da2 = {
-	name = "Personal effects and recovered belongings: Personal valuables (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_watch"},
 	},
 }
 
@@ -7952,11 +7908,12 @@ ix.progression.itemPools.town_expansion_3dac069fdbb3 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_de6782916b35 = {
-	name = "Personal effects and recovered belongings: Personal effects and keepsakes (Marsh, Garbage, Waystation, Pripyat)",
+ix.progression.itemPools.town_expansion_ea7d5eddcaf8 = {
+	name = "Personal effects and recovered belongings: Small equipment pouches and sleeves (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "rare",
 	candidates = {
-		{item = "value_lightkeeper_amulet"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 	},
 }
 
@@ -7966,6 +7923,14 @@ ix.progression.itemPools.town_expansion_5b9bf3ce5bab = {
 	candidates = {
 		{item = "value_envelope"},
 		{item = "value_officepaper"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_de6782916b35 = {
+	name = "Personal effects and recovered belongings: Personal effects and keepsakes (Marsh, Garbage, Waystation, Pripyat)",
+	tier = "rare",
+	candidates = {
+		{item = "value_lightkeeper_amulet"},
 	},
 }
 
@@ -7991,14 +7956,5 @@ ix.progression.itemPools.town_expansion_01ffc26eb395 = {
 	candidates = {
 		{item = "value_briefcase"},
 		{item = "value_small_case"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_ea7d5eddcaf8 = {
-	name = "Personal effects and recovered belongings: Small equipment pouches and sleeves (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "rare",
-	candidates = {
-		{item = "value_container_smallitems"},
-		{item = "value_docbag"},
 	},
 }

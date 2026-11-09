@@ -68,11 +68,30 @@ PLUGIN:Register("ballast", {
 
 	progression = {
 		{
+			id = "v3/hideout/access",
+			branch = "hideout-access",
+			name = "Initial hideout access",
+			kind = "delivery",
+			requires = {},
+			briefing = "Bring me one crowbar or one bat. Either will do. I can arrange a room for you once you've brought it over; we can talk about improvements afterwards.",
+			completion = "Put it here. You can arrange your room with me now. Have a look at the locations before you settle on one.",
+			requirements = {
+				{pool = "hideout_access_tool", quantity = 1},
+			},
+			services = {
+				{id = "hideoutAccess", name = "Initial hideout access at Ballast"},
+			},
+			branchIndex = 1,
+			branchLength = 1,
+			acquisitionMaps = {"rp_marsh_cs"},
+			requirementAlternatives = {bat = "crowbar"},
+		},
+		{
 			id = "v3/hideout/01",
 			branch = "hideout",
 			name = "Hideout improvements 1",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/hideout/access"},
 			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 			completion = "Put them down here. I will sort the packing before anything leaves.",
 			requirements = {

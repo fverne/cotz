@@ -17,6 +17,11 @@ function vectorMeta:DistToSqr(other)
 	return (self.x - other.x) ^ 2 + (self.y - other.y) ^ 2 + (self.z - other.z) ^ 2
 end
 function vectorMeta.__sub(a, b) return Vector(a.x - b.x, a.y - b.y, a.z - b.z) end
+function vectorMeta:GetNormalized()
+	local length = math.sqrt(self.x ^ 2 + self.y ^ 2 + self.z ^ 2)
+
+	return Vector(self.x / length, self.y / length, self.z / length)
+end
 function vectorMeta:Angle() return {y = math.deg(math.atan(self.y, self.x))} end
 math.NormalizeAngle = function(value) return (value + 180) % 360 - 180 end
 D_HT, D_LI, D_NU = 1, 3, 4
@@ -52,6 +57,30 @@ check(manager:CanActorAttack(bandit, merc) and manager:CanActorAttack(merc, mili
 local zombie = actor("npc_mutant_classiczombie", 1300)
 zombie.cotzSpecies, zombie.cotzFaction = "zombie", "undead"
 local zombified = actor("npc_human_z_merc_rifleman", 1400)
+local lowMutant = actor("npc_mutant_dog", 500)
+lowMutant.WorldSpaceCenter = function() return Vector(500, 0, 12) end
+bandit.enemy = lowMutant
+local spread = Vector(0.1, 0.1, 0)
+local bullet = {Src = Vector(0, 0, 64), Dir = Vector(1, 0, 0), Spread = spread, Damage = 20, Num = 6}
+check(manager:EntityFireBullets(bandit, bullet) == true and bullet.Dir.z < 0,
+	"human shots aim down at a short mutant's collision center")
+check(math.abs(64 + bullet.Dir.z * 500 / bullet.Dir.x - 12) < 0.001,
+	"the corrected bullet ray intersects the mutant's body height")
+check(bullet.Spread == spread and bullet.Damage == 20 and bullet.Num == 6,
+	"aim correction preserves spread, damage and pellet count")
+bandit.enemy = merc
+local direction = bullet.Dir
+check(manager:EntityFireBullets(bandit, bullet) == nil and bullet.Dir == direction,
+	"human targets retain ordinary engine aim")
+bandit.enemy = lowMutant
+lowMutant.cotzSleeping = true
+check(manager:EntityFireBullets(bandit, bullet) == false, "sleeping mutants cannot be shot through aim correction")
+lowMutant.cotzSleeping = nil
+bandit.enemy = nil
+check(manager:EntityFireBullets(bandit, bullet) == nil, "a missing enemy leaves bullets unchanged")
+manager:RemoveCombatActor(lowMutant)
+lowMutant.removed = true
+bandit.enemy = nil
 check(manager:ActorsAllied(zombified, zombie) and manager:CanActorAttack(zombified, merc),
 	"zombified humans ally with undead rather than their former faction")
 merc.cotzSleeping = true

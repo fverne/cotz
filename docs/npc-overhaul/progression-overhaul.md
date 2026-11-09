@@ -1,6 +1,6 @@
 # Town progression overhaul, 9 November 2026
 
-This replaces the former 600-milestone town graph with 639 hand-in milestones across 49 independent
+This replaces the former 600-milestone town graph with 635 hand-in milestones across 50
 branches, including 223 stock-preparation intermissions. The authored `upgradeChains` and
 `regularAmmoChain` in `sh_equipment.lua` retain their exact order. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
@@ -11,18 +11,18 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 | Contact | Progression branches | Starting sale stock |
 | --- | --- | --- |
 | Atlas | Binoculars; Geiger counter/GPS; anomaly detector; headlamp | Flashlight, compass |
-| Ballast | Swamps hideout improvements | Buys all at 0.3 |
+| Ballast | Initial hideout access, then Swamps hideout improvements | Buys all at 0.3 |
 | Gasket | Sidearms; strong alcohol | Nagant, Contender, M1917, Ruger Mk III; .22, 7.62x25, 9x18, .45 ACP |
 | Haggler | Pact CQB/shotguns | .22, 7.62x25, 9x18, 9x19, .45 ACP, .410; tanker helmet |
 | Jitters | Separate medkit, bandage, antirad, antipsychotic, psy-healing and stimpak branches | Basic bandages and medkits |
-| Mute | STALKERnet, including emission warnings and event broadcasts | None |
+| Mute | Regional mutant PDA reports; emission warnings | None |
 | Old Timer | Knives; melee in groups of 2/2/3; high-tier cooker; hidestashers | Lead pipe, low-tier cooker, charcoal |
 | Spicy Lemon | Weak drugs/nicotine; beer; energy drinks | Corn, beans, chili beans; cheapest vodka, cigarettes and energy drink |
 | Technut | Ordinary, Clear Sky and military suits; painting | Anorak, cloth mask |
 | Brass | Regular ammunition; HP exchanges; TR/DT/MG shotgun loads | Basic gun ammunition, buckshot and slugs |
 | Cleaner | Garbage hideout improvements | Buys all at 0.3 |
-| Latch | Gasmasks and middle-tier headwear | None |
-| Spool | Steel/riot headwear; strong drugs | None |
+| Latch | Gasmasks and middle-tier headwear | Cloth mask |
+| Spool | Steel/riot headwear; strong drugs | Russian tank helmet |
 | Spoor | Slow-firing rifles | Sako .22 and Winchester .22 |
 | Vesper | Pact rifles | None |
 | Wake | Backpacks; carried weight; inventory rows | Basic bandages and medkits |
@@ -36,8 +36,7 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 | Egghead | SSP-99, SSP-99M, SEVA | Ukrainian/Russian MREs, canned water, basic antirad/bandages/medkits |
 | Intern | Echo, Bear, Veles artifact detectors | None |
 
-Latch sells the full authored mask chain and operator-Russian-2/CS1/CS2 headwear. Spool sells the tanker,
-three steel helmets and riot helmet; Haggler's tanker starter is an intentional duplicate. Boss owns
+Latch starts with the cloth mask and unlocks the remaining mask chain and operator-Russian-2/CS1/CS2 headwear. Spool starts with the Russian tank helmet and unlocks three steel helmets and the riot helmet; Haggler's tanker starter is an intentional duplicate. Boss owns
 the remainder of the helmet chain. All four trenchcoat colours share Technut's black-trenchcoat step.
 
 Weak drugs include cigarettes, tobacco, cigars, mints, codeine and caffeine. Spool's strong-drug branch
@@ -46,7 +45,7 @@ wine and spirits; the cheapest vodka also remains a Spicy Lemon starter.
 
 ## Unlocks, exchanges and retained assets
 
-Town requirements contain only valuables and artifacts, validated through item inheritance and actual
+Except for Ballast's initial one-crowbar-or-bat hand-in, town requirements contain only valuables and artifacts, validated through item inheritance and actual
 checked-in world/box/cycling acquisition sources. Currency and bound quest assets are excluded.
 Scientists retain artifact deliveries at equipment milestones; their preparation stages request ordinary
 research and technical valuables. Garbage introductions use locally available members of each
@@ -92,7 +91,17 @@ milestone's base units, rounded upward with minimum one, before applying contact
 Its reward increases personal capacity for the previous purchase group, including grouped equipment.
 Highest-earned bonuses apply once, up to +4 total; current stock, refill interval and amount stay unchanged.
 Existing single-item `stock.item` definitions and grouped `stock.items` are both supported.
-Mute's cash-only directory maintenance is removed; location tracking now leads directly to the dossier.
+All scoreboard tools and dossier fields are available immediately, including server-supplied remote records.
+Mute's retained `networkSearch`, `networkSquads`, `networkRanking` and `eventBroadcasts` milestone IDs now
+unlock mutant spawn PDA reports in Swamps, Garbage, Waystation and Pripyat, respectively. Emission warnings
+remain between Waystation and Pripyat reports. The redundant activity, location and dossier milestones are
+retired; saved records remain history. Retained milestones keep their delivery terms, assigned items and
+completed states, so existing completion grants the corresponding regional report permission.
+
+Jitters' stimpak branch follows `medic_medkit_6`; antirads follow `medic_medkit_2`; Asenapine and Modafines
+follow `medic_medkit_4`. Later medicine tiers retain their family prerequisites. Atlas' anomaly detector
+follows his Geiger counter. Haggler's three gunpowder/ammunition-kit barters are removed.
+Town progression dialogue displays the same assigned items, remaining quantities and rewards as the task journal.
 
 Finite progression has no flat completion cash. Accepted hand-ins accrue the existing 60% valuation,
 including instance pricing and the existing vendor valuation rules. Cash is rounded upward once at
@@ -114,8 +123,34 @@ Technut retains paid painting behind his own hand-in milestone. Bank/Computer pr
 town service credit and town repair/treatment discounts are retired; ordinary paid repair/treatment remain.
 Computer is no longer gated by an obsolete Intern milestone. Existing bank data is retained.
 
-Wake supplies the existing total limits of +5 kg and +2 inventory rows through separate branches.
-Ballast/Cleaner/Ledger each have twelve local hideout stages, enabling the existing twelve storage tiers.
+Wake's existing +5 kg and +2 inventory rows are optional one-depth side branches at the backpack milestones
+below. Each requires only its assigned backpack; all seven can be completed independently of one another.
+Later backpacks and their preparation continue along the backpack route. The side branches remain available
+for later completion, including when their backpack was completed before this update. Their IDs, contribution
+records, hand-in terms and capacity amounts are preserved. Completed purchases and capacity remain earned.
+
+| After backpack | Optional capacity upgrade revealed |
+| --- | --- |
+| Worn Sportsbag | Carried weight +1 kg (01) |
+| School Backpack | Carried weight +1 kg (02) |
+| Large Sling Backpack | Inventory +1 row (01) |
+| Army Backpack | Carried weight +1 kg (03) |
+| Modern Military Backpack (Russian) | Carried weight +1 kg (04) |
+| Modern Military Backpack (USA) | Inventory +1 row (02) |
+| Large Modern Military Backpack (Russian) | Carried weight +1 kg (05) |
+
+Spool's tank helmet and Latch's cloth mask have no active purchase milestones; both are starting vendor
+stock. Retired milestone records remain history. Their successors keep the original delivery terms and
+regional tier positions. `preserveProgression = true` on Spool, Latch and Wake tells the expansion tool to
+preserve their approved layout, stock stages and request tuning.
+Quartermaster's two gunpowder-for-ammunition-kit barters are removed from the main menu; his six regular
+currency-for-ammunition barters remain in his barter submenu. Suture's suit conversion milestones are
+labelled with the suit name followed by "variants", including "Anorak variants".
+Ballast/Cleaner/Ledger each have twelve local hideout improvement stages, enabling the existing twelve storage tiers.
+Ballast additionally requires `v3/hideout/access` before new Swamps room claims and unfinished improvements.
+It consumes exactly one unequipped crowbar or bat, at the player's choice. Both choices credit one shared
+requirement; repeated hand-ins cannot consume or pay again. Existing owned rooms and paid upgrades remain saved.
+Garbage and Waystation room claims retain their existing availability.
 The two +2 floor allowances require stages 2 and 4; furnishings require stage 3. Purchases still cost
 their configured roubles/items. Saved paid levels, receipts, inventory dimensions and contents remain.
 

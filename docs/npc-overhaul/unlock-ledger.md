@@ -4,11 +4,11 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**639 active steps; 639 have functional unlocks; 0 have TODO-only unlock plans;
+**635 active steps; 635 have functional unlocks; 0 have TODO-only unlock plans;
 19 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
-Medicine uses independent family branches. Listed starter supplies are available immediately.
+Medicine retains family branches; Jitters gates antirads, Asenapine/Modafines and stimpaks after medkits 2, 4 and 6. Listed starter supplies are available immediately.
 Stock values are total bonuses above the future base capacity, not additive grants or automatic refills.
 Default vendor quantities, prices and refill policy are outside this allocation pass.
 
@@ -25,7 +25,7 @@ Validation passed.
 | --- | ---: | ---: | ---: | ---: |
 | arena-master | 0 | 0 | 0 | 0 |
 | atlas | 10 | 10 | 0 | 0 |
-| ballast | 12 | 12 | 0 | 0 |
+| ballast | 13 | 13 | 0 | 0 |
 | beanstalk | 27 | 27 | 0 | 0 |
 | boss | 13 | 13 | 0 | 0 |
 | brass | 68 | 68 | 0 | 0 |
@@ -36,14 +36,14 @@ Validation passed.
 | haggler | 35 | 35 | 0 | 0 |
 | intern | 5 | 5 | 0 | 0 |
 | jitters | 23 | 23 | 0 | 0 |
-| latch | 21 | 21 | 0 | 0 |
+| latch | 20 | 20 | 0 | 0 |
 | ledger | 12 | 12 | 0 | 0 |
-| mute | 8 | 8 | 0 | 0 |
+| mute | 5 | 5 | 0 | 0 |
 | old-timer | 11 | 11 | 0 | 4 |
 | quartermaster | 23 | 23 | 0 | 0 |
 | smartass | 47 | 47 | 0 | 0 |
 | spicy-lemon | 51 | 51 | 0 | 0 |
-| spool | 16 | 16 | 0 | 0 |
+| spool | 15 | 15 | 0 | 0 |
 | spoor | 21 | 21 | 0 | 0 |
 | suture | 37 | 37 | 0 | 13 |
 | technut | 26 | 26 | 0 | 2 |
@@ -97,6 +97,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | atlas | v3/instruments/gpstracker | Purchase: gpstracker | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | atlas | v3/anomaly-detector/anomalydetector | Purchase: anomalydetector | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | atlas | v3/headlamp/headlamp | Purchase: headlamp | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| ballast | v3/hideout/access | Initial hideout access at Ballast | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | ballast | v3/hideout/01 | Hideout improvements 1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | ballast | v3/hideout/02 | Hideout improvements 2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | ballast | v3/hideout/03 | Hideout improvements 3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
@@ -384,8 +385,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | jitters | v3/bandages/medic_bandage_3 | Purchase: medic_bandage_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antirad/medic_antirad_1 | Purchase: medic_antirad_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antirad/medic_antirad_2 | Purchase: medic_antirad_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| latch | v3/masks-headwear/mask_cloth | Purchase: mask_cloth | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
-| latch | v3/masks-headwear/mask_halfmask | Purchase: mask_halfmask | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| latch | v3/masks-headwear/mask_halfmask | Purchase: mask_halfmask | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_respirator/stock | Stock: mask_halfmask +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_respirator | Purchase: mask_respirator | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_gp5/stock | Stock: mask_respirator +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
@@ -417,14 +417,11 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | ledger | v3/hideout/10 | Hideout improvements 10 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | ledger | v3/hideout/11 | Hideout improvements 11 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | ledger | v3/hideout/12 | Hideout improvements 12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| mute | v3/stalkernet/networkSearch | STALKERnet search | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| mute | v3/stalkernet/networkSquads | STALKERnet squad filter | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| mute | v3/stalkernet/networkRanking | STALKERnet ranks and reputation | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| mute | v3/stalkernet/networkSearch | Swamps mutant spawn PDA messages | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| mute | v3/stalkernet/networkSquads | Garbage mutant spawn PDA messages | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| mute | v3/stalkernet/networkRanking | Waystation mutant spawn PDA messages | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | mute | v3/stalkernet/emissionWarnings | Emission warnings | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| mute | v3/stalkernet/networkActivity | STALKERnet activity counters | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| mute | v3/stalkernet/eventBroadcasts | Event broadcasts | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| mute | v3/stalkernet/networkLocation | STALKERnet location tracking | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| mute | v3/stalkernet/networkDossier | STALKERnet full career dossier | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| mute | v3/stalkernet/eventBroadcasts | Pripyat mutant spawn PDA messages | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | old-timer | v3/knives/knife2 | Purchase: knife2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/knives/knife3 | Purchase: knife3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/knives/knife4/stock | Stock: knife3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -557,8 +554,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | spicy-lemon | v3/energy-drinks/drink_energydrink_6 | Purchase: drink_energydrink_6 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spicy-lemon | v3/energy-drinks/drink_energydrink_3/stock | Stock: drink_energydrink_6 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spicy-lemon | v3/energy-drinks/drink_energydrink_3 | Purchase: drink_energydrink_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| spool | v3/steel-headwear/helm_tanker | Purchase: helm_tanker | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
-| spool | v3/steel-headwear/helm_steel_arab | Purchase: helm_steel_arab | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| spool | v3/steel-headwear/helm_steel_arab | Purchase: helm_steel_arab | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | spool | v3/steel-headwear/helm_steel_ger | Purchase: helm_steel_ger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spool | v3/steel-headwear/helm_steel_rus/stock | Stock: helm_steel_ger +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spool | v3/steel-headwear/helm_steel_rus | Purchase: helm_steel_rus | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -690,19 +686,23 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | vesper | v3/pact-rifles/dp28 | Purchase: dp28 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_sling | Purchase: backpack_sling | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | wake | v3/backpacks/backpack_duffle | Purchase: backpack_duffle | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| wake | v3/carry-weight/01 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | wake | v3/backpacks/backpack_sanitar/stock | Stock: backpack_duffle +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_sanitar | Purchase: backpack_sanitar | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_tbag/stock | Stock: backpack_sanitar +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_tbag | Purchase: backpack_tbag | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| wake | v3/carry-weight/02 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_tourist/stock | Stock: backpack_tbag +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_tourist | Purchase: backpack_tourist | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_takedown_1/stock | Stock: backpack_tourist +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_takedown_1 | Purchase: backpack_takedown_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| wake | v3/inventory-rows/01 | Carried capacity: +1 rows | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | wake | v3/backpacks/backpack_takedown_2 | Purchase: backpack_takedown_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_mbss/stock | Stock: backpack_takedown_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_mbss | Purchase: backpack_mbss | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | wake | v3/backpacks/backpack_vkbo/stock | Stock: backpack_mbss +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | wake | v3/backpacks/backpack_vkbo | Purchase: backpack_vkbo | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| wake | v3/carry-weight/03 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | wake | v3/backpacks/backpack_pilgrim/stock | Stock: backpack_vkbo +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | wake | v3/backpacks/backpack_pilgrim | Purchase: backpack_pilgrim | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | wake | v3/backpacks/backpack_scavbackpack/stock | Stock: backpack_pilgrim +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -711,21 +711,17 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | wake | v3/backpacks/backpack_1 | Purchase: backpack_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | wake | v3/backpacks/backpack_3/stock | Stock: backpack_1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_3 | Purchase: backpack_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| wake | v3/carry-weight/04 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_2/stock | Stock: backpack_3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_2 | Purchase: backpack_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| wake | v3/inventory-rows/02 | Carried capacity: +1 rows | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_1_large/stock | Stock: backpack_2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_1_large | Purchase: backpack_1_large | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_3_large/stock | Stock: backpack_1_large +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_3_large | Purchase: backpack_3_large | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| wake | v3/carry-weight/05 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_2_large/stock | Stock: backpack_3_large +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | wake | v3/backpacks/backpack_2_large | Purchase: backpack_2_large | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| wake | v3/carry-weight/01 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
-| wake | v3/carry-weight/02 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| wake | v3/carry-weight/03 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| wake | v3/carry-weight/04 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| wake | v3/carry-weight/05 | Carried capacity: +1 weight | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| wake | v3/inventory-rows/01 | Carried capacity: +1 rows | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
-| wake | v3/inventory-rows/02 | Carried capacity: +1 rows | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 
 ## Purchase catalogue
 
@@ -864,7 +860,6 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | headwear_cs1 | latch | v3/masks-headwear/headwear_cs1 | latch |
 | headwear_cs2 | latch | v3/masks-headwear/headwear_cs2 | latch |
 | helm_operator_rus_2 | latch | v3/masks-headwear/helm_operator_rus_2 | latch |
-| mask_cloth | latch | v3/masks-headwear/mask_cloth | technut |
 | mask_eo20 | latch | v3/masks-headwear/mask_eo20 | latch |
 | mask_gp5 | latch | v3/masks-headwear/mask_gp5 | latch |
 | mask_halfmask | latch | v3/masks-headwear/mask_halfmask | latch |
@@ -962,7 +957,6 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | helm_steel_arab | spool | v3/steel-headwear/helm_steel_arab | spool |
 | helm_steel_ger | spool | v3/steel-headwear/helm_steel_ger | spool |
 | helm_steel_rus | spool | v3/steel-headwear/helm_steel_rus | spool |
-| helm_tanker | spool | v3/steel-headwear/helm_tanker | haggler |
 | miscaid_swampbrew | spool | v3/strong-drugs/miscaid_swampbrew | spool |
 | l115 | spoor | v3/slow-rifles/l115 | spoor |
 | lax44 | spoor | v3/slow-rifles/lax44 | spoor |

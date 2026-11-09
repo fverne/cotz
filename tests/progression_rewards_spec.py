@@ -38,8 +38,11 @@ class ProgressionRewardsSpec(unittest.TestCase):
     def test_directory_maintenance_removed_without_a_roster_gate(self):
         steps = {step["id"]: step for step in self.data["contacts"]["mute"]["progression"]}
         self.assertNotIn("v3/stalkernet/networkRemote", steps)
-        self.assertEqual(steps["v3/stalkernet/networkDossier"]["requires"],
-                         ["v3/stalkernet/networkLocation"])
+        self.assertNotIn("v3/stalkernet/networkDossier", steps)
+        self.assertNotIn("v3/stalkernet/networkLocation", steps)
+        self.assertNotIn("v3/stalkernet/networkActivity", steps)
+        self.assertEqual(steps["v3/stalkernet/eventBroadcasts"]["requires"],
+                         ["v3/stalkernet/emissionWarnings"])
 
     def test_fresh_ids_and_hand_in_objectives(self):
         for contact in self.data["contacts"].values():

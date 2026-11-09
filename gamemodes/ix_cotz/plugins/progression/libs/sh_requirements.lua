@@ -1,5 +1,22 @@
 ix.progression = ix.progression or {}
 
+function ix.progression.GetRequirementKey(progressionID, itemID)
+	local definition = ix.progression.definitions[progressionID]
+
+	return definition and (definition.requirementAlternatives or {})[itemID] or itemID
+end
+
+function ix.progression.GetRequirementChoices(progressionID, itemID)
+	local definition = ix.progression.definitions[progressionID]
+	local choices = {itemID}
+	for alternative, required in pairs(definition and definition.requirementAlternatives or {}) do
+		if required == itemID then choices[#choices + 1] = alternative end
+	end
+	table.sort(choices)
+
+	return choices
+end
+
 function ix.progression.GetRequirements(character, progressionID)
 	local definition = ix.progression.definitions[progressionID]
 	if not definition or not definition.requirementSlots then
@@ -23,7 +40,9 @@ function ix.progression.GetNeededItems(character)
 			for item, amount in pairs(ix.progression.GetRequirements(character, progressionID)) do
 				local remaining = amount - (contributed[item] or 0)
 				if remaining > 0 then
-					result[item] = (result[item] or 0) + remaining
+					for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, item)) do
+						result[choice] = (result[choice] or 0) + remaining
+					end
 				end
 			end
 		end
@@ -54,6 +73,21 @@ if SERVER then
 		error("Unknown catalogue threshold: " .. definition.id)
 	end
 
+	local function validateAlternatives(definition)
+		if not definition.requirementAlternatives then return end
+		local requirementItems = {}
+		for _, slot in ipairs(definition.requirementSlots or {}) do
+			for _, candidate in ipairs(validateSlot(slot).candidates) do requirementItems[candidate.item] = true end
+		end
+		for alternative, required in pairs(definition.requirementAlternatives) do
+			assert(ix.item.list[alternative] and ix.item.list[required], "Unknown alternative requirement item")
+			assert(alternative ~= required and not definition.requirementAlternatives[required],
+				"Alternative requirements must point directly to a canonical item")
+			assert(not requirementItems[alternative], "Alternative item also occupies a requirement slot")
+			assert(requirementItems[required], "Alternative requirement has no canonical slot")
+		end
+	end
+
 	function ix.progression.ValidateRequirementPools()
 		for progressionID, definition in pairs(ix.progression.definitions) do
 			if ix.progression.ValidateBenefits then ix.progression.ValidateBenefits(definition) end
@@ -78,6 +112,7 @@ if SERVER then
 			if definition.requirementSlots then
 				assert(#definition.requirementSlots > 0, "Empty delivery requirements: " .. progressionID)
 			end
+			validateAlternatives(definition)
 			for _, slot in ipairs(definition.requirementSlots or {}) do
 				local pool = validateSlot(slot)
 				if definition.requirementPolicy then

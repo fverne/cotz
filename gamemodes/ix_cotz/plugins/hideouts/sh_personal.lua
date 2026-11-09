@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.personalContacts = {
-	rp_marsh_cs = {name = "'Ballast'", id = "ballast", prefix = "BA"},
+	rp_marsh_cs = {name = "'Ballast'", id = "ballast", prefix = "BA", claimStep = "access"},
 	rp_garbage_cotz = {name = "'Cleaner'", id = "cleaner", prefix = "CL"},
 	rp_waystation = {name = "'Ledger'", id = "ledger", prefix = "LE"},
 }
@@ -68,9 +68,13 @@ function PLUGIN:GetPersonalUnlock(character, feature, level)
 	local steps = self.personalUnlockSteps[feature]
 	local step = feature == "claim" and contact.claimStep or steps and steps[level]
 	if not step then return false, "Further progression is not enabled yet." end
-	local id = "cotz/town/" .. contact.id .. "/v3/hideout/" .. string.format("%02d", step)
+	local suffix = type(step) == "number" and string.format("%02d", step) or step
+	local id = "cotz/town/" .. contact.id .. "/v3/hideout/" .. suffix
 
-	return ix.progression.IsCompleted(character, id), "Requires hideout improvement " .. step .. "."
+	local reason = feature == "claim" and "Arrange initial hideout access with Ballast."
+		or "Requires hideout improvement " .. step .. "."
+
+	return ix.progression.IsCompleted(character, id), reason
 end
 
 function PLUGIN:GetPersonalFloorLimit(record)

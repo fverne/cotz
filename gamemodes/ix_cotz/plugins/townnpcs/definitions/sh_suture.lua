@@ -647,7 +647,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_anorak",
 			branch = "suit-variants",
-			name = "Anorak",
+			name = "Anorak variants",
 			kind = "delivery",
 			requires = {},
 			crossRequires = {},
@@ -665,7 +665,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_mailjacket",
 			branch = "suit-variants",
-			name = "Mail Jacket",
+			name = "Mail Jacket variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_anorak"},
 			crossRequires = {
@@ -685,7 +685,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_sunrise",
 			branch = "suit-variants",
-			name = "Sunrise STALKER Suit",
+			name = "Sunrise STALKER Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_mailjacket"},
 			crossRequires = {
@@ -705,7 +705,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_io7a",
 			branch = "suit-variants",
-			name = "IO7a Suit",
+			name = "IO7a Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_sunrise"},
 			crossRequires = {
@@ -725,7 +725,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_cs1",
 			branch = "suit-variants",
-			name = "Sky-1 Suit",
+			name = "Sky-1 Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_io7a"},
 			crossRequires = {
@@ -745,7 +745,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_wind",
 			branch = "suit-variants",
-			name = "Pathfinder Suit",
+			name = "Pathfinder Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_cs1"},
 			crossRequires = {
@@ -766,7 +766,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_ps5m",
 			branch = "suit-variants",
-			name = "Universal Protection Suit",
+			name = "Universal Protection Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_wind"},
 			crossRequires = {
@@ -787,7 +787,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_cs2",
 			branch = "suit-variants",
-			name = "Sky-2 Suit",
+			name = "Sky-2 Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_ps5m"},
 			crossRequires = {
@@ -808,7 +808,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_nbc",
 			branch = "suit-variants",
-			name = "NBC Suit",
+			name = "NBC Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_cs2"},
 			crossRequires = {
@@ -829,7 +829,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_berill",
 			branch = "suit-variants",
-			name = "Berill-5M",
+			name = "Berill-5M variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_nbc"},
 			crossRequires = {
@@ -851,7 +851,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_cs3",
 			branch = "suit-variants",
-			name = "Sky-3 Suit",
+			name = "Sky-3 Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_berill"},
 			crossRequires = {
@@ -878,7 +878,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_seva",
 			branch = "suit-variants",
-			name = "SEVA Suit",
+			name = "SEVA Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_cs3"},
 			crossRequires = {
@@ -905,7 +905,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_skat10",
 			branch = "suit-variants",
-			name = "Skat-10 Armored Suit",
+			name = "Skat-10 Armored Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_seva"},
 			crossRequires = {
@@ -932,7 +932,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-variants/suit_skat9",
 			branch = "suit-variants",
-			name = "Skat-9 Armored Suit",
+			name = "Skat-9 Armored Suit variants",
 			kind = "delivery",
 			requires = {"v3/suit-variants/suit_skat10"},
 			crossRequires = {

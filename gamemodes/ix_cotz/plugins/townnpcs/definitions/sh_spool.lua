@@ -3,6 +3,7 @@ PLUGIN:Register("spool", {
 	template = "spoolnpc",
 	difficultyMultiplier = 3.5,
 	enforceCatalogue = true,
+	preserveProgression = true,
 	map = "rp_garbage_cotz",
 	courierPools = {
 		"valuables_radio_equipment",
@@ -30,7 +31,7 @@ PLUGIN:Register("spool", {
 			medium = "rp_waystation",
 		},
 	},
-	supplies = {},
+	supplies = {"helm_tanker"},
 	rewards = {
 		bonusPackages = {
 			{
@@ -61,10 +62,6 @@ PLUGIN:Register("spool", {
 		rfreceiver = true,
 	},
 	catalogue = {
-		helm_tanker = {
-			step = "v3/steel-headwear/helm_tanker",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
 		helm_steel_arab = {
 			step = "v3/steel-headwear/helm_steel_arab",
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
@@ -114,27 +111,11 @@ PLUGIN:Register("spool", {
 
 	progression = {
 		{
-			id = "v3/steel-headwear/helm_tanker",
-			branch = "steel-headwear",
-			name = "Russian Tank Helmet",
-			kind = "delivery",
-			requires = {},
-			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thanks. Leave those by the bench; I will check them between calls.",
-			requirements = {
-				{pool = "town_expansion_db9a2caaa58c", quantity = 1},
-			},
-			branchIndex = 1,
-			branchLength = 5,
-			acquisitionMaps = {"rp_garbage_cotz"},
-			requirementPolicy = 4,
-		},
-		{
 			id = "v3/steel-headwear/helm_steel_arab",
 			branch = "steel-headwear",
 			name = "Arab Steel Helmet",
 			kind = "delivery",
-			requires = {"v3/steel-headwear/helm_tanker"},
+			requires = {},
 			briefing = "I need supplies for the radio bench. I would like the set ready when somebody calls, without holding a connection together by hand. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thanks. Leave those by the bench; I will check them between calls.",
 			requirements = {
@@ -142,7 +123,7 @@ PLUGIN:Register("spool", {
 			},
 			branchIndex = 2,
 			branchLength = 5,
-			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			acquisitionMaps = {"rp_garbage_cotz"},
 			requirementPolicy = 4,
 		},
 		{

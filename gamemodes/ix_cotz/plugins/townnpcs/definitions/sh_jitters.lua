@@ -163,7 +163,7 @@ PLUGIN:Register("jitters", {
 			branch = "antipsychotics",
 			name = "Asenapine Tablets",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/medkits/medic_medkit_4"},
 			briefing = "I need to replenish the medical supplies. Look at the list before packing; I have enough things to sort when someone actually needs treatment. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
@@ -252,7 +252,7 @@ PLUGIN:Register("jitters", {
 			branch = "psy-healing",
 			name = "Modafine Tablets",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/medkits/medic_medkit_4"},
 			briefing = "I need to replenish the medical supplies. Look at the list before packing; I have enough things to sort when someone actually needs treatment. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
@@ -287,7 +287,7 @@ PLUGIN:Register("jitters", {
 			branch = "stimpaks",
 			name = "Experimental Medical Stimpak MkI",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/medkits/medic_medkit_6"},
 			briefing = "I need to replenish the medical supplies. Look at the list before packing; I have enough things to sort when someone actually needs treatment. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {
@@ -601,7 +601,7 @@ PLUGIN:Register("jitters", {
 			branch = "antirad",
 			name = "Anti-Radiation Drugs (Old)",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/medkits/medic_medkit_2"},
 			briefing = "I need to replenish the medical supplies. Look at the list before packing; I have enough things to sort when someone actually needs treatment. Bring everything on the list back here; I need the full delivery.",
 			completion = "Thank you. Put those here so I can check them and clear some room.",
 			requirements = {

@@ -53,7 +53,9 @@ function PLUGIN:BuildProgressions()
 				townContact = slug,
 				townKind = step.kind,
 				townBranch = step.branch,
-				defaultActive = #step.requires == 0 and #(step.crossRequires or {}) == 0,
+				-- Entry steps still open when their newly linked parent was completed before this update.
+				defaultActive = step.defaultActive == true or step.branchIndex == 1
+					or (#step.requires == 0 and #(step.crossRequires or {}) == 0),
 				nextProgressions = {},
 				prerequisites = {},
 				BuildResponse = buildResponse,
@@ -61,6 +63,7 @@ function PLUGIN:BuildProgressions()
 				completionBenefits = step.benefits,
 				acquisitionMaps = step.acquisitionMaps,
 				requirementPolicy = step.requirementPolicy,
+				requirementAlternatives = step.requirementAlternatives,
 				intermissionFor = step.intermissionFor,
 				capacityReward = step.capacity,
 				vendorUnlocks = {},
