@@ -59,7 +59,7 @@ for item, seller in pairs({makarov = "gasket", mp153 = "haggler", akm = "vesper"
 	check(ix.townNPCs.canonicalSellers[item] == seller, "the approved specialist owns " .. item)
 end
 for _, item in ipairs({"ij600", "lax410", "ruger1022", "walkman", "cassette_standart",
-	"sharpening_stone", "sharpening_stone_fine", "hidestasher_cutlery"}) do
+	"sharpening_stone", "sharpening_stone_fine"}) do
 	for _, contact in pairs(ix.townNPCs.contacts) do
 		check(not contact.catalogue[item], "deferred or job-awarded item stays outside progression sales")
 	end
@@ -67,6 +67,29 @@ end
 for _, item in ipairs({"meal_boar", "meat_boar", "meal_human", "meat_human"}) do
 	check(not ix.progression.CanBuyItem(fresh, "Unrelated vendor", item), "non-town NPCs cannot sell meat or meals")
 end
+local stashCharacter = context.fixture.character()
+local cutleryID = stepID("old-timer", "hidestashers", "hidestasher_cutlery")
+local cleaningID = stepID("old-timer", "hidestashers", "hidestasher_cleaningkit")
+local shovelID = stepID("old-timer", "hidestashers", "hidestasher_shovel")
+check(ix.townNPCs.canonicalSellers.hidestasher_cutlery == "old-timer", "Old Timer owns cutlery sales")
+check(ix.progression.definitions[cleaningID].prerequisites[1] == cutleryID,
+	"cutlery precedes the cleaning kit")
+check(ix.progression.definitions[shovelID].prerequisites[1] == cleaningID,
+	"the cleaning kit still precedes the shovel")
+check(not ix.progression.CanBuyItem(stashCharacter, "'Old Timer'", "hidestasher_cutlery"),
+	"cutlery requires its hand-in")
+complete(stashCharacter, cutleryID)
+check(ix.progression.CanBuyItem(stashCharacter, "'Old Timer'", "hidestasher_cutlery"),
+	"the new hand-in unlocks cutlery sales")
+check(not ix.progression.CanBuyItem(stashCharacter, "'Old Timer'", "hidestasher_cleaningkit"),
+	"cutlery completion does not skip the cleaning kit hand-in")
+local previousStashCharacter = context.fixture.character()
+complete(previousStashCharacter, cleaningID)
+complete(previousStashCharacter, shovelID)
+check(ix.progression.CanBuyItem(previousStashCharacter, "'Old Timer'", "hidestasher_cleaningkit"),
+	"saved cleaning kit access survives the inserted prerequisite")
+check(ix.progression.CanBuyItem(previousStashCharacter, "'Old Timer'", "hidestasher_shovel"),
+	"saved shovel access survives the inserted prerequisite")
 local technut = ix.townNPCs.contacts.technut
 for _, colour in ipairs({"brown", "green", "tan"}) do
 	check(technut.catalogue["suit_trenchcoat_" .. colour].step == technut.catalogue.suit_trenchcoat_black.step,

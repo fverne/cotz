@@ -3,7 +3,7 @@
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 635 hand-in milestones
+the earlier progression, catalogue and service descriptions below. There are 636 hand-in milestones
 in 50 branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
@@ -14,13 +14,14 @@ value at 60%, with no flat cash. Stock bonuses increase personal capacity withou
 Ledger uses 3× difficulty. Policy 4 converts outstanding invalid or out-of-region saved inputs while preserving credited
 contributions and completed unlocks. Inserted stages gate unfinished unlocks; Mute's redundant directory
 maintenance is removed. See the authoritative guide for regional thresholds and save handling.
-The authored equipment and regular-ammo chains are unchanged. Jitters' stimpaks follow medkit 6,
+Old Timer now unlocks Cutlery before Cleaning kit, followed by Shovel. Existing completed unlocks remain saved.
+Jitters' stimpaks follow medkit 6,
 antirads follow medkit 2, and Asenapine/Modafines follow medkit 4. Atlas' anomaly detector follows his Geiger counter.
 Ballast's initial hideout access consumes one unequipped crowbar or bat before new room claims and improvements;
 existing rooms/upgrades remain saved. Haggler's gunpowder barters are removed.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 
-All 635 active milestones have individual authored `briefing` and `completion` replies in their
+All 636 active milestones have individual authored `briefing` and `completion` replies in their
 contact definitions, including the 223 stock-preparation deliveries. Read each contact's existing
 profile and bound conversation before editing its voice. The current requirements, catalogue and
 benefits determine what a reply can promise; the older story tables and retired commissions do not.
@@ -44,7 +45,7 @@ the existing backpack milestones; each requires only its assigned backpack. Play
 route and return for any capacity upgrades later.
 Spool's Russian tank helmet and Latch's cloth mask start in vendor stock; their old purchase steps are retired.
 Spool owns strong drugs. Quartermaster retains six regular ammunition barters; his two main-menu kit exchanges
-are removed. Suture's conversion milestones explicitly say "variants". Spool/Latch/Wake declare
+are removed. Suture's conversion milestones explicitly say "variants". Old Timer/Spool/Latch/Wake declare
 `preserveProgression = true` so the authoring tool retains their ordering, request tuning and stock stages. Technut keeps painting and all ordinary
 suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
 conversion menu and per-suit non-looted finishes. Intern owns artifact detectors. Brass/Carbon provide

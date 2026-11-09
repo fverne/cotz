@@ -127,7 +127,7 @@ class ProgressionRewardsSpec(unittest.TestCase):
 
     def test_deferred_or_job_awarded_items_have_no_sale_route(self):
         deferred = {"ij600", "lax410", "ruger1022", "walkman", "cassette_standart",
-                    "sharpening_stone", "sharpening_stone_fine", "hidestasher_cutlery"}
+                    "sharpening_stone", "sharpening_stone_fine"}
         for contact in self.data["contacts"].values():
             self.assertFalse(deferred.intersection(contact["catalogue"]))
             self.assertFalse(deferred.intersection(contact["supplies"]))

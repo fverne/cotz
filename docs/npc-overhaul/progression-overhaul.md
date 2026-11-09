@@ -1,8 +1,8 @@
 # Town progression overhaul, 9 November 2026
 
-This replaces the former 600-milestone town graph with 635 hand-in milestones across 50
-branches, including 223 stock-preparation intermissions. The authored `upgradeChains` and
-`regularAmmoChain` in `sh_equipment.lua` retain their exact order. Where one branch combines families, cheaper available items come first without reversing an
+This replaces the former 600-milestone town graph with 636 hand-in milestones across 50
+branches, including 223 stock-preparation intermissions. The authored `upgradeChains` in
+`sh_equipment.lua` now include Cutlery before Cleaning kit; all other equipment and `regularAmmoChain` ordering is retained. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
 introduction or joined ending. The Original and Arena Master retain no finite progression.
 
@@ -155,7 +155,8 @@ The two +2 floor allowances require stages 2 and 4; furnishings require stage 3.
 their configured roubles/items. Saved paid levels, receipts, inventory dimensions and contents remain.
 
 `ij600`, `lax410` and `ruger1022` await later starter allocation. Music awaits later acquisition.
-Sharpening stones and cutlery remain job rewards without progression sales. All eight canned foods are
+Sharpening stones remain job rewards without progression sales. Old Timer unlocks
+Cutlery → Cleaning kit → Shovel; cutlery also remains a job reward. All eight canned foods are
 Spicy Lemon job and bonus candidates. His three canned starters remain saleable. Meals and raw meat
 cannot be bought from ordinary NPC vendors; cooking, hunting and job hand-ins remain available.
 Rare/reserved equipment retains its existing non-purchase policy.
@@ -194,14 +195,14 @@ upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or 
 ## Authoring and regression checks
 
 Each active step owns its authored `briefing` and `completion` in the contact definition, including
-stock intermissions. All 635 pairs are individually written against the contact's profile and current
+stock intermissions. All 636 pairs are individually written against the contact's profile and current
 benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
 conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
 Keep exact assigned items and quantities in the generated objective display rather than hard-coding
 them into speech, since valid saved requests can differ from newly rolled requests.
 
 The expansion tool retains existing stock-step text by stable ID when rebuilding requirements. New
-intermissions start with the following unlock's text and need their own replies. Verify all 635 pairs
+intermissions start with the following unlock's text and need their own replies. Verify all 636 pairs
 and their compiled fields with `luatex --luaonly tests/progression_dialogue_spec.lua`; the Python
 expansion suite also checks that regeneration preserves distinct stock conversations. Editorial review
 of voice, continuity and promises is still required; uniqueness checks cannot assess writing quality.

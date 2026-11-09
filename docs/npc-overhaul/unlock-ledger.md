@@ -4,7 +4,7 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**635 active steps; 635 have functional unlocks; 0 have TODO-only unlock plans;
+**636 active steps; 636 have functional unlocks; 0 have TODO-only unlock plans;
 19 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
@@ -39,7 +39,7 @@ Validation passed.
 | latch | 20 | 20 | 0 | 0 |
 | ledger | 12 | 12 | 0 | 0 |
 | mute | 5 | 5 | 0 | 0 |
-| old-timer | 11 | 11 | 0 | 4 |
+| old-timer | 12 | 12 | 0 | 4 |
 | quartermaster | 23 | 23 | 0 | 0 |
 | smartass | 47 | 47 | 0 | 0 |
 | spicy-lemon | 51 | 51 | 0 | 0 |
@@ -431,6 +431,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | old-timer | v3/melee/sledgehammer/stock | Stock: hatchet +1 total; Stock: machete +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/melee/sledgehammer | Purchase: fireaxe; Purchase: fubar; Purchase: sledgehammer | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/cooking/hightiercooker | Purchase: hightiercooker | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| old-timer | v3/hidestashers/hidestasher_cutlery | Purchase: hidestasher_cutlery | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/hidestashers/hidestasher_cleaningkit | Purchase: hidestasher_cleaningkit | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/hidestashers/hidestasher_shovel | Purchase: hidestasher_shovel | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | quartermaster | v3/nato-rifles/rugermini14 | Purchase: rugermini14 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
@@ -874,6 +875,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | fubar | old-timer | v3/melee/sledgehammer | old-timer |
 | hatchet | old-timer | v3/melee/hatchet | old-timer |
 | hidestasher_cleaningkit | old-timer | v3/hidestashers/hidestasher_cleaningkit | old-timer |
+| hidestasher_cutlery | old-timer | v3/hidestashers/hidestasher_cutlery | old-timer |
 | hidestasher_shovel | old-timer | v3/hidestashers/hidestasher_shovel | old-timer |
 | hightiercooker | old-timer | v3/cooking/hightiercooker | old-timer |
 | knife2 | old-timer | v3/knives/knife2 | old-timer |
