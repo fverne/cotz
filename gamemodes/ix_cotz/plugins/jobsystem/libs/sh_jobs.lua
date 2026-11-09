@@ -70,7 +70,7 @@ function ix.jobs.getFormattedName(job)
 	return ix.jobs.FormatMapNames(string.format(ix.jobs.list[job.identifier].name, job.numberRec))
 end
 
-function ix.jobs.getFormattedDesc(activejob, hideRewards)
+function ix.jobs.getFormattedDesc(activejob, hideRewards, character)
 	local description = activejob.fieldTask and ix.jobs.field.DescribeAssignment(activejob)
 		or ix.jobs.list[activejob.identifier].desc
 	local text = description
@@ -89,7 +89,7 @@ function ix.jobs.getFormattedDesc(activejob, hideRewards)
 	end
 	if definition.alternateDelivery then
 		text = text .. "\nDeliver to "
-			.. table.concat(ix.jobs.regional.EligibleReceivers(definition), ", ") .. "."
+			.. table.concat(ix.jobs.regional.EligibleReceivers(definition, nil, nil, character), ", ") .. "."
 	end
 	if activejob.photoKind then text = text .. "\n" .. ix.jobs.regional.PhotoSummary(activejob) end
 	local fieldType = activejob.fieldTask and activejob.fieldTask.kind or definition.fieldType
@@ -105,7 +105,7 @@ function ix.jobs.getFormattedDesc(activejob, hideRewards)
 	return ix.jobs.FormatMapNames(text)
 end
 
-local function spokenJobDetails(job, contact)
+local function spokenJobDetails(job, contact, character)
 	local definition = ix.jobs.list[job.identifier]
 	local state = job.fieldTask
 	local count = job.numberRec - (job.progress or 0)
@@ -118,7 +118,7 @@ local function spokenJobDetails(job, contact)
 		if definition.requiredPool then label = ix.progression.itemPools[definition.requiredPool].name end
 		local items = (count == 1 and "" or count .. " ") .. label
 		if definition.alternateDelivery then
-			local receivers = ix.jobs.regional.EligibleReceivers(definition)
+			local receivers = ix.jobs.regional.EligibleReceivers(definition, nil, nil, character)
 			return "Take " .. items .. " to " .. table.concat(receivers, " or ") .. " in " .. region
 				.. ". Come back here once you've handed it over."
 		end
@@ -169,10 +169,10 @@ local function spokenJobDetails(job, contact)
 	return contact.dialogue.work
 end
 
-function ix.jobs.GetDialogueDescription(job, npc, preview)
+function ix.jobs.GetDialogueDescription(job, npc, preview, character)
 	local definition = ix.jobs.list[job.identifier]
 	local contact = ix.townNPCs and ix.townNPCs.byName[npc]
-	if not contact then return ix.jobs.getFormattedDesc(job, true) end
+	if not contact then return ix.jobs.getFormattedDesc(job, true, character) end
 	if definition.townProgression then
 		local progression = ix.progression.definitions[definition.townProgression]
 		if progression then
@@ -181,7 +181,7 @@ function ix.jobs.GetDialogueDescription(job, npc, preview)
 	end
 	if job.isCompleted then return contact.dialogue.jobFinished end
 	local template = preview and contact.dialogue.jobBriefing or contact.dialogue.jobReminder
-	local details = spokenJobDetails(job, contact)
+	local details = spokenJobDetails(job, contact, character)
 
 	return (template:gsub("{details}", function() return details end))
 end
@@ -190,8 +190,8 @@ function ix.jobs.getFormattedNameInactive(identifier)
 	return string.format(ix.jobs.list[identifier].name, initialCount(identifier))
 end
 
-function ix.jobs.getFormattedDescInactive(identifier)
-	return ix.jobs.getFormattedDesc({identifier = identifier, numberRec = initialCount(identifier)})
+function ix.jobs.getFormattedDescInactive(identifier, character)
+	return ix.jobs.getFormattedDesc({identifier = identifier, numberRec = initialCount(identifier)}, nil, character)
 end
 
 function ix.jobs.isItemJob(identifier)

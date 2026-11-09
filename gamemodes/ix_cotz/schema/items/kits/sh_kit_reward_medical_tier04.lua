@@ -1,6 +1,6 @@
 ITEM.name = "Master Medical Box"
 ITEM.description= "A red first aid kit."
-ITEM.longdesc = "The Master Medical Box represents the upper issue class of this medical-package series. The red first-aid housing remains familiar even as the allowance changes. The available supply choice is identified before exchange instead of being concealed by the lid."
+ITEM.longdesc = "The Master Medical Box represents the upper issue class of this medical-package series. The red first-aid housing remains familiar even as the allowance changes."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

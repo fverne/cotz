@@ -149,6 +149,71 @@ local server = PLUGIN
 local originalRandom = math.random
 local contactCount = 0
 for _ in pairs(ix.townNPCs.contacts) do contactCount = contactCount + 1 end
+local previousInteract = ix.townNPCs.CanInteract
+local previousLookup = ix.progression.GetNPCFromName
+local saves = 0
+function char:Save() saves = saves + 1 end
+for _, slug in ipairs({"beanstalk", "egghead", "intern"}) do
+	local contact = ix.townNPCs.contacts[slug]
+	check(not ix.townNPCs:HasMetContact(char, contact), "new characters have not met bunker scientists")
+	local itemID = next(contact.courierItems)
+	local definition = {issuerName = "'Technut'", requiredItem = itemID, alternateDelivery = true}
+	ix.progression.GetNPCFromName = function(name) if name == contact.name then return {} end end
+	check(not ix.jobs.regional.CanOffer(char, definition), "undiscovered-only recipients cannot produce offers")
+	definition.townContact, definition.numberRec, definition.desc = "technut", 1, "Deliver %s units."
+	ix.jobs.list.discoveryFixture = definition
+	local delivery = {identifier = "discoveryFixture", numberRec = 1}
+	check(not ix.jobs.getFormattedDesc(delivery, true, char):find(contact.name, 1, true),
+		"journal does not disclose an undiscovered scientist")
+	check(not ix.jobs.GetDialogueDescription(delivery, "'Technut'", true, char):find(contact.name, 1, true),
+		"preview does not disclose an undiscovered scientist")
+	check(not ix.jobs.regional.ReceiverMatches(char, contact, delivery),
+		"server hand-in validation rejects undiscovered scientist recipients")
+	local job = {identifier = "cotz/town/v2/wake/hard/courier"}
+	for index = 1, contactCount do
+		math.random = function(limit) return math.min(index, limit) end
+		check(ix.jobs.regional.AssignCourier(char, "'Wake'", job), "undiscovered bunker leaves other routes available")
+		check(not ix.townNPCs.byName[job.fieldTask.recipient].bunker,
+			"information couriers exclude every undiscovered scientist")
+	end
+	math.random = originalRandom
+	local target = {GetDisplayName = function() return contact.name end, SetNetVar = function() end,
+		GetClass = function() return "ix_vendor_adv" end, CanAccess = function() return false end}
+	local greeting = ix.dialogue.list[ix.npctemplates.templates[contact.template].dialogueid].tree.GREETING
+	ix.townNPCs.CanInteract = function() return false end
+	greeting.preCallback({}, client, target)
+	check(not ix.townNPCs:HasMetContact(char, contact), "rejected conversations cannot discover a scientist")
+	ix.townNPCs.CanInteract = function() return true end
+	greeting.preCallback({}, client, target)
+	check(ix.townNPCs:HasMetContact(char, contact), "the first greeting discovers its scientist")
+	check(ix.jobs.regional.CanOffer(char, definition), "discovery enables an otherwise eligible scientist offer")
+	check(ix.jobs.getFormattedDesc(delivery, true, char):find(contact.name, 1, true),
+		"journal lists the newly discovered scientist")
+	check(ix.jobs.GetDialogueDescription(delivery, "'Technut'", true, char):find(contact.name, 1, true),
+		"preview lists the newly discovered scientist")
+	check(ix.jobs.regional.ReceiverMatches(char, contact, delivery),
+		"server hand-in validation accepts a discovered matching scientist")
+	ix.jobs.list.discoveryFixture = nil
+	local saved = saves
+	greeting.preCallback({}, client, target)
+	check(saves == saved, "repeat greetings do not save discovery again")
+	check(not ix.townNPCs:HasMetContact({GetData = function(_, _, default) return default end}, contact),
+		"another character does not inherit discovery")
+	-- Reset between scientists so every unknown-recipient assignment check starts fresh.
+	char.data.townKnownContacts = nil
+end
+ix.townNPCs.CanInteract = previousInteract
+ix.progression.GetNPCFromName = previousLookup
+char.data.knownProgressionTopics = {[ix.townNPCs:StepID("intern", "v3/detectors/detectorecho")] = true}
+check(ix.townNPCs:HasMetContact(char, ix.townNPCs.contacts.intern),
+	"existing progression discovery counts as having met that scientist")
+check(not ix.townNPCs:HasMetContact(char, ix.townNPCs.contacts.egghead),
+	"progression discovery does not reveal a different scientist")
+char.data.knownProgressionTopics = nil
+char.data.townKnownContacts = {beanstalk = true, egghead = true, intern = true}
+local restored = {GetData = function(_, key, default) return char.data[key] or default end}
+check(ix.townNPCs:HasMetContact(restored, ix.townNPCs.contacts.intern),
+	"discovery remains available from restored character data")
 for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
 	local recipients = {}
 	for index = 1, contactCount do
@@ -251,10 +316,10 @@ end
 local receiverJobs = 0
 for id, definition in pairs(ix.jobs.list) do
 	if definition.alternateDelivery and not definition.completionOnly then
-		local names = ix.jobs.regional.EligibleReceivers(definition)
+		local names = ix.jobs.regional.EligibleReceivers(definition, nil, nil, char)
 		check(#names > 0, "valuable delivery lists eligible contacts")
-		local inactive = ix.jobs.getFormattedDescInactive(id)
-		local activeDescription = ix.jobs.getFormattedDesc({identifier = id, numberRec = definition.numberRec})
+		local inactive = ix.jobs.getFormattedDescInactive(id, char)
+		local activeDescription = ix.jobs.getFormattedDesc({identifier = id, numberRec = definition.numberRec}, nil, char)
 		for _, name in ipairs(names) do
 			check(inactive:find(name, 1, true) and activeDescription:find(name, 1, true),
 				"both preview and journal name each eligible receiver")

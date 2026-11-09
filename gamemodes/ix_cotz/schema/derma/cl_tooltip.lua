@@ -414,8 +414,13 @@ function PANEL:SizeToContents()
 		height = height + v:GetTall()
 	end
 
-	self:SetSize(width*1.1, height*1.05)
-	self:DockPadding(self:GetWide()*0.05, self:GetTall()*0.02, self:GetWide()*0.05, self:GetTall()*0.1)
+	local horizontalPadding = math.ceil(width * 0.05)
+	local topPadding = math.ceil(height * 0.02)
+	local bottomPadding = math.ceil(height * 0.1)
+
+	-- Keep the measured row area intact so docking cannot narrow wrapped text or clip the last rows.
+	self:DockPadding(horizontalPadding, topPadding, horizontalPadding, bottomPadding)
+	self:SetSize(width + horizontalPadding * 2, height + topPadding + bottomPadding)
 end
 
 function PANEL:Remove()

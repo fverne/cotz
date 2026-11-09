@@ -1,6 +1,6 @@
 ITEM.name = "Master Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The Master Weapon Box carries the top issue label in this equipment-package series. Its wooden body is little different from less ambitious transport boxes. The contact's available exchange offer establishes what the entitlement can provide, rather than the name promising a particular firearm."
+ITEM.longdesc = "The Master Weapon Box carries the top issue label in this equipment-package series. Its wooden body is little different from less ambitious transport boxes."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

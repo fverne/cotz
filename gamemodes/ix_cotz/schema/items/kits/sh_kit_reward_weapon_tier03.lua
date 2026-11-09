@@ -1,6 +1,6 @@
 ITEM.name = "Regular Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The Regular Weapon Box belongs to the equipment-package class associated with established field work. Its wooden casing keeps the entitlement together as one item. The exchange offer identifies the actual equipment instead of leaving the label to imply a particular weapon."
+ITEM.longdesc = "The Regular Weapon Box belongs to the equipment-package class associated with established field work. Its wooden casing holds the equipment together for transport."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

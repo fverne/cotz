@@ -621,6 +621,9 @@ function PANEL:Think()
 			row.DoRightClick = function()
 				if not IsValid(record.player) then return end
 				local menu = DermaMenu()
+				menu:AddOption(L("viewProfile"), function()
+					if IsValid(record.player) then record.player:ShowProfile() end
+				end)
 				menu:AddOption("Mute / unmute", function()
 					record.player:SetMuted(not record.player:IsMuted())
 				end)

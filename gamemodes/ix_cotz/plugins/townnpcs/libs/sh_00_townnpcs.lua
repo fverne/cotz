@@ -22,6 +22,18 @@ function PLUGIN:StepID(contact, step)
 	return "cotz/town/" .. contact .. "/" .. step
 end
 
+function PLUGIN:HasMetContact(character, contact)
+	if not character then return false end
+	if character:GetData("townKnownContacts", {})[contact.id] then return true end
+	-- Progression topics were the only recorded conversations before contact discovery existed.
+	local prefix = self:StepID(contact.id, "")
+	for id, known in pairs(character:GetData("knownProgressionTopics", {})) do
+		if known and id:sub(1, #prefix) == prefix then return true end
+	end
+
+	return false
+end
+
 function PLUGIN:IsContactCompleted(character, contact)
 	if not character or #contact.progression == 0 then return false end
 	for _, step in ipairs(contact.progression) do

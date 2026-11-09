@@ -21,7 +21,8 @@ local function configureWork(dialogue, contact)
 		preCallback = function(self, client, target)
 			if CLIENT then
 				local job = client:GetCharacter():GetJobs()[target:GetDisplayName()]
-				self.response = job and ix.jobs.GetDialogueDescription(job, contact.name) or contact.dialogue.work
+				self.response = job and ix.jobs.GetDialogueDescription(job, contact.name, false, client:GetCharacter())
+					or contact.dialogue.work
 			end
 		end,
 		GetDynamicOptions = function(_, client, target)
@@ -226,7 +227,10 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	local finalID = finalStep and ix.townNPCs:StepID(contact.id, finalStep.id)
 	greeting.preCallback = function(self, client, target)
 		self.response = originalResponse
-		if SERVER then target:SetNetVar("possibleJobs", contact.categories) end
+		if SERVER then
+			ix.townNPCs:DiscoverContact(client, target, contact)
+			target:SetNetVar("possibleJobs", contact.categories)
+		end
 		if CLIENT and finalID and contact.dialogue.completedGreeting
 			and ix.townNPCs:IsContactCompleted(client:GetCharacter(), contact) then
 			self.response = contact.dialogue.completedGreeting

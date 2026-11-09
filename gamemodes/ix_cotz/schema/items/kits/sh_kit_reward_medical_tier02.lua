@@ -1,6 +1,6 @@
 ITEM.name = "Novice Medical Box"
 ITEM.description= "A red first aid kit."
-ITEM.longdesc = "The Novice Medical Box belongs to the next issue class above the introductory medical package. Its red case keeps the allowance recognisable among other supply kits. The exchange offer specifies the supplies rather than leaving the contents to an unseen draw."
+ITEM.longdesc = "The Novice Medical Box belongs to the next issue class above the introductory medical package. Its red case keeps the allowance recognisable among other supply kits."
 ITEM.model = "models/illusion/eftcontainers/carmedkit.mdl"
 
 ITEM.width = 2

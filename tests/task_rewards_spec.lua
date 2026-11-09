@@ -245,35 +245,7 @@ check(useOwner.client.receivedLabels[1] == "Reward Bandage (2 uses)",
 	"item-received message includes the exact awarded uses")
 check(not ix.progression.ClaimRewards(useOwner, "taskRewardClaims") and #useOwner.client.receivedLabels == 1,
 	"replaying a delivered claim does not repeat its item notification")
-local function kit(actor, id)
-	local item = {uniqueID = "kit_reward_demo", data = {}}
-	function item:GetID() return id end
-	function item:GetData(key, default) return self.data[key] or default end
-	function item:SetData(key, value) self.data[key] = value end
-	function item:Remove() actor.inventory.items[id] = nil end
-	actor.inventory.items[id] = item
-
-	return item
-end
-local kitOwner = actor()
-kit(kitOwner, 77)
-local kitChoice = ix.taskRewards.BuildChoices(
-	kitOwner,
-	"'Haggler'",
-	ix.taskRewards.ExpectedValue("kit_reward_demo"),
-	"kit:77"
-)[1]
-check(not ix.taskRewards.RedeemKit(kitOwner, "'Haggler'", 77, 1, "changed"), "stale kit quote does not consume it")
-check(kitOwner.inventory.items[77], "rejected redemption preserves the owned kit")
-check(
-	ix.taskRewards.RedeemKit(kitOwner, "'Haggler'", 77, 1, kitChoice.label),
-	"task kit redeems without paying an upgrade fee"
-)
-check(not ix.taskRewards.RedeemKit(kitOwner, "'Haggler'", 77, 1, kitChoice.label), "same kit cannot redeem twice")
-check(
-	not ix.taskRewards.RedeemKit(actor(), "'Haggler'", 77, 1, kitChoice.label),
-	"other character cannot redeem an unowned kit"
-)
+local barterOwner = actor()
 
 ix.npcbarter = {barterdict = {["'Haggler'"] = {powder = {
 	barterItem = {"kit_reward_demo", 1}, reqItem = {"powder", 2},
@@ -281,22 +253,22 @@ ix.npcbarter = {barterdict = {["'Haggler'"] = {powder = {
 local consumed = 0
 ix.npcbarter.ConsumeItems = function(_, _, amount) consumed = consumed + amount return true end
 local barterChoice = ix.taskRewards.BarterChoices(
-	kitOwner,
+	barterOwner,
 	"'Haggler'",
 	"powder",
 	ix.npcbarter.barterdict["'Haggler'"].powder
 )[1]
 check(barterChoice, "kit barter exposes explicit ammunition choices")
-check(not ix.taskRewards.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, "wrong"), "stale barter quote is rejected")
+check(not ix.taskRewards.ExecuteBarter(barterOwner, "'Haggler'", "powder", 1, "wrong"), "stale barter quote is rejected")
 check(consumed == 0, "invalid barter consumes no inputs")
 check(
-	ix.taskRewards.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, barterChoice.label),
+	ix.taskRewards.ExecuteBarter(barterOwner, "'Haggler'", "powder", 1, barterChoice.label),
 	"converted barter grants chosen ammo"
 )
 check(consumed == 2, "converted barter preserves input quantity")
 ix.npcbarter.activebarters.powder = false
 check(
-	not ix.taskRewards.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, barterChoice.label),
+	not ix.taskRewards.ExecuteBarter(barterOwner, "'Haggler'", "powder", 1, barterChoice.label),
 	"inactive recipe cannot execute"
 )
 
@@ -1537,6 +1509,22 @@ do
 		"last item reveals selectable rewards without another completion action")
 	check(#packets > packetCount and packets[#packets].name == "cotz/dialogue/task-rewards-refresh",
 		"last item immediately sends the dialogue reward refresh")
+end
+
+do
+	local owner = actor()
+	local oldKit = {uniqueID = "kit_mixed_high"}
+	owner.inventory.items[77] = oldKit
+	check(ix.taskRewards.RedeemKit == nil, "legacy kit redemption has no server handler")
+	check(not dialogue.tree.TaskRewardChoices.ShouldAdd(nil, owner.client, target),
+		"carrying a Hiking Backpack does not expose reward exchanges")
+	check(#dialogue.tree.GREETING.GetDynamicOptions(nil, owner.client, target) == 0,
+		"carried legacy kits add no root dialogue actions")
+	dialogue.tree.TaskRewardChoices.ResolveDynamicOption(nil, owner.client, target,
+		{kind = "kit", item = 77, choice = 1, label = "Old kit quote"})
+	check(owner.inventory.items[77] == oldKit and #owner.inventory.received == 0
+		and owner.money == 0 and next(owner:GetData("taskRewardOffers", {})) == nil,
+		"stale kit selections neither consume the kit nor award supplies")
 end
 
 print("PASS: " .. checks .. " task reward checks")

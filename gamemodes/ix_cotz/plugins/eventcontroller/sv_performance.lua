@@ -234,6 +234,10 @@ function PLUGIN:OnUnload()
 			entity:STALKERNPCWake()
 		end
 		if IsValid(entity) then
+			self:ClearCombatEnemy(entity)
+			self:UpdateCombatSchedule(entity)
+			entity.cotzCombatScheduleDirty = nil
+			entity.cotzPursuitScheduled, entity.cotzNextPursuit = nil, nil
 			if entity.cotzHuman and entity.SetSquad then entity:SetSquad(entity.cotzOriginalSquad or nil) end
 			entity.cotzOriginalSquad = nil
 			for other, disposition in pairs(entity.cotzOriginalRelations or {}) do

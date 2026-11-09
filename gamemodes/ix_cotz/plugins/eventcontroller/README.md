@@ -114,6 +114,27 @@ followed by a 120-second cooldown. Range is 1,500 units. Research waves cannot j
 The policy and tuning constants live in `sv_combat.lua`. `ai_disabled` stops ambient decisions and
 regrouping; existing `ai_ignoreplayers` behavior remains supported.
 
+Mutants and human NPCs keep their engaged player target instead of switching to a closer NPC,
+retaliating against an NPC, or accepting a competing squad alert. Ambient mutant conflicts start only
+when their leader is idle. Idle target acquisition still selects the nearest visible hostile inside the
+existing detection range and forward cone (1,500 units/90-degree half-angle for mutants and
+7,000 units/45-degree half-angle for humans).
+
+Each actor remembers one player and their last observed position for ten seconds after contact.
+Seeing that player or receiving damage from them refreshes contact. A remembered player can be
+recognized from behind; after expiry, ordinary detection rules apply again. During occlusion actors
+move toward the recorded position and wait there, rather than tracking the player's hidden movement.
+Squad alerts share the observed position and original contact time; repeated alerts do not extend it.
+Regular visibility checks run at most once per quarter-second for the remembered player; target
+assignments and damage also evaluate contact when they occur.
+
+Target loss clears stale enemy memory and requests another search through the existing cooldown and
+shared budget. Target acquisition and changes between visible combat and remembered pursuit clear
+Lua/engine schedule bookkeeping once, without recursively selecting schedules. Mutant attacks, jumps
+and grabs finish recovery before voluntary target switches or schedule refreshes. Player focus is
+discarded on expiry, death, disconnect, observer/noclip mode, `ai_ignoreplayers`, actor sleep/removal,
+and plugin unload. Player memory is session-only and does not change saves or population limits.
+
 Player positions are cached, spatial cells update during the existing half-second maintenance pass,
 and enemy searches/ambient decisions share the configured per-tick budget. There are no per-actor
 maintenance timers or routine all-world/all-pairs relationship scans. Relationship caches and empty
@@ -123,3 +144,7 @@ pre-policy dispositions.
 Run `luatex --luaonly tests/npc_combat_spec.lua` and the population/tag suites above. Multiplayer
 checks still need mixed factions and mutant packs, sleep boundaries during melee/projectiles,
 leader death and blocked navigation, task waves, and server frame cost at the configured caps.
+Also check both NPC families while circling behind them, breaking sight around cover, introducing
+closer rivals, and removing targets during attacks. Confirm that occluded pursuit stops at the last
+known position and expires after ten seconds. A valid target with no usable navigation path remains
+a map/navigation issue; the standalone suites cannot establish in-game movement correctness.

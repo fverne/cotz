@@ -1,6 +1,6 @@
 ITEM.name = "Master Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "The small Master Reward carries the highest general issue class in a compact bundle. Its plain outer form conceals no dependable inventory of its own. The supplying contact identifies the available return when the package is presented for redemption."
+ITEM.longdesc = "The small Master Reward carries the highest general issue class in a compact bundle. The plain outer wrapping gives little indication of the assortment inside."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

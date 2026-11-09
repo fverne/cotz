@@ -89,7 +89,7 @@ ordinary repeatable job's quantities or combat settings.
 
 Ordinary definitions call `ix.jobs.register({...}, "stable-id")` directly. Legacy tool jobs call
 `ix.jobs.RegisterToolJob`; their item configuration is data and their shared callbacks live in
-`libs/sh_tooljobs.lua`. Reward profiles here are fallbacks and kit-redemption catalogues. Town contacts
+`libs/sh_tooljobs.lua`. Reward profiles here are fallbacks. Town contacts
 install dedicated `rewards` definitions separately from their ordinary vendor `supplies`.
 `moneyReward` is reference cash processed by reward calculations,
 not necessarily the final preview payment. Preserve field names and units when tuning.
@@ -271,7 +271,7 @@ all-hard jobs at Mute, Spool or Ballast produce budgets of 2,000 / 3,500 / 5,250
 Unaffordable bonus value carries into the next cycle; a zero-value cycle creates no empty reward.
 Revealed current-version bonus choices persist without rerolling on menu reopen or reconnect.
 
-### Compatibility and kit exchanges
+### Compatibility and ammunition barters
 
 Catalogue version 5 retires old acceptance-time reward reservations. On character load and NPC
 interaction, active jobs and saved previews lose cached choices while keeping their IDs, quantities,
@@ -280,8 +280,9 @@ current eligible catalogue with their earned budget preserved. Previously paid/t
 remain recoverable; this migration does not erase existing item claims or repay completed jobs.
 No database reset or first-time setup is required. Update all map servers together and restart.
 
-Task-kit and ammunition-barter redemption retain their existing exchange flow and item valuation.
-These legacy exchanges are separate from town job rewards. They continue to use bounded,
+Legacy kits, including Hiking Backpack, open directly from inventory using their existing loot tables.
+NPC kit hand-in choices and their server redemption handler are removed. Existing item IDs and queued
+reward claims are preserved. Ammunition barters retain visible choices, existing valuation, bounded
 token-backed pending claims and provider access checks. The paid upgrade dialogue remains removed.
 
 Checks:
@@ -290,6 +291,7 @@ Checks:
 luatex --luaonly tests/task_rewards_spec.lua
 luatex --luaonly tests/jobs_menu_spec.lua
 luatex --luaonly tests/jobs_loading_spec.lua
+luatex --luaonly tests/kit_opening_spec.lua
 python3 -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
 ```
 
@@ -515,3 +517,11 @@ Run `luatex --luaonly tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec
 `tests/field_tasks_spec.lua`, `tests/jobs_menu_spec.lua` and `tests/dialogue_order_spec.lua`
 with the same `luatex --luaonly` prefix for each file. Check hidden pickup, tool cancellation/loss,
 full inventory, parcel burial, reward timing and character switches in multiplayer as well.
+
+## Bunker courier discovery
+
+Beanstalk, Egghead and Intern are excluded from valuable-courier recipients and new information-parcel
+assignments until that character has greeted the individual scientist. Offers, previews, journals and
+server hand-ins share this filter. Accepted parcel destinations remain saved. Existing progression-topic
+discovery counts as prior contact; earlier unrecorded greetings require another conversation.
+See [town discovery and verification](../townnpcs/README.md#bunker-courier-discovery).

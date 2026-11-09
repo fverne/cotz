@@ -27,7 +27,10 @@ end
 
 function ENT:SelectSchedule( iNPCState )
 	if self.cotzSleeping then return end
-	if ix and ix.eventController then ix.eventController:ValidateCombatEnemy(self) end
+	if ix and ix.eventController then
+		ix.eventController:ValidateCombatEnemy(self)
+		if ix.eventController:UpdateCombatSchedule(self) then return end
+	end
 	if(!isnumber(self.NextRun)) then
 		self.NextRun = CurTime()+1
 	end

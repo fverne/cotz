@@ -32,12 +32,22 @@ local function actor(class, x, pack)
 	serial = serial + 1
 	local entity = fixture.NewMutant(serial, x)
 	entity.class, entity.position, entity.relationships = class, Vector(x, 0, 0), {}
-	entity.GetAngles = function() return {y = 0} end
+	entity.GetAngles = function(self) return {y = self.facing or 0} end
+	entity.SetHealth = function(self, health) self.health = health end
 	entity.Visible = function(self, other) return not other.hidden end
 	entity.SetSquad = function(self, squad) self.squad = squad end
-	entity.SetSchedule = function(self, schedule) self.schedule = schedule end
+	entity.SetSchedule = function(self, schedule)
+		self.schedule, self.scheduleCalls = schedule, (self.scheduleCalls or 0) + 1
+	end
+	entity.IsCurrentSchedule = function(self, schedule) return self.schedule == schedule end
+	entity.ClearSchedule = function(self)
+		self.schedule, self.cleared, self.clearCalls = nil, true, (self.clearCalls or 0) + 1
+	end
 	entity.SetLastPosition = function(self, point) self.destination = point end
-	entity.UpdateEnemyMemory = function(self, enemy) self.remembered = enemy end
+	entity.UpdateEnemyMemory = function(self, enemy, position)
+		self.remembered, self.rememberedPosition = enemy, position
+		self.memoryCalls = (self.memoryCalls or 0) + 1
+	end
 	entity.AddEntityRelationship = function(self, other, disposition) self.relationships[other] = disposition end
 	entity.Disposition = function(self, other) return self.relationships[other] or D_NU end
 	manager:RegisterCombatActor(entity, pack)
@@ -219,6 +229,248 @@ check(not queryActor.cotzRelations[queryOther] and not queryActor.cotzOriginalRe
 local observer = {IsNPC = function() return false end, IsPlayer = function() return true end,
 	Alive = function() return true end, GetMoveType = function() return MOVETYPE_OBSERVER end}
 check(not manager:CanActorAttack(queryActor, observer), "observers remain excluded from enemy selection")
+
+local function targetPlayer(x)
+	return {
+		position = Vector(x), health = 100,
+		GetClass = function() return "player" end,
+		GetPos = function(self) return self.position end,
+		IsNPC = function() return false end,
+		IsPlayer = function() return true end,
+		Alive = function(self) return self.health > 0 end,
+		Health = function(self) return self.health end,
+		GetMoveType = function(self) return self.moveType or 0 end,
+	}
+end
+local function advance(seconds)
+	fixture.SetTime(fixture.GetTime() + seconds)
+end
+for _, class in ipairs({"npc_mutant_dog", "npc_human_bandit_rifleman"}) do
+	fixture.Reset()
+	local subject = actor(class, 0)
+	local rival = actor("npc_human_merc_rifleman", 600)
+	local client = targetPlayer(300)
+	fixture.SetPlayers({client})
+	manager:FindCombatEnemy(subject, 1500, 90, true)
+	check(subject.enemy == client and subject.cotzPlayerFocus == client, class .. " acquires player focus")
+	manager:UpdateCombatSchedule(subject)
+	local clears = subject.clearCalls
+	rival.position = Vector(100)
+	manager:FindCombatEnemy(subject, 1500, 90, true)
+	manager:RetaliateCombatActor(subject, rival)
+	manager:UpdateCombatSchedule(subject)
+	check(subject.enemy == client and subject.clearCalls == clears,
+		class .. " keeps a player over a closer rival without repeated schedule resets")
+	local secondPlayer = targetPlayer(50)
+	manager:RetaliateCombatActor(subject, secondPlayer)
+	check(subject.enemy == client, class .. " keeps the engaged player when a different player attacks")
+	check(not manager:SetCombatTarget(subject, rival), class .. " direct assignments cannot steal player focus")
+
+	local contactPosition, contactTime = subject.cotzPlayerPosition, subject.cotzPlayerContact
+	client.hidden, client.position = true, Vector(-700)
+	advance(0.3)
+	manager:ValidateCombatEnemy(subject)
+	check(manager:UpdateCombatSchedule(subject) == true and subject.destination == contactPosition,
+		class .. " pursues the last observed position after sight is lost")
+	local memoryCalls, scheduleCalls = subject.memoryCalls, subject.scheduleCalls
+	advance(1)
+	manager:ValidateCombatEnemy(subject)
+	manager:UpdateCombatSchedule(subject)
+	check(subject.cotzPlayerContact == contactTime and subject.memoryCalls == memoryCalls
+		and subject.cotzPlayerPosition == contactPosition and subject.scheduleCalls == scheduleCalls,
+		class .. " neither tracks hidden movement nor restarts an active pursuit schedule")
+	subject.position = contactPosition
+	manager:UpdateCombatSchedule(subject)
+	check(subject.schedule == nil, class .. " waits at the last known position instead of following hidden movement")
+	subject.position = Vector(0)
+	subject.enemy = nil
+	manager:ValidateCombatEnemy(subject)
+	check(subject.enemy == client and subject.rememberedPosition == contactPosition
+		and subject.cotzPlayerContact == contactTime, class .. " restores an engine-lost target using existing knowledge")
+	client.hidden = nil
+	advance(0.3)
+	manager:ValidateCombatEnemy(subject)
+	manager:UpdateCombatSchedule(subject)
+	check(subject.enemy == client and subject.cotzPlayerPosition == client.position
+		and subject.cotzPlayerContact > contactTime and not subject.cotzPursuitScheduled,
+		class .. " recognizes a remembered player behind it and resumes normal combat")
+	client.hidden = true
+	advance(10)
+	manager:ValidateCombatEnemy(subject)
+	check(not subject.enemy and not subject.cotzPlayerFocus, class .. " expires player focus after ten seconds")
+	client.hidden = nil
+	manager:FindCombatEnemy(subject, 1500, 90, true)
+	check(subject.enemy == rival, class .. " returns to normal detection and acquires another target after expiry")
+
+	manager:RetaliateCombatActor(subject, client)
+	check(subject.enemy == client and subject.cotzPlayerPosition == client.position,
+		class .. " player damage establishes contact from behind")
+	client.hidden = true
+	advance(5)
+	manager:RetaliateCombatActor(subject, client)
+	check(subject.cotzPlayerContact == fixture.GetTime(), class .. " new damage refreshes remembered contact")
+	client.moveType = MOVETYPE_NOCLIP
+	manager:ValidateCombatEnemy(subject)
+	check(not subject.enemy and not subject.cotzPlayerFocus, class .. " immediately forgets noclip players")
+	client.moveType, client.hidden = nil, nil
+	manager:SetCombatTarget(subject, client)
+	client.health = 0
+	manager:ValidateCombatEnemy(subject)
+	check(not subject.enemy and not subject.cotzPlayerFocus, class .. " releases dead player targets")
+	client.health = 100
+	manager:SetCombatTarget(subject, client)
+	client.invalid = true
+	manager:ValidateCombatEnemy(subject)
+	check(not subject.enemy and not subject.cotzPlayerFocus, class .. " releases disconnected player targets")
+	client.invalid = nil
+	manager:SetCombatTarget(subject, client)
+	local formerConVar = GetConVar
+	GetConVar = function(name) return {GetInt = function() return name == "ai_ignoreplayers" and 1 or 0 end} end
+	manager:ValidateCombatEnemy(subject)
+	check(not subject.enemy and not subject.cotzPlayerFocus, class .. " honors ai_ignoreplayers during pursuit")
+	GetConVar = formerConVar
+
+	manager:SetCombatTarget(subject, rival)
+	subject.cotzCombatScheduleDirty = nil
+	rival.invalid = true
+	manager:ValidateCombatEnemy(subject)
+	fixture.config.mutantSearchBudget = 0
+	manager:FindCombatEnemy(subject, 1500, 90)
+	check(not subject.enemy and subject.cotzCombatScheduleDirty,
+		class .. " clears a removed rival even while reacquisition has no budget")
+	fixture.config.mutantSearchBudget = 4
+	client.position = Vector(400)
+	manager:FindCombatEnemy(subject, 1500, 90)
+	check(subject.enemy == client, class .. " reacquires when search budget becomes available")
+	subject.CurrentSchedule, subject.bDoingEngineSchedule = {}, true
+	manager:UpdateCombatSchedule(subject)
+	check(not subject.CurrentSchedule and not subject.bDoingEngineSchedule,
+		class .. " target transitions clear both Lua and engine schedule bookkeeping")
+	manager:ClearCombatEnemy(subject)
+	check(not subject.cotzPlayerFocus, class .. " sleep cleanup discards remembered players")
+	rival.invalid = nil
+	manager:SetCombatTarget(subject, rival)
+	rival.cotzSleeping = true
+	manager:ValidateCombatEnemy(subject)
+	manager:FindCombatEnemy(subject, 1500, 90, true)
+	check(subject.enemy == client, class .. " replaces a sleeping rival with an eligible player")
+	manager:ClearCombatEnemy(subject)
+	rival.cotzSleeping = nil
+	manager:SetCombatTarget(subject, rival)
+	rival.cotzFaction = subject.cotzFaction or "undead"
+	if not subject.cotzHuman then subject.cotzFaction = "undead" end
+	manager:ValidateCombatEnemy(subject)
+	manager:FindCombatEnemy(subject, 1500, 90, true)
+	check(subject.enemy == client, class .. " replaces a newly friendly rival with an eligible player")
+end
+
+fixture.Reset()
+local huntingDog = actor("npc_mutant_dog", 0)
+huntingDog.cotzSpecies = "blinddog"
+local huntingPrey = actor("npc_mutant_boar", 500)
+local huntingPlayer = targetPlayer(300)
+manager:SetCombatTarget(huntingDog, huntingPlayer)
+huntingDog.cotzCombatPack.nextAmbient = 0
+local savedRandom = math.random
+math.random = function() return 1 end
+manager:UpdateAmbientPack(huntingDog.cotzCombatPack, huntingDog)
+math.random = savedRandom
+check(not huntingDog.cotzCombatPack.opponent and huntingDog.enemy == huntingPlayer,
+	"ambient hunting cannot start while its leader is engaged with a player")
+huntingDog.PlayingAnimation, huntingDog.IsGrabbing = true, 2
+manager:UpdateCombatSchedule(huntingDog)
+check(huntingDog.cotzCombatScheduleDirty and not huntingDog.clearCalls,
+	"schedule refresh waits for active mutant animations and grabs")
+check(not manager:SetCombatTarget(huntingDog, huntingPrey), "active grabs do not voluntarily switch targets")
+huntingDog.PlayingAnimation, huntingDog.IsGrabbing = false, 0
+manager:UpdateCombatSchedule(huntingDog)
+check(not huntingDog.cotzCombatScheduleDirty and huntingDog.clearCalls == 1,
+	"schedule refresh runs once after grab recovery")
+manager:ClearCombatEnemy(huntingDog)
+huntingDog.PlayingAnimation, huntingDog.isAttacking = true, 2
+manager:RetaliateCombatActor(huntingDog, huntingPlayer)
+check(not huntingDog.enemy and huntingDog.cotzPlayerFocus == huntingPlayer,
+	"damage during an attack remembers the player without interrupting recovery")
+huntingDog.PlayingAnimation, huntingDog.isAttacking = false, 0
+manager:ValidateCombatEnemy(huntingDog)
+check(huntingDog.enemy == huntingPlayer, "deferred player retaliation takes effect after attack recovery")
+local alertAlly = actor("npc_mutant_dog", 100, huntingDog.cotzCombatPack)
+alertAlly.cotzSpecies = "blinddog"
+huntingDog.enemy = nil
+manager:ShareCombatThreat(alertAlly, huntingPrey)
+check(not huntingDog.enemy and huntingDog.cotzPlayerFocus == huntingPlayer,
+	"squad alerts cannot replace remembered player focus after engine target loss")
+manager:ValidateCombatEnemy(huntingDog)
+manager:ShareCombatThreat(huntingDog, huntingPlayer)
+check(alertAlly.enemy == huntingPlayer and alertAlly.cotzPlayerPosition == huntingDog.cotzPlayerPosition,
+	"squad player alerts carry an observed position")
+local sharedContact = alertAlly.cotzPlayerContact
+huntingPlayer.hidden, huntingPlayer.position = true, Vector(900)
+advance(2)
+alertAlly.enemy = nil
+manager:ShareCombatThreat(huntingDog, huntingPlayer)
+check(alertAlly.cotzPlayerContact == sharedContact and alertAlly.cotzPlayerPosition.x == 300,
+	"repeated squad alerts cannot refresh stale contact or reveal hidden movement")
+manager:RetaliateCombatActor(alertAlly, huntingPlayer)
+local newerContact, newerPosition = alertAlly.cotzPlayerContact, alertAlly.cotzPlayerPosition
+alertAlly.enemy = nil
+manager:ShareCombatThreat(huntingDog, huntingPlayer)
+check(alertAlly.cotzPlayerContact == newerContact and alertAlly.cotzPlayerPosition == newerPosition,
+	"stale squad alerts cannot overwrite an ally's more recent contact")
+manager:RemoveCombatActor(alertAlly)
+check(not alertAlly.cotzPlayerFocus and not alertAlly.cotzCombatScheduleDirty,
+	"actor removal clears player memory and queued schedule work")
+
+local function loadEntityMethod(path, method)
+	local file = assert(io.open(path))
+	local source = file:read("*a")
+	file:close()
+	local start = assert(source:find("function ENT:" .. method .. "(", 1, true))
+	local finish = source:find("\nfunction ENT:", start + 1, true)
+	source = source:sub(start, finish and finish - 1 or #source)
+	source = source:gsub("!=", "~="):gsub("&&", " and "):gsub("||", " or "):gsub("!", "not ")
+	source = source:gsub("//([^\n]*)", "--%1")
+	ENT = {}
+	assert(load(source, "@" .. path .. ":" .. method))()
+
+	return ENT[method]
+end
+fixture.Reset()
+local recoveringMutant = actor("npc_mutant_dog", 0)
+local recoveryPlayer = targetPlayer(500)
+manager:SetCombatTarget(recoveringMutant, recoveryPlayer)
+recoveringMutant.CurrentSchedule, recoveringMutant.bDoingEngineSchedule = {}, true
+recoveryPlayer.hidden = true
+manager:RetaliateCombatActor(recoveringMutant, recoveryPlayer)
+manager:UpdateCombatSchedule(recoveringMutant)
+check(not recoveringMutant.CurrentSchedule and not recoveringMutant.bDoingEngineSchedule
+	and recoveringMutant.destination.x == 500,
+	"damage contact during the visibility-check cooldown still refreshes lost-sight schedules")
+recoveryPlayer.hidden, recoveryPlayer.position = true, Vector(900)
+advance(0.3)
+local recoveryTicks, newAttacks = 0, 0
+recoveringMutant.PlayingAnimation, recoveringMutant.isAttacking = true, 2
+recoveringMutant.STALKERNPCCancelPendingTargetAbilities = function() end
+recoveringMutant.STALKERNPCThink = function() recoveryTicks = recoveryTicks + 1 end
+recoveringMutant.STALKERNPCAnimationIsPlaying = function() end
+recoveringMutant.STALKERNPCTryEnemySearch = function() return false end
+recoveringMutant.STALKERNPCProcessMeleeAttacks = function() end
+recoveringMutant.STALKERNPCIsEnemyNPC = function() return false end
+recoveringMutant.STALKERNPCIsEnemyPlayer = function() return true end
+recoveringMutant.STALKERNPCThinkNoEnemy = function() end
+recoveringMutant.STALKERNPCThinkEnemyValidNoAnimCheck = function() newAttacks = newAttacks + 1 end
+loadEntityMethod("lua/entities/stalker_ai/init.lua", "Think")(recoveringMutant)
+check(recoveryTicks == 1 and newAttacks == 0 and recoveringMutant.isAttacking == 2,
+	"real mutant Think continues attack recovery without starting new combat work during occlusion")
+recoveringMutant.PlayingAnimation, recoveringMutant.isAttacking = false, 0
+loadEntityMethod("lua/entities/stalker_ai/schedules.lua", "SelectSchedule")(recoveringMutant)
+check(recoveringMutant.destination.x == 500 and recoveringMutant.schedule == SCHED_FORCED_GO_RUN,
+	"real mutant SelectSchedule pursues remembered positions after recovery")
+
+manager:OnUnload()
+check(not recoveringMutant.cotzPlayerFocus and not recoveringMutant.enemy
+	and not recoveringMutant.cotzCombatScheduleDirty, "plugin unload discards player memory and queued work")
+ix.eventController = manager
 -- Execute every armed-human definition's real integration methods, rather than matching source text.
 local formerFind = ents.FindByClass
 ents.FindByClass = function() error("combat integration must not rescan all NPC classes") end
@@ -237,6 +489,7 @@ for path in paths:lines() do
 	ENT = {}
 	assert(load(source, "@" .. path))()
 	local human = actor(path:match("entities/([^/]+)/"), 0)
+	human.InitEnemies = ENT.InitEnemies
 	ENT.InitEnemies(human)
 	check(manager.combatActors[human], "human relationship refresh uses the actor registry")
 	human.cotzSleeping = true
@@ -247,6 +500,35 @@ for path in paths:lines() do
 	local before = human:Health()
 	ENT.OnTakeDamage(human, ownDamage)
 	check(human:Health() == before, "human damage callback rejects blocked damage before armour minimums")
+	human.cotzSleeping = nil
+	human.SpawnBlood, human.StopSpeechSounds, human.PlayRandomSound = function() end, function() end, function() end
+	local attackingPlayer = targetPlayer(-300)
+	local playerDamage = {
+		GetAttacker = function() return attackingPlayer end,
+		GetInflictor = function() end,
+		IsDamageType = function() return false end,
+		GetDamage = function() return 1 end,
+	}
+	ENT.OnTakeDamage(human, playerDamage)
+	check(human.enemy == attackingPlayer and human.cotzPlayerFocus == attackingPlayer,
+		"every human damage callback remembers player contact, including non-bullet damage from behind")
+	local npcDamage = {
+		GetAttacker = function() return enemy end,
+		GetInflictor = function() end,
+		IsDamageType = function() return false end,
+		GetDamage = function() return 1 end,
+	}
+	-- The mercenary target is allied to mercenary variants, whose damage must remain blocked.
+	npcDamage.SetDamage = function() end
+	ENT.OnTakeDamage(human, npcDamage)
+	check(human.enemy == attackingPlayer, "every human retaliation callback protects player focus")
+	attackingPlayer.hidden, attackingPlayer.position = true, Vector(-900)
+	advance(0.3)
+	human.HasLOS = function() error("remembered pursuit must bypass live-target combat schedules") end
+	ENT.Think(human)
+	ENT.SelectSchedule(human)
+	check(human.destination.x == -300 and human.schedule == SCHED_FORCED_GO_RUN,
+		"every human Think and SelectSchedule integration pursues the last observed player position")
 	manager:RemoveCombatActor(human)
 end
 paths:close()

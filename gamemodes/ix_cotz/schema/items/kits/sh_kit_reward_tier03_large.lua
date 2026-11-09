@@ -1,6 +1,6 @@
 ITEM.name = "Regular Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "The large Regular Reward belongs to the supply class used for established field work. Its broad bundle distinguishes it from the compact version of the same entitlement. The exchange offer, rather than the wrapping, specifies what can be received."
+ITEM.longdesc = "The large Regular Reward belongs to the supply class used for established field work. Its broad bundle distinguishes it from the compact version of the same package."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

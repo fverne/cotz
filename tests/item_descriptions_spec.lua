@@ -75,7 +75,7 @@ for index, prose in ipairs(cardProse) do
 end
 
 -- Exercise the actual description methods without running unrelated gameplay code.
-ix = {meta = {item = {}}, taskRewards = {IsTaskKit = function() return true end}, util = {}}
+ix = {meta = {item = {}}, util = {}}
 Format = string.format
 function ix.util.GetLongLatFromVector() return {1, 2} end
 function ix.util.GetHeadingFromAngle() return "North" end
@@ -133,10 +133,7 @@ check(parcel(item):find(combined, 1, true) == 1 and parcel(item):find("Use Field
 	"dead-drop parcels retain prose and PDA delivery instructions")
 
 local kit = method("gamemodes/ix_cotz/schema/items/base/sh_kits.lua")
-check(kit(item):find(combined, 1, true) == 1 and kit(item):find("Redeem at an NPC", 1, true),
-	"task supply kits retain prose and redemption instructions")
-ix.taskRewards.IsTaskKit = function() return false end
-check(kit(item) == combined, "ordinary openable kits retain their background")
+check(kit(item) == combined, "openable kits retain their background without NPC redemption instructions")
 local pda = method("gamemodes/ix_cotz/plugins/pda/items/pda/sh_pda.lua")
 item.data.avatar, item.data.nickname = "chosen/avatar.png", "FieldName"
 check(pda(item):find(combined, 1, true) == 1 and pda(item):find("chosen/avatar.png", 1, true)

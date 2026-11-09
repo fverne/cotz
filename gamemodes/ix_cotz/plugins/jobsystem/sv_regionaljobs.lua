@@ -86,7 +86,9 @@ function ix.jobs.regional.AssignCourier(character, npc, job)
 		local allowed = definition.tier == 1 and contact.map == "rp_marsh_cs" and not contact.bunker
 			or definition.tier == 2 and contact.map == "rp_waystation"
 			or definition.tier == 3 and (contact.bunker or contact.map == "rp_waystation")
-		if allowed then recipients[#recipients + 1] = contact.name end
+		if allowed and (not contact.bunker or ix.townNPCs:HasMetContact(character, contact)) then
+			recipients[#recipients + 1] = contact.name
+		end
 	end
 	if #recipients == 0 then return false end
 	table.sort(recipients)

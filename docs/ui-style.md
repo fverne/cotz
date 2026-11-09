@@ -20,6 +20,10 @@ It is automatically distributed/included as a client schema library before gamep
 `Schema:LoadFonts` refreshes its fonts through the bundled Helix font/resolution lifecycle.
 Existing reference panels keep their own layouts; the helper does not replace the global Derma skin.
 
+The schema tooltip adds its frame padding outside the measured rows. Its content area must retain
+the full measured width and height so wrapped item descriptions and the final property rows fit.
+When checking tooltips in multiplayer, include a Lost Note with saved stash text and coordinates.
+
 The Q-menu Items tab uses `ix.util.GetItemIcon` for centered, aspect-preserving item previews,
 including custom images and cached model renders. Each entry resolves its material once when created;
 painting reuses that material without further icon lookups or generation.

@@ -86,22 +86,6 @@ local function offerOptions(character, npc)
 	return options
 end
 
-local function kitOptions(character, npc, options)
-	for id, item in pairs(character:GetInventory():GetItems()) do
-		if ix.taskRewards.IsTaskKit(item.uniqueID) and not item:GetData("taskRewardRedeemed", false) then
-			local choices = ix.taskRewards.BuildChoices(character, npc,
-				ix.taskRewards.ExpectedValue(item.uniqueID), "kit:" .. id)
-			for index, choice in ipairs(choices) do
-				options[#options + 1] = {
-					statement = "Redeem " .. item:GetName() .. ": " .. choice.label,
-					topicID = "TaskRewardChoices",
-					category = "service", dyndata = {kind = "kit", item = id, choice = index, label = choice.label},
-				}
-			end
-		end
-	end
-end
-
 local function barterOptions(character, npc, options)
 	for id, barter in pairs(ix.npcbarter and ix.npcbarter.barterdict[npc] or {}) do
 		local reward = barter.barterItem
@@ -182,7 +166,8 @@ local function configureJobPreview(dialogue)
 				local definition = ix.jobs.list[preview.identifier]
 
 				local contact = ix.townNPCs and ix.townNPCs.byName[target:GetDisplayName()]
-				local description = ix.jobs.GetDialogueDescription(preview, target:GetDisplayName(), true)
+				local description = ix.jobs.GetDialogueDescription(preview, target:GetDisplayName(), true,
+					client:GetCharacter())
 				if contact and contact.dialogue.jobTerms then
 					description = description .. "\n\n" .. contact.dialogue.jobTerms:gsub("{money}", preview.moneyReward)
 				else
@@ -239,7 +224,6 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 			local character = client:GetCharacter()
 			local npc = target:GetDisplayName()
 			local options = offerOptions(character, npc)
-			kitOptions(character, npc, options)
 			barterOptions(character, npc, options)
 			local pending = ix.progression.GetLine(character, CLAIM_LINE).pendingRewards
 
@@ -252,7 +236,6 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 			if not ix.taskRewards then return {} end
 			local character = client:GetCharacter()
 			local options = offerOptions(character, target:GetDisplayName())
-			kitOptions(character, target:GetDisplayName(), options)
 			barterOptions(character, target:GetDisplayName(), options)
 			local line = ix.progression.GetLine(character, CLAIM_LINE)
 			if line.pendingRewards and #line.pendingRewards > 0 then
@@ -272,8 +255,6 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 				and (data.key:match("^job:") or data.key:match("^bonus:"))
 				if isOffer then
 					ix.taskRewards.SelectOffer(character, target:GetDisplayName(), data.key, data.choice, data.label)
-				elseif data.kind == "kit" then
-					ix.taskRewards.RedeemKit(character, target:GetDisplayName(), data.item, data.choice, data.label)
 				elseif data.kind == "barter" then
 					ix.taskRewards.ExecuteBarter(character, target:GetDisplayName(), data.key, data.choice, data.label)
 				elseif data.kind == "claim" then

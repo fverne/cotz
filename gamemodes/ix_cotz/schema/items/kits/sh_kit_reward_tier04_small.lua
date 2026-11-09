@@ -1,6 +1,6 @@
 ITEM.name = "Experienced Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "The small Experienced Reward keeps the same issue identity in a more compact bundle. Its plain packaging is intended for transport rather than display. The contact's offer identifies the supplies available in return for the entitlement."
+ITEM.longdesc = "The small Experienced Reward keeps the same issue identity in a more compact bundle. Its plain packaging is intended for transport rather than display."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

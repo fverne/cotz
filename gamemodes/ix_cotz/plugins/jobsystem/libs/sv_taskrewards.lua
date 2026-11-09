@@ -370,27 +370,6 @@ local function hasClaimSpace(character, choice)
 	return #pending + #choice.items <= MAX_PENDING_REWARDS
 end
 
-function ix.taskRewards.RedeemKit(character, npc, itemID, choiceIndex, label)
-	if type(itemID) ~= "number" or itemID % 1 ~= 0 then return false end
-	local item = character:GetInventory():GetItems()[tonumber(itemID)]
-	if not item or not ix.taskRewards.IsTaskKit(item.uniqueID) then return false end
-	local key = "kit:" .. item:GetID()
-	local choices = ix.taskRewards.BuildChoices(character, npc,
-		ix.taskRewards.ExpectedValue(item.uniqueID), key)
-	if type(choiceIndex) ~= "number" or choiceIndex % 1 ~= 0 or not choices[choiceIndex] then return false end
-	if choices[choiceIndex].label ~= label or not hasClaimSpace(character, choices[choiceIndex]) then return false end
-	local offers = offersFor(character)
-	-- The owned item is the consumable entitlement; retire it before inventory insertion can re-enter.
-	if item:GetData("taskRewardRedeemed", false) then return false end
-	item:SetData("taskRewardRedeemed", true)
-	item:Remove()
-	offers[key] = {npc = npc, choices = choices, selected = choiceIndex, earned = true}
-	saveOffers(character, offers)
-	paySelected(character, key, offers)
-
-	return true
-end
-
 function ix.taskRewards.ExecuteBarter(character, npc, barterID, index, label)
 	local barter = ix.npcbarter.barterdict[npc] and ix.npcbarter.barterdict[npc][barterID]
 	if not barter or not ix.npcbarter.activebarters[barterID]

@@ -8,6 +8,11 @@ local REGROUP_START = 512
 local REGROUP_STOP = 256
 local HOME_RANGE = 2048
 local REGROUP_RETRY = 10
+local PLAYER_MEMORY_SECONDS = 10
+local PLAYER_CONTACT_INTERVAL = 0.25
+local PURSUIT_RETRY = 1
+local PURSUIT_ARRIVAL = 64
+local TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing"}
 local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
 	chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true}
 local PREY = {boar = true, flesh = true, tark = true, rodent = true, tushkano = true}
@@ -26,6 +31,15 @@ end
 
 local function cellKey(position)
 	return math.floor(position.x / CELL_SIZE) .. ":" .. math.floor(position.y / CELL_SIZE)
+end
+
+local function targetBusy(actor)
+	if actor.PlayingAnimation then return true end
+	for _, field in ipairs(TARGET_ABILITIES) do
+		if (actor[field] or 0) ~= 0 then return true end
+	end
+
+	return false
 end
 
 function PLUGIN:IsCombatActor(entity)
@@ -55,6 +69,7 @@ function PLUGIN:CreateCombatPack(origin, isolated)
 end
 
 function PLUGIN:RemoveCombatActor(entity)
+	self:ClearCombatPlayerFocus(entity)
 	self.combatActors[entity] = nil
 	local bucket = self.combatBuckets[entity.cotzCombatCell]
 	if bucket then
@@ -75,6 +90,8 @@ function PLUGIN:RemoveCombatActor(entity)
 	end
 	entity.cotzCombatCell, entity.cotzCombatPack = nil, nil
 	entity.cotzRelations, entity.cotzOriginalRelations = nil, nil
+	entity.cotzCombatEnemy, entity.cotzCombatScheduleDirty = nil, nil
+	entity.cotzPursuitScheduled, entity.cotzNextPursuit = nil, nil
 end
 
 function PLUGIN:RegisterCombatActor(entity, pack)
@@ -166,20 +183,125 @@ function PLUGIN:CanActorAttack(actor, target)
 	return true
 end
 
-function PLUGIN:ClearCombatEnemy(actor)
+function PLUGIN:ClearCombatPlayerFocus(actor)
+	local focus = actor.cotzPlayerFocus
+	if focus then actor.cotzCombatScheduleDirty = true end
+	if IsValid(actor) and IsValid(focus) then actor:ClearEnemyMemory(focus) end
+	actor.cotzPlayerFocus, actor.cotzPlayerPosition, actor.cotzPlayerContact = nil, nil, nil
+	actor.cotzPlayerVisible, actor.cotzNextContactCheck = nil, nil
+end
+
+function PLUGIN:GetCombatPlayerFocus(actor)
+	local focus = actor.cotzPlayerFocus
+	if focus and self:CanActorAttack(actor, focus)
+		and CurTime() - actor.cotzPlayerContact < PLAYER_MEMORY_SECONDS then
+		return focus
+	end
+end
+
+function PLUGIN:RememberCombatPlayer(actor, client, position, contactTime)
+	contactTime = contactTime or CurTime()
+	if actor.cotzPlayerFocus == client and contactTime < actor.cotzPlayerContact then return end
+
+	actor.cotzPlayerFocus = client
+	actor.cotzPlayerPosition = position
+	actor.cotzPlayerContact = contactTime
+	actor.cotzNextContactCheck = 0
+end
+
+function PLUGIN:ClearCombatEnemy(actor, preserveFocus)
 	local enemy = actor:GetEnemy()
 	if IsValid(enemy) then actor:ClearEnemyMemory(enemy) end
 	actor:SetEnemy(NULL)
 	actor.RegEnemy = nil
 	actor.cotzRegrouping = nil
+	actor.cotzCombatEnemy = nil
+	actor.cotzCombatScheduleDirty = true
+	actor.cotzNextEnemySearch, actor.cotzNextHumanSearch = 0, 0
+	if not preserveFocus then self:ClearCombatPlayerFocus(actor) end
 end
 
 function PLUGIN:ValidateCombatEnemy(actor)
 	local enemy = actor:GetEnemy()
-	if IsValid(enemy) and not self:CanActorAttack(actor, enemy) then
-		self:ClearCombatEnemy(actor)
-		actor:ClearSchedule()
+	if (IsValid(enemy) and not self:CanActorAttack(actor, enemy))
+		or (actor.cotzCombatEnemy and not IsValid(enemy)) then
+		self:ClearCombatEnemy(actor, true)
+		enemy = nil
 	end
+	if not living(actor) or actor.cotzSleeping then
+		self:ClearCombatPlayerFocus(actor)
+		return
+	end
+	if GetConVar("ai_disabled"):GetInt() ~= 0 then return end
+
+	local focus = actor.cotzPlayerFocus
+	if focus and not self:GetCombatPlayerFocus(actor) then
+		self:ClearCombatPlayerFocus(actor)
+		if enemy == focus then
+			self:ClearCombatEnemy(actor)
+			enemy = nil
+		end
+		focus = nil
+	end
+	if not focus and IsValid(enemy) and enemy:IsPlayer() then
+		if actor:Visible(enemy) then
+			self:RememberCombatPlayer(actor, enemy, enemy:GetPos())
+			focus = enemy
+		else
+			self:ClearCombatEnemy(actor)
+			enemy = nil
+		end
+	end
+	if IsValid(enemy) then
+		if actor.cotzCombatEnemy ~= enemy then actor.cotzCombatScheduleDirty = true end
+		actor.cotzCombatEnemy = enemy
+	end
+	if not focus then return end
+
+	if CurTime() >= (actor.cotzNextContactCheck or 0) then
+		actor.cotzNextContactCheck = CurTime() + PLAYER_CONTACT_INTERVAL
+		local visible = actor:Visible(focus)
+		if actor.cotzPlayerVisible ~= visible then actor.cotzCombatScheduleDirty = true end
+		actor.cotzPlayerVisible = visible
+		if visible then
+			actor.cotzPlayerPosition, actor.cotzPlayerContact = focus:GetPos(), CurTime()
+			actor:UpdateEnemyMemory(focus, actor.cotzPlayerPosition)
+		end
+	end
+	if enemy ~= focus and not targetBusy(actor) then
+		self:SetCombatTarget(actor, focus, actor.cotzPlayerPosition, actor.cotzPlayerContact)
+	end
+end
+
+function PLUGIN:UpdateCombatSchedule(actor)
+	if actor.cotzSleeping or not living(actor) or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
+	if targetBusy(actor) then return end
+
+	if actor.cotzCombatScheduleDirty then
+		actor:ClearSchedule()
+		if actor.ScheduleFinished then actor:ScheduleFinished() end
+		if actor.EngineScheduleFinish then actor:EngineScheduleFinish() end
+		actor.cotzCombatScheduleDirty, actor.cotzPursuitScheduled, actor.cotzNextPursuit = nil, nil, nil
+	end
+	local focus = self:GetCombatPlayerFocus(actor)
+	if not focus or actor.cotzPlayerVisible ~= false or actor:GetEnemy() ~= focus then return end
+
+	-- Use the observed position, never the hidden player's current position, for pursuit.
+	if actor:GetPos():DistToSqr(actor.cotzPlayerPosition) <= PURSUIT_ARRIVAL ^ 2 then
+		if actor.cotzPursuitScheduled then actor:ClearSchedule() end
+		actor.cotzPursuitScheduled = nil
+		return true
+	end
+	if CurTime() >= (actor.cotzNextPursuit or 0) then
+		actor.cotzNextPursuit = CurTime() + PURSUIT_RETRY
+		if not actor.cotzPursuitScheduled or not actor:IsCurrentSchedule(SCHED_FORCED_GO_RUN) then
+			actor:SetLastPosition(actor.cotzPlayerPosition)
+			actor:SetSchedule(SCHED_FORCED_GO_RUN)
+			actor.cotzPursuitScheduled = true
+		end
+	end
+
+	return true
 end
 
 function PLUGIN:SetCombatRelationship(first, second)
@@ -205,8 +327,32 @@ function PLUGIN:RefreshCombatRelationships(actor)
 	end
 end
 
-function PLUGIN:SetCombatTarget(actor, target)
+function PLUGIN:SetCombatTarget(actor, target, knownPosition, contactTime)
 	if not self:CanActorAttack(actor, target) then return false end
+	local previous = actor:GetEnemy()
+	local focus = self:GetCombatPlayerFocus(actor)
+	if not focus and IsValid(previous) and previous:IsPlayer() and self:CanActorAttack(actor, previous)
+		and actor:Visible(previous) then
+		self:RememberCombatPlayer(actor, previous, previous:GetPos())
+		actor.cotzPlayerVisible = true
+		focus = previous
+	end
+	if focus and focus ~= target then return false end
+	if previous ~= target and targetBusy(actor) then return false end
+	if target:IsPlayer() then
+		local visible = actor:Visible(target)
+		if visible then
+			knownPosition = target:GetPos()
+			contactTime = CurTime()
+		elseif not knownPosition then
+			return false
+		end
+		self:RememberCombatPlayer(actor, target, knownPosition, contactTime)
+		knownPosition = actor.cotzPlayerPosition
+		if actor.cotzPlayerVisible ~= visible then actor.cotzCombatScheduleDirty = true end
+		actor.cotzPlayerVisible = visible
+		actor.cotzNextContactCheck = CurTime() + PLAYER_CONTACT_INTERVAL
+	end
 	if self.combatActors[target] then
 		self:SetCombatRelationship(actor, target)
 		self:SetCombatRelationship(target, actor)
@@ -214,18 +360,44 @@ function PLUGIN:SetCombatTarget(actor, target)
 		actor:AddEntityRelationship(target, D_HT, RELATION_PRIORITY)
 	end
 	actor.cotzRegrouping = nil
-	actor:SetEnemy(target)
-	actor:UpdateEnemyMemory(target, target:GetPos())
+	if previous ~= target then
+		actor:SetEnemy(target)
+		actor.cotzCombatScheduleDirty = true
+	end
+	actor.cotzCombatEnemy = target
+	actor:UpdateEnemyMemory(target, knownPosition or target:GetPos())
 
 	return true
 end
 
+function PLUGIN:RetaliateCombatActor(actor, attacker)
+	if not IsValid(attacker) or not (attacker:IsPlayer() or attacker:IsNPC()) then return end
+	if not self:CanActorAttack(actor, attacker) then return end
+	self:ValidateCombatEnemy(actor)
+	local focus = self:GetCombatPlayerFocus(actor)
+	if focus and focus ~= attacker then return end
+	if attacker:IsPlayer() then
+		self:RememberCombatPlayer(actor, attacker, attacker:GetPos())
+		self:SetCombatTarget(actor, attacker, actor.cotzPlayerPosition, actor.cotzPlayerContact)
+	elseif not targetBusy(actor) then
+		local enemy = actor:GetEnemy()
+		if actor.cotzHuman or not IsValid(enemy)
+			or actor:GetPos():DistToSqr(attacker:GetPos()) < actor:GetPos():DistToSqr(enemy:GetPos()) then
+			self:SetCombatTarget(actor, attacker)
+		end
+	end
+end
+
 function PLUGIN:FindCombatEnemy(actor, range, halfAngle, budgetTaken)
-	if actor.cotzSleeping then return end
+	if actor.cotzSleeping or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if not budgetTaken then
 		if (actor.cotzNextHumanSearch or 0) > CurTime() or not self:TakeSearchBudget() then return end
 		actor.cotzNextHumanSearch = CurTime() + 2 + (actor:EntIndex() % 10) * 0.03
 	end
+	self:ValidateCombatEnemy(actor)
+	local focus = self:GetCombatPlayerFocus(actor)
+	if focus then return focus, 0 end
+	if targetBusy(actor) then return end
 	self:UpdatePlayerCache()
 	local candidates = self:NearbyCombatActors(actor:GetPos(), range)
 	for _, client in ipairs(self.combatPlayers or {}) do candidates[#candidates + 1] = client end
@@ -246,8 +418,7 @@ function PLUGIN:FindCombatEnemy(actor, range, halfAngle, budgetTaken)
 			end
 		end
 	end
-	if nearest then
-		self:SetCombatTarget(actor, nearest)
+	if nearest and self:SetCombatTarget(actor, nearest) then
 		self:ShareCombatThreat(actor, nearest)
 	end
 
@@ -258,7 +429,8 @@ function PLUGIN:ShareCombatThreat(actor, target)
 	for _, ally in ipairs(self:NearbyCombatActors(actor:GetPos(), AMBIENT_RANGE)) do
 		if ally ~= actor and not ally.cotzSleeping and self:ActorsAllied(actor, ally)
 			and self:CanActorAttack(ally, target) and not IsValid(ally:GetEnemy()) then
-			self:SetCombatTarget(ally, target)
+			local position = target:IsPlayer() and actor.cotzPlayerPosition or nil
+			self:SetCombatTarget(ally, target, position, actor.cotzPlayerContact)
 		end
 	end
 end
@@ -293,6 +465,7 @@ function PLUGIN:UpdateAmbientPack(pack, leader)
 	if pack.isolated or pack.opponent or CurTime() < pack.nextAmbient then return end
 	pack.nextAmbient = CurTime() + AMBIENT_INTERVAL
 	if not leader or leader.cotzHuman or leader.cotzSleeping or CurTime() < pack.cooldown then return end
+	if self:GetCombatPlayerFocus(leader) or IsValid(leader:GetEnemy()) or targetBusy(leader) then return end
 	if not self:TakeSearchBudget() then pack.nextAmbient = CurTime() + 1 return end
 	local prey, rival
 	for _, other in ipairs(self:NearbyCombatActors(leader:GetPos(), AMBIENT_RANGE)) do
@@ -354,6 +527,7 @@ function PLUGIN:UpdateCombatActors()
 			local sleeping = actor.cotzSleeping
 			actor:STALKERNPCUpdateSleep()
 			self:ValidateCombatEnemy(actor)
+			self:UpdateCombatSchedule(actor)
 			if sleeping ~= actor.cotzSleeping then self:RefreshCombatRelationships(actor) end
 		end
 	end

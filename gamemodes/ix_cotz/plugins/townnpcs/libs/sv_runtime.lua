@@ -1,6 +1,17 @@
 local PLUGIN = PLUGIN
 local STATE_KEY = "townNPCProgression"
 
+function PLUGIN:DiscoverContact(client, target, contact)
+	if not contact.bunker or not self:CanInteract(client, target)
+		or target:GetDisplayName() ~= contact.name then return end
+	local character = client:GetCharacter()
+	local known = table.Copy(character:GetData("townKnownContacts", {}))
+	if known[contact.id] then return end
+	known[contact.id] = true
+	character:SetData("townKnownContacts", known)
+	character:Save()
+end
+
 function PLUGIN:InitializeTownCharacter(character)
 	if not character:GetData(STATE_KEY) then
 		character:SetData(STATE_KEY, {counts = {}, claims = {}, opponents = {}, pending = {}, rewardVersion = 2})

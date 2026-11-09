@@ -437,7 +437,7 @@ job.rewards can override money/reputation per difficulty; defaults live in sh_co
 contact.supplyStock can override initial, maximum, interval and amount for that NPC.
 Only delivery jobs declare pools and delivery tiers. Quantities apply to deliveries, eliminations and
 computer extraction; destination maps apply to field jobs. Omit settings ignored by the selected kind.
-The `supplies` list configures ordinary vendor stock and legacy kit redemption. Repeatable task
+The `supplies` list configures ordinary vendor stock. Repeatable task
 rewards are separate: `rewards.packages` contains up to three `{label, items}` families. Each saved
 offer selects one affordable eligible candidate per family, with explicit quantities and a two-item
 limit. `rewards.bonusItems` lists optional equipment for larger five-task bonuses; existing purchase
@@ -881,3 +881,17 @@ Run `tests/town_dialogue_menus_spec.lua`, `tests/dialogue_order_spec.lua`,
 `tests/gear_customization_spec.lua` and `tests/squads_menu_scoreboard_spec.lua` with `luatex --luaonly`.
 Verify Escape presses/holds, modal focus, suit previews and confirmation, trade returns and fresh-character
 cross-server roster visibility in multiplayer after deploying matching server/client code.
+
+## Bunker courier discovery
+
+Beanstalk, Egghead and Intern become eligible delivery recipients individually after the character
+first talks to them. Their validated greeting saves `townKnownContacts` by contact ID on that
+character; repeated greetings do not save again. Existing `knownProgressionTopics` entries for a
+scientist also count as prior discovery. Earlier ordinary conversations were not recorded, so a
+character with no saved evidence must greet that scientist again. No saves are reset.
+
+Valuable-courier offers, previews, task journals and server hand-ins use the same discovery filter.
+Wake's information-parcel assignments also exclude undiscovered bunker scientists, retaining their
+existing regional and bunker-card gates. Accepted parcel destinations remain saved without rerolling.
+Verify greeting each scientist, switching characters, reconnecting, previews and deliveries in multiplayer.
+Run `luatex --luaonly tests/regional_jobs_spec.lua` for standalone regression coverage.
