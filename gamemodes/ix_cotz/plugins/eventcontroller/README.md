@@ -28,6 +28,44 @@ luatex --luaonly gamemodes/ix_cotz/plugins/eventcontroller/tests/location_tags_s
 luatex --luaonly tests/population_performance_spec.lua
 ```
 
+## NPC spawn placement
+
+Routine encounters prefer nearby ground nodes from `maps/graphs/<map>.ain`. The server reads and
+caches the graph once per map/plugin load; it never writes or rebuilds it. `sv_spawnnodes.lua` reads
+the version 37 format described by Valve's
+[network graph serialization](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_networkmanager.cpp).
+It checks record bounds, link endpoints, finite coordinates, the engine's node count where available,
+and the BSP revision when the BSP can be opened. Unsupported, missing or invalid graphs produce one
+console warning and use ordinary validated floor sampling. Reload the map or plugin after replacing a graph.
+
+Eligible nodes must have a ground-movement link to another ground node for `HULL_HUMAN`, the navigation
+hull used by the current encounter actors. Hull-specific vertical offsets place candidates at the node's
+actual floor height. Candidates stay within the encounter's 750-unit radius and 128 units vertically
+of its authored point. Up to 24 nodes are tried randomly without replacement. A candidate needs a floor
+within 18 units of its saved height, a ground normal of at least 0.7, and clear space for the encounter
+actors. The shared clearance box is 112 units wide and 112 units high, covering current mutant collision
+bounds (including the scaled hellhound) and human NPCs without requiring the old 256-unit headroom.
+
+If the graph has no safe nearby candidate, spawning continues with up to 24 ordinary positions around
+the event point, followed by a validated center position. The fallback retains the unobstructed sweep
+from the center, checks for a floor from 32 units above to 128 units below the candidate, and rejects
+prop-supported floors, steep slopes, solid starts, sky, blocked hulls and out-of-world positions.
+Connected graph nodes may use authored static-prop walkways; arbitrary prop tops are excluded from
+the fallback. There is no unchecked center fallback. An individual spawn is skipped only when both
+the node candidates and ordinary floor checks fail. Fully rejected encounters do not issue PDA reports.
+
+Routine queued mutants recheck clearance immediately before creation, so another queued NPC or a
+new blocker cannot occupy the same placement unnoticed. Population limits, player exclusion and pack
+ownership remain in effect. Existing event points and saves need no migration. Advanced event dupes,
+scripted advanced-event spawns and research-defence placement retain their own behavior.
+
+Run `luatex --luaonly tests/event_spawnplacement_spec.lua`, the population suite and the tag suite above.
+The placement spec also accepts optional `.ain` paths to check installed graphs. In multiplayer, test
+events near crates and rooftops, connected static-prop walkways, indoor ceilings, slopes, blocked node
+positions and points without nearby nodes. Check fallback spawning and queued group separation too.
+Saved links improve placement but cannot guarantee a live route through dynamic doors, blocked links
+or disconnected regions. These tests do not replace in-game movement checks.
+
 ## Garbage encounter tier
 
 Garbage sits between Swamps and Waystation. Its shared encounters and 11 explicit `garbage_*` definitions use:

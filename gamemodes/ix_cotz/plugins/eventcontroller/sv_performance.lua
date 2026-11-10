@@ -131,7 +131,7 @@ function PLUGIN:RegisterMutant(entity, enforceLimit, pack)
 	end
 end
 
-function PLUGIN:QueueMutant(class, position, safeRange, targetLimited, pack)
+function PLUGIN:QueueMutant(class, position, safeRange, targetLimited, pack, validatePlacement)
 	if spawnTail - spawnHead + 1 >= MAX_QUEUED_SPAWNS then return false end
 	if not self:CanQueueMutant(position, true, targetLimited) then return false end
 
@@ -139,6 +139,7 @@ function PLUGIN:QueueMutant(class, position, safeRange, targetLimited, pack)
 	spawnQueue[spawnTail] = {
 		class = class,
 		pack = pack,
+		validatePlacement = validatePlacement,
 		targetLimited = targetLimited,
 		position = position,
 		safeRange = safeRange,
@@ -158,7 +159,12 @@ function PLUGIN:ProcessMutantQueue()
 		local playerNearby = request.safeRange
 			and self:HasPlayerNear(request.position, request.safeRange)
 		local hasCapacity = self:CanQueueMutant(request.position, false, request.targetLimited)
-		if CurTime() < request.expires and not playerNearby and hasCapacity then
+		local canSpawn = CurTime() < request.expires and not playerNearby and hasCapacity
+		if canSpawn and request.validatePlacement then
+			-- Earlier queue entries or player props may have occupied this point since it was selected.
+			canSpawn = self:IsSpawnLocationClear(request.position)
+		end
+		if canSpawn then
 			local entity = ents.Create(request.class)
 			if IsValid(entity) then
 				entity.cotzCombatPack = request.pack

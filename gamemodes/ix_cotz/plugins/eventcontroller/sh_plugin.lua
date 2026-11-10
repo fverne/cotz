@@ -55,6 +55,8 @@ PLUGIN.spawnrate = 30
 local icon = Material("vgui/icons/news.png")
 
 ix.util.Include("sh_population.lua")
+ix.util.Include("sv_spawnnodes.lua")
+ix.util.Include("sv_spawnplacement.lua")
 
 if SERVER then
 	local spawntime = 1
@@ -75,8 +77,29 @@ if SERVER then
 		return true
 	end
 
+	function PLUGIN:SpawnEncounterEntity(class, origin, pack)
+		local position = self:GetSpawnLocation(origin)
+		if not position then return end
+		if class:sub(1, 11) == "npc_mutant_" then
+			if not self:CanPopulateMutant(position, true) then return end
+
+			return self:QueueMutant(class, position, self.saferadius, true, pack, true)
+		end
+
+		local entity = ents.Create(class)
+		if not IsValid(entity) then return end
+		entity.cotzCombatPack = pack
+		entity:SetPos(position)
+		entity:Spawn()
+		entity:DropToFloor()
+		self:RegisterCombatActor(entity, pack)
+
+		return entity
+	end
+
 	function PLUGIN:spawnEvent(eventpoint, spawn)
 		if ix.eventController ~= self then return end
+		local spawned = false
 		-- spawnents
 		if spawn.entities then
 			local pack = self:CreateCombatPack(eventpoint[1])
@@ -86,29 +109,7 @@ if SERVER then
 					local isMutant = class:sub(1, 11) == "npc_mutant_"
 					if isMutant and not self:CanPopulateMutant(nil, true) then break end
 
-					local position = self:GetSpawnLocation(eventpoint[1])
-					local data = {}
-					data.start = position
-					data.endpos = position
-					data.mins = Vector(-96, -96, 0)
-					data.maxs = Vector(96, 96, 256)
-
-					-- local trace = util.TraceHull(data)
-					-- if trace.Hit then
-					-- 	continue
-					-- end
-
-					if isMutant and not self:CanPopulateMutant(position, true) then continue end
-					if isMutant then
-						self:QueueMutant(class, position, self.saferadius, true, pack)
-					else
-						local newNPC = ents.Create(class)
-						newNPC.cotzCombatPack = pack
-						newNPC:SetPos(position)
-						newNPC:Spawn()
-						newNPC:DropToFloor()
-						self:RegisterCombatActor(newNPC, pack)
-					end
+					if self:SpawnEncounterEntity(class, eventpoint[1], pack) then spawned = true end
 				end
 			end
 		end
@@ -116,6 +117,7 @@ if SERVER then
 		if spawn.items then
 			for k = 1, #spawn.items do
 				local position = self:GetSpawnLocation(eventpoint[1])
+				if not position then continue end
 				local data = {}
 				data.start = position
 				data.endpos = position
@@ -127,6 +129,7 @@ if SERVER then
 					continue
 				end
 				ix.item.Spawn(spawn.items[k][1], position, nil, AngleRand(), spawn.items[k][2] or {})
+				spawned = true
 			end
 		end
 
@@ -152,6 +155,8 @@ if SERVER then
 				end
 			end]]
 		end
+
+		return spawned
 	end
 
 	function PLUGIN:setSpawnTime(time)
@@ -177,42 +182,6 @@ if SERVER then
 
 	function PLUGIN:SaveData()
 		self:SetData(self.eventpoints)
-	end
-
-	function PLUGIN:GetSpawnLocation(pos)
-		local tracegood = false
-		local teleres
-		local tracecnt = 0
-
-		repeat
-			local trace = util.TraceHull({
-				start = pos + Vector(0, 0, 16),
-				endpos = pos + Vector(
-					math.random(-PLUGIN.spawnradius, PLUGIN.spawnradius),
-					math.random(-PLUGIN.spawnradius, PLUGIN.spawnradius),
-					0
-				),
-				mins = Vector(-96, -96, 0),
-				maxs = Vector(96, 96, 256),
-				mask = MASK_SOLID,
-				ignoreworld = false,
-			})
-
-			if not trace.Hit then
-				tracegood = true
-				teleres = trace.HitPos + (trace.HitNormal * 32)
-			end
-
-			tracecnt = tracecnt + 1
-
-			if tracecnt > 50 then
-				tracegood = true
-				teleres = pos + Vector(0, 0, 16) -- Teleport to original position if we cant find a position
-			end
-
-		until tracegood
-
-		return teleres
 	end
 
 	function PLUGIN:Think()
@@ -273,9 +242,9 @@ if SERVER then
 			return
 		end
 
-		self:spawnEvent(eventpoint, spawn)
+		local spawned = self:spawnEvent(eventpoint, spawn)
 
-		if math.Rand(1, 100) <= self.pdachatterchance then
+		if spawned and math.Rand(1, 100) <= self.pdachatterchance then
 			for _, ply in player.Iterator() do
 				local character = ply:GetCharacter()
 				if character and ix.townNPCs:CanReceiveMutantReports(character, game.GetMap()) then

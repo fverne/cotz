@@ -391,7 +391,11 @@ local broadcastController = {
 	GetNumMutants = function() return 0 end,
 	GetMutantTarget = function() return 10 end,
 	IsClear = function() return true end,
-	spawnEvent = function() eventsSpawned = eventsSpawned + 1 end,
+	spawnEvent = function()
+		eventsSpawned = eventsSpawned + 1
+
+		return true
+	end,
 }
 local broadcastEnvironment = setmetatable({
 	PLUGIN = broadcastController,
@@ -418,6 +422,10 @@ check(#broadcasts == 1 and broadcasts[1][1] == unlockedPlayer,
 	"event broadcasts only reach characters with their personal unlock")
 check(broadcasts[1][2] == "Mutants near Marsh" and broadcasts[1][3][1] == unlockedPlayer,
 	"event broadcast uses the event location and a private recipient list")
+broadcastController.spawnEvent = function() return false end
+now = now + broadcastController.spawnrate + 1
+broadcastController:Think()
+check(#broadcasts == 1, "failed placement does not announce a nonexistent encounter")
 
 print(string.format("PASS: %d population performance checks", checks))
 
