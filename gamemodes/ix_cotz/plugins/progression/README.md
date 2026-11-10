@@ -14,10 +14,14 @@ Opening a contact's progression conversation records its currently active topics
 data key `knownProgressionTopics`; newly unlocked topics require another conversation before they
 appear. Discovery survives reconnects and does not change progression eligibility or saved progress.
 Purple inventory backgrounds and Progression tooltip labels use the same discovery rules: only
-outstanding items for active, discussed topics are highlighted. Ordinary task highlighting is unchanged.
+outstanding items for active, discussed topics are highlighted. Inventory tooltips list each requesting
+contact beside Task or Progression, with repeated contacts shown once per type. Courier tasks list
+their eligible delivery recipients. Ordinary task highlighting is unchanged.
 The tab uses a fill-docked scrolling list with one card per contact. Within each card, spaced
 dividers separate the heading and earned benefits from each progression section. Long task
-requirements and rewards wrap inside the card.
+requirements and rewards wrap inside the card. A search bar stays above the list and filters contact
+cards as you type, matching names, visible requests, required items and rewards without regard to case.
+Clearing the search restores all discovered cards; undiscovered topics remain hidden.
 
 Town requests use each contact's explicit core/support specialty pools rather than a global theme
 rotation. Marsh branches' first two original milestones and all work below 45% use only Marsh-sourced
@@ -101,6 +105,7 @@ World-arrival support remains for explicit worldNPC definitions; Pripyat town ar
     luatex --luaonly tests/progression_expansion_spec.lua
     python3 tests/progression_expansion_spec.py
     luatex --luaonly tests/progression_spec.lua
+    luatex --luaonly tests/item_requirement_tooltips_spec.lua
     luatex --luaonly tests/character_storage_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua
     luatex --luaonly tests/progression_services_spec.lua

@@ -451,17 +451,28 @@ function PANEL:Init()
 	self.panels = {}
 
 	self.highlghtItems = {}
+	self.highlightContacts = {Task = {}, Progression = {}}
 
-	for _, v in pairs(LocalPlayer():GetCharacter():GetJobs()) do
+	local character = LocalPlayer():GetCharacter()
+	for npc, v in pairs(character:GetJobs()) do
 		local jobDef = ix.jobs.list[v.identifier]
-		if not jobDef or not jobDef.requiredItem then
-			continue
+		if jobDef and jobDef.requiredItem then
+			self.highlghtItems[jobDef.requiredItem] = "Task"
+			local contacts = self.highlightContacts.Task[jobDef.requiredItem] or {}
+			if jobDef.alternateDelivery then
+				local receivers = ix.jobs.regional.EligibleReceivers(jobDef, nil, nil, character)
+				for _, receiver in ipairs(receivers) do
+					contacts[receiver] = true
+				end
+			else
+				contacts[npc] = true
+			end
+			self.highlightContacts.Task[jobDef.requiredItem] = contacts
 		end
-
-		self.highlghtItems[jobDef.requiredItem] = "Task"
 	end
 
-	for item in pairs(ix.progression.GetNeededItems(LocalPlayer():GetCharacter())) do
+	self.highlightContacts.Progression = ix.progression.GetNeededItemContacts(character)
+	for item in pairs(self.highlightContacts.Progression) do
 		self.highlghtItems[item] = self.highlghtItems[item] == "Task" and "Both" or "Progression"
 	end
 end
@@ -555,6 +566,21 @@ local function addHighlightRow(tooltip, text, color)
 	return row
 end
 
+local function addRequirementContacts(tooltip, kind, contacts, color)
+	local names = {}
+	for name in pairs(contacts or {}) do
+		names[#names + 1] = name
+	end
+	table.sort(names)
+	if #names == 0 then
+		ix.util.PropertyDesc(tooltip, kind, color)
+		return
+	end
+	for _, name in ipairs(names) do
+		ix.util.PropertyDesc(tooltip, kind .. ": " .. name, color)
+	end
+end
+
 function PANEL:SetInventory(inventory, bFitParent)
 	if inventory.slots then
 		local invWidth, invHeight = inventory:GetSize()
@@ -601,13 +627,13 @@ function PANEL:SetInventory(inventory, bFitParent)
 							ix.hud.PopulateItemTooltip(tooltip, item)
 							local highlightText = self.highlghtItems[item.uniqueID]
 							if highlightText then
-								if highlightText == "Task" then
-									ix.util.PropertyDesc(tooltip, "Task", yellowCol)
-								elseif highlightText == "Progression" then
-									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
-								elseif highlightText == "Both" then
-									ix.util.PropertyDesc(tooltip, "Task", yellowCol)
-									ix.util.PropertyDesc(tooltip, "Progression", purpleCol)
+								if highlightText == "Task" or highlightText == "Both" then
+									addRequirementContacts(tooltip, "Task",
+										self.highlightContacts.Task[item.uniqueID], yellowCol)
+								end
+								if highlightText == "Progression" or highlightText == "Both" then
+									addRequirementContacts(tooltip, "Progression",
+										self.highlightContacts.Progression[item.uniqueID], purpleCol)
 								end
 							end
 							tooltip:SizeToContents()

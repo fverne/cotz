@@ -524,6 +524,8 @@ check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 0,
 	"a new character has no discovered progression entries")
 check(next(ix.progression.GetNeededItems(reader)) == nil,
 	"undiscussed progression requests do not highlight inventory items")
+check(next(ix.progression.GetNeededItemContacts(reader)) == nil,
+	"undiscussed requests do not reveal tooltip contacts")
 ix.progression.DiscoverTopics(reader, "Discovery")
 check(ix.progression.GetKnownActiveProgressions(reader, "Discovery")[1] == "discovery/first",
 	"discussing a contact reveals its currently active topics")
@@ -543,6 +545,9 @@ check(#ix.progression.GetKnownActiveProgressions(reader, "Discovery") == 2,
 	"returning to the contact reveals the new topic")
 check(ix.progression.GetNeededItems(reader).artifact_bolt == 8,
 	"discussed active requests combine their remaining item counts")
+local neededContacts = ix.progression.GetNeededItemContacts(reader)
+check(neededContacts.artifact_bolt.Discovery and next(neededContacts.artifact_bolt, "Discovery") == nil,
+	"multiple requests from the same contact produce one tooltip contact")
 local reconnected = character()
 reconnected.data = copy(reader.data)
 reconnected.vars = copy(reader.vars)
@@ -561,6 +566,27 @@ check(ix.progression.GetNeededItems(reader).artifact_bolt == 5,
 ix.progression.SetCompleted(reader, "discovery/second")
 check(next(ix.progression.GetNeededItems(reader)) == nil,
 	"items stop being highlighted once every discussed request is complete")
+check(next(ix.progression.GetNeededItemContacts(reader)) == nil,
+	"completed requests stop contributing tooltip contacts")
+
+local contactReader = character()
+for id, npc in pairs({first = "Alpha", second = "Beta"}) do
+	ix.progression.Register("tooltip/" .. id, {keyNpc = npc, defaultActive = true,
+		requirementSlots = {{pool = "fixture", quantity = 3}},
+		requirementAlternatives = {artifact_alt = "artifact_bolt"}})
+	ix.progression.DiscoverTopics(contactReader, npc)
+end
+neededContacts = ix.progression.GetNeededItemContacts(contactReader)
+check(neededContacts.artifact_bolt.Alpha and neededContacts.artifact_bolt.Beta
+	and neededContacts.artifact_alt.Alpha and neededContacts.artifact_alt.Beta,
+	"shared requirements and accepted alternatives retain every requesting contact")
+local contactRecord = ix.progression.GetCharacterProgression(contactReader)
+contactRecord.lines["tooltip/first"].complexData = {artifact_bolt = 3}
+ix.progression.SetCharacterProgression(contactReader, contactRecord)
+neededContacts = ix.progression.GetNeededItemContacts(contactReader)
+check(not neededContacts.artifact_bolt.Alpha and neededContacts.artifact_bolt.Beta
+	and not neededContacts.artifact_alt.Alpha and neededContacts.artifact_alt.Beta,
+	"fulfilled contributions remove only their contact, including accepted alternatives")
 
 local journalOwner = character()
 ix.progression.Register("journalRewardsFixture", {

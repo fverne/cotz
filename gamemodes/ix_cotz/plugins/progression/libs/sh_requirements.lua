@@ -31,10 +31,10 @@ function ix.progression.GetRequirements(character, progressionID)
 	return line.requirements or {}
 end
 
-function ix.progression.GetNeededItems(character)
-	local result = {}
+local function collectNeededItems(character)
+	local result, contacts = {}, {}
 	local known = character:GetData("knownProgressionTopics", {})
-	for progressionID in pairs(ix.progression.definitions) do
+	for progressionID, definition in pairs(ix.progression.definitions) do
 		if known[progressionID] and ix.progression.IsActive(character, progressionID) then
 			local contributed = ix.progression.GetComplexProgressionValue(character, progressionID)
 			for item, amount in pairs(ix.progression.GetRequirements(character, progressionID)) do
@@ -42,13 +42,27 @@ function ix.progression.GetNeededItems(character)
 				if remaining > 0 then
 					for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, item)) do
 						result[choice] = (result[choice] or 0) + remaining
+						contacts[choice] = contacts[choice] or {}
+						contacts[choice][definition.keyNpc] = true
 					end
 				end
 			end
 		end
 	end
 
-	return result
+	return result, contacts
+end
+
+function ix.progression.GetNeededItems(character)
+	local items = collectNeededItems(character)
+
+	return items
+end
+
+function ix.progression.GetNeededItemContacts(character)
+	local _, contacts = collectNeededItems(character)
+
+	return contacts
 end
 
 if SERVER then
