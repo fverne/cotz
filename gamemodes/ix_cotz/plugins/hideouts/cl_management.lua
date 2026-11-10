@@ -44,6 +44,10 @@ net.Receive("cotz/hideouts/manage", function()
 		local id, name = net.ReadString(), net.ReadString()
 		local squad, access = net.ReadBool(), net.ReadString()
 		local manage, canReset = net.ReadBool(), net.ReadBool()
+		local guests = {}
+		for _ = 1, net.ReadUInt(16) do
+			guests[#guests + 1] = {id = net.ReadUInt(32), name = net.ReadString()}
+		end
 		ix.cotzUI.Label(scroll, name, true)
 		if scope == "exit" then
 			button(scroll, "Leave hideout", function()
@@ -52,20 +56,27 @@ net.Receive("cotz/hideouts/manage", function()
 			end)
 		end
 		if manage then
-			for _, option in ipairs({{label = "Invite character", action = 6}, {label = "Revoke invitation", action = 7}}) do
-				button(scroll, option.label, function()
-					local menu = ix.cotzUI.Menu()
-					for _, target in ipairs(player.GetHumans()) do
-						local character = target:GetCharacter()
-						if character and target ~= LocalPlayer() then
-							menu:AddOption(character:GetName(), function()
-								sendManagement(panel, id, option.action, tostring(character:GetID()))
-							end)
-						end
+			button(scroll, "Invite character", function()
+				local menu = ix.cotzUI.Menu()
+				for _, target in ipairs(player.GetHumans()) do
+					local character = target:GetCharacter()
+					if character and target ~= LocalPlayer() then
+						menu:AddOption(character:GetName(), function()
+							sendManagement(panel, id, 6, tostring(character:GetID()))
+						end)
 					end
-					menu:Open()
-				end)
-			end
+				end
+				menu:Open()
+			end)
+			button(scroll, "Revoke invitation", function()
+				local menu = ix.cotzUI.Menu()
+				for _, guest in ipairs(guests) do
+					menu:AddOption(guest.name, function()
+						sendManagement(panel, id, 7, tostring(guest.id))
+					end)
+				end
+				menu:Open()
+			end)
 			if squad then
 				if scope == "squad" or scope == "entrance" then
 					button(scroll, "Place entrance where you are looking", function() sendManagement(panel, id, 1) end)

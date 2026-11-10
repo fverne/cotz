@@ -193,6 +193,7 @@ Only the pilot levels below are purchasable; later levels remain explicitly lock
 Owners use the entrance keypad or exit menu to invite/revoke characters. Each installed container's
 owner menu opens storage, shares with all invited guests, or grants/revokes individual invited characters.
 Private starts with owner-only access; selected guest permissions work while all-guest sharing is off.
+The revoke-invitation menu lists only current invitees, including offline characters by ID when their name is unavailable.
 Room invitations never grant storage or building rights automatically. Revocation closes affected sessions,
 and transfers recheck current invitation and per-container access. Guests cannot change these controls.
 
@@ -458,7 +459,9 @@ character switching/deletion, and revive/respawn handling. Reviving retains the
 instance; a final respawn returns outside. The normal Spawn Saver stores outside
 return positions for hideout occupants and intercepts old interior restores.
 Area membership is audited once per second, including intruders and external
-teleports. Generic world-item persistence excludes hideout floor items.
+teleports. Administrators can enter personal and squad hideouts without an invitation, including through
+the entrance while noclipping; occupancy audits do not eject administrators visiting an interior directly.
+Normal loading, persistence and disabled-room checks still apply. Generic world-item persistence excludes hideout floor items.
 
 AdvDupe integration retains its existing public signatures and historical
 DepawnAdvDupe2Dupe helper. Optional per-paste validation, completion callbacks,
@@ -472,6 +475,7 @@ From the repository root:
 
     python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
     luatex --luaonly tests/fts_hideouts_spec.lua
+    luatex --luaonly tests/hideout_management_spec.lua
 
 This syntax-checks changed GLua and runs real server methods against mocked engine boundaries
 using the system Lua shared library. Feature cases use the installed query builder and real SQLite

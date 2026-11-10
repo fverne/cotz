@@ -129,3 +129,56 @@ Test("exit management resets a missing squad vendor without reaching it", functi
 	assert(PLUGIN:HandleManagementAction(officer, record.id, 2, "", 0))
 	assert(IsValid(instance.vendor))
 end)
+
+Test("administrators enter private personal and squad hideouts without invitations while noclipping", function()
+	local owner, inventory, instance, record = containerHome()
+	local admin = FeatureClient(2)
+	assert(not PLUGIN:CanAccess(admin, record))
+	admin.IsAdmin = function() return true end
+	assert(PLUGIN:CanAccess(admin, record))
+	record.ownerType, record.owner, record.squadID, record.access = "squad", nil, "absent", "squad"
+	assert(PLUGIN:CanAccess(admin, record))
+	record.frozen = true
+	assert(not PLUGIN:CanAccess(admin, record))
+	record.frozen = nil
+	admin.position = PLUGIN.state.entrances.gate.pos
+	admin.GetMoveType = function() return MOVETYPE_NOCLIP end
+	assert(PLUGIN:RequestEntry(admin, record.id))
+	assert(PLUGIN.members[admin] == record.id)
+	PLUGIN:EnforceAccess(instance)
+	assert(PLUGIN.members[admin] == record.id)
+end)
+
+Test("occupancy audits leave visiting administrators in place and still eject uninvited players", function()
+	local owner, inventory, instance, record = containerHome()
+	local admin = FeatureClient(2)
+	local intruder = FeatureClient(3)
+	admin.IsAdmin = function() return true end
+	admin.position, intruder.position = instance.origin, instance.origin
+	admin.GetClass = function() return "player" end
+	local findInBox = ents.FindInBox
+	ents.FindInBox = function() return {admin, intruder} end
+	PLUGIN.nextAudit, instance.nextCheckpoint = 0, math.huge
+	PLUGIN:Think()
+	ents.FindInBox = findInBox
+	assert(admin.position == instance.origin and not PLUGIN.members[admin])
+	assert(not PLUGIN:Contains(intruder:GetPos(), instance.mins, instance.maxs))
+end)
+
+Test("management sends actual invitations and permits revoking an offline invited character", function()
+	local owner, inventory, instance, record = containerHome()
+	local guest = FeatureClient(2)
+	record.guests = {["2"] = true, ["3"] = false, ["4"] = true}
+	local writeUInt, writeString = net.WriteUInt, net.WriteString
+	local ids, names = {}, {}
+	net.WriteUInt = function(value, bits) if bits == 32 then ids[#ids + 1] = value end end
+	net.WriteString = function(value) names[value] = true end
+	owner.position = PLUGIN.state.entrances.gate.pos
+	PLUGIN:ShowManagement(owner, record.id, "entrance")
+	net.WriteUInt, net.WriteString = writeUInt, writeString
+	assert(#ids == 2 and ids[1] == 2 and ids[2] == 4)
+	assert(names["Character 2"] and names["Character #4"])
+	assert(PLUGIN:HandleManagementAction(owner, record.id, 7, "4", 0))
+	assert(record.guests["4"] == nil and record.guests["2"] == true)
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 7, "3", 0))
+end)

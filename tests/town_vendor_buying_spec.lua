@@ -26,6 +26,15 @@ local cook = town.contacts["spicy-lemon"]
 for _, item in ipairs(cook.buyItems) do
 	check(town:CanSellItem(item, cook.name), "Spicy Lemon buys strong alcohol: " .. item)
 end
+local kitchenItems = {}
+for item, definition in pairs(ix.item.list) do
+	if definition.category == "Cookable Meat" or definition.category == "Cooked Meat" then
+		kitchenItems[#kitchenItems + 1] = item
+		check(town:CanSellItem(item, cook.name), "Spicy Lemon buys every meat and meal: " .. item)
+		check(not town:CanBuyItem(fresh, item, cook.name), "Meat buying does not add purchase routes: " .. item)
+	end
+end
+check(#kitchenItems > 0, "Meat and meal definitions are present in the fixture")
 check(not town:CanSellItem("drink_spirit_1", "'Haggler'"), "Haggler does not become a general buyer")
 check(not town:CanSellItem("ak74", cook.name), "Spicy Lemon does not buy unrelated firearms")
 check(not town:CanBuyItem(fresh, "ak74", "'Haggler'"), "Buying firearms does not add new purchase routes")
@@ -48,6 +57,11 @@ for _, contact in ipairs({town.contacts.haggler, cook}) do
 	local catalogue = town.catalogues[contact.name]
 	vendors:ConfigureTownTemplate(contact, catalogue, stock)
 	local items = ix.npctemplates.templates[contact.template].items
+	if contact == cook then
+		for _, item in ipairs(kitchenItems) do
+			check(items[item] and items[item][3] == VENDOR_BUYONLY, "Templates buy meat and meals: " .. item)
+		end
+	end
 	for _, item in ipairs(contact.supplies) do
 		check(items[item][3] == VENDOR_SELLANDBUY and items[item][2] ~= nil,
 			"Ordinary supplies retain sale stock when also bought")
@@ -58,6 +72,12 @@ for _, contact in ipairs({town.contacts.haggler, cook}) do
 	function vendor:GetDisplayName() return contact.name end
 	check(vendors:RefreshTownVendor(vendor, contact, catalogue, stock), "Saved vendors gain buying rows")
 	check(not vendors:RefreshTownVendor(vendor, contact, catalogue, stock), "Buying refresh is idempotent")
+	if contact == cook then
+		for _, item in ipairs(kitchenItems) do
+			check(vendor.items[item] and vendor.items[item][3] == VENDOR_BUYONLY,
+				"Saved vendors gain meat and meal buying rows: " .. item)
+		end
+	end
 	local extra = contact == cook and "drink_spirit_1" or "ak74"
 	check(vendor.items[extra][3] == VENDOR_BUYONLY, "Extra buying goods never become sale stock")
 

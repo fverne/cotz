@@ -119,7 +119,7 @@ ix.command.Add("HideoutTemplateContainer", {
 				local entity = other.containers[slotID]
 				if not IsValid(entity) then
 					entity = PLUGIN:CreateUtility(other, "ix_hideout_storage", definition.pos,
-						"models/props_junk/wood_crate001a.mdl")
+						"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl")
 					entity.ixHideoutSlot = slotID
 					other.containers[slotID] = entity
 				end

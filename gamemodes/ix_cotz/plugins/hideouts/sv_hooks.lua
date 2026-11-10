@@ -609,6 +609,7 @@ local function auditInstanceEntities(self, instance)
 		if
 			entity:IsPlayer()
 			and entity:Alive()
+			and not entity:IsAdmin()
 			and self.members[entity] ~= instance.id
 			and not instance.pending[entity]
 		then

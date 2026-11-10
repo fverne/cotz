@@ -3,6 +3,7 @@ PLUGIN:Register("spicy-lemon", {
 	template = "cooknpc",
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
+	buyCategories = {["Cookable Meat"] = true, ["Cooked Meat"] = true},
 	buyItems = {
 		"drink_moonshine", "drink_wine",
 		"drink_vodka_1", "drink_vodka_2", "drink_vodka_3", "drink_vodka_4", "drink_vodka_5", "drink_vodka_6",
@@ -110,10 +111,6 @@ PLUGIN:Register("spicy-lemon", {
 		progressionPrompt = "What needs doing for the kitchen?",
 		work = "Food requests. Meals and provisions, whatever the actual order asks for. Read it before deciding your favourite dish must be the one I need. I have enough opinions about supper to manage without discovering a delivery was an entirely different meal. Bring it here and keep it clear of the rest of your scavenging.",
 		workPrompt = "About the food request I'm filling.",
-	},
-	disabledItems = {
-		meal_human = true,
-		meat_human = true,
 	},
 	catalogue = {
 		drug_cigarette_2 = {

@@ -131,7 +131,8 @@ remain completed. Commission counts and pending completion values are saved with
 
 Contacts buy their delivery candidates, catalogue goods and ordinary supplies independently of purchase
 unlocks. Extra buying IDs (`buyItems`) and category lookups (`buyCategories`) live in contact definitions:
-Haggler accepts ammunition and weapons, and Spicy Lemon accepts every strong alcohol item.
+Haggler accepts ammunition and weapons, and Spicy Lemon accepts every strong alcohol item, raw meat and
+cooked meal (the `Cookable Meat` and `Cooked Meat` categories).
 These additions do not change progression requirements or courier candidates. Buying-only goods use
 BUYONLY rows; catalogue goods remain BUYONLY in the menu until their seller-specific purchase milestone
 is earned, then become SELLANDBUY. The server enforces both purchase and sale assortments, including
@@ -370,8 +371,9 @@ restore them through ordinary supplies, stock bonuses or generated catalogues. T
 that the exclusions match the comments and that no active catalogue, supply or stock entry restores them.
 Update both the comment and exclusion only when explicitly authorised to restore that suggestion.
 
-The 61 current exclusions include mission/access equipment, human meat and The Original's proposed
-specimen/hide shop. Twelve remaining stock references to excluded equipment have been removed without
+The 59 current exclusions include mission/access equipment and The Original's proposed specimen/hide
+shop. Spicy Lemon's former human meat exclusions are removed so he buys every raw meat and cooked meal.
+Twelve remaining stock references to excluded equipment have been removed without
 replacement rewards. Accepted jobs, progression IDs and TODO plans are preserved.
 Template assembly and saved-vendor refresh remove excluded rows, and purchase checks also reject stale
 rows. Personal stock history and owned items are retained; no character data reset is performed.

@@ -20,7 +20,10 @@ PLUGIN.personalContainerRecipes = {
 	general = {
 		name = "General crate", filter = "general", price = 600, item = "value_container_smallitems",
 		sizes = {{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}},
-		models = {"models/props_junk/wood_crate001a.mdl", "models/props_junk/wood_crate002a.mdl"},
+		models = {
+			"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+			"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+		},
 	},
 	ammo = {
 		name = "Ammunition container", filter = "ammo", price = 900, item = "value_container_ammo",

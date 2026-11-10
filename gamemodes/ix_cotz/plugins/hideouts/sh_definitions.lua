@@ -22,9 +22,18 @@ PLUGIN.containerRecipes = {
 	general = {
 		name = "General storage", filter = "general",
 		tiers = {
-			{item = "value_container_smallitems", width = 3, height = 3},
-			{item = "value_container_junkbox", width = 6, height = 6},
-			{item = "value_container_parls", width = 10, height = 8},
+			{
+				item = "value_container_smallitems", width = 3, height = 3,
+				model = "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+			},
+			{
+				item = "value_container_junkbox", width = 6, height = 6,
+				model = "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+			},
+			{
+				item = "value_container_parls", width = 10, height = 8,
+				model = "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+			},
 		},
 	},
 	ammo = {
