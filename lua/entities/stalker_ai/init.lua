@@ -7,6 +7,7 @@ AddCSLuaFile( "shared.lua" )
 include( "STALKERNPCBaseVars.lua" )
 include( "shared.lua" )
 include("sv_performance.lua")
+include("sv_summoning.lua")
 include( "schedules.lua" )
 include( "tasks.lua" )
 

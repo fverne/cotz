@@ -43,11 +43,12 @@ function PLUGIN:GetGroundedSpawnLocation(position, onNodegraph)
 	return grounded
 end
 
-function PLUGIN:GetSpawnLocation(position)
+function PLUGIN:GetSpawnLocation(position, radius, sweepFilter)
+	radius = radius or self.spawnradius
 	local nodes = self:GetSpawnNodes()
 	if nodes then
 		local candidates = {}
-		local radiusSquared = self.spawnradius * self.spawnradius
+		local radiusSquared = radius * radius
 		for _, node in ipairs(nodes) do
 			if node:DistToSqr(position) <= radiusSquared and math.abs(node.z - position.z) <= NODE_HEIGHT_RANGE then
 				candidates[#candidates + 1] = node
@@ -65,8 +66,8 @@ function PLUGIN:GetSpawnLocation(position)
 
 	for _ = 1, MAX_SPAWN_ATTEMPTS do
 		local candidate = position + Vector(
-			math.random(-self.spawnradius, self.spawnradius),
-			math.random(-self.spawnradius, self.spawnradius),
+			math.random(-radius, radius),
+			math.random(-radius, radius),
 			0
 		)
 		local trace = util.TraceHull({
@@ -75,6 +76,8 @@ function PLUGIN:GetSpawnLocation(position)
 			mins = NPC_MINS,
 			maxs = NPC_MAXS,
 			mask = MASK_SOLID,
+			-- A summoner occupies the sweep's origin; final floor and clearance checks still include it.
+			filter = sweepFilter,
 		})
 		if not trace.Hit and not trace.StartSolid and not trace.AllSolid then
 			local grounded = self:GetGroundedSpawnLocation(candidate)

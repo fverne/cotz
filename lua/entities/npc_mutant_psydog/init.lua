@@ -47,6 +47,14 @@ ENT.NextSpawn = 0
 ENT.CanSpawn = false
 
 ENT.PsiAttackCancel = 0
+ENT.summonSpawnRadius = 256
+
+local CLONE_OFFSETS = {
+	Vector(100, 40, 100),
+	Vector(100, -40, 100),
+	Vector(-100, -40, 100),
+	Vector(-100, 40, 100),
+}
 
 ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1200
@@ -107,36 +115,14 @@ function ENT:STALKERNPCThink()
 	-- 	self:SetMovementActivity(self.injuredact)
 	-- end
 
-	if (self.PsiAttackCancel < CurTime() and self.CanSpawn) then
+	if self.PsiAttackCancel < CurTime() and self.CanSpawn then
 		self:STALKERNPCClearAnimation()
 
-		if (!IsValid(self.Clone1)) then
-			self.Clone1 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone1.cotzCombatPack = self.cotzCombatPack
-			self.Clone1:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40 + self:GetUp()*100)
-			self.Clone1:SetAngles(self:GetAngles())
-			self.Clone1:Spawn()
-		end
-		if (!IsValid(self.Clone2)) then
-			self.Clone2 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone2.cotzCombatPack = self.cotzCombatPack
-			self.Clone2:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40 + self:GetUp()*100)
-			self.Clone2:SetAngles(self:GetAngles())
-			self.Clone2:Spawn()
-		end
-		if (!IsValid(self.Clone3)) then
-			self.Clone3 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone3.cotzCombatPack = self.cotzCombatPack
-			self.Clone3:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40 + self:GetUp()*100)
-			self.Clone3:SetAngles(self:GetAngles())
-			self.Clone3:Spawn()
-		end
-		if (!IsValid(self.Clone4)) then
-			self.Clone4 = ents.Create("npc_mutant_psydog_phantom")
-			self.Clone4.cotzCombatPack = self.cotzCombatPack
-			self.Clone4:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40 + self:GetUp()*100)
-			self.Clone4:SetAngles(self:GetAngles())
-			self.Clone4:Spawn()
+		for index, offset in ipairs(CLONE_OFFSETS) do
+			local field = "Clone" .. index
+			if not IsValid(self[field]) then
+				self[field] = self:STALKERNPCSpawnSummon("npc_mutant_psydog_phantom", offset)
+			end
 		end
 		self.CanSpawn = false
 	end

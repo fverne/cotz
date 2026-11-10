@@ -59,10 +59,23 @@ new blocker cannot occupy the same placement unnoticed. Population limits, playe
 ownership remain in effect. Existing event points and saves need no migration. Advanced event dupes,
 scripted advanced-event spawns and research-defence placement retain their own behavior.
 
+Psydog phantoms and controller zombies use the same placement service through the NPC base's
+server-only `sv_summoning.lua`. Each owner declares a 256-unit `summonSpawnRadius`; node selection
+and ordinary floor sampling center on the owner. Only the outward fallback sweep ignores the owner,
+so the sweep can leave its occupied origin while final floor/clearance checks still reject overlaps
+with it and earlier summons. Exhausted graph candidates still fall back to ordinary ground positions.
+Summons register immediately against the hard population caps and retain their owner's pack,
+including research-pack isolation. They remain immediate ability spawns with their existing slot
+references, replacement rules, cooldowns and cleanup, rather than queued routine encounters with
+player-exclusion checks. Outside COTZ, the NPC base retains the original summon offsets.
+
 Run `luatex --luaonly tests/event_spawnplacement_spec.lua`, the population suite and the tag suite above.
+For summoning, also run `luatex --luaonly tests/mutant_summoning_spec.lua` and the combat suite below.
 The placement spec also accepts optional `.ain` paths to check installed graphs. In multiplayer, test
 events near crates and rooftops, connected static-prop walkways, indoor ceilings, slopes, blocked node
 positions and points without nearby nodes. Check fallback spawning and queued group separation too.
+Check psydog and controller summons near props, in narrow spaces, without nearby nodes and at population
+caps; kill/remove their owners and confirm summon cleanup and ordinary replacement timing.
 Saved links improve placement but cannot guarantee a live route through dynamic doors, blocked links
 or disconnected regions. These tests do not replace in-game movement checks.
 

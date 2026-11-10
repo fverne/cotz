@@ -160,6 +160,27 @@ check(not PLUGIN:GetSpawnLocation(Vector(0, 0, 5)) and lineCalls == 25,
 	"missing-graph fallback has bounded attempts and never blindly accepts a prop-supported center")
 resetFloor()
 check(PLUGIN:GetSpawnLocation(Vector(0, 0, 5)), "missing-graph fallback still permits validated world floors")
+local summoner = {}
+local ordinaryHullTrace = util.TraceHull
+local sweepCalls, clearanceCalls = 0, 0
+PLUGIN.GetSpawnNodes = function() return {Vector(300, 0, 8)} end
+util.TraceHull = function(data)
+	if data.start:DistToSqr(data.endpos) > 0 then
+		sweepCalls = sweepCalls + 1
+		check(data.filter == summoner and data.endpos.x == 128 and data.endpos.y == 128,
+			"summons use their own radius and ignore the owner only during the outward sweep")
+
+		return {Hit = data.filter ~= summoner}
+	end
+	clearanceCalls = clearanceCalls + 1
+	check(data.filter == nil, "summon clearance still collides with the owner and existing summons")
+
+	return {Hit = false}
+end
+resetFloor()
+check(PLUGIN:GetSpawnLocation(Vector(0, 0, 5), 128, summoner) and sweepCalls == 1 and clearanceCalls == 1,
+	"summoning falls back from nodes outside its radius without blocking on the owner's hull at the origin")
+util.TraceHull = ordinaryHullTrace
 math.random = originalRandom
 
 -- Exercise the actual encounter entry point and delayed queue, including a blocker appearing after selection.
