@@ -26,7 +26,7 @@ function ITEM:PopulateTooltipIndividual(tooltip)
 end
 
 ITEM.blackScreenAction = function(item, player)
-	player:AddBuff("debuff_radiation", 10, { amount = 1.15 })
+	player:AddBuff("buff_radiationremoval", 10, { amount = 1.15 })
 end
 
 ITEM:DecideFunction()
