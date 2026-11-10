@@ -18,6 +18,8 @@ local mapName, engineCount = "test", 0
 game = {GetMap = function() return mapName end}
 ai = {GetNodeCount = function() return engineCount end}
 local warnings, opens, closes, files = {}, 0, 0, {}
+local notices, originalPrint = {}, print
+print = function(message) notices[#notices + 1] = message end
 ErrorNoHalt = function(message) warnings[#warnings + 1] = message end
 local function binaryFile(data)
 	local cursor = 1
@@ -62,6 +64,7 @@ end
 PLUGIN = {spawnradius = 750, saferadius = 1500}
 local function loadGraph(data, count, bspRevision)
 	files, warnings, opens, closes = {}, {}, 0, 0
+	notices = {}
 	engineCount = count or 0
 	files["maps/graphs/test.ain"] = data
 	if bspRevision then files["maps/test.bsp"] = string.rep("\0", 1032) .. string.pack("<i4", bspRevision) end
@@ -88,10 +91,20 @@ check(not loadGraph(string.pack("<i4i4i4", 37, 1, 32769)), "node count has a fix
 check(not loadGraph(graph:sub(1, 50), 6), "truncated node records are rejected")
 check(not loadGraph(graph:sub(1, -2), 6), "truncated link/lookup data is rejected")
 check(not loadGraph(graph, 5), "graph count must match the engine")
-check(not loadGraph(graph, 6, 2) and closes == 2, "stale BSP revision is rejected with both files closed")
+local customNodes = loadGraph(graph, 6, 2)
+check(customNodes and #customNodes == 2 and closes == 2,
+	"manually authored graph remains usable despite a different BSP revision; both files close")
+check(#warnings == 0 and #notices == 1 and notices[1]:find("using validated nodegraph positions", 1, true),
+	"revision mismatch produces an ordinary console notice instead of a Lua error or floor fallback")
+before = opens
+check(PLUGIN:GetSpawnNodes() == customNodes and opens == before and #notices == 1,
+	"accepted custom graph is cached and its revision notice is printed only once")
+check(not loadGraph(makeGraph({{}, {}}, {{0, 2}}), 2, 2) and #notices == 0 and #warnings == 1,
+	"revision tolerance still rejects invalid links without announcing successful graph use")
 check(not loadGraph(makeGraph({{}, {}}, {{0, 2}}), 2), "invalid link endpoints are rejected")
 check(not loadGraph(makeGraph({{x = math.huge}, {}}, {{0, 1}}), 2), "non-finite positions are rejected")
 check(#loadGraph(makeGraph({{}, {}}, {}), 2) == 0, "valid graph without connections yields no node candidates")
+print = originalPrint
 
 local floor, blocked, inWorld, hullCalls, lineCalls = {}, false, true, 0, 0
 local function resetFloor(changes)

@@ -18,6 +18,7 @@ local function readSpawnNodes(graph)
 	if size < linksOffset + 4 then return nil, "truncated node records" end
 	if ai.GetNodeCount and ai.GetNodeCount() ~= count then return nil, "node count differs from the engine" end
 
+	local revisionNotice
 	local bsp = file.Open("maps/" .. game.GetMap() .. ".bsp", "rb", "GAME")
 	if bsp then
 		local mapRevision
@@ -26,7 +27,11 @@ local function readSpawnNodes(graph)
 			mapRevision = bsp:ReadLong()
 		end
 		bsp:Close()
-		if mapRevision ~= revision then return nil, "nodegraph map revision differs from the BSP" end
+		if not mapRevision then return nil, "truncated BSP header" end
+		-- Manually authored graphs can work with a different BSP revision; validate their contents below.
+		if mapRevision ~= revision then
+			revisionNotice = string.format("nodegraph revision %d differs from BSP revision %d", revision, mapRevision)
+		end
 	end
 
 	-- Layout follows Valve's version 37 SaveNetworkGraph (ai_networkmanager.cpp), not a Lua navmesh.
@@ -73,7 +78,7 @@ local function readSpawnNodes(graph)
 		if node and node.connected then positions[#positions + 1] = node.position end
 	end
 
-	return positions
+	return positions, revisionNotice
 end
 
 function PLUGIN:GetSpawnNodes()
@@ -88,6 +93,8 @@ function PLUGIN:GetSpawnNodes()
 	end
 	if not cachedNodes then
 		ErrorNoHalt("[COTZ eventcontroller] " .. reason .. "; using validated floor sampling.\n")
+	elseif reason then
+		print("[COTZ eventcontroller] " .. reason .. "; using validated nodegraph positions.")
 	end
 
 	return cachedNodes

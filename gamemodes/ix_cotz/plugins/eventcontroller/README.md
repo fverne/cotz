@@ -34,9 +34,11 @@ Routine encounters prefer nearby ground nodes from `maps/graphs/<map>.ain`. The 
 caches the graph once per map/plugin load; it never writes or rebuilds it. `sv_spawnnodes.lua` reads
 the version 37 format described by Valve's
 [network graph serialization](https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/ai_networkmanager.cpp).
-It checks record bounds, link endpoints, finite coordinates, the engine's node count where available,
-and the BSP revision when the BSP can be opened. Unsupported, missing or invalid graphs produce one
-console warning and use ordinary validated floor sampling. Reload the map or plugin after replacing a graph.
+It checks record bounds, link endpoints, finite coordinates and the engine's node count where available.
+A different BSP revision produces one ordinary console notice, but the graph remains in use after
+validation; manually authored graphs need not share the BSP's revision number. Unsupported, missing
+or invalid graphs produce one console warning and use ordinary validated floor sampling. Reload the
+map or plugin after replacing a graph.
 
 Eligible nodes must have a ground-movement link to another ground node for `HULL_HUMAN`, the navigation
 hull used by the current encounter actors. Hull-specific vertical offsets place candidates at the node's
