@@ -95,7 +95,15 @@ PLUGIN.categoryDefs =
 	["stash_map_garbage"] = {
 		appearTime = 1200,
 		disappearTime = 3600,
-		allowedStashTypes = {"empty"},
+		allowedStashTypes = {
+			"normal_cache_assorted_garbage_1",
+			"normal_cache_assorted_garbage_2",
+			"normal_cache_assorted_garbage_3",
+			"normal_cache_assorted_garbage_4",
+			"normal_cache_assorted_garbage_5",
+			"normal_cache_assorted_garbage_6",
+			"normal_cache_assorted_garbage_7",
+		},
 	},
 
 	["stash_map1"] = {

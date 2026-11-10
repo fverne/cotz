@@ -94,7 +94,12 @@ item pool is not a cyclic category. Check pool IDs in
 [`randomitem/libs/sh_randomitems.lua`](../gamemodes/ix_cotz/plugins/randomitem/libs/sh_randomitems.lua)
 and cyclic categories (including `stash_map1`, `stash_map2`, and `stash_map3`) in
 [`cycliccontainer/sh_definitions.lua`](../gamemodes/ix_cotz/plugins/cycliccontainer/sh_definitions.lua).
-`stash_map_garbage` is an empty placeholder category: it cycles normally but refills with no loot.
+`stash_map_garbage` uses seven equally likely regular-stash loadouts: ammunition,
+consumables, regular Garbage salvage, or a single rare Garbage salvage selection.
+It keeps its 1,200-second appearance and 3,600-second absence settings. Existing
+saved containers use the updated loot on their next appearance after deployment;
+no FTS rerun or persistence reset is needed. Verify its definitions with
+`luatex --luaonly tests/cyclic_garbage_loot_spec.lua` and check a full cycle in multiplayer.
 Choose rewards for the map's intended progression level rather than copying all
 of another map's loot.
 
