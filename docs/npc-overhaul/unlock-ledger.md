@@ -4,7 +4,7 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**636 active steps; 636 have functional unlocks; 0 have TODO-only unlock plans;
+**638 active steps; 638 have functional unlocks; 0 have TODO-only unlock plans;
 19 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
@@ -30,14 +30,14 @@ Validation passed.
 | boss | 13 | 13 | 0 | 0 |
 | brass | 68 | 68 | 0 | 0 |
 | carbon | 19 | 19 | 0 | 0 |
-| cleaner | 12 | 12 | 0 | 0 |
+| cleaner | 13 | 13 | 0 | 0 |
 | egghead | 5 | 5 | 0 | 0 |
 | gasket | 68 | 68 | 0 | 0 |
 | haggler | 35 | 35 | 0 | 0 |
 | intern | 5 | 5 | 0 | 0 |
 | jitters | 23 | 23 | 0 | 0 |
 | latch | 20 | 20 | 0 | 0 |
-| ledger | 12 | 12 | 0 | 0 |
+| ledger | 13 | 13 | 0 | 0 |
 | mute | 5 | 5 | 0 | 0 |
 | old-timer | 12 | 12 | 0 | 4 |
 | quartermaster | 23 | 23 | 0 | 0 |
@@ -237,6 +237,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | carbon | v3/ap-ammo/50aeap | Barter: 3 boxes 50ae for one box 50aeap | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | carbon | v3/ap-ammo/57x28ap | Barter: 3 boxes 57x28 for one box 57x28ap | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | carbon | v3/ap-ammo/145x114ap | Barter: 3 boxes 145x114 for one box 145x114ap | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| cleaner | v3/hideout/access | Initial hideout access at Cleaner | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | cleaner | v3/hideout/01 | Hideout improvements 1 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | cleaner | v3/hideout/02 | Hideout improvements 2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | cleaner | v3/hideout/03 | Hideout improvements 3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
@@ -405,6 +406,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | latch | v3/masks-headwear/mask_m40 | Purchase: mask_m40 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m50/stock | Stock: mask_m40 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m50 | Purchase: mask_m50 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| ledger | v3/hideout/access | Initial hideout access at Ledger | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | ledger | v3/hideout/01 | Hideout improvements 1 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | ledger | v3/hideout/02 | Hideout improvements 2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | ledger | v3/hideout/03 | Hideout improvements 3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |

@@ -7,6 +7,16 @@ ix.progression.itemPools = {
 		evidence = "Crowbar or bat; existing melee items obtainable in Marsh.",
 		candidates = {{item = "crowbar"}},
 	},
+	hideout_access_sledgehammer = {
+		name = "Cleaner hideout access tool",
+		tier = "common",
+		candidates = {{item = "sledgehammer"}},
+	},
+	hideout_access_fubar = {
+		name = "Ledger hideout access tool",
+		tier = "common",
+		candidates = {{item = "fubar"}},
+	},
 	fasteners = {
 		name = "Common fasteners",
 		tier = "common",

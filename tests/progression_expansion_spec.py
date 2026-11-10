@@ -21,7 +21,7 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 636)
+        self.assertEqual(len(steps), 638)
         self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 223)
         output, count = expansion.outputs()
         self.assertEqual(count, 223)
@@ -75,14 +75,21 @@ class ProgressionExpansionTests(unittest.TestCase):
         self.assertGreater(protected, 100)
 
     def test_each_candidate_has_an_eligible_real_regional_source(self):
-        for contact in self.data["contacts"].values():
+        for slug, contact in self.data["contacts"].items():
             for step in contact["progression"]:
                 phase = (step["branchIndex"] - 1) / max(1, step["branchLength"] - 1)
                 maximum = 0 if step["branchIndex"] == 1 else 2 if phase >= 0.75 else 1
                 nonlocal_slots, used = 0, set()
-                if step.get("requirementAlternatives"):
-                    self.assertEqual(step["id"], "v3/hideout/access")
-                    self.assertEqual(step["requirementAlternatives"], {"bat": "crowbar"})
+                if step["id"] == "v3/hideout/access":
+                    tool = {"ballast": "crowbar", "cleaner": "sledgehammer", "ledger": "fubar"}[slug]
+                    self.assertEqual(len(step["requirements"]), 1)
+                    slot = step["requirements"][0]
+                    self.assertEqual(slot["quantity"], 1)
+                    self.assertEqual(self.data["pools"][slot["pool"]]["candidates"], [{"item": tool}])
+                    if slug == "ballast":
+                        self.assertEqual(step["requirementAlternatives"], {"bat": "crowbar"})
+                    else:
+                        self.assertNotIn("requirementAlternatives", step)
                     continue
                 for slot in step["requirements"]:
                     ids = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
@@ -142,7 +149,7 @@ class ProgressionExpansionTests(unittest.TestCase):
             support = {c["item"] for name in identity["support"]
                        for c in self.data["pools"][name]["candidates"]}
             for step in contact["progression"]:
-                if step.get("requirementAlternatives") or slug in expansion.SCIENCE and not step.get("intermissionFor"):
+                if step["id"] == "v3/hideout/access" or slug in expansion.SCIENCE and not step.get("intermissionFor"):
                     continue
                 core_units, total_units = 0, 0
                 for index, slot in enumerate(step["requirements"]):

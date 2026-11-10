@@ -147,9 +147,10 @@ entrance/template combination needs a new location ID. The command can rename an
 It does not place a shell, entrance or NPC. No preset or first-time setup is run automatically.
 
 At that contact, choose **Barter → Can I arrange a hideout or buy improvements?** Players can unlock
-one free room at each configured location. New Swamps claims require Ballast's `v3/hideout/access`
-milestone: hand in one unequipped crowbar or bat. The shared contact definition's `claimStep` accepts a
-numeric improvement level or a named hideout milestone. Garbage and Waystation claims remain available.
+one free room at each configured location after the local `v3/hideout/access` milestone: hand in one
+unequipped crowbar or bat to Ballast, one sledgehammer to Cleaner, or one FUBar to Ledger.
+Each access hand-in consumes exactly one tool, independent of the contact's delivery difficulty.
+The shared contact definition's `claimStep` accepts a numeric improvement level or a named hideout milestone.
 Existing rooms retain entry and ownership. Existing owned rooms also count toward
 the location claim. `/HideoutGrant` remains administrator-only and can create additional rooms using the
 same entrance/template. `hideoutPersonalLimit` remains an optional map-wide cap (default 0, unlimited).
@@ -199,8 +200,8 @@ and transfers recheck current invitation and per-container access. Guests cannot
 
 ### Personal progression and furnishings
 
-Each local contact has twelve `v3/hideout/01`–`12` hand-in milestones. Ballast's additional
-`v3/hideout/access` precedes his unfinished improvements and new location claims. `personalUnlockSteps` is the
+Each local contact has twelve `v3/hideout/01`–`12` hand-in milestones. Each contact's additional
+`v3/hideout/access` precedes their unfinished improvements and new location claims. `personalUnlockSteps` is the
 editable gate table. The local contact is Ballast in Swamps, Cleaner in Garbage and Ledger in Waystation.
 
 | Local completed step | Purchases enabled for each owned room on this map |

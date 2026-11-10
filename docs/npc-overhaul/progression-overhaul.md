@@ -1,6 +1,6 @@
 # Town progression overhaul, 9 November 2026
 
-This replaces the former 600-milestone town graph with 636 hand-in milestones across 50
+This replaces the former 600-milestone town graph with 638 hand-in milestones across 52
 branches, including 223 stock-preparation intermissions. The authored `upgradeChains` in
 `sh_equipment.lua` now include Cutlery before Cleaning kit; all other equipment and `regularAmmoChain` ordering is retained. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
@@ -20,7 +20,7 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 | Spicy Lemon | Weak drugs/nicotine; beer; energy drinks | Corn, beans, chili beans; cheapest vodka, cigarettes and energy drink |
 | Technut | Ordinary, Clear Sky and military suits; painting | Anorak, cloth mask |
 | Brass | Regular ammunition; HP exchanges; TR/DT/MG shotgun loads | Basic gun ammunition, buckshot and slugs |
-| Cleaner | Garbage hideout improvements | Buys all at 0.3 |
+| Cleaner | Initial hideout access, then Garbage hideout improvements | Buys all at 0.3 |
 | Latch | Gasmasks and middle-tier headwear | Cloth mask |
 | Spool | Steel/riot headwear; strong drugs | Russian tank helmet |
 | Spoor | Slow-firing rifles | Sako .22 and Winchester .22 |
@@ -28,7 +28,7 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 | Wake | Backpacks; carried weight; inventory rows | Basic bandages and medkits |
 | Boss | Higher-tier helmets | None |
 | Carbon | AP exchanges | None |
-| Ledger | Waystation hideout improvements | Buys all at 0.3 |
+| Ledger | Initial hideout access, then Waystation hideout improvements | Buys all at 0.3 |
 | Quartermaster | NATO rifles | US MRE, canned water, basic antirad/bandages/medkits |
 | Smartass | NATO CQB/shotguns; bunker then laboratory access cards | None |
 | Suture | Suit attachments; suit variant conversion unlocks | Conversion menu |
@@ -45,7 +45,8 @@ wine and spirits; the cheapest vodka also remains a Spicy Lemon starter.
 
 ## Unlocks, exchanges and retained assets
 
-Except for Ballast's initial one-crowbar-or-bat hand-in, town requirements contain only valuables and artifacts, validated through item inheritance and actual
+Except for the three initial hideout tool hand-ins, town requirements contain only valuables and artifacts,
+validated through item inheritance and actual
 checked-in world/box/cycling acquisition sources. Currency and bound quest assets are excluded.
 Scientists retain artifact deliveries at equipment milestones; their preparation stages request ordinary
 research and technical valuables. Garbage introductions use locally available members of each
@@ -147,10 +148,11 @@ Quartermaster's two gunpowder-for-ammunition-kit barters are removed from the ma
 currency-for-ammunition barters remain in his barter submenu. Suture's suit conversion milestones are
 labelled with the suit name followed by "variants", including "Anorak variants".
 Ballast/Cleaner/Ledger each have twelve local hideout improvement stages, enabling the existing twelve storage tiers.
-Ballast additionally requires `v3/hideout/access` before new Swamps room claims and unfinished improvements.
-It consumes exactly one unequipped crowbar or bat, at the player's choice. Both choices credit one shared
-requirement; repeated hand-ins cannot consume or pay again. Existing owned rooms and paid upgrades remain saved.
-Garbage and Waystation room claims retain their existing availability.
+Each contact additionally requires `v3/hideout/access` before new local room claims and unfinished improvements.
+Ballast consumes one unequipped crowbar or bat, at the player's choice; Cleaner consumes one unequipped
+sledgehammer and Ledger consumes one unequipped FUBar. Access requirements are not multiplied by contact
+difficulty. Ballast's two choices credit one shared requirement; repeated hand-ins cannot consume or pay again.
+Existing owned rooms and paid upgrades remain saved and usable without completing the new access step.
 The two +2 floor allowances require stages 2 and 4; furnishings require stage 3. Purchases still cost
 their configured roubles/items. Saved paid levels, receipts, inventory dimensions and contents remain.
 
@@ -195,14 +197,14 @@ upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or 
 ## Authoring and regression checks
 
 Each active step owns its authored `briefing` and `completion` in the contact definition, including
-stock intermissions. All 636 pairs are individually written against the contact's profile and current
+stock intermissions. All 638 pairs are individually written against the contact's profile and current
 benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
 conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
 Keep exact assigned items and quantities in the generated objective display rather than hard-coding
 them into speech, since valid saved requests can differ from newly rolled requests.
 
 The expansion tool retains existing stock-step text by stable ID when rebuilding requirements. New
-intermissions start with the following unlock's text and need their own replies. Verify all 636 pairs
+intermissions start with the following unlock's text and need their own replies. Verify all 638 pairs
 and their compiled fields with `luatex --luaonly tests/progression_dialogue_spec.lua`; the Python
 expansion suite also checks that regeneration preserves distinct stock conversations. Editorial review
 of voice, continuity and promises is still required; uniqueness checks cannot assess writing quality.

@@ -69,11 +69,29 @@ PLUGIN:Register("ledger", {
 
 	progression = {
 		{
+			id = "v3/hideout/access",
+			branch = "hideout-access",
+			name = "Initial hideout access",
+			kind = "delivery",
+			requires = {},
+			briefing = "If you're looking for a room at Waystation, bring me one FUBar. Keep it unequipped for the hand-in. Once it's received, you can claim a room at the available locations here. We can discuss improvements afterwards; I'd like you to have somewhere to put your things first.",
+			completion = "Thank you. The FUBar is received, and you can claim a room at the available Waystation locations now. Have a look before you settle on one; there's no need to choose while you're standing at my desk.",
+			requirements = {
+				{pool = "hideout_access_fubar", quantity = 1},
+			},
+			services = {
+				{id = "ledgerHideoutAccess", name = "Initial hideout access at Ledger"},
+			},
+			branchIndex = 1,
+			branchLength = 1,
+			acquisitionMaps = {"rp_waystation"},
+		},
+		{
 			id = "v3/hideout/01",
 			branch = "hideout",
 			name = "Hideout improvements 1",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/hideout/access"},
 			briefing = "If you'd like more storage options in your Waystation rooms, this delivery opens the first paid container installations. The initial general crate in a new room remains included. I prefer putting that distinction on the page before we find ourselves politely agreeing to different things.",
 			completion = "The first container purchases are available. Thank you; the supply order is complete.",
 			requirements = {

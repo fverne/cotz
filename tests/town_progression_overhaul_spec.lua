@@ -27,20 +27,24 @@ for slug, contact in pairs(ix.townNPCs.contacts) do
 		check(step.kind == "delivery" and #step.requirements > 0, "all finite unlocks use themed hand-ins")
 		check(not step.discounts and not step.benefits, "removed town credits and discounts cannot return")
 		local id = ix.townNPCs:StepID(slug, step.id)
+		local hideoutEntry = step.id == "v3/hideout/01"
+			and (slug == "ballast" or slug == "cleaner" or slug == "ledger")
 		if not branches[step.branch] then
 			local linked = slug == "jitters" or slug == "atlas" or slug == "wake"
-				or slug == "ballast" and step.id == "v3/hideout/01"
+				or hideoutEntry
 			check(#step.requires == 0 or linked, "only explicitly linked branches have an entry prerequisite")
 			branches[step.branch] = true
 		end
 		for _, required in ipairs(step.requires) do
-			local linked = slug == "jitters" or slug == "atlas" or slug == "wake" or slug == "ballast"
+			local linked = slug == "jitters" or slug == "atlas" or slug == "wake" or hideoutEntry
 			check(ix.townNPCs.steps[ix.townNPCs:StepID(slug, required)].branch == step.branch or linked,
 				"cross-branch prerequisites belong to the explicitly linked contacts")
 		end
 		for index, slot in ipairs(step.requirements) do
+			local quantity = step.id == "v3/hideout/access" and 1
+				or math.ceil(slot.quantity * contact.difficultyMultiplier)
 			check(ix.progression.definitions[id].requirementSlots[index].quantity
-				== math.ceil(slot.quantity * contact.difficultyMultiplier), "effort is scaled exactly once")
+				== quantity, "delivery effort scales once while initial access takes exactly one tool")
 		end
 	end
 	for _, item in ipairs(contact.supplies) do

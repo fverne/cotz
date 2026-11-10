@@ -67,6 +67,48 @@ for _, choice in ipairs({"crowbar", "bat"}) do
 		"both alternatives share the same saved contribution")
 end
 
+for contactID, tool in pairs({cleaner = "sledgehammer", ledger = "fubar"}) do
+	local contact = ix.townNPCs.contacts[contactID]
+	context.fixture.SetMap(contact.map)
+	local identifier = id(contactID, "hideout/access")
+	local character = context.fixture.character()
+	local item = {name = tool}
+	function item:GetData(key, default) return self[key] or default end
+	function item:Remove() self.removed = true end
+	character.client.Notify = function() end
+	character.inventory = {
+		HasItem = function(_, itemID) return itemID == tool and not item.removed and item end,
+	}
+	local contactTarget = {
+		GetClass = target.GetClass,
+		GetDisplayName = function() return contact.name end,
+		GetPos = target.GetPos,
+		CanAccess = target.CanAccess,
+	}
+	check(ix.progression.IsActive(character, identifier), "local initial access starts available")
+	check(not ix.progression.IsActive(character, id(contactID, "hideout/01")),
+		"initial access gates unfinished local improvements")
+	ix.progression.AssignActiveRequirements(character)
+	check(ix.progression.GetRequirements(character, identifier)[tool] == 1,
+		"initial access requires exactly one tool despite the contact difficulty multiplier")
+	local options = ix.progression.GetDeliveryOptions(character, identifier)
+	check(#options == 1 and options[1].dyndata.itemid == tool, "the required tool has a hand-in action")
+	item.equip = true
+	check(not ix.progression.TurnIn(character.client, contactTarget, identifier, tool),
+		"equipped access tools cannot be consumed")
+	item.equip = nil
+	check(not ix.progression.TurnIn(character.client, contactTarget, identifier, "crowbar"),
+		"other tools cannot substitute for the local requirement")
+	check(not ix.progression.TurnIn(character.client, target, identifier, tool),
+		"access tools must be delivered to the owning contact")
+	check(ix.progression.TurnIn(character.client, contactTarget, identifier, tool), "the local tool completes access")
+	check(item.removed and ix.progression.IsCompleted(character, identifier), "one local access tool is consumed")
+	check(ix.progression.IsActive(character, id(contactID, "hideout/01")), "access opens local improvements")
+	check(not ix.progression.TurnIn(character.client, contactTarget, identifier, tool),
+		"duplicate local access requests are rejected")
+end
+context.fixture.SetMap("rp_marsh_cs")
+
 PLUGIN = ix.townNPCs
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sh_networkservices.lua")
 local character = context.fixture.character()
@@ -109,6 +151,20 @@ complete(fresh, accessID)
 check(PLUGIN:GetPersonalUnlock(fresh, "claim", 1), "completing access allows room claims")
 complete(fresh, id("ballast", "hideout/01"))
 check(PLUGIN:GetPersonalUnlock(fresh, "ammo", 1), "existing improvement IDs keep their storage gates")
+local originalGetMap = game.GetMap
+for _, contactID in ipairs({"ballast", "cleaner", "ledger"}) do
+	local contact = ix.townNPCs.contacts[contactID]
+	game.GetMap = function() return contact.map end
+	local character = context.fixture.character()
+	local allowed, reason = PLUGIN:GetPersonalUnlock(character, "claim", 1)
+	check(not allowed and reason:find(contact.name, 1, true), "new claims name the local access contact")
+	complete(character, id(contactID, "hideout/01"))
+	check(PLUGIN:GetPersonalUnlock(character, "ammo", 1), "saved improvements remain usable before access")
+	check(not PLUGIN:GetPersonalUnlock(character, "claim", 1), "saved improvements do not bypass new claims")
+	complete(character, id(contactID, "hideout/access"))
+	check(PLUGIN:GetPersonalUnlock(character, "claim", 1), "local access enables new room claims")
+end
+game.GetMap = originalGetMap
 PLUGIN = town
 
 CLIENT, SERVER = true, false

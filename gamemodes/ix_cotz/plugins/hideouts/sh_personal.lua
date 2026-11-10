@@ -2,8 +2,8 @@ local PLUGIN = PLUGIN
 
 PLUGIN.personalContacts = {
 	rp_marsh_cs = {name = "'Ballast'", id = "ballast", prefix = "BA", claimStep = "access"},
-	rp_garbage_cotz = {name = "'Cleaner'", id = "cleaner", prefix = "CL"},
-	rp_waystation = {name = "'Ledger'", id = "ledger", prefix = "LE"},
+	rp_garbage_cotz = {name = "'Cleaner'", id = "cleaner", prefix = "CL", claimStep = "access"},
+	rp_waystation = {name = "'Ledger'", id = "ledger", prefix = "LE", claimStep = "access"},
 }
 
 PLUGIN.personalUnlockSteps = {
@@ -74,7 +74,7 @@ function PLUGIN:GetPersonalUnlock(character, feature, level)
 	local suffix = type(step) == "number" and string.format("%02d", step) or step
 	local id = "cotz/town/" .. contact.id .. "/v3/hideout/" .. suffix
 
-	local reason = feature == "claim" and "Arrange initial hideout access with Ballast."
+	local reason = feature == "claim" and "Arrange initial hideout access with " .. contact.name .. "."
 		or "Requires hideout improvement " .. step .. "."
 
 	return ix.progression.IsCompleted(character, id), reason

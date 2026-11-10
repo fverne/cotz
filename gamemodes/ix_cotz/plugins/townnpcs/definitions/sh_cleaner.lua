@@ -84,11 +84,29 @@ PLUGIN:Register("cleaner", {
 
 	progression = {
 		{
+			id = "v3/hideout/access",
+			branch = "hideout-access",
+			name = "Initial hideout access",
+			kind = "delivery",
+			requires = {},
+			briefing = "Want a room here in Garbage? Bring me one sledgehammer. Unequip it before handing it over. Then you can choose from the available locations. Storage improvements are a separate arrangement; let's settle the room first.",
+			completion = "Sledgehammer received. You can claim a room at the available Garbage locations. Choose one that suits you; I don't need the reasons.",
+			requirements = {
+				{pool = "hideout_access_sledgehammer", quantity = 1},
+			},
+			services = {
+				{id = "cleanerHideoutAccess", name = "Initial hideout access at Cleaner"},
+			},
+			branchIndex = 1,
+			branchLength = 1,
+			acquisitionMaps = {"rp_garbage_cotz"},
+		},
+		{
 			id = "v3/hideout/01",
 			branch = "hideout",
 			name = "Hideout improvements 1",
 			kind = "delivery",
-			requires = {},
+			requires = {"v3/hideout/access"},
 			briefing = "Want more storage options in your Garbage room? Bring this supply order. It opens the first paid container installations. The room's initial general crate is separate. Read the terms before you start bringing parcels; I won't guess which arrangement you meant.",
 			completion = "First container purchases are open. Supplies received. The starter crate remains included with a new room.",
 			requirements = {

@@ -108,7 +108,7 @@ def expand_contacts(contacts):
             continue
         branches = defaultdict(list)
         existing = {step["id"]: step for step in contact["progression"]}
-        authored = [s for s in contact["progression"] if s.get("requirementAlternatives")]
+        authored = [s for s in contact["progression"] if s["id"] == "v3/hideout/access"]
         for step in contact["progression"]:
             if step in authored:
                 continue
@@ -218,7 +218,7 @@ def author_requirements(data, rates, sources):
         for name in identity["core"] + identity["support"]:
             assert name in data["pools"], (slug, name)
         previous_by_branch = {}
-        generated_steps = [s for s in contact["progression"] if not s.get("requirementAlternatives")]
+        generated_steps = [s for s in contact["progression"] if s["id"] != "v3/hideout/access"]
         for ordinal, step in enumerate(generated_steps):
             # Approved layout changes retain their delivery terms and saved assignments.
             if slug == "mute" or contact.get("preserveProgression"):

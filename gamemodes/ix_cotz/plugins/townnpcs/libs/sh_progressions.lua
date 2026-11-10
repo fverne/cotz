@@ -101,8 +101,11 @@ function PLUGIN:BuildProgressions()
 			if step.kind == "delivery" then
 				definition.requirementSlots = {}
 				for _, slot in ipairs(step.requirements) do
+					-- Initial access takes one tool regardless of the contact's delivery difficulty.
+					local quantity = step.id == "v3/hideout/access" and slot.quantity
+						or self:ScaleProgressionEffort(contact, slot.quantity)
 					definition.requirementSlots[#definition.requirementSlots + 1] = {
-						pool = slot.pool, quantity = self:ScaleProgressionEffort(contact, slot.quantity),
+						pool = slot.pool, quantity = quantity,
 					}
 				end
 			else

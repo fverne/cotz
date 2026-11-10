@@ -3,13 +3,13 @@
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 636 hand-in milestones
-in 50 branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
+the earlier progression, catalogue and service descriptions below. There are 638 hand-in milestones
+in 52 branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
 locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
 Marsh branches keep their first two original milestones and all work below 45% fully Marsh-obtainable,
-including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts, except for Ballast's initial crowbar-or-bat hand-in. Completion pays accumulated hand-in
+including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts, except for the initial hideout tool hand-ins. Completion pays accumulated hand-in
 value at 60%, with no flat cash. Stock bonuses increase personal capacity without refilling it.
 Ledger uses 3× difficulty. Policy 4 converts outstanding invalid or out-of-region saved inputs while preserving credited
 contributions and completed unlocks. Inserted stages gate unfinished unlocks; Mute's redundant directory
@@ -17,11 +17,12 @@ maintenance is removed. See the authoritative guide for regional thresholds and 
 Old Timer now unlocks Cutlery before Cleaning kit, followed by Shovel. Existing completed unlocks remain saved.
 Jitters' stimpaks follow medkit 6,
 antirads follow medkit 2, and Asenapine/Modafines follow medkit 4. Atlas' anomaly detector follows his Geiger counter.
-Ballast's initial hideout access consumes one unequipped crowbar or bat before new room claims and improvements;
-existing rooms/upgrades remain saved. Haggler's gunpowder barters are removed.
+Initial hideout access consumes one unequipped tool before new local room claims and unfinished improvements:
+one crowbar or bat for Ballast, one sledgehammer for Cleaner, and one FUBar for Ledger. These hand-ins ignore
+contact difficulty multipliers. Existing rooms/upgrades remain saved and usable. Haggler's gunpowder barters are removed.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 
-All 636 active milestones have individual authored `briefing` and `completion` replies in their
+All 638 active milestones have individual authored `briefing` and `completion` replies in their
 contact definitions, including the 223 stock-preparation deliveries. Read each contact's existing
 profile and bound conversation before editing its voice. The current requirements, catalogue and
 benefits determine what a reply can promise; the older story tables and retired commissions do not.
