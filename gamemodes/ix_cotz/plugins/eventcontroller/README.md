@@ -120,18 +120,21 @@ controllers have not been added to Garbage.
 
 ## Aim and regional PDA reports
 
-Human `npc_human_*` shots against living hostile `npc_mutant_*` targets aim at the target's world collision
-center from the bullet source, correcting engine aim above low creatures. Weapon spread, pellet count and
-damage remain unchanged. The server `EntityFireBullets` plugin hook returns `true` to apply the direction,
-following the engine hook contract. Shots at players, humans and unrelated targets retain ordinary aim.
+Living and zombified `npc_human_*` gunmen aim at their enemy's chest bone, with alternate chest and spine
+names supported for different skeletons. This applies to players, humans and mutants. If no preferred
+bone has a usable position, each shot chooses a random bone and tries the remaining bones if necessary.
+Targets without usable bone positions fall back to their world collision center. Positions are read
+for each shot; weapon spread, pellet count and damage remain unchanged. The server `EntityFireBullets`
+plugin hook returns `true` to apply the direction, following the engine hook contract.
 
 Routine encounter PDA chatter checks Mute's permission for the current map through
 `CanReceiveMutantReports`: Swamps, Garbage, Waystation, then Pripyat. Delivery remains private to each
 eligible character. Existing spawn frequency and chatter chance are unchanged.
 
 Run `luatex --luaonly tests/contact_progression_changes_spec.lua` and the combat suite below. Live checks
-need low mutants at different elevations, moving targets and cover, plus fresh/completed Mute characters
-on each map. Standalone vector and permission mocks cannot prove model hitboxes or multiplayer delivery.
+need living and zombified gunmen against players and NPCs with different skeletons, low mutants at
+different elevations, moving targets and cover, plus fresh/completed Mute characters on each map.
+Standalone bone, vector and permission mocks cannot prove model hitboxes or multiplayer delivery.
 
 ## Proximity combat and squads
 

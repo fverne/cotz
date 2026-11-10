@@ -34,6 +34,11 @@ local function actor(class, x, pack)
 	entity.class, entity.position, entity.relationships = class, Vector(x, 0, 0), {}
 	entity.GetAngles = function(self) return {y = self.facing or 0} end
 	entity.SetHealth = function(self, health) self.health = health end
+	entity.LookupBone = function(self, name) return (self.aimBones or {})[name] end
+	entity.GetBoneCount = function(self) return self.boneCount or 0 end
+	entity.GetBonePosition = function(self, bone) return (self.bonePositions or {})[bone] end
+	entity.GetBoneMatrix = function(self, bone) return (self.boneMatrices or {})[bone] end
+	entity.WorldSpaceCenter = function(self) return self.position end
 	entity.Visible = function(self, other) return not other.hidden end
 	entity.SetSquad = function(self, squad) self.squad = squad end
 	entity.SetSchedule = function(self, schedule)
@@ -79,9 +84,76 @@ check(math.abs(64 + bullet.Dir.z * 500 / bullet.Dir.x - 12) < 0.001,
 check(bullet.Spread == spread and bullet.Damage == 20 and bullet.Num == 6,
 	"aim correction preserves spread, damage and pellet count")
 bandit.enemy = merc
-local direction = bullet.Dir
-check(manager:EntityFireBullets(bandit, bullet) == nil and bullet.Dir == direction,
-	"human targets retain ordinary engine aim")
+check(manager:EntityFireBullets(bandit, bullet) == true and bullet.Dir.z < 0,
+	"human targets without bones use their collision center")
+do
+	local function aimsAt(shooter, target, point, message)
+		shooter.enemy = target
+		check(manager:EntityFireBullets(shooter, bullet) == true, message .. " applies the bullet change")
+		local expected = (point - bullet.Src):GetNormalized()
+		check(bullet.Dir:DistToSqr(expected) < 0.000001, message)
+	end
+	merc.aimBones = {["ValveBiped.Bip01_Spine2"] = 0, ["ValveBiped.Bip01_Spine1"] = 1}
+	merc.boneCount = 2
+	merc.bonePositions = {[0] = Vector(1100, 0, 48), [1] = Vector(1100, 0, 36)}
+	aimsAt(bandit, merc, merc.bonePositions[0], "living gunmen prefer the chest, including bone index zero")
+	aimsAt(zombified, merc, merc.bonePositions[0], "zombified gunmen use the same chest preference")
+	merc.bonePositions[0] = Vector(1120, 20, 50)
+	aimsAt(bandit, merc, merc.bonePositions[0], "shots use the bone's current world position")
+	merc.aimBones["ValveBiped.Bip01_Spine2"] = nil
+	aimsAt(bandit, merc, merc.bonePositions[1], "a lower spine substitutes for a missing chest bone")
+	merc.aimBones = {["Chest"] = 0, ["ValveBiped.Bip01_Spine1"] = 1}
+	aimsAt(bandit, merc, merc.bonePositions[0], "alternate chest names take priority over lower spine bones")
+	lowMutant.aimBones = {["bip01_spine"] = 0}
+	lowMutant.boneCount, lowMutant.bonePositions = 1, {[0] = Vector(500, 0, 10)}
+	aimsAt(bandit, lowMutant, lowMutant.bonePositions[0], "mutant skeletons use their torso bone")
+	local client = {
+		Health = function() return 100 end,
+		IsNPC = function() return false end,
+		IsPlayer = function() return true end,
+		Alive = function() return true end,
+		GetMoveType = function() return 0 end,
+		GetClass = function() return "player" end,
+		GetPos = merc.GetPos,
+		LookupBone = merc.LookupBone,
+		GetBonePosition = merc.GetBonePosition,
+		aimBones = {["ValveBiped.Bip01_Spine2"] = 0},
+		bonePositions = {[0] = Vector(200, 0, 48)},
+		position = Vector(200),
+	}
+	aimsAt(bandit, client, client.bonePositions[0], "players are also aimed at the chest")
+	aimsAt(zombified, client, client.bonePositions[0], "zombified gunmen aim at player chests too")
+	merc.aimBones = {}
+	local previousRandom = math.random
+	math.random = function(minimum, maximum)
+		check(minimum == 0 and maximum == 1, "random fallback uses the entire zero-based bone range")
+
+		return maximum
+	end
+	aimsAt(bandit, merc, merc.bonePositions[1], "an unrecognized skeleton selects a random bone")
+	merc.bonePositions[1] = nil
+	aimsAt(bandit, merc, merc.bonePositions[0], "an unavailable random bone retries other bones")
+	math.random = previousRandom
+	merc.aimBones = {["ValveBiped.Bip01_Spine2"] = 0}
+	merc.bonePositions[0] = merc.position
+	local matrixPoint = Vector(1100, 0, 45)
+	merc.boneMatrices = {[0] = {GetTranslation = function() return matrixPoint end}}
+	aimsAt(bandit, merc, matrixPoint, "an uninitialized bone cache uses the bone matrix")
+	merc.boneMatrices, merc.boneCount = nil, 0
+	aimsAt(bandit, merc, merc.position, "unavailable bone positions safely fall back to collision center")
+	merc.aimBones, merc.bonePositions = nil, nil
+	bandit.enemy = ally
+	check(manager:EntityFireBullets(bandit, bullet) == false, "aim correction cannot target faction allies")
+	bandit.cotzSleeping, bandit.enemy = true, merc
+	check(manager:EntityFireBullets(bandit, bullet) == false, "sleeping gunmen cannot shoot through aim correction")
+	bandit.cotzSleeping = nil
+	local direction = bullet.Dir
+	check(manager:EntityFireBullets(lowMutant, bullet) == nil and bullet.Dir == direction,
+		"unrelated shooters retain ordinary aim")
+	merc.health, bandit.enemy = 0, merc
+	check(manager:EntityFireBullets(bandit, bullet) == nil, "dead enemies leave bullets unchanged")
+	merc.health = 100
+end
 bandit.enemy = lowMutant
 lowMutant.cotzSleeping = true
 check(manager:EntityFireBullets(bandit, bullet) == false, "sleeping mutants cannot be shot through aim correction")

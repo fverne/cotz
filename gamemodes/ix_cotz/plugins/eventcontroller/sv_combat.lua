@@ -12,6 +12,12 @@ local PLAYER_MEMORY_SECONDS = 10
 local PLAYER_CONTACT_INTERVAL = 0.25
 local PURSUIT_RETRY = 1
 local PURSUIT_ARRIVAL = 64
+local AIM_BONES = {
+	"chest", "Chest", "thorax", "Thorax",
+	"ValveBiped.Bip01_Spine2", "bip01_spine2", "Bip01 Spine2", "spine_03",
+	"ValveBiped.Bip01_Spine1", "bip01_spine1", "Bip01 Spine1", "spine_02",
+	"ValveBiped.Bip01_Spine", "bip01_spine", "Bip01 Spine", "spine", "spine_01",
+}
 local TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing"}
 local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
 	chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true}
@@ -49,14 +55,46 @@ function PLUGIN:IsCombatActor(entity)
 	return class:sub(1, 11) == "npc_mutant_" or class:sub(1, 10) == "npc_human_"
 end
 
+local function aimBonePosition(enemy, bone)
+	local position = enemy:GetBonePosition(bone)
+	-- An uninitialized bone cache can return the entity origin instead of the bone's position.
+	if not position or position == enemy:GetPos() then
+		local matrix = enemy:GetBoneMatrix(bone)
+
+		return matrix and matrix:GetTranslation()
+	end
+
+	return position
+end
+
+local function enemyAimPosition(enemy)
+	for _, name in ipairs(AIM_BONES) do
+		local bone = enemy:LookupBone(name)
+		if bone then
+			local position = aimBonePosition(enemy, bone)
+			if position then return position end
+		end
+	end
+
+	local boneCount = enemy:GetBoneCount()
+	if boneCount > 0 then
+		local firstBone = math.random(0, boneCount - 1)
+		for offset = 0, boneCount - 1 do
+			local position = aimBonePosition(enemy, (firstBone + offset) % boneCount)
+			if position then return position end
+		end
+	end
+
+	return enemy:WorldSpaceCenter()
+end
+
 function PLUGIN:EntityFireBullets(entity, data)
 	if not entity:IsNPC() or entity:GetClass():sub(1, 10) ~= "npc_human_" then return end
 	local enemy = entity:GetEnemy()
-	if not living(enemy) or enemy:GetClass():sub(1, 11) ~= "npc_mutant_" then return end
+	if not living(enemy) then return end
 	if not self:CanActorAttack(entity, enemy) then return false end
 
-	-- Engine eye targets can sit above short mutants. Keep the weapon's spread around the body instead.
-	data.Dir = (enemy:WorldSpaceCenter() - data.Src):GetNormalized()
+	data.Dir = (enemyAimPosition(enemy) - data.Src):GetNormalized()
 
 	return true
 end
