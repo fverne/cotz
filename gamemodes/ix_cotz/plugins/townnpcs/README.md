@@ -871,7 +871,9 @@ See `tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec.lua` and `tests/
 
 Dialogue uses explicit action colors, with jobs/progression matching inventory yellow/purple.
 All 27 contacts keep flavour under questions, appearance services under customization, and ammunition
-exchanges under barter. Incoming deliveries remain on both root variants. Technut's existing gear
+exchanges under barter. Incoming deliveries remain on both root variants. Task rewards stay under
+About work → Task rewards; new tasks and field commissions from that contact require collecting earned rewards first, including
+items waiting for inventory space. Technut's existing gear
 window now also paints unlocked suits; Suture retains conversions and Mute retains PDA appearance work.
 Escape returns through menus, and a one-second hold closes the interaction.
 

@@ -95,7 +95,7 @@ for _, topicID in ipairs({"TradeTopic", "RepairItems", "AboutWorkTopic", "AboutP
 	check(hasOption(oldTree.GREETING, topicID), "important actions remain at the root")
 	check(not hasOption(oldTree.QuestionsTopic, topicID), "important actions do not enter flavour menus")
 end
-check(not hasOption(oldTree.AboutWorkTopic, "TaskRewardChoices"), "assignment has no reward submenu")
+check(hasOption(oldTree.AboutWorkTopic, "TaskRewardChoices"), "assignment keeps its reward submenu")
 check(not hasOption(oldTree.QuestionsTopic, "TaskRewardChoices"), "reward claims stay outside questions")
 check(hasOption(oldTree.RepairItems, "BackTopic"), "services still return to their main menu")
 check(hasOption(oldTree.BackgroundTopic2, "QuestionsBackTopic"), "nested background replies return to questions")

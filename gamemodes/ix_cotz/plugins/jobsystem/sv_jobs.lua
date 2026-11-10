@@ -104,6 +104,7 @@ function playerMeta:ixJobAdd(identifier, npcidentifier, preview)
 	local jobs = character:GetJobs()
 	local definition = ix.jobs.list[identifier]
 	if jobs[npcidentifier] or not definition then return false end
+	if ix.taskRewards.HasUnclaimedRewards(character, npcidentifier) then return false end
 	if ix.townNPCs and ix.townNPCs.installed
 		and not ix.townNPCs:CanAcceptJob(character, npcidentifier, definition) then return false end
 	if definition.CanAcceptTask and not definition.CanAcceptTask(self) then return false end

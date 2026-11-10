@@ -468,6 +468,20 @@ function ix.taskRewards.CanTakeDifficulty(character, difficulty)
 	return required ~= nil and character:GetPlayer():getReputation() >= required
 end
 
+function ix.taskRewards.HasUnclaimedRewards(character, npc)
+	for key, offer in pairs(character:GetData("taskRewardOffers", {})) do
+		if offer.npc == npc and offer.earned and (key:match("^job:") or key:match("^bonus:")) then
+			return true
+		end
+	end
+	for _, reward in ipairs(ix.progression.GetLine(character, "taskRewardClaims").pendingRewards or {}) do
+		-- Older queued rewards have no issuer; collect them before accepting more work anywhere.
+		if reward.taskNPC == nil or reward.taskNPC == npc then return true end
+	end
+
+	return false
+end
+
 function ix.taskRewards.CanSelectOffer(character, npc, key, offer)
 	if not offer or offer.npc ~= npc or type(key) ~= "string" then return false end
 	if offer.selected and not offer.retrySelected then return false end

@@ -61,8 +61,10 @@ local function paySelected(character, key, offers)
 		end
 	end
 	for _, reward in ipairs(choice.items) do
+		local queuedReward = table.Copy(reward)
+		queuedReward.taskNPC = (key:match("^job:") or key:match("^bonus:")) and offer.npc or false
 		line.pendingRewards[#line.pendingRewards + 1] =
-			ix.progression.PrepareReward(character, claimLine, line, table.Copy(reward))
+			ix.progression.PrepareReward(character, claimLine, line, queuedReward)
 	end
 	record.lines[claimLine] = line
 	offers[key] = nil
@@ -395,6 +397,7 @@ end
 
 function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 	ix.taskRewards.ReconcileCharacter(character)
+	if ix.taskRewards.HasUnclaimedRewards(character, npc) then return end
 	if not ix.taskRewards.CanTakeDifficulty(character, difficulty) then return end
 	if character:GetJobs()[npc] or type(categories) ~= "table" or #categories == 0 then return end
 	local previews = table.Copy(character:GetData("taskJobPreviews", {}) or {})

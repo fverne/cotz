@@ -36,7 +36,10 @@ for id, dialogue in pairs(ix.dialogue.list) do
 				check(topicID ~= "AmmoExchange", id .. ": ammunition exchanges belong in barter")
 			end
 			check(includes(tree[rootID], "TownDeliveries"), id .. ": deliveries survive a return to root")
+			check(not includes(tree[rootID], "TaskRewardChoices"), id .. ": task rewards stay out of the root")
 		end
+		check(includes(tree.AboutWorkTopic, "TaskRewardChoices"), id .. ": task rewards belong under work")
+		check(includes(tree.TaskRewardChoices, "AboutWorkTopic"), id .. ": rewards return to work")
 		check(tree.TradeTopic.quickAction, id .. ": trading preserves the current dialogue choices")
 		check(ix.dialogue.GetOptionCategory("InterestTownRelationsTopic") == "text", id .. ": flavour stays white")
 		local options = table.concat(tree.GREETING.options, ",")

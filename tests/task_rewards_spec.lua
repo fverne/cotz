@@ -773,8 +773,8 @@ local dialogue = {tree = {GREETING = {options = {"GOODBYE"}},
 	BackTopic = {options = {"GOODBYE"}}, GetTaskByDifficulty = {}}}
 dialogue.addTopic = function(id, data) dialogue.tree[id] = data end
 ix.dialogue.ConfigureTaskRewards(dialogue)
-check(#dialogue.tree.GREETING.options == 1
-	and dialogue.tree.GREETING.options[1] == "GOODBYE", "no claim submenu remains at root")
+check(#dialogue.tree.GREETING.options == 2
+	and dialogue.tree.GREETING.options[1] == "AboutWorkTopic", "reward-only contacts expose the work submenu")
 local viewer = actor()
 local position = {DistToSqr = function() return 0 end}
 function viewer.client:GetPos() return position end
@@ -846,11 +846,14 @@ for _, id in ipairs({"GREETING", "BackTopic"}) do
 		check(option ~= "TaskRewardChoices", "claim submenu is removed")
 	end
 end
-check(#workDialogue.tree.AboutWorkTopic.options == 1
-	and workDialogue.tree.AboutWorkTopic.options[1] == "BackTopic",
-	"assignment has no reward submenu")
-check(workDialogue.tree.TaskRewardChoices.options[1] == "BackTopic",
-	"supplies always provide a main-menu return even when work becomes unavailable")
+check(#workDialogue.tree.AboutWorkTopic.options == 2
+	and workDialogue.tree.AboutWorkTopic.options[1] == "TaskRewardChoices",
+	"assignment keeps rewards in a submenu")
+check(workDialogue.tree.TaskRewardChoices.options[1] == "AboutWorkTopic"
+	and workDialogue.tree.TaskRewardChoices.options[2] == "BackTopic",
+	"supplies provide both work and main-menu returns")
+check(workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, rootRewardOwner.client, target),
+	"earned bonuses keep About work visible without an active assignment")
 check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
 	"unaccepted previews do not expose reward actions in the work menu")
 local hiddenChoices = workDialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, viewer.client, target)
@@ -953,6 +956,13 @@ local listed = dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogu
 check(cleared and #displayedOptions == 1 and #listed == 1 and listed[1].statement == listPacket[4],
 	"client replaces difficulty labels with the authoritative task and reward row")
 check(listed[1].dyndata.difficulty == "easy", "listed task retains its saved category for acceptance")
+for _, topicID in ipairs({"AboutWorkTopic", "TaskRewardChoices"}) do
+	ix.gui.dialogue.currentTopicID = topicID
+	ix.gui.dialogue.tree = dialogue.tree
+	activePacket, offset, cleared = {target}, 0, false
+	receivers["cotz/dialogue/task-rewards-refresh"]()
+	check(cleared and #displayedOptions == 0, "reward refresh updates the open " .. topicID .. " submenu")
+end
 check(#dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogueReader.client, {GetDisplayName = function() return "Other NPC" end}) == 0,
 	"another NPC cannot display a cached task list")
 catalogueReader.client.cotzTaskList.options = {
@@ -1429,6 +1439,9 @@ finishJob(queueOwner, "'Old Timer'")
 local held = queueOwner:GetData("taskRewardOffers")[queueJob.rewardKey]
 check(held and held.earned and held.selected == 1 and held.retrySelected,
 	"a full claim queue retains the selected earned entitlement")
+check(ix.taskRewards.HasUnclaimedRewards(queueOwner, "'Old Timer'")
+	and not queueOwner.client:ixJobAdd("hunt", "'Old Timer'"),
+	"a reward held outside the full queue also blocks a new task")
 check(not ix.taskRewards.SelectOffer(queueOwner, "'Old Timer'", queueJob.rewardKey, 2),
 	"a queued entitlement cannot change reward and invalidate the credited bonus allowance")
 local interruptedOffers = queueOwner:GetData("taskRewardOffers")
@@ -1453,10 +1466,11 @@ check(not secretBonusStatus:find("rubles", 1, true), "bonus progress hides rewar
 
 local directRewards = dialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, rootRewardOwner.client, target)
 local rootRewards = dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target)
-check(#rootRewards == #directRewards, "reward actions appear directly at the root")
+check(#directRewards > 0 and #rootRewards == 0, "reward actions stay inside the work submenu")
 ix.dialogue.ConfigureTaskRewards(dialogue)
-check(#dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target) == #directRewards,
-	"reconfiguring a dialogue does not duplicate direct reward actions")
+check(#dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target) == 0
+	and #dialogue.tree.AboutWorkTopic.options == 2,
+	"reconfiguring a dialogue preserves one reward submenu without root claims")
 for tier, base in ipairs({500, 1000, 1500}) do
 	local request = {requiredItem = "food", wholeItems = true, numberRec = 2, tier = tier}
 	check(ix.taskRewards.FixedMoney(request, 2) == base + 100,
@@ -1525,6 +1539,86 @@ do
 	check(owner.inventory.items[77] == oldKit and #owner.inventory.received == 0
 		and owner.money == 0 and next(owner:GetData("taskRewardOffers", {})) == nil,
 		"stale kit selections neither consume the kit nor award supplies")
+end
+
+do
+	local npc = "'Old Timer'"
+	local owner = actor()
+	local preview = ix.taskRewards.PreviewJob(owner, npc, "easy", {"hunting"})
+	ix.taskRewards.CreateOffer(owner, "bonus:blocking", npc, 100, "Five-task bonus")
+	local offers = owner:GetData("taskRewardOffers")
+	offers["bonus:blocking"].choices = {{label = "Bandage", items = {{item = "medic_bandage_1"}}}}
+	owner:SetData("taskRewardOffers", offers)
+	ix.taskRewards.EarnOffer(owner, "bonus:blocking")
+	check(ix.taskRewards.HasUnclaimedRewards(owner, npc), "an earned unchosen bonus blocks new work")
+	check(not dialogue.tree.GetTaskByDifficulty:ShouldAdd(owner.client, target),
+		"new work is hidden until the reward is taken")
+	owner.client.cotzTaskList = {target = target, options = {{dyndata = {difficulty = "easy"}}}}
+	check(#dialogue.tree.GetTaskByDifficulty:GetDynamicOptions(owner.client, target) == 0,
+		"a stale client offer list cannot expose work while a reward is outstanding")
+	check(not ix.taskRewards.PreviewJob(owner, npc, "easy", {"hunting"}),
+		"outstanding rewards prevent server previews")
+	check(not ix.taskRewards.AcceptJob(owner.client, npc, "easy"),
+		"outstanding rewards reject acceptance of an earlier saved preview")
+	check(not owner.client:ixJobAdd("hunt", npc), "direct job acceptance cannot bypass reward collection")
+	check(not owner:GetJobs()[npc] and owner:GetData("taskJobPreviews")[npc].easy.rewardKey == preview.rewardKey,
+		"rejected acceptance preserves the preview and creates no assignment")
+	check(owner.client:ixJobAdd("hunt", "'Jitters'"), "an unclaimed bonus only blocks its issuing contact")
+	check(ix.taskRewards.SelectOffer(owner, npc, "bonus:blocking", 1), "the earned bonus can be claimed")
+	while #(ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards or {}) > 0 do
+		check(ix.taskRewards.ClaimNext(owner), "all bonus items are collected before accepting more work")
+	end
+	check(not ix.taskRewards.HasUnclaimedRewards(owner, npc), "delivered rewards release the work lock")
+	check(ix.taskRewards.AcceptJob(owner.client, npc, "easy"), "the saved preview can be accepted after collection")
+end
+
+do
+	local npc = "'Old Timer'"
+	local owner = actor()
+	check(owner.client:ixJobAdd("hunt", npc), "stored reward fixture accepts a task")
+	owner.jobs[npc].isCompleted = true
+	owner.inventory.full = true
+	finishJob(owner, npc)
+	local pending = ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards
+	check(#pending > 0 and pending[1].taskNPC == npc, "stored task rewards retain their issuing contact")
+	check(ix.taskRewards.HasUnclaimedRewards(owner, npc) and not owner.client:ixJobAdd("hunt", npc),
+		"choosing a reward does not unlock work while its items cannot fit")
+	check(not ix.taskRewards.HasUnclaimedRewards(owner, "'Jitters'"),
+		"stored rewards do not block other contacts")
+	local restored = actor()
+	restored.data, restored.vars = copy(owner.data), copy(owner.vars)
+	check(ix.taskRewards.HasUnclaimedRewards(restored, npc) and not restored.client:ixJobAdd("hunt", npc),
+		"saved pending rewards keep work locked after character restoration")
+	check(workDialogue.tree.AboutWorkTopic:ShouldAdd(owner.client, target),
+		"stored items keep the work submenu accessible after the completed job disappears")
+	check(not ix.taskRewards.ClaimNext(owner) and ix.taskRewards.HasUnclaimedRewards(owner, npc),
+		"a failed inventory claim keeps new work locked")
+	owner.inventory.full = false
+	local add = owner.inventory.Add
+	owner.inventory.Add = function() return 1 end
+	check(ix.taskRewards.ClaimNext(owner) and ix.taskRewards.HasUnclaimedRewards(owner, npc),
+		"a reserved inventory slot keeps work locked until delivery is acknowledged")
+	local token = ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards[1].token
+	ix.char = {loaded = {[owner.id] = owner}}
+	owner.inventory.owner = owner.id
+	callbacks.InventoryItemAdded(nil, owner.inventory, {GetData = function() return token end})
+	owner.inventory.Add = add
+	while #(ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards or {}) > 0 do
+		local token = ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards[1].token
+		owner.inventory.items = {{GetData = function() return token end}}
+		check(ix.taskRewards.ClaimNext(owner), "token recovery acknowledges the queued reward")
+	end
+	check(not ix.taskRewards.HasUnclaimedRewards(owner, npc) and owner.client:ixJobAdd("hunt", npc),
+		"work unlocks after every selected item is received")
+	local legacy = actor()
+	ix.progression.QueueReward(legacy, "taskRewardClaims", {item = "medic_bandage_1"})
+	check(ix.taskRewards.HasUnclaimedRewards(legacy, npc)
+		and ix.taskRewards.HasUnclaimedRewards(legacy, "'Jitters'"),
+		"older stored rewards without an issuer must be collected before accepting more tasks")
+	local barterOwner = actor()
+	ix.progression.QueueReward(barterOwner, "taskRewardClaims", {item = "medic_bandage_1", taskNPC = false})
+	check(not ix.taskRewards.HasUnclaimedRewards(barterOwner, npc),
+		"new barter deliveries do not impose a task reward lock")
 end
 
 print("PASS: " .. checks .. " task reward checks")

@@ -212,9 +212,9 @@ reward. Preview packets transmit zero reward choices, and neither previews, acti
 unrevealed offers store reward candidate details. The task journal shows ordinary payment and return
 instructions. Bonus progress shows the number of completions, without revealing the bonus value.
 
-Once the objective is ready, choose **Complete the assignment** at the issuing contact. This reveals
-up to three reward choices. Selecting one completes the hand-in, consumes any required cargo, pays
-cash/reputation, credits the task and restock once, and grants the selected reward. Selection is checked
+Once the objective is ready, open **About work → Task rewards** at the issuing contact.
+**Complete the assignment** also reveals up to three reward choices in that submenu. Selecting one
+completes the hand-in, consumes any required cargo, pays cash/reputation, credits the task and restock once, and grants the selected reward. Selection is checked
 against the current character, active claim, completion state, cargo, NPC access and proximity.
 Walking away after revealing a reward preserves the job and choices; returning does not reroll them.
 
@@ -223,6 +223,16 @@ A full claim queue keeps the chosen earned offer until space opens; its choice s
 retrying cannot change the allowance already credited to the bonus. Retrying it cannot pay ordinary
 cash or credit task/bonus progress again. Pending inventory insertions retain their existing callback
 and token recovery behaviour. Cash rewards require no inventory space.
+
+New repeatable tasks and field commissions from that contact stay unavailable until all earned task
+and five-task bonus rewards are collected, including selected items awaiting inventory delivery.
+The server also rejects stale previews and direct acceptance while rewards remain. About work stays
+visible for claims after the assignment disappears; hand-ins return there, and reward choices stay
+in their submenu. Existing ammunition barter actions retain their main-menu placement.
+
+New queued items carry an additive `taskNPC` issuer field; barter items use `false`. Existing tokens,
+quantities and queue order are unchanged. Older queued items without an issuer remain claimable and
+block new tasks at every contact until collected, since their original issuer cannot be recovered.
 
 ### Allowed items and quantities
 
