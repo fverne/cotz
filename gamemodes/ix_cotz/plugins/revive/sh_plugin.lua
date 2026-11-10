@@ -199,18 +199,23 @@ ix.command.Add("charrevive", {
             health = math.Round(health)
         end
 
-        if not ix.temp.Corpses[target].isDeadBody then return client:Notify("The target is not dead, they can't be revived!") end
+		local corpse = ix.temp.Corpses[target]
+		if not IsValid(corpse) or not corpse.isDeadBody then
+			return client:Notify("The target is not dead, they can't be revived!")
+		end
+		-- PlayerSpawn schedules corpse removal; retain its position before spawning and other hooks run.
+		local corpsePosition = corpse:GetPos()
         target:UnSpectate()
         target:SetNetVar("resurrected", true)
         target:Spawn()
         target:SetHealth(health or 100)
 
-        target:SetPos(ix.temp.Corpses[target]:GetPos())
+		target:SetPos(corpsePosition)
 
         if target:IsStuck() then
-            target:SetPos(ix.temp.Corpses[target]:GetPos() + Vector(0, 0, 16))
+			target:SetPos(corpsePosition + Vector(0, 0, 16))
 
-            local positions = ix.util.FindEmptySpace(target, {ix.temp.Corpses[target], target})
+			local positions = ix.util.FindEmptySpace(target, {corpse, target})
 
             for _, v in ipairs(positions) do
                 target:SetPos(v)

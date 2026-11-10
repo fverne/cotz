@@ -7,7 +7,8 @@ migration is needed. Restart/changelevel to load the new plugin and item.
 ## Commands and encounter
 
 - `/MutantDefenseStart`: aim at clear ground to place the center and begin preparation.
-- `/MutantDefenseStatus`: report phase, wave, attackers still required, center coordinates and radius.
+- `/MutantDefenseStatus`: report phase, wave, attackers still required/awaiting spawn, living defenders,
+  center coordinates, radius and the last reason spawning was blocked (placement, player clearance or population).
 - `/MutantDefenseCancel`: remove surviving event attackers and end without rewards.
 
 All three commands require Helix administrator command access. Only one event runs per server.
@@ -32,6 +33,13 @@ their recorded death location until respawn when no corpse exists. Death does no
 At completion, the same character must be connected and present; being downed/dead is allowed.
 If no living defender remains for 30 consecutive seconds, the event fails. A final mutual kill may finish
 successfully before that grace period expires.
+
+Living/observer eligibility follows the mutant combat system's movement-type checks. A revived player who
+is walking counts as living even if an observer camera field remains set or the old corpse still exists
+until the next tick. Living players use their own position rather than a surviving corpse reference.
+The `/charrevive` command captures the body's position before spawning, because the revive plugin's
+`PlayerSpawn` schedules that body's removal. It does not rely on the corpse remaining usable after spawn hooks.
+Reviving within the abandonment grace period resumes the encounter; it does not restart the current wave.
 
 Spawn attempts use validated encounter placement, a 1,000–2,000-unit band around the center, and 256 units
 of player clearance. At most two creation attempts occur per one-second update. Event attackers use isolated
@@ -80,6 +88,9 @@ luatex --luaonly tests/population_performance_spec.lua
 luatex --luaonly tests/npc_combat_spec.lua
 luatex --luaonly tests/event_spawnplacement_spec.lua
 ```
+
+The defense spec also executes the installed `/charrevive` callback and corpse-removing `PlayerSpawn` hook
+through wave-two death, revival and wave-three spawning, including a stale observer camera mode.
 
 In multiplayer, test all three waves with late arrivals/leavers, death/revive/respawn, character switches,
 different group sizes and population caps. Check actual map navigation and blocked approaches, kill versus

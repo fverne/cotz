@@ -7,22 +7,22 @@ function PLUGIN:GetDefenderPosition(client)
 	local character = client:GetCharacter()
 	if not character then return end
 	local corpse = ix.temp and ix.temp.Corpses and ix.temp.Corpses[client]
-	if IsValid(corpse) then return corpse:GetPos() end
+	if not client:Alive() and IsValid(corpse) then return corpse:GetPos() end
 	if IsValid(client.ixRagdoll) then return client.ixRagdoll:GetPos() end
 	if not client:Alive() then
 		local death = self.event and self.event.deaths[client]
 		if death and death.character == character then return death.position end
 		return
 	end
-	if client:GetMoveType() == MOVETYPE_NOCLIP or client:GetObserverMode() ~= OBS_MODE_NONE then return end
+	if client:GetMoveType() == MOVETYPE_NOCLIP or client:GetMoveType() == MOVETYPE_OBSERVER then return end
 
 	return client:GetPos()
 end
 
 function PLUGIN:IsLivingDefender(client)
+	-- A revive can leave a valid corpse until the next tick; use the player's actual life/movement state.
 	return client:Alive() and not client:IsRestricted() and not IsValid(client.ixRagdoll)
-		and not IsValid(ix.temp and ix.temp.Corpses and ix.temp.Corpses[client])
-		and client:GetMoveType() ~= MOVETYPE_NOCLIP and client:GetObserverMode() == OBS_MODE_NONE
+		and client:GetMoveType() ~= MOVETYPE_NOCLIP and client:GetMoveType() ~= MOVETYPE_OBSERVER
 end
 
 function PLUGIN:GetDefenders()
@@ -89,18 +89,25 @@ function PLUGIN:BeginDefenseWave(living)
 end
 
 function PLUGIN:FindDefenseSpawn()
+	local reason = "no safe spawn position in the spawn band"
 	for _ = 1, self.settings.placementAttempts do
 		local position = ix.eventController:GetSpawnLocation(self.event.center, self.settings.spawnMaximum)
 		if position and position:DistToSqr(self.event.center) >= self.settings.spawnMinimum ^ 2
-			and position:DistToSqr(self.event.center) <= self.settings.spawnMaximum ^ 2
-			and not ix.eventController:HasPlayerNear(position, self.settings.playerSafeDistance)
-			and ix.eventController:CanSpawnMutant(position, true) then
-			return position
+			and position:DistToSqr(self.event.center) <= self.settings.spawnMaximum ^ 2 then
+			if ix.eventController:HasPlayerNear(position, self.settings.playerSafeDistance) then
+				reason = "players too close to spawn positions"
+			elseif not ix.eventController:CanSpawnMutant(position, true) then
+				reason = "mutant population limit"
+			else
+				return position
+			end
 		end
 	end
+	self.event.spawnBlocked = reason
 end
 
 function PLUGIN:SpawnDefenseAttackers(living)
+	self.event.spawnBlocked = nil
 	local budget = self.settings.spawnBudget
 	for _, slot in ipairs(self.event.slots) do
 		if not slot.killed and not IsValid(slot.entity) then
@@ -110,6 +117,7 @@ function PLUGIN:SpawnDefenseAttackers(living)
 			if not position then break end
 			local entity = ents.Create(slot.class)
 			if not IsValid(entity) then
+				self.event.spawnBlocked = "attacker creation failed"
 				ErrorNoHalt("[COTZ mutantdefense] Cannot create " .. slot.class .. "\n")
 				break
 			end
@@ -119,6 +127,7 @@ function PLUGIN:SpawnDefenseAttackers(living)
 			entity:Spawn()
 			if IsValid(entity) then ix.eventController:RegisterMutant(entity, true, self.event.pack) end
 			if not IsValid(entity) or entity.cotzPopulationRejected then
+				self.event.spawnBlocked = "attacker removed or rejected during creation"
 				slot.entity, attackers[entity] = nil, nil
 			elseif not slot.killed and IsValid(living[1]) then
 				local target = living[1]
@@ -171,6 +180,7 @@ function PLUGIN:UpdateDefense()
 		if not present[id] or present[id]:GetCharacter() ~= character then event.candidates[id] = nil end
 	end
 	if #living == 0 then
+		event.spawnBlocked = "no living defenders in the area"
 		if not event.emptySince then
 			event.emptySince = CurTime()
 			self:NotifyDefense(

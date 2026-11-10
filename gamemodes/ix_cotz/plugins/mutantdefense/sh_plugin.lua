@@ -63,9 +63,14 @@ ix.command.Add("MutantDefenseStatus", {
 	OnRun = function()
 		local event = PLUGIN.event
 		if not event then return "No mutant defense is active." end
+		local pending = 0
+		for _, slot in ipairs(event.slots) do
+			if not slot.killed and not IsValid(slot.entity) then pending = pending + 1 end
+		end
+		local _, living = PLUGIN:GetDefenders()
 
-		return string.format("Mutant defense: %s, wave %d/%d, %d attackers remaining, center %s, radius %d.",
-			event.phase, event.wave, #PLUGIN.settings.waves, PLUGIN:RemainingAttackers(),
-			tostring(event.center), PLUGIN.settings.defendRadius)
+		return string.format("Mutant defense: %s, wave %d/%d, %d attackers remaining (%d awaiting spawn), %d living defenders, center %s, radius %d. Spawn blocked: %s.",
+			event.phase, event.wave, #PLUGIN.settings.waves, PLUGIN:RemainingAttackers(), pending, #living,
+			tostring(event.center), PLUGIN.settings.defendRadius, event.spawnBlocked or "none")
 	end,
 })

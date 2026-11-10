@@ -29,7 +29,7 @@ function CurTime() return now end
 function IsValid(value) return type(value) == "table" and not value.invalid end
 function ErrorNoHalt(message) error(message) end
 table.Copy = copy
-SERVER, MOVETYPE_NOCLIP, OBS_MODE_NONE = true, 8, 0
+SERVER, MOVETYPE_NOCLIP, MOVETYPE_OBSERVER, OBS_MODE_NONE = true, 8, 10, 0
 timer = {Simple = function(_, callback) timers[#timers + 1] = callback end}
 local function flushTimers()
 	local pending = timers
@@ -224,9 +224,14 @@ capacity = false
 local createdBefore = #created
 plugin:UpdateDefense()
 check(#created == createdBefore and plugin:RemainingAttackers() == 3, "population caps keep required slots pending")
+local blockedStatus = commands.MutantDefenseStatus.OnRun()
+check(blockedStatus:find("3 awaiting spawn", 1, true) and blockedStatus:find("mutant population limit", 1, true),
+	"status distinguishes pending attackers blocked by population from already spawned enemies")
 capacity, placement = true, false
 plugin:UpdateDefense()
 check(#created == createdBefore, "blocked placement keeps slots pending")
+check(commands.MutantDefenseStatus.OnRun():find("no safe spawn position", 1, true),
+	"status reports a placement blockage")
 placement, playerNear = true, true
 plugin:UpdateDefense()
 check(#created == createdBefore, "nearby players prevent spawning")
@@ -254,6 +259,8 @@ first.observer = 4
 check(plugin:GetDefenderPosition(first).x == 5 and not plugin:IsLivingDefender(first),
 	"revive corpses retain presence despite chase spectator mode")
 plugin:UpdateDefense()
+check(commands.MutantDefenseStatus.OnRun():find("0 living defenders", 1, true),
+	"status reports missing living defenders during the grace period")
 now = now + plugin.settings.abandonGrace
 plugin:UpdateDefense()
 check(not plugin.event, "no living defenders eventually fails the event")
@@ -449,5 +456,86 @@ now = now + 2
 additions = holderChar.inventory.additions
 dialogue.tree.DefenseRewards.postCallback(nil, holder, vendor)
 check(holderChar.inventory.additions == additions, "forged dialogue collection still checks server access")
+
+-- Exercise the installed revive command and corpse-removing spawn hook during wave two.
+local reviveFile = assert(io.open(ROOT .. "revive/sh_plugin.lua"))
+local reviveSource = reviveFile:read("*a")
+reviveFile:close()
+local reviveSpawn = {}
+local spawnStart = assert(reviveSource:find("function PLUGIN:PlayerSpawn( client )", 1, true))
+local spawnEnd = assert(reviveSource:find("\n\t--[[", spawnStart, true))
+local spawnSource = reviveSource:sub(spawnStart, spawnEnd - 1):gsub("!", "not ")
+assert(load(spawnSource, "@revive/PlayerSpawn", "t", setmetatable({PLUGIN = reviveSpawn}, {__index = _G})))()
+local commandSource = assert(reviveSource:match('ix.command.Add%("charrevive", (%b{})%)'))
+local commandEnvironment = setmetatable({bit = {bor = function(a, b) return a + b end}}, {__index = _G})
+ix.type = {string = 1, number = 2, optional = 4}
+local reviveCommand = assert(load("return " .. commandSource, "@revive/charrevive", "t", commandEnvironment))()
+math.Round = function(value) return math.floor(value + 0.5) end
+ix.util.FindPlayer = function() return first end
+function first:UnSpectate() self.observer = OBS_MODE_NONE end
+function first:SetNWEntity() end
+function first:SetNetVar(key, value)
+	self.netVars = self.netVars or {}
+	self.netVars[key] = value
+end
+function first:GetNetVar(key) return self.netVars and self.netVars[key] end
+function first:SetPos(position) self.position = position end
+function first:SetHealth(value) self.health = value end
+function first:IsStuck() return false end
+function first:GetName() return "Defender" end
+function first:Spawn()
+	self.alive, self.moveType = true, 2
+	-- Normal loadout may place the player away from the defense before the revive restores them.
+	self.position = Vector(9000, 0, 0)
+	plugin:PlayerSpawn(self)
+	reviveSpawn:PlayerSpawn(self)
+end
+resetEvent()
+beginWave()
+clearWave()
+beginWave()
+local deathPosition = Vector(20, 0, 0)
+local corpse = {isDeadBody = true}
+function corpse:GetPos()
+	assert(not self.invalid, "revive accessed a removed corpse")
+	return deathPosition
+end
+function corpse:Remove() self.markedForDeletion = true end
+first.position, first.alive, first.observer, first.moveType = deathPosition, false, 4, MOVETYPE_OBSERVER
+ix.temp.Corpses[first] = corpse
+plugin:PlayerDeath(first)
+plugin:UpdateDefense()
+now = now + 5
+reviveCommand.OnRun(reviveCommand, first, "Defender", 100)
+check(first.position == deathPosition and corpse.markedForDeletion and first:Alive(),
+	"charrevive restores the saved body position after Spawn schedules corpse removal")
+plugin:UpdateDefense()
+check(plugin.event and plugin.event.emptySince == nil and plugin:IsLivingDefender(first),
+	"reviving during wave two clears abandonment even before the old corpse is deleted")
+first.position = Vector(25, 0, 0)
+check(plugin:GetDefenderPosition(first) == first.position,
+	"living defender presence follows the revived player instead of the old corpse")
+corpse.invalid = true
+clearWave()
+beginWave()
+check(plugin.event.wave == 3 and plugin.event.phase == "fighting", "wave three starts after a wave-two revival")
+local beforeRevivedSpawns = #created
+plugin:UpdateDefense()
+check(#created == beforeRevivedSpawns + 2, "wave three creates attackers after solo charrevive")
+first.observer = 4
+check(plugin:IsLivingDefender(first) and plugin:GetDefenderPosition(first) == first.position,
+	"a revived walking defender is eligible even if the observer camera field remains set")
+first.moveType = MOVETYPE_OBSERVER
+check(not plugin:IsLivingDefender(first) and plugin:GetDefenderPosition(first) == nil,
+	"actual observer movement still excludes spectators")
+first.moveType, first.observer = 2, OBS_MODE_NONE
+clearWave()
+check(not plugin.event, "a revived solo defender can finish the event")
+local emptyBody = ix.temp.Corpses[first]
+ix.temp.Corpses[first] = nil
+reviveCommand.OnRun(reviveCommand, first, "Defender", 100)
+check(first.messages[#first.messages] == "The target is not dead, they can't be revived!",
+	"charrevive safely rejects a player without a valid dead body")
+ix.temp.Corpses[first] = emptyBody
 
 print("PASS: " .. checks .. " mutant defense checks")
