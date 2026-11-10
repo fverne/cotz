@@ -1112,9 +1112,24 @@ check(farCentre:DistToSqr(target) <= farRadius ^ 2 and midCentre:DistToSqr(targe
 	"old assignments without search centres keep the object within an offset approximate area")
 recovery.search = {1192, 192, 0}
 local savedCentre = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4096, 0, 0))
-check(savedCentre:DistToSqr(Vector(1768, 768, 0)) == 0
+local savedOffset = savedCentre - target
+check(math.abs(savedOffset.x - savedOffset.y) < 0.01 and savedOffset.x > 0
 	and recovery.search[1] == 1192 and recovery.search[2] == 192 and recovery.point[1] == 1000,
-	"recovery marker expands existing search offsets without changing saved sites or search centres")
+	"recovery marker preserves the saved search direction without changing saved sites or search centres")
+for _, offset in ipairs({{0, 0, 0}, {1, 0, 0}, {192, 192, 0}, {5000, -2000, 0}}) do
+	local spreadState = copy(recovery)
+	spreadState.search = ix.jobs.field.Pack(target + ix.jobs.field.Unpack(offset))
+	for _, distance in ipairs({0, 128, 1024, 4096}) do
+		local viewer = target + Vector(distance, 0, 0)
+		local centre, radius = ix.jobs.field.GetRecoverySearchArea(spreadState, viewer)
+		local separationSquared = centre:DistToSqr(target)
+		check(separationSquared >= (radius * 0.7) ^ 2 and separationSquared <= (radius * 0.8) ^ 2,
+			"search markers stay well away from the object while containing it, even with coincident saved centres")
+		local repeatedCentre = ix.jobs.field.GetRecoverySearchArea(spreadState, viewer)
+		check(repeatedCentre:DistToSqr(centre) == 0,
+			"refreshing a recovery marker keeps its direction stable instead of rerolling the offset")
+	end
+end
 check(not ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4097, 0, 0)),
 	"recovery marker is unavailable beyond the activation distance")
 map = "another-map"

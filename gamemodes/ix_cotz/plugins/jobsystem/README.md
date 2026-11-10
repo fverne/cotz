@@ -33,6 +33,9 @@ Incoming delivery options require an actual nonempty matching item or bound parc
 assignment state alone. Reward choices refresh immediately after the final hand-in at the issuer;
 completed field/combat work reveals its choices on returning to the issuer.
 Every objective completion sends a task-completed notification and PDA sound once. The Tasks tab shows objectives and progress without payment or reward-choice instructions.
+At the default COTZ font scale of 1.30, the journal uses 33 px headers, 25 px task names
+and 22 px body/button text at 1080p. Adjust it under Settings → Appearance; action rows
+scale with the text, and cards wrap and scroll.
 Photography
 shows the saved captured species/anomaly list in the journal. There is no camera HUD ledger.
 Triangulation saves the origin and compass bearing of each reading and marks those positions in
@@ -502,12 +505,15 @@ a named clue. Accepted recovery sites retain their coordinates, cargo, descripti
 optional `fieldTask.whereabouts` text is resolved lazily and saved through the existing jobs field.
 Missing providers leave existing jobs intact, with a temporary unavailable message and later retry.
 Show assignment and the journal display the same clue. Area names are literal text, including `%`.
-Nearby recovery markers use the saved search centre and claim, with an offset fallback for older
-assignments lacking a search centre. Marker radii and offsets are scaled by four for both existing
-and new assignments without moving the saved object or rewriting its search area.
+Nearby recovery markers use the saved search direction and claim, with a stable fallback for older
+assignments lacking a search centre or having a centre directly on the object. The marker sits 75%
+of the current search radius away from the object, so the object remains inside the stated area
+without sitting directly under the marker. Marker radii are scaled by four for both existing and
+new assignments without moving the saved object or rewriting its search area.
 `runtimeSettings.recoveryMarkerDistance`, `recoveryMarkerMinRadius`, `recoveryMarkerRadiusScale` and
 `recoveryMarkerUpdateInterval` in `definitions/sh_fieldsettings.lua` control the activation range,
-minimum area, search-area scale and client refresh.
+minimum area, search-area scale and client refresh. `recoveryMarkerOffsetFraction` controls the
+marker's separation from the object as a fraction of the current radius (default `0.75`).
 Marker geometry updates locally every 0.1 seconds; the server sends only the contact and active claim
 when Field work requests status in range. No per-frame networking or persistence migration is needed.
 Other field types retain their current markers. Check narrowing, expiry, map/character changes and

@@ -14,13 +14,13 @@ local RANKS = {[0] = "MEMBERS", [1] = "OFFICERS", [2] = "LEADER"}
 local fontScale
 
 local function refreshFonts()
-	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+	local scale = ix.cotzUI.GetScale()
 	if (fontScale == scale) then return false end
 	fontScale = scale
 
 	for name, size in pairs({Title = 25, Label = 19, Small = 17}) do
 		surface.CreateFont("cotzSquads" .. name, {
-			font = "alsina", size = math.floor(size * scale), weight = 500, extended = true,
+			font = "alsina", size = math.floor(size * scale + 0.5), weight = 500, extended = true,
 		})
 	end
 

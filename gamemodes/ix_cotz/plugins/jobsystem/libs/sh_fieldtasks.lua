@@ -91,11 +91,13 @@ function ix.jobs.field.GetRecoverySearchArea(state, position)
 		(state.searchRadius or ix.jobs.field.settings.recovery.searchRadius) * radiusScale)
 	local radius = math.max(ix.jobs.field.runtimeSettings.recoveryMarkerMinRadius,
 		baseRadius * math.sqrt(distanceSquared) / markerDistance)
-	local offset = state.search and (ix.jobs.field.Unpack(state.search) - point) * radiusScale
-		or Vector(baseRadius / 2, 0, 0)
-	-- Keep the object inside the approximate area, including older saved search centres.
+	local offset = state.search and ix.jobs.field.Unpack(state.search) - point or Vector(1, 0, 0)
 	local offsetLength = math.sqrt(offset:LengthSqr())
-	local scale = radius / math.max(baseRadius, offsetLength)
+	-- Saved search centres can coincide with the object; retain a stable direction without exposing its position.
+	if offsetLength == 0 then
+		offset, offsetLength = Vector(1, 0, 0), 1
+	end
+	local scale = radius * ix.jobs.field.runtimeSettings.recoveryMarkerOffsetFraction / offsetLength
 
 	return point + offset * scale, radius
 end

@@ -22,7 +22,7 @@ for _, resolution in ipairs(resolutions) do
 	for _, inventoryScale in ipairs({0.8, 1, 1.25}) do
 		for _, journal in ipairs({false, true}) do
 			local screenWidth, screenHeight = resolution[1], resolution[2]
-			local scale = math.max(0.75, math.min(2, screenWidth / 1920, screenHeight / 1080))
+			local scale = math.max(0.75, math.min(2, screenWidth / 1920, screenHeight / 1080)) * 1.3
 			local pageWidth = screenWidth * 0.67
 			local backpackWidth = screenWidth * 0.28 * inventoryScale
 			local available = pageWidth - backpackWidth - screenWidth * 0.016
@@ -75,6 +75,27 @@ local function loadClientMethod(signature, environment)
 	local last = assert(source:find("\nend", first, true)) + 3
 	assert(load(source:sub(first, last), "@" .. path, "t", setmetatable(environment, {__index = _G})))()
 end
+
+local fontScale = 1.3
+local fonts, fontCount = {}, 0
+local fontEnvironment = {
+	PLUGIN = PLUGIN,
+	ix = {cotzUI = {GetScale = function() return fontScale end}},
+	surface = {CreateFont = function(name, definition)
+		fonts[name] = definition
+		fontCount = fontCount + 1
+	end},
+}
+loadClientMethod("function PLUGIN:CreateEquipmentFonts()", fontEnvironment)
+PLUGIN:CreateEquipmentFonts()
+check(fonts.cotzEquipmentTitle.size == 33 and fonts.cotzEquipmentLabel.size == 25
+	and fonts.cotzEquipmentSmall.size == 22, "Equipment uses the default larger font sizes")
+PLUGIN:CreateEquipmentFonts()
+check(fontCount == 3, "Unchanged equipment scale reuses its fonts")
+fontScale = 1
+PLUGIN:CreateEquipmentFonts()
+check(fonts.cotzEquipmentSmall.size == 17 and PLUGIN.uiScale == 1,
+	"Equipment fonts and control scale update when the preference changes")
 
 local panelMethods = {}
 PLUGIN.equipmentViews = setmetatable({}, {__mode = "k"})

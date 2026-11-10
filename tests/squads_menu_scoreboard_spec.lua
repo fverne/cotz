@@ -119,6 +119,9 @@ end}
 net = {Receive = function() end}
 ix = {
 	gui = {}, option = {Add = function() end}, type = {},
+	cotzUI = {GetScale = function()
+		return math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2) * 1.3
+	end},
 	char = {loaded = {}, RegisterVar = function(name, data) vars[name] = data end},
 	util = {Include = function() end, GetMaterial = function(path) return path end}, command = {Add = function() end},
 	config = {Get = function() return {} end},
@@ -330,10 +333,11 @@ clock = clock + 16
 remoteRow:UpdateCharacter()
 check(remoteRow.status.text == "STATUS UNAVAILABLE", "stale shared presence becomes unavailable")
 view.body:PerformLayout(1000, 600)
-check(view.overview.width + view.roster.width + 12 == 1000 and view.roster.y == 0,
+local paneGap = math.ceil(12 * ix.cotzUI.GetScale())
+check(view.overview.width + view.roster.width + paneGap == 1000 and view.roster.y == 0,
 	"wide layout has separate overview and roster columns")
 view.body:PerformLayout(500, 600)
-check(view.roster.x == 0 and view.roster.y == view.overview.height + 12,
+check(view.roster.x == 0 and view.roster.y == view.overview.height + paneGap,
 	"narrow layout stacks both scrolling panes without overlap")
 view.entryName.OnValueChange(view.entryName, "Draft name")
 view:SetMembers(data)

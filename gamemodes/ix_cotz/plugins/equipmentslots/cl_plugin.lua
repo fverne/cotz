@@ -106,14 +106,14 @@ local function setBounds(panel, bounds)
 end
 
 function PLUGIN:CreateEquipmentFonts()
-	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+	local scale = ix.cotzUI.GetScale()
 	self.uiScale = scale
 	if self.fontScale == scale then return end
 	self.fontScale = scale
 
 	for name, size in pairs({Title = 25, Label = 19, Small = 17}) do
 		surface.CreateFont("cotzEquipment" .. name, {
-			font = "alsina", size = math.floor(size * scale), weight = 500, extended = true,
+			font = "alsina", size = math.floor(size * scale + 0.5), weight = 500, extended = true,
 		})
 	end
 end
@@ -387,6 +387,11 @@ function PANEL:Think()
 	end
 	if (self.nextProtectionUpdate or 0) > RealTime() then return end
 	self.nextProtectionUpdate = RealTime() + 0.25
+	if self.layoutScale ~= ix.cotzUI.GetScale() then
+		PLUGIN:CreateEquipmentFonts()
+		self.layoutScale = PLUGIN.uiScale
+		self:InvalidateLayout(true)
+	end
 	self:UpdateProtection()
 end
 

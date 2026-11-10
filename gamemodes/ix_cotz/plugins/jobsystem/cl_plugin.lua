@@ -86,12 +86,12 @@ function PANEL:Init()
 end
 
 function PANEL:RefreshFonts()
-	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+	local scale = ix.cotzUI.GetScale()
 	if self.fontScale == scale then return end
 	self.fontScale = scale
 	for name, size in pairs({Title = 25, Label = 19, Small = 17}) do
 		surface.CreateFont("cotzTasks" .. name, {
-			font = "alsina", size = math.floor(size * scale), weight = 500, extended = true,
+			font = "alsina", size = math.floor(size * scale + 0.5), weight = 500, extended = true,
 		})
 	end
 	self.title:SetFont("cotzTasksTitle")

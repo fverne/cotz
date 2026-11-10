@@ -12,6 +12,8 @@ local sent = {}
 local confirmation
 local notifications = {}
 local fieldActions = {}
+local uiScale = 1.3
+local fonts = {}
 local character = {GetJobs = function() return activeJobs end, GetData = function() return 0 end}
 local client = {
 	GetCharacter = function() return character end,
@@ -68,14 +70,15 @@ SortedPairs = function(value)
 	end
 end
 math.Clamp = function(value, low, high) return math.max(low, math.min(high, value)) end
-surface = {CreateFont = function() end, SetFont = function() end,
+surface = {CreateFont = function(name, definition) fonts[name] = definition end, SetFont = function() end,
 	GetTextSize = function(text) return #text * 10, 17 end}
 vgui = {Register = function(name, definition) classes[name] = definition end}
 netstream = {
 	Hook = function() end,
 	Start = function(name, npc) sent[#sent + 1] = {name = name, npc = npc} end,
 }
-ix = {cotzUI = {Query = function(text, title, cancel, onCancel, accept, onAccept)
+ix = {type = {bool = "bool"}, option = {Add = function() end}, cotzUI = {
+GetScale = function() return uiScale end, Query = function(text, title, cancel, onCancel, accept, onAccept)
 	confirmation = {text = text, cancel = onCancel, accept = onAccept}
 end}, jobs = {
 	list = {hunt = {}, survey = {}},
@@ -95,6 +98,8 @@ menu:Init()
 check(menu.title.text == "TASKS · 0", "empty menu shows zero tasks")
 check(menu.journal.class == "DScrollPanel", "task list scrolls independently")
 check(menu.journal.children[1].text:find("No active tasks", 1, true), "empty menu explains how to find work")
+check(fonts.cotzTasksTitle.size == 33 and fonts.cotzTasksLabel.size == 25 and fonts.cotzTasksSmall.size == 22,
+	"Tasks use the larger font scale for headings, names and body text")
 activeJobs = {
 	Zulu = {identifier = "survey", numberRec = 1, progress = 0, reward = "recorder", fieldTask = {kind = "sensor", stage = "deploy"}},
 	Alpha = {identifier = "hunt", numberRec = 4, progress = 2, reward = "bandages"},
@@ -151,6 +156,12 @@ local stableCard = menu.journal.children[1]
 clock = 2
 menu:Think()
 check(menu.journal.children[1] == stableCard, "unchanged jobs preserve cards and scroll state")
+uiScale = 1
+clock = 2.5
+menu:Think()
+check(fonts.cotzTasksSmall.size == 17 and menu.journal.children[1] ~= stableCard
+	and menu.journal.children[1].children[6]:GetTall() == 30,
+	"Changing font scale refreshes open task cards and action rows")
 activeJobs.Alpha = nil
 clock = 3
 menu:Think()

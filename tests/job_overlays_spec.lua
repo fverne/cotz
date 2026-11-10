@@ -103,13 +103,15 @@ local function paintRecovery(distance)
 end
 showRecovery()
 local farMarker = paintRecovery(4096)
-check(farMarker and farMarker.x == 1768 and farMarker.label:find("search within 30 m", 1, true),
+check(farMarker and farMarker.x == 2152 and farMarker.label:find("search within 30 m", 1, true),
 	"nearby field work displays the saved approximate area in world space")
 local midMarker = paintRecovery(2048)
 local nearMarker = paintRecovery(0)
 check(midMarker and midMarker.x < farMarker.x and midMarker.label:find("search within 15 m", 1, true)
 	and nearMarker and nearMarker.x < midMarker.x and nearMarker.label:find("search within 5 m", 1, true),
 	"active recovery marker narrows its position and displayed radius without another request")
+check(nearMarker.x - 1000 >= 180 and nearMarker.x - 1000 <= 205,
+	"even the narrowest recovery marker stays several metres away from the equipment")
 check(not paintRecovery(4097), "walking outside the nearby area hides the recovery marker")
 check(paintRecovery(2048), "returning nearby restores an unexpired recovery marker")
 hidden = true

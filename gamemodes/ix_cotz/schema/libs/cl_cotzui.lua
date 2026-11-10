@@ -19,13 +19,34 @@ local function refreshLayout(panel)
 	for _, child in ipairs(panel:GetChildren()) do refreshLayout(child) end
 end
 
+function ix.cotzUI.GetScale()
+	local screenScale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+
+	return screenScale * math.Clamp(ix.option.Get("cotzUIFontScale", 1.1), 0.75, 2)
+end
+
+ix.option.Add("cotzUIFontScale", ix.type.number, 1.1, {
+	category = "appearance",
+	phrase = "COTZ font scale",
+	description = "Scale text and its controls in Tasks, Squads, Equipment and shared COTZ menus. 1.00 restores the original size; 1.10 is the default.",
+	min = 0.75,
+	max = 2,
+	decimals = 2,
+	OnChanged = function()
+		ix.cotzUI.Scale(1)
+		local world = vgui.GetWorldPanel()
+		refreshLayout(world)
+		world:InvalidateChildren(true)
+	end,
+})
+
 function ix.cotzUI.Scale(value)
-	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+	local scale = ix.cotzUI.GetScale()
 	if fontScale ~= scale then
 		fontScale = scale
 		for name, size in pairs({Title = 25, Label = 19, Small = 17}) do
 			surface.CreateFont("cotzUI" .. name, {
-				font = "alsina", size = math.floor(size * scale), weight = 500, extended = true,
+				font = "alsina", size = math.floor(size * scale + 0.5), weight = 500, extended = true,
 			})
 		end
 	end
@@ -120,6 +141,7 @@ function ix.cotzUI.Frame(title, widthFraction, heightFraction, maxWidth)
 	frame:SetTitle(title)
 	local function resize(control)
 		control.screenWidth, control.screenHeight = ScrW(), ScrH()
+		control.cotzScale = ix.cotzUI.GetScale()
 		control:SetSize(math.min(ScrW() * widthFraction, ix.cotzUI.Scale(maxWidth)), ScrH() * heightFraction)
 		control:Center()
 		refreshLayout(control)
@@ -129,7 +151,8 @@ function ix.cotzUI.Frame(title, widthFraction, heightFraction, maxWidth)
 	local think = frame.Think
 	frame.Think = function(control)
 		think(control)
-		if control.screenWidth ~= ScrW() or control.screenHeight ~= ScrH() then resize(control) end
+		if control.screenWidth ~= ScrW() or control.screenHeight ~= ScrH()
+			or control.cotzScale ~= ix.cotzUI.GetScale() then resize(control) end
 	end
 	resize(frame)
 	frame:MakePopup()

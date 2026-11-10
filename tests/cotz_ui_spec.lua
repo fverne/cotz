@@ -7,6 +7,7 @@ end
 local screenWidth, screenHeight = 1920, 1080
 local fonts, fontCount, currentFont = {}, 0, nil
 local rectangles = {}
+local options, optionValues = {}, {}
 local methods = {}
 local function panel(class)
 	return setmetatable({class = class, children = {}, width = 100, height = 24,
@@ -82,7 +83,18 @@ vgui = {Create = function(class)
 
 	return frame
 end}
-ix = {util = {WrapText = function(text, width, font)
+local world = panel("World")
+vgui.GetWorldPanel = function() return world end
+ix = {type = {number = "number"}, option = {
+	Add = function(key, valueType, default, data)
+		data.default, data.type = default, valueType
+		options[key] = data
+	end,
+	Get = function(key, default)
+		if optionValues[key] ~= nil then return optionValues[key] end
+		return options[key] and options[key].default or default
+	end,
+}, util = {WrapText = function(text, width, font)
 	surface.SetFont(font)
 	local textWidth = surface.GetTextSize(text)
 	local lines = {}
@@ -92,11 +104,28 @@ ix = {util = {WrapText = function(text, width, font)
 end}}
 dofile("gamemodes/ix_cotz/schema/libs/cl_cotzui.lua")
 local frame, scroll = ix.cotzUI.Frame("Management", 0.8, 0.75, 900)
+world.children[#world.children + 1] = frame
 check(fontCount == 3, "Shared fonts are created once for a screen scale")
+check(fonts.cotzUITitle.size == 33 and fonts.cotzUILabel.size == 25 and fonts.cotzUISmall.size == 22,
+	"Default preference enlarges titles, labels and body text by about thirty percent")
+check(options.cotzUIFontScale.category == "appearance" and options.cotzUIFontScale.default == 1.3
+	and not options.cotzUIFontScale.bNetworked, "Font scale is a local appearance preference")
 ix.cotzUI.Scale(1)
 check(fontCount == 3, "Repeated drawing reuses fonts")
 local field = ix.cotzUI.StyleEntry(scroll:Add("DTextEntry"))
 ix.cotzUI.SetHeight(field, 34)
+local largerHeight = field:GetTall()
+optionValues.cotzUIFontScale = 1
+options.cotzUIFontScale.OnChanged(1.3, 1)
+frame:Think()
+check(fonts.cotzUITitle.size == 25 and fonts.cotzUILabel.size == 19 and fonts.cotzUISmall.size == 17,
+	"A scale of one restores the original font sizes without changing resolution")
+check(field:GetTall() < largerHeight and frame.cotzScale == 1,
+	"Open controls and frame layout refresh after a preference change")
+optionValues.cotzUIFontScale = 1.3
+options.cotzUIFontScale.OnChanged(1, 1.3)
+frame:Think()
+check(field:GetTall() == largerHeight, "Restoring the preference resizes existing controls")
 local button = ix.cotzUI.Button(scroll, string.rep("Long item name ", 12), function() end)
 button:PerformLayout(800, 34)
 local wideHeight = button:GetTall()

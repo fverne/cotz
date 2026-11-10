@@ -60,5 +60,6 @@ ix.jobs.field.runtimeSettings = {
 	recoveryMarkerDistance = 4096,
 	recoveryMarkerMinRadius = 256,
 	recoveryMarkerRadiusScale = 4,
+	recoveryMarkerOffsetFraction = 0.75,
 	recoveryMarkerUpdateInterval = 0.1,
 }
