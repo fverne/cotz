@@ -144,3 +144,7 @@ Run `luatex --luaonly tests/mutant_target_safety_spec.lua`,
 `luatex --luaonly tests/burer_stamina_spec.lua`, `luatex --luaonly tests/karlik_teleport_spec.lua` and
 `luatex --luaonly tests/npc_combat_spec.lua`. Also verify mutant-versus-NPC fights, target removal during
 windup, and player release after grabs or mutant death in multiplayer.
+
+`lua/entities/stalker_ai/schedules.lua` owns mutant unreachable-target grace, bounded position retries,
+and recovery when targets move or return to melee range. Run `luatex --luaonly tests/mutant_navigation_spec.lua`
+alongside the combat and population suites; verify static-prop encounters in multiplayer.

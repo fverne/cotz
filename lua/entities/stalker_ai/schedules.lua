@@ -1,3 +1,77 @@
+local UNREACHABLE_GRACE = 1
+local UNREACHABLE_RETRY_INTERVAL = 2
+local UNREACHABLE_RETRIES = 2
+local UNREACHABLE_TARGET_MOVEMENT_SQR = 64 ^ 2
+local UNREACHABLE_PROGRESS = 64
+
+local function clearUnreachableRecovery(actor)
+	if not actor.cotzUnreachableRecovery then return end
+
+	actor.cotzUnreachableRecovery = nil
+	actor:ClearSchedule()
+	actor:ScheduleFinished()
+	actor:EngineScheduleFinish()
+	actor.NextRun = 0
+end
+
+local function updateUnreachableRecovery(actor, enemy)
+	local recovery = actor.cotzUnreachableRecovery
+	local position = enemy:GetPos()
+	local now = CurTime()
+	if recovery and (recovery.enemy ~= enemy
+		or position:DistToSqr(recovery.position) >= UNREACHABLE_TARGET_MOVEMENT_SQR) then
+		clearUnreachableRecovery(actor)
+		recovery = nil
+	end
+
+	if not recovery and not actor:IsUnreachable(enemy) then return false end
+
+	local meleeRange = actor:STALKERNPCEnemyInMeleeRange(
+		enemy, actor.MeleeAttackDistanceMin, actor.MeleeAttackDistance
+	)
+	if meleeRange ~= 0 then
+		clearUnreachableRecovery(actor)
+
+		return false
+	end
+
+	if not recovery then
+		recovery = {
+			enemy = enemy,
+			position = position,
+			distance = actor:GetPos():Distance(position),
+			nextRetry = now + UNREACHABLE_GRACE,
+			retries = 0,
+		}
+		actor.cotzUnreachableRecovery = recovery
+		actor:SetSchedule(SCHED_COMBAT_FACE)
+	end
+
+	-- Expiry of the engine's unreachable memory alone does not prove that a retry found a path.
+	if recovery.retries > 0 and not recovery.retreating and not actor:IsUnreachable(enemy)
+		and actor:GetPos():Distance(position) <= recovery.distance - UNREACHABLE_PROGRESS then
+		clearUnreachableRecovery(actor)
+
+		return false
+	end
+	if now < recovery.nextRetry then return true end
+
+	if recovery.retries < UNREACHABLE_RETRIES then
+		recovery.retries = recovery.retries + 1
+		recovery.nextRetry = now + UNREACHABLE_RETRY_INTERVAL
+		-- Position goals retry navigation without the chase task rejecting remembered unreachable enemies.
+		actor:SetLastPosition(position)
+		actor:SetSchedule(SCHED_FORCED_GO_RUN)
+	else
+		recovery.retreating = true
+		if not actor:IsCurrentSchedule(SCHED_MOVE_AWAY_FROM_ENEMY) then
+			actor:SetSchedule(SCHED_MOVE_AWAY_FROM_ENEMY)
+		end
+	end
+
+	return true
+end
+
 function ENT:RunAI( strExp )
 	if self.cotzSleeping then return end
 	if(self.PlayingAnimation==false||(self.PlayingAnimation==true&&self.PlayingGesture==true&&self.AllowSchedulesOnGesture==true)) then
@@ -29,7 +103,11 @@ function ENT:SelectSchedule( iNPCState )
 	if self.cotzSleeping then return end
 	if ix and ix.eventController then
 		ix.eventController:ValidateCombatEnemy(self)
-		if ix.eventController:UpdateCombatSchedule(self) then return end
+		if ix.eventController:UpdateCombatSchedule(self) then
+			self.cotzUnreachableRecovery = nil
+
+			return
+		end
 	end
 	if(!isnumber(self.NextRun)) then
 		self.NextRun = CurTime()+1
@@ -51,14 +129,7 @@ function ENT:SelectSchedule( iNPCState )
 			self:GetEnemy():VisibleVec(self:GetPos()+self:OBBCenter())) then
 				self.SeeEnemy = CurTime()+3
 
-				if(self:IsUnreachable(self:GetEnemy())) then
-					if(!self:IsCurrentSchedule(SCHED_MOVE_AWAY_FROM_ENEMY) or self.NextSchedForce < CurTime()) then
-						self:SetSchedule(SCHED_MOVE_AWAY_FROM_ENEMY)
-					end
-					self.NextSchedForce = CurTime()+0.5
-					self.NextRun = CurTime()+3
-					return
-				end
+				if updateUnreachableRecovery(self, self:GetEnemy()) then return end
 				
 				local TEMP_EDist = (self:GetPos()+self:OBBCenter()):Distance(self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter())
 				
@@ -93,6 +164,7 @@ function ENT:SelectSchedule( iNPCState )
 				end
 						
 			else
+				clearUnreachableRecovery(self)
 				if(self.SeeEnemy<CurTime()) then
 
 					if(!self:IsCurrentSchedule(self.HiddenSchedule)) then
@@ -101,6 +173,7 @@ function ENT:SelectSchedule( iNPCState )
 				end
 			end
 		else
+			clearUnreachableRecovery(self)
 			if(!self:IsCurrentSchedule(SCHED_IDLE_WANDER)) then
 				self:SetSchedule(SCHED_IDLE_WANDER)
 			end

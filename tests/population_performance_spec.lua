@@ -142,10 +142,12 @@ reset()
 local entity = mutant(20, 10000)
 performance:RegisterMutant(entity, false)
 entity.CurrentSchedule, entity.bDoingEngineSchedule = {}, true
+entity.cotzUnreachableRecovery = {retries = 2, retreating = true}
 entity:STALKERNPCUpdateSleep()
 check(entity.cotzSleeping and entity.flags ~= 0 and entity.stopped, "distant idle mutant stops engine Think")
 check(entity.CurrentSchedule == nil and entity.bDoingEngineSchedule == nil,
 	"sleep clears Lua and engine schedule bookkeeping")
+check(not entity.cotzUnreachableRecovery, "sleep discards unreachable recovery before the next encounter")
 local damage = {GetAttacker = function() return nil end, GetInflictor = function() end}
 PLUGIN:EntityTakeDamage(entity, damage)
 check(not entity.cotzSleeping and entity.flags == 0 and entity.state == 2,

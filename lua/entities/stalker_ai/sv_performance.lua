@@ -52,6 +52,7 @@ function ENT:STALKERNPCUpdateSleep()
 
 	self.cotzPreviousState = self:GetNPCState()
 	self.cotzSleeping = true
+	self.cotzUnreachableRecovery = nil
 	ix.eventController:ClearCombatEnemy(self)
 	if self.STALKERNPCStopAllTimers then self:STALKERNPCStopAllTimers(true) end
 	if self.STALKERNPCClearAnimation then self:STALKERNPCClearAnimation() end

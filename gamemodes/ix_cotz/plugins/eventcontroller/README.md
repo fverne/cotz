@@ -148,3 +148,16 @@ Also check both NPC families while circling behind them, breaking sight around c
 closer rivals, and removing targets during attacks. Confirm that occluded pursuit stops at the last
 known position and expires after ten seconds. A valid target with no usable navigation path remains
 a map/navigation issue; the standalone suites cannot establish in-game movement correctness.
+
+Visible unreachable targets now receive a one-second grace period, then two position-based chase retries
+two seconds apart before the existing move-away fallback. Recovery is per mutant and target, and applies
+to player and NPC enemies. Engine unreachable-memory expiry alone does not replenish retries. Advancing
+64 units toward the target while that memory is clear restores normal combat. Target movement of 64 units
+in any direction resets recovery; returning within the mutant's existing melee range cancels it even while
+engine memory is stale. Target loss, occluded pursuit and sleep discard recovery. Attack animations retain
+their existing schedule protection. Constants live at the top of `lua/entities/stalker_ai/schedules.lua`.
+
+Run `luatex --luaonly tests/mutant_navigation_spec.lua` alongside the combat and population suites.
+In multiplayer, check climbing onto and off static props, stationary perched players and mutants, repeated
+small movements, target switching, and navigation recovery after failed retries. This change does not repair
+map navigation or relocate stranded mutants.
