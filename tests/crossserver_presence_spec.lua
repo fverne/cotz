@@ -35,7 +35,15 @@ local function encode(value)
 end
 util = {JSONToTable = function(value) return jsonValues[value] end, AddNetworkString = function() end, SHA256 = function(value) return value end, TableToJSON = encode}
 game = {GetIPAddress = function() return "test" end}
-local client = {GetCharacter = function() return {} end}
+local liveData = {leaderboardStats = {tasksCompleted = 15, taskEarnings = 900, species = {private = true}},
+	privateVendorHistory = "private"}
+local liveProgression = {lines = {["test/one"] = {completed = true}}}
+local character = {
+	GetID = function() return 70 end,
+	GetData = function() return liveData end,
+	GetProgression = function() return liveProgression end,
+}
+local client = {GetCharacter = function() return character end}
 player = {GetHumans = function() return {client} end}
 string.ToColor = function() return Color(105, 139, 87) end
 ix = {config = {Add = function() end, Get = function(_, default) return default end}}
@@ -78,6 +86,12 @@ check(ix.crossserver.roster[1].profile.leaderboardStats.favoriteContact == "Test
 check(ix.crossserver.roster[1].name == "Scout 1" and ix.crossserver.roster[70].squadName == "Scouts",
 	"completed snapshot preserves character identity and public squad data")
 check(ix.crossserver.roster[70].squadColor.g == 139, "typed colors survive the round trip")
+local profile = ix.crossserver.roster[70].profile
+check(profile.leaderboardStats.tasksCompleted == 15 and profile.leaderboardStats.taskEarnings == 900
+	and profile.leaderboardStats.favoriteContact == "Tester",
+	"local public profiles use live server counters and progression before character save")
+check(profile.privateVendorHistory == nil and profile.leaderboardStats.species == nil
+	and profile.progression == nil, "roster profiles exclude private character data and raw progression")
 packets = {}
 ix.crossserver.PublishRoster(rows)
 check(#packets == 1 and packets[1][1] == false and #packets[1] == 1,
@@ -85,6 +99,13 @@ check(#packets == 1 and packets[1][1] == false and #packets[1] == 1,
 now = now + 5
 receive(packets[1])
 check(ix.crossserver.rosterFresh == now, "freshness acknowledgements refresh the last successful read")
+packets = {}
+liveData.leaderboardStats.tasksCompleted = 16
+ix.crossserver.PublishRoster(rows)
+check(#packets == 3 and packets[1][1] == true, "unsaved counter changes publish a replacement snapshot")
+for _, values in ipairs(packets) do receive(values) end
+check(ix.crossserver.roster[70].profile.leaderboardStats.tasksCompleted == 16,
+	"updated live totals survive the roster round trip")
 packets = {}
 ix.crossserver.PublishRoster({})
 receive(packets[1])

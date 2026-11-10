@@ -213,14 +213,23 @@ local function sendSnapshot(client, records)
 end
 
 function ix.crossserver.PublishRoster(rows)
+	local clients = player.GetHumans()
+	local characters = {}
+	for _, client in ipairs(clients) do
+		local character = client:GetCharacter()
+		if character then characters[character:GetID()] = character end
+	end
 	local records = {}
 	for _, row in ipairs(rows) do
-		local progression = row.progression and util.JSONToTable(row.progression)
+		local characterID = tonumber(row.character_id)
+		local character = characters[characterID]
+		local data = character and character:GetData() or util.JSONToTable(row.profile or "{}") or {}
+		local progression = character and character.GetProgression and character:GetProgression()
+			or (row.progression and util.JSONToTable(row.progression))
 		records[#records + 1] = {
-			profile = util.TableToJSON({leaderboardStats = ix.jobs.GetLeaderboardStats(
-				util.JSONToTable(row.profile or "{}") or {}, progression),
+			profile = util.TableToJSON({leaderboardStats = ix.jobs.GetLeaderboardStats(data, progression),
 				reputation = tonumber(row.reputation) or 0}),
-			characterID = tonumber(row.character_id), name = row.name or "",
+			characterID = characterID, name = row.name or "",
 			pdaavatar = row.pdaavatar or "vgui/icons/face_31.png", state = row.state,
 			map = row.map or "", destination = row.destination or "",
 			squadID = row.squad_id or "", squadName = row.squad_name or "",
@@ -230,7 +239,7 @@ function ix.crossserver.PublishRoster(rows)
 				and string.ToColor(row.squad_color) or Color(116, 119, 107),
 		}
 	end
-	for _, client in ipairs(player.GetHumans()) do
+	for _, client in ipairs(clients) do
 		local character = client:GetCharacter()
 		if (character) then
 			local visible = records

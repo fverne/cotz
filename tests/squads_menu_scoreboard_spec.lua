@@ -149,7 +149,14 @@ local nextCharacterID = 0
 local function client(id, name, reputation)
 	nextCharacterID = nextCharacterID + 1
 	local character = {id = id, name = name, characterID = nextCharacterID}
-	function character:GetData() return {} end
+	function character:GetData()
+		assert(self == localClient.character, "other characters' private data is unavailable on this client")
+		return {leaderboardStats = {tasksCompleted = 3, taskEarnings = 100}}
+	end
+	function character:GetProgression()
+		assert(self == localClient.character, "other characters' progression is unavailable on this client")
+		return {}
+	end
 	function character:GetID() return self.characterID end
 	function character:GetName() return "Name " .. self.characterID end
 	function character:GetPdaavatar() return "vgui/icons/face_31.png" end
@@ -173,7 +180,7 @@ local second = client("owner-a", "Alpha", 10)
 local hidden = client("owner-b", "Hidden", 0)
 hidden.hidden = true
 clients = {localClient, first, second, hidden}
-ix.jobs = {GetLeaderboardStats = function() return {tasksCompleted = 3, taskEarnings = 100} end}
+dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_leaderboard.lua")
 loadGLua("gamemodes/ix_cotz/schema/derma/cl_scoreboard.lua")
 -- Remote presentation must run without any player entity methods or local-only action menu.
 local remotePresentation = panel("ixScoreboardRow")
@@ -255,10 +262,27 @@ local filtered = ix.townNPCs:FilterNetworkRecord(localClient.character, {
 }, {remote = false})
 check(filtered and filtered.profile.reputation == 500 and filtered.profile.leaderboardStats.tasksCompleted == 8,
 	"remote identities, rank and activity are available without progression")
+ix.crossserver.roster[first.character:GetID()] = {
+	characterID = first.character:GetID(), name = "Old name", map = "map_a",
+	profile = {reputation = 20, leaderboardStats = {
+		tasksCompleted = 8, taskEarnings = 750, mutantsPoached = 4, favoriteContact = "Tester",
+	}},
+}
 local otherRecord = ix.crossserver.GetScoreboardRoster(false)[first.character:GetID()]
 scoreboard:SelectRecord(otherRecord)
 check(scoreboard.dossierFields.taskEarnings.card.visible
 	and scoreboard.dossierFields.reputation.card.visible, "other characters have fully available dossiers")
+check(scoreboard.dossierFields.tasksCompleted.value.text == "8"
+	and scoreboard.dossierFields.taskEarnings.value.text == "750 RU"
+	and scoreboard.dossierFields.mutantsPoached.value.text == "4"
+	and scoreboard.dossierFields.favoriteContact.value.text == "Tester",
+	"local player dossiers retain the public server counters and favorite contact")
+check(otherRecord.player == first and otherRecord.name == first.character:GetName(),
+	"public statistics merge with the current local identity and actions")
+ix.crossserver.roster[first.character:GetID()].profile.leaderboardStats.tasksCompleted = 9
+clock = clock + 1
+scoreboard:Think()
+check(scoreboard.dossierFields.tasksCompleted.value.text == "9", "selected dossiers refresh with public snapshots")
 scoreboard:SelectRecord(ix.crossserver.GetScoreboardRoster(false)[localClient.character:GetID()])
 local lockedRoster = ix.crossserver.GetScoreboardRoster(false)
 check(lockedRoster[localClient.character:GetID()].profile.reputation == 0

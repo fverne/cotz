@@ -85,10 +85,15 @@ if (CLIENT) then
 					if (ix.squad and ix.squad.GetScoreboardGroup) then
 						squadID, squadName, squadColor = ix.squad.GetScoreboardGroup(client)
 					end
+					-- Helix character data and progression are only replicated to their owner.
+					local stats = previous and previous.profile and previous.profile.leaderboardStats or {}
+					if client == LocalPlayer() then
+						stats = ix.jobs.GetLeaderboardStats(character:GetData(),
+							character.GetProgression and character:GetProgression())
+					end
 					records[id] = {
 						profile = {reputation = client:getReputation(),
-							leaderboardStats = ix.jobs.GetLeaderboardStats(character:GetData(),
-								character.GetProgression and character:GetProgression())},
+							leaderboardStats = stats},
 						characterID = id, player = client, name = character:GetName(),
 						pdaavatar = character:GetPdaavatar(), map = game.GetMap(), fresh = true,
 						state = previous and fresh and previous.state == "travelling" and "travelling" or "online",
