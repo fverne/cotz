@@ -45,36 +45,71 @@ ix.char.RegisterVar("karma", {
 local playerMeta = FindMetaTable("Player")
 local entityMeta = FindMetaTable("Entity")
 
+-- Character state is authoritative; player net vars are only its display mirror.
 function playerMeta:getKarma()
-	return (self:GetNetVar("karma")) or 0
+	if SERVER then
+		local character = self:GetCharacter()
+
+		return character and character:GetKarma() or 0
+	end
+
+	return self:GetNetVar("karma", 0)
 end
 
 function playerMeta:getReputation()
-	return (self:GetNetVar("reputation")) or 0
+	if SERVER then
+		local character = self:GetCharacter()
+
+		return character and character:GetReputation() or 0
+	end
+
+	return self:GetNetVar("reputation", 0)
 end
 
 function playerMeta:getRepName()
-	return (self:GetNetVar("repOverride")) or 0
+	if SERVER then
+		local character = self:GetCharacter()
+
+		return character and character:GetData("repOverride", 0) or 0
+	end
+
+	return self:GetNetVar("repOverride", 0)
 end
 
 function playerMeta:addKarma(amount)
-	local curKarma = self:getKarma()
+	if not SERVER then return end
+	local character = self:GetCharacter()
+	if not character then return end
+	local karma = math.Clamp(character:GetKarma() + amount, -100, 100)
 
-	self:SetNetVar("karma", 
-		math.Clamp(math.min(curKarma) + amount, -100, 100)
-	)
+	character:SetKarma(karma)
+	self:SetNetVar("karma", karma)
 end
 
 function playerMeta:addReputation(amount)
-	self:SetNetVar("reputation", self:getReputation() + amount)
+	self:setReputation(self:getReputation() + amount)
 end
 
 function playerMeta:setReputation(amount)
+	if not SERVER then return end
+	local character = self:GetCharacter()
+	if not character then return end
+
+	character:SetReputation(amount)
 	self:SetNetVar("reputation", amount)
 end
 
+function playerMeta:SetRepName(name)
+	if not SERVER then return end
+	local character = self:GetCharacter()
+	if not character then return end
+
+	character:SetData("repOverride", name)
+	self:SetNetVar("repOverride", name)
+end
+
 function playerMeta:getCurrentRankName()
-	local rep = self:GetNetVar("reputation") or 0
+	local rep = self:getReputation()
 
 	if self:getRepName() != 0 then
 		return self:getRepName()
@@ -90,7 +125,7 @@ function playerMeta:getCurrentRankName()
 end
 
 function playerMeta:getCurrentKarmaName()
-	local karma = self:GetNetVar("karma") or 0
+	local karma = self:getKarma()
 	
 	for i = 1, #PLUGIN.karmaDefs do
 		if PLUGIN.karmaDefs[i][2] >= karma then
@@ -118,34 +153,11 @@ function PLUGIN:PopulateCharacterInfo(client, character, container)
 	return true
 end
 
-if (SERVER) then
-	local PLUGIN = PLUGIN
-	
-	function PLUGIN:CharacterPreSave(character)
-		local savedKarma = math.Clamp(character.player:getKarma(), -100, 100)
-		character:SetKarma(savedKarma)
-		character:SetReputation(character.player:getReputation())
-		character:SetData("repOverride", character.player:getRepName())
-	end
-
+if SERVER then
 	function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
-		if (character:GetKarma()) then
-			client:SetNetVar("karma", character:GetKarma())
-		else
-			client:SetNetVar("karma", 0)
-		end
-		
-		if (character:GetReputation()) then
-			client:SetNetVar("reputation", character:GetReputation())
-		else
-			client:SetNetVar("reputation", 0)
-		end
-
-		if (character:GetData("repOverride")) then
-			client:SetNetVar("repOverride", character:GetData("repOverride"))
-		else
-			client:SetNetVar("repOverride", 0)
-		end
+		client:SetNetVar("karma", character:GetKarma())
+		client:SetNetVar("reputation", character:GetReputation())
+		client:SetNetVar("repOverride", character:GetData("repOverride", 0))
 	end
 
 	function PLUGIN:PlayerDeath(client)
@@ -334,7 +346,7 @@ ix.command.Add("charrepnameset", {
 		local target = ix.util.FindPlayer(target)
 		local reputation = name
 
-		target:SetNetVar("repOverride", reputation)
+		target:SetRepName(reputation)
 
 		if client == target then
             client:Notify("Custom rankname set.")
@@ -353,7 +365,7 @@ ix.command.Add("charrepnameremove", {
 	OnRun = function(self, client, target)
 		local target = ix.util.FindPlayer(target)
 
-		target:SetNetVar("repOverride", 0)
+		target:SetRepName(0)
 
 		if client == target then
             client:Notify("Custom rankname removed.")

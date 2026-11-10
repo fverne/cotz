@@ -19,7 +19,8 @@ for _, realm in ipairs({"server", "client"}) do
 	hook = {Add = function() end}
 	vgui = {Register = function(name) registered[name] = true end}
 	ix = {
-		util = {}, type = {text = "text", character = "character"},
+		util = {}, type = {text = "text", character = "character", bool = "bool"},
+		option = {Add = function() check(CLIENT, "field equipment option registered client-side") end},
 		char = {RegisterVar = function() end}, config = {Add = function() end},
 		command = {Add = function() check(SERVER, "commands installed on the server") end},
 	}

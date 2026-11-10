@@ -4,11 +4,54 @@ local nextRequest = 0
 local nextOverlayUpdate = 0
 local overlayCharacter
 local readingMarkers = {}
+local equipmentMarkers
+local nextEquipmentUpdate = 0
+local EQUIPMENT_UPDATE_INTERVAL = 1
 local MARKER_SECONDS = ix.jobs.field.runtimeSettings.markerSeconds
 local METRES_PER_UNIT = 0.01905
 local MARKER_OFFSET = Vector(0, 0, 24)
 local ACTIONS = {status = "Show assignment", deploy = "Deploy sensor", read = "Take signal reading",
 	start = "Start or restart research", deliver = "Deliver parcel", issue = "Collect parcel from issuer"}
+
+ix.option.Add("observerFieldEquipmentESP", ix.type.bool, false, {
+	category = "observer",
+	phrase = "Field Equipment ESP",
+	description = "Show spawned field-task equipment through walls while observing (admins only).",
+	hidden = function()
+		local client = LocalPlayer()
+
+		return not IsValid(client) or not client:IsAdmin()
+			or not CAMI.PlayerHasAccess(client, "Helix - Observer", nil)
+	end,
+})
+
+local function drawEquipmentESP(client)
+	if not client:IsAdmin() or not ix.option.Get("observerFieldEquipmentESP", false)
+		or not ix.option.Get("observerESP", true) or client:GetMoveType() ~= MOVETYPE_NOCLIP
+		or client:InVehicle() or not CAMI.PlayerHasAccess(client, "Helix - Observer", nil) then
+		equipmentMarkers, nextEquipmentUpdate = nil, 0
+		return
+	end
+	if CurTime() >= nextEquipmentUpdate then
+		nextEquipmentUpdate = CurTime() + EQUIPMENT_UPDATE_INTERVAL
+		equipmentMarkers = {}
+		for _, entity in ipairs(ents.FindByClass("ix_job_field_object")) do
+			equipmentMarkers[#equipmentMarkers + 1] = {
+				entity = entity,
+				position = entity:GetPos() + MARKER_OFFSET,
+				label = entity:GetNWString("cotz/jobsystem/cargo-name", "Field task equipment"),
+			}
+		end
+	end
+	for _, equipment in ipairs(equipmentMarkers) do
+		if IsValid(equipment.entity) then
+			local screen = equipment.position:ToScreen()
+			if screen.visible then
+				ix.cotzUI.DrawMarker(equipment.label, screen.x, screen.y, ix.cotzUI.colors.teal)
+			end
+		end
+	end
+end
 
 local function request(npc, action)
 	if CurTime() < nextRequest then return end
@@ -89,6 +132,7 @@ function PLUGIN:HUDPaint()
 	local client = LocalPlayer()
 	local character = client:GetCharacter()
 	if not client:Alive() or not character or client:ShouldDrawLocalPlayer() or gui.IsGameUIVisible() then return end
+	drawEquipmentESP(client)
 	drawOverlays(client, character)
 	if not marker or CurTime() > marker.expires then return end
 	if character ~= marker.character then marker = nil return end

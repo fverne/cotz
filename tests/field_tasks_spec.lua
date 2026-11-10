@@ -1093,7 +1093,7 @@ check(ix.jobs.getFormattedDesc(textJob):find("50% Yard", 1, true),
 local previousMarkers = markers
 local recoveryClient, recoveryOwner = actor()
 recoveryOwner.jobs.Clue = textJob
-recoveryClient.position = Vector(-25, 0, 0)
+recoveryClient.position = Vector(-3097, 0, 0)
 ix.jobs.field.Status(recoveryClient, "Clue", textJob)
 check(markers == previousMarkers, "distant recovery status provides the clue without a world marker")
 recoveryClient.position = Vector(0, 0, 0)
@@ -1102,19 +1102,20 @@ check(markers == previousMarkers + 1 and lastNetwork == "cotz/jobsystem/recovery
 	and lastRecipient == recoveryClient and networkStrings[1] == "Clue"
 	and networkStrings[2] == textJob.rewardKey, "nearby recovery status marks only the requesting owner's claim")
 local target = ix.jobs.field.Unpack(recovery.point)
-local farCentre, farRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(1024, 0, 0))
-local midCentre, midRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(512, 0, 0))
+local farCentre, farRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4096, 0, 0))
+local midCentre, midRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(2048, 0, 0))
 local nearCentre, nearRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target)
-check(farRadius == 384 and midRadius == 192 and nearRadius == 64,
+check(farRadius == 1536 and midRadius == 768 and nearRadius == 256,
 	"recovery search radius narrows with object distance and retains a small approximate area")
 check(farCentre:DistToSqr(target) <= farRadius ^ 2 and midCentre:DistToSqr(target) <= midRadius ^ 2
 	and nearCentre:DistToSqr(target) > 0 and nearCentre:DistToSqr(target) <= nearRadius ^ 2,
 	"old assignments without search centres keep the object within an offset approximate area")
 recovery.search = {1192, 192, 0}
-local savedCentre = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(1024, 0, 0))
-check(savedCentre:DistToSqr(ix.jobs.field.Unpack(recovery.search)) == 0 and recovery.point[1] == 1000,
-	"recovery marker reuses the saved search centre without changing the assignment")
-check(not ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(1025, 0, 0)),
+local savedCentre = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4096, 0, 0))
+check(savedCentre:DistToSqr(Vector(1768, 768, 0)) == 0
+	and recovery.search[1] == 1192 and recovery.search[2] == 192 and recovery.point[1] == 1000,
+	"recovery marker expands existing search offsets without changing saved sites or search centres")
+check(not ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4097, 0, 0)),
 	"recovery marker is unavailable beyond the activation distance")
 map = "another-map"
 ix.jobs.field.Status(recoveryClient, "Clue", textJob)

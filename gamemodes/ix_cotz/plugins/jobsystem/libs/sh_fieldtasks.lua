@@ -86,12 +86,13 @@ function ix.jobs.field.GetRecoverySearchArea(state, position)
 	local distanceSquared = position:DistToSqr(point)
 	local markerDistance = ix.jobs.field.runtimeSettings.recoveryMarkerDistance
 	if distanceSquared > markerDistance ^ 2 then return end
+	local radiusScale = ix.jobs.field.runtimeSettings.recoveryMarkerRadiusScale
 	local baseRadius = math.max(ix.jobs.field.runtimeSettings.recoveryMarkerMinRadius,
-		state.searchRadius or ix.jobs.field.settings.recovery.searchRadius)
+		(state.searchRadius or ix.jobs.field.settings.recovery.searchRadius) * radiusScale)
 	local radius = math.max(ix.jobs.field.runtimeSettings.recoveryMarkerMinRadius,
 		baseRadius * math.sqrt(distanceSquared) / markerDistance)
-	local search = state.search and ix.jobs.field.Unpack(state.search) or point + Vector(baseRadius / 2, 0, 0)
-	local offset = search - point
+	local offset = state.search and (ix.jobs.field.Unpack(state.search) - point) * radiusScale
+		or Vector(baseRadius / 2, 0, 0)
 	-- Keep the object inside the approximate area, including older saved search centres.
 	local offsetLength = math.sqrt(offset:LengthSqr())
 	local scale = radius / math.max(baseRadius, offsetLength)

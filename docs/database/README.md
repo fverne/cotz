@@ -37,3 +37,20 @@ switching, reconnecting and saving during loading. Already persisted zeroes are 
 reset: an administrator can use `/CharResetValues` while playing the affected character to restore
 its stats. That command also restores health and clears radiation and drunkenness; no further wipe
 is needed.
+
+Reputation and karma use their existing character vars as the server's source of truth. Custom rank
+names remain in character data under `repOverride`. The `karmarep` player APIs update character state
+immediately and mirror changes to the existing player net vars for client display. Character saves
+never copy those display values back into storage, so early town initialization/reward recovery and
+saves of inactive characters cannot replace saved values with zeroes or another character's values.
+Server callers should use `client:addReputation(amount)`, `client:setReputation(amount)`,
+`client:addKarma(amount)` and `client:SetRepName(name)`; writing the player net vars alone does not
+change persistent state. `SetRepName(0)` removes a custom rank name.
+
+Run `luatex --luaonly tests/character_reputation_spec.lua` for both load-hook orders, load-time rewards,
+character switches, missing display values, admin edits, fractional reputation, karma clamps and
+save/restore checks. Restart all map servers after deployment; hot reload can retain the removed
+legacy save hook. Verify reconnect, character switching, task/kill rewards, admin edits and cross-map
+travel in multiplayer. Existing saved values and database fields are retained. Reputation already
+overwritten with zero needs a known value from a backup or administrator correction using
+`/CharSetReputation`; this fix cannot reconstruct it.

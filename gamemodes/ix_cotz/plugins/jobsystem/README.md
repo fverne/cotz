@@ -335,9 +335,9 @@ Open **Field work** on an accepted job in the PDA task list for directions, read
 or deployment, research startup, and parcel delivery. Assignment markers last 30 seconds; Show
 assignment displays them again. Recorded triangulation origins and bearings stay visible during the search.
 Recovery uses the named event-spawn area, with a compass offset and approximate distance when needed.
-Within 1,024 units (about 20 metres) of the object, Show assignment also displays an approximate
+Within 4,096 units (about 80 metres) of the object, Show assignment also displays an approximate
 recovery-area marker for 30 seconds. Its centre and search radius tighten as the player approaches:
-the default 384-unit area (about 8 metres) narrows to 64 units (about 2 metres). Walking out of range
+the default 1,536-unit area (about 30 metres) narrows to 256 units (about 5 metres). Walking out of range
 hides it; collecting cargo, abandoning/replacing the job or changing character clears it.
 Wrong-map status reports the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
 following the existing field jobs' regional difficulty convention. Target maps, categories,
@@ -503,13 +503,22 @@ optional `fieldTask.whereabouts` text is resolved lazily and saved through the e
 Missing providers leave existing jobs intact, with a temporary unavailable message and later retry.
 Show assignment and the journal display the same clue. Area names are literal text, including `%`.
 Nearby recovery markers use the saved search centre and claim, with an offset fallback for older
-assignments lacking a search centre. They never move the saved object or rewrite its search area.
-`runtimeSettings.recoveryMarkerDistance`, `recoveryMarkerMinRadius` and `recoveryMarkerUpdateInterval`
-in `definitions/sh_fieldsettings.lua` control the activation range, minimum area and client refresh.
+assignments lacking a search centre. Marker radii and offsets are scaled by four for both existing
+and new assignments without moving the saved object or rewriting its search area.
+`runtimeSettings.recoveryMarkerDistance`, `recoveryMarkerMinRadius`, `recoveryMarkerRadiusScale` and
+`recoveryMarkerUpdateInterval` in `definitions/sh_fieldsettings.lua` control the activation range,
+minimum area, search-area scale and client refresh.
 Marker geometry updates locally every 0.1 seconds; the server sends only the contact and active claim
 when Field work requests status in range. No per-frame networking or persistence migration is needed.
 Other field types retain their current markers. Check narrowing, expiry, map/character changes and
 pickup/abandonment in multiplayer alongside `tests/field_tasks_spec.lua` and `tests/job_overlays_spec.lua`.
+
+Admins with observer access can enable **Settings → Observer → Field Equipment ESP** (off by default).
+It shows the exact position and cargo name of spawned field-task equipment through walls, including
+recovery cargo, sensors and research equipment. It follows the master **Show admin ESP** toggle and
+requires observer noclip outside vehicles. Only entities transmitted to the client are available;
+equipment still spawns when its assigned player approaches. The entity list and static marker data
+refresh once a second, with removed objects hidden immediately. No extra networking is used.
 
 Valuable couriers use explicit per-contact `courierPools`, separate from ordinary `wantedItems`
 shop assortments. The compiled courier index and previous receiver interests drive the same offer,
