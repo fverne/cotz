@@ -45,9 +45,10 @@ enabled. Collision groups stay unchanged: changing only the mover's group does n
 used by player movement traces. The server and client cache the toggle and call `CollisionRulesChanged`
 when it changes. A client NWBool proxy applies incoming values before invalidating the collision cache;
 newly networked players initialize from their replicated value. Existing saved preferences are retained.
+Collision updates ignore invalid entities received by the proxy during client initialization or removal.
 Disabling is refused while a normal movement hull trace starts solid or another living, solid player's
 standing/crouched hull overlaps, including players with passage enabled. Move clear and try again.
 If a loadout requests disabling while overlapping, a short retry restores collisions once clear without
 changing the saved preference. There is no expiry timer. Raised-hand pushing is unchanged.
 Run `luatex --luaonly tests/hands_passage_spec.lua`, then verify with two clients, props, doors and NPCs,
-both movement directions, crouching, character switches and reconnect/restart persistence.
+both movement directions, crouching, joining before character load, character switches and reconnect/restart persistence.

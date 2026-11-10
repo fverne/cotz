@@ -21,8 +21,10 @@ local jobs = {
 local character = {GetJobs = function() return jobs end}
 local weapon
 local hidden, dead = false, false
+local position = Vector(0, 0, 0)
 local client = {
 	GetCharacter = function() return character end,
+	GetPos = function() return position end,
 	GetActiveWeapon = function() return weapon end,
 	Alive = function() return not dead end,
 	ShouldDrawLocalPlayer = function() return false end,
@@ -39,6 +41,8 @@ ix.cotzUI = {
 draw = {SimpleTextOutlined = function(text) lines[#lines + 1] = text end}
 ix.plugin.list.anomalycontroller = {anomalydefs = {{name = "Burner", entityname = "anom_jarka"}}}
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_regionaljobs.lua")
+local receivers = {}
+net.Receive = function(name, callback) receivers[name] = callback end
 dofile("gamemodes/ix_cotz/plugins/jobsystem/cl_fieldtasks.lua")
 PLUGIN:HUDPaint()
 check(#markers == 1 and markers[1].x == 20 and markers[1].y == 40,
@@ -64,4 +68,62 @@ check(#lines == 0, "game UI hides the camera ledger")
 hidden, dead = false, true
 PLUGIN:HUDPaint()
 check(#lines == 0, "death hides the camera ledger")
+dead = false
+jobs.Recovery = {rewardKey = "recovery-claim", fieldTask = {kind = "recovery", map = "rp_marsh_cs",
+	stage = "search", point = {1000, 0, 0}, search = {1192, 0, 0}, searchRadius = 384}}
+local function showRecovery()
+	local strings = {"Recovery", "recovery-claim"}
+	net.ReadString = function() return table.remove(strings, 1) end
+	receivers["cotz/jobsystem/recovery-marker"]()
+end
+local function paintRecovery(distance)
+	position = Vector(1000 + distance, 0, 0)
+	now = now + 0.2
+	markers = {}
+	PLUGIN:HUDPaint()
+
+	return markers[1]
+end
+showRecovery()
+local farMarker = paintRecovery(1024)
+check(farMarker and farMarker.x == 1192 and farMarker.label:find("search within 8 m", 1, true),
+	"nearby field work displays the saved approximate area in world space")
+local midMarker = paintRecovery(512)
+local nearMarker = paintRecovery(0)
+check(midMarker and midMarker.x < farMarker.x and midMarker.label:find("search within 4 m", 1, true)
+	and nearMarker and nearMarker.x < midMarker.x and nearMarker.label:find("search within 2 m", 1, true),
+	"active recovery marker narrows its position and displayed radius without another request")
+check(not paintRecovery(1025), "walking outside the nearby area hides the recovery marker")
+check(paintRecovery(512), "returning nearby restores an unexpired recovery marker")
+hidden = true
+check(not paintRecovery(512), "game UI hides the recovery marker")
+hidden, dead = false, true
+check(not paintRecovery(512), "death hides the recovery marker")
+dead = false
+jobs.Recovery.fieldTask.stage = "carrying"
+check(not paintRecovery(0), "collecting the cargo clears the search marker immediately")
+jobs.Recovery.fieldTask.stage = "search"
+showRecovery()
+jobs.Recovery.rewardKey = "replacement-claim"
+check(not paintRecovery(0), "a replacement assignment cannot inherit the old marker")
+jobs.Recovery.rewardKey = "recovery-claim"
+showRecovery()
+local recoveryJob = jobs.Recovery
+jobs.Recovery = nil
+check(not paintRecovery(0), "abandoning the assignment clears its marker")
+jobs.Recovery = recoveryJob
+showRecovery()
+local recoveryCharacter = character
+character = {GetJobs = function() return {} end}
+check(not paintRecovery(0), "switching characters clears the recovery marker")
+character = recoveryCharacter
+check(not paintRecovery(0), "returning to the previous character does not revive its cleared marker")
+showRecovery()
+now = now + ix.jobs.field.runtimeSettings.markerSeconds
+check(not paintRecovery(0), "recovery marker expires after the normal assignment marker lifetime")
+showRecovery()
+check(paintRecovery(0), "field work can refresh an expired recovery marker")
+game.GetMap = function() return "another-map" end
+check(not paintRecovery(0), "recovery markers are hidden on the wrong map")
+game.GetMap = function() return "rp_marsh_cs" end
 print("PASS: " .. checks .. " job overlay checks")

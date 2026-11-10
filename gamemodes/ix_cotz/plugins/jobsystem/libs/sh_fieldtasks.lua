@@ -80,6 +80,25 @@ function ix.jobs.field.EnsureRecoveryClue(state)
 	return state.whereabouts ~= nil
 end
 
+function ix.jobs.field.GetRecoverySearchArea(state, position)
+	if state.kind ~= "recovery" or state.stage ~= "search" or state.map ~= game.GetMap() then return end
+	local point = ix.jobs.field.Unpack(state.point)
+	local distanceSquared = position:DistToSqr(point)
+	local markerDistance = ix.jobs.field.runtimeSettings.recoveryMarkerDistance
+	if distanceSquared > markerDistance ^ 2 then return end
+	local baseRadius = math.max(ix.jobs.field.runtimeSettings.recoveryMarkerMinRadius,
+		state.searchRadius or ix.jobs.field.settings.recovery.searchRadius)
+	local radius = math.max(ix.jobs.field.runtimeSettings.recoveryMarkerMinRadius,
+		baseRadius * math.sqrt(distanceSquared) / markerDistance)
+	local search = state.search and ix.jobs.field.Unpack(state.search) or point + Vector(baseRadius / 2, 0, 0)
+	local offset = search - point
+	-- Keep the object inside the approximate area, including older saved search centres.
+	local offsetLength = math.sqrt(offset:LengthSqr())
+	local scale = radius / math.max(baseRadius, offsetLength)
+
+	return point + offset * scale, radius
+end
+
 function ix.jobs.field.SelectRoute(settings, map, usable, destinationMap)
 	local sources = ix.jobs.field.CollectPoints(settings.sources, map)
 	destinationMap = destinationMap or map

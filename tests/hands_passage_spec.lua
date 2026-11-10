@@ -49,8 +49,12 @@ function playerMeta:GetPos() return self.position end
 function playerMeta:GetCharacter() return self.character end
 function playerMeta:GetCollisionGroup() return self.group end
 function playerMeta:SetCollisionGroup(value) self.group = value end
-function playerMeta:SetCustomCollisionCheck(value) self.customCollision = value end
+function playerMeta:SetCustomCollisionCheck(value)
+	assert(IsValid(self), "Tried to use a NULL entity!")
+	self.customCollision = value
+end
 function playerMeta:CollisionRulesChanged()
+	assert(IsValid(self), "Tried to use a NULL entity!")
 	self.collisionUpdates = (self.collisionUpdates or 0) + 1
 	self.passageAtRefresh = self.cotzHandsPassage
 end
@@ -193,6 +197,11 @@ check(remote.cotzHandsPassage and remote.customCollision,
 	"newly networked players initialize passage for late joiners")
 local proxy = remote.proxies["cotz/hands/player-passage"]
 local updates = remote.collisionUpdates
+remote.invalid = true
+proxy(remote, "cotz/hands/player-passage", true, false)
+check(remote.collisionUpdates == updates and remote.cotzHandsPassage,
+	"a proxy receiving an invalid entity skips collision methods and cached state changes")
+remote.invalid = nil
 proxy(remote, "cotz/hands/player-passage", true, false)
 check(remote.collisionUpdates == updates + 1 and remote.passageAtRefresh == false,
 	"replication invalidates collision rules using the proxy value before GetNWBool changes")

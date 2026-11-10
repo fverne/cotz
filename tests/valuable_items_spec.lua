@@ -167,7 +167,7 @@ local properties = {}
 ix.util.PropertyDesc = function(_, label) properties[#properties + 1] = label end
 local tooltipItem = ix.item.list.value_soap
 tooltipItem:PopulateTooltip({})
-check(properties[1] == "Valuable" and properties[2] == "cleaning supplies",
+check(properties[1] == "Valuable" and properties[2] == "Cleaning Supplies",
 	"inventory tooltips show the readable valuable category")
 properties = {}
 tooltipItem.entity = {}

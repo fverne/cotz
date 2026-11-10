@@ -62,7 +62,7 @@ Previously completed hand-ins also receive the current cash formula at claim; pa
 
 Field-work menus and temporary world labels use the shared
 [COTZ UI style](../../../../docs/ui-style.md). Assignment labels have a dark backing and amber border
-and stay within the viewport. Recovery uses text directions instead of a world marker.
+and stay within the viewport. Recovery retains text directions and adds a narrowing search-area marker nearby.
 
 Restart after editing shared definitions. Job IDs, category IDs, cargo item IDs, network names and
 saved character keys remain stable. Existing accepted field jobs keep their saved destinations,
@@ -334,8 +334,12 @@ No new map spawn-point definitions or per-assignment staff setup are required.
 Open **Field work** on an accepted job in the PDA task list for directions, readings
 or deployment, research startup, and parcel delivery. Assignment markers last 30 seconds; Show
 assignment displays them again. Recorded triangulation origins and bearings stay visible during the search.
-Recovery uses the named event-spawn area, with a compass offset and approximate distance when needed,
-and never creates a world marker. Wrong-map status reports the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
+Recovery uses the named event-spawn area, with a compass offset and approximate distance when needed.
+Within 1,024 units (about 20 metres) of the object, Show assignment also displays an approximate
+recovery-area marker for 30 seconds. Its centre and search radius tighten as the player approaches:
+the default 384-unit area (about 8 metres) narrows to 64 units (about 2 metres). Walking out of range
+hides it; collecting cargo, abandoning/replacing the job or changing character clears it.
+Wrong-map status reports the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
 following the existing field jobs' regional difficulty convention. Target maps, categories,
 reference payments and reputation are in `definitions/sh_fieldjobs.lua`. Existing reputation
 gates, supply choices, completion bonuses and completion/restock handling still apply.
@@ -498,7 +502,14 @@ a named clue. Accepted recovery sites retain their coordinates, cargo, descripti
 optional `fieldTask.whereabouts` text is resolved lazily and saved through the existing jobs field.
 Missing providers leave existing jobs intact, with a temporary unavailable message and later retry.
 Show assignment and the journal display the same clue. Area names are literal text, including `%`.
-Other field types retain their current markers.
+Nearby recovery markers use the saved search centre and claim, with an offset fallback for older
+assignments lacking a search centre. They never move the saved object or rewrite its search area.
+`runtimeSettings.recoveryMarkerDistance`, `recoveryMarkerMinRadius` and `recoveryMarkerUpdateInterval`
+in `definitions/sh_fieldsettings.lua` control the activation range, minimum area and client refresh.
+Marker geometry updates locally every 0.1 seconds; the server sends only the contact and active claim
+when Field work requests status in range. No per-frame networking or persistence migration is needed.
+Other field types retain their current markers. Check narrowing, expiry, map/character changes and
+pickup/abandonment in multiplayer alongside `tests/field_tasks_spec.lua` and `tests/job_overlays_spec.lua`.
 
 Valuable couriers use explicit per-contact `courierPools`, separate from ordinary `wantedItems`
 shop assortments. The compiled courier index and previous receiver interests drive the same offer,

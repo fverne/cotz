@@ -46,9 +46,12 @@ util = {
 	end,
 	IsInWorld = function() return true end,
 }
-local markers, lastMarker = 0
-net = {Receive = function() end, Start = function() end, WriteVector = function(position) lastMarker = position end,
-	WriteString = function() end, WriteUInt = function() end, Send = function() markers = markers + 1 end}
+local markers, lastMarker, lastNetwork, lastRecipient = 0
+local networkStrings = {}
+net = {Receive = function() end, Start = function(name) lastNetwork, networkStrings = name, {} end,
+	WriteVector = function(position) lastMarker = position end,
+	WriteString = function(value) networkStrings[#networkStrings + 1] = value end, WriteUInt = function() end,
+	Send = function(client) markers, lastRecipient = markers + 1, client end}
 netstream = {Start = function() end}
 hook = {Add = function() end, Run = function() end}
 timer = {Simple = function() end}
@@ -1060,7 +1063,7 @@ local markerCount = markers
 now = now + 2
 ix.jobs.field.Action(client, "Contact", "status")
 check(markers == markerCount, "retained network callbacks cannot operate after plugin unload")
--- Recovery clues are text, retain saved sites and do not depend on camera/HUD markers.
+-- Recovery retains saved clues and sites, adding a narrowing marker only near the search area.
 map = "rp_marsh_cs"
 points()
 local recovery = {kind = "recovery", map = map, point = {1000, 0, 0}, searchRadius = 384,
@@ -1082,13 +1085,44 @@ check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_recovery_easy),
 points()
 local named = ix.plugin.list.eventcontroller.eventpoints[map][1]
 named[2] = "50% Yard"
-local textJob = {identifier = "field_recovery_easy", numberRec = 1, fieldTask = copy(missing)}
+local textJob = {identifier = "field_recovery_easy", numberRec = 1, rewardKey = "recovery-clue",
+	fieldTask = copy(missing)}
 ix.jobs.field.EnsureRecoveryClue(textJob.fieldTask)
 check(ix.jobs.getFormattedDesc(textJob):find("50% Yard", 1, true),
 	"literal percent signs in event area names are safe in the PDA")
 local previousMarkers = markers
 local recoveryClient, recoveryOwner = actor()
 recoveryOwner.jobs.Clue = textJob
+recoveryClient.position = Vector(-25, 0, 0)
 ix.jobs.field.Status(recoveryClient, "Clue", textJob)
-check(markers == previousMarkers, "Show assignment gives recovery text without creating a world marker")
+check(markers == previousMarkers, "distant recovery status provides the clue without a world marker")
+recoveryClient.position = Vector(0, 0, 0)
+ix.jobs.field.Status(recoveryClient, "Clue", textJob)
+check(markers == previousMarkers + 1 and lastNetwork == "cotz/jobsystem/recovery-marker"
+	and lastRecipient == recoveryClient and networkStrings[1] == "Clue"
+	and networkStrings[2] == textJob.rewardKey, "nearby recovery status marks only the requesting owner's claim")
+local target = ix.jobs.field.Unpack(recovery.point)
+local farCentre, farRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(1024, 0, 0))
+local midCentre, midRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(512, 0, 0))
+local nearCentre, nearRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target)
+check(farRadius == 384 and midRadius == 192 and nearRadius == 64,
+	"recovery search radius narrows with object distance and retains a small approximate area")
+check(farCentre:DistToSqr(target) <= farRadius ^ 2 and midCentre:DistToSqr(target) <= midRadius ^ 2
+	and nearCentre:DistToSqr(target) > 0 and nearCentre:DistToSqr(target) <= nearRadius ^ 2,
+	"old assignments without search centres keep the object within an offset approximate area")
+recovery.search = {1192, 192, 0}
+local savedCentre = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(1024, 0, 0))
+check(savedCentre:DistToSqr(ix.jobs.field.Unpack(recovery.search)) == 0 and recovery.point[1] == 1000,
+	"recovery marker reuses the saved search centre without changing the assignment")
+check(not ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(1025, 0, 0)),
+	"recovery marker is unavailable beyond the activation distance")
+map = "another-map"
+ix.jobs.field.Status(recoveryClient, "Clue", textJob)
+check(markers == previousMarkers + 1 and not ix.jobs.field.GetRecoverySearchArea(recovery, target),
+	"wrong-map recovery status creates no marker")
+map = recovery.map
+recovery.stage, textJob.fieldTask.stage = "carrying", "carrying"
+ix.jobs.field.Status(recoveryClient, "Clue", textJob)
+check(markers == previousMarkers + 1 and not ix.jobs.field.GetRecoverySearchArea(recovery, target),
+	"collected equipment no longer produces a search marker")
 print("PASS: " .. checks .. " field task checks")

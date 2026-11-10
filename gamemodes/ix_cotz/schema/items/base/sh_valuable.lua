@@ -46,7 +46,8 @@ function ITEM:PopulateTooltip(tooltip)
 	if not self.entity then
 		ix.util.PropertyDesc(tooltip, "Valuable", PROPERTY_COLOR)
 		if self.valuableCategory then
-			ix.util.PropertyDesc(tooltip, self.valuableCategory, PROPERTY_COLOR)
+			local categoryLabel = self.valuableCategory:gsub("%f[%a]%l", string.upper)
+			ix.util.PropertyDesc(tooltip, categoryLabel, PROPERTY_COLOR)
 		end
 	end
 

@@ -57,4 +57,7 @@ ix.jobs.field.runtimeSettings = {
 	blockedNotifyInterval = 30,
 	pickupTimeout = 30,
 	markerSeconds = 30,
+	recoveryMarkerDistance = 1024,
+	recoveryMarkerMinRadius = 64,
+	recoveryMarkerUpdateInterval = 0.1,
 }

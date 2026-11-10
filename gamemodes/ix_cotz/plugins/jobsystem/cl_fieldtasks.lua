@@ -35,9 +35,27 @@ function ix.jobs.field.GetActions(job)
 end
 
 net.Receive("cotz/jobsystem/field-marker", function()
-	marker = {position = net.ReadVector(), label = net.ReadString(), radius = net.ReadUInt(16),
+	marker = {position = net.ReadVector() + MARKER_OFFSET, label = net.ReadString(), radius = net.ReadUInt(16),
 		expires = CurTime() + MARKER_SECONDS, character = LocalPlayer():GetCharacter()}
 end)
+
+net.Receive("cotz/jobsystem/recovery-marker", function()
+	marker = {npc = net.ReadString(), claim = net.ReadString(), label = "Recovery area",
+		expires = CurTime() + MARKER_SECONDS, character = LocalPlayer():GetCharacter(), nextUpdate = 0}
+end)
+
+local function updateRecoveryMarker(client, character)
+	local job = character:GetJobs()[marker.npc]
+	local state = job and job.fieldTask
+	if not state or job.rewardKey ~= marker.claim or state.stage ~= "search" then
+		marker = nil
+		return
+	end
+	if CurTime() < marker.nextUpdate then return end
+	marker.nextUpdate = CurTime() + ix.jobs.field.runtimeSettings.recoveryMarkerUpdateInterval
+	marker.position, marker.radius = ix.jobs.field.GetRecoverySearchArea(state, client:GetPos())
+	if marker.position then marker.position = marker.position + MARKER_OFFSET end
+end
 
 local function updateOverlays(character)
 	if character == overlayCharacter and CurTime() < nextOverlayUpdate then return end
@@ -74,7 +92,11 @@ function PLUGIN:HUDPaint()
 	drawOverlays(client, character)
 	if not marker or CurTime() > marker.expires then return end
 	if character ~= marker.character then marker = nil return end
-	local screen = (marker.position + MARKER_OFFSET):ToScreen()
+	if marker.npc then
+		updateRecoveryMarker(client, character)
+		if not marker or not marker.position then return end
+	end
+	local screen = marker.position:ToScreen()
 	if not screen.visible then return end
 	local label = marker.label
 	if marker.radius > 0 then

@@ -14,6 +14,9 @@ function PLUGIN:ShouldCollide(ent1, ent2)
 end
 
 local function updateCollision(client, enabled)
+	-- NWVar proxies can receive a NULL entity during client initialization or removal.
+	if not IsValid(client) then return end
+
 	-- Proxies can run before GetNWBool exposes the new value. Cache the supplied value first.
 	client.cotzHandsPassage = enabled == true
 	client:SetCustomCollisionCheck(true)
