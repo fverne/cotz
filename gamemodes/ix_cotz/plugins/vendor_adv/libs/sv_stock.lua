@@ -126,26 +126,12 @@ function ix.vendorStock.Refresh(character, vendor)
 	end
 end
 
-function ix.vendorStock.TaskRestock(character, vendor, claimID, jobSerial)
+function ix.vendorStock.RestockFraction(character, vendor, fraction)
 	if vendor.GetSherpa and vendor:GetSherpa() then
 		return false
 	end
-	local identity = game.GetMap() .. "/" .. vendor:GetDisplayName()
-	local claims = character:GetVendorRestockClaims()
-	claims[identity] = claims[identity] or {milestones = {}, lastJob = 0}
-	local claim = claims[identity]
-	if jobSerial then
-		if jobSerial <= claim.lastJob then
-			return false
-		end
-		claim.lastJob = jobSerial
-	else
-		if claim.milestones[claimID] then
-			return false
-		end
-		claim.milestones[claimID] = true
-	end
-	character:SetVendorRestockClaims(claims)
+	if type(fraction) ~= "number" or fraction ~= fraction or fraction <= 0 or fraction > 1 then return false end
+	local changed = false
 	for uniqueID, catalog in pairs(vendor.items) do
 		local interval, amount = vendor:GetStockInterval(uniqueID)
 		local eligible = catalog[VENDOR_MAXSTOCK] and catalog[VENDOR_MAXSTOCK] > 0
@@ -155,7 +141,7 @@ function ix.vendorStock.TaskRestock(character, vendor, claimID, jobSerial)
 		if eligible and ix.progression.CanBuyItem(character, vendor:GetDisplayName(), uniqueID) then
 			local line, maximum, data = getLine(character, vendor, uniqueID)
 			if line.count < maximum then
-				local progress = (line.fraction or 0) + maximum * 0.2
+				local progress = (line.fraction or 0) + maximum * fraction
 				local whole = math.floor(progress + 0.000000001)
 				line.count = math.min(maximum, line.count + whole)
 				line.fraction = line.count == maximum and 0 or math.max(0, progress - whole)
@@ -164,10 +150,30 @@ function ix.vendorStock.TaskRestock(character, vendor, claimID, jobSerial)
 				end
 				character:SetVendorStock(data)
 				sendStock(character, vendor, uniqueID, line.count, maximum, line.fraction)
+				changed = true
 			end
 		end
 	end
-	character:Save()
+	if changed then character:Save() end
+
+	return changed
+end
+
+function ix.vendorStock.TaskRestock(character, vendor, claimID, jobSerial)
+	if vendor.GetSherpa and vendor:GetSherpa() then return false end
+	local identity = game.GetMap() .. "/" .. vendor:GetDisplayName()
+	local claims = character:GetVendorRestockClaims()
+	claims[identity] = claims[identity] or {milestones = {}, lastJob = 0}
+	local claim = claims[identity]
+	if jobSerial then
+		if jobSerial <= claim.lastJob then return false end
+		claim.lastJob = jobSerial
+	else
+		if claim.milestones[claimID] then return false end
+		claim.milestones[claimID] = true
+	end
+	character:SetVendorRestockClaims(claims)
+	if not ix.vendorStock.RestockFraction(character, vendor, 0.2) then character:Save() end
 
 	return true
 end

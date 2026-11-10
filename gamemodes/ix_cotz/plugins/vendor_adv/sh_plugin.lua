@@ -62,7 +62,7 @@ local FUEL_ITEMS = {value_kerosene = true, lowtiercookerfuel = true}
 function ix.vendorStock.FormatStock(count, maximum, fraction)
 	local text = string.format("Stock: %d/%d", count, maximum)
 	if (fraction or 0) > 0 then
-		text = text .. string.format(" (+%.2f task credit)", fraction)
+		text = text .. string.format(" (+%.2f restock credit)", fraction)
 	end
 
 	return text

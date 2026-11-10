@@ -104,6 +104,12 @@ to place these contacts manually.
 
 ## Verification
 
+The [mutant defense plugin](../mutantdefense/README.md) awards transferable vouchers redeemable through
+vendor dialogue for 50% of the holder's personal maximum stock. The shared `ix.vendorStock.RestockFraction`
+API preserves normal restock eligibility, progression bonuses, caps and fractional credit. Task restocks
+continue to grant 20%; vendors with no eligible deficit keep the voucher. Sherpas/hideout vendors are excluded.
+Run `luatex --luaonly tests/mutant_defense_spec.lua` alongside the stock checks below.
+
 Relevant standalone checks from the repository root:
 
     luatex --luaonly tests/vendor_stock_spec.lua

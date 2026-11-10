@@ -14,6 +14,11 @@ Ordinary dialogue, flavour and service responses stay in the conversation file. 
 ix.dialogue.AddTradeTopic from integrations/sh_trade.lua; it does not copy another NPC's tree.
 Task prompts, briefings and completion text stay beside the contact's jobs/progression definitions.
 
+`integrations/sh_mutantdefense.lua` adds restock voucher hand-in and stored defense reward collection to
+trade conversations when the [mutant defense plugin](../mutantdefense/README.md) is enabled. Both are quick
+actions with empty responses, preserving silent NPCs and current navigation. Server callbacks validate vendor
+access, distance, ownership and cooldown; Sherpas and hideout vendors do not offer these actions.
+
 All 27 town contacts offer a two-part personality exchange through SpecialtyTopic and
 InterestTownFollowup in the questions menu. These are ordinary conversations available whenever
 the contact is accessible. Mute responds through gestures. Work explanations, finite briefings and completion replies, and completed greetings live in the
