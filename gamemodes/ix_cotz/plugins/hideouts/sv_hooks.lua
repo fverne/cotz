@@ -38,7 +38,8 @@ function PLUGIN:SpawnEntrances()
 end
 
 function PLUGIN:ShowEntrance(client, entranceID)
-	if not client:GetCharacter() or not self:IsNearEntrance(client, entranceID) then
+	local character = client:GetCharacter()
+	if not character or not self:IsNearEntrance(client, entranceID) then
 		return
 	end
 	if (client.ixHideoutMenuTime or 0) > CurTime() then
@@ -47,7 +48,9 @@ function PLUGIN:ShowEntrance(client, entranceID)
 	client.ixHideoutMenuTime = CurTime() + MENU_COOLDOWN
 	local records = {}
 	for _, record in pairs(self.state.hideouts) do
-		if record.entrance == entranceID and self:CanAccess(client, record) then
+		local visible = not client:IsAdmin() or record.owner == character:GetID()
+			or (record.guests or {})[tostring(character:GetID())] == true
+		if visible and record.entrance == entranceID and self:CanAccess(client, record) then
 			records[#records + 1] = {id = record.id, name = record.name, manage = self:CanManageHideout(client, record)}
 		end
 	end

@@ -461,6 +461,7 @@ return positions for hideout occupants and intercepts old interior restores.
 Area membership is audited once per second, including intruders and external
 teleports. Administrators can enter personal and squad hideouts without an invitation, including through
 the entrance while noclipping; occupancy audits do not eject administrators visiting an interior directly.
+Administrator keypad menus list only their own rooms and rooms that explicitly invite their current character.
 Normal loading, persistence and disabled-room checks still apply. Generic world-item persistence excludes hideout floor items.
 
 AdvDupe integration retains its existing public signatures and historical

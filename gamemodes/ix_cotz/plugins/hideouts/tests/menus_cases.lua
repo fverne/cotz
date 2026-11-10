@@ -182,3 +182,39 @@ Test("management sends actual invitations and permits revoking an offline invite
 	assert(record.guests["4"] == nil and record.guests["2"] == true)
 	assert(not PLUGIN:HandleManagementAction(owner, record.id, 7, "3", 0))
 end)
+
+Test("administrator keypads list owned rooms and explicit invitations without exposing other rooms", function()
+	local owner, inventory, instance, record = containerHome()
+	local admin = FeatureClient(2)
+	admin.IsAdmin = function() return true end
+	admin.position = PLUGIN.state.entrances.gate.pos
+	local owned = table.Copy(record)
+	owned.id, owned.owner = "owned", admin:GetCharacter():GetID()
+	PLUGIN.state.hideouts.owned = owned
+	local invited = table.Copy(record)
+	invited.id, invited.guests = "invited", {["2"] = true}
+	PLUGIN.state.hideouts.invited = invited
+	local squad = table.Copy(record)
+	squad.id, squad.owner, squad.ownerType, squad.squadID, squad.access = "squad", nil, "squad", "squad1", "public"
+	PLUGIN.state.hideouts.squad = squad
+	ix.squad.list.squad1 = {members = {[2] = 2}}
+	local start = netstream.Start
+	local shown
+	netstream.Start = function(client, message, entrance, records)
+		assert(client == admin and message == "ixHideoutMenu" and entrance == "gate")
+		shown = {}
+		for _, entry in ipairs(records) do shown[entry.id] = true end
+	end
+	PLUGIN:ShowEntrance(admin, "gate")
+	netstream.Start = start
+	assert(shown.owned and shown.invited and not shown[record.id] and not shown.squad)
+	assert(PLUGIN:CanAccess(admin, record) and PLUGIN:CanAccess(admin, squad))
+
+	admin.ixHideoutMenuTime = nil
+	invited.guests["2"] = nil
+	netstream.Start = function(client, message, entrance, records)
+		assert(#records == 1 and records[1].id == "owned")
+	end
+	PLUGIN:ShowEntrance(admin, "gate")
+	netstream.Start = start
+end)
