@@ -32,6 +32,13 @@ local function panel(parent, name)
 	function result:Dock() end
 	function result:DockMargin() end
 	function result:GetChildren() return self.children or {} end
+	function result:Find(name)
+		for _, child in ipairs(self:GetChildren()) do
+			if child:GetName() == name then return child end
+			local found = child:Find(name)
+			if found then return found end
+		end
+	end
 	function result:MakePopup() self.popups = (self.popups or 0) + 1 end
 	function result:MoveToFront() self.raised = true end
 	function result:SetPaintedManually(value) self.manual = value end
@@ -82,6 +89,7 @@ for _, signature in ipairs({
 	"function PANEL:UpdatePageLayout()", "function PANEL:LayoutCompanion()",
 	"function PLUGIN:AttachInventoryEquipment(", "function PLUGIN:RaiseInventoryEquipment(",
 	"function PLUGIN:InstallInventoryPanels()",
+	"function PLUGIN:OnReloaded()", "function PANEL:LayoutCard(",
 	"function PLUGIN:OnScreenSizeChanged()",
 }) do loadMethod(signature) end
 
@@ -91,7 +99,7 @@ assert(load(source:sub(refreshStart), "@equipment/refresh", "t", environment))()
 
 function classes.ixStalkerInventoryPanel:Init()
 	self.originalInit = true
-	environment.ix.gui.inv1 = panel(self, "ixInventory")
+	environment.ix.gui.inv1 = self:Add("ixInventory")
 end
 function classes.ixStalkerInventoryPanel:OnRemove() self.originalRemoved = true end
 function classes.ixStorageView:OnRemove() self.originalRemoved = true end
@@ -173,4 +181,75 @@ check(youEquipment.rebuilds == 3 and otherEquipment.rebuilds == 3, "Resolution c
 otherInventory:OnRemove()
 check(otherInventory.originalRemoved and otherEquipment.removed, "Closing a view removes its equipment")
 check(not youEquipment.removed, "Independent menu views retain their equipment")
+
+local firstInit = classes.ixStalkerInventoryPanel.Init
+local firstAddIcon = classes.ixInventory.AddIcon
+plugin:OnReloaded()
+plugin:OnReloaded()
+check(classes.ixStalkerInventoryPanel.Init == firstInit and classes.ixInventory.AddIcon == firstAddIcon,
+	"Repeated refresh hooks do not stack wrappers")
+
+local initCalls, removeCalls, iconCalls, storageRemovals = 0, 0, 0, 0
+classes.ixStalkerInventoryPanel = {
+	Init = function(self)
+		initCalls = initCalls + 1
+		environment.ix.gui.inv1 = self:Add("ixInventory")
+	end,
+	OnRemove = function() removeCalls = removeCalls + 1 end,
+}
+plugin:OnReloaded()
+check(classes.ixInventory.AddIcon == firstAddIcon, "Refreshing only the frame leaves the grid wrapper intact")
+local refreshedInventory = inventoryPanel(youPage)
+runDeferred()
+check(initCalls == 1 and refreshedInventory.cotzEquipmentPanel ~= nil,
+	"A re-registered frame captures its grid and attaches equipment")
+refreshedInventory:OnRemove()
+check(removeCalls == 1 and refreshedInventory.cotzEquipmentPanel.removed,
+	"Refreshed frame cleanup calls its new callback once")
+
+classes.ixInventory = {AddIcon = function() iconCalls = iconCalls + 1 return "new icon" end}
+classes.ixStorageView = {OnRemove = function() storageRemovals = storageRemovals + 1 end}
+plugin:OnReloaded()
+function plugin:IsEquipmentCell(x) return x >= 32 end
+local freshGrid = {invID = 1}
+check(classes.ixInventory.AddIcon(freshGrid, "model", 32, 1, 1, 1) == nil and iconCalls == 0,
+	"A re-registered grid still hides reserved equipment cells")
+check(classes.ixInventory.AddIcon(freshGrid, "model", 1, 1, 1, 1) == "new icon" and iconCalls == 1,
+	"The new grid callback handles normal cells exactly once")
+classes.ixStorageView.OnRemove({})
+check(storageRemovals == 1, "Refreshed storage cleanup calls its new callback once")
+
+local survivingViews = plugin.equipmentViews
+local firstFunction = assert(source:find("function PLUGIN:SendEquipmentAction", 1, true))
+assert(load(source:sub(1, firstFunction - 1), "@equipment/reload", "t", environment))()
+check(plugin.equipmentViews == survivingViews and plugin.equipmentViews[youEquipment],
+	"Reloading the client file preserves open equipment views for refresh and resize")
+
+local unwrappedInventory = panel(youPage, "ixStalkerInventoryPanel")
+local container = unwrappedInventory:Add("ixStalkerInventory")
+local ownedGrid = container:Add("ixInventory")
+local recoveredEquipment = plugin:AttachInventoryEquipment(unwrappedInventory)
+check(unwrappedInventory.cotzEquipmentInventoryGrid == ownedGrid,
+	"A frame created without a wrapper recovers its own nested grid instead of the global grid")
+check(plugin:AttachInventoryEquipment(unwrappedInventory) == recoveredEquipment,
+	"Recovering an existing frame still prevents duplicate equipment")
+
+local missingGridInventory = panel(youPage, "ixStalkerInventoryPanel")
+local missingGridEquipment = {inventoryPanel = missingGridInventory}
+local card = panel(nil)
+card.item = {width = 2, height = 1}
+card.icon = panel(card)
+card.label = panel(card)
+card.unequip = panel(card)
+for _, control in ipairs({card.label, card.unequip}) do
+	function control:SetFont() end
+end
+local bounds = {x = 0, y = 0, w = 200, h = 160}
+methods.LayoutCard(missingGridEquipment, card, bounds, 1, 4)
+missingGridInventory.cotzEquipmentInventoryGrid = {removed = true}
+methods.LayoutCard(missingGridEquipment, card, bounds, 1, 4)
+missingGridInventory.cotzEquipmentInventoryGrid = {GetIconSize = function() return 48 end}
+methods.LayoutCard(missingGridEquipment, card, bounds, 1, 4)
+check(card.icon.width == 96 and card.icon.height == 48,
+	"Card layout tolerates absent/removed grids and uses the restored grid's icon size")
 print("Equipment views: " .. checks .. " checks passed")

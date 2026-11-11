@@ -1,6 +1,6 @@
 local PLUGIN = PLUGIN
 local PANEL = {}
-PLUGIN.equipmentViews = setmetatable({}, {__mode = "k"})
+PLUGIN.equipmentViews = PLUGIN.equipmentViews or setmetatable({}, {__mode = "k"})
 
 function PLUGIN:SendEquipmentAction(item, index, equipping, x, y)
 	if (self.nextAction or 0) > RealTime() then return end
@@ -363,6 +363,7 @@ function PANEL:LayoutCard(card, bounds, scale, padding)
 	if IsValid(card.icon) then
 		local item = card.item
 		local grid = self.inventoryPanel.cotzEquipmentInventoryGrid
+		if not IsValid(grid) then return end
 		local size = math.min(grid:GetIconSize(), (bounds.w - padding * 2) / item.width, iconAreaHeight / item.height)
 		local iconWidth, iconHeight = item.width * size, item.height * size
 		local iconY = iconTop + (iconAreaHeight - iconHeight) / 2
@@ -471,40 +472,56 @@ end
 vgui.Register("ixEquipmentSlots", PANEL, "EditablePanel")
 
 function PLUGIN:InstallInventoryPanels()
-	if self.panelOriginals then return end
+	-- Refresh can replace individual control tables while retaining the plugin table and live panels.
+	self.panelWrappers = self.panelWrappers or {}
+	local wrappers = self.panelWrappers
 	local panel = vgui.GetControlTable("ixInventory")
-	local originals = {AddIcon = panel.AddIcon}
-	self.panelOriginals = originals
+	if panel.AddIcon ~= wrappers.AddIcon then
+		local originalAddIcon = panel.AddIcon
+		function panel:AddIcon(model, x, y, width, height, skin)
+			local inventory = ix.item.inventories[self.invID]
+			if inventory and inventory.vars.cotzEquipmentWidth and PLUGIN:IsEquipmentCell(x) then return end
 
-	function panel:AddIcon(model, x, y, width, height, skin)
-		local inventory = ix.item.inventories[self.invID]
-		if inventory and inventory.vars.cotzEquipmentWidth and PLUGIN:IsEquipmentCell(x) then return end
-
-		return originals.AddIcon(self, model, x, y, width, height, skin)
+			return originalAddIcon(self, model, x, y, width, height, skin)
+		end
+		wrappers.AddIcon = panel.AddIcon
 	end
 	local inventoryPanel = vgui.GetControlTable("ixStalkerInventoryPanel")
-	originals.InventoryInit = inventoryPanel.Init
-	originals.InventoryOnRemove = inventoryPanel.OnRemove
-	function inventoryPanel:Init()
-		originals.InventoryInit(self)
-		self.cotzEquipmentInventoryGrid = ix.gui.inv1
-		-- Wait until the caller has assigned docking, popup state, and storage contents.
-		timer.Simple(0, function()
-			if IsValid(self) then PLUGIN:AttachInventoryEquipment(self) end
-		end)
+	if inventoryPanel.Init ~= wrappers.InventoryInit then
+		local originalInit = inventoryPanel.Init
+		function inventoryPanel:Init()
+			originalInit(self)
+			self.cotzEquipmentInventoryGrid = ix.gui.inv1
+			-- Wait until the caller has assigned docking, popup state, and storage contents.
+			timer.Simple(0, function()
+				if IsValid(self) then PLUGIN:AttachInventoryEquipment(self) end
+			end)
+		end
+		wrappers.InventoryInit = inventoryPanel.Init
 	end
-	function inventoryPanel:OnRemove()
-		if IsValid(self.cotzEquipmentPanel) then self.cotzEquipmentPanel:Remove() end
-		if originals.InventoryOnRemove then originals.InventoryOnRemove(self) end
+	if not wrappers.InventoryOnRemove or inventoryPanel.OnRemove ~= wrappers.InventoryOnRemove then
+		local originalOnRemove = inventoryPanel.OnRemove
+		function inventoryPanel:OnRemove()
+			if IsValid(self.cotzEquipmentPanel) then self.cotzEquipmentPanel:Remove() end
+			if originalOnRemove then originalOnRemove(self) end
+		end
+		wrappers.InventoryOnRemove = inventoryPanel.OnRemove
 	end
 	local storage = vgui.GetControlTable("ixStorageView")
-	originals.StorageOnRemove = storage.OnRemove
-	function storage:OnRemove()
-		local host = self.cotzEquipmentHost
-		self.cotzEquipmentHost = nil
-		if originals.StorageOnRemove then originals.StorageOnRemove(self) end
-		if IsValid(host) then host:Remove() end
+	if not wrappers.StorageOnRemove or storage.OnRemove ~= wrappers.StorageOnRemove then
+		local originalOnRemove = storage.OnRemove
+		function storage:OnRemove()
+			local host = self.cotzEquipmentHost
+			self.cotzEquipmentHost = nil
+			if originalOnRemove then originalOnRemove(self) end
+			if IsValid(host) then host:Remove() end
+		end
+		wrappers.StorageOnRemove = storage.OnRemove
 	end
+end
+
+function PLUGIN:OnReloaded()
+	self:InstallInventoryPanels()
 end
 
 function PLUGIN:RefreshInventoryPanel(panel, inventory)
@@ -523,6 +540,10 @@ function PLUGIN:MenuSubpanelCreated(name, page)
 end
 
 function PLUGIN:AttachInventoryEquipment(inventoryPanel)
+	-- Recover frames created before the Init wrapper was restored after refresh.
+	if not IsValid(inventoryPanel.cotzEquipmentInventoryGrid) then
+		inventoryPanel.cotzEquipmentInventoryGrid = inventoryPanel:Find("ixInventory")
+	end
 	if IsValid(inventoryPanel.cotzEquipmentPanel) then return inventoryPanel.cotzEquipmentPanel end
 	local page = inventoryPanel:GetParent()
 	if not IsValid(page) then return end

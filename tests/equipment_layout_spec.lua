@@ -100,7 +100,7 @@ check(fonts.cotzEquipmentSmall.size == 17 and PLUGIN.uiScale == 1,
 local panelMethods = {}
 PLUGIN.equipmentViews = setmetatable({}, {__mode = "k"})
 local inventory = {vars = {cotzEquipmentWidth = 8}}
-local inventoryPanel = {GetWide = function() return 420 end}
+local inventoryPanel = {cotzEquipmentInventoryGrid = {}, GetWide = function() return 420 end}
 function inventoryPanel:SetZPos(value) self.z = value end
 local environment = {
 	PLUGIN = PLUGIN, PANEL = panelMethods, RIGHT = "right",

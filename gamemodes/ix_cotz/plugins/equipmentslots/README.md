@@ -73,7 +73,10 @@ remains visible in its slot; the × button returns it when backpack space is ava
 
 ## Storage and compatibility
 
-The plugin installs runtime wrappers after `InitializedPlugins`. Device power actions
+The plugin installs runtime wrappers after `InitializedPlugins` and restores replaced panel callbacks
+on Lua refresh without wrapping unchanged callbacks again. Open equipment views remain tracked across
+refresh, and frames missing their grid reference recover it from their own child panels.
+Device power actions
 live in their owning item definitions. The schema inventory drag preview uses the
 destination grid's cell size for its footprint; equipment icon controls fit their
 actual item image so the dragged panel no longer includes an oversized card area.
@@ -164,7 +167,9 @@ The layout spec checks slot/header/footer bounds and overlap at 1024×768, 1280�
 scales of 0.8, 1, and 1.25 and with/without journal space. These geometry checks do
 not verify engine docking, font rendering, tooltips, or drag/drop in a live client.
 The view spec covers deferred menu attachment, duplicate prevention, storage and
-standalone exclusion, independent view cleanup, refresh, and resolution changes.
+standalone exclusion, independent view cleanup, refresh, and resolution changes. It also covers
+re-registering individual panel definitions, repeated Lua refresh hooks, surviving views, missing grid
+recovery, and card layout while a grid is unavailable.
 The admin spec covers access, stale targets, membership, space, pending actions,
 unequip requests, failed transfers, and repeated takes. The power spec checks
 saved/default power, rate limits, ownership, equipped state, and effect flags.
@@ -188,6 +193,8 @@ Multiplayer acceptance checks:
   context menus, and change resolution. Verify equipment appears only on You
   and is absent from Cleaner storage and all other storage/standalone windows. Check the You page with
   and without journal entries, and verify its equipment hides on other tabs.
+- Lua-refresh with You open and closed, then reopen it and switch tabs repeatedly. Verify equipment
+  icons, context menus, backpack contents, and equipment updates still work without layout errors.
 - Attempt repeated requests, foreign item IDs, incompatible slot IDs, and moves
   into reserved cells. Verify containers/bags keep their existing dimensions.
 
