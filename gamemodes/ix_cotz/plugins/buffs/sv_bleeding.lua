@@ -108,22 +108,6 @@ function PLUGIN:RestoreBleeding(client)
 	self:SetBleedingSeverity(client, self:GetBleeding(client))
 end
 
-function PLUGIN:PlayerLoadedCharacter(client)
-	self:RestoreBleeding(client)
-end
-
-function PLUGIN:PrePlayerLoadedCharacter(client)
-	client.cotzBandageAction = nil
-	active[client] = nil
-	client:SetLocalVar("bleedingSeverity", 0)
-end
-
-function PLUGIN:PlayerDisconnected(client)
-	active[client] = nil
-end
-
-function PLUGIN:PlayerDeath(client)
-	client.cotzBandageAction = nil
-	self:SetBleedingSeverity(client, 0)
+function PLUGIN:StopBleeding(client)
 	active[client] = nil
 end

@@ -52,7 +52,8 @@ function ix.util.DamageHeadgear(client, damageInfo)
 
 	for _, item in pairs(character:GetInventory():GetItems(true)) do
 		local headgear = not item.isBodyArmor and (item.isHelmet or item.isGasmask)
-		if headgear and item:GetData("equip") and not item:GetData("unlimitedDurability", false) then
+		local filterWear = item.filterType and damageInfo:IsDamageType(DMG_RADIATION)
+		if headgear and not filterWear and item:GetData("equip") and not item:GetData("unlimitedDurability", false) then
 			local durability = item:GetData("durability", 100)
 			local remaining = math.Clamp(durability - damage * wearRate, 0, 100)
 			if remaining ~= durability then

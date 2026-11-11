@@ -4743,6 +4743,21 @@ ix.progression.itemPools.town_expansion_b3dfc5681867 = {
 	},
 }
 
+ix.progression.itemPools.town_expansion_e495fb79e800 = {
+	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_ballistic1"},
+		{item = "value_ballistic11"},
+		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
+		{item = "value_balloon_poison_gas"},
+		{item = "value_flammable_thermite"},
+		{item = "value_flammable_trotil"},
+		{item = "value_other_uzrgm_fuse"},
+	},
+}
+
 ix.progression.itemPools.town_expansion_70d1a7e12f99 = {
 	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
@@ -4758,6 +4773,20 @@ ix.progression.itemPools.town_expansion_70d1a7e12f99 = {
 	},
 }
 
+ix.progression.itemPools.town_expansion_ea19e7f52af0 = {
+	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_ballistic1"},
+		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
+		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
+		{item = "value_flammable_thermite"},
+		{item = "value_other_uzrgm_fuse"},
+	},
+}
+
 ix.progression.itemPools.town_expansion_f0839ac5ddec = {
 	name = "Ordnance and protective equipment: general supplies (Waystation)",
 	tier = "common",
@@ -4768,12 +4797,11 @@ ix.progression.itemPools.town_expansion_f0839ac5ddec = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_fbe4511f6f67 = {
+ix.progression.itemPools.town_expansion_03bbb2fdfea5 = {
 	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
-		{item = "value_ballistic11"},
 		{item = "value_ballistic3"},
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
@@ -4791,28 +4819,6 @@ ix.progression.itemPools.town_expansion_5057b25bebae = {
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
 		{item = "value_c4"},
-		{item = "value_flammable_thermite"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_03bbb2fdfea5 = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_ballistic1"},
-		{item = "value_ballistic3"},
-		{item = "value_ballistic6"},
-		{item = "value_ballistic7"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_400bfa3af00f = {
-	name = "Ordnance and protective equipment: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_c4"},
-		{item = "value_dynamite"},
-		{item = "value_explosive_charge"},
 		{item = "value_flammable_thermite"},
 	},
 }
@@ -6478,6 +6484,36 @@ ix.progression.itemPools.town_expansion_b96d05056688 = {
 	},
 }
 
+ix.progression.itemPools.town_expansion_f01f02d773ec = {
+	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_expandingfoam"},
+		{item = "value_hultafors_db5000"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
+		{item = "value_pliers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_4da1807ce39b = {
+	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_building_kektape"},
+		{item = "value_crowbar"},
+		{item = "value_electricdrill"},
+		{item = "value_handdrill"},
+		{item = "value_swiss"},
+		{item = "value_tools_nippers"},
+		{item = "value_toolset"},
+		{item = "value_wd40_400ml"},
+	},
+}
+
 ix.progression.itemPools.town_expansion_6b08c04b410b = {
 	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
 	tier = "common",
@@ -6568,14 +6604,14 @@ ix.progression.itemPools.town_expansion_de5faa6ef74e = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_7cf31995d220 = {
+ix.progression.itemPools.town_expansion_8957d0e845ad = {
 	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_ballistic1"},
 		{item = "value_ballistic11"},
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
+		{item = "value_retardant10"},
 		{item = "value_retardant11"},
 		{item = "value_retardant12"},
 		{item = "value_retardant2"},

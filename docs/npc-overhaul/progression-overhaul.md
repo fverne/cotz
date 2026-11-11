@@ -1,6 +1,6 @@
 # Town progression overhaul, 9 November 2026
 
-This replaces the former 600-milestone town graph with 626 hand-in milestones across 52
+This replaces the former 600-milestone town graph with 631 hand-in milestones across 52
 branches, including 212 stock-preparation intermissions. The authored `upgradeChains` in
 `sh_equipment.lua` now include Cutlery before Cleaning kit; all other equipment and `regularAmmoChain` ordering is retained. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
@@ -21,12 +21,12 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 | Technut | Ordinary, Clear Sky and military suits; painting | Anorak, cloth mask |
 | Brass | Regular ammunition; HP exchanges; TR/DT/MG shotgun loads | Basic gun ammunition, buckshot and slugs |
 | Cleaner | Initial hideout access, then Garbage hideout improvements | Buys all at 0.3 |
-| Latch | Gasmasks and middle-tier headwear | Cloth mask |
+| Latch | Gasmasks, matching filters and middle-tier headwear | Cloth mask |
 | Spool | Steel/riot headwear; strong drugs | Russian tank helmet |
 | Spoor | Slow-firing rifles | Sako .22 and Winchester .22 |
 | Vesper | Pact rifles | None |
 | Wake | Backpacks; carried weight; inventory rows | Basic bandages and medkits |
-| Boss | Higher-tier helmets | None |
+| Boss | Higher-tier helmets and matching filters | None |
 | Carbon | AP exchanges | None |
 | Ledger | Initial hideout access, then Waystation hideout improvements | Buys all at 0.3 |
 | Quartermaster | NATO rifles | US MRE, canned water, basic antirad/bandages/medkits |
@@ -38,6 +38,14 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 
 Latch starts with the cloth mask and unlocks the remaining mask chain and operator-Russian-2/CS1/CS2 headwear. Spool starts with the Russian tank helmet and unlocks three steel helmets and the riot helmet; Haggler's tanker starter is an intentional duplicate. Boss owns
 the remainder of the helmet chain. All four trenchcoat colours share Technut's black-trenchcoat step.
+
+Latch unlocks civilian filters immediately before Halfmask, military before EO-20, and scientific
+before M40. Boss unlocks military filters before CS-4 and scientific before Screen. These five
+seller-local delivery stages precede the mask purchases and preserve any earlier stock-preparation
+requirements. Completed mask permissions remain earned; unfinished mask requests wait for the new
+filter stage without losing saved contributions or accrued value. Existing owners can complete the
+new filter stages after their old prerequisites, without replaying completed mask requests.
+See the [filter purchase details](../../../gamemodes/ix_cotz/plugins/townnpcs/README.md#gasmask-filter-purchases).
 
 Weak drugs include cigarettes, tobacco, cigars, mints, codeine and caffeine. Spool's strong-drug branch
 contains adrenaline, morphine, marijuana, glucose, cocaine and swampbrew. Gasket owns moonshine, vodka,
@@ -245,14 +253,14 @@ upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or 
 ## Authoring and regression checks
 
 Each active step owns its authored `briefing` and `completion` in the contact definition, including
-stock intermissions. All 626 pairs are individually written against the contact's profile and current
+stock intermissions. All 631 pairs are individually written against the contact's profile and current
 benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
 conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
 Keep exact assigned items and quantities in the generated objective display rather than hard-coding
 them into speech, since valid saved requests can differ from newly rolled requests.
 
 The expansion tool retains existing stock-step text by stable ID when rebuilding requirements. New
-intermissions start with the following unlock's text and need their own replies. Verify all 626 pairs
+intermissions start with the following unlock's text and need their own replies. Verify all 631 pairs
 and their compiled fields with `luatex --luaonly tests/progression_dialogue_spec.lua`; the Python
 expansion suite also checks that regeneration preserves distinct stock conversations. Editorial review
 of voice, continuity and promises is still required; uniqueness checks cannot assess writing quality.

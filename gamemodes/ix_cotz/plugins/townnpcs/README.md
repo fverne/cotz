@@ -3,7 +3,7 @@
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 626 hand-in milestones
+the earlier progression, catalogue and service descriptions below. There are 631 hand-in milestones
 in 52 branches, retaining current `v3/` IDs and adding 212 `/stock` intermissions.
 Technut's initial anorak stock delivery and eleven intermediate stock-preparation deliveries are retired.
 Anoraks remain starting stock; suit progression starts with the Mail Jacket and follows each preceding suit
@@ -44,7 +44,7 @@ contact difficulty multipliers. Existing rooms/upgrades remain saved and usable.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 Stock-capacity milestones use "<item> stock increase" as their title in dialogue and the progression menu.
 
-All 626 active milestones have individual authored `briefing` and `completion` replies in their
+All 631 active milestones have individual authored `briefing` and `completion` replies in their
 contact definitions, including the 212 stock-preparation deliveries. Read each contact's existing
 profile and bound conversation before editing its voice. The current requirements, catalogue and
 benefits determine what a reply can promise; the older story tables and retired commissions do not.
@@ -100,6 +100,37 @@ Regenerate reports with `progression_rewards.py --write` and `ammo_progression.p
 
 Deploy all map servers together and restart without resetting saves or running first-time setup.
 The linked overhaul guide records default quantities, current allocations, compatibility and live checks.
+
+## Gasmask filter purchases
+
+Every current seller of filter-dependent headgear unlocks the matching cartridge before the first
+mask requiring it. Latch supplies civilian filters before Halfmask, military before EO-20, and
+scientific before M40. Boss supplies military filters before CS-4 and scientific before Screen.
+The other masks at those sellers follow these milestones through their existing prerequisite chains.
+Exempt equipment adds no filter delivery. Cleaner and Beanstalk's old template mask entries remain
+outside the authoritative town catalogue and do not create additional sale routes.
+
+These five delivery stages grant purchase access only. Each inherits the following mask's existing
+prerequisites and sits after any stock preparation, immediately before that mask's purchase delivery.
+Each seller stocks four cartridges initially, with a maximum of four and one cartridge refilled every 12 hours;
+prices come from the concrete filter items. Normal vendor refresh adds the catalogue rows on restart.
+Latch remains the canonical supplier; Boss grants independent local military/scientific purchase access.
+Boss now joins the contacts marked `preserveProgression`, so authoring regeneration retains this ordering.
+
+New filter stages declare `defaultActive = true` while retaining their prerequisites, so they become
+offerable when their parents were completed before the update. Completed mask purchases, saved
+requirements, partial deliveries and accrued hand-in value remain intact. Unfinished mask deliveries
+wait for the matching filter unlock. Talk to the contact to discover the newly available request.
+The affected branches retain delivery quantities and acquisition regions; their generated candidate
+pools and category-only opening boundaries follow the updated chain positions. Saved selections stay fixed.
+Deploy matching code to all map servers and restart; no save reset or first-time setup is needed.
+
+Run `luatex --luaonly tests/gasmask_filter_progression_spec.lua` for all fourteen mask sale routes,
+five filter unlocks, seller-local permissions, saved-progress handling and vendor-template refresh.
+Also run `tests/town_requirement_modes_spec.lua` and `tests/progression_dialogue_spec.lua` with `luatex --luaonly`,
+and `python3 tests/progression_expansion_spec.py` plus `python3 tests/progression_rewards_spec.py`.
+In multiplayer, check topic discovery, real deliveries, filter purchases, restocking and returning
+characters with completed or partially delivered mask requests.
 
 ## Earlier implementation notes
 

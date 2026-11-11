@@ -4,7 +4,7 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**626 active steps; 626 have functional unlocks; 0 have TODO-only unlock plans;
+**631 active steps; 631 have functional unlocks; 0 have TODO-only unlock plans;
 18 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
@@ -27,7 +27,7 @@ Validation passed.
 | atlas | 10 | 10 | 0 | 0 |
 | ballast | 13 | 13 | 0 | 0 |
 | beanstalk | 27 | 27 | 0 | 0 |
-| boss | 13 | 13 | 0 | 0 |
+| boss | 15 | 15 | 0 | 0 |
 | brass | 68 | 68 | 0 | 0 |
 | carbon | 19 | 19 | 0 | 0 |
 | cleaner | 13 | 13 | 0 | 0 |
@@ -36,7 +36,7 @@ Validation passed.
 | haggler | 35 | 35 | 0 | 0 |
 | intern | 5 | 5 | 0 | 0 |
 | jitters | 23 | 23 | 0 | 0 |
-| latch | 20 | 20 | 0 | 0 |
+| latch | 23 | 23 | 0 | 0 |
 | ledger | 13 | 13 | 0 | 0 |
 | mute | 5 | 5 | 0 | 0 |
 | old-timer | 12 | 12 | 0 | 4 |
@@ -92,7 +92,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | atlas | 4 | 20 | 4 |
 | ballast | 4 | 17 | 9 |
 | beanstalk | 4 | 54 | 11 |
-| boss | 2 | 24 | 6 |
+| boss | 2 | 24 | 8 |
 | brass | 10 | 109 | 36 |
 | carbon | 4 | 25 | 15 |
 | cleaner | 4 | 17 | 9 |
@@ -101,7 +101,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | haggler | 4 | 61 | 15 |
 | intern | 1 | 11 | 2 |
 | jitters | 7 | 48 | 11 |
-| latch | 3 | 37 | 8 |
+| latch | 3 | 40 | 11 |
 | ledger | 4 | 17 | 9 |
 | mute | 1 | 3 | 4 |
 | old-timer | 4 | 23 | 6 |
@@ -170,8 +170,10 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | beanstalk | v3/optics/nightforce/stock | Stock: acog +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | beanstalk | v3/optics/nightforce | Purchase: nightforce | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | boss | v3/helmets/helm_operator_rus_1 | Purchase: helm_operator_rus_1 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
+| boss | v3/helmets/gasmask_filter_military | Purchase: gasmask_filter_military | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/headwear_cs4 | Purchase: headwear_cs4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/headwear_screen/stock | Stock: headwear_cs4 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| boss | v3/helmets/gasmask_filter_scientific | Purchase: gasmask_filter_scientific | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/headwear_screen | Purchase: headwear_screen | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/helm_sphere08 | Purchase: helm_sphere08 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/helm_sphere12/stock | Stock: helm_sphere08 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -418,11 +420,13 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | jitters | v3/bandages/medic_bandage_3 | Purchase: medic_bandage_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antirad/medic_antirad_1 | Purchase: medic_antirad_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antirad/medic_antirad_2 | Purchase: medic_antirad_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| latch | v3/masks-headwear/gasmask_filter_civilian | Purchase: gasmask_filter_civilian | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_halfmask | Purchase: mask_halfmask | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_respirator/stock | Stock: mask_halfmask +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_respirator | Purchase: mask_respirator | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_gp5/stock | Stock: mask_respirator +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_gp5 | Purchase: mask_gp5 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| latch | v3/masks-headwear/gasmask_filter_military | Purchase: gasmask_filter_military | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_eo20 | Purchase: mask_eo20 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/helm_operator_rus_2/stock | Stock: mask_eo20 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | latch | v3/masks-headwear/helm_operator_rus_2 | Purchase: helm_operator_rus_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -435,6 +439,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | latch | v3/masks-headwear/mask_xm40/stock | Stock: headwear_cs2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_xm40 | Purchase: mask_xm40 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m40/stock | Stock: mask_xm40 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| latch | v3/masks-headwear/gasmask_filter_scientific | Purchase: gasmask_filter_scientific | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m40 | Purchase: mask_m40 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m50/stock | Stock: mask_m40 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m50 | Purchase: mask_m50 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -773,6 +778,8 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | shortdot | beanstalk | v3/optics/shortdot | beanstalk |
 | trijiconrmr | beanstalk | v3/red-dots/trijiconrmr | beanstalk |
 | tundrasuppressor | beanstalk | v3/suppressors/tundrasuppressor | beanstalk |
+| gasmask_filter_military | boss | v3/helmets/gasmask_filter_military | latch |
+| gasmask_filter_scientific | boss | v3/helmets/gasmask_filter_scientific | latch |
 | headwear_cs4 | boss | v3/helmets/headwear_cs4 | boss |
 | headwear_pracs | boss | v3/helmets/headwear_pracs | boss |
 | headwear_psz12 | boss | v3/helmets/headwear_psz12 | boss |
@@ -880,6 +887,9 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | medic_stimpak_1 | jitters | v3/stimpaks/medic_stimpak_1 | jitters |
 | medic_stimpak_2 | jitters | v3/stimpaks/medic_stimpak_2 | jitters |
 | medic_stimpak_3 | jitters | v3/stimpaks/medic_stimpak_3 | jitters |
+| gasmask_filter_civilian | latch | v3/masks-headwear/gasmask_filter_civilian | latch |
+| gasmask_filter_military | latch | v3/masks-headwear/gasmask_filter_military | latch |
+| gasmask_filter_scientific | latch | v3/masks-headwear/gasmask_filter_scientific | latch |
 | headwear_cs1 | latch | v3/masks-headwear/headwear_cs1 | latch |
 | headwear_cs2 | latch | v3/masks-headwear/headwear_cs2 | latch |
 | helm_operator_rus_2 | latch | v3/masks-headwear/helm_operator_rus_2 | latch |

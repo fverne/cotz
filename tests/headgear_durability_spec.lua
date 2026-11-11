@@ -32,6 +32,8 @@ local damageNames = {
 DMG_GENERIC = 0
 for index, name in ipairs(damageNames) do _G["DMG_" .. name] = 2 ^ (index - 1) end
 ix = {util = {GetMaterial = function() end}, temp = {Corpses = {}}}
+PLUGIN = {}
+dofile("gamemodes/ix_cotz/plugins/suits/sv_filters.lua")
 dofile("gamemodes/ix_cotz/plugins/suits/sh_durability.lua")
 ITEM = {}
 local gearPath = "gamemodes/ix_cotz/schema/items/base/sh_gear.lua"

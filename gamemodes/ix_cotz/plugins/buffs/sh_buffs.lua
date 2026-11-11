@@ -196,6 +196,17 @@ PLUGIN.buffs[ "buff_hijump" ] = {
 	end,
 }
 
+local function updateSprintWeight(client)
+	local character = client:GetCharacter()
+	if not character then return end
+
+	timer.Simple(0, function()
+		if IsValid(client) and client:GetCharacter() == character then
+			ix.weight.Update(character)
+		end
+	end)
+end
+
 PLUGIN.buffs[ "buff_lightningsprint" ] = {
 	name = "Lightning Sprint",
 	desc = "You move quickly, but at what cost?",
@@ -217,14 +228,10 @@ PLUGIN.buffs[ "buff_lightningsprint" ] = {
 			player:RemoveBuff("buff_lightningsprint")
 			return
 		end
-		timer.Simple(0, function()
-			ix.weight.Update(player:GetCharacter())	
-		end)
+		updateSprintWeight(player)
 
 	end,
 	ondebuffed = function( player, parameter )
-		timer.Simple(0, function()
-			ix.weight.Update(player:GetCharacter())	
-		end)
+		updateSprintWeight(player)
 	end,
 }

@@ -21,7 +21,7 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 626)
+        self.assertEqual(len(steps), 631)
         self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 212)
         output, count = expansion.outputs()
         self.assertEqual(count, 212)

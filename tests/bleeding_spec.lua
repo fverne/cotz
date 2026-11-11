@@ -19,8 +19,18 @@ ix = {config = {
 	Get = function(key, default) return settings[key] or default end,
 }, util = {Include = function() end}, plugin = {}}
 PLUGIN = {}
+table.Copy = function(value)
+	local copy = {}
+	for key, entry in pairs(value) do
+		copy[key] = type(entry) == "table" and table.Copy(entry) or entry
+	end
+
+	return copy
+end
+timer = {Simple = function() end}
 dofile("gamemodes/ix_cotz/plugins/buffs/sh_bleeding.lua")
 dofile("gamemodes/ix_cotz/plugins/buffs/sv_bleeding.lua")
+dofile("gamemodes/ix_cotz/plugins/buffs/sv_persistence.lua")
 local buffs = PLUGIN
 ix.plugin.Get = function() return buffs end
 local world = {}
@@ -56,6 +66,8 @@ local function player(severity)
 	function client:GetLocalVar(key, default) return self.vars[key] or default end
 	function client:SetLocalVar(key, value) self.vars[key] = value self.sends = self.sends + 1 end
 	function client:GetNetVar(key, default) return self.vars[key] or default end
+	function client:SetNetVar(key, value) self.vars[key] = value end
+	function client:GetBuffs() return self:GetNetVar("buffs", {}) end
 	function client:AddBuff(_, duration, parameters) self.healing = {duration, parameters.amount} end
 	function client:TakeDamageInfo(info)
 		check(info.kind == DMG_GENERIC and info.attacker == world and info.inflictor == world,

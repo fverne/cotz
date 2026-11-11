@@ -55,6 +55,9 @@ local function itemConditions(item)
 	if item.isPoachKnife and ix.poaching then return ix.poaching.GetSharpness(item) end
 	local durability = item:GetData("durability")
 	local wear = item:GetData("wear")
+	if item.filterType and item.isGasmask and item.GetFilterCondition then
+		return durability or 100, item:GetFilterCondition() or 0
+	end
 	if item.isWeapon and item.class then
 		local weapon = LocalPlayer():GetWeapon(item.class)
 		if IsValid(weapon) then
@@ -84,14 +87,15 @@ local function paintCard(card, width, height)
 	local barHeight = math.max(3, math.floor(card.scale * 4))
 	local barY = height - padding - barHeight
 	local conditionColor
+	local filter = card.item.filterType and card.item.isGasmask
 	if card.item.isPoachKnife and ix.poaching and condition > ix.poaching.Sharpness.default then
 		conditionColor = COLORS.teal
 	end
 	drawSegments(padding, barY, width - padding * 2, barHeight,
-		math.Clamp(condition / 100, 0, 1), conditionColor)
+		math.Clamp((filter and wear or condition) / 100, 0, 1), filter and COLORS.teal or conditionColor)
 	if wear ~= nil then
 		barY = barY - barHeight - math.max(2, math.floor(card.scale * 3))
-		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp(wear / 100, 0, 1))
+		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp((filter and condition or wear) / 100, 0, 1))
 	end
 end
 

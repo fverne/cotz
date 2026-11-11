@@ -1,7 +1,7 @@
 # Progression engine
 
 The [town progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) uses 25 finite
-contacts, 52 branches and 626 hand-in milestones (including 212 stock intermissions). Town compilation scales new quantities
+contacts, 52 branches and 631 hand-in milestones (including 212 stock intermissions). Town compilation scales new quantities
 by the contact's effort multiplier. Fresh `v3/` IDs do not inherit old completion permissions; old
 requests and contributions remain saved history. Inventory, money and paid hideout assets are retained.
 Ballast's bank service is retired with its data preserved. Suture provides paid suit conversions;
@@ -115,7 +115,7 @@ old-ID permission import or completion alias. The explicit policy-4 request conv
 of inserted intermissions preserve existing completions; unfinished unlocks require the new stages.
 
 Town completion messages use the authored reply verbatim, including Mute's nonverbal presentation.
-Standalone contacts retain the completing character's current name as a prefix. All 626 active town
+Standalone contacts retain the completing character's current name as a prefix. All 631 active town
 briefings and completions live in their owning contact definitions; the shared engine contains no
 individual contact prose. Run `luatex --luaonly tests/progression_dialogue_spec.lua` for coverage and
 `luatex --luaonly tests/progression_spec.lua` for both notification paths.

@@ -1,0 +1,95 @@
+# Suits, headgear and gasmask filters
+
+The plugin owns equipment resistance calculations, headgear damage, and replaceable gasmask filters.
+Shared mechanics load through `sh_plugin.lua`; filter items use the immediate `items/gasmaskfilters/`
+folder and its `base_gasmaskfilters` base. No bundled Helix changes are required.
+
+## Filter compatibility
+
+Concrete equipment declares `ITEM.filterType`. Compatibility is exact; a scientific cartridge cannot
+replace a civilian or military cartridge. Equipment declared with `false` has no filter socket.
+
+| Filter | Item ID | Compatible equipment | Moderate exposure lifetime | Price |
+| --- | --- | --- | --- | --- |
+| Civilian | `gasmask_filter_civilian` | Halfmask, Respirator, GP5, CS-1, CS-2 | 10 minutes | 850 |
+| Military | `gasmask_filter_military` | EO-20, PMK-3, XM-40, CS-4, PRACS, PSZ-12 | 15 minutes | 1,700 |
+| Scientific | `gasmask_filter_scientific` | M40, M50, Exohelm with Respirator, Spartan, Screen | 20 minutes | 2,550 |
+
+SSP-99, SSP-99M, all SEVA and NBC variants, Cloth Mask, Riot Helmet and Altyn are exempt. Their existing
+durability-based radiation protection remains unchanged. Screen requires a scientific filter despite
+its closed-respiratory description.
+
+Filters are available through normal admin item spawning/giving and seller-specific progression.
+Latch unlocks civilian filters before Halfmask, military before EO-20, and scientific before M40.
+Boss unlocks military filters before CS-4 and scientific before Screen. Each unlock is a separate
+delivery immediately before that seller's first mask of its type. Filters have four starting/maximum
+stock with a refill amount of one every 12 hours. Filter and mask purchase
+permissions remain personal to the character and seller. No loot or reward pools are added.
+Each cartridge occupies 1×1 cells and weighs 0.2 kg, whether loose or installed. Equipment's existing
+weight describes the equipment without its cartridge. See the [town progression guide](../townnpcs/README.md#gasmask-filter-purchases).
+
+## Protection and use
+
+A filter has 0–100% condition. Effectiveness is `clamp(condition / 80, 0, 1)`: full at 80–100%, then
+linear below 80%. The headgear's percentage and flat radiation protection multiply its ordinary
+durability scale by this filter scale. Other resistances, independent attachments, artifacts and
+buffs keep their existing behavior. Missing and exhausted filters give no filter-dependent protection.
+
+Only positive incoming `DMG_RADIATION` exposure drains an equipped filter, including fully blocked
+exposure. Condition loss is raw damage divided by the concrete cartridge's `filterWearDivisor`:
+120 civilian, 180 military, 240 scientific. The reference moderate field delivers 4 damage every
+0.2 seconds. Stronger radiation drains faster; clean areas and other damage do not drain filters.
+Protection uses the condition at the start of the hit, before filter wear and the radiation health override.
+Safe-zone damage blocking, corpse protection and `unlimitedDurability` preserve filter condition.
+Radiation no longer wears ordinary durability on filter-dependent headgear. Other headgear wear remains.
+
+Unequip the equipment and return it to the main backpack before changing filters. **Remove Filter**
+requires a free backpack cell and returns a matching cartridge at its remaining condition, including
+0%. **Install Filter** lists matching cartridges in the main backpack with their condition. The socket
+must be empty. A fresh cartridge restores 100% filter condition without repairing the headgear.
+Removed filters can be reinstalled; repairs cannot recharge them.
+
+Tooltips show the required filter and its percentage or **No filter**. Backpack icons have a teal
+filter bar above ordinary durability; equipment cards show ordinary durability above the filter bar.
+Protection tooltips and the equipment footer use effective radiation resistance.
+
+## Saved state and inventory safety
+
+Installed condition lives in the equipment's `filterCondition` item data. Numbers from 0–100 mean an
+installed cartridge; `false` means an empty socket. Missing legacy data initializes to 100 on restore
+or first access, using the equipment's declared type. Existing ordinary durability is preserved.
+New equipment includes a full matching cartridge. Loose cartridges save their own `filterCondition`;
+creation preserves supplied partial or zero condition. Empty and depleted states survive reconnects,
+server restarts and transfers. There is no database reset or bulk migration.
+
+Server actions validate current character, ownership, life state, backpack placement, equipment
+transitions, exact filter compatibility and submitted IDs. Changes have a 0.5-second server cooldown.
+Removal creates an unplaced item through `ix.item.Instance`, because this bundled Helix's
+`Inventory:Add(string)` returns before its database callback completes. The callback revalidates state
+and available space before placing the item and emptying the socket. Until then, the equipment cannot
+be used, transferred or equipped. Failures retain the installed filter and delete uncommitted output.
+A 15-second timeout releases the lock; late callbacks delete their output without emptying the socket.
+Placement counts the returning cartridge's existing carried mass only once, including at the carry limit.
+
+## Verification
+
+Run from the repository root:
+
+```sh
+luatex --luaonly tests/gasmask_filters_spec.lua
+luatex --luaonly tests/headgear_durability_spec.lua
+luatex --luaonly tests/equipment_slots_spec.lua
+luatex --luaonly tests/equipment_layout_spec.lua
+luatex --luaonly tests/equipment_views_spec.lua
+luatex --luaonly tests/equipment_interactions_spec.lua
+luatex --luaonly tests/equipment_admin_spec.lua
+luatex --luaonly tests/item_descriptions_spec.lua
+```
+
+These standalone checks use mocks. In multiplayer, verify all three cartridges load and spawn, exact
+compatibility, percentage taper, moderate exposure lifetimes, fully blocked radiation, safe zones,
+ordinary combat durability and all exemptions. Check actions and bars on ordinary masks and linked
+helmet slots, including Screen. Reconnect, restart and transfer between identically configured servers
+with partial, empty and exhausted filters. Try repeated and foreign requests, full backpacks, a
+backpack filled during creation, death or character switching during creation, and normal carry limits.
+Inspect tooltips and both condition bars at narrow, 1080p, ultrawide and 4K resolutions.

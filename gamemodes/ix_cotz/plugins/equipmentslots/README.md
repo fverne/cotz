@@ -42,6 +42,8 @@ where that state exists. The UI does not introduce new gameplay statistics.
 Slotted icons omit equipped badges and small corner condition indicators. Full-width
 card bars show durability above wear when both exist, or a single bar for knife
 sharpness, durability, or wear. Ordinary backpack icons keep their existing overlays.
+Filter-dependent headgear instead shows ordinary durability above a teal filter condition bar.
+Tooltips identify its required cartridge and remaining condition; see the [filter guide](../suits/README.md).
 Section headers use the same plain label and thin divider as the bottom protection header.
 Equipment icons use the existing `ix.util.GetItemIcon` material cache, including
 its `img` priority, rather than rebuilding spawn icons when the menu opens.

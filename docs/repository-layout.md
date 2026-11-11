@@ -67,6 +67,10 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `sherpas/` | Reusable player/squad quartermasters, instance trading panel, stock persistence and dialogue; retains plugin ID `sherpas`. |
 | Other plugin `items/`, `entities/`, `derma/`, `libs/` | Files owned by the corresponding gameplay feature. |
 
+`suits/` owns tiered replaceable gasmask filters, their shared/server modules and immediate
+`items/gasmaskfilters/` definitions. Concrete headgear declares exact compatibility; closed-respiratory
+suit families remain exempt. See the [filter guide](../gamemodes/ix_cotz/plugins/suits/README.md).
+
 `gearcustomization/` owns the vendor appearance service, shared appearance API, menu
 and icon rendering. Concrete `gear` and `newbags` items declare approved variants.
 The standalone schema PAC integration carries equipped instance descriptors; see the
