@@ -38,8 +38,11 @@ for _, step in ipairs(technut.progression) do
 		previousSuit = identifier
 	end
 end
-check(suitCount == 14, "all fourteen original suit stages remain")
-check(technut.progression[1].stock.item == "suit_anorak", "the initial anorak stock step remains")
+check(suitCount == 13, "all thirteen suit purchase stages remain")
+check(technut.progression[1].id == "v3/suits/suit_mailjacket", "suit progression starts with the mail jacket")
+check(not ix.progression.definitions[id("technut", "suits/suit_anorak")], "anorak stock is retired")
+check(ix.progression.CanBuyItem(context.fixture.character(), technut.name, "suit_anorak"),
+	"anoraks remain available without progression")
 check(ix.progression.IsActive(suitOwner, id("technut", "painting/painting")), "painting remains independent")
 
 local returningSuitOwner = context.fixture.character()
@@ -98,7 +101,8 @@ for _, choice in ipairs({"crowbar", "bat"}) do
 		"initial access precedes unfinished improvements")
 	ix.progression.AssignActiveRequirements(character)
 	local text = ix.progression.DescribeTask(ix.progression.definitions[accessID], "'Ballast'", nil, character)
-	check(text:find("1 bat or crowbar", 1, true), "the request describes a single alternative hand-in")
+	check(text:find("1 Hideout access tool (any mix: bat, crowbar)", 1, true),
+		"the request describes the shared one-tool category")
 	local options = ix.progression.GetDeliveryOptions(character, accessID)
 	check(#options == 1 and options[1].dyndata.itemid == choice, "either inventory choice gets a hand-in action")
 	item.equip = true

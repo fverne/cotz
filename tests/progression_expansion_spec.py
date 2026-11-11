@@ -21,7 +21,7 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 627)
+        self.assertEqual(len(steps), 626)
         self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 212)
         output, count = expansion.outputs()
         self.assertEqual(count, 212)
@@ -47,7 +47,8 @@ class ProgressionExpansionTests(unittest.TestCase):
     def test_technut_suit_route_survives_regeneration_without_intermissions(self):
         contacts = deepcopy(self.data["contacts"])
         expected = deepcopy(contacts["technut"]["progression"])
-        self.assertEqual(len(expected), 15)
+        self.assertEqual(len(expected), 14)
+        self.assertFalse(any(step["id"] == "v3/suits/suit_anorak" for step in expected))
         self.assertFalse(any(step.get("intermissionFor") for step in expected))
         expansion.expand_contacts(contacts)
         self.assertEqual(contacts["technut"]["progression"], expected)
@@ -138,17 +139,55 @@ class ProgressionExpansionTests(unittest.TestCase):
                     else:
                         self.assertIn(item, contact["supplies"])
 
-    def test_consecutive_requests_are_actually_varied(self):
+    def test_category_only_openings_and_later_specific_slots(self):
+        any_count = random_count = 0
         for slug, contact in self.data["contacts"].items():
-            # Retiring Technut's intermissions preserves the original suit requests, including repeats.
-            if slug == "technut":
-                continue
-            previous = {}
+            opening = expansion.opening_steps(contact)
             for step in contact["progression"]:
-                signature = [(tuple(c["item"] for c in self.data["pools"][s["pool"]]["candidates"]), s["quantity"])
-                             for s in step["requirements"]]
-                self.assertNotEqual(previous.get(step["branch"]), signature, step["id"])
-                previous[step["branch"]] = signature
+                introductory = step.get("intermissionFor", step["id"]) in opening
+                self.assertEqual(step["categoryOnly"], introductory, (slug, step["id"]))
+                for index, slot in enumerate(step["requirements"]):
+                    specific = not introductory and not step.get("intermissionFor") and index == len(step["requirements"]) - 1
+                    self.assertEqual(slot["mode"], "random" if specific else "any", (slug, step["id"]))
+                    if slot["mode"] == "any":
+                        any_count += 1
+                        if introductory and step["id"] != "v3/hideout/access":
+                            self.assertGreaterEqual(len(self.data["pools"][slot["pool"]]["candidates"]), 2,
+                                                    (slug, step["id"], "opening category is too narrow"))
+                    else:
+                        random_count += 1
+        self.assertGreater(any_count, random_count)
+        self.assertGreater(random_count, 100)
+        technut = [s for s in self.data["contacts"]["technut"]["progression"] if s["branch"] == "suits"]
+        self.assertEqual([s["name"] for s in technut if s["categoryOnly"]],
+                         ["Mail Jacket", "Black Trenchcoat", "Sunrise STALKER Suit"])
+
+    def test_independent_unlocks_do_not_share_a_twenty_percent_budget(self):
+        contact = {"progression": [
+            {"id": "a", "branch": "shared", "requires": []},
+            {"id": "b", "branch": "shared", "requires": []},
+            {"id": "c", "branch": "shared", "requires": []},
+            {"id": "d", "branch": "shared", "requires": []},
+            {"id": "e", "branch": "shared", "requires": []},
+            {"id": "f", "branch": "shared", "requires": []},
+        ]}
+        self.assertEqual(expansion.opening_steps(contact), {"a", "b", "c", "d", "e", "f"})
+        contact["progression"][1]["requires"] = ["a"]
+        self.assertEqual(expansion.opening_steps(contact), {"a", "c", "d", "e", "f"})
+        for step in self.data["contacts"]["wake"]["progression"]:
+            if step.get("capacity"):
+                self.assertTrue(step["categoryOnly"], step["id"])
+
+    def test_specific_pools_have_comparable_acquisition_frequency(self):
+        for contact in self.data["contacts"].values():
+            for step in contact["progression"]:
+                for slot in step["requirements"]:
+                    if slot["mode"] != "random" or slot.get("artifactPool"):
+                        continue
+                    scores = [sum(sum(v[1] for v in self.rates[m].get(candidate["item"], {}).values())
+                                  for m in step["acquisitionMaps"])
+                              for candidate in self.data["pools"][slot["pool"]]["candidates"]]
+                    self.assertLessEqual(max(scores), min(scores) * 3 + 1e-9, step["id"])
 
     def test_requests_stay_with_the_contact_specialty(self):
         for slug, contact in self.data["contacts"].items():

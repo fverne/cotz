@@ -114,8 +114,9 @@ PLUGIN:Register("egghead", {
 			completion = "The delivery is complete. You can purchase the SSP-99 now; my enthusiasm isn't part of its specification.",
 			requirements = {
 				{
-					pool = "town_expansion_6ab242e44564",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 1,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 			},
@@ -123,6 +124,7 @@ PLUGIN:Register("egghead", {
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/science-suits/suit_ssp99m/stock",
@@ -133,8 +135,8 @@ PLUGIN:Register("egghead", {
 			briefing = "I'd like a larger SSP-99 reserve before opening the next suit arrangement. Supplies have an irritating habit of demanding attention just as a comparison becomes interesting. Bring this order in and your stock allowance will rise. It won't refill the suits immediately, even if I explain the desirability of doing so at length.",
 			completion = "Your SSP-99 stock capacity has increased. A satisfactorily practical result; Beanstalk would approve of me noticing it.",
 			requirements = {
-				{pool = "town_expansion_41f7e321426e", quantity = 1},
-				{pool = "town_expansion_c50fe0412bf4", quantity = 1},
+				{pool = "town_expansion_cdf25d73f659", quantity = 1, mode = "any"},
+				{pool = "town_expansion_d2609995f8d8", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"suit_ssp99"},
@@ -145,6 +147,7 @@ PLUGIN:Register("egghead", {
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/science-suits/suit_ssp99m",
@@ -156,13 +159,15 @@ PLUGIN:Register("egghead", {
 			completion = "That settles the SSP-99M purchase access. Yes, I've checked the delivery before beginning the interesting questions.",
 			requirements = {
 				{
-					pool = "town_expansion_6ab242e44564",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_b42cfd993705",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "electrical_artifacts",
 				},
 			},
@@ -170,6 +175,7 @@ PLUGIN:Register("egghead", {
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/science-suits/suit_seva/stock",
@@ -180,10 +186,10 @@ PLUGIN:Register("egghead", {
 			briefing = "The SSP-99M reserve needs its own supplies. This request increases how many I can keep available for you; it isn't the SEVA purchase arrangement yet. I'd rather say that plainly now than discover we've conducted two entirely different negotiations over the same table.",
 			completion = "The SSP-99M allowance is larger. The SEVA arrangement remains a separate matter, and the shelves refill normally.",
 			requirements = {
-				{pool = "town_expansion_651dbe68491b", quantity = 2},
-				{pool = "town_expansion_f23b91a4c88c", quantity = 2},
-				{pool = "town_expansion_7a865395e36d", quantity = 1},
-				{pool = "town_expansion_9580fee61c88", quantity = 1},
+				{pool = "town_expansion_4fb728e0590f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_cd0152fc8308", quantity = 2, mode = "any"},
+				{pool = "town_expansion_7ab833816100", quantity = 1, mode = "any"},
+				{pool = "town_expansion_7d43e6ba987e", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"suit_ssp99m"},
@@ -199,6 +205,7 @@ PLUGIN:Register("egghead", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/science-suits/suit_seva",
@@ -210,23 +217,27 @@ PLUGIN:Register("egghead", {
 			completion = "The research order is complete. You can buy the SEVA suit here now. Thank you; I'll try to keep the next explanation seated.",
 			requirements = {
 				{
-					pool = "town_expansion_6ab242e44564",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 4,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_b42cfd993705",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_9e467e82494b",
+					pool = "town_expansion_9eca93351695",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_f2eb34f40bc8",
+					pool = "town_expansion_4191637a3663",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "exceptional_artifacts",
 				},
 			},
@@ -239,6 +250,7 @@ PLUGIN:Register("egghead", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 	},
 	startingServices = {},

@@ -4,7 +4,7 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**627 active steps; 627 have functional unlocks; 0 have TODO-only unlock plans;
+**626 active steps; 626 have functional unlocks; 0 have TODO-only unlock plans;
 18 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
@@ -46,7 +46,7 @@ Validation passed.
 | spool | 15 | 15 | 0 | 0 |
 | spoor | 21 | 21 | 0 | 0 |
 | suture | 37 | 37 | 0 | 13 |
-| technut | 15 | 15 | 0 | 1 |
+| technut | 14 | 14 | 0 | 1 |
 | the-original | 0 | 0 | 0 | 0 |
 | vesper | 31 | 31 | 0 | 0 |
 | wake | 38 | 38 | 0 | 0 |
@@ -76,12 +76,44 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | quartermaster | Field issue kits and military packing | valuables_equipment_pouches, valuables_protective_textiles, valuables_military_cases | administrative_documents, valuables_armour_panels |
 | smartass | Computer hardware and data media | small_electronics, valuables_computer_parts, valuables_portable_computers, valuables_control_electronics, valuables_flash_media | valuables_electronic_components, valuables_technical_records |
 | spicy-lemon | Kitchen stores and cooking fuel | valuables_provisions, fuel | cleaning, valuables_fuel_supplies |
-| spool | Receivers, communications parts and recordings | consumer_electronics, radio_components, valuables_recording_equipment | valuables_portable_power, valuables_electrical_supplies |
+| spool | Receivers, communications parts and recordings | consumer_electronics, radio_components, valuables_recording_equipment, fasteners, repair_electrical | valuables_portable_power, valuables_electrical_supplies |
 | spoor | Hunting equipment care and field observations | maintenance, valuables_field_records | valuables_cutting_tools, valuables_instruments |
 | suture | Cloth, protective layers and sewing supplies | valuables_textile_supplies, valuables_protective_textiles | valuables_cutting_tools, valuables_armour_panels |
-| technut | Precision tools and mechanical repair parts | valuables_repair_parts, valuables_drivers_wrenches, basic_tools, advanced_parts, specialty_tools | valuables_workshop_consumables, valuables_electrical_supplies |
+| technut | Precision tools and mechanical repair parts | workshop_supplies, adhesives, fasteners, repair_electrical, town_textiles, valuables_repair_parts, valuables_drivers_wrenches, basic_tools, advanced_parts, specialty_tools | valuables_workshop_consumables, valuables_electrical_supplies |
 | vesper | Expedition instruments and field preparation | valuables_instruments, valuables_survey_equipment, field_maintenance | valuables_sample_carriers, valuables_equipment_pouches |
 | wake | Personal effects and recovered belongings | valuables_equipment_pouches, valuables_personal_effects, small_valuables | valuables_office_records, valuables_transit_cases |
+
+## Hand-in modes
+
+The first 20% of actual unlocks in each branch, rounded up, are category-only. Stock intermissions are category-wide. Later ordinary deliveries use a specific final slot with category totals in any preceding slots. Existing saved counts and specific rolls are retained.
+
+| Contact | Opening category-only unlocks | Category slots | Specific slots |
+| --- | ---: | ---: | ---: |
+| atlas | 4 | 20 | 4 |
+| ballast | 4 | 17 | 9 |
+| beanstalk | 4 | 54 | 11 |
+| boss | 2 | 24 | 6 |
+| brass | 10 | 109 | 36 |
+| carbon | 4 | 25 | 15 |
+| cleaner | 4 | 17 | 9 |
+| egghead | 1 | 11 | 2 |
+| gasket | 9 | 116 | 28 |
+| haggler | 4 | 61 | 15 |
+| intern | 1 | 11 | 2 |
+| jitters | 7 | 48 | 11 |
+| latch | 3 | 37 | 8 |
+| ledger | 4 | 17 | 9 |
+| mute | 1 | 3 | 4 |
+| old-timer | 4 | 23 | 6 |
+| quartermaster | 3 | 42 | 10 |
+| smartass | 6 | 79 | 20 |
+| spicy-lemon | 8 | 92 | 22 |
+| spool | 3 | 32 | 7 |
+| spoor | 3 | 37 | 9 |
+| suture | 6 | 60 | 21 |
+| technut | 4 | 19 | 10 |
+| vesper | 4 | 53 | 13 |
+| wake | 11 | 69 | 13 |
 
 ## Every progression step
 
@@ -630,7 +662,6 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | suture | v3/suit-variants/suit_seva | Conversion: suit_seva_anarchist; Conversion: suit_seva_authority; Conversion: suit_seva_ecologist; Conversion: suit_seva_fanatic; Conversion: suit_seva_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-variants/suit_skat10 | Conversion: suit_skat10_anarchist; Conversion: suit_skat10_authority; Conversion: suit_skat10_ecologist; Conversion: suit_skat10_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-variants/suit_skat9 | Conversion: suit_skat9_anarchist; Conversion: suit_skat9_authority; Conversion: suit_skat9_ecologist; Conversion: suit_skat9_fanatic; Conversion: suit_skat9_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_anorak | Stock: suit_anorak +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_mailjacket | Purchase: suit_mailjacket | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_trenchcoat_black | Purchase: suit_trenchcoat_black; Purchase: suit_trenchcoat_brown; Purchase: suit_trenchcoat_green; Purchase: suit_trenchcoat_tan | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_sunrise | Purchase: suit_sunrise | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |

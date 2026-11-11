@@ -157,12 +157,13 @@ PLUGIN:Register("haggler", {
 			briefing = "The TOZ-106 is where we begin. Small enough to attract a hopeful buyer, interesting enough to keep him at the counter while I explain the arrangement. Bring the workshop supplies on this list and I'll make it available to purchase. You get a choice on the shelf, I get a useful delivery; nobody needs to pretend we're running a charity.",
 			completion = "TOZ-106 purchase access, as agreed. A complete delivery makes a much better introduction than a promise.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/pact-cqb/mp27",
@@ -173,12 +174,13 @@ PLUGIN:Register("haggler", {
 			briefing = "For the MP-27, this is the supply order. I can explain its attractions while you read, but you may accuse me of making the list longer through sheer enthusiasm. Bring the full request back and you can buy the gun.",
 			completion = "The MP-27 is available to buy. I have received everything, including the small entry people like to overlook.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/pact-cqb/toz66short/stock",
@@ -189,7 +191,7 @@ PLUGIN:Register("haggler", {
 			briefing = "Before the next purchase, let's make more room for the MP-27. This delivery increases your stock allowance. More space for you in the supply arrangement, not a gun appearing out of my sleeve.",
 			completion = "Your MP-27 capacity is larger. The refill still travels by the usual means, however impressive my sleeves.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mp27"},
@@ -200,6 +202,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/pact-cqb/toz66short",
@@ -210,12 +213,13 @@ PLUGIN:Register("haggler", {
 			briefing = "The sawn-off BM-16 has a straightforward purchase request. Bring the listed supplies. I enjoy a customer who asks about a gun instead of explaining why I should be grateful to sell it; we reach the useful part much faster.",
 			completion = "The BM-16 sawn-off is open for purchase. Thank you for bringing supplies instead of a lecture on commerce.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/pact-cqb/skorpion/stock",
@@ -226,7 +230,7 @@ PLUGIN:Register("haggler", {
 			briefing = "The BM-16 reserve needs these materials before the Skorpion arrangement. It raises your allowance for the gun you've unlocked. A reserve can be good business even when it doesn't make a dramatic story.",
 			completion = "BM-16 reserve capacity increased. Actual stock refills on the ordinary schedule.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"toz66short"},
@@ -237,6 +241,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/pact-cqb/skorpion",
@@ -247,12 +252,13 @@ PLUGIN:Register("haggler", {
 			briefing = "The Skorpion catches people's attention before I finish saying the price. For purchase access, bring this workshop order. You are welcome to admire it in advance; admiration simply isn't among the supplies requested.",
 			completion = "Skorpion purchase access is ready. The delivery has improved my afternoon more than admiration alone.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			branchIndex = 4,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/pact-cqb/toz34short/stock",
@@ -263,7 +269,7 @@ PLUGIN:Register("haggler", {
 			briefing = "I'd like to expand the Skorpion reserve. Complete the smaller list and the stock allowance rises. If you want to negotiate with an empty shelf today, you're welcome to try; I have never heard it concede a point.",
 			completion = "Your Skorpion allowance is larger. Fresh stock must still arrive normally.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"skorpion"},
@@ -274,6 +280,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz34short",
@@ -284,12 +291,13 @@ PLUGIN:Register("haggler", {
 			briefing = "For the TOZ-34 sawn-off, bring this request. Yes, another shotgun arrangement. People ask why I carry a choice, then spend a wonderfully long time explaining why their own choice is the right one.",
 			completion = "The TOZ-34 sawn-off can be purchased now. You've earned the opportunity to make your own comparison.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
+				{pool = "town_expansion_15b692cf7ae6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/kiparis/stock",
@@ -300,7 +308,7 @@ PLUGIN:Register("haggler", {
 			briefing = "The short TOZ-34 reserve comes before the Kiparis. Bring these supplies and I'll increase the capacity. I would rather support a purchase already available than have every conversation end with 'perhaps next time'.",
 			completion = "Short TOZ-34 stock capacity increased. Normal refill, better allowance.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
+				{pool = "town_expansion_dc2eb71761f5", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"toz34short"},
@@ -311,6 +319,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/kiparis",
@@ -321,12 +330,13 @@ PLUGIN:Register("haggler", {
 			briefing = "The Kiparis has this delivery attached to its purchase access. It's all written down; the order won't acquire an extra item because I thought of another convincing sales point while you were leaving.",
 			completion = "The Kiparis is available to buy. The written deal is complete, and remarkably resistant to my enthusiasm.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
+				{pool = "town_expansion_15b692cf7ae6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz66",
@@ -337,13 +347,14 @@ PLUGIN:Register("haggler", {
 			briefing = "The full-length TOZ-66 comes through this request. Bring the listed materials here. I like seeing someone consider a different option instead of announcing that every other customer has been buying incorrectly.",
 			completion = "TOZ-66 purchase access is settled. You can buy it without winning an argument with the previous owner.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
-				{pool = "town_expansion_cc3bbd9b289f", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4ce173e4c3e2", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/ppsh/stock",
@@ -354,8 +365,8 @@ PLUGIN:Register("haggler", {
 			briefing = "Before the PPSh, let's address the TOZ-66 reserve. This delivery increases the allowance for it. Supporting an earlier choice doesn't mean I've lost interest in showing you the next one.",
 			completion = "Your TOZ-66 reserve is larger. I can remain interested while the ordinary refill takes its time.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
-				{pool = "town_expansion_638378a25387", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_93ec49f5bd34", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"toz66"},
@@ -366,6 +377,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/ppsh",
@@ -376,13 +388,14 @@ PLUGIN:Register("haggler", {
 			briefing = "The PPSh-41 has a name people recognise, which saves me one part of the sales pitch and encourages them to supply three more. Bring this workshop order and I'll make it available for purchase.",
 			completion = "PPSh purchase access is open. A full delivery: the part of the discussion I can actually put away.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
-				{pool = "town_expansion_15fff9ec4117", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4ce173e4c3e2", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz34/stock",
@@ -393,8 +406,8 @@ PLUGIN:Register("haggler", {
 			briefing = "This order expands your PPSh capacity before the hunting TOZ-34. I'm agreeing to a larger stock allowance. If I were promising immediate stock, I'd have chosen a much shorter explanation and a much happier expression.",
 			completion = "PPSh stock allowance increased. Refill is still the usual arrangement.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
-				{pool = "town_expansion_cc3bbd9b289f", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_93ec49f5bd34", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"ppsh"},
@@ -405,6 +418,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz34",
@@ -415,13 +429,14 @@ PLUGIN:Register("haggler", {
 			briefing = "For the TOZ-34 hunting shotgun, complete this delivery. People can spend all afternoon comparing barrels and forget they still need to bring me the supplies. I appreciate enthusiasm better when the order comes back with it.",
 			completion = "The hunting TOZ-34 is available to purchase. You've given the conversation something solid to conclude on.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
-				{pool = "town_expansion_638378a25387", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ebd69b9f35a9", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/pp2000/stock",
@@ -432,8 +447,8 @@ PLUGIN:Register("haggler", {
 			briefing = "The hunting TOZ-34 reserve needs this smaller order. Bring the full list and your capacity rises. There's no need to purchase one first just to prove my pitch worked.",
 			completion = "Your hunting TOZ-34 allowance has increased. The sales decision remains entirely, enticingly yours.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 1},
-				{pool = "town_expansion_152de158b4a1", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c06c67504ef8", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"toz34"},
@@ -444,6 +459,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/pp2000",
@@ -454,13 +470,14 @@ PLUGIN:Register("haggler", {
 			briefing = "The PP-2000 purchase arrangement uses this request. Read the complete list while I make room on the counter. I would like the return to involve supplies rather than an account of the excellent bargain you nearly brought me.",
 			completion = "PP-2000 purchase access is ready. That is a delivery I can do business with.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
-				{pool = "town_expansion_bdc28c49496b", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_bb6f2a2518e6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz194/stock",
@@ -471,8 +488,8 @@ PLUGIN:Register("haggler", {
 			briefing = "Before the TOZ-194, let's increase your PP-2000 reserve. The supplies are listed here. It helps to have room for a returning customer's choice, even when that customer enjoys considering every other gun first.",
 			completion = "Your PP-2000 stock capacity is larger. The normal refill still applies to that room on the sheet.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 1},
-				{pool = "town_expansion_f7f42b02f574", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c06c67504ef8", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"pp2000"},
@@ -483,6 +500,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz194",
@@ -493,13 +511,14 @@ PLUGIN:Register("haggler", {
 			briefing = "For the TOZ-194, bring this workshop order. A shotgun question gives me a pleasant change from discussing somebody's idea of my profit margin. Let's preserve that improvement by agreeing on the supplies before anything else.",
 			completion = "The TOZ-194 can be purchased now. I have the complete delivery and no need to revisit the terms.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
-				{pool = "town_expansion_152de158b4a1", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_bb6f2a2518e6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/pp1901vityaz/stock",
@@ -510,8 +529,8 @@ PLUGIN:Register("haggler", {
 			briefing = "The TOZ-194 reserve needs these supplies. Completing the list raises your allowance. Think of it as another bit of business already settled when you next come looking, rather than another gun already waiting.",
 			completion = "TOZ-194 stock capacity increased. The shelf itself makes no advance promises.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 1},
-				{pool = "town_expansion_bdc28c49496b", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c06c67504ef8", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"toz194"},
@@ -522,6 +541,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/pp1901vityaz",
@@ -532,13 +552,14 @@ PLUGIN:Register("haggler", {
 			briefing = "The Vityaz comes through this request. I can make the gun available once the materials are here. You don't have to recite its entire reputation; I enjoy hearing what a customer actually wants more than the advertisement he remembers.",
 			completion = "Vityaz purchase access is open. Your own choice can have a turn now.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
-				{pool = "town_expansion_f7f42b02f574", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_bb6f2a2518e6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/saiga410/stock",
@@ -549,9 +570,9 @@ PLUGIN:Register("haggler", {
 			briefing = "This smaller order supports the Vityaz reserve. Bring the list and the stock allowance increases. I call that planning for repeat business; Brass would probably insist I use a less cheerful phrase.",
 			completion = "Vityaz reserve capacity increased. It refills normally, regardless of how cheerfully I describe it.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
-				{pool = "town_expansion_15fff9ec4117", quantity = 1},
-				{pool = "town_expansion_b16633a45e5e", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_93ec49f5bd34", quantity = 1, mode = "any"},
+				{pool = "town_expansion_d8f8ea477461", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"pp1901vityaz"},
@@ -562,6 +583,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/saiga410",
@@ -572,14 +594,15 @@ PLUGIN:Register("haggler", {
 			briefing = "For the Saiga-410, complete this supply delivery. That is the purchase arrangement. I can see you considering what else might fit in the pack; let's get the order home before we build the next load around it.",
 			completion = "The Saiga-410 is available to purchase. Everything required has made it onto the counter.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 3},
-				{pool = "town_expansion_cc3bbd9b289f", quantity = 2},
-				{pool = "town_expansion_b87c057c55a9", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 3, mode = "any"},
+				{pool = "town_expansion_93ec49f5bd34", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ea4a3ff123bc", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/gepardpdw/stock",
@@ -590,9 +613,9 @@ PLUGIN:Register("haggler", {
 			briefing = "I'd like more capacity for the Saiga-410 before the Gepard. These materials cover it. A customer shouldn't have to begin a fresh argument about access every time he returns for a gun he already likes.",
 			completion = "Saiga-410 allowance increased. Access is settled; current stock still depends on refill.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
-				{pool = "town_expansion_638378a25387", quantity = 1},
-				{pool = "town_expansion_b16633a45e5e", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_93ec49f5bd34", quantity = 1, mode = "any"},
+				{pool = "town_expansion_d8f8ea477461", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"saiga410"},
@@ -603,6 +626,7 @@ PLUGIN:Register("haggler", {
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/gepardpdw",
@@ -613,14 +637,15 @@ PLUGIN:Register("haggler", {
 			briefing = "The Gepard PDW is next. Bring this workshop request and you can buy it. Some people prefer asking about unusual equipment because they enjoy my explanation; others want the explanation finished so they can look. I can accommodate either.",
 			completion = "Gepard purchase access is ready. I'll let you decide which kind of customer you are today.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 3},
-				{pool = "town_expansion_15fff9ec4117", quantity = 2},
-				{pool = "town_expansion_b87c057c55a9", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 3, mode = "any"},
+				{pool = "town_expansion_93ec49f5bd34", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ea4a3ff123bc", quantity = 1, mode = "random"},
 			},
 			branchIndex = 14,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/pp19/stock",
@@ -631,9 +656,9 @@ PLUGIN:Register("haggler", {
 			briefing = "The Gepard reserve needs its own delivery. The list raises stock capacity, without making anything arrive immediately. I can make a convincing case for a reserve while still letting you read that last sentence.",
 			completion = "Your Gepard capacity is larger. The honest limitation remains: ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
-				{pool = "town_expansion_2db70b6fbf88", quantity = 1},
-				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9afb06e9bb9c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"gepardpdw"},
@@ -649,6 +674,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/pp19",
@@ -659,9 +685,9 @@ PLUGIN:Register("haggler", {
 			briefing = "For the Bizon, this is the purchase order. Bring the listed supplies. We can discuss what attracted you when you get back, if you like; I enjoy an equipment conversation that isn't simply somebody repeating my price in disbelief.",
 			completion = "Bizon purchase access is complete. You've brought an excellent alternative to an argument about the label.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 3},
-				{pool = "town_expansion_d8d65e086eac", quantity = 2},
-				{pool = "town_expansion_df5cad80abc3", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 3, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 2, mode = "any"},
+				{pool = "town_expansion_08a8dc156b3a", quantity = 1, mode = "random"},
 			},
 			branchIndex = 15,
 			branchLength = 19,
@@ -672,6 +698,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/mp153/stock",
@@ -682,9 +709,9 @@ PLUGIN:Register("haggler", {
 			briefing = "This request increases your Bizon reserve. Bring the full smaller order and I'll raise the allowance. There's room in a good transaction for returning to something familiar.",
 			completion = "Your Bizon stock allowance is larger. Familiar equipment still needs fresh stock to arrive.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
-				{pool = "town_expansion_cbdcbe001335", quantity = 1},
-				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9afb06e9bb9c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"pp19"},
@@ -700,6 +727,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/mp153",
@@ -710,9 +738,9 @@ PLUGIN:Register("haggler", {
 			briefing = "The MP-153 comes through this workshop delivery. I won't claim the choice is inevitable simply because I'd like to sell you one. Complete the list, then decide whether the gun belongs in your plans.",
 			completion = "MP-153 purchase access is open. A complete order buys you the option, without borrowing your decision.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 3},
-				{pool = "town_expansion_2db70b6fbf88", quantity = 2},
-				{pool = "town_expansion_df5cad80abc3", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 3, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d5721363063", quantity = 1, mode = "random"},
 			},
 			branchIndex = 16,
 			branchLength = 19,
@@ -723,6 +751,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/sr2/stock",
@@ -733,9 +762,9 @@ PLUGIN:Register("haggler", {
 			briefing = "Before the Veresk, there is the MP-153 reserve. These supplies increase capacity. It's less lively than a new sales pitch, but I have discovered that customers occasionally want the useful arrangement before the performance.",
 			completion = "MP-153 capacity increased. The useful arrangement is done; the refill remains normal.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 2},
-				{pool = "town_expansion_d8d65e086eac", quantity = 1},
-				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9afb06e9bb9c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mp153"},
@@ -751,6 +780,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/sr2",
@@ -761,9 +791,9 @@ PLUGIN:Register("haggler", {
 			briefing = "The Veresk is available through this supply order. Put your attention on the list before I distract you with the gun. I do know when I'm doing it; that doesn't mean the explanation isn't worth hearing.",
 			completion = "Veresk purchase access is ready. Supplies received before I could talk either of us away from them.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 3},
-				{pool = "town_expansion_cbdcbe001335", quantity = 2},
-				{pool = "town_expansion_df5cad80abc3", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 3, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d5721363063", quantity = 1, mode = "random"},
 			},
 			branchIndex = 17,
 			branchLength = 19,
@@ -774,6 +804,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz34special/stock",
@@ -784,9 +815,9 @@ PLUGIN:Register("haggler", {
 			briefing = "This delivery raises your Veresk stock allowance. Bring what's requested. I won't ask for something extra merely because we are approaching the end of this line and I'm enjoying the business.",
 			completion = "Your Veresk reserve is larger. Exactly the increase agreed, with normal refill.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 2},
-				{pool = "town_expansion_2db70b6fbf88", quantity = 1},
-				{pool = "town_expansion_9af7d4b50cee", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9afb06e9bb9c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sr2"},
@@ -802,6 +833,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/toz34special",
@@ -812,9 +844,9 @@ PLUGIN:Register("haggler", {
 			briefing = "The special TOZ-34 has a purchase request of its own. Bring the full workshop order here. A name like that makes half my pitch for me; I'd rather let you see the gun before deciding whether the other half persuaded you.",
 			completion = "The special TOZ-34 is available to buy. The arrangement is complete, whatever you think of the adjective.",
 			requirements = {
-				{pool = "town_expansion_e86e7b663cc7", quantity = 3},
-				{pool = "town_expansion_d8d65e086eac", quantity = 2},
-				{pool = "town_expansion_df5cad80abc3", quantity = 1},
+				{pool = "town_expansion_052064323b6a", quantity = 3, mode = "any"},
+				{pool = "town_expansion_1806ede61236", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d5721363063", quantity = 1, mode = "random"},
 			},
 			branchIndex = 18,
 			branchLength = 19,
@@ -825,6 +857,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/saiga12/stock",
@@ -835,10 +868,10 @@ PLUGIN:Register("haggler", {
 			briefing = "One final reserve order before the Saiga-12. This increases capacity for the special TOZ-34. You can support an earlier purchase without feeling you've interrupted my grand finale.",
 			completion = "Special TOZ-34 stock capacity increased. The reserve will refill normally; my finale can wait.",
 			requirements = {
-				{pool = "town_expansion_056d0b7eb0ef", quantity = 2},
-				{pool = "town_expansion_15fff9ec4117", quantity = 2},
-				{pool = "town_expansion_be2bc316f977", quantity = 1},
-				{pool = "town_expansion_ae4f451666e5", quantity = 1},
+				{pool = "town_expansion_38291627bd4d", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1716f0e04429", quantity = 2, mode = "any"},
+				{pool = "town_expansion_78dc4256fdef", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9596b33bb0af", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"toz34special"},
@@ -854,6 +887,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/pact-cqb/saiga12",
@@ -864,10 +898,10 @@ PLUGIN:Register("haggler", {
 			briefing = "The Saiga-12 closes this purchase line. Bring the full request and I'll open access. You've done a substantial amount of business here; I'm capable of recognising a finished agreement without adding another errand while you shoulder the pack.",
 			completion = "Saiga-12 purchase access is open. That's this line completed. Come back when you want something, even if it's only an argument.",
 			requirements = {
-				{pool = "town_expansion_b5741c6c2f68", quantity = 4},
-				{pool = "town_expansion_cc3bbd9b289f", quantity = 3},
-				{pool = "town_expansion_0226ddbdcca9", quantity = 2},
-				{pool = "town_expansion_ee70748a5af1", quantity = 1},
+				{pool = "town_expansion_38291627bd4d", quantity = 4, mode = "any"},
+				{pool = "town_expansion_1716f0e04429", quantity = 3, mode = "any"},
+				{pool = "town_expansion_78dc4256fdef", quantity = 2, mode = "any"},
+				{pool = "town_expansion_53d55c07b383", quantity = 1, mode = "random"},
 			},
 			branchIndex = 19,
 			branchLength = 19,
@@ -878,6 +912,7 @@ PLUGIN:Register("haggler", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 	},
 	startingServices = {},

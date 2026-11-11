@@ -1,13 +1,14 @@
 # Progression engine
 
 The [town progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) uses 25 finite
-contacts, 52 branches and 627 hand-in milestones (including 212 stock intermissions). Town compilation scales new quantities
+contacts, 52 branches and 626 hand-in milestones (including 212 stock intermissions). Town compilation scales new quantities
 by the contact's effort multiplier. Fresh `v3/` IDs do not inherit old completion permissions; old
 requests and contributions remain saved history. Inventory, money and paid hideout assets are retained.
 Ballast's bank service is retired with its data preserved. Suture provides paid suit conversions;
 Technut retains painting. Mute's existing STALKERnet features have explicit service gates.
-Technut's eleven intermediate stock-preparation steps are retired; each later suit follows its
-preceding suit directly. The anorak stock entry remains. Retired records stay saved history;
+Technut's initial anorak stock step and eleven intermediate stock-preparation steps are retired.
+Anoraks remain starting stock; the Mail Jacket starts suit progression and each later suit follows its
+preceding suit directly. Retired records stay saved history;
 retained suit IDs, request quantities, partial contributions and completed purchases are preserved.
 The town service labels are included in benefit summaries; optional `plannedUnlocks` remain inactive.
 
@@ -68,6 +69,21 @@ Screws, D-cells and small lubricant aerosols retain their existing later-region 
 these alternatives are not promises of equal availability on every map. Tool tiers and story inputs
 remain distinct. Pool IDs, quantities and saved progression selections are preserved.
 
+Requirement slots optionally declare `mode = "any"` or `mode = "random"`. Omitted mode retains
+legacy behaviour. Any-mode selections snapshot a category's accepted items and one canonical counter;
+random-mode selections snapshot the chosen item. `GetRequirementKey` and `GetRequirementChoices` accept
+the owning character as their third argument to resolve saved choices. Task labels, inventory highlights,
+dialogue actions and server consumption use these same helpers.
+All town slots declare a mode. Their first 20% of actual connected-chain unlocks, rounded up, are category-only;
+stock intermissions remain category-wide. Other later requests use a specific final slot and category
+slots before it. The town compiler opts into mode-version-1 migration: unfinished requests preserve
+all original counts, item keys and credit while gaining saved alternatives for any-mode slots. Existing
+specific rolls and completed records are preserved. Subsequent definition edits do not reroll choices.
+See the [town policy](../../../../docs/npc-overhaul/progression-overhaul.md#category-totals-and-specific-requests).
+Run `luatex --luaonly tests/town_requirement_modes_spec.lua` for all compiled town boundaries.
+Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` for mixed delivery, snapshot,
+legacy conversion, isolation, failed-removal and duplicate-payment coverage.
+
 libs/sh_storage.lua exposes character-owned snapshots. Server mutations commit through the setter;
 clients only read replicated state. Requirements are assigned once by the server. Policy 4 converts outstanding ineligible/out-of-region
 town inputs once while preserving fulfilled contributions and eligible saved requests. Hand-ins validate
@@ -99,7 +115,7 @@ old-ID permission import or completion alias. The explicit policy-4 request conv
 of inserted intermissions preserve existing completions; unfinished unlocks require the new stages.
 
 Town completion messages use the authored reply verbatim, including Mute's nonverbal presentation.
-Standalone contacts retain the completing character's current name as a prefix. All 627 active town
+Standalone contacts retain the completing character's current name as a prefix. All 626 active town
 briefings and completions live in their owning contact definitions; the shared engine contains no
 individual contact prose. Run `luatex --luaonly tests/progression_dialogue_spec.lua` for coverage and
 `luatex --luaonly tests/progression_spec.lua` for both notification paths.

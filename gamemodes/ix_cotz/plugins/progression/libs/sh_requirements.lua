@@ -1,12 +1,32 @@
 ix.progression = ix.progression or {}
 
-function ix.progression.GetRequirementKey(progressionID, itemID)
-	local definition = ix.progression.definitions[progressionID]
-
-	return definition and (definition.requirementAlternatives or {})[itemID] or itemID
+local function savedSelection(character, progressionID, itemID)
+	if not character then return end
+	local line = ix.progression.GetLine(character, progressionID)
+	for _, selection in ipairs(line.selections or {}) do
+		if selection.item == itemID and selection.mode then return selection end
+	end
 end
 
-function ix.progression.GetRequirementChoices(progressionID, itemID)
+function ix.progression.GetRequirementKey(progressionID, itemID, character)
+	if character then
+		local line = ix.progression.GetLine(character, progressionID)
+		for _, selection in ipairs(line.selections or {}) do
+			for _, choice in ipairs(selection.choices or {}) do
+				if choice == itemID then return selection.item end
+			end
+		end
+	end
+	local definition = ix.progression.definitions[progressionID]
+	local required = definition and (definition.requirementAlternatives or {})[itemID]
+	if required and savedSelection(character, progressionID, required) then return itemID end
+
+	return required or itemID
+end
+
+function ix.progression.GetRequirementChoices(progressionID, itemID, character)
+	local selection = savedSelection(character, progressionID, itemID)
+	if selection and selection.choices then return table.Copy(selection.choices) end
 	local definition = ix.progression.definitions[progressionID]
 	local choices = {itemID}
 	for alternative, required in pairs(definition and definition.requirementAlternatives or {}) do
@@ -15,6 +35,19 @@ function ix.progression.GetRequirementChoices(progressionID, itemID)
 	table.sort(choices)
 
 	return choices
+end
+
+function ix.progression.GetRequirementLabel(progressionID, itemID, character)
+	local names = {}
+	for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, itemID, character)) do
+		names[#names + 1] = ix.item.list[choice].name
+	end
+	local selection = savedSelection(character, progressionID, itemID)
+	if selection and selection.mode == "any" then
+		return selection.name .. " (any mix: " .. table.concat(names, ", ") .. ")"
+	end
+
+	return table.concat(names, " or ")
 end
 
 function ix.progression.GetRequirements(character, progressionID)
@@ -40,7 +73,7 @@ local function collectNeededItems(character)
 			for item, amount in pairs(ix.progression.GetRequirements(character, progressionID)) do
 				local remaining = amount - (contributed[item] or 0)
 				if remaining > 0 then
-					for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, item)) do
+					for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, item, character)) do
 						result[choice] = (result[choice] or 0) + remaining
 						contacts[choice] = contacts[choice] or {}
 						contacts[choice][definition.keyNpc] = true
@@ -69,6 +102,7 @@ if SERVER then
 	local function validateSlot(slot)
 		local pool = ix.progression.itemPools[slot.pool]
 		assert(pool and #pool.candidates > 0, "Unknown or empty requirement pool: " .. tostring(slot.pool))
+		assert(slot.mode == nil or slot.mode == "any" or slot.mode == "random", "Invalid requirement mode")
 		local quantity = slot.quantity
 		assert(isnumber(quantity) and quantity > 0 and quantity % 1 == 0, "Invalid requirement quantity")
 		for _, candidate in ipairs(pool.candidates) do
@@ -127,7 +161,17 @@ if SERVER then
 				assert(#definition.requirementSlots > 0, "Empty delivery requirements: " .. progressionID)
 			end
 			validateAlternatives(definition)
+			local accepted = {}
 			for _, slot in ipairs(definition.requirementSlots or {}) do
+				if definition.categoryOnly then
+					assert(slot.mode == "any", "Opening town requests must be category-wide: " .. progressionID)
+				end
+				if slot.mode then
+					for _, candidate in ipairs(validateSlot(slot).candidates) do
+						assert(not accepted[candidate.item], "Overlapping requirement slots: " .. progressionID)
+						accepted[candidate.item] = true
+					end
+				end
 				local pool = validateSlot(slot)
 				if definition.requirementPolicy then
 					for _, candidate in ipairs(pool.candidates) do
@@ -191,28 +235,88 @@ if SERVER then
 		end
 	end
 
-	local function rollRequirements(definition, character, record)
-		local requirements, selections = {}, {}
-		local usedItems = {}
-		for index, slot in ipairs(definition.requirementSlots) do
-			local pool = validateSlot(slot)
-			local candidates = {}
-			for _, candidate in ipairs(pool.candidates) do
-				if not usedItems[candidate.item] then
-					candidates[#candidates + 1] = candidate
+	local function makeSelection(definition, slot, itemID, reserved, used)
+		local choices = {itemID}
+		if slot.mode == "any" then
+			for _, candidate in ipairs(validateSlot(slot).candidates) do
+				local choice = candidate.item
+				if choice ~= itemID and not reserved[choice] and not used[choice] then
+					choices[#choices + 1] = choice
 				end
 			end
+		end
+		for alternative, required in pairs(definition.requirementAlternatives or {}) do
+			if required == itemID and not reserved[alternative] and not used[alternative] then
+				choices[#choices + 1] = alternative
+			end
+		end
+		table.sort(choices)
+		for _, choice in ipairs(choices) do used[choice] = true end
+
+		return {pool = slot.pool, item = itemID, mode = slot.mode or "random",
+			choices = choices, name = validateSlot(slot).name or slot.pool}
+	end
+
+	local function rollRequirements(definition, character, record)
+		local requirements, selections, usedItems = {}, {}, {}
+		for index, slot in ipairs(definition.requirementSlots) do
+			local candidates = {}
+			for _, candidate in ipairs(validateSlot(slot).candidates) do
+				if not usedItems[candidate.item] then candidates[#candidates + 1] = candidate end
+			end
 			assert(#candidates > 0, "Requirement slots have no distinct item selection")
-			local candidate = candidates[math.random(1, #candidates)]
+			local candidate = candidates[slot.mode == "any" and 1 or math.random(1, #candidates)]
 			if definition.milestoneGroup then
 				candidate = programmeSelection(record, definition.milestoneGroup, slot.pool) or candidate
 			end
 			requirements[candidate.item] = slot.quantity
-			selections[index] = { pool = slot.pool, item = candidate.item }
+			selections[index] = {pool = slot.pool, item = candidate.item}
 			usedItems[candidate.item] = true
+		end
+		local usedChoices = {}
+		for index, selection in ipairs(selections) do
+			local slot = definition.requirementSlots[index]
+			if slot.mode then
+				selections[index] = makeSelection(definition, slot, selection.item, usedItems, usedChoices)
+			end
 		end
 
 		return requirements, selections
+	end
+
+	local function upgradeRequirementModes(definition, line)
+		if not definition.requirementModesVersion or line.completed or not line.requirements
+			or line.requirementModesVersion == definition.requirementModesVersion then return false end
+		local selections, reserved, used, ordered = {}, {}, {}, {}
+		for itemID in pairs(line.requirements) do reserved[itemID] = true end
+		for _, selection in ipairs(line.selections or {}) do
+			local itemID = selection.item
+			-- Region-policy conversions can leave a fulfilled historical key beside its pending replacement.
+			for _, conversion in ipairs(line.requirementConversions or {}) do
+				if conversion.from == itemID and line.requirements[conversion.to] then itemID = conversion.to end
+			end
+			if reserved[itemID] and not ordered[itemID] then
+				selections[#selections + 1] = itemID
+				ordered[itemID] = true
+			end
+		end
+		local remaining = {}
+		for itemID in pairs(reserved) do
+			if not ordered[itemID] then remaining[#remaining + 1] = itemID end
+		end
+		table.sort(remaining)
+		for _, itemID in ipairs(remaining) do selections[#selections + 1] = itemID end
+		line.selections = {}
+		for index, itemID in ipairs(selections) do
+			local slot = definition.requirementSlots[index]
+			if slot then
+				line.selections[index] = makeSelection(definition, slot, itemID, reserved, used)
+			end
+		end
+		-- Keep original item keys, quantities, contributions and credit; only add saved acceptance metadata.
+		line.requirementModesVersion = definition.requirementModesVersion
+
+		return true
 	end
 
 	local function replacementCandidates(definition, line, used, itemID, index)
@@ -284,6 +388,7 @@ if SERVER then
 				changed = true
 			end
 			if line and convertRequirements(definition, line) then changed = true end
+			if line and upgradeRequirementModes(definition, line) then changed = true end
 		end
 		if changed then ix.progression.SetCharacterProgression(character, record) end
 		for progressionID, definition in pairs(ix.progression.definitions) do
@@ -303,6 +408,7 @@ if SERVER then
 			if not line.requirements and accessible then
 				line.requirements, line.selections = rollRequirements(definition, character, record)
 				line.requirementPolicy = definition.requirementPolicy
+				line.requirementModesVersion = definition.requirementModesVersion
 				record.lines[progressionID] = line
 				changed = true
 			end

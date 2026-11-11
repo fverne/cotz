@@ -242,13 +242,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Glory cigarettes are the first arrangement. Bring the kitchen stores and fuel supplies on this list and you can buy them here. I don't see why people can remember the precise packet they want and forget that a kitchen needs supplies before it can smell inviting. This is a chance to demonstrate both talents.",
 			completion = "Glory cigarettes are available to buy. The kitchen has received something useful from this conversation.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			stock = {bonus = 1, item = "drug_cigarette_1"},
 			branchIndex = 1,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_2",
@@ -259,12 +260,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Petr cigarettes, bring this kitchen-supply request. I enjoy offering a choice. I enjoy rather less being told that the choice someone wanted ought to have arrived before they bothered to ask for it.",
 			completion = "Petr purchase access is ready. You brought the order before delivering an opinion about the shelf.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-drugs/drug_mints/stock",
@@ -275,7 +277,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I'd like a larger Petr reserve before the mints. These supplies increase your stock allowance. No, that doesn't mean I keep another packet hidden for anyone who smiles nicely; I would be out before breakfast.",
 			completion = "Your Petr allowance is larger. The ordinary refill will still have to do the arriving.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_cigarette_2"},
@@ -286,6 +288,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-drugs/drug_mints",
@@ -296,12 +299,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Altoid mints, this is the kitchen request. A little ordinary preference, paid for through an ordinary arrangement. I don't need somebody explaining their entire evening to justify wanting something other than a cigarette.",
 			completion = "The mints are open for purchase. The delivery is complete; your evening can remain yours.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_3/stock",
@@ -312,7 +316,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The mint reserve needs this smaller order. Bring the supplies and capacity increases. People notice an empty little tin on the shelf rather more reliably than they notice a kitchen order needing attention.",
 			completion = "Your mint stock capacity is increased. A small shelf concern has had a properly complete answer.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_mints"},
@@ -323,6 +327,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_3",
@@ -333,12 +338,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Star cigarettes come through this delivery. Read the kitchen list first. I can appreciate a customer with particular tastes, provided those tastes occasionally extend to bringing what we actually agreed on.",
 			completion = "Star purchase access is ready. You've brought the full order, which is a taste I thoroughly approve of.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_faf015d6ac68", quantity = 1, mode = "random"},
 			},
 			branchIndex = 4,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_painkillers",
@@ -349,13 +355,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The codeine purchase arrangement has its own kitchen-supply request. Bring what's listed here. You needn't explain someone else's troubles across my counter; we're making a clear supply deal, and that is enough business for the moment.",
 			completion = "Codeine is available to buy. The supply terms are met, without anyone else's business added.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_ad8a38d74ac4", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1d4b55e193f2", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_5/stock",
@@ -366,8 +373,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Before Lucky Strike, there's the codeine reserve. Complete the listed kitchen delivery for a larger allowance. I'm not promising a fresh packet immediately; I reserve my miracles for what people say I should make out of an empty cupboard.",
 			completion = "Codeine stock capacity increased. Refills remain ordinary, which ought to surprise nobody.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
-				{pool = "town_expansion_c93f929960fd", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81363bbb5ed7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_painkillers"},
@@ -378,6 +385,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_5",
@@ -391,13 +399,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Lucky Strike, bring this order. People become very serious about a packet label, then tell me I'm particular for wanting the kitchen supplies they promised. I am particular. It is one of the reasons you come here.",
 			completion = "Lucky Strike purchase access is open. The particular supplies have arrived in full.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_98b12c7cb6da", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_caffeine/stock",
@@ -408,8 +417,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "This request expands the Lucky Strike reserve before caffeine. Bring the whole list. A larger allowance is what we're agreeing on, rather than my producing a packet just because the transaction feels finished.",
 			completion = "Your Lucky Strike capacity is larger. Actual stock refills in its usual way.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
-				{pool = "town_expansion_c93f929960fd", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81363bbb5ed7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_cigarette_5"},
@@ -420,6 +429,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_caffeine",
@@ -430,13 +440,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Caffeine tablets have a purchase order. Bring these kitchen supplies back here. Yes, I can sell something people ask for without agreeing it is a substitute for sitting down and eating a meal I worked on.",
 			completion = "Caffeine purchase access is ready. Supply order finished; my opinion about supper remains available.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_98b12c7cb6da", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_4/stock",
@@ -447,8 +458,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The caffeine reserve needs this smaller delivery before Spark. It increases the amount I can hold for you. That's stock capacity, not another favour someone can tell the camp I've started providing.",
 			completion = "Your caffeine allowance has increased. The refill is still the usual arrangement.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
-				{pool = "town_expansion_c93f929960fd", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81363bbb5ed7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_caffeine"},
@@ -459,6 +470,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_4",
@@ -469,13 +481,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Spark cigarettes, this is the request. Bring the kitchen supplies in full. I would like the small entries to receive as much attention as the packet size; both seem quite easy to read from where I'm standing.",
 			completion = "Spark purchase access is complete. Every entry received the attention it deserved.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_98b12c7cb6da", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigar/stock",
@@ -486,9 +499,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I'd like a larger Spark reserve before the cigar. Bring these supplies and the allowance increases. Supporting a familiar preference can be useful even when somebody has begun planning a much grander smoke.",
 			completion = "Your Spark stock capacity is increased. Grand plans still have to wait for actual stock.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_504bedd659bc", quantity = 1},
-				{pool = "town_expansion_7957e159e3ce", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1d4b55e193f2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9a1e4bd69da2", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_cigarette_4"},
@@ -499,6 +512,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigar",
@@ -509,14 +523,15 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The Cuban cigar has a purchase arrangement, yes. Complete this kitchen delivery and you can buy one. People ask about it in a voice they don't use for anything else, then become wonderfully offended when I notice.",
 			completion = "The cigar is available to purchase. Delivery complete; you can use your ordinary voice again.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 3},
-				{pool = "town_expansion_ad8a38d74ac4", quantity = 2},
-				{pool = "town_expansion_b13ea47418ea", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_1d4b55e193f2", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1a2385845422", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_6/stock",
@@ -527,9 +542,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "This order increases the cigar reserve before Marlboro. I am arranging capacity, not handing you a cigar for a completed delivery. Leave the occasion until you know what is actually in stock.",
 			completion = "Your cigar allowance is larger. Refills still decline to organise themselves around an occasion.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_b7713ce2aa55", quantity = 1},
-				{pool = "town_expansion_3e9f1370e922", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9691cc6dbfcc", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_cigar"},
@@ -545,6 +560,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_cigarette_6",
@@ -555,9 +571,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Marlboro, bring the kitchen request here. I can make the packets available after the full order. A familiar brand is welcome; an explanation of how everyone back home sold it cheaper is less welcome.",
 			completion = "Marlboro purchase access is ready. The supplies arrived without bringing a second shop's prices with them.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 3},
-				{pool = "town_expansion_71271652e722", quantity = 2},
-				{pool = "town_expansion_c279546a695f", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4e90352af9b3", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 12,
@@ -568,6 +584,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_1/stock",
@@ -578,9 +595,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The Marlboro reserve needs these materials before the loose tobacco. This increases stock capacity. I appreciate someone supporting the stock they ask for instead of treating its presence as a personal obligation of mine.",
 			completion = "Your Marlboro capacity has increased. The reserve will refill normally.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_b7713ce2aa55", quantity = 1},
-				{pool = "town_expansion_3e9f1370e922", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9691cc6dbfcc", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_cigarette_6"},
@@ -596,6 +613,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_1",
@@ -606,9 +624,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Golden Virginia comes through this supply delivery. I enjoy a person taking time to choose what they like. I also enjoy that person moving clear of the kitchen work once the choosing begins to occupy the whole afternoon.",
 			completion = "Golden Virginia purchase access is open. You've finished the supply arrangement; make room before beginning the comparison.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 3},
-				{pool = "town_expansion_71271652e722", quantity = 2},
-				{pool = "town_expansion_c279546a695f", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 2, mode = "any"},
+				{pool = "town_expansion_93a3504b5346", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 12,
@@ -619,6 +637,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_2/stock",
@@ -629,10 +648,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Before the final tobacco, I'd like the Golden Virginia reserve increased. Complete the smaller order here for more capacity. It won't refill the shelf immediately, whatever you have decided to put in your pocket for the walk home.",
 			completion = "Your Golden Virginia allowance is larger. The actual tobacco still arrives through the usual refill.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_504bedd659bc", quantity = 2},
-				{pool = "town_expansion_89ebb7471428", quantity = 1},
-				{pool = "town_expansion_3b10ddedc65b", quantity = 1},
+				{pool = "town_expansion_f2fa448016ca", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2c47c18fdac3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_99b5053f4bb9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3708ad79f7ec", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drug_tobacco_1"},
@@ -648,6 +667,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-drugs/drug_tobacco_2",
@@ -658,10 +678,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Russian cigarette tobacco closes this purchase line. Bring the full kitchen order. We can finish it without pretending the next thing you ask me about must wait until you've delivered a speech about my excellent service.",
 			completion = "The Russian tobacco is available to buy. The line is complete. Praise is still welcome, just unnecessary.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 4},
-				{pool = "town_expansion_ad8a38d74ac4", quantity = 3},
-				{pool = "town_expansion_4eccdfd3dca1", quantity = 2},
-				{pool = "town_expansion_d658a702f753", quantity = 1},
+				{pool = "town_expansion_f2fa448016ca", quantity = 4, mode = "any"},
+				{pool = "town_expansion_2c47c18fdac3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_99b5053f4bb9", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f1ead98128b3", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
 			branchLength = 12,
@@ -672,6 +692,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_2",
@@ -682,12 +703,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Chernihivske begins the beer arrangements. Bring this kitchen-supply delivery and you can purchase it. People will discuss beer for half an hour before remembering they haven't eaten; my interest is in leaving time for both subjects.",
 			completion = "Chernihivske purchase access is ready. The kitchen order has reached a sensible conclusion.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_3",
@@ -698,12 +720,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Lvivske 1715, use this supply request. Bring all the listed materials back. I can offer a second choice without listening to the first customer explain why the second should never have been necessary.",
 			completion = "Lvivske 1715 is available to buy. Both choice and delivery have survived the discussion.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_1/stock",
@@ -714,7 +737,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "This order increases the Lvivske 1715 reserve before OBOLON. The smaller kitchen delivery raises your capacity. A larger allowance is useful without my promising a can immediately.",
 			completion = "Your Lvivske 1715 capacity is larger. The stock will refill normally.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_canbeer_3"},
@@ -725,6 +748,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_1",
@@ -738,12 +762,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "OBOLON Strong has this purchase request. Bring the kitchen stores and supplies here. I would like you reading the actual list rather than deciding its name means this is a more impressive agreement than the last one.",
 			completion = "OBOLON purchase access is ready. An ordinary full delivery has done the impressive work.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_4/stock",
@@ -754,7 +779,7 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The OBOLON reserve needs these supplies before Tuborg. This raises the stock allowance. You can keep an earlier choice available without insulting the next beer to demonstrate your loyalty.",
 			completion = "Your OBOLON allowance has increased. Fresh stock still takes its normal route to the shelf.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_canbeer_1"},
@@ -765,6 +790,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_4",
@@ -778,12 +804,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Tuborg, complete this kitchen delivery. I don't mind someone arriving with a preference. I mind the man who expects me to supply the preference and then thanks the label for his pleasant evening.",
 			completion = "Tuborg is available to purchase. The kitchen has received its small share of the evening's consideration.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_faf015d6ac68", quantity = 1, mode = "random"},
 			},
 			branchIndex = 4,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_4",
@@ -794,13 +821,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Utenos Porteris comes through this order. Bring the listed supplies. You can tell me what you like about it afterwards; I enjoy a description of something someone actually tasted more than a confident speech about all the others.",
 			completion = "Utenos purchase access is open. Full delivery received, before the tasting opinions begin.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_504bedd659bc", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1d4b55e193f2", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_6/stock",
@@ -811,8 +839,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "I'd like more Utenos reserve before Heineken. These materials increase the allowance. I am not offering a can as a thank-you for bringing them; that is how people remember a remarkably different deal.",
 			completion = "Your Utenos capacity is increased. Stock refills normally; the delivery isn't an item gift.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
-				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81363bbb5ed7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_canbeer_4"},
@@ -823,6 +851,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_6",
@@ -836,13 +865,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Heineken, bring this kitchen request. The label is familiar enough to do its own introducing. My part concerns the supplies, which have been waiting rather patiently for their turn in the conversation.",
 			completion = "Heineken purchase access is ready. The patient part of the conversation has finally arrived complete.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_c93f929960fd", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_98b12c7cb6da", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_3/stock",
@@ -853,8 +883,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The Heineken reserve needs a smaller delivery before Baltika. Bring what's listed and capacity rises. If someone has told you I produce a refill on request, ask whether they actually saw me do it.",
 			completion = "Your Heineken stock allowance is larger. The refill remains its ordinary unmagical self.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
-				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81363bbb5ed7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_canbeer_6"},
@@ -865,6 +895,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_3",
@@ -878,13 +909,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Baltika no.3 has this purchase order. Read the kitchen list and bring it back complete. I have enough conversations that begin with a number and end with somebody remembering a different one; this request is written down.",
 			completion = "Baltika no.3 is available to buy. The correct order has been delivered in full.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_c93f929960fd", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_98b12c7cb6da", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_6/stock",
@@ -895,8 +927,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "This raises the Baltika no.3 reserve before the porter. The supplies are listed here. I'm not asking for the whole shelf to become your favourite; a larger allowance for one choice is enough business.",
 			completion = "Your Baltika no.3 capacity is increased. Ordinary refill will supply the allowance.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
-				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81363bbb5ed7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_bottlebeer_3"},
@@ -907,6 +939,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_6",
@@ -920,13 +953,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Lvivske Porter, bring this kitchen request. People can make choosing a bottle sound like an important occasion. I can make receiving the agreed supplies feel like one too, provided they actually arrive.",
 			completion = "Lvivske Porter purchase access is ready. The supplies have made the occasion pleasantly concrete.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_c93f929960fd", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_98b12c7cb6da", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_5/stock",
@@ -937,9 +971,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "The porter reserve needs this smaller delivery before Baltika no.7. It increases stock capacity. Check the shelf when you want the bottle; a good arrangement still has to contend with what is actually there.",
 			completion = "Your porter stock allowance has increased. Refill stays on the usual schedule.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_ad8a38d74ac4", quantity = 1},
-				{pool = "town_expansion_b13ea47418ea", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1d4b55e193f2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9a1e4bd69da2", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_bottlebeer_6"},
@@ -950,6 +984,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_canbeer_5",
@@ -963,14 +998,15 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Baltika no.7, this is the kitchen order. Bring the full list. Yes, I am pleased to offer another beer; no, that doesn't mean I want to hear every beer argument that has travelled through the camp this week.",
 			completion = "Baltika no.7 purchase access is open. A complete delivery has improved on the week's arguments.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 3},
-				{pool = "town_expansion_504bedd659bc", quantity = 2},
-				{pool = "town_expansion_7957e159e3ce", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_1d4b55e193f2", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1a2385845422", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_2/stock",
@@ -981,9 +1017,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Before the large Lvivske, complete this Baltika no.7 reserve request. The result is a larger allowance, with normal refill. I would like that clear before someone rearranges supper around a bottle that isn't here yet.",
 			completion = "Your Baltika no.7 capacity is larger. The actual bottle must still come into stock.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_71271652e722", quantity = 1},
-				{pool = "town_expansion_c279546a695f", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9691cc6dbfcc", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_canbeer_5"},
@@ -999,6 +1035,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_2",
@@ -1012,9 +1049,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Lvivske Svitle has a separate purchase arrangement. Bring these kitchen supplies here. I appreciate a customer who notices the size before buying rather than discovering it halfway through explaining how little room remains in the pack.",
 			completion = "Lvivske Svitle is available to purchase. Full order received; the space in your pack is your decision.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 3},
-				{pool = "town_expansion_b7713ce2aa55", quantity = 2},
-				{pool = "town_expansion_3e9f1370e922", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4e90352af9b3", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 12,
@@ -1025,6 +1062,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_5/stock",
@@ -1035,9 +1073,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "This delivery increases the Lvivske Svitle reserve before Zaporizske. Bring the complete smaller request. I have not put 'something Lemon probably needs' on the list, despite how often people appear to read it there.",
 			completion = "Your Lvivske Svitle allowance is increased. Exactly the requested supplies, properly received.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_71271652e722", quantity = 1},
-				{pool = "town_expansion_c279546a695f", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9691cc6dbfcc", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_bottlebeer_2"},
@@ -1053,6 +1091,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_5",
@@ -1066,9 +1105,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Zaporizske, complete this kitchen delivery. I can make it available without pretending you must prefer every bottle I sell. Some variety is good business, and occasionally somebody even calls it hospitality.",
 			completion = "Zaporizske purchase access is ready. A useful delivery and another choice on the shelf.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 3},
-				{pool = "town_expansion_b7713ce2aa55", quantity = 2},
-				{pool = "town_expansion_3e9f1370e922", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 2, mode = "any"},
+				{pool = "town_expansion_93a3504b5346", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 12,
@@ -1079,6 +1118,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_1/stock",
@@ -1089,10 +1129,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "One more beer reserve before the last purchase. This supports Zaporizske capacity. The full smaller order is here; it doesn't summon a bottle immediately, however eager you are to finish the arrangement.",
 			completion = "Your Zaporizske stock capacity is larger. The refill still has to arrive at its usual time.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_ad8a38d74ac4", quantity = 2},
-				{pool = "town_expansion_4eccdfd3dca1", quantity = 1},
-				{pool = "town_expansion_d658a702f753", quantity = 1},
+				{pool = "town_expansion_f2fa448016ca", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2c47c18fdac3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_99b5053f4bb9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3708ad79f7ec", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_bottlebeer_5"},
@@ -1108,6 +1148,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_1",
@@ -1121,10 +1162,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Ochakovo closes the beer line. Bring this kitchen order back in full. You've made quite a few deliveries; I can acknowledge that without deciding you now owe me an opinion on every bottle we discussed.",
 			completion = "Ochakovo is available to buy. The beer arrangements are finished. If you're hungry, lead with that next time.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 4},
-				{pool = "town_expansion_504bedd659bc", quantity = 3},
-				{pool = "town_expansion_89ebb7471428", quantity = 2},
-				{pool = "town_expansion_3b10ddedc65b", quantity = 1},
+				{pool = "town_expansion_f2fa448016ca", quantity = 4, mode = "any"},
+				{pool = "town_expansion_2c47c18fdac3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_99b5053f4bb9", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f1ead98128b3", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
 			branchLength = 12,
@@ -1135,6 +1176,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_4",
@@ -1145,13 +1187,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "EuroShopper is already in the starting selection. This delivery increases your personal stock allowance for it. Bring the kitchen supplies listed here. I can support something people already buy without being told I ought to devote the kitchen to their next sleepless plan.",
 			completion = "Your EuroShopper capacity is increased. The drink still refills normally, and supper remains a separate question.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			stock = {bonus = 1, item = "drink_energydrink_4"},
 			branchIndex = 1,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_2",
@@ -1162,12 +1205,13 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Revo comes through this kitchen-supply request. Complete the delivery and you can purchase it. People enjoy explaining the exact evening they're preparing for; I'm interested in whether anyone remembered the supplies they agreed to bring.",
 			completion = "Revo purchase access is ready. This evening's plans have at least included a completed delivery.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
+				{pool = "town_expansion_053e066e8c3d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_1",
@@ -1178,13 +1222,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Red Bull, this is the kitchen order. Bring it back complete. I'm familiar with the little pause before somebody tells a cook they're planning to get through the day on a can; you may skip that performance.",
 			completion = "Red Bull is available to buy. The supply delivery is finished; my kitchen still serves its own purpose.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_ad8a38d74ac4", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1d4b55e193f2", quantity = 1, mode = "random"},
 			},
 			branchIndex = 3,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_5/stock",
@@ -1195,8 +1240,8 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Before Monster Classic, there's the Red Bull reserve. These supplies raise its stock allowance. I won't refill it by putting aside somebody else's can because your departure is apparently more urgent.",
 			completion = "Your Red Bull capacity has increased. The refill remains the ordinary arrangement.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 1},
-				{pool = "town_expansion_c93f929960fd", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81363bbb5ed7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_energydrink_1"},
@@ -1207,6 +1252,7 @@ PLUGIN:Register("spicy-lemon", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_5",
@@ -1220,13 +1266,14 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Monster Classic has this purchase request. Bring the kitchen stores and supplies listed. A striking can has never relieved me of the work behind the counter, though it does distract people from asking whether I have finished it.",
 			completion = "Monster Classic purchase access is open. The work represented by this order is actually finished.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 2},
-				{pool = "town_expansion_74c1a96ad32a", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_98b12c7cb6da", quantity = 1, mode = "random"},
 			},
 			branchIndex = 4,
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_6/stock",
@@ -1237,9 +1284,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "This delivery expands the Classic reserve before Ultra White. It increases capacity for the version already available. Read the heading rather than deciding two similar cans must have the same order.",
 			completion = "Your Classic stock allowance is larger. The actual refill is still normal.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_b7713ce2aa55", quantity = 1},
-				{pool = "town_expansion_3e9f1370e922", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9691cc6dbfcc", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_energydrink_5"},
@@ -1255,6 +1302,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_6",
@@ -1268,9 +1316,9 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "For Ultra White, complete this kitchen delivery. You can prefer it without having an argument with someone who preferred the last one. I have food to think about and limited patience for refereeing cans.",
 			completion = "Ultra White is available to purchase. The delivery has been received without a verdict on anybody else's taste.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 3},
-				{pool = "town_expansion_71271652e722", quantity = 2},
-				{pool = "town_expansion_c279546a695f", quantity = 1},
+				{pool = "town_expansion_b0f51f1be48f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_73b4332d4f85", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4e90352af9b3", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 6,
@@ -1281,6 +1329,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_3/stock",
@@ -1291,10 +1340,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "One final drink reserve before Redline. The materials here increase Ultra White capacity. I enjoy reaching the end of a request without hearing that somebody has already promised the result to half the camp.",
 			completion = "Your Ultra White allowance has increased. Stock will refill normally; no immediate cans promised.",
 			requirements = {
-				{pool = "town_expansion_6ce8f38e0bf1", quantity = 2},
-				{pool = "town_expansion_504bedd659bc", quantity = 2},
-				{pool = "town_expansion_89ebb7471428", quantity = 1},
-				{pool = "town_expansion_3b10ddedc65b", quantity = 1},
+				{pool = "town_expansion_f2fa448016ca", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2c47c18fdac3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_99b5053f4bb9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3708ad79f7ec", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_energydrink_6"},
@@ -1310,6 +1359,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/energy-drinks/drink_energydrink_3",
@@ -1323,10 +1373,10 @@ PLUGIN:Register("spicy-lemon", {
 			briefing = "Redline Extreme closes this drink line. Bring the full kitchen-supply order. I will be pleased to finish the deliveries and equally pleased if the next thing you ask about is an actual meal. Apparently that preference astonishes people.",
 			completion = "Redline purchase access is open. That's the drink arrangements finished. I can finally return to the subject of food.",
 			requirements = {
-				{pool = "town_expansion_53138dbbce3c", quantity = 4},
-				{pool = "town_expansion_ad8a38d74ac4", quantity = 3},
-				{pool = "town_expansion_4eccdfd3dca1", quantity = 2},
-				{pool = "town_expansion_d658a702f753", quantity = 1},
+				{pool = "town_expansion_f2fa448016ca", quantity = 4, mode = "any"},
+				{pool = "town_expansion_2c47c18fdac3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_99b5053f4bb9", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f1ead98128b3", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 6,
@@ -1337,6 +1387,7 @@ PLUGIN:Register("spicy-lemon", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 	},
 	startingServices = {},

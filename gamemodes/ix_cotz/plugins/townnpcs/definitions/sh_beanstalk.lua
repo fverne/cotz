@@ -143,8 +143,9 @@ PLUGIN:Register("beanstalk", {
 			completion = "The Tundra is available to purchase. Thank you for bringing the order back intact.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 1,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 			},
@@ -152,6 +153,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/suppressors/cobrasuppressor/stock",
@@ -162,8 +164,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I'd like the Tundra reserve settled before the Cobra arrangement. This smaller research delivery increases your stock allowance. It is a rather quiet part of preparation, which may explain why I can usually finish discussing it.",
 			completion = "Your Tundra capacity is increased. We'll let the normal refill supply it.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
-				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
+				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_07ac2fbf5de1", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"tundrasuppressor"},
@@ -174,6 +176,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/suppressors/cobrasuppressor",
@@ -188,13 +191,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "The Cobra M2 purchase route is open. I will try to let you choose without supplying a questionnaire.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_fef409d4796e",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "electrical_artifacts",
 				},
 			},
@@ -202,6 +207,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/suppressors/pbssuppressor/stock",
@@ -212,9 +218,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The Cobra reserve needs these supplies. Completing the list increases how many can be held for you. I ought to be clear that I mean capacity; I have already been accused of making an empty shelf sound very well organised.",
 			completion = "Cobra stock capacity is increased. The shelf still needs its ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
-				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
-				{pool = "town_expansion_e4f1dcc8ca40", quantity = 1},
+				{pool = "town_expansion_a1ace2f2865e", quantity = 2, mode = "any"},
+				{pool = "town_expansion_07ac2fbf5de1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_25b061f3b22f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"cobrasuppressor"},
@@ -225,6 +231,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/suppressors/pbssuppressor",
@@ -236,18 +243,21 @@ PLUGIN:Register("beanstalk", {
 			completion = "That settles access to the PBS. Everything required has been received, including the entries I almost talked past.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_fef409d4796e",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_bb9312c017ca",
+					pool = "town_expansion_93a96a4765bd",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "rare_field_artifacts",
 				},
 			},
@@ -255,6 +265,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 4,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/suppressors/sakersuppressor/stock",
@@ -265,10 +276,10 @@ PLUGIN:Register("beanstalk", {
 			briefing = "Before the SAKER, I'd like the PBS reserve expanded. This delivery does that, rather than opening another suppressor by itself. Keeping the two orders distinct saves me explaining my own notes later.",
 			completion = "The PBS stock allowance is larger now. This order can be filed without an amendment.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
-				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
-				{pool = "town_expansion_e7519d375461", quantity = 1},
-				{pool = "town_expansion_eed76cf208ae", quantity = 1},
+				{pool = "town_expansion_ee0f01e7c6c6", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ab96359a0c63", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e47e1dab9830", quantity = 1, mode = "any"},
+				{pool = "town_expansion_daac7c31b7d8", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"pbssuppressor"},
@@ -284,6 +295,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/suppressors/sakersuppressor",
@@ -295,23 +307,27 @@ PLUGIN:Register("beanstalk", {
 			completion = "SAKER purchase access is ready. The order is finished; now I can be curious without holding up the transaction.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 4,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_fef409d4796e",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_12b8f67992a1",
+					pool = "town_expansion_9eca93351695",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_4fde50b2ea01",
+					pool = "town_expansion_4191637a3663",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "exceptional_artifacts",
 				},
 			},
@@ -324,6 +340,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/trijiconrmr",
@@ -335,8 +352,9 @@ PLUGIN:Register("beanstalk", {
 			completion = "You can purchase the RMR here now. Your delivery is complete, whatever the next equipment debate decides.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 1,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 			},
@@ -344,6 +362,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/red-dots/kobra/stock",
@@ -354,7 +373,7 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The RMR allowance needs its own reserve order. Bring these research materials and I'll increase the capacity. I appreciate a request small enough to finish discussing without losing the original question.",
 			completion = "RMR stock capacity increased. A reserve arranged, with the usual refill still to follow.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
+				{pool = "town_expansion_d5c230931a12", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"trijiconrmr"},
@@ -365,6 +384,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/red-dots/kobra",
@@ -376,8 +396,9 @@ PLUGIN:Register("beanstalk", {
 			completion = "The Kobra is available to purchase. That was a useful delivery and a mercifully uncomplicated agreement.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 1,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 			},
@@ -385,6 +406,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/red-dots/microt1/stock",
@@ -395,8 +417,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I'd like to put more room in the Kobra reserve before the Micro T1. The list covers that capacity increase. No fresh sight appears just because I've found a better place to write the allowance.",
 			completion = "Your Kobra allowance has increased. The stock itself will refill normally.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
-				{pool = "town_expansion_e79ab98b1acd", quantity = 1},
+				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_07ac2fbf5de1", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"kobra"},
@@ -407,6 +429,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/microt1",
@@ -418,13 +441,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "Micro T1 purchase access is complete. I'll keep this delivery somewhere less ambitious than the paper pile.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_fef409d4796e",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "electrical_artifacts",
 				},
 			},
@@ -432,6 +457,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/eotech/stock",
@@ -442,8 +468,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "This order concerns the Micro T1 reserve. Complete it and the stock capacity rises. I've put the heading first so neither of us confuses it with the Eotech request while discussing something more interesting.",
 			completion = "The Micro T1 reserve is larger now. Heading and result agree, which is always pleasing.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
-				{pool = "town_expansion_0acc14dfa866", quantity = 1},
+				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_08cb53802f9d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"microt1"},
@@ -454,6 +480,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/eotech",
@@ -465,13 +492,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "The Eotech purchase arrangement is ready. The required materials are all here.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_f7313298a439",
+					pool = "town_expansion_8b6f5686711c",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "electrical_artifacts",
 				},
 			},
@@ -479,6 +508,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 6,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/cmore/stock",
@@ -489,9 +519,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The Eotech reserve could use these research supplies. This increases your allowance rather than changing the sight. It is perfectly acceptable to want a dependable reserve of something you already like.",
 			completion = "Your Eotech stock capacity has increased. Refill remains as usual.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
-				{pool = "town_expansion_983c927640d1", quantity = 1},
-				{pool = "town_expansion_293e6c43ac71", quantity = 1},
+				{pool = "town_expansion_a1ace2f2865e", quantity = 2, mode = "any"},
+				{pool = "town_expansion_eb9a86daf632", quantity = 1, mode = "any"},
+				{pool = "town_expansion_42f95bf26576", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"eotech"},
@@ -507,6 +537,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/cmore",
@@ -518,18 +549,21 @@ PLUGIN:Register("beanstalk", {
 			completion = "You can purchase the CMore now. And I can still read the notes underneath the delivery, thank you.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_dc4e5278ad7b",
+					pool = "town_expansion_651aa3a30eb5",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_12b8f67992a1",
+					pool = "town_expansion_9eca93351695",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "rare_field_artifacts",
 				},
 			},
@@ -542,6 +576,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/aimpoint/stock",
@@ -552,10 +587,10 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I'd like to expand the CMore reserve before the final sight order. These supplies provide the larger allowance. I should resist the temptation to call it a small request before you've read it; you're the one bringing it back.",
 			completion = "CMore capacity increased. You have the larger allowance, with normal restocking.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
-				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
-				{pool = "town_expansion_3c54dfc0a0bc", quantity = 1},
-				{pool = "town_expansion_95306e3a7624", quantity = 1},
+				{pool = "town_expansion_ee0f01e7c6c6", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ab96359a0c63", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e47e1dab9830", quantity = 1, mode = "any"},
+				{pool = "town_expansion_daac7c31b7d8", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"cmore"},
@@ -571,6 +606,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/red-dots/aimpoint",
@@ -582,23 +618,27 @@ PLUGIN:Register("beanstalk", {
 			completion = "The CompM4 is available to buy. The sight arrangements are complete; I will leave that fact unqualified for a moment.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 4,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_fef409d4796e",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_12b8f67992a1",
+					pool = "town_expansion_9eca93351695",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_4fde50b2ea01",
+					pool = "town_expansion_4191637a3663",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "exceptional_artifacts",
 				},
 			},
@@ -611,6 +651,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/kingarmsmr",
@@ -622,8 +663,9 @@ PLUGIN:Register("beanstalk", {
 			completion = "King Arms MR purchase access is ready. The supply list, at least, has a definite answer.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 1,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 			},
@@ -631,6 +673,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/optics/pso1/stock",
@@ -641,7 +684,7 @@ PLUGIN:Register("beanstalk", {
 			briefing = "Before the PSO-1, there's the King Arms reserve. Bring the supplies here and the capacity will increase. I like a little room for an ordinary replacement without having to turn it into a new discussion of equipment.",
 			completion = "Your King Arms stock allowance is larger. Actual stock will follow its normal refill.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
+				{pool = "town_expansion_d5c230931a12", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"kingarmsmr"},
@@ -652,6 +695,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/pso1",
@@ -663,8 +707,9 @@ PLUGIN:Register("beanstalk", {
 			completion = "The PSO-1 purchase route is open. I'll take the completed list before explaining anything further.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "common_artifacts",
 				},
 			},
@@ -672,6 +717,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/shortdot/stock",
@@ -682,8 +728,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The PSO-1 reserve needs these supplies. This is the allowance for an optic already available to you. I have kept it separate from the Shortdot arrangement because my earlier notes were beginning to read like two conversations at once.",
 			completion = "PSO-1 stock capacity is increased. One conversation successfully concluded.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 1},
-				{pool = "town_expansion_0acc14dfa866", quantity = 1},
+				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_08cb53802f9d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"pso1"},
@@ -694,6 +740,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/shortdot",
@@ -705,13 +752,15 @@ PLUGIN:Register("beanstalk", {
 			completion = "The Shortdot can be purchased here now. The delivery is settled, so the preference can remain yours.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_f7313298a439",
+					pool = "town_expansion_8b6f5686711c",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "electrical_artifacts",
 				},
 			},
@@ -719,6 +768,7 @@ PLUGIN:Register("beanstalk", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/acog/stock",
@@ -729,9 +779,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "This smaller order increases the Shortdot reserve. It does not put another optic into current stock immediately. I prefer mentioning the dull limitation here to discovering it during somebody's otherwise carefully prepared departure.",
 			completion = "Shortdot stock allowance increased. Current availability still depends on the shelf.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
-				{pool = "town_expansion_fc138e40849a", quantity = 1},
-				{pool = "town_expansion_c1b2fc0c25e2", quantity = 1},
+				{pool = "town_expansion_a1ace2f2865e", quantity = 2, mode = "any"},
+				{pool = "town_expansion_eb9a86daf632", quantity = 1, mode = "any"},
+				{pool = "town_expansion_42f95bf26576", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"shortdot"},
@@ -747,6 +797,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/acog",
@@ -758,18 +809,21 @@ PLUGIN:Register("beanstalk", {
 			completion = "ACOG purchase access is ready. Every entry is received; I can stop hovering over the request.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_dc4e5278ad7b",
+					pool = "town_expansion_651aa3a30eb5",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_12b8f67992a1",
+					pool = "town_expansion_9eca93351695",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "rare_field_artifacts",
 				},
 			},
@@ -782,6 +836,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/nightforce/stock",
@@ -792,10 +847,10 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The ACOG reserve comes before the Nightforce purchase arrangement. These research supplies increase your allowance for the optic already unlocked. There's no need to bring an extra sample merely because I looked interested.",
 			completion = "Your ACOG reserve capacity has increased. Exactly the delivery we agreed, thank you.",
 			requirements = {
-				{pool = "town_expansion_59c712d7d4fe", quantity = 2},
-				{pool = "town_expansion_e79ab98b1acd", quantity = 2},
-				{pool = "town_expansion_e7519d375461", quantity = 1},
-				{pool = "town_expansion_eed76cf208ae", quantity = 1},
+				{pool = "town_expansion_ee0f01e7c6c6", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ab96359a0c63", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e47e1dab9830", quantity = 1, mode = "any"},
+				{pool = "town_expansion_daac7c31b7d8", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"acog"},
@@ -811,6 +866,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/optics/nightforce",
@@ -822,23 +878,27 @@ PLUGIN:Register("beanstalk", {
 			completion = "The Nightforce purchase route is open. That's the optics line completed. Please, take your time putting the pack down.",
 			requirements = {
 				{
-					pool = "town_expansion_2f0b6e78417d",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 4,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_fef409d4796e",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_12b8f67992a1",
+					pool = "town_expansion_9eca93351695",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_4fde50b2ea01",
+					pool = "town_expansion_4191637a3663",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "exceptional_artifacts",
 				},
 			},
@@ -851,6 +911,7 @@ PLUGIN:Register("beanstalk", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 	},
 	startingServices = {},

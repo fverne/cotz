@@ -1,6 +1,6 @@
 # Town progression overhaul, 9 November 2026
 
-This replaces the former 600-milestone town graph with 627 hand-in milestones across 52
+This replaces the former 600-milestone town graph with 626 hand-in milestones across 52
 branches, including 212 stock-preparation intermissions. The authored `upgradeChains` in
 `sh_equipment.lua` now include Cutlery before Cleaning kit; all other equipment and `regularAmmoChain` ordering is retained. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
@@ -42,6 +42,48 @@ the remainder of the helmet chain. All four trenchcoat colours share Technut's b
 Weak drugs include cigarettes, tobacco, cigars, mints, codeine and caffeine. Spool's strong-drug branch
 contains adrenaline, morphine, marijuana, glucose, cocaine and swampbrew. Gasket owns moonshine, vodka,
 wine and spirits; the cheapest vodka also remains a Spicy Lemon starter.
+
+## Category totals and specific requests
+
+Every town delivery slot declares `mode = "any"` or `mode = "random"` beside its pool and quantity.
+`any` accepts a mixture of the pool's eligible items toward one shared total; `random` chooses one
+item once per character and requires that exact item. Other progression definitions retain their
+existing behaviour when mode is omitted.
+
+The first `ceil(unlockCount / 5)` milestones in each connected unlock chain use only `any` slots.
+Count actual non-intermission milestones; retired entries are excluded. Shared branch labels do not
+join independent one-step upgrades: all seven of Wake's capacity purchases remain category-only.
+A stock intermission inherits its following unlock's opening classification. All stock intermissions
+remain category-wide even later in the chain. After the opening, a normal delivery's last, smallest
+slot uses `random`; earlier slots remain `any`. A one-slot delivery therefore becomes a specific-item
+request after its opening. Technut's first three of thirteen suit purchases are category-only:
+Mail Jacket, the trenchcoat group and Sunrise. Painting is its own category-only one-step branch.
+
+Candidate sets stay disjoint within a request. Bulk pools favour the most accessible local members
+of the contact's specialty, using checked-in loose points, boxes and cycling containers. Specific
+pools compare modeled raw-unit supply, including natural batches, and keep candidates within a
+threefold frequency range. These are comparative estimates, not measured player acquisition times.
+Scientist equipment retains its artifact families. Generated valuable-pool rarity labels follow
+aggregate modeled source frequency rather than slot number; artifact-family labels remain authored.
+Technut's core now includes ordinary workshop, textile, fastening and electrical repair stock.
+Spool also accepts fastening and electrical repair stock for his radio bench.
+
+New assignments save the item roll or category membership, its label and its mode. Later edits to
+pools do not change that saved acceptance list. Mode version 1 upgrades unfinished legacy assignments
+once: item keys, quantities, contributions and reward credit remain, while slots now configured as
+`any` gain alternatives alongside their original item. Existing specific rolls stay fixed. Completed
+records are untouched. Region-policy conversions are applied first so any newly eligible replacement
+receives the correct mode. No database reset or new SQL column is required.
+
+The server resolves each donated item to exactly one saved counter, consumes only the remaining
+quantity and prices the actual item supplied. Dialogue, journal text, search and inventory highlights
+read the same saved alternatives. Existing completion, purchase gates and payout handling are reused.
+
+Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` and
+`python3 tests/progression_expansion_spec.py`. Regenerate with
+`python3 docs/npc-overhaul/tools/expand_progression.py --write`; verify with `--check`.
+Restart all map servers together. Multiplayer UI, replication, inventory and database/reconnect
+behaviour still need runtime verification; do not rerun first-time setup.
 
 ## Unlocks, exchanges and retained assets
 
@@ -87,8 +129,9 @@ once, rounding upward; Ledger uses 3×. Branches are optional, so the catalogue 
 
 From the third original unlock onward, stock preparation precedes repeated requirement patterns and
 three-/four-slot requests where the previous milestone has eligible shop stock, except at Technut.
-Technut's eleven intermediate `/stock` steps are retired; suits require the preceding suit directly.
-His initial anorak stock step, painting branch, suit IDs, request quantities and saved contributions remain.
+Technut's initial anorak stock step and eleven intermediate `/stock` steps are retired. Anoraks remain
+starting stock; the Mail Jacket starts the suit chain and each later suit requires its predecessor.
+The painting branch, retained suit IDs, request quantities, regional ranks and saved contributions remain.
 Retired stock-step records remain saved history. `preserveProgression = true` prevents authoring-tool
 regeneration of these intermissions. Intern, Egghead and
 Beanstalk have preparation between every equipment tier. A preparation delivery requests half the next
@@ -147,7 +190,8 @@ records, hand-in terms and capacity amounts are preserved. Completed purchases a
 Spool's tank helmet and Latch's cloth mask have no active purchase milestones; both are starting vendor
 stock. Retired milestone records remain history. Their successors keep the original delivery terms and
 regional tier positions. `preserveProgression = true` on Spool, Latch and Wake tells the expansion tool to
-preserve their approved layout, stock stages and request tuning.
+preserve their approved layout, stock stages and quantities. Mode and candidate-pool authoring applies
+to every contact, including these protected layouts.
 Quartermaster's two gunpowder-for-ammunition-kit barters are removed from the main menu; his six regular
 currency-for-ammunition barters remain in his barter submenu. Suture's suit conversion milestones are
 labelled with the suit name followed by "variants", including "Anorak variants".
@@ -201,14 +245,14 @@ upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or 
 ## Authoring and regression checks
 
 Each active step owns its authored `briefing` and `completion` in the contact definition, including
-stock intermissions. All 627 pairs are individually written against the contact's profile and current
+stock intermissions. All 626 pairs are individually written against the contact's profile and current
 benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
 conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
 Keep exact assigned items and quantities in the generated objective display rather than hard-coding
 them into speech, since valid saved requests can differ from newly rolled requests.
 
 The expansion tool retains existing stock-step text by stable ID when rebuilding requirements. New
-intermissions start with the following unlock's text and need their own replies. Verify all 627 pairs
+intermissions start with the following unlock's text and need their own replies. Verify all 626 pairs
 and their compiled fields with `luatex --luaonly tests/progression_dialogue_spec.lua`; the Python
 expansion suite also checks that regeneration preserves distinct stock conversations. Editorial review
 of voice, continuity and promises is still required; uniqueness checks cannot assess writing quality.

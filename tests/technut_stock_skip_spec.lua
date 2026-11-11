@@ -6,13 +6,16 @@ local function check(value, message)
 	assert(value, message)
 end
 local suits = {
-	"suit_trenchcoat_black", "suit_sunrise", "suit_io7a", "suit_wind", "suit_ps5m", "suit_cs2",
+	"suit_mailjacket", "suit_trenchcoat_black", "suit_sunrise", "suit_io7a", "suit_wind", "suit_ps5m", "suit_cs2",
 	"suit_nbc", "suit_berill", "suit_cs3", "suit_skat10", "suit_skat9",
 }
 local unrelated = ix.townNPCs:StepID("jitters", "v3/medkits/medic_medkit_2/stock")
 for _, suit in ipairs(suits) do
 	local nextID = ix.townNPCs:StepID("technut", "v3/suits/" .. suit)
 	local stockID = nextID .. "/stock"
+	if suit == "suit_mailjacket" then
+		stockID = ix.townNPCs:StepID("technut", "v3/suits/suit_anorak")
+	end
 	for _, successorState in ipairs({"missing", "inactive", "partial", "completed"}) do
 		local character = context.fixture.character()
 		character:SetData("townNPCProgression", {

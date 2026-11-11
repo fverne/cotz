@@ -298,9 +298,10 @@ if SERVER then
 		if not canAdvance(character, progressionID) or not istable(data) then
 			return false
 		end
-		local itemID = ix.progression.GetRequirementKey(progressionID, data[1])
+		local requirements = ix.progression.GetRequirements(character, progressionID)
+		local itemID = ix.progression.GetRequirementKey(progressionID, data[1], character)
 		local amount = data[2]
-		local required = ix.progression.GetRequirements(character, progressionID)[itemID]
+		local required = requirements[itemID]
 		if not required or not isnumber(amount) or amount ~= amount or amount <= 0 or amount == math.huge then
 			return false
 		end
@@ -359,8 +360,9 @@ if SERVER then
 		if not canAdvance(character, progressionID) then
 			return false
 		end
-		local requirementKey = ix.progression.GetRequirementKey(progressionID, itemID)
-		local required = ix.progression.GetRequirements(character, progressionID)[requirementKey]
+		local requirements = ix.progression.GetRequirements(character, progressionID)
+		local requirementKey = ix.progression.GetRequirementKey(progressionID, itemID, character)
+		local required = requirements[requirementKey]
 		if not required then
 			return false
 		end

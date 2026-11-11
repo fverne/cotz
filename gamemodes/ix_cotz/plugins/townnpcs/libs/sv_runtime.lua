@@ -1,17 +1,27 @@
 local PLUGIN = PLUGIN
 local STATE_KEY = "townNPCProgression"
 local RETIRED_TECHNUT_STOCK = {
-	"suit_trenchcoat_black", "suit_sunrise", "suit_io7a", "suit_wind", "suit_ps5m", "suit_cs2",
-	"suit_nbc", "suit_berill", "suit_cs3", "suit_skat10", "suit_skat9",
+	suit_anorak = "suit_mailjacket",
+	["suit_trenchcoat_black/stock"] = "suit_trenchcoat_black",
+	["suit_sunrise/stock"] = "suit_sunrise",
+	["suit_io7a/stock"] = "suit_io7a",
+	["suit_wind/stock"] = "suit_wind",
+	["suit_ps5m/stock"] = "suit_ps5m",
+	["suit_cs2/stock"] = "suit_cs2",
+	["suit_nbc/stock"] = "suit_nbc",
+	["suit_berill/stock"] = "suit_berill",
+	["suit_cs3/stock"] = "suit_cs3",
+	["suit_skat10/stock"] = "suit_skat10",
+	["suit_skat9/stock"] = "suit_skat9",
 }
 
 local function skipRetiredTechnutStock(self, character)
 	local record = ix.progression.GetCharacterProgression(character)
 	local known = table.Copy(character:GetData("knownProgressionTopics", {}))
 	local changed, discoveryChanged = false, false
-	for _, suit in ipairs(RETIRED_TECHNUT_STOCK) do
+	for retired, suit in pairs(RETIRED_TECHNUT_STOCK) do
 		local nextID = self:StepID("technut", "v3/suits/" .. suit)
-		local stockID = nextID .. "/stock"
+		local stockID = self:StepID("technut", "v3/suits/" .. retired)
 		local line = record.lines[stockID]
 		if line and line.active == true and not line.completed then
 			assert(self.steps[nextID], "Unknown retired Technut stock successor: " .. nextID)

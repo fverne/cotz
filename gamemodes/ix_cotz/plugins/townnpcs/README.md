@@ -3,15 +3,29 @@
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 627 hand-in milestones
+the earlier progression, catalogue and service descriptions below. There are 626 hand-in milestones
 in 52 branches, retaining current `v3/` IDs and adding 212 `/stock` intermissions.
-Technut's eleven intermediate stock-preparation deliveries are retired. Suit unlocks now follow
-the preceding suit directly; the initial anorak stock step and independent painting branch remain.
+Technut's initial anorak stock delivery and eleven intermediate stock-preparation deliveries are retired.
+Anoraks remain starting stock; suit progression starts with the Mail Jacket and follows each preceding suit
+directly. The independent painting branch remains. Existing regional ranks are retained for later suits.
 Retained milestone IDs, request quantities and saved contributions are unchanged. Retired stock-step
 records remain saved history and no longer gate unfinished suits.
 On character load, an active retired Technut stock step is marked skipped and activates its following
 suit request. Discussed stock steps also reveal that request in the progression tab. The migration
 preserves partial deliveries, pays no completion reward and never reopens a completed suit.
+Town delivery slots now declare `mode = "any"` (one shared category total) or `mode = "random"`
+(one saved item selection per character). The first `ceil(actualUnlockCount / 5)` milestones of every
+connected chain are category-only; shared labels do not join independent capacity purchases. Intermissions
+inherit the following unlock's position and always use category
+totals. Later ordinary requests use a specific-item final slot with category totals in earlier slots.
+One-step branches stay category-only. See the [mode and migration policy](../../../../docs/npc-overhaul/progression-overhaul.md#category-totals-and-specific-requests).
+Unfinished saved requests keep their quantities, item keys, contributions and credit. Mode version 1
+adds category alternatives once where applicable; completed records and specific item rolls are retained.
+New saved rolls and category choices are unaffected by later pool edits. Dialogue, journal search and
+inventory highlights use the saved choices. Restart map servers together; do not reset saves or run FTS.
+Run `luatex --luaonly tests/town_requirement_modes_spec.lua` for all compiled town boundaries.
+Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` and
+`python3 tests/progression_expansion_spec.py`; multiplayer replication and hand-in QA remain required.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
 locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
@@ -30,7 +44,7 @@ contact difficulty multipliers. Existing rooms/upgrades remain saved and usable.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 Stock-capacity milestones use "<item> stock increase" as their title in dialogue and the progression menu.
 
-All 627 active milestones have individual authored `briefing` and `completion` replies in their
+All 626 active milestones have individual authored `briefing` and `completion` replies in their
 contact definitions, including the 212 stock-preparation deliveries. Read each contact's existing
 profile and bound conversation before editing its voice. The current requirements, catalogue and
 benefits determine what a reply can promise; the older story tables and retired commissions do not.
@@ -55,7 +69,8 @@ route and return for any capacity upgrades later.
 Spool's Russian tank helmet and Latch's cloth mask start in vendor stock; their old purchase steps are retired.
 Spool owns strong drugs. Quartermaster retains six regular ammunition barters; his two main-menu kit exchanges
 are removed. Suture's conversion milestones explicitly say "variants". Old Timer/Spool/Latch/Wake declare
-`preserveProgression = true` so the authoring tool retains their ordering, request tuning and stock stages.
+`preserveProgression = true` so the authoring tool retains their ordering, quantities and stock stages.
+Mode and candidate-pool authoring still applies to these contacts.
 Technut also declares it to preserve the suit route without regenerating stock intermissions.
 Technut keeps painting and all ordinary suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
 conversion menu and per-suit non-looted finishes. Intern owns artifact detectors. Brass/Carbon provide

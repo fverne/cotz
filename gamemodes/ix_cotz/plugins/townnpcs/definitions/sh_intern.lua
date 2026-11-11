@@ -107,8 +107,9 @@ PLUGIN:Register("intern", {
 			completion = "That's the full delivery. You can purchase an Echo here now. I'll put the materials away myself.",
 			requirements = {
 				{
-					pool = "town_expansion_a9a6a4663f7e",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 1,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 			},
@@ -116,6 +117,7 @@ PLUGIN:Register("intern", {
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/artifact-detectors/detectorbear/stock",
@@ -126,8 +128,8 @@ PLUGIN:Register("intern", {
 			briefing = "Before the next detector, I'd like to increase your Echo stock allowance. Keeping instruments available is part of preparation too, even if it's less interesting to discuss. This is the order for that reserve; it won't produce another detector immediately.",
 			completion = "Your Echo allowance has increased. The stock itself still follows the usual refill.",
 			requirements = {
-				{pool = "town_expansion_8619904d9216", quantity = 1},
-				{pool = "town_expansion_eb7056313562", quantity = 1},
+				{pool = "town_expansion_9ca634ef473b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_341f46a2577a", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"detectorecho"},
@@ -138,6 +140,7 @@ PLUGIN:Register("intern", {
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/artifact-detectors/detectorbear",
@@ -152,13 +155,15 @@ PLUGIN:Register("intern", {
 			completion = "All received. You can buy the Bear detector now. That arrangement is complete.",
 			requirements = {
 				{
-					pool = "town_expansion_a9a6a4663f7e",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_6af4f494aa60",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "electrical_artifacts",
 				},
 			},
@@ -166,6 +171,7 @@ PLUGIN:Register("intern", {
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/artifact-detectors/detectorveles/stock",
@@ -176,10 +182,10 @@ PLUGIN:Register("intern", {
 			briefing = "I'd like to get the Bear reserve settled before the final detector request. These supplies increase the amount I can hold for you. It is still a stock allowance, so please check what's actually on sale before packing around a spare.",
 			completion = "I've increased your Bear stock capacity. The reserve is arranged; the refill timing hasn't changed.",
 			requirements = {
-				{pool = "town_expansion_96f10f2d5514", quantity = 2},
-				{pool = "town_expansion_7056d335ecb3", quantity = 2},
-				{pool = "town_expansion_e010d2b94975", quantity = 1},
-				{pool = "town_expansion_52c92cccdf1a", quantity = 1},
+				{pool = "town_expansion_c424b030ac41", quantity = 2, mode = "any"},
+				{pool = "town_expansion_bc0105418f59", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4c2ad9cd5e95", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6be29e7a116d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"detectorbear"},
@@ -195,6 +201,7 @@ PLUGIN:Register("intern", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/artifact-detectors/detectorveles",
@@ -209,23 +216,27 @@ PLUGIN:Register("intern", {
 			completion = "Everything is accounted for. You can purchase the Veles now. Thank you for seeing the detector orders through with me.",
 			requirements = {
 				{
-					pool = "town_expansion_a9a6a4663f7e",
+					pool = "town_expansion_c065cd2ebf15",
 					quantity = 4,
+					mode = "any",
 					artifactPool = "common_artifacts",
 				},
 				{
-					pool = "town_expansion_6af4f494aa60",
+					pool = "town_expansion_911d8be41ce3",
 					quantity = 3,
+					mode = "any",
 					artifactPool = "electrical_artifacts",
 				},
 				{
-					pool = "town_expansion_9ee1d71f61fc",
+					pool = "town_expansion_9eca93351695",
 					quantity = 2,
+					mode = "any",
 					artifactPool = "rare_field_artifacts",
 				},
 				{
-					pool = "town_expansion_eb5fb8c496fa",
+					pool = "town_expansion_4191637a3663",
 					quantity = 1,
+					mode = "random",
 					artifactPool = "exceptional_artifacts",
 				},
 			},
@@ -238,6 +249,7 @@ PLUGIN:Register("intern", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 	},
 	startingServices = {},

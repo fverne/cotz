@@ -178,38 +178,78 @@ def build_sources(data, rates, families):
     return sources
 
 
+def opening_steps(contact):
+    """Count connected unlock chains, not intermissions or labels shared by independent side branches."""
+    steps = {step["id"]: step for step in contact["progression"]}
+    unlocks = {key: step for key, step in steps.items() if not step.get("intermissionFor")}
+    neighbours = {key: set() for key in unlocks}
+    for key, step in unlocks.items():
+        pending, visited = list(step["requires"]), set()
+        while pending:
+            parent = pending.pop()
+            if parent in visited or parent not in steps:
+                continue
+            visited.add(parent)
+            if steps[parent].get("intermissionFor"):
+                pending.extend(steps[parent]["requires"])
+            elif parent in unlocks and unlocks[parent]["branch"] == step["branch"]:
+                neighbours[key].add(parent)
+                neighbours[parent].add(key)
+    opening, visited = set(), set()
+    for key in unlocks:
+        if key in visited:
+            continue
+        component, pending = set(), [key]
+        while pending:
+            current = pending.pop()
+            if current in component:
+                continue
+            component.add(current)
+            pending.extend(neighbours[current] - component)
+        visited.update(component)
+        ordered = [key for key in unlocks if key in component]
+        opening.update(ordered[:math.ceil(len(ordered) / 5)])
+    return opening
+
+
 def author_requirements(data, rates, sources):
     pools, lookup = {}, {}
 
-    def get_pool(items, label, maps, band):
+    def get_pool(items, label, maps, band, tier=None):
         key = (tuple(sorted(items)), label, tuple(maps), band)
         if key not in lookup:
             identifier = "town_expansion_" + hashlib.sha256(json.dumps(key).encode()).hexdigest()[:12]
             lookup[key] = identifier
+            frequency = sum(sum(v[0] for v in rates[m].get(item, {}).values()) for m in maps for item in items)
+            rarity = "common" if frequency >= 4 else "uncommon" if frequency >= 1 else "rare" if frequency >= 0.1 else "exceptional"
             pools[identifier] = {
                 "name": label + " (" + ", ".join(MAP_LABELS[m] for m in maps) + ")",
-                "tier": ("common", "uncommon", "rare", "rare")[band],
+                "tier": tier or rarity,
                 "candidates": [{"item": item} for item in sorted(items)],
             }
         return lookup[key]
 
-    def select_group(names, maps, band, used, seed, variant):
-        for offset in range(len(names)):
-            name = names[(seed + offset) % len(names)]
-            candidates = {row["item"] for row in data["pools"][name]["candidates"]}
-            candidates = [item for item in candidates - used if item in sources
-                          and sources[item]["kind"] == "valuable"
-                          and any(m in sources[item]["maps"] for m in maps)]
-            if not candidates:
-                continue
-            def score(item):
-                return sum(sum(v[0] for v in rates[m].get(item, {}).values()) for m in maps)
-            candidates.sort(key=lambda item: (-score(item), item))
-            width = max(1, min(8, (len(candidates) + 3) // 4))
-            start = (len(candidates) * band // 4 + variant) % len(candidates)
-            items = set(candidates[start:start + width])
-            return items, data["pools"][name]["name"]
-        return set(), ""
+    def select_group(names, maps, mode, used, remaining, phase):
+        candidates = {row["item"] for name in names for row in data["pools"][name]["candidates"]}
+        candidates = [item for item in candidates - used if item in sources
+                      and sources[item]["kind"] == "valuable"
+                      and any(m in sources[item]["maps"] for m in maps)]
+        def score(item):
+            return sum(sum(v[1 if mode == "random" else 0] for v in rates[m].get(item, {}).values()) for m in maps)
+        candidates.sort(key=lambda item: (-score(item), item))
+        if not candidates:
+            return set()
+        width = min(8, max(1, len(candidates) // (remaining + 1)))
+        if mode == "any":
+            # Bulk requests favour accessible supplies. Leave distinct candidates for other slots.
+            start = 0
+        else:
+            start = min(len(candidates) - 1, int(phase * (len(candidates) - 1) * 0.6))
+            # A specific-item roll must not mix a common find with a much rarer alternative.
+            best = score(candidates[start])
+            candidates = [item for item in candidates[start:] if score(item) >= best / 3]
+            start = 0
+        return set(candidates[start:start + width])
 
     for slug, contact in sorted(data["contacts"].items()):
         if not contact["progression"]:
@@ -218,14 +258,13 @@ def author_requirements(data, rates, sources):
         assert identity["core"] and identity["support"], slug
         for name in identity["core"] + identity["support"]:
             assert name in data["pools"], (slug, name)
-        previous_by_branch = {}
-        generated_steps = [s for s in contact["progression"] if s["id"] != "v3/hideout/access"]
-        for ordinal, step in enumerate(generated_steps):
-            # Approved layout changes retain their delivery terms and saved assignments.
-            if slug == "mute" or contact.get("preserveProgression"):
-                for slot in step["requirements"]:
-                    pool = data["pools"][slot["pool"]]
-                    pools[slot["pool"]] = {key: pool[key] for key in ("name", "tier", "candidates")}
+        opening = opening_steps(contact)
+        for step in contact["progression"]:
+            category_only = step.get("intermissionFor", step["id"]) in opening
+            step["categoryOnly"] = category_only
+            if step["id"] == "v3/hideout/access":
+                slot = step["requirements"][0]
+                step["requirements"][0] = {"pool": slot["pool"], "quantity": slot["quantity"], "mode": "any"}
                 continue
             maps = step["acquisitionMaps"]
             original_index, length = step["branchIndex"] - 1, step["branchLength"]
@@ -234,41 +273,34 @@ def author_requirements(data, rates, sources):
             count = len(step["requirements"])
             expanded = min(cap, count)
             science = slug in SCIENCE and not step.get("intermissionFor")
-            attempts = max(len(identity["core"]), len(identity["support"]))
-            for attempt in range(attempts * 8):
-                used, slots, signature = set(), [], []
-                for index, slot in enumerate(step["requirements"]):
-                    slot_maps = maps if index >= count - expanded else [contact["map"]]
-                    artifact_pool = None
-                    if science:
-                        artifact_pool = slot.get("artifactPool", slot["pool"])
-                        items = {c["item"] for c in data["pools"][artifact_pool]["candidates"]
-                                 if c["item"] in sources
-                                 and any(m in sources[c["item"]]["maps"] for m in slot_maps)}
-                        assert items and all(sources[i]["kind"] == "artifact" for i in items)
-                        label = data["pools"][artifact_pool]["name"]
-                    else:
-                        # Core work owns every high-quantity slot. Only the smallest slot may borrow support.
-                        names = identity["support"] if count >= 3 and index == count - 1 else identity["core"]
-                        seed, variant = ordinal + index + attempt, attempt // attempts
-                        items, label = select_group(names, slot_maps, index, used, seed, variant)
-                        if not items and names is identity["support"]:
-                            items, label = select_group(identity["core"], slot_maps, index, used, seed, variant)
-                        if not items:
-                            break
-                    used.update(items)
-                    pool = get_pool(items, identity["name"] + ": " + label, slot_maps, index)
-                    requirement = {"pool": pool, "quantity": slot["quantity"]}
-                    if artifact_pool:
-                        requirement["artifactPool"] = artifact_pool
-                    slots.append(requirement)
-                    signature.append((tuple(sorted(items)), slot["quantity"]))
-                if len(slots) == count and signature != previous_by_branch.get(step["branch"]):
-                    break
-            else:
-                raise ValueError(f"No varied, disjoint specialty request for {slug}: {step['id']}")
+            used, slots = set(), []
+            for index, slot in enumerate(step["requirements"]):
+                mode = "random" if not category_only and not step.get("intermissionFor") and index == count - 1 else "any"
+                slot_maps = maps if index >= count - expanded else [contact["map"]]
+                artifact_pool = None
+                if science:
+                    artifact_pool = slot.get("artifactPool", slot["pool"])
+                    items = {c["item"] for c in data["pools"][artifact_pool]["candidates"]
+                             if c["item"] in sources and any(m in sources[c["item"]]["maps"] for m in slot_maps)}
+                    assert items and all(sources[i]["kind"] == "artifact" for i in items)
+                    label = data["pools"][artifact_pool]["name"]
+                else:
+                    support = count >= 3 and index == count - 1
+                    names = identity["support"] if support else identity["core"]
+                    remaining = max(0, count - index - (2 if count >= 3 and not support else 1))
+                    items = select_group(names, slot_maps, mode, used, remaining, phase)
+                    if not items and support:
+                        items = select_group(identity["core"], slot_maps, mode, used, 0, phase)
+                    assert items, (slug, step["id"], index, "No distinct local specialty supplies")
+                    label = identity["name"] + (": supporting supplies" if support else ": general supplies")
+                used.update(items)
+                pool = get_pool(items, label, slot_maps, index,
+                                data["pools"][artifact_pool]["tier"] if artifact_pool else None)
+                requirement = {"pool": pool, "quantity": slot["quantity"], "mode": mode}
+                if artifact_pool:
+                    requirement["artifactPool"] = artifact_pool
+                slots.append(requirement)
             step["requirements"] = slots
-            previous_by_branch[step["branch"]] = signature
     referenced = {slot["pool"] for contact in data["contacts"].values()
                   for step in contact["progression"] for slot in step["requirements"]}
     for name in referenced:
@@ -300,7 +332,7 @@ def outputs():
             continue
         path = rewards.DEFINITIONS / ("sh_" + slug.replace("-", "_") + ".lua")
         source = path.read_text()
-        output[path] = source if contact.get("preserveProgression") else render_contact(source, contact["progression"])
+        output[path] = render_contact(source, contact["progression"])
     original = POOL_FILE.read_text().split(MARKER)[0].rstrip()
     generated = [original, MARKER.rstrip(), "ix.progression.townRequirementSources = " + lua(sources)]
     for name, pool in pools.items():

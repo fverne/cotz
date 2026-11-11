@@ -237,6 +237,16 @@ TODO plans alone never satisfy reward coverage. Empty steps are reported without
                    f"{text(', '.join(contact['progressionIdentity']['core']))} | "
                    f"{text(', '.join(contact['progressionIdentity']['support']))} |"
                    for slug, contact in sorted(data["contacts"].items()) if contact["progression"]]
+    mode_rows = []
+    for slug, contact in sorted(data["contacts"].items()):
+        steps = contact["progression"]
+        if not steps:
+            continue
+        introductory = sum(bool(step.get("categoryOnly")) for step in steps if not step.get("intermissionFor"))
+        slots = [slot for step in steps for slot in step["requirements"]]
+        category = sum(slot.get("mode") == "any" for slot in slots)
+        specific = sum(slot.get("mode", "random") == "random" for slot in slots)
+        mode_rows.append(f"| {slug} | {introductory} | {category} | {specific} |")
     sections = [header + "\n".join(summaries),
                 "## Request specialties\n\n"
                 "At least 75% of requested units stay with the contact's core work. Only the smallest slot "
@@ -244,6 +254,12 @@ TODO plans alone never satisfy reward coverage. Empty steps are reported without
                 "retains its artifact requirements. Marsh openings remain fully locally obtainable.\n\n"
                 "| Contact | Specialty | Core pools | Related support pools |\n| --- | --- | --- | --- |\n"
                 + "\n".join(specialties),
+                "## Hand-in modes\n\n"
+                "The first 20% of actual unlocks in each branch, rounded up, are category-only. "
+                "Stock intermissions are category-wide. Later ordinary deliveries use a specific final slot "
+                "with category totals in any preceding slots. Existing saved counts and specific rolls are retained.\n\n"
+                "| Contact | Opening category-only unlocks | Category slots | Specific slots |\n"
+                "| --- | ---: | ---: | ---: |\n" + "\n".join(mode_rows),
                 "## Every progression step\n\n| Contact | Step | Functional unlocks | TODO unlocks | Supplementary rewards |\n"
                 "| --- | --- | --- | --- | --- |\n" + "\n".join(rows),
                 "## Purchase catalogue\n\n| Item | Seller | Local milestone | Canonical tier owner |\n"

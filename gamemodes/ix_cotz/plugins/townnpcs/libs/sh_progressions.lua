@@ -53,6 +53,7 @@ function PLUGIN:BuildProgressions()
 				townContact = slug,
 				townKind = step.kind,
 				townBranch = step.branch,
+				categoryOnly = step.categoryOnly,
 				-- Entry steps still open when their newly linked parent was completed before this update.
 				defaultActive = step.defaultActive == true or step.branchIndex == 1
 					or (#step.requires == 0 and #(step.crossRequires or {}) == 0),
@@ -63,6 +64,7 @@ function PLUGIN:BuildProgressions()
 				completionBenefits = step.benefits,
 				acquisitionMaps = step.acquisitionMaps,
 				requirementPolicy = step.requirementPolicy,
+				requirementModesVersion = 1,
 				requirementAlternatives = step.requirementAlternatives,
 				intermissionFor = step.intermissionFor,
 				capacityReward = step.capacity,
@@ -105,7 +107,7 @@ function PLUGIN:BuildProgressions()
 					local quantity = step.id == "v3/hideout/access" and slot.quantity
 						or self:ScaleProgressionEffort(contact, slot.quantity)
 					definition.requirementSlots[#definition.requirementSlots + 1] = {
-						pool = slot.pool, quantity = quantity,
+						pool = slot.pool, quantity = quantity, mode = slot.mode,
 					}
 				end
 			else
