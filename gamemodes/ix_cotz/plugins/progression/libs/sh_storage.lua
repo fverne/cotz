@@ -6,6 +6,16 @@ ix.char.RegisterVar("progression", {
 	default = {lines = {}},
 	isLocal = true,
 	bNoDisplay = true,
+	OnSet = function(character, value)
+		local oldValue = character.vars.progression
+		character.vars.progression = value
+
+		if IsValid(character.player) then
+			ix.characterNetwork.SendVar(character, "progression", value, character.player)
+		end
+
+		hook.Run("CharacterVarChanged", character, "progression", oldValue, value)
+	end,
 })
 
 local function validateCharacter(character)

@@ -100,6 +100,9 @@ Whole-stack removal must succeed before progress/rewards are granted.
 
 Progression persists in its own owner-local `progression` character var and `MEDIUMTEXT` SQL column,
 outside generic character data. This targets a fresh database; see [character storage](../../../../docs/database/README.md).
+Initial owner snapshots and progression updates use the schema's compressed character transport,
+split into reliable chunks below the net message limit. The setter retains its server-side
+`CharacterVarChanged` callback and owner-only replication. This networking fix preserves existing saves.
 
 All finite progression pays only accumulated hand-in value at the existing 60% rate, rounded up once
 on completion. Town hand-ins now accrue monetary credit too; flat completion cash is removed.
@@ -140,6 +143,8 @@ World-arrival support remains for explicit worldNPC definitions; Pripyat town ar
     luatex --luaonly tests/progression_spec.lua
     luatex --luaonly tests/item_requirement_tooltips_spec.lua
     luatex --luaonly tests/character_storage_spec.lua
+    luatex --luaonly tests/character_sync_spec.lua
+    luatex --luaonly tests/character_network_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua
     luatex --luaonly tests/progression_services_spec.lua
     luatex --luaonly tests/task_rewards_spec.lua

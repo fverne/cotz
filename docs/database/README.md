@@ -13,6 +13,20 @@ Vendor stock and restock claims use `bNoNetworking`; vendor menus receive separa
 Jobs retain their existing visibility and `GetJobs`/`SetJobs` API. Shared world unlocks stay in plugin data.
 STALKERnet reads the separate progression var/column for favourite-contact statistics.
 
+SQL column capacity does not increase Garry's Mod's roughly 64 KB net message limit. Initial owner
+character snapshots and progression setter updates therefore use the schema's compressed, chunked
+character transport. It uses Helix's bundled pON serializer to preserve numeric keys and engine value
+types; reliable chunks assemble completely before client state is replaced. Other recipients retain
+the installed Helix sync path. The server still fires `CharacterVarChanged` after progression commits.
+No database migration or reset is needed for this networking fix. Deploy the shared schema library,
+server sync override and progression storage library together, restart map servers and reconnect clients.
+
+Run `luatex --luaonly tests/character_sync_spec.lua` and
+`luatex --luaonly tests/character_network_spec.lua` for privacy, oversized snapshots, chunk reassembly,
+consecutive characters and progression update coverage. Standalone compression is an identity mock
+to exercise worst-case chunk sizes; live engine LZMA, reconnect/menu order and HUD initialization still
+need multiplayer verification with a large saved character, character switching and a progression hand-in.
+
 This storage change targets a fresh database, as requested for the planned database reset.
 Helix creates the four columns at startup. No legacy migration or fallback is included.
 Changing a registered type does not enlarge existing columns; deploying these files alone does

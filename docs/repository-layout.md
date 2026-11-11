@@ -27,7 +27,10 @@ gameplay plugins through the existing library loader. See [UI and HUD style](ui-
 
 `schema/meta/sv_character.lua` is explicitly included by `sh_schema.lua`. Its owner-sync override
 keeps legacy personal vendor stock/history keys out of the initial character network payload;
-other recipients retain Helix's normal visibility rules.
+other recipients retain Helix's normal visibility rules. The automatically loaded shared library
+`schema/libs/sh_characternetwork.lua` sends owner snapshots through compressed, reliable 60,000-byte
+chunks and creates the client character only after reassembly. Progression's setter uses the same
+transport for owner-only updates. This avoids the single-message limit without truncating saved state.
 
 Progression and personal vendor stock now use separate large character vars. Their owning plugin
 libraries register them; `schema/sv_schema.lua` supplies the SQL type before plugins load.
