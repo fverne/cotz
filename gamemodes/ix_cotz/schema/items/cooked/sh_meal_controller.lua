@@ -4,7 +4,7 @@ ITEM.longdesc = "Even after a long time over the fire, it carries a disquieting 
 	.. " psychic influence. The smell alone does little to encourage a second helping."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
-ITEM.price = 2300
+ITEM.price = 1308
 ITEM.width = 1
 ITEM.height = 1
 

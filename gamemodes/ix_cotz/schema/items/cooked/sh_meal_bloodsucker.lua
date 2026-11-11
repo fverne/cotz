@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a bloodsucker, cooked in the zone."
 ITEM.longdesc = "Chunks of Bloodsucker meat, braised for a long time to be as tender as possible. The taste still leaves much to be desired, but the meat is very filling."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_bloodsucker.mdl"
 
-ITEM.price = 1800
+ITEM.price = 1140
 ITEM.width = 1
 ITEM.height = 1
 

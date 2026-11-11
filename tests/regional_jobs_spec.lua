@@ -63,6 +63,31 @@ for id, definition in pairs(ix.jobs.list) do
 	end
 end
 check(ix.jobs.list["cotz/town/mute/easy/value_battery"].completionOnly, "old requests can finish but are not offered")
+do
+	local issuers = {}
+	local previousClamp = math.Clamp
+	math.Clamp = function(value, minimum, maximum) return math.max(minimum, math.min(maximum, value)) end
+	for _, definition in pairs(ix.jobs.list) do
+		if definition.regionalJob and definition.requiredItem and not definition.completionOnly then
+			local item = ix.item.list[definition.requiredItem]
+			local previousPrice = item.price
+			local count = definition.numberRec
+			local originalCash = ix.taskRewards.FixedMoney(definition, count)
+			local supplyBudget = ix.taskRewards.SupplyBudget(definition, count)
+			item.price = previousPrice * 2
+			check(ix.taskRewards.FixedMoney(definition, count) > originalCash,
+				"every contact's active item delivery accounts for the requested item's price")
+			check(ix.taskRewards.SupplyBudget(definition, count) == supplyBudget,
+				"repricing delivery inputs does not increase supplies or the bonus allowance")
+			item.price = previousPrice
+			issuers[definition.issuerName] = true
+		end
+	end
+	check(issuers["'Spicy Lemon'"] and issuers["'Jitters'"] and issuers["'Egghead'"]
+		and issuers["'Technut'"] and issuers["'Latch'"] and issuers["'Quartermaster'"],
+		"price coverage includes meals, specimens and every valuable-courier issuer")
+	math.Clamp = previousClamp
+end
 check(ix.jobs.list["cotz/town/old-timer/hard"].repReward == 45, "accepted old work retains reputation terms")
 check(ix.jobs.regional.Species("npc_human_bandit_sniper") == "bandit",
 	"snipers count toward faction kills while remaining outside patrol-size medians")

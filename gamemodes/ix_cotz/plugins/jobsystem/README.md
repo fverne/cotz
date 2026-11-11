@@ -57,6 +57,10 @@ The chosen supply reward never reduces cash. The added item payment funds neithe
 five-task bonus: hand-in supplies use only the tier base (with the existing 600-ruble minimum), and
 only unused supply allowance contributes to bonuses. Whole-item requests value whole meals/specimens;
 per-use requests retain unit valuation and higher-quality hand-ins retain their increased value.
+Definition-only quotes that return zero without instance data, such as a meal's saved weight, use
+the configured item price as their reference. Actual hand-ins retain their instance valuation.
+Unpaid delivery assignments and previews refresh their cash from the shared calculation without
+changing their identity, quantities, credited value or progress.
 Accepted assignments retain their identity and progress. Unpaid reward offers migrate to the current
 completion-time catalogue; their bonus allowance is capped to the current tier basis.
 Previously completed hand-ins also receive the current cash formula at claim; paid claims stay paid.

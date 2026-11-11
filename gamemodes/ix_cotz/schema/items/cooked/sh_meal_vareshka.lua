@@ -4,7 +4,7 @@ ITEM.longdesc = "Searing has browned the outside without doing much for the toug
 	.. " it seems to have favoured getting fed over making a memorable supper."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
-ITEM.price = 2400
+ITEM.price = 1152
 ITEM.width = 1
 ITEM.height = 1
 

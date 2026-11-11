@@ -34,6 +34,27 @@ ix.spawnPolicy.Register("boxSpawnerThreshold")
 
 if SERVER then
 	local spawntime = 1
+	local LOOT_CLEARANCE = 2
+
+	function PLUGIN:SpawnBoxLoot(box, drop, index)
+		local position = box:GetPos()
+		local _, boxMaxs = box:WorldSpaceAABB()
+		position = Vector(position.x, position.y, boxMaxs.z + LOOT_CLEARANCE + index)
+
+		ix.item.Spawn(drop[1], position, function(item, entity)
+			item:SetData("bTemporary", true)
+
+			if not IsValid(entity) then return end
+
+			entity.bTemporary = true
+
+			-- The final model and random rotation are only available after Helix creates the item.
+			local mins = entity:WorldSpaceAABB()
+			local lift = math.max(0, position.z - mins.z)
+			entity:SetPos(entity:GetPos() + Vector(0, 0, lift))
+			entity:PhysWake()
+		end, AngleRand(), drop[2] or {})
+	end
 	
 	local function isClear(position)
 		local currentents = ents.FindInSphere( position, PLUGIN.saferadius )

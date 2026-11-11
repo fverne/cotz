@@ -3,7 +3,7 @@ ITEM.description = "Uncooked meat from a Hellhound."
 ITEM.longdesc = "This chunk of meat from the mutated type of dog called a Hellhound feels warm to the touch, even though it was killed hours ago. Considered a delicacy among STALKERs used to eating the regular dog meat."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_dog.mdl"
 
-ITEM.price = 1680
+ITEM.price = 1180
 ITEM.width = 1
 ITEM.height = 1
 

@@ -42,7 +42,9 @@ function ix.taskRewards.UnitValue(itemID)
 
 			return default
 		end}, {__index = item})
-		value = quote:GetPrice()
+		-- Weight-priced items can quote zero before their instance weight exists.
+		local quotedValue = quote:GetPrice()
+		if quotedValue ~= 0 then value = quotedValue end
 	end
 
 	return math.max(0, value) / math.max(1, units)

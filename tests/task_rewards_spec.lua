@@ -141,6 +141,27 @@ check(
 )
 check(ix.taskRewards.ExpectedValue("value_currency_euro", {quantity = 3}) == 156,
 	"explicit pool quantities override generated defaults")
+do
+	local meal = {name = "Boar Chops", price = 520, weight = 0}
+	function meal:GetWeight() return self:GetData("weight", self.weight) end
+	function meal:GetPrice() return self.price * self:GetWeight() * 2 end
+	ix.item.list.weightedMeal = meal
+	check(ix.taskRewards.UnitValue("weightedMeal") == 520,
+		"a zero definition quote retains the configured meal price without saved weight")
+	local instance = setmetatable({GetData = function(_, key, default)
+		if key == "weight" then return 1.5 end
+
+		return default
+	end}, {__index = meal})
+	check(ix.taskRewards.HandInUnitValue("weightedMeal", instance, true) == 1560,
+		"actual meal weight still determines the handed-in item value")
+	meal.weight = 0.25
+	check(ix.taskRewards.UnitValue("weightedMeal") == 260,
+		"positive custom quotes retain their own units even below the configured price")
+	meal.weight, meal.price = 0, 0
+	check(ix.taskRewards.UnitValue("weightedMeal") == 0, "explicitly unpriced items remain unpriced")
+	meal.price = 520
+end
 local owner = actor()
 local choices = ix.taskRewards.BuildChoices(owner, "'Old Timer'", 75, "saved")
 check(#choices == 3, "contact gets three distinct available supply choices")
@@ -1619,6 +1640,35 @@ do
 	ix.progression.QueueReward(barterOwner, "taskRewardClaims", {item = "medic_bandage_1", taskNPC = false})
 	check(not ix.taskRewards.HasUnclaimedRewards(barterOwner, npc),
 		"new barter deliveries do not impose a task reward lock")
+end
+
+do
+	local npc = "'Spicy Lemon'"
+	local owner = actor()
+	ix.jobs.list.weightedDelivery = {name = "Deliver %d meals", desc = "Deliver %d meals", numberRec = 3,
+		requiredItem = "weightedMeal", wholeItems = true, tier = 1, reward = {}, repReward = 15}
+	local job = {identifier = "weightedDelivery", numberRec = 3, progress = 1, deliveredValue = 1560,
+		moneyReward = 500, progressionClaim = 7, rewardKey = "job:weighted"}
+	owner.jobs[npc] = copy(job)
+	owner:SetData("taskJobPreviews", {[npc] = {easy = {identifier = "weightedDelivery", numberRec = 3,
+		progressionClaim = 8, rewardKey = "job:weighted-preview", moneyReward = 500}}})
+	ix.taskRewards.ReconcileCharacter(owner)
+	local refreshed = owner:GetJobs()[npc]
+	check(refreshed.moneyReward == 1280, "accepted meal deliveries refresh their missing price component")
+	check(refreshed.progress == job.progress and refreshed.deliveredValue == job.deliveredValue
+		and refreshed.numberRec == job.numberRec and refreshed.rewardKey == job.rewardKey
+		and refreshed.progressionClaim == job.progressionClaim,
+		"repricing preserves the accepted assignment and its credited hand-ins")
+	check(owner:GetData("taskJobPreviews")[npc].easy.moneyReward == 1280,
+		"saved meal previews use the same item-price reference")
+	owner.jobs[npc].isCompleted = true
+	owner.jobs[npc].deliveredValue = 3120
+	ix.taskRewards.ReconcileCharacter(owner)
+	check(owner:GetJobs()[npc].moneyReward == 2060 and owner.money == 0,
+		"completed unpaid deliveries keep actual value without paying during reconciliation")
+	local saves = owner.saves
+	ix.taskRewards.ReconcileCharacter(owner)
+	check(owner.saves == saves, "unchanged delivery payments do not trigger repeated saves")
 end
 
 print("PASS: " .. checks .. " task reward checks")

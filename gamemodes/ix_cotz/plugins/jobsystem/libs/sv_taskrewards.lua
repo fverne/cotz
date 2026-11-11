@@ -274,6 +274,13 @@ function ix.taskRewards.ReconcileCharacter(character)
 		end
 		local offer = offers[job.rewardKey]
 		local definition = ix.jobs.list[job.identifier]
+		if definition and definition.requiredItem and not definition.townProgression then
+			local cash = ix.taskRewards.FixedMoney(definition, job.numberRec, job.deliveredValue)
+			if job.moneyReward ~= cash then
+				job.moneyReward = cash
+				changed = true
+			end
+		end
 		if not offer or offer.npc ~= npc or offer.earned or not definition or definition.townProgression then return end
 		if offer.version ~= version or job.supplyCatalogueVersion ~= version then
 			offer.choices, offer.selected, offer.ready, offer.retrySelected = {}, nil, nil, nil

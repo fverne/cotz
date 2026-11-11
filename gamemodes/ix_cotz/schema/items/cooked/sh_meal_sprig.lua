@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a sprig, cooked in the zone."
 ITEM.longdesc = "A nice hearthy soup cooked on the leg of a Sprig. Has a vegetable taste that is hard to place your finger on. The soup is filled with chunks of Sprig meat, and will leave you quite satisfied."
 ITEM.model = "models/lostsignalproject/items/medical/drink_crow.mdl"
 
-ITEM.price = 730
+ITEM.price = 360
 ITEM.width = 1
 ITEM.height = 1
 

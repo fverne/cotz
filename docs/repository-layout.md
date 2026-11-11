@@ -104,6 +104,10 @@ descriptions, and instructions when extending a custom `GetDescription()`. Inven
 include the extra prose; world descriptions retain their existing shorter presentation.
 Check coverage and custom description rendering with `luatex --luaonly tests/item_descriptions_spec.lua`.
 
+Cooked meal definitions declare prices at 120% of their corresponding raw meat's current `ITEM.price`,
+using the raw item's `ITEM.meal` mapping. Both bases price by weight, and cooking preserves that weight.
+Keep these prices explicit in each concrete definition when retuning the meat and meal families.
+
 The 378 implemented items listed in the combined valuables and supply/job workbook are split across
 `schema/items/valuables_test/`, `schema/items/valuable/`, and `schema/items/quests/`.
 The `recovery_` and `supply_` filename segments have been removed, which also changes their
