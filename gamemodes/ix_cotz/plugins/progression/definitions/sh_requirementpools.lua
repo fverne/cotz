@@ -7399,29 +7399,11 @@ ix.progression.itemPools.town_expansion_31108a33b52e = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_5680557761a2 = {
-	name = "Precision tools and mechanical repair parts: Specialty workshop tools (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_techtool_3"},
-	},
-}
-
 ix.progression.itemPools.town_expansion_0edc942bcdb2 = {
 	name = "Precision tools and mechanical repair parts: Specialty workshop tools (Marsh)",
 	tier = "uncommon",
 	candidates = {
 		{item = "value_techtool_3"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_c4ef1c490cad = {
-	name = "Precision tools and mechanical repair parts: Mechanical and equipment repair parts (Marsh, Garbage, Waystation)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_parts"},
-		{item = "value_upgro1"},
-		{item = "value_upgro2"},
 	},
 }
 
@@ -7442,11 +7424,21 @@ ix.progression.itemPools.town_expansion_682820bbf4fb = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_4bfcbfdd8522 = {
-	name = "Precision tools and mechanical repair parts: Specialty workshop tools (Marsh, Garbage, Waystation)",
-	tier = "uncommon",
+ix.progression.itemPools.town_expansion_5680557761a2 = {
+	name = "Precision tools and mechanical repair parts: Specialty workshop tools (Marsh)",
+	tier = "common",
 	candidates = {
 		{item = "value_techtool_3"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_c4ef1c490cad = {
+	name = "Precision tools and mechanical repair parts: Mechanical and equipment repair parts (Marsh, Garbage, Waystation)",
+	tier = "uncommon",
+	candidates = {
+		{item = "value_parts"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
 	},
 }
 
@@ -7458,40 +7450,12 @@ ix.progression.itemPools.town_expansion_dc8a21b56c89 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_667359aa6e51 = {
-	name = "Precision tools and mechanical repair parts: Electrical installation supplies (Marsh, Garbage, Waystation)",
-	tier = "rare",
-	candidates = {
-		{item = "value_kanifol"},
-		{item = "value_lamp_uv"},
-		{item = "value_usb_adapter"},
-	},
-}
-
 ix.progression.itemPools.town_expansion_2de85c7b6370 = {
 	name = "Precision tools and mechanical repair parts: Adhesives, lubricants and repair sheets (Marsh, Garbage, Waystation)",
 	tier = "rare",
 	candidates = {
 		{item = "value_building_plexiglass"},
 		{item = "value_building_poxeram"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_61616ce759ce = {
-	name = "Precision tools and mechanical repair parts: Advanced computer equipment (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_pcpart_ssd"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_0f652b49711c = {
-	name = "Precision tools and mechanical repair parts: Electrical installation supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "rare",
-	candidates = {
-		{item = "value_kanifol"},
-		{item = "value_lamp_uv"},
-		{item = "value_usb_adapter"},
 	},
 }
 
@@ -7512,16 +7476,6 @@ ix.progression.itemPools.town_expansion_02e3f0c99b9e = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_051370659b7c = {
-	name = "Precision tools and mechanical repair parts: Mechanical and equipment repair parts (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_parts"},
-		{item = "value_upgro1"},
-		{item = "value_upgro2"},
-	},
-}
-
 ix.progression.itemPools.town_expansion_89c6fbb6476c = {
 	name = "Precision tools and mechanical repair parts: Screwdrivers and wrenches (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "uncommon",
@@ -7531,22 +7485,11 @@ ix.progression.itemPools.town_expansion_89c6fbb6476c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_1e469de7d680 = {
-	name = "Precision tools and mechanical repair parts: Mechanical and equipment repair parts (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "rare",
+ix.progression.itemPools.town_expansion_61616ce759ce = {
+	name = "Precision tools and mechanical repair parts: Advanced computer equipment (Marsh, Garbage, Waystation, Pripyat)",
+	tier = "uncommon",
 	candidates = {
-		{item = "value_large_parts"},
-		{item = "value_upgro3"},
-		{item = "value_weaponparts"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_415a473489fd = {
-	name = "Precision tools and mechanical repair parts: Adhesives, lubricants and repair sheets (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "rare",
-	candidates = {
-		{item = "value_plastic"},
-		{item = "value_wd40_100ml"},
+		{item = "value_pcpart_ssd"},
 	},
 }
 

@@ -15,6 +15,52 @@ local function complete(character, identifier)
 	ix.progression.SetCharacterProgression(character, record)
 end
 
+local technut = ix.townNPCs.contacts.technut
+local suitOwner = context.fixture.character()
+local previousSuit
+local suitCount = 0
+for _, step in ipairs(technut.progression) do
+	check(not step.intermissionFor and not step.id:match("/stock$"), "Technut has no stock intermissions")
+	if step.branch == "suits" then
+		suitCount = suitCount + 1
+		local identifier = ix.townNPCs:StepID("technut", step.id)
+		local definition = ix.progression.definitions[identifier]
+		check(#step.requires == (previousSuit and 1 or 0), "authored suits have only their preceding suit gate")
+		for _, required in ipairs(definition.prerequisites) do
+			check(not required:match("/stock$"), "compiled suit gates contain no stock intermissions")
+		end
+		if previousSuit then
+			check(definition.prerequisites[1] == previousSuit, "suit order is preserved")
+			check(not ix.progression.IsActive(suitOwner, identifier), "later suits wait for the preceding suit")
+			ix.progression.SetCompleted(suitOwner, previousSuit)
+		end
+		check(ix.progression.IsActive(suitOwner, identifier), "the next suit opens without a stock delivery")
+		previousSuit = identifier
+	end
+end
+check(suitCount == 14, "all fourteen original suit stages remain")
+check(technut.progression[1].stock.item == "suit_anorak", "the initial anorak stock step remains")
+check(ix.progression.IsActive(suitOwner, id("technut", "painting/painting")), "painting remains independent")
+
+local returningSuitOwner = context.fixture.character()
+local retainedSuit = id("technut", "suits/suit_trenchcoat_black")
+local retiredStock = retainedSuit .. "/stock"
+local savedProgress = ix.progression.GetCharacterProgression(returningSuitOwner)
+savedProgress.lines[id("technut", "suits/suit_mailjacket")] = {completed = true}
+savedProgress.lines[retainedSuit] = {
+	active = true, requirements = {value_nuts = 3}, complexData = {value_nuts = 1}, requirementPolicy = 4,
+}
+savedProgress.lines[retiredStock] = {active = true, complexData = {value_bolts = 1}}
+ix.progression.SetCharacterProgression(returningSuitOwner, savedProgress)
+ix.progression.AssignActiveRequirements(returningSuitOwner)
+check(ix.progression.IsActive(returningSuitOwner, retainedSuit), "saved unfinished suits no longer wait for stock")
+check(ix.progression.GetComplexProgressionValue(returningSuitOwner, retainedSuit).value_nuts == 1,
+	"retained suits preserve partial contributions")
+check(not ix.progression.definitions[retiredStock]
+	and not ix.progression.IsActive(returningSuitOwner, retiredStock), "retired stock cannot become active")
+check(ix.progression.GetComplexProgressionValue(returningSuitOwner, retiredStock).value_bolts == 1,
+	"retired stock contributions remain saved history")
+
 for step, prerequisite in pairs({
 	["stimpaks/medic_stimpak_1"] = "medkits/medic_medkit_6",
 	["antirad/medic_antirad_1"] = "medkits/medic_medkit_2",

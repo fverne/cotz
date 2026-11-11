@@ -21,10 +21,10 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 638)
-        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 223)
+        self.assertEqual(len(steps), 627)
+        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 212)
         output, count = expansion.outputs()
-        self.assertEqual(count, 223)
+        self.assertEqual(count, 212)
         for path, content in output.items():
             self.assertEqual(path.read_text(), content, str(path))
 
@@ -43,6 +43,14 @@ class ProgressionExpansionTests(unittest.TestCase):
                   for slug, contact in contacts.items() for step in contact["progression"]
                   if step.get("intermissionFor")}
         self.assertEqual(actual, expected)
+
+    def test_technut_suit_route_survives_regeneration_without_intermissions(self):
+        contacts = deepcopy(self.data["contacts"])
+        expected = deepcopy(contacts["technut"]["progression"])
+        self.assertEqual(len(expected), 15)
+        self.assertFalse(any(step.get("intermissionFor") for step in expected))
+        expansion.expand_contacts(contacts)
+        self.assertEqual(contacts["technut"]["progression"], expected)
 
     def test_local_introductions_and_explicit_boundary_examples(self):
         contacts = self.data["contacts"]
@@ -131,7 +139,10 @@ class ProgressionExpansionTests(unittest.TestCase):
                         self.assertIn(item, contact["supplies"])
 
     def test_consecutive_requests_are_actually_varied(self):
-        for contact in self.data["contacts"].values():
+        for slug, contact in self.data["contacts"].items():
+            # Retiring Technut's intermissions preserves the original suit requests, including repeats.
+            if slug == "technut":
+                continue
             previous = {}
             for step in contact["progression"]:
                 signature = [(tuple(c["item"] for c in self.data["pools"][s["pool"]]["candidates"]), s["quantity"])

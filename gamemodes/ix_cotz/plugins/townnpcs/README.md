@@ -3,8 +3,12 @@
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 638 hand-in milestones
-in 52 branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
+the earlier progression, catalogue and service descriptions below. There are 627 hand-in milestones
+in 52 branches, retaining current `v3/` IDs and adding 212 `/stock` intermissions.
+Technut's eleven intermediate stock-preparation deliveries are retired. Suit unlocks now follow
+the preceding suit directly; the initial anorak stock step and independent painting branch remain.
+Retained milestone IDs, request quantities and saved contributions are unchanged. Retired stock-step
+records remain saved history and no longer gate unfinished suits.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
 locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
@@ -22,8 +26,8 @@ one crowbar or bat for Ballast, one sledgehammer for Cleaner, and one FUBar for 
 contact difficulty multipliers. Existing rooms/upgrades remain saved and usable. Haggler's gunpowder barters are removed.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 
-All 638 active milestones have individual authored `briefing` and `completion` replies in their
-contact definitions, including the 223 stock-preparation deliveries. Read each contact's existing
+All 627 active milestones have individual authored `briefing` and `completion` replies in their
+contact definitions, including the 212 stock-preparation deliveries. Read each contact's existing
 profile and bound conversation before editing its voice. The current requirements, catalogue and
 benefits determine what a reply can promise; the older story tables and retired commissions do not.
 Requests leave assigned item names/counts to the existing objective display so valid saved deliveries
@@ -47,8 +51,9 @@ route and return for any capacity upgrades later.
 Spool's Russian tank helmet and Latch's cloth mask start in vendor stock; their old purchase steps are retired.
 Spool owns strong drugs. Quartermaster retains six regular ammunition barters; his two main-menu kit exchanges
 are removed. Suture's conversion milestones explicitly say "variants". Old Timer/Spool/Latch/Wake declare
-`preserveProgression = true` so the authoring tool retains their ordering, request tuning and stock stages. Technut keeps painting and all ordinary
-suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
+`preserveProgression = true` so the authoring tool retains their ordering, request tuning and stock stages.
+Technut also declares it to preserve the suit route without regenerating stock intermissions.
+Technut keeps painting and all ordinary suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
 conversion menu and per-suit non-looted finishes. Intern owns artifact detectors. Brass/Carbon provide
 HP/AP barter only, gated by regular/HP completions respectively. Starter stock is explicitly declared.
 Ballast, Cleaner and Ledger buy all at 0.3 and provide twelve local hideout improvement stages.

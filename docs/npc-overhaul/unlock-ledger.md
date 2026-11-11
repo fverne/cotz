@@ -4,8 +4,8 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**638 active steps; 638 have functional unlocks; 0 have TODO-only unlock plans;
-19 have multiple assigned unlocks; 0 have no assigned unlock.**
+**627 active steps; 627 have functional unlocks; 0 have TODO-only unlock plans;
+18 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
 Medicine retains family branches; Jitters gates antirads, Asenapine/Modafines and stimpaks after medkits 2, 4 and 6. Listed starter supplies are available immediately.
@@ -46,7 +46,7 @@ Validation passed.
 | spool | 15 | 15 | 0 | 0 |
 | spoor | 21 | 21 | 0 | 0 |
 | suture | 37 | 37 | 0 | 13 |
-| technut | 26 | 26 | 0 | 2 |
+| technut | 15 | 15 | 0 | 1 |
 | the-original | 0 | 0 | 0 | 0 |
 | vesper | 31 | 31 | 0 | 0 |
 | wake | 38 | 38 | 0 | 0 |
@@ -632,28 +632,17 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | suture | v3/suit-variants/suit_skat9 | Conversion: suit_skat9_anarchist; Conversion: suit_skat9_authority; Conversion: suit_skat9_ecologist; Conversion: suit_skat9_fanatic; Conversion: suit_skat9_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_anorak | Stock: suit_anorak +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_mailjacket | Purchase: suit_mailjacket | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_trenchcoat_black/stock | Stock: suit_mailjacket +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_trenchcoat_black | Purchase: suit_trenchcoat_black; Purchase: suit_trenchcoat_brown; Purchase: suit_trenchcoat_green; Purchase: suit_trenchcoat_tan | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_sunrise/stock | Stock: suit_trenchcoat_black +1 total; Stock: suit_trenchcoat_brown +1 total; Stock: suit_trenchcoat_green +1 total; Stock: suit_trenchcoat_tan +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_sunrise | Purchase: suit_sunrise | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_io7a/stock | Stock: suit_sunrise +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_io7a | Purchase: suit_io7a | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_cs1 | Purchase: suit_cs1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_wind/stock | Stock: suit_cs1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_wind | Purchase: suit_wind | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_ps5m/stock | Stock: suit_wind +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_ps5m | Purchase: suit_ps5m | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_cs2/stock | Stock: suit_ps5m +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_cs2 | Purchase: suit_cs2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_nbc/stock | Stock: suit_cs2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_nbc | Purchase: suit_nbc | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_berill/stock | Stock: suit_nbc +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_berill | Purchase: suit_berill | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_cs3/stock | Stock: suit_berill +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_cs3 | Purchase: suit_cs3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_skat10/stock | Stock: suit_cs3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_skat10 | Purchase: suit_skat10 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_skat9/stock | Stock: suit_skat10 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_skat9 | Purchase: suit_skat9 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/painting/painting | Suit painting | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | vesper | v3/pact-rifles/saigasemi545 | Purchase: saigasemi545 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |

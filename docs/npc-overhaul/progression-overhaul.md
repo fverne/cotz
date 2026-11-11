@@ -1,7 +1,7 @@
 # Town progression overhaul, 9 November 2026
 
-This replaces the former 600-milestone town graph with 638 hand-in milestones across 52
-branches, including 223 stock-preparation intermissions. The authored `upgradeChains` in
+This replaces the former 600-milestone town graph with 627 hand-in milestones across 52
+branches, including 212 stock-preparation intermissions. The authored `upgradeChains` in
 `sh_equipment.lua` now include Cutlery before Cleaning kit; all other equipment and `regularAmmoChain` ordering is retained. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
 introduction or joined ending. The Original and Arena Master retain no finite progression.
@@ -86,7 +86,11 @@ Main deliveries retain their base quantities `1`, `2/1`, `3/2/1` or `4/3/2/1`. C
 once, rounding upward; Ledger uses 3×. Branches are optional, so the catalogue total is not one playthrough.
 
 From the third original unlock onward, stock preparation precedes repeated requirement patterns and
-three-/four-slot requests where the previous milestone has eligible shop stock. Intern, Egghead and
+three-/four-slot requests where the previous milestone has eligible shop stock, except at Technut.
+Technut's eleven intermediate `/stock` steps are retired; suits require the preceding suit directly.
+His initial anorak stock step, painting branch, suit IDs, request quantities and saved contributions remain.
+Retired stock-step records remain saved history. `preserveProgression = true` prevents authoring-tool
+regeneration of these intermissions. Intern, Egghead and
 Beanstalk have preparation between every equipment tier. A preparation delivery requests half the next
 milestone's base units, rounded upward with minimum one, before applying contact difficulty once.
 Its reward increases personal capacity for the previous purchase group, including grouped equipment.
@@ -197,14 +201,14 @@ upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or 
 ## Authoring and regression checks
 
 Each active step owns its authored `briefing` and `completion` in the contact definition, including
-stock intermissions. All 638 pairs are individually written against the contact's profile and current
+stock intermissions. All 627 pairs are individually written against the contact's profile and current
 benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
 conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
 Keep exact assigned items and quantities in the generated objective display rather than hard-coding
 them into speech, since valid saved requests can differ from newly rolled requests.
 
 The expansion tool retains existing stock-step text by stable ID when rebuilding requirements. New
-intermissions start with the following unlock's text and need their own replies. Verify all 638 pairs
+intermissions start with the following unlock's text and need their own replies. Verify all 627 pairs
 and their compiled fields with `luatex --luaonly tests/progression_dialogue_spec.lua`; the Python
 expansion suite also checks that regeneration preserves distinct stock conversations. Editorial review
 of voice, continuity and promises is still required; uniqueness checks cannot assess writing quality.
