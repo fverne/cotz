@@ -43,11 +43,19 @@ Protection uses the condition at the start of the hit, before filter wear and th
 Safe-zone damage blocking, corpse protection and `unlimitedDurability` preserve filter condition.
 Radiation no longer wears ordinary durability on filter-dependent headgear. Other headgear wear remains.
 
-Unequip the equipment and return it to the main backpack before changing filters. **Remove Filter**
-requires a free backpack cell and returns a matching cartridge at its remaining condition, including
-0%. **Install Filter** lists matching cartridges in the main backpack with their condition. The socket
-must be empty. A fresh cartridge restores 100% filter condition without repairing the headgear.
-Removed filters can be reinstalled; repairs cannot recharge them.
+Drag a matching cartridge from the main backpack onto a mask in the backpack or onto its equipped
+card or icon, including any linked helmet/backpack card for integrated equipment. The mask can stay
+equipped. Its **Install Filter** context-menu action also lists matching backpack cartridges.
+Installing or replacing a filter takes six seconds through the existing black-screen action bar;
+press **F** to cancel. Both cartridges stay unchanged until completion, apart from normal exposure
+wear on the installed one. The old filter continues providing its current protection during the delay.
+
+Replacing an installed cartridge returns it in the incoming cartridge's backpack cell, retaining
+its actual remaining condition at completion. This works with a full backpack. Installing into an
+empty socket consumes the loose cartridge only when the action completes successfully.
+**Remove Filter** also works while equipped, requires a free backpack cell and returns a matching
+cartridge at its remaining condition, including 0%. A fresh cartridge restores 100% filter condition
+without repairing the headgear. Removed filters can be reinstalled; repairs cannot recharge them.
 
 Tooltips show the required filter and its percentage or **No filter**. Backpack icons have a teal
 filter bar above ordinary durability; equipment cards show ordinary durability above the filter bar.
@@ -62,12 +70,19 @@ New equipment includes a full matching cartridge. Loose cartridges save their ow
 creation preserves supplied partial or zero condition. Empty and depleted states survive reconnects,
 server restarts and transfers. There is no database reset or bulk migration.
 
-Server actions validate current character, ownership, life state, backpack placement, equipment
-transitions, exact filter compatibility and submitted IDs. Changes have a 0.5-second server cooldown.
+Server actions validate current character, ownership, life state, backpack/equipment placement,
+equipment transitions, exact filter compatibility and submitted IDs. Changes have a 0.5-second
+server cooldown. During installation, the mask and loose cartridge cannot be used or transferred;
+moving either within the inventory cancels the operation. A bounded monitor releases locks after
+cancellation, death, character changes or invalidated state, and disconnect cleanup interrupts the
+shared action before the player entity disappears. Completion rechecks ownership, position, equipped
+state and interaction permissions before swapping condition or consuming an incoming cartridge.
+Cancelled or rejected installations leave both items intact and can be retried.
+
 Removal creates an unplaced item through `ix.item.Instance`, because this bundled Helix's
 `Inventory:Add(string)` returns before its database callback completes. The callback revalidates state
 and available space before placing the item and emptying the socket. Until then, the equipment cannot
-be used, transferred or equipped. Failures retain the installed filter and delete uncommitted output.
+be used, transferred, equipped or unequipped. Failures retain the installed filter and delete uncommitted output.
 A 15-second timeout releases the lock; late callbacks delete their output without emptying the socket.
 Placement counts the returning cartridge's existing carried mass only once, including at the carry limit.
 
@@ -91,5 +106,7 @@ compatibility, percentage taper, moderate exposure lifetimes, fully blocked radi
 ordinary combat durability and all exemptions. Check actions and bars on ordinary masks and linked
 helmet slots, including Screen. Reconnect, restart and transfer between identically configured servers
 with partial, empty and exhausted filters. Try repeated and foreign requests, full backpacks, a
-backpack filled during creation, death or character switching during creation, and normal carry limits.
+backpack filled during removal, death or character switching during installation/removal, and normal carry limits.
+Check equipped and unequipped drag/drop, full-backpack replacement, the complete six-second delay,
+F cancellation just before completion, permission changes, repeated requests and filter wear during the delay.
 Inspect tooltips and both condition bars at narrow, 1080p, ultrawide and 4K resolutions.

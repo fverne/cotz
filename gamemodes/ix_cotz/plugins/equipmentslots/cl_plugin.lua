@@ -207,6 +207,9 @@ function PANEL:AddEquipmentIcon(card, item, index)
 			PLUGIN:SendEquipmentAction(item, index, false, x, y)
 		end
 	end
+	icon:Receiver("ixInventoryItem", function(_, panels, dropped)
+		PLUGIN:ReceiveEquipmentDrop(card, index, panels, dropped)
+	end)
 	card.icon = icon
 end
 
@@ -260,6 +263,23 @@ function PANEL:OpenHotkeys()
 	menu:Open()
 end
 
+function PLUGIN:ReceiveEquipmentDrop(card, index, panels, dropped)
+	local icon = panels[1]
+	if not dropped or not IsValid(icon) then return end
+	local item = icon:GetItemTable()
+	if not item then return end
+	if not item.isGasmaskFilter then self:SendEquipmentAction(item, index, true) return end
+	if not ix.util.CanInstallGasmaskFilter(card.item, item, LocalPlayer()) then return end
+	if (self.nextFilterAction or 0) > RealTime() then return end
+	self.nextFilterAction = RealTime() + 0.5
+	net.Start("ixInventoryAction")
+		net.WriteString("combine")
+		net.WriteUInt(item.id, 32)
+		net.WriteUInt(item.invID, 32)
+		net.WriteTable({card.item.id})
+	net.SendToServer()
+end
+
 function PANEL:Rebuild(inventory)
 	self.inventoryID = inventory:GetID()
 	self.content:Clear()
@@ -281,12 +301,10 @@ function PANEL:Rebuild(inventory)
 		card.DoClick = function() self:ChooseSlotItem(index) end
 		card.item = occupied[index]
 		card.Paint = paintCard
-		card:Receiver("ixInventoryItem", function(_, panels, dropped)
-			local icon = panels[1]
-			if not dropped or not IsValid(icon) then return end
-			local item = icon:GetItemTable()
-			if item then PLUGIN:SendEquipmentAction(item, index, true) end
-		end)
+		local receiveDrop = function(_, panels, dropped)
+			PLUGIN:ReceiveEquipmentDrop(card, index, panels, dropped)
+		end
+		card:Receiver("ixInventoryItem", receiveDrop)
 		card.label = card:Add("DLabel")
 		card.label:SetText(card.item and card.item.isPDA and "PDA - RETURN TO BACKPACK" or string.upper(slot.name))
 		card.label:SetTextColor(COLORS.text)

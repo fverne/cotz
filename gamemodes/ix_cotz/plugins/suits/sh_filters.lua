@@ -26,16 +26,28 @@ local function inMainBackpack(item, inventory)
 end
 
 function ix.util.CanChangeGasmaskFilter(item, client, pending)
-	if not item.isGasmask or not item.filterType or IsValid(item.entity) then return false end
-	if item:GetData("equip") or (item.cotzFilterPending and not pending) then return false end
+	if not item or not item.isGasmask or not item.filterType or IsValid(item.entity) then return false end
+	if item.cotzFilterPending and not pending then return false end
 	if not IsValid(client) or not client:Alive() then return false end
 	local character = client:GetCharacter()
-	if not character or not inMainBackpack(item, character:GetInventory()) then return false end
+	if not character then return false end
+	local inventory = character:GetInventory()
+	if item.invID ~= inventory:GetID() or inventory:GetItemByID(item.id, true) ~= item then return false end
+	if not item:GetData("equip") and not inMainBackpack(item, inventory) then return false end
 	local equipment = ix.plugin.list.equipmentslots
 	if SERVER and equipment and equipment:GetPending(client) then return false end
-	if client:GetNetVar("ix_hasBlackScreen", false) then return false end
+	if not pending and (client.cotzFilterAction or client:GetNetVar("ix_hasBlackScreen", false)) then return false end
 
 	return true
+end
+
+function ix.util.CanInstallGasmaskFilter(item, filter, client, pending)
+	if not ix.util.CanChangeGasmaskFilter(item, client, pending) then return false end
+	if not filter or not filter.isGasmaskFilter or filter.filterType ~= item.filterType then return false end
+	if IsValid(filter.entity) or filter:GetData("equip") then return false end
+	if filter.cotzFilterPending and not pending then return false end
+
+	return inMainBackpack(filter, client:GetCharacter():GetInventory())
 end
 
 function ix.util.GetGasmaskFilterOptions(item, client)
@@ -43,8 +55,9 @@ function ix.util.GetGasmaskFilterOptions(item, client)
 	if not ix.util.CanChangeGasmaskFilter(item, client) then return options end
 	local inventory = client:GetCharacter():GetInventory()
 	for _, filter in pairs(inventory:GetItems(true)) do
-		if filter.isGasmaskFilter and filter.filterType == item.filterType and inMainBackpack(filter, inventory) then
-			local label = string.format("%s (%d%%)", filter:GetName(), filter:GetData("filterCondition", FULL_CONDITION))
+		if ix.util.CanInstallGasmaskFilter(item, filter, client) then
+			local condition = math.floor(filter:GetData("filterCondition", FULL_CONDITION))
+			local label = string.format("%s (%d%%)", filter:GetName(), condition)
 			options[#options + 1] = {name = label:gsub("%%", "%%%%"), data = {filter.id}}
 		end
 	end

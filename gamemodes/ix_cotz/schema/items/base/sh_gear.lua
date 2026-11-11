@@ -175,7 +175,7 @@ ITEM.functions.InstallFilter = {
 		return ix.util.GetGasmaskFilterOptions(item, client)
 	end,
 	OnCanRun = function(item)
-		return ix.util.CanChangeGasmaskFilter(item, item.player) and item:GetFilterCondition() == false
+		return ix.util.CanChangeGasmaskFilter(item, item.player)
 	end,
 	OnRun = function(item, data)
 		ix.util.InstallGasmaskFilter(item, item.player, data)

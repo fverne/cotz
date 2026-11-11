@@ -85,7 +85,7 @@ local function instantiate(definition, data)
 	return item
 end
 
-ITEM = {}
+ITEM = {functions = {}}
 dofile("gamemodes/ix_cotz/plugins/suits/items/base/sh_gasmaskfilters.lua")
 local filterBase = ITEM
 for _, tier in ipairs({"civilian", "military", "scientific"}) do
@@ -202,7 +202,33 @@ local function completeCreation()
 	return output
 end
 local function advance(seconds)
-	now = now + (seconds or 1)
+	local finish = now + (seconds or 1)
+	while true do
+		local nextIndex
+		for index, entry in ipairs(timers) do
+			if entry.time <= finish and (not nextIndex or entry.time < timers[nextIndex].time) then nextIndex = index end
+		end
+		if not nextIndex then break end
+		local entry = table.remove(timers, nextIndex)
+		now = entry.time
+		entry.callback()
+	end
+	now = finish
+end
+
+function ix.util.PlayerPerformBlackScreenAction(player, text, duration, callback)
+	player.busy, player.actionDuration = true, duration
+	player.actionGeneration = (player.actionGeneration or 0) + 1
+	local generation = player.actionGeneration
+	timer.Simple(duration, function()
+		if not player.busy or player.actionGeneration ~= generation then return end
+		player.busy = false
+		callback(player)
+	end)
+end
+function ix.util.PlayerActionInterrupt(player)
+	player.busy = false
+	player.actionGeneration = (player.actionGeneration or 0) + 1
 end
 
 local mask = newMask()
@@ -285,17 +311,31 @@ check(highMask:GetFilterCondition() == false, "reject lower tier substitution")
 advance()
 civilian.failRemove = true
 ix.util.InstallGasmaskFilter(mask, client, {civilian.id})
+advance(6)
 check(mask:GetFilterCondition() == false, "failed consumption cannot install a filter")
 civilian.failRemove = nil
 advance()
 ix.util.InstallGasmaskFilter(mask, client, {civilian.id})
+check(mask:GetFilterCondition() == false and ix.item.instances[civilian.id] and client.actionDuration == 6,
+	"installation starts a six-second action without consuming the cartridge")
+advance(5)
+check(mask:GetFilterCondition() == false and ix.item.instances[civilian.id], "installation cannot finish early")
+advance(1)
 check(mask:GetFilterCondition() == 37 and not ix.item.instances[civilian.id],
 	"installation consumes one partial cartridge")
 check(mask.data.durability == 100, "installation preserves ordinary durability")
 advance()
 local fullFilter = newFilter("civilian", 100)
 ix.util.InstallGasmaskFilter(mask, client, {fullFilter.id})
-check(mask:GetFilterCondition() == 37 and ix.item.instances[fullFilter.id], "cannot overwrite an installed cartridge")
+check(mask:GetFilterCondition() == 37 and fullFilter:GetData("filterCondition") == 100,
+	"replacement preserves both cartridges until the action finishes")
+advance(6)
+check(mask:GetFilterCondition() == 100 and fullFilter:GetData("filterCondition") == 37,
+	"replacement returns the old cartridge in the incoming filter's cell")
+ix.util.InstallGasmaskFilter(mask, client, {fullFilter.id})
+advance(6)
+check(mask:GetFilterCondition() == 37 and fullFilter:GetData("filterCondition") == 100,
+	"swapping partial cartridges back preserves both conditions")
 
 inventory.full = true
 advance()
@@ -320,6 +360,7 @@ check(returned.data.filterCondition == 37 and returned.filterType == "civilian" 
 near(returned:GetWeight() + mask:GetWeight(), 0.8, "removal conserves total mass")
 advance()
 ix.util.InstallGasmaskFilter(mask, client, {returned.id})
+advance(6)
 check(mask:GetFilterCondition() == 37, "reinstalling cannot refresh condition")
 
 local function failedRemoval(setup, reset, label)
@@ -343,7 +384,6 @@ failedRemoval(function() mask.invID = 999 end, function() mask.invID = inventory
 advance()
 ix.util.RemoveGasmaskFilter(mask, client)
 advance(16)
-for _, entry in ipairs(timers) do if entry.time <= now then entry.callback() end end
 check(not mask.cotzFilterPending and mask:GetFilterCondition() == 37, "timeout releases lock and keeps filter")
 local late = completeCreation()
 check(not ix.item.instances[late.id] and mask:GetFilterCondition() == 37, "late completion cannot duplicate a filter")
@@ -355,7 +395,7 @@ for _, field in ipairs({"alive", "busy"}) do
 	client[field] = original
 end
 mask.data.equip = true
-check(not ix.util.CanChangeGasmaskFilter(mask, client), "must unequip first")
+check(ix.util.CanChangeGasmaskFilter(mask, client), "equipped owned masks allow filter changes")
 mask.data.equip = false
 mask.gridX = 32
 check(not ix.util.CanChangeGasmaskFilter(mask, client), "reserved equipment cells are not backpack space")
@@ -368,12 +408,138 @@ ix.util.InstallGasmaskFilter(mask, client, {foreign.id})
 check(mask:GetFilterCondition() == false and ix.item.instances[foreign.id], "foreign item IDs are rejected")
 advance()
 ix.util.InstallGasmaskFilter(mask, client, {fullFilter.id})
+advance(6)
 check(mask:GetFilterCondition() == 100, "fresh replacement restores full filter condition")
 mask.data.filterCondition = 0
 advance()
 ix.util.RemoveGasmaskFilter(mask, client)
 local spent = completeCreation()
 check(spent.data.filterCondition == 0 and mask:GetFilterCondition() == false, "exhausted cartridge is removable")
+
+for _, tier in ipairs({"civilian", "military", "scientific"}) do
+	local worn = newMask(tier, 37)
+	local replacement = newFilter(tier, 100)
+	worn.data.equip, worn.gridX, worn.data.durability = true, 32, 40
+	replacement.player = client
+	check(filterBase.functions.combine.OnCanRun(replacement, {worn.id}),
+		"drag-and-drop accepts an equipped mask with a matching filter: " .. tier)
+	inventory.full = true
+	advance()
+	check(filterBase.functions.combine.OnRun(replacement, {worn.id}) == false,
+		"combine preserves the incoming cartridge while installation is pending")
+	check(worn:GetFilterCondition() == 37 and replacement:GetData("filterCondition") == 100,
+		"equipped replacement is not immediate")
+	check(filterPlugin:CanTransferItem(replacement) == false
+		and filterPlugin:CanPlayerUnequipItem(client, worn) == false,
+		"both the spare and equipped mask are locked throughout installation")
+	advance(3)
+	ix.util.DamageGasmaskFilters(client, damage(120, DMG_RADIATION))
+	local oldCondition = worn:GetFilterCondition()
+	advance(3)
+	check(worn:GetFilterCondition() == 100 and replacement:GetData("filterCondition") == oldCondition,
+		"equipped replacement returns the actual old condition after exposure during installation")
+	check(worn.data.equip == true and worn.gridX == 32 and worn.data.durability == 40,
+		"filter replacement preserves equipment placement, ordinary durability and equipped state")
+	near(worn:GetWeight() + replacement:GetWeight(), 1, "full-backpack swap conserves both cartridge masses")
+	check(#creations == 0 and not worn.cotzFilterPending and not replacement.cotzFilterPending,
+		"occupied sockets swap in the existing cell without an asynchronous inventory insert")
+	inventory.full, worn.data.equip, replacement.player = false, false, nil
+end
+
+local timedMask = newMask("civilian", 37)
+local timedFilter = newFilter("civilian", 100)
+advance()
+ix.util.InstallGasmaskFilter(timedMask, client, {timedFilter.id})
+advance(2)
+ix.util.PlayerActionInterrupt(client)
+advance(0.2)
+check(not timedMask.cotzFilterPending and not timedFilter.cotzFilterPending and not client.cotzFilterAction,
+	"cancelling releases both items and the player action")
+check(timedMask:GetFilterCondition() == 37 and timedFilter:GetData("filterCondition") == 100,
+	"cancelling leaves both cartridge conditions unchanged")
+advance(5)
+check(timedMask:GetFilterCondition() == 37, "a cancelled timer cannot later complete the installation")
+
+advance()
+ix.util.InstallGasmaskFilter(timedMask, client, {timedFilter.id})
+filterPlugin:PlayerDisconnected(client)
+check(not client.busy and not client.cotzFilterAction and not timedFilter.cotzFilterPending,
+	"disconnect hook cancels the shared action before the player entity becomes invalid")
+advance(6)
+check(timedMask:GetFilterCondition() == 37, "disconnected installation cannot complete later")
+
+local function interruptedInstall(setup, reset, label)
+	advance()
+	ix.util.InstallGasmaskFilter(timedMask, client, {timedFilter.id})
+	check(client.cotzFilterAction ~= nil, label .. " begins")
+	setup()
+	advance(0.2)
+	reset()
+	check(not timedMask.cotzFilterPending and not timedFilter.cotzFilterPending and not client.cotzFilterAction,
+		label .. " releases all locks")
+	advance(6)
+	check(timedMask:GetFilterCondition() == 37 and timedFilter:GetData("filterCondition") == 100,
+		label .. " leaves both items unchanged")
+end
+interruptedInstall(function() client.alive = false end, function() client.alive = true end, "death during installation")
+interruptedInstall(function() client.character = {} end, function() client.character = character end,
+	"character switch during installation")
+interruptedInstall(function() client.invalid = true end, function() client.invalid = nil end,
+	"disconnect during installation")
+interruptedInstall(function() timedMask.invID = 999 end, function() timedMask.invID = inventory.id end,
+	"mask ownership changed during installation")
+interruptedInstall(function() timedFilter.invID = 999 end, function() timedFilter.invID = inventory.id end,
+	"filter ownership changed during installation")
+interruptedInstall(function() timedFilter.gridX = 2 end, function() timedFilter.gridX = 1 end,
+	"filter moved inside the backpack during installation")
+interruptedInstall(function() timedMask.gridY = 2 end, function() timedMask.gridY = 1 end,
+	"mask moved inside the backpack during installation")
+interruptedInstall(function() timedMask.data.equip = true end, function() timedMask.data.equip = false end,
+	"equipment state changed during installation")
+interruptedInstall(function() timedFilter.filterType = "scientific" end,
+	function() timedFilter.filterType = "civilian" end, "compatibility changed during installation")
+interruptedInstall(function() ix.item.instances[timedFilter.id] = nil end,
+	function() ix.item.instances[timedFilter.id] = timedFilter end, "incoming filter removed during installation")
+
+for _, event in ipairs({"CanPlayerInteractItem", "CanPlayerCombineItem"}) do
+	advance()
+	ix.util.InstallGasmaskFilter(timedMask, client, {timedFilter.id})
+	advance(3)
+	veto = event
+	advance(3)
+	veto = nil
+	check(timedMask:GetFilterCondition() == 37 and timedFilter:GetData("filterCondition") == 100,
+		"installation rechecks permission at completion: " .. event)
+	check(not client.cotzFilterAction, "a rejected completion releases the player action")
+end
+
+advance()
+ix.util.InstallGasmaskFilter(timedMask, client, {timedFilter.id})
+local pending = client.cotzFilterAction
+advance()
+ix.util.InstallGasmaskFilter(timedMask, client, {timedFilter.id})
+ix.util.InstallGasmaskFilter(mask, client, {fullFilter.id})
+check(client.cotzFilterAction == pending and timedMask.cotzFilterPending == pending,
+	"repeated requests cannot replace an in-flight installation or use another mask")
+advance(5)
+check(timedMask:GetFilterCondition() == 100 and timedFilter:GetData("filterCondition") == 37,
+	"a cancelled or rejected installation can subsequently be retried")
+
+timedMask.data.equip, timedMask.gridX = true, 32
+advance()
+ix.util.RemoveGasmaskFilter(timedMask, client)
+ix.util.DamageGasmaskFilters(client, damage(120, DMG_RADIATION))
+local removedCondition = timedMask:GetFilterCondition()
+local removedWhileWorn = completeCreation()
+check(timedMask:GetFilterCondition() == false and timedMask.data.equip
+	and removedWhileWorn:GetData("filterCondition") == removedCondition,
+	"removal from an equipped mask returns its condition at completion without recharging")
+removedWhileWorn.player = client
+check(not filterBase.functions.combine.OnCanRun(removedWhileWorn, {})
+	and not filterBase.functions.combine.OnCanRun(removedWhileWorn, {"invalid"}),
+	"malformed combine targets are rejected")
+check(not filterBase.functions.combine.OnCanRun(removedWhileWorn, {scientific.id}),
+	"filters cannot combine into unrelated items")
 
 -- Exercise the actual radiation hook: protection is read before wear, then direct health damage is cleared.
 PLUGIN = {}

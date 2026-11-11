@@ -44,6 +44,10 @@ card bars show durability above wear when both exist, or a single bar for knife
 sharpness, durability, or wear. Ordinary backpack icons keep their existing overlays.
 Filter-dependent headgear instead shows ordinary durability above a teal filter condition bar.
 Tooltips identify its required cartridge and remaining condition; see the [filter guide](../suits/README.md).
+Drag a matching filter from the backpack onto an equipped mask's card or icon to replace its cartridge.
+Installation takes six seconds and can be cancelled with F. The old cartridge returns to the incoming
+filter's cell, so a full backpack can still swap filters. Filter actions also work through the equipped
+item's context menu; the mask stays equipped.
 Section headers use the same plain label and thin divider as the bottom protection header.
 Equipment icons use the existing `ix.util.GetItemIcon` material cache, including
 its `img` priority, rather than rebuilding spawn icons when the menu opens.
