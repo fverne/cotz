@@ -25,6 +25,11 @@ A successful roll adds the damage amount to severity (maximum 100). Blocked and 
 Every second, severity causes `severity * bleedingDamageScale` HP loss (default 0.04), with fractional HP
 accumulated until whole damage can be applied. Severity then falls by `bleedingClotRate` (default 1).
 Damage is world-attributed generic damage and can kill through normal death/revive handling.
+Bleeding hits preserve the player's existing view-punch angles and velocity, suppressing the additional
+damage punch without clearing weapon recoil. Bleeding pain sounds have a separate five-second cooldown,
+starting only when a sound plays; ordinary damage retains Helix's normal pain-sound timing. Blocked hits
+do not start the cooldown. The cooldown survives clotting or treatment but resets on character restore,
+death, character switching and disconnect; it is not saved across sessions.
 The HUD shows rounded-up severity in a heart icon, transitioning from yellow to red (255, 0, 0) at maximum severity. Settings are in Helix's Bleeding configuration category.
 
 `ix.plugin.Get("buffs")` exposes server methods `GetBleeding(client)`, `AddBleeding(client, amount)` and
@@ -49,6 +54,8 @@ armor and blocked hits, HUD/resolution changes, self/target bandages and cancell
 character switching, reconnect, and actual cross-server save/transfer. Check timed healing and damage,
 remaining HUD durations, and restored jump, sprint, psyblock, and suppression effects; verify bonuses
 apply once after equipment loadout and clear on expiry, death, and character switches.
+Verify bleeding adds no view punch while firing, pain sounds occur at most once per five seconds,
+and ordinary combat still causes normal recoil and pain sounds during the bleeding cooldown.
 
 At defaults, severity 25/50/100 produces 1/2/4 HP per second before protection.
 A severity-100 bleed clots in 100 seconds without further hits. Existing explicit server configuration

@@ -92,7 +92,9 @@ local function hit(damageType, amount, attacker)
 	ix.util.DamageHeadgear(client, info)
 end
 
-for _, damageType in ipairs({DMG_BULLET, DMG_SLASH, DMG_CLUB, DMG_CRUSH}) do hit(damageType, 100) end
+for _, damageType in ipairs({DMG_BULLET, DMG_SLASH, DMG_CLUB, DMG_GENERIC}) do
+	hit(damageType, 100, client)
+end
 check(helmet.data.durability == 99 and mask.data.durability == 99, "Combat wears helmets and masks slowly")
 check(combined.data.durability == 99, "Combined headgear wears once per hit")
 check(suit.data.durability == 100 and backpack.data.durability == 100, "Other equipment is unaffected")
@@ -199,11 +201,12 @@ client.getEquippedBodyArmor = function() return suit end
 items = {helmet, suit}
 client.GetNWFloat = function() return 0.2 end
 client.GetNWInt = function() return 10 end
-for _, damageType in ipairs({DMG_BULLET, DMG_SLASH, DMG_BURN, DMG_ACID}) do
+for _, damageType in ipairs({DMG_BULLET, DMG_SLASH, DMG_BURN, DMG_ACID, DMG_CRUSH, DMG_BLAST}) do
 	helmet.data.durability = 100
 	suit.data.durability = 100
 	local damage = overrideDamage(damageType)
 	suitsPlugin:EntityTakeDamage(client, damage)
+	check(damage.value == 18, "Percentage and flat resistance apply to damage type: " .. damageType)
 	local headgearWear = 100 - helmet.data.durability
 	local suitWear = 100 - suit.data.durability
 	local ratio = (damageType == DMG_BULLET or damageType == DMG_SLASH) and 0.25 or 0.5

@@ -78,7 +78,14 @@ function ENT:StartTouch(ent)
 	timer.Create("voronka_activated"..self:EntIndex(), 2.0, 1, function()
 		if not IsValid(self) then return end
 		ParticleEffect( "voronka_blast", self:GetPos(), Angle( 0, 0, 0 ) )
-		util.BlastDamage( self, self, self:GetPos(), 120, 150)
+		local damageOrigin = self:GetPos()
+		local damageInfo = DamageInfo()
+		damageInfo:SetDamage(150)
+		damageInfo:SetDamageType(DMG_CRUSH)
+		damageInfo:SetAttacker(self)
+		damageInfo:SetInflictor(self)
+		damageInfo:SetDamagePosition(damageOrigin)
+		util.BlastDamageInfo(damageInfo, damageOrigin, 120)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			ent:Remove()
 		end

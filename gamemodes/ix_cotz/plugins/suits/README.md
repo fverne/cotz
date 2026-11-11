@@ -30,6 +30,9 @@ weight describes the equipment without its cartridge. See the [town progression 
 
 ## Protection and use
 
+Anomaly resistance covers burn, shock, acid, blast, crush, drowning, poison, nerve gas and slow burn.
+Crush damage uses environmental headgear wear, including gravitational anomalies and physics impacts.
+
 A filter has 0–100% condition. Effectiveness is `clamp(condition / 80, 0, 1)`: full at 80–100%, then
 linear below 80%. The headgear's percentage and flat radiation protection multiply its ordinary
 durability scale by this filter scale. Other resistances, independent attachments, artifacts and

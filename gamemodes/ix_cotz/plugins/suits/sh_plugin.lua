@@ -95,6 +95,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 	anomtypes[DMG_BURN] = true
 	anomtypes[DMG_ACID] = true
 	anomtypes[DMG_BLAST] = true
+	anomtypes[DMG_CRUSH] = true
 	anomtypes[DMG_DROWN] = true
 	anomtypes[DMG_POISON] = true
 	anomtypes[DMG_NERVEGAS] = true

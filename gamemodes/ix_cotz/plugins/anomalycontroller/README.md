@@ -2,7 +2,25 @@
 
 The controller owns field placement and artifact spawning. The ten field anomaly classes live in
 `lua/entities/`; their client definitions include `lua/cotz/anomalies/cl_idle.lua` into their existing
-`ENT` tables. Class IDs, bases, field density, damage, cooldowns and artifact settings are unchanged.
+`ENT` tables. Class IDs, bases, field density, damage amounts, cooldowns and artifact settings are unchanged.
+
+## Damage types
+
+| Field anomaly | Damage type |
+| --- | --- |
+| Burner / Burner 2 (steam) | `DMG_BURN` |
+| Electro / Electro 2 | `DMG_SHOCK` |
+| Bubble / Bubble 2 | `DMG_CRUSH` |
+| Whirlgig / Karusel | `DMG_CRUSH` |
+| Fruitpunch / Fruitpunch 2 | `DMG_ACID` |
+
+Red Razor and passive anomaly damage also use `DMG_ACID`. Whirlgig and Karusel use
+`util.BlastDamageInfo` with crush damage, retaining their radial damage amounts, origins and radii.
+Burners, Fruitpunch and Bubble no longer use generic damage, so anomaly resistance now applies to
+their hits. Crush damage is included in suit anomaly resistance and environmental headgear wear;
+this classification also applies to other crush damage, including physics impacts.
+
+## Client effects
 
 The existing `lua/autorun/stalker_anomaly_particles.lua` entry point distributes the helper and
 handles client PVS transitions. It uses an explicit engine hook because these resource entities can
@@ -26,9 +44,12 @@ Run from the repository root:
 ```sh
 luatex --luaonly tests/anomaly_client_spec.lua
 luatex --luaonly tests/anomaly_performance_spec.lua
+luatex --luaonly tests/anomaly_damage_spec.lua
+luatex --luaonly tests/headgear_durability_spec.lua
 ```
 
-These mock checks cover lifecycle and scheduling, not rendering performance. In multiplayer:
+These mock checks cover lifecycle, scheduling, damage callbacks and resistance, not rendering performance.
+In multiplayer:
 
 1. Compare client frame time from the same position looking at a dense field, with lights enabled
    and disabled. Compare idle and activated states separately.
@@ -40,5 +61,7 @@ These mock checks cover lifecycle and scheduling, not rendering performance. In 
    burner/steam idle recovery after their 11-second effect cleanup. Damage and artifacts must still work.
 5. Remove awake entities and repeat entry/exit several times; check for lingering particles, lights,
    sounds or Lua errors. Compare frame times before and after under the same field population.
+6. Trigger each field type with and without anomaly protection. Verify burn, shock, acid and crush
+   damage, suit/headgear wear, and Whirlgig/Karusel range, obstruction and falloff behavior.
 
 The detector has its own [scan policy and checks](../anomalydetector/README.md).
