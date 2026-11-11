@@ -14,8 +14,10 @@ The town service labels are included in benefit summaries; optional `plannedUnlo
 
 Paid repairs at Technut and Boss use `2 * round(missingCondition * price^(1/3))` for suits,
 masks, helmets and repairable weapons. Weapons read `wear`; suits and headgear read `durability`.
-Earned discounts apply after this base calculation. At 0% condition, a cloth mask costs 2,000 RU
-and a standard anorak costs 3,768 RU before discounts. Legacy `repairCost` item fields do not
+Standalone masks and helmets cost one third of this amount, rounded to the nearest whole RU.
+Headgear with both flags receives the reduction once; body armor with integrated headgear keeps suit pricing.
+Earned discounts apply after this base calculation and headgear reduction. At 0% condition, a cloth mask
+costs 667 RU and a standard anorak costs 3,768 RU before discounts. Legacy `repairCost` item fields do not
 control these fees; each repairable base supplies its rate through `GetRepairCost()`.
 
 Progression is a top-level menu tab beside Tasks, using contact cards and the shared

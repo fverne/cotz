@@ -4,6 +4,7 @@ local CREDIT_KEY = "progressionServiceCredits"
 local QUOTE_LIFETIME = 60
 local MAX_DISCOUNT = 0.15
 local REPAIR_COST_MULTIPLIER = 2
+local HEADGEAR_REPAIR_COST_DIVISOR = 3
 local SERVICE_CONTACTS = {
 	repair = { ["'Technut'"] = true, ["'Boss'"] = true },
 	treatment = { ["'Jitters'"] = true, ["'Arena Master'"] = true },
@@ -90,6 +91,9 @@ local function repairOffer(client, data)
 	end
 
 	local baseCost = math.max(0, math.Round(missing * item:GetRepairCost())) * REPAIR_COST_MULTIPLIER
+	if not item.isBodyArmor and (item.isHelmet or item.isGasmask) then
+		baseCost = math.Round(baseCost / HEADGEAR_REPAIR_COST_DIVISOR)
+	end
 
 	return {item = item, field = field, baseCost = baseCost}
 end

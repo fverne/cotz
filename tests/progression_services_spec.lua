@@ -152,6 +152,29 @@ for _, baseName in ipairs({"suit", "gear", "newweapons"}) do
 	end
 end
 
+for _, equipment in ipairs({
+	{name = "mask", isGasmask = true},
+	{name = "helmet", isHelmet = true},
+	{name = "combined headgear", isGasmask = true, isHelmet = true},
+	{name = "sealed suit", isGasmask = true, isHelmet = true, isBodyArmor = true},
+}) do
+	local character = actor()
+	local item = repairItem(character, 1, false)
+	item.isGasmask, item.isHelmet, item.isBodyArmor = equipment.isGasmask, equipment.isHelmet, equipment.isBodyArmor
+	item.price = 1000
+	item.GetRepairCost = loadRepairCost(equipment.isBodyArmor and "suit" or "gear")
+	for _, condition in ipairs({0, 50}) do
+		item.data.durability = condition
+		local expected = equipment.isBodyArmor and (condition == 0 and 2000 or 1000)
+			or (condition == 0 and 667 or 333)
+		for _, provider in ipairs({tech, vendor("'Boss'")}) do
+			local offer = ix.progression.BuildServiceOffer(character.client, provider, "repair", {itemid = 1})
+			check(offer and offer.baseCost == expected and offer.cost == expected,
+				equipment.name .. " has the intended repair fee at " .. condition .. "%")
+		end
+	end
+end
+
 local first, second = actor(), actor()
 local firstItem, secondItem = repairItem(first, 11, true), repairItem(second, 22, true)
 local credit = {services = {{npc = "'Technut'", service = "repair", amount = 100}}}
@@ -313,6 +336,19 @@ ix.progression.SetCompleted(discountCharacter, "repairDiscount")
 local discountedRepair = ix.progression.BuildServiceOffer(discountCharacter.client, tech, "repair", {itemid = 44})
 check(discountedRepair.baseCost == 600 and discountedRepair.cost == 570,
 	"earned repair discount applies after doubling the base price")
+local maskItem = repairItem(discountCharacter, 45, false)
+maskItem.isBodyArmor, maskItem.isGasmask = false, true
+maskItem.price = 1000
+maskItem.GetRepairCost = loadRepairCost("gear")
+maskItem.data.durability = 0
+local discountedMask = ix.progression.BuildServiceOffer(discountCharacter.client, tech, "repair", {itemid = 45})
+check(discountedMask.baseCost == 667 and discountedMask.cost == 634,
+	"earned discount applies after reducing headgear repair costs to one third")
+ix.progression.ConfirmService({}, discountCharacter.client, tech, "repair", {itemid = 45, cost = 634})
+local maskMoney = discountCharacter.money
+check(ix.progression.ExecuteService(discountCharacter.client, tech, "repair", true)
+	and maskItem.data.durability == 100 and discountCharacter.money == maskMoney - 634,
+	"headgear repair restores condition and charges the reduced discounted fee")
 local restored = actor()
 restored.data = copy(first.data)
 restored.vars = copy(first.vars)
