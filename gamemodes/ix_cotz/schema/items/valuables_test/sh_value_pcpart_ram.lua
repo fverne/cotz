@@ -5,7 +5,7 @@ ITEM.valuableCategory = "computer parts"
 
 ITEM.model = "models/cotz/eft/barter/electr_ram.mdl"
 
-ITEM.price = 1800
+ITEM.price = 360
 ITEM.width = 1
 ITEM.height = 1
 ITEM.flatweight = 0
