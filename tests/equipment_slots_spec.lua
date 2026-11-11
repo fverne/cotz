@@ -520,4 +520,37 @@ check(inventory:CanItemFit(1, 7, 1, 1), "Newly earned rows accept ordinary items
 ix.townNPCs = oldTown
 ix.char.loaded[inventory.owner] = nil
 inventory.owner = previousOwner
+
+loadMethod(inventoryPath, "function META:GetSize(", {META = inventoryMeta, ix = ix})
+check(inventory:GetSize() == 63, "Reloading Helix exposes the reserved storage width before reinstalling compatibility")
+plugin:InitializedPlugins()
+check(inventory:GetSize() == 8, "Plugin reinitialization restores backpack width after Helix reloads GetSize")
+local wrappers = {
+	GetSize = inventoryMeta.GetSize, CanItemFit = inventoryMeta.CanItemFit,
+	FindEmptySlot = inventoryMeta.FindEmptySlot, Add = inventoryMeta.Add,
+}
+plugin:OnReloaded()
+plugin:OnReloaded()
+for name, callback in pairs(wrappers) do
+	check(inventoryMeta[name] == callback, "Repeated refreshes retain the existing " .. name .. " wrapper")
+end
+for _, name in ipairs({"GetSize", "CanItemFit", "FindEmptySlot"}) do
+	loadMethod(inventoryPath, "function META:" .. name .. "(", {META = inventoryMeta, ix = ix})
+end
+local addCalls = 0
+function inventoryMeta:Add() addCalls = addCalls + 1 return "refreshed-add" end
+plugin:OnReloaded()
+check(inventory:GetSize() == 8, "The refresh hook restores logical dimensions without changing physical storage")
+check(inventory.w == 63 and inventory.vars.cotzEquipmentWidth == 8,
+	"Restoring wrappers preserves storage dimensions and saved backpack configuration")
+check(not inventory:CanItemFit(32, 1, 1, 1), "Refreshed fitting still rejects equipment storage cells")
+check(inventory:Add(positioned.id, 1, nil, 32, 1) == false and addCalls == 0,
+	"Refreshed Add cannot bypass reserved-cell protection")
+check(inventory:Add(positioned.id, 1, nil, 3, 3) == "refreshed-add" and addCalls == 1,
+	"Normal adds call the refreshed implementation exactly once")
+local fittingInventory = newInventory(200, 1, 1)
+plugin:ConfigureInventory(fittingInventory)
+fittingInventory.slots[1] = {[1] = {id = 999}}
+check(not fittingInventory:FindEmptySlot(1, 1, true), "Refreshed slot searches cannot overflow a full backpack")
+check(foreignInventory:GetSize() == 3, "Container dimensions still use the refreshed original implementation")
 print("Equipment slots: " .. checks .. " checks passed")

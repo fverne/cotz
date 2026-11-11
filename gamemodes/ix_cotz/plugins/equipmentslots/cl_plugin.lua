@@ -518,10 +518,9 @@ function PLUGIN:InstallInventoryPanels()
 		end
 		wrappers.StorageOnRemove = storage.OnRemove
 	end
-end
 
-function PLUGIN:OnReloaded()
-	self:InstallInventoryPanels()
+	local frame = ix.gui.menuInventoryFrame
+	if IsValid(frame) then self:AttachInventoryEquipment(frame) end
 end
 
 function PLUGIN:RefreshInventoryPanel(panel, inventory)

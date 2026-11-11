@@ -11,7 +11,15 @@ local plugin = PLUGIN
 local methods = {}
 local timers = {}
 local callbacks = {}
-local clientInventory = {vars = {cotzEquipmentWidth = 8}, GetID = function() return 1 end}
+local inventoryMethods = {
+	GetSize = function(self) return self.w, self.h end,
+	CanItemFit = function() return true end,
+	FindEmptySlot = function() return 1, 1 end,
+}
+local clientInventory = setmetatable({
+	w = 63, h = 32, vars = {cotzEquipmentWidth = 8, cotzEquipmentHeight = 6},
+	GetID = function() return 1 end,
+}, {__index = inventoryMethods})
 local storageData = {}
 local classes = {
 	ixInventory = {AddIcon = function() return "original icon" end},
@@ -63,6 +71,7 @@ end
 
 local environment = {
 	PLUGIN = plugin, PANEL = methods, RIGHT = "right",
+	CLIENT = true, SERVER = false,
 	IsValid = function(value) return type(value) == "table" and not value.removed end,
 	ScrW = function() return 1600 end, ScrH = function() return 900 end,
 	LocalPlayer = function()
@@ -74,24 +83,38 @@ local environment = {
 		GetControlTable = function(name) return classes[name] end,
 		Create = function(name) return panel(nil, name) end,
 	},
-	ix = {gui = {}, item = {inventories = {[1] = clientInventory, [2] = storageData}}},
+	ix = {
+		gui = {}, item = {inventories = {[1] = clientInventory, [2] = storageData}},
+		meta = {inventory = inventoryMethods}, char = {loaded = {}},
+	},
 	setBounds = function(target, bounds) target:SetPos(bounds.x, bounds.y) target:SetSize(bounds.w, bounds.h) end,
 }
 local sourceFile = assert(io.open("gamemodes/ix_cotz/plugins/equipmentslots/cl_plugin.lua"))
 local source = sourceFile:read("*a")
 sourceFile:close()
-local function loadMethod(signature)
-	local first = assert(source:find(signature, 1, true))
-	local last = assert(source:find("\nend", first, true)) + 3
-	assert(load(source:sub(first, last), "@equipment/client", "t", setmetatable(environment, {__index = _G})))()
+local function loadMethod(signature, path)
+	local methodSource = source
+	if path then
+		local file = assert(io.open(path))
+		methodSource = file:read("*a")
+		file:close()
+	end
+	local first = assert(methodSource:find(signature, 1, true))
+	local last = assert(methodSource:find("\nend", first, true)) + 3
+	assert(load(methodSource:sub(first, last), "@equipment/client", "t",
+		setmetatable(environment, {__index = _G})))()
 end
 for _, signature in ipairs({
 	"function PANEL:UpdatePageLayout()", "function PANEL:LayoutCompanion()",
 	"function PLUGIN:AttachInventoryEquipment(", "function PLUGIN:RaiseInventoryEquipment(",
 	"function PLUGIN:InstallInventoryPanels()",
-	"function PLUGIN:OnReloaded()", "function PANEL:LayoutCard(",
+	"function PANEL:LayoutCard(",
 	"function PLUGIN:OnScreenSizeChanged()",
 }) do loadMethod(signature) end
+for _, signature in ipairs({
+	"function PLUGIN:InstallInventoryCompatibility()", "function PLUGIN:InitializedPlugins()",
+	"function PLUGIN:OnReloaded()",
+}) do loadMethod(signature, "gamemodes/ix_cotz/plugins/equipmentslots/sh_plugin.lua") end
 
 function plugin:CreateEquipmentFonts() end
 local refreshStart = assert(source:find("net.Receive(\"cotz/equipment/refresh\"", 1, true))
@@ -112,7 +135,7 @@ function plugin:RefreshInventoryPanel(grid, data)
 		grid.refreshes = (grid.refreshes or 0) + 1
 	end
 end
-plugin:InstallInventoryPanels()
+plugin:InitializedPlugins()
 local function runDeferred()
 	local queued = timers
 	timers = {}
@@ -252,4 +275,28 @@ missingGridInventory.cotzEquipmentInventoryGrid = {GetIconSize = function() retu
 methods.LayoutCard(missingGridEquipment, card, bounds, 1, 4)
 check(card.icon.width == 96 and card.icon.height == 48,
 	"Card layout tolerates absent/removed grids and uses the restored grid's icon size")
+
+inventoryMethods.GetSize = function(self) return self.w, self.h end
+check(clientInventory:GetSize() == 63, "A full client refresh overwrites the logical backpack dimensions")
+plugin:OnReloaded()
+local reopenedInventory = inventoryPanel(youPage)
+reopenedInventory:SetWide(clientInventory:GetSize() * 48)
+runDeferred()
+check(clientInventory:GetSize() == 8 and reopenedInventory.cotzEquipmentPanel.width > 0,
+	"Client refresh restores normal backpack width so equipment receives visible space when reopened")
+
+local populatedPage = panel(nil, "ixSubpanel")
+populatedPage.subpanelName = "you"
+populatedPage.bPopulated = true
+local existingFrame = panel(populatedPage, "ixStalkerInventoryPanel")
+existingFrame:Add("ixInventory")
+populatedPage.children = {existingFrame}
+environment.ix.gui.menuInventoryFrame = existingFrame
+plugin:OnReloaded()
+local attached = existingFrame.cotzEquipmentPanel
+check(attached and plugin.equipmentViews[attached],
+	"Refresh attaches missing equipment to an already populated You page without replaying creation hooks")
+plugin:OnReloaded()
+check(existingFrame.cotzEquipmentPanel == attached,
+	"Restoring an existing You page repeatedly creates only one equipment view")
 print("Equipment views: " .. checks .. " checks passed")

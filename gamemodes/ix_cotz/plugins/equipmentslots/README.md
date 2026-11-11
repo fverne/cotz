@@ -73,11 +73,12 @@ remains visible in its slot; the × button returns it when backpack space is ava
 
 ## Storage and compatibility
 
-The plugin installs runtime wrappers after `InitializedPlugins` and restores replaced panel callbacks
-on Lua refresh without wrapping unchanged callbacks again. Open equipment views remain tracked across
-refresh, and frames missing their grid reference recover it from their own child panels.
-Device power actions
-live in their owning item definitions. The schema inventory drag preview uses the
+The plugin installs runtime wrappers after `InitializedPlugins` and restores replaced inventory methods
+and panel callbacks on Lua refresh without stacking wrappers. Restoring `GetSize()` keeps reserved
+equipment columns out of the visible backpack, so they cannot expand it across the equipment panel.
+Refresh also attaches missing equipment to an already populated You page. Open equipment views remain
+tracked across refresh, and frames missing their grid reference recover it from their own child panels.
+Device power actions live in their owning item definitions. The schema inventory drag preview uses the
 destination grid's cell size for its footprint; equipment icon controls fit their
 actual item image so the dragged panel no longer includes an oversized card area.
 No bundled Helix files are modified.
@@ -161,7 +162,8 @@ luatex --luaonly tests/helix_upgrade_spec.lua
 The equipment spec exercises the plugin with bundled inventory enumeration,
 fitting searches, removal, and the bundled item-action dispatcher plus mocked
 Garry's Mod networking, timers, and database calls. It does not establish runtime
-VGUI or multiplayer correctness.
+VGUI or multiplayer correctness. It also reloads the bundled inventory methods and verifies wrapper
+restoration, logical backpack dimensions, reserved-cell restrictions, and delegation to refreshed methods.
 The layout spec checks slot/header/footer bounds and overlap at 1024×768, 1280×720,
 1366×768, 1600×900, 1920×1080, 2560×1440, 3440×1440, and 3840×2160, with inventory
 scales of 0.8, 1, and 1.25 and with/without journal space. These geometry checks do
@@ -169,7 +171,8 @@ not verify engine docking, font rendering, tooltips, or drag/drop in a live clie
 The view spec covers deferred menu attachment, duplicate prevention, storage and
 standalone exclusion, independent view cleanup, refresh, and resolution changes. It also covers
 re-registering individual panel definitions, repeated Lua refresh hooks, surviving views, missing grid
-recovery, and card layout while a grid is unavailable.
+recovery, and card layout while a grid is unavailable. Full client inventory-method refresh must leave
+visible equipment space when reopening You, and an existing populated You page must regain missing equipment.
 The admin spec covers access, stale targets, membership, space, pending actions,
 unequip requests, failed transfers, and repeated takes. The power spec checks
 saved/default power, rate limits, ownership, equipped state, and effect flags.
