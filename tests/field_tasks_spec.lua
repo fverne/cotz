@@ -83,7 +83,7 @@ ents = {Create = function(class)
 	function entity:GetClass() return self.class end
 	function entity:SetHealth(health) self.health = health end
 	function entity:Health() return self.health end
-	function entity:DropToFloor() end
+	function entity:DropToFloor() self.droppedToFloor = true end
 	function entity:SetEnemy(enemy) self.enemy = enemy end
 	function entity:GetEnemy() return self.enemy end
 	function entity:UpdateEnemyMemory() end
@@ -665,8 +665,19 @@ check(
 	"defence is hidden without the population manager"
 )
 local populationBlocked, spawnBlocked, checkedQueued, enforcedRegistration = false, false, false, false
+local placementBlocked, placedPosition, placementOrigin = false
 local registered = {}
 ix.eventController = {
+	GetSpawnLocation = function(_, position)
+		placementOrigin = position
+		if placementBlocked then return end
+		placedPosition = position + Vector(64, 0, 2)
+
+		return placedPosition
+	end,
+	UpdateCombatSchedule = function(_, npc)
+		npc.destination = npc.cotzCombatObjective:GetPos()
+	end,
 	CreateCombatPack = function(_, origin, isolated) return {origin = origin, isolated = isolated} end,
 	CanSpawnMutant = function(_, _, includeQueued)
 		checkedQueued = includeQueued
@@ -747,11 +758,23 @@ update(client, character)
 check(#livingAttackers() == 0 and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
 	"capacity-limited waves cannot be silently completed")
 populationBlocked = false
+placementBlocked = true
+update(client, character)
+check(#livingAttackers() == 0 and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
+	"unsafe encounter placement keeps research attackers pending")
+placementBlocked = false
 update(client, character)
 check(#livingAttackers() == 2, "research attackers respect the shared per-tick spawn budget")
 check(checkedQueued and enforcedRegistration, "attacker creation checks queued capacity and enforces registration limits")
 local attackingNPC = livingAttackers()[1]
-check(attackingNPC:GetEnemy() == client, "attackers engage the assigned defender")
+check(attackingNPC:GetPos():DistToSqr(placedPosition) == 0
+	and placementOrigin:DistToSqr(ix.jobs.field.Unpack(job.fieldTask.defence.spawnPoints[1])) == 0,
+	"research uses encounter placement around its saved approaches")
+check(not attackingNPC.droppedToFloor, "validated placement is not moved again by DropToFloor")
+check(not attackingNPC:GetEnemy() and attackingNPC.cotzCombatObjective == entity
+	and attackingNPC.cotzCombatObjectiveRadius == job.fieldTask.defence.threatRadius
+	and attackingNPC.destination == entity:GetPos(),
+	"attackers initially advance on the sampler without player targets")
 local health = entity:Health()
 ix.jobs.field.DefenceDamage(
 	entity,
@@ -769,6 +792,15 @@ health = character.jobs.Contact.fieldTask.defence.health
 attackingNPC.hidden = false
 update(client, character)
 check(character.jobs.Contact.fieldTask.defence.health < health, "visible nearby mutants disrupt the sampler")
+health = character.jobs.Contact.fieldTask.defence.health
+attackingNPC:SetEnemy(client)
+update(client, character)
+check(character.jobs.Contact.fieldTask.defence.health == health,
+	"attackers fighting a player stop disrupting the sampler")
+attackingNPC:SetEnemy(nil)
+update(client, character)
+check(character.jobs.Contact.fieldTask.defence.health < health,
+	"losing the combat target resumes sampler disruption")
 check(character.jobs.Contact.fieldTask.stage == "defending", "elapsed recording time cannot bypass uncleared waves")
 attackingNPC:Remove()
 update(client, character)

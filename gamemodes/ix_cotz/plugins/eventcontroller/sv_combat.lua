@@ -130,6 +130,7 @@ function PLUGIN:RemoveCombatActor(entity)
 	entity.cotzRelations, entity.cotzOriginalRelations = nil, nil
 	entity.cotzCombatEnemy, entity.cotzCombatScheduleDirty = nil, nil
 	entity.cotzPursuitScheduled, entity.cotzNextPursuit = nil, nil
+	entity.cotzCombatObjective, entity.cotzCombatObjectiveRadius = nil, nil
 end
 
 function PLUGIN:RegisterCombatActor(entity, pack)
@@ -322,10 +323,20 @@ function PLUGIN:UpdateCombatSchedule(actor)
 		actor.cotzCombatScheduleDirty, actor.cotzPursuitScheduled, actor.cotzNextPursuit = nil, nil, nil
 	end
 	local focus = self:GetCombatPlayerFocus(actor)
-	if not focus or actor.cotzPlayerVisible ~= false or actor:GetEnemy() ~= focus then return end
+	local destination, arrivalRadius, objective
+	if focus and actor.cotzPlayerVisible == false and actor:GetEnemy() == focus then
+		-- Use the observed position, never the hidden player's current position, for pursuit.
+		destination, arrivalRadius = actor.cotzPlayerPosition, PURSUIT_ARRIVAL
+	elseif not IsValid(actor:GetEnemy()) and IsValid(actor.cotzCombatObjective) then
+		-- Task devices are props, so idle mutants approach them without making them combat enemies.
+		objective = actor.cotzCombatObjective
+		destination = objective:GetPos()
+		arrivalRadius = actor.cotzCombatObjectiveRadius or PURSUIT_ARRIVAL
+	else
+		return
+	end
 
-	-- Use the observed position, never the hidden player's current position, for pursuit.
-	if actor:GetPos():DistToSqr(actor.cotzPlayerPosition) <= PURSUIT_ARRIVAL ^ 2 then
+	if actor:GetPos():DistToSqr(destination) <= arrivalRadius ^ 2 and (not objective or actor:Visible(objective)) then
 		if actor.cotzPursuitScheduled then actor:ClearSchedule() end
 		actor.cotzPursuitScheduled = nil
 		return true
@@ -333,7 +344,7 @@ function PLUGIN:UpdateCombatSchedule(actor)
 	if CurTime() >= (actor.cotzNextPursuit or 0) then
 		actor.cotzNextPursuit = CurTime() + PURSUIT_RETRY
 		if not actor.cotzPursuitScheduled or not actor:IsCurrentSchedule(SCHED_FORCED_GO_RUN) then
-			actor:SetLastPosition(actor.cotzPlayerPosition)
+			actor:SetLastPosition(destination)
 			actor:SetSchedule(SCHED_FORCED_GO_RUN)
 			actor.cotzPursuitScheduled = true
 		end

@@ -58,8 +58,9 @@ the node candidates and ordinary floor checks fail. Fully rejected encounters do
 
 Routine queued mutants recheck clearance immediately before creation, so another queued NPC or a
 new blocker cannot occupy the same placement unnoticed. Population limits, player exclusion and pack
-ownership remain in effect. Existing event points and saves need no migration. Advanced event dupes,
-scripted advanced-event spawns and research-defence placement retain their own behavior.
+ownership remain in effect. Existing event points and saves need no migration. Advanced event dupes
+and scripted advanced-event spawns retain their own behavior. Research-defence attackers use
+this placement service around their saved approaches, retaining task-owned spawning and population checks.
 
 Psydog phantoms and controller zombies use the same placement service through the NPC base's
 server-only `sv_summoning.lua`. Each owner declares a 256-unit `summonSpawnRadius`; node selection
@@ -162,6 +163,17 @@ Routine encounters and advanced events share one session-only pack identity per 
 including queued mutants. Summoned creatures inherit their summoner's pack. Manual spawns get
 singleton packs. Each research-defence wave has an isolated pack and retains its task-owned lifecycle.
 Pack identities and feuds are not persisted or added to character data.
+
+Research attackers carry their sampler as `cotzCombatObjective`, with `cotzCombatObjectiveRadius`
+set to the task's disruption radius. When idle they run toward it and hold within visible disruption
+range. This uses the same schedule handling as remembered pursuit, so normal mutant schedule selection
+does not replace the approach with wandering. Visible or remembered enemies take priority; player
+acquisition and retaliation remain unchanged. Target loss resumes the objective. Cleanup clears the
+objective reference along with ordinary pursuit state.
+
+For research defence, verify attacks on the sampler before player contact, interruption by sight or
+incoming fire, and return to the device after player contact expires. Check near-wall approaches and
+that fighting a player pauses proximity disruption. Run the field-task suite alongside the combat suite.
 
 Mutant packmates and separate packs of the same species stay friendly. Every 30 seconds, staggered
 by pack, awake predators can hunt nearby visible herbivores/rodents with a 50% chance; otherwise

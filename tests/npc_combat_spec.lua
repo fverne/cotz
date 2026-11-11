@@ -507,6 +507,71 @@ local function loadEntityMethod(path, method)
 
 	return ENT[method]
 end
+
+do
+	fixture.Reset()
+	local researcher = actor("npc_mutant_dog", 0, manager:CreateCombatPack(Vector(0), true))
+	local sampler = {GetPos = function() return Vector(1000) end}
+	local defender = targetPlayer(300)
+	defender.hidden = true
+	fixture.SetPlayers({defender})
+	researcher.cotzCombatObjective, researcher.cotzCombatObjectiveRadius = sampler, 160
+	manager:FindCombatEnemy(researcher, 1500, 90, true)
+	local selectSchedule = loadEntityMethod("lua/entities/stalker_ai/schedules.lua", "SelectSchedule")
+	selectSchedule(researcher)
+	check(not researcher.enemy and researcher.destination.x == 1000
+		and researcher.schedule == SCHED_FORCED_GO_RUN,
+		"research attackers approach the device through real schedule selection without knowing hidden players")
+	local scheduleCalls = researcher.scheduleCalls
+	advance(2)
+	selectSchedule(researcher)
+	check(researcher.scheduleCalls == scheduleCalls, "device pursuit does not restart an active path every update")
+	researcher.position = Vector(900)
+	selectSchedule(researcher)
+	check(not researcher.schedule and not researcher.cotzPursuitScheduled,
+		"attackers stop inside the visible device's disruption radius instead of wandering or overlapping it")
+	sampler.hidden = true
+	advance(1)
+	selectSchedule(researcher)
+	check(researcher.schedule == SCHED_FORCED_GO_RUN,
+		"a wall inside the disruption radius cannot make an attacker stop approaching the device")
+	sampler.hidden, researcher.position, defender.hidden = false, Vector(0), false
+	advance(1)
+	manager:FindCombatEnemy(researcher, 1500, 90, true)
+	check(researcher.enemy == defender, "seeing a defender replaces device pursuit with player combat")
+	check(manager:UpdateCombatSchedule(researcher) == nil and not researcher.schedule,
+		"visible player combat releases the device movement schedule")
+	defender.hidden, defender.position = true, Vector(-900)
+	advance(0.3)
+	manager:ValidateCombatEnemy(researcher)
+	manager:UpdateCombatSchedule(researcher)
+	check(researcher.destination.x == 300,
+		"player pursuit retains last contact instead of returning to the device early")
+	advance(11)
+	manager:ValidateCombatEnemy(researcher)
+	selectSchedule(researcher)
+	check(not IsValid(researcher.enemy) and researcher.destination.x == 1000,
+		"expired player contact returns research attackers to the device")
+	manager:RetaliateCombatActor(researcher, defender)
+	manager:UpdateCombatSchedule(researcher)
+	check(researcher.enemy == defender and researcher.destination.x == -900,
+		"being shot by an unseen player behind the attacker interrupts device pursuit")
+	researcher.PlayingAnimation = true
+	defender.health = 0
+	manager:ValidateCombatEnemy(researcher)
+	scheduleCalls = researcher.scheduleCalls
+	manager:UpdateCombatSchedule(researcher)
+	check(researcher.scheduleCalls == scheduleCalls, "returning to the device cannot interrupt attack recovery")
+	researcher.PlayingAnimation = false
+	manager:UpdateCombatSchedule(researcher)
+	check(researcher.destination.x == 1000, "player death releases the attacker back to the device")
+	sampler.invalid = true
+	check(manager:UpdateCombatSchedule(researcher) == nil, "removed devices stop owning movement schedules")
+	manager:RemoveCombatActor(researcher)
+	check(not researcher.cotzCombatObjective and not researcher.cotzCombatObjectiveRadius,
+		"actor cleanup releases device references")
+end
+
 fixture.Reset()
 local recoveringMutant = actor("npc_mutant_dog", 0)
 local recoveryPlayer = targetPlayer(500)

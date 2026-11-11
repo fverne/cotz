@@ -346,10 +346,11 @@ No new map spawn-point definitions or per-assignment staff setup are required.
 - **Research defence:** start the sampler at the assigned site through the PDA. Stay
   within 768 units, clear the waves and complete 90 seconds of defended recording, then
   collect the 1x2, 0.5 kg results recorder and return it. The sampler has 250 health.
-  Visible encounter mutants within 160 units disrupt it for 8 damage per mutant per
-  second. Its own attackers can also damage it directly; unrelated players cannot.
-  Bundled mutant AI targets defenders, so proximity disruption supplies the equipment
-  threat without changing the NPC framework. Easy jobs have two small waves; medium
+  Attackers advance on the sampler and, when visible and within 160 units, disrupt it
+  for 8 damage per mutant per second. Seeing a player or taking damage from one switches
+  their attention to player combat and pauses their disruption. After losing player contact,
+  they resume attacking the sampler. Its own attackers can also damage it directly;
+  unrelated players cannot. Easy jobs have two small waves; medium
   and hard jobs have three waves with tougher configured compositions.
 
 Open **Field work** on an accepted job in the PDA task list for directions, readings
@@ -411,9 +412,12 @@ delivery remains complete after the parcel is consumed or the character reconnec
 
 Research defence configures sampler `sources` and `attackSources` separately. Both
 default to `rf`, reusing event points. A site needs at least one approach 512–4,096
-units away and within 256 vertical units. Up to eight approaches are saved; models
-and NPC hulls are checked for ground/clearance at runtime. Attack points occupied by
-nearby players are skipped. Existing point data cannot guarantee navigable NPC paths;
+units away and within 256 vertical units. Up to eight approaches are saved. Attackers use
+the event controller's shared placement service around those approaches: connected ground
+nodes within its 750-unit spawn radius are preferred, with the same validated floor/clearance
+fallback when graph candidates are unavailable or blocked. The validated position is used
+directly without another `DropToFloor`. Positions occupied by nearby players are skipped;
+unsafe or population-limited spawns remain pending. Existing point data cannot guarantee navigable NPC paths;
 verify representative sites in-game, especially buildings and underground areas.
 Wave class lists and counts, health, recording duration, disruption, radius and retry
 parameters live in `field.settings.defence`. Wave compositions are rolled once on
@@ -428,6 +432,12 @@ these bounded encounters create and register their own NPCs to track kills and c
 The existing jobsystem kill listener forwards deaths without changing dispatch order or
 ordinary kill credit. Removing an NPC without a death event does not clear its wave;
 the missing attacker is replaced subject to the same spawn/cap checks.
+
+Research attackers remain awake in isolated packs. Their sampler is a movement objective,
+not a combat enemy: the NPC base cannot melee props, so the existing proximity disruption
+damages it on arrival. Ordinary visible-player acquisition and damage retaliation take priority.
+Player pursuit retains the combat system's ten-second last-contact memory; losing that contact
+or the player's death resumes the sampler approach. Movement respects attack recovery and `ai_disabled`.
 
 Defence recording advances only while the assigned character is alive and near the
 sampler. Leaving, dying, changing characters, disconnecting or restarting the server
