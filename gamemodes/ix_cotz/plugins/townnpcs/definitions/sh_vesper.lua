@@ -141,7 +141,13 @@ PLUGIN:Register("vesper", {
 	},
 	progressionIdentity = {
 		name = "Expedition instruments and field preparation",
-		core = {"valuables_instruments", "valuables_survey_equipment", "field_maintenance"},
+		core = {
+			"valuables_instruments",
+			"valuables_survey_equipment",
+			"field_maintenance",
+			"valuables_equipment_pouches",
+			"valuables_cutting_tools",
+		},
 		support = {"valuables_sample_carriers", "valuables_equipment_pouches"},
 	},
 
@@ -155,7 +161,7 @@ PLUGIN:Register("vesper", {
 			briefing = "The 5.45 Saiga is the first rifle arrangement. Bring the expedition supplies listed here and I can make it available to buy. I enjoy the point where a trip is still a plan and everything seems to fit. The actual packing is usually less elegant, so read the whole order before volunteering.",
 			completion = "The 5.45 Saiga is open for purchase. Good to have the real delivery match the plan.",
 			requirements = {
-				{pool = "town_expansion_77f938d099ae", quantity = 1, mode = "any"},
+				{pool = "town_expansion_409e675b1118", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 17,
@@ -172,7 +178,7 @@ PLUGIN:Register("vesper", {
 			briefing = "The other Saiga has a separate purchase request. This one uses the list below; don't let the matching name do the reading for you. I've persuaded myself something was familiar often enough to know how much work that can cause later.",
 			completion = "The second Saiga purchase route is open. This delivery is accounted for separately.",
 			requirements = {
-				{pool = "town_expansion_659c6ec753e7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_f4d04381205b", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 17,
@@ -189,7 +195,7 @@ PLUGIN:Register("vesper", {
 			briefing = "I'd like the reserve for that Saiga increased before the AKs-74u. Bring this smaller order and the stock capacity rises. An allowance isn't an immediate gun, however neatly it fits the trip you were imagining.",
 			completion = "Your Saiga reserve capacity is larger. Stock still needs its ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_659c6ec753e7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_f4d04381205b", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"saigasemi"},
@@ -211,7 +217,7 @@ PLUGIN:Register("vesper", {
 			briefing = "For the AKs-74u, complete this expedition-supply request. I can be interested in a compact rifle without turning it into the answer to every outing. Get the order back here, then decide if it's what you want to buy.",
 			completion = "AKs-74u purchase access is ready. The supplies have all made it home.",
 			requirements = {
-				{pool = "town_expansion_659c6ec753e7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_f4d04381205b", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 17,
@@ -228,7 +234,7 @@ PLUGIN:Register("vesper", {
 			briefing = "This request increases the AKs-74u reserve. Bring the listed materials; I like keeping the equipment someone already chose available while we discuss the next thing. The refill itself stays normal.",
 			completion = "Your AKs-74u stock allowance is increased. The shelf still has to receive the guns.",
 			requirements = {
-				{pool = "town_expansion_659c6ec753e7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_f4d04381205b", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"aks74u"},
@@ -250,7 +256,7 @@ PLUGIN:Register("vesper", {
 			briefing = "The SKS is next on the purchase list. Bring these supplies back here. Sometimes the best equipment conversation is somebody having a look, deciding what they think, and getting a chance to finish saying it before a third opinion arrives.",
 			completion = "The SKS is available to purchase. I'll leave you room for your own opinion first.",
 			requirements = {
-				{pool = "town_expansion_659c6ec753e7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_f4d04381205b", quantity = 1, mode = "any"},
 			},
 			branchIndex = 4,
 			branchLength = 17,
@@ -267,7 +273,7 @@ PLUGIN:Register("vesper", {
 			briefing = "Before the AK74, there's an SKS reserve order. These supplies raise stock capacity for it. I know the next rifle is more interesting to discuss, but the ordinary reserve still deserves getting home.",
 			completion = "SKS stock capacity increased. Normal refill, a little more room in the allowance.",
 			requirements = {
-				{pool = "town_expansion_659c6ec753e7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a823fcf29a01", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sks"},
@@ -289,7 +295,7 @@ PLUGIN:Register("vesper", {
 			briefing = "The AK74 purchase arrangement uses this delivery. I'm not asking you to agree with everyone who likes the rifle. Bring the full supply request and you'll be able to consider it on your own terms.",
 			completion = "AK74 purchase access is open. The delivery is settled without the equipment debate.",
 			requirements = {
-				{pool = "town_expansion_ddeffeb73aaa", quantity = 1, mode = "random"},
+				{pool = "town_expansion_97ae0fe853de", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 17,
@@ -306,7 +312,7 @@ PLUGIN:Register("vesper", {
 			briefing = "I'd like more capacity for the AK74 before the AN-94. This smaller order does that. It doesn't refill anything immediately, so check the sale stock before choosing the moment for your next purchase.",
 			completion = "Your AK74 allowance is larger. Actual availability still follows the usual refill.",
 			requirements = {
-				{pool = "town_expansion_659c6ec753e7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a823fcf29a01", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"ak74"},
@@ -328,7 +334,7 @@ PLUGIN:Register("vesper", {
 			briefing = "For the AN-94, bring this expedition order. People arrive eager to explain what they've heard about it. I'd rather let you read the request and see whether the arrangement suits you before adding another voice.",
 			completion = "The AN-94 is available to buy. All supplies received; now there is time to look.",
 			requirements = {
-				{pool = "town_expansion_8822f7a90f08", quantity = 1, mode = "random"},
+				{pool = "town_expansion_df78f75b1497", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 17,
@@ -345,8 +351,8 @@ PLUGIN:Register("vesper", {
 			briefing = "The AKM has a purchase request of its own. Bring what's listed here. A choice of rifles is useful even if you never end up buying every one; nobody needs to arrange a lifetime of expeditions in a single conversation.",
 			completion = "AKM purchase access is ready. You can make the buying decision when it fits your plans.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a36dd2f48f95", quantity = 1, mode = "random"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_72c916d0abcb", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 17,
@@ -363,8 +369,8 @@ PLUGIN:Register("vesper", {
 			briefing = "This order increases the AKM reserve before the AEK. Bring the whole smaller list. I appreciate a return with the agreed supplies, even when it lacks the exciting detour somebody wanted to tell me about.",
 			completion = "Your AKM stock capacity is larger. A useful result, with normal refill afterwards.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 1, mode = "any"},
-				{pool = "town_expansion_70501b6c691d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 1, mode = "any"},
+				{pool = "town_expansion_05132b8d0238", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"akm"},
@@ -386,8 +392,8 @@ PLUGIN:Register("vesper", {
 			briefing = "For the AEK-971, complete this delivery. I like the anticipation of a new piece of kit, but I try to remember there are still supplies to bring back before the interesting comparison on the table.",
 			completion = "AEK-971 purchase access is open. We've reached the part where you can compare instead of promise.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a36dd2f48f95", quantity = 1, mode = "random"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e8bd5202b929", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 17,
@@ -404,8 +410,8 @@ PLUGIN:Register("vesper", {
 			briefing = "The AEK reserve needs these materials. Completing the order raises its capacity. I can enjoy discussing the next rifle without deciding the one already available has become uninteresting.",
 			completion = "Your AEK stock allowance is increased. It will refill through the usual arrangement.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 1, mode = "any"},
-				{pool = "town_expansion_7f149830f8d0", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 1, mode = "any"},
+				{pool = "town_expansion_51ebdbd40920", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"aek971"},
@@ -427,8 +433,8 @@ PLUGIN:Register("vesper", {
 			briefing = "The AK-12 comes through this expedition-supply request. Read all the entries before deciding what you can manage. I have a talent for planning another look at somewhere while the pack is already being closed; you're allowed to finish one order at a time.",
 			completion = "AK-12 purchase access is ready. That's this order finished, without an extra excursion attached.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_9f1deadf7aa2", quantity = 1, mode = "random"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_54371b32c140", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 17,
@@ -445,8 +451,8 @@ PLUGIN:Register("vesper", {
 			briefing = "Before the RK 95, I'd like the AK-12 reserve sorted. These supplies raise your stock capacity. It is a smaller arrangement that can still be worth doing properly.",
 			completion = "Your AK-12 reserve is larger. Fresh stock arrives on the normal refill.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 1, mode = "any"},
-				{pool = "town_expansion_7f149830f8d0", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 1, mode = "any"},
+				{pool = "town_expansion_51ebdbd40920", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"ak12"},
@@ -468,8 +474,8 @@ PLUGIN:Register("vesper", {
 			briefing = "For the RK 95, bring the listed expedition materials here. You can take the time to compare the rifle afterwards; an order being complete isn't an instruction to buy before you've caught your breath.",
 			completion = "The RK 95 is available to purchase. The delivery is received, so take a moment.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_efa40da7e4ad", quantity = 1, mode = "random"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_a3908ffe8d9d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 17,
@@ -486,8 +492,8 @@ PLUGIN:Register("vesper", {
 			briefing = "This order supports the RK 95 reserve before the SVT. It increases capacity for the rifle you've unlocked. I like leaving a familiar choice on the list rather than making every new arrangement replace it.",
 			completion = "RK 95 stock capacity increased. The reserve will fill normally.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 1, mode = "any"},
-				{pool = "town_expansion_7f149830f8d0", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 1, mode = "any"},
+				{pool = "town_expansion_51ebdbd40920", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"rk95"},
@@ -509,8 +515,8 @@ PLUGIN:Register("vesper", {
 			briefing = "The SVT-40 needs this supply delivery. Bring the full request back. I'm interested in older equipment as a thing somebody might actually choose, not merely the opening of a story about how nobody makes anything properly now.",
 			completion = "SVT-40 purchase access is open. A present-day delivery for an older rifle; that suits me.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_efa40da7e4ad", quantity = 1, mode = "random"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_a44245ac02ff", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 17,
@@ -527,9 +533,9 @@ PLUGIN:Register("vesper", {
 			briefing = "I'd like a larger SVT reserve before the VSS. The supplies below increase its allowance. It won't put a rifle into current stock just because we've reached a satisfying point in the conversation.",
 			completion = "Your SVT stock allowance is larger. Actual stock continues to refill as usual.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_b06ffdd3872e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_8263cc3b2759", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_53f9dde5b77b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_04ec9aa9092f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"svt40"},
@@ -551,8 +557,8 @@ PLUGIN:Register("vesper", {
 			briefing = "For the VSS, complete this expedition order. There is usually plenty somebody wants to say about it. I'll keep my part to the supplies until you've decided whether the request fits the time you have.",
 			completion = "The VSS is available to buy. The complete delivery has arrived, with no extra conditions to discuss.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 3, mode = "any"},
-				{pool = "town_expansion_b06ffdd3872e", quantity = 2, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 3, mode = "any"},
+				{pool = "town_expansion_53f9dde5b77b", quantity = 2, mode = "any"},
 				{pool = "town_expansion_ea1d090d14a0", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
@@ -570,9 +576,9 @@ PLUGIN:Register("vesper", {
 			briefing = "This delivery raises the VSS reserve. Bring what's listed, then the stock capacity increases. I don't want you mistaking a reserve arrangement for a gun waiting at the end of today's walk.",
 			completion = "VSS reserve capacity increased. The shelf still follows its ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 1, mode = "any"},
-				{pool = "town_expansion_78fede4ef488", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 1, mode = "any"},
+				{pool = "town_expansion_431c32d21d4a", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"vss"},
@@ -599,8 +605,8 @@ PLUGIN:Register("vesper", {
 			briefing = "The RPK purchase route uses this request. I like getting the load agreed before leaving; the return is quite inventive enough without adding forgotten supplies. Bring the full list here and you can purchase it.",
 			completion = "RPK purchase access is complete. Nothing on this delivery was left for a second return.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 3, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 3, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 2, mode = "any"},
 				{pool = "town_expansion_950732f7ecab", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
@@ -623,9 +629,9 @@ PLUGIN:Register("vesper", {
 			briefing = "The RPK reserve needs these materials before the next rifle. It increases your stock allowance. A practical order isn't less useful because I've found a more entertaining piece of equipment to discuss.",
 			completion = "Your RPK capacity is larger. The reserve refills on the normal schedule.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 1, mode = "any"},
-				{pool = "town_expansion_78fede4ef488", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 1, mode = "any"},
+				{pool = "town_expansion_431c32d21d4a", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"rpk"},
@@ -652,8 +658,8 @@ PLUGIN:Register("vesper", {
 			briefing = "For the 9A-91, bring this expedition-supply delivery. We can finish the arrangement before you decide how it fits the rest of your kit. I won't take interest in the rifle as a commitment to an entire new load.",
 			completion = "The 9A-91 is open for purchase. Supplies received; the rest of the packing is your choice.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 3, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 3, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 2, mode = "any"},
 				{pool = "town_expansion_950732f7ecab", quantity = 1, mode = "random"},
 			},
 			branchIndex = 14,
@@ -676,9 +682,9 @@ PLUGIN:Register("vesper", {
 			briefing = "Before the AS Val, there's a reserve order for the 9A-91. Complete the listed supplies and the capacity rises. I appreciate bringing an existing arrangement to a proper stop before starting another.",
 			completion = "Your 9A-91 stock allowance is increased. That reserve order is finished.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 1, mode = "any"},
-				{pool = "town_expansion_78fede4ef488", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 1, mode = "any"},
+				{pool = "town_expansion_431c32d21d4a", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"9a91"},
@@ -705,8 +711,8 @@ PLUGIN:Register("vesper", {
 			briefing = "The AS Val needs this delivery for purchase access. Take a look at the full request. I'm capable of becoming excited enough about the next outing to read only the entries I expected; I try not to encourage that in anyone else.",
 			completion = "AS Val purchase access is ready. Every entry is received, including the less exciting ones.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 3, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 3, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 2, mode = "any"},
 				{pool = "town_expansion_4908b8a6a214", quantity = 1, mode = "random"},
 			},
 			branchIndex = 15,
@@ -729,9 +735,9 @@ PLUGIN:Register("vesper", {
 			briefing = "This order expands your AS Val reserve. Bring the supplies here rather than carrying them into another planned journey. I won't need a dramatic account of how they arrived to appreciate the result.",
 			completion = "AS Val stock capacity increased. A complete return and normal refill from here.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 1, mode = "any"},
-				{pool = "town_expansion_78fede4ef488", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 1, mode = "any"},
+				{pool = "town_expansion_431c32d21d4a", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"asval"},
@@ -758,8 +764,8 @@ PLUGIN:Register("vesper", {
 			briefing = "For the SVD, this is the expedition request. Complete the order and the rifle becomes available to buy. There's enough to consider without my pretending a purchase decides the kind of journey you'll take with it.",
 			completion = "The SVD is available to purchase. The supply arrangement is complete; the future trips can stay open.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 3, mode = "any"},
-				{pool = "town_expansion_c2760e63776a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 3, mode = "any"},
+				{pool = "town_expansion_9b08d7a6b279", quantity = 2, mode = "any"},
 				{pool = "town_expansion_4908b8a6a214", quantity = 1, mode = "random"},
 			},
 			branchIndex = 16,
@@ -782,10 +788,10 @@ PLUGIN:Register("vesper", {
 			briefing = "One more reserve order before the last gun. This increases SVD capacity, with normal refill. Bring the full list and we can leave the earlier rifle properly supported while discussing the DP-28.",
 			completion = "Your SVD reserve is larger. No immediate refill promised, but the allowance is settled.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 2, mode = "any"},
-				{pool = "town_expansion_b06ffdd3872e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_f4528b8e747d", quantity = 1, mode = "any"},
-				{pool = "town_expansion_921ae5a3e892", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 2, mode = "any"},
+				{pool = "town_expansion_53f9dde5b77b", quantity = 2, mode = "any"},
+				{pool = "town_expansion_06860f39be0d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_76588b984896", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"svd"},
@@ -812,9 +818,9 @@ PLUGIN:Register("vesper", {
 			briefing = "The DP-28 closes this purchase line. Bring the listed expedition supplies back here. You've seen a long set of arrangements through; I'd like the last return to have time for an ordinary conversation rather than another hurried departure.",
 			completion = "DP-28 purchase access is open. That's the line completed. Tell me about the walk if you have the time.",
 			requirements = {
-				{pool = "town_expansion_cdd204229f48", quantity = 4, mode = "any"},
-				{pool = "town_expansion_b06ffdd3872e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_f4528b8e747d", quantity = 2, mode = "any"},
+				{pool = "town_expansion_43b520596561", quantity = 4, mode = "any"},
+				{pool = "town_expansion_53f9dde5b77b", quantity = 3, mode = "any"},
+				{pool = "town_expansion_06860f39be0d", quantity = 2, mode = "any"},
 				{pool = "town_expansion_3f51cdb7d8ff", quantity = 1, mode = "random"},
 			},
 			branchIndex = 17,

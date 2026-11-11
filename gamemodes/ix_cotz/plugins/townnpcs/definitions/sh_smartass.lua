@@ -170,6 +170,8 @@ PLUGIN:Register("smartass", {
 		name = "Computer hardware and data media",
 		core = {
 			"small_electronics",
+			"batteries",
+			"valuables_technical_records",
 			"valuables_computer_parts",
 			"valuables_portable_computers",
 			"valuables_control_electronics",
@@ -188,7 +190,7 @@ PLUGIN:Register("smartass", {
 			briefing = "The C96 carbine. A perfectly good way to begin an equipment conversation that will eventually occupy my entire counter. Bring the computer and data materials on this list and I'll open its purchase route. I don't need you to identify everything by saying 'some old electronics'; the order has names for a reason.",
 			completion = "C96 carbine access is open. Everything arrived with an identity more useful than 'that bit'.",
 			requirements = {
-				{pool = "town_expansion_8bf6b70943be", quantity = 1, mode = "any"},
+				{pool = "town_expansion_bf3277df53ee", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 24,
@@ -205,7 +207,7 @@ PLUGIN:Register("smartass", {
 			briefing = "For the short Stoeger, here's the request. Bring the listed data and computer supplies. I can finish the arrangement without hearing why short things are universally better; somebody will be back in ten minutes arguing the opposite.",
 			completion = "The short Stoeger is available to buy. Our delivery survived the absence of a universal theory.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_99e7f327cb08", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 24,
@@ -222,7 +224,7 @@ PLUGIN:Register("smartass", {
 			briefing = "Before the Sten, let's enlarge the short-Stoeger reserve. This order raises stock capacity. It doesn't make a gun appear. If I had that button, you would be looking at a considerably more interesting problem.",
 			completion = "Short-Stoeger allowance increased. The appearance of actual stock still depends on refill.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_99e7f327cb08", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"stoegerddshort"},
@@ -244,7 +246,7 @@ PLUGIN:Register("smartass", {
 			briefing = "The Sten comes through this delivery. Read the computer-supply request before inventing a connection between the gun and every object I want. Sometimes I need parts, and you want access, and the arrangement can stop there.",
 			completion = "Sten purchase access is ready. A complete transaction without an unnecessary origin story.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_99e7f327cb08", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 24,
@@ -261,7 +263,7 @@ PLUGIN:Register("smartass", {
 			briefing = "This order expands your Sten reserve before the full Stoeger. Capacity, normal refill, no mysterious reserve hidden under the keyboard. I'd call it simple if that didn't encourage somebody to stop reading.",
 			completion = "Your Sten capacity is larger. The keyboard continues to conceal no spare gun.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_99e7f327cb08", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sten"},
@@ -283,7 +285,7 @@ PLUGIN:Register("smartass", {
 			briefing = "The full Stoeger has its own request. Conveniently, I've written it down so neither of us has to reconstruct what I meant while you were nodding at the short version. Bring the complete list back here.",
 			completion = "The full Stoeger is open for purchase. We have successfully distinguished two similarly named things.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_99e7f327cb08", quantity = 1, mode = "any"},
 			},
 			branchIndex = 4,
 			branchLength = 24,
@@ -300,7 +302,7 @@ PLUGIN:Register("smartass", {
 			briefing = "I'd like the full-Stoeger reserve increased before the Mac. These supplies raise your allowance. You can admire the next gun while the old reserve remains a real piece of business.",
 			completion = "Full-Stoeger stock capacity increased. Refill still proceeds at its habitual speed.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_99e7f327cb08", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"stoegerdd"},
@@ -322,7 +324,7 @@ PLUGIN:Register("smartass", {
 			briefing = "The Mac-11 purchase route needs this delivery. People tell me what they expect from it with remarkable certainty. You can spare me the performance, bring the requested supplies, and decide what you think when you can actually buy one.",
 			completion = "Mac-11 access is ready. Your delivery contained supplies rather than expectations.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_99e7f327cb08", quantity = 1, mode = "any"},
 			},
 			branchIndex = 5,
 			branchLength = 24,
@@ -339,7 +341,7 @@ PLUGIN:Register("smartass", {
 			briefing = "This raises the Mac reserve before the MP34. Bring the smaller computer-supply order. It adds capacity to an existing line, which is apparently less exciting than asking whether I've got anything new every afternoon.",
 			completion = "Your Mac-11 stock allowance is larger. Something useful has happened to the old line.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_b57268c761ed", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mac11"},
@@ -361,7 +363,7 @@ PLUGIN:Register("smartass", {
 			briefing = "For the MP34, bring the data and computer materials here. You're allowed to want an older gun without staging a debate about the decline of craftsmanship. I have actual old machinery to be annoyed with.",
 			completion = "MP34 purchase access is open. The old machinery appreciates being left out of the argument.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "random"},
+				{pool = "town_expansion_7a85b50fb433", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 24,
@@ -378,7 +380,7 @@ PLUGIN:Register("smartass", {
 			briefing = "Before the short shotgun, complete this MP34 reserve request. It raises capacity for the gun you've unlocked. No, the smaller order is not an invitation to replace the last item with a persuasive shrug.",
 			completion = "MP34 capacity increased. Every item survived the journey, including the one a shrug wouldn't cover.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_b57268c761ed", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mp34"},
@@ -400,7 +402,7 @@ PLUGIN:Register("smartass", {
 			briefing = "The Serbu Super Shorty has this purchase order. I know, the gun is shorter than the explanation of its name. Bring the listed computer supplies and I'll open access without lengthening either one.",
 			completion = "The Super Shorty is available to buy. The delivery was full-sized and complete.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "random"},
+				{pool = "town_expansion_7a85b50fb433", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 24,
@@ -417,7 +419,7 @@ PLUGIN:Register("smartass", {
 			briefing = "This is the Super Shorty reserve order before the MP40. It increases the stock allowance, not today's count. You can check the shelf instead of conducting an optimistic interpretation of my wording.",
 			completion = "Super Shorty capacity increased. Current stock remains stubbornly factual.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "any"},
+				{pool = "town_expansion_b57268c761ed", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"m3supershort"},
@@ -439,7 +441,7 @@ PLUGIN:Register("smartass", {
 			briefing = "For the MP40, complete this request. I'm interested in computer and data supplies, even while everyone at the counter is trying to persuade me to become interested in the same gun story. Bring what's actually on the list.",
 			completion = "MP40 access is open. The supplies have managed to be the interesting part for once.",
 			requirements = {
-				{pool = "town_expansion_681245d7563b", quantity = 1, mode = "random"},
+				{pool = "town_expansion_7a85b50fb433", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 24,
@@ -456,8 +458,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The KP-31 comes through this delivery. You don't need to ask whether I personally approve of every purchase. I need the listed computer materials; you get the option to buy the gun. Astonishingly workable division of interests.",
 			completion = "KP-31 purchase access is ready. Our interests have reached a mutually tolerable result.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_b92bc1e23d60", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 24,
@@ -474,8 +476,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I'd like more KP-31 reserve before the Mossberg. Bring the supplies here and capacity rises. An empty allowance doesn't hold an invisible gun; I prefer to get that particular technical point settled early.",
 			completion = "Your KP-31 allowance is larger. The refill will provide the visible contents.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8c8654a6c624", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"kp31"},
@@ -497,8 +499,8 @@ PLUGIN:Register("smartass", {
 			briefing = "For the Mossberg 500, use this order. Bring all the listed materials. A number in a name does not make every request interchangeable, however confidently somebody remembers what the previous shotgun needed.",
 			completion = "Mossberg purchase access is complete. The return agrees with the current request.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_b92bc1e23d60", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 24,
@@ -515,8 +517,8 @@ PLUGIN:Register("smartass", {
 			briefing = "This delivery increases the Mossberg reserve. It doesn't open the AR15 by itself or refill anything immediately. A modest amount of attention to the heading will spare us both a very dull argument.",
 			completion = "Mossberg stock capacity increased. The heading has accurately predicted the result.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8c8654a6c624", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mossberg500"},
@@ -538,8 +540,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The 9mm AR15 has its own purchase arrangement. The supplies are listed here. Finish the delivery before telling everybody what you're about to buy; it saves having to blame a supply list for interrupting your grand announcement.",
 			completion = "The 9mm AR15 is open for purchase. You can make the announcement with a completed order behind it.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_b92bc1e23d60", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 24,
@@ -556,8 +558,8 @@ PLUGIN:Register("smartass", {
 			briefing = "Before the MP5k, enlarge the 9mm AR15 reserve with this request. Capacity rises on completion. I've resisted calling it a groundbreaking improvement in stock management, despite the opportunity.",
 			completion = "Your 9mm AR15 allowance is increased. A practical result, tragically short of a breakthrough.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8c8654a6c624", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"ar159mm"},
@@ -579,8 +581,8 @@ PLUGIN:Register("smartass", {
 			briefing = "For the MP5k, bring the full computer-supply delivery. I can make access available without asking you to explain why every other short gun disappointed you. There are limits to how many reviews I need before lunch.",
 			completion = "MP5k purchase access is ready. The order is complete; lunch retains a faint possibility.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_b92bc1e23d60", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
 			branchLength = 24,
@@ -597,8 +599,8 @@ PLUGIN:Register("smartass", {
 			briefing = "This order raises the MP5k reserve before the Uzi. Bring what is listed rather than a heap of disconnected parts with a story attached. Stories are not particularly good at becoming the one missing connector.",
 			completion = "Your MP5k capacity is larger. All required parts arrived as parts.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8c8654a6c624", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mp5k"},
@@ -620,8 +622,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The Uzi comes through this delivery. I like a request that can survive somebody being interested in the equipment while still remembering why they came to my desk. Bring the supplies and we'll find out if this is one.",
 			completion = "Uzi purchase access is open. The request has survived your interest intact.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_af44d6118fd8", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
 			branchLength = 24,
@@ -638,8 +640,8 @@ PLUGIN:Register("smartass", {
 			briefing = "I'd like the Uzi reserve increased before the Ithaca. Complete this smaller order for more capacity. The gun you already unlocked hasn't evaporated from relevance merely because I've mentioned another one.",
 			completion = "Uzi stock allowance increased. Actual stock still depends on the normal refill.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8c8654a6c624", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"uzi"},
@@ -661,8 +663,8 @@ PLUGIN:Register("smartass", {
 			briefing = "For the Ithaca 37, this is the computer-supply arrangement. Bring the whole list. If you want to discuss a particularly strange part you found, finish giving me the delivery before I become interested enough to forget it.",
 			completion = "Ithaca purchase access is ready. Supplies checked before either of us lost the original subject.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_af44d6118fd8", quantity = 1, mode = "random"},
 			},
 			branchIndex = 14,
 			branchLength = 24,
@@ -679,8 +681,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The Ithaca reserve needs these materials before the Sterling. It raises the stock allowance. An allowance is a quantity on a sheet, incidentally, not something you can take outside and point at a problem.",
 			completion = "Your Ithaca capacity is increased. Fresh guns remain the refill's responsibility.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8c8654a6c624", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"ithaca37"},
@@ -702,8 +704,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The Sterling purchase request is here. Read it before leaving. Confident recollection is wonderful until somebody opens a pack and discovers they've spent half a day collecting the request they thought I ought to have made.",
 			completion = "Sterling access is open. You've returned with my actual request, an underrated achievement.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_af44d6118fd8", quantity = 1, mode = "random"},
 			},
 			branchIndex = 15,
 			branchLength = 24,
@@ -720,8 +722,8 @@ PLUGIN:Register("smartass", {
 			briefing = "This delivery expands the Sterling reserve. Capacity increases for the existing gun. You may continue looking at the next one without accusing the reserve arrangement of being boring; it knows.",
 			completion = "Your Sterling stock allowance is larger. The unglamorous arrangement is complete.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8c8654a6c624", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sterling"},
@@ -743,8 +745,8 @@ PLUGIN:Register("smartass", {
 			briefing = "For the full MP5, bring the listed computer materials. It is a separate purchase order from the MP5k. The extra letter's absence has not erased the supplies, even if someone at the counter sincerely hopes it did.",
 			completion = "The full MP5 is available to buy. Distinction maintained, supplies received.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_236f10f95cdf", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_af44d6118fd8", quantity = 1, mode = "random"},
 			},
 			branchIndex = 16,
 			branchLength = 24,
@@ -761,8 +763,8 @@ PLUGIN:Register("smartass", {
 			briefing = "Before the M1887, increase the MP5 reserve with this order. Normal refill still applies. If I repeat the word capacity one more time I may start dreaming about stock sheets, so let's get it finished.",
 			completion = "Your MP5 reserve is larger. We can stop discussing capacity for at least this request.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4250046093e2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_39e0202598f4", quantity = 1, mode = "any"},
 				{pool = "town_expansion_fb1365f60b12", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -785,8 +787,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The M1887 comes through this delivery. An older gun can be interesting without requiring me to believe every story repeated beside it. The supplies are the bit of the arrangement both of us can check.",
 			completion = "M1887 purchase access is ready. The checkable part has turned up complete.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 3, mode = "any"},
-				{pool = "town_expansion_4250046093e2", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 3, mode = "any"},
+				{pool = "town_expansion_39e0202598f4", quantity = 2, mode = "any"},
 				{pool = "town_expansion_2efa4442816e", quantity = 1, mode = "random"},
 			},
 			branchIndex = 17,
@@ -804,8 +806,8 @@ PLUGIN:Register("smartass", {
 			briefing = "This request increases the M1887 allowance before the UMP. Bring the smaller list in full. Half an order with a confident explanation is still half an order, with extra listening required.",
 			completion = "M1887 stock capacity increased. No supplementary explanation was needed to complete it.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4250046093e2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_39e0202598f4", quantity = 1, mode = "any"},
 				{pool = "town_expansion_fb1365f60b12", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -828,8 +830,8 @@ PLUGIN:Register("smartass", {
 			briefing = "For the UMP, bring these computer and data supplies. I'm happy to make a purchase arrangement without endorsing the entire load you've planned around it. We can keep one decision small enough to finish.",
 			completion = "UMP purchase access is open. One decision successfully contained.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 3, mode = "any"},
-				{pool = "town_expansion_4250046093e2", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 3, mode = "any"},
+				{pool = "town_expansion_39e0202598f4", quantity = 2, mode = "any"},
 				{pool = "town_expansion_2efa4442816e", quantity = 1, mode = "random"},
 			},
 			branchIndex = 18,
@@ -847,9 +849,9 @@ PLUGIN:Register("smartass", {
 			briefing = "The UMP reserve needs these materials before the Remington. Completing the list raises capacity. It doesn't require proving how often you use the gun or presenting an essay on the sensible equipment choice.",
 			completion = "Your UMP allowance is larger. The refill can proceed without an essay attached.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 1, mode = "any"},
-				{pool = "town_expansion_79808d7fafd4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15df9e09224f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"ump45"},
@@ -876,8 +878,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The Remington 870 AE has this purchase request. Bring the full delivery. I'd rather look at the computer materials than hear someone explain why computer materials shouldn't be on a gun arrangement; I have considered that fascinating objection already.",
 			completion = "Remington purchase access is ready. The material contribution has defeated the objection through sheer usefulness.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 3, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 3, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 2, mode = "any"},
 				{pool = "town_expansion_9ad3afb71982", quantity = 1, mode = "random"},
 			},
 			branchIndex = 19,
@@ -900,9 +902,9 @@ PLUGIN:Register("smartass", {
 			briefing = "Before the M3, I'd like the Remington reserve supported. These supplies increase its stock allowance. You don't have to buy every gun I've made available to demonstrate you remember the conversation.",
 			completion = "Your Remington capacity is increased. Memory remains free of a purchase obligation.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 1, mode = "any"},
-				{pool = "town_expansion_79808d7fafd4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15df9e09224f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"rem870ae"},
@@ -929,8 +931,8 @@ PLUGIN:Register("smartass", {
 			briefing = "For the M3 Super 90, complete the order here. I have kept the parts request separate from the opinions people have about the shotgun. A difficult enough filing problem without combining them.",
 			completion = "M3 purchase access is complete. The supplies can be filed; the opinions may have to remain unsorted.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 3, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 3, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 2, mode = "any"},
 				{pool = "town_expansion_9ad3afb71982", quantity = 1, mode = "random"},
 			},
 			branchIndex = 20,
@@ -953,9 +955,9 @@ PLUGIN:Register("smartass", {
 			briefing = "This delivery raises the M3 reserve before the MP9. Bring what's listed. No extra visit, secret hand gesture, or demonstration that you've heard a better rumour about my stock.",
 			completion = "Your M3 allowance is larger. Normal refill, disappointingly free of secret rituals.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 1, mode = "any"},
-				{pool = "town_expansion_79808d7fafd4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15df9e09224f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"m3super90"},
@@ -982,8 +984,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The MP9a1 comes through this request. Finish the computer-supply delivery and you can purchase it. Asking a practical question is more promising than spending five minutes trying to sound as though you already know the answer.",
 			completion = "MP9 purchase access is open. The practical part has reached its conclusion.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 3, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 3, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 2, mode = "any"},
 				{pool = "town_expansion_24a35a39e55d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 21,
@@ -1006,9 +1008,9 @@ PLUGIN:Register("smartass", {
 			briefing = "I'd like a larger MP9 reserve before the Thompson. This order increases capacity. It will not become a fresh gun merely because you announce you've carefully allowed space for it in the pack.",
 			completion = "Your MP9 stock allowance is increased. Pack space remains unable to influence refill timing.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 1, mode = "any"},
-				{pool = "town_expansion_79808d7fafd4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15df9e09224f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mp9a1"},
@@ -1035,8 +1037,8 @@ PLUGIN:Register("smartass", {
 			briefing = "For the Thompson, bring the listed data and computer materials. The name is familiar enough that I'll spare you an introduction. It hasn't made the supply request optional, though; that seems to be the part people remember less readily.",
 			completion = "Thompson access is ready. Familiar name, completed new delivery.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 3, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 3, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 2, mode = "any"},
 				{pool = "town_expansion_24a35a39e55d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 22,
@@ -1059,9 +1061,9 @@ PLUGIN:Register("smartass", {
 			briefing = "The Thompson reserve needs this smaller order before the P90. It raises your stock capacity. Let me finish that transaction before the conversation becomes a comparison of every gun you've ever considered.",
 			completion = "Your Thompson capacity is larger. The comparison can resume with the reserve settled.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 1, mode = "any"},
-				{pool = "town_expansion_79808d7fafd4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15df9e09224f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"m1928"},
@@ -1088,8 +1090,8 @@ PLUGIN:Register("smartass", {
 			briefing = "The P90 purchase route uses this delivery. Bring the full list. I would enjoy seeing someone read an order with the care they give an unusual gun; a quietly radical idea for this desk.",
 			completion = "P90 purchase access is complete. The order has received its deserved moment of attention.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 3, mode = "any"},
-				{pool = "town_expansion_618611e80a23", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 3, mode = "any"},
+				{pool = "town_expansion_80c787521d7d", quantity = 2, mode = "any"},
 				{pool = "town_expansion_24a35a39e55d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 23,
@@ -1112,10 +1114,10 @@ PLUGIN:Register("smartass", {
 			briefing = "One final gun-reserve request before the Striker. This increases P90 capacity, with ordinary refill. You don't need to make finishing it sound like the climax of an engineering career.",
 			completion = "Your P90 allowance is increased. An ordinary useful result has been achieved.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4250046093e2", quantity = 2, mode = "any"},
-				{pool = "town_expansion_d37d1c34fc08", quantity = 1, mode = "any"},
-				{pool = "town_expansion_c881f6d42e13", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_39e0202598f4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_079f578a1435", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a3d6e7732b73", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"p90"},
@@ -1142,9 +1144,9 @@ PLUGIN:Register("smartass", {
 			briefing = "The Striker closes this gun line. Bring the computer and data supplies listed here. I can recognise the end of a long arrangement without inventing a final examination of your character. You've kept bringing the requests back, which is considerably more practical.",
 			completion = "Striker purchase access is open. That's the gun line finished. No examination concealed beneath the last item.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 4, mode = "any"},
-				{pool = "town_expansion_4250046093e2", quantity = 3, mode = "any"},
-				{pool = "town_expansion_d37d1c34fc08", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 4, mode = "any"},
+				{pool = "town_expansion_39e0202598f4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_079f578a1435", quantity = 2, mode = "any"},
 				{pool = "town_expansion_921e32a51219", quantity = 1, mode = "random"},
 			},
 			branchIndex = 24,
@@ -1167,7 +1169,7 @@ PLUGIN:Register("smartass", {
 			briefing = "The bunker access card has a purchase arrangement. Complete this computer-supply delivery and you can buy the card. It is not permission to assume I have personally approved whatever plan you attach to the word bunker; the card and your plan are different subjects.",
 			completion = "Bunker-card purchase access is ready. You still need to buy the card before you can use it.",
 			requirements = {
-				{pool = "town_expansion_8bf6b70943be", quantity = 1, mode = "any"},
+				{pool = "town_expansion_bf3277df53ee", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 2,
@@ -1184,9 +1186,9 @@ PLUGIN:Register("smartass", {
 			briefing = "For the laboratory access card, bring the full request here. The bunker card route comes first, as the list makes clear. I don't need to hear how you believe access ought to work while the materials remain outside my door.",
 			completion = "Laboratory-card purchase access is open. The delivery is complete; the card itself remains a purchase.",
 			requirements = {
-				{pool = "town_expansion_294f20293f0b", quantity = 4, mode = "any"},
-				{pool = "town_expansion_4250046093e2", quantity = 3, mode = "any"},
-				{pool = "town_expansion_d37d1c34fc08", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3a3ab44e09e5", quantity = 4, mode = "any"},
+				{pool = "town_expansion_39e0202598f4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_079f578a1435", quantity = 2, mode = "any"},
 				{pool = "town_expansion_921e32a51219", quantity = 1, mode = "random"},
 			},
 			branchIndex = 2,

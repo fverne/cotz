@@ -128,7 +128,11 @@ PLUGIN:Register("beanstalk", {
 	},
 	progressionIdentity = {
 		name = "Field samples and laboratory containment",
-		core = {"valuables_research_samples", "valuables_sample_carriers"},
+		core = {
+			"valuables_technical_records",
+			"valuables_research_samples",
+			"valuables_sample_carriers",
+		},
 		support = {"valuables_filtration", "documents_research"},
 	},
 
@@ -164,8 +168,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I'd like the Tundra reserve settled before the Cobra arrangement. This smaller research delivery increases your stock allowance. It is a rather quiet part of preparation, which may explain why I can usually finish discussing it.",
 			completion = "Your Tundra capacity is increased. We'll let the normal refill supply it.",
 			requirements = {
-				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_07ac2fbf5de1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2543f03b06bc", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"tundrasuppressor"},
@@ -218,8 +222,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The Cobra reserve needs these supplies. Completing the list increases how many can be held for you. I ought to be clear that I mean capacity; I have already been accused of making an empty shelf sound very well organised.",
 			completion = "Cobra stock capacity is increased. The shelf still needs its ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_a1ace2f2865e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_07ac2fbf5de1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2543f03b06bc", quantity = 1, mode = "any"},
 				{pool = "town_expansion_25b061f3b22f", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -276,9 +280,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "Before the SAKER, I'd like the PBS reserve expanded. This delivery does that, rather than opening another suppressor by itself. Keeping the two orders distinct saves me explaining my own notes later.",
 			completion = "The PBS stock allowance is larger now. This order can be filed without an amendment.",
 			requirements = {
-				{pool = "town_expansion_ee0f01e7c6c6", quantity = 2, mode = "any"},
-				{pool = "town_expansion_ab96359a0c63", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e47e1dab9830", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2543f03b06bc", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1537e0c06e89", quantity = 1, mode = "any"},
 				{pool = "town_expansion_daac7c31b7d8", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -373,7 +377,7 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The RMR allowance needs its own reserve order. Bring these research materials and I'll increase the capacity. I appreciate a request small enough to finish discussing without losing the original question.",
 			completion = "RMR stock capacity increased. A reserve arranged, with the usual refill still to follow.",
 			requirements = {
-				{pool = "town_expansion_d5c230931a12", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c81d136325a3", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"trijiconrmr"},
@@ -417,8 +421,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I'd like to put more room in the Kobra reserve before the Micro T1. The list covers that capacity increase. No fresh sight appears just because I've found a better place to write the allowance.",
 			completion = "Your Kobra allowance has increased. The stock itself will refill normally.",
 			requirements = {
-				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_07ac2fbf5de1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2543f03b06bc", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"kobra"},
@@ -468,8 +472,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "This order concerns the Micro T1 reserve. Complete it and the stock capacity rises. I've put the heading first so neither of us confuses it with the Eotech request while discussing something more interesting.",
 			completion = "The Micro T1 reserve is larger now. Heading and result agree, which is always pleasing.",
 			requirements = {
-				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_08cb53802f9d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a93997bc4506", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"microt1"},
@@ -519,8 +523,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The Eotech reserve could use these research supplies. This increases your allowance rather than changing the sight. It is perfectly acceptable to want a dependable reserve of something you already like.",
 			completion = "Your Eotech stock capacity has increased. Refill remains as usual.",
 			requirements = {
-				{pool = "town_expansion_a1ace2f2865e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_eb9a86daf632", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c0bcbab54219", quantity = 1, mode = "any"},
 				{pool = "town_expansion_42f95bf26576", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -587,9 +591,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "I'd like to expand the CMore reserve before the final sight order. These supplies provide the larger allowance. I should resist the temptation to call it a small request before you've read it; you're the one bringing it back.",
 			completion = "CMore capacity increased. You have the larger allowance, with normal restocking.",
 			requirements = {
-				{pool = "town_expansion_ee0f01e7c6c6", quantity = 2, mode = "any"},
-				{pool = "town_expansion_ab96359a0c63", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e47e1dab9830", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2543f03b06bc", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1537e0c06e89", quantity = 1, mode = "any"},
 				{pool = "town_expansion_daac7c31b7d8", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -684,7 +688,7 @@ PLUGIN:Register("beanstalk", {
 			briefing = "Before the PSO-1, there's the King Arms reserve. Bring the supplies here and the capacity will increase. I like a little room for an ordinary replacement without having to turn it into a new discussion of equipment.",
 			completion = "Your King Arms stock allowance is larger. Actual stock will follow its normal refill.",
 			requirements = {
-				{pool = "town_expansion_d5c230931a12", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"kingarmsmr"},
@@ -728,8 +732,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The PSO-1 reserve needs these supplies. This is the allowance for an optic already available to you. I have kept it separate from the Shortdot arrangement because my earlier notes were beginning to read like two conversations at once.",
 			completion = "PSO-1 stock capacity is increased. One conversation successfully concluded.",
 			requirements = {
-				{pool = "town_expansion_a1ace2f2865e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_08cb53802f9d", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a93997bc4506", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"pso1"},
@@ -779,8 +783,8 @@ PLUGIN:Register("beanstalk", {
 			briefing = "This smaller order increases the Shortdot reserve. It does not put another optic into current stock immediately. I prefer mentioning the dull limitation here to discovering it during somebody's otherwise carefully prepared departure.",
 			completion = "Shortdot stock allowance increased. Current availability still depends on the shelf.",
 			requirements = {
-				{pool = "town_expansion_a1ace2f2865e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_eb9a86daf632", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c0bcbab54219", quantity = 1, mode = "any"},
 				{pool = "town_expansion_42f95bf26576", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -847,9 +851,9 @@ PLUGIN:Register("beanstalk", {
 			briefing = "The ACOG reserve comes before the Nightforce purchase arrangement. These research supplies increase your allowance for the optic already unlocked. There's no need to bring an extra sample merely because I looked interested.",
 			completion = "Your ACOG reserve capacity has increased. Exactly the delivery we agreed, thank you.",
 			requirements = {
-				{pool = "town_expansion_ee0f01e7c6c6", quantity = 2, mode = "any"},
-				{pool = "town_expansion_ab96359a0c63", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e47e1dab9830", quantity = 1, mode = "any"},
+				{pool = "town_expansion_de7b35dd9b7f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2543f03b06bc", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1537e0c06e89", quantity = 1, mode = "any"},
 				{pool = "town_expansion_daac7c31b7d8", quantity = 1, mode = "any"},
 			},
 			stock = {

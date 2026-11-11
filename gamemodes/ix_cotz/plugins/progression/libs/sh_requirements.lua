@@ -16,6 +16,9 @@ function ix.progression.GetRequirementKey(progressionID, itemID, character)
 				if choice == itemID then return selection.item end
 			end
 		end
+		for _, selection in ipairs(line.selections or {}) do
+			if selection.item == itemID and selection.choices then return nil end
+		end
 	end
 	local definition = ix.progression.definitions[progressionID]
 	local required = definition and (definition.requirementAlternatives or {})[itemID]
@@ -37,12 +40,24 @@ function ix.progression.GetRequirementChoices(progressionID, itemID, character)
 	return choices
 end
 
+function ix.progression.GetRequirementUnitSize(progressionID, itemID, character)
+	local key = ix.progression.GetRequirementKey(progressionID, itemID, character)
+	local selection = key and savedSelection(character, progressionID, key)
+
+	return selection and selection.unitSizes and selection.unitSizes[itemID] or 1
+end
+
 function ix.progression.GetRequirementLabel(progressionID, itemID, character)
 	local names = {}
 	for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, itemID, character)) do
-		names[#names + 1] = ix.item.list[choice].name
+		local size = ix.progression.GetRequirementUnitSize(progressionID, choice, character)
+		local name = ix.item.list[choice].name
+		names[#names + 1] = size > 1 and (name .. " x" .. size) or name
 	end
 	local selection = savedSelection(character, progressionID, itemID)
+	if selection and selection.unitSizes then
+		return selection.name .. " batches (any mix; per batch: " .. table.concat(names, ", ") .. ")"
+	end
 	if selection and selection.mode == "any" then
 		return selection.name .. " (any mix: " .. table.concat(names, ", ") .. ")"
 	end
@@ -74,7 +89,8 @@ local function collectNeededItems(character)
 				local remaining = amount - (contributed[item] or 0)
 				if remaining > 0 then
 					for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, item, character)) do
-						result[choice] = (result[choice] or 0) + remaining
+						local size = ix.progression.GetRequirementUnitSize(progressionID, choice, character)
+						result[choice] = (result[choice] or 0) + remaining * size
 						contacts[choice] = contacts[choice] or {}
 						contacts[choice][definition.keyNpc] = true
 					end
@@ -107,6 +123,8 @@ if SERVER then
 		assert(isnumber(quantity) and quantity > 0 and quantity % 1 == 0, "Invalid requirement quantity")
 		for _, candidate in ipairs(pool.candidates) do
 			assert(ix.item.list[candidate.item], "Unknown requirement item: " .. tostring(candidate.item))
+			local size = (ix.progression.requirementBatchSizes or {})[candidate.item] or 1
+			assert(isnumber(size) and size >= 1 and size % 1 == 0, "Invalid requirement batch size")
 		end
 
 		return pool
@@ -161,6 +179,12 @@ if SERVER then
 				assert(#definition.requirementSlots > 0, "Empty delivery requirements: " .. progressionID)
 			end
 			validateAlternatives(definition)
+			local range = definition.categoryChoiceRange
+			if range then
+				assert(isnumber(range[1]) and isnumber(range[2]) and range[1] > 0
+					and range[1] % 1 == 0 and range[2] % 1 == 0 and range[2] >= range[1],
+					"Invalid category subset range: " .. progressionID)
+			end
 			local accepted = {}
 			for _, slot in ipairs(definition.requirementSlots or {}) do
 				if definition.categoryOnly then
@@ -168,7 +192,8 @@ if SERVER then
 				end
 				if slot.mode then
 					for _, candidate in ipairs(validateSlot(slot).candidates) do
-						assert(not accepted[candidate.item], "Overlapping requirement slots: " .. progressionID)
+						assert(definition.categoryChoiceRange or not accepted[candidate.item],
+							"Overlapping requirement slots: " .. progressionID)
 						accepted[candidate.item] = true
 					end
 				end
@@ -257,6 +282,93 @@ if SERVER then
 			choices = choices, name = validateSlot(slot).name or slot.pool}
 	end
 
+	local function batchSize(itemID)
+		return (ix.progression.requirementBatchSizes or {})[itemID] or 1
+	end
+
+	local function subsetGroups(slot, used)
+		local eligible, groups = {}, {}
+		for _, candidate in ipairs(validateSlot(slot).candidates) do
+			if not used[candidate.item] then eligible[candidate.item] = true end
+		end
+		-- Fasteners must be offered together, including when categories overlap other slots.
+		if eligible.value_nuts and eligible.value_bolts then groups[#groups + 1] = {"value_nuts", "value_bolts"} end
+		eligible.value_nuts, eligible.value_bolts = nil, nil
+		local ordered = {}
+		for itemID in pairs(eligible) do ordered[#ordered + 1] = itemID end
+		table.sort(ordered)
+		for _, itemID in ipairs(ordered) do groups[#groups + 1] = {itemID} end
+
+		return groups
+	end
+
+	local function takeSubset(groups, choices, maximum, used, weights)
+		while #groups > 0 and #choices < maximum do
+			local best, options = math.huge, {}
+			for index, group in ipairs(groups) do
+				local weight = 0
+				for _, itemID in ipairs(group) do weight = weight + (weights[itemID] or 0) end
+				weight = weight / #group
+				if #choices + #group <= maximum and weight <= best then
+					if weight < best then best, options = weight, {} end
+					options[#options + 1] = index
+				end
+			end
+			if #options == 0 then break end
+			local group = table.remove(groups, options[math.random(1, #options)])
+			for _, itemID in ipairs(group) do
+				choices[#choices + 1] = itemID
+				used[itemID] = true
+			end
+		end
+	end
+
+	local function buildSubsetSelections(definition, requirements, selections, line)
+		local used, categories, weights = {}, {}, {}
+		local range = definition.categoryChoiceRange
+		for index, selection in ipairs(selections) do
+			local slot = definition.requirementSlots[index]
+			if slot.mode == "any" then
+				local count = #validateSlot(slot).candidates
+				for _, candidate in ipairs(validateSlot(slot).candidates) do
+					weights[candidate.item] = (weights[candidate.item] or 0) + 1
+				end
+				categories[#categories + 1] = {index = index, count = count,
+					target = math.random(range[1], range[2]), choices = {}}
+			else
+				selections[index] = makeSelection(definition, slot, selection.item, {}, used)
+			end
+		end
+		table.sort(categories, function(first, second)
+			if first.count == second.count then return first.index < second.index end
+
+			return first.count < second.count
+		end)
+		for _, category in ipairs(categories) do
+			local slot = definition.requirementSlots[category.index]
+			local groups = subsetGroups(slot, used)
+			takeSubset(groups, category.choices, range[1], used, weights)
+			assert(#category.choices >= range[1], "Not enough distinct category choices: " .. definition.id)
+		end
+		for _, category in ipairs(categories) do
+			local index = category.index
+			local slot, selection = definition.requirementSlots[index], selections[index]
+			local groups = subsetGroups(slot, used)
+			takeSubset(groups, category.choices, category.target, used, weights)
+			table.sort(category.choices)
+			local sizes = {}
+			for _, itemID in ipairs(category.choices) do sizes[itemID] = batchSize(itemID) end
+			selections[index] = {pool = slot.pool, item = selection.item, mode = "any",
+				choices = category.choices, name = validateSlot(slot).name, unitSizes = sizes}
+			local supplied = line and (line.complexData or {})[selection.item] or 0
+			if not line or supplied < requirements[selection.item] then
+				requirements[selection.item] = math.max(requirements[selection.item], line and range[1] or category.target)
+			end
+		end
+
+		return selections
+	end
+
 	local function rollRequirements(definition, character, record)
 		local requirements, selections, usedItems = {}, {}, {}
 		for index, slot in ipairs(definition.requirementSlots) do
@@ -265,13 +377,18 @@ if SERVER then
 				if not usedItems[candidate.item] then candidates[#candidates + 1] = candidate end
 			end
 			assert(#candidates > 0, "Requirement slots have no distinct item selection")
-			local candidate = candidates[slot.mode == "any" and 1 or math.random(1, #candidates)]
+			local fixedAnchor = slot.mode == "any" and not definition.categoryChoiceRange
+			local candidate = candidates[fixedAnchor and 1 or math.random(1, #candidates)]
 			if definition.milestoneGroup then
 				candidate = programmeSelection(record, definition.milestoneGroup, slot.pool) or candidate
 			end
-			requirements[candidate.item] = slot.quantity
+			local size = definition.batchSizedRequirements and slot.mode == "random" and batchSize(candidate.item) or 1
+			requirements[candidate.item] = slot.quantity * size
 			selections[index] = {pool = slot.pool, item = candidate.item}
 			usedItems[candidate.item] = true
+		end
+		if definition.categoryChoiceRange then
+			return requirements, buildSubsetSelections(definition, requirements, selections)
 		end
 		local usedChoices = {}
 		for index, selection in ipairs(selections) do
@@ -313,7 +430,10 @@ if SERVER then
 				line.selections[index] = makeSelection(definition, slot, itemID, reserved, used)
 			end
 		end
-		-- Keep original item keys, quantities, contributions and credit; only add saved acceptance metadata.
+		if definition.categoryChoiceRange then
+			line.selections = buildSubsetSelections(definition, line.requirements, line.selections, line)
+		end
+		-- Keep item keys, credited deliveries and money; completed categories are not reopened.
 		line.requirementModesVersion = definition.requirementModesVersion
 
 		return true

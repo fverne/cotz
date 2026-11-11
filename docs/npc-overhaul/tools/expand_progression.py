@@ -212,8 +212,25 @@ def opening_steps(contact):
     return opening
 
 
+def requirement_batch_sizes(data, families):
+    sizes = {}
+    for item, kind in families.items():
+        if kind != "valuable":
+            continue
+        bounds = data["batches"].get(item, [data["items"].get(item, {}).get("quantity", 1)])
+        size = min(bounds)
+        for rows in data["loot"].values():
+            for weight, entry in rows:
+                if weight > 0 and entry[0] == item and len(entry) > 1 and "quantity" in entry[1]:
+                    size = min(size, entry[1]["quantity"])
+        if size > 1:
+            sizes[item] = int(size)
+    return sizes
+
+
 def author_requirements(data, rates, sources):
     pools, lookup = {}, {}
+    batches = requirement_batch_sizes(data, eligible_items())
 
     def get_pool(items, label, maps, band, tier=None):
         key = (tuple(sorted(items)), label, tuple(maps), band)
@@ -229,27 +246,32 @@ def author_requirements(data, rates, sources):
             }
         return lookup[key]
 
-    def select_group(names, maps, mode, used, remaining, phase):
+    def select_group(names, maps, mode, used, remaining, phase, category_limit=16):
         candidates = {row["item"] for name in names for row in data["pools"][name]["candidates"]}
         candidates = [item for item in candidates - used if item in sources
                       and sources[item]["kind"] == "valuable"
                       and any(m in sources[item]["maps"] for m in maps)]
         def score(item):
-            return sum(sum(v[1 if mode == "random" else 0] for v in rates[m].get(item, {}).values()) for m in maps)
+            units = sum(sum(v[1 if mode == "random" else 0] for v in rates[m].get(item, {}).values()) for m in maps)
+            return units / batches.get(item, 1) if mode == "random" else units
         candidates.sort(key=lambda item: (-score(item), item))
         if not candidates:
             return set()
-        width = min(8, max(1, len(candidates) // (remaining + 1)))
         if mode == "any":
-            # Bulk requests favour accessible supplies. Leave distinct candidates for other slots.
+            # Leave enough accessible candidates for disjoint three-item subsets in the other categories.
+            width = category_limit
             start = 0
         else:
+            width = min(8, max(1, len(candidates) // (remaining + 1)))
             start = min(len(candidates) - 1, int(phase * (len(candidates) - 1) * 0.6))
             # A specific-item roll must not mix a common find with a much rarer alternative.
             best = score(candidates[start])
             candidates = [item for item in candidates[start:] if score(item) >= best / 3]
             start = 0
-        return set(candidates[start:start + width])
+        items = set(candidates[start:start + width])
+        if mode == "any" and bool("value_nuts" in items) != bool("value_bolts" in items):
+            items -= {"value_nuts", "value_bolts"}
+        return items
 
     for slug, contact in sorted(data["contacts"].items()):
         if not contact["progression"]:
@@ -288,12 +310,14 @@ def author_requirements(data, rates, sources):
                     support = count >= 3 and index == count - 1
                     names = identity["support"] if support else identity["core"]
                     remaining = max(0, count - index - (2 if count >= 3 and not support else 1))
-                    items = select_group(names, slot_maps, mode, used, remaining, phase)
+                    limit = 6 if category_only and count == 1 else 16
+                    items = select_group(names, slot_maps, mode, used, remaining, phase, limit)
                     if not items and support:
-                        items = select_group(identity["core"], slot_maps, mode, used, 0, phase)
+                        items = select_group(identity["core"], slot_maps, mode, used, 0, phase, limit)
                     assert items, (slug, step["id"], index, "No distinct local specialty supplies")
                     label = identity["name"] + (": supporting supplies" if support else ": general supplies")
-                used.update(items)
+                if mode == "random":
+                    used.update(items)
                 pool = get_pool(items, label, slot_maps, index,
                                 data["pools"][artifact_pool]["tier"] if artifact_pool else None)
                 requirement = {"pool": pool, "quantity": slot["quantity"], "mode": mode}
@@ -334,7 +358,8 @@ def outputs():
         source = path.read_text()
         output[path] = render_contact(source, contact["progression"])
     original = POOL_FILE.read_text().split(MARKER)[0].rstrip()
-    generated = [original, MARKER.rstrip(), "ix.progression.townRequirementSources = " + lua(sources)]
+    generated = [original, MARKER.rstrip(), "ix.progression.townRequirementSources = " + lua(sources),
+                 "ix.progression.requirementBatchSizes = " + lua(requirement_batch_sizes(data, eligible_items()))]
     for name, pool in pools.items():
         generated.append("ix.progression.itemPools." + name + " = " + lua(pool))
     output[POOL_FILE] = "\n\n".join(generated) + "\n"

@@ -376,25 +376,27 @@ if SERVER then
 		if not isnumber(available) or available ~= available or available == math.huge then
 			return false
 		end
-		local amount = math.floor(math.min(available, remaining))
+		local size = ix.progression.GetRequirementUnitSize(progressionID, itemID, character)
+		local amount = math.min(math.floor(available / size), remaining)
 		if amount <= 0 then
 			return false
 		end
+		local consumed = amount * size
 		local itemName = item.name or ix.item.list[itemID].name
-		local reputation, money = ix.util.GetValueFromProgressionTurnin(item, amount, itemID)
+		local reputation, money = ix.util.GetValueFromProgressionTurnin(item, consumed, itemID)
 		-- Consume before running completion callbacks or giving rewards.
-		if amount == available then
+		if consumed == available then
 			if item:Remove() == false then
 				return false
 			end
 		else
-			item:SetData("quantity", available - amount)
+			item:SetData("quantity", available - consumed)
 		end
-		ix.dialogue.notifyItemLost(client, string.format("%s x%d", itemName, amount))
+		ix.dialogue.notifyItemLost(client, string.format("%s x%d", itemName, consumed))
 		ix.progression.AccrueTurnInRewards(character, progressionID, reputation, money, itemID)
 		ix.progression.AddComplexProgressionValue(character, progressionID, { itemID, amount })
 		character:Save()
-		local response = string.format("Received %d x %s. ", amount, itemName)
+		local response = string.format("Received %d x %s. ", consumed, itemName)
 		if ix.progression.IsCompleted(character, progressionID) then
 			response = response .. "Task complete. Claim any pending rewards here."
 		elseif remaining > amount then

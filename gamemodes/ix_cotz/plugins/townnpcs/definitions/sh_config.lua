@@ -1,4 +1,5 @@
 PLUGIN.settings = {
+	progressionCategoryChoices = {3, 4},
 	-- OnInstanced yields; quantity is otherwise the item capacity, not its spawned yield.
 	spawnBatches = {
 		value_nuts = {3, 8},

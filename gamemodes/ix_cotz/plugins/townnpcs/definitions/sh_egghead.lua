@@ -94,6 +94,7 @@ PLUGIN:Register("egghead", {
 	progressionIdentity = {
 		name = "Laboratory containment and research reagents",
 		core = {
+			"valuables_technical_records",
 			"valuables_medical_equipment",
 			"valuables_filtration",
 			"valuables_research_injectors_a",
@@ -135,8 +136,8 @@ PLUGIN:Register("egghead", {
 			briefing = "I'd like a larger SSP-99 reserve before opening the next suit arrangement. Supplies have an irritating habit of demanding attention just as a comparison becomes interesting. Bring this order in and your stock allowance will rise. It won't refill the suits immediately, even if I explain the desirability of doing so at length.",
 			completion = "Your SSP-99 stock capacity has increased. A satisfactorily practical result; Beanstalk would approve of me noticing it.",
 			requirements = {
-				{pool = "town_expansion_cdf25d73f659", quantity = 1, mode = "any"},
-				{pool = "town_expansion_d2609995f8d8", quantity = 1, mode = "any"},
+				{pool = "town_expansion_745c62856683", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8b83c0d2cc3a", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"suit_ssp99"},
@@ -186,9 +187,9 @@ PLUGIN:Register("egghead", {
 			briefing = "The SSP-99M reserve needs its own supplies. This request increases how many I can keep available for you; it isn't the SEVA purchase arrangement yet. I'd rather say that plainly now than discover we've conducted two entirely different negotiations over the same table.",
 			completion = "The SSP-99M allowance is larger. The SEVA arrangement remains a separate matter, and the shelves refill normally.",
 			requirements = {
-				{pool = "town_expansion_4fb728e0590f", quantity = 2, mode = "any"},
-				{pool = "town_expansion_cd0152fc8308", quantity = 2, mode = "any"},
-				{pool = "town_expansion_7ab833816100", quantity = 1, mode = "any"},
+				{pool = "town_expansion_745c62856683", quantity = 2, mode = "any"},
+				{pool = "town_expansion_8b83c0d2cc3a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c4322c51582c", quantity = 1, mode = "any"},
 				{pool = "town_expansion_7d43e6ba987e", quantity = 1, mode = "any"},
 			},
 			stock = {

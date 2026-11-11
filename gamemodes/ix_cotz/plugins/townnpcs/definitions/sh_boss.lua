@@ -124,7 +124,7 @@ PLUGIN:Register("boss", {
 			briefing = "The PASGT purchase arrangement requires this delivery. I need the protective-equipment supplies listed here, returned in full. You can ask about a practical difficulty before accepting the work. There is little value in discovering after departure that we understood the request differently.",
 			completion = "PASGT purchase access is approved. The agreed delivery is complete.",
 			requirements = {
-				{pool = "town_expansion_38773dec85c7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_42254f70f06f", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 10,
@@ -141,7 +141,7 @@ PLUGIN:Register("boss", {
 			briefing = "The CS-4 needs military filter cartridges. Complete this supply delivery before we open the helmet purchase order. You will be able to buy replacements here; the cartridge fitted to a new helmet is a starting supply.",
 			completion = "Military filter purchases are approved. The CS-4 request can follow.",
 			requirements = {
-				{pool = "town_expansion_b3dfc5681867", quantity = 1, mode = "any"},
+				{pool = "town_expansion_301902d9f818", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 10,
@@ -176,7 +176,7 @@ PLUGIN:Register("boss", {
 			briefing = "The CS-4 reserve needs these materials before the next purchase arrangement. Completion increases your stock capacity for that helmet. It doesn't authorise an immediate refill, and urgency won't change that distinction.",
 			completion = "Your CS-4 stock allowance is increased. Refill remains on its normal schedule.",
 			requirements = {
-				{pool = "town_expansion_b3dfc5681867", quantity = 1, mode = "any"},
+				{pool = "town_expansion_ce9765fb7cf7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -237,8 +237,8 @@ PLUGIN:Register("boss", {
 			briefing = "For the Sphere-08, this is the order I need completed. There are several entries, so check what you're undertaking. An accurate account of what remains is useful to me; an assurance that everything is nearly done is less so.",
 			completion = "You can purchase the Sphere-08 now. Nothing remains outstanding on this delivery.",
 			requirements = {
-				{pool = "town_expansion_f0839ac5ddec", quantity = 2, mode = "any"},
-				{pool = "town_expansion_03bbb2fdfea5", quantity = 1, mode = "random"},
+				{pool = "town_expansion_38773dec85c7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c1cbada5e01f", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 10,
@@ -255,8 +255,8 @@ PLUGIN:Register("boss", {
 			briefing = "Before extending the Sphere line, I want this reserve order finished. It raises your Sphere-08 allowance. Keeping the existing equipment supported is part of the arrangement, even when the next helmet is what brought you here.",
 			completion = "Sphere-08 stock capacity has increased. The existing allocation is settled.",
 			requirements = {
-				{pool = "town_expansion_f0839ac5ddec", quantity = 1, mode = "any"},
-				{pool = "town_expansion_5057b25bebae", quantity = 1, mode = "any"},
+				{pool = "town_expansion_38773dec85c7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_59255152cb9b", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -278,8 +278,8 @@ PLUGIN:Register("boss", {
 			briefing = "The Sphere-12 requires a further supply delivery. Bring what's listed and we'll open its purchase route. There's no requirement to discuss what you intend to do with it beyond what this transaction actually needs.",
 			completion = "The Sphere-12 is approved for purchase. You've completed the full order.",
 			requirements = {
-				{pool = "town_expansion_f0839ac5ddec", quantity = 2, mode = "any"},
-				{pool = "town_expansion_03bbb2fdfea5", quantity = 1, mode = "random"},
+				{pool = "town_expansion_38773dec85c7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c1cbada5e01f", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 10,
@@ -296,8 +296,8 @@ PLUGIN:Register("boss", {
 			briefing = "This order concerns the Sphere-12 reserve, rather than the ACH. Complete the listed delivery and I'll increase its stock allowance. I'd prefer the distinction understood before either of us starts allocating supplies on an assumption.",
 			completion = "Your Sphere-12 allowance is larger. The next helmet remains a separate purchase arrangement.",
 			requirements = {
-				{pool = "town_expansion_f0839ac5ddec", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5057b25bebae", quantity = 1, mode = "any"},
+				{pool = "town_expansion_38773dec85c7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_59255152cb9b", quantity = 1, mode = "any"},
 				{pool = "town_expansion_3b8591e605b5", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -320,8 +320,8 @@ PLUGIN:Register("boss", {
 			briefing = "The ACH purchase route depends on this delivery. Protective equipment attracts confident opinions; the materials still need to arrive regardless of which helmet someone prefers. Bring the complete order back here.",
 			completion = "ACH purchase access is approved. The delivery meets the arrangement.",
 			requirements = {
-				{pool = "town_expansion_f0839ac5ddec", quantity = 3, mode = "any"},
-				{pool = "town_expansion_5057b25bebae", quantity = 2, mode = "any"},
+				{pool = "town_expansion_38773dec85c7", quantity = 3, mode = "any"},
+				{pool = "town_expansion_59255152cb9b", quantity = 2, mode = "any"},
 				{pool = "town_expansion_42e6fb2eee15", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
@@ -339,8 +339,8 @@ PLUGIN:Register("boss", {
 			briefing = "I need this order for an increased ACH reserve. That raises capacity, with the normal stock refill. It is a useful piece of preparation without requiring me to attach an operation or a speech to it.",
 			completion = "The ACH reserve capacity is increased. Preparation complete for that allocation.",
 			requirements = {
-				{pool = "town_expansion_f0839ac5ddec", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5d53532b81d0", quantity = 1, mode = "any"},
+				{pool = "town_expansion_38773dec85c7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_bbed61122071", quantity = 1, mode = "any"},
 				{pool = "town_expansion_bd11a578386c", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -368,8 +368,8 @@ PLUGIN:Register("boss", {
 			briefing = "For PRACS, the supply terms are here. Check the smaller entries as carefully as the large ones. I'd rather have a complete ordinary delivery than hear how close an incomplete one came to being exceptional.",
 			completion = "PRACS is available to purchase. All entries have been received.",
 			requirements = {
-				{pool = "town_expansion_f0839ac5ddec", quantity = 3, mode = "any"},
-				{pool = "town_expansion_5d53532b81d0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_38773dec85c7", quantity = 3, mode = "any"},
+				{pool = "town_expansion_bbed61122071", quantity = 2, mode = "any"},
 				{pool = "town_expansion_ebe1eeabefee", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
@@ -392,9 +392,9 @@ PLUGIN:Register("boss", {
 			briefing = "Before the final helmet, complete this PRACS reserve request. I am increasing the amount that can be held for you, not promising that amount on the shelf today. Those are separate commitments.",
 			completion = "Your PRACS capacity is larger now. Availability still depends on current stock.",
 			requirements = {
-				{pool = "town_expansion_c0fa3fd9aabe", quantity = 2, mode = "any"},
-				{pool = "town_expansion_39cb7e94440d", quantity = 2, mode = "any"},
-				{pool = "town_expansion_9c9e7fa86560", quantity = 1, mode = "any"},
+				{pool = "town_expansion_38773dec85c7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1d12d1615a01", quantity = 2, mode = "any"},
+				{pool = "town_expansion_9e28abde391d", quantity = 1, mode = "any"},
 				{pool = "town_expansion_d4d3a8a90806", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -422,9 +422,9 @@ PLUGIN:Register("boss", {
 			briefing = "The PSZ-12 is the final purchase arrangement in this line. Bring this full order. You've completed enough business here to know I value a verifiable result; there's no need to dress the delivery up as anything else.",
 			completion = "PSZ-12 purchase access is approved. You've finished the helmet arrangements as agreed.",
 			requirements = {
-				{pool = "town_expansion_c0fa3fd9aabe", quantity = 4, mode = "any"},
-				{pool = "town_expansion_39cb7e94440d", quantity = 3, mode = "any"},
-				{pool = "town_expansion_9c9e7fa86560", quantity = 2, mode = "any"},
+				{pool = "town_expansion_38773dec85c7", quantity = 4, mode = "any"},
+				{pool = "town_expansion_1d12d1615a01", quantity = 3, mode = "any"},
+				{pool = "town_expansion_9e28abde391d", quantity = 2, mode = "any"},
 				{pool = "town_expansion_c37f2fe71765", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,

@@ -257,7 +257,9 @@ TODO plans alone never satisfy reward coverage. Empty steps are reported without
                 "## Hand-in modes\n\n"
                 "The first 20% of actual unlocks in each branch, rounded up, are category-only. "
                 "Stock intermissions are category-wide. Later ordinary deliveries use a specific final slot "
-                "with category totals in any preceding slots. Existing saved counts and specific rolls are retained.\n\n"
+                "with category totals in any preceding slots. Each category saves 3–4 accepted types per character. "
+                "Quantity-bearing valuables use spawn-sized batches; nuts and bolts are offered together. "
+                "Completed progress and saved specific rolls are retained.\n\n"
                 "| Contact | Opening category-only unlocks | Category slots | Specific slots |\n"
                 "| --- | ---: | ---: | ---: |\n" + "\n".join(mode_rows),
                 "## Every progression step\n\n| Contact | Step | Functional unlocks | TODO unlocks | Supplementary rewards |\n"

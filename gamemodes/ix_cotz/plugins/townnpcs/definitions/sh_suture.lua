@@ -136,7 +136,7 @@ PLUGIN:Register("suture", {
 			briefing = "The old ceramic plate begins this attachment range. Bring the textile and outfitting supplies listed here and I'll open its purchase route. People sometimes expect me to approve the rest of their outfit at the same time. You can buy a plate without submitting your coat for comment.",
 			completion = "The old ceramic plate is available to buy. Your coat has survived the transaction without my opinion.",
 			requirements = {
-				{pool = "town_expansion_3c5cd8199633", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9441b17bc45e", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 13,
@@ -153,7 +153,7 @@ PLUGIN:Register("suture", {
 			briefing = "The worn steel plate has a separate order. I'd like the materials below before making it available. A person can become surprisingly attached to an unpromising piece of equipment; I prefer letting them choose after they've had a proper look.",
 			completion = "Worn-steel purchase access is ready. The delivery is received; the choice belongs to you.",
 			requirements = {
-				{pool = "town_expansion_b9ac7abdac90", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4f326e70072d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 13,
@@ -170,7 +170,7 @@ PLUGIN:Register("suture", {
 			briefing = "This order increases the worn steel plate reserve. Bring the full list and I'll raise your stock allowance. Supporting an ordinary attachment is worthwhile even when it isn't the thing someone has come to admire.",
 			completion = "Your worn-steel stock allowance is larger. Refill remains on the usual schedule.",
 			requirements = {
-				{pool = "town_expansion_b9ac7abdac90", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4f326e70072d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_steelplate_1"},
@@ -195,7 +195,7 @@ PLUGIN:Register("suture", {
 			briefing = "Insulating fabrics are the next purchase arrangement. I need the outfitting supplies here first. People are much more articulate about a plate than a layer of fabric, until a small discomfort has occupied an entire walk.",
 			completion = "Insulating fabrics are open for purchase. All the requested supplies have arrived.",
 			requirements = {
-				{pool = "town_expansion_b9ac7abdac90", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4f326e70072d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 13,
@@ -212,7 +212,7 @@ PLUGIN:Register("suture", {
 			briefing = "I'd like a larger reserve of insulating fabrics before the next plate. This delivery increases capacity for the layers already available to you. The shelf itself will still take its usual time to refill.",
 			completion = "Insulating-fabric capacity increased. The quieter part of the outfit has its reserve arranged.",
 			requirements = {
-				{pool = "town_expansion_b9ac7abdac90", quantity = 1, mode = "any"},
+				{pool = "town_expansion_92fb932ff1c5", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_fabric_1"},
@@ -254,8 +254,8 @@ PLUGIN:Register("suture", {
 			briefing = "The ceramic plate is next. Bring the textile and outfitting materials listed here. It is a small enough request to write down, and a long enough trip that I'd rather you read it carefully before agreeing.",
 			completion = "The ceramic plate is available to you now. Thank you for returning the complete order.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4890d067106b", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3acf0f035059", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 13,
@@ -272,8 +272,8 @@ PLUGIN:Register("suture", {
 			briefing = "This reserve order concerns the ceramic plate. It increases how much stock can be held for you, rather than putting a new plate in your pack. I'd rather settle that expectation before you rearrange everything around it.",
 			completion = "Ceramic-plate allowance increased. Actual stock still needs its normal refill.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_18843025de3c", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_0b1245b6e79e", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_ceramicplate_2"},
@@ -298,8 +298,8 @@ PLUGIN:Register("suture", {
 			briefing = "Thicker insulating fabrics come through this supply arrangement. I'd like the full list brought here. I enjoy working with material people can feel a difference in without having to invent a reason why their preference is respectable.",
 			completion = "The thick insulating fabrics can be purchased now. The materials for this order are all accounted for.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_0bf6215d6420", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_d941dc81b901", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 13,
@@ -316,8 +316,8 @@ PLUGIN:Register("suture", {
 			briefing = "I'd like the thick-fabric reserve expanded before the Kevlar. Bring the listed supplies and the allowance grows. Nobody has to call fabric exciting for it to deserve a proper place on the stock sheet.",
 			completion = "Your thick-fabric stock capacity is larger. The reserve has a place of its own now.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_18843025de3c", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_0b1245b6e79e", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_fabric_2"},
@@ -342,8 +342,8 @@ PLUGIN:Register("suture", {
 			briefing = "The K119 plates have their own purchase request. Bring these outfitting supplies back here. You're allowed to ask what becomes available without pretending you've already decided every layer of the finished outfit.",
 			completion = "K119 purchase access is ready. You can take your time choosing the attachment.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e89248037748", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2b18fb90c7bf", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 13,
@@ -360,8 +360,8 @@ PLUGIN:Register("suture", {
 			briefing = "Before the aluminium frame, this order raises your K119 reserve. It does not change the plates or fit anything to your suit. We are agreeing on stock capacity, with the normal refill afterwards.",
 			completion = "K119 stock capacity increased. That completes the reserve arrangement.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 1, mode = "any"},
-				{pool = "town_expansion_18843025de3c", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_0b1245b6e79e", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_kevlar_1"},
@@ -386,8 +386,8 @@ PLUGIN:Register("suture", {
 			briefing = "The aluminium frame is available through this delivery. Bring the supplies below. I notice how people lift their packs when they ask about frames; it's usually a more useful beginning than the explanation they prepared on the way in.",
 			completion = "Aluminium-frame purchase access is open. The supply order is complete; you can put the pack down now.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e89248037748", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_222a2f2dcf66", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 13,
@@ -404,9 +404,9 @@ PLUGIN:Register("suture", {
 			briefing = "This is the aluminium-frame reserve request. Complete it and I can hold more for you as stock refills. I like finishing a practical arrangement before somebody begins asking whether the next frame would look better.",
 			completion = "Your aluminium-frame allowance has increased. The next attachment can wait its turn.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3d545324f4f1", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2470b2a13707", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6f85ea5be266", quantity = 1, mode = "any"},
+				{pool = "town_expansion_77bed644606f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_aluframe"},
@@ -431,8 +431,8 @@ PLUGIN:Register("suture", {
 			briefing = "For the galvanised steel plate, bring this outfitting order. Names can make people sound remarkably certain about equipment they haven't handled. You're welcome to finish the delivery, then have a proper look before buying.",
 			completion = "The galvanised plate is open for purchase. I have received every part of the order.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_3d545324f4f1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_6f85ea5be266", quantity = 2, mode = "any"},
 				{pool = "town_expansion_b4f6e587d11c", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
@@ -450,9 +450,9 @@ PLUGIN:Register("suture", {
 			briefing = "The galvanised-plate reserve needs these supplies. This delivery increases your capacity for that plate. I won't turn a smaller order into an opportunity to add everything I remembered needing since breakfast.",
 			completion = "Galvanised-plate stock capacity increased. Exactly the order we agreed on.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 1, mode = "any"},
-				{pool = "town_expansion_f71814abbe4a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 1, mode = "any"},
+				{pool = "town_expansion_708945232835", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_steelplate_3"},
@@ -482,8 +482,8 @@ PLUGIN:Register("suture", {
 			briefing = "Carbon-fibre layers are next. I'd like the listed outfitting materials brought here first. People tend to ask what a layer will say about their equipment before admitting that they're simply interested in trying it. Interest is quite enough for a purchase question.",
 			completion = "The carbon-fibre layers are available to buy. You've finished the supply arrangement.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 2, mode = "any"},
 				{pool = "town_expansion_b7928c8a97c3", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
@@ -506,9 +506,9 @@ PLUGIN:Register("suture", {
 			briefing = "Before the steel frame, there's a carbon-fibre reserve order. Complete the list and the allowance rises. The existing stock will refill normally; I'm making more room in the arrangement, not packing another layer for you now.",
 			completion = "Carbon-fibre reserve capacity increased. Its normal refill still applies.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 1, mode = "any"},
-				{pool = "town_expansion_f71814abbe4a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 1, mode = "any"},
+				{pool = "town_expansion_708945232835", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_carbonfibre"},
@@ -538,8 +538,8 @@ PLUGIN:Register("suture", {
 			briefing = "The steel frame comes through this request. Bring the full outfitting delivery. You can discuss what you want from the equipment plainly here; I don't need a ceremonial account of how little comfort matters to you.",
 			completion = "Steel-frame purchase access is ready. A complete delivery and a straightforward arrangement.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 2, mode = "any"},
 				{pool = "town_expansion_0a2a535093bf", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
@@ -562,9 +562,9 @@ PLUGIN:Register("suture", {
 			briefing = "I'd like the steel-frame reserve settled before the next ceramic plate. The materials listed below increase that allowance. There is something pleasing about supporting equipment after the initial enthusiasm has moved on.",
 			completion = "Your steel-frame stock capacity has increased. Fresh frames will follow the ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 1, mode = "any"},
-				{pool = "town_expansion_f71814abbe4a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 1, mode = "any"},
+				{pool = "town_expansion_708945232835", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_steelframe"},
@@ -594,8 +594,8 @@ PLUGIN:Register("suture", {
 			briefing = "The modern ceramic plate needs this supply order. Take a moment over the list; being pleased with the equipment is a better reason to read it carefully than to hurry past it. Purchase access follows the full delivery.",
 			completion = "The modern ceramic plate is open for purchase. All supplies received and put aside.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 2, mode = "any"},
 				{pool = "town_expansion_e9d564566ea6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
@@ -618,10 +618,10 @@ PLUGIN:Register("suture", {
 			briefing = "This order increases the modern ceramic plate reserve. It belongs to the attachment you already unlocked, not the K29 purchase. I have made the headings different because tired people deserve better than nearly identical requests.",
 			completion = "Your modern-ceramic stock allowance is larger. This reserve order is finished.",
 			requirements = {
-				{pool = "town_expansion_a91bbf487d15", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4b43b441dd21", quantity = 2, mode = "any"},
-				{pool = "town_expansion_ed39009e757a", quantity = 1, mode = "any"},
-				{pool = "town_expansion_29ae43e240cf", quantity = 1, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6f85ea5be266", quantity = 2, mode = "any"},
+				{pool = "town_expansion_10904788249e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_aeaa200e6d7f", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"attachment_ceramicplate_3"},
@@ -651,9 +651,9 @@ PLUGIN:Register("suture", {
 			briefing = "The K29 plates are the final purchase arrangement in this attachment line. Bring the full textile and outfitting order here. I'll leave the outfit you build from it to your own preferences; they're allowed a place beside the practical considerations.",
 			completion = "K29 purchase access is complete. The attachment arrangements are finished, and the choices are yours.",
 			requirements = {
-				{pool = "town_expansion_a91bbf487d15", quantity = 4, mode = "any"},
-				{pool = "town_expansion_4b43b441dd21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_ed39009e757a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 4, mode = "any"},
+				{pool = "town_expansion_6f85ea5be266", quantity = 3, mode = "any"},
+				{pool = "town_expansion_10904788249e", quantity = 2, mode = "any"},
 				{pool = "town_expansion_080481dac15f", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
@@ -677,7 +677,7 @@ PLUGIN:Register("suture", {
 			briefing = "If you want the alternate Anorak finishes, start with this textile delivery. You also need the base suit's purchase unlock. Then the paid conversion service can offer its available variants; I'm not handing over a new suit with the delivery.",
 			completion = "Anorak variants are unlocked. With the base-suit access, you can use the paid conversion service.",
 			requirements = {
-				{pool = "town_expansion_3c5cd8199633", quantity = 1, mode = "any"},
+				{pool = "town_expansion_9441b17bc45e", quantity = 1, mode = "any"},
 			},
 			variantBase = "suit_anorak",
 			branchIndex = 1,
@@ -698,7 +698,7 @@ PLUGIN:Register("suture", {
 			briefing = "The mail jacket's variants have their own material order. Bring the supplies here and keep the base-suit purchase unlock in mind. Liking a different finish is a perfectly good reason; there's no need to invent an improvement it doesn't claim.",
 			completion = "Mail-jacket variants are unlocked. The conversion menu will apply the usual suit and fee requirements.",
 			requirements = {
-				{pool = "town_expansion_b9ac7abdac90", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4f326e70072d", quantity = 1, mode = "any"},
 			},
 			variantBase = "suit_mailjacket",
 			branchIndex = 2,
@@ -719,7 +719,7 @@ PLUGIN:Register("suture", {
 			briefing = "For Sunrise variants, this is the textile request. Finish it alongside the base suit's purchase unlock and the paid conversions become available. A familiar suit can be worth keeping even when you're tired of looking at the same finish.",
 			completion = "Sunrise variants are available through conversion, with base access and the ordinary fee.",
 			requirements = {
-				{pool = "town_expansion_b9ac7abdac90", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4f326e70072d", quantity = 1, mode = "any"},
 			},
 			variantBase = "suit_sunrise",
 			branchIndex = 3,
@@ -782,8 +782,8 @@ PLUGIN:Register("suture", {
 			briefing = "For Pathfinder variants, I need this textile delivery. Keep the base-suit purchase access separate in your mind; both are required. I enjoy a customer who can say they like a finish and let that be the end of the explanation.",
 			completion = "Pathfinder variants are unlocked. Paid conversion remains subject to your base-suit access.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_0bf6215d6420", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2f020af62913", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_wind",
 			branchIndex = 6,
@@ -804,8 +804,8 @@ PLUGIN:Register("suture", {
 			briefing = "The Universal Protection variants come through this material order. Complete it and the base-suit unlock, then use the conversion service at its usual fee. The suit's name needn't supply a technical justification for your favourite colour.",
 			completion = "Universal Protection variants are unlocked. The conversion service retains its normal requirements and charge.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_0bf6215d6420", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_d941dc81b901", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_ps5m",
 			branchIndex = 7,
@@ -826,8 +826,8 @@ PLUGIN:Register("suture", {
 			briefing = "Sky-2 variants are next. Bring the listed materials and make sure the base suit's purchase route is unlocked as well. I can be exact about the arrangement without deciding what you ought to look like when it's finished.",
 			completion = "Sky-2 variants are unlocked. With base access, the paid conversion options are available.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e89248037748", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2b18fb90c7bf", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_cs2",
 			branchIndex = 8,
@@ -848,8 +848,8 @@ PLUGIN:Register("suture", {
 			briefing = "For the NBC variants, complete this textile request alongside the base-suit unlock. We are discussing alternate finishes through the paid service. You needn't tell me where you plan to wear it to ask about how it looks.",
 			completion = "NBC variants are unlocked. The usual fee and base-suit requirements remain in place.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_65bb0e75d525", quantity = 1, mode = "random"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_222a2f2dcf66", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_nbc",
 			branchIndex = 9,
@@ -870,8 +870,8 @@ PLUGIN:Register("suture", {
 			briefing = "The Berill variants have this material order. Bring it back complete and earn the base-suit purchase access; then the service can offer its supported finishes. I won't turn the choice into an inspection of the rest of your equipment.",
 			completion = "Berill variants are unlocked. You can arrange a paid conversion with the required base access.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_3d545324f4f1", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_6f85ea5be266", quantity = 2, mode = "any"},
 				{pool = "town_expansion_b4f6e587d11c", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_berill",
@@ -893,8 +893,8 @@ PLUGIN:Register("suture", {
 			briefing = "Sky-3 variants require the supplies listed below. Complete the request and the base-suit unlock to use them through the paid service. A long equipment list doesn't make an ordinary preference less worth hearing.",
 			completion = "Sky-3 variants are unlocked. Their conversion uses the usual suit checks and fee.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 2, mode = "any"},
 				{pool = "town_expansion_0a2a535093bf", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_cs3",
@@ -921,8 +921,8 @@ PLUGIN:Register("suture", {
 			briefing = "For the SEVA variants, this is the textile delivery. Base-suit purchase access is also required. I sometimes hear remarkably elaborate arguments for a finish somebody simply likes; you can save us both the argument.",
 			completion = "SEVA variants are unlocked. With the base access, you can choose a paid conversion.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 2, mode = "any"},
 				{pool = "town_expansion_0a2a535093bf", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_seva",
@@ -949,8 +949,8 @@ PLUGIN:Register("suture", {
 			briefing = "Skat-10 variants have their own supply request. Bring the full list and unlock the base suit too. The existing conversion service handles the change, for its usual fee; this delivery buys no replacement suit.",
 			completion = "Skat-10 variants are unlocked. Base access and the ordinary conversion charge still apply.",
 			requirements = {
-				{pool = "town_expansion_9441b17bc45e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a7a6382a68e7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 3, mode = "any"},
+				{pool = "town_expansion_02c827324460", quantity = 2, mode = "any"},
 				{pool = "town_expansion_e9d564566ea6", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_skat10",
@@ -977,9 +977,9 @@ PLUGIN:Register("suture", {
 			briefing = "The Skat-9 variants are the last finish arrangement here. Complete this textile order alongside the base-suit unlock. I'll be glad to finish discussing what is required and let you spend a moment choosing what you actually want.",
 			completion = "Skat-9 variants are unlocked. That's the finish arrangements complete; the paid service is there when you're ready.",
 			requirements = {
-				{pool = "town_expansion_a91bbf487d15", quantity = 4, mode = "any"},
-				{pool = "town_expansion_4b43b441dd21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_ed39009e757a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6ffc7ac7f5d1", quantity = 4, mode = "any"},
+				{pool = "town_expansion_6f85ea5be266", quantity = 3, mode = "any"},
+				{pool = "town_expansion_10904788249e", quantity = 2, mode = "any"},
 				{pool = "town_expansion_080481dac15f", quantity = 1, mode = "random"},
 			},
 			variantBase = "suit_skat9",

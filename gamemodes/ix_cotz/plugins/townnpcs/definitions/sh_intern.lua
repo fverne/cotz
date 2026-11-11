@@ -89,6 +89,7 @@ PLUGIN:Register("intern", {
 	progressionIdentity = {
 		name = "Detector calibration and survey equipment",
 		core = {
+			"valuables_technical_records",
 			"field_instruments",
 			"valuables_survey_equipment",
 			"valuables_sample_carriers",
@@ -128,8 +129,8 @@ PLUGIN:Register("intern", {
 			briefing = "Before the next detector, I'd like to increase your Echo stock allowance. Keeping instruments available is part of preparation too, even if it's less interesting to discuss. This is the order for that reserve; it won't produce another detector immediately.",
 			completion = "Your Echo allowance has increased. The stock itself still follows the usual refill.",
 			requirements = {
-				{pool = "town_expansion_9ca634ef473b", quantity = 1, mode = "any"},
-				{pool = "town_expansion_341f46a2577a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43d693fb144f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c268760d508e", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"detectorecho"},
@@ -182,9 +183,9 @@ PLUGIN:Register("intern", {
 			briefing = "I'd like to get the Bear reserve settled before the final detector request. These supplies increase the amount I can hold for you. It is still a stock allowance, so please check what's actually on sale before packing around a spare.",
 			completion = "I've increased your Bear stock capacity. The reserve is arranged; the refill timing hasn't changed.",
 			requirements = {
-				{pool = "town_expansion_c424b030ac41", quantity = 2, mode = "any"},
-				{pool = "town_expansion_bc0105418f59", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4c2ad9cd5e95", quantity = 1, mode = "any"},
+				{pool = "town_expansion_43d693fb144f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c268760d508e", quantity = 2, mode = "any"},
+				{pool = "town_expansion_a5a382cf5db3", quantity = 1, mode = "any"},
 				{pool = "town_expansion_6be29e7a116d", quantity = 1, mode = "any"},
 			},
 			stock = {

@@ -57,35 +57,35 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 
 | Contact | Specialty | Core pools | Related support pools |
 | --- | --- | --- | --- |
-| atlas | Survey notes and measuring instruments | valuables_field_records, valuables_instruments | valuables_survey_equipment, valuables_recording_equipment |
+| atlas | Survey notes and measuring instruments | valuables_technical_records, valuables_field_records, valuables_instruments | valuables_survey_equipment, valuables_recording_equipment |
 | ballast | Freight cases and cargo packing | town_textiles, valuables_transit_cases, valuables_reinforced_cases | valuables_textile_supplies, valuables_fuel_supplies |
-| beanstalk | Field samples and laboratory containment | valuables_research_samples, valuables_sample_carriers | valuables_filtration, documents_research |
+| beanstalk | Field samples and laboratory containment | valuables_technical_records, valuables_research_samples, valuables_sample_carriers | valuables_filtration, documents_research |
 | boss | Ordnance and protective equipment | valuables_ordnance_salvage, valuables_armour_panels | valuables_secured_cases, valuables_military_cases |
 | brass | Reloading components and ammunition storage | powder, valuables_military_cases, maintenance | valuables_drivers_wrenches, valuables_equipment_pouches |
 | carbon | Historical documents and technical records | documents_field, documents_technical, documents_research, valuables_technical_records | valuables_printed_material, valuables_recording_equipment |
 | cleaner | Storage upkeep and discreet containers | valuables_cleaning_supplies, valuables_secured_cases | valuables_transit_cases, valuables_workshop_consumables |
-| egghead | Laboratory containment and research reagents | valuables_medical_equipment, valuables_filtration, valuables_research_injectors_a, valuables_research_injectors_b, valuables_research_samples | valuables_instruments |
+| egghead | Laboratory containment and research reagents | valuables_technical_records, valuables_medical_equipment, valuables_filtration, valuables_research_injectors_a, valuables_research_injectors_b, valuables_research_samples | valuables_instruments |
 | gasket | Generator parts and camp electrics | heavy_components, engine_care, valuables_electrical_supplies | fuel, repair_electrical |
 | haggler | Resale curios and small valuables | small_valuables, valuables_decorative_valuables, statues | valuables_personal_effects, valuables_transit_cases |
-| intern | Detector calibration and survey equipment | field_instruments, valuables_survey_equipment, valuables_sample_carriers | batteries, valuables_technical_records |
+| intern | Detector calibration and survey equipment | valuables_technical_records, field_instruments, valuables_survey_equipment, valuables_sample_carriers | batteries, valuables_technical_records |
 | jitters | Clinical supplies and trauma equipment | valuables_clinical_supplies, valuables_trauma_supplies, valuables_medical_equipment | valuables_filtration, valuables_research_samples |
 | latch | Workshop tools and fabrication materials | valuables_workshop_tools, valuables_cutting_tools, valuables_workshop_consumables | valuables_armour_panels, valuables_protective_textiles |
-| ledger | Consignment paperwork and secure dispatches | valuables_office_records, administrative_documents, valuables_secured_cases | valuables_transit_cases, valuables_field_records |
+| ledger | Consignment paperwork and secure dispatches | valuables_office_records, administrative_documents, valuables_secured_cases, valuables_field_records, valuables_printed_material | valuables_transit_cases, valuables_technical_records |
 | mute | Radio infrastructure and network components | valuables_radio_components, valuables_radio_equipment, small_electronics | valuables_flash_media, valuables_portable_power |
 | old-timer | Trail repairs and camp supplies | field_maintenance, valuables_fuel_supplies | valuables_cutting_tools, valuables_textile_supplies |
 | quartermaster | Field issue kits and military packing | valuables_equipment_pouches, valuables_protective_textiles, valuables_military_cases | administrative_documents, valuables_armour_panels |
-| smartass | Computer hardware and data media | small_electronics, valuables_computer_parts, valuables_portable_computers, valuables_control_electronics, valuables_flash_media | valuables_electronic_components, valuables_technical_records |
+| smartass | Computer hardware and data media | small_electronics, batteries, valuables_technical_records, valuables_computer_parts, valuables_portable_computers, valuables_control_electronics, valuables_flash_media | valuables_electronic_components, valuables_technical_records |
 | spicy-lemon | Kitchen stores and cooking fuel | valuables_provisions, fuel | cleaning, valuables_fuel_supplies |
-| spool | Receivers, communications parts and recordings | consumer_electronics, radio_components, valuables_recording_equipment, fasteners, repair_electrical | valuables_portable_power, valuables_electrical_supplies |
-| spoor | Hunting equipment care and field observations | maintenance, valuables_field_records | valuables_cutting_tools, valuables_instruments |
+| spool | Receivers, communications parts and recordings | consumer_electronics, radio_components, valuables_recording_equipment, fasteners, repair_electrical, valuables_repair_parts | valuables_portable_power, valuables_electrical_supplies |
+| spoor | Hunting equipment care and field observations | maintenance, valuables_field_records, valuables_cutting_tools | valuables_cutting_tools, valuables_instruments |
 | suture | Cloth, protective layers and sewing supplies | valuables_textile_supplies, valuables_protective_textiles | valuables_cutting_tools, valuables_armour_panels |
 | technut | Precision tools and mechanical repair parts | workshop_supplies, adhesives, fasteners, repair_electrical, town_textiles, valuables_repair_parts, valuables_drivers_wrenches, basic_tools, advanced_parts, specialty_tools | valuables_workshop_consumables, valuables_electrical_supplies |
-| vesper | Expedition instruments and field preparation | valuables_instruments, valuables_survey_equipment, field_maintenance | valuables_sample_carriers, valuables_equipment_pouches |
+| vesper | Expedition instruments and field preparation | valuables_instruments, valuables_survey_equipment, field_maintenance, valuables_equipment_pouches, valuables_cutting_tools | valuables_sample_carriers, valuables_equipment_pouches |
 | wake | Personal effects and recovered belongings | valuables_equipment_pouches, valuables_personal_effects, small_valuables | valuables_office_records, valuables_transit_cases |
 
 ## Hand-in modes
 
-The first 20% of actual unlocks in each branch, rounded up, are category-only. Stock intermissions are category-wide. Later ordinary deliveries use a specific final slot with category totals in any preceding slots. Existing saved counts and specific rolls are retained.
+The first 20% of actual unlocks in each branch, rounded up, are category-only. Stock intermissions are category-wide. Later ordinary deliveries use a specific final slot with category totals in any preceding slots. Each category saves 3–4 accepted types per character. Quantity-bearing valuables use spawn-sized batches; nuts and bolts are offered together. Completed progress and saved specific rolls are retained.
 
 | Contact | Opening category-only unlocks | Category slots | Specific slots |
 | --- | ---: | ---: | ---: |

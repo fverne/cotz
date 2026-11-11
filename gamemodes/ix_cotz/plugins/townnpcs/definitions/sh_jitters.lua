@@ -167,7 +167,7 @@ PLUGIN:Register("jitters", {
 			briefing = "If you're asking about Asenapine, I can open a purchase arrangement after this clinical-supply delivery. Let me put the list somewhere you can read it without moving my trays. There. I like to finish these preparations while I can still think about supplies instead of the next person coming through the door.",
 			completion = "The Asenapine purchase arrangement is ready. Thank you for leaving the trays where they were.",
 			requirements = {
-				{pool = "town_expansion_69a36fd02700", quantity = 1, mode = "any"},
+				{pool = "town_expansion_31c8ee1ee48f", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 3,
@@ -184,8 +184,8 @@ PLUGIN:Register("jitters", {
 			briefing = "Chlorpromazine is the next medicine I can make available through a supply order. Please use the list rather than bringing whatever looks medical. People are trying to help, I know; it just takes a surprisingly long time to explain why a collection of empty bottles isn't the delivery we agreed.",
 			completion = "Everything on the order is here. You can purchase Chlorpromazine now; these supplies will have a place of their own.",
 			requirements = {
-				{pool = "town_expansion_2b00b4c4b21c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3381dd915629", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3154c30ff6bf", quantity = 1, mode = "random"},
 			},
 			branchIndex = 2,
 			branchLength = 3,
@@ -202,9 +202,9 @@ PLUGIN:Register("jitters", {
 			briefing = "I'd like to increase your Chlorpromazine stock allowance. A reserve is easier to arrange while there's time to read the request properly. This delivery raises capacity for the medicine; the actual stock still refills normally.",
 			completion = "Your Chlorpromazine allowance is increased. That's one reserve I can stop reconsidering for the moment.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 2, mode = "any"},
-				{pool = "town_expansion_dee44a950fbd", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 2, mode = "any"},
+				{pool = "town_expansion_92f41ad4323a", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a89397d5af5e", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -235,9 +235,9 @@ PLUGIN:Register("jitters", {
 			briefing = "For Zotepine, bring the clinical materials listed here. I've checked the request twice already, so you can trust the list more than the absent-minded additions I might make while talking. The full delivery will open purchase access.",
 			completion = "That completes the Zotepine order. It's available to buy now, and I can finally put this particular list down.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 4, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_dee44a950fbd", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 4, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 3, mode = "any"},
+				{pool = "town_expansion_92f41ad4323a", quantity = 2, mode = "any"},
 				{pool = "town_expansion_f129053f6d26", quantity = 1, mode = "random"},
 			},
 			branchIndex = 3,
@@ -260,7 +260,7 @@ PLUGIN:Register("jitters", {
 			briefing = "The Modafine request uses these supplies. I'm glad you asked before leaving; I prefer agreeing on a delivery here to deciphering what somebody thought I meant when they return tired. Complete the list and I'll make the tablets available to purchase.",
 			completion = "You've completed the Modafine delivery. Purchase access is arranged; no extra errand from me today.",
 			requirements = {
-				{pool = "town_expansion_69a36fd02700", quantity = 1, mode = "any"},
+				{pool = "town_expansion_31c8ee1ee48f", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 2,
@@ -277,9 +277,9 @@ PLUGIN:Register("jitters", {
 			briefing = "Cardazepine is a separate purchase arrangement. The clinical supplies are all listed below; nothing about the order requires you to bring me a story about why you want the medicine. You can talk if you wish, of course. I just don't want curiosity mistaken for a condition of doing business.",
 			completion = "The Cardazepine arrangement is complete. Thank you; you can buy it here now.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 4, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_e0ae749d1392", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 4, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 3, mode = "any"},
+				{pool = "town_expansion_7c1b1e2e5b90", quantity = 2, mode = "any"},
 				{pool = "town_expansion_9bf329b664a1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 2,
@@ -297,7 +297,7 @@ PLUGIN:Register("jitters", {
 			briefing = "The first experimental stimpak has its own supply order. You've reached it through the medical-kit line, but that doesn't make the supplies appear in my cupboard. Bring what's listed here and you can purchase the MkI. I would rather have the arrangement clear before either of us starts rushing.",
 			completion = "The MkI stimpak is open for purchase. Delivery checked, arrangement finished; I can breathe between those two things.",
 			requirements = {
-				{pool = "town_expansion_69a36fd02700", quantity = 1, mode = "any"},
+				{pool = "town_expansion_31c8ee1ee48f", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 3,
@@ -314,8 +314,8 @@ PLUGIN:Register("jitters", {
 			briefing = "For the MkII, this is the clinical delivery I need. Put any earlier list aside so the requests don't get mixed together. I do that myself when the bench gets crowded, then spend ten minutes being annoyed with whoever stacked the papers. Usually me.",
 			completion = "That's the MkII delivery complete. You can purchase it now; I'll put the finished order somewhere unmistakable.",
 			requirements = {
-				{pool = "town_expansion_2b00b4c4b21c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3381dd915629", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3154c30ff6bf", quantity = 1, mode = "random"},
 			},
 			branchIndex = 2,
 			branchLength = 3,
@@ -332,9 +332,9 @@ PLUGIN:Register("jitters", {
 			briefing = "The MkII reserve needs a smaller order before the next stimpak arrangement. This increases your stock allowance, rather than handing you an injector. I should make that clear before you leave space in the pack for something that still has to come into stock.",
 			completion = "Your MkII stock capacity has increased. Please check the shelf before counting on a spare.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 2, mode = "any"},
-				{pool = "town_expansion_dee44a950fbd", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 2, mode = "any"},
+				{pool = "town_expansion_92f41ad4323a", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a89397d5af5e", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -362,9 +362,9 @@ PLUGIN:Register("jitters", {
 			briefing = "The MkIII is the last stimpak arrangement on this list. Bring the full clinical order back here. There's quite enough to keep track of without my adding a speech about how far you've come; I'm pleased you've kept returning, and that will do for now.",
 			completion = "The MkIII can be purchased here now. That's the delivery finished. Good to have you back.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 4, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_dee44a950fbd", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 4, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 3, mode = "any"},
+				{pool = "town_expansion_92f41ad4323a", quantity = 2, mode = "any"},
 				{pool = "town_expansion_f129053f6d26", quantity = 1, mode = "random"},
 			},
 			branchIndex = 3,
@@ -387,7 +387,7 @@ PLUGIN:Register("jitters", {
 			briefing = "Basic medkits are already for sale. This delivery is for a larger personal stock allowance, so there can be more available to you as the stock refills. It is worth arranging before the day you arrive needing every one of them. Read the clinic list and bring it back complete.",
 			completion = "Your basic-medkit allowance is larger. The reserve will fill on the usual schedule.",
 			requirements = {
-				{pool = "town_expansion_69a36fd02700", quantity = 1, mode = "any"},
+				{pool = "town_expansion_31c8ee1ee48f", quantity = 1, mode = "any"},
 			},
 			stock = {bonus = 1, item = "medic_medkit_1"},
 			branchIndex = 1,
@@ -405,7 +405,7 @@ PLUGIN:Register("jitters", {
 			briefing = "The medical syrette kit is the next purchase option. I'd like the supplies listed here first. I can talk you through the arrangement without knowing what happened on your last trip; a quiet, ordinary delivery is perfectly welcome in this room.",
 			completion = "The medical syrette kit is available to you now. That was a pleasantly complete delivery.",
 			requirements = {
-				{pool = "town_expansion_69a36fd02700", quantity = 1, mode = "any"},
+				{pool = "town_expansion_31c8ee1ee48f", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 6,
@@ -422,8 +422,8 @@ PLUGIN:Register("jitters", {
 			briefing = "For the army medkit, bring this clinical order back to me. I appreciate someone taking time to read a request before volunteering; it gives me a chance to finish preparing one thing instead of correcting three misunderstandings. Purchase access follows the full delivery.",
 			completion = "You've settled the army-medkit order. You can buy one here now; I'll keep the new supplies off your resting space.",
 			requirements = {
-				{pool = "town_expansion_2b00b4c4b21c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3381dd915629", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3154c30ff6bf", quantity = 1, mode = "random"},
 			},
 			branchIndex = 3,
 			branchLength = 6,
@@ -440,8 +440,8 @@ PLUGIN:Register("jitters", {
 			briefing = "This order increases the army-medkit reserve. It doesn't change which kit you've unlocked or refill what's missing today. I'm putting that first because a misunderstanding about a reserve tends to arrive back at the clinic at a very inconvenient moment.",
 			completion = "The army-medkit stock allowance has increased. Actual stock still needs its ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_2b00b4c4b21c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_50f1a6c08b39", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 1, mode = "any"},
+				{pool = "town_expansion_0ac1ddad8ea9", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"medic_medkit_3"},
@@ -463,8 +463,8 @@ PLUGIN:Register("jitters", {
 			briefing = "The army syrette kit requires another supply delivery. The request is below, including the small entries that are easy to miss when you're tired. You can leave me to check the tray labels; I won't make that part of your assignment as well.",
 			completion = "Everything is here. You can purchase the army syrette kit now. The labels are my problem again.",
 			requirements = {
-				{pool = "town_expansion_2b00b4c4b21c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_fb3bbf7a30aa", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1344ee972c6f", quantity = 1, mode = "random"},
 			},
 			branchIndex = 4,
 			branchLength = 6,
@@ -481,8 +481,8 @@ PLUGIN:Register("jitters", {
 			briefing = "I'd like a larger allowance for the army syrette kits before moving on. Bring the listed supplies and I'll increase that capacity. No need to buy a kit just to prove you read the last order; the delivery is what matters here.",
 			completion = "Your army-syrette stock capacity is larger now. Thank you for seeing that reserve through.",
 			requirements = {
-				{pool = "town_expansion_2b00b4c4b21c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_bef1aed7f393", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4f3b0e281ad9", quantity = 1, mode = "any"},
 				{pool = "town_expansion_3bf4bb4e77a2", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -510,8 +510,8 @@ PLUGIN:Register("jitters", {
 			briefing = "The scientific medkit is next. I like having the materials ready before the equipment becomes urgent; it is a much better use of a quiet afternoon than imagining everything that might turn up at the door. This complete delivery opens its purchase route.",
 			completion = "The scientific-medkit order is complete. You can purchase the kit here, and I have a useful pile to sort.",
 			requirements = {
-				{pool = "town_expansion_2b00b4c4b21c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_bef1aed7f393", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 3, mode = "any"},
+				{pool = "town_expansion_4f3b0e281ad9", quantity = 2, mode = "any"},
 				{pool = "town_expansion_b86ca08c164d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
@@ -534,9 +534,9 @@ PLUGIN:Register("jitters", {
 			briefing = "There's a reserve order for the scientific medkit before the syrette version. It raises how many I can hold for you. I'm keeping this list away from the treatment bench; an unfinished supply request shouldn't follow me into every other task.",
 			completion = "The scientific-medkit allowance is increased. That list can leave the bench now.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 2, mode = "any"},
-				{pool = "town_expansion_dee44a950fbd", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 2, mode = "any"},
+				{pool = "town_expansion_92f41ad4323a", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a89397d5af5e", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -564,9 +564,9 @@ PLUGIN:Register("jitters", {
 			briefing = "For the scientific syrette kit, bring the full request here. You've worked through the kit arrangements carefully. I notice that, even if I sometimes begin asking about the next delivery before thanking you for this one. Let me get the order straight first.",
 			completion = "The scientific syrette kit is available to purchase. And thank you for the delivery; I meant to say that first.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 4, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_dee44a950fbd", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 4, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 3, mode = "any"},
+				{pool = "town_expansion_92f41ad4323a", quantity = 2, mode = "any"},
 				{pool = "town_expansion_f129053f6d26", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
@@ -589,7 +589,7 @@ PLUGIN:Register("jitters", {
 			briefing = "Elastic bandages have a separate purchase order. Bring the clinical supplies listed here and I'll make them available. I would much rather discuss bandages while you're standing comfortably than have you explain that you thought about buying some yesterday.",
 			completion = "The elastic-bandage arrangement is ready. You can buy them here now, at an admirably uneventful moment.",
 			requirements = {
-				{pool = "town_expansion_69a36fd02700", quantity = 1, mode = "any"},
+				{pool = "town_expansion_31c8ee1ee48f", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 2,
@@ -606,9 +606,9 @@ PLUGIN:Register("jitters", {
 			briefing = "For compression bandages, this is the next delivery. It's an ordinary supply agreement; you don't need to show me an injury to justify asking. I know that sounds obvious, but people can be extraordinarily thorough about explaining what they want at this desk.",
 			completion = "Compression bandages are open for purchase now. The full order is received; no demonstration was necessary.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 4, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_e0ae749d1392", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 4, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 3, mode = "any"},
+				{pool = "town_expansion_7c1b1e2e5b90", quantity = 2, mode = "any"},
 				{pool = "town_expansion_9bf329b664a1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 2,
@@ -626,7 +626,7 @@ PLUGIN:Register("jitters", {
 			briefing = "The older anti-radiation medicine has its own request. Read the listed supplies and bring them here. I won't infer anything about your condition from a purchase question; if you need treatment, please say so separately instead of hoping I'll guess.",
 			completion = "The older anti-radiation medicine is available to buy. I've finished accounting for this delivery.",
 			requirements = {
-				{pool = "town_expansion_69a36fd02700", quantity = 1, mode = "any"},
+				{pool = "town_expansion_31c8ee1ee48f", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 2,
@@ -643,9 +643,9 @@ PLUGIN:Register("jitters", {
 			briefing = "This delivery opens the newer anti-radiation medicine. It is a different purchase arrangement from the last one, so please follow the current list. You can take a moment before setting off. I'd enjoy a conversation that didn't end with somebody remembering they were already late.",
 			completion = "The newer anti-radiation medicine can be purchased now. That's the order done; we don't have to start another immediately.",
 			requirements = {
-				{pool = "town_expansion_b4fb665dfaca", quantity = 4, mode = "any"},
-				{pool = "town_expansion_a1a21eb44a21", quantity = 3, mode = "any"},
-				{pool = "town_expansion_e0ae749d1392", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e9bc2b73f8b0", quantity = 4, mode = "any"},
+				{pool = "town_expansion_7be59808c150", quantity = 3, mode = "any"},
+				{pool = "town_expansion_7c1b1e2e5b90", quantity = 2, mode = "any"},
 				{pool = "town_expansion_9bf329b664a1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 2,

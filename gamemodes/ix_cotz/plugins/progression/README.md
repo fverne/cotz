@@ -78,10 +78,16 @@ the owning character as their third argument to resolve saved choices. Task labe
 dialogue actions and server consumption use these same helpers.
 All town slots declare a mode. Their first 20% of actual connected-chain unlocks, rounded up, are category-only;
 stock intermissions remain category-wide. Other later requests use a specific final slot and category
-slots before it. The town compiler opts into mode-version-1 migration: unfinished requests preserve
-all original counts, item keys and credit while gaining saved alternatives for any-mode slots. Existing
-specific rolls and completed records are preserved. Subsequent definition edits do not reroll choices.
+slots before it. Town `categoryChoiceRange` selects 3–4 types per character and saves disjoint accepted
+subsets, even when catalogue pools overlap. New category totals have a matching 3–4 batch minimum.
+`GetRequirementUnitSize` reads saved raw-unit costs: three nuts or four bolts contribute one batch.
+Nuts and bolts must appear together in category subsets. New specific requests scale their raw target
+by the batch minimum once. Inventory surplus and actual consumed-item valuation are preserved.
+Mode version 2 retains old specific targets and credited progress, raises outstanding category totals
+below three and replaces full-category lists once. Fulfilled categories and completed milestones stay
+fulfilled. Subsequent definition edits do not reroll subsets or batch costs.
 See the [town policy](../../../../docs/npc-overhaul/progression-overhaul.md#category-totals-and-specific-requests).
+Run `luatex --luaonly tests/progression_subsets_spec.lua` for per-character subsets and batch consumption.
 Run `luatex --luaonly tests/town_requirement_modes_spec.lua` for all compiled town boundaries.
 Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` for mixed delivery, snapshot,
 legacy conversion, isolation, failed-removal and duplicate-payment coverage.

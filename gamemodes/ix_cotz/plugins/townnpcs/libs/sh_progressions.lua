@@ -64,7 +64,7 @@ function PLUGIN:BuildProgressions()
 				completionBenefits = step.benefits,
 				acquisitionMaps = step.acquisitionMaps,
 				requirementPolicy = step.requirementPolicy,
-				requirementModesVersion = 1,
+				requirementModesVersion = 2,
 				requirementAlternatives = step.requirementAlternatives,
 				intermissionFor = step.intermissionFor,
 				capacityReward = step.capacity,
@@ -74,6 +74,10 @@ function PLUGIN:BuildProgressions()
 				townServices = step.services,
 				ammoExchange = step.ammoExchange,
 			}
+			if step.id ~= "v3/hideout/access" then
+				definition.categoryChoiceRange = self.settings.progressionCategoryChoices
+				definition.batchSizedRequirements = true
+			end
 			if step.acquisitionMaps then
 				local key = table.concat(step.acquisitionMaps, "/")
 				if not allowedByMaps[key] then

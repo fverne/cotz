@@ -117,7 +117,11 @@ PLUGIN:Register("spoor", {
 	},
 	progressionIdentity = {
 		name = "Hunting equipment care and field observations",
-		core = {"maintenance", "valuables_field_records"},
+		core = {
+			"maintenance",
+			"valuables_field_records",
+			"valuables_cutting_tools",
+		},
 		support = {"valuables_cutting_tools", "valuables_instruments"},
 	},
 
@@ -131,7 +135,7 @@ PLUGIN:Register("spoor", {
 			briefing = "The MP-18 is the first purchase arrangement here. Bring the hunting and field supplies listed. I'm interested in what someone notices on a walk that isn't about the rifle, too. You don't owe me an entertaining hunt before we can do ordinary business.",
 			completion = "The MP-18 is available to buy. You've brought everything the order needed.",
 			requirements = {
-				{pool = "town_expansion_c281c09c7712", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81da17cceb15", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 12,
@@ -148,7 +152,7 @@ PLUGIN:Register("spoor", {
 			briefing = "For the NATO Sako 85, I need this delivery. Check the list before deciding what to bring back. I like sitting with a choice for a while; people sometimes mistake that for having nothing to say about it.",
 			completion = "You can purchase the NATO Sako now. The supplies are all here; take your time with the choice.",
 			requirements = {
-				{pool = "town_expansion_d58e029a2c73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4b2888b79c97", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 12,
@@ -165,7 +169,7 @@ PLUGIN:Register("spoor", {
 			briefing = "I'd like to increase your NATO Sako reserve. These supplies raise its stock allowance. Having an earlier rifle available can matter more than hurrying to discuss the next one.",
 			completion = "Your NATO Sako capacity is larger. Actual stock still refills normally.",
 			requirements = {
-				{pool = "town_expansion_d58e029a2c73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4b2888b79c97", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sako85nato"},
@@ -187,7 +191,7 @@ PLUGIN:Register("spoor", {
 			briefing = "The Obrez has a purchase request. Bring what's listed here. There's no need to turn wanting a short rifle into a story about every place you've been; looking it over and deciding it suits you is enough.",
 			completion = "The Obrez is available to purchase. That delivery has finished its part of the discussion.",
 			requirements = {
-				{pool = "town_expansion_d58e029a2c73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_4b2888b79c97", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 12,
@@ -204,7 +208,7 @@ PLUGIN:Register("spoor", {
 			briefing = "This order expands the Obrez reserve before the Marlin. It increases capacity, rather than putting another gun in your hands. I would check the shelf before planning around a spare.",
 			completion = "Obrez stock allowance increased. The usual refill still has to arrive.",
 			requirements = {
-				{pool = "town_expansion_d58e029a2c73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_46860f28a864", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"obrez"},
@@ -226,7 +230,7 @@ PLUGIN:Register("spoor", {
 			briefing = "For the Marlin, complete this field-supply delivery. I like a rifle conversation that leaves time to listen to something else. Bring the order back and we can settle purchase access before the conversation wanders.",
 			completion = "The Marlin can be purchased now. Everything on the request has arrived.",
 			requirements = {
-				{pool = "town_expansion_81b2bee23ae3", quantity = 1, mode = "random"},
+				{pool = "town_expansion_9d7bd0fa3203", quantity = 1, mode = "random"},
 			},
 			branchIndex = 4,
 			branchLength = 12,
@@ -243,8 +247,8 @@ PLUGIN:Register("spoor", {
 			briefing = "The Mosin purchase arrangement needs these supplies. People bring a long account of the rifle before asking about it. I don't mind hearing an account; I just prefer knowing whether any of it is theirs.",
 			completion = "Mosin purchase access is open. The delivery is a thing we've both actually seen.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c0fd82db86e4", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_79c06143a76d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 12,
@@ -261,8 +265,8 @@ PLUGIN:Register("spoor", {
 			briefing = "Before the other Sako, there's a Mosin reserve order. Complete this list for a larger allowance. A familiar option doesn't become less useful because someone has begun asking about a different rifle.",
 			completion = "Your Mosin stock capacity is increased. Refill remains as usual.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 1, mode = "any"},
-				{pool = "town_expansion_f9d2f4d1f455", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 1, mode = "any"},
+				{pool = "town_expansion_707d65dea71d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mosin"},
@@ -284,8 +288,8 @@ PLUGIN:Register("spoor", {
 			briefing = "This Sako 85 has its own purchase request. Read the current list rather than remembering the earlier Sako arrangement. I have made enough mistakes from recognising something too quickly to recommend that approach.",
 			completion = "The Sako 85 is available to buy. This request is complete in its own right.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 2, mode = "any"},
-				{pool = "town_expansion_1d794f429f81", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_a64750b77a87", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 12,
@@ -302,8 +306,8 @@ PLUGIN:Register("spoor", {
 			briefing = "I'd like more room in your Sako reserve before the Winchester. The supplies are here on the order. It doesn't require bringing a rifle back or proving you used the last purchase.",
 			completion = "Sako reserve capacity increased. The stock will refill through the ordinary arrangement.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 1, mode = "any"},
-				{pool = "town_expansion_f9d2f4d1f455", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 1, mode = "any"},
+				{pool = "town_expansion_707d65dea71d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sako85"},
@@ -325,8 +329,8 @@ PLUGIN:Register("spoor", {
 			briefing = "For the Winchester 1895, bring this hunting-supply request. I enjoy watching someone examine a rifle without being told what they should admire first. We can get the supply agreement finished and leave you to that.",
 			completion = "The Winchester 1895 is open for purchase. I'll let you have a look without commentary.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 2, mode = "any"},
-				{pool = "town_expansion_1d794f429f81", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_67b16c2b8dd0", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 12,
@@ -343,8 +347,8 @@ PLUGIN:Register("spoor", {
 			briefing = "This smaller order increases the Winchester reserve. Bring the whole list back here. I like having useful things available without needing another persuasive account of why they should be.",
 			completion = "Your Winchester stock allowance is larger. Fresh stock will still take its usual time.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 1, mode = "any"},
-				{pool = "town_expansion_f9d2f4d1f455", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 1, mode = "any"},
+				{pool = "town_expansion_707d65dea71d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"w1895"},
@@ -366,8 +370,8 @@ PLUGIN:Register("spoor", {
 			briefing = "The Mercenary Malfunction is next on the purchase list. The name is already enough of a conversation. Read the supplies below and look at the gun when access is open; you can decide what you make of it then.",
 			completion = "The Mercenary Malfunction can be purchased now. The name hasn't changed the delivery terms.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 2, mode = "any"},
-				{pool = "town_expansion_0e0dc6e7b126", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_17388ddfb4af", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 12,
@@ -384,9 +388,9 @@ PLUGIN:Register("spoor", {
 			briefing = "The reserve for that last rifle needs these supplies. This increases its stock allowance. We needn't settle every opinion the gun invites to finish a fairly ordinary order.",
 			completion = "Mercenary Malfunction stock capacity increased. The reserve is arranged, with normal refill.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 2, mode = "any"},
-				{pool = "town_expansion_eed29779a4a3", quantity = 1, mode = "any"},
-				{pool = "town_expansion_56d648ee3be5", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f90cbd1a38e0", quantity = 1, mode = "any"},
+				{pool = "town_expansion_d3512ab9afe7", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"obrezmalfunction"},
@@ -408,8 +412,8 @@ PLUGIN:Register("spoor", {
 			briefing = "For the SV-98, complete this field-supply order. You're welcome to talk about what drew you to it when you return. I don't need the delivery turned into proof that you've become a particular sort of hunter.",
 			completion = "SV-98 purchase access is ready. You've brought the full order, which is enough for this arrangement.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 3, mode = "any"},
-				{pool = "town_expansion_eed29779a4a3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 3, mode = "any"},
+				{pool = "town_expansion_f90cbd1a38e0", quantity = 2, mode = "any"},
 				{pool = "town_expansion_3017dfb6aeed", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
@@ -427,9 +431,9 @@ PLUGIN:Register("spoor", {
 			briefing = "I'd like the SV-98 reserve increased before the Henry. Bring the listed supplies. Keeping a rifle in the allowance doesn't decide how often you must take it out.",
 			completion = "Your SV-98 stock capacity is larger. It refills normally when stock arrives.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 2, mode = "any"},
-				{pool = "town_expansion_207b0a33c365", quantity = 1, mode = "any"},
-				{pool = "town_expansion_c1a8cc8c75c6", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_26dee0f0dae1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a01798fd35ac", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sv98"},
@@ -456,8 +460,8 @@ PLUGIN:Register("spoor", {
 			briefing = "The Henry .44 has this purchase request. Read the list before setting out. I sometimes prefer leaving a decision until I've finished eating; equipment will still be equipment afterwards, without the hurry I've brought to it.",
 			completion = "The Henry .44 is open for purchase. The order is done; you needn't rush the next decision.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 3, mode = "any"},
-				{pool = "town_expansion_207b0a33c365", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 3, mode = "any"},
+				{pool = "town_expansion_26dee0f0dae1", quantity = 2, mode = "any"},
 				{pool = "town_expansion_7cbed9a0ebbc", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
@@ -480,9 +484,9 @@ PLUGIN:Register("spoor", {
 			briefing = "Before the L115, this delivery increases your Henry reserve. It is capacity for the rifle already available. Make the choice about another purchase when you've had a look at the actual stock.",
 			completion = "Your Henry stock allowance has increased. The reserve remains on its ordinary refill.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 2, mode = "any"},
-				{pool = "town_expansion_207b0a33c365", quantity = 1, mode = "any"},
-				{pool = "town_expansion_c1a8cc8c75c6", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_26dee0f0dae1", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a01798fd35ac", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"lax44"},
@@ -509,8 +513,8 @@ PLUGIN:Register("spoor", {
 			briefing = "For the L115, bring this field-supply order. An interesting rifle can occupy a whole return conversation. I'd still be glad to hear about something you watched without taking a shot.",
 			completion = "L115 purchase access is complete. The supplies are received, and the rest of the walk can have its own account.",
 			requirements = {
-				{pool = "town_expansion_dff12f3a7bfc", quantity = 3, mode = "any"},
-				{pool = "town_expansion_207b0a33c365", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 3, mode = "any"},
+				{pool = "town_expansion_26dee0f0dae1", quantity = 2, mode = "any"},
 				{pool = "town_expansion_4faa8fb764b5", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
@@ -533,10 +537,10 @@ PLUGIN:Register("spoor", {
 			briefing = "The L115 reserve needs these materials before the last rifle. Complete the smaller delivery and capacity increases. No need to bring more simply because this part of the line looks nearly finished.",
 			completion = "L115 reserve capacity increased. Exactly the listed order, with normal restocking.",
 			requirements = {
-				{pool = "town_expansion_6744c5d3d5e5", quantity = 2, mode = "any"},
-				{pool = "town_expansion_16d5b9b3fa35", quantity = 2, mode = "any"},
-				{pool = "town_expansion_9d57a1f81f49", quantity = 1, mode = "any"},
-				{pool = "town_expansion_8d74da7dbff0", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f90cbd1a38e0", quantity = 2, mode = "any"},
+				{pool = "town_expansion_7eaf2f13e938", quantity = 1, mode = "any"},
+				{pool = "town_expansion_299bbe142b4b", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"l115"},
@@ -563,9 +567,9 @@ PLUGIN:Register("spoor", {
 			briefing = "The TRG-42 is the final purchase arrangement here. Bring all the requested field supplies back. I'm glad to finish a long sequence without needing a conclusion about what sort of person you are now. We can simply have done the work.",
 			completion = "The TRG-42 is available to purchase. That completes the rifle arrangements. Sit a while if you want.",
 			requirements = {
-				{pool = "town_expansion_6744c5d3d5e5", quantity = 4, mode = "any"},
-				{pool = "town_expansion_16d5b9b3fa35", quantity = 3, mode = "any"},
-				{pool = "town_expansion_9d57a1f81f49", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2453b1622777", quantity = 4, mode = "any"},
+				{pool = "town_expansion_f90cbd1a38e0", quantity = 3, mode = "any"},
+				{pool = "town_expansion_7eaf2f13e938", quantity = 2, mode = "any"},
 				{pool = "town_expansion_3dd770aeba25", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,

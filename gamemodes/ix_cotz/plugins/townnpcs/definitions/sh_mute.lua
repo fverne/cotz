@@ -140,7 +140,7 @@ PLUGIN:Register("mute", {
 			briefing = "** He selects Waystation on the screen. The supply order rests underneath it, held flat with a closed parts box. He points to the report heading, then draws the box back so the entire list can be read. **",
 			completion = "** He ticks the completed order and opens the Waystation mutant reports for you. **",
 			requirements = {
-				{pool = "town_expansion_0d82996d3674", quantity = 1, mode = "random"},
+				{pool = "town_expansion_7689c41134ff", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "mutantReportsWaystation", name = "Waystation mutant spawn PDA messages"},
@@ -160,8 +160,8 @@ PLUGIN:Register("mute", {
 			briefing = "** He sets down a written order headed 'Emission warnings'. Beside it he places the PDA with the warning setting visible. He taps the supply entries in turn, then folds his hands away from the keyboard. **",
 			completion = "** He finishes checking the delivery, enables the emission warnings, and gives a single nod. **",
 			requirements = {
-				{pool = "town_expansion_522f1a014836", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3cdde43c4da9", quantity = 1, mode = "random"},
+				{pool = "town_expansion_0142dc69300a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c48a3ba1fe73", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "emissionWarnings", name = "Emission warnings"},
@@ -181,8 +181,8 @@ PLUGIN:Register("mute", {
 			briefing = "** A Pripyat map fills the screen. He slides the last supply order beside it and points to the mutant-report heading. For a moment he leaves the map alone, then turns the order so its smallest entries are easy to read. **",
 			completion = "** He marks the order complete and enables the Pripyat mutant reports. The finished list goes beneath the others. **",
 			requirements = {
-				{pool = "town_expansion_daf27db0d950", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a4e6394388b2", quantity = 1, mode = "random"},
+				{pool = "town_expansion_7f868b76a42a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_60379d0b699a", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "mutantReportsPripyat", name = "Pripyat mutant spawn PDA messages"},

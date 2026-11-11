@@ -54,8 +54,9 @@ wine and spirits; the cheapest vodka also remains a Spicy Lemon starter.
 ## Category totals and specific requests
 
 Every town delivery slot declares `mode = "any"` or `mode = "random"` beside its pool and quantity.
-`any` accepts a mixture of the pool's eligible items toward one shared total; `random` chooses one
-item once per character and requires that exact item. Other progression definitions retain their
+`any` accepts a mixture of 3–4 item types selected once from the pool for that character; it never
+exposes a large catalogue as the accepted list. `random` chooses one item once per character and
+requires that exact item. Other progression definitions retain their
 existing behaviour when mode is omitted.
 
 The first `ceil(unlockCount / 5)` milestones in each connected unlock chain use only `any` slots.
@@ -67,27 +68,41 @@ slot uses `random`; earlier slots remain `any`. A one-slot delivery therefore be
 request after its opening. Technut's first three of thirteen suit purchases are category-only:
 Mail Jacket, the trenchcoat group and Sunrise. Painting is its own category-only one-step branch.
 
-Candidate sets stay disjoint within a request. Bulk pools favour the most accessible local members
-of the contact's specialty, using checked-in loose points, boxes and cycling containers. Specific
-pools compare modeled raw-unit supply, including natural batches, and keep candidates within a
-threefold frequency range. These are comparative estimates, not measured player acquisition times.
-Scientist equipment retains its artifact families. Generated valuable-pool rarity labels follow
-aggregate modeled source frequency rather than slot number; artifact-family labels remain authored.
-Technut's core now includes ordinary workshop, textile, fastening and electrical repair stock.
-Spool also accepts fastening and electrical repair stock for his radio bench.
+Catalogue pools may overlap, but accepted subsets are partitioned per character: one item can only
+contribute to one counter in a request. Assignment allocates the most constrained categories first,
+favouring items not needed by another category, then adds a fourth type where the roll and available
+candidates permit it. `settings.progressionCategoryChoices = {3, 4}` owns this policy. The three physical
+hideout-access hand-ins retain their existing tool choices and one-tool cost.
 
-New assignments save the item roll or category membership, its label and its mode. Later edits to
-pools do not change that saved acceptance list. Mode version 1 upgrades unfinished legacy assignments
-once: item keys, quantities, contributions and reward credit remain, while slots now configured as
-`any` gain alternatives alongside their original item. Existing specific rolls stay fixed. Completed
-records are untouched. Region-policy conversions are applied first so any newly eligible replacement
-receives the correct mode. No database reset or new SQL column is required.
+New category goals require at least the rolled 3–4 supply batches. Whole valuables contribute one
+batch each. Quantity-bearing valuables use the minimum natural spawn quantity, including explicit
+loot overrides, rather than inventory capacity: three nuts or four bolts contribute one batch.
+A category offer containing nuts always contains bolts too; neither appears alone. Other examples
+are two capacitors, two 9V batteries or two kerosene units per batch. The generated shared
+`ix.progression.requirementBatchSizes` registry records these values. Specific requests multiply their
+base amount by the selected item's batch size once; their displayed quantity is the final raw total.
+Task text lists per-batch costs, highlights show raw outstanding quantities and incomplete batches
+have no hand-in action. Surplus units remain in inventory. Rewards price the actual raw units consumed.
+
+Bulk catalogues favour local sources within the contact's specialty. Related record, tool and packing
+pools supply enough local candidates where earlier catalogues contained only one or two types.
+Specific pools compare modeled batch-equivalent supply and stay within a threefold frequency range.
+Checked-in loose points, boxes and cycling containers provide comparative estimates, not measured
+player acquisition times. Scientist equipment retains its artifact families and regional ceilings remain.
+
+Mode version 2 saves accepted subsets and per-item batch costs. Reconnects and later pool/batch edits
+do not reroll them. Unfinished older category requests receive a subset once, retaining their canonical
+keys, delivered credit and money. Outstanding category goals below three rise to three; fulfilled
+categories and completed milestones are not reopened. Previous specific rolls and raw-unit targets
+remain intact. Region-policy conversions run before this migration. No database reset or SQL column
+change is required.
 
 The server resolves each donated item to exactly one saved counter, consumes only the remaining
 quantity and prices the actual item supplied. Dialogue, journal text, search and inventory highlights
 read the same saved alternatives. Existing completion, purchase gates and payout handling are reused.
 
-Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` and
+Run `luatex --luaonly tests/progression_subsets_spec.lua`,
+`luatex --luaonly tests/progression_requirement_modes_spec.lua` and
 `python3 tests/progression_expansion_spec.py`. Regenerate with
 `python3 docs/npc-overhaul/tools/expand_progression.py --write`; verify with `--check`.
 Restart all map servers together. Multiplayer UI, replication, inventory and database/reconnect

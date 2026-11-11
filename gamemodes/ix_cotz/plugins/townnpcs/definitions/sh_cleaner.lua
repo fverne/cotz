@@ -111,7 +111,7 @@ PLUGIN:Register("cleaner", {
 			briefing = "Want more storage options in your Garbage room? Bring this supply order. It opens the first paid container installations. The room's initial general crate is separate. Read the terms before you start bringing parcels; I won't guess which arrangement you meant.",
 			completion = "First container purchases are open. Supplies received. The starter crate remains included with a new room.",
 			requirements = {
-				{pool = "town_expansion_06f11c6d52b8", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8000e56a4250", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "cleanerHideout1", name = "Hideout improvements 1"},
@@ -132,7 +132,7 @@ PLUGIN:Register("cleaner", {
 			briefing = "Next storage tier, and the first paid floor allowance for two more loose items. The supplies are listed here. I don't need an account of what you're keeping. I need the order complete.",
 			completion = "The next storage tier and first floor allowance are available to purchase. Your contents stay your business.",
 			requirements = {
-				{pool = "town_expansion_88b3cadf7aff", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c1f3ccbfe4fc", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "cleanerHideout2", name = "Hideout improvements 2"},
@@ -153,7 +153,7 @@ PLUGIN:Register("cleaner", {
 			briefing = "This delivery opens another storage tier and paid furnishings. Decide what you want once the options are available. I have no interest in explaining your choice of chair to anybody else.",
 			completion = "Storage and furnishing purchases are open. Put the delivery on the clear side and leave it there.",
 			requirements = {
-				{pool = "town_expansion_88b3cadf7aff", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c1f3ccbfe4fc", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "cleanerHideout3", name = "Hideout improvements 3"},
@@ -195,8 +195,8 @@ PLUGIN:Register("cleaner", {
 			briefing = "For the next storage tier, bring these supplies. Keep the wet things away from the paperwork. That instruction isn't an invitation to describe the weather for ten minutes.",
 			completion = "Another storage tier is available to buy. The paperwork is still dry.",
 			requirements = {
-				{pool = "town_expansion_8000e56a4250", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e674fb3afa85", quantity = 1, mode = "random"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_5508561e2495", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout5", name = "Hideout improvements 5"},
@@ -217,8 +217,8 @@ PLUGIN:Register("cleaner", {
 			briefing = "This order opens the next storage purchases. I want the listed materials. If you have something else to sell, we'll discuss that separately instead of discovering it in the middle of the delivery.",
 			completion = "The next storage tier is open. Everything received belongs to this arrangement.",
 			requirements = {
-				{pool = "town_expansion_8000e56a4250", quantity = 2, mode = "any"},
-				{pool = "town_expansion_f3c6e3787c6c", quantity = 1, mode = "random"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_fc9193c43ae1", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout6", name = "Hideout improvements 6"},
@@ -239,8 +239,8 @@ PLUGIN:Register("cleaner", {
 			briefing = "Further storage access requires this delivery. Take the list. You can read it here without agreeing to anything; I'd rather you decide before taking a task you don't want.",
 			completion = "The next storage purchases are available. You've completed what you agreed to bring.",
 			requirements = {
-				{pool = "town_expansion_8000e56a4250", quantity = 2, mode = "any"},
-				{pool = "town_expansion_f3c6e3787c6c", quantity = 1, mode = "random"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_fc9193c43ae1", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout7", name = "Hideout improvements 7"},
@@ -261,8 +261,8 @@ PLUGIN:Register("cleaner", {
 			briefing = "For the next room-storage tier, complete this order. A parcel doesn't become less awkward because its owner has stopped mentioning it. Bring the supplies while you still know what you've promised.",
 			completion = "The next tier is available for purchase. No outstanding part of this order remains.",
 			requirements = {
-				{pool = "town_expansion_8000e56a4250", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3f71ee5759f7", quantity = 1, mode = "random"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_609694bab68e", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout8", name = "Hideout improvements 8"},
@@ -283,8 +283,8 @@ PLUGIN:Register("cleaner", {
 			briefing = "This is the next storage request. Same return point, full list. You don't have to leave the supplies for an imagined recipient or tell anyone else what we're arranging.",
 			completion = "Another storage tier is open to buy. The delivery stayed between the people handling it.",
 			requirements = {
-				{pool = "town_expansion_8000e56a4250", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a80ba31efb59", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_c140ec1b36ff", quantity = 2, mode = "any"},
 				{pool = "town_expansion_3ee97809ffce", quantity = 1, mode = "random"},
 			},
 			services = {
@@ -306,8 +306,8 @@ PLUGIN:Register("cleaner", {
 			briefing = "Bring these materials for the next storage purchase tier. I keep the terms where you can read them. If somebody has supplied a more entertaining version, deal with the one on the page.",
 			completion = "The next storage purchases are ready. The written arrangement is complete.",
 			requirements = {
-				{pool = "town_expansion_8000e56a4250", quantity = 3, mode = "any"},
-				{pool = "town_expansion_be50aecc58a5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_8280e5acf226", quantity = 2, mode = "any"},
 				{pool = "town_expansion_0fb1615accd2", quantity = 1, mode = "random"},
 			},
 			services = {
@@ -334,8 +334,8 @@ PLUGIN:Register("cleaner", {
 			briefing = "One more storage request before the last. The list is here. I don't need you demonstrating how full your pack is by emptying the rest of it across my table.",
 			completion = "The next storage tier is open. You can put the remainder of your pack back where it belongs.",
 			requirements = {
-				{pool = "town_expansion_8000e56a4250", quantity = 3, mode = "any"},
-				{pool = "town_expansion_be50aecc58a5", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_8280e5acf226", quantity = 2, mode = "any"},
 				{pool = "town_expansion_afeb42da558e", quantity = 1, mode = "random"},
 			},
 			services = {
@@ -362,9 +362,9 @@ PLUGIN:Register("cleaner", {
 			briefing = "The final storage tier needs this supply order. Complete it and the purchase becomes available. Finished business doesn't require a speech from either of us.",
 			completion = "Final Garbage storage purchases are open. That's the order complete. Anything else?",
 			requirements = {
-				{pool = "town_expansion_3bb6cdd22bc3", quantity = 4, mode = "any"},
-				{pool = "town_expansion_ebf5705cad72", quantity = 3, mode = "any"},
-				{pool = "town_expansion_4b2fdb8a03ce", quantity = 2, mode = "any"},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 4, mode = "any"},
+				{pool = "town_expansion_c140ec1b36ff", quantity = 3, mode = "any"},
+				{pool = "town_expansion_cc5babbdb781", quantity = 2, mode = "any"},
 				{pool = "town_expansion_d695ccfe3436", quantity = 1, mode = "random"},
 			},
 			services = {

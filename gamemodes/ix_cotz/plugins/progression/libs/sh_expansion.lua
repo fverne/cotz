@@ -155,6 +155,16 @@ function ix.progression.DescribeTask(definition, npcName, status, character)
 	return text
 end
 
+local function hasHandInBatch(character, progressionID, itemID)
+	local item = character:GetInventory():HasItem(itemID)
+	if not item then return false end
+	local size = ix.progression.GetRequirementUnitSize(progressionID, itemID, character)
+	if size == 1 then return true end
+	local available = item:GetData("quantity", item.quantity or item.ammoAmount or 1)
+
+	return isnumber(available) and available >= size
+end
+
 function ix.progression.GetDeliveryOptions(character, progressionID)
 	local definition = ix.progression.definitions[progressionID]
 	if not definition then
@@ -171,7 +181,7 @@ function ix.progression.GetDeliveryOptions(character, progressionID)
 	for itemID, amount in pairs(ix.progression.GetRequirements(character, progressionID)) do
 		if (line.complexData[itemID] or 0) < amount then
 			for _, choice in ipairs(ix.progression.GetRequirementChoices(progressionID, itemID, character)) do
-				if character:GetInventory():HasItem(choice) then
+				if hasHandInBatch(character, progressionID, choice) then
 					addOption("Hand over " .. ix.item.list[choice].name, {progid = progressionID, itemid = choice})
 				end
 			end

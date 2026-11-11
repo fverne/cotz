@@ -150,7 +150,7 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The Mini-14 purchase arrangement begins with this supply order. Bring the listed ordnance and field materials here. I need a complete delivery, not a proposed share of whatever you happen to return with. Read the terms before committing your time.",
 			completion = "Mini-14 purchase access is approved. Your delivery is received in full.",
 			requirements = {
-				{pool = "town_expansion_8bd7dd015011", quantity = 1, mode = "any"},
+				{pool = "town_expansion_61caf3061784", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 13,
@@ -167,7 +167,7 @@ PLUGIN:Register("quartermaster", {
 			briefing = "For the FAMAS, complete this procurement request. The equipment becomes available to purchase afterwards. Asking for access and reserving what you intend to buy are different matters; check current stock when you're ready.",
 			completion = "The FAMAS is available to purchase. The supply obligation is settled.",
 			requirements = {
-				{pool = "town_expansion_5cc83a38ada3", quantity = 1, mode = "any"},
+				{pool = "town_expansion_0a560e2a0220", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 13,
@@ -184,7 +184,7 @@ PLUGIN:Register("quartermaster", {
 			briefing = "This delivery raises your FAMAS stock allowance. It supports an existing purchase route before the next one opens. Do not allocate a gun to your departure until the actual stock is there.",
 			completion = "FAMAS reserve capacity increased. Refill remains on the normal schedule.",
 			requirements = {
-				{pool = "town_expansion_5cc83a38ada3", quantity = 1, mode = "any"},
+				{pool = "town_expansion_0a560e2a0220", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"famas"},
@@ -206,7 +206,7 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The L85 requires these supplies. I will consider a specific difficulty before you leave. An incomplete return accompanied by an explanation that the request was inconvenient gives neither of us much to work with.",
 			completion = "L85 purchase access is approved. The order has been completed as written.",
 			requirements = {
-				{pool = "town_expansion_5cc83a38ada3", quantity = 1, mode = "any"},
+				{pool = "town_expansion_0a560e2a0220", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 13,
@@ -223,7 +223,7 @@ PLUGIN:Register("quartermaster", {
 			briefing = "Before the M16, bring this L85 reserve order. The result is increased capacity for the L85. It changes the allowance, not today's stock count.",
 			completion = "Your L85 stock allowance is larger. Availability still depends on the normal refill.",
 			requirements = {
-				{pool = "town_expansion_5cc83a38ada3", quantity = 1, mode = "any"},
+				{pool = "town_expansion_d3529072739c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"l85"},
@@ -262,8 +262,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "For the LR-300, bring the full procurement order here. The practical arrangements matter more to me than an extended argument about equipment preferences. You may have your preference without asking me to share it.",
 			completion = "The LR-300 is open for purchase. Your supply delivery is complete.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_9370c4b61e34", quantity = 1, mode = "random"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_0b6d8b4fbf6f", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 13,
@@ -280,8 +280,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The LR-300 reserve needs these materials before the SIG arrangement. Completing the order increases its stock capacity. That is a continuing allowance, not immediate equipment issued for your next trip.",
 			completion = "LR-300 capacity increased. No change to the ordinary refill timing.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2ae5db69c5c7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a9671194f353", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"lr300"},
@@ -303,8 +303,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The SG 552 is available through this request. Bring what is listed. I have no reason to complicate a clear supply agreement by asking you to justify every other item in your kit.",
 			completion = "SG 552 purchase access is approved. The agreed supplies are accounted for.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_dc820678cc48", quantity = 1, mode = "random"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_b80413944f08", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 13,
@@ -321,8 +321,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "I'd like this SG 552 reserve order completed before proceeding. It increases how much stock can be held for you. A useful reserve is part of procurement even when the next rifle has captured everyone's attention.",
 			completion = "Your SG 552 stock capacity is increased. That reserve arrangement is settled.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2ae5db69c5c7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a9671194f353", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"sg552"},
@@ -344,8 +344,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "For the G36C, this is the supply request. Complete it before treating the rifle as available to buy. I would rather repeat a clear condition now than discuss why somebody's departure depended on assuming it away.",
 			completion = "G36C purchase access is ready. The condition has been met in full.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_b99fd339a771", quantity = 1, mode = "random"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_b80413944f08", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 13,
@@ -362,8 +362,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "This order increases the G36C reserve. Bring the smaller delivery here. Keep it separate from the AUG request; the two arrangements have different results even if you intend to finish both.",
 			completion = "G36C stock allowance increased. The AUG remains its own purchase order.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2ae5db69c5c7", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a9671194f353", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"g36c"},
@@ -385,8 +385,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The AUG purchase arrangement requires this delivery. I need an accurate return against the list. If you want to discuss an objection to the request, begin with the particular entry causing it.",
 			completion = "AUG purchase access is approved. Nothing remains outstanding on this order.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_b99fd339a771", quantity = 1, mode = "random"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_bb6f868952ef", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 13,
@@ -403,8 +403,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The AUG reserve comes before the F2000 arrangement. Complete these supplies for a larger stock allowance. I am making no exception to the refill schedule because another rifle is waiting on the page.",
 			completion = "Your AUG capacity is larger. Stock refills by the established arrangement.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_2b4fe59ec190", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_867a15727340", quantity = 1, mode = "any"},
 				{pool = "town_expansion_5da355df76fd", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -427,8 +427,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "For the F2000, bring this procurement order. A distinctive rifle attracts enough commentary without mine. The terms you need from me are the supplies listed and purchase access after the full delivery.",
 			completion = "F2000 purchase access is open. The delivery has been verified.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 3, mode = "any"},
-				{pool = "town_expansion_2b4fe59ec190", quantity = 2, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 3, mode = "any"},
+				{pool = "town_expansion_867a15727340", quantity = 2, mode = "any"},
 				{pool = "town_expansion_cac9456f2b4b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
@@ -446,8 +446,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "This is the F2000 reserve request. Complete it and capacity rises. An allowance is useful precisely because you needn't argue for it again whenever stock comes in.",
 			completion = "Your F2000 stock allowance is increased. Normal refill still determines current availability.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_97ec9ad98c1f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2be74abb2113", quantity = 1, mode = "any"},
 				{pool = "town_expansion_82f85d31e439", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -475,8 +475,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The HK416 comes through this supply agreement. Read the list before deciding how to fit it around your other work. I don't require enthusiasm for the paperwork; I require the return to match it.",
 			completion = "HK416 purchase access is approved. The return matches the request.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 3, mode = "any"},
-				{pool = "town_expansion_97ec9ad98c1f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2be74abb2113", quantity = 2, mode = "any"},
 				{pool = "town_expansion_f643892847d6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
@@ -499,8 +499,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "Before the G3, complete the HK416 reserve order. The supplies increase your personal stock capacity. I will keep the distinction between capacity and a gun on the shelf clear, even if it sounds repetitive.",
 			completion = "HK416 reserve capacity increased. Today's stock remains a separate count.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_97ec9ad98c1f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2be74abb2113", quantity = 1, mode = "any"},
 				{pool = "town_expansion_82f85d31e439", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -528,8 +528,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "For the G3A3, bring the materials requested here. I can settle the purchase arrangement without hearing why every other rifle was unsuitable. You have made a choice; now we can address its supplies.",
 			completion = "G3A3 purchase access is ready. The full procurement order is received.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 3, mode = "any"},
-				{pool = "town_expansion_97ec9ad98c1f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2be74abb2113", quantity = 2, mode = "any"},
 				{pool = "town_expansion_f643892847d6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
@@ -552,8 +552,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The G3A3 reserve needs this smaller delivery. Its stock allowance increases when the order is complete. Supporting the equipment already available remains part of the work before opening another route.",
 			completion = "Your G3A3 capacity is larger. The reserve will refill normally.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 2, mode = "any"},
-				{pool = "town_expansion_97ec9ad98c1f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2be74abb2113", quantity = 1, mode = "any"},
 				{pool = "town_expansion_82f85d31e439", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -581,8 +581,8 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The FAL requires this supply request. Bring all entries back here. I appreciate a measured undertaking more than a quick assurance; the supplies still have to be carried by the person agreeing to the delivery.",
 			completion = "FAL purchase access is approved. You've fulfilled the undertaking.",
 			requirements = {
-				{pool = "town_expansion_61caf3061784", quantity = 3, mode = "any"},
-				{pool = "town_expansion_97ec9ad98c1f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2be74abb2113", quantity = 2, mode = "any"},
 				{pool = "town_expansion_f643892847d6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
@@ -605,9 +605,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "Before the final rifle, complete this FAL reserve arrangement. It increases stock capacity, with no immediate refill. There is no additional task concealed in that explanation.",
 			completion = "FAL stock capacity increased. This reserve order is finished.",
 			requirements = {
-				{pool = "town_expansion_8095377989f4", quantity = 2, mode = "any"},
-				{pool = "town_expansion_8841f0077ff5", quantity = 2, mode = "any"},
-				{pool = "town_expansion_13aec002f2fd", quantity = 1, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 2, mode = "any"},
+				{pool = "town_expansion_867a15727340", quantity = 2, mode = "any"},
+				{pool = "town_expansion_bc2fa5cf5724", quantity = 1, mode = "any"},
 				{pool = "town_expansion_8e5e40077d43", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -635,9 +635,9 @@ PLUGIN:Register("quartermaster", {
 			briefing = "The M14 is the final purchase arrangement in this line. Bring the full procurement request. We can conclude the series as we began it: clear terms, a complete return, and no need to make the delivery mean anything beyond what was agreed.",
 			completion = "M14 purchase access is approved. The rifle procurement line is complete.",
 			requirements = {
-				{pool = "town_expansion_8095377989f4", quantity = 4, mode = "any"},
-				{pool = "town_expansion_8841f0077ff5", quantity = 3, mode = "any"},
-				{pool = "town_expansion_13aec002f2fd", quantity = 2, mode = "any"},
+				{pool = "town_expansion_cdb68b829caa", quantity = 4, mode = "any"},
+				{pool = "town_expansion_867a15727340", quantity = 3, mode = "any"},
+				{pool = "town_expansion_bc2fa5cf5724", quantity = 2, mode = "any"},
 				{pool = "town_expansion_bbb0f66b23a1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,

@@ -232,7 +232,7 @@ PLUGIN:Register("gasket", {
 			briefing = "I can make the Tokarev available if you bring the generator and electrical supplies on this list. Yes, the camp needs those even when everyone has something more interesting to buy. They remember that when a familiar cupboard is empty and decide I should have mentioned it sooner.",
 			completion = "Tokarev purchase access is ready. A useful delivery, before somebody arrives to tell me we're short again.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 26,
@@ -249,7 +249,7 @@ PLUGIN:Register("gasket", {
 			briefing = "For the Makarov, bring this camp-supply request. Put it beside the bench when you return, away from the cup. I would like to finish one drink without fishing a component out of it because somebody was trying to help.",
 			completion = "The Makarov is available to buy. Supplies counted, cup untouched. An unusually civilised return.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 26,
@@ -266,7 +266,7 @@ PLUGIN:Register("gasket", {
 			briefing = "The Makarov reserve needs a smaller delivery before the next pistol. This raises your stock allowance. It doesn't refill the shelf, and I won't find a fresh gun by looking crossly at the space.",
 			completion = "Makarov capacity increased. I'm leaving the actual refill to the usual arrangement.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"makarov"},
@@ -288,7 +288,7 @@ PLUGIN:Register("gasket", {
 			briefing = "The Luger purchase order is here. Bring the listed electrical and maintenance supplies. People like talking about an old pistol's workmanship; occasionally I'd enjoy that level of interest in the things they expect me to keep working every day.",
 			completion = "Luger purchase access is complete. These supplies deserve a little of the admiration the pistol gets.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 26,
@@ -305,7 +305,7 @@ PLUGIN:Register("gasket", {
 			briefing = "Before the CZ52, I'd like a larger Luger reserve. Complete the order below for more capacity. An empty allocation is still empty until stock comes in, no matter how grandly I describe it.",
 			completion = "Your Luger stock allowance is larger. The shelf hasn't been refilled by the announcement.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"lugerp08"},
@@ -327,7 +327,7 @@ PLUGIN:Register("gasket", {
 			briefing = "For the CZ52, this is the delivery. I need the camp supplies listed, brought here in full. You can ask about the gun while I put them away; I only object when the explanation begins before I've had a chance to set down what I'm holding.",
 			completion = "The CZ52 is open for purchase. I've got the supplies and both hands free again.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 4,
 			branchLength = 26,
@@ -344,7 +344,7 @@ PLUGIN:Register("gasket", {
 			briefing = "This order expands the CZ52 reserve before the Mauser. It is stock capacity, with normal refill. I keep saying that because people sometimes hear 'more' and stop listening to the noun.",
 			completion = "CZ52 capacity increased. More allowance, exactly as agreed.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"cz52"},
@@ -366,7 +366,7 @@ PLUGIN:Register("gasket", {
 			briefing = "The C96 comes through this supply order. Bring everything listed. I can appreciate an interesting mechanism without asking you to bring me one in pieces; the camp materials are what this arrangement needs.",
 			completion = "Mauser C96 purchase access is ready. Delivery complete, and no mysterious dismantled extra.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 5,
 			branchLength = 26,
@@ -383,7 +383,7 @@ PLUGIN:Register("gasket", {
 			briefing = "I'd like to increase the C96 reserve before the short Henry. These supplies cover the capacity. There are enough requests arriving with 'while you're there' attached; this one ends where the list does.",
 			completion = "Your C96 allowance is larger. Nothing has been added to the finished order.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"c96"},
@@ -405,7 +405,7 @@ PLUGIN:Register("gasket", {
 			briefing = "The short .410 Henry has a purchase arrangement of its own. Bring the maintenance supplies here. A name that long makes me grateful the parts list doesn't need to repeat it on every line.",
 			completion = "The short Henry is available to buy. The complete delivery took less explaining than its name.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 6,
 			branchLength = 26,
@@ -422,7 +422,7 @@ PLUGIN:Register("gasket", {
 			briefing = "The short-Henry reserve needs this order before the Fort. Capacity increases when you finish it. Keep a little room for your own things; I'm asking for supplies, not the contents of your entire pack.",
 			completion = "Short-Henry stock capacity increased. Normal refill, and your own supplies stay yours.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"lax410s"},
@@ -461,7 +461,7 @@ PLUGIN:Register("gasket", {
 			briefing = "This delivery increases your Fort-12 allowance. It won't put a gun straight into stock. I know the reserve is less interesting to discuss; sometimes less interesting is precisely what I want from an afternoon.",
 			completion = "Your Fort reserve is larger. The ordinary refill can do its job.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"fort12"},
@@ -500,7 +500,7 @@ PLUGIN:Register("gasket", {
 			briefing = "Before the Beretta, let's enlarge the Hi-Power reserve. Bring this smaller order and the allowance increases. I'm not asking you to buy another pistol to prove the first arrangement was worthwhile.",
 			completion = "Hi-Power stock capacity increased. You can decide what to buy after it refills.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"brhp"},
@@ -539,8 +539,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The P99 is next. Bring the generator and electrical supplies on the request. I'm capable of discussing equipment I don't have to repair during the conversation; it is one of the quieter pleasures of this counter.",
 			completion = "P99 purchase access is open. The delivery gave us something straightforward to finish.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3ea3fe5ce3d4", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_31db5e234de1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 26,
@@ -557,8 +557,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The P99 reserve needs these supplies before the Glock. Completing it raises stock capacity. It doesn't mean I've personally gone and filled every space while you were walking back.",
 			completion = "Your P99 stock allowance is increased. Refill remains normal, despite the hopeful look.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"p99"},
@@ -580,8 +580,8 @@ PLUGIN:Register("gasket", {
 			briefing = "For the Glock 17, this is the order. Bring the full list here. I know ordinary camp supplies aren't what people want to talk about when there's a pistol involved; the ordinary needs still turn up in the morning.",
 			completion = "Glock 17 purchase access is complete. Tomorrow's supplies have at least had some attention today.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3ea3fe5ce3d4", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_31db5e234de1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 26,
@@ -598,8 +598,8 @@ PLUGIN:Register("gasket", {
 			briefing = "This request raises the Glock 17 reserve. The smaller delivery is written down. I want to finish the allowance before opening another pistol arrangement and discovering half the earlier work is still under a cup.",
 			completion = "Your Glock 17 capacity is larger. The reserve order is finished and clear of the cups.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"glock17"},
@@ -621,8 +621,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The M1911 comes through this maintenance-supply order. Bring what's listed. People can have a favourite pistol without explaining why everybody else's favourite is an insult; I'm very happy to skip that part of the sale.",
 			completion = "M1911 purchase access is ready. A full delivery and no referendum on everyone's taste.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3ea3fe5ce3d4", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_31db5e234de1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
 			branchLength = 26,
@@ -639,8 +639,8 @@ PLUGIN:Register("gasket", {
 			briefing = "Before the Stechkin, the M1911 reserve needs these materials. It increases your stock allowance, with the usual refill afterwards. There is no missing instruction for you to discover on your return.",
 			completion = "Your M1911 reserve capacity is increased. That is the entire arrangement completed.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a45967d5138a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15c973ec8c45", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"m1911"},
@@ -662,8 +662,8 @@ PLUGIN:Register("gasket", {
 			briefing = "For the Stechkin APS, bring this camp-supply request. Put the small items where I can count them instead of tipping everything together. I can identify a part without enjoying searching for it under the rest.",
 			completion = "Stechkin purchase access is open. Supplies accounted for without emptying the whole bench.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5b5d39e3738d", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_192256dbd2c6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
 			branchLength = 26,
@@ -680,8 +680,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The Stechkin reserve comes before the Glock 18. Complete these supplies for increased capacity. You can leave the pistol comparisons until I've got the order put away.",
 			completion = "Your Stechkin allowance is larger. Fresh stock will arrive normally.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a45967d5138a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15c973ec8c45", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"stechaps"},
@@ -703,8 +703,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The Glock 18 has a purchase order separate from the 17. Use the list here. Similar names are a reliable way to get somebody nodding before you've finished the number, so I'm finishing that part first.",
 			completion = "Glock 18 purchase access is ready. This order belongs to the right pistol.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5b5d39e3738d", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4a275fcf876d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 14,
 			branchLength = 26,
@@ -721,8 +721,8 @@ PLUGIN:Register("gasket", {
 			briefing = "I'd like the Glock 18 reserve increased before the Contender. Bring the listed supplies. A larger stock capacity isn't an instant refill, however quickly somebody expects me to get everything else done.",
 			completion = "Your Glock 18 capacity is increased. The refill still has its ordinary schedule.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a45967d5138a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15c973ec8c45", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"glock18"},
@@ -744,8 +744,8 @@ PLUGIN:Register("gasket", {
 			briefing = "For the .500 Contender, complete this maintenance delivery. I can make the gun available after the full request is in. The arrangement doesn't need a demonstration of how much noise you expect to make with it.",
 			completion = "The .500 Contender is available to buy. Delivery complete, and the discussion stayed at a reasonable volume.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5b5d39e3738d", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4a275fcf876d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 15,
 			branchLength = 26,
@@ -762,8 +762,8 @@ PLUGIN:Register("gasket", {
 			briefing = "This order expands the Contender reserve. The supplies raise your stock allowance. I would rather have that said plainly than listen later to an account of the pistol you assumed was waiting.",
 			completion = "Contender stock capacity increased. Check actual stock before depending on a spare.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a45967d5138a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15c973ec8c45", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"g2contender500"},
@@ -785,8 +785,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The MR96 comes through this delivery. Bring the electrical and maintenance supplies listed. I like a request where we both know what the return should contain before somebody starts moving things onto my table.",
 			completion = "MR96 purchase access is complete. The return matches the list exactly.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5b5d39e3738d", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4a275fcf876d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 16,
 			branchLength = 26,
@@ -803,8 +803,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The MR96 reserve needs these materials before the R8. It raises capacity. I can support a pistol somebody already wants without pretending it has become a less interesting object because another one is next.",
 			completion = "Your MR96 reserve is larger. Stock refills by the usual arrangement.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a45967d5138a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15c973ec8c45", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mr96"},
@@ -826,8 +826,8 @@ PLUGIN:Register("gasket", {
 			briefing = "For the R8, bring this supply order here. If you've got another bit of business as well, let me finish counting first. I can hold a conversation or keep my place; the audience usually discovers when I'm attempting both.",
 			completion = "R8 purchase access is ready. Count finished before the next question.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5b5d39e3738d", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4a275fcf876d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 17,
 			branchLength = 26,
@@ -844,8 +844,8 @@ PLUGIN:Register("gasket", {
 			briefing = "This delivery increases the R8 allowance before the Judge. Complete the smaller list. I have left out the entertaining digression about how the camp got short of ordinary things again.",
 			completion = "Your R8 stock capacity has increased. The reserve, at least, is properly arranged.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 1, mode = "any"},
 				{pool = "town_expansion_e210a8bed09e", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -868,9 +868,9 @@ PLUGIN:Register("gasket", {
 			briefing = "The Judge has its own purchase request. Bring the listed maintenance materials. The name encourages jokes; I will listen to yours once the supplies are on the table and my hands aren't full.",
 			completion = "Judge purchase access is open. You've finished the delivery; the joke can have its hearing.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 2, mode = "any"},
-				{pool = "town_expansion_6fa4b2017521", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c58a767bfe4b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 18,
 			branchLength = 26,
@@ -887,8 +887,8 @@ PLUGIN:Register("gasket", {
 			briefing = "I'd like more Judge reserve before the Model 29. These supplies increase capacity. The stock will still refill normally; this isn't one of the camp's urgent little jobs assigned to me without asking.",
 			completion = "Your Judge allowance is larger. No emergency refill has been promised.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 1, mode = "any"},
 				{pool = "town_expansion_e210a8bed09e", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -911,9 +911,9 @@ PLUGIN:Register("gasket", {
 			briefing = "For the Model 29, complete this camp-supply order. I can give you purchase access once it's all here. A full list is much more persuasive than describing the missing item as too small to matter.",
 			completion = "Model 29 purchase access is ready. The small entries mattered, and you've brought them.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 2, mode = "any"},
-				{pool = "town_expansion_6fa4b2017521", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c58a767bfe4b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 19,
 			branchLength = 26,
@@ -930,8 +930,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The Model 29 reserve needs a smaller delivery. Bring these supplies and the allowance rises. I'd enjoy putting the finished request away before anyone asks where it has gone.",
 			completion = "Your Model 29 stock capacity is increased. The completed page is filed, in front of witnesses.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -959,9 +959,9 @@ PLUGIN:Register("gasket", {
 			briefing = "The Raging Bull comes through this order. Bring the full maintenance request back. I would like a pistol conversation that doesn't become another explanation of why somebody has no room left for the things they promised to carry.",
 			completion = "Raging Bull purchase access is open. There was room for the complete delivery after all.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4b1d88e67e5c", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2c1252e65ba4", quantity = 1, mode = "random"},
 			},
 			branchIndex = 20,
 			branchLength = 26,
@@ -983,8 +983,8 @@ PLUGIN:Register("gasket", {
 			briefing = "Before the Mateba, expand the Raging Bull reserve with this list. It increases capacity for the gun already unlocked. I can appreciate a larger allowance without inventing a reason the stock should arrive faster.",
 			completion = "Raging Bull capacity increased. Refill still takes its normal time.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1012,9 +1012,9 @@ PLUGIN:Register("gasket", {
 			briefing = "For the Mateba, bring this electrical and maintenance delivery. You can be interested in the mechanism without handing it to me halfway through my meal. First the supplies, then the opportunity to buy one.",
 			completion = "Mateba purchase access is complete. The supplies are put aside and the meal remains theoretical.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4b1d88e67e5c", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2c1252e65ba4", quantity = 1, mode = "random"},
 			},
 			branchIndex = 21,
 			branchLength = 26,
@@ -1036,8 +1036,8 @@ PLUGIN:Register("gasket", {
 			briefing = "This request supports the Mateba reserve. Bring what's listed and I'll increase your stock allowance. It is a separate arrangement from the Desert Eagle coming next, so don't let the names get lost in the conversation.",
 			completion = "Your Mateba reserve capacity is larger. This order is settled on its own.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1065,9 +1065,9 @@ PLUGIN:Register("gasket", {
 			briefing = "The .44 Desert Eagle has a purchase request. Bring the camp supplies here. Yes, that is the .44 version; I have learned to finish specifying things before someone begins telling me what they wanted instead.",
 			completion = "The .44 Desert Eagle is available to buy. The version and the delivery are both accounted for.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2f8fdcd7149", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_0a417ddc981b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 22,
 			branchLength = 26,
@@ -1089,8 +1089,8 @@ PLUGIN:Register("gasket", {
 			briefing = "I'd like a larger reserve for the .44 Desert Eagle before the Colt. These materials raise capacity. We can enlarge an allowance without pretending another gun is already sitting in it.",
 			completion = "Your .44 Desert Eagle allowance is increased. Actual stock still refills normally.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1118,9 +1118,9 @@ PLUGIN:Register("gasket", {
 			briefing = "For the Colt Chicago, complete this supply order. I need the list brought back in full. You can save the comparison with the other Colt for the point where we have both names written in front of us.",
 			completion = "Colt Chicago purchase access is ready. Nothing is missing from this order.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2f8fdcd7149", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_0a417ddc981b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 23,
 			branchLength = 26,
@@ -1142,8 +1142,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The Colt Chicago reserve needs these materials before the Five-seveN. It increases stock capacity. Another practical arrangement I would rather finish than keep remembering between interruptions.",
 			completion = "Colt Chicago capacity increased. That request can stop taking up space in my head.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1171,9 +1171,9 @@ PLUGIN:Register("gasket", {
 			briefing = "The Five-seveN comes through this delivery. Bring the maintenance supplies here. A new pistol does not make the camp's old ordinary needs go away, regardless of how long the customer can discuss it.",
 			completion = "Five-seveN purchase access is complete. The ordinary supplies have finally had their turn.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2f8fdcd7149", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_0a417ddc981b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 24,
 			branchLength = 26,
@@ -1195,8 +1195,8 @@ PLUGIN:Register("gasket", {
 			briefing = "This order expands your Five-seveN reserve. Complete the list for a larger allowance. Check the actual shelf when you next buy; stock capacity isn't a prediction of what will be there that morning.",
 			completion = "Your Five-seveN stock allowance is larger. The reserve refills normally.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1224,9 +1224,9 @@ PLUGIN:Register("gasket", {
 			briefing = "For the other Desert Eagle, use this supply request. I'd rather have you read the current list than remember what the .44 delivery needed. One familiar name can create quite a long argument about the wrong order.",
 			completion = "Desert Eagle purchase access is ready. This arrangement is complete, separately from the .44 version.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2f8fdcd7149", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_0a417ddc981b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 25,
 			branchLength = 26,
@@ -1248,9 +1248,9 @@ PLUGIN:Register("gasket", {
 			briefing = "One last pistol reserve before the .500 Smith & Wesson. Bring these materials for more Desert Eagle capacity. I won't make the final small order bigger because we're nearly finished.",
 			completion = "Your Desert Eagle capacity is increased. The reserve has the same ordinary refill as before.",
 			requirements = {
-				{pool = "town_expansion_b756e66afe8c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_f0815324bc06", quantity = 2, mode = "any"},
-				{pool = "town_expansion_6300c1b64c28", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 2, mode = "any"},
+				{pool = "town_expansion_72aa1a2f1e76", quantity = 1, mode = "any"},
 				{pool = "town_expansion_2c3be06003ee", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1278,10 +1278,10 @@ PLUGIN:Register("gasket", {
 			briefing = "The .500 Smith & Wesson closes the sidearm line. Bring the full camp-supply request back here. A final delivery is allowed to be an ordinary finished job. I've got enough people expecting every useful thing I do to turn into the next task immediately.",
 			completion = "The .500 Smith & Wesson is available to buy. That's the sidearm line finished. Give me a moment to enjoy saying that.",
 			requirements = {
-				{pool = "town_expansion_b756e66afe8c", quantity = 4, mode = "any"},
-				{pool = "town_expansion_f0815324bc06", quantity = 3, mode = "any"},
-				{pool = "town_expansion_6300c1b64c28", quantity = 2, mode = "any"},
-				{pool = "town_expansion_7eefff4d1776", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 4, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 3, mode = "any"},
+				{pool = "town_expansion_72aa1a2f1e76", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ed0ffb379f26", quantity = 1, mode = "random"},
 			},
 			branchIndex = 26,
 			branchLength = 26,
@@ -1303,7 +1303,7 @@ PLUGIN:Register("gasket", {
 			briefing = "Moonshine begins this purchase line. Bring the camp-maintenance supplies listed here. People can spend a surprising amount of time discussing a bottle while standing next to the ordinary things they expect somebody else to arrange.",
 			completion = "Moonshine purchase access is open. Useful supplies received; the bottle can wait for your decision.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 11,
@@ -1320,7 +1320,7 @@ PLUGIN:Register("gasket", {
 			briefing = "The Zone-produced vodka is the next bottle arrangement. Complete this delivery and you can buy it. I don't need an explanation of the occasion; I'd rather hear the list has come back complete.",
 			completion = "You can purchase the Zone-produced vodka now. The delivery is here without an occasion attached.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 11,
@@ -1337,7 +1337,7 @@ PLUGIN:Register("gasket", {
 			briefing = "The local-vodka reserve needs these supplies before the next bottle. This increases your stock allowance. I will not be refilling it by pouring anything into whatever containers you happen to bring.",
 			completion = "Your local-vodka capacity is larger. Actual stock follows the normal refill.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_vodka_2"},
@@ -1362,7 +1362,7 @@ PLUGIN:Register("gasket", {
 			briefing = "For Cossacks, bring this maintenance order. I know a bottle is what interests you; the supplies are what interests me at present. It's possible for both parts of a deal to get a little attention.",
 			completion = "Cossacks purchase access is ready. My part of the delivery is accounted for.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 11,
@@ -1379,7 +1379,7 @@ PLUGIN:Register("gasket", {
 			briefing = "This request increases the Cossacks reserve. Bring the listed materials. There are quieter ways to support a bottle allowance than arriving with an argument about how much the camp ought to have.",
 			completion = "Your Cossacks stock allowance is increased. It will refill in the usual way.",
 			requirements = {
-				{pool = "town_expansion_1093527f1ee9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_vodka_1"},
@@ -1421,8 +1421,8 @@ PLUGIN:Register("gasket", {
 			briefing = "For wine, bring this maintenance request. Yes, I can arrange access without asking what grand meal you've planned. Lemon will have an opinion about that whether we invite one or not.",
 			completion = "Wine is available to purchase. The full order is in, and we haven't involved the kitchen.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_3ea3fe5ce3d4", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_31db5e234de1", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 11,
@@ -1439,8 +1439,8 @@ PLUGIN:Register("gasket", {
 			briefing = "I'd like to expand the wine reserve before the honey-and-pepper vodka. This delivery raises the allowance. Don't confuse a larger capacity with a bottle already waiting to accompany supper.",
 			completion = "Your wine stock capacity is larger. The refill still needs to arrive normally.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a45967d5138a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15c973ec8c45", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_wine"},
@@ -1462,8 +1462,8 @@ PLUGIN:Register("gasket", {
 			briefing = "For Nemiroff Honey & Pepper, this is the camp-supply list. Bring it complete. I have no objection to someone choosing a particular bottle; I'd just like equal care applied to the particular supplies I asked for.",
 			completion = "Nemiroff purchase access is ready. Every listed supply has received the necessary attention.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5b5d39e3738d", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_192256dbd2c6", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 11,
@@ -1480,8 +1480,8 @@ PLUGIN:Register("gasket", {
 			briefing = "The Nemiroff reserve requires this smaller order. It increases stock capacity before the Khortytsa arrangement. I will leave the bottle comparisons to people who haven't been interrupted three times trying to finish a cup.",
 			completion = "Your Nemiroff allowance is larger. Actual bottles still arrive by the normal refill.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a45967d5138a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 1, mode = "any"},
+				{pool = "town_expansion_15c973ec8c45", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"drink_vodka_6"},
@@ -1506,8 +1506,8 @@ PLUGIN:Register("gasket", {
 			briefing = "Khortytsa has the next purchase request. Bring these maintenance supplies back here. A clear arrangement is rather pleasant after a morning of people remembering things they meant to ask me yesterday.",
 			completion = "Khortytsa purchase access is open. This request has become a finished delivery instead of another reminder.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_5b5d39e3738d", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4a275fcf876d", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 11,
@@ -1524,8 +1524,8 @@ PLUGIN:Register("gasket", {
 			briefing = "Before the cream liqueur, there's the Khortytsa reserve. The listed materials raise your allowance. I need the current order, not whatever someone said I was probably running short of.",
 			completion = "Your Khortytsa stock capacity is increased. The agreed reserve is properly supported.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 1, mode = "any"},
 				{pool = "town_expansion_e210a8bed09e", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1551,9 +1551,9 @@ PLUGIN:Register("gasket", {
 			briefing = "For Baileys, bring this camp-supply delivery. People raise an eyebrow at that bottle as though the whole shelf ought to share their preference. I can make it available without sharing every customer's taste.",
 			completion = "Baileys purchase access is ready. Your delivery is complete, whatever anyone else thinks of the bottle.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a521a3db5b35", quantity = 2, mode = "any"},
-				{pool = "town_expansion_6fa4b2017521", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c58a767bfe4b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 11,
@@ -1570,8 +1570,8 @@ PLUGIN:Register("gasket", {
 			briefing = "This request expands the Baileys reserve. It is a stock allowance, with ordinary refill. I am saying that before anyone starts imagining I have a special delivery hidden behind the electrical parts.",
 			completion = "Your Baileys capacity is larger. No secret stock has appeared behind the bench.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1602,9 +1602,9 @@ PLUGIN:Register("gasket", {
 			briefing = "The Shevkoff Black arrangement requires this delivery. The label is very sure of itself; I would be equally pleased with a supply order that comes back certain it contains everything requested.",
 			completion = "Shevkoff Black purchase access is complete. At least the delivery has justified its confidence.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_4b1d88e67e5c", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2c1252e65ba4", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 11,
@@ -1626,8 +1626,8 @@ PLUGIN:Register("gasket", {
 			briefing = "Before the rum, increase the Shevkoff reserve with this list. It raises stock capacity. I won't ask you to remember a different spelling when all you need from me is a clear request.",
 			completion = "Your Shevkoff stock allowance is larger. The refill remains the usual arrangement.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 1, mode = "any"},
 				{pool = "town_expansion_a5605073b6ac", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1658,9 +1658,9 @@ PLUGIN:Register("gasket", {
 			briefing = "For Captain Morgan, bring these maintenance supplies. I could make a speech about the variety on the shelf, but what I actually want is to finish this order before the kettle needs my attention again.",
 			completion = "Captain Morgan purchase access is ready. Supplies received; I may yet get to the kettle.",
 			requirements = {
-				{pool = "town_expansion_2b87f36b3a5c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_293721c53aac", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c2f8fdcd7149", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 3, mode = "any"},
+				{pool = "town_expansion_95320215b0ba", quantity = 2, mode = "any"},
+				{pool = "town_expansion_0a417ddc981b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 11,
@@ -1682,9 +1682,9 @@ PLUGIN:Register("gasket", {
 			briefing = "One final bottle reserve before the whisky. This increases capacity for Captain Morgan after the listed delivery. A small order is still worth reading before somebody announces it's already handled.",
 			completion = "Your Captain Morgan capacity has increased. Nothing left outstanding on the reserve request.",
 			requirements = {
-				{pool = "town_expansion_b756e66afe8c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_f0815324bc06", quantity = 2, mode = "any"},
-				{pool = "town_expansion_6300c1b64c28", quantity = 1, mode = "any"},
+				{pool = "town_expansion_e19a010d3045", quantity = 2, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 2, mode = "any"},
+				{pool = "town_expansion_72aa1a2f1e76", quantity = 1, mode = "any"},
 				{pool = "town_expansion_2c3be06003ee", quantity = 1, mode = "any"},
 			},
 			stock = {
@@ -1715,10 +1715,10 @@ PLUGIN:Register("gasket", {
 			briefing = "Glenfiddich closes this bottle line. Bring the full camp-supply request here. I appreciate seeing a delivery through to the end; I would also appreciate a few minutes in which nobody translates that into my willingness to begin another job.",
 			completion = "Glenfiddich purchase access is open. The bottle arrangements are finished. Now, where did I leave the cup?",
 			requirements = {
-				{pool = "town_expansion_b756e66afe8c", quantity = 4, mode = "any"},
-				{pool = "town_expansion_f0815324bc06", quantity = 3, mode = "any"},
-				{pool = "town_expansion_6300c1b64c28", quantity = 2, mode = "any"},
-				{pool = "town_expansion_7eefff4d1776", quantity = 1, mode = "random"},
+				{pool = "town_expansion_e19a010d3045", quantity = 4, mode = "any"},
+				{pool = "town_expansion_370444fd22ff", quantity = 3, mode = "any"},
+				{pool = "town_expansion_72aa1a2f1e76", quantity = 2, mode = "any"},
+				{pool = "town_expansion_ed0ffb379f26", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 11,

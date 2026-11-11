@@ -19,10 +19,16 @@ connected chain are category-only; shared labels do not join independent capacit
 inherit the following unlock's position and always use category
 totals. Later ordinary requests use a specific-item final slot with category totals in earlier slots.
 One-step branches stay category-only. See the [mode and migration policy](../../../../docs/npc-overhaul/progression-overhaul.md#category-totals-and-specific-requests).
-Unfinished saved requests keep their quantities, item keys, contributions and credit. Mode version 1
-adds category alternatives once where applicable; completed records and specific item rolls are retained.
-New saved rolls and category choices are unaffected by later pool edits. Dialogue, journal search and
+Category requests now save 3–4 accepted item types per character, allowing any mixture. New totals
+require at least 3–4 supply batches. Three nuts or four bolts count as one batch; category offers
+always contain both fasteners or neither. Other quantity-bearing valuables use their natural spawn
+minimum. Specific requests display raw quantities after batch scaling. Catalogue pools may overlap;
+the saved accepted subsets do not. `settings.progressionCategoryChoices` configures the subset range.
+Mode version 2 replaces old full-category lists once and raises outstanding category totals below three.
+Canonical keys, delivered credit and money remain; fulfilled categories, completed milestones and old
+specific targets are retained. Choices and batch costs are unaffected by subsequent definition edits. Dialogue, journal search and
 inventory highlights use the saved choices. Restart map servers together; do not reset saves or run FTS.
+Run `luatex --luaonly tests/progression_subsets_spec.lua` for randomized subsets and batch hand-ins.
 Run `luatex --luaonly tests/town_requirement_modes_spec.lua` for all compiled town boundaries.
 Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` and
 `python3 tests/progression_expansion_spec.py`; multiplayer replication and hand-in QA remain required.

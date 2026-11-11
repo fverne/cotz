@@ -152,7 +152,7 @@ PLUGIN:Register("latch", {
 			briefing = "Before we start on fitted masks, sort out the civilian cartridges. Bring the workshop supplies on this list and I'll make replacements available to buy. Give yourself a spare; the cartridge already fitted to a mask won't last forever.",
 			completion = "Civilian filters are available to buy here now. That gives us the replacements sorted before the Halfmask order.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a115cb177717", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 14,
@@ -170,7 +170,7 @@ PLUGIN:Register("latch", {
 			briefing = "The halfmask is the first bit of this range I can open for you. Bring the workshop materials on that list. Don't apologise for needing to look twice; I'd rather have a person reading an order than nodding while thinking about the next thing.",
 			completion = "That's the order. The halfmask is available to buy; you've done the useful part of the conversation.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a115cb177717", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 14,
@@ -187,7 +187,7 @@ PLUGIN:Register("latch", {
 			briefing = "Before the respirator, I want the halfmask reserve sorted. This delivery raises the number I can keep for you. Empty space on the shelf will still be empty until the usual stock comes in.",
 			completion = "Your halfmask stock allowance is up. The refill hasn't learned to hurry.",
 			requirements = {
-				{pool = "town_expansion_b96d05056688", quantity = 1, mode = "any"},
+				{pool = "town_expansion_f007cba67161", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -212,7 +212,7 @@ PLUGIN:Register("latch", {
 			briefing = "The respirator comes through this supply order. Workshop stock gets used in unremarkable amounts until there's suddenly nothing left, and everybody remembers a task they meant to finish. Bring the complete list and you'll be able to buy the mask.",
 			completion = "All present. You can buy the respirator now. I'll get these off the bench.",
 			requirements = {
-				{pool = "town_expansion_b96d05056688", quantity = 1, mode = "any"},
+				{pool = "town_expansion_f007cba67161", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 14,
@@ -229,7 +229,7 @@ PLUGIN:Register("latch", {
 			briefing = "The respirator needs a larger reserve. I'm asking for the materials here, not an explanation of how much you like the mask. Finish this delivery and the stock allowance grows.",
 			completion = "Respirator capacity increased. Check the actual shelf when you want one.",
 			requirements = {
-				{pool = "town_expansion_b96d05056688", quantity = 1, mode = "any"},
+				{pool = "town_expansion_93048bf51946", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -268,8 +268,8 @@ PLUGIN:Register("latch", {
 			briefing = "The EO-20 takes a military cartridge. You can put a civilian filter beside it and admire the resemblance, but it still won't fit. Bring this order back complete and I'll open the military filters for you first.",
 			completion = "Military filters are available to buy. Keep their fittings in mind when you're packing spares for the EO-20.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 1, mode = "any"},
-				{pool = "town_expansion_4da1807ce39b", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_86908d7e5831", quantity = 1, mode = "random"},
 			},
 			branchIndex = 5,
 			branchLength = 14,
@@ -290,8 +290,8 @@ PLUGIN:Register("latch", {
 			briefing = "The EO-20 is the next mask arrangement. Bring these workshop supplies back complete. I like equipment with a name people can repeat without waving both hands at their face; this one usually gets us that far.",
 			completion = "The EO-20 is available to purchase. Nice to finish an order without guessing what anyone meant.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_6b08c04b410b", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2b209bd707b0", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 14,
@@ -308,8 +308,8 @@ PLUGIN:Register("latch", {
 			briefing = "I'd like more EO-20 capacity before going further. The supplies on this order cover that reserve. It isn't a delivery of fresh masks, and I won't pretend drawing another box on the stock sheet makes one appear.",
 			completion = "The EO-20 allowance is larger. Fresh masks still have to arrive normally.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 1, mode = "any"},
-				{pool = "town_expansion_1168bc176d8a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a07b5a6724e3", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -334,8 +334,8 @@ PLUGIN:Register("latch", {
 			briefing = "The old Russian operator helmet is on this purchase order. Old equipment can be worth a look; that isn't permission to ignore what you're actually buying. Bring the materials listed, then decide for yourself at the shelf.",
 			completion = "That opens the old operator helmet for purchase. Take your time looking it over.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_8ccde904a437", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_b7200a7f95bb", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 14,
@@ -352,8 +352,8 @@ PLUGIN:Register("latch", {
 			briefing = "The operator-helmet reserve comes first here. Bring the full smaller order and I'll increase your allowance. Keeping an existing line supplied is work too, even if it doesn't make an interesting tale.",
 			completion = "Your old operator-helmet capacity is increased. Uninteresting work, properly finished.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 1, mode = "any"},
-				{pool = "town_expansion_1168bc176d8a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a07b5a6724e3", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -378,8 +378,8 @@ PLUGIN:Register("latch", {
 			briefing = "For the CS-1 flight helmet, I need this delivery. Set the order where you can read the little entries as well. People will carry a great lump of salvage home, then forget the last small part and blame the writing.",
 			completion = "CS-1 purchase access is ready. No small entries missing this time.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_8ccde904a437", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_fd4b6b99785e", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 14,
@@ -396,8 +396,8 @@ PLUGIN:Register("latch", {
 			briefing = "The CS-1 reserve could use these supplies. Complete the order and you get a larger stock allowance for that helmet. It doesn't move you into the next mask arrangement by itself.",
 			completion = "CS-1 stock capacity is larger. That's the reserve taken care of.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 1, mode = "any"},
-				{pool = "town_expansion_1168bc176d8a", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a07b5a6724e3", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -419,8 +419,8 @@ PLUGIN:Register("latch", {
 			briefing = "The PMK-3 is the next gasmask I can make available. Bring the listed workshop materials. I won't turn it into an inspection of your present kit; you've asked about a purchase, and we can finish that business first.",
 			completion = "You've completed the PMK-3 order. It's available to buy here now.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_58c67701e851", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1168bc176d8a", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 14,
@@ -437,9 +437,9 @@ PLUGIN:Register("latch", {
 			briefing = "Before the CS-2, there's a PMK-3 reserve order. I want the materials where I can account for them, rather than in the pile somebody has declared useful from the doorway. The list tells you which is which.",
 			completion = "PMK-3 allowance increased. These can go into the right pile for once.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e3e4bc290f7c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_de5faa6ef74e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_d1da9c5aae2f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_81061404cde0", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -461,8 +461,8 @@ PLUGIN:Register("latch", {
 			briefing = "The CS-2 frag helmet requires this supply delivery. There's a satisfying amount of work in a thing most people discuss only after dropping it. Get the full order here and you can purchase it; we can leave the dropping out of the arrangement.",
 			completion = "The CS-2 is open for purchase. Delivery's complete and the bench is still intact.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 3, mode = "any"},
-				{pool = "town_expansion_e3e4bc290f7c", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 3, mode = "any"},
+				{pool = "town_expansion_d1da9c5aae2f", quantity = 2, mode = "any"},
 				{pool = "town_expansion_8957d0e845ad", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
@@ -480,9 +480,9 @@ PLUGIN:Register("latch", {
 			briefing = "This raises your CS-2 stock allowance. Bring what's listed; nothing extra is needed to impress me. I have enough objects here that someone couldn't bear to leave behind.",
 			completion = "Your CS-2 reserve capacity is up. You kept the delivery to what was useful.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_7fd0a0ed0759", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a3cb2e84213f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_63a28dad3590", quantity = 1, mode = "any"},
+				{pool = "town_expansion_5ef434e7a351", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -509,8 +509,8 @@ PLUGIN:Register("latch", {
 			briefing = "For the XM-40, bring this workshop request. I don't mind explaining a material somebody hasn't seen before. I mind the fellow who assures me he's understood, then tries to argue the missing part into being.",
 			completion = "The XM-40 order is settled. You can purchase it now; no argument required.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 3, mode = "any"},
-				{pool = "town_expansion_7fd0a0ed0759", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 3, mode = "any"},
+				{pool = "town_expansion_63a28dad3590", quantity = 2, mode = "any"},
 				{pool = "town_expansion_a5f288f21963", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
@@ -533,9 +533,9 @@ PLUGIN:Register("latch", {
 			briefing = "The XM-40 reserve needs attention before the M40 purchase order. This delivery increases capacity for the mask you've already unlocked. Take a look at the request before deciding how much room to leave.",
 			completion = "XM-40 stock allowance increased. It will fill by the ordinary schedule.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_7fd0a0ed0759", quantity = 1, mode = "any"},
-				{pool = "town_expansion_a3cb2e84213f", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_63a28dad3590", quantity = 1, mode = "any"},
+				{pool = "town_expansion_5ef434e7a351", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -562,8 +562,8 @@ PLUGIN:Register("latch", {
 			briefing = "Before the M40, I'd like its replacement filters settled. That assembly takes scientific cartridges, and a sack of the other types won't help when one runs out. Bring the materials listed here; we can deal with the mask after its spares are available.",
 			completion = "You can buy scientific filters now. The M40 order can go ahead with the right replacements behind it.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_7fd0a0ed0759", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_63a28dad3590", quantity = 1, mode = "any"},
 				{pool = "town_expansion_7b6bb1241f98", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
@@ -591,8 +591,8 @@ PLUGIN:Register("latch", {
 			briefing = "The M40 arrangement uses the materials listed here. More specialised kit still depends on ordinary supplies turning up. That's why I keep asking for deliveries instead of listening to how urgently somebody wants the next mask.",
 			completion = "M40 purchase access is ready. These supplies are a more useful answer than urgency.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 3, mode = "any"},
-				{pool = "town_expansion_7fd0a0ed0759", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 3, mode = "any"},
+				{pool = "town_expansion_63a28dad3590", quantity = 2, mode = "any"},
 				{pool = "town_expansion_7b6bb1241f98", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
@@ -615,10 +615,10 @@ PLUGIN:Register("latch", {
 			briefing = "One more reserve order before the M50. This is for the M40, and it increases how many I can hold for you. Finish the list rather than bringing the first large thing you find and expecting a substitution.",
 			completion = "Your M40 capacity has increased. Good; the reserve and the next order won't be confused.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e3e4bc290f7c", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a9f6316d975c", quantity = 1, mode = "any"},
-				{pool = "town_expansion_8227d69b4065", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 2, mode = "any"},
+				{pool = "town_expansion_d1da9c5aae2f", quantity = 2, mode = "any"},
+				{pool = "town_expansion_cd001154e395", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c342ce00082c", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -645,9 +645,9 @@ PLUGIN:Register("latch", {
 			briefing = "The M50 is the end of this purchase line. Bring the full workshop order here. You've heard enough from me to know I like a completed job, so I won't stand over you reading it aloud.",
 			completion = "That's the M50 purchase arrangement finished. A long set of orders, brought back properly.",
 			requirements = {
-				{pool = "town_expansion_adb5ba8af817", quantity = 4, mode = "any"},
-				{pool = "town_expansion_e3e4bc290f7c", quantity = 3, mode = "any"},
-				{pool = "town_expansion_a9f6316d975c", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2b4d34254e73", quantity = 4, mode = "any"},
+				{pool = "town_expansion_d1da9c5aae2f", quantity = 3, mode = "any"},
+				{pool = "town_expansion_cd001154e395", quantity = 2, mode = "any"},
 				{pool = "town_expansion_3c9a03c85455", quantity = 1, mode = "random"},
 			},
 			branchIndex = 14,

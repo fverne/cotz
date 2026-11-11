@@ -4189,12 +4189,40 @@ ix.progression.townRequirementSources = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_fd0c7c0e30f3 = {
+ix.progression.requirementBatchSizes = {
+	value_propanetank = 2,
+	value_bolts = 4,
+	value_nuts = 3,
+	value_gasoline = 2,
+	value_9vbattery = 2,
+	value_kerosene = 2,
+	value_capacitors = 2,
+}
+
+ix.progression.itemPools.town_expansion_2c39104686e8 = {
 	name = "Survey notes and measuring instruments: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
+		{item = "value_thick_diary"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_9541551e9e93 = {
+	name = "Survey notes and measuring instruments: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
 		{item = "value_info_maps"},
 		{item = "value_info_moleskine"},
+		{item = "value_manual_lada"},
 		{item = "value_maps"},
 		{item = "value_milimap"},
 		{item = "value_pressuregauge"},
@@ -4203,33 +4231,36 @@ ix.progression.itemPools.town_expansion_fd0c7c0e30f3 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_921ffa4bb7c2 = {
+ix.progression.itemPools.town_expansion_760a26e25631 = {
 	name = "Survey notes and measuring instruments: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
+		{item = "value_clothbook2"},
+		{item = "value_info_maps"},
 		{item = "value_info_moleskine"},
+		{item = "value_manual_lada"},
 		{item = "value_maps"},
+		{item = "value_milimap"},
 		{item = "value_thick_diary"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_394faf3b2bc1 = {
+ix.progression.itemPools.town_expansion_d1ac14ec4037 = {
 	name = "Survey notes and measuring instruments: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
 		{item = "value_info_maps"},
-		{item = "value_milimap"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_cb717f902d7e = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_info_maps"},
+		{item = "value_info_moleskine"},
+		{item = "value_manual_lada"},
+		{item = "value_maps"},
 		{item = "value_milimap"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
+		{item = "value_thick_diary"},
 	},
 }
 
@@ -4255,40 +4286,30 @@ ix.progression.itemPools.town_expansion_9986d3394105 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_6a7a13e88edb = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_info_moleskine"},
-		{item = "value_maps"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_805df9d0e31f = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_milimap"},
-		{item = "value_thick_diary"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_7bd9b9f6b468 = {
+ix.progression.itemPools.town_expansion_f992b065f19b = {
 	name = "Survey notes and measuring instruments: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_electro_gyroscope"},
-		{item = "value_gyroscope"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
 		{item = "value_info_maps"},
+		{item = "value_info_moleskine"},
+		{item = "value_manual_lada"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
 		{item = "value_optical_lens"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
 		{item = "value_sensor_d"},
 		{item = "value_thermalmodule"},
+		{item = "value_thick_diary"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_e7e0de73f92a = {
+ix.progression.itemPools.town_expansion_9c6bee1426dc = {
 	name = "Survey notes and measuring instruments: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -4299,6 +4320,8 @@ ix.progression.itemPools.town_expansion_e7e0de73f92a = {
 		{item = "value_detector"},
 		{item = "value_geigercounter"},
 		{item = "value_minedetector"},
+		{item = "value_scanner_anomaly"},
+		{item = "value_scanner_artefact"},
 		{item = "value_spec_recorder"},
 	},
 }
@@ -4315,13 +4338,22 @@ ix.progression.itemPools.town_expansion_08367600e48c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a17426b40822 = {
+ix.progression.itemPools.town_expansion_ec6a9a5eae75 = {
 	name = "Survey notes and measuring instruments: general supplies (Marsh)",
-	tier = "uncommon",
+	tier = "common",
 	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
 		{item = "value_info_maps"},
+		{item = "value_info_moleskine"},
+		{item = "value_manual_lada"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
+		{item = "value_thick_diary"},
 	},
 }
 
@@ -4331,6 +4363,19 @@ ix.progression.itemPools.town_expansion_2c4f96357444 = {
 	candidates = {
 		{item = "value_archive_cassette"},
 		{item = "value_cassette_fiolet"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_a436288caee5 = {
+	name = "Freight cases and cargo packing: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_paracord"},
+		{item = "value_rope"},
+		{item = "value_ropes"},
+		{item = "value_tape_duct"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
 	},
 }
 
@@ -4348,20 +4393,12 @@ ix.progression.itemPools.town_expansion_ef56d98e1e68 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_ab70754481f9 = {
+ix.progression.itemPools.town_expansion_4efa86832367 = {
 	name = "Freight cases and cargo packing: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_paracord"},
 		{item = "value_rope"},
-		{item = "value_tape_duct"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_691dc581bc8a = {
-	name = "Freight cases and cargo packing: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
 		{item = "value_ropes"},
 		{item = "value_sewingkit"},
 		{item = "value_tarp"},
@@ -4369,14 +4406,29 @@ ix.progression.itemPools.town_expansion_691dc581bc8a = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_adef4be4b1a2 = {
+ix.progression.itemPools.town_expansion_8313ff40d2d3 = {
 	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbon_case"},
 		{item = "value_knife_box_low"},
 		{item = "value_large_case"},
-		{item = "value_pukt90"},
+		{item = "value_rope"},
+		{item = "value_ropes"},
+		{item = "value_sewingkit"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_3389c064b502 = {
+	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_carbon_case"},
+		{item = "value_knife_box_low"},
+		{item = "value_large_case"},
+		{item = "value_ropes"},
 		{item = "value_security_box"},
 		{item = "value_sewingkit"},
 		{item = "value_tarp"},
@@ -4384,126 +4436,123 @@ ix.progression.itemPools.town_expansion_adef4be4b1a2 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_810ca9732e11 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation)",
+ix.progression.itemPools.town_expansion_03a67c43cf19 = {
+	name = "Freight cases and cargo packing: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_paracord"},
+		{item = "value_rope"},
+		{item = "value_ropes"},
+		{item = "value_sewingkit"},
+		{item = "value_tape_duct"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_742385b91f8d = {
+	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_gascan"},
+		{item = "value_ropes"},
+		{item = "value_sewingkit"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+		{item = "value_valuable_kresalo"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_2847198e6a81 = {
+	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
 		{item = "value_carbon_case"},
+		{item = "value_container_junkbox"},
 		{item = "value_knife_box_low"},
 		{item = "value_large_case"},
-		{item = "value_pukt90"},
-		{item = "value_security_box"},
-		{item = "value_sewingkit"},
-		{item = "value_tools_sewing"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_b4bf24ab68ea = {
-	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_crikent_0"},
-		{item = "value_fabric_fleece"},
-		{item = "value_fabric_ripstop"},
-		{item = "value_fabrics1"},
-		{item = "value_flammable_huntermatches"},
-		{item = "value_flammable_klean"},
-		{item = "value_gascan"},
-		{item = "value_valuable_kresalo"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_9c040898845b = {
-	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "common",
-	candidates = {
-		{item = "value_carbon_case"},
-		{item = "value_container_junkbox"},
-		{item = "value_large_case"},
-		{item = "value_parcel"},
-		{item = "value_ropes"},
-		{item = "value_sewingkit"},
-		{item = "value_tarp"},
-		{item = "value_tools_sewing"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_01e4dbaff55e = {
-	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "common",
-	candidates = {
-		{item = "value_crikent_0"},
-		{item = "value_fabric_fleece"},
-		{item = "value_fabric_ripstop"},
-		{item = "value_flammable_huntermatches"},
-		{item = "value_flammable_klean"},
-		{item = "value_gascan"},
-		{item = "value_matches"},
-		{item = "value_valuable_kresalo"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_a66c4903095e = {
-	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "common",
-	candidates = {
-		{item = "value_crikent_0"},
-		{item = "value_fabric_fleece"},
-		{item = "value_fabric_ripstop"},
-		{item = "value_flammable_huntermatches"},
-		{item = "value_flammable_klean"},
-		{item = "value_gascan"},
-		{item = "value_match"},
-		{item = "value_matches"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_4008e6738732 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
 		{item = "value_paracord"},
-		{item = "value_tape_duct"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_785886b6bdc1 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
+		{item = "value_parcel"},
+		{item = "value_pukt90"},
 		{item = "value_rope"},
 		{item = "value_ropes"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_c3736fe6b4e7 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "common",
-	candidates = {
-		{item = "value_carbon_case"},
-		{item = "value_container_junkbox"},
-		{item = "value_knife_box_low"},
-		{item = "value_large_case"},
-		{item = "value_parcel"},
+		{item = "value_security_box"},
 		{item = "value_sewingkit"},
+		{item = "value_small_case"},
+		{item = "value_tape_duct"},
 		{item = "value_tarp"},
 		{item = "value_tools_sewing"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_e66eadf0eb93 = {
+ix.progression.itemPools.town_expansion_58819248abd4 = {
+	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	tier = "common",
+	candidates = {
+		{item = "value_fabric_fleece"},
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_gascan"},
+		{item = "value_sewingkit"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+		{item = "value_valuable_kresalo"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_c706432f6e12 = {
 	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
-		{item = "value_fabric_cordura"},
 		{item = "value_fabric_fleece"},
 		{item = "value_fabric_ripstop"},
+		{item = "value_flammable_huntermatches"},
 		{item = "value_flammable_klean"},
 		{item = "value_gascan"},
-		{item = "value_match"},
+		{item = "value_sewingkit"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_6a51d7730e3e = {
+	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	tier = "common",
+	candidates = {
+		{item = "value_briefcase"},
+		{item = "value_carbon_case"},
+		{item = "value_container_junkbox"},
+		{item = "value_knife_box_low"},
+		{item = "value_large_case"},
+		{item = "value_paracord"},
+		{item = "value_parcel"},
+		{item = "value_pukt90"},
+		{item = "value_rope"},
+		{item = "value_ropes"},
+		{item = "value_security_box"},
+		{item = "value_sewingkit"},
+		{item = "value_small_case"},
+		{item = "value_tape_duct"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_7ac8639f4591 = {
+	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	tier = "common",
+	candidates = {
+		{item = "value_crikent_0"},
+		{item = "value_fabric_fleece"},
+		{item = "value_fabric_ripstop"},
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_gascan"},
 		{item = "value_matches"},
+		{item = "value_sewingkit"},
 	},
 }
 
@@ -4522,21 +4571,36 @@ ix.progression.itemPools.town_expansion_c065cd2ebf15 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a1ace2f2865e = {
+ix.progression.itemPools.town_expansion_de7b35dd9b7f = {
 	name = "Field samples and laboratory containment: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_event_labyrinth_chem_container"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
+		{item = "value_portable_container_closed"},
 		{item = "value_portable_container_opened"},
+		{item = "value_thermobag"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_07ac2fbf5de1 = {
+ix.progression.itemPools.town_expansion_2543f03b06bc = {
 	name = "Field samples and laboratory containment: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
+		{item = "value_chemcontainer"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_event_labyrinth_chem_container"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 		{item = "value_portable_container_closed"},
+		{item = "value_portable_container_opened"},
 		{item = "value_thermobag"},
 	},
 }
@@ -4576,32 +4640,23 @@ ix.progression.itemPools.town_expansion_93a96a4765bd = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_ee0f01e7c6c6 = {
-	name = "Field samples and laboratory containment: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
-		{item = "value_portable_container_opened"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_ab96359a0c63 = {
-	name = "Field samples and laboratory containment: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
-		{item = "value_chemcontainer"},
-		{item = "value_portable_container_closed"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_e47e1dab9830 = {
+ix.progression.itemPools.town_expansion_1537e0c06e89 = {
 	name = "Field samples and laboratory containment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_anomaly_plant"},
+		{item = "value_chemcontainer"},
 		{item = "value_chemicalsample"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_event_labyrinth_chem_container"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 		{item = "value_med_bloodsample"},
 		{item = "value_plasticbag_labyrinth"},
+		{item = "value_portable_container_closed"},
+		{item = "value_portable_container_opened"},
 		{item = "value_quest_biohazard_case"},
 		{item = "value_thermobag"},
 	},
@@ -4643,24 +4698,32 @@ ix.progression.itemPools.town_expansion_4191637a3663 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_d5c230931a12 = {
+ix.progression.itemPools.town_expansion_c81d136325a3 = {
 	name = "Field samples and laboratory containment: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
-		{item = "value_chemcontainer"},
-		{item = "value_event_labyrinth_chem_container"},
-		{item = "value_portable_container_closed"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 		{item = "value_portable_container_opened"},
-		{item = "value_thermobag"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_08cb53802f9d = {
+ix.progression.itemPools.town_expansion_a93997bc4506 = {
 	name = "Field samples and laboratory containment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_chemcontainer"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_event_labyrinth_chem_container"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 		{item = "value_portable_container_closed"},
+		{item = "value_portable_container_opened"},
 		{item = "value_quest_biohazard_case"},
 		{item = "value_thermobag"},
 	},
@@ -4676,16 +4739,23 @@ ix.progression.itemPools.town_expansion_8b6f5686711c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_eb9a86daf632 = {
+ix.progression.itemPools.town_expansion_c0bcbab54219 = {
 	name = "Field samples and laboratory containment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_anomaly_plant"},
+		{item = "value_chemcontainer"},
 		{item = "value_chemicalsample"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_event_labyrinth_chem_container"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 		{item = "value_med_bloodsample"},
 		{item = "value_plasticbag_labyrinth"},
 		{item = "value_portable_container_closed"},
+		{item = "value_portable_container_opened"},
 		{item = "value_quest_biohazard_case"},
 		{item = "value_thermobag"},
 	},
@@ -4714,13 +4784,12 @@ ix.progression.itemPools.town_expansion_651aa3a30eb5 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_38773dec85c7 = {
+ix.progression.itemPools.town_expansion_42254f70f06f = {
 	name = "Ordnance and protective equipment: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_balloon_poison_gas"},
 		{item = "value_c4"},
-		{item = "value_dynamite"},
 		{item = "value_explosive_charge"},
 		{item = "value_flammable_thermite"},
 		{item = "value_flammable_trotil"},
@@ -4728,14 +4797,12 @@ ix.progression.itemPools.town_expansion_38773dec85c7 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_b3dfc5681867 = {
+ix.progression.itemPools.town_expansion_301902d9f818 = {
 	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic11"},
 		{item = "value_ballistic4"},
-		{item = "value_ballistic6"},
-		{item = "value_ballistic7"},
 		{item = "value_balloon_poison_gas"},
 		{item = "value_flammable_thermite"},
 		{item = "value_flammable_trotil"},
@@ -4752,6 +4819,26 @@ ix.progression.itemPools.town_expansion_e495fb79e800 = {
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
 		{item = "value_balloon_poison_gas"},
+		{item = "value_flammable_thermite"},
+		{item = "value_flammable_trotil"},
+		{item = "value_other_uzrgm_fuse"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_ce9765fb7cf7 = {
+	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_ballistic1"},
+		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
+		{item = "value_ballistic4"},
+		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
+		{item = "value_balloon_poison_gas"},
+		{item = "value_c4"},
+		{item = "value_dynamite"},
+		{item = "value_explosive_charge"},
 		{item = "value_flammable_thermite"},
 		{item = "value_flammable_trotil"},
 		{item = "value_other_uzrgm_fuse"},
@@ -4787,28 +4874,34 @@ ix.progression.itemPools.town_expansion_ea19e7f52af0 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_f0839ac5ddec = {
+ix.progression.itemPools.town_expansion_38773dec85c7 = {
 	name = "Ordnance and protective equipment: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_balloon_poison_gas"},
+		{item = "value_c4"},
+		{item = "value_dynamite"},
+		{item = "value_explosive_charge"},
+		{item = "value_flammable_thermite"},
 		{item = "value_flammable_trotil"},
 		{item = "value_other_uzrgm_fuse"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_03bbb2fdfea5 = {
+ix.progression.itemPools.town_expansion_c1cbada5e01f = {
 	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
+		{item = "value_ballistic11"},
 		{item = "value_ballistic3"},
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
+		{item = "value_flammable_thermite"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_5057b25bebae = {
+ix.progression.itemPools.town_expansion_59255152cb9b = {
 	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
@@ -4818,8 +4911,13 @@ ix.progression.itemPools.town_expansion_5057b25bebae = {
 		{item = "value_ballistic4"},
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
+		{item = "value_balloon_poison_gas"},
 		{item = "value_c4"},
+		{item = "value_dynamite"},
+		{item = "value_explosive_charge"},
 		{item = "value_flammable_thermite"},
+		{item = "value_flammable_trotil"},
+		{item = "value_other_uzrgm_fuse"},
 	},
 }
 
@@ -4844,7 +4942,7 @@ ix.progression.itemPools.town_expansion_42e6fb2eee15 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_5d53532b81d0 = {
+ix.progression.itemPools.town_expansion_bbed61122071 = {
 	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -4854,8 +4952,13 @@ ix.progression.itemPools.town_expansion_5d53532b81d0 = {
 		{item = "value_ballistic4"},
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
+		{item = "value_balloon_poison_gas"},
 		{item = "value_c4"},
+		{item = "value_dynamite"},
+		{item = "value_explosive_charge"},
 		{item = "value_flammable_thermite"},
+		{item = "value_flammable_trotil"},
+		{item = "value_other_uzrgm_fuse"},
 	},
 }
 
@@ -4881,25 +4984,21 @@ ix.progression.itemPools.town_expansion_ebe1eeabefee = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_c0fa3fd9aabe = {
+ix.progression.itemPools.town_expansion_1d12d1615a01 = {
 	name = "Ordnance and protective equipment: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_balloon_poison_gas"},
-		{item = "value_flammable_trotil"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_39cb7e94440d = {
-	name = "Ordnance and protective equipment: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
+		{item = "value_c4"},
+		{item = "value_dynamite"},
+		{item = "value_explosive_charge"},
 		{item = "value_flammable_thermite"},
+		{item = "value_flammable_trotil"},
 		{item = "value_other_uzrgm_fuse"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_9c9e7fa86560 = {
+ix.progression.itemPools.town_expansion_9e28abde391d = {
 	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -4909,8 +5008,13 @@ ix.progression.itemPools.town_expansion_9c9e7fa86560 = {
 		{item = "value_ballistic4"},
 		{item = "value_ballistic6"},
 		{item = "value_ballistic7"},
+		{item = "value_balloon_poison_gas"},
 		{item = "value_c4"},
+		{item = "value_dynamite"},
 		{item = "value_explosive_charge"},
+		{item = "value_flammable_thermite"},
+		{item = "value_flammable_trotil"},
+		{item = "value_other_uzrgm_fuse"},
 	},
 }
 
@@ -4936,13 +5040,25 @@ ix.progression.itemPools.town_expansion_c37f2fe71765 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_e5d6c53061f3 = {
+ix.progression.itemPools.town_expansion_11432963f8ae = {
 	name = "Reloading components and ammunition storage: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_guncleaner"},
 		{item = "value_gunoil"},
 		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
+		{item = "value_gunpowder_red"},
+		{item = "value_gunspray"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_64a8e2e09127 = {
+	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
 		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_gunspray"},
@@ -4986,50 +5102,49 @@ ix.progression.itemPools.town_expansion_e00696cd67cf = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_de1f4d5c33d6 = {
+ix.progression.itemPools.town_expansion_e5d6c53061f3 = {
 	name = "Reloading components and ammunition storage: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_guncleaner"},
 		{item = "value_gunoil"},
 		{item = "value_gunpowder_blue"},
 		{item = "value_gunpowder_green"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_7da8bdd25de3 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_guncleaner"},
 		{item = "value_gunpowder_red"},
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_4d5f7e467f0d = {
+ix.progression.itemPools.town_expansion_85f15f41a5ef = {
+	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_guncleaner"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
+		{item = "value_gunpowder_red"},
+		{item = "value_gunspray"},
+		{item = "value_lubricant"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_7be8fdb53f87 = {
 	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
 		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_023c54df6115 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_guncleaner"},
-		{item = "value_gunpowder_red"},
-		{item = "value_lubricant"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_224af09f586f = {
+ix.progression.itemPools.town_expansion_b831b88bf8a7 = {
 	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
@@ -5037,54 +5152,69 @@ ix.progression.itemPools.town_expansion_224af09f586f = {
 		{item = "value_container_parls"},
 		{item = "value_container_weaponcase"},
 		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_02feda14ec81 = {
+ix.progression.itemPools.town_expansion_90de7166a430 = {
 	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
 		{item = "value_guncleaner"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_ab02577b1443 = {
+ix.progression.itemPools.town_expansion_c49ce575cf50 = {
 	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_d4ffbb33bee8 = {
+ix.progression.itemPools.town_expansion_dd5ba6faf7e5 = {
 	name = "Reloading components and ammunition storage: general supplies (Garbage)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
 		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_e37e23b7575b = {
+ix.progression.itemPools.town_expansion_60d977cc67e0 = {
 	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 		{item = "value_pipewrench"},
 		{item = "value_precisiontools"},
 		{item = "value_screwdriver"},
 		{item = "value_tools_advwrench"},
 		{item = "value_tools_ratchetwrench"},
+		{item = "value_tools_screwdriver_flat"},
 		{item = "value_tools_screwdriver_flat_long"},
 		{item = "value_wrench"},
 	},
@@ -5102,7 +5232,7 @@ ix.progression.itemPools.town_expansion_91612d91ad03 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a3337a27d974 = {
+ix.progression.itemPools.town_expansion_df7b8b770885 = {
 	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -5111,22 +5241,30 @@ ix.progression.itemPools.town_expansion_a3337a27d974 = {
 		{item = "value_container_weapon_thicc"},
 		{item = "value_container_weaponcase"},
 		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_5286bb89816d = {
+ix.progression.itemPools.town_expansion_2bcd5ac29800 = {
 	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 		{item = "value_pipewrench"},
 		{item = "value_precisiontools"},
 		{item = "value_screwdriver"},
 		{item = "value_tools_advwrench"},
 		{item = "value_tools_ratchetwrench"},
+		{item = "value_tools_screwdriver_flat"},
 		{item = "value_tools_screwdriver_flat_long"},
 		{item = "value_wrench"},
 	},
@@ -5155,25 +5293,7 @@ ix.progression.itemPools.town_expansion_dc7e0ab4a6de = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_3d986e0d6b1f = {
-	name = "Reloading components and ammunition storage: general supplies (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_gunoil"},
-		{item = "value_gunpowder_green"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_6978872f4202 = {
-	name = "Reloading components and ammunition storage: general supplies (Garbage)",
-	tier = "rare",
-	candidates = {
-		{item = "value_guncleaner"},
-		{item = "value_gunpowder_blue"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_b1010fd3352b = {
+ix.progression.itemPools.town_expansion_2ef4539083ea = {
 	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -5181,22 +5301,31 @@ ix.progression.itemPools.town_expansion_b1010fd3352b = {
 		{item = "value_container_parls"},
 		{item = "value_container_weapon_thicc"},
 		{item = "value_container_weaponcase"},
+		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
+		{item = "value_gunpowder_blue"},
+		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_a71af4c623cd = {
+ix.progression.itemPools.town_expansion_aea4e8575719 = {
 	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 		{item = "value_pipewrench"},
 		{item = "value_precisiontools"},
 		{item = "value_screwdriver"},
 		{item = "value_tools_advwrench"},
 		{item = "value_tools_ratchetwrench"},
+		{item = "value_tools_screwdriver_flat"},
 		{item = "value_tools_screwdriver_flat_long"},
 		{item = "value_wrench"},
 	},
@@ -5226,7 +5355,7 @@ ix.progression.itemPools.town_expansion_6c1ea6c989dc = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_ebe38fab8b66 = {
+ix.progression.itemPools.town_expansion_65397c5ae9bc = {
 	name = "Historical documents and technical records: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
@@ -5236,18 +5365,14 @@ ix.progression.itemPools.town_expansion_ebe38fab8b66 = {
 		{item = "value_documents_5"},
 		{item = "value_documents_6"},
 		{item = "value_documents_7"},
-		{item = "value_handbook_materials"},
-		{item = "value_manual_lada"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_1cd75d531157 = {
+ix.progression.itemPools.town_expansion_486c5fd6b835 = {
 	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_clothbook1"},
 		{item = "value_documents_12"},
-		{item = "value_documents_3"},
 		{item = "value_documents_4"},
 		{item = "value_documents_5"},
 		{item = "value_documents_6"},
@@ -5271,57 +5396,80 @@ ix.progression.itemPools.town_expansion_406f35b6f207 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_65397c5ae9bc = {
+ix.progression.itemPools.town_expansion_5eeeea7bc9ae = {
 	name = "Historical documents and technical records: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_documents_10"},
+		{item = "value_documents_11"},
 		{item = "value_documents_12"},
+		{item = "value_documents_14"},
 		{item = "value_documents_3"},
 		{item = "value_documents_4"},
 		{item = "value_documents_5"},
 		{item = "value_documents_6"},
 		{item = "value_documents_7"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_8de7c83b4f1d = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_clothbook1"},
-		{item = "value_clothbook2"},
-		{item = "value_documents_8"},
-		{item = "value_manual_lada"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_5b7b7a168af9 = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_clothbook2"},
-		{item = "value_documents_8"},
-		{item = "value_manual_lada"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_8fa2c0559032 = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_documents_8"},
+		{item = "value_documents_9"},
 		{item = "value_handbook_materials"},
 		{item = "value_manual_lada"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_47de1bcad0c2 = {
+ix.progression.itemPools.town_expansion_4bff88ee59a9 = {
+	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_documents_12"},
+		{item = "value_documents_3"},
+		{item = "value_documents_4"},
+		{item = "value_documents_8"},
+		{item = "value_guide"},
+		{item = "value_manual_lada"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_51d6dd480c10 = {
+	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_documents_12"},
+		{item = "value_documents_3"},
+		{item = "value_documents_8"},
+		{item = "value_guide"},
+		{item = "value_manual_lada"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_27ac5d00881a = {
+	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_documents_3"},
+		{item = "value_documents_8"},
+		{item = "value_guide"},
+		{item = "value_manual_lada"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_09610a098c14 = {
 	name = "Historical documents and technical records: general supplies (Waystation)",
-	tier = "uncommon",
+	tier = "common",
 	candidates = {
 		{item = "value_documents_10"},
 		{item = "value_documents_11"},
+		{item = "value_documents_12"},
 		{item = "value_documents_14"},
+		{item = "value_documents_3"},
+		{item = "value_documents_4"},
+		{item = "value_documents_5"},
+		{item = "value_documents_6"},
+		{item = "value_documents_7"},
 		{item = "value_documents_9"},
 		{item = "value_handbook_materials"},
 		{item = "value_manual_lada"},
@@ -5343,13 +5491,21 @@ ix.progression.itemPools.town_expansion_24ed82226a6c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_d4101333b518 = {
+ix.progression.itemPools.town_expansion_7ab712313d3a = {
 	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
 		{item = "value_clothbook2"},
 		{item = "value_documents_10"},
+		{item = "value_documents_11"},
+		{item = "value_documents_12"},
+		{item = "value_documents_14"},
+		{item = "value_documents_3"},
+		{item = "value_documents_4"},
+		{item = "value_documents_5"},
+		{item = "value_documents_6"},
+		{item = "value_documents_7"},
 		{item = "value_documents_8"},
 		{item = "value_documents_9"},
 		{item = "value_guide"},
@@ -5387,29 +5543,7 @@ ix.progression.itemPools.town_expansion_9117b3dcad2a = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_0324962de821 = {
-	name = "Historical documents and technical records: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_documents_3"},
-		{item = "value_documents_4"},
-		{item = "value_documents_5"},
-		{item = "value_documents_6"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_5a7f17628aaf = {
-	name = "Historical documents and technical records: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_documents_12"},
-		{item = "value_documents_7"},
-		{item = "value_handbook_materials"},
-		{item = "value_manual_lada"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_fed462f98a10 = {
+ix.progression.itemPools.town_expansion_c368aedd068c = {
 	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -5417,10 +5551,18 @@ ix.progression.itemPools.town_expansion_fed462f98a10 = {
 		{item = "value_clothbook2"},
 		{item = "value_documents_10"},
 		{item = "value_documents_11"},
+		{item = "value_documents_12"},
 		{item = "value_documents_14"},
+		{item = "value_documents_3"},
+		{item = "value_documents_4"},
+		{item = "value_documents_5"},
+		{item = "value_documents_6"},
+		{item = "value_documents_7"},
 		{item = "value_documents_8"},
 		{item = "value_documents_9"},
 		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 	},
 }
 
@@ -5437,31 +5579,27 @@ ix.progression.itemPools.town_expansion_fc09dd38d32c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_06f11c6d52b8 = {
+ix.progression.itemPools.town_expansion_8000e56a4250 = {
 	name = "Storage upkeep and discreet containers: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
-		{item = "value_antiinsect"},
 		{item = "value_bleach"},
 		{item = "value_chlorine"},
 		{item = "value_draincleaner"},
 		{item = "value_glasscleaner"},
-		{item = "value_household_repellent"},
 		{item = "value_ratpoison"},
 		{item = "value_shampoo"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_88b3cadf7aff = {
+ix.progression.itemPools.town_expansion_c1f3ccbfe4fc = {
 	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
-		{item = "value_antiinsect"},
 		{item = "value_bleach"},
 		{item = "value_chlorine"},
 		{item = "value_draincleaner"},
 		{item = "value_glasscleaner"},
-		{item = "value_household_repellent"},
 		{item = "value_ratpoison"},
 		{item = "value_shampoo"},
 	},
@@ -5482,62 +5620,84 @@ ix.progression.itemPools.town_expansion_c463135f111b = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_8000e56a4250 = {
+ix.progression.itemPools.town_expansion_f7aa2d4db5d3 = {
 	name = "Storage upkeep and discreet containers: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_antiinsect"},
 		{item = "value_bleach"},
 		{item = "value_chlorine"},
 		{item = "value_draincleaner"},
 		{item = "value_glasscleaner"},
+		{item = "value_household_repellent"},
+		{item = "value_household_toothpaste1"},
+		{item = "value_household_tree_life_extender"},
 		{item = "value_ratpoison"},
 		{item = "value_shampoo"},
+		{item = "value_soap"},
+		{item = "value_soda"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_e674fb3afa85 = {
+ix.progression.itemPools.town_expansion_5508561e2495 = {
 	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_antiinsect"},
+		{item = "value_chlorine"},
+		{item = "value_glasscleaner"},
 		{item = "value_household_repellent"},
-		{item = "value_household_toothpaste1"},
 		{item = "value_household_tree_life_extender"},
+		{item = "value_ratpoison"},
+		{item = "value_shampoo"},
 		{item = "value_soap"},
-		{item = "value_soda"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_f3c6e3787c6c = {
+ix.progression.itemPools.town_expansion_fc9193c43ae1 = {
 	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_antiinsect"},
+		{item = "value_glasscleaner"},
 		{item = "value_household_repellent"},
 		{item = "value_household_toothpaste1"},
 		{item = "value_household_tree_life_extender"},
+		{item = "value_ratpoison"},
+		{item = "value_shampoo"},
 		{item = "value_soap"},
-		{item = "value_soda"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_3f71ee5759f7 = {
+ix.progression.itemPools.town_expansion_609694bab68e = {
 	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
-	candidates = {
-		{item = "value_household_toothpaste1"},
-		{item = "value_household_tree_life_extender"},
-		{item = "value_soap"},
-		{item = "value_soda"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_a80ba31efb59 = {
-	name = "Storage upkeep and discreet containers: general supplies (Garbage)",
-	tier = "uncommon",
 	candidates = {
 		{item = "value_antiinsect"},
 		{item = "value_household_repellent"},
 		{item = "value_household_toothpaste1"},
 		{item = "value_household_tree_life_extender"},
+		{item = "value_ratpoison"},
+		{item = "value_shampoo"},
+		{item = "value_soap"},
+		{item = "value_soda"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_c140ec1b36ff = {
+	name = "Storage upkeep and discreet containers: general supplies (Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_antiinsect"},
+		{item = "value_bleach"},
+		{item = "value_chlorine"},
+		{item = "value_draincleaner"},
+		{item = "value_glasscleaner"},
+		{item = "value_household_repellent"},
+		{item = "value_household_toothpaste1"},
+		{item = "value_household_tree_life_extender"},
+		{item = "value_ratpoison"},
+		{item = "value_shampoo"},
 		{item = "value_soap"},
 		{item = "value_soda"},
 	},
@@ -5558,15 +5718,21 @@ ix.progression.itemPools.town_expansion_3ee97809ffce = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_be50aecc58a5 = {
+ix.progression.itemPools.town_expansion_8280e5acf226 = {
 	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_antiinsect"},
+		{item = "value_bleach"},
+		{item = "value_chlorine"},
+		{item = "value_draincleaner"},
+		{item = "value_glasscleaner"},
 		{item = "value_household_repellent"},
 		{item = "value_household_toothpaste1"},
 		{item = "value_household_tree_life_extender"},
+		{item = "value_ratpoison"},
 		{item = "value_safe_container"},
+		{item = "value_shampoo"},
 		{item = "value_soap"},
 		{item = "value_soda"},
 	},
@@ -5601,35 +5767,21 @@ ix.progression.itemPools.town_expansion_afeb42da558e = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_3bb6cdd22bc3 = {
-	name = "Storage upkeep and discreet containers: general supplies (Garbage)",
+ix.progression.itemPools.town_expansion_cc5babbdb781 = {
+	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_antiinsect"},
 		{item = "value_bleach"},
 		{item = "value_chlorine"},
 		{item = "value_draincleaner"},
 		{item = "value_glasscleaner"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_ebf5705cad72 = {
-	name = "Storage upkeep and discreet containers: general supplies (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_antiinsect"},
 		{item = "value_household_repellent"},
-		{item = "value_ratpoison"},
-		{item = "value_shampoo"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_4b2fdb8a03ce = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "common",
-	candidates = {
 		{item = "value_household_toothpaste1"},
 		{item = "value_household_tree_life_extender"},
+		{item = "value_ratpoison"},
 		{item = "value_safe_container"},
+		{item = "value_shampoo"},
 		{item = "value_soap"},
 		{item = "value_soda"},
 	},
@@ -5648,54 +5800,60 @@ ix.progression.itemPools.town_expansion_d695ccfe3436 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_cdf25d73f659 = {
+ix.progression.itemPools.town_expansion_745c62856683 = {
 	name = "Laboratory containment and research reagents: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
-		{item = "value_other_hosemilitary"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_d2609995f8d8 = {
-	name = "Laboratory containment and research reagents: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
 		{item = "value_labyrinth_valve"},
+		{item = "value_manual_lada"},
 		{item = "value_med_thermometer"},
 		{item = "value_other_filter"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_4fb728e0590f = {
-	name = "Laboratory containment and research reagents: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
 		{item = "value_other_hosemilitary"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_cd0152fc8308 = {
+ix.progression.itemPools.town_expansion_8b83c0d2cc3a = {
 	name = "Laboratory containment and research reagents: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_labyrinth_valve"},
+		{item = "value_manual_lada"},
+		{item = "value_med_thermometer"},
 		{item = "value_other_filter"},
+		{item = "value_other_hosemilitary"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_7ab833816100 = {
+ix.progression.itemPools.town_expansion_c4322c51582c = {
 	name = "Laboratory containment and research reagents: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_airfilter"},
 		{item = "value_injector_2a2"},
 		{item = "value_injector_3btg"},
 		{item = "value_injector_ahf1m"},
 		{item = "value_injector_l1"},
 		{item = "value_injector_mildronate"},
+		{item = "value_injector_mule"},
 		{item = "value_injector_obdolbos"},
+		{item = "value_injector_obdolbos_2"},
 		{item = "value_injector_p22"},
 		{item = "value_injector_perfotoran"},
+		{item = "value_injector_sj12"},
+		{item = "value_injector_sj9"},
+		{item = "value_injector_trimadol"},
+		{item = "value_injector_xtg12"},
+		{item = "value_other_hosemilitary"},
 	},
 }
 
@@ -5714,17 +5872,34 @@ ix.progression.itemPools.town_expansion_7d43e6ba987e = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_1093527f1ee9 = {
+ix.progression.itemPools.town_expansion_2b87f36b3a5c = {
 	name = "Generator parts and camp electrics: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
 		{item = "value_engine"},
-		{item = "value_helix"},
 		{item = "value_lamp_efficient"},
+		{item = "value_motorclean"},
+		{item = "value_powercable"},
+		{item = "value_wire_heavy"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_e19a010d3045 = {
+	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_carbattery"},
+		{item = "value_electr_tplug"},
+		{item = "value_engine"},
+		{item = "value_helix"},
+		{item = "value_kanifol"},
+		{item = "value_lamp_efficient"},
+		{item = "value_lamp_uv"},
 		{item = "value_magnet"},
 		{item = "value_motorclean"},
 		{item = "value_powercable"},
+		{item = "value_usb_adapter"},
 		{item = "value_wire_heavy"},
 	},
 }
@@ -5747,67 +5922,81 @@ ix.progression.itemPools.town_expansion_26c6aac8b583 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_2b87f36b3a5c = {
+ix.progression.itemPools.town_expansion_31db5e234de1 = {
+	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	tier = "uncommon",
+	candidates = {
+		{item = "value_carbattery"},
+		{item = "value_engine"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_370444fd22ff = {
 	name = "Generator parts and camp electrics: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
+		{item = "value_electr_tplug"},
 		{item = "value_engine"},
+		{item = "value_helix"},
+		{item = "value_kanifol"},
 		{item = "value_lamp_efficient"},
+		{item = "value_lamp_uv"},
+		{item = "value_magnet"},
 		{item = "value_motorclean"},
 		{item = "value_powercable"},
+		{item = "value_usb_adapter"},
 		{item = "value_wire_heavy"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_3ea3fe5ce3d4 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
-		{item = "value_electr_tplug"},
-		{item = "value_helix"},
-		{item = "value_kanifol"},
-		{item = "value_lamp_uv"},
-		{item = "value_usb_adapter"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_a521a3db5b35 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
-		{item = "value_electr_tplug"},
-		{item = "value_helix"},
-		{item = "value_kanifol"},
-		{item = "value_lamp_uv"},
-		{item = "value_magnet"},
-		{item = "value_usb_adapter"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_a45967d5138a = {
+ix.progression.itemPools.town_expansion_15c973ec8c45 = {
 	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_carbattery"},
 		{item = "value_electr_tplug"},
+		{item = "value_engine"},
 		{item = "value_helix"},
 		{item = "value_kanifol"},
+		{item = "value_lamp_efficient"},
 		{item = "value_lamp_uv"},
 		{item = "value_magnet"},
+		{item = "value_motorclean"},
+		{item = "value_powercable"},
 		{item = "value_powerfilter"},
 		{item = "value_usb_adapter"},
 		{item = "value_wd40_100ml"},
+		{item = "value_wire_heavy"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_5b5d39e3738d = {
+ix.progression.itemPools.town_expansion_192256dbd2c6 = {
 	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_carbattery"},
+		{item = "value_engine"},
+		{item = "value_helix"},
+		{item = "value_kanifol"},
+		{item = "value_lamp_efficient"},
+		{item = "value_lamp_uv"},
+		{item = "value_magnet"},
+		{item = "value_usb_adapter"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_4a275fcf876d = {
+	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_carbattery"},
 		{item = "value_electr_tplug"},
+		{item = "value_engine"},
+		{item = "value_helix"},
 		{item = "value_kanifol"},
 		{item = "value_lamp_uv"},
-		{item = "value_powerfilter"},
+		{item = "value_magnet"},
 		{item = "value_usb_adapter"},
 	},
 }
@@ -5826,30 +6015,36 @@ ix.progression.itemPools.town_expansion_e210a8bed09e = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_6fa4b2017521 = {
+ix.progression.itemPools.town_expansion_c58a767bfe4b = {
 	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_gasoline"},
 		{item = "value_kerosene"},
 		{item = "value_propanetank"},
-		{item = "value_tape_electric"},
 		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_293721c53aac = {
+ix.progression.itemPools.town_expansion_95320215b0ba = {
 	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_carbattery"},
 		{item = "value_electr_tplug"},
+		{item = "value_engine"},
 		{item = "value_helix"},
 		{item = "value_kanifol"},
+		{item = "value_lamp_efficient"},
 		{item = "value_lamp_uv"},
 		{item = "value_magnet"},
+		{item = "value_motorclean"},
+		{item = "value_powercable"},
 		{item = "value_powerfilter"},
 		{item = "value_usb_adapter"},
 		{item = "value_wd40_100ml"},
+		{item = "value_wire_heavy"},
 	},
 }
 
@@ -5867,22 +6062,11 @@ ix.progression.itemPools.town_expansion_a5605073b6ac = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_4b1d88e67e5c = {
+ix.progression.itemPools.town_expansion_2c1252e65ba4 = {
 	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
-		{item = "value_kerosene"},
-		{item = "value_propanetank"},
-		{item = "value_sparkplug"},
-		{item = "value_wire_copper"},
-		{item = "value_wire_light"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_c2f8fdcd7149 = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "common",
-	candidates = {
+		{item = "value_gasoline"},
 		{item = "value_kerosene"},
 		{item = "value_propanetank"},
 		{item = "value_wire_copper"},
@@ -5890,38 +6074,35 @@ ix.progression.itemPools.town_expansion_c2f8fdcd7149 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_b756e66afe8c = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
+ix.progression.itemPools.town_expansion_0a417ddc981b = {
+	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
-		{item = "value_carbattery"},
-		{item = "value_engine"},
-		{item = "value_motorclean"},
-		{item = "value_wire_heavy"},
+		{item = "value_gasoline"},
+		{item = "value_kerosene"},
+		{item = "value_propanetank"},
+		{item = "value_wire_copper"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_f0815324bc06 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
-		{item = "value_helix"},
-		{item = "value_lamp_efficient"},
-		{item = "value_magnet"},
-		{item = "value_powercable"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_6300c1b64c28 = {
+ix.progression.itemPools.town_expansion_72aa1a2f1e76 = {
 	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_carbattery"},
 		{item = "value_electr_tplug"},
+		{item = "value_engine"},
+		{item = "value_helix"},
 		{item = "value_kanifol"},
+		{item = "value_lamp_efficient"},
 		{item = "value_lamp_uv"},
+		{item = "value_magnet"},
+		{item = "value_motorclean"},
+		{item = "value_powercable"},
 		{item = "value_powerfilter"},
 		{item = "value_usb_adapter"},
 		{item = "value_wd40_100ml"},
+		{item = "value_wire_heavy"},
 	},
 }
 
@@ -5939,29 +6120,44 @@ ix.progression.itemPools.town_expansion_2c3be06003ee = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_7eefff4d1776 = {
+ix.progression.itemPools.town_expansion_ed0ffb379f26 = {
 	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_gasoline"},
 		{item = "value_kerosene"},
 		{item = "value_propanetank"},
 		{item = "value_wire_copper"},
-		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_dc2eb71761f5 = {
+ix.progression.itemPools.town_expansion_2345f7264026 = {
+	name = "Resale curios and small valuables: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_antique_vase"},
+		{item = "value_bear_souvenir"},
+		{item = "value_skullring"},
+		{item = "value_statue_cat"},
+		{item = "value_statue_lion"},
+		{item = "value_statue_raven"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_8b4b54445113 = {
 	name = "Resale curios and small valuables: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
 		{item = "value_antique_vase"},
 		{item = "value_bear_souvenir"},
+		{item = "value_goldchain"},
 		{item = "value_skullring"},
 		{item = "value_statue_cat"},
 		{item = "value_statue_horse"},
 		{item = "value_statue_lion"},
 		{item = "value_statue_raven"},
+		{item = "value_watch"},
 	},
 }
 
@@ -5979,74 +6175,95 @@ ix.progression.itemPools.town_expansion_15b692cf7ae6 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_052064323b6a = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_antique_vase"},
-		{item = "value_bear_souvenir"},
-		{item = "value_skullring"},
-		{item = "value_statue_cat"},
-		{item = "value_statue_lion"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_4ce173e4c3e2 = {
+ix.progression.itemPools.town_expansion_6c290a02e2a4 = {
 	name = "Resale curios and small valuables: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
+		{item = "value_antique_vase"},
+		{item = "value_skullring"},
+		{item = "value_statue_cat"},
 		{item = "value_statue_horse"},
+		{item = "value_statue_lion"},
 		{item = "value_statue_raven"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_93ec49f5bd34 = {
+ix.progression.itemPools.town_expansion_aee789b711ad = {
 	name = "Resale curios and small valuables: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
+		{item = "value_antique_vase"},
+		{item = "value_bear_souvenir"},
 		{item = "value_goldchain"},
+		{item = "value_skullring"},
+		{item = "value_statue_cat"},
 		{item = "value_statue_horse"},
+		{item = "value_statue_lion"},
 		{item = "value_statue_raven"},
 		{item = "value_watch"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_ebd69b9f35a9 = {
+ix.progression.itemPools.town_expansion_9165c882cc6d = {
 	name = "Resale curios and small valuables: general supplies (Marsh)",
-	tier = "uncommon",
+	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
+		{item = "value_antique_vase"},
+		{item = "value_statue_cat"},
 		{item = "value_statue_horse"},
+		{item = "value_statue_lion"},
+		{item = "value_statue_raven"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_c06c67504ef8 = {
+ix.progression.itemPools.town_expansion_e28cbf1cd692 = {
 	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
+		{item = "value_antique_vase"},
+		{item = "value_bear_souvenir"},
 		{item = "value_goldchain"},
 		{item = "value_lighter_gold"},
 		{item = "value_pocketwatch"},
+		{item = "value_skullring"},
+		{item = "value_statue_cat"},
 		{item = "value_statue_horse"},
+		{item = "value_statue_lion"},
 		{item = "value_statue_raven"},
 		{item = "value_watch"},
 		{item = "value_woodclock"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_bb6f2a2518e6 = {
+ix.progression.itemPools.town_expansion_00a9f98fb179 = {
 	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_antique_vase"},
+		{item = "value_bear_souvenir"},
+		{item = "value_skullring"},
+		{item = "value_statue_horse"},
+		{item = "value_woodclock"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_a16c78633f5e = {
+	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_antique_vase"},
+		{item = "value_bear_souvenir"},
+		{item = "value_skullring"},
 		{item = "value_statue_horse"},
 		{item = "value_statue_raven"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_d8f8ea477461 = {
+ix.progression.itemPools.town_expansion_6611c76f562e = {
 	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
@@ -6058,6 +6275,7 @@ ix.progression.itemPools.town_expansion_d8f8ea477461 = {
 		{item = "value_parcel"},
 		{item = "value_pukt90"},
 		{item = "value_security_box"},
+		{item = "value_small_case"},
 	},
 }
 
@@ -6074,22 +6292,27 @@ ix.progression.itemPools.town_expansion_ea4a3ff123bc = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_1806ede61236 = {
+ix.progression.itemPools.town_expansion_5881eaf81d7e = {
 	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
+		{item = "value_antique_vase"},
+		{item = "value_bear_souvenir"},
 		{item = "value_goldchain"},
 		{item = "value_lighter_gold"},
 		{item = "value_pocketwatch"},
+		{item = "value_skullring"},
+		{item = "value_statue_cat"},
 		{item = "value_statue_horse"},
+		{item = "value_statue_lion"},
 		{item = "value_statue_raven"},
 		{item = "value_watch"},
 		{item = "value_woodclock"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_9afb06e9bb9c = {
+ix.progression.itemPools.town_expansion_9f80b188c008 = {
 	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -6101,6 +6324,7 @@ ix.progression.itemPools.town_expansion_9afb06e9bb9c = {
 		{item = "value_parcel"},
 		{item = "value_pukt90"},
 		{item = "value_security_box"},
+		{item = "value_small_case"},
 	},
 }
 
@@ -6129,41 +6353,27 @@ ix.progression.itemPools.town_expansion_3d5721363063 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_38291627bd4d = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_bear_souvenir"},
-		{item = "value_skullring"},
-		{item = "value_statue_cat"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_1716f0e04429 = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_antique_vase"},
-		{item = "value_statue_lion"},
-		{item = "value_statue_raven"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_78dc4256fdef = {
+ix.progression.itemPools.town_expansion_bf10bed3cc79 = {
 	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
+		{item = "value_antique_vase"},
+		{item = "value_bear_souvenir"},
 		{item = "value_goldchain"},
 		{item = "value_lighter_gold"},
 		{item = "value_pocketwatch"},
+		{item = "value_skullring"},
+		{item = "value_statue_cat"},
 		{item = "value_statue_horse"},
+		{item = "value_statue_lion"},
+		{item = "value_statue_raven"},
 		{item = "value_watch"},
 		{item = "value_woodclock"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_9596b33bb0af = {
+ix.progression.itemPools.town_expansion_4f2d5163d707 = {
 	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -6175,6 +6385,7 @@ ix.progression.itemPools.town_expansion_9596b33bb0af = {
 		{item = "value_parcel"},
 		{item = "value_pukt90"},
 		{item = "value_security_box"},
+		{item = "value_small_case"},
 	},
 }
 
@@ -6190,56 +6401,63 @@ ix.progression.itemPools.town_expansion_53d55c07b383 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_9ca634ef473b = {
+ix.progression.itemPools.town_expansion_43d693fb144f = {
 	name = "Detector calibration and survey equipment: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
-		{item = "value_portable_container_closed"},
-		{item = "value_portable_container_opened"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_341f46a2577a = {
-	name = "Detector calibration and survey equipment: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_event_labyrinth_chem_container"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 		{item = "value_pcpart_fpga"},
 		{item = "value_pcpart_lcd"},
+		{item = "value_portable_container_closed"},
+		{item = "value_portable_container_opened"},
 		{item = "value_thermobag"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_c424b030ac41 = {
+ix.progression.itemPools.town_expansion_c268760d508e = {
 	name = "Detector calibration and survey equipment: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
-		{item = "value_portable_container_opened"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_bc0105418f59 = {
-	name = "Detector calibration and survey equipment: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_event_labyrinth_chem_container"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
+		{item = "value_pcpart_fpga"},
+		{item = "value_pcpart_lcd"},
 		{item = "value_portable_container_closed"},
+		{item = "value_portable_container_opened"},
+		{item = "value_thermobag"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_4c2ad9cd5e95 = {
+ix.progression.itemPools.town_expansion_a5a382cf5db3 = {
 	name = "Detector calibration and survey equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_casezerogeo"},
+		{item = "value_chemcontainer"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
 		{item = "value_detector"},
+		{item = "value_event_labyrinth_chem_container"},
 		{item = "value_geigercounter"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
 		{item = "value_pcpart_fpga"},
 		{item = "value_pcpart_lcd"},
+		{item = "value_portable_container_closed"},
+		{item = "value_portable_container_opened"},
 		{item = "value_powerbank"},
-		{item = "value_quest_biohazard_case"},
 		{item = "value_thermobag"},
 	},
 }
@@ -6259,83 +6477,92 @@ ix.progression.itemPools.town_expansion_6be29e7a116d = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_69a36fd02700 = {
+ix.progression.itemPools.town_expansion_31c8ee1ee48f = {
 	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
+		{item = "value_med_ibuprofen"},
+		{item = "value_med_peroxide"},
+		{item = "value_med_petroleumjelly"},
+		{item = "value_med_saline"},
+		{item = "value_med_vitamins"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_e9bc2b73f8b0 = {
+	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_med_aquatabs"},
+		{item = "value_med_bloodset"},
 		{item = "value_med_haemostatic"},
 		{item = "value_med_ibuprofen"},
 		{item = "value_med_medicalstock"},
 		{item = "value_med_peroxide"},
 		{item = "value_med_petroleumjelly"},
 		{item = "value_med_saline"},
-		{item = "value_med_vitamins"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_2b00b4c4b21c = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_med_aquatabs"},
-		{item = "value_med_ibuprofen"},
-		{item = "value_med_medicalstock"},
-		{item = "value_med_peroxide"},
-		{item = "value_med_petroleumjelly"},
-		{item = "value_med_saline"},
-		{item = "value_med_vitamins"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_3381dd915629 = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
-	tier = "rare",
-	candidates = {
-		{item = "value_med_bloodset"},
 		{item = "value_med_splint"},
 		{item = "value_med_syringe"},
 		{item = "value_med_thermometer"},
 		{item = "value_med_tourniquet"},
 		{item = "value_med_tourniquet_rubber"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_b4fb665dfaca = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_med_ibuprofen"},
-		{item = "value_med_peroxide"},
-		{item = "value_med_petroleumjelly"},
 		{item = "value_med_vitamins"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_a1a21eb44a21 = {
+ix.progression.itemPools.town_expansion_3154c30ff6bf = {
 	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
-		{item = "value_med_haemostatic"},
+		{item = "value_med_ibuprofen"},
 		{item = "value_med_medicalstock"},
 		{item = "value_med_saline"},
-		{item = "value_med_tourniquet"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_dee44a950fbd = {
+ix.progression.itemPools.town_expansion_7be59808c150 = {
+	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_med_aquatabs"},
+		{item = "value_med_bloodset"},
+		{item = "value_med_haemostatic"},
+		{item = "value_med_ibuprofen"},
+		{item = "value_med_medicalstock"},
+		{item = "value_med_peroxide"},
+		{item = "value_med_petroleumjelly"},
+		{item = "value_med_saline"},
+		{item = "value_med_splint"},
+		{item = "value_med_syringe"},
+		{item = "value_med_thermometer"},
+		{item = "value_med_tourniquet"},
+		{item = "value_med_tourniquet_rubber"},
+		{item = "value_med_vitamins"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_92f41ad4323a = {
 	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_med_aquatabs"},
 		{item = "value_med_bloodset"},
-		{item = "value_med_injectiondevice"},
+		{item = "value_med_haemostatic"},
+		{item = "value_med_ibuprofen"},
+		{item = "value_med_medicalstock"},
+		{item = "value_med_peroxide"},
+		{item = "value_med_petroleumjelly"},
+		{item = "value_med_saline"},
 		{item = "value_med_splint"},
 		{item = "value_med_surgicalpouch"},
 		{item = "value_med_surgicaltools"},
 		{item = "value_med_syringe"},
 		{item = "value_med_thermometer"},
+		{item = "value_med_tourniquet"},
 		{item = "value_med_tourniquet_rubber"},
+		{item = "value_med_vitamins"},
 	},
 }
 
@@ -6365,15 +6592,24 @@ ix.progression.itemPools.town_expansion_f129053f6d26 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_e0ae749d1392 = {
+ix.progression.itemPools.town_expansion_7c1b1e2e5b90 = {
 	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
+		{item = "value_med_aquatabs"},
 		{item = "value_med_bloodset"},
+		{item = "value_med_haemostatic"},
+		{item = "value_med_ibuprofen"},
+		{item = "value_med_medicalstock"},
+		{item = "value_med_peroxide"},
+		{item = "value_med_petroleumjelly"},
+		{item = "value_med_saline"},
 		{item = "value_med_splint"},
 		{item = "value_med_syringe"},
 		{item = "value_med_thermometer"},
+		{item = "value_med_tourniquet"},
 		{item = "value_med_tourniquet_rubber"},
+		{item = "value_med_vitamins"},
 	},
 }
 
@@ -6387,43 +6623,64 @@ ix.progression.itemPools.town_expansion_9bf329b664a1 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_50f1a6c08b39 = {
+ix.progression.itemPools.town_expansion_0ac1ddad8ea9 = {
 	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_med_aquatabs"},
 		{item = "value_med_bloodset"},
 		{item = "value_med_haemostatic"},
+		{item = "value_med_ibuprofen"},
+		{item = "value_med_medicalstock"},
+		{item = "value_med_peroxide"},
+		{item = "value_med_petroleumjelly"},
+		{item = "value_med_saline"},
 		{item = "value_med_splint"},
 		{item = "value_med_surgicalpouch"},
+		{item = "value_med_surgicaltools"},
 		{item = "value_med_syringe"},
 		{item = "value_med_thermometer"},
 		{item = "value_med_tourniquet"},
 		{item = "value_med_tourniquet_rubber"},
+		{item = "value_med_vitamins"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_fb3bbf7a30aa = {
+ix.progression.itemPools.town_expansion_1344ee972c6f = {
 	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_med_aquatabs"},
+		{item = "value_med_bloodset"},
+		{item = "value_med_medicalstock"},
+		{item = "value_med_saline"},
 		{item = "value_med_splint"},
 		{item = "value_med_syringe"},
+		{item = "value_med_thermometer"},
 		{item = "value_med_tourniquet_rubber"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_bef1aed7f393 = {
+ix.progression.itemPools.town_expansion_4f3b0e281ad9 = {
 	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_med_aquatabs"},
 		{item = "value_med_bloodset"},
 		{item = "value_med_haemostatic"},
+		{item = "value_med_ibuprofen"},
+		{item = "value_med_medicalstock"},
+		{item = "value_med_peroxide"},
+		{item = "value_med_petroleumjelly"},
+		{item = "value_med_saline"},
 		{item = "value_med_splint"},
 		{item = "value_med_surgicalpouch"},
+		{item = "value_med_surgicaltools"},
 		{item = "value_med_syringe"},
 		{item = "value_med_thermometer"},
 		{item = "value_med_tourniquet"},
 		{item = "value_med_tourniquet_rubber"},
+		{item = "value_med_vitamins"},
 	},
 }
 
@@ -6454,33 +6711,52 @@ ix.progression.itemPools.town_expansion_b86ca08c164d = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_adb5ba8af817 = {
+ix.progression.itemPools.town_expansion_a115cb177717 = {
 	name = "Workshop tools and fabrication materials: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
-		{item = "value_expandingfoam"},
 		{item = "value_hultafors_db5000"},
 		{item = "value_key_labyrinth_torch"},
 		{item = "value_mining_kit"},
-		{item = "value_multitul_0"},
 		{item = "value_plexiglass"},
 		{item = "value_tapemeasure"},
 		{item = "value_tools_metalscissors"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_b96d05056688 = {
+ix.progression.itemPools.town_expansion_f007cba67161 = {
 	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_hultafors_db5000"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_mining_kit"},
+		{item = "value_plexiglass"},
+		{item = "value_tapemeasure"},
+		{item = "value_tools_metalscissors"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_93048bf51946 = {
+	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_building_kektape"},
+		{item = "value_crowbar"},
+		{item = "value_electricdrill"},
 		{item = "value_expandingfoam"},
 		{item = "value_hultafors_db5000"},
 		{item = "value_key_labyrinth_torch"},
 		{item = "value_mining_kit"},
 		{item = "value_multitul_0"},
 		{item = "value_plexiglass"},
+		{item = "value_pliers"},
 		{item = "value_tapemeasure"},
 		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
+		{item = "value_wd40_400ml"},
 	},
 }
 
@@ -6499,32 +6775,108 @@ ix.progression.itemPools.town_expansion_f01f02d773ec = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_4da1807ce39b = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+ix.progression.itemPools.town_expansion_2b4d34254e73 = {
+	name = "Workshop tools and fabrication materials: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
 		{item = "value_crowbar"},
 		{item = "value_electricdrill"},
-		{item = "value_handdrill"},
-		{item = "value_swiss"},
+		{item = "value_expandingfoam"},
+		{item = "value_hultafors_db5000"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_mining_kit"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
+		{item = "value_pliers"},
+		{item = "value_tapemeasure"},
+		{item = "value_tools_metalscissors"},
 		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_toolset"},
 		{item = "value_wd40_400ml"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_6b08c04b410b = {
+ix.progression.itemPools.town_expansion_86908d7e5831 = {
 	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
-		{item = "value_building_plexiglass"},
+		{item = "value_expandingfoam"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
+		{item = "value_pliers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_2b209bd707b0 = {
+	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_building_kektape"},
+		{item = "value_expandingfoam"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
+		{item = "value_pliers"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_a07b5a6724e3 = {
+	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_building_kektape"},
 		{item = "value_crowbar"},
 		{item = "value_electricdrill"},
-		{item = "value_handdrill"},
-		{item = "value_swiss"},
+		{item = "value_expandingfoam"},
+		{item = "value_hultafors_db5000"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_mining_kit"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
+		{item = "value_pliers"},
+		{item = "value_tapemeasure"},
+		{item = "value_tools_metalscissors"},
 		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
+		{item = "value_wd40_400ml"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_b7200a7f95bb = {
+	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_building_kektape"},
+		{item = "value_expandingfoam"},
+		{item = "value_multitul_0"},
+		{item = "value_pliers"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
+		{item = "value_wd40_400ml"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_fd4b6b99785e = {
+	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_building_kektape"},
+		{item = "value_crowbar"},
+		{item = "value_expandingfoam"},
+		{item = "value_pliers"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
 		{item = "value_wd40_400ml"},
 	},
 }
@@ -6544,44 +6896,22 @@ ix.progression.itemPools.town_expansion_1168bc176d8a = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_8ccde904a437 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_building_plexiglass"},
-		{item = "value_crowbar"},
-		{item = "value_electricdrill"},
-		{item = "value_hammer"},
-		{item = "value_handdrill"},
-		{item = "value_swiss"},
-		{item = "value_tools_nippers"},
-		{item = "value_wd40_400ml"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_58c67701e851 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_building_plexiglass"},
-		{item = "value_building_poxeram"},
-		{item = "value_crowbar"},
-		{item = "value_electricdrill"},
-		{item = "value_hammer"},
-		{item = "value_handdrill"},
-		{item = "value_swiss"},
-		{item = "value_wd40_400ml"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_e3e4bc290f7c = {
+ix.progression.itemPools.town_expansion_d1da9c5aae2f = {
 	name = "Workshop tools and fabrication materials: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
 		{item = "value_crowbar"},
 		{item = "value_electricdrill"},
+		{item = "value_expandingfoam"},
+		{item = "value_hultafors_db5000"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_mining_kit"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
 		{item = "value_pliers"},
+		{item = "value_tapemeasure"},
+		{item = "value_tools_metalscissors"},
 		{item = "value_tools_nippers"},
 		{item = "value_tools_pliers_round"},
 		{item = "value_toolset"},
@@ -6589,17 +6919,24 @@ ix.progression.itemPools.town_expansion_e3e4bc290f7c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_de5faa6ef74e = {
+ix.progression.itemPools.town_expansion_81061404cde0 = {
 	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_ballistic1"},
+		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
 		{item = "value_ballistic4"},
+		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
 		{item = "value_retardant1"},
 		{item = "value_retardant10"},
 		{item = "value_retardant11"},
 		{item = "value_retardant12"},
+		{item = "value_retardant2"},
 		{item = "value_retardant3"},
 		{item = "value_retardant4"},
+		{item = "value_retardant6"},
 		{item = "value_retardant9"},
 	},
 }
@@ -6619,14 +6956,22 @@ ix.progression.itemPools.town_expansion_8957d0e845ad = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_7fd0a0ed0759 = {
+ix.progression.itemPools.town_expansion_63a28dad3590 = {
 	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
 		{item = "value_crowbar"},
 		{item = "value_electricdrill"},
+		{item = "value_expandingfoam"},
+		{item = "value_hultafors_db5000"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_mining_kit"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
 		{item = "value_pliers"},
+		{item = "value_tapemeasure"},
+		{item = "value_tools_metalscissors"},
 		{item = "value_tools_nippers"},
 		{item = "value_tools_pliers_round"},
 		{item = "value_toolset"},
@@ -6634,17 +6979,24 @@ ix.progression.itemPools.town_expansion_7fd0a0ed0759 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a3cb2e84213f = {
+ix.progression.itemPools.town_expansion_5ef434e7a351 = {
 	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_ballistic1"},
+		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
 		{item = "value_ballistic4"},
+		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
 		{item = "value_retardant1"},
 		{item = "value_retardant10"},
 		{item = "value_retardant11"},
 		{item = "value_retardant12"},
+		{item = "value_retardant2"},
 		{item = "value_retardant3"},
 		{item = "value_retardant4"},
+		{item = "value_retardant6"},
 		{item = "value_retardant9"},
 	},
 }
@@ -6678,32 +7030,47 @@ ix.progression.itemPools.town_expansion_7b6bb1241f98 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a9f6316d975c = {
+ix.progression.itemPools.town_expansion_cd001154e395 = {
 	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
-		{item = "value_awl"},
-		{item = "value_building_plexiglass"},
-		{item = "value_building_poxeram"},
-		{item = "value_hammer"},
-		{item = "value_handdrill"},
-		{item = "value_plastic"},
-		{item = "value_swiss"},
-		{item = "value_wd40_100ml"},
+		{item = "value_building_kektape"},
+		{item = "value_crowbar"},
+		{item = "value_electricdrill"},
+		{item = "value_expandingfoam"},
+		{item = "value_hultafors_db5000"},
+		{item = "value_key_labyrinth_torch"},
+		{item = "value_mining_kit"},
+		{item = "value_multitul_0"},
+		{item = "value_plexiglass"},
+		{item = "value_pliers"},
+		{item = "value_tapemeasure"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_toolset"},
+		{item = "value_wd40_400ml"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_8227d69b4065 = {
+ix.progression.itemPools.town_expansion_c342ce00082c = {
 	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_ballistic1"},
+		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
 		{item = "value_ballistic4"},
+		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
 		{item = "value_retardant1"},
 		{item = "value_retardant10"},
 		{item = "value_retardant11"},
 		{item = "value_retardant12"},
+		{item = "value_retardant2"},
 		{item = "value_retardant3"},
 		{item = "value_retardant4"},
+		{item = "value_retardant6"},
 		{item = "value_retardant9"},
 	},
 }
@@ -6721,131 +7088,193 @@ ix.progression.itemPools.town_expansion_3c9a03c85455 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_08a5fc882471 = {
+ix.progression.itemPools.town_expansion_14d1beef665c = {
 	name = "Consignment paperwork and secure dispatches: general supplies (Waystation)",
-	tier = "uncommon",
+	tier = "common",
 	candidates = {
+		{item = "value_info_maps"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
+		{item = "value_note_book_coming_closed"},
 		{item = "value_officepaper"},
-		{item = "value_safe_container"},
+		{item = "value_thick_diary"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_32bf9455d614 = {
+ix.progression.itemPools.town_expansion_ced8d202eaf4 = {
 	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_documents_1"},
-		{item = "value_documents_2"},
+		{item = "value_flyer_01"},
+		{item = "value_flyer_03"},
+		{item = "value_gamemagazine_01"},
+		{item = "value_note_folder_closed_cardboard"},
+		{item = "value_notepad_a6_closed_01"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_ca46416ba805 = {
+	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
 		{item = "value_envelope"},
+		{item = "value_flyer_02"},
+		{item = "value_flyers"},
+		{item = "value_gamemagazine_01"},
+		{item = "value_info_labrys"},
 		{item = "value_note_folder_closed_cardboard"},
 		{item = "value_notepad_a5_closed_01"},
 		{item = "value_notepad_a6_closed_01"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_ba8ac3af2b83 = {
+	name = "Consignment paperwork and secure dispatches: general supplies (Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_info_maps"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
+		{item = "value_note_book_coming_closed"},
 		{item = "value_officepaper"},
 		{item = "value_safe_container"},
+		{item = "value_thick_diary"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_bbf56f55989a = {
+ix.progression.itemPools.town_expansion_d5aa4471b8c2 = {
 	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_documents_2"},
 		{item = "value_envelope"},
-		{item = "value_note_folder_closed_cardboard"},
-		{item = "value_notepad_a5_closed_01"},
-		{item = "value_notepad_a6_closed_01"},
-		{item = "value_officepaper"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_6049430add23 = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Waystation)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_officepaper"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_e0fb04b1f79d = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_documents_2"},
-		{item = "value_envelope"},
+		{item = "value_flyer_02"},
+		{item = "value_flyers"},
+		{item = "value_info_labrys"},
+		{item = "value_info_moleskine"},
 		{item = "value_note_folder_closed_cardboard"},
 		{item = "value_notepad_a5_closed_01"},
 		{item = "value_notepad_a6_closed_01"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_b9a6073487e4 = {
+ix.progression.itemPools.town_expansion_1692368e6fcf = {
 	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_documents_2"},
 		{item = "value_envelope"},
+		{item = "value_flyer_02"},
+		{item = "value_flyers"},
+		{item = "value_info_labrys"},
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
 		{item = "value_notepad_a5_closed_01"},
 		{item = "value_notepad_a6_closed_01"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_fe8b073bee14 = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Waystation)",
-	tier = "rare",
+ix.progression.itemPools.town_expansion_15c57727a4de = {
+	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
 	candidates = {
+		{item = "value_envelope"},
+		{item = "value_flyer_02"},
+		{item = "value_flyers"},
+		{item = "value_info_labrys"},
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
+		{item = "value_notepad_a5_closed_01"},
+		{item = "value_officepaper"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_4d44f19494ce = {
+	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_envelope"},
+		{item = "value_info_labrys"},
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
+		{item = "value_note_newspaper_folded_01"},
+		{item = "value_note_newspaper_folded_02"},
+		{item = "value_notepad_a5_closed_01"},
+		{item = "value_officepaper"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_25e538b843ac = {
+	name = "Consignment paperwork and secure dispatches: general supplies (Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_info_maps"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
+		{item = "value_note_book_coming_closed"},
+		{item = "value_officepaper"},
 		{item = "value_safe_container"},
+		{item = "value_thick_diary"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_1d8912d7dcc9 = {
+ix.progression.itemPools.town_expansion_eef3b6f2ad7a = {
 	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
 		{item = "value_carbon_case"},
-		{item = "value_info_maps"},
+		{item = "value_handbook_materials"},
 		{item = "value_knife_box_low"},
-		{item = "value_milimap"},
+		{item = "value_manual_lada"},
 		{item = "value_pukt90"},
 		{item = "value_security_box"},
 		{item = "value_small_case"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_a15c9f55de8d = {
+ix.progression.itemPools.town_expansion_f42a3238f802 = {
 	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_documents_1"},
-		{item = "value_documents_2"},
 		{item = "value_envelope"},
+		{item = "value_flyer_01"},
+		{item = "value_flyer_02"},
+		{item = "value_flyer_03"},
+		{item = "value_flyers"},
+		{item = "value_gamemagazine_01"},
+		{item = "value_info_labrys"},
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
 		{item = "value_note_folder_closed_cardboard"},
+		{item = "value_note_newspaper_folded_01"},
+		{item = "value_note_newspaper_folded_02"},
 		{item = "value_notepad_a5_closed_01"},
 		{item = "value_notepad_a6_closed_01"},
-		{item = "value_safe_container"},
+		{item = "value_officepaper"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_5f8c4bfe651e = {
+ix.progression.itemPools.town_expansion_e6e419511987 = {
 	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
-		{item = "value_info_maps"},
+		{item = "value_handbook_materials"},
 		{item = "value_knife_box_low"},
-		{item = "value_milimap"},
+		{item = "value_manual_lada"},
 		{item = "value_pukt90"},
 		{item = "value_security_box"},
 		{item = "value_small_case"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_f3e2fe835c22 = {
+ix.progression.itemPools.town_expansion_4d2788de1f2d = {
 	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
-		{item = "value_info_maps"},
+		{item = "value_handbook_materials"},
 		{item = "value_knife_box_low"},
 		{item = "value_pukt90"},
 		{item = "value_security_box"},
@@ -6853,25 +7282,35 @@ ix.progression.itemPools.town_expansion_f3e2fe835c22 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_0ad4191601c1 = {
+ix.progression.itemPools.town_expansion_2ba084e72d2d = {
 	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_documents_1"},
-		{item = "value_documents_2"},
 		{item = "value_envelope"},
+		{item = "value_flyer_01"},
+		{item = "value_flyer_02"},
+		{item = "value_flyer_03"},
+		{item = "value_flyers"},
+		{item = "value_gamemagazine_01"},
+		{item = "value_info_labrys"},
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
 		{item = "value_note_folder_closed_cardboard"},
+		{item = "value_note_newspaper_folded_01"},
+		{item = "value_note_newspaper_folded_02"},
 		{item = "value_notepad_a5_closed_01"},
 		{item = "value_notepad_a6_closed_01"},
+		{item = "value_officepaper"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_b22cbcfe962d = {
+ix.progression.itemPools.town_expansion_2824dbcfe6d8 = {
 	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
-		{item = "value_info_maps"},
+		{item = "value_handbook_materials"},
 		{item = "value_knife_box_low"},
 		{item = "value_pukt90"},
 		{item = "value_security_box"},
@@ -6902,90 +7341,98 @@ ix.progression.itemPools.town_expansion_522f1a014836 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_0d82996d3674 = {
+ix.progression.itemPools.town_expansion_7689c41134ff = {
 	name = "Radio infrastructure and network components: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_wire_copper"},
-		{item = "value_wire_light"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_3cdde43c4da9 = {
-	name = "Radio infrastructure and network components: general supplies (Marsh)",
-	tier = "uncommon",
-	candidates = {
-		{item = "value_receiver1"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_daf27db0d950 = {
-	name = "Radio infrastructure and network components: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_capacitors"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_c48a3ba1fe73 = {
+	name = "Radio infrastructure and network components: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_receiver1"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_7f868b76a42a = {
+	name = "Radio infrastructure and network components: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_ais_sart"},
+		{item = "value_capacitors"},
+		{item = "value_electr_gary_zont"},
+		{item = "value_electr_signal_jammer"},
 		{item = "value_ir_ms2000"},
+		{item = "value_jamming"},
+		{item = "value_radio"},
+		{item = "value_radio_repeater"},
 		{item = "value_receiver1"},
 		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_a4e6394388b2 = {
+ix.progression.itemPools.town_expansion_60379d0b699a = {
 	name = "Radio infrastructure and network components: general supplies (Marsh, Garbage, Waystation)",
-	tier = "uncommon",
+	tier = "common",
 	candidates = {
+		{item = "value_ais_sart"},
+		{item = "value_electr_gary_zont"},
 		{item = "value_electr_signal_jammer"},
 		{item = "value_jamming"},
 		{item = "value_radio_repeater"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_87f2b5d33fe9 = {
+ix.progression.itemPools.town_expansion_0a6bb9f5510f = {
 	name = "Trail repairs and camp supplies: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_dryfuel"},
 		{item = "value_flammable_survlighter"},
 		{item = "value_gunoil"},
-		{item = "value_kerosene_container"},
 		{item = "value_paracord"},
 		{item = "value_tape_electric"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_e2ad6f9bab62 = {
+	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_crikent_0"},
+		{item = "value_dryfuel"},
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_flammable_survlighter"},
+		{item = "value_gascan"},
+		{item = "value_gunoil"},
+		{item = "value_kerosene_container"},
+		{item = "value_lubricant"},
+		{item = "value_match"},
+		{item = "value_matches"},
+		{item = "value_paracord"},
+		{item = "value_tape_electric"},
+		{item = "value_valuable_kresalo"},
 		{item = "value_wire_light"},
 		{item = "value_zibbo_0"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_104aeb78b5d5 = {
+ix.progression.itemPools.town_expansion_b5c2fbdb1c86 = {
 	name = "Trail repairs and camp supplies: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
-		{item = "value_flammable_klean"},
-		{item = "value_gascan"},
-		{item = "value_lubricant"},
-		{item = "value_match"},
-		{item = "value_matches"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_885725dd4862 = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
 		{item = "value_dryfuel"},
-		{item = "value_gunoil"},
-		{item = "value_paracord"},
-		{item = "value_tape_electric"},
-		{item = "value_wire_light"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_da07a70522f1 = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
 		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
 		{item = "value_flammable_survlighter"},
 		{item = "value_kerosene_container"},
 		{item = "value_valuable_kresalo"},
@@ -6993,31 +7440,72 @@ ix.progression.itemPools.town_expansion_da07a70522f1 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_37b55ef0dcf6 = {
+ix.progression.itemPools.town_expansion_2b72ea4f43f9 = {
+	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_crikent_0"},
+		{item = "value_dryfuel"},
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_flammable_survlighter"},
+		{item = "value_gascan"},
+		{item = "value_gunoil"},
+		{item = "value_kerosene_container"},
+		{item = "value_lubricant"},
+		{item = "value_match"},
+		{item = "value_matches"},
+		{item = "value_paracord"},
+		{item = "value_tape_electric"},
+		{item = "value_valuable_kresalo"},
+		{item = "value_wire_light"},
+		{item = "value_zibbo_0"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_380290c507fe = {
 	name = "Trail repairs and camp supplies: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
+		{item = "value_dryfuel"},
+		{item = "value_flammable_huntermatches"},
 		{item = "value_flammable_klean"},
+		{item = "value_flammable_survlighter"},
 		{item = "value_gascan"},
+		{item = "value_gunoil"},
+		{item = "value_kerosene_container"},
 		{item = "value_lubricant"},
 		{item = "value_match"},
 		{item = "value_matches"},
+		{item = "value_paracord"},
+		{item = "value_tape_electric"},
+		{item = "value_valuable_kresalo"},
+		{item = "value_wire_light"},
+		{item = "value_zibbo_0"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_ce1fe3da240a = {
+ix.progression.itemPools.town_expansion_11d21ef20779 = {
 	name = "Trail repairs and camp supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bedspread"},
 		{item = "value_fabric_aramid"},
+		{item = "value_fabric_fleece"},
+		{item = "value_fabric_ripstop"},
+		{item = "value_fabrics1"},
 		{item = "value_fabrics2"},
 		{item = "value_pliers"},
 		{item = "value_rope"},
+		{item = "value_ropes"},
+		{item = "value_sewingkit"},
+		{item = "value_swiss"},
+		{item = "value_tarp"},
 		{item = "value_tools_metalscissors"},
 		{item = "value_tools_nippers"},
 		{item = "value_tools_pliers_round"},
+		{item = "value_tools_sewing"},
 	},
 }
 
@@ -7050,16 +7538,26 @@ ix.progression.itemPools.town_expansion_6d4d51331f9d = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_69581534d2e6 = {
+ix.progression.itemPools.town_expansion_9c0cc96e9858 = {
 	name = "Trail repairs and camp supplies: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
+		{item = "value_dryfuel"},
+		{item = "value_flammable_huntermatches"},
 		{item = "value_flammable_klean"},
+		{item = "value_flammable_survlighter"},
 		{item = "value_gascan"},
+		{item = "value_gunoil"},
+		{item = "value_kerosene_container"},
 		{item = "value_lubricant"},
 		{item = "value_match"},
 		{item = "value_matches"},
+		{item = "value_paracord"},
+		{item = "value_tape_electric"},
+		{item = "value_valuable_kresalo"},
+		{item = "value_wire_light"},
+		{item = "value_zibbo_0"},
 	},
 }
 
@@ -7075,10 +7573,43 @@ ix.progression.itemPools.town_expansion_40c54698454c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_8bd7dd015011 = {
+ix.progression.itemPools.town_expansion_61caf3061784 = {
 	name = "Field issue kits and military packing: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_0a560e2a0220 = {
+	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_lopouch"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_d3529072739c = {
+	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_ammo"},
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_container_weaponcase"},
+		{item = "value_docbag"},
 		{item = "value_retardant1"},
 		{item = "value_retardant10"},
 		{item = "value_retardant11"},
@@ -7086,21 +7617,7 @@ ix.progression.itemPools.town_expansion_8bd7dd015011 = {
 		{item = "value_retardant2"},
 		{item = "value_retardant3"},
 		{item = "value_retardant4"},
-		{item = "value_retardant9"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_5cc83a38ada3 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_lopouch"},
-		{item = "value_retardant1"},
-		{item = "value_retardant10"},
-		{item = "value_retardant11"},
-		{item = "value_retardant12"},
-		{item = "value_retardant3"},
-		{item = "value_retardant4"},
+		{item = "value_retardant6"},
 		{item = "value_retardant9"},
 	},
 }
@@ -7120,80 +7637,109 @@ ix.progression.itemPools.town_expansion_429fc498f1b3 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_61caf3061784 = {
-	name = "Field issue kits and military packing: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_retardant1"},
-		{item = "value_retardant10"},
-		{item = "value_retardant11"},
-		{item = "value_retardant3"},
-		{item = "value_retardant4"},
-		{item = "value_retardant9"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_9370c4b61e34 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_ammo"},
-		{item = "value_container_injectorcase"},
-		{item = "value_docbag"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
-		{item = "value_retardant6"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_2ae5db69c5c7 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_ammo"},
-		{item = "value_container_injectorcase"},
-		{item = "value_container_lopouch"},
-		{item = "value_container_smallitems"},
-		{item = "value_docbag"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
-		{item = "value_retardant6"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_dc820678cc48 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_ammo"},
-		{item = "value_container_injectorcase"},
-		{item = "value_docbag"},
-		{item = "value_retardant2"},
-		{item = "value_retardant6"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_b99fd339a771 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_ammo"},
-		{item = "value_container_injectorcase"},
-		{item = "value_docbag"},
-		{item = "value_retardant6"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_2b4fe59ec190 = {
+ix.progression.itemPools.town_expansion_cdb68b829caa = {
 	name = "Field issue kits and military packing: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
 		{item = "value_container_parls"},
 		{item = "value_container_weaponcase"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant6"},
+		{item = "value_retardant9"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_0b6d8b4fbf6f = {
+	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
 		{item = "value_retardant12"},
 		{item = "value_retardant2"},
 		{item = "value_retardant6"},
+		{item = "value_retardant9"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_a9671194f353 = {
+	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_ammo"},
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_container_weaponcase"},
+		{item = "value_docbag"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant6"},
+		{item = "value_retardant9"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_b80413944f08 = {
+	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_ammo"},
+		{item = "value_container_injectorcase"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant2"},
+		{item = "value_retardant6"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_bb6f868952ef = {
+	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_ammo"},
+		{item = "value_container_injectorcase"},
+		{item = "value_docbag"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant2"},
+		{item = "value_retardant6"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_867a15727340 = {
+	name = "Field issue kits and military packing: general supplies (Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_ammo"},
+		{item = "value_container_parls"},
+		{item = "value_container_weaponcase"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant6"},
+		{item = "value_retardant9"},
 	},
 }
 
@@ -7225,18 +7771,26 @@ ix.progression.itemPools.town_expansion_cac9456f2b4b = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_97ec9ad98c1f = {
+ix.progression.itemPools.town_expansion_2be74abb2113 = {
 	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
+		{item = "value_container_cardholder"},
 		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
 		{item = "value_container_smallitems"},
+		{item = "value_container_weapon_thicc"},
 		{item = "value_docbag"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
 		{item = "value_retardant12"},
 		{item = "value_retardant2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
 		{item = "value_retardant6"},
+		{item = "value_retardant9"},
 	},
 }
 
@@ -7267,29 +7821,7 @@ ix.progression.itemPools.town_expansion_f643892847d6 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_8095377989f4 = {
-	name = "Field issue kits and military packing: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_retardant1"},
-		{item = "value_retardant3"},
-		{item = "value_retardant4"},
-		{item = "value_retardant9"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_8841f0077ff5 = {
-	name = "Field issue kits and military packing: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_retardant10"},
-		{item = "value_retardant11"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_13aec002f2fd = {
+ix.progression.itemPools.town_expansion_bc2fa5cf5724 = {
 	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -7300,7 +7832,15 @@ ix.progression.itemPools.town_expansion_13aec002f2fd = {
 		{item = "value_container_smallitems"},
 		{item = "value_container_weapon_thicc"},
 		{item = "value_docbag"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
 		{item = "value_retardant6"},
+		{item = "value_retardant9"},
 	},
 }
 
@@ -7330,47 +7870,128 @@ ix.progression.itemPools.town_expansion_bbb0f66b23a1 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_8bf6b70943be = {
+ix.progression.itemPools.town_expansion_bf3277df53ee = {
 	name = "Computer hardware and data media: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
 		{item = "value_capacitors"},
+		{item = "value_manual_lada"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_681245d7563b = {
+ix.progression.itemPools.town_expansion_99e7f327cb08 = {
 	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
 		{item = "value_capacitors"},
 		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_294f20293f0b = {
-	name = "Computer hardware and data media: general supplies (Waystation)",
+ix.progression.itemPools.town_expansion_b57268c761ed = {
+	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
+		{item = "value_capacitors"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
+		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_236f10f95cdf = {
+ix.progression.itemPools.town_expansion_7a85b50fb433 = {
 	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_9vbattery"},
 		{item = "value_capacitors"},
 		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_4250046093e2 = {
+ix.progression.itemPools.town_expansion_3a3ab44e09e5 = {
 	name = "Computer hardware and data media: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
 		{item = "value_capacitors"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_b92bc1e23d60 = {
+	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_battery_d_0"},
+		{item = "value_capacitors"},
+		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_8c8654a6c624 = {
+	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
+		{item = "value_capacitors"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
+		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_af44d6118fd8 = {
+	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_battery_d_0"},
+		{item = "value_clothbook1"},
+		{item = "value_clothbook2"},
+		{item = "value_guide"},
+		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_39e0202598f4 = {
+	name = "Computer hardware and data media: general supplies (Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
+		{item = "value_capacitors"},
+		{item = "value_handbook_materials"},
+		{item = "value_manual_lada"},
+		{item = "value_wire_light"},
 	},
 }
 
@@ -7396,22 +8017,30 @@ ix.progression.itemPools.town_expansion_2efa4442816e = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_618611e80a23 = {
+ix.progression.itemPools.town_expansion_80c787521d7d = {
 	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
 		{item = "value_capacitors"},
 		{item = "value_electr_card_programmer"},
 		{item = "value_flash_card_ironkey"},
 		{item = "value_flash_card_ironkey_slider"},
 		{item = "value_flash_card_slider"},
+		{item = "value_guide"},
 		{item = "value_pcpart_cpufan"},
 		{item = "value_pcpart_discdrive"},
+		{item = "value_pcpart_ram"},
+		{item = "value_pda2"},
+		{item = "value_pda3"},
 		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_79808d7fafd4 = {
+ix.progression.itemPools.town_expansion_15df9e09224f = {
 	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -7420,7 +8049,12 @@ ix.progression.itemPools.town_expansion_79808d7fafd4 = {
 		{item = "value_clothbook2"},
 		{item = "value_electr_components"},
 		{item = "value_guide"},
+		{item = "value_handbook_materials"},
 		{item = "value_ipcamera"},
+		{item = "value_lcddirty"},
+		{item = "value_manual_lada"},
+		{item = "value_militaryboard"},
+		{item = "value_sz_1"},
 		{item = "value_textolite"},
 		{item = "value_transistors"},
 	},
@@ -7449,22 +8083,30 @@ ix.progression.itemPools.town_expansion_24a35a39e55d = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_d37d1c34fc08 = {
+ix.progression.itemPools.town_expansion_079f578a1435 = {
 	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_9vbattery"},
+		{item = "value_battery"},
+		{item = "value_battery_d_0"},
+		{item = "value_capacitors"},
 		{item = "value_electr_card_programmer"},
 		{item = "value_flash_card_ironkey"},
 		{item = "value_flash_card_ironkey_slider"},
 		{item = "value_flash_card_slider"},
+		{item = "value_guide"},
 		{item = "value_pcpart_cpufan"},
 		{item = "value_pcpart_discdrive"},
 		{item = "value_pcpart_ram"},
+		{item = "value_pda2"},
+		{item = "value_pda3"},
 		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_c881f6d42e13 = {
+ix.progression.itemPools.town_expansion_a3d6e7732b73 = {
 	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -7473,7 +8115,12 @@ ix.progression.itemPools.town_expansion_c881f6d42e13 = {
 		{item = "value_clothbook2"},
 		{item = "value_electr_components"},
 		{item = "value_guide"},
+		{item = "value_handbook_materials"},
 		{item = "value_ipcamera"},
+		{item = "value_lcddirty"},
+		{item = "value_manual_lada"},
+		{item = "value_militaryboard"},
+		{item = "value_sz_1"},
 		{item = "value_textolite"},
 		{item = "value_transistors"},
 	},
@@ -7489,7 +8136,20 @@ ix.progression.itemPools.town_expansion_921e32a51219 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_053e066e8c3d = {
+ix.progression.itemPools.town_expansion_078508e6263c = {
+	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_coffee"},
+		{item = "value_household_salt"},
+		{item = "value_other_grechka"},
+		{item = "value_other_lupo"},
+		{item = "value_other_tea"},
+		{item = "value_sugar"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_9852e3d24390 = {
 	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
@@ -7500,83 +8160,120 @@ ix.progression.itemPools.town_expansion_053e066e8c3d = {
 		{item = "value_other_grechka"},
 		{item = "value_other_lupo"},
 		{item = "value_other_tea"},
-		{item = "value_sugar"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_faf015d6ac68 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_coffee"},
-		{item = "value_household_salt"},
-		{item = "value_kerosene"},
-		{item = "value_other_grechka"},
-		{item = "value_other_lupo"},
-		{item = "value_other_tea"},
 		{item = "value_propanetank"},
 		{item = "value_sugar"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_b0f51f1be48f = {
+ix.progression.itemPools.town_expansion_450be1b77576 = {
 	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
-		{item = "value_other_grechka"},
-		{item = "value_other_lupo"},
-		{item = "value_other_tea"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_1d4b55e193f2 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
 		{item = "value_gasoline"},
 		{item = "value_household_salt"},
 		{item = "value_kerosene"},
+		{item = "value_other_grechka"},
+		{item = "value_other_tea"},
 		{item = "value_propanetank"},
 		{item = "value_sugar"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_81363bbb5ed7 = {
+ix.progression.itemPools.town_expansion_6a839f7482c6 = {
+	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_coffee"},
+		{item = "value_gasoline"},
+		{item = "value_household_salt"},
+		{item = "value_kerosene"},
+		{item = "value_other_grechka"},
+		{item = "value_other_tea"},
+		{item = "value_propanetank"},
+		{item = "value_sugar"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_00b90348348f = {
+	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_coffee"},
+		{item = "value_gasoline"},
+		{item = "value_household_salt"},
+		{item = "value_kerosene"},
+		{item = "value_other_grechka"},
+		{item = "value_other_lupo"},
+		{item = "value_other_tea"},
+		{item = "value_propanetank"},
+		{item = "value_sugar"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_ddafdcda66bb = {
 	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
 		{item = "value_household_salt"},
 		{item = "value_kerosene"},
+		{item = "value_other_grechka"},
+		{item = "value_other_tea"},
 		{item = "value_propanetank"},
 		{item = "value_sugar"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_98b12c7cb6da = {
+ix.progression.itemPools.town_expansion_776be98bb3cb = {
 	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_gasoline"},
 		{item = "value_household_salt"},
 		{item = "value_kerosene"},
+		{item = "value_other_tea"},
 		{item = "value_propanetank"},
 		{item = "value_sugar"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_9a1e4bd69da2 = {
+ix.progression.itemPools.town_expansion_1e700080e18f = {
+	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_coffee"},
+		{item = "value_gasoline"},
+		{item = "value_household_salt"},
+		{item = "value_kerosene"},
+		{item = "value_other_grechka"},
+		{item = "value_other_lupo"},
+		{item = "value_other_tea"},
+		{item = "value_propanetank"},
+		{item = "value_sugar"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_62689732dc60 = {
 	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_bleach"},
 		{item = "value_detergent"},
+		{item = "value_dryfuel"},
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_flammable_survlighter"},
+		{item = "value_gascan"},
 		{item = "value_glasscleaner"},
 		{item = "value_household_toothpaste1"},
+		{item = "value_kerosene_container"},
 		{item = "value_shampoo"},
 		{item = "value_soap"},
 		{item = "value_toiletpaper"},
 		{item = "value_toothpaste"},
+		{item = "value_valuable_kresalo"},
+		{item = "value_zibbo_0"},
 	},
 }
 
@@ -7595,30 +8292,42 @@ ix.progression.itemPools.town_expansion_1a2385845422 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_73b4332d4f85 = {
+ix.progression.itemPools.town_expansion_dca324fec478 = {
 	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_coffee"},
 		{item = "value_gasoline"},
 		{item = "value_household_salt"},
 		{item = "value_kerosene"},
+		{item = "value_other_grechka"},
+		{item = "value_other_lupo"},
+		{item = "value_other_tea"},
 		{item = "value_propanetank"},
 		{item = "value_sugar"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_9691cc6dbfcc = {
+ix.progression.itemPools.town_expansion_27eb27285361 = {
 	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bleach"},
 		{item = "value_detergent"},
+		{item = "value_dryfuel"},
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_flammable_survlighter"},
+		{item = "value_gascan"},
 		{item = "value_glasscleaner"},
 		{item = "value_household_toothpaste1"},
+		{item = "value_kerosene_container"},
 		{item = "value_shampoo"},
 		{item = "value_soap"},
 		{item = "value_toiletpaper"},
 		{item = "value_toothpaste"},
+		{item = "value_valuable_kresalo"},
+		{item = "value_zibbo_0"},
 	},
 }
 
@@ -7652,48 +8361,42 @@ ix.progression.itemPools.town_expansion_93a3504b5346 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_f2fa448016ca = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+ix.progression.itemPools.town_expansion_af7d21ff2670 = {
+	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
+		{item = "value_gasoline"},
+		{item = "value_household_salt"},
+		{item = "value_kerosene"},
 		{item = "value_other_grechka"},
 		{item = "value_other_lupo"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_2c47c18fdac3 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
-	tier = "common",
-	candidates = {
-		{item = "value_household_salt"},
 		{item = "value_other_tea"},
+		{item = "value_propanetank"},
 		{item = "value_sugar"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_99b5053f4bb9 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation, Pripyat)",
-	tier = "common",
-	candidates = {
-		{item = "value_gasoline"},
-		{item = "value_kerosene"},
-		{item = "value_propanetank"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_3708ad79f7ec = {
+ix.progression.itemPools.town_expansion_fdac49383f8f = {
 	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bleach"},
 		{item = "value_detergent"},
+		{item = "value_dryfuel"},
+		{item = "value_flammable_huntermatches"},
+		{item = "value_flammable_klean"},
+		{item = "value_flammable_survlighter"},
+		{item = "value_gascan"},
 		{item = "value_glasscleaner"},
 		{item = "value_household_toothpaste1"},
+		{item = "value_kerosene_container"},
 		{item = "value_shampoo"},
 		{item = "value_soap"},
 		{item = "value_toiletpaper"},
 		{item = "value_toothpaste"},
+		{item = "value_valuable_kresalo"},
+		{item = "value_zibbo_0"},
 	},
 }
 
@@ -7712,73 +8415,98 @@ ix.progression.itemPools.town_expansion_f1ead98128b3 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_6d2796b9c603 = {
+ix.progression.itemPools.town_expansion_f9997206707b = {
 	name = "Receivers, communications parts and recordings: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
-		{item = "value_calculationunit"},
+		{item = "value_metalparts"},
+		{item = "value_parts"},
+		{item = "value_screws"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_waste_heavy"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_d3ad5e933a17 = {
+	name = "Receivers, communications parts and recordings: general supplies (Garbage)",
+	tier = "common",
+	candidates = {
 		{item = "value_frequencymodulator"},
-		{item = "value_memorymodule"},
-		{item = "value_monitoringunit"},
+		{item = "value_large_parts"},
+		{item = "value_metalparts"},
+		{item = "value_parts"},
 		{item = "value_phone_new"},
 		{item = "value_phone_old"},
 		{item = "value_screws"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_upgrw2"},
+		{item = "value_upgrw3"},
+		{item = "value_waste_heavy"},
+		{item = "value_waste_light"},
+		{item = "value_weaponparts"},
 		{item = "value_wirelesstrans"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_1e97742fdab4 = {
-	name = "Receivers, communications parts and recordings: general supplies (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_phone_new"},
-		{item = "value_phone_old"},
-		{item = "value_screws"},
-		{item = "value_wirelesstrans"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_44f787d6c65b = {
+ix.progression.itemPools.town_expansion_7cceb0a03856 = {
 	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_archive_cassette"},
 		{item = "value_cassette_black90"},
-		{item = "value_cassette_fiolet"},
 		{item = "value_nails"},
-		{item = "value_tape_electric"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_weaponparts"},
 		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_908b33f75597 = {
+ix.progression.itemPools.town_expansion_70664e46c8a5 = {
 	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_archive_cassette"},
 		{item = "value_bolts"},
+		{item = "value_metalparts"},
 		{item = "value_nails"},
 		{item = "value_nuts"},
+		{item = "value_parts"},
+		{item = "value_screws"},
 		{item = "value_sparkplug"},
 		{item = "value_spec_recorder"},
 		{item = "value_tape_electric"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_waste_heavy"},
 		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_3476ed146b98 = {
+ix.progression.itemPools.town_expansion_f4db51faa1c0 = {
 	name = "Receivers, communications parts and recordings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_battery_d_0"},
+		{item = "value_electr_tplug"},
 		{item = "value_energy_accum"},
 		{item = "value_energy_cyclon"},
 		{item = "value_energy_greenbat"},
 		{item = "value_helix"},
+		{item = "value_kanifol"},
 		{item = "value_lamp_efficient"},
+		{item = "value_lamp_uv"},
 		{item = "value_magnet"},
+		{item = "value_militarybattery"},
 		{item = "value_powercable"},
+		{item = "value_powerfilter"},
+		{item = "value_usb_adapter"},
 	},
 }
 
@@ -7796,52 +8524,70 @@ ix.progression.itemPools.town_expansion_52083f144cae = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_4983fe5a1dfc = {
+ix.progression.itemPools.town_expansion_06c7e7b45627 = {
 	name = "Receivers, communications parts and recordings: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_frequencymodulator"},
+		{item = "value_large_parts"},
+		{item = "value_metalparts"},
+		{item = "value_parts"},
+		{item = "value_phone_new"},
+		{item = "value_phone_old"},
 		{item = "value_screws"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_upgrw2"},
+		{item = "value_upgrw3"},
+		{item = "value_waste_heavy"},
+		{item = "value_waste_light"},
+		{item = "value_weaponparts"},
 		{item = "value_wirelesstrans"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_f376ba7d7c11 = {
-	name = "Receivers, communications parts and recordings: general supplies (Garbage)",
-	tier = "rare",
-	candidates = {
-		{item = "value_frequencymodulator"},
-		{item = "value_phone_new"},
-		{item = "value_phone_old"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_76f849572a9d = {
+ix.progression.itemPools.town_expansion_f3a7e106ec1c = {
 	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_archive_cassette"},
 		{item = "value_bolts"},
+		{item = "value_metalparts"},
 		{item = "value_nails"},
 		{item = "value_nuts"},
+		{item = "value_parts"},
+		{item = "value_screws"},
 		{item = "value_sparkplug"},
 		{item = "value_spec_recorder"},
 		{item = "value_tape_electric"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_waste_heavy"},
 		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_dfe9b6a33027 = {
+ix.progression.itemPools.town_expansion_d1a020209080 = {
 	name = "Receivers, communications parts and recordings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_battery_d_0"},
+		{item = "value_electr_tplug"},
 		{item = "value_energy_accum"},
 		{item = "value_energy_cyclon"},
 		{item = "value_energy_greenbat"},
 		{item = "value_helix"},
+		{item = "value_kanifol"},
 		{item = "value_lamp_efficient"},
+		{item = "value_lamp_uv"},
 		{item = "value_magnet"},
+		{item = "value_militarybattery"},
 		{item = "value_powercable"},
+		{item = "value_powerfilter"},
+		{item = "value_usb_adapter"},
 	},
 }
 
@@ -7857,51 +8603,58 @@ ix.progression.itemPools.town_expansion_d28603ad751d = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_af20f7801894 = {
+ix.progression.itemPools.town_expansion_4a19ca0768f1 = {
 	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
+		{item = "value_metalparts"},
+		{item = "value_nuts"},
+		{item = "value_parts"},
+		{item = "value_screws"},
+		{item = "value_waste_heavy"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_a3f70d1ba27f = {
+	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_nails"},
+		{item = "value_sparkplug"},
+		{item = "value_tape_electric"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_0864622558f9 = {
+	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_bolts"},
+		{item = "value_cassette_black90"},
+		{item = "value_metalparts"},
 		{item = "value_nails"},
 		{item = "value_nuts"},
+		{item = "value_parts"},
 		{item = "value_screws"},
 		{item = "value_sparkplug"},
 		{item = "value_tape_electric"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_waste_heavy"},
+		{item = "value_weaponparts"},
 		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_694e61e8f85c = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_archive_cassette"},
-		{item = "value_cassette_black90"},
-		{item = "value_cassette_fiolet"},
-		{item = "value_nails"},
-		{item = "value_sparkplug"},
-		{item = "value_tape_electric"},
-		{item = "value_wire_light"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_220487dd9175 = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_bolts"},
-		{item = "value_cassette_black90"},
-		{item = "value_nails"},
-		{item = "value_nuts"},
-		{item = "value_sparkplug"},
-		{item = "value_tape_electric"},
-		{item = "value_wire_copper"},
-		{item = "value_wire_light"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_dc5e419e9611 = {
+ix.progression.itemPools.town_expansion_377d8f1db330 = {
 	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
@@ -7909,8 +8662,10 @@ ix.progression.itemPools.town_expansion_dc5e419e9611 = {
 		{item = "value_cassette_black90"},
 		{item = "value_cassette_fiolet"},
 		{item = "value_nails"},
-		{item = "value_wire_copper"},
-		{item = "value_wire_light"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_upgro3"},
+		{item = "value_weaponparts"},
 	},
 }
 
@@ -7927,121 +8682,193 @@ ix.progression.itemPools.town_expansion_8ea22f53808c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_c281c09c7712 = {
+ix.progression.itemPools.town_expansion_81da17cceb15 = {
 	name = "Hunting equipment care and field observations: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_gunoil"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_4b2888b79c97 = {
+	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_gunoil"},
+		{item = "value_info_moleskine"},
+		{item = "value_pliers"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_46860f28a864 = {
+	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_awl"},
+		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
+		{item = "value_gunspray"},
+		{item = "value_info_maps"},
+		{item = "value_info_moleskine"},
+		{item = "value_lubricant"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_thick_diary"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_9d7bd0fa3203 = {
+	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_thick_diary"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_2453b1622777 = {
+	name = "Hunting equipment care and field observations: general supplies (Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_awl"},
 		{item = "value_guncleaner"},
 		{item = "value_gunoil"},
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_d58e029a2c73 = {
+ix.progression.itemPools.town_expansion_79c06143a76d = {
 	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_gunspray"},
+		{item = "value_info_moleskine"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
+		{item = "value_swiss"},
+		{item = "value_thick_diary"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_707d65dea71d = {
+	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_awl"},
 		{item = "value_guncleaner"},
 		{item = "value_gunoil"},
 		{item = "value_gunspray"},
 		{item = "value_info_maps"},
 		{item = "value_info_moleskine"},
+		{item = "value_lubricant"},
 		{item = "value_maps"},
 		{item = "value_milimap"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
 		{item = "value_thick_diary"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_81b2bee23ae3 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+ix.progression.itemPools.town_expansion_a64750b77a87 = {
+	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_guncleaner"},
-		{item = "value_gunspray"},
+		{item = "value_info_moleskine"},
+		{item = "value_lubricant"},
+		{item = "value_maps"},
+		{item = "value_pliers"},
+		{item = "value_thick_diary"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_67b16c2b8dd0 = {
+	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_info_moleskine"},
+		{item = "value_lubricant"},
+		{item = "value_maps"},
+		{item = "value_milimap"},
+		{item = "value_pliers"},
+		{item = "value_thick_diary"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_17388ddfb4af = {
+	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
 		{item = "value_info_maps"},
 		{item = "value_info_moleskine"},
 		{item = "value_lubricant"},
 		{item = "value_maps"},
 		{item = "value_milimap"},
 		{item = "value_thick_diary"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_dff12f3a7bfc = {
+ix.progression.itemPools.town_expansion_f90cbd1a38e0 = {
 	name = "Hunting equipment care and field observations: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
 		{item = "value_guncleaner"},
 		{item = "value_gunoil"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_c0fd82db86e4 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_gunspray"},
-		{item = "value_info_maps"},
-		{item = "value_lubricant"},
-		{item = "value_maps"},
-		{item = "value_milimap"},
-		{item = "value_thick_diary"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_f9d2f4d1f455 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_gunspray"},
-		{item = "value_info_maps"},
-		{item = "value_info_moleskine"},
-		{item = "value_lubricant"},
-		{item = "value_maps"},
-		{item = "value_milimap"},
-		{item = "value_thick_diary"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_1d794f429f81 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_info_maps"},
-		{item = "value_info_moleskine"},
-		{item = "value_lubricant"},
-		{item = "value_maps"},
-		{item = "value_milimap"},
-		{item = "value_thick_diary"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_0e0dc6e7b126 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_info_maps"},
-		{item = "value_info_moleskine"},
-		{item = "value_maps"},
-		{item = "value_milimap"},
-		{item = "value_thick_diary"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_eed29779a4a3 = {
-	name = "Hunting equipment care and field observations: general supplies (Garbage)",
-	tier = "rare",
-	candidates = {
 		{item = "value_gunspray"},
 		{item = "value_lubricant"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_56d648ee3be5 = {
+ix.progression.itemPools.town_expansion_d3512ab9afe7 = {
 	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_electro_gyroscope"},
+		{item = "value_gyrotachometer"},
+		{item = "value_optical_lens"},
 		{item = "value_pliers"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
@@ -8063,29 +8890,43 @@ ix.progression.itemPools.town_expansion_3017dfb6aeed = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_207b0a33c365 = {
+ix.progression.itemPools.town_expansion_26dee0f0dae1 = {
 	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
 		{item = "value_gunspray"},
 		{item = "value_info_maps"},
 		{item = "value_info_moleskine"},
 		{item = "value_lubricant"},
 		{item = "value_maps"},
 		{item = "value_milimap"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
 		{item = "value_thick_diary"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_c1a8cc8c75c6 = {
+ix.progression.itemPools.town_expansion_a01798fd35ac = {
 	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_electro_gyroscope"},
+		{item = "value_gyroscope"},
+		{item = "value_gyrotachometer"},
+		{item = "value_optical_lens"},
 		{item = "value_pliers"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
 		{item = "value_sensor_d"},
 		{item = "value_swiss"},
+		{item = "value_thermalmodule"},
 		{item = "value_tools_metalscissors"},
 		{item = "value_tools_nippers"},
 		{item = "value_tools_pliers_round"},
@@ -8117,45 +8958,43 @@ ix.progression.itemPools.town_expansion_4faa8fb764b5 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_6744c5d3d5e5 = {
-	name = "Hunting equipment care and field observations: general supplies (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_gunoil"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_16d5b9b3fa35 = {
-	name = "Hunting equipment care and field observations: general supplies (Garbage)",
-	tier = "rare",
-	candidates = {
-		{item = "value_guncleaner"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_9d57a1f81f49 = {
+ix.progression.itemPools.town_expansion_7eaf2f13e938 = {
 	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
 		{item = "value_gunspray"},
 		{item = "value_info_maps"},
 		{item = "value_info_moleskine"},
 		{item = "value_lubricant"},
 		{item = "value_maps"},
 		{item = "value_milimap"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
 		{item = "value_thick_diary"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_8d74da7dbff0 = {
+ix.progression.itemPools.town_expansion_299bbe142b4b = {
 	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_electro_gyroscope"},
+		{item = "value_gyroscope"},
+		{item = "value_gyrotachometer"},
+		{item = "value_optical_lens"},
 		{item = "value_pliers"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
 		{item = "value_sensor_d"},
 		{item = "value_swiss"},
+		{item = "value_thermalmodule"},
 		{item = "value_tools_metalscissors"},
 		{item = "value_tools_nippers"},
 		{item = "value_tools_pliers_round"},
@@ -8176,22 +9015,20 @@ ix.progression.itemPools.town_expansion_3dd770aeba25 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_3c5cd8199633 = {
+ix.progression.itemPools.town_expansion_9441b17bc45e = {
 	name = "Cloth, protective layers and sewing supplies: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_retardant1"},
 		{item = "value_retardant10"},
 		{item = "value_retardant11"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
 		{item = "value_retardant3"},
 		{item = "value_retardant4"},
 		{item = "value_retardant9"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_b9ac7abdac90 = {
+ix.progression.itemPools.town_expansion_4f326e70072d = {
 	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
@@ -8201,6 +9038,27 @@ ix.progression.itemPools.town_expansion_b9ac7abdac90 = {
 		{item = "value_fabrics2"},
 		{item = "value_rope"},
 		{item = "value_ropes"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_92fb932ff1c5 = {
+	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_bedspread"},
+		{item = "value_fabric_aramid"},
+		{item = "value_fabrics1"},
+		{item = "value_fabrics2"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
+		{item = "value_rope"},
+		{item = "value_ropes"},
+		{item = "value_sewingkit"},
 		{item = "value_tarp"},
 		{item = "value_tools_sewing"},
 	},
@@ -8221,8 +9079,95 @@ ix.progression.itemPools.town_expansion_66b24e939800 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_9441b17bc45e = {
+ix.progression.itemPools.town_expansion_6ffc7ac7f5d1 = {
 	name = "Cloth, protective layers and sewing supplies: general supplies (Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_fabric_cordura"},
+		{item = "value_fabric_fleece"},
+		{item = "value_fabric_ripstop"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant6"},
+		{item = "value_retardant9"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_3acf0f035059 = {
+	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_fabrics1"},
+		{item = "value_fabrics2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
+		{item = "value_ropes"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_0b1245b6e79e = {
+	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_bedspread"},
+		{item = "value_fabric_aramid"},
+		{item = "value_fabrics1"},
+		{item = "value_fabrics2"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
+		{item = "value_rope"},
+		{item = "value_ropes"},
+		{item = "value_sewingkit"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_d941dc81b901 = {
+	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_retardant1"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
+		{item = "value_ropes"},
+		{item = "value_sewingkit"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_2b18fb90c7bf = {
+	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
+		{item = "value_sewingkit"},
+		{item = "value_tarp"},
+		{item = "value_tools_sewing"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_222a2f2dcf66 = {
+	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_retardant1"},
@@ -8231,89 +9176,41 @@ ix.progression.itemPools.town_expansion_9441b17bc45e = {
 		{item = "value_retardant3"},
 		{item = "value_retardant4"},
 		{item = "value_retardant9"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_4890d067106b = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_fabrics1"},
-		{item = "value_fabrics2"},
-		{item = "value_retardant12"},
-		{item = "value_rope"},
-		{item = "value_ropes"},
 		{item = "value_sewingkit"},
-		{item = "value_tarp"},
 		{item = "value_tools_sewing"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_18843025de3c = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_bedspread"},
-		{item = "value_fabric_aramid"},
-		{item = "value_fabrics1"},
-		{item = "value_fabrics2"},
-		{item = "value_rope"},
-		{item = "value_ropes"},
-		{item = "value_tarp"},
-		{item = "value_tools_sewing"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_0bf6215d6420 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_fabrics1"},
-		{item = "value_fabrics2"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
-		{item = "value_ropes"},
-		{item = "value_sewingkit"},
-		{item = "value_tarp"},
-		{item = "value_tools_sewing"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_e89248037748 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_fabrics1"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
-		{item = "value_retardant6"},
-		{item = "value_ropes"},
-		{item = "value_sewingkit"},
-		{item = "value_tarp"},
-		{item = "value_tools_sewing"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_3d545324f4f1 = {
+ix.progression.itemPools.town_expansion_6f85ea5be266 = {
 	name = "Cloth, protective layers and sewing supplies: general supplies (Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabric_cordura"},
 		{item = "value_fabric_fleece"},
 		{item = "value_fabric_ripstop"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
 		{item = "value_retardant12"},
 		{item = "value_retardant2"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
 		{item = "value_retardant6"},
+		{item = "value_retardant9"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_2470b2a13707 = {
+ix.progression.itemPools.town_expansion_77bed644606f = {
 	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_ballistic1"},
 		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
 		{item = "value_ballistic4"},
 		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
 		{item = "value_pliers"},
 		{item = "value_swiss"},
 		{item = "value_tools_metalscissors"},
@@ -8335,7 +9232,7 @@ ix.progression.itemPools.town_expansion_b4f6e587d11c = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a7a6382a68e7 = {
+ix.progression.itemPools.town_expansion_02c827324460 = {
 	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -8343,20 +9240,32 @@ ix.progression.itemPools.town_expansion_a7a6382a68e7 = {
 		{item = "value_fabric_aramid"},
 		{item = "value_fabrics1"},
 		{item = "value_fabrics2"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
 		{item = "value_rope"},
 		{item = "value_ropes"},
+		{item = "value_sewingkit"},
 		{item = "value_tarp"},
 		{item = "value_tools_sewing"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_f71814abbe4a = {
+ix.progression.itemPools.town_expansion_708945232835 = {
 	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_ballistic1"},
 		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
 		{item = "value_ballistic4"},
 		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
 		{item = "value_pliers"},
 		{item = "value_swiss"},
 		{item = "value_tools_metalscissors"},
@@ -8405,29 +9314,7 @@ ix.progression.itemPools.town_expansion_e9d564566ea6 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a91bbf487d15 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_retardant1"},
-		{item = "value_retardant3"},
-		{item = "value_retardant4"},
-		{item = "value_retardant9"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_4b43b441dd21 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_retardant10"},
-		{item = "value_retardant11"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_ed39009e757a = {
+ix.progression.itemPools.town_expansion_10904788249e = {
 	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
@@ -8435,20 +9322,32 @@ ix.progression.itemPools.town_expansion_ed39009e757a = {
 		{item = "value_fabric_aramid"},
 		{item = "value_fabrics1"},
 		{item = "value_fabrics2"},
+		{item = "value_retardant1"},
+		{item = "value_retardant10"},
+		{item = "value_retardant11"},
+		{item = "value_retardant12"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
 		{item = "value_rope"},
 		{item = "value_ropes"},
+		{item = "value_sewingkit"},
 		{item = "value_tarp"},
 		{item = "value_tools_sewing"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_29ae43e240cf = {
+ix.progression.itemPools.town_expansion_aeaa200e6d7f = {
 	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_ballistic1"},
 		{item = "value_ballistic11"},
+		{item = "value_ballistic3"},
 		{item = "value_ballistic4"},
 		{item = "value_ballistic6"},
+		{item = "value_ballistic7"},
 		{item = "value_pliers"},
 		{item = "value_swiss"},
 		{item = "value_tools_metalscissors"},
@@ -8485,14 +9384,14 @@ ix.progression.itemPools.town_expansion_89449a5e427f = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_65bb0e75d525 = {
+ix.progression.itemPools.town_expansion_2f020af62913 = {
 	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_fabric_fleece"},
-		{item = "value_retardant12"},
-		{item = "value_retardant2"},
-		{item = "value_retardant6"},
+		{item = "value_fabrics1"},
+		{item = "value_retardant3"},
+		{item = "value_retardant4"},
+		{item = "value_retardant9"},
 		{item = "value_ropes"},
 		{item = "value_sewingkit"},
 		{item = "value_tarp"},
@@ -8500,7 +9399,7 @@ ix.progression.itemPools.town_expansion_65bb0e75d525 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_a4cab97a944e = {
+ix.progression.itemPools.town_expansion_c7169f14696b = {
 	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
@@ -8508,8 +9407,6 @@ ix.progression.itemPools.town_expansion_a4cab97a944e = {
 		{item = "value_glue_1"},
 		{item = "value_glue_2"},
 		{item = "value_glue_3"},
-		{item = "value_glue_4"},
-		{item = "value_hose"},
 		{item = "value_nuts"},
 		{item = "value_wire_copper"},
 	},
@@ -8530,29 +9427,82 @@ ix.progression.itemPools.town_expansion_3698b9592041 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_92b292933cfc = {
+ix.progression.itemPools.town_expansion_3d13120ddff7 = {
 	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
+		{item = "value_bolts"},
+		{item = "value_glue_1"},
+		{item = "value_glue_2"},
+		{item = "value_glue_3"},
+		{item = "value_glue_4"},
+		{item = "value_hose"},
+		{item = "value_lightbulb"},
+		{item = "value_nails"},
+		{item = "value_nuts"},
 		{item = "value_paracord"},
-		{item = "value_rope"},
-		{item = "value_ropes"},
 		{item = "value_siliconetube"},
+		{item = "value_sparkplug"},
 		{item = "value_tape_duct"},
 		{item = "value_tape_electric"},
-		{item = "value_tarp"},
+		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_0482d320b672 = {
+ix.progression.itemPools.town_expansion_a7b9149f8af2 = {
+	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
+	tier = "common",
+	candidates = {
+		{item = "value_glue_1"},
+		{item = "value_glue_3"},
+		{item = "value_glue_4"},
+		{item = "value_hose"},
+		{item = "value_lightbulb"},
+		{item = "value_nails"},
+		{item = "value_tape_duct"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_dad62e7585ad = {
 	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_lightbulb"},
-		{item = "value_nails"},
 		{item = "value_paracord"},
-		{item = "value_tape_duct"},
+		{item = "value_siliconetube"},
+		{item = "value_tape_electric"},
+		{item = "value_tools_ratchetwrench"},
+		{item = "value_upgro1"},
+		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
+		{item = "value_wrench"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_6439a6f8a7e9 = {
+	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_hose"},
+		{item = "value_paracord"},
+		{item = "value_siliconetube"},
+		{item = "value_tools_ratchetwrench"},
+		{item = "value_upgro1"},
+		{item = "value_upgro2"},
+		{item = "value_wire_copper"},
+		{item = "value_wrench"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_13f1649aba56 = {
+	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_hose"},
+		{item = "value_lightbulb"},
+		{item = "value_paracord"},
+		{item = "value_tools_ratchetwrench"},
 		{item = "value_upgro1"},
 		{item = "value_upgro2"},
 		{item = "value_upgro3"},
@@ -8560,47 +9510,25 @@ ix.progression.itemPools.town_expansion_0482d320b672 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_588269d38f3b = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_lightbulb"},
-		{item = "value_nails"},
-		{item = "value_paracord"},
-		{item = "value_precisiontools"},
-		{item = "value_tape_duct"},
-		{item = "value_upgro2"},
-		{item = "value_upgro3"},
-		{item = "value_wrench"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_6eccbc654c33 = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_lightbulb"},
-		{item = "value_nails"},
-		{item = "value_precisiontools"},
-		{item = "value_screwdriver"},
-		{item = "value_tape_duct"},
-		{item = "value_tools_screwdriver_flat_long"},
-		{item = "value_upgro2"},
-		{item = "value_upgro3"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_fccf7e5c508d = {
+ix.progression.itemPools.town_expansion_4673dd0551bc = {
 	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
 	tier = "common",
 	candidates = {
+		{item = "value_bolts"},
+		{item = "value_glue_1"},
+		{item = "value_glue_2"},
+		{item = "value_glue_3"},
+		{item = "value_glue_4"},
+		{item = "value_hose"},
 		{item = "value_lightbulb"},
 		{item = "value_nails"},
+		{item = "value_nuts"},
 		{item = "value_paracord"},
 		{item = "value_siliconetube"},
 		{item = "value_sparkplug"},
 		{item = "value_tape_duct"},
 		{item = "value_tape_electric"},
+		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
@@ -8620,17 +9548,25 @@ ix.progression.itemPools.town_expansion_5d7a58b28901 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_265c3543f984 = {
+ix.progression.itemPools.town_expansion_92bc90ddebaf = {
 	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_bolts"},
+		{item = "value_glue_1"},
+		{item = "value_glue_2"},
+		{item = "value_glue_3"},
+		{item = "value_glue_4"},
 		{item = "value_metalparts"},
+		{item = "value_nuts"},
+		{item = "value_paracord"},
 		{item = "value_screws"},
 		{item = "value_siliconetube"},
 		{item = "value_sparkplug"},
 		{item = "value_tape_electric"},
 		{item = "value_tools_advwrench"},
 		{item = "value_waste_heavy"},
+		{item = "value_wire_copper"},
 		{item = "value_wire_light"},
 	},
 }
@@ -8665,18 +9601,26 @@ ix.progression.itemPools.town_expansion_d051739d24e8 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_88c326a82942 = {
+ix.progression.itemPools.town_expansion_26499ce470b2 = {
 	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_bolts"},
+		{item = "value_glue_1"},
+		{item = "value_glue_2"},
+		{item = "value_glue_3"},
+		{item = "value_glue_4"},
 		{item = "value_metalparts"},
-		{item = "value_parts"},
+		{item = "value_nuts"},
+		{item = "value_paracord"},
 		{item = "value_screws"},
+		{item = "value_siliconetube"},
+		{item = "value_sparkplug"},
+		{item = "value_tape_electric"},
 		{item = "value_tools_advwrench"},
-		{item = "value_tools_ratchetwrench"},
-		{item = "value_upgro1"},
 		{item = "value_waste_heavy"},
-		{item = "value_wrench"},
+		{item = "value_wire_copper"},
+		{item = "value_wire_light"},
 	},
 }
 
@@ -8694,133 +9638,253 @@ ix.progression.itemPools.town_expansion_064eb1bf0cb5 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_77f938d099ae = {
+ix.progression.itemPools.town_expansion_409e675b1118 = {
 	name = "Expedition instruments and field preparation: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_lopouch"},
+		{item = "value_gunoil"},
+		{item = "value_pliers"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_f4d04381205b = {
+	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_lopouch"},
+		{item = "value_gunoil"},
+		{item = "value_paracord"},
+		{item = "value_tape_electric"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_wire_light"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_a823fcf29a01 = {
+	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_awl"},
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 		{item = "value_gunoil"},
 		{item = "value_lubricant"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_659c6ec753e7 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_gunoil"},
-		{item = "value_lubricant"},
 		{item = "value_paracord"},
-		{item = "value_pressuregauge"},
-		{item = "value_sensor_a"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
 		{item = "value_tape_electric"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_ddeffeb73aaa = {
+ix.progression.itemPools.town_expansion_97ae0fe853de = {
 	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
-		{item = "value_gunoil"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
 		{item = "value_paracord"},
+		{item = "value_pliers"},
 		{item = "value_tape_electric"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_8822f7a90f08 = {
+ix.progression.itemPools.town_expansion_df78f75b1497 = {
 	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_injectorcase"},
 		{item = "value_paracord"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
 		{item = "value_tape_electric"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_cdd204229f48 = {
+ix.progression.itemPools.town_expansion_43b520596561 = {
 	name = "Expedition instruments and field preparation: general supplies (Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 		{item = "value_gunoil"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_a36dd2f48f95 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_paracord"},
-		{item = "value_tape_electric"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_70501b6c691d = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
 		{item = "value_lubricant"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_72c916d0abcb = {
+	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
 		{item = "value_paracord"},
-		{item = "value_pressuregauge"},
-		{item = "value_sensor_a"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
 		{item = "value_tape_electric"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_7f149830f8d0 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
+ix.progression.itemPools.town_expansion_05132b8d0238 = {
+	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
-		{item = "value_casezerogeo"},
+		{item = "value_awl"},
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
+		{item = "value_gunoil"},
 		{item = "value_lubricant"},
 		{item = "value_paracord"},
-		{item = "value_pressuregauge"},
-		{item = "value_sensor_a"},
-		{item = "value_sensor_d"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
 		{item = "value_tape_electric"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_9f1deadf7aa2 = {
+ix.progression.itemPools.town_expansion_e8bd5202b929 = {
+	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_paracord"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_tape_electric"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_51ebdbd40920 = {
 	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
+		{item = "value_gunoil"},
 		{item = "value_lubricant"},
+		{item = "value_paracord"},
+		{item = "value_pliers"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
+		{item = "value_swiss"},
+		{item = "value_tape_electric"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_efa40da7e4ad = {
+ix.progression.itemPools.town_expansion_54371b32c140 = {
 	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_injectorcase"},
 		{item = "value_lubricant"},
+		{item = "value_pliers"},
 		{item = "value_pressuregauge"},
+		{item = "value_swiss"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_b06ffdd3872e = {
+ix.progression.itemPools.town_expansion_a3908ffe8d9d = {
+	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_lubricant"},
+		{item = "value_pressuregauge"},
+		{item = "value_swiss"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_a44245ac02ff = {
+	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_pressuregauge"},
+		{item = "value_swiss"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_53f9dde5b77b = {
 	name = "Expedition instruments and field preparation: general supplies (Garbage)",
-	tier = "rare",
+	tier = "common",
 	candidates = {
+		{item = "value_awl"},
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
+		{item = "value_gunoil"},
 		{item = "value_lubricant"},
+		{item = "value_pliers"},
+		{item = "value_swiss"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_8263cc3b2759 = {
+ix.progression.itemPools.town_expansion_04ec9aa9092f = {
 	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
+		{item = "value_container_cardholder"},
 		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
 		{item = "value_docbag"},
 		{item = "value_event_labyrinth_chem_container"},
 		{item = "value_portable_container_closed"},
 		{item = "value_portable_container_opened"},
+		{item = "value_quest_biohazard_case"},
 		{item = "value_thermobag"},
 	},
 }
@@ -8837,32 +9901,43 @@ ix.progression.itemPools.town_expansion_ea1d090d14a0 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_c2760e63776a = {
+ix.progression.itemPools.town_expansion_9b08d7a6b279 = {
 	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
+		{item = "value_gunoil"},
 		{item = "value_lubricant"},
 		{item = "value_paracord"},
+		{item = "value_pliers"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
-		{item = "value_sensor_d"},
+		{item = "value_swiss"},
 		{item = "value_tape_electric"},
-		{item = "value_thermalmodule"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_78fede4ef488 = {
+ix.progression.itemPools.town_expansion_431c32d21d4a = {
 	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
+		{item = "value_container_cardholder"},
 		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
 		{item = "value_docbag"},
 		{item = "value_event_labyrinth_chem_container"},
 		{item = "value_portable_container_closed"},
 		{item = "value_portable_container_opened"},
+		{item = "value_quest_biohazard_case"},
 		{item = "value_thermobag"},
 	},
 }
@@ -8890,32 +9965,43 @@ ix.progression.itemPools.town_expansion_4908b8a6a214 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_f4528b8e747d = {
+ix.progression.itemPools.town_expansion_06860f39be0d = {
 	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
-		{item = "value_casezerogeo"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
+		{item = "value_gunoil"},
+		{item = "value_lubricant"},
 		{item = "value_paracord"},
+		{item = "value_pliers"},
 		{item = "value_pressuregauge"},
 		{item = "value_sensor_a"},
-		{item = "value_sensor_d"},
+		{item = "value_swiss"},
 		{item = "value_tape_electric"},
-		{item = "value_thermalmodule"},
+		{item = "value_tools_metalscissors"},
+		{item = "value_tools_nippers"},
+		{item = "value_tools_pliers_round"},
 		{item = "value_wire_light"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_921ae5a3e892 = {
+ix.progression.itemPools.town_expansion_76588b984896 = {
 	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
+		{item = "value_container_cardholder"},
 		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
 		{item = "value_docbag"},
 		{item = "value_event_labyrinth_chem_container"},
 		{item = "value_portable_container_closed"},
 		{item = "value_portable_container_opened"},
+		{item = "value_quest_biohazard_case"},
 		{item = "value_thermobag"},
 	},
 }
@@ -8927,6 +10013,59 @@ ix.progression.itemPools.town_expansion_3f51cdb7d8ff = {
 		{item = "value_container_smallitems"},
 		{item = "value_docbag"},
 		{item = "value_thermobag"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_8e7f590bf612 = {
+	name = "Personal effects and recovered belongings: general supplies (Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
+		{item = "value_watch"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_ef16b6d5da9d = {
+	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_crow_beak"},
+		{item = "value_docbag"},
+		{item = "value_lightkeeper_amulet"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_3a98413f7be1 = {
+	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_crow_beak"},
+		{item = "value_docbag"},
+		{item = "value_goldchain"},
+		{item = "value_lightkeeper_amulet"},
+		{item = "value_watch"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_156ee0d5478b = {
+	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_crow_beak"},
+		{item = "value_docbag"},
+		{item = "value_lightkeeper_amulet"},
 	},
 }
 
@@ -8944,7 +10083,18 @@ ix.progression.itemPools.town_expansion_2527acd3d1b4 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_f145861c27c2 = {
+ix.progression.itemPools.town_expansion_30b09f9b3823 = {
+	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_injectorcase"},
+		{item = "value_crow_beak"},
+		{item = "value_docbag"},
+		{item = "value_lightkeeper_amulet"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_03a9328806d6 = {
 	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
@@ -8954,92 +10104,79 @@ ix.progression.itemPools.town_expansion_f145861c27c2 = {
 		{item = "value_container_smallitems"},
 		{item = "value_crow_beak"},
 		{item = "value_docbag"},
+		{item = "value_goldchain"},
 		{item = "value_lightkeeper_amulet"},
 		{item = "value_watch"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_156ee0d5478b = {
+ix.progression.itemPools.town_expansion_d050133279ce = {
 	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
-		{item = "value_crow_beak"},
+		{item = "value_container_smallitems"},
 		{item = "value_docbag"},
 		{item = "value_lightkeeper_amulet"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_fc81a72067fb = {
-	name = "Personal effects and recovered belongings: general supplies (Garbage)",
+ix.progression.itemPools.town_expansion_80b756dba629 = {
+	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_cardholder"},
 		{item = "value_container_injectorcase"},
 		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
+		{item = "value_crow_beak"},
 		{item = "value_docbag"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_69eb1c719480 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_cardholder"},
-		{item = "value_container_smallitems"},
-		{item = "value_lightkeeper_amulet"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_23ae21c1f226 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_cardholder"},
-		{item = "value_container_smallitems"},
-		{item = "value_crow_beak"},
 		{item = "value_goldchain"},
 		{item = "value_lightkeeper_amulet"},
 		{item = "value_watch"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_0280c4e0d311 = {
+ix.progression.itemPools.town_expansion_703d74c6da26 = {
 	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
-		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
 		{item = "value_container_smallitems"},
-		{item = "value_crow_beak"},
-		{item = "value_goldchain"},
-		{item = "value_lightkeeper_amulet"},
-		{item = "value_watch"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_c0f4328bbece = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 		{item = "value_lightkeeper_amulet"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_0b064e1c97d2 = {
+ix.progression.itemPools.town_expansion_85979a57a122 = {
+	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation)",
+	tier = "common",
+	candidates = {
+		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
+		{item = "value_lightkeeper_amulet"},
+	},
+}
+
+ix.progression.itemPools.town_expansion_3501889212d9 = {
 	name = "Personal effects and recovered belongings: general supplies (Garbage)",
-	tier = "uncommon",
+	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
 		{item = "value_container_smallitems"},
+		{item = "value_docbag"},
 		{item = "value_goldchain"},
 		{item = "value_watch"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_589ad0d0339c = {
+ix.progression.itemPools.town_expansion_8f40472ef8f5 = {
 	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
+		{item = "value_briefcase"},
 		{item = "value_carbon_case"},
 		{item = "value_envelope"},
 		{item = "value_knife_box_low"},
@@ -9048,6 +10185,9 @@ ix.progression.itemPools.town_expansion_589ad0d0339c = {
 		{item = "value_notepad_a6_closed_01"},
 		{item = "value_officepaper"},
 		{item = "value_parcel"},
+		{item = "value_pukt90"},
+		{item = "value_security_box"},
+		{item = "value_small_case"},
 	},
 }
 
@@ -9065,23 +10205,27 @@ ix.progression.itemPools.town_expansion_8d2894187d3b = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_849adebda003 = {
+ix.progression.itemPools.town_expansion_383d0ddf3e93 = {
 	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
 		{item = "value_container_smallitems"},
 		{item = "value_crow_beak"},
+		{item = "value_docbag"},
 		{item = "value_goldchain"},
 		{item = "value_lightkeeper_amulet"},
 		{item = "value_watch"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_2399396de269 = {
+ix.progression.itemPools.town_expansion_243a967d3c85 = {
 	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_briefcase"},
 		{item = "value_carbon_case"},
 		{item = "value_envelope"},
 		{item = "value_knife_box_low"},
@@ -9090,6 +10234,9 @@ ix.progression.itemPools.town_expansion_2399396de269 = {
 		{item = "value_notepad_a6_closed_01"},
 		{item = "value_officepaper"},
 		{item = "value_parcel"},
+		{item = "value_pukt90"},
+		{item = "value_security_box"},
+		{item = "value_small_case"},
 	},
 }
 
@@ -9121,40 +10268,27 @@ ix.progression.itemPools.town_expansion_938c8456db0f = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_2c2a7090730b = {
-	name = "Personal effects and recovered belongings: general supplies (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_injectorcase"},
-		{item = "value_container_lopouch"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_94565a20fc22 = {
-	name = "Personal effects and recovered belongings: general supplies (Garbage)",
-	tier = "common",
-	candidates = {
-		{item = "value_container_smallitems"},
-		{item = "value_docbag"},
-	},
-}
-
-ix.progression.itemPools.town_expansion_9111ce4a36e4 = {
+ix.progression.itemPools.town_expansion_66622a11fcf6 = {
 	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
+		{item = "value_container_injectorcase"},
+		{item = "value_container_lopouch"},
+		{item = "value_container_smallitems"},
 		{item = "value_crow_beak"},
+		{item = "value_docbag"},
 		{item = "value_goldchain"},
 		{item = "value_lightkeeper_amulet"},
 		{item = "value_watch"},
 	},
 }
 
-ix.progression.itemPools.town_expansion_df842199a87e = {
+ix.progression.itemPools.town_expansion_2ba4a2b2e5b5 = {
 	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
+		{item = "value_briefcase"},
 		{item = "value_carbon_case"},
 		{item = "value_envelope"},
 		{item = "value_knife_box_low"},
@@ -9163,6 +10297,9 @@ ix.progression.itemPools.town_expansion_df842199a87e = {
 		{item = "value_notepad_a6_closed_01"},
 		{item = "value_officepaper"},
 		{item = "value_parcel"},
+		{item = "value_pukt90"},
+		{item = "value_security_box"},
+		{item = "value_small_case"},
 	},
 }
 

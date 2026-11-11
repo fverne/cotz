@@ -145,7 +145,7 @@ PLUGIN:Register("wake", {
 			briefing = "A sling bag is a modest place to begin. People sometimes want to explain why they haven't bought something larger yet; you don't owe me that account. Bring the listed recovery supplies here and I can make the bag available for purchase.",
 			completion = "The sling bag is available to buy. Thank you for the complete delivery.",
 			requirements = {
-				{pool = "town_expansion_2527acd3d1b4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8e7f590bf612", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 17,
@@ -162,7 +162,7 @@ PLUGIN:Register("wake", {
 			briefing = "The worn sportsbag has its own supply request. I like a bag someone can choose for an ordinary use without treating it as a statement about the person carrying it. Bring what's listed, and the purchase option opens.",
 			completion = "You can purchase the sportsbag now. That's the full order received.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_ef16b6d5da9d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 17,
@@ -179,7 +179,7 @@ PLUGIN:Register("wake", {
 			briefing = "This is an optional carrying allowance after the sportsbag: one extra kilogram. The delivery is listed here. You can come back to it later; it doesn't stand between you and the next backpack.",
 			completion = "The extra kilogram of carrying capacity is yours. This side order is finished.",
 			requirements = {
-				{pool = "town_expansion_2527acd3d1b4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8e7f590bf612", quantity = 1, mode = "any"},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 1,
@@ -198,7 +198,7 @@ PLUGIN:Register("wake", {
 			briefing = "I'd like a larger sportsbag reserve. These supplies increase the stock allowance for the bag you've unlocked. It won't refill immediately, so check what is actually available before counting on another one.",
 			completion = "Your sportsbag reserve capacity is larger. Normal refill still applies.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_ef16b6d5da9d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -220,7 +220,7 @@ PLUGIN:Register("wake", {
 			briefing = "The old paramedic bag is next. Bring this recovery-supply order and I'll make it available to buy. An old bag can have plenty of ordinary use left in it; I don't ask a new owner to carry a story with it.",
 			completion = "The paramedic bag is open for purchase. Its next use is for you to decide.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_ef16b6d5da9d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 17,
@@ -237,7 +237,7 @@ PLUGIN:Register("wake", {
 			briefing = "This request increases the paramedic-bag allowance. I need the supplies listed, rather than another bag to add to the pile. The stock will refill in the normal way once the capacity is raised.",
 			completion = "Your paramedic-bag stock capacity has increased. The reserve arrangement is complete.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_ef16b6d5da9d", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -259,7 +259,7 @@ PLUGIN:Register("wake", {
 			briefing = "For the school backpack, this is the delivery. People can feel rather self-conscious choosing something familiar for a place that isn't. You can like the bag without explaining the choice. Bring the full order and you can purchase it.",
 			completion = "The school backpack is available to buy. The order is received, and the preference can stay simple.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_ef16b6d5da9d", quantity = 1, mode = "any"},
 			},
 			branchIndex = 4,
 			branchLength = 17,
@@ -276,7 +276,7 @@ PLUGIN:Register("wake", {
 			briefing = "There's an optional extra kilogram of carrying capacity after the school backpack. This supply request covers it. Finish it whenever it suits you; the backpack route can continue without waiting for this order.",
 			completion = "You've earned another kilogram of carrying capacity. The optional request is settled.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_ef16b6d5da9d", quantity = 1, mode = "any"},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 2,
@@ -295,7 +295,7 @@ PLUGIN:Register("wake", {
 			briefing = "The school-backpack reserve could use these supplies. Completing this delivery increases your allowance rather than handing you a bag. I want that clear before you leave room for something that still has to arrive.",
 			completion = "School-backpack capacity increased. Fresh stock follows the usual refill.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a98413f7be1", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -334,7 +334,7 @@ PLUGIN:Register("wake", {
 			briefing = "I'd like more room in the large-school-backpack reserve before the sling line continues. This order raises its stock capacity. You can keep an earlier bag as an option even while deciding on another.",
 			completion = "Your large-school-backpack allowance has increased. Its normal refill remains unchanged.",
 			requirements = {
-				{pool = "town_expansion_f145861c27c2", quantity = 1, mode = "any"},
+				{pool = "town_expansion_3a98413f7be1", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -376,7 +376,7 @@ PLUGIN:Register("wake", {
 			briefing = "This optional order adds a row to your inventory after the large sling backpack. It doesn't hold up the later bags. Bring the listed supplies when you want the additional space, whether that's now or after the rest of the route.",
 			completion = "Your inventory has one additional row. This optional space order is complete.",
 			requirements = {
-				{pool = "town_expansion_2527acd3d1b4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8e7f590bf612", quantity = 1, mode = "any"},
 			},
 			capacity = {amount = 1, kind = "rows"},
 			branchIndex = 1,
@@ -395,8 +395,8 @@ PLUGIN:Register("wake", {
 			briefing = "The black large sling backpack is a separate purchase option. Bring the supplies listed here to open it. You're allowed to choose the finish you prefer; I won't ask you to make it sound like a necessity.",
 			completion = "The black large sling backpack is available to buy. No further explanation needed.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_69eb1c719480", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_30b09f9b3823", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 17,
@@ -413,8 +413,8 @@ PLUGIN:Register("wake", {
 			briefing = "This reserve order concerns the black sling backpack. The listed supplies increase its allowance. A larger reserve doesn't require you to buy every bag it could hold; it gives you the option as stock refills.",
 			completion = "Your black-sling stock capacity has increased. The refill will take its ordinary time.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 1, mode = "any"},
-				{pool = "town_expansion_23ae21c1f226", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_03a9328806d6", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -436,8 +436,8 @@ PLUGIN:Register("wake", {
 			briefing = "The MBSS backpack comes through this request. Bring the full recovery-supply delivery here. I like getting these arrangements clear before somebody starts repacking everything on the floor in anticipation.",
 			completion = "MBSS purchase access is ready. You've completed the delivery before beginning another load.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_69eb1c719480", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_d050133279ce", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 17,
@@ -454,8 +454,8 @@ PLUGIN:Register("wake", {
 			briefing = "Before the army backpack, I'd like the MBSS reserve increased. This smaller request raises your stock capacity for it. Actual stock remains separate from what I've agreed to hold for you.",
 			completion = "The MBSS allowance is larger now. Check the shelf for current availability.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 1, mode = "any"},
-				{pool = "town_expansion_0280c4e0d311", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_80b756dba629", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -477,8 +477,8 @@ PLUGIN:Register("wake", {
 			briefing = "For the army backpack, this is the supply list. Complete the delivery and you can purchase the bag. You don't need to settle every later equipment choice before making this one.",
 			completion = "The army backpack is open for purchase. This arrangement is finished on its own terms.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c0f4328bbece", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_703d74c6da26", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 17,
@@ -495,8 +495,8 @@ PLUGIN:Register("wake", {
 			briefing = "The army backpack makes another optional carrying order available. Completing this delivery adds one kilogram to your capacity. It can wait while you continue the backpack route; I won't treat leaving it for later as unfinished business between us.",
 			completion = "You've added one kilogram of carrying capacity. That side arrangement is now complete.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_0280c4e0d311", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_80b756dba629", quantity = 1, mode = "any"},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 3,
@@ -515,8 +515,8 @@ PLUGIN:Register("wake", {
 			briefing = "This request raises the army-backpack reserve. Bring the supplies listed here and the allowance grows. I prefer asking for exactly what I need rather than accepting a bagful because someone felt they should bring more.",
 			completion = "Your army-backpack capacity is increased. Thank you for keeping to the agreed delivery.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 1, mode = "any"},
-				{pool = "town_expansion_0280c4e0d311", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_80b756dba629", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -538,8 +538,8 @@ PLUGIN:Register("wake", {
 			briefing = "The Pilgrim backpack has the next purchase order. Read the recovery supplies below and bring them back here. Choosing more room needn't mean promising that room to everybody who asks what you're carrying.",
 			completion = "The Pilgrim backpack is available to buy. The supply request has been completed.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c0f4328bbece", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_703d74c6da26", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
 			branchLength = 17,
@@ -556,8 +556,8 @@ PLUGIN:Register("wake", {
 			briefing = "I'd like to increase your Pilgrim reserve before the upgraded MBSS. This delivery covers the stock allowance. It won't put a bag into your inventory, or refill the sale stock straight away.",
 			completion = "Pilgrim stock capacity increased. The bags still arrive through the usual refill.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 1, mode = "any"},
-				{pool = "town_expansion_0280c4e0d311", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 1, mode = "any"},
+				{pool = "town_expansion_80b756dba629", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -582,8 +582,8 @@ PLUGIN:Register("wake", {
 			briefing = "For the upgraded MBSS, bring this recovery-supply delivery. I won't ask you to part with the bag you're using as a way of proving you want another. The request is the one written here.",
 			completion = "The upgraded MBSS purchase route is open. Your delivery is received in full.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_c0f4328bbece", quantity = 1, mode = "random"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_85979a57a122", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
 			branchLength = 17,
@@ -600,9 +600,9 @@ PLUGIN:Register("wake", {
 			briefing = "This is the upgraded-MBSS reserve order. Complete the list and I'll increase your allowance. An earlier choice can remain available without every later bag turning it into something you ought to discard.",
 			completion = "Your upgraded-MBSS capacity is larger. Refill remains normal.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_0b064e1c97d2", quantity = 1, mode = "any"},
-				{pool = "town_expansion_589ad0d0339c", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3501889212d9", quantity = 1, mode = "any"},
+				{pool = "town_expansion_8f40472ef8f5", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -624,8 +624,8 @@ PLUGIN:Register("wake", {
 			briefing = "The Ukrainian military backpack is next. Bring the materials listed here and you can buy it. I'm interested in the practical choice you're making; the label on the bag doesn't need an account of your allegiance.",
 			completion = "The Ukrainian military backpack is available for purchase. That completes its supply order.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 3, mode = "any"},
-				{pool = "town_expansion_0b064e1c97d2", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_3501889212d9", quantity = 2, mode = "any"},
 				{pool = "town_expansion_8d2894187d3b", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
@@ -643,9 +643,9 @@ PLUGIN:Register("wake", {
 			briefing = "The Ukrainian-backpack reserve needs these supplies before the next bag. This request raises capacity for the bag already unlocked. Take your time reading the heading; there are several similar names on this part of the list.",
 			completion = "Ukrainian-backpack stock allowance increased. This reserve has been settled separately.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2399396de269", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 1, mode = "any"},
+				{pool = "town_expansion_243a967d3c85", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -672,8 +672,8 @@ PLUGIN:Register("wake", {
 			briefing = "For the Russian military backpack, bring this delivery. You can compare it with the other options after purchase access is open. I don't mind someone returning to look twice before deciding.",
 			completion = "The Russian military backpack is open for purchase. You're welcome to take another look before buying.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 3, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 2, mode = "any"},
 				{pool = "town_expansion_7f159eab7029", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
@@ -696,9 +696,9 @@ PLUGIN:Register("wake", {
 			briefing = "Another optional kilogram of carrying capacity is available after that backpack. These supplies cover the increase. You can leave this request until later and continue choosing bags; it isn't a condition of finishing their route.",
 			completion = "Your carrying capacity has gained another kilogram. The optional order is finished.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 3, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 2, mode = "any"},
-				{pool = "town_expansion_2399396de269", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 2, mode = "any"},
+				{pool = "town_expansion_243a967d3c85", quantity = 1, mode = "any"},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 4,
@@ -722,9 +722,9 @@ PLUGIN:Register("wake", {
 			briefing = "I'd like to expand the Russian military backpack reserve. Bring the supplies listed here and its allowance increases. It is the regular-sized bag on this request, so keep it separate from the larger versions still ahead.",
 			completion = "Russian military backpack capacity increased. The regular bag's reserve is complete.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2399396de269", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 1, mode = "any"},
+				{pool = "town_expansion_243a967d3c85", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -751,8 +751,8 @@ PLUGIN:Register("wake", {
 			briefing = "The US military backpack comes through this supply order. Bring it back complete, then decide whether you want to buy the bag. Arranging access shouldn't make you feel obliged to choose before you've looked.",
 			completion = "The US military backpack is available to purchase. The decision about buying it remains yours.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 3, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 2, mode = "any"},
 				{pool = "town_expansion_938c8456db0f", quantity = 1, mode = "random"},
 			},
 			branchIndex = 14,
@@ -775,10 +775,10 @@ PLUGIN:Register("wake", {
 			briefing = "This is the second optional inventory-row order. It becomes available after the US backpack and can be finished at any time afterwards. Bring the listed supplies for one more row; later backpack requests don't depend on it.",
 			completion = "Your inventory has gained another row. The optional space arrangement is settled.",
 			requirements = {
-				{pool = "town_expansion_2c2a7090730b", quantity = 4, mode = "any"},
-				{pool = "town_expansion_94565a20fc22", quantity = 3, mode = "any"},
-				{pool = "town_expansion_9111ce4a36e4", quantity = 2, mode = "any"},
-				{pool = "town_expansion_df842199a87e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 4, mode = "any"},
+				{pool = "town_expansion_3501889212d9", quantity = 3, mode = "any"},
+				{pool = "town_expansion_66622a11fcf6", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2ba4a2b2e5b5", quantity = 1, mode = "any"},
 			},
 			capacity = {amount = 1, kind = "rows"},
 			branchIndex = 2,
@@ -802,9 +802,9 @@ PLUGIN:Register("wake", {
 			briefing = "Before the large bags, I'd like the US-backpack reserve addressed. The delivery here increases your stock allowance. It is perfectly reasonable to keep the regular size as an option.",
 			completion = "US-backpack stock capacity increased. Its usual refill still applies.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2399396de269", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 1, mode = "any"},
+				{pool = "town_expansion_243a967d3c85", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -831,8 +831,8 @@ PLUGIN:Register("wake", {
 			briefing = "The large Ukrainian military backpack has a separate purchase request. Bring these recovery supplies here. More space is a useful choice when it suits what you carry; it doesn't oblige you to fill every corner.",
 			completion = "The large Ukrainian backpack is open for purchase. Thank you for completing the order.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 3, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 2, mode = "any"},
 				{pool = "town_expansion_938c8456db0f", quantity = 1, mode = "random"},
 			},
 			branchIndex = 15,
@@ -855,9 +855,9 @@ PLUGIN:Register("wake", {
 			briefing = "This reserve order supports the large Ukrainian backpack. The listed supplies raise its allowance. There are enough similar bags at this point that I would rather repeat the size than let either of us work from a guess.",
 			completion = "Your large Ukrainian-backpack capacity is increased. This reserve order is complete.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 2, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 1, mode = "any"},
-				{pool = "town_expansion_2399396de269", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 1, mode = "any"},
+				{pool = "town_expansion_243a967d3c85", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -884,8 +884,8 @@ PLUGIN:Register("wake", {
 			briefing = "For the large Russian military backpack, this is the delivery. You can put the pack down while reading it. I would rather let someone finish one journey before discussing how much they might carry on the next.",
 			completion = "The large Russian backpack is available to buy. The delivery is safely accounted for.",
 			requirements = {
-				{pool = "town_expansion_fc81a72067fb", quantity = 3, mode = "any"},
-				{pool = "town_expansion_849adebda003", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 3, mode = "any"},
+				{pool = "town_expansion_383d0ddf3e93", quantity = 2, mode = "any"},
 				{pool = "town_expansion_c087c135e110", quantity = 1, mode = "random"},
 			},
 			branchIndex = 16,
@@ -908,10 +908,10 @@ PLUGIN:Register("wake", {
 			briefing = "The last optional carrying increase adds one kilogram after the large Russian backpack. Complete this supply order whenever you want that extra capacity. The remaining backpack is still available through its own route without this step.",
 			completion = "You've earned the last extra kilogram in this line. This capacity request is complete.",
 			requirements = {
-				{pool = "town_expansion_2c2a7090730b", quantity = 4, mode = "any"},
-				{pool = "town_expansion_94565a20fc22", quantity = 3, mode = "any"},
-				{pool = "town_expansion_9111ce4a36e4", quantity = 2, mode = "any"},
-				{pool = "town_expansion_df842199a87e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 4, mode = "any"},
+				{pool = "town_expansion_3501889212d9", quantity = 3, mode = "any"},
+				{pool = "town_expansion_66622a11fcf6", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2ba4a2b2e5b5", quantity = 1, mode = "any"},
 			},
 			capacity = {amount = 1, kind = "weight"},
 			branchIndex = 5,
@@ -935,10 +935,10 @@ PLUGIN:Register("wake", {
 			briefing = "I'd like the large Russian backpack reserve increased before the last purchase order. Bring these supplies and the allowance grows. Current stock still refills normally, even at the end of a long set of arrangements.",
 			completion = "Large Russian-backpack stock capacity increased. The reserve will refill as usual.",
 			requirements = {
-				{pool = "town_expansion_2c2a7090730b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_94565a20fc22", quantity = 2, mode = "any"},
-				{pool = "town_expansion_9111ce4a36e4", quantity = 1, mode = "any"},
-				{pool = "town_expansion_df842199a87e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3501889212d9", quantity = 2, mode = "any"},
+				{pool = "town_expansion_66622a11fcf6", quantity = 1, mode = "any"},
+				{pool = "town_expansion_2ba4a2b2e5b5", quantity = 1, mode = "any"},
 			},
 			stock = {
 				bonus = 1,
@@ -965,9 +965,9 @@ PLUGIN:Register("wake", {
 			briefing = "The large US military backpack is the final bag arrangement. Bring the full request back here. You can return for any optional space or carrying orders later; finishing the bag route needn't mean doing every other piece of business today.",
 			completion = "The large US backpack is open for purchase. That's the bag route finished. Any optional capacity orders can wait for you.",
 			requirements = {
-				{pool = "town_expansion_2c2a7090730b", quantity = 4, mode = "any"},
-				{pool = "town_expansion_94565a20fc22", quantity = 3, mode = "any"},
-				{pool = "town_expansion_9111ce4a36e4", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2527acd3d1b4", quantity = 4, mode = "any"},
+				{pool = "town_expansion_3501889212d9", quantity = 3, mode = "any"},
+				{pool = "town_expansion_66622a11fcf6", quantity = 2, mode = "any"},
 				{pool = "town_expansion_a565b0dea0b8", quantity = 1, mode = "random"},
 			},
 			branchIndex = 17,

@@ -167,7 +167,7 @@ PLUGIN:Register("technut", {
 			briefing = "The mail jacket has a purchase order. I like a garment that makes people lean closer before they decide what to say about it. Bring the listed workshop supplies, and you'll be able to buy one. I won't insist you share my interest in how it's put together.",
 			completion = "The mail jacket is available to purchase. I'll let you examine it without describing every fastening.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c7169f14696b", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 14,
@@ -184,7 +184,7 @@ PLUGIN:Register("technut", {
 			briefing = "Trenchcoats. All four colours go through this purchase arrangement, so don't let me turn your colour preference into four deliveries. Bring the workshop supplies listed here and the group becomes available. You can choose on the day you buy.",
 			completion = "The trenchcoat group is open for purchase: black, brown, green and tan. One delivery did the job.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c7169f14696b", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 14,
@@ -201,7 +201,7 @@ PLUGIN:Register("technut", {
 			briefing = "The Sunrise suit is next. I know that outline catches people's eye; sometimes they keep describing it while I'm trying to ask about the supplies. Here, the workshop order comes first. Complete it and you can buy the suit.",
 			completion = "Sunrise purchase access is ready. Now I can be enthusiastic about the suit without losing the order.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c7169f14696b", quantity = 1, mode = "any"},
 			},
 			branchIndex = 4,
 			branchLength = 14,
@@ -235,8 +235,8 @@ PLUGIN:Register("technut", {
 			briefing = "The Sky-1 comes through this supply order. I like the point where somebody stops asking about every suit and begins comparing two they actually want. Bring what's listed and you'll be able to include this one in that comparison.",
 			completion = "You can purchase the Sky-1 now. I'll give you room to make up your own mind.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_92b292933cfc", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_a7b9149f8af2", quantity = 1, mode = "random"},
 			},
 			branchIndex = 6,
 			branchLength = 14,
@@ -253,8 +253,8 @@ PLUGIN:Register("technut", {
 			briefing = "The Pathfinder needs this delivery. The workshop supplies are all listed below. If you return with an interesting account of a field repair as well, I will probably forget what I was holding, so let me check the order first.",
 			completion = "Pathfinder purchase access is ready. Supplies checked; now I can listen without losing our place.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_0482d320b672", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_dad62e7585ad", quantity = 1, mode = "random"},
 			},
 			branchIndex = 7,
 			branchLength = 14,
@@ -271,8 +271,8 @@ PLUGIN:Register("technut", {
 			briefing = "For the Universal Protection suit, complete this order. The name makes a splendid conversation starter and a poor reason to stop examining what you're buying. I can open purchase access once the supplies are here; the decision about the suit stays with you.",
 			completion = "The Universal Protection suit is available to buy. Full order received, and the bench has room again.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_588269d38f3b", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_6439a6f8a7e9", quantity = 1, mode = "random"},
 			},
 			branchIndex = 8,
 			branchLength = 14,
@@ -289,8 +289,8 @@ PLUGIN:Register("technut", {
 			briefing = "The Sky-2 is next in the suit line. Bring the workshop materials on this request. There's always another technical detail I want to explain, but you've got a supply order to read and I've got a habit to manage.",
 			completion = "Sky-2 purchase access is open. I managed to finish that before introducing another adjustment.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 2, mode = "any"},
-				{pool = "town_expansion_6eccbc654c33", quantity = 1, mode = "random"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 2, mode = "any"},
+				{pool = "town_expansion_13f1649aba56", quantity = 1, mode = "random"},
 			},
 			branchIndex = 9,
 			branchLength = 14,
@@ -307,8 +307,8 @@ PLUGIN:Register("technut", {
 			briefing = "For the NBC suit, I need this workshop delivery. People sometimes arrive already explaining the expedition they have imagined in it. I enjoy the account, but let's get you as far as purchase access before we pack the thing.",
 			completion = "The NBC suit can be purchased now. That's the practical arrangement completed.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_fccf7e5c508d", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 3, mode = "any"},
+				{pool = "town_expansion_4673dd0551bc", quantity = 2, mode = "any"},
 				{pool = "town_expansion_5d7a58b28901", quantity = 1, mode = "random"},
 			},
 			branchIndex = 10,
@@ -326,8 +326,8 @@ PLUGIN:Register("technut", {
 			briefing = "The Berill-5M has a new supply order. Bring the listed materials and I can open its purchase route. I'll clear a space before you return; saying that aloud improves the chance I remember before starting something else.",
 			completion = "Berill-5M purchase access is ready. There's even a clear space left after checking the delivery.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_265c3543f984", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 3, mode = "any"},
+				{pool = "town_expansion_92bc90ddebaf", quantity = 2, mode = "any"},
 				{pool = "town_expansion_21f69e1dd804", quantity = 1, mode = "random"},
 			},
 			branchIndex = 11,
@@ -350,8 +350,8 @@ PLUGIN:Register("technut", {
 			briefing = "For the Sky-3, complete this workshop request. By now you know I can find something to explain in almost any suit. You can still buy one without agreeing to remain here until I've exhausted the subject.",
 			completion = "The Sky-3 is open for purchase. I promise the completed order fits in this sentence.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_265c3543f984", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 3, mode = "any"},
+				{pool = "town_expansion_92bc90ddebaf", quantity = 2, mode = "any"},
 				{pool = "town_expansion_d051739d24e8", quantity = 1, mode = "random"},
 			},
 			branchIndex = 12,
@@ -374,8 +374,8 @@ PLUGIN:Register("technut", {
 			briefing = "The Skat-10 purchase arrangement uses this delivery. There's plenty to look at when you get to the suit; for now, give the workshop list the same attention. I can wait while you work out what you're taking on.",
 			completion = "Skat-10 purchase access is ready. The delivery is complete before the inspection begins.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 3, mode = "any"},
-				{pool = "town_expansion_265c3543f984", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 3, mode = "any"},
+				{pool = "town_expansion_92bc90ddebaf", quantity = 2, mode = "any"},
 				{pool = "town_expansion_d051739d24e8", quantity = 1, mode = "random"},
 			},
 			branchIndex = 13,
@@ -398,9 +398,9 @@ PLUGIN:Register("technut", {
 			briefing = "The Skat-9 is the final suit purchase in this line. Bring the full request back here. You've made quite a few workshop deliveries; I won't interpret this one being finished as permission to add another item while you put the pack down.",
 			completion = "The Skat-9 is available to buy. That's the suit line finished, buddy. Put the pack down properly.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 4, mode = "any"},
-				{pool = "town_expansion_fccf7e5c508d", quantity = 3, mode = "any"},
-				{pool = "town_expansion_88c326a82942", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3d13120ddff7", quantity = 4, mode = "any"},
+				{pool = "town_expansion_4673dd0551bc", quantity = 3, mode = "any"},
+				{pool = "town_expansion_26499ce470b2", quantity = 2, mode = "any"},
 				{pool = "town_expansion_064eb1bf0cb5", quantity = 1, mode = "random"},
 			},
 			branchIndex = 14,
@@ -423,7 +423,7 @@ PLUGIN:Register("technut", {
 			briefing = "Painting, yes. I have several ideas already, which is why we should agree on the supplies first. Finish this workshop delivery and my paid painting service becomes available to you. The service fee still applies when you choose a change; this order opens the door to it.",
 			completion = "Painting access is ready. When you want a change, we can discuss the finish and its fee in the customization window.",
 			requirements = {
-				{pool = "town_expansion_a4cab97a944e", quantity = 1, mode = "any"},
+				{pool = "town_expansion_c7169f14696b", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "painting", name = "Suit painting"},

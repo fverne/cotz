@@ -18,6 +18,7 @@ class ProgressionExpansionTests(unittest.TestCase):
         cls.rates, _, _ = supply.estimate(cls.data)
         cls.families = expansion.eligible_items()
         cls.compiled = rewards.snapshot()
+        cls.batches = expansion.requirement_batch_sizes(cls.data, cls.families)
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
@@ -103,7 +104,9 @@ class ProgressionExpansionTests(unittest.TestCase):
                 for slot in step["requirements"]:
                     ids = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
                     self.assertTrue(ids)
-                    self.assertFalse(used & ids, (step["id"], ids & used))
+                    # Catalogues may overlap; each character's accepted subsets are partitioned at assignment.
+                    if slot["mode"] == "any":
+                        self.assertEqual("value_nuts" in ids, "value_bolts" in ids, step["id"])
                     used |= ids
                     nonlocal_slot = False
                     for item in ids:
@@ -162,6 +165,14 @@ class ProgressionExpansionTests(unittest.TestCase):
         self.assertEqual([s["name"] for s in technut if s["categoryOnly"]],
                          ["Mail Jacket", "Black Trenchcoat", "Sunrise STALKER Suit"])
 
+    def test_batch_sizes_use_spawned_amounts_instead_of_stack_capacity(self):
+        self.assertEqual(self.batches["value_nuts"], 3)
+        self.assertEqual(self.batches["value_bolts"], 4)
+        self.assertEqual(self.batches["value_capacitors"], 2)
+        self.assertEqual(self.batches["value_9vbattery"], 2)
+        self.assertEqual(self.batches["value_kerosene"], 2)
+        self.assertNotIn("value_sparkplug", self.batches)
+
     def test_independent_unlocks_do_not_share_a_twenty_percent_budget(self):
         contact = {"progression": [
             {"id": "a", "branch": "shared", "requires": []},
@@ -184,8 +195,9 @@ class ProgressionExpansionTests(unittest.TestCase):
                 for slot in step["requirements"]:
                     if slot["mode"] != "random" or slot.get("artifactPool"):
                         continue
+                    batches = self.batches
                     scores = [sum(sum(v[1] for v in self.rates[m].get(candidate["item"], {}).values())
-                                  for m in step["acquisitionMaps"])
+                                  for m in step["acquisitionMaps"]) / batches.get(candidate["item"], 1)
                               for candidate in self.data["pools"][slot["pool"]]["candidates"]]
                     self.assertLessEqual(max(scores), min(scores) * 3 + 1e-9, step["id"])
 

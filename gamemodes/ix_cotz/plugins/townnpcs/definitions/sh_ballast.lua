@@ -96,7 +96,7 @@ PLUGIN:Register("ballast", {
 			briefing = "For the first storage arrangements, I need this packing-supply delivery. It opens paid container installation for your Swamps rooms; the initial general crate still comes with a new room. I like to mention both before someone imagines I've packed their entire home for them.",
 			completion = "The first container purchases are open. Your room's starter crate remains its own arrangement.",
 			requirements = {
-				{pool = "town_expansion_ef56d98e1e68", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a436288caee5", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ballastHideout1", name = "Hideout improvements 1"},
@@ -117,7 +117,7 @@ PLUGIN:Register("ballast", {
 			briefing = "The next delivery opens the next storage tier and the first paid allowance for two more loose items in a room. Bring the packing supplies listed here. People discover how much they've brought home when the floor begins answering for them.",
 			completion = "The next storage tier and first floor allowance are available to buy. Nothing needs moving until you choose an improvement.",
 			requirements = {
-				{pool = "town_expansion_ef56d98e1e68", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a436288caee5", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ballastHideout2", name = "Hideout improvements 2"},
@@ -138,7 +138,7 @@ PLUGIN:Register("ballast", {
 			briefing = "This packing order opens another storage tier and the paid furnishing options. I'm not much of a decorator. I can tell when a chair has become a shelf, though usually its owner is sitting on the bed explaining where all the space went.",
 			completion = "Storage and furnishing purchase access are ready. You can decide which objects deserve the chair.",
 			requirements = {
-				{pool = "town_expansion_ef56d98e1e68", quantity = 1, mode = "any"},
+				{pool = "town_expansion_a436288caee5", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ballastHideout3", name = "Hideout improvements 3"},
@@ -180,8 +180,8 @@ PLUGIN:Register("ballast", {
 			briefing = "The next storage improvement needs this supply delivery. Packing is easier when you decide what belongs together before putting the lid down. People tend to begin considering that once the case is already full. Bring the list and we'll open the next purchases.",
 			completion = "Another storage tier is available to buy. The supplies are all here, and none underneath my chair.",
 			requirements = {
-				{pool = "town_expansion_ab70754481f9", quantity = 2, mode = "any"},
-				{pool = "town_expansion_691dc581bc8a", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4efa86832367", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout5", name = "Hideout improvements 5"},
@@ -202,8 +202,8 @@ PLUGIN:Register("ballast", {
 			briefing = "I'd like the packing materials on this order for the next room-storage arrangement. I enjoy a load that makes sense when you open it again. That's a modest ambition until somebody explains their system relies entirely on remembering.",
 			completion = "The next storage purchases are open. These materials can go where I'll find them again.",
 			requirements = {
-				{pool = "town_expansion_ab70754481f9", quantity = 2, mode = "any"},
-				{pool = "town_expansion_adef4be4b1a2", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_8313ff40d2d3", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout6", name = "Hideout improvements 6"},
@@ -224,8 +224,8 @@ PLUGIN:Register("ballast", {
 			briefing = "This delivery opens a further storage tier. Look at the complete request before deciding the pack has room. I've heard 'just one more thing' often enough to know it usually arrives in company.",
 			completion = "Your next storage tier is available for purchase. A complete delivery, without the surprise addition.",
 			requirements = {
-				{pool = "town_expansion_ab70754481f9", quantity = 2, mode = "any"},
-				{pool = "town_expansion_adef4be4b1a2", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_8313ff40d2d3", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout7", name = "Hideout improvements 7"},
@@ -246,8 +246,8 @@ PLUGIN:Register("ballast", {
 			briefing = "For the next storage arrangement, bring these packing supplies here. I don't mind a nervous person taking time to set a load down. It's the confident swing over the table that makes me move my tea.",
 			completion = "The next storage upgrade can be bought now. You can set the rest of your things down without hurrying.",
 			requirements = {
-				{pool = "town_expansion_ab70754481f9", quantity = 2, mode = "any"},
-				{pool = "town_expansion_810ca9732e11", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3389c064b502", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout8", name = "Hideout improvements 8"},
@@ -268,9 +268,9 @@ PLUGIN:Register("ballast", {
 			briefing = "The larger storage arrangements still need ordinary packing supplies. This is the next order. People ask for more room and then tell me it will finally be enough. I don't contradict them while they're enjoying the thought.",
 			completion = "Another storage tier is open to purchase. We'll leave the question of enough room for another day.",
 			requirements = {
-				{pool = "town_expansion_ab70754481f9", quantity = 3, mode = "any"},
-				{pool = "town_expansion_691dc581bc8a", quantity = 2, mode = "any"},
-				{pool = "town_expansion_b4bf24ab68ea", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 3, mode = "any"},
+				{pool = "town_expansion_03a67c43cf19", quantity = 2, mode = "any"},
+				{pool = "town_expansion_742385b91f8d", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout9", name = "Hideout improvements 9"},
@@ -291,9 +291,9 @@ PLUGIN:Register("ballast", {
 			briefing = "Bring the listed supplies for the next storage purchase tier. I like it when a case opens without the person beside it having to hold three things in place. A little preparation can make unloading pleasantly uneventful.",
 			completion = "The next storage purchases are ready. Uneventful delivery, properly accounted for.",
 			requirements = {
-				{pool = "town_expansion_ab70754481f9", quantity = 3, mode = "any"},
-				{pool = "town_expansion_9c040898845b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_01e4dbaff55e", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2847198e6a81", quantity = 2, mode = "any"},
+				{pool = "town_expansion_58819248abd4", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout10", name = "Hideout improvements 10"},
@@ -319,9 +319,9 @@ PLUGIN:Register("ballast", {
 			briefing = "This is the next packing order for your Swamps storage. I'd rather ask for a full list once than keep you walking back with the bit neither of us remembered. Take a look while you've got both hands free.",
 			completion = "Your next storage tier is available to buy. Nothing left on this delivery to bring back.",
 			requirements = {
-				{pool = "town_expansion_ab70754481f9", quantity = 3, mode = "any"},
-				{pool = "town_expansion_9c040898845b", quantity = 2, mode = "any"},
-				{pool = "town_expansion_a66c4903095e", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2847198e6a81", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c706432f6e12", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout11", name = "Hideout improvements 11"},
@@ -347,10 +347,10 @@ PLUGIN:Register("ballast", {
 			briefing = "The last storage arrangement needs this full packing request. There's no need to promise you'll have everything sorted after it. A room can be useful while its owner is still deciding where things go.",
 			completion = "The final Swamps storage tier is open for purchase. That's the supply sequence finished; the arranging can take its time.",
 			requirements = {
-				{pool = "town_expansion_4008e6738732", quantity = 4, mode = "any"},
-				{pool = "town_expansion_785886b6bdc1", quantity = 3, mode = "any"},
-				{pool = "town_expansion_c3736fe6b4e7", quantity = 2, mode = "any"},
-				{pool = "town_expansion_e66eadf0eb93", quantity = 1, mode = "random"},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 4, mode = "any"},
+				{pool = "town_expansion_03a67c43cf19", quantity = 3, mode = "any"},
+				{pool = "town_expansion_6a51d7730e3e", quantity = 2, mode = "any"},
+				{pool = "town_expansion_7ac8639f4591", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout12", name = "Hideout improvements 12"},
