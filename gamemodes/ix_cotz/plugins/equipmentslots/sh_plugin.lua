@@ -124,13 +124,23 @@ function PLUGIN:CheckEquipmentAction(item, client, equipping, dropping, position
 end
 
 function PLUGIN:InstallInventoryCompatibility()
-	if self.inventoryOriginals then return end
 	local originals = {
 		GetSize = ix.meta.inventory.GetSize,
 		CanItemFit = ix.meta.inventory.CanItemFit,
 		FindEmptySlot = ix.meta.inventory.FindEmptySlot,
 		Add = ix.meta.inventory.Add,
 	}
+	local wrappers = self.inventoryWrappers or {}
+	local changed = false
+	-- Helix refreshes methods on the existing inventory class while retaining this plugin's state.
+	for name, callback in pairs(originals) do
+		if callback == wrappers[name] then
+			originals[name] = self.inventoryOriginals[name]
+		else
+			changed = true
+		end
+	end
+	if not changed then return end
 	self.inventoryOriginals = originals
 
 	function ix.meta.inventory:GetSize()
@@ -180,12 +190,21 @@ function PLUGIN:InstallInventoryCompatibility()
 			return originals.Add(self, uniqueID, quantity, data, x, y, noReplication)
 		end
 	end
+
+	for name in pairs(originals) do
+		wrappers[name] = ix.meta.inventory[name]
+	end
+	self.inventoryWrappers = wrappers
 end
 
 function PLUGIN:InitializedPlugins()
 	self:InstallInventoryCompatibility()
 	if SERVER then self:InstallServerCompatibility() end
 	if CLIENT then self:InstallInventoryPanels() end
+end
+
+function PLUGIN:OnReloaded()
+	self:InitializedPlugins()
 end
 
 ix.util.Include("sv_plugin.lua")
