@@ -18,6 +18,7 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/energydrink_4.png")
 
 ITEM.blackScreenAction = function(item, player)
 	player:AddBuff("buff_staminarestore", 120, { amount = 1 })
+	player:AddBuff("buff_sprintboost", 30, { multiplier = 1.15 })
 end
 
 ITEM:DecideFunction()

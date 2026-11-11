@@ -21,6 +21,8 @@ function ix.weight.Update(character) -- Updates the specified character's curren
 			local sprintMult = 1
 			if client:HasBuff("buff_lightningsprint") then
 				sprintMult = sprintMult * client:HasBuff("buff_lightningsprint")[2].multiplier
+			elseif client:HasBuff("buff_sprintboost") then
+				sprintMult = sprintMult * client:HasBuff("buff_sprintboost")[2].multiplier
 			end
 			if character:HeavilyOverweight() then
 				client:SetWalkSpeed(1)
