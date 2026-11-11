@@ -202,9 +202,9 @@ local function fixedMoney(job, count, deliveredValue, rate)
 	if job.requiredItem then
 		local amount = count or average(job.numberRec, 1)
 		local reference = ix.taskRewards.HandInUnitValue(job.requiredItem, nil, job.wholeItems) * amount
-		local base = ix.taskRewards.settings.jobHandInBaseMoney[math.Clamp(job.tier or 1, 1, 3)]
+		local minimum = ix.taskRewards.settings.jobHandInBaseMoney[math.Clamp(job.tier or 1, 1, 3)]
 
-		return base + math.ceil(math.max(reference, deliveredValue or 0) * rate - CASH_ROUNDING_EPSILON)
+		return math.max(minimum, math.ceil(math.max(reference, deliveredValue or 0) * rate - CASH_ROUNDING_EPSILON))
 	end
 	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_SUPPLY_CASH_SHARE
 
@@ -213,7 +213,7 @@ end
 
 function ix.taskRewards.SupplyBudget(job, count)
 	if job.requiredItem then
-		local base = ix.taskRewards.settings.jobHandInBaseMoney[math.Clamp(job.tier or 1, 1, 3)]
+		local base = ix.taskRewards.settings.jobHandInSupplyMoney[math.Clamp(job.tier or 1, 1, 3)]
 
 		return math.max(JOB_MIN_SUPPLY_BUDGET, math.floor(base * JOB_SUPPLY_SHARE))
 	end

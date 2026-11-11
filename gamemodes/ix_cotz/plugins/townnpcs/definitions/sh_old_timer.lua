@@ -166,7 +166,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "v3/knives/knife4/stock",
 			branch = "knives",
-			name = "Stock preparation: Survival Knife",
+			name = "Survival Knife stock increase",
 			kind = "delivery",
 			requires = {"v3/knives/knife3"},
 			briefing = "I'd like a little more reserve for the Survival Knife before we move on. This delivery increases how many I can hold for you. It doesn't refill the shelf today, so don't plan an outing around a knife you haven't bought yet.",
@@ -252,7 +252,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "v3/melee/sledgehammer/stock",
 			branch = "melee",
-			name = "Stock preparation: Hatchet / Machete",
+			name = "Hatchet / Machete stock increase",
 			kind = "delivery",
 			requires = {"v3/melee/hatchet"},
 			briefing = "This order is for a larger hatchet and machete reserve. Keeping the ordinary things available matters too, even when there's something heavier to ask about next. Bring the supplies listed and I'll increase your stock allowance for that pair.",

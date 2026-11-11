@@ -52,9 +52,10 @@ tool uses and never writes to the permanent hidden-stash registry. Bound parcels
 inside the main inventory and cannot leave it. Sensor world objects use
 `models/lostsignalproject/items/quest/scanner_anomaly.mdl`, including custom commission sensors.
 
-Hand-in cash is 500 / 1,000 / 1,500 rubles by tier, plus 50% of the required items' value.
-The chosen supply reward never reduces cash. The added item payment funds neither supplies nor the
-five-task bonus: hand-in supplies use only the tier base (with the existing 600-ruble minimum), and
+Hand-in cash is 50% of the required items' value, with minimum payouts of 500 / 750 / 1,000 rubles
+for easy / medium / hard jobs. The minimum is a floor, not an added fee: one 1,200-ruble cat tail
+pays 600 rubles on easy. The chosen supply reward never reduces cash. Item value funds neither
+supplies nor the five-task bonus: hand-in supply allowances remain 600 / 1,000 / 1,500 rubles, and
 only unused supply allowance contributes to bonuses. Whole-item requests value whole meals/specimens;
 per-use requests retain unit valuation and higher-quality hand-ins retain their increased value.
 Definition-only quotes that return zero without instance data, such as a meal's saved weight, use
@@ -269,14 +270,17 @@ items with cash, and `bonusCash` adds a cash alternative to the bonus choices.
 
 ### Cash and five-task bonuses
 
-Ordinary payment is independent of the selected reward. Hand-in cash adds 500 / 1,000 / 1,500 rubles
-by tier to 50% of the required items' value. Actual hand-in quality is recorded before consumption;
-whole-item requests use whole-item value, and per-use requests use consumed-unit value. Non-item
+Ordinary payment is independent of the selected reward. Hand-in cash pays 50% of the required items'
+value, subject to an easy / medium / hard minimum of 500 / 750 / 1,000 rubles. Actual hand-in quality
+is recorded before consumption; whole-item requests use whole-item value, and per-use requests use
+consumed-unit value. Non-item
 jobs retain their ordinary 55% reference-cash payment. The 200 / 400 / 600 reward for cash-only
 contacts is paid in addition to that payment.
 
-Supply allowance retains its 600-ruble minimum. Item hand-ins use the tier base for that allowance;
-item reimbursement never funds supplies or bonuses. On reward selection, the chosen items' value or
+Supply allowance retains its 600-ruble minimum. Item hand-ins retain allowances of 600 / 1,000 / 1,500
+rubles by tier. In `sh_rewardsettings.lua`, `jobHandInBaseMoney` sets cash minimums and
+`jobHandInSupplyMoney` sets supply funding before the 600-ruble minimum. Item reimbursement never
+funds supplies or bonuses. On reward selection, the chosen items' value or
 chosen cash reward is deducted from the allowance. Only the remainder enters that trader's five-task
 bonus. Each trader keeps a separate completion count and budget, without a time limit.
 

@@ -183,7 +183,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/toz66short/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: MP-27",
+			name = "MP-27 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/mp27"},
 			briefing = "Before the next purchase, let's make more room for the MP-27. This delivery increases your stock allowance. More space for you in the supply arrangement, not a gun appearing out of my sleeve.",
@@ -220,7 +220,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/skorpion/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: TOZ BM-16 Sawnoff",
+			name = "TOZ BM-16 Sawnoff stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/toz66short"},
 			briefing = "The BM-16 reserve needs these materials before the Skorpion arrangement. It raises your allowance for the gun you've unlocked. A reserve can be good business even when it doesn't make a dramatic story.",
@@ -257,7 +257,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/toz34short/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: skorpion",
+			name = "skorpion stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/skorpion"},
 			briefing = "I'd like to expand the Skorpion reserve. Complete the smaller list and the stock allowance rises. If you want to negotiate with an empty shelf today, you're welcome to try; I have never heard it concede a point.",
@@ -294,7 +294,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/kiparis/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: TOZ-34 Sawnoff",
+			name = "TOZ-34 Sawnoff stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/toz34short"},
 			briefing = "The short TOZ-34 reserve comes before the Kiparis. Bring these supplies and I'll increase the capacity. I would rather support a purchase already available than have every conversation end with 'perhaps next time'.",
@@ -348,7 +348,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/ppsh/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: TOZ-66",
+			name = "TOZ-66 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/toz66"},
 			briefing = "Before the PPSh, let's address the TOZ-66 reserve. This delivery increases the allowance for it. Supporting an earlier choice doesn't mean I've lost interest in showing you the next one.",
@@ -387,7 +387,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/toz34/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: PPSh-41",
+			name = "PPSh-41 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/ppsh"},
 			briefing = "This order expands your PPSh capacity before the hunting TOZ-34. I'm agreeing to a larger stock allowance. If I were promising immediate stock, I'd have chosen a much shorter explanation and a much happier expression.",
@@ -426,7 +426,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/pp2000/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: TOZ-34 Hunting Shotgun",
+			name = "TOZ-34 Hunting Shotgun stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/toz34"},
 			briefing = "The hunting TOZ-34 reserve needs this smaller order. Bring the full list and your capacity rises. There's no need to purchase one first just to prove my pitch worked.",
@@ -465,7 +465,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/toz194/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: PP-2000",
+			name = "PP-2000 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/pp2000"},
 			briefing = "Before the TOZ-194, let's increase your PP-2000 reserve. The supplies are listed here. It helps to have room for a returning customer's choice, even when that customer enjoys considering every other gun first.",
@@ -504,7 +504,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/pp1901vityaz/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: TOZ-194",
+			name = "TOZ-194 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/toz194"},
 			briefing = "The TOZ-194 reserve needs these supplies. Completing the list raises your allowance. Think of it as another bit of business already settled when you next come looking, rather than another gun already waiting.",
@@ -543,7 +543,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/saiga410/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: PP-19-01 'Vityaz'",
+			name = "PP-19-01 'Vityaz' stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/pp1901vityaz"},
 			briefing = "This smaller order supports the Vityaz reserve. Bring the list and the stock allowance increases. I call that planning for repeat business; Brass would probably insist I use a less cheerful phrase.",
@@ -584,7 +584,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/gepardpdw/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: Saiga-410",
+			name = "Saiga-410 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/saiga410"},
 			briefing = "I'd like more capacity for the Saiga-410 before the Gepard. These materials cover it. A customer shouldn't have to begin a fresh argument about access every time he returns for a gun he already likes.",
@@ -625,7 +625,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/pp19/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: Gepard PDW",
+			name = "Gepard PDW stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/gepardpdw"},
 			briefing = "The Gepard reserve needs its own delivery. The list raises stock capacity, without making anything arrive immediately. I can make a convincing case for a reserve while still letting you read that last sentence.",
@@ -676,7 +676,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/mp153/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: PP19 'Bizon'",
+			name = "PP19 'Bizon' stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/pp19"},
 			briefing = "This request increases your Bizon reserve. Bring the full smaller order and I'll raise the allowance. There's room in a good transaction for returning to something familiar.",
@@ -727,7 +727,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/sr2/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: Baikal MP-153",
+			name = "Baikal MP-153 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/mp153"},
 			briefing = "Before the Veresk, there is the MP-153 reserve. These supplies increase capacity. It's less lively than a new sales pitch, but I have discovered that customers occasionally want the useful arrangement before the performance.",
@@ -778,7 +778,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/toz34special/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: SR-2 Veresk",
+			name = "SR-2 Veresk stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/sr2"},
 			briefing = "This delivery raises your Veresk stock allowance. Bring what's requested. I won't ask for something extra merely because we are approaching the end of this line and I'm enjoying the business.",
@@ -829,7 +829,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "v3/pact-cqb/saiga12/stock",
 			branch = "pact-cqb",
-			name = "Stock preparation: TOZ-34 Special",
+			name = "TOZ-34 Special stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-cqb/toz34special"},
 			briefing = "One final reserve order before the Saiga-12. This increases capacity for the special TOZ-34. You can support an earlier purchase without feeling you've interrupted my grand finale.",

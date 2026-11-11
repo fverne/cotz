@@ -236,7 +236,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_cigarette_1",
 			branch = "weak-drugs",
-			name = "'Glory' Cigarettes (10pk)",
+			name = "'Glory' Cigarettes (10pk) stock increase",
 			kind = "delivery",
 			requires = {},
 			briefing = "Glory cigarettes are the first arrangement. Bring the kitchen stores and fuel supplies on this list and you can buy them here. I don't see why people can remember the precise packet they want and forget that a kitchen needs supplies before it can smell inviting. This is a chance to demonstrate both talents.",
@@ -269,7 +269,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_mints/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: 'Petr 1.' Cigarettes (10pk)",
+			name = "'Petr 1.' Cigarettes (10pk) stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_cigarette_2"},
 			briefing = "I'd like a larger Petr reserve before the mints. These supplies increase your stock allowance. No, that doesn't mean I keep another packet hidden for anyone who smiles nicely; I would be out before breakfast.",
@@ -306,7 +306,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_cigarette_3/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: Altoid Mints",
+			name = "Altoid Mints stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_mints"},
 			briefing = "The mint reserve needs this smaller order. Bring the supplies and capacity increases. People notice an empty little tin on the shelf rather more reliably than they notice a kitchen order needing attention.",
@@ -360,7 +360,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_cigarette_5/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: Codeine Tablets",
+			name = "Codeine Tablets stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_painkillers"},
 			briefing = "Before Lucky Strike, there's the codeine reserve. Complete the listed kitchen delivery for a larger allowance. I'm not promising a fresh packet immediately; I reserve my miracles for what people say I should make out of an empty cupboard.",
@@ -402,7 +402,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_caffeine/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: Lucky Strike Cigarettes (10pk)",
+			name = "Lucky Strike Cigarettes (10pk) stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_cigarette_5"},
 			briefing = "This request expands the Lucky Strike reserve before caffeine. Bring the whole list. A larger allowance is what we're agreeing on, rather than my producing a packet just because the transaction feels finished.",
@@ -441,7 +441,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_cigarette_4/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: Caffeine Tablets",
+			name = "Caffeine Tablets stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_caffeine"},
 			briefing = "The caffeine reserve needs this smaller delivery before Spark. It increases the amount I can hold for you. That's stock capacity, not another favour someone can tell the camp I've started providing.",
@@ -480,7 +480,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_cigar/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: 'Spark' Cigarettes (20pk)",
+			name = "'Spark' Cigarettes (20pk) stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_cigarette_4"},
 			briefing = "I'd like a larger Spark reserve before the cigar. Bring these supplies and the allowance increases. Supporting a familiar preference can be useful even when somebody has begun planning a much grander smoke.",
@@ -521,7 +521,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_cigarette_6/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: Cuban Cigar",
+			name = "Cuban Cigar stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_cigar"},
 			briefing = "This order increases the cigar reserve before Marlboro. I am arranging capacity, not handing you a cigar for a completed delivery. Leave the occasion until you know what is actually in stock.",
@@ -572,7 +572,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_tobacco_1/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: Marlboro Cigarettes (20pk)",
+			name = "Marlboro Cigarettes (20pk) stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_cigarette_6"},
 			briefing = "The Marlboro reserve needs these materials before the loose tobacco. This increases stock capacity. I appreciate someone supporting the stock they ask for instead of treating its presence as a personal obligation of mine.",
@@ -623,7 +623,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-drugs/drug_tobacco_2/stock",
 			branch = "weak-drugs",
-			name = "Stock preparation: Golden Virginia Tobacco",
+			name = "Golden Virginia Tobacco stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-drugs/drug_tobacco_1"},
 			briefing = "Before the final tobacco, I'd like the Golden Virginia reserve increased. Complete the smaller order here for more capacity. It won't refill the shelf immediately, whatever you have decided to put in your pocket for the walk home.",
@@ -708,7 +708,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_canbeer_1/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Lvivske 1715, 500ml",
+			name = "Lvivske 1715, 500ml stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_canbeer_3"},
 			briefing = "This order increases the Lvivske 1715 reserve before OBOLON. The smaller kitchen delivery raises your capacity. A larger allowance is useful without my promising a can immediately.",
@@ -748,7 +748,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_4/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: OBOLON Strong, 500ml",
+			name = "OBOLON Strong, 500ml stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_canbeer_1"},
 			briefing = "The OBOLON reserve needs these supplies before Tuborg. This raises the stock allowance. You can keep an earlier choice available without insulting the next beer to demonstrate your loyalty.",
@@ -805,7 +805,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_canbeer_6/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Utenos Porteris, 500ml",
+			name = "Utenos Porteris, 500ml stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_canbeer_4"},
 			briefing = "I'd like more Utenos reserve before Heineken. These materials increase the allowance. I am not offering a can as a thank-you for bringing them; that is how people remember a remarkably different deal.",
@@ -847,7 +847,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_3/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Heineken, 500ml",
+			name = "Heineken, 500ml stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_canbeer_6"},
 			briefing = "The Heineken reserve needs a smaller delivery before Baltika. Bring what's listed and capacity rises. If someone has told you I produce a refill on request, ask whether they actually saw me do it.",
@@ -889,7 +889,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_6/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Baltika no.3, 850ml",
+			name = "Baltika no.3, 850ml stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_bottlebeer_3"},
 			briefing = "This raises the Baltika no.3 reserve before the porter. The supplies are listed here. I'm not asking for the whole shelf to become your favourite; a larger allowance for one choice is enough business.",
@@ -931,7 +931,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_canbeer_5/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Lvivske Porter, 1l",
+			name = "Lvivske Porter, 1l stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_bottlebeer_6"},
 			briefing = "The porter reserve needs this smaller delivery before Baltika no.7. It increases stock capacity. Check the shelf when you want the bottle; a good arrangement still has to contend with what is actually there.",
@@ -975,7 +975,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_2/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Baltika no 7, 900ml",
+			name = "Baltika no 7, 900ml stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_canbeer_5"},
 			briefing = "Before the large Lvivske, complete this Baltika no.7 reserve request. The result is a larger allowance, with normal refill. I would like that clear before someone rearranges supper around a bottle that isn't here yet.",
@@ -1029,7 +1029,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_5/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Lvivske Svitle, 1.5l",
+			name = "Lvivske Svitle, 1.5l stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_bottlebeer_2"},
 			briefing = "This delivery increases the Lvivske Svitle reserve before Zaporizske. Bring the complete smaller request. I have not put 'something Lemon probably needs' on the list, despite how often people appear to read it there.",
@@ -1083,7 +1083,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/weak-alcohol/drink_bottlebeer_1/stock",
 			branch = "weak-alcohol",
-			name = "Stock preparation: Zaporizske, 2.5l",
+			name = "Zaporizske, 2.5l stock increase",
 			kind = "delivery",
 			requires = {"v3/weak-alcohol/drink_bottlebeer_5"},
 			briefing = "One more beer reserve before the last purchase. This supports Zaporizske capacity. The full smaller order is here; it doesn't summon a bottle immediately, however eager you are to finish the arrangement.",
@@ -1139,7 +1139,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/energy-drinks/drink_energydrink_4",
 			branch = "energy-drinks",
-			name = "EuroShopper Energy Drink, 250ml",
+			name = "EuroShopper Energy Drink, 250ml stock increase",
 			kind = "delivery",
 			requires = {},
 			briefing = "EuroShopper is already in the starting selection. This delivery increases your personal stock allowance for it. Bring the kitchen supplies listed here. I can support something people already buy without being told I ought to devote the kitchen to their next sleepless plan.",
@@ -1189,7 +1189,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/energy-drinks/drink_energydrink_5/stock",
 			branch = "energy-drinks",
-			name = "Stock preparation: Red Bull, 250ml",
+			name = "Red Bull, 250ml stock increase",
 			kind = "delivery",
 			requires = {"v3/energy-drinks/drink_energydrink_1"},
 			briefing = "Before Monster Classic, there's the Red Bull reserve. These supplies raise its stock allowance. I won't refill it by putting aside somebody else's can because your departure is apparently more urgent.",
@@ -1231,7 +1231,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/energy-drinks/drink_energydrink_6/stock",
 			branch = "energy-drinks",
-			name = "Stock preparation: Monster Energy Classic, 500ml",
+			name = "Monster Energy Classic, 500ml stock increase",
 			kind = "delivery",
 			requires = {"v3/energy-drinks/drink_energydrink_5"},
 			briefing = "This delivery expands the Classic reserve before Ultra White. It increases capacity for the version already available. Read the heading rather than deciding two similar cans must have the same order.",
@@ -1285,7 +1285,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "v3/energy-drinks/drink_energydrink_3/stock",
 			branch = "energy-drinks",
-			name = "Stock preparation: Monster Energy Ultra White, 500ml",
+			name = "Monster Energy Ultra White, 500ml stock increase",
 			kind = "delivery",
 			requires = {"v3/energy-drinks/drink_energydrink_6"},
 			briefing = "One final drink reserve before Redline. The materials here increase Ultra White capacity. I enjoy reaching the end of a request without hearing that somebody has already promised the result to half the camp.",

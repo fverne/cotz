@@ -74,7 +74,8 @@ ix.taskRewards.settings = {
 	creditPremium = 1.3,
 	jobSupplyCashShare = 0.5,
 	jobCashRate = 0.50,
-	jobHandInBaseMoney = {500, 1000, 1500},
+	jobHandInBaseMoney = {500, 750, 1000},
+	jobHandInSupplyMoney = {500, 1000, 1500},
 	-- Preserve supply budgets and non-delivery cash independently of turn-in payouts.
 	jobReferenceCashRate = 0.55,
 	cashRoundingEpsilon = 0.000000001,

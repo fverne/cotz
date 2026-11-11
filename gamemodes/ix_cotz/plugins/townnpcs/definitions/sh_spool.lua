@@ -146,7 +146,7 @@ PLUGIN:Register("spool", {
 		{
 			id = "v3/steel-headwear/helm_steel_rus/stock",
 			branch = "steel-headwear",
-			name = "Stock preparation: German Steel Helmet",
+			name = "German Steel Helmet stock increase",
 			kind = "delivery",
 			requires = {"v3/steel-headwear/helm_steel_ger"},
 			briefing = "A larger reserve for the German helmet would be useful. This supply order increases your allowance; it doesn't refill it immediately. If I could persuade stock to arrive by repeating myself, I'd have a much tidier room.",
@@ -200,7 +200,7 @@ PLUGIN:Register("spool", {
 		{
 			id = "v3/steel-headwear/headwear_riot/stock",
 			branch = "steel-headwear",
-			name = "Stock preparation: Russian Steel Helmet",
+			name = "Russian Steel Helmet stock increase",
 			kind = "delivery",
 			requires = {"v3/steel-headwear/helm_steel_rus"},
 			briefing = "Before the riot helmet, let's increase your Russian-helmet allowance. These supplies are for that reserve. I know, another parts list. At least this one doesn't interrupt you halfway through telling me what you've brought.",
@@ -305,7 +305,7 @@ PLUGIN:Register("spool", {
 		{
 			id = "v3/strong-drugs/miscaid_swampbrew/stock",
 			branch = "strong-drugs",
-			name = "Stock preparation: Marijuana Joint",
+			name = "Marijuana Joint stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-drugs/drug_marijuana"},
 			briefing = "I'd like a larger allowance for the joints before the next arrangement. This order increases stock capacity. It won't conjure anything onto the shelf, so have a look before deciding what's available today.",
@@ -347,7 +347,7 @@ PLUGIN:Register("spool", {
 		{
 			id = "v3/strong-drugs/drug_glucose/stock",
 			branch = "strong-drugs",
-			name = "Stock preparation: Swamp Doctor's Brew",
+			name = "Swamp Doctor's Brew stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-drugs/miscaid_swampbrew"},
 			briefing = "This is the reserve order for the brew. A larger stock allowance is all I'm promising here. I say 'all' because somebody will otherwise remember a much more entertaining offer than the one we discussed.",
@@ -401,7 +401,7 @@ PLUGIN:Register("spool", {
 		{
 			id = "v3/strong-drugs/drug_cocaine/stock",
 			branch = "strong-drugs",
-			name = "Stock preparation: Glucose Syringe",
+			name = "Glucose Syringe stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-drugs/drug_glucose"},
 			briefing = "Before the final purchase arrangement, I'd like this order for the glucose reserve. Bring the whole list and I'll increase your capacity. You don't have to finish the conversation in a hurry; I'm trying to remember that applies to me too.",

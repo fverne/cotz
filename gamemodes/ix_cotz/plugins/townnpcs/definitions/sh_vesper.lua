@@ -181,7 +181,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/aks74u/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: Saiga Semi-Automatic Rifle",
+			name = "Saiga Semi-Automatic Rifle stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/saigasemi"},
 			briefing = "I'd like the reserve for that Saiga increased before the AKs-74u. Bring this smaller order and the stock capacity rises. An allowance isn't an immediate gun, however neatly it fits the trip you were imagining.",
@@ -218,7 +218,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/sks/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: AKs-74u",
+			name = "AKs-74u stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/aks74u"},
 			briefing = "This request increases the AKs-74u reserve. Bring the listed materials; I like keeping the equipment someone already chose available while we discuss the next thing. The refill itself stays normal.",
@@ -255,7 +255,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/ak74/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: SKS",
+			name = "SKS stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/sks"},
 			briefing = "Before the AK74, there's an SKS reserve order. These supplies raise stock capacity for it. I know the next rifle is more interesting to discuss, but the ordinary reserve still deserves getting home.",
@@ -292,7 +292,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/an94k/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: AK74",
+			name = "AK74 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/ak74"},
 			briefing = "I'd like more capacity for the AK74 before the AN-94. This smaller order does that. It doesn't refill anything immediately, so check the sale stock before choosing the moment for your next purchase.",
@@ -346,7 +346,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/aek971/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: akm",
+			name = "akm stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/akm"},
 			briefing = "This order increases the AKM reserve before the AEK. Bring the whole smaller list. I appreciate a return with the agreed supplies, even when it lacks the exciting detour somebody wanted to tell me about.",
@@ -385,7 +385,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/ak12/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: AEK-971",
+			name = "AEK-971 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/aek971"},
 			briefing = "The AEK reserve needs these materials. Completing the order raises its capacity. I can enjoy discussing the next rifle without deciding the one already available has become uninteresting.",
@@ -424,7 +424,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/rk95/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: AK-12",
+			name = "AK-12 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/ak12"},
 			briefing = "Before the RK 95, I'd like the AK-12 reserve sorted. These supplies raise your stock capacity. It is a smaller arrangement that can still be worth doing properly.",
@@ -463,7 +463,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/svt40/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: SAKO RK 95",
+			name = "SAKO RK 95 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/rk95"},
 			briefing = "This order supports the RK 95 reserve before the SVT. It increases capacity for the rifle you've unlocked. I like leaving a familiar choice on the list rather than making every new arrangement replace it.",
@@ -502,7 +502,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/vss/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: SVT 40",
+			name = "SVT 40 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/svt40"},
 			briefing = "I'd like a larger SVT reserve before the VSS. The supplies below increase its allowance. It won't put a rifle into current stock just because we've reached a satisfying point in the conversation.",
@@ -543,7 +543,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/rpk/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: VSS Vintorez",
+			name = "VSS Vintorez stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/vss"},
 			briefing = "This delivery raises the VSS reserve. Bring what's listed, then the stock capacity increases. I don't want you mistaking a reserve arrangement for a gun waiting at the end of today's walk.",
@@ -594,7 +594,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/9a91/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: RPK",
+			name = "RPK stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/rpk"},
 			briefing = "The RPK reserve needs these materials before the next rifle. It increases your stock allowance. A practical order isn't less useful because I've found a more entertaining piece of equipment to discuss.",
@@ -645,7 +645,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/asval/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: 9A-91",
+			name = "9A-91 stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/9a91"},
 			briefing = "Before the AS Val, there's a reserve order for the 9A-91. Complete the listed supplies and the capacity rises. I appreciate bringing an existing arrangement to a proper stop before starting another.",
@@ -696,7 +696,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/svd/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: AS Val",
+			name = "AS Val stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/asval"},
 			briefing = "This order expands your AS Val reserve. Bring the supplies here rather than carrying them into another planned journey. I won't need a dramatic account of how they arrived to appreciate the result.",
@@ -747,7 +747,7 @@ PLUGIN:Register("vesper", {
 		{
 			id = "v3/pact-rifles/dp28/stock",
 			branch = "pact-rifles",
-			name = "Stock preparation: Dragunov SVD",
+			name = "Dragunov SVD stock increase",
 			kind = "delivery",
 			requires = {"v3/pact-rifles/svd"},
 			briefing = "One more reserve order before the last gun. This increases SVD capacity, with normal refill. Bring the full list and we can leave the earlier rifle properly supported while discussing the DP-28.",

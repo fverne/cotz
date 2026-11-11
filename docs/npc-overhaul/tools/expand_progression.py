@@ -141,7 +141,8 @@ def expand_contacts(contacts):
                     bonus = min(4, 1 + max(ranks[item] for item in targets))
                     intermission = {
                         "id": step["id"] + "/stock", "branch": step["branch"],
-                        "name": "Stock preparation: " + previous["name"], "kind": "delivery",
+                        "name": previous["name"].removesuffix(" stock increase") + " stock increase",
+                        "kind": "delivery",
                         "requires": [previous["id"]], "briefing": step["briefing"],
                         "completion": step["completion"],
                         "requirements": [{"pool": slot["pool"], "quantity": math.ceil(slot["quantity"] / 2)}

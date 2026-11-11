@@ -189,7 +189,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_sanitar/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Worn Sportsbag",
+			name = "Worn Sportsbag stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_duffle"},
 			briefing = "I'd like a larger sportsbag reserve. These supplies increase the stock allowance for the bag you've unlocked. It won't refill immediately, so check what is actually available before counting on another one.",
@@ -226,7 +226,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_tbag/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Old Paramedic Bag",
+			name = "Old Paramedic Bag stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_sanitar"},
 			briefing = "This request increases the paramedic-bag allowance. I need the supplies listed, rather than another bag to add to the pile. The stock will refill in the normal way once the capacity is raised.",
@@ -281,7 +281,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_tourist/stock",
 			branch = "backpacks",
-			name = "Stock preparation: School Backpack",
+			name = "School Backpack stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_tbag"},
 			briefing = "The school-backpack reserve could use these supplies. Completing this delivery increases your allowance rather than handing you a bag. I want that clear before you leave room for something that still has to arrive.",
@@ -318,7 +318,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_takedown_1/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Large School Backpack",
+			name = "Large School Backpack stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_tourist"},
 			briefing = "I'd like more room in the large-school-backpack reserve before the sling line continues. This order raises its stock capacity. You can keep an earlier bag as an option even while deciding on another.",
@@ -393,7 +393,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_mbss/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Large Sling Backpack (Black)",
+			name = "Large Sling Backpack (Black) stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_takedown_2"},
 			briefing = "This reserve order concerns the black sling backpack. The listed supplies increase its allowance. A larger reserve doesn't require you to buy every bag it could hold; it gives you the option as stock refills.",
@@ -432,7 +432,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_vkbo/stock",
 			branch = "backpacks",
-			name = "Stock preparation: MBSS Backpack",
+			name = "MBSS Backpack stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_mbss"},
 			briefing = "Before the army backpack, I'd like the MBSS reserve increased. This smaller request raises your stock capacity for it. Actual stock remains separate from what I've agreed to hold for you.",
@@ -490,7 +490,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_pilgrim/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Army Backpack",
+			name = "Army Backpack stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_vkbo"},
 			briefing = "This request raises the army-backpack reserve. Bring the supplies listed here and the allowance grows. I prefer asking for exactly what I need rather than accepting a bagful because someone felt they should bring more.",
@@ -529,7 +529,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_scavbackpack/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Pilgrim Backpack",
+			name = "Pilgrim Backpack stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_pilgrim"},
 			briefing = "I'd like to increase your Pilgrim reserve before the upgraded MBSS. This delivery covers the stock allowance. It won't put a bag into your inventory, or refill the sale stock straight away.",
@@ -571,7 +571,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_1/stock",
 			branch = "backpacks",
-			name = "Stock preparation: MBSS Backpack (Upgraded)",
+			name = "MBSS Backpack (Upgraded) stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_scavbackpack"},
 			briefing = "This is the upgraded-MBSS reserve order. Complete the list and I'll increase your allowance. An earlier choice can remain available without every later bag turning it into something you ought to discard.",
@@ -612,7 +612,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_3/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Modern Military Backpack (Ukrainian)",
+			name = "Modern Military Backpack (Ukrainian) stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_1"},
 			briefing = "The Ukrainian-backpack reserve needs these supplies before the next bag. This request raises capacity for the bag already unlocked. Take your time reading the heading; there are several similar names on this part of the list.",
@@ -688,7 +688,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_2/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Modern Military Backpack (Russian)",
+			name = "Modern Military Backpack (Russian) stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_3"},
 			briefing = "I'd like to expand the Russian military backpack reserve. Bring the supplies listed here and its allowance increases. It is the regular-sized bag on this request, so keep it separate from the larger versions still ahead.",
@@ -765,7 +765,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_1_large/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Modern Military Backpack (USA)",
+			name = "Modern Military Backpack (USA) stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_2"},
 			briefing = "Before the large bags, I'd like the US-backpack reserve addressed. The delivery here increases your stock allowance. It is perfectly reasonable to keep the regular size as an option.",
@@ -816,7 +816,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_3_large/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Large Modern Military Backpack (Ukrainian)",
+			name = "Large Modern Military Backpack (Ukrainian) stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_1_large"},
 			briefing = "This reserve order supports the large Ukrainian backpack. The listed supplies raise its allowance. There are enough similar bags at this point that I would rather repeat the size than let either of us work from a guess.",
@@ -893,7 +893,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "v3/backpacks/backpack_2_large/stock",
 			branch = "backpacks",
-			name = "Stock preparation: Large Modern Military Backpack (Russian)",
+			name = "Large Modern Military Backpack (Russian) stock increase",
 			kind = "delivery",
 			requires = {"v3/backpacks/backpack_3_large"},
 			briefing = "I'd like the large Russian backpack reserve increased before the last purchase order. Bring these supplies and the allowance grows. Current stock still refills normally, even at the end of a long set of arrangements.",

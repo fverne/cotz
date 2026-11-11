@@ -120,7 +120,7 @@ PLUGIN:Register("intern", {
 		{
 			id = "v3/artifact-detectors/detectorbear/stock",
 			branch = "artifact-detectors",
-			name = "Stock preparation: Artifact Detector (Echo)",
+			name = "Artifact Detector (Echo) stock increase",
 			kind = "delivery",
 			requires = {"v3/artifact-detectors/detectorecho"},
 			briefing = "Before the next detector, I'd like to increase your Echo stock allowance. Keeping instruments available is part of preparation too, even if it's less interesting to discuss. This is the order for that reserve; it won't produce another detector immediately.",
@@ -170,7 +170,7 @@ PLUGIN:Register("intern", {
 		{
 			id = "v3/artifact-detectors/detectorveles/stock",
 			branch = "artifact-detectors",
-			name = "Stock preparation: Artifact Detector (Bear)",
+			name = "Artifact Detector (Bear) stock increase",
 			kind = "delivery",
 			requires = {"v3/artifact-detectors/detectorbear"},
 			briefing = "I'd like to get the Bear reserve settled before the final detector request. These supplies increase the amount I can hold for you. It is still a stock allowance, so please check what's actually on sale before packing around a spare.",

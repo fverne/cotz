@@ -258,7 +258,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/lugerp08/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Makarov",
+			name = "Makarov stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/makarov"},
 			briefing = "The Makarov reserve needs a smaller delivery before the next pistol. This raises your stock allowance. It doesn't refill the shelf, and I won't find a fresh gun by looking crossly at the space.",
@@ -295,7 +295,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/cz52/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Luger P08",
+			name = "Luger P08 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/lugerp08"},
 			briefing = "Before the CZ52, I'd like a larger Luger reserve. Complete the order below for more capacity. An empty allocation is still empty until stock comes in, no matter how grandly I describe it.",
@@ -332,7 +332,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/c96/stock",
 			branch = "sidearms",
-			name = "Stock preparation: cz52",
+			name = "cz52 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/cz52"},
 			briefing = "This order expands the CZ52 reserve before the Mauser. It is stock capacity, with normal refill. I keep saying that because people sometimes hear 'more' and stop listening to the noun.",
@@ -369,7 +369,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/lax410s/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Mauser C96",
+			name = "Mauser C96 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/c96"},
 			briefing = "I'd like to increase the C96 reserve before the short Henry. These supplies cover the capacity. There are enough requests arriving with 'while you're there' attached; this one ends where the list does.",
@@ -406,7 +406,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/fort12/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Henry Lever Action X Model .410 Short",
+			name = "Henry Lever Action X Model .410 Short stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/lax410s"},
 			briefing = "The short-Henry reserve needs this order before the Fort. Capacity increases when you finish it. Keep a little room for your own things; I'm asking for supplies, not the contents of your entire pack.",
@@ -443,7 +443,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/brhp/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Fort-12",
+			name = "Fort-12 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/fort12"},
 			briefing = "This delivery increases your Fort-12 allowance. It won't put a gun straight into stock. I know the reserve is less interesting to discuss; sometimes less interesting is precisely what I want from an afternoon.",
@@ -480,7 +480,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/beretta92/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Browning Hi-Power",
+			name = "Browning Hi-Power stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/brhp"},
 			briefing = "Before the Beretta, let's enlarge the Hi-Power reserve. Bring this smaller order and the allowance increases. I'm not asking you to buy another pistol to prove the first arrangement was worthwhile.",
@@ -534,7 +534,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/glock17/stock",
 			branch = "sidearms",
-			name = "Stock preparation: P99",
+			name = "P99 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/p99"},
 			briefing = "The P99 reserve needs these supplies before the Glock. Completing it raises stock capacity. It doesn't mean I've personally gone and filled every space while you were walking back.",
@@ -573,7 +573,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/m1911/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Glock 17",
+			name = "Glock 17 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/glock17"},
 			briefing = "This request raises the Glock 17 reserve. The smaller delivery is written down. I want to finish the allowance before opening another pistol arrangement and discovering half the earlier work is still under a cup.",
@@ -612,7 +612,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/stechaps/stock",
 			branch = "sidearms",
-			name = "Stock preparation: M1911",
+			name = "M1911 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/m1911"},
 			briefing = "Before the Stechkin, the M1911 reserve needs these materials. It increases your stock allowance, with the usual refill afterwards. There is no missing instruction for you to discover on your return.",
@@ -651,7 +651,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/glock18/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Stechkin APS",
+			name = "Stechkin APS stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/stechaps"},
 			briefing = "The Stechkin reserve comes before the Glock 18. Complete these supplies for increased capacity. You can leave the pistol comparisons until I've got the order put away.",
@@ -690,7 +690,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/g2contender500/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Glock 18",
+			name = "Glock 18 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/glock18"},
 			briefing = "I'd like the Glock 18 reserve increased before the Contender. Bring the listed supplies. A larger stock capacity isn't an instant refill, however quickly somebody expects me to get everything else done.",
@@ -729,7 +729,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/mr96/stock",
 			branch = "sidearms",
-			name = "Stock preparation: g2contender500",
+			name = "g2contender500 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/g2contender500"},
 			briefing = "This order expands the Contender reserve. The supplies raise your stock allowance. I would rather have that said plainly than listen later to an account of the pistol you assumed was waiting.",
@@ -768,7 +768,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/swr8/stock",
 			branch = "sidearms",
-			name = "Stock preparation: MR96",
+			name = "MR96 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/mr96"},
 			briefing = "The MR96 reserve needs these materials before the R8. It raises capacity. I can support a pistol somebody already wants without pretending it has become a less interesting object because another one is next.",
@@ -807,7 +807,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/taurusjudge/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Smith&Wesson M&P R8",
+			name = "Smith&Wesson M&P R8 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/swr8"},
 			briefing = "This delivery increases the R8 allowance before the Judge. Complete the smaller list. I have left out the entertaining digression about how the camp got short of ordinary things again.",
@@ -848,7 +848,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/swmodel29/stock",
 			branch = "sidearms",
-			name = "Stock preparation: taurusjudge",
+			name = "taurusjudge stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/taurusjudge"},
 			briefing = "I'd like more Judge reserve before the Model 29. These supplies increase capacity. The stock will still refill normally; this isn't one of the camp's urgent little jobs assigned to me without asking.",
@@ -889,7 +889,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/taurusragingbull/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Smith&Wesson Model 29",
+			name = "Smith&Wesson Model 29 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/swmodel29"},
 			briefing = "The Model 29 reserve needs a smaller delivery. Bring these supplies and the allowance rises. I'd enjoy putting the finished request away before anyone asks where it has gone.",
@@ -940,7 +940,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/mateba/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Taurus Raging Bull",
+			name = "Taurus Raging Bull stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/taurusragingbull"},
 			briefing = "Before the Mateba, expand the Raging Bull reserve with this list. It increases capacity for the gun already unlocked. I can appreciate a larger allowance without inventing a reason the stock should arrive faster.",
@@ -991,7 +991,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/deagle44/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Mateba Autorevolver",
+			name = "Mateba Autorevolver stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/mateba"},
 			briefing = "This request supports the Mateba reserve. Bring what's listed and I'll increase your stock allowance. It is a separate arrangement from the Desert Eagle coming next, so don't let the names get lost in the conversation.",
@@ -1042,7 +1042,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/m1911chic/stock",
 			branch = "sidearms",
-			name = "Stock preparation: IMI Desert Eagle .44",
+			name = "IMI Desert Eagle .44 stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/deagle44"},
 			briefing = "I'd like a larger reserve for the .44 Desert Eagle before the Colt. These materials raise capacity. We can enlarge an allowance without pretending another gun is already sitting in it.",
@@ -1093,7 +1093,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/fiveseven/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Colt Chicago",
+			name = "Colt Chicago stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/m1911chic"},
 			briefing = "The Colt Chicago reserve needs these materials before the Five-seveN. It increases stock capacity. Another practical arrangement I would rather finish than keep remembering between interruptions.",
@@ -1144,7 +1144,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/deagle/stock",
 			branch = "sidearms",
-			name = "Stock preparation: Five-seveN",
+			name = "Five-seveN stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/fiveseven"},
 			briefing = "This order expands your Five-seveN reserve. Complete the list for a larger allowance. Check the actual shelf when you next buy; stock capacity isn't a prediction of what will be there that morning.",
@@ -1195,7 +1195,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/sidearms/sw500/stock",
 			branch = "sidearms",
-			name = "Stock preparation: IMI Desert Eagle",
+			name = "IMI Desert Eagle stock increase",
 			kind = "delivery",
 			requires = {"v3/sidearms/deagle"},
 			briefing = "One last pistol reserve before the .500 Smith & Wesson. Bring these materials for more Desert Eagle capacity. I won't make the final small order bigger because we're nearly finished.",
@@ -1280,7 +1280,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_vodka_1/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Zone-Produced Vodka",
+			name = "Zone-Produced Vodka stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_vodka_2"},
 			briefing = "The local-vodka reserve needs these supplies before the next bottle. This increases your stock allowance. I will not be refilling it by pouring anything into whatever containers you happen to bring.",
@@ -1320,7 +1320,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_vodka_3/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Cossacks Vodka, 700ml",
+			name = "Cossacks Vodka, 700ml stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_vodka_1"},
 			briefing = "This request increases the Cossacks reserve. Bring the listed materials. There are quieter ways to support a bottle allowance than arriving with an argument about how much the camp ought to have.",
@@ -1377,7 +1377,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_vodka_6/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Wine, 750ml",
+			name = "Wine, 750ml stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_wine"},
 			briefing = "I'd like to expand the wine reserve before the honey-and-pepper vodka. This delivery raises the allowance. Don't confuse a larger capacity with a bottle already waiting to accompany supper.",
@@ -1416,7 +1416,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_vodka_4/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Nemiroff Honey&Pepper Vodka, 750ml",
+			name = "Nemiroff Honey&Pepper Vodka, 750ml stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_vodka_6"},
 			briefing = "The Nemiroff reserve requires this smaller order. It increases stock capacity before the Khortytsa arrangement. I will leave the bottle comparisons to people who haven't been interrupted three times trying to finish a cup.",
@@ -1458,7 +1458,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_spirit_1/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Khortytsa Vodka, 700ml",
+			name = "Khortytsa Vodka, 700ml stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_vodka_4"},
 			briefing = "Before the cream liqueur, there's the Khortytsa reserve. The listed materials raise your allowance. I need the current order, not whatever someone said I was probably running short of.",
@@ -1502,7 +1502,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_vodka_5/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Baileys Irish Cream, 1l",
+			name = "Baileys Irish Cream, 1l stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_spirit_1"},
 			briefing = "This request expands the Baileys reserve. It is a stock allowance, with ordinary refill. I am saying that before anyone starts imagining I have a special delivery hidden behind the electrical parts.",
@@ -1556,7 +1556,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_spirit_2/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Shevkoff Black Ultra Premium Vodka, 500ml",
+			name = "Shevkoff Black Ultra Premium Vodka, 500ml stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_vodka_5"},
 			briefing = "Before the rum, increase the Shevkoff reserve with this list. It raises stock capacity. I won't ask you to remember a different spelling when all you need from me is a clear request.",
@@ -1610,7 +1610,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "v3/strong-alcohol/drink_spirit_3/stock",
 			branch = "strong-alcohol",
-			name = "Stock preparation: Captain Morgan Spiced Rum, 700ml",
+			name = "Captain Morgan Spiced Rum, 700ml stock increase",
 			kind = "delivery",
 			requires = {"v3/strong-alcohol/drink_spirit_2"},
 			briefing = "One final bottle reserve before the whisky. This increases capacity for Captain Morgan after the listed delivery. A small order is still worth reading before somebody announces it's already handled.",

@@ -127,7 +127,7 @@ PLUGIN:Register("egghead", {
 		{
 			id = "v3/science-suits/suit_ssp99m/stock",
 			branch = "science-suits",
-			name = "Stock preparation: SSP-99",
+			name = "SSP-99 stock increase",
 			kind = "delivery",
 			requires = {"v3/science-suits/suit_ssp99"},
 			briefing = "I'd like a larger SSP-99 reserve before opening the next suit arrangement. Supplies have an irritating habit of demanding attention just as a comparison becomes interesting. Bring this order in and your stock allowance will rise. It won't refill the suits immediately, even if I explain the desirability of doing so at length.",
@@ -174,7 +174,7 @@ PLUGIN:Register("egghead", {
 		{
 			id = "v3/science-suits/suit_seva/stock",
 			branch = "science-suits",
-			name = "Stock preparation: SSP-99M",
+			name = "SSP-99M stock increase",
 			kind = "delivery",
 			requires = {"v3/science-suits/suit_ssp99m"},
 			briefing = "The SSP-99M reserve needs its own supplies. This request increases how many I can keep available for you; it isn't the SEVA purchase arrangement yet. I'd rather say that plainly now than discover we've conducted two entirely different negotiations over the same table.",

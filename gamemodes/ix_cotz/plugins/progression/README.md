@@ -11,6 +11,12 @@ preceding suit directly. The anorak stock entry remains. Retired records stay sa
 retained suit IDs, request quantities, partial contributions and completed purchases are preserved.
 The town service labels are included in benefit summaries; optional `plannedUnlocks` remain inactive.
 
+Paid repairs at Technut and Boss use `2 * round(missingCondition * price^(1/3))` for suits,
+masks, helmets and repairable weapons. Weapons read `wear`; suits and headgear read `durability`.
+Earned discounts apply after this base calculation. At 0% condition, a cloth mask costs 2,000 RU
+and a standard anorak costs 3,768 RU before discounts. Legacy `repairCost` item fields do not
+control these fees; each repairable base supplies its rate through `GetRepairCost()`.
+
 Progression is a top-level menu tab beside Tasks, using contact cards and the shared
 [COTZ typography and palette](../../../../docs/ui-style.md). The list begins empty for each character.
 Opening a contact's progression conversation records its currently active topics in the character

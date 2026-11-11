@@ -1,5 +1,40 @@
 local PLUGIN = PLUGIN
 local STATE_KEY = "townNPCProgression"
+local RETIRED_TECHNUT_STOCK = {
+	"suit_trenchcoat_black", "suit_sunrise", "suit_io7a", "suit_wind", "suit_ps5m", "suit_cs2",
+	"suit_nbc", "suit_berill", "suit_cs3", "suit_skat10", "suit_skat9",
+}
+
+local function skipRetiredTechnutStock(self, character)
+	local record = ix.progression.GetCharacterProgression(character)
+	local known = table.Copy(character:GetData("knownProgressionTopics", {}))
+	local changed, discoveryChanged = false, false
+	for _, suit in ipairs(RETIRED_TECHNUT_STOCK) do
+		local nextID = self:StepID("technut", "v3/suits/" .. suit)
+		local stockID = nextID .. "/stock"
+		local line = record.lines[stockID]
+		if line and line.active == true and not line.completed then
+			assert(self.steps[nextID], "Unknown retired Technut stock successor: " .. nextID)
+			-- Keep contributions as history without running completion rewards for a removed delivery.
+			line.active = false
+			line.skipped = true
+			local nextLine = record.lines[nextID] or {}
+			if not nextLine.completed then
+				nextLine.active = true
+				record.lines[nextID] = nextLine
+			end
+			if not nextLine.completed and known[stockID] and not known[nextID] then
+				known[nextID] = true
+				discoveryChanged = true
+			end
+			changed = true
+		end
+	end
+	if not changed then return end
+	ix.progression.SetCharacterProgression(character, record)
+	if discoveryChanged then character:SetData("knownProgressionTopics", known) end
+	character:Save()
+end
 
 function PLUGIN:DiscoverContact(client, target, contact)
 	if not contact.bunker or not self:CanInteract(client, target)
@@ -32,6 +67,7 @@ function PLUGIN:InitializeTownCharacter(character)
 		character:SetData(STATE_KEY, state)
 		character:Save()
 	end
+	skipRetiredTechnutStock(self, character)
 	self:RecoverCompletions(character)
 	self:AdvanceCounters(character)
 	ix.progression.AssignActiveRequirements(character)

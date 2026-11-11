@@ -9,6 +9,9 @@ Technut's eleven intermediate stock-preparation deliveries are retired. Suit unl
 the preceding suit directly; the initial anorak stock step and independent painting branch remain.
 Retained milestone IDs, request quantities and saved contributions are unchanged. Retired stock-step
 records remain saved history and no longer gate unfinished suits.
+On character load, an active retired Technut stock step is marked skipped and activates its following
+suit request. Discussed stock steps also reveal that request in the progression tab. The migration
+preserves partial deliveries, pays no completion reward and never reopens a completed suit.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
 locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
@@ -25,6 +28,7 @@ Initial hideout access consumes one unequipped tool before new local room claims
 one crowbar or bat for Ballast, one sledgehammer for Cleaner, and one FUBar for Ledger. These hand-ins ignore
 contact difficulty multipliers. Existing rooms/upgrades remain saved and usable. Haggler's gunpowder barters are removed.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
+Stock-capacity milestones use "<item> stock increase" as their title in dialogue and the progression menu.
 
 All 627 active milestones have individual authored `briefing` and `completion` replies in their
 contact definitions, including the 212 stock-preparation deliveries. Read each contact's existing
@@ -69,6 +73,7 @@ Regenerate reports with `progression_rewards.py --write` and `ammo_progression.p
 
     luatex --luaonly tests/contact_stock_and_capacity_spec.lua
     luatex --luaonly tests/contact_progression_changes_spec.lua
+    luatex --luaonly tests/technut_stock_skip_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua
     luatex --luaonly tests/town_ammo_exchange_spec.lua
     luatex --luaonly tests/vendor_plan_spec.lua

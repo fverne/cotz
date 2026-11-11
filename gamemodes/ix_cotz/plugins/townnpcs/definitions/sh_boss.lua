@@ -141,7 +141,7 @@ PLUGIN:Register("boss", {
 		{
 			id = "v3/helmets/headwear_screen/stock",
 			branch = "helmets",
-			name = "Stock preparation: FSB Helmet (CS-4)",
+			name = "FSB Helmet (CS-4) stock increase",
 			kind = "delivery",
 			requires = {"v3/helmets/headwear_cs4"},
 			briefing = "The CS-4 reserve needs these materials before the next purchase arrangement. Completion increases your stock capacity for that helmet. It doesn't authorise an immediate refill, and urgency won't change that distinction.",
@@ -195,7 +195,7 @@ PLUGIN:Register("boss", {
 		{
 			id = "v3/helmets/helm_sphere12/stock",
 			branch = "helmets",
-			name = "Stock preparation: Sphere-08 Helmet",
+			name = "Sphere-08 Helmet stock increase",
 			kind = "delivery",
 			requires = {"v3/helmets/helm_sphere08"},
 			briefing = "Before extending the Sphere line, I want this reserve order finished. It raises your Sphere-08 allowance. Keeping the existing equipment supported is part of the arrangement, even when the next helmet is what brought you here.",
@@ -234,7 +234,7 @@ PLUGIN:Register("boss", {
 		{
 			id = "v3/helmets/helm_operator_nato/stock",
 			branch = "helmets",
-			name = "Stock preparation: Sphere-12 Helmet",
+			name = "Sphere-12 Helmet stock increase",
 			kind = "delivery",
 			requires = {"v3/helmets/helm_sphere12"},
 			briefing = "This order concerns the Sphere-12 reserve, rather than the ACH. Complete the listed delivery and I'll increase its stock allowance. I'd prefer the distinction understood before either of us starts allocating supplies on an assumption.",
@@ -275,7 +275,7 @@ PLUGIN:Register("boss", {
 		{
 			id = "v3/helmets/headwear_pracs/stock",
 			branch = "helmets",
-			name = "Stock preparation: ACH Helmet",
+			name = "ACH Helmet stock increase",
 			kind = "delivery",
 			requires = {"v3/helmets/helm_operator_nato"},
 			briefing = "I need this order for an increased ACH reserve. That raises capacity, with the normal stock refill. It is a useful piece of preparation without requiring me to attach an operation or a speech to it.",
@@ -326,7 +326,7 @@ PLUGIN:Register("boss", {
 		{
 			id = "v3/helmets/headwear_psz12/stock",
 			branch = "helmets",
-			name = "Stock preparation: PRACS",
+			name = "PRACS stock increase",
 			kind = "delivery",
 			requires = {"v3/helmets/headwear_pracs"},
 			briefing = "Before the final helmet, complete this PRACS reserve request. I am increasing the amount that can be held for you, not promising that amount on the shelf today. Those are separate commitments.",

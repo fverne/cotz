@@ -194,7 +194,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "v3/antipsychotics/medic_antipsychotic_3/stock",
 			branch = "antipsychotics",
-			name = "Stock preparation: Chlorpromazine Tablets",
+			name = "Chlorpromazine Tablets stock increase",
 			kind = "delivery",
 			requires = {"v3/antipsychotics/medic_antipsychotic_2"},
 			briefing = "I'd like to increase your Chlorpromazine stock allowance. A reserve is easier to arrange while there's time to read the request properly. This delivery raises capacity for the medicine; the actual stock still refills normally.",
@@ -318,7 +318,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "v3/stimpaks/medic_stimpak_3/stock",
 			branch = "stimpaks",
-			name = "Stock preparation: Experimental Medical Stimpak MkII",
+			name = "Experimental Medical Stimpak MkII stock increase",
 			kind = "delivery",
 			requires = {"v3/stimpaks/medic_stimpak_2"},
 			briefing = "The MkII reserve needs a smaller order before the next stimpak arrangement. This increases your stock allowance, rather than handing you an injector. I should make that clear before you leave space in the pack for something that still has to come into stock.",
@@ -371,7 +371,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "v3/medkits/medic_medkit_1",
 			branch = "medkits",
-			name = "Medkit",
+			name = "Medkit stock increase",
 			kind = "delivery",
 			requires = {},
 			briefing = "Basic medkits are already for sale. This delivery is for a larger personal stock allowance, so there can be more available to you as the stock refills. It is worth arranging before the day you arrive needing every one of them. Read the clinic list and bring it back complete.",
@@ -421,7 +421,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "v3/medkits/medic_medkit_4/stock",
 			branch = "medkits",
-			name = "Stock preparation: Army Medkit",
+			name = "Army Medkit stock increase",
 			kind = "delivery",
 			requires = {"v3/medkits/medic_medkit_3"},
 			briefing = "This order increases the army-medkit reserve. It doesn't change which kit you've unlocked or refill what's missing today. I'm putting that first because a misunderstanding about a reserve tends to arrive back at the clinic at a very inconvenient moment.",
@@ -460,7 +460,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "v3/medkits/medic_medkit_5/stock",
 			branch = "medkits",
-			name = "Stock preparation: Army Syrette Kit",
+			name = "Army Syrette Kit stock increase",
 			kind = "delivery",
 			requires = {"v3/medkits/medic_medkit_4"},
 			briefing = "I'd like a larger allowance for the army syrette kits before moving on. Bring the listed supplies and I'll increase that capacity. No need to buy a kit just to prove you read the last order; the delivery is what matters here.",
@@ -511,7 +511,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "v3/medkits/medic_medkit_6/stock",
 			branch = "medkits",
-			name = "Stock preparation: Scientific Medkit",
+			name = "Scientific Medkit stock increase",
 			kind = "delivery",
 			requires = {"v3/medkits/medic_medkit_5"},
 			briefing = "There's a reserve order for the scientific medkit before the syrette version. It raises how many I can hold for you. I'm keeping this list away from the treatment bench; an unfinished supply request shouldn't follow me into every other task.",

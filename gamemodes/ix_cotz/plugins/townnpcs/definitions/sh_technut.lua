@@ -156,7 +156,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "v3/suits/suit_anorak",
 			branch = "suits",
-			name = "Anorak",
+			name = "Anorak stock increase",
 			kind = "delivery",
 			requires = {},
 			briefing = "Anoraks are already on sale, buddy. This order is for a larger personal reserve. People come in asking about the grandest suit and leave remembering they wanted something ordinary for another outing. Bring the workshop supplies here and I'll increase how many anoraks I can hold for you.",

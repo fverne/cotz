@@ -308,12 +308,15 @@ ix.item.list.part_swampcontroller_1 = hand
 local delivery = {name = "Hand over %d hands", numberRec = 1, requiredItem = "part_swampcontroller_1",
 	reward = {{"kit_reward_demo"}}, repReward = 5}
 ix.jobs.list.hand = delivery
-check(ix.taskRewards.FixedMoney(delivery, 1) == 3850, "delivery cash adds the tier base to half the hand-in value")
+check(ix.taskRewards.FixedMoney(delivery, 1) == 3350, "delivery cash pays half the hand-in value above the minimum")
+ix.item.list.part_cat = {name = "Cat Tail", price = 1200}
+check(ix.taskRewards.FixedMoney({requiredItem = "part_cat", numberRec = 1, tier = 1}, 1) == 600,
+	"one easy cat-tail delivery pays 600 rubles without an added base fee")
 check(
 	ix.taskRewards.SupplyBudget(delivery, 1) == 600,
 	"delivery supplies exclude the item reimbursement"
 )
-check(ix.taskRewards.FixedMoney(delivery, 3) == 10550, "cash floor covers every requested specimen")
+check(ix.taskRewards.FixedMoney(delivery, 3) == 10050, "cash covers every requested specimen")
 ix.jobs.jobsbycategory.handDelivery = {"hand"}
 local deliveryViewer = actor()
 local deliveryPreview = ix.taskRewards.PreviewJob(deliveryViewer, "'Old Timer'", "easy", {"handDelivery"})
@@ -323,7 +326,7 @@ local oldDeliveryPreviews = copy(deliveryViewer:GetData("taskJobPreviews"))
 oldDeliveryPreviews["'Old Timer'"].easy.moneyReward = 3685
 deliveryViewer:SetData("taskJobPreviews", oldDeliveryPreviews)
 local refreshedDelivery = ix.taskRewards.PreviewJob(deliveryViewer, "'Old Timer'", "easy", {"handDelivery"})
-check(refreshedDelivery.moneyReward == 3850, "cached delivery previews refresh their cash payout")
+check(refreshedDelivery.moneyReward == 3350, "cached delivery previews refresh their cash payout")
 check(refreshedDelivery.supplyBudget == savedDeliveryBudget
 	and refreshedDelivery.rewardChoices == nil and savedDeliveryChoices == nil,
 	"cash refresh preserves the saved supply budget and offered items")
@@ -337,7 +340,7 @@ end}, {__index = hand})
 check(ix.taskRewards.HandInUnitValue("part_swampcontroller_1", specimen) == 11800,
 	"actual specimen tier increases opportunity cost")
 check(
-	ix.taskRewards.FixedMoney(delivery, 1, 11800) == 6400,
+	ix.taskRewards.FixedMoney(delivery, 1, 11800) == 5900,
 	"high-quality specimen scales the fifty percent cash payout"
 )
 ix.npctemplates = {templates = {one = {items = {part_swampcontroller_1 = {20000, nil, 3}}, scale = 0.8},
@@ -345,13 +348,14 @@ ix.npctemplates = {templates = {one = {items = {part_swampcontroller_1 = {20000,
 check(ix.taskRewards.HandInUnitValue("part_swampcontroller_1") == 16000,
 	"best trader override is considered without multiplying prices between traders")
 check(
-	ix.taskRewards.FixedMoney(delivery, 1) == 8500,
+	ix.taskRewards.FixedMoney(delivery, 1) == 8000,
 	"delivery cash is fifty percent of configured trader reference value"
 )
 ix.npctemplates = nil
 ix.item.list.food = {name = "Food", price = 100, quantity = 5}
 local foodJob = {requiredItem = "food", numberRec = 3, reward = {}, moneyReward = 0}
-check(ix.taskRewards.FixedMoney(foodJob, 3) == 530, "stacked deliveries are valued per use, not per full stack")
+check(ix.taskRewards.FixedMoney(foodJob, 3) == 500, "cheap stacked deliveries receive the easy minimum")
+check(ix.taskRewards.FixedMoney(foodJob, 60) == 600, "stacked deliveries are valued per use, not per full stack")
 local foodOwner = actor()
 foodOwner.jobs.NPC = {identifier = "food", numberRec = 3, progress = 0}
 ix.jobs.list.food = foodJob
@@ -380,7 +384,7 @@ end
 ix.dialogue.notifyItemLost = function() end
 check(ix.taskRewards.DeliverJobItem(foodOwner.client, "NPC"), "delivery records consumed units")
 check(food.data.quantity == 2 and not food.removed, "partial stack hand-in preserves surplus uses")
-check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 530,
+check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 500,
 	"actual hand-in value and payout are saved with progress")
 check(not ix.taskRewards.DeliverJobItem(foodOwner.client, "NPC"), "completed task cannot consume more items")
 local ammoOwner = actor()
@@ -1492,12 +1496,19 @@ ix.dialogue.ConfigureTaskRewards(dialogue)
 check(#dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target) == 0
 	and #dialogue.tree.AboutWorkTopic.options == 2,
 	"reconfiguring a dialogue preserves one reward submenu without root claims")
-for tier, base in ipairs({500, 1000, 1500}) do
+for tier, minimum in ipairs({500, 750, 1000}) do
 	local request = {requiredItem = "food", wholeItems = true, numberRec = 2, tier = tier}
-	check(ix.taskRewards.FixedMoney(request, 2) == base + 100,
-		"each delivery tier adds its base to half the price of two whole meals")
-	check(ix.taskRewards.SupplyBudget(request, 2) == math.max(600, base),
-		"item reimbursement does not increase the supply allowance")
+	check(ix.taskRewards.FixedMoney(request, 2) == minimum,
+		"each delivery tier guarantees its minimum for low-value whole items")
+	local boundaryCount = minimum / 50
+	check(ix.taskRewards.FixedMoney(request, boundaryCount) == minimum,
+		"an item payout at the tier minimum receives no added base fee")
+	check(ix.taskRewards.FixedMoney(request, boundaryCount + 1) == minimum + 50,
+		"whole-item value above the tier minimum determines the full payout")
+	check(ix.taskRewards.FixedMoney(request, 2, (minimum + 100) * 2) == minimum + 100,
+		"actual hand-in value can raise a cheap request above its tier minimum")
+	check(ix.taskRewards.SupplyBudget(request, 2) == ({600, 1000, 1500})[tier],
+		"delivery cash minimums preserve the existing supply allowance")
 end
 local handInBonus = actor()
 handInBonus:SetData("taskRewardOffers", {["job:handin"] = {npc = "'Old Timer'", selected = 1,
@@ -1511,14 +1522,14 @@ local paidHandIn = actor()
 local paidJob = {identifier = "hand", numberRec = 1, deliveredValue = 11800}
 ix.taskRewards.PrepareJob(paidHandIn, "'Old Timer'", paidJob)
 paidJob.isCompleted = true
-paidJob.moneyReward = 5900
+paidJob.moneyReward = 6400
 paidHandIn.jobs["'Old Timer'"] = paidJob
 ix.taskRewards.SelectOffer(paidHandIn, "'Old Timer'", paidJob.rewardKey, 1)
 finishJob(paidHandIn, "'Old Timer'")
-check(paidHandIn.money == 6400 and #paidHandIn.inventory.received > 0,
-	"saved hand-ins receive the base and reimbursement without deducting their item reward")
+check(paidHandIn.money == 5900 and #paidHandIn.inventory.received > 0,
+	"saved hand-ins receive the current payout without deducting their item reward")
 finishJob(paidHandIn, "'Old Timer'")
-check(paidHandIn.money == 6400, "hand-in payment cannot be repeated")
+check(paidHandIn.money == 5900, "hand-in payment cannot be repeated")
 local triggerOwner = actor()
 triggerOwner.jobs.NPC = {identifier = "hunt", listenTrigger = "hunt", numberRec = 1, progress = 0}
 triggerOwner.client:ixJobEvaluate("hunt")
@@ -1654,17 +1665,17 @@ do
 		progressionClaim = 8, rewardKey = "job:weighted-preview", moneyReward = 500}}})
 	ix.taskRewards.ReconcileCharacter(owner)
 	local refreshed = owner:GetJobs()[npc]
-	check(refreshed.moneyReward == 1280, "accepted meal deliveries refresh their missing price component")
+	check(refreshed.moneyReward == 780, "accepted meal deliveries refresh their value without an added base fee")
 	check(refreshed.progress == job.progress and refreshed.deliveredValue == job.deliveredValue
 		and refreshed.numberRec == job.numberRec and refreshed.rewardKey == job.rewardKey
 		and refreshed.progressionClaim == job.progressionClaim,
 		"repricing preserves the accepted assignment and its credited hand-ins")
-	check(owner:GetData("taskJobPreviews")[npc].easy.moneyReward == 1280,
+	check(owner:GetData("taskJobPreviews")[npc].easy.moneyReward == 780,
 		"saved meal previews use the same item-price reference")
 	owner.jobs[npc].isCompleted = true
 	owner.jobs[npc].deliveredValue = 3120
 	ix.taskRewards.ReconcileCharacter(owner)
-	check(owner:GetJobs()[npc].moneyReward == 2060 and owner.money == 0,
+	check(owner:GetJobs()[npc].moneyReward == 1560 and owner.money == 0,
 		"completed unpaid deliveries keep actual value without paying during reconciliation")
 	local saves = owner.saves
 	ix.taskRewards.ReconcileCharacter(owner)

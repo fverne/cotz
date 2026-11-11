@@ -170,7 +170,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/22lr",
 			branch = "regular-ammo",
-			name = ".22LR",
+			name = ".22LR stock increase",
 			kind = "delivery",
 			requires = {},
 			briefing = "The .22 is already on sale. This order raises your personal stock allowance for it. Bring the loading-bench and storage supplies listed here; I will check the delivery against the page, including what I owe you. Starting with a small cartridge doesn't make careful work less worthwhile.",
@@ -187,7 +187,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/762x25",
 			branch = "regular-ammo",
-			name = "7.62x25mm",
+			name = "7.62x25mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/22lr"},
 			briefing = "For a larger 7.62x25 allowance, bring this supply request. It is already part of my starting stock. A reserve arrangement needs its own materials, and I prefer getting that clear before a customer counts on more than is actually available.",
@@ -204,7 +204,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/45acp41/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 7.62x25mm",
+			name = "7.62x25mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x25"},
 			briefing = "This further reserve order supports 7.62x25 before the .410 arrangement. Complete the smaller delivery and the total allowance rises again. I count an increase as part of the existing reserve, not a fresh pile appearing alongside it.",
@@ -225,7 +225,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/45acp41",
 			branch = "regular-ammo",
-			name = ".410 Magnum Buck",
+			name = ".410 Magnum Buck stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x25", "v3/regular-ammo/45acp41/stock"},
 			briefing = "The .410 buckshot is already available. This delivery increases how much can be held for you. Bring the listed bench supplies and let me account for them before we start discussing the next calibre.",
@@ -242,7 +242,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/9x19/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .410 Magnum Buck",
+			name = ".410 Magnum Buck stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/45acp41"},
 			briefing = "Before the 9x19 reserve, there's a further .410 allowance to arrange. The request is here. Finishing it raises total capacity; it does not put new shells on the shelf today.",
@@ -263,7 +263,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/9x19",
 			branch = "regular-ammo",
-			name = "9x19mm",
+			name = "9x19mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/45acp41", "v3/regular-ammo/9x19/stock"},
 			briefing = "For 9x19, this order expands the stock allowance. The cartridges are already sold here. People sometimes apologise for asking about an ordinary calibre; it is a perfectly sensible thing to want available.",
@@ -280,7 +280,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/45acp/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 9x19mm",
+			name = "9x19mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x19"},
 			briefing = "The next 9x19 reserve increase needs these supplies before the .45 arrangement. Bring the full smaller request. I'll check it without assuming a familiar customer's delivery must be right or wrong.",
@@ -301,7 +301,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/45acp",
 			branch = "regular-ammo",
-			name = ".45 ACP",
+			name = ".45 ACP stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x19", "v3/regular-ammo/45acp/stock"},
 			briefing = "The .45 ACP request here is for additional stock capacity. It is already part of the starting selection. Bring the materials listed; a regular customer's preference deserves a clear allowance rather than a vague assurance.",
@@ -318,7 +318,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/545x39/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .45 ACP",
+			name = ".45 ACP stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/45acp"},
 			briefing = "This further order raises the .45 reserve before 5.45 access. I want the supplies listed, not loose ammunition substituted because the heading mentions a calibre. The request and its result are different things.",
@@ -355,7 +355,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/12gauge/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 5.45x39mm",
+			name = "5.45x39mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/545x39"},
 			briefing = "I'd like the regular 5.45 reserve increased before the buckshot allowance. These supplies raise stock capacity. A number written beside a calibre is only useful if both of us understand whether it means current stock or capacity.",
@@ -376,7 +376,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/12gauge",
 			branch = "regular-ammo",
-			name = "12g Buckshot",
+			name = "12g Buckshot stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/545x39", "v3/regular-ammo/12gauge/stock"},
 			briefing = "Twelve-gauge buckshot is already sold here. This delivery gives you a larger personal reserve. Bring the bench and storage supplies in the order; there's no need to bring a story proving how urgently you expect to use the shells.",
@@ -393,7 +393,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/762x39/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 12g Buckshot",
+			name = "12g Buckshot stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/12gauge"},
 			briefing = "This is the next buckshot reserve request before 7.62x39. It raises the total capacity, with normal refill. Put the supplies on the clear side so I can check the last order before setting out another.",
@@ -447,7 +447,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/9x18/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 5.56x45mm",
+			name = "5.56x45mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/556x45"},
 			briefing = "Before the 9x18 reserve, support the 5.56 allowance with this delivery. It raises capacity for the ammunition you've opened. I won't claim the shelves have refilled merely because the account looks better.",
@@ -469,7 +469,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/9x18",
 			branch = "regular-ammo",
-			name = "9x18mm",
+			name = "9x18mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/556x45", "v3/regular-ammo/9x18/stock"},
 			briefing = "The 9x18 is already in the starting selection. This order increases your stock allowance. Bring the listed bench supplies. A quieter piece of reserve work can still make a return to the counter less uncertain.",
@@ -487,7 +487,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/762x54/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 9x18mm",
+			name = "9x18mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x18"},
 			briefing = "This further 9x18 order raises the reserve before 7.62x54 access. Complete the smaller list. There is room for a higher allowance without pretending every increase is another fresh reserve to add together.",
@@ -526,7 +526,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/357magnum/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 7.62x54mm",
+			name = "7.62x54mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x54"},
 			briefing = "The 7.62x54 reserve needs these materials before the .357 arrangement. Capacity increases when the list is complete. I don't expect a customer to remember an allowance I haven't put into a clear agreement.",
@@ -565,7 +565,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/9x39/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .357 Magnum",
+			name = ".357 Magnum stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/357magnum"},
 			briefing = "Before 9x39, there's a .357 reserve order. These supplies increase the allowance. You don't need to buy a box to demonstrate interest before arranging its capacity.",
@@ -604,7 +604,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/44magnum/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 9x39mm",
+			name = "9x39mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x39"},
 			briefing = "This order raises the regular 9x39 reserve. It doesn't open an exchange or put special ammunition in your pack. We are arranging stock capacity for the regular rounds already available.",
@@ -643,7 +643,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/9x21/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .44 Magnum",
+			name = ".44 Magnum stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/44magnum"},
 			briefing = "The .44 reserve needs these supplies before 9x21 access. This increases the stock allowance. I'll check it in the same manner as the first delivery; familiarity is a good reason to remain fair, not stop counting.",
@@ -682,7 +682,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/762x51/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 9x21mm Gyurza SP-11 (7N28)",
+			name = "9x21mm Gyurza SP-11 (7N28) stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/9x21"},
 			briefing = "I'd like more capacity for the regular Gyurza before 7.62x51. Bring these supplies. It raises the allowance rather than changing the cartridge or producing a special load.",
@@ -721,7 +721,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/500magnum/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 7.62x51mm",
+			name = "7.62x51mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/762x51"},
 			briefing = "This delivery increases 7.62x51 stock capacity before the .500. Bring the smaller order in full. Current stock and a larger allowance will remain separate figures after we're finished.",
@@ -762,7 +762,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/338lapua/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .500 Magnum",
+			name = ".500 Magnum stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/500magnum"},
 			briefing = "Before the Lapua, I'd like the .500 reserve supported. This smaller delivery raises its stock capacity. An allowance can be practical without a promise that a box will be waiting the instant you return.",
@@ -803,7 +803,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/50ae/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .338 Lapua",
+			name = ".338 Lapua stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/338lapua"},
 			briefing = "The Lapua reserve needs this request before .50AE. Capacity rises on completion. Put the last supplies where we can both see them; a careful count should be something you can check too.",
@@ -854,7 +854,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/57x28/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .50AE",
+			name = ".50AE stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/50ae"},
 			briefing = "This order increases the .50AE reserve before 5.7x28. Bring the smaller supply request. We can support the existing stock without turning the conversation into a contest over which cartridge deserves the most space.",
@@ -905,7 +905,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/127x55/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 5.7x28mm",
+			name = "5.7x28mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/57x28"},
 			briefing = "Before 12.7x55, there's a 5.7 reserve order. This raises stock capacity for the regular ammunition. Do not count it as the special-load exchange; that is a different agreement.",
@@ -956,7 +956,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/145x114/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 12.7x55mm",
+			name = "12.7x55mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/127x55"},
 			briefing = "This request increases the 12.7x55 reserve before 14.5 access. Bring the smaller list and capacity rises. I will leave current stock out of the promise until the actual boxes are here.",
@@ -1007,7 +1007,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/700nitro/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: 14.5x114mm",
+			name = "14.5x114mm stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/145x114"},
 			briefing = "The 14.5 reserve needs these supplies before Nitro Express. Capacity increases with the full request. I would rather state the exact arrangement than let the next impressive name do the explaining.",
@@ -1058,7 +1058,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/regular-ammo/93x64/stock",
 			branch = "regular-ammo",
-			name = "Stock preparation: .700 Nitro Express",
+			name = ".700 Nitro Express stock increase",
 			kind = "delivery",
 			requires = {"v3/regular-ammo/700nitro"},
 			briefing = "One final regular-ammunition reserve before 9.3x64. Complete this list to increase Nitro Express capacity. It raises the allowance; there isn't a box included as a closing gesture.",
@@ -1573,7 +1573,7 @@ PLUGIN:Register("brass", {
 		{
 			id = "v3/shotgun-loads/12gaugemg/stock",
 			branch = "shotgun-loads",
-			name = "Stock preparation: 12g Dart Rounds",
+			name = "12g Dart Rounds stock increase",
 			kind = "delivery",
 			requires = {"v3/shotgun-loads/12gaugedt"},
 			briefing = "Before the Magnum buckshot, support the dart-round reserve with this smaller order. It increases stock capacity, with ordinary refill. No shells are included merely for finishing the reserve arrangement.",

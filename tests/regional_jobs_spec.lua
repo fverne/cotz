@@ -75,8 +75,10 @@ do
 			local originalCash = ix.taskRewards.FixedMoney(definition, count)
 			local supplyBudget = ix.taskRewards.SupplyBudget(definition, count)
 			item.price = previousPrice * 2
-			check(ix.taskRewards.FixedMoney(definition, count) > originalCash,
-				"every contact's active item delivery accounts for the requested item's price")
+			local repricedCash = ix.taskRewards.FixedMoney(definition, count)
+			local minimum = ({500, 750, 1000})[definition.tier]
+			check(repricedCash >= originalCash and (repricedCash > originalCash or repricedCash == minimum),
+				"repricing raises each contact's delivery cash unless the tier minimum still applies")
 			check(ix.taskRewards.SupplyBudget(definition, count) == supplyBudget,
 				"repricing delivery inputs does not increase supplies or the bonus allowance")
 			item.price = previousPrice

@@ -145,7 +145,7 @@ PLUGIN:Register("atlas", {
 		{
 			id = "v3/binoculars/binoculars_4/stock",
 			branch = "binoculars",
-			name = "Stock preparation: Rangefinder Binoculars",
+			name = "Rangefinder Binoculars stock increase",
 			kind = "delivery",
 			requires = {"v3/binoculars/binoculars_1"},
 			briefing = "I'd like to make a little more room in your rangefinder allocation. People ask about the next instrument while we're still finding enough supplies for the present one. This smaller order addresses that. It raises the amount I can hold for you, rather than putting another pair on the table today.",
@@ -186,7 +186,7 @@ PLUGIN:Register("atlas", {
 		{
 			id = "v3/binoculars/binoculars_3/stock",
 			branch = "binoculars",
-			name = "Stock preparation: Scouting Binoculars",
+			name = "Scouting Binoculars stock increase",
 			kind = "delivery",
 			requires = {"v3/binoculars/binoculars_4"},
 			briefing = "Before going further, there's the reserve for the Scouting pair. A spare place on a stock sheet sounds rather dull beside a new instrument, until that's the pair you want. Deliver this order and I'll increase your allowance. The shelf will refill in the ordinary way.",

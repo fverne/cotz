@@ -119,6 +119,39 @@ local function repairItem(character, id, weapon)
 end
 local tech, doctor, arena, cleaner, wish = vendor("'Technut'"), vendor("'Jitters'"),
 	vendor("'Arena Master'"), vendor("'Ballast'"), vendor("'???'")
+
+local function loadRepairCost(baseName)
+	local path = "gamemodes/ix_cotz/schema/items/base/sh_" .. baseName .. ".lua"
+	local file = assert(io.open(path))
+	local source = file:read("*a")
+	file:close()
+	local first = assert(source:find("function ITEM:GetRepairCost()", 1, true))
+	local last = assert(source:find("\nend", first, true)) + 3
+	local environment = {ITEM = {}, math = math}
+	assert(load(source:sub(first, last), "@" .. path, "t", environment))()
+
+	return environment.ITEM.GetRepairCost
+end
+
+for _, baseName in ipairs({"suit", "gear", "newweapons"}) do
+	local character = actor()
+	local item = repairItem(character, 1, baseName == "newweapons")
+	item.GetRepairCost = loadRepairCost(baseName)
+	for _, pricing in ipairs({{price = 1000, full = 2000}, {price = 6690, full = 3768}}) do
+		item.price = pricing.price
+		for _, condition in ipairs({0, 50, 100}) do
+			item.data.wear, item.data.durability = condition, condition
+			local offer = ix.progression.BuildServiceOffer(character.client, tech, "repair", {itemid = 1})
+			if condition == 100 then
+				check(offer == nil, baseName .. " at full condition needs no repair")
+			else
+				check(offer and offer.baseCost == pricing.full * (100 - condition) / 100,
+					baseName .. " uses suit pricing at " .. condition .. "% for price " .. item.price)
+			end
+		end
+	end
+end
+
 local first, second = actor(), actor()
 local firstItem, secondItem = repairItem(first, 11, true), repairItem(second, 22, true)
 local credit = {services = {{npc = "'Technut'", service = "repair", amount = 100}}}

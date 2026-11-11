@@ -157,7 +157,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/obrez/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: Sako 85 NATO",
+			name = "Sako 85 NATO stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/sako85nato"},
 			briefing = "I'd like to increase your NATO Sako reserve. These supplies raise its stock allowance. Having an earlier rifle available can matter more than hurrying to discuss the next one.",
@@ -194,7 +194,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/w9422357/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: Obrez",
+			name = "Obrez stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/obrez"},
 			briefing = "This order expands the Obrez reserve before the Marlin. It increases capacity, rather than putting another gun in your hands. I would check the shelf before planning around a spare.",
@@ -248,7 +248,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/sako85/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: Mosin Nagant",
+			name = "Mosin Nagant stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/mosin"},
 			briefing = "Before the other Sako, there's a Mosin reserve order. Complete this list for a larger allowance. A familiar option doesn't become less useful because someone has begun asking about a different rifle.",
@@ -287,7 +287,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/w1895/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: Sako 85",
+			name = "Sako 85 stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/sako85"},
 			briefing = "I'd like more room in your Sako reserve before the Winchester. The supplies are here on the order. It doesn't require bringing a rifle back or proving you used the last purchase.",
@@ -326,7 +326,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/obrezmalfunction/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: Winchester 1895",
+			name = "Winchester 1895 stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/w1895"},
 			briefing = "This smaller order increases the Winchester reserve. Bring the whole list back here. I like having useful things available without needing another persuasive account of why they should be.",
@@ -365,7 +365,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/sv98/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: Mercenary Malfunction",
+			name = "Mercenary Malfunction stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/obrezmalfunction"},
 			briefing = "The reserve for that last rifle needs these supplies. This increases its stock allowance. We needn't settle every opinion the gun invites to finish a fairly ordinary order.",
@@ -406,7 +406,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/lax44/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: SV-98",
+			name = "SV-98 stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/sv98"},
 			briefing = "I'd like the SV-98 reserve increased before the Henry. Bring the listed supplies. Keeping a rifle in the allowance doesn't decide how often you must take it out.",
@@ -457,7 +457,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/l115/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: Henry Lever Action X Model .44",
+			name = "Henry Lever Action X Model .44 stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/lax44"},
 			briefing = "Before the L115, this delivery increases your Henry reserve. It is capacity for the rifle already available. Make the choice about another purchase when you've had a look at the actual stock.",
@@ -508,7 +508,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "v3/slow-rifles/trg42/stock",
 			branch = "slow-rifles",
-			name = "Stock preparation: L115",
+			name = "L115 stock increase",
 			kind = "delivery",
 			requires = {"v3/slow-rifles/l115"},
 			briefing = "The L115 reserve needs these materials before the last rifle. Complete the smaller delivery and capacity increases. No need to bring more simply because this part of the line looks nearly finished.",

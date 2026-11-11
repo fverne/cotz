@@ -176,7 +176,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/l85/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: FAMAS",
+			name = "FAMAS stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/famas"},
 			briefing = "This delivery raises your FAMAS stock allowance. It supports an existing purchase route before the next one opens. Do not allocate a gun to your departure until the actual stock is there.",
@@ -213,7 +213,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/m16a4/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: L85",
+			name = "L85 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/l85"},
 			briefing = "Before the M16, bring this L85 reserve order. The result is increased capacity for the L85. It changes the allowance, not today's stock count.",
@@ -267,7 +267,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/sg552/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: LR-300",
+			name = "LR-300 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/lr300"},
 			briefing = "The LR-300 reserve needs these materials before the SIG arrangement. Completing the order increases its stock capacity. That is a continuing allowance, not immediate equipment issued for your next trip.",
@@ -306,7 +306,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/g36c/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: SIG SG 552",
+			name = "SIG SG 552 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/sg552"},
 			briefing = "I'd like this SG 552 reserve order completed before proceeding. It increases how much stock can be held for you. A useful reserve is part of procurement even when the next rifle has captured everyone's attention.",
@@ -345,7 +345,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/aug/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: HK G36C",
+			name = "HK G36C stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/g36c"},
 			briefing = "This order increases the G36C reserve. Bring the smaller delivery here. Keep it separate from the AUG request; the two arrangements have different results even if you intend to finish both.",
@@ -384,7 +384,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/f2000/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: Steyr AUG",
+			name = "Steyr AUG stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/aug"},
 			briefing = "The AUG reserve comes before the F2000 arrangement. Complete these supplies for a larger stock allowance. I am making no exception to the refill schedule because another rifle is waiting on the page.",
@@ -425,7 +425,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/hk416/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: f2000",
+			name = "f2000 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/f2000"},
 			briefing = "This is the F2000 reserve request. Complete it and capacity rises. An allowance is useful precisely because you needn't argue for it again whenever stock comes in.",
@@ -476,7 +476,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/g3a3/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: HK416",
+			name = "HK416 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/hk416"},
 			briefing = "Before the G3, complete the HK416 reserve order. The supplies increase your personal stock capacity. I will keep the distinction between capacity and a gun on the shelf clear, even if it sounds repetitive.",
@@ -527,7 +527,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/fnfal/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: G3A3",
+			name = "G3A3 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/g3a3"},
 			briefing = "The G3A3 reserve needs this smaller delivery. Its stock allowance increases when the order is complete. Supporting the equipment already available remains part of the work before opening another route.",
@@ -578,7 +578,7 @@ PLUGIN:Register("quartermaster", {
 		{
 			id = "v3/nato-rifles/m14/stock",
 			branch = "nato-rifles",
-			name = "Stock preparation: fnfal",
+			name = "fnfal stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-rifles/fnfal"},
 			briefing = "Before the final rifle, complete this FAL reserve arrangement. It increases stock capacity, with no immediate refill. There is no additional task concealed in that explanation.",

@@ -150,7 +150,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/mask_respirator/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: Halfmask",
+			name = "Halfmask stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/mask_halfmask"},
 			briefing = "Before the respirator, I want the halfmask reserve sorted. This delivery raises the number I can keep for you. Empty space on the shelf will still be empty until the usual stock comes in.",
@@ -190,7 +190,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/mask_gp5/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: Respirator",
+			name = "Respirator stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/mask_respirator"},
 			briefing = "The respirator needs a larger reserve. I'm asking for the materials here, not an explanation of how much you like the mask. Finish this delivery and the stock allowance grows.",
@@ -244,7 +244,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/helm_operator_rus_2/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: EO-20 Gasmask",
+			name = "EO-20 Gasmask stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/mask_eo20"},
 			briefing = "I'd like more EO-20 capacity before going further. The supplies on this order cover that reserve. It isn't a delivery of fresh masks, and I won't pretend drawing another box on the stock sheet makes one appear.",
@@ -286,7 +286,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/headwear_cs1/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: Russian Operator Helmet (old)",
+			name = "Russian Operator Helmet (old) stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/helm_operator_rus_2"},
 			briefing = "The operator-helmet reserve comes first here. Bring the full smaller order and I'll increase your allowance. Keeping an existing line supplied is work too, even if it doesn't make an interesting tale.",
@@ -328,7 +328,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/mask_pmk3/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: Flight Helmet (CS-1)",
+			name = "Flight Helmet (CS-1) stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/headwear_cs1"},
 			briefing = "The CS-1 reserve could use these supplies. Complete the order and you get a larger stock allowance for that helmet. It doesn't move you into the next mask arrangement by itself.",
@@ -367,7 +367,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/headwear_cs2/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: PMK-3 Gasmask",
+			name = "PMK-3 Gasmask stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/mask_pmk3"},
 			briefing = "Before the CS-2, there's a PMK-3 reserve order. I want the materials where I can account for them, rather than in the pile somebody has declared useful from the doorway. The list tells you which is which.",
@@ -408,7 +408,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/mask_xm40/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: Frag Helmet (CS-2)",
+			name = "Frag Helmet (CS-2) stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/headwear_cs2"},
 			briefing = "This raises your CS-2 stock allowance. Bring what's listed; nothing extra is needed to impress me. I have enough objects here that someone couldn't bear to leave behind.",
@@ -459,7 +459,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/mask_m40/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: XM-40",
+			name = "XM-40 stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/mask_xm40"},
 			briefing = "The XM-40 reserve needs attention before the M40 purchase order. This delivery increases capacity for the mask you've already unlocked. Take a look at the request before deciding how much room to leave.",
@@ -510,7 +510,7 @@ PLUGIN:Register("latch", {
 		{
 			id = "v3/masks-headwear/mask_m50/stock",
 			branch = "masks-headwear",
-			name = "Stock preparation: M40 Gasmask",
+			name = "M40 Gasmask stock increase",
 			kind = "delivery",
 			requires = {"v3/masks-headwear/mask_m40"},
 			briefing = "One more reserve order before the M50. This is for the M40, and it increases how many I can hold for you. Finish the list rather than bringing the first large thing you find and expecting a substitution.",

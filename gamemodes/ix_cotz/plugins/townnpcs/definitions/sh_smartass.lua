@@ -214,7 +214,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/sten/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Stoeger Double Defense Short",
+			name = "Stoeger Double Defense Short stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/stoegerddshort"},
 			briefing = "Before the Sten, let's enlarge the short-Stoeger reserve. This order raises stock capacity. It doesn't make a gun appear. If I had that button, you would be looking at a considerably more interesting problem.",
@@ -251,7 +251,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/stoegerdd/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Sten Gun MKII",
+			name = "Sten Gun MKII stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/sten"},
 			briefing = "This order expands your Sten reserve before the full Stoeger. Capacity, normal refill, no mysterious reserve hidden under the keyboard. I'd call it simple if that didn't encourage somebody to stop reading.",
@@ -288,7 +288,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/mac11/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Stoeger Double Defense",
+			name = "Stoeger Double Defense stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/stoegerdd"},
 			briefing = "I'd like the full-Stoeger reserve increased before the Mac. These supplies raise your allowance. You can admire the next gun while the old reserve remains a real piece of business.",
@@ -325,7 +325,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/mp34/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Mac-11",
+			name = "Mac-11 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/mac11"},
 			briefing = "This raises the Mac reserve before the MP34. Bring the smaller computer-supply order. It adds capacity to an existing line, which is apparently less exciting than asking whether I've got anything new every afternoon.",
@@ -362,7 +362,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/m3supershort/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: MP34",
+			name = "MP34 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/mp34"},
 			briefing = "Before the short shotgun, complete this MP34 reserve request. It raises capacity for the gun you've unlocked. No, the smaller order is not an invitation to replace the last item with a persuasive shrug.",
@@ -399,7 +399,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/mp40/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Serbu Super Shorty",
+			name = "Serbu Super Shorty stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/m3supershort"},
 			briefing = "This is the Super Shorty reserve order before the MP40. It increases the stock allowance, not today's count. You can check the shelf instead of conducting an optimistic interpretation of my wording.",
@@ -453,7 +453,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/mossberg500/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: KP-31",
+			name = "KP-31 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/kp31"},
 			briefing = "I'd like more KP-31 reserve before the Mossberg. Bring the supplies here and capacity rises. An empty allowance doesn't hold an invisible gun; I prefer to get that particular technical point settled early.",
@@ -492,7 +492,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/ar159mm/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Mossberg 500",
+			name = "Mossberg 500 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/mossberg500"},
 			briefing = "This delivery increases the Mossberg reserve. It doesn't open the AR15 by itself or refill anything immediately. A modest amount of attention to the heading will spare us both a very dull argument.",
@@ -531,7 +531,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/mp5k/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: AR15 9mm",
+			name = "AR15 9mm stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/ar159mm"},
 			briefing = "Before the MP5k, enlarge the 9mm AR15 reserve with this request. Capacity rises on completion. I've resisted calling it a groundbreaking improvement in stock management, despite the opportunity.",
@@ -570,7 +570,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/uzi/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: MP5k",
+			name = "MP5k stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/mp5k"},
 			briefing = "This order raises the MP5k reserve before the Uzi. Bring what is listed rather than a heap of disconnected parts with a story attached. Stories are not particularly good at becoming the one missing connector.",
@@ -609,7 +609,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/ithaca37/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: IMI Uzi",
+			name = "IMI Uzi stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/uzi"},
 			briefing = "I'd like the Uzi reserve increased before the Ithaca. Complete this smaller order for more capacity. The gun you already unlocked hasn't evaporated from relevance merely because I've mentioned another one.",
@@ -648,7 +648,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/sterling/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Ithaca 37",
+			name = "Ithaca 37 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/ithaca37"},
 			briefing = "The Ithaca reserve needs these materials before the Sterling. It raises the stock allowance. An allowance is a quantity on a sheet, incidentally, not something you can take outside and point at a problem.",
@@ -687,7 +687,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/mp5/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Sterling",
+			name = "Sterling stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/sterling"},
 			briefing = "This delivery expands the Sterling reserve. Capacity increases for the existing gun. You may continue looking at the next one without accusing the reserve arrangement of being boring; it knows.",
@@ -726,7 +726,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/m1887/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: HK MP5",
+			name = "HK MP5 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/mp5"},
 			briefing = "Before the M1887, increase the MP5 reserve with this order. Normal refill still applies. If I repeat the word capacity one more time I may start dreaming about stock sheets, so let's get it finished.",
@@ -767,7 +767,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/ump45/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: M1887",
+			name = "M1887 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/m1887"},
 			briefing = "This request increases the M1887 allowance before the UMP. Bring the smaller list in full. Half an order with a confident explanation is still half an order, with extra listening required.",
@@ -808,7 +808,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/rem870ae/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: H&K UMP",
+			name = "H&K UMP stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/ump45"},
 			briefing = "The UMP reserve needs these materials before the Remington. Completing the list raises capacity. It doesn't require proving how often you use the gun or presenting an essay on the sensible equipment choice.",
@@ -859,7 +859,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/m3super90/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: Remington 870 AE",
+			name = "Remington 870 AE stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/rem870ae"},
 			briefing = "Before the M3, I'd like the Remington reserve supported. These supplies increase its stock allowance. You don't have to buy every gun I've made available to demonstrate you remember the conversation.",
@@ -910,7 +910,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/mp9a1/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: M3 Super 90",
+			name = "M3 Super 90 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/m3super90"},
 			briefing = "This delivery raises the M3 reserve before the MP9. Bring what's listed. No extra visit, secret hand gesture, or demonstration that you've heard a better rumour about my stock.",
@@ -961,7 +961,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/m1928/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: MP9a1",
+			name = "MP9a1 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/mp9a1"},
 			briefing = "I'd like a larger MP9 reserve before the Thompson. This order increases capacity. It will not become a fresh gun merely because you announce you've carefully allowed space for it in the pack.",
@@ -1012,7 +1012,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/p90/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: M1928A1 'Thompson'",
+			name = "M1928A1 'Thompson' stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/m1928"},
 			briefing = "The Thompson reserve needs this smaller order before the P90. It raises your stock capacity. Let me finish that transaction before the conversation becomes a comparison of every gun you've ever considered.",
@@ -1063,7 +1063,7 @@ PLUGIN:Register("smartass", {
 		{
 			id = "v3/nato-cqb/striker/stock",
 			branch = "nato-cqb",
-			name = "Stock preparation: FN P90",
+			name = "FN P90 stock increase",
 			kind = "delivery",
 			requires = {"v3/nato-cqb/p90"},
 			briefing = "One final gun-reserve request before the Striker. This increases P90 capacity, with ordinary refill. You don't need to make finishing it sound like the climax of an engineering career.",

@@ -162,7 +162,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_fabric_1/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Well Worn Steel Plate",
+			name = "Well Worn Steel Plate stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_steelplate_1"},
 			briefing = "This order increases the worn steel plate reserve. Bring the full list and I'll raise your stock allowance. Supporting an ordinary attachment is worthwhile even when it isn't the thing someone has come to admire.",
@@ -202,7 +202,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_steelplate_2/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Insulating Fabrics",
+			name = "Insulating Fabrics stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_fabric_1"},
 			briefing = "I'd like a larger reserve of insulating fabrics before the next plate. This delivery increases capacity for the layers already available to you. The shelf itself will still take its usual time to refill.",
@@ -259,7 +259,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_fabric_2/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Ceramic Plate",
+			name = "Ceramic Plate stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_ceramicplate_2"},
 			briefing = "This reserve order concerns the ceramic plate. It increases how much stock can be held for you, rather than putting a new plate in your pack. I'd rather settle that expectation before you rearrange everything around it.",
@@ -301,7 +301,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_kevlar_1/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Thick Insulating Fabrics",
+			name = "Thick Insulating Fabrics stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_fabric_2"},
 			briefing = "I'd like the thick-fabric reserve expanded before the Kevlar. Bring the listed supplies and the allowance grows. Nobody has to call fabric exciting for it to deserve a proper place on the stock sheet.",
@@ -343,7 +343,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_aluframe/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Kevlar K119 Plates",
+			name = "Kevlar K119 Plates stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_kevlar_1"},
 			briefing = "Before the aluminium frame, this order raises your K119 reserve. It does not change the plates or fit anything to your suit. We are agreeing on stock capacity, with the normal refill afterwards.",
@@ -385,7 +385,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_steelplate_3/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Aluminium Frame",
+			name = "Aluminium Frame stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_aluframe"},
 			briefing = "This is the aluminium-frame reserve request. Complete it and I can hold more for you as stock refills. I like finishing a practical arrangement before somebody begins asking whether the next frame would look better.",
@@ -429,7 +429,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_carbonfibre/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Galvanized Steel Plate",
+			name = "Galvanized Steel Plate stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_steelplate_3"},
 			briefing = "The galvanised-plate reserve needs these supplies. This delivery increases your capacity for that plate. I won't turn a smaller order into an opportunity to add everything I remembered needing since breakfast.",
@@ -483,7 +483,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_steelframe/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Carbon Fibre Layers",
+			name = "Carbon Fibre Layers stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_carbonfibre"},
 			briefing = "Before the steel frame, there's a carbon-fibre reserve order. Complete the list and the allowance rises. The existing stock will refill normally; I'm making more room in the arrangement, not packing another layer for you now.",
@@ -537,7 +537,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_ceramicplate_3/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Steel Frame",
+			name = "Steel Frame stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_steelframe"},
 			briefing = "I'd like the steel-frame reserve settled before the next ceramic plate. The materials listed below increase that allowance. There is something pleasing about supporting equipment after the initial enthusiasm has moved on.",
@@ -591,7 +591,7 @@ PLUGIN:Register("suture", {
 		{
 			id = "v3/suit-attachments/attachment_kevlar_2/stock",
 			branch = "suit-attachments",
-			name = "Stock preparation: Modern Ceramic Plate",
+			name = "Modern Ceramic Plate stock increase",
 			kind = "delivery",
 			requires = {"v3/suit-attachments/attachment_ceramicplate_3"},
 			briefing = "This order increases the modern ceramic plate reserve. It belongs to the attachment you already unlocked, not the K29 purchase. I have made the headings different because tired people deserve better than nearly identical requests.",

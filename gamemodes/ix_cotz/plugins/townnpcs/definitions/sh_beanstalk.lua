@@ -156,7 +156,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/suppressors/cobrasuppressor/stock",
 			branch = "suppressors",
-			name = "Stock preparation: Tundra suppressor",
+			name = "Tundra suppressor stock increase",
 			kind = "delivery",
 			requires = {"v3/suppressors/tundrasuppressor"},
 			briefing = "I'd like the Tundra reserve settled before the Cobra arrangement. This smaller research delivery increases your stock allowance. It is a rather quiet part of preparation, which may explain why I can usually finish discussing it.",
@@ -206,7 +206,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/suppressors/pbssuppressor/stock",
 			branch = "suppressors",
-			name = "Stock preparation: Cobra M2 suppressor",
+			name = "Cobra M2 suppressor stock increase",
 			kind = "delivery",
 			requires = {"v3/suppressors/cobrasuppressor"},
 			briefing = "The Cobra reserve needs these supplies. Completing the list increases how many can be held for you. I ought to be clear that I mean capacity; I have already been accused of making an empty shelf sound very well organised.",
@@ -259,7 +259,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/suppressors/sakersuppressor/stock",
 			branch = "suppressors",
-			name = "Stock preparation: PBS suppressor",
+			name = "PBS suppressor stock increase",
 			kind = "delivery",
 			requires = {"v3/suppressors/pbssuppressor"},
 			briefing = "Before the SAKER, I'd like the PBS reserve expanded. This delivery does that, rather than opening another suppressor by itself. Keeping the two orders distinct saves me explaining my own notes later.",
@@ -348,7 +348,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/red-dots/kobra/stock",
 			branch = "red-dots",
-			name = "Stock preparation: Trijicon RMR",
+			name = "Trijicon RMR stock increase",
 			kind = "delivery",
 			requires = {"v3/red-dots/trijiconrmr"},
 			briefing = "The RMR allowance needs its own reserve order. Bring these research materials and I'll increase the capacity. I appreciate a request small enough to finish discussing without losing the original question.",
@@ -389,7 +389,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/red-dots/microt1/stock",
 			branch = "red-dots",
-			name = "Stock preparation: Kobra sight",
+			name = "Kobra sight stock increase",
 			kind = "delivery",
 			requires = {"v3/red-dots/kobra"},
 			briefing = "I'd like to put more room in the Kobra reserve before the Micro T1. The list covers that capacity increase. No fresh sight appears just because I've found a better place to write the allowance.",
@@ -436,7 +436,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/red-dots/eotech/stock",
 			branch = "red-dots",
-			name = "Stock preparation: Aimpoint Micro T1",
+			name = "Aimpoint Micro T1 stock increase",
 			kind = "delivery",
 			requires = {"v3/red-dots/microt1"},
 			briefing = "This order concerns the Micro T1 reserve. Complete it and the stock capacity rises. I've put the heading first so neither of us confuses it with the Eotech request while discussing something more interesting.",
@@ -483,7 +483,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/red-dots/cmore/stock",
 			branch = "red-dots",
-			name = "Stock preparation: Eotech holographic sight",
+			name = "Eotech holographic sight stock increase",
 			kind = "delivery",
 			requires = {"v3/red-dots/eotech"},
 			briefing = "The Eotech reserve could use these research supplies. This increases your allowance rather than changing the sight. It is perfectly acceptable to want a dependable reserve of something you already like.",
@@ -546,7 +546,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/red-dots/aimpoint/stock",
 			branch = "red-dots",
-			name = "Stock preparation: CMore Railway",
+			name = "CMore Railway stock increase",
 			kind = "delivery",
 			requires = {"v3/red-dots/cmore"},
 			briefing = "I'd like to expand the CMore reserve before the final sight order. These supplies provide the larger allowance. I should resist the temptation to call it a small request before you've read it; you're the one bringing it back.",
@@ -635,7 +635,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/optics/pso1/stock",
 			branch = "optics",
-			name = "Stock preparation: King Arms MR",
+			name = "King Arms MR stock increase",
 			kind = "delivery",
 			requires = {"v3/optics/kingarmsmr"},
 			briefing = "Before the PSO-1, there's the King Arms reserve. Bring the supplies here and the capacity will increase. I like a little room for an ordinary replacement without having to turn it into a new discussion of equipment.",
@@ -676,7 +676,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/optics/shortdot/stock",
 			branch = "optics",
-			name = "Stock preparation: PSO-1",
+			name = "PSO-1 stock increase",
 			kind = "delivery",
 			requires = {"v3/optics/pso1"},
 			briefing = "The PSO-1 reserve needs these supplies. This is the allowance for an optic already available to you. I have kept it separate from the Shortdot arrangement because my earlier notes were beginning to read like two conversations at once.",
@@ -723,7 +723,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/optics/acog/stock",
 			branch = "optics",
-			name = "Stock preparation: Schmidt Shortdot",
+			name = "Schmidt Shortdot stock increase",
 			kind = "delivery",
 			requires = {"v3/optics/shortdot"},
 			briefing = "This smaller order increases the Shortdot reserve. It does not put another optic into current stock immediately. I prefer mentioning the dull limitation here to discovering it during somebody's otherwise carefully prepared departure.",
@@ -786,7 +786,7 @@ PLUGIN:Register("beanstalk", {
 		{
 			id = "v3/optics/nightforce/stock",
 			branch = "optics",
-			name = "Stock preparation: ACOG Sight",
+			name = "ACOG Sight stock increase",
 			kind = "delivery",
 			requires = {"v3/optics/acog"},
 			briefing = "The ACOG reserve comes before the Nightforce purchase arrangement. These research supplies increase your allowance for the optic already unlocked. There's no need to bring an extra sample merely because I looked interested.",
