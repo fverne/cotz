@@ -56,6 +56,8 @@ ENT.MaxRangeDist = 1500
 ENT.VisibleSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 ENT.RangeSchedule = SCHED_RUN_RANDOM
 
+ENT.navigationRangedRange = 1500
+
 function ENT:Initialize()
 	self.Model = "models/gsc/s.t.a.l.k.e.r/monsters/burer.mdl"
 	self:STALKERNPCInit(Vector(-32,-32,70),MOVETYPE_STEP)

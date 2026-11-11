@@ -53,6 +53,11 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
+ENT.navigationLeapRange = 1200
+ENT.navigationLeapMinRange = 300
+ENT.navigationLeapHealthFraction = 0.5
+ENT.navigationRangedRange = 800
+
 function ENT:Initialize()
 	self.Model = "models/darkmessiah/spider_regular.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)
@@ -216,10 +221,10 @@ end
 //little aggressive jump
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.PlayingAnimation==false) then
-		if self:Health() > 0.5*self:GetMaxHealth() then
+		if self:Health() > self.navigationLeapHealthFraction * self:GetMaxHealth() then
 
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance < 1200 and distance > 300 then
+			if distance < self.navigationLeapRange and distance > self.navigationLeapMinRange then
 				if(self.CanJump<CurTime()) then
 					local TEMP_Rand = math.random(1,5)
 			
@@ -233,7 +238,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			end
 		else
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if(self.CanSpit < CurTime() and distance < 800)then
+			if self.CanSpit < CurTime() and distance < self.navigationRangedRange then
 				self.CanSpit = CurTime() + 4
 				self.spitting = CurTime() + 0.8
 				self.IsSpitting = 1

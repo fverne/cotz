@@ -604,6 +604,20 @@ loadEntityMethod("lua/entities/stalker_ai/schedules.lua", "SelectSchedule")(reco
 check(recoveringMutant.destination.x == 500 and recoveringMutant.schedule == SCHED_FORCED_GO_RUN,
 	"real mutant SelectSchedule pursues remembered positions after recovery")
 
+recoveringMutant.cotzNavigationRecovery = {attempts = 1}
+recoveringMutant.cotzNavigationIntent = Vector(-100)
+recoveringMutant.destination = recoveringMutant.cotzNavigationIntent
+local recoveryScheduleCalls = recoveringMutant.scheduleCalls
+check(manager:UpdateCombatSchedule(recoveringMutant) == true
+	and recoveringMutant.destination.x == -100 and recoveringMutant.scheduleCalls == recoveryScheduleCalls,
+	"remembered pursuit yields to physical recovery instead of replacing its escape destination")
+recoveringMutant.cotzNavigationRecovery = nil
+recoveringMutant.position = recoveringMutant.cotzPlayerPosition
+recoveringMutant.cotzNavigationMotion = {since = 0}
+manager:UpdateCombatSchedule(recoveringMutant)
+check(not recoveringMutant.cotzNavigationIntent and not recoveringMutant.cotzNavigationMotion,
+	"arrival at the remembered position discards stale physical movement tracking")
+
 manager:OnUnload()
 check(not recoveringMutant.cotzPlayerFocus and not recoveringMutant.enemy
 	and not recoveringMutant.cotzCombatScheduleDirty, "plugin unload discards player memory and queued work")

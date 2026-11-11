@@ -48,6 +48,8 @@ local ZOMBIE_OFFSETS = {
 
 ENT.sndGeigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav" }
 
+ENT.navigationRangedRange = 1500
+
 function ENT:Initialize()
 	self.Model = "models/monsters/controler.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)

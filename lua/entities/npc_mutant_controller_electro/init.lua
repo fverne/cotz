@@ -47,6 +47,8 @@ sound.Add( {
 	sound = "anomaly/electra_blast1.mp3"
 } )
 
+ENT.navigationRangedRange = 1500
+
 function ENT:Initialize()
 	self.Model = "models/monsters/controler_big.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)

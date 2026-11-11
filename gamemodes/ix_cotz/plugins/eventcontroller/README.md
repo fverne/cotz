@@ -217,15 +217,50 @@ closer rivals, and removing targets during attacks. Confirm that occluded pursui
 known position and expires after ten seconds. A valid target with no usable navigation path remains
 a map/navigation issue; the standalone suites cannot establish in-game movement correctness.
 
-Visible unreachable targets now receive a one-second grace period, then two position-based chase retries
-two seconds apart before the existing move-away fallback. Recovery is per mutant and target, and applies
-to player and NPC enemies. Engine unreachable-memory expiry alone does not replenish retries. Advancing
+Visible unreachable targets receive a one-second grace period, then two position-based chase retries
+two seconds apart. Recovery is per mutant and target, and applies to player and NPC enemies.
+Engine unreachable-memory expiry alone does not replenish retries. Advancing
 64 units toward the target while that memory is clear restores normal combat. Target movement of 64 units
 in any direction resets recovery; returning within the mutant's existing melee range cancels it even while
 engine memory is stale. Target loss, occluded pursuit and sleep discard recovery. Attack animations retain
-their existing schedule protection. Constants live at the top of `lua/entities/stalker_ai/schedules.lua`.
+their schedule protection, including jump windups before an animation begins.
+
+Mutants with ranged or leap attacks hold a suitable attack position while their existing Think callbacks
+continue to handle cooldowns, random rolls and attacks. Jump-capable mutants approach until they enter
+their existing leap range. Short/long leap windows, the spider's health-dependent leap/spit switch, and
+species-specific ranges are declared in the concrete mutant definitions. Existing leap conditions use
+the same fields; their distances and cooldowns are unchanged.
+
+After direct retries fail, mutants sample up to four alternate grounded approaches, two seconds apart.
+Approaches use their attack range and hull size to find footing around the target, below elevated perches.
+Successful walking progress keeps an active route running, including routes that initially move sideways.
+If approaches fail, mutants withdraw toward validated encounter-origin footing or request an engine cover
+route. They retry in bounded batches after ten seconds of withdrawal rather than fleeing indefinitely.
+
+`lua/entities/stalker_ai/sv_navigation.lua` is included server-side by the NPC base before schedules.
+Its movement monitor checks active paths or validated ground destinations every half-second. A failed
+chase to an elevated target alone does not diagnose a stranded mutant. Six seconds without
+32 units of progress starts physical recovery: up to four local walk/descent attempts, three seconds apart.
+Idle actors, intentional attack holds, attack windups, grabs, airborne actors, sleeping actors and disabled
+AI do not trigger recovery. Combat-manager pursuit yields while physical recovery owns movement, and
+arrival at a remembered player position or task device clears stale movement intent. Successful escape
+walking preserves the target-approach budget so it cannot indefinitely restart the same failed chase.
+
+Relocation is a last resort after failed walk attempts, retried at most once every ten seconds. It stays
+within 512 units of the mutant and 128 units vertically. Destinations must have world support
+under all hull corners, a walkable slope, a clear full hull, and no water/slime at the feet. Recovery uses
+a previously traversed safe position or a lower local surface; it does not relocate onto an untested perch
+at the same height. The current mutant and destination hull must be outside every player's and view
+entity's PVS, and no player may be within 512 units of either position. Failed checks leave the mutant
+in place. These conservative visibility checks may defer relocation even behind nearby cover.
+Health, combat targets, pack identity, task ownership and rewards remain intact. All recovery state is
+session-only; sleep clears movement recovery. Geometry scans share the existing search budget.
+Timing and safety constants live in the navigation module and `schedules.lua`.
 
 Run `luatex --luaonly tests/mutant_navigation_spec.lua` alongside the combat and population suites.
 In multiplayer, check climbing onto and off static props, stationary perched players and mutants, repeated
-small movements, target switching, and navigation recovery after failed retries. This change does not repair
-map navigation or relocate stranded mutants.
+small movements, target switching, short/long jumps and injured spiders. Also check mutants stranded on
+static props, blocked or narrow descent routes, full-size pseudogiant hulls, water, players entering view
+during recovery, observers, task-device arrival and server frame cost at population caps. Standalone mocks
+cannot establish nodegraph connectivity, engine cover routing, model collision or multiplayer visibility.
+This change does not repair map navigation.

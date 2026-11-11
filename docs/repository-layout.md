@@ -158,5 +158,8 @@ Run `luatex --luaonly tests/mutant_target_safety_spec.lua`,
 windup, and player release after grabs or mutant death in multiplayer.
 
 `lua/entities/stalker_ai/schedules.lua` owns mutant unreachable-target grace, bounded position retries,
-and recovery when targets move or return to melee range. Run `luatex --luaonly tests/mutant_navigation_spec.lua`
-alongside the combat and population suites; verify static-prop encounters in multiplayer.
+and recovery when targets move or return to melee range. The base includes `sv_navigation.lua` server-side
+before schedules for attack-position selection, grounded approach/withdrawal, movement monitoring and
+conservative unseen recovery of stranded mutants. Concrete mutant definitions share leap-range values
+between navigation and their existing attacks. Run `luatex --luaonly tests/mutant_navigation_spec.lua`
+alongside the combat, population, field-task and summoning suites; verify static-prop encounters in multiplayer.

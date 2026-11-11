@@ -92,6 +92,7 @@ for _, name in ipairs({"bloodsucker", "skeleton"}) do
 	local stateField = name == "bloodsucker" and "IsSuccing" or "IsGrabbing"
 	local function makeGrabber()
 		local actor = makeActor()
+		actor.navigationLeapRange = 100
 		actor.NextAbilityTime, actor.CanJump, actor.CanSuck, actor.CanGrab = 0, 100, 0, 0
 		actor.PlayingAnimation, actor.FakeDeath = false, 0
 		actor.jumping1, actor.jumping2, actor.IsJumping = 0, 0, 0

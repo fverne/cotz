@@ -315,8 +315,11 @@ end
 function PLUGIN:UpdateCombatSchedule(actor)
 	if actor.cotzSleeping or not living(actor) or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if targetBusy(actor) then return end
+	if actor.cotzNavigationRecovery then return true end
 
 	if actor.cotzCombatScheduleDirty then
+		actor.cotzNavigationIntent, actor.cotzNavigationMotion = nil, nil
+		actor.cotzNavigationIntentGrounded = nil
 		actor:ClearSchedule()
 		if actor.ScheduleFinished then actor:ScheduleFinished() end
 		if actor.EngineScheduleFinish then actor:EngineScheduleFinish() end
@@ -337,6 +340,8 @@ function PLUGIN:UpdateCombatSchedule(actor)
 	end
 
 	if actor:GetPos():DistToSqr(destination) <= arrivalRadius ^ 2 and (not objective or actor:Visible(objective)) then
+		actor.cotzNavigationIntent, actor.cotzNavigationMotion = nil, nil
+		actor.cotzNavigationIntentGrounded = nil
 		if actor.cotzPursuitScheduled then actor:ClearSchedule() end
 		actor.cotzPursuitScheduled = nil
 		return true
@@ -344,6 +349,8 @@ function PLUGIN:UpdateCombatSchedule(actor)
 	if CurTime() >= (actor.cotzNextPursuit or 0) then
 		actor.cotzNextPursuit = CurTime() + PURSUIT_RETRY
 		if not actor.cotzPursuitScheduled or not actor:IsCurrentSchedule(SCHED_FORCED_GO_RUN) then
+			actor.cotzNavigationIntent = destination
+			actor.cotzNavigationIntentGrounded = nil
 			actor:SetLastPosition(destination)
 			actor:SetSchedule(SCHED_FORCED_GO_RUN)
 			actor.cotzPursuitScheduled = true

@@ -58,6 +58,9 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 ENT.TEMP_PunchDamage1 = 0
 ENT.TEMP_PunchDamage2 = 0
 
+ENT.navigationRangedRange = 512
+ENT.navigationRangedMinRange = 256
+
 function ENT:Initialize()
 	self.Model = "models/monsters/izlom.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
@@ -200,7 +203,7 @@ end
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos())) or 0
-		if distance > 256 and distance < 512 then
+		if distance > self.navigationRangedMinRange and distance < self.navigationRangedRange then
 			if(self.CanPull<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 				

@@ -57,6 +57,8 @@ ENT.MaxRangeDist = 1500
 ENT.VisibleSchedule = SCHED_ALERT_FACE
 ENT.RangeSchedule = SCHED_IDLE_STAND
 
+ENT.navigationRangedRange = 1500
+
 function ENT:Initialize()
 	self.Model = "models/maver1k_XVII/Stalker/mutants/karlik.mdl"
 	self.ragdollModel = "models/monsters/karlik.mdl"

@@ -3,11 +3,16 @@ local UNREACHABLE_RETRY_INTERVAL = 2
 local UNREACHABLE_RETRIES = 2
 local UNREACHABLE_TARGET_MOVEMENT_SQR = 64 ^ 2
 local UNREACHABLE_PROGRESS = 64
+local UNREACHABLE_APPROACHES = 4
+local UNREACHABLE_RECHECK_INTERVAL = 10
+local WALK_PROGRESS_SQR = 32 ^ 2
 
 local function clearUnreachableRecovery(actor)
 	if not actor.cotzUnreachableRecovery then return end
 
 	actor.cotzUnreachableRecovery = nil
+	actor.cotzNavigationIntent, actor.cotzNavigationMotion = nil, nil
+	actor.cotzNavigationIntentGrounded = nil
 	actor:ClearSchedule()
 	actor:ScheduleFinished()
 	actor:EngineScheduleFinish()
@@ -40,11 +45,20 @@ local function updateUnreachableRecovery(actor, enemy)
 			enemy = enemy,
 			position = position,
 			distance = actor:GetPos():Distance(position),
+			walkPosition = actor:GetPos(),
 			nextRetry = now + UNREACHABLE_GRACE,
 			retries = 0,
 		}
 		actor.cotzUnreachableRecovery = recovery
 		actor:SetSchedule(SCHED_COMBAT_FACE)
+	end
+
+	local distance = actor:GetPos():Distance(position)
+	local minimum, maximum = actor:STALKERNPCNavigationAttackRange(distance)
+	if maximum and distance > minimum and distance < maximum then
+		actor:STALKERNPCHoldNavigationPosition()
+
+		return true
 	end
 
 	-- Expiry of the engine's unreachable memory alone does not prove that a retry found a path.
@@ -54,18 +68,31 @@ local function updateUnreachableRecovery(actor, enemy)
 
 		return false
 	end
+	if actor.cotzNavigationIntent and actor:IsGoalActive()
+		and actor:GetPos():DistToSqr(recovery.walkPosition) >= WALK_PROGRESS_SQR then
+		recovery.walkPosition = actor:GetPos()
+		recovery.nextRetry = math.max(recovery.nextRetry, now + UNREACHABLE_RETRY_INTERVAL)
+
+		return true
+	end
 	if now < recovery.nextRetry then return true end
 
 	if recovery.retries < UNREACHABLE_RETRIES then
 		recovery.retries = recovery.retries + 1
 		recovery.nextRetry = now + UNREACHABLE_RETRY_INTERVAL
 		-- Position goals retry navigation without the chase task rejecting remembered unreachable enemies.
-		actor:SetLastPosition(position)
-		actor:SetSchedule(SCHED_FORCED_GO_RUN)
+		actor:STALKERNPCMoveToPosition(position)
+	elseif (recovery.approaches or 0) < UNREACHABLE_APPROACHES then
+		recovery.nextRetry = now + UNREACHABLE_RETRY_INTERVAL
+		actor:STALKERNPCApproachUnreachable(enemy, recovery)
 	else
-		recovery.retreating = true
-		if not actor:IsCurrentSchedule(SCHED_MOVE_AWAY_FROM_ENEMY) then
-			actor:SetSchedule(SCHED_MOVE_AWAY_FROM_ENEMY)
+		if recovery.retreating then
+			recovery.retries, recovery.approaches, recovery.retreating = 0, 0, nil
+			recovery.nextRetry = now + UNREACHABLE_GRACE
+		else
+			recovery.retreating = true
+			recovery.nextRetry = now + UNREACHABLE_RECHECK_INTERVAL
+			actor:STALKERNPCWithdrawUnreachable(recovery)
 		end
 	end
 
@@ -74,6 +101,11 @@ end
 
 function ENT:RunAI( strExp )
 	if self.cotzSleeping then return end
+	if self:STALKERNPCUpdateNavigation() then
+		self:MaintainActivity()
+
+		return
+	end
 	if(self.PlayingAnimation==false||(self.PlayingAnimation==true&&self.PlayingGesture==true&&self.AllowSchedulesOnGesture==true)) then
 		if((self.PlayingAnimation==false||self.PlayingGesture==true)&&!self.CurrentSchedule) then
 			self:SelectSchedule()
@@ -101,6 +133,7 @@ end
 
 function ENT:SelectSchedule( iNPCState )
 	if self.cotzSleeping then return end
+	if self:STALKERNPCNavigationBusy() then return end
 	if ix and ix.eventController then
 		ix.eventController:ValidateCombatEnemy(self)
 		if ix.eventController:UpdateCombatSchedule(self) then

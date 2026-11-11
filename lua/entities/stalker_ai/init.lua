@@ -8,6 +8,7 @@ include( "STALKERNPCBaseVars.lua" )
 include( "shared.lua" )
 include("sv_performance.lua")
 include("sv_summoning.lua")
+include("sv_navigation.lua")
 include( "schedules.lua" )
 include( "tasks.lua" )
 

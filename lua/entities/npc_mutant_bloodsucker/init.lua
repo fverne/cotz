@@ -63,6 +63,8 @@ ENT.SuccVictim = nil
 TEMP_TargetDamage = 0
 distance = 0
 
+ENT.navigationLeapRange = 100
+
 function ENT:Initialize()
 	self.Model = "models/monsters/krovosos.mdl"
 	self:STALKERNPCInit(Vector(-28,-28,70),MOVETYPE_STEP)
@@ -235,7 +237,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	if self.NextAbilityTime < CurTime() then
 		if(self.PlayingAnimation==false) then
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance < 100 then
+			if distance < self.navigationLeapRange then
 				if(self.CanJump<CurTime()) then
 					local TEMP_Rand = math.random(1,5)
 				

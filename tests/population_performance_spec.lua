@@ -37,6 +37,7 @@ ix = {
 }
 ENT = mutantMeta
 dofile("lua/entities/stalker_ai/sv_performance.lua")
+dofile("lua/entities/stalker_ai/sv_navigation.lua")
 engine = {TickCount = function() return tick end}
 math.Rand = function(a) return a end
 player = {Iterator = function() return ipairs(clients) end}
@@ -143,11 +144,14 @@ local entity = mutant(20, 10000)
 performance:RegisterMutant(entity, false)
 entity.CurrentSchedule, entity.bDoingEngineSchedule = {}, true
 entity.cotzUnreachableRecovery = {retries = 2, retreating = true}
+entity.cotzNavigationRecovery, entity.cotzNavigationMotion, entity.cotzNavigationIntent = {}, {}, vector(0)
 entity:STALKERNPCUpdateSleep()
 check(entity.cotzSleeping and entity.flags ~= 0 and entity.stopped, "distant idle mutant stops engine Think")
 check(entity.CurrentSchedule == nil and entity.bDoingEngineSchedule == nil,
 	"sleep clears Lua and engine schedule bookkeeping")
 check(not entity.cotzUnreachableRecovery, "sleep discards unreachable recovery before the next encounter")
+check(not entity.cotzNavigationRecovery and not entity.cotzNavigationMotion and not entity.cotzNavigationIntent,
+	"sleep discards physical recovery and stale movement intent")
 local damage = {GetAttacker = function() return nil end, GetInflictor = function() end}
 PLUGIN:EntityTakeDamage(entity, damage)
 check(not entity.cotzSleeping and entity.flags == 0 and entity.state == 2,

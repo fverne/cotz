@@ -57,6 +57,10 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 ENT.flatbulletresistance = 3
 ENT.percentbulletresistance = 10
 
+ENT.navigationLeapRange = 800
+ENT.navigationLeapMinRange = 200
+ENT.navigationShortLeapRange = 200
+
 function ENT:Initialize()
 	self.Model = "models/monsters/snork2.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
@@ -200,7 +204,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			local TEMP_Rand = math.random(1,5)
 
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance > 200 && distance < 800 then
+			if distance > self.navigationLeapMinRange and distance < self.navigationLeapRange then
 				if(TEMP_Rand==1) then		
 					self.CanLongJump = CurTime()+6
 					self.CanJump = CurTime()+3
@@ -218,7 +222,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < 200 then
+		if distance < self.navigationShortLeapRange then
 			if(self.CanJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 			
