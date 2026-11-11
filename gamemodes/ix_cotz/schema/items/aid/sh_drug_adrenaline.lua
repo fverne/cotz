@@ -32,7 +32,7 @@ ITEM.functions.use = {
 		local quantity = item:GetData("quantity", item.quantity)
 		
 		item.player:AddBuff("buff_staminarestore", 300, { amount = 2.5 })
-		player:AddBuff("buff_sprintboost", 30, { multiplier = 1.25 })
+		item.player:AddBuff("buff_sprintboost", 30, { multiplier = 1.25 })
 		--item.player:AddBuff("buff_adrenalinerunspeed", 50, { })
 		--item.player:AddBuff("buff_adrenalinepunchdamage", 50, { })
 
