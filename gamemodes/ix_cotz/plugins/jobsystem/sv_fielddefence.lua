@@ -1,7 +1,5 @@
 local encounters, attackers = {}, {}
 local spawnBudget = ix.jobs.field.defenceSpawnBudget
-local NPC_MIN, NPC_MAX = Vector(-32, -32, 0), Vector(32, 32, 96)
-local TRACE_UP, TRACE_DOWN, CLEARANCE = Vector(0, 0, 32), Vector(0, 0, 128), Vector(0, 0, 2)
 
 local function claimKey(character, job)
 	return character:GetID() .. ":" .. job.rewardKey
@@ -95,11 +93,8 @@ local function spawnPosition(defence)
 	local points = table.Copy(defence.spawnPoints)
 	table.Shuffle(points)
 	for _, packed in ipairs(points) do
-		local position = ix.jobs.field.Unpack(packed)
-		local trace = util.TraceHull({start = position + TRACE_UP, endpos = position - TRACE_DOWN,
-			mins = NPC_MIN, maxs = NPC_MAX, mask = MASK_SOLID})
-		local point = trace.HitPos + CLEARANCE
-		if trace.Hit and not trace.StartSolid and trace.HitNormal.z >= 0.5 and util.IsInWorld(point)
+		local point = ix.eventController:GetSpawnLocation(ix.jobs.field.Unpack(packed))
+		if point
 			and not ix.eventController:HasPlayerNear(point, defence.playerSafeDistance)
 			and ix.eventController:CanSpawnMutant(point, true) then
 			return point
@@ -107,7 +102,7 @@ local function spawnPosition(defence)
 	end
 end
 
-local function spawnAttacker(client, defence, encounter, slot)
+local function spawnAttacker(defence, encounter, slot)
 	if spawnBudget <= 0 then return end
 	local position = spawnPosition(defence)
 	if not position then return end
@@ -118,15 +113,13 @@ local function spawnAttacker(client, defence, encounter, slot)
 		return
 	end
 	encounter.combatPack = encounter.combatPack or ix.eventController:CreateCombatPack(position, true)
-	npc.cotzCombatPack = encounter.combatPack
+	npc.cotzCombatPack, npc.cotzNoSleep = encounter.combatPack, true
 	npc:SetPos(position)
 	npc:Spawn()
-	npc:DropToFloor()
 	ix.eventController:RegisterMutant(npc, true)
 	if not IsValid(npc) or npc.cotzPopulationRejected then return end
-	npc.cotzNoSleep = true
-	npc:SetEnemy(client)
-	npc:UpdateEnemyMemory(client, client:GetPos())
+	npc.cotzCombatObjective, npc.cotzCombatObjectiveRadius = encounter.sampler, defence.threatRadius
+	ix.eventController:UpdateCombatSchedule(npc)
 	slot.entity = npc
 	attackers[npc] = {encounter = encounter, slot = slot}
 end
@@ -147,9 +140,9 @@ function ix.jobs.field.DefenceDamage(entity, damage)
 	entity:SetHealth(encounter.health)
 end
 
--- Bundled stalker_ai fights players/NPCs rather than sampler props. Visible nearby
--- mutants disrupt the equipment while engaging defenders, without detouring their AI.
-local function updateWave(client, defence, encounter, elapsed)
+-- Bundled stalker_ai cannot melee sampler props. Idle attackers disrupt the device
+-- on arrival; seeing or being damaged by a player gives ordinary combat priority.
+local function updateWave(defence, encounter, elapsed)
 	local cleared, pressure = true, 0
 	for _, slot in ipairs(encounter.slots) do
 		if not slot.killed then
@@ -158,14 +151,11 @@ local function updateWave(client, defence, encounter, elapsed)
 				if slot.entity then attackers[slot.entity] = nil end
 				if IsValid(slot.entity) then slot.entity:Remove() end
 				slot.entity = nil
-				spawnAttacker(client, defence, encounter, slot)
+				spawnAttacker(defence, encounter, slot)
 			end
 			if IsValid(slot.entity) and slot.entity:Health() > 0 then
-				if not IsValid(slot.entity:GetEnemy()) then
-					slot.entity:SetEnemy(client)
-					slot.entity:UpdateEnemyMemory(client, client:GetPos())
-				end
-				if slot.entity:GetPos():DistToSqr(encounter.sampler:GetPos()) <= defence.threatRadius ^ 2
+				if not IsValid(slot.entity:GetEnemy())
+					and slot.entity:GetPos():DistToSqr(encounter.sampler:GetPos()) <= defence.threatRadius ^ 2
 					and slot.entity:Visible(encounter.sampler) then pressure = pressure + 1 end
 			end
 		end
@@ -198,7 +188,7 @@ function ix.jobs.field.UpdateDefence(client, character, npc, job, keep)
 	defence.guardedSeconds = math.min(defence.duration, defence.guardedSeconds + elapsed)
 	defence.attemptSeconds = defence.attemptSeconds + elapsed
 	if os.time() >= (defence.nextWaveAt or 0) and defence.completedWaves < #defence.waves then
-		if updateWave(client, defence, encounter, elapsed) then
+		if updateWave(defence, encounter, elapsed) then
 			for _, slot in ipairs(encounter.slots) do
 				if slot.entity then attackers[slot.entity] = nil end
 			end

@@ -49,21 +49,40 @@ function playerMeta:GetPos() return self.position end
 function playerMeta:GetCharacter() return self.character end
 function playerMeta:GetCollisionGroup() return self.group end
 function playerMeta:SetCollisionGroup(value) self.group = value end
+function playerMeta:SetCustomCollisionCheck(value)
+	assert(IsValid(self), "Tried to use a NULL entity!")
+	self.customCollision = value
+end
+function playerMeta:CollisionRulesChanged()
+	assert(IsValid(self), "Tried to use a NULL entity!")
+	self.collisionUpdates = (self.collisionUpdates or 0) + 1
+	self.passageAtRefresh = self.cotzHandsPassage
+end
+function playerMeta:SetNWVarProxy(key, callback)
+	self.proxies = self.proxies or {}
+	self.proxies[key] = callback
+end
 function playerMeta:SetNWBool(key, value) self.nw[key] = value end
 function playerMeta:GetNWBool(key, default) if self.nw[key] == nil then return default end return self.nw[key] end
 local path = "gamemodes/ix_cotz/plugins/corechanges/sh_handspassage.lua"
 dofile(path)
 local owner, other = entity(1, 0), entity(2, 100)
-check(PLUGIN:ShouldCollide(owner, other) == nil, "player collisions use engine groups instead of ShouldCollide")
+check(PLUGIN:ShouldCollide(owner, other) == nil, "ordinary player collisions do not override other handlers")
 check(PLUGIN:ShouldCollide({IsSTALKERNPC = true}, {IsSTALKERNPC = true}) == false,
 	"the unrelated STALKER NPC collision rule survives")
-check(owner:SetHandsPassage(true) and owner.group == 15, "passage uses the passable-door collision group")
+check(owner:SetHandsPassage(true) and owner.group == 5, "passage preserves the normal collision group")
+check(owner.customCollision and owner.passageAtRefresh, "enabling updates cached collision rules immediately")
+check(PLUGIN:ShouldCollide(owner, other) == false and PLUGIN:ShouldCollide(other, owner) == false,
+	"one enabled player permits passage in both movement directions")
+local prop = {IsPlayer = function() return false end}
+check(PLUGIN:ShouldCollide(owner, prop) == nil and PLUGIN:ShouldCollide(prop, owner) == nil,
+	"passage preserves collisions with non-player entities")
 check(owner:GetHandsPassage() and owner.character.data.cotzHandsPassage and owner.character.saves == 1,
 	"enabling saves the per-character toggle immediately")
 check(next(timers) == nil, "passage never starts an expiry timer")
 other.position = vector(10, 0, 0)
 other:SetHandsPassage(true)
-check(not owner:SetHandsPassage(false) and owner.group == 15 and owner.character.data.cotzHandsPassage,
+check(not owner:SetHandsPassage(false) and owner.group == 5 and owner.character.data.cotzHandsPassage,
 	"overlapping another passable character cannot disable passage or change the saved preference")
 other.position = vector(100, 0, 0)
 stuck = true
@@ -76,23 +95,23 @@ check(owner:SetHandsPassage(false) and owner.group == 5 and not owner.character.
 owner.group = 9
 owner:SetHandsPassage(true)
 owner:SetHandsPassage(false)
-check(owner.group == 9, "disabling restores the previous collision group")
+check(owner.group == 9, "toggling preserves an existing custom collision group")
 owner.group = 5
 owner:SetHandsPassage(true)
 local saved = owner.character.data
 local reconnected = entity(3, 200)
 reconnected.character = character(saved)
 PLUGIN:PostPlayerLoadout(reconnected)
-check(reconnected:GetHandsPassage() and reconnected.group == 15, "a fresh player entity restores saved passage")
+check(reconnected:GetHandsPassage() and reconnected.group == 5, "a fresh player entity restores saved passage")
 reconnected.group = 5
 PLUGIN:PostPlayerLoadout(reconnected)
-check(reconnected.group == 15, "respawning reapplies the saved preference after the engine resets groups")
+check(reconnected.group == 5, "respawning reapplies the saved preference without replacing the engine group")
 owner.character = character()
 owner.group = 5
 other.position = vector(0, 0, 0)
 PLUGIN:PostPlayerLoadout(owner)
 local pending = timers["cotz/hands/restore-collision/1"]
-check(pending and owner:GetHandsPassage() and owner.group == 15 and owner.character.data.cotzHandsPassage == nil,
+check(pending and owner:GetHandsPassage() and owner.group == 5 and owner.character.data.cotzHandsPassage == nil,
 	"a character switch defers unsafe restoration without enabling passage on the new character")
 other.position = vector(100, 0, 0)
 pending.callback()
@@ -158,8 +177,38 @@ function owner:EmitSound() end
 function SWEP:SetNextPrimaryFire() end
 SWEP:SecondaryAttack()
 check(other.pushed and not owner:GetHandsPassage(), "raised-hand pushing retains its original behavior")
-SERVER, CLIENT = false, true
-dofile(path)
+other:SetHandsPassage(false)
+check(PLUGIN:ShouldCollide(owner, other) == nil and owner.passageAtRefresh == false,
+	"disabling refreshes the cached rule and restores ordinary player collisions")
+owner.group, owner.cotzHandsCollisionGroup = 15, 9
 owner.nw["cotz/hands/player-passage"] = true
-check(owner:GetHandsPassage(), "client prediction reads the replicated toggle without a collision proxy")
+PLUGIN:PostPlayerLoadout(owner)
+check(owner.group == 9 and owner.cotzHandsCollisionGroup == nil,
+	"loadout restores a collision group left by the previous implementation")
+SERVER, CLIENT = false, true
+owner.nw["cotz/hands/player-passage"] = true
+dofile(path)
+check(owner:GetHandsPassage() and owner.cotzHandsPassage and owner.customCollision,
+	"existing client entities initialize from replicated passage on reload")
+local remote = entity(4, 300)
+remote.nw["cotz/hands/player-passage"] = true
+PLUGIN:NetworkEntityCreated(remote)
+check(remote.cotzHandsPassage and remote.customCollision,
+	"newly networked players initialize passage for late joiners")
+local proxy = remote.proxies["cotz/hands/player-passage"]
+local updates = remote.collisionUpdates
+remote.invalid = true
+proxy(remote, "cotz/hands/player-passage", true, false)
+check(remote.collisionUpdates == updates and remote.cotzHandsPassage,
+	"a proxy receiving an invalid entity skips collision methods and cached state changes")
+remote.invalid = nil
+proxy(remote, "cotz/hands/player-passage", true, false)
+check(remote.collisionUpdates == updates + 1 and remote.passageAtRefresh == false,
+	"replication invalidates collision rules using the proxy value before GetNWBool changes")
+owner.proxies["cotz/hands/player-passage"](owner, "cotz/hands/player-passage", true, false)
+check(PLUGIN:ShouldCollide(remote, owner) == nil,
+	"client collision rules use the updated cache even while NW getters still expose old values")
+proxy(remote, "cotz/hands/player-passage", false, true)
+check(PLUGIN:ShouldCollide(remote, owner) == false and PLUGIN:ShouldCollide(owner, remote) == false,
+	"replicated passage applies symmetrically on the client")
 print(string.format("PASS: %d hands passage checks", checks))

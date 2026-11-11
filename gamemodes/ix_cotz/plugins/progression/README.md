@@ -1,12 +1,24 @@
 # Progression engine
 
 The [town progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) uses 25 finite
-contacts, 49 independent branches and 639 hand-in milestones (including 223 stock intermissions). Town compilation scales new quantities
+contacts, 52 branches and 631 hand-in milestones (including 212 stock intermissions). Town compilation scales new quantities
 by the contact's effort multiplier. Fresh `v3/` IDs do not inherit old completion permissions; old
 requests and contributions remain saved history. Inventory, money and paid hideout assets are retained.
 Ballast's bank service is retired with its data preserved. Suture provides paid suit conversions;
 Technut retains painting. Mute's existing STALKERnet features have explicit service gates.
+Technut's initial anorak stock step and eleven intermediate stock-preparation steps are retired.
+Anoraks remain starting stock; the Mail Jacket starts suit progression and each later suit follows its
+preceding suit directly. Retired records stay saved history;
+retained suit IDs, request quantities, partial contributions and completed purchases are preserved.
 The town service labels are included in benefit summaries; optional `plannedUnlocks` remain inactive.
+
+Paid repairs at Technut and Boss use `2 * round(missingCondition * price^(1/3))` for suits,
+masks, helmets and repairable weapons. Weapons read `wear`; suits and headgear read `durability`.
+The cloth mask alone sets `repairCostMultiplier = 1 / 3`, reducing its per-condition repair rate
+before rounding. Other masks and helmets keep the standard rate.
+Earned discounts apply after this base calculation. At 0% condition, a cloth mask costs 666 RU
+and a standard anorak costs 3,768 RU before discounts. Legacy `repairCost` item fields do not
+control these fees; each repairable base supplies its rate through `GetRepairCost()`.
 
 Progression is a top-level menu tab beside Tasks, using contact cards and the shared
 [COTZ typography and palette](../../../../docs/ui-style.md). The list begins empty for each character.
@@ -14,10 +26,14 @@ Opening a contact's progression conversation records its currently active topics
 data key `knownProgressionTopics`; newly unlocked topics require another conversation before they
 appear. Discovery survives reconnects and does not change progression eligibility or saved progress.
 Purple inventory backgrounds and Progression tooltip labels use the same discovery rules: only
-outstanding items for active, discussed topics are highlighted. Ordinary task highlighting is unchanged.
+outstanding items for active, discussed topics are highlighted. Inventory tooltips list each requesting
+contact beside Task or Progression, with repeated contacts shown once per type. Courier tasks list
+their eligible delivery recipients. Ordinary task highlighting is unchanged.
 The tab uses a fill-docked scrolling list with one card per contact. Within each card, spaced
 dividers separate the heading and earned benefits from each progression section. Long task
-requirements and rewards wrap inside the card.
+requirements and rewards wrap inside the card. A search bar stays above the list and filters contact
+cards as you type, matching names, visible requests, required items and rewards without regard to case.
+Clearing the search restores all discovered cards; undiscovered topics remain hidden.
 
 Town requests use each contact's explicit core/support specialty pools rather than a global theme
 rotation. Marsh branches' first two original milestones and all work below 45% use only Marsh-sourced
@@ -55,6 +71,27 @@ Screws, D-cells and small lubricant aerosols retain their existing later-region 
 these alternatives are not promises of equal availability on every map. Tool tiers and story inputs
 remain distinct. Pool IDs, quantities and saved progression selections are preserved.
 
+Requirement slots optionally declare `mode = "any"` or `mode = "random"`. Omitted mode retains
+legacy behaviour. Any-mode selections snapshot a category's accepted items and one canonical counter;
+random-mode selections snapshot the chosen item. `GetRequirementKey` and `GetRequirementChoices` accept
+the owning character as their third argument to resolve saved choices. Task labels, inventory highlights,
+dialogue actions and server consumption use these same helpers.
+All town slots declare a mode. Their first 20% of actual connected-chain unlocks, rounded up, are category-only;
+stock intermissions remain category-wide. Other later requests use a specific final slot and category
+slots before it. Town `categoryChoiceRange` selects 3–4 types per character and saves disjoint accepted
+subsets, even when catalogue pools overlap. New category totals have a matching 3–4 batch minimum.
+`GetRequirementUnitSize` reads saved raw-unit costs: three nuts or four bolts contribute one batch.
+Nuts and bolts must appear together in category subsets. New specific requests scale their raw target
+by the batch minimum once. Inventory surplus and actual consumed-item valuation are preserved.
+Mode version 2 retains old specific targets and credited progress, raises outstanding category totals
+below three and replaces full-category lists once. Fulfilled categories and completed milestones stay
+fulfilled. Subsequent definition edits do not reroll subsets or batch costs.
+See the [town policy](../../../../docs/npc-overhaul/progression-overhaul.md#category-totals-and-specific-requests).
+Run `luatex --luaonly tests/progression_subsets_spec.lua` for per-character subsets and batch consumption.
+Run `luatex --luaonly tests/town_requirement_modes_spec.lua` for all compiled town boundaries.
+Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` for mixed delivery, snapshot,
+legacy conversion, isolation, failed-removal and duplicate-payment coverage.
+
 libs/sh_storage.lua exposes character-owned snapshots. Server mutations commit through the setter;
 clients only read replicated state. Requirements are assigned once by the server. Policy 4 converts outstanding ineligible/out-of-region
 town inputs once while preserving fulfilled contributions and eligible saved requests. Hand-ins validate
@@ -63,6 +100,9 @@ Whole-stack removal must succeed before progress/rewards are granted.
 
 Progression persists in its own owner-local `progression` character var and `MEDIUMTEXT` SQL column,
 outside generic character data. This targets a fresh database; see [character storage](../../../../docs/database/README.md).
+Initial owner snapshots and progression updates use the schema's compressed character transport,
+split into reliable chunks below the net message limit. The setter retains its server-side
+`CharacterVarChanged` callback and owner-only replication. This networking fix preserves existing saves.
 
 All finite progression pays only accumulated hand-in value at the existing 60% rate, rounded up once
 on completion. Town hand-ins now accrue monetary credit too; flat completion cash is removed.
@@ -85,8 +125,11 @@ Only current registered definitions participate in task discovery and equipment 
 old-ID permission import or completion alias. The explicit policy-4 request conversion and activation
 of inserted intermissions preserve existing completions; unfinished unlocks require the new stages.
 
-Completion speech prefixes the authored reply with the completing character's current name for
-both town and standalone contacts. Nearby listeners can identify who the NPC is addressing.
+Town completion messages use the authored reply verbatim, including Mute's nonverbal presentation.
+Standalone contacts retain the completing character's current name as a prefix. All 631 active town
+briefings and completions live in their owning contact definitions; the shared engine contains no
+individual contact prose. Run `luatex --luaonly tests/progression_dialogue_spec.lua` for coverage and
+`luatex --luaonly tests/progression_spec.lua` for both notification paths.
 
 ## Runtime and checks
 
@@ -98,7 +141,10 @@ World-arrival support remains for explicit worldNPC definitions; Pripyat town ar
     luatex --luaonly tests/progression_expansion_spec.lua
     python3 tests/progression_expansion_spec.py
     luatex --luaonly tests/progression_spec.lua
+    luatex --luaonly tests/item_requirement_tooltips_spec.lua
     luatex --luaonly tests/character_storage_spec.lua
+    luatex --luaonly tests/character_sync_spec.lua
+    luatex --luaonly tests/character_network_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua
     luatex --luaonly tests/progression_services_spec.lua
     luatex --luaonly tests/task_rewards_spec.lua

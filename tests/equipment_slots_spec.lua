@@ -328,6 +328,26 @@ local bagX, bagY, foundBag = inventory:FindEmptySlot(1, 1)
 check(bagX == 1 and bagY == 1 and foundBag == bag, "Backpack fitting preserves the bundled bag search")
 inventory.slots = originalSlots
 
+inventory = newInventory(69)
+inventory.client = client
+plugin:ConfigureInventory(inventory)
+local headlamp = newItem({isHeadLamp = true, width = 1, height = 1})
+local flashlight = newItem({weaponCategory = "flashlight", width = 1, height = 1}, 2, 1)
+check(plugin:GetItemSlots(headlamp)[1] == 13 and plugin:GetItemSlots(flashlight)[1] == 13,
+	"Headlamps and handheld flashlights share the existing light region")
+perform(headlamp, "Equip")
+perform(flashlight, "Equip")
+check(headlamp.data.equip and not flashlight.data.equip,
+	"An equipped headlamp blocks equipping a handheld flashlight")
+perform(headlamp, "EquipUn")
+perform(flashlight, "Equip")
+local lightX, lightY = plugin:GetStoragePosition(13)
+check(flashlight.data.equip and flashlight.gridX == lightX and flashlight.gridY == lightY,
+	"A handheld flashlight occupies the light region after the headlamp is removed")
+perform(headlamp, "Equip")
+check(not headlamp.data.equip and flashlight.data.equip,
+	"An equipped handheld flashlight blocks equipping a headlamp")
+
 inventory = newInventory(70)
 inventory.client = client
 plugin:ConfigureInventory(inventory)

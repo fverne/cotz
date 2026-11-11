@@ -1,6 +1,7 @@
 local PLUGIN = PLUGIN
 local active = {}
 local TICK_INTERVAL = 1
+local PAIN_COOLDOWN = 5
 
 local function isFinite(value)
 	return type(value) == "number" and value == value and value > -math.huge and value < math.huge
@@ -17,6 +18,35 @@ local function synchronize(client, severity)
 	if client:GetLocalVar("bleedingSeverity", 0) ~= display then
 		client:SetLocalVar("bleedingSeverity", display)
 	end
+end
+
+local function applyBleedingDamage(client, character, damage, now)
+	local punchAngles = client:GetViewPunchAngles()
+	local punchVelocity = client:GetViewPunchVelocity()
+	local nextPain = client.ixNextPain
+	local suppressPain = now < (client.cotzNextBleedingPain or 0)
+
+	-- Bundled Helix gates PlayerHurt sounds with ixNextPain. Only override it for this bleeding hit.
+	if suppressPain then client.ixNextPain = math.max(nextPain or 0, now) end
+	local damageInfo = DamageInfo()
+	damageInfo:SetDamage(damage)
+	damageInfo:SetDamageType(DMG_GENERIC)
+	damageInfo:SetAttacker(game.GetWorld())
+	damageInfo:SetInflictor(game.GetWorld())
+	client:TakeDamageInfo(damageInfo)
+	if not IsValid(client) then return end
+
+	if suppressPain then
+		client.ixNextPain = nextPain
+	elseif client:GetCharacter() == character and client:Alive() and (client.ixNextPain or 0) > (nextPain or 0) then
+		client.cotzNextBleedingPain = now + PAIN_COOLDOWN
+	end
+
+	if not client:Alive() or client:GetCharacter() ~= character then return end
+
+	-- Restore existing recoil instead of clearing it along with the engine's bleeding view punch.
+	client:SetViewPunchAngles(punchAngles)
+	client:SetViewPunchVelocity(punchVelocity)
 end
 
 function PLUGIN:GetBleeding(client)
@@ -94,36 +124,17 @@ function PLUGIN:TickBleeding(client, state, now)
 	self:SetBleedingSeverity(client, severity - ix.config.Get("bleedingClotRate", 1))
 
 	if damage > 0 then
-		local damageInfo = DamageInfo()
-		damageInfo:SetDamage(damage)
-		damageInfo:SetDamageType(DMG_GENERIC)
-		damageInfo:SetAttacker(game.GetWorld())
-		damageInfo:SetInflictor(game.GetWorld())
-		client:TakeDamageInfo(damageInfo)
+		applyBleedingDamage(client, state.character, damage, now)
 	end
 end
 
 function PLUGIN:RestoreBleeding(client)
 	active[client] = nil
+	client.cotzNextBleedingPain = nil
 	self:SetBleedingSeverity(client, self:GetBleeding(client))
 end
 
-function PLUGIN:PlayerLoadedCharacter(client)
-	self:RestoreBleeding(client)
-end
-
-function PLUGIN:PrePlayerLoadedCharacter(client)
-	client.cotzBandageAction = nil
+function PLUGIN:StopBleeding(client)
 	active[client] = nil
-	client:SetLocalVar("bleedingSeverity", 0)
-end
-
-function PLUGIN:PlayerDisconnected(client)
-	active[client] = nil
-end
-
-function PLUGIN:PlayerDeath(client)
-	client.cotzBandageAction = nil
-	self:SetBleedingSeverity(client, 0)
-	active[client] = nil
+	client.cotzNextBleedingPain = nil
 end

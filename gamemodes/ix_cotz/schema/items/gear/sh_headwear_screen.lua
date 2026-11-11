@@ -8,6 +8,7 @@ ITEM.weight = 4
 ITEM.overlayPath = "vgui/overlays/hud_sci"
 
 ITEM.isGasmask = true
+ITEM.filterType = "scientific"
 ITEM.isHelmet = true
 ITEM.isBackpack = true
 ITEM.outfitCategory = "Backpack"

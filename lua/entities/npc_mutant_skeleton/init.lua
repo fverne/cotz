@@ -162,6 +162,14 @@ function ENT:STALKERNPCThink()
 	end
 
 	-- GRAB
+	if self.IsGrabbing ~= 0 and not IsValid(self.GrabTarget) then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime() + 10
+		self.GrabTarget = nil
+		self.IsGrabbing = 0
+	end
+
 	if self.grabbing1 < CurTime() && self.IsGrabbing == 1 then
 		if(IsValid(self)&&self!=nil&&self!=NULL) then
 			local dmg = DamageInfo()
@@ -177,24 +185,25 @@ function ENT:STALKERNPCThink()
 		end
 	end
 
-	if self.grabbing2 < CurTime() && self.IsGrabbing == 2 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self.NextAbilityTime = CurTime()+10
-
+	if self.grabbing2 < CurTime() and self.IsGrabbing == 2 then
+		self.NextAbilityTime = CurTime() + 10
+		local target = self.GrabTarget
+		if IsValid(target) then
 			local dmg = DamageInfo()
 			dmg:SetDamage(7)
 			dmg:SetAttacker(self)
 			dmg:SetDamageType(DMG_SONIC)
 			dmg:SetInflictor(self)
-			dmg:SetDamagePosition(self.GrabTarget:NearestPoint(self:GetPos()))
+			dmg:SetDamagePosition(target:NearestPoint(self:GetPos()))
 
-			self.GrabTarget:TakeDamageInfo(dmg)
+			target:TakeDamageInfo(dmg)
 
-			self.GrabTarget:Freeze(false)
-			self.GrabTarget = nil
-			self.IsGrabbing = 0
-
+			if IsValid(target) and target:IsPlayer() then
+				target:Freeze(false)
+			end
 		end
+		self.GrabTarget = nil
+		self.IsGrabbing = 0
 	end
 end
 
@@ -231,7 +240,9 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 						self:SetPos(self:GetPos() + (self:GetForward()*25))
 
 						local target = self:GetEnemy()
-						target:Freeze(true)
+						if target:IsPlayer() then
+							target:Freeze(true)
+						end
 
 						self.GrabTarget = target
 
@@ -253,13 +264,13 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 end
 
 function ENT:STALKERNPCOnKilled()
-	if self.GrabTarget then
+	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
 		self.GrabTarget:Freeze(false)
 	end
 end
 
 function ENT:STALKERNPCRemove() 
-	if self.GrabTarget then
+	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
 		self.GrabTarget:Freeze(false)
 	end
 end

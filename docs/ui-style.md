@@ -20,12 +20,24 @@ It is automatically distributed/included as a client schema library before gamep
 `Schema:LoadFonts` refreshes its fonts through the bundled Helix font/resolution lifecycle.
 Existing reference panels keep their own layouts; the helper does not replace the global Derma skin.
 
+Settings → Appearance → COTZ font scale (`cotzUIFontScale`) controls the shared UI,
+Tasks, Squads and Equipment font families, including headers. It defaults to 1.30
+(about 30% larger), with a range of 0.75–2.00; 1.00 restores the original sizes.
+Controls and spacing scale with their text. Open panels refresh when the setting changes,
+and Helix saves the preference locally. Progression, hideouts, gear customization,
+shared dialogs and markers inherit the shared font sizes.
+
+The schema tooltip adds its frame padding outside the measured rows. Its content area must retain
+the full measured width and height so wrapped item descriptions and the final property rows fit.
+When checking tooltips in multiplayer, include a Lost Note with saved stash text and coordinates.
+
 The Q-menu Items tab uses `ix.util.GetItemIcon` for centered, aspect-preserving item previews,
 including custom images and cached model renders. Each entry resolves its material once when created;
 painting reuses that material without further icon lookups or generation.
 Left-click spawns an item; right-click gives it to you.
 
-The reference scale is `Clamp(Min(ScrW()/1920, ScrH()/1080), 0.75, 2)`. Major windows use viewport
+The reference scale is `Clamp(Min(ScrW()/1920, ScrH()/1080), 0.75, 2)` multiplied by the
+COTZ font scale preference, exposed through `ix.cotzUI.GetScale()`. Major windows use viewport
 fractions and scaled maximum widths. Shared frames update their existing controls on resolution
 changes. Use `SetHeight` for fixed-height inputs/footer controls inside them; wrapping actions size
 to their content. Fill scroll panels dock after fixed footer controls. Descriptions, long names and

@@ -61,8 +61,10 @@ local function paySelected(character, key, offers)
 		end
 	end
 	for _, reward in ipairs(choice.items) do
+		local queuedReward = table.Copy(reward)
+		queuedReward.taskNPC = (key:match("^job:") or key:match("^bonus:")) and offer.npc or false
 		line.pendingRewards[#line.pendingRewards + 1] =
-			ix.progression.PrepareReward(character, claimLine, line, table.Copy(reward))
+			ix.progression.PrepareReward(character, claimLine, line, queuedReward)
 	end
 	record.lines[claimLine] = line
 	offers[key] = nil
@@ -272,6 +274,13 @@ function ix.taskRewards.ReconcileCharacter(character)
 		end
 		local offer = offers[job.rewardKey]
 		local definition = ix.jobs.list[job.identifier]
+		if definition and definition.requiredItem and not definition.townProgression then
+			local cash = ix.taskRewards.FixedMoney(definition, job.numberRec, job.deliveredValue)
+			if job.moneyReward ~= cash then
+				job.moneyReward = cash
+				changed = true
+			end
+		end
 		if not offer or offer.npc ~= npc or offer.earned or not definition or definition.townProgression then return end
 		if offer.version ~= version or job.supplyCatalogueVersion ~= version then
 			offer.choices, offer.selected, offer.ready, offer.retrySelected = {}, nil, nil, nil
@@ -370,27 +379,6 @@ local function hasClaimSpace(character, choice)
 	return #pending + #choice.items <= MAX_PENDING_REWARDS
 end
 
-function ix.taskRewards.RedeemKit(character, npc, itemID, choiceIndex, label)
-	if type(itemID) ~= "number" or itemID % 1 ~= 0 then return false end
-	local item = character:GetInventory():GetItems()[tonumber(itemID)]
-	if not item or not ix.taskRewards.IsTaskKit(item.uniqueID) then return false end
-	local key = "kit:" .. item:GetID()
-	local choices = ix.taskRewards.BuildChoices(character, npc,
-		ix.taskRewards.ExpectedValue(item.uniqueID), key)
-	if type(choiceIndex) ~= "number" or choiceIndex % 1 ~= 0 or not choices[choiceIndex] then return false end
-	if choices[choiceIndex].label ~= label or not hasClaimSpace(character, choices[choiceIndex]) then return false end
-	local offers = offersFor(character)
-	-- The owned item is the consumable entitlement; retire it before inventory insertion can re-enter.
-	if item:GetData("taskRewardRedeemed", false) then return false end
-	item:SetData("taskRewardRedeemed", true)
-	item:Remove()
-	offers[key] = {npc = npc, choices = choices, selected = choiceIndex, earned = true}
-	saveOffers(character, offers)
-	paySelected(character, key, offers)
-
-	return true
-end
-
 function ix.taskRewards.ExecuteBarter(character, npc, barterID, index, label)
 	local barter = ix.npcbarter.barterdict[npc] and ix.npcbarter.barterdict[npc][barterID]
 	if not barter or not ix.npcbarter.activebarters[barterID]
@@ -416,6 +404,7 @@ end
 
 function ix.taskRewards.PreviewJob(character, npc, difficulty, categories)
 	ix.taskRewards.ReconcileCharacter(character)
+	if ix.taskRewards.HasUnclaimedRewards(character, npc) then return end
 	if not ix.taskRewards.CanTakeDifficulty(character, difficulty) then return end
 	if character:GetJobs()[npc] or type(categories) ~= "table" or #categories == 0 then return end
 	local previews = table.Copy(character:GetData("taskJobPreviews", {}) or {})

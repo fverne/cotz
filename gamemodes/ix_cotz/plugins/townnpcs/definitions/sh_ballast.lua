@@ -73,10 +73,10 @@ PLUGIN:Register("ballast", {
 			name = "Initial hideout access",
 			kind = "delivery",
 			requires = {},
-			briefing = "Bring me one crowbar or one bat. Either will do. I can arrange a room for you once you've brought it over; we can talk about improvements afterwards.",
-			completion = "Put it here. You can arrange your room with me now. Have a look at the locations before you settle on one.",
+			briefing = "Bring me one crowbar or one bat, whichever you can spare. Keep it unequipped for the hand-in. Then we can arrange your room here in the Swamps. A place to put the pack down is a reasonable beginning; nobody has to explain their whole future over the first load.",
+			completion = "That will do. You can claim a room at the available Swamps locations now. Take a look before settling in.",
 			requirements = {
-				{pool = "hideout_access_tool", quantity = 1},
+				{pool = "hideout_access_tool", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "hideoutAccess", name = "Initial hideout access at Ballast"},
@@ -84,6 +84,7 @@ PLUGIN:Register("ballast", {
 			branchIndex = 1,
 			branchLength = 1,
 			acquisitionMaps = {"rp_marsh_cs"},
+			categoryOnly = true,
 			requirementAlternatives = {bat = "crowbar"},
 		},
 		{
@@ -92,10 +93,10 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 1",
 			kind = "delivery",
 			requires = {"v3/hideout/access"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "For the first storage arrangements, I need this packing-supply delivery. It opens paid container installation for your Swamps rooms; the initial general crate still comes with a new room. I like to mention both before someone imagines I've packed their entire home for them.",
+			completion = "The first container purchases are open. Your room's starter crate remains its own arrangement.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 1},
+				{pool = "town_expansion_a436288caee5", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ballastHideout1", name = "Hideout improvements 1"},
@@ -104,6 +105,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 1,
 		},
 		{
@@ -112,10 +114,10 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 2",
 			kind = "delivery",
 			requires = {"v3/hideout/01"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "The next delivery opens the next storage tier and the first paid allowance for two more loose items in a room. Bring the packing supplies listed here. People discover how much they've brought home when the floor begins answering for them.",
+			completion = "The next storage tier and first floor allowance are available to buy. Nothing needs moving until you choose an improvement.",
 			requirements = {
-				{pool = "town_expansion_5678ca47eff1", quantity = 1},
+				{pool = "town_expansion_a436288caee5", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ballastHideout2", name = "Hideout improvements 2"},
@@ -124,6 +126,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 2,
 		},
 		{
@@ -132,10 +135,10 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 3",
 			kind = "delivery",
 			requires = {"v3/hideout/02"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "This packing order opens another storage tier and the paid furnishing options. I'm not much of a decorator. I can tell when a chair has become a shelf, though usually its owner is sitting on the bed explaining where all the space went.",
+			completion = "Storage and furnishing purchase access are ready. You can decide which objects deserve the chair.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 1},
+				{pool = "town_expansion_a436288caee5", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ballastHideout3", name = "Hideout improvements 3"},
@@ -144,6 +147,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 3,
 		},
 		{
@@ -152,10 +156,10 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 4",
 			kind = "delivery",
 			requires = {"v3/hideout/03"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "Bring this order for the next storage tier and the second paid floor allowance. That's another two loose items if you buy the allowance. I would still leave somewhere to put your feet when you come in tired.",
+			completion = "The next storage tier and second floor allowance can be purchased. The floor plan is still yours to argue with.",
 			requirements = {
-				{pool = "town_expansion_5678ca47eff1", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout4", name = "Hideout improvements 4"},
@@ -164,6 +168,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 4,
 		},
 		{
@@ -172,11 +177,11 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 5",
 			kind = "delivery",
 			requires = {"v3/hideout/04"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "The next storage improvement needs this supply delivery. Packing is easier when you decide what belongs together before putting the lid down. People tend to begin considering that once the case is already full. Bring the list and we'll open the next purchases.",
+			completion = "Another storage tier is available to buy. The supplies are all here, and none underneath my chair.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 2},
-				{pool = "town_expansion_16eadd0282a9", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4efa86832367", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout5", name = "Hideout improvements 5"},
@@ -185,6 +190,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 5,
 		},
 		{
@@ -193,11 +199,11 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 6",
 			kind = "delivery",
 			requires = {"v3/hideout/05"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "I'd like the packing materials on this order for the next room-storage arrangement. I enjoy a load that makes sense when you open it again. That's a modest ambition until somebody explains their system relies entirely on remembering.",
+			completion = "The next storage purchases are open. These materials can go where I'll find them again.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 2},
-				{pool = "town_expansion_26349e00c296", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_8313ff40d2d3", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout6", name = "Hideout improvements 6"},
@@ -206,6 +212,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 6,
 		},
 		{
@@ -214,11 +221,11 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 7",
 			kind = "delivery",
 			requires = {"v3/hideout/06"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "This delivery opens a further storage tier. Look at the complete request before deciding the pack has room. I've heard 'just one more thing' often enough to know it usually arrives in company.",
+			completion = "Your next storage tier is available for purchase. A complete delivery, without the surprise addition.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 2},
-				{pool = "town_expansion_74ccfb2736e2", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_8313ff40d2d3", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout7", name = "Hideout improvements 7"},
@@ -227,6 +234,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 7,
 		},
 		{
@@ -235,11 +243,11 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 8",
 			kind = "delivery",
 			requires = {"v3/hideout/07"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "For the next storage arrangement, bring these packing supplies here. I don't mind a nervous person taking time to set a load down. It's the confident swing over the table that makes me move my tea.",
+			completion = "The next storage upgrade can be bought now. You can set the rest of your things down without hurrying.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 2},
-				{pool = "town_expansion_d24f6e6806cb", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3389c064b502", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout8", name = "Hideout improvements 8"},
@@ -248,6 +256,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 8,
 		},
 		{
@@ -256,12 +265,12 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 9",
 			kind = "delivery",
 			requires = {"v3/hideout/08"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "The larger storage arrangements still need ordinary packing supplies. This is the next order. People ask for more room and then tell me it will finally be enough. I don't contradict them while they're enjoying the thought.",
+			completion = "Another storage tier is open to purchase. We'll leave the question of enough room for another day.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 3},
-				{pool = "town_expansion_16eadd0282a9", quantity = 2},
-				{pool = "town_expansion_85356b44df05", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 3, mode = "any"},
+				{pool = "town_expansion_03a67c43cf19", quantity = 2, mode = "any"},
+				{pool = "town_expansion_742385b91f8d", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout9", name = "Hideout improvements 9"},
@@ -270,6 +279,7 @@ PLUGIN:Register("ballast", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 9,
 		},
 		{
@@ -278,12 +288,12 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 10",
 			kind = "delivery",
 			requires = {"v3/hideout/09"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "Bring the listed supplies for the next storage purchase tier. I like it when a case opens without the person beside it having to hold three things in place. A little preparation can make unloading pleasantly uneventful.",
+			completion = "The next storage purchases are ready. Uneventful delivery, properly accounted for.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 3},
-				{pool = "town_expansion_f5c0a28eb987", quantity = 2},
-				{pool = "town_expansion_4f6e339e6499", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2847198e6a81", quantity = 2, mode = "any"},
+				{pool = "town_expansion_58819248abd4", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout10", name = "Hideout improvements 10"},
@@ -297,6 +307,7 @@ PLUGIN:Register("ballast", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 10,
 		},
 		{
@@ -305,12 +316,12 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 11",
 			kind = "delivery",
 			requires = {"v3/hideout/10"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "This is the next packing order for your Swamps storage. I'd rather ask for a full list once than keep you walking back with the bit neither of us remembered. Take a look while you've got both hands free.",
+			completion = "Your next storage tier is available to buy. Nothing left on this delivery to bring back.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 3},
-				{pool = "town_expansion_c37905912f9c", quantity = 2},
-				{pool = "town_expansion_cab385be9728", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2847198e6a81", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c706432f6e12", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout11", name = "Hideout improvements 11"},
@@ -324,6 +335,7 @@ PLUGIN:Register("ballast", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 11,
 		},
 		{
@@ -332,13 +344,13 @@ PLUGIN:Register("ballast", {
 			name = "Hideout improvements 12",
 			kind = "delivery",
 			requires = {"v3/hideout/11"},
-			briefing = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
-			completion = "Put them down here. I will sort the packing before anything leaves.",
+			briefing = "The last storage arrangement needs this full packing request. There's no need to promise you'll have everything sorted after it. A room can be useful while its owner is still deciding where things go.",
+			completion = "The final Swamps storage tier is open for purchase. That's the supply sequence finished; the arranging can take its time.",
 			requirements = {
-				{pool = "town_expansion_3697657ea4c2", quantity = 4},
-				{pool = "town_expansion_16eadd0282a9", quantity = 3},
-				{pool = "town_expansion_4758fc5afaa5", quantity = 2},
-				{pool = "town_expansion_5a1a3b84317a", quantity = 1},
+				{pool = "town_expansion_ef56d98e1e68", quantity = 4, mode = "any"},
+				{pool = "town_expansion_03a67c43cf19", quantity = 3, mode = "any"},
+				{pool = "town_expansion_6a51d7730e3e", quantity = 2, mode = "any"},
+				{pool = "town_expansion_7ac8639f4591", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ballastHideout12", name = "Hideout improvements 12"},
@@ -352,6 +364,7 @@ PLUGIN:Register("ballast", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 12,
 		},
 	},

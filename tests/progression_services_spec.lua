@@ -119,6 +119,62 @@ local function repairItem(character, id, weapon)
 end
 local tech, doctor, arena, cleaner, wish = vendor("'Technut'"), vendor("'Jitters'"),
 	vendor("'Arena Master'"), vendor("'Ballast'"), vendor("'???'")
+
+local function loadRepairCost(baseName)
+	local path = "gamemodes/ix_cotz/schema/items/base/sh_" .. baseName .. ".lua"
+	local file = assert(io.open(path))
+	local source = file:read("*a")
+	file:close()
+	local first = assert(source:find("function ITEM:GetRepairCost()", 1, true))
+	local last = assert(source:find("\nend", first, true)) + 3
+	local environment = {ITEM = {}, math = math}
+	assert(load(source:sub(first, last), "@" .. path, "t", environment))()
+
+	return environment.ITEM.GetRepairCost
+end
+
+for _, baseName in ipairs({"suit", "gear", "newweapons"}) do
+	local character = actor()
+	local item = repairItem(character, 1, baseName == "newweapons")
+	item.GetRepairCost = loadRepairCost(baseName)
+	for _, pricing in ipairs({{price = 1000, full = 2000}, {price = 6690, full = 3768}}) do
+		item.price = pricing.price
+		for _, condition in ipairs({0, 50, 100}) do
+			item.data.wear, item.data.durability = condition, condition
+			local offer = ix.progression.BuildServiceOffer(character.client, tech, "repair", {itemid = 1})
+			if condition == 100 then
+				check(offer == nil, baseName .. " at full condition needs no repair")
+			else
+				check(offer and offer.baseCost == pricing.full * (100 - condition) / 100,
+					baseName .. " uses suit pricing at " .. condition .. "% for price " .. item.price)
+			end
+		end
+	end
+end
+
+local clothCharacter = actor()
+local clothMask = repairItem(clothCharacter, 1, false)
+clothMask.isBodyArmor = false
+local clothEnvironment = {
+	ITEM = clothMask,
+	Vector = function() return {} end,
+	Angle = function() return {} end,
+}
+assert(loadfile("gamemodes/ix_cotz/schema/items/gear/sh_mask_cloth.lua", "t", clothEnvironment))()
+clothMask.GetRepairCost = loadRepairCost("gear")
+for _, pricing in ipairs({{condition = 0, cost = 666}, {condition = 50, cost = 334}, {condition = 100}}) do
+	clothMask.data.durability = pricing.condition
+	for _, provider in ipairs({tech, vendor("'Boss'")}) do
+		local offer = ix.progression.BuildServiceOffer(clothCharacter.client, provider, "repair", {itemid = 1})
+		if pricing.condition == 100 then
+			check(offer == nil, "cloth mask at full condition needs no repair")
+		else
+			check(offer and offer.baseCost == pricing.cost and offer.cost == pricing.cost,
+				"cloth mask uses its reduced repair rate at " .. pricing.condition .. "%")
+		end
+	end
+end
+
 local first, second = actor(), actor()
 local firstItem, secondItem = repairItem(first, 11, true), repairItem(second, 22, true)
 local credit = {services = {{npc = "'Technut'", service = "repair", amount = 100}}}
@@ -280,6 +336,15 @@ ix.progression.SetCompleted(discountCharacter, "repairDiscount")
 local discountedRepair = ix.progression.BuildServiceOffer(discountCharacter.client, tech, "repair", {itemid = 44})
 check(discountedRepair.baseCost == 600 and discountedRepair.cost == 570,
 	"earned repair discount applies after doubling the base price")
+ix.progression.SetCompleted(clothCharacter, "repairDiscount")
+clothMask.data.durability = 0
+local clothOffer = ix.progression.BuildServiceOffer(clothCharacter.client, tech, "repair", {itemid = 1})
+check(clothOffer.baseCost == 666 and clothOffer.cost == 633, "earned discount applies to reduced cloth mask fee")
+local clothMoney = clothCharacter.money
+ix.progression.ConfirmService({}, clothCharacter.client, tech, "repair", {itemid = 1, cost = 633})
+check(ix.progression.ExecuteService(clothCharacter.client, tech, "repair", true)
+	and clothMask.data.durability == 100 and clothCharacter.money == clothMoney - 633,
+	"cloth mask repair restores condition and charges its reduced discounted fee")
 local restored = actor()
 restored.data = copy(first.data)
 restored.vars = copy(first.vars)

@@ -145,7 +145,7 @@ function PLUGIN:RestoreStorage(instance, callback)
 			if record.ownerType ~= "squad" and not tier then continue end
 			local model = slot.model or tier and (tier.model or ix.item.list[tier.item] and ix.item.list[tier.item].model)
 			local entity = self:CreateUtility(instance, "ix_hideout_storage", definition.pos,
-				model or "models/props_junk/wood_crate001a.mdl")
+				model or "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl")
 			if not IsValid(entity) then callback(false, "Could not create a storage spot.") return end
 			entity.ixHideoutSlot = slotID
 			entity:SetAngles(definition.angles or angle_zero)
@@ -261,7 +261,7 @@ function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
 					slot.tier, slot.width, slot.height = tierNumber, tier.width, tier.height
 					storage:SetSize(tier.width, tier.height)
 					if IsValid(entity) then
-						entity:SetModel(ix.item.list[tier.item].model)
+						entity:SetModel(tier.model or ix.item.list[tier.item].model)
 						entity:PhysicsInit(SOLID_VPHYSICS)
 						local physics = entity:GetPhysicsObject()
 						if IsValid(physics) then physics:EnableMotion(false) end

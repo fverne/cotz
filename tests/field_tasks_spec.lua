@@ -46,9 +46,12 @@ util = {
 	end,
 	IsInWorld = function() return true end,
 }
-local markers, lastMarker = 0
-net = {Receive = function() end, Start = function() end, WriteVector = function(position) lastMarker = position end,
-	WriteString = function() end, WriteUInt = function() end, Send = function() markers = markers + 1 end}
+local markers, lastMarker, lastNetwork, lastRecipient = 0
+local networkStrings = {}
+net = {Receive = function() end, Start = function(name) lastNetwork, networkStrings = name, {} end,
+	WriteVector = function(position) lastMarker = position end,
+	WriteString = function(value) networkStrings[#networkStrings + 1] = value end, WriteUInt = function() end,
+	Send = function(client) markers, lastRecipient = markers + 1, client end}
 netstream = {Start = function() end}
 hook = {Add = function() end, Run = function() end}
 timer = {Simple = function() end}
@@ -80,7 +83,7 @@ ents = {Create = function(class)
 	function entity:GetClass() return self.class end
 	function entity:SetHealth(health) self.health = health end
 	function entity:Health() return self.health end
-	function entity:DropToFloor() end
+	function entity:DropToFloor() self.droppedToFloor = true end
 	function entity:SetEnemy(enemy) self.enemy = enemy end
 	function entity:GetEnemy() return self.enemy end
 	function entity:UpdateEnemyMemory() end
@@ -94,6 +97,7 @@ local base = "gamemodes/ix_cotz/plugins/jobsystem/"
 ix.jobs = ix.jobs or {}
 ix.jobs.field = ix.jobs.field or {}
 ix.taskRewards = ix.taskRewards or {}
+ix.taskRewards.HasUnclaimedRewards = function() return false end
 for _, name in ipairs({"settings", "rewardsettings", "fieldsettings", "killcredit", "regionalcatalogue"}) do
 	dofile("gamemodes/ix_cotz/plugins/jobsystem/definitions/sh_" .. name .. ".lua")
 end
@@ -337,8 +341,20 @@ check(lastItem:CanTransfer(inventory, stranger:GetCharacter():GetInventory()) ==
 	"client still blocks parcel transfers out of the main inventory")
 SERVER, CLIENT = true, false
 check(lastItem:CanTransfer(inventory, nil) == false, "server still rejects nil-destination drops")
-check(PLUGIN:CanPlayerTakeItem(stranger, lastItem) == false, "foreign character pickup is denied")
-check(PLUGIN:CanPlayerTakeItem(client, lastItem) == nil, "owner pickup does not override other hooks")
+ix.item.instances = {[101] = lastItem}
+local cargoEntity = {ixItemID = 101}
+check(PLUGIN:CanPlayerTakeItem(stranger, cargoEntity) == false, "foreign character pickup is denied")
+check(PLUGIN:CanPlayerTakeItem(client, cargoEntity) == nil, "owner pickup does not override other hooks")
+ix.item.instances[102] = {}
+check(PLUGIN:CanPlayerDropItem(client, 102) == nil, "ordinary persistent drops accept Helix's numeric item ID")
+check(PLUGIN:CanPlayerDropItem(client, 101) == false, "numeric cargo IDs still block persistent drops")
+check(PLUGIN:CanPlayerDropItem(client, 999) == nil, "a missing drop instance does not crash the hook")
+check(PLUGIN:CanPlayerTakeItem(stranger, {ixItemID = 102}) == nil,
+	"ordinary world-item pickup does not override other hooks")
+check(PLUGIN:CanPlayerTakeItem(client, {ixItemID = 999}) == nil,
+	"a missing pickup instance does not crash the hook")
+check(PLUGIN:CanPlayerTakeItem({GetCharacter = function() end}, cargoEntity) == false,
+	"cargo pickup requires a loaded character")
 lastItem.data.fieldClaim = "another-job"
 check(not ix.jobs.field.CanComplete(character, job), "cargo must match the exact active claim")
 lastItem.data.fieldClaim = job.rewardKey
@@ -649,8 +665,19 @@ check(
 	"defence is hidden without the population manager"
 )
 local populationBlocked, spawnBlocked, checkedQueued, enforcedRegistration = false, false, false, false
+local placementBlocked, placedPosition, placementOrigin = false
 local registered = {}
 ix.eventController = {
+	GetSpawnLocation = function(_, position)
+		placementOrigin = position
+		if placementBlocked then return end
+		placedPosition = position + Vector(64, 0, 2)
+
+		return placedPosition
+	end,
+	UpdateCombatSchedule = function(_, npc)
+		npc.destination = npc.cotzCombatObjective:GetPos()
+	end,
 	CreateCombatPack = function(_, origin, isolated) return {origin = origin, isolated = isolated} end,
 	CanSpawnMutant = function(_, _, includeQueued)
 		checkedQueued = includeQueued
@@ -731,11 +758,23 @@ update(client, character)
 check(#livingAttackers() == 0 and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
 	"capacity-limited waves cannot be silently completed")
 populationBlocked = false
+placementBlocked = true
+update(client, character)
+check(#livingAttackers() == 0 and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
+	"unsafe encounter placement keeps research attackers pending")
+placementBlocked = false
 update(client, character)
 check(#livingAttackers() == 2, "research attackers respect the shared per-tick spawn budget")
 check(checkedQueued and enforcedRegistration, "attacker creation checks queued capacity and enforces registration limits")
 local attackingNPC = livingAttackers()[1]
-check(attackingNPC:GetEnemy() == client, "attackers engage the assigned defender")
+check(attackingNPC:GetPos():DistToSqr(placedPosition) == 0
+	and placementOrigin:DistToSqr(ix.jobs.field.Unpack(job.fieldTask.defence.spawnPoints[1])) == 0,
+	"research uses encounter placement around its saved approaches")
+check(not attackingNPC.droppedToFloor, "validated placement is not moved again by DropToFloor")
+check(not attackingNPC:GetEnemy() and attackingNPC.cotzCombatObjective == entity
+	and attackingNPC.cotzCombatObjectiveRadius == job.fieldTask.defence.threatRadius
+	and attackingNPC.destination == entity:GetPos(),
+	"attackers initially advance on the sampler without player targets")
 local health = entity:Health()
 ix.jobs.field.DefenceDamage(
 	entity,
@@ -753,6 +792,15 @@ health = character.jobs.Contact.fieldTask.defence.health
 attackingNPC.hidden = false
 update(client, character)
 check(character.jobs.Contact.fieldTask.defence.health < health, "visible nearby mutants disrupt the sampler")
+health = character.jobs.Contact.fieldTask.defence.health
+attackingNPC:SetEnemy(client)
+update(client, character)
+check(character.jobs.Contact.fieldTask.defence.health == health,
+	"attackers fighting a player stop disrupting the sampler")
+attackingNPC:SetEnemy(nil)
+update(client, character)
+check(character.jobs.Contact.fieldTask.defence.health < health,
+	"losing the combat target resumes sampler disruption")
 check(character.jobs.Contact.fieldTask.stage == "defending", "elapsed recording time cannot bypass uncleared waves")
 attackingNPC:Remove()
 update(client, character)
@@ -1048,7 +1096,7 @@ local markerCount = markers
 now = now + 2
 ix.jobs.field.Action(client, "Contact", "status")
 check(markers == markerCount, "retained network callbacks cannot operate after plugin unload")
--- Recovery clues are text, retain saved sites and do not depend on camera/HUD markers.
+-- Recovery retains saved clues and sites, adding a narrowing marker only near the search area.
 map = "rp_marsh_cs"
 points()
 local recovery = {kind = "recovery", map = map, point = {1000, 0, 0}, searchRadius = 384,
@@ -1070,13 +1118,60 @@ check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_recovery_easy),
 points()
 local named = ix.plugin.list.eventcontroller.eventpoints[map][1]
 named[2] = "50% Yard"
-local textJob = {identifier = "field_recovery_easy", numberRec = 1, fieldTask = copy(missing)}
+local textJob = {identifier = "field_recovery_easy", numberRec = 1, rewardKey = "recovery-clue",
+	fieldTask = copy(missing)}
 ix.jobs.field.EnsureRecoveryClue(textJob.fieldTask)
 check(ix.jobs.getFormattedDesc(textJob):find("50% Yard", 1, true),
 	"literal percent signs in event area names are safe in the PDA")
 local previousMarkers = markers
 local recoveryClient, recoveryOwner = actor()
 recoveryOwner.jobs.Clue = textJob
+recoveryClient.position = Vector(-3097, 0, 0)
 ix.jobs.field.Status(recoveryClient, "Clue", textJob)
-check(markers == previousMarkers, "Show assignment gives recovery text without creating a world marker")
+check(markers == previousMarkers, "distant recovery status provides the clue without a world marker")
+recoveryClient.position = Vector(0, 0, 0)
+ix.jobs.field.Status(recoveryClient, "Clue", textJob)
+check(markers == previousMarkers + 1 and lastNetwork == "cotz/jobsystem/recovery-marker"
+	and lastRecipient == recoveryClient and networkStrings[1] == "Clue"
+	and networkStrings[2] == textJob.rewardKey, "nearby recovery status marks only the requesting owner's claim")
+local target = ix.jobs.field.Unpack(recovery.point)
+local farCentre, farRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4096, 0, 0))
+local midCentre, midRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(2048, 0, 0))
+local nearCentre, nearRadius = ix.jobs.field.GetRecoverySearchArea(recovery, target)
+check(farRadius == 1536 and midRadius == 768 and nearRadius == 256,
+	"recovery search radius narrows with object distance and retains a small approximate area")
+check(farCentre:DistToSqr(target) <= farRadius ^ 2 and midCentre:DistToSqr(target) <= midRadius ^ 2
+	and nearCentre:DistToSqr(target) > 0 and nearCentre:DistToSqr(target) <= nearRadius ^ 2,
+	"old assignments without search centres keep the object within an offset approximate area")
+recovery.search = {1192, 192, 0}
+local savedCentre = ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4096, 0, 0))
+local savedOffset = savedCentre - target
+check(math.abs(savedOffset.x - savedOffset.y) < 0.01 and savedOffset.x > 0
+	and recovery.search[1] == 1192 and recovery.search[2] == 192 and recovery.point[1] == 1000,
+	"recovery marker preserves the saved search direction without changing saved sites or search centres")
+for _, offset in ipairs({{0, 0, 0}, {1, 0, 0}, {192, 192, 0}, {5000, -2000, 0}}) do
+	local spreadState = copy(recovery)
+	spreadState.search = ix.jobs.field.Pack(target + ix.jobs.field.Unpack(offset))
+	for _, distance in ipairs({0, 128, 1024, 4096}) do
+		local viewer = target + Vector(distance, 0, 0)
+		local centre, radius = ix.jobs.field.GetRecoverySearchArea(spreadState, viewer)
+		local separationSquared = centre:DistToSqr(target)
+		check(separationSquared >= (radius * 0.7) ^ 2 and separationSquared <= (radius * 0.8) ^ 2,
+			"search markers stay well away from the object while containing it, even with coincident saved centres")
+		local repeatedCentre = ix.jobs.field.GetRecoverySearchArea(spreadState, viewer)
+		check(repeatedCentre:DistToSqr(centre) == 0,
+			"refreshing a recovery marker keeps its direction stable instead of rerolling the offset")
+	end
+end
+check(not ix.jobs.field.GetRecoverySearchArea(recovery, target + Vector(4097, 0, 0)),
+	"recovery marker is unavailable beyond the activation distance")
+map = "another-map"
+ix.jobs.field.Status(recoveryClient, "Clue", textJob)
+check(markers == previousMarkers + 1 and not ix.jobs.field.GetRecoverySearchArea(recovery, target),
+	"wrong-map recovery status creates no marker")
+map = recovery.map
+recovery.stage, textJob.fieldTask.stage = "carrying", "carrying"
+ix.jobs.field.Status(recoveryClient, "Clue", textJob)
+check(markers == previousMarkers + 1 and not ix.jobs.field.GetRecoverySearchArea(recovery, target),
+	"collected equipment no longer produces a search marker")
 print("PASS: " .. checks .. " field task checks")

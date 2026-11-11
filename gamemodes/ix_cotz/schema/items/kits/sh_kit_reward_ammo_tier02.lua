@@ -1,6 +1,6 @@
 ITEM.name = "Novice Ammo Box"
 ITEM.description= "The box rattles when you shake it."
-ITEM.longdesc = "The Novice Ammo Box represents a larger class of ammunition allowance than the introductory package. Its plain shell keeps the transaction's stock together as one object. The actual offered loads are identified by the supplying contact before exchange."
+ITEM.longdesc = "The Novice Ammo Box represents a larger class of ammunition allowance than the introductory package. Its plain shell keeps the transaction's stock together as one object."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

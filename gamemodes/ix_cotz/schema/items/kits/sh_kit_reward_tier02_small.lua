@@ -1,6 +1,6 @@
 ITEM.name = "Novice Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "The small Novice Reward compresses a work-related supply allowance into one bundle. Its modest exterior gives no reliable inventory by itself. The issuing contact identifies the offered contents before taking the package in exchange."
+ITEM.longdesc = "The small Novice Reward compresses a work-related supply allowance into one bundle. Its modest exterior gives no reliable inventory by itself."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

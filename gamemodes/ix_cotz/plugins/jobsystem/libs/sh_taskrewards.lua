@@ -42,7 +42,9 @@ function ix.taskRewards.UnitValue(itemID)
 
 			return default
 		end}, {__index = item})
-		value = quote:GetPrice()
+		-- Weight-priced items can quote zero before their instance weight exists.
+		local quotedValue = quote:GetPrice()
+		if quotedValue ~= 0 then value = quotedValue end
 	end
 
 	return math.max(0, value) / math.max(1, units)
@@ -200,9 +202,9 @@ local function fixedMoney(job, count, deliveredValue, rate)
 	if job.requiredItem then
 		local amount = count or average(job.numberRec, 1)
 		local reference = ix.taskRewards.HandInUnitValue(job.requiredItem, nil, job.wholeItems) * amount
-		local base = ix.taskRewards.settings.jobHandInBaseMoney[math.Clamp(job.tier or 1, 1, 3)]
+		local minimum = ix.taskRewards.settings.jobHandInBaseMoney[math.Clamp(job.tier or 1, 1, 3)]
 
-		return base + math.ceil(math.max(reference, deliveredValue or 0) * rate - CASH_ROUNDING_EPSILON)
+		return math.max(minimum, math.ceil(math.max(reference, deliveredValue or 0) * rate - CASH_ROUNDING_EPSILON))
 	end
 	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_SUPPLY_CASH_SHARE
 
@@ -211,7 +213,7 @@ end
 
 function ix.taskRewards.SupplyBudget(job, count)
 	if job.requiredItem then
-		local base = ix.taskRewards.settings.jobHandInBaseMoney[math.Clamp(job.tier or 1, 1, 3)]
+		local base = ix.taskRewards.settings.jobHandInSupplyMoney[math.Clamp(job.tier or 1, 1, 3)]
 
 		return math.max(JOB_MIN_SUPPLY_BUDGET, math.floor(base * JOB_SUPPLY_SHARE))
 	end
@@ -466,6 +468,20 @@ function ix.taskRewards.CanTakeDifficulty(character, difficulty)
 	local required = ix.taskRewards.settings.difficultyReputation[difficulty]
 
 	return required ~= nil and character:GetPlayer():getReputation() >= required
+end
+
+function ix.taskRewards.HasUnclaimedRewards(character, npc)
+	for key, offer in pairs(character:GetData("taskRewardOffers", {})) do
+		if offer.npc == npc and offer.earned and (key:match("^job:") or key:match("^bonus:")) then
+			return true
+		end
+	end
+	for _, reward in ipairs(ix.progression.GetLine(character, "taskRewardClaims").pendingRewards or {}) do
+		-- Older queued rewards have no issuer; collect them before accepting more work anywhere.
+		if reward.taskNPC == nil or reward.taskNPC == npc then return true end
+	end
+
+	return false
 end
 
 function ix.taskRewards.CanSelectOffer(character, npc, key, offer)

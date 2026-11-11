@@ -5,6 +5,7 @@ ix.jobs.field.enabled = true
 
 util.AddNetworkString("cotz/jobsystem/field-action")
 util.AddNetworkString("cotz/jobsystem/field-marker")
+util.AddNetworkString("cotz/jobsystem/recovery-marker")
 
 local function keyFor(character, job)
 	return character:GetID() .. ":" .. job.rewardKey

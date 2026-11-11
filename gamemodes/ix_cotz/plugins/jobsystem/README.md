@@ -33,6 +33,9 @@ Incoming delivery options require an actual nonempty matching item or bound parc
 assignment state alone. Reward choices refresh immediately after the final hand-in at the issuer;
 completed field/combat work reveals its choices on returning to the issuer.
 Every objective completion sends a task-completed notification and PDA sound once. The Tasks tab shows objectives and progress without payment or reward-choice instructions.
+At the default COTZ font scale of 1.30, the journal uses 33 px headers, 25 px task names
+and 22 px body/button text at 1080p. Adjust it under Settings → Appearance; action rows
+scale with the text, and cards wrap and scroll.
 Photography
 shows the saved captured species/anomaly list in the journal. There is no camera HUD ledger.
 Triangulation saves the origin and compass bearing of each reading and marks those positions in
@@ -49,11 +52,16 @@ tool uses and never writes to the permanent hidden-stash registry. Bound parcels
 inside the main inventory and cannot leave it. Sensor world objects use
 `models/lostsignalproject/items/quest/scanner_anomaly.mdl`, including custom commission sensors.
 
-Hand-in cash is 500 / 1,000 / 1,500 rubles by tier, plus 50% of the required items' value.
-The chosen supply reward never reduces cash. The added item payment funds neither supplies nor the
-five-task bonus: hand-in supplies use only the tier base (with the existing 600-ruble minimum), and
+Hand-in cash is 50% of the required items' value, with minimum payouts of 500 / 750 / 1,000 rubles
+for easy / medium / hard jobs. The minimum is a floor, not an added fee: one 1,200-ruble cat tail
+pays 600 rubles on easy. The chosen supply reward never reduces cash. Item value funds neither
+supplies nor the five-task bonus: hand-in supply allowances remain 600 / 1,000 / 1,500 rubles, and
 only unused supply allowance contributes to bonuses. Whole-item requests value whole meals/specimens;
 per-use requests retain unit valuation and higher-quality hand-ins retain their increased value.
+Definition-only quotes that return zero without instance data, such as a meal's saved weight, use
+the configured item price as their reference. Actual hand-ins retain their instance valuation.
+Unpaid delivery assignments and previews refresh their cash from the shared calculation without
+changing their identity, quantities, credited value or progress.
 Accepted assignments retain their identity and progress. Unpaid reward offers migrate to the current
 completion-time catalogue; their bonus allowance is capped to the current tier basis.
 Previously completed hand-ins also receive the current cash formula at claim; paid claims stay paid.
@@ -62,7 +70,7 @@ Previously completed hand-ins also receive the current cash formula at claim; pa
 
 Field-work menus and temporary world labels use the shared
 [COTZ UI style](../../../../docs/ui-style.md). Assignment labels have a dark backing and amber border
-and stay within the viewport. Recovery uses text directions instead of a world marker.
+and stay within the viewport. Recovery retains text directions and adds a narrowing search-area marker nearby.
 
 Restart after editing shared definitions. Job IDs, category IDs, cargo item IDs, network names and
 saved character keys remain stable. Existing accepted field jobs keep their saved destinations,
@@ -89,7 +97,7 @@ ordinary repeatable job's quantities or combat settings.
 
 Ordinary definitions call `ix.jobs.register({...}, "stable-id")` directly. Legacy tool jobs call
 `ix.jobs.RegisterToolJob`; their item configuration is data and their shared callbacks live in
-`libs/sh_tooljobs.lua`. Reward profiles here are fallbacks and kit-redemption catalogues. Town contacts
+`libs/sh_tooljobs.lua`. Reward profiles here are fallbacks. Town contacts
 install dedicated `rewards` definitions separately from their ordinary vendor `supplies`.
 `moneyReward` is reference cash processed by reward calculations,
 not necessarily the final preview payment. Preserve field names and units when tuning.
@@ -156,6 +164,10 @@ The dialogue plugin still loads `integrations/sh_dialogue.lua` early to register
 - `libs/sh_taskrewards.lua` and `libs/sv_taskrewards.lua`: reward calculations, saved offers and claims.
 - `cl_plugin.lua` and `cl_fieldtasks.lua`: Tasks menu and field markers.
 
+Cargo protection resolves the numeric instance ID supplied to `CanPlayerDropItem` and the world
+entity's `ixItemID` supplied to `CanPlayerTakeItem` through `ix.item.instances`. Pickup ownership uses
+saved instance data; ordinary persistent drops and pickups continue through the remaining hooks.
+
 Public legacy job/player API names remain available for existing dialogue and item callers. The
 `ix_JobTrigger` callback retains its original `hook.Add` dispatch stage; it is server-only and is not
 also registered as a plugin method. The existing reward-claim continuation hook retains its stage too.
@@ -205,9 +217,9 @@ reward. Preview packets transmit zero reward choices, and neither previews, acti
 unrevealed offers store reward candidate details. The task journal shows ordinary payment and return
 instructions. Bonus progress shows the number of completions, without revealing the bonus value.
 
-Once the objective is ready, choose **Complete the assignment** at the issuing contact. This reveals
-up to three reward choices. Selecting one completes the hand-in, consumes any required cargo, pays
-cash/reputation, credits the task and restock once, and grants the selected reward. Selection is checked
+Once the objective is ready, open **About work → Task rewards** at the issuing contact.
+**Complete the assignment** also reveals up to three reward choices in that submenu. Selecting one
+completes the hand-in, consumes any required cargo, pays cash/reputation, credits the task and restock once, and grants the selected reward. Selection is checked
 against the current character, active claim, completion state, cargo, NPC access and proximity.
 Walking away after revealing a reward preserves the job and choices; returning does not reroll them.
 
@@ -216,6 +228,16 @@ A full claim queue keeps the chosen earned offer until space opens; its choice s
 retrying cannot change the allowance already credited to the bonus. Retrying it cannot pay ordinary
 cash or credit task/bonus progress again. Pending inventory insertions retain their existing callback
 and token recovery behaviour. Cash rewards require no inventory space.
+
+New repeatable tasks and field commissions from that contact stay unavailable until all earned task
+and five-task bonus rewards are collected, including selected items awaiting inventory delivery.
+The server also rejects stale previews and direct acceptance while rewards remain. About work stays
+visible for claims after the assignment disappears; hand-ins return there, and reward choices stay
+in their submenu. Existing ammunition barter actions retain their main-menu placement.
+
+New queued items carry an additive `taskNPC` issuer field; barter items use `false`. Existing tokens,
+quantities and queue order are unchanged. Older queued items without an issuer remain claimable and
+block new tasks at every contact until collected, since their original issuer cannot be recovered.
 
 ### Allowed items and quantities
 
@@ -248,14 +270,17 @@ items with cash, and `bonusCash` adds a cash alternative to the bonus choices.
 
 ### Cash and five-task bonuses
 
-Ordinary payment is independent of the selected reward. Hand-in cash adds 500 / 1,000 / 1,500 rubles
-by tier to 50% of the required items' value. Actual hand-in quality is recorded before consumption;
-whole-item requests use whole-item value, and per-use requests use consumed-unit value. Non-item
+Ordinary payment is independent of the selected reward. Hand-in cash pays 50% of the required items'
+value, subject to an easy / medium / hard minimum of 500 / 750 / 1,000 rubles. Actual hand-in quality
+is recorded before consumption; whole-item requests use whole-item value, and per-use requests use
+consumed-unit value. Non-item
 jobs retain their ordinary 55% reference-cash payment. The 200 / 400 / 600 reward for cash-only
 contacts is paid in addition to that payment.
 
-Supply allowance retains its 600-ruble minimum. Item hand-ins use the tier base for that allowance;
-item reimbursement never funds supplies or bonuses. On reward selection, the chosen items' value or
+Supply allowance retains its 600-ruble minimum. Item hand-ins retain allowances of 600 / 1,000 / 1,500
+rubles by tier. In `sh_rewardsettings.lua`, `jobHandInBaseMoney` sets cash minimums and
+`jobHandInSupplyMoney` sets supply funding before the 600-ruble minimum. Item reimbursement never
+funds supplies or bonuses. On reward selection, the chosen items' value or
 chosen cash reward is deducted from the allowance. Only the remainder enters that trader's five-task
 bonus. Each trader keeps a separate completion count and budget, without a time limit.
 
@@ -267,7 +292,7 @@ all-hard jobs at Mute, Spool or Ballast produce budgets of 2,000 / 3,500 / 5,250
 Unaffordable bonus value carries into the next cycle; a zero-value cycle creates no empty reward.
 Revealed current-version bonus choices persist without rerolling on menu reopen or reconnect.
 
-### Compatibility and kit exchanges
+### Compatibility and ammunition barters
 
 Catalogue version 5 retires old acceptance-time reward reservations. On character load and NPC
 interaction, active jobs and saved previews lose cached choices while keeping their IDs, quantities,
@@ -276,8 +301,9 @@ current eligible catalogue with their earned budget preserved. Previously paid/t
 remain recoverable; this migration does not erase existing item claims or repay completed jobs.
 No database reset or first-time setup is required. Update all map servers together and restart.
 
-Task-kit and ammunition-barter redemption retain their existing exchange flow and item valuation.
-These legacy exchanges are separate from town job rewards. They continue to use bounded,
+Legacy kits, including Hiking Backpack, open directly from inventory using their existing loot tables.
+NPC kit hand-in choices and their server redemption handler are removed. Existing item IDs and queued
+reward claims are preserved. Ammunition barters retain visible choices, existing valuation, bounded
 token-backed pending claims and provider access checks. The paid upgrade dialogue remains removed.
 
 Checks:
@@ -286,6 +312,7 @@ Checks:
 luatex --luaonly tests/task_rewards_spec.lua
 luatex --luaonly tests/jobs_menu_spec.lua
 luatex --luaonly tests/jobs_loading_spec.lua
+luatex --luaonly tests/kit_opening_spec.lua
 python3 -m unittest discover -s docs/balance/tests -p test_task_rewards.py -v
 ```
 
@@ -319,17 +346,22 @@ No new map spawn-point definitions or per-assignment staff setup are required.
 - **Research defence:** start the sampler at the assigned site through the PDA. Stay
   within 768 units, clear the waves and complete 90 seconds of defended recording, then
   collect the 1x2, 0.5 kg results recorder and return it. The sampler has 250 health.
-  Visible encounter mutants within 160 units disrupt it for 8 damage per mutant per
-  second. Its own attackers can also damage it directly; unrelated players cannot.
-  Bundled mutant AI targets defenders, so proximity disruption supplies the equipment
-  threat without changing the NPC framework. Easy jobs have two small waves; medium
+  Attackers advance on the sampler and, when visible and within 160 units, disrupt it
+  for 8 damage per mutant per second. Seeing a player or taking damage from one switches
+  their attention to player combat and pauses their disruption. After losing player contact,
+  they resume attacking the sampler. Its own attackers can also damage it directly;
+  unrelated players cannot. Easy jobs have two small waves; medium
   and hard jobs have three waves with tougher configured compositions.
 
 Open **Field work** on an accepted job in the PDA task list for directions, readings
 or deployment, research startup, and parcel delivery. Assignment markers last 30 seconds; Show
 assignment displays them again. Recorded triangulation origins and bearings stay visible during the search.
-Recovery uses the named event-spawn area, with a compass offset and approximate distance when needed,
-and never creates a world marker. Wrong-map status reports the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
+Recovery uses the named event-spawn area, with a compass offset and approximate distance when needed.
+Within 4,096 units (about 80 metres) of the object, Show assignment also displays an approximate
+recovery-area marker for 30 seconds. Its centre and search radius tighten as the player approaches:
+the default 1,536-unit area (about 30 metres) narrows to 256 units (about 5 metres). Walking out of range
+hides it; collecting cargo, abandoning/replacing the job or changing character clears it.
+Wrong-map status reports the target map. Easy/medium/hard definitions target Swamps/Waystation/Pripyat respectively,
 following the existing field jobs' regional difficulty convention. Target maps, categories,
 reference payments and reputation are in `definitions/sh_fieldjobs.lua`. Existing reputation
 gates, supply choices, completion bonuses and completion/restock handling still apply.
@@ -380,9 +412,12 @@ delivery remains complete after the parcel is consumed or the character reconnec
 
 Research defence configures sampler `sources` and `attackSources` separately. Both
 default to `rf`, reusing event points. A site needs at least one approach 512–4,096
-units away and within 256 vertical units. Up to eight approaches are saved; models
-and NPC hulls are checked for ground/clearance at runtime. Attack points occupied by
-nearby players are skipped. Existing point data cannot guarantee navigable NPC paths;
+units away and within 256 vertical units. Up to eight approaches are saved. Attackers use
+the event controller's shared placement service around those approaches: connected ground
+nodes within its 750-unit spawn radius are preferred, with the same validated floor/clearance
+fallback when graph candidates are unavailable or blocked. The validated position is used
+directly without another `DropToFloor`. Positions occupied by nearby players are skipped;
+unsafe or population-limited spawns remain pending. Existing point data cannot guarantee navigable NPC paths;
 verify representative sites in-game, especially buildings and underground areas.
 Wave class lists and counts, health, recording duration, disruption, radius and retry
 parameters live in `field.settings.defence`. Wave compositions are rolled once on
@@ -397,6 +432,12 @@ these bounded encounters create and register their own NPCs to track kills and c
 The existing jobsystem kill listener forwards deaths without changing dispatch order or
 ordinary kill credit. Removing an NPC without a death event does not clear its wave;
 the missing attacker is replaced subject to the same spawn/cap checks.
+
+Research attackers remain awake in isolated packs. Their sampler is a movement objective,
+not a combat enemy: the NPC base cannot melee props, so the existing proximity disruption
+damages it on arrival. Ordinary visible-player acquisition and damage retaliation take priority.
+Player pursuit retains the combat system's ten-second last-contact memory; losing that contact
+or the player's death resumes the sampler approach. Movement respects attack recovery and `ai_disabled`.
 
 Defence recording advances only while the assigned character is alive and near the
 sampler. Leaving, dying, changing characters, disconnecting or restarting the server
@@ -492,7 +533,26 @@ a named clue. Accepted recovery sites retain their coordinates, cargo, descripti
 optional `fieldTask.whereabouts` text is resolved lazily and saved through the existing jobs field.
 Missing providers leave existing jobs intact, with a temporary unavailable message and later retry.
 Show assignment and the journal display the same clue. Area names are literal text, including `%`.
-Other field types retain their current markers.
+Nearby recovery markers use the saved search direction and claim, with a stable fallback for older
+assignments lacking a search centre or having a centre directly on the object. The marker sits 75%
+of the current search radius away from the object, so the object remains inside the stated area
+without sitting directly under the marker. Marker radii are scaled by four for both existing and
+new assignments without moving the saved object or rewriting its search area.
+`runtimeSettings.recoveryMarkerDistance`, `recoveryMarkerMinRadius`, `recoveryMarkerRadiusScale` and
+`recoveryMarkerUpdateInterval` in `definitions/sh_fieldsettings.lua` control the activation range,
+minimum area, search-area scale and client refresh. `recoveryMarkerOffsetFraction` controls the
+marker's separation from the object as a fraction of the current radius (default `0.75`).
+Marker geometry updates locally every 0.1 seconds; the server sends only the contact and active claim
+when Field work requests status in range. No per-frame networking or persistence migration is needed.
+Other field types retain their current markers. Check narrowing, expiry, map/character changes and
+pickup/abandonment in multiplayer alongside `tests/field_tasks_spec.lua` and `tests/job_overlays_spec.lua`.
+
+Admins with observer access can enable **Settings → Observer → Field Equipment ESP** (off by default).
+It shows the exact position and cargo name of spawned field-task equipment through walls, including
+recovery cargo, sensors and research equipment. It follows the master **Show admin ESP** toggle and
+requires observer noclip outside vehicles. Only entities transmitted to the client are available;
+equipment still spawns when its assigned player approaches. The entity list and static marker data
+refresh once a second, with removed objects hidden immediately. No extra networking is used.
 
 Valuable couriers use explicit per-contact `courierPools`, separate from ordinary `wantedItems`
 shop assortments. The compiled courier index and previous receiver interests drive the same offer,
@@ -511,3 +571,11 @@ Run `luatex --luaonly tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec
 `tests/field_tasks_spec.lua`, `tests/jobs_menu_spec.lua` and `tests/dialogue_order_spec.lua`
 with the same `luatex --luaonly` prefix for each file. Check hidden pickup, tool cancellation/loss,
 full inventory, parcel burial, reward timing and character switches in multiplayer as well.
+
+## Bunker courier discovery
+
+Beanstalk, Egghead and Intern are excluded from valuable-courier recipients and new information-parcel
+assignments until that character has greeted the individual scientist. Offers, previews, journals and
+server hand-ins share this filter. Accepted parcel destinations remain saved. Existing progression-topic
+discovery counts as prior contact; earlier unrecorded greetings require another conversation.
+See [town discovery and verification](../townnpcs/README.md#bunker-courier-discovery).

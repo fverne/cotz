@@ -67,6 +67,9 @@ sound.Add( {
 } )
 
 
+ENT.navigationLeapRange = 1200
+ENT.navigationLeapMinRange = 300
+
 function ENT:Initialize()
 	self.Model = "models/monsters/chimera2.mdl"
 	self.ragdollModel = "models/monsters/chimera3.mdl" -- skins dont overlap, will anyone notice? x
@@ -170,7 +173,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	if(self.PlayingAnimation==false) then
 		if self:GetEnemy() then
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance > 300 && distance < 1200 then
+			if distance > self.navigationLeapMinRange and distance < self.navigationLeapRange then
 				if(self.CanJump<CurTime()) then
 
 					local TEMP_Rand = math.random(1,5)

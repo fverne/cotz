@@ -38,6 +38,8 @@ ENT.MaxRangeDist = 1500
 ENT.VisibleSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 ENT.RangeSchedule = SCHED_RUN_RANDOM
 
+ENT.navigationRangedRange = 1500
+
 function ENT:Initialize()
 	self.Model = "models/monsters/controler_fast.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)
@@ -137,8 +139,8 @@ function ENT:STALKERNPCThink()
 				TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2500)
 			end
 
-			self.SpecialAttack = 2
 		end
+		self.SpecialAttack = 2
 	end
 
 	if (self.special2 < CurTime() and self.SpecialAttack == 2) then

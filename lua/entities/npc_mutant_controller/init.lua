@@ -35,8 +35,20 @@ ENT.special1 = 0
 ENT.special2 = 0
 
 ENT.farttimer = 0
+ENT.summonSpawnRadius = 256
+
+local ZOMBIE_OFFSETS = {
+	Vector(0, 90, 16),
+	Vector(0, -90, 16),
+	Vector(100, 40, 16),
+	Vector(100, -40, 16),
+	Vector(-100, -40, 16),
+	Vector(-100, 40, 16),
+}
 
 ENT.sndGeigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav" }
+
+ENT.navigationRangedRange = 1500
 
 function ENT:Initialize()
 	self.Model = "models/monsters/controler.mdl"
@@ -125,45 +137,20 @@ function ENT:STALKERNPCThink()
 
 
 	if CurTime() > self.NextSpawn then
-		if (!IsValid(self.Zombie1) && !IsValid(self.Zombie2) && !IsValid(self.Zombie3) && !IsValid(self.Zombie4) && !IsValid(self.Zombie5) && !IsValid(self.Zombie6) && self.GoingToSpawnThem == false) then
+		local hasZombie = false
+		for index = 1, #ZOMBIE_OFFSETS do
+			if IsValid(self["Zombie" .. index]) then
+				hasZombie = true
+				break
+			end
+		end
+		if not hasZombie and self.GoingToSpawnThem == false then
 			self.GoingToSpawnThem = true
-			
-			self.Zombie1 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie1.cotzCombatPack = self.cotzCombatPack
-			self.Zombie1:SetPos(self:GetPos() +self:GetRight()*90 + self:GetUp()*16)
-			self.Zombie1:SetAngles(self:GetAngles())
-			self.Zombie1:Spawn()
-			
-			self.Zombie2 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie2.cotzCombatPack = self.cotzCombatPack
-			self.Zombie2:SetPos(self:GetPos() +self:GetRight()*-90 + self:GetUp()*16)
-			self.Zombie2:SetAngles(self:GetAngles())
-			self.Zombie2:Spawn()
-			
-			self.Zombie3 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie3.cotzCombatPack = self.cotzCombatPack
-			self.Zombie3:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*40 + self:GetUp()*16)
-			self.Zombie3:SetAngles(self:GetAngles())
-			self.Zombie3:Spawn()
-			
-			self.Zombie4 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie4.cotzCombatPack = self.cotzCombatPack
-			self.Zombie4:SetPos(self:GetPos() +self:GetForward()*100 +self:GetRight()*-40 + self:GetUp()*16)
-			self.Zombie4:SetAngles(self:GetAngles())
-			self.Zombie4:Spawn()
-			
-			self.Zombie5 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie5.cotzCombatPack = self.cotzCombatPack
-			self.Zombie5:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*-40 + self:GetUp()*16)
-			self.Zombie5:SetAngles(self:GetAngles())
-			self.Zombie5:Spawn()
-			
-			self.Zombie6 = ents.Create("npc_mutant_classiczombie")
-			self.Zombie6.cotzCombatPack = self.cotzCombatPack
-			self.Zombie6:SetPos(self:GetPos() +self:GetForward()*-100 +self:GetRight()*40 + self:GetUp()*16)
-			self.Zombie6:SetAngles(self:GetAngles())
-			self.Zombie6:Spawn()
-		
+
+			for index, offset in ipairs(ZOMBIE_OFFSETS) do
+				self["Zombie" .. index] = self:STALKERNPCSpawnSummon("npc_mutant_classiczombie", offset)
+			end
+
 			self.GoingToSpawnThem = false
 			self.NextSpawn = CurTime() + 60
 		end
@@ -196,8 +183,8 @@ function ENT:STALKERNPCThink()
 				TEMP_POORGUY:TakeDamageInfo(TEMP_TargetDamage)
 			end
 
-			self.SpecialAttack = 2
 		end
+		self.SpecialAttack = 2
 	end
 
 	if (self.special2 < CurTime() and self.SpecialAttack == 2) then

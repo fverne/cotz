@@ -48,6 +48,8 @@ ENT.FBR = 5
 ENT.FBRAP = 30
 ENT.BR = 0
 
+ENT.navigationLeapRange = 200
+
 function ENT:Initialize()
 	self.Model = "models/monsters/zanoza.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
@@ -166,7 +168,7 @@ end
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < 200 then
+		if distance < self.navigationLeapRange then
 			if(self.CanJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 			

@@ -13,6 +13,20 @@ Vendor stock and restock claims use `bNoNetworking`; vendor menus receive separa
 Jobs retain their existing visibility and `GetJobs`/`SetJobs` API. Shared world unlocks stay in plugin data.
 STALKERnet reads the separate progression var/column for favourite-contact statistics.
 
+SQL column capacity does not increase Garry's Mod's roughly 64 KB net message limit. Initial owner
+character snapshots and progression setter updates therefore use the schema's compressed, chunked
+character transport. It uses Helix's bundled pON serializer to preserve numeric keys and engine value
+types; reliable chunks assemble completely before client state is replaced. Other recipients retain
+the installed Helix sync path. The server still fires `CharacterVarChanged` after progression commits.
+No database migration or reset is needed for this networking fix. Deploy the shared schema library,
+server sync override and progression storage library together, restart map servers and reconnect clients.
+
+Run `luatex --luaonly tests/character_sync_spec.lua` and
+`luatex --luaonly tests/character_network_spec.lua` for privacy, oversized snapshots, chunk reassembly,
+consecutive characters and progression update coverage. Standalone compression is an identity mock
+to exercise worst-case chunk sizes; live engine LZMA, reconnect/menu order and HUD initialization still
+need multiplayer verification with a large saved character, character switching and a progression hand-in.
+
 This storage change targets a fresh database, as requested for the planned database reset.
 Helix creates the four columns at startup. No legacy migration or fallback is included.
 Changing a registered type does not enlarge existing columns; deploying these files alone does
@@ -37,3 +51,20 @@ switching, reconnecting and saving during loading. Already persisted zeroes are 
 reset: an administrator can use `/CharResetValues` while playing the affected character to restore
 its stats. That command also restores health and clears radiation and drunkenness; no further wipe
 is needed.
+
+Reputation and karma use their existing character vars as the server's source of truth. Custom rank
+names remain in character data under `repOverride`. The `karmarep` player APIs update character state
+immediately and mirror changes to the existing player net vars for client display. Character saves
+never copy those display values back into storage, so early town initialization/reward recovery and
+saves of inactive characters cannot replace saved values with zeroes or another character's values.
+Server callers should use `client:addReputation(amount)`, `client:setReputation(amount)`,
+`client:addKarma(amount)` and `client:SetRepName(name)`; writing the player net vars alone does not
+change persistent state. `SetRepName(0)` removes a custom rank name.
+
+Run `luatex --luaonly tests/character_reputation_spec.lua` for both load-hook orders, load-time rewards,
+character switches, missing display values, admin edits, fractional reputation, karma clamps and
+save/restore checks. Restart all map servers after deployment; hot reload can retain the removed
+legacy save hook. Verify reconnect, character switching, task/kill rewards, admin edits and cross-map
+travel in multiplayer. Existing saved values and database fields are retained. Reputation already
+overwritten with zero needs a known value from a backup or administrator correction using
+`/CharSetReputation`; this fix cannot reconstruct it.

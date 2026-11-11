@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a tark, cooked in the zone."
 ITEM.longdesc = "Stringy and not very tasty, tark meat is not really considered a delicacy in the zone. Despite how much spice it added, it has the same dull taste."
 ITEM.model = "models/lostsignalproject/items/consumable/food_chimera.mdl"
 
-ITEM.price = 740
+ITEM.price = 300
 ITEM.width = 1
 ITEM.height = 1
 

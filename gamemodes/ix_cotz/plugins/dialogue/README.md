@@ -14,6 +14,11 @@ Ordinary dialogue, flavour and service responses stay in the conversation file. 
 ix.dialogue.AddTradeTopic from integrations/sh_trade.lua; it does not copy another NPC's tree.
 Task prompts, briefings and completion text stay beside the contact's jobs/progression definitions.
 
+`integrations/sh_mutantdefense.lua` adds restock voucher hand-in and stored defense reward collection to
+trade conversations when the [mutant defense plugin](../mutantdefense/README.md) is enabled. Both are quick
+actions with empty responses, preserving silent NPCs and current navigation. Server callbacks validate vendor
+access, distance, ownership and cooldown; Sherpas and hideout vendors do not offer these actions.
+
 All 27 town contacts offer a two-part personality exchange through SpecialtyTopic and
 InterestTownFollowup in the questions menu. These are ordinary conversations available whenever
 the contact is accessible. Mute responds through gestures. Work explanations, finite briefings and completion replies, and completed greetings live in the
@@ -35,6 +40,15 @@ uses the same nonverbal presentation as his personal replies, including payment 
 topic links, callbacks, fees, eligibility checks, and random-story selection are preserved; no dormant
 topic is enabled. Work prompts and progression text remain in their unchanged owning definitions.
 
+The subsequent progression dialogue pass authors individual briefings and completion replies for all
+635 active town milestones, including 223 stock-preparation requests. Text stays in the contact's
+`townnpcs/definitions/sh_<contact>.lua` progression entries. Shared menu rendering still adds the assigned
+items, remaining quantities and actual benefits; it contains no NPC-specific request prose. Town
+completion notifications use the complete authored reply without a player-name prefix so Mute's
+gestures remain nonverbal. Existing jobs, ordinary conversations and non-town progression are unchanged.
+The expansion tool preserves existing stock-step text by ID. Run `tests/progression_dialogue_spec.lua`
+and the normal dialogue/progression checks after editing.
+
 Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing loader discovers
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.
@@ -51,7 +65,7 @@ Free hideout claims and ordinary paid repair/treatment retain their existing sta
 
 ## Main menu and questions
 
-The root contains trade, barter, services, repeatable work, progression, available reward/exchange actions,
+The root contains trade, barter, services, repeatable work, progression, available exchange actions,
 **Can I ask you something?**, and Goodbye, where those actions exist.
 
 The shared loader groups the offered BackgroundTopic, InterestTopic, TutorialTopic,
@@ -92,9 +106,12 @@ and existing UI behaviour with mocks. In multiplayer, verify main menu → quest
 reply → question list → main menu, Goodbye/Escape, and normal trade/service/job flows for old and
 new NPCs. Also check an NPC whose questions are locked and one with no flavour topics.
 
-Assignment details appear only while the character has an assignment from that NPC. There is no
-Claim rewards submenu: available exchanges and recoverable stored items appear directly at the main
-menu, with the existing server validation and pending reward queues. Names appear above every reply.
+Assignment details appear while the character has an assignment from that NPC. Task choices and
+recoverable stored items appear under **About work → Task rewards**, with the existing server validation
+and pending reward queues. About work stays visible while a claim remains after the assignment is gone.
+Earned task and bonus rewards must be collected before accepting another task from that contact;
+selected items awaiting inventory delivery also keep new work unavailable. Exchanges retain their
+main-menu placement. Names appear above every reply.
 Option colors use muted amber for jobs, lavender for progression, red for services and barter,
 teal for trading, warm off-white for flavour and other dialogue, and grey for back/goodbye.
 Categories use explicit action identities rather than substrings of topic IDs. Dynamic barters sharing
@@ -109,6 +126,6 @@ The Escape handler remains at the original Garry's Mod hook stage after Helix pl
 
 Repeatable task acceptance reveals no reward choices. Once the objective is complete, the issuing
 contact reveals choices through Complete the assignment; choosing one finishes the hand-in.
-Five-task bonuses appear only after they are earned. The root shows ready reward choices and
+Five-task bonuses appear only after they are earned. The work submenu shows ready reward choices and
 recoverable earned claims, with the existing access, distance and action-rate checks. See the
 [jobsystem reward guide](../jobsystem/README.md#task-rewards-and-existing-kits).

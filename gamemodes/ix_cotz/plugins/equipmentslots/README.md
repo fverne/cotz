@@ -1,11 +1,13 @@
 # Equipment slots
 
 Adds suit, helmet, gasmask, backpack, exoskeleton, primary weapon, secondary weapon,
-knife, artifact detector, binoculars, Geiger counter, anomaly detector, headlamp,
+knife, artifact detector, binoculars, Geiger counter, anomaly detector, light,
 compass, and GPS tracker slots. Drag an item from the backpack onto a compatible
 slot, click anywhere on a card to choose a matching backpack item, or use its usual Equip action.
 Slot interiors use the same skin painting as backpack cells. Empty cards have no inset button or text. Equipped images have no inset background.
 An occupied slot must be unequipped before choosing a replacement.
+Headlamps and handheld flashlights share the Light slot; only one can be equipped at a time.
+The slot retains its existing `headlamp` ID and saved position.
 
 The admin item picker uses the shared [COTZ UI style](../../../../docs/ui-style.md), with a responsive
 frame, scrolling list and wrapped take actions. Server validation remains unchanged.
@@ -40,6 +42,12 @@ where that state exists. The UI does not introduce new gameplay statistics.
 Slotted icons omit equipped badges and small corner condition indicators. Full-width
 card bars show durability above wear when both exist, or a single bar for knife
 sharpness, durability, or wear. Ordinary backpack icons keep their existing overlays.
+Filter-dependent headgear instead shows ordinary durability above a teal filter condition bar.
+Tooltips identify its required cartridge and remaining condition; see the [filter guide](../suits/README.md).
+Drag a matching filter from the backpack onto an equipped mask's card or icon to replace its cartridge.
+Installation takes six seconds and can be cancelled with F. The old cartridge returns to the incoming
+filter's cell, so a full backpack can still swap filters. Filter actions also work through the equipped
+item's context menu; the mask stays equipped.
 Section headers use the same plain label and thin divider as the bottom protection header.
 Equipment icons use the existing `ix.util.GetItemIcon` material cache, including
 its `img` priority, rather than rebuilding spawn icons when the menu opens.

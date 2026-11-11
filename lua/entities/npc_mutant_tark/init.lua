@@ -49,6 +49,8 @@ ENT.VisibleSchedule = SCHED_IDLE_WANDER
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 
+ENT.navigationLeapRange = 350
+
 function ENT:Initialize()
 	self.Model = "models/monsters/tark.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
@@ -136,7 +138,7 @@ end
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < 350 then
+		if distance < self.navigationLeapRange then
 			if(self.CanJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 				

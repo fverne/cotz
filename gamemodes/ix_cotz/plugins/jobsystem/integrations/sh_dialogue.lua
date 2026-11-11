@@ -40,10 +40,12 @@ else
 		local target = net.ReadEntity()
 		local panel = ix.gui.dialogue
 		if IsValid(panel) and panel.target == target and panel.tree.TaskRewardChoices then
-			if panel.currentTopicID == "GREETING" or panel.currentTopicID == "BackTopic" then
+			local id = panel.currentTopicID
+			if id == "GREETING" or id == "BackTopic" or id == "AboutWorkTopic" or id == "TaskRewardChoices" then
 				panel.options:Clear()
 				local topic = panel.tree[panel.currentTopicID]
-				panel:prepareDynamicOptions(topic.GetDynamicOptions(topic, LocalPlayer(), target), topic.options)
+				local options = topic.GetDynamicOptions and topic:GetDynamicOptions(LocalPlayer(), target) or {}
+				panel:prepareDynamicOptions(options, topic.options)
 			end
 		end
 	end)
@@ -86,22 +88,6 @@ local function offerOptions(character, npc)
 	return options
 end
 
-local function kitOptions(character, npc, options)
-	for id, item in pairs(character:GetInventory():GetItems()) do
-		if ix.taskRewards.IsTaskKit(item.uniqueID) and not item:GetData("taskRewardRedeemed", false) then
-			local choices = ix.taskRewards.BuildChoices(character, npc,
-				ix.taskRewards.ExpectedValue(item.uniqueID), "kit:" .. id)
-			for index, choice in ipairs(choices) do
-				options[#options + 1] = {
-					statement = "Redeem " .. item:GetName() .. ": " .. choice.label,
-					topicID = "TaskRewardChoices",
-					category = "service", dyndata = {kind = "kit", item = id, choice = index, label = choice.label},
-				}
-			end
-		end
-	end
-end
-
 local function barterOptions(character, npc, options)
 	for id, barter in pairs(ix.npcbarter and ix.npcbarter.barterdict[npc] or {}) do
 		local reward = barter.barterItem
@@ -122,6 +108,14 @@ end
 local function configureJobPreview(dialogue)
 	local topic = dialogue.tree.GetTaskByDifficulty
 	if not topic then return end
+	if topic.ShouldAdd ~= topic.cotzRewardShouldAdd or not topic.cotzRewardShouldAdd then
+		local previous = topic.ShouldAdd
+		topic.ShouldAdd = function(self, client, target)
+			return not ix.taskRewards.HasUnclaimedRewards(client:GetCharacter(), target:GetDisplayName())
+				and (not previous or previous(self, client, target))
+		end
+		topic.cotzRewardShouldAdd = topic.ShouldAdd
+	end
 	topic.IsDynamic = true
 	topic.response = dialogue.townContact and topic.response or "Here is what needs doing."
 	topic.options = {"BackTopic"}
@@ -158,7 +152,9 @@ local function configureJobPreview(dialogue)
 	end
 	topic.GetDynamicOptions = function(_, client, target)
 		local list = client.cotzTaskList
-		if client:GetCharacter():GetJobs()[target:GetDisplayName()] or not list or list.target ~= target then
+		if client:GetCharacter():GetJobs()[target:GetDisplayName()]
+			or ix.taskRewards.HasUnclaimedRewards(client:GetCharacter(), target:GetDisplayName())
+			or not list or list.target ~= target then
 			return {}
 		end
 
@@ -182,7 +178,8 @@ local function configureJobPreview(dialogue)
 				local definition = ix.jobs.list[preview.identifier]
 
 				local contact = ix.townNPCs and ix.townNPCs.byName[target:GetDisplayName()]
-				local description = ix.jobs.GetDialogueDescription(preview, target:GetDisplayName(), true)
+				local description = ix.jobs.GetDialogueDescription(preview, target:GetDisplayName(), true,
+					client:GetCharacter())
 				if contact and contact.dialogue.jobTerms then
 					description = description .. "\n\n" .. contact.dialogue.jobTerms:gsub("{money}", preview.moneyReward)
 				else
@@ -234,26 +231,22 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 	if not dialogue.tree.GREETING then return end
 	configureJobPreview(dialogue)
 	dialogue.addTopic("TaskRewardChoices", {
-		statement = "",
+		statement = "Task rewards.",
 		ShouldAdd = function(_, client, target)
 			local character = client:GetCharacter()
 			local npc = target:GetDisplayName()
 			local options = offerOptions(character, npc)
-			kitOptions(character, npc, options)
-			barterOptions(character, npc, options)
 			local pending = ix.progression.GetLine(character, CLAIM_LINE).pendingRewards
 
 			return #options > 0 or (pending and #pending > 0) or false
 		end,
 		response = "",
 		IsDynamic = true,
-		options = {"BackTopic"},
+		options = {"AboutWorkTopic", "BackTopic"},
 		GetDynamicOptions = function(_, client, target)
 			if not ix.taskRewards then return {} end
 			local character = client:GetCharacter()
 			local options = offerOptions(character, target:GetDisplayName())
-			kitOptions(character, target:GetDisplayName(), options)
-			barterOptions(character, target:GetDisplayName(), options)
 			local line = ix.progression.GetLine(character, CLAIM_LINE)
 			if line.pendingRewards and #line.pendingRewards > 0 then
 				options[#options + 1] = {
@@ -272,8 +265,6 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 				and (data.key:match("^job:") or data.key:match("^bonus:"))
 				if isOffer then
 					ix.taskRewards.SelectOffer(character, target:GetDisplayName(), data.key, data.choice, data.label)
-				elseif data.kind == "kit" then
-					ix.taskRewards.RedeemKit(character, target:GetDisplayName(), data.item, data.choice, data.label)
 				elseif data.kind == "barter" then
 					ix.taskRewards.ExecuteBarter(character, target:GetDisplayName(), data.key, data.choice, data.label)
 				elseif data.kind == "claim" then
@@ -284,15 +275,38 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 				net.Send(client)
 			end
 
-			return "BackTopic"
+			return type(data) == "table" and data.kind == "barter" and "BackTopic" or "TaskRewardChoices"
 		end,
 	})
+	local work = dialogue.tree.AboutWorkTopic
+	if not work then
+		dialogue.addTopic("AboutWorkTopic", {
+			statement = "About work...", response = "", options = {"BackTopic"},
+			ShouldAdd = function() return false end,
+		})
+		work = dialogue.tree.AboutWorkTopic
+	end
+	if work.ShouldAdd ~= work.cotzRewardShouldAdd or not work.cotzRewardShouldAdd then
+		local previous = work.ShouldAdd
+		work.ShouldAdd = function(self, client, target)
+			return (previous and previous(self, client, target))
+				or dialogue.tree.TaskRewardChoices:ShouldAdd(client, target)
+		end
+		work.cotzRewardShouldAdd = work.ShouldAdd
+	end
 	for _, id in ipairs({"GREETING", "BackTopic", "AboutWorkTopic"}) do
 		local topic = dialogue.tree[id]
 		if topic then
 			local options = {}
+			local hasWork = false
 			for _, option in ipairs(topic.options or {}) do
 				if option ~= "TaskRewardChoices" then options[#options + 1] = option end
+				if option == "AboutWorkTopic" then hasWork = true end
+			end
+			if id == "AboutWorkTopic" then
+				options[#options + 1] = "TaskRewardChoices"
+			elseif not hasWork then
+				options[#options + 1] = "AboutWorkTopic"
 			end
 			topic.options = ix.dialogue.OrderOptions(options, id == "GREETING" or id == "BackTopic")
 		end
@@ -305,13 +319,17 @@ function ix.dialogue.ConfigureTaskRewards(dialogue)
 				local previous = root.GetDynamicOptions
 				root.GetDynamicOptions = function(self, client, target)
 					local options = previous and previous(self, client, target) or {}
-					local rewards = dialogue.tree.TaskRewardChoices:GetDynamicOptions(client, target)
-					for _, option in ipairs(rewards) do options[#options + 1] = option end
+					barterOptions(client:GetCharacter(), target:GetDisplayName(), options)
 
 					return options
 				end
 				root.cotzRewardOptions = true
 			end
+		end
+	end
+	for _, id in ipairs({"GREETING", "BackTopic", "AboutWorkTopic"}) do
+		local root = dialogue.tree[id]
+		if root then
 			if root.preCallback ~= root.cotzRewardPreCallback or not root.cotzRewardPreCallback then
 				local previous = root.preCallback
 				root.preCallback = function(self, client, target)

@@ -4,7 +4,7 @@ ITEM.longdesc = "The meat of this midget-like creature has a bit of a psychoacti
 	.. " sometimes used recreationally by stalkers."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
-ITEM.price = 890
+ITEM.price = 590
 ITEM.width = 1
 ITEM.height = 1
 

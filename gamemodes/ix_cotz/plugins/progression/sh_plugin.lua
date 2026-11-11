@@ -55,6 +55,21 @@ end
 function PLUGIN:CreateMenuButtons(tabs)
 	tabs["progression"] = function(container)
 		ix.cotzUI.Scale(1)
+		local search = ix.cotzUI.StyleEntry(container:Add("DTextEntry"))
+		search:Dock(TOP)
+		search:DockMargin(0, 0, 0, ix.cotzUI.Scale(12))
+		ix.cotzUI.SetHeight(search, 34)
+		search:SetPlaceholderText("Search contacts, requests, items or rewards")
+		search:SetUpdateOnType(true)
+		local paintEntry = search.Paint
+		search.Paint = function(control, width, height)
+			paintEntry(control, width, height)
+			if control:GetText() == "" and not control:HasFocus() then
+				draw.SimpleText(control:GetPlaceholderText(), "cotzUISmall", ix.cotzUI.Scale(8), height / 2,
+					ix.cotzUI.colors.muted, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+			end
+		end
+
 		local scroll = container:Add("DScrollPanel")
 		scroll:Dock(FILL)
 		ix.cotzUI.StyleScroll(scroll)
@@ -91,8 +106,10 @@ function PLUGIN:CreateMenuButtons(tabs)
 		end
 		table.sort(npcIdentifiers)
 
+		local cards = {}
 		for _, npcIdentifier in pairs(npcIdentifiers) do
 			local card = ix.cotzUI.Card(scroll)
+			local searchText = {npcIdentifier}
 			local npcTitle = card:Add("DLabel")
 			npcTitle:SetWrap(true)
 			npcTitle:SetFont("cotzUILabel")
@@ -120,6 +137,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 				capacityText[#capacityText + 1] = ix.item.list[itemID].name .. ": +" .. bonus
 			end
 			table.sort(capacityText)
+			searchText[#searchText + 1] = table.concat(capacityText, "; ")
 			if #capacityText > 0 then
 				local label = card:Add("DLabel")
 				label:SetFont("cotzUISmall")
@@ -132,6 +150,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 			end
 
 			local earned = ix.progression.GetEarnedServiceText(LocalPlayer():GetCharacter(), npcIdentifier)
+			searchText[#searchText + 1] = earned
 			if earned ~= "" then
 				local label = card:Add("DLabel")
 				label:SetFont("cotzUISmall")
@@ -147,6 +166,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 				pairs(ix.progression.GetKnownActiveProgressions(LocalPlayer():GetCharacter(), npcIdentifier))
 			do
 				local definition = ix.progression.definitions[v]
+				searchText[#searchText + 1] = definition.name
 				local character = LocalPlayer():GetCharacter()
 				local progressionStatus = definition.requirementSlots
 						and ix.progression.GetComplexProgressionValue(character, v)
@@ -177,6 +197,7 @@ function PLUGIN:CreateMenuButtons(tabs)
 				if definition.BuildResponse then
 					local descriptionText =
 						ix.progression.DescribeTask(definition, definition.keyNpc, progressionStatus, character)
+					searchText[#searchText + 1] = descriptionText
 					local heading = definition.name .. "\n"
 					if descriptionText:sub(1, #heading) == heading then
 						descriptionText = descriptionText:sub(#heading + 1):gsub("^\n+", "")
@@ -194,7 +215,32 @@ function PLUGIN:CreateMenuButtons(tabs)
 
 			if activeProgressions == 0 and #capacityText == 0 and earned == "" then
 				card:Remove()
+			else
+				cards[#cards + 1] = {panel = card, text = string.lower(table.concat(searchText, "\n"))}
 			end
+		end
+
+		local noResults = scroll:Add("DLabel")
+		noResults:Dock(TOP)
+		noResults:DockMargin(0, ix.cotzUI.Scale(16), 0, 0)
+		noResults:SetFont("cotzUISmall")
+		noResults:SetTextColor(ix.cotzUI.colors.muted)
+		noResults:SetText("No matching progression found.")
+		noResults:SetWrap(true)
+		noResults:SetAutoStretchVertical(true)
+		noResults:SetVisible(false)
+		search.OnValueChange = function(_, value)
+			local query = string.lower(string.Trim(value))
+			local matches = 0
+			for _, entry in ipairs(cards) do
+				local visible = query == "" or string.find(entry.text, query, 1, true) ~= nil
+				entry.panel:SetVisible(visible)
+				if visible then matches = matches + 1 end
+			end
+			noResults:SetVisible(query ~= "" and matches == 0)
+			scroll:GetVBar():SetScroll(0)
+			scroll:GetCanvas():InvalidateLayout(true)
+			scroll:InvalidateLayout(true)
 		end
 	end
 end

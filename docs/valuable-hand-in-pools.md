@@ -15,8 +15,9 @@ in over multiple deliveries toward the same required unit count. Medium and hard
 the named item. Existing job IDs, counts, progress, reference payment floors and reward choices are
 retained; actual hand-in value uses the submitted item. Accepted easy jobs also gain these alternatives.
 Each catalogued valuable declares `ITEM.valuableCategory`, shown under inventory tooltip properties.
-Labels remove the `valuables_` prefix and replace underscores with spaces: `valuables_clinical_supplies`
-appears as "clinical supplies". Pool membership remains authoritative for hand-in eligibility.
+Category values remove the `valuables_` prefix and replace underscores with spaces. Tooltips capitalize
+each word for display: `valuables_clinical_supplies` appears as "Clinical Supplies".
+Pool membership remains authoritative for hand-in eligibility.
 The `uncommon` catalogue tier is provisional, not verified drop rarity. Live acquisition still needs playtesting.
 
 Names and descriptions determine these groups. Cases and pouches are requested as recovered

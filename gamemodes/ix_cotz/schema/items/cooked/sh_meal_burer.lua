@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a burer, cooked in the zone."
 ITEM.longdesc = "A watery stew made from Burer meat. Eating this while thinking of the fact that there's one less Burer in the zone gives most STALKERs a peace of mind."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_pseudodog.mdl"
 
-ITEM.price = 1420
+ITEM.price = 792
 ITEM.width = 1
 ITEM.height = 1
 

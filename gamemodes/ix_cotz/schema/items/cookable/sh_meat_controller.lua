@@ -4,7 +4,7 @@ ITEM.longdesc = "Incredibly dangerous to eat raw, as the latent psychic powers i
 	.. " mind of the consumer."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
-ITEM.price = 1890
+ITEM.price = 1090
 ITEM.width = 1
 ITEM.height = 1
 

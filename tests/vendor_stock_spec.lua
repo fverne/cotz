@@ -430,7 +430,7 @@ rankShop.items.ammo[VENDOR_RESTOCK_INTERVAL] = 0
 local _, disabledMaximum = rankShop:GetStock("ammo", ranked)
 check(disabledMaximum == 4, "disabled refill policy receives no capacity benefit")
 
-check(string.find(ix.vendorStock.FormatStock(0, 1, 0.4), "0.40 task credit", 1, true),
+check(string.find(ix.vendorStock.FormatStock(0, 1, 0.4), "0.40 restock credit", 1, true),
 	"shop explains fractional progress when no complete item has replenished")
 -- An already-open shop receives a complete policy before rendering a newly unlocked item.
 local packets, packet = {}, nil
@@ -480,5 +480,49 @@ local finish = assert(source:find('net.Receive("ixVendorAdvAddItem"', start, tru
 assert((loadstring or load)(source:sub(start, finish - 1)))()
 handlers.ixVendorAdvStock()
 check(rendered and readIndex == #packets[1], "live item appears without reopening and consumes the complete packet")
+
+local voucherShop, voucherOwner, otherOwner = vendor(), character(), character()
+voucherShop.items = {
+	odd = {10, 0, VENDOR_SELLANDBUY, 3, 48, 1},
+	one = {10, 0, VENDOR_SELLANDBUY, 1, 48, 1},
+	ammo = {10, 0, VENDOR_SELLANDBUY, 4, 48, 1},
+	locked = {10, 0, VENDOR_SELLANDBUY, 4, 48, 1},
+	buyOnly = {10, 0, VENDOR_BUYONLY, 4, 48, 1},
+	noInterval = {10, 0, VENDOR_SELLANDBUY, 4, 0, 1},
+	noAmount = {10, 0, VENDOR_SELLANDBUY, 4, 48, 0},
+	zero = {10, 0, VENDOR_SELLANDBUY, 0, 48, 1},
+	quest_test = {10, 0, VENDOR_SELLANDBUY, 4, 48, 1},
+	accesscard_test = {10, 0, VENDOR_SELLANDBUY, 4, 48, 1},
+	unlimited = {10, nil, VENDOR_SELLANDBUY},
+}
+voucherOwner.rank = 2
+ix.progression.CanBuyItem = function(_, _, id) return id ~= "locked" end
+check(ix.vendorStock.RestockFraction(voucherOwner, voucherShop, 0.5), "voucher replenishes eligible stock")
+local count, maxStock, fraction = ix.vendorStock.Get(voucherOwner, voucherShop, "odd")
+check(count == 1 and maxStock == 3 and fraction == 0.5, "odd maxima retain half-unit credit")
+count, maxStock, fraction = ix.vendorStock.Get(voucherOwner, voucherShop, "one")
+check(count == 0 and fraction == 0.5, "fractional-only replenishment counts as a successful change")
+count, maxStock = ix.vendorStock.Get(voucherOwner, voucherShop, "ammo")
+check(count == 3 and maxStock == 6, "voucher uses progression-adjusted capacity")
+for _, id in ipairs({"locked", "buyOnly", "noInterval", "noAmount", "zero", "quest_test", "accesscard_test"}) do
+	check(ix.vendorStock.Get(voucherOwner, voucherShop, id) == 0, "voucher excludes " .. id)
+end
+check(ix.vendorStock.Get(voucherOwner, voucherShop, "unlimited") == nil, "unlimited goods are unaffected")
+check(ix.vendorStock.Get(otherOwner, voucherShop, "odd") == 0, "vouchers leave other characters' shelves unchanged")
+check(ix.vendorStock.RestockFraction(voucherOwner, voucherShop, 0.5), "a second voucher adds another half")
+count, maxStock, fraction = ix.vendorStock.Get(voucherOwner, voucherShop, "odd")
+check(count == 3 and fraction == 0, "two half restocks fill odd maxima and clear excess credit")
+check(ix.vendorStock.Get(voucherOwner, voucherShop, "one") == 1, "two half credits replenish a one-stock item")
+check(not ix.vendorStock.RestockFraction(voucherOwner, voucherShop, 0.5), "full shelves report no change")
+ix.vendorStock.Set(voucherOwner, voucherShop, "odd", 2)
+check(ix.vendorStock.RestockFraction(voucherOwner, voucherShop, 0.5), "partly depleted shelves accept restock")
+count, maxStock, fraction = ix.vendorStock.Get(voucherOwner, voucherShop, "odd")
+check(count == 3 and fraction == 0, "stock cannot overfill or bank excess credit at full capacity")
+voucherShop.GetSherpa = function() return true end
+check(not ix.vendorStock.RestockFraction(voucherOwner, voucherShop, 0.5), "Sherpa instance stock cannot be replenished")
+voucherShop.GetSherpa = function() return false end
+for _, invalid in ipairs({0, -1, 2, "half", math.huge, 0 / 0}) do
+	check(not ix.vendorStock.RestockFraction(voucherOwner, voucherShop, invalid), "invalid restock fractions are rejected")
+end
 
 print(string.format("PASS: %d personal vendor stock checks", checks))

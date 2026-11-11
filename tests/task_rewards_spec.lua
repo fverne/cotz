@@ -141,6 +141,27 @@ check(
 )
 check(ix.taskRewards.ExpectedValue("value_currency_euro", {quantity = 3}) == 156,
 	"explicit pool quantities override generated defaults")
+do
+	local meal = {name = "Boar Chops", price = 520, weight = 0}
+	function meal:GetWeight() return self:GetData("weight", self.weight) end
+	function meal:GetPrice() return self.price * self:GetWeight() * 2 end
+	ix.item.list.weightedMeal = meal
+	check(ix.taskRewards.UnitValue("weightedMeal") == 520,
+		"a zero definition quote retains the configured meal price without saved weight")
+	local instance = setmetatable({GetData = function(_, key, default)
+		if key == "weight" then return 1.5 end
+
+		return default
+	end}, {__index = meal})
+	check(ix.taskRewards.HandInUnitValue("weightedMeal", instance, true) == 1560,
+		"actual meal weight still determines the handed-in item value")
+	meal.weight = 0.25
+	check(ix.taskRewards.UnitValue("weightedMeal") == 260,
+		"positive custom quotes retain their own units even below the configured price")
+	meal.weight, meal.price = 0, 0
+	check(ix.taskRewards.UnitValue("weightedMeal") == 0, "explicitly unpriced items remain unpriced")
+	meal.price = 520
+end
 local owner = actor()
 local choices = ix.taskRewards.BuildChoices(owner, "'Old Timer'", 75, "saved")
 check(#choices == 3, "contact gets three distinct available supply choices")
@@ -245,35 +266,7 @@ check(useOwner.client.receivedLabels[1] == "Reward Bandage (2 uses)",
 	"item-received message includes the exact awarded uses")
 check(not ix.progression.ClaimRewards(useOwner, "taskRewardClaims") and #useOwner.client.receivedLabels == 1,
 	"replaying a delivered claim does not repeat its item notification")
-local function kit(actor, id)
-	local item = {uniqueID = "kit_reward_demo", data = {}}
-	function item:GetID() return id end
-	function item:GetData(key, default) return self.data[key] or default end
-	function item:SetData(key, value) self.data[key] = value end
-	function item:Remove() actor.inventory.items[id] = nil end
-	actor.inventory.items[id] = item
-
-	return item
-end
-local kitOwner = actor()
-kit(kitOwner, 77)
-local kitChoice = ix.taskRewards.BuildChoices(
-	kitOwner,
-	"'Haggler'",
-	ix.taskRewards.ExpectedValue("kit_reward_demo"),
-	"kit:77"
-)[1]
-check(not ix.taskRewards.RedeemKit(kitOwner, "'Haggler'", 77, 1, "changed"), "stale kit quote does not consume it")
-check(kitOwner.inventory.items[77], "rejected redemption preserves the owned kit")
-check(
-	ix.taskRewards.RedeemKit(kitOwner, "'Haggler'", 77, 1, kitChoice.label),
-	"task kit redeems without paying an upgrade fee"
-)
-check(not ix.taskRewards.RedeemKit(kitOwner, "'Haggler'", 77, 1, kitChoice.label), "same kit cannot redeem twice")
-check(
-	not ix.taskRewards.RedeemKit(actor(), "'Haggler'", 77, 1, kitChoice.label),
-	"other character cannot redeem an unowned kit"
-)
+local barterOwner = actor()
 
 ix.npcbarter = {barterdict = {["'Haggler'"] = {powder = {
 	barterItem = {"kit_reward_demo", 1}, reqItem = {"powder", 2},
@@ -281,22 +274,22 @@ ix.npcbarter = {barterdict = {["'Haggler'"] = {powder = {
 local consumed = 0
 ix.npcbarter.ConsumeItems = function(_, _, amount) consumed = consumed + amount return true end
 local barterChoice = ix.taskRewards.BarterChoices(
-	kitOwner,
+	barterOwner,
 	"'Haggler'",
 	"powder",
 	ix.npcbarter.barterdict["'Haggler'"].powder
 )[1]
 check(barterChoice, "kit barter exposes explicit ammunition choices")
-check(not ix.taskRewards.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, "wrong"), "stale barter quote is rejected")
+check(not ix.taskRewards.ExecuteBarter(barterOwner, "'Haggler'", "powder", 1, "wrong"), "stale barter quote is rejected")
 check(consumed == 0, "invalid barter consumes no inputs")
 check(
-	ix.taskRewards.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, barterChoice.label),
+	ix.taskRewards.ExecuteBarter(barterOwner, "'Haggler'", "powder", 1, barterChoice.label),
 	"converted barter grants chosen ammo"
 )
 check(consumed == 2, "converted barter preserves input quantity")
 ix.npcbarter.activebarters.powder = false
 check(
-	not ix.taskRewards.ExecuteBarter(kitOwner, "'Haggler'", "powder", 1, barterChoice.label),
+	not ix.taskRewards.ExecuteBarter(barterOwner, "'Haggler'", "powder", 1, barterChoice.label),
 	"inactive recipe cannot execute"
 )
 
@@ -315,12 +308,15 @@ ix.item.list.part_swampcontroller_1 = hand
 local delivery = {name = "Hand over %d hands", numberRec = 1, requiredItem = "part_swampcontroller_1",
 	reward = {{"kit_reward_demo"}}, repReward = 5}
 ix.jobs.list.hand = delivery
-check(ix.taskRewards.FixedMoney(delivery, 1) == 3850, "delivery cash adds the tier base to half the hand-in value")
+check(ix.taskRewards.FixedMoney(delivery, 1) == 3350, "delivery cash pays half the hand-in value above the minimum")
+ix.item.list.part_cat = {name = "Cat Tail", price = 1200}
+check(ix.taskRewards.FixedMoney({requiredItem = "part_cat", numberRec = 1, tier = 1}, 1) == 600,
+	"one easy cat-tail delivery pays 600 rubles without an added base fee")
 check(
 	ix.taskRewards.SupplyBudget(delivery, 1) == 600,
 	"delivery supplies exclude the item reimbursement"
 )
-check(ix.taskRewards.FixedMoney(delivery, 3) == 10550, "cash floor covers every requested specimen")
+check(ix.taskRewards.FixedMoney(delivery, 3) == 10050, "cash covers every requested specimen")
 ix.jobs.jobsbycategory.handDelivery = {"hand"}
 local deliveryViewer = actor()
 local deliveryPreview = ix.taskRewards.PreviewJob(deliveryViewer, "'Old Timer'", "easy", {"handDelivery"})
@@ -330,7 +326,7 @@ local oldDeliveryPreviews = copy(deliveryViewer:GetData("taskJobPreviews"))
 oldDeliveryPreviews["'Old Timer'"].easy.moneyReward = 3685
 deliveryViewer:SetData("taskJobPreviews", oldDeliveryPreviews)
 local refreshedDelivery = ix.taskRewards.PreviewJob(deliveryViewer, "'Old Timer'", "easy", {"handDelivery"})
-check(refreshedDelivery.moneyReward == 3850, "cached delivery previews refresh their cash payout")
+check(refreshedDelivery.moneyReward == 3350, "cached delivery previews refresh their cash payout")
 check(refreshedDelivery.supplyBudget == savedDeliveryBudget
 	and refreshedDelivery.rewardChoices == nil and savedDeliveryChoices == nil,
 	"cash refresh preserves the saved supply budget and offered items")
@@ -344,7 +340,7 @@ end}, {__index = hand})
 check(ix.taskRewards.HandInUnitValue("part_swampcontroller_1", specimen) == 11800,
 	"actual specimen tier increases opportunity cost")
 check(
-	ix.taskRewards.FixedMoney(delivery, 1, 11800) == 6400,
+	ix.taskRewards.FixedMoney(delivery, 1, 11800) == 5900,
 	"high-quality specimen scales the fifty percent cash payout"
 )
 ix.npctemplates = {templates = {one = {items = {part_swampcontroller_1 = {20000, nil, 3}}, scale = 0.8},
@@ -352,13 +348,14 @@ ix.npctemplates = {templates = {one = {items = {part_swampcontroller_1 = {20000,
 check(ix.taskRewards.HandInUnitValue("part_swampcontroller_1") == 16000,
 	"best trader override is considered without multiplying prices between traders")
 check(
-	ix.taskRewards.FixedMoney(delivery, 1) == 8500,
+	ix.taskRewards.FixedMoney(delivery, 1) == 8000,
 	"delivery cash is fifty percent of configured trader reference value"
 )
 ix.npctemplates = nil
 ix.item.list.food = {name = "Food", price = 100, quantity = 5}
 local foodJob = {requiredItem = "food", numberRec = 3, reward = {}, moneyReward = 0}
-check(ix.taskRewards.FixedMoney(foodJob, 3) == 530, "stacked deliveries are valued per use, not per full stack")
+check(ix.taskRewards.FixedMoney(foodJob, 3) == 500, "cheap stacked deliveries receive the easy minimum")
+check(ix.taskRewards.FixedMoney(foodJob, 60) == 600, "stacked deliveries are valued per use, not per full stack")
 local foodOwner = actor()
 foodOwner.jobs.NPC = {identifier = "food", numberRec = 3, progress = 0}
 ix.jobs.list.food = foodJob
@@ -387,7 +384,7 @@ end
 ix.dialogue.notifyItemLost = function() end
 check(ix.taskRewards.DeliverJobItem(foodOwner.client, "NPC"), "delivery records consumed units")
 check(food.data.quantity == 2 and not food.removed, "partial stack hand-in preserves surplus uses")
-check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 530,
+check(foodOwner:GetJobs().NPC.deliveredValue == 60 and foodOwner:GetJobs().NPC.moneyReward == 500,
 	"actual hand-in value and payout are saved with progress")
 check(not ix.taskRewards.DeliverJobItem(foodOwner.client, "NPC"), "completed task cannot consume more items")
 local ammoOwner = actor()
@@ -801,8 +798,8 @@ local dialogue = {tree = {GREETING = {options = {"GOODBYE"}},
 	BackTopic = {options = {"GOODBYE"}}, GetTaskByDifficulty = {}}}
 dialogue.addTopic = function(id, data) dialogue.tree[id] = data end
 ix.dialogue.ConfigureTaskRewards(dialogue)
-check(#dialogue.tree.GREETING.options == 1
-	and dialogue.tree.GREETING.options[1] == "GOODBYE", "no claim submenu remains at root")
+check(#dialogue.tree.GREETING.options == 2
+	and dialogue.tree.GREETING.options[1] == "AboutWorkTopic", "reward-only contacts expose the work submenu")
 local viewer = actor()
 local position = {DistToSqr = function() return 0 end}
 function viewer.client:GetPos() return position end
@@ -874,11 +871,14 @@ for _, id in ipairs({"GREETING", "BackTopic"}) do
 		check(option ~= "TaskRewardChoices", "claim submenu is removed")
 	end
 end
-check(#workDialogue.tree.AboutWorkTopic.options == 1
-	and workDialogue.tree.AboutWorkTopic.options[1] == "BackTopic",
-	"assignment has no reward submenu")
-check(workDialogue.tree.TaskRewardChoices.options[1] == "BackTopic",
-	"supplies always provide a main-menu return even when work becomes unavailable")
+check(#workDialogue.tree.AboutWorkTopic.options == 2
+	and workDialogue.tree.AboutWorkTopic.options[1] == "TaskRewardChoices",
+	"assignment keeps rewards in a submenu")
+check(workDialogue.tree.TaskRewardChoices.options[1] == "AboutWorkTopic"
+	and workDialogue.tree.TaskRewardChoices.options[2] == "BackTopic",
+	"supplies provide both work and main-menu returns")
+check(workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, rootRewardOwner.client, target),
+	"earned bonuses keep About work visible without an active assignment")
 check(not workDialogue.tree.AboutWorkTopic.ShouldAdd(nil, viewer.client, target),
 	"unaccepted previews do not expose reward actions in the work menu")
 local hiddenChoices = workDialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, viewer.client, target)
@@ -981,6 +981,13 @@ local listed = dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogu
 check(cleared and #displayedOptions == 1 and #listed == 1 and listed[1].statement == listPacket[4],
 	"client replaces difficulty labels with the authoritative task and reward row")
 check(listed[1].dyndata.difficulty == "easy", "listed task retains its saved category for acceptance")
+for _, topicID in ipairs({"AboutWorkTopic", "TaskRewardChoices"}) do
+	ix.gui.dialogue.currentTopicID = topicID
+	ix.gui.dialogue.tree = dialogue.tree
+	activePacket, offset, cleared = {target}, 0, false
+	receivers["cotz/dialogue/task-rewards-refresh"]()
+	check(cleared and #displayedOptions == 0, "reward refresh updates the open " .. topicID .. " submenu")
+end
 check(#dialogue.tree.GetTaskByDifficulty.GetDynamicOptions(nil, catalogueReader.client, {GetDisplayName = function() return "Other NPC" end}) == 0,
 	"another NPC cannot display a cached task list")
 catalogueReader.client.cotzTaskList.options = {
@@ -1457,6 +1464,9 @@ finishJob(queueOwner, "'Old Timer'")
 local held = queueOwner:GetData("taskRewardOffers")[queueJob.rewardKey]
 check(held and held.earned and held.selected == 1 and held.retrySelected,
 	"a full claim queue retains the selected earned entitlement")
+check(ix.taskRewards.HasUnclaimedRewards(queueOwner, "'Old Timer'")
+	and not queueOwner.client:ixJobAdd("hunt", "'Old Timer'"),
+	"a reward held outside the full queue also blocks a new task")
 check(not ix.taskRewards.SelectOffer(queueOwner, "'Old Timer'", queueJob.rewardKey, 2),
 	"a queued entitlement cannot change reward and invalidate the credited bonus allowance")
 local interruptedOffers = queueOwner:GetData("taskRewardOffers")
@@ -1481,16 +1491,24 @@ check(not secretBonusStatus:find("rubles", 1, true), "bonus progress hides rewar
 
 local directRewards = dialogue.tree.TaskRewardChoices.GetDynamicOptions(nil, rootRewardOwner.client, target)
 local rootRewards = dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target)
-check(#rootRewards == #directRewards, "reward actions appear directly at the root")
+check(#directRewards > 0 and #rootRewards == 0, "reward actions stay inside the work submenu")
 ix.dialogue.ConfigureTaskRewards(dialogue)
-check(#dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target) == #directRewards,
-	"reconfiguring a dialogue does not duplicate direct reward actions")
-for tier, base in ipairs({500, 1000, 1500}) do
+check(#dialogue.tree.GREETING.GetDynamicOptions(nil, rootRewardOwner.client, target) == 0
+	and #dialogue.tree.AboutWorkTopic.options == 2,
+	"reconfiguring a dialogue preserves one reward submenu without root claims")
+for tier, minimum in ipairs({500, 750, 1000}) do
 	local request = {requiredItem = "food", wholeItems = true, numberRec = 2, tier = tier}
-	check(ix.taskRewards.FixedMoney(request, 2) == base + 100,
-		"each delivery tier adds its base to half the price of two whole meals")
-	check(ix.taskRewards.SupplyBudget(request, 2) == math.max(600, base),
-		"item reimbursement does not increase the supply allowance")
+	check(ix.taskRewards.FixedMoney(request, 2) == minimum,
+		"each delivery tier guarantees its minimum for low-value whole items")
+	local boundaryCount = minimum / 50
+	check(ix.taskRewards.FixedMoney(request, boundaryCount) == minimum,
+		"an item payout at the tier minimum receives no added base fee")
+	check(ix.taskRewards.FixedMoney(request, boundaryCount + 1) == minimum + 50,
+		"whole-item value above the tier minimum determines the full payout")
+	check(ix.taskRewards.FixedMoney(request, 2, (minimum + 100) * 2) == minimum + 100,
+		"actual hand-in value can raise a cheap request above its tier minimum")
+	check(ix.taskRewards.SupplyBudget(request, 2) == ({600, 1000, 1500})[tier],
+		"delivery cash minimums preserve the existing supply allowance")
 end
 local handInBonus = actor()
 handInBonus:SetData("taskRewardOffers", {["job:handin"] = {npc = "'Old Timer'", selected = 1,
@@ -1504,14 +1522,14 @@ local paidHandIn = actor()
 local paidJob = {identifier = "hand", numberRec = 1, deliveredValue = 11800}
 ix.taskRewards.PrepareJob(paidHandIn, "'Old Timer'", paidJob)
 paidJob.isCompleted = true
-paidJob.moneyReward = 5900
+paidJob.moneyReward = 6400
 paidHandIn.jobs["'Old Timer'"] = paidJob
 ix.taskRewards.SelectOffer(paidHandIn, "'Old Timer'", paidJob.rewardKey, 1)
 finishJob(paidHandIn, "'Old Timer'")
-check(paidHandIn.money == 6400 and #paidHandIn.inventory.received > 0,
-	"saved hand-ins receive the base and reimbursement without deducting their item reward")
+check(paidHandIn.money == 5900 and #paidHandIn.inventory.received > 0,
+	"saved hand-ins receive the current payout without deducting their item reward")
 finishJob(paidHandIn, "'Old Timer'")
-check(paidHandIn.money == 6400, "hand-in payment cannot be repeated")
+check(paidHandIn.money == 5900, "hand-in payment cannot be repeated")
 local triggerOwner = actor()
 triggerOwner.jobs.NPC = {identifier = "hunt", listenTrigger = "hunt", numberRec = 1, progress = 0}
 triggerOwner.client:ixJobEvaluate("hunt")
@@ -1537,6 +1555,131 @@ do
 		"last item reveals selectable rewards without another completion action")
 	check(#packets > packetCount and packets[#packets].name == "cotz/dialogue/task-rewards-refresh",
 		"last item immediately sends the dialogue reward refresh")
+end
+
+do
+	local owner = actor()
+	local oldKit = {uniqueID = "kit_mixed_high"}
+	owner.inventory.items[77] = oldKit
+	check(ix.taskRewards.RedeemKit == nil, "legacy kit redemption has no server handler")
+	check(not dialogue.tree.TaskRewardChoices.ShouldAdd(nil, owner.client, target),
+		"carrying a Hiking Backpack does not expose reward exchanges")
+	check(#dialogue.tree.GREETING.GetDynamicOptions(nil, owner.client, target) == 0,
+		"carried legacy kits add no root dialogue actions")
+	dialogue.tree.TaskRewardChoices.ResolveDynamicOption(nil, owner.client, target,
+		{kind = "kit", item = 77, choice = 1, label = "Old kit quote"})
+	check(owner.inventory.items[77] == oldKit and #owner.inventory.received == 0
+		and owner.money == 0 and next(owner:GetData("taskRewardOffers", {})) == nil,
+		"stale kit selections neither consume the kit nor award supplies")
+end
+
+do
+	local npc = "'Old Timer'"
+	local owner = actor()
+	local preview = ix.taskRewards.PreviewJob(owner, npc, "easy", {"hunting"})
+	ix.taskRewards.CreateOffer(owner, "bonus:blocking", npc, 100, "Five-task bonus")
+	local offers = owner:GetData("taskRewardOffers")
+	offers["bonus:blocking"].choices = {{label = "Bandage", items = {{item = "medic_bandage_1"}}}}
+	owner:SetData("taskRewardOffers", offers)
+	ix.taskRewards.EarnOffer(owner, "bonus:blocking")
+	check(ix.taskRewards.HasUnclaimedRewards(owner, npc), "an earned unchosen bonus blocks new work")
+	check(not dialogue.tree.GetTaskByDifficulty:ShouldAdd(owner.client, target),
+		"new work is hidden until the reward is taken")
+	owner.client.cotzTaskList = {target = target, options = {{dyndata = {difficulty = "easy"}}}}
+	check(#dialogue.tree.GetTaskByDifficulty:GetDynamicOptions(owner.client, target) == 0,
+		"a stale client offer list cannot expose work while a reward is outstanding")
+	check(not ix.taskRewards.PreviewJob(owner, npc, "easy", {"hunting"}),
+		"outstanding rewards prevent server previews")
+	check(not ix.taskRewards.AcceptJob(owner.client, npc, "easy"),
+		"outstanding rewards reject acceptance of an earlier saved preview")
+	check(not owner.client:ixJobAdd("hunt", npc), "direct job acceptance cannot bypass reward collection")
+	check(not owner:GetJobs()[npc] and owner:GetData("taskJobPreviews")[npc].easy.rewardKey == preview.rewardKey,
+		"rejected acceptance preserves the preview and creates no assignment")
+	check(owner.client:ixJobAdd("hunt", "'Jitters'"), "an unclaimed bonus only blocks its issuing contact")
+	check(ix.taskRewards.SelectOffer(owner, npc, "bonus:blocking", 1), "the earned bonus can be claimed")
+	while #(ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards or {}) > 0 do
+		check(ix.taskRewards.ClaimNext(owner), "all bonus items are collected before accepting more work")
+	end
+	check(not ix.taskRewards.HasUnclaimedRewards(owner, npc), "delivered rewards release the work lock")
+	check(ix.taskRewards.AcceptJob(owner.client, npc, "easy"), "the saved preview can be accepted after collection")
+end
+
+do
+	local npc = "'Old Timer'"
+	local owner = actor()
+	check(owner.client:ixJobAdd("hunt", npc), "stored reward fixture accepts a task")
+	owner.jobs[npc].isCompleted = true
+	owner.inventory.full = true
+	finishJob(owner, npc)
+	local pending = ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards
+	check(#pending > 0 and pending[1].taskNPC == npc, "stored task rewards retain their issuing contact")
+	check(ix.taskRewards.HasUnclaimedRewards(owner, npc) and not owner.client:ixJobAdd("hunt", npc),
+		"choosing a reward does not unlock work while its items cannot fit")
+	check(not ix.taskRewards.HasUnclaimedRewards(owner, "'Jitters'"),
+		"stored rewards do not block other contacts")
+	local restored = actor()
+	restored.data, restored.vars = copy(owner.data), copy(owner.vars)
+	check(ix.taskRewards.HasUnclaimedRewards(restored, npc) and not restored.client:ixJobAdd("hunt", npc),
+		"saved pending rewards keep work locked after character restoration")
+	check(workDialogue.tree.AboutWorkTopic:ShouldAdd(owner.client, target),
+		"stored items keep the work submenu accessible after the completed job disappears")
+	check(not ix.taskRewards.ClaimNext(owner) and ix.taskRewards.HasUnclaimedRewards(owner, npc),
+		"a failed inventory claim keeps new work locked")
+	owner.inventory.full = false
+	local add = owner.inventory.Add
+	owner.inventory.Add = function() return 1 end
+	check(ix.taskRewards.ClaimNext(owner) and ix.taskRewards.HasUnclaimedRewards(owner, npc),
+		"a reserved inventory slot keeps work locked until delivery is acknowledged")
+	local token = ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards[1].token
+	ix.char = {loaded = {[owner.id] = owner}}
+	owner.inventory.owner = owner.id
+	callbacks.InventoryItemAdded(nil, owner.inventory, {GetData = function() return token end})
+	owner.inventory.Add = add
+	while #(ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards or {}) > 0 do
+		local token = ix.progression.GetLine(owner, "taskRewardClaims").pendingRewards[1].token
+		owner.inventory.items = {{GetData = function() return token end}}
+		check(ix.taskRewards.ClaimNext(owner), "token recovery acknowledges the queued reward")
+	end
+	check(not ix.taskRewards.HasUnclaimedRewards(owner, npc) and owner.client:ixJobAdd("hunt", npc),
+		"work unlocks after every selected item is received")
+	local legacy = actor()
+	ix.progression.QueueReward(legacy, "taskRewardClaims", {item = "medic_bandage_1"})
+	check(ix.taskRewards.HasUnclaimedRewards(legacy, npc)
+		and ix.taskRewards.HasUnclaimedRewards(legacy, "'Jitters'"),
+		"older stored rewards without an issuer must be collected before accepting more tasks")
+	local barterOwner = actor()
+	ix.progression.QueueReward(barterOwner, "taskRewardClaims", {item = "medic_bandage_1", taskNPC = false})
+	check(not ix.taskRewards.HasUnclaimedRewards(barterOwner, npc),
+		"new barter deliveries do not impose a task reward lock")
+end
+
+do
+	local npc = "'Spicy Lemon'"
+	local owner = actor()
+	ix.jobs.list.weightedDelivery = {name = "Deliver %d meals", desc = "Deliver %d meals", numberRec = 3,
+		requiredItem = "weightedMeal", wholeItems = true, tier = 1, reward = {}, repReward = 15}
+	local job = {identifier = "weightedDelivery", numberRec = 3, progress = 1, deliveredValue = 1560,
+		moneyReward = 500, progressionClaim = 7, rewardKey = "job:weighted"}
+	owner.jobs[npc] = copy(job)
+	owner:SetData("taskJobPreviews", {[npc] = {easy = {identifier = "weightedDelivery", numberRec = 3,
+		progressionClaim = 8, rewardKey = "job:weighted-preview", moneyReward = 500}}})
+	ix.taskRewards.ReconcileCharacter(owner)
+	local refreshed = owner:GetJobs()[npc]
+	check(refreshed.moneyReward == 780, "accepted meal deliveries refresh their value without an added base fee")
+	check(refreshed.progress == job.progress and refreshed.deliveredValue == job.deliveredValue
+		and refreshed.numberRec == job.numberRec and refreshed.rewardKey == job.rewardKey
+		and refreshed.progressionClaim == job.progressionClaim,
+		"repricing preserves the accepted assignment and its credited hand-ins")
+	check(owner:GetData("taskJobPreviews")[npc].easy.moneyReward == 780,
+		"saved meal previews use the same item-price reference")
+	owner.jobs[npc].isCompleted = true
+	owner.jobs[npc].deliveredValue = 3120
+	ix.taskRewards.ReconcileCharacter(owner)
+	check(owner:GetJobs()[npc].moneyReward == 1560 and owner.money == 0,
+		"completed unpaid deliveries keep actual value without paying during reconciliation")
+	local saves = owner.saves
+	ix.taskRewards.ReconcileCharacter(owner)
+	check(owner.saves == saves, "unchanged delivery payments do not trigger repeated saves")
 end
 
 print("PASS: " .. checks .. " task reward checks")

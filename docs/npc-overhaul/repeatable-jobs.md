@@ -40,8 +40,9 @@ research defence, Egghead requests Garbage/Waystation/Pripyat specimens, and Int
 
 New reference cash budgets are 1,000 / 2,000 / 3,000 rubles; reputation is 15 / 25 / 35.
 Reference cash is not a guaranteed payout. Non-item jobs currently pay 55% of reference cash
-(550 / 1,100 / 1,650 rubles); hand-ins pay 500 / 1,000 / 1,500 plus 50% of the required
-items' value. This added payment is separate from supplies and bonus allowance. Rewards are chosen
+(550 / 1,100 / 1,650 rubles); hand-ins pay 50% of the required items' value, with minimum payouts of
+500 / 750 / 1,000 rubles for easy / medium / hard. The minimum is not added to the item payment.
+Supply and bonus allowances remain separate. Rewards are chosen
 at completed hand-in and remain hidden beforehand. The new consumable/currency packages and five-task
 bonuses are documented in the [jobsystem reward guide](../../gamemodes/ix_cotz/plugins/jobsystem/README.md#task-rewards-and-existing-kits).
 Medium/hard reputation gates and equipment purchase gates remain.

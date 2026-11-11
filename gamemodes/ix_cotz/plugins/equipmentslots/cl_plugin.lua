@@ -55,6 +55,9 @@ local function itemConditions(item)
 	if item.isPoachKnife and ix.poaching then return ix.poaching.GetSharpness(item) end
 	local durability = item:GetData("durability")
 	local wear = item:GetData("wear")
+	if item.filterType and item.isGasmask and item.GetFilterCondition then
+		return durability or 100, item:GetFilterCondition() or 0
+	end
 	if item.isWeapon and item.class then
 		local weapon = LocalPlayer():GetWeapon(item.class)
 		if IsValid(weapon) then
@@ -84,14 +87,15 @@ local function paintCard(card, width, height)
 	local barHeight = math.max(3, math.floor(card.scale * 4))
 	local barY = height - padding - barHeight
 	local conditionColor
+	local filter = card.item.filterType and card.item.isGasmask
 	if card.item.isPoachKnife and ix.poaching and condition > ix.poaching.Sharpness.default then
 		conditionColor = COLORS.teal
 	end
 	drawSegments(padding, barY, width - padding * 2, barHeight,
-		math.Clamp(condition / 100, 0, 1), conditionColor)
+		math.Clamp((filter and wear or condition) / 100, 0, 1), filter and COLORS.teal or conditionColor)
 	if wear ~= nil then
 		barY = barY - barHeight - math.max(2, math.floor(card.scale * 3))
-		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp(wear / 100, 0, 1))
+		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp((filter and condition or wear) / 100, 0, 1))
 	end
 end
 
@@ -106,14 +110,14 @@ local function setBounds(panel, bounds)
 end
 
 function PLUGIN:CreateEquipmentFonts()
-	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+	local scale = ix.cotzUI.GetScale()
 	self.uiScale = scale
 	if self.fontScale == scale then return end
 	self.fontScale = scale
 
 	for name, size in pairs({Title = 25, Label = 19, Small = 17}) do
 		surface.CreateFont("cotzEquipment" .. name, {
-			font = "alsina", size = math.floor(size * scale), weight = 500, extended = true,
+			font = "alsina", size = math.floor(size * scale + 0.5), weight = 500, extended = true,
 		})
 	end
 end
@@ -203,6 +207,9 @@ function PANEL:AddEquipmentIcon(card, item, index)
 			PLUGIN:SendEquipmentAction(item, index, false, x, y)
 		end
 	end
+	icon:Receiver("ixInventoryItem", function(_, panels, dropped)
+		PLUGIN:ReceiveEquipmentDrop(card, index, panels, dropped)
+	end)
 	card.icon = icon
 end
 
@@ -256,6 +263,23 @@ function PANEL:OpenHotkeys()
 	menu:Open()
 end
 
+function PLUGIN:ReceiveEquipmentDrop(card, index, panels, dropped)
+	local icon = panels[1]
+	if not dropped or not IsValid(icon) then return end
+	local item = icon:GetItemTable()
+	if not item then return end
+	if not item.isGasmaskFilter then self:SendEquipmentAction(item, index, true) return end
+	if not ix.util.CanInstallGasmaskFilter(card.item, item, LocalPlayer()) then return end
+	if (self.nextFilterAction or 0) > RealTime() then return end
+	self.nextFilterAction = RealTime() + 0.5
+	net.Start("ixInventoryAction")
+		net.WriteString("combine")
+		net.WriteUInt(item.id, 32)
+		net.WriteUInt(item.invID, 32)
+		net.WriteTable({card.item.id})
+	net.SendToServer()
+end
+
 function PANEL:Rebuild(inventory)
 	self.inventoryID = inventory:GetID()
 	self.content:Clear()
@@ -277,12 +301,10 @@ function PANEL:Rebuild(inventory)
 		card.DoClick = function() self:ChooseSlotItem(index) end
 		card.item = occupied[index]
 		card.Paint = paintCard
-		card:Receiver("ixInventoryItem", function(_, panels, dropped)
-			local icon = panels[1]
-			if not dropped or not IsValid(icon) then return end
-			local item = icon:GetItemTable()
-			if item then PLUGIN:SendEquipmentAction(item, index, true) end
-		end)
+		local receiveDrop = function(_, panels, dropped)
+			PLUGIN:ReceiveEquipmentDrop(card, index, panels, dropped)
+		end
+		card:Receiver("ixInventoryItem", receiveDrop)
 		card.label = card:Add("DLabel")
 		card.label:SetText(card.item and card.item.isPDA and "PDA - RETURN TO BACKPACK" or string.upper(slot.name))
 		card.label:SetTextColor(COLORS.text)
@@ -387,6 +409,11 @@ function PANEL:Think()
 	end
 	if (self.nextProtectionUpdate or 0) > RealTime() then return end
 	self.nextProtectionUpdate = RealTime() + 0.25
+	if self.layoutScale ~= ix.cotzUI.GetScale() then
+		PLUGIN:CreateEquipmentFonts()
+		self.layoutScale = PLUGIN.uiScale
+		self:InvalidateLayout(true)
+	end
 	self:UpdateProtection()
 end
 

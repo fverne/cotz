@@ -3,22 +3,66 @@
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 635 hand-in milestones
-in 50 branches, retaining current `v3/` IDs and adding 223 `/stock` intermissions.
+the earlier progression, catalogue and service descriptions below. There are 631 hand-in milestones
+in 52 branches, retaining current `v3/` IDs and adding 212 `/stock` intermissions.
+Technut's initial anorak stock delivery and eleven intermediate stock-preparation deliveries are retired.
+Anoraks remain starting stock; suit progression starts with the Mail Jacket and follows each preceding suit
+directly. The independent painting branch remains. Existing regional ranks are retained for later suits.
+Retained milestone IDs, request quantities and saved contributions are unchanged. Retired stock-step
+records remain saved history and no longer gate unfinished suits.
+On character load, an active retired Technut stock step is marked skipped and activates its following
+suit request. Discussed stock steps also reveal that request in the progression tab. The migration
+preserves partial deliveries, pays no completion reward and never reopens a completed suit.
+Town delivery slots now declare `mode = "any"` (one shared category total) or `mode = "random"`
+(one saved item selection per character). The first `ceil(actualUnlockCount / 5)` milestones of every
+connected chain are category-only; shared labels do not join independent capacity purchases. Intermissions
+inherit the following unlock's position and always use category
+totals. Later ordinary requests use a specific-item final slot with category totals in earlier slots.
+One-step branches stay category-only. See the [mode and migration policy](../../../../docs/npc-overhaul/progression-overhaul.md#category-totals-and-specific-requests).
+Category requests now save 3–4 accepted item types per character, allowing any mixture. New totals
+require at least 3–4 supply batches. Three nuts or four bolts count as one batch; category offers
+always contain both fasteners or neither. Other quantity-bearing valuables use their natural spawn
+minimum. Specific requests display raw quantities after batch scaling. Catalogue pools may overlap;
+the saved accepted subsets do not. `settings.progressionCategoryChoices` configures the subset range.
+Mode version 2 replaces old full-category lists once and raises outstanding category totals below three.
+Canonical keys, delivered credit and money remain; fulfilled categories, completed milestones and old
+specific targets are retained. Choices and batch costs are unaffected by subsequent definition edits. Dialogue, journal search and
+inventory highlights use the saved choices. Restart map servers together; do not reset saves or run FTS.
+Run `luatex --luaonly tests/progression_subsets_spec.lua` for randomized subsets and batch hand-ins.
+Run `luatex --luaonly tests/town_requirement_modes_spec.lua` for all compiled town boundaries.
+Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` and
+`python3 tests/progression_expansion_spec.py`; multiplayer replication and hand-in QA remain required.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
 locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
 Marsh branches keep their first two original milestones and all work below 45% fully Marsh-obtainable,
-including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts, except for Ballast's initial crowbar-or-bat hand-in. Completion pays accumulated hand-in
+including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts, except for the initial hideout tool hand-ins. Completion pays accumulated hand-in
 value at 60%, with no flat cash. Stock bonuses increase personal capacity without refilling it.
 Ledger uses 3× difficulty. Policy 4 converts outstanding invalid or out-of-region saved inputs while preserving credited
 contributions and completed unlocks. Inserted stages gate unfinished unlocks; Mute's redundant directory
 maintenance is removed. See the authoritative guide for regional thresholds and save handling.
-The authored equipment and regular-ammo chains are unchanged. Jitters' stimpaks follow medkit 6,
+Old Timer now unlocks Cutlery before Cleaning kit, followed by Shovel. Existing completed unlocks remain saved.
+Jitters' stimpaks follow medkit 6,
 antirads follow medkit 2, and Asenapine/Modafines follow medkit 4. Atlas' anomaly detector follows his Geiger counter.
-Ballast's initial hideout access consumes one unequipped crowbar or bat before new room claims and improvements;
-existing rooms/upgrades remain saved. Haggler's gunpowder barters are removed.
+Initial hideout access consumes one unequipped tool before new local room claims and unfinished improvements:
+one crowbar or bat for Ballast, one sledgehammer for Cleaner, and one FUBar for Ledger. These hand-ins ignore
+contact difficulty multipliers. Existing rooms/upgrades remain saved and usable. Haggler's gunpowder barters are removed.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
+Stock-capacity milestones use "<item> stock increase" as their title in dialogue and the progression menu.
+
+All 631 active milestones have individual authored `briefing` and `completion` replies in their
+contact definitions, including the 212 stock-preparation deliveries. Read each contact's existing
+profile and bound conversation before editing its voice. The current requirements, catalogue and
+benefits determine what a reply can promise; the older story tables and retired commissions do not.
+Requests leave assigned item names/counts to the existing objective display so valid saved deliveries
+remain accurately described. Mute's five requests and completions use gestures and written orders.
+Town completion messages render the authored text without adding the player's name.
+
+`expand_progression.py` preserves existing stock-step briefings and completions by step ID when
+rebuilding their requirements. A newly generated stock step initially copies the following unlock's
+text and needs its own authored replies before delivery; do not reuse the unlock's purchase wording
+for a stock-capacity benefit. Check coverage with `luatex --luaonly tests/progression_dialogue_spec.lua`
+and preservation with `python3 tests/progression_expansion_spec.py`.
 
 Scoreboard tools and dossier data are immediately available. Mute instead unlocks mutant PDA reports for
 Swamps, Garbage, Waystation, then Pripyat, retaining emission warnings before Pripyat. Retained milestone IDs
@@ -30,9 +74,11 @@ the existing backpack milestones; each requires only its assigned backpack. Play
 route and return for any capacity upgrades later.
 Spool's Russian tank helmet and Latch's cloth mask start in vendor stock; their old purchase steps are retired.
 Spool owns strong drugs. Quartermaster retains six regular ammunition barters; his two main-menu kit exchanges
-are removed. Suture's conversion milestones explicitly say "variants". Spool/Latch/Wake declare
-`preserveProgression = true` so the authoring tool retains their ordering, request tuning and stock stages. Technut keeps painting and all ordinary
-suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
+are removed. Suture's conversion milestones explicitly say "variants". Old Timer/Spool/Latch/Wake declare
+`preserveProgression = true` so the authoring tool retains their ordering, quantities and stock stages.
+Mode and candidate-pool authoring still applies to these contacts.
+Technut also declares it to preserve the suit route without regenerating stock intermissions.
+Technut keeps painting and all ordinary suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
 conversion menu and per-suit non-looted finishes. Intern owns artifact detectors. Brass/Carbon provide
 HP/AP barter only, gated by regular/HP completions respectively. Starter stock is explicitly declared.
 Ballast, Cleaner and Ledger buy all at 0.3 and provide twelve local hideout improvement stages.
@@ -48,6 +94,7 @@ Regenerate reports with `progression_rewards.py --write` and `ammo_progression.p
 
     luatex --luaonly tests/contact_stock_and_capacity_spec.lua
     luatex --luaonly tests/contact_progression_changes_spec.lua
+    luatex --luaonly tests/technut_stock_skip_spec.lua
     luatex --luaonly tests/townnpcs_spec.lua
     luatex --luaonly tests/town_ammo_exchange_spec.lua
     luatex --luaonly tests/vendor_plan_spec.lua
@@ -59,6 +106,37 @@ Regenerate reports with `progression_rewards.py --write` and `ammo_progression.p
 
 Deploy all map servers together and restart without resetting saves or running first-time setup.
 The linked overhaul guide records default quantities, current allocations, compatibility and live checks.
+
+## Gasmask filter purchases
+
+Every current seller of filter-dependent headgear unlocks the matching cartridge before the first
+mask requiring it. Latch supplies civilian filters before Halfmask, military before EO-20, and
+scientific before M40. Boss supplies military filters before CS-4 and scientific before Screen.
+The other masks at those sellers follow these milestones through their existing prerequisite chains.
+Exempt equipment adds no filter delivery. Cleaner and Beanstalk's old template mask entries remain
+outside the authoritative town catalogue and do not create additional sale routes.
+
+These five delivery stages grant purchase access only. Each inherits the following mask's existing
+prerequisites and sits after any stock preparation, immediately before that mask's purchase delivery.
+Each seller stocks four cartridges initially, with a maximum of four and one cartridge refilled every 12 hours;
+prices come from the concrete filter items. Normal vendor refresh adds the catalogue rows on restart.
+Latch remains the canonical supplier; Boss grants independent local military/scientific purchase access.
+Boss now joins the contacts marked `preserveProgression`, so authoring regeneration retains this ordering.
+
+New filter stages declare `defaultActive = true` while retaining their prerequisites, so they become
+offerable when their parents were completed before the update. Completed mask purchases, saved
+requirements, partial deliveries and accrued hand-in value remain intact. Unfinished mask deliveries
+wait for the matching filter unlock. Talk to the contact to discover the newly available request.
+The affected branches retain delivery quantities and acquisition regions; their generated candidate
+pools and category-only opening boundaries follow the updated chain positions. Saved selections stay fixed.
+Deploy matching code to all map servers and restart; no save reset or first-time setup is needed.
+
+Run `luatex --luaonly tests/gasmask_filter_progression_spec.lua` for all fourteen mask sale routes,
+five filter unlocks, seller-local permissions, saved-progress handling and vendor-template refresh.
+Also run `tests/town_requirement_modes_spec.lua` and `tests/progression_dialogue_spec.lua` with `luatex --luaonly`,
+and `python3 tests/progression_expansion_spec.py` plus `python3 tests/progression_rewards_spec.py`.
+In multiplayer, check topic discovery, real deliveries, filter purchases, restocking and returning
+characters with completed or partially delivered mask requests.
 
 ## Earlier implementation notes
 
@@ -114,10 +192,14 @@ Repeatable job quantities, combat strength, recording duration, cash and item pr
 Existing assigned requirements and partial contributions keep their saved values. Completed milestones
 remain completed. Commission counts and pending completion values are saved with the existing claim journal.
 
-The 25 planned contacts have empty `supplies`. Their current delivery candidates become starting
-BUYONLY rows. A requested catalogue item is BUYONLY until its seller-specific milestone is earned;
-other earned catalogue items are SELLONLY. The server enforces both purchase and sale assortments,
-including stale vendor rows. Template assembly and saved-vendor refresh apply the approved catalogue.
+Contacts buy their delivery candidates, catalogue goods and ordinary supplies independently of purchase
+unlocks. Extra buying IDs (`buyItems`) and category lookups (`buyCategories`) live in contact definitions:
+Haggler accepts ammunition and weapons, and Spicy Lemon accepts every strong alcohol item, raw meat and
+cooked meal (the `Cookable Meat` and `Cooked Meat` categories).
+These additions do not change progression requirements or courier candidates. Buying-only goods use
+BUYONLY rows; catalogue goods remain BUYONLY in the menu until their seller-specific purchase milestone
+is earned, then become SELLANDBUY. The server enforces both purchase and sale assortments, including
+stale vendor rows. Template assembly and saved-vendor refresh apply the current buying lists and catalogue.
 Character-owned stock histories are retained and clamped by the existing stock policy, not reset.
 
 Carbon sells `accesscard_bunker`; Intern sells `accesscard_laboratory`. Their existing physical-door
@@ -352,8 +434,9 @@ restore them through ordinary supplies, stock bonuses or generated catalogues. T
 that the exclusions match the comments and that no active catalogue, supply or stock entry restores them.
 Update both the comment and exclusion only when explicitly authorised to restore that suggestion.
 
-The 61 current exclusions include mission/access equipment, human meat and The Original's proposed
-specimen/hide shop. Twelve remaining stock references to excluded equipment have been removed without
+The 59 current exclusions include mission/access equipment and The Original's proposed specimen/hide
+shop. Spicy Lemon's former human meat exclusions are removed so he buys every raw meat and cooked meal.
+Twelve remaining stock references to excluded equipment have been removed without
 replacement rewards. Accepted jobs, progression IDs and TODO plans are preserved.
 Template assembly and saved-vendor refresh remove excluded rows, and purchase checks also reject stale
 rows. Personal stock history and owned items are retained; no character data reset is performed.
@@ -419,7 +502,7 @@ job.rewards can override money/reputation per difficulty; defaults live in sh_co
 contact.supplyStock can override initial, maximum, interval and amount for that NPC.
 Only delivery jobs declare pools and delivery tiers. Quantities apply to deliveries, eliminations and
 computer extraction; destination maps apply to field jobs. Omit settings ignored by the selected kind.
-The `supplies` list configures ordinary vendor stock and legacy kit redemption. Repeatable task
+The `supplies` list configures ordinary vendor stock. Repeatable task
 rewards are separate: `rewards.packages` contains up to three `{label, items}` families. Each saved
 offer selects one affordable eligible candidate per family, with explicit quantities and a two-item
 limit. `rewards.bonusItems` lists optional equipment for larger five-task bonuses; existing purchase
@@ -524,6 +607,7 @@ New NPC models remain replaceable placeholders. Place and playtest sites before 
 Run from the repository root:
 
     luatex --luaonly tests/townnpcs_spec.lua
+    luatex --luaonly tests/town_vendor_buying_spec.lua
     luatex --luaonly tests/town_delivery_sources_spec.lua
     luatex --luaonly tests/progression_spec.lua
     luatex --luaonly tests/dialogue_order_spec.lua
@@ -850,7 +934,9 @@ See `tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec.lua` and `tests/
 
 Dialogue uses explicit action colors, with jobs/progression matching inventory yellow/purple.
 All 27 contacts keep flavour under questions, appearance services under customization, and ammunition
-exchanges under barter. Incoming deliveries remain on both root variants. Technut's existing gear
+exchanges under barter. Incoming deliveries remain on both root variants. Task rewards stay under
+About work → Task rewards; new tasks and field commissions from that contact require collecting earned rewards first, including
+items waiting for inventory space. Technut's existing gear
 window now also paints unlocked suits; Suture retains conversions and Mute retains PDA appearance work.
 Escape returns through menus, and a one-second hold closes the interaction.
 
@@ -862,3 +948,17 @@ Run `tests/town_dialogue_menus_spec.lua`, `tests/dialogue_order_spec.lua`,
 `tests/gear_customization_spec.lua` and `tests/squads_menu_scoreboard_spec.lua` with `luatex --luaonly`.
 Verify Escape presses/holds, modal focus, suit previews and confirmation, trade returns and fresh-character
 cross-server roster visibility in multiplayer after deploying matching server/client code.
+
+## Bunker courier discovery
+
+Beanstalk, Egghead and Intern become eligible delivery recipients individually after the character
+first talks to them. Their validated greeting saves `townKnownContacts` by contact ID on that
+character; repeated greetings do not save again. Existing `knownProgressionTopics` entries for a
+scientist also count as prior discovery. Earlier ordinary conversations were not recorded, so a
+character with no saved evidence must greet that scientist again. No saves are reset.
+
+Valuable-courier offers, previews, task journals and server hand-ins use the same discovery filter.
+Wake's information-parcel assignments also exclude undiscovered bunker scientists, retaining their
+existing regional and bunker-card gates. Accepted parcel destinations remain saved without rerolling.
+Verify greeting each scientist, switching characters, reconnecting, previews and deliveries in multiplayer.
+Run `luatex --luaonly tests/regional_jobs_spec.lua` for standalone regression coverage.

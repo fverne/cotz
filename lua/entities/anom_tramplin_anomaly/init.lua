@@ -93,7 +93,14 @@ function ENT:StartTouch(ent)
 	timer.Create("tramplin_activated"..self:EntIndex(), 6, 1, function()
 		if not IsValid(self) then return end
 		ParticleEffect( "tramplin_blast", self:GetPos(), Angle( 0, 0, 0 ) )
-		util.BlastDamage( self, self, self:GetPos()+Vector(50,50,300), 250, 400)
+		local damageOrigin = self:GetPos() + Vector(50, 50, 300)
+		local damageInfo = DamageInfo()
+		damageInfo:SetDamage(400)
+		damageInfo:SetDamageType(DMG_CRUSH)
+		damageInfo:SetAttacker(self)
+		damageInfo:SetInflictor(self)
+		damageInfo:SetDamagePosition(damageOrigin)
+		util.BlastDamageInfo(damageInfo, damageOrigin, 250)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)

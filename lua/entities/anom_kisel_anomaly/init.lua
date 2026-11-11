@@ -52,7 +52,12 @@ function ENT:Touch(ent)
 	end
 	
 	timer.Create(self:EntIndex().."_kisel_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
-		ent:TakeDamage(self.BalanceDamage, self, self)
+		local damageInfo = DamageInfo()
+		damageInfo:SetDamage(self.BalanceDamage)
+		damageInfo:SetDamageType(DMG_ACID)
+		damageInfo:SetAttacker(self)
+		damageInfo:SetInflictor(self)
+		ent:TakeDamageInfo(damageInfo)
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)

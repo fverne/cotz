@@ -26,14 +26,6 @@ ITEM.items = {
 ]]--
 
 function ITEM:GetDescription()
-	if ix.taskRewards and ix.taskRewards.IsTaskKit(self.uniqueID) then
-		local description = self.description
-		if not self.entity and self.longdesc and self.longdesc ~= "" then
-			description = description .. "\n\n" .. self.longdesc
-		end
-
-		return description .. "\nRedeem at an NPC's task supplies menu for visible contents. No upgrade fee."
-	end
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
 	local quantdesc = ""
 	local invdesc = ""
@@ -54,9 +46,7 @@ end
 
 function ITEM:PopulateTooltip(tooltip)
     if !self.entity then
-        local description = ix.taskRewards and ix.taskRewards.IsTaskKit(self.uniqueID)
-			and "Redeem for visible supplies at an NPC" or "Openable, contains items"
-		ix.util.PropertyDesc(tooltip, description, Color(64, 224, 208))
+		ix.util.PropertyDesc(tooltip, "Openable, contains items", Color(64, 224, 208))
     end
 
     if (self.PopulateTooltipIndividual) then
@@ -68,11 +58,6 @@ ITEM.functions.Open = {
     icon = "icon16/stalker/unlock.png",
     sound = "stalkersound/inv_ruck.mp3",
     OnRun = function(item)
-		if ix.taskRewards and ix.taskRewards.IsTaskKit(item.uniqueID) then
-			item.player:Notify("Redeem this kit through an NPC's task supplies menu. Contents are shown before exchange.")
-
-			return false
-		end
         local position = item.player:GetItemDropPos()
         local client = item.player
 
@@ -118,6 +103,5 @@ ITEM.functions.Open = {
 }
 
 ITEM:Hook("Open", function(item)
-	if ix.taskRewards and ix.taskRewards.IsTaskKit(item.uniqueID) then return end
 	ix.chat.Send(item.player, "iteminternal", "opens the "..item.name..".", false)
 end)

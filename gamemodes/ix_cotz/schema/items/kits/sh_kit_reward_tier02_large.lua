@@ -1,6 +1,6 @@
 ITEM.name = "Novice Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "The large Novice Reward represents a supply payment rather than loose cash. Its expanded package sits within the novice issue class. The available redemption choice is specified by the contact, leaving the plain wrapping to serve as transport packaging."
+ITEM.longdesc = "The large Novice Reward represents a supply payment rather than loose cash. Its expanded package sits within the novice issue class."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

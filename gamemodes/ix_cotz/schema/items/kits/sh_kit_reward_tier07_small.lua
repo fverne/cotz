@@ -1,6 +1,6 @@
 ITEM.name = "Expert Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "The small Expert Reward is a compact entitlement within the expert supply class. Its exterior is deliberately ordinary equipment packaging. The exchange preview identifies the concrete choice, leaving the label to establish which allowance is being redeemed."
+ITEM.longdesc = "The small Expert Reward is a compact package within the expert supply class. Its exterior is deliberately ordinary equipment packaging."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

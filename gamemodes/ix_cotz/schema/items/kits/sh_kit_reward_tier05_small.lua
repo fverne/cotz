@@ -1,6 +1,6 @@
 ITEM.name = "Professional Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "The small Professional Reward is an equipment-and-supply entitlement packaged for carrying. Its professional issue class remains separate from any particular redemption choice. The supplying contact shows the available inventory before the exchange is completed."
+ITEM.longdesc = "The small Professional Reward is a bundle of equipment and supplies packed for carrying. Its wrapping keeps the assortment together until it is unpacked."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

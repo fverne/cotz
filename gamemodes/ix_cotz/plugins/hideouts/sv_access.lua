@@ -35,6 +35,7 @@ end
 function PLUGIN:CanAccess(client, record)
 	local character = IsValid(client) and client:GetCharacter()
 	if not character or not record or record.deleting or record.frozen or record.homeConflict or record.homePending then return false end
+	if client:IsAdmin() then return true end
 	if record.ownerType == "squad" then
 		local squad = ix.squad and ix.squad.list[record.squadID]
 		if not squad or ix.squad.cross and ix.squad.cross.Enabled()

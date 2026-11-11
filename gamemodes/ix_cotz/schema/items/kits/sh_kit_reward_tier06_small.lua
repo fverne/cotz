@@ -1,6 +1,6 @@
 ITEM.name = "Veteran Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "The small Veteran Reward keeps a high-class supply payment in a compact bundle. Its label identifies the allowance more usefully than the plain wrapping. The actual offered supplies are specified before the package is redeemed."
+ITEM.longdesc = "The small Veteran Reward keeps a high-class supply payment in a compact bundle. Its label identifies the allowance more usefully than the plain wrapping."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

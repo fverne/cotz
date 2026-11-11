@@ -147,8 +147,9 @@ function ENT:OnTakeDamage(dmg)
   end
 
 	local attacker = dmg:GetAttacker()
-	if IsValid(attacker) and attacker:GetClass() ~= self:GetClass() and dmg:IsDamageType(DMG_BULLET)
-		and (not ix or not ix.eventController or ix.eventController:CanActorAttack(self, attacker)) then
+	if ix and ix.eventController then
+		ix.eventController:RetaliateCombatActor(self, attacker)
+	elseif IsValid(attacker) and attacker:GetClass() ~= self:GetClass() and dmg:IsDamageType(DMG_BULLET) then
 		self:AddEntityRelationship(attacker, D_HT, 10)
 		self:SetEnemy(attacker)
 	end
@@ -204,7 +205,10 @@ end
 
 function ENT:Think()
 	if self.cotzSleeping then return end
-	if ix and ix.eventController then ix.eventController:ValidateCombatEnemy(self) end
+	if ix and ix.eventController then
+		ix.eventController:ValidateCombatEnemy(self)
+		ix.eventController:UpdateCombatSchedule(self)
+	end
   if self:Health() > 0 then
 
     if (self.RecheckEnemyTimer or 0) < CurTime() then
@@ -224,7 +228,10 @@ end
 
 function ENT:SelectSchedule()
 	if self.cotzSleeping then return end
-	if ix and ix.eventController then ix.eventController:ValidateCombatEnemy(self) end
+	if ix and ix.eventController then
+		ix.eventController:ValidateCombatEnemy(self)
+		if ix.eventController:UpdateCombatSchedule(self) then return end
+	end
 	if self.cotzRegrouping and not IsValid(self:GetEnemy()) then return end
   if self:Alive() then
     local haslos = self:HasLOS()

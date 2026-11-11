@@ -96,6 +96,7 @@ function card:Add(class)
 	if class == "DButton" then return {SetText = noop, SetTooltip = noop} end
 	local result = {
 		Icon = {SetVisible = noop}, SetInventoryID = noop, SetItemTable = noop, SetHelixTooltip = noop,
+		Receiver = function(this, name, callback) this.receiverName, this.receiver = name, callback end,
 		OnMousePressed = function(this, code) this.pressed = code end,
 		OnMouseReleased = function(this, code) this.released = code end,
 	}
@@ -112,6 +113,8 @@ local iconEnvironment = {
 	PANEL = iconMethods,
 	PLUGIN = {SendEquipmentAction = function(_, item, slot, equipping, x, y)
 		sent = {item = item, slot = slot, equipping = equipping, x = x, y = y}
+	end, ReceiveEquipmentDrop = function(_, target, slot, panels, dropped)
+		sent = {card = target, slot = slot, panels = panels, dropped = dropped}
 	end},
 	MOUSE_LEFT = 1,
 	IsValid = function(value) return type(value) == "table" end,
@@ -139,4 +142,56 @@ check(sent and sent.item == equipped and not sent.equipping and sent.x == 4 and 
 	"Backpack drop forwards its preview coordinates to the server")
 card.icon:Paint(64, 64)
 check(imageDraws == 1 and backgroundDraws == 0, "Equipped images render without a dark inset background")
+card.icon:receiver({icon}, true)
+check(card.icon.receiverName == "ixInventoryItem" and sent.card == card and sent.slot == 2 and sent.dropped,
+	"dropping onto the item image delegates to the same equipment drop handler")
+
+first = assert(source:find("function PLUGIN:ReceiveEquipmentDrop(", 1, true))
+last = assert(source:find("\nend", first, true)) + 3
+local requests, outgoing, currentTime = {}, nil, 10
+local allowed = true
+local dropPlugin = {SendEquipmentAction = function(_, item, slot, equipping)
+	sent = {item = item, slot = slot, equipping = equipping}
+end}
+local cartridge = {id = 11, invID = 1, isGasmaskFilter = true}
+local dropIcon = {GetItemTable = function() return cartridge end}
+local dropCard = {item = equipped}
+local dropEnvironment = {
+	PLUGIN = dropPlugin,
+	IsValid = function(value) return type(value) == "table" end,
+	LocalPlayer = function() return client end,
+	RealTime = function() return currentTime end,
+	ix = {util = {CanInstallGasmaskFilter = function(target, filter)
+		return allowed and target == equipped and filter == cartridge
+	end}},
+	net = {
+		Start = function(name) outgoing = {name = name, fields = {}} end,
+		WriteString = function(value) outgoing.fields[#outgoing.fields + 1] = value end,
+		WriteUInt = function(value) outgoing.fields[#outgoing.fields + 1] = value end,
+		WriteTable = function(value) outgoing.fields[#outgoing.fields + 1] = value end,
+		SendToServer = function() requests[#requests + 1] = outgoing end,
+	},
+}
+assert(load(source:sub(first, last), "@equipment/filter-drop", "t",
+	setmetatable(dropEnvironment, {__index = _G})))()
+dropPlugin:ReceiveEquipmentDrop(dropCard, 2, {dropIcon}, false)
+dropPlugin:ReceiveEquipmentDrop({}, 2, {dropIcon}, true)
+allowed = false
+dropPlugin:ReceiveEquipmentDrop(dropCard, 2, {dropIcon}, true)
+check(#requests == 0, "hover, empty cards and incompatible cartridges cannot send filter requests")
+allowed = true
+dropPlugin:ReceiveEquipmentDrop(dropCard, 2, {dropIcon}, true)
+check(#requests == 1 and requests[1].name == "ixInventoryAction" and requests[1].fields[1] == "combine"
+	and requests[1].fields[2] == cartridge.id and requests[1].fields[3] == cartridge.invID
+	and requests[1].fields[4][1] == equipped.id, "equipped filter drops use the existing server combine action")
+dropPlugin:ReceiveEquipmentDrop(dropCard, 2, {dropIcon}, true)
+check(#requests == 1, "icon and card drops are debounced")
+currentTime = currentTime + 1
+dropPlugin:ReceiveEquipmentDrop(dropCard, 2, {dropIcon}, true)
+check(#requests == 2, "filter drops can be retried after the debounce")
+cartridge.isGasmaskFilter = false
+dropPlugin:ReceiveEquipmentDrop(dropCard, 2, {dropIcon}, true)
+check(sent.item == cartridge and sent.slot == 2 and sent.equipping,
+	"ordinary equipment drops retain their original equip request")
+
 print("Equipment interactions: " .. checks .. " checks passed")

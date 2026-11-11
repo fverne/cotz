@@ -97,10 +97,10 @@ PLUGIN:Register("mute", {
 			name = "Swamps mutant reports",
 			kind = "delivery",
 			requires = {},
-			briefing = "** He writes Swamps at the top of the supply list, then points to a notice about mutant sightings on his PDA. He slides the list towards you. **",
-			completion = "** He checks the delivery, enables the Swamps mutant reports on your PDA, and nods. **",
+			briefing = "** He opens a Swamps map beside the supply list. A finger moves from the marked region to the mutant-report page on his PDA. He leaves that page visible and pushes the list across the clear part of the desk. **",
+			completion = "** He checks the last entry, enables the Swamps mutant reports, and turns the screen towards you. **",
 			requirements = {
-				{pool = "town_expansion_799fd6d1e148", quantity = 1},
+				{pool = "town_expansion_0142dc69300a", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "mutantReportsSwamps", name = "Swamps mutant spawn PDA messages"},
@@ -109,6 +109,7 @@ PLUGIN:Register("mute", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 		},
 		{
 			id = "v3/stalkernet/networkSquads",
@@ -116,10 +117,10 @@ PLUGIN:Register("mute", {
 			name = "Garbage mutant reports",
 			kind = "delivery",
 			requires = {"v3/stalkernet/networkSearch"},
-			briefing = "** He writes Garbage at the top of the supply list, then points to a notice about mutant sightings on his PDA. He slides the list towards you. **",
-			completion = "** He checks the delivery, enables the Garbage mutant reports on your PDA, and nods. **",
+			briefing = "** He brings up a map of Garbage, then sets a fresh supply order beside it. The report heading is visible under his hand. He lifts his hand, taps the heading once, and waits. **",
+			completion = "** He crosses out the final supply entry and shows the enabled Garbage mutant-report page. **",
 			requirements = {
-				{pool = "town_expansion_d55bb0def78c", quantity = 1},
+				{pool = "town_expansion_522f1a014836", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "mutantReportsGarbage", name = "Garbage mutant spawn PDA messages"},
@@ -128,6 +129,7 @@ PLUGIN:Register("mute", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/stalkernet/networkRanking",
@@ -135,10 +137,10 @@ PLUGIN:Register("mute", {
 			name = "Waystation mutant reports",
 			kind = "delivery",
 			requires = {"v3/stalkernet/networkSquads"},
-			briefing = "** He writes Waystation at the top of the supply list, then points to a notice about mutant sightings on his PDA. He slides the list towards you. **",
-			completion = "** He checks the delivery, enables the Waystation mutant reports on your PDA, and nods. **",
+			briefing = "** He selects Waystation on the screen. The supply order rests underneath it, held flat with a closed parts box. He points to the report heading, then draws the box back so the entire list can be read. **",
+			completion = "** He ticks the completed order and opens the Waystation mutant reports for you. **",
 			requirements = {
-				{pool = "town_expansion_799fd6d1e148", quantity = 1},
+				{pool = "town_expansion_7689c41134ff", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "mutantReportsWaystation", name = "Waystation mutant spawn PDA messages"},
@@ -147,6 +149,7 @@ PLUGIN:Register("mute", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/stalkernet/emissionWarnings",
@@ -154,11 +157,11 @@ PLUGIN:Register("mute", {
 			name = "Emission warnings",
 			kind = "delivery",
 			requires = {"v3/stalkernet/networkRanking"},
-			briefing = "** He lays a supply list beside the equipment and underlines every entry before sliding it towards you. **",
-			completion = "** He checks the delivery against the list, makes a small mark, and nods. **",
+			briefing = "** He sets down a written order headed 'Emission warnings'. Beside it he places the PDA with the warning setting visible. He taps the supply entries in turn, then folds his hands away from the keyboard. **",
+			completion = "** He finishes checking the delivery, enables the emission warnings, and gives a single nod. **",
 			requirements = {
-				{pool = "town_expansion_799fd6d1e148", quantity = 2},
-				{pool = "town_expansion_a36be0defe80", quantity = 1},
+				{pool = "town_expansion_0142dc69300a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_c48a3ba1fe73", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "emissionWarnings", name = "Emission warnings"},
@@ -167,6 +170,7 @@ PLUGIN:Register("mute", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 		},
 		{
 			id = "v3/stalkernet/eventBroadcasts",
@@ -174,11 +178,11 @@ PLUGIN:Register("mute", {
 			name = "Pripyat mutant reports",
 			kind = "delivery",
 			requires = {"v3/stalkernet/emissionWarnings"},
-			briefing = "** He writes Pripyat at the top of the supply list, then points to a notice about mutant sightings on his PDA. He slides the list towards you. **",
-			completion = "** He checks the delivery, enables the Pripyat mutant reports on your PDA, and nods. **",
+			briefing = "** A Pripyat map fills the screen. He slides the last supply order beside it and points to the mutant-report heading. For a moment he leaves the map alone, then turns the order so its smallest entries are easy to read. **",
+			completion = "** He marks the order complete and enables the Pripyat mutant reports. The finished list goes beneath the others. **",
 			requirements = {
-				{pool = "town_expansion_d55bb0def78c", quantity = 2},
-				{pool = "town_expansion_21e05a8284d2", quantity = 1},
+				{pool = "town_expansion_7f868b76a42a", quantity = 2, mode = "any"},
+				{pool = "town_expansion_60379d0b699a", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "mutantReportsPripyat", name = "Pripyat mutant spawn PDA messages"},
@@ -187,6 +191,7 @@ PLUGIN:Register("mute", {
 			branchLength = 5,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			defaultActive = true,
 		},
 	},

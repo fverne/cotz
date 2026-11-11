@@ -5,6 +5,8 @@ PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage
 
 ix.util.Include("cl_plugin.lua")
 ix.util.Include("sh_durability.lua")
+ix.util.Include("sh_filters.lua")
+ix.util.Include("sv_filters.lua")
 
 ix.config.Add("disablePVP", true, "If true, disables player versus player damage.", nil, {
 	category = "pvp",
@@ -93,6 +95,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 	anomtypes[DMG_BURN] = true
 	anomtypes[DMG_ACID] = true
 	anomtypes[DMG_BLAST] = true
+	anomtypes[DMG_CRUSH] = true
 	anomtypes[DMG_DROWN] = true
 	anomtypes[DMG_POISON] = true
 	anomtypes[DMG_NERVEGAS] = true

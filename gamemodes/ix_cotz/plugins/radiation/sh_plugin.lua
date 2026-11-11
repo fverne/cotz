@@ -98,7 +98,11 @@ function playerMeta:getFlatRadResist()
 
 	for j, i in pairs(items) do
 		if (i.flatRadProt and i:GetData("equip") == true) then
-			res = res + i.flatRadProt * (i.GetDurabilityScale and i:GetDurabilityScale() or 1)
+			if i.GetFlatRadProt then
+				res = res + i:GetFlatRadProt()
+			else
+				res = res + i.flatRadProt * (i.GetDurabilityScale and i:GetDurabilityScale() or 1)
+			end
 		end
 	end
 
@@ -142,6 +146,7 @@ function PLUGIN:EntityTakeDamage(entity, dmgInfo)
 		end
 
 		entity:addRadiation(math.Clamp(finalRadDamage, 0, 100))
+		ix.util.DamageGasmaskFilters(entity, dmgInfo)
 		dmgInfo:SetDamage(0)
 	end
 end

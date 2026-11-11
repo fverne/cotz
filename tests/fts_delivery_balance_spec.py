@@ -112,6 +112,11 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
                     candidates = self.data["pools"][slot["pool"]]["candidates"]
                     self.assertTrue(candidates)
                     for candidate in candidates:
+                        if slug == "ledger" and step["id"] == "v3/hideout/access":
+                            self.assertEqual(candidate["item"], "fubar")
+                            # Old Timer sells this tool; it does not spawn in the sampled FTS pools.
+                            self.assertIn("fubar", self.data["contacts"]["old-timer"]["catalogue"])
+                            continue
                         self.assertTrue(candidate["item"].startswith("artifact_") or any(self.rates[region].get(candidate["item"])
                                             for region in balance.MAPS),
                                         (slug, step["id"], candidate["item"]))

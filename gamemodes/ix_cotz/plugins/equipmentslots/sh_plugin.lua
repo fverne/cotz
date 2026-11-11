@@ -23,7 +23,7 @@ PLUGIN.slots = {
 	{id = "binoculars", name = "Binoculars", category = "Binoculars"},
 	{id = "geiger", name = "Geiger counter", field = "isGeiger"},
 	{id = "anomalydetector", name = "Anomaly detector", field = "isAnomalydetector"},
-	{id = "headlamp", name = "Headlamp", field = "isHeadLamp"},
+	{id = "headlamp", name = "Light", field = "isHeadLamp", category = "flashlight"},
 	{id = "compass", name = "Compass", field = "isCompass"},
 	{id = "gps", name = "GPS tracker", field = "isGpstracker"},
 }

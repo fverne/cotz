@@ -27,7 +27,10 @@ gameplay plugins through the existing library loader. See [UI and HUD style](ui-
 
 `schema/meta/sv_character.lua` is explicitly included by `sh_schema.lua`. Its owner-sync override
 keeps legacy personal vendor stock/history keys out of the initial character network payload;
-other recipients retain Helix's normal visibility rules.
+other recipients retain Helix's normal visibility rules. The automatically loaded shared library
+`schema/libs/sh_characternetwork.lua` sends owner snapshots through compressed, reliable 60,000-byte
+chunks and creates the client character only after reassembly. Progression's setter uses the same
+transport for owner-only updates. This avoids the single-message limit without truncating saved state.
 
 Progression and personal vendor stock now use separate large character vars. Their owning plugin
 libraries register them; `schema/sv_schema.lua` supplies the SQL type before plugins load.
@@ -60,11 +63,16 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `firsttimesetup/presets/` | Map-specific setup data, loaded explicitly by `sh_plugin.lua`. |
 | `dialogue/libs/` | Dialogue registration, option ordering, and conversation APIs. |
 | `vendor_adv/definitions/` | Individual vendor appearances, identities, base items and dialogue bindings; explicit includes in libs/sh_npctemplates.lua. |
+| `mutantdefense/` | Admin-started wave defense, character reward delivery and the restock voucher item; dialogue integration lives in `dialogue/integrations/sh_mutantdefense.lua`. |
 | `dialogue/libs/sh_towncontacts.lua` | Shared current town work/progression actions; NPC root actions are declared in conversation files. |
 | `dialogue/dialogue/` | NPC conversation definitions, discovered by the custom dialogue loader. |
 | `hideouts/sv_*.lua` and `sh_*.lua` | Personal/squad interiors, trader location claims and progression purchases, specialized containers, floor allowances, rank access, squad shop, economic adapter and saved travel. |
 | `sherpas/` | Reusable player/squad quartermasters, instance trading panel, stock persistence and dialogue; retains plugin ID `sherpas`. |
 | Other plugin `items/`, `entities/`, `derma/`, `libs/` | Files owned by the corresponding gameplay feature. |
+
+`suits/` owns tiered replaceable gasmask filters, their shared/server modules and immediate
+`items/gasmaskfilters/` definitions. Concrete headgear declares exact compatibility; closed-respiratory
+suit families remain exempt. See the [filter guide](../gamemodes/ix_cotz/plugins/suits/README.md).
 
 `gearcustomization/` owns the vendor appearance service, shared appearance API, menu
 and icon rendering. Concrete `gear` and `newbags` items declare approved variants.
@@ -103,6 +111,10 @@ descriptions, and instructions when extending a custom `GetDescription()`. Inven
 include the extra prose; world descriptions retain their existing shorter presentation.
 Check coverage and custom description rendering with `luatex --luaonly tests/item_descriptions_spec.lua`.
 
+Cooked meal definitions declare prices at 120% of their corresponding raw meat's current `ITEM.price`,
+using the raw item's `ITEM.meal` mapping. Both bases price by weight, and cooking preserves that weight.
+Keep these prices explicit in each concrete definition when retuning the meat and meal families.
+
 The 378 implemented items listed in the combined valuables and supply/job workbook are split across
 `schema/items/valuables_test/`, `schema/items/valuable/`, and `schema/items/quests/`.
 The `recovery_` and `supply_` filename segments have been removed, which also changes their
@@ -135,3 +147,19 @@ Equipment, progression, job-reset and town command handlers remain server-side. 
 shared deployment defaults; schema `libs/sh_spawnpolicy.lua` provides map-threshold registration and
 lookup. `eventcontroller/sv_combat.lua` owns encounter packs, combat eligibility and human regrouping;
 `sv_performance.lua` retains mutant population accounting, spawn queues and maintenance scheduling.
+
+Mutant attacks in `lua/entities/npc_mutant_*/` must support NPC enemies and target loss during windup.
+Camera, stamina and freeze effects require player targets; grabs retain their own victim reference and
+validate it before delayed effects or release. Controllers and spiders finish recovery after target loss;
+Karlik projectiles use a local forward aim point when their target disappears.
+Run `luatex --luaonly tests/mutant_target_safety_spec.lua`,
+`luatex --luaonly tests/burer_stamina_spec.lua`, `luatex --luaonly tests/karlik_teleport_spec.lua` and
+`luatex --luaonly tests/npc_combat_spec.lua`. Also verify mutant-versus-NPC fights, target removal during
+windup, and player release after grabs or mutant death in multiplayer.
+
+`lua/entities/stalker_ai/schedules.lua` owns mutant unreachable-target grace, bounded position retries,
+and recovery when targets move or return to melee range. The base includes `sv_navigation.lua` server-side
+before schedules for attack-position selection, grounded approach/withdrawal, movement monitoring and
+conservative unseen recovery of stranded mutants. Concrete mutant definitions share leap-range values
+between navigation and their existing attacks. Run `luatex --luaonly tests/mutant_navigation_spec.lua`
+alongside the combat, population, field-task and summoning suites; verify static-prop encounters in multiplayer.

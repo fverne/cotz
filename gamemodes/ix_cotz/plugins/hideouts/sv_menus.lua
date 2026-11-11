@@ -1,5 +1,6 @@
 local PLUGIN = PLUGIN
 local MENU_DISTANCE_SQUARED = 128 * 128
+local MAX_MANAGEMENT_GUESTS = 65535
 local SCOPES = {[1] = "entrance", [2] = "exit", [3] = "vendor", [4] = "squad"}
 util.AddNetworkString("cotz/hideouts/manage")
 util.AddNetworkString("cotz/hideouts/manage-open")
@@ -62,6 +63,23 @@ function PLUGIN:ShowManagement(client, id, scope)
 		net.WriteString(record.access or "squad")
 		net.WriteBool(self:CanManageHideout(client, record))
 		net.WriteBool(self.members[client] == record.id or self:IsNearEntrance(client, record.entrance))
+		local guests = {}
+		if self:CanManageHideout(client, record) then
+			for guestID, invited in SortedPairs(record.guests or {}) do
+				if invited == true then
+					local character = ix.char.loaded[tonumber(guestID)]
+					guests[#guests + 1] = {
+						id = tonumber(guestID), name = character and character:GetName() or "Character #" .. guestID,
+					}
+					if #guests == MAX_MANAGEMENT_GUESTS then break end
+				end
+			end
+		end
+		net.WriteUInt(#guests, 16)
+		for _, guest in ipairs(guests) do
+			net.WriteUInt(guest.id, 32)
+			net.WriteString(guest.name:sub(1, 256))
+		end
 	end
 	net.Send(client)
 end
@@ -163,7 +181,9 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, 
 		return true
 	elseif action == 6 or action == 7 then
 		local characterID = tonumber(value)
-		if not characterID or not ix.char.loaded[characterID] then return false end
+		if not characterID or characterID < 1 or characterID % 1 ~= 0 then return false end
+		if action == 6 and not ix.char.loaded[characterID] then return false end
+		if action == 7 and record.guests[tostring(characterID)] ~= true then return false end
 		local key = tostring(characterID)
 		local previous = record.guests[key]
 		record.guests[key] = action == 6 or nil

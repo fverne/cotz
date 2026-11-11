@@ -1,6 +1,6 @@
 ITEM.name = "Rookie Reward Small"
 ITEM.description = "A small reward supply package."
-ITEM.longdesc = "The small Rookie Reward keeps its supply allowance in a compact bundle. Its class and size distinguish it from similar-looking reward packages. The packed form is an entitlement to redeem, with the actual offer shown at the supplying contact."
+ITEM.longdesc = "The small Rookie Reward keeps its supply allowance in a compact bundle. Its class and size distinguish it from similar-looking reward packages."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

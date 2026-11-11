@@ -19,12 +19,35 @@ ix = {config = {
 	Get = function(key, default) return settings[key] or default end,
 }, util = {Include = function() end}, plugin = {}}
 PLUGIN = {}
+table.Copy = function(value)
+	local copy = {}
+	for key, entry in pairs(value) do
+		copy[key] = type(entry) == "table" and table.Copy(entry) or entry
+	end
+
+	return copy
+end
+timer = {Simple = function() end}
 dofile("gamemodes/ix_cotz/plugins/buffs/sh_bleeding.lua")
 dofile("gamemodes/ix_cotz/plugins/buffs/sv_bleeding.lua")
+dofile("gamemodes/ix_cotz/plugins/buffs/sv_persistence.lua")
 local buffs = PLUGIN
 ix.plugin.Get = function() return buffs end
-local world = {}
+local world = {GetName = function() return "" end, GetClass = function() return "worldspawn" end}
 game = {GetWorld = function() return world end}
+
+-- Exercise the installed Helix sound gate and logging rather than duplicating their behavior.
+local helix = {}
+ix.log = {Add = function(client) client.hurtLogs = (client.hurtLogs or 0) + 1 end}
+local hooksFile = assert(io.open("gamemodes/helix/gamemode/core/hooks/sv_hooks.lua"))
+local hooksSource = hooksFile:read("*a")
+hooksFile:close()
+local methodStart = assert(hooksSource:find("function GM:PlayerHurt(", 1, true))
+local methodEnd = assert(hooksSource:find("\nend", methodStart, true)) + 3
+local hurtMethod = hooksSource:sub(methodStart, methodEnd):gsub("!", "not ")
+assert(load(hurtMethod, "@helix/PlayerHurt", "t", setmetatable({
+	GM = helix, hook = {Run = function() return "stalkersound/pain1.wav" end},
+}, {__index = _G})))()
 local function damage(amount, kind)
 	return {
 		amount = amount, kind = kind,
@@ -37,6 +60,18 @@ local function damage(amount, kind)
 	}
 end
 DamageInfo = function() return damage(0, 0) end
+local function takeDamage(client, info)
+	if client.blockDamage then return end
+
+	client.health = client.health - info.amount
+	client.punchAngles = {p = -2, y = 0, r = 0}
+	client.punchVelocity = {p = 10, y = 0, r = 0}
+	helix:PlayerHurt(client, world, client.health, info.amount)
+	buffs:PostEntityTakeDamage(client, info, true)
+	if not client:Alive() then buffs:PlayerDeath(client) end
+	if client.afterDamage then client:afterDamage() end
+end
+
 local function character(severity)
 	return {
 		data = {bleedingSeverity = severity or 0},
@@ -49,20 +84,29 @@ local function character(severity)
 	}
 end
 local function player(severity)
-	local client = {character = character(severity), health = 100, vars = {}, sends = 0}
+	local client = {
+		character = character(severity), health = 100, vars = {}, sends = 0, painSounds = {},
+		punchAngles = {p = 3, y = 4, r = 5}, punchVelocity = {p = 6, y = 7, r = 8},
+	}
 	function client:GetCharacter() return self.character end
 	function client:IsPlayer() return true end
+	function client:IsFemale() return false end
 	function client:Alive() return self.health > 0 end
+	function client:EmitSound(sound) self.painSounds[#self.painSounds + 1] = {sound = sound, time = now} end
+	function client:GetViewPunchAngles() return table.Copy(self.punchAngles) end
+	function client:GetViewPunchVelocity() return table.Copy(self.punchVelocity) end
+	function client:SetViewPunchAngles(value) self.punchAngles = value end
+	function client:SetViewPunchVelocity(value) self.punchVelocity = value end
 	function client:GetLocalVar(key, default) return self.vars[key] or default end
 	function client:SetLocalVar(key, value) self.vars[key] = value self.sends = self.sends + 1 end
 	function client:GetNetVar(key, default) return self.vars[key] or default end
+	function client:SetNetVar(key, value) self.vars[key] = value end
+	function client:GetBuffs() return self:GetNetVar("buffs", {}) end
 	function client:AddBuff(_, duration, parameters) self.healing = {duration, parameters.amount} end
 	function client:TakeDamageInfo(info)
 		check(info.kind == DMG_GENERIC and info.attacker == world and info.inflictor == world,
 			"bleeding must use generic world damage")
-		self.health = self.health - info.amount
-		buffs:PostEntityTakeDamage(self, info, true)
-		if not self:Alive() then buffs:PlayerDeath(self) end
+		takeDamage(self, info)
 	end
 
 	return client
@@ -136,6 +180,83 @@ check(not dying:Alive() and buffs:GetBleeding(dying) == 0, "lethal tick clears s
 dying.health = 100
 buffs:RestoreBleeding(dying)
 near(buffs:GetBleeding(dying), 0, "revive cannot restore cleared bleeding")
+
+-- Bleeding feedback uses the real Helix pain cooldown while preserving preexisting recoil.
+settings.bleedingClotRate = 0
+local feedback = player(100)
+buffs:RestoreBleeding(feedback)
+local firstTick = now + 1
+for tick = 0, 5 do
+	now = firstTick + tick
+	buffs:ProcessBleeding()
+	check(feedback.punchAngles.p == 3 and feedback.punchAngles.y == 4 and feedback.punchAngles.r == 5,
+		"bleeding preserves preexisting view-punch angles")
+	check(feedback.punchVelocity.p == 6 and feedback.punchVelocity.y == 7 and feedback.punchVelocity.r == 8,
+		"bleeding preserves preexisting view-punch velocity")
+	check(#feedback.painSounds == (tick < 5 and 1 or 2), "bleeding pain has an exact five-second cooldown")
+end
+check(feedback.hurtLogs == 6 and feedback.health == 76, "sound throttling preserves damage and Helix hurt logs")
+check(feedback.painSounds[2].time - feedback.painSounds[1].time == 5, "sound resumes at the cooldown boundary")
+now = now + 1
+buffs:ProcessBleeding()
+local ordinaryNextPain = feedback.ixNextPain
+check(ordinaryNextPain < now, "muted bleeding does not extend the ordinary pain timer")
+takeDamage(feedback, damage(1, DMG_GENERIC))
+check(#feedback.painSounds == 3 and feedback.punchAngles.p == -2 and feedback.punchVelocity.p == 10,
+	"ordinary damage retains pain and view punch during the bleeding cooldown")
+buffs:HealBleeding(feedback, 100)
+buffs:AddBleeding(feedback, 100)
+now = now + 1
+buffs:ProcessBleeding()
+check(#feedback.painSounds == 3, "treatment and rebleeding do not reset the sound cooldown")
+local otherFeedback = player(100)
+buffs:RestoreBleeding(otherFeedback)
+now = now + 1
+buffs:ProcessBleeding()
+check(#otherFeedback.painSounds == 1, "bleeding sound cooldown is independent per player")
+buffs:PrePlayerLoadedCharacter(feedback)
+feedback.character = character(100)
+buffs:PlayerLoadedCharacter(feedback)
+now = now + 1
+buffs:ProcessBleeding()
+check(#feedback.painSounds == 4, "new characters do not inherit the previous character's bleeding cooldown")
+local blockedFeedback = player(100)
+blockedFeedback.blockDamage = true
+buffs:RestoreBleeding(blockedFeedback)
+now = now + 1
+buffs:ProcessBleeding()
+check(#blockedFeedback.painSounds == 0 and blockedFeedback.cotzNextBleedingPain == nil,
+	"blocked bleeding does not play pain or start a cooldown")
+blockedFeedback.blockDamage = false
+now = now + 1
+buffs:ProcessBleeding()
+check(#blockedFeedback.painSounds == 1, "first unblocked bleeding hit can play pain immediately")
+local delayedFeedback = player(100)
+buffs:RestoreBleeding(delayedFeedback)
+delayedFeedback.ixNextPain = now + 2
+now = now + 1
+buffs:ProcessBleeding()
+check(delayedFeedback.cotzNextBleedingPain == nil, "existing ordinary cooldown does not consume bleeding cooldown")
+now = now + 2
+buffs:ProcessBleeding()
+check(#delayedFeedback.painSounds == 1, "bleeding plays pain after the ordinary cooldown expires")
+for _, transition in ipairs({"remove", "switch", "death"}) do
+	local transitioning = player(100)
+	buffs:RestoreBleeding(transitioning)
+	transitioning.afterDamage = function(self)
+		if transition == "remove" then self.invalid = true end
+		if transition == "switch" then self.character = character() end
+		if transition == "death" then self.health = 0 buffs:PlayerDeath(self) end
+	end
+	now = now + 1
+	buffs:ProcessBleeding()
+	check(transitioning.punchAngles.p == -2, "view punch is not restored after damage-time " .. transition)
+end
+buffs:StopBleeding(feedback)
+buffs:StopBleeding(otherFeedback)
+buffs:StopBleeding(blockedFeedback)
+buffs:StopBleeding(delayedFeedback)
+settings.bleedingClotRate = 1
 
 -- Exercise the real bandage definitions and inherited aid helpers with action mocks.
 CLIENT = false

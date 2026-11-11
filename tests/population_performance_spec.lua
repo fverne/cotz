@@ -37,6 +37,7 @@ ix = {
 }
 ENT = mutantMeta
 dofile("lua/entities/stalker_ai/sv_performance.lua")
+dofile("lua/entities/stalker_ai/sv_navigation.lua")
 engine = {TickCount = function() return tick end}
 math.Rand = function(a) return a end
 player = {Iterator = function() return ipairs(clients) end}
@@ -142,10 +143,15 @@ reset()
 local entity = mutant(20, 10000)
 performance:RegisterMutant(entity, false)
 entity.CurrentSchedule, entity.bDoingEngineSchedule = {}, true
+entity.cotzUnreachableRecovery = {retries = 2, retreating = true}
+entity.cotzNavigationRecovery, entity.cotzNavigationMotion, entity.cotzNavigationIntent = {}, {}, vector(0)
 entity:STALKERNPCUpdateSleep()
 check(entity.cotzSleeping and entity.flags ~= 0 and entity.stopped, "distant idle mutant stops engine Think")
 check(entity.CurrentSchedule == nil and entity.bDoingEngineSchedule == nil,
 	"sleep clears Lua and engine schedule bookkeeping")
+check(not entity.cotzUnreachableRecovery, "sleep discards unreachable recovery before the next encounter")
+check(not entity.cotzNavigationRecovery and not entity.cotzNavigationMotion and not entity.cotzNavigationIntent,
+	"sleep discards physical recovery and stale movement intent")
 local damage = {GetAttacker = function() return nil end, GetInflictor = function() end}
 PLUGIN:EntityTakeDamage(entity, damage)
 check(not entity.cotzSleeping and entity.flags == 0 and entity.state == 2,
@@ -389,7 +395,11 @@ local broadcastController = {
 	GetNumMutants = function() return 0 end,
 	GetMutantTarget = function() return 10 end,
 	IsClear = function() return true end,
-	spawnEvent = function() eventsSpawned = eventsSpawned + 1 end,
+	spawnEvent = function()
+		eventsSpawned = eventsSpawned + 1
+
+		return true
+	end,
 }
 local broadcastEnvironment = setmetatable({
 	PLUGIN = broadcastController,
@@ -416,6 +426,10 @@ check(#broadcasts == 1 and broadcasts[1][1] == unlockedPlayer,
 	"event broadcasts only reach characters with their personal unlock")
 check(broadcasts[1][2] == "Mutants near Marsh" and broadcasts[1][3][1] == unlockedPlayer,
 	"event broadcast uses the event location and a private recipient list")
+broadcastController.spawnEvent = function() return false end
+now = now + broadcastController.spawnrate + 1
+broadcastController:Think()
+check(#broadcasts == 1, "failed placement does not announce a nonexistent encounter")
 
 print(string.format("PASS: %d population performance checks", checks))
 

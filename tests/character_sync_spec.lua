@@ -70,6 +70,15 @@ net = {
 local owner = {EntIndex = function() return 7 end}
 local observer = {EntIndex = function() return 8 end}
 player = {Iterator = function() return ipairs({owner, observer}) end}
+ix.characterNetwork = {SendInfo = function(character, data, receiver)
+	messages[#messages + 1] = {
+		name = "cotz/character/snapshot",
+		data = copy(data),
+		id = character:GetID(),
+		playerIndex = character.player:EntIndex(),
+		receiver = receiver,
+	}
+end}
 
 -- Exercise the installed Sync, including broadcast recursion and non-owner filtering.
 local file = assert(io.open("gamemodes/helix/gamemode/core/meta/sh_character.lua"))
@@ -83,7 +92,7 @@ function characterMeta:GetID()
 	return self.id
 end
 
-local progression = {lines = {example = {active = true, completed = false}}}
+local progression = {lines = {example = {active = true, completed = false, history = string.rep("p", 70000)}}}
 local stock = {map = {trader = {history = string.rep("s", 70000)}}}
 local claims = {map = {milestones = {example = true}, lastJob = 12}}
 local characterData = {
@@ -112,14 +121,16 @@ check(#messages == 0, "original overflowing sync does not reach the owner")
 dofile("gamemodes/ix_cotz/schema/meta/sv_character.lua")
 character:Sync(owner)
 local message = messages[1]
-check(message.name == "ixCharacterInfo" and message.receiver == owner, "owner uses the existing Helix protocol")
-check(message.integers[1][1] == 42 and message.integers[1][2] == 32, "character ID retains its field width")
-check(message.integers[2][1] == 7 and message.integers[2][2] == 8, "player index retains its field width")
+check(message.name == "cotz/character/snapshot" and message.receiver == owner, "owner uses chunked snapshots")
+check(message.id == 42, "snapshot retains character ID")
+check(message.playerIndex == 7, "snapshot retains player index")
 check(message.data.data.vendorStock == nil, "initial sync excludes personal stock history")
 check(message.data.data.vendorRestockClaims == nil, "initial sync excludes stock claim history")
 check(message.data.vendorStock == nil and message.data.vendorRestockClaims == nil,
 	"private stock character vars are excluded from initial sync")
 check(message.data.progression.lines.example.active, "owner receives the separate progression var")
+check(stringBytes(message.data) > 65533, "large replicated progression bypasses the single-message table writer")
+check(#message.data.progression.lines.example.history == 70000, "chunk transport receives all progression history")
 check(message.data.data.progression.lines.example.active, "owner retains progression")
 check(message.data.data.skin == 2 and message.data.data.bleedingSeverity == 1, "other character data is retained")
 check(message.data.jobs.contact.progress == 2 and message.data.money == 100, "ordinary variables are retained")

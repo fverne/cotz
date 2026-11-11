@@ -3,6 +3,8 @@ ix.dialogue.list = ix.dialogue.list or {}
 
 local MENU_ORDER = {
 	TradeTopic = 10,
+	DefenseVoucher = 11,
+	DefenseRewards = 12,
 	StartBarter = 20,
 	HealTopic = 30,
 	RepairItems = 35,
@@ -290,6 +292,7 @@ function ix.dialogue.LoadFromDir(directory)
 			ix.util.Include(directory.."/"..v)
 
 			if ix.dialogue.ConfigureTaskRewards then ix.dialogue.ConfigureTaskRewards(DIALOGUE) end
+			ix.dialogue.ConfigureMutantDefense(DIALOGUE)
 			configureQuestions(DIALOGUE)
 			ix.dialogue.ConfigureCustomization(DIALOGUE)
 			ix.dialogue.ConfigureBarterVisibility(DIALOGUE)
@@ -324,6 +327,7 @@ function ix.dialogue.getTopic(id, topicID)
 end
 
 ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_trade.lua")
+ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_mutantdefense.lua")
 
 -- Reward topics must be available before DoPluginIncludes registers NPC conversations.
 ix.util.Include("ix_cotz/plugins/jobsystem/integrations/sh_dialogue.lua")

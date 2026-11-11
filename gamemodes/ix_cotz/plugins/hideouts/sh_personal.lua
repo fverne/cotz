@@ -2,8 +2,8 @@ local PLUGIN = PLUGIN
 
 PLUGIN.personalContacts = {
 	rp_marsh_cs = {name = "'Ballast'", id = "ballast", prefix = "BA", claimStep = "access"},
-	rp_garbage_cotz = {name = "'Cleaner'", id = "cleaner", prefix = "CL"},
-	rp_waystation = {name = "'Ledger'", id = "ledger", prefix = "LE"},
+	rp_garbage_cotz = {name = "'Cleaner'", id = "cleaner", prefix = "CL", claimStep = "access"},
+	rp_waystation = {name = "'Ledger'", id = "ledger", prefix = "LE", claimStep = "access"},
 }
 
 PLUGIN.personalUnlockSteps = {
@@ -20,7 +20,10 @@ PLUGIN.personalContainerRecipes = {
 	general = {
 		name = "General crate", filter = "general", price = 600, item = "value_container_smallitems",
 		sizes = {{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}},
-		models = {"models/props_junk/wood_crate001a.mdl", "models/props_junk/wood_crate002a.mdl"},
+		models = {
+			"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+			"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+		},
 	},
 	ammo = {
 		name = "Ammunition container", filter = "ammo", price = 900, item = "value_container_ammo",
@@ -71,7 +74,7 @@ function PLUGIN:GetPersonalUnlock(character, feature, level)
 	local suffix = type(step) == "number" and string.format("%02d", step) or step
 	local id = "cotz/town/" .. contact.id .. "/v3/hideout/" .. suffix
 
-	local reason = feature == "claim" and "Arrange initial hideout access with Ballast."
+	local reason = feature == "claim" and "Arrange initial hideout access with " .. contact.name .. "."
 		or "Requires hideout improvement " .. step .. "."
 
 	return ix.progression.IsCompleted(character, id), reason

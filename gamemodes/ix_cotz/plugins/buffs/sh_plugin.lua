@@ -9,6 +9,7 @@ local playerMeta = FindMetaTable("Player")
 ix.util.Include("sh_buffs.lua")
 ix.util.Include("sh_buffhooks.lua")
 ix.util.Include("sh_bleeding.lua")
+ix.util.Include("sv_persistence.lua")
 ix.util.Include("cl_hud.lua")
 
 -- player:GetBuffs()
@@ -22,7 +23,7 @@ end
 -- returns table or boolean( false )
 -- This function allows you handle buffs
 function playerMeta:HasBuff( strBuff )
-	if (self:GetNetVar( "buffs" ) != nil) then
+	if (self:GetNetVar( "buffs" ) ~= nil) then
 		return ( self:GetNetVar( "buffs" )[ strBuff ] )
 	else
 		return false
@@ -41,7 +42,7 @@ if (SERVER) then
 		local tblBuffs = self:GetNetVar( "buffs" ) or {}
 		local tblBuffInfo = PLUGIN.buffs[strBuff]
 		if tblBuffInfo and tblBuffInfo.onbuffed then
-			if !self:HasBuff( strBuff ) then
+			if not self:HasBuff( strBuff ) then
 				tblBuffInfo.onbuffed( self, parameter )
 			end
 		end
@@ -50,43 +51,36 @@ if (SERVER) then
 		self:SetNetVar( "buffs", tblBuffs )
 	end
 	
-	-- player:RemoveBuff( string [Buff's unique name], table [Parameters] )
-	-- This function allows you to add some buffs to player.
-	function playerMeta:RemoveBuff( strBuff, parameter ) -- perma
-		local tblBuffs = self:GetNetVar( "buffs" ) or {}
-			local tblBuffInfo = PLUGIN.buffs[strBuff]
-			if tblBuffInfo and tblBuffInfo.ondebuffed then
-				tblBuffInfo.ondebuffed( self, parameter )
-			end
-			tblBuffs[ strBuff ] = nil
-			hook.Call( "OnDebuffed", GAMEMODE, strBuff, intDuration, parameter )
-		self:SetNetVar( "buffs", tblBuffs )
+	function playerMeta:RemoveBuff(buffName, parameters)
+		local currentBuffs = self:GetBuffs()
+		local buff = currentBuffs[buffName]
+		if not buff then return end
+
+		parameters = parameters or buff[2]
+		local definition = PLUGIN.buffs[buffName]
+		if definition and definition.ondebuffed then
+			definition.ondebuffed(self, parameters)
+		end
+
+		currentBuffs[buffName] = nil
+		hook.Call("OnDebuffed", GAMEMODE, buffName, nil, parameters)
+		self:SetNetVar("buffs", currentBuffs)
 	end
 	
-	-- player:PlayerSpawn( player player )
-	-- This hook wipes every buffs on your character.
-	-- I suggest you do not touch this function unless you know what you're doing.
-	function PLUGIN:PlayerSpawn( player )
-		player:SetNetVar( "buffs", {} )
-		self:RestoreBleeding(player)
-	end
-
 	-- player:Think( )
 	-- This hook handles every player's buff effect.
 	-- I suggest you do not touch this function unless you know what you're doing.
 	function PLUGIN:Think()
 		self:ProcessBleeding()
 
-		for k, v in player.Iterator() do
-			if !( v:IsValid() and v:Alive() ) then continue end 
-			local tblBuffs = v:GetNetVar( "buffs" ) or {}
+		for _, v in player.Iterator() do
+			local tblBuffs = v:IsValid() and v:Alive() and v:GetBuffs() or {}
 			for name, dat in pairs( tblBuffs ) do
 				local tblBuffInfo = self.buffs[ name ]
-				if tblBuffInfo and tblBuffInfo.func then
-					tblBuffInfo.func( v, dat[2] )
-				end
-				if dat[1] < CurTime() then
+				if dat[1] <= CurTime() then
 					v:RemoveBuff( name, dat[2] )
+				elseif tblBuffInfo and tblBuffInfo.func then
+					tblBuffInfo.func( v, dat[2] )
 				end
 			end
 		end
@@ -95,9 +89,8 @@ if (SERVER) then
 else
 
 	function PLUGIN:Think()
-		for k, v in player.Iterator() do
-			if !( v:IsValid() and v:Alive() ) then continue end 
-			local tblBuffs = v:GetNetVar( "buffs" ) or {}
+		for _, v in player.Iterator() do
+			local tblBuffs = v:IsValid() and v:Alive() and v:GetBuffs() or {}
 			for name, dat in pairs( tblBuffs ) do
 				local tblBuffInfo = self.buffs[ name ]
 				if tblBuffInfo and tblBuffInfo.cl_func then

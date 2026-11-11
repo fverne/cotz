@@ -7,6 +7,8 @@ AddCSLuaFile( "shared.lua" )
 include( "STALKERNPCBaseVars.lua" )
 include( "shared.lua" )
 include("sv_performance.lua")
+include("sv_summoning.lua")
+include("sv_navigation.lua")
 include( "schedules.lua" )
 include( "tasks.lua" )
 
@@ -977,7 +979,10 @@ end
 
 function ENT:Think()
 	if self.cotzSleeping then return end
-	if ix and ix.eventController then ix.eventController:ValidateCombatEnemy(self) end
+	if ix and ix.eventController then
+		ix.eventController:ValidateCombatEnemy(self)
+		ix.eventController:UpdateCombatSchedule(self)
+	end
 	if(GetConVar("ai_disabled"):GetInt()==0&&self.IsAlive==true) then
 
 		self:STALKERNPCCancelPendingTargetAbilities()
@@ -996,7 +1001,8 @@ function ENT:Think()
 		self:STALKERNPCProcessMeleeAttacks()
 
 		if(self:GetEnemy()&&IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL&&
-		(self:STALKERNPCIsEnemyNPC(self:GetEnemy())||self:STALKERNPCIsEnemyPlayer(self:GetEnemy()))) then
+		(self:STALKERNPCIsEnemyNPC(self:GetEnemy())||self:STALKERNPCIsEnemyPlayer(self:GetEnemy()))
+		and self.cotzPlayerVisible ~= false) then
 			if(self:IsOnGround()) then
 				if(self.PlayingAnimation==false) then
 
@@ -1171,7 +1177,9 @@ function ENT:OnTakeDamage(dmginfo)
 		self:STALKERNPCOnDeath()
 	end
 
-	if(self.PlayingAnimation==false) then
+	if ix and ix.eventController then
+		ix.eventController:RetaliateCombatActor(self, TEMP_RealAttacker)
+	elseif(self.PlayingAnimation==false) then
 		if(TEMP_RealAttacker!=game.GetWorld()&&IsValid(TEMP_RealAttacker)&&TEMP_RealAttacker!=nil&&TEMP_RealAttacker!=NULL&&
 		TEMP_RealAttacker!=self&&(!IsValid(self:GetEnemy())||self:GetEnemy()==nil||self:GetEnemy()==NULL||
 		self:GetEnemy():GetPos():Distance(self:GetPos())>TEMP_RealAttacker:GetPos():Distance(self:GetPos()))) then

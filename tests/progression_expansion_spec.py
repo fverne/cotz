@@ -1,5 +1,6 @@
 """Run from the addon root: python3 tests/progression_expansion_spec.py."""
 from pathlib import Path
+from copy import deepcopy
 import sys
 import unittest
 
@@ -17,15 +18,41 @@ class ProgressionExpansionTests(unittest.TestCase):
         cls.rates, _, _ = supply.estimate(cls.data)
         cls.families = expansion.eligible_items()
         cls.compiled = rewards.snapshot()
+        cls.batches = expansion.requirement_batch_sizes(cls.data, cls.families)
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 635)
-        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 223)
+        self.assertEqual(len(steps), 631)
+        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 212)
         output, count = expansion.outputs()
-        self.assertEqual(count, 223)
+        self.assertEqual(count, 212)
         for path, content in output.items():
             self.assertEqual(path.read_text(), content, str(path))
+
+    def test_stock_dialogue_survives_regeneration_by_id(self):
+        contacts = deepcopy(self.data["contacts"])
+        expected = {}
+        for slug, contact in contacts.items():
+            for step in contact["progression"]:
+                if not step.get("intermissionFor"):
+                    continue
+                step["briefing"] = "Reserve request: " + slug + "/" + step["id"]
+                step["completion"] = "Reserve complete: " + slug + "/" + step["id"]
+                expected[slug, step["id"]] = (step["briefing"], step["completion"])
+        expansion.expand_contacts(contacts)
+        actual = {(slug, step["id"]): (step["briefing"], step["completion"])
+                  for slug, contact in contacts.items() for step in contact["progression"]
+                  if step.get("intermissionFor")}
+        self.assertEqual(actual, expected)
+
+    def test_technut_suit_route_survives_regeneration_without_intermissions(self):
+        contacts = deepcopy(self.data["contacts"])
+        expected = deepcopy(contacts["technut"]["progression"])
+        self.assertEqual(len(expected), 14)
+        self.assertFalse(any(step["id"] == "v3/suits/suit_anorak" for step in expected))
+        self.assertFalse(any(step.get("intermissionFor") for step in expected))
+        expansion.expand_contacts(contacts)
+        self.assertEqual(contacts["technut"]["progression"], expected)
 
     def test_local_introductions_and_explicit_boundary_examples(self):
         contacts = self.data["contacts"]
@@ -58,19 +85,28 @@ class ProgressionExpansionTests(unittest.TestCase):
         self.assertGreater(protected, 100)
 
     def test_each_candidate_has_an_eligible_real_regional_source(self):
-        for contact in self.data["contacts"].values():
+        for slug, contact in self.data["contacts"].items():
             for step in contact["progression"]:
                 phase = (step["branchIndex"] - 1) / max(1, step["branchLength"] - 1)
                 maximum = 0 if step["branchIndex"] == 1 else 2 if phase >= 0.75 else 1
                 nonlocal_slots, used = 0, set()
-                if step.get("requirementAlternatives"):
-                    self.assertEqual(step["id"], "v3/hideout/access")
-                    self.assertEqual(step["requirementAlternatives"], {"bat": "crowbar"})
+                if step["id"] == "v3/hideout/access":
+                    tool = {"ballast": "crowbar", "cleaner": "sledgehammer", "ledger": "fubar"}[slug]
+                    self.assertEqual(len(step["requirements"]), 1)
+                    slot = step["requirements"][0]
+                    self.assertEqual(slot["quantity"], 1)
+                    self.assertEqual(self.data["pools"][slot["pool"]]["candidates"], [{"item": tool}])
+                    if slug == "ballast":
+                        self.assertEqual(step["requirementAlternatives"], {"bat": "crowbar"})
+                    else:
+                        self.assertNotIn("requirementAlternatives", step)
                     continue
                 for slot in step["requirements"]:
                     ids = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
                     self.assertTrue(ids)
-                    self.assertFalse(used & ids, (step["id"], ids & used))
+                    # Catalogues may overlap; each character's accepted subsets are partitioned at assignment.
+                    if slot["mode"] == "any":
+                        self.assertEqual("value_nuts" in ids, "value_bolts" in ids, step["id"])
                     used |= ids
                     nonlocal_slot = False
                     for item in ids:
@@ -106,14 +142,64 @@ class ProgressionExpansionTests(unittest.TestCase):
                     else:
                         self.assertIn(item, contact["supplies"])
 
-    def test_consecutive_requests_are_actually_varied(self):
-        for contact in self.data["contacts"].values():
-            previous = {}
+    def test_category_only_openings_and_later_specific_slots(self):
+        any_count = random_count = 0
+        for slug, contact in self.data["contacts"].items():
+            opening = expansion.opening_steps(contact)
             for step in contact["progression"]:
-                signature = [(tuple(c["item"] for c in self.data["pools"][s["pool"]]["candidates"]), s["quantity"])
-                             for s in step["requirements"]]
-                self.assertNotEqual(previous.get(step["branch"]), signature, step["id"])
-                previous[step["branch"]] = signature
+                introductory = step.get("intermissionFor", step["id"]) in opening
+                self.assertEqual(step["categoryOnly"], introductory, (slug, step["id"]))
+                for index, slot in enumerate(step["requirements"]):
+                    specific = not introductory and not step.get("intermissionFor") and index == len(step["requirements"]) - 1
+                    self.assertEqual(slot["mode"], "random" if specific else "any", (slug, step["id"]))
+                    if slot["mode"] == "any":
+                        any_count += 1
+                        if introductory and step["id"] != "v3/hideout/access":
+                            self.assertGreaterEqual(len(self.data["pools"][slot["pool"]]["candidates"]), 2,
+                                                    (slug, step["id"], "opening category is too narrow"))
+                    else:
+                        random_count += 1
+        self.assertGreater(any_count, random_count)
+        self.assertGreater(random_count, 100)
+        technut = [s for s in self.data["contacts"]["technut"]["progression"] if s["branch"] == "suits"]
+        self.assertEqual([s["name"] for s in technut if s["categoryOnly"]],
+                         ["Mail Jacket", "Black Trenchcoat", "Sunrise STALKER Suit"])
+
+    def test_batch_sizes_use_spawned_amounts_instead_of_stack_capacity(self):
+        self.assertEqual(self.batches["value_nuts"], 3)
+        self.assertEqual(self.batches["value_bolts"], 4)
+        self.assertEqual(self.batches["value_capacitors"], 2)
+        self.assertEqual(self.batches["value_9vbattery"], 2)
+        self.assertEqual(self.batches["value_kerosene"], 2)
+        self.assertNotIn("value_sparkplug", self.batches)
+
+    def test_independent_unlocks_do_not_share_a_twenty_percent_budget(self):
+        contact = {"progression": [
+            {"id": "a", "branch": "shared", "requires": []},
+            {"id": "b", "branch": "shared", "requires": []},
+            {"id": "c", "branch": "shared", "requires": []},
+            {"id": "d", "branch": "shared", "requires": []},
+            {"id": "e", "branch": "shared", "requires": []},
+            {"id": "f", "branch": "shared", "requires": []},
+        ]}
+        self.assertEqual(expansion.opening_steps(contact), {"a", "b", "c", "d", "e", "f"})
+        contact["progression"][1]["requires"] = ["a"]
+        self.assertEqual(expansion.opening_steps(contact), {"a", "c", "d", "e", "f"})
+        for step in self.data["contacts"]["wake"]["progression"]:
+            if step.get("capacity"):
+                self.assertTrue(step["categoryOnly"], step["id"])
+
+    def test_specific_pools_have_comparable_acquisition_frequency(self):
+        for contact in self.data["contacts"].values():
+            for step in contact["progression"]:
+                for slot in step["requirements"]:
+                    if slot["mode"] != "random" or slot.get("artifactPool"):
+                        continue
+                    batches = self.batches
+                    scores = [sum(sum(v[1] for v in self.rates[m].get(candidate["item"], {}).values())
+                                  for m in step["acquisitionMaps"]) / batches.get(candidate["item"], 1)
+                              for candidate in self.data["pools"][slot["pool"]]["candidates"]]
+                    self.assertLessEqual(max(scores), min(scores) * 3 + 1e-9, step["id"])
 
     def test_requests_stay_with_the_contact_specialty(self):
         for slug, contact in self.data["contacts"].items():
@@ -125,7 +211,7 @@ class ProgressionExpansionTests(unittest.TestCase):
             support = {c["item"] for name in identity["support"]
                        for c in self.data["pools"][name]["candidates"]}
             for step in contact["progression"]:
-                if step.get("requirementAlternatives") or slug in expansion.SCIENCE and not step.get("intermissionFor"):
+                if step["id"] == "v3/hideout/access" or slug in expansion.SCIENCE and not step.get("intermissionFor"):
                     continue
                 core_units, total_units = 0, 0
                 for index, slot in enumerate(step["requirements"]):

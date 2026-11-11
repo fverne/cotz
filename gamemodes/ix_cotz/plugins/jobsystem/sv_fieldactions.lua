@@ -48,6 +48,12 @@ function ix.jobs.field.Status(client, npc, job)
 			ix.jobs.field.SaveJob(client:GetCharacter(), npc, job)
 		end
 		client:Notify(ix.jobs.field.DescribeAssignment(job) .. " Region: " .. ix.jobs.GetMapName(state.map) .. ".")
+		if ix.jobs.field.GetRecoverySearchArea(state, client:GetPos()) then
+			net.Start("cotz/jobsystem/recovery-marker")
+			net.WriteString(npc)
+			net.WriteString(job.rewardKey)
+			net.Send(client)
+		end
 		return
 	end
 	local activeMap = state.kind == "deadDrop" and state.stage == "carrying"
@@ -61,7 +67,7 @@ function ix.jobs.field.Status(client, npc, job)
 			.. " separated positions. Readings saved: " .. #state.readings .. ".")
 		return
 	end
-	local position = ix.jobs.field.Unpack(state.kind == "recovery" and state.search or state.point)
+	local position = ix.jobs.field.Unpack(state.point)
 	local label = "Search area"
 	if state.kind == "deadDrop" then
 		local carrying = state.stage == "carrying"

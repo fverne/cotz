@@ -54,7 +54,8 @@ local function jobSignature(jobs)
 	for npc, job in SortedPairs(jobs) do
 		if ix.jobs.list[job.identifier] then
 			parts[#parts + 1] = npc .. "\n" .. ix.jobs.getFormattedName(job) .. "\n"
-				.. ix.jobs.getFormattedDesc(job, true) .. "\n" .. tostring(job.progress) .. "/" .. job.numberRec
+				.. ix.jobs.getFormattedDesc(job, true, LocalPlayer():GetCharacter()) .. "\n"
+				.. tostring(job.progress) .. "/" .. job.numberRec
 				.. tostring(job.isCompleted) .. tostring(job.fieldTask and job.fieldTask.kind)
 		end
 	end
@@ -85,12 +86,12 @@ function PANEL:Init()
 end
 
 function PANEL:RefreshFonts()
-	local scale = math.Clamp(math.min(ScrW() / 1920, ScrH() / 1080), 0.75, 2)
+	local scale = ix.cotzUI.GetScale()
 	if self.fontScale == scale then return end
 	self.fontScale = scale
 	for name, size in pairs({Title = 25, Label = 19, Small = 17}) do
 		surface.CreateFont("cotzTasks" .. name, {
-			font = "alsina", size = math.floor(size * scale), weight = 500, extended = true,
+			font = "alsina", size = math.floor(size * scale + 0.5), weight = 500, extended = true,
 		})
 	end
 	self.title:SetFont("cotzTasksTitle")
@@ -111,7 +112,7 @@ function PANEL:AddTask(npc, job)
 	end
 	addLabel(card, ix.jobs.getFormattedName(job), "cotzTasksLabel")
 	addLabel(card, npc, "cotzTasksSmall", COLORS.muted)
-	addLabel(card, ix.jobs.getFormattedDesc(job, true), "cotzTasksSmall")
+	addLabel(card, ix.jobs.getFormattedDesc(job, true, LocalPlayer():GetCharacter()), "cotzTasksSmall")
 	local completed = job.isCompleted or job.progress >= job.numberRec
 	local progressText = job.targetWeights and string.format("Progress: %.2f / %d packs", job.progress, job.numberRec)
 		or string.format("Progress: %d / %d", job.progress, job.numberRec)

@@ -501,7 +501,7 @@ function PLUGIN:SpawnInstance(record, callback)
 			instance,
 			"ix_hideout_exit",
 			resolved.exit,
-			"models/props_c17/consolebox01a.mdl",
+			"models/z-o-m-b-i-e/metro_ll/door/m_ll_door_final_cut_scene_01_2.mdl",
 			resolved.exitAngles
 		)
 		local needsStorage = not resolved.dupeMarkerRoles or resolved.dupeMarkerRoles.storage or record.storageID
@@ -511,7 +511,7 @@ function PLUGIN:SpawnInstance(record, callback)
 				instance,
 				"ix_hideout_storage",
 				resolved.storage,
-				"models/props_junk/wood_crate001a.mdl",
+				"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
 				resolved.storageAngles
 			)
 		end
@@ -635,7 +635,7 @@ function PLUGIN:RequestEntry(client, id)
 	if
 		not client:Alive()
 		or client:InVehicle()
-		or client:GetMoveType() == MOVETYPE_NOCLIP
+		or client:GetMoveType() == MOVETYPE_NOCLIP and not client:IsAdmin()
 		or client:GetLocalVar("inArena")
 		or client.ixHideoutPending
 	then

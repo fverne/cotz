@@ -29,9 +29,5 @@ function ix.meta.character:Sync(receiver)
 		data.data = characterData
 	end
 
-	net.Start("ixCharacterInfo")
-	net.WriteTable(data)
-	net.WriteUInt(self:GetID(), 32)
-	net.WriteUInt(self.player:EntIndex(), 8)
-	net.Send(receiver)
+	ix.characterNetwork.SendInfo(self, data, receiver)
 end

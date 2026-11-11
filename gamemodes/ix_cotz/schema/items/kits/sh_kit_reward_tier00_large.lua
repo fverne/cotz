@@ -1,6 +1,6 @@
 ITEM.name = "Tourist Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "The large Tourist Reward package keeps an introductory work payment in supply form. Its size distinguishes it from the compact package of the same class. The issuing contact identifies the redeemable contents before the bundle changes hands."
+ITEM.longdesc = "The large Tourist Reward package keeps an introductory work payment in supply form. Its size distinguishes it from the compact package of the same class."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

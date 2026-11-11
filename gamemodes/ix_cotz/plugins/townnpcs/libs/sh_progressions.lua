@@ -53,6 +53,7 @@ function PLUGIN:BuildProgressions()
 				townContact = slug,
 				townKind = step.kind,
 				townBranch = step.branch,
+				categoryOnly = step.categoryOnly,
 				-- Entry steps still open when their newly linked parent was completed before this update.
 				defaultActive = step.defaultActive == true or step.branchIndex == 1
 					or (#step.requires == 0 and #(step.crossRequires or {}) == 0),
@@ -63,6 +64,7 @@ function PLUGIN:BuildProgressions()
 				completionBenefits = step.benefits,
 				acquisitionMaps = step.acquisitionMaps,
 				requirementPolicy = step.requirementPolicy,
+				requirementModesVersion = 2,
 				requirementAlternatives = step.requirementAlternatives,
 				intermissionFor = step.intermissionFor,
 				capacityReward = step.capacity,
@@ -72,6 +74,10 @@ function PLUGIN:BuildProgressions()
 				townServices = step.services,
 				ammoExchange = step.ammoExchange,
 			}
+			if step.id ~= "v3/hideout/access" then
+				definition.categoryChoiceRange = self.settings.progressionCategoryChoices
+				definition.batchSizedRequirements = true
+			end
 			if step.acquisitionMaps then
 				local key = table.concat(step.acquisitionMaps, "/")
 				if not allowedByMaps[key] then
@@ -101,8 +107,11 @@ function PLUGIN:BuildProgressions()
 			if step.kind == "delivery" then
 				definition.requirementSlots = {}
 				for _, slot in ipairs(step.requirements) do
+					-- Initial access takes one tool regardless of the contact's delivery difficulty.
+					local quantity = step.id == "v3/hideout/access" and slot.quantity
+						or self:ScaleProgressionEffort(contact, slot.quantity)
 					definition.requirementSlots[#definition.requirementSlots + 1] = {
-						pool = slot.pool, quantity = self:ScaleProgressionEffort(contact, slot.quantity),
+						pool = slot.pool, quantity = quantity, mode = slot.mode,
 					}
 				end
 			else

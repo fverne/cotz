@@ -1,6 +1,6 @@
 ITEM.name = "Expert Reward Large"
 ITEM.description = "A large reward supply package."
-ITEM.longdesc = "The large Expert Reward belongs near the upper end of the supply-package series. Its packed form is easier to transport than the assortment it represents. The issuing contact identifies the available return before accepting the entitlement."
+ITEM.longdesc = "The large Expert Reward belongs near the upper end of the supply-package series. Its packed form is easier to transport than the assortment it represents."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

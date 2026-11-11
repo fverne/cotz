@@ -34,6 +34,10 @@ for path in itemFiles:lines() do
 			file:close()
 			local quantity = tonumber(source:match("ITEM.quantity = (%d+)"))
 			ix.item.list[id] = {name = id, price = 100, quantity = quantity,
+				category = path:find("/items/newammo/", 1, true) and "Ammunition"
+					or path:find("/items/newweapons/", 1, true) and "Weapons"
+					or path:find("/items/cookable/", 1, true) and "Cookable Meat"
+					or path:find("/items/cooked/", 1, true) and "Cooked Meat",
 				ammoAmount = tonumber(source:match("ITEM.ammoAmount%s*=%s*(%d+)")),
 				isAmmo = path:find("/items/newammo/", 1, true) ~= nil,
 				weaponCategory = source:match([[ITEM.weaponCategory%s*=%s*"([^"]+)"]]),

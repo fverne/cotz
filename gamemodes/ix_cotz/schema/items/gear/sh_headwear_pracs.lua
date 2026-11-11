@@ -7,6 +7,7 @@ ITEM.price = 250000
 ITEM.weight = 2.5
 
 ITEM.isGasmask = true
+ITEM.filterType = "military"
 ITEM.isHelmet = true
 
 ITEM.br = 0.12

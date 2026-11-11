@@ -95,6 +95,8 @@ function CHAR:GetData(key, default)
 end
 function CHAR:SetData(key, value) self.vars.data[key] = value end
 local networked = {}
+IsValid = function(value) return value ~= nil end
+ix.characterNetwork = {SendVar = function(_, key) networked[#networked + 1] = key end}
 net = {Start = function() end, WriteUInt = function() end, WriteType = function() end,
 	WriteString = function(key) networked[#networked + 1] = key end, Send = function() end,
 	Broadcast = function() end}
@@ -117,7 +119,7 @@ local progression = {lines = {example = {completed = true, pendingRewards = {{it
 	requirement = {item = "old_choice"}}}}
 local stock = {map = {trader = {item = {count = 2, updated = 123, fraction = 0.4, maximum = 5}}}}
 local claims = {map = {milestones = {paid = true}, lastJob = 42}}
-local character = setmetatable({vars = {data = {unrelated = "retain"},
+local character = setmetatable({player = {}, vars = {data = {unrelated = "retain"},
 	jobs = {contact = {progress = 3}}}}, CHAR)
 character:SetProgression(copy(progression))
 character:SetVendorStock(copy(stock))

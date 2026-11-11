@@ -1,12 +1,22 @@
 # Advanced vendor definitions
 
 The [approved workbook plan](../../../../docs/npc-overhaul/vendor-plan.md) now owns the 25 planned
-contacts' assortments. They have no starting sale supplies. Hand-in candidates start as BUYONLY;
-seller-specific progression opens catalogue purchases. Overlapping requested/purchase items retain
-their BUYONLY action before the purchase unlock. Other purchased goods are SELLONLY.
+contacts' assortments. Vendors buy their hand-in candidates, catalogue goods and ordinary supplies.
+Additional `buyItems` IDs and `buyCategories` category lookups are configured on town contacts;
+Haggler buys ammunition/weapons and Spicy Lemon also buys all strong alcohol, raw meat and cooked meals.
+Buying lists are separate from progression and courier requests. Buying-only goods use BUYONLY;
+catalogue goods and supplies use SELLANDBUY, with catalogue purchases gated by seller-specific progression.
+Before a purchase unlock, the trade menu retains the BUYONLY action.
 Saved town vendor rows are reconciled to this plan on load, including trade modes and removed routes.
 The server checks both sale and purchase eligibility. Existing personal stock history is not reset.
 The Original retains ordinary work and supplies without a finite progression catalogue.
+
+NPC traders have no cash balance or payout limit. Advanced vendors ignore legacy saved/template
+balances, reject attempts to enable cash accounting and hide the cash controls in the editor.
+Players still pay purchase prices and receive normal sale payouts. Item eligibility, ownership,
+equipped-item restrictions and personal stock limits still apply. Sherpa/squad earnings accounts
+remain managed by their own transaction system; they are separate from NPC cash limits.
+Run `luatex --luaonly tests/helix_vendor_trade_spec.lua` for zero-balance sales and player payment checks.
 
 Personal `vendorStock` and `vendorRestockClaims` are separate persistent character vars with
 `bNoNetworking = true`, including during initial synchronization. Each uses its own `MEDIUMTEXT`
@@ -94,9 +104,16 @@ to place these contacts manually.
 
 ## Verification
 
+The [mutant defense plugin](../mutantdefense/README.md) awards transferable vouchers redeemable through
+vendor dialogue for 50% of the holder's personal maximum stock. The shared `ix.vendorStock.RestockFraction`
+API preserves normal restock eligibility, progression bonuses, caps and fractional credit. Task restocks
+continue to grant 20%; vendors with no eligible deficit keep the voucher. Sherpas/hideout vendors are excluded.
+Run `luatex --luaonly tests/mutant_defense_spec.lua` alongside the stock checks below.
+
 Relevant standalone checks from the repository root:
 
     luatex --luaonly tests/vendor_stock_spec.lua
+    luatex --luaonly tests/town_vendor_buying_spec.lua
     luatex --luaonly tests/character_storage_spec.lua
     luatex --luaonly tests/character_sync_spec.lua
     luatex --luaonly tests/dialogue_order_spec.lua

@@ -1,6 +1,6 @@
 ITEM.name = "Professional Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The Professional Weapon Box represents a higher-class equipment allowance in ordinary transport packaging. The outside gives no reliable identification of a specific firearm. The supplying contact shows the concrete exchange offer rather than opening an unseen random prize."
+ITEM.longdesc = "The Professional Weapon Box represents a higher-class equipment allowance in ordinary transport packaging. The outside gives no reliable identification of a specific firearm."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

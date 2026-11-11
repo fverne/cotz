@@ -6,6 +6,17 @@ PLUGIN.desc = "This plugin makes your flashlight feels like it's from L4D2"
 
 local meta = FindMetaTable("Player")
 
+local function isHandheldEnabled(client)
+	local weapon = client:GetActiveWeapon()
+
+	return IsValid(weapon) and weapon:GetClass() == "weapon_flashlight"
+		and weapon:GetNWBool("cotz/flashlight/active", false)
+end
+
+local function isFlashlightEnabled(client)
+	return client:Alive() and (client:GetNWBool("customFlashlight", false) or isHandheldEnabled(client))
+end
+
 if (CLIENT) then
 	if (FLASHES) then
 		for k, v in pairs(FLASHES) do
@@ -35,7 +46,7 @@ if (CLIENT) then
 
 
 	local function flashlightThink(client)
-		if (client:GetNWBool("customFlashlight") != true) then 
+		if not isFlashlightEnabled(client) then
 			if (client.flash) then
 				 client.flash:Remove()
 			end
@@ -53,10 +64,14 @@ if (CLIENT) then
 
 		
 
+		local handheld = not client:GetNWBool("customFlashlight", false) and isHandheldEnabled(client)
 		local pos, ang = client:EyePos(), client:EyeAngles()
 		pos = pos + ang:Forward() * 5
 		pos = pos + ang:Up() * 3.5
-		pos = pos + ang:Right() * -3
+		pos = pos + ang:Right() * (handheld and 8 or -3)
+		if handheld then
+			pos = pos - ang:Up() * 8
+		end
 
 			 
 		local flashlightInfo = client:getFlashType()
@@ -94,7 +109,8 @@ if (CLIENT) then
 			if ( isVisible == 0 ) then return end
 			local size = 8 * isVisible
 
-			local spritepos, spriteang = client:GetBonePosition(client:LookupBone("ValveBiped.Bip01_Head1") or 1)
+			local boneName = handheld and "ValveBiped.Bip01_R_Hand" or "ValveBiped.Bip01_Head1"
+			local spritepos, spriteang = client:GetBonePosition(client:LookupBone(boneName) or 1)
 
 			spriteang[1] = spriteang[1]+75
 			--spritepos = spritepos + spriteang:Forward() * 5
@@ -131,7 +147,7 @@ if (CLIENT) then
 				 continue
 			end
 
-			if (client:GetNWBool("customFlashlight") != true) then 
+			if not isFlashlightEnabled(client) then
 				if (flash) then
 					flash:Remove()
 				end
@@ -156,7 +172,7 @@ if (CLIENT) then
 				continue
 			end
 
-			if (client:GetNWBool("customFlashlight") != true) then
+			if not isFlashlightEnabled(client) then
 				if (client.flash and client.flash.Remove) then
 					client.flash:SetBrightness(0)
 					client.flash:Update()

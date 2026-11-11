@@ -82,6 +82,9 @@ Personal mutant and human NPC kills and successfully handed-in tasks are stored 
 under `leaderboardStats`. These counters begin with this update; nearby task kill credit does not
 increment personal kills. Town assignments count once through the existing guarded hand-in path.
 No historical totals are inferred from bonus progress. Existing saves need no reset or SQL migration.
+Same-map profiles use live server-side statistics and progression at each roster refresh, including
+unsaved changes. The client retains those public counters when attaching local player entities;
+Helix's private character data and progression are available only to their owning client.
 Remote profiles read saved character reputation and statistics; they can lag until character save
 and the next roster refresh. Only the public counters and reputation enter the roster payload.
 Deploy the updated roster reader and writer together on all maps.

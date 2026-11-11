@@ -12,6 +12,7 @@ PLUGIN.activemaps = {
 	"rp_marsh_cs",
 	"rp_waystation",
 	"rp_pripyat_remaster",
+	"rp_garbage_cotz",
 }
 
 local DEBUGSETUP = true

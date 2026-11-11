@@ -13,6 +13,7 @@ ITEM.pacData = {}
 
 ITEM.isHelmet = nil
 ITEM.isGasmask = nil
+ITEM.filterType = false
 
 ITEM.br = 0
 ITEM.fbr = 0
@@ -34,13 +35,37 @@ ITEM.canRepair = true
 local FULL_PROTECTION_DURABILITY = 80
 
 function ITEM:GetRepairCost()
-	return self.price ^ (1 / 3)
+	return self.price ^ (1 / 3) * (self.repairCostMultiplier or 1)
 end
 
 function ITEM:GetDurabilityScale()
 	if not (self.isHelmet or self.isGasmask) then return 1 end
 
 	return math.Clamp(self:GetData("durability", 100) / FULL_PROTECTION_DURABILITY, 0, 1)
+end
+
+function ITEM:GetFilterCondition()
+	return ix.util.GetGasmaskFilterCondition(self)
+end
+
+function ITEM:GetFilterScale()
+	if not self.filterType then return 1 end
+
+	return math.Clamp((self:GetFilterCondition() or 0) / FULL_PROTECTION_DURABILITY, 0, 1)
+end
+
+function ITEM:GetFlatRadProt()
+	return self.flatRadProt * self:GetDurabilityScale() * self:GetFilterScale()
+end
+
+function ITEM:GetWeight()
+	local weight = self:GetData("weight", self.weight)
+	if self.filterType and self:GetFilterCondition() ~= false then
+		local definition = ix.item.list["gasmask_filter_" .. self.filterType]
+		weight = weight + definition.weight
+	end
+
+	return weight
 end
 
 ITEM.miscSlots = {
@@ -102,6 +127,7 @@ if (CLIENT) then
 			surface.SetDrawColor(Color(255, 120, 120, 255))
 		end
 		surface.DrawTexturedRectUV(5, h - 10, math.Clamp(dura/100, 0, 1)*38, 4.6, 0, 0, math.Clamp(dura/100, 0, 1)*0.2, 1)
+		if item.filterType then ix.util.PaintGasmaskFilter(item, w, h) end
 	end
 
 	function ITEM:PopulateTooltip(tooltip)
@@ -111,6 +137,7 @@ if (CLIENT) then
 			local duratitle = tooltip:AddRow("duratitle")
 			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 			duratitle:SizeToContents()
+			if self.filterType then ix.util.PopulateGasmaskFilterTooltip(tooltip, self) end
 
 			if self.isGasmask then
 	        	ix.util.PropertyDesc2(tooltip, "Gasmask", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
@@ -133,7 +160,42 @@ end
 
 function ITEM:OnInstanced()
 	self:SetData("durability", 100)
+	if self.filterType then self:GetFilterCondition() end
 end
+
+function ITEM:OnRestored()
+	if self.filterType then self:GetFilterCondition() end
+end
+
+ITEM.functions.InstallFilter = {
+	name = "Install Filter",
+	icon = "icon16/stalker/attach.png",
+	isMulti = true,
+	multiOptions = function(item, client)
+		return ix.util.GetGasmaskFilterOptions(item, client)
+	end,
+	OnCanRun = function(item)
+		return ix.util.CanChangeGasmaskFilter(item, item.player)
+	end,
+	OnRun = function(item, data)
+		ix.util.InstallGasmaskFilter(item, item.player, data)
+
+		return false
+	end,
+}
+
+ITEM.functions.RemoveFilter = {
+	name = "Remove Filter",
+	icon = "icon16/stalker/detach.png",
+	OnCanRun = function(item)
+		return ix.util.CanChangeGasmaskFilter(item, item.player) and item:GetFilterCondition() ~= false
+	end,
+	OnRun = function(item)
+		ix.util.RemoveGasmaskFilter(item, item.player)
+
+		return false
+	end,
+}
 
 function ITEM:RemovePart(client)
 	local char = client:GetCharacter()
@@ -393,7 +455,7 @@ function ITEM:getRadProt()
 		end
 	end
 
-	return res * self:GetDurabilityScale()
+	return res * self:GetDurabilityScale() * self:GetFilterScale()
 end
 
 

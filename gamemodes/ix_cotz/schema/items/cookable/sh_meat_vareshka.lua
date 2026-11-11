@@ -4,7 +4,7 @@ ITEM.longdesc = "Meat from this hulking ape-like creature is tough and chewy, bu
 	.. " be a feast after taking one of them down."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
-ITEM.price = 1260
+ITEM.price = 960
 ITEM.width = 1
 ITEM.height = 1
 

@@ -80,6 +80,28 @@ function ix.jobs.field.EnsureRecoveryClue(state)
 	return state.whereabouts ~= nil
 end
 
+function ix.jobs.field.GetRecoverySearchArea(state, position)
+	if state.kind ~= "recovery" or state.stage ~= "search" or state.map ~= game.GetMap() then return end
+	local point = ix.jobs.field.Unpack(state.point)
+	local distanceSquared = position:DistToSqr(point)
+	local markerDistance = ix.jobs.field.runtimeSettings.recoveryMarkerDistance
+	if distanceSquared > markerDistance ^ 2 then return end
+	local radiusScale = ix.jobs.field.runtimeSettings.recoveryMarkerRadiusScale
+	local baseRadius = math.max(ix.jobs.field.runtimeSettings.recoveryMarkerMinRadius,
+		(state.searchRadius or ix.jobs.field.settings.recovery.searchRadius) * radiusScale)
+	local radius = math.max(ix.jobs.field.runtimeSettings.recoveryMarkerMinRadius,
+		baseRadius * math.sqrt(distanceSquared) / markerDistance)
+	local offset = state.search and ix.jobs.field.Unpack(state.search) - point or Vector(1, 0, 0)
+	local offsetLength = math.sqrt(offset:LengthSqr())
+	-- Saved search centres can coincide with the object; retain a stable direction without exposing its position.
+	if offsetLength == 0 then
+		offset, offsetLength = Vector(1, 0, 0), 1
+	end
+	local scale = radius * ix.jobs.field.runtimeSettings.recoveryMarkerOffsetFraction / offsetLength
+
+	return point + offset * scale, radius
+end
+
 function ix.jobs.field.SelectRoute(settings, map, usable, destinationMap)
 	local sources = ix.jobs.field.CollectPoints(settings.sources, map)
 	destinationMap = destinationMap or map

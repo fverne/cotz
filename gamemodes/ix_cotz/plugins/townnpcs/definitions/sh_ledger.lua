@@ -63,21 +63,42 @@ PLUGIN:Register("ledger", {
 			"valuables_office_records",
 			"administrative_documents",
 			"valuables_secured_cases",
+			"valuables_field_records",
+			"valuables_printed_material",
 		},
-		support = {"valuables_transit_cases", "valuables_field_records"},
+		support = {"valuables_transit_cases", "valuables_technical_records"},
 	},
 
 	progression = {
+		{
+			id = "v3/hideout/access",
+			branch = "hideout-access",
+			name = "Initial hideout access",
+			kind = "delivery",
+			requires = {},
+			briefing = "If you're looking for a room at Waystation, bring me one FUBar. Keep it unequipped for the hand-in. Once it's received, you can claim a room at the available locations here. We can discuss improvements afterwards; I'd like you to have somewhere to put your things first.",
+			completion = "Thank you. The FUBar is received, and you can claim a room at the available Waystation locations now. Have a look before you settle on one; there's no need to choose while you're standing at my desk.",
+			requirements = {
+				{pool = "hideout_access_fubar", quantity = 1, mode = "any"},
+			},
+			services = {
+				{id = "ledgerHideoutAccess", name = "Initial hideout access at Ledger"},
+			},
+			branchIndex = 1,
+			branchLength = 1,
+			acquisitionMaps = {"rp_waystation"},
+			categoryOnly = true,
+		},
 		{
 			id = "v3/hideout/01",
 			branch = "hideout",
 			name = "Hideout improvements 1",
 			kind = "delivery",
-			requires = {},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			requires = {"v3/hideout/access"},
+			briefing = "If you'd like more storage options in your Waystation rooms, this delivery opens the first paid container installations. The initial general crate in a new room remains included. I prefer putting that distinction on the page before we find ourselves politely agreeing to different things.",
+			completion = "The first container purchases are available. Thank you; the supply order is complete.",
 			requirements = {
-				{pool = "town_expansion_60ff2d834302", quantity = 1},
+				{pool = "town_expansion_14d1beef665c", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ledgerHideout1", name = "Hideout improvements 1"},
@@ -86,6 +107,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 1,
 		},
 		{
@@ -94,10 +116,10 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 2",
 			kind = "delivery",
 			requires = {"v3/hideout/01"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "The next request opens another storage tier and the first paid allowance for two more loose items. Bring the dispatch and packing supplies here. A little extra floor space can prevent a surprising amount of discussion at the doorway.",
+			completion = "The next storage tier and first floor allowance are open for purchase. This delivery is fully received.",
 			requirements = {
-				{pool = "town_expansion_f70bc0a9392c", quantity = 1},
+				{pool = "town_expansion_ced8d202eaf4", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ledgerHideout2", name = "Hideout improvements 2"},
@@ -106,6 +128,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 2,
 		},
 		{
@@ -114,10 +137,10 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 3",
 			kind = "delivery",
 			requires = {"v3/hideout/02"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "This order opens the next storage tier and the paid furnishing options. You may have a view on how the room should look already. Mine concerns getting the supplies received before either of us moves the imaginary furniture.",
+			completion = "Storage and furnishing purchase access are ready. We can close the delivery before arranging anything else.",
 			requirements = {
-				{pool = "town_expansion_8c732b3806f5", quantity = 1},
+				{pool = "town_expansion_ced8d202eaf4", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "ledgerHideout3", name = "Hideout improvements 3"},
@@ -126,6 +149,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 3,
 		},
 		{
@@ -134,10 +158,10 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 4",
 			kind = "delivery",
 			requires = {"v3/hideout/03"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "For the next storage tier and second paid floor allowance, complete this request. The allowance adds two more loose items when purchased. I would advise leaving room to enter, but I won't make my preference a condition of the delivery.",
+			completion = "The next storage tier and second floor allowance can be purchased. The advice remains optional.",
 			requirements = {
-				{pool = "town_expansion_3fe753055c23", quantity = 1},
+				{pool = "town_expansion_ca46416ba805", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout4", name = "Hideout improvements 4"},
@@ -146,6 +170,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 4,
 		},
 		{
@@ -154,11 +179,11 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 5",
 			kind = "delivery",
 			requires = {"v3/hideout/04"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "The next storage arrangement requires these supplies. I enjoy reaching the end of a request without a missing receipt or an unexpected third person waiting. Bring the whole list here and we should manage that pleasantly ordinary result.",
+			completion = "Another storage tier is available to buy. The delivery has reached a satisfactory end.",
 			requirements = {
-				{pool = "town_expansion_4ea89303af2d", quantity = 2},
-				{pool = "town_expansion_6d8810642590", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 2, mode = "any"},
+				{pool = "town_expansion_d5aa4471b8c2", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout5", name = "Hideout improvements 5"},
@@ -167,6 +192,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 5,
 		},
 		{
@@ -175,11 +201,11 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 6",
 			kind = "delivery",
 			requires = {"v3/hideout/05"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "This dispatch-supply order opens the next storage purchases. Please keep to the current list. It is much easier to resolve a mistaken request before it has spent a day travelling in somebody's pack.",
+			completion = "Your next storage tier is open for purchase. Everything has arrived against the right order.",
 			requirements = {
-				{pool = "town_expansion_60ff2d834302", quantity = 2},
-				{pool = "town_expansion_0be7e6713fc9", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 2, mode = "any"},
+				{pool = "town_expansion_1692368e6fcf", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout6", name = "Hideout improvements 6"},
@@ -188,6 +214,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 6,
 		},
 		{
@@ -196,11 +223,11 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 7",
 			kind = "delivery",
 			requires = {"v3/hideout/06"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "For further room storage, bring the materials listed here. There is a small pleasure in finding something where its label says it should be. I would like to have that pleasure with this delivery rather than discuss why it belongs elsewhere.",
+			completion = "The next storage purchases are available. The labels and the delivery agree.",
 			requirements = {
-				{pool = "town_expansion_4ea89303af2d", quantity = 2},
-				{pool = "town_expansion_6d8810642590", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 2, mode = "any"},
+				{pool = "town_expansion_15c57727a4de", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout7", name = "Hideout improvements 7"},
@@ -209,6 +236,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 7,
 		},
 		{
@@ -217,11 +245,11 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 8",
 			kind = "delivery",
 			requires = {"v3/hideout/07"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "This request opens another storage tier. You can check the whole order before deciding when to leave. A hurried promise has a habit of remaining unfinished in several people's afternoons, including the person who made it.",
+			completion = "The next storage tier is available to purchase. This promise is finished rather than waiting in the margin.",
 			requirements = {
-				{pool = "town_expansion_60ff2d834302", quantity = 2},
-				{pool = "town_expansion_0be7e6713fc9", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4d44f19494ce", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout8", name = "Hideout improvements 8"},
@@ -230,6 +258,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 8,
 		},
 		{
@@ -238,12 +267,12 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 9",
 			kind = "delivery",
 			requires = {"v3/hideout/08"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "The larger storage arrangements need another supply delivery. The list is here. If you wish to discuss the journey when you return, I will gladly put a marker in my work before listening.",
+			completion = "Another storage tier is open to buy. The order is closed, so the rest of the conversation can have its turn.",
 			requirements = {
-				{pool = "town_expansion_4ea89303af2d", quantity = 3},
-				{pool = "town_expansion_dfefeedcc8d8", quantity = 2},
-				{pool = "town_expansion_59f84bf18165", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 3, mode = "any"},
+				{pool = "town_expansion_25e538b843ac", quantity = 2, mode = "any"},
+				{pool = "town_expansion_eef3b6f2ad7a", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout9", name = "Hideout improvements 9"},
@@ -252,6 +281,7 @@ PLUGIN:Register("ledger", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 9,
 		},
 		{
@@ -260,12 +290,12 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 10",
 			kind = "delivery",
 			requires = {"v3/hideout/09"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "For the next storage purchase tier, bring these supplies. I'd rather make one clear request than leave you remembering an instruction I added while saying goodbye. That is the complete list below.",
+			completion = "The next storage purchases are ready. Nothing was added after your departure.",
 			requirements = {
-				{pool = "town_expansion_60ff2d834302", quantity = 3},
-				{pool = "town_expansion_ede8fdcabd61", quantity = 2},
-				{pool = "town_expansion_32fcf2360a1f", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 3, mode = "any"},
+				{pool = "town_expansion_f42a3238f802", quantity = 2, mode = "any"},
+				{pool = "town_expansion_e6e419511987", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout10", name = "Hideout improvements 10"},
@@ -279,6 +309,7 @@ PLUGIN:Register("ledger", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 10,
 		},
 		{
@@ -287,12 +318,12 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 11",
 			kind = "delivery",
 			requires = {"v3/hideout/10"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "This is the penultimate storage order for your Waystation rooms. Please return the full request here. I can appreciate progress without calling an almost-finished arrangement complete; the distinction matters to whoever is still waiting.",
+			completion = "The next storage tier is available. Nobody remains waiting for a piece of this delivery.",
 			requirements = {
-				{pool = "town_expansion_4ea89303af2d", quantity = 3},
-				{pool = "town_expansion_8bdebb3d10cc", quantity = 2},
-				{pool = "town_expansion_a67473cd9b4d", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 3, mode = "any"},
+				{pool = "town_expansion_f42a3238f802", quantity = 2, mode = "any"},
+				{pool = "town_expansion_4d2788de1f2d", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout11", name = "Hideout improvements 11"},
@@ -306,6 +337,7 @@ PLUGIN:Register("ledger", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 11,
 		},
 		{
@@ -314,13 +346,13 @@ PLUGIN:Register("ledger", {
 			name = "Hideout improvements 12",
 			kind = "delivery",
 			requires = {"v3/hideout/11"},
-			briefing = "I need supplies for the dispatch work. Have a look at the request before you load up; it saves both ends a second journey. Bring everything on the list back here; I need the full delivery.",
-			completion = "Thank you. I will check these into the account before the next request arrives.",
+			briefing = "The final storage tier opens after this supply order. Take your time reading it. I like finishing an extended arrangement while both parties can still remember what they agreed, rather than hurrying to find the next unfinished page.",
+			completion = "Final Waystation storage purchases are open. Thank you for seeing the sequence through; this page can be closed.",
 			requirements = {
-				{pool = "town_expansion_4ea89303af2d", quantity = 4},
-				{pool = "town_expansion_dfefeedcc8d8", quantity = 3},
-				{pool = "town_expansion_eb9dc70d7065", quantity = 2},
-				{pool = "town_expansion_652c6332fff4", quantity = 1},
+				{pool = "town_expansion_ba8ac3af2b83", quantity = 4, mode = "any"},
+				{pool = "town_expansion_25e538b843ac", quantity = 3, mode = "any"},
+				{pool = "town_expansion_2ba084e72d2d", quantity = 2, mode = "any"},
+				{pool = "town_expansion_2824dbcfe6d8", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "ledgerHideout12", name = "Hideout improvements 12"},
@@ -334,6 +366,7 @@ PLUGIN:Register("ledger", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 12,
 		},
 	},

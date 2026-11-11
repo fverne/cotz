@@ -245,8 +245,9 @@ Keep this implementation as the baseline. Balance the combined effect of capacit
 
 ## Reward overhaul — implemented
 
-The expansion's remaining kit routes now use saved visible choices: jobs, older logical delivery bonuses,
-legacy kit redemption, and kit-producing barters. Paid upgrading is removed. Existing fixed-benefit
+The expansion's task reward routes use saved visible choices: jobs, older logical delivery bonuses,
+and kit-producing barters. Legacy kit hand-ins have since been removed; carried kits open directly
+using their existing loot tables. Paid upgrading is removed. Existing fixed-benefit
 commissions, service rewards, gates and the 20% restock retain their behaviour. The original kit tables
 remain as nominal valuation specifications and saved-item compatibility, rather than new task rewards.
 The steps below record the implementation scope; optional new repeatable branches remain future work.

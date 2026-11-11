@@ -62,7 +62,7 @@ local FUEL_ITEMS = {value_kerosene = true, lowtiercookerfuel = true}
 function ix.vendorStock.FormatStock(count, maximum, fraction)
 	local text = string.format("Stock: %d/%d", count, maximum)
 	if (fraction or 0) > 0 then
-		text = text .. string.format(" (+%.2f task credit)", fraction)
+		text = text .. string.format(" (+%.2f restock credit)", fraction)
 	end
 
 	return text
@@ -160,7 +160,6 @@ if SERVER then
 				items = entity.items,
 				factions = entity.factions,
 				classes = entity.classes,
-				money = entity.money,
 				scale = entity.scale,
 				dialogueid = entity.dialogueid,
 				soundgroup = entity:GetSoundGroup(),
@@ -203,7 +202,7 @@ if SERVER then
 			entity.items = items
 			entity.factions = v.factions or {}
 			entity.classes = v.classes or {}
-			entity.money = v.money
+			entity.money = nil
 			entity.scale = v.scale or 0.5
 			entity.dialogueid = v.dialogueid
 			entity:SetSoundGroup(v.soundgroup or "")
@@ -418,15 +417,9 @@ if SERVER then
 			entity:InitPhysObj()
 			entity:SetAnim()
 		elseif key == "useMoney" then
-			if entity.money then
-				entity:SetMoney()
-			else
-				entity:SetMoney(0)
-			end
+			entity:SetMoney()
 		elseif key == "money" then
-			data = math.Round(math.abs(tonumber(data) or 0))
-
-			entity:SetMoney(data)
+			entity:SetMoney()
 			feedback = false
 		elseif key == "scale" then
 			data = tonumber(data) or 0.5
@@ -577,7 +570,6 @@ if SERVER then
 				else
 					client:GetCharacter():GiveMoney(price)
 					client:NotifyLocalized("businessSell", name, ix.currency.Get(price))
-					entity:TakeMoney(price)
 				end
 
 				local item = ix.item.list[uniqueID]
@@ -627,7 +619,6 @@ if SERVER then
 				else
 					client:GetCharacter():TakeMoney(price)
 					client:NotifyLocalized("businessPurchase", name, ix.currency.Get(price))
-					entity:GiveMoney(price)
 				end
 
 				if not client:GetCharacter():GetInventory():Add(uniqueID) then
@@ -676,7 +667,8 @@ else
 			return
 		end
 
-		entity.money = net.ReadUInt(16)
+		net.ReadUInt(16)
+		entity.money = nil
 		entity.items = net.ReadTable()
 		entity.scale = net.ReadFloat()
 
@@ -692,7 +684,8 @@ else
 			return
 		end
 
-		entity.money = net.ReadUInt(16)
+		net.ReadUInt(16)
+		entity.money = nil
 		entity.items = net.ReadTable()
 		entity.scale = net.ReadFloat()
 		entity.messages = net.ReadTable()
@@ -883,19 +876,15 @@ else
 			return
 		end
 
-		local value = net.ReadUInt(16)
-		value = value ~= -1 and value or nil
-
-		entity.money = value
+		net.ReadUInt(16)
+		entity.money = nil
 
 		local editor = ix.gui.vendorEditor
 
 		if IsValid(editor) then
-			local useMoney = tonumber(value) ~= nil
-
-			editor.money:SetDisabled(not useMoney)
-			editor.money:SetEnabled(useMoney)
-			editor.money:SetText(useMoney and value or "∞")
+			editor.money:SetDisabled(true)
+			editor.money:SetEnabled(false)
+			editor.money:SetText("∞")
 		end
 	end)
 

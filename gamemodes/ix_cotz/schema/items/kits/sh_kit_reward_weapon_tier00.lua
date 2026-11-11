@@ -1,6 +1,6 @@
 ITEM.name = "Tourist Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The Tourist Weapon Box places an entry-level equipment entitlement in a wooden transport shell. Its label identifies the allowance rather than a particular firearm. The contact's exchange offer specifies the available equipment before the box is surrendered."
+ITEM.longdesc = "The Tourist Weapon Box places an entry-level equipment package in a wooden transport shell. Its label identifies the allowance rather than a particular firearm."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

@@ -1,7 +1,7 @@
 local COMBAT_WEAR_RATE = 1 / 400
 local ENVIRONMENT_WEAR_RATE = 1 / 100
 local ENVIRONMENT_DAMAGE_TYPES = {
-	DMG_SHOCK, DMG_BURN, DMG_ACID, DMG_BLAST, DMG_DROWN, DMG_POISON,
+	DMG_SHOCK, DMG_BURN, DMG_ACID, DMG_BLAST, DMG_CRUSH, DMG_DROWN, DMG_POISON,
 	DMG_NERVEGAS, DMG_SLOWBURN, DMG_RADIATION, DMG_SONIC, DMG_AIRBOAT,
 }
 
@@ -52,7 +52,8 @@ function ix.util.DamageHeadgear(client, damageInfo)
 
 	for _, item in pairs(character:GetInventory():GetItems(true)) do
 		local headgear = not item.isBodyArmor and (item.isHelmet or item.isGasmask)
-		if headgear and item:GetData("equip") and not item:GetData("unlimitedDurability", false) then
+		local filterWear = item.filterType and damageInfo:IsDamageType(DMG_RADIATION)
+		if headgear and not filterWear and item:GetData("equip") and not item:GetData("unlimitedDurability", false) then
 			local durability = item:GetData("durability", 100)
 			local remaining = math.Clamp(durability - damage * wearRate, 0, 100)
 			if remaining ~= durability then

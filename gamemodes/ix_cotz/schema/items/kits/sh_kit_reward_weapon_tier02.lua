@@ -1,6 +1,6 @@
 ITEM.name = "Novice Weapon Box"
 ITEM.description= "Feels heavy, has something inside."
-ITEM.longdesc = "The Novice Weapon Box represents an equipment allowance rather than an identified gun waiting beneath the lid. The wooden shell gives it a familiar transport form. Its available redemption choice is shown at the supplying contact."
+ITEM.longdesc = "The Novice Weapon Box represents an equipment allowance rather than an identified gun waiting beneath the lid. The wooden shell gives it a familiar transport form."
 ITEM.model = "models/lostsignalproject/items/misc/small_wood_box.mdl"
 
 ITEM.width = 4

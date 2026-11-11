@@ -102,7 +102,7 @@ ix.poaching.MutantParts = {
 	},
 	["swampcontroller"] = {
 		["meattype"] = "meat_controller",
-		["parts"] = {{"part_swampcontroller_1", 20}, {"part_swampcontroller_2", 5}, {"hide_swampcontroller", 3}, {"artifact_photo", 1}, },
+		["parts"] = {{"part_swampcontroller_1", 20}, {"part_swampcontroller_2", 5}, {"hide_swampcontroller", 3}, {"artifact_photo", 2}, },
 	},
 	["electrocontroller"] = {
 		["meattype"] = "meat_controller",

@@ -1,5 +1,7 @@
 AddCSLuaFile()
 
+local PLUGIN = PLUGIN
+
 ENT.Type = "anim"
 ENT.PrintName = "Metal Box"
 ENT.Author = "Spenser&Kek1ch"
@@ -39,7 +41,7 @@ if (SERVER) then
 			for i = 1,4 do
 				if (math.random(1, 6) == 6) then
 					local drop = ix.util.GetRandomItemFromPool(self.CustomSpawngroup or "ix_entbox_drops")
-					ix.item.Spawn(drop[1], self:GetPos()+Vector(0, 0, 2 + i), function(item, ent) item:SetData("bTemporary", true) ent.bTemporary = true end, AngleRand(), drop[2] or {})
+					PLUGIN:SpawnBoxLoot(self, drop, i)
 				end
 			end
 		end

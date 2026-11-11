@@ -97,7 +97,7 @@ function PANEL:Init()
 		end
 	end
 
-	local useMoney = tonumber(entity.money) != nil
+	local useMoney = false
 
 	self.money = self:Add("DTextEntry")
 	self.money:Dock(TOP)
@@ -106,6 +106,7 @@ function PANEL:Init()
 	self.money:SetDisabled(!useMoney)
 	self.money:SetEnabled(useMoney)
 	self.money:SetNumeric(true)
+	self.money:SetVisible(false)
 	self.money:SetPlaceholderText( "Money amount" )
 	self.money.OnEnter = function(this)
 		local value = tonumber(this:GetText()) or entity.money
@@ -135,6 +136,7 @@ function PANEL:Init()
 	self.useMoney:Dock(TOP)
 	self.useMoney:DockMargin(0, 4, 0, 0)
 	self.useMoney:SetChecked(useMoney)
+	self.useMoney:SetVisible(false)
 	self.useMoney.OnChange = function(this, value)
 		self:updateVendor("useMoney")
 	end

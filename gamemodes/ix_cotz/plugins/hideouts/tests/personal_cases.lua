@@ -305,7 +305,7 @@ Test("scripted overflow keeps original rows, waits for room and restores safely 
 	util.TableToJSON, util.JSONToTable = encode, decode
 end)
 
-Test("each map checks local improvements and Ballast requires initial claim access", function()
+Test("each map requires local initial claim access and retains saved improvements", function()
 	local owner = personalHome()
 	local currentMap = game.GetMap
 	for _, map in ipairs({"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"}) do
@@ -313,15 +313,14 @@ Test("each map checks local improvements and Ballast requires initial claim acce
 		local contact = PLUGIN.personalContacts[map]
 		owner:GetCharacter().completed = {}
 		local originalClaimStep = contact.claimStep
-		assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1) == (map ~= "rp_marsh_cs"))
-		if map == "rp_marsh_cs" then
-			owner:GetCharacter().completed["cotz/town/ballast/v3/hideout/access"] = true
-			assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
-		end
+		assert(not PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
 		assert(not PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "ammo", 1))
 		local id = "cotz/town/" .. contact.id .. "/v3/hideout/01"
 		owner:GetCharacter().completed[id] = true
 		assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "ammo", 1))
+		assert(not PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
+		owner:GetCharacter().completed["cotz/town/" .. contact.id .. "/v3/hideout/access"] = true
+		assert(PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
 		contact.claimStep = 2
 		assert(not PLUGIN:GetPersonalUnlock(owner:GetCharacter(), "claim", 1))
 		contact.claimStep = originalClaimStep

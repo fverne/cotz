@@ -1,8 +1,8 @@
 # Town progression overhaul, 9 November 2026
 
-This replaces the former 600-milestone town graph with 635 hand-in milestones across 50
-branches, including 223 stock-preparation intermissions. The authored `upgradeChains` and
-`regularAmmoChain` in `sh_equipment.lua` retain their exact order. Where one branch combines families, cheaper available items come first without reversing an
+This replaces the former 600-milestone town graph with 631 hand-in milestones across 52
+branches, including 212 stock-preparation intermissions. The authored `upgradeChains` in
+`sh_equipment.lua` now include Cutlery before Cleaning kit; all other equipment and `regularAmmoChain` ordering is retained. Where one branch combines families, cheaper available items come first without reversing an
 authored family. Equipment tier prerequisites can cross sellers; unrelated branches have no shared
 introduction or joined ending. The Original and Arena Master retain no finite progression.
 
@@ -20,15 +20,15 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 | Spicy Lemon | Weak drugs/nicotine; beer; energy drinks | Corn, beans, chili beans; cheapest vodka, cigarettes and energy drink |
 | Technut | Ordinary, Clear Sky and military suits; painting | Anorak, cloth mask |
 | Brass | Regular ammunition; HP exchanges; TR/DT/MG shotgun loads | Basic gun ammunition, buckshot and slugs |
-| Cleaner | Garbage hideout improvements | Buys all at 0.3 |
-| Latch | Gasmasks and middle-tier headwear | Cloth mask |
+| Cleaner | Initial hideout access, then Garbage hideout improvements | Buys all at 0.3 |
+| Latch | Gasmasks, matching filters and middle-tier headwear | Cloth mask |
 | Spool | Steel/riot headwear; strong drugs | Russian tank helmet |
 | Spoor | Slow-firing rifles | Sako .22 and Winchester .22 |
 | Vesper | Pact rifles | None |
 | Wake | Backpacks; carried weight; inventory rows | Basic bandages and medkits |
-| Boss | Higher-tier helmets | None |
+| Boss | Higher-tier helmets and matching filters | None |
 | Carbon | AP exchanges | None |
-| Ledger | Waystation hideout improvements | Buys all at 0.3 |
+| Ledger | Initial hideout access, then Waystation hideout improvements | Buys all at 0.3 |
 | Quartermaster | NATO rifles | US MRE, canned water, basic antirad/bandages/medkits |
 | Smartass | NATO CQB/shotguns; bunker then laboratory access cards | None |
 | Suture | Suit attachments; suit variant conversion unlocks | Conversion menu |
@@ -39,13 +39,79 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 Latch starts with the cloth mask and unlocks the remaining mask chain and operator-Russian-2/CS1/CS2 headwear. Spool starts with the Russian tank helmet and unlocks three steel helmets and the riot helmet; Haggler's tanker starter is an intentional duplicate. Boss owns
 the remainder of the helmet chain. All four trenchcoat colours share Technut's black-trenchcoat step.
 
+Latch unlocks civilian filters immediately before Halfmask, military before EO-20, and scientific
+before M40. Boss unlocks military filters before CS-4 and scientific before Screen. These five
+seller-local delivery stages precede the mask purchases and preserve any earlier stock-preparation
+requirements. Completed mask permissions remain earned; unfinished mask requests wait for the new
+filter stage without losing saved contributions or accrued value. Existing owners can complete the
+new filter stages after their old prerequisites, without replaying completed mask requests.
+See the [filter purchase details](../../../gamemodes/ix_cotz/plugins/townnpcs/README.md#gasmask-filter-purchases).
+
 Weak drugs include cigarettes, tobacco, cigars, mints, codeine and caffeine. Spool's strong-drug branch
 contains adrenaline, morphine, marijuana, glucose, cocaine and swampbrew. Gasket owns moonshine, vodka,
 wine and spirits; the cheapest vodka also remains a Spicy Lemon starter.
 
+## Category totals and specific requests
+
+Every town delivery slot declares `mode = "any"` or `mode = "random"` beside its pool and quantity.
+`any` accepts a mixture of 3–4 item types selected once from the pool for that character; it never
+exposes a large catalogue as the accepted list. `random` chooses one item once per character and
+requires that exact item. Other progression definitions retain their
+existing behaviour when mode is omitted.
+
+The first `ceil(unlockCount / 5)` milestones in each connected unlock chain use only `any` slots.
+Count actual non-intermission milestones; retired entries are excluded. Shared branch labels do not
+join independent one-step upgrades: all seven of Wake's capacity purchases remain category-only.
+A stock intermission inherits its following unlock's opening classification. All stock intermissions
+remain category-wide even later in the chain. After the opening, a normal delivery's last, smallest
+slot uses `random`; earlier slots remain `any`. A one-slot delivery therefore becomes a specific-item
+request after its opening. Technut's first three of thirteen suit purchases are category-only:
+Mail Jacket, the trenchcoat group and Sunrise. Painting is its own category-only one-step branch.
+
+Catalogue pools may overlap, but accepted subsets are partitioned per character: one item can only
+contribute to one counter in a request. Assignment allocates the most constrained categories first,
+favouring items not needed by another category, then adds a fourth type where the roll and available
+candidates permit it. `settings.progressionCategoryChoices = {3, 4}` owns this policy. The three physical
+hideout-access hand-ins retain their existing tool choices and one-tool cost.
+
+New category goals require at least the rolled 3–4 supply batches. Whole valuables contribute one
+batch each. Quantity-bearing valuables use the minimum natural spawn quantity, including explicit
+loot overrides, rather than inventory capacity: three nuts or four bolts contribute one batch.
+A category offer containing nuts always contains bolts too; neither appears alone. Other examples
+are two capacitors, two 9V batteries or two kerosene units per batch. The generated shared
+`ix.progression.requirementBatchSizes` registry records these values. Specific requests multiply their
+base amount by the selected item's batch size once; their displayed quantity is the final raw total.
+Task text lists per-batch costs, highlights show raw outstanding quantities and incomplete batches
+have no hand-in action. Surplus units remain in inventory. Rewards price the actual raw units consumed.
+
+Bulk catalogues favour local sources within the contact's specialty. Related record, tool and packing
+pools supply enough local candidates where earlier catalogues contained only one or two types.
+Specific pools compare modeled batch-equivalent supply and stay within a threefold frequency range.
+Checked-in loose points, boxes and cycling containers provide comparative estimates, not measured
+player acquisition times. Scientist equipment retains its artifact families and regional ceilings remain.
+
+Mode version 2 saves accepted subsets and per-item batch costs. Reconnects and later pool/batch edits
+do not reroll them. Unfinished older category requests receive a subset once, retaining their canonical
+keys, delivered credit and money. Outstanding category goals below three rise to three; fulfilled
+categories and completed milestones are not reopened. Previous specific rolls and raw-unit targets
+remain intact. Region-policy conversions run before this migration. No database reset or SQL column
+change is required.
+
+The server resolves each donated item to exactly one saved counter, consumes only the remaining
+quantity and prices the actual item supplied. Dialogue, journal text, search and inventory highlights
+read the same saved alternatives. Existing completion, purchase gates and payout handling are reused.
+
+Run `luatex --luaonly tests/progression_subsets_spec.lua`,
+`luatex --luaonly tests/progression_requirement_modes_spec.lua` and
+`python3 tests/progression_expansion_spec.py`. Regenerate with
+`python3 docs/npc-overhaul/tools/expand_progression.py --write`; verify with `--check`.
+Restart all map servers together. Multiplayer UI, replication, inventory and database/reconnect
+behaviour still need runtime verification; do not rerun first-time setup.
+
 ## Unlocks, exchanges and retained assets
 
-Except for Ballast's initial one-crowbar-or-bat hand-in, town requirements contain only valuables and artifacts, validated through item inheritance and actual
+Except for the three initial hideout tool hand-ins, town requirements contain only valuables and artifacts,
+validated through item inheritance and actual
 checked-in world/box/cycling acquisition sources. Currency and bound quest assets are excluded.
 Scientists retain artifact deliveries at equipment milestones; their preparation stages request ordinary
 research and technical valuables. Garbage introductions use locally available members of each
@@ -85,7 +151,12 @@ Main deliveries retain their base quantities `1`, `2/1`, `3/2/1` or `4/3/2/1`. C
 once, rounding upward; Ledger uses 3×. Branches are optional, so the catalogue total is not one playthrough.
 
 From the third original unlock onward, stock preparation precedes repeated requirement patterns and
-three-/four-slot requests where the previous milestone has eligible shop stock. Intern, Egghead and
+three-/four-slot requests where the previous milestone has eligible shop stock, except at Technut.
+Technut's initial anorak stock step and eleven intermediate `/stock` steps are retired. Anoraks remain
+starting stock; the Mail Jacket starts the suit chain and each later suit requires its predecessor.
+The painting branch, retained suit IDs, request quantities, regional ranks and saved contributions remain.
+Retired stock-step records remain saved history. `preserveProgression = true` prevents authoring-tool
+regeneration of these intermissions. Intern, Egghead and
 Beanstalk have preparation between every equipment tier. A preparation delivery requests half the next
 milestone's base units, rounded upward with minimum one, before applying contact difficulty once.
 Its reward increases personal capacity for the previous purchase group, including grouped equipment.
@@ -142,20 +213,23 @@ records, hand-in terms and capacity amounts are preserved. Completed purchases a
 Spool's tank helmet and Latch's cloth mask have no active purchase milestones; both are starting vendor
 stock. Retired milestone records remain history. Their successors keep the original delivery terms and
 regional tier positions. `preserveProgression = true` on Spool, Latch and Wake tells the expansion tool to
-preserve their approved layout, stock stages and request tuning.
+preserve their approved layout, stock stages and quantities. Mode and candidate-pool authoring applies
+to every contact, including these protected layouts.
 Quartermaster's two gunpowder-for-ammunition-kit barters are removed from the main menu; his six regular
 currency-for-ammunition barters remain in his barter submenu. Suture's suit conversion milestones are
 labelled with the suit name followed by "variants", including "Anorak variants".
 Ballast/Cleaner/Ledger each have twelve local hideout improvement stages, enabling the existing twelve storage tiers.
-Ballast additionally requires `v3/hideout/access` before new Swamps room claims and unfinished improvements.
-It consumes exactly one unequipped crowbar or bat, at the player's choice. Both choices credit one shared
-requirement; repeated hand-ins cannot consume or pay again. Existing owned rooms and paid upgrades remain saved.
-Garbage and Waystation room claims retain their existing availability.
+Each contact additionally requires `v3/hideout/access` before new local room claims and unfinished improvements.
+Ballast consumes one unequipped crowbar or bat, at the player's choice; Cleaner consumes one unequipped
+sledgehammer and Ledger consumes one unequipped FUBar. Access requirements are not multiplied by contact
+difficulty. Ballast's two choices credit one shared requirement; repeated hand-ins cannot consume or pay again.
+Existing owned rooms and paid upgrades remain saved and usable without completing the new access step.
 The two +2 floor allowances require stages 2 and 4; furnishings require stage 3. Purchases still cost
 their configured roubles/items. Saved paid levels, receipts, inventory dimensions and contents remain.
 
 `ij600`, `lax410` and `ruger1022` await later starter allocation. Music awaits later acquisition.
-Sharpening stones and cutlery remain job rewards without progression sales. All eight canned foods are
+Sharpening stones remain job rewards without progression sales. Old Timer unlocks
+Cutlery → Cleaning kit → Shovel; cutlery also remains a job reward. All eight canned foods are
 Spicy Lemon job and bonus candidates. His three canned starters remain saleable. Meals and raw meat
 cannot be bought from ordinary NPC vendors; cooking, hunting and job hand-ins remain available.
 Rare/reserved equipment retains its existing non-purchase policy.
@@ -192,6 +266,19 @@ painting/conversions, barter with partial stacks/full inventories, saved vendor 
 upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or client presentation.
 
 ## Authoring and regression checks
+
+Each active step owns its authored `briefing` and `completion` in the contact definition, including
+stock intermissions. All 631 pairs are individually written against the contact's profile and current
+benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
+conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
+Keep exact assigned items and quantities in the generated objective display rather than hard-coding
+them into speech, since valid saved requests can differ from newly rolled requests.
+
+The expansion tool retains existing stock-step text by stable ID when rebuilding requirements. New
+intermissions start with the following unlock's text and need their own replies. Verify all 631 pairs
+and their compiled fields with `luatex --luaonly tests/progression_dialogue_spec.lua`; the Python
+expansion suite also checks that regeneration preserves distinct stock conversations. Editorial review
+of voice, continuity and promises is still required; uniqueness checks cannot assess writing quality.
 
 `python3 docs/npc-overhaul/tools/expand_progression.py --write` reproduces the expanded definitions and
 source-audited pools. `--check` verifies them without writing. Candidate/source changes affect new

@@ -4,8 +4,8 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**635 active steps; 635 have functional unlocks; 0 have TODO-only unlock plans;
-19 have multiple assigned unlocks; 0 have no assigned unlock.**
+**631 active steps; 631 have functional unlocks; 0 have TODO-only unlock plans;
+18 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
 Medicine retains family branches; Jitters gates antirads, Asenapine/Modafines and stimpaks after medkits 2, 4 and 6. Listed starter supplies are available immediately.
@@ -27,26 +27,26 @@ Validation passed.
 | atlas | 10 | 10 | 0 | 0 |
 | ballast | 13 | 13 | 0 | 0 |
 | beanstalk | 27 | 27 | 0 | 0 |
-| boss | 13 | 13 | 0 | 0 |
+| boss | 15 | 15 | 0 | 0 |
 | brass | 68 | 68 | 0 | 0 |
 | carbon | 19 | 19 | 0 | 0 |
-| cleaner | 12 | 12 | 0 | 0 |
+| cleaner | 13 | 13 | 0 | 0 |
 | egghead | 5 | 5 | 0 | 0 |
 | gasket | 68 | 68 | 0 | 0 |
 | haggler | 35 | 35 | 0 | 0 |
 | intern | 5 | 5 | 0 | 0 |
 | jitters | 23 | 23 | 0 | 0 |
-| latch | 20 | 20 | 0 | 0 |
-| ledger | 12 | 12 | 0 | 0 |
+| latch | 23 | 23 | 0 | 0 |
+| ledger | 13 | 13 | 0 | 0 |
 | mute | 5 | 5 | 0 | 0 |
-| old-timer | 11 | 11 | 0 | 4 |
+| old-timer | 12 | 12 | 0 | 4 |
 | quartermaster | 23 | 23 | 0 | 0 |
 | smartass | 47 | 47 | 0 | 0 |
 | spicy-lemon | 51 | 51 | 0 | 0 |
 | spool | 15 | 15 | 0 | 0 |
 | spoor | 21 | 21 | 0 | 0 |
 | suture | 37 | 37 | 0 | 13 |
-| technut | 26 | 26 | 0 | 2 |
+| technut | 14 | 14 | 0 | 1 |
 | the-original | 0 | 0 | 0 | 0 |
 | vesper | 31 | 31 | 0 | 0 |
 | wake | 38 | 38 | 0 | 0 |
@@ -57,31 +57,63 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 
 | Contact | Specialty | Core pools | Related support pools |
 | --- | --- | --- | --- |
-| atlas | Survey notes and measuring instruments | valuables_field_records, valuables_instruments | valuables_survey_equipment, valuables_recording_equipment |
+| atlas | Survey notes and measuring instruments | valuables_technical_records, valuables_field_records, valuables_instruments | valuables_survey_equipment, valuables_recording_equipment |
 | ballast | Freight cases and cargo packing | town_textiles, valuables_transit_cases, valuables_reinforced_cases | valuables_textile_supplies, valuables_fuel_supplies |
-| beanstalk | Field samples and laboratory containment | valuables_research_samples, valuables_sample_carriers | valuables_filtration, documents_research |
+| beanstalk | Field samples and laboratory containment | valuables_technical_records, valuables_research_samples, valuables_sample_carriers | valuables_filtration, documents_research |
 | boss | Ordnance and protective equipment | valuables_ordnance_salvage, valuables_armour_panels | valuables_secured_cases, valuables_military_cases |
 | brass | Reloading components and ammunition storage | powder, valuables_military_cases, maintenance | valuables_drivers_wrenches, valuables_equipment_pouches |
 | carbon | Historical documents and technical records | documents_field, documents_technical, documents_research, valuables_technical_records | valuables_printed_material, valuables_recording_equipment |
 | cleaner | Storage upkeep and discreet containers | valuables_cleaning_supplies, valuables_secured_cases | valuables_transit_cases, valuables_workshop_consumables |
-| egghead | Laboratory containment and research reagents | valuables_medical_equipment, valuables_filtration, valuables_research_injectors_a, valuables_research_injectors_b, valuables_research_samples | valuables_instruments |
+| egghead | Laboratory containment and research reagents | valuables_technical_records, valuables_medical_equipment, valuables_filtration, valuables_research_injectors_a, valuables_research_injectors_b, valuables_research_samples | valuables_instruments |
 | gasket | Generator parts and camp electrics | heavy_components, engine_care, valuables_electrical_supplies | fuel, repair_electrical |
 | haggler | Resale curios and small valuables | small_valuables, valuables_decorative_valuables, statues | valuables_personal_effects, valuables_transit_cases |
-| intern | Detector calibration and survey equipment | field_instruments, valuables_survey_equipment, valuables_sample_carriers | batteries, valuables_technical_records |
+| intern | Detector calibration and survey equipment | valuables_technical_records, field_instruments, valuables_survey_equipment, valuables_sample_carriers | batteries, valuables_technical_records |
 | jitters | Clinical supplies and trauma equipment | valuables_clinical_supplies, valuables_trauma_supplies, valuables_medical_equipment | valuables_filtration, valuables_research_samples |
 | latch | Workshop tools and fabrication materials | valuables_workshop_tools, valuables_cutting_tools, valuables_workshop_consumables | valuables_armour_panels, valuables_protective_textiles |
-| ledger | Consignment paperwork and secure dispatches | valuables_office_records, administrative_documents, valuables_secured_cases | valuables_transit_cases, valuables_field_records |
+| ledger | Consignment paperwork and secure dispatches | valuables_office_records, administrative_documents, valuables_secured_cases, valuables_field_records, valuables_printed_material | valuables_transit_cases, valuables_technical_records |
 | mute | Radio infrastructure and network components | valuables_radio_components, valuables_radio_equipment, small_electronics | valuables_flash_media, valuables_portable_power |
 | old-timer | Trail repairs and camp supplies | field_maintenance, valuables_fuel_supplies | valuables_cutting_tools, valuables_textile_supplies |
 | quartermaster | Field issue kits and military packing | valuables_equipment_pouches, valuables_protective_textiles, valuables_military_cases | administrative_documents, valuables_armour_panels |
-| smartass | Computer hardware and data media | small_electronics, valuables_computer_parts, valuables_portable_computers, valuables_control_electronics, valuables_flash_media | valuables_electronic_components, valuables_technical_records |
+| smartass | Computer hardware and data media | small_electronics, batteries, valuables_technical_records, valuables_computer_parts, valuables_portable_computers, valuables_control_electronics, valuables_flash_media | valuables_electronic_components, valuables_technical_records |
 | spicy-lemon | Kitchen stores and cooking fuel | valuables_provisions, fuel | cleaning, valuables_fuel_supplies |
-| spool | Receivers, communications parts and recordings | consumer_electronics, radio_components, valuables_recording_equipment | valuables_portable_power, valuables_electrical_supplies |
-| spoor | Hunting equipment care and field observations | maintenance, valuables_field_records | valuables_cutting_tools, valuables_instruments |
+| spool | Receivers, communications parts and recordings | consumer_electronics, radio_components, valuables_recording_equipment, fasteners, repair_electrical, valuables_repair_parts | valuables_portable_power, valuables_electrical_supplies |
+| spoor | Hunting equipment care and field observations | maintenance, valuables_field_records, valuables_cutting_tools | valuables_cutting_tools, valuables_instruments |
 | suture | Cloth, protective layers and sewing supplies | valuables_textile_supplies, valuables_protective_textiles | valuables_cutting_tools, valuables_armour_panels |
-| technut | Precision tools and mechanical repair parts | valuables_repair_parts, valuables_drivers_wrenches, basic_tools, advanced_parts, specialty_tools | valuables_workshop_consumables, valuables_electrical_supplies |
-| vesper | Expedition instruments and field preparation | valuables_instruments, valuables_survey_equipment, field_maintenance | valuables_sample_carriers, valuables_equipment_pouches |
+| technut | Precision tools and mechanical repair parts | workshop_supplies, adhesives, fasteners, repair_electrical, town_textiles, valuables_repair_parts, valuables_drivers_wrenches, basic_tools, advanced_parts, specialty_tools | valuables_workshop_consumables, valuables_electrical_supplies |
+| vesper | Expedition instruments and field preparation | valuables_instruments, valuables_survey_equipment, field_maintenance, valuables_equipment_pouches, valuables_cutting_tools | valuables_sample_carriers, valuables_equipment_pouches |
 | wake | Personal effects and recovered belongings | valuables_equipment_pouches, valuables_personal_effects, small_valuables | valuables_office_records, valuables_transit_cases |
+
+## Hand-in modes
+
+The first 20% of actual unlocks in each branch, rounded up, are category-only. Stock intermissions are category-wide. Later ordinary deliveries use a specific final slot with category totals in any preceding slots. Each category saves 3–4 accepted types per character. Quantity-bearing valuables use spawn-sized batches; nuts and bolts are offered together. Completed progress and saved specific rolls are retained.
+
+| Contact | Opening category-only unlocks | Category slots | Specific slots |
+| --- | ---: | ---: | ---: |
+| atlas | 4 | 20 | 4 |
+| ballast | 4 | 17 | 9 |
+| beanstalk | 4 | 54 | 11 |
+| boss | 2 | 24 | 8 |
+| brass | 10 | 109 | 36 |
+| carbon | 4 | 25 | 15 |
+| cleaner | 4 | 17 | 9 |
+| egghead | 1 | 11 | 2 |
+| gasket | 9 | 116 | 28 |
+| haggler | 4 | 61 | 15 |
+| intern | 1 | 11 | 2 |
+| jitters | 7 | 48 | 11 |
+| latch | 3 | 40 | 11 |
+| ledger | 4 | 17 | 9 |
+| mute | 1 | 3 | 4 |
+| old-timer | 4 | 23 | 6 |
+| quartermaster | 3 | 42 | 10 |
+| smartass | 6 | 79 | 20 |
+| spicy-lemon | 8 | 92 | 22 |
+| spool | 3 | 32 | 7 |
+| spoor | 3 | 37 | 9 |
+| suture | 6 | 60 | 21 |
+| technut | 4 | 19 | 10 |
+| vesper | 4 | 53 | 13 |
+| wake | 11 | 69 | 13 |
 
 ## Every progression step
 
@@ -138,8 +170,10 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | beanstalk | v3/optics/nightforce/stock | Stock: acog +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | beanstalk | v3/optics/nightforce | Purchase: nightforce | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | boss | v3/helmets/helm_operator_rus_1 | Purchase: helm_operator_rus_1 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
+| boss | v3/helmets/gasmask_filter_military | Purchase: gasmask_filter_military | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/headwear_cs4 | Purchase: headwear_cs4 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/headwear_screen/stock | Stock: headwear_cs4 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| boss | v3/helmets/gasmask_filter_scientific | Purchase: gasmask_filter_scientific | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/headwear_screen | Purchase: headwear_screen | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/helm_sphere08 | Purchase: helm_sphere08 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | boss | v3/helmets/helm_sphere12/stock | Stock: helm_sphere08 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -237,6 +271,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | carbon | v3/ap-ammo/50aeap | Barter: 3 boxes 50ae for one box 50aeap | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | carbon | v3/ap-ammo/57x28ap | Barter: 3 boxes 57x28 for one box 57x28ap | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | carbon | v3/ap-ammo/145x114ap | Barter: 3 boxes 145x114 for one box 145x114ap | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| cleaner | v3/hideout/access | Initial hideout access at Cleaner | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | cleaner | v3/hideout/01 | Hideout improvements 1 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | cleaner | v3/hideout/02 | Hideout improvements 2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | cleaner | v3/hideout/03 | Hideout improvements 3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
@@ -385,11 +420,13 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | jitters | v3/bandages/medic_bandage_3 | Purchase: medic_bandage_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antirad/medic_antirad_1 | Purchase: medic_antirad_1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | jitters | v3/antirad/medic_antirad_2 | Purchase: medic_antirad_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| latch | v3/masks-headwear/gasmask_filter_civilian | Purchase: gasmask_filter_civilian | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_halfmask | Purchase: mask_halfmask | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_respirator/stock | Stock: mask_halfmask +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_respirator | Purchase: mask_respirator | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_gp5/stock | Stock: mask_respirator +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_gp5 | Purchase: mask_gp5 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| latch | v3/masks-headwear/gasmask_filter_military | Purchase: gasmask_filter_military | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/mask_eo20 | Purchase: mask_eo20 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | latch | v3/masks-headwear/helm_operator_rus_2/stock | Stock: mask_eo20 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | latch | v3/masks-headwear/helm_operator_rus_2 | Purchase: helm_operator_rus_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -402,9 +439,11 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | latch | v3/masks-headwear/mask_xm40/stock | Stock: headwear_cs2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_xm40 | Purchase: mask_xm40 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m40/stock | Stock: mask_xm40 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| latch | v3/masks-headwear/gasmask_filter_scientific | Purchase: gasmask_filter_scientific | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m40 | Purchase: mask_m40 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m50/stock | Stock: mask_m40 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | latch | v3/masks-headwear/mask_m50 | Purchase: mask_m50 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| ledger | v3/hideout/access | Initial hideout access at Ledger | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | ledger | v3/hideout/01 | Hideout improvements 1 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | ledger | v3/hideout/02 | Hideout improvements 2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | ledger | v3/hideout/03 | Hideout improvements 3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -431,6 +470,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | old-timer | v3/melee/sledgehammer/stock | Stock: hatchet +1 total; Stock: machete +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/melee/sledgehammer | Purchase: fireaxe; Purchase: fubar; Purchase: sledgehammer | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | old-timer | v3/cooking/hightiercooker | Purchase: hightiercooker | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| old-timer | v3/hidestashers/hidestasher_cutlery | Purchase: hidestasher_cutlery | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/hidestashers/hidestasher_cleaningkit | Purchase: hidestasher_cleaningkit | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/hidestashers/hidestasher_shovel | Purchase: hidestasher_shovel | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | quartermaster | v3/nato-rifles/rugermini14 | Purchase: rugermini14 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
@@ -627,30 +667,18 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | suture | v3/suit-variants/suit_seva | Conversion: suit_seva_anarchist; Conversion: suit_seva_authority; Conversion: suit_seva_ecologist; Conversion: suit_seva_fanatic; Conversion: suit_seva_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-variants/suit_skat10 | Conversion: suit_skat10_anarchist; Conversion: suit_skat10_authority; Conversion: suit_skat10_ecologist; Conversion: suit_skat10_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-variants/suit_skat9 | Conversion: suit_skat9_anarchist; Conversion: suit_skat9_authority; Conversion: suit_skat9_ecologist; Conversion: suit_skat9_fanatic; Conversion: suit_skat9_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_anorak | Stock: suit_anorak +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_mailjacket | Purchase: suit_mailjacket | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_trenchcoat_black/stock | Stock: suit_mailjacket +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_trenchcoat_black | Purchase: suit_trenchcoat_black; Purchase: suit_trenchcoat_brown; Purchase: suit_trenchcoat_green; Purchase: suit_trenchcoat_tan | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_sunrise/stock | Stock: suit_trenchcoat_black +1 total; Stock: suit_trenchcoat_brown +1 total; Stock: suit_trenchcoat_green +1 total; Stock: suit_trenchcoat_tan +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_sunrise | Purchase: suit_sunrise | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_io7a/stock | Stock: suit_sunrise +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_io7a | Purchase: suit_io7a | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_cs1 | Purchase: suit_cs1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_wind/stock | Stock: suit_cs1 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_wind | Purchase: suit_wind | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_ps5m/stock | Stock: suit_wind +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_ps5m | Purchase: suit_ps5m | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_cs2/stock | Stock: suit_ps5m +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_cs2 | Purchase: suit_cs2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_nbc/stock | Stock: suit_cs2 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_nbc | Purchase: suit_nbc | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| technut | v3/suits/suit_berill/stock | Stock: suit_nbc +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_berill | Purchase: suit_berill | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_cs3/stock | Stock: suit_berill +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_cs3 | Purchase: suit_cs3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_skat10/stock | Stock: suit_cs3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_skat10 | Purchase: suit_skat10 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_skat9/stock | Stock: suit_skat10 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_skat9 | Purchase: suit_skat9 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/painting/painting | Suit painting | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | vesper | v3/pact-rifles/saigasemi545 | Purchase: saigasemi545 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
@@ -750,6 +778,8 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | shortdot | beanstalk | v3/optics/shortdot | beanstalk |
 | trijiconrmr | beanstalk | v3/red-dots/trijiconrmr | beanstalk |
 | tundrasuppressor | beanstalk | v3/suppressors/tundrasuppressor | beanstalk |
+| gasmask_filter_military | boss | v3/helmets/gasmask_filter_military | latch |
+| gasmask_filter_scientific | boss | v3/helmets/gasmask_filter_scientific | latch |
 | headwear_cs4 | boss | v3/helmets/headwear_cs4 | boss |
 | headwear_pracs | boss | v3/helmets/headwear_pracs | boss |
 | headwear_psz12 | boss | v3/helmets/headwear_psz12 | boss |
@@ -857,6 +887,9 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | medic_stimpak_1 | jitters | v3/stimpaks/medic_stimpak_1 | jitters |
 | medic_stimpak_2 | jitters | v3/stimpaks/medic_stimpak_2 | jitters |
 | medic_stimpak_3 | jitters | v3/stimpaks/medic_stimpak_3 | jitters |
+| gasmask_filter_civilian | latch | v3/masks-headwear/gasmask_filter_civilian | latch |
+| gasmask_filter_military | latch | v3/masks-headwear/gasmask_filter_military | latch |
+| gasmask_filter_scientific | latch | v3/masks-headwear/gasmask_filter_scientific | latch |
 | headwear_cs1 | latch | v3/masks-headwear/headwear_cs1 | latch |
 | headwear_cs2 | latch | v3/masks-headwear/headwear_cs2 | latch |
 | helm_operator_rus_2 | latch | v3/masks-headwear/helm_operator_rus_2 | latch |
@@ -874,6 +907,7 @@ At least 75% of requested units stay with the contact's core work. Only the smal
 | fubar | old-timer | v3/melee/sledgehammer | old-timer |
 | hatchet | old-timer | v3/melee/hatchet | old-timer |
 | hidestasher_cleaningkit | old-timer | v3/hidestashers/hidestasher_cleaningkit | old-timer |
+| hidestasher_cutlery | old-timer | v3/hidestashers/hidestasher_cutlery | old-timer |
 | hidestasher_shovel | old-timer | v3/hidestashers/hidestasher_shovel | old-timer |
 | hightiercooker | old-timer | v3/cooking/hightiercooker | old-timer |
 | knife2 | old-timer | v3/knives/knife2 | old-timer |

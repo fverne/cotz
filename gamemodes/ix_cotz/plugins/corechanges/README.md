@@ -1,5 +1,12 @@
 # COTZ configuration defaults
 
+`sv_vendorcash.lua` disables NPC cash limits through the existing vendor use/trade hooks, including
+standard Helix vendors with legacy saved balances. Both endpoints dispatch the trade hook before
+checking vendor funds. The hooks clear the NPC balance and return nothing, preserving access and
+weight checks. Advanced vendors also disable cash accounting in their owning implementation.
+Player purchase costs and sale payouts remain active. Verify both vendor classes with
+`luatex --luaonly tests/helix_vendor_trade_spec.lua` and live multiplayer selling after restart.
+
 `sh_defaults.lua` contains the approved local installation's saved Helix settings as repository
 fallbacks, including its fonts, inventory dimensions, weight limit, starting date and spawn counts.
 The default inventory is 7 columns wide and 11 rows high.
@@ -33,11 +40,15 @@ Lowered hands right-click on a player toggles passage through other players. Rig
 while lowered to switch it off. The `cotzHandsPassage` character data flag is saved immediately and
 restored after loadout, including reconnects, respawns and server restarts. Existing characters default
 to disabled; no saved data migration is needed. Switching characters uses that character's own setting.
-`sh_handspassage.lua` uses `COLLISION_GROUP_PASSABLE_DOOR` and restores the previous collision group.
-The NWBool only replicates the toggle; player passage no longer uses `ShouldCollide` or a client proxy.
+`sh_handspassage.lua` uses a shared `ShouldCollide` rule for player pairs when either player has passage
+enabled. Collision groups stay unchanged: changing only the mover's group does not change the group
+used by player movement traces. The server and client cache the toggle and call `CollisionRulesChanged`
+when it changes. A client NWBool proxy applies incoming values before invalidating the collision cache;
+newly networked players initialize from their replicated value. Existing saved preferences are retained.
+Collision updates ignore invalid entities received by the proxy during client initialization or removal.
 Disabling is refused while a normal movement hull trace starts solid or another living, solid player's
 standing/crouched hull overlaps, including players with passage enabled. Move clear and try again.
 If a loadout requests disabling while overlapping, a short retry restores collisions once clear without
 changing the saved preference. There is no expiry timer. Raised-hand pushing is unchanged.
 Run `luatex --luaonly tests/hands_passage_spec.lua`, then verify with two clients, props, doors and NPCs,
-both movement directions, crouching, character switches and reconnect/restart persistence.
+both movement directions, crouching, joining before character load, character switches and reconnect/restart persistence.

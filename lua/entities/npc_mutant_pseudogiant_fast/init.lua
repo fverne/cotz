@@ -51,6 +51,10 @@ ENT.FBR = 15
 ENT.FBRAP = 5
 ENT.BR = 12
 
+ENT.navigationLeapRange = 1200
+ENT.navigationLeapMinRange = 300
+ENT.navigationShortLeapRange = 200
+
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant.mdl"
 	self:STALKERNPCInit(Vector(-48,-48,70),MOVETYPE_STEP)
@@ -201,7 +205,7 @@ end
 function ENT:STALKERNPCDistanceForMeleeTooBig() 
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < 200 then
+		if distance < self.navigationShortLeapRange then
 			if(self.CanJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 				
@@ -214,7 +218,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			end
 		end
 
-		if (distance > 300 and distance < 1200) then
+		if (distance > self.navigationLeapMinRange and distance < self.navigationLeapRange) then
 			if(self.CanBigJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 

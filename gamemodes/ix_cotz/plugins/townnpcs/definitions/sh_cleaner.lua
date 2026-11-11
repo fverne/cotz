@@ -84,15 +84,34 @@ PLUGIN:Register("cleaner", {
 
 	progression = {
 		{
+			id = "v3/hideout/access",
+			branch = "hideout-access",
+			name = "Initial hideout access",
+			kind = "delivery",
+			requires = {},
+			briefing = "Want a room here in Garbage? Bring me one sledgehammer. Unequip it before handing it over. Then you can choose from the available locations. Storage improvements are a separate arrangement; let's settle the room first.",
+			completion = "Sledgehammer received. You can claim a room at the available Garbage locations. Choose one that suits you; I don't need the reasons.",
+			requirements = {
+				{pool = "hideout_access_sledgehammer", quantity = 1, mode = "any"},
+			},
+			services = {
+				{id = "cleanerHideoutAccess", name = "Initial hideout access at Cleaner"},
+			},
+			branchIndex = 1,
+			branchLength = 1,
+			acquisitionMaps = {"rp_garbage_cotz"},
+			categoryOnly = true,
+		},
+		{
 			id = "v3/hideout/01",
 			branch = "hideout",
 			name = "Hideout improvements 1",
 			kind = "delivery",
-			requires = {},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			requires = {"v3/hideout/access"},
+			briefing = "Want more storage options in your Garbage room? Bring this supply order. It opens the first paid container installations. The room's initial general crate is separate. Read the terms before you start bringing parcels; I won't guess which arrangement you meant.",
+			completion = "First container purchases are open. Supplies received. The starter crate remains included with a new room.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 1},
+				{pool = "town_expansion_8000e56a4250", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "cleanerHideout1", name = "Hideout improvements 1"},
@@ -101,6 +120,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_garbage_cotz"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 1,
 		},
 		{
@@ -109,10 +129,10 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 2",
 			kind = "delivery",
 			requires = {"v3/hideout/01"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "Next storage tier, and the first paid floor allowance for two more loose items. The supplies are listed here. I don't need an account of what you're keeping. I need the order complete.",
+			completion = "The next storage tier and first floor allowance are available to purchase. Your contents stay your business.",
 			requirements = {
-				{pool = "town_expansion_7e1f4a0cb741", quantity = 1},
+				{pool = "town_expansion_c1f3ccbfe4fc", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "cleanerHideout2", name = "Hideout improvements 2"},
@@ -121,6 +141,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 2,
 		},
 		{
@@ -129,10 +150,10 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 3",
 			kind = "delivery",
 			requires = {"v3/hideout/02"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "This delivery opens another storage tier and paid furnishings. Decide what you want once the options are available. I have no interest in explaining your choice of chair to anybody else.",
+			completion = "Storage and furnishing purchases are open. Put the delivery on the clear side and leave it there.",
 			requirements = {
-				{pool = "town_expansion_a7ec3c9bdcd4", quantity = 1},
+				{pool = "town_expansion_c1f3ccbfe4fc", quantity = 1, mode = "any"},
 			},
 			services = {
 				{id = "cleanerHideout3", name = "Hideout improvements 3"},
@@ -141,6 +162,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
 			requirementPolicy = 4,
+			categoryOnly = true,
 			hideoutLevel = 3,
 		},
 		{
@@ -149,10 +171,10 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 4",
 			kind = "delivery",
 			requires = {"v3/hideout/03"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "The next request opens further storage and the second paid floor allowance. Two more loose items if you buy that allowance. More room on the floor isn't an arrangement for me to look after what you leave on it.",
+			completion = "The next storage tier and second floor allowance can be bought. This delivery is finished.",
 			requirements = {
-				{pool = "town_expansion_7e1f4a0cb741", quantity = 1},
+				{pool = "town_expansion_c463135f111b", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout4", name = "Hideout improvements 4"},
@@ -161,6 +183,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 4,
 		},
 		{
@@ -169,11 +192,11 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 5",
 			kind = "delivery",
 			requires = {"v3/hideout/04"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "For the next storage tier, bring these supplies. Keep the wet things away from the paperwork. That instruction isn't an invitation to describe the weather for ten minutes.",
+			completion = "Another storage tier is available to buy. The paperwork is still dry.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 2},
-				{pool = "town_expansion_3d49a06eea09", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_5508561e2495", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout5", name = "Hideout improvements 5"},
@@ -182,6 +205,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 5,
 		},
 		{
@@ -190,11 +214,11 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 6",
 			kind = "delivery",
 			requires = {"v3/hideout/05"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "This order opens the next storage purchases. I want the listed materials. If you have something else to sell, we'll discuss that separately instead of discovering it in the middle of the delivery.",
+			completion = "The next storage tier is open. Everything received belongs to this arrangement.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 2},
-				{pool = "town_expansion_40c144daf329", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_fc9193c43ae1", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout6", name = "Hideout improvements 6"},
@@ -203,6 +227,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 6,
 		},
 		{
@@ -211,11 +236,11 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 7",
 			kind = "delivery",
 			requires = {"v3/hideout/06"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "Further storage access requires this delivery. Take the list. You can read it here without agreeing to anything; I'd rather you decide before taking a task you don't want.",
+			completion = "The next storage purchases are available. You've completed what you agreed to bring.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 2},
-				{pool = "town_expansion_25638ac97f91", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_fc9193c43ae1", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout7", name = "Hideout improvements 7"},
@@ -224,6 +249,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 7,
 		},
 		{
@@ -232,11 +258,11 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 8",
 			kind = "delivery",
 			requires = {"v3/hideout/07"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "For the next room-storage tier, complete this order. A parcel doesn't become less awkward because its owner has stopped mentioning it. Bring the supplies while you still know what you've promised.",
+			completion = "The next tier is available for purchase. No outstanding part of this order remains.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 2},
-				{pool = "town_expansion_40c144daf329", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 2, mode = "any"},
+				{pool = "town_expansion_609694bab68e", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout8", name = "Hideout improvements 8"},
@@ -245,6 +271,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 8,
 		},
 		{
@@ -253,12 +280,12 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 9",
 			kind = "delivery",
 			requires = {"v3/hideout/08"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "This is the next storage request. Same return point, full list. You don't have to leave the supplies for an imagined recipient or tell anyone else what we're arranging.",
+			completion = "Another storage tier is open to buy. The delivery stayed between the people handling it.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 3},
-				{pool = "town_expansion_4e87c268c4ff", quantity = 2},
-				{pool = "town_expansion_179ac8ebe912", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_c140ec1b36ff", quantity = 2, mode = "any"},
+				{pool = "town_expansion_3ee97809ffce", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout9", name = "Hideout improvements 9"},
@@ -267,6 +294,7 @@ PLUGIN:Register("cleaner", {
 			branchLength = 12,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 9,
 		},
 		{
@@ -275,12 +303,12 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 10",
 			kind = "delivery",
 			requires = {"v3/hideout/09"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "Bring these materials for the next storage purchase tier. I keep the terms where you can read them. If somebody has supplied a more entertaining version, deal with the one on the page.",
+			completion = "The next storage purchases are ready. The written arrangement is complete.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 3},
-				{pool = "town_expansion_ba61520e246c", quantity = 2},
-				{pool = "town_expansion_e01d346b3135", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_8280e5acf226", quantity = 2, mode = "any"},
+				{pool = "town_expansion_0fb1615accd2", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout10", name = "Hideout improvements 10"},
@@ -294,6 +322,7 @@ PLUGIN:Register("cleaner", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 10,
 		},
 		{
@@ -302,12 +331,12 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 11",
 			kind = "delivery",
 			requires = {"v3/hideout/10"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "One more storage request before the last. The list is here. I don't need you demonstrating how full your pack is by emptying the rest of it across my table.",
+			completion = "The next storage tier is open. You can put the remainder of your pack back where it belongs.",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 3},
-				{pool = "town_expansion_2199e252fb48", quantity = 2},
-				{pool = "town_expansion_7e6817c3ef2e", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 3, mode = "any"},
+				{pool = "town_expansion_8280e5acf226", quantity = 2, mode = "any"},
+				{pool = "town_expansion_afeb42da558e", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout11", name = "Hideout improvements 11"},
@@ -321,6 +350,7 @@ PLUGIN:Register("cleaner", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 11,
 		},
 		{
@@ -329,13 +359,13 @@ PLUGIN:Register("cleaner", {
 			name = "Hideout improvements 12",
 			kind = "delivery",
 			requires = {"v3/hideout/11"},
-			briefing = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
-			completion = "Leave them here. That settles this request.",
+			briefing = "The final storage tier needs this supply order. Complete it and the purchase becomes available. Finished business doesn't require a speech from either of us.",
+			completion = "Final Garbage storage purchases are open. That's the order complete. Anything else?",
 			requirements = {
-				{pool = "town_expansion_221493d7b15f", quantity = 4},
-				{pool = "town_expansion_4e87c268c4ff", quantity = 3},
-				{pool = "town_expansion_5ffe9c63cc87", quantity = 2},
-				{pool = "town_expansion_9a544edd6edd", quantity = 1},
+				{pool = "town_expansion_f7aa2d4db5d3", quantity = 4, mode = "any"},
+				{pool = "town_expansion_c140ec1b36ff", quantity = 3, mode = "any"},
+				{pool = "town_expansion_cc5babbdb781", quantity = 2, mode = "any"},
+				{pool = "town_expansion_d695ccfe3436", quantity = 1, mode = "random"},
 			},
 			services = {
 				{id = "cleanerHideout12", name = "Hideout improvements 12"},
@@ -349,6 +379,7 @@ PLUGIN:Register("cleaner", {
 				"rp_pripyat_remaster",
 			},
 			requirementPolicy = 4,
+			categoryOnly = false,
 			hideoutLevel = 12,
 		},
 	},

@@ -3,7 +3,7 @@ ITEM.description = "A meal made from a dog, cooked in the zone."
 ITEM.longdesc = "Chunks of Hellhound braised in a thick rich sauce, makes for an excellent meal. STALKERs rarely meet hellhounds, even more rare is taking one down, and so it is considered a delicacy."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_dog.mdl"
 
-ITEM.price = 3280
+ITEM.price = 1416
 ITEM.width = 1
 ITEM.height = 1
 

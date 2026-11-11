@@ -4,7 +4,7 @@ ITEM.longdesc = "Most stalkers keep their distance from this particular meal, ho
 	.. " Stories about what it does to the mind travel faster than recipes."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_flesh.mdl"
 
-ITEM.price = 960
+ITEM.price = 660
 ITEM.width = 1
 ITEM.height = 1
 

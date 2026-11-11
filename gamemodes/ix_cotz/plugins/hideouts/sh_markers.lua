@@ -2,10 +2,19 @@ local PLUGIN = PLUGIN
 
 PLUGIN.markerRoles = {
 	spawn = {name = "Player spawn", model = "models/props_junk/PopCan01a.mdl"},
-	exit = {name = "Exit / management", model = "models/props_c17/consolebox01a.mdl"},
-	container = {name = "Personal storage container", model = "models/props_junk/wood_crate001a.mdl"},
+	exit = {
+		name = "Exit / management",
+		model = "models/z-o-m-b-i-e/metro_ll/door/m_ll_door_final_cut_scene_01_2.mdl",
+	},
+	container = {
+		name = "Personal storage container",
+		model = "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+	},
 	vendor = {name = "Squad vendor", model = "models/props_c17/cashregister01a.mdl"},
-	storage = {name = "Legacy recovery storage", model = "models/props_junk/wood_crate001a.mdl"},
+	storage = {
+		name = "Legacy recovery storage",
+		model = "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+	},
 }
 
 function PLUGIN:ValidateMarkerSettings(role, slotID, recipeID)

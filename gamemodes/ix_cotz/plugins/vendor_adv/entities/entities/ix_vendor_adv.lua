@@ -208,12 +208,8 @@ function ENT:CanBuyFromPlayer(client, uniqueID)
 end
 
 function ENT:HasMoney(amount)
-	-- Vendor not using money system so they can always afford it.
-	if not self.money then
-		return true
-	end
-
-	return self.money >= amount
+	-- Legacy saved balances never limit NPC payouts.
+	return true
 end
 
 function ENT:SetAnim()
@@ -304,23 +300,19 @@ if SERVER then
 	end
 
 	function ENT:SetMoney(value)
-		self.money = value
+		self.money = nil
 
 		net.Start("ixVendorAdvMoney")
-		net.WriteUInt(value and value or -1, 16)
+		net.WriteUInt(65535, 16)
 		net.Send(self.receivers)
 	end
 
 	function ENT:GiveMoney(value)
-		if self.money then
-			self:SetMoney(self:GetMoney() + value)
-		end
+		-- Compatibility API: NPC trades only update the player's money.
 	end
 
 	function ENT:TakeMoney(value)
-		if self.money then
-			self:GiveMoney(-value)
-		end
+		-- Compatibility API: NPC trades only update the player's money.
 	end
 
 	function ENT:SetStock(uniqueID, value, character)
@@ -465,7 +457,7 @@ else
 end
 
 function ENT:GetMoney()
-	return self.money
+	return nil
 end
 
 function ENT:LoadTemplate(templateName)
@@ -501,7 +493,7 @@ function ENT:LoadTemplate(templateName)
 		self.items = items
 		self.factions = template.factions or self.factions
 		self.classes = template.classes or self.classes
-		self.money = template.money or self.money
+		self.money = nil
 		self.scale = template.scale or self.scale
 		self:SetBuyAll(template.buyAll or self:GetBuyAll())
 		self:SetSherpa(template.sherpa or self:GetSherpa())

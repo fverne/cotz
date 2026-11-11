@@ -8,7 +8,7 @@ ITEM.longdesc = "Since chimeras are considered one of the most dangerous creatur
 	.. " effective gun lubrication."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
-ITEM.price = 1560
+ITEM.price = 660
 ITEM.width = 1
 ITEM.height = 1
 

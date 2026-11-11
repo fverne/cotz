@@ -8,6 +8,36 @@ end
 
 function PLUGIN:ShouldCollide(ent1, ent2)
 	if ent1.IsSTALKERNPC and ent2.IsSTALKERNPC then return false end
+	if ent1:IsPlayer() and ent2:IsPlayer() and (ent1.cotzHandsPassage or ent2.cotzHandsPassage) then
+		return false
+	end
+end
+
+local function updateCollision(client, enabled)
+	-- NWVar proxies can receive a NULL entity during client initialization or removal.
+	if not IsValid(client) then return end
+
+	-- Proxies can run before GetNWBool exposes the new value. Cache the supplied value first.
+	client.cotzHandsPassage = enabled == true
+	client:SetCustomCollisionCheck(true)
+	client:CollisionRulesChanged()
+end
+
+if CLIENT then
+	local function initializePassage(client)
+		client:SetNWVarProxy(PASSAGE_KEY, function(entity, _, _, enabled)
+			updateCollision(entity, enabled)
+		end)
+		updateCollision(client, client:GetHandsPassage())
+	end
+
+	function PLUGIN:NetworkEntityCreated(entity)
+		if entity:IsPlayer() then initializePassage(entity) end
+	end
+
+	for _, client in player.Iterator() do
+		initializePassage(client)
+	end
 end
 
 if SERVER then
@@ -41,14 +71,12 @@ if SERVER then
 	end
 
 	local function applyPassage(client, enabled)
-		local group = client:GetCollisionGroup()
-		if enabled then
-			if group ~= COLLISION_GROUP_PASSABLE_DOOR then client.cotzHandsCollisionGroup = group end
-			client:SetCollisionGroup(COLLISION_GROUP_PASSABLE_DOOR)
-		elseif group == COLLISION_GROUP_PASSABLE_DOOR then
+		-- Restore groups left by the previous implementation during a Lua reload.
+		if client:GetCollisionGroup() == COLLISION_GROUP_PASSABLE_DOOR and client:GetHandsPassage() then
 			client:SetCollisionGroup(client.cotzHandsCollisionGroup or COLLISION_GROUP_PLAYER)
 			client.cotzHandsCollisionGroup = nil
 		end
+		updateCollision(client, enabled)
 		client:SetNWBool(PASSAGE_KEY, enabled)
 	end
 

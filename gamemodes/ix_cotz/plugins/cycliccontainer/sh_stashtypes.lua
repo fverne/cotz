@@ -240,6 +240,33 @@ PLUGIN.stashTypes =
 		"worldspawn_3"
 	},
 
+	["normal_cache_assorted_garbage_1"] = {
+		"task_reward_ammo_01_aphp",
+		"reward_consumable",
+	},
+	["normal_cache_assorted_garbage_2"] = {
+		"task_reward_ammo_02_small",
+	},
+	["normal_cache_assorted_garbage_3"] = {
+		"worldspawn_garbage_regular",
+		"worldspawn_garbage_regular",
+	},
+	["normal_cache_assorted_garbage_4"] = {
+		"reward_consumable",
+		"reward_consumable",
+	},
+	["normal_cache_assorted_garbage_5"] = {
+		"worldspawn_garbage_regular",
+		"reward_consumable",
+	},
+	["normal_cache_assorted_garbage_6"] = {
+		"reward_ammo_low",
+		"reward_consumable",
+	},
+	["normal_cache_assorted_garbage_7"] = {
+		"worldspawn_garbage_rare",
+	},
+
 	-- map2
 	["normal_cache_assorted_map2_1"] = {
 		"cache_ammo_pistol_tier2",

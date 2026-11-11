@@ -63,6 +63,8 @@ ENT.SuccVictim = nil
 TEMP_TargetDamage = 0
 distance = 0
 
+ENT.navigationLeapRange = 100
+
 function ENT:Initialize()
 	self.Model = "models/monsters/krovosos.mdl"
 	self:STALKERNPCInit(Vector(-28,-28,70),MOVETYPE_STEP)
@@ -183,6 +185,14 @@ function ENT:STALKERNPCThink()
 	-- JUMP END
 
 	-- SUCC
+	if self.IsSuccing ~= 0 and not IsValid(self.SuccVictim) then
+		self:STALKERNPCStopAllTimers()
+		self:STALKERNPCClearAnimation()
+		self.NextAbilityTime = CurTime() + 1
+		self.SuccVictim = nil
+		self.IsSuccing = 0
+	end
+
 	if self.succing1 < CurTime() && self.IsSuccing == 1 then
 		if(IsValid(self)&&self!=nil&&self!=NULL) then
 			self:EmitSound("Stalker.Bloodsucker.Feed")
@@ -209,7 +219,9 @@ function ENT:STALKERNPCThink()
 			self.NextAbilityTime = CurTime()+1
 
 			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-			self.SuccVictim:Freeze(false)
+			if IsValid(self.SuccVictim) and self.SuccVictim:IsPlayer() then
+				self.SuccVictim:Freeze(false)
+			end
 			self.SuccVictim = nil
 			self.IsSuccing = 0
 
@@ -225,7 +237,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 	if self.NextAbilityTime < CurTime() then
 		if(self.PlayingAnimation==false) then
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance < 100 then
+			if distance < self.navigationLeapRange then
 				if(self.CanJump<CurTime()) then
 					local TEMP_Rand = math.random(1,5)
 				
@@ -252,7 +264,9 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 						self.CanSuck = CurTime()+15
 
 						local target = self:GetEnemy()
-						target:Freeze(true)
+						if target:IsPlayer() then
+							target:Freeze(true)
+						end
 
 						self.SuccVictim = target
 
@@ -275,13 +289,13 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 end
 
 function ENT:STALKERNPCOnKilled()
-	if self.SuccVictim then
+	if IsValid(self.SuccVictim) and self.SuccVictim:IsPlayer() then
 		self.SuccVictim:Freeze(false)
 	end
 end
 
 function ENT:STALKERNPCRemove() 
-	if self.SuccVictim then
+	if IsValid(self.SuccVictim) and self.SuccVictim:IsPlayer() then
 		self.SuccVictim:Freeze(false)
 	end
 end
