@@ -9,6 +9,7 @@ ITEM.weight = 0.3
 ITEM.isGasmask = true
 ITEM.filterType = false
 ITEM.isHelmet = false
+ITEM.repairCostMultiplier = 1 / 3
 -- 
 ITEM.br = 0.01
 ITEM.fbr = 0

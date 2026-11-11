@@ -35,7 +35,7 @@ ITEM.canRepair = true
 local FULL_PROTECTION_DURABILITY = 80
 
 function ITEM:GetRepairCost()
-	return self.price ^ (1 / 3)
+	return self.price ^ (1 / 3) * (self.repairCostMultiplier or 1)
 end
 
 function ITEM:GetDurabilityScale()
