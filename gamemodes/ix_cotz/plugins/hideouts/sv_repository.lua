@@ -478,6 +478,7 @@ function PLUGIN:SerializeProp(entity, origin)
 	local physics = entity:GetPhysicsObject()
 	local data = {
 		class = entity:GetClass(),
+		placedBy = entity.cotzPlacedBy,
 		model = entity:GetModel(),
 		pos = entity:GetPos() - origin,
 		angles = entity:GetAngles(),
@@ -502,6 +503,7 @@ function PLUGIN:SerializeProp(entity, origin)
 end
 
 function PLUGIN:ApplyPropData(entity, data, origin)
+	entity.cotzPlacedBy = data.placedBy
 	entity:SetPos(origin + data.pos)
 	entity:SetAngles(data.angles)
 	entity:SetSkin(data.skin or 0)
@@ -525,6 +527,7 @@ function PLUGIN:SaveInstance(instance, callback)
 		return
 	end
 	if self.AuditVendor then self:AuditVendor(instance) end
+	if self.AuditContainers and not instance.saving then self:AuditContainers(instance) end
 	if instance.saving then
 		if callback then
 			callback(false)

@@ -172,6 +172,7 @@ function PLUGIN:Think()
 			if self.AuditPersonalFloorItems then self:AuditPersonalFloorItems(instance) end
 			self:AuditContainerAccess(instance)
 			if self.AuditVendor then self:AuditVendor(instance) end
+			if self.AuditContainers and not instance.saving then self:AuditContainers(instance) end
 		end
 	end
 	if self.AuditBuildingTools then self:AuditBuildingTools() end

@@ -52,6 +52,14 @@ PLUGIN.containerRecipes = {
 			{item = "value_container_injectorcase", width = 8, height = 6},
 		},
 	},
+	gear = {
+		name = "Suit and gear storage", filter = "gear",
+		tiers = {
+			{item = "value_container_parls", width = 3, height = 6, model = "models/props_c17/Lockers001a.mdl"},
+			{item = "value_container_parls", width = 4, height = 8, model = "models/props_c17/Lockers001a.mdl"},
+			{item = "value_container_parls", width = 5, height = 10, model = "models/props_c17/Lockers001a.mdl"},
+		},
+	},
 	weapon = {
 		name = "Weapon storage", filter = "weapon",
 		tiers = {

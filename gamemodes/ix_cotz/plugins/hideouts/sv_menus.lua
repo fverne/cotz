@@ -166,6 +166,7 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, 
 	local ok, reason
 	if action == 1 then ok, reason = self:PlaceSquadEntrance(client, record)
 	elseif action == 2 then ok, reason = self:ResetVendor(client, record)
+	elseif action == 15 then ok, reason = self:ResetHideoutLayout(client, record)
 	elseif action == 3 then ok, reason = self:SetAccessMode(client, record, value)
 	elseif action == 4 then ok, reason = self:UpgradeContainer(client, record, value, expectedTier)
 	elseif action == 5 then

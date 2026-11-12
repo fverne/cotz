@@ -519,6 +519,7 @@ function PLUGIN:PlayerSpawnedProp(client, model, entity)
 
 		return
 	end
+	entity.cotzPlacedBy = client:GetCharacter():GetID()
 	instance.props[entity] = true
 	self:TagEntity(instance, entity)
 end

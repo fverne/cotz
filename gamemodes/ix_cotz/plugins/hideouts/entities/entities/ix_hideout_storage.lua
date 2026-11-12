@@ -9,6 +9,7 @@ if SERVER then
 	function ENT:Initialize()
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetSolid(SOLID_VPHYSICS)
+		self:SetMoveType(MOVETYPE_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
 		local physics = self:GetPhysicsObject()
 		if IsValid(physics) then

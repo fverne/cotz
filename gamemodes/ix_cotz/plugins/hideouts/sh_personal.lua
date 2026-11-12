@@ -11,6 +11,7 @@ PLUGIN.personalUnlockSteps = {
 	ammo = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	medical = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	weapon = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+	gear = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	floor = {2, 4}, furnishing = {3},
 }
 PLUGIN.personalPriceMultiplier = 2.2
@@ -34,6 +35,14 @@ PLUGIN.personalContainerRecipes = {
 		name = "Medical cabinet", filter = "medical", price = 1000, item = "value_container_injectorcase",
 		sizes = {{4, 4}, {5, 4}, {5, 5}, {6, 5}, {6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8}, {9, 9}, {10, 9}},
 		models = {"models/props_interiors/medicalcabinet02.mdl", "models/props_wasteland/controlroom_storagecloset001a.mdl"},
+	},
+	gear = {
+		name = "Suit and gear locker", filter = "gear", price = 1400, item = "value_container_parls",
+		sizes = {
+			{6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8},
+			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
+		},
+		models = {"models/props_c17/Lockers001a.mdl", "models/props_wasteland/controlroom_storagecloset001b.mdl"},
 	},
 	weapon = {
 		name = "Weapon rack", filter = "weapon", price = 1400, item = "value_container_parls",

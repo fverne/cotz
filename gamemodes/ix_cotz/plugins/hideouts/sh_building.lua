@@ -29,10 +29,30 @@ function PLUGIN:GetHideoutEntityPermission(client, entity, property)
 	if SERVER then
 		local instance = self.instances[id]
 		if not instance or instance.state ~= "active" or instance.saving or memberID ~= id then return false end
-		return self:CanBuildInHideout(client) and (instance.props[entity] == true or instance.vendor == entity)
+		if not self:CanBuildInHideout(client) then return false end
+		if property == "remover" then return self:CanRemoveHideoutProp(client, entity) end
+		if entity.ixHideoutSlot and (instance.containers or {})[entity.ixHideoutSlot] == entity then
+			if (instance.operations or 0) > 0 then return false end
+			if entity.cotzContainerHeld and entity.cotzContainerHeld ~= client then return false end
+			return self:CanManageContainer(client, self:GetHideout(id), entity.ixHideoutSlot)
+		end
+
+		return instance.props[entity] == true or instance.vendor == entity
+	end
+	if property == "remover" then
+		return memberID == id and self:CanBuildInHideout(client) and self:CanRemoveHideoutProp(client, entity)
 	end
 
 	return memberID == id and self:CanBuildInHideout(client) and entity:GetNetVar("hideoutEditable", false)
+end
+
+function PLUGIN:CanRemoveHideoutProp(client, entity)
+	local character = client:GetCharacter()
+	if not character then return false end
+	if CLIENT then return entity:GetNetVar("hideoutPlacedBy") == character:GetID() end
+	local instance = self.instances[entity.ixHideout]
+
+	return instance ~= nil and instance.props[entity] == true and entity.cotzPlacedBy == character:GetID()
 end
 
 function PLUGIN:CharacterHasFlags(character, flags)
@@ -62,13 +82,19 @@ function PLUGIN:CanTool(client, trace, tool)
 		if self:CanBuildInHideout(client) then return false end
 		return
 	end
-	local allowed = self:GetHideoutEntityPermission(client, trace.Entity)
+	local allowed = self:GetHideoutEntityPermission(client, trace.Entity, tool)
 	if allowed == false then return false end
 	if allowed == true then
 		if trace.Entity:GetClass() == "ix_hideout_marker" then return end
 		if not self.furnishingTools[tool] then return false end
 		if trace.Entity:GetClass() == "ix_hideout_vendor" and tool == "remover" then return false end
+		if trace.Entity:GetClass() == "ix_hideout_storage" then return false end
 		if SERVER then
+			if tool == "remover" then
+				for _, entity in pairs(constraint.GetAllConstrainedEntities(trace.Entity)) do
+					if not self:GetHideoutEntityPermission(client, entity, "remover") then return false end
+				end
+			end
 			local instance = self.instances[trace.Entity.ixHideout]
 			if instance.vendor == trace.Entity then self:CloseShop(instance) end
 		end
@@ -84,6 +110,7 @@ function PLUGIN:CanProperty(client, property, entity)
 	if allowed == true then
 		if entity:GetClass() == "ix_hideout_marker" then return end
 		-- Helix's final gamemode handler denies these for non-admins. This narrow override is intentional.
+		if property == "remover" then return true end
 		return self.furnishingProperties[property] == true
 	end
 end
@@ -140,6 +167,14 @@ if SERVER then
 		if self:GetHideoutEntityPermission(client, entity) == false then return false end
 	end
 
+	function PLUGIN:OnPhysgunPickup(client, entity)
+		local instance = entity.ixHideout and self.instances[entity.ixHideout]
+		if instance and entity.ixHideoutSlot and (instance.containers or {})[entity.ixHideoutSlot] == entity then
+			entity.cotzContainerHeld = client
+			self:CloseStorage(instance)
+		end
+	end
+
 	function PLUGIN:PhysgunDrop(client, entity)
 		local instance = entity.ixHideout and self.instances[entity.ixHideout]
 		if instance and instance.vendor == entity then
@@ -147,9 +182,17 @@ if SERVER then
 			self:AuditVendor(instance)
 			self:Persist()
 		end
+		if instance and entity.ixHideoutSlot then
+			entity.cotzContainerHeld = nil
+			self:AuditContainers(instance)
+			if not self:Persist() then
+				client:Notify("Could not save the container position. The next hideout checkpoint will retry.")
+			end
+		end
 	end
 
 	function PLUGIN:CanPlayerHoldObject(client, entity)
+		if entity:GetClass() == "ix_hideout_storage" then return false end
 		if self:GetHideoutEntityPermission(client, entity) == false then return false end
 	end
 

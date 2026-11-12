@@ -43,13 +43,18 @@ travelling/destination labels match squads. Offline/expired sessions disappear f
 private squad rosters retain offline members. After 15 seconds without a successful refresh, cached
 remote entries show **STATUS UNAVAILABLE**, and their unverified maps cannot pass the local-area filter.
 Local characters continue to update directly from their real entities.
+Connected local players without a loaded character appear under their Steam name as
+**TRAVELLING**, until character selection completes. Temporary connection rows replace any
+cached character for that account and disappear on disconnect or character load.
 
 The public roster selects only visible, unexpired online/travelling sessions in the current schema.
 The source server applies `ShouldShowPlayerOnScoreboard` to presence; the client also applies that hook
 to local entities. Squad metadata comes from the squad plugin's `cotz/crossserver/roster-query` hook,
 which receives a MySQL query object and adds structured projection and join calls. No private squad member list is broadcast.
-Remote rows use saved character names/PDA portraits and have no local voice, Steam profile or
-entity-based actions. Local rows retain their existing actions and reputation display.
+Remote rows use saved character names/PDA portraits. Right-click offers the account's Steam profile
+using its SteamID64 from the character owner column. Voice mute and entity-based actions remain
+available on local rows. The roster includes this public account ID as a string; deploy the updated
+reader and writer together on every map. No database migration is required.
 
 Snapshots are polled every five seconds, sent only when changed or needed by a newly loaded character,
 and split into typed chunks of at most 32 records. Clients replace the roster atomically after the
@@ -76,7 +81,8 @@ voice actions and portrait/status layout at different resolutions.
 
 STALKERnet now lists active characters by descending reputation, with character ID breaking ties.
 Filters retain the overall position. Select a row for its PDA dossier; right-click local characters
-for voice mute and plugin context actions. The dossier moves below the list on narrow panels.
+for voice mute and plugin context actions, or any character for its Steam profile.
+The dossier moves below the list on narrow panels.
 
 Personal mutant and human NPC kills and successfully handed-in tasks are stored in character data
 under `leaderboardStats`. These counters begin with this update; nearby task kill credit does not

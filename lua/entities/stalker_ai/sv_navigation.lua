@@ -12,6 +12,8 @@ local MIN_GROUND_NORMAL = 0.7
 local SAFE_POSITION_INTERVAL = 5
 local RELOCATION_RANGE_SQR = 512 ^ 2
 local PLAYER_SAFE_RANGE_SQR = 512 ^ 2
+local WITHDRAW_DISTANCE_SQR = 3000 ^ 2
+local WITHDRAW_CANDIDATES = 4
 local BUSY_FIELDS = {
 	"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing",
 	"IsSpitting", "SpecialAttack", "IsWarping", "IsThrow1", "IsThrow2", "IsBlast", "IsStamAttack",
@@ -129,20 +131,34 @@ function ENT:STALKERNPCApproachUnreachable(enemy, recovery)
 end
 
 function ENT:STALKERNPCWithdrawUnreachable(recovery)
-	local origin = self.cotzCombatPack and self.cotzCombatPack.origin
-	if origin and self:GetPos():DistToSqr(origin) > ARRIVAL_SQR and takeBudget() then
-		local ground = self:STALKERNPCNavigationGround(origin)
+	if not takeBudget() then return end
+	local nodes = ix and ix.eventController and ix.eventController.GetSpawnNodes
+		and ix.eventController:GetSpawnNodes()
+	local position = self:GetPos()
+	local enemyDistance = position:DistToSqr(recovery.position)
+	local candidates = {}
+	for _, node in ipairs(nodes or {}) do
+		local distance = position:DistToSqr(node)
+		if distance >= WITHDRAW_DISTANCE_SQR and node:DistToSqr(recovery.position) > enemyDistance then
+			for index = 1, WITHDRAW_CANDIDATES do
+				if not candidates[index] or distance < candidates[index].distance then
+					table.insert(candidates, index, {position = node, distance = distance})
+					break
+				end
+			end
+			if #candidates > WITHDRAW_CANDIDATES then table.remove(candidates) end
+		end
+	end
+
+	for _, candidate in ipairs(candidates) do
+		local ground = self:STALKERNPCNavigationGround(candidate.position)
 		if ground then
 			self:STALKERNPCMoveToPosition(ground, true)
 
 			return
 		end
 	end
-
-	-- Let the engine choose an actual cover route when the encounter origin is unavailable.
-	self.cotzNavigationIntent = recovery.position
-	self.cotzNavigationIntentGrounded = nil
-	self:SetSchedule(SCHED_TAKE_COVER_FROM_ENEMY)
+	self:STALKERNPCHoldNavigationPosition()
 end
 
 local function hullInPVS(view, position, mins, maxs)

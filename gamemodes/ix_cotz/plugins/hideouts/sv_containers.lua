@@ -77,6 +77,7 @@ end
 function PLUGIN:IsNearUtility(client, entity)
 	local instance = IsValid(entity) and self.instances[entity.ixHideout]
 	if not instance or instance.state ~= "active" or instance.saving then return false end
+	if entity.cotzContainerHeld then return false end
 	local record = self:GetHideout(instance.id)
 
 	return self.members[client] == instance.id and self:CanAccess(client, record)
@@ -144,12 +145,13 @@ function PLUGIN:RestoreStorage(instance, callback)
 			local tier = recipe and recipe.tiers[slot.tier or 0]
 			if record.ownerType ~= "squad" and not tier then continue end
 			local model = slot.model or tier and (tier.model or ix.item.list[tier.item] and ix.item.list[tier.item].model)
-			local entity = self:CreateUtility(instance, "ix_hideout_storage", definition.pos,
-				model or "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl")
+			local placement = slot.transform or definition
+			local entity = self:CreateUtility(instance, "ix_hideout_storage", placement.pos,
+				model or "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl", placement.angles)
 			if not IsValid(entity) then callback(false, "Could not create a storage spot.") return end
 			entity.ixHideoutSlot = slotID
-			entity:SetAngles(definition.angles or angle_zero)
 			instance.containers[slotID] = entity
+			self:RememberContainerPosition(instance, slotID, entity)
 		end
 		if record.ownerType == "squad" then
 			self:RestoreShop(instance, callback)
@@ -288,6 +290,10 @@ function PLUGIN:ContainerAccepts(record, slotID, item)
 	if recipe.filter == "ammo" then return item.isAmmo == true end
 	if recipe.filter == "medical" then return item.base == "base_aid" end
 	if recipe.filter == "weapon" then return item.isWeapon == true end
+	if recipe.filter == "gear" then
+		return item.isBodyArmor == true or item.base == "base_gear" or item.isHelmet == true
+			or item.isGasmask == true or item.isBackpack == true or item.isExoskeleton == true
+	end
 
 	return recipe.filter == "general"
 end

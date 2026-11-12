@@ -294,6 +294,33 @@ Personal owners who have purchased furnishing access receive the same contextual
 building privileges. Personal containers keep their existing owner/private/invited-guest sharing rules.
 The personal room limit applies to new grants on this map and never removes rooms already owned.
 
+### Container layout and prop removal
+
+The marker editor includes a **Suit and gear storage** recipe (`gear`) for suits, helmets, masks,
+backpacks and exoskeleton frames. Inventory-bearing bags remain excluded. Add a new permanent
+container slot with this recipe to the authored shell; existing slots keep their recipes and contents.
+Personal lockers use the existing twelve hideout improvement gates and trader purchase flow.
+Squad lockers use the existing three container hand-ins.
+
+Players with furnishing/building access can move and freeze containers with the physgun. Squad
+container rank restrictions also apply to movement. Container position and rotation survive checkpoints,
+unloading and reallocation. Storage sessions close on pickup and cannot reopen while a container is held.
+Movement outside the interior bounds returns the container to its last valid position. Containers cannot
+be removed, duplicated or picked up with the use key or gravity gun. The legacy recovery fixture stays fixed.
+
+Use the context menu **Remove** action or remover tool to remove props placed by the current character.
+The placing character is saved with each furnishing, including squad furnishings. Another character's
+props and the template shell remain protected. Old personal furnishings belong to the room owner;
+old squad furnishings without a recorded placer stay protected because their original owner is unknown.
+
+**Reset hideout layout** is available from the entrance and interior management menus, with a confirmation.
+It restores the containers the owner/officer can manage to their template positions and rotations, freezes
+them, and removes only that character's furnishings. It also works at the entrance while the room is
+unloaded. Container inventories, upgrades, access settings, loose items, shell and squad vendor remain
+intact. Leader-only containers retain their layout when an officer resets the room. The reset is blocked
+while saving, loading, trading/upgrading, or holding a container. If the configuration cannot be saved,
+the current layout is retained. Vendor position keeps its separate reset control.
+
 ### Vendor and treasury
 
 The vendor is an animated Sherpa quartermaster derived from the advanced vendor entity, using the
@@ -338,7 +365,7 @@ Players do not need chat commands. All hideout commands are restricted to admini
 | Interaction | Available actions |
 | --- | --- |
 | Use the entrance keypad or squad entrance | Enter an accessible hideout; owners/officers can manage access and invitations |
-| Use the interior exit | Leave; owners/officers can manage invitations/access and reset the vendor |
+| Use the interior exit | Leave; owners/officers can manage invitations/access, reset the layout and reset the vendor |
 | Use a container | Personal owner: open/set sharing; squad officer: open/install/upgrade/set rank; other permitted users: open |
 | Use the squad vendor | Dialogue opens trading, donations and personal bank; stock Options exposes authorized management and treasury actions |
 | Tab → Squads → Squad hideout | Leaders/officers can place the first entrance or relocate it on this map |
@@ -464,6 +491,9 @@ teleports. Administrators can enter personal and squad hideouts without an invit
 the entrance while noclipping; occupancy audits do not eject administrators visiting an interior directly.
 Administrator keypad menus list only their own rooms and rooms that explicitly invite their current character.
 Normal loading, persistence and disabled-room checks still apply. Generic world-item persistence excludes hideout floor items.
+Blowout temporary-item cleanup also excludes tagged hideout floor items, including template seeds and
+player drops. These items retain `bTemporary` for the separate hideout persistence path; the flag alone
+does not make them disposable world loot. Check with `luatex --luaonly tests/blowout_items_spec.lua`.
 
 AdvDupe integration retains its existing public signatures and historical
 DepawnAdvDupe2Dupe helper. Optional per-paste validation, completion callbacks,
@@ -484,6 +514,8 @@ using the system Lua shared library. Feature cases use the installed query build
 transactions. Coverage includes ownership/access, per-container sharing and upgrades, concurrent
 purchases, rollback, saved wallet changes, treasury overdrafts/demotion, vendor reset, stable artifact
 destinations and cross-map arrival/rejection, alongside existing allocation and item persistence cases.
+Layout cases cover gear filtering and progression, placer ownership across reloads, rank-restricted movement,
+container checkpoints/reallocation, and loaded/unloaded resets including failed saves and stale sessions.
 Menu cases load the actual menu server module and cover container hand-ins/sharing/opening, invitation
 updates, guest exit, initial entrance placement, vendor reset, role/location/character changes, and
 administrator-only command counterparts. Shared-storage cases also exercise squad rank restrictions,
@@ -509,3 +541,7 @@ artifact arrival into unloaded hideouts, character switches, delayed connections
 No running Garry's Mod development session or server dupe assets were available during implementation.
 For markers, also save/reload a real AdvDupe2 file with all roles, edit and resave a container without
 changing its slot ID, verify exact preview placement/facing, and test vendor reset after unloading.
+
+Layout smoke checks: move/freeze each container, unload/reenter and restart, then reset from both the
+entrance and exit menus. Check occupied storage windows, guests, officers with leader-only slots,
+props from two characters, out-of-bounds movement, and unchanged inventory contents/upgrades.

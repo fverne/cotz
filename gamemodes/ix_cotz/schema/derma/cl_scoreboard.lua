@@ -327,6 +327,7 @@ local FIELD_COLORS = {
 local PANEL = {}
 
 local function rankName(record)
+	if record.awaitingCharacter then return "Awaiting character" end
 	if record.networkRanking == false then return "RANK LOCKED" end
 	if IsValid(record.player) then return record.player:getCurrentRankName() end
 	local plugin = ix.plugin.Get("karmarep")
@@ -486,7 +487,7 @@ function PANEL:SelectRecord(record)
 		local basic = key == "tasksCompleted" or key == "mutantsKilled" or key == "humansKilled"
 		local visible = key == "squad" or access.dossier or (basic and access.activity)
 			or ((key == "rank" or key == "reputation") and access.ranking) or (key == "location" and access.location)
-		field.card:SetVisible(visible == true)
+		field.card:SetVisible(visible == true and (not record.awaitingCharacter or key == "location"))
 		field.value:SetText(tostring(values[key] or 0))
 		local color = FIELD_COLORS[key] or COLORS.text
 		if key == "squad" then color = record.squadColor or COLORS.muted end
@@ -619,15 +620,22 @@ function PANEL:Think()
 			end
 			row.DoClick = function() self:SelectRecord(record) end
 			row.DoRightClick = function()
-				if not IsValid(record.player) then return end
 				local menu = DermaMenu()
-				menu:AddOption(L("viewProfile"), function()
-					if IsValid(record.player) then record.player:ShowProfile() end
-				end)
-				menu:AddOption("Mute / unmute", function()
-					record.player:SetMuted(not record.player:IsMuted())
-				end)
-				hook.Run("PopulateScoreboardPlayerMenu", record.player, menu)
+				if IsValid(record.player) or (record.steamID64 and record.steamID64:match("^%d+$")) then
+					menu:AddOption(L("viewProfile"), function()
+						if IsValid(record.player) then
+							record.player:ShowProfile()
+						elseif record.steamID64 and record.steamID64:match("^%d+$") then
+							gui.OpenURL("https://steamcommunity.com/profiles/" .. record.steamID64)
+						end
+					end)
+				end
+				if IsValid(record.player) then
+					menu:AddOption("Mute / unmute", function()
+						if IsValid(record.player) then record.player:SetMuted(not record.player:IsMuted()) end
+					end)
+					hook.Run("PopulateScoreboardPlayerMenu", record.player, menu)
+				end
 				menu:Open()
 			end
 			if self.selected == id then self:SelectRecord(record) end

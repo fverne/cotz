@@ -149,7 +149,7 @@ for _, isPlayer in ipairs({true, false}) do
 	selectAt(actor, 4)
 	check(actor.cotzUnreachableRecovery.retries == 2, "engine memory expiry cannot renew the retry budget")
 	for time = 5, 13, 2 do selectAt(actor, time) end
-	check(actor.schedule == SCHED_TAKE_COVER_FROM_ENEMY, "failed approaches withdraw toward cover")
+	check(actor.schedule == SCHED_COMBAT_FACE, "without usable graph nodes failed approaches hold instead of fleeing")
 	selectAt(actor, 22)
 	check(#actor.schedules == 4 and actor.enemy == enemy, "withdrawal does not restart navigation every frame")
 
@@ -335,8 +335,34 @@ check(actor:STALKERNPCApproachUnreachable(actor.enemy, recovery) == true
 	and actor.destination.z == 2 and actor.destination.x < actor.enemy.position.x,
 	"alternate approaches use supported footing below a perch on the mutant's side")
 actor.cotzCombatPack = {origin = Vector(-400)}
+ix = {eventController = {
+	GetSpawnNodes = function() return {Vector(-4500), Vector(-3100), Vector(-3000), Vector(-2500)} end,
+	TakeSearchBudget = function() return true end,
+}}
 actor:STALKERNPCWithdrawUnreachable(recovery)
-check(actor.destination.x == -400, "withdrawal uses safe encounter-origin footing when available")
+check(actor.destination.x == -3000 and actor.schedule == SCHED_FORCED_GO_RUN,
+	"withdrawal runs to the closest grounded graph point at least 3000 units away")
+local groundChecks = 0
+local originalGround = actor.STALKERNPCNavigationGround
+actor.STALKERNPCNavigationGround = function(self, position)
+	groundChecks = groundChecks + 1
+	if position.x == -3000 then return end
+
+	return originalGround(self, position)
+end
+actor:STALKERNPCWithdrawUnreachable(recovery)
+check(actor.destination.x == -3100 and groundChecks == 2,
+	"a blocked retreat node falls back to the next closest graph point")
+ix.eventController.GetSpawnNodes = function() return {Vector(-2500)} end
+actor:STALKERNPCWithdrawUnreachable(recovery)
+check(actor.schedule == SCHED_COMBAT_FACE and not actor.cotzNavigationIntent,
+	"missing distant graph nodes hold safely without scheduling cover or flee")
+ix.eventController.TakeSearchBudget = function() return false end
+groundChecks = 0
+actor:STALKERNPCWithdrawUnreachable(recovery)
+check(groundChecks == 0, "retreat node validation respects the shared search budget")
+actor.STALKERNPCNavigationGround = nil
+ix = nil
 
 actor = mutant(target(true))
 selectAt(actor, 0)

@@ -31,7 +31,7 @@ net.Receive("cotz/hideouts/marker", function()
 	recipe:Dock(TOP)
 	ix.cotzUI.SetHeight(recipe, 34)
 	ix.cotzUI.StyleCombo(recipe)
-	for _, id in ipairs({"general", "ammo", "medical", "weapon"}) do
+	for _, id in ipairs({"general", "ammo", "medical", "weapon", "gear"}) do
 		recipe:AddChoice(PLUGIN.containerRecipes[id].name, id, id == entity:GetRecipeID())
 	end
 	local function updateFields(_, _, id)

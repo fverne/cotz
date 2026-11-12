@@ -57,6 +57,7 @@ dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_leaderboard.lua")
 local rows = {}
 for id = 1, 70 do
 	rows[id] = {character_id = id, name = "Scout " .. id, pdaavatar = "portrait.png", state = "online",
+		steamID64 = "76561198000000001",
 		map = "map_b", squad_id = "squad", squad_name = "Scouts", squad_color = "105 139 87 255"}
 end
 ix.townNPCs = {contacts = {test = {name = "Tester", progression = {{id = "one"}}}},
@@ -86,6 +87,7 @@ check(ix.crossserver.roster[1].profile.leaderboardStats.favoriteContact == "Test
 check(ix.crossserver.roster[1].name == "Scout 1" and ix.crossserver.roster[70].squadName == "Scouts",
 	"completed snapshot preserves character identity and public squad data")
 check(ix.crossserver.roster[70].squadColor.g == 139, "typed colors survive the round trip")
+check(ix.crossserver.roster[70].steamID64 == "76561198000000001", "Steam account IDs survive the roster round trip")
 local profile = ix.crossserver.roster[70].profile
 check(profile.leaderboardStats.tasksCompleted == 15 and profile.leaderboardStats.taskEarnings == 900
 	and profile.leaderboardStats.favoriteContact == "Tester",

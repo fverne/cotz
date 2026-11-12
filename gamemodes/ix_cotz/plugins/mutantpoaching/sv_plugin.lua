@@ -261,7 +261,10 @@ function PLUGIN:OpenPoachMenu(client, mutant, knifeID)
 	end
 	local character = client:GetCharacter()
 	local operation = {npc = npc, character = character, knife = knife}
-	local poachingTime = ix.poaching.KnifeTime[knife.class] or DEFAULT_POACH_TIME
+	local poachingTime = DEFAULT_POACH_TIME
+	if IsValid(weapon) and weapon.ixItem == knife then
+		poachingTime = ix.poaching.KnifeTime[knife.class] or DEFAULT_POACH_TIME
+	end
 	activePoaches[client] = operation
 	npc:SetNetVar("beingSkinned", true)
 	npc:EmitSound("stalkersound/inv_mutant_loot_animal.ogg", 60)

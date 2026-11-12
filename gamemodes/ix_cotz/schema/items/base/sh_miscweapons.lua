@@ -329,12 +329,13 @@ end
 
 function ITEM:OnRemoved()
 	local inventory = ix.item.inventories[self.invID]
-	local owner = inventory.GetOwner and inventory:GetOwner()
+	local owner = inventory and inventory.GetOwner and inventory:GetOwner()
 
-	if (IsValid(owner) and owner:IsPlayer()) then
+	if IsValid(owner) and owner:IsPlayer() and self:GetData("equip", false) then
 		local weapon = owner:GetWeapon(self.class)
+		if IsValid(weapon) and weapon.ixItem ~= self then return end
 
-		if (IsValid(weapon)) then
+		if IsValid(weapon) then
 			weapon:Remove()
 		end
 

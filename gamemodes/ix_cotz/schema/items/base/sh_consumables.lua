@@ -82,7 +82,7 @@ function ITEM:DecideFunction()
 						ix.chat.Send(client, "iteminternal", item.message, false)
 					end
 
-					ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
+					ix.util.PlayerPerformBlackScreenAction(item.player, "Drinking", 5, function(player)
 						player:SetHunger(hunger + item.hunger)
 						player:SetThirst(thirst + item.thirst)
 						player:UpdateHungerState(player)

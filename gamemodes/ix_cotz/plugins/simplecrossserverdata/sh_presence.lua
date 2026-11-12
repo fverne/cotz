@@ -50,6 +50,7 @@ if (CLIENT) then
 			record.destination = net.ReadString()
 			record.squadID = net.ReadString()
 			record.squadName = net.ReadString()
+			record.steamID64 = net.ReadString()
 			record.squadColor = Color(net.ReadUInt(8), net.ReadUInt(8), net.ReadUInt(8))
 			if record.squadID == "" or record.squadID == "NULL" then
 				record.squadColor = PRESENCE_COLORS.unavailable
@@ -94,11 +95,25 @@ if (CLIENT) then
 					records[id] = {
 						profile = {reputation = client:getReputation(),
 							leaderboardStats = stats},
-						characterID = id, player = client, name = character:GetName(),
+						characterID = id, player = client, name = character:GetName(), steamID64 = client:SteamID64(),
 						pdaavatar = character:GetPdaavatar(), map = game.GetMap(), fresh = true,
 						state = previous and fresh and previous.state == "travelling" and "travelling" or "online",
 						destination = previous and previous.destination or "",
 						squadID = squadID, squadName = squadName, squadColor = squadColor,
+					}
+				end
+			else
+				local steamID64 = client:SteamID64()
+				-- Replace any character snapshot for this account while it is in the character menu.
+				for id, record in pairs(records) do
+					if steamID64 ~= "0" and record.steamID64 == steamID64 then records[id] = nil end
+				end
+				if hook.Run("ShouldShowPlayerOnScoreboard", client) ~= false then
+					local id = -client:EntIndex()
+					records[id] = {
+						characterID = id, player = client, name = client:Nick(), steamID64 = steamID64,
+						profile = {}, awaitingCharacter = true, map = game.GetMap(), fresh = true,
+						state = "travelling", destination = game.GetMap(),
 					}
 				end
 			end

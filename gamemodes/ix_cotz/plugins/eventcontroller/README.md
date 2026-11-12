@@ -234,8 +234,10 @@ the same fields; their distances and cooldowns are unchanged.
 After direct retries fail, mutants sample up to four alternate grounded approaches, two seconds apart.
 Approaches use their attack range and hull size to find footing around the target, below elevated perches.
 Successful walking progress keeps an active route running, including routes that initially move sideways.
-If approaches fail, mutants withdraw toward validated encounter-origin footing or request an engine cover
-route. They retry in bounded batches after ten seconds of withdrawal rather than fleeing indefinitely.
+If approaches fail, mutants run to a validated ground node at least 3000 units from their current position,
+preferring the closest suitable node that increases distance from the target. Up to four nearby candidates
+at that distance are checked against the mutant's full hull using the shared search budget. If no suitable
+graph node exists, they hold position. They retry in bounded batches after ten seconds of withdrawal.
 
 `lua/entities/stalker_ai/sv_navigation.lua` is included server-side by the NPC base before schedules.
 Its movement monitor checks active paths or validated ground destinations every half-second. A failed
@@ -262,5 +264,5 @@ In multiplayer, check climbing onto and off static props, stationary perched pla
 small movements, target switching, short/long jumps and injured spiders. Also check mutants stranded on
 static props, blocked or narrow descent routes, full-size pseudogiant hulls, water, players entering view
 during recovery, observers, task-device arrival and server frame cost at population caps. Standalone mocks
-cannot establish nodegraph connectivity, engine cover routing, model collision or multiplayer visibility.
+cannot establish nodegraph route connectivity, model collision or multiplayer visibility.
 This change does not repair map navigation.

@@ -320,9 +320,9 @@ if SERVER then
 
 				if ix.config.Get("blowoutRemoveItems", false) then
 					for _, v in pairs(ents.FindByClass("ix_item")) do
-						if v.bTemporary then
+						-- Hideout floor items use their own persistence and also carry bTemporary.
+						if v.bTemporary and not v.ixHideout then
 							v:Remove()
-							continue
 						end
 
 						-- local itm = ix.item.instances[v.ixItemID]

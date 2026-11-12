@@ -102,6 +102,13 @@ string.utf8sub = string.sub
 table.IsEmpty = function(value) return next(value) == nil end
 surface = {CreateFont = function() end}
 function L(value) return value end
+local menuOptions, openedURL
+function DermaMenu()
+	menuOptions = {}
+
+	return {AddOption = function(_, label, callback) menuOptions[label] = callback end, Open = function() end}
+end
+gui = {OpenURL = function(url) openedURL = url end}
 local timers, sentSettings = {}, {}
 timer = {Simple = function(delay, callback) timers[#timers + 1] = callback end}
 local function flushTimers()
@@ -168,6 +175,10 @@ local function client(id, name, reputation)
 	local value = {character = character}
 	function value:GetLocalVar(key) return self[key] end
 	function value:GetCharacter() return self.character end
+	function value:SteamID64() return "7656119800000000" .. self.entityIndex end
+	function value:EntIndex() return self.entityIndex end
+	function value:Nick() return "Connecting player" end
+	value.entityIndex = nextCharacterID
 	function value:getReputation() return reputation end
 	function value:getCurrentRankName() return "Tourist" end
 
@@ -211,6 +222,7 @@ check(previousRow.removed, "hidden players lose existing rows")
 ix.crossserver.rosterFresh = clock
 ix.crossserver.roster = {
 	[100] = {characterID = 100, name = "Remote scout", state = "online", map = "map_b",
+		steamID64 = "76561198000000100",
 		squadID = "owner-r", squadName = "Remote squad", squadColor = Color(90, 100, 110)},
 	[101] = {characterID = 101, name = "Traveller", state = "travelling", map = "map_a", destination = "map_b"},
 	[first.character:GetID()] = {characterID = first.character:GetID(), name = "Old name", map = "map_a"},
@@ -219,6 +231,11 @@ ix.crossserver.roster = {
 clock = clock + 1
 scoreboard:Think()
 check(scoreboard.rows[100], "remote characters appear without a player entity")
+scoreboard.rows[100]:DoRightClick()
+check(menuOptions.viewProfile and not menuOptions["Mute / unmute"],
+	"remote rows offer Steam profiles without voice actions")
+menuOptions.viewProfile()
+check(openedURL == "https://steamcommunity.com/profiles/76561198000000100", "remote profiles use the saved account ID")
 local remoteRow = scoreboard.rows[100]
 scoreboard.area:DoClick()
 clock = clock + 1
@@ -240,6 +257,37 @@ ix.crossserver.roster = {}
 clock = clock + 1
 scoreboard:Think()
 check(not scoreboard.rows[100], "remote disconnect removes the row")
+
+local connecting = client("NULL", "", 0)
+local connectingCharacter = connecting.character
+connecting.character = nil
+clients[#clients + 1] = connecting
+ix.crossserver.roster = {
+	[900] = {characterID = 900, name = "Old character", steamID64 = connecting:SteamID64()},
+}
+clock = clock + 1
+scoreboard:Think()
+local connectingID = -connecting:EntIndex()
+records = ix.crossserver.GetScoreboardRoster(false)
+check(scoreboard.rows[connectingID] and records[connectingID].awaitingCharacter,
+	"connected players enter the scoreboard before selecting a character")
+check(not records[900], "character-menu rows replace stale character snapshots for the same account")
+check(ix.crossserver.GetPresenceText(records[connectingID], true, true) == "TRAVELLING: MAP_A",
+	"connected players awaiting a character show travelling")
+connecting.hidden = true
+records = ix.crossserver.GetScoreboardRoster(false)
+check(not records[connectingID] and not records[900], "hidden connection rows and their cached characters stay hidden")
+connecting.hidden = false
+scoreboard.rows[connectingID]:DoClick()
+check(scoreboard.dossierFields.location.card.visible and not scoreboard.dossierFields.rank.card.visible,
+	"connection rows show travel status without inventing character statistics")
+connecting.character = connectingCharacter
+clock = clock + 1
+scoreboard:Think()
+check(not scoreboard.rows[connectingID] and scoreboard.rows[connectingCharacter:GetID()],
+	"loading a character replaces the temporary connection row")
+clients[#clients] = nil
+ix.crossserver.roster = {}
 
 -- Owner access is independent of the viewer's unlocks and the list filters.
 local squadPlugin = PLUGIN

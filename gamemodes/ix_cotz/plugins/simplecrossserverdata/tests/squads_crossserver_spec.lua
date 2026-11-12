@@ -285,6 +285,7 @@ ix.crossserver.RefreshRoster()
 check(#rosterRows == 2, "public roster includes active characters across maps and excludes other schemas")
 check(rosterRows[1].progression == '{"lines":{"fixture":{"completed":true}}}',
 	"the real roster SQL selects the separate progression column")
+check(rosterRows[1].steamID64 == "account", "the real roster SQL includes the character owner's Steam account")
 check(rosterRows[1].squad_name == "New group" and rosterRows[2].squad_id == nil,
 	"public roster joins authoritative squad display metadata and includes loners")
 query("UPDATE ix_squads_presence SET hidden=1 WHERE character_id=3")

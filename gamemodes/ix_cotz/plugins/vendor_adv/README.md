@@ -17,6 +17,9 @@ Players still pay purchase prices and receive normal sale payouts. Item eligibil
 equipped-item restrictions and personal stock limits still apply. Sherpa/squad earnings accounts
 remain managed by their own transaction system; they are separate from NPC cash limits.
 Run `luatex --luaonly tests/helix_vendor_trade_spec.lua` for zero-balance sales and player payment checks.
+Selling an unequipped duplicate weapon preserves the equipped instance's SWEP and PAC appearance.
+Both weapon bases check equipped state and exact SWEP ownership when an item is removed.
+Run `luatex --luaonly tests/weapon_removal_spec.lua` for the removal callbacks.
 
 Personal `vendorStock` and `vendorRestockClaims` are separate persistent character vars with
 `bNoNetworking = true`, including during initial synchronization. Each uses its own `MEDIUMTEXT`

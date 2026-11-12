@@ -56,3 +56,14 @@ callbacks["cotz/hideouts/manage"]()
 buttons["Revoke invitation"]()
 assert(#options == 0)
 print("PASS: invitation menus show saved invitees, including offline characters, and exclude strangers")
+
+local confirmation
+ix.cotzUI.Confirm = function(message, title, label, callback) confirmation = callback end
+panel.nextRequest = nil
+readIndex, reads = 0, {"exit", 1, "1", "Home", false, "invite", true, true, 0}
+callbacks["cotz/hideouts/manage"]()
+buttons["Reset hideout layout"]()
+assert(confirmation and sent[2] ~= 15)
+confirmation()
+assert(sent[1] == "1" and sent[2] == 15)
+print("PASS: layout reset requires confirmation before sending its management action")

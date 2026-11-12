@@ -56,6 +56,12 @@ net.Receive("cotz/hideouts/manage", function()
 			end)
 		end
 		if manage then
+			if canReset then
+				button(scroll, "Reset hideout layout", function()
+					ix.cotzUI.Confirm("Restore containers you manage to their template positions and remove props placed by this character? Stored items and purchased upgrades are kept.",
+						"Reset hideout layout", "Reset layout", function() sendManagement(panel, id, 15) end, "Cancel")
+				end)
+			end
 			button(scroll, "Invite character", function()
 				local menu = ix.cotzUI.Menu()
 				for _, target in ipairs(player.GetHumans()) do

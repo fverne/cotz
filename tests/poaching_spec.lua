@@ -14,10 +14,12 @@ Angle = function() return {} end
 KEY_F, IN_USE = 1, 2
 ix = {util = {}, item = {}, weight = {Update = function() end}}
 PLUGIN = {}
-local action
+local action, actionDuration
 local timers = {}
 timer = {Simple = function(_, callback) timers[#timers + 1] = callback end}
-ix.util.PlayerPerformBlackScreenAction = function(_, _, _, callback) action = callback end
+ix.util.PlayerPerformBlackScreenAction = function(_, _, duration, callback)
+	action, actionDuration = callback, duration
+end
 ix.util.PlayerActionInterrupt = function(client) client:SetNetVar("IsPoaching", false) end
 ix.util.GetMutantMeatWeight = function(_, tier) return tier + 1 end
 local pluginPath = "gamemodes/ix_cotz/plugins/mutantpoaching/"
@@ -75,7 +77,7 @@ function client:SetNetVar(key, value) self.data[key] = value end
 function client:Notify(message) self.notice = message end
 function client:GetPos() return Vector() end
 function client:GetItemDropPos() return Vector() end
-function client:GetActiveWeapon() return nil end
+function client:GetActiveWeapon() return self.weapon end
 local npc
 function client:GetEyeTraceNoCursor() return {Entity = npc} end
 local function corpse()
@@ -97,7 +99,17 @@ PLUGIN:OpenPoachMenu(client, "dog", 1)
 check(action == nil and not npc.invalid, "dull knife cannot start poaching")
 knife:SetData("sharpness", 101)
 PLUGIN:OpenPoachMenu(client, "dog", 1)
+check(actionDuration == 5, "holstered knife uses the default poaching time")
 PLUGIN:PlayerButtonDown(client, KEY_F)
+client.weapon = {GetClass = function() return "other_weapon" end}
+PLUGIN:OpenPoachMenu(client, "dog", 1)
+check(actionDuration == 5, "holding another weapon does not receive the knife speed bonus")
+PLUGIN:PlayerButtonDown(client, KEY_F)
+client.weapon = {ixItem = knife, GetClass = function() return knife.class end}
+PLUGIN:OpenPoachMenu(client, "dog", 1)
+check(actionDuration == 3, "holding the equipped knife receives its poaching speed bonus")
+PLUGIN:PlayerButtonDown(client, KEY_F)
+client.weapon = nil
 check(ix.poaching.GetSharpness(knife) == 101 and not npc.invalid, "cancel preserves bonus and corpse")
 check(not npc:GetNetVar("beingSkinned"), "cancel releases the original corpse")
 PLUGIN:OpenPoachMenu(client, "dog", 1)

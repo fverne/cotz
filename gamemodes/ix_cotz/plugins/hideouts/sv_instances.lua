@@ -264,13 +264,19 @@ end
 function PLUGIN:TagEntity(instance, entity)
 	entity.ixHideout = instance.id
 	entity:SetNetVar("cotzHideoutID", instance.id)
-	entity:SetNetVar("hideoutEditable", instance.props[entity] == true or entity:GetClass() == "ix_hideout_vendor")
+	local class = entity:GetClass()
+	entity:SetNetVar("hideoutEditable", instance.props[entity] == true
+		or class == "ix_hideout_vendor" or class == "ix_hideout_storage")
 	entity.bNoPersist = true
 	instance.entities[entity] = true
 	local record = self:GetHideout(instance.id)
-	entity:SetNetVar("owner", record.owner)
+	-- Legacy personal furnishings belonged to the room owner; old squad props have no known placer.
+	local ownerID = instance.props[entity] and (entity.cotzPlacedBy or record.owner) or record.owner
+	if instance.props[entity] then entity.cotzPlacedBy = ownerID end
+	entity:SetNetVar("hideoutPlacedBy", entity.cotzPlacedBy)
+	entity:SetNetVar("owner", ownerID)
 	if entity.CPPISetOwner then
-		local character = ix.char.loaded[record.owner]
+		local character = ix.char.loaded[ownerID]
 		local owner = instance.props[entity] and character and character:GetPlayer()
 		entity:CPPISetOwner(IsValid(owner) and owner or game.GetWorld())
 	end
