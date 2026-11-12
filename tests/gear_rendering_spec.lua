@@ -91,11 +91,13 @@ local function wearer(index)
 	function entity:SetNetVar(key, value) self.vars[key] = copy(value) end
 	function entity:EntIndex() return self.index end
 	function entity:GetCharacter() return self.character end
-	function entity:AttachPACPart(tree) self.attached[#self.attached + 1] = tree end
-	function entity:RemovePACPart(tree) self.removed[#self.removed + 1] = tree end
+	function entity:IsPlayer() return true end
+	function entity:IsDormant() return self.dormant == true end
 
 	return entity
 end
+function meta:AttachPACPart(tree) self.attached[#self.attached + 1] = tree end
+function meta:RemovePACPart(tree) self.removed[#self.removed + 1] = tree end
 SERVER, CLIENT = true, false
 assert(load(source, "@" .. path))()
 local serverPlugin = PLUGIN
@@ -130,9 +132,14 @@ check(owner:GetParts().helmet.itemID == 23, "Exiting observer restores instance 
 
 SERVER, CLIENT = false, true
 PLUGIN = {}
-local hooks, timers = {}, {}
+local hooks, timers, namedTimers = {}, {}, {}
 hook = {Add = function(event, id, callback) hooks[id] = callback end, Remove = function(_, id) hooks[id] = nil end}
-timer = {Simple = function(delay, callback) timers[#timers + 1] = {delay = delay, callback = callback} end}
+timer = {
+	Simple = function(delay, callback) timers[#timers + 1] = {delay = delay, callback = callback} end,
+	Create = function(id, delay, repetitions, callback)
+		namedTimers[id] = {delay = delay, repetitions = repetitions, callback = callback}
+	end,
+}
 concommand = {Add = function() end}
 pac.SetupENT = function(entity)
 	entity.pac_owner = "self"
@@ -174,16 +181,100 @@ receive("ixPartReset", {viewer, {helmet = true, rifle = true}})
 check(viewer.removed[#viewer.removed] ~= nil, "Reset removes mixed legacy and customized parts")
 local delayed = wearer(12)
 delayed.AttachPACPart = false
+local setupBeforeDelay = pac.SetupENT
+pac.SetupENT = function(entity) entity.pac_owner = "self" end
 show(delayed, 25, "black")
 local attachCount = #delayed.attached
 receive("ixPartRemove", {delayed, "helmet"})
 timers[#timers].callback()
 check(#delayed.attached == attachCount, "A delayed PAC setup cannot reattach already removed gear")
+pac.SetupENT = setupBeforeDelay
 receive("ixPartWear", {{valid = false}, "helmet", true, 23, "black", 0})
 check(timers[#timers].delay == 5.1, "Missing late-join entities schedule a bounded snapshot retry")
 count = #net.sent
 timers[#timers].callback()
 check(#net.sent == count + 1, "The snapshot retry requests fresh current state")
+
+for _ = 1, 2 do
+	receive("ixPartWear", {{valid = false}, "helmet", true, 23, "black", 0})
+	timers[#timers].callback()
+end
+local timerCount = #timers
+receive("ixPartWear", {{valid = false}, "helmet", true, 23, "black", 0})
+check(#timers == timerCount, "Snapshot retries eventually stop while distant entities remain unavailable")
+local reconcile = namedTimers["cotz/pac/reconcile"]
+check(reconcile and reconcile.delay == 1 and reconcile.repetitions == 0, "Local recovery runs once per second")
+local distant = wearer(20)
+distant.dormant = true
+distant:SetNetVar("parts", {
+	helmet = {itemID = 31, appearance = {skin = "black", bodygroups = {}}},
+	rifle = true,
+})
+players = {distant}
+count = #net.sent
+reconcile.callback()
+check(#distant.attached == 0, "Dormant players are left for PAC's normal visibility handling")
+distant.dormant = false
+PLUGIN:NotifyShouldTransmit(distant, true)
+check(#distant.attached == 0, "Transmission recovery waits until the entity update has completed")
+timers[#timers].callback()
+check(#distant.attached == 2 and not distant:GetCharacter(),
+	"Entering view restores legacy and customized parts after all late-join retries, without character data")
+local attachmentCount = #distant.attached
+reconcile.callback()
+reconcile.callback()
+check(#distant.attached == attachmentCount, "Unchanged parts are not rebuilt during local recovery")
+distant:SetNetVar("parts", copy(distant:GetParts()))
+reconcile.callback()
+check(#distant.attached == attachmentCount, "Equivalent replicated descriptors do not rebuild parts")
+distant.vars.parts.helmet.appearance.skin = "green"
+reconcile.callback()
+check(#distant.attached == attachmentCount + 1
+	and distant.attached[#distant.attached][1].children[1].self.Skin == 0,
+	"A missed appearance update is recovered from current replicated state")
+distant.vars.parts.helmet.itemID = 32
+reconcile.callback()
+check(#distant.attached == attachmentCount + 2, "Replacing a worn instance refreshes its PAC identity")
+distant.vars.parts.helmet = nil
+local removedCount = #distant.removed
+reconcile.callback()
+check(#distant.removed == removedCount + 1, "A missed unequip message removes the stale attached tree")
+distant:SetNetVar("parts", {})
+reconcile.callback()
+check(#distant.removed == removedCount + 2, "A missed reset removes remaining parts without reattaching old gear")
+check(#net.sent == count, "Local visibility recovery never requests repeated server snapshots")
+
+local lateState = wearer(21)
+players = {lateState}
+PLUGIN:NotifyShouldTransmit(lateState, true)
+timers[#timers].callback()
+check(#lateState.attached == 0, "Transmission can resume before outfit NetVars arrive")
+lateState:SetNetVar("parts", {rifle = true})
+reconcile.callback()
+check(#lateState.attached == 1, "State arriving after the transmission callback still recovers")
+PLUGIN:NotifyShouldTransmit(lateState, false)
+check(#lateState.attached == 1, "Stopping transmission does not rebuild parts")
+PLUGIN:NotifyShouldTransmit(lateState, true)
+timers[#timers].callback()
+check(#lateState.attached == 2, "Re-entering view rebuilds PAC owners even when the descriptor is unchanged")
+PLUGIN:NotifyShouldTransmit(lateState, true)
+lateState.valid = false
+timers[#timers].callback()
+check(#lateState.attached == 2, "Disconnecting before deferred recovery cannot attach parts")
+
+local pending = wearer(22)
+pending.AttachPACPart = false
+pending:SetNetVar("parts", {rifle = true})
+local setup = pac.SetupENT
+pac.SetupENT = function() end
+players = {pending}
+reconcile.callback()
+timers[#timers].callback()
+check(#pending.attached == 0, "Incomplete PAC setup does not mark the outfit as attached")
+pac.SetupENT = setup
+reconcile.callback()
+timers[#timers].callback()
+check(#pending.attached == 1, "Local recovery retries incomplete PAC setup after the original delay")
 
 PLUGIN = {}
 local entity = {skin = 7, material = "original", materials = {[0] = "old"}}

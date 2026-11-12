@@ -110,7 +110,12 @@ include a typed optional descriptor; all clients must update with the server. Cl
 clone definitions, namespace part identities by wearer and item instance, remap internal
 references, and retain the exact attached tree for removal. Late clients request a
 rate-limited snapshot once PAC is ready, with up to three delayed retries if entities
-are not yet available. Delayed attachment checks that the item has not been removed.
+are not yet available. When a player starts transmitting to the client, their current
+replicated parts are rebuilt after the entity update. A once-per-second local check
+also restores missing or changed parts and removes stale ones, covering distant
+players who become available after those retries and outfit state arriving later.
+Dormant players are skipped, unchanged attachments are retained, and this recovery
+sends no server requests. Delayed attachment checks that the item has not been removed.
 
 Rendered icons use appearance-specific keys in the existing icon cache and preserve
 explicit image overrides. The schema's scoped icon-renderer detour restores renderer
@@ -151,6 +156,10 @@ all configured finishes (especially clipped masks and compound Screen equipment)
 ground mappings, inventory/equipment icons, late joins, reconnects, observer mode,
 character changes and saved world items after restart. Try full backpacks, repeated
 confirmations, moving away, dying, losing funds and unequipping during confirmation.
+Join with an equipped player outside visibility for more than 20 seconds, then approach
+and move out of and back into visibility. Repeat while that player changes finishes,
+unequips gear, changes character or enters observer outside visibility; only their
+current equipment should appear, without needing to re-equip it.
 Check that protection, capacity, condition and upgrades remain unchanged. Inspect
 preview cancellation and cleanup, keyboard/modal focus, long lists and narrow,
 1080p, ultrawide and 4K layouts, including resolution changes while open.

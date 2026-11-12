@@ -191,6 +191,7 @@ if (SERVER) then
 		end
 	end
 else
+	local RECONCILE_INTERVAL = 1
 	local attached = setmetatable({}, {__mode = "k"})
 	local syncRetries, syncQueued = 0, false
 
@@ -218,6 +219,13 @@ else
 		if tree and isfunction(client.RemovePACPart) then client:RemovePACPart(tree) end
 	end
 
+	local function getDescriptorKey(uniqueID, descriptor)
+		local itemTable = ix.item.list[uniqueID]
+		if type(descriptor) ~= "table" or not itemTable or not ix.gearAppearance then return true end
+
+		return descriptor.itemID .. ":" .. ix.gearAppearance.Fingerprint(itemTable, descriptor.appearance)
+	end
+
 	local function AttachPart(client, uniqueID, descriptor)
 		if not IsValid(client) then return end
 		local itemTable = ix.item.list[uniqueID]
@@ -233,20 +241,53 @@ else
 			local key = client:EntIndex() .. ":" .. descriptor.itemID
 			pacData = ix.gearAppearance.BuildPAC(itemTable, descriptor.appearance, key, pacData)
 		end
-		local entry = {tree = pacData}
+		local entry = {tree = pacData, descriptorKey = getDescriptorKey(uniqueID, descriptor)}
 		attached[client][uniqueID] = entry
 		if isfunction(client.AttachPACPart) then
 			client:AttachPACPart(pacData)
+			entry.applied = true
 		else
 			pac.SetupENT(client)
 			timer.Simple(0.1, function()
 				if IsValid(client) and attached[client] and attached[client][uniqueID] == entry
 					and isfunction(client.AttachPACPart) then
 					client:AttachPACPart(pacData)
+					entry.applied = true
 				end
 			end)
 		end
 	end
+
+	local function reconcileParts(client, force)
+		if not pac or not IsValid(pac.LocalPlayer) or not IsValid(client) or client:IsDormant() then return end
+		local desired = client:GetParts()
+
+		for uniqueID in pairs(attached[client] or {}) do
+			if not desired[uniqueID] then RemovePart(client, uniqueID) end
+		end
+		for uniqueID, descriptor in pairs(desired) do
+			local entry = attached[client] and attached[client][uniqueID]
+			if force or not entry or not entry.applied or entry.descriptorKey ~= getDescriptorKey(uniqueID, descriptor) then
+				AttachPart(client, uniqueID, descriptor)
+			end
+		end
+	end
+
+	function PLUGIN:NotifyShouldTransmit(entity, shouldTransmit)
+		if not shouldTransmit or not entity:IsPlayer() then return end
+		-- Wait until the entity's transmission state and model have updated before rebuilding its parts.
+		timer.Simple(0, function()
+			reconcileParts(entity, true)
+		end)
+	end
+
+	-- Helix caches NetVars by index even before an entity exists. Recover missed wear/remove messages locally.
+	timer.Create("cotz/pac/reconcile", RECONCILE_INTERVAL, 0, function()
+		if not pac or not IsValid(pac.LocalPlayer) then return end
+		for _, client in player.Iterator() do
+			reconcileParts(client)
+		end
+	end)
 
 	hook.Add("Think", "ix_pacupdate", function()
 		if (!pac) then
