@@ -6,9 +6,9 @@
 28-step story with the later requirement for regular hand-ins and job trackers. It replaces the
 older step ordering; exact quantities, thresholds, destinations, and reward amounts remain open.
 
-Home: Marsh. Preserve existing name, model, stern personality, and experienced voice.
+Home: Swamps. Preserve existing name, model, stern personality, and experienced voice.
 Repeatable specialty: mutant hunting only. The finite story concerns survival lessons and a former
-companion's failed expedition, concluding in Pripyat with return to Marsh.
+companion's failed expedition, concluding in Pripyat with return to Swamps.
 
 ## Structure
 
@@ -26,7 +26,7 @@ Threshold ordering across branches needs explicit design rather than assuming ta
 
 | # | Title | Kind | Objective | Reward or unlock |
 | ---: | --- | --- | --- | --- |
-| 1 | Before You Leave | Hand-in | Supply modest basic provisions obtainable in Marsh. | Fixed food and water package. |
+| 1 | Before You Leave | Hand-in | Supply modest basic provisions obtainable in Swamps. | Fixed food and water package. |
 | 2 | Know Your Ground | Authored | Recover a field notebook near a local landmark. | Useful local scavenging directions. |
 | 3 | Something With Teeth | Tracker | Reach the first Old Timer hunting-job checkpoint. | Kitchen Knife purchase access. |
 | 4 | Bring Something Back | Authored | Investigate an abandoned hunting camp and recover its observations. | Modest medical supplies. |
@@ -37,7 +37,7 @@ Threshold ordering across branches needs explicit design rather than assuming ta
 | 9 | Bad Water | Hand-in | Supply existing water-treatment or exposure-preparation items, selected after source review. | Fixed anti-radiation supplies. |
 | 10 | Enough for the Walk Home | Authored | Retrieve a lost supply case along an exposed return route. | Small stock increase for one existing provision he sells. |
 | 11 | Old Habits | Tracker | Reach the next preparation-branch hunting checkpoint. | Modest Technut repair credit. |
-| 12 | Keep Yourself Alive | Authored | Complete a longer Marsh expedition with two saved field objectives. | Survival Knife purchase access. |
+| 12 | Keep Yourself Alive | Authored | Complete a longer Swamps expedition with two saved field objectives. | Survival Knife purchase access. |
 | 13 | Tracks at the Fence | Hand-in | Deliver common harvested specimens for comparison. | Directions to a hunting ground. |
 | 14 | Thin the Pack | Authored | Investigate a named hunting site and recover observer notes. | Hunting ammunition package. |
 | 15 | What They Leave Behind | Tracker | Reach a fieldcraft-branch hunting checkpoint. | Fixed blade-maintenance supplies. |
@@ -53,7 +53,7 @@ Threshold ordering across branches needs explicit design rather than assuming ta
 | 25 | Past the Turn Back Point | Hand-in | Supply ordinary research records whose availability at this stage is verified. | Modest repair credit; records narrow the search. |
 | 26 | He Made It This Far | Authored | Locate the final equipment case and recover the companion's keepsake. | Final selected maintenance-stock improvement. |
 | 27 | Bring Him Home | Tracker | Reach the final hunting checkpoint; the keepsake was already recovered at step 26. | One supplied Survival Knife, meaningful through dialogue, with no new item powers implied. |
-| 28 | Nothing Left Unsaid | Authored | Return from the final field search with a second piece of personal evidence and conclude the story in Marsh. | Permanent recognition, changed greeting, final survival-supply barter. |
+| 28 | Nothing Left Unsaid | Authored | Return from the final field search with a second piece of personal evidence and conclude the story in Swamps. | Permanent recognition, changed greeting, final survival-supply barter. |
 
 Step 28 includes a real field conclusion; the final conversation does not inflate the step count.
 Review the late tracker at 27 during playtesting: cumulative credit should minimise an awkward

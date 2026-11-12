@@ -46,7 +46,7 @@ See the [dialogue source guide](dialogue-guide.md) for the NPC text locations.
 
 Add intermediate milestones where existing tasks bundle several rewards or jump sharply in requirement breadth. Give contacts with little progression their own short, themed branches. Preserve the current total acquisition effort to reach existing major unlocks as the initial tuning target, while providing useful rewards more often. Do not multiply the existing 25% difficulty growth by every inserted step.
 
-Treat map tier, contact access, equipment power and task difficulty as separate inputs. A Marsh NPC can offer late research after the Waystation story, while ordinary Marsh survival equipment should remain obtainable locally. Additional branches are optional unless explicitly identified as part of an existing story gate.
+Treat map tier, contact access, equipment power and task difficulty as separate inputs. A Swamps NPC can offer late research after the Waystation story, while ordinary Swamps survival equipment should remain obtainable locally. Additional branches are optional unless explicitly identified as part of an existing story gate.
 
 **Confirmed access constraint:** Intern, Egghead and Beanstalk are physically located on map 1, but their area is inaccessible until after map 2 progression. Their entire catalogue, services, tasks and new preparation stages therefore belong to post-map-2 progression. Returning to map 1 is an intentional part of that progression, not a reason to reset their difficulty to newcomer level. Preserve both the physical access restriction and personal story gates; do not bypass either through remote dialogue, early assignments or relocated rewards.
 
@@ -73,9 +73,9 @@ These are planning bands, not nine mandatory global reputation ranks. Every cont
 
 | Band | Acquisition ceiling | Typical requirements | Reward purpose |
 | --- | --- | --- | --- |
-| M1: newcomer | Marsh, tier 1 | One local supply category or an introductory job | Basic survival, first tool or service |
-| M2: established | Marsh, tier 1 | Two local categories; ordinary quarry | Useful upgrade or a small supply selection |
-| M3: field capable | Marsh, tier 1 | Three or four local categories; specialised local work | Finish basic equipment families and early utility |
+| M1: newcomer | Swamps, tier 1 | One local supply category or an introductory job | Basic survival, first tool or service |
+| M2: established | Swamps, tier 1 | Two local categories; ordinary quarry | Useful upgrade or a small supply selection |
+| M3: field capable | Swamps, tier 1 | Three or four local categories; specialised local work | Finish basic equipment families and early utility |
 | W1: trusted contact | Waystation, tier 2 | Three or four categories, or qualified local contracts | Surplus-to-military transition |
 | W2: specialist | Waystation, tier 2 | Four to six categories; instruments, research or dangerous trophies | Advanced protection and specialist equipment |
 | W3: veteran | Waystation, tier 2 | Six to eight categories where the reward warrants it | Military/scientific capstones obtainable without Pripyat salvage |
@@ -83,11 +83,11 @@ These are planning bands, not nine mandatory global reputation ranks. Every cont
 | P2: laboratory | Pripyat, tier 3 | Six to eight categories or multi-stage field programmes | Computer, laboratory and advanced research rewards |
 | P3: endgame | Pripyat, tier 3 | Optional demanding commissions after story completion | Wishes, prestigious options and renewable endgame supplies |
 
-A ceiling permits earlier sources too; it does not force travel or prove that a trophy spawns on that map. World loot pairs are 1/2 for Marsh, 3/4 for Waystation and 5/6 for Pripyat. Check *every candidate*, including rare alternatives. Harvesting, cooking, job rewards and vendor routes need separate map-availability evidence.
+A ceiling permits earlier sources too; it does not force travel or prove that a trophy spawns on that map. World loot pairs are 1/2 for Swamps, 3/4 for Waystation and 5/6 for Pripyat. Check *every candidate*, including rare alternatives. Harvesting, cooking, job rewards and vendor routes need separate map-availability evidence.
 
 Science entry occurs only after map 2 access is resolved, using the W2–W3 equipment/difficulty comparisons as initial references rather than M1–M3. This is an access floor, not a blanket requirement for Pripyat materials or eight-category deliveries. Science preparation can use earlier-map supplies while still being balanced for a character who has progressed through map 2. Check cumulative story effort, preparation and owned equipment when comparing these branches to other contacts.
 
-Keep early Marsh story deliveries at ceiling 1. Preserve ceiling 2 for Boss and Quartermaster equipment and Egghead's existing advanced science, even when those branches are difficult. Preserve existing ceiling 3 inputs in late Technut, Haggler and Spicy Lemon branches initially; do not introduce Pripyat inputs simply because a branch gained depth. Mute and Jitters currently finish at ceiling 2. Science contacts based in the Marsh retain their later story access gates.
+Keep early Swamps story deliveries at ceiling 1. Preserve ceiling 2 for Boss and Quartermaster equipment and Egghead's existing advanced science, even when those branches are difficult. Preserve existing ceiling 3 inputs in late Technut, Haggler and Spicy Lemon branches initially; do not introduce Pripyat inputs simply because a branch gained depth. Mute and Jitters currently finish at ceiling 2. Science contacts based in the Swamps retain their later story access gates.
 
 ## Effort and payout rules
 
@@ -148,11 +148,11 @@ Test characters with different ranks at the same vendor, alternative completion 
 
 Counts below describe the intended shape, including preparation stages. Final definition counts follow the item and effort audit; branch layouts are not one global linear ladder.
 
-### Old Timer — Marsh hunting and survival
+### Old Timer — Swamps hunting and survival
 
 Keep the three story milestones and their arrivals in place. Expand the optional knife line from three to five stages: small-game proof → knife2, predator preparation → field supplies, big-game proof → knife3, elite tracking preparation → hunting supplies, final dangerous proof → knife4. Split the two digging milestones into four stages: basic anomaly evidence → supply allocation, mixed local evidence → cleaning-kit digging tool, advanced search preparation → supplies, final treasure-hunter proof → shovel. These tools keep their actual digging purpose.
 
-Split Clubbing into three stages: bat/hatchet → machete/fireaxe → fubar. This creates twelve optional stages from the present six. All remain Marsh ceilings; dangerous quarry availability must be checked rather than inferred from generic harvest tables. Keep knife4 and the shovel as capstones, and use the existing alternative-item payout budget for preparation rewards. New exclusive hunting dressings belong to the separate reward implementation.
+Split Clubbing into three stages: bat/hatchet → machete/fireaxe → fubar. This creates twelve optional stages from the present six. All remain Swamps ceilings; dangerous quarry availability must be checked rather than inferred from generic harvest tables. Keep knife4 and the shovel as capstones, and use the existing alternative-item payout budget for preparation rewards. New exclusive hunting dressings belong to the separate reward implementation.
 
 ### Cleaner — storage and transport
 
@@ -214,11 +214,11 @@ Add an optional later suppressor/advanced-optic branch at W2–W3, using the cat
 
 ### Beanstalk — expedition preparation
 
-All stages start after the physically gated return to the scientists on map 1 following map 2. Expedition preparation here means preparing an experienced character for scientific work, not teaching a new Marsh character basic survival.
+All stages start after the physically gated return to the scientists on map 1 following map 2. Expedition preparation here means preparing an experienced character for scientific work, not teaching a new Swamps character basic survival.
 
 Split the current document delivery into three phases sharing its current effort: field records → a modest science expedition supply allocation; instrumentation records → new expedition catalogue access if adopted; final research archive → the original story completion and Egghead artifact task. Use five existing categories divided across those phases; do not request the full archive three times.
 
-Keep existing PP-2000 and Screen Helmet availability unless explicitly opting into a fresh-start catalogue rebalance. Correct matching ammunition using the actual weapon definition. Add one optional expedition-outfitting milestone after the story work. The contact remains physically in the Marsh but starts after Waystation story access and retains ceiling 2.
+Keep existing PP-2000 and Screen Helmet availability unless explicitly opting into a fresh-start catalogue rebalance. Correct matching ammunition using the actual weapon definition. Add one optional expedition-outfitting milestone after the story work. The contact remains physically in the Swamps but starts after Waystation story access and retains ceiling 2.
 
 ### Egghead — detectors, suits and science drugs
 
@@ -232,11 +232,11 @@ Split the story artifact delivery into preparation + final specimens only if its
 
 ### Intern — surveys and Pripyat readiness
 
-Intern becomes reachable only after map 2, alongside the other scientists. His early checkpoints are post-map-2 expedition rewards; none become available during the initial Marsh progression.
+Intern becomes reachable only after map 2, alongside the other scientists. His early checkpoints are post-map-2 expedition rewards; none become available during the initial Swamps progression.
 
 Replace the single 17-job story counter with four stages of 2 + 4 + 5 + 6 hard survey jobs. Show cumulative progress 2 / 6 / 11 / 17; completion count is per job, not per scanned point. Reward stages one and two with bounded expedition supplies, stage three with a research supply allocation, and stage four with the existing Computer apparatus and laboratory-card access at Egghead. Keep the original `intern_gasAnalyzerReadings` ID on stage four.
 
-The hard jobs issue a four-point analyzer bound to Pripyat, while the progression definition requires completion on Marsh. The job hook runs when the job is claimed. Verify the complete Pripyat scan → return to Marsh → claim flow before changing either map check; this may be intentional expedition/return pacing. Label acquisition tier 3 separately from the hand-in map. Do not move the whole contact to Pripyat or let easier Marsh scans substitute unnoticed. Numeric tuning must account for those trips rather than using Marsh job effort alone.
+The hard jobs issue a four-point analyzer bound to Pripyat, while the progression definition requires completion on Swamps. The job hook runs when the job is claimed. Verify the complete Pripyat scan → return to Swamps → claim flow before changing either map check; this may be intentional expedition/return pacing. Label acquisition tier 3 separately from the hand-in map. Do not move the whole contact to Pripyat or let easier Swamps scans substitute unnoticed. Numeric tuning must account for those trips rather than using Swamps job effort alone.
 
 ### Computer — laboratory stages
 
@@ -268,7 +268,7 @@ The current first wish costs zero, with subsequent costs based on wishes already
 
 ### Community NPC (`ratnpc`, display name `NPC`) — optional contribution branch
 
-Add three small contribution milestones using verified local goods: initial provisions → a small fixed supply allocation; workshop contribution → a utility allocation; sustained support → a cosmetic distinction. Scale ceiling and theme to actual placement rather than assume this template lives in Marsh. Keep Sherpa/community trade available immediately.
+Add three small contribution milestones using verified local goods: initial provisions → a small fixed supply allocation; workshop contribution → a utility allocation; sustained support → a cosmetic distinction. Scale ceiling and theme to actual placement rather than assume this template lives in Swamps. Keep Sherpa/community trade available immediately.
 
 Personal donations may advance that character only. Community player-deposited goods cannot generate restock or count as a renewable free reward. A new personal branch must not manufacture stock for the shared exchange or reward unrestricted buy/sell cycling. If the template is unused on the deployed maps, definitions can exist but remain unavailable until deliberately placed.
 
@@ -291,7 +291,7 @@ Use the current progression graph directly for the fresh-start release. Runtime 
 5. Validate every original configured purchase unlock appears exactly once in its replacement segment, all original single unlocks survive, source ceilings hold for every candidate, no prerequisite depends on its own reward, and all story endpoints are reachable. Check branches separately rather than summing every optional path into one mandatory route.
 6. Exercise fresh and continuing characters as appropriate, fixed assignments, partial stacks, full inventory, reconnect/restart/transfer, admin grants, repeated completion requests and multiple NPC instances. Check one-time payouts, rounding, service credits, fractional restock eligibility and duplicate job/arena events. Add meaningful regression cases to `tests/progression_spec.lua` and balance-model tests when implementation begins.
 7. Verify Quartermaster progression retains the flashdrive introduction and has no added Haggler requirement. Verify that withdrawn exchange definitions and specialised input/purchase handlers are absent. Test pending checkpoint claims, restart/transfer and duplicate claims. Check every NPC menu and dynamic option list keeps GOODBYE last.
-8. Playtest a new Marsh character, a Waystation military/science character and a Pripyat laboratory character. Compare total time and spend to the old endpoint, the longest interval without a useful reward, costly random assignments and the value of each stage's unlock. Adjust the ±10% effort tolerance from observed evidence if the old task was itself badly tuned. Source odds alone cannot establish real spawn frequency or travel time.
+8. Playtest a new Swamps character, a Waystation military/science character and a Pripyat laboratory character. Compare total time and spend to the old endpoint, the longest interval without a useful reward, costly random assignments and the value of each stage's unlock. Adjust the ±10% effort tolerance from observed evidence if the old task was itself badly tuned. Source odds alone cannot establish real spawn frequency or travel time.
 9. Verify science access specifically: an initial map-1 character cannot reach scientist services, claim their preparation rewards or acquire their gated catalogue through a new branch. After map 2, returning to map 1 exposes the intended science introductions while later personal story requirements still apply. Test physical access and progression access separately.
 
 ## Appendix A — exact existing shop-unlock split

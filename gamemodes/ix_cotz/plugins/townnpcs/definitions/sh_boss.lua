@@ -18,6 +18,16 @@ PLUGIN:Register("boss", {
 		maps = {
 			easy = "rp_garbage_cotz",
 			hard = "rp_pripyat_remaster",
+			medium = "rp_garbage_cotz",
+		},
+	},
+	retiredRegionalJob = {
+		category = "Regional human elimination",
+		description = "Regional human elimination",
+		kind = "regionalHumans",
+		maps = {
+			easy = "rp_garbage_cotz",
+			hard = "rp_pripyat_remaster",
 			medium = "rp_waystation",
 		},
 	},
@@ -60,7 +70,7 @@ PLUGIN:Register("boss", {
 		offerPrompt = "Do you have an elimination assignment?",
 		progression = "There is an allocation to fill. Check the request before bringing anything; I need to know what I can actually issue. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "What needs checking in the operation's reports?",
-		work = "Hostile elimination orders, against the targets specified. Read the assignment before accepting it. I need a defined threat dealt with and an accurate return, rather than another problem created by an expanded interpretation. Ask about anything that affects your decision while we can still settle it here.",
+		work = "Hostile elimination orders, against the targets specified. Read the assignment before accepting it. I need a defined threat dealt with and an accurate return, rather than another problem created by an expanded interpretation. Ask about anything that affects your decision while we can still settle it here. Medium orders take you to Garbage; hard orders take you to Pripyat. Return to me in Waystation when the specified work is finished.",
 		workPrompt = "About my current orders.",
 	},
 	disabledItems = {

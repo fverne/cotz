@@ -17,6 +17,16 @@ PLUGIN:Register("old-timer", {
 		kind = "regionalHunting",
 		maps = {
 			easy = "rp_marsh_cs",
+			hard = "rp_pripyat_remaster",
+			medium = "rp_garbage_cotz",
+		},
+	},
+	retiredRegionalJob = {
+		category = "Specific mutant hunting",
+		description = "Specific mutant hunting",
+		kind = "regionalHunting",
+		maps = {
+			easy = "rp_marsh_cs",
 			hard = "rp_waystation",
 			medium = "rp_garbage_cotz",
 		},
@@ -62,7 +72,7 @@ PLUGIN:Register("old-timer", {
 		offerPrompt = "Do you have a mutant hunting job?",
 		progression = "There are supplies I would like brought in. Read the list before setting off, and leave enough room for what you need yourself. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "What needs doing next?",
-		work = "Mutant hunting. Read the quarry on the order and prepare for the return as carefully as the hunt. Don't chase a wounded animal so far you forget where you've left yourself room to go. I'll have more work if you come back. I won't complain if you take time to make that likely.",
+		work = "Mutant hunting. Read the quarry on the order and prepare for the return as carefully as the hunt. Don't chase a wounded animal so far you forget where you've left yourself room to go. I'll have more work if you come back. I won't complain if you take time to make that likely. Medium hunts are in Garbage, hard hunts in Pripyat. Come back to me in the Swamps afterwards. Leave yourself enough provisions for that part too.",
 		workPrompt = "About the hunt I'm on.",
 	},
 	catalogue = {
@@ -387,7 +397,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT02",
 			name = "Know Your Ground",
-			briefing = "There's a field notebook out in Marsh. I'd like you to pay attention to the walk as well as bringing the book back. Recover the Marsh field notebook from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "There's a field notebook out in the Swamps. I'd like you to pay attention to the walk as well as bringing the book back. Recover the Swamps field notebook from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "OT04",
@@ -397,7 +407,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT06",
 			name = "Ready Enough",
-			briefing = "A supply case is still outside camp. Leave room to bring it home without throwing away what you need for yourself. Recover the expedition supply case from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "A supply case is still outside camp. Leave room to bring it home without throwing away what you need for yourself. Recover the expedition supply case from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "OT08",
@@ -407,7 +417,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT10",
 			name = "Enough for the Walk Home",
-			briefing = "I want the lost supply case recovered. The return journey still needs food and water even when the search went well. Recover the return-route provisions from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I want the lost supply case recovered. The return journey still needs food and water even when the search went well. Recover the return-route provisions from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "OT12",
@@ -417,7 +427,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT14",
 			name = "Thin the Pack",
-			briefing = "There's an observer's account to recover from the hunting site. I'd like to compare what was seen with what people remember hearing. Recover the pack observer's notes from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "There's an observer's account to recover from the hunting site. I'd like to compare what was seen with what people remember hearing. Recover the pack observer's notes from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "OT16",
@@ -427,7 +437,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT18",
 			name = "Leave a Way Out",
-			briefing = "Recover the route observations. A party's intended path isn't always the one they managed to walk. Recover the missing party's route notes from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "Recover the route observations. A party's intended path isn't always the one they managed to walk. Recover the missing party's route notes from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "OT20",
@@ -437,7 +447,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT22",
 			name = "A Voice on Tape",
-			briefing = "Spool should hear the recording. He listens more carefully than most people talk. Recover the recording for Spool from the assigned search area in Waystation. Deliver it to 'Spool' in Garbage, then come back to me in Marsh.",
+			briefing = "Spool should hear the recording. He listens more carefully than most people talk. Recover the recording for Spool from the assigned search area in Waystation. Deliver it to 'Spool' in Garbage, then come back to me in the Swamps.",
 		},
 		{
 			id = "OT24",
@@ -447,7 +457,7 @@ PLUGIN:Register("old-timer", {
 		{
 			id = "OT26",
 			name = "He Made It This Far",
-			briefing = "There's a final equipment case to collect. Keep the small things with it. I want to see what survived together. Recover the companion's recovered equipment from the assigned search area in Pripyat. Bring it back to me in Marsh.",
+			briefing = "There's a final equipment case to collect. Keep the small things with it. I want to see what survived together. Recover the companion's recovered equipment from the assigned search area in Pripyat. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "OT28",

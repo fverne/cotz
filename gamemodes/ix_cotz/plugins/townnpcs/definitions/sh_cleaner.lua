@@ -18,7 +18,7 @@ PLUGIN:Register("cleaner", {
 		kind = "deadDrop",
 		maps = {
 			easy = "rp_garbage_cotz",
-			hard = "rp_waystation",
+			hard = "rp_pripyat_remaster",
 			medium = "rp_garbage_cotz",
 		},
 	},
@@ -72,7 +72,7 @@ PLUGIN:Register("cleaner", {
 		offerPrompt = "Do you have a parcel circuit?",
 		progression = "I need supplies for the next arrangements. The list is specific. Bring them here. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "What else needs checking in the deliveries?",
-		work = "Collect the sealed parcel at the assigned pickup. Deliver it to the assigned cache. Come back after finishing the delivery. Read both endpoints before accepting, and leave the package shut. If you want to know whether that is all the arrangement requires, yes. That's why I wrote it down.",
+		work = "Collect the sealed parcel at the assigned pickup. Deliver it to the assigned cache. Come back after finishing the delivery. Read both endpoints before accepting, and leave the package shut. If you want to know whether that is all the arrangement requires, yes. That's why I wrote it down. Medium deliveries leave Garbage for the Swamps or Waystation. Hard deliveries go to Pripyat. Finish at the named cache, then return here to Garbage.",
 		workPrompt = "About the circuit I'm carrying.",
 	},
 	catalogue = {},

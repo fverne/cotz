@@ -4,7 +4,7 @@ ix.progression.itemPools = {
 	hideout_access_tool = {
 		name = "Hideout access tool",
 		tier = "common",
-		evidence = "Crowbar or bat; existing melee items obtainable in Marsh.",
+		evidence = "Crowbar or bat; existing melee items obtainable in the Swamps.",
 		candidates = {{item = "crowbar"}},
 	},
 	hideout_access_sledgehammer = {
@@ -90,7 +90,7 @@ ix.progression.itemPools = {
 		tier = "uncommon",
 		evidence = (
 			"worldspawn_1: paper/toothpaste/detergent weights 85/85/68; shampoo/soap/ "
-			.. "recovered toothpaste/bleach/glass cleaner 84/79/72/74/80. All share Marsh regular loot."
+			.. "recovered toothpaste/bleach/glass cleaner 84/79/72/74/80. All share Swamps regular loot."
 		),
 		candidates = {
 			{ item = "value_toiletpaper" },
@@ -190,7 +190,7 @@ ix.progression.itemPools = {
 		tier = "uncommon",
 		evidence = (
 			"worldspawn_2: cat/lion/horse/raven weights 182/116/81/134. "
-			.. "The raven shares the Marsh rare source; other statuettes also appear in later regions."
+			.. "The raven shares the Swamps rare source; other statuettes also appear in later regions."
 		),
 		candidates = {
 			{ item = "value_statue_cat" },
@@ -1038,7 +1038,7 @@ ix.progression.itemPools = {
 		},
 	},
 	advanced_parts_map1 = {
-		name = "Advanced workshop tools (Marsh)",
+		name = "Advanced workshop tools (Swamps)",
 		tier = "rare",
 		evidence = (
 			"worldspawn_1: advanced toolbox weight 5. GPU and SSD candidates are excluded because "
@@ -1049,7 +1049,7 @@ ix.progression.itemPools = {
 		},
 	},
 	heavy_electrical_map1 = {
-		name = "Heavy electrical salvage (Marsh)",
+		name = "Heavy electrical salvage (Swamps)",
 		tier = "rare",
 		evidence = (
 			"worldspawn_1: car battery 130, heavy wire 150, military tape 100. Powerbanks are "
@@ -1695,7 +1695,7 @@ ix.progression.itemPools = {
 
 	-- FTS delivery availability bands. Rebuild with docs/npc-overhaul/tools/fts_delivery_balance.py.
 	town_delivery_collectibles_marsh_1 = {
-		name = "Collectible finds (Marsh, band 1)",
+		name = "Collectible finds (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1706,7 +1706,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_collectibles_marsh_2 = {
-		name = "Collectible finds (Marsh, band 2)",
+		name = "Collectible finds (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1717,7 +1717,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_collectibles_marsh_3 = {
-		name = "Collectible finds (Marsh, band 3)",
+		name = "Collectible finds (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1728,7 +1728,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_collectibles_marsh_4 = {
-		name = "Collectible finds (Marsh, band 4)",
+		name = "Collectible finds (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1739,7 +1739,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_electronics_marsh_1 = {
-		name = "Electronic supplies (Marsh, band 1)",
+		name = "Electronic supplies (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1753,7 +1753,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_electronics_marsh_2 = {
-		name = "Electronic supplies (Marsh, band 2)",
+		name = "Electronic supplies (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1767,7 +1767,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_electronics_marsh_3 = {
-		name = "Electronic supplies (Marsh, band 3)",
+		name = "Electronic supplies (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1781,7 +1781,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_electronics_marsh_4 = {
-		name = "Electronic supplies (Marsh, band 4)",
+		name = "Electronic supplies (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1853,7 +1853,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_kitchen_marsh_1 = {
-		name = "Kitchen supplies (Marsh, band 1)",
+		name = "Kitchen supplies (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1865,7 +1865,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_kitchen_marsh_2 = {
-		name = "Kitchen supplies (Marsh, band 2)",
+		name = "Kitchen supplies (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1877,7 +1877,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_kitchen_marsh_3 = {
-		name = "Kitchen supplies (Marsh, band 3)",
+		name = "Kitchen supplies (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1889,7 +1889,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_kitchen_marsh_4 = {
-		name = "Kitchen supplies (Marsh, band 4)",
+		name = "Kitchen supplies (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1901,7 +1901,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_medical_marsh_1 = {
-		name = "Medical supplies (Marsh, band 1)",
+		name = "Medical supplies (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1912,7 +1912,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_medical_marsh_2 = {
-		name = "Medical supplies (Marsh, band 2)",
+		name = "Medical supplies (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1923,7 +1923,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_medical_marsh_3 = {
-		name = "Medical supplies (Marsh, band 3)",
+		name = "Medical supplies (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -1934,7 +1934,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_medical_marsh_4 = {
-		name = "Medical supplies (Marsh, band 4)",
+		name = "Medical supplies (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2097,7 +2097,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_research_marsh_1 = {
-		name = "Research supplies (Marsh, band 1)",
+		name = "Research supplies (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2110,7 +2110,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_research_marsh_2 = {
-		name = "Research supplies (Marsh, band 2)",
+		name = "Research supplies (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2124,7 +2124,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_research_marsh_3 = {
-		name = "Research supplies (Marsh, band 3)",
+		name = "Research supplies (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2138,7 +2138,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_research_marsh_4 = {
-		name = "Research supplies (Marsh, band 4)",
+		name = "Research supplies (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2207,7 +2207,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_textiles_marsh_1 = {
-		name = "Textiles and protective materials (Marsh, band 1)",
+		name = "Textiles and protective materials (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2218,7 +2218,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_textiles_marsh_2 = {
-		name = "Textiles and protective materials (Marsh, band 2)",
+		name = "Textiles and protective materials (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2230,7 +2230,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_textiles_marsh_3 = {
-		name = "Textiles and protective materials (Marsh, band 3)",
+		name = "Textiles and protective materials (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2242,7 +2242,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_textiles_marsh_4 = {
-		name = "Textiles and protective materials (Marsh, band 4)",
+		name = "Textiles and protective materials (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2302,7 +2302,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trade_marsh_1 = {
-		name = "Trading stock (Marsh, band 1)",
+		name = "Trading stock (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2313,7 +2313,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trade_marsh_2 = {
-		name = "Trading stock (Marsh, band 2)",
+		name = "Trading stock (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2325,7 +2325,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trade_marsh_3 = {
-		name = "Trading stock (Marsh, band 3)",
+		name = "Trading stock (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2337,7 +2337,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trade_marsh_4 = {
-		name = "Trading stock (Marsh, band 4)",
+		name = "Trading stock (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2400,7 +2400,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trail_marsh_1 = {
-		name = "Trail supplies (Marsh, band 1)",
+		name = "Trail supplies (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2413,7 +2413,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trail_marsh_2 = {
-		name = "Trail supplies (Marsh, band 2)",
+		name = "Trail supplies (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2426,7 +2426,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trail_marsh_3 = {
-		name = "Trail supplies (Marsh, band 3)",
+		name = "Trail supplies (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2439,7 +2439,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_trail_marsh_4 = {
-		name = "Trail supplies (Marsh, band 4)",
+		name = "Trail supplies (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2452,7 +2452,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_utilities_marsh_1 = {
-		name = "Utility supplies (Marsh, band 1)",
+		name = "Utility supplies (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2463,7 +2463,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_utilities_marsh_2 = {
-		name = "Utility supplies (Marsh, band 2)",
+		name = "Utility supplies (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2476,7 +2476,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_utilities_marsh_3 = {
-		name = "Utility supplies (Marsh, band 3)",
+		name = "Utility supplies (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2489,7 +2489,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_utilities_marsh_4 = {
-		name = "Utility supplies (Marsh, band 4)",
+		name = "Utility supplies (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2557,7 +2557,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_workshop_marsh_1 = {
-		name = "Workshop supplies (Marsh, band 1)",
+		name = "Workshop supplies (Swamps, band 1)",
 		tier = "common",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2569,7 +2569,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_workshop_marsh_2 = {
-		name = "Workshop supplies (Marsh, band 2)",
+		name = "Workshop supplies (Swamps, band 2)",
 		tier = "uncommon",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2583,7 +2583,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_workshop_marsh_3 = {
-		name = "Workshop supplies (Marsh, band 3)",
+		name = "Workshop supplies (Swamps, band 3)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -2597,7 +2597,7 @@ ix.progression.itemPools = {
 		},
 	},
 	town_delivery_workshop_marsh_4 = {
-		name = "Workshop supplies (Marsh, band 4)",
+		name = "Workshop supplies (Swamps, band 4)",
 		tier = "rare",
 		evidence = "FTS point counts and weighted supply; see docs/npc-overhaul/delivery-balance.md.",
 		candidates = {
@@ -4200,7 +4200,7 @@ ix.progression.requirementBatchSizes = {
 }
 
 ix.progression.itemPools.town_expansion_2c39104686e8 = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
+	name = "Survey notes and measuring instruments: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -4213,7 +4213,7 @@ ix.progression.itemPools.town_expansion_2c39104686e8 = {
 }
 
 ix.progression.itemPools.town_expansion_9541551e9e93 = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
+	name = "Survey notes and measuring instruments: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -4232,7 +4232,7 @@ ix.progression.itemPools.town_expansion_9541551e9e93 = {
 }
 
 ix.progression.itemPools.town_expansion_760a26e25631 = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
+	name = "Survey notes and measuring instruments: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook2"},
@@ -4246,7 +4246,7 @@ ix.progression.itemPools.town_expansion_760a26e25631 = {
 }
 
 ix.progression.itemPools.town_expansion_d1ac14ec4037 = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
+	name = "Survey notes and measuring instruments: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -4265,7 +4265,7 @@ ix.progression.itemPools.town_expansion_d1ac14ec4037 = {
 }
 
 ix.progression.itemPools.town_expansion_16ea1d93ed79 = {
-	name = "Survey notes and measuring instruments: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Survey notes and measuring instruments: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -4279,7 +4279,7 @@ ix.progression.itemPools.town_expansion_16ea1d93ed79 = {
 }
 
 ix.progression.itemPools.town_expansion_9986d3394105 = {
-	name = "Survey notes and measuring instruments: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Survey notes and measuring instruments: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -4287,7 +4287,7 @@ ix.progression.itemPools.town_expansion_9986d3394105 = {
 }
 
 ix.progression.itemPools.town_expansion_f992b065f19b = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Survey notes and measuring instruments: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -4310,7 +4310,7 @@ ix.progression.itemPools.town_expansion_f992b065f19b = {
 }
 
 ix.progression.itemPools.town_expansion_9c6bee1426dc = {
-	name = "Survey notes and measuring instruments: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Survey notes and measuring instruments: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -4327,7 +4327,7 @@ ix.progression.itemPools.town_expansion_9c6bee1426dc = {
 }
 
 ix.progression.itemPools.town_expansion_08367600e48c = {
-	name = "Survey notes and measuring instruments: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Survey notes and measuring instruments: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_detector"},
@@ -4339,7 +4339,7 @@ ix.progression.itemPools.town_expansion_08367600e48c = {
 }
 
 ix.progression.itemPools.town_expansion_ec6a9a5eae75 = {
-	name = "Survey notes and measuring instruments: general supplies (Marsh)",
+	name = "Survey notes and measuring instruments: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -4358,7 +4358,7 @@ ix.progression.itemPools.town_expansion_ec6a9a5eae75 = {
 }
 
 ix.progression.itemPools.town_expansion_2c4f96357444 = {
-	name = "Survey notes and measuring instruments: supporting supplies (Marsh)",
+	name = "Survey notes and measuring instruments: supporting supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -4367,7 +4367,7 @@ ix.progression.itemPools.town_expansion_2c4f96357444 = {
 }
 
 ix.progression.itemPools.town_expansion_a436288caee5 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh)",
+	name = "Freight cases and cargo packing: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_paracord"},
@@ -4380,7 +4380,7 @@ ix.progression.itemPools.town_expansion_a436288caee5 = {
 }
 
 ix.progression.itemPools.town_expansion_ef56d98e1e68 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh)",
+	name = "Freight cases and cargo packing: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_paracord"},
@@ -4394,7 +4394,7 @@ ix.progression.itemPools.town_expansion_ef56d98e1e68 = {
 }
 
 ix.progression.itemPools.town_expansion_4efa86832367 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh)",
+	name = "Freight cases and cargo packing: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_paracord"},
@@ -4407,7 +4407,7 @@ ix.progression.itemPools.town_expansion_4efa86832367 = {
 }
 
 ix.progression.itemPools.town_expansion_8313ff40d2d3 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Freight cases and cargo packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbon_case"},
@@ -4422,7 +4422,7 @@ ix.progression.itemPools.town_expansion_8313ff40d2d3 = {
 }
 
 ix.progression.itemPools.town_expansion_3389c064b502 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Freight cases and cargo packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbon_case"},
@@ -4437,7 +4437,7 @@ ix.progression.itemPools.town_expansion_3389c064b502 = {
 }
 
 ix.progression.itemPools.town_expansion_03a67c43cf19 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh)",
+	name = "Freight cases and cargo packing: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_paracord"},
@@ -4451,7 +4451,7 @@ ix.progression.itemPools.town_expansion_03a67c43cf19 = {
 }
 
 ix.progression.itemPools.town_expansion_742385b91f8d = {
-	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Freight cases and cargo packing: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_flammable_huntermatches"},
@@ -4466,7 +4466,7 @@ ix.progression.itemPools.town_expansion_742385b91f8d = {
 }
 
 ix.progression.itemPools.town_expansion_2847198e6a81 = {
-	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Freight cases and cargo packing: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -4489,7 +4489,7 @@ ix.progression.itemPools.town_expansion_2847198e6a81 = {
 }
 
 ix.progression.itemPools.town_expansion_58819248abd4 = {
-	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Freight cases and cargo packing: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabric_fleece"},
@@ -4504,7 +4504,7 @@ ix.progression.itemPools.town_expansion_58819248abd4 = {
 }
 
 ix.progression.itemPools.town_expansion_c706432f6e12 = {
-	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Freight cases and cargo packing: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -4519,7 +4519,7 @@ ix.progression.itemPools.town_expansion_c706432f6e12 = {
 }
 
 ix.progression.itemPools.town_expansion_6a51d7730e3e = {
-	name = "Freight cases and cargo packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Freight cases and cargo packing: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -4542,7 +4542,7 @@ ix.progression.itemPools.town_expansion_6a51d7730e3e = {
 }
 
 ix.progression.itemPools.town_expansion_7ac8639f4591 = {
-	name = "Freight cases and cargo packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Freight cases and cargo packing: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -4557,7 +4557,7 @@ ix.progression.itemPools.town_expansion_7ac8639f4591 = {
 }
 
 ix.progression.itemPools.town_expansion_c065cd2ebf15 = {
-	name = "Common anomalous specimens (Marsh)",
+	name = "Common anomalous specimens (Swamps)",
 	tier = "uncommon",
 	candidates = {
 		{item = "artifact_bolt"},
@@ -4572,7 +4572,7 @@ ix.progression.itemPools.town_expansion_c065cd2ebf15 = {
 }
 
 ix.progression.itemPools.town_expansion_de7b35dd9b7f = {
-	name = "Field samples and laboratory containment: general supplies (Marsh)",
+	name = "Field samples and laboratory containment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -4589,7 +4589,7 @@ ix.progression.itemPools.town_expansion_de7b35dd9b7f = {
 }
 
 ix.progression.itemPools.town_expansion_2543f03b06bc = {
-	name = "Field samples and laboratory containment: general supplies (Marsh)",
+	name = "Field samples and laboratory containment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -4606,7 +4606,7 @@ ix.progression.itemPools.town_expansion_2543f03b06bc = {
 }
 
 ix.progression.itemPools.town_expansion_911d8be41ce3 = {
-	name = "Common electrical artifacts (Marsh)",
+	name = "Common electrical artifacts (Swamps)",
 	tier = "uncommon",
 	candidates = {
 		{item = "artifact_battery"},
@@ -4616,7 +4616,7 @@ ix.progression.itemPools.town_expansion_911d8be41ce3 = {
 }
 
 ix.progression.itemPools.town_expansion_25b061f3b22f = {
-	name = "Field samples and laboratory containment: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Field samples and laboratory containment: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -4629,7 +4629,7 @@ ix.progression.itemPools.town_expansion_25b061f3b22f = {
 }
 
 ix.progression.itemPools.town_expansion_93a96a4765bd = {
-	name = "Rare field artifacts (Marsh, Garbage, Waystation)",
+	name = "Rare field artifacts (Swamps, Garbage, Waystation)",
 	tier = "rare",
 	candidates = {
 		{item = "artifact_crystal"},
@@ -4641,7 +4641,7 @@ ix.progression.itemPools.town_expansion_93a96a4765bd = {
 }
 
 ix.progression.itemPools.town_expansion_1537e0c06e89 = {
-	name = "Field samples and laboratory containment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field samples and laboratory containment: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_anomaly_plant"},
@@ -4663,7 +4663,7 @@ ix.progression.itemPools.town_expansion_1537e0c06e89 = {
 }
 
 ix.progression.itemPools.town_expansion_daac7c31b7d8 = {
-	name = "Field samples and laboratory containment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field samples and laboratory containment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -4676,7 +4676,7 @@ ix.progression.itemPools.town_expansion_daac7c31b7d8 = {
 }
 
 ix.progression.itemPools.town_expansion_9eca93351695 = {
-	name = "Rare field artifacts (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Rare field artifacts (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "rare",
 	candidates = {
 		{item = "artifact_crystal"},
@@ -4688,7 +4688,7 @@ ix.progression.itemPools.town_expansion_9eca93351695 = {
 }
 
 ix.progression.itemPools.town_expansion_4191637a3663 = {
-	name = "Exceptional field artifacts (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Exceptional field artifacts (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "exceptional",
 	candidates = {
 		{item = "artifact_arachno"},
@@ -4699,7 +4699,7 @@ ix.progression.itemPools.town_expansion_4191637a3663 = {
 }
 
 ix.progression.itemPools.town_expansion_c81d136325a3 = {
-	name = "Field samples and laboratory containment: general supplies (Marsh)",
+	name = "Field samples and laboratory containment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -4712,7 +4712,7 @@ ix.progression.itemPools.town_expansion_c81d136325a3 = {
 }
 
 ix.progression.itemPools.town_expansion_a93997bc4506 = {
-	name = "Field samples and laboratory containment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field samples and laboratory containment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -4730,7 +4730,7 @@ ix.progression.itemPools.town_expansion_a93997bc4506 = {
 }
 
 ix.progression.itemPools.town_expansion_8b6f5686711c = {
-	name = "Common electrical artifacts (Marsh, Garbage, Waystation)",
+	name = "Common electrical artifacts (Swamps, Garbage, Waystation)",
 	tier = "uncommon",
 	candidates = {
 		{item = "artifact_battery"},
@@ -4740,7 +4740,7 @@ ix.progression.itemPools.town_expansion_8b6f5686711c = {
 }
 
 ix.progression.itemPools.town_expansion_c0bcbab54219 = {
-	name = "Field samples and laboratory containment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field samples and laboratory containment: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_anomaly_plant"},
@@ -4762,7 +4762,7 @@ ix.progression.itemPools.town_expansion_c0bcbab54219 = {
 }
 
 ix.progression.itemPools.town_expansion_42f95bf26576 = {
-	name = "Field samples and laboratory containment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field samples and laboratory containment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -4775,7 +4775,7 @@ ix.progression.itemPools.town_expansion_42f95bf26576 = {
 }
 
 ix.progression.itemPools.town_expansion_651aa3a30eb5 = {
-	name = "Common electrical artifacts (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Common electrical artifacts (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "uncommon",
 	candidates = {
 		{item = "artifact_battery"},
@@ -4798,7 +4798,7 @@ ix.progression.itemPools.town_expansion_42254f70f06f = {
 }
 
 ix.progression.itemPools.town_expansion_301902d9f818 = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic11"},
@@ -4811,7 +4811,7 @@ ix.progression.itemPools.town_expansion_301902d9f818 = {
 }
 
 ix.progression.itemPools.town_expansion_e495fb79e800 = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -4826,7 +4826,7 @@ ix.progression.itemPools.town_expansion_e495fb79e800 = {
 }
 
 ix.progression.itemPools.town_expansion_ce9765fb7cf7 = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -4846,7 +4846,7 @@ ix.progression.itemPools.town_expansion_ce9765fb7cf7 = {
 }
 
 ix.progression.itemPools.town_expansion_70d1a7e12f99 = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -4861,7 +4861,7 @@ ix.progression.itemPools.town_expansion_70d1a7e12f99 = {
 }
 
 ix.progression.itemPools.town_expansion_ea19e7f52af0 = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -4889,7 +4889,7 @@ ix.progression.itemPools.town_expansion_38773dec85c7 = {
 }
 
 ix.progression.itemPools.town_expansion_c1cbada5e01f = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -4902,7 +4902,7 @@ ix.progression.itemPools.town_expansion_c1cbada5e01f = {
 }
 
 ix.progression.itemPools.town_expansion_59255152cb9b = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -4922,7 +4922,7 @@ ix.progression.itemPools.town_expansion_59255152cb9b = {
 }
 
 ix.progression.itemPools.town_expansion_3b8591e605b5 = {
-	name = "Ordnance and protective equipment: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -4933,7 +4933,7 @@ ix.progression.itemPools.town_expansion_3b8591e605b5 = {
 }
 
 ix.progression.itemPools.town_expansion_42e6fb2eee15 = {
-	name = "Ordnance and protective equipment: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Ordnance and protective equipment: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "uncommon",
 	candidates = {
 		{item = "value_container_parls"},
@@ -4943,7 +4943,7 @@ ix.progression.itemPools.town_expansion_42e6fb2eee15 = {
 }
 
 ix.progression.itemPools.town_expansion_bbed61122071 = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -4963,7 +4963,7 @@ ix.progression.itemPools.town_expansion_bbed61122071 = {
 }
 
 ix.progression.itemPools.town_expansion_bd11a578386c = {
-	name = "Ordnance and protective equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Ordnance and protective equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -4975,7 +4975,7 @@ ix.progression.itemPools.town_expansion_bd11a578386c = {
 }
 
 ix.progression.itemPools.town_expansion_ebe1eeabefee = {
-	name = "Ordnance and protective equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Ordnance and protective equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "uncommon",
 	candidates = {
 		{item = "value_container_parls"},
@@ -4999,7 +4999,7 @@ ix.progression.itemPools.town_expansion_1d12d1615a01 = {
 }
 
 ix.progression.itemPools.town_expansion_9e28abde391d = {
-	name = "Ordnance and protective equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Ordnance and protective equipment: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -5019,7 +5019,7 @@ ix.progression.itemPools.town_expansion_9e28abde391d = {
 }
 
 ix.progression.itemPools.town_expansion_d4d3a8a90806 = {
-	name = "Ordnance and protective equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Ordnance and protective equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5031,7 +5031,7 @@ ix.progression.itemPools.town_expansion_d4d3a8a90806 = {
 }
 
 ix.progression.itemPools.town_expansion_c37f2fe71765 = {
-	name = "Ordnance and protective equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Ordnance and protective equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "uncommon",
 	candidates = {
 		{item = "value_container_parls"},
@@ -5054,7 +5054,7 @@ ix.progression.itemPools.town_expansion_11432963f8ae = {
 }
 
 ix.progression.itemPools.town_expansion_64a8e2e09127 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_guncleaner"},
@@ -5067,7 +5067,7 @@ ix.progression.itemPools.town_expansion_64a8e2e09127 = {
 }
 
 ix.progression.itemPools.town_expansion_dc0d9e9b2d00 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5082,7 +5082,7 @@ ix.progression.itemPools.town_expansion_dc0d9e9b2d00 = {
 }
 
 ix.progression.itemPools.town_expansion_280bb8599be5 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_gunoil"},
@@ -5090,7 +5090,7 @@ ix.progression.itemPools.town_expansion_280bb8599be5 = {
 }
 
 ix.progression.itemPools.town_expansion_e00696cd67cf = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_guncleaner"},
@@ -5117,7 +5117,7 @@ ix.progression.itemPools.town_expansion_e5d6c53061f3 = {
 }
 
 ix.progression.itemPools.town_expansion_85f15f41a5ef = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_guncleaner"},
@@ -5130,7 +5130,7 @@ ix.progression.itemPools.town_expansion_85f15f41a5ef = {
 }
 
 ix.progression.itemPools.town_expansion_7be8fdb53f87 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5145,7 +5145,7 @@ ix.progression.itemPools.town_expansion_7be8fdb53f87 = {
 }
 
 ix.progression.itemPools.town_expansion_b831b88bf8a7 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5162,7 +5162,7 @@ ix.progression.itemPools.town_expansion_b831b88bf8a7 = {
 }
 
 ix.progression.itemPools.town_expansion_90de7166a430 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5175,7 +5175,7 @@ ix.progression.itemPools.town_expansion_90de7166a430 = {
 }
 
 ix.progression.itemPools.town_expansion_c49ce575cf50 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5201,7 +5201,7 @@ ix.progression.itemPools.town_expansion_dd5ba6faf7e5 = {
 }
 
 ix.progression.itemPools.town_expansion_60d977cc67e0 = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -5221,7 +5221,7 @@ ix.progression.itemPools.town_expansion_60d977cc67e0 = {
 }
 
 ix.progression.itemPools.town_expansion_91612d91ad03 = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -5233,7 +5233,7 @@ ix.progression.itemPools.town_expansion_91612d91ad03 = {
 }
 
 ix.progression.itemPools.town_expansion_df7b8b770885 = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5251,7 +5251,7 @@ ix.progression.itemPools.town_expansion_df7b8b770885 = {
 }
 
 ix.progression.itemPools.town_expansion_2bcd5ac29800 = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -5271,7 +5271,7 @@ ix.progression.itemPools.town_expansion_2bcd5ac29800 = {
 }
 
 ix.progression.itemPools.town_expansion_5b31b14470db = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -5283,7 +5283,7 @@ ix.progression.itemPools.town_expansion_5b31b14470db = {
 }
 
 ix.progression.itemPools.town_expansion_dc7e0ab4a6de = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -5294,7 +5294,7 @@ ix.progression.itemPools.town_expansion_dc7e0ab4a6de = {
 }
 
 ix.progression.itemPools.town_expansion_2ef4539083ea = {
-	name = "Reloading components and ammunition storage: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -5312,7 +5312,7 @@ ix.progression.itemPools.town_expansion_2ef4539083ea = {
 }
 
 ix.progression.itemPools.town_expansion_aea4e8575719 = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -5332,7 +5332,7 @@ ix.progression.itemPools.town_expansion_aea4e8575719 = {
 }
 
 ix.progression.itemPools.town_expansion_4edbd45ed05d = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -5343,7 +5343,7 @@ ix.progression.itemPools.town_expansion_4edbd45ed05d = {
 }
 
 ix.progression.itemPools.town_expansion_6c1ea6c989dc = {
-	name = "Reloading components and ammunition storage: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Reloading components and ammunition storage: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -5369,7 +5369,7 @@ ix.progression.itemPools.town_expansion_65397c5ae9bc = {
 }
 
 ix.progression.itemPools.town_expansion_486c5fd6b835 = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	name = "Historical documents and technical records: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_documents_12"},
@@ -5382,7 +5382,7 @@ ix.progression.itemPools.town_expansion_486c5fd6b835 = {
 }
 
 ix.progression.itemPools.town_expansion_406f35b6f207 = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	name = "Historical documents and technical records: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -5416,7 +5416,7 @@ ix.progression.itemPools.town_expansion_5eeeea7bc9ae = {
 }
 
 ix.progression.itemPools.town_expansion_4bff88ee59a9 = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	name = "Historical documents and technical records: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -5431,7 +5431,7 @@ ix.progression.itemPools.town_expansion_4bff88ee59a9 = {
 }
 
 ix.progression.itemPools.town_expansion_51d6dd480c10 = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	name = "Historical documents and technical records: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -5445,7 +5445,7 @@ ix.progression.itemPools.town_expansion_51d6dd480c10 = {
 }
 
 ix.progression.itemPools.town_expansion_27ac5d00881a = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation)",
+	name = "Historical documents and technical records: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -5477,7 +5477,7 @@ ix.progression.itemPools.town_expansion_09610a098c14 = {
 }
 
 ix.progression.itemPools.town_expansion_24ed82226a6c = {
-	name = "Historical documents and technical records: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Historical documents and technical records: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -5492,7 +5492,7 @@ ix.progression.itemPools.town_expansion_24ed82226a6c = {
 }
 
 ix.progression.itemPools.town_expansion_7ab712313d3a = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Historical documents and technical records: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -5515,7 +5515,7 @@ ix.progression.itemPools.town_expansion_7ab712313d3a = {
 }
 
 ix.progression.itemPools.town_expansion_89df7e4e2855 = {
-	name = "Historical documents and technical records: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Historical documents and technical records: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_flyer_02"},
@@ -5530,7 +5530,7 @@ ix.progression.itemPools.town_expansion_89df7e4e2855 = {
 }
 
 ix.progression.itemPools.town_expansion_9117b3dcad2a = {
-	name = "Historical documents and technical records: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Historical documents and technical records: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_flyer_02"},
@@ -5544,7 +5544,7 @@ ix.progression.itemPools.town_expansion_9117b3dcad2a = {
 }
 
 ix.progression.itemPools.town_expansion_c368aedd068c = {
-	name = "Historical documents and technical records: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Historical documents and technical records: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -5567,7 +5567,7 @@ ix.progression.itemPools.town_expansion_c368aedd068c = {
 }
 
 ix.progression.itemPools.town_expansion_fc09dd38d32c = {
-	name = "Historical documents and technical records: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Historical documents and technical records: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_flyer_02"},
@@ -5593,7 +5593,7 @@ ix.progression.itemPools.town_expansion_8000e56a4250 = {
 }
 
 ix.progression.itemPools.town_expansion_c1f3ccbfe4fc = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage)",
+	name = "Storage upkeep and discreet containers: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_bleach"},
@@ -5606,7 +5606,7 @@ ix.progression.itemPools.town_expansion_c1f3ccbfe4fc = {
 }
 
 ix.progression.itemPools.town_expansion_c463135f111b = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage)",
+	name = "Storage upkeep and discreet containers: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_antiinsect"},
@@ -5640,7 +5640,7 @@ ix.progression.itemPools.town_expansion_f7aa2d4db5d3 = {
 }
 
 ix.progression.itemPools.town_expansion_5508561e2495 = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage)",
+	name = "Storage upkeep and discreet containers: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_antiinsect"},
@@ -5655,7 +5655,7 @@ ix.progression.itemPools.town_expansion_5508561e2495 = {
 }
 
 ix.progression.itemPools.town_expansion_fc9193c43ae1 = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation)",
+	name = "Storage upkeep and discreet containers: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_antiinsect"},
@@ -5670,7 +5670,7 @@ ix.progression.itemPools.town_expansion_fc9193c43ae1 = {
 }
 
 ix.progression.itemPools.town_expansion_609694bab68e = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation)",
+	name = "Storage upkeep and discreet containers: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_antiinsect"},
@@ -5704,7 +5704,7 @@ ix.progression.itemPools.town_expansion_c140ec1b36ff = {
 }
 
 ix.progression.itemPools.town_expansion_3ee97809ffce = {
-	name = "Storage upkeep and discreet containers: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Storage upkeep and discreet containers: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -5719,7 +5719,7 @@ ix.progression.itemPools.town_expansion_3ee97809ffce = {
 }
 
 ix.progression.itemPools.town_expansion_8280e5acf226 = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Storage upkeep and discreet containers: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_antiinsect"},
@@ -5739,7 +5739,7 @@ ix.progression.itemPools.town_expansion_8280e5acf226 = {
 }
 
 ix.progression.itemPools.town_expansion_0fb1615accd2 = {
-	name = "Storage upkeep and discreet containers: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Storage upkeep and discreet containers: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -5754,7 +5754,7 @@ ix.progression.itemPools.town_expansion_0fb1615accd2 = {
 }
 
 ix.progression.itemPools.town_expansion_afeb42da558e = {
-	name = "Storage upkeep and discreet containers: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Storage upkeep and discreet containers: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -5768,7 +5768,7 @@ ix.progression.itemPools.town_expansion_afeb42da558e = {
 }
 
 ix.progression.itemPools.town_expansion_cc5babbdb781 = {
-	name = "Storage upkeep and discreet containers: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Storage upkeep and discreet containers: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_antiinsect"},
@@ -5788,7 +5788,7 @@ ix.progression.itemPools.town_expansion_cc5babbdb781 = {
 }
 
 ix.progression.itemPools.town_expansion_d695ccfe3436 = {
-	name = "Storage upkeep and discreet containers: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Storage upkeep and discreet containers: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -5801,7 +5801,7 @@ ix.progression.itemPools.town_expansion_d695ccfe3436 = {
 }
 
 ix.progression.itemPools.town_expansion_745c62856683 = {
-	name = "Laboratory containment and research reagents: general supplies (Marsh)",
+	name = "Laboratory containment and research reagents: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -5818,7 +5818,7 @@ ix.progression.itemPools.town_expansion_745c62856683 = {
 }
 
 ix.progression.itemPools.town_expansion_8b83c0d2cc3a = {
-	name = "Laboratory containment and research reagents: general supplies (Marsh)",
+	name = "Laboratory containment and research reagents: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -5835,7 +5835,7 @@ ix.progression.itemPools.town_expansion_8b83c0d2cc3a = {
 }
 
 ix.progression.itemPools.town_expansion_c4322c51582c = {
-	name = "Laboratory containment and research reagents: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Laboratory containment and research reagents: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -5858,7 +5858,7 @@ ix.progression.itemPools.town_expansion_c4322c51582c = {
 }
 
 ix.progression.itemPools.town_expansion_7d43e6ba987e = {
-	name = "Laboratory containment and research reagents: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Laboratory containment and research reagents: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_electro_gyroscope"},
@@ -5873,7 +5873,7 @@ ix.progression.itemPools.town_expansion_7d43e6ba987e = {
 }
 
 ix.progression.itemPools.town_expansion_2b87f36b3a5c = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	name = "Generator parts and camp electrics: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5886,7 +5886,7 @@ ix.progression.itemPools.town_expansion_2b87f36b3a5c = {
 }
 
 ix.progression.itemPools.town_expansion_e19a010d3045 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	name = "Generator parts and camp electrics: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5905,7 +5905,7 @@ ix.progression.itemPools.town_expansion_e19a010d3045 = {
 }
 
 ix.progression.itemPools.town_expansion_9f54f7183eca = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	name = "Generator parts and camp electrics: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5914,7 +5914,7 @@ ix.progression.itemPools.town_expansion_9f54f7183eca = {
 }
 
 ix.progression.itemPools.town_expansion_26c6aac8b583 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	name = "Generator parts and camp electrics: general supplies (Swamps)",
 	tier = "uncommon",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5923,7 +5923,7 @@ ix.progression.itemPools.town_expansion_26c6aac8b583 = {
 }
 
 ix.progression.itemPools.town_expansion_31db5e234de1 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	name = "Generator parts and camp electrics: general supplies (Swamps)",
 	tier = "uncommon",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5932,7 +5932,7 @@ ix.progression.itemPools.town_expansion_31db5e234de1 = {
 }
 
 ix.progression.itemPools.town_expansion_370444fd22ff = {
-	name = "Generator parts and camp electrics: general supplies (Marsh)",
+	name = "Generator parts and camp electrics: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5951,7 +5951,7 @@ ix.progression.itemPools.town_expansion_370444fd22ff = {
 }
 
 ix.progression.itemPools.town_expansion_15c973ec8c45 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation)",
+	name = "Generator parts and camp electrics: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5972,7 +5972,7 @@ ix.progression.itemPools.town_expansion_15c973ec8c45 = {
 }
 
 ix.progression.itemPools.town_expansion_192256dbd2c6 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation)",
+	name = "Generator parts and camp electrics: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -5987,7 +5987,7 @@ ix.progression.itemPools.town_expansion_192256dbd2c6 = {
 }
 
 ix.progression.itemPools.town_expansion_4a275fcf876d = {
-	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation)",
+	name = "Generator parts and camp electrics: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -6002,7 +6002,7 @@ ix.progression.itemPools.town_expansion_4a275fcf876d = {
 }
 
 ix.progression.itemPools.town_expansion_e210a8bed09e = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Generator parts and camp electrics: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -6016,7 +6016,7 @@ ix.progression.itemPools.town_expansion_e210a8bed09e = {
 }
 
 ix.progression.itemPools.town_expansion_c58a767bfe4b = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Generator parts and camp electrics: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -6028,7 +6028,7 @@ ix.progression.itemPools.town_expansion_c58a767bfe4b = {
 }
 
 ix.progression.itemPools.town_expansion_95320215b0ba = {
-	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Generator parts and camp electrics: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -6049,7 +6049,7 @@ ix.progression.itemPools.town_expansion_95320215b0ba = {
 }
 
 ix.progression.itemPools.town_expansion_a5605073b6ac = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Generator parts and camp electrics: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -6063,7 +6063,7 @@ ix.progression.itemPools.town_expansion_a5605073b6ac = {
 }
 
 ix.progression.itemPools.town_expansion_2c1252e65ba4 = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Generator parts and camp electrics: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -6075,7 +6075,7 @@ ix.progression.itemPools.town_expansion_2c1252e65ba4 = {
 }
 
 ix.progression.itemPools.town_expansion_0a417ddc981b = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Generator parts and camp electrics: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -6086,7 +6086,7 @@ ix.progression.itemPools.town_expansion_0a417ddc981b = {
 }
 
 ix.progression.itemPools.town_expansion_72aa1a2f1e76 = {
-	name = "Generator parts and camp electrics: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Generator parts and camp electrics: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_carbattery"},
@@ -6107,7 +6107,7 @@ ix.progression.itemPools.town_expansion_72aa1a2f1e76 = {
 }
 
 ix.progression.itemPools.town_expansion_2c3be06003ee = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Generator parts and camp electrics: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -6121,7 +6121,7 @@ ix.progression.itemPools.town_expansion_2c3be06003ee = {
 }
 
 ix.progression.itemPools.town_expansion_ed0ffb379f26 = {
-	name = "Generator parts and camp electrics: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Generator parts and camp electrics: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -6131,21 +6131,21 @@ ix.progression.itemPools.town_expansion_ed0ffb379f26 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_2345f7264026 = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
+ix.progression.itemPools.town_expansion_48dbe0d5b154 = {
+	name = "Ordinary shop supplies (Swamps)",
 	tier = "common",
 	candidates = {
-		{item = "value_antique_vase"},
-		{item = "value_bear_souvenir"},
-		{item = "value_skullring"},
-		{item = "value_statue_cat"},
-		{item = "value_statue_lion"},
-		{item = "value_statue_raven"},
+		{item = "value_detergent"},
+		{item = "value_glue_1"},
+		{item = "value_glue_2"},
+		{item = "value_glue_3"},
+		{item = "value_glue_4"},
+		{item = "value_hose"},
 	},
 }
 
 ix.progression.itemPools.town_expansion_8b4b54445113 = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
+	name = "Resale curios and small valuables: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6162,7 +6162,7 @@ ix.progression.itemPools.town_expansion_8b4b54445113 = {
 }
 
 ix.progression.itemPools.town_expansion_15b692cf7ae6 = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
+	name = "Resale curios and small valuables: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6176,7 +6176,7 @@ ix.progression.itemPools.town_expansion_15b692cf7ae6 = {
 }
 
 ix.progression.itemPools.town_expansion_6c290a02e2a4 = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
+	name = "Resale curios and small valuables: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6190,7 +6190,7 @@ ix.progression.itemPools.town_expansion_6c290a02e2a4 = {
 }
 
 ix.progression.itemPools.town_expansion_aee789b711ad = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
+	name = "Resale curios and small valuables: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6207,7 +6207,7 @@ ix.progression.itemPools.town_expansion_aee789b711ad = {
 }
 
 ix.progression.itemPools.town_expansion_9165c882cc6d = {
-	name = "Resale curios and small valuables: general supplies (Marsh)",
+	name = "Resale curios and small valuables: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6220,7 +6220,7 @@ ix.progression.itemPools.town_expansion_9165c882cc6d = {
 }
 
 ix.progression.itemPools.town_expansion_e28cbf1cd692 = {
-	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation)",
+	name = "Resale curios and small valuables: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6240,7 +6240,7 @@ ix.progression.itemPools.town_expansion_e28cbf1cd692 = {
 }
 
 ix.progression.itemPools.town_expansion_00a9f98fb179 = {
-	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation)",
+	name = "Resale curios and small valuables: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_vase"},
@@ -6252,7 +6252,7 @@ ix.progression.itemPools.town_expansion_00a9f98fb179 = {
 }
 
 ix.progression.itemPools.town_expansion_a16c78633f5e = {
-	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation)",
+	name = "Resale curios and small valuables: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_vase"},
@@ -6264,7 +6264,7 @@ ix.progression.itemPools.town_expansion_a16c78633f5e = {
 }
 
 ix.progression.itemPools.town_expansion_6611c76f562e = {
-	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Resale curios and small valuables: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -6280,7 +6280,7 @@ ix.progression.itemPools.town_expansion_6611c76f562e = {
 }
 
 ix.progression.itemPools.town_expansion_ea4a3ff123bc = {
-	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Resale curios and small valuables: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -6293,7 +6293,7 @@ ix.progression.itemPools.town_expansion_ea4a3ff123bc = {
 }
 
 ix.progression.itemPools.town_expansion_5881eaf81d7e = {
-	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Resale curios and small valuables: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6313,7 +6313,7 @@ ix.progression.itemPools.town_expansion_5881eaf81d7e = {
 }
 
 ix.progression.itemPools.town_expansion_9f80b188c008 = {
-	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Resale curios and small valuables: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -6329,7 +6329,7 @@ ix.progression.itemPools.town_expansion_9f80b188c008 = {
 }
 
 ix.progression.itemPools.town_expansion_08a8dc156b3a = {
-	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Resale curios and small valuables: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -6342,7 +6342,7 @@ ix.progression.itemPools.town_expansion_08a8dc156b3a = {
 }
 
 ix.progression.itemPools.town_expansion_3d5721363063 = {
-	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Resale curios and small valuables: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -6354,7 +6354,7 @@ ix.progression.itemPools.town_expansion_3d5721363063 = {
 }
 
 ix.progression.itemPools.town_expansion_bf10bed3cc79 = {
-	name = "Resale curios and small valuables: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Resale curios and small valuables: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_antique_teapot"},
@@ -6374,7 +6374,7 @@ ix.progression.itemPools.town_expansion_bf10bed3cc79 = {
 }
 
 ix.progression.itemPools.town_expansion_4f2d5163d707 = {
-	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Resale curios and small valuables: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -6390,7 +6390,7 @@ ix.progression.itemPools.town_expansion_4f2d5163d707 = {
 }
 
 ix.progression.itemPools.town_expansion_53d55c07b383 = {
-	name = "Resale curios and small valuables: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Resale curios and small valuables: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -6402,7 +6402,7 @@ ix.progression.itemPools.town_expansion_53d55c07b383 = {
 }
 
 ix.progression.itemPools.town_expansion_43d693fb144f = {
-	name = "Detector calibration and survey equipment: general supplies (Marsh)",
+	name = "Detector calibration and survey equipment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -6421,7 +6421,7 @@ ix.progression.itemPools.town_expansion_43d693fb144f = {
 }
 
 ix.progression.itemPools.town_expansion_c268760d508e = {
-	name = "Detector calibration and survey equipment: general supplies (Marsh)",
+	name = "Detector calibration and survey equipment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -6440,7 +6440,7 @@ ix.progression.itemPools.town_expansion_c268760d508e = {
 }
 
 ix.progression.itemPools.town_expansion_a5a382cf5db3 = {
-	name = "Detector calibration and survey equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Detector calibration and survey equipment: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_casezerogeo"},
@@ -6463,7 +6463,7 @@ ix.progression.itemPools.town_expansion_a5a382cf5db3 = {
 }
 
 ix.progression.itemPools.town_expansion_6be29e7a116d = {
-	name = "Detector calibration and survey equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Detector calibration and survey equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_9vbattery"},
@@ -6478,7 +6478,7 @@ ix.progression.itemPools.town_expansion_6be29e7a116d = {
 }
 
 ix.progression.itemPools.town_expansion_31c8ee1ee48f = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6491,7 +6491,7 @@ ix.progression.itemPools.town_expansion_31c8ee1ee48f = {
 }
 
 ix.progression.itemPools.town_expansion_e9bc2b73f8b0 = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6512,7 +6512,7 @@ ix.progression.itemPools.town_expansion_e9bc2b73f8b0 = {
 }
 
 ix.progression.itemPools.town_expansion_3154c30ff6bf = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6523,7 +6523,7 @@ ix.progression.itemPools.town_expansion_3154c30ff6bf = {
 }
 
 ix.progression.itemPools.town_expansion_7be59808c150 = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6544,7 +6544,7 @@ ix.progression.itemPools.town_expansion_7be59808c150 = {
 }
 
 ix.progression.itemPools.town_expansion_92f41ad4323a = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6567,7 +6567,7 @@ ix.progression.itemPools.town_expansion_92f41ad4323a = {
 }
 
 ix.progression.itemPools.town_expansion_a89397d5af5e = {
-	name = "Clinical supplies and trauma equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Clinical supplies and trauma equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -6582,7 +6582,7 @@ ix.progression.itemPools.town_expansion_a89397d5af5e = {
 }
 
 ix.progression.itemPools.town_expansion_f129053f6d26 = {
-	name = "Clinical supplies and trauma equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Clinical supplies and trauma equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_anomaly_plant"},
@@ -6593,7 +6593,7 @@ ix.progression.itemPools.town_expansion_f129053f6d26 = {
 }
 
 ix.progression.itemPools.town_expansion_7c1b1e2e5b90 = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6614,7 +6614,7 @@ ix.progression.itemPools.town_expansion_7c1b1e2e5b90 = {
 }
 
 ix.progression.itemPools.town_expansion_9bf329b664a1 = {
-	name = "Clinical supplies and trauma equipment: supporting supplies (Marsh)",
+	name = "Clinical supplies and trauma equipment: supporting supplies (Swamps)",
 	tier = "rare",
 	candidates = {
 		{item = "value_airfilter"},
@@ -6624,7 +6624,7 @@ ix.progression.itemPools.town_expansion_9bf329b664a1 = {
 }
 
 ix.progression.itemPools.town_expansion_0ac1ddad8ea9 = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6647,7 +6647,7 @@ ix.progression.itemPools.town_expansion_0ac1ddad8ea9 = {
 }
 
 ix.progression.itemPools.town_expansion_1344ee972c6f = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6662,7 +6662,7 @@ ix.progression.itemPools.town_expansion_1344ee972c6f = {
 }
 
 ix.progression.itemPools.town_expansion_4f3b0e281ad9 = {
-	name = "Clinical supplies and trauma equipment: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Clinical supplies and trauma equipment: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_med_aquatabs"},
@@ -6685,7 +6685,7 @@ ix.progression.itemPools.town_expansion_4f3b0e281ad9 = {
 }
 
 ix.progression.itemPools.town_expansion_3bf4bb4e77a2 = {
-	name = "Clinical supplies and trauma equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Clinical supplies and trauma equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_airfilter"},
@@ -6700,7 +6700,7 @@ ix.progression.itemPools.town_expansion_3bf4bb4e77a2 = {
 }
 
 ix.progression.itemPools.town_expansion_b86ca08c164d = {
-	name = "Clinical supplies and trauma equipment: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Clinical supplies and trauma equipment: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_anomaly_plant"},
@@ -6725,7 +6725,7 @@ ix.progression.itemPools.town_expansion_a115cb177717 = {
 }
 
 ix.progression.itemPools.town_expansion_f007cba67161 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_hultafors_db5000"},
@@ -6738,7 +6738,7 @@ ix.progression.itemPools.town_expansion_f007cba67161 = {
 }
 
 ix.progression.itemPools.town_expansion_93048bf51946 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6761,7 +6761,7 @@ ix.progression.itemPools.town_expansion_93048bf51946 = {
 }
 
 ix.progression.itemPools.town_expansion_f01f02d773ec = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_expandingfoam"},
@@ -6799,7 +6799,7 @@ ix.progression.itemPools.town_expansion_2b4d34254e73 = {
 }
 
 ix.progression.itemPools.town_expansion_86908d7e5831 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6814,7 +6814,7 @@ ix.progression.itemPools.town_expansion_86908d7e5831 = {
 }
 
 ix.progression.itemPools.town_expansion_2b209bd707b0 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6829,7 +6829,7 @@ ix.progression.itemPools.town_expansion_2b209bd707b0 = {
 }
 
 ix.progression.itemPools.town_expansion_a07b5a6724e3 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6852,7 +6852,7 @@ ix.progression.itemPools.town_expansion_a07b5a6724e3 = {
 }
 
 ix.progression.itemPools.town_expansion_b7200a7f95bb = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6867,7 +6867,7 @@ ix.progression.itemPools.town_expansion_b7200a7f95bb = {
 }
 
 ix.progression.itemPools.town_expansion_fd4b6b99785e = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6882,7 +6882,7 @@ ix.progression.itemPools.town_expansion_fd4b6b99785e = {
 }
 
 ix.progression.itemPools.town_expansion_1168bc176d8a = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6920,7 +6920,7 @@ ix.progression.itemPools.town_expansion_d1da9c5aae2f = {
 }
 
 ix.progression.itemPools.town_expansion_81061404cde0 = {
-	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Workshop tools and fabrication materials: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -6942,7 +6942,7 @@ ix.progression.itemPools.town_expansion_81061404cde0 = {
 }
 
 ix.progression.itemPools.town_expansion_8957d0e845ad = {
-	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Workshop tools and fabrication materials: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic11"},
@@ -6957,7 +6957,7 @@ ix.progression.itemPools.town_expansion_8957d0e845ad = {
 }
 
 ix.progression.itemPools.town_expansion_63a28dad3590 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -6980,7 +6980,7 @@ ix.progression.itemPools.town_expansion_63a28dad3590 = {
 }
 
 ix.progression.itemPools.town_expansion_5ef434e7a351 = {
-	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Workshop tools and fabrication materials: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7002,7 +7002,7 @@ ix.progression.itemPools.town_expansion_5ef434e7a351 = {
 }
 
 ix.progression.itemPools.town_expansion_a5f288f21963 = {
-	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Workshop tools and fabrication materials: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7017,7 +7017,7 @@ ix.progression.itemPools.town_expansion_a5f288f21963 = {
 }
 
 ix.progression.itemPools.town_expansion_7b6bb1241f98 = {
-	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Workshop tools and fabrication materials: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7031,7 +7031,7 @@ ix.progression.itemPools.town_expansion_7b6bb1241f98 = {
 }
 
 ix.progression.itemPools.town_expansion_cd001154e395 = {
-	name = "Workshop tools and fabrication materials: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Workshop tools and fabrication materials: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_kektape"},
@@ -7054,7 +7054,7 @@ ix.progression.itemPools.town_expansion_cd001154e395 = {
 }
 
 ix.progression.itemPools.town_expansion_c342ce00082c = {
-	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Workshop tools and fabrication materials: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7076,7 +7076,7 @@ ix.progression.itemPools.town_expansion_c342ce00082c = {
 }
 
 ix.progression.itemPools.town_expansion_3c9a03c85455 = {
-	name = "Workshop tools and fabrication materials: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Workshop tools and fabrication materials: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7102,7 +7102,7 @@ ix.progression.itemPools.town_expansion_14d1beef665c = {
 }
 
 ix.progression.itemPools.town_expansion_ced8d202eaf4 = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_documents_1"},
@@ -7115,7 +7115,7 @@ ix.progression.itemPools.town_expansion_ced8d202eaf4 = {
 }
 
 ix.progression.itemPools.town_expansion_ca46416ba805 = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_envelope"},
@@ -7144,7 +7144,7 @@ ix.progression.itemPools.town_expansion_ba8ac3af2b83 = {
 }
 
 ix.progression.itemPools.town_expansion_d5aa4471b8c2 = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_envelope"},
@@ -7159,7 +7159,7 @@ ix.progression.itemPools.town_expansion_d5aa4471b8c2 = {
 }
 
 ix.progression.itemPools.town_expansion_1692368e6fcf = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_envelope"},
@@ -7174,7 +7174,7 @@ ix.progression.itemPools.town_expansion_1692368e6fcf = {
 }
 
 ix.progression.itemPools.town_expansion_15c57727a4de = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_envelope"},
@@ -7189,7 +7189,7 @@ ix.progression.itemPools.town_expansion_15c57727a4de = {
 }
 
 ix.progression.itemPools.town_expansion_4d44f19494ce = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_envelope"},
@@ -7218,7 +7218,7 @@ ix.progression.itemPools.town_expansion_25e538b843ac = {
 }
 
 ix.progression.itemPools.town_expansion_eef3b6f2ad7a = {
-	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Consignment paperwork and secure dispatches: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -7233,7 +7233,7 @@ ix.progression.itemPools.town_expansion_eef3b6f2ad7a = {
 }
 
 ix.progression.itemPools.town_expansion_f42a3238f802 = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_documents_1"},
@@ -7256,7 +7256,7 @@ ix.progression.itemPools.town_expansion_f42a3238f802 = {
 }
 
 ix.progression.itemPools.town_expansion_e6e419511987 = {
-	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Consignment paperwork and secure dispatches: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -7270,7 +7270,7 @@ ix.progression.itemPools.town_expansion_e6e419511987 = {
 }
 
 ix.progression.itemPools.town_expansion_4d2788de1f2d = {
-	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Consignment paperwork and secure dispatches: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -7283,7 +7283,7 @@ ix.progression.itemPools.town_expansion_4d2788de1f2d = {
 }
 
 ix.progression.itemPools.town_expansion_2ba084e72d2d = {
-	name = "Consignment paperwork and secure dispatches: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Consignment paperwork and secure dispatches: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_documents_1"},
@@ -7306,7 +7306,7 @@ ix.progression.itemPools.town_expansion_2ba084e72d2d = {
 }
 
 ix.progression.itemPools.town_expansion_2824dbcfe6d8 = {
-	name = "Consignment paperwork and secure dispatches: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Consignment paperwork and secure dispatches: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -7319,7 +7319,7 @@ ix.progression.itemPools.town_expansion_2824dbcfe6d8 = {
 }
 
 ix.progression.itemPools.town_expansion_0142dc69300a = {
-	name = "Radio infrastructure and network components: general supplies (Marsh)",
+	name = "Radio infrastructure and network components: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_capacitors"},
@@ -7332,7 +7332,7 @@ ix.progression.itemPools.town_expansion_0142dc69300a = {
 }
 
 ix.progression.itemPools.town_expansion_522f1a014836 = {
-	name = "Radio infrastructure and network components: general supplies (Marsh)",
+	name = "Radio infrastructure and network components: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_capacitors"},
@@ -7342,7 +7342,7 @@ ix.progression.itemPools.town_expansion_522f1a014836 = {
 }
 
 ix.progression.itemPools.town_expansion_7689c41134ff = {
-	name = "Radio infrastructure and network components: general supplies (Marsh)",
+	name = "Radio infrastructure and network components: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_capacitors"},
@@ -7351,7 +7351,7 @@ ix.progression.itemPools.town_expansion_7689c41134ff = {
 }
 
 ix.progression.itemPools.town_expansion_c48a3ba1fe73 = {
-	name = "Radio infrastructure and network components: general supplies (Marsh)",
+	name = "Radio infrastructure and network components: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_receiver1"},
@@ -7360,7 +7360,7 @@ ix.progression.itemPools.town_expansion_c48a3ba1fe73 = {
 }
 
 ix.progression.itemPools.town_expansion_7f868b76a42a = {
-	name = "Radio infrastructure and network components: general supplies (Marsh, Garbage, Waystation)",
+	name = "Radio infrastructure and network components: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ais_sart"},
@@ -7378,7 +7378,7 @@ ix.progression.itemPools.town_expansion_7f868b76a42a = {
 }
 
 ix.progression.itemPools.town_expansion_60379d0b699a = {
-	name = "Radio infrastructure and network components: general supplies (Marsh, Garbage, Waystation)",
+	name = "Radio infrastructure and network components: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ais_sart"},
@@ -7390,7 +7390,7 @@ ix.progression.itemPools.town_expansion_60379d0b699a = {
 }
 
 ix.progression.itemPools.town_expansion_0a6bb9f5510f = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	name = "Trail repairs and camp supplies: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_dryfuel"},
@@ -7403,7 +7403,7 @@ ix.progression.itemPools.town_expansion_0a6bb9f5510f = {
 }
 
 ix.progression.itemPools.town_expansion_e2ad6f9bab62 = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	name = "Trail repairs and camp supplies: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -7426,7 +7426,7 @@ ix.progression.itemPools.town_expansion_e2ad6f9bab62 = {
 }
 
 ix.progression.itemPools.town_expansion_b5c2fbdb1c86 = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	name = "Trail repairs and camp supplies: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -7441,7 +7441,7 @@ ix.progression.itemPools.town_expansion_b5c2fbdb1c86 = {
 }
 
 ix.progression.itemPools.town_expansion_2b72ea4f43f9 = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	name = "Trail repairs and camp supplies: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -7464,7 +7464,7 @@ ix.progression.itemPools.town_expansion_2b72ea4f43f9 = {
 }
 
 ix.progression.itemPools.town_expansion_380290c507fe = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Trail repairs and camp supplies: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -7487,7 +7487,7 @@ ix.progression.itemPools.town_expansion_380290c507fe = {
 }
 
 ix.progression.itemPools.town_expansion_11d21ef20779 = {
-	name = "Trail repairs and camp supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Trail repairs and camp supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bedspread"},
@@ -7510,7 +7510,7 @@ ix.progression.itemPools.town_expansion_11d21ef20779 = {
 }
 
 ix.progression.itemPools.town_expansion_e2b49b37ea94 = {
-	name = "Trail repairs and camp supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Trail repairs and camp supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabric_cordura"},
@@ -7524,7 +7524,7 @@ ix.progression.itemPools.town_expansion_e2b49b37ea94 = {
 }
 
 ix.progression.itemPools.town_expansion_6d4d51331f9d = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	name = "Trail repairs and camp supplies: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -7539,7 +7539,7 @@ ix.progression.itemPools.town_expansion_6d4d51331f9d = {
 }
 
 ix.progression.itemPools.town_expansion_9c0cc96e9858 = {
-	name = "Trail repairs and camp supplies: general supplies (Marsh)",
+	name = "Trail repairs and camp supplies: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -7562,7 +7562,7 @@ ix.progression.itemPools.town_expansion_9c0cc96e9858 = {
 }
 
 ix.progression.itemPools.town_expansion_40c54698454c = {
-	name = "Trail repairs and camp supplies: supporting supplies (Marsh)",
+	name = "Trail repairs and camp supplies: supporting supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabric_cordura"},
@@ -7587,7 +7587,7 @@ ix.progression.itemPools.town_expansion_61caf3061784 = {
 }
 
 ix.progression.itemPools.town_expansion_0a560e2a0220 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_lopouch"},
@@ -7600,7 +7600,7 @@ ix.progression.itemPools.town_expansion_0a560e2a0220 = {
 }
 
 ix.progression.itemPools.town_expansion_d3529072739c = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -7623,7 +7623,7 @@ ix.progression.itemPools.town_expansion_d3529072739c = {
 }
 
 ix.progression.itemPools.town_expansion_429fc498f1b3 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_retardant1"},
@@ -7657,7 +7657,7 @@ ix.progression.itemPools.town_expansion_cdb68b829caa = {
 }
 
 ix.progression.itemPools.town_expansion_0b6d8b4fbf6f = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -7672,7 +7672,7 @@ ix.progression.itemPools.town_expansion_0b6d8b4fbf6f = {
 }
 
 ix.progression.itemPools.town_expansion_a9671194f353 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -7695,7 +7695,7 @@ ix.progression.itemPools.town_expansion_a9671194f353 = {
 }
 
 ix.progression.itemPools.town_expansion_b80413944f08 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -7710,7 +7710,7 @@ ix.progression.itemPools.town_expansion_b80413944f08 = {
 }
 
 ix.progression.itemPools.town_expansion_bb6f868952ef = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -7744,7 +7744,7 @@ ix.progression.itemPools.town_expansion_867a15727340 = {
 }
 
 ix.progression.itemPools.town_expansion_5da355df76fd = {
-	name = "Field issue kits and military packing: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7759,7 +7759,7 @@ ix.progression.itemPools.town_expansion_5da355df76fd = {
 }
 
 ix.progression.itemPools.town_expansion_cac9456f2b4b = {
-	name = "Field issue kits and military packing: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Field issue kits and military packing: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7772,7 +7772,7 @@ ix.progression.itemPools.town_expansion_cac9456f2b4b = {
 }
 
 ix.progression.itemPools.town_expansion_2be74abb2113 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -7795,7 +7795,7 @@ ix.progression.itemPools.town_expansion_2be74abb2113 = {
 }
 
 ix.progression.itemPools.town_expansion_82f85d31e439 = {
-	name = "Field issue kits and military packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field issue kits and military packing: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7810,7 +7810,7 @@ ix.progression.itemPools.town_expansion_82f85d31e439 = {
 }
 
 ix.progression.itemPools.town_expansion_f643892847d6 = {
-	name = "Field issue kits and military packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field issue kits and military packing: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7822,7 +7822,7 @@ ix.progression.itemPools.town_expansion_f643892847d6 = {
 }
 
 ix.progression.itemPools.town_expansion_bc2fa5cf5724 = {
-	name = "Field issue kits and military packing: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field issue kits and military packing: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_ammo"},
@@ -7845,7 +7845,7 @@ ix.progression.itemPools.town_expansion_bc2fa5cf5724 = {
 }
 
 ix.progression.itemPools.town_expansion_8e5e40077d43 = {
-	name = "Field issue kits and military packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field issue kits and military packing: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7860,7 +7860,7 @@ ix.progression.itemPools.town_expansion_8e5e40077d43 = {
 }
 
 ix.progression.itemPools.town_expansion_bbb0f66b23a1 = {
-	name = "Field issue kits and military packing: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Field issue kits and military packing: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -7884,7 +7884,7 @@ ix.progression.itemPools.town_expansion_bf3277df53ee = {
 }
 
 ix.progression.itemPools.town_expansion_99e7f327cb08 = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_9vbattery"},
@@ -7897,7 +7897,7 @@ ix.progression.itemPools.town_expansion_99e7f327cb08 = {
 }
 
 ix.progression.itemPools.town_expansion_b57268c761ed = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_9vbattery"},
@@ -7915,7 +7915,7 @@ ix.progression.itemPools.town_expansion_b57268c761ed = {
 }
 
 ix.progression.itemPools.town_expansion_7a85b50fb433 = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_9vbattery"},
@@ -7940,7 +7940,7 @@ ix.progression.itemPools.town_expansion_3a3ab44e09e5 = {
 }
 
 ix.progression.itemPools.town_expansion_b92bc1e23d60 = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_battery_d_0"},
@@ -7951,7 +7951,7 @@ ix.progression.itemPools.town_expansion_b92bc1e23d60 = {
 }
 
 ix.progression.itemPools.town_expansion_8c8654a6c624 = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_9vbattery"},
@@ -7969,7 +7969,7 @@ ix.progression.itemPools.town_expansion_8c8654a6c624 = {
 }
 
 ix.progression.itemPools.town_expansion_af44d6118fd8 = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_battery_d_0"},
@@ -7996,7 +7996,7 @@ ix.progression.itemPools.town_expansion_39e0202598f4 = {
 }
 
 ix.progression.itemPools.town_expansion_fb1365f60b12 = {
-	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -8008,7 +8008,7 @@ ix.progression.itemPools.town_expansion_fb1365f60b12 = {
 }
 
 ix.progression.itemPools.town_expansion_2efa4442816e = {
-	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Computer hardware and data media: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -8018,7 +8018,7 @@ ix.progression.itemPools.town_expansion_2efa4442816e = {
 }
 
 ix.progression.itemPools.town_expansion_80c787521d7d = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_9vbattery"},
@@ -8041,7 +8041,7 @@ ix.progression.itemPools.town_expansion_80c787521d7d = {
 }
 
 ix.progression.itemPools.town_expansion_15df9e09224f = {
-	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Computer hardware and data media: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_circuitboard"},
@@ -8061,7 +8061,7 @@ ix.progression.itemPools.town_expansion_15df9e09224f = {
 }
 
 ix.progression.itemPools.town_expansion_9ad3afb71982 = {
-	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Computer hardware and data media: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -8073,7 +8073,7 @@ ix.progression.itemPools.town_expansion_9ad3afb71982 = {
 }
 
 ix.progression.itemPools.town_expansion_24a35a39e55d = {
-	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Computer hardware and data media: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook1"},
@@ -8084,7 +8084,7 @@ ix.progression.itemPools.town_expansion_24a35a39e55d = {
 }
 
 ix.progression.itemPools.town_expansion_079f578a1435 = {
-	name = "Computer hardware and data media: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Computer hardware and data media: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_9vbattery"},
@@ -8107,7 +8107,7 @@ ix.progression.itemPools.town_expansion_079f578a1435 = {
 }
 
 ix.progression.itemPools.town_expansion_a3d6e7732b73 = {
-	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Computer hardware and data media: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_circuitboard"},
@@ -8127,7 +8127,7 @@ ix.progression.itemPools.town_expansion_a3d6e7732b73 = {
 }
 
 ix.progression.itemPools.town_expansion_921e32a51219 = {
-	name = "Computer hardware and data media: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Computer hardware and data media: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_clothbook2"},
@@ -8137,7 +8137,7 @@ ix.progression.itemPools.town_expansion_921e32a51219 = {
 }
 
 ix.progression.itemPools.town_expansion_078508e6263c = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8150,7 +8150,7 @@ ix.progression.itemPools.town_expansion_078508e6263c = {
 }
 
 ix.progression.itemPools.town_expansion_9852e3d24390 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8166,7 +8166,7 @@ ix.progression.itemPools.town_expansion_9852e3d24390 = {
 }
 
 ix.progression.itemPools.town_expansion_450be1b77576 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8181,7 +8181,7 @@ ix.progression.itemPools.town_expansion_450be1b77576 = {
 }
 
 ix.progression.itemPools.town_expansion_6a839f7482c6 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8196,7 +8196,7 @@ ix.progression.itemPools.town_expansion_6a839f7482c6 = {
 }
 
 ix.progression.itemPools.town_expansion_00b90348348f = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8212,7 +8212,7 @@ ix.progression.itemPools.town_expansion_00b90348348f = {
 }
 
 ix.progression.itemPools.town_expansion_ddafdcda66bb = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -8226,7 +8226,7 @@ ix.progression.itemPools.town_expansion_ddafdcda66bb = {
 }
 
 ix.progression.itemPools.town_expansion_776be98bb3cb = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_gasoline"},
@@ -8239,7 +8239,7 @@ ix.progression.itemPools.town_expansion_776be98bb3cb = {
 }
 
 ix.progression.itemPools.town_expansion_1e700080e18f = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8255,7 +8255,7 @@ ix.progression.itemPools.town_expansion_1e700080e18f = {
 }
 
 ix.progression.itemPools.town_expansion_62689732dc60 = {
-	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Kitchen stores and cooking fuel: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_bleach"},
@@ -8278,7 +8278,7 @@ ix.progression.itemPools.town_expansion_62689732dc60 = {
 }
 
 ix.progression.itemPools.town_expansion_1a2385845422 = {
-	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Kitchen stores and cooking fuel: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_dryfuel"},
@@ -8293,7 +8293,7 @@ ix.progression.itemPools.town_expansion_1a2385845422 = {
 }
 
 ix.progression.itemPools.town_expansion_dca324fec478 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8309,7 +8309,7 @@ ix.progression.itemPools.town_expansion_dca324fec478 = {
 }
 
 ix.progression.itemPools.town_expansion_27eb27285361 = {
-	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Kitchen stores and cooking fuel: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bleach"},
@@ -8332,7 +8332,7 @@ ix.progression.itemPools.town_expansion_27eb27285361 = {
 }
 
 ix.progression.itemPools.town_expansion_4e90352af9b3 = {
-	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Kitchen stores and cooking fuel: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_dryfuel"},
@@ -8347,7 +8347,7 @@ ix.progression.itemPools.town_expansion_4e90352af9b3 = {
 }
 
 ix.progression.itemPools.town_expansion_93a3504b5346 = {
-	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Kitchen stores and cooking fuel: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -8362,7 +8362,7 @@ ix.progression.itemPools.town_expansion_93a3504b5346 = {
 }
 
 ix.progression.itemPools.town_expansion_af7d21ff2670 = {
-	name = "Kitchen stores and cooking fuel: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Kitchen stores and cooking fuel: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_coffee"},
@@ -8378,7 +8378,7 @@ ix.progression.itemPools.town_expansion_af7d21ff2670 = {
 }
 
 ix.progression.itemPools.town_expansion_fdac49383f8f = {
-	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Kitchen stores and cooking fuel: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bleach"},
@@ -8401,7 +8401,7 @@ ix.progression.itemPools.town_expansion_fdac49383f8f = {
 }
 
 ix.progression.itemPools.town_expansion_f1ead98128b3 = {
-	name = "Kitchen stores and cooking fuel: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Kitchen stores and cooking fuel: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_crikent_0"},
@@ -8452,7 +8452,7 @@ ix.progression.itemPools.town_expansion_d3ad5e933a17 = {
 }
 
 ix.progression.itemPools.town_expansion_7cceb0a03856 = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation)",
+	name = "Receivers, communications parts and recordings: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_cassette_black90"},
@@ -8467,7 +8467,7 @@ ix.progression.itemPools.town_expansion_7cceb0a03856 = {
 }
 
 ix.progression.itemPools.town_expansion_70664e46c8a5 = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Receivers, communications parts and recordings: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -8490,7 +8490,7 @@ ix.progression.itemPools.town_expansion_70664e46c8a5 = {
 }
 
 ix.progression.itemPools.town_expansion_f4db51faa1c0 = {
-	name = "Receivers, communications parts and recordings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Receivers, communications parts and recordings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_battery_d_0"},
@@ -8511,7 +8511,7 @@ ix.progression.itemPools.town_expansion_f4db51faa1c0 = {
 }
 
 ix.progression.itemPools.town_expansion_52083f144cae = {
-	name = "Receivers, communications parts and recordings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Receivers, communications parts and recordings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_electr_tplug"},
@@ -8548,7 +8548,7 @@ ix.progression.itemPools.town_expansion_06c7e7b45627 = {
 }
 
 ix.progression.itemPools.town_expansion_f3a7e106ec1c = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Receivers, communications parts and recordings: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -8571,7 +8571,7 @@ ix.progression.itemPools.town_expansion_f3a7e106ec1c = {
 }
 
 ix.progression.itemPools.town_expansion_d1a020209080 = {
-	name = "Receivers, communications parts and recordings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Receivers, communications parts and recordings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_battery_d_0"},
@@ -8592,7 +8592,7 @@ ix.progression.itemPools.town_expansion_d1a020209080 = {
 }
 
 ix.progression.itemPools.town_expansion_d28603ad751d = {
-	name = "Receivers, communications parts and recordings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Receivers, communications parts and recordings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_electr_tplug"},
@@ -8604,7 +8604,7 @@ ix.progression.itemPools.town_expansion_d28603ad751d = {
 }
 
 ix.progression.itemPools.town_expansion_4a19ca0768f1 = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage)",
+	name = "Receivers, communications parts and recordings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
@@ -8617,7 +8617,7 @@ ix.progression.itemPools.town_expansion_4a19ca0768f1 = {
 }
 
 ix.progression.itemPools.town_expansion_a3f70d1ba27f = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage)",
+	name = "Receivers, communications parts and recordings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_nails"},
@@ -8632,7 +8632,7 @@ ix.progression.itemPools.town_expansion_a3f70d1ba27f = {
 }
 
 ix.progression.itemPools.town_expansion_0864622558f9 = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation)",
+	name = "Receivers, communications parts and recordings: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
@@ -8655,7 +8655,7 @@ ix.progression.itemPools.town_expansion_0864622558f9 = {
 }
 
 ix.progression.itemPools.town_expansion_377d8f1db330 = {
-	name = "Receivers, communications parts and recordings: general supplies (Marsh, Garbage, Waystation)",
+	name = "Receivers, communications parts and recordings: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_archive_cassette"},
@@ -8670,7 +8670,7 @@ ix.progression.itemPools.town_expansion_377d8f1db330 = {
 }
 
 ix.progression.itemPools.town_expansion_8ea22f53808c = {
-	name = "Receivers, communications parts and recordings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Receivers, communications parts and recordings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_electr_tplug"},
@@ -8696,7 +8696,7 @@ ix.progression.itemPools.town_expansion_81da17cceb15 = {
 }
 
 ix.progression.itemPools.town_expansion_4b2888b79c97 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_gunoil"},
@@ -8709,7 +8709,7 @@ ix.progression.itemPools.town_expansion_4b2888b79c97 = {
 }
 
 ix.progression.itemPools.town_expansion_46860f28a864 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8731,7 +8731,7 @@ ix.progression.itemPools.town_expansion_46860f28a864 = {
 }
 
 ix.progression.itemPools.town_expansion_9d7bd0fa3203 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_info_moleskine"},
@@ -8763,7 +8763,7 @@ ix.progression.itemPools.town_expansion_2453b1622777 = {
 }
 
 ix.progression.itemPools.town_expansion_79c06143a76d = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_gunspray"},
@@ -8778,7 +8778,7 @@ ix.progression.itemPools.town_expansion_79c06143a76d = {
 }
 
 ix.progression.itemPools.town_expansion_707d65dea71d = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8800,7 +8800,7 @@ ix.progression.itemPools.town_expansion_707d65dea71d = {
 }
 
 ix.progression.itemPools.town_expansion_a64750b77a87 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_guncleaner"},
@@ -8815,7 +8815,7 @@ ix.progression.itemPools.town_expansion_a64750b77a87 = {
 }
 
 ix.progression.itemPools.town_expansion_67b16c2b8dd0 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_info_moleskine"},
@@ -8830,7 +8830,7 @@ ix.progression.itemPools.town_expansion_67b16c2b8dd0 = {
 }
 
 ix.progression.itemPools.town_expansion_17388ddfb4af = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_info_maps"},
@@ -8862,7 +8862,7 @@ ix.progression.itemPools.town_expansion_f90cbd1a38e0 = {
 }
 
 ix.progression.itemPools.town_expansion_d3512ab9afe7 = {
-	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Hunting equipment care and field observations: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8881,7 +8881,7 @@ ix.progression.itemPools.town_expansion_d3512ab9afe7 = {
 }
 
 ix.progression.itemPools.town_expansion_3017dfb6aeed = {
-	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Hunting equipment care and field observations: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_pressuregauge"},
@@ -8891,7 +8891,7 @@ ix.progression.itemPools.town_expansion_3017dfb6aeed = {
 }
 
 ix.progression.itemPools.town_expansion_26dee0f0dae1 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8913,7 +8913,7 @@ ix.progression.itemPools.town_expansion_26dee0f0dae1 = {
 }
 
 ix.progression.itemPools.town_expansion_a01798fd35ac = {
-	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Hunting equipment care and field observations: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8934,7 +8934,7 @@ ix.progression.itemPools.town_expansion_a01798fd35ac = {
 }
 
 ix.progression.itemPools.town_expansion_7cbed9a0ebbc = {
-	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Hunting equipment care and field observations: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8945,7 +8945,7 @@ ix.progression.itemPools.town_expansion_7cbed9a0ebbc = {
 }
 
 ix.progression.itemPools.town_expansion_4faa8fb764b5 = {
-	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Hunting equipment care and field observations: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8959,7 +8959,7 @@ ix.progression.itemPools.town_expansion_4faa8fb764b5 = {
 }
 
 ix.progression.itemPools.town_expansion_7eaf2f13e938 = {
-	name = "Hunting equipment care and field observations: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Hunting equipment care and field observations: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -8981,7 +8981,7 @@ ix.progression.itemPools.town_expansion_7eaf2f13e938 = {
 }
 
 ix.progression.itemPools.town_expansion_299bbe142b4b = {
-	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Hunting equipment care and field observations: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9002,7 +9002,7 @@ ix.progression.itemPools.town_expansion_299bbe142b4b = {
 }
 
 ix.progression.itemPools.town_expansion_3dd770aeba25 = {
-	name = "Hunting equipment care and field observations: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Hunting equipment care and field observations: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9029,7 +9029,7 @@ ix.progression.itemPools.town_expansion_9441b17bc45e = {
 }
 
 ix.progression.itemPools.town_expansion_4f326e70072d = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_bedspread"},
@@ -9042,7 +9042,7 @@ ix.progression.itemPools.town_expansion_4f326e70072d = {
 }
 
 ix.progression.itemPools.town_expansion_92fb932ff1c5 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_bedspread"},
@@ -9065,7 +9065,7 @@ ix.progression.itemPools.town_expansion_92fb932ff1c5 = {
 }
 
 ix.progression.itemPools.town_expansion_66b24e939800 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabrics1"},
@@ -9099,7 +9099,7 @@ ix.progression.itemPools.town_expansion_6ffc7ac7f5d1 = {
 }
 
 ix.progression.itemPools.town_expansion_3acf0f035059 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabrics1"},
@@ -9114,7 +9114,7 @@ ix.progression.itemPools.town_expansion_3acf0f035059 = {
 }
 
 ix.progression.itemPools.town_expansion_0b1245b6e79e = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_bedspread"},
@@ -9137,7 +9137,7 @@ ix.progression.itemPools.town_expansion_0b1245b6e79e = {
 }
 
 ix.progression.itemPools.town_expansion_d941dc81b901 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_retardant1"},
@@ -9152,7 +9152,7 @@ ix.progression.itemPools.town_expansion_d941dc81b901 = {
 }
 
 ix.progression.itemPools.town_expansion_2b18fb90c7bf = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_retardant1"},
@@ -9167,7 +9167,7 @@ ix.progression.itemPools.town_expansion_2b18fb90c7bf = {
 }
 
 ix.progression.itemPools.town_expansion_222a2f2dcf66 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_retardant1"},
@@ -9201,7 +9201,7 @@ ix.progression.itemPools.town_expansion_6f85ea5be266 = {
 }
 
 ix.progression.itemPools.town_expansion_77bed644606f = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9220,7 +9220,7 @@ ix.progression.itemPools.town_expansion_77bed644606f = {
 }
 
 ix.progression.itemPools.town_expansion_b4f6e587d11c = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -9233,7 +9233,7 @@ ix.progression.itemPools.town_expansion_b4f6e587d11c = {
 }
 
 ix.progression.itemPools.town_expansion_02c827324460 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bedspread"},
@@ -9256,7 +9256,7 @@ ix.progression.itemPools.town_expansion_02c827324460 = {
 }
 
 ix.progression.itemPools.town_expansion_708945232835 = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9275,7 +9275,7 @@ ix.progression.itemPools.town_expansion_708945232835 = {
 }
 
 ix.progression.itemPools.town_expansion_b7928c8a97c3 = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_ballistic1"},
@@ -9288,7 +9288,7 @@ ix.progression.itemPools.town_expansion_b7928c8a97c3 = {
 }
 
 ix.progression.itemPools.town_expansion_0a2a535093bf = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9302,7 +9302,7 @@ ix.progression.itemPools.town_expansion_0a2a535093bf = {
 }
 
 ix.progression.itemPools.town_expansion_e9d564566ea6 = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9315,7 +9315,7 @@ ix.progression.itemPools.town_expansion_e9d564566ea6 = {
 }
 
 ix.progression.itemPools.town_expansion_10904788249e = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bedspread"},
@@ -9338,7 +9338,7 @@ ix.progression.itemPools.town_expansion_10904788249e = {
 }
 
 ix.progression.itemPools.town_expansion_aeaa200e6d7f = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9357,7 +9357,7 @@ ix.progression.itemPools.town_expansion_aeaa200e6d7f = {
 }
 
 ix.progression.itemPools.town_expansion_080481dac15f = {
-	name = "Cloth, protective layers and sewing supplies: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Cloth, protective layers and sewing supplies: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9370,7 +9370,7 @@ ix.progression.itemPools.town_expansion_080481dac15f = {
 }
 
 ix.progression.itemPools.town_expansion_89449a5e427f = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabrics1"},
@@ -9385,7 +9385,7 @@ ix.progression.itemPools.town_expansion_89449a5e427f = {
 }
 
 ix.progression.itemPools.town_expansion_2f020af62913 = {
-	name = "Cloth, protective layers and sewing supplies: general supplies (Marsh, Garbage, Waystation)",
+	name = "Cloth, protective layers and sewing supplies: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_fabrics1"},
@@ -9400,7 +9400,7 @@ ix.progression.itemPools.town_expansion_2f020af62913 = {
 }
 
 ix.progression.itemPools.town_expansion_c7169f14696b = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
@@ -9413,7 +9413,7 @@ ix.progression.itemPools.town_expansion_c7169f14696b = {
 }
 
 ix.progression.itemPools.town_expansion_3698b9592041 = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_glue_1"},
@@ -9428,7 +9428,7 @@ ix.progression.itemPools.town_expansion_3698b9592041 = {
 }
 
 ix.progression.itemPools.town_expansion_3d13120ddff7 = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
@@ -9451,7 +9451,7 @@ ix.progression.itemPools.town_expansion_3d13120ddff7 = {
 }
 
 ix.progression.itemPools.town_expansion_a7b9149f8af2 = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_glue_1"},
@@ -9466,7 +9466,7 @@ ix.progression.itemPools.town_expansion_a7b9149f8af2 = {
 }
 
 ix.progression.itemPools.town_expansion_dad62e7585ad = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_paracord"},
@@ -9481,7 +9481,7 @@ ix.progression.itemPools.town_expansion_dad62e7585ad = {
 }
 
 ix.progression.itemPools.town_expansion_6439a6f8a7e9 = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_hose"},
@@ -9496,7 +9496,7 @@ ix.progression.itemPools.town_expansion_6439a6f8a7e9 = {
 }
 
 ix.progression.itemPools.town_expansion_13f1649aba56 = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_hose"},
@@ -9511,7 +9511,7 @@ ix.progression.itemPools.town_expansion_13f1649aba56 = {
 }
 
 ix.progression.itemPools.town_expansion_4673dd0551bc = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
@@ -9534,7 +9534,7 @@ ix.progression.itemPools.town_expansion_4673dd0551bc = {
 }
 
 ix.progression.itemPools.town_expansion_5d7a58b28901 = {
-	name = "Precision tools and mechanical repair parts: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Precision tools and mechanical repair parts: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_plexiglass"},
@@ -9549,7 +9549,7 @@ ix.progression.itemPools.town_expansion_5d7a58b28901 = {
 }
 
 ix.progression.itemPools.town_expansion_92bc90ddebaf = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
@@ -9572,7 +9572,7 @@ ix.progression.itemPools.town_expansion_92bc90ddebaf = {
 }
 
 ix.progression.itemPools.town_expansion_21f69e1dd804 = {
-	name = "Precision tools and mechanical repair parts: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Precision tools and mechanical repair parts: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_plexiglass"},
@@ -9587,7 +9587,7 @@ ix.progression.itemPools.town_expansion_21f69e1dd804 = {
 }
 
 ix.progression.itemPools.town_expansion_d051739d24e8 = {
-	name = "Precision tools and mechanical repair parts: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Precision tools and mechanical repair parts: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_plexiglass"},
@@ -9602,7 +9602,7 @@ ix.progression.itemPools.town_expansion_d051739d24e8 = {
 }
 
 ix.progression.itemPools.town_expansion_26499ce470b2 = {
-	name = "Precision tools and mechanical repair parts: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Precision tools and mechanical repair parts: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_bolts"},
@@ -9625,7 +9625,7 @@ ix.progression.itemPools.town_expansion_26499ce470b2 = {
 }
 
 ix.progression.itemPools.town_expansion_064eb1bf0cb5 = {
-	name = "Precision tools and mechanical repair parts: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Precision tools and mechanical repair parts: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_building_plexiglass"},
@@ -9652,7 +9652,7 @@ ix.progression.itemPools.town_expansion_409e675b1118 = {
 }
 
 ix.progression.itemPools.town_expansion_f4d04381205b = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_lopouch"},
@@ -9665,7 +9665,7 @@ ix.progression.itemPools.town_expansion_f4d04381205b = {
 }
 
 ix.progression.itemPools.town_expansion_a823fcf29a01 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9688,7 +9688,7 @@ ix.progression.itemPools.town_expansion_a823fcf29a01 = {
 }
 
 ix.progression.itemPools.town_expansion_97ae0fe853de = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9703,7 +9703,7 @@ ix.progression.itemPools.town_expansion_97ae0fe853de = {
 }
 
 ix.progression.itemPools.town_expansion_df78f75b1497 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9738,7 +9738,7 @@ ix.progression.itemPools.town_expansion_43b520596561 = {
 }
 
 ix.progression.itemPools.town_expansion_72c916d0abcb = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9753,7 +9753,7 @@ ix.progression.itemPools.town_expansion_72c916d0abcb = {
 }
 
 ix.progression.itemPools.town_expansion_05132b8d0238 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_awl"},
@@ -9776,7 +9776,7 @@ ix.progression.itemPools.town_expansion_05132b8d0238 = {
 }
 
 ix.progression.itemPools.town_expansion_e8bd5202b929 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9790,7 +9790,7 @@ ix.progression.itemPools.town_expansion_e8bd5202b929 = {
 }
 
 ix.progression.itemPools.town_expansion_51ebdbd40920 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9813,7 +9813,7 @@ ix.progression.itemPools.town_expansion_51ebdbd40920 = {
 }
 
 ix.progression.itemPools.town_expansion_54371b32c140 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9827,7 +9827,7 @@ ix.progression.itemPools.town_expansion_54371b32c140 = {
 }
 
 ix.progression.itemPools.town_expansion_a3908ffe8d9d = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9840,7 +9840,7 @@ ix.progression.itemPools.town_expansion_a3908ffe8d9d = {
 }
 
 ix.progression.itemPools.town_expansion_a44245ac02ff = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9872,7 +9872,7 @@ ix.progression.itemPools.town_expansion_53f9dde5b77b = {
 }
 
 ix.progression.itemPools.town_expansion_04ec9aa9092f = {
-	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Expedition instruments and field preparation: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -9890,7 +9890,7 @@ ix.progression.itemPools.town_expansion_04ec9aa9092f = {
 }
 
 ix.progression.itemPools.town_expansion_ea1d090d14a0 = {
-	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Expedition instruments and field preparation: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9902,7 +9902,7 @@ ix.progression.itemPools.town_expansion_ea1d090d14a0 = {
 }
 
 ix.progression.itemPools.town_expansion_9b08d7a6b279 = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9925,7 +9925,7 @@ ix.progression.itemPools.town_expansion_9b08d7a6b279 = {
 }
 
 ix.progression.itemPools.town_expansion_431c32d21d4a = {
-	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Expedition instruments and field preparation: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -9943,7 +9943,7 @@ ix.progression.itemPools.town_expansion_431c32d21d4a = {
 }
 
 ix.progression.itemPools.town_expansion_950732f7ecab = {
-	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Expedition instruments and field preparation: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9955,7 +9955,7 @@ ix.progression.itemPools.town_expansion_950732f7ecab = {
 }
 
 ix.progression.itemPools.town_expansion_4908b8a6a214 = {
-	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Expedition instruments and field preparation: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9966,7 +9966,7 @@ ix.progression.itemPools.town_expansion_4908b8a6a214 = {
 }
 
 ix.progression.itemPools.town_expansion_06860f39be0d = {
-	name = "Expedition instruments and field preparation: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Expedition instruments and field preparation: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -9989,7 +9989,7 @@ ix.progression.itemPools.town_expansion_06860f39be0d = {
 }
 
 ix.progression.itemPools.town_expansion_76588b984896 = {
-	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Expedition instruments and field preparation: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_chemcontainer"},
@@ -10007,7 +10007,7 @@ ix.progression.itemPools.town_expansion_76588b984896 = {
 }
 
 ix.progression.itemPools.town_expansion_3f51cdb7d8ff = {
-	name = "Expedition instruments and field preparation: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Expedition instruments and field preparation: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_smallitems"},
@@ -10030,7 +10030,7 @@ ix.progression.itemPools.town_expansion_8e7f590bf612 = {
 }
 
 ix.progression.itemPools.town_expansion_ef16b6d5da9d = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -10043,7 +10043,7 @@ ix.progression.itemPools.town_expansion_ef16b6d5da9d = {
 }
 
 ix.progression.itemPools.town_expansion_3a98413f7be1 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -10059,7 +10059,7 @@ ix.progression.itemPools.town_expansion_3a98413f7be1 = {
 }
 
 ix.progression.itemPools.town_expansion_156ee0d5478b = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -10084,7 +10084,7 @@ ix.progression.itemPools.town_expansion_2527acd3d1b4 = {
 }
 
 ix.progression.itemPools.town_expansion_30b09f9b3823 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -10095,7 +10095,7 @@ ix.progression.itemPools.town_expansion_30b09f9b3823 = {
 }
 
 ix.progression.itemPools.town_expansion_03a9328806d6 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -10111,7 +10111,7 @@ ix.progression.itemPools.town_expansion_03a9328806d6 = {
 }
 
 ix.progression.itemPools.town_expansion_d050133279ce = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -10122,7 +10122,7 @@ ix.progression.itemPools.town_expansion_d050133279ce = {
 }
 
 ix.progression.itemPools.town_expansion_80b756dba629 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -10138,7 +10138,7 @@ ix.progression.itemPools.town_expansion_80b756dba629 = {
 }
 
 ix.progression.itemPools.town_expansion_703d74c6da26 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_injectorcase"},
@@ -10149,7 +10149,7 @@ ix.progression.itemPools.town_expansion_703d74c6da26 = {
 }
 
 ix.progression.itemPools.town_expansion_85979a57a122 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_smallitems"},
@@ -10173,7 +10173,7 @@ ix.progression.itemPools.town_expansion_3501889212d9 = {
 }
 
 ix.progression.itemPools.town_expansion_8f40472ef8f5 = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -10192,7 +10192,7 @@ ix.progression.itemPools.town_expansion_8f40472ef8f5 = {
 }
 
 ix.progression.itemPools.town_expansion_8d2894187d3b = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -10206,7 +10206,7 @@ ix.progression.itemPools.town_expansion_8d2894187d3b = {
 }
 
 ix.progression.itemPools.town_expansion_383d0ddf3e93 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -10222,7 +10222,7 @@ ix.progression.itemPools.town_expansion_383d0ddf3e93 = {
 }
 
 ix.progression.itemPools.town_expansion_243a967d3c85 = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -10241,7 +10241,7 @@ ix.progression.itemPools.town_expansion_243a967d3c85 = {
 }
 
 ix.progression.itemPools.town_expansion_7f159eab7029 = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -10255,7 +10255,7 @@ ix.progression.itemPools.town_expansion_7f159eab7029 = {
 }
 
 ix.progression.itemPools.town_expansion_938c8456db0f = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -10269,7 +10269,7 @@ ix.progression.itemPools.town_expansion_938c8456db0f = {
 }
 
 ix.progression.itemPools.town_expansion_66622a11fcf6 = {
-	name = "Personal effects and recovered belongings: general supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: general supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_container_cardholder"},
@@ -10285,7 +10285,7 @@ ix.progression.itemPools.town_expansion_66622a11fcf6 = {
 }
 
 ix.progression.itemPools.town_expansion_2ba4a2b2e5b5 = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -10304,7 +10304,7 @@ ix.progression.itemPools.town_expansion_2ba4a2b2e5b5 = {
 }
 
 ix.progression.itemPools.town_expansion_c087c135e110 = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},
@@ -10317,7 +10317,7 @@ ix.progression.itemPools.town_expansion_c087c135e110 = {
 }
 
 ix.progression.itemPools.town_expansion_a565b0dea0b8 = {
-	name = "Personal effects and recovered belongings: supporting supplies (Marsh, Garbage, Waystation, Pripyat)",
+	name = "Personal effects and recovered belongings: supporting supplies (Swamps, Garbage, Waystation, Pripyat)",
 	tier = "common",
 	candidates = {
 		{item = "value_briefcase"},

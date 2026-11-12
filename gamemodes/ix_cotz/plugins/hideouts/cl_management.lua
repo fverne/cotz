@@ -44,11 +44,14 @@ net.Receive("cotz/hideouts/manage", function()
 		local id, name = net.ReadString(), net.ReadString()
 		local squad, access = net.ReadBool(), net.ReadString()
 		local manage, canReset = net.ReadBool(), net.ReadBool()
+		local propTier, propLimit = net.ReadUInt(3), net.ReadUInt(7)
+		local nextPropLimit, propPrice = net.ReadUInt(7), net.ReadUInt(32)
 		local guests = {}
 		for _ = 1, net.ReadUInt(16) do
 			guests[#guests + 1] = {id = net.ReadUInt(32), name = net.ReadString()}
 		end
 		ix.cotzUI.Label(scroll, name, true)
+		ix.cotzUI.Label(scroll, "Prop capacity: " .. propLimit)
 		if scope == "exit" then
 			button(scroll, "Leave hideout", function()
 				sendManagement(panel, id, 9)
@@ -56,6 +59,14 @@ net.Receive("cotz/hideouts/manage", function()
 			end)
 		end
 		if manage then
+			if nextPropLimit > 0 then
+				button(scroll, "Upgrade prop capacity to " .. nextPropLimit .. " (" .. ix.currency.Get(propPrice) .. ")", function()
+					ix.cotzUI.Confirm("Increase this hideout's prop capacity to " .. nextPropLimit .. " for " .. ix.currency.Get(propPrice) .. "?",
+						"Upgrade prop capacity", "Purchase", function()
+							sendManagement(panel, id, 0, "", propTier)
+						end, "Cancel")
+				end)
+			end
 			if canReset then
 				button(scroll, "Reset hideout layout", function()
 					ix.cotzUI.Confirm("Restore containers you manage to their template positions and remove props placed by this character? Stored items and purchased upgrades are kept.",
@@ -167,7 +178,8 @@ end)
 
 net.Receive("cotz/hideouts/history", function()
 	local panel, scroll = frame("Recent squad transactions")
-	local labels = {sale = "Sale", withdraw = "Treasury withdrawal", donate = "Stock donation", recover = "Stock recovery"}
+	local labels = {sale = "Sale", withdraw = "Treasury withdrawal", donate = "Stock donation",
+		recover = "Stock recovery", props = "Prop capacity upgrade"}
 	for _ = 1, net.ReadUInt(6) do
 		local timestamp, name, kind, delta = net.ReadUInt(32), net.ReadString(), net.ReadString(), net.ReadInt(32)
 		ix.cotzUI.Label(scroll, os.date("%Y-%m-%d %H:%M", timestamp) .. " — " .. name .. " — "

@@ -85,7 +85,7 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR01"},
 			briefing = (
-				"Take a qualifying sanctioned bout here in Marsh against an eligible opponent you haven't faced "
+				"Take a qualifying sanctioned bout here in the Swamps against an eligible opponent you haven't faced "
 				.. "before. I'd like a proper result before we begin describing your style."
 			),
 			completion = "First result recorded. You can think about what worked after you've caught your breath.",
@@ -116,7 +116,7 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR03"},
 			briefing = (
-				"Another qualifying sanctioned bout in Marsh, with a new eligible opponent. The arrangement is the "
+				"Another qualifying sanctioned bout in the Swamps, with a new eligible opponent. The arrangement is the "
 				.. "same even if you're feeling rather more confident about it."
 			),
 			completion = "A proper finish. Let the next discussion wait until you've had a rest.",
@@ -152,15 +152,15 @@ PLUGIN:Register("arena-master", {
 			name = "The Damaged Shipment",
 			kind = "field",
 			objective = (
-				"Recover the arena protective-equipment case from the assigned search area in Marsh. Deliver it to "
-				.. "'Suture' in Waystation, then come back to the issuing contact in Marsh."
+				"Recover the arena protective-equipment case from the assigned search area in the Swamps. Deliver it to "
+				.. "'Suture' in Waystation, then come back to the issuing contact in the Swamps."
 			),
 			requires = {"AR04"},
 			briefing = (
 				"Suture needs the recovered protective-equipment case. I'd prefer an inspection to another "
 				.. "conversation about how it looked fine before the bout. Recover the arena protective-equipment "
-				.. "case from the assigned search area in Marsh. Deliver it to 'Suture' in Waystation, then come back "
-				.. "to me in Marsh."
+				.. "case from the assigned search area in the Swamps. Deliver it to 'Suture' in Waystation, then come back "
+				.. "to me in the Swamps."
 			),
 			completion = "Delivered. Good. I'll let Suture have the first opinion before the contenders offer theirs.",
 			field = {
@@ -202,7 +202,7 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR06"},
 			briefing = (
-				"Take another qualifying Marsh bout against an eligible opponent you haven't faced. I'd like the "
+				"Take another qualifying Swamps bout against an eligible opponent you haven't faced. I'd like the "
 				.. "result settled in the arena rather than in the audience's account."
 			),
 			completion = (
@@ -294,7 +294,7 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR10"},
 			briefing = (
-				"There's another qualifying sanctioned bout to complete in Marsh against a new eligible opponent. "
+				"There's another qualifying sanctioned bout to complete in the Swamps against a new eligible opponent. "
 				.. "Prepare for the match in front of you, not the one that went well last time."
 			),
 			completion = "A finished result. I hope you had time to notice how you adapted, not just how it ended.",
@@ -348,14 +348,14 @@ PLUGIN:Register("arena-master", {
 			name = "A Fighter's Effects",
 			kind = "field",
 			objective = (
-				"Recover the former contender's records from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Recover the former contender's records from the assigned search area in the Swamps. Bring it back to "
+				.. "the issuing contact in the Swamps."
 			),
 			requires = {"AR12"},
 			briefing = (
 				"I'd like the former contender's records brought back together. A person's place in the arena "
 				.. "shouldn't depend entirely on who still tells their story. Recover the former contender's records "
-				.. "from the assigned search area in Marsh. Bring it back to me in Marsh."
+				.. "from the assigned search area in the Swamps. Bring it back to me in the Swamps."
 			),
 			completion = (
 				"Leave the file here. I'll read the account before deciding which parts belong in the arena "
@@ -418,7 +418,7 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR14"},
 			briefing = (
-				"Complete another qualifying Marsh bout against an eligible opponent you haven't faced. We still "
+				"Complete another qualifying Swamps bout against an eligible opponent you haven't faced. We still "
 				.. "need the match properly finished before the account moves on."
 			),
 			completion = "That settles the result. Take some time before answering anybody who wants an immediate repeat.",
@@ -484,7 +484,7 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR16"},
 			briefing = (
-				"Another sanctioned bout here in Marsh, with an eligible opponent new to your account. Reputation "
+				"Another sanctioned bout here in the Swamps, with an eligible opponent new to your account. Reputation "
 				.. "doesn't replace the qualifying result."
 			),
 			completion = (
@@ -525,7 +525,7 @@ PLUGIN:Register("arena-master", {
 			kind = "arena",
 			requires = {"AR19"},
 			briefing = (
-				"The championship step needs a qualifying sanctioned bout here in Marsh against a new eligible "
+				"The championship step needs a qualifying sanctioned bout here in the Swamps against a new eligible "
 				.. "opponent. Don't let the title persuade you to skip the preparation."
 			),
 			completion = (

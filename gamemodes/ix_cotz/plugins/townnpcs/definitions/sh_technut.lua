@@ -422,7 +422,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN02",
 			name = "The Missing Toolbox",
-			briefing = "There's a workshop case to recover. I'm trying not to decide what I'll do with the tools before I've seen them, but it's difficult. Recover the workshop toolbox from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "There's a workshop case to recover. I'm trying not to decide what I'll do with the tools before I've seen them, but it's difficult. Recover the workshop toolbox from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "TN04",
@@ -432,7 +432,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN06",
 			name = "The Misaligned Jig",
-			briefing = "I'd like the calibration record. A little misalignment becomes an expensive amount of enthusiasm once you build around it. Recover the workshop calibration notes from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I'd like the calibration record. A little misalignment becomes an expensive amount of enthusiasm once you build around it. Recover the workshop calibration notes from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "TN08",
@@ -442,7 +442,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN10",
 			name = "Latch's Find",
-			briefing = "Latch should have the identification record. He'll compare it with what he actually found, which saves us building a theory around the wrong machine. Recover the machine identity record for Latch from the assigned search area in Marsh. Deliver it to 'Latch' in Garbage, then come back to me in Marsh.",
+			briefing = "Latch should have the identification record. He'll compare it with what he actually found, which saves us building a theory around the wrong machine. Recover the machine identity record for Latch from the assigned search area in the Swamps. Deliver it to 'Latch' in Garbage, then come back to me in the Swamps.",
 		},
 		{
 			id = "TN12",
@@ -452,7 +452,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN14",
 			name = "Patterns in Metal",
-			briefing = "I'd like the assembly drawing. There may be a perfectly good reason for the bit I've spent the morning complaining about. Recover the assembly specification file from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I'd like the assembly drawing. There may be a perfectly good reason for the bit I've spent the morning complaining about. Recover the assembly specification file from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "TN16",
@@ -462,7 +462,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN18",
 			name = "The Test Assembly",
-			briefing = "The test assembly case is still out in Waystation territory. I'm interested in how it was put together, so leave everything inside as it is. Recover the test assembly from the assigned search area in Waystation. Bring it back to me in Marsh.",
+			briefing = "The test assembly case is still out in Waystation territory. I'm interested in how it was put together, so leave everything inside as it is. Recover the test assembly from the assigned search area in Waystation. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "TN20",
@@ -472,7 +472,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN22",
 			name = "The Machine's Origin",
-			briefing = "I'd like the manufacturing papers from Pripyat. They may answer something more useful than which factory name to argue about. Recover the manufacturing specification record from the assigned search area in Pripyat. Bring it back to me in Marsh.",
+			briefing = "I'd like the manufacturing papers from Pripyat. They may answer something more useful than which factory name to argue about. Recover the manufacturing specification record from the assigned search area in Pripyat. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "TN24",
@@ -482,7 +482,7 @@ PLUGIN:Register("technut", {
 		{
 			id = "TN26",
 			name = "A Test Under Load",
-			briefing = "We need a test recording from the machinery survey. I promise to examine the inconvenient readings too. Deploy the recorder at the assigned site in Marsh, let it finish recording, then retrieve the machinery test recorder. Bring it back to me in Marsh.",
+			briefing = "We need a test recording from the machinery survey. I promise to examine the inconvenient readings too. Deploy the recorder at the assigned site in the Swamps, let it finish recording, then retrieve the machinery test recorder. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "TN28",

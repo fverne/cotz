@@ -17,7 +17,7 @@ function PLUGIN:EntityKeyValue(ent, key, value)
             ent:SetKeyValue("dmg", 0)
         end
 
-        --disables swamp radio in marsh base
+        --disables swamp radio in Swamps base
         if IsValid(ent) and ent:MapCreationID() == 3706 then
             ent:SetKeyValue("spawnflags", 0) -- disables all flags, including use actvates
         end

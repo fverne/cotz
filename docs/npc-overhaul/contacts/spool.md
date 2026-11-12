@@ -87,7 +87,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | SO09 | A Longer Cable | Hand-in | Supply existing communications components. | Next electronic-supply purchase. |
-| SO10 | Mute's Header | Authored | Recover a damaged network record in Marsh. | Mute relationship response. |
+| SO10 | Mute's Header | Authored | Recover a damaged network record in Swamps. | Mute relationship response. |
 | SO11 | Across the Static | Tracker | Cumulative checkpoint C3: maintain regional triangulation work. | One selected supply-stock increase. |
 | SO12 | The Garbage Relay | Authored | Locate and retrieve a source near a freight route. | Wake investigation connection. |
 | SO13 | Packed to Listen | Hand-in | Deliver expedition radio provisions. | Fixed technical preparation supplies. |

@@ -3,7 +3,6 @@ local STORAGE_DISTANCE_SQUARED = 128 * 128
 local MENU_COOLDOWN = 1
 local STORAGE_COOLDOWN = 1
 local AUDIT_INTERVAL = 1
-local MAX_PROP_COUNT = 64
 local MAX_HIDEOUT_ID_LENGTH = 20
 
 function PLUGIN:PostLoadData()
@@ -50,7 +49,8 @@ function PLUGIN:ShowEntrance(client, entranceID)
 	for _, record in pairs(self.state.hideouts) do
 		local visible = not client:IsAdmin() or record.owner == character:GetID()
 			or (record.guests or {})[tostring(character:GetID())] == true
-		if visible and record.entrance == entranceID and self:CanAccess(client, record) then
+			or record.ownerType == "squad" and self:GetSquadRank(client, record) ~= nil
+		if visible and self:IsHideoutEntrance(record, entranceID) and self:CanAccess(client, record) then
 			records[#records + 1] = {id = record.id, name = record.name, manage = self:CanManageHideout(client, record)}
 		end
 	end
@@ -480,7 +480,8 @@ function PLUGIN:PlayerSpawnProp(client, model)
 	local instance = self.instances[self.members[client]]
 	if
 		instance
-		and (instance.state ~= "active" or instance.saving or table.Count(instance.props) >= MAX_PROP_COUNT)
+		and (instance.state ~= "active" or instance.saving
+			or self:GetHideoutPropCount(instance) >= self:GetHideoutPropLimit(self:GetHideout(instance.id)))
 	then
 		return false
 	end
@@ -497,6 +498,8 @@ function PLUGIN:PlayerSpawnedProp(client, model, entity)
 	if
 		instance.state ~= "active"
 		or instance.saving
+		or not self:CanBuildInHideout(client)
+		or self:GetHideoutPropCount(instance) >= self:GetHideoutPropLimit(self:GetHideout(instance.id))
 		or not self:Contains(entity:GetPos(), instance.mins, instance.maxs)
 	then
 		entity:Remove()

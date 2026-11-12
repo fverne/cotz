@@ -25,7 +25,8 @@ for slug, contact in pairs(ix.townNPCs.contacts) do
 		-- Wake's optional capacity purchases are independent one-step chains despite shared branch labels.
 		local categoryOnly = opening[step.intermissionFor or step.id] == true or step.capacity ~= nil
 		check(compiled.categoryOnly == categoryOnly, "the compiler preserves the actual opening boundary: " .. id)
-		check(compiled.requirementModesVersion == 2, "every finite town contact opts into saved mode migration")
+		check(compiled.requirementModesVersion == (step.requirementModesVersion or 2),
+			"every finite town contact opts into its saved mode migration")
 		for index, slot in ipairs(compiled.requirementSlots) do
 			local specific = not categoryOnly and not step.intermissionFor and index == #compiled.requirementSlots
 			check(slot.mode == (specific and "random" or "any"), "compiled slot mode matches its chain position")

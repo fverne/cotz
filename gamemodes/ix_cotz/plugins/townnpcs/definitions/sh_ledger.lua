@@ -385,7 +385,7 @@ PLUGIN:Register("ledger", {
 		{
 			id = "LE06",
 			name = "Ballast's Landing Copy",
-			briefing = "Ballast needs the landing copy. He can check what was actually handled against the freight record. Recover the landing manifest for Ballast from the assigned search area in Marsh. Deliver it to 'Ballast' in Marsh, then come back to me in Waystation.",
+			briefing = "Ballast needs the landing copy. He can check what was actually handled against the freight record. Recover the landing manifest for Ballast from the assigned search area in the Swamps. Deliver it to 'Ballast' in the Swamps, then come back to me in Waystation.",
 		},
 		{
 			id = "LE08",

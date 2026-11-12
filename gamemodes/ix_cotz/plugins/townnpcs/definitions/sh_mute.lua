@@ -200,7 +200,7 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU02",
 			name = "The Silent Repeater",
-			briefing = "** He sets a disconnected plug beside the order, traces its contacts with the tip of his pen, and circles the search instruction. ** ** The written order reads: Recover the repeater controller from the assigned search area in Marsh. Bring it back to the bench in Marsh. **",
+			briefing = "** He sets a disconnected plug beside the order, traces its contacts with the tip of his pen, and circles the search instruction. ** ** The written order reads: Recover the repeater controller from the assigned search area in the Swamps. Bring it back to the bench in the Swamps. **",
 		},
 		{
 			id = "MU04",
@@ -209,8 +209,8 @@ PLUGIN:Register("mute", {
 		},
 		{
 			id = "MU06",
-			name = "A Line Through the Marsh",
-			briefing = "** He follows a line across the network sketch, stops at an unfinished section, and places the order beside his finger. ** ** The written order reads: Recover the Marsh connection record from the assigned search area in Marsh. Bring it back to the bench in Marsh. **",
+			name = "A Line Through the Swamps",
+			briefing = "** He follows a line across the network sketch, stops at an unfinished section, and places the order beside his finger. ** ** The written order reads: Recover the Swamps connection record from the assigned search area in the Swamps. Bring it back to the bench in the Swamps. **",
 		},
 		{
 			id = "MU08",
@@ -220,7 +220,7 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU10",
 			name = "The Duplicate Message",
-			briefing = "** He places two short notes side by side. Their headings match. He turns over the field order and taps the recovery instruction. ** ** The written order reads: Recover the duplicate-message recording from the assigned search area in Marsh. Bring it back to the bench in Marsh. **",
+			briefing = "** He places two short notes side by side. Their headings match. He turns over the field order and taps the recovery instruction. ** ** The written order reads: Recover the duplicate-message recording from the assigned search area in the Swamps. Bring it back to the bench in the Swamps. **",
 		},
 		{
 			id = "MU12",
@@ -230,7 +230,7 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU14",
 			name = "The Second Copy",
-			briefing = "** He marks the disc on the order, writes Spool's name below it, and underlines the instruction to return here afterwards. ** ** The written order reads: Recover the second data copy for Spool from the assigned search area in Waystation. Deliver it to 'Spool' in Garbage, then come back to the bench in Marsh. **",
+			briefing = "** He marks the disc on the order, writes Spool's name below it, and underlines the instruction to return here afterwards. ** ** The written order reads: Recover the second data copy for Spool from the assigned search area in Waystation. Deliver it to 'Spool' in Garbage, then come back to the bench in the Swamps. **",
 		},
 		{
 			id = "MU16",
@@ -240,7 +240,7 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU18",
 			name = "The Old Routing Table",
-			briefing = "** He marks Carbon's name on the folder order. A small arrow leads back to the bench. He waits until the page is facing you before letting it go. ** ** The written order reads: Recover the routing archive for Carbon from the assigned search area in Pripyat. Deliver it to 'Carbon' in Waystation, then come back to the bench in Marsh. **",
+			briefing = "** He marks Carbon's name on the folder order. A small arrow leads back to the bench. He waits until the page is facing you before letting it go. ** ** The written order reads: Recover the routing archive for Carbon from the assigned search area in Pripyat. Deliver it to 'Carbon' in Waystation, then come back to the bench in the Swamps. **",
 		},
 		{
 			id = "MU20",
@@ -250,7 +250,7 @@ PLUGIN:Register("mute", {
 		{
 			id = "MU22",
 			name = "The Broken Handshake",
-			briefing = "** He brings two disconnected leads together without joining them, lays them down, and turns the recovery order towards you. ** ** The written order reads: Take the required bearings in Pripyat, locate the source, and collect the failed connection controller. Bring it back to the bench in Marsh. **",
+			briefing = "** He brings two disconnected leads together without joining them, lays them down, and turns the recovery order towards you. ** ** The written order reads: Take the required bearings in Pripyat, locate the source, and collect the failed connection controller. Bring it back to the bench in the Swamps. **",
 		},
 		{
 			id = "MU24",

@@ -40,9 +40,9 @@ open its **Edit Vendor** property, select the contact, and click **Load**.
 
 | Planned home | Contact | Chat command | Appearance definition |
 | --- | --- | --- | --- |
-| Marsh | Atlas | /spawnadvvendor atlasnpc | [sh_atlas.lua](definitions/sh_atlas.lua) |
-| Marsh | Gasket | /spawnadvvendor gasketnpc | [sh_gasket.lua](definitions/sh_gasket.lua) |
-| Marsh | Ballast | /spawnadvvendor ballastnpc | [sh_ballast.lua](definitions/sh_ballast.lua) |
+| Swamps | Atlas | /spawnadvvendor atlasnpc | [sh_atlas.lua](definitions/sh_atlas.lua) |
+| Swamps | Gasket | /spawnadvvendor gasketnpc | [sh_gasket.lua](definitions/sh_gasket.lua) |
+| Swamps | Ballast | /spawnadvvendor ballastnpc | [sh_ballast.lua](definitions/sh_ballast.lua) |
 | Garbage | Latch | /spawnadvvendor latchnpc | [sh_latch.lua](definitions/sh_latch.lua) |
 | Garbage | Spoor | /spawnadvvendor spoornpc | [sh_spoor.lua](definitions/sh_spoor.lua) |
 | Garbage | Brass | /spawnadvvendor brassnpc | [sh_brass.lua](definitions/sh_brass.lua) |

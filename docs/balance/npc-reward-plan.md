@@ -7,7 +7,7 @@ see the [runtime reward documentation](../../gamemodes/ix_cotz/plugins/progressi
 
 The current source declares **227 progression definitions: 219 deliveries and eight numeric programmes, covering all 19 NPC templates**. The source parser reports no unsupported progression registrations. The expansion already supplies intermediate equipment unlocks, fixed commission rewards, service credits, permanent discounts, personal consumable-stock capacity and a 20% task restock. These are existing systems, not recommendations to implement again.
 
-The current [expanded progression specification](progression/expansion-plan.md) defines the accepted scope. Use existing items and services. New dressings, cleaning kits, cartridge variants, meals with new effects, protective inserts and navigation mechanics remain deferred. Backpack acquisition, item bases and backpack entities remain unchanged; there is no new backpack shop or exchange progression in this plan. Quartermaster retains his flashdrive introduction, with no added Haggler dependency. The three Marsh scientists are inaccessible until after map 2; neither local shop additions nor task assignments should bypass physical or personal story access.
+The current [expanded progression specification](progression/expansion-plan.md) defines the accepted scope. Use existing items and services. New dressings, cleaning kits, cartridge variants, meals with new effects, protective inserts and navigation mechanics remain deferred. Backpack acquisition, item bases and backpack entities remain unchanged; there is no new backpack shop or exchange progression in this plan. Quartermaster retains his flashdrive introduction, with no added Haggler dependency. The three Swamps scientists are inaccessible until after map 2; neither local shop additions nor task assignments should bypass physical or personal story access.
 
 Evidence: current vendor templates, all loaded per-NPC progression definitions (`sh_*prog.lua` and story definitions in `sh_definitions.lua`), service and stock libraries, repeatable-job payout, dialogue, and active barter definitions. Appendix A inventories every configured base entry, progression purchase authorisation and barter output. It includes the milestone and checkpoint threshold for each purchase, rather than treating all unlocked goods as initial stock. Map-saved server catalogue edits are not available in this workspace and need comparison before deployment.
 
@@ -124,7 +124,7 @@ Each section distinguishes current implementation from the remaining recommendat
 
 **Keep:** artifacts/specimen buying; Echo/Bear/Veles; SSP-99/SSP-99M/SEVA; staged scientific medicines; computer/laboratory access. Scientific Aid 1 now grants +1 personal capacity for `medic_psyheal_2` and `medic_stimpak_1`, normally two → three. Its other medical authorisations retain their staged order.
 
-**Access:** despite being in Marsh, the entire science contact is post-map-2 content. Existing acquisition ceilings and story dependencies remain; do not rebalance this into an introductory medicine/detector shop based on location alone.
+**Access:** despite being in Swamps, the entire science contact is post-map-2 content. Existing acquisition ceilings and story dependencies remain; do not rebalance this into an introductory medicine/detector shop based on location alone.
 
 **Next:** retain the science speciality and use existing scientific medicines for visible rewards. Keep advanced detector ownership here. Do not add a shop selling artifacts that can be turned directly into his own profitable research requests.
 
@@ -142,7 +142,7 @@ Each section distinguishes current implementation from the remaining recommendat
 
 ### Intern — dangerous surveys and local hazard recovery
 
-**Keep:** compact anomaly detector/Geiger counter and hazard medicine stock, including existing medkits 5–6 and their explicit prices. The survey programme now has checkpoints at 2/6/11/17 jobs: antirad; tea plus basic medkit; advanced psy recovery; then original laboratory-access outcome. Work is Pripyat field work even though the contact is in Marsh.
+**Keep:** compact anomaly detector/Geiger counter and hazard medicine stock, including existing medkits 5–6 and their explicit prices. The survey programme now has checkpoints at 2/6/11/17 jobs: antirad; tea plus basic medkit; advanced psy recovery; then original laboratory-access outcome. Work is Pripyat field work even though the contact is in Swamps.
 
 **Next:** retain these checkpoints rather than adding a new reward after every survey. Use existing hazard medicine in repeatable-job reward choices. A small bandage/water stock is optional local convenience; no full general pharmacy.
 

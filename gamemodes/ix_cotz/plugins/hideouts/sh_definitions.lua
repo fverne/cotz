@@ -72,6 +72,29 @@ PLUGIN.containerRecipes = {
 
 PLUGIN.furnishingTools = {colour = true, material = true, remover = true}
 PLUGIN.furnishingProperties = {skin = true, bodygroups = true, bonemanipulate = false}
+PLUGIN.propCapacityTiers = {
+	{limit = 30},
+	{limit = 40, price = 5000},
+	{limit = 50, price = 10000},
+	{limit = 60, price = 20000},
+}
+
+function PLUGIN:GetHideoutPropTier(record)
+	return math.Clamp(math.floor(tonumber(record.propTier) or 1), 1, #self.propCapacityTiers)
+end
+
+function PLUGIN:GetHideoutPropLimit(record)
+	return self.propCapacityTiers[self:GetHideoutPropTier(record)].limit
+end
+
+function PLUGIN:GetHideoutPropCount(instance)
+	local count = 0
+	for entity in pairs(instance.props) do
+		if IsValid(entity) then count = count + 1 end
+	end
+
+	return count
+end
 
 function PLUGIN:GetSaleCommission()
 	return math.Clamp(math.floor(tonumber(ix.config.Get("hideoutSaleCommission", 5)) or 5), 0, 100)

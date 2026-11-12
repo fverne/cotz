@@ -1007,7 +1007,7 @@ PLUGIN:Register("wake", {
 		{
 			id = "WA10",
 			name = "Atlas' Missing Mark",
-			briefing = "Atlas should have the survey note. A place described poorly can make the whole route look more certain than it is. Recover the survey note for Atlas from the assigned search area in Garbage. Deliver it to 'Atlas' in Marsh, then come back to me in Garbage.",
+			briefing = "Atlas should have the survey note. A place described poorly can make the whole route look more certain than it is. Recover the survey note for Atlas from the assigned search area in Garbage. Deliver it to 'Atlas' in the Swamps, then come back to me in Garbage.",
 		},
 		{
 			id = "WA12",

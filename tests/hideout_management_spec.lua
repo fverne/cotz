@@ -16,7 +16,7 @@ net = {
 	SendToServer = function() end,
 }
 local panel = {Remove = function() end}
-ix = {gui = {}, cotzUI = {
+ix = {gui = {}, currency = {Get = function(value) return value .. " roubles" end}, cotzUI = {
 	Frame = function() return panel, {} end,
 	Label = function() end,
 	Button = function(parent, label, callback) buttons[label] = callback end,
@@ -41,7 +41,8 @@ LocalPlayer = function() return owner end
 player = {GetHumans = function() return {owner, invited, stranger} end}
 dofile("gamemodes/ix_cotz/plugins/hideouts/cl_management.lua")
 
-reads = {"entrance", 1, "1", "Home", false, "invite", true, false, 2, 2, "Invited", 4, "Character #4"}
+reads = {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000,
+	2, 2, "Invited", 4, "Character #4"}
 callbacks["cotz/hideouts/manage"]()
 assert(readIndex == #reads)
 buttons["Revoke invitation"]()
@@ -51,7 +52,7 @@ assert(sent[1] == "1" and sent[2] == 7 and sent[3] == "4")
 buttons["Invite character"]()
 assert(#options == 2 and options[1][1] == "Invited" and options[2][1] == "Stranger")
 
-readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 0}
+readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, 0}
 callbacks["cotz/hideouts/manage"]()
 buttons["Revoke invitation"]()
 assert(#options == 0)
@@ -60,10 +61,18 @@ print("PASS: invitation menus show saved invitees, including offline characters,
 local confirmation
 ix.cotzUI.Confirm = function(message, title, label, callback) confirmation = callback end
 panel.nextRequest = nil
-readIndex, reads = 0, {"exit", 1, "1", "Home", false, "invite", true, true, 0}
+readIndex, reads = 0, {"exit", 1, "1", "Home", false, "invite", true, true, 1, 30, 40, 5000, 0}
 callbacks["cotz/hideouts/manage"]()
 buttons["Reset hideout layout"]()
 assert(confirmation and sent[2] ~= 15)
 confirmation()
 assert(sent[1] == "1" and sent[2] == 15)
 print("PASS: layout reset requires confirmation before sending its management action")
+
+panel.nextRequest = nil
+confirmation = nil
+buttons["Upgrade prop capacity to 40 (5000 roubles)"]()
+assert(confirmation and sent[2] ~= 0)
+confirmation()
+assert(sent[1] == "1" and sent[2] == 0 and sent[4] == 1)
+print("PASS: prop capacity upgrades confirm the price and send the displayed tier")

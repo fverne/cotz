@@ -153,7 +153,7 @@ one candidate per slot. `value_personal` remains outside progression.
 `Acquisition audit` includes conditional probabilities within each weighted loot
 table, explicit spawn quantities, simple instance quantity ranges, guaranteed meat,
 rare trophy probabilities, cooking inputs, and artifact field tiers.
-Worldspawn tables 1/2 belong to the Marsh, 3/4 to Waystation,
+Worldspawn tables 1/2 belong to the Swamps, 3/4 to Waystation,
 and 5/6 to Pripyat; odd tables are ordinary loot and even tables are hard to find.
 The audit labels each world route with its map tier, map name and spawn class.
 Step and hand-in tabs show each delivery's `Loot map ceiling`; early low-tier

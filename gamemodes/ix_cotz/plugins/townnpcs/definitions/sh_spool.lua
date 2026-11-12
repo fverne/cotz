@@ -483,7 +483,7 @@ PLUGIN:Register("spool", {
 		{
 			id = "SO06",
 			name = "The Crossed Bearings",
-			briefing = "Technut needs the calibration record. He can check the hardware side without me making increasingly elaborate sounds at him. Recover the calibration file for Technut from the assigned search area in Waystation. Deliver it to 'Technut' in Marsh, then come back to me in Garbage.",
+			briefing = "Technut needs the calibration record. He can check the hardware side without me making increasingly elaborate sounds at him. Recover the calibration file for Technut from the assigned search area in Waystation. Deliver it to 'Technut' in the Swamps, then come back to me in Garbage.",
 		},
 		{
 			id = "SO08",
@@ -493,7 +493,7 @@ PLUGIN:Register("spool", {
 		{
 			id = "SO10",
 			name = "Mute's Header",
-			briefing = "There's a damaged network record out in Marsh. I'd like to see what remains before deciding who it connects to. Recover the network header from the assigned search area in Marsh. Bring it back to me in Garbage.",
+			briefing = "There's a damaged network record out in the Swamps. I'd like to see what remains before deciding who it connects to. Recover the network header from the assigned search area in the Swamps. Bring it back to me in Garbage.",
 		},
 		{
 			id = "SO12",

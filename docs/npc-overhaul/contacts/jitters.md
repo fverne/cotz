@@ -36,7 +36,7 @@ These conversations and their follow-up live in [sh_medicnpc.lua](../../../gamem
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** Existing jittery medic.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Specific mutant specimens.
@@ -70,9 +70,9 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | JT01 | Clean Hands | Hand-in | Deliver basic clinical supplies. | First bandage purchase improvement. |
-| JT02 | The Empty Cabinet | Authored | Recover a clinic inventory from a Marsh aid station. | Basic treatment supplies. |
+| JT02 | The Empty Cabinet | Authored | Recover a clinic inventory from a Swamps aid station. | Basic treatment supplies. |
 | JT03 | Keep the Shelves Filled | Tracker | Cumulative checkpoint C1: maintain medical-supply deliveries. | First bandage capacity increase. |
-| JT04 | A Missing Bag | Authored | Recover a medic's abandoned case in Marsh. | Treatment credit. |
+| JT04 | A Missing Bag | Authored | Recover a medic's abandoned case in Swamps. | Treatment credit. |
 
 ### Chapter 2: Diagnostic equipment
 

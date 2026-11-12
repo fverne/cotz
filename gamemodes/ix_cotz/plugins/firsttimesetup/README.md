@@ -6,12 +6,12 @@ entity export and spawning lives in `sv_entities.lua`.
 
 ## Town vendor placements
 
-The Marsh preset lists all nine contacts with authored alternate positions in `vendors` as well as
+The Swamps preset lists all nine contacts with authored alternate positions in `vendors` as well as
 `plugindata["townnpcs"]`. Alternate positions alone do not create NPCs. FTS saves its vendor snapshot
 before returning, so a restart before the normal autosave does not lose newly spawned vendors.
 
 Preset edits do not update an initialized server. To restore missing preset vendors on an existing
-Marsh server after deploying these files, run this once in its server console:
+Swamps server after deploying these files, run this once in its server console:
 
 ```lua
 lua_run local f = ix.plugin.Get("firsttimesetup") for _, v in ipairs(f.map_presets[game.GetMap()].vendors) do if not ix.progression.GetNPCFromName(ix.npctemplates.templates[v.template].name) then f:SpawnVendor(v) end end 
@@ -96,7 +96,7 @@ The hideout spec checks setup export/import and Lua round trips, ownership/inven
 existing-ID preservation, unloaded-instance checks, malformed definitions, missing/rejected shell files,
 failed-save rollback, and stopping FTS before world population on invalid hideout data.
 
-The vendor spec checks that every Marsh contact with alternate positions has a unique vendor placement,
+The vendor spec checks that every Swamps contact with alternate positions has a unique vendor placement,
 that its template exists, that its starting transform matches the authored point, and that FTS saves
 all spawned vendors before returning. Verify recovery and an immediate restart in multiplayer as well.
 

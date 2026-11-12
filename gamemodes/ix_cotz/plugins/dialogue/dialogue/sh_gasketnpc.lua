@@ -79,7 +79,7 @@ DIALOGUE.addTopic("InterestTownFollowup", {
 
 DIALOGUE.addTopic("InterestZoneLifeTopic", {
 	statement = "What bothers you most after everyone comes back from an expedition?",
-	response = "Mud. All the excitement over an artifact, and six people standing about shedding half the Marsh while they explain who carried it. Boots off would be a start. Then somebody remembers they've left an empty container beside the water. Everybody's exhausted, apparently. I'm allowed to be exhausted as soon as I've finished clearing up. Still, I like hearing them outside. Means I can complain to their faces instead of wondering where they've got to.",
+	response = "Mud. All the excitement over an artifact, and six people standing about shedding half the Swamps while they explain who carried it. Boots off would be a start. Then somebody remembers they've left an empty container beside the water. Everybody's exhausted, apparently. I'm allowed to be exhausted as soon as I've finished clearing up. Still, I like hearing them outside. Means I can complain to their faces instead of wondering where they've got to.",
 	options = {"InterestPersonalFollowup", "BackTopic"},
 })
 

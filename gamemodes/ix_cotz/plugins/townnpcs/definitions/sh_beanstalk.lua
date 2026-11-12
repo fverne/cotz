@@ -15,6 +15,11 @@ PLUGIN:Register("beanstalk", {
 		category = "Research defence",
 		description = "Research defence",
 		kind = "defence",
+		maps = {easy = "rp_marsh_cs", medium = "rp_garbage_cotz", hard = "rp_pripyat_remaster"},
+		mapChoices = {
+			easy = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
+			medium = {"rp_garbage_cotz", "rp_waystation"},
+		},
 	},
 	legacyJob = {
 		category = "Research defence",
@@ -61,7 +66,7 @@ PLUGIN:Register("beanstalk", {
 		offerPrompt = "Do you have research defence work?",
 		progression = "I need supplies for handling and checking samples. I would rather spend time preparing them than explain a result I cannot trust. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "What needs comparing in the research records?",
-		work = "Defended sampler runs. Deploy at the assigned site, stay close enough to protect the sampler, let the recording finish, then bring the results back. Prepare for the whole run. A quiet beginning is not evidence that the equipment can be left alone. We need the completed record before discussing how reassuring the conditions looked.",
+		work = "Defended sampler runs. Deploy at the assigned site, stay close enough to protect the sampler, let the recording finish, then bring the results back. Prepare for the whole run. A quiet beginning is not evidence that the equipment can be left alone. We need the completed record before discussing how reassuring the conditions looked. Medium runs take you to Garbage or Waystation; hard runs are in Pripyat. Bring the finished recording back to me in the Swamps. I would rather you allow for that journey before starting the sampler.",
 		workPrompt = "About the sampler run I'm protecting.",
 	},
 	catalogue = {

@@ -6,7 +6,7 @@ the [unlock ledger](unlock-ledger.md) for implementation.
 
 Implemented from the main planning columns of the November 2026 workbook. Optional unlock ideas remain proposals.
 
-The scientist tier is the Marsh Eco Bunker. Carbon sells the existing physical bunker access card. Actual NPC positions still require administrator placement. NPC conversation access stays independent, so existing courier assignments do not gain circular prerequisites.
+The scientist tier is the Swamps Eco Bunker. Carbon sells the existing physical bunker access card. Actual NPC positions still require administrator placement. NPC conversation access stays independent, so existing courier assignments do not gain circular prerequisites.
 Ballast provides the existing personal-storage service as the requested hideout storage. No new hideout construction system is introduced.
 
 | Contact | Effort multiplier | Authored purchases |

@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_firststalkernpc.lua](../../.
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** Existing self-proclaimed first stalker; retain his established voice.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** None; contact unused. Specimen requests moved to Jitters.
@@ -69,7 +69,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | OR01 | A Familiar Beast | Hand-in | Deliver common harvested specimens. | Basic specimen-supply barter. |
-| OR02 | Where It Fed | Authored | Retrieve observations from a Marsh feeding site. | Field preparation supplies. |
+| OR02 | Where It Fed | Authored | Retrieve observations from a Swamps feeding site. | Field preparation supplies. |
 | OR03 | Proof in the Bag | Tracker | Cumulative checkpoint C1: maintain mutant-specimen deliveries. | First survival-supply purchase. |
 | OR04 | The First Account | Authored | Recover an early expedition note near a local landmark. | An old encounter clue. |
 

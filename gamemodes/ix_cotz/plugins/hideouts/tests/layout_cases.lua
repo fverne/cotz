@@ -244,3 +244,23 @@ Test("officer layout reset retains leader-only container positions", function()
 	assert(PLUGIN:ResetHideoutLayout(officer, record))
 	assert(entity:GetPos().x == instance.origin.x + 70 and slot.transform.pos.x == 70)
 end)
+
+Test("personal and squad furnishings enforce every capacity before and after spawning", function()
+	for _, squad in ipairs({false, true}) do
+		local owner, instance, record = home(squad)
+		for tier, limit in ipairs({30, 40, 50, 60}) do
+			record.propTier = tier
+			while PLUGIN:GetHideoutPropCount(instance) < limit do
+				assert(PLUGIN:PlayerSpawnProp(owner, "chair.mdl") ~= false)
+				assert(IsValid(furnishing(owner, instance)))
+			end
+			assert(PLUGIN:PlayerSpawnProp(owner, "chair.mdl") == false)
+			assert(not IsValid(furnishing(owner, instance)))
+			assert(PLUGIN:GetHideoutPropCount(instance) == limit)
+		end
+		local prop = next(instance.props)
+		prop:Remove()
+		assert(PLUGIN:PlayerSpawnProp(owner, "chair.mdl") ~= false)
+		assert(IsValid(furnishing(owner, instance)))
+	end
+end)

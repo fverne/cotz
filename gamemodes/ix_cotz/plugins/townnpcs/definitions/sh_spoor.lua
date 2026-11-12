@@ -599,7 +599,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "SP06",
 			name = "Lemon's Complaint",
-			briefing = "Jitters needs the meat-handling notes. He can judge the health concerns better with the account in front of him. Recover the camp meat-handling notes from the assigned search area in Garbage. Deliver it to 'Jitters' in Marsh, then come back to me in Garbage.",
+			briefing = "Jitters needs the meat-handling notes. He can judge the health concerns better with the account in front of him. Recover the camp meat-handling notes from the assigned search area in Garbage. Deliver it to 'Jitters' in the Swamps, then come back to me in Garbage.",
 		},
 		{
 			id = "SP08",
@@ -619,7 +619,7 @@ PLUGIN:Register("spoor", {
 		{
 			id = "SP14",
 			name = "The Pattern Breaks",
-			briefing = "Atlas needs the survey record. I'd like him to check the ground account without me selecting the useful bits for him. Recover the survey recorder for Atlas from the assigned search area in Waystation. Deliver it to 'Atlas' in Marsh, then come back to me in Garbage.",
+			briefing = "Atlas needs the survey record. I'd like him to check the ground account without me selecting the useful bits for him. Recover the survey recorder for Atlas from the assigned search area in Waystation. Deliver it to 'Atlas' in the Swamps, then come back to me in Garbage.",
 		},
 		{
 			id = "SP16",

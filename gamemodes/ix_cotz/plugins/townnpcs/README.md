@@ -34,8 +34,8 @@ Run `luatex --luaonly tests/progression_requirement_modes_spec.lua` and
 `python3 tests/progression_expansion_spec.py`; multiplayer replication and hand-in QA remain required.
 Each contact declares core and related support request pools in `progressionIdentity`. At least 75%
 of requested units stay with the contact's specialty; there is no all-theme rotation. Each branch starts
-locally; later low-quantity slots gradually allow Marsh/Garbage, Waystation and finally Pripyat sources.
-Marsh branches keep their first two original milestones and all work below 45% fully Marsh-obtainable,
+locally; later low-quantity slots gradually allow Swamps/Garbage, Waystation and finally Pripyat sources.
+Swamps branches keep their first two original milestones and all work below 45% fully Swamps-obtainable,
 including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts, except for the initial hideout tool hand-ins. Completion pays accumulated hand-in
 value at 60%, with no flat cash. Stock bonuses increase personal capacity without refilling it.
 Ledger uses 3× difficulty. Policy 4 converts outstanding invalid or out-of-region saved inputs while preserving credited
@@ -47,6 +47,11 @@ antirads follow medkit 2, and Asenapine/Modafines follow medkit 4. Atlas' anomal
 Initial hideout access consumes one unequipped tool before new local room claims and unfinished improvements:
 one crowbar or bat for Ballast, one sledgehammer for Cleaner, and one FUBar for Ledger. These hand-ins ignore
 contact difficulty multipliers. Existing rooms/upgrades remain saved and usable. Haggler's gunpowder barters are removed.
+Haggler's first four weapon unlocks and their two stock intermissions request ordinary shop supplies
+from regular Swamps loot: workshop consumables, adhesives and cleaning supplies. The generator reads
+`progressionIdentity.opening` for these opening categories; later requests retain his resale specialty.
+Their mode version 3 refreshes unfinished saved categories once, preserving targets, delivered units,
+earned credit and completed unlocks. Subsequent assignments keep their saved choices.
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 Stock-capacity milestones use "<item> stock increase" as their title in dialogue and the progression menu.
 
@@ -167,6 +172,12 @@ Beanstalk retains research defence; Egghead retains Garbage/Waystation/Pripyat s
 All three declare `bunker = true`, excluding them from Brass's easy couriers and including them in hard
 couriers. Saved incoming deliveries resolve their current Swamps home without rerolling assignments.
 
+New regional/field routes require travel away from the issuer on medium and target Pripyat on hard.
+Ballast's medium recoveries and Beanstalk's medium defence runs choose Garbage or Waystation. Boss's
+medium orders target Garbage. Cleaner's hard delivery endpoint is Pripyat; old hard routes remain
+completion-only. Assigned field sites and legacy jobs stay saved. Spoken work explanations and offer
+previews name the new destinations. See the current [route table](../../../../docs/npc-overhaul/repeatable-jobs.md).
+
 ## Completion-time repeatable rewards
 
 Reward candidates are defined in each contact's `rewards` table, independently of shop stock.
@@ -207,7 +218,7 @@ stale vendor rows. Template assembly and saved-vendor refresh apply the current 
 Character-owned stock histories are retained and clamped by the existing stock policy, not reset.
 
 Carbon sells `accesscard_bunker`; Intern sells `accesscard_laboratory`. Their existing physical-door
-actions are retained. Beanstalk, Egghead and Intern now have Marsh as their home, at the Eco Bunker.
+actions are retained. Beanstalk, Egghead and Intern now have Swamps as their home, at the Eco Bunker.
 Place them there with `/TownNPCPlace <slug>` after removing and saving their old placements.
 NPC conversation access remains independent, so existing courier work does not acquire circular gates.
 Accepted deliveries resolve a named contact's current home while retaining their saved assignment.
@@ -227,7 +238,7 @@ Run the existing progression/vendor suites and `luatex --luaonly tests/vendor_pl
 Verify scientist placement, both access-card doors, all three trade modes, repeated commissions,
 conversion retries, personal storage and STALKERnet unlocks with fresh and existing characters in multiplayer.
 
-The town plugin owns 27 contacts and 624 active finite objectives. Arena Master lives in Marsh
+The town plugin owns 27 contacts and 624 active finite objectives. Arena Master lives in Swamps
 (rp_marsh_cs), Garbage uses rp_garbage_cotz, and Waystation uses rp_waystation. Pripyat
 (rp_pripyat_remaster) is a task destination without permanent town NPCs.
 
@@ -524,7 +535,7 @@ Flavour stays under **Can I ask you something?**; actions and services stay at t
 The [FTS availability report](../../../../docs/npc-overhaul/delivery-balance.md) inventories item
 points, boxes and cycling containers, combines their weights, and documents modeled rarity ratios.
 Garbage now has 61 loose-item and 199 box points; custom box pools contribute to its availability.
-Contacts without a local source for their theme use Marsh as the introductory acquisition region.
+Contacts without a local source for their theme use Swamps as the introductory acquisition region.
 The model does not invent local Garbage loot or infer encounter rates from hidden-stash destinations.
 
 All 327 finite delivery milestones now have 849 item slots across four phases of local prerequisite
@@ -535,7 +546,7 @@ in the same delivery are disjoint, so every requested type rolls a distinct item
 items and quantities remain visible in the existing requirement list; briefings ask for the full list.
 
 Candidates have positive modeled world/box/cycling exposure. Introductory candidates have a source
-in the contact's starting region (local where the theme has sources; otherwise Marsh); later bands allow more travel and rarer finds.
+in the contact's starting region (local where the theme has sources; otherwise Swamps); later bands allow more travel and rarer finds.
 The report explains the population caps, pickup units, batch sizing, planning factors and exclusions.
 Repeatable specialties, milestone IDs, prerequisites, cash, benefits and field mechanics are unchanged.
 Existing saved item selections and partial contributions are retained rather than rerolled.
@@ -658,18 +669,18 @@ Delivery maps are acquisition guidance, not a restriction on where an item must 
 
 | Contact / home | Easy additions | Medium additions | Hard additions |
 | --- | --- | --- | --- |
-| Gasket / Marsh | Cleaning, fuel | Filtration, electrical stock | Portable power, reinforced cases |
-| Jitters / Marsh | Clinical stock | Trauma stock, medical equipment | Research injectors |
-| Technut / Marsh | Workshop consumables, drivers/wrenches | Tools, cutting tools, repair parts | Instruments, control electronics |
-| Mute / Marsh | Components, power | Radios, radio parts, flash media | Computers, controls, archives, recording equipment |
-| Spicy Lemon / Marsh | Provisions | Provisions | Provisions |
-| The Original / Marsh | Personal effects, music cassettes | Collectibles, faction patches | Irregular patches, specialist cases |
+| Gasket / Swamps | Cleaning, fuel | Filtration, electrical stock | Portable power, reinforced cases |
+| Jitters / Swamps | Clinical stock | Trauma stock, medical equipment | Research injectors |
+| Technut / Swamps | Workshop consumables, drivers/wrenches | Tools, cutting tools, repair parts | Instruments, control electronics |
+| Mute / Swamps | Components, power | Radios, radio parts, flash media | Computers, controls, archives, recording equipment |
+| Spicy Lemon / Swamps | Provisions | Provisions | Provisions |
+| The Original / Swamps | Personal effects, music cassettes | Collectibles, faction patches | Irregular patches, specialist cases |
 | Latch / Garbage | Tools, drivers/wrenches, repair parts | Consumables, transit cases, electrical stock | Reinforced/secured cases, instruments |
 | Brass / Garbage | Equipment pouches | Military cases | Ordnance salvage |
 | Suture / Waystation | Textiles, pouches | Protective textiles | Armour panels |
 | Carbon / Waystation | Office/field records, printed material | Official/technical records | Research records, data archives |
 | Quartermaster / Waystation | Military cases, pouches | Ordnance salvage, official records | Secured cases, control electronics |
-| Egghead / Marsh Eco Bunker | Sample carriers, survey gear | Research samples/records | Instruments, research injectors |
+| Egghead / Swamps Eco Bunker | Sample carriers, survey gear | Research samples/records | Instruments, research injectors |
 
 Easy additions favour home-region themes. Pools contain alternatives with different acquisition routes,
 so a particular request can still require travel. Medium workshop requests favour Garbage/Waystation;
@@ -732,7 +743,7 @@ items are not removed. No database reset or first-time setup is required.
 All 646 milestones have an assigned functional unlock, stock tier or unimplemented unlock.
 The initial redistribution covered 624 milestones; the later author-disabled suggestions above
 supersede that coverage snapshot.
-Arena Master remains in Marsh as an arena organiser, with no active catalogue or finite progression.
+Arena Master remains in Swamps as an arena organiser, with no active catalogue or finite progression.
 His 22 former milestones, including eight TODO entries, remain in `retiredProgression` as inactive
 reference data; none are registered, offered or counted. His former purchases now belong to
 Haggler, Brass and Jitters as appropriate.

@@ -36,7 +36,7 @@ These conversations and their follow-up live in [sh_atlasnpc.lua](../../../gamem
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** New: patient, meticulous former surveyor, concerned for missing explorers.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
 - **Only repeatable category:** Alternating mutant and anomaly photography.
@@ -51,7 +51,7 @@ impose a single sequential line. Explicit cross-contact equipment prerequisites 
 
 | Chapter | Design steps | Story direction |
 | --- | --- | --- |
-| 1 | AT01–AT04 | Marsh landmarks |
+| 1 | AT01–AT04 | Swamps landmarks |
 | 2 | AT05–AT08 | Unreliable routes |
 | 3 | AT09–AT14 | Garbage approaches |
 | 4 | AT15–AT18 | Missing survey teams |
@@ -65,14 +65,14 @@ does not grant the item. A clue must identify a real authored destination. A cap
 not fill shelves. Each generic equipment slot remains unassigned until its item and upgrade gates
 pass the catalogue audit; it must not be implemented as a convenient arbitrary item.
 
-### Chapter 1: Marsh landmarks
+### Chapter 1: Swamps landmarks
 
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | AT01 | Marks on Paper | Hand-in | Deliver ordinary survey and writing supplies. | Survey-supply barter. |
-| AT02 | The First Landmark | Authored | Deploy and retrieve a recorder near a Marsh landmark. | Local route note. |
+| AT02 | The First Landmark | Authored | Deploy and retrieve a recorder near a Swamps landmark. | Local route note. |
 | AT03 | Repeatable Ground | Tracker | Cumulative checkpoint C1: complete initial sensor-work checkpoint. | First survey consumable purchase. |
-| AT04 | The Route That Shifted | Authored | Retrieve a recorder near a blocked Marsh approach. | Alternate-route clue. |
+| AT04 | The Route That Shifted | Authored | Retrieve a recorder near a blocked Swamps approach. | Alternate-route clue. |
 
 ### Chapter 2: Unreliable routes
 

@@ -335,7 +335,7 @@ performance:RegisterMutant(mutant(851, 10000), false)
 check(not eventPlugin:CanSpawnMutant(vector(20000)), "map global cap is enforced across regions")
 currentMap = "rp_marsh_cs"
 globalLimit, regionLimit = eventPlugin:GetMutantLimits()
-check(globalLimit == 100 and regionLimit == 20, "same shared config gives marsh its independent limits")
+check(globalLimit == 100 and regionLimit == 20, "same shared config gives Swamps its independent limits")
 currentMap = "rp_waystation"
 configValues.mutantLimit_rp_waystation = 0
 configValues.mutantRegionLimit_rp_waystation = 0
@@ -388,7 +388,7 @@ local lockedPlayer = {GetCharacter = function() return lockedCharacter end}
 local loadingPlayer = {GetCharacter = function() end}
 local broadcasts, eventsSpawned = {}, 0
 local broadcastController = {
-	eventpoints = {[currentMap] = {{vector(0), "Marsh", 1}}},
+	eventpoints = {[currentMap] = {{vector(0), "Swamps", 1}}},
 	eventdefs = {{difficulty = {1}, pdabroadcast = "Mutants near %s"}},
 	spawnrate = 30, pdachatterchance = 100,
 	UpdateMutantPerformance = function() end,
@@ -424,7 +424,7 @@ broadcastController:Think()
 check(eventsSpawned == 1, "population-aware event controller still spawns routine events")
 check(#broadcasts == 1 and broadcasts[1][1] == unlockedPlayer,
 	"event broadcasts only reach characters with their personal unlock")
-check(broadcasts[1][2] == "Mutants near Marsh" and broadcasts[1][3][1] == unlockedPlayer,
+check(broadcasts[1][2] == "Mutants near Swamps" and broadcasts[1][3][1] == unlockedPlayer,
 	"event broadcast uses the event location and a private recipient list")
 broadcastController.spawnEvent = function() return false end
 now = now + broadcastController.spawnrate + 1

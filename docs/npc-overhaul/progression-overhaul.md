@@ -135,13 +135,13 @@ Original equipment rank determines regional access, using `(index - 1) / (branch
 | Branch position | Eligible acquisition maps |
 | --- | --- |
 | First milestone, or a single-step branch | Contact's home map only |
-| After introduction, below 45% | Home map, Marsh and Garbage |
+| After introduction, below 45% | Home map, Swamps and Garbage |
 | 45% to below 75% | Also Waystation |
 | 75% onward | Also Pripyat |
 
-**Marsh exception:** the first two original milestones of every Marsh branch, and all other milestones
+**Swamps exception:** the first two original milestones of every Swamps branch, and all other milestones
 below 45%, stay wholly local. This includes preparation stages attached to those milestones. Every
-candidate must have a positive checked-in Marsh source; simply retaining Marsh among several possible
+candidate must have a positive checked-in Swamps source; simply retaining Swamps among several possible
 maps is insufficient. Short branches cannot make their second request Pripyat-only.
 
 The home map always remains eligible. Newly regional goods enter the lowest-quantity slots: at most one
@@ -243,7 +243,7 @@ completed purchases are not revoked. When an intermission's parents were complet
 character initialization activates it without completing it or awarding any benefit automatically.
 
 Requirement policy 4 converts only outstanding ineligible or out-of-region saved inputs. It upgrades
-policy-3 assignments so that opening Marsh work cannot retain later-map-only demands. Eligible saved
+policy-3 assignments so that opening Swamps work cannot retain later-map-only demands. Eligible saved
 requests retain their exact items and quantities, including locally available requests that predate the
 new specialties. Specialties apply to new rolls without rerolling valid saved assignments.
 Completed contributions remain credited; converted

@@ -85,7 +85,7 @@ def allowed_maps(home, index, length):
     if index == 0 or length == 1:
         return [home]
     phase = index / (length - 1)
-    # Opening Marsh work must never roll a later-map-only item, including on short branches.
+    # Opening Swamps work must never roll a later-map-only item, including on short branches.
     if home == "rp_marsh_cs" and (index < 2 or phase < 0.45):
         return [home]
     maps = {home, "rp_marsh_cs", "rp_garbage_cotz"}
@@ -278,12 +278,16 @@ def author_requirements(data, rates, sources):
             continue
         identity = contact["progressionIdentity"]
         assert identity["core"] and identity["support"], slug
-        for name in identity["core"] + identity["support"]:
+        for name in identity["core"] + identity["support"] + identity.get("opening", []):
             assert name in data["pools"], (slug, name)
         opening = opening_steps(contact)
         for step in contact["progression"]:
             category_only = step.get("intermissionFor", step["id"]) in opening
             step["categoryOnly"] = category_only
+            opening_pools = identity.get("opening") if category_only else None
+            if opening_pools:
+                # Refresh saved opening categories once, retaining counters, deliveries and earned credit.
+                step["requirementModesVersion"] = 3
             if step["id"] == "v3/hideout/access":
                 slot = step["requirements"][0]
                 step["requirements"][0] = {"pool": slot["pool"], "quantity": slot["quantity"], "mode": "any"}
@@ -309,6 +313,8 @@ def author_requirements(data, rates, sources):
                 else:
                     support = count >= 3 and index == count - 1
                     names = identity["support"] if support else identity["core"]
+                    if opening_pools:
+                        names = opening_pools
                     remaining = max(0, count - index - (2 if count >= 3 and not support else 1))
                     limit = 6 if category_only and count == 1 else 16
                     items = select_group(names, slot_maps, mode, used, remaining, phase, limit)
@@ -316,6 +322,8 @@ def author_requirements(data, rates, sources):
                         items = select_group(identity["core"], slot_maps, mode, used, 0, phase, limit)
                     assert items, (slug, step["id"], index, "No distinct local specialty supplies")
                     label = identity["name"] + (": supporting supplies" if support else ": general supplies")
+                    if opening_pools:
+                        label = identity["openingName"]
                 if mode == "random":
                     used.update(items)
                 pool = get_pool(items, label, slot_maps, index,

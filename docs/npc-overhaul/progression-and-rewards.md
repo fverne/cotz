@@ -113,7 +113,7 @@ detector behind work that needs that detector, or gate Pripyat behind its own ex
 Keep physical NPC arrival, personal access, and travel permissions separate.
 
 Calibrate effort using actual supply, quantities, travel, hazard preparation, and competition.
-Adding Garbage requires re-evaluating the current Marsh/Waystation/Pripyat tier assumptions;
+Adding Garbage requires re-evaluating the current Swamps/Waystation/Pripyat tier assumptions;
 do not insert a numeric tier and silently change existing assignments.
 
 ## Regional overlap and current allocation

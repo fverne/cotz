@@ -1737,7 +1737,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK02",
 			name = "The Empty Service Shed",
-			briefing = "Someone kept the generator serviced before I inherited everyone else's guesses. I'd like to see what they wrote down. Recover the generator service journal from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "Someone kept the generator serviced before I inherited everyone else's guesses. I'd like to see what they wrote down. Recover the generator service journal from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "GK04",
@@ -1747,7 +1747,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK06",
 			name = "The Pump Log",
-			briefing = "I want the last pump entries, including the dull ones. People always remember a failure and forget the weeks of small complaints before it. Recover the water-pump maintenance log from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I want the last pump entries, including the dull ones. People always remember a failure and forget the weeks of small complaints before it. Recover the water-pump maintenance log from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "GK08",
@@ -1757,7 +1757,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK10",
 			name = "The Scrap Specification",
-			briefing = "Latch can judge a replacement if he has the specification. I'm tired of describing a fitting with my hands. Recover the replacement-part specification from the assigned search area in Garbage. Deliver it to 'Latch' in Garbage, then come back to me in Marsh.",
+			briefing = "Latch can judge a replacement if he has the specification. I'm tired of describing a fitting with my hands. Recover the replacement-part specification from the assigned search area in Garbage. Deliver it to 'Latch' in Garbage, then come back to me in the Swamps.",
 		},
 		{
 			id = "GK12",
@@ -1767,7 +1767,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK14",
 			name = "The Shelter Circuit",
-			briefing = "The shelter's service recorder may tell me more than a report saying everything seemed fine. I'd like the actual record. Recover the shelter service recorder from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "The shelter's service recorder may tell me more than a report saying everything seemed fine. I'd like the actual record. Recover the shelter service recorder from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "GK16",
@@ -1777,7 +1777,7 @@ PLUGIN:Register("gasket", {
 		{
 			id = "GK18",
 			name = "The Original Manual",
-			briefing = "I want the original utility papers. If the last fellow changed something, I'd like to know what he was changing it from. Recover the original utility manual from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I want the original utility papers. If the last fellow changed something, I'd like to know what he was changing it from. Recover the original utility manual from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "GK20",

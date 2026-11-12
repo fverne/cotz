@@ -269,14 +269,14 @@ PLUGIN:Register("the-original", {
 			name = "Where It Fed",
 			kind = "field",
 			objective = (
-				"Recover the feeding-ground journal from the assigned search area in Marsh. Bring it back to the "
-				.. "issuing contact in Marsh."
+				"Recover the feeding-ground journal from the assigned search area in the Swamps. Bring it back to the "
+				.. "issuing contact in the Swamps."
 			),
 			requires = {"OR01"},
 			briefing = (
 				"Bring the feeding observations back. The animal people remember seeing isn't always the only "
 				.. "thing that used the ground. Recover the feeding-ground journal from the assigned search area in "
-				.. "Marsh. Bring it back to me in Marsh."
+				.. "Swamps. Bring it back to me in the Swamps."
 			),
 			completion = (
 				"Let me read the ordinary entries first. People rush past those when they've heard there's a story "
@@ -366,14 +366,14 @@ PLUGIN:Register("the-original", {
 			name = "The Wrong Tracks",
 			kind = "field",
 			objective = (
-				"Recover the disputed hunting recording from the assigned search area in Marsh. Bring it back to "
-				.. "the issuing contact in Marsh."
+				"Recover the disputed hunting recording from the assigned search area in the Swamps. Bring it back to "
+				.. "the issuing contact in the Swamps."
 			),
 			requires = {"OR04"},
 			briefing = (
 				"I want the hunting-site recording. Spoor can have an opinion on it after I've actually heard the "
-				.. "thing. Recover the disputed hunting recording from the assigned search area in Marsh. Bring it "
-				.. "back to me in Marsh."
+				.. "thing. Recover the disputed hunting recording from the assigned search area in the Swamps. Bring it "
+				.. "back to me in the Swamps."
 			),
 			completion = "Put it down. I'll listen to the account, including the part that may spoil mine.",
 			field = {
@@ -521,14 +521,14 @@ PLUGIN:Register("the-original", {
 			name = "A Story With Dates",
 			kind = "field",
 			objective = (
-				"Recover the dated expedition log for Carbon from the assigned search area in Marsh. Deliver it to "
-				.. "'Carbon' in Waystation, then come back to the issuing contact in Marsh."
+				"Recover the dated expedition log for Carbon from the assigned search area in the Swamps. Deliver it to "
+				.. "'Carbon' in Waystation, then come back to the issuing contact in the Swamps."
 			),
 			requires = {"OR08"},
 			briefing = (
 				"Carbon needs the dated expedition book. If he wants to question my dates, he should have the "
 				.. "original beside him. Recover the dated expedition log for Carbon from the assigned search area in "
-				.. "Marsh. Deliver it to 'Carbon' in Waystation, then come back to me in Marsh."
+				.. "Swamps. Deliver it to 'Carbon' in Waystation, then come back to me in the Swamps."
 			),
 			completion = "He has it. Fine. I'll hear what the pages support, even if I don't enjoy the conversation.",
 			field = {
@@ -696,13 +696,13 @@ PLUGIN:Register("the-original", {
 			kind = "field",
 			objective = (
 				"Recover the earlier camp journal from the assigned search area in Waystation. Bring it back to "
-				.. "the issuing contact in Marsh."
+				.. "the issuing contact in the Swamps."
 			),
 			requires = {"OR12"},
 			briefing = (
 				"Recover the old camp record. I want the account from when it was a working camp, before it became "
 				.. "a place people tell stories about. Recover the earlier camp journal from the assigned search area "
-				.. "in Waystation. Bring it back to me in Marsh."
+				.. "in Waystation. Bring it back to me in the Swamps."
 			),
 			completion = "Let me read it. The little entries may place the journey better than the memorable ones.",
 			field = {
@@ -856,13 +856,13 @@ PLUGIN:Register("the-original", {
 			kind = "field",
 			objective = (
 				"Recover the old route file for Atlas from the assigned search area in Pripyat. Deliver it to "
-				.. "'Atlas' in Marsh, then come back to the issuing contact in Marsh."
+				.. "'Atlas' in the Swamps, then come back to the issuing contact in the Swamps."
 			),
 			requires = {"OR16"},
 			briefing = (
 				"Atlas should have the route record. He can compare my description with what's written without me "
 				.. "leaning over the paper. Recover the old route file for Atlas from the assigned search area in "
-				.. "Pripyat. Deliver it to 'Atlas' in Marsh, then come back to me in Marsh."
+				.. "Pripyat. Deliver it to 'Atlas' in the Swamps, then come back to me in the Swamps."
 			),
 			completion = "Delivered. He'll ask awkward questions. Better those than a comfortable wrong turn.",
 			field = {
@@ -1029,13 +1029,13 @@ PLUGIN:Register("the-original", {
 			kind = "field",
 			objective = (
 				"Recover the encounter witness recording from the assigned search area in Pripyat. Bring it back "
-				.. "to the issuing contact in Marsh."
+				.. "to the issuing contact in the Swamps."
 			),
 			requires = {"OR21"},
 			briefing = (
 				"Recover the last encounter recording. I've told the account often enough; it's somebody else's "
 				.. "turn to be heard. Recover the encounter witness recording from the assigned search area in "
-				.. "Pripyat. Bring it back to me in Marsh."
+				.. "Pripyat. Bring it back to me in the Swamps."
 			),
 			completion = "I'll listen. If it contradicts me, we'll talk about that after it's finished.",
 			field = {

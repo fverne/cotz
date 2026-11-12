@@ -168,7 +168,7 @@ def expanded_plan(root, steps, gates, pools, costs):
         depth = max((p['depth'] + 1 for p in before), default=0)
         ceiling = step['lootMapTier'] or 1
         map_tier = MAP_TIERS.get(step['progMap'], ceiling)
-        # Intern claims in Marsh but performs hard surveys in Pripyat.
+        # Intern claims in Swamps but performs hard surveys in Pripyat.
         if ident == 'intern_gasAnalyzerReadings':
             map_tier = 3
         factor = MAP_EFFORT[map_tier]

@@ -1395,7 +1395,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL02",
 			name = "The Cold Kitchen",
-			briefing = "My recipe notebook is still out in Marsh. I can cook without it. I'd prefer not to keep proving that point every time someone asks for something different. Recover the kitchen recipe journal from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "My recipe notebook is still out in the Swamps. I can cook without it. I'd prefer not to keep proving that point every time someone asks for something different. Recover the kitchen recipe journal from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "SL04",
@@ -1405,7 +1405,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL06",
 			name = "The Spoiled Shipment",
-			briefing = "Bring back the shipment evidence. I'd like to know which consignment we're discussing before everyone blames the kitchen. Recover the spoiled consignment evidence from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "Bring back the shipment evidence. I'd like to know which consignment we're discussing before everyone blames the kitchen. Recover the spoiled consignment evidence from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "SL08",
@@ -1415,7 +1415,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL10",
 			name = "The Supplier's Ledger",
-			briefing = "I want the supplier's book. Everybody remembers having sent enough food; a written entry would make a lovely change. Recover the food supplier's ledger from the assigned search area in Garbage. Bring it back to me in Marsh.",
+			briefing = "I want the supplier's book. Everybody remembers having sent enough food; a written entry would make a lovely change. Recover the food supplier's ledger from the assigned search area in Garbage. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "SL12",
@@ -1425,7 +1425,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL14",
 			name = "Jitters' Complaint",
-			briefing = "Jitters needs the ration observations. I am perfectly prepared to have this discussion with a page between us for once. Recover the clinic ration log for Jitters from the assigned search area in Marsh. Deliver it to 'Jitters' in Marsh, then come back to me in Marsh.",
+			briefing = "Jitters needs the ration observations. I am perfectly prepared to have this discussion with a page between us for once. Recover the clinic ration log for Jitters from the assigned search area in the Swamps. Deliver it to 'Jitters' in the Swamps, then come back to me in the Swamps.",
 		},
 		{
 			id = "SL16",
@@ -1435,7 +1435,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL18",
 			name = "The Long Walk",
-			briefing = "Gasket should have the ration-test record. He's usually the one who remembers to ask what was available on the journey. Recover the ration trial recorder for Gasket from the assigned search area in Marsh. Deliver it to 'Gasket' in Marsh, then come back to me in Marsh.",
+			briefing = "Gasket should have the ration-test record. He's usually the one who remembers to ask what was available on the journey. Recover the ration trial recorder for Gasket from the assigned search area in the Swamps. Deliver it to 'Gasket' in the Swamps, then come back to me in the Swamps.",
 		},
 		{
 			id = "SL20",
@@ -1445,7 +1445,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL22",
 			name = "The Cook's Detour",
-			briefing = "The cook's surviving personal papers should come back together. Leave them as they are until they're here. Recover the cook's personal records from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "The cook's surviving personal papers should come back together. Leave them as they are until they're here. Recover the cook's personal records from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "SL24",
@@ -1455,7 +1455,7 @@ PLUGIN:Register("spicy-lemon", {
 		{
 			id = "SL26",
 			name = "Room at the Table",
-			briefing = "Bring the album home, away from anything leaking in your pack. I can wipe a table clean. Photographs are less forgiving. Recover the cook's photograph album from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "Bring the album home, away from anything leaking in your pack. I can wipe a table clean. Photographs are less forgiving. Recover the cook's photograph album from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 	},
 })

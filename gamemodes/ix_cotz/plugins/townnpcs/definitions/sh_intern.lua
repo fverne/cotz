@@ -288,7 +288,7 @@ PLUGIN:Register("intern", {
 		{
 			id = "IN14",
 			name = "The Lost Calibration Case",
-			briefing = "Technut should inspect the instrument case. I can describe the fault, but I'd rather he saw the equipment himself. Recover the calibration case for Technut from the assigned search area in Waystation. Deliver it to 'Technut' in Marsh, then come back to me in Waystation.",
+			briefing = "Technut should inspect the instrument case. I can describe the fault, but I'd rather he saw the equipment himself. Recover the calibration case for Technut from the assigned search area in Waystation. Deliver it to 'Technut' in the Swamps, then come back to me in Waystation.",
 		},
 		{
 			id = "IN16",

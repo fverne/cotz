@@ -64,7 +64,7 @@ function PLUGIN:BuildProgressions()
 				completionBenefits = step.benefits,
 				acquisitionMaps = step.acquisitionMaps,
 				requirementPolicy = step.requirementPolicy,
-				requirementModesVersion = 2,
+				requirementModesVersion = step.requirementModesVersion or 2,
 				requirementAlternatives = step.requirementAlternatives,
 				intermissionFor = step.intermissionFor,
 				capacityReward = step.capacity,

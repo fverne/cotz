@@ -11,13 +11,13 @@ the legacy FTS writer cannot overwrite authored branches.
 
 | Map | Loose regular / rare | Small / big boxes | Cycling containers | Hidden locations | Anomaly points |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Marsh | 525 / 82 | 238 / 244 | 138 | 74 | 78 |
+| Swamps | 525 / 82 | 238 / 244 | 138 | 74 | 78 |
 | Garbage | 55 / 6 | 94 / 105 | 0 | 15 | 0 |
 | Waystation | 139 / 20 | 108 / 140 | 158 | 34 | 31 |
 | Pripyat | 486 / 39 | 264 / 439 | 219 | 52 | 59 |
 
 Garbage has 61 loose-item points and 199 box points. Box custom pools are included in its supply.
-Contacts use local thematic sources where configured; themes without local sources use Marsh for introductory acquisition.
+Contacts use local thematic sources where configured; themes without local sources use Swamps for introductory acquisition.
 Live saved map data can differ from FTS and overrides these estimates.
 
 ## Estimation method
@@ -55,8 +55,8 @@ Missing referenced pool names use the installed randomitem default fallback; the
 
 | Map | Pool | Points |
 | --- | --- | ---: |
-| Marsh | `worldspawn_1` | 525 |
-| Marsh | `worldspawn_2` | 82 |
+| Swamps | `worldspawn_1` | 525 |
+| Swamps | `worldspawn_2` | 82 |
 | Garbage | `worldspawn_garbage_rare` | 6 |
 | Garbage | `worldspawn_garbage_regular` | 55 |
 | Waystation | `worldspawn_3` | 139 |
@@ -68,12 +68,12 @@ Missing referenced pool names use the installed randomitem default fallback; the
 
 | Map | Category | Locations | Mean appearance interval (seconds) |
 | --- | --- | ---: | ---: |
-| Marsh | `barrel_easy` | 16 | 10800 |
-| Marsh | `barrel_hard` | 4 | 16200 |
-| Marsh | `cache_cbt` | 1 | 25000 |
-| Marsh | `cache_easy` | 10 | 15600 |
-| Marsh | `cache_hard` | 4 | 21500 |
-| Marsh | `stash_map1` | 103 | 3600 |
+| Swamps | `barrel_easy` | 16 | 10800 |
+| Swamps | `barrel_hard` | 4 | 16200 |
+| Swamps | `cache_cbt` | 1 | 25000 |
+| Swamps | `cache_easy` | 10 | 15600 |
+| Swamps | `cache_hard` | 4 | 21500 |
+| Swamps | `stash_map1` | 103 | 3600 |
 | Waystation | `barrel_easy` | 21 | 10800 |
 | Waystation | `barrel_hard` | 1 | 16200 |
 | Waystation | `cache_cbt` | 3 | 25000 |
@@ -90,17 +90,17 @@ Ratios are item-entity frequency ratios; a loose ammo box and one round are not 
 
 | Item | Entity supply index | Relative to bolts | Source maps |
 | --- | ---: | ---: | --- |
-| `value_bolts` | 41.808 | 1.0× rarer | Marsh, Waystation, Pripyat |
-| `value_battery` | 43.219 | 1.0× rarer | Marsh, Waystation |
-| `value_wire_copper` | 24.364 | 1.7× rarer | Marsh, Pripyat |
-| `medic_bandage_1` | 20.502 | 2.0× rarer | Marsh |
-| `value_airfilter` | 12.147 | 3.4× rarer | Marsh, Waystation |
-| `food_can_beans` | 6.492 | 6.4× rarer | Marsh, Waystation, Pripyat |
-| `value_sensor_a` | 10.629 | 3.9× rarer | Marsh, Waystation |
+| `value_bolts` | 41.808 | 1.0× rarer | Swamps, Waystation, Pripyat |
+| `value_battery` | 43.219 | 1.0× rarer | Swamps, Waystation |
+| `value_wire_copper` | 24.364 | 1.7× rarer | Swamps, Pripyat |
+| `medic_bandage_1` | 20.502 | 2.0× rarer | Swamps |
+| `value_airfilter` | 12.147 | 3.4× rarer | Swamps, Waystation |
+| `food_can_beans` | 6.492 | 6.4× rarer | Swamps, Waystation, Pripyat |
+| `value_sensor_a` | 10.629 | 3.9× rarer | Swamps, Waystation |
 | `value_controller` | 3.194 | 13.1× rarer | Pripyat |
 | `value_pcpart_laptop` | 1.759 | 23.8× rarer | Pripyat |
 | `value_med_surgicaltools` | 0.895 | 46.7× rarer | Waystation |
-| `value_goldchain` | 0.796 | 52.5× rarer | Marsh, Waystation, Pripyat |
+| `value_goldchain` | 0.796 | 52.5× rarer | Swamps, Waystation, Pripyat |
 
 The full per-item/per-map/source estimates and quantities are in [fts-item-availability.json](fts-item-availability.json).
 
@@ -122,7 +122,7 @@ the other early region 0.3, and Pripyat 0.1 to account for travel. These plannin
 not measured travel times. Candidates are sorted by that score and divided into four bands.
 A maximum of three candidates from each source category preserves thematic variety. Categories can overlap; IDs are deduplicated.
 Candidates with less than 0.1 aggregate entity opportunities per modeled hour are excluded from mandatory requests.
-Every introductory candidate has a source in its starting region. Themes without local sources use Marsh as a proxy.
+Every introductory candidate has a source in its starting region. Themes without local sources use Swamps as a proxy.
 Later pools extend to less available and more distant material; rare bands are added at low quantity while common stock grows.
 Each band quantity is its batch multiple times the smallest mean natural unit batch among that band's candidates, rounded down
 with a one-unit minimum. This preserves meaningful ammunition counts without demanding full-capacity salvage stacks.
@@ -134,26 +134,26 @@ are not rerolled; the retuning applies when an unassigned milestone first receiv
 
 | Theme / starting region | Band | Candidates (item IDs) |
 | --- | ---: | --- |
-| collectibles / Marsh | 1 | `value_flyer_01`, `value_flyer_03`, `value_gamemagazine_01`, `value_crow_beak` |
-| collectibles / Marsh | 2 | `value_bear_souvenir`, `value_info_moleskine`, `value_statue_cat`, `value_maps` |
-| collectibles / Marsh | 3 | `value_lightkeeper_amulet`, `value_thick_diary`, `value_statue_lion`, `value_statue_horse` |
-| collectibles / Marsh | 4 | `value_skullring`, `value_lighter_gold`, `value_watch`, `value_goldchain` |
-| electronics / Marsh | 1 | `value_battery`, `value_9vbattery`, `value_wire_copper`, `value_capacitors`, `value_tape_electric`, `value_sparkplug`, `value_wire_light` |
-| electronics / Marsh | 2 | `value_receiver1`, `value_battery_d_0`, `value_ir_ms2000`, `value_radio`, `value_flash_card_slider`, `value_circuitboard`, `value_flash_card_ironkey` |
-| electronics / Marsh | 3 | `value_flash_card_ironkey_slider`, `value_electr_components`, `value_electr_card_programmer`, `value_pcpart_cpufan`, `value_pcpart_discdrive`, `value_pcpart_ram`, `value_ipcamera` |
-| electronics / Marsh | 4 | `value_pda2`, `value_pda3`, `value_phaserelay`, `value_controller`, `value_electr_adv_converter`, `value_electr_adv_controller`, `value_electr_adv_ultralink`, `value_pcpart_laptop` |
+| collectibles / Swamps | 1 | `value_flyer_01`, `value_flyer_03`, `value_gamemagazine_01`, `value_crow_beak` |
+| collectibles / Swamps | 2 | `value_bear_souvenir`, `value_info_moleskine`, `value_statue_cat`, `value_maps` |
+| collectibles / Swamps | 3 | `value_lightkeeper_amulet`, `value_thick_diary`, `value_statue_lion`, `value_statue_horse` |
+| collectibles / Swamps | 4 | `value_skullring`, `value_lighter_gold`, `value_watch`, `value_goldchain` |
+| electronics / Swamps | 1 | `value_battery`, `value_9vbattery`, `value_wire_copper`, `value_capacitors`, `value_tape_electric`, `value_sparkplug`, `value_wire_light` |
+| electronics / Swamps | 2 | `value_receiver1`, `value_battery_d_0`, `value_ir_ms2000`, `value_radio`, `value_flash_card_slider`, `value_circuitboard`, `value_flash_card_ironkey` |
+| electronics / Swamps | 3 | `value_flash_card_ironkey_slider`, `value_electr_components`, `value_electr_card_programmer`, `value_pcpart_cpufan`, `value_pcpart_discdrive`, `value_pcpart_ram`, `value_ipcamera` |
+| electronics / Swamps | 4 | `value_pda2`, `value_pda3`, `value_phaserelay`, `value_controller`, `value_electr_adv_converter`, `value_electr_adv_controller`, `value_electr_adv_ultralink`, `value_pcpart_laptop` |
 | electronics / Waystation | 1 | `value_battery`, `value_9vbattery`, `value_tape_electric`, `value_wire_light`, `value_sparkplug`, `value_capacitors`, `value_receiver1` |
 | electronics / Waystation | 2 | `value_battery_d_0`, `value_ir_ms2000`, `value_radio`, `value_wire_copper`, `value_flash_card_slider`, `value_circuitboard`, `value_flash_card_ironkey` |
 | electronics / Waystation | 3 | `value_flash_card_ironkey_slider`, `value_electr_components`, `value_electr_card_programmer`, `value_pcpart_cpufan`, `value_pcpart_discdrive`, `value_pcpart_ram`, `value_ipcamera` |
 | electronics / Waystation | 4 | `value_pda2`, `value_pda3`, `value_phaserelay`, `value_controller`, `value_electr_adv_converter`, `value_electr_adv_controller`, `value_electr_adv_ultralink`, `value_pcpart_laptop` |
-| kitchen / Marsh | 1 | `value_detergent`, `value_bleach`, `value_other_lupo`, `value_coffee`, `value_other_grechka` |
-| kitchen / Marsh | 2 | `value_soap`, `food_bread`, `food_raisins`, `food_sausage_1`, `food_sausage_2` |
-| kitchen / Marsh | 3 | `drink_orangejuice`, `drink_canwater`, `food_can_beans`, `food_can_sprats`, `food_can_tuna` |
-| kitchen / Marsh | 4 | `food_can_tushonka`, `drink_bottlewater`, `food_mre_ukraine`, `food_mre_russia`, `food_mre_usa` |
-| medical / Marsh | 1 | `medic_bandage_1`, `medic_medkit_1`, `value_med_petroleumjelly`, `value_med_peroxide` |
-| medical / Marsh | 2 | `value_med_vitamins`, `value_other_hosemilitary`, `value_airfilter`, `value_other_filter` |
-| medical / Marsh | 3 | `value_med_haemostatic`, `value_med_tourniquet`, `value_med_thermometer`, `value_injector_obdolbos` |
-| medical / Marsh | 4 | `value_med_bloodset`, `value_injector_2a2`, `value_injector_3btg`, `value_med_surgicalpouch`, `value_med_surgicaltools` |
+| kitchen / Swamps | 1 | `value_detergent`, `value_bleach`, `value_other_lupo`, `value_coffee`, `value_other_grechka` |
+| kitchen / Swamps | 2 | `value_soap`, `food_bread`, `food_raisins`, `food_sausage_1`, `food_sausage_2` |
+| kitchen / Swamps | 3 | `drink_orangejuice`, `drink_canwater`, `food_can_beans`, `food_can_sprats`, `food_can_tuna` |
+| kitchen / Swamps | 4 | `food_can_tushonka`, `drink_bottlewater`, `food_mre_ukraine`, `food_mre_russia`, `food_mre_usa` |
+| medical / Swamps | 1 | `medic_bandage_1`, `medic_medkit_1`, `value_med_petroleumjelly`, `value_med_peroxide` |
+| medical / Swamps | 2 | `value_med_vitamins`, `value_other_hosemilitary`, `value_airfilter`, `value_other_filter` |
+| medical / Swamps | 3 | `value_med_haemostatic`, `value_med_tourniquet`, `value_med_thermometer`, `value_injector_obdolbos` |
+| medical / Swamps | 4 | `value_med_bloodset`, `value_injector_2a2`, `value_injector_3btg`, `value_med_surgicalpouch`, `value_med_surgicaltools` |
 | military / Garbage | 1 | `value_ballistic4`, `value_container_lopouch` |
 | military / Garbage | 2 | `9x18`, `545x39`, `value_container_injectorcase`, `556x45`, `value_ballistic11`, `value_ballistic6` |
 | military / Garbage | 3 | `value_docbag`, `value_retardant3`, `value_retardant4`, `value_retardant9`, `value_flammable_trotil` |
@@ -166,46 +166,46 @@ are not rerolled; the retuning applies when an unassigned milestone first receiv
 | records / Waystation | 2 | `value_maps`, `value_officepaper`, `value_thick_diary`, `value_note_book_coming_closed`, `value_archive_cassette`, `value_documents_1`, `value_milimap` |
 | records / Waystation | 3 | `value_cassette_black90`, `value_cassette_fiolet`, `value_manual_lada`, `value_flyer_01`, `value_flyer_03`, `value_note_folder_closed_cardboard` |
 | records / Waystation | 4 | `value_notepad_a6_closed_01`, `value_guide`, `value_clothbook1`, `value_documents_2`, `value_info_securedtape`, `value_documents_10`, `value_documents_11` |
-| research / Marsh | 1 | `value_battery`, `value_9vbattery`, `value_wire_copper`, `value_capacitors`, `value_wire_light`, `value_other_hosemilitary` |
-| research / Marsh | 2 | `value_airfilter`, `value_other_filter`, `value_sensor_a`, `value_battery_d_0`, `value_portable_container_opened`, `value_chemcontainer`, `value_injector_obdolbos` |
-| research / Marsh | 3 | `value_injector_p22`, `value_portable_container_closed`, `value_injector_2a2`, `value_injector_3btg`, `value_injector_perfotoran`, `value_injector_trimadol`, `value_pressuregauge` |
-| research / Marsh | 4 | `value_chemicalsample`, `value_anomaly_plant`, `value_sensor_d`, `value_med_bloodsample`, `value_casezerogeo`, `value_detector`, `value_geigercounter` |
+| research / Swamps | 1 | `value_battery`, `value_9vbattery`, `value_wire_copper`, `value_capacitors`, `value_wire_light`, `value_other_hosemilitary` |
+| research / Swamps | 2 | `value_airfilter`, `value_other_filter`, `value_sensor_a`, `value_battery_d_0`, `value_portable_container_opened`, `value_chemcontainer`, `value_injector_obdolbos` |
+| research / Swamps | 3 | `value_injector_p22`, `value_portable_container_closed`, `value_injector_2a2`, `value_injector_3btg`, `value_injector_perfotoran`, `value_injector_trimadol`, `value_pressuregauge` |
+| research / Swamps | 4 | `value_chemicalsample`, `value_anomaly_plant`, `value_sensor_d`, `value_med_bloodsample`, `value_casezerogeo`, `value_detector`, `value_geigercounter` |
 | research / Waystation | 1 | `value_battery`, `value_9vbattery`, `value_other_hosemilitary`, `value_airfilter`, `value_other_filter`, `value_wire_light` |
 | research / Waystation | 2 | `value_sensor_a`, `value_capacitors`, `value_battery_d_0`, `value_portable_container_opened`, `value_chemcontainer`, `value_portable_container_closed`, `value_wire_copper` |
 | research / Waystation | 3 | `value_pressuregauge`, `value_injector_obdolbos`, `value_injector_p22`, `value_injector_2a2`, `value_injector_3btg`, `value_injector_perfotoran`, `value_injector_trimadol` |
 | research / Waystation | 4 | `value_sensor_d`, `value_casezerogeo`, `value_detector`, `value_geigercounter`, `value_chemicalsample`, `value_anomaly_plant`, `value_med_bloodsample` |
-| textiles / Marsh | 1 | `value_paracord`, `value_tape_duct`, `value_bedspread`, `value_rope` |
-| textiles / Marsh | 2 | `value_fabrics2`, `value_ballistic4`, `value_container_lopouch`, `value_parcel`, `value_container_junkbox` |
-| textiles / Marsh | 3 | `value_retardant3`, `value_retardant4`, `value_retardant9`, `value_large_case`, `value_container_injectorcase` |
-| textiles / Marsh | 4 | `value_carbon_case`, `value_knife_box_low`, `value_ballistic11`, `value_ballistic6`, `value_docbag` |
+| textiles / Swamps | 1 | `value_paracord`, `value_tape_duct`, `value_bedspread`, `value_rope` |
+| textiles / Swamps | 2 | `value_fabrics2`, `value_ballistic4`, `value_container_lopouch`, `value_parcel`, `value_container_junkbox` |
+| textiles / Swamps | 3 | `value_retardant3`, `value_retardant4`, `value_retardant9`, `value_large_case`, `value_container_injectorcase` |
+| textiles / Swamps | 4 | `value_carbon_case`, `value_knife_box_low`, `value_ballistic11`, `value_ballistic6`, `value_docbag` |
 | textiles / Waystation | 1 | `value_paracord`, `value_retardant3`, `value_retardant4`, `value_retardant9`, `value_tape_duct` |
 | textiles / Waystation | 2 | `value_ballistic4`, `value_container_lopouch`, `value_fabric_fleece`, `value_parcel`, `value_container_junkbox` |
 | textiles / Waystation | 3 | `value_fabric_aramid`, `value_bedspread`, `value_rope`, `value_large_case`, `value_container_injectorcase` |
 | textiles / Waystation | 4 | `value_carbon_case`, `value_knife_box_low`, `value_ballistic11`, `value_ballistic6`, `value_docbag` |
-| trade / Marsh | 1 | `value_other_lupo`, `value_coffee`, `value_other_grechka`, `value_crow_beak` |
-| trade / Marsh | 2 | `value_bear_souvenir`, `value_lightkeeper_amulet`, `value_container_lopouch`, `drink_orangejuice`, `value_skullring` |
-| trade / Marsh | 3 | `drink_canwater`, `food_can_beans`, `food_can_sprats`, `food_can_tuna`, `value_lighter_gold` |
-| trade / Marsh | 4 | `value_container_injectorcase`, `drink_bottlewater`, `value_docbag`, `value_watch`, `value_goldchain` |
+| trade / Swamps | 1 | `value_other_lupo`, `value_coffee`, `value_other_grechka`, `value_crow_beak` |
+| trade / Swamps | 2 | `value_bear_souvenir`, `value_lightkeeper_amulet`, `value_container_lopouch`, `drink_orangejuice`, `value_skullring` |
+| trade / Swamps | 3 | `drink_canwater`, `food_can_beans`, `food_can_sprats`, `food_can_tuna`, `value_lighter_gold` |
+| trade / Swamps | 4 | `value_container_injectorcase`, `drink_bottlewater`, `value_docbag`, `value_watch`, `value_goldchain` |
 | trail / Garbage | 1 | `value_gunoil`, `value_container_lopouch`, `value_bleach`, `value_glasscleaner`, `value_parcel` |
 | trail / Garbage | 2 | `value_shampoo`, `value_wire_light`, `value_container_injectorcase`, `value_carbon_case`, `value_knife_box_low`, `value_gasoline` |
 | trail / Garbage | 3 | `value_kerosene`, `value_propanetank`, `value_docbag`, `value_retardant3`, `value_retardant4`, `value_retardant9` |
 | trail / Garbage | 4 | `food_can_beans`, `food_can_sprats`, `food_can_tuna`, `value_casezerogeo`, `value_detector`, `value_geigercounter` |
-| trail / Marsh | 1 | `value_detergent`, `value_gunoil`, `value_tape_electric`, `value_wire_light`, `value_toiletpaper`, `value_toothpaste` |
-| trail / Marsh | 2 | `value_kerosene`, `value_gasoline`, `value_propanetank`, `value_container_lopouch`, `value_parcel`, `food_can_beans` |
-| trail / Marsh | 3 | `food_can_sprats`, `food_can_tuna`, `value_retardant3`, `value_retardant4`, `value_retardant9`, `value_container_injectorcase` |
-| trail / Marsh | 4 | `value_carbon_case`, `value_knife_box_low`, `value_docbag`, `value_casezerogeo`, `value_detector`, `value_geigercounter` |
-| utilities / Marsh | 1 | `value_bolts`, `value_nuts`, `value_wire_copper`, `value_detergent` |
-| utilities / Marsh | 2 | `value_tape_electric`, `value_sparkplug`, `value_toiletpaper`, `value_toothpaste`, `value_metalparts`, `value_waste_heavy` |
-| utilities / Marsh | 3 | `value_kerosene`, `value_gasoline`, `value_propanetank`, `value_other_hosemilitary`, `value_powercable`, `value_airfilter` |
-| utilities / Marsh | 4 | `value_other_filter`, `value_battery_d_0`, `value_lamp_efficient`, `value_magnet`, `value_energy_cyclon`, `value_energy_accum` |
+| trail / Swamps | 1 | `value_detergent`, `value_gunoil`, `value_tape_electric`, `value_wire_light`, `value_toiletpaper`, `value_toothpaste` |
+| trail / Swamps | 2 | `value_kerosene`, `value_gasoline`, `value_propanetank`, `value_container_lopouch`, `value_parcel`, `food_can_beans` |
+| trail / Swamps | 3 | `food_can_sprats`, `food_can_tuna`, `value_retardant3`, `value_retardant4`, `value_retardant9`, `value_container_injectorcase` |
+| trail / Swamps | 4 | `value_carbon_case`, `value_knife_box_low`, `value_docbag`, `value_casezerogeo`, `value_detector`, `value_geigercounter` |
+| utilities / Swamps | 1 | `value_bolts`, `value_nuts`, `value_wire_copper`, `value_detergent` |
+| utilities / Swamps | 2 | `value_tape_electric`, `value_sparkplug`, `value_toiletpaper`, `value_toothpaste`, `value_metalparts`, `value_waste_heavy` |
+| utilities / Swamps | 3 | `value_kerosene`, `value_gasoline`, `value_propanetank`, `value_other_hosemilitary`, `value_powercable`, `value_airfilter` |
+| utilities / Swamps | 4 | `value_other_filter`, `value_battery_d_0`, `value_lamp_efficient`, `value_magnet`, `value_energy_cyclon`, `value_energy_accum` |
 | workshop / Garbage | 1 | `value_screws`, `value_metalparts`, `value_tools_advwrench`, `value_waste_heavy`, `value_tools_metalscissors`, `value_tapemeasure` |
 | workshop / Garbage | 2 | `value_tools_ratchetwrench`, `value_mining_kit`, `value_wrench`, `value_hultafors_db5000`, `value_bolts`, `value_nuts`, `value_pliers` |
 | workshop / Garbage | 3 | `value_tools_pliers_round`, `value_tape_electric`, `value_glue_3`, `value_glue_4`, `value_glue_2`, `value_wire_light`, `value_sparkplug` |
 | workshop / Garbage | 4 | `value_siliconetube`, `value_hose`, `value_lightbulb`, `value_sensor_a`, `value_pressuregauge`, `value_techtool_1`, `value_sensor_d` |
-| workshop / Marsh | 1 | `value_bolts`, `value_nuts`, `value_glue_3`, `value_glue_2`, `value_glue_4` |
-| workshop / Marsh | 2 | `value_wire_copper`, `value_tape_electric`, `value_sparkplug`, `value_hose`, `value_lightbulb`, `value_siliconetube`, `value_metalparts` |
-| workshop / Marsh | 3 | `value_tools_advwrench`, `value_waste_heavy`, `value_tools_metalscissors`, `value_tapemeasure`, `value_tools_ratchetwrench`, `value_mining_kit`, `value_wrench` |
-| workshop / Marsh | 4 | `value_hultafors_db5000`, `value_sensor_a`, `value_pliers`, `value_techtool_1`, `value_tools_pliers_round`, `value_pressuregauge`, `value_sensor_d` |
+| workshop / Swamps | 1 | `value_bolts`, `value_nuts`, `value_glue_3`, `value_glue_2`, `value_glue_4` |
+| workshop / Swamps | 2 | `value_wire_copper`, `value_tape_electric`, `value_sparkplug`, `value_hose`, `value_lightbulb`, `value_siliconetube`, `value_metalparts` |
+| workshop / Swamps | 3 | `value_tools_advwrench`, `value_waste_heavy`, `value_tools_metalscissors`, `value_tapemeasure`, `value_tools_ratchetwrench`, `value_mining_kit`, `value_wrench` |
+| workshop / Swamps | 4 | `value_hultafors_db5000`, `value_sensor_a`, `value_pliers`, `value_techtool_1`, `value_tools_pliers_round`, `value_pressuregauge`, `value_sensor_d` |
 
 ## Current finite delivery requirements
 

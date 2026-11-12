@@ -213,16 +213,32 @@ class ProgressionExpansionTests(unittest.TestCase):
             for step in contact["progression"]:
                 if step["id"] == "v3/hideout/access" or slug in expansion.SCIENCE and not step.get("intermissionFor"):
                     continue
+                step_core = core
+                if step["categoryOnly"] and identity.get("opening"):
+                    step_core = {c["item"] for name in identity["opening"]
+                                 for c in self.data["pools"][name]["candidates"]}
                 core_units, total_units = 0, 0
                 for index, slot in enumerate(step["requirements"]):
                     items = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
-                    self.assertLessEqual(items, core | support, (slug, step["id"]))
+                    self.assertLessEqual(items, step_core | support, (slug, step["id"]))
                     if index < len(step["requirements"]) - 1 or len(step["requirements"]) <= 2:
-                        self.assertLessEqual(items, core, (slug, step["id"], "core slot"))
+                        self.assertLessEqual(items, step_core, (slug, step["id"], "core slot"))
                     total_units += slot["quantity"]
-                    if items <= core:
+                    if items <= step_core:
                         core_units += slot["quantity"]
                 self.assertGreaterEqual(core_units / total_units, 0.75, (slug, step["id"]))
+
+    def test_haggler_openings_use_regular_swamps_loot(self):
+        regular = {row[1][0] for row in self.data["loot"]["worldspawn_1"]}
+        contact = self.data["contacts"]["haggler"]
+        early = [step for step in contact["progression"] if step["categoryOnly"]]
+        self.assertEqual(len(early), 6)
+        for step in early:
+            self.assertEqual(step["requirementModesVersion"], 3)
+            for slot in step["requirements"]:
+                candidates = {c["item"] for c in self.data["pools"][slot["pool"]]["candidates"]}
+                self.assertGreaterEqual(len(candidates), 4)
+                self.assertLessEqual(candidates, regular)
 
     def test_unrelated_npcs_no_longer_share_generic_shopping_lists(self):
         def requested(slug):

@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_tradernpc.lua](../../../game
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** Existing trader; retain his personality.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Regional human elimination.
@@ -69,7 +69,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | HG01 | Opening the Shutters | Hand-in | Deliver shop essentials and accounting supplies. | Bat purchase. |
-| HG02 | The Missing Invoice | Authored | Recover an invoice from a Marsh trading stop. | First supplier clue. |
+| HG02 | The Missing Invoice | Authored | Recover an invoice from a Swamps trading stop. | First supplier clue. |
 | HG03 | A Small Problem | Tracker | Cumulative checkpoint C1: complete early hostile-human elimination work. | One entry pistol purchase. |
 | HG04 | Who Pays Twice | Authored | Recover an extortion receipt from a hostile NPC camp. | Common ammunition package. |
 
@@ -78,7 +78,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | HG05 | Working Capital | Hand-in | Supply ordinary trade goods from a curated pool. | Second entry weapon sidegrade. |
-| HG06 | The Wrong Seal | Authored | Retrieve a consignment seal record along a Marsh route. | General-supply barter. |
+| HG06 | The Wrong Seal | Authored | Retrieve a consignment seal record along a Swamps route. | General-supply barter. |
 | HG07 | Safer Roads | Tracker | Cumulative checkpoint C2: disrupt threats to local suppliers. | First compact-weapon purchase. |
 | HG08 | The Abandoned Stall | Authored | Recover a trader's account book in Garbage. | New supplier directions. |
 | HG09 | Stock Worth Carrying | Hand-in | Deliver regional provisions and saleable supplies. | One practical consumable purchase. |

@@ -195,7 +195,7 @@ LABELS = {
     "trade": "Trading stock", "records": "Records and recording equipment", "military": "Military supplies",
     "research": "Research supplies", "textiles": "Textiles and protective materials", "collectibles": "Collectible finds",
 }
-REGION_LABELS = {"rp_marsh_cs": "Marsh", "rp_garbage_cotz": "Garbage", "rp_waystation": "Waystation",
+REGION_LABELS = {"rp_marsh_cs": "Swamps", "rp_garbage_cotz": "Garbage", "rp_waystation": "Waystation",
                  "rp_pripyat_remaster": "Pripyat"}
 QUANTITIES = ((1,), (2, 1), (3, 2, 1), (4, 3, 2, 1))
 
@@ -332,7 +332,7 @@ def build_report(data, rates, counts, missing, bands, manifests):
         lines.append(f'| {REGION_LABELS[region]} | {regular} / {rare} | {row["boxes"].get("1",0)} / {row["boxes"].get("2",0)} | {sum(row["cyclic"].values())} | {row["hidden"]} | {row["anomalies"]} |')
     lines += ["", f"Garbage has {sum(counts["rp_garbage_cotz"]["world"].values())} loose-item points and "
               f"{sum(counts["rp_garbage_cotz"]["boxes"].values())} box points. Box custom pools are included in its supply.",
-              "Contacts use local thematic sources where configured; themes without local sources use Marsh for introductory acquisition.",
+              "Contacts use local thematic sources where configured; themes without local sources use Swamps for introductory acquisition.",
               "Live saved map data can differ from FTS and overrides these estimates.", "", "## Estimation method", "",
               "For each item and pool: P(item) = summed positive item weights / summed positive pool weights.",
               "An item's loose-point exposure is the sum of point count × P(item), not its raw row weight.",
@@ -390,7 +390,7 @@ def build_report(data, rates, counts, missing, bands, manifests):
               "not measured travel times. Candidates are sorted by that score and divided into four bands.",
               "A maximum of three candidates from each source category preserves thematic variety. Categories can overlap; IDs are deduplicated.",
               "Candidates with less than 0.1 aggregate entity opportunities per modeled hour are excluded from mandatory requests.",
-              "Every introductory candidate has a source in its starting region. Themes without local sources use Marsh as a proxy.",
+              "Every introductory candidate has a source in its starting region. Themes without local sources use Swamps as a proxy.",
               "Later pools extend to less available and more distant material; rare bands are added at low quantity while common stock grows.",
               "Each band quantity is its batch multiple times the smallest mean natural unit batch among that band's candidates, rounded down",
               "with a one-unit minimum. This preserves meaningful ammunition counts without demanding full-capacity salvage stacks.", "",

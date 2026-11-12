@@ -17,6 +17,16 @@ PLUGIN:Register("haggler", {
 		kind = "regionalHumans",
 		maps = {
 			easy = "rp_marsh_cs",
+			hard = "rp_pripyat_remaster",
+			medium = "rp_garbage_cotz",
+		},
+	},
+	retiredRegionalJob = {
+		category = "Regional human elimination",
+		description = "Regional human elimination",
+		kind = "regionalHumans",
+		maps = {
+			easy = "rp_marsh_cs",
 			hard = "rp_waystation",
 			medium = "rp_garbage_cotz",
 		},
@@ -53,14 +63,14 @@ PLUGIN:Register("haggler", {
 		},
 	},
 	dialogue = {
-		completedGreeting = "There you are. It's pleasant to see a customer whose promises don't need chasing all over the Marsh.",
+		completedGreeting = "There you are. It's pleasant to see a customer whose promises don't need chasing all over the Swamps.",
 		jobBriefing = "There's a little trouble making journeys more expensive than they ought to be. {details}",
 		jobFinished = "You've made that journey a little less troublesome. And yes, I remember our price.",
 		jobReminder = "I'm still waiting to hear that you've dealt with them. {details}",
 		offerPrompt = "Do you have an elimination job?",
 		progression = "I have a supply request worth your time. Bring what is on the list and we can both finish this bit of business satisfied. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "What needs doing about the trading accounts?",
-		work = "Hostile elimination orders. The specified targets, before you become inspired by somebody else's valuable-looking pack. I need the work done as agreed. Read the order, decide whether the payment suits you, then prepare. We can have an entirely different conversation about buying things when you return.",
+		work = "Hostile elimination orders. The specified targets, before you become inspired by somebody else's valuable-looking pack. I need the work done as agreed. Read the order, decide whether the payment suits you, then prepare. We can have an entirely different conversation about buying things when you return. Medium orders take you to Garbage; hard orders take you to Pripyat. Payment is back here in the Swamps. The journey belongs in your calculations, even if you would prefer it in mine.",
 		workPrompt = "About the job I'm doing for you.",
 	},
 	catalogue = {
@@ -143,6 +153,8 @@ PLUGIN:Register("haggler", {
 	},
 	progressionIdentity = {
 		name = "Resale curios and small valuables",
+		opening = {"workshop_supplies", "adhesives", "cleaning"},
+		openingName = "Ordinary shop supplies",
 		core = {"small_valuables", "valuables_decorative_valuables", "statues"},
 		support = {"valuables_personal_effects", "valuables_transit_cases"},
 	},
@@ -157,13 +169,14 @@ PLUGIN:Register("haggler", {
 			briefing = "The TOZ-106 is where we begin. Small enough to attract a hopeful buyer, interesting enough to keep him at the counter while I explain the arrangement. Bring the workshop supplies on this list and I'll make it available to purchase. You get a choice on the shelf, I get a useful delivery; nobody needs to pretend we're running a charity.",
 			completion = "TOZ-106 purchase access, as agreed. A complete delivery makes a much better introduction than a promise.",
 			requirements = {
-				{pool = "town_expansion_2345f7264026", quantity = 1, mode = "any"},
+				{pool = "town_expansion_48dbe0d5b154", quantity = 1, mode = "any"},
 			},
 			branchIndex = 1,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
 			categoryOnly = true,
+			requirementModesVersion = 3,
 		},
 		{
 			id = "v3/pact-cqb/mp27",
@@ -174,13 +187,14 @@ PLUGIN:Register("haggler", {
 			briefing = "For the MP-27, this is the supply order. I can explain its attractions while you read, but you may accuse me of making the list longer through sheer enthusiasm. Bring the full request back and you can buy the gun.",
 			completion = "The MP-27 is available to buy. I have received everything, including the small entry people like to overlook.",
 			requirements = {
-				{pool = "town_expansion_2345f7264026", quantity = 1, mode = "any"},
+				{pool = "town_expansion_48dbe0d5b154", quantity = 1, mode = "any"},
 			},
 			branchIndex = 2,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
 			categoryOnly = true,
+			requirementModesVersion = 3,
 		},
 		{
 			id = "v3/pact-cqb/toz66short/stock",
@@ -191,7 +205,7 @@ PLUGIN:Register("haggler", {
 			briefing = "Before the next purchase, let's make more room for the MP-27. This delivery increases your stock allowance. More space for you in the supply arrangement, not a gun appearing out of my sleeve.",
 			completion = "Your MP-27 capacity is larger. The refill still travels by the usual means, however impressive my sleeves.",
 			requirements = {
-				{pool = "town_expansion_2345f7264026", quantity = 1, mode = "any"},
+				{pool = "town_expansion_48dbe0d5b154", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"mp27"},
@@ -203,6 +217,7 @@ PLUGIN:Register("haggler", {
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
 			categoryOnly = true,
+			requirementModesVersion = 3,
 		},
 		{
 			id = "v3/pact-cqb/toz66short",
@@ -213,13 +228,14 @@ PLUGIN:Register("haggler", {
 			briefing = "The sawn-off BM-16 has a straightforward purchase request. Bring the listed supplies. I enjoy a customer who asks about a gun instead of explaining why I should be grateful to sell it; we reach the useful part much faster.",
 			completion = "The BM-16 sawn-off is open for purchase. Thank you for bringing supplies instead of a lecture on commerce.",
 			requirements = {
-				{pool = "town_expansion_2345f7264026", quantity = 1, mode = "any"},
+				{pool = "town_expansion_48dbe0d5b154", quantity = 1, mode = "any"},
 			},
 			branchIndex = 3,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
 			categoryOnly = true,
+			requirementModesVersion = 3,
 		},
 		{
 			id = "v3/pact-cqb/skorpion/stock",
@@ -230,7 +246,7 @@ PLUGIN:Register("haggler", {
 			briefing = "The BM-16 reserve needs these materials before the Skorpion arrangement. It raises your allowance for the gun you've unlocked. A reserve can be good business even when it doesn't make a dramatic story.",
 			completion = "BM-16 reserve capacity increased. Actual stock refills on the ordinary schedule.",
 			requirements = {
-				{pool = "town_expansion_2345f7264026", quantity = 1, mode = "any"},
+				{pool = "town_expansion_48dbe0d5b154", quantity = 1, mode = "any"},
 			},
 			stock = {
 				items = {"toz66short"},
@@ -242,6 +258,7 @@ PLUGIN:Register("haggler", {
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
 			categoryOnly = true,
+			requirementModesVersion = 3,
 		},
 		{
 			id = "v3/pact-cqb/skorpion",
@@ -252,13 +269,14 @@ PLUGIN:Register("haggler", {
 			briefing = "The Skorpion catches people's attention before I finish saying the price. For purchase access, bring this workshop order. You are welcome to admire it in advance; admiration simply isn't among the supplies requested.",
 			completion = "Skorpion purchase access is ready. The delivery has improved my afternoon more than admiration alone.",
 			requirements = {
-				{pool = "town_expansion_2345f7264026", quantity = 1, mode = "any"},
+				{pool = "town_expansion_48dbe0d5b154", quantity = 1, mode = "any"},
 			},
 			branchIndex = 4,
 			branchLength = 19,
 			acquisitionMaps = {"rp_marsh_cs"},
 			requirementPolicy = 4,
 			categoryOnly = true,
+			requirementModesVersion = 3,
 		},
 		{
 			id = "v3/pact-cqb/toz34short/stock",
@@ -920,7 +938,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG02",
 			name = "The Missing Invoice",
-			briefing = "An invoice has gone missing. Everyone remembers the amount most favourable to them, so I'd like the paper. Recover the missing trading invoice from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "An invoice has gone missing. Everyone remembers the amount most favourable to them, so I'd like the paper. Recover the missing trading invoice from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "HG04",
@@ -930,7 +948,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG06",
 			name = "The Wrong Seal",
-			briefing = "I'd like the consignment seal record. A seal described from memory is worth precisely what the description costs. Recover the consignment seal record from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I'd like the consignment seal record. A seal described from memory is worth precisely what the description costs. Recover the consignment seal record from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "HG08",
@@ -940,7 +958,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG10",
 			name = "Two Sets of Books",
-			briefing = "Ledger gets the second book. If somebody has two accounts, I want them compared by a man who enjoys finding the difference. Recover the second freight ledger from the assigned search area in Marsh. Deliver it to 'Ledger' in Waystation, then come back to me in Marsh.",
+			briefing = "Ledger gets the second book. If somebody has two accounts, I want them compared by a man who enjoys finding the difference. Recover the second freight ledger from the assigned search area in the Swamps. Deliver it to 'Ledger' in Waystation, then come back to me in the Swamps.",
 		},
 		{
 			id = "HG12",
@@ -950,7 +968,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG14",
 			name = "A Broken Agreement",
-			briefing = "Bring the supplier contract intact. People lose things without help; I'd like evidence before I spend money blaming anyone. Recover the supplier's broken agreement from the assigned search area in Garbage. Bring it back to me in Marsh.",
+			briefing = "Bring the supplier contract intact. People lose things without help; I'd like evidence before I spend money blaming anyone. Recover the supplier's broken agreement from the assigned search area in Garbage. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "HG16",
@@ -960,7 +978,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG18",
 			name = "The Shipment List",
-			briefing = "Brass needs the shipment manifest. I want the quantities checked by someone who won't be charmed out of counting. Recover the distributor's shipment manifest from the assigned search area in Marsh. Deliver it to 'Brass' in Garbage, then come back to me in Marsh.",
+			briefing = "Brass needs the shipment manifest. I want the quantities checked by someone who won't be charmed out of counting. Recover the distributor's shipment manifest from the assigned search area in the Swamps. Deliver it to 'Brass' in Garbage, then come back to me in the Swamps.",
 		},
 		{
 			id = "HG20",
@@ -970,7 +988,7 @@ PLUGIN:Register("haggler", {
 		{
 			id = "HG22",
 			name = "The Unpaid Supplier",
-			briefing = "The supplier's surviving evidence is still out on the route. I'd like an account from someone besides the people demanding payment. Recover the unpaid supplier's file from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "The supplier's surviving evidence is still out on the route. I'd like an account from someone besides the people demanding payment. Recover the unpaid supplier's file from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "HG24",

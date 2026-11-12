@@ -11,7 +11,7 @@ function PLUGIN:IsManagementLocation(client, record, scope, slotID)
 	if not record then return false end
 	if scope == "admin" then return client:IsAdmin() end
 	if scope == "squad" then return record.ownerType == "squad" and self:CanManageHideout(client, record) end
-	if scope == "entrance" then return self:IsNearEntrance(client, record.entrance) end
+	if scope == "entrance" then return self:FindHideoutEntrance(client, record) ~= nil end
 	local instance = self.instances[record.id]
 	if not instance or self.members[client] ~= record.id then return false end
 	if scope == "exit" then
@@ -62,7 +62,13 @@ function PLUGIN:ShowManagement(client, id, scope)
 		net.WriteBool(record.ownerType == "squad")
 		net.WriteString(record.access or "squad")
 		net.WriteBool(self:CanManageHideout(client, record))
-		net.WriteBool(self.members[client] == record.id or self:IsNearEntrance(client, record.entrance))
+		net.WriteBool(self.members[client] == record.id or self:FindHideoutEntrance(client, record) ~= nil)
+		local propTier = self:GetHideoutPropTier(record)
+		local nextTier = self.propCapacityTiers[propTier + 1]
+		net.WriteUInt(propTier, 3)
+		net.WriteUInt(self:GetHideoutPropLimit(record), 7)
+		net.WriteUInt(nextTier and nextTier.limit or 0, 7)
+		net.WriteUInt(nextTier and nextTier.price or 0, 32)
 		local guests = {}
 		if self:CanManageHideout(client, record) then
 			for guestID, invited in SortedPairs(record.guests or {}) do
@@ -147,6 +153,64 @@ function PLUGIN:RefreshManagementMenu(client)
 	end
 end
 
+function PLUGIN:UpgradePropCapacity(client, record, expectedTier)
+	if not self.operationsReady or not self:CanManageHideout(client, record)
+		or not self:CanUseManagementMenu(client, record.id) then return false end
+	if record.frozen then return false, "This hideout is unavailable." end
+	local tier = self:GetHideoutPropTier(record)
+	local upgrade = self.propCapacityTiers[tier + 1]
+	if expectedTier ~= tier or not upgrade then return false, "Reopen hideout management for current upgrades." end
+	if (self.capacityPurchases or {})[record.id] or (self.personalPurchases or {})[record.id] then
+		return false, "Wait for the hideout purchase to finish."
+	end
+	local instance = self.instances[record.id]
+	if instance and (instance.state ~= "active" or instance.saving or (instance.operations or 0) > 0) then
+		return false, "Wait for the hideout to finish loading or saving."
+	end
+	local character = client:GetCharacter()
+	if not character:HasMoney(upgrade.price) then return false, "Not enough roubles." end
+	self.capacityPurchases = self.capacityPurchases or {}
+	self.capacityPurchases[record.id] = true
+	if instance then instance.operations = (instance.operations or 0) + 1 end
+	local function authorize()
+		return IsValid(client) and client:GetCharacter() == character and self:GetHideout(record.id) == record
+			and self:CanManageHideout(client, record) and self:CanUseManagementMenu(client, record.id)
+			and self:GetHideoutPropTier(record) == tier
+	end
+	self:CheckCapacityPurchaseRole(client, record, function(allowed)
+		local function finish(ok, reason)
+			if ok then
+				record.propTier = tier + 1
+				if not self:Persist() then
+					self.operationsReady = false
+					ErrorNoHalt("[Hideouts] Prop capacity committed; restart to replay its entitlement.\n")
+				end
+			end
+			self.capacityPurchases[record.id] = nil
+			if instance then instance.operations = instance.operations - 1 end
+			if IsValid(client) and client:GetCharacter() == character then
+				client:Notify(ok and "Hideout prop capacity increased to " .. upgrade.limit .. "." or reason)
+				if ok then self:RefreshManagementMenu(client) end
+			end
+		end
+		if not allowed or not authorize() then finish(false, "Hideout access changed.") return end
+		self:CommitOperation(client, record, {
+			rank = record.ownerType == "squad" and 1 or nil,
+			moneyDelta = -upgrade.price, payload = {kind = "props", tier = tier + 1}, authorize = authorize,
+		}, finish)
+	end)
+
+	return true
+end
+
+function PLUGIN:CheckCapacityPurchaseRole(client, record, callback)
+	if record.ownerType == "squad" then
+		self:CheckSquadRole(client, record, 1, callback)
+	else
+		callback(self:CanManageHideout(client, record))
+	end
+end
+
 function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, guestID)
 	if not self:CanUseManagementMenu(client, id) then return false end
 	local record = self:GetHideout(id)
@@ -164,7 +228,8 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, 
 		if scope ~= "container" or client.cotzHideoutMenu.slot ~= value then return false end
 	elseif scope == "container" then return false end
 	local ok, reason
-	if action == 1 then ok, reason = self:PlaceSquadEntrance(client, record)
+	if action == 0 then ok, reason = self:UpgradePropCapacity(client, record, expectedTier)
+	elseif action == 1 then ok, reason = self:PlaceSquadEntrance(client, record)
 	elseif action == 2 then ok, reason = self:ResetVendor(client, record)
 	elseif action == 15 then ok, reason = self:ResetHideoutLayout(client, record)
 	elseif action == 3 then ok, reason = self:SetAccessMode(client, record, value)
@@ -195,7 +260,7 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, 
 		if ok and instance then self:CloseStorage(instance) self:EnforceAccess(instance) end
 	end
 	if reason then client:Notify(reason) end
-	if ok and action ~= 4 then self:RefreshManagementMenu(client) end
+	if ok and action ~= 0 and action ~= 4 then self:RefreshManagementMenu(client) end
 
 	return ok
 end

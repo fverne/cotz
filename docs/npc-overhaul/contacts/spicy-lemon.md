@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_cooknpc.lua](../../../gamemo
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** Existing confident cook; retain his voice.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Meal deliveries.
@@ -69,7 +69,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | SL01 | Pots Before Plates | Hand-in | Deliver ordinary cookware and kitchen supplies. | First cooked-meal purchase. |
-| SL02 | The Cold Kitchen | Authored | Recover the kitchen's missing recipe notebook in Marsh. | Basic cooking-fuel package. |
+| SL02 | The Cold Kitchen | Authored | Recover the kitchen's missing recipe notebook in Swamps. | Basic cooking-fuel package. |
 | SL03 | A Steady Table | Tracker | Cumulative checkpoint C1: establish reliable meal deliveries. | One common meal's stock increase. |
 | SL04 | Spoor's Contribution | Authored | Recover a meat-handling ledger at a deserted hunting camp. | Meat preparation information. |
 
@@ -78,7 +78,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | SL05 | Clean Enough | Hand-in | Deliver water and cleaning supplies for food preparation. | Water-and-food barter. |
-| SL06 | The Spoiled Shipment | Authored | Retrieve shipment evidence from a Marsh supply cache. | Directions to an alternate food source. |
+| SL06 | The Spoiled Shipment | Authored | Retrieve shipment evidence from a Swamps supply cache. | Directions to an alternate food source. |
 | SL07 | Same Dish Twice | Tracker | Cumulative checkpoint C2: demonstrate consistent meal deliveries. | Second meal purchase. |
 | SL08 | The Missing Crate | Authored | Recover a cookware case along the Garbage route. | Cooking consumables. |
 | SL09 | A Proper Pantry | Hand-in | Supply durable ingredients available before this step. | First preserved-food purchase. |
@@ -141,7 +141,7 @@ A final greeting or recognition is personal unless an explicitly global event is
 
 ## Implementation and availability notes
 
-The feast concludes in Marsh. Ordinary food remains available before this line. Remote evidence retrieval does not imply a new cooking minigame.
+The feast concludes in Swamps. Ordinary food remains available before this line. Remote evidence retrieval does not imply a new cooking minigame.
 
 - Sites and story evidence above are proposed map content, not asserted existing spawns.
 - Use existing item/job primitives where suitable; finite commissions are implemented with the existing field primitives. Bespoke evidence items and

@@ -630,12 +630,32 @@ function PLUGIN:IsNearEntrance(client, entranceID)
 	return entrance and client:GetPos():DistToSqr(entrance.pos) <= ENTRANCE_DISTANCE_SQUARED
 end
 
+function PLUGIN:IsHideoutEntrance(record, entranceID)
+	local entrance = self.state.entrances[entranceID]
+	if not record or not entrance then return false end
+	if record.ownerType ~= "squad" then return record.entrance == entranceID end
+
+	return not entrance.hideout or entrance.hideout == record.id
+end
+
+function PLUGIN:FindHideoutEntrance(client, record)
+	if not record then return end
+	if self:IsHideoutEntrance(record, record.entrance) and self:IsNearEntrance(client, record.entrance) then
+		return record.entrance
+	end
+	if record.ownerType ~= "squad" then return end
+	for id in pairs(self.state.entrances) do
+		if self:IsHideoutEntrance(record, id) and self:IsNearEntrance(client, id) then return id end
+	end
+end
+
 function PLUGIN:RequestEntry(client, id)
 	local record = self:GetHideout(id)
 	if not self:CanAccess(client, record) then
 		return false, "You cannot enter that hideout."
 	end
-	if not self:IsNearEntrance(client, record.entrance) then
+	local entranceID = self:FindHideoutEntrance(client, record)
+	if not entranceID then
 		return false, "Move closer to the hideout entrance."
 	end
 	if
@@ -655,7 +675,7 @@ function PLUGIN:RequestEntry(client, id)
 	end
 	client.ixNextHideout = CurTime() + ENTRY_COOLDOWN
 	local character = client:GetCharacter()
-	local request = { character = character:GetID(), entrance = record.entrance }
+	local request = { character = character:GetID(), entrance = entranceID }
 	client.ixHideoutPending = request
 	local function complete(ok, result)
 		if not IsValid(client) or client.ixHideoutPending ~= request then
@@ -695,6 +715,7 @@ function PLUGIN:AdmitPlayer(client, request, instance)
 		or character:GetID() ~= request.character
 		or not client:Alive()
 		or not self:CanAccess(client, record)
+		or not self:IsHideoutEntrance(record, request.entrance)
 		or not self:IsNearEntrance(client, request.entrance)
 		or self.members[client]
 	then
@@ -732,6 +753,7 @@ function PLUGIN:AdmitPlayer(client, request, instance)
 			or client:GetCharacter() ~= character
 			or not client:Alive()
 			or not self:IsNearEntrance(client, request.entrance)
+			or not self:IsHideoutEntrance(record, request.entrance)
 			or not self:CanAccess(client, record)
 		then
 			if table.IsEmpty(instance.pending) and table.IsEmpty(instance.occupants) then

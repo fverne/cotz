@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_arenanpc.lua](../../../gamem
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** Existing relaxed arena organiser.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** None; ordinary offers disabled.
@@ -69,7 +69,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | AR01 | Before the Bell | Hand-in | Deliver ordinary arena medical supplies. | Fixed bandages; arena entry remains accessible. |
-| AR02 | The Missing Register | Authored | Recover the arena's bout register near the Marsh arena supply route. | Qualification programme revealed. |
+| AR02 | The Missing Register | Authored | Recover the arena's bout register near the Swamps arena supply route. | Qualification programme revealed. |
 | AR03 | First Opponents | Tracker | Cumulative checkpoint C1: complete the first distinct-opponent bout checkpoint. | Combat preparation package. |
 | AR04 | A Fair Match | Authored | Finish an eligible sanctioned bout against a distinct opponent. | Arena recognition tier. |
 

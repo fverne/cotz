@@ -136,7 +136,7 @@ areas, areas too small for the full bounds, and failure to find a clear/unreserv
 
 ## Personal storage rooms
 
-Ballast handles Marsh (`rp_marsh_cs`), Cleaner handles Garbage (`rp_garbage_cotz`), and Ledger
+Ballast handles Swamps (`rp_marsh_cs`), Cleaner handles Garbage (`rp_garbage_cotz`), and Ledger
 handles Waystation (`rp_waystation`). Each map has one contact for all its personal hideout locations.
 After configuring a template and a fixed exterior entrance, register a location as an administrator:
 
@@ -263,7 +263,12 @@ Provision a target character's squad as an administrator:
     /HideoutSquadGrant "Player Name" cabin "Squad headquarters"
 
 A squad may own **one hideout across all maps sharing the schema database**. Provision it on its home map. The stable squad ID owns it, not its leader.
-Leaders/officers open **Tab → Squads → Squad hideout** to place the first entrance or relocate it.
+Squad rooms are available at shared hideout entrance keypads on their home map without binding or placing
+a squad-specific entrance. Membership, invitations and access mode still control admission. The entrance
+used for a request is checked again after loading; leaving returns to that entrant's saved outside position.
+Administrators see their own squad rooms alongside personal rooms and explicit invitations.
+
+Leaders/officers can optionally open **Tab → Squads → Squad hideout** to place a dedicated entrance or relocate it.
 Aim at a nearby solid surface on the home map before opening the menu and choose **Place entrance
 where you are looking**. The same control is available when managing the existing entrance.
 This places a shared, visible keypad entity. Existing invisible squad keypads become visible when entrances reload. Stand safely outside
@@ -293,6 +298,21 @@ sessions; transfers and periodic session audits recheck current membership and r
 Personal owners who have purchased furnishing access receive the same contextual tools as squad officers. Guests receive no
 building privileges. Personal containers keep their existing owner/private/invited-guest sharing rules.
 The personal room limit applies to new grants on this map and never removes rooms already owned.
+
+### Prop capacity upgrades
+
+Each personal or squad hideout starts with a **30-prop** furnishing capacity. Owners and squad
+leaders/officers can buy **40**, **50**, then **60** props through hideout management at an entrance
+or the interior exit (also available from squad management). The three upgrades cost **5,000**,
+**10,000**, and **20,000 roubles**, paid by the managing character, once per room. Capacity purchases
+do not grant furnishing permissions; personal rooms still need their existing props/PET purchase.
+
+Only player-placed furnishings count. Shell geometry, containers, vendors and loose items keep their
+existing rules. Both the spawn request and the resulting entity enforce the room-wide capacity,
+shared by all builders. Old furnishings are preserved even above the current limit; remove props
+or upgrade before adding more. Removed props free capacity immediately. A missing saved tier means
+the initial 30-prop tier. Purchased tiers use the existing transaction journal and replay after restart
+if the plugin-data save was interrupted. Deploy client and server changes together.
 
 ### Container layout and prop removal
 
@@ -368,7 +388,7 @@ Players do not need chat commands. All hideout commands are restricted to admini
 | Use the interior exit | Leave; owners/officers can manage invitations/access, reset the layout and reset the vendor |
 | Use a container | Personal owner: open/set sharing; squad officer: open/install/upgrade/set rank; other permitted users: open |
 | Use the squad vendor | Dialogue opens trading, donations and personal bank; stock Options exposes authorized management and treasury actions |
-| Tab → Squads → Squad hideout | Leaders/officers can place the first entrance or relocate it on this map |
+| Tab → Squads → Squad hideout | Leaders/officers can optionally place/relocate a dedicated entrance and upgrade prop capacity |
 
 Management requests bind to the active character and the relevant entrance, exit, vendor, or container.
 Actions recheck the current role and location. Container actions apply only to the container whose

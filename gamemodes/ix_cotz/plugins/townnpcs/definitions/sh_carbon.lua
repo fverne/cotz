@@ -540,7 +540,7 @@ PLUGIN:Register("carbon", {
 		{
 			id = "CA06",
 			name = "The Original's Account",
-			briefing = "The Original should read the expedition note himself. A detail may mean something to him that I wouldn't think to ask about. Recover the contemporary expedition diary from the assigned search area in Waystation. Deliver it to 'The Original' in Marsh, then come back to me in Waystation.",
+			briefing = "The Original should read the expedition note himself. A detail may mean something to him that I wouldn't think to ask about. Recover the contemporary expedition diary from the assigned search area in Waystation. Deliver it to 'The Original' in the Swamps, then come back to me in Waystation.",
 		},
 		{
 			id = "CA08",

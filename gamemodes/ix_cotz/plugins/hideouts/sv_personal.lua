@@ -208,7 +208,9 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 	if not offer or not offer.allowed or offer.level ~= quote.level or offer.price ~= quote.price
 		or offer.item ~= quote.item or offer.width ~= quote.width or offer.height ~= quote.height
 		or offer.model ~= quote.model then return false, "That offer changed or is locked. Reopen barter." end
-	if self.personalPurchases[record.id] then return false, "This hideout already has a purchase pending." end
+	if self.personalPurchases[record.id] or (self.capacityPurchases or {})[record.id] then
+		return false, "This hideout already has a purchase pending."
+	end
 	local character = client:GetCharacter()
 	local inventory = character:GetInventory()
 	local input = offer.item and inventory:HasItem(offer.item)

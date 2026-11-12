@@ -79,7 +79,7 @@ No save reset or first-time setup is required.
 
 For deliveries addressed to a town contact, the PDA and hand-in checks resolve that contact's current
 home map. This keeps accepted commissions usable when the workbook plan moves the scientists to
-the Marsh Eco Bunker. Saved search sites, cargo identity, claim serials and delivery progress are retained.
+the Swamps Eco Bunker. Saved search sites, cargo identity, claim serials and delivery progress are retained.
 The town progression multiplier changes required commission trips and cumulative checkpoints, not the
 ordinary repeatable job's quantities or combat settings.
 

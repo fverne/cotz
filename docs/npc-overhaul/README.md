@@ -8,7 +8,7 @@ The [7 November progression overhaul](progression-overhaul.md) replaces the earl
 
 Runtime and design reference, 31 October 2026. **Town NPC implementation is now present.**
 There are 27 town contacts (15 existing, 12 new) with 646 new finite nodes.
-Carbon is included in the new-contact definitions. Arena Master is based in Marsh.
+Carbon is included in the new-contact definitions. Arena Master is based in Swamps.
 See the [runtime/editing guide](../../gamemodes/ix_cotz/plugins/townnpcs/README.md)
 and [unlock ledger](unlock-ledger.md). Physical placement, field-site authoring, economy/pacing,
 and multiplayer verification remain deployment work.
@@ -29,7 +29,7 @@ It is intended for both human review and future implementation work.
 ## User requirements
 
 - Overhaul old and new town contacts together. Existing NPC names, models, and personalities remain.
-- Include Marsh, the upcoming STALKER-inspired Garbage, and Waystation as NPC home maps.
+- Include Swamps, the upcoming STALKER-inspired Garbage, and Waystation as NPC home maps.
 - Pripyat has no NPCs. Contacts elsewhere send players there and receive their hand-ins and claims.
 - Each NPC offers one repeatable job category. A category may recur on another home map,
   but two NPCs on the same home map must not offer it.
@@ -44,14 +44,14 @@ It is intended for both human review and future implementation work.
 - Hoarder is also excluded: he remains a secret NPC that appears periodically.
   Do not turn him into a permanent contact or advertise him through ordinary referrals.
 - All contacts are now implemented with editable work and sparse progression trees.
-- Arena Master remains in Marsh, where the arena dupe is located.
+- Arena Master remains in Swamps, where the arena dupe is located.
 - Keep the trees sparse: two narrow branches rather than one long line or a dense web.
 
 ## Working design, subject to review
 
 | Home | Existing contacts | New contacts | Total | Proposed finite steps |
 | --- | ---: | ---: | ---: | ---: |
-| Marsh | 8 | 3 | 11 | 270 |
+| Swamps | 8 | 3 | 11 | 270 |
 | Garbage | 3 | 5 | 8 | 190 |
 | Waystation | 4 | 4 | 8 | 186 |
 | Pripyat | 0 | 0 | 0 | 0 |
@@ -63,7 +63,7 @@ Their count does not establish a completion-time promise.
 The previously discussed per-contact ranges now total **544–704**, after removing the
 community NPC and Hoarder. Earlier 29-contact totals are obsolete.
 
-Map identities: Marsh establishes survival and community; Garbage centres on salvage,
+Map identities: Swamps establishes survival and community; Garbage centres on salvage,
 hunting, and contested trade; Waystation organises specialist preparation and expeditions.
 Pripyat provides demanding objectives and discoveries without town services.
 An NPC's home does not restrict all their objectives to that map.

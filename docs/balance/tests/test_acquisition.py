@@ -11,8 +11,8 @@ from acquisition import build_audit, worldspawn_scope
 class AcquisitionTests(unittest.TestCase):
     def test_worldspawn_numbers_are_map_pairs_not_six_difficulty_levels(self):
         for group, expected in {
-            'worldspawn_1': (1, 'Marsh', 'Normal'),
-            'worldspawn_2': (1, 'Marsh', 'Hard to find'),
+            'worldspawn_1': (1, 'Swamps', 'Normal'),
+            'worldspawn_2': (1, 'Swamps', 'Hard to find'),
             'worldspawn_3': (2, 'Waystation', 'Normal'),
             'worldspawn_4': (2, 'Waystation', 'Hard to find'),
             'worldspawn_5': (3, 'Pripyat', 'Normal'),

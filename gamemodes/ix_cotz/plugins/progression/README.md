@@ -36,9 +36,12 @@ cards as you type, matching names, visible requests, required items and rewards 
 Clearing the search restores all discovered cards; undiscovered topics remain hidden.
 
 Town requests use each contact's explicit core/support specialty pools rather than a global theme
-rotation. Marsh branches' first two original milestones and all work below 45% use only Marsh-sourced
+rotation. Swamps branches' first two original milestones and all work below 45% use only Swamps-sourced
 candidates. Policy 4 replaces remaining later-region demands in those openings without discarding
 fulfilled contributions. Valid saved requests stay fixed; new requests receive the revised specialties.
+
+Saved category labels also display Swamps in place of the previous region name without rewriting
+accepted choices, quantities or contributions.
 
 This plugin owns character progression storage, persistent item requirements, numeric counters,
 prerequisite validation, purchase permissions, completion payouts, pending reward claims and services.
@@ -86,6 +89,9 @@ by the batch minimum once. Inventory surplus and actual consumed-item valuation 
 Mode version 2 retains old specific targets and credited progress, raises outstanding category totals
 below three and replaces full-category lists once. Fulfilled categories and completed milestones stay
 fulfilled. Subsequent definition edits do not reroll subsets or batch costs.
+Haggler's opening shop-supply requests use mode version 3 to refresh unfinished categories once with
+regular Swamps loot, retaining their counters, delivered units and earned credit. Completed requests
+stay completed; later requests retain mode version 2.
 See the [town policy](../../../../docs/npc-overhaul/progression-overhaul.md#category-totals-and-specific-requests).
 Run `luatex --luaonly tests/progression_subsets_spec.lua` for per-character subsets and batch consumption.
 Run `luatex --luaonly tests/town_requirement_modes_spec.lua` for all compiled town boundaries.

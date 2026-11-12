@@ -39,7 +39,7 @@ already assigned also keeps those saved requests.
 
 Fixed supplies, provider-bound service credits, permanent service discounts and explicit existing-item catalogue rewards are included in the [implemented allocation](expansion-plan.md#completed-reward-and-service-allocation). Briefing sources are listed in the [dialogue guide](dialogue-guide.md).
 
-Job checkpoints are cumulative and retain the original final totals. Intern's effort report uses Pripyat field-work difficulty even though the hand-in contact lives in Marsh. Any map-independent optional contact uses its declared acquisition ceiling for its effort comparison. No backpack exchange progression is included.
+Job checkpoints are cumulative and retain the original final totals. Intern's effort report uses Pripyat field-work difficulty even though the hand-in contact lives in Swamps. Any map-independent optional contact uses its declared acquisition ceiling for its effort comparison. No backpack exchange progression is included.
 
 The workbook also reports personal stock-capacity unlocks. Delivery rewards share rounding and one final item bonus within their logical milestone. Runtime menu ordering, persistent programme previews and character persistence are documented in the progression plugin README.
 
@@ -61,9 +61,9 @@ run this model or change saved assignments. Reproduce the tuning from the addon 
 access depth and quantities. These scores are relative tuning units, not minutes
 or measured encounter rates. Assumptions are explicit in the script:
 
-- Marsh, Waystation and Pripyat use difficulty multipliers 1, 1.5 and 2.25.
+- Swamps, Waystation and Pripyat use difficulty multipliers 1, 1.5 and 2.25.
   Loot routes also include the source map multiplier, so later-map salvage carries
-  travel risk even when the hand-in NPC lives in the Marsh.
+  travel risk even when the hand-in NPC lives in the Swamps.
 - World loot uses normalized item weight times expected raw-unit yield. Unit effort
   is `sqrt(1 / (4 * chance * yield * pointFrequency))`, at least one.
   Hard-to-find points use assumed half availability. The square root compresses
@@ -171,14 +171,14 @@ Worldspawn tables are map pairs, not six interchangeable rarity samples:
 
 | Map tier | Map | Ordinary world loot | Hard-to-find world loot |
 | --- | --- | --- | --- |
-| 1 | Marsh | `worldspawn_1` | `worldspawn_2` |
+| 1 | Swamps | `worldspawn_1` | `worldspawn_2` |
 | 2 | Waystation | `worldspawn_3` | `worldspawn_4` |
 | 3 | Pripyat | `worldspawn_5` | `worldspawn_6` |
 
 Delivery definitions declare `lootMapTier`, shown as `Loot map ceiling` in the
 step and hand-in tabs. For Old Timer, Haggler, Technut, Mute, Jitters and Spicy
 Lemon, opening branches through two successor edges use ceiling 1. Mid branches
-at three or four edges use ceiling 2; later branches can use ceiling 3. The Marsh
+at three or four edges use ceiling 2; later branches can use ceiling 3. The Swamps
 story deliveries for meat, Technut's main repairs, statues and the radio tower
 also use ceiling 1 regardless of their chain depth, so they do not require later
 map world loot to advance the early story. Egghead and Beanstalk unlock after
@@ -188,12 +188,12 @@ research early progression. Boss and Quartermaster use ceiling 2, Computer uses 
 Every candidate with an active worldspawn entry must have an entry at or below
 its delivery's ceiling. A global reward/cache route does not exempt an otherwise
 later-map world item. Both ordinary and hard-to-find tables on the permitted map
-count; `worldspawn_2` is valid early Marsh loot. Commented entries do not count.
+count; `worldspawn_2` is valid early Swamps loot. Commented entries do not count.
 
 Twenty deliveries use localized pools; their slot counts remain unchanged.
 Early heavy-electrical pools exclude the Waystation powerbank. Early computer and
 instrument requirements use local electrical or industrial salvage instead; early
-advanced equipment keeps the advanced toolbox that actually spawns in the Marsh.
+advanced equipment keeps the advanced toolbox that actually spawns in the Swamps.
 Mute's early warnings no longer require Pripyat radio modules. Spicy Lemon's early
 drinks use ordinary refreshments and beer through `reward_consumable`, which is
 included by map-1 assorted caches 1/4/5/6,

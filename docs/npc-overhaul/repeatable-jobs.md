@@ -16,27 +16,33 @@ research defence, Egghead requests Garbage/Waystation/Pripyat specimens, and Int
 
 | Workbook row | Issuer | Work | Easy / medium / hard |
 | --- | --- | --- | --- |
-| 2 | Old Timer | Specific mutant kills | Swamps / Garbage / Waystation |
-| 3 | Cleaner | Dead drops | Garbage→Garbage / Garbage→Swamps or Waystation / two different non-Garbage maps |
-| 4 | Haggler | Hostile-human kills | Swamps / Garbage / Waystation |
+| 2 | Old Timer | Specific mutant kills | Swamps / Garbage / Pripyat |
+| 3 | Cleaner | Dead drops | Garbage→Garbage / Garbage→Swamps or Waystation / Swamps or Waystation→Pripyat |
+| 4 | Haggler | Hostile-human kills | Swamps / Garbage / Pripyat |
 | 5 | Vesper | Sensor deployment and retrieval | Garbage / Waystation / Pripyat |
 | 6 | Intern | Sensor deployment and retrieval | Swamps / Waystation / Pripyat |
 | 7 | Smartass | Computer extraction | Existing 1 / 2 / 5 computer types |
 | 8 | Technut | Valuable courier | Swamps acquisition rules |
 | 9 | Latch | Valuable courier | Garbage acquisition rules |
 | 10 | Quartermaster | Valuable courier | Waystation acquisition rules |
-| 11 | Ballast | Equipment recovery | Swamps light / Swamps heavy / Garbage or Waystation heavy |
-| 12 | Beanstalk | Research defence | Random non-Pripyat / random region / random region; 3 / 4 / 5 waves |
+| 11 | Ballast | Equipment recovery | Swamps light / Garbage or Waystation heavy / Pripyat heavy |
+| 12 | Beanstalk | Research defence | Random non-Pripyat / Garbage or Waystation / Pripyat; 3 / 4 / 5 waves |
 | 13 | Spicy Lemon | Cooked mutant meals | Swamps / Waystation / Pripyat species |
-| 14 | Jitters | Specific mutant specimens | Swamps / Garbage / Waystation species |
+| 14 | Jitters | Specific mutant specimens | Swamps / Garbage / Pripyat species |
 | 15 | Egghead | Specific mutant specimens | Garbage / Waystation / Pripyat species |
 | 16 | Wake | Information courier and return | Swamps settlement / Waystation / Eco Bunker or Waystation |
 | 17 | Spoor | Mutant category hunting | Garbage / Waystation / Pripyat |
-| 18 | Boss | Hostile-human kills | Garbage / Waystation / Pripyat |
+| 18 | Boss | Hostile-human kills | Garbage / Garbage / Pripyat |
 | 22 | Spool | Triangulation | Garbage 3 / Waystation 4 / Pripyat 5 readings |
 | Additional | Mute | Triangulation | Swamps 3 / Waystation 4 / Pripyat 5 readings |
 | 23 | Atlas | Mutant photography | Any supported map; 3 / 5 / 7 distinct living species |
 | 24 | Atlas | Anomaly photography | Any supported map; 3 / 5 / 7 actual registered anomaly types |
+
+Medium regional/field assignments leave the issuer's home map; hard assignments target Pripyat.
+Cleaner's circuits apply this to the delivery endpoint. Superseded hard circuit routes stay
+completion-only so accepted parcels keep their saved destination. Removed regional targets also keep
+completion-only identities, and saved kill orders retain their target map in dialogue and the journal. Existing saved field assignments
+retain their assigned sites. Work explanations and offer previews show the revised destinations.
 
 New reference cash budgets are 1,000 / 2,000 / 3,000 rubles; reputation is 15 / 25 / 35.
 Reference cash is not a guaranteed payout. Non-item jobs currently pay 55% of reference cash

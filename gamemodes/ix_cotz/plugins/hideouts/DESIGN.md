@@ -23,6 +23,10 @@ remote map space, share occupancy across visitors, and retain failed saves for r
 - Administrator-placed template markers carry interior roles, stable container slots and recipes in
   the AdvDupe file. Each load resolves them to local runtime points without overwriting manual defaults;
   slot recipe identities persist with the existing container state. Marker edits apply on the next load.
+- Squad entry resolves the shared keypad being used rather than requiring a room-specific entrance.
+  Entry rechecks that point after asynchronous loading; original outside return points remain per entrant.
+- Furnishing capacities are 30/40/50/60 per room. Paid upgrades use the operation journal for durable
+  replay, count only player props and preserve old furnishings above the limit.
 - Owner/officer building capabilities are contextual and limited to furnishings plus the movable vendor.
   Personal owners purchase furnishing/PET access and cannot delegate it. Template geometry and fixed
   utilities are protected. Vendor reset never touches stock or money.

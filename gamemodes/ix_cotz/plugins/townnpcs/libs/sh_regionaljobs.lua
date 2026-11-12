@@ -88,16 +88,14 @@ local function fieldJob(contact, tier)
 	local kind = contact.job.kind
 	local definition = {name = contact.job.description, desc = contact.job.description,
 		fieldType = kind, fieldMap = (contact.job.maps or {})[DIFFICULTIES[tier]]}
+	definition.fieldMaps = (contact.job.mapChoices or {})[DIFFICULTIES[tier]]
 	if kind == "sensor" then definition.fieldSettings = {recordSeconds = 900} end
 	if kind == "triangulation" then definition.fieldSettings = {readingCount = tier + 2} end
 	if kind == "recovery" then
 		definition.fieldCargoChoices = tier == 1 and {"job_recovery_tube", "job_recovery_module", "job_recovery_notes"}
 			or {"job_recovery_tools", "job_recovery_equipment", "job_recovery_armour"}
-		if tier == 3 then definition.fieldMaps = {"rp_garbage_cotz", "rp_waystation"} end
 	elseif kind == "defence" then
 		definition.regionalWaves = true
-		definition.fieldMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"}
-		if tier > 1 then definition.fieldMaps[4] = "rp_pripyat_remaster" end
 	elseif kind == "deadDrop" then
 		local maps = tier == 1 and {contact.map} or {"rp_marsh_cs", "rp_waystation", "rp_pripyat_remaster"}
 		for _, pickup in ipairs(tier == 3 and maps or {contact.map}) do
@@ -107,6 +105,11 @@ local function fieldJob(contact, tier)
 				if allowed then
 					local route = table.Copy(definition)
 					route.fieldMap, route.destinationMap = pickup, destination
+					-- Keep old route identities available to finish accepted work.
+					if tier == 3 and destination ~= "rp_pripyat_remaster" then
+						route.completionOnly = true
+						route.CanAcceptTask = function() return false end
+					end
 					route.fieldCargoChoices = {"town_quest_case", "town_quest_equipment", "town_quest_medical"}
 					route.desc = "Collect the assigned parcel in " .. pickup .. " and deliver it to the cache in " .. destination .. ". Return to " .. contact.name .. "."
 					register(contact, tier, pickup .. "/" .. destination, route)
@@ -115,6 +118,8 @@ local function fieldJob(contact, tier)
 		end
 		return
 	end
+	local regions = definition.fieldMaps or {definition.fieldMap}
+	definition.desc = definition.desc .. " Assignment region: " .. table.concat(regions, " or ") .. "."
 	definition.desc = definition.desc .. " Use Field work for the saved assignment and return instructions."
 	register(contact, tier, kind, definition)
 end

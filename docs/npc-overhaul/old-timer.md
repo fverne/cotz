@@ -2,7 +2,7 @@
 
 [Design index](README.md) · [Runtime/editing guide](../../gamemodes/ix_cotz/plugins/townnpcs/README.md)
 
-Home: Marsh. Existing name, model and personality remain. Only repeatable work: mutant hunting.
+Home: Swamps. Existing name, model and personality remain. Only repeatable work: mutant hunting.
 Edit [sh_old_timer.lua](../../gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_old_timer.lua)
 for requirements, targets, prerequisites, work prompts, briefings, benefits and finished-story greeting.
 Background dialogue remains in sh_tutorialnpc.lua.

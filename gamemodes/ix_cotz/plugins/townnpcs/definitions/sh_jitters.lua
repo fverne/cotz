@@ -16,6 +16,16 @@ PLUGIN:Register("jitters", {
 		kind = "regionalSpecimens",
 		maps = {
 			easy = "rp_marsh_cs",
+			hard = "rp_pripyat_remaster",
+			medium = "rp_garbage_cotz",
+		},
+	},
+	retiredRegionalJob = {
+		category = "Specific mutant specimens",
+		description = "Specific mutant specimens",
+		kind = "regionalSpecimens",
+		maps = {
+			easy = "rp_marsh_cs",
 			hard = "rp_waystation",
 			medium = "rp_garbage_cotz",
 		},
@@ -57,7 +67,7 @@ PLUGIN:Register("jitters", {
 		offerPrompt = "Do you need mutant specimens?",
 		progression = "I need to replenish the medical supplies. Look at the list before packing; I have enough things to sort when someone actually needs treatment. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "What needs checking for the clinic?",
-		work = "I need mutant specimens to examine. Bring the exact part and number on the request, and please keep them separate from the rest of your pack. Check the suggested region before you leave. I'd much rather have a specimen to look at than another patient because I made the request sound hurried.",
+		work = "I need mutant specimens to examine. Bring the exact part and number on the request, and please keep them separate from the rest of your pack. Check the suggested region before you leave. I'd much rather have a specimen to look at than another patient because I made the request sound hurried. For medium requests, look in Garbage; for hard requests, Pripyat. Bring the specimens back here in the Swamps. Please allow for the return journey when you pack.",
 		workPrompt = "About the mutant specimens I'm collecting.",
 	},
 	catalogue = {
@@ -643,7 +653,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT02",
 			name = "The Empty Cabinet",
-			briefing = "I'd like the aid-station inventory recovered. Before I decide what was missing, I need to know what they thought they had. Recover the aid-station inventory journal from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I'd like the aid-station inventory recovered. Before I decide what was missing, I need to know what they thought they had. Recover the aid-station inventory journal from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "JT04",
@@ -653,7 +663,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT06",
 			name = "The Exposure Log",
-			briefing = "I'd like the patient observations from the shelter. A remembered symptom isn't always remembered at the right point in the account. Recover the field exposure observations from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I'd like the patient observations from the shelter. A remembered symptom isn't always remembered at the right point in the account. Recover the field exposure observations from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "JT08",
@@ -663,7 +673,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT10",
 			name = "The Contaminated Batch",
-			briefing = "Bring the batch evidence back sealed. I need to check the account before deciding what the contamination claim supports. Recover the suspect batch evidence from the assigned search area in Garbage. Bring it back to me in Marsh.",
+			briefing = "Bring the batch evidence back sealed. I need to check the account before deciding what the contamination claim supports. Recover the suspect batch evidence from the assigned search area in Garbage. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "JT12",
@@ -673,7 +683,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT14",
 			name = "A Second Opinion",
-			briefing = "I'd like another research note to compare. Two similar cases can be terribly persuasive until you check what differed. Recover the exposure research note from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I'd like another research note to compare. Two similar cases can be terribly persuasive until you check what differed. Recover the exposure research note from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "JT16",
@@ -683,7 +693,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT18",
 			name = "The Field Ward",
-			briefing = "Wake should have the field ward's log. There may be a useful detail about the people that I'd overlook concentrating on treatment. Recover the field treatment log for Wake from the assigned search area in Marsh. Deliver it to 'Wake' in Garbage, then come back to me in Marsh.",
+			briefing = "Wake should have the field ward's log. There may be a useful detail about the people that I'd overlook concentrating on treatment. Recover the field treatment log for Wake from the assigned search area in the Swamps. Deliver it to 'Wake' in Garbage, then come back to me in the Swamps.",
 		},
 		{
 			id = "JT20",
@@ -693,7 +703,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT22",
 			name = "The Patient's Route",
-			briefing = "Recover the expedition's later exposure record. I'd rather compare the sequence than select the reading that suits my worry. Recover the last exposure survey record from the assigned search area in Pripyat. Bring it back to me in Marsh.",
+			briefing = "Recover the expedition's later exposure record. I'd rather compare the sequence than select the reading that suits my worry. Recover the last exposure survey record from the assigned search area in Pripyat. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "JT24",
@@ -703,7 +713,7 @@ PLUGIN:Register("jitters", {
 		{
 			id = "JT26",
 			name = "The Case Closed",
-			briefing = "The identifying papers need to stay together. I don't want to fill a gap by guessing because a page went missing on the way home. Recover the final exposure identification file from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "The identifying papers need to stay together. I don't want to fill a gap by guessing because a page went missing on the way home. Recover the final exposure identification file from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 	},
 })

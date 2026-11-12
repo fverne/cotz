@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_ballastnpc.lua](../../../gam
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** New: dry-humoured ferryman, patient and respectful of dangerous water.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
 - **Only repeatable category:** Equipment recovery.
@@ -69,7 +69,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | BA01 | A Dry Package | Hand-in | Deliver rope, packaging, and ordinary transport supplies. | Cargo-preparation barter. |
-| BA02 | The First Stranding | Authored | Recover a shipment case on a Marsh shore. | Waterside route clue. |
+| BA02 | The First Stranding | Authored | Recover a shipment case on a Swamps shore. | Waterside route clue. |
 | BA03 | Nothing Left Behind | Tracker | Cumulative checkpoint C1: complete initial equipment-recovery checkpoint. | One existing recovery supply purchase. |
 | BA04 | The Rotten Landing | Authored | Retrieve a landing inspection record. | First waterside stash clue. |
 
@@ -87,7 +87,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | BA09 | Names on the Manifest | Hand-in | Supply existing freight and administrative documents. | Transport-supply barter. |
-| BA10 | The Floating Trail | Authored | Recover the crew's recorder near a remote Marsh water route. | Crew route information. |
+| BA10 | The Floating Trail | Authored | Recover the crew's recorder near a remote Swamps water route. | Crew route information. |
 | BA11 | Recover What Matters | Tracker | Cumulative checkpoint C3: maintain recovery work. | Medical preparation supplies. |
 | BA12 | The Disputed Cargo | Authored | Retrieve shipment evidence at a Garbage freight site. | Ledger relationship response. |
 | BA13 | Patch and Pack | Hand-in | Deliver cargo protection and utility supplies. | One recovery-tool sidegrade purchase. |

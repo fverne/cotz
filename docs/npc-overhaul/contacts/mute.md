@@ -36,7 +36,7 @@ These conversations and their follow-up live in [sh_stalkernetadmin.lua](../../.
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** Existing withdrawn, near-silent Stalkernet operator.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Radio triangulation.
@@ -70,7 +70,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | MU01 | A Loose Connection | Hand-in | Deliver ordinary electronic components. | Flash-drive purchase; binoculars reassigned to Atlas. |
-| MU02 | The Silent Repeater | Authored | Recover a failed repeater's log in Marsh. | Network preparation supplies. |
+| MU02 | The Silent Repeater | Authored | Recover a failed repeater's log in Swamps. | Network preparation supplies. |
 | MU03 | Signals Getting Through | Tracker | Cumulative checkpoint C1: maintain electronics deliveries. | Small electronics-stock improvement. |
 | MU04 | The Missing Address | Authored | Recover an address register from a local cache. | PDA information topic. |
 
@@ -79,7 +79,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | MU05 | A Clearer Picture | Hand-in | Supply optical and electronic service goods. | 9V battery purchase; binoculars reassigned to Atlas. |
-| MU06 | A Line Through the Marsh | Authored | Retrieve a recorder along a broken network route. | Regional signal clue. |
+| MU06 | A Line Through the Swamps | Authored | Retrieve a recorder along a broken network route. | Regional signal clue. |
 | MU07 | Not Just Static | Tracker | Cumulative checkpoint C2: reach the next electronics-delivery checkpoint. | One existing PDA service unlock. |
 | MU08 | Spool's Packet | Authored | Recover a sealed communications record in Garbage. | Spool relationship response. |
 | MU09 | Noisy Components | Hand-in | Deliver components for interference testing. | Basic anomaly-warning equipment purchase, effects audit required. |

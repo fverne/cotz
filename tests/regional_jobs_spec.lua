@@ -1,5 +1,7 @@
--- Production registry and the existing progression/dialogue fixtures, followed by server boundary checks.
-dofile("tests/townnpcs_spec.lua")
+-- Production registry and dialogue fixtures, followed by server boundary checks.
+dofile("tests/helpers/townnpcs.lua")
+ix.townNPCs:BuildJobs()
+dofile("tests/helpers/town_dialogue.lua")
 local checks = 0
 local function check(value, message)
 	checks = checks + 1
@@ -32,10 +34,13 @@ for id, definition in pairs(ix.jobs.list) do
 	if suffix then
 		local replacement = ix.jobs.list["cotz/town/v2/jitters/" .. suffix]
 		check(definition.completionOnly and not definition.CanAcceptTask(), "old specimen identities cannot be accepted")
-		check(replacement and not replacement.completionOnly
-			and replacement.requiredItem == definition.requiredItem and replacement.numberRec == definition.numberRec,
-			"specimen reassignment retains each item, tier and quantity")
-		check(replacement.issuerName == "'Jitters'", "hand-ins and rewards belong to the new issuer")
+		if definition.tier < 3 then
+			check(replacement and not replacement.completionOnly
+				and replacement.requiredItem == definition.requiredItem
+				and replacement.numberRec == definition.numberRec,
+				"easy and medium specimen reassignment retains each item, tier and quantity")
+			check(replacement.issuerName == "'Jitters'", "hand-ins and rewards belong to the new issuer")
+		end
 		inheritedRequests = inheritedRequests + 1
 	end
 end

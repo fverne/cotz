@@ -71,15 +71,18 @@ function ix.jobs.getFormattedName(job)
 end
 
 function ix.jobs.getFormattedDesc(activejob, hideRewards, character)
+	local definition = ix.jobs.list[activejob.identifier]
 	local description = activejob.fieldTask and ix.jobs.field.DescribeAssignment(activejob)
-		or ix.jobs.list[activejob.identifier].desc
+		or definition.desc
+	if activejob.targetMap and definition.targetMap and activejob.targetMap ~= definition.targetMap then
+		description = description:gsub(definition.targetMap, activejob.targetMap)
+	end
 	local text = description
 	if not activejob.fieldTask or activejob.fieldTask.kind ~= "recovery" then
 		text = string.format(description, activejob.numberRec)
 	end
-	local definition = ix.jobs.list[activejob.identifier]
 	local contact = ix.townNPCs and ix.townNPCs.contacts and ix.townNPCs.contacts[definition.townContact]
-	local assignmentMap = activejob.fieldTask and activejob.fieldTask.map or definition.fieldMap
+	local assignmentMap = activejob.fieldTask and activejob.fieldTask.map or activejob.targetMap or definition.fieldMap
 	if assignmentMap then text = text .. "\nAssignment region: " .. ix.jobs.GetMapName(assignmentMap) .. "." end
 	if activejob.fieldTask and contact then
 		text = text .. "\nReturn to " .. contact.name .. " in " .. contact.map .. "."
@@ -109,9 +112,16 @@ local function spokenJobDetails(job, contact, character)
 	local definition = ix.jobs.list[job.identifier]
 	local state = job.fieldTask
 	local count = job.numberRec - (job.progress or 0)
-	local map = state and state.map or definition.targetMap or definition.fieldMap
+	local map = state and state.map or job.targetMap or definition.targetMap or definition.fieldMap
 		or (contact.job.maps or {})[({"easy", "medium", "hard"})[definition.tier or 1]] or contact.map
 	local region = ix.jobs.GetMapName(map)
+	if not state and definition.fieldMaps then
+		local regions = {}
+		for _, candidate in ipairs(definition.fieldMaps) do
+			regions[#regions + 1] = ix.jobs.GetMapName(candidate)
+		end
+		region = table.concat(regions, " or ")
+	end
 	if definition.requiredItem then
 		local item = ix.item.list[definition.requiredItem]
 		local label = item and item.name or "the requested material"

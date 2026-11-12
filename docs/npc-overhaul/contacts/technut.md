@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_technpc.lua](../../../gamemo
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** Existing enthusiastic technician.
 - **Model:** Preserve the installed template's model, skin, and presentation.
 - **Only repeatable category:** Valuable delivery and courier work.
@@ -69,7 +69,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | TN01 | A Bench to Work On | Hand-in | Deliver mechanical tools and workshop parts. | First maintenance-product purchase. |
-| TN02 | The Missing Toolbox | Authored | Recover a Marsh workshop case. | Repair credit. |
+| TN02 | The Missing Toolbox | Authored | Recover a Swamps workshop case. | Repair credit. |
 | TN03 | Keeping Busy | Tracker | Cumulative checkpoint C1: maintain industrial-salvage deliveries. | First light-equipment purchase. |
 | TN04 | A Regulator for Gasket | Authored | Recover a regulator from a utility service cache. | Utility consumables. |
 | TN05 | Something Accurate | Hand-in | Deliver precision measuring tools. | First protective accessory purchase. |

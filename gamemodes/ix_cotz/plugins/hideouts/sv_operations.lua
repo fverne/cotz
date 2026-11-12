@@ -405,13 +405,15 @@ function PLUGIN:RecoverUpgradeEntitlements(callback)
 	local query = mysql:Select("ix_hideout_operations")
 	query:Where("scope", Schema.folder)
 	query:Where("map", game.GetMap())
-	query:WhereIn("kind", {"upgrade", "personal"})
+	query:WhereIn("kind", {"upgrade", "personal", "props"})
 	read(query, function(rows, failure)
 		if failure then callback(false) return end
 		for _, row in ipairs(rows) do
 			local payload = util.JSONToTable(row.payload or "{}")
 			local record = self:GetHideout(row.hideout)
-			if record and payload and payload.kind == "personal" then
+			if record and payload and payload.kind == "props" then
+				record.propTier = math.max(record.propTier or 1, payload.tier)
+			elseif record and payload and payload.kind == "personal" then
 				self:ApplyPersonalEntitlement(record, payload)
 			elseif record and payload and payload.kind == "upgrade"
 				and (record.ownerType == "squad" or not record.personalVersion) then

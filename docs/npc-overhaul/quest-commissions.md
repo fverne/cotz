@@ -69,18 +69,18 @@ item directly; `Field cache` means deliver at the assigned cache before returnin
 
 | Contact | Step | Commission | Cargo ID | Interaction | Search region | Recipient |
 | --- | --- | --- | --- | --- | --- | --- |
-| arena-master | AR06 | The Damaged Shipment | `town_quest_armour` | recovery | Marsh | suture |
-| arena-master | AR14 | A Fighter's Effects | `town_quest_personnel` | recovery | Marsh | Issuer |
-| atlas | AT02 | The First Landmark | `town_quest_module` | sensor | Marsh | Issuer |
-| atlas | AT06 | Ballast's Shortcut | `town_quest_notebook` | recovery | Marsh | ballast |
+| arena-master | AR06 | The Damaged Shipment | `town_quest_armour` | recovery | Swamps | suture |
+| arena-master | AR14 | A Fighter's Effects | `town_quest_personnel` | recovery | Swamps | Issuer |
+| atlas | AT02 | The First Landmark | `town_quest_module` | sensor | Swamps | Issuer |
+| atlas | AT06 | Ballast's Shortcut | `town_quest_notebook` | recovery | Swamps | ballast |
 | atlas | AT10 | An Unfinished Map | `town_quest_tape` | recovery | Garbage | Issuer |
-| atlas | AT14 | The Wrong Coordinates | `town_quest_official` | recovery | Marsh | Issuer |
+| atlas | AT14 | The Wrong Coordinates | `town_quest_official` | recovery | Swamps | Issuer |
 | atlas | AT18 | The First Pripyat Mark | `town_quest_module` | sensor | Pripyat | Issuer |
-| ballast | BA02 | The First Stranding | `town_quest_case` | recovery | Marsh | Issuer |
-| ballast | BA06 | A Missing Mooring | `town_quest_tools` | recovery | Marsh | Issuer |
-| ballast | BA10 | The Floating Trail | `town_quest_tape` | recovery | Marsh | Issuer |
-| ballast | BA14 | The Other Landing | `town_quest_manifest` | recovery | Marsh | ledger |
-| ballast | BA18 | The Last Mooring | `town_quest_personnel` | recovery | Marsh | Issuer |
+| ballast | BA02 | The First Stranding | `town_quest_case` | recovery | Swamps | Issuer |
+| ballast | BA06 | A Missing Mooring | `town_quest_tools` | recovery | Swamps | Issuer |
+| ballast | BA10 | The Floating Trail | `town_quest_tape` | recovery | Swamps | Issuer |
+| ballast | BA14 | The Other Landing | `town_quest_manifest` | recovery | Swamps | ledger |
+| ballast | BA18 | The Last Mooring | `town_quest_personnel` | recovery | Swamps | Issuer |
 | beanstalk | BN06 | Two Sides of the Heap | `town_quest_lab` | recovery | Garbage | Issuer |
 | beanstalk | BN22 | The Last Control | `town_quest_module` | recovery | Pripyat | Issuer |
 | boss | BO02 | The Missing Patrol | `town_quest_orders` | recovery | Waystation | Issuer |
@@ -112,30 +112,30 @@ item directly; `Field cache` means deliver at the assigned cache before returnin
 | egghead | EG14 | Beanstalk's Objection | `town_quest_clinic` | recovery | Garbage | vesper |
 | egghead | EG18 | The Pripyat Baseline | `town_quest_module` | recovery | Pripyat | Issuer |
 | egghead | EG22 | The Family Resemblance | `town_quest_module2` | recovery | Pripyat | Issuer |
-| gasket | GK02 | The Empty Service Shed | `town_quest_notebook` | recovery | Marsh | Issuer |
-| gasket | GK06 | The Pump Log | `town_quest_notebook` | recovery | Marsh | Issuer |
+| gasket | GK02 | The Empty Service Shed | `town_quest_notebook` | recovery | Swamps | Issuer |
+| gasket | GK06 | The Pump Log | `town_quest_notebook` | recovery | Swamps | Issuer |
 | gasket | GK10 | The Scrap Specification | `town_quest_official` | recovery | Garbage | latch |
-| gasket | GK14 | The Shelter Circuit | `town_quest_module2` | recovery | Marsh | Issuer |
-| gasket | GK18 | The Original Manual | `town_quest_official` | recovery | Marsh | Issuer |
-| haggler | HG02 | The Missing Invoice | `town_quest_receipt` | recovery | Marsh | Issuer |
-| haggler | HG06 | The Wrong Seal | `town_quest_manifest` | recovery | Marsh | Issuer |
-| haggler | HG10 | Two Sets of Books | `town_quest_receipt` | recovery | Marsh | ledger |
+| gasket | GK14 | The Shelter Circuit | `town_quest_module2` | recovery | Swamps | Issuer |
+| gasket | GK18 | The Original Manual | `town_quest_official` | recovery | Swamps | Issuer |
+| haggler | HG02 | The Missing Invoice | `town_quest_receipt` | recovery | Swamps | Issuer |
+| haggler | HG06 | The Wrong Seal | `town_quest_manifest` | recovery | Swamps | Issuer |
+| haggler | HG10 | Two Sets of Books | `town_quest_receipt` | recovery | Swamps | ledger |
 | haggler | HG14 | A Broken Agreement | `town_quest_contract` | recovery | Garbage | Issuer |
-| haggler | HG18 | The Shipment List | `town_quest_manifest` | recovery | Marsh | brass |
-| haggler | HG22 | The Unpaid Supplier | `town_quest_personnel` | recovery | Marsh | Issuer |
+| haggler | HG18 | The Shipment List | `town_quest_manifest` | recovery | Swamps | brass |
+| haggler | HG22 | The Unpaid Supplier | `town_quest_personnel` | recovery | Swamps | Issuer |
 | intern | IN02 | The Calibration Point | `town_quest_module` | sensor | Waystation | Issuer |
 | intern | IN06 | Beanstalk's Control | `town_quest_module2` | sensor | Garbage | Issuer |
 | intern | IN10 | The Senior's Notebook | `town_quest_diary` | recovery | Waystation | Issuer |
 | intern | IN14 | The Lost Calibration Case | `town_quest_research` | recovery | Waystation | technut |
 | intern | IN18 | The Contradictory Site | `town_quest_module` | sensor | Pripyat | Issuer |
 | intern | IN22 | The Independent Control | `town_quest_module2` | sensor | Pripyat | Issuer |
-| jitters | JT02 | The Empty Cabinet | `town_quest_clinic` | recovery | Marsh | Issuer |
-| jitters | JT06 | The Exposure Log | `town_quest_clinic2` | recovery | Marsh | Issuer |
+| jitters | JT02 | The Empty Cabinet | `town_quest_clinic` | recovery | Swamps | Issuer |
+| jitters | JT06 | The Exposure Log | `town_quest_clinic2` | recovery | Swamps | Issuer |
 | jitters | JT10 | The Contaminated Batch | `town_quest_tube` | recovery | Garbage | Issuer |
-| jitters | JT14 | A Second Opinion | `town_quest_lab` | recovery | Marsh | Issuer |
-| jitters | JT18 | The Field Ward | `town_quest_clinic` | recovery | Marsh | wake |
+| jitters | JT14 | A Second Opinion | `town_quest_lab` | recovery | Swamps | Issuer |
+| jitters | JT18 | The Field Ward | `town_quest_clinic` | recovery | Swamps | wake |
 | jitters | JT22 | The Patient's Route | `town_quest_module2` | recovery | Pripyat | Issuer |
-| jitters | JT26 | The Case Closed | `town_quest_personnel` | recovery | Marsh | Issuer |
+| jitters | JT26 | The Case Closed | `town_quest_personnel` | recovery | Swamps | Issuer |
 | latch | LA02 | The Missing Inventory | `town_quest_manifest` | recovery | Garbage | Issuer |
 | latch | LA06 | A Machine With a Number | `town_quest_control` | recovery | Garbage | Issuer |
 | latch | LA10 | The Wrong Replacement | `town_quest_equipment` | recovery | Garbage | Issuer |
@@ -143,22 +143,22 @@ item directly; `Field cache` means deliver at the assigned cache before returnin
 | latch | LA18 | The Last Bearing | `town_quest_equipment` | recovery | Pripyat | Issuer |
 | latch | LA22 | The Commissioning Plate | `town_quest_official` | recovery | Garbage | Issuer |
 | ledger | LE02 | The First Route | `town_quest_case` | deadDrop | Waystation | Field cache |
-| ledger | LE06 | Ballast's Landing Copy | `town_quest_manifest` | recovery | Marsh | ballast |
+| ledger | LE06 | Ballast's Landing Copy | `town_quest_manifest` | recovery | Swamps | ballast |
 | ledger | LE10 | The Duplicate Destination | `town_quest_official` | recovery | Waystation | Issuer |
 | ledger | LE14 | The Last Scheduled Drop | `town_quest_evidence` | deadDrop | Waystation | Field cache |
 | ledger | LE18 | The Dispatcher's Detour | `town_quest_tape` | recovery | Pripyat | Issuer |
 | ledger | LE22 | The Last Receipt | `town_quest_receipt` | recovery | Waystation | Issuer |
-| mute | MU02 | The Silent Repeater | `town_quest_control` | recovery | Marsh | Issuer |
-| mute | MU06 | A Line Through the Marsh | `town_quest_module` | recovery | Marsh | Issuer |
-| mute | MU10 | The Duplicate Message | `town_quest_disc` | recovery | Marsh | Issuer |
+| mute | MU02 | The Silent Repeater | `town_quest_control` | recovery | Swamps | Issuer |
+| mute | MU06 | A Line Through the Swamps | `town_quest_module` | recovery | Swamps | Issuer |
+| mute | MU10 | The Duplicate Message | `town_quest_disc` | recovery | Swamps | Issuer |
 | mute | MU14 | The Second Copy | `town_quest_disc` | recovery | Waystation | spool |
 | mute | MU18 | The Old Routing Table | `town_quest_archive` | recovery | Pripyat | carbon |
 | mute | MU22 | The Broken Handshake | `town_quest_control` | triangulation | Pripyat | Issuer |
-| old-timer | OT02 | Know Your Ground | `town_quest_notebook` | recovery | Marsh | Issuer |
-| old-timer | OT06 | Ready Enough | `town_quest_case` | recovery | Marsh | Issuer |
-| old-timer | OT10 | Enough for the Walk Home | `town_quest_case` | recovery | Marsh | Issuer |
-| old-timer | OT14 | Thin the Pack | `town_quest_notebook` | recovery | Marsh | Issuer |
-| old-timer | OT18 | Leave a Way Out | `town_quest_diary` | recovery | Marsh | Issuer |
+| old-timer | OT02 | Know Your Ground | `town_quest_notebook` | recovery | Swamps | Issuer |
+| old-timer | OT06 | Ready Enough | `town_quest_case` | recovery | Swamps | Issuer |
+| old-timer | OT10 | Enough for the Walk Home | `town_quest_case` | recovery | Swamps | Issuer |
+| old-timer | OT14 | Thin the Pack | `town_quest_notebook` | recovery | Swamps | Issuer |
+| old-timer | OT18 | Leave a Way Out | `town_quest_diary` | recovery | Swamps | Issuer |
 | old-timer | OT22 | A Voice on Tape | `town_quest_tape2` | recovery | Waystation | spool |
 | old-timer | OT26 | He Made It This Far | `town_quest_photo` | recovery | Pripyat | Issuer |
 | quartermaster | QM02 | The Missing Requisition | `town_quest_orders` | recovery | Waystation | Issuer |
@@ -173,16 +173,16 @@ item directly; `Field cache` means deliver at the assigned cache before returnin
 | smartass | SM14 | Mute's Missing Packet | `town_quest_drive` | recovery | Garbage | Issuer |
 | smartass | SM18 | The Rooftop Source | `town_quest_control` | recovery | Pripyat | Issuer |
 | smartass | SM22 | Two Signals One Source | `town_quest_control` | recovery | Pripyat | Issuer |
-| spicy-lemon | SL02 | The Cold Kitchen | `town_quest_notebook` | recovery | Marsh | Issuer |
-| spicy-lemon | SL06 | The Spoiled Shipment | `town_quest_manifest` | recovery | Marsh | Issuer |
+| spicy-lemon | SL02 | The Cold Kitchen | `town_quest_notebook` | recovery | Swamps | Issuer |
+| spicy-lemon | SL06 | The Spoiled Shipment | `town_quest_manifest` | recovery | Swamps | Issuer |
 | spicy-lemon | SL10 | The Supplier's Ledger | `town_quest_receipt` | recovery | Garbage | Issuer |
-| spicy-lemon | SL14 | Jitters' Complaint | `town_quest_clinic` | recovery | Marsh | jitters |
-| spicy-lemon | SL18 | The Long Walk | `town_quest_module` | recovery | Marsh | gasket |
-| spicy-lemon | SL22 | The Cook's Detour | `town_quest_personnel` | recovery | Marsh | Issuer |
-| spicy-lemon | SL26 | Room at the Table | `town_quest_photo` | recovery | Marsh | Issuer |
+| spicy-lemon | SL14 | Jitters' Complaint | `town_quest_clinic` | recovery | Swamps | jitters |
+| spicy-lemon | SL18 | The Long Walk | `town_quest_module` | recovery | Swamps | gasket |
+| spicy-lemon | SL22 | The Cook's Detour | `town_quest_personnel` | recovery | Swamps | Issuer |
+| spicy-lemon | SL26 | Room at the Table | `town_quest_photo` | recovery | Swamps | Issuer |
 | spool | SO02 | The Local Silence | `town_quest_control` | triangulation | Waystation | Issuer |
 | spool | SO06 | The Crossed Bearings | `town_quest_module` | recovery | Waystation | technut |
-| spool | SO10 | Mute's Header | `town_quest_drive` | recovery | Marsh | Issuer |
+| spool | SO10 | Mute's Header | `town_quest_drive` | recovery | Swamps | Issuer |
 | spool | SO14 | The Unsent Call | `town_quest_tape2` | recovery | Waystation | wake |
 | spool | SO18 | The Last Check-in | `town_quest_tape` | recovery | Pripyat | wake |
 | spool | SO22 | The Message Home | `town_quest_tape2` | recovery | Waystation | Issuer |
@@ -198,16 +198,16 @@ item directly; `Field cache` means deliver at the assigned cache before returnin
 | suture | SU14 | The Failed Seam | `town_quest_worncase` | recovery | Waystation | Issuer |
 | suture | SU18 | The Pripyat Trial | `town_quest_module2` | recovery | Pripyat | Issuer |
 | suture | SU22 | The Return Journey Test | `town_quest_module` | sensor | Waystation | Issuer |
-| technut | TN02 | The Missing Toolbox | `town_quest_tools` | recovery | Marsh | Issuer |
-| technut | TN06 | The Misaligned Jig | `town_quest_official` | recovery | Marsh | Issuer |
-| technut | TN10 | Latch's Find | `town_quest_control` | recovery | Marsh | latch |
-| technut | TN14 | Patterns in Metal | `town_quest_official` | recovery | Marsh | Issuer |
+| technut | TN02 | The Missing Toolbox | `town_quest_tools` | recovery | Swamps | Issuer |
+| technut | TN06 | The Misaligned Jig | `town_quest_official` | recovery | Swamps | Issuer |
+| technut | TN10 | Latch's Find | `town_quest_control` | recovery | Swamps | latch |
+| technut | TN14 | Patterns in Metal | `town_quest_official` | recovery | Swamps | Issuer |
 | technut | TN18 | The Test Assembly | `town_quest_research` | recovery | Waystation | Issuer |
 | technut | TN22 | The Machine's Origin | `town_quest_official` | recovery | Pripyat | Issuer |
-| technut | TN26 | A Test Under Load | `town_quest_module` | sensor | Marsh | Issuer |
-| the-original | OR02 | Where It Fed | `town_quest_notebook` | recovery | Marsh | Issuer |
-| the-original | OR06 | The Wrong Tracks | `town_quest_tape` | recovery | Marsh | Issuer |
-| the-original | OR10 | A Story With Dates | `town_quest_diary` | recovery | Marsh | carbon |
+| technut | TN26 | A Test Under Load | `town_quest_module` | sensor | Swamps | Issuer |
+| the-original | OR02 | Where It Fed | `town_quest_notebook` | recovery | Swamps | Issuer |
+| the-original | OR06 | The Wrong Tracks | `town_quest_tape` | recovery | Swamps | Issuer |
+| the-original | OR10 | A Story With Dates | `town_quest_diary` | recovery | Swamps | carbon |
 | the-original | OR14 | The Camp Before This One | `town_quest_notebook` | recovery | Waystation | Issuer |
 | the-original | OR18 | The Route He Remembers | `town_quest_official` | recovery | Pripyat | atlas |
 | the-original | OR22 | The Place in the Story | `town_quest_tape` | recovery | Pripyat | Issuer |

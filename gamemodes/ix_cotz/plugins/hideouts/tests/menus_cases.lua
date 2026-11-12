@@ -170,13 +170,17 @@ Test("management sends actual invitations and permits revoking an offline invite
 	local guest = FeatureClient(2)
 	record.guests = {["2"] = true, ["3"] = false, ["4"] = true}
 	local writeUInt, writeString = net.WriteUInt, net.WriteString
-	local ids, names = {}, {}
-	net.WriteUInt = function(value, bits) if bits == 32 then ids[#ids + 1] = value end end
+	local ids, names, price = {}, {}, nil
+	net.WriteUInt = function(value, bits)
+		if bits == 32 then
+			if not price then price = value else ids[#ids + 1] = value end
+		end
+	end
 	net.WriteString = function(value) names[value] = true end
 	owner.position = PLUGIN.state.entrances.gate.pos
 	PLUGIN:ShowManagement(owner, record.id, "entrance")
 	net.WriteUInt, net.WriteString = writeUInt, writeString
-	assert(#ids == 2 and ids[1] == 2 and ids[2] == 4)
+	assert(price == 5000 and #ids == 2 and ids[1] == 2 and ids[2] == 4)
 	assert(names["Character 2"] and names["Character #4"])
 	assert(PLUGIN:HandleManagementAction(owner, record.id, 7, "4", 0))
 	assert(record.guests["4"] == nil and record.guests["2"] == true)
@@ -207,14 +211,118 @@ Test("administrator keypads list owned rooms and explicit invitations without ex
 	end
 	PLUGIN:ShowEntrance(admin, "gate")
 	netstream.Start = start
-	assert(shown.owned and shown.invited and not shown[record.id] and not shown.squad)
+	assert(shown.owned and shown.invited and shown.squad and not shown[record.id])
 	assert(PLUGIN:CanAccess(admin, record) and PLUGIN:CanAccess(admin, squad))
 
 	admin.ixHideoutMenuTime = nil
 	invited.guests["2"] = nil
+	ix.squad.list.squad1.members[2] = nil
 	netstream.Start = function(client, message, entrance, records)
 		assert(#records == 1 and records[1].id == "owned")
 	end
 	PLUGIN:ShowEntrance(admin, "gate")
 	netstream.Start = start
+end)
+
+Test("squad rooms use a shared entrance without a placed or configured squad entrance", function()
+	FeatureReset()
+	local leader = FeatureClient(1)
+	local instance, record = FeatureHome(leader, true)
+	record.entrance = "squad:" .. record.id
+	PLUGIN.members[leader], instance.occupants[leader] = nil, nil
+	leader.position = PLUGIN.state.entrances.gate.pos
+	assert(not PLUGIN.state.entrances[record.entrance])
+	assert(PLUGIN:FindHideoutEntrance(leader, record) == "gate")
+	assert(PLUGIN:IsManagementLocation(leader, record, "entrance"))
+	local start, shown = netstream.Start, nil
+	netstream.Start = function(_, _, _, records) shown = records end
+	PLUGIN:ShowEntrance(leader, "gate")
+	netstream.Start = start
+	assert(#shown == 1 and shown[1].id == record.id and shown[1].manage)
+	assert(PLUGIN:RequestEntry(leader, record.id))
+	assert(PLUGIN.members[leader] == record.id)
+	assert(instance.occupants[leader].returnPoint[1] == PLUGIN.state.entrances.gate.pos)
+end)
+
+Test("squad shared-entrance admission rechecks the entrance after character save", function()
+	FeatureReset()
+	local leader = FeatureClient(1)
+	local instance, record = FeatureHome(leader, true)
+	record.entrance = "squad:" .. record.id
+	PLUGIN.members[leader], instance.occupants[leader] = nil, nil
+	leader.position = PLUGIN.state.entrances.gate.pos
+	local saved
+	leader:GetCharacter().Save = function(_, callback) saved = callback end
+	assert(PLUGIN:RequestEntry(leader, record.id) and saved)
+	PLUGIN.state.entrances.gate = nil
+	saved()
+	assert(not PLUGIN.members[leader] and not instance.occupants[leader])
+end)
+
+Test("prop capacity upgrades charge once and replay after a lost projection for both owner types", function()
+	for _, squad in ipairs({false, true}) do
+		FeatureReset()
+		local owner = FeatureClient(1, 100000)
+		local instance, record = FeatureHome(owner, squad)
+		instance.exit = NewEntity(nil, instance.origin)
+		PLUGIN:ShowManagement(owner, record.id, "exit")
+		assert(PLUGIN:GetHideoutPropLimit(record) == 30)
+		for tier, limit in ipairs({40, 50, 60}) do
+			assert(PLUGIN:HandleManagementAction(owner, record.id, 0, "", tier))
+			assert(PLUGIN:GetHideoutPropLimit(record) == limit)
+			local balance = owner:GetCharacter():GetMoney()
+			assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", tier))
+			assert(owner:GetCharacter():GetMoney() == balance)
+		end
+		assert(owner:GetCharacter():GetMoney() == 65000)
+		assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 4))
+		record.propTier = nil
+		PLUGIN:RecoverUpgradeEntitlements(function(ok) assert(ok) end)
+		assert(PLUGIN:GetHideoutPropLimit(record) == 60 and owner:GetCharacter():GetMoney() == 65000)
+	end
+end)
+
+Test("prop capacity purchases reject insufficient funds, guests, demotion and failed commits", function()
+	FeatureReset()
+	local owner = FeatureClient(1, 100000)
+	local instance, record = FeatureHome(owner, true)
+	instance.exit = NewEntity(nil, instance.origin)
+	PLUGIN:ShowManagement(owner, record.id, "exit")
+	owner:GetCharacter().money = 0
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	assert(not record.propTier)
+	owner:GetCharacter().money = 100000
+	local commit = PLUGIN.CommitOperation
+	PLUGIN.CommitOperation = function(_, _, _, _, callback) callback(false, "Database failure") end
+	assert(PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	PLUGIN.CommitOperation = commit
+	assert(not record.propTier and not PLUGIN.capacityPurchases[record.id] and instance.operations == 0)
+	assert(owner:GetCharacter():GetMoney() == 100000)
+	ix.squad.list.squad1.members[1] = 0
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	local guest = FeatureClient(2, 100000)
+	record.guests["2"] = true
+	guest.position, PLUGIN.members[guest] = instance.origin, record.id
+	PLUGIN:ShowManagement(guest, record.id, "exit")
+	assert(not PLUGIN:HandleManagementAction(guest, record.id, 0, "", 1))
+end)
+
+Test("pending prop purchases reject duplicates and recheck a delayed role response", function()
+	FeatureReset()
+	local owner = FeatureClient(1, 100000)
+	local instance, record = FeatureHome(owner, true)
+	instance.exit = NewEntity(nil, instance.origin)
+	PLUGIN:ShowManagement(owner, record.id, "exit")
+	local checkRole, pending = PLUGIN.CheckSquadRole, nil
+	PLUGIN.CheckSquadRole = function(_, _, _, _, callback) pending = callback end
+	assert(PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1) and pending)
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	local deleted
+	PLUGIN:DeleteHideout(record.id, function(ok) deleted = ok end)
+	assert(deleted == false and not record.deleting)
+	ix.squad.list.squad1.members[1] = 0
+	pending(true)
+	PLUGIN.CheckSquadRole = checkRole
+	assert(not record.propTier and not PLUGIN.capacityPurchases[record.id] and instance.operations == 0)
+	assert(owner:GetCharacter():GetMoney() == 100000)
 end)

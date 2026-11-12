@@ -13,9 +13,9 @@ five-part outlines, with parallel specialist branches allowed within them.
 
 See the [individual contact directory](contacts/README.md) for named steps, rewards, dialogue,
 and prerequisite details. The runtime definitions use sparse trees with two long branches and a short joined finale,
-while preserving equipment-tier prerequisites. Arena Master stays in Marsh beside the existing dupe.
+while preserving equipment-tier prerequisites. Arena Master stays in Swamps beside the existing dupe.
 
-## Marsh: survival and community
+## Swamps: survival and community
 
 | NPC | Identity and role | Repeatable category | Progression chapters | Small unlocks and services | Step target |
 | --- | --- | --- | --- | --- | ---: |
@@ -26,7 +26,7 @@ while preserving equipment-tier prerequisites. Arena Master stays in Marsh besid
 | Technut | Existing enthusiastic technician. | Industrial salvage deliveries | Workshop capacity → precision tools → equipment support → specialist machinery → major restoration. | Main repair service, maintenance products, tools, repair credits and discounts, equipment support. | 28 |
 | Mute | Existing withdrawn, near-silent Stalkernet operator. | Electronics deliveries | Network hardware → lost records → regional equipment → unknown connection → intrusion resolution. | PDA services, electronics, information, specialist technology. | 24 |
 | The Original | Existing self-proclaimed first stalker; retain his established voice. | Mutant specimen deliveries | Common specimens → predator adaptations → unusual mutations → early expedition evidence → old encounter. | Specimen barters, survival supplies, protection, field knowledge. | 24 |
-| Atlas | New: patient, meticulous former surveyor, concerned for missing explorers. | Sensor deployment and retrieval | Marsh landmarks → unreliable routes → Garbage approaches → missing survey teams → Pripyat route. | Route notes, authored stash clues, survey supplies, advanced assignments. | 22 |
+| Atlas | New: patient, meticulous former surveyor, concerned for missing explorers. | Sensor deployment and retrieval | Swamps landmarks → unreliable routes → Garbage approaches → missing survey teams → Pripyat route. | Route notes, authored stash clues, survey supplies, advanced assignments. | 22 |
 | Gasket | New: gruff utilities caretaker who treats the generator like an unreliable relative. | Utility supply deliveries | Generator → water infrastructure → spare supplies → emergency reserves → long-term provision. | Fuel, filters, utility barters, reserve stock; visible repairs are a separate proposed mechanic. | 22 |
 | Ballast | New: dry-humoured ferryman, patient and respectful of dangerous water. | Equipment recovery | Stranded shipments → abandoned landings → missing boat crew → disputed freight → waterside supply route. | Waterside clues, recovery supplies, cargo barters; functional crossings deferred. | 22 |
 | Arena Master | Existing relaxed arena organiser. | Arena bouts | Qualification → varied opponents → intermediate competition → veteran challenges → championship. | Combat supplies, existing equipment variants, arena recognition, milestone prizes. Optional competitive line. | 22 |

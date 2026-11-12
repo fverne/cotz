@@ -78,7 +78,7 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | LE05 | Stock for the Road | Hand-in | Supply accessible travel provisions. | Selected courier-supply reserve. |
-| LE06 | Ballast's Landing Copy | Authored | Recover a landing manifest in Marsh. | Waterside route information. |
+| LE06 | Ballast's Landing Copy | Authored | Recover a landing manifest in Swamps. | Waterside route information. |
 | LE07 | On Both Sides | Tracker | Cumulative checkpoint C2: reach the next dead-drop checkpoint. | One travel-supply sidegrade. |
 | LE08 | The Interrupted Connection | Authored | Recover a freight case on the Garbage route. | Cleaner referral. |
 

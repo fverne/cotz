@@ -7,6 +7,7 @@ function PLUGIN:RequestEntry(client, id)
 	if self.personalPurchases and self.personalPurchases[tostring(id)] then
 		return false, "Wait for the hideout purchase to finish."
 	end
+	if (self.capacityPurchases or {})[tostring(id)] then return false, "Wait for the hideout purchase to finish." end
 
 	return previousEntry(self, client, id)
 end

@@ -55,7 +55,7 @@ ix.progression.AssignActiveRequirements(traveller)
 local converted = ix.progression.GetLine(traveller, introduction)
 check(converted.requirementConversions[1].quantity == 4 and converted.requirements.value_controller == 1,
 	"a valuable from an unavailable region is converted while its old contribution stays credited")
-check(converted.requirementPolicy == 4, "policy-three saves upgrade to the protected Marsh request policy")
+check(converted.requirementPolicy == 4, "policy-three saves upgrade to the protected Swamps request policy")
 local secondStep = "cotz/town/old-timer/v3/knives/knife3"
 local returning = context.fixture.character()
 putLine(returning, introduction, {completed = true, completionRewardsPaid = true})
@@ -64,10 +64,10 @@ putLine(returning, secondStep, {active = true, requirementPolicy = 3,
 ix.progression.AssignActiveRequirements(returning)
 local localRequest = ix.progression.GetLine(returning, secondStep)
 check(localRequest.requirementConversions[1].quantity == 3 and localRequest.requirements.value_sensor_d == 1,
-	"the second Marsh milestone replaces only outstanding later-region goods")
+	"the second Swamps milestone replaces only outstanding later-region goods")
 local localItem = localRequest.requirementConversions[1].to
 check(ix.progression.definitions[secondStep].allowedRequirements[localItem],
-	"the replacement is obtainable within the protected Marsh introduction")
+	"the replacement is obtainable within the protected Swamps introduction")
 local existing = context.fixture.character()
 local brassIntro = "cotz/town/brass/v3/regular-ammo/22lr"
 putLine(existing, brassIntro, {active = true, requirementPolicy = 3,
@@ -100,4 +100,36 @@ putLine(shopper, meleeStock, {completed = true, completionRewardsPaid = true})
 check(ix.progression.GetStockBonus(shopper, "'Old Timer'", "hatchet") == 1,
 	"repeated completion cannot stack a capacity bonus")
 check(ix.townNPCs.contacts.ledger.difficultyMultiplier == 3, "Ledger retains the user's threefold effort")
-print("PASS: " .. checks .. " progression expansion persistence and stock checks")
+
+local hagglerID = "cotz/town/haggler/v3/pact-cqb/toz106"
+local customer = context.fixture.character()
+putLine(customer, hagglerID, {
+	active = true, requirementPolicy = 4, requirementModesVersion = 2,
+	requirements = {value_antique_vase = 4}, complexData = {value_antique_vase = 2},
+	selections = {{item = "value_antique_vase", mode = "any", choices = {"value_antique_vase"}}},
+	rewardCredit = {money = 150},
+})
+ix.progression.AssignActiveRequirements(customer)
+local opening = ix.progression.GetLine(customer, hagglerID)
+check(opening.requirements.value_antique_vase == 4 and opening.complexData.value_antique_vase == 2,
+	"Haggler's category refresh preserves the existing target and delivered credit")
+check(opening.requirementModesVersion == 3 and opening.rewardCredit.money == 150,
+	"Haggler's refresh retains monetary credit and records its migration")
+for _, itemID in ipairs(opening.selections[1].choices) do
+	check(itemID ~= "value_antique_vase" and ix.progression.GetRequirementKey(hagglerID, itemID, customer),
+		"ordinary supplies satisfy the retained category counter")
+end
+local choices = table.concat(opening.selections[1].choices, ",")
+ix.progression.AssignActiveRequirements(customer)
+check(table.concat(ix.progression.GetLine(customer, hagglerID).selections[1].choices, ",") == choices,
+	"Haggler's category refresh runs once")
+
+local record = ix.progression.GetCharacterProgression(customer)
+record.lines[hagglerID].selections[1].name = "Shop supplies (Marsh)"
+ix.progression.SetCharacterProgression(customer, record)
+local category = ix.progression.GetRequirementLabel(hagglerID, opening.selections[1].item, customer)
+check(category:find("Swamps", 1, true) and not category:find("Marsh", 1, true),
+	"saved category labels display the corrected region name")
+check(ix.progression.GetLine(customer, hagglerID).selections[1].name == "Shop supplies (Marsh)",
+	"displaying the corrected region does not rewrite saved assignments")
+print("PASS: " .. checks .. " progression expansion and saved-label checks")

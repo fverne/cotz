@@ -459,7 +459,7 @@ def export(root, output, preview=False):
                 ["Personal job thresholds", "Original task-completion counts divided by 16, rounded up, with a minimum of one."],
                 ["Potential raw units across all steps", "Catalog sum over all candidate possibilities and branches; not the amount one character must collect."],
                 ["Conditional probability", "Chance within the named loot table or after harvesting the named quarry. Map availability and overall encounter rates are not inferred."],
-                ["World map tier / World spawn class", "worldspawn_1/2 = Marsh, 3/4 = Waystation, 5/6 = Pripyat. Odd tables are normal world loot; even tables are hard to find. Non-world routes do not establish map availability."],
+                ["World map tier / World spawn class", "worldspawn_1/2 = Swamps, 3/4 = Waystation, 5/6 = Pripyat. Odd tables are normal world loot; even tables are hard to find. Non-world routes do not establish map availability."],
                 ["Loot map ceiling", "Highest intended world-loot map tier for this delivery. Candidates with worldspawn routes must have an active entry at or below this tier. Opening low-tier quests use tier 1."],
                 ["Initially active definition", "defaultActive in source; the character must also have access to the NPC"],
                 ["Activated by completion of (any)", "Incoming nextProgressions edges; one predecessor completion activates a step, subject to NPC access"],

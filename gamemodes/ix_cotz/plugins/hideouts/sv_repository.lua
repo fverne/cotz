@@ -134,8 +134,8 @@ function PLUGIN:DeleteHideout(id, callback)
 		return
 	end
 	local active = self.instances[record.id]
-	if self.personalPurchases and self.personalPurchases[record.id] then
-		callback(false, "Wait for the pending personal hideout purchase.")
+	if (self.personalPurchases or {})[record.id] or (self.capacityPurchases or {})[record.id] then
+		callback(false, "Wait for the pending hideout purchase.")
 		return
 	end
 	if active and (active.operations or 0) > 0 then

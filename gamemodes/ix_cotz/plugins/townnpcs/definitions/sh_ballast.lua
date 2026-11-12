@@ -16,10 +16,11 @@ PLUGIN:Register("ballast", {
 		category = "Equipment recovery",
 		description = "Equipment recovery",
 		kind = "recovery",
+		mapChoices = {medium = {"rp_garbage_cotz", "rp_waystation"}},
 		maps = {
 			easy = "rp_marsh_cs",
-			hard = "rp_garbage_cotz",
-			medium = "rp_marsh_cs",
+			hard = "rp_pripyat_remaster",
+			medium = "rp_garbage_cotz",
 		},
 	},
 	legacyJob = {
@@ -56,7 +57,7 @@ PLUGIN:Register("ballast", {
 		offerPrompt = "Do you have a recovery job?",
 		progression = "I need packing supplies for the loads coming through. It is easier to keep a load dry than explain afterwards why nobody thought of it. Bring everything on the list back here; I need the full delivery.",
 		progressionPrompt = "What needs sorting out along the freight route?",
-		work = "A marked case, brought back intact. Have a look at the return before you load yourself down. People become inventive about routes once they've got both hands full, and the inventions rarely improve my afternoon. Check the region before agreeing. I can wait while you prepare.",
+		work = "A marked case, brought back intact. Have a look at the return before you load yourself down. People become inventive about routes once they've got both hands full, and the inventions rarely improve my afternoon. Check the region before agreeing. I can wait while you prepare. Medium loads are out in Garbage or Waystation. Hard loads mean Pripyat. Either way, bring the case back here in the Swamps; I have enough missing freight without adding the person carrying it.",
 		workPrompt = "About the case I'm recovering.",
 	},
 	catalogue = {},
@@ -373,7 +374,7 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA02",
 			name = "The First Stranding",
-			briefing = "A case has been left out along the route. Its owner has explained how urgent it is at greater length than how it got there. Recover the stranded freight case from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "A case has been left out along the route. Its owner has explained how urgent it is at greater length than how it got there. Recover the stranded freight case from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "BA04",
@@ -383,7 +384,7 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA06",
 			name = "A Missing Mooring",
-			briefing = "There's a tool case left with the maintenance work. Tools are useful company, but only when somebody remembers to bring them home. Recover the landing maintenance tools from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "There's a tool case left with the maintenance work. Tools are useful company, but only when somebody remembers to bring them home. Recover the landing maintenance tools from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "BA08",
@@ -393,7 +394,7 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA10",
 			name = "The Floating Trail",
-			briefing = "There's a recording from the crew's route. I'd rather hear their own account before listening to another confident explanation. Recover the crew route cassette from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "There's a recording from the crew's route. I'd rather hear their own account before listening to another confident explanation. Recover the crew route cassette from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "BA12",
@@ -403,7 +404,7 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA14",
 			name = "The Other Landing",
-			briefing = "Ledger needs the landing record. He packs things properly and remembers where he sent them; I try to return the courtesy. Recover the landing freight manifest from the assigned search area in Marsh. Deliver it to 'Ledger' in Waystation, then come back to me in Marsh.",
+			briefing = "Ledger needs the landing record. He packs things properly and remembers where he sent them; I try to return the courtesy. Recover the landing freight manifest from the assigned search area in the Swamps. Deliver it to 'Ledger' in Waystation, then come back to me in the Swamps.",
 		},
 		{
 			id = "BA16",
@@ -413,7 +414,7 @@ PLUGIN:Register("ballast", {
 		{
 			id = "BA18",
 			name = "The Last Mooring",
-			briefing = "I want the crew's personal records kept together. Loose pages have a way of acquiring owners who remember only the convenient parts. Recover the crew personal records from the assigned search area in Marsh. Bring it back to me in Marsh.",
+			briefing = "I want the crew's personal records kept together. Loose pages have a way of acquiring owners who remember only the convenient parts. Recover the crew personal records from the assigned search area in the Swamps. Bring it back to me in the Swamps.",
 		},
 		{
 			id = "BA20",

@@ -251,7 +251,7 @@ TODO plans alone never satisfy reward coverage. Empty steps are reported without
                 "## Request specialties\n\n"
                 "At least 75% of requested units stay with the contact's core work. Only the smallest slot "
                 "of three-/four-slot requests may use related support goods. Scientist equipment research "
-                "retains its artifact requirements. Marsh openings remain fully locally obtainable.\n\n"
+                "retains its artifact requirements. Swamps openings remain fully locally obtainable.\n\n"
                 "| Contact | Specialty | Core pools | Related support pools |\n| --- | --- | --- | --- |\n"
                 + "\n".join(specialties),
                 "## Hand-in modes\n\n"

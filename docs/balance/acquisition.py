@@ -12,7 +12,7 @@ def worldspawn_scope(group):
         return None, "", "Non-world route"
     number = int(match[1])
     tier = (number + 1) // 2
-    name = {1: "Marsh", 2: "Waystation", 3: "Pripyat"}.get(tier, f"Map {tier}")
+    name = {1: "Swamps", 2: "Waystation", 3: "Pripyat"}.get(tier, f"Map {tier}")
     return tier, name, "Normal" if number % 2 else "Hard to find"
 
 

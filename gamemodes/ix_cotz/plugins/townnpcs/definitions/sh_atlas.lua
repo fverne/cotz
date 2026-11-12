@@ -323,7 +323,7 @@ PLUGIN:Register("atlas", {
 		{
 			id = "AT02",
 			name = "The First Landmark",
-			briefing = "Let's begin with a recording here in Marsh. Take the recorder to the assigned site, let it finish, and bring the results back here. Have a look at the approach while you're there. Afterwards we can compare what the instrument recorded with how you found the place.",
+			briefing = "Let's begin with a recording here in the Swamps. Take the recorder to the assigned site, let it finish, and bring the results back here. Have a look at the approach while you're there. Afterwards we can compare what the instrument recorded with how you found the place.",
 		},
 		{
 			id = "AT04",
@@ -333,7 +333,7 @@ PLUGIN:Register("atlas", {
 		{
 			id = "AT06",
 			name = "Ballast's Shortcut",
-			briefing = "Recover the waterside journal from the assigned area in Marsh and take it to Ballast, also here in Marsh. Then come back to me. He should have the record to consult himself before I ask him more questions about the approach. He already accuses me of discussing ground I haven't stood on recently enough.",
+			briefing = "Recover the waterside journal from the assigned area in the Swamps and take it to Ballast, also here in the Swamps. Then come back to me. He should have the record to consult himself before I ask him more questions about the approach. He already accuses me of discussing ground I haven't stood on recently enough.",
 		},
 		{
 			id = "AT08",
@@ -343,7 +343,7 @@ PLUGIN:Register("atlas", {
 		{
 			id = "AT10",
 			name = "An Unfinished Map",
-			briefing = "There's an audio cassette to recover in the assigned search area in Garbage. Bring it back to me in Marsh. Written notes often leave out the small decisions made along the way; I'm hoping the recording gives me something I can check against them.",
+			briefing = "There's an audio cassette to recover in the assigned search area in Garbage. Bring it back to me in the Swamps. Written notes often leave out the small decisions made along the way; I'm hoping the recording gives me something I can check against them.",
 		},
 		{
 			id = "AT12",
@@ -353,7 +353,7 @@ PLUGIN:Register("atlas", {
 		{
 			id = "AT14",
 			name = "The Wrong Coordinates",
-			briefing = "Recover the file folder from the assigned search area in Marsh and bring it here. I want to check the disputed coordinates against the source. A copied number can look completely respectable through several more copies; I'd rather start as close to the original account as we can.",
+			briefing = "Recover the file folder from the assigned search area in the Swamps and bring it here. I want to check the disputed coordinates against the source. A copied number can look completely respectable through several more copies; I'd rather start as close to the original account as we can.",
 		},
 		{
 			id = "AT16",
@@ -363,7 +363,7 @@ PLUGIN:Register("atlas", {
 		{
 			id = "AT18",
 			name = "The First Pripyat Mark",
-			briefing = "This recording is in Pripyat. Check your supplies and the assigned destination before setting out. Deploy the recorder, allow it to finish, retrieve the results, and return here to Marsh. If you need to turn back and prepare again, do so. I'd rather discuss a postponed survey than wait for someone who felt obliged to press on.",
+			briefing = "This recording is in Pripyat. Check your supplies and the assigned destination before setting out. Deploy the recorder, allow it to finish, retrieve the results, and return here to Swamps. If you need to turn back and prepare again, do so. I'd rather discuss a postponed survey than wait for someone who felt obliged to press on.",
 		},
 		{
 			id = "AT20",

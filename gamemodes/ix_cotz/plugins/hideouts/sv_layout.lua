@@ -43,7 +43,8 @@ function PLUGIN:ResetHideoutLayout(client, record)
 	if (client.cotzLayoutReset or 0) > CurTime() then return false, "Please wait before resetting again." end
 	client.cotzLayoutReset = CurTime() + RESET_COOLDOWN
 	local instance = self.instances[record.id]
-	if record.deleting or record.frozen or (self.personalPurchases or {})[record.id] or instance
+	if record.deleting or record.frozen or (self.personalPurchases or {})[record.id]
+		or (self.capacityPurchases or {})[record.id] or instance
 		and (instance.state ~= "active" or instance.saving or (instance.operations or 0) > 0) then
 		return false, "The hideout is busy."
 	end

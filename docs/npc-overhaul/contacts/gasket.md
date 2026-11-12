@@ -35,7 +35,7 @@ These conversations and their follow-up live in [sh_gasketnpc.lua](../../../game
 
 ## Contact brief
 
-- **Home and return point:** Marsh. Every hand-in and reward claim occurs here.
+- **Home and return point:** Swamps. Every hand-in and reward claim occurs here.
 - **Identity:** New: gruff utilities caretaker who treats the generator like an unreliable relative.
 - **Model:** Provisional Half-Life 2 human model in the appearance definition; final model still open.
 - **Only repeatable category:** None; ordinary offers disabled.
@@ -69,9 +69,9 @@ pass the catalogue audit; it must not be implemented as a convenient arbitrary i
 | ID | Objective | Kind | Requirement or field action | Benefit |
 | --- | --- | --- | --- | --- |
 | GK01 | Keep It Turning | Hand-in | Deliver operating fuel and utility consumables. | First fuel purchase. |
-| GK02 | The Empty Service Shed | Authored | Recover generator service notes in Marsh. | Fuel preparation supplies. |
+| GK02 | The Empty Service Shed | Authored | Recover generator service notes in Swamps. | Fuel preparation supplies. |
 | GK03 | The First Reserve | Tracker | Cumulative checkpoint C1: maintain utility-supply deliveries. | Selected fuel-stock increase. |
-| GK04 | Technut's Regulator | Authored | Recover a utility component case from a Marsh service site. | Technut referral. |
+| GK04 | Technut's Regulator | Authored | Recover a utility component case from a Swamps service site. | Technut referral. |
 
 ### Chapter 2: Water infrastructure
 
