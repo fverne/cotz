@@ -23,8 +23,9 @@ function ITEM:PopulateTooltipIndividual(tooltip)
 end
 
 ITEM.blackScreenAction = function(item, player)
-	player:AddBuff("buff_staminarestore", 50, { amount = 0.5 })
+	player:AddBuff("buff_staminarestore", 100, { amount = 0.5 })
 	player:AddBuff("buff_radiationremoval", 10, { amount = 0.15 })
+	player:AddBuff("buff_sprintboost", 25, { multiplier = 1.10 })
 end
 
 ITEM:DecideFunction()
