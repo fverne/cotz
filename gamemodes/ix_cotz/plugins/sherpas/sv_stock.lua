@@ -267,7 +267,7 @@ function ix.sherpa.ApplyAppearance(entity, appearance)
 	appearance = appearance or {}
 	entity:SetModel(appearance.model or "models/mossman.mdl")
 	entity:InitPhysObj()
-	entity:SetDisplayName(appearance.name or "Quartermaster")
+	entity:SetDisplayName(appearance.name or "Squad Vendor")
 	entity:SetDescription(appearance.description or "")
 	entity:SetIdleAnim(appearance.idleanim or "")
 	entity:SetAnimGroupId(appearance.animgroup or 0)

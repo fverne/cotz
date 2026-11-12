@@ -17,31 +17,31 @@ DIALOGUE.addTopic("TradeTopic", {
 	end,
 })
 
-DIALOGUE.addTopic("DonateTopic", {
-	statement = "I'd like to store some supplies with you.",
-	response = "Use the items on your side of the trading window to hand them over. There's no payment for a donation.",
-	options = {"BackTopic"},
-	postCallback = function(_, client, target)
-		if SERVER then ix.sherpa.Open(client, target) end
-	end,
-})
+-- DIALOGUE.addTopic("DonateTopic", {
+-- 	statement = "I'd like to store some supplies with you.",
+-- 	response = "Use the items on your side of the trading window to hand them over. There's no payment for a donation.",
+-- 	options = {"BackTopic"},
+-- 	postCallback = function(_, client, target)
+-- 		if SERVER then ix.sherpa.Open(client, target) end
+-- 	end,
+-- })
 
-DIALOGUE.addTopic("ManageTopic", {
-	statement = "I need to manage our stock.",
-	response = "Prices and stock are in the trading window. You'll need authorization to change them.",
-	options = {"BackTopic"},
-	postCallback = function(_, client, target)
-		if SERVER then ix.sherpa.Open(client, target) end
-	end,
-})
+-- DIALOGUE.addTopic("ManageTopic", {
+-- 	statement = "I need to manage our stock.",
+-- 	response = "Prices and stock are in the trading window. You'll need authorization to change them.",
+-- 	options = {"BackTopic"},
+-- 	postCallback = function(_, client, target)
+-- 		if SERVER then ix.sherpa.Open(client, target) end
+-- 	end,
+-- })
 
 DIALOGUE.addTopic("GOODBYE", {statement = "That's all for now.", response = "See you."})
 
-DIALOGUE.addTopic("StorageTopic", {
-	statement = "I'd like to access my personal storage.",
-	response = "Go ahead.",
-	options = {"BackTopic"},
-	postCallback = function(_, client, target)
-		if SERVER then ix.sherpa.OpenPersonalStorage(client, target) end
-	end,
-})
+-- DIALOGUE.addTopic("StorageTopic", {
+-- 	statement = "I'd like to access my personal storage.",
+-- 	response = "Go ahead.",
+-- 	options = {"BackTopic"},
+-- 	postCallback = function(_, client, target)
+-- 		if SERVER then ix.sherpa.OpenPersonalStorage(client, target) end
+-- 	end,
+-- })
