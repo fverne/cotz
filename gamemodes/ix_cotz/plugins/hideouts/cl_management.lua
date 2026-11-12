@@ -61,7 +61,7 @@ net.Receive("cotz/hideouts/manage", function()
 		if manage then
 			if nextPropLimit > 0 then
 				button(scroll, "Upgrade prop capacity to " .. nextPropLimit .. " (" .. ix.currency.Get(propPrice) .. ")", function()
-					ix.cotzUI.Confirm("Increase this hideout's prop capacity to " .. nextPropLimit .. " for " .. ix.currency.Get(propPrice) .. "?",
+					ix.cotzUI.Query("Increase this hideout's prop capacity to " .. nextPropLimit .. " for " .. ix.currency.Get(propPrice) .. "?",
 						"Upgrade prop capacity", "Purchase", function()
 							sendManagement(panel, id, 0, "", propTier)
 						end, "Cancel")
@@ -69,7 +69,7 @@ net.Receive("cotz/hideouts/manage", function()
 			end
 			if canReset then
 				button(scroll, "Reset hideout layout", function()
-					ix.cotzUI.Confirm("Restore containers you manage to their template positions and remove props placed by this character? Stored items and purchased upgrades are kept.",
+					ix.cotzUI.Query("Restore containers you manage to their template positions and remove props placed by this character? Stored items and purchased upgrades are kept.",
 						"Reset hideout layout", "Reset layout", function() sendManagement(panel, id, 15) end, "Cancel")
 				end)
 			end

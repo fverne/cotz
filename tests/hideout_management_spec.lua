@@ -59,7 +59,7 @@ assert(#options == 0)
 print("PASS: invitation menus show saved invitees, including offline characters, and exclude strangers")
 
 local confirmation
-ix.cotzUI.Confirm = function(message, title, label, callback) confirmation = callback end
+ix.cotzUI.Query = function(message, title, label, callback) confirmation = callback end
 panel.nextRequest = nil
 readIndex, reads = 0, {"exit", 1, "1", "Home", false, "invite", true, true, 1, 30, 40, 5000, 0}
 callbacks["cotz/hideouts/manage"]()
