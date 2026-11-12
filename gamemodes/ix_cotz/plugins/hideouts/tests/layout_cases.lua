@@ -29,6 +29,41 @@ local function furnishing(client, instance)
 	return entity
 end
 
+Test("contextual PET permits appearance and stacking tools only on authorized hideout targets", function()
+	for _, squad in ipairs({false, true}) do
+		local owner, instance, record, slot, storage = home(squad)
+		local prop = furnishing(owner, instance)
+		local shell = NewEntity(nil, instance.origin)
+		PLUGIN:TagEntity(instance, shell)
+		local guest = FeatureClient(2)
+		PLUGIN.members[guest] = record.id
+		guest.position = instance.origin
+		local vendor = PLUGIN:CreateUtility(instance, "ix_hideout_vendor", Vector(), "vendor.mdl")
+		instance.vendor = vendor
+		owner:SetLocalVar("hideout", record.id)
+		owner:SetLocalVar("hideoutBuilder", true)
+		guest:SetLocalVar("hideout", record.id)
+		guest:SetLocalVar("hideoutBuilder", false)
+		assert(PLUGIN:CharacterHasFlags(owner:GetCharacter(), "pet") == true)
+		for _, clientRealm in ipairs({false, true}) do
+			CLIENT, SERVER = clientRealm, not clientRealm
+			for _, tool in ipairs({"colour", "material", "submaterial", "stacker", "stacker_improved"}) do
+				assert(PLUGIN:CanTool(owner, {Entity = prop}, tool) == nil, tool)
+				assert(PLUGIN:CanTool(guest, {Entity = prop}, tool) == false, tool)
+				assert(PLUGIN:CanTool(owner, {Entity = shell}, tool) == false, tool)
+				assert(PLUGIN:CanTool(owner, {Entity = storage}, tool) == false, tool)
+			end
+			assert(PLUGIN:CanTool(owner, {Entity = vendor}, "stacker") == false)
+			assert(PLUGIN:CanTool(owner, {Entity = vendor}, "stacker_improved") == false)
+			assert(PLUGIN:CanTool(owner, {Entity = prop}, "duplicator") == false)
+		end
+		CLIENT, SERVER = false, true
+		instance.saving = true
+		assert(PLUGIN:CanTool(owner, {Entity = prop}, "submaterial") == false)
+		assert(PLUGIN:CanTool(owner, {Entity = prop}, "stacker") == false)
+	end
+end)
+
 Test("gear recipes accept suits, headgear and carrying gear without accepting unrelated items or nested storage", function()
 	local owner, instance, record = home()
 	assert(PLUGIN:ValidateMarkerSettings("container", "locker", "gear"))

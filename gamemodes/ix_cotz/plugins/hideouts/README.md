@@ -282,9 +282,10 @@ can be visited without members online. Unverifiable/stale membership closes priv
 disbanding retains the hideout and assets for administrator recovery.
 
 Leaders/officers receive temporary prop/physgun/tool access inside their squad hideout, without
-saved flag changes. It permits shared furnishings, supported appearance properties, colour/material,
-and furnishing removal. Template geometry, fixed utilities, unsafe tools, duplicators and arbitrary
-scripted entity spawning remain protected. Privileges end on exit or loss of rank/membership.
+saved flag changes. It permits shared furnishings, supported appearance properties, colour/material/submaterial,
+the standard and improved stacker tools on furnishing props, and furnishing removal. Stacked props use the
+same capacity, bounds, ownership and persistence checks as spawned furnishings. Template geometry, fixed utilities,
+unsafe tools, duplicators and arbitrary scripted entity spawning remain protected. Privileges end on exit or loss of rank/membership.
 
 ### Shared containers and furnishings
 

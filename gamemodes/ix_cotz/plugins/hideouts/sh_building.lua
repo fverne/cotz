@@ -87,6 +87,8 @@ function PLUGIN:CanTool(client, trace, tool)
 	if allowed == true then
 		if trace.Entity:GetClass() == "ix_hideout_marker" then return end
 		if not self.furnishingTools[tool] then return false end
+		if (tool == "stacker" or tool == "stacker_improved")
+			and trace.Entity:GetClass() == "ix_hideout_vendor" then return false end
 		if trace.Entity:GetClass() == "ix_hideout_vendor" and tool == "remover" then return false end
 		if trace.Entity:GetClass() == "ix_hideout_storage" then return false end
 		if SERVER then

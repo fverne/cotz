@@ -70,7 +70,14 @@ PLUGIN.containerRecipes = {
 	},
 }
 
-PLUGIN.furnishingTools = {colour = true, material = true, remover = true}
+PLUGIN.furnishingTools = {
+	colour = true,
+	material = true,
+	submaterial = true,
+	stacker = true,
+	stacker_improved = true,
+	remover = true,
+}
 PLUGIN.furnishingProperties = {skin = true, bodygroups = true, bonemanipulate = false}
 PLUGIN.propCapacityTiers = {
 	{limit = 30},
