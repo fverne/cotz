@@ -44,6 +44,8 @@ exposure. Condition loss is raw damage divided by the concrete cartridge's `filt
 0.2 seconds. Stronger radiation drains faster; clean areas and other damage do not drain filters.
 Protection uses the condition at the start of the hit, before filter wear and the radiation health override.
 Safe-zone damage blocking, corpse protection and `unlimitedDurability` preserve filter condition.
+Town NPC radiation protection (`buff_townradprotect`) also pauses filter wear, including its existing
+grace period after leaving the protected area. Wear resumes when the buff expires.
 Radiation no longer wears ordinary durability on filter-dependent headgear. Other headgear wear remains.
 
 Drag a matching cartridge from the main backpack onto a mask in the backpack or onto its equipped

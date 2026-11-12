@@ -152,6 +152,7 @@ end
 function ix.util.DamageGasmaskFilters(client, damageInfo)
 	if damageInfo:GetDamage() <= 0 or not damageInfo:IsDamageType(DMG_RADIATION) then return end
 	if IsValid(ix.temp.Corpses[client]) then return end
+	if ix.plugin.list["buffs"] and client:HasBuff("buff_townradprotect") then return end
 	local character = client:GetCharacter()
 	for _, item in pairs(character:GetInventory():GetItems(true)) do
 		if item.filterType and item.isGasmask and item:GetData("equip")

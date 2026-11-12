@@ -161,6 +161,7 @@ function client:IsPlayer() return true end
 function client:SteamID64() return "test-owner" end
 function client:Notify(message) self.notices[#self.notices + 1] = message end
 function client:EmitSound() end
+function client:HasBuff(name) return name == "buff_townradprotect" and self.townProtected == true end
 function client:RecalculateResistances() end
 function client:GetNWFloat() return 1 end
 function client:GetNWInt() return 0 end
@@ -260,6 +261,7 @@ check(mask:GetFilterCondition() == 0, "ordinary repair does not refill a filter"
 DMG_RADIATION, DMG_BULLET, DMG_FALL, DMG_GENERIC = 1, 2, 4, 0
 DMG_SHOCK, DMG_BURN, DMG_ACID, DMG_BLAST, DMG_DROWN = 8, 16, 32, 64, 128
 DMG_POISON, DMG_NERVEGAS, DMG_SLOWBURN, DMG_SONIC, DMG_AIRBOAT = 256, 512, 1024, 2048, 4096
+DMG_CRUSH = 8192
 dofile("gamemodes/ix_cotz/plugins/suits/sh_durability.lua")
 local function damage(amount, kind)
 	return {
@@ -272,6 +274,12 @@ end
 for _, entry in ipairs({{"civilian", 600}, {"military", 900}, {"scientific", 1200}}) do
 	local item = newMask(entry[1], 100)
 	item.data.equip = true
+	ix.plugin.list.buffs, client.townProtected = {}, true
+	local protectedWrites = item.writes
+	ix.util.DamageGasmaskFilters(client, damage(120, DMG_RADIATION))
+	check(item:GetFilterCondition() == 100 and item.writes == protectedWrites,
+		"town NPC protection prevents filter wear and saved writes: " .. entry[1])
+	ix.plugin.list.buffs, client.townProtected = nil, nil
 	for _ = 1, entry[2] * 5 - 1 do ix.util.DamageGasmaskFilters(client, damage(4, DMG_RADIATION)) end
 	check(item:GetFilterCondition() > 0, "filter lasts to its final exposure: " .. entry[1])
 	ix.util.DamageGasmaskFilters(client, damage(4, DMG_RADIATION))
@@ -609,6 +617,18 @@ radiationPlugin:EntityTakeDamage(client, info)
 check(client.receivedRadiation == 0 and mask:GetFilterCondition() == 99,
 	"fully blocked radiation still drains the installed filter")
 mask.radProt, mask.flatRadProt = 0.8, 0.02
+
+ix.plugin.list.buffs, client.townProtected = {}, true
+info.value = 120
+radiationPlugin:EntityTakeDamage(client, info)
+check(client.receivedRadiation == 0 and mask:GetFilterCondition() == 99 and info.value == 0,
+	"town NPC radiation protection also preserves filters through the radiation hook")
+client.townProtected = false
+info.value = 120
+radiationPlugin:EntityTakeDamage(client, info)
+check(client.receivedRadiation > 0 and mask:GetFilterCondition() == 98,
+	"radiation and filter wear resume when town protection expires")
+ix.plugin.list.buffs, client.townProtected = nil, nil
 
 mask.data.filterCondition = 37
 local restored = instantiate(gearBase, {filterCondition = mask.data.filterCondition, durability = 42})
