@@ -10,6 +10,7 @@ local DEFAULTS = {
 	containerOpenTime = 0,
 	containerSpawnChanceScaling = 0,
 	containerSpawnRate = 1800,
+	cotzIntro = false,
 	day = 2,
 	deathWeaponDuraDmg = 1,
 	deathWeaponWearDmg = 15,
