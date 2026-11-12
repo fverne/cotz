@@ -334,21 +334,34 @@ function ix.taskRewards.BuildJobChoices(character, npc, budget, seed, tier)
 	return result
 end
 
+local function addBonusRemainders(choices, budget)
+	for _, choice in ipairs(choices) do
+		local remainder = math.floor(budget - ix.taskRewards.ChoiceValue(choice) + CASH_ROUNDING_EPSILON)
+		if remainder > 0 then
+			choice.money = (choice.money or 0) + remainder
+			choice.label = choice.label .. " + " .. remainder .. " rubles"
+		end
+	end
+
+	return choices
+end
+
 function ix.taskRewards.BuildBonusChoices(character, npc, budget, seed)
 	local profile = townProfiles[npc]
 	if profile and not ix.progression.CanUseNPC(character, npc) then return {} end
 	if profile then
-		local choices = themedChoices(character, npc, budget, seed, MAX_PACKAGE_ITEMS,
+		local choices = themedChoices(character, npc, budget, seed, JOB_MAX_SUPPLY_ITEMS,
 			profile.bonusPackages or profile.packages)
 		if profile.bonusCash and budget >= 1 then
 			local money = math.floor(budget)
 			choices[#choices + 1] = {label = "Payment: " .. money .. " rubles", money = money, items = {}}
 		end
 
-		return choices
+		return addBonusRemainders(choices, budget)
 	end
 	local catalogue = ix.taskRewards.SupplyCatalogue(character, npc)
-	local choices = ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, true)
+	local choices = ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, true, JOB_MAX_SUPPLY_ITEMS)
+	addBonusRemainders(choices, budget)
 	local credit = math.floor(budget * CREDIT_PREMIUM)
 	if (npc == "'Technut'" or npc == "'Boss'") and credit > 0
 		and ix.progression.ServiceCreditCapacity(character, npc, "repair") >= credit then
@@ -359,7 +372,8 @@ function ix.taskRewards.BuildBonusChoices(character, npc, budget, seed)
 	return choices
 end
 
-function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, suppliesOnly)
+function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, suppliesOnly, maximumItems)
+	maximumItems = maximumItems or MAX_PACKAGE_ITEMS
 	local candidates = {}
 	for _, itemID in ipairs(catalogue
 		or ix.taskRewards.settings.profiles[npc] or ix.taskRewards.settings.profiles["NPC"]) do
@@ -388,7 +402,7 @@ function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, su
 			and math.floor(stack * ix.taskRewards.settings.ammoRewardFraction)
 			or isEquipment and 1 or math.floor(budget / ix.taskRewards.UnitValue(itemID))
 		local rewards = {}
-		for _ = 1, MAX_PACKAGE_ITEMS do
+		for _ = 1, maximumItems do
 			if quantity <= 0 then break end
 			local count = math.min(stack, quantity)
 			rewards[#rewards + 1] = {item = itemID, data = (item.quantity or item.ammoAmount)
@@ -398,7 +412,7 @@ function ix.taskRewards.BuildChoices(character, npc, budget, seed, catalogue, su
 		local units = suppliesOnly and item.isAmmo
 			and math.floor(stack * ix.taskRewards.settings.ammoRewardFraction)
 			or isEquipment and 1
-			or math.min(math.floor(budget / ix.taskRewards.UnitValue(itemID)), stack * MAX_PACKAGE_ITEMS)
+			or math.min(math.floor(budget / ix.taskRewards.UnitValue(itemID)), stack * maximumItems)
 		local remainder = math.floor(budget - units * ix.taskRewards.UnitValue(itemID))
 		local label = item.name .. " x" .. units
 		if remainder > 0 and not suppliesOnly then

@@ -60,7 +60,7 @@ ix.taskRewards.settings = {
 		["NPC"] = {"drink_bottlewater", "drink_bottletea", "medic_bandage_1"},
 	},
 
-	supplyCatalogueVersion = 5,
+	supplyCatalogueVersion = 6,
 	ammoRewardFraction = 0.5,
 	maxPackageItems = 64,
 	maxOffers = 512,

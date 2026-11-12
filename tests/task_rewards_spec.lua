@@ -669,12 +669,14 @@ check(
 )
 local cashBefore = bonusOwner.money
 check(ix.taskRewards.SelectOffer(bonusOwner, finalNPC, finalKey, 1), "supply bonus can be claimed")
-check(bonusOwner.money == cashBefore, "bonus supplies never pay cash")
+check(bonusOwner.money == cashBefore + (bonusOffer.choices[1].money or 0), "bonus supplies pay their cash remainder")
 check(not ix.taskRewards.SelectOffer(bonusOwner, finalNPC, finalKey, 1), "supply bonus cannot be replayed")
 for _, choice in ipairs(bonusOffer.choices) do
-	check(not choice.money, "bonus choices have no cash payout")
+	check(#choice.items <= 2, "standalone bonus choices contain at most two inventory items")
+	check(math.abs(ix.taskRewards.ChoiceValue(choice) - bonusOffer.budget) < 1,
+		"bonus supplies and cash spend the earned allowance to the nearest whole ruble")
 	for _, reward in ipairs(choice.items) do
-		check(reward.item ~= "bagrubles", "bonus supplies include no cash rounding remainder")
+		check(reward.item ~= "bagrubles", "bonus cash is paid directly without an inventory item")
 	end
 end
 local legacyCash = actor()
@@ -686,6 +688,7 @@ check(legacyCash.money == 0 and legacyCash:GetData("taskRewardOffers")["bonus:le
 	"legacy migration preserves the earned budget without paying cash")
 local roundedBonus = ix.taskRewards.BuildBonusChoices(owner, "'Old Timer'", 101, "bonus:rounding")
 for _, choice in ipairs(roundedBonus) do
+	check(math.abs(ix.taskRewards.ChoiceValue(choice) - 101) < 1, "uneven bonuses pay their whole-ruble remainder")
 	for _, reward in ipairs(choice.items) do
 		check(reward.item ~= "bagrubles", "uneven bonus budgets cannot add ruble items")
 	end
@@ -1275,6 +1278,53 @@ do
 	record.lines["cotz/town/old-timer/OT19"] = {completed = true}
 	record.lines["cotz/town/smartass/SM07"] = {completed = true}
 	ix.progression.SetCharacterProgression(recipient, record)
+	do
+		local choices = ix.taskRewards.BuildBonusChoices(recipient, "'Spoor'", 2475, "bonus:stones")
+		local stoneChoice = choices[1]
+		check(#stoneChoice.items == 2 and stoneChoice.money == 1925,
+			"Spoor's nine-stone allowance becomes two full stones and 1925 rubles")
+		for _, reward in ipairs(stoneChoice.items) do
+			check(reward.item == "sharpening_stone_fine" and reward.data.quantity == 3,
+				"capped Spoor stones keep all three uses")
+		end
+		check(stoneChoice.label:find("1925 rubles", 1, true), "bonus label shows its cash remainder")
+		local exact = ix.taskRewards.BuildBonusChoices(recipient, "'Spoor'", 550, "bonus:exact")[1]
+		check(#exact.items == 2 and not exact.money, "an exactly spent bonus adds no cash")
+		local partial = ix.taskRewards.BuildBonusChoices(recipient, "'Spoor'", 400, "bonus:partial")[1]
+		check(#partial.items == 2 and partial.items[2].data.quantity == 1 and partial.money == 33,
+			"partial stone stacks retain uses and pay the remaining whole rubles")
+
+		local saved = actor()
+		local oldItems = {}
+		for _ = 1, 9 do
+			oldItems[#oldItems + 1] = {item = "sharpening_stone_fine", data = {quantity = 3}}
+		end
+		saved:SetData("taskRewardOffers", {["bonus:stones"] = {npc = "'Spoor'", earned = true,
+			budget = 2475, version = 5, choices = {{label = "Nine stones", items = oldItems}}}})
+		ix.taskRewards.ReconcileCharacter(saved)
+		local migrated = saved:GetData("taskRewardOffers")["bonus:stones"]
+		check(migrated.budget == 2475 and #migrated.choices[1].items == 2
+			and migrated.choices[1].money == 1925 and saved.money == 0,
+			"saved bonuses migrate to the item cap without losing budget or paying before selection")
+		local saves = saved.saves
+		ix.taskRewards.ReconcileCharacter(saved)
+		check(saved.saves == saves, "current bonus offers do not reroll or save repeatedly")
+		check(not ix.taskRewards.SelectOffer(saved, "'Spoor'", "bonus:stones", 1, "Nine stones"),
+			"obsolete uncapped bonus labels cannot select a migrated offer")
+		saved.inventory.full = true
+		check(ix.taskRewards.SelectOffer(saved, "'Spoor'", "bonus:stones", 1),
+			"capped bonuses can be selected with a full inventory")
+		check(saved.money == 1925 and #saved.inventory.received == 0
+			and #ix.progression.GetLine(saved, "taskRewardClaims").pendingRewards == 2,
+			"full inventory queues two stones while paying the cash remainder immediately")
+		check(not ix.taskRewards.SelectOffer(saved, "'Spoor'", "bonus:stones", 1) and saved.money == 1925,
+			"repeated selection cannot pay a bonus cash remainder twice")
+		saved.inventory.full = false
+		check(ix.taskRewards.ClaimNext(saved) and ix.taskRewards.ClaimNext(saved),
+			"both capped bonus stones remain recoverable")
+		check(saved.money == 1925 and #saved.inventory.received == 2,
+			"recovering queued bonus items does not repeat the cash payout")
+	end
 	for _, contact in pairs(contacts) do
 		for _, budget in ipairs({600, 1500, 10000}) do
 			for serial = 1, 10 do
@@ -1295,6 +1345,9 @@ do
 		end
 		for _, choice in ipairs(ix.taskRewards.BuildBonusChoices(recipient, contact.name, 15000, "bonus:theme")) do
 			check(not choice.services, "new town bonuses never issue service credit")
+			check(#choice.items <= 2, "every town bonus has at most two inventory items")
+			check(math.abs(ix.taskRewards.ChoiceValue(choice) - 15000) < 1,
+				"every town bonus pays its unused allowance in whole rubles")
 			for _, reward in ipairs(choice.items) do
 				check(ix.taskRewards.IsConsumableSupply(reward.item), "bonus items are consumable")
 				local item = ix.item.list[reward.item]
@@ -1377,13 +1430,14 @@ do
 					check(#bonus.choices == 2, "cash-only contacts offer euros or dollars for the bonus")
 					for _, choice in ipairs(bonus.choices) do
 						local reward = choice.items[1]
-						check(not choice.money and #choice.items == 1,
-							"their bonus never substitutes rubles or unrelated items")
+						check(#choice.items == 1, "currency bonus keeps its single bundle")
 						check(reward.item == "value_currency_euro" or reward.item == "value_currency_dollar",
 							"bonus uses only the allowed foreign currencies")
 						local unit = reward.item == "value_currency_euro" and 52 or 38
 						check(reward.data.quantity == math.floor(bonus.budget / unit),
 							"currency quantities match the agreed conversion values")
+						check((choice.money or 0) == bonus.budget % unit,
+							"currency bonuses pay the conversion remainder directly in rubles")
 					end
 					cashOwner.inventory.full = true
 					local key = "bonus:" .. job.progressionClaim

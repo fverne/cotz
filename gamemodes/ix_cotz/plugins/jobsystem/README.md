@@ -250,8 +250,9 @@ new town reward lists. These restrictions apply to ordinary and five-task bonus 
 Every ammunition reward contains exactly half its normal pack, rounded down for an odd pack size.
 Its allowance must cover that half-pack. Larger allowances never increase ammunition quantities,
 including for bonus ammunition. Other consumables use explicit, budgeted quantities within their
-normal stack capacity; ordinary choices contain at most two inventory items. Bonus choices can
-contain larger consumable packages. No cash remainder is silently attached to an item choice.
+normal stack capacity; ordinary and bonus choices contain at most two inventory items. Bonus
+choices pay the unused allowance directly in rubles, with the amount shown in the choice label.
+Ordinary item choices do not include a cash remainder.
 
 | Contact | Regular reward highlights | Five-task bonus highlights |
 | --- | --- | --- |
@@ -285,8 +286,9 @@ chosen cash reward is deducted from the allowance. Only the remainder enters tha
 bonus. Each trader keeps a separate completion count and budget, without a time limit.
 
 Bonus choices are generated and revealed only after five completed hand-ins for that trader.
-A bonus cash choice pays the earned budget. Euro and dollar choices use their configured per-note
-values (52 and 38 rubles), rounding down with no ruble remainder. Five all-easy / all-medium /
+A bonus cash choice pays the earned budget. Item bonus choices contain at most two inventory items
+and pay the remaining allowance directly in whole rubles. Euro and dollar choices use their configured per-note
+values (52 and 38 rubles), rounding down and paying the remaining whole rubles. Five all-easy / all-medium /
 all-hard jobs at Mute, Spool or Ballast produce budgets of 2,000 / 3,500 / 5,250 rubles: a choice of
 38 / 67 / 100 euros or 52 / 92 / 138 dollars. Mixed difficulties combine the remaining allowances.
 Unaffordable bonus value carries into the next cycle; a zero-value cycle creates no empty reward.
@@ -294,7 +296,11 @@ Revealed current-version bonus choices persist without rerolling on menu reopen 
 
 ### Compatibility and ammunition barters
 
-Catalogue version 5 retires old acceptance-time reward reservations. On character load and NPC
+Catalogue version 6 also caps bonus offers at two items and adds direct ruble remainders. Unclaimed
+bonus offers rebuild with their earned budget preserved. Already-selected rewards in the durable
+item queue retain their exact items and quantities; they are not paid again or converted retroactively.
+
+The catalogue migration retires old acceptance-time reward reservations. On character load and NPC
 interaction, active jobs and saved previews lose cached choices while keeping their IDs, quantities,
 progress, cargo, claim serials and ordinary cash terms. Already-earned unclaimed offers receive the
 current eligible catalogue with their earned budget preserved. Previously paid/token-queued rewards
