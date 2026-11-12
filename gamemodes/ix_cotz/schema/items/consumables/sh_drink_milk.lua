@@ -17,7 +17,7 @@ ITEM.sound = "stalkersound/inv_drink_flask_effect.mp3"
 ITEM.img = ix.util.GetMaterial("vgui/hud/items/drink/milk.png")
 
 ITEM.blackScreenAction = function(item, player)
-	player:AddBuff("buff_staminarestore", 10, { amount = 1 })
+	player:AddBuff("buff_staminarestore", 30, { amount = 1 })
 end
 
 ITEM:DecideFunction()

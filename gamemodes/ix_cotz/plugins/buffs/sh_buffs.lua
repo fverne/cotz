@@ -235,3 +235,16 @@ PLUGIN.buffs[ "buff_lightningsprint" ] = {
 		updateSprintWeight(player)
 	end,
 }
+
+PLUGIN.buffs[ "buff_sprintboost" ] = {
+	name = "Sprint Boost",
+	desc = "You move quickly",
+	func = function( player, parameter)
+	end,
+	onbuffed = function( player, parameter )
+		updateSprintWeight(player)
+	end,
+	ondebuffed = function( player, parameter )
+		updateSprintWeight(player)
+	end,
+}

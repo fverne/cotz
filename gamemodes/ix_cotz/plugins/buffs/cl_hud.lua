@@ -5,6 +5,7 @@ local incH = ScrH() * -0.035
 local incW = ScrW() * 0.02
 
 local bleedingColor = Color(255, 220, 0)
+local sprintColor = Color(255, 255, 150, 255)
 
 function PLUGIN:OnScreenSizeChanged()
 	posH = ScrH() * 0.75
@@ -54,6 +55,15 @@ function PLUGIN:HUDPaint()
 
 	if LocalPlayer():HasBuff("buff_lightningsprint") then
 		ix.util.DrawBuffIcon("stalker/ui/stamina.png", posW+incW*3, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(255, 255, 150, 255))
+	end
+
+	if LocalPlayer():HasBuff("buff_sprintboost") then
+		if LocalPlayer():HasBuff("buff_lightningsprint") then
+			sprintColor = Color(150, 150, 150, 70)
+		else
+			sprintColor = Color(255, 255, 150, 255)
+		end
+		ix.util.DrawBuffIcon("stalker/ui/stamina.png", posW+incW, posH+incH*2, ScrW()*0.016, ScrH()*0.032, sprintColor,  math.Round(LocalPlayer():HasBuff("buff_sprintboost")[1]-CurTime()+0.5))
 	end
 
 	if LocalPlayer():HasBuff("buff_psysuppress") then
