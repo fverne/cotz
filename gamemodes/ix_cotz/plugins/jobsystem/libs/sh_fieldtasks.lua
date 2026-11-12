@@ -15,7 +15,7 @@ function ix.jobs.field.Unpack(position)
 	return Vector(position[1], position[2], position[3])
 end
 
-function ix.jobs.field.CollectPoints(names, map)
+function ix.jobs.field.CollectPoints(names, map, filter)
 	local points, visited, positions, pointNames = {}, {}, {}, {}
 	local function collect(name)
 		if visited[name] then return end
@@ -36,6 +36,7 @@ function ix.jobs.field.CollectPoints(names, map)
 		end
 		for _, row in pairs(rows or {}) do
 			local point = row[1]
+			if filter and not filter(row, source) then point = nil end
 			if isvector(point) and type(row[2]) == "string" and row[2]:find("%S") then
 				pointNames[tostring(point)] = row[2]
 			end
@@ -119,9 +120,14 @@ function ix.jobs.field.SelectRoute(settings, map, usable, destinationMap)
 	end
 end
 
+local function isOutsideEventPoint(row, source)
+	return source.plugin == "eventcontroller" and source.key == "eventpoints" and type(row[3]) == "string"
+		and (row[3]:match("_outside_easy$") ~= nil or row[3]:match("_outside_hard$") ~= nil)
+end
+
 function ix.jobs.field.SelectDefenceSite(settings, map, usable)
-	local sites = ix.jobs.field.CollectPoints(settings.sources, map)
-	local approaches = ix.jobs.field.CollectPoints(settings.attackSources, map)
+	local sites = ix.jobs.field.CollectPoints(settings.sources, map, isOutsideEventPoint)
+	local approaches = ix.jobs.field.CollectPoints(settings.attackSources, map, isOutsideEventPoint)
 	table.Shuffle(sites)
 	table.Shuffle(approaches)
 	for _, site in ipairs(sites) do

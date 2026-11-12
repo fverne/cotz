@@ -43,6 +43,10 @@ instance lifecycle, treasury and journal operations remain with hideouts. All me
 officers/leaders can price or recover stock, and only the leader withdraws squad earnings. The same
 trading window and dialogue are used. Personal storage rooms instantiate no vendor.
 
+Parent initialization resolves the registered entity definition through `scripted_ents.GetStored`.
+Helix plugin registration can occur after GMod populates its separate baseclass cache, so initialization
+must not depend on that cache containing these plugin entities.
+
 Squad vendor appearance is saved separately from its local movement transform. It survives unloading,
 reallocation and position reset. An administrator can use **Edit Vendor** without joining the squad;
 this does not grant furnishing/tool privileges or player access to its containers.
@@ -73,6 +77,8 @@ migration; do not reset them or infer missing condition/quantity data. New donat
 From the repository root:
 
     python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
+    luatex --luaonly tests/hideout_vendor_spec.lua
+    luatex --luaonly tests/vendor_dialogue_spec.lua
     luatex --luaonly tests/vendor_stock_spec.lua
     luatex --luaonly tests/helix_vendor_trade_spec.lua
     luatex --luaonly tests/dialogue_order_spec.lua

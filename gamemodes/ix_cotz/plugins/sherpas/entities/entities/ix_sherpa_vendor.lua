@@ -9,7 +9,8 @@ ENT.bNoPersist = true
 ENT.AutomaticFrameAdvance = true
 
 function ENT:Initialize()
-	baseclass.Get("ix_vendor_adv").Initialize(self)
+	-- Resolve the registered definition; Helix plugin entities can miss GMod's baseclass cache.
+	scripted_ents.GetStored("ix_vendor_adv").t.Initialize(self)
 	if SERVER then
 		self:SetSherpa(true)
 		self:SetDisplayName("Quartermaster")

@@ -82,6 +82,10 @@ function ENT:GetAxisAlignedBoundingBox()
 end
 
 function ENT:CanAccess(client)
+	if ix.sherpa and ix.sherpa.IsVendor(self) then
+		return self:CanTalkTo(client)
+	end
+
 	return self:CanTalkTo(client) and ix.progression.CanUseNPC(client:GetCharacter(), self:GetDisplayName())
 end
 

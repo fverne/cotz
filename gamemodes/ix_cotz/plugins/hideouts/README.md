@@ -528,6 +528,7 @@ From the repository root:
     python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
     luatex --luaonly tests/fts_hideouts_spec.lua
     luatex --luaonly tests/hideout_management_spec.lua
+    luatex --luaonly tests/hideout_vendor_spec.lua
 
 This syntax-checks changed GLua and runs real server methods against mocked engine boundaries
 using the system Lua shared library. Feature cases use the installed query builder and real SQLite
@@ -544,6 +545,8 @@ transactions, including full inventories and database failures.
 Marker cases cover duplicator settings, exact transforms and spawn facings, replacement of markers
 in the full paste lifecycle, slot identity across cold reloads, recipe/duplicate/bounds validation,
 administrator editor sessions, tool permissions and marker-based vendor reset.
+The vendor initialization spec loads the real hideout/Sherpa/advanced entity chain on both realms
+with an empty baseclass cache, covering parent initialization, movement and delayed animation setup.
 
 A live server smoke test is still required for actual dupe coordinates, map
 geometry/PVS, model bounds, storage UI, database adapter behavior, and revive.

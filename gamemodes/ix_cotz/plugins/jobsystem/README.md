@@ -104,7 +104,7 @@ not necessarily the final preview payment. Preserve field names and units when t
 
 Existing map points are the default: recovery uses stash/event points, sensors anomaly/radiation
 points, triangulation event/stash points, dead drops stash pickup and stash/event destinations, and
-research defence event points. Optional authored town points are added to these sources. No manual
+research defence outside event points. Optional authored town points are added for the other task types. No manual
 point placement is needed when existing providers contain suitable points for the destination map.
 
 Town easy item-return definitions set `requiredPool` in addition to their existing `requiredItem`
@@ -437,14 +437,18 @@ the task is accepted. Losing the parcel reopens pickup on that same route. Compl
 delivery remains complete after the parcel is consumed or the character reconnects.
 
 Research defence configures sampler `sources` and `attackSources` separately. Both
-default to `rf`, reusing event points. A site needs at least one approach 512–4,096
+default to `rf`, reusing event points. Both sampler sites and attacker approaches require
+eventcontroller points tagged with a regional `_outside_easy` or `_outside_hard` suffix.
+Building, underground, sniper, untagged and authored town points are excluded, including
+when collecting from FTS presets. Existing accepted assignments keep their saved locations.
+A site needs at least one approach 512–4,096
 units away and within 256 vertical units. Up to eight approaches are saved. Attackers use
 the event controller's shared placement service around those approaches: connected ground
 nodes within its 750-unit spawn radius are preferred, with the same validated floor/clearance
 fallback when graph candidates are unavailable or blocked. The validated position is used
 directly without another `DropToFloor`. Positions occupied by nearby players are skipped;
 unsafe or population-limited spawns remain pending. Existing point data cannot guarantee navigable NPC paths;
-verify representative sites in-game, especially buildings and underground areas.
+verify representative outdoor sites in-game.
 Wave class lists and counts, health, recording duration, disruption, radius and retry
 parameters live in `field.settings.defence`. Wave compositions are rolled once on
 acceptance and saved. An unavailable population manager or missing approaches hides

@@ -20,11 +20,14 @@ if SERVER then
 
 	local function accessibleTopic(client, treeID, topicID, target)
 		local character = client:GetCharacter()
+		if not character or not IsValid(target) then
+			return
+		end
+		local isSherpa = ix.sherpa and ix.sherpa.IsVendor(target)
+		local dialogueID = isSherpa and "sherpa" or target.dialogueid
 		if
-			not character
-			or not IsValid(target)
-			or target:GetClass() ~= "ix_vendor_adv"
-			or target.dialogueid ~= treeID
+			(target:GetClass() ~= "ix_vendor_adv" and not isSherpa)
+			or dialogueID ~= treeID
 			or client:GetPos():DistToSqr(target:GetPos()) > 192 * 192
 			or not target:CanAccess(client)
 		then
@@ -93,6 +96,7 @@ function playerMeta:dialogue(id, target)
 	end
 	if
 		target:GetClass() == "ix_vendor_adv"
+		and not (ix.sherpa and ix.sherpa.IsVendor(target))
 		and not ix.progression.CanUseNPC(self:GetCharacter(), target:GetDisplayName())
 	then
 		id = target:GetDisplayName() == "'Mute'" and "mutelocked" or "progressionlocked"

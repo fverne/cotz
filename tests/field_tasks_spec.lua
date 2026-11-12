@@ -131,7 +131,10 @@ dofile(base .. "definitions/sh_fieldjobs.lua")
 local function points()
 	ix.plugin.list = {
 		hidestashspawner = {stashspawnpoints = {[map] = {{Vector(1000, 0, 0), "stash"}}}},
-		eventcontroller = {eventpoints = {[map] = {{Vector(1000, 0, 0), "Test event area"}, {Vector(2000, 0, 0), "Test event area"}}}},
+		eventcontroller = {eventpoints = {[map] = {
+			{Vector(1000, 0, 0), "Test event area", "swamps_outside_easy"},
+			{Vector(2000, 0, 0), "Test event area", "swamps_outside_hard"},
+		}}},
 		radiationcontroller = {radiationpoints = {[map] = {{Vector(3000, 0, 0), "Test event area"}}}},
 		anomalycontroller = {anomalypoints = {[map] = {{Vector(4000, 0, 0), "Test event area"}}}},
 	}
@@ -139,7 +142,8 @@ end
 points()
 local originalProviders = ix.plugin.list
 ix.plugin.list = {eventcontroller = {eventpoints = {[map] = {
-	{Vector(1000, 0, 0), "Test event area"}, {Vector(4000, 0, 0), "Test event area"},
+	{Vector(1000, 0, 0), "Test event area", "swamps_outside_easy"},
+	{Vector(4000, 0, 0), "Test event area", "swamps_outside_hard"},
 }}}}
 for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop"}) do
 	check(ix.jobs.field.IsAvailable(ix.jobs.list["field_" .. kind .. "_easy"]),
@@ -147,9 +151,44 @@ for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop"}) do
 end
 local site, approaches = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map)
 check(site and #approaches > 0, "event points provide defence sites and approaches")
+for _, prefix in ipairs({"swamps", "garbage", "waystation", "pripyat"}) do
+	local rows = {
+		{Vector(500, 0, 0), "Building", prefix .. "_building"},
+		{Vector(750, 0, 0), "Underground", prefix .. "_underground"},
+		{Vector(1000, 0, 0), "Outside easy", prefix .. "_outside_easy"},
+		{Vector(2000, 0, 0), "Outside hard", prefix .. "_outside_hard"},
+		{Vector(2500, 0, 0), "Sniper spot", prefix .. "_sniperspot"},
+		{Vector(3000, 0, 0), "Untagged"},
+		{Vector(3500, 0, 0), "Unknown", prefix .. "_outside_easy_extra"},
+	}
+	ix.plugin.list.eventcontroller.eventpoints[map] = rows
+	local selected, selectedApproaches = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map)
+	check(selected and (selected.x == 1000 or selected.x == 2000), prefix .. " sampler uses outside points only")
+	check(#selectedApproaches == 1 and selectedApproaches[1][1] == (selected.x == 1000 and 2000 or 1000),
+		prefix .. " attackers use outside points only")
+	check(#ix.jobs.field.CollectPoints({"event"}, map) == #rows, "other field tasks retain every event category")
+	local hardSite = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map,
+		function(point) return point.x == 2000 end)
+	check(hardSite and hardSite.x == 2000, "outside hard also provides a sampler site")
+	rows[4][3] = prefix .. "_building"
+	check(ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map) == nil,
+		"an indoor approach cannot enable a lone outdoor site")
+end
+ix.jobs.field.sources.testAuthored = {plugin = "townnpcs", key = "defencePoints"}
+ix.plugin.list.townnpcs = {defencePoints = {[map] = {
+	{Vector(1000, 0, 0), "Authored site", "swamps_outside_easy"},
+	{Vector(2000, 0, 0), "Authored approach", "swamps_outside_hard"},
+}}}
+local authoredSettings = copy(ix.jobs.field.settings.defence)
+authoredSettings.sources, authoredSettings.attackSources = {"testAuthored"}, {"testAuthored"}
+check(ix.jobs.field.SelectDefenceSite(authoredSettings, map) == nil, "defence requires eventcontroller points")
+ix.jobs.field.sources.testAuthored = nil
 ix.plugin.list = originalProviders
 local presetMap = "preset_destination"
-local presetRows = {{Vector(1000, 0, 0), "Test event area"}, {Vector(4000, 0, 0), "Test event area"}}
+local presetRows = {
+	{Vector(1000, 0, 0), "Test event area", "swamps_outside_easy"},
+	{Vector(4000, 0, 0), "Test event area", "swamps_outside_hard"},
+}
 ix.plugin.list.firsttimesetup = {map_presets = {[presetMap] = {
 	plugindata = {eventcontroller = presetRows},
 }}}
@@ -160,6 +199,10 @@ check(
 	ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, presetMap) ~= nil,
 	"FTS enables destination defence"
 )
+presetRows[2][3] = "swamps_building"
+check(ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, presetMap) == nil,
+	"FTS defence applies the same outside-only filter")
+presetRows[2][3] = "swamps_outside_hard"
 originalProviders.eventcontroller.eventpoints[presetMap] = {}
 check(#ix.jobs.field.CollectPoints({"event"}, presetMap) == 0, "explicitly empty saved map overrides FTS")
 originalProviders.eventcontroller.eventpoints[presetMap] = {{Vector(7000, 0, 0), "Test event area"}}
@@ -696,6 +739,13 @@ ix.eventController = {
 	end,
 }
 check(ix.jobs.field.IsAvailable(ix.jobs.list.field_defence_easy), "defence uses existing sites and attack points")
+local defenceRows = ix.plugin.list.eventcontroller.eventpoints[map]
+ix.plugin.list.eventcontroller.eventpoints[map] = {
+	{Vector(1000, 0, 0), "Building", "swamps_building"},
+	{Vector(2000, 0, 0), "Underground", "swamps_underground"},
+}
+check(not ix.jobs.field.IsAvailable(ix.jobs.list.field_defence_easy), "indoor-only points hide defence offers")
+ix.plugin.list.eventcontroller.eventpoints[map] = defenceRows
 local originalDefenceSettings = copy(ix.jobs.field.settings.defence)
 ix.jobs.field.settings.defence.duration, ix.jobs.field.settings.defence.waveInterval = 4, 0
 ix.jobs.field.settings.defence.waves[1] = {

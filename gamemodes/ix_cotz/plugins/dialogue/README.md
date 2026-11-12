@@ -53,6 +53,10 @@ Conversation definitions live in dialogue/sh_<dialogueID>.lua. The existing load
 these shared files and registers their topics on both realms. Vendor templates bind to them
 through dialogueid.
 
+Server callbacks accept advanced vendors and Sherpa-derived vendors, including squad quartermasters.
+Sherpas use the `sherpa` tree even when a legacy advanced vendor retains another template dialogue ID.
+Character, distance, tree and vendor access checks still apply; ordinary town contacts retain progression locks.
+
 Technut opens the combined [gear and suit customization window](../gearcustomization/README.md)
 from his root menu after the painting progression unlock. Each confirmed gear or suit change costs
 100 rubles. The server checks the unlock when opening, quoting and confirming customization.
@@ -97,6 +101,7 @@ to silent characters. Personality and conversation text remain with the individu
 From the repository root:
 
     luatex --luaonly tests/dialogue_order_spec.lua
+    luatex --luaonly tests/vendor_dialogue_spec.lua
     luatex --luaonly tests/town_dialogue_menus_spec.lua
     luatex --luaonly tests/task_rewards_spec.lua
     luatex --luaonly tests/progression_spec.lua
