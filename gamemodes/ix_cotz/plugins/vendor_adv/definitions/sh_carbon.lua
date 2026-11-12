@@ -2,7 +2,7 @@ ix.npctemplates.templates["carbonnpc"] = {
 	name = "'Carbon'",
 	description = "A persistent archivist who checks the dates on every page before filing it.",
 
-	model = "models/Humans/Group01/male_05.mdl",
+	model = "models/legends/kruglov.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

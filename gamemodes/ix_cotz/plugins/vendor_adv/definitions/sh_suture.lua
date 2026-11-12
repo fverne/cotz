@@ -2,7 +2,7 @@ ix.npctemplates.templates["suturenpc"] = {
 	name = "'Suture'",
 	description = "An exacting outfitter whose attention keeps returning to worn straps and torn seams.",
 
-	model = "models/Humans/Group01/male_06.mdl",
+	model = "models/legends/mark.mdl",
 	skin = 0,
 	bodygroups = {},
 	idleanim = "",

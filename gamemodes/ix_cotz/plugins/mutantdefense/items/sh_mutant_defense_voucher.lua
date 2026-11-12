@@ -1,8 +1,8 @@
-ITEM.name = "Restock Voucher"
-ITEM.description = "A voucher earned by defending against mutants. Hand it to an NPC vendor to replenish your unlocked, normally replenishing goods by half their maximum stock."
-ITEM.longdesc = "Rows of small boxes divide the printed slip beneath a heavy stamp. The voucher covers one restock with a trader of your choice; quantities above the trader's stock limit are lost, while credit for partial units carries over."
+ITEM.name = "Trader Supply"
+ITEM.description = "A box with supplies."
+ITEM.longdesc = "This box contains various supplies that all traders would find useful. Hand it over to a trader to partially restock them."
 
-ITEM.model = "models/props_lab/clipboard.mdl"
+ITEM.model = "models/lostsignalproject/items/quest/safe_container.mdl"
 
 ITEM.price = 0
 ITEM.width = 1
