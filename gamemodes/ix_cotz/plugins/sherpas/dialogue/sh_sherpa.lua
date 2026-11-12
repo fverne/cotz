@@ -4,7 +4,13 @@ for _, id in ipairs({"GREETING", "BackTopic"}) do
 	DIALOGUE.addTopic(id, {
 		statement = "Let's talk about something else.",
 		response = "Need something from stock, or dropping something off?",
-		options = {"TradeTopic", "StorageTopic", "DonateTopic", "ManageTopic", "GOODBYE"},
+		options = {
+			"TradeTopic", 
+		-- "StorageTopic", 
+		-- "DonateTopic", 
+		-- "ManageTopic", 
+			"GOODBYE"
+		},
 	})
 end
 
