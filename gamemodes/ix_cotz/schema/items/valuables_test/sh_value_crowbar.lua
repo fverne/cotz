@@ -6,8 +6,8 @@ ITEM.valuableCategory = "workshop tools"
 ITEM.model = "models/lostsignalproject/items/misc/crowbar.mdl"
 
 ITEM.price = 350
-ITEM.width = 3
-ITEM.height = 1
+ITEM.width = 1
+ITEM.height = 3
 ITEM.flatweight = 1.5
 
 ITEM.exRender = true
