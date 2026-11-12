@@ -35,6 +35,29 @@ local function paySelected(character, key, offers)
 	local offer = offers[key]
 	if not offer or not offer.earned or not offer.selected then return false end
 	local choice = offer.choices[offer.selected]
+	if choice.partialCredit then
+		local service = choice.services[1]
+		local amount = math.min(service.amount,
+			ix.progression.ServiceCreditCapacity(character, service.npc, service.service))
+		if amount <= 0 then
+			character:GetPlayer():Notify("Spend some service credit first. Your remaining reward is saved.")
+
+			return false
+		end
+		if not ix.progression.AddServiceCredit(character, service.npc, service.service, amount) then return false end
+		local remaining = service.amount - amount
+		if remaining > 0 then
+			-- A future catalogue migration must only rebuild the unpaid remainder.
+			offer.budget = remaining
+			offer.choices[offer.selected] = ix.taskRewards.BuildServiceChoice(service.npc, service.service, remaining)
+		else
+			offers[key] = nil
+		end
+		saveOffers(character, offers)
+		character:Save()
+
+		return remaining == 0
+	end
 	if key:match("^bonus:") then
 		for _, reward in ipairs(choice.items) do
 			if reward.item == "bagrubles" then return false end
@@ -42,7 +65,7 @@ local function paySelected(character, key, offers)
 	end
 	for _, service in ipairs(choice.services or {}) do
 		if ix.progression.ServiceCreditCapacity(character, service.npc, service.service) < service.amount then
-			character:GetPlayer():Notify("Repair credit is full. Choose another bonus reward or spend credit first.")
+			character:GetPlayer():Notify("Service credit is full. Choose another bonus reward or spend credit first.")
 
 			return false
 		end
@@ -298,7 +321,8 @@ function ix.taskRewards.ReconcileCharacter(character)
 		if offer.earned and offer.version ~= version and (key:match("^job:") or key:match("^bonus:")) then
 			local budget = offer.budget or ix.taskRewards.settings.jobMinSupplyBudget
 			for _, choice in ipairs(offer.choices or {}) do
-				budget = math.max(budget, ix.taskRewards.ChoiceValue(choice))
+				-- Legacy service choices can include a face-value premium over their saved allowance.
+				if not choice.services then budget = math.max(budget, ix.taskRewards.ChoiceValue(choice)) end
 			end
 			offer.budget, offer.version, offer.selected, offer.retrySelected = budget, version, nil, nil
 			offer.choices = key:match("^bonus:")

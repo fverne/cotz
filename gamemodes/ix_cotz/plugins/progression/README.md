@@ -131,6 +131,12 @@ briefings and completions live in their owning contact definitions; the shared e
 individual contact prose. Run `luatex --luaonly tests/progression_dialogue_spec.lua` for coverage and
 `luatex --luaonly tests/progression_spec.lua` for both notification paths.
 
+Technut and Jitters accept provider-bound repeatable-job credits for repair and treatment respectively.
+Their contact reward profiles opt into credit use; other town contacts retain disabled credit balances.
+The existing service quotes and confirmations spend credit before charging cash. Balance caps remain
+20,000 repair / 5,000 treatment credits; jobsystem retains excess reward value as a recoverable offer.
+No new finite-progression credit rewards are introduced.
+
 ## Runtime and checks
 
 PlayerLoadedCharacter initializes progression storage. Town state initializes through its owning

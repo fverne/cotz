@@ -288,13 +288,28 @@ function ix.taskRewards.ChoiceValue(choice)
 	for _, reward in ipairs(choice.items or {}) do
 		value = value + ix.taskRewards.ExpectedValue(reward.item, reward.data)
 	end
+	for _, service in ipairs(choice.services or {}) do value = value + service.amount end
 
 	return value
+end
+
+function ix.taskRewards.BuildServiceChoice(npc, service, amount)
+	return {
+		label = string.format("%s %s credit: %d rubles", npc, service, amount),
+		items = {},
+		services = {{npc = npc, service = service, amount = amount}},
+		partialCredit = true,
+	}
 end
 
 function ix.taskRewards.BuildJobChoices(character, npc, budget, seed, tier)
 	local profile = townProfiles[npc]
 	if profile and not ix.progression.CanUseNPC(character, npc) then return {} end
+	if profile and profile.service then
+		local amount = math.min(math.floor(budget), profile.creditPerTier * math.Clamp(tier or 1, 1, 3))
+
+		return {ix.taskRewards.BuildServiceChoice(npc, profile.service, amount)}
+	end
 	if profile and profile.cashPerTier then
 		local money = profile.cashPerTier * math.Clamp(tier or 1, 1, 3)
 
@@ -349,6 +364,9 @@ end
 function ix.taskRewards.BuildBonusChoices(character, npc, budget, seed)
 	local profile = townProfiles[npc]
 	if profile and not ix.progression.CanUseNPC(character, npc) then return {} end
+	if profile and profile.service then
+		return {ix.taskRewards.BuildServiceChoice(npc, profile.service, math.floor(budget))}
+	end
 	if profile then
 		local choices = themedChoices(character, npc, budget, seed, JOB_MAX_SUPPLY_ITEMS,
 			profile.bonusPackages or profile.packages)
@@ -546,7 +564,13 @@ end
 
 function ix.taskRewards.Validate()
 	for npc, profile in pairs(townProfiles) do
-		assert(profile.cashPerTier or #profile.packages > 0, "Empty reward profile: " .. npc)
+		assert(profile.cashPerTier or profile.service or #profile.packages > 0, "Empty reward profile: " .. npc)
+		if profile.service then
+			assert((npc == "'Technut'" and profile.service == "repair")
+				or (npc == "'Jitters'" and profile.service == "treatment"), "Unsupported reward service: " .. npc)
+			assert(type(profile.creditPerTier) == "number" and profile.creditPerTier > 0
+				and profile.creditPerTier % 1 == 0, "Invalid regular service credit: " .. npc)
+		end
 		assert(#profile.packages <= CHOICE_COUNT, "Too many reward packages: " .. npc)
 		for _, packages in ipairs({profile.packages, profile.bonusPackages or profile.packages}) do
 			for _, package in ipairs(packages) do

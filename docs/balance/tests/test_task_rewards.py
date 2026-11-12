@@ -130,9 +130,17 @@ class TaskRewardAuditTests(unittest.TestCase):
             contacts += 1
             profile = profiles[0]
             cash_only = path.stem in {'sh_mute', 'sh_spool', 'sh_ballast'}
-            self.assertEqual(len(profile['packages']), 0 if cash_only else 3, path)
+            service = {'sh_technut': 'repair', 'sh_jitters': 'treatment'}.get(path.stem)
+            self.assertEqual(len(profile['packages']), 0 if cash_only or service else 3, path)
             if cash_only:
                 self.assertEqual(profile['cashPerTier'], 200, path)
+            if service:
+                self.assertEqual(profile['service'], service, path)
+                self.assertEqual(profile['creditPerTier'], 200, path)
+                self.assertNotIn('bonusCash', profile, path)
+                self.assertNotIn('bonusPackages', profile, path)
+            else:
+                self.assertNotIn('service', profile, path)
             self.assertNotIn('bonusItems', profile, path)
             self.assertNotIn('bonusService', profile, path)
             for packages in (profile['packages'], profile.get('bonusPackages', profile['packages'])):

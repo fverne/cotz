@@ -416,4 +416,37 @@ check(serviceTopic == "ConfirmRepair" and serviceData.cost == 200,
 	"service selection replaces a forged client price with the authoritative fee")
 check(ix.progression.ResolveServiceOffer(first.client, cleaner, "storage", {option = "use"}) == "BackTopic",
 	"retired storage is unavailable through forged service-menu requests")
+do
+	local contacts = {}
+	PLUGIN = {Register = function(_, _, contact) contacts[contact.name] = contact end}
+	dofile("gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_technut.lua")
+	dofile("gamemodes/ix_cotz/plugins/townnpcs/definitions/sh_jitters.lua")
+	PLUGIN = nil
+	contacts["'Boss'"] = {rewards = {packages = {}}}
+	local previousTown = ix.townNPCs
+	ix.townNPCs = {byName = contacts}
+	local owner = actor()
+	repairItem(owner, 1, true)
+	check(ix.progression.AddServiceCredit(owner, "'Technut'", "repair", 200),
+		"town Technut accepts repair credits")
+	check(ix.progression.AddServiceCredit(owner, "'Jitters'", "treatment", 200),
+		"town Jitters accepts treatment credits")
+	check(not ix.progression.AddServiceCredit(owner, "'Boss'", "repair", 200),
+		"other town contacts retain their disabled credit policy")
+	local repair = ix.progression.BuildServiceOffer(owner.client, tech, "repair", {itemid = 1})
+	check(repair.credit == 200 and repair.cost == 200, "town repair quotes spend only Technut's credit")
+	ix.progression.ConfirmService({}, owner.client, tech, "repair", {itemid = 1})
+	check(ix.progression.ExecuteService(owner.client, tech, "repair", true), "town repair spends reward credit")
+	check(ix.progression.GetServiceCredit(owner, "'Technut'", "repair") == 0
+		and ix.progression.GetServiceCredit(owner, "'Jitters'", "treatment") == 200,
+		"repair leaves the separate clinic credit intact")
+	local treatment = ix.progression.BuildServiceOffer(owner.client, doctor, "treatment", {type = "all"})
+	check(treatment.credit == 200 and treatment.cost == 60, "town treatment quotes apply Jitters's credit")
+	ix.progression.ConfirmService({}, owner.client, doctor, "treatment", {type = "all"})
+	check(ix.progression.ExecuteService(owner.client, doctor, "treatment", true), "town treatment spends reward credit")
+	check(ix.progression.GetServiceCredit(owner, "'Jitters'", "treatment") == 0
+		and owner.client.health == 125 and owner.client.radiation == 0 and owner.client.psyHealth == 100,
+		"town treatment consumes its credit and restores the patient")
+	ix.townNPCs = previousTown
+end
 print(string.format("PASS: %d progression service checks", checks))

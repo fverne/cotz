@@ -244,8 +244,9 @@ block new tasks at every contact until collected, since their original issuer ca
 Town reward items must be consumable or have limited uses. Ammunition, medicine, food, drinks,
 charcoal, sharpening stones and stash digging tools qualify. Hidestash spawners are eligible because
 their stash-generation action is spent once. Euro Notes and Dollar Notes are the only valuable-item
-exceptions. Reusable equipment, attachments, other valuables and service credit are excluded from
-new town reward lists. These restrictions apply to ordinary and five-task bonus choices.
+exceptions. Reusable equipment, attachments and other valuables are excluded from new town reward lists.
+Technut and Jitters instead issue provider-bound repair and treatment credits for both regular
+and five-task rewards. These restrictions apply to ordinary and five-task bonus choices.
 
 Every ammunition reward contains exactly half its normal pack, rounded down for an odd pack size.
 Its allowance must cover that half-pack. Larger allowances never increase ammunition quantities,
@@ -260,14 +261,17 @@ Ordinary item choices do not include a cash remainder.
 | Cleaner | Cutlery, stash cleaning kits, canned beans | Lost Note, Lost Rookie PDA, Lost Veteran PDA |
 | Spicy Lemon | Cutlery, canned chili beans/olives/corn, charcoal | Canned supplies, charcoal, or cash |
 | Mute, Spool, Ballast | Cash only: 200 / 400 / 600 rubles for easy / medium / hard | Euro Notes or Dollar Notes |
-| Haggler, Smartass, Technut, Latch, Brass, Boss | Dedicated consumable/currency packages | Dedicated packages or cash |
+| Technut | Repair credit: 200 / 400 / 600 rubles | Remaining allowance as repair credit |
+| Jitters | Treatment credit: 200 / 400 / 600 rubles | Remaining allowance as treatment credit |
+| Haggler, Smartass, Latch, Brass, Boss | Dedicated consumable/currency packages | Dedicated packages or cash |
 | Other contacts | Dedicated food, medical, ammunition and other consumable packages | Defined consumable/currency packages or stash information |
 
 Old Timer's only reward ammunition is .410. Cleaner has no ordinary stash-spawner reward.
 The three stash spawners generate caches in Swamps, Waystation and Pripyat respectively.
 Contact definitions list every candidate; `packages` configures ordinary choices, `bonusPackages`
 configures separate bonus choices (defaulting to ordinary packages), `cashPerTier` replaces ordinary
-items with cash, and `bonusCash` adds a cash alternative to the bonus choices.
+items with cash, and `bonusCash` adds a cash alternative to the bonus choices. A `service` profile replaces both
+item pools with that service's credits; `creditPerTier` sets the regular face value per difficulty tier.
 
 ### Cash and five-task bonuses
 
@@ -294,9 +298,25 @@ all-hard jobs at Mute, Spool or Ballast produce budgets of 2,000 / 3,500 / 5,250
 Unaffordable bonus value carries into the next cycle; a zero-value cycle creates no empty reward.
 Revealed current-version bonus choices persist without rerolling on menu reopen or reconnect.
 
+Technut's repair credits and Jitters's treatment credits replace their item and extra-cash reward
+choices. Regular rewards are 200 / 400 / 600 credits; one credit covers one ruble of that provider's
+service fee. Their item-hand-in allowances leave 400 / 600 / 900 credits per job for the bonus,
+so five jobs of one difficulty yield 2,000 / 3,000 / 4,500 bonus credits. Normal cash and reputation
+remain separate. There is no credit premium or ruble remainder for these profiles.
+
+Credit balances retain the existing caps: 20,000 for Technut's repairs and 5,000 for Jitters's treatment.
+A claim fills available balance space and saves any excess as a pending reward. Spend credits and
+return to Task rewards to collect the remainder; this also supports bonuses larger than the balance
+cap. Pending credit blocks new work at that contact. Inventory space is irrelevant, and retries
+cannot pay ordinary cash, reputation or completion progress again.
+
 ### Compatibility and ammunition barters
 
-Catalogue version 6 also caps bonus offers at two items and adds direct ruble remainders. Unclaimed
+Catalogue version 7 replaces unpaid Technut/Jitters reward offers with service credit, preserving
+assignment identity, progress, earned budgets and already queued item claims. Partially collected
+credit offers save only their unpaid remainder for subsequent migrations.
+
+Catalogue version 6 caps bonus offers at two items and adds direct ruble remainders. Unclaimed
 bonus offers rebuild with their earned budget preserved. Already-selected rewards in the durable
 item queue retain their exact items and quantities; they are not paid again or converted retroactively.
 

@@ -40,27 +40,9 @@ PLUGIN:Register("technut", {
 	},
 	supplies = {"suit_anorak", "mask_cloth"},
 	rewards = {
-		bonusCash = true,
-		bonusPackages = {
-			{
-				items = {"sharpening_stone_fine"},
-				label = "Fine edge upkeep",
-			},
-		},
-		packages = {
-			{
-				items = {"sharpening_stone"},
-				label = "Edge upkeep",
-			},
-			{
-				items = {"hidestasher_cleaningkit"},
-				label = "Digging tools",
-			},
-			{
-				items = {"food_can_beans"},
-				label = "Canned provisions",
-			},
-		},
+		service = "repair",
+		creditPerTier = 300,
+		packages = {},
 	},
 	dialogue = {
 		completedGreeting = "Buddy! Come and have a look, if you've got a minute. No, you don't have to fetch anything first.",

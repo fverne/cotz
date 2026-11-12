@@ -83,8 +83,9 @@ conversion menu and per-suit non-looted finishes. Intern owns artifact detectors
 HP/AP barter only, gated by regular/HP completions respectively. Starter stock is explicitly declared.
 Ballast, Cleaner and Ledger buy all at 0.3 and provide twelve local hideout improvement stages.
 
-Bank/Computer progression access, town discounts and credit are removed; ordinary paid repair/treatment
-remain. Tools remain job rewards, music and three unassigned guns are deferred. Spicy Lemon's jobs
+Bank/Computer progression access, town discounts and progression credit are removed; ordinary paid
+repair/treatment remain. Technut and Jitters award service credits through repeatable jobs as described
+below. Tools remain job rewards, music and three unassigned guns are deferred. Spicy Lemon's jobs
 cover all canned foods; meals/meat have no NPC sale routes. Existing inventories and paid hideout assets
 remain saved. Old commission journals are inactive history and cannot grant new progression.
 
@@ -171,7 +172,10 @@ couriers. Saved incoming deliveries resolve their current Swamps home without re
 Reward candidates are defined in each contact's `rewards` table, independently of shop stock.
 Regular choices are revealed at completed hand-in; bonus choices are revealed once earned.
 New town rewards contain consumables or limited-use items, stash spawners, euros and dollars.
-Reusable equipment, attachments, service credit and other valuables are excluded.
+Reusable equipment, attachments and other valuables are excluded. Technut and Jitters replace
+regular item rewards with 200/400/600 repair/treatment credits and convert the five-task bonus
+allowance to the same provider-bound credit at face value. Credit exceeding the balance cap stays
+pending until spent; cash and reputation payments remain separate.
 Every ammunition reward is half its normal pack. Old Timer offers .410 rather than 12g or .22;
 Cleaner keeps cutlery and cleaning kits as regular choices and stash spawners as bonus choices.
 Spicy Lemon also offers cutlery. Mute, Spool and Ballast offer 200/400/600 rubles as their regular
@@ -505,9 +509,10 @@ computer extraction; destination maps apply to field jobs. Omit settings ignored
 The `supplies` list configures ordinary vendor stock. Repeatable task
 rewards are separate: `rewards.packages` contains up to three `{label, items}` families. Each saved
 offer selects one affordable eligible candidate per family, with explicit quantities and a two-item
-limit. `rewards.bonusItems` lists optional equipment for larger five-task bonuses; existing purchase
-gates still apply. `rewards.bonusService = "repair"` gives Technut and Boss provider-bound repair
-credit choices. Thematic reward lists never add vendor stock or purchase unlocks.
+limit. `rewards.bonusPackages` configures separate bonus families, and `rewards.bonusCash` adds a cash
+alternative. `rewards.service` and `rewards.creditPerTier` configure Technut's repair and Jitters's
+treatment credit rewards for ordinary work and five-task bonuses. Thematic reward lists never add
+vendor stock or purchase unlocks.
 See the jobsystem README for budgets, bonus banking, gate rules and claim recovery.
 
 Spoken task text stays in the contact's dialogue and progression fields. step.objective separately

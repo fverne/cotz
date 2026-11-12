@@ -15,15 +15,21 @@ local WISH_PRICE = 1000000
 local MAX_WISH_PRICE = 4000000
 local WISH_TYPES = {carryinc = true, far = true, fbsr = true, hp = true, weapon = true, suit = true}
 
+local function canUseTownCredit(npc, service)
+	local contact = ix.townNPCs and ix.townNPCs.byName[npc]
+
+	return not contact or contact.rewards and contact.rewards.service == service
+end
+
 function ix.progression.GetServiceCredit(character, npc, service)
-	if ix.townNPCs and ix.townNPCs.byName[npc] then return 0 end
+	if not canUseTownCredit(npc, service) then return 0 end
 	local credits = character:GetData(CREDIT_KEY, {}) or {}
 
 	return credits[npc .. "/" .. service] or 0
 end
 
 function ix.progression.ServiceCreditCapacity(character, npc, service)
-	if ix.townNPCs and ix.townNPCs.byName[npc] then return 0 end
+	if not canUseTownCredit(npc, service) then return 0 end
 	if not SERVICE_CONTACTS[service] or not SERVICE_CONTACTS[service][npc]
 		or not ix.progression.CanUseNPC(character, npc) then return 0 end
 

@@ -44,26 +44,9 @@ PLUGIN:Register("jitters", {
 	},
 	supplies = {"medic_bandage_1", "medic_medkit_1"},
 	rewards = {
-		bonusPackages = {
-			{
-				items = {"medic_medkit_2", "medic_medkit_3"},
-				label = "Medical supplies",
-			},
-		},
-		packages = {
-			{
-				items = {"medic_bandage_1", "medic_bandage_2"},
-				label = "Field dressings",
-			},
-			{
-				items = {"medic_medkit_1", "medic_medkit_2"},
-				label = "Medical supplies",
-			},
-			{
-				items = {"food_can_beans"},
-				label = "Canned provisions",
-			},
-		},
+		service = "treatment",
+		creditPerTier = 300,
+		packages = {},
 	},
 	dialogue = {
 		completedGreeting = "Oh, hello. No fresh injuries, I hope? It's nice when somebody visits and I can finish a sentence before reaching for something.",

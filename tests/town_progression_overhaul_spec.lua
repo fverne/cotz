@@ -116,9 +116,11 @@ complete(known, "cotz/town/ballast/BA12")
 check(not ix.progression.CanBuyItem(known, "'Gasket'", "tokarev"), "old completion cannot authorize the new gun branch")
 check(not ix.townNPCs:HasService(known, "storage"), "old bank completion cannot restore a retired service")
 known:SetData("progressionServiceCredits", {["'Technut'/repair"] = 500})
-check(ix.progression.GetServiceCredit(known, "'Technut'", "repair") == 0
-	and ix.progression.ServiceCreditCapacity(known, "'Technut'", "repair") == 0,
-	"old town credit remains inactive and cannot be awarded again")
+check(ix.progression.GetServiceCredit(known, "'Technut'", "repair") == 500
+	and ix.progression.ServiceCreditCapacity(known, "'Technut'", "repair") == 19500,
+	"Technut's task credit profile restores the saved provider balance without resetting it")
+check(ix.progression.ServiceCreditCapacity(known, "'Boss'", "repair") == 0,
+	"town providers without a task credit profile remain ineligible")
 check(not ix.progression.npcRequirements["'Computer'"], "Computer has no orphaned town progression gate")
 check(ix.townNPCs:HasService(fresh, "suitVariants", "'Suture'"), "Suture's conversion menu starts available")
 check(not ix.townNPCs:HasService(fresh, "suitVariants", "'Vesper'"), "the former converter cannot retain the service")
