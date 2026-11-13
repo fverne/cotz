@@ -86,8 +86,10 @@ fixture.SetMap(currentMap)
 check(not ix.progression.TurnIn(a.client, target, "storageFixture", "artifact_bolt"), "wrong map rejected")
 currentMap = "rp_marsh_cs"
 fixture.SetMap(currentMap)
+check(not a.weightUpdates, "rejected hand-ins do not refresh carry weight")
 local accepted, response = ix.progression.TurnIn(a.client, target, "storageFixture", "artifact_bolt")
 check(accepted, "valid turn-in accepted")
+check(a.weightUpdates == 1, "partial-stack hand-in refreshes carry weight")
 check(#lostItems == 1 and lostItems[1].client == a.client, "only accepted delivery notifies its owner")
 check(lostItems[1].description == "artifact_bolt x1", "lost-item notification uses consumed quantity")
 check(string.find(response, "Task complete", 1, true), "completed hand-in confirms task completion")
@@ -104,6 +106,7 @@ check(
 	"duplicate requests cannot award rewards or affect others"
 )
 check(#lostItems == 1, "duplicate delivery sends no lost-item notification")
+check(a.weightUpdates == 1, "duplicate hand-in does not refresh carry weight again")
 check(a.saves >= 2, "assignment and turn-in both save character")
 
 -- Inventory removal can fail; never grant progress or rewards in that case.
@@ -122,6 +125,7 @@ check(
 	"failed removal gives no progress or rewards"
 )
 check(#lostItems == 1, "failed removal sends no lost-item notification")
+check(not c.weightUpdates, "failed removal does not refresh carry weight")
 inventoryItem.Remove = function(self)
 	self.removed = true
 end
@@ -129,6 +133,7 @@ check(
 	ix.progression.TurnIn(c.client, target, "storageFixture", "artifact_bolt") and inventoryItem.removed,
 	"whole-stack turn-in removes inventory item"
 )
+check(c.weightUpdates == 1, "whole-stack hand-in refreshes carry weight")
 
 local ammoOwner = character()
 ammoOwner.inventory = a.inventory
@@ -139,6 +144,7 @@ check(ix.progression.TurnIn(ammoOwner.client, target, "storageFixture", "artifac
 	"progression accepts ammunition default quantity")
 check(inventoryItem.quantity == 9 and not inventoryItem.removed,
 	"progression preserves ammunition surplus after consuming one round")
+check(ammoOwner.weightUpdates == 1, "ammunition hand-in refreshes carry weight")
 
 ix.progression.definitions.storageFixture.requirementSlots[1].quantity = storageQuantity
 

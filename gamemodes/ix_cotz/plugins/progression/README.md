@@ -105,6 +105,8 @@ clients only read replicated state. Requirements are assigned once by the server
 town inputs once while preserving fulfilled contributions and eligible saved requests. Hand-ins validate
 character, NPC, access, map, inventory and remaining units.
 Whole-stack removal must succeed before progress/rewards are granted.
+Successful hand-ins refresh carry weight and encumbrance movement speeds on the next tick,
+including deliveries that consume only part of a stack.
 
 Progression persists in its own owner-local `progression` character var and `MEDIUMTEXT` SQL column,
 outside generic character data. This targets a fresh database; see [character storage](../../../../docs/database/README.md).

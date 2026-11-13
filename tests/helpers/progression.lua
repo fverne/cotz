@@ -132,6 +132,9 @@ end
 function ix.meta.character:GetInventory()
 	return self.inventory
 end
+function ix.meta.character:UpdateWeight()
+	self.weightUpdates = (self.weightUpdates or 0) + 1
+end
 function ix.meta.character:GiveMoney(amount)
 	self.money = self.money + amount
 end

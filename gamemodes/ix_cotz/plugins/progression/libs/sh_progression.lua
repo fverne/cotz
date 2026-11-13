@@ -392,6 +392,7 @@ if SERVER then
 		else
 			item:SetData("quantity", available - consumed)
 		end
+		character:UpdateWeight()
 		ix.dialogue.notifyItemLost(client, string.format("%s x%d", itemName, consumed))
 		ix.progression.AccrueTurnInRewards(character, progressionID, reputation, money, itemID)
 		ix.progression.AddComplexProgressionValue(character, progressionID, { itemID, amount })
