@@ -18,7 +18,7 @@ ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
 ITEM.isGasmask = true
 ITEM.filterType = "scientific"
 ITEM.isAirTank = true
-ITEM.filterWearDivisor = 1920
+ITEM.filterWearDivisor = 700
 ITEM.isHelmet = true
 
 ITEM.br = 0.09

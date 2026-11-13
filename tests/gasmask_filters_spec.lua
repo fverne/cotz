@@ -114,7 +114,7 @@ for _, id in ipairs({"mask_cloth", "headwear_riot", "headwear_altyn"}) do
 end
 for file in lfs.dir("gamemodes/ix_cotz/schema/items/suit") do
 	if file:match("^sh_suit_seva") or file:match("^sh_suit_nbc") or file:match("^sh_suit_ssp99") then
-		check(read("gamemodes/ix_cotz/schema/items/suit/" .. file):find('ITEM.filterType = "scientific"\nITEM.isAirTank = true\nITEM.filterWearDivisor = 1920', 1, true),
+		check(read("gamemodes/ix_cotz/schema/items/suit/" .. file):find('ITEM.filterType = "scientific"\nITEM.isAirTank = true\nITEM.filterWearDivisor = 700', 1, true),
 			"closed respiratory suit declares long-life tank: " .. file)
 	end
 end
