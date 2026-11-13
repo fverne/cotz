@@ -33,10 +33,12 @@ weight describes the equipment without its cartridge. See the [town progression 
 Anomaly resistance covers burn, shock, acid, blast, crush, drowning, poison, nerve gas and slow burn.
 Crush damage uses environmental headgear wear, including gravitational anomalies and physics impacts.
 
-A filter has 0–100% condition. Effectiveness is `clamp(condition / 80, 0, 1)`: full at 80–100%, then
-linear below 80%. The headgear's percentage and flat radiation protection multiply its ordinary
+A filter has 0–100% condition. Effectiveness is `clamp(condition / 20, 0, 1)`: full at 20–100%, then
+linear below 20%. The headgear's percentage and flat radiation protection multiply its ordinary
 durability scale by this filter scale. Other resistances, independent attachments, artifacts and
 buffs keep their existing behavior. Missing and exhausted filters give no filter-dependent protection.
+The ordinary durability scale remains `clamp(durability / 80, 0, 1)`. A mask at 50% durability with
+a filter at 10% condition supplies 31.25% of its rated percentage and flat radiation protection.
 
 Only positive incoming `DMG_RADIATION` exposure drains an equipped filter, including fully blocked
 exposure. Condition loss is raw damage divided by the concrete cartridge's `filterWearDivisor`:

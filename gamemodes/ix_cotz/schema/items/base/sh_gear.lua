@@ -33,6 +33,7 @@ ITEM.weight = 0
 ITEM.canRepair = true
 
 local FULL_PROTECTION_DURABILITY = 80
+local FULL_FILTER_EFFECTIVENESS_CONDITION = 20
 
 function ITEM:GetRepairCost()
 	return self.price ^ (1 / 3) * (self.repairCostMultiplier or 1)
@@ -51,7 +52,7 @@ end
 function ITEM:GetFilterScale()
 	if not self.filterType then return 1 end
 
-	return math.Clamp((self:GetFilterCondition() or 0) / FULL_PROTECTION_DURABILITY, 0, 1)
+	return math.Clamp((self:GetFilterCondition() or 0) / FULL_FILTER_EFFECTIVENESS_CONDITION, 0, 1)
 end
 
 function ITEM:GetFlatRadProt()

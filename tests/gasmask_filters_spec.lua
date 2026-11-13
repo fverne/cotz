@@ -237,16 +237,16 @@ check(mask:GetFilterCondition() == 100 and mask.data.filterCondition == 100, "le
 local writes = mask.writes
 mask:GetFilterCondition()
 check(mask.writes == writes, "reads do not repeatedly initialize saved state")
-for _, entry in ipairs({{100, 1}, {80, 1}, {40, 0.5}, {0, 0}, {false, 0}}) do
+for _, entry in ipairs({{100, 1}, {80, 1}, {20, 1}, {10, 0.5}, {1, 0.05}, {0, 0}, {false, 0}}) do
 	mask.data.filterCondition = entry[1]
 	near(mask:GetFilterScale(), entry[2], "filter taper at " .. tostring(entry[1]))
 	near(mask:getRadProt(), 0.8 * entry[2], "percentage radiation protection uses filter")
 	near(mask:GetFlatRadProt(), 0.02 * entry[2], "flat radiation protection uses filter")
 	near(mask:getBR(), 0.2, "filter does not affect ballistics")
 end
-mask.data.durability, mask.data.filterCondition = 40, 40
-near(mask:getRadProt(), 0.2, "mask and filter scales multiply")
-near(mask:GetFlatRadProt(), 0.005, "flat protection uses both scales")
+mask.data.durability, mask.data.filterCondition = 50, 10
+near(mask:getRadProt(), 0.8 * 0.3125, "50 percent mask and 10 percent filter give 31.25 percent protection")
+near(mask:GetFlatRadProt(), 0.02 * 0.3125, "flat protection uses both scales")
 near(mask:GetWeight(), 0.8, "installed cartridge contributes its mass")
 mask.data.filterCondition = false
 near(mask:GetWeight(), 0.6, "empty socket contributes no cartridge mass")
@@ -558,7 +558,7 @@ function client:hasGeiger() return false end
 function client:getPercentageRadResist() return 1 - mask:getRadProt() end
 function client:getFlatRadResist() return mask:GetFlatRadProt() end
 function client:addRadiation(value) self.receivedRadiation = value end
-mask.data.filterCondition, mask.data.equip = 40, true
+mask.data.filterCondition, mask.data.equip = 10, true
 local info = {value = 120, IsDamageType = function(_, kind) return kind == DMG_RADIATION end}
 function info:GetDamage() return self.value end
 function info:SetDamage(value) self.value = value end
@@ -566,29 +566,29 @@ function info:GetDamageType() return DMG_RADIATION end
 function info:GetAttacker() return client end
 PLUGIN:EntityTakeDamage(client, info)
 near(client.receivedRadiation, 12 * 0.6 - 0.01, "radiation uses pre-wear protection")
-check(mask:GetFilterCondition() == 39 and info.value == 0, "raw exposure wears filter once before health override")
+check(mask:GetFilterCondition() == 9 and info.value == 0, "raw exposure wears filter once before health override")
 veto = nil
 local originalRun = hook.Run
 hook.Run = function(event) if event == "ShouldBlockSafeZoneDamage" then return true end end
 info.value = 120
 PLUGIN:EntityTakeDamage(client, info)
-check(mask:GetFilterCondition() == 39 and info.value == 0, "safe zones preserve filters")
+check(mask:GetFilterCondition() == 9 and info.value == 0, "safe zones preserve filters")
 hook.Run = originalRun
 
 -- Blessings and unequipped spares do not drain, even during a real radiation event.
 mask.data.unlimitedDurability = true
 info.value = 120
 PLUGIN:EntityTakeDamage(client, info)
-check(mask:GetFilterCondition() == 39, "unlimited durability also preserves filter condition")
+check(mask:GetFilterCondition() == 9, "unlimited durability also preserves filter condition")
 mask.data.unlimitedDurability, mask.data.equip = nil, false
 info.value = 120
 PLUGIN:EntityTakeDamage(client, info)
-check(mask:GetFilterCondition() == 39, "unequipped spare filters do not drain")
+check(mask:GetFilterCondition() == 9, "unequipped spare filters do not drain")
 mask.data.equip = true
 ix.temp.Corpses[client] = {}
 info.value = 120
 PLUGIN:EntityTakeDamage(client, info)
-check(mask:GetFilterCondition() == 39, "protected corpses preserve filter condition")
+check(mask:GetFilterCondition() == 9, "protected corpses preserve filter condition")
 ix.temp.Corpses[client] = nil
 
 local radiationPlugin = PLUGIN
