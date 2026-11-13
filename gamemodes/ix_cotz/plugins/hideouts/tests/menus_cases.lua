@@ -15,6 +15,29 @@ local function containerHome()
 	return owner, inventory, instance, record
 end
 
+Test("personal room labels include their owner rather than the visiting character", function()
+	local owner, inventory, instance, record = containerHome()
+	local guest = FeatureClient(2)
+	record.guests["2"] = true
+	guest.position = PLUGIN.state.entrances.gate.pos
+	local start = netstream.Start
+	netstream.Start = function(client, message, entrance, records)
+		assert(client == guest and #records == 1)
+		assert(records[1].name == "Character 1's " .. record.name)
+	end
+	PLUGIN:ShowEntrance(guest, "gate")
+	netstream.Start = start
+	owner:GetCharacter().GetName = function() return "Renamed owner" end
+	assert(PLUGIN:GetHideoutName(record) == "Renamed owner's " .. record.name)
+	ix.char.loaded[1] = nil
+	record.ownerName = "Saved owner"
+	assert(PLUGIN:GetHideoutName(record) == "Saved owner's " .. record.name)
+	record.ownerName = nil
+	assert(PLUGIN:GetHideoutName(record) == "Character #1's " .. record.name)
+	record.ownerType = "squad"
+	assert(PLUGIN:GetHideoutName(record) == record.name)
+end)
+
 Test("menu actions retain administrator-only chat counterparts", function()
 	for _, name in ipairs({"HideoutManage", "HideoutEntrancePlace", "HideoutAccess", "HideoutVendorReset",
 		"HideoutContainerUpgrade", "HideoutContainerPublic"}) do
@@ -141,6 +164,7 @@ Test("administrators enter private personal and squad hideouts without invitatio
 	record.frozen = true
 	assert(not PLUGIN:CanAccess(admin, record))
 	record.frozen = nil
+	PLUGIN.state.entrances.gate.hideout = record.id
 	admin.position = PLUGIN.state.entrances.gate.pos
 	admin.GetMoveType = function() return MOVETYPE_NOCLIP end
 	assert(PLUGIN:RequestEntry(admin, record.id))
@@ -200,6 +224,8 @@ Test("administrator keypads list public squad rooms alongside owned rooms and in
 	PLUGIN.state.hideouts.invited = invited
 	local squad = table.Copy(record)
 	squad.id, squad.owner, squad.ownerType, squad.squadID, squad.access = "squad", nil, "squad", "squad1", "public"
+	squad.entrance = "squadgate"
+	PLUGIN.state.entrances.squadgate = {pos = admin.position, hideout = squad.id}
 	PLUGIN.state.hideouts.squad = squad
 	ix.squad.list.squad1 = {members = {[2] = 2}}
 	local start = netstream.Start
@@ -211,7 +237,7 @@ Test("administrator keypads list public squad rooms alongside owned rooms and in
 	end
 	PLUGIN:ShowEntrance(admin, "gate")
 	netstream.Start = start
-	assert(shown.owned and shown.invited and shown.squad and not shown[record.id])
+	assert(shown.owned and shown.invited and not shown.squad and not shown[record.id])
 	assert(PLUGIN:CanAccess(admin, record) and PLUGIN:CanAccess(admin, squad))
 
 	admin.ixHideoutMenuTime = nil
@@ -220,19 +246,19 @@ Test("administrator keypads list public squad rooms alongside owned rooms and in
 	netstream.Start = function(client, message, entrance, records)
 		local visible = {}
 		for _, entry in ipairs(records) do visible[entry.id] = true end
-		assert(#records == 2 and visible.owned and visible.squad)
+		assert(#records == 1 and visible.squad)
 	end
-	PLUGIN:ShowEntrance(admin, "gate")
+	PLUGIN:ShowEntrance(admin, "squadgate")
 	admin.ixHideoutMenuTime = nil
 	squad.access = "squad"
 	netstream.Start = function(_, _, _, records)
-		assert(#records == 1 and records[1].id == "owned")
+		assert(#records == 0)
 	end
-	PLUGIN:ShowEntrance(admin, "gate")
+	PLUGIN:ShowEntrance(admin, "squadgate")
 	netstream.Start = start
 end)
 
-Test("squad rooms use a shared entrance without a placed or configured squad entrance", function()
+Test("squad rooms require their dedicated entrance and reject personal keypads", function()
 	FeatureReset()
 	local leader = FeatureClient(1)
 	local instance, record = FeatureHome(leader, true)
@@ -240,11 +266,16 @@ Test("squad rooms use a shared entrance without a placed or configured squad ent
 	PLUGIN.members[leader], instance.occupants[leader] = nil, nil
 	leader.position = PLUGIN.state.entrances.gate.pos
 	assert(not PLUGIN.state.entrances[record.entrance])
-	assert(PLUGIN:FindHideoutEntrance(leader, record) == "gate")
-	assert(PLUGIN:IsManagementLocation(leader, record, "entrance"))
+	assert(not PLUGIN:FindHideoutEntrance(leader, record))
+	assert(not PLUGIN:IsManagementLocation(leader, record, "entrance"))
+	assert(not PLUGIN:RequestEntry(leader, record.id))
 	local start, shown = netstream.Start, nil
 	netstream.Start = function(_, _, _, records) shown = records end
 	PLUGIN:ShowEntrance(leader, "gate")
+	assert(#shown == 0)
+	PLUGIN.state.entrances[record.entrance] = {pos = leader.position, hideout = record.id}
+	leader.ixHideoutMenuTime = nil
+	PLUGIN:ShowEntrance(leader, record.entrance)
 	netstream.Start = start
 	assert(#shown == 1 and shown[1].id == record.id and shown[1].manage)
 	assert(PLUGIN:RequestEntry(leader, record.id))
@@ -252,17 +283,18 @@ Test("squad rooms use a shared entrance without a placed or configured squad ent
 	assert(instance.occupants[leader].returnPoint[1] == PLUGIN.state.entrances.gate.pos)
 end)
 
-Test("squad shared-entrance admission rechecks the entrance after character save", function()
+Test("squad admission rechecks its dedicated entrance after character save", function()
 	FeatureReset()
 	local leader = FeatureClient(1)
 	local instance, record = FeatureHome(leader, true)
 	record.entrance = "squad:" .. record.id
 	PLUGIN.members[leader], instance.occupants[leader] = nil, nil
 	leader.position = PLUGIN.state.entrances.gate.pos
+	PLUGIN.state.entrances[record.entrance] = {pos = leader.position, hideout = record.id}
 	local saved
 	leader:GetCharacter().Save = function(_, callback) saved = callback end
 	assert(PLUGIN:RequestEntry(leader, record.id) and saved)
-	PLUGIN.state.entrances.gate = nil
+	PLUGIN.state.entrances[record.entrance].hideout = "another"
 	saved()
 	assert(not PLUGIN.members[leader] and not instance.occupants[leader])
 end)

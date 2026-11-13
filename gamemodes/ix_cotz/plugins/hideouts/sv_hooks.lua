@@ -52,7 +52,7 @@ function PLUGIN:ShowEntrance(client, entranceID)
 			or record.ownerType == "squad" and self:GetSquadRank(client, record) ~= nil
 			or record.ownerType == "squad" and record.access == "public"
 		if visible and self:IsHideoutEntrance(record, entranceID) and self:CanAccess(client, record) then
-			records[#records + 1] = {id = record.id, name = record.name, manage = self:CanManageHideout(client, record)}
+			records[#records + 1] = {id = record.id, name = self:GetHideoutName(record), manage = self:CanManageHideout(client, record)}
 		end
 	end
 	netstream.Start(client, "ixHideoutMenu", entranceID, records)

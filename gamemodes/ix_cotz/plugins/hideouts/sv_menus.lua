@@ -58,7 +58,7 @@ function PLUGIN:ShowManagement(client, id, scope)
 	net.WriteUInt(#records, 4)
 	for _, record in ipairs(records) do
 		net.WriteString(record.id)
-		net.WriteString(record.name:sub(1, 256))
+		net.WriteString(self:GetHideoutName(record):sub(1, 256))
 		net.WriteBool(record.ownerType == "squad")
 		net.WriteString(record.access or "squad")
 		net.WriteBool(self:CanManageHideout(client, record))

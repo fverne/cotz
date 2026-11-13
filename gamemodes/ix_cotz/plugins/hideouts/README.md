@@ -154,6 +154,9 @@ The shared contact definition's `claimStep` accepts a numeric improvement level 
 Existing rooms retain entry and ownership. Existing owned rooms also count toward
 the location claim. `/HideoutGrant` remains administrator-only and can create additional rooms using the
 same entrance/template. `hideoutPersonalLimit` remains an optional map-wide cap (default 0, unlimited).
+Personal room labels include the owning character's name, including when viewed by invited guests.
+New grants save the owner's name for offline display; loaded characters supply their current name.
+Legacy rooms without a saved owner name display their character ID while the owner is unloaded.
 
 Enter a room once to resolve its dupe markers. The saved layout then supplies the exterior trader's
 barter offers even while that room is unloaded. Each room has its own paid levels and inventories;
@@ -263,12 +266,12 @@ Provision a target character's squad as an administrator:
     /HideoutSquadGrant "Player Name" cabin "Squad headquarters"
 
 A squad may own **one hideout across all maps sharing the schema database**. Provision it on its home map. The stable squad ID owns it, not its leader.
-Squad rooms are available at shared hideout entrance keypads on their home map without binding or placing
-a squad-specific entrance. Membership, invitations and access mode still control admission. The entrance
-used for a request is checked again after loading; leaving returns to that entrant's saved outside position.
-Administrators see their own squad rooms alongside personal rooms and explicit invitations.
+Squad rooms require their own placed squad entrance on their home map. Personal hideout keypads never
+list or admit squad rooms, including for administrators. Membership, invitations and access mode still
+control admission at the squad entrance. Its binding is checked again after loading; leaving returns
+to that entrant's saved outside position.
 
-Leaders/officers can optionally open **Tab → Squads → Squad hideout** to place a dedicated entrance or relocate it.
+Leaders/officers open **Tab → Squads → Squad hideout** to place a dedicated entrance or relocate it.
 Aim at a nearby solid surface on the home map before opening the menu and choose **Place entrance
 where you are looking**. The same control is available when managing the existing entrance.
 This places a shared, visible keypad entity. Existing invisible squad keypads become visible when entrances reload. Stand safely outside
@@ -510,7 +513,8 @@ return positions for hideout occupants and intercepts old interior restores.
 Area membership is audited once per second, including intruders and external
 teleports. Administrators can enter personal and squad hideouts without an invitation, including through
 the entrance while noclipping; occupancy audits do not eject administrators visiting an interior directly.
-Administrator keypad menus list their own rooms, explicit invitations, squad memberships and public squad rooms.
+Administrator personal keypad menus list their own rooms and explicit invitations. Squad entrance menus
+list the associated squad room when public, invited or accessible through squad membership.
 Administrators visiting a loaded interior directly can open its nearby squad vendor and buy listed stock;
 stock management, treasury withdrawals and container access retain their character's normal permissions.
 Normal loading, persistence and disabled-room checks still apply. Generic world-item persistence excludes hideout floor items.

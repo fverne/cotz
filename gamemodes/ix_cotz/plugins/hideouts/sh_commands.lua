@@ -157,7 +157,7 @@ ix.command.Add("HideoutList", {
 				records[#records + 1] = "#"
 					.. record.id
 					.. " "
-					.. record.name
+					.. PLUGIN:GetHideoutName(record)
 					.. " ("
 					.. record.entrance
 					.. ")"
@@ -207,7 +207,7 @@ ix.command.Add("HideoutInvite", {
 			record.guests[tostring(character:GetID())] = previous
 			return "Could not save the invitation."
 		end
-		target:Notify("Your character can now enter " .. record.name .. ".")
+		target:Notify("Your character can now enter " .. PLUGIN:GetHideoutName(record) .. ".")
 
 		return "Character invited."
 	end,

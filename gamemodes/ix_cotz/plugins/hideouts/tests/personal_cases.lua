@@ -37,7 +37,11 @@ Test("locations claim one free room each while admin grants allow several at one
 	owner:GetCharacter().completed["cotz/town/ballast/v3/hideout/access"] = true
 	assert(PLUGIN:ClaimPersonalLocation(owner, target, "village"))
 	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "village"))
-	assert(PLUGIN:GrantHideout(owner, "room", "gate", "Admin extra"))
+	local granted, grantedID = PLUGIN:GrantHideout(owner, "room", "gate", "Admin extra")
+	assert(granted)
+	local grantedRecord = PLUGIN:GetHideout(grantedID)
+	assert(grantedRecord.ownerName == owner:GetCharacter():GetName())
+	assert(PLUGIN:GetHideoutName(grantedRecord) == "Character 1's Admin extra")
 	assert(table.Count(PLUGIN.state.hideouts) == 2)
 	assert(owner:GetCharacter():GetMoney() == 100000)
 	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "missing"))

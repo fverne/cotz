@@ -635,17 +635,13 @@ function PLUGIN:IsHideoutEntrance(record, entranceID)
 	if not record or not entrance then return false end
 	if record.ownerType ~= "squad" then return record.entrance == entranceID end
 
-	return not entrance.hideout or entrance.hideout == record.id
+	return entrance.hideout == record.id
 end
 
 function PLUGIN:FindHideoutEntrance(client, record)
 	if not record then return end
 	if self:IsHideoutEntrance(record, record.entrance) and self:IsNearEntrance(client, record.entrance) then
 		return record.entrance
-	end
-	if record.ownerType ~= "squad" then return end
-	for id in pairs(self.state.entrances) do
-		if self:IsHideoutEntrance(record, id) and self:IsNearEntrance(client, id) then return id end
 	end
 end
 

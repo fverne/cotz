@@ -70,6 +70,14 @@ function PLUGIN:GetHideout(id)
 	return self.state and self.state.hideouts[tostring(id)]
 end
 
+function PLUGIN:GetHideoutName(record)
+	if record.ownerType == "squad" then return record.name end
+	local character = ix.char.loaded[record.owner]
+	local ownerName = character and character:GetName() or record.ownerName or "Character #" .. record.owner
+
+	return ownerName .. "'s " .. record.name
+end
+
 function PLUGIN:GetTemplate(record)
 	local instance = record and self.instances[record.id]
 	if instance and instance.template then return instance.template end
@@ -108,6 +116,7 @@ function PLUGIN:GrantHideout(client, templateID, entranceID, name, locationID)
 	self.state.hideouts[id] = {
 		id = id,
 		owner = character:GetID(),
+		ownerName = character:GetName(),
 		template = templateID,
 		entrance = entranceID,
 		name = name,

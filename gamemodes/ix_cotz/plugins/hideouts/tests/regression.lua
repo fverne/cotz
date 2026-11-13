@@ -429,6 +429,9 @@ end
 function NewClient(id)
 	local character = { id = id, data = {} }
 	local client = { valid = true, position = Vector(10000, 0, 8), angles = Angle(), character = character }
+	function character:GetName()
+		return "Character " .. self.id
+	end
 	function character:GetID()
 		return self.id
 	end

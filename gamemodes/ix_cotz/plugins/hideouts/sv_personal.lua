@@ -296,7 +296,7 @@ function PLUGIN:OpenPersonalBarter(client, target, page, refresh)
 			local function append(feature, slotID)
 				local offer = self:BuildPersonalOffer(client, record, feature, slotID)
 				if not offer then return end
-				offer.label = record.name:sub(1, 128) .. " (#" .. record.id .. ") / " .. offer.label
+				offer.label = self:GetHideoutName(record):sub(1, 128) .. " (#" .. record.id .. ") / " .. offer.label
 				appendOffer(offer)
 			end
 			for slotID in SortedPairs(record.personalLayout or {}) do append("container", slotID) end

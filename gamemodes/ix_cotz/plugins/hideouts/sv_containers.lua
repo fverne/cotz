@@ -191,7 +191,7 @@ function PLUGIN:OpenContainerInventory(client, entity)
 			if not IsValid(client) or client:GetCharacter() ~= character
 				or not self:IsNearUtility(client, entity) or not self:CanUseContainer(client, record, slotID) then return end
 			ix.storage.Open(client, inventory, {
-				entity = entity, name = record.name .. " / " .. slotID, searchTime = 0,
+				entity = entity, name = self:GetHideoutName(record) .. " / " .. slotID, searchTime = 0,
 			})
 		end)
 end
