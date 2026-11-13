@@ -19,8 +19,8 @@ SSP-99, SSP-99M and all SEVA and NBC variants use built-in air tanks. Tanks foll
 wear and the same protection taper, with a wear divisor of 1,920: eight times the scientific cartridge
 lifetime, or 160 minutes of moderate exposure. They cannot accept or remove loose cartridges.
 Technut offers a separate air tank repair/refill even when suit durability is full, restoring tank
-condition without repairing the suit. It uses the normal suit per-condition repair rate, discounts
-and credit. Ordinary suit repairs do not refill tanks. Existing and new suits start with full tanks;
+condition without repairing the suit. It costs 40 RU per missing percentage point, up to 4,000 RU for an empty tank on any suit, before earned discounts
+and repair credit. Ordinary suit repairs do not refill tanks. Existing and new suits start with full tanks;
 partial and exhausted tanks persist in `filterCondition`. Tank mass is included in existing suit weight.
 Suit percentage and flat radiation protection scale with both durability and tank condition;
 independent upgrades and attachments retain their existing behavior.

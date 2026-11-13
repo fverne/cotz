@@ -457,8 +457,18 @@ do
 	function item:GetFilterCondition() return self:GetData("filterCondition", 100) end
 	local request = {itemid = 990, type = "airTank"}
 	local offer = ix.progression.BuildServiceOffer(owner.client, tech, "repair", request)
-	check(offer and offer.field == "filterCondition" and offer.baseCost == 2000,
+	check(offer and offer.field == "filterCondition" and offer.baseCost == 4000,
 		"Technut quotes an exhausted tank on an undamaged suit")
+	for _, rate in ipairs({10, 50, 100}) do
+		function item:GetRepairCost() return rate end
+		for _, remaining in ipairs({0, 25, 50, 75, 99}) do
+			item.data.filterCondition = remaining
+			local refill = ix.progression.BuildServiceOffer(owner.client, tech, "repair", request)
+			check(refill and refill.baseCost == (100 - remaining) * 40,
+				"refill price scales with missing air independently of suit repair rate")
+		end
+	end
+	item.data.filterCondition = 0
 	check(not ix.progression.BuildServiceOffer(owner.client, vendor("'Boss'"), "repair", request),
 		"tank service is restricted to Technut")
 	check(#ix.progression.GetRepairOptions(owner.client, tech) == 1, "depleted tank appears separately")

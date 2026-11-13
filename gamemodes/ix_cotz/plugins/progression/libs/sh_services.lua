@@ -4,6 +4,7 @@ local CREDIT_KEY = "progressionServiceCredits"
 local QUOTE_LIFETIME = 60
 local MAX_DISCOUNT = 0.15
 local REPAIR_COST_MULTIPLIER = 2
+local AIR_TANK_REFILL_COST = 4000
 local SERVICE_CONTACTS = {
 	repair = { ["'Technut'"] = true, ["'Boss'"] = true },
 	treatment = { ["'Jitters'"] = true, ["'Arena Master'"] = true },
@@ -101,7 +102,12 @@ local function repairOffer(client, data, npc)
 		return
 	end
 
-	local baseCost = math.max(0, math.Round(missing * item:GetRepairCost())) * REPAIR_COST_MULTIPLIER
+	local baseCost
+	if field == "filterCondition" then
+		baseCost = math.Round(missing / 100 * AIR_TANK_REFILL_COST)
+	else
+		baseCost = math.max(0, math.Round(missing * item:GetRepairCost())) * REPAIR_COST_MULTIPLIER
+	end
 
 	return {item = item, field = field, baseCost = baseCost}
 end

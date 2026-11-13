@@ -17,7 +17,7 @@ masks, helmets and repairable weapons. Weapons read `wear`; suits and headgear r
 The cloth mask alone sets `repairCostMultiplier = 1 / 3`, reducing its per-condition repair rate
 before rounding. Other masks and helmets keep the standard rate.
 Technut also offers separate air tank refills for NBC, SSP-99, SSP-99M and SEVA variants, using
-the same suit per-condition rate on missing tank condition. Suit durability repairs leave air unchanged.
+40 RU per missing percentage point of air, up to 4,000 RU, regardless of suit. Suit durability repairs leave air unchanged.
 Earned discounts apply after this base calculation. At 0% condition, a cloth mask costs 666 RU
 and a standard anorak costs 3,768 RU before discounts. Legacy `repairCost` item fields do not
 control these fees; each repairable base supplies its rate through `GetRepairCost()`.
