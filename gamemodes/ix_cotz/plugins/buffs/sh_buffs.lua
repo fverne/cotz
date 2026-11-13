@@ -271,7 +271,7 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 		if CurTime() > player.timeNextMeditatonTick then
 			player:SetHealth(math.Clamp(player:Health() + player.meditationHealing, 0, player:GetMaxHealth()))
 			player.timeNextMeditatonTick = CurTime() + 1
-			print(player.meditationHealing)
+			-- print(player.meditationHealing)
 			player.meditationHealing = math.min(player.meditationHealing + 0.5, parameter.max)
 		end
 	end,
