@@ -7,5 +7,6 @@ gamemodes/STALKER_Roleplay/plugins/bodygrouphelpercancer.lua
 
 # Generated balancing exports and Python caches.
 /docs/balance/output/
+/outputs/
 __pycache__/
 *.pyc
