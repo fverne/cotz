@@ -248,3 +248,41 @@ PLUGIN.buffs[ "buff_sprintboost" ] = {
 		updateSprintWeight(player)
 	end,
 }
+
+PLUGIN.buffs[ "buff_meditation" ] = {
+	name = "Meditation",
+	desc = "Slowly regenerate health while not moving",
+	func = function( player, parameter)
+		player.timeNextMeditatonTick = player.timeNextMeditatonTick or CurTime() + 1
+		player.timeNextMeditatonTickSound = player.timeNextMeditatonTickSound or CurTime()
+		if player:Health() < player.meditationHealth or player:Health() == player:GetMaxHealth() then 
+			ix.util.PlayerActionInterrupt(player) 
+		end
+		player.meditationHealth = player:Health()
+		if not player:GetNetVar("ix_hasBlackScreen") then
+			player:RemoveBuff("buff_meditation") 
+			return
+		end
+		if CurTime() > player.timeNextMeditatonTickSound then
+			player:StopSound("sleep/heartbeat.ogg")
+			player:EmitSound("sleep/heartbeat.ogg")
+			player.timeNextMeditatonTickSound = CurTime() + 1.2
+		end
+		if CurTime() > player.timeNextMeditatonTick then
+			player:SetHealth(math.Clamp(player:Health() + player.meditationHealing, 0, player:GetMaxHealth()))
+			player.timeNextMeditatonTick = CurTime() + 1
+			print(player.meditationHealing)
+			player.meditationHealing = math.min(player.meditationHealing + 0.5, parameter.max)
+		end
+	end,
+	onbuffed = function( player, parameter )
+		player.meditationHealth = player:Health()
+		player.meditationHealing = parameter.min
+		ix.util.PlayerPerformBlackScreenAction(player, "Meditating", 60, function(player) 
+		end)
+	end,
+	ondebuffed = function( player, parameter )
+		player.timeNextMeditatonTick = nil
+		player:StopSound("sleep/heartbeat.ogg")
+	end,
+}

@@ -28,6 +28,10 @@ function PLUGIN:HUDPaint()
 	if LocalPlayer():HasBuff("buff_slowheal") then
 		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH+incH, ScrW()*0.016, ScrH()*0.032, Color(0, 190, 255), math.Round(LocalPlayer():HasBuff("buff_slowheal")[1]-CurTime()+0.5))
 	end
+	
+	if LocalPlayer():HasBuff("buff_meditation") then
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH+incH*3, ScrW()*0.016, ScrH()*0.032, Color(255, 120, 255))
+	end
 
 	if LocalPlayer():HasBuff("buff_rapidheal") then
 		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH+incH*2, ScrW()*0.016, ScrH()*0.032, Color(0, 255, 190), math.Round(LocalPlayer():HasBuff("buff_rapidheal")[1]-CurTime()+0.5))
