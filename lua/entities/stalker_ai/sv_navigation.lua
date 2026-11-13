@@ -12,8 +12,13 @@ local MIN_GROUND_NORMAL = 0.7
 local SAFE_POSITION_INTERVAL = 5
 local RELOCATION_RANGE_SQR = 512 ^ 2
 local PLAYER_SAFE_RANGE_SQR = 512 ^ 2
-local WITHDRAW_DISTANCE_SQR = 3000 ^ 2
+local WITHDRAW_MIN_DISTANCE = 2000
+local WITHDRAW_MAX_DISTANCE = 3000
 local WITHDRAW_CANDIDATES = 4
+local WITHDRAW_RETRY = 2
+local WITHDRAW_TIMEOUT = 60
+local WITHDRAW_ARRIVAL_SQR = 96 ^ 2
+local JUMP_SEGMENTS = 16
 local BUSY_FIELDS = {
 	"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing",
 	"IsSpitting", "SpecialAttack", "IsWarping", "IsThrow1", "IsThrow2", "IsBlast", "IsStamAttack",
@@ -74,7 +79,70 @@ function ENT:STALKERNPCNavigationBusy()
 		if (self[field] or 0) ~= 0 then return true end
 	end
 
-	return not self:IsOnGround()
+	return false
+end
+
+function ENT:STALKERNPCNavigationJumpVelocity(enemy, shortJump)
+	local height, speed = self.navigationLeapAimHeight, self.navigationLeapSpeed
+	if shortJump and self.navigationShortLeapRange then
+		height, speed = self.navigationShortLeapAimHeight, self.navigationShortLeapSpeed
+	end
+	local distance = self:GetPos():Distance(enemy:GetPos())
+	local direction = (enemy:GetPos() + Vector(0, 0, height) + self:OBBCenter() - self:GetPos()):GetNormalized()
+
+	return direction * (distance * speed)
+end
+
+function ENT:STALKERNPCTryNavigationJump(enemy)
+	if not self.navigationLeapRange or not self:IsOnGround() or self:STALKERNPCNavigationBusy() then return false end
+	if self.navigationLeapHealthFraction and self:Health() <= self:GetMaxHealth() * self.navigationLeapHealthFraction then
+		return false
+	end
+	local distance = self:GetPos():Distance(enemy:GetPos())
+	local minimum, maximum = self:STALKERNPCNavigationAttackRange(distance)
+	if not maximum or distance <= minimum or distance >= maximum then return false end
+	local shortJump = self.navigationShortLeapRange and distance < self.navigationShortLeapRange
+	local cooldown = shortJump and "CanJump" or (self.navigationLeapCooldown or "CanJump")
+	if (self[cooldown] or 0) >= CurTime() or (self.NextAbilityTime or 0) >= CurTime() then return false end
+	if not takeBudget() then return false end
+
+	local start = self:GetPos()
+	local offset = enemy:GetPos() - start
+	local velocity = self:STALKERNPCNavigationJumpVelocity(enemy, shortJump)
+	local speed = math.sqrt(velocity.x ^ 2 + velocity.y ^ 2)
+	if speed <= 0 then return false end
+	local flightTime = math.sqrt(offset.x ^ 2 + offset.y ^ 2) / speed
+	if flightTime <= 0 then return false end
+	local gravityScale = self:GetGravity()
+	if gravityScale == 0 then gravityScale = 1 end
+	local gravity = Vector(0, 0, -GetConVar("sv_gravity"):GetFloat() * gravityScale)
+	local finish = start + velocity * flightTime + gravity * (flightTime ^ 2 / 2)
+	if finish.z + self:OBBMaxs().z < enemy:GetPos().z + enemy:OBBMins().z
+		or finish.z + self:OBBMins().z > enemy:GetPos().z + enemy:OBBMaxs().z then return false end
+
+	local previous = start
+	for segment = 1, JUMP_SEGMENTS do
+		local time = flightTime * segment / JUMP_SEGMENTS
+		local position = start + velocity * time + gravity * (time ^ 2 / 2)
+		local trace = util.TraceHull({
+			start = previous, endpos = position, mins = self:OBBMins(), maxs = self:OBBMaxs(),
+			filter = self, mask = MASK_NPCSOLID,
+		})
+		if trace.StartSolid or trace.AllSolid then return false end
+		if trace.Hit then
+			local onTarget = trace.Entity == enemy
+			local onPerch = segment >= JUMP_SEGMENTS - 1 and trace.HitWorld
+				and trace.HitNormal.z >= MIN_GROUND_NORMAL and trace.HitPos.z >= enemy:GetPos().z - STEP_HEIGHT
+			if not onTarget and not onPerch then return false end
+
+			break
+		end
+		previous = position
+	end
+
+	self:STALKERNPCDistanceForMeleeTooBig(distance, true)
+
+	return self:STALKERNPCNavigationBusy()
 end
 
 function ENT:STALKERNPCNavigationAttackRange(distance)
@@ -130,19 +198,27 @@ function ENT:STALKERNPCApproachUnreachable(enemy, recovery)
 	return true
 end
 
-function ENT:STALKERNPCWithdrawUnreachable(recovery)
-	if not takeBudget() then return end
+local function retreatsAway(position, retreat)
+	local away = retreat.start - retreat.enemyPosition
+	local offset = position - retreat.start
+	if away.x ^ 2 + away.y ^ 2 <= 1 then return true end
+
+	return offset.x * away.x + offset.y * away.y > 0
+end
+
+local function retreatCandidates(retreat)
 	local nodes = ix and ix.eventController and ix.eventController.GetSpawnNodes
 		and ix.eventController:GetSpawnNodes()
-	local position = self:GetPos()
-	local enemyDistance = position:DistToSqr(recovery.position)
 	local candidates = {}
+	local enemyDistance = retreat.start:DistToSqr(retreat.enemyPosition)
 	for _, node in ipairs(nodes or {}) do
-		local distance = position:DistToSqr(node)
-		if distance >= WITHDRAW_DISTANCE_SQR and node:DistToSqr(recovery.position) > enemyDistance then
+		local distanceSquared = retreat.start:DistToSqr(node)
+		if distanceSquared >= WITHDRAW_MIN_DISTANCE ^ 2 and distanceSquared <= WITHDRAW_MAX_DISTANCE ^ 2
+			and node:DistToSqr(retreat.enemyPosition) > enemyDistance and retreatsAway(node, retreat) then
+			local score = math.abs(math.sqrt(distanceSquared) - retreat.distance)
 			for index = 1, WITHDRAW_CANDIDATES do
-				if not candidates[index] or distance < candidates[index].distance then
-					table.insert(candidates, index, {position = node, distance = distance})
+				if not candidates[index] or score < candidates[index].score then
+					table.insert(candidates, index, {position = node, score = score})
 					break
 				end
 			end
@@ -150,15 +226,85 @@ function ENT:STALKERNPCWithdrawUnreachable(recovery)
 		end
 	end
 
-	for _, candidate in ipairs(candidates) do
-		local ground = self:STALKERNPCNavigationGround(candidate.position)
-		if ground then
-			self:STALKERNPCMoveToPosition(ground, true)
+	return candidates
+end
 
-			return
-		end
+local function fleeWithoutDestination(actor)
+	actor.cotzNavigationIntent, actor.cotzNavigationMotion, actor.cotzNavigationIntentGrounded = nil, nil, nil
+	local schedule = IsValid(actor:GetEnemy()) and SCHED_RUN_FROM_ENEMY or SCHED_RUN_RANDOM
+	if not actor:IsCurrentSchedule(schedule) then
+		clearSchedules(actor)
+		actor:SetSchedule(schedule)
 	end
-	self:STALKERNPCHoldNavigationPosition()
+end
+
+function ENT:STALKERNPCWithdrawUnreachable(recovery)
+	if not self.cotzNavigationRetreat then
+		self.cotzNavigationRetreat = {
+			start = self:GetPos(), enemyPosition = recovery.position,
+			distance = math.Rand(WITHDRAW_MIN_DISTANCE, WITHDRAW_MAX_DISTANCE),
+			expires = CurTime() + WITHDRAW_TIMEOUT, nextTry = 0, attempts = 0,
+			progressPosition = self:GetPos(), progressTime = CurTime(),
+		}
+	end
+
+	return self:STALKERNPCUpdateRetreat()
+end
+
+function ENT:STALKERNPCUpdateRetreat()
+	local retreat = self.cotzNavigationRetreat
+	if not retreat then return false end
+	if self.cotzSleeping or self.IsAlive == false or self:Health() <= 0
+		or GetConVar("ai_disabled"):GetInt() ~= 0 then return false end
+	local now = CurTime()
+	local travelled = self:GetPos():DistToSqr(retreat.start)
+	local arrived = retreat.goal and self:GetPos():DistToSqr(retreat.goal) <= WITHDRAW_ARRIVAL_SQR
+	local escaped = travelled >= WITHDRAW_MIN_DISTANCE ^ 2 and retreatsAway(self:GetPos(), retreat)
+		and self:GetPos():DistToSqr(retreat.enemyPosition) > retreat.start:DistToSqr(retreat.enemyPosition)
+	if now >= retreat.expires or (escaped
+		and (arrived or travelled >= retreat.distance ^ 2)) then
+		self.cotzNavigationRetreat, self.cotzUnreachableRecovery = nil, nil
+		self.cotzNavigationIntent, self.cotzNavigationMotion = nil, nil
+		self.cotzNavigationIntentGrounded = nil
+		clearSchedules(self)
+		self.cotzCombatScheduleDirty = true
+		self.NextRun = 0
+
+		return false
+	end
+	if self:STALKERNPCNavigationBusy() or self.cotzNavigationRecovery then return true end
+	if self:GetPos():DistToSqr(retreat.progressPosition) >= MOVEMENT_SQR then
+		retreat.progressPosition, retreat.progressTime = self:GetPos(), now
+	end
+	if self:IsGoalActive() and now - retreat.progressTime < ESCAPE_INTERVAL then return true end
+	if now < retreat.nextTry then return true end
+	retreat.nextTry = now + WITHDRAW_RETRY
+	if not takeBudget() then
+		fleeWithoutDestination(self)
+
+		return true
+	end
+	if not retreat.candidates then retreat.candidates = retreatCandidates(retreat) end
+
+	retreat.attempts = retreat.attempts + 1
+	local candidate = retreat.candidates[(retreat.attempts - 1) % math.max(1, #retreat.candidates) + 1]
+	local direction = (retreat.start - retreat.enemyPosition):Angle().y
+	local angle = math.rad(direction + ((retreat.attempts - 1) % 5 - 2) * 30)
+	local sampled = retreat.start + Vector(math.cos(angle) * retreat.distance, math.sin(angle) * retreat.distance, 0)
+	local ground = candidate and self:STALKERNPCNavigationGround(candidate.position)
+	if not ground then ground = self:STALKERNPCNavigationGround(sampled) end
+	local distance = ground and retreat.start:Distance(ground)
+	if ground and distance >= WITHDRAW_MIN_DISTANCE and distance <= WITHDRAW_MAX_DISTANCE
+		and retreatsAway(ground, retreat)
+		and ground:DistToSqr(retreat.enemyPosition) > retreat.start:DistToSqr(retreat.enemyPosition) then
+		retreat.goal = ground
+		self:STALKERNPCMoveToPosition(ground, true)
+	else
+		-- Missing/blocked graph data must not turn the escape response into another stationary hold.
+		fleeWithoutDestination(self)
+	end
+
+	return true
 end
 
 local function hullInPVS(view, position, mins, maxs)
@@ -261,7 +407,7 @@ function ENT:STALKERNPCUpdateNavigation()
 	local now = CurTime()
 	if now < (self.cotzNextNavigationCheck or 0) then return self.cotzNavigationRecovery ~= nil end
 	self.cotzNextNavigationCheck = now + CHECK_INTERVAL
-	if self:STALKERNPCNavigationBusy() then
+	if self:STALKERNPCNavigationBusy() or not self:IsOnGround() then
 		self.cotzNavigationMotion = nil
 		if self.cotzNavigationRecovery then
 			self.cotzNavigationRecovery.position = self:GetPos()

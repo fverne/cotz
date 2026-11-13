@@ -57,6 +57,12 @@ ENT.navigationLeapRange = 800
 ENT.navigationLeapMinRange = 400
 ENT.navigationShortLeapRange = 400
 
+ENT.navigationLeapAimHeight = 128
+ENT.navigationLeapSpeed = 1.5
+ENT.navigationShortLeapAimHeight = 32
+ENT.navigationShortLeapSpeed = 3
+ENT.navigationLeapCooldown = "CanLongJump"
+
 function ENT:Initialize()
 	self.Model = "models/monsters/vareshka.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
@@ -113,10 +119,7 @@ function ENT:STALKERNPCThink()
 	if self.longjumping1 < CurTime() && self.IsLongJumping == 1 then 
 		if(IsValid(self)&&self!=nil&&self!=NULL) and self:GetEnemy() then
 			self:STALKERNPCClearAnimation()
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,128) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-			self:SetVelocity((dirnormal*(distance*1.5)))
+			self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
 			self:STALKERNPCPlayAnimation("attack_1",3)
 			self:STALKERNPCMakeMeleeAttack(3)
 			self:EmitSound("Stalker.Vareshka.Hit1")
@@ -165,10 +168,7 @@ function ENT:STALKERNPCThink()
 
 	-- SMALL JUMP
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-		self:SetVelocity((dirnormal*(distance*3)))
+		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), true))
 		self:STALKERNPCPlayAnimation("attack_1",3)
 		self:STALKERNPCMakeMeleeAttack(3)
 		self:EmitSound("Stalker.Vareshka.Chase4")
@@ -184,14 +184,15 @@ function ENT:STALKERNPCThink()
 end
 
 
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
+function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
+	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
 	if(self.PlayingAnimation==false) then
 		if(self.CanLongJump<CurTime()) then
 			local TEMP_Rand = math.random(1,5)
 
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 			if distance > self.navigationLeapMinRange and distance < self.navigationLeapRange then
-				if(TEMP_Rand==1) then		
+				if TEMP_Rand == 1 or forceJump then
 					self.CanLongJump = CurTime()+6
 					self.CanJump = CurTime()+3
 
@@ -212,7 +213,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			if(self.CanJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 			
-				if(TEMP_Rand==1) then		
+				if TEMP_Rand == 1 or forceJump then
 					self.CanJump = CurTime()+3
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.2

@@ -315,7 +315,7 @@ end
 function PLUGIN:UpdateCombatSchedule(actor)
 	if actor.cotzSleeping or not living(actor) or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if targetBusy(actor) then return end
-	if actor.cotzNavigationRecovery then return true end
+	if actor.cotzNavigationRecovery or actor.cotzNavigationRetreat then return true end
 
 	if actor.cotzCombatScheduleDirty then
 		actor.cotzNavigationIntent, actor.cotzNavigationMotion = nil, nil

@@ -63,6 +63,9 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 ENT.navigationLeapRange = 200
 
+ENT.navigationLeapAimHeight = 32
+ENT.navigationLeapSpeed = 3
+
 function ENT:Initialize()
 	self.Model = "models/monsters/psydog.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
@@ -140,10 +143,7 @@ function ENT:STALKERNPCThink()
 
 
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-		self:SetVelocity((dirnormal*(distance*3)))
+		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
 		
 		self:STALKERNPCPlayAnimation("jump_attack_all",3)
 		self:STALKERNPCMakeMeleeAttack(3)
@@ -159,14 +159,15 @@ function ENT:STALKERNPCThink()
 end
 
 //little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
+function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
+	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 		if distance < self.navigationLeapRange then
 			if(self.CanJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 			
-				if(TEMP_Rand==1) then		
+				if TEMP_Rand == 1 or forceJump then
 					self.CanJump = CurTime()+3
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.2

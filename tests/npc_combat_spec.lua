@@ -612,6 +612,12 @@ check(manager:UpdateCombatSchedule(recoveringMutant) == true
 	and recoveringMutant.destination.x == -100 and recoveringMutant.scheduleCalls == recoveryScheduleCalls,
 	"remembered pursuit yields to physical recovery instead of replacing its escape destination")
 recoveringMutant.cotzNavigationRecovery = nil
+recoveringMutant.cotzNavigationRetreat = {distance = 2500}
+recoveringMutant.cotzCombatScheduleDirty = true
+check(manager:UpdateCombatSchedule(recoveringMutant) == true
+	and recoveringMutant.destination.x == -100 and recoveringMutant.scheduleCalls == recoveryScheduleCalls,
+	"enemy-memory updates cannot replace an active retreat with another pursuit")
+recoveringMutant.cotzNavigationRetreat = nil
 recoveringMutant.position = recoveringMutant.cotzPlayerPosition
 recoveringMutant.cotzNavigationMotion = {since = 0}
 manager:UpdateCombatSchedule(recoveringMutant)

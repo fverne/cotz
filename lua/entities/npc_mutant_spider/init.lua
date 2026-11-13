@@ -58,6 +58,9 @@ ENT.navigationLeapMinRange = 300
 ENT.navigationLeapHealthFraction = 0.5
 ENT.navigationRangedRange = 800
 
+ENT.navigationLeapAimHeight = 128
+ENT.navigationLeapSpeed = 1.5
+
 function ENT:Initialize()
 	self.Model = "models/darkmessiah/spider_regular.mdl"
 	self:STALKERNPCInit(Vector(-16,-16,70),MOVETYPE_STEP)
@@ -124,10 +127,7 @@ end
 
 function ENT:STALKERNPCThink()
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,128) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-		self:SetVelocity((dirnormal*(distance*1.5)))
+		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
 
 		self:STALKERNPCPlayAnimation("attack_2",4)
 		self:STALKERNPCMakeMeleeAttack(4)
@@ -219,7 +219,8 @@ function ENT:DoTeleport()
 end
 
 //little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
+function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
+	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
 	if(self.PlayingAnimation==false) then
 		if self:Health() > self.navigationLeapHealthFraction * self:GetMaxHealth() then
 
@@ -228,7 +229,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				if(self.CanJump<CurTime()) then
 					local TEMP_Rand = math.random(1,5)
 			
-					if(TEMP_Rand==1) then		
+					if TEMP_Rand == 1 or forceJump then
 						self.CanJump = CurTime()+3
 						self.isAttacking = 1
 						self.jumping1 = CurTime()+0.2

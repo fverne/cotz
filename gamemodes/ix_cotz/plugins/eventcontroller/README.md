@@ -225,19 +225,32 @@ in any direction resets recovery; returning within the mutant's existing melee r
 engine memory is stale. Target loss, occluded pursuit and sleep discard recovery. Attack animations retain
 their schedule protection, including jump windups before an animation begins.
 
-Mutants with ranged or leap attacks hold a suitable attack position while their existing Think callbacks
-continue to handle cooldowns, random rolls and attacks. Jump-capable mutants approach until they enter
-their existing leap range. Short/long leap windows, the spider's health-dependent leap/spit switch, and
-species-specific ranges are declared in the concrete mutant definitions. Existing leap conditions use
-the same fields; their distances and cooldowns are unchanged.
+An unreachable target no longer causes an indefinite ranged/leap-range hold. Jump-capable mutants first
+test their actual launch velocity against server gravity, the target's vertical bounds, and a 16-segment
+full-hull trajectory. A feasible jump starts the existing attack callback directly, bypassing only its
+random jump roll. Species ranges, health restrictions, short/long jump selection, windups, cooldowns,
+animations and damage remain intact. The feasibility test and actual launch share velocity calculations
+and concrete definition fields. Normal reachable-target jumps retain their random rolls. Unchecked
+random jumps and new ranged ability windups are suppressed during unreachable recovery/retreat.
 
-After direct retries fail, mutants sample up to four alternate grounded approaches, two seconds apart.
-Approaches use their attack range and hull size to find footing around the target, below elevated perches.
-Successful walking progress keeps an active route running, including routes that initially move sideways.
-If approaches fail, mutants run to a validated ground node at least 3000 units from their current position,
-preferring the closest suitable node that increases distance from the target. Up to four nearby candidates
-at that distance are checked against the mutant's full hull using the shared search budget. If no suitable
-graph node exists, they hold position. They retry in bounded batches after ten seconds of withdrawal.
+If jumping cannot solve the approach and the two direct retries fail, mutants commit to running
+2000–3000 units from their starting position, away from the last observed target position. Up to four
+grounded graph candidates within that band are retained. Missing or blocked graph candidates fall back
+to grounded directional sampling; failed sampling or an exhausted search budget requests native flee
+behavior instead of holding position. Failed escape routes retry every two seconds, while routes making
+progress continue without restarts. Actual path connectivity still depends on the map's nodegraph.
+
+Retreat owns movement until its escape distance is reached, or a 60-second timeout allows reassessment.
+Target loss, sight changes and enemy-memory expiry cannot replace the retreat with pursuit midway.
+The target's hidden movement is never used. Sleep discards the retreat. Native fleeing/wandering remains
+the fallback where the map cannot supply a validated distant destination; a 2000–3000-unit route cannot
+be guaranteed through disconnected or enclosed navigation.
+
+`RunAI` returns `true` while native recovery/retreat paths are active, allowing the engine to execute
+them. Previously its recovery early return prevented native schedules from advancing. Attack windups
+and animations still suppress competing engine work. An airborne flag alone no longer blocks ordinary
+schedule selection; physical recovery still waits for grounded actors.
+See the [engine RunAI return contract](https://wiki.facepunch.com/gmod/ENTITY:RunAI).
 
 `lua/entities/stalker_ai/sv_navigation.lua` is included server-side by the NPC base before schedules.
 Its movement monitor checks active paths or validated ground destinations every half-second. A failed

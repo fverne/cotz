@@ -144,12 +144,14 @@ local entity = mutant(20, 10000)
 performance:RegisterMutant(entity, false)
 entity.CurrentSchedule, entity.bDoingEngineSchedule = {}, true
 entity.cotzUnreachableRecovery = {retries = 2, retreating = true}
+entity.cotzNavigationRetreat = {distance = 2500}
 entity.cotzNavigationRecovery, entity.cotzNavigationMotion, entity.cotzNavigationIntent = {}, {}, vector(0)
 entity:STALKERNPCUpdateSleep()
 check(entity.cotzSleeping and entity.flags ~= 0 and entity.stopped, "distant idle mutant stops engine Think")
 check(entity.CurrentSchedule == nil and entity.bDoingEngineSchedule == nil,
 	"sleep clears Lua and engine schedule bookkeeping")
 check(not entity.cotzUnreachableRecovery, "sleep discards unreachable recovery before the next encounter")
+check(not entity.cotzNavigationRetreat, "sleep discards the previous encounter's retreat")
 check(not entity.cotzNavigationRecovery and not entity.cotzNavigationMotion and not entity.cotzNavigationIntent,
 	"sleep discards physical recovery and stale movement intent")
 local damage = {GetAttacker = function() return nil end, GetInflictor = function() end}

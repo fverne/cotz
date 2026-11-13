@@ -161,5 +161,7 @@ windup, and player release after grabs or mutant death in multiplayer.
 and recovery when targets move or return to melee range. The base includes `sv_navigation.lua` server-side
 before schedules for attack-position selection, grounded approach/withdrawal, movement monitoring and
 conservative unseen recovery of stranded mutants. Concrete mutant definitions share leap-range values
-between navigation and their existing attacks. Run `luatex --luaonly tests/mutant_navigation_spec.lua`
+and launch velocities between navigation and their existing attacks. Failed chases trigger persistent
+2000–3000-unit retreats or feasible forced jumps; recovery keeps native engine schedules running.
+Run `luatex --luaonly tests/mutant_navigation_spec.lua`
 alongside the combat, population, field-task and summoning suites; verify static-prop encounters in multiplayer.

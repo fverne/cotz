@@ -53,6 +53,7 @@ function ENT:STALKERNPCUpdateSleep()
 	self.cotzPreviousState = self:GetNPCState()
 	self.cotzSleeping = true
 	self.cotzUnreachableRecovery = nil
+	self.cotzNavigationRetreat = nil
 	self.cotzNavigationRecovery, self.cotzNavigationMotion, self.cotzNavigationIntent = nil, nil, nil
 	self.cotzNavigationIntentGrounded = nil
 	ix.eventController:ClearCombatEnemy(self)

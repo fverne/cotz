@@ -55,6 +55,12 @@ ENT.navigationLeapRange = 1200
 ENT.navigationLeapMinRange = 300
 ENT.navigationShortLeapRange = 200
 
+ENT.navigationLeapAimHeight = 48
+ENT.navigationLeapSpeed = 2
+ENT.navigationShortLeapAimHeight = 32
+ENT.navigationShortLeapSpeed = 3
+ENT.navigationLeapCooldown = "CanBigJump"
+
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant.mdl"
 	self:STALKERNPCInit(Vector(-48,-48,70),MOVETYPE_STEP)
@@ -135,10 +141,7 @@ function ENT:STALKERNPCThink()
 
 	-- BIG JUMP 
 	if (self.bigjumping1 < CurTime() and self.isBigJumping == 1 and self:GetEnemy()) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,48) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-		self:SetVelocity((dirnormal*(distance*2)))
+		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
 
 		self.isBigJumping = 2
 	end
@@ -179,10 +182,7 @@ function ENT:STALKERNPCThink()
 
 	-- SMALL JUMP
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,32) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-		self:SetVelocity((dirnormal*(distance*3)))
+		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), true))
 
 		self:STALKERNPCPlayAnimation("stand_attack_run_0",6)
 		self:STALKERNPCMakeMeleeAttack(6)
@@ -202,14 +202,15 @@ function ENT:STALKERNPCOnDeath()
 
 end
 
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
+function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
+	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
 	if(self.PlayingAnimation==false) then
 		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
 		if distance < self.navigationShortLeapRange then
 			if(self.CanJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 				
-				if(TEMP_Rand==1) then		
+				if TEMP_Rand == 1 or forceJump then
 					self.CanJump = CurTime()+6
 					self.isAttacking = 1
 					self.jumping1 = CurTime()+0.3
@@ -222,7 +223,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 			if(self.CanBigJump<CurTime()) then
 				local TEMP_Rand = math.random(1,5)
 
-				if(TEMP_Rand==1) then		
+				if TEMP_Rand == 1 or forceJump then
 					self.CanBigJump = CurTime()+10
 					self.isBigJumping = 1
 					self.bigjumping1 = CurTime()+0.3

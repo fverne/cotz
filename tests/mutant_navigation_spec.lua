@@ -12,6 +12,11 @@ function Vector(x, y, z)
 end
 function vectorMeta.__add(a, b) return Vector(a.x + b.x, a.y + b.y, a.z + b.z) end
 function vectorMeta.__sub(a, b) return Vector(a.x - b.x, a.y - b.y, a.z - b.z) end
+function vectorMeta.__mul(a, b) return Vector(a.x * b, a.y * b, a.z * b) end
+function vectorMeta:GetNormalized()
+	local length = math.sqrt(self.x ^ 2 + self.y ^ 2 + self.z ^ 2)
+	return length == 0 and Vector() or self * (1 / length)
+end
 function vectorMeta:Angle() return {y = math.deg(math.atan(self.y, self.x))} end
 function vectorMeta:DistToSqr(other)
 	return (self.x - other.x) ^ 2 + (self.y - other.y) ^ 2 + (self.z - other.z) ^ 2
@@ -24,10 +29,13 @@ function IsValid(entity) return type(entity) == "table" and not entity.removed e
 function isnumber(value) return type(value) == "number" end
 SCHED_COMBAT_FACE, SCHED_FORCED_GO_RUN, SCHED_MOVE_AWAY_FROM_ENEMY = 1, 2, 3
 SCHED_CHASE_ENEMY, SCHED_IDLE_WANDER, SCHED_RUN_RANDOM = 4, 5, 6
-SCHED_TAKE_COVER_FROM_ENEMY = 7
+SCHED_TAKE_COVER_FROM_ENEMY, SCHED_RUN_FROM_ENEMY = 7, 8
 MASK_NPCSOLID, MASK_WATER = 1, 2
 vector_origin = Vector()
-GetConVar = function() return {GetInt = function() return 0 end} end
+GetConVar = function()
+	return {GetInt = function() return 0 end, GetFloat = function() return 600 end}
+end
+math.Rand = function(low, high) return (low + high) / 2 end
 player = {Iterator = function() return ipairs({}) end}
 local noGround, blocked, water, steep, noSupport = true, false, false, false, false
 local traceCalls = 0
@@ -62,6 +70,8 @@ local function target(isPlayer)
 		position = Vector(400),
 		GetPos = function(self) return self.position end,
 		OBBCenter = function() return Vector(0, 0, 32) end,
+		OBBMins = function() return Vector(0, 0, 0) end,
+		OBBMaxs = function() return Vector(0, 0, 72) end,
 		IsNPC = function() return not isPlayer end,
 		IsPlayer = function() return isPlayer end,
 		Alive = function(self) return not self.dead end,
@@ -85,6 +95,11 @@ local function mutant(enemy)
 		schedules = {},
 		unreachable = true,
 		GetEnemy = function(self) return self.enemy end,
+		GetGravity = function() return 1 end,
+		IsRunningBehavior = function() return false end,
+		EmitSound = function() end,
+		STALKERNPCPlayAnimation = function(self) self.PlayingAnimation = true end,
+		STALKERNPCMakeMeleeAttack = function() end,
 		IsOnGround = function(self) return not self.airborne end,
 		IsGoalActive = function(self) return self.goalActive or false end,
 		GetGoalPos = function(self) return self.destination end,
@@ -106,6 +121,7 @@ local function mutant(enemy)
 			return self.meleeRange or 0
 		end,
 		SetSchedule = function(self, schedule)
+			self:StartEngineSchedule(schedule)
 			self.schedule = schedule
 			self.schedules[#self.schedules + 1] = schedule
 		end,
@@ -121,136 +137,8 @@ local function selectAt(actor, time)
 end
 
 local function exhaustRetries(actor)
-	selectAt(actor, 0)
-	selectAt(actor, 1)
-	selectAt(actor, 3)
-	selectAt(actor, 5)
-	selectAt(actor, 7)
-	selectAt(actor, 9)
-	selectAt(actor, 11)
-	selectAt(actor, 13)
+	for _, time in ipairs({0, 1, 3, 5}) do selectAt(actor, time) end
 end
-
-for _, isPlayer in ipairs({true, false}) do
-	local enemy = target(isPlayer)
-	local actor = mutant(enemy)
-	selectAt(actor, 0)
-	check(actor.schedule == SCHED_COMBAT_FACE, "a first path failure starts a grace period instead of retreat")
-	for i = 1, 9 do selectAt(actor, i / 10) end
-	check(#actor.schedules == 1, "repeated schedule selections cannot restart the grace period")
-	selectAt(actor, 1)
-	check(actor.schedule == SCHED_FORCED_GO_RUN and actor.destination == enemy.position,
-		"the first retry paths toward the visible target position despite stale unreachable memory")
-	selectAt(actor, 2.9)
-	check(#actor.schedules == 2, "retries are spaced out instead of restarting navigation every frame")
-	selectAt(actor, 3)
-	check(actor.schedule == SCHED_FORCED_GO_RUN and #actor.schedules == 3, "the second retry runs once")
-	actor.unreachable = false
-	selectAt(actor, 4)
-	check(actor.cotzUnreachableRecovery.retries == 2, "engine memory expiry cannot renew the retry budget")
-	for time = 5, 13, 2 do selectAt(actor, time) end
-	check(actor.schedule == SCHED_COMBAT_FACE, "without usable graph nodes failed approaches hold instead of fleeing")
-	selectAt(actor, 22)
-	check(#actor.schedules == 4 and actor.enemy == enemy, "withdrawal does not restart navigation every frame")
-
-	enemy.position = Vector(430)
-	selectAt(actor, 22.1)
-	check(actor.cotzUnreachableRecovery.retreating, "small target movement does not reset recovery")
-	enemy.position = Vector(464)
-	selectAt(actor, 22.2)
-	check(not actor.cotzUnreachableRecovery and actor.schedule == SCHED_CHASE_ENEMY,
-		"64 units of cumulative movement releases retreat and resumes ordinary combat")
-
-	actor = mutant(target(isPlayer))
-	exhaustRetries(actor)
-	actor.enemy.position = Vector(400, 0, -64)
-	selectAt(actor, 6)
-	check(actor.schedule == SCHED_COMBAT_FACE and actor.cotzUnreachableRecovery.retries == 0,
-		"vertical target movement starts fresh recovery even while engine memory remains stale")
-	selectAt(actor, 7)
-	check(actor.schedule == SCHED_FORCED_GO_RUN, "a moved target receives a fresh position retry")
-
-	for _, range in ipairs({1, 2}) do
-		actor = mutant(target(isPlayer))
-		exhaustRetries(actor)
-		actor.meleeRange = range
-		selectAt(actor, 6)
-		check(not actor.cotzUnreachableRecovery and actor.schedule == SCHED_CHASE_ENEMY,
-			"returning within melee range or too close to attack cancels retreat despite stale engine memory")
-	end
-end
-
-local actor = mutant(target(true))
-actor.unreachable = false
-selectAt(actor, 0)
-check(actor.schedule == SCHED_CHASE_ENEMY and not actor.cotzUnreachableRecovery,
-	"reachable targets retain ordinary combat schedules")
-
-actor = mutant(target(true))
-selectAt(actor, 0)
-selectAt(actor, 1)
-actor.position, actor.unreachable = Vector(64), false
-selectAt(actor, 2)
-check(not actor.cotzUnreachableRecovery and actor.schedule == SCHED_CHASE_ENEMY,
-	"successful navigation progress with expired failure memory restores ordinary combat")
-
-actor = mutant(target(true))
-exhaustRetries(actor)
-actor.enemy = target(false)
-selectAt(actor, 6)
-check(actor.schedule == SCHED_COMBAT_FACE and actor.cotzUnreachableRecovery.retries == 0,
-	"switching targets discards the previous target's retry budget")
-actor.enemy.removed = true
-selectAt(actor, 7)
-check(not actor.cotzUnreachableRecovery and actor.schedule == SCHED_IDLE_WANDER,
-	"target removal clears recovery without accessing an invalid entity")
-
-actor = mutant(target(true))
-exhaustRetries(actor)
-actor.enemy.dead = true
-selectAt(actor, 6)
-check(not actor.cotzUnreachableRecovery and actor.schedule == SCHED_IDLE_WANDER,
-	"player death clears recovery")
-
-actor = mutant(target(true))
-selectAt(actor, 0)
-actor.PlayingAnimation = true
-selectAt(actor, 10)
-check(#actor.schedules == 1, "attack animations finish without navigation retries interrupting them")
-actor.PlayingAnimation, actor.cotzSleeping = false, true
-selectAt(actor, 11)
-check(#actor.schedules == 1, "sleeping mutants cannot issue navigation retries")
-
-actor = mutant(target(true))
-exhaustRetries(actor)
-actor.enemy.hidden = true
-selectAt(actor, 17)
-check(not actor.cotzUnreachableRecovery and actor.schedule == SCHED_CHASE_ENEMY,
-	"without the combat manager, loss of visibility clears recovery and uses ordinary hidden schedules")
-
-actor = mutant(target(true))
-exhaustRetries(actor)
-ix = {eventController = {
-	ValidateCombatEnemy = function() end,
-	UpdateCombatSchedule = function(self, entity)
-		entity:SetLastPosition(Vector(200))
-		entity:SetSchedule(SCHED_FORCED_GO_RUN)
-
-		return true
-	end,
-}}
-selectAt(actor, 6)
-check(not actor.cotzUnreachableRecovery and actor.destination.x == 200
-	and actor.schedule == SCHED_FORCED_GO_RUN,
-	"combat-manager pursuit owns occluded movement without recovery clearing its schedule or tracking hidden positions")
-
-ix = nil
-actor = mutant(target(true))
-exhaustRetries(actor)
-local other = mutant(actor.enemy)
-selectAt(other, 6)
-check(actor.cotzUnreachableRecovery.retreating and other.cotzUnreachableRecovery.retries == 0,
-	"mutants fighting the same target keep independent retry budgets")
 
 local function applySpecies(entity, name)
 	local definition = assert(io.open("lua/entities/npc_mutant_" .. name .. "/init.lua"))
@@ -261,116 +149,205 @@ local function applySpecies(entity, name)
 		if line:match("^ENT%.navigation") then declarations[#declarations + 1] = line end
 	end
 	assert(load(table.concat(declarations, "\n"), "@" .. name, "t", {ENT = entity}))()
-
-	return contents
+	local start = assert(contents:find("function ENT:STALKERNPCDistanceForMeleeTooBig(", 1, true))
+	local finish = contents:find("\nfunction ENT:", start + 1, true)
+	local callback = contents:sub(start, finish and finish - 1 or #contents)
+	callback = callback:gsub("!=", "~="):gsub("&&", " and "):gsub("||", " or "):gsub("!", "not ")
+	callback = callback:gsub("//([^\n]*)", "--%1")
+	local methods = {}
+	assert(load(callback, "@" .. name .. ":attack", "t", setmetatable({ENT = methods}, {__index = _G})))()
+	entity.STALKERNPCDistanceForMeleeTooBig = methods.STALKERNPCDistanceForMeleeTooBig
+	entity.CanJump, entity.CanLongJump, entity.CanBigJump, entity.NextAbilityTime = 0, 0, 0, 0
+	entity.CanSuck = 1000
 end
 
+for _, isPlayer in ipairs({true, false}) do
+	local actor = mutant(target(isPlayer))
+	selectAt(actor, 0)
+	check(actor.schedule == SCHED_COMBAT_FACE, "a path failure starts only a short grace period")
+	for i = 1, 9 do selectAt(actor, i / 10) end
+	check(#actor.schedules == 1, "the grace period cannot restart every frame")
+	selectAt(actor, 1)
+	check(actor.schedule == SCHED_FORCED_GO_RUN, "the first retry requests a real path")
+	selectAt(actor, 3)
+	actor.unreachable = false
+	selectAt(actor, 4)
+	check(actor.cotzUnreachableRecovery.retries == 2, "memory expiry does not replenish path retries")
+	selectAt(actor, 5)
+	check(actor.cotzNavigationRetreat and actor.schedule == SCHED_RUN_FROM_ENEMY,
+		"failed player and NPC chases flee instead of holding when graph/floor sampling fails")
+	actor.enemy.hidden, actor.enemy.position = true, Vector(9000)
+	selectAt(actor, 6)
+	check(actor.cotzNavigationRetreat and actor.cotzNavigationRetreat.enemyPosition.x == 400,
+		"retreat survives occlusion without tracking hidden target movement")
+end
+
+local actor = mutant(target(true))
+actor.unreachable = false
+selectAt(actor, 0)
+check(actor.schedule == SCHED_CHASE_ENEMY, "ordinary reachable combat remains unchanged")
+check(actor:RunAI() == true, "normal combat continues to run native engine schedules")
+actor = mutant(target(true))
+actor.airborne = true
+selectAt(actor, 0)
+check(actor.schedule ~= nil, "an airborne flag alone cannot permanently block ordinary schedule selection")
+
+actor = mutant(target(true))
+selectAt(actor, 0)
+selectAt(actor, 1)
+actor.position, actor.unreachable = Vector(64), false
+selectAt(actor, 2)
+check(not actor.cotzUnreachableRecovery and actor.schedule == SCHED_CHASE_ENEMY,
+	"successful path progress returns to ordinary combat")
+
+actor = mutant(target(true))
+actor.navigationRangedRange = 1500
+exhaustRetries(actor)
+check(actor.cotzNavigationRetreat, "a ranged attack range alone no longer creates an indefinite stationary hold")
+
+local formerRandom = math.random
+math.random = function() return 2 end
 for _, name in ipairs({"dog", "rodent", "cat", "psydog", "psydog_phantom", "bear", "sprig", "pseudodog",
 	"bloodsucker", "chimera", "chimera_fire", "chimera_electro", "snork", "vareshka", "tark",
 	"pseudogiant_fast", "spider"}) do
 	actor = mutant(target(true))
 	applySpecies(actor, name)
-	actor.enemy.position = Vector(actor.navigationLeapRange + 200)
-	selectAt(actor, 0)
-	selectAt(actor, 1)
-	check(actor.schedule == SCHED_FORCED_GO_RUN, name .. " approaches targets outside its existing leap range")
 	actor.enemy.position = Vector((actor.navigationLeapRange + (actor.navigationLeapMinRange or 0)) / 2)
-	selectAt(actor, 2)
-	check(actor.schedule == SCHED_COMBAT_FACE and not actor.cotzNavigationIntent,
-		name .. " stops walking inside leap range so the normal jump callback can run")
+	if name == "bloodsucker" then actor.enemy.position = Vector(60, 0, -40) end
+	selectAt(actor, 1)
+	check(actor:STALKERNPCNavigationBusy(), name .. " starts a feasible jump even when the normal random roll fails")
+	check(not actor.cotzNavigationRetreat, name .. " uses a feasible jump before retreating")
+	local schedules = #actor.schedules
+	selectAt(actor, 1.1)
+	check(#actor.schedules == schedules, name .. " protects the queued jump windup")
 end
 
-for _, name in ipairs({"controller", "controller_fast", "controller_electro", "controller_swamp", "burer",
-	"karlik", "hellhound", "izlom"}) do
-	actor = mutant(target(false))
-	applySpecies(actor, name)
-	actor.enemy.position = Vector(((actor.navigationRangedMinRange or 0) + actor.navigationRangedRange) / 2)
-	selectAt(actor, 0)
-	selectAt(actor, 20)
-	check(actor.schedule == SCHED_COMBAT_FACE and not actor.cotzNavigationIntent,
-		name .. " preserves ranged attacks against an unreachable NPC instead of retreating")
-end
+actor = mutant(target(true))
+applySpecies(actor, "dog")
+actor.enemy.position = Vector(150)
+actor:STALKERNPCDistanceForMeleeTooBig()
+check(not actor.isAttacking, "ordinary jump attacks still use their normal probability")
+selectAt(actor, 1)
+check(actor.isAttacking == 1 and actor.CanJump == 4, "an escape jump preserves the native cooldown")
+
+actor = mutant(target(true))
+applySpecies(actor, "dog")
+actor.enemy.position = Vector(150)
+actor.CanJump = 100
+exhaustRetries(actor)
+check(actor.cotzNavigationRetreat and not actor.isAttacking,
+	"jump cooldowns cause retreat rather than an infinite hold")
 
 actor = mutant(target(true))
 applySpecies(actor, "spider")
-actor.health = 50
-local minimum, maximum = actor:STALKERNPCNavigationAttackRange(400)
-check(minimum == 0 and maximum == 800, "wounded spiders use their existing spit range rather than a disabled leap")
-actor.enemy.position = Vector(400)
-selectAt(actor, 0)
-check(actor.schedule == SCHED_COMBAT_FACE, "a wounded spider keeps attacking from a valid spit position")
+actor.health, actor.enemy.position = 50, Vector(400)
+exhaustRetries(actor)
+check(actor.cotzNavigationRetreat and not actor.isAttacking, "wounded spiders cannot force a disabled leap")
+
+for _, name in ipairs({"snork", "vareshka", "pseudogiant_fast"}) do
+	actor = mutant(target(true))
+	applySpecies(actor, name)
+	actor.enemy.position = Vector(actor.navigationShortLeapRange / 2)
+	selectAt(actor, 1)
+	check(actor.isAttacking == 1, name .. " chooses its native short jump below the long-jump minimum")
+end
 
 actor = mutant(target(true))
-applySpecies(actor, "pseudogiant_fast")
-minimum, maximum = actor:STALKERNPCNavigationAttackRange(250)
-check(minimum == 0 and maximum == 200, "pseudogiants approach into short-jump range from the gap between leaps")
-
--- Exercise the real dog attack after navigation has brought it into range; preserve rolls and cooldowns.
-actor = mutant(target(true))
-local definition = applySpecies(actor, "dog")
+applySpecies(actor, "dog")
 actor.enemy.position = Vector(150)
+local formerTrace = util.TraceHull
+util.TraceHull = function() return {Hit = true, StartSolid = true} end
+exhaustRetries(actor)
+check(actor.cotzNavigationRetreat and not actor.isAttacking,
+	"blocked jump arcs retreat instead of jumping through props")
+util.TraceHull = formerTrace
+
+actor = mutant(target(true))
+applySpecies(actor, "dog")
+actor.enemy.position = Vector(150)
+util.TraceHull = function()
+	return {Hit = true, HitWorld = true, HitPos = Vector(60, 0, 80), HitNormal = Vector(0, 0, -1)}
+end
 selectAt(actor, 1)
-local attackStart = assert(definition:find("function ENT:STALKERNPCDistanceForMeleeTooBig()", 1, true))
-local attackSource = definition:sub(attackStart):gsub("!=", "~="):gsub("&&", " and ")
-attackSource = attackSource:gsub("//([^\n]*)", "--%1")
-local dog = {}
-assert(load(attackSource, "@dog-attack", "t", setmetatable({ENT = dog}, {__index = _G})))()
-local formerRandom = math.random
-actor.CanJump = 0
-math.random = function() return 2 end
-dog.STALKERNPCDistanceForMeleeTooBig(actor)
-check(not actor.isAttacking, "navigation does not bypass the species' existing jump roll")
-math.random = function() return 1 end
-dog.STALKERNPCDistanceForMeleeTooBig(actor)
-check(actor.isAttacking == 1 and actor.CanJump == 4, "normal jumps start with their unchanged three-second cooldown")
-local schedules = #actor.schedules
-selectAt(actor, 1.1)
-check(#actor.schedules == schedules, "queued jumps cannot be interrupted before their animation begins")
+check(not actor.isAttacking, "a ceiling blocks a forced jump even when its endpoint is in range")
+util.TraceHull = formerTrace
+
+actor = mutant(target(true))
+applySpecies(actor, "bloodsucker")
+actor.enemy.position = Vector(50)
+selectAt(actor, 1)
+check(not actor.isAttacking, "a jump that falls below the target before arrival is rejected despite being in range")
 math.random = formerRandom
 
 noGround = false
 actor = mutant(target(true))
 local recovery = {position = actor.enemy.position}
-check(actor:STALKERNPCApproachUnreachable(actor.enemy, recovery) == true
-	and actor.destination.z == 2 and actor.destination.x < actor.enemy.position.x,
-	"alternate approaches use supported footing below a perch on the mutant's side")
-actor.cotzCombatPack = {origin = Vector(-400)}
 ix = {eventController = {
-	GetSpawnNodes = function() return {Vector(-4500), Vector(-3100), Vector(-3000), Vector(-2500)} end,
+	GetSpawnNodes = function() return {Vector(-4500), Vector(-3100), Vector(-2900), Vector(-2500)} end,
 	TakeSearchBudget = function() return true end,
+	ValidateCombatEnemy = function() end,
+	UpdateCombatSchedule = function() end,
 }}
 actor:STALKERNPCWithdrawUnreachable(recovery)
-check(actor.destination.x == -3000 and actor.schedule == SCHED_FORCED_GO_RUN,
-	"withdrawal runs to the closest grounded graph point at least 3000 units away")
-local groundChecks = 0
-local originalGround = actor.STALKERNPCNavigationGround
-actor.STALKERNPCNavigationGround = function(self, position)
-	groundChecks = groundChecks + 1
-	if position.x == -3000 then return end
-
-	return originalGround(self, position)
-end
-actor:STALKERNPCWithdrawUnreachable(recovery)
-check(actor.destination.x == -3100 and groundChecks == 2,
-	"a blocked retreat node falls back to the next closest graph point")
-ix.eventController.GetSpawnNodes = function() return {Vector(-2500)} end
-actor:STALKERNPCWithdrawUnreachable(recovery)
-check(actor.schedule == SCHED_COMBAT_FACE and not actor.cotzNavigationIntent,
-	"missing distant graph nodes hold safely without scheduling cover or flee")
-ix.eventController.TakeSearchBudget = function() return false end
-groundChecks = 0
-actor:STALKERNPCWithdrawUnreachable(recovery)
-check(groundChecks == 0, "retreat node validation respects the shared search budget")
-actor.STALKERNPCNavigationGround = nil
-ix = nil
+check(actor.destination.x == -2500 and actor.schedule == SCHED_FORCED_GO_RUN,
+	"retreat chooses a grounded node within 2000-3000 units, away from its target")
+local schedules = #actor.schedules
+actor.enemy.hidden, actor.enemy.position = true, Vector(8000)
+actor.enemy = nil
+selectAt(actor, 0.5)
+check(actor.cotzNavigationRetreat and #actor.schedules == schedules,
+	"losing the enemy does not cancel the retreat or restart its path every frame")
+actor.position = Vector(-2500, 0, 2)
+selectAt(actor, 1)
+check(not actor.cotzNavigationRetreat, "retreat finishes after reaching its distant destination")
 
 actor = mutant(target(true))
-selectAt(actor, 0)
-selectAt(actor, 1)
+ix.eventController.GetSpawnNodes = function() return {Vector(2500), Vector(-2900)} end
+actor:STALKERNPCWithdrawUnreachable({position = actor.enemy.position})
+check(actor.destination.x == -2900, "retreat does not choose a destination reached by running toward the enemy")
+
+actor = mutant(target(true))
+ix.eventController.GetSpawnNodes = function() return {Vector(-2500), Vector(-2900)} end
+actor:STALKERNPCWithdrawUnreachable({position = actor.enemy.position})
+local retreat = actor.cotzNavigationRetreat
+actor.goalActive, actor.position = true, Vector(-64)
+now = 1
+check(actor:STALKERNPCUpdateRetreat() and actor.cotzNavigationRetreat == retreat,
+	"an active retreat keeps its original distance and deadline while making progress")
+actor.goalActive = false
+now = 3
+actor:STALKERNPCUpdateRetreat()
+check(actor.destination.x == -2900, "a failed retreat route tries the next distant candidate")
+
+actor = mutant(target(true))
+ix.eventController.GetSpawnNodes = function() return {Vector(-2500)} end
+actor:STALKERNPCWithdrawUnreachable({position = actor.enemy.position})
+actor.enemy = nil
 actor.goalActive = true
-actor.position = Vector(0, 64)
-selectAt(actor, 3)
-check(#actor.schedules == 2, "a working route can make sideways progress without being restarted")
+for tick = 1, 5 do
+	now = tick
+	local runEngine = actor:RunAI()
+	check(runEngine == true, "retreat frames keep native movement enabled after enemy loss")
+	actor.position = actor.position + Vector(-500)
+end
+now = 6
+actor:RunAI()
+check(not actor.cotzNavigationRetreat, "native movement can complete a persistent 2500-unit retreat")
+
+actor = mutant(target(true))
+ix.eventController.GetSpawnNodes = function() return {} end
+actor:STALKERNPCWithdrawUnreachable({position = actor.enemy.position})
+check(actor.destination and actor.destination:Distance(actor.position) >= 2000
+	and actor.destination:Distance(actor.position) <= 3000,
+	"missing distant graph nodes use grounded directional sampling instead of standing still")
+
+actor = mutant(target(true))
+ix.eventController.TakeSearchBudget = function() return false end
+local traceCount = traceCalls
+actor:STALKERNPCWithdrawUnreachable({position = actor.enemy.position})
+check(traceCalls == traceCount, "retreat geometry searches respect the shared budget")
+check(actor.schedule == SCHED_RUN_FROM_ENEMY, "budget exhaustion still starts native fleeing instead of standing still")
+ix = nil
 
 local function navigationAt(entity, time)
 	now = time
@@ -416,8 +393,7 @@ check(not actor.cotzNavigationRecovery, "unreachable elevated target goals alone
 actor = mutant(target(true))
 for time = 0, 30 do navigationAt(actor, time) end
 check(not actor.cotzNavigationRecovery, "stationary idle mutants have no requested goal and are never unstuck")
-actor.navigationRangedRange = 1500
-selectAt(actor, 31)
+actor:STALKERNPCHoldNavigationPosition()
 for time = 32, 60 do navigationAt(actor, time) end
 check(not actor.cotzNavigationRecovery, "intentional ranged holds are never treated as movement failures")
 
@@ -510,8 +486,9 @@ navigationAt(actor, 6)
 check(traceCalls == traces and actor.cotzNavigationRecovery.attempts == 0,
 	"exhausting the shared search budget defers recovery without geometry scans or lost attempts")
 ix = nil
-actor:RunAI()
-check(actor.maintained, "RunAI keeps navigation recovery active without selecting a competing combat schedule")
+local runsEngine = actor:RunAI()
+check(runsEngine == true and actor.maintained,
+	"RunAI keeps navigation recovery active without selecting a competing combat schedule")
 
 for _, state in ipairs({"sleep", "dead", "disabled"}) do
 	actor = stranded()

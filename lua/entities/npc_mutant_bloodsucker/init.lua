@@ -65,6 +65,9 @@ distance = 0
 
 ENT.navigationLeapRange = 100
 
+ENT.navigationLeapAimHeight = 96
+ENT.navigationLeapSpeed = 2
+
 function ENT:Initialize()
 	self.Model = "models/monsters/krovosos.mdl"
 	self:STALKERNPCInit(Vector(-28,-28,70),MOVETYPE_STEP)
@@ -162,10 +165,7 @@ function ENT:STALKERNPCThink()
 	-- JUMP
 	if self.jumping1 < CurTime() && self.IsJumping == 1 then
 		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,96) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-			self:SetVelocity((dirnormal*(distance*2)))
+			self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
 
 			self:STALKERNPCPlayAnimation("stand_attack_run_0",4)
 			self:STALKERNPCMakeMeleeAttack(4)
@@ -233,7 +233,8 @@ function ENT:STALKERNPCThink()
 end
 
 //little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
+function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
+	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
 	if self.NextAbilityTime < CurTime() then
 		if(self.PlayingAnimation==false) then
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
@@ -241,7 +242,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				if(self.CanJump<CurTime()) then
 					local TEMP_Rand = math.random(1,5)
 				
-					if(TEMP_Rand==1) then		
+					if TEMP_Rand == 1 or forceJump then
 						self.CanJump = CurTime()+9
 						self.NextAbilityTime = CurTime()+4
 
@@ -253,6 +254,8 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 				end
 			end
 		end
+
+		if forceJump then return end
 
 		if(self.PlayingAnimation==false) then
 			distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))

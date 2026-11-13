@@ -53,6 +53,9 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 ENT.navigationLeapRange = 1200
 ENT.navigationLeapMinRange = 300
 
+ENT.navigationLeapAimHeight = 128
+ENT.navigationLeapSpeed = 1.5
+
 function ENT:Initialize()
 	self.Model = "models/monsters/chimera2.mdl"
 	self:STALKERNPCInit(Vector(-48,-48,70),MOVETYPE_STEP)
@@ -106,10 +109,7 @@ function ENT:STALKERNPCThink()
 	end
 
 	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetEnemy():GetPos() + Vector(0,0,128) + self:OBBCenter()) - (self:GetPos())):GetNormal()
-
-		self:SetVelocity((dirnormal*(distance*1.5)))
+		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
 		self:STALKERNPCPlayAnimation("jump_attack_0",1)
 		self:STALKERNPCMakeMeleeAttack(1)
 		self:EmitSound("Stalker.Chimera.Hit4")
@@ -124,7 +124,8 @@ function ENT:STALKERNPCThink()
 end
 
 
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
+function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
+	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
 	if(self.PlayingAnimation==false) then
 		if self:GetEnemy() then
 			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
@@ -133,7 +134,7 @@ function ENT:STALKERNPCDistanceForMeleeTooBig()
 
 					local TEMP_Rand = math.random(1,5)
 				
-					if(TEMP_Rand==1) then		
+					if TEMP_Rand == 1 or forceJump then
 						self.CanJump = CurTime()+3
 						self.isAttacking = 1
 						self.jumping1 = CurTime()+0.2

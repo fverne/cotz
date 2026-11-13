@@ -3,9 +3,8 @@ local UNREACHABLE_RETRY_INTERVAL = 2
 local UNREACHABLE_RETRIES = 2
 local UNREACHABLE_TARGET_MOVEMENT_SQR = 64 ^ 2
 local UNREACHABLE_PROGRESS = 64
-local UNREACHABLE_APPROACHES = 4
-local UNREACHABLE_RECHECK_INTERVAL = 10
 local WALK_PROGRESS_SQR = 32 ^ 2
+local JUMP_CHECK_INTERVAL = 1
 
 local function clearUnreachableRecovery(actor)
 	if not actor.cotzUnreachableRecovery then return end
@@ -53,12 +52,9 @@ local function updateUnreachableRecovery(actor, enemy)
 		actor:SetSchedule(SCHED_COMBAT_FACE)
 	end
 
-	local distance = actor:GetPos():Distance(position)
-	local minimum, maximum = actor:STALKERNPCNavigationAttackRange(distance)
-	if maximum and distance > minimum and distance < maximum then
-		actor:STALKERNPCHoldNavigationPosition()
-
-		return true
+	if now >= (recovery.nextJumpCheck or 0) then
+		recovery.nextJumpCheck = now + JUMP_CHECK_INTERVAL
+		if actor:STALKERNPCTryNavigationJump(enemy) then return true end
 	end
 
 	-- Expiry of the engine's unreachable memory alone does not prove that a retry found a path.
@@ -82,29 +78,24 @@ local function updateUnreachableRecovery(actor, enemy)
 		recovery.nextRetry = now + UNREACHABLE_RETRY_INTERVAL
 		-- Position goals retry navigation without the chase task rejecting remembered unreachable enemies.
 		actor:STALKERNPCMoveToPosition(position)
-	elseif (recovery.approaches or 0) < UNREACHABLE_APPROACHES then
-		recovery.nextRetry = now + UNREACHABLE_RETRY_INTERVAL
-		actor:STALKERNPCApproachUnreachable(enemy, recovery)
 	else
-		if recovery.retreating then
-			recovery.retries, recovery.approaches, recovery.retreating = 0, 0, nil
-			recovery.nextRetry = now + UNREACHABLE_GRACE
-		else
-			recovery.retreating = true
-			recovery.nextRetry = now + UNREACHABLE_RECHECK_INTERVAL
-			actor:STALKERNPCWithdrawUnreachable(recovery)
-		end
+		recovery.retreating = true
+		actor:STALKERNPCWithdrawUnreachable(recovery)
 	end
 
 	return true
 end
 
 function ENT:RunAI( strExp )
-	if self.cotzSleeping then return end
-	if self:STALKERNPCUpdateNavigation() then
+	if self.cotzSleeping or self.IsAlive == false or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
+	local recovering = self:STALKERNPCUpdateNavigation()
+	local retreating = not self.cotzNavigationRecovery and self:STALKERNPCUpdateRetreat()
+	if recovering or retreating then
 		self:MaintainActivity()
+		if self:STALKERNPCNavigationBusy() then return end
 
-		return
+		-- Native path tasks still need MaintainSchedule while Lua recovery owns movement.
+		return true
 	end
 	if(self.PlayingAnimation==false||(self.PlayingAnimation==true&&self.PlayingGesture==true&&self.AllowSchedulesOnGesture==true)) then
 		if((self.PlayingAnimation==false||self.PlayingGesture==true)&&!self.CurrentSchedule) then
@@ -132,8 +123,9 @@ function ENT:RunAI( strExp )
 end
 
 function ENT:SelectSchedule( iNPCState )
-	if self.cotzSleeping then return end
+	if self.cotzSleeping or self.IsAlive == false or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if self:STALKERNPCNavigationBusy() then return end
+	if self.cotzNavigationRetreat and self:STALKERNPCUpdateRetreat() then return end
 	if ix and ix.eventController then
 		ix.eventController:ValidateCombatEnemy(self)
 		if ix.eventController:UpdateCombatSchedule(self) then

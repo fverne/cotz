@@ -1020,7 +1020,7 @@ function ENT:Think()
 							self:STALKERNPCMeleePlay(TEMP_IND)
 						elseif(TEMP_DistanceForMelee==1) then
 							self:STALKERNPCDistanceForMeleeTooSmall(TEMP_DistToEnemy)
-						else
+						elseif not self.cotzNavigationRetreat then
 							self:STALKERNPCDistanceForMeleeTooBig(TEMP_DistToEnemy)
 						end
 					end
