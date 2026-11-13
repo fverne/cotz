@@ -10,7 +10,7 @@ function ix.util.GetGasmaskFilterCondition(item)
 	end
 	if condition == false then return false end
 
-	return math.Clamp(condition, 0, FULL_CONDITION)
+	return math.Clamp(condition / 20, 0, FULL_CONDITION)
 end
 
 local function inMainBackpack(item, inventory)

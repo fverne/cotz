@@ -38,7 +38,7 @@ PLUGIN:Register("technut", {
 		pools = {"fasteners", "basic_tools", "workshop_supplies"},
 		quantities = {2, 4, 7},
 	},
-	supplies = {"suit_anorak", "mask_cloth"},
+	supplies = {"suit_anorak", "mask_cloth", "gasmask_filter_civilian"},
 	rewards = {
 		service = "repair",
 		creditPerTier = 300,
