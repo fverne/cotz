@@ -3,6 +3,7 @@ PLUGIN:Register("beanstalk", {
 	template = "ecologistnpc2",
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
+	buyCategories = {Artifacts = true, ["Mutant Parts"] = true},
 	map = "rp_marsh_cs",
 	bunker = true,
 	courierPools = {

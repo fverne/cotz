@@ -3,6 +3,7 @@ PLUGIN:Register("intern", {
 	template = "ecologistnpc3",
 	difficultyMultiplier = 4,
 	enforceCatalogue = true,
+	buyCategories = {Artifacts = true, ["Mutant Parts"] = true},
 	map = "rp_marsh_cs",
 	bunker = true,
 	courierPools = {

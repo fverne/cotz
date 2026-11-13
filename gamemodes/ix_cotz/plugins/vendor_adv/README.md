@@ -4,6 +4,8 @@ The [approved workbook plan](../../../../docs/npc-overhaul/vendor-plan.md) now o
 contacts' assortments. Vendors buy their hand-in candidates, catalogue goods and ordinary supplies.
 Additional `buyItems` IDs and `buyCategories` category lookups are configured on town contacts;
 Haggler buys ammunition/weapons and Spicy Lemon also buys all strong alcohol, raw meat and cooked meals.
+Beanstalk, Egghead and Intern at the Eco Bunker buy all items in the `Artifacts` and `Mutant Parts`
+categories, independently of progression unlocks.
 Buying lists are separate from progression and courier requests. Buying-only goods use BUYONLY;
 catalogue goods and supplies use SELLANDBUY, with catalogue purchases gated by seller-specific progression.
 Before a purchase unlock, the trade menu retains the BUYONLY action.

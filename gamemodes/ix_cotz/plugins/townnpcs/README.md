@@ -211,6 +211,8 @@ Contacts buy their delivery candidates, catalogue goods and ordinary supplies in
 unlocks. Extra buying IDs (`buyItems`) and category lookups (`buyCategories`) live in contact definitions:
 Haggler accepts ammunition and weapons, and Spicy Lemon accepts every strong alcohol item, raw meat and
 cooked meal (the `Cookable Meat` and `Cooked Meat` categories).
+Beanstalk, Egghead and Intern at the Eco Bunker buy all items in the `Artifacts` and `Mutant Parts`
+categories, independently of progression unlocks.
 These additions do not change progression requirements or courier candidates. Buying-only goods use
 BUYONLY rows; catalogue goods remain BUYONLY in the menu until their seller-specific purchase milestone
 is earned, then become SELLANDBUY. The server enforces both purchase and sale assortments, including

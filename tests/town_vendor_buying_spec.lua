@@ -42,6 +42,20 @@ check(not town:CanBuyItem(fresh, "drink_spirit_1", cook.name), "Buying spirits d
 check(not ix.progression.CanBuyItem(fresh, "'Haggler'", "mp153"), "Existing purchase milestones still apply")
 check(not town.contacts.haggler.wantedItems.ak74, "Buying firearms does not add progression hand-in candidates")
 
+local specimenItems = {}
+local categoryCounts = {Artifacts = 0, ["Mutant Parts"] = 0}
+for item, definition in pairs(ix.item.list) do
+	if categoryCounts[definition.category] then
+		specimenItems[#specimenItems + 1] = item
+		categoryCounts[definition.category] = categoryCounts[definition.category] + 1
+		for _, id in ipairs({"beanstalk", "egghead", "intern"}) do
+			local contact = town.contacts[id]
+			check(town:CanSellItem(item, contact.name), "Bunker scientists buy every artifact and part: " .. id .. "/" .. item)
+		end
+	end
+end
+check(categoryCounts.Artifacts > 0 and categoryCounts["Mutant Parts"] > 0, "Both specimen categories are loaded")
+
 VENDOR_MODE, VENDOR_BUYONLY, VENDOR_SELLANDBUY = 3, 3, 1
 ix.vendorStock = {
 	ApplyDefaults = function() end,
@@ -52,7 +66,7 @@ PLUGIN = {}
 dofile("gamemodes/ix_cotz/plugins/vendor_adv/libs/sh_towncontacts.lua")
 local vendors = PLUGIN
 local stock = {initial = 1, maximum = 1, interval = 48, amount = 1}
-for _, contact in ipairs({town.contacts.haggler, cook}) do
+for _, contact in ipairs({town.contacts.haggler, cook, town.contacts.beanstalk, town.contacts.egghead, town.contacts.intern}) do
 	ix.npctemplates.templates[contact.template] = {}
 	local catalogue = town.catalogues[contact.name]
 	vendors:ConfigureTownTemplate(contact, catalogue, stock)
@@ -79,6 +93,12 @@ for _, contact in ipairs({town.contacts.haggler, cook}) do
 		end
 	end
 	local extra = contact == cook and "drink_spirit_1" or "ak74"
+	if contact.bunker then
+		for _, item in ipairs(specimenItems) do
+			check(items[item] and vendor.items[item], "Templates and saved bunker vendors buy specimens: " .. item)
+		end
+		extra = specimenItems[1]
+	end
 	check(vendor.items[extra][3] == VENDOR_BUYONLY, "Extra buying goods never become sale stock")
 
 	local sentItems

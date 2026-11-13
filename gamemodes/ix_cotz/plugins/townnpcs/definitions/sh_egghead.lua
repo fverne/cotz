@@ -3,6 +3,7 @@ PLUGIN:Register("egghead", {
 	template = "ecologistnpc",
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
+	buyCategories = {Artifacts = true, ["Mutant Parts"] = true},
 	map = "rp_marsh_cs",
 	bunker = true,
 	courierPools = {
