@@ -366,6 +366,22 @@ function ix.progression.ValidateBenefits(definition)
 end
 
 if SERVER then
+	function ix.progression.ChargeService(character, npc, service, baseCost, maximumCash)
+		if type(baseCost) ~= "number" or baseCost < 0 or baseCost == math.huge or baseCost % 1 ~= 0
+			or type(maximumCash) ~= "number" or maximumCash < 0 or maximumCash ~= maximumCash then return false end
+		if not SERVICE_CONTACTS[service] or not SERVICE_CONTACTS[service][npc]
+			or not ix.progression.CanUseNPC(character, npc) then return false end
+		local cash, credit = ix.progression.QuoteService(character, npc, service, baseCost)
+		if cash > maximumCash or not character:HasMoney(cash) then return false end
+		local credits = table.Copy(character:GetData(CREDIT_KEY, {}) or {})
+		local key = npc .. "/" .. service
+		credits[key] = math.max(0, (credits[key] or 0) - credit)
+		character:SetData(CREDIT_KEY, credits)
+		character:TakeMoney(cash)
+
+		return true
+	end
+
 	function ix.progression.GrantBenefits(character, progressionID, benefits, claimID)
 		local record = ix.progression.GetCharacterProgression(character)
 		local line = ix.progression.GetLine(character, progressionID)
@@ -452,11 +468,9 @@ if SERVER then
 			or not character:HasMoney(offer.cost) then
 			return false
 		end
-		local credits = table.Copy(character:GetData(CREDIT_KEY, {}) or {})
-		local key = offer.npc .. "/" .. service
-		credits[key] = math.max(0, (credits[key] or 0) - offer.credit)
-		character:SetData(CREDIT_KEY, credits)
-		character:TakeMoney(offer.cost)
+		if not ix.progression.ChargeService(character, offer.npc, service, offer.baseCost, quote.cost) then
+			return false
+		end
 		if service == "repair" then applyRepair(client, offer) end
 		if service == "treatment" then applyTreatment(client, offer) end
 		if service == "storage" then character:SetData(offer.field, offer.size + 1) end

@@ -35,10 +35,12 @@ spacing, cards, and the footer scale with screen size; the journal retains space
 when present, and the equipment area uses the full remaining width otherwise.
 Journal space is reserved only for an actual `ixCharacterJournalPanel`; transient
 subpanel controls during menu creation do not reduce the equipment width.
-The footer shows ballistic, rupture, radiation, anomaly, and psy percentage reduction.
+The footer shows ballistic, rupture, radiation, thermal, electrical, chemical, gravitational and psy
+percentage reduction. Its eight statistics wrap into rows with room for the longer protection names;
+the slot cards scroll above the fixed footer.
 Its tooltips report flat absorption separately, matching the existing damage formulas.
 Values refresh while the page is visible, and real item durability appears on cards
-where that state exists. The UI does not introduce new gameplay statistics.
+where that state exists. The summary uses the same resistance values as damage calculations.
 Slotted icons omit equipped badges and small corner condition indicators. Full-width
 card bars show durability above wear when both exist, or a single bar for knife
 sharpness, durability, or wear. Ordinary backpack icons keep their existing overlays.
@@ -156,6 +158,7 @@ luatex --luaonly tests/equipment_admin_spec.lua
 luatex --luaonly tests/equipment_interactions_spec.lua
 luatex --luaonly tests/device_power_spec.lua
 luatex --luaonly tests/headgear_durability_spec.lua
+luatex --luaonly tests/anomaly_resistance_spec.lua
 luatex --luaonly tests/helix_upgrade_spec.lua
 ```
 

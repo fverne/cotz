@@ -49,6 +49,35 @@ local function addButton(parent, text, callback)
 	return button
 end
 
+local function isCompleted(job)
+	return job.isCompleted or job.progress >= job.numberRec
+end
+
+local function taskMap(npc, job)
+	local definition = ix.jobs.list[job.identifier]
+	local contact = ix.townNPCs and ix.townNPCs.byName[npc]
+	local issuerMap = contact and contact.map
+	local state = job.fieldTask
+	if isCompleted(job) then return issuerMap end
+	if state then
+		if state.stage == "delivered" or state.stage == "issue" then return issuerMap or state.map end
+		if state.stage == "carrying" then
+			if state.recipient then return ix.jobs.field.GetRecipientMap(state) end
+			if state.kind == "deadDrop" then return state.destinationMap or state.map end
+
+			return issuerMap
+		end
+
+		return state.map
+	end
+
+	local map = job.targetMap or definition.targetMap or definition.fieldMap
+	if map then return map end
+	if job.photoKind or definition.photoKind or definition.listenTrigger then return nil end
+
+	return issuerMap
+end
+
 local function jobSignature(jobs)
 	local parts = {}
 	for npc, job in SortedPairs(jobs) do
@@ -57,6 +86,7 @@ local function jobSignature(jobs)
 				.. ix.jobs.getFormattedDesc(job, true, LocalPlayer():GetCharacter()) .. "\n"
 				.. tostring(job.progress) .. "/" .. job.numberRec
 				.. tostring(job.isCompleted) .. tostring(job.fieldTask and job.fieldTask.kind)
+				.. tostring(job.fieldTask and job.fieldTask.stage) .. tostring(taskMap(npc, job))
 		end
 	end
 
@@ -68,6 +98,46 @@ local PANEL = {}
 function PANEL:Init()
 	self:DockPadding(16, 16, 16, 16)
 	self.title = addLabel(self, "TASKS", "ixMediumFont")
+	self.query = ""
+	self.statusFilter = "all"
+	self.zoneFilter = "all"
+	self.search = ix.cotzUI.StyleEntry(self:Add("DTextEntry"))
+	self.search:Dock(TOP)
+	self.search:SetPlaceholderText("Search tasks, contacts, objectives or zones")
+	self.search:SetUpdateOnType(true)
+	local paintEntry = self.search.Paint
+	self.search.Paint = function(control, width, height)
+		paintEntry(control, width, height)
+		if control:GetText() == "" and not control:HasFocus() then
+			draw.SimpleText(control:GetPlaceholderText(), "cotzUISmall", 8 * self.fontScale, height / 2,
+				COLORS.muted, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+		end
+	end
+	self.search.OnValueChange = function(_, value)
+		self.query = string.lower(string.Trim(value))
+		self:Rebuild()
+	end
+	self.status = ix.cotzUI.StyleCombo(self:Add("DComboBox"))
+	self.status:Dock(TOP)
+	self.status:SetSortItems(false)
+	self.status:AddChoice("All tasks", "all", true)
+	self.status:AddChoice("In progress", "progress")
+	self.status:AddChoice("Completed", "completed")
+	self.status:SetTooltip("Completed tasks are ready to return to the contact. Handed-in tasks leave this list.")
+	self.status.OnSelect = function(_, _, _, value)
+		self.statusFilter = value
+		self:Rebuild()
+	end
+	self.zone = ix.cotzUI.StyleCombo(self:Add("DComboBox"))
+	self.zone:Dock(TOP)
+	self.zone:SetSortItems(false)
+	self.zone:AddChoice("All zones", "all", true)
+	self.zone:AddChoice("Current zone", "current")
+	self.zone:SetTooltip("Filter by the current objective, delivery destination or return contact. Tasks without a known zone remain visible.")
+	self.zone.OnSelect = function(_, _, _, value)
+		self.zoneFilter = value
+		self:Rebuild()
+	end
 	self.journal = self:Add("DScrollPanel")
 	self.journal:Dock(FILL)
 	local bar = self.journal:GetVBar()
@@ -95,6 +165,10 @@ function PANEL:RefreshFonts()
 		})
 	end
 	self.title:SetFont("cotzTasksTitle")
+	for _, control in ipairs({self.search, self.status, self.zone}) do
+		control:SetTall(math.ceil(34 * scale))
+		control:DockMargin(0, 0, 0, math.ceil(8 * scale))
+	end
 end
 
 function PANEL:AddTask(npc, job)
@@ -113,7 +187,7 @@ function PANEL:AddTask(npc, job)
 	addLabel(card, ix.jobs.getFormattedName(job), "cotzTasksLabel")
 	addLabel(card, npc, "cotzTasksSmall", COLORS.muted)
 	addLabel(card, ix.jobs.getFormattedDesc(job, true, LocalPlayer():GetCharacter()), "cotzTasksSmall")
-	local completed = job.isCompleted or job.progress >= job.numberRec
+	local completed = isCompleted(job)
 	local progressText = job.targetWeights and string.format("Progress: %.2f / %d packs", job.progress, job.numberRec)
 		or string.format("Progress: %d / %d", job.progress, job.numberRec)
 	local status = completed and "Complete — return to " .. npc
@@ -170,22 +244,42 @@ function PANEL:AddTask(npc, job)
 	end
 end
 
+function PANEL:MatchesTask(npc, job)
+	local completed = isCompleted(job)
+	if self.statusFilter == "completed" and not completed then return false end
+	if self.statusFilter == "progress" and completed then return false end
+	local map = taskMap(npc, job)
+	if self.zoneFilter == "current" and map and map ~= game.GetMap() then return false end
+	if self.query == "" then return true end
+	local text = table.concat({npc, ix.jobs.getFormattedName(job),
+		ix.jobs.getFormattedDesc(job, true, self.character), map and ix.jobs.GetMapName(map) or ""}, "\n")
+
+	return string.find(string.lower(text), self.query, 1, true) ~= nil
+end
+
 function PANEL:Rebuild()
 	self.journal:Clear()
 	local character = LocalPlayer():GetCharacter()
 	local jobs = character and character:GetJobs() or {}
 	self.snapshot = jobSignature(jobs)
 	self.character = character
-	local count = 0
+	self.map = game.GetMap()
+	local count, total = 0, 0
 	for npc, job in SortedPairs(jobs) do
 		if ix.jobs.list[job.identifier] then
-			self:AddTask(npc, job)
-			count = count + 1
+			total = total + 1
+			if self:MatchesTask(npc, job) then
+				self:AddTask(npc, job)
+				count = count + 1
+			end
 		end
 	end
-	self.title:SetText("TASKS · " .. count)
+	local filtered = self.query ~= "" or self.statusFilter ~= "all" or self.zoneFilter ~= "all"
+	self.title:SetText("TASKS · " .. count .. (filtered and " / " .. total or ""))
 	if count == 0 then
-		addLabel(self.journal, "No active tasks. Speak to a contact to find work.", "cotzTasksLabel", COLORS.muted)
+		local text = total == 0 and "No active tasks. Speak to a contact to find work."
+			or "No matching tasks. Clear the search or change the filters."
+		addLabel(self.journal, text, "cotzTasksLabel", COLORS.muted)
 	end
 end
 
@@ -196,7 +290,8 @@ function PANEL:Think()
 	local jobs = character and character:GetJobs() or {}
 	local oldScale = self.fontScale
 	self:RefreshFonts()
-	if oldScale ~= self.fontScale or character ~= self.character or jobSignature(jobs) ~= self.snapshot then
+	if oldScale ~= self.fontScale or character ~= self.character or self.map ~= game.GetMap()
+		or jobSignature(jobs) ~= self.snapshot then
 		self:Rebuild()
 	end
 end

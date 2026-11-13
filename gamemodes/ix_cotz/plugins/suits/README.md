@@ -1,8 +1,9 @@
 # Suits, headgear and gasmask filters
 
 The plugin owns equipment resistance calculations, headgear damage, and replaceable gasmask filters.
-Shared mechanics load through `sh_plugin.lua`; filter items use the immediate `items/gasmaskfilters/`
-folder and its `base_gasmaskfilters` base. No bundled Helix changes are required.
+Shared mechanics load through `sh_plugin.lua`, including `sh_resistances.lua` before headgear wear.
+Filter items use the immediate `items/gasmaskfilters/` folder and its `base_gasmaskfilters` base.
+No bundled Helix changes are required.
 
 ## Filter compatibility
 
@@ -48,8 +49,30 @@ weight describes the equipment without its cartridge. See the [town progression 
 
 ## Protection and use
 
-Anomaly resistance covers burn, shock, acid, blast, crush, drowning, poison, nerve gas and slow burn.
-Crush damage uses environmental headgear wear, including gravitational anomalies and physics impacts.
+Suit anomaly protection has four independent percentage/flat pairs:
+
+| Protection | Percentage field | Flat field | Damage types |
+| --- | --- | --- | --- |
+| Thermal | `thermalRes` | `flatThermalRes` | Burn, slow burn |
+| Electrical | `electricalRes` | `flatElectricalRes` | Shock |
+| Chemical | `chemicalRes` | `flatChemicalRes` | Acid, drowning, poison, nerve gas |
+| Gravitational | `gravitationalRes` | `flatGravitationalRes` | Crush, blast |
+
+Every concrete suit declares all eight fields, initially copying its previous `ar`/`far` values.
+These are definition values, so existing instances use them without changing saved item data.
+`getAR(field)` returns the remaining-damage multiplier; `getFAR(field)` returns flat absorption.
+Damage is `max((incoming - flat) * multiplier, 0)`. Base protection retains its ordinary durability
+taper below 80%. Suit tooltips list all four effective pairs, including zero and flat-only ratings.
+The equipment footer shows each family's combined percentage reduction and flat absorption tooltip.
+
+Legacy `ar`/`far` remain as fallback values and for existing untyped callers and environmental
+headgear wear outside these families. Broad upgrades, attachments and the flat anomaly wish still
+apply to every family with their existing formulas. A type-specific field overrides its broad fallback,
+including explicit zero; flat attachments retain their existing behavior and do not add suit absorption.
+Equipped headgear may also supply these fields, otherwise its existing `ar`/`far` apply to all four.
+The existing resistance refresh paths update each family's cached network values.
+Mixed damage flags use the weakest applicable family's protection once, without stacking reductions.
+Crush damage still uses environmental headgear wear, including gravitational anomalies and physics impacts.
 
 A filter has 0–100% condition. Effectiveness is `clamp(condition / 20, 0, 1)`: full at 20–100%, then
 linear below 20%. The headgear's percentage and flat radiation protection multiply its ordinary
@@ -116,6 +139,7 @@ Placement counts the returning cartridge's existing carried mass only once, incl
 Run from the repository root:
 
 ```sh
+luatex --luaonly tests/anomaly_resistance_spec.lua
 luatex --luaonly tests/gasmask_filters_spec.lua
 luatex --luaonly tests/headgear_durability_spec.lua
 luatex --luaonly tests/equipment_slots_spec.lua
@@ -134,4 +158,8 @@ with partial, empty and exhausted filters. Try repeated and foreign requests, fu
 backpack filled during removal, death or character switching during installation/removal, and normal carry limits.
 Check equipped and unequipped drag/drop, full-backpack replacement, the complete six-second delay,
 F cancellation just before completion, permission changes, repeated requests and filter wear during the delay.
-Inspect tooltips and both condition bars at narrow, 1080p, ultrawide and 4K resolutions.
+Inspect tooltips, all eight equipment protection statistics and both condition bars at narrow, 1080p,
+ultrawide and 4K resolutions. Temporarily give a test suit different thermal, electrical, chemical and
+gravitational ratings; compare each field anomaly's damage and equipment wear with its matching tooltip
+and footer value. Restore the definition afterward. Check low durability, upgrades, attachments, the
+flat anomaly wish, reconnects and mixed damage flags. Standalone specs do not verify live rendering or networking.

@@ -24,7 +24,7 @@ ix.jobs.field.settings = {
 	defence = {
 		sources = {"rf"}, attackSources = {"rf"}, cargo = "job_research_results",
 		minAttackDistance = 512, maxAttackDistance = 4096, maxHeightDifference = 256, maxSpawnPoints = 8,
-		defendDistance = 768, duration = 90, samplerHealth = 250, threatRadius = 160, threatDamage = 8,
+		defendDistance = 2048, duration = 90, samplerHealth = 250, threatRadius = 160, threatDamage = 8,
 		waveInterval = 10, attemptTimeout = 300, retryDelay = 30, playerSafeDistance = 256,
 		waves = {
 			{{classes = {"npc_mutant_dog"}, count = 2},

@@ -28,6 +28,14 @@ ITEM.sr = 0.35
 ITEM.fsr = 2
 ITEM.ar = 0.77
 ITEM.far = 3
+ITEM.thermalRes = 0.77
+ITEM.flatThermalRes = 3
+ITEM.electricalRes = 0.77
+ITEM.flatElectricalRes = 3
+ITEM.chemicalRes = 0.77
+ITEM.flatChemicalRes = 3
+ITEM.gravitationalRes = 0.77
+ITEM.flatGravitationalRes = 3
 
 ITEM.pr = 0.47
 ITEM.fpr = 0

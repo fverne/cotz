@@ -14,6 +14,7 @@ local notifications = {}
 local fieldActions = {}
 local uiScale = 1.3
 local fonts = {}
+local currentMap = "swamps"
 local character = {GetJobs = function() return activeJobs end, GetData = function() return 0 end}
 local client = {
 	GetCharacter = function() return character end,
@@ -40,6 +41,11 @@ function methods:SetFont(value) self.font = value end
 function methods:SetTall(value) self.height = value end
 function methods:GetTall() return self.height end
 function methods:SetWide(value) self.width = value end
+function methods:AddChoice(text, data, selected)
+	self.choices = self.choices or {}
+	self.choices[#self.choices + 1] = {text = text, data = data}
+	if selected then self:SetText(text) end
+end
 function methods:DockMargin(...) self.margin = {...} end
 function methods:GetDockMargin() return table.unpack(self.margin) end
 function methods:GetVBar()
@@ -49,7 +55,9 @@ function methods:GetVBar()
 	return self.bar
 end
 for _, name in ipairs({"Dock", "DockPadding", "SetTextColor", "SetWrap", "SetAutoStretchVertical",
-	"SetHideButtons"}) do methods[name] = function() end end
+	"SetHideButtons", "SetPlaceholderText", "SetUpdateOnType", "SetSortItems", "SetTooltip"}) do
+	methods[name] = function() end
+end
 TOP, FILL, RIGHT = 1, 2, 3
 PLUGIN = {}
 Color = function(...) return {...} end
@@ -57,6 +65,8 @@ ScrW = function() return 1920 end
 ScrH = function() return 1080 end
 RealTime = function() return clock end
 LocalPlayer = function() return client end
+game = {GetMap = function() return currentMap end}
+string.Trim = function(value) return value:match("^%s*(.-)%s*$") end
 SortedPairs = function(value)
 	local keys = {}
 	for key in pairs(value) do keys[#keys + 1] = key end
@@ -78,19 +88,26 @@ netstream = {
 	Start = function(name, npc) sent[#sent + 1] = {name = name, npc = npc} end,
 }
 ix = {type = {bool = "bool"}, option = {Add = function() end}, cotzUI = {
+StyleEntry = function(control) return control end, StyleCombo = function(control) return control end,
 GetScale = function() return uiScale end, Query = function(text, title, cancel, onCancel, accept, onAccept)
 	confirmation = {text = text, cancel = onCancel, accept = onAccept}
 end}, jobs = {
 	list = {hunt = {}, survey = {}},
 	getFormattedName = function(job) return "Task " .. job.identifier end,
 	getFormattedDesc = function(job) return "Description with reward " .. job.reward end,
+	GetMapName = function(map) return ({swamps = "Swamps", garbage = "Garbage"})[map] or map end,
 	field = {runtimeSettings = {markerSeconds = 10}},
-}}
+}, townNPCs = {byName = {Alpha = {map = "swamps"}, Zulu = {map = "garbage"}}}}
 Vector = function() return {} end
 net = {Receive = function() end}
 dofile("gamemodes/ix_cotz/plugins/jobsystem/cl_fieldtasks.lua")
 ix.jobs.field.RequestAction = function(npc, action)
 	fieldActions[#fieldActions + 1] = {npc = npc, action = action}
+end
+ix.jobs.field.GetRecipientMap = function(state)
+	local contact = ix.townNPCs.byName[state.recipient]
+
+	return contact and contact.map or state.recipientMap
 end
 dofile("gamemodes/ix_cotz/plugins/jobsystem/cl_plugin.lua")
 local menu = panel("ixCharacterJournalPanel")
@@ -166,8 +183,99 @@ activeJobs.Alpha = nil
 clock = 3
 menu:Think()
 check(menu.title.text == "TASKS · 1", "server removal updates the task count")
-character = nil
+activeJobs.Alpha = oldJob
+menu:Rebuild()
+menu.status:OnSelect(3, "Completed", "completed")
+check(menu.title.text == "TASKS · 1 / 2" and menu.journal.children[1].children[2].text == "Alpha",
+	"completed filter includes tasks ready for return")
+menu.status:OnSelect(2, "In progress", "progress")
+check(menu.title.text == "TASKS · 1 / 2" and menu.journal.children[1].children[2].text == "Zulu",
+	"in-progress filter excludes completed tasks")
+menu.search:OnValueChange("  RECORDER  ")
+check(menu.title.text == "TASKS · 1 / 2", "search matches descriptions without case or surrounding whitespace")
+menu.search:OnValueChange("bandages")
+check(menu.title.text == "TASKS · 0 / 2" and menu.journal.children[1].text:find("No matching", 1, true),
+	"search combines with the status filter and explains empty results")
+menu.status:OnSelect(1, "All tasks", "all")
+check(menu.title.text == "TASKS · 1 / 2", "status changes preserve the search")
+menu.search:OnValueChange("%")
+check(menu.title.text == "TASKS · 0 / 2", "search treats Lua pattern characters literally")
+menu.search:OnValueChange("ALPHA")
+check(menu.title.text == "TASKS · 1 / 2", "search matches contact names")
+menu.search:OnValueChange("survey")
+check(menu.title.text == "TASKS · 1 / 2", "search matches task names")
+menu.search:OnValueChange("")
+menu.zone:OnSelect(2, "Current zone", "current")
+local fieldJob = activeJobs.Zulu
+fieldJob.fieldTask.map = "garbage"
+menu:Rebuild()
+check(menu.title.text == "TASKS · 1 / 2" and menu.journal.children[1].children[2].text == "Alpha",
+	"current zone shows completed work at its return contact and hides remote field work")
+fieldJob.fieldTask.map = "swamps"
+clock = 3.5
+menu:Think()
+check(menu.title.text == "TASKS · 2 / 2", "saved assignment map changes refresh the zone filter")
+fieldJob.fieldTask.stage = "carrying"
 clock = 4
+menu:Think()
+check(menu.title.text == "TASKS · 1 / 2", "carrying field cargo follows the return contact rather than the search map")
+fieldJob.fieldTask.recipient = "Alpha"
+clock = 4.5
+menu:Think()
+check(menu.title.text == "TASKS · 2 / 2", "carrying cargo follows the current receiving contact")
+fieldJob.fieldTask.kind = "deadDrop"
+fieldJob.fieldTask.recipient = nil
+fieldJob.fieldTask.destinationMap = "garbage"
+menu:Rebuild()
+check(menu.title.text == "TASKS · 1 / 2", "carrying dead-drop cargo follows its saved burial map")
+fieldJob.fieldTask.stage = "delivered"
+fieldJob.fieldTask.destinationMap = "swamps"
+menu:Rebuild()
+check(menu.title.text == "TASKS · 1 / 2", "delivered routes follow their return contact")
+currentMap = "garbage"
+clock = 5
+menu:Think()
+check(menu.title.text == "TASKS · 1 / 2" and menu.journal.children[1].children[2].text == "Zulu",
+	"changing zones refreshes the current-zone filter")
+menu.zone:OnSelect(1, "All zones", "all")
+menu.search:OnValueChange("swamps")
+check(menu.title.text == "TASKS · 1 / 2", "search matches readable zone names")
+menu.search:OnValueChange("")
+activeJobs = {Alpha = {identifier = "hunt", progress = 0, numberRec = 1, reward = "bandages",
+	targetMap = "garbage"}}
+menu.zone:OnSelect(2, "Current zone", "current")
+check(menu.title.text == "TASKS · 1 / 1", "regional combat follows the saved target map")
+activeJobs.Alpha.progress = 1
+clock = 5.5
+menu:Think()
+check(menu.title.text == "TASKS · 0 / 1", "numeric completion alone moves a task to its return zone")
+activeJobs.Alpha.progress = 0
+activeJobs.Alpha.targetMap = nil
+activeJobs.Alpha.photoKind = "mutant"
+menu:Rebuild()
+check(menu.title.text == "TASKS · 1 / 1", "photography remains available away from the issuer's zone")
+activeJobs.Alpha.photoKind = nil
+ix.jobs.list.hunt.listenTrigger = "mutantKilled"
+menu:Rebuild()
+check(menu.title.text == "TASKS · 1 / 1", "unrestricted legacy kill work remains available in other zones")
+ix.jobs.list.hunt.listenTrigger = nil
+ix.townNPCs.byName.Alpha = nil
+menu:Rebuild()
+check(menu.title.text == "TASKS · 1 / 1", "tasks without known zones remain visible")
+activeJobs = {Zulu = fieldJob}
+fieldJob.fieldTask.kind = "courier"
+fieldJob.fieldTask.stage = "issue"
+fieldJob.fieldTask.map = "swamps"
+menu:Rebuild()
+check(menu.title.text == "TASKS · 1 / 1", "unissued couriers follow their issuing contact")
+fieldJob.fieldTask.stage = "carrying"
+fieldJob.fieldTask.recipient = "Remote"
+fieldJob.fieldTask.recipientMap = "swamps"
+menu:Rebuild()
+check(menu.title.text == "TASKS · 0 / 1", "legacy receivers use the saved recipient map")
+menu.zone:OnSelect(1, "All zones", "all")
+character = nil
+clock = 6
 menu:Think()
 check(menu.title.text == "TASKS · 0", "character departure clears the displayed assignments")
 print("PASS: " .. checks .. " task menu checks")

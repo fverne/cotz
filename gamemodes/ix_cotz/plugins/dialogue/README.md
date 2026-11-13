@@ -60,6 +60,9 @@ Character, distance, tree and vendor access checks still apply; ordinary town co
 Technut opens the combined [gear and suit customization window](../gearcustomization/README.md)
 from his root menu after the painting progression unlock. Each confirmed gear or suit change costs
 100 rubles. The server checks the unlock when opening, quoting and confirming customization.
+Technut and Boss also offer **Weapon workshop**, installed by [weaponservice](../weaponservice/README.md)
+after conversations load. Its component, rebuild, dismantling and stored-item actions use the existing
+dynamic dialogue UI; the owning plugin validates and executes every transaction on the server.
 Suture's conversions and Mute's PDA appearance options sit under gear customization. Suture's progression labels distinguish suit variants from suit purchases. Ammunition exchanges sit under barter.
 Quartermaster's two gunpowder-for-ammunition-kit exchanges are removed from the main menu. His six regular
 currency-for-ammunition barters remain under barter. These menus retain the owning service's access checks. Barter roots are hidden until an active legacy

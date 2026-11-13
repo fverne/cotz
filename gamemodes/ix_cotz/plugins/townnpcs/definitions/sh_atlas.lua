@@ -25,7 +25,7 @@ PLUGIN:Register("atlas", {
 			medium = "rp_garbage_cotz",
 		},
 	},
-	supplies = {"flashlight", "compass"},
+	supplies = {"flashlight", "compass", "map_usb_swamps"},
 	rewards = {
 		bonusPackages = {
 			{

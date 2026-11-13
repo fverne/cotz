@@ -4,6 +4,7 @@ PLUGIN.author = "Subleader and Alexgrist and verne (Outfit base used)"
 PLUGIN.desc = "Compatible with bad air and localized damage, plus it adds damage resistance"
 
 ix.util.Include("cl_plugin.lua")
+ix.util.Include("sh_resistances.lua")
 ix.util.Include("sh_durability.lua")
 ix.util.Include("sh_filters.lua")
 ix.util.Include("sv_filters.lua")
@@ -89,32 +90,11 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		dmginfo:SetDamage(damage)
 	end
 
-	-- Anomaly resistance
-	local anomtypes = {}
-	anomtypes[DMG_SHOCK] = true
-	anomtypes[DMG_BURN] = true
-	anomtypes[DMG_ACID] = true
-	anomtypes[DMG_BLAST] = true
-	anomtypes[DMG_CRUSH] = true
-	anomtypes[DMG_DROWN] = true
-	anomtypes[DMG_POISON] = true
-	anomtypes[DMG_NERVEGAS] = true
-	anomtypes[DMG_SLOWBURN] = true
-	-- anomtypes[DMG_GENERIC] = true
-
-	if target:IsPlayer() and anomtypes[dmginfo:GetDamageType()] then
-		local damage = dmginfo:GetDamage()
-		local perRes = target:GetNWFloat("ixperanomres")
-		local flatRes = target:GetNWInt("ixflatanomres")
+	if target:IsPlayer() then
+		local damage = ix.suits.GetAnomalyDamage(target, dmginfo)
+		if damage == nil then return end
 		local suit = target:getEquippedBodyArmor()
 
-		damage = damage - flatRes
-		damage = damage * perRes
-
-		-- Make sure we dont heal the player
-		damage = math.max(damage, 0)
-
-		-- wishes
 		if ix.util.CanWearSuit(suit) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
 		end
@@ -143,8 +123,8 @@ end
 
 local playerMeta = FindMetaTable("Player")
 
-local function getGearProtection(item, field)
-	local protection = item[field]
+local function getGearProtection(item, field, fallbackField)
+	local protection = item[field] or item[fallbackField] or 0
 	if item.GetDurabilityScale then protection = protection * item:GetDurabilityScale() end
 
 	return protection
@@ -232,36 +212,38 @@ function playerMeta:getFlatSlashRes()
 	return res
 end
 
-function playerMeta:getPercentageAnomalyRes()
+function playerMeta:getPercentageAnomalyRes(field)
+	field = field or "ar"
 	local res = 1
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
 	for _, v in pairs(items) do
 		if v.isBodyArmor and v:GetData("equip") then
-			res = res * v:getAR(v)
+			res = res * v:getAR(field)
 		end
 
-		if v.ar ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res * (1 - getGearProtection(v, "ar"))
+		if not v.isBodyArmor and v:GetData("equip") == true then
+			res = res * (1 - getGearProtection(v, field, "ar"))
 		end
 	end
 
 	return res
 end
 
-function playerMeta:getFlatAnomalyRes()
+function playerMeta:getFlatAnomalyRes(field)
+	field = field or "far"
 	local res = 0
 	local char = self:GetCharacter()
 	local items = char:GetInventory():GetItems()
 
 	for _, v in pairs(items) do
 		if v.isBodyArmor and v:GetData("equip") then
-			res = res + v:getFAR(v)
+			res = res + v:getFAR(field)
 		end
 
-		if v.far ~= nil and not v.isBodyArmor and v:GetData("equip") == true then
-			res = res + getGearProtection(v, "far")
+		if not v.isBodyArmor and v:GetData("equip") == true then
+			res = res + getGearProtection(v, field, "far")
 		end
 	end
 
@@ -370,6 +352,10 @@ function playerMeta:RecalculateResistances()
 	self:SetNWInt("ixflatslashres", self:getFlatSlashRes())
 	self:SetNWFloat("ixperanomres", self:getPercentageAnomalyRes())
 	self:SetNWInt("ixflatanomres", self:getFlatAnomalyRes())
+	for _, definition in ipairs(ix.suits.anomalyTypes) do
+		self:SetNWFloat("ixper" .. definition.network .. "res", self:getPercentageAnomalyRes(definition.field))
+		self:SetNWInt("ixflat" .. definition.network .. "res", self:getFlatAnomalyRes(definition.flatField))
+	end
 	self:SetNWFloat("ixperpsyres", self:getPercentagePsyRes())
 	self:SetNWInt("ixflatpsyres", self:getFlatPsyRes())
 end

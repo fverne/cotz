@@ -98,9 +98,11 @@ function ix.util.DrawSuitResistances(parentTooltip, item)
     if item:getSR() ~= 1 then
         ix.util.DrawResistance(parentTooltip, "Rupture: ", 1-item:getSR(), item:getFSR())
     end
-    if item:getAR() ~= 1 then
-        ix.util.DrawResistance(parentTooltip, "Anomalous: ", 1-item:getAR(), item:getFAR())
-    end
+	for _, definition in ipairs(ix.suits.anomalyTypes) do
+		local reduction = 1 - item:getAR(definition.field)
+		local flat = item:getFAR(definition.flatField)
+		ix.util.DrawResistance(parentTooltip, definition.name .. ": ", reduction, flat)
+	end
     if item:getPR() ~= 1 then
         ix.util.DrawResistance(parentTooltip, "Psychic: ", 1-item:getPR(), item:getFPR())
     end

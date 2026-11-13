@@ -8,6 +8,7 @@ local MENU_ORDER = {
 	StartBarter = 20,
 	HealTopic = 30,
 	RepairItems = 35,
+	WeaponWorkshop = 36,
 	StorageTopic = 40,
 	PaintSuit = 45,
 	CustomizeGear = 45,

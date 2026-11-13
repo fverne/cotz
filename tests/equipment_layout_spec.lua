@@ -31,7 +31,7 @@ for _, resolution in ipairs(resolutions) do
 			local layout = PLUGIN:GetEquipmentLayout(width, height, scale)
 			local context = screenWidth .. "x" .. screenHeight .. " inventory scale " .. inventoryScale
 			check(layout.footerHeight < height, context .. ": protection footer fits the page")
-			check(#layout.footer == 5, context .. ": every protection type remains visible")
+			check(#layout.footer == 8, context .. ": every protection type remains visible")
 			check(#layout.cards == 15, context .. ": every equipment slot is laid out")
 
 			for index, card in ipairs(layout.cards) do

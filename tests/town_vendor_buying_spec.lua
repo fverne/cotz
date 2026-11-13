@@ -8,6 +8,25 @@ local function check(value, message)
 end
 
 local fresh = context.fixture.character()
+ix.item.list.weapon_barrel_makarov = {
+	name = "Makarov Barrel", category = "Weapon Components", price = 40,
+	isWeaponServiceItem = true, componentKind = "barrel", weaponID = "makarov",
+}
+for _, contact in pairs(town.contacts) do
+	if contact.enforceCatalogue then
+		town:BuildBuyingItems(contact)
+		check(town:CanSellItem("weapon_barrel_makarov", contact.name), "Town vendors accept workshop components")
+		check(not town:CanBuyItem(fresh, "weapon_barrel_makarov", contact.name),
+			"Component buying does not create component purchase routes")
+	end
+end
+check(town:CanBuyItem(fresh, "map_usb_swamps", town.contacts.atlas.name),
+	"Atlas sells the Swamps map before any progression")
+ITEM = {}
+dofile("gamemodes/ix_cotz/plugins/pda/items/mapusb/sh_map_usb_swamps.lua")
+check(ITEM.price == 1000, "Swamps map costs 1,000 rubles")
+ix.item.list.map_usb_swamps.price = ITEM.price
+ITEM = nil
 table.IsEmpty = function(value) return next(value) == nil end
 for _, contact in pairs(town.contacts) do
 	if contact.enforceCatalogue then
@@ -66,6 +85,22 @@ PLUGIN = {}
 dofile("gamemodes/ix_cotz/plugins/vendor_adv/libs/sh_towncontacts.lua")
 local vendors = PLUGIN
 local stock = {initial = 1, maximum = 1, interval = 48, amount = 1}
+local atlas = town.contacts.atlas
+ix.npctemplates.templates[atlas.template] = {}
+vendors:ConfigureTownTemplate(atlas, town.catalogues[atlas.name], stock)
+local mapStock = ix.npctemplates.templates[atlas.template].items.map_usb_swamps
+check(ix.npctemplates.templates[atlas.template].items.weapon_barrel_makarov[3] == VENDOR_BUYONLY,
+	"Component buying uses buy-only vendor rows")
+check(mapStock and mapStock[3] == VENDOR_SELLANDBUY, "Atlas templates include Swamps map sale stock")
+check((mapStock[1] or ix.item.list.map_usb_swamps.price) == 1000, "Atlas's map purchase price is 1,000 rubles")
+local savedAtlas = {items = {}, GetBuyAll = function() return false end, SetBuyAll = function() end}
+check(vendors:RefreshTownVendor(savedAtlas, atlas, town.catalogues[atlas.name], stock),
+	"Existing Atlas placements gain stock without world setup")
+check(savedAtlas.items.map_usb_swamps[3] == VENDOR_SELLANDBUY, "Existing Atlas placements can sell maps")
+check(savedAtlas.items.weapon_barrel_makarov[3] == VENDOR_BUYONLY,
+	"Saved vendors gain component buying without first-time setup")
+check(not vendors:RefreshTownVendor(savedAtlas, atlas, town.catalogues[atlas.name], stock),
+	"Atlas stock reconciliation is idempotent")
 for _, contact in ipairs({town.contacts.haggler, cook, town.contacts.beanstalk, town.contacts.egghead, town.contacts.intern}) do
 	ix.npctemplates.templates[contact.template] = {}
 	local catalogue = town.catalogues[contact.name]

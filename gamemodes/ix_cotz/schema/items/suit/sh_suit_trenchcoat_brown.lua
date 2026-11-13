@@ -21,6 +21,14 @@ ITEM.sr = 0.16
 ITEM.fsr = 1
 ITEM.ar = 0.07
 ITEM.far = 1
+ITEM.thermalRes = 0.07
+ITEM.flatThermalRes = 1
+ITEM.electricalRes = 0.07
+ITEM.flatElectricalRes = 1
+ITEM.chemicalRes = 0.07
+ITEM.flatChemicalRes = 1
+ITEM.gravitationalRes = 0.07
+ITEM.flatGravitationalRes = 1
 
 ITEM.carryinc = 4.180
 ITEM.exteriorSlots = 1

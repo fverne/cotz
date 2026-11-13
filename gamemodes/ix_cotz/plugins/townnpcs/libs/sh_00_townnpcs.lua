@@ -107,7 +107,9 @@ function PLUGIN:BuildBuyingItems(contact)
 		buying[item] = true
 	end
 	for item, definition in pairs(ix.item.list) do
-		if categories[definition.category] then buying[item] = true end
+		if categories[definition.category] or (definition.isWeaponServiceItem and definition.componentKind) then
+			buying[item] = true
+		end
 	end
 	for item in pairs(contact.disabledItems or {}) do buying[item] = nil end
 	contact.buyingItems = buying

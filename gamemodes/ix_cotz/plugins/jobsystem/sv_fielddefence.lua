@@ -1,5 +1,6 @@
 local encounters, attackers = {}, {}
 local spawnBudget = ix.jobs.field.defenceSpawnBudget
+local LEGACY_DEFEND_DISTANCE = 768
 
 local function claimKey(character, job)
 	return character:GetID() .. ":" .. job.rewardKey
@@ -43,12 +44,19 @@ function ix.jobs.field.StopDefence(character, job)
 	end
 end
 
-local function createEncounter(character, npc, job, sampler)
-	local encounter = {character = character, npc = npc, claim = job.rewardKey, sampler = sampler,
-		health = job.fieldTask.defence.health, slots = {}, lastTick = CurTime()}
-	for _, class in ipairs(job.fieldTask.defence.waves[job.fieldTask.defence.completedWaves + 1] or {}) do
-		encounter.slots[#encounter.slots + 1] = {class = class}
+local function waveSlots(defence)
+	local slots = {}
+	for index, class in ipairs(defence.waves[defence.completedWaves + 1] or {}) do
+		slots[index] = {class = class, killed = defence.waveKills and defence.waveKills[index] == true}
 	end
+
+	return slots
+end
+
+local function createEncounter(character, npc, job, sampler)
+	local defence = job.fieldTask.defence
+	local encounter = {character = character, npc = npc, claim = job.rewardKey, sampler = sampler,
+		health = defence.health, wave = defence.completedWaves + 1, slots = waveSlots(defence), lastTick = CurTime()}
 	encounters[claimKey(character, job)] = encounter
 
 	return encounter
@@ -81,6 +89,7 @@ function ix.jobs.field.StartDefence(client, character, npc, job)
 	end
 	defence.health, defence.completedWaves, defence.guardedSeconds = defence.maxHealth, 0, 0
 	defence.attemptSeconds, defence.nextWaveAt = 0, nil
+	defence.waveKills = nil
 	local sampler = ix.jobs.field.SpawnObject(character, npc, job)
 	if not IsValid(sampler) then return end
 	state.stage = "defending"
@@ -129,6 +138,16 @@ function ix.jobs.field.DefenceKilled(entity)
 	if not record then return end
 	record.slot.killed = true
 	attackers[entity] = nil
+	local encounter = record.encounter
+	local job = encounter.character:GetJobs()[encounter.npc]
+	if not job or job.rewardKey ~= encounter.claim or not job.fieldTask
+		or job.fieldTask.stage ~= "defending" then return end
+	local defence = job.fieldTask.defence
+	if defence.completedWaves + 1 ~= encounter.wave then return end
+	-- Save each kill before the next update can pause or recreate this encounter.
+	defence.waveKills = {}
+	for index, slot in ipairs(encounter.slots) do defence.waveKills[index] = slot.killed == true end
+	ix.jobs.field.SaveJob(encounter.character, encounter.npc, job)
 end
 
 function ix.jobs.field.DefenceDamage(entity, damage)
@@ -170,6 +189,10 @@ end
 function ix.jobs.field.UpdateDefence(client, character, npc, job, keep)
 	if not ix.eventController then return end
 	local state, defence = job.fieldTask, job.fieldTask.defence
+	-- Accepted assignments retain their tuning; upgrade only the former default radius.
+	if defence.defendDistance == LEGACY_DEFEND_DISTANCE then
+		defence.defendDistance = ix.jobs.field.settings.defence.defendDistance
+	end
 	local key = claimKey(character, job)
 	if client:IsRestricted() or IsValid(client.ixRagdoll)
 		or client:GetPos():DistToSqr(ix.jobs.field.Unpack(state.point)) > defence.defendDistance ^ 2 then return end
@@ -194,10 +217,9 @@ function ix.jobs.field.UpdateDefence(client, character, npc, job, keep)
 			end
 			defence.completedWaves = defence.completedWaves + 1
 			defence.nextWaveAt = os.time() + defence.waveInterval
-			encounter.slots = {}
-			for _, class in ipairs(defence.waves[defence.completedWaves + 1] or {}) do
-				encounter.slots[#encounter.slots + 1] = {class = class}
-			end
+			defence.waveKills = nil
+			encounter.wave = defence.completedWaves + 1
+			encounter.slots = waveSlots(defence)
 			client:Notify("Research wave cleared: " .. defence.completedWaves .. "/" .. #defence.waves .. ".")
 		end
 	end
@@ -221,7 +243,7 @@ function ix.jobs.field.PruneDefences(keep)
 			ix.jobs.field.StopDefence(encounter.character, {rewardKey = encounter.claim})
 			local client = encounter.character:GetPlayer()
 			if IsValid(client) and client:Alive() and client:GetCharacter() == encounter.character then
-				client:Notify("Research paused. Return to resume; the unfinished wave restarts.")
+				client:Notify("Research paused. Return to resume; defeated attackers stay cleared.")
 			end
 		end
 	end

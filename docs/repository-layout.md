@@ -57,6 +57,13 @@ from observing the active camera. Run `luatex --luaonly tests/mapscene_visibilit
 In multiplayer, verify distant static and moving scenes, scene transitions, reopening character
 selection with a loaded character, and returning to gameplay with two clients.
 
+The bundled `helix/plugins/typing.lua` accepts indicator clears during its 0.2-second update cooldown,
+so quickly sending or cancelling a message cannot leave a typing/talking label behind. It tracks active
+indicators per player to suppress duplicate clear broadcasts and resets that state on spawn. The fix
+lives in the owning plugin because it controls the existing `ixTypeClass` receiver and cooldown.
+Run `luatex --luaonly tests/typing_indicator_spec.lua`. In multiplayer, verify sending and cancelling
+short messages, changing chat classes, respawning, and clearing after a viewer leaves the sender's PVS.
+
 ## Gameplay supporting files
 
 Paths below are relative to `gamemodes/ix_cotz/plugins/`.
@@ -85,6 +92,12 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 `suits/` owns tiered replaceable gasmask filters, their shared/server modules and immediate
 `items/gasmaskfilters/` definitions. Concrete headgear declares exact compatibility; closed-respiratory
 suit families use built-in air tanks serviced by Technut. See the [filter guide](../gamemodes/ix_cotz/plugins/suits/README.md).
+
+`weaponservice/` owns the technician weapon workshop: 260 exact-model barrel/receiver definitions,
+four salvage families, the reviewed firearm tier catalogue, fixed recipes, durability rebuilding,
+condition-sensitive dismantling and acknowledged pending output delivery. Its two concrete item
+folders remain at immediate discovery depth. Technician dialogue is installed after plugins load;
+ordinary weapon cleaning stays in progression services. See the [workshop guide](../gamemodes/ix_cotz/plugins/weaponservice/README.md).
 
 `gearcustomization/` owns the vendor appearance service, shared appearance API, menu
 and icon rendering. Concrete `gear` and `newbags` items declare approved variants.

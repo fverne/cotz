@@ -16,9 +16,11 @@ The controller owns field placement and artifact spawning. The ten field anomaly
 
 Red Razor and passive anomaly damage also use `DMG_ACID`. Whirlgig and Karusel use
 `util.BlastDamageInfo` with crush damage, retaining their radial damage amounts, origins and radii.
-Burners, Fruitpunch and Bubble no longer use generic damage, so anomaly resistance now applies to
-their hits. Crush damage is included in suit anomaly resistance and environmental headgear wear;
-this classification also applies to other crush damage, including physics impacts.
+Burners, Fruitpunch and Bubble no longer use generic damage, so suit protection applies to their hits.
+Burners use thermal resistance, Electros use electrical, Fruitpunch and Red Razor use chemical, and
+Bubbles, Whirlgig and Karusel use gravitational. See the [suit protection fields](../suits/README.md#protection-and-use).
+Crush damage is included in gravitational resistance and environmental headgear wear; this
+classification also applies to other crush damage, including physics impacts.
 
 ## Client effects
 
@@ -45,6 +47,7 @@ Run from the repository root:
 luatex --luaonly tests/anomaly_client_spec.lua
 luatex --luaonly tests/anomaly_performance_spec.lua
 luatex --luaonly tests/anomaly_damage_spec.lua
+luatex --luaonly tests/anomaly_resistance_spec.lua
 luatex --luaonly tests/headgear_durability_spec.lua
 ```
 

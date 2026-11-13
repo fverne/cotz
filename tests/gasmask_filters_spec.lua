@@ -262,6 +262,7 @@ DMG_RADIATION, DMG_BULLET, DMG_FALL, DMG_GENERIC = 1, 2, 4, 0
 DMG_SHOCK, DMG_BURN, DMG_ACID, DMG_BLAST, DMG_DROWN = 8, 16, 32, 64, 128
 DMG_POISON, DMG_NERVEGAS, DMG_SLOWBURN, DMG_SONIC, DMG_AIRBOAT = 256, 512, 1024, 2048, 4096
 DMG_CRUSH = 8192
+dofile("gamemodes/ix_cotz/plugins/suits/sh_resistances.lua")
 dofile("gamemodes/ix_cotz/plugins/suits/sh_durability.lua")
 local function damage(amount, kind)
 	return {

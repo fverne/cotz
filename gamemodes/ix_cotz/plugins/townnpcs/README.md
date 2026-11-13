@@ -219,6 +219,10 @@ is earned, then become SELLANDBUY. The server enforces both purchase and sale as
 stale vendor rows. Template assembly and saved-vendor refresh apply the current buying lists and catalogue.
 Character-owned stock histories are retained and clamped by the existing stock policy, not reset.
 
+All town buying lists also include the weapon workshop's barrels and receivers as buy-only goods,
+at their low 20–200 RU nominal item values before the contact's buy scale. This does not add component
+purchase routes or salvage buying. Existing vendor placements receive these rows through normal refresh.
+
 Carbon sells `accesscard_bunker`; Intern sells `accesscard_laboratory`. Their existing physical-door
 actions are retained. Beanstalk, Egghead and Intern now have Swamps as their home, at the Eco Bunker.
 Place them there with `/TownNPCPlace <slug>` after removing and saving their old placements.

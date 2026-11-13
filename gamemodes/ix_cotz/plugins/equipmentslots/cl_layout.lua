@@ -1,5 +1,16 @@
 local PLUGIN = PLUGIN
 
+PLUGIN.protectionTypes = {
+	{name = "Ballistic", multiplier = "ixperbulletres", flat = "ixflatbulletres"},
+	{name = "Rupture", multiplier = "ixperslashres", flat = "ixflatslashres"},
+	{name = "Radiation", radiation = true},
+	{name = "Thermal", multiplier = "ixperthermalres", flat = "ixflatthermalres"},
+	{name = "Electrical", multiplier = "ixperelectricalres", flat = "ixflatelectricalres"},
+	{name = "Chemical", multiplier = "ixperchemicalres", flat = "ixflatchemicalres"},
+	{name = "Gravitational", multiplier = "ixpergravitationalres", flat = "ixflatgravitationalres"},
+	{name = "Psy", multiplier = "ixperpsyres", flat = "ixflatpsyres"},
+}
+
 function PLUGIN:GetStorageEquipmentBounds(width, height, inventoryWidth, inventoryHeight, storageWidth, storageHeight)
 	local gap = math.max(4, math.floor(width * 0.008))
 	local inventoryX = width - inventoryWidth - gap
@@ -29,10 +40,11 @@ end
 function PLUGIN:GetEquipmentLayout(width, height, scale)
 	local gap = math.max(4, math.floor(8 * scale))
 	width = math.max(1, width)
-	local footerColumns = columnCount(width, 110 * scale, gap, 5)
+	local protectionCount = #self.protectionTypes
+	local footerColumns = columnCount(width, 160 * scale, gap, 4)
 	local footerRowHeight = math.floor(38 * scale)
 	local headerHeight = math.floor(26 * scale)
-	local footerHeight = headerHeight + math.ceil(5 / footerColumns) * footerRowHeight + gap
+	local footerHeight = headerHeight + math.ceil(protectionCount / footerColumns) * footerRowHeight + gap
 	local bodyHeight = math.max(1, height - footerHeight - gap)
 	local columns = {
 		columnCount(width, 92 * scale, gap, 5),
@@ -71,7 +83,7 @@ function PLUGIN:GetEquipmentLayout(width, height, scale)
 	end
 
 	local footerWidth = (width - gap * (footerColumns - 1)) / footerColumns
-	for index = 1, 5 do
+	for index = 1, protectionCount do
 		result.footer[index] = {
 			x = ((index - 1) % footerColumns) * (footerWidth + gap),
 			y = headerHeight + math.floor((index - 1) / footerColumns) * footerRowHeight,

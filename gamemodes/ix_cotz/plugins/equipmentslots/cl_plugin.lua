@@ -30,13 +30,6 @@ local COLORS = {
 	red = Color(154, 84, 70),
 	track = Color(41, 43, 38),
 }
-local PROTECTION = {
-	{name = "Ballistic", multiplier = "ixperbulletres", flat = "ixflatbulletres"},
-	{name = "Rupture", multiplier = "ixperslashres", flat = "ixflatslashres"},
-	{name = "Radiation", radiation = true},
-	{name = "Anomaly", multiplier = "ixperanomres", flat = "ixflatanomres"},
-	{name = "Psy", multiplier = "ixperpsyres", flat = "ixflatpsyres"},
-}
 
 local function drawSegments(x, y, width, height, fraction, fillColor)
 	local segments = 12
@@ -141,7 +134,7 @@ function PANEL:Init()
 	self.footerTitle:SetTextColor(COLORS.text)
 	self.footer.Paint = paintHeader
 
-	for index, definition in ipairs(PROTECTION) do
+	for index, definition in ipairs(PLUGIN.protectionTypes) do
 		local statistic = self.footer:Add("DPanel")
 		statistic.name = definition.name
 		statistic.fraction = 0
@@ -378,7 +371,7 @@ end
 function PANEL:UpdateProtection()
 	local client = LocalPlayer()
 
-	for index, definition in ipairs(PROTECTION) do
+	for index, definition in ipairs(PLUGIN.protectionTypes) do
 		local multiplier, flat
 		if definition.radiation then
 			if client.getPercentageRadResist then multiplier = client:getPercentageRadResist() end

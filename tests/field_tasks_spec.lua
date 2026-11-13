@@ -768,6 +768,8 @@ local function killWave()
 	end
 end
 job = assign(character, "defence")
+job.fieldTask.defence.waves[1] = {"npc_mutant_fish", "npc_mutant_skeleton"}
+character.jobs.Contact = copy(job)
 client.position = Vector(-4000, 0, 0)
 now = now + 2
 ix.jobs.field.Action(client, "Contact", "start")
@@ -825,6 +827,20 @@ check(not attackingNPC:GetEnemy() and attackingNPC.cotzCombatObjective == entity
 	and attackingNPC.cotzCombatObjectiveRadius == job.fieldTask.defence.threatRadius
 	and attackingNPC.destination == entity:GetPos(),
 	"attackers initially advance on the sampler without player targets")
+character.jobs.Contact.fieldTask.defence.defendDistance = 768
+local attemptAtSite = character.jobs.Contact.fieldTask.defence.attemptSeconds
+client.position = ix.jobs.field.Unpack(job.fieldTask.point) + Vector(2048, 0, 0)
+update(client, character)
+check(IsValid(entity) and #livingAttackers() == 2
+	and character.jobs.Contact.fieldTask.defence.attemptSeconds > attemptAtSite
+	and character.jobs.Contact.fieldTask.defence.defendDistance == 2048,
+	"legacy assignments allow defending at the widened 2048-unit boundary without resetting attackers")
+character.jobs.Contact.fieldTask.defence.defendDistance = 3072
+update(client, character)
+check(character.jobs.Contact.fieldTask.defence.defendDistance == 3072,
+	"radius migration preserves customized saved defence distances")
+character.jobs.Contact.fieldTask.defence.defendDistance = 2048
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
 local health = entity:Health()
 ix.jobs.field.DefenceDamage(
 	entity,
@@ -860,14 +876,49 @@ ix.jobs.field.DefenceKilled(attackingNPC)
 update(client, character)
 check(character.jobs.Contact.fieldTask.defence.completedWaves == 0,
 	"late death events from replaced attackers cannot credit their replacements")
+local harvested = livingAttackers()[1]
+harvested:SetHealth(0)
+local survivingClass = livingAttackers()[1]:GetClass()
+local world = {IsPlayer = function() return false end}
+PLUGIN:OnNPCKilled(harvested, world)
+local savedKills = copy(character.jobs.Contact.fieldTask.defence.waveKills)
+PLUGIN:OnNPCKilled(harvested, world)
+check(savedKills and #savedKills == 2 and savedKills[1] ~= savedKills[2]
+	and character.jobs.Contact.fieldTask.defence.waveKills[1] == savedKills[1]
+	and character.jobs.Contact.fieldTask.defence.waveKills[2] == savedKills[2],
+	"partial-wave kills are saved immediately and duplicate death events cannot change progress")
+for pause = 1, 2 do
+	client.position = ix.jobs.field.Unpack(job.fieldTask.point) + Vector(2049, 0, 0)
+	update(client, character)
+	check(#livingAttackers() == 0, "moving beyond 2048 units cleans up surviving attackers")
+	if pause == 1 then
+		-- Recreate the encounter module from saved job data, as after a server restart.
+		character.jobs = copy(character.jobs)
+		dofile(base .. "sv_fielddefence.lua")
+	end
+	local registeredBeforeResume = #registered
+	client.position = ix.jobs.field.Unpack(job.fieldTask.point)
+	update(client, character)
+	check(#registered == registeredBeforeResume + 1 and #livingAttackers() == 1
+		and livingAttackers()[1]:GetClass() == survivingClass
+		and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
+		"resuming a mixed wave cannot respawn its harvested species, including after reload")
+end
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 killWave()
+client.position = ix.jobs.field.Unpack(job.fieldTask.point) + Vector(2049, 0, 0)
 update(client, character)
-check(character.jobs.Contact.fieldTask.defence.completedWaves == 1,
-	"the real kill listener credits a cleared wave once, including non-player kills")
+local registeredBeforeClear = #registered
+client.position = ix.jobs.field.Unpack(job.fieldTask.point)
+update(client, character)
+check(character.jobs.Contact.fieldTask.defence.completedWaves == 1 and #registered == registeredBeforeClear
+	and not character.jobs.Contact.fieldTask.defence.waveKills,
+	"leaving after the last kill preserves the cleared wave and resets kill tracking for the next wave")
 update(client, character)
 check(#livingAttackers() == 1, "next wave uses its saved composition")
+entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 local checkpoint = copy(character.jobs.Contact.fieldTask)
-client.position = client.position + Vector(2000, 0, 0)
+client.position = client.position + Vector(2049, 0, 0)
 update(client, character)
 check(entity.invalid and #livingAttackers() == 0, "leaving the defence area cleans up sampler and attackers")
 check(character.jobs.Contact.fieldTask.defence.completedWaves == checkpoint.defence.completedWaves,
@@ -883,7 +934,7 @@ entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 check(character.jobs.Contact.fieldTask.defence.guardedSeconds == checkpoint.defence.guardedSeconds,
 	"offline time cannot advance defended recording")
 check(#livingAttackers() == 1 and character.jobs.Contact.fieldTask.defence.completedWaves == 1,
-	"returning restarts only the unfinished wave")
+	"returning restores the surviving attacker in the unfinished wave")
 killWave()
 update(client, character)
 check(character.jobs.Contact.fieldTask.stage == "ready" and not character.jobs.Contact.isCompleted,
@@ -905,6 +956,9 @@ now = now + 2
 ix.jobs.field.Action(client, "Contact", "start")
 entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
 update(client, character)
+local killedBeforeDisconnect = livingAttackers()[1]
+killedBeforeDisconnect:SetHealth(0)
+PLUGIN:OnNPCKilled(killedBeforeDisconnect, world)
 local guardedBeforeDisconnect = character.jobs.Contact.fieldTask.defence.guardedSeconds
 activePlayers = players
 players = {stranger}
@@ -928,8 +982,10 @@ check(character.jobs.Contact.fieldTask.stage == "deploy", "failed attempts enfor
 now = now + ix.jobs.field.settings.defence.retryDelay
 ix.jobs.field.Action(client, "Contact", "start")
 check(character.jobs.Contact.fieldTask.stage == "defending"
-	and character.jobs.Contact.fieldTask.point[1] == job.fieldTask.point[1], "explicit retry keeps the assigned site")
+	and character.jobs.Contact.fieldTask.point[1] == job.fieldTask.point[1]
+	and not character.jobs.Contact.fieldTask.defence.waveKills, "explicit retry keeps the site and resets partial kills")
 update(client, character)
+check(#livingAttackers() == 2, "a fresh attempt creates all attackers after clearing the old kill ledger")
 character.data.lastTaskAbandon = 0
 client:ixJobRemove("Contact")
 check(not character.jobs.Contact and #livingAttackers() == 0, "abandonment removes the entire defence encounter")

@@ -36,6 +36,14 @@ Every objective completion sends a task-completed notification and PDA sound onc
 At the default COTZ font scale of 1.30, the journal uses 33 px headers, 25 px task names
 and 22 px body/button text at 1080p. Adjust it under Settings → Appearance; action rows
 scale with the text, and cards wrap and scroll.
+Search above the task list matches task names, contacts, objective descriptions and current objective
+zone names as you type, without regard to case. The status filter offers All tasks, In progress and
+Completed. Completed means ready to return to the contact; handed-in assignments leave the list and
+are not a task history. Current zone follows the assignment's current step: its saved field/combat
+map, courier receiver, dead-drop burial map, or issuing contact when returning cargo/completed work.
+Photography, unrestricted legacy kill work and tasks without a known zone remain visible in any zone.
+Search and both filters combine, stay above the scrolling
+cards, and show the matching count against the total accepted tasks. They refresh as assignments change.
 Photography
 shows the saved captured species/anomaly list in the journal. There is no camera HUD ledger.
 Triangulation saves the origin and compass bearing of each reading and marks those positions in
@@ -370,7 +378,7 @@ No new map spawn-point definitions or per-assignment staff setup are required.
   must be at least 2,048 units apart. Pickup alone earns nothing; delivery consumes the
   matching parcel and saves completion. Return to the contact to receive payment.
 - **Research defence:** start the sampler at the assigned site through the PDA. Stay
-  within 768 units, clear the waves and complete 90 seconds of defended recording, then
+  within 2,048 units, clear the waves and complete 90 seconds of defended recording, then
   collect the 1x2, 0.5 kg results recorder and return it. The sampler has 250 health.
   Attackers advance on the sampler and, when visible and within 160 units, disrupt it
   for 8 damage per mutant per second. Seeing a player or taking damage from one switches
@@ -469,10 +477,16 @@ damages it on arrival. Ordinary visible-player acquisition and damage retaliatio
 Player pursuit retains the combat system's ten-second last-contact memory; losing that contact
 or the player's death resumes the sampler approach. Movement respects attack recovery and `ai_disabled`.
 
-Defence recording advances only while the assigned character is alive and near the
-sampler. Leaving, dying, changing characters, disconnecting or restarting the server
-removes ephemeral attackers and interrupts the current wave. On return, completed waves,
-recording time and sampler health are retained; only the unfinished wave restarts.
+Defence recording advances only while the assigned character is alive and within 2,048 units of the
+sampler. Accepted assignments with the former 768-unit default receive this wider radius on their
+next active update; other saved radius values remain unchanged. Leaving, dying, changing characters,
+disconnecting or restarting the server removes ephemeral attackers and pauses the current wave.
+Every attacker kill is saved immediately as a dense boolean list in `defence.waveKills` within the
+existing job state. On return, completed waves, individual kills in the current wave, recording time
+and sampler health are retained. Only surviving or unspawned slots are recreated, so leaving cannot
+respawn already harvested attackers. Kill tracking clears when the next wave begins or an explicit
+retry starts a fresh attempt. Older saves without this list treat the unfinished wave as uncredited;
+previously unsaved partial kills cannot be reconstructed. No save reset is required.
 Unrelated nearby players can help fight but cannot substitute for the assigned defender
 or collect the results. Destroying the sampler or exceeding the 300-second active-attempt
 limit fails the attempt. After a saved 30-second delay, explicitly restarting resets the

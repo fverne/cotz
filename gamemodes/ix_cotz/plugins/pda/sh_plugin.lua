@@ -2,6 +2,10 @@ PLUGIN.name = "PDA chatting system"
 PLUGIN.author = "verne"
 PLUGIN.description = "PDA chatting system, supporting avatars and nicknames"
 
+ix.util.Include("sh_maps.lua")
+ix.util.Include("sv_maps.lua")
+ix.util.Include("cl_maps.lua")
+
 ix.config.Add("pdaWiringEnabled", false, "If true, PDA Wiring will be enabled.", nil, {
 	category = "PDA Wiring"
 })

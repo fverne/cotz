@@ -24,6 +24,8 @@ local function getProtectedDamage(client, damageInfo, environmental)
 	elseif damageInfo:IsDamageType(DMG_SLASH) then
 		resistance = "slash"
 	elseif environmental or damageInfo:GetDamageType() == DMG_GENERIC then
+		local protectedDamage = ix.suits.GetAnomalyDamage(client, damageInfo)
+		if protectedDamage ~= nil then return protectedDamage end
 		resistance = "anom"
 	end
 

@@ -820,35 +820,22 @@ function ITEM:getFPR()
 	return res
 end
 
-function ITEM:getAR()
-	local res = 1
-	local upgrades = self:GetData("upgrades", {})
+function ITEM:getAR(field)
+	field = field or "ar"
+	local protection = self[field] or self.ar
+	local durabilityScale = math.Clamp(self:GetData("durability", 100) / 80, 0, 1)
+	local res = 1 - protection * durabilityScale
 
-	if self:GetData("durability",100) < 80 then
-		res = 1 - (self.ar * (self:GetData("durability",0)/80))
-	else
-		res = 1 - self.ar
+	for _, upgradeID in pairs(self:GetData("upgrades", {})) do
+		local upgrade = ix.armortables.upgrades[upgradeID]
+		if upgrade then res = res - (upgrade[field] or upgrade.ar or 0) end
 	end
-	
-	for k,v in pairs(upgrades) do
-		if (!ix.armortables.upgrades[v]) then continue end
-		if ix.armortables.upgrades[v].ar then
-			res = res - ix.armortables.upgrades[v].ar
-		end
-	end
-	
-	--For artifacts, kevlarplates, mutant hides, etc..
-	local attachments = self:GetData("attachments", self.miscSlots)
-	
-	for k,v in pairs(attachments) do
-		if !v then
-			continue
-		end
-		
-		for _, attachment in pairs (v) do
-			if (!ix.armortables.attachments[attachment]) then continue end
-			if ix.armortables.attachments[attachment].ar then
-				res = res * (1 - ix.armortables.attachments[attachment].ar)
+
+	for _, slots in pairs(self:GetData("attachments", self.miscSlots)) do
+		if slots then
+			for _, attachmentID in pairs(slots) do
+				local attachment = ix.armortables.attachments[attachmentID]
+				if attachment then res = res * (1 - (attachment[field] or attachment.ar or 0)) end
 			end
 		end
 	end
@@ -894,23 +881,16 @@ function ITEM:getRadProt()
 	return 1 - res -- this is inverted for radprot!!!
 end
 
-function ITEM:getFAR() 
-	local res = self.far
-	local upgrades = self:GetData("upgrades", {})
+function ITEM:getFAR(field)
+	field = field or "far"
+	local protection = self[field] or self.far
+	local res = protection * math.Clamp(self:GetData("durability", 100) / 80, 0, 1)
 
-	if self:GetData("durability",100) < 80 then
-		res = self.far * (self:GetData("durability",0)/80)
-	else
-		res = self.far
+	for _, upgradeID in pairs(self:GetData("upgrades", {})) do
+		local upgrade = ix.armortables.upgrades[upgradeID]
+		if upgrade then res = res + (upgrade[field] or upgrade.far or 0) end
 	end
-	
-	for k,v in pairs(upgrades) do
-		if (!ix.armortables.upgrades[v]) then continue end
-		if ix.armortables.upgrades[v].far then
-			res = res + ix.armortables.upgrades[v].far
-		end
-	end
-	
+
 	return res
 end
 
