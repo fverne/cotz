@@ -54,7 +54,7 @@ local function getLine(character, vendor, uniqueID)
 	local line = data[key][uniqueID]
 	if not line then
 		line = { count = math.min(catalog[VENDOR_STOCK] or 0, catalog[VENDOR_MAXSTOCK]),
-			updated = now, maximum = maximum }
+			updated = now, maximum = catalog[VENDOR_MAXSTOCK] }
 		data[key][uniqueID] = line
 	end
 	local previousMaximum = line.maximum or catalog[VENDOR_MAXSTOCK]
@@ -73,6 +73,7 @@ local function getLine(character, vendor, uniqueID)
 		line.updated = now
 		line.fraction = 0
 	end
+	line.count = math.min(maximum, line.count + math.max(0, maximum - previousMaximum))
 	line.maximum = maximum
 	character:SetVendorStock(data)
 

@@ -376,7 +376,7 @@ check(templateShop.items["22lr"][VENDOR_MAXSTOCK] == 4
 check(templateShop.items.ruger1022[VENDOR_MAXSTOCK] == 1
 	and templateShop.items.ruger1022[VENDOR_RESTOCK_INTERVAL] == 48,
 	"template loading enforces equipment limits")
--- Personal capacity must not refill shelves or mutate the shared catalogue.
+-- Personal capacity adds only the upgrade quantity without mutating the shared catalogue.
 local ranked = character()
 local rankedOther = character()
 local rankShop = vendor()
@@ -391,14 +391,14 @@ local waterCount, waterMaximum = rankShop:GetStock("drink_bottlewater", waterBuy
 check(waterCount == 1 and waterMaximum == 1, "clean water starts at one bottle and one capacity")
 waterBuyer.rank = 1
 waterCount, waterMaximum = rankShop:GetStock("drink_bottlewater", waterBuyer)
-check(waterCount == 1 and waterMaximum == 2, "earned water capacity expands without a free refill")
+check(waterCount == 2 and waterMaximum == 2, "earned water capacity adds the matching bottle")
 check(rankShop.items.drink_bottlewater[VENDOR_MAXSTOCK] == 1,
 	"earned water capacity leaves the starting maximum at one")
 check(rankShop:GetStock("ammo", ranked) == 4, "ranked shop starts at base stock")
 now = now + 120 * 3600
 ranked.rank = 1
 local current, maximum = rankShop:GetStock("ammo", ranked)
-check(current == 4 and maximum == 5, "capacity upgrade cannot bank old full-shelf time")
+check(current == 5 and maximum == 5, "capacity upgrade cannot bank old full-shelf time")
 check(rankShop:GetStock("ammo", rankedOther) == 4, "another character keeps base capacity")
 check(rankShop.items.ammo[VENDOR_MAXSTOCK] == 4, "capacity leaves the shared catalogue unchanged")
 now = now + 12 * 3600
@@ -406,16 +406,17 @@ check(rankShop:GetStock("ammo", ranked) == 5, "new space fills at the original i
 rankShop:TakeStock("ammo", 5, ranked)
 ranked.rank = 2
 current, maximum = rankShop:GetStock("ammo", ranked)
-check(current == 0 and maximum == 6, "second capacity milestone does not refill depleted stock")
+check(current == 1 and maximum == 6, "second capacity milestone adds only its increase to depleted stock")
+check(rankShop:GetStock("ammo", ranked) == 1, "repeated reads do not regrant the upgrade")
 check(ix.vendorStock.GetItems(ranked, rankShop).ammo[VENDOR_MAXSTOCK] == 6,
 	"personal shop copy exposes the actual maximum")
 local rankedFresh = character()
 rankedFresh.rank = 2
 current, maximum = rankShop:GetStock("ammo", rankedFresh)
-check(current == 4 and maximum == 6, "uninitialized stock does not give free upgraded starting supply")
+check(current == 6 and maximum == 6, "uninitialized stock includes earned upgrade quantities")
 now = now + 12 * 3600
-check(rankShop:GetStock("ammo", ranked) == 1, "capacity does not increase passive refill quantity")
-rankShop:TakeStock("ammo", 1, ranked)
+check(rankShop:GetStock("ammo", ranked) == 2, "capacity does not increase passive refill quantity")
+rankShop:TakeStock("ammo", 2, ranked)
 rankShop:TakeStock("rifle", 1, ranked)
 check(ix.vendorStock.TaskRestock(ranked, rankShop, "first"), "first qualifying completion replenishes")
 check(rankShop:GetStock("ammo", ranked) == 1, "20 percent uses upgraded capacity with fractions")
@@ -503,7 +504,7 @@ check(count == 1 and maxStock == 3 and fraction == 0.5, "odd maxima retain half-
 count, maxStock, fraction = ix.vendorStock.Get(voucherOwner, voucherShop, "one")
 check(count == 0 and fraction == 0.5, "fractional-only replenishment counts as a successful change")
 count, maxStock = ix.vendorStock.Get(voucherOwner, voucherShop, "ammo")
-check(count == 3 and maxStock == 6, "voucher uses progression-adjusted capacity")
+check(count == 5 and maxStock == 6, "voucher adds to earned stock using progression-adjusted capacity")
 for _, id in ipairs({"locked", "buyOnly", "noInterval", "noAmount", "zero", "quest_test", "accesscard_test"}) do
 	check(ix.vendorStock.Get(voucherOwner, voucherShop, id) == 0, "voucher excludes " .. id)
 end

@@ -37,7 +37,7 @@ of requested units stay with the contact's specialty; there is no all-theme rota
 locally; later low-quantity slots gradually allow Swamps/Garbage, Waystation and finally Pripyat sources.
 Swamps branches keep their first two original milestones and all work below 45% fully Swamps-obtainable,
 including stock preparation. Valid saved requests are not rerolled to impose the new specialties. Requests use valuables and artifacts, except for the initial hideout tool hand-ins. Completion pays accumulated hand-in
-value at 60%, with no flat cash. Stock bonuses increase personal capacity without refilling it.
+value at 60%, with no flat cash. Stock bonuses increase personal capacity and add the capacity increase to current stock once, preserving any existing deficit.
 Ledger uses 3× difficulty. Policy 4 converts outstanding invalid or out-of-region saved inputs while preserving credited
 contributions and completed unlocks. Inserted stages gate unfinished unlocks; Mute's redundant directory
 maintenance is removed. See the authoritative guide for regional thresholds and save handling.

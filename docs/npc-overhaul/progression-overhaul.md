@@ -269,7 +269,7 @@ upgrades. Standalone mocks do not verify live MySQL callbacks, map transfers or 
 
 Each active step owns its authored `briefing` and `completion` in the contact definition, including
 stock intermissions. All 631 pairs are individually written against the contact's profile and current
-benefits. Stock wording distinguishes a higher personal capacity from an immediate refill; exchange,
+benefits. Stock upgrades raise personal capacity and add the corresponding quantity to current stock; exchange,
 conversion, hideout and purchase wording retains the later ammunition costs, fees or purchases.
 Keep exact assigned items and quantities in the generated objective display rather than hard-coding
 them into speech, since valid saved requests can differ from newly rolled requests.

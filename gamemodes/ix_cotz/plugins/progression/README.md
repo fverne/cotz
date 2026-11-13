@@ -125,7 +125,7 @@ after the required items. Journal copy uses region names and addresses the playe
 All scoreboard tools, dossier fields and remote roster data are available immediately. Mute's progression
 instead grants map-specific mutant spawn PDA reports. Town dialogue uses the full task description, including
 assigned required items and remaining quantities. A definition's `requirementAlternatives` maps an accepted
-alternative item to its canonical requirement; both choices share one saved contribution and completion. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards.
+alternative item to its canonical requirement; both choices share one saved contribution and completion. Hand-in replies give a short receipt and the remaining requirement or completion. Service credits, discounts and stock capacity remain functional progression rewards. Stock upgrades also add the capacity increase to current personal stock once, when that stock is next refreshed or read.
 
 Only current registered definitions participate in task discovery and equipment gating. There is no
 old-ID permission import or completion alias. The explicit policy-4 request conversion and activation
