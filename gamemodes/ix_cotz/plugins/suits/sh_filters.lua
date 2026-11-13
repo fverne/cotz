@@ -26,7 +26,9 @@ local function inMainBackpack(item, inventory)
 end
 
 function ix.util.CanChangeGasmaskFilter(item, client, pending)
-	if not item or not item.isGasmask or not item.filterType or IsValid(item.entity) then return false end
+	if not item or item.isAirTank or not item.isGasmask or not item.filterType or IsValid(item.entity) then
+		return false
+	end
 	if item.cotzFilterPending and not pending then return false end
 	if not IsValid(client) or not client:Alive() then return false end
 	local character = client:GetCharacter()
@@ -87,7 +89,7 @@ if CLIENT then
 			or ix.util.GetGasmaskFilterCondition(item)
 		local row = tooltip:AddRow("gasmaskFilter")
 		local state = condition == false and "No filter" or string.format("%d%%", math.floor(condition))
-		row:SetText(definition.name .. ": " .. state)
+		row:SetText((item.isAirTank and "Air tank" or definition.name) .. ": " .. state)
 		row:SizeToContents()
 	end
 end

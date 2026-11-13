@@ -449,4 +449,27 @@ do
 		"town treatment consumes its credit and restores the patient")
 	ix.townNPCs = previousTown
 end
+do
+	local owner = actor()
+	local item = repairItem(owner, 990, false)
+	item.isAirTank = true
+	item.data.durability, item.data.filterCondition = 100, 0
+	function item:GetFilterCondition() return self:GetData("filterCondition", 100) end
+	local request = {itemid = 990, type = "airTank"}
+	local offer = ix.progression.BuildServiceOffer(owner.client, tech, "repair", request)
+	check(offer and offer.field == "filterCondition" and offer.baseCost == 2000,
+		"Technut quotes an exhausted tank on an undamaged suit")
+	check(not ix.progression.BuildServiceOffer(owner.client, vendor("'Boss'"), "repair", request),
+		"tank service is restricted to Technut")
+	check(#ix.progression.GetRepairOptions(owner.client, tech) == 1, "depleted tank appears separately")
+	ix.progression.ConfirmService({}, owner.client, tech, "repair", request)
+	check(ix.progression.ExecuteService(owner.client, tech, "repair", true), "tank refill executes")
+	check(item.data.filterCondition == 100 and item.data.durability == 100 and owner.client.recalculated,
+		"tank service restores air and recalculates protection")
+	check(not ix.progression.ExecuteService(owner.client, tech, "repair", true), "tank quote cannot replay")
+	check(not ix.progression.BuildServiceOffer(owner.client, tech, "repair", request), "full tank needs no service")
+	item.isAirTank = false
+	check(not ix.progression.BuildServiceOffer(owner.client, tech, "repair", request),
+		"ordinary filters cannot be recharged by forged tank requests")
+end
 print(string.format("PASS: %d progression service checks", checks))

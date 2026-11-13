@@ -114,8 +114,8 @@ for _, id in ipairs({"mask_cloth", "headwear_riot", "headwear_altyn"}) do
 end
 for file in lfs.dir("gamemodes/ix_cotz/schema/items/suit") do
 	if file:match("^sh_suit_seva") or file:match("^sh_suit_nbc") or file:match("^sh_suit_ssp99") then
-		check(read("gamemodes/ix_cotz/schema/items/suit/" .. file):find("ITEM.filterType = false", 1, true),
-			"closed respiratory suit remains exempt: " .. file)
+		check(read("gamemodes/ix_cotz/schema/items/suit/" .. file):find('ITEM.filterType = "scientific"\nITEM.isAirTank = true\nITEM.filterWearDivisor = 1920', 1, true),
+			"closed respiratory suit declares long-life tank: " .. file)
 	end
 end
 
@@ -302,6 +302,38 @@ end
 
 mask = newMask("civilian", false)
 local civilian = newFilter("civilian", 37)
+local tank = newMask("scientific", 100)
+tank.isAirTank = true
+tank.filterWearDivisor = 1920
+tank.data.equip = true
+check(not ix.util.CanChangeGasmaskFilter(tank, client), "built-in tanks cannot accept or remove cartridges")
+ix.util.DamageGasmaskFilters(client, damage(240, DMG_RADIATION))
+near(tank:GetFilterCondition(), 99.875, "tank consumes one eighth of scientific filter condition")
+tank.data.filterCondition = 100
+ix.util.DamageGasmaskFilters(client, damage(192000, DMG_RADIATION))
+near(tank:GetFilterCondition(), 0, "tank lasts 160 minutes at 20 raw damage per second")
+tank.data.equip = false
+
+local suitPath = "gamemodes/ix_cotz/schema/items/base/sh_suit.lua"
+ITEM = {}
+for _, signature in ipairs({"GetFilterCondition", "GetFilterScale", "GetFlatRadProt", "getRadProt"}) do
+	local source = read(suitPath)
+	local first = assert(source:find("function ITEM:" .. signature .. "(", 1, true))
+	local last = assert(source:find("\nend", first, true)) + 3
+	assert(load(standardLua(source:sub(first, last)):gsub("continue", "break")))()
+end
+local suit = instantiate(ITEM, {durability = 40, filterCondition = 10})
+suit.filterType, suit.isAirTank = "scientific", true
+suit.radProt, suit.flatRadProt, suit.miscSlots = 0.9, 0.02, {}
+ix.armortables = {upgrades = {}, attachments = {}}
+near(suit:getRadProt(), 0.225, "tank taper combines with suit durability")
+near(suit:GetFlatRadProt(), 0.005, "flat suit protection follows both condition scales")
+suit.data.filterCondition = 0
+near(suit:getRadProt(), 0, "exhausted tank removes suit radiation protection")
+near(suit:GetFlatRadProt(), 0, "exhausted tank removes flat radiation protection")
+suit.data.filterCondition = nil
+near(suit:GetFilterCondition(), 100, "legacy suit starts with a full tank")
+
 local military = newFilter("military", 100)
 local scientific = newFilter("scientific", 100)
 local options = ix.util.GetGasmaskFilterOptions(mask, client)

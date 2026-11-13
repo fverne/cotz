@@ -15,8 +15,17 @@ replace a civilian or military cartridge. Equipment declared with `false` has no
 | Military | `gasmask_filter_military` | EO-20, PMK-3, XM-40, CS-4, PRACS, PSZ-12 | 15 minutes | 1,700 |
 | Scientific | `gasmask_filter_scientific` | M40, M50, Exohelm with Respirator, Spartan, Screen | 20 minutes | 2,550 |
 
-SSP-99, SSP-99M, all SEVA and NBC variants, Cloth Mask, Riot Helmet and Altyn are exempt. Their existing
-durability-based radiation protection remains unchanged. Screen requires a scientific filter despite
+SSP-99, SSP-99M and all SEVA and NBC variants use built-in air tanks. Tanks follow scientific filter
+wear and the same protection taper, with a wear divisor of 1,920: eight times the scientific cartridge
+lifetime, or 160 minutes of moderate exposure. They cannot accept or remove loose cartridges.
+Technut offers a separate air tank repair/refill even when suit durability is full, restoring tank
+condition without repairing the suit. It uses the normal suit per-condition repair rate, discounts
+and credit. Ordinary suit repairs do not refill tanks. Existing and new suits start with full tanks;
+partial and exhausted tanks persist in `filterCondition`. Tank mass is included in existing suit weight.
+Suit percentage and flat radiation protection scale with both durability and tank condition;
+independent upgrades and attachments retain their existing behavior.
+
+Cloth Mask, Riot Helmet and Altyn remain exempt. Screen requires a scientific filter despite
 its closed-respiratory description.
 
 Filters are available through normal admin item spawning/giving and seller-specific progression.
@@ -64,7 +73,7 @@ empty socket consumes the loose cartridge only when the action completes success
 cartridge at its remaining condition, including 0%. A fresh cartridge restores 100% filter condition
 without repairing the headgear. Removed filters can be reinstalled; repairs cannot recharge them.
 
-Tooltips show the required filter and its percentage or **No filter**. Backpack icons have a teal
+Tank tooltips and condition bars show remaining air. Other tooltips show the required filter and its percentage or **No filter**. Backpack icons have a teal
 filter bar above ordinary durability; equipment cards show ordinary durability above the filter bar.
 Protection tooltips and the equipment footer use effective radiation resistance.
 
@@ -110,7 +119,7 @@ luatex --luaonly tests/item_descriptions_spec.lua
 
 These standalone checks use mocks. In multiplayer, verify all three cartridges load and spawn, exact
 compatibility, percentage taper, moderate exposure lifetimes, fully blocked radiation, safe zones,
-ordinary combat durability and all exemptions. Check actions and bars on ordinary masks and linked
+ordinary combat durability and all exemptions and built-in tanks. Check Technut tank quotes, refill of undamaged suits, and rejection at Boss. Check actions and bars on ordinary masks and linked
 helmet slots, including Screen. Reconnect, restart and transfer between identically configured servers
 with partial, empty and exhausted filters. Try repeated and foreign requests, full backpacks, a
 backpack filled during removal, death or character switching during installation/removal, and normal carry limits.

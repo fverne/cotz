@@ -72,7 +72,7 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 
 `suits/` owns tiered replaceable gasmask filters, their shared/server modules and immediate
 `items/gasmaskfilters/` definitions. Concrete headgear declares exact compatibility; closed-respiratory
-suit families remain exempt. See the [filter guide](../gamemodes/ix_cotz/plugins/suits/README.md).
+suit families use built-in air tanks serviced by Technut. See the [filter guide](../gamemodes/ix_cotz/plugins/suits/README.md).
 
 `gearcustomization/` owns the vendor appearance service, shared appearance API, menu
 and icon rendering. Concrete `gear` and `newbags` items declare approved variants.

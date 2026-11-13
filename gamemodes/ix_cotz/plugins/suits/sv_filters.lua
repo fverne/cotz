@@ -160,7 +160,8 @@ function ix.util.DamageGasmaskFilters(client, damageInfo)
 			local condition = item:GetFilterCondition()
 			if condition and condition > 0 then
 				local definition = ix.item.list["gasmask_filter_" .. item.filterType]
-				item:SetData("filterCondition", math.max(0, condition - damageInfo:GetDamage() / definition.filterWearDivisor))
+				local wearDivisor = item.filterWearDivisor or definition.filterWearDivisor
+				item:SetData("filterCondition", math.max(0, condition - damageInfo:GetDamage() / wearDivisor))
 			end
 		end
 	end

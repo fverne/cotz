@@ -59,6 +59,23 @@ function ITEM:GetRepairCost()
 	return math.pow(self.price, 1/3)
 end
 
+function ITEM:GetFilterCondition()
+	return ix.util.GetGasmaskFilterCondition(self)
+end
+
+function ITEM:GetFilterScale()
+	if not self.filterType then return 1 end
+
+	return math.Clamp((self:GetFilterCondition() or 0) / 20, 0, 1)
+end
+
+function ITEM:GetFlatRadProt()
+	if not self.isAirTank then return self.flatRadProt end
+	local durabilityScale = math.Clamp(self:GetData("durability", 100) / 80, 0, 1)
+
+	return self.flatRadProt * durabilityScale * self:GetFilterScale()
+end
+
 function ITEM:GetDescription()
 	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
 	local quantdesc = ""
@@ -90,6 +107,7 @@ if (CLIENT) then
 	local Texture2 = Material("cotz/panels/hp1.png", "noclamp smooth") 
 
 	function ITEM:PaintOver(item, w, h)
+		if item.filterType then ix.util.PaintGasmaskFilter(item, w, h) end
 		if (item:GetData("equip")) then
 			surface.SetDrawColor(110, 255, 110, 255)
 		else
@@ -222,6 +240,7 @@ if (CLIENT) then
 			local duratitle = tooltip:AddRowAfter("skintitle", "duratitle")
 			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 			duratitle:SizeToContents()
+			if self.filterType then ix.util.PopulateGasmaskFilterTooltip(tooltip, self) end
 
 			ix.util.PropertyDesc2(tooltip, "Protective Suit", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 
@@ -294,6 +313,7 @@ function ITEM:RemoveOutfit(client)
 end
 
 function ITEM:OnInstanced()
+	if self.filterType then self:GetFilterCondition() end
 	self:SetData("durability", 100)
 
 	self:SetData("maxMiscSlots", {
@@ -828,6 +848,8 @@ function ITEM:getRadProt()
 		res = 1 - self.radProt
 	end
 	
+	res = 1 - (1 - res) * self:GetFilterScale()
+
 	for k,v in pairs(upgrades) do
 		if (!ix.armortables.upgrades[v]) then continue end
 		if ix.armortables.upgrades[v].radProt then

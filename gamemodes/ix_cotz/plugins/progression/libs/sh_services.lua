@@ -84,13 +84,19 @@ local function ownedItem(character, itemID)
 	end
 end
 
-local function repairOffer(client, data)
+local function repairOffer(client, data, npc)
 	local item = ownedItem(client:GetCharacter(), data.itemid)
 	if not item or not item.canRepair then
 		return
 	end
 	local field = item.isWeapon and "wear" or "durability"
-	local missing = 100 - item:GetData(field, 100)
+	if data.type == "airTank" then
+		if not item.isAirTank or npc ~= "'Technut'" then return end
+		field = "filterCondition"
+	end
+	if item.cotzFilterPending then return end
+	local condition = field == "filterCondition" and (item:GetFilterCondition() or 0) or item:GetData(field, 100)
+	local missing = 100 - condition
 	if missing < 0.5 then
 		return
 	end
@@ -274,12 +280,15 @@ end
 function ix.progression.GetRepairOptions(client, target)
 	local options = {}
 	for id, item in pairs(client:GetCharacter():GetInventory():GetItems()) do
-		local data = {itemid = id}
-		local offer = ix.progression.BuildServiceOffer(client, target, "repair", data)
-		if offer then
-			data.cost = offer.cost
-			options[#options + 1] = {statement = item:GetName() .. " - " .. ix.progression.ServicePriceText(offer),
-				topicID = "RepairItems", dyndata = data}
+		for _, kind in ipairs({"durability", "airTank"}) do
+			local data = {itemid = id, type = kind}
+			local offer = ix.progression.BuildServiceOffer(client, target, "repair", data)
+			if offer then
+				data.cost = offer.cost
+				local label = item:GetName() .. (kind == "airTank" and " (air tank)" or "")
+				options[#options + 1] = {statement = label .. " - " .. ix.progression.ServicePriceText(offer),
+					topicID = "RepairItems", dyndata = data}
+			end
 		end
 	end
 
@@ -415,7 +424,7 @@ if SERVER then
 
 	local function applyRepair(client, offer)
 		offer.item:SetData(offer.field, 100)
-		if offer.item.GetDurabilityScale then client:RecalculateResistances() end
+		if offer.item.GetDurabilityScale or offer.item.isAirTank then client:RecalculateResistances() end
 		if offer.item.isWeapon and offer.item.class then
 			local weapon = client:GetWeapon(offer.item.class)
 			if IsValid(weapon) then weapon:SetWeaponWear(100) end
