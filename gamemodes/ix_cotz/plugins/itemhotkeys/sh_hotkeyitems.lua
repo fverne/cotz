@@ -92,5 +92,6 @@ PLUGIN.hotkeyitems = {
     ["artifact_dwarfgalaxy"] = "use",
     ["artifact_storm"] = "use",
     ["artifact_panacea"] = "use",
+    ["artifact_gaia"] = "use",
 
 }

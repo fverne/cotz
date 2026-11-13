@@ -13,3 +13,18 @@ ITEM.varweight  = 0.300
 ITEM.JumpPower = 400
 
 ITEM.exRender = true
+
+ITEM.functions.use = {
+	name = "Meditate",
+ 	icon = "icon16/stalker/heal.png",
+    sound = "physics/metal/chain_impact_soft2.wav",
+    OnRun = function(item)
+        if item.player:Health() < item.player:GetMaxHealth() then
+        	item.player:AddBuff("buff_meditation", -1, { min = 1, max = 5 })
+        end
+        return false
+    end,
+    OnCanRun = function(item)
+        return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
+    end
+}
