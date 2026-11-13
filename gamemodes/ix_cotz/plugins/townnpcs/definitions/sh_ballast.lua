@@ -5,7 +5,7 @@ PLUGIN:Register("ballast", {
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	buyAll = true,
-	buyScale = 0.3,
+	buyScale = 0.15,
 	courierPools = {
 		"valuables_transit_cases",
 		"valuables_reinforced_cases",

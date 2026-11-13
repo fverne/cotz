@@ -15,7 +15,7 @@ ix.npctemplates.templates["gasketnpc"] = {
 	classes = {},
 
 	money = 0,
-	scale = 0.5,
+	scale = 0.3,
 	buyAll = false,
 	sherpa = false,
 	items = {},

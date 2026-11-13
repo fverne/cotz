@@ -5,7 +5,7 @@ PLUGIN:Register("cleaner", {
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",
 	buyAll = true,
-	buyScale = 0.3,
+	buyScale = 0.15,
 	courierPools = {
 		"valuables_cleaning_supplies",
 		"valuables_cutting_tools",

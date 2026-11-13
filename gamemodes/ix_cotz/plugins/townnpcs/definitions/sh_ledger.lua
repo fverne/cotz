@@ -5,7 +5,7 @@ PLUGIN:Register("ledger", {
 	enforceCatalogue = true,
 	map = "rp_waystation",
 	buyAll = true,
-	buyScale = 0.3,
+	buyScale = 0.15,
 	courierPools = {
 		"valuables_office_records",
 		"valuables_transit_cases",
