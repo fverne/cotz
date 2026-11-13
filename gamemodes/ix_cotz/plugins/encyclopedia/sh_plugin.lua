@@ -17,7 +17,16 @@ if (CLIENT) then
 end
 */
 
+ix.config.Add("tutorialPopupEnabled", true, "Automatically open the Tutorial for new characters.", nil, {
+	category = "Tutorial",
+})
+
+ix.util.Include("sv_tutorial.lua")
+ix.util.Include("cl_tutorial.lua")
+
 function PLUGIN:PopulateHelpMenu(tabs)
+	self:PopulateTutorial(tabs)
+
     tabs["readme"] = function(container)
         local title = container:Add("DLabel")
         title:SetText("Welcome to Call of the Zone!")

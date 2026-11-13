@@ -209,6 +209,7 @@ LANGUAGE = {
 	noFit = "You do not have enough space for this item!",
 	itemOwned = "You cannot interact with an item that you own on a different character!",
 	help = "Encyclopedia",
+	tutorial = "Tutorial",
 	commands = "Commands",
 	doorSettings = "Door Settings",
 	sell = "Sell",

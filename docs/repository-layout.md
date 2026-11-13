@@ -45,6 +45,18 @@ For item descriptions and NPC prose, read the [writing guide](writing-guide.md) 
 [curated references](writing-references/README.md). Detailed examples live in the repository;
 NPC-specific voice notes remain in the existing [contact profiles](npc-overhaul/contacts/README.md).
 
+The bundled `helix/plugins/mapscene.lua` includes COTZ camera visibility support. While a map scene
+is rendering, the client reports its final camera origin at most four times per second. The server
+rate-limits reports, validates them against configured static positions or moving camera segments
+(with 16 units of tolerance for mouse parallax and network rounding), and adds that origin through
+`SetupPlayerVisibility`/`AddOriginToPVS`. This keeps entities visible around the camera independently
+of the player's spawn position. Closing the menu clears the extra origin; reports also expire after
+two seconds without a refresh. Saved scene formats and camera selection remain unchanged.
+This lives in the owning bundled plugin because its `CalcView` return can prevent other plugins
+from observing the active camera. Run `luatex --luaonly tests/mapscene_visibility_spec.lua`.
+In multiplayer, verify distant static and moving scenes, scene transitions, reopening character
+selection with a loaded character, and returning to gameplay with two clients.
+
 ## Gameplay supporting files
 
 Paths below are relative to `gamemodes/ix_cotz/plugins/`.

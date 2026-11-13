@@ -1,4 +1,11 @@
 local PLUGIN = PLUGIN
+local introPrompt
+local introPlaying = false
+
+function PLUGIN:IsIntroActive()
+	return IsValid(introPrompt) or introPlaying
+end
+
 -- hard-coded + badly made intro sequence, sorry in advance to whoever views this.
 surface.CreateFont("stalkerregularfont8", {
     font = "alsina",
@@ -26,6 +33,7 @@ surface.CreateFont("stalkerregularfont6", {
 
 function PLUGIN.RequestContinue()
     requestBackgroundFrame = vgui.Create("DFrame")
+	introPrompt = requestBackgroundFrame
     requestBackgroundFrame:SetTitle("")
     requestBackgroundFrame:SetSize(ScrW(), ScrH())
     requestBackgroundFrame:SetPos(0, 0)
@@ -75,6 +83,8 @@ function PLUGIN.RequestContinue()
 end
 
 function PLUGIN.PlayIntro()
+	introPlaying = true
+
     sound.PlayFile("sound/stalkersound/blowout_siren.wav", "mono", function(station, errCode, errStr)
         if IsValid(station) then
             station:Play()
@@ -256,6 +266,9 @@ function PLUGIN.PlayIntro()
         end
 
         local main2 = vgui.Create("DFrame")
+		main2.OnRemove = function()
+			introPlaying = false
+		end
         main2:SetTitle("")
         main2:SetSize(ScrW(), ScrH())
         main2:SetPos(0)

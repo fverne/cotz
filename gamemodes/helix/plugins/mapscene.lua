@@ -10,9 +10,34 @@ local x3, y3 = 0, 0
 local realOrigin = Vector(0, 0, 0)
 local realAngles = Angle(0, 0, 0)
 local view = {}
+local VISIBILITY_UPDATE_INTERVAL = 0.25
+local VISIBILITY_TIMEOUT = 2
+local VISIBILITY_TOLERANCE_SQUARED = 16 * 16
 
 if (CLIENT) then
 	PLUGIN.ordered = PLUGIN.ordered or {}
+
+	local nextVisibilityUpdate = 0
+	local visibilityActive = false
+
+	local function updateVisibility(origin)
+		local curTime = CurTime()
+
+		if curTime < nextVisibilityUpdate or (not origin and not visibilityActive) then
+			return
+		end
+
+		nextVisibilityUpdate = curTime + VISIBILITY_UPDATE_INTERVAL
+		visibilityActive = origin ~= nil
+
+		net.Start("cotz/mapscene/visibility")
+			net.WriteBool(visibilityActive)
+
+			if visibilityActive then
+				net.WriteVector(origin)
+			end
+		net.SendToServer()
+	end
 
 	function PLUGIN:CalcView(client, origin, angles, fov)
 		local scenes = self.scenes
@@ -88,8 +113,12 @@ if (CLIENT) then
 			view.origin = realOrigin + realAngles:Up()*y3 + realAngles:Right()*x3
 			view.angles = realAngles + Angle(y3 * -0.5, x3 * -0.5, 0)
 
+			updateVisibility(view.origin)
+
 			return view
 		end
+
+		updateVisibility()
 	end
 
 	function PLUGIN:PreDrawViewModel(viewModel, client, weapon)
@@ -153,6 +182,62 @@ if (CLIENT) then
 		end
 	end)
 else
+	util.AddNetworkString("cotz/mapscene/visibility")
+
+	local function isSceneOrigin(origin)
+		for key, scene in pairs(PLUGIN.scenes) do
+			local start = scene.origin or (isvector(key) and key)
+			local nearest = scene[1]
+
+			if start then
+				local offset = scene[1] - start
+				local lengthSquared = offset:LengthSqr()
+				local fraction = 0
+
+				if lengthSquared > 0 then
+					fraction = math.Clamp((origin - start):Dot(offset) / lengthSquared, 0, 1)
+				end
+
+				nearest = start + offset * fraction
+			end
+
+			-- Include mouse parallax and network vector rounding, but reject arbitrary viewing positions.
+			if origin:DistToSqr(nearest) <= VISIBILITY_TOLERANCE_SQUARED then
+				return true
+			end
+		end
+
+		return false
+	end
+
+	net.Receive("cotz/mapscene/visibility", function(_, client)
+		local curTime = CurTime()
+
+		if curTime < (client.ixMapSceneNextUpdate or 0) then
+			return
+		end
+
+		client.ixMapSceneNextUpdate = curTime + VISIBILITY_UPDATE_INTERVAL * 0.5
+		client.ixMapSceneOrigin = nil
+
+		if not net.ReadBool() then
+			return
+		end
+
+		local origin = net.ReadVector()
+
+		if isSceneOrigin(origin) then
+			client.ixMapSceneOrigin = origin
+			client.ixMapSceneExpires = curTime + VISIBILITY_TIMEOUT
+		end
+	end)
+
+	function PLUGIN:SetupPlayerVisibility(client)
+		if client.ixMapSceneOrigin and CurTime() < client.ixMapSceneExpires then
+			AddOriginToPVS(client.ixMapSceneOrigin)
+		end
+	end
+
 	util.AddNetworkString("ixMapSceneSync")
 	util.AddNetworkString("ixMapSceneAdd")
 	util.AddNetworkString("ixMapSceneRemove")
