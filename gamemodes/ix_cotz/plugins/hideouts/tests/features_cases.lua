@@ -62,6 +62,37 @@ local function shop()
 	return officer, inventory, buyer, destination, instance, record, stock
 end
 
+Test("visiting administrators can open and buy squad stock without gaining management access", function()
+	local officer, inventory, admin, destination, instance, record, stock = shop()
+	PLUGIN.members[admin], instance.shopClients[admin] = nil, nil
+	assert(not PLUGIN:IsNearUtility(admin, instance.vendor))
+	admin.IsAdmin = function() return true end
+	local listed = FeatureItem(stock, {cotzHideoutStock = {price = 100, revision = 1}})
+	FeatureItem(stock, {cotzHideoutStock = {price = 0, revision = 1}})
+	local sendStock, opened = ix.sherpa.SendStock, false
+	ix.sherpa.SendStock = function(client, entity, id, name, rank, balance, commission, page, pages, rows)
+		assert(client == admin and entity == instance.vendor and id == record.id)
+		assert(rank == nil and balance == 0 and #rows == 1 and rows[1] == listed)
+		opened = true
+	end
+	PLUGIN:OpenShop(admin, instance.vendor)
+	ix.sherpa.SendStock = sendStock
+	assert(opened and instance.shopClients[admin])
+	assert(not PLUGIN:CanManageHideout(admin, record))
+	PLUGIN:ShopAction(admin, record, "price", listed:GetID(), 1, 1)
+	assert(listed:GetData("cotzHideoutStock").price == 100)
+	PLUGIN:ShopAction(admin, record, "buy", listed:GetID(), 100, 1)
+	assert(listed.invID == destination:GetID() and admin:GetCharacter():GetMoney() == 900)
+	local container = NewEntity(nil, instance.origin)
+	container.ixHideout = record.id
+	assert(not PLUGIN:IsNearUtility(admin, container))
+	instance.saving = true
+	assert(not PLUGIN:IsNearUtility(admin, instance.vendor))
+	instance.saving = nil
+	admin.position = instance.origin + Vector(1000, 0, 0)
+	assert(not PLUGIN:IsNearUtility(admin, instance.vendor))
+end)
+
 Test("donation pays nothing and purchase preserves the same item row and data", function()
 	local officer, inventory, buyer, destination, instance, record, stock = shop()
 	local item = FeatureItem(inventory, {quantity = 19, durability = 37, name = "Unique rifle"})

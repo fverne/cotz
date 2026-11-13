@@ -79,8 +79,11 @@ function PLUGIN:IsNearUtility(client, entity)
 	if not instance or instance.state ~= "active" or instance.saving then return false end
 	if entity.cotzContainerHeld then return false end
 	local record = self:GetHideout(instance.id)
+	-- Administrators may visit vendors by noclipping in without registering as occupants.
+	local visitingVendor = entity == instance.vendor and client:IsAdmin()
+		and self:Contains(client:GetPos(), instance.mins, instance.maxs)
 
-	return self.members[client] == instance.id and self:CanAccess(client, record)
+	return (self.members[client] == instance.id or visitingVendor) and self:CanAccess(client, record)
 		and client:GetPos():DistToSqr(entity:GetPos()) <= USE_DISTANCE_SQUARED
 end
 

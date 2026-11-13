@@ -187,7 +187,7 @@ Test("management sends actual invitations and permits revoking an offline invite
 	assert(not PLUGIN:HandleManagementAction(owner, record.id, 7, "3", 0))
 end)
 
-Test("administrator keypads list owned rooms and explicit invitations without exposing other rooms", function()
+Test("administrator keypads list public squad rooms alongside owned rooms and invitations", function()
 	local owner, inventory, instance, record = containerHome()
 	local admin = FeatureClient(2)
 	admin.IsAdmin = function() return true end
@@ -218,6 +218,14 @@ Test("administrator keypads list owned rooms and explicit invitations without ex
 	invited.guests["2"] = nil
 	ix.squad.list.squad1.members[2] = nil
 	netstream.Start = function(client, message, entrance, records)
+		local visible = {}
+		for _, entry in ipairs(records) do visible[entry.id] = true end
+		assert(#records == 2 and visible.owned and visible.squad)
+	end
+	PLUGIN:ShowEntrance(admin, "gate")
+	admin.ixHideoutMenuTime = nil
+	squad.access = "squad"
+	netstream.Start = function(_, _, _, records)
 		assert(#records == 1 and records[1].id == "owned")
 	end
 	PLUGIN:ShowEntrance(admin, "gate")

@@ -50,6 +50,7 @@ function PLUGIN:ShowEntrance(client, entranceID)
 		local visible = not client:IsAdmin() or record.owner == character:GetID()
 			or (record.guests or {})[tostring(character:GetID())] == true
 			or record.ownerType == "squad" and self:GetSquadRank(client, record) ~= nil
+			or record.ownerType == "squad" and record.access == "public"
 		if visible and self:IsHideoutEntrance(record, entranceID) and self:CanAccess(client, record) then
 			records[#records + 1] = {id = record.id, name = record.name, manage = self:CanManageHideout(client, record)}
 		end

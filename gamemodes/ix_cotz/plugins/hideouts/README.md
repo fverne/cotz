@@ -510,7 +510,9 @@ return positions for hideout occupants and intercepts old interior restores.
 Area membership is audited once per second, including intruders and external
 teleports. Administrators can enter personal and squad hideouts without an invitation, including through
 the entrance while noclipping; occupancy audits do not eject administrators visiting an interior directly.
-Administrator keypad menus list only their own rooms and rooms that explicitly invite their current character.
+Administrator keypad menus list their own rooms, explicit invitations, squad memberships and public squad rooms.
+Administrators visiting a loaded interior directly can open its nearby squad vendor and buy listed stock;
+stock management, treasury withdrawals and container access retain their character's normal permissions.
 Normal loading, persistence and disabled-room checks still apply. Generic world-item persistence excludes hideout floor items.
 Blowout temporary-item cleanup also excludes tagged hideout floor items, including template seeds and
 player drops. These items retain `bTemporary` for the separate hideout persistence path; the flag alone
