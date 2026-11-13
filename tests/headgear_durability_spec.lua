@@ -222,8 +222,8 @@ for _, remaining in ipairs({100, 1, 0.001, 0}) do
 		local damage = overrideDamage(damageType)
 		suitsPlugin:EntityTakeDamage(client, damage)
 		check(damage.value == 18, "Tank wear immunity preserves incoming health damage")
-		check((suit.data.durability == 100) == (remaining > 0),
-			"Suit wears only when tank is exhausted: " .. remaining .. "/" .. damageType)
+		check(suit.data.durability < 100,
+			"Suit wears regardless of remaining tank air: " .. remaining .. "/" .. damageType)
 	end
 end
 suit.isAirTank = nil

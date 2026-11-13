@@ -360,8 +360,11 @@ local suit = instantiate(ITEM, {durability = 40, filterCondition = 10})
 suit.filterType, suit.isAirTank = "scientific", true
 suit.radProt, suit.flatRadProt, suit.miscSlots = 0.9, 0.02, {}
 ix.armortables = {upgrades = {}, attachments = {}}
-near(suit:getRadProt(), 0.225, "tank taper combines with suit durability")
-near(suit:GetFlatRadProt(), 0.005, "flat suit protection follows both condition scales")
+for _, remaining in ipairs({100, 20, 10, 1, 0.001}) do
+	suit.data.filterCondition = remaining
+	near(suit:getRadProt(), 0.45, "nonempty tank preserves radiation rating at " .. remaining)
+	near(suit:GetFlatRadProt(), 0.01, "nonempty tank preserves flat radiation rating at " .. remaining)
+end
 suit.data.filterCondition = 0
 near(suit:getRadProt(), 0, "exhausted tank removes suit radiation protection")
 near(suit:GetFlatRadProt(), 0, "exhausted tank removes flat radiation protection")

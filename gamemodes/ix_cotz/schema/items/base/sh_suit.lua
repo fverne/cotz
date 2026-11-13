@@ -82,6 +82,7 @@ end
 
 function ITEM:GetFilterScale()
 	if not self.filterType then return 1 end
+	if self.isAirTank then return (self:GetFilterCondition() or 0) > 0 and 1 or 0 end
 
 	return math.Clamp((self:GetFilterCondition() or 0) / 20, 0, 1)
 end
