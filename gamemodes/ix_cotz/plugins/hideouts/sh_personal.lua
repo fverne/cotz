@@ -22,19 +22,19 @@ PLUGIN.personalContainerRecipes = {
 		name = "General crate", filter = "general", price = 600, item = "value_container_smallitems",
 		sizes = {{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}},
 		models = {
-			"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
-			"models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl",
+			"models/lostsignalproject/items/misc/backpack.mdl",
+			"models/lostsignalproject/items/misc/backpack.mdl",
 		},
 	},
 	ammo = {
 		name = "Ammunition container", filter = "ammo", price = 900, item = "value_container_ammo",
 		sizes = {{4, 4}, {5, 4}, {5, 5}, {6, 5}, {6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8}, {9, 9}, {10, 9}},
-		models = {"models/items/ammocrate_smg1.mdl", "models/items/ammocrate_ar2.mdl"},
+		models = {"models/cotz/eft/lootcont/ammo_crate_wood.mdl", "models/cotz/eft/lootcont/scontainer_ammo_grenade.mdl"},
 	},
 	medical = {
 		name = "Medical cabinet", filter = "medical", price = 1000, item = "value_container_injectorcase",
 		sizes = {{4, 4}, {5, 4}, {5, 5}, {6, 5}, {6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8}, {9, 9}, {10, 9}},
-		models = {"models/props_interiors/medicalcabinet02.mdl", "models/props_wasteland/controlroom_storagecloset001a.mdl"},
+		models = {"models/illusion/eftcontainers/ifak.mdl", "models/illusion/eftcontainers/ifak.mdl"},
 	},
 	gear = {
 		name = "Suit and gear locker", filter = "gear", price = 1400, item = "value_container_parls",
