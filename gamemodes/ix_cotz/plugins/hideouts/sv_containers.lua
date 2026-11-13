@@ -148,6 +148,8 @@ function PLUGIN:RestoreStorage(instance, callback)
 			local tier = recipe and recipe.tiers[slot.tier or 0]
 			if record.ownerType ~= "squad" and not tier then continue end
 			local model = slot.model or tier and (tier.model or ix.item.list[tier.item] and ix.item.list[tier.item].model)
+			-- Personal appearance follows current definitions; saved purchase models may be outdated.
+			if record.ownerType ~= "squad" then model = tier.model or model end
 			local placement = slot.transform or definition
 			local entity = self:CreateUtility(instance, "ix_hideout_storage", placement.pos,
 				model or "models/z-o-m-b-i-e/st/equipment_cache/st_equipment_box_01.mdl", placement.angles)

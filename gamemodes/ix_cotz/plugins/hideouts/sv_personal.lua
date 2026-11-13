@@ -125,11 +125,14 @@ function PLUGIN:RefreshPersonalContainer(record, slotID)
 	if not instance or instance.state ~= "active" then return end
 	local slot, definition = self:GetContainer(record, slotID)
 	if not slot then return end
+	local recipe = self:GetContainerRecipe(record, definition)
+	local tier = recipe and recipe.tiers[slot.tier or 0]
+	local model = tier and tier.model or slot.model
 	instance.containers = instance.containers or {}
 	local entity = instance.containers[slotID]
 	if not IsValid(entity) then
 		local placement = slot.transform or definition
-		entity = self:CreateUtility(instance, "ix_hideout_storage", placement.pos, slot.model, placement.angles)
+		entity = self:CreateUtility(instance, "ix_hideout_storage", placement.pos, model, placement.angles)
 		if not IsValid(entity) then
 			ErrorNoHalt("[Hideouts] Purchased storage could not spawn; it will be restored on next entry.\n")
 			return
@@ -137,7 +140,7 @@ function PLUGIN:RefreshPersonalContainer(record, slotID)
 		entity.ixHideoutSlot = slotID
 		instance.containers[slotID] = entity
 	else
-		entity:SetModel(slot.model)
+		entity:SetModel(model)
 		entity:PhysicsInit(SOLID_VPHYSICS)
 		local physics = entity:GetPhysicsObject()
 		if IsValid(physics) then physics:EnableMotion(false) end

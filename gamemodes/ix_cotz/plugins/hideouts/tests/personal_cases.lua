@@ -63,6 +63,44 @@ Test("personal rooms begin with exactly one private 2 by 3 crate and no unpurcha
 	assert(record.containers.general.tier == 1)
 end)
 
+Test("purchased personal containers follow current tier models on restore and refresh", function()
+	for _, recipeID in ipairs({"general", "ammo", "medical", "weapon"}) do
+		for _, level in ipairs({1, 3}) do
+			local owner, inventory, instance, record = personalHome()
+			local slot = record.containers[recipeID]
+			local tier = PLUGIN.personalContainerRecipes[recipeID].tiers[level]
+			slot.tier, slot.model = level, "old-purchase.mdl"
+			slot.width, slot.height = 12, 14
+			slot.public, slot.guests = true, {["2"] = true}
+			slot.transform = {pos = Vector(10, 20, 30), angles = Angle(0, 45, 0)}
+			local storage = ix.inventory.Create(12, 14, 880)
+			slot.inventoryID = storage:GetID()
+			local item = FeatureItem(storage, {name = "Keep this"})
+			local saved = table.Copy(slot)
+			instance.state = "loading"
+			PLUGIN:RestoreStorage(instance, function(ok) assert(ok) end)
+			assert(instance.containers[recipeID].model == tier.model)
+			instance.state = "active"
+			local entity = instance.containers[recipeID]
+			entity:SetModel("outdated-live.mdl")
+			PLUGIN:RefreshPersonalContainer(record, recipeID)
+			assert(instance.containers[recipeID] == entity and entity.model == tier.model)
+			entity:Remove()
+			PLUGIN:RefreshPersonalContainer(record, recipeID)
+			entity = instance.containers[recipeID]
+			assert(IsValid(entity) and entity.model == tier.model)
+			assert(entity:GetPos():DistToSqr(instance.origin + saved.transform.pos) == 0)
+			assert(entity:GetAngles().p == saved.transform.angles.p)
+			assert(entity:GetAngles().y == saved.transform.angles.y)
+			assert(entity:GetAngles().r == saved.transform.angles.r)
+			assert(slot.model == saved.model and slot.tier == saved.tier)
+			assert(slot.width == saved.width and slot.height == saved.height)
+			assert(slot.inventoryID == saved.inventoryID and item.invID == saved.inventoryID)
+			assert(slot.public and slot.guests["2"])
+		end
+	end
+end)
+
 Test("unmarked personal templates get one starter crate at the configured storage point", function()
 	local owner, inventory, instance, record = personalHome()
 	record.containers, record.starterSlot, record.personalLayout = {}, nil, nil

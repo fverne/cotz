@@ -192,6 +192,8 @@ Inventory-bearing bags are rejected by every recipe. `sh_personal.lua` defines 1
 with monotonically growing dimensions. General crates remain at most 40% of a specialized container's
 capacity at the same level. Prices multiply by 2.2 each level while slot gains remain modest; subsequent
 levels cost roubles only. Models switch at level 3 by default and may be configured per tier.
+Personal containers use the current tier's model when the room loads or the container refreshes,
+including containers purchased before a model change. Saved inventory sizes, contents, access and placement remain intact.
 Only the pilot levels below are purchasable; later levels remain explicitly locked.
 
 Owners use the entrance keypad or exit menu to invite/revoke characters. Each installed container's
