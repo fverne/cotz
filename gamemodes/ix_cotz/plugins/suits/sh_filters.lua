@@ -26,7 +26,7 @@ local function inMainBackpack(item, inventory)
 end
 
 function ix.util.CanChangeGasmaskFilter(item, client, pending)
-	if not item or item.isAirTank or not item.isGasmask or not item.filterType or IsValid(item.entity) then
+	if not item or not item.isGasmask or not item.filterType or IsValid(item.entity) then
 		return false
 	end
 	if item.cotzFilterPending and not pending then return false end

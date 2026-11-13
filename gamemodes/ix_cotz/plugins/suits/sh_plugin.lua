@@ -57,7 +57,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		end
 
 		-- wishes
-		if suit ~= nil and not suit:GetData("unlimitedDurability", nil) then
+		if ix.util.CanWearSuit(suit) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
@@ -82,7 +82,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		end
 
 		-- wishes
-		if suit ~= nil and not suit:GetData("unlimitedDurability", nil) then
+		if ix.util.CanWearSuit(suit) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
 		end
 
@@ -115,7 +115,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		damage = math.max(damage, 0)
 
 		-- wishes
-		if suit ~= nil and not suit:GetData("unlimitedDurability", nil) then
+		if ix.util.CanWearSuit(suit) then
 			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
 		end
 

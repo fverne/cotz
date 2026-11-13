@@ -59,6 +59,23 @@ function ITEM:GetRepairCost()
 	return math.pow(self.price, 1/3)
 end
 
+ITEM.functions.InstallFilter = {
+	name = "Swap Gas Tank",
+	icon = "icon16/stalker/attach.png",
+	isMulti = true,
+	multiOptions = function(item, client)
+		return ix.util.GetGasmaskFilterOptions(item, client)
+	end,
+	OnCanRun = function(item)
+		return item.isAirTank and ix.util.CanChangeGasmaskFilter(item, item.player)
+	end,
+	OnRun = function(item, data)
+		ix.util.InstallGasmaskFilter(item, item.player, data)
+
+		return false
+	end,
+}
+
 function ITEM:GetFilterCondition()
 	return ix.util.GetGasmaskFilterCondition(self)
 end

@@ -15,9 +15,17 @@ replace a civilian or military cartridge. Equipment declared with `false` has no
 | Military | `gasmask_filter_military` | EO-20, PMK-3, XM-40, CS-4, PRACS, PSZ-12 | 15 minutes | 1,700 |
 | Scientific | `gasmask_filter_scientific` | M40, M50, Exohelm with Respirator, Spartan, Screen | 20 minutes | 2,550 |
 
-SSP-99, SSP-99M and all SEVA and NBC variants use built-in air tanks. Tanks follow scientific filter
-wear and the same protection taper, with a wear divisor of 1,920: eight times the scientific cartridge
-lifetime, or 160 minutes of moderate exposure. They cannot accept or remove loose cartridges.
+SSP-99, SSP-99M and all SEVA and NBC variants use air tanks with the same protection taper as filters.
+Their current concrete wear divisor is 700, preserved by tank swaps. The replacement `gasmask_filter_air_tank`
+item costs 6,000 RU, occupies 2×2 cells and weighs 6 kg loose. It only fits these suits; scientific
+cartridges and gas tanks cannot substitute for one another.
+Drag a tank onto a backpack suit or its equipped card, or use **Swap Gas Tank**. Swapping uses the
+same six-second cancellable action and ownership/placement checks as filters. The outgoing tank
+returns in the incoming tank's backpack space with its actual air remaining at completion, including
+0%, so swaps work with a full backpack. Tanks cannot be removed without replacing them.
+Suit durability does not deteriorate from combat or anomalies while tank air is above 0%, including
+fractional percentages. Health damage and air consumption continue normally; ordinary suit wear resumes
+when the tank is exhausted. Unlimited durability retains its existing behavior.
 Technut offers a separate air tank repair/refill even when suit durability is full, restoring tank
 condition without repairing the suit. It costs 40 RU per missing percentage point, up to 4,000 RU for an empty tank on any suit, before earned discounts
 and repair credit. Ordinary suit repairs do not refill tanks. Existing and new suits start with full tanks;

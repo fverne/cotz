@@ -114,7 +114,7 @@ for _, id in ipairs({"mask_cloth", "headwear_riot", "headwear_altyn"}) do
 end
 for file in lfs.dir("gamemodes/ix_cotz/schema/items/suit") do
 	if file:match("^sh_suit_seva") or file:match("^sh_suit_nbc") or file:match("^sh_suit_ssp99") then
-		check(read("gamemodes/ix_cotz/schema/items/suit/" .. file):find('ITEM.filterType = "scientific"\nITEM.isAirTank = true\nITEM.filterWearDivisor = 700', 1, true),
+		check(read("gamemodes/ix_cotz/schema/items/suit/" .. file):find('ITEM.filterType = "air_tank"\nITEM.isAirTank = true\nITEM.filterWearDivisor = 700', 1, true),
 			"closed respiratory suit declares long-life tank: " .. file)
 	end
 end
@@ -302,11 +302,45 @@ end
 
 mask = newMask("civilian", false)
 local civilian = newFilter("civilian", 37)
+ITEM = setmetatable({}, {__index = filterBase})
+dofile("gamemodes/ix_cotz/plugins/suits/items/gasmaskfilters/sh_gasmask_filter_air_tank.lua")
+ix.item.list.gasmask_filter_air_tank = ITEM
+check(ITEM.price == 6000 and ITEM.width == 2 and ITEM.height == 2 and ITEM.weight == 6,
+	"Gas tank declares requested price, footprint and mass")
+local spareTank = newFilter("air_tank", 80)
+local tankSuit = newMask("air_tank", 25)
+tankSuit.isAirTank = true
+tankSuit.data.equip = true
+check(not ix.util.CanInstallGasmaskFilter(mask, spareTank, client), "Tank cannot fit a gasmask")
+check(not ix.util.CanInstallGasmaskFilter(tankSuit, newFilter("scientific", 100), client),
+	"Scientific cartridges cannot fit a suit tank socket")
+inventory.full = true
+advance()
+ix.util.InstallGasmaskFilter(tankSuit, client, {spareTank.id})
+check(tankSuit:GetFilterCondition() == 25, "Tank stays installed during swap delay")
+advance(5.9)
+check(tankSuit:GetFilterCondition() == 25, "Tank swap lasts the full six seconds")
+tankSuit:SetData("filterCondition", 20)
+advance(0.1)
+check(tankSuit:GetFilterCondition() == 80 and spareTank:GetData("filterCondition") == 20,
+	"Full-backpack tank swap preserves outgoing air at completion")
+check(spareTank.invID == inventory.id and not tankSuit.cotzFilterPending,
+	"Outgoing tank uses incoming tank's space and releases locks")
+local tankCreations = #creations
+advance()
+ix.util.RemoveGasmaskFilter(tankSuit, client)
+check(#creations == tankCreations and tankSuit:GetFilterCondition() == 80, "Tank cannot be removed after swapping")
+inventory.full = false
+tankSuit.data.equip = false
+
 local tank = newMask("scientific", 100)
 tank.isAirTank = true
 tank.filterWearDivisor = 1920
 tank.data.equip = true
-check(not ix.util.CanChangeGasmaskFilter(tank, client), "built-in tanks cannot accept or remove cartridges")
+check(ix.util.CanChangeGasmaskFilter(tank, client), "suit tank can be swapped")
+local creationCount = #creations
+ix.util.RemoveGasmaskFilter(tank, client)
+check(#creations == creationCount and tank:GetFilterCondition() == 100, "server rejects tank removal")
 ix.util.DamageGasmaskFilters(client, damage(240, DMG_RADIATION))
 near(tank:GetFilterCondition(), 99.875, "tank consumes one eighth of scientific filter condition")
 tank.data.filterCondition = 100

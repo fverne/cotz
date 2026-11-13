@@ -86,7 +86,7 @@ function ix.util.InstallGasmaskFilter(item, client, data)
 	context.installing = true
 	context.expires = CurTime() + INSTALL_DURATION + 1
 	timer.Simple(ACTION_CHECK_INTERVAL, function() monitorInstallation(context) end)
-	ix.util.PlayerPerformBlackScreenAction(client, "Installing filter...", INSTALL_DURATION, function()
+	ix.util.PlayerPerformBlackScreenAction(client, item.isAirTank and "Swapping gas tank..." or "Installing filter...", INSTALL_DURATION, function()
 		if not validContext(context) or not canInteract(item, filter, client) then releaseAction(context) return end
 		local incoming = math.Clamp(filter:GetData("filterCondition", 100), 0, 100)
 		local outgoing = item:GetFilterCondition()
@@ -105,6 +105,7 @@ function ix.util.InstallGasmaskFilter(item, client, data)
 end
 
 function ix.util.RemoveGasmaskFilter(item, client)
+	if not item or item.isAirTank then return end
 	if not beginAction(item, client) then return end
 	local condition = item:GetFilterCondition()
 	if condition == false then return end

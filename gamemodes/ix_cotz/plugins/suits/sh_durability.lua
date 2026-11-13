@@ -1,3 +1,10 @@
+function ix.util.CanWearSuit(item)
+	if not item or item:GetData("unlimitedDurability", false) then return false end
+	if item.isAirTank and (item:GetFilterCondition() or 0) > 0 then return false end
+
+	return true
+end
+
 local COMBAT_WEAR_RATE = 1 / 400
 local ENVIRONMENT_WEAR_RATE = 1 / 100
 local ENVIRONMENT_DAMAGE_TYPES = {

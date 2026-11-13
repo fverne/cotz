@@ -213,6 +213,20 @@ for _, damageType in ipairs({DMG_BULLET, DMG_SLASH, DMG_BURN, DMG_ACID, DMG_CRUS
 	check(suitWear > 0 and math.abs(headgearWear / suitWear - ratio) < 0.000001,
 		"Headgear wears slower than suits after protection: " .. damageType)
 end
+suit.isAirTank = true
+function suit:GetFilterCondition() return self:GetData("filterCondition", 100) end
+for _, remaining in ipairs({100, 1, 0.001, 0}) do
+	suit.data.filterCondition = remaining
+	for _, damageType in ipairs({DMG_BULLET, DMG_SLASH, DMG_BURN, DMG_ACID, DMG_CRUSH, DMG_BLAST}) do
+		suit.data.durability = 100
+		local damage = overrideDamage(damageType)
+		suitsPlugin:EntityTakeDamage(client, damage)
+		check(damage.value == 18, "Tank wear immunity preserves incoming health damage")
+		check((suit.data.durability == 100) == (remaining > 0),
+			"Suit wears only when tank is exhausted: " .. remaining .. "/" .. damageType)
+	end
+end
+suit.isAirTank = nil
 helmet.data.durability = 100
 client.GetNWInt = function() return 100 end
 suitsPlugin:EntityTakeDamage(client, overrideDamage(DMG_BULLET))
