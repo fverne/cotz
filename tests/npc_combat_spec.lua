@@ -17,6 +17,8 @@ function vectorMeta:DistToSqr(other)
 	return (self.x - other.x) ^ 2 + (self.y - other.y) ^ 2 + (self.z - other.z) ^ 2
 end
 function vectorMeta.__sub(a, b) return Vector(a.x - b.x, a.y - b.y, a.z - b.z) end
+function vectorMeta.__add(a, b) return Vector(a.x + b.x, a.y + b.y, a.z + b.z) end
+function vectorMeta.__mul(a, b) return Vector(a.x * b, a.y * b, a.z * b) end
 function vectorMeta:GetNormalized()
 	local length = math.sqrt(self.x ^ 2 + self.y ^ 2 + self.z ^ 2)
 
@@ -25,8 +27,30 @@ end
 function vectorMeta:Angle() return {y = math.deg(math.atan(self.y, self.x))} end
 math.NormalizeAngle = function(value) return (value + 180) % 360 - 180 end
 D_HT, D_LI, D_NU = 1, 3, 4
+HITGROUP_GENERIC, HITGROUP_HEAD, HITGROUP_CHEST = 0, 1, 2
 MOVETYPE_OBSERVER, MOVETYPE_NOCLIP, SCHED_FORCED_GO_RUN = 10, 8, 200
 GetConVar = function() return {GetInt = function() return 0 end} end
+local function hitboxData(entity, hitbox, hitboxSet)
+	return ((entity.hitboxSets or {})[hitboxSet] or {})[hitbox] or {}
+end
+local function mockHitboxes(entity)
+	entity.GetHitboxSet = function(self) return self.hitboxSet end
+	entity.GetHitBoxCount = function(self, hitboxSet)
+		return ((self.hitboxSets or {})[hitboxSet] or {}).count
+	end
+	entity.GetHitBoxHitGroup = function(self, hitbox, hitboxSet)
+		return hitboxData(self, hitbox, hitboxSet).group
+	end
+	entity.GetHitBoxBounds = function(self, hitbox, hitboxSet)
+		local box = hitboxData(self, hitbox, hitboxSet)
+
+		return box.mins, box.maxs
+	end
+	entity.GetHitBoxBone = function(self, hitbox, hitboxSet)
+		return hitboxData(self, hitbox, hitboxSet).bone
+	end
+	entity.GetBoneMatrix = function(self, bone) return (self.boneMatrices or {})[bone] end
+end
 local serial = 1000
 local function actor(class, x, pack)
 	serial = serial + 1
@@ -34,10 +58,7 @@ local function actor(class, x, pack)
 	entity.class, entity.position, entity.relationships = class, Vector(x, 0, 0), {}
 	entity.GetAngles = function(self) return {y = self.facing or 0} end
 	entity.SetHealth = function(self, health) self.health = health end
-	entity.LookupBone = function(self, name) return (self.aimBones or {})[name] end
-	entity.GetBoneCount = function(self) return self.boneCount or 0 end
-	entity.GetBonePosition = function(self, bone) return (self.bonePositions or {})[bone] end
-	entity.GetBoneMatrix = function(self, bone) return (self.boneMatrices or {})[bone] end
+	mockHitboxes(entity)
 	entity.WorldSpaceCenter = function(self) return self.position end
 	entity.Visible = function(self, other) return not other.hidden end
 	entity.SetSquad = function(self, squad) self.squad = squad end
@@ -85,28 +106,59 @@ check(bullet.Spread == spread and bullet.Damage == 20 and bullet.Num == 6,
 	"aim correction preserves spread, damage and pellet count")
 bandit.enemy = merc
 check(manager:EntityFireBullets(bandit, bullet) == true and bullet.Dir.z < 0,
-	"human targets without bones use their collision center")
+	"human targets without hitboxes use their collision center")
 do
+	local function aimMatrix(position, rotation, scale)
+		return setmetatable({position = position, rotation = rotation or 0, scale = scale or 1}, {
+			__mul = function(matrix, point)
+				local sine, cosine = math.sin(matrix.rotation), math.cos(matrix.rotation)
+
+				return matrix.position + Vector(
+					point.x * cosine - point.y * sine,
+					point.x * sine + point.y * cosine,
+					point.z
+				) * matrix.scale
+			end,
+		})
+	end
 	local function aimsAt(shooter, target, point, message)
 		shooter.enemy = target
 		check(manager:EntityFireBullets(shooter, bullet) == true, message .. " applies the bullet change")
 		local expected = (point - bullet.Src):GetNormalized()
 		check(bullet.Dir:DistToSqr(expected) < 0.000001, message)
 	end
-	merc.aimBones = {["ValveBiped.Bip01_Spine2"] = 0, ["ValveBiped.Bip01_Spine1"] = 1}
-	merc.boneCount = 2
-	merc.bonePositions = {[0] = Vector(1100, 0, 48), [1] = Vector(1100, 0, 36)}
-	aimsAt(bandit, merc, merc.bonePositions[0], "living gunmen prefer the chest, including bone index zero")
-	aimsAt(zombified, merc, merc.bonePositions[0], "zombified gunmen use the same chest preference")
-	merc.bonePositions[0] = Vector(1120, 20, 50)
-	aimsAt(bandit, merc, merc.bonePositions[0], "shots use the bone's current world position")
-	merc.aimBones["ValveBiped.Bip01_Spine2"] = nil
-	aimsAt(bandit, merc, merc.bonePositions[1], "a lower spine substitutes for a missing chest bone")
-	merc.aimBones = {["Chest"] = 0, ["ValveBiped.Bip01_Spine1"] = 1}
-	aimsAt(bandit, merc, merc.bonePositions[0], "alternate chest names take priority over lower spine bones")
-	lowMutant.aimBones = {["bip01_spine"] = 0}
-	lowMutant.boneCount, lowMutant.bonePositions = 1, {[0] = Vector(500, 0, 10)}
-	aimsAt(bandit, lowMutant, lowMutant.bonePositions[0], "mutant skeletons use their torso bone")
+	merc.hitboxSet = 0
+	merc.hitboxSets = {[0] = {
+		count = 2,
+		[0] = {group = HITGROUP_CHEST, bone = 0, mins = Vector(-4, -6, -24), maxs = Vector(4, 6, -12)},
+		[1] = {group = HITGROUP_HEAD, bone = 1, mins = Vector(-3, -3, -3), maxs = Vector(3, 3, 3)},
+	}}
+	merc.boneMatrices = {[0] = aimMatrix(Vector(1100, 0, 60)), [1] = aimMatrix(Vector(1100, 0, 70))}
+	aimsAt(bandit, merc, Vector(1100, 0, 42), "living gunmen aim at the chest hitbox center below its bone origin")
+	aimsAt(zombified, merc, Vector(1100, 0, 42), "zombified gunmen use the same chest hitbox preference")
+	merc.boneMatrices[0].position = Vector(1120, 20, 50)
+	aimsAt(bandit, merc, Vector(1120, 20, 32), "each shot follows the target's current hitbox position")
+	merc.hitboxSets[0][0].mins, merc.hitboxSets[0][0].maxs = Vector(2, -2, -12), Vector(10, 6, -4)
+	merc.boneMatrices[0] = aimMatrix(Vector(1120, 20, 60), math.pi / 2, 2)
+	aimsAt(bandit, merc, Vector(1116, 32, 44), "hitbox centers account for local offsets, rotation and model scale")
+	merc.hitboxSet = 1
+	merc.hitboxSets[1] = {
+		count = 2,
+		[0] = {group = HITGROUP_HEAD, bone = 1, mins = Vector(-3, -3, -3), maxs = Vector(3, 3, 3)},
+		[1] = {group = HITGROUP_CHEST, bone = 2, mins = Vector(-4, -6, -10), maxs = Vector(4, 6, 0)},
+	}
+	merc.boneMatrices[2] = aimMatrix(Vector(1100, 0, 35))
+	aimsAt(bandit, merc, Vector(1100, 0, 30), "the active hitbox set supplies the chest at any hitbox index")
+	merc.hitboxSets[1][0].group = HITGROUP_CHEST
+	merc.hitboxSets[1][0].mins = nil
+	aimsAt(bandit, merc, Vector(1100, 0, 30), "an unusable chest hitbox does not hide another valid chest")
+	lowMutant.hitboxSet = 0
+	lowMutant.hitboxSets = {[0] = {
+		count = 1,
+		[0] = {group = HITGROUP_GENERIC, bone = 0, mins = Vector(-10, -4, -8), maxs = Vector(10, 4, 0)},
+	}}
+	lowMutant.boneMatrices = {[0] = aimMatrix(Vector(500, 0, 14))}
+	aimsAt(bandit, lowMutant, Vector(500, 0, 10), "mutants without a chest group use an actual hitbox center")
 	local client = {
 		Health = function() return 100 end,
 		IsNPC = function() return false end,
@@ -115,33 +167,48 @@ do
 		GetMoveType = function() return 0 end,
 		GetClass = function() return "player" end,
 		GetPos = merc.GetPos,
-		LookupBone = merc.LookupBone,
-		GetBonePosition = merc.GetBonePosition,
-		aimBones = {["ValveBiped.Bip01_Spine2"] = 0},
-		bonePositions = {[0] = Vector(200, 0, 48)},
+		WorldSpaceCenter = merc.WorldSpaceCenter,
+		hitboxSet = 0,
+		hitboxSets = merc.hitboxSets,
+		boneMatrices = {[0] = aimMatrix(Vector(200, 0, 56))},
 		position = Vector(200),
 	}
-	aimsAt(bandit, client, client.bonePositions[0], "players are also aimed at the chest")
-	aimsAt(zombified, client, client.bonePositions[0], "zombified gunmen aim at player chests too")
-	merc.aimBones = {}
+	mockHitboxes(client)
+	aimsAt(bandit, client, Vector(206, 2, 48), "players are also aimed at their chest hitbox center")
+	aimsAt(zombified, client, Vector(206, 2, 48), "zombified gunmen aim at player chest hitboxes too")
+	client.boneMatrices[0].position = Vector(200, 0, 32)
+	aimsAt(bandit, client, Vector(206, 2, 24), "crouching updates the player hitbox aim height on the next shot")
+	merc.hitboxSet = 0
+	merc.hitboxSets[0][0].group = HITGROUP_GENERIC
 	local previousRandom = math.random
 	math.random = function(minimum, maximum)
-		check(minimum == 0 and maximum == 1, "random fallback uses the entire zero-based bone range")
+		check(minimum == 0 and maximum == 1, "random fallback uses the entire zero-based hitbox range")
 
 		return maximum
 	end
-	aimsAt(bandit, merc, merc.bonePositions[1], "an unrecognized skeleton selects a random bone")
-	merc.bonePositions[1] = nil
-	aimsAt(bandit, merc, merc.bonePositions[0], "an unavailable random bone retries other bones")
+	aimsAt(bandit, merc, Vector(1100, 0, 70), "a target without chest hitboxes selects a random hitbox")
+	merc.boneMatrices[1] = nil
+	aimsAt(bandit, merc, Vector(1116, 32, 44), "an unavailable random hitbox retries the other hitboxes")
+	merc.hitboxSets[0][0].group = HITGROUP_CHEST
+	merc.boneMatrices[1] = aimMatrix(Vector(1100, 0, 70))
+	aimsAt(bandit, merc, Vector(1116, 32, 44), "a chest hitbox takes priority over the random fallback")
+	merc.hitboxSets[0][0].maxs = nil
+	aimsAt(bandit, merc, Vector(1100, 0, 70), "an unusable chest falls back to another hitbox center")
+	merc.boneMatrices[1] = nil
+	aimsAt(bandit, merc, merc.position, "missing hitbox bounds fall back safely when no other hitbox is usable")
+	merc.hitboxSets[0][0].maxs = Vector(10, 6, -4)
+	merc.hitboxSets[0][0].bone = -1
+	aimsAt(bandit, merc, merc.position, "an invalid hitbox bone cannot become an aim point")
+	merc.hitboxSets[0][0].bone = nil
+	aimsAt(bandit, merc, merc.position, "a missing hitbox bone cannot become an aim point")
+	merc.hitboxSets[0][0].bone = 0
+	merc.boneMatrices = nil
+	aimsAt(bandit, merc, merc.position, "unavailable hitbox transforms fall back to collision center")
 	math.random = previousRandom
-	merc.aimBones = {["ValveBiped.Bip01_Spine2"] = 0}
-	merc.bonePositions[0] = merc.position
-	local matrixPoint = Vector(1100, 0, 45)
-	merc.boneMatrices = {[0] = {GetTranslation = function() return matrixPoint end}}
-	aimsAt(bandit, merc, matrixPoint, "an uninitialized bone cache uses the bone matrix")
-	merc.boneMatrices, merc.boneCount = nil, 0
-	aimsAt(bandit, merc, merc.position, "unavailable bone positions safely fall back to collision center")
-	merc.aimBones, merc.bonePositions = nil, nil
+	merc.hitboxSets[0].count = 0
+	aimsAt(bandit, merc, merc.position, "an empty hitbox set falls back without choosing a random hitbox")
+	merc.hitboxSet, merc.hitboxSets = nil, nil
+	aimsAt(bandit, merc, merc.position, "a model without hitboxes uses its collision center")
 	bandit.enemy = ally
 	check(manager:EntityFireBullets(bandit, bullet) == false, "aim correction cannot target faction allies")
 	bandit.cotzSleeping, bandit.enemy = true, merc

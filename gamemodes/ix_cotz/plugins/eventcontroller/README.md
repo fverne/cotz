@@ -123,12 +123,13 @@ controllers have not been added to Garbage.
 
 ## Aim and regional PDA reports
 
-Living and zombified `npc_human_*` gunmen aim at their enemy's chest bone, with alternate chest and spine
-names supported for different skeletons. This applies to players, humans and mutants. If no preferred
-bone has a usable position, each shot chooses a random bone and tries the remaining bones if necessary.
-Targets without usable bone positions fall back to their world collision center. Positions are read
-for each shot; weapon spread, pellet count and damage remain unchanged. The server `EntityFireBullets`
-plugin hook returns `true` to apply the direction, following the engine hook contract.
+Living and zombified `npc_human_*` gunmen aim at the center of a chest hitbox in their enemy's active
+hitbox set. This applies to players, humans and mutants. Hitbox centers include their bone-local
+offset, current rotation and model scale. If no chest hitbox has a usable transform, each shot chooses
+a random hitbox and tries the remaining hitboxes if necessary. Targets without usable hitboxes fall
+back to their world collision center. Positions are read for each shot; weapon spread, pellet count
+and damage remain unchanged. The server `EntityFireBullets` plugin hook returns `true` to apply the
+direction, following the engine hook contract.
 
 Routine encounter PDA chatter checks Mute's permission for the current map through
 `CanReceiveMutantReports`: Swamps, Garbage, Waystation, then Pripyat. Delivery remains private to each
@@ -137,7 +138,7 @@ eligible character. Existing spawn frequency and chatter chance are unchanged.
 Run `luatex --luaonly tests/contact_progression_changes_spec.lua` and the combat suite below. Live checks
 need living and zombified gunmen against players and NPCs with different skeletons, low mutants at
 different elevations, moving targets and cover, plus fresh/completed Mute characters on each map.
-Standalone bone, vector and permission mocks cannot prove model hitboxes or multiplayer delivery.
+Standalone hitbox, matrix, vector and permission mocks cannot prove model hitboxes or multiplayer delivery.
 
 ## Proximity combat and squads
 

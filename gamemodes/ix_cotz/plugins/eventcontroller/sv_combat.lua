@@ -12,12 +12,6 @@ local PLAYER_MEMORY_SECONDS = 10
 local PLAYER_CONTACT_INTERVAL = 0.25
 local PURSUIT_RETRY = 1
 local PURSUIT_ARRIVAL = 64
-local AIM_BONES = {
-	"chest", "Chest", "thorax", "Thorax",
-	"ValveBiped.Bip01_Spine2", "bip01_spine2", "Bip01 Spine2", "spine_03",
-	"ValveBiped.Bip01_Spine1", "bip01_spine1", "Bip01 Spine1", "spine_02",
-	"ValveBiped.Bip01_Spine", "bip01_spine", "Bip01 Spine", "spine", "spine_01",
-}
 local TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing"}
 local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
 	chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true}
@@ -55,32 +49,34 @@ function PLUGIN:IsCombatActor(entity)
 	return class:sub(1, 11) == "npc_mutant_" or class:sub(1, 10) == "npc_human_"
 end
 
-local function aimBonePosition(enemy, bone)
-	local position = enemy:GetBonePosition(bone)
-	-- An uninitialized bone cache can return the entity origin instead of the bone's position.
-	if not position or position == enemy:GetPos() then
-		local matrix = enemy:GetBoneMatrix(bone)
+local function hitboxAimPosition(enemy, hitbox, hitboxSet)
+	local mins, maxs = enemy:GetHitBoxBounds(hitbox, hitboxSet)
+	if not mins or not maxs then return end
+	local bone = enemy:GetHitBoxBone(hitbox, hitboxSet)
+	if not bone or bone < 0 then return end
+	local matrix = enemy:GetBoneMatrix(bone)
+	if not matrix then return end
 
-		return matrix and matrix:GetTranslation()
-	end
-
-	return position
+	-- Hitbox bounds are bone-local; transform their center with the current rotation and scale.
+	return matrix * ((mins + maxs) * 0.5)
 end
 
 local function enemyAimPosition(enemy)
-	for _, name in ipairs(AIM_BONES) do
-		local bone = enemy:LookupBone(name)
-		if bone then
-			local position = aimBonePosition(enemy, bone)
+	local hitboxSet = enemy:GetHitboxSet()
+	if hitboxSet == nil then return enemy:WorldSpaceCenter() end
+	local hitboxCount = enemy:GetHitBoxCount(hitboxSet) or 0
+	for hitbox = 0, hitboxCount - 1 do
+		if enemy:GetHitBoxHitGroup(hitbox, hitboxSet) == HITGROUP_CHEST then
+			local position = hitboxAimPosition(enemy, hitbox, hitboxSet)
 			if position then return position end
 		end
 	end
 
-	local boneCount = enemy:GetBoneCount()
-	if boneCount > 0 then
-		local firstBone = math.random(0, boneCount - 1)
-		for offset = 0, boneCount - 1 do
-			local position = aimBonePosition(enemy, (firstBone + offset) % boneCount)
+	if hitboxCount > 0 then
+		local firstHitbox = math.random(0, hitboxCount - 1)
+		for offset = 0, hitboxCount - 1 do
+			local hitbox = (firstHitbox + offset) % hitboxCount
+			local position = hitboxAimPosition(enemy, hitbox, hitboxSet)
 			if position then return position end
 		end
 	end
