@@ -86,7 +86,7 @@ function ITEM:StartBandageTreatment()
 		if player.cotzBandageAction ~= token then return end
 
 		player.cotzBandageAction = nil
-		player:AddBuff("buff_slowheal", duration, {amount = restore})
+		player:AddBuff("buff_bleedheal", duration, {amount = restore})
 		local buffs = ix.plugin.Get("buffs")
 		if buffs then
 			buffs:HealBleeding(player, bleedRestore)
