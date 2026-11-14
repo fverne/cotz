@@ -5,7 +5,7 @@ ITEM.longdesc = "Since pseudogiants can easily be considered the apex predator o
 	.. " scientists."
 ITEM.model = "models/lostsignalproject/items/consumable/raw_chimera.mdl"
 
-ITEM.price = 1000
+ITEM.price = 800
 ITEM.width = 2
 ITEM.height = 2
 
