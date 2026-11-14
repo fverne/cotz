@@ -5,7 +5,7 @@ ITEM.model = ("models/weapons/w_pist_ruger23a1.mdl")
 ITEM.class = "cw_rugermk3"
 ITEM.weaponCategory = "secondary"
 ITEM.width = 2
-ITEM.price = 3000
+ITEM.price = 300
 ITEM.height = 1
 ITEM.canAttach = false
 
