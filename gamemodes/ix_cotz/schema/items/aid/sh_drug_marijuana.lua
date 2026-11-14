@@ -87,3 +87,11 @@ ITEM.functions.combine = {
 		end
 	end,
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_psyheal", duration = 60, amount = self.psyheal/120},
+		{buff = "buff_psysuppress", duration = 60},
+		{buff = "buff_psyblock", duration = 60, amount = self.psyblock},
+	}
+end

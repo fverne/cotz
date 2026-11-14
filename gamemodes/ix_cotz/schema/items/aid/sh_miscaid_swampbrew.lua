@@ -50,3 +50,12 @@ ITEM.functions.use = {
 		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_staminarestore", duration = 300, amount = 1},
+		{buff = "buff_psyheal", duration = 300, amount = self.psyheal/600},
+		{buff = "buff_slowheal", duration = self.restoreduration, amount = self.restore},
+		{buff = "buff_radiationremoval", duration = 300, amount = self.radrem/600},
+	}
+end

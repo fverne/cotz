@@ -1,6 +1,6 @@
 ITEM.name = "Stechkin APS"
 ITEM.description= "A fully-automatic handgun with a large magazine. Fires 9x18mm."
-ITEM.longdesc = "When the Stetchkin automatic pistol was phased out of Soviet army service, a few hundred mysteriously made their way into the Zone.\nIt's low weight of 1.2 kilograms, fully automatic capacity and concealability makes it an useful alternative to a submachinegun.\nIts 750 rounds per minute firerate makes the recoil an issue.\n\nAmmo: 9x18mm \nMagazine Capacity: 20"
+ITEM.longdesc = "When the Stetchkin automatic pistol was phased out of Soviet army service, a few hundred mysteriously made their way into the Zone.\nIt's low weight, fully automatic capacity and concealability makes it an useful alternative to a submachinegun.\nAutomatic fire makes recoil control an issue."
 ITEM.model = "models/weapons/w_ma85_wf_pt10.mdl"
 ITEM.class = "cw_stechaps"
 ITEM.weaponCategory = "secondary"

@@ -144,6 +144,10 @@ function PLUGIN:IsCharacterOperationPending(character)
 	return walletLocks[character:GetID()] ~= nil
 end
 
+function PLUGIN:IsTreasuryOperationPending(record)
+	return locks["treasury:" .. record.squadID] ~= nil
+end
+
 function PLUGIN:IsOperationLocked(item, current, target)
 	if self.applyingOperation then return false end
 
@@ -191,6 +195,14 @@ function PLUGIN:BuildOperationQueries(character, record, spec, token, row)
 		itemRow:Where("data", row.data)
 		source:WhereExpr(mysql.Exists(itemRow))
 	end
+	for _, input in ipairs(spec.inputs or {}) do
+		local itemRow = mysql:Select("ix_items")
+		itemRow:SelectValue(1)
+		itemRow:Where("item_id", input.item:GetID())
+		itemRow:Where("inventory_id", spec.from:GetID())
+		itemRow:Where("data", input.snapshot)
+		source:WhereExpr(mysql.Exists(itemRow))
+	end
 	if spec.session then
 		local session = mysql:Select("ix_squads_presence")
 		session:SelectValue(1)
@@ -201,13 +213,14 @@ function PLUGIN:BuildOperationQueries(character, record, spec, token, row)
 		session:WhereExpr(mysql.Compare("expires", ">", mysql.Now()))
 		source:WhereExpr(mysql.Exists(session))
 	end
-	if spec.treasuryDelta and spec.treasuryDelta ~= 0 then
+	if spec.treasuryBalance ~= nil or spec.treasuryDelta and spec.treasuryDelta ~= 0 then
 		local balance = mysql:Select("ix_hideout_treasuries")
 		balance:SelectValue(1)
 		balance:Where("scope", Schema.folder)
 		balance:Where("squad", record.squadID)
-		balance:WhereGTE("balance", math.max(0, -spec.treasuryDelta))
-		balance:WhereLTE("balance", MAX_MONEY - math.max(0, spec.treasuryDelta))
+		if spec.treasuryBalance then balance:Where("balance", spec.treasuryBalance) end
+		balance:WhereGTE("balance", math.max(0, -(spec.treasuryDelta or 0)))
+		balance:WhereLTE("balance", MAX_MONEY - math.max(0, spec.treasuryDelta or 0))
 		source:WhereExpr(mysql.Exists(balance))
 	end
 	if record.ownerType == "squad" and ix.squad.cross and ix.squad.cross.Enabled() then
@@ -237,7 +250,16 @@ function PLUGIN:BuildOperationQueries(character, record, spec, token, row)
 	end
 	local receipt = mysql:Insert("ix_hideout_operations")
 	receipt:InsertFrom(source, {"token", "scope", "map", "hideout", "actor", "kind", "squad", "created", "payload"})
-	local queries = {receipt}
+	local queries = {}
+	if spec.treasuryBalance ~= nil or spec.treasuryDelta and spec.treasuryDelta ~= 0 then
+		-- Serialize the balance check with cross-server withdrawals and sales before issuing the receipt.
+		local lock = mysql:Update("ix_hideout_treasuries")
+		lock:UpdateValue("balance", mysql.Column("balance"))
+		lock:Where("scope", Schema.folder)
+		lock:Where("squad", record.squadID)
+		queries[#queries + 1] = lock
+	end
+	queries[#queries + 1] = receipt
 	local condition = receiptCondition(token)
 	if spec.item then
 		local change = spec.consume and mysql:Delete("ix_items") or mysql:Update("ix_items")
@@ -250,6 +272,24 @@ function PLUGIN:BuildOperationQueries(character, record, spec, token, row)
 		change:Where("item_id", spec.item:GetID())
 		change:WhereExpr(condition)
 		queries[#queries + 1] = change
+	end
+	for _, input in ipairs(spec.inputs or {}) do
+		local change = input.remaining == 0 and mysql:Delete("ix_items") or mysql:Update("ix_items")
+		if input.remaining > 0 then change:Update("data", util.TableToJSON(input.data)) end
+		change:Where("item_id", input.item:GetID())
+		change:WhereExpr(condition)
+		queries[#queries + 1] = change
+	end
+	if spec.output then
+		local output = mysql:Select()
+		for _, value in ipairs({spec.to:GetID(), spec.output.item, spec.outputJSON, spec.x, spec.y,
+			character:GetID(), spec.playerID}) do
+			output:SelectValue(value)
+		end
+		output:WhereExpr(condition)
+		local insert = mysql:Insert("ix_items")
+		insert:InsertFrom(output, {"inventory_id", "unique_id", "data", "x", "y", "character_id", "player_id"})
+		queries[#queries + 1] = insert
 	end
 	if spec.moneyDelta and spec.moneyDelta ~= 0 then
 		local money = mysql:Update("ix_characters")
@@ -288,6 +328,10 @@ function PLUGIN:CommitOperation(client, record, spec, callback)
 	end
 	local keys = {}
 	if spec.item then keys[#keys + 1] = "item:" .. spec.item:GetID() end
+	for _, input in ipairs(spec.inputs or {}) do keys[#keys + 1] = "item:" .. input.item:GetID() end
+	if spec.treasuryBalance ~= nil or spec.treasuryDelta and spec.treasuryDelta ~= 0 then
+		keys[#keys + 1] = "treasury:" .. record.squadID
+	end
 	if spec.from then keys[#keys + 1] = "inventory:" .. spec.from:GetID() end
 	if spec.to then keys[#keys + 1] = "inventory:" .. spec.to:GetID() end
 	for _, key in ipairs(keys) do
@@ -299,9 +343,17 @@ function PLUGIN:CommitOperation(client, record, spec, callback)
 		callback(false, "Insufficient funds or wallet limit reached.")
 		return
 	end
+	if spec.output then
+		spec.playerID = client:SteamID64()
+	end
 	local token = util.SHA256(Schema.folder .. game.GetMap() .. SysTime() .. math.random())
 	spec.payload = spec.payload or {kind = "transfer"}
 	spec.payload.actorName = character:GetName()
+	if spec.output then
+		spec.output.data = table.Copy(spec.output.data)
+		spec.output.data.cotzCraftToken = token
+		spec.outputJSON = util.TableToJSON(spec.output.data)
+	end
 	client.cotzHideoutOperation = token
 	local instance = self.instances[record.id]
 	if instance then instance.operations = (instance.operations or 0) + 1 end
@@ -314,10 +366,21 @@ function PLUGIN:CommitOperation(client, record, spec, callback)
 	local function finish(ok, reason)
 		if finished then return end
 		finished = true
+		local sameSession = not spec.session or ix.crossserver.sessions[character:GetID()] == spec.session
+		local active = IsValid(client) and client:GetCharacter() == character and sameSession
 		if ok then
 			if (spec.moneyDelta or 0) > 0 then character:GiveMoney(spec.moneyDelta) end
 			self.applyingOperation = token
 			if spec.item then self:ApplyCommittedItem(spec, client) end
+			if spec.output and not active then
+				-- A switched character must restore committed rows rather than hydrate an obsolete inventory.
+				for _, input in ipairs(spec.inputs) do ix.item.instances[input.item:GetID()] = nil end
+				ix.item.inventories[spec.to:GetID()] = nil
+			else
+				if spec.inputs then self:ApplyCraftInputs(spec) end
+				if spec.output then character:UpdateWeight() end
+				if spec.output then self:ApplyCraftOutput(spec, character) end
+			end
 			self.applyingOperation = nil
 		elseif (spec.moneyDelta or 0) < 0 then
 			character:GiveMoney(-spec.moneyDelta)
@@ -326,8 +389,7 @@ function PLUGIN:CommitOperation(client, record, spec, callback)
 		client.cotzHideoutOperation = nil
 		for _, key in ipairs(keys) do locks[key] = nil end
 		if instance then instance.operations = instance.operations - 1 end
-		local sameSession = not spec.session or ix.crossserver.sessions[character:GetID()] == spec.session
-		if IsValid(client) and client:GetCharacter() == character and sameSession then
+		if active then
 			character:Save(function()
 				for _, complete in ipairs(pending.callbacks) do complete() end
 			end)
@@ -348,7 +410,27 @@ function PLUGIN:CommitOperation(client, record, spec, callback)
 			finish(false, "Your character or vendor access changed.")
 			return
 		end
+		if spec.output and not spec.to:CanItemFit(spec.x, spec.y,
+			ix.item.list[spec.output.item].width, ix.item.list[spec.output.item].height) then
+			finish(false, "The reserved crate space is no longer available.")
+			return
+		end
 		local queries = self:BuildOperationQueries(character, record, spec, token, row)
+		local function confirmed(ok, reason)
+			if not ok or not spec.output then finish(ok, reason) return end
+			local output = mysql:Select("ix_items")
+			output:Where("inventory_id", spec.to:GetID())
+			output:Where("unique_id", spec.output.item)
+			output:Where("data", spec.outputJSON)
+			read(output, function(rows, failure)
+				if failure or not rows[1] then
+					ErrorNoHalt("[Hideouts] Committed crate awaits authoritative inventory restore: " .. token .. "\n")
+					return
+				end
+				spec.outputID = tonumber(rows[1].item_id)
+				finish(true, reason)
+			end)
+		end
 		self:RunAtomicQueries(queries, function(ok, result)
 			if ok == nil then
 				local receipt = mysql:Select("ix_hideout_operations")
@@ -358,13 +440,39 @@ function PLUGIN:CommitOperation(client, record, spec, callback)
 						ErrorNoHalt("[Hideouts] Uncertain outcome remains locked: " .. token .. "\n")
 						return
 					end
-					finish(rows[1] ~= nil, result)
+					confirmed(rows[1] ~= nil, result)
 				end)
 				return
 			end
-			finish(ok and istable(result) and result[1] ~= nil,
+			confirmed(ok and istable(result) and result[1] ~= nil,
 				ok and "The item or squad state changed; try again." or result)
 		end)
+	end
+	if spec.inputs then
+		local function snapshot(index)
+			local input = spec.inputs[index]
+			if not input then commit() return end
+			local query = mysql:Select("ix_items")
+			query:Where("item_id", input.item:GetID())
+			query:Where("inventory_id", spec.from:GetID())
+			read(query, function(rows, failure)
+				if not IsValid(client) or client:GetCharacter() ~= character or failure or not rows[1]
+					or input.item.invID ~= spec.from:GetID()
+					or not self:CanStockItem(client, input.item) then
+					finish(false, failure or "Crafting materials changed.")
+					return
+				end
+				local saved = util.JSONToTable(rows[1].data or "{}")
+				local quantity = saved and (saved.quantity or input.item.quantity or input.item.ammoAmount or 1)
+				if quantity ~= input.available then finish(false, "Crafting materials changed.") return end
+				input.snapshot = rows[1].data
+				input.data = saved
+				input.data.quantity = input.remaining
+				snapshot(index + 1)
+			end)
+		end
+		snapshot(1)
+		return
 	end
 	if not spec.item then commit() return end
 	local query = mysql:Select("ix_items")
@@ -419,11 +527,14 @@ function PLUGIN:RecoverUpgradeEntitlements(callback)
 				and (record.ownerType == "squad" or not record.personalVersion) then
 				record.containers = record.containers or {}
 				local slot = record.containers[payload.slot] or {public = false}
-				if (slot.tier or 0) < payload.tier then
+				if (slot.tier or 0) < payload.tier and (not record.crateVersion or payload.crateVersion) then
 					slot.tier, slot.width, slot.height = payload.tier, payload.width, payload.height
 					record.containers[payload.slot] = slot
 				end
 			end
+		end
+		for _, record in pairs(self.state.hideouts) do
+			if self.MigrateSquadContainers then self:MigrateSquadContainers(record) end
 		end
 		callback(self:Persist())
 	end)

@@ -93,12 +93,8 @@ if CLIENT then
 	end
 
 	function ix.util.PopulateGasmaskFilterTooltip(tooltip, item)
-		local definition = item.isGasmaskFilter and item or ix.item.list["gasmask_filter_" .. item.filterType]
-		local condition = item.isGasmaskFilter and item:GetData("filterCondition", FULL_CONDITION)
-			or ix.util.GetGasmaskFilterCondition(item)
-		local row = tooltip:AddRow("gasmaskFilter")
-		local state = condition == false and "No filter" or string.format("%d%%", math.floor(condition))
-		row:SetText((item.isAirTank and "Air tank" or definition.name) .. ": " .. state)
-		row:SizeToContents()
+		for _, row in ipairs(ix.itemProperties.GetFilterRows(item)) do
+			ix.itemProperties.AddRow(tooltip, row.id, row.text)
+		end
 	end
 end

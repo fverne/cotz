@@ -509,8 +509,8 @@ if SERVER then
 				record.lines[progressionID] = line
 				changed = true
 			end
-			if line and convertRequirements(definition, line) then changed = true end
-			if line and upgradeRequirementModes(definition, line) then changed = true end
+			if line and not definition.hideoutLevel and convertRequirements(definition, line) then changed = true end
+			if line and not definition.hideoutLevel and upgradeRequirementModes(definition, line) then changed = true end
 		end
 		if changed then ix.progression.SetCharacterProgression(character, record) end
 		for progressionID, definition in pairs(ix.progression.definitions) do
@@ -527,7 +527,7 @@ if SERVER then
 			local definition = ix.progression.definitions[progressionID]
 			local accessible = ix.progression.IsActive(character, progressionID)
 				or activeGroups[definition.milestoneGroup]
-			if not line.requirements and accessible then
+			if not line.requirements and accessible and not definition.hideoutLevel then
 				line.requirements, line.selections = rollRequirements(definition, character, record)
 				line.requirementPolicy = definition.requirementPolicy
 				line.requirementModesVersion = definition.requirementModesVersion

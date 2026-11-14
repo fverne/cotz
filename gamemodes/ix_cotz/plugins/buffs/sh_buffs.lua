@@ -286,3 +286,11 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 		player:StopSound("sleep/heartbeat.ogg")
 	end,
 }
+PLUGIN.buffs["buff_bandageclotting"] = {
+	name = "Clotting",
+	desc = "Your bandage is helping the wound clot.",
+	onbuffed = function(client)
+		client.cotzClottingTime = CurTime()
+		client.cotzClottingCharacter = client:GetCharacter()
+	end,
+}

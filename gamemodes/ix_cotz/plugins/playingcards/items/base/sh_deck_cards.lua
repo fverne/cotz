@@ -37,11 +37,8 @@ if (CLIENT) then
 end
 
 function ITEM:PopulateTooltip(tooltip)
-    local count = self:GetData("cards") and #self:GetData("cards") or 54
-    local info = tooltip:AddRow("take")
-    info:SetText("Number of Cards: " .. tonumber(count))
-    info:SetBackgroundColor(Color(49, 115, 201)) -- for base helix
-    info:SizeToContents()
+	local cards = self:GetData("cards")
+	ix.itemProperties.AddRow(tooltip, "cards", "Cards remaining: " .. (cards and #cards or 54))
 end
 
 ITEM.functions.PickUp = {

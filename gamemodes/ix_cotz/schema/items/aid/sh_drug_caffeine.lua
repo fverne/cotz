@@ -75,3 +75,10 @@ ITEM.functions.combine = {
 		end
 	end,
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_staminarestore", duration = 100, amount = 2},
+		{buff = "buff_sprintboost", duration = 20, multiplier = 1.1},
+	}
+end

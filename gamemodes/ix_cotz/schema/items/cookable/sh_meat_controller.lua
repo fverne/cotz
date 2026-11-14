@@ -32,3 +32,10 @@ function ITEM:PopulateTooltipIndividual(tooltip)
 		ix.util.PropertyDesc(tooltip, "Toxic Food", Color(255, 0, 0))
 	end
 end
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "debuff_radiation", duration = 10, amount = 25/20},
+		{buff = "debuff_psy", duration = 10, amount = 45/20},
+	}
+end

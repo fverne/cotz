@@ -11,22 +11,10 @@ ITEM.price = 0
 ITEM.weight = 0
 
 function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
-	local quantdesc = ""
-	local invdesc = ""
-	if self.longdesc then
-		invdesc = "\n\n"..(self.longdesc)
-	end
+	local description = self:GetData("description", self.description)
+	if self.entity or not self.longdesc or self.longdesc == "" then return description end
 
-	if self.quantdesc then
-		quantdesc = "\n\n"..Format(self.quantdesc, quant)
-	end
-
-	if (self.entity) then
-		return (self.description)
-	else
-        return (self.description..quantdesc..invdesc)
-	end
+	return description .. "\n\n" .. self.longdesc
 end
 
 function ITEM:PopulateTooltip(tooltip)

@@ -66,33 +66,13 @@ if (CLIENT) then
 end
 
 function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
-	local quantdesc = ""
-	local invdesc = ""
-	if self.longdesc then
-		invdesc = "\n\n"..(self.longdesc)
-	end
+	local description = self:GetData("description", self.description)
+	if self.entity or not self.longdesc or self.longdesc == "" then return description end
 
-	if self.quantdesc then
-		quantdesc = "\n\n"..Format(self.quantdesc, quant)
-	end
-
-	if (self.entity) then
-		return (self.description)
-	else
-        return (self.description..quantdesc..invdesc)
-	end
+	return description .. "\n\n" .. self.longdesc
 end
 
 function ITEM:PopulateTooltip(tooltip)
-	if self.isPoachKnife then
-		local sharpness = ix.poaching.GetSharpness(self)
-		local text = string.format("Sharpness: %d%% | Poaching tier: %d", sharpness, ix.poaching.GetKnifeTier(self))
-		ix.util.PropertyDesc(tooltip, text, Color(64, 224, 208))
-		if sharpness > ix.poaching.Sharpness.default then
-			ix.util.PropertyDesc(tooltip, "+1 tier for the next poach", Color(64, 224, 208))
-		end
-	end
 
     if (!self.entity) then
         if self.weaponCategory == "secondary" then

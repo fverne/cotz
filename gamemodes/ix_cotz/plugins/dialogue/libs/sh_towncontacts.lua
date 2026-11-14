@@ -244,4 +244,5 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	ix.dialogue.ConfigureTaskRewards(dialogue)
 	ix.dialogue.ConfigureCustomization(dialogue)
 	ix.dialogue.ConfigureBarterVisibility(dialogue)
+	ix.dialogue.ConfigureHideoutCrates(dialogue, contact)
 end

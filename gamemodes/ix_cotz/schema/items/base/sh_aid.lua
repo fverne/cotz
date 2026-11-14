@@ -16,22 +16,10 @@ ITEM.weight = 0
 ITEM.flatweight = 0
 
 function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
-	local quantdesc = ""
-	local invdesc = ""
-	if self.longdesc then
-		invdesc = "\n\n"..(self.longdesc)
-	end
+	local description = self:GetData("description", self.description)
+	if self.entity or not self.longdesc or self.longdesc == "" then return description end
 
-	if self.quantdesc then
-		quantdesc = "\n\n"..Format(self.quantdesc, quant)
-	end
-
-	if (self.entity) then
-		return (self.description)
-	else
-        return (self.description..quantdesc..invdesc)
-	end
+	return description .. "\n\n" .. self.longdesc
 end
 
 if (CLIENT) then
@@ -73,25 +61,50 @@ function ITEM:CanUseBandage()
 	return self:GetData("quantity", self.quantity) >= 1
 end
 
-function ITEM:StartBandageTreatment()
+local BANDAGE_RANGE = 96
+
+local function canTreatTarget(client, target, character)
+	if not IsValid(target) or not target:IsPlayer() or not target:Alive() then return false end
+	if target:GetCharacter() ~= character then return false end
+	if client == target then return true end
+	if client:GetPos():DistToSqr(target:GetPos()) > BANDAGE_RANGE * BANDAGE_RANGE then return false end
+
+	local trace = util.TraceLine({
+		start = client:GetShootPos(),
+		endpos = target:WorldSpaceCenter(),
+		filter = client,
+	})
+
+	return trace.Entity == target
+end
+
+function ITEM:StartBandageTreatment(target)
 	if not self:CanUseBandage() then return false end
 
 	local client = self.player
+	target = target or client
 	local character = client:GetCharacter()
-	local restore, duration, bleedRestore = self.restore, self.restoreduration, self.bleedRestore
+	local targetCharacter = IsValid(target) and target:IsPlayer() and target:GetCharacter()
+	if not targetCharacter or not canTreatTarget(client, target, targetCharacter) then return false end
+
+	local total, duration, healing = self.bleedRestore, self.restoreduration, self.restore
 	local token = {}
 	client.cotzBandageAction = token
-	ix.util.PlayerPerformItemAction(client, self, "Wrapping Bandages", 2, function(player)
+	local started = ix.util.PlayerPerformItemAction(client, self, "Wrapping Bandages", self.applicationTime, function(player)
 		if not IsValid(player) or not player:Alive() or player:GetCharacter() ~= character then return end
 		if player.cotzBandageAction ~= token then return end
 
 		player.cotzBandageAction = nil
-		player:AddBuff("buff_bleedheal", duration, {amount = restore})
-		local buffs = ix.plugin.Get("buffs")
-		if buffs then
-			buffs:HealBleeding(player, bleedRestore)
-		end
+		if not canTreatTarget(player, target, targetCharacter) then return end
+
+		target:SetHealth(math.min(target:Health() + healing, target:GetMaxHealth()))
+		ix.plugin.Get("buffs"):StartBandageClotting(target, total, duration)
 	end)
+	if started == false then
+		client.cotzBandageAction = nil
+
+		return false
+	end
 
 	return true
 end

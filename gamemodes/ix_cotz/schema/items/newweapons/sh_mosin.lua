@@ -1,6 +1,6 @@
 ITEM.name = "Mosin Nagant"
 ITEM.description= "An old bolt action rifle mostly made out of wood. Fires 7.62x54mm."
-ITEM.longdesc = "The Mosin Nagant is an old bolt action design with it's origins in the Russian Empire, 1891.\nIt was used extensively as the official service rifle for multiple states and remains in arsenals of guerillas and other formations that needs to utilize a reliable, powerful and cheap rifle.\nIt's especially popular with the hunters in the Zone as the large bullet takes a wild animal out in a single shot.\nVery devastating towards unarmored personnel and personnel in armor alike, with the right ammunition.\n\nAmmo: 7.62x54mm\nMagazine Capacity: 5"
+ITEM.longdesc = "The Mosin Nagant is an old bolt action design with it's origins in the Russian Empire, 1891.\nIt was used extensively as the official service rifle for multiple states and remains in arsenals of guerillas and other formations that needs to utilize a reliable, powerful and cheap rifle.\nIt's especially popular with the hunters in the Zone as the large bullet takes a wild animal out in a single shot.\nVery devastating towards unarmored personnel and personnel in armor alike, with the right ammunition."
 ITEM.model = ("models/weapons/ws mosin/w_ws_mosin.mdl")
 ITEM.class = "cw_ws_mosin"
 ITEM.weaponCategory = "primary"

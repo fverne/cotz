@@ -13,7 +13,7 @@ local function sendManagement(panel, id, action, value, expectedTier, guestID)
 	panel.nextRequest = CurTime() + 0.5
 	net.Start("cotz/hideouts/manage-action")
 	net.WriteString(id)
-	net.WriteUInt(action, 4)
+	net.WriteUInt(action, 5)
 	net.WriteString(value or "")
 	net.WriteUInt(expectedTier or 0, 8)
 	net.WriteUInt(guestID or 0, 32)
@@ -46,6 +46,8 @@ net.Receive("cotz/hideouts/manage", function()
 		local manage, canReset = net.ReadBool(), net.ReadBool()
 		local propTier, propLimit = net.ReadUInt(3), net.ReadUInt(7)
 		local nextPropLimit, propPrice = net.ReadUInt(7), net.ReadUInt(32)
+		local leader, fundUpgrades = net.ReadBool(), net.ReadBool()
+		local treasuryShare, playerShare = net.ReadUInt(32), net.ReadUInt(32)
 		local guests = {}
 		for _ = 1, net.ReadUInt(16) do
 			guests[#guests + 1] = {id = net.ReadUInt(32), name = net.ReadString()}
@@ -64,7 +66,7 @@ net.Receive("cotz/hideouts/manage", function()
 			end
 			if nextPropLimit > 0 then
 				button(scroll, "Upgrade prop capacity to " .. nextPropLimit .. " (" .. ix.currency.Get(propPrice) .. ")", function()
-					ix.cotzUI.Query("Increase this hideout's prop capacity to " .. nextPropLimit .. " for " .. ix.currency.Get(propPrice) .. "?",
+					ix.cotzUI.Query("Increase this hideout's prop capacity to " .. nextPropLimit .. " for " .. ix.currency.Get(propPrice) .. "? Treasury: " .. ix.currency.Get(treasuryShare) .. "; your share: " .. ix.currency.Get(playerShare) .. ".",
 						"Upgrade prop capacity", "Purchase", function()
 							sendManagement(panel, id, 0, "", propTier)
 						end, "Cancel")
@@ -98,6 +100,12 @@ net.Receive("cotz/hideouts/manage", function()
 				menu:Open()
 			end)
 			if squad then
+				ix.cotzUI.Label(scroll, "Vendor funding for upgrades: " .. (fundUpgrades and "enabled" or "disabled"))
+				if leader then
+					button(scroll, "Use squad vendor funds for hideout upgrades: " .. (fundUpgrades and "on" or "off"), function()
+						sendManagement(panel, id, 16, fundUpgrades and "0" or "1")
+					end)
+				end
 				if scope == "squad" or scope == "entrance" then
 					button(scroll, "Place entrance where you are looking", function() sendManagement(panel, id, 1) end)
 				end
@@ -184,7 +192,7 @@ end)
 net.Receive("cotz/hideouts/history", function()
 	local panel, scroll = frame("Recent squad transactions")
 	local labels = {sale = "Sale", withdraw = "Treasury withdrawal", donate = "Stock donation",
-		recover = "Stock recovery", props = "Prop capacity upgrade"}
+		recover = "Stock recovery", props = "Prop capacity upgrade", craft = "Storage crate assembly"}
 	for _ = 1, net.ReadUInt(6) do
 		local timestamp, name, kind, delta = net.ReadUInt(32), net.ReadString(), net.ReadString(), net.ReadInt(32)
 		ix.cotzUI.Label(scroll, os.date("%Y-%m-%d %H:%M", timestamp) .. " — " .. name .. " — "

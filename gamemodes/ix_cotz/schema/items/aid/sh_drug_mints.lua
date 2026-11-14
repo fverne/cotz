@@ -45,3 +45,9 @@ ITEM.functions.use = {
 		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_psyheal", duration = 20, amount = self.psyheal/40},
+	}
+end

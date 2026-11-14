@@ -163,7 +163,7 @@ Enter a room once to resolve its dupe markers. The saved layout then supplies th
 menu even while that room is unloaded. Each room has its own paid levels and inventories;
 completing a contact milestone only unlocks permission to purchase. Offers show costs and locked gates.
 The exterior contacts' [progression branches](../../../../docs/npc-overhaul/progression-overhaul.md)
-unlock purchase permissions; they do not grant free improvements or item gifts.
+track installed storage levels and unlock subsequent crate recipes. Assembly is paid at the contact.
 
 ### Storage and sharing
 
@@ -177,34 +177,57 @@ The marker editor now includes weapon storage. Unmarked templates can add spots 
     /HideoutTemplateContainer cabin medical_shelf medical
     /HideoutTemplateContainer cabin weapon_rack weapon
 
-Room improvements and level-1 container installations are bought in the door management submenu.
-Use an installed container, then **Upgrade this container**, for its later paid levels.
+Install level-1 containers through the door management submenu. Use an installed container, then
+**Upgrade this container**, for later levels. Each consumes a matching crafted upgrade crate;
+assembly at the local contact pays its cash and salvage cost, with no second installation charge.
 An active room receives a new container
 immediately; unloaded rooms instantiate it on next entry. Container size and model can change per level.
 Allow clearance for the largest configured model when placing markers. Inventory IDs, contents and access
 survive upgrades. Removed markers retain their inventories for `/HideoutRecoveryOpen ID SPOT`.
 
-| Recipe | Initial size | Permitted contents | Installation cost |
-| --- | --- | --- | --- |
-| general | 2×3 | Ordinary storable items | 600 roubles + Small Utility Pouch; starter is free |
-| ammo | 4×4 | `isAmmo == true` | 900 roubles + Ammunition Transit Can |
-| medical | 4×4 | `base_aid` | 1,000 roubles + Injector Transport Pouch |
-| weapon | 6×4 | `isWeapon == true` | 1,400 roubles + Military Transit Crate |
-| fridge | 6×4 | `base_consumables` (food/drink family) | 1,000 roubles + Small Utility Pouch |
+| Recipe | Initial size | Permitted contents | Personal level-1 assembly cash |
+| --- | --- | --- | ---: |
+| general | 2×3 | Ordinary storable items | 600 roubles; starter is free |
+| ammo | 4×4 | `isAmmo == true` | 900 roubles |
+| medical | 4×4 | `base_aid` | 1,000 roubles |
+| gear | 6×6 | Suits, headgear and carrying gear | 1,400 roubles |
+| weapon | 6×4 | `isWeapon == true` | 1,400 roubles |
+| fridge | 6×4 | `base_consumables` | 1,000 roubles |
 
-Add a **fridge** storage marker to the shell (or use `/HideoutTemplateContainer TEMPLATE SLOT fridge`
-inside an unmarked template) to offer a fridge installation. Existing slots retain their recipe IDs.
-Fridges use the HL2 refrigerator model and the same sharing, movement and inventory persistence as other storage.
-Squad templates also support the fridge recipe, with their existing three item-hand-in tiers.
+### Crafting upgrade crates
 
-Inventory-bearing bags are rejected by every recipe. `sh_personal.lua` defines 12 levels per recipe,
-with monotonically growing dimensions. Gear, weapon and fridge containers keep at least 2.5 times the general
-crate capacity at the same level; legacy ammo and medical capacity tables remain unchanged. Prices multiply
-by 2.2 each level while slot gains remain modest; subsequent
-levels cost roubles only. Models switch at level 3 by default and may be configured per tier.
-Personal containers use the current tier's model when the room loads or the container refreshes,
-including containers purchased before a model change. Saved inventory sizes, contents, access and placement remain intact.
-Only the pilot levels below are purchasable; later levels remain explicitly locked.
+Choose **Can you assemble storage crates?** at Ballast, Cleaner or Ledger, then select personal/squad,
+family and level. All three contacts use the same recipes. Cash increases by 1.5× per level, rounded
+up; squad crates cost exactly three times the personal cash and every raw material amount.
+The [generated recipe matrix](../../../../docs/balance/hideout-crates.md) lists all costs and loot evidence.
+
+Fasteners accept mixtures of nuts, bolts, nails and screws. Three raw nuts or four bolts make one batch;
+other materials use one raw unit. Batches can span several stacks of the same material. Packing accepts
+three family-specific alternatives. Levels 1–3 use common Swamps/Garbage salvage, 4–5 add a rarer early-region
+material, 6–9 introduce Waystation supplies, and 10–12 add Pripyat boards, textolite and a controller.
+Recipes preview all materials and regions. They are fixed rather than rolled per character.
+
+Keep a free 2×2 space in the main inventory before confirming assembly. Inputs must be unequipped,
+unbound and transferable main-inventory items. Surplus raw quantities stay in their original stacks.
+Carrying checks account for consumed salvage and the finished crate. Insufficient materials, funds,
+carrying capacity or space cause no charge. Confirmation binds the recipe, vendor, character,
+payment split and expiry. Database transactions commit cash, all input changes, output and receipt together.
+Uncertain outcomes are verified rather than refunded speculatively. An interrupted in-memory delivery
+restores the already committed crate row on a fresh character/server restore.
+
+Six new crate item types carry saved level and personal/squad metadata. Installation validates the exact
+family, scope, level and version. Existing valuable cases remain ordinary loot, rather than substitute
+upgrade crates. Any current squad member can craft crates for this map's squad hideout using their own local personal
+progression; only officers/leaders can install them. Squad installations do not advance personal milestones.
+
+Inventory-bearing bags are rejected by every storage recipe. Personal capacities remain unchanged;
+squad capacities are the matching personal size plus two columns and one row at each of twelve levels.
+Gear, weapon and fridge containers keep their larger personal capacity tables; ammo/medical retain theirs.
+Models switch at level 3 by default. Installed personal containers use their current tier model on refresh,
+including purchases made before a model change. Existing saved dimensions, contents and placement remain intact.
+
+Add fridge and other family markers to the shell to offer those installations. Fridges use the HL2
+refrigerator model and the same persistence, sharing and movement rules as other storage.
 
 Owners use the entrance keypad or exit menu to invite/revoke characters. Each installed container's
 owner menu opens storage, shares with all invited guests, or grants/revokes individual invited characters.
@@ -215,21 +238,26 @@ and transfers recheck current invitation and per-container access. Guests cannot
 
 ### Personal progression and furnishings
 
-Each local contact has twelve `v3/hideout/01`–`12` hand-in milestones. Each contact's additional
-`v3/hideout/access` precedes their unfinished improvements and new location claims. `personalUnlockSteps` is the
-editable gate table. The local contact is Ballast in Swamps, Cleaner in Garbage and Ledger in Waystation.
+Each local contact retains twelve `v3/hideout/01`–`12` milestones and the separate initial-access tool
+hand-in. New milestones require installation instead of another supply delivery. Claiming a room completes
+step 01 because its free general crate is included. The first personal installation at level N completes
+step N and unlocks the next crate level for all owned personal rooms on this map. Every subsequent room
+or container still needs its own matching crate. Installing the same level twice grants no extra progression.
 
-| Local completed step | Purchases enabled for each owned room on this map |
+| Local completed step | Available recipes and other purchases |
 | --- | --- |
-| 01 | Container installation at tier 1; the room's initial general crate is still free |
-| 02 | Container tier 2; first loose-item upgrade, 4 → 6 (500 roubles) |
-| 03 | Container tier 3; props/PET access (5,000 roubles) |
-| 04 | Container tier 4; second loose-item upgrade, 6 → 8 (1,100 roubles) |
-| 05–12 | Matching container tier |
+| 01, from room claim | Crates through level 2; cassette player |
+| 02, from installation | Crates through level 3; first loose-item upgrade, 4 → 6 (500 roubles) |
+| 03, from installation | Crates through level 4; props/PET access (5,000 roubles) |
+| 04, from installation | Crates through level 5; second loose-item upgrade, 6 → 8 (1,100 roubles) |
+| 05–11 | Crates through the next level |
+| 12 | Final installed personal level; no additional crate levels |
 
-For testing, administrators may use `/ProgressionGrant <character> cotz/town/ballast/v3/hideout/01` (or the matching
-contact/step), then buy the desired improvement. Existing progression grants do not purchase upgrades.
-The rebuilt town graph passes the offline dependency audit. Verify the natural unlock path in multiplayer.
+Previously completed milestones remain earned. Saved unfinished supply requests retain their assigned
+choices, quantities, contributions and earned reward credit; finishing that request remains an alternative
+to installing its level. New requests never assign another supply hand-in. On character load, room claim,
+room preparation or opening crate barter, owned personal storage reconciles its installed milestones.
+Squad storage and other characters' rooms never contribute. Existing oversized storage is never shrunk.
 
 A room permits four loose item entities by default; floor purchases increase this by two each time.
 Guests share the same allowance. Drop/throwaway and direct inventory-to-world transfers enforce the cap.
@@ -264,10 +292,10 @@ quote revision, expiry and current upgrade level. Moving away or changing the co
 the purchase. Required container items must be unequipped, unbound instances in the main inventory.
 Inventory assignment failure prevents payment and retains that inventory ID for retry.
 
-### Progression ideas beyond the pilot (proposals only)
+### Other progression ideas (proposals only)
 
-The pilot deliberately shares a small test structure; these are directions for differentiating later trees,
-not additional implemented gates or promises of new quest mechanics.
+These remain ideas for services beyond the implemented crate progression, rather than additional gates
+or promises of new quest mechanics.
 
 | Contact | Proposed later progression |
 | --- | --- |
@@ -311,8 +339,8 @@ unsafe tools, duplicators and arbitrary scripted entity spawning remain protecte
 
 ### Shared containers and furnishings
 
-Squad rooms instantiate the same container slots, recipes, capacities and upgrade hand-ins as personal
-rooms. All members can use installed containers by default; outside visitors cannot use squad containers.
+Squad rooms instantiate their template container slots and use twelve crafted squad crate levels.
+Their storage dimensions are the personal level dimensions plus two columns and one row. All members can use installed containers by default; outside visitors cannot use squad containers.
 An officer or leader uses a container to install/upgrade it and choose **Entire squad**, **Officers and
 leader**, or **Leader only** access for that slot. Officers cannot change or upgrade leader-only containers
 or set a restriction above their own rank. Leaders can change every slot. Changing access closes open
@@ -327,7 +355,8 @@ The personal room limit applies to new grants on this map and never removes room
 Each personal or squad hideout starts with a **30-prop** furnishing capacity. Owners and squad
 leaders/officers can buy **40**, **50**, then **60** props through hideout management at an entrance
 or the interior exit (also available from squad management). The three upgrades cost **5,000**,
-**10,000**, and **20,000 roubles**, paid by the managing character, once per room. Capacity purchases
+**10,000**, and **20,000 roubles**, once per room. The managing character pays unless the leader has
+enabled vendor funding, in which case the treasury contributes first and the character pays the remainder. Capacity purchases
 do not grant furnishing permissions; personal rooms still need their existing props/PET purchase.
 
 Only player-placed furnishings count. Shell geometry, containers, vendors and loose items keep their
@@ -343,7 +372,7 @@ The marker editor includes a **Suit and gear storage** recipe (`gear`) for suits
 backpacks and exoskeleton frames. Inventory-bearing bags remain excluded. Add a new permanent
 container slot with this recipe to the authored shell; existing slots keep their recipes and contents.
 Personal lockers use the existing twelve hideout improvement gates and door/container purchase flow.
-Squad lockers use the existing three container hand-ins.
+Squad lockers use the matching twelve squad crate levels.
 
 Players with furnishing/building access can move and freeze containers with the physgun. Squad
 container rank restrictions also apply to movement. Container position and rotation survive checkpoints,
@@ -402,6 +431,19 @@ The stock rules remain:
   Listed and unlisted stock share that capacity. Shop pages contain at most 20 entries.
 - Equipped, bound, non-transferable, field cargo and inventory-bearing items are rejected.
   Normal NPC reward/progression callbacks are not invoked.
+
+The squad leader can toggle **Use squad vendor funds for hideout upgrades** in hideout management
+(the hideout properties menu at the entrance, exit, vendor or squad menu). It starts disabled and persists
+with the hideout. When enabled, squad crate assembly and prop-capacity purchases spend the shared vendor
+treasury first, then charge the crafting member or managing officer/leader the remainder. Personal room costs always use
+personal funds. Confirmations show both shares. A changed funding setting, rank or quoted balance rejects
+the purchase for a fresh quote; combined insufficient funds consume nothing. Treasury debits and player
+charges share the same atomic receipt, and transaction history shows the treasury contribution.
+
+Legacy three-tier squad storage is converted once to the lowest new level whose dimensions contain its
+saved dimensions. Inventory IDs, contents, access and placement remain; actual dimensions change only on
+a later upgrade. Old receipts replay before conversion and cannot reapply their old tier numbers afterwards.
+Deploy matching client/server code to all map servers and restart without resetting saves or running FTS.
 
 ## Player menus and administrator recovery
 
@@ -566,6 +608,8 @@ From the repository root:
     luatex --luaonly tests/fts_hideouts_spec.lua
     luatex --luaonly tests/hideout_management_spec.lua
     luatex --luaonly tests/hideout_vendor_spec.lua
+    luatex --luaonly tests/hideout_crates_spec.lua
+    python3 docs/balance/hideouts.py --check
 
 This syntax-checks changed GLua and runs real server methods against mocked engine boundaries
 using the system Lua shared library. Feature cases use the installed query builder and real SQLite

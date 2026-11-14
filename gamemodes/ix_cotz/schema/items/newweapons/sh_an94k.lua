@@ -1,6 +1,6 @@
 ITEM.name = "AN-94"
 ITEM.description= "A soviet-designed assault rifle chambered for 5.45x39mm"
-ITEM.longdesc = "The AN-94 offers a unique two-shot burst function at a stated 1800 rounds per minute rate of fire.\nThe Nikonov mechanism fires the second shot in the burst quickly enough to allow it to escape before the recoil of the first shot is felt, thus potentially allowing the two shots to hit extremely close together, for example to aid in piercing body armor.\nThis makes it the weapon of choice when fighting heavily armored enemies.\n\nAmmo: 5.45x39mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The AN-94 offers a unique two-shot burst function with an unusually short interval between shots.\nThe Nikonov mechanism fires the second shot in the burst quickly enough to allow it to escape before the recoil of the first shot is felt, thus potentially allowing the two shots to hit extremely close together, for example to aid in piercing body armor.\nThis makes it the weapon of choice when fighting heavily armored enemies."
 ITEM.model = "models/srp/weapons/w_abakan.mdl"
 ITEM.class = "cw_an94k"
 ITEM.weaponCategory = "primary"

@@ -1,6 +1,6 @@
 ITEM.name = "Marlin 1894C .357 Magnum"
 ITEM.description= "A classic lever-action rifle. Fires .357 Magnum."
-ITEM.longdesc = "A modified Marlin brand rifle. It is a traditional lever-action with exposed hammer, straight grip, tube magazine and barrel bands.\n\nAmmo: .357 Magnum\nMagazine Capacity: 7"
+ITEM.longdesc = "A modified Marlin brand rifle. It is a traditional lever-action with exposed hammer, straight grip, tube magazine and barrel bands."
 ITEM.model = ("models/weapons/tfa_nmrih/w_fa_win1892.mdl")
 ITEM.class = "cw_w9422357"
 ITEM.weaponCategory = "primary"

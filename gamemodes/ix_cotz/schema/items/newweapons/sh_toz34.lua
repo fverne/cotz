@@ -1,6 +1,6 @@
 ITEM.name = "TOZ-34 Hunting Shotgun"
 ITEM.description= "A break-action hunting shotgun firing 12 gauge shells."
-ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThe cheap price and long barrel makes it useful for engaging animals and unarmed targets at ranges up to fifty meters.\nThe over-and-under barrel placement helps to place shots in the center, but makes the gun more mechanically complex.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThe cheap price and long barrel makes it useful for engaging animals and unarmed targets at ranges up to fifty meters.\nThe over-and-under barrel placement helps to place shots in the center, but makes the gun more mechanically complex."
 ITEM.model = ("models/weapons/w_sv10.mdl")
 ITEM.class = "cw_toz34"
 ITEM.weaponCategory = "primary"

@@ -10,6 +10,10 @@ ITEM.rarity = 7
 ITEM.baseweight = 1.200
 ITEM.varweight  = 0.200
 
+ITEM.contactDamage = 99
+ITEM.radiationRemoved = 95
+ITEM.applicationTime = 4
+
 ITEM.functions.use = {
 	name = "Stab Self",
     icon = "icon16/help.png",
@@ -17,15 +21,16 @@ ITEM.functions.use = {
     OnRun = function(item)
     	local TEMP_TargetDamage = DamageInfo()
 						
-		ix.util.PlayerPerformItemAction(item.player, item, "Stabbing self with Kolobok", 4, function(player)
-            TEMP_TargetDamage:SetDamage(99)
+		ix.util.PlayerPerformItemAction(item.player, item, "Stabbing self with Kolobok", item.applicationTime,
+			function(player)
+            TEMP_TargetDamage:SetDamage(item.contactDamage)
 			TEMP_TargetDamage:SetAttacker(player)
 			TEMP_TargetDamage:SetDamageType(DMG_BULLET)
 			TEMP_TargetDamage:SetInflictor(player)
 			TEMP_TargetDamage:SetDamagePosition(player:GetPos())
 			player:TakeDamageInfo(TEMP_TargetDamage)
 
-			player:addRadiation(-95)
+			player:addRadiation(-item.radiationRemoved)
         end)
 
         return false
@@ -34,3 +39,12 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "radiationRemoval", text = "Radiation removal: "
+			.. ix.itemProperties.Format("radiationAmount", -self.radiationRemoved)},
+		{id = "contactDamage", text = "Treatment injury: " .. ix.itemProperties.Format("health", -self.contactDamage)},
+		{id = "application", text = "Application time: " .. ix.itemProperties.Format("duration", self.applicationTime)},
+	}
+end

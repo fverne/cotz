@@ -36,7 +36,8 @@ end)
 Test("squad storage upgrades require an officer and preserve contents and access", function()
 	local leader, officer, member, outsider, instance, record = squadStorage()
 	ix.item.list.value_container_smallitems = {model = "case.mdl", name = "Case"}
-	local input = FeatureItem(officer:GetCharacter():GetInventory(), {}, "value_container_smallitems")
+	local input = FeatureItem(officer:GetCharacter():GetInventory(),
+		{cotzHideoutCrate = {level = 1, squad = true, version = 1}}, "hideout_crate_general")
 	assert(not PLUGIN:UpgradeContainer(member, record, "left", 0))
 	assert(PLUGIN:SetContainerRank(leader, record, "left", 1))
 	assert(PLUGIN:UpgradeContainer(officer, record, "left", 0))
@@ -54,7 +55,8 @@ Test("a demotion while a squad upgrade awaits SQL prevents consumption", functio
 	local leader, officer, member, outsider, instance, record = squadStorage()
 	ix.item.list.value_container_smallitems = {model = "case.mdl", name = "Case"}
 	local inventory = officer:GetCharacter():GetInventory()
-	local input = FeatureItem(inventory, {}, "value_container_smallitems")
+	local input = FeatureItem(inventory, {cotzHideoutCrate = {level = 1, squad = true, version = 1}},
+		"hideout_crate_general")
 	local originalQuery, resume = ix.crossserver.Query
 	ix.crossserver.Query = function(query, callback)
 		if query.tableName == "ix_items" then

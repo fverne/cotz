@@ -17,22 +17,11 @@ ITEM.maxStack = 300
 ITEM.weight = 0
 
 function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
-	local quantdesc = ""
-	local invdesc = ""
-	if self.longdesc then
-		invdesc = "\n\n"..(self.longdesc)
-	end
+	local description = self:GetData("description", self.description)
+	if description == "" and self.isAmmo then description = "Ammunition." end
+	if self.entity or not self.longdesc or self.longdesc == "" then return description end
 
-	if self.quantdesc then
-		quantdesc = Format(self.quantdesc, quant)
-	end
-
-	if (self.entity) then
-		return (Format(self.quantdesc, quant))
-	else
-        return (quantdesc..invdesc)
-	end
+	return description .. "\n\n" .. self.longdesc
 end
 
 if (CLIENT) then

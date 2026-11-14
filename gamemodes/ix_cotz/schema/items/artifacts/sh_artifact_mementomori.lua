@@ -54,3 +54,10 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "psyRecovery", text = "Psychic recovery: +15%"},
+		{id = "cooldown", text = "Recovery cooldown: 900 s"},
+	}
+end

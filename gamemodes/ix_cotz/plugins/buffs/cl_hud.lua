@@ -5,6 +5,7 @@ local incH = ScrH() * -0.035
 local incW = ScrW() * 0.02
 
 local bleedingColor = Color(255, 220, 0)
+local clottingColor = Color(120, 220, 160)
 local sprintColor = Color(255, 255, 150, 255)
 
 function PLUGIN:OnScreenSizeChanged()
@@ -23,6 +24,12 @@ function PLUGIN:HUDPaint()
 
 		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH, ScrW() * 0.016, ScrH() * 0.032,
 			bleedingColor, tostring(severity))
+	end
+
+	local clotting = LocalPlayer():HasBuff("buff_bandageclotting")
+	if clotting then
+		ix.util.DrawBuffIcon("stalker/ui/heart.png", posW, posH + incH * 4,
+			ScrW() * 0.016, ScrH() * 0.032, clottingColor, tostring(math.max(math.ceil(clotting[1] - CurTime()), 0)))
 	end
 
 	if LocalPlayer():HasBuff("buff_slowheal") then

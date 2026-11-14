@@ -51,3 +51,10 @@ ITEM.functions.use = {
 		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_staminarestore", duration = 300, amount = 2.5},
+		{buff = "buff_sprintboost", duration = 30, multiplier = 1.25},
+	}
+end

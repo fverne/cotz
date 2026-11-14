@@ -1,6 +1,6 @@
 ITEM.name = "Mercenary Malfunction"
 ITEM.description= "A shortened bolt action rifle chambered for 7.62x54mm."
-ITEM.longdesc = "This abomination SHOULD not exist.\nAn unnamed gun enthusiast has decided that making this sawn-off mosin tacticool would be a good idea.\n\nAmmo: 7.62x54mm\nMagazine Capacity: 5"
+ITEM.longdesc = "This abomination SHOULD not exist.\nAn unnamed gun enthusiast has decided that making this sawn-off mosin tacticool would be a good idea."
 ITEM.model = ("models/weapons3/mosina.mdl")
 ITEM.class = "cw_obrezmalfunction"
 ITEM.weaponCategory = "primary"

@@ -334,3 +334,7 @@ function Schema:LoadFonts(font, genericFont)
 
 	return true
 end
+
+function Schema:PopulateItemTooltip(tooltip, item)
+	ix.itemProperties.Populate(tooltip, item)
+end

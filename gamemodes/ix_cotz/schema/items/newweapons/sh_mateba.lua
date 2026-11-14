@@ -1,6 +1,6 @@
 ITEM.name = "Mateba Autorevolver"
 ITEM.description= "A double-action revolver chambered for .44 Magnum."
-ITEM.longdesc = "The Mateba Model 6 Unica (often known simply as the Mateba or the Mateba Autorevolver) is a recoil operated semi-automatic revolver, one of only a few of this type ever produced. It was developed by Mateba, based in Pavia, Italy.\nThe Mateba Model 6 uses the recoil from firing to rotate the cylinder and cock the hammer, unlike conventional revolvers, which depend on the user physically pulling the trigger and/or cocking the hammer to actuate the weapon's mechanism of operation.\n\nAmmo: .44 Magnum\nMagazine Capacity: 6"
+ITEM.longdesc = "The Mateba Model 6 Unica (often known simply as the Mateba or the Mateba Autorevolver) is a recoil operated semi-automatic revolver, one of only a few of this type ever produced. It was developed by Mateba, based in Pavia, Italy.\nThe Mateba Model 6 uses the recoil from firing to rotate the cylinder and cock the hammer, unlike conventional revolvers, which depend on the user physically pulling the trigger and/or cocking the hammer to actuate the weapon's mechanism of operation."
 ITEM.model = ("models/weapons/cwc_mateba/w_pist_mateba.mdl")
 ITEM.class = "cw_mateba"
 ITEM.weaponCategory = "secondary"

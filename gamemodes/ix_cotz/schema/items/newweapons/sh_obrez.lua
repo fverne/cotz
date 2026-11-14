@@ -1,6 +1,6 @@
 ITEM.name = "Obrez"
 ITEM.description= "A shortened bolt action rifle chambered for 7.62x54mm."
-ITEM.longdesc = "A well-used sawn-off Mosin Nagant rifle, it's exact model is unclear.\nA direct hit with this weapon at close range is devastating, but accuracy leaves a lot to be desired.\n\nAmmo: 7.62x54mm\nMagazine Capacity: 5"
+ITEM.longdesc = "A well-used sawn-off Mosin Nagant rifle, it's exact model is unclear.\nA direct hit with this weapon at close range is devastating, but accuracy leaves a lot to be desired."
 ITEM.model = ("models/weapons3/mosina.mdl")
 ITEM.class = "cw_obrez"
 ITEM.weaponCategory = "primary"

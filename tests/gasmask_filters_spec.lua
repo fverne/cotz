@@ -731,9 +731,16 @@ surface = {
 }
 derma = {SkinFunc = function() end}
 dofile("gamemodes/ix_cotz/plugins/suits/sh_filters.lua")
+dofile("gamemodes/ix_cotz/schema/libs/sh_itemproperties.lua")
+dofile("gamemodes/ix_cotz/schema/libs/cl_itemproperties.lua")
 local tooltip = {rows = {}}
+function tooltip:GetRow(id) return self.rows[id] end
 function tooltip:AddRow(id)
-	local row = {}
+	local row = {z = 10}
+	function row:GetZPos() return self.z end
+	function row:SetZPos(z) self.z = z end
+	function row:SetFont() end
+	function row:SetTextColor() end
 	function row:SetText(text) self.text = text end
 	function row:SizeToContents() end
 	self.rows[id] = row
@@ -742,12 +749,12 @@ function tooltip:AddRow(id)
 end
 mask.data.filterCondition = false
 ix.util.PopulateGasmaskFilterTooltip(tooltip, mask)
-check(tooltip.rows.gasmaskFilter.text == "Civilian Gasmask Filter: No filter", "empty socket tooltip")
+check(tooltip.rows["cotz/property/filter"].text == "• Civilian Gasmask Filter: No filter", "empty socket tooltip")
 mask.data.filterCondition = 37
 ix.util.PopulateGasmaskFilterTooltip(tooltip, mask)
-check(tooltip.rows.gasmaskFilter.text == "Civilian Gasmask Filter: 37%", "partial installed filter tooltip")
+check(tooltip.rows["cotz/property/filter"].text == "• Civilian Gasmask Filter: 37%", "partial installed filter tooltip")
 ix.util.PopulateGasmaskFilterTooltip(tooltip, spent)
-check(tooltip.rows.gasmaskFilter.text == "Civilian Gasmask Filter: 0%", "spent loose cartridge tooltip")
+check(tooltip.rows["cotz/property/filter"].text == "• Civilian Gasmask Filter: 0%", "spent loose cartridge tooltip")
 ix.util.PaintGasmaskFilter(mask, 64, 64)
 near(rectangles[#rectangles].width, 38 * 0.37, "backpack icon shows real filter condition")
 mask.data.filterCondition = false

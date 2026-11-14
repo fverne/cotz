@@ -28,3 +28,9 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_meditation", duration = -1, min = 1, max = 5},
+	}
+end

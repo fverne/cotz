@@ -1,6 +1,6 @@
 ITEM.name = "DP-28"
 ITEM.description= "A big, old Soviet machinegun. Fires 7.62x54mm."
-ITEM.longdesc = "The Degtyaryov machine gun or DP is a light machine gun firing the 7.62x54mmR cartridge that was used primarily by the Soviet Union starting in 1928.\nThe DP machine gun was supplemented in the 1950s by the more modern RPD machine gun and entirely replaced in Soviet service by the general purpose PK machine gun in the 1960s.\nDespite its numerous problems, the DP had a reputation as a relatively effective light support weapon.\nIt was nicknamed the 'Record player' by Red Army troops because the disc-shaped pan magazine resembled a gramophone record and its top cover revolved while the weapon was fired.\n\nAmmo: 7.62x54mm \nMagazine Capacity: 47"
+ITEM.longdesc = "The Degtyaryov machine gun or DP is a light machine gun firing the 7.62x54mmR cartridge that was used primarily by the Soviet Union starting in 1928.\nThe DP machine gun was supplemented in the 1950s by the more modern RPD machine gun and entirely replaced in Soviet service by the general purpose PK machine gun in the 1960s.\nDespite its numerous problems, the DP had a reputation as a relatively effective light support weapon.\nIt was nicknamed the 'Record player' by Red Army troops because the disc-shaped pan magazine resembled a gramophone record and its top cover revolved while the weapon was fired."
 ITEM.model = ("models/weapons/w_ro2_dp28.mdl")
 ITEM.class = "cw_dp28"
 ITEM.weaponCategory = "primary"

@@ -1,6 +1,6 @@
 ITEM.name = "Beretta 92"
 ITEM.description= "A semi-automatic pistol chambered for 9x19mm."
-ITEM.longdesc = "The Beretta 92, also known as the M9, is the Italian-made replacement for the M1911 pistol in the American army.\nIt is a semi-automatic pistol firing the 9x19mm cartridge.\nIt's popular with many stalkers as a sidearm since its ammo is easy to come across and it's very reliable.\n\nAmmo: 9x19mm\nMagazine Capacity: 15"
+ITEM.longdesc = "The Beretta 92, also known as the M9, is the Italian-made replacement for the M1911 pistol in the American army.\nIt is a semi-automatic pistol firing the 9x19mm cartridge.\nIt's popular with many stalkers as a sidearm since its ammo is easy to come across and it's very reliable."
 ITEM.model = ("models/weapons/w_M92f_p228.mdl")
 ITEM.class = "cw_beretta92"
 ITEM.weaponCategory = "secondary"

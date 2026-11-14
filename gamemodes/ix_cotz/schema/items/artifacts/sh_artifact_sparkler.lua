@@ -10,6 +10,8 @@ ITEM.rarity = 2
 ITEM.baseweight = 0.480
 ITEM.varweight  = 0.080
 
+ITEM.contactDamage = 10
+
 ITEM.functions.use = {
 	name = "Shake",
     icon = "icon16/help.png",
@@ -19,7 +21,7 @@ ITEM.functions.use = {
 
             local TEMP_TargetDamage = DamageInfo()
                         
-            TEMP_TargetDamage:SetDamage(10)
+            TEMP_TargetDamage:SetDamage(item.contactDamage)
             TEMP_TargetDamage:SetAttacker(item.player)
             TEMP_TargetDamage:SetDamageType(DMG_SHOCK)
             TEMP_TargetDamage:SetInflictor(item.player)
@@ -37,3 +39,8 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {{id = "contactDamage", text = "Use injury: "
+		.. ix.itemProperties.Format("health", -self.contactDamage)}}
+end

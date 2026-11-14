@@ -21,3 +21,8 @@ ITEM.blackScreenAction = function(item, player)
 end
 
 ITEM:DecideFunction()
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_radiationremoval", duration = 10, amount = 0.2},
+	}
+end

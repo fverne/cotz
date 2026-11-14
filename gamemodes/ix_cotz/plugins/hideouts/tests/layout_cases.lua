@@ -82,7 +82,8 @@ Test("personal gear locker purchases use existing milestone gates and retain slo
 	assert(PLUGIN:PreparePersonalStorage(instance))
 	local offer = PLUGIN:BuildPersonalOffer(owner, record, "container", "locker")
 	assert(offer and not offer.allowed and offer.level == 2)
-	owner:GetCharacter().completed = {["cotz/town/ballast/v3/hideout/02"] = true}
+	owner:GetCharacter().completed = {["cotz/town/ballast/v3/hideout/01"] = true,
+		["cotz/town/ballast/v3/hideout/02"] = true}
 	offer = PLUGIN:BuildPersonalOffer(owner, record, "container", "locker")
 	assert(offer.allowed and offer.width >= slot.width and offer.height >= slot.height)
 	local target = instance.containers.locker
@@ -92,6 +93,8 @@ Test("personal gear locker purchases use existing milestone gates and retain slo
 	local entity = instance.containers.locker
 	entity:SetPos(instance.origin + Vector(70, 40, 20))
 	PLUGIN:AuditContainers(instance)
+	FeatureItem(owner:GetCharacter():GetInventory(),
+		{cotzHideoutCrate = {level = offer.level, squad = false, version = 1}}, offer.item)
 	assert(PLUGIN:PurchasePersonalOffer(owner, target, offer))
 	assert(slot.inventoryID == 80 and slot.tier == 2 and owner:GetCharacter():GetMoney() == 100000 - offer.price)
 	assert(entity:GetPos().x == instance.origin.x + 70 and slot.transform.pos.x == 70)

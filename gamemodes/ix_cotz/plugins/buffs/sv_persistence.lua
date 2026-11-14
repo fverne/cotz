@@ -8,6 +8,8 @@ function PLUGIN:SaveBuffs(client, character)
 	character = character or client:GetCharacter()
 	if not character or client:GetCharacter() ~= character then return end
 
+	self:ProcessBandageClotting(client)
+
 	-- A save can occur before the deferred loadout restoration has run.
 	local saved = client.cotzBuffCharacter ~= character and table.Copy(character:GetData("buffs", {})) or {}
 	local now = CurTime()
@@ -31,6 +33,8 @@ function PLUGIN:ClearBuffs(client)
 
 	client:SetNetVar("buffs", {})
 	client.cotzBuffCharacter = nil
+	client.cotzClottingTime = nil
+	client.cotzClottingCharacter = nil
 end
 
 function PLUGIN:RestoreBuffs(client)

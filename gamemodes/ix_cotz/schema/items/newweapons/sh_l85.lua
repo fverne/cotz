@@ -1,6 +1,6 @@
 ITEM.name = "L85"
 ITEM.description= "A bullpup assault rifle. Fires 5.56x45mm."
-ITEM.longdesc = "The standard rifle for the British armed forces. This rifle was designed to be fitted with various attachments.\n\nAmmo: 5.56x45mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The standard rifle for the British armed forces. This rifle was designed to be fitted with various attachments."
 ITEM.model = ("models/weapons/w_rif_l852.mdl")
 ITEM.class = "cw_l85"
 ITEM.weaponCategory = "primary"

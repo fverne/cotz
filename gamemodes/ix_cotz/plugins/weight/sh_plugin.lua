@@ -54,19 +54,9 @@ if (CLIENT) then
 	})
 
 	function PLUGIN:PopulateItemTooltip(tooltip, item)
-		local weight = item:GetWeight()
-		local carryinc = item:GetCarryInc()
-
-		if !item.entity then
-			if (carryinc && carryinc != 0) then
-				ix.util.PropertyDesc2(tooltip, "Carry Capacity Increase: "..ix.weight.WeightString(carryinc, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/armorupgrades/carryweightinc.png"))
-			end
-		end
-
-		if (weight) then
-			ix.util.PropertyDesc3(tooltip, "Weight: "..ix.weight.WeightString(weight, ix.option.Get("imperial", false)), Color(255, 255, 255), Material("vgui/ui/stalker/weaponupgrades/weight.png"), 999)
-		end
+		ix.itemProperties.Populate(tooltip, item)
 	end
+
 end
 
 function PLUGIN:HUDPaint()

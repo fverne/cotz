@@ -27,6 +27,7 @@ local DEFAULTS = {
 	music = "stalkersound/music/coronaradiata.ogg",
 	mutantLimit = 128,
 	mutantRegionLimit = 32,
+	pdaMapSwampsURL = "https://media.discordapp.net/attachments/940346461705601054/1571027053338431620/cotz_swamp.png?ex=6af93c75&is=6af7eaf5&hm=73462b536c962c3a2381a369bcb07366a01ae4b5799003de3aa7a36656bbd7ba&format=webp&quality=lossless&width=1024&height=1024",
 	saveInterval = 60,
 	spawnTime = 300,
 	thirdperson = true,

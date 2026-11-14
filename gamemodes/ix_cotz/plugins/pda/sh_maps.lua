@@ -3,9 +3,41 @@ PLUGIN.maps = {
 		name = "Swamps",
 		urlConfig = "pdaMapSwampsURL",
 	},
+	farmlands = {
+		name = "Farmlands",
+		urlConfig = "pdaMapFarmlandsURL",
+	},
+	waystation = {
+		name = "Waystation",
+		urlConfig = "pdaMapWaystationURL",
+	},
+	pripyat = {
+		name = "Pripyat",
+		urlConfig = "pdaMapPripyatURL",
+	},
+	garbage = {
+		name = "Garbage",
+		urlConfig = "pdaMapGarbageURL",
+	},
 }
 
 ix.config.Add("pdaMapSwampsURL", "https://media.discordapp.net/attachments/673842219144183809/1446868781191397496/cotz_swamp.png?ex=6af86e0e&is=6af71c8e&hm=cf68be3e3e65cad4c78929772be87fa7a80ab23d4e1112dc42708447197745cb&format=webp&quality=lossless&width=1024&height=1024", "Image URL displayed by the Swamps map USB. Use a direct HTTP or HTTPS image URL.", nil, {
+	category = "PDA Maps",
+})
+
+ix.config.Add("pdaMapFarmlandsURL", "", "Image URL displayed by the Farmlands map USB. Use a direct HTTP or HTTPS image URL.", nil, {
+	category = "PDA Maps",
+})
+
+ix.config.Add("pdaMapWaystationURL", "", "Image URL displayed by the Waystation map USB. Use a direct HTTP or HTTPS image URL.", nil, {
+	category = "PDA Maps",
+})
+
+ix.config.Add("pdaMapPripyatURL", "", "Image URL displayed by the Pripyat map USB. Use a direct HTTP or HTTPS image URL.", nil, {
+	category = "PDA Maps",
+})
+
+ix.config.Add("pdaMapGarbageURL", "", "Image URL displayed by the Garbage map USB. Use a direct HTTP or HTTPS image URL.", nil, {
 	category = "PDA Maps",
 })
 

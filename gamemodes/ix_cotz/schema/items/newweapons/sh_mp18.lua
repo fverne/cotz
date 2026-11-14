@@ -1,6 +1,6 @@
 ITEM.name = "MP-18"
 ITEM.description= "Russian single shot rifle, primarily designed for hunting. Fires 7.62x54mm."
-ITEM.longdesc = "MP-18 is the legendary Soviet single-barreled rifle. This gun behaves perfectly in all weather conditions, no breakdowns or failures have ever been identified.\n\nAmmo: 7.62x54mm\nMagazine Capacity: 1"
+ITEM.longdesc = "MP-18 is the legendary Soviet single-barreled rifle. This gun behaves perfectly in all weather conditions, no breakdowns or failures have ever been identified."
 ITEM.model = ("models/weapons/arc9/darsu_eft/w_mp18.mdl")
 ITEM.class = "cw_mp18"
 ITEM.weaponCategory = "primary"

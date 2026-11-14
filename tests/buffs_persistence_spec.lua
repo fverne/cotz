@@ -42,6 +42,8 @@ ix = {
 	end},
 	util = {},
 }
+ix.util.PlayerPerformBlackScreenAction = function() end
+ix.util.PlayerActionInterrupt = function() end
 ix.util.Include = function(path)
 	if path:sub(1, 3) == "cl_" then return end
 
@@ -94,6 +96,7 @@ local function playerObject(saved)
 	client.GetNWFloat, client.SetNWFloat = client.GetNetVar, client.SetNetVar
 	client.GetNWBool, client.SetNWBool = client.GetNetVar, client.SetNetVar
 	function client:SetJumpPower(value) self.jump = value end
+	function client:StopSound() end
 	function client:Health() return self.health end
 	function client:GetMaxHealth() return 100 end
 	function client:SetHealth(value) self.health = value end
@@ -127,7 +130,7 @@ for name in pairs(buffs.buffs) do
 	near(snapshot.buffs[name][1], 47.5, name .. " saves remaining duration")
 	check(snapshot.buffs[name][2].nested.value == 7, name .. " saves parameters")
 end
-check(count == 14, "all registered buffs and debuffs exercised")
+check(count == 17, "all registered buffs and debuffs exercised")
 snapshot.buffs.buff_slowheal[2].nested.value = 99
 check(client:HasBuff("buff_slowheal")[2].nested.value == 7, "save parameters are copied")
 near(client:GetNWFloat("ixflatpsyres"), 11, "psyblock initially applied")
@@ -246,4 +249,39 @@ near(ticking:GetLocalVar("stm"), 26, "restored stamina uses saved strength")
 near(ticking.radiation, 2, "restored radiation debuff uses saved strength")
 near(ticking.psyDamage, 3, "restored psychic debuff uses saved strength")
 near(ticking.psyHealing, 5, "restored psychic healing uses saved strength")
+-- Clotting settles fractional elapsed time before saving and resumes without replaying healing.
+settings.bleedingDamageScale, settings.bleedingClotRate = 0, 0
+local clotting = playerObject(character({bleedingSeverity = 100}))
+loadCharacter(clotting)
+clotting.health = 70
+buffs:StartBandageClotting(clotting, 20, 6)
+now = now + 2.25
+local clotSnapshot = clotting.character:Save()
+near(clotSnapshot.bleedingSeverity, 92.5, "save settles fractional clotting")
+near(clotSnapshot.buffs.buff_bandageclotting[1], 3.75, "save keeps remaining clotting duration")
+near(clotSnapshot.buffs.buff_bandageclotting[2].remaining, 12.5, "save keeps unspent treatment")
+buffs:PlayerDisconnected(clotting)
+clotting.invalid = true
+now = 0
+local resumed = playerObject(character(clotSnapshot))
+loadCharacter(resumed)
+clients = {resumed}
+near(buffs:GetBleeding(resumed), 92.5, "offline time does not clot")
+near(resumed.health, 100, "restoring the buff does not grant completion healing")
+now = 3.75
+buffs:Think()
+near(buffs:GetBleeding(resumed), 80, "expiry boundary delivers complete six-second total")
+check(not resumed:HasBuff("buff_bandageclotting"), "expired clotting removed")
+now = now + 10
+buffs:Think()
+near(buffs:GetBleeding(resumed), 80, "clotting cannot replay after expiry")
+buffs:StartBandageClotting(resumed, 90, 6)
+now = now + 1
+buffs:ProcessBandageClotting(resumed)
+resumed.health = 0
+buffs:PlayerDeath(resumed)
+check(not resumed.character:Save().buffs.buff_bandageclotting, "death clears saved clotting")
+resumed.health = 100
+loadCharacter(resumed)
+check(not resumed:HasBuff("buff_bandageclotting"), "revive does not restore clotting")
 print("buffs_persistence_spec: " .. checks .. " checks passed")

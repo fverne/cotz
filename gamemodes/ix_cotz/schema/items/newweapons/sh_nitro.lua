@@ -1,6 +1,6 @@
 ITEM.name = "Accurate Reloading .700 Nitro Express"
 ITEM.description= "Big game hunting rifle for big targets."
-ITEM.longdesc = "The .700 Nitro Express rifle is primarily designed for taking on big game, and has found practical application in the Zone. The .700 Nitro Express develops an approximate average of 12,100 J force of muzzle energy with a 1,000 gr bullet at 610 m/s.\n\nAmmo: .700 Nitro Express \nMagazine Capacity: 2"
+ITEM.longdesc = "The .700 Nitro Express rifle is primarily designed for taking on big game, and has found practical application in the Zone. The .700 Nitro Express develops an approximate average of 12,100 J force of muzzle energy with a 1,000 gr bullet at 610 m/s."
 ITEM.model = ("models/weapons/w_fc4_700nitro_fixed.mdl")
 ITEM.class = "cw_ne700"
 ITEM.weaponCategory = "primary"

@@ -1,6 +1,6 @@
 ITEM.name = "Winchester 1895"
 ITEM.description= "A classic lever-action rifle. Fires 7.62x54mmR."
-ITEM.longdesc = "A modified version of the Winchester rifle. It is a traditional lever-action with exposed hammer, straight grip, tube magazine and barrel bands.\n\nAmmo: 7.62x54mmR\nMagazine Capacity: 5"
+ITEM.longdesc = "A modified version of the Winchester rifle. It is a traditional lever-action with exposed hammer, straight grip, tube magazine and barrel bands."
 ITEM.model = ("models/weapons/w_rif_win1895.mdl")
 ITEM.class = "cw_w1895"
 ITEM.weaponCategory = "primary"

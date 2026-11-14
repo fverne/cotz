@@ -1,6 +1,6 @@
 ITEM.name = "SVU-A"
 ITEM.description = "A bullpup rifle chambered for 7.62x54mmR."
-ITEM.longdesc = "The SVU-A places its action and magazine behind the pistol grip. That bullpup arrangement retains a substantial rifle mechanism within a shorter overall body. The unusual layout is visible in its balance and in the amount of the weapon carried behind the shooting hand.\n\nAmmo: 7.62x54mm\nMagazine Capacity: 20+1"
+ITEM.longdesc = "The SVU-A places its action and magazine behind the pistol grip. That bullpup arrangement retains a substantial rifle mechanism within a shorter overall body. The unusual layout is visible in its balance and in the amount of the weapon carried behind the shooting hand."
 ITEM.model = ("models/weapons/w_snip_svu.mdl")
 ITEM.class = "cw_svu"
 ITEM.weaponCategory = "primary"

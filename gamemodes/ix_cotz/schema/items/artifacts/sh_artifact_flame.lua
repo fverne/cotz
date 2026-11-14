@@ -10,6 +10,8 @@ ITEM.rarity = 9
 ITEM.baseweight = 1.900
 ITEM.varweight  = 0.300
 
+ITEM.contactDamage = 80
+
 ITEM.fueltier = 2
 
 function ITEM:PopulateTooltipIndividual(tooltip)
@@ -21,7 +23,7 @@ ITEM:Hook("take", function(item)
 
 		local TEMP_TargetDamage = DamageInfo()
 
-		TEMP_TargetDamage:SetDamage(80)
+		TEMP_TargetDamage:SetDamage(item.contactDamage)
 		TEMP_TargetDamage:SetAttacker(item.player)
 		TEMP_TargetDamage:SetDamageType(DMG_BURN)
 		TEMP_TargetDamage:SetInflictor(item.player)
@@ -51,3 +53,8 @@ ITEM.functions.combine = {
 		return false
 	end,
 }
+
+function ITEM:GetIndividualProperties()
+	return {{id = "contactDamage", text = "Pickup injury: "
+		.. ix.itemProperties.Format("health", -self.contactDamage)}}
+end

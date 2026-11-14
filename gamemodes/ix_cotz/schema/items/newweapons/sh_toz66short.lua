@@ -1,6 +1,6 @@
 ITEM.name = "TOZ BM-16 Sawnoff"
 ITEM.description= "A sawn-off hunting shotgun. Fires 12 gauge."
-ITEM.longdesc = "This sawn-off double barrelled shotgun is a must-have in many rookies eyes.\nIt dispatches mutants and unarmored stalkers with ease, and is cheap to keep supplied with ammo.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "This sawn-off double barrelled shotgun is a must-have in many rookies eyes.\nIt dispatches mutants and unarmored stalkers with ease, and is cheap to keep supplied with ammo."
 ITEM.model = "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"
 ITEM.class = "cw_toz66short"
 ITEM.weaponCategory = "primary"

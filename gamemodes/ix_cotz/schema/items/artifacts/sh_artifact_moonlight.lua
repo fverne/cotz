@@ -10,6 +10,11 @@ ITEM.rarity = 8
 ITEM.baseweight = 0.880
 ITEM.varweight  = 0.120
 
+ITEM.dischargeRadius = 256
+ITEM.dischargeDamage = 940
+ITEM.dischargePlayerDamage = 260
+ITEM.operatorDamage = 80
+
 ITEM.functions.use = {
     name = "Shake",
     icon = "icon16/help.png",
@@ -17,11 +22,11 @@ ITEM.functions.use = {
     OnRun = function(item)
         if  item.player and ( item:GetData("cooldown",0) < os.time() ) then
             item:SetData("cooldown", os.time() + 0.4 )
-            for k, v in pairs(ents.FindInSphere(item.player:GetPos(), 256)) do
-                local dmg = 940
+            for k, v in pairs(ents.FindInSphere(item.player:GetPos(), item.dischargeRadius)) do
+                local dmg = item.dischargeDamage
                 local attacker = item.player
                 if(v:IsPlayer()) then 
-                    dmg = 260 
+                    dmg = item.dischargePlayerDamage
                     attacker = v
                 end
 
@@ -40,7 +45,7 @@ ITEM.functions.use = {
             -- Invoking player takes extra damage
             local TEMP_TargetDamage = DamageInfo()
                         
-            TEMP_TargetDamage:SetDamage(80)
+            TEMP_TargetDamage:SetDamage(item.operatorDamage)
             TEMP_TargetDamage:SetAttacker(item.player)
             TEMP_TargetDamage:SetDamageType(DMG_SHOCK)
             TEMP_TargetDamage:SetInflictor(item.player)
@@ -58,3 +63,15 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "dischargeRadius", text = "Discharge radius: " .. ix.itemProperties.Format("distance", self.dischargeRadius)},
+		{id = "dischargePlayers", text = "Discharge impact (players): "
+			.. ix.itemProperties.Format("health", -self.dischargePlayerDamage)},
+		{id = "dischargeOthers", text = "Discharge impact (other targets): "
+			.. ix.itemProperties.Format("health", -self.dischargeDamage)},
+		{id = "operatorDamage", text = "Additional operator injury: "
+			.. ix.itemProperties.Format("health", -self.operatorDamage)},
+	}
+end

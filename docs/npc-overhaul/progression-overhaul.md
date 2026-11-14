@@ -218,7 +218,15 @@ to every contact, including these protected layouts.
 Quartermaster's two gunpowder-for-ammunition-kit barters are removed from the main menu; his six regular
 currency-for-ammunition barters remain in his barter submenu. Suture's suit conversion milestones are
 labelled with the suit name followed by "variants", including "Anorak variants".
-Ballast/Cleaner/Ledger each have twelve local hideout improvement stages, enabling the existing twelve storage tiers.
+Ballast/Cleaner/Ledger each retain twelve local hideout improvement stages. New requests track personal
+storage installation: claiming a room completes step 01 with its free starter; the first installation
+at each later level completes that step and opens the next crate recipe. Saved unfinished supply
+requests remain an alternative completion route, preserving contributions. Crates are assembled through
+the local contact's barter menu, with cash and salvage charged once. All contacts share the same recipes;
+squad crates require exactly three times the personal quantities and rubles and follow the crafter's
+personal unlocks. Squad installations grant no personal progression. See the
+[hideout guide](../../gamemodes/ix_cotz/plugins/hideouts/README.md#crafting-upgrade-crates) and
+[generated recipe matrix](../balance/hideout-crates.md).
 Each contact additionally requires `v3/hideout/access` before new local room claims and unfinished improvements.
 Ballast consumes one unequipped crowbar or bat, at the player's choice; Cleaner consumes one unequipped
 sledgehammer and Ledger consumes one unequipped FUBar. Access requirements are not multiplied by contact

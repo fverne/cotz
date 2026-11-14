@@ -29,3 +29,11 @@ ITEM.blackScreenAction = function(item, player)
 end
 
 ITEM:DecideFunction()
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_staminarestore", duration = 100, amount = 0.5},
+		{buff = "buff_radiationremoval", duration = 10, amount = 0.15},
+		{buff = "buff_sprintboost", duration = 25, multiplier = 1.10},
+	}
+end

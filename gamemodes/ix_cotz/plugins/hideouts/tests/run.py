@@ -224,10 +224,14 @@ def main():
     ):
         lua.run((ROOT / path).read_text(), path)
     lua.run('mysql.module = "sqlite"', "SQLite adapter")
-    for file in ("sh_definitions.lua", "sh_personal.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua",
+    for file in ("sh_definitions.lua", "sh_personal.lua", "sh_crates.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua",
                  "sv_containers.lua", "sv_trading.lua", "sh_building.lua", "sv_layout.lua", "sv_travel.lua", "sh_management.lua",
-                 "sv_menus.lua", "sv_personal.lua"):
+                 "sv_menus.lua", "sv_personal.lua", "sv_crates.lua", "sv_funding.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
+    lua.run("""for family, recipe in pairs(PLUGIN.personalContainerRecipes) do
+        ix.item.list["hideout_crate_" .. family] = {uniqueID = "hideout_crate_" .. family,
+            model = recipe.models[1], name = recipe.name, width = 2, height = 2}
+    end""", "crate item fixtures")
     lua.run("PLUGIN = {}; ix.char.RegisterVar = function() end", "sherpa shared setup")
     lua.run((ROOT / "ix_cotz/plugins/sherpas/sh_plugin.lua").read_text(), "sherpa shared")
     lua.run((ROOT / "ix_cotz/plugins/sherpas/sv_stock.lua").read_text(), "sherpa stock")
@@ -246,6 +250,7 @@ def main():
             "cassette entity")
     lua.run((HERE / "cassette_cases.lua").read_text(), "cassette timer cases")
     lua.run((HERE / "personal_cases.lua").read_text(), "personal hideout progression cases")
+    lua.run((HERE / "crate_cases.lua").read_text(), "crate crafting cases")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 ITEM.name = "SAKO TRG-42"
 ITEM.description= "A Finnish bolt action rifle chambered for .338 Lapua Magnum."
-ITEM.longdesc = "The TRG-42 is the newest development in the TRG sniper rifle family.\nIn addition to a more reliable build, it also fires the massive .338 Lapua Magnum, capable of taking out most humanoid targets in just a single shot.\n\nAmmo: .338 Lapua Magnum \nMagazine Capacity: 5"
+ITEM.longdesc = "The TRG-42 is the newest development in the TRG sniper rifle family.\nIn addition to a more reliable build, it also fires the massive .338 Lapua Magnum, capable of taking out most humanoid targets in just a single shot."
 ITEM.model = ("models/weapons/tgr/w_spin_scout.mdl")
 ITEM.class = "cw_trg42"
 ITEM.weaponCategory = "primary"

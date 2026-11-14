@@ -49,3 +49,9 @@ ITEM.functions.use = {
 		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_radiationremoval", duration = 120, amount = self.restore/240},
+	}
+end

@@ -20,6 +20,7 @@ function PLUGIN:GetContainer(record, slotID)
 	local slot = record.containers[slotID]
 	if slot.recipe and slot.recipe ~= definition.recipe then return end
 	slot.recipe = definition.recipe
+	if self.MigrateSquadContainers then self:MigrateSquadContainers(record) end
 
 	return slot, definition
 end
@@ -243,7 +244,7 @@ function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
 		return false, "This recipe would shrink saved storage; an administrator must correct it."
 	end
 	local inventory = client:GetCharacter():GetInventory()
-	local input = inventory:HasItem(tier.item)
+	local input = self:FindUpgradeCrate(client, definition.recipe, tierNumber, true)
 	if not input or not self:CanStockItem(client, input) then return false, "You need the required container item." end
 	local character = client:GetCharacter()
 	self:LoadOwnedInventory(record, slotID, slot, "cotzHideoutContainer", slot.width or 1, slot.height or 1,
@@ -258,8 +259,10 @@ function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
 				rank = record.ownerType == "squad" and math.max(1, slot.minimumRank or 0) or nil,
 				authorize = function()
 					return self:IsNearUtility(client, entity) and self:CanManageContainer(client, record, slotID)
+						and self:IsUpgradeCrate(client, input, definition.recipe, tierNumber, true)
 				end,
-				payload = {kind = "upgrade", slot = slotID, tier = tierNumber, width = tier.width, height = tier.height},
+				payload = {kind = "upgrade", slot = slotID, tier = tierNumber, width = tier.width, height = tier.height,
+					crateVersion = self.crateVersion},
 			}, function(ok, reason)
 				if ok then
 					slot.tier, slot.width, slot.height = tierNumber, tier.width, tier.height

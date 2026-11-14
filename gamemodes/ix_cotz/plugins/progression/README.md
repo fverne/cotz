@@ -1,7 +1,29 @@
 # Progression engine
 
+## Hideout crate progression
+
+Ballast, Cleaner and Ledger now assemble personal/squad upgrade crates through **Can you assemble storage
+crates?** All three use the same cash/salvage recipes. Personal costs grow by 1.5× per level; squad costs
+are exactly 3× personal. Common early-region salvage precedes Waystation supplies at level 6 and Pripyat
+parts at level 10. See the [recipe matrix](../../../../docs/balance/hideout-crates.md).
+
+A personal room claim completes step 01 with its free starter crate. The first installed personal
+container at each later level completes that local milestone and opens the next crate level. Crafting
+pays the full cost; installation has no second cash charge. Old saved unfinished supply requests remain
+an alternative completion route with their choices and contributions retained. New hideout requests do
+not assign duplicate supply deliveries. Other contact deliveries retain their existing multipliers.
+
+The squad leader's hideout-properties setting permits treasury-first squad crate/prop funding, with
+the managing character paying any remainder. It defaults off. Squad crafting follows the crafter's
+personal milestones; squad installations do not award them. Existing rooms, paid assets and inventories
+remain saved. Deploy matching code across map servers; no FTS or save reset is required.
+
+    luatex --luaonly tests/hideout_crates_spec.lua
+    python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
+    python3 docs/balance/hideouts.py --check
+
 The [town progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) uses 25 finite
-contacts, 52 branches and 631 hand-in milestones (including 212 stock intermissions). Town compilation scales new quantities
+contacts, 52 branches and 631 milestones (595 hand-ins and 36 hideout installation objectives) (including 212 stock intermissions). Town compilation scales new quantities
 by the contact's effort multiplier. Fresh `v3/` IDs do not inherit old completion permissions; old
 requests and contributions remain saved history. Inventory, money and paid hideout assets are retained.
 Ballast's bank service is retired with its data preserved. Suture provides paid suit conversions;

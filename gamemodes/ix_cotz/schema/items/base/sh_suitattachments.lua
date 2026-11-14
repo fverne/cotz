@@ -12,42 +12,16 @@ ITEM.attachName = "namegoeshere"
 ITEM.weight = 0
 
 function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
-	local quantdesc = ""
-	local invdesc = ""
-	if self.longdesc then
-		invdesc = "\n\n"..(self.longdesc)
-	end
+	local description = self:GetData("description", self.description)
+	if self.entity or not self.longdesc or self.longdesc == "" then return description end
 
-	if self.quantdesc then
-		quantdesc = "\n\n"..Format(self.quantdesc, quant)
-	end
-
-	if (self.entity) then
-		return (self.description)
-	else
-        return (self.description..quantdesc..invdesc)
-	end
+	return description .. "\n\n" .. self.longdesc
 end
 
 function ITEM:PopulateTooltip(tooltip)
 
     if (ix.armortables.attachments[self.attachName]) then
-		if ix.armortables.attachments[self.attachName].br then
-			ix.util.DrawResistance(tooltip, "Ballistics: ", ix.armortables.attachments[self.attachName].br, 0)
-		end
-		if ix.armortables.attachments[self.attachName].sr then
-			ix.util.DrawResistance(tooltip, "Rupture: ", ix.armortables.attachments[self.attachName].sr, 0)
-		end
-		if ix.armortables.attachments[self.attachName].ar then
-			ix.util.DrawResistance(tooltip, "Anomalous: ", ix.armortables.attachments[self.attachName].ar, 0)
-		end
-		if ix.armortables.attachments[self.attachName].pr then
-			ix.util.DrawResistance(tooltip, "Psychic: ", ix.armortables.attachments[self.attachName].pr, 0)
-		end
-		if ix.armortables.attachments[self.attachName].radProt then
-			ix.util.DrawResistance(tooltip, "Radiation: ", ix.armortables.attachments[self.attachName].radProt, 0)
-		end
+		ix.itemProperties.PopulateProtection(tooltip, self)
 		if (!self.entity) then
 			if ix.armortables.attachments[self.attachName].slot == "exteriorSlots" then
 	        	ix.util.PropertyDesc(tooltip, "Exterior Suit Attachment", Color(64, 224, 208))

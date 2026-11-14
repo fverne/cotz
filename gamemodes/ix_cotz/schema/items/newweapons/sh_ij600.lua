@@ -1,6 +1,6 @@
 ITEM.name = "Iver Johnson IJ600"
 ITEM.description= "An Iver Johnson IJ600 .410 Bore O/U Break Action Shotgun."
-ITEM.longdesc = "A classic shotgun design, firing .410 buckshot. The Iver Johnson brand has an illustrious history of producing wonderful firearms, and this over under shotgun is no exception.\nThe ammo being \n\nAmmo: .410 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "A classic shotgun design, firing .410 buckshot. The Iver Johnson brand has an illustrious history of producing wonderful firearms, and this over under shotgun is no exception.\nThe ammo being "
 ITEM.model = ("models/weapons/w_sv10.mdl")
 ITEM.class = "cw_ij600"
 ITEM.weaponCategory = "primary"

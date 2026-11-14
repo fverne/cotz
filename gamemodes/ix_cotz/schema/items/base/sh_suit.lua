@@ -95,29 +95,10 @@ function ITEM:GetFlatRadProt()
 end
 
 function ITEM:GetDescription()
-	local quant = self:GetData("quantity", self.ammoAmount or self.quantity or 0)
-	local quantdesc = ""
-	local invdesc = ""
-	local duradesc = ""
+	local description = self:GetData("description", self.description)
+	if self.entity or not self.longdesc or self.longdesc == "" then return description end
 
-	if self.longdesc then
-		invdesc = "\n\n"..(self.longdesc)
-	end
-
-	if self.quantdesc then
-		quantdesc = "\n\n"..Format(self.quantdesc, quant)
-	end
-
-	if self:GetData("durability", nil) then
-		duradesc = "\n\n".."Durability: " .. math.floor(self:GetData("durability", 100)) .. "%"
-	end
-
-
-	if (self.entity) then
-		return (self.description..duradesc)
-	else
-        return (self.description..quantdesc..invdesc)
-	end
+	return description .. "\n\n" .. self.longdesc
 end
 
 -- Inventory drawing
@@ -257,9 +238,6 @@ if (CLIENT) then
 
 			if self.filterType then ix.util.PopulateGasmaskFilterTooltip(tooltip, self) end
 
-			local duratitle = tooltip:AddRow("duratitle")
-			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
-			duratitle:SizeToContents()
 
 			ix.util.PropertyDesc2(tooltip, "Protective Suit", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
 

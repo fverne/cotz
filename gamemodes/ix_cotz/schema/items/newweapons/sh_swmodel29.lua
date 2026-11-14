@@ -1,6 +1,6 @@
 ITEM.name = "Smith&Wesson Model 29"
 ITEM.description= "A double-action revolver chambered for .44 Magnum."
-ITEM.longdesc = "The Model 29 was made famous worldwide by the 1971 movie Dirty Harry, being the most powerful production handgun in the world at the time. It has since been surpassed by other offerings from Smith&Wesson, but it still packs a punch.\n\nAmmo: .44 Magnum\nMagazine Capacity: 6"
+ITEM.longdesc = "The Model 29 was made famous worldwide by the 1971 movie Dirty Harry, being the most powerful production handgun in the world at the time. It has since been surpassed by other offerings from Smith&Wesson, but it still packs a punch."
 ITEM.model = ("models/weapons/w_taurus_327p.mdl")
 ITEM.class = "cw_model29"
 ITEM.weaponCategory = "secondary"

@@ -1,6 +1,6 @@
 ITEM.name = "Winchester 9422"
 ITEM.description= "A classic lever-action rifle. Fires .22LR."
-ITEM.longdesc = "A modified version of the Winchester rifle. It is a traditional lever-action with exposed hammer, straight grip, tube magazine and barrel bands.\n\nAmmo: .22LR\nMagazine Capacity: 15"
+ITEM.longdesc = "A modified version of the Winchester rifle. It is a traditional lever-action with exposed hammer, straight grip, tube magazine and barrel bands."
 ITEM.model = ("models/weapons/tfa_nmrih/w_fa_win1892.mdl")
 ITEM.class = "cw_w9422"
 ITEM.weaponCategory = "primary"

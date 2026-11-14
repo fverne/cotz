@@ -29,3 +29,9 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_hijump", duration = 10, amount = 300},
+	}
+end

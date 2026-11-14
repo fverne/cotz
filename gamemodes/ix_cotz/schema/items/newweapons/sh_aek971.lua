@@ -1,6 +1,6 @@
 ITEM.name = "AEK-971"
 ITEM.description= "A Russian assault rifle. Fires 5.45x39mm."
-ITEM.longdesc = "The AEK-971 is an experimental assault rifle released around the same time as the AN-94 'Abakan'.\nThe AN-94 was chosen over it, but it was still put into limited production.\nIt has a built-in recoil compensator, meaning its recoil is felt much less by the user.\nIt's a rare specimen since it was only given out to a few select groups of the military.\n\nAmmo: 5.45x39mm \nMagazine Capacity: 30"
+ITEM.longdesc = "The AEK-971 is an experimental assault rifle released around the same time as the AN-94 'Abakan'.\nThe AN-94 was chosen over it, but it was still put into limited production.\nIt has a built-in recoil compensator, meaning its recoil is felt much less by the user.\nIt's a rare specimen since it was only given out to a few select groups of the military."
 ITEM.model = "models/weapons/w_rif_aek97.mdl"
 ITEM.class = "cw_aek971"
 ITEM.weaponCategory = "primary"

@@ -14,3 +14,5 @@ for _, setting in ipairs(settings) do
 end
 
 ix.util.Include("sv_bleeding.lua")
+
+ix.util.Include("sv_bandageclotting.lua")

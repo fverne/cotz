@@ -1,6 +1,6 @@
 ITEM.name = "AKs-74u"
 ITEM.description= "A short folding-stock assault rifle chambered for 5.45x39mm."
-ITEM.longdesc = "The AKS-74U bridges the gap between a submachine gun and an assault rifle.\nIt was intended for use mainly with special forces, airborne infantry, rear-echelon support units and armored vehicle crews.\nIt is still used in these roles, but has been augmented by various submachine guns, and the AK-105.\nIt is a popular rifle with stalkers due to its reduced weight and slim profile allowing you to carry it with ease.\n\nAmmo: 5.45x39mm\nMagazine Capacity: 30"
+ITEM.longdesc = "The AKS-74U bridges the gap between a submachine gun and an assault rifle.\nIt was intended for use mainly with special forces, airborne infantry, rear-echelon support units and armored vehicle crews.\nIt is still used in these roles, but has been augmented by various submachine guns, and the AK-105.\nIt is a popular rifle with stalkers due to its reduced weight and slim profile allowing you to carry it with ease."
 ITEM.model = "models/weapons/w_smg_aks.mdl"
 ITEM.class = "cw_aks74u"
 ITEM.weaponCategory = "primary"

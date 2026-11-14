@@ -8,6 +8,19 @@ Atlas sells the Swamps USB immediately for **1,000 rubles**, without a progressi
 unlock. It uses his normal personal supply stock/restocking. Existing placed Atlas
 vendors receive it through the town stock reconciliation on load; no world setup is needed.
 
+The remaining travel maps have USB items ready for later manual availability:
+
+| Map | Item ID | Image configuration |
+| --- | --- | --- |
+| Farmlands | `map_usb_farmlands` | `pdaMapFarmlandsURL` |
+| Waystation | `map_usb_waystation` | `pdaMapWaystationURL` |
+| Pripyat | `map_usb_pripyat` | `pdaMapPripyatURL` |
+| Garbage | `map_usb_garbage` | `pdaMapGarbageURL` |
+
+These four items use the same installation action and 1,000-ruble base price as
+the Swamps USB. They are not added to vendors, loot or progression rewards. Their
+image URLs start blank; configure each under **PDA Maps** before making it available.
+
 ## Image configuration
 
 In Helix configuration, under **PDA Maps**, edit **pdaMapSwampsURL**. The default is

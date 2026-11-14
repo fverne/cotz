@@ -1,6 +1,6 @@
 ITEM.name = "M1917 Revolver"
 ITEM.description= "A single-action variant of a revolver chambered for .45 ACP."
-ITEM.longdesc = "The M1917 Revolvers are six-shot, .45 ACP, large frame revolvers adopted by the United States Military in 1917, to supplement the standard .45 ACP M1911 pistol during World War I.\n\nAmmo: .45 ACP\nMagazine Capacity: 6"
+ITEM.longdesc = "The M1917 Revolvers are six-shot, .45 ACP, large frame revolvers adopted by the United States Military in 1917, to supplement the standard .45 ACP M1911 pistol during World War I."
 ITEM.model = ("models/khrcw2/doipack/w_sw1917.mdl")
 ITEM.class = "cw_m1917"
 ITEM.weaponCategory = "secondary"

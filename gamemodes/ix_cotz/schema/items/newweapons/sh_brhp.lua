@@ -1,6 +1,6 @@
 ITEM.name = "Browning Hi-Power"
 ITEM.description= "A semi-automatic pistol chambered for 9x19mm."
-ITEM.longdesc = "The Browning Hi-Power pistol is product of the French military requesting a new service pistol.\nThe Hi-Power name alludes to the 13-round magazine capacity, almost twice that of contemporary designs such as the Luger or Colt M1911.\nIt has been widely used throughout history, mainly in the second world war by both the Axis and the Allied forces.\nWhen the war ended, over 50 armies adopted it as their service pistol.\n\nAmmo: 9x19mm\nMagazine Capacity: 13"
+ITEM.longdesc = "The Browning Hi-Power pistol is product of the French military requesting a new service pistol.\nThe Hi-Power name alludes to the 13-round magazine capacity, almost twice that of contemporary designs such as the Luger or Colt M1911.\nIt has been widely used throughout history, mainly in the second world war by both the Axis and the Allied forces.\nWhen the war ended, over 50 armies adopted it as their service pistol."
 ITEM.model = "models/weapons/w_pist_brhp.mdl"
 ITEM.class = "cw_brhp"
 ITEM.weaponCategory = "secondary"

@@ -53,89 +53,21 @@ function ix.util.ProtectionTranslator(value, minVal, maxVal)
 end
 
 
-function ix.util.DrawResistance(parentTooltip, resistanceName, value, flatValue)
-    if !parentTooltip:GetRow("resistances") then
-        local descheader = parentTooltip:AddRow("resistances")
-		descheader:SetText("\nRESISTANCES:")
-		descheader:SizeToContents()
-		descheader:SetContentAlignment(4)
-    end
-
-    local anchor = parentTooltip:AddRowAfter("resistances", resistanceName)
-    anchor:SetText("")
-    anchor:SetContentAlignment(4)
-
-	local text = anchor:Add("DLabel")
-    text:SetPos(12, 0)
-    text:SetText(resistanceName)
-    text:SetFont("ixSmallFont")
-	text:SizeToContents()
-
-    local displayedValue = anchor:Add("DLabel")
---    displayedValue:SetText(ix.util.ProtectionTranslator(value, minVal, maxVal))
-
-    displayedValue:SetText((math.floor(math.Remap(value, 0, 1, 0, 100)+0.5)).."%"..(flatValue == nil and "" or (" + "..math.Round(flatValue, 1))))
-
-    displayedValue:SetColor(ix.util.GetColorFromValue(value, 0, 1))
-    displayedValue:SetFont("ixSmallFont")
-	displayedValue:SizeToContents()
-    displayedValue:MoveRightOf(text)
-end
-
-
-function ix.util.DrawSuitResistances(parentTooltip, item)
-    if !parentTooltip:GetRow("resistances") then
-        local descheader = parentTooltip:AddRow("resistances")
-		descheader:SetText("\nPROTECTION LEVELS:")
-		descheader:SizeToContents()
-		descheader:SetContentAlignment(4)
-    end
-
-    if item:getBR() ~= 1 then
-        -- ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), 1 - 0.00, 1 - 0.95)
-        ix.util.DrawResistance(parentTooltip, "Ballistics: ", 1-item:getBR(), item:getFBR())
-    end
-    if item:getSR() ~= 1 then
-        ix.util.DrawResistance(parentTooltip, "Rupture: ", 1-item:getSR(), item:getFSR())
-    end
-	for _, definition in ipairs(ix.suits.anomalyTypes) do
-		local reduction = 1 - item:getAR(definition.field)
-		local flat = item:getFAR(definition.flatField)
-		ix.util.DrawResistance(parentTooltip, definition.name .. ": ", reduction, flat)
+function ix.util.DrawResistance(tooltip, resistanceName, value, flatValue)
+	local name = resistanceName:gsub(":%s*$", "")
+	local kind = name:lower()
+	local text = name .. ": " .. ix.itemProperties.Format(kind, value)
+	if flatValue ~= nil then
+		text = text .. "; absorption " .. ix.itemProperties.Format(kind, flatValue / 100)
 	end
-    if item:getPR() ~= 1 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", 1-item:getPR(), item:getFPR())
-    end
-    if item:getRadProt() ~= 0 then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item:getRadProt(), nil)
-    end
 
-    parentTooltip:GetParent():SizeToContents()
+	ix.itemProperties.AddRow(tooltip, "protection/" .. kind, text)
 end
 
-function ix.util.DrawGearResistances(parentTooltip, item)
-    if !parentTooltip:GetRow("resistances") then
-        local descheader = parentTooltip:AddRow("resistances")
-		descheader:SetText("\nPROTECTION LEVELS:")
-		descheader:SizeToContents()
-		descheader:SetContentAlignment(4)
-    end
+function ix.util.DrawSuitResistances(tooltip, item)
+	ix.itemProperties.PopulateProtection(tooltip, item)
+end
 
-    if item:getBR()~=0 then
-        ix.util.DrawResistance(parentTooltip, "Ballistics: ", item:getBR(), item:getFBR())
-    end
-    if item:getSR()~=0 then
-        ix.util.DrawResistance(parentTooltip, "Rupture: ", item:getSR(), item:getFSR())
-    end
-    if item:getAR()~=0 then
-        ix.util.DrawResistance(parentTooltip, "Anomalous: ", item:getAR(), item:getFAR())
-    end
-    if item:getPR()~=0 then
-        ix.util.DrawResistance(parentTooltip, "Psychic: ", item:getPR(), item:getFPR())
-    end
-    if item:getRadProt() ~= 0  then
-        ix.util.DrawResistance(parentTooltip, "Radiation: ", item:getRadProt(), nil)
-    end
-
-    parentTooltip:GetParent():SizeToContents()
+function ix.util.DrawGearResistances(tooltip, item)
+	ix.itemProperties.PopulateProtection(tooltip, item)
 end

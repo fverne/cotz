@@ -1,6 +1,6 @@
 ITEM.name = "TOZ-34 Special"
 ITEM.description= "A break-action hunting shotgun firing 12 gauge shells."
-ITEM.longdesc = "A special edition double barrel shotgun, customized for the long-range hunting. Modified barrel and integrated scope increase the overall damage and effective range.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "A special edition double barrel shotgun, customized for the long-range hunting. Modified barrel and integrated scope increase the overall damage and effective range."
 ITEM.model = ("models/weapons/w_sv10.mdl")
 ITEM.class = "cw_toz34special"
 ITEM.weaponCategory = "primary"

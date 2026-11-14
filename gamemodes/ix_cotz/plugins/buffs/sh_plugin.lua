@@ -74,6 +74,7 @@ if (SERVER) then
 		self:ProcessBleeding()
 
 		for _, v in player.Iterator() do
+			if IsValid(v) and v:Alive() then self:ProcessBandageClotting(v) end
 			local tblBuffs = v:IsValid() and v:Alive() and v:GetBuffs() or {}
 			for name, dat in pairs( tblBuffs ) do
 				local tblBuffInfo = self.buffs[ name ]

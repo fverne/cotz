@@ -53,41 +53,72 @@ function PLUGIN:ShowManagement(client, id, scope)
 		end
 	end
 	client.cotzHideoutMenu = session
-	net.Start("cotz/hideouts/manage")
-	net.WriteString(scope)
-	net.WriteUInt(#records, 4)
-	for _, record in ipairs(records) do
-		net.WriteString(record.id)
-		net.WriteString(self:GetHideoutName(record):sub(1, 256))
-		net.WriteBool(record.ownerType == "squad")
-		net.WriteString(record.access or "squad")
-		net.WriteBool(self:CanManageHideout(client, record))
-		net.WriteBool(self.members[client] == record.id or self:FindHideoutEntrance(client, record) ~= nil)
-		local propTier = self:GetHideoutPropTier(record)
-		local nextTier = self.propCapacityTiers[propTier + 1]
-		net.WriteUInt(propTier, 3)
-		net.WriteUInt(self:GetHideoutPropLimit(record), 7)
-		net.WriteUInt(nextTier and nextTier.limit or 0, 7)
-		net.WriteUInt(nextTier and nextTier.price or 0, 32)
-		local guests = {}
-		if self:CanManageHideout(client, record) then
-			for guestID, invited in SortedPairs(record.guests or {}) do
-				if invited == true then
-					local character = ix.char.loaded[tonumber(guestID)]
-					guests[#guests + 1] = {
-						id = tonumber(guestID), name = character and character:GetName() or "Character #" .. guestID,
-					}
-					if #guests == MAX_MANAGEMENT_GUESTS then break end
+	session.funding = {}
+	local function send()
+		net.Start("cotz/hideouts/manage")
+		net.WriteString(scope)
+		net.WriteUInt(#records, 4)
+		for _, record in ipairs(records) do
+			net.WriteString(record.id)
+			net.WriteString(self:GetHideoutName(record):sub(1, 256))
+			net.WriteBool(record.ownerType == "squad")
+			net.WriteString(record.access or "squad")
+			net.WriteBool(self:CanManageHideout(client, record))
+			net.WriteBool(self.members[client] == record.id or self:FindHideoutEntrance(client, record) ~= nil)
+			local propTier = self:GetHideoutPropTier(record)
+			local nextTier = self.propCapacityTiers[propTier + 1]
+			net.WriteUInt(propTier, 3)
+			net.WriteUInt(self:GetHideoutPropLimit(record), 7)
+			net.WriteUInt(nextTier and nextTier.limit or 0, 7)
+			net.WriteUInt(nextTier and nextTier.price or 0, 32)
+			net.WriteBool(self:GetSquadRank(client, record) == 2)
+			net.WriteBool(record.fundUpgrades == true)
+			local funding = session.funding[record.id] or {player = nextTier and nextTier.price or 0, treasury = 0}
+			net.WriteUInt(funding.treasury, 32)
+			net.WriteUInt(funding.player, 32)
+			local guests = {}
+			if self:CanManageHideout(client, record) then
+				for guestID, invited in SortedPairs(record.guests or {}) do
+					if invited == true then
+						local character = ix.char.loaded[tonumber(guestID)]
+						guests[#guests + 1] = {
+							id = tonumber(guestID), name = character and character:GetName() or "Character #" .. guestID,
+						}
+						if #guests == MAX_MANAGEMENT_GUESTS then break end
+					end
 				end
 			end
+			net.WriteUInt(#guests, 16)
+			for _, guest in ipairs(guests) do
+				net.WriteUInt(guest.id, 32)
+				net.WriteString(guest.name:sub(1, 256))
+			end
 		end
-		net.WriteUInt(#guests, 16)
-		for _, guest in ipairs(guests) do
-			net.WriteUInt(guest.id, 32)
-			net.WriteString(guest.name:sub(1, 256))
-		end
+		net.Send(client)
 	end
-	net.Send(client)
+	local function quote(index)
+		local record = records[index]
+		if not record then
+			if IsValid(client) and client.cotzHideoutMenu == session
+				and client:GetCharacter() == session.character then send() end
+			return
+		end
+		local nextTier = self.propCapacityTiers[self:GetHideoutPropTier(record) + 1]
+		if not self:CanManageHideout(client, record) or not nextTier then
+			session.funding[record.id] = {player = nextTier and nextTier.price or 0, treasury = 0}
+			quote(index + 1)
+			return
+		end
+		self:QuoteHideoutFunding(client, record, nextTier and nextTier.price or 0, function(funding, reason)
+			if not funding then
+				if IsValid(client) then client:Notify(reason or "Squad funding is unavailable.") end
+				return
+			end
+			session.funding[record.id] = funding
+			quote(index + 1)
+		end)
+	end
+	quote(1)
 end
 
 function PLUGIN:ShowContainerMenu(client, entity)
@@ -116,7 +147,7 @@ function PLUGIN:ShowContainerMenu(client, entity)
 	net.WriteUInt(slot.height or 0, 6)
 	net.WriteBool(item ~= nil)
 	if item then
-		net.WriteString(item.name:sub(1, 128))
+		net.WriteString((item.name .. " — squad level " .. ((slot.tier or 0) + 1)):sub(1, 128))
 		net.WriteUInt(tier.width, 6)
 		net.WriteUInt(tier.height, 6)
 	end
@@ -168,14 +199,21 @@ function PLUGIN:UpgradePropCapacity(client, record, expectedTier)
 		return false, "Wait for the hideout to finish loading or saving."
 	end
 	local character = client:GetCharacter()
-	if not character:HasMoney(upgrade.price) then return false, "Not enough roubles." end
+	local session = client.cotzHideoutMenu
+	local funding = session and session.funding and session.funding[record.id]
+	if not funding and record.fundUpgrades ~= true then funding = {player = upgrade.price, treasury = 0} end
+	if not funding or funding.player + funding.treasury ~= upgrade.price
+		or not self:ValidateHideoutFunding(client, record, funding) then
+		return false, "Reopen hideout management for a current payment quote."
+	end
+	if not character:HasMoney(funding.player) then return false, "Not enough roubles for your share." end
 	self.capacityPurchases = self.capacityPurchases or {}
 	self.capacityPurchases[record.id] = true
 	if instance then instance.operations = (instance.operations or 0) + 1 end
 	local function authorize()
 		return IsValid(client) and client:GetCharacter() == character and self:GetHideout(record.id) == record
 			and self:CanManageHideout(client, record) and self:CanUseManagementMenu(client, record.id)
-			and self:GetHideoutPropTier(record) == tier
+			and self:GetHideoutPropTier(record) == tier and self:ValidateHideoutFunding(client, record, funding)
 	end
 	self:CheckCapacityPurchaseRole(client, record, function(allowed)
 		local function finish(ok, reason)
@@ -196,7 +234,9 @@ function PLUGIN:UpgradePropCapacity(client, record, expectedTier)
 		if not allowed or not authorize() then finish(false, "Hideout access changed.") return end
 		self:CommitOperation(client, record, {
 			rank = record.ownerType == "squad" and 1 or nil,
-			moneyDelta = -upgrade.price, payload = {kind = "props", tier = tier + 1}, authorize = authorize,
+			moneyDelta = -funding.player, treasuryDelta = -funding.treasury, treasuryBalance = funding.balance,
+			payload = {kind = "props", tier = tier + 1, treasury = -funding.treasury, paid = funding.player},
+			authorize = authorize,
 		}, finish)
 	end)
 
@@ -231,6 +271,7 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, 
 	if action == 0 then ok, reason = self:UpgradePropCapacity(client, record, expectedTier)
 	elseif action == 1 then ok, reason = self:PlaceSquadEntrance(client, record)
 	elseif action == 2 then ok, reason = self:ResetVendor(client, record)
+	elseif action == 16 then ok, reason = self:SetUpgradeFunding(client, record, value == "1")
 	elseif action == 15 then ok, reason = self:ResetHideoutLayout(client, record)
 	elseif action == 3 then ok, reason = self:SetAccessMode(client, record, value)
 	elseif action == 4 then ok, reason = self:UpgradeContainer(client, record, value, expectedTier)
@@ -274,7 +315,7 @@ end)
 net.Receive("cotz/hideouts/manage-action", function(_, client)
 	if not client:GetCharacter() or (client.cotzManageAction or 0) > CurTime() then return end
 	client.cotzManageAction = CurTime() + 0.5
-	local id, action, value = net.ReadString(), net.ReadUInt(4), net.ReadString()
+	local id, action, value = net.ReadString(), net.ReadUInt(5), net.ReadString()
 	local expectedTier = net.ReadUInt(8)
 	local guestID = net.ReadUInt(32)
 	if #id <= 20 and #value <= 32 then

@@ -25,3 +25,9 @@ function ITEM:PopulateTooltipIndividual(tooltip)
 		ix.util.PropertyDesc(tooltip, "Mutant Meal", Color(0, 255, 0))
 	end
 end
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "debuff_radiation", duration = 10, amount = 4/20},
+	}
+end

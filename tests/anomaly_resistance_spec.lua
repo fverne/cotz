@@ -201,25 +201,22 @@ end
 local unarmored = {GetNWFloat = function(_, _, default) return default end, GetNWInt = function() return 0 end}
 near(ix.suits.GetAnomalyDamage(unarmored, damageInfo(DMG_BURN)), 100, "Missing cache means no protection")
 
--- Verify the tooltip and equipment summary read the independent effective values.
-local displayEnvironment = setmetatable({ix = ix}, {__index = _G})
-assert(load(read("gamemodes/ix_cotz/schema/libs/sh_protectiondisplay.lua"):gsub("!", "not "),
-	"@protection/display", "t", displayEnvironment))()
-local rows = {}
-ix.util.DrawResistance = function(_, name, reduction, flat) rows[name] = {reduction, flat} end
+-- Verify tooltip conversion reads independent effective values without changing the equipment summary.
+dofile("gamemodes/ix_cotz/schema/libs/sh_itemproperties.lua")
 for _, name in ipairs({"getBR", "getSR", "getPR"}) do suit[name] = function() return 1 end end
+for _, name in ipairs({"getFBR", "getFSR", "getFPR", "GetFlatRadProt"}) do suit[name] = function() return 0 end end
 suit.getRadProt = function() return 0 end
+suit.isBodyArmor = true
 suit.data.durability = 40
-ix.util.DrawSuitResistances({
-	GetRow = function() return true end,
-	GetParent = function() return {SizeToContents = function() end} end,
-}, suit)
+local rows = {}
+for _, row in ipairs(ix.itemProperties.GetProtection(suit)) do rows[row.id] = row.text end
 for _, definition in ipairs(ix.suits.anomalyTypes) do
-	local row = assert(rows[definition.name .. ": "])
-	near(row[1], suit[definition.field] / 2, "Tooltip reports current percentage: " .. definition.name)
-	near(row[2], suit[definition.flatField] / 2, "Tooltip reports current flat protection: " .. definition.name)
+	local reduction = suit[definition.field] / 2
+	local flat = suit[definition.flatField] / 2
+	local expected = definition.name .. ": " .. ix.itemProperties.Format(definition.network, reduction)
+		.. "; absorption " .. ix.itemProperties.Format(definition.network, flat / 100)
+	check(rows["protection/" .. definition.network] == expected, "Tooltip effective protection: " .. definition.name)
 end
-check(rows["Anomalous: "] == nil, "Suit tooltip replaces the combined anomaly row")
 PLUGIN = {}
 dofile("gamemodes/ix_cotz/plugins/equipmentslots/cl_layout.lua")
 local panelMethods = {}

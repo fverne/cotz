@@ -1,6 +1,6 @@
 ITEM.name = "IMI Desert Eagle .44"
 ITEM.description= "A large semi-automatic pistol chambered for .44 Magnum"
-ITEM.longdesc = "The IMI Desert Eagle is a semi-automatic handgun notable for chambering the largest centerfire cartridge of any magazine fed, self-loading pistol.\nThis variant is chambered in .44 Magnum.\nCompared to its larger sibling, this variant has a larger magazine and more controllable recoil.\nMore common than the .50 AE variant, but doesn't hit as hard.\n\nAmmo: .44 Magnum\nMagazine Capacity: 8+1"
+ITEM.longdesc = "The IMI Desert Eagle is a semi-automatic handgun notable for chambering the largest centerfire cartridge of any magazine fed, self-loading pistol.\nThis variant is chambered in .44 Magnum.\nCompared to its larger sibling, this variant has a larger magazine and more controllable recoil.\nMore common than the .50 AE variant, but doesn't hit as hard."
 ITEM.model = "models/weapons/w_pist_deagle.mdl"
 ITEM.class = "cw_deagle44"
 ITEM.weaponCategory = "secondary"

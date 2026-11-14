@@ -22,6 +22,10 @@ Moved Lua files retain their original contents; loaders, documentation, and tool
 | `.github/workflows/` | Balance export, import, and validation automation. |
 | `archive/` | Inactive source retained for reference, outside runtime discovery directories. |
 
+The shared `schema/libs/sh_itemproperties.lua` and client `cl_itemproperties.lua` own numerical item
+readings and their PROPERTIES rows across inventory, vendor, equipment and world tooltips.
+See [item properties](item-properties.md) for conversion scales, providers and checks.
+
 The client schema library `schema/libs/cl_cotzui.lua` owns shared COTZ UI styling. It loads before
 gameplay plugins through the existing library loader. See [UI and HUD style](ui-style.md).
 

@@ -1,6 +1,6 @@
 ITEM.name = "Gepard PDW"
 ITEM.description = "A compact personal defence weapon chambered for 9x21mm."
-ITEM.longdesc = "The Gepard PDW concentrates its action and controls into a short body. Its compact outline is markedly less cumbersome than a full-length rifle in a confined interior. The detachable magazine remains a separate, conspicuous part of a weapon designed around keeping the main assembly small.\n\nAmmo: 9x21mm\nMagazine Capacity: 22"
+ITEM.longdesc = "The Gepard PDW concentrates its action and controls into a short body. Its compact outline is markedly less cumbersome than a full-length rifle in a confined interior. The detachable magazine remains a separate, conspicuous part of a weapon designed around keeping the main assembly small."
 ITEM.model = ("models/weapons/tfa_l4d2/w_gepard.mdl")
 ITEM.class = "cw_gepardpdw"
 ITEM.weaponCategory = "primary"

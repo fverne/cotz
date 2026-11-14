@@ -110,32 +110,10 @@ if (CLIENT) then
 end
 
 function ITEM:GetDescription()
-	local str = self.description.." \n\n"..self.longdesc
+	local description = self:GetData("description", self.description)
+	if self.entity or not self.longdesc or self.longdesc == "" then return description end
 
-	if (self.entity) then
-		return (self.description .. "\n \nCleanliness: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
-	else
-		//Attachments
-		str = str.."\n\nAttachments available:\n"
-		if self.canAttach then
-			for i=1, #self.validAttachments do
-				str = str.."- "..ix.weapontables.attachments[self.validAttachments[i]].name
-				if self:GetData("attachments") then
-					local att = self:GetData("attachments")
-					for k=1, #att do
-						if att[k] == self.validAttachments[i] then
-							str = str.." ✓"
-						end
-					end
-				end
-				str = str.."\n"
-			end
-		else
-			str = str.."None\n"
-		end
-
-        return (str .. "\n \nCleanliness: " .. math.floor(self:GetData("wear", 100)) .. "%\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
-	end
+	return description .. "\n\n" .. self.longdesc
 end
 
 function ITEM:PopulateTooltip(tooltip)

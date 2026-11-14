@@ -1,6 +1,6 @@
 ﻿ITEM.name = "Nagant Revolver"
 ITEM.description= "A single action revolver chambered for 7.62x25mm."
-ITEM.longdesc = "The Nagant M1895 Revolver is a seven-shot, gas-seal revolver designed and produced by Belgian industrialist Léon Nagant for the Russian Empire. The Nagant M1895 was chambered for a proprietary cartridge, 7.62×38mmR, and featured an unusual 'gas-seal' system, in which the cylinder moved forward when the gun was cocked. This particular revolver has been modified by a technician to accept 7.62x25, which breaks this gas seal system, but enables it to fire the much more available 7.62x25 cartridge.\n\nAmmo: 7.62x25mm\nMagazine Capacity: 7"
+ITEM.longdesc = "The Nagant M1895 Revolver is a seven-shot, gas-seal revolver designed and produced by Belgian industrialist Léon Nagant for the Russian Empire. The Nagant M1895 was chambered for a proprietary cartridge, 7.62×38mmR, and featured an unusual 'gas-seal' system, in which the cylinder moved forward when the gun was cocked. This particular revolver has been modified by a technician to accept 7.62x25, which breaks this gas seal system, but enables it to fire the much more available 7.62x25 cartridge."
 ITEM.model = "models/weapons/tfa_ins2/wpn_m1895_w.mdl"
 ITEM.class = "cw_nagantrev"
 ITEM.weaponCategory = "secondary"

@@ -1,6 +1,6 @@
 ITEM.name = "AK-12"
 ITEM.description= "A Russian assault rifle. Fires 5.45x39mm."
-ITEM.longdesc = "The AK-12, also known as the AK-200, is the newest member of the AK family.\nWhile the Russian army had no interest in purchasing any of these because of their massive supply of AK-74's, the AK-12 is still a highly modular and effective weapon platform.\nThis rifle is rare to find, but easy to keep in good condition and easy to find ammunition for.\n\nAmmo: 5.45x39mm \nMagazine Capacity: 30"
+ITEM.longdesc = "The AK-12, also known as the AK-200, is the newest member of the AK family.\nWhile the Russian army had no interest in purchasing any of these because of their massive supply of AK-74's, the AK-12 is still a highly modular and effective weapon platform.\nThis rifle is rare to find, but easy to keep in good condition and easy to find ammunition for."
 ITEM.model = "models/weapons/w_rif_ak12.mdl"
 ITEM.class = "cw_ak12"
 ITEM.weaponCategory = "primary"

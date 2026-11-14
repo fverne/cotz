@@ -1,6 +1,6 @@
 ITEM.name = "Ruger MKIII"
 ITEM.description= "An internally silenced target practice pistol chambered for .22LR."
-ITEM.longdesc = "The Ruger Mark III is a .22 Long Rifle semi-automatic pistol manufactured by Sturm, Ruger & Company.\nIt is the successor to the Ruger MK II, and includes several new features.\n\nAmmo: .22LR\nMagazine Capacity: 10"
+ITEM.longdesc = "The Ruger Mark III is a .22 Long Rifle semi-automatic pistol manufactured by Sturm, Ruger & Company.\nIt is the successor to the Ruger MK II, and includes several new features."
 ITEM.model = ("models/weapons/w_pist_ruger23a1.mdl")
 ITEM.class = "cw_rugermk3"
 ITEM.weaponCategory = "secondary"

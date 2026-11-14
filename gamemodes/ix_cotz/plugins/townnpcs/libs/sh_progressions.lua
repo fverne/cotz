@@ -53,6 +53,7 @@ function PLUGIN:BuildProgressions()
 				townContact = slug,
 				townKind = step.kind,
 				townBranch = step.branch,
+				hideoutLevel = step.hideoutLevel,
 				categoryOnly = step.categoryOnly,
 				-- Entry steps still open when their newly linked parent was completed before this update.
 				defaultActive = step.defaultActive == true or step.branchIndex == 1
@@ -118,6 +119,10 @@ function PLUGIN:BuildProgressions()
 				definition.progressthresholds = {self:ScaleProgressionEffort(contact, step.target or 1)}
 				definition.progressfunctions = {}
 			end
+			if step.hideoutLevel then
+				definition.progressthresholds = {1}
+				definition.progressfunctions = {}
+			end
 			if step.kind == "field" then definition.townCommission = "cotz/town/commission/" .. slug .. "/" .. step.id end
 			ix.progression.Register(id, definition)
 			self.steps[id] = step
@@ -138,7 +143,8 @@ function PLUGIN:OnCompleted(character, id)
 	local step = self.steps[id]
 	if not step then return end
 	if SERVER then
-		ix.progression.PayCompletionRewards(character, id)
+		local line = ix.progression.GetLine(character, id)
+		if not step.hideoutLevel or line.rewardCredit then ix.progression.PayCompletionRewards(character, id) end
 		self:AdvanceCounters(character)
 	end
 end

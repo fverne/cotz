@@ -50,3 +50,7 @@ ITEM.functions.use = {
 		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:GetIndividualProperties()
+	return {{id = "glucose", text = "Nutritional energy: " .. ix.itemProperties.Format("nutrition", 40, true)}}
+end

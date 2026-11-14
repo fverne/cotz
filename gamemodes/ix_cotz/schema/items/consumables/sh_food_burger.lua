@@ -24,3 +24,8 @@ ITEM.blackScreenAction = function(item, player)
 end
 
 ITEM:DecideFunction()
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "debuff_psy", duration = 5, amount = 40 / (5 * 2)},
+	}
+end

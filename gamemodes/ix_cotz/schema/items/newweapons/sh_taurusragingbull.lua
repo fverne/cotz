@@ -1,6 +1,6 @@
 ITEM.name = "Taurus Raging Bull"
 ITEM.description= "A double-action revolver chambered for .44 Magnum."
-ITEM.longdesc = "This Brazilian made revolver has somehow made in into the zone. The Raging Bull is a popular hunting weapon, as the great stopping power afforded by the large calibers it fires is handy when hunting bigger game. In the Zone, STALKERs pick up this revolver to have an edge against the dangerous wildlife.\n\nAmmo: .44 Magnum\nMagazine Capacity: 6"
+ITEM.longdesc = "This Brazilian made revolver has somehow made in into the zone. The Raging Bull is a popular hunting weapon, as the great stopping power afforded by the large calibers it fires is handy when hunting bigger game. In the Zone, STALKERs pick up this revolver to have an edge against the dangerous wildlife."
 ITEM.model = ("models/weapons/w_raging_bull.mdl")
 ITEM.class = "cw_ragingbull"
 ITEM.weaponCategory = "secondary"

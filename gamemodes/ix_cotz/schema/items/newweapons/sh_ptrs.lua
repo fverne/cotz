@@ -1,6 +1,6 @@
 ITEM.name = "PTRS-41"
 ITEM.description= "A humongous anti-tank rifle. Fires 14.5x114mm."
-ITEM.longdesc = "The PTRS-41 is an anti-tank rifle developed during World War II. While it no longer puts up a threat against anything larger than an early BTR, it will take out any of the beasts or armored figures in the Zone with a single shot to center mass.\nIt's big, bulky and weighs 20 kilograms unloaded, requiring an exoskeleton or very strong arms to be carried and fired without problems.\nAmmunition is very hard to find as it is only shared by the military's armored troop carriers.\n\nAmmo: 14.5x114mm \nMagazine Capacity: 5"
+ITEM.longdesc = "The PTRS-41 is an anti-tank rifle developed during World War II. While it no longer puts up a threat against anything larger than an early BTR, it will take out any of the beasts or armored figures in the Zone with a single shot to center mass.\nIt's big, bulky and heavy even unloaded, requiring an exoskeleton or very strong arms to be carried and fired without problems.\nAmmunition is very hard to find as it is only shared by the military's armored troop carriers."
 ITEM.model = ("models/weapons/w_grub_ptrs.mdl")
 ITEM.class = "cw_ptrs"
 ITEM.weaponCategory = "primary"

@@ -125,3 +125,9 @@ ITEM.functions.usetarget = {
 		return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
 	end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_rapidheal", duration = 20, amount = self.restore/20},
+	}
+end

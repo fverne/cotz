@@ -10,6 +10,8 @@ ITEM.rarity = 6
 ITEM.baseweight = 0.180
 ITEM.varweight  = 0.100
 
+ITEM.contactDamage = 10
+
 ITEM.fueltier = 1
 
 ITEM.exRender = true
@@ -29,7 +31,7 @@ ITEM:Hook("take", function(item)
 
 		local TEMP_TargetDamage = DamageInfo()
 						
-		TEMP_TargetDamage:SetDamage(10)
+		TEMP_TargetDamage:SetDamage(item.contactDamage)
 		TEMP_TargetDamage:SetAttacker(item.player)
 		TEMP_TargetDamage:SetDamageType(DMG_BURN)
 		TEMP_TargetDamage:SetInflictor(item.player)
@@ -60,3 +62,8 @@ ITEM.functions.combine = {
 		return false
 	end,
 }
+
+function ITEM:GetIndividualProperties()
+	return {{id = "contactDamage", text = "Pickup injury: "
+		.. ix.itemProperties.Format("health", -self.contactDamage)}}
+end

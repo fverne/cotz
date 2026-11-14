@@ -160,7 +160,8 @@ Test("upgrade consumption recovers its entitlement without consuming a second co
 	PLUGIN.state.templates.room.containers = {left = {recipe = "general", pos = Vector()},
 		right = {recipe = "general", pos = Vector(40, 0, 0)}}
 	ix.item.list.value_container_smallitems = {model = "case.mdl", name = "Case"}
-	local input = FeatureItem(inventory, {}, "value_container_smallitems")
+	local input = FeatureItem(inventory, {cotzHideoutCrate = {level = 1, squad = true, version = 1}},
+		"hideout_crate_general")
 	local entity = NewEntity(nil, instance.origin)
 	entity.ixHideout, entity.ixHideoutSlot = record.id, "left"
 	instance.containers.left = entity
@@ -171,7 +172,7 @@ Test("upgrade consumption recovers its entitlement without consuming a second co
 	assert(tonumber(sql.QueryValue("SELECT COUNT(*) FROM ix_items")) == 0)
 	record.containers.left.tier = 0
 	PLUGIN:RecoverUpgradeEntitlements(function(ok) assert(ok) end)
-	assert(record.containers.left.tier == 1 and record.containers.left.width == 3)
+	assert(record.containers.left.tier == 1 and record.containers.left.width == 4)
 	assert(tonumber(sql.QueryValue("SELECT COUNT(*) FROM ix_items")) == 0)
 end)
 

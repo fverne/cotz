@@ -12,7 +12,7 @@ local function personalHome()
 		medical = {recipe = "medical", pos = Vector(-40, 0, 0)}, weapon = {recipe = "weapon", pos = Vector(0, 40, 0)},
 	}
 	for _, recipe in pairs(PLUGIN.personalContainerRecipes) do
-		ix.item.list[recipe.item] = {model = recipe.models[1], name = recipe.name, width = 1, height = 1}
+		ix.item.list[recipe.item] = {model = recipe.models[1], name = recipe.name, width = 2, height = 2}
 	end
 	assert(PLUGIN:PreparePersonalStorage(instance))
 	local target = NewEntity(nil, owner:GetPos())
@@ -153,17 +153,19 @@ Test("container upgrades preserve inventory, sharing, contents and change model 
 	target.GetClass = function() return "ix_hideout_storage" end
 	target.ixHideout, target.ixHideoutSlot = record.id, "general"
 	instance.containers.general = target
+	FeatureItem(inventory, {cotzHideoutCrate = {level = quote.level, squad = false, version = 1}}, quote.item)
 	assert(PLUGIN:PurchasePersonalOffer(owner, target, quote))
 	local slot = record.containers.general
 	local id = slot.inventoryID
 	local storage = ix.inventory.Get(id)
 	local item = FeatureItem(storage, {name = "Keep this"})
 	quote = PLUGIN:BuildPersonalOffer(owner, record, "container", "general")
+	FeatureItem(inventory, {cotzHideoutCrate = {level = quote.level, squad = false, version = 1}}, quote.item)
 	assert(PLUGIN:PurchasePersonalOffer(owner, target, quote))
 	assert(slot.tier == 3 and slot.width == 3 and slot.height == 4)
 	assert(slot.inventoryID == id and slot.public and item.invID == id)
 	assert(instance.containers.general.model == PLUGIN.personalContainerRecipes.general.tiers[3].model)
-	assert(not PLUGIN:BuildPersonalOffer(owner, record, "container", "general").allowed)
+	assert(PLUGIN:BuildPersonalOffer(owner, record, "container", "general").allowed)
 	PLUGIN.instances, PLUGIN.members = {}, {}
 	local offline = PLUGIN:BuildPersonalOffer(owner, record, "container", "ammo")
 	local input = FeatureItem(inventory, {}, offline.item)
@@ -452,6 +454,7 @@ Test("fridge installation filters consumables and preserves its inventory throug
 	local inventoryID = slot.inventoryID
 	quote = PLUGIN:BuildPersonalOffer(owner, record, "container", "fridge")
 	assert(not PLUGIN:PurchasePersonalOffer(owner, door, quote))
+	FeatureItem(inventory, {cotzHideoutCrate = {level = quote.level, squad = false, version = 1}}, quote.item)
 	assert(PLUGIN:PurchasePersonalOffer(owner, entity, quote))
 	assert(slot.tier == 2 and slot.inventoryID == inventoryID and food.invID == inventoryID)
 	assert(entity.model == "models/props_c17/FurnitureFridge001a.mdl")
@@ -511,10 +514,10 @@ Test("all twelve levels grow monotonically while general crates remain far small
 			if previous then
 				assert(tier.width >= previous.width and tier.height >= previous.height)
 				assert(tier.width * tier.height > previous.width * previous.height)
-				assert(tier.price / (tier.width * tier.height) > previous.price / (previous.width * previous.height))
+				assert(tier.price == 0 and previous.price == 0)
 			end
 			local general = PLUGIN.personalContainerRecipes.general.tiers[level]
-			if name ~= "general" then
+			if name == "gear" or name == "weapon" or name == "fridge" then
 				assert(tier.width * tier.height >= 2.5 * general.width * general.height, name .. " level " .. level)
 			end
 		end

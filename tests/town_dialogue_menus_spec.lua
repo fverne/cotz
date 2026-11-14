@@ -106,8 +106,21 @@ legacyAvailable = false
 ix.dialogue.ConfigureBarterVisibility(ix.dialogue.list.tradernpc)
 check(not hagglerTree.StartBarter:ShouldAdd(client, haggler), "barter visibility remains idempotent")
 local ballastTree = ix.dialogue.list.ballastnpc.tree
-check(ballastTree.StartBarter:ShouldAdd(client, target("'Ballast'")), "available free hideout claims retain barter access")
 local originalGet = ix.plugin.Get
+local opened
+local hideouts = {GetCrateRecipe = function() end, OpenCrateBarter = function(_, player, vendor)
+	opened = {player, vendor}
+end}
+ix.plugin.Get = function(id) if id == "hideouts" then return hideouts end return originalGet(id) end
+check(ballastTree.HideoutBarter:ShouldAdd(client, target("'Ballast'")),
+	"the local hideout contact exposes crate barter when its plugin is available")
+local wasServer = SERVER
+SERVER = true
+local ballast = target("'Ballast'")
+ballastTree.HideoutBarter:preCallback(client, ballast)
+SERVER = wasServer
+check(opened and opened[1] == client and opened[2] == ballast, "the barter topic opens the authoritative crate menu")
 ix.plugin.Get = function(id) if id ~= "hideouts" then return originalGet(id) end end
-check(not ballastTree.StartBarter:ShouldAdd(client, target("'Ballast'")), "unavailable child services cannot expose a barter root")
+check(not ballastTree.HideoutBarter:ShouldAdd(client, ballast), "crate barter hides when hideouts are unavailable")
+ix.plugin.Get = originalGet
 print(string.format("PASS: %d town dialogue menu checks", checks))

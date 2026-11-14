@@ -30,6 +30,7 @@ end
 timer = {Simple = function() end}
 dofile("gamemodes/ix_cotz/plugins/buffs/sh_bleeding.lua")
 dofile("gamemodes/ix_cotz/plugins/buffs/sv_bleeding.lua")
+dofile("gamemodes/ix_cotz/plugins/buffs/sv_bandageclotting.lua")
 dofile("gamemodes/ix_cotz/plugins/buffs/sv_persistence.lua")
 local buffs = PLUGIN
 ix.plugin.Get = function() return buffs end
@@ -102,7 +103,18 @@ local function player(severity)
 	function client:GetNetVar(key, default) return self.vars[key] or default end
 	function client:SetNetVar(key, value) self.vars[key] = value end
 	function client:GetBuffs() return self:GetNetVar("buffs", {}) end
-	function client:AddBuff(_, duration, parameters) self.healing = {duration, parameters.amount} end
+	function client:HasBuff(name) return self:GetBuffs()[name] end
+	function client:AddBuff(name, duration, parameters)
+		local current = self:GetBuffs()
+		current[name] = {now + duration, parameters}
+		self:SetNetVar("buffs", current)
+	end
+	function client:RemoveBuff(name) self:GetBuffs()[name] = nil end
+	function client:Health() return self.health end
+	function client:GetMaxHealth() return 100 end
+	function client:SetHealth(health) self.health = health end
+	function client:GetPos() return {DistToSqr = function() return self.distanceSquared or 0 end} end
+	function client:WorldSpaceCenter() return 0 end
 	function client:TakeDamageInfo(info)
 		check(info.kind == DMG_GENERIC and info.attacker == world and info.inflictor == world,
 			"bleeding must use generic world damage")
@@ -258,7 +270,7 @@ buffs:StopBleeding(blockedFeedback)
 buffs:StopBleeding(delayedFeedback)
 settings.bleedingClotRate = 1
 
--- Exercise the real bandage definitions and inherited aid helpers with action mocks.
+-- Exercise real definitions and inherited helpers with action completion/cancellation mocks.
 CLIENT = false
 Color = function() return {} end
 Vector = function() end
@@ -266,11 +278,15 @@ Angle = function() end
 ITEM = {Hook = function() end}
 dofile("gamemodes/ix_cotz/schema/items/base/sh_aid.lua")
 local base = ITEM
-local pending, target
+local pending, target, failAction
 ix.util.PropertyDesc = function() end
-ix.util.PlayerPerformItemAction = function(actor, _, _, _, callback)
+ix.util.PlayerPerformItemAction = function(actor, _, _, duration, callback)
+	if failAction then return false end
+	check(duration == 2, "both application actions take two seconds")
 	actor.vars.ix_noMenuAllowed = true
 	pending = callback
+
+	return true
 end
 ix.chat = {Send = function() end}
 util = {TraceLine = function() return {Entity = target} end}
@@ -284,21 +300,47 @@ for tier, strength in ipairs({20, 50, 90}) do
 	ITEM = setmetatable({functions = {}}, {__index = base})
 	dofile("gamemodes/ix_cotz/schema/items/aid/sh_medic_bandage_" .. tier .. ".lua")
 	local item = setmetatable({player = actor, invID = 1, data = {}}, {__index = ITEM})
-	function item:GetData(key, default) return self.data[key] or default end
+	function item:GetData(key, default)
+		if self.data[key] ~= nil then return self.data[key] end
+
+		return default
+	end
 	function item:SetData(key, value) self.data[key] = value end
 	actor.vars.ix_noMenuAllowed = false
+	actor:SetNetVar("buffs", {})
+	actor.health = 50
 	buffs:SetBleedingSeverity(actor, 100)
 	check(item.functions.use.OnRun(item) == false, "multi-use bandage retained")
 	check(item.data.quantity == 2, "self-use consumes one charge at start")
 	check(item.functions.use.OnRun(item) == false and item.data.quantity == 2, "overlap rejected")
+	near(actor.health, 50, "no heal before completion")
+	local completion = pending
 	actor.vars.ix_noMenuAllowed = false
-	pending(actor)
-	near(buffs:GetBleeding(actor), 100 - strength, "self treatment strength")
+	completion(actor)
+	near(actor.health, 50 + ({6, 9, 12})[tier], "tier completion heal")
+	completion(actor)
+	near(actor.health, 50 + ({6, 9, 12})[tier], "completion is idempotent")
+	near(buffs:GetBleeding(actor), 100, "no instant severity subtraction")
+	for second = 1, 6 do
+		now = now + 1
+		buffs:ProcessBandageClotting(actor)
+		near(buffs:GetBleeding(actor), 100 - strength * second / 6, "even six-second clotting")
+	end
+	now = now + 20
+	buffs:ProcessBandageClotting(actor)
+	near(buffs:GetBleeding(actor), 100 - strength, "expiry cannot over-treat")
 	target = player(100)
+	target.health = 99
 	function target:Name() return "Target" end
 	item.functions.usetarget.OnRun(item)
-	near(buffs:GetBleeding(target), 100 - strength, "target treatment strength")
-	check(item.data.quantity == 1, "target consumes once")
+	near(buffs:GetBleeding(target), 100, "target treatment waits for completion")
+	check(item.data.quantity == 1, "target consumes once at start")
+	actor.vars.ix_noMenuAllowed = false
+	pending(actor)
+	near(target.health, 100, "target healing capped at maximum")
+	now = now + 6
+	buffs:ProcessBandageClotting(target)
+	near(buffs:GetBleeding(target), 100 - strength, "target strength matches self even after a delayed frame")
 	buffs:SetBleedingSeverity(actor, 100)
 	item.functions.use.OnRun(item)
 	local callback = pending
@@ -308,7 +350,6 @@ for tier, strength in ipairs({20, 50, 90}) do
 	near(buffs:GetBleeding(actor), 100, "character transition invalidates delayed action")
 	item.data.quantity = 3
 	item.functions.use.OnRun(item)
-	-- The shared black-screen helper suppresses callbacks on cancellation.
 	actor.vars.ix_noMenuAllowed = false
 	near(buffs:GetBleeding(actor), 100, "canceling does not treat bleeding")
 	check(item.data.quantity == 2, "cancellation retains start-time consumption")
@@ -316,19 +357,65 @@ for tier, strength in ipairs({20, 50, 90}) do
 	callback = pending
 	actor.health = 0
 	callback(actor)
-	near(buffs:GetBleeding(actor), 100, "dead actor cannot receive delayed treatment")
+	near(buffs:GetBleeding(actor), 100, "dead actor cannot receive treatment")
 	actor.health = 100
 	actor.vars.ix_noMenuAllowed = false
 	target.invalid = true
 	local quantity = item.data.quantity
 	check(item.functions.usetarget.OnRun(item) == false and item.data.quantity == quantity,
-		"invalid target does not consume a charge")
+		"invalid target does not consume")
 	item.data.quantity = 0
 	check(item.functions.use.OnRun(item) == false, "empty bandage rejected")
 	item.data.quantity = 3
 	item.invID = 2
 	check(item.functions.use.OnRun(item) == false, "foreign inventory rejected")
+	item.invID = 1
+	failAction = true
+	item.functions.use.OnRun(item)
+	check(item.data.quantity == 3 and actor.cotzBandageAction == nil, "failed action does not consume or lock")
+	failAction = false
 end
+local treated = player(100)
+buffs:StartBandageClotting(treated, 50, 6)
+now = now + 2
+buffs:StartBandageClotting(treated, 20, 6)
+near(treated:HasBuff("buff_bandageclotting")[2].amount, 50 / 6, "weaker bandage cannot downgrade")
+near(treated:HasBuff("buff_bandageclotting")[1] - now, 4, "weaker bandage cannot extend")
+buffs:StartBandageClotting(treated, 50, 6)
+near(treated:HasBuff("buff_bandageclotting")[1] - now, 6, "equal strength refreshes")
+buffs:StartBandageClotting(treated, 90, 6)
+near(treated:HasBuff("buff_bandageclotting")[2].amount, 15, "stronger bandage replaces")
+local clotting = player(100)
+settings.bleedingDamageScale = 0
+buffs:RestoreBleeding(clotting)
+buffs:StartBandageClotting(clotting, 20, 6)
+for second = 1, 6 do
+	now = now + 1
+	buffs:ProcessBandageClotting(clotting)
+	buffs:ProcessBleeding()
+end
+near(buffs:GetBleeding(clotting), 74, "natural clotting adds six to bandage's twenty")
+-- Target changes invalidate completion, while the original charge remains consumed.
+local item = setmetatable({player = actor, invID = 1, data = {}}, {__index = ITEM})
+function item:GetData(key, default) return self.data[key] or default end
+function item:SetData(key, value) self.data[key] = value end
+for _, change in ipairs({"range", "visibility", "character", "death"}) do
+	actor.vars.ix_noMenuAllowed = false
+	actor.distanceSquared = 0
+	target = player(100)
+	item.data.quantity = 3
+	item.functions.usetarget.OnRun(item)
+	local original = target
+	if change == "range" then actor.distanceSquared = 10000 end
+	if change == "visibility" then target = {} end
+	if change == "character" then original.character = character(100) end
+	if change == "death" then original.health = 0 end
+	local health = original.health
+	pending(actor)
+	near(original.health, health, "invalidated target: " .. change)
+	check(not original:HasBuff("buff_bandageclotting"), "invalidated target receives no clotting: " .. change)
+end
+actor.distanceSquared = 0
 -- Failed rolls must not postpone the already scheduled clot/damage tick.
 local ongoing = player(40)
 buffs:PlayerLoadedCharacter(ongoing)

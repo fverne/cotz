@@ -15,12 +15,13 @@ PLUGIN.personalUnlockSteps = {
 	gear = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	floor = {2, 4}, furnishing = {3}, cassette = {1},
 }
+-- Retain the existing loose-item allowance price curve. Crates have their own assembly curve.
 PLUGIN.personalPriceMultiplier = 2.2
 PLUGIN.personalUpgradePrices = {floor = 500, furnishing = 5000, cassette = 1500}
 
 PLUGIN.personalContainerRecipes = {
 	fridge = {
-		name = "Fridge", filter = "food", price = 1000, item = "value_container_smallitems",
+		name = "Fridge", filter = "food", price = 1000, item = "hideout_crate_fridge",
 		sizes = {
 			{6, 4}, {7, 4}, {7, 6}, {8, 6}, {8, 8}, {9, 8},
 			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
@@ -28,7 +29,7 @@ PLUGIN.personalContainerRecipes = {
 		models = {"models/props_c17/FurnitureFridge001a.mdl", "models/props_c17/FurnitureFridge001a.mdl"},
 	},
 	general = {
-		name = "General crate", filter = "general", price = 600, item = "value_container_smallitems",
+		name = "General crate", filter = "general", price = 600, item = "hideout_crate_general",
 		sizes = {{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}},
 		models = {
 			"models/lostsignalproject/items/misc/backpack.mdl",
@@ -36,17 +37,17 @@ PLUGIN.personalContainerRecipes = {
 		},
 	},
 	ammo = {
-		name = "Ammunition container", filter = "ammo", price = 900, item = "value_container_ammo",
+		name = "Ammunition container", filter = "ammo", price = 900, item = "hideout_crate_ammo",
 		sizes = {{4, 4}, {5, 4}, {5, 5}, {6, 5}, {6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8}, {9, 9}, {10, 9}},
 		models = {"models/cotz/eft/lootcont/ammo_crate_wood.mdl", "models/cotz/eft/lootcont/scontainer_ammo_grenade.mdl"},
 	},
 	medical = {
-		name = "Medical cabinet", filter = "medical", price = 1000, item = "value_container_injectorcase",
+		name = "Medical cabinet", filter = "medical", price = 1000, item = "hideout_crate_medical",
 		sizes = {{4, 4}, {5, 4}, {5, 5}, {6, 5}, {6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8}, {9, 9}, {10, 9}},
 		models = {"models/illusion/eftcontainers/ifak.mdl", "models/illusion/eftcontainers/ifak.mdl"},
 	},
 	gear = {
-		name = "Suit and gear locker", filter = "gear", price = 1400, item = "value_container_parls",
+		name = "Suit and gear locker", filter = "gear", price = 1400, item = "hideout_crate_gear",
 		sizes = {
 			{6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8},
 			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
@@ -54,7 +55,7 @@ PLUGIN.personalContainerRecipes = {
 		models = {"models/props_c17/Lockers001a.mdl", "models/props_wasteland/controlroom_storagecloset001b.mdl"},
 	},
 	weapon = {
-		name = "Weapon rack", filter = "weapon", price = 1400, item = "value_container_parls",
+		name = "Weapon rack", filter = "weapon", price = 1400, item = "hideout_crate_weapon",
 		sizes = {
 			{6, 4}, {7, 4}, {7, 6}, {8, 6}, {8, 8}, {9, 8},
 			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
@@ -63,14 +64,13 @@ PLUGIN.personalContainerRecipes = {
 	},
 }
 
--- Each extra level costs 2.2 times as much; capacity grows only by a row or column.
+-- Assembly pays the cash and salvage cost. Installation consumes one matching crate at every level.
 for _, recipe in pairs(PLUGIN.personalContainerRecipes) do
 	recipe.tiers = {}
 	for level, size in ipairs(recipe.sizes) do
 		recipe.tiers[level] = {
 			width = size[1], height = size[2],
-			price = math.ceil(recipe.price * PLUGIN.personalPriceMultiplier ^ (level - 1)),
-			item = level == 1 and recipe.item or nil,
+			price = 0, item = recipe.item,
 			model = recipe.models[level < 3 and 1 or 2],
 		}
 	end

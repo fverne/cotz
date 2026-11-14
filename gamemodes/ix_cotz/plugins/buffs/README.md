@@ -42,10 +42,30 @@ Offline time pauses severity; fractional HP and tick scheduling restart on load.
 including when a corpse remains revivable. Spawn restores severity instead of clearing it.
 Only rounded severity changes are replicated through the owner's `bleedingSeverity` local variable.
 
-Gauze, elastic, and compression bandages remove 20, 50, and 90 severity, on both self and target use.
-Their concrete definitions declare `bleedRestore`. Existing healing and consumption remain unchanged:
-self-use consumes on starting the ten-second action, even if canceled; target-use is immediate.
+Gauze, elastic, and compression bandages apply 20, 50, and 90 **additional** severity reduction
+evenly over six seconds, alongside natural clotting. Both self-use and target-use take two seconds.
+Successful application immediately heals the recipient for 6, 9, or 12 HP, capped at maximum health,
+and starts `buff_bandageclotting`. No old bandage stamina or instant severity reduction is applied.
 Medkits do not treat bleeding. Healing does not stop bleeding by itself.
+
+Concrete bandages declare `bleedRestore`, `restoreduration`, `restore` and `applicationTime`.
+The shared aid helper validates ownership/charges and locks overlapping actions. One charge is
+consumed on starting either application, including a later cancellation or invalidated recipient.
+Failed starts do not consume charges. Completion rechecks life, both character identities, range
+(96 Source units) and line of sight, and can apply its effects only once.
+
+`StartBandageClotting(client, total, duration)` starts the server-owned effect. It returns false for
+invalid inputs or a stronger ongoing treatment. Equal strength refreshes duration, stronger treatment
+replaces it and weaker treatment does not extend or downgrade it. Completed applications still grant
+their own immediate heal. The treatment is active even if the wound clots before its duration ends.
+
+`ProcessBandageClotting(client, now)` integrates elapsed time with a remaining-treatment budget,
+including fractional time. It settles before buff expiry and saves so the expiry boundary cannot
+lose a final tick. Its character buff snapshot saves remaining duration and treatment; live clock
+anchors stay on the player. Reconnects and character switches pause/resume treatment without granting
+the completion heal again. Death clears it. No SQL migration or character reset is needed.
+The HUD displays a clotting countdown. [Item properties](../../../../docs/item-properties.md) describes
+the cosmetic Anomaly conversion and property providers.
 
 Run `luatex --luaonly tests/buffs_persistence_spec.lua` and
 `luatex --luaonly tests/bleeding_spec.lua` from the repository root.

@@ -172,3 +172,21 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item:GetData("contains", item.contains)>0 and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetPropertyEffects()
+	local contains = self:GetData("contains", self.contains)
+	if contains == 0 or contains == 3 then return {} end
+	if contains == 2 then return {{buff = "debuff_radiation", duration = 10, amount = 0.2}} end
+
+	return {
+		{buff = "debuff_radiation", duration = 10, amount = 0.5},
+		{buff = "debuff_psy", duration = 10, amount = 0.25},
+	}
+end
+
+function ITEM:GetIndividualProperties()
+	local contains = self:GetData("contains", self.contains)
+	local thirst = ({[0] = 0, 8, 12, 15})[contains]
+
+	return {{id = "flaskHydration", text = "Hydration: " .. ix.itemProperties.Format("hydration", thirst, true)}}
+end

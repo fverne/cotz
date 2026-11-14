@@ -1,6 +1,6 @@
 ITEM.name = "Mauser C96"
 ITEM.description= "A semi-automatic pistol that was originally produced by German arms manufacturer Mauser from 1896 to 1937."
-ITEM.longdesc = "It has a few distinctive characteristics, mainly the integral box magazine in front of the trigger, \nthe long barrel and an iconic grip shaped like the handle of a broom.\nWith its long barrel and high-velocity cartridge, the Mauser C96 had superior range and better penetration than most other pistols of its era.\n\nAmmo: 7.62x25mm\nMagazine Capacity: 10"
+ITEM.longdesc = "It has a few distinctive characteristics, mainly the integral box magazine in front of the trigger, \nthe long barrel and an iconic grip shaped like the handle of a broom.\nWith its long barrel and high-velocity cartridge, the Mauser C96 had superior range and better penetration than most other pistols of its era."
 ITEM.model = "models/khrcw2/doipack/w_c96.mdl"
 ITEM.class = "cw_c96"
 ITEM.weaponCategory = "secondary"

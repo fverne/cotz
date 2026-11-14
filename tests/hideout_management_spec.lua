@@ -41,7 +41,7 @@ LocalPlayer = function() return owner end
 player = {GetHumans = function() return {owner, invited, stranger} end}
 dofile("gamemodes/ix_cotz/plugins/hideouts/cl_management.lua")
 
-reads = {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000,
+reads = {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, false, false, 0, 5000,
 	2, 2, "Invited", 4, "Character #4"}
 callbacks["cotz/hideouts/manage"]()
 assert(readIndex == #reads)
@@ -52,7 +52,7 @@ assert(sent[1] == "1" and sent[2] == 7 and sent[3] == "4")
 buttons["Invite character"]()
 assert(#options == 2 and options[1][1] == "Invited" and options[2][1] == "Stranger")
 
-readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, 0}
+readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, false, false, 0, 5000, 0}
 callbacks["cotz/hideouts/manage"]()
 buttons["Revoke invitation"]()
 assert(#options == 0)
@@ -61,7 +61,7 @@ print("PASS: invitation menus show saved invitees, including offline characters,
 local confirmation
 ix.cotzUI.Query = function(message, title, label, callback) confirmation = callback end
 panel.nextRequest = nil
-readIndex, reads = 0, {"exit", 1, "1", "Home", false, "invite", true, true, 1, 30, 40, 5000, 0}
+readIndex, reads = 0, {"exit", 1, "1", "Home", false, "invite", true, true, 1, 30, 40, 5000, false, false, 0, 5000, 0}
 callbacks["cotz/hideouts/manage"]()
 buttons["Reset hideout layout"]()
 assert(confirmation and sent[2] ~= 15)
@@ -78,7 +78,7 @@ assert(sent[1] == "1" and sent[2] == 0 and sent[4] == 1)
 print("PASS: prop capacity upgrades confirm the price and send the displayed tier")
 
 dofile("gamemodes/ix_cotz/plugins/hideouts/cl_personal.lua")
-readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, 0}
+readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, false, false, 0, 5000, 0}
 callbacks["cotz/hideouts/manage"]()
 buttons["Hideout improvements"]()
 assert(sent[1] == "1" and sent[2] == "")
@@ -89,3 +89,19 @@ assert(readIndex == #reads)
 buttons["Upgrade this container"]()
 assert(sent[1] == "1" and sent[2] == "")
 print("PASS: personal door and container controls request their server-bound purchase submenu")
+
+panel.nextRequest = nil
+readIndex, reads = 0, {"squad", 1, "1", "Squad home", true, "squad", true, false,
+	1, 30, 40, 5000, true, false, 0, 5000, 0}
+callbacks["cotz/hideouts/manage"]()
+buttons["Use squad vendor funds for hideout upgrades: off"]()
+assert(sent[1] == "1" and sent[2] == 16 and sent[3] == "1")
+local paymentText
+ix.cotzUI.Query = function(message, title, label, callback) paymentText, confirmation = message, callback end
+readIndex, reads = 0, {"squad", 1, "1", "Squad home", true, "squad", true, false,
+	1, 30, 40, 5000, true, true, 3000, 2000, 0}
+callbacks["cotz/hideouts/manage"]()
+buttons["Upgrade prop capacity to 40 (5000 roubles)"]()
+assert(paymentText:find("Treasury: 3000 roubles", 1, true)
+	and paymentText:find("your share: 2000 roubles", 1, true))
+print("PASS: leader funding controls send the setting action and confirmations show both payment shares")

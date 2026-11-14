@@ -1,6 +1,6 @@
 ﻿ITEM.name = "G2 Contender (.500 Magnum)"
 ITEM.description= "A markmanship pistol chambered in .500 ACP."
-ITEM.longdesc = "Outside of the zone, it is mainly used in marksmanship competitions, as its high accuracy makes it very suited for it. The only issue is its low ammo capacity, as only a single round can be fired at a time. This specific specimen has been reworked and rechambered for the monstrous .500 Magnum round.\n\nAmmo: .500 Magnum\nMagazine Capacity: 1"
+ITEM.longdesc = "Outside of the zone, it is mainly used in marksmanship competitions, as its high accuracy makes it very suited for it. The only issue is its low ammo capacity, as only a single round can be fired at a time. This specific specimen has been reworked and rechambered for the monstrous .500 Magnum round."
 ITEM.model = "models/cw2/pistols/w_contender.mdl"
 ITEM.class = "cw_contender500"
 ITEM.weaponCategory = "secondary"

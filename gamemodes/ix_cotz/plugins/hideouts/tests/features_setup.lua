@@ -80,6 +80,7 @@ function FeatureClient(id, balance)
 	function character:TakeMoney(amount) self.money = self.money - amount end
 	function character:GiveMoney(amount) self.money = self.money + amount end
 	function character:GetFlags() return "" end
+	function character:UpdateWeight() self.weightUpdates = (self.weightUpdates or 0) + 1 end
 	character.Save = function(self, callback) return ix.meta.character.Save(self, callback) end
 	local inventory = ix.inventory.Create(6, 6, id + 100)
 	inventory.owner = id
@@ -99,6 +100,10 @@ function FeatureClient(id, balance)
 end
 
 function FeatureItem(inventory, data, uniqueID)
+	data = data or {}
+	if uniqueID and uniqueID:match("^hideout_crate_") and not data.cotzHideoutCrate then
+		data.cotzHideoutCrate = {level = 1, squad = false, version = 1}
+	end
 	local item
 	ix.item.Instance(inventory:GetID(), uniqueID or "water", data or {}, 1, 1, function(created) item = created end)
 	AttachCore(item)

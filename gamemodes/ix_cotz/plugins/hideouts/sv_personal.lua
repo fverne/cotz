@@ -83,6 +83,7 @@ function PLUGIN:ClaimPersonalLocation(client, target, id)
 	end
 	if self:OwnsPersonalLocation(character, id, location) then return false, "You already own a room at this location." end
 	local ok, result = self:GrantHideout(client, location.template, location.entrance, location.name, id)
+	if ok then self:CompleteInstalledLevel(character, 1) end
 
 	return ok, ok and "Hideout unlocked. Use its entrance to initialize the room." or result
 end
@@ -108,7 +109,7 @@ function PLUGIN:PreparePersonalStorage(instance)
 	if not record.personalVersion then
 		-- Preserve installed legacy sizes and appearance. Future purchases may only grow either dimension.
 		for id, slot in pairs(record.containers) do
-			local recipe = self.containerRecipes[slot.recipe or definitions[id] and definitions[id].recipe]
+			local recipe = self.legacyContainerRecipes[slot.recipe or definitions[id] and definitions[id].recipe]
 			local tier = recipe and recipe.tiers[slot.tier or 0]
 			local item = tier and ix.item.list[tier.item]
 			if item then slot.model = item.model end
@@ -143,7 +144,11 @@ function PLUGIN:PreparePersonalStorage(instance)
 	-- Remember marker slots for door purchases while the interior is unloaded.
 	record.personalLayout = definitions
 
-	return self:Persist(), "Could not save personal storage configuration."
+	local saved = self:Persist()
+	local owner = ix.char.loaded[record.owner]
+	if saved and owner then self:ReconcileInstalledLevels(owner) end
+
+	return saved, "Could not save personal storage configuration."
 end
 
 function PLUGIN:RestoreStorage(instance, callback)
@@ -212,7 +217,7 @@ function PLUGIN:BuildPersonalOffer(client, record, feature, slotID)
 		if not tier or tier.width < (slot.width or 1) or tier.height < (slot.height or 1) then return end
 		offer.recipe, offer.width, offer.height, offer.model = definition.recipe, tier.width, tier.height, tier.model
 		offer.price, offer.item = tier.price, tier.item
-		offer.allowed, offer.reason = self:GetPersonalUnlock(character, definition.recipe, offer.level)
+		offer.allowed, offer.reason = self:GetCrateUnlock(character, offer.level)
 		offer.label = slotID .. ": " .. recipe.name .. " level " .. offer.level
 		offer.detail = string.format("%d × %d slots; %s items", tier.width, tier.height, recipe.filter)
 	elseif feature == "floor" then
@@ -273,7 +278,7 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 	end
 	local character = client:GetCharacter()
 	local inventory = character:GetInventory()
-	local input = offer.item and inventory:HasItem(offer.item)
+	local input = offer.item and self:FindUpgradeCrate(client, offer.recipe, offer.level, false)
 	if offer.item and (not input or input.invID ~= inventory:GetID() or not self:CanStockItem(client, input)) then
 		return false, "Bring the required container item in your main inventory."
 	end
@@ -287,6 +292,7 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 		return client:GetCharacter() == character and self:CanUsePersonalTrader(client, target)
 			and self:IsPersonalOfferLocation(client, target, record, quote.feature, quote.slot)
 			and current and current.allowed and current.level == offer.level and current.price == offer.price
+			and (not input or self:IsUpgradeCrate(client, input, offer.recipe, offer.level, false))
 	end
 	local function commit(storage)
 		if not IsValid(client) or not authorize() or offer.feature == "container" and not storage then
@@ -305,6 +311,7 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 		}, function(ok, reason)
 			if ok then
 				self:ApplyPersonalEntitlement(record, payload)
+				if payload.feature == "container" then self:CompleteInstalledLevel(character, payload.level) end
 				if payload.feature == "cassette" then self:RefreshPersonalCassette(record) end
 				if storage then
 					storage:SetSize(payload.width, payload.height)
@@ -387,7 +394,10 @@ function PLUGIN:OpenPersonalBarter(client, target, page, refresh, recordID)
 	for _, offer in ipairs(offers) do
 		net.WriteString(offer.label:sub(1, 256))
 		local cost = ix.currency.Get(offer.price or 0)
-		if offer.item then cost = cost .. " + " .. ix.item.list[offer.item].name end
+		if offer.item then
+			cost = offer.price == 0 and ix.item.list[offer.item].name
+				or cost .. " + " .. ix.item.list[offer.item].name
+		end
 		local detail = offer.feature == "page" and "Browse more offers."
 			or offer.detail .. "\n" .. cost .. (offer.allowed and "" or "\n" .. offer.reason)
 		net.WriteString(detail:sub(1, 512))

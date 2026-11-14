@@ -49,7 +49,10 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 	end
 	if line.completed then
 		parts[#parts + 1] = "Request fulfilled."
-	elseif self.progressthresholds then
+	elseif self.hideoutLevel and not line.requirements then
+		parts[#parts + 1] = self.hideoutLevel == 1 and "Claim a personal room to receive its starter crate."
+			or ("Craft and install any personal storage crate at level " .. self.hideoutLevel .. ".")
+	elseif self.progressthresholds and not (self.hideoutLevel and line.requirements) then
 		local value = line.value or 0
 		parts[#parts + 1] = string.format("Qualified matches completed: %d/%d.", value,
 			self.progressthresholds[#self.progressthresholds])
@@ -67,6 +70,10 @@ function ix.progression.BuildDeliveryResponse(self, npcName, status, character)
 		for _, requirement in ipairs(requirements) do
 			parts[#parts + 1] = requirement
 		end
+	end
+
+	if self.hideoutLevel and line.requirements and not line.completed then
+		parts[#parts + 1] = "Your saved supply request remains valid. You may instead complete this improvement by installing the matching personal storage level."
 	end
 
 	return table.concat(parts, "\n")

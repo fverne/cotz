@@ -1,6 +1,6 @@
 ITEM.name = "Striker"
 ITEM.description= "A revolver-magazine fed shotgun. 12 gauge."
-ITEM.longdesc = "The Striker-12 is an unique shotgun, as it is fed by a permanently attached revolver magazine.\nWhile being an effective tool in combat and priceless for mutant hunting, it's unwieldy and has a non-adjustible stock.\nThe drum has to be manually winded up, each shell has to be manually ejected and it features a very janky trigger.\n\nAmmo: 12 Gauge\nMagazine Capacity: 12"
+ITEM.longdesc = "The Striker-12 is an unique shotgun, as it is fed by a permanently attached revolver magazine.\nWhile being an effective tool in combat and priceless for mutant hunting, it's unwieldy and has a non-adjustible stock.\nThe drum has to be manually winded up, each shell has to be manually ejected and it features a very janky trigger."
 ITEM.model = ("models/weapons/w_shot_strike.mdl")
 ITEM.class = "cw_striker"
 ITEM.weaponCategory = "primary"

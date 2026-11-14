@@ -28,3 +28,9 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_psyblock", duration = 60, amount = 50},
+	}
+end

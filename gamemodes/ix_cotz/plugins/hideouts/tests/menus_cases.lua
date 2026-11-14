@@ -204,7 +204,8 @@ Test("management sends actual invitations and permits revoking an offline invite
 	owner.position = PLUGIN.state.entrances.gate.pos
 	PLUGIN:ShowManagement(owner, record.id, "entrance")
 	net.WriteUInt, net.WriteString = writeUInt, writeString
-	assert(price == 5000 and #ids == 2 and ids[1] == 2 and ids[2] == 4)
+	assert(price == 5000 and ids[1] == 0 and ids[2] == 5000)
+	assert(#ids == 4 and ids[3] == 2 and ids[4] == 4)
 	assert(names["Character 2"] and names["Character #4"])
 	assert(PLUGIN:HandleManagementAction(owner, record.id, 7, "4", 0))
 	assert(record.guests["4"] == nil and record.guests["2"] == true)

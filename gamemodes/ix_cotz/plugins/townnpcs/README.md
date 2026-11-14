@@ -1,5 +1,27 @@
 # Town NPCs
 
+## Hideout crate progression
+
+Ballast, Cleaner and Ledger now assemble personal/squad upgrade crates through **Can you assemble storage
+crates?** All three use the same cash/salvage recipes. Personal costs grow by 1.5× per level; squad costs
+are exactly 3× personal. Common early-region salvage precedes Waystation supplies at level 6 and Pripyat
+parts at level 10. See the [recipe matrix](../../../../docs/balance/hideout-crates.md).
+
+A personal room claim completes step 01 with its free starter crate. The first installed personal
+container at each later level completes that local milestone and opens the next crate level. Crafting
+pays the full cost; installation has no second cash charge. Old saved unfinished supply requests remain
+an alternative completion route with their choices and contributions retained. New hideout requests do
+not assign duplicate supply deliveries. Other contact deliveries retain their existing multipliers.
+
+The squad leader's hideout-properties setting permits treasury-first squad crate/prop funding, with
+the managing character paying any remainder. It defaults off. Squad crafting follows the crafter's
+personal milestones; squad installations do not award them. Existing rooms, paid assets and inventories
+remain saved. Deploy matching code across map servers; no FTS or save reset is required.
+
+    luatex --luaonly tests/hideout_crates_spec.lua
+    python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
+    python3 docs/balance/hideouts.py --check
+
 Town trading uses the shared [stock inspector](../vendor_adv/README.md#trading-interface), with
 Buy/Sell tabs and a persistent selected-item pane. This changes presentation only; catalogue unlocks,
 personal stock, prices and trade eligibility retain their existing server rules.
@@ -20,7 +42,7 @@ Restart matching code on all map servers; no save reset or first-time setup is r
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 631 hand-in milestones
+the earlier progression, catalogue and service descriptions below. There are 631 milestones (595 hand-ins and 36 hideout installation objectives)
 in 52 branches, retaining current `v3/` IDs and adding 212 `/stock` intermissions.
 Technut's initial anorak stock delivery and eleven intermediate stock-preparation deliveries are retired.
 Anoraks remain starting stock; suit progression starts with the Mail Jacket and follows each preceding suit

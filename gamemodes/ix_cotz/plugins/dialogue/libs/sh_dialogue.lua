@@ -6,6 +6,7 @@ local MENU_ORDER = {
 	DefenseVoucher = 11,
 	DefenseRewards = 12,
 	StartBarter = 20,
+	HideoutBarter = 21,
 	HealTopic = 30,
 	RepairItems = 35,
 	WeaponWorkshop = 36,
@@ -328,6 +329,7 @@ function ix.dialogue.getTopic(id, topicID)
 end
 
 ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_trade.lua")
+ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_hideoutcrates.lua")
 ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_mutantdefense.lua")
 
 -- Reward topics must be available before DoPluginIncludes registers NPC conversations.

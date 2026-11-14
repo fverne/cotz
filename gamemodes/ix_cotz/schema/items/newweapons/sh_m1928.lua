@@ -1,6 +1,6 @@
 ITEM.name = "M1928A1 'Thompson'"
 ITEM.description= "A submachinegun chambered for .45 ACP."
-ITEM.longdesc = "The Thompson submachine gun is an American submachine gun invented by John T. Thompson in 1918 which became infamous during the Prohibition era, being a signature weapon of various organized crime syndicates in the United States.\nThe Thompson submachine gun was also known informally as the 'Tommy Gun', 'Annihilator', 'Chicago Typewriter' and many more.\nThe Thompson was favored by soldiers, criminals, police, FBI, and civilians alike for its large .45 ACP cartridge and high volume of fully automatic fire. \n\nAmmo: .45 ACP \nMagazine Capacity: 50"
+ITEM.longdesc = "The Thompson submachine gun is an American submachine gun invented by John T. Thompson in 1918 which became infamous during the Prohibition era, being a signature weapon of various organized crime syndicates in the United States.\nThe Thompson submachine gun was also known informally as the 'Tommy Gun', 'Annihilator', 'Chicago Typewriter' and many more.\nThe Thompson was favored by soldiers, criminals, police, FBI, and civilians alike for its large .45 ACP cartridge and high volume of fully automatic fire. "
 ITEM.model = ("models/khrcw2/doipack/w_thompson1928.mdl")
 ITEM.class = "cw_m1928a1"
 ITEM.weaponCategory = "primary"

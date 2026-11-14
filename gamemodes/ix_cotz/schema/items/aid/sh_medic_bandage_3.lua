@@ -1,12 +1,13 @@
 ITEM.name = "Compression Bandage"
-ITEM.description = "A bandage for wounds. Reduces bleeding severity by 90."
+ITEM.description = "A bandage for wounds."
 ITEM.longdesc = "A more advanced bandage, used for serious bleeding in combat situations. It is easy and quick to apply, but you do pay for the convenience."
 ITEM.model = "models/lostsignalproject/items/medical/army_bandage.mdl"
 ITEM.width = 1
 ITEM.height = 1
 
--- ITEM.restore = 14
-ITEM.restoreduration = 4
+ITEM.restore = 12
+ITEM.restoreduration = 6
+ITEM.applicationTime = 2
 ITEM.quantity = 3
 ITEM.bleedRestore = 90
 
@@ -23,7 +24,6 @@ ITEM.iconCam = {
 
 function ITEM:PopulateTooltipIndividual(tooltip)
 	ix.util.PropertyDesc(tooltip, "Medical", Color(64, 224, 208))
-	ix.util.PropertyDesc(tooltip, "Bleeding reduction: " .. self.bleedRestore, Color(220, 45, 45))
 end
 
 ITEM.functions.use = {
@@ -63,24 +63,17 @@ ITEM.functions.usetarget = {
 			data.filter = item.player
 		local target = util.TraceLine(data).Entity
 		local quantity = item:GetData("quantity", item.quantity)
-		if IsValid(target) and target:IsPlayer() and target:Alive() and target:GetCharacter() then
-			
-			ix.chat.Send(item.player, "iteminternal", "unwraps a "..item.name.." and ties it to "..target:Name().."'s wound.", false)
-			-- target:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
-			local buffs = ix.plugin.Get("buffs")
-			if buffs then
-				buffs:HealBleeding(target, item.bleedRestore)
-			end
-			target:SetLocalVar("stm", math.min(target:GetLocalVar("stm", 100) + item.restore*item.restoreduration, 100))
-			
-			quantity = quantity - 1
+		if not item:StartBandageTreatment(target) then
+			item.player:Notify("Look at a living player within reach.")
 
-			if (quantity >= 1) then
-				item:SetData("quantity", quantity)
-				return false
-			end
-		else
-			item.player:Notify("Not looking at a player!")
+			return false
+		end
+
+		ix.chat.Send(item.player, "iteminternal", "applies a " .. item.name .. " to the patient's wound.", false)
+		quantity = quantity - 1
+		if quantity >= 1 then
+			item:SetData("quantity", quantity)
+
 			return false
 		end
 

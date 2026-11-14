@@ -1,6 +1,6 @@
 ITEM.name = "AS Val"
 ITEM.description= "A silenced special forces assault rifle chambered for 9x39mm."
-ITEM.longdesc = "The AS 'Val' is a Soviet-designed assault rifle featuring an integrated suppressor.\nIts effective range is approximately 300 m, as it uses heavy subsonic 9x39mm SP-6 (high-performance armor-piercing) ammunition\nThe 'Val' has two modes of fire, semi-automatic and fully automatic fire at a rate of 900 RPM.\nAccording to its users, the 'Val' is reliable, accurate, and well liked.\nIt is a must have when getting the jump on your enemies is crucial.\n\nAmmo:9x39mm\nMagazine Capacity: 20"
+ITEM.longdesc = "The AS 'Val' is a Soviet-designed assault rifle featuring an integrated suppressor.\nIts effective range is approximately 300 m, as it uses heavy subsonic 9x39mm SP-6 (high-performance armor-piercing) ammunition\nThe 'Val' has two modes of fire, semi-automatic and fully automatic fire at a rate of 900 RPM.\nAccording to its users, the 'Val' is reliable, accurate, and well liked.\nIt is a must have when getting the jump on your enemies is crucial."
 ITEM.model = "models/weapons/w_dmg_vally.mdl"
 ITEM.class = "cw_asval"
 ITEM.weaponCategory = "primary"

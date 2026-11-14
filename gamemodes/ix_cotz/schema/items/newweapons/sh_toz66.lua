@@ -1,6 +1,6 @@
 ITEM.name = "TOZ-66"
 ITEM.description= "A break-action hunting shotgun firing 12 gauge shells."
-ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThe cheap price and long barrel makes it useful for engaging animals and unarmed targets at ranges up to fifty meters.\nThe side-by-side barrels makes the weapon simpler built compared to the TOZ, but the sights are not aligned to both barrels.\n\nAmmo: 12 Gauge \nMagazine Capacity: 2"
+ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThe cheap price and long barrel makes it useful for engaging animals and unarmed targets at ranges up to fifty meters.\nThe side-by-side barrels makes the weapon simpler built compared to the TOZ, but the sights are not aligned to both barrels."
 ITEM.model = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
 
 ITEM.width = 5
