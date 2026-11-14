@@ -171,6 +171,16 @@ function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
     end
 end
 
+do
+	local WEAPON_ACTION_KEYS = bit.bor(IN_ATTACK, IN_ATTACK2, IN_RELOAD)
+
+	function Schema:StartCommand(client, command)
+		if client:GetNetVar("ix_hasMobileAction") or client:GetNetVar("ix_hasBlackScreen") then
+			command:RemoveKey(WEAPON_ACTION_KEYS)
+		end
+	end
+end
+
 function Schema:CanPlayerInteractItem(client, action, item, data)
 	if client:GetNetVar("ix_hasMobileAction") then return false end
 	if client:Alive() or isentity(item) then return end

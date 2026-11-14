@@ -3,7 +3,8 @@
 Settings → Hotkeys uses `sh_hotkeyitems.lua` to select the available F1–F4 items.
 Items in that registry use moving timed actions by default, including when used from inventory.
 The action bar and F cancellation remain; moving actions do not freeze the player or fade the screen.
-Menus and overlapping item actions remain blocked until completion or cancellation. A world interaction
+Weapon attacks, aiming and reload input are blocked during moving and stationary actions until completion
+or cancellation. Menus and overlapping item actions remain blocked. A world interaction
 that starts stationary work cancels the moving action before starting its own timer. Death and character
 changes cancel moving actions. Item charges retain their existing start-time consumption rules.
 
@@ -27,5 +28,6 @@ Stash tools also use this selection for searching and job digging; their complet
 
 Run `luatex --luaonly tests/mobile_actions_spec.lua`, `tests/consumable_actions_spec.lua`,
 `tests/bleeding_spec.lua`, `tests/equipment_slots_spec.lua` and `tests/field_tasks_spec.lua`.
-In multiplayer, check F cancellation, movement, menus, repeated use, death/character switches,
+In multiplayer, check attack/aim/reload blocking and recovery after completion or F cancellation,
+movement, menus, repeated use, death/character switches,
 target treatment, stash searches and both directions of the item overrides.
