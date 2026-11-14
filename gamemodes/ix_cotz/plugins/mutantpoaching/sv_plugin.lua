@@ -130,7 +130,7 @@ ix.poaching.MutantParts = {
 	},
 	["electrochimera"] = {
 		["meattype"] = "meat_chimera",
-		["parts"] = {{"part_chimera", 20}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"artifact_moonlight", 45}, {"hide_chimera", 3}},
+		["parts"] = {{"part_chimera", 20}, {"artifact_flash", 45}, {"artifact_flash", 45}, {"artifact_flash", 45}, {"artifact_flash", 45}, {"hide_chimera", 3}},
 	},
 	["fastcontroller"] = {
 		["meattype"] = "meat_controller",
