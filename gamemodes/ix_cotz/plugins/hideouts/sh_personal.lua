@@ -13,7 +13,7 @@ PLUGIN.personalUnlockSteps = {
 	medical = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	weapon = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	gear = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
-	floor = {2, 4}, furnishing = {3}, cassette = {1},
+	floor = {3, 4}, furnishing = {2}, cassette = {1},
 }
 -- Retain the existing loose-item allowance price curve. Crates have their own assembly curve.
 PLUGIN.personalPriceMultiplier = 2.2
@@ -26,7 +26,7 @@ PLUGIN.personalContainerRecipes = {
 			{6, 4}, {7, 4}, {7, 6}, {8, 6}, {8, 8}, {9, 8},
 			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
 		},
-		models = {"models/props_c17/FurnitureFridge001a.mdl", "models/props_c17/FurnitureFridge001a.mdl"},
+		models = {"models/z-o-m-b-i-e/st/kitchen_room/st_freezer_01.mdl", "models/z-o-m-b-i-e/st/kitchen_room/st_freezer_01.mdl"},
 	},
 	general = {
 		name = "General crate", filter = "general", price = 600, item = "hideout_crate_general",
@@ -38,29 +38,27 @@ PLUGIN.personalContainerRecipes = {
 	},
 	ammo = {
 		name = "Ammunition container", filter = "ammo", price = 900, item = "hideout_crate_ammo",
-		sizes = {{4, 4}, {5, 4}, {5, 5}, {6, 5}, {6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8}, {9, 9}, {10, 9}},
+		sizes = {{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}},
 		models = {"models/cotz/eft/lootcont/ammo_crate_wood.mdl", "models/cotz/eft/lootcont/scontainer_ammo_grenade.mdl"},
 	},
 	medical = {
 		name = "Medical cabinet", filter = "medical", price = 1000, item = "hideout_crate_medical",
-		sizes = {{4, 4}, {5, 4}, {5, 5}, {6, 5}, {6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8}, {9, 9}, {10, 9}},
+		sizes = {{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}},
 		models = {"models/illusion/eftcontainers/ifak.mdl", "models/illusion/eftcontainers/ifak.mdl"},
 	},
 	gear = {
 		name = "Suit and gear locker", filter = "gear", price = 1400, item = "hideout_crate_gear",
 		sizes = {
-			{6, 6}, {7, 6}, {7, 7}, {8, 7}, {8, 8}, {9, 8},
-			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
+			{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}
 		},
-		models = {"models/props_c17/Lockers001a.mdl", "models/props_wasteland/controlroom_storagecloset001b.mdl"},
+		models = {"models/cotz/eft/lootcont/gun_safe.mdl", "models/cotz/eft/lootcont/gun_safe.mdl"},
 	},
 	weapon = {
 		name = "Weapon rack", filter = "weapon", price = 1400, item = "hideout_crate_weapon",
 		sizes = {
-			{6, 4}, {7, 4}, {7, 6}, {8, 6}, {8, 8}, {9, 8},
-			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
+			{4, 2}, {5, 2}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {7, 9}, {7, 10}
 		},
-		models = {"models/props_c17/Lockers001a.mdl", "models/props_wasteland/controlroom_storagecloset001b.mdl"},
+		models = {"models/z-o-m-b-i-e/st/shkaf/st_seif_03.mdl", "models/z-o-m-b-i-e/st/shkaf/st_seif_03.mdl"},
 	},
 }
 
