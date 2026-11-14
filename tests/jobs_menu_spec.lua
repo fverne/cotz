@@ -4,6 +4,7 @@ local function check(value, message)
 	checks = checks + 1
 	assert(value, message)
 end
+local savedData = {}
 local classes = {}
 local methods = {}
 local clock = 0
@@ -92,7 +93,17 @@ netstream = {
 	Hook = function() end,
 	Start = function(name, npc) sent[#sent + 1] = {name = name, npc = npc} end,
 }
-ix = {type = {bool = "bool"}, option = {Add = function() end}, cotzUI = {
+ix = {data = {
+	Get = function(key, default, global, ignoreMap)
+		check(key == "cotzTaskFilters" and global == false and ignoreMap == true, "filters load across maps")
+
+		return savedData[key] or default
+	end,
+	Set = function(key, value, global, ignoreMap)
+		check(global == false and ignoreMap == true, "filters save within the schema across maps")
+		savedData[key] = {status = value.status, zone = value.zone}
+	end,
+}, type = {bool = "bool"}, option = {Add = function() end}, cotzUI = {
 StyleEntry = function(control) return control end, StyleCombo = function(control) return control end,
 GetScale = function() return uiScale end, Query = function(text, title, cancel, onCancel, accept, onAccept)
 	confirmation = {text = text, cancel = onCancel, accept = onAccept}
@@ -309,4 +320,26 @@ character = nil
 clock = 6
 menu:Think()
 check(menu.title.text == "TASKS · 0", "character departure clears the displayed assignments")
+menu.status:OnSelect(3, "Completed", "completed")
+menu.zone:OnSelect(2, "Current zone", "current")
+menu.search:OnValueChange("temporary")
+dofile("gamemodes/ix_cotz/plugins/jobsystem/cl_plugin.lua")
+local reopened = panel("ixCharacterJournalPanel")
+reopened:Init()
+check(reopened.statusFilter == "completed" and reopened.zoneFilter == "current",
+	"filter selections survive panel recreation and client file reload")
+check(reopened.status.text == "Completed" and reopened.zone.text == "Current zone",
+	"restored dropdown labels match the active filters")
+check(reopened.query == "", "search remains temporary")
+reopened.status:OnSelect(1, "All tasks", "all")
+reopened.zone:OnSelect(1, "All zones", "all")
+local reset = panel("ixCharacterJournalPanel")
+reset:Init()
+check(reset.statusFilter == "all" and reset.zoneFilter == "all", "reset selections persist too")
+for _, invalid in ipairs({false, "invalid", {status = "removed", zone = "removed"}}) do
+	savedData.cotzTaskFilters = invalid
+	local fallback = panel("ixCharacterJournalPanel")
+	fallback:Init()
+	check(fallback.statusFilter == "all" and fallback.zoneFilter == "all", "invalid saved filters use defaults")
+end
 print("PASS: " .. checks .. " task menu checks")

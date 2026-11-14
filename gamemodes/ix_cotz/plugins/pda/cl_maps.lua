@@ -15,6 +15,8 @@ onerror="this.style.display='none';document.getElementById('status').textContent
 </body></html>]=]
 
 local mapImages = {}
+local mapViewer
+local selectedMapID
 
 function PLUGIN:LoadMapImage(id, url, callback)
 	if type(url) ~= "string" or not url:match("^https?://%S+$") then
@@ -112,28 +114,61 @@ function PLUGIN:PopulateMapMenu(container)
 	selector:Dock(TOP)
 	ix.cotzUI.SetHeight(selector, 34)
 	local status = ix.cotzUI.Label(container, "")
-	local image = container:Add("DHTML")
+	local image = mapViewer
+	if not IsValid(image) then
+		image = container:Add("DHTML")
+		image:SetAllowLua(false)
+		image:SetAutoDelete(false)
+		mapViewer = image
+	else
+		image:SetParent(container)
+	end
 	image:Dock(FILL)
-	image:SetAllowLua(false)
+	-- Keep the browser document alive when Helix destroys the menu and its tab containers.
+	local originalOnRemove = container.OnRemove
+	container.OnRemove = function(panel)
+		if IsValid(image) and image:GetParent() == panel then
+			image:SetVisible(false)
+			image:SetParent(nil)
+		end
+		if originalOnRemove then originalOnRemove(panel) end
+	end
 	local selection = 0
 	selector.OnSelect = function(_, _, _, id)
 		selection = selection + 1
 		local request = selection
 		local definition = self.maps[id]
+		selectedMapID = id
+		local url = ix.config.Get(definition.urlConfig, "")
+		if image.cotzMapURL == url then
+			status:SetVisible(false)
+			image:SetVisible(true)
+
+			return
+		end
 		status:SetText("Loading map...")
 		status:SetVisible(true)
 		image:SetVisible(false)
-		self:LoadMapImage(id, ix.config.Get(definition.urlConfig, ""), function(html)
-			if not IsValid(image) or request ~= selection then return end
+		self:LoadMapImage(id, url, function(html)
+			if not IsValid(image) or image:GetParent() ~= container or request ~= selection then return end
 
 			status:SetText(html and "" or "No map image is available.")
 			status:SetVisible(html == nil)
 			image:SetVisible(html ~= nil)
-			if html then image:SetHTML(html) end
+			if html then
+				image:SetHTML(html)
+				image.cotzMapURL = url
+			else
+				image.cotzMapURL = nil
+			end
 		end)
 	end
-	for _, map in ipairs(maps) do selector:AddChoice(map.name, map.id) end
-	selector:ChooseOptionID(1)
+	local selectedIndex = 1
+	for index, map in ipairs(maps) do
+		selector:AddChoice(map.name, map.id)
+		if map.id == selectedMapID then selectedIndex = index end
+	end
+	selector:ChooseOptionID(selectedIndex)
 end
 
 function PLUGIN:CreateMenuButtons(tabs)

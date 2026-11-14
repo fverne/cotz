@@ -111,8 +111,11 @@ function PANEL:Init()
 	self:DockPadding(16, 16, 16, 16)
 	self.title = addLabel(self, "TASKS", "ixMediumFont")
 	self.query = ""
-	self.statusFilter = "all"
-	self.zoneFilter = "all"
+	local filters = ix.data.Get("cotzTaskFilters", {}, false, true)
+	if type(filters) ~= "table" then filters = {} end
+	self.statusFilter = (filters.status == "progress" or filters.status == "completed")
+		and filters.status or "all"
+	self.zoneFilter = filters.zone == "current" and "current" or "all"
 	self.search = ix.cotzUI.StyleEntry(self:Add("DTextEntry"))
 	self.search:Dock(TOP)
 	self.search:SetPlaceholderText("Search tasks, contacts, objectives or zones")
@@ -132,22 +135,24 @@ function PANEL:Init()
 	self.status = ix.cotzUI.StyleCombo(self:Add("DComboBox"))
 	self.status:Dock(TOP)
 	self.status:SetSortItems(false)
-	self.status:AddChoice("All tasks", "all", true)
-	self.status:AddChoice("In progress", "progress")
-	self.status:AddChoice("Completed", "completed")
+	self.status:AddChoice("All tasks", "all", self.statusFilter == "all")
+	self.status:AddChoice("In progress", "progress", self.statusFilter == "progress")
+	self.status:AddChoice("Completed", "completed", self.statusFilter == "completed")
 	self.status:SetTooltip("Completed tasks are ready to return to the contact. Handed-in tasks leave this list.")
 	self.status.OnSelect = function(_, _, _, value)
 		self.statusFilter = value
+		self:SaveFilters()
 		self:Rebuild()
 	end
 	self.zone = ix.cotzUI.StyleCombo(self:Add("DComboBox"))
 	self.zone:Dock(TOP)
 	self.zone:SetSortItems(false)
-	self.zone:AddChoice("All zones", "all", true)
-	self.zone:AddChoice("Current zone", "current")
+	self.zone:AddChoice("All zones", "all", self.zoneFilter == "all")
+	self.zone:AddChoice("Current zone", "current", self.zoneFilter == "current")
 	self.zone:SetTooltip("Filter by the current objective, delivery destination or return contact. Tasks without a known zone remain visible.")
 	self.zone.OnSelect = function(_, _, _, value)
 		self.zoneFilter = value
+		self:SaveFilters()
 		self:Rebuild()
 	end
 	self.journal = self:Add("DScrollPanel")
@@ -165,6 +170,10 @@ function PANEL:Init()
 	end
 	self:RefreshFonts()
 	self:Rebuild()
+end
+
+function PANEL:SaveFilters()
+	ix.data.Set("cotzTaskFilters", {status = self.statusFilter, zone = self.zoneFilter}, false, true)
 end
 
 function PANEL:RefreshFonts()

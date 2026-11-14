@@ -193,13 +193,19 @@ check(disk["helix/ix_cotz/pda/maps/https___example_org_large_webp.png"] == large
 local image, selector, status
 local container = {}
 function container:Add(class)
-	local panel = {valid = true}
+	local panel = {valid = true, parent = self}
 	function panel:Dock() end
 	function panel:SetVisible(value) self.visible = value end
 	if class == "DHTML" then
 		image = panel
+		function panel:SetAutoDelete(value) self.autoDelete = value end
+		function panel:SetParent(value) self.parent = value end
+		function panel:GetParent() return self.parent end
 		function panel:SetAllowLua(value) self.allowLua = value end
-		function panel:SetHTML(value) self.html = value end
+		function panel:SetHTML(value)
+			self.html = value
+			self.htmlLoads = (self.htmlLoads or 0) + 1
+		end
 	else
 		selector = panel
 		function panel:AddChoice(name, id) self.choice = {name, id} end
@@ -228,6 +234,16 @@ oldRequest.success("image", 5, {}, 200)
 check(not image.visible, "Stale download cannot replace the selected map")
 requests[#requests].success("image", 5, {}, 200)
 check(image.visible and image.html:find("asset://garrysmod/data/", 1, true), "Selected map displays cached data")
+local retainedImage = image
+local loads = image.htmlLoads
+local requestCount = #requests
+container:OnRemove()
+check(not image.visible and image.parent == nil and image.autoDelete == false,
+	"Closing Maps parks the browser without deleting it")
+plugin:PopulateMapMenu(container)
+check(image == retainedImage and image.visible and image.htmlLoads == loads,
+	"Reopening Maps reuses the loaded browser document")
+check(#requests == requestCount, "Reopening Maps does not download the image again")
 configs.pdaMapSwampsURL = ""
 selector:OnSelect(1, "Swamps", "swamps")
 check(not image.visible and status.visible, "Blank config displays a readable empty state")

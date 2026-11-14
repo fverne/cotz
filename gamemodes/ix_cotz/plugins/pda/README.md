@@ -40,6 +40,10 @@ automatically without another download. Images fit without changing
 aspect ratio, and resize with the tab. Missing/invalid URLs show a message. Failed
 image requests show an unavailable message. Lua execution is disabled in the viewer.
 This is an image viewer, with no position markers or live navigation.
+The client retains one hidden browser viewer when the menu closes, reuses its loaded
+document on reopening, and remembers the selected map for the session. Selecting a
+different image URL replaces the document; changing characters still limits the
+selector to that character's unlocked maps.
 
 ## Adding a map
 
@@ -73,4 +77,5 @@ progression; confirm the 1,000-ruble price and normal stock use. Unlock without 
 try another inventory and a duplicate map, then reopen the main menu and inspect Maps.
 Reconnect/restart and switch characters to verify personal persistence. Load a character
 with legacy PDA maps and verify they are retained after removing the PDA. Check valid,
-blank and broken image URLs, multiple maps, and resizing at narrow, 1080p, ultrawide and 4K resolutions.
+blank and broken image URLs, reopening without an image reload, character switching,
+multiple maps, and resizing at narrow, 1080p, ultrawide and 4K resolutions.

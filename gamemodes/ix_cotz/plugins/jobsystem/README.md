@@ -60,6 +60,8 @@ map, courier receiver, dead-drop burial map, or issuing contact when returning c
 Photography, unrestricted legacy kill work and tasks without a known zone remain visible in any zone.
 Search and both filters combine, stay above the scrolling
 cards, and show the matching count against the total accepted tasks. They refresh as assignments change.
+Status and zone selections are saved on the client across menu opens, reconnects and map changes.
+Search text starts empty each time the menu opens.
 Photography
 shows the saved captured species/anomaly list in the journal. There is no camera HUD ledger.
 Triangulation saves the origin and compass bearing of each reading and marks those positions in
