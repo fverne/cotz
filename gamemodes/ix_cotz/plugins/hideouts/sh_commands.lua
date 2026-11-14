@@ -183,18 +183,13 @@ ix.command.Add("HideoutList", {
 	OnRun = function(self, client)
 		local records = {}
 		for _, record in pairs(PLUGIN.state.hideouts) do
-			if PLUGIN:CanAccess(client, record) then
-				records[#records + 1] = "#"
-					.. record.id
-					.. " "
-					.. PLUGIN:GetHideoutName(record)
-					.. " ("
-					.. record.entrance
-					.. ")"
-			end
+			local owner = record.ownerType == "squad" and "squad " .. record.squadID
+				or "character #" .. record.owner
+			records[#records + 1] = "#" .. record.id .. " " .. PLUGIN:GetHideoutName(record)
+				.. " (template: " .. record.template .. ", entrance: " .. record.entrance .. ", owner: " .. owner .. ")"
 		end
 
-		return #records > 0 and table.concat(records, "; ") or "This character has no hideouts."
+		return #records > 0 and table.concat(records, "; ") or "No hideouts exist on this map."
 	end,
 })
 
