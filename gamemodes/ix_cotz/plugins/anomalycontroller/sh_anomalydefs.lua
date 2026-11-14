@@ -161,7 +161,7 @@ PLUGIN.anomalydefs[8] = {
 		"artifact_cell",
 	},
 	veryRareArtifacts = {
-		"artifact_seraphim"
+		"artifact_seraphim",
 		"artifact_mica",
 	},
 }
