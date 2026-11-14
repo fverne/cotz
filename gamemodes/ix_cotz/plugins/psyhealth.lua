@@ -131,17 +131,17 @@ function PLUGIN:PreDrawHUD()
 			math.Clamp((ix.util.mapValueToRange(psyDamageBeforeSuppression, 25, 100, 0, 100) / 100), 0, 1)
 
 		local tab = {
-			["$pp_colour_addr"] = 0.01 * (psyDamage * 2),
-			["$pp_colour_addg"] = 0.02 * (psyDamage * 2),
-			["$pp_colour_addb"] = 0.3 * (psyDamage * 2),
-			["$pp_colour_brightness"] = -0.33 * (psyDamage * 2),
-			["$pp_colour_contrast"] = 1 - (0.22 * (psyDamage * 2)),
-			["$pp_colour_colour"] = 1 - (0.5 * (psyDamage * 2)),
+			["$pp_colour_addr"] = 0.01 * (psyDamage),
+			["$pp_colour_addg"] = 0.02 * (psyDamage),
+			["$pp_colour_addb"] = 0.3 * (psyDamage),
+			["$pp_colour_brightness"] = -0.33 * (psyDamage),
+			["$pp_colour_contrast"] = 1 - (0.22 * (psyDamage)),
+			["$pp_colour_colour"] = 1 - (0.5 * (psyDamage)),
 		}
 
 		DrawColorModify(tab)
 
-		DrawMotionBlur(0.3, 0.3 * (psyDamage * 2), 0.001)
+		DrawMotionBlur(0.3, 0.3 * (psyDamage), 0.001)
 
 		DrawMaterialOverlay("effects/water_warp01", math.sin(CurTime()) * psyDamage * 0.1)
 
