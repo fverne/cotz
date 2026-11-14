@@ -1,5 +1,22 @@
 # Advanced vendor definitions
 
+## Trading interface
+
+Town traders use the shared stock inspector with **Buy / Sell** tabs. The left pane lists catalogue
+goods or eligible personal item instances; the right pane shows the selected item's icon, description,
+price, stock information and Purchase/Sell action. Personal items retain instance-specific descriptions
+and saved quantity/condition values where present. Icons and normal item tooltips are retained.
+Personal stock limits, fractional restock credit, progression gates and existing prices still apply.
+NPCs have no earnings account in this interface. Personal bank access stays in dialogue.
+
+Trades wait for stock broadcasts and inventory synchronization before changing rows; rejected requests
+do not remove the selection. The vendor editor retains its read-only preview and existing update methods.
+The window uses COTZ fonts/scaling and reflows its panes on narrow screens. Run
+`luatex --luaonly tests/vendor_inspector_spec.lua` for inspector state, permissions and viewport bounds;
+engine layout, tooltips, live resizing and multiplayer transactions still require in-game verification.
+
+## Catalogue definitions
+
 The [approved workbook plan](../../../../docs/npc-overhaul/vendor-plan.md) now owns the 25 planned
 contacts' assortments. Vendors buy their hand-in candidates, catalogue goods and ordinary supplies.
 Additional `buyItems` IDs and `buyCategories` category lookups are configured on town contacts;

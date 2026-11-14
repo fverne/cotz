@@ -1,385 +1,443 @@
-
 local PANEL = {}
 
 AccessorFunc(PANEL, "bReadOnly", "ReadOnly", FORCE_BOOL)
 
+local function addToolbar(parent, dock)
+	local toolbar = parent:Add("DPanel")
+	toolbar:Dock(dock)
+	toolbar:SetPaintBackground(false)
+	toolbar.PerformLayout = function(control, width)
+		local gap, height = ix.cotzUI.Scale(6), ix.cotzUI.Scale(34)
+		local x, y = 0, 0
+		surface.SetFont("cotzUISmall")
+		for _, child in ipairs(control:GetChildren()) do
+			if child:IsVisible() then
+				local textWidth = surface.GetTextSize(child:GetText())
+				local childWidth = math.min(width, textWidth + ix.cotzUI.Scale(24))
+				if x > 0 and x + childWidth > width then x, y = 0, y + height + gap end
+				child:SetFont("cotzUISmall")
+				child:SetPos(x, y)
+				child:SetSize(childWidth, height)
+				x = x + childWidth + gap
+			end
+		end
+		local tall = x > 0 and y + height + gap or 0
+		if control:GetTall() ~= tall then control:SetTall(tall) end
+	end
+
+	return toolbar
+end
+
+local function addTool(parent, text, callback)
+	local button = ix.cotzUI.StyleButton(parent:Add("DButton"))
+	button:SetText(text)
+	button.DoClick = callback
+	local paint = button.Paint
+	button.Paint = function(control, width, height)
+		paint(control, width, height)
+		if control.tradeActive then
+			surface.SetDrawColor(ix.cotzUI.colors.teal)
+			surface.DrawOutlinedRect(0, 0, width, height)
+		end
+	end
+
+	return button
+end
+
+local function describeItem(item)
+	local description = item:GetDescription()
+	if item.id then
+		for _, key in ipairs({"quantity", "durability", "condition"}) do
+			local value = item:GetData(key)
+			if isnumber(value) then description = description .. "\n" .. key .. ": " .. value end
+		end
+	end
+
+	return description
+end
+
 function PANEL:Init()
-	self:SetSize(ScrW() * 0.45, ScrH() * 0.65)
-	self:SetTitle("")
+	ix.cotzUI.StyleFrame(self)
+	self:SetTitle("Trade")
+	self:SetSizable(false)
 	self:MakePopup()
-	self:Center()
+	self.sellingList, self.buyingList = {}, {}
+	self.tab = "selling"
+	self.character = LocalPlayer():GetCharacter()
 
-	local header = self:Add("DPanel")
-	header:SetTall(34)
-	header:Dock(TOP)
+	self.header = self:Add("DPanel")
+	self.header:Dock(TOP)
+	self.header:SetPaintBackground(false)
+	self.vendorName = ix.cotzUI.Label(self.header, "Vendor", true)
+	self.vendorName:SetTextColor(ix.cotzUI.colors.text)
+	self.ourName = ix.cotzUI.Label(self.header, "")
 
-	self.vendorName = header:Add("DLabel")
-	self.vendorName:Dock(LEFT)
-	self.vendorName:SetWide(self:GetWide() * 0.5 - 7)
-	self.vendorName:SetText("John Doe")
-	self.vendorName:SetTextInset(4, 0)
-	self.vendorName:SetTextColor(color_white)
-	self.vendorName:SetFont("stalkerregularfont")
-
-	self.ourName = header:Add("DLabel")
-	self.ourName:Dock(RIGHT)
-	self.ourName:SetWide(self:GetWide() * 0.5 - 7)
-	self.ourName:SetText(L"you".." ("..ix.currency.Get(LocalPlayer():GetCharacter():GetMoney())..")")
-	self.ourName:SetTextInset(0, 0)
-	self.ourName:SetTextColor(color_white)
-	self.ourName:SetFont("stalkerregularfont")
-
-	local footer = self:Add("DPanel")
-	footer:SetTall(34)
-	footer:Dock(BOTTOM)
-	footer:SetPaintBackground(false)
-
-	self.vendorSell = footer:Add("DButton")
-	self.vendorSell:SetFont("stalkerregularfont")
-	self.vendorSell:SetWide(self.vendorName:GetWide())
-	self.vendorSell:Dock(LEFT)
-	self.vendorSell:SetContentAlignment(5)
-	-- The text says purchase but the vendor is selling it to us.
-	self.vendorSell:SetText(L"purchase")
-	self.vendorSell:SetTextColor(color_white)
-
-	self.vendorSell.DoClick = function(this)
-		if (IsValid(self.activeSell)) then
-			net.Start("ixVendorAdvTrade")
-				net.WriteString(self.activeSell.item)
-				net.WriteUInt(0, 32) -- Not an existing item
-				net.WriteBool(false)
-			net.SendToServer()
-
-			self:removeItem(self.activeSell.item, "selling", 0) -- We assume everything goes well - not always the case!!
-		end
+	self.footer = self:Add("DPanel")
+	self.footer:Dock(BOTTOM)
+	self.footer:SetPaintBackground(false)
+	self.summary = ix.cotzUI.Label(self.footer, "")
+	self.summary:SetTextColor(ix.cotzUI.colors.text)
+	self.footer.PerformLayout = function(control)
+		control:SizeToChildren(false, true)
 	end
+	self.pageTools = addToolbar(self.footer, TOP)
+	self.managementTools = addToolbar(self.footer, TOP)
 
-	self.vendorBuy = footer:Add("DButton")
-	self.vendorBuy:SetFont("stalkerregularfont")
-	self.vendorBuy:SetWide(self.ourName:GetWide())
-	self.vendorBuy:Dock(RIGHT)
-	self.vendorBuy:SetContentAlignment(5)
-	self.vendorBuy:SetText(L"sell")
-	self.vendorBuy:SetTextColor(color_white)
-	self.vendorBuy.DoClick = function(this)
-		if (IsValid(self.activeBuy)) then
-			net.Start("ixVendorAdvTrade")
-				net.WriteString(self.activeBuy.item)
-				net.WriteUInt(self.activeBuy.iteminstanceID, 32)
-				net.WriteBool(true)
-			net.SendToServer()
+	self.tabs = addToolbar(self, TOP)
+	self.stockTab = addTool(self.tabs, "Buy", function() self:SetTab("selling") end)
+	self.personalTab = addTool(self.tabs, "Sell", function() self:SetTab("buying") end)
 
-			self:removeItem(self.activeBuy.item, "buying", self.activeBuy.iteminstanceID) -- We assume everything goes well - not always the case!!
-		end
-	end
-
-	self.selling = self:Add("DScrollPanel")
-	self.selling:SetWide(self:GetWide() * 0.5 - 7)
-	self.selling:Dock(LEFT)
-	self.selling:DockMargin(0, 4, 0, 4)
-	self.selling:SetPaintBackground(true)
-
+	self.body = self:Add("DPanel")
+	self.body:Dock(FILL)
+	self.body:SetPaintBackground(false)
+	self.listPane = self.body:Add("DPanel")
+	self.listPane:SetPaintBackground(false)
+	self.selling = self.listPane:Add("DScrollPanel")
+	self.selling:Dock(FILL)
+	ix.cotzUI.StyleScroll(self.selling)
+	self.buying = self.listPane:Add("DScrollPanel")
+	self.buying:Dock(FILL)
+	ix.cotzUI.StyleScroll(self.buying)
 	self.sellingItems = self.selling:Add("DListLayout")
-	self.sellingItems:SetSize(self.selling:GetSize())
-	self.sellingItems:DockPadding(0, 0, 0, 4)
-	self.sellingItems:SetTall(ScrH())
-
-	self.buying = self:Add("DScrollPanel")
-	self.buying:SetWide(self:GetWide() * 0.5 - 7)
-	self.buying:Dock(RIGHT)
-	self.buying:DockMargin(0, 4, 0, 4)
-	self.buying:SetPaintBackground(true)
-
+	self.sellingItems:Dock(TOP)
 	self.buyingItems = self.buying:Add("DListLayout")
-	self.buyingItems:SetSize(self.buying:GetSize())
-	self.buyingItems:DockPadding(0, 0, 0, 4)
+	self.buyingItems:Dock(TOP)
+	self.empty = ix.cotzUI.Label(self.listPane, "No items available.")
+	self.empty:SetZPos(0)
+	self.selling:SetZPos(1)
+	self.buying:SetZPos(2)
 
-	self.sellingList = {}
-	self.buyingList = {}
+	self.inspector = self.body:Add("DPanel")
+	self.inspector.Paint = ix.cotzUI.PaintCard
+	self.inspectorActions = addToolbar(self.inspector, BOTTOM)
+	self.vendorSell = addTool(self.inspectorActions, "Purchase", function() self:TradeSelected(false) end)
+	self.vendorBuy = addTool(self.inspectorActions, "Sell", function() self:TradeSelected(true) end)
+	self.detailScroll = self.inspector:Add("DScrollPanel")
+	self.detailScroll:Dock(FILL)
+	ix.cotzUI.StyleScroll(self.detailScroll)
+	self.preview = self.detailScroll:Add("DImage")
+	self.preview:Dock(TOP)
+	self.preview:SetKeepAspect(true)
+	self.detailName = ix.cotzUI.Label(self.detailScroll, "Select an item", true)
+	self.detailName:SetTextColor(ix.cotzUI.colors.text)
+	self.detailPrice = ix.cotzUI.Label(self.detailScroll, "")
+	self.detailStock = ix.cotzUI.Label(self.detailScroll, "")
+	self.detailDescription = ix.cotzUI.Label(self.detailScroll, "")
+	self.detailDescription:SetTextColor(ix.cotzUI.colors.text)
+
+	self.body.PerformLayout = function(_, width, height)
+		local gap = ix.cotzUI.Scale(12)
+		local stacked = width < ix.cotzUI.Scale(420)
+		local listWidth = stacked and width or math.floor((width - gap) * 0.53)
+		local listHeight = stacked and math.floor((height - gap) * 0.42) or height
+		self.listPane:SetPos(0, 0)
+		self.listPane:SetSize(listWidth, listHeight)
+		self.inspector:SetPos(stacked and 0 or listWidth + gap, stacked and listHeight + gap or 0)
+		self.inspector:SetSize(stacked and width or width - listWidth - gap,
+			stacked and height - listHeight - gap or height)
+		self.inspector:DockPadding(gap, gap, gap, gap)
+		self.preview:SetTall(math.min(ix.cotzUI.Scale(100), height * 0.2))
+	end
+	self.header.PerformLayout = function(control) control:SizeToChildren(false, true) end
+	self:PostLayoutUpdate()
+	self:SetTab("selling")
+	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(ix.gui.dialogue) then
+		ix.dialogue.TrackRelatedPanel(self)
+	end
+end
+
+function PANEL:PostLayoutUpdate()
+	self.screenWidth, self.screenHeight = ScrW(), ScrH()
+	self.uiScale = ix.cotzUI.GetScale()
+	self:SetSize(math.min(ScrW() * 0.88, ix.cotzUI.Scale(1180)), ScrH() * 0.88)
+	self.preview:SetTall(ix.cotzUI.Scale(100))
+	self:Center()
+	self:InvalidateLayout(true)
+	self:InvalidateChildren(true)
+end
+
+function PANEL:SetTab(tab)
+	if tab == "buying" and not self.personalTab:IsVisible() then tab = "selling" end
+	self.tab = tab
+	self.selling:SetVisible(tab == "selling")
+	self.buying:SetVisible(tab == "buying")
+	self.stockTab:SetTextColor(tab == "selling" and ix.cotzUI.colors.teal or ix.cotzUI.colors.text)
+	self.personalTab:SetTextColor(tab == "buying" and ix.cotzUI.colors.teal or ix.cotzUI.colors.text)
+	self.stockTab.tradeActive, self.personalTab.tradeActive = tab == "selling", tab == "buying"
+	if tab == "selling" then self.selected = self.activeSell else self.selected = self.activeBuy end
+	self:RefreshInspector()
+end
+
+function PANEL:AddInspectorTool(text, callback)
+	return addTool(self.inspectorActions, text, callback)
+end
+
+function PANEL:AddPageTool(text, callback)
+	return addTool(self.pageTools, text, callback)
+end
+
+function PANEL:AddManagementTool(text, callback)
+	return addTool(self.managementTools, text, callback)
+end
+
+function PANEL:AddTradeRow(parent, data)
+	local row = parent:Add("ixVendorAdvItem")
+	row:SetupData(self, data)
+
+	return row
 end
 
 function PANEL:addItem(uniqueID, listID, iteminstanceID)
-	local entity = self.entity
-	local items = entity.items
-	local data = items[uniqueID]
-
-	if ((!listID or listID == "selling") and !IsValid(self.sellingList[uniqueID])
-	and ix.item.list[uniqueID]) then
-		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_BUYONLY) or entity:GetSherpa() then
-			local item = self.sellingItems:Add("ixVendorAdvItem")
-			item:Setup(uniqueID)
-
-			self.sellingList[uniqueID] = item
-			self.sellingItems:InvalidateLayout()
+	local definition = ix.item.list[uniqueID]
+	if not definition or not IsValid(self.entity) then return end
+	local data = self.entity.items[uniqueID]
+	if not listID or listID == "selling" then
+		local allowed = data and data[VENDOR_MODE] and data[VENDOR_MODE] ~= VENDOR_BUYONLY
+		if allowed and not IsValid(self.sellingList[uniqueID]) then
+			self.sellingList[uniqueID] = self:AddTradeRow(self.sellingItems,
+				{key = uniqueID, uniqueID = uniqueID, item = definition, personal = false})
 		end
 	end
-
-	if ((!listID or listID == "buying") and !IsValid(self.buyingList[iteminstanceID]) and iteminstanceID) then
-		if (data and data[VENDOR_MODE] and data[VENDOR_MODE] != VENDOR_SELLONLY) or entity:GetBuyAll() then
-			if (iteminstanceID and ix.item.instances[iteminstanceID] and !ix.item.instances[iteminstanceID]:GetData("equip",false)) then
-				local item = self.buyingItems:Add("ixVendorAdvItem")
-				item.isLocal = true
-				item:Setup(uniqueID, iteminstanceID)
-
-				self.buyingList[iteminstanceID] = item
-				self.buyingItems:InvalidateLayout()
-			end
+	if not listID or listID == "buying" then
+		-- Editor callbacks may only supply an item definition; discover the actual owned instances.
+		if not iteminstanceID or iteminstanceID == 0 then
+			self:SyncPersonalItems()
+			return
+		end
+		local item = ix.item.instances[iteminstanceID]
+		local allowed = data and data[VENDOR_MODE] and data[VENDOR_MODE] ~= VENDOR_SELLONLY
+		if item and not item.noDrop and not item.isFieldCargo and not item:GetData("equip", false)
+			and (allowed or self.entity:GetBuyAll()) and not IsValid(self.buyingList[iteminstanceID]) then
+			self.buyingList[iteminstanceID] = self:AddTradeRow(self.buyingItems,
+				{key = iteminstanceID, uniqueID = uniqueID, item = item, personal = true})
 		end
 	end
 end
 
 function PANEL:removeItem(uniqueID, listID, iteminstanceID)
-	if (!listID or listID == "selling") then
-		if (IsValid(self.sellingList[uniqueID])) then
-			self.sellingList[uniqueID].stock.curstock = math.max(self.sellingList[uniqueID].stock.curstock - 1,0)
-			self.sellingList[uniqueID].stock:SetText(ix.vendorStock.FormatStock(self.sellingList[uniqueID].stock.curstock,
-				ix.gui.vendor.entity.items[uniqueID][VENDOR_MAXSTOCK],
-				ix.gui.vendor.entity.items[uniqueID][VENDOR_TASK_PROGRESS]))
-			
-			if self.sellingList[uniqueID].stock.curstock <= 0 then
-				self.sellingList[uniqueID]:Remove()
+	if not listID or listID == "selling" then
+		if IsValid(self.sellingList[uniqueID]) then self.sellingList[uniqueID]:Remove() end
+		self.sellingList[uniqueID] = nil
+	end
+	if not listID or listID == "buying" then
+		for id, row in pairs(self.buyingList) do
+			if id == iteminstanceID or (not iteminstanceID and row.item == uniqueID) then
+				if IsValid(row) then row:Remove() end
+				self.buyingList[id] = nil
 			end
-			
-			self.sellingItems:InvalidateLayout()
 		end
 	end
+	self:RefreshInspector()
+end
 
-	if (!listID or listID == "buying") then
-		if (IsValid(self.buyingList[iteminstanceID])) then
-			self.buyingList[iteminstanceID]:Remove()
-			self.buyingItems:InvalidateLayout()
+function PANEL:SyncPersonalItems()
+	local items = self.character:GetInventory():GetItems()
+	for id, row in pairs(self.buyingList) do
+		local item = items[id]
+		local data = item and self.entity.items[item.uniqueID]
+		local allowed = data and data[VENDOR_MODE] and data[VENDOR_MODE] ~= VENDOR_SELLONLY
+		if not item or item.noDrop or item.isFieldCargo or item:GetData("equip", false)
+			or not (allowed or self.entity:GetBuyAll()) then
+			row:Remove()
+			self.buyingList[id] = nil
 		end
 	end
+	for _, item in pairs(items) do self:addItem(item.uniqueID, "buying", item:GetID()) end
+	for _, row in pairs(self.buyingList) do row:RefreshData() end
 end
 
 function PANEL:Setup(entity)
+	if not self.character then self:Remove() return end
 	self.entity = entity
-	self:SetTitle("")
-	self.vendorName:SetText(entity:GetDisplayName()..(entity.money and " ("..entity.money..")" or ""))
+	self.vendorName:SetText(entity:GetDisplayName())
+	for uniqueID in SortedPairs(entity.items) do self:addItem(uniqueID, "selling") end
+	self:SyncPersonalItems()
+	self.summary:SetText(self:GetReadOnly() and "Vendor editor preview · Trading disabled" or "NPC catalogue")
+	self:RefreshInspector()
+end
 
-	self.vendorBuy:SetEnabled(!self:GetReadOnly())
-	self.vendorSell:SetEnabled(!self:GetReadOnly())
+function PANEL:OnItemSelected(row)
+	self.selected = row
+	if row.isLocal then self.activeBuy = row else self.activeSell = row end
+	self:RefreshInspector()
+end
 
-	for k, _ in SortedPairs(entity.items) do
-		self:addItem(k, "selling")
+function PANEL:RefreshInspector()
+	local row = self.selected
+	if not IsValid(row) then
+		self.selected = nil
+		self.preview:SetVisible(false)
+		self.detailName:SetText("Select an item")
+		self.detailDescription:SetText("")
+		self.detailPrice:SetText("")
+		self.detailStock:SetText("")
+	else
+		row:RefreshData()
+		self.preview:SetVisible(true)
+		self.preview:SetMaterial(row.iconMaterial)
+		self.detailName:SetText(row.data.name)
+		self.detailDescription:SetText(row.data.description)
+		self.detailPrice:SetText((row.isLocal and (self.isInstanceVendor and "Donation: no payment" or "Sale price: ")
+			or "Purchase price: ") .. (row.isLocal and self.isInstanceVendor and "" or ix.currency.Get(row.data.price)))
+		self.detailStock:SetText(row.stock:GetText())
 	end
+	local personal = self.tab == "buying"
+	self.vendorSell:SetVisible(not personal)
+	self.vendorBuy:SetVisible(personal)
+	local ready = IsValid(row) and not self:GetReadOnly()
+	local price = ready and row.data.price or 0
+	self.vendorSell:SetEnabled(ready and not personal and (not self.isInstanceVendor or price > 0)
+		and self.character:HasMoney(price) and (not row.data.stock or row.data.stock > 0))
+	self.vendorBuy:SetEnabled(ready and personal)
+	self.empty:SetVisible(not next(personal and self.buyingList or self.sellingList))
+	self.inspectorActions:InvalidateLayout(true)
+end
 
-	for _, v in SortedPairs(LocalPlayer():GetCharacter():GetInventory():GetItems()) do
-		if !v.noDrop then
-			self:addItem(v.uniqueID, "buying", v:GetID())
-		end
+function PANEL:TradeSelected(personal)
+	local row = self.selected
+	if not IsValid(row) or row.isLocal ~= personal or self:GetReadOnly() then return end
+	if (self.nextRequest or 0) > CurTime() then return end
+	self.nextRequest = CurTime() + 0.5
+	net.Start("ixVendorAdvTrade")
+	net.WriteString(row.item)
+	net.WriteUInt(personal and row.iteminstanceID or 0, 32)
+	net.WriteBool(personal)
+	net.SendToServer()
+	-- Stock broadcasts and inventory synchronization confirm changes, including rejected trades.
+end
+
+function PANEL:UpdateTrade()
+	if not self.character or not IsValid(self.entity) or LocalPlayer():GetCharacter() ~= self.character then
+		self:Remove()
+		return false
 	end
+	vgui.GetControlTable("DFrame").Think(self)
+	if self.screenWidth ~= ScrW() or self.screenHeight ~= ScrH() or self.uiScale ~= ix.cotzUI.GetScale() then
+		self:PostLayoutUpdate()
+	end
+	if (self.nextUpdate or 0) > CurTime() then return false end
+	self.nextUpdate = CurTime() + 0.25
+	self.vendorName:SetText(self.entity:GetDisplayName())
+	self.ourName:SetText("Your wallet: " .. ix.currency.Get(self.character:GetMoney()))
 
-	self:PostLayoutUpdate()
+	return true
 end
 
 function PANEL:OnRemove()
 	net.Start("ixVendorAdvClose")
 	net.SendToServer()
-
-	if (IsValid(ix.gui.vendorEditor)) then
-		ix.gui.vendorEditor:Remove()
-	end
-
+	if IsValid(ix.gui.vendorEditor) then ix.gui.vendorEditor:Remove() end
 	if ix.gui.vendor == self then
 		ix.gui.vendor = nil
-		local dialogue = ix.gui.dialogue
-		if IsValid(dialogue) and not dialogue.exiting then
-			dialogue:RequestFocus()
-		end
+		if IsValid(ix.gui.dialogue) and not ix.gui.dialogue.exiting then ix.gui.dialogue:RequestFocus() end
 	end
 end
 
 function PANEL:Think()
-	local entity = self.entity
-
-	if (!IsValid(entity)) then
-		self:Remove()
-
-		return
-	end
-
-	if ((self.nextUpdate or 0) < CurTime()) then
-		self:SetTitle("")
-		self.vendorName:SetText(entity:GetDisplayName()..(entity.money and " ("..ix.currency.Get(entity.money)..")" or ""))
-		self.ourName:SetText(L"you".." ("..ix.currency.Get(LocalPlayer():GetCharacter():GetMoney())..")")
-
-		self.nextUpdate = CurTime() + 0.25
-	end
-end
-
-function PANEL:OnItemSelected(panel)
-	local price = self.entity:GetPrice(panel.item, panel.isLocal, panel.iteminstanceID)
-	local isSherpaClient = LocalPlayer():GetCharacter():HasSherpaVendor(self.entity:GetDisplayName())
-	
-	if !isSherpaClient then
-		if (panel.isLocal) then
-			self.vendorBuy:SetText(L"sell".." ("..ix.currency.Get(price)..")")
-
-			if self.entity:GetSherpa() then
-				self.vendorBuy:SetText("You cannot sell to this vendor.")
-				self.vendorBuy:SetEnabled(false)
-			end
+	if not self:UpdateTrade() then return end
+	self:SyncPersonalItems()
+	for uniqueID in SortedPairs(self.entity.items) do self:addItem(uniqueID, "selling") end
+	for uniqueID, row in pairs(self.sellingList) do
+		local data = self.entity.items[uniqueID]
+		if not IsValid(row) or not data or not data[VENDOR_MODE] or data[VENDOR_MODE] == VENDOR_BUYONLY then
+			if IsValid(row) then row:Remove() end
+			self.sellingList[uniqueID] = nil
 		else
-			self.vendorSell:SetText(L"purchase".." ("..ix.currency.Get(price)..")")
-		end
-	else
-		if (panel.isLocal) then
-			self.vendorBuy:SetText("Give to vendor")
-		else
-			self.vendorSell:SetText("Take from vendor")
+			row:RefreshData()
 		end
 	end
-	
+	self:RefreshInspector()
 end
 
-vgui.Register("ixVendorAdv", PANEL, "ixStalkerFrame")
+vgui.Register("ixVendorAdv", PANEL, "DFrame")
 
 PANEL = {}
 
 function PANEL:Init()
-	self:SetTall(36)
-	self:DockMargin(4, 4, 4, 0)
+	self:SetText("")
+	self:DockMargin(0, 0, ix.cotzUI.Scale(6), ix.cotzUI.Scale(6))
+	self.icon = self:Add("DImage")
+	self.icon:SetKeepAspect(true)
+	self.name = ix.cotzUI.Label(self, "", true)
+	self.name:Dock(NODOCK)
+	self.name:SetTextColor(ix.cotzUI.colors.text)
+	self.stock = ix.cotzUI.Label(self, "")
+	self.stock:Dock(NODOCK)
+	self.price = ix.cotzUI.Label(self, "")
+	self.price:Dock(NODOCK)
+	for _, label in ipairs({self.name, self.stock, self.price}) do label:SetMouseInputEnabled(false) end
+	self.icon:SetMouseInputEnabled(false)
+	self.DoClick = function() self.owner:OnItemSelected(self) end
+	self.click = self
+end
 
-	self.name = self:Add("DLabel")
-	self.name:Dock(FILL)
-	self.name:DockMargin(48, 0, 0, 0)
-	self.name:SetFont("stalkerregularfont")
-	self.name:SetTextColor(color_white)
-	self.name:SetExpensiveShadow(1, Color(0, 0, 0, 200))
-
-	self.infocontainer = self.name:Add("DPanel")
-	self.infocontainer:Dock(RIGHT)
-	self.infocontainer:DockPadding(0, 0, 6, 0)
-	self.infocontainer:DockMargin(0, 0, 12, 0)
-	self.infocontainer:SetWide(self:GetWide() * 1.5)
-	self.infocontainer.Paint = function() end
-
-	self.stock = self.infocontainer:Add("DLabel")
-	self.stock:Dock(TOP)
-	self.stock:SetContentAlignment(6)
-	self.stock:SetFont("stalkerregularsmallfont")
-	self.stock:SetText("")
-
-	self.price = self.infocontainer:Add("DLabel")
-	self.price:SetContentAlignment(6)
-	self.price:Dock(FILL)
-	self.price:SetFont("stalkerregularsmallfont")
-
-	self.click = self:Add("DButton")
-	self.click:Dock(FILL)
-	self.click:SetText("")
-	self.click.Paint = function() end
-	self.click.DoClick = function(this)
-		if (self.isLocal) then
-			ix.gui.vendor.activeBuy = self
+function PANEL:SetupData(owner, data)
+	self.owner, self.data = owner, data
+	self.item, self.iteminstanceID, self.isLocal = data.uniqueID, data.personal and data.key or 0, data.personal
+	self.iconMaterial = ix.util.GetItemIcon(data.item)
+	self.icon:SetMaterial(self.iconMaterial)
+	self:RefreshData()
+	self:SetHelixTooltip(function(tooltip)
+		if owner.isInstanceVendor and not self.isLocal then
+			local name = tooltip:AddRow("name")
+			name:SetText(self.data.name)
+			name:SizeToContents()
+			local description = tooltip:AddRow("description")
+			description:SetText(self.data.description)
+			description:SizeToContents()
 		else
-			ix.gui.vendor.activeSell = self
+			ix.hud.PopulateItemTooltip(tooltip, self.data.item)
 		end
+	end)
+end
 
-		ix.gui.vendor:OnItemSelected(self)
+function PANEL:RefreshData()
+	local data = self.data
+	if not self.owner.isInstanceVendor then
+		data.name = data.item:GetName()
+		data.description = describeItem(data.item)
+		data.price = self.owner.entity:GetPrice(self.item, self.isLocal, self.iteminstanceID)
+		local info = self.owner.entity.items[self.item]
+		data.stock = not self.isLocal and info and info[VENDOR_MAXSTOCK] and info[VENDOR_STOCK] or nil
+		self.stock.curstock = data.stock
+		self.stock:SetText(self.isLocal and "Your inventory" or data.stock and
+			ix.vendorStock.FormatStock(data.stock, info[VENDOR_MAXSTOCK], info[VENDOR_TASK_PROGRESS]) or "Stock: Unlimited")
+	else
+		if self.isLocal then
+			data.name, data.description = data.item:GetName(), describeItem(data.item)
+		end
+		self.stock:SetText(self.isLocal and "Your inventory" or data.price > 0 and "Listed" or "Unlisted")
 	end
+	self.name:SetText(data.name)
+	self.price:SetText(self.isLocal and self.owner.isInstanceVendor and "Donate" or ix.currency.Get(data.price))
+end
+
+function PANEL:PerformLayout(width)
+	local gap, iconSize = ix.cotzUI.Scale(8), ix.cotzUI.Scale(44)
+	local textX, textWidth = iconSize + gap * 2, math.max(1, width - iconSize - gap * 3)
+	self.icon:SetPos(gap, gap)
+	self.icon:SetSize(iconSize, iconSize)
+	local y = gap
+	for _, label in ipairs({self.name, self.stock, self.price}) do
+		label:SetFont(label == self.name and "cotzUILabel" or "cotzUISmall")
+		label:SetPos(textX, y)
+		label:SetWide(textWidth)
+		label:SizeToContentsY()
+		y = y + label:GetTall()
+	end
+	local height = math.max(iconSize + gap * 2, y + gap)
+	if self:GetTall() ~= height then self:SetTall(height) end
 end
 
 function PANEL:SetCallback(callback)
-	self.click.DoClick = function(this)
-		callback()
-		self.selected = true
-	end
+	self.DoClick = function() callback() end
 end
 
-function PANEL:Setup(uniqueID, iteminstanceID)
-	local item = ix.item.instances[iteminstanceID] or ix.item.list[uniqueID]
-	local exIcon = ikon:GetIcon(item.uniqueID)
-	local wmax = 32
-	local hmax = 32
-	local whratio = 1
-
-	if item.width > item.height then
-		whratio = item.height / item.width
-		wmax = 32
-		hmax = 32 * whratio
-	elseif item.height > item.width then
-		whratio = item.width / item.height
-		wmax = 32 * whratio
-		hmax = 32
-	end
-
-	if (item) then
-		self.item = uniqueID
-		
-		self.iteminstanceID = iteminstanceID or 0
-		local iconMaterial = ix.util.GetItemIcon(item)
-
-		self.icon = self:Add("DImage")
-		self.icon:SetMaterial(iconMaterial)
-		self.icon:SetSize(wmax, hmax)
-		if hmax == 32 then
-			self.icon:SetPos(18 - (16 * whratio), 2)
-		else
-			self.icon:SetPos(2, 18 - (16 * whratio))
-		end
-
-		self.name:SetText(item:GetName())
-		self.itemName = item:GetName()
-
-		local entity = ix.gui.vendor.entity
-		if (!self.isLocal) then
-			self.stock:SetText("Stock: Unlimited")
-			if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
-				local info = entity.items[self.item]
-			
-				self.stock.curstock = info[VENDOR_STOCK]
-				self.stock:SetText(ix.vendorStock.FormatStock(self.stock.curstock, info[VENDOR_MAXSTOCK], info[VENDOR_TASK_PROGRESS]))
-			end
-		end
-
-		self.price:SetText(ix.currency.Get(entity:GetPrice(self.item, self.isLocal, self.iteminstanceID)).." ")
-		
-		self.stock:SizeToContents()
-		self.price:SizeToContents()
-		self.infocontainer:SizeToChildren()
-
-		self.click:SetHelixTooltip(function(tooltip)
-			ix.hud.PopulateItemTooltip(tooltip, item)
-
-			local entity = ix.gui.vendor.entity
-			if (entity and entity.items[self.item] and entity.items[self.item][VENDOR_MAXSTOCK]) then
-				local info = entity.items[self.item]
-				local stock = tooltip:AddRowAfter("name", "stock")
-				stock:SetText(ix.vendorStock.FormatStock(info[VENDOR_STOCK], info[VENDOR_MAXSTOCK], info[VENDOR_TASK_PROGRESS]))
-				stock:SetBackgroundColor(derma.GetColor("Info", self))
-				stock:SizeToContents()
-			end
-		end)
-	end
+function PANEL:Paint(width, height)
+	surface.SetDrawColor(self.owner.selected == self and ix.cotzUI.colors.track or ix.cotzUI.colors.card)
+	surface.DrawRect(0, 0, width, height)
+	surface.SetDrawColor(self.owner.selected == self and ix.cotzUI.colors.teal or ix.cotzUI.colors.border)
+	surface.DrawOutlinedRect(0, 0, width, height)
 end
 
-function PANEL:Think()
-	if ((self.nextUpdate or 0) < CurTime()) then
-		local entity = ix.gui.vendor.entity
-
-		if (entity and self.isLocal) then
-			local count = LocalPlayer():GetCharacter():GetInventory():GetItemCount(self.item)
-
-			if (count == 0) then
-				self:Remove()
-			end
-		end
-
-		self.nextUpdate = CurTime() + 0.1
-	end
-end
-
-function PANEL:Paint(w, h)
-	if (ix.gui.vendor.activeBuy == self or ix.gui.vendor.activeSell == self) then
-		surface.SetDrawColor(ix.config.Get("color"))
-	else
-		surface.SetDrawColor(0, 0, 0, 100)
-	end
-
-	surface.DrawRect(0, 0, w, h)
-end
-
-vgui.Register("ixVendorAdvItem", PANEL, "DPanel")
+vgui.Register("ixVendorAdvItem", PANEL, "DButton")

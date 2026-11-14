@@ -56,7 +56,17 @@ local items = {}
 local inventory = {}
 function inventory:GetItems() return items end
 function inventory:GetItemByID(id) return items[id] end
-local character = {GetInventory = function() return inventory end}
+local function newCharacter()
+	local value = {data = {}, GetInventory = function() return inventory end}
+	function value:GetData(key, default) return self.data[key] or default end
+	function value:SetData(key, entry)
+		self.data[key] = entry
+		self.saved = table.Copy(self.data)
+	end
+
+	return value
+end
+local character = newCharacter()
 local client = {valid = true, GetCharacter = function() return character end}
 function client:Notify(message) self.notification = message end
 function LocalPlayer() return client end
@@ -65,10 +75,8 @@ items[usb.id] = usb
 local device = pda(2, false)
 items[device.id] = device
 
-check(not action.OnCanRun(usb), "Detached PDA cannot install maps")
-check(action.OnRun(usb) == false, "Server rejects detached PDA and retains USB")
-device.data.equip = true
-check(action.OnCanRun(usb), "Equipped PDA accepts map USB")
+check(action.name == "Add to Maps", "Right-click action names the main menu destination")
+check(action.OnCanRun(usb), "Map USB works without an equipped PDA")
 items[usb.id] = nil
 check(action.OnRun(usb) == false, "USB from another inventory is rejected server-side")
 items[usb.id] = usb
@@ -80,48 +88,45 @@ check(action.OnRun(usb) == false, "Unknown map cannot be installed")
 usb.mapID = "swamps"
 character = nil
 check(action.OnRun(usb) == false, "Character switching invalidates action")
-character = {GetInventory = function() return inventory end}
+character = newCharacter()
 local tabs = {}
 plugin:CreateMenuButtons(tabs)
 check(tabs.maps == nil, "Maps tab is absent before installing a map")
 
 check(action.OnRun(usb) == true, "Successful action permits Helix to consume the USB")
-check(device.data.cotzMaps.swamps and device.saved.cotzMaps.swamps, "Map is persisted on the equipped PDA")
+check(character.data.cotzMaps.swamps and character.saved.cotzMaps.swamps, "Map is persisted on the character")
 check(client.notification:find("Swamps", 1, true), "Installation confirms the map")
 check(not action.OnCanRun(usb), "Already installed map hides the install action")
 check(action.OnRun(usb) == false, "Repeated request retains a duplicate USB")
 plugin:CreateMenuButtons(tabs)
 check(type(tabs.maps) == "function", "Installed map enables Maps tab")
 
-local replacement = pda(3, true)
 items[device.id] = nil
-items[replacement.id] = replacement
-check(#plugin:GetInstalledMaps(client) == 0, "A replacement PDA does not inherit another device's maps")
-check(action.OnRun(usb) == false, "Rapid install into another device is rate-limited")
-now = now + 1
-check(action.OnRun(usb) == true, "A later install into a different PDA succeeds")
-device.data = table.Copy(device.saved)
-items[replacement.id] = nil
+check(plugin:GetInstalledMaps(client)[1].id == "swamps", "Removing the PDA preserves map access")
+local owner = character
+character = newCharacter()
+check(#plugin:GetInstalledMaps(client) == 0, "Another character does not inherit unlocked maps")
+character = owner
+character.data = table.Copy(character.saved)
+check(plugin:GetInstalledMaps(client)[1].id == "swamps", "Restored character retains map access")
+plugin.maps.legacy = {name = "Legacy"}
+device.data.cotzMaps = {legacy = true}
 items[device.id] = device
-check(plugin:GetInstalledMaps(client)[1].id == "swamps", "Restored PDA data preserves installed maps")
-device.data.equip = false
-check(#plugin:GetInstalledMaps(client) == 0, "Detaching PDA removes map access")
-device.data.equip = true
-local recipientInventory = {GetItems = function() return {[device.id] = device} end}
-local recipientCharacter = {GetInventory = function() return recipientInventory end}
-local recipient = {valid = true, GetCharacter = function() return recipientCharacter end}
-items[device.id] = nil
-check(#plugin:GetInstalledMaps(client) == 0, "Original owner loses maps after transferring the PDA")
-check(plugin:GetInstalledMaps(recipient)[1].id == "swamps", "Map access follows PDA inventory ownership")
-items[device.id] = device
+plugin:PlayerLoadedCharacter(client, character)
+check(character.data.cotzMaps.legacy and character.data.cotzMaps.swamps,
+	"Legacy PDA maps merge without replacing character unlocks")
+plugin:PlayerLoadedCharacter(client, character)
+check(character.data.cotzMaps.legacy, "Legacy migration is repeatable")
+plugin.maps.legacy = nil
 plugin.maps.garbage = {name = "Garbage", urlConfig = "pdaMapGarbageURL"}
 usb.mapID = "garbage"
+check(action.OnRun(usb) == false, "Rapid map unlock is rate-limited")
 now = now + 1
-check(action.OnRun(usb) == true, "Additional map USB installs into the same PDA")
-check(device.data.cotzMaps.swamps and device.data.cotzMaps.garbage, "Installing another map preserves prior maps")
+check(action.OnRun(usb) == true, "Additional map USB unlocks another character map")
+check(character.data.cotzMaps.swamps and character.data.cotzMaps.garbage, "Installing another map preserves prior maps")
 local collection = plugin:GetInstalledMaps(client)
 check(#collection == 2 and collection[1].id == "garbage", "Installed map choices are sorted by name")
-device.data.cotzMaps.unknown = true
+character.data.cotzMaps.unknown = true
 check(#plugin:GetInstalledMaps(client) == 2, "Unknown saved map IDs are not displayed")
 plugin.maps.garbage = nil
 usb.mapID = "swamps"

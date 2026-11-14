@@ -1,5 +1,9 @@
 # Town NPCs
 
+Town trading uses the shared [stock inspector](../vendor_adv/README.md#trading-interface), with
+Buy/Sell tabs and a persistent selected-item pane. This changes presentation only; catalogue unlocks,
+personal stock, prices and trade eligibility retain their existing server rules.
+
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over

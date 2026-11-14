@@ -126,7 +126,7 @@ local function isOutsideEventPoint(row, source)
 end
 
 function ix.jobs.field.SelectDefenceSite(settings, map, usable)
-	local sites = ix.jobs.field.CollectPoints(settings.sources, map, isOutsideEventPoint)
+	local sites, names = ix.jobs.field.CollectPoints(settings.sources, map, isOutsideEventPoint)
 	local approaches = ix.jobs.field.CollectPoints(settings.attackSources, map, isOutsideEventPoint)
 	table.Shuffle(sites)
 	table.Shuffle(approaches)
@@ -140,7 +140,8 @@ function ix.jobs.field.SelectDefenceSite(settings, map, usable)
 				if #nearby >= settings.maxSpawnPoints then break end
 			end
 		end
-		if #nearby > 0 and (not usable or usable(site)) then return site, nearby end
+		local name = names[tostring(site)]
+		if #nearby > 0 and (not usable or usable(site, name)) then return site, nearby, name end
 	end
 end
 

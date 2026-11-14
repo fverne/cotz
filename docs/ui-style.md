@@ -69,6 +69,13 @@ Moved item definitions, unchanged legacy interfaces and upstream Helix upgrade c
 COTZ surfaces. Existing vendor stock/tooltips continue using the COTZ inventory/vendor presentation.
 Visual changes preserve network names, permissions, cooldowns, saved state and gameplay tuning.
 
+Advanced town traders and Sherpa/squad vendors now share a stock inspector: a tabbed item list and
+selected-item details/actions. Town traders use Buy/Sell; Sherpas use Stock/Donate with donation and
+management controls gated by rank. Pagination, refresh, earnings and authorized management actions
+are visible in the footer. This feature-owned window uses the shared COTZ styling rather than changing
+the legacy inventory or global Derma skin. Run `luatex --luaonly tests/vendor_inspector_spec.lua` for
+selection, permission and refresh regressions, then verify docking and rendering in multiplayer.
+
 ## Verification
 
 Run `luatex --luaonly tests/cotz_ui_spec.lua` for shared window bounds at 1024×768, 1280×720,

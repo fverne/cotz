@@ -457,6 +457,14 @@ fallback when graph candidates are unavailable or blocked. The validated positio
 directly without another `DropToFloor`. Positions occupied by nearby players are skipped;
 unsafe or population-limited spawns remain pending. Existing point data cannot guarantee navigable NPC paths;
 verify representative outdoor sites in-game.
+
+`ix.jobs.field.SelectDefenceSite(settings, map, usable)` returns the site vector, packed approaches and
+the selected event point's location text. Its optional `usable(site, name)` filter can reject unnamed or
+blocked sites. Server-side `ix.jobs.field.FindDefenceSpawn(defence)` shuffles `defence.spawnPoints` and applies
+shared placement, `defence.playerSafeDistance` and hard population checks, returning a position or
+`nil, reason`. Research encounters and automated supply-van mutant defenses both use these helpers;
+their wave ownership, budgets, objectives and rewards remain separate.
+
 Wave class lists and counts, health, recording duration, disruption, radius and retry
 parameters live in `field.settings.defence`. Wave compositions are rolled once on
 acceptance and saved. An unavailable population manager or missing approaches hides

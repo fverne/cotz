@@ -43,23 +43,6 @@ function PLUGIN:NotifyDefense(message)
 	for _, client in pairs(present) do client:Notify(message) end
 end
 
-function PLUGIN:StartDefense(position)
-	if self.event then return "A mutant defense is already active." end
-	if not ix.eventController or not ix.vendorStock then return "Defense requires the encounter and vendor plugins." end
-	local center = ix.eventController:GetGroundedSpawnLocation(position)
-	if not center then return "That location has no clear, safe ground for a defense." end
-	self.event = {
-		center = center, started = CurTime(), nextWave = CurTime() + self.settings.preparation,
-		phase = "preparing", wave = 0, slots = {}, candidates = {}, credited = {}, deaths = {},
-	}
-	self:NotifyDefense(
-		"Mutant defense begins in " .. self.settings.preparation
-		.. " seconds. Hold the area for a full wave and remain until the defense ends to earn a restock voucher."
-	)
-
-	return "Defense placed at " .. tostring(center) .. ". Radius: " .. self.settings.defendRadius .. " units."
-end
-
 function PLUGIN:RemainingAttackers()
 	local remaining = 0
 	for _, slot in ipairs(self.event.slots) do
@@ -73,6 +56,7 @@ function PLUGIN:BeginDefenseWave(living)
 	local event = self.event
 	event.wave = event.wave + 1
 	event.phase, event.slots, event.candidates = "fighting", {}, {}
+	event.nextWave = nil
 	event.pack = ix.eventController:CreateCombatPack(event.center, true)
 	local count = math.min(#living, self.settings.scalingCap)
 	for _, group in ipairs(self.settings.waves[event.wave]) do
@@ -89,21 +73,10 @@ function PLUGIN:BeginDefenseWave(living)
 end
 
 function PLUGIN:FindDefenseSpawn()
-	local reason = "no safe spawn position in the spawn band"
-	for _ = 1, self.settings.placementAttempts do
-		local position = ix.eventController:GetSpawnLocation(self.event.center, self.settings.spawnMaximum)
-		if position and position:DistToSqr(self.event.center) >= self.settings.spawnMinimum ^ 2
-			and position:DistToSqr(self.event.center) <= self.settings.spawnMaximum ^ 2 then
-			if ix.eventController:HasPlayerNear(position, self.settings.playerSafeDistance) then
-				reason = "players too close to spawn positions"
-			elseif not ix.eventController:CanSpawnMutant(position, true) then
-				reason = "mutant population limit"
-			else
-				return position
-			end
-		end
-	end
+	local position, reason = ix.jobs.field.FindDefenceSpawn(self.event)
 	self.event.spawnBlocked = reason
+
+	return position
 end
 
 function PLUGIN:SpawnDefenseAttackers(living)
@@ -157,6 +130,9 @@ function PLUGIN:EndDefense(message, success)
 	self:NotifyDefense(message)
 	-- Detach before removing actors or granting items: callbacks cannot finish this event twice.
 	self.event = nil
+	-- A pre-automation session may still be active when this plugin is reloaded.
+	if event.dupePlugin then event.dupePlugin:DespawnDupe(event.dupeID) end
+	self:ScheduleDefense()
 	for _, slot in ipairs(event.slots) do
 		if slot.entity then attackers[slot.entity] = nil end
 		if not slot.killed and IsValid(slot.entity) then slot.entity:Remove() end
@@ -171,7 +147,23 @@ end
 function PLUGIN:UpdateDefense()
 	local event = self.event
 	if not event then return end
-	if not ix.eventController or CurTime() - event.started >= self.settings.timeout then
+	local dependencyError = self:GetDefenseDependencyError()
+	if dependencyError then
+		self:EndDefense(dependencyError)
+		return
+	end
+	if event.phase == "deploying" then
+		if CurTime() >= event.deployDeadline then
+			self:EndDefense("Supply-van deployment timed out.")
+			self:DefenseStartFailed("Supply-van deployment timed out.")
+		end
+		return
+	end
+	if event.phase == "warning" then
+		if CurTime() < event.nextWave then return end
+		event.phase, event.started = "preparing", CurTime()
+	end
+	if CurTime() - event.started >= self.settings.timeout then
 		self:EndDefense("Mutant defense failed: the encounter timed out or its spawning service stopped.")
 		return
 	end
@@ -205,7 +197,7 @@ function PLUGIN:UpdateDefense()
 	if self:RemainingAttackers() > 0 then return end
 	for id, character in pairs(event.candidates) do event.credited[id] = character end
 	if event.wave == #self.settings.waves then
-		self:EndDefense("Mutant defense complete. Defenders who held a full wave earn a restock voucher.", true)
+		self:EndDefense("Mutant defense complete. Defenders who held a full wave earn a trader supply.", true)
 		return
 	end
 	event.phase, event.nextWave = "break", CurTime() + self.settings.waveBreak
@@ -213,9 +205,13 @@ function PLUGIN:UpdateDefense()
 end
 
 function PLUGIN:Think()
-	if not self.event or CurTime() < nextUpdate then return end
+	if self.enabled == false or CurTime() < nextUpdate then return end
 	nextUpdate = CurTime() + self.settings.updateInterval
-	self:UpdateDefense()
+	if self.event then
+		self:UpdateDefense()
+	else
+		self:UpdateDefenseSchedule()
+	end
 end
 
 function PLUGIN:PlayerDeath(client)
@@ -245,7 +241,9 @@ function PLUGIN:PreCleanupMap()
 end
 
 function PLUGIN:OnUnload()
+	self.enabled = false
 	self:EndDefense("Mutant defense cancelled because its plugin stopped.")
+	self.nextDefense = nil
 	ix.mutantDefense = nil
 end
 
@@ -253,10 +251,22 @@ function PLUGIN:OnLoaded()
 	ix.mutantDefense = self
 	-- Discard a running session when Helix reloads this existing plugin table.
 	if self.event then self:EndDefense("Mutant defense cancelled because its plugin reloaded.") end
+	self.enabled = true
+	nextUpdate = 0
+	self:ScheduleDefense()
 end
 
 function PLUGIN:PluginUnloaded(uniqueID)
-	if uniqueID ~= self.uniqueID and uniqueID ~= "eventcontroller" then return end
+	if uniqueID == self.uniqueID then
+		self:OnUnload()
+		return
+	end
+	if not self:IsDefenseDependency(uniqueID) then return end
 	self:EndDefense("Mutant defense cancelled because a required plugin stopped.")
-	if uniqueID == self.uniqueID then ix.mutantDefense = nil end
+end
+
+function PLUGIN:PluginLoaded(uniqueID)
+	if self:IsDefenseDependency(uniqueID) then
+		self:EndDefense("Mutant defense cancelled because a required plugin reloaded.")
+	end
 end

@@ -9,17 +9,6 @@ ix.config.Add("pdaMapSwampsURL", "https://media.discordapp.net/attachments/67384
 	category = "PDA Maps",
 })
 
-function PLUGIN:GetEquippedMapPDA(client)
-	if not IsValid(client) then return end
-	local character = client:GetCharacter()
-	local inventory = character and character:GetInventory()
-	if not inventory then return end
-
-	for _, item in pairs(inventory:GetItems(true)) do
-		if item.isPDA and item:GetData("equip") == true then return item end
-	end
-end
-
 function PLUGIN:GetMapInstallTarget(item)
 	if IsValid(item.entity) or not self.maps[item.mapID] then return end
 	local client = item.player
@@ -27,15 +16,14 @@ function PLUGIN:GetMapInstallTarget(item)
 	local character = client:GetCharacter()
 	local inventory = character and character:GetInventory()
 	if not inventory or inventory:GetItemByID(item.id) ~= item then return end
-	local pda = self:GetEquippedMapPDA(client)
-	if not pda or pda:GetData("cotzMaps", {})[item.mapID] == true then return end
+	if character:GetData("cotzMaps", {})[item.mapID] == true then return end
 
-	return pda
+	return character
 end
 
 function PLUGIN:GetInstalledMaps(client)
-	local pda = self:GetEquippedMapPDA(client)
-	local installed = pda and pda:GetData("cotzMaps", {}) or {}
+	local character = IsValid(client) and client:GetCharacter()
+	local installed = character and character:GetData("cotzMaps", {}) or {}
 	local maps = {}
 	for id, definition in pairs(self.maps) do
 		if installed[id] == true then maps[#maps + 1] = {id = id, name = definition.name} end

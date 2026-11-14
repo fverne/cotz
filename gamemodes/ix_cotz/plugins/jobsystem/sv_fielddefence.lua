@@ -98,22 +98,27 @@ function ix.jobs.field.StartDefence(client, character, npc, job)
 	client:Notify("Research started. Stay near the sampler, clear the waves and keep mutants away from it.")
 end
 
-local function spawnPosition(defence)
+function ix.jobs.field.FindDefenceSpawn(defence)
 	local points = table.Copy(defence.spawnPoints)
+	local reason = "no safe spawn position near the approaches"
 	table.Shuffle(points)
 	for _, packed in ipairs(points) do
 		local point = ix.eventController:GetSpawnLocation(ix.jobs.field.Unpack(packed))
-		if point
-			and not ix.eventController:HasPlayerNear(point, defence.playerSafeDistance)
-			and ix.eventController:CanSpawnMutant(point, true) then
+		if point and ix.eventController:HasPlayerNear(point, defence.playerSafeDistance) then
+			reason = "players too close to spawn positions"
+		elseif point and not ix.eventController:CanSpawnMutant(point, true) then
+			reason = "mutant population limit"
+		elseif point then
 			return point
 		end
 	end
+
+	return nil, reason
 end
 
 local function spawnAttacker(defence, encounter, slot)
 	if spawnBudget <= 0 then return end
-	local position = spawnPosition(defence)
+	local position = ix.jobs.field.FindDefenceSpawn(defence)
 	if not position then return end
 	spawnBudget = spawnBudget - 1
 	local npc = ents.Create(slot.class)

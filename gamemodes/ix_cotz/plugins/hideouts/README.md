@@ -360,10 +360,12 @@ Place a **Squad vendor** marker in the shell to configure its reset point. For a
 reports failure. Vendor movement/reset closes shop sessions.
 
 Use the vendor's dialogue to trade, donate supplies, access the existing personal bank or manage stock.
-Stock opens in the advanced vendor's two-column trading window: vendor instances on the left, eligible
-player items on the right. Select an item and use Purchase/Donate; officers right-click vendor stock to
-set its whole-instance price or recover it. Options contains pages, transaction history, management and
-leader treasury withdrawals. The window does not remove rows optimistically when sending a request.
+Stock opens in the shared stock inspector: **Stock / Donate** tabs select the item list on the left,
+with the selected item's details and actions on the right. Select an item and use Purchase/Donate;
+officers use the visible Set price, Unlist and Recover actions. The footer exposes pages, refresh,
+transaction history, hideout management and leader treasury withdrawals according to rank.
+Refreshes retain the selected instance when it remains on the current page. The window does not remove
+rows optimistically when sending a request. See the [Sherpa guide](../sherpas/README.md) for UI checks.
 
 Administrators use **Edit Vendor** for model, name, description, bubble, sound group, animation group and
 idle sequence. Skin/bodygroup properties remain available through the existing furnishing permissions.
@@ -393,7 +395,7 @@ Players do not need chat commands. All hideout commands are restricted to admini
 | Use the entrance keypad or squad entrance | Enter an accessible hideout; owners/officers can manage access and invitations |
 | Use the interior exit | Leave; owners/officers can manage invitations/access, reset the layout and reset the vendor |
 | Use a container | Personal owner: open/set sharing; squad officer: open/install/upgrade/set rank; other permitted users: open |
-| Use the squad vendor | Dialogue opens trading, donations and personal bank; stock Options exposes authorized management and treasury actions |
+| Use the squad vendor | Dialogue opens trading, donations and personal bank; the inspector footer exposes authorized management and treasury actions |
 | Tab → Squads → Squad hideout | Leaders/officers can optionally place/relocate a dedicated entrance and upgrade prop capacity |
 
 Management requests bind to the active character and the relevant entrance, exit, vendor, or container.

@@ -9,7 +9,7 @@ function ix.dialogue.ConfigureMutantDefense(dialogue)
 		return client:GetCharacter() ~= nil
 	end
 	dialogue.addTopic("DefenseVoucher", {
-		statement = "Hand over a restock voucher.",
+		statement = "Hand over a trader supply.",
 		response = "",
 		category = "trade",
 		quickAction = true,

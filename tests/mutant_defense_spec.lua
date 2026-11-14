@@ -7,6 +7,7 @@ end
 
 local function copy(value)
 	if type(value) ~= "table" then return value end
+	if isvector and isvector(value) then return Vector(value.x, value.y, value.z) end
 	local result = {}
 	for key, entry in pairs(value) do result[key] = copy(entry) end
 
@@ -25,10 +26,18 @@ function vectorMeta:DistToSqr(other)
 	return (self.x - other.x) ^ 2 + (self.y - other.y) ^ 2 + (self.z - other.z) ^ 2
 end
 function Vector(x, y, z) return setmetatable({x = x, y = y, z = z}, vectorMeta) end
+function vectorMeta.__tostring(value) return value.x .. ":" .. value.y .. ":" .. value.z end
+function vectorMeta.__add(a, b) return Vector(a.x + b.x, a.y + b.y, a.z + b.z) end
+function isvector(value) return getmetatable(value) == vectorMeta end
+function istable(value) return type(value) == "table" end
+function Color(...) return {...} end
+function Material(path) return path end
 function CurTime() return now end
 function IsValid(value) return type(value) == "table" and not value.invalid end
 function ErrorNoHalt(message) error(message) end
 table.Copy = copy
+table.Shuffle = function() end
+game = {GetMap = function() return "test_map" end}
 SERVER, MOVETYPE_NOCLIP, MOVETYPE_OBSERVER, OBS_MODE_NONE = true, 8, 10, 0
 timer = {Simple = function(_, callback) timers[#timers + 1] = callback end}
 local function flushTimers()
@@ -38,7 +47,19 @@ local function flushTimers()
 end
 player = {Iterator = function() return ipairs(clients) end}
 hook = {Run = function() if vendorBlocked then return false end end}
+local announcements, chatClasses, pastes, despawns = {}, {}, {}, {}
+local deferPaste, failPaste, pasteWithoutCallback = false, false, false
+local lastApproach, lastRadius
 ix = {
+	jobs = {field = {}},
+	plugin = {list = {}, unloaded = {}},
+	chat = {
+		Register = function(id, class) chatClasses[id] = class end,
+		Send = function(speaker, id, message, anonymous, receivers)
+			announcements[#announcements + 1] = {speaker = speaker, id = id, message = message,
+				anonymous = anonymous, receivers = receivers}
+		end,
+	},
 	temp = {Corpses = {}}, char = {loaded = {}},
 	command = {Add = function(id, definition) commands[id] = definition end},
 	util = {Include = function(path) dofile(ROOT .. "mutantdefense/" .. path) end},
@@ -50,7 +71,10 @@ ix = {
 	end},
 	eventController = {
 		GetGroundedSpawnLocation = function(_, position) if placement then return position end end,
-		GetSpawnLocation = function() if placement then return spawnPoint or Vector(1200, 0, 0) end end,
+		GetSpawnLocation = function(_, approach, radius)
+			lastApproach, lastRadius = approach, radius
+			if placement then return spawnPoint or Vector(1200, 0, 0) end
+		end,
 		HasPlayerNear = function() return playerNear end,
 		CanSpawnMutant = function() return capacity end,
 		CreateCombatPack = function(_, origin, isolated) return {origin = origin, isolated = isolated} end,
@@ -61,9 +85,34 @@ ix = {
 		SetCombatTarget = function(_, entity, target) entity.target = target end,
 	},
 }
+ix.plugin.Get = function(id) return ix.plugin.list[id] end
+local dupePlugin = {}
+function dupePlugin:SpawnDupe(name, id, offset, position, options, callback)
+	local request = {name = name, id = id, offset = offset, position = position,
+		options = options, callback = callback}
+	pastes[#pastes + 1] = request
+	if pasteWithoutCallback then return false, "Paste refused without callback." end
+	if deferPaste then return true end
+	callback(not failPaste, failPaste and "Missing dupe." or {{}})
+
+	return not failPaste, "Missing dupe."
+end
+function dupePlugin:DespawnDupe(id) despawns[id] = (despawns[id] or 0) + 1 end
+ix.plugin.list = {
+	eventcontroller = {eventpoints = {test_map = {
+		{Vector(0, 0, 0), "near the old road", "swamps_outside_easy"},
+		{Vector(3000, 0, 0), "by the crossing", "swamps_outside_hard"},
+	}}},
+	advdupeint = dupePlugin, jobsystem = {}, vendor_adv = {}, dialogue = {},
+}
+dofile(ROOT .. "jobsystem/definitions/sh_fieldsettings.lua")
+dofile(ROOT .. "jobsystem/libs/sh_fieldtasks.lua")
+dofile(ROOT .. "jobsystem/sv_fielddefence.lua")
 PLUGIN = {uniqueID = "mutantdefense"}
 dofile(ROOT .. "mutantdefense/sh_plugin.lua")
 local plugin = PLUGIN
+plugin:OnLoaded()
+plugin:InitializedChatClasses()
 ents = {Create = function(class)
 	local entity = {class = class}
 	function entity:SetPos(position) self.position = position end
@@ -80,10 +129,11 @@ end}
 local serial = 0
 local function newClient()
 	serial = serial + 1
-	local character = {id = serial, data = {}, saves = 0}
+	local character = {id = serial, data = {}, saves = 0, money = 0}
 	local client = {character = character, position = Vector(0, 0, 0), alive = true, messages = {}}
 	local inventory = {owner = serial, items = {}, full = false, additions = 0}
 	character.inventory, character.client = inventory, client
+	function character:GiveMoney(amount) self.money = self.money + amount end
 	function character:GetID() return self.id end
 	function character:GetData(key, default)
 		if self.data[key] == nil then return default end
@@ -142,7 +192,7 @@ local function resetEvent()
 	capacity, placement, playerNear, rejectSpawn = true, true, false, false
 	ix.temp.Corpses = {}
 	now = now + 1000
-	plugin:StartDefense(Vector(0, 0, 0))
+	plugin:StartDefense()
 end
 local function beginWave()
 	now = plugin.event.nextWave
@@ -162,12 +212,12 @@ for _, id in ipairs({"MutantDefenseStart", "MutantDefenseCancel", "MutantDefense
 	check(commands[id].adminOnly and #commands[id].arguments == 0, id .. " has Helix admin permissions")
 end
 placement = false
-check(plugin:StartDefense(Vector(0, 0, 0)):find("safe ground") and not plugin.event,
+check(plugin:StartDefense():find("safe ground") and not plugin.event,
 	"invalid centers do not create an event")
 resetEvent()
-check(plugin.event.phase == "preparing", "event starts in preparation")
+check(plugin.event.phase == "warning", "event starts with the ten-minute warning")
 local original = plugin.event
-plugin:StartDefense(Vector(500, 0, 0))
+plugin:StartDefense()
 check(plugin.event == original, "only one event can run")
 now = plugin.event.nextWave - 1
 plugin:UpdateDefense()
@@ -238,11 +288,15 @@ check(#created == createdBefore, "nearby players prevent spawning")
 playerNear = false
 spawnPoint = Vector(2500, 0, 0)
 plugin:UpdateDefense()
-check(#created == createdBefore, "square fallback samples beyond the outer radius are rejected")
+check(#created == createdBefore + 2 and lastApproach.x == 3000 and lastRadius == nil,
+	"attackers use research approaches and the placement service's default radius instead of a center ring")
 spawnPoint = Vector(500, 0, 0)
 plugin:UpdateDefense()
-check(#created == createdBefore, "spawns inside the inner band are rejected")
+check(plugin.event.slots[3].entity.position == spawnPoint,
+	"validated research placement is used directly without a second ring restriction")
 spawnPoint = nil
+resetEvent()
+beginWave()
 rejectSpawn = true
 plugin:UpdateDefense()
 check(plugin:RemainingAttackers() == 3 and not plugin.event.slots[1].entity,
@@ -285,6 +339,7 @@ local survivor = plugin.event.slots[1].entity
 plugin:PreCleanupMap()
 check(not plugin.event and survivor.invalid, "map cleanup removes surviving event attackers")
 resetEvent()
+beginWave()
 now = plugin.event.started + plugin.settings.timeout
 plugin:UpdateDefense()
 check(not plugin.event, "overall timeout fails the event")
@@ -399,13 +454,17 @@ restockAllowed = false
 now = now + 2
 check(not plugin:RedeemVoucher(holder, vendor) and not delivered.removed,
 	"full shelves keep the voucher")
+check(holderChar.money == 0, "payment: full shelves keep the voucher")
 restockAllowed = true
 check(not plugin:RedeemVoucher(holder, vendor), "server action cooldown rejects repeated requests")
+check(holderChar.money == 0, "payment: server action cooldown rejects repeated requests")
 now = now + 2
 check(plugin:RedeemVoucher(holder, vendor) and delivered.removed and restocks == 1,
 	"one successful hand-in consumes one voucher")
+check(holderChar.money == 1000, "payment: one successful hand-in consumes one voucher")
 now = now + 2
 check(not plugin:RedeemVoucher(holder, vendor) and restocks == 1, "replayed hand-in has no item to redeem")
+check(holderChar.money == 1000, "payment: replayed hand-in has no item to redeem")
 holderChar.inventory.items = {}
 plugin:AwardVoucher(holderChar)
 delivered = finishInsert()
@@ -413,6 +472,7 @@ secondChar.inventory.items = {delivered}
 holderChar.inventory.items = {}
 now = now + 2
 check(plugin:RedeemVoucher(second, vendor), "another character may redeem a transferred voucher")
+check(secondChar.money == 1000 and holderChar.money == 1000, "payment: another character may redeem a transferred voucher")
 delivered.cotzDefenseRedeeming = nil
 holderChar.inventory.items = {delivered}
 for _, failure in ipairs({"distance", "access", "sherpa", "class", "hook", "character"}) do
@@ -425,6 +485,7 @@ for _, failure in ipairs({"distance", "access", "sherpa", "class", "hook", "char
 	holder.character = holderChar
 	if failure == "character" then holder.character = nil end
 	check(not plugin:RedeemVoucher(holder, vendor) and not delivered.removed, failure .. " rejects redemption")
+	check(holderChar.money == 1000, failure .. " rejection pays nothing")
 end
 holder.character, holder.position = holderChar, Vector(0, 0, 0)
 vendor.denied, vendor.sherpa, vendor.class, vendorBlocked = false, false, nil, false
@@ -537,5 +598,223 @@ reviveCommand.OnRun(reviveCommand, first, "Defender", 100)
 check(first.messages[#first.messages] == "The target is not dead, they can't be revived!",
 	"charrevive safely rejects a player without a valid dead body")
 ix.temp.Corpses[first] = emptyBody
+
+-- Automation uses the actual research selector and spawn helper with a mocked external paste boundary.
+local random = math.random
+math.random = function(minimum, maximum)
+	check(minimum == 1800 and maximum == 3600, "schedule rolls the configured 30–60 minute interval")
+
+	return minimum
+end
+plugin:ScheduleDefense()
+check(plugin.nextDefense == now + 1800, "schedule includes its lower bound")
+math.random = function(_, maximum) return maximum end
+plugin:ScheduleDefense()
+check(plugin.nextDefense == now + 3600, "schedule includes its upper bound")
+math.random = random
+
+local news = chatClasses["cotz/mutantdefense/announcement"]
+check(news and news.CanSay(nil, nil) and not news.CanSay(nil, first) and news.CanHear(),
+	"announcement class permits only system messages with map-wide hearing")
+resetEvent()
+local scene = plugin.event
+local lastPaste = pastes[#pastes]
+check(lastPaste.name == "event_mutantdefense_supplyvan" and lastPaste.options.noItems,
+	"the configured supply-van dupe is pasted without loose item conversion")
+check(lastPaste.position == scene.center and lastPaste.offset.x == 0,
+	"dupe anchors at the grounded research site with the configured offset")
+check(scene.location == "near the old road" and scene.spawnPoints[1][1] == 3000,
+	"selected eventadd text and research approaches are retained")
+local warning = announcements[#announcements]
+check(warning.speaker == nil and warning.anonymous and warning.id == "cotz/mutantdefense/announcement",
+	"warning uses the local system chat class")
+check(warning.message == "The supply van has crashed near the old road. Go secure the site if you want supplies back in town! Mutant waves begin in 10 minutes.",
+	"warning includes eventadd text and the ten-minute lead time")
+check(scene.nextWave == now + 600 and scene.started == nil, "combat timeout has not begun during the warning")
+check(commands.MutantDefenseStatus.OnRun():find("countdown 600 seconds", 1, true)
+	and commands.MutantDefenseStatus.OnRun():find(scene.dupeID, 1, true),
+	"status exposes warning countdown and dupe instance")
+first.position = Vector(9000, 0, 0)
+now = scene.nextWave - 1
+plugin:UpdateDefense()
+check(plugin.event == scene and scene.wave == 0 and not scene.emptySince and not scene.started,
+	"599 seconds without defenders cannot trigger waves, abandonment or encounter timeout")
+first.position = Vector(0, 0, 0)
+now = scene.nextWave
+plugin:UpdateDefense()
+check(scene.phase == "fighting" and scene.wave == 1 and scene.started == now,
+	"wave one begins at 600 seconds without another preparation period")
+now = scene.started + plugin.settings.timeout
+plugin:UpdateDefense()
+check(not plugin.event and despawns[scene.dupeID], "fight timeout cleans the tracked scene")
+check(plugin.nextDefense >= now + 1800 and plugin.nextDefense <= now + 3600,
+	"event termination rolls the next full interval")
+
+resetEvent()
+scene = plugin.event
+first.position = Vector(9000, 0, 0)
+now = scene.nextWave
+plugin:UpdateDefense()
+check(scene.emptySince == now and scene.wave == 0, "abandonment grace begins only at the warning deadline")
+now = now + plugin.settings.abandonGrace
+plugin:UpdateDefense()
+check(not plugin.event and despawns[scene.dupeID], "unattended crashes expire and remove their scene")
+
+resetEvent()
+plugin:EndDefense("test")
+deferPaste = true
+local beforeNews = #announcements
+plugin:StartDefense()
+scene, lastPaste = plugin.event, pastes[#pastes]
+check(scene.phase == "deploying" and #announcements == beforeNews, "pending paste has no early announcement")
+local beforePastes = #pastes
+plugin:StartDefense()
+plugin:UpdateDefenseSchedule()
+check(#pastes == beforePastes, "deployment excludes manual and automatic overlap")
+now = now + 5
+lastPaste.callback(true, {{}})
+check(scene.nextWave == now + 600 and #announcements == beforeNews + 1,
+	"asynchronous successful paste starts a fresh 600-second countdown")
+lastPaste.callback(true, {{}})
+check(#announcements == beforeNews + 1, "duplicate callbacks cannot repeat the warning")
+plugin:EndDefense("test")
+plugin:StartDefense()
+local stale = pastes[#pastes]
+local staleID = plugin.event.dupeID
+commands.MutantDefenseCancel.OnRun()
+plugin:StartDefense()
+scene = plugin.event
+beforeNews = #announcements
+stale.callback(true, {{}})
+check(plugin.event == scene and scene.dupeID ~= staleID and #announcements == beforeNews,
+	"cancelled paste callbacks cannot announce or replace a newer event")
+check(despawns[staleID] >= 1, "cancelled paste callbacks clean only their own scene")
+now = scene.deployDeadline
+plugin:UpdateDefense()
+check(not plugin.event and despawns[scene.dupeID] and plugin.nextDefense == now + 60,
+	"an unfinished paste times out with cleanup and a bounded retry")
+deferPaste = false
+
+beforeNews = #announcements
+failPaste = true
+local failure, started = plugin:StartDefense()
+check(not started and failure:find("Missing dupe", 1, true) and not plugin.event,
+	"missing dupe fails startup without an active event")
+check(#announcements == beforeNews and plugin.nextDefense == now + 60,
+	"failed paste does not announce and retries after 60 seconds")
+failPaste, pasteWithoutCallback = false, true
+plugin:StartDefense()
+check(not plugin.event and #announcements == beforeNews, "paste refusal without a callback is handled")
+pasteWithoutCallback, deferPaste = false, true
+plugin:StartDefense()
+pastes[#pastes].callback(true, {})
+check(not plugin.event and #announcements == beforeNews, "an empty paste cannot announce a crash")
+deferPaste = false
+
+local rows = ix.plugin.list.eventcontroller.eventpoints.test_map
+ix.plugin.list.eventcontroller.eventpoints.test_map = {}
+plugin:StartDefense()
+check(not plugin.event, "no eligible research site skips startup")
+ix.plugin.list.eventcontroller.eventpoints.test_map = rows
+local location = rows[1][2]
+rows[1][2], rows[2][2] = " ", ""
+plugin:StartDefense()
+check(not plugin.event, "unnamed sites cannot generate locationless warnings")
+rows[1][2], rows[2][2] = "at the 10% crossing", "by the crossing"
+plugin:StartDefense()
+scene = plugin.event
+rows[1][2], rows[2][1] = location, Vector(6000, 0, 0)
+check(scene.location == "at the 10% crossing" and scene.spawnPoints[1][1] == 3000,
+	"later event-point edits cannot move or rename an announced encounter")
+check(announcements[#announcements].message:find("at the 10% crossing", 1, true),
+	"percent characters in eventadd text remain literal")
+rows[2][1] = Vector(3000, 0, 0)
+plugin:EndDefense("test")
+playerNear = true
+beforePastes = #pastes
+plugin:StartDefense()
+check(not plugin.event and #pastes == beforePastes, "players at the scene block the paste")
+playerNear = false
+
+for _, id in ipairs({"eventcontroller", "jobsystem", "advdupeint", "vendor_adv", "dialogue"}) do
+	local dependency = ix.plugin.list[id]
+	ix.plugin.list[id] = nil
+	plugin:StartDefense()
+	check(not plugin.event, id .. " is required before startup")
+	ix.plugin.list[id] = dependency
+	ix.plugin.unloaded[id] = true
+	plugin:StartDefense()
+	check(not plugin.event, id .. " cannot be used through a retained unloaded plugin table")
+	ix.plugin.unloaded[id] = nil
+	resetEvent()
+	scene = plugin.event
+	plugin:PluginUnloaded(id)
+	check(not plugin.event and despawns[scene.dupeID], id .. " unload cancels and removes the scene")
+	resetEvent()
+	scene = plugin.event
+	plugin:PluginLoaded(id)
+	check(not plugin.event and despawns[scene.dupeID], id .. " reload cancels and removes the scene")
+end
+resetEvent()
+scene = plugin.event
+plugin:OnLoaded()
+check(not plugin.event and despawns[scene.dupeID], "own plugin reload removes its session scene")
+plugin.event = {center = Vector(0, 0, 0), slots = {}, credited = {}, deaths = {}}
+plugin:OnLoaded()
+check(not plugin.event, "reload can also cancel a pre-automation session without a dupe reference")
+local output, failureReports = print, 0
+print = function() failureReports = failureReports + 1 end
+plugin:DefenseStartFailed("repeatable failure")
+plugin:DefenseStartFailed("repeatable failure")
+check(failureReports == 1, "identical startup failures are reported only once")
+plugin:DefenseStartFailed("different failure")
+check(failureReports == 2, "a changed failure is reported")
+print = output
+local noCharacter = {GetCharacter = function() end}
+local modes = {"dead", "observer", "noclip", "restricted", "ragdoll", "noCharacter", "empty"}
+for _, mode in ipairs(modes) do
+	clients = {first}
+	first.alive = mode ~= "dead"
+	first.moveType = mode == "observer" and MOVETYPE_OBSERVER or mode == "noclip" and MOVETYPE_NOCLIP or 2
+	first.restricted = mode == "restricted"
+	first.ixRagdoll = mode == "ragdoll" and {} or nil
+	if mode == "noCharacter" then clients = {noCharacter} end
+	if mode == "empty" then clients = {} end
+	plugin.nextDefense = now
+	plugin:UpdateDefenseSchedule()
+	check(not plugin.event and plugin.nextDefense == now + 60, mode .. " cannot start an automatic crash")
+end
+clients = {first, second, noCharacter}
+first.alive, first.moveType, first.restricted, first.ixRagdoll = true, 2, false, nil
+plugin.settings.automationEnabled = false
+plugin.nextDefense = now
+plugin:UpdateDefenseSchedule()
+check(not plugin.event, "automatic scheduling can be disabled")
+plugin.settings.automationEnabled = true
+plugin.nextDefense = now + 20
+plugin:UpdateDefenseSchedule()
+check(not plugin.event, "an automatic crash cannot start before its timer")
+now = now + 20
+plugin:UpdateDefenseSchedule()
+check(plugin.event and #announcements[#announcements].receivers == 2,
+	"a due crash warns every loaded character regardless of distance, excluding character selection")
+scene = plugin.event
+plugin:PreCleanupMap()
+check(not plugin.event and despawns[scene.dupeID], "map cleanup during warning removes the scene")
+check(commands.MutantDefenseStatus.OnRun():find("Next attempt in", 1, true),
+	"idle status reports the next scheduled attempt")
+now = now + 2
+plugin:OnUnload()
+plugin.nextDefense = now
+beforePastes = #pastes
+plugin:Think()
+check(#pastes == beforePastes and not plugin.event, "retained Think hooks cannot restart an unloaded plugin")
+plugin:OnLoaded()
+clients = {first}
+beforePastes = #pastes
+commands.MutantDefenseStart.OnRun(nil, noCharacter)
+check(#pastes == beforePastes + 1 and plugin.event.phase == "warning",
+	"admin start runs site selection and the full countdown without reading a crosshair")
+plugin:EndDefense("test finished")
 
 print("PASS: " .. checks .. " mutant defense checks")

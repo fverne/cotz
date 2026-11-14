@@ -23,7 +23,7 @@ function PLUGIN:AwardVoucher(character)
 	local state = table.Copy(character:GetData(REWARD_KEY, {}))
 	state.pending = (state.pending or 0) + 1
 	saveRewards(character, state)
-	notifyCharacter(character, "You earned a restock voucher. Stored rewards can be collected through vendor dialogue if your inventory is full.")
+	notifyCharacter(character, "You earned a trader supply. Stored rewards can be collected through vendor dialogue if your inventory is full.")
 	self:DeliverVoucher(character)
 end
 
@@ -33,7 +33,7 @@ function PLUGIN:ConfirmVoucher(character, item)
 	state.pending, state.token = state.pending - 1, nil
 	deliveries[character:GetID()] = nil
 	saveRewards(character, state)
-	notifyCharacter(character, "Restock voucher added to your inventory.")
+	notifyCharacter(character, "trader supply added to your inventory.")
 	if state.pending <= 0 then return end
 	timer.Simple(0, function()
 		local client = character:GetPlayer()
@@ -68,7 +68,7 @@ function PLUGIN:DeliverVoucher(character)
 	local result = inventory:Add(VOUCHER_ID, 1, {[DELIVERY_KEY] = state.token})
 	if not result then
 		deliveries[character:GetID()] = nil
-		notifyCharacter(character, "Your restock voucher is stored. Make inventory space and collect it through vendor dialogue.")
+		notifyCharacter(character, "Your trader supply is stored. Make inventory space and collect it through vendor dialogue.")
 		return false
 	end
 
@@ -118,7 +118,8 @@ function PLUGIN:RedeemVoucher(client, vendor)
 		return false
 	end
 	item:Remove()
-	client:Notify("Restock voucher accepted. Your eligible stock with this vendor has been replenished by half its maximum.")
+	character:GiveMoney(self.settings.voucherReward)
+	client:Notify(string.format("trader supply accepted. You received %d rubles, and your eligible stock with this vendor has been replenished by half its maximum.", self.settings.voucherReward))
 
 	return true
 end

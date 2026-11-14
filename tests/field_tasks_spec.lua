@@ -149,8 +149,13 @@ for _, kind in ipairs({"recovery", "sensor", "triangulation", "deadDrop"}) do
 	check(ix.jobs.field.IsAvailable(ix.jobs.list["field_" .. kind .. "_easy"]),
 		kind .. " can use event points without stash or hazard providers")
 end
-local site, approaches = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map)
+local site, approaches, siteName = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map)
 check(site and #approaches > 0, "event points provide defence sites and approaches")
+check(siteName == "Test event area", "defence selection returns the selected eventadd location text")
+local namedSite = ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, map, function(point, name)
+	return name == "Test event area" and point.x == 4000
+end)
+check(namedSite and namedSite.x == 4000, "site filters can inspect names without recollecting point data")
 for _, prefix in ipairs({"swamps", "garbage", "waystation", "pripyat"}) do
 	local rows = {
 		{Vector(500, 0, 0), "Building", prefix .. "_building"},
@@ -195,10 +200,10 @@ ix.plugin.list.firsttimesetup = {map_presets = {[presetMap] = {
 check(#ix.jobs.field.CollectPoints({"event"}, presetMap) == 2, "missing destination data reads FTS coordinates")
 check(ix.jobs.field.IsAvailable({fieldType = "sensor", fieldMap = presetMap}), "FTS enables destination sensors")
 check(ix.jobs.field.SelectRoute(ix.jobs.field.settings.deadDrop, presetMap) ~= nil, "FTS enables destination routes")
-check(
-	ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, presetMap) ~= nil,
-	"FTS enables destination defence"
-)
+local presetSite, presetApproaches, presetName =
+	ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, presetMap)
+check(presetSite ~= nil and #presetApproaches > 0, "FTS enables destination defence")
+check(presetName == "Test event area", "FTS defence returns the same location metadata as saved points")
 presetRows[2][3] = "swamps_building"
 check(ix.jobs.field.SelectDefenceSite(ix.jobs.field.settings.defence, presetMap) == nil,
 	"FTS defence applies the same outside-only filter")

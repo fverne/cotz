@@ -1,10 +1,8 @@
 # PDA maps
 
-Equip a PDA, then right-click a **Swamps Map USB** (`map_usb_swamps`) and choose
-**Insert into PDA**. Installation consumes the USB and adds the **Maps** tab when
-you next open the PDA menu. Maps belong to the physical PDA: they survive reconnects
-and travel with that item if transferred. Another PDA starts with its own map collection.
-Removing the PDA from your belt hides the tab. Duplicate installations keep the USB.
+Right-click a **Swamps Map USB** (`map_usb_swamps`) and choose **Add to Maps**.
+This consumes the USB and adds the **Maps** tab when you next open the main menu.
+Maps belong permanently to the character and require no PDA. Duplicate unlocks keep the USB.
 
 Atlas sells the Swamps USB immediately for **1,000 rubles**, without a progression
 unlock. It uses his normal personal supply stock/restocking. Existing placed Atlas
@@ -30,10 +28,11 @@ item in the immediate `items/mapusb/` directory with its `mapID` matching that e
 The `base_mapusb` base provides installation; keep identity, price, dimensions, weight,
 map ID and presentation in the concrete item. Add vendor availability separately.
 
-PDA item data uses the new additive `cotzMaps` key, a set of installed map IDs. Existing
-PDAs start without maps; existing character, PDA identity and stock history are retained.
-Installation validates the USB's presence in the current character's inventory and
-the equipped PDA again on the server. Repeated successful actions have a server cooldown.
+Character data uses `cotzMaps`, a set of unlocked map IDs. On character load,
+legacy maps on PDAs in that character's inventory are copied into these unlocks.
+Legacy device data is retained; no saved maps or unrelated data are deleted.
+Installation validates the USB's presence in the current character's inventory
+again on the server. Successful actions have a server cooldown.
 No new client-to-server network endpoint is added.
 
 ## Verification
@@ -49,9 +48,8 @@ luatex --luaonly tests/item_descriptions_spec.lua
 
 Standalone mocks do not establish engine rendering, replication or database durability.
 In multiplayer, buy a USB from a fresh and an existing Atlas vendor before doing any
-progression; confirm the 1,000-ruble price and normal stock use. Try installing without
-a PDA, from another inventory, with a detached PDA, and with a duplicate map. Install
-successfully, reopen the menu and inspect Maps. Reconnect/restart, switch characters,
-and transfer the detached PDA to verify the maps follow only that device. Check valid,
-blank and broken image URLs, switching between multiple installed maps, and resizing
-at narrow, 1080p, ultrawide and 4K resolutions.
+progression; confirm the 1,000-ruble price and normal stock use. Unlock without a PDA,
+try another inventory and a duplicate map, then reopen the main menu and inspect Maps.
+Reconnect/restart and switch characters to verify personal persistence. Load a character
+with legacy PDA maps and verify they are retained after removing the PDA. Check valid,
+blank and broken image URLs, multiple maps, and resizing at narrow, 1080p, ultrawide and 4K resolutions.

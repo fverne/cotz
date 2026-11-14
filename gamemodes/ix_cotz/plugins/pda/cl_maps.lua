@@ -24,7 +24,7 @@ end
 function PLUGIN:PopulateMapMenu(container)
 	local maps = self:GetInstalledMaps(LocalPlayer())
 	if #maps == 0 then
-		ix.cotzUI.Label(container, "Equip a PDA with an installed map to view Maps.")
+		ix.cotzUI.Label(container, "Use a map USB to add a map to this menu.")
 
 		return
 	end

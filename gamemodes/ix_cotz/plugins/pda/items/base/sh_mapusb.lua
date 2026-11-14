@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 ITEM.name = "Map USB"
-ITEM.description = "A USB drive holding a map for a PDA."
+ITEM.description = "A USB drive holding a map."
 ITEM.model = "models/lostsignalproject/items/quest/usb2.mdl"
 ITEM.category = "Communication"
 ITEM.price = 1000
@@ -16,7 +16,7 @@ function ITEM:GetDescription()
 end
 
 ITEM.functions.Install = {
-	name = "Insert into PDA",
+	name = "Add to Maps",
 	icon = "icon16/map_add.png",
 	OnRun = function(item)
 		return PLUGIN:InstallMapUSB(item)

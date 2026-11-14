@@ -82,7 +82,7 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 | `firsttimesetup/presets/` | Map-specific setup data, loaded explicitly by `sh_plugin.lua`. |
 | `dialogue/libs/` | Dialogue registration, option ordering, and conversation APIs. |
 | `vendor_adv/definitions/` | Individual vendor appearances, identities, base items and dialogue bindings; explicit includes in libs/sh_npctemplates.lua. |
-| `mutantdefense/` | Admin-started wave defense, character reward delivery and the restock voucher item; dialogue integration lives in `dialogue/integrations/sh_mutantdefense.lua`. |
+| `mutantdefense/` | Scheduled supply-van wave defense using research sites/spawn placement, tracked AdvDupe2 scenes, local announcements, character rewards and trader supplys; dialogue integration lives in `dialogue/integrations/sh_mutantdefense.lua`. |
 | `dialogue/libs/sh_towncontacts.lua` | Shared current town work/progression actions; NPC root actions are declared in conversation files. |
 | `dialogue/dialogue/` | NPC conversation definitions, discovered by the custom dialogue loader. |
 | `hideouts/sv_*.lua` and `sh_*.lua` | Personal/squad interiors, trader location claims and progression purchases, specialized containers, floor allowances, rank access, squad shop, economic adapter and saved travel. |
