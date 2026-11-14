@@ -735,7 +735,7 @@ ix.jobs.register({
 ix.jobs.register({
 	name = "Kill %d snorks.",
 	desc = "%d snorks.",
-	icon = "vgui/icons/snorkdead.png",
+	icon = "entities/vj_mutant_snork.png",
 	tier = 2,
 	listenTrigger = "snorkKilled",
 	numberRec = 1,
@@ -749,7 +749,7 @@ ix.jobs.register({
 ix.jobs.register({
 	name = "Kill %d snorks.",
 	desc = "%d snorks.",
-	icon = "vgui/icons/snorkdead.png",
+	icon = "entities/vj_mutant_snork.png",
 	tier = 2,
 	listenTrigger = "snorkKilled",
 	numberRec = 2,
@@ -763,7 +763,7 @@ ix.jobs.register({
 ix.jobs.register({
 	name = "Kill %d snorks.",
 	desc = "%d snorks.",
-	icon = "vgui/icons/snorkdead.png",
+	icon = "entities/vj_mutant_snork.png",
 	tier = 2,
 	listenTrigger = "snorkKilled",
 	numberRec = 4,
