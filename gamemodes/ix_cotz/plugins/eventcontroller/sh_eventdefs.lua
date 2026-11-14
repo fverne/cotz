@@ -750,7 +750,7 @@ PLUGIN.eventdefs["controllerswamp3"] = {
 		{"npc_human_z_rookie_rifleman", 1},
 	},
 	pdabroadcast = "Getting strange readings %s... Be very cautious, stalker.",
-	difficulty = {"waystation_outside_easy", "waystation_outside_hard", "waystation_building"},
+	difficulty = {"swamps_outside_hard", "swamps_building"},
 }
 
 --[[-------------------------------------------------------------------------

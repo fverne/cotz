@@ -98,8 +98,10 @@ Ordinary zombies are 3 classic zombies and 1 babka. Radioactive packs are 3 clas
 for future sniper encounters.
 
 Swamps no longer selects lone bloodsuckers, lone snorks, two-sprig encounters, radioactive zombie
-packs, swamp-controller encounters, pseudodog-led dog packs, 3–4 boar packs, or the 4-flesh/1-boar
-encounter. Other existing Swamps encounters remain. Controllers stay at Waystation and above.
+packs, pseudodog-led dog packs, 3–4 boar packs, or the 4-flesh/1-boar
+encounter. The swamp-controller encounter uses Swamps outside-hard and building points instead of
+Waystation points, with one swamp controller and three zombified gunmen. Other controller variants
+stay at Waystation and above. Other existing Swamps encounters remain.
 The two-boar and smaller rodent encounters are removed from Waystation entirely. All 12 mutant
 encounters that previously bridged Swamps hard and Waystation easy now bridge Swamps hard and
 Garbage easy instead: `Dog1`, `Dog2`, `Dog4`, `rodent2`, `cat1`, `cat2`, `izlom1`, `zombies1`,
