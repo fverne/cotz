@@ -132,18 +132,49 @@ plugin.maps.garbage = nil
 usb.mapID = "swamps"
 
 check(configs.pdaMapSwampsURL:find("cotz_swamp.png", 1, true), "Supplied Swamps image is the default")
-check(plugin:BuildMapHTML("") == nil, "Blank image URL uses the empty state")
-check(plugin:BuildMapHTML("javascript:alert(1)") == nil, "Non-image URL schemes are rejected")
-check(plugin:BuildMapHTML("https://example.org/map\n.png") == nil, "Control whitespace is rejected")
-local html = plugin:BuildMapHTML("https://example.org/map.png?a=1&b=2\"<img>")
-check(html:find("&amp;b=2&quot;&lt;img&gt;", 1, true), "URL is escaped as an HTML attribute")
-check(html:find("object-fit: contain", 1, true), "Map keeps its aspect ratio while resizing")
-check(html:find("default-src 'none'", 1, true), "Viewer restricts remote resources to images")
+Schema = {folder = "ix_cotz"}
+local disk, requests = {}, {}
+file = {
+	Read = function(path) return disk[path] end,
+	Write = function(path, value) disk[path] = value end,
+	CreateDir = function() end,
+}
+util = {
+	SHA256 = function(url) return url:gsub("[^%w]", "_") end,
+	Base64Encode = function() return "aW1hZ2U=" end,
+}
+http = {Fetch = function(url, success, failure)
+	requests[#requests + 1] = {url = url, success = success, failure = failure}
+end}
+local result
+local function receive(html) result = html end
+plugin:LoadMapImage("test", "", receive)
+check(result == nil and #requests == 0, "Blank URL does not fetch")
+plugin:LoadMapImage("test", "javascript:alert(1)", receive)
+check(#requests == 0, "Non-HTTP URL does not fetch")
+plugin:LoadMapImage("test", "https://example.org/map.png", receive)
+plugin:LoadMapImage("test", "https://example.org/map.png", receive)
+check(#requests == 1, "Concurrent viewers share a request")
+requests[1].success("image", 5, {["Content-Type"] = "image/webp"}, 200)
+check(result:find("data:image/webp;base64,", 1, true), "Image is embedded locally with its format")
+check(result:find("object-fit: contain", 1, true), "Map retains aspect ratio")
+plugin:LoadMapImage("test", "https://example.org/map.png", receive)
+check(#requests == 1, "Memory cache avoids repeat downloads")
+dofile(base .. "cl_maps.lua")
+plugin:LoadMapImage("test", "https://example.org/map.png", receive)
+check(#requests == 1, "Disk cache survives client script reload")
+plugin:LoadMapImage("test", "https://example.org/map.png?v=2", receive)
+check(#requests == 2, "Changed URL downloads an updated image")
+requests[2].success("error", 5, {}, 404)
+check(result == nil, "HTTP errors are not cached")
+plugin:LoadMapImage("test", "https://example.org/map.png?v=2", receive)
+check(#requests == 3, "Failed downloads can be retried")
+requests[3].failure("unavailable")
 
 local image, selector, status
 local container = {}
 function container:Add(class)
-	local panel = {}
+	local panel = {valid = true}
 	function panel:Dock() end
 	function panel:SetVisible(value) self.visible = value end
 	if class == "DHTML" then
@@ -170,13 +201,21 @@ ix.cotzUI = {
 	end,
 }
 plugin:PopulateMapMenu(container)
-check(image.allowLua == false and image.visible, "Image viewer disables Lua and displays installed map")
-check(image.html:find("cotz_swamp.png", 1, true), "Map selection uses its configured URL")
+check(image.allowLua == false and not image.visible, "Viewer disables Lua while loading")
+local oldRequest = requests[#requests]
 configs.pdaMapSwampsURL = "https://example.org/replacement.png"
 selector:OnSelect(1, "Swamps", "swamps")
-check(image.html:find("replacement.png", 1, true), "Config edits change the selected image")
+oldRequest.success("image", 5, {}, 200)
+check(not image.visible, "Stale download cannot replace the selected map")
+requests[#requests].success("image", 5, {}, 200)
+check(image.visible and image.html:find("data:image/", 1, true), "Selected map displays cached data")
 configs.pdaMapSwampsURL = ""
 selector:OnSelect(1, "Swamps", "swamps")
 check(not image.visible and status.visible, "Blank config displays a readable empty state")
+configs.pdaMapSwampsURL = "https://example.org/closed.png"
+selector:OnSelect(1, "Swamps", "swamps")
+image.valid = false
+requests[#requests].success("image", 5, {}, 200)
+check(not image.visible, "Closing the menu safely ignores download completion")
 
 print("PDA maps checks passed: " .. checks)
