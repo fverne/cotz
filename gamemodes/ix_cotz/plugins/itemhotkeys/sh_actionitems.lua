@@ -2,6 +2,9 @@
 PLUGIN.useHotkeyActionDefaults = true
 PLUGIN.mobileActionItems = {
 	-- item_id = true enables moving actions; false retains the black screen.
+	medic_medkit_1 = false,
+	medic_medkit_3 = false,
+	medic_medkit_5 = false,
 }
 
 function PLUGIN:UsesMobileAction(itemID)

@@ -1,5 +1,6 @@
 local PLUGIN = PLUGIN
 ix.squad.cross = {ready = false, generation = 0, sessions = ix.crossserver and ix.crossserver.sessions or {}}
+local MINIMUM_CREATION_REPUTATION = 250 -- Novice rank.
 local POLL_INTERVAL = 5
 local CHUNK_SIZE = 128
 util.AddNetworkString("cotz/squads/presence-fresh")
@@ -419,6 +420,7 @@ function ix.squad.cross.RefreshInvites()
 end
 
 function ix.squad.cross.New(name, character, callback)
+	if (character:GetReputation() < MINIMUM_CREATION_REPUTATION) then return end
 	if (not ix.squad.cross.ready) then return end
 	local id = "c:" .. character:GetID() .. ":" .. token():sub(1, 7)
 	local source = mysql:Select()

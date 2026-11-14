@@ -12,7 +12,12 @@ function PLUGIN:ApplyMarkerSettings(entity, role, slotID, recipeID)
 	entity:SetMarkerRole(role)
 	entity:SetSlotID(role == "container" and slotID or "")
 	entity:SetRecipeID(role == "container" and recipeID or "")
-	entity:SetModel(self.markerRoles[role].model)
+	local model = self.markerRoles[role].model
+	if role == "container" then
+		local tier = self.containerRecipes[recipeID].tiers[1]
+		model = tier.model or ix.item.list[tier.item].model
+	end
+	entity:SetModel(model)
 	entity:PhysicsInit(SOLID_VPHYSICS)
 	entity:SetSolid(SOLID_VPHYSICS)
 	local physics = entity:GetPhysicsObject()

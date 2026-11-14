@@ -16,7 +16,7 @@ if (CLIENT) then
 		local blessed = item:GetData("unlimitedDurability")
 
         if (blessed) then
-            ix.util.PropertyDesc2(tooltip, "Does not deteriorate", Color(255, 255, 255), Material("vgui/ui/stalker/misc/goldupgrade.png"))
+			ix.util.PropertyDesc2(tooltip, "Does not deteriorate", Color(255, 255, 255), ix.util.GetMaterial("vgui/ui/stalker/misc/goldupgrade.png"))
         end
 	end
 end

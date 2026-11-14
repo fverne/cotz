@@ -62,7 +62,8 @@ Every concrete suit declares all eight fields, initially copying its previous `a
 These are definition values, so existing instances use them without changing saved item data.
 `getAR(field)` returns the remaining-damage multiplier; `getFAR(field)` returns flat absorption.
 Damage is `max((incoming - flat) * multiplier, 0)`. Base protection retains its ordinary durability
-taper below 80%. Suit tooltips list all four effective pairs, including zero and flat-only ratings.
+taper below 80%. Suit tooltips list all four effective percentage reductions in their cosmetic units,
+including zero ratings, without flat absorption or a protection subheader.
 The equipment footer shows each family's combined percentage reduction and flat absorption tooltip.
 
 Legacy `ar`/`far` remain as fallback values and for existing untyped callers and environmental

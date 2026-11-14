@@ -9,7 +9,7 @@ util.AddNetworkString("cotz/hideouts/personal-barter")
 util.AddNetworkString("cotz/hideouts/personal-buy")
 util.AddNetworkString("cotz/hideouts/personal-open")
 
-function PLUGIN:AddPersonalLocation(id, template, entrance, name)
+function PLUGIN:AddPersonalLocation(id, template, entrance, name, override)
 	if not self.ready or not self.personalContacts[game.GetMap()] then return "No local hideout contact configured." end
 	if not id:match("^[%w_%-]+$") or #id > 32 then return "Use a location ID of 1–32 letters/digits/_/-." end
 	if not self.state.templates[template] or not self.state.entrances[entrance]
@@ -17,13 +17,27 @@ function PLUGIN:AddPersonalLocation(id, template, entrance, name)
 	self.state.locations = self.state.locations or {}
 	if not self.state.locations[id] and table.Count(self.state.locations) >= 32 then return "Location limit reached." end
 	local previous = self.state.locations[id]
-	if previous and (previous.template ~= template or previous.entrance ~= entrance) then
-		return "Keep location bindings stable; use a new ID for a different entrance or template."
+	if override and not previous then return "Unknown personal hideout location." end
+	if previous and not override and (previous.template ~= template or previous.entrance ~= entrance) then
+		return "Use /HideoutLocationOverride to replace an existing location's template or entrance."
 	end
 	self.state.locations[id] = {template = template, entrance = entrance, name = name:sub(1, 128)}
 	if not self:Persist() then self.state.locations[id] = previous return "Could not save the location." end
 
 	return "Location registered with " .. self.personalContacts[game.GetMap()].name .. "."
+end
+
+function PLUGIN:DeletePersonalLocation(id)
+	if not self.ready then return "Hideout persistence is not ready." end
+	local previous = (self.state.locations or {})[id]
+	if not previous then return "Unknown personal hideout location." end
+	self.state.locations[id] = nil
+	if not self:Persist() then
+		self.state.locations[id] = previous
+		return "Could not save location removal."
+	end
+
+	return "Personal hideout location removed. Existing rooms and their contents are unchanged."
 end
 
 function PLUGIN:CanUsePersonalTrader(client, target)
@@ -199,6 +213,7 @@ function PLUGIN:RefreshPersonalContainer(record, slotID)
 		if IsValid(physics) then physics:EnableMotion(false) end
 	end
 	self:RememberContainerPosition(instance, slotID, entity)
+	self:AuditContainers(instance)
 end
 
 function PLUGIN:BuildPersonalOffer(client, record, feature, slotID)

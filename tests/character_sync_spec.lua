@@ -98,6 +98,7 @@ local claims = {map = {milestones = {example = true}, lastJob = 12}}
 local characterData = {
 	vendorStock = stock,
 	vendorRestockClaims = claims,
+	economyStats = {repairSpent = 123},
 	progression = progression,
 	skin = 2,
 	bleedingSeverity = 1,
@@ -124,6 +125,8 @@ local message = messages[1]
 check(message.name == "cotz/character/snapshot" and message.receiver == owner, "owner uses chunked snapshots")
 check(message.id == 42, "snapshot retains character ID")
 check(message.playerIndex == 7, "snapshot retains player index")
+check(message.data.data.economyStats == nil, "initial owner sync excludes admin-only economy counters")
+check(characterData.economyStats.repairSpent == 123, "sync retains saved economy counters")
 check(message.data.data.vendorStock == nil, "initial sync excludes personal stock history")
 check(message.data.data.vendorRestockClaims == nil, "initial sync excludes stock claim history")
 check(message.data.vendorStock == nil and message.data.vendorRestockClaims == nil,

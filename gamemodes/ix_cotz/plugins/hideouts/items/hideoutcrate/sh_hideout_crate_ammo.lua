@@ -1,4 +1,4 @@
-ITEM.name = "Ammunition storage upgrade crate"
+ITEM.name = "Ammunition crate"
 ITEM.description = "A closed packing crate containing ammunition storage fittings and protective packing."
 ITEM.longdesc = "The fittings are packed separately from the protective material so neither is lost among the loose fasteners. This is an assembly kit for ammunition storage; it contains no ammunition."
 

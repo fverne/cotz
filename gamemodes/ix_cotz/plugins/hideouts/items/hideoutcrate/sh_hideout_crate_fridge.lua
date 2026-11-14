@@ -1,4 +1,4 @@
-ITEM.name = "Fridge upgrade crate"
+ITEM.name = "Fridge crate"
 ITEM.description = "A packing crate containing appliance fittings, seals and replacement connections."
 ITEM.longdesc = "Appliance fittings and packing share the crate with the small fasteners needed for installation. The marked grade distinguishes the assembled kit from an ordinary box of spare parts."
 

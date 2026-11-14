@@ -26,22 +26,19 @@ net.Receive("cotz/hideouts/crates", function()
 		for family, definition in SortedPairs(PLUGIN.personalContainerRecipes) do
 			ix.cotzUI.Button(scroll, (squad and "Squad: " or "Personal: ") .. definition.name, function()
 				local _, list = ix.cotzUI.Frame(definition.name .. " crates", 0.8, 0.75, 900)
-				for level = 1, 12 do
+				for level = 1, maximum do
 					local recipe = PLUGIN:GetCrateRecipe(family, level, squad)
-					local allowed = level <= maximum
-					ix.cotzUI.Label(list, "Level " .. level .. (allowed and "" or " — locked"), true)
+					ix.cotzUI.Label(list, "Tier " .. level .. " " .. ix.item.list[recipe.item].name:lower(), true)
 					ix.cotzUI.Label(list, describe(recipe))
-					if allowed then
-						ix.cotzUI.Button(list, "Review payment for level " .. level, function()
-							if (panel.nextCrateRequest or 0) > CurTime() then return end
-							panel.nextCrateRequest = CurTime() + 0.5
-							net.Start("cotz/hideouts/crate-quote")
-							net.WriteString(family)
-							net.WriteUInt(level, 4)
-							net.WriteBool(squad)
-							net.SendToServer()
-						end)
-					end
+					ix.cotzUI.Button(list, "Review payment for tier " .. level, function()
+						if (panel.nextCrateRequest or 0) > CurTime() then return end
+						panel.nextCrateRequest = CurTime() + 0.5
+						net.Start("cotz/hideouts/crate-quote")
+						net.WriteString(family)
+						net.WriteUInt(level, 4)
+						net.WriteBool(squad)
+						net.SendToServer()
+					end)
 				end
 			end)
 		end
@@ -54,9 +51,14 @@ net.Receive("cotz/hideouts/crate-quote", function()
 	local treasury, playerShare = net.ReadUInt(32), net.ReadUInt(32)
 	local recipe = PLUGIN:GetCrateRecipe(family, level, squad)
 	if not recipe then return end
-	local text = describe(recipe) .. "\n\nSquad treasury: " .. ix.currency.Get(treasury)
-		.. "\nYour share: " .. ix.currency.Get(playerShare)
-	ix.cotzUI.Query(text, "Assemble " .. (squad and "squad" or "personal") .. " crate — level " .. level,
+	local text = describe(recipe)
+	if squad then
+		text = text .. "\n\nSquad treasury: " .. ix.currency.Get(treasury)
+			.. "\nYour share: " .. ix.currency.Get(playerShare)
+	else
+		text = text .. "\n\nYour wallet: " .. ix.currency.Get(playerShare)
+	end
+	ix.cotzUI.Query(text, "Assemble " .. (squad and "squad" or "personal") .. " crate — tier " .. level,
 		"Assemble", function()
 			net.Start("cotz/hideouts/crate-buy")
 			net.WriteString(token)

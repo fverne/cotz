@@ -146,6 +146,35 @@ Test("disabled squad funding leaves vendor funds intact and personal crates alwa
 	end
 end)
 
+Test("personal crates cannot fall back to squad funds when the wallet is short", function()
+	local owner, inventory, record, vendor = craftingHome(true, 100)
+	record.fundUpgrades = true
+	treasury(record, 10000)
+	local screws = material(inventory, "value_screws", 2)
+	local rope = material(inventory, "value_rope", 1)
+	local current = quote(owner, vendor, false)
+	assert(not current.record and current.funding.treasury == 0 and current.funding.player == 600)
+	assert(craft(owner, vendor, current) == false)
+	assert(balance(record) == 10000 and owner:GetCharacter():GetMoney() == 100)
+	assert(screws:GetData("quantity") == 2 and rope:GetData("quantity") == 1)
+	assert(not PLUGIN:FindUpgradeCrate(owner, "general", 1, false))
+end)
+
+Test("personal crate purchases reject squad-backed payment quotes", function()
+	local owner, inventory, record, vendor = craftingHome(true)
+	record.fundUpgrades = true
+	treasury(record, 10000)
+	local screws = material(inventory, "value_screws", 2)
+	local rope = material(inventory, "value_rope", 1)
+	local current = quote(owner, vendor, false)
+	current.record = record
+	current.funding = {player = 0, treasury = 600, balance = 10000, enabled = true, rank = 0}
+	assert(craft(owner, vendor, current) == false)
+	assert(balance(record) == 10000 and owner:GetCharacter():GetMoney() == 10000)
+	assert(screws:GetData("quantity") == 2 and rope:GetData("quantity") == 1)
+	assert(not PLUGIN:FindUpgradeCrate(owner, "general", 1, false))
+end)
+
 Test("insufficient combined funds and failed commits preserve all materials and both balances", function()
 	for _, rollback in ipairs({false, true}) do
 		local owner, inventory, record, vendor = craftingHome(true, rollback and 10000 or 100)

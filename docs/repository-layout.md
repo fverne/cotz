@@ -29,6 +29,10 @@ See [item properties](item-properties.md) for conversion scales, providers and c
 The client schema library `schema/libs/cl_cotzui.lua` owns shared COTZ UI styling. It loads before
 gameplay plugins through the existing library loader. See [UI and HUD style](ui-style.md).
 
+`schema/libs/sh_economystats.lua` owns persistent per-character cash-flow counters and the admin
+scoreboard field list. Transaction owners record successful cash payments; simplecrossserverdata
+sends summaries only to administrators. See its [economy dossier guide](../gamemodes/ix_cotz/plugins/simplecrossserverdata/README.md#administrator-economy-dossier).
+
 `schema/meta/sv_character.lua` is explicitly included by `sh_schema.lua`. Its owner-sync override
 keeps legacy personal vendor stock/history keys out of the initial character network payload;
 other recipients retain Helix's normal visibility rules. The automatically loaded shared library

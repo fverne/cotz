@@ -1,3 +1,5 @@
+local MINIMUM_CREATION_REPUTATION = 250 -- Novice rank.
+
 function PLUGIN:PostLoadData()
 	local query = mysql:Create("ix_squads_squads")
 		query:Create("owner", "VARCHAR(20) NOT NULL") -- Stable squad key, not an authorization identity.
@@ -98,6 +100,11 @@ net.Receive("ixSquadCreate", function(_, client)
 	client.ixSquadCreateTry = CurTime() + 30
 	local character = client:GetCharacter()
 	if (not character or character:GetSquadID() ~= "NULL") then return end
+
+	if (character:GetReputation() < MINIMUM_CREATION_REPUTATION) then
+		client:NotifyLocalized("squad_creation_reputation")
+		return
+	end
 
 	local name = string.Trim(net.ReadString():gsub("[\r\n]", ""))
 	if (name == "" or name:utf8len() > 48) then return end

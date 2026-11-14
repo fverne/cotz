@@ -54,7 +54,13 @@ for _, family in ipairs({"general", "ammo", "medical", "weapon", "gear", "fridge
 	dofile("gamemodes/ix_cotz/plugins/hideouts/items/hideoutcrate/sh_hideout_crate_" .. family .. ".lua")
 	function ITEM:GetData(key, default) return self.data[key] or default end
 	assert(ITEM.width == 2 and ITEM.height == 2 and ITEM.price == 0 and ITEM.weight == 1)
-	assert(ITEM:GetName():find("squad level 12", 1, true))
+	assert(ITEM:GetName() == "Tier 12 " .. ITEM.name:lower() .. " — squad")
+	assert(ITEM:GetIndividualProperties()[1].text == "Upgrades tier 11 to tier 12 " .. ITEM.name:lower())
+	ITEM.data.cotzHideoutCrate = {level = 3, squad = false, version = 1}
+	assert(ITEM:GetName() == "Tier 3 " .. ITEM.name:lower())
+	assert(ITEM:GetIndividualProperties()[1].text == "Upgrades tier 2 to tier 3 " .. ITEM.name:lower())
+	ITEM.data.cotzHideoutCrate.level = 1
+	assert(ITEM:GetIndividualProperties()[1].text == "Installs tier 1 " .. ITEM.name:lower())
 	assert(ITEM:GetDescription():find(ITEM.longdesc, 1, true))
 	assert(ITEM:GetDescription():find("upgrade menu", 1, true))
 end

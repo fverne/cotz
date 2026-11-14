@@ -125,6 +125,7 @@ local function finishConversion(operation, replacement)
 		return
 	end
 	character:TakeMoney(price)
+	ix.economyStats.Record(character, "conversionSpent", price)
 	character:Save()
 	ix.dialogue.notifyMoneyLost(client, ix.currency.Get(price))
 end

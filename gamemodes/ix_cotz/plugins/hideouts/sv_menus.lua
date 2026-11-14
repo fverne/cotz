@@ -55,6 +55,7 @@ function PLUGIN:ShowManagement(client, id, scope)
 	client.cotzHideoutMenu = session
 	session.funding = {}
 	local function send()
+		session.migrations = {}
 		net.Start("cotz/hideouts/manage")
 		net.WriteString(scope)
 		net.WriteUInt(#records, 4)
@@ -93,6 +94,10 @@ function PLUGIN:ShowManagement(client, id, scope)
 				net.WriteUInt(guest.id, 32)
 				net.WriteString(guest.name:sub(1, 256))
 			end
+			local migration = scope == "entrance" and self:CanManageHideout(client, record)
+				and self:GetPersonalMigrationOffer(record)
+			if migration then session.migrations[record.id] = table.Copy(migration) end
+			net.WriteString(migration and migration.target or "")
 		end
 		net.Send(client)
 	end
@@ -267,8 +272,28 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, 
 	if containerAction then
 		if scope ~= "container" or client.cotzHideoutMenu.slot ~= value then return false end
 	elseif scope == "container" then return false end
+	if action == 17 then
+		if record.ownerType == "squad" or (scope ~= "entrance" and scope ~= "exit") then return false end
+		if not self.operationsReady or record.frozen then
+			client:Notify("This hideout is unavailable.")
+			return false
+		end
+		local instance = self.instances[id]
+		if instance and (instance.state ~= "active" or instance.saving) then
+			client:Notify("Wait for the hideout to finish loading or saving.")
+			return false
+		end
+		local character, session = client:GetCharacter(), client.cotzHideoutMenu
+		self:DeleteHideout(id, function(deleted, message)
+			if not IsValid(client) or client:GetCharacter() ~= character then return end
+			if deleted and client.cotzHideoutMenu == session then client.cotzHideoutMenu = nil end
+			client:Notify(message)
+		end)
+		return true
+	end
 	local ok, reason
-	if action == 0 then ok, reason = self:UpgradePropCapacity(client, record, expectedTier)
+	if action == 18 then ok, reason = self:MigratePersonalHideout(client, record)
+	elseif action == 0 then ok, reason = self:UpgradePropCapacity(client, record, expectedTier)
 	elseif action == 1 then ok, reason = self:PlaceSquadEntrance(client, record)
 	elseif action == 2 then ok, reason = self:ResetVendor(client, record)
 	elseif action == 16 then ok, reason = self:SetUpgradeFunding(client, record, value == "1")
@@ -301,7 +326,7 @@ function PLUGIN:HandleManagementAction(client, id, action, value, expectedTier, 
 		if ok and instance then self:CloseStorage(instance) self:EnforceAccess(instance) end
 	end
 	if reason then client:Notify(reason) end
-	if ok and action ~= 0 and action ~= 4 then self:RefreshManagementMenu(client) end
+	if ok and action ~= 0 and action ~= 4 and action ~= 18 then self:RefreshManagementMenu(client) end
 
 	return ok
 end

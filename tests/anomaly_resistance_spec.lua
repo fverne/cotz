@@ -212,9 +212,10 @@ local rows = {}
 for _, row in ipairs(ix.itemProperties.GetProtection(suit)) do rows[row.id] = row.text end
 for _, definition in ipairs(ix.suits.anomalyTypes) do
 	local reduction = suit[definition.field] / 2
-	local flat = suit[definition.flatField] / 2
-	local expected = definition.name .. ": " .. ix.itemProperties.Format(definition.network, reduction)
-		.. "; absorption " .. ix.itemProperties.Format(definition.network, flat / 100)
+	local expected
+	if reduction ~= 0 then
+		expected = definition.name .. ": " .. ix.itemProperties.Format(definition.network, reduction)
+	end
 	check(rows["protection/" .. definition.network] == expected, "Tooltip effective protection: " .. definition.name)
 end
 PLUGIN = {}

@@ -31,6 +31,7 @@ query([[INSERT INTO ix_squads_squads VALUES ('char:1','Legacy','Message','NULL')
 -- Public presence now selects these existing character columns for its leaderboard.
 query([[ALTER TABLE ix_characters ADD COLUMN data TEXT DEFAULT '{}']])
 query([[ALTER TABLE ix_characters ADD COLUMN reputation INTEGER DEFAULT 0]])
+query([[ALTER TABLE ix_characters ADD COLUMN money INTEGER DEFAULT 0]])
 query([[ALTER TABLE ix_characters ADD COLUMN progression MEDIUMTEXT DEFAULT '{}']])
 local humans, sent, errors = {}, {}, {}
 local now, map = 100, "map_a"
@@ -114,6 +115,7 @@ function ix.squad.Register(id, name, data)
 end
 local function character(id)
 	local value = {id = id, squad = "NULL", rank = 0, name = "", color = {}}
+	function value:GetReputation() return self.reputation or 250 end
 	function value:GetID() return self.id end
 	function value:GetSquadID() return self.squad end
 	function value:SetSquadID(entry) self.squad = entry end
@@ -264,6 +266,10 @@ check(query("SELECT active FROM ix_squads_state WHERE squad_id='char:1'")[1].act
 	"restart migration cannot resurrect a disbanded squad")
 -- New squads use distinct keys; members can join after their previous squad was disbanded.
 local created
+remoteLeader.reputation = 249
+ix.squad.cross.New("Blocked", remoteLeader, function() error("low reputation creation callback") end)
+check(not created, "below Novice cannot create shared squads")
+remoteLeader.reputation = 250
 ix.squad.cross.New("New group", remoteLeader, function(value) created = value end)
 check(created and created.owner ~= "char:1", "creation makes a new stable key after disband")
 check(query("SELECT member_rank FROM ix_squads_members WHERE character_id=1")[1].member_rank == "2",
@@ -286,6 +292,7 @@ check(#rosterRows == 2, "public roster includes active characters across maps an
 check(rosterRows[1].progression == '{"lines":{"fixture":{"completed":true}}}',
 	"the real roster SQL selects the separate progression column")
 check(rosterRows[1].steamID64 == "account", "the real roster SQL includes the character owner's Steam account")
+check(tonumber(rosterRows[1].money) == 0, "the roster SQL selects saved wallet cash for administrator summaries")
 check(rosterRows[1].squad_name == "New group" and rosterRows[2].squad_id == nil,
 	"public roster joins authoritative squad display metadata and includes loners")
 query("UPDATE ix_squads_presence SET hidden=1 WHERE character_id=3")

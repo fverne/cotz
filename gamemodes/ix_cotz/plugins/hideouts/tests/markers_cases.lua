@@ -20,6 +20,20 @@ local function marker(role, slotID, recipeID, position, angles)
 	return entity
 end
 
+Test("storage marker models follow the selected recipe on edits and dupe restore", function()
+	local entity = marker("container", "preview", "general")
+	for recipeID, recipe in pairs(PLUGIN.containerRecipes) do
+		assert(PLUGIN:ApplyMarkerSettings(entity, "container", "preview", recipeID))
+		local tier = recipe.tiers[1]
+		assert(entity:GetModel() == (tier.model or ix.item.list[tier.item].model))
+		local pasted = marker("container", "temporary", "general")
+		TEST_MARKER_MODIFIER(nil, pasted, {role = "container", slot = "preview", recipe = recipeID})
+		assert(pasted:GetModel() == entity:GetModel())
+	end
+	assert(PLUGIN:ApplyMarkerSettings(entity, "spawn", "", ""))
+	assert(entity:GetModel() == PLUGIN.markerRoles.spawn.model)
+end)
+
 local function home()
 	FeatureReset()
 	local owner = FeatureClient(1)

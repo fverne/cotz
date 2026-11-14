@@ -1,4 +1,4 @@
-ITEM.name = "General storage upgrade crate"
+ITEM.name = "General crate"
 ITEM.description = "A reinforced packing crate containing fasteners, straps and general storage fittings."
 ITEM.longdesc = "Packing material keeps the loose fittings together during transport. The finished bundle is intended for one storage installation, with its grade and intended room type marked on the crate."
 

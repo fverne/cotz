@@ -89,6 +89,7 @@ function PANEL:Init()
 	self:MakePopup()
 	self.sellingList, self.buyingList = {}, {}
 	self.tab = "selling"
+	self.categoryFilters = {}
 	self.character = LocalPlayer():GetCharacter()
 
 	self.header = self:Add("DPanel")
@@ -113,6 +114,8 @@ function PANEL:Init()
 	self.tabs = addToolbar(self, TOP)
 	self.stockTab = addTool(self.tabs, "Buy", function() self:SetTab("selling") end)
 	self.personalTab = addTool(self.tabs, "Sell", function() self:SetTab("buying") end)
+
+	self.categoryButton = addTool(self.tabs, "Category: All", function() self:OpenCategoryMenu() end)
 
 	self.body = self:Add("DPanel")
 	self.body:Dock(FILL)
@@ -195,6 +198,77 @@ function PANEL:SetTab(tab)
 	self:RefreshInspector()
 end
 
+local function getRowCategory(row)
+	return row.data.item.category or "Other"
+end
+
+function PANEL:SetCategory(category)
+	self.categoryFilters[self.tab] = category
+	self:RefreshInspector()
+	local scroll = self.tab == "buying" and self.buying or self.selling
+	scroll:GetVBar():SetScroll(0)
+end
+
+function PANEL:OpenCategoryMenu()
+	local categories = {}
+	local list = self.tab == "buying" and self.buyingList or self.sellingList
+	for _, row in pairs(list) do
+		if IsValid(row) then categories[getRowCategory(row)] = true end
+	end
+	local menu = ix.cotzUI.Menu()
+	menu:AddOption("All categories", function() self:SetCategory(nil) end)
+	for category in SortedPairs(categories) do
+		menu:AddOption(category, function() self:SetCategory(category) end)
+	end
+	menu:Open()
+end
+
+function PANEL:RefreshItemLists()
+	local visibleCount = 0
+	for _, tab in ipairs({"selling", "buying"}) do
+		local rows = {}
+		local list = tab == "buying" and self.buyingList or self.sellingList
+		for _, row in pairs(list) do
+			if IsValid(row) then rows[#rows + 1] = row end
+		end
+		table.sort(rows, function(first, second)
+			if tab == "buying" then return first.data.key > second.data.key end
+			if first.data.name ~= second.data.name then return first.data.name < second.data.name end
+
+			return first.data.key < second.data.key
+		end)
+		local category = self.categoryFilters[tab]
+		local layoutChanged = false
+		for index, row in ipairs(rows) do
+			-- Panel z positions are signed 16-bit values; database IDs can exceed that range.
+			if row.tradePosition ~= index then
+				row:SetZPos(index)
+				row.tradePosition = index
+				layoutChanged = true
+			end
+			local visible = not category or getRowCategory(row) == category
+			if row:IsVisible() ~= visible then
+				row:SetVisible(visible)
+				layoutChanged = true
+			end
+			if visible and tab == self.tab then visibleCount = visibleCount + 1 end
+		end
+		if layoutChanged then
+			-- Visibility changes must refresh docking before the scroll canvas measures the list.
+			local layout = tab == "buying" and self.buyingItems or self.sellingItems
+			local scroll = tab == "buying" and self.buying or self.selling
+			layout:InvalidateLayout(true)
+			scroll:InvalidateLayout(true)
+		end
+	end
+	local category = self.categoryFilters[self.tab]
+	self.categoryButton:SetText("Category: " .. (category or "All"))
+	self.tabs:InvalidateLayout(true)
+	if IsValid(self.selected) and not self.selected:IsVisible() then self.selected = nil end
+	self.empty:SetText(category and "No items in this category." or "No items available.")
+	self.empty:SetVisible(visibleCount == 0)
+end
+
 function PANEL:AddInspectorTool(text, callback)
 	return addTool(self.inspectorActions, text, callback)
 end
@@ -237,7 +311,6 @@ function PANEL:addItem(uniqueID, listID, iteminstanceID)
 			and (allowed or self.entity:GetBuyAll()) and not IsValid(self.buyingList[iteminstanceID]) then
 			self.buyingList[iteminstanceID] = self:AddTradeRow(self.buyingItems,
 				{key = iteminstanceID, uniqueID = uniqueID, item = item, personal = true})
-			self.buyingList[iteminstanceID]:SetZPos(-iteminstanceID)
 		end
 	end
 end
@@ -291,6 +364,7 @@ function PANEL:OnItemSelected(row)
 end
 
 function PANEL:RefreshInspector()
+	self:RefreshItemLists()
 	local modifier = ix.option.Get("vendorQuickTrade", "Shift")
 	self.quickTradeHint:SetText(QUICK_TRADE_KEYS[modifier] and "Quick trade: " .. modifier .. " + right click" or "")
 	local row = self.selected
@@ -319,7 +393,6 @@ function PANEL:RefreshInspector()
 	self.vendorSell:SetEnabled(ready and not personal and (not self.isInstanceVendor or price > 0)
 		and self.character:HasMoney(price) and (not row.data.stock or row.data.stock > 0))
 	self.vendorBuy:SetEnabled(ready and personal)
-	self.empty:SetVisible(not next(personal and self.buyingList or self.sellingList))
 	self.inspectorActions:InvalidateLayout(true)
 end
 

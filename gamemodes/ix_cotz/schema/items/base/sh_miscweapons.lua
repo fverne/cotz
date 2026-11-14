@@ -76,13 +76,13 @@ function ITEM:PopulateTooltip(tooltip)
 
     if (!self.entity) then
         if self.weaponCategory == "secondary" then
-        	ix.util.PropertyDesc2(tooltip, "Secondary Weapon", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
+			ix.util.PropertyDesc2(tooltip, "Secondary Weapon", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
 		elseif self.weaponCategory == "primary" then
-        	ix.util.PropertyDesc2(tooltip, "Primary Weapon", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
+			ix.util.PropertyDesc2(tooltip, "Primary Weapon", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
 		elseif self.weaponCategory == "knife" then
-        	ix.util.PropertyDesc2(tooltip, "Knife", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
+			ix.util.PropertyDesc2(tooltip, "Knife", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
 		elseif self.weaponCategory == "artifactdetector" then
-        	ix.util.PropertyDesc2(tooltip, "Artifact Detector", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
+			ix.util.PropertyDesc2(tooltip, "Artifact Detector", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
         end
     end
 

@@ -1,7 +1,7 @@
 local originalSync = ix.meta.character.Sync
 
 -- SetData's noReplication argument only suppresses updates, not Helix's initial character sync.
--- Vendor history stays persisted on the server; the vendor UI receives its own stock messages.
+-- Vendor history and admin economy counters stay server-side; their UIs receive filtered snapshots.
 function ix.meta.character:Sync(receiver)
 	if receiver ~= self.player then
 		return originalSync(self, receiver)
@@ -21,7 +21,7 @@ function ix.meta.character:Sync(receiver)
 		local characterData = {}
 
 		for key, value in pairs(data.data) do
-			if key ~= "vendorStock" and key ~= "vendorRestockClaims" then
+			if key ~= "vendorStock" and key ~= "vendorRestockClaims" and key ~= "economyStats" then
 				characterData[key] = value
 			end
 		end

@@ -367,3 +367,70 @@ Test("pending prop purchases reject duplicates and recheck a delayed role respon
 	assert(not record.propTier and not PLUGIN.capacityPurchases[record.id] and instance.operations == 0)
 	assert(owner:GetCharacter():GetMoney() == 100000)
 end)
+
+Test("personal owners can delete from entrance or exit management and free their room allowance", function()
+	for _, scope in ipairs({"entrance", "exit"}) do
+		local owner, inventory, instance, record = containerHome()
+		instance.exit = NewEntity(nil, instance.origin)
+		local guest = FeatureClient(2)
+		record.guests["2"] = true
+		guest.position = instance.origin
+		PLUGIN.members[guest] = record.id
+		instance.occupants[guest] = {
+			character = 2, returnPoint = {Vector(10000, 0, 8), Angle(), game.GetMap()},
+		}
+		if scope == "entrance" then owner.position = PLUGIN.state.entrances.gate.pos end
+		PLUGIN:ShowManagement(owner, record.id, scope)
+		local balance = owner:GetCharacter():GetMoney()
+		assert(PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+		assert(not PLUGIN:GetHideout(record.id) and not PLUGIN.instances[record.id])
+		assert(not PLUGIN.members[guest] and guest:GetPos().x == 10000)
+		assert(not owner.cotzHideoutMenu and owner:GetCharacter():GetMoney() == balance)
+		assert(not PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+		assert(PLUGIN:GrantHideout(owner, "room", "gate", "Replacement"))
+	end
+end)
+
+Test("personal deletion rejects guests, squad homes, stale locations and container sessions", function()
+	local owner, inventory, instance, record = containerHome()
+	instance.exit = NewEntity(nil, instance.origin)
+	local guest = FeatureClient(2)
+	record.guests["2"] = true
+	guest.position, PLUGIN.members[guest] = instance.origin, record.id
+	PLUGIN:ShowManagement(guest, record.id, "exit")
+	assert(not PLUGIN:HandleManagementAction(guest, record.id, 17, "", 0))
+	PLUGIN:ShowContainerMenu(owner, instance.containers.left)
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+	PLUGIN:ShowManagement(owner, record.id, "exit")
+	owner.position = Vector(10000, 0, 8)
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+	owner.position = instance.origin
+	owner.character = guest:GetCharacter()
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+	assert(PLUGIN:GetHideout(record.id) == record and not record.deleting)
+	FeatureReset()
+	owner = FeatureClient(1)
+	instance, record = FeatureHome(owner, true)
+	instance.exit = NewEntity(nil, instance.origin)
+	PLUGIN:ShowManagement(owner, record.id, "exit")
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+	assert(PLUGIN:GetHideout(record.id) == record and not record.deleting)
+end)
+
+Test("personal deletion waits for saves and pending economic operations", function()
+	local owner, inventory, instance, record = containerHome()
+	instance.exit = NewEntity(nil, instance.origin)
+	PLUGIN:ShowManagement(owner, record.id, "exit")
+	instance.saving = true
+	assert(not PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+	instance.saving = nil
+	for _, lock in ipairs({"personalPurchases", "capacityPurchases"}) do
+		PLUGIN[lock][record.id] = true
+		PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0)
+		assert(PLUGIN:GetHideout(record.id) == record and not record.deleting)
+		PLUGIN[lock][record.id] = nil
+	end
+	instance.operations = 1
+	PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0)
+	assert(PLUGIN:GetHideout(record.id) == record and not record.deleting)
+end)

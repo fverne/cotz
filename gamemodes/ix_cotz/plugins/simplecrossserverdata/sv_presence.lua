@@ -220,12 +220,14 @@ function ix.crossserver.PublishRoster(rows)
 		if character then characters[character:GetID()] = character end
 	end
 	local records = {}
+	local economyProfiles = {}
 	for _, row in ipairs(rows) do
 		local characterID = tonumber(row.character_id)
 		local character = characters[characterID]
 		local data = character and character:GetData() or util.JSONToTable(row.profile or "{}") or {}
 		local progression = character and character.GetProgression and character:GetProgression()
 			or (row.progression and util.JSONToTable(row.progression))
+		economyProfiles[characterID] = ix.economyStats.GetSummary(data, character and character:GetMoney() or row.money)
 		records[#records + 1] = {
 			profile = util.TableToJSON({leaderboardStats = ix.jobs.GetLeaderboardStats(data, progression),
 				reputation = tonumber(row.reputation) or 0}),
@@ -243,13 +245,25 @@ function ix.crossserver.PublishRoster(rows)
 	for _, client in ipairs(clients) do
 		local character = client:GetCharacter()
 		if (character) then
-			local visible = records
-			if ix.townNPCs then
-				visible = {}
-				local access = ix.townNPCs:GetNetworkAccess(character)
-				for _, record in ipairs(records) do
-					local filtered = ix.townNPCs:FilterNetworkRecord(character, record, access)
-					if filtered then visible[#visible + 1] = filtered end
+			local visible = {}
+			local access = ix.townNPCs and ix.townNPCs:GetNetworkAccess(character)
+			for _, record in ipairs(records) do
+				local filtered
+				if ix.townNPCs then
+					filtered = ix.townNPCs:FilterNetworkRecord(character, record, access)
+				else
+					filtered = table.Copy(record)
+				end
+				if filtered then
+					-- Attach private totals after public entitlement filtering, separately for each receiver.
+					if client:IsAdmin() then
+						filtered = table.Copy(filtered)
+						local profile = filtered.profile
+						if type(profile) == "string" then profile = util.JSONToTable(profile) or {} end
+						filtered.profile = profile
+						profile.economyStats = economyProfiles[record.characterID]
+					end
+					visible[#visible + 1] = filtered
 				end
 			end
 			local signature = util.TableToJSON(visible)
@@ -276,6 +290,7 @@ function ix.crossserver.RefreshRoster()
 		query:SelectColumn("leaderboard.progression", "progression")
 	end
 	query:SelectColumn("leaderboard.reputation", "reputation")
+	query:SelectColumn("leaderboard.money", "money")
 	query:SelectColumn("leaderboard.steamid", "steamID64")
 	query:WhereExpr(mysql.All(mysql.Compare("p.scope", "=", scope()), mysql.Compare("p.hidden", "=", 0),
 		mysql.Compare("p.expires", ">", mysql.Now()), mysql.Any(mysql.Compare("p.state", "=", "online"),

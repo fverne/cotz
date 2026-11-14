@@ -1,4 +1,5 @@
 local PLUGIN = PLUGIN
+local MAX_TEMPLATE_DEPTH = 16000
 ix.inventory.Register("hideout", 8, 6)
 
 ix.command.Add("HideoutAreaStart", {
@@ -90,6 +91,35 @@ ix.command.Add("HideoutTemplateAdd", {
 			.. id
 			.. ". Its paste anchor is the floor center; use /HideoutTemplatePoint "
 			.. "to adjust local utility and spawn positions."
+	end,
+})
+
+ix.command.Add("HideoutTemplateDepth", {
+	adminOnly = true,
+	arguments = {ix.type.string, ix.type.number},
+	OnRun = function(self, client, id, depth)
+		if not PLUGIN.ready then
+			return "Hideout persistence is not ready."
+		end
+		local template = PLUGIN.state.templates[id]
+		if not template then
+			return "Unknown hideout template."
+		end
+		if depth ~= depth or depth < 0 or depth > MAX_TEMPLATE_DEPTH then
+			return "Template depth must be between 0 and 16000 units below the paste anchor."
+		end
+		if not table.IsEmpty(PLUGIN.instances) then
+			return "Unload all hideouts before editing template bounds."
+		end
+		local previous = template.mins
+		template.mins = Vector(previous.x, previous.y, -depth)
+		if not PLUGIN:Persist() then
+			template.mins = previous
+
+			return "Could not save the template depth."
+		end
+
+		return "Saved template depth. Its allocation area must also fit the extra space below the anchor."
 	end,
 })
 

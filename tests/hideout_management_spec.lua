@@ -43,6 +43,7 @@ dofile("gamemodes/ix_cotz/plugins/hideouts/cl_management.lua")
 
 reads = {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, false, false, 0, 5000,
 	2, 2, "Invited", 4, "Character #4"}
+reads[#reads + 1] = ""
 callbacks["cotz/hideouts/manage"]()
 assert(readIndex == #reads)
 buttons["Revoke invitation"]()
@@ -53,6 +54,7 @@ buttons["Invite character"]()
 assert(#options == 2 and options[1][1] == "Invited" and options[2][1] == "Stranger")
 
 readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, false, false, 0, 5000, 0}
+reads[#reads + 1] = ""
 callbacks["cotz/hideouts/manage"]()
 buttons["Revoke invitation"]()
 assert(#options == 0)
@@ -62,12 +64,21 @@ local confirmation
 ix.cotzUI.Query = function(message, title, label, callback) confirmation = callback end
 panel.nextRequest = nil
 readIndex, reads = 0, {"exit", 1, "1", "Home", false, "invite", true, true, 1, 30, 40, 5000, false, false, 0, 5000, 0}
+reads[#reads + 1] = ""
 callbacks["cotz/hideouts/manage"]()
 buttons["Reset hideout layout"]()
 assert(confirmation and sent[2] ~= 15)
 confirmation()
 assert(sent[1] == "1" and sent[2] == 15)
 print("PASS: layout reset requires confirmation before sending its management action")
+
+panel.nextRequest = nil
+confirmation = nil
+buttons["Delete personal hideout"]()
+assert(confirmation and sent[2] ~= 17)
+confirmation()
+assert(sent[1] == "1" and sent[2] == 17)
+print("PASS: personal hideout deletion requires confirmation")
 
 panel.nextRequest = nil
 confirmation = nil
@@ -79,6 +90,7 @@ print("PASS: prop capacity upgrades confirm the price and send the displayed tie
 
 dofile("gamemodes/ix_cotz/plugins/hideouts/cl_personal.lua")
 readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, false, false, 0, 5000, 0}
+reads[#reads + 1] = ""
 callbacks["cotz/hideouts/manage"]()
 buttons["Hideout improvements"]()
 assert(sent[1] == "1" and sent[2] == "")
@@ -93,6 +105,7 @@ print("PASS: personal door and container controls request their server-bound pur
 panel.nextRequest = nil
 readIndex, reads = 0, {"squad", 1, "1", "Squad home", true, "squad", true, false,
 	1, 30, 40, 5000, true, false, 0, 5000, 0}
+reads[#reads + 1] = ""
 callbacks["cotz/hideouts/manage"]()
 buttons["Use squad vendor funds for hideout upgrades: off"]()
 assert(sent[1] == "1" and sent[2] == 16 and sent[3] == "1")
@@ -100,8 +113,30 @@ local paymentText
 ix.cotzUI.Query = function(message, title, label, callback) paymentText, confirmation = message, callback end
 readIndex, reads = 0, {"squad", 1, "1", "Squad home", true, "squad", true, false,
 	1, 30, 40, 5000, true, true, 3000, 2000, 0}
+reads[#reads + 1] = ""
 callbacks["cotz/hideouts/manage"]()
 buttons["Upgrade prop capacity to 40 (5000 roubles)"]()
 assert(paymentText:find("Treasury: 3000 roubles", 1, true)
 	and paymentText:find("your share: 2000 roubles", 1, true))
 print("PASS: leader funding controls send the setting action and confirmations show both payment shares")
+
+buttons, confirmation = {}, nil
+panel.nextRequest = nil
+readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false,
+	1, 30, 40, 5000, false, false, 0, 5000, 0, "new_room"}
+callbacks["cotz/hideouts/manage"]()
+buttons["Migrate hideout to new_room"]()
+assert(confirmation and sent[2] ~= 18)
+assert(paymentText:find("props are discarded", 1, true))
+confirmation()
+assert(sent[1] == "1" and sent[2] == 18 and readIndex == #reads)
+print("PASS: migration offers require confirmation and explain prop loss")
+
+for _, state in ipairs({{false, false, "new_room"}, {true, true, "new_room"}, {false, true, ""}}) do
+	buttons = {}
+	readIndex, reads = 0, {"entrance", 1, "1", "Home", state[1], "invite", state[2], false,
+		1, 30, 40, 5000, false, false, 0, 5000, 0, state[3]}
+	callbacks["cotz/hideouts/manage"]()
+	assert(not buttons["Migrate hideout to new_room"])
+end
+print("PASS: migration is hidden for guests, squad rooms and rooms without an offer")

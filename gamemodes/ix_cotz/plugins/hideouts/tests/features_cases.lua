@@ -93,6 +93,56 @@ Test("visiting administrators can open and buy squad stock without gaining manag
 	assert(not PLUGIN:IsNearUtility(admin, instance.vendor))
 end)
 
+Test("stock actions refresh all open viewers without closing their sessions", function()
+	local officer, inventory, buyer, destination, instance, record, stock = shop()
+	local sendStock = ix.sherpa.SendStock
+	local updates = {}
+	ix.sherpa.SendStock = function(client, entity, id, name, rank, balance, commission, page, pages, rows)
+		updates[client] = {page = page, rows = rows, balance = balance}
+	end
+	-- Automatic refreshes must work even immediately after opening the vendor.
+	officer.cotzShopOpen, buyer.cotzShopOpen = CurTime() + 1, CurTime() + 1
+	local item = FeatureItem(inventory)
+	PLUGIN:ShopAction(officer, record, "donate", item:GetID(), 0, 0)
+	assert(instance.shopClients[officer] and instance.shopClients[buyer])
+	assert(updates[officer] and updates[buyer])
+	assert(#updates[officer].rows == 1 and #updates[buyer].rows == 0)
+	PLUGIN:ShopAction(officer, record, "price", item:GetID(), 100, 1)
+	assert(#updates[buyer].rows == 1 and updates[buyer].rows[1] == item)
+	PLUGIN:ShopAction(buyer, record, "buy", item:GetID(), 100, 2)
+	assert(#updates[officer].rows == 0 and #updates[buyer].rows == 0)
+	assert(instance.shopClients[officer] and instance.shopClients[buyer])
+	assert(updates[officer].balance == 95)
+	PLUGIN:ShopAction(officer, record, "withdraw", 0, 50, 0)
+	assert(updates[officer].balance == 45)
+	local recovered = FeatureItem(stock)
+	PLUGIN:ShopAction(officer, record, "recover", recovered:GetID(), 0, 0)
+	assert(recovered.invID == inventory:GetID() and instance.shopClients[officer])
+	ix.sherpa.SendStock = sendStock
+end)
+
+Test("stock refresh preserves pages and cannot reopen a closed session after a delayed query", function()
+	local officer, inventory, buyer, destination, instance, record, stock = shop()
+	for index = 1, 21 do FeatureItem(stock) end
+	instance.shopClients[officer].page = 2
+	local sendStock = ix.sherpa.SendStock
+	local updates = 0
+	ix.sherpa.SendStock = function(client, entity, id, name, rank, balance, commission, page, pages, rows)
+		if client == officer then assert(page == 2 and #rows == 1) end
+		updates = updates + 1
+	end
+	PLUGIN:RefreshShop(instance)
+	assert(updates == 2 and instance.shopClients[officer].page == 2)
+	local getTreasury = PLUGIN.GetTreasury
+	local callbacks = {}
+	PLUGIN.GetTreasury = function(self, current, callback) callbacks[#callbacks + 1] = callback end
+	PLUGIN:RefreshShop(instance)
+	PLUGIN:CloseShop(instance)
+	for _, callback in ipairs(callbacks) do callback(0) end
+	assert(updates == 2 and next(instance.shopClients) == nil)
+	PLUGIN.GetTreasury, ix.sherpa.SendStock = getTreasury, sendStock
+end)
+
 Test("donation pays nothing and purchase preserves the same item row and data", function()
 	local officer, inventory, buyer, destination, instance, record, stock = shop()
 	local item = FeatureItem(inventory, {quantity = 19, durability = 37, name = "Unique rifle"})

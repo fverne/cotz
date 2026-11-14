@@ -40,7 +40,7 @@ if (CLIENT) then
 		if !self.entity then
 			ix.util.PropertyDesc(tooltip, "Very Rare Item", Color(200, 200, 200))
 			ix.util.PropertyDesc(tooltip, "Fits into cassette players", Color(200, 200, 200))
-			ix.util.PropertyDesc2(tooltip, "Valuable", Color(218, 165, 32), Material("icon16/stalker/sell.png"))
+			ix.util.PropertyDesc2(tooltip, "Valuable", Color(218, 165, 32), ix.util.GetMaterial("icon16/stalker/sell.png"))
 		end
 	end
 end

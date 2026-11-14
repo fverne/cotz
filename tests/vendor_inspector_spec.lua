@@ -72,12 +72,16 @@ function methods:GetVBar()
 
 	return self.bar
 end
+function methods:SetScroll(value) self.scroll = value end
 for _, name in ipairs({"Dock", "DockMargin", "DockPadding", "SetPaintBackground", "SetWrap",
 	"SetAutoStretchVertical", "SetContentAlignment", "SetSizable", "SetZPos", "SetKeepAspect",
 	"SetMouseInputEnabled", "SetHideButtons", "InvalidateChildren", "MakePopup", "Center", "PerformLayout"}) do
 	methods[name] = function() end
 end
-function methods:SetZPos(value) self.zPos = value end
+function methods:SetZPos(value)
+	assert(value >= -32768 and value <= 32767, "Panel z position exceeds the engine range")
+	self.zPos = value
+end
 IsValid = function(value) return type(value) == "table" and not value.removed end
 AccessorFunc = function(target, field, name)
 	target["Set" .. name] = function(self, value) self[field] = value end
@@ -148,7 +152,7 @@ dofile("gamemodes/ix_cotz/plugins/vendor_adv/derma/cl_vendor.lua")
 local town = create("ixVendorAdv")
 town:SetReadOnly(false)
 town:Setup(entity)
-check(town.buyingList[101].zPos == -101, "Sale rows use descending instance IDs")
+check(town.buyingList[101].zPos == 1, "Sale rows use small display positions")
 check(town.stockTab.text == "Buy" and town.personalTab.text == "Sell", "Town traders use Buy/Sell tabs")
 local row = town.sellingList.rifle
 row:DoClick()
@@ -231,7 +235,53 @@ check(not town.buyingList[101] and not town.vendorBuy.enabled, "Equipping a sele
 ownedData.equip = false
 town:SyncPersonalItems()
 check(IsValid(town.buyingList[101]), "Newly eligible inventory instances appear without reopening")
-check(town.buyingList[101].zPos == -101, "Refreshed rows retain descending instance order")
+town:RefreshInspector()
+check(town.buyingList[101].zPos == 1, "Refreshed rows retain safe display positions")
+ix.item.list.rifle.category = "Weapons"
+ix.item.list.medkit.category = "Medical"
+inventory[101].category = "Weapons"
+entity.items.medkit = {[VENDOR_MODE] = 1}
+for _, id in ipairs({32768, 65536, 1000000}) do
+	inventory[id] = item(id, "medkit", "Purchased medkit", {})
+	inventory[id].category = "Medical"
+	ix.item.instances[id] = inventory[id]
+end
+town:SyncPersonalItems()
+town:Think()
+check(town.buyingList[1000000].zPos == 1 and town.buyingList[65536].zPos == 2
+	and town.buyingList[32768].zPos == 3 and town.buyingList[101].zPos == 4,
+	"High-ID purchases sort ahead of starting items without exceeding the engine range")
+town.buyingList[101]:DoClick()
+town.buying:GetVBar():SetScroll(200)
+town:SetCategory("Medical")
+check(town.buying:GetVBar().scroll == 0, "Choosing a category returns the filtered list to the top")
+check(not town.buyingList[101].visible and town.buyingList[1000000].visible,
+	"Personal category filters retain only matching instances")
+check(not town.selected and not town.vendorBuy.enabled, "Filtering out a selection clears the sale action")
+town:SetTab("selling")
+check(town.categoryButton.text == "Category: All", "Buy and Sell keep independent category filters")
+town:SetCategory("Weapons")
+check(town.sellingList.rifle.visible and not town.sellingList.medkit.visible,
+	"Catalogue category filters use item definitions")
+town:SetTab("buying")
+check(town.categoryButton.text == "Category: Medical", "Switching tabs restores the category filter")
+town:SetCategory("Missing")
+check(town.empty.visible and town.empty.text == "No items in this category.",
+	"An empty category has a visible explanation")
+local categoryMenu
+ix.cotzUI.Menu = function()
+	categoryMenu = {options = {}, AddOption = function(self, text, callback) self.options[text] = callback end,
+		Open = function() end}
+	return categoryMenu
+end
+town:OpenCategoryMenu()
+check(categoryMenu.options.Weapons and categoryMenu.options.Medical and categoryMenu.options["All categories"],
+	"Category menu includes the active tab's item categories and an All option")
+categoryMenu.options["All categories"]()
+check(town.buyingList[101].visible and not town.empty.visible, "All categories restores the full list")
+town:SetTab("selling")
+town:SetCategory(nil)
+town:SetTab("buying")
 inventory = {}
 town:SyncPersonalItems()
 town:RefreshInspector()

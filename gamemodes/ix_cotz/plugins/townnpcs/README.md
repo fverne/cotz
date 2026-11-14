@@ -1000,6 +1000,9 @@ See `tests/contact_job_flow_spec.lua`, `tests/task_rewards_spec.lua` and `tests/
 ## Dialogue navigation and roster visibility
 
 Dialogue uses explicit action colors, with jobs/progression matching inventory yellow/purple.
+Contacts offering multiple red service/barter choices place them under **What services do you provide?**
+The shared dialogue classifier applies this to future contacts and services too; single-service contacts
+keep their direct action. Existing unlock checks and nested customization/barter menus remain active.
 All 27 contacts keep flavour under questions, appearance services under customization, and ammunition
 exchanges under barter. Incoming deliveries remain on both root variants. Task rewards stay under
 About work → Task rewards; new tasks and field commissions from that contact require collecting earned rewards first, including

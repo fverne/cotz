@@ -378,6 +378,7 @@ if SERVER then
 		credits[key] = math.max(0, (credits[key] or 0) - credit)
 		character:SetData(CREDIT_KEY, credits)
 		character:TakeMoney(cash)
+		ix.economyStats.Record(character, service == "repair" and "repairSpent" or "serviceSpent", cash)
 
 		return true
 	end

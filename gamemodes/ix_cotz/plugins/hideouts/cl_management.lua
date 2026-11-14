@@ -52,6 +52,7 @@ net.Receive("cotz/hideouts/manage", function()
 		for _ = 1, net.ReadUInt(16) do
 			guests[#guests + 1] = {id = net.ReadUInt(32), name = net.ReadString()}
 		end
+		local migrationTarget = net.ReadString()
 		ix.cotzUI.Label(scroll, name, true)
 		ix.cotzUI.Label(scroll, "Prop capacity: " .. propLimit)
 		if scope == "exit" then
@@ -61,8 +62,24 @@ net.Receive("cotz/hideouts/manage", function()
 			end)
 		end
 		if manage then
+			if not squad and scope == "entrance" and migrationTarget ~= "" then
+				button(scroll, "Migrate hideout to " .. migrationTarget, function()
+					ix.cotzUI.Query("Move this hideout to the new interior? Containers, their upgrades and contents, room upgrades and ground items are kept. Player-placed props are discarded without a refund. Everyone must leave the hideout and let it finish saving first. Ground items keep their local positions; the move is blocked if they do not fit the new bounds.",
+						"Migrate personal hideout", "Migrate hideout", function()
+							sendManagement(panel, id, 18)
+							panel:Remove()
+						end, "Cancel")
+				end)
+			end
 			if not squad and (scope == "entrance" or scope == "exit") then
 				button(scroll, "Hideout improvements", function() PLUGIN:RequestPersonalBarter(id) end)
+				button(scroll, "Delete personal hideout", function()
+					ix.cotzUI.Query("Permanently delete this hideout? Everyone inside will be moved outside. Furnishings, loose items and upgrades are lost, with no refund. Empty your containers first; their contents will only be recoverable by an administrator. You can arrange a new hideout at a configured entrance afterward.",
+						"Delete personal hideout", "Delete hideout", function()
+							sendManagement(panel, id, 17)
+							panel:Remove()
+						end, "Cancel")
+				end)
 			end
 			if nextPropLimit > 0 then
 				button(scroll, "Upgrade prop capacity to " .. nextPropLimit .. " (" .. ix.currency.Get(propPrice) .. ")", function()

@@ -3,10 +3,9 @@ ix.dialogue.list = ix.dialogue.list or {}
 
 local MENU_ORDER = {
 	TradeTopic = 10,
-	DefenseVoucher = 11,
-	DefenseRewards = 12,
+	ServicesTopic = 20,
 	StartBarter = 20,
-	HideoutBarter = 21,
+	HideoutBarter = 41,
 	HealTopic = 30,
 	RepairItems = 35,
 	WeaponWorkshop = 36,
@@ -25,11 +24,14 @@ local MENU_ORDER = {
 	AboutProgression = 70,
 	TownProgression = 70,
 	TaskRewardChoices = 75,
+	DefenseVoucher = 78,
+	DefenseRewards = 79,
 	QuestionsTopic = 80,
 	TutorialTopic = 80,
 	Introduction = 90,
 	BackgroundTopic = 90,
 	InterestTopic = 95,
+	ServicesBackTopic = 890,
 	QuestionsBackTopic = 890,
 	TutorialTopicBack = 890,
 	GearCustomizationBackTopic = 890,
@@ -38,7 +40,7 @@ local MENU_ORDER = {
 }
 
 local TOPIC_CATEGORIES = {
-	TradeTopic = "trade",
+	TradeTopic = "trade", ServicesTopic = "service",
 	StartBarter = "service", AmmoExchange = "service", HideoutBarter = "service",
 	HealTopic = "service", ConfirmHeal = "service", RepairItems = "service", ConfirmRepair = "service",
 	StorageTopic = "service", OpenStorage = "service", ConfirmStorageUpgrade = "service",
@@ -52,7 +54,7 @@ local TOPIC_CATEGORIES = {
 	AboutProgression = "progression", TownProgression = "progression", TownView = "progression",
 	TownHandIn = "progression", TownCommission = "progression", ViewProgression = "progression",
 	HandInComplexProgressionItemTopic = "progression",
-	BackTopic = "back", QuestionsBackTopic = "back", GearCustomizationBackTopic = "back",
+	ServicesBackTopic = "back", BackTopic = "back", QuestionsBackTopic = "back", GearCustomizationBackTopic = "back",
 	TutorialTopicBack = "back", GOODBYE = "back",
 }
 
@@ -238,6 +240,78 @@ function ix.dialogue.ConfigureCustomization(dialogue)
 	})
 end
 
+function ix.dialogue.ConfigureServices(dialogue)
+	if not dialogue or not dialogue.townContact then return end
+	local tree = dialogue.tree
+	local choices, included = {}, {}
+	local function collect(options)
+		for _, id in ipairs(options or {}) do
+			if id ~= "ServicesTopic" and tree[id] and not included[id]
+				and ix.dialogue.GetOptionCategory(id, tree[id]) == "service" then
+				choices[#choices + 1] = id
+				included[id] = true
+			end
+		end
+	end
+	collect(tree.ServicesTopic and tree.ServicesTopic.options)
+	for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+		collect(tree[rootID] and tree[rootID].options)
+	end
+	if #choices < 2 then return end
+
+	for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+		local root = tree[rootID]
+		if root then
+			local options = {"ServicesTopic"}
+			for _, id in ipairs(root.options) do
+				if not included[id] and id ~= "ServicesTopic" then options[#options + 1] = id end
+			end
+			root.options = ix.dialogue.OrderOptions(options, true)
+		end
+	end
+
+	local visited = {}
+	local function redirect(id)
+		if visited[id] or id == "BackTopic" or id == "ServicesTopic" or id == "ServicesBackTopic" then return end
+		local topic = tree[id]
+		if not topic then return end
+		visited[id] = true
+		topic.backTopic = "ServicesBackTopic"
+		topic.returnTopic = topic.returnTopic or "ServicesBackTopic"
+		for index, option in ipairs(topic.options or {}) do
+			if option == "BackTopic" then
+				topic.options[index] = "ServicesBackTopic"
+			elseif option == "GearCustomizationBackTopic"
+				or ix.dialogue.GetOptionCategory(option, tree[option]) == "service"
+				or ix.dialogue.GetOptionCategory(option, tree[option]) == "text" then
+				redirect(option)
+			end
+		end
+	end
+	for _, id in ipairs(choices) do redirect(id) end
+	-- Dynamic confirmation topics may only be reachable through a resolver.
+	for id, topic in pairs(tree) do
+		if ix.dialogue.GetOptionCategory(id, topic) == "service" then redirect(id) end
+	end
+
+	local options = ix.dialogue.OrderOptions(choices, true)
+	options[#options + 1] = "BackTopic"
+	dialogue.addTopic("ServicesTopic", {
+		statement = "What services do you provide?",
+		options = options,
+		ShouldAdd = function(_, client, target)
+			for _, id in ipairs(choices) do
+				if tree[id].statement ~= "" and tree[id]:ShouldAdd(client, target) then return true end
+			end
+
+			return false
+		end,
+	})
+	dialogue.addTopic("ServicesBackTopic", {
+		statement = "Back to your services.", options = options,
+	})
+end
+
 function ix.dialogue.ConfigureBarterVisibility(dialogue)
 	local tree = dialogue.tree
 	local barter = tree.StartBarter
@@ -251,7 +325,8 @@ function ix.dialogue.ConfigureBarterVisibility(dialogue)
 		end
 		for _, id in ipairs(self.options) do
 			local topic = tree[id]
-			if id ~= "BackTopic" and topic and topic.statement ~= "" and topic:ShouldAdd(client, target) then
+			if topic and ix.dialogue.GetOptionCategory(id, topic) ~= "back"
+				and topic.statement ~= "" and topic:ShouldAdd(client, target) then
 				return true
 			end
 		end

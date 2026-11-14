@@ -57,6 +57,13 @@ local environment = setmetatable({
 		WriteBool = function() end, WriteFloat = function() end,
 	},
 }, {__index = _G})
+environment.table = setmetatable({Copy = function(value)
+	local result = {}
+	for key, entry in pairs(value) do result[key] = entry end
+
+	return result
+end}, {__index = table})
+execute(read("gamemodes/ix_cotz/schema/libs/sh_economystats.lua"), environment)
 local base = "gamemodes/ix_cotz/plugins/vendor_adv/"
 execute(read(base .. "libs/sv_stock.lua"), environment)
 local entitySource = read(base .. "entities/entities/ix_vendor_adv.lua")
@@ -210,6 +217,33 @@ check(shop.money == nil, "Vendor cash credits and debits remain disabled")
 local policy = {}
 local policyEnvironment = setmetatable({PLUGIN = policy}, {__index = environment})
 execute(read("gamemodes/ix_cotz/plugins/corechanges/sv_vendorcash.lua"), policyEnvironment)
+check(first:GetData("economyStats").vendorEarned == 5,
+	"a repeated sale records only the single paid vendor payout")
+check(first:GetData("economyStats").vendorSpent == 10,
+	"denied and unaffordable purchases never inflate spending")
+local ammoBuyer, ammoClient = buyer()
+selling = false
+requestedItem = "rifle"
+environment.ix.item.list.rifle.isAmmo = true
+trade(ammoClient)
+check(ammoBuyer:GetData("economyStats").ammoSpent == 10
+	and ammoBuyer:GetData("economyStats").vendorSpent == nil,
+	"ammo purchases use a disjoint spending category rather than counting vendor spending twice")
+environment.ix.item.list.rifle.isAmmo = nil
+
+for _, kind in ipairs({"food", "drink"}) do
+	local consumer, customer = buyer()
+	local item = environment.ix.item.list.rifle
+	item.base, item.hunger, item.thirst = "base_consumables", 10, kind == "drink" and 10 or 0
+	trade(customer)
+	check(consumer:GetData("economyStats")[kind .. "Spent"] == 10
+		and consumer:GetData("economyStats").vendorSpent == nil,
+		"food and drink purchases are classified without double counting vendor spending")
+	item.base, item.hunger, item.thirst = nil, nil, nil
+end
+check(first:GetData("economyStats").salesByCategory.Other == 5,
+	"successful sales accumulate their actual payout under the item category")
+
 local standardMeta = {}
 policyEnvironment.ENT = standardMeta
 local standardSource = read("gamemodes/helix/plugins/vendor/entities/entities/ix_vendor.lua")

@@ -2,10 +2,19 @@ PLUGIN.name = "Spawn Saver"
 PLUGIN.author = "Chessnut"
 PLUGIN.description = "Saves the position of a character."
 
+local pendingRestores = setmetatable({}, {__mode = "k"})
+
+function PLUGIN:PrePlayerLoadedCharacter(client, character)
+	pendingRestores[character] = true
+end
+
 -- Called right before the character has its information save.
 function PLUGIN:CharacterPreSave(character)
 	-- Get the player from the character.
 	local client = character:GetPlayer()
+
+	-- Load-time saves must not replace the saved location with the temporary faction spawn.
+	if pendingRestores[character] or not IsValid(client) or client:GetCharacter() ~= character then return end
 
 	-- Check to see if we can get the player's position.
 	if IsValid(client) then
@@ -26,7 +35,9 @@ end
 -- Called after the player's loadout has been set.
 function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
 	timer.Simple(0, function()
-		if IsValid(client) then
+		pendingRestores[character] = nil
+
+		if IsValid(client) and client:GetCharacter() == character then
 			-- simplecrossserver
 			local xserverpos = character:GetData("newpos")
 			if xserverpos then

@@ -40,6 +40,7 @@ ix = {
 	config = {Get = function(_, default) return default end},
 }
 dofile("gamemodes/ix_cotz/plugins/jobsystem/libs/sh_leaderboard.lua")
+dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile("tests/helpers/character_vars.lua")
 dofile(base .. "libs/sh_storage.lua")

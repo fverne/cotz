@@ -31,6 +31,7 @@ function ix.dialogue.ConfigureHideoutCrates(dialogue, contact)
 				if option == "HideoutBarter" then present = true break end
 			end
 			if not present then root.options[#root.options + 1] = "HideoutBarter" end
+			root.options = ix.dialogue.OrderOptions(root.options, true)
 		end
 	end
 end

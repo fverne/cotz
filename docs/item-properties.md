@@ -1,8 +1,11 @@
 # Item properties
 
-Numerical gameplay readings belong in **PROPERTIES**, including the **Protection levels** group.
-Descriptions identify an object and provide background; they do not append condition, quantity,
-ammunition capacity or restoration tables. Calibres, model names, ingredients and historical numbers
+Numerical gameplay readings belong in **PROPERTIES**, with protection readings listed directly
+without a protection subheader. Missing or zero protection is omitted; adverse protection remains visible.
+Converted readings appear immediately below PROPERTIES, followed by legacy item rows and weight. Quantity rows are omitted because quantities have different meanings
+across item families. Ammunition descriptions retain their original box text, live round count and
+ammo-specific background. Descriptions identify an object and provide background; they do not append
+condition, quantity, ammunition capacity or restoration tables. Calibres, model names, ingredients and historical numbers
 may remain in prose. Saved custom descriptions and task/location instructions remain intact.
 
 ## Ownership and API
@@ -11,16 +14,25 @@ The automatically loaded schema libraries `sh_itemproperties.lua` and `cl_itempr
 `ix.itemProperties`. Schema's `PopulateItemTooltip` hook supplies the common path used by inventory,
 vendors, equipment and world entities. Weight and legacy protection/filter helpers delegate to it;
 semantic row IDs prevent duplicates regardless of plugin dispatch order. Existing quantity/condition
-bars, the imperial weight preference and equipment summary controls remain available.
+bars, the imperial weight preference and equipment summary controls remain available. Weight retains
+the legacy gram/kilogram and ounce/pound formatter and bottom-row position. Carry capacity retains
+its legacy label and formatter and remains hidden on world items. Distances and jump velocity retain
+their raw Source-unit values, without conversion to metres.
 
 - `Convert(kind, value)` returns the numeric display value and unit. It rejects unknown kinds and
   nonfinite values. Negative values remain negative; conversions do not clamp gameplay values.
-- `Format(kind, value, signed)` formats at most two decimals, groups thousands and optionally prefixes
-  positive values with `+`. A nonzero reading small enough to round to zero displays zero.
+- `Format(kind, value, signed)` rounds percentages except medicinal healing to whole numbers, formats other readings with at
+  most two decimals, groups thousands and optionally prefixes positive values with `+`. A nonzero
+  reading small enough to round to zero displays zero. Cleanliness appears before durability.
 - `GetRows(item)`, `GetProtection(item)`, `GetFilterRows(item)` and `GetEffects(item)` return ordered
   `{id, text}` rows without constructing panels or invoking gameplay callbacks.
-- `AddRow(tooltip, id, text)`, `PopulateProtection(tooltip, item)` and `Populate(tooltip, item)` render
-  the rows. Repeated semantic rows update the existing row; full population runs once per tooltip.
+- `AddRow(tooltip, id, text)`, `PopulateProtection(tooltip, item)` and `Populate(tooltip, item)`
+  render converted rows through `ix.util.PropertyDesc`, without image icons. Its optional fourth
+  argument supplies a semantic row ID; repeated rows update the existing row and children.
+  Weight and carry capacity retain their original image icons through `PropertyDesc2`.
+  Property labels use explicit Helix word wrapping and size each row from the measured lines,
+  including resetting its height when text becomes shorter. Full population runs once per tooltip. World-item tooltips keep legacy weight and existing item
+  modifiers, without evaluating or adding converted nutrition, hydration, effects or protection rows.
 - Concrete items can implement `GetPropertyEffects()` for implemented timed effects, returning
   `{buff, duration, amount}` or `{buff, duration, multiplier}` entries. These expressions reference
   item tuning, not copied computed totals. Include an entry only for an effect that actually exists.
@@ -31,8 +43,10 @@ bars, the imperial weight preference and equipment summary controls remain avail
 Family readers use saved quantities and rolled meat weight, effective suit/headgear protection,
 filter/tank state and installed attachment getters. Equipped firearms use their current SWEP when
 available; other previews use registered SWEP definitions. Magazine size and cyclic rate come from
-that weapon rather than historical figures in prose. The common ammunition reader preserves calibre
-and loading identifiers. Unsupported or missing SWEP definitions do not produce invented capacities.
+that weapon rather than historical figures in prose. Firearms list all compatible ammunition by item name, including variants offered by their SWEP
+ammo attachments. Ammo items omit the cartridge row and expand special variant labels such as
+HP to Hollow Point. Long ammunition lists wrap within the tooltip width. Melee weapons have no cartridge, magazine capacity or cyclic-rate rows. Unsupported or missing SWEP definitions
+do not produce invented capacities.
 
 ## Cosmetic conversions
 
@@ -47,27 +61,31 @@ no external script is loaded or copied into the game.
 | --- | --- | --- |
 | Nutrition | hunger / 100 × 1000 | kcal per use |
 | Hydration | thirst / 100 × 1000 | mL equivalent per use |
-| Medicinal health restoration | HP per second / 100 × 1000 | nominal % strength |
+| Medicinal health restoration | HP per tick / viewer maximum HP × 100 | % of maximum health per tick |
 | Completion healing | unchanged | HP |
 | Instant radiation removal/exposure | radiation points / 100 × 30000 | mSv |
 | Medicinal radiation removal/exposure | radiation points per second / 100 × 30000 | mSv/s |
 | Bandage clotting | severity points per second / 100 × 150000 | mL/min |
 | Stamina restoration | stamina points per second / 100 × 100000 | µg/s |
 | Psychic recovery/damage | psychic points per second | %/s |
-| World distance / jump velocity | Source units × 0.0254 | m / m/s |
-| Weight, duration, quantities | unchanged | kg, s, counts |
+| World distance / jump velocity | unchanged | Source units / units per second |
+| Weight, carry capacity | legacy weight formatter | g/kg or oz/lbs |
+| Duration | unchanged | s |
 
-Hydration equivalents are a COTZ extension and do not describe bottle volume. The medicinal health
-percentage is the reference-style strength index, not a promise to heal that percentage of a
-character's maximum health. Buff readers account for the actual 0.5-second or one-second callback
-interval. Durations describe the effect after application, separately from application time.
+Hydration equivalents are a COTZ extension and do not describe bottle volume. Medicinal healing
+percentages use the viewing player's current maximum health, retaining up to two decimal places.
+Without a valid client viewer, readings use 100 maximum HP. Healing rows show restoration per actual
+tick (0.5 seconds for rapid healing or one second for slow healing), followed by the overall duration.
+For example, a 2 HP tick at 200 maximum HP reads `+1% per 1 second over 300 seconds`. Other buff
+readers account for their actual callback interval. Durations describe the effect after application, separately from application time.
 
 Protection uses an Anomaly-style cosmetic calibration of each effective resistance fraction:
 thermal ×300 kW/m², electrical ×480 V, chemical ×100%, ballistic/rupture/gravitational ×2500 J,
 psychic ×300 mT and radiation ×3000 mSv. These are explicit COTZ adaptations; the referenced
-StatsDisplay version itself displays outfit protection as percentages. Flat absorption is converted
-separately, first normalizing its points by 100. A resistance reading is not combined with absorption
-into a single protection percentage or threshold. Zero and adverse protection remain visible.
+StatsDisplay version itself displays outfit protection as percentages. Gear and suit property rows
+omit flat absorption; their gameplay calculations and the equipment summary remain unchanged.
+Attachment property rows can still show separately converted absorption, first normalizing its
+points by 100. Zero protection rows are omitted; adverse protection remains visible.
 
 Examples: Bread restores 9 hunger and reads **+90 kcal** per portion. Old antirad removes a nominal
 50 radiation points in 120 seconds and reads **−125 mSv/s for 120 s**. Gauze supplies 20 additional
@@ -76,8 +94,9 @@ severity reduction over six seconds and reads **5,000 mL/min**, plus **6 HP** on
 ## Verification
 
 Run `luatex --luaonly tests/item_properties_spec.lua` from the repository root. It covers conversions,
-actual item definitions, source/provider agreement, saved quantities, meat weight, weapon state,
-condition-sensitive protection and semantic-row deduplication in all four tooltip contexts.
+actual item definitions, source/provider agreement, quantity omission, legacy weight/distance displays,
+meat weight, weapon state, rounded condition ordering, melee cartridge omission, condition-sensitive
+protection, semantic bullet-row deduplication and exclusion of converted rows from world tooltips.
 Also run the bleeding, buffs persistence, anomaly resistance, gasmask filter, item description,
 headgear durability, suit attachment, mobile action and equipment view specs.
 

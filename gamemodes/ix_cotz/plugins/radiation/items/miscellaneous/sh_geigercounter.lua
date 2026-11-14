@@ -35,7 +35,7 @@ end
 
 function ITEM:PopulateTooltip(tooltip)
     if !self.entity then
-        ix.util.PropertyDesc2(tooltip, "Geiger Counter", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+		ix.util.PropertyDesc2(tooltip, "Geiger Counter", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
     end
 end
 

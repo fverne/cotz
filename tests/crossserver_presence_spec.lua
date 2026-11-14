@@ -8,10 +8,22 @@ local now = 100
 function CurTime() return now end
 function SysTime() return now end
 function Color(r, g, b) return {r = r, g = g, b = b} end
+local function copy(value)
+	if type(value) ~= "table" then return value end
+	local result = {}
+	for key, entry in pairs(value) do result[key] = copy(entry) end
+
+	return result
+end
+table.Copy = copy
 local packets, packet, receiver = {}, nil, nil
+local recipients = {}
 net = {
 	Start = function() packet = {} end,
-	Send = function() packets[#packets + 1] = packet end,
+	Send = function(client)
+		packets[#packets + 1] = packet
+		recipients[packet] = client
+	end,
 	Receive = function(_, callback) receiver = callback end,
 }
 local function write(value) packet[#packet + 1] = value end
@@ -33,22 +45,25 @@ local function encode(value)
 	jsonValues[key] = value
 	return key
 end
-util = {JSONToTable = function(value) return jsonValues[value] end, AddNetworkString = function() end, SHA256 = function(value) return value end, TableToJSON = encode}
+util = {JSONToTable = function(value) return copy(jsonValues[value]) end, AddNetworkString = function() end, SHA256 = function(value) return value end, TableToJSON = encode}
 game = {GetIPAddress = function() return "test" end}
 local liveData = {leaderboardStats = {tasksCompleted = 15, taskEarnings = 900, species = {private = true}},
 	privateVendorHistory = "private"}
 local liveProgression = {lines = {["test/one"] = {completed = true}}}
 local character = {
 	GetID = function() return 70 end,
+	GetMoney = function() return 765 end,
 	GetData = function() return liveData end,
 	GetProgression = function() return liveProgression end,
 }
-local client = {GetCharacter = function() return character end}
+local admin = false
+local client = {GetCharacter = function() return character end, IsAdmin = function() return admin end}
 player = {GetHumans = function() return {client} end}
 string.ToColor = function() return Color(105, 139, 87) end
 ix = {config = {Add = function() end, Get = function(_, default) return default end}}
 SERVER, CLIENT = true, false
 PLUGIN = {}
+dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 local root = "gamemodes/ix_cotz/plugins/simplecrossserverdata/"
 ix.plugin = ix.plugin or {Get = function() end}
 dofile(root .. "sh_presence.lua")
@@ -133,4 +148,51 @@ check(ix.crossserver.GetPresenceColor({state = "online"}, true, false).g == 140,
 	"remote online status uses teal")
 check(ix.crossserver.GetPresenceColor({state = "online"}, false, false).r == 116,
 	"stale presence stays muted")
+
+-- Admin profiles must never contaminate a later ordinary recipient's public snapshot.
+liveData.economyStats = {progressionEarned = 500, ammoSpent = 120, startedAt = 123}
+rows[1].profile = encode({economyStats = {vendorEarned = 900, repairSpent = 100}})
+rows[1].money = "432"
+local observer = {GetCharacter = function() return character end, IsAdmin = function() return false end}
+player.GetHumans = function() return {client, observer} end
+admin = true
+packets = {}
+ix.crossserver.PublishRoster(rows)
+for _, values in ipairs(packets) do
+	if recipients[values] == client then receive(values) end
+end
+check(ix.crossserver.roster[70].profile.economyStats.cash == 765
+	and ix.crossserver.roster[70].profile.economyStats.progressionEarned == 500,
+	"administrators receive live cash and unsaved economy counters")
+check(ix.crossserver.roster[1].profile.economyStats.cash == 432
+	and ix.crossserver.roster[1].profile.economyStats.vendorEarned == 900,
+	"remote admin totals come from saved character data and money")
+for _, values in ipairs(packets) do
+	if recipients[values] == observer then receive(values) end
+end
+for _, record in pairs(ix.crossserver.roster) do
+	check(record.profile.economyStats == nil, "ordinary recipients receive no private economy payload")
+end
+admin = false
+packets = {}
+ix.crossserver.PublishRoster(rows)
+check(packets[1][1] == true, "revoking administrator access replaces the private snapshot")
+for _, values in ipairs(packets) do
+	if recipients[values] == client then receive(values) end
+end
+check(ix.crossserver.roster[70].profile.economyStats == nil, "demotion clears cached admin totals")
+ix.townNPCs = nil
+admin = true
+packets = {}
+ix.crossserver.PublishRoster(rows)
+for _, values in ipairs(packets) do
+	if recipients[values] == client then receive(values) end
+end
+check(ix.crossserver.roster[70].profile.economyStats.cash == 765,
+	"admin reporting also works without town progression filtering")
+for _, values in ipairs(packets) do
+	if recipients[values] == observer then receive(values) end
+end
+check(ix.crossserver.roster[70].profile.economyStats == nil,
+	"disabling town progression cannot expose economy counters to ordinary recipients")
 print("cross-server presence: " .. checks .. " checks passed")

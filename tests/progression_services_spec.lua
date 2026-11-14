@@ -38,6 +38,7 @@ ix = {
 	item = {list = {medic_antirad_1 = {name = "Antirad"}}},
 	dialogue = {notifyMoneyLost = function() end}, chat = {Send = function() end},
 }
+dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile("tests/helpers/character_vars.lua")
 dofile(base .. "libs/sh_storage.lua")
@@ -205,8 +206,10 @@ local firstMoney, secondMoney = first.money, second.money
 check(ix.progression.ExecuteService(first.client, tech, "repair", true), "first concurrent quote executes")
 check(firstItem.data.wear == 100 and secondItem.data.wear == 80, "one shopper cannot overwrite another shopper's repair")
 check(first.money == firstMoney - 300, "only the uncovered fee is charged")
+check(first:GetData("economyStats").repairSpent == 300, "repair statistics exclude service credit")
 check(ix.progression.GetServiceCredit(first, "'Technut'", "repair") == 0, "actual credit is consumed once")
 check(not ix.progression.ExecuteService(first.client, tech, "repair", true), "confirmation cannot replay")
+check(first:GetData("economyStats").repairSpent == 300, "replayed repair confirmations cannot inflate spending")
 check(ix.progression.ExecuteService(second.client, tech, "repair", true), "second shopper retains their own quote")
 check(secondItem.data.wear == 100 and second.money == secondMoney - 400, "second shopper pays their own fee")
 check(

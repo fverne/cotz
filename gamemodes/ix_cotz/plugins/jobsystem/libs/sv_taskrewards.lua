@@ -95,6 +95,9 @@ local function paySelected(character, key, offers)
 	ix.progression.SetCharacterProgression(character, record)
 	if choice.money and choice.money > 0 then
 		character:GiveMoney(choice.money)
+		local incomeKey = key:match("^job:") and "taskEarned"
+			or key:match("^bonus:") and "bonusEarned" or "barterEarned"
+		ix.economyStats.Record(character, incomeKey, choice.money)
 		ix.dialogue.notifyMoneyReceive(character:GetPlayer(), choice.money)
 		if key:match("^job:") then
 			local stats = table.Copy(character:GetData("leaderboardStats", {}))

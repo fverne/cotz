@@ -12,7 +12,8 @@ local function addWorkshopOption(plugin, options, client, target, item, action, 
 	data.cost, data.durability, data.cleanliness = offer.cost, offer.durability, offer.cleanliness
 	local name = offer.reward and ix.item.list[offer.reward].name or item.name
 	if action == "dismantle" then name = item.name .. " -> " .. name end
-	local statement = string.format("%s [#%d, %.1f%% durability]", name, item.id, offer.durability)
+	local statement = string.format("%s [%.1f%% cleanliness, %.1f%% durability]",
+		name, offer.cleanliness, offer.durability)
 	options[#options + 1] = {statement = statement, topicID = topicID, dyndata = data}
 end
 
@@ -103,4 +104,5 @@ function PLUGIN:ConfigureDialogue(dialogue)
 			root.options = ix.dialogue.OrderOptions(root.options, true)
 		end
 	end
+	if ix.dialogue.ConfigureServices then ix.dialogue.ConfigureServices(dialogue) end
 end

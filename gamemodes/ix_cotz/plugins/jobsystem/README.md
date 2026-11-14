@@ -244,7 +244,7 @@ unrevealed offers store reward candidate details. The task journal shows ordinar
 instructions. Bonus progress shows the number of completions, without revealing the bonus value.
 
 Once the objective is ready, open **About work → Task rewards** at the issuing contact.
-**Complete the assignment** also reveals up to three reward choices in that submenu. Selecting one
+Up to three reward choices appear there automatically, without a separate completion action. Selecting one
 completes the hand-in, consumes any required cargo, pays cash/reputation, credits the task and restock once, and grants the selected reward. Selection is checked
 against the current character, active claim, completion state, cargo, NPC access and proximity.
 Walking away after revealing a reward preserves the job and choices; returning does not reroll them.

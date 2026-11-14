@@ -11,9 +11,23 @@ ITEM.category = "Hideout crates"
 function ITEM:GetName()
 	local data = self:GetData("cotzHideoutCrate", {})
 
-	return string.format("%s — %s level %d", self.name, data.squad and "squad" or "personal", data.level or 0)
+	return string.format("Tier %d %s%s", data.level or 1, self.name:lower(), data.squad and " — squad" or "")
 end
 
 function ITEM:GetDescription()
 	return self.description .. "\n\n" .. self.longdesc .. "\n\nInstall this crate through the matching hideout container's upgrade menu."
+end
+
+function ITEM:GetIndividualProperties()
+	local data = self:GetData("cotzHideoutCrate", {})
+	local level = data.level or 1
+	local name = self.name:lower()
+	local text
+	if level == 1 then
+		text = string.format("Installs tier 1 %s", name)
+	else
+		text = string.format("Upgrades tier %d to tier %d %s", level - 1, level, name)
+	end
+
+	return {{id = "hideoutCrateUpgrade", text = text}}
 end

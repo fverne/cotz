@@ -77,6 +77,7 @@ function playerMeta:ixJobComplete(npcidentifier)
 		self:addReputation(definition.repReward)
 		ix.dialogue.notifyReputationReceive(self, definition.repReward)
 		character:GiveMoney(job.moneyReward)
+		ix.economyStats.Record(character, "taskEarned", job.moneyReward)
 		local stats = table.Copy(character:GetData("leaderboardStats", {}))
 		stats.taskEarnings = (stats.taskEarnings or 0) + job.moneyReward
 		character:SetData("leaderboardStats", stats)

@@ -61,5 +61,5 @@ ITEM.pacData = {
 }
 
 function ITEM:PopulateTooltipIndividual(tooltip)
-    ix.util.PropertyDesc2(tooltip, "Binoculars", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))
+	ix.util.PropertyDesc2(tooltip, "Binoculars", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
 end

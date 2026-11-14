@@ -77,7 +77,8 @@ where the real console/crate/register belongs. A spawn marker's origin marks the
 its yaw sets facing. Keep spawn points above the floor with room for a standing player. Both personal and squad
 hideouts instantiate storage container markers; only squad hideouts instantiate the vendor. One shell can contain both.
 
-For each storage container, choose a recipe and a permanent **slot ID** in its menu. New markers get
+For each storage container, choose a recipe and a permanent **slot ID** in its menu. The marker previews
+the selected recipe's level-one model, updating when edited or restored from a dupe. New markers get
 an ID automatically; copied markers keep their ID, so rename copies to make separate containers.
 Keep the ID when moving/resaving a spot: its upgrades, sharing and inventory belong to that ID in each
 hideout. Do not reuse a slot for a different recipe; loading rejects recipe changes, duplicate slots,
@@ -134,6 +135,110 @@ so its allocation volume must be at least 1024×1024×528. The gap separates ins
 not require extra border space around a single instance. Allocation errors distinguish missing
 areas, areas too small for the full bounds, and failure to find a clear/unreserved placement.
 
+Shell decorations can extend below the floor plate even when the paste anchor is correct. With all
+hideouts unloaded, `/HideoutTemplateDepth cabin 80` changes only that template's lower Z bound to
+`-80`, preserving its anchor, upper bounds, markers, manual points and container definitions. The value
+is a positive distance below the anchor (0–16000); new templates still default to 16. The allocation
+area must contain the enlarged volume: a 1024×1024×512 template with depth 80 needs 1024×1024×592.
+This applies to every room using that template on this map. Re-registering it with `HideoutTemplateAdd`
+resets the depth to 16. A shell-bounds error reports the offending entity's class/model and actual
+local bounds alongside the template bounds; use those runtime measurements to choose enough depth.
+
+## Migrate personal rooms to a new template
+
+### Let owners migrate their own rooms
+
+Prepare and inspect a personal test room on the destination template, including every old installed
+container's exact slot ID and recipe and its general starter slot. While that test room is loaded, an
+administrator can publish an opt-in offer:
+
+    /HideoutMigrationOffer OLD_TEMPLATE TEST_HIDEOUT_ID
+
+The second argument is the loaded test room's hideout ID. This saves the destination's resolved marker
+layout and dupe fingerprint. It does not move any rooms or change location definitions. Use
+`/HideoutLocationOverride` separately if new claims should start on the destination template.
+Reissue the offer after changing the destination template or dupe; stale offers cannot migrate rooms.
+
+An owner whose personal room uses `OLD_TEMPLATE` sees **Migrate hideout to TARGET_TEMPLATE** in its
+entrance management menu. Everyone must leave that room and let it finish saving before migration.
+The confirmation explains that storage containers, inventory IDs, dimensions, upgrades, sharing,
+stored items, ground items and room improvements are kept. Player-placed props are discarded without
+a refund. Containers move to the destination markers; the cassette player returns to its default
+position. Ownership, invitations, entrance and character progression remain intact. Guests, squad
+managers and owners already on the destination template do not receive this offer.
+
+Only the selected room changes. Other rooms may remain loaded. Missing or mismatched installed
+storage slots and ground items outside the destination bounds block the move. Ground item rows and
+local positions stay unchanged, so the inspected destination must also provide wall/floor clearance
+at those positions. Migration does not generate fresh template loot. Server checks lock the room
+during the database read and recheck character identity, ownership, entrance proximity, offer,
+destination dupe and saved state before committing.
+
+Each accepted move first writes and verifies a room backup beneath
+`garrysmod/data/cotz_hideout_migrations/`. Keep these for administrator recovery; the bulk migration
+rollback command below is for bulk migration tokens. An uncertain plugin-data save blocks further
+hideout loading until an administrator inspects the saved state and backup. No item rows are rewritten.
+
+### Administrator bulk migration
+
+The administrator migration tool moves **all personal rooms using one source template on the current
+map**, including offline owners. It also changes personal location definitions using that template so
+future claims receive the new interior. Squad rooms keep their original template. Use a separate target
+template ID; do not overwrite the old definition or dupe, which are needed for rollback.
+
+1. Back up the server database and map plugin data. Deploy this code and restart normally, without FTS.
+2. Register the new shell under a new template ID, with bounds and allocation space that fit it.
+   Include every installed old container's exact slot ID and recipe, including the general starter.
+   A room using the fallback starter needs a general marker named `personal_starter` in a marked target.
+3. Grant yourself a personal test room using the new template, enter it, and inspect spawn, exit,
+   container clearance, and the floor plan. Leave the old rooms unloaded while previewing.
+4. With the test room still loaded, run:
+
+       /HideoutMigratePreview OLD_TEMPLATE TEST_HIDEOUT_ID
+
+   The second argument is the test **hideout ID**, not the target template ID. `/HideoutList` lists room
+   IDs. The test room supplies its resolved marker layout; moved container positions are ignored.
+   The preview reports a token and counts, and prints affected room IDs to the administrator's console.
+5. Leave the test room and let **all hideouts fully unload**, including squad rooms and invited guests.
+   On the same administrator character, within ten minutes, run:
+
+       /HideoutMigrateApply TOKEN
+
+   Wait for the result notification after database floor-item verification. Apply rechecks permissions,
+   character, template files, location bindings, source records and pending purchases. A changed source
+   record requires a new preview. The test room may unload between preview and apply.
+6. Enter migrated rooms, inspect geometry and storage, then test unload/re-entry and server restart
+   before reopening player access. Include a room with upgraded storage and an offline owner.
+
+Container inventory IDs, contents, dimensions, levels and sharing remain intact. Room identity, owner,
+entrance, invitations, starter identity, room improvements and character milestones remain intact.
+Containers use their new template positions and the cassette player uses its default placement.
+Old shell-entity overrides are cleared because AdvDupe entity keys can identify different props in a
+new build. Existing seed history stays saved; migrated rooms do not receive fresh template-dummy loot.
+
+Furnishings and loose items retain their existing local coordinates and authoritative item rows.
+Apply checks saved furnishings and all matching world-item rows, including queued floor items, against
+the new bounds. Out-of-bounds assets must be repositioned first. These checks cannot establish wall,
+floor or model clearance: build the target around those positions or reposition assets in advance.
+Retired installed storage must also have matching target slots; it is never silently dropped.
+
+Apply writes and verifies an immutable backup beneath
+`garrysmod/data/cotz_hideout_migrations/`, scoped to schema and map, before changing plugin state.
+The success notification gives its full path. Keep these files and the original dupe files with backups.
+A failed plugin-data verification disables hideout persistence and new instance loading for that session;
+inspect disk state and the migration backup before restarting or reopening access.
+
+To restore the original template layout with all rooms unloaded, run:
+
+    /HideoutMigrateRollback TOKEN
+
+Rollback works after restart and keeps current inventory contents, container upgrades, sharing, room
+improvements, furnishings and progression. It restores the original template, remembered layout,
+container/cassette placement, shell overrides and affected location bindings. It rejects missing/changed
+source templates or dupes, altered location bindings, out-of-bounds assets and newly installed containers
+that the old layout cannot expose. Resolve those conflicts before retrying. It does not rewind player
+activity or replace item/database rows. Sequential migrations must be rolled back newest first.
+
 ## Personal storage rooms
 
 Ballast handles Swamps (`rp_marsh_cs`), Cleaner handles Garbage (`rp_garbage_cotz`), and Ledger
@@ -142,8 +247,14 @@ After configuring a template and a fixed exterior entrance, register a location 
 
     /HideoutLocationAdd village cabin village "Village room"
 
-Arguments are location ID, template ID, entrance ID and display name. Bindings are permanent; a new
-entrance/template combination needs a new location ID. The command can rename an existing location.
+Arguments are location ID, template ID, entrance ID and display name. The command can rename an existing location.
+Administrators can explicitly replace its bindings with
+`/HideoutLocationOverride village other_template other_entrance "New village room"`, or stop new claims with
+`/HideoutLocationDelete village`. Overrides affect future claims; existing rooms keep their saved template,
+entrance, ownership, upgrades and contents. Deleting a location also preserves existing rooms. A character
+who owns a room under the same location ID must delete that room before claiming the replacement.
+Use `/HideoutDelete ID` to retire an individual player's room administratively. Use the template migration
+workflow below when existing rooms should move to another interior along with their contents.
 It does not place a shell, entrance or NPC. No preset or first-time setup is run automatically.
 
 At a configured entrance, choose **Arrange a personal hideout** to claim a room. Owners use
@@ -156,6 +267,12 @@ Existing rooms retain entry and ownership. Existing owned rooms also count towar
 the location claim. `/HideoutGrant` remains administrator-only and can create additional rooms using the
 same entrance/template. `hideoutPersonalLimit` remains an optional map-wide cap (default 0, unlimited).
 Personal room labels include the owning character's name, including when viewed by invited guests.
+Owners can choose **Delete personal hideout** in the entrance or exit management menu and confirm
+its permanent removal. Occupants are moved outside; furnishings, loose items and purchased upgrades
+are lost without a refund. Empty containers first: their inventory references are retained only for
+administrator recovery. Deletion frees the location and personal room allowance so the character can
+use **Arrange a personal hideout** again at a configured entrance, under the existing claim rules.
+Guests and squad managers cannot use this action. Loading, saving and pending economic work block deletion.
 New grants save the owner's name for offline display; loaded characters supply their current name.
 Legacy rooms without a saved owner name display their character ID while the owner is unloaded.
 
@@ -184,6 +301,9 @@ An active room receives a new container
 immediately; unloaded rooms instantiate it on next entry. Container size and model can change per level.
 Allow clearance for the largest configured model when placing markers. Inventory IDs, contents and access
 survive upgrades. Removed markers retain their inventories for `/HideoutRecoveryOpen ID SPOT`.
+New or upgraded container models that cross the template bounds are shifted inside those bounds.
+Bounds corrections close only that container's storage session. Models larger than the entire
+template still require an administrator to correct the template bounds or configured model.
 
 | Recipe | Initial size | Permitted contents | Personal level-1 assembly cash |
 | --- | --- | --- | ---: |
@@ -197,8 +317,11 @@ survive upgrades. Removed markers retain their inventories for `/HideoutRecovery
 ### Crafting upgrade crates
 
 Choose **Can you assemble storage crates?** at Ballast, Cleaner or Ledger, then select personal/squad,
-family and level. All three contacts use the same recipes. Cash increases by 1.5× per level, rounded
+family and tier. The dialogue action sits with services, and the barter list shows only unlocked tiers.
+Crate names show their destination tier; their properties identify the previous and destination tiers
+(or a tier 1 installation). All three contacts use the same recipes. Cash increases by 1.5× per level, rounded
 up; squad crates cost exactly three times the personal cash and every raw material amount.
+Personal crates always charge the buyer's wallet, even when squad upgrade funding is enabled.
 The [generated recipe matrix](../../../../docs/balance/hideout-crates.md) lists all costs and loot evidence.
 
 Fasteners accept mixtures of nuts, bolts, nails and screws. Three raw nuts or four bolts make one batch;
@@ -412,6 +535,8 @@ officers use the visible Set price, Unlist and Recover actions. The footer expos
 transaction history, hideout management and leader treasury withdrawals according to rank.
 Refreshes retain the selected instance when it remains on the current page. The window does not remove
 rows optimistically when sending a request. See the [Sherpa guide](../sherpas/README.md) for UI checks.
+Donations, purchases, recovery, listing changes and treasury withdrawals refresh all open squad stock
+windows in place, retaining each viewer's tab and page. Vendor movement/reset still closes sessions.
 
 Administrators use **Edit Vendor** for model, name, description, bubble, sound group, animation group and
 idle sequence. Skin/bodygroup properties remain available through the existing furnishing permissions.
@@ -561,13 +686,18 @@ protection uses physical bounds and ends when the player leaves those bounds;
 town-style buffs expire normally after their short duration.
 
 Shell templates accept prop_physics, prop_physics_multiplayer, prop_dynamic,
-prop_dynamic_override, ix_dupedummyitem, and ix_hideout_marker. Arbitrary scripted entities,
+prop_dynamic_override, gmod_lamp, ix_dupedummyitem, and ix_hideout_marker. Arbitrary scripted entities,
 NPCs, vehicles, and standard containers are not serialized. Use template markers for interior
 utilities and storage spots. Shell props are fixed and protected; props spawned by permitted
 players inside the instance are tracked furnishings, with local transforms,
 model, skin, color, material, bodygroups, submaterials, and movable state.
 Other entities created inside an instance are tracked for runtime cleanup;
 persistent custom scripted-entity state requires a class-specific serializer.
+Lamps preserve their on/off state, toggle mode, projected texture, field of view, distance and brightness,
+alongside their ordinary transform and color. Template lamps remain protected shell fixtures. Saved
+lamp furnishings retain these settings through migration and rollback; target shell lamps use the new
+dupe settings because migration clears old shell overrides. Lamp support does not grant new tool or SENT
+spawning permissions. Verify projected lighting and child-entity cleanup through unload/re-entry in multiplayer.
 
 The plugin has explicit occupancy, cancellation, timeouts, cleanup, disconnect,
 character switching/deletion, and revive/respawn handling. Reviving retains the
@@ -605,6 +735,8 @@ confirm behavior against the server's installed AdvDupe2 version.
 From the repository root:
 
     python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py
+    python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py --migration-only
+    python3 gamemodes/ix_cotz/plugins/hideouts/tests/run.py --lamps-only
     luatex --luaonly tests/fts_hideouts_spec.lua
     luatex --luaonly tests/hideout_management_spec.lua
     luatex --luaonly tests/hideout_vendor_spec.lua

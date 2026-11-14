@@ -39,6 +39,7 @@ PLUGIN.allowedShellClasses = {
 	prop_physics_multiplayer = true,
 	prop_dynamic = true,
 	prop_dynamic_override = true,
+	gmod_lamp = true,
 }
 
 ix.util.Include("sh_definitions.lua")
@@ -64,6 +65,8 @@ ix.util.Include("sv_menus.lua")
 ix.util.Include("sv_personal.lua")
 ix.util.Include("sv_crates.lua")
 ix.util.Include("sv_funding.lua")
+ix.util.Include("sh_migration.lua")
+ix.util.Include("sv_migration.lua")
 ix.util.Include("cl_plugin.lua")
 ix.util.Include("cl_management.lua")
 ix.util.Include("cl_markers.lua")

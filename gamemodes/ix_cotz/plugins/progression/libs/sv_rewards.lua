@@ -58,6 +58,7 @@ function ix.progression.PayCompletionRewards(character, progressionID)
 	local client = character:GetPlayer()
 	client:addReputation(reputation)
 	character:GiveMoney(money)
+	ix.economyStats.Record(character, "progressionEarned", money)
 	ix.dialogue.notifyReputationReceive(client, reputation)
 	ix.dialogue.notifyMoneyReceive(client, money)
 	if final and definition.completionBenefits then

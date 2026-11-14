@@ -132,6 +132,8 @@ local replacement = acknowledge(5)
 check(input.removed and not replacement.removed and replacement.data.durability == 37,
 	"successful conversion preserves condition and consumes the input once")
 check(converter.money == 99100, "successful conversion charges exactly the server-calculated fee")
+check(converter:GetData("economyStats").conversionSpent == 900,
+	"only the completed suit conversion records its paid fee")
 
 local storage = serviceVendor("'Ballast'")
 check(not town:OpenTownStorage(converter.client, storage), "retired bank service is unavailable")

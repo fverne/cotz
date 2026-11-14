@@ -158,6 +158,7 @@ local function character()
 
 	return char
 end
+dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 local base = "gamemodes/ix_cotz/plugins/progression/"
 dofile("tests/helpers/character_vars.lua")
 dofile(base .. "libs/sh_storage.lua")

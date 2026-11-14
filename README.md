@@ -126,6 +126,12 @@ COTZ uses Garry's Mod Lua and Helix's plugin/schema conventions. A useful starti
 
 Follow each file's `cl_`, `sh_`, and `sv_` conventions when changing client, shared, or server logic. Test changes in a multiplayer development environment; database, network, and state changes deserve particular care.
 
+The schema's `plugins/spawnsaver.lua` preserves a character's saved position during loading, so saves
+from setup and progression cannot replace it with the temporary faction spawn before restoration.
+Cross-server arrivals and hideout position overrides retain their existing behavior. Run
+`luatex --luaonly tests/spawnsaver_spec.lua`; also verify console `retry` away from spawn on Swamps
+and another map in multiplayer, including character switching and cross-server arrivals.
+
 ### Balancing spreadsheets
 
 GitHub Actions can export item, weapon, mutant, and anomaly configuration into an

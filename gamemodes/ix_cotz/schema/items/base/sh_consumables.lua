@@ -63,6 +63,7 @@ function ITEM:DecideFunction()
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
 				local client = item.player
+				local character = client:GetCharacter()
 				if not (hunger > 150 and item.hunger > 0) and not (thirst > 150 and item.thirst > 0) then
 
 					client:EmitSound(item.sound or "items/battery_pickup.wav")
@@ -75,6 +76,9 @@ function ITEM:DecideFunction()
 						player:SetThirst(thirst + item.thirst)
 						player:UpdateHungerState(player)
 						item.blackScreenAction(item, player)
+						if player:GetCharacter() == character then
+							ix.economyStats.RecordConsumption(character, item)
+						end
 						if item.alcohol > 0 then
 							player:IncreaseDrunkLevel(item.alcohol)
 						end
@@ -113,6 +117,7 @@ function ITEM:DecideFunction()
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
 				local client = item.player
+				local character = client:GetCharacter()
 				if not (hunger > 150 and item.hunger > 0) and not (thirst > 150 and item.thirst > 0) then
 
 					client:EmitSound(item.sound or "items/battery_pickup.wav")
@@ -125,6 +130,9 @@ function ITEM:DecideFunction()
 						player:SetThirst(thirst + item.thirst)
 						player:UpdateHungerState(item.player)
 						item.blackScreenAction(item, player)
+						if player:GetCharacter() == character then
+							ix.economyStats.RecordConsumption(character, item)
+						end
 					end)
 				else
 					client:Notify("You are too full to eat that!")
@@ -158,6 +166,7 @@ function ITEM:DecideFunction()
 				local hunger = item.player:GetCharacter():GetData("hunger", 100)
 				local thirst = item.player:GetCharacter():GetData("thirst", 100)
 				local client = item.player
+				local character = client:GetCharacter()
 				if not (hunger > 150 and item.hunger > 0) and not (thirst > 150 and item.thirst > 0) then
 
 					client:EmitSound(item.sound or "items/battery_pickup.wav")
@@ -170,6 +179,9 @@ function ITEM:DecideFunction()
 						player:SetThirst(thirst + item.thirst)
 						player:UpdateHungerState(item.player)
 						item.blackScreenAction(item, player)
+						if player:GetCharacter() == character then
+							ix.economyStats.RecordConsumption(character, item)
+						end
 					end)
 				else
 					client:Notify("You are too full to consume that!")

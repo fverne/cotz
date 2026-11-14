@@ -1,4 +1,4 @@
-ITEM.name = "Medical storage upgrade crate"
+ITEM.name = "Medical crate"
 ITEM.description = "A packing crate containing cleaned cabinet fittings and medical storage liners."
 ITEM.longdesc = "Clean packing separates the cabinet fittings from the loose hardware. The bundle supplies one storage installation rather than medical treatment or a stock of medicines."
 

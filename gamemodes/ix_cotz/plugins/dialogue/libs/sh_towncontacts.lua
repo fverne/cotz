@@ -29,10 +29,7 @@ local function configureWork(dialogue, contact)
 			local job = client:GetCharacter():GetJobs()[target:GetDisplayName()]
 			if not job then return {} end
 			local options = {}
-			if job.isCompleted then
-				options[1] = {statement = "Complete the assignment.", topicID = "TownJobAction",
-					dyndata = {action = "complete", claim = job.progressionClaim}}
-			elseif ix.jobs.regional.FindHandIn(client:GetCharacter(), job)
+			if not job.isCompleted and ix.jobs.regional.FindHandIn(client:GetCharacter(), job)
 				and not ix.jobs.list[job.identifier].alternateDelivery then
 				options[1] = {statement = "Hand over the requested items.", topicID = "TownJobAction",
 					dyndata = {action = "deliver", claim = job.progressionClaim}}
@@ -50,9 +47,7 @@ local function configureWork(dialogue, contact)
 			if type(data) == "table" and allowAction(client, target) then
 				local job = client:GetCharacter():GetJobs()[target:GetDisplayName()]
 				if job and data.claim == job.progressionClaim then
-					if data.action == "complete" then
-						client:ixJobComplete(target:GetDisplayName())
-					elseif data.action == "deliver" then
+					if data.action == "deliver" then
 						ix.taskRewards.DeliverJobItem(client, target:GetDisplayName())
 					elseif data.action == "camera" and job.photoKind then
 						ix.jobs.regional.ReconcileCamera(client)
@@ -245,4 +240,5 @@ function ix.dialogue.ConfigureTownContact(dialogue, contact)
 	ix.dialogue.ConfigureCustomization(dialogue)
 	ix.dialogue.ConfigureBarterVisibility(dialogue)
 	ix.dialogue.ConfigureHideoutCrates(dialogue, contact)
+	ix.dialogue.ConfigureServices(dialogue)
 end

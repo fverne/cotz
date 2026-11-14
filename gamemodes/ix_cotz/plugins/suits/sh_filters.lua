@@ -93,6 +93,8 @@ if CLIENT then
 	end
 
 	function ix.util.PopulateGasmaskFilterTooltip(tooltip, item)
+		if item.entity then return end
+
 		for _, row in ipairs(ix.itemProperties.GetFilterRows(item)) do
 			ix.itemProperties.AddRow(tooltip, row.id, row.text)
 		end

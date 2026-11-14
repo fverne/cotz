@@ -1,4 +1,5 @@
 LANGUAGE = {
+	squad_creation_reputation = "You must reach Novice reputation rank to create a squad.",
 	squads = "Squads",
 	squad_menu_holdername = "Squad name",
 	squad_menu_text_logo = "Squad logo",

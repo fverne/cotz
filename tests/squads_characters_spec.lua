@@ -105,6 +105,7 @@ local function character(id, account, squadID)
 		schema = Schema.folder, squad_id = squadID or "NULL", squad_officer = 0}
 	database.ix_characters[#database.ix_characters + 1] = row
 	local char = {id = id, squadID = row.squad_id, officer = 0, name = row.name}
+	function char:GetReputation() return self.reputation or 250 end
 	function char:GetID() return self.id end
 	function char:GetSquadID() return self.squadID end
 	function char:SetSquadID(value) self.squadID = value end
@@ -135,6 +136,11 @@ local alt, altRow = character(2, "same-account")
 local member, memberRow = character(3, "member-account")
 local founderClient, memberClient = client(founder), client(member)
 local squad
+founder.reputation = 249
+ix.squad.New("Blocked", founder, function() error("low reputation creation callback") end)
+flush()
+check(#database.ix_squads_squads == 0, "below Novice cannot create squads")
+founder.reputation = 250
 ix.squad.New("Alpha", founder, function(value) squad = value end)
 ix.squad.New("Duplicate", founder, function() error("duplicate creation callback") end)
 flush()

@@ -61,9 +61,17 @@ local function checkWeaponInput(blocked)
 end
 local name = "cotz/mobile-action/test"
 checkWeaponInput(false)
-check(hotkeys:UsesMobileAction("medic_medkit_1"), "hotkey items use mobile actions by default")
+for _, id in ipairs({"medic_medkit_1", "medic_medkit_3", "medic_medkit_5"}) do
+	check(not hotkeys:UsesMobileAction(id), id .. " uses black-screen treatment")
+	ix.util.PlayerPerformItemAction(client, {uniqueID = id}, "Treating", 8, finish)
+	check(client.vars.ix_hasBlackScreen and client.frozen, id .. " starts stationary work")
+	checkWeaponInput(true)
+	ix.util.PlayerActionInterrupt(client)
+end
+client.freezes, client.fades = 0, 0
+check(hotkeys:UsesMobileAction("medic_medkit_2"), "syrettes use mobile actions by default")
 check(not hotkeys:UsesMobileAction("food_bread"), "ordinary food retains the stationary action")
-ix.util.PlayerPerformItemAction(client, {uniqueID = "medic_medkit_1"}, "Treating", 3, finish)
+ix.util.PlayerPerformItemAction(client, {uniqueID = "medic_medkit_2"}, "Treating", 3, finish)
 check(client.vars.ix_hasMobileAction and not client.vars.ix_hasBlackScreen, "mobile state is independent")
 check(client.freezes == 0 and client.fades == 0, "mobile work never freezes or fades")
 checkWeaponInput(true)

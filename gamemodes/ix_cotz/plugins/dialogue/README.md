@@ -72,7 +72,16 @@ Free hideout claims and ordinary paid repair/treatment retain their existing sta
 
 ## Main menu and questions
 
-The root contains trade, barter, services, repeatable work, progression, available exchange actions,
+Town contacts offering multiple service/barter entries group all red actions under
+**What services do you provide?** Single-service contacts keep their direct root action. The shared
+`ix.dialogue.ConfigureServices` classifier uses each topic’s service category, including explicit
+`category = "service"` on new actions. It runs after contact and workshop integration and again when
+opening the main dialogue menu, so future contacts and later-added services follow the same pattern.
+Child unlock conditions remain active and the submenu hides when none are available. Service replies
+and confirmations return through the services list; existing gear and barter submenus remain nested.
+The grouping adds no spoken response, preserving silent contacts.
+
+The root contains trade, the services menu or individual service/barter actions, repeatable work, progression, available exchange actions,
 **Can I ask you something?**, and Goodbye, where those actions exist.
 
 The shared loader groups the offered BackgroundTopic, InterestTopic, TutorialTopic,
@@ -89,7 +98,7 @@ When all collected topics are conditionally unavailable, the submenu entry is hi
 
 BackgroundTopic*, Interest*, and TutorialTopic* follow-up branches return through
 QuestionsBackTopic instead of the main BackTopic. The six entry topics above follow the same
-rule. Services, jobs, and progression continue to use BackTopic for the main menu. Questions
+rule. Jobs and progression continue to use BackTopic for the main menu. Grouped services use ServicesBackTopic. Questions
 include a main-menu return; Goodbye remains at the root. Actionable Introduction topics stay at root.
 
 New flavour topic families should be added deliberately to the shared classifier and regression
@@ -133,7 +142,8 @@ frames opened during dialogue participate in this navigation, including confirma
 The Escape handler remains at the original Garry's Mod hook stage after Helix plugin dispatch.
 
 Repeatable task acceptance reveals no reward choices. Once the objective is complete, the issuing
-contact reveals choices through Complete the assignment; choosing one finishes the hand-in.
+contact reveals choices under About work → Task rewards; choosing one finishes the hand-in.
+There is no separate Complete the assignment action in town conversations.
 Five-task bonuses appear only after they are earned. The work submenu shows ready reward choices and
 recoverable earned claims, with the existing access, distance and action-rate checks. See the
 [jobsystem reward guide](../jobsystem/README.md#task-rewards-and-existing-kits).

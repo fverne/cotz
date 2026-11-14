@@ -180,6 +180,9 @@ end
 function PANEL:startTopic(topicID, dynamicData)
 	if self.exiting then return end
 
+	if topicID == "GREETING" or topicID == "BackTopic" then
+		ix.dialogue.ConfigureServices(ix.dialogue.list[self.treeID])
+	end
 	local topic = self.tree[topicID]
 	if not topic then return end
 	if topic.quickAction then
@@ -448,7 +451,7 @@ function PANEL:GoBack()
 
 		return
 	end
-	for _, id in ipairs({"QuestionsBackTopic", "GearCustomizationBackTopic", "BackTopic"}) do
+	for _, id in ipairs({"QuestionsBackTopic", "GearCustomizationBackTopic", "ServicesBackTopic", "BackTopic"}) do
 		for _, button in ipairs(self.buttonList or {}) do
 			if button.topicID == id then button:DoClick() return end
 		end

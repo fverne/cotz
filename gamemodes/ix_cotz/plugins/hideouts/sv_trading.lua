@@ -120,16 +120,34 @@ function PLUGIN:ResetVendor(client, record)
 	return true, "Vendor reset. Stock and treasury retained."
 end
 
-function PLUGIN:OpenShop(client, entity, requestedPage)
+function PLUGIN:RefreshShop(instance)
+	if self.instances[instance.id] ~= instance then return end
+	for client, session in pairs(instance.shopClients or {}) do
+		if IsValid(client) and client:GetCharacter()
+			and client:GetCharacter():GetID() == session.character then
+			self:OpenShop(client, instance.vendor, session.page, session)
+		end
+	end
+end
+
+function PLUGIN:OpenShop(client, entity, requestedPage, refreshSession)
 	if not self:IsNearUtility(client, entity) or entity.cotzVendorHeld then return end
-	if (client.cotzShopOpen or 0) > CurTime() then return end
-	client.cotzShopOpen = CurTime() + 0.5
 	local instance = self.instances[entity.ixHideout]
+	if refreshSession then
+		if not instance.shopClients or instance.shopClients[client] ~= refreshSession then return end
+	else
+		if (client.cotzShopOpen or 0) > CurTime() then return end
+		client.cotzShopOpen = CurTime() + 0.5
+	end
 	local record = self:GetHideout(instance.id)
 	local character = client:GetCharacter()
 	self:GetTreasury(record, function(balance)
 		if not balance or not IsValid(client) or client:GetCharacter() ~= character
 			or not self:IsNearUtility(client, entity) then return end
+		if self.instances[instance.id] ~= instance or entity.cotzVendorHeld then return end
+		-- A delayed refresh must not reopen a window closed while the treasury query was pending.
+		if refreshSession and (not instance.shopClients
+			or instance.shopClients[client] ~= refreshSession) then return end
 		local rank = self:GetSquadRank(client, record)
 		local rows = {}
 		for _, item in pairs(instance.stock:GetItems(true)) do
@@ -142,7 +160,7 @@ function PLUGIN:OpenShop(client, entity, requestedPage)
 		local first = (page - 1) * SHOP_PAGE_SIZE + 1
 		local last = math.min(first + SHOP_PAGE_SIZE - 1, #rows)
 		instance.shopClients = instance.shopClients or {}
-		instance.shopClients[client] = {character = character:GetID(), vendor = entity}
+		instance.shopClients[client] = {character = character:GetID(), vendor = entity, page = page}
 		local visible = {}
 		for index = first, last do visible[#visible + 1] = rows[index] end
 		ix.sherpa.SendStock(client, entity, record.id, record.name, rank,
@@ -179,6 +197,7 @@ function PLUGIN:ShopAction(client, record, action, itemID, amount, revision)
 					return self:IsNearUtility(client, instance.vendor) and self:GetSquadRank(client, record) == 2
 				end,
 			}, function(ok, reason)
+				self:RefreshShop(instance)
 				if IsValid(client) then client:Notify(ok and "Treasury withdrawal complete." or reason) end
 			end)
 		end)
@@ -212,7 +231,7 @@ function PLUGIN:ShopAction(client, record, action, itemID, amount, revision)
 				price = amount, revision = (listing.revision or 0) + 1,
 				donor = listing.donor, hideout = record.id, map = game.GetMap(),
 			})
-			self:CloseShop(instance)
+			self:RefreshShop(instance)
 		end
 	end)
 end
@@ -268,7 +287,7 @@ function PLUGIN:TransferShopItem(client, record, instance, item, target, price, 
 		payload = {kind = price ~= nil and "donate" or (moneyDelta < 0 and "sale" or "recover"),
 			item = item:GetID(), paid = -moneyDelta, treasury = treasuryDelta},
 	}, function(ok, reason)
-		self:CloseShop(instance)
+		self:RefreshShop(instance)
 		if IsValid(client) then client:Notify(ok and "Stock transfer complete." or reason) end
 	end)
 end

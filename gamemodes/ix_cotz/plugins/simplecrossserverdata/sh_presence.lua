@@ -94,7 +94,8 @@ if (CLIENT) then
 					end
 					records[id] = {
 						profile = {reputation = client:getReputation(),
-							leaderboardStats = stats},
+							leaderboardStats = stats,
+							economyStats = previous and previous.profile and previous.profile.economyStats},
 						characterID = id, player = client, name = character:GetName(), steamID64 = client:SteamID64(),
 						pdaavatar = character:GetPdaavatar(), map = game.GetMap(), fresh = true,
 						state = previous and fresh and previous.state == "travelling" and "travelling" or "online",
@@ -119,11 +120,16 @@ if (CLIENT) then
 			end
 		end
 
-		if ix.townNPCs then
-			local character = LocalPlayer():GetCharacter()
-			local access = ix.townNPCs:GetNetworkAccess(character)
-			for id, record in pairs(records) do
+		local character = LocalPlayer():GetCharacter()
+		local access = ix.townNPCs and ix.townNPCs:GetNetworkAccess(character)
+		for id, record in pairs(records) do
+			local economy = LocalPlayer():IsAdmin() and record.profile and record.profile.economyStats or nil
+			if ix.townNPCs then
 				records[id] = ix.townNPCs:FilterNetworkRecord(character, record, access)
+			end
+			if records[id] then
+				records[id].profile = records[id].profile or {}
+				records[id].profile.economyStats = economy
 			end
 		end
 

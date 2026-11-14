@@ -195,6 +195,62 @@ Test("container positions survive checkpoints and cold restoration at a differen
 	assert(record.containers.locker.inventoryID == 80)
 end)
 
+Test("new storage crossing template bounds is fitted once without closing other containers", function()
+	local owner, instance, record, slot, entity = home()
+	local guest = FeatureClient(2)
+	record.guests["2"], slot.public = true, true
+	guest.position, PLUGIN.members[guest] = owner:GetPos(), record.id
+	local storage = ix.inventory.Get(slot.inventoryID)
+	ix.storage.Open(guest, storage, {entity = entity})
+	local definition = {recipe = "ammo", pos = Vector(-100, 40, 0), angles = Angle()}
+	PLUGIN.state.templates.room.containers.new = definition
+	local added = PLUGIN:GetContainer(record, "new")
+	added.tier, added.width, added.height = 1, 4, 4
+	local created = PLUGIN:CreateUtility(instance, "ix_hideout_storage", definition.pos, "ammo.mdl")
+	created.ixHideoutSlot = "new"
+	created.WorldSpaceAABB = function(self)
+		return self:GetPos() - Vector(20, 20, 40), self:GetPos() + Vector(20, 20, 40)
+	end
+	instance.containers.new = created
+	PLUGIN:RememberContainerPosition(instance, "new", created)
+	assert(not instance.containerValid.new)
+	PLUGIN:AuditContainers(instance)
+	local mins, maxs = created:WorldSpaceAABB()
+	assert(PLUGIN:Contains(mins, instance.mins, instance.maxs))
+	assert(PLUGIN:Contains(maxs, instance.mins, instance.maxs))
+	assert(guest.ixOpenStorage == storage)
+	assert(added.transform.pos.z == 40 and added.transform.pos.x == -80)
+	PLUGIN:OpenContainerInventory(owner, created)
+	local installed = owner.ixOpenStorage
+	assert(installed and installed:GetID() == added.inventoryID)
+	for _ = 1, 3 do PLUGIN:AuditContainers(instance) end
+	assert(owner.ixOpenStorage == installed and guest.ixOpenStorage == storage)
+end)
+
+Test("bounds correction closes only the moved container and keeps oversized storage isolated", function()
+	local owner, instance, record, slot, entity = home()
+	local storage = ix.inventory.Get(slot.inventoryID)
+	ix.storage.Open(owner, storage, {entity = entity})
+	entity:SetPos(Vector(2000, 2000, 2000))
+	PLUGIN:AuditContainers(instance)
+	assert(not owner.ixOpenStorage and not storage.storageInfo)
+	local position = entity:GetPos()
+	PLUGIN.state.templates.room.containers.safe = {recipe = "ammo", pos = Vector(60, 40, 20)}
+	local safeSlot = PLUGIN:GetContainer(record, "safe")
+	safeSlot.tier, safeSlot.width, safeSlot.height = 1, 4, 4
+	PLUGIN:RefreshPersonalContainer(record, "safe")
+	PLUGIN:OpenContainerInventory(owner, instance.containers.safe)
+	local opened = owner.ixOpenStorage
+	assert(opened)
+	entity.WorldSpaceAABB = function(self)
+		return self:GetPos() - Vector(2000, 1, 1), self:GetPos() + Vector(2000, 1, 1)
+	end
+	PLUGIN:RememberContainerPosition(instance, "locker", entity)
+	for _ = 1, 3 do PLUGIN:AuditContainers(instance) end
+	assert(entity:GetPos():DistToSqr(position) == 0)
+	assert(slot.transform.pos.x == 40 and owner.ixOpenStorage == opened)
+end)
+
 Test("layout reset preserves inventories, upgrades, loose items, shell, vendor and other characters' props", function()
 	local owner, instance, record, slot, entity = home(true)
 	local officer = FeatureClient(2)

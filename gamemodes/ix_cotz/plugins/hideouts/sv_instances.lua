@@ -397,6 +397,11 @@ local function captureSeed(record, key, entity, origin)
 end
 
 function PLUGIN:SpawnInstance(record, callback)
+	if not self.ready then
+		callback(false, "Hideout persistence is not ready.")
+
+		return
+	end
 	local template = self:GetTemplate(record)
 	local dupePlugin = ix.plugin.Get("advdupeint")
 	if not template or not dupePlugin then
@@ -431,6 +436,7 @@ function PLUGIN:SpawnInstance(record, callback)
 		noItems = true,
 		keepDummies = true,
 		validate = function(dupe)
+			if self.GetMigrationDupeHash then instance.migrationDupeHash = self:GetMigrationDupeHash(template) end
 			return self:ValidateDupe(dupe, template)
 		end,
 	}, function(ok, entities, source)
@@ -452,7 +458,14 @@ function PLUGIN:SpawnInstance(record, callback)
 				entity:GetSolid() ~= SOLID_NONE
 				and (not self:Contains(entMin, mins, maxs) or not self:Contains(entMax, mins, maxs))
 			then
-				self:FailLoad(instance, "The dupe extends outside its configured bounds.")
+				local localMin, localMax = entMin - origin, entMax - origin
+				self:FailLoad(instance, string.format(
+					"The dupe extends outside its configured bounds: %s [%s]. Local bounds (%g, %g, %g) to (%g, %g, %g); template bounds (%g, %g, %g) to (%g, %g, %g).",
+					entity:GetClass(), entity:GetModel() or "no model",
+					localMin.x, localMin.y, localMin.z, localMax.x, localMax.y, localMax.z,
+					template.mins.x, template.mins.y, template.mins.z,
+					template.maxs.x, template.maxs.y, template.maxs.z
+				))
 
 				return
 			end
@@ -469,7 +482,7 @@ function PLUGIN:SpawnInstance(record, callback)
 				continue
 			end
 			if entity:GetClass() == "ix_dupedummyitem" then
-				if not captureSeed(record, key, entity, origin) then
+				if not record.ignoreTemplateSeeds and not captureSeed(record, key, entity, origin) then
 					self:FailLoad(instance, "An item dummy references an invalid item.")
 
 					return

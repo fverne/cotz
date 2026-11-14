@@ -569,6 +569,7 @@ if SERVER then
 					client:Notify("Gave item to vendor.")
 				else
 					client:GetCharacter():GiveMoney(price)
+					ix.economyStats.RecordVendorSale(character, ix.item.list[uniqueID], price)
 					client:NotifyLocalized("businessSell", name, ix.currency.Get(price))
 				end
 
@@ -618,6 +619,11 @@ if SERVER then
 					client:Notify("Took item from vendor.")
 				else
 					client:GetCharacter():TakeMoney(price)
+					local purchase = ix.item.list[uniqueID]
+					local kind = ix.economyStats.GetConsumableKind(purchase)
+					local spendingKey = purchase.isAmmo and "ammoSpent" or "vendorSpent"
+					if kind then spendingKey = kind == "drink" and "drinkSpent" or "foodSpent" end
+					ix.economyStats.Record(character, spendingKey, price)
 					client:NotifyLocalized("businessPurchase", name, ix.currency.Get(price))
 				end
 

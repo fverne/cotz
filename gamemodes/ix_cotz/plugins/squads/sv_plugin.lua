@@ -9,6 +9,8 @@ util.AddNetworkString("ixSquadDisband")
 util.AddNetworkString("ixSquadRankChange")
 util.AddNetworkString("ixSquadLeave")
 
+local MINIMUM_CREATION_REPUTATION = 250 -- Novice rank.
+
 local pendingRestores = {}
 local pendingCreates = {}
 local generations = {}
@@ -124,6 +126,7 @@ function ix.squad.Restore(id, characterID, callback)
 end
 
 function ix.squad.New(name, character, callback)
+	if (character:GetReputation() < MINIMUM_CREATION_REPUTATION) then return end
 	local characterID = character:GetID()
 	if (pendingCreates[characterID] or character:GetSquadID() ~= "NULL") then return end
 	pendingCreates[characterID] = true

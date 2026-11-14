@@ -107,3 +107,19 @@ ix.command.Add("HideoutLocationAdd", {
 		if SERVER then return PLUGIN:AddPersonalLocation(id, template, entrance, name) end
 	end,
 })
+
+ix.command.Add("HideoutLocationOverride", {
+	adminOnly = true,
+	arguments = {ix.type.string, ix.type.string, ix.type.string, ix.type.text},
+	OnRun = function(self, client, id, template, entrance, name)
+		if SERVER then return PLUGIN:AddPersonalLocation(id, template, entrance, name, true) end
+	end,
+})
+
+ix.command.Add("HideoutLocationDelete", {
+	adminOnly = true,
+	arguments = ix.type.string,
+	OnRun = function(self, client, id)
+		if SERVER then return PLUGIN:DeletePersonalLocation(id) end
+	end,
+})

@@ -2,6 +2,7 @@
 
 Squad creation and management live in the **SQUADS** section of the Tab menu, alongside YOU and
 TASKS. Players without a squad see a creation button; members see the embedded management panel.
+Creating a squad requires at least Novice reputation (250); joining an invited squad has no reputation requirement.
 The plugin no longer handles `gm_showspare2` (normally F4).
 
 The STALKERnet scoreboard shows active characters across all connected maps by default, grouped by

@@ -3,13 +3,13 @@ ix.itemProperties = ix.itemProperties or {}
 -- Cosmetic Anomaly-style scales. See docs/item-properties.md for normalization and source attribution.
 local UNITS = {
 	nutrition = {10, "kcal"}, hydration = {10, "mL equivalent"},
-	healthRate = {10, "%"}, health = {1, "HP"}, psychicRate = {1, "%/s"},
+	healthRate = {1, "%"}, health = {1, "HP"}, psychicRate = {1, "%/s"},
 	radiationRate = {300, "mSv/s"}, radiationAmount = {300, "mSv"},
 	clotting = {1500, "mL/min"}, staminaRate = {1000, "µg/s"},
 	thermal = {300, "kW/m²"}, electrical = {480, "V"}, chemical = {100, "%"}, anomalous = {100, "%"},
 	ballistics = {2500, "J"}, rupture = {2500, "J"}, gravitational = {2500, "J"},
 	psychic = {300, "mT"}, radiation = {3000, "mSv"},
-	distance = {0.0254, "m"}, jumpSpeed = {0.0254, "m/s"},
+	distance = {1, "units"}, jumpSpeed = {1, "units/s"},
 	weight = {1, "kg"}, duration = {1, "s"}, percent = {1, "%"}, number = {1, ""},
 }
 
@@ -22,7 +22,12 @@ end
 
 function ix.itemProperties.Format(kind, value, signed)
 	local converted, unit = ix.itemProperties.Convert(kind, value)
-	local text = string.format("%.2f", converted):gsub("0+$", ""):gsub("%.$", "")
+	local text
+	if (unit == "%" or unit == "%/s") and kind ~= "healthRate" then
+		text = string.format("%.0f", math.Round(converted))
+	else
+		text = string.format("%.2f", converted):gsub("0+$", ""):gsub("%.$", "")
+	end
 	if text == "-0" then text = "0" end
 	local whole, fraction = text:match("^(-?%d+)(.*)$")
 	whole = whole:reverse():gsub("(%d%d%d)", "%1,"):reverse():gsub("^,", ""):gsub("^-%,", "-")
@@ -48,7 +53,9 @@ end
 function ix.itemProperties.GetProtection(item)
 	local rows = {}
 	local function protection(id, label, reduction, flat)
-		local text = label .. ": " .. ix.itemProperties.Format(id, reduction)
+		if (reduction == nil or reduction == 0) and (flat == nil or flat == 0) then return end
+
+		local text = label .. ": " .. ix.itemProperties.Format(id, reduction or 0)
 		if flat ~= nil then
 			text = text .. "; absorption " .. ix.itemProperties.Format(id, flat / 100)
 		end
@@ -58,27 +65,26 @@ function ix.itemProperties.GetProtection(item)
 		local function reduction(method, field)
 			local value = item[method](item, field)
 
+			if value == nil then return end
+
 			return item.isBodyArmor and 1 - value or value
 		end
-		protection("ballistics", "Ballistics", reduction("getBR"), item:getFBR())
-		protection("rupture", "Rupture", reduction("getSR"), item:getFSR())
+		protection("ballistics", "Ballistics", reduction("getBR"))
+		protection("rupture", "Rupture", reduction("getSR"))
 		if item.isBodyArmor then
 			for _, definition in ipairs(ix.suits.anomalyTypes) do
-				protection(definition.network, definition.name, reduction("getAR", definition.field),
-					item:getFAR(definition.flatField))
+				protection(definition.network, definition.name, reduction("getAR", definition.field))
 			end
 		else
-			-- Installed headgear uses its broad anomaly pair for each damage family.
+			-- Installed headgear uses its broad anomaly resistance for each damage family.
 			for _, definition in ipairs(ix.suits.anomalyTypes) do
 				local value = item[definition.field]
-				local flat = item[definition.flatField]
 				local scale = item:GetDurabilityScale()
-				protection(definition.network, definition.name, value and value * scale or item:getAR(),
-					flat and flat * scale or item:getFAR())
+				protection(definition.network, definition.name, value and value * scale or item:getAR())
 			end
 		end
-		protection("psychic", "Psychic", reduction("getPR"), item:getFPR())
-		protection("radiation", "Radiation", item:getRadProt(), item:GetFlatRadProt())
+		protection("psychic", "Psychic", reduction("getPR"))
+		protection("radiation", "Radiation", item:getRadProt())
 	elseif item.attachName and ix.armortables and ix.armortables.attachments[item.attachName] then
 		local attachment = ix.armortables.attachments[item.attachName]
 		for _, entry in ipairs({
@@ -111,10 +117,18 @@ local EFFECTS = {
 function ix.itemProperties.GetEffects(item)
 	local rows = {}
 	local effects = item.GetPropertyEffects and item:GetPropertyEffects() or {}
+	local client = CLIENT and LocalPlayer()
+	local maxHealth = IsValid(client) and client:GetMaxHealth() or 100
 	for index, effect in ipairs(effects) do
 		local definition = EFFECTS[effect.buff]
 		local id = "effect/" .. index
-		if definition then
+		if effect.buff == "buff_slowheal" or effect.buff == "buff_rapidheal" then
+			local interval = effect.buff == "buff_rapidheal" and 0.5 or 1
+			local percentage = (effect.amount or 1) / math.max(maxHealth, 1) * 100
+			local text = "Health restoration: " .. ix.itemProperties.Format("healthRate", percentage, true)
+			text = text .. " per " .. ix.itemProperties.Format("number", interval) .. " second"
+			addText(rows, id, text .. " over " .. ix.itemProperties.Format("number", effect.duration) .. " seconds")
+		elseif definition then
 			add(rows, id, definition[1], definition[2], effect.amount * definition[3], true, effect.duration)
 		elseif effect.buff == "buff_sprintboost" then
 			add(rows, id, "Sprint speed", "percent", (effect.multiplier - 1) * 100, true, effect.duration)
@@ -146,6 +160,36 @@ function ix.itemProperties.GetFilterRows(item)
 	return rows
 end
 
+local AMMO_VARIANTS = {
+	HP = "Hollow Point", AP = "Armor Piercing", SG = "Slug", TR = "Trishot",
+	DT = "Dart", MG = "Magnum Buck", ["41"] = "Magnum Buck",
+}
+
+function ix.itemProperties.GetAmmoNames(item, weapon)
+	local registered = weapons.Get(item.class) or weapon
+	local rechamber = item:GetData("ammoRechamber", {})
+	local ammo = rechamber.ammotypeName or registered.Primary.Ammo
+	local baseAmmo = ammo:gsub(" %-%w+%-$", "")
+	local allowed = {[baseAmmo] = true, [ammo] = true}
+	local attachments = {}
+	for _, slot in pairs(registered.Attachments or {}) do
+		for _, attachment in ipairs(slot.atts or {}) do attachments[attachment] = true end
+	end
+	for subtype, definition in pairs(ix.weapontables and ix.weapontables.ammosubtypes or {}) do
+		if attachments[definition.uID] then allowed[baseAmmo .. " -" .. subtype .. "-"] = true end
+	end
+	local names, seen = {}, {}
+	for _, definition in pairs(ix.item.list) do
+		if definition.isAmmo and allowed[definition.ammo] and not seen[definition.name] then
+			names[#names + 1] = definition.name
+			seen[definition.name] = true
+		end
+	end
+	table.sort(names)
+
+	return names
+end
+
 function ix.itemProperties.GetRows(item)
 	local rows = {}
 	local hunger = item.GetHunger and item:GetHunger() or item.hunger
@@ -154,12 +198,6 @@ function ix.itemProperties.GetRows(item)
 	if thirst and thirst ~= 0 then add(rows, "hydration", "Hydration", "hydration", thirst, true) end
 	if item.alcohol and item.alcohol ~= 0 then
 		add(rows, "alcohol", "Intoxication", "number", item.alcohol, true)
-	end
-	local initialQuantity = item.ammoAmount or item.quantity
-	if initialQuantity ~= nil then
-		local label = item.isAmmo and "Rounds remaining" or "Uses remaining"
-		local current = item:GetData("quantity", initialQuantity)
-		addText(rows, "quantity", label .. ": " .. current .. "/" .. (item.maxStack or initialQuantity))
 	end
 	if item.bleedRestore then
 		add(rows, "clotting", "Clotting", "clotting", item.bleedRestore / item.restoreduration)
@@ -176,37 +214,43 @@ function ix.itemProperties.GetRows(item)
 		end
 		if weapon and weapon.Primary then
 			local primary = weapon.Primary
-			addText(rows, "cartridge", "Cartridge: " .. (item:GetData("ammoRechamber", {}).ammotypeName
-				or primary.Ammo or "Unknown"))
-			local capacity = primary.ClipSize or weapon.ClipSize
-			if capacity and capacity > 0 then add(rows, "magazine", "Magazine capacity", "number", capacity) end
-			local delay = weapon.FireDelay or primary.Delay
-			local rpm = primary.RPM or (delay and delay > 0 and 60 / delay)
-			if rpm then addText(rows, "fireRate", "Cyclic rate: " .. ix.itemProperties.Format("number", rpm) .. " rpm") end
-		end
-		if item.base == "base_newweapons" or item:GetData("durability") ~= nil then
-			add(rows, "durability", "Durability", "percent", item:GetData("durability", 100))
+			local isMelee = weapon.Type == "Melee" or weapon.IsMelee or item.weaponCategory == "knife"
+			if not isMelee and primary.Ammo and primary.Ammo ~= "" and primary.Ammo:lower() ~= "none" then
+				local names = ix.itemProperties.GetAmmoNames(item, weapon)
+				if #names > 0 then addText(rows, "cartridge", "Ammunition: " .. table.concat(names, ", ")) end
+				local capacity = primary.ClipSize or weapon.ClipSize
+				if capacity and capacity > 0 then add(rows, "magazine", "Magazine capacity", "number", capacity) end
+				local delay = weapon.FireDelay or primary.Delay
+				local rpm = primary.RPM or (delay and delay > 0 and 60 / delay)
+				if rpm then
+					addText(rows, "fireRate", "Cyclic rate: " .. ix.itemProperties.Format("number", rpm) .. " rpm")
+				end
+			end
 		end
 		if item.base == "base_newweapons" then
 			add(rows, "cleanliness", "Cleanliness", "percent", item:GetData("wear", 100))
 		end
+		if item.base == "base_newweapons" or item:GetData("durability") ~= nil then
+			add(rows, "durability", "Durability", "percent", item:GetData("durability", 100))
+		end
 	elseif item.isBodyArmor or item.isHelmet or item.isGasmask then
 		add(rows, "durability", "Durability", "percent", item:GetData("durability", 100))
 	end
-	if item.ammo then addText(rows, "cartridge", "Cartridge: " .. item.ammo) end
-	for _, row in ipairs(ix.itemProperties.GetFilterRows(item)) do rows[#rows + 1] = row end
-	if item.GetCarryInc then
-		local carry = item:GetCarryInc()
-		if carry and carry ~= 0 then add(rows, "carry", "Carrying capacity", "weight", carry, true) end
+	if item.ammo and not item.isWeapon then
+		local variant = AMMO_VARIANTS[item.ammo:match(" %-(%w+)%-$")]
+		if variant then addText(rows, "ammoVariant", "Variant: " .. variant) end
 	end
-	if item.GetWeight then add(rows, "weight", "Weight", "weight", item:GetWeight()) end
-	if CLIENT and ix.option and ix.option.Get("imperial", false) then
-		for _, row in ipairs(rows) do
-			if row.id == "weight" then row.text = "Weight: " .. ix.weight.WeightString(item:GetWeight(), true) end
-			if row.id == "carry" then
-				row.text = "Carrying capacity: " .. ix.weight.WeightString(item:GetCarryInc(), true)
-			end
+	for _, row in ipairs(ix.itemProperties.GetFilterRows(item)) do rows[#rows + 1] = row end
+	local imperial = CLIENT and ix.option.Get("imperial", false) or false
+	if item.GetCarryInc and not item.entity then
+		local carry = item:GetCarryInc()
+		if carry and carry ~= 0 then
+			addText(rows, "carry", "Carry Capacity Increase: " .. ix.weight.WeightString(carry, imperial))
 		end
+	end
+	local weight = item.GetWeight and item:GetWeight()
+	if weight then
+		addText(rows, "weight", "Weight: " .. ix.weight.WeightString(weight, imperial))
 	end
 	if item.fueltier then add(rows, "fuelTier", "Cooking fuel grade", "number", item.fueltier) end
 	if item.cookertier then

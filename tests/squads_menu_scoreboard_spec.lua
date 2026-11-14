@@ -95,6 +95,8 @@ local screenWidth, screenHeight = 1920, 1080
 function ScrW() return screenWidth end
 function ScrH() return screenHeight end
 function Material(path) return path end
+math.Round = function(value) return math.floor(value + 0.5) end
+string.Comma = tostring
 math.Clamp = function(value, low, high) return math.max(low, math.min(high, value)) end
 string.Trim = function(value) return value:match("^%s*(.-)%s*$") end
 string.utf8len = string.len
@@ -135,12 +137,14 @@ ix = {
 }
 game = {GetMap = function() return "map_a" end}
 table.Copy = function(value)
+	if type(value) ~= "table" or value.GetCharacter then return value end
 	local result = {}
-	for key, item in pairs(value) do result[key] = item end
+	for key, item in pairs(value) do result[key] = table.Copy(item) end
 	return result
 end
 ix.plugin = ix.plugin or {Get = function() end}
 dofile("gamemodes/ix_cotz/plugins/simplecrossserverdata/sh_presence.lua")
+dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 local root = "gamemodes/ix_cotz/plugins/squads/"
 loadGLua(root .. "sh_plugin.lua")
 check(not vars.squadID.isLocal, "squad identity is visible to other players")
@@ -175,6 +179,7 @@ local function client(id, name, reputation)
 	local value = {character = character}
 	function value:GetLocalVar(key) return self[key] end
 	function value:GetCharacter() return self.character end
+	function value:IsAdmin() return self.admin == true end
 	function value:SteamID64() return "7656119800000000" .. self.entityIndex end
 	function value:EntIndex() return self.entityIndex end
 	function value:Nick() return "Connecting player" end
@@ -327,6 +332,26 @@ check(scoreboard.dossierFields.tasksCompleted.value.text == "8"
 	"local player dossiers retain the public server counters and favorite contact")
 check(otherRecord.player == first and otherRecord.name == first.character:GetName(),
 	"public statistics merge with the current local identity and actions")
+local privateProfile = {cash = 400, repairSpent = 30, ammoSpent = 15, startedAt = 123,
+	topFood = {{name = "Bread", amount = 4}}, topSales = {{name = "Artifacts", amount = 800}}}
+ix.crossserver.roster[first.character:GetID()].profile.economyStats = privateProfile
+localClient.admin = true
+local adminRecord = ix.crossserver.GetScoreboardRoster(false)[first.character:GetID()]
+scoreboard:SelectRecord(adminRecord)
+check(scoreboard.economySection.visible and scoreboard.economySection.margin[2] >= 24,
+	"administrator economy has a clear spacer after public statistics")
+check(scoreboard.economyFields.repairSpent.value.text == "30 RU"
+	and scoreboard.economyFields.ammoSpent.value.text == "15 RU",
+	"local identity merging and town filtering preserve admin economy values")
+check(scoreboard.economyFields.topFood.value.text == "1. Bread · 4 servings"
+	and scoreboard.economyFields.topSales.value.text == "1. Artifacts · 800 RU",
+	"admin rankings display names, serving counts and category cash payouts")
+localClient.admin = false
+scoreboard:SelectRecord(adminRecord)
+check(not scoreboard.economySection.visible and not scoreboard.economyFields.cash.card.visible,
+	"ordinary viewers cannot display even a previously selected admin record")
+check(ix.crossserver.GetScoreboardRoster(false)[first.character:GetID()].profile.economyStats == nil,
+	"demoted clients strip cached private profiles when rebuilding the roster")
 ix.crossserver.roster[first.character:GetID()].profile.leaderboardStats.tasksCompleted = 9
 clock = clock + 1
 scoreboard:Think()

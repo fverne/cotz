@@ -38,6 +38,12 @@ for id, dialogue in pairs(ix.dialogue.list) do
 			check(includes(tree[rootID], "TownDeliveries"), id .. ": deliveries survive a return to root")
 			check(not includes(tree[rootID], "TaskRewardChoices"), id .. ": task rewards stay out of the root")
 		end
+		local completedClient = {GetCharacter = function()
+			return {GetJobs = function() return {["test contact"] = {isCompleted = true}} end}
+		end}
+		local completedTarget = {GetDisplayName = function() return "test contact" end}
+		check(#tree.AboutWorkTopic:GetDynamicOptions(completedClient, completedTarget) == 0,
+			id .. ": completed assignments have no redundant completion action")
 		check(includes(tree.AboutWorkTopic, "TaskRewardChoices"), id .. ": task rewards belong under work")
 		check(includes(tree.TaskRewardChoices, "AboutWorkTopic"), id .. ": rewards return to work")
 		check(tree.TradeTopic.quickAction, id .. ": trading preserves the current dialogue choices")
@@ -106,6 +112,12 @@ legacyAvailable = false
 ix.dialogue.ConfigureBarterVisibility(ix.dialogue.list.tradernpc)
 check(not hagglerTree.StartBarter:ShouldAdd(client, haggler), "barter visibility remains idempotent")
 local ballastTree = ix.dialogue.list.ballastnpc.tree
+for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+	local options = ballastTree[rootID].options
+	check(table.concat(options, ",") == table.concat(ix.dialogue.OrderOptions(options, true), ","),
+		"crate integration preserves service ordering in " .. rootID)
+	check(options[#options] == "GOODBYE", "crate service stays before goodbye in " .. rootID)
+end
 local originalGet = ix.plugin.Get
 local opened
 local hideouts = {GetCrateRecipe = function() end, OpenCrateBarter = function(_, player, vendor)
@@ -123,4 +135,55 @@ check(opened and opened[1] == client and opened[2] == ballast, "the barter topic
 ix.plugin.Get = function(id) if id ~= "hideouts" then return originalGet(id) end end
 check(not ballastTree.HideoutBarter:ShouldAdd(client, ballast), "crate barter hides when hideouts are unavailable")
 ix.plugin.Get = originalGet
+check(brassTree.StartBarter:ShouldAdd(client, brass), "unlocked barter remains visible after service grouping")
+check(includes(ballastTree.GREETING, "HideoutBarter"), "a lone hideout barter keeps its direct action")
+local grouped = 0
+for id, dialogue in pairs(ix.dialogue.list) do
+	if dialogue.townContact and dialogue.tree.ServicesTopic then
+		grouped = grouped + 1
+		local tree = dialogue.tree
+		check(tree.ServicesTopic.statement == "What services do you provide?", id .. ": services use the shared prompt")
+		for _, rootID in ipairs({"GREETING", "BackTopic"}) do
+			check(includes(tree[rootID], "ServicesTopic"), id .. ": both roots offer services")
+			for _, topicID in ipairs(tree[rootID].options) do
+				check(topicID == "ServicesTopic" or ix.dialogue.GetOptionCategory(topicID, tree[topicID]) ~= "service",
+					id .. ": individual services stay out of the root")
+			end
+		end
+		check(includes(tree.ServicesTopic, "BackTopic"), id .. ": services return to the main menu")
+		local before = table.concat(tree.ServicesTopic.options, ",")
+		ix.dialogue.ConfigureServices(dialogue)
+		check(table.concat(tree.ServicesTopic.options, ",") == before, id .. ": services grouping is idempotent")
+	end
+end
+check(grouped > 0, "the roster includes contacts with multiple services")
+local future = {townContact = "future", tree = {}}
+future.addTopic = function(id, data)
+	data.statement = data.statement or ""
+	data.options = data.options or {}
+	data.ShouldAdd = data.ShouldAdd or function() return true end
+	future.tree[id] = data
+end
+future.addTopic("GREETING", {options = {"TradeTopic", "RepairItems", "GOODBYE"}})
+future.addTopic("BackTopic", {options = {"TradeTopic", "RepairItems", "GOODBYE"}})
+future.addTopic("RepairItems", {statement = "Repair.", options = {"BackTopic"}})
+ix.dialogue.ConfigureServices(future)
+check(not future.tree.ServicesTopic and includes(future.tree.GREETING, "RepairItems"),
+	"a single service stays directly accessible")
+local available = false
+future.addTopic("FutureService", {statement = "New service.", category = "service", options = {"BackTopic"},
+	ShouldAdd = function() return available end})
+future.tree.GREETING.options[#future.tree.GREETING.options + 1] = "FutureService"
+ix.dialogue.ConfigureServices(future)
+check(includes(future.tree.ServicesTopic, "RepairItems") and includes(future.tree.ServicesTopic, "FutureService"),
+	"adding a second service automatically groups both without a hard-coded topic ID")
+check(includes(future.tree.BackTopic, "ServicesTopic"), "late services appear on both root variants")
+check(includes(future.tree.FutureService, "ServicesBackTopic"), "services return to their submenu")
+check(not future.tree.FutureService:ShouldAdd(client, ballast), "grouping preserves locked service conditions")
+future.tree.RepairItems.ShouldAdd = function() return false end
+check(not future.tree.ServicesTopic:ShouldAdd(client, ballast), "an empty service submenu is hidden")
+available = true
+check(future.tree.ServicesTopic:ShouldAdd(client, ballast), "unlocking a child reveals services")
+check(ix.dialogue.GetOptionCategory("ServicesTopic") == "service"
+	and ix.dialogue.GetOptionCategory("ServicesBackTopic") == "back", "service navigation keeps its action colors")
 print(string.format("PASS: %d town dialogue menu checks", checks))

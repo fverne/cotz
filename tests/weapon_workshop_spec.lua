@@ -65,6 +65,7 @@ ix = {
 	progression = {definitions = {}, CanUseNPC = function(character) return not character.denied end},
 	dialogue = {OrderOptions = function(options) return options end},
 }
+dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 local base = "gamemodes/ix_cotz/plugins/weaponservice/"
 dofile(base .. "sh_catalogue.lua")
 dofile(base .. "sh_service.lua")

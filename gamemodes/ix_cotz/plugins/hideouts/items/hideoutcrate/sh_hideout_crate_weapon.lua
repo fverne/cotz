@@ -1,4 +1,4 @@
-ITEM.name = "Weapon storage upgrade crate"
+ITEM.name = "Weapon crate"
 ITEM.description = "A reinforced packing crate containing rack fittings and treated mounting hardware."
 ITEM.longdesc = "Mounting hardware is held together inside the transport shell, ready to be fitted to an existing storage spot. The crate supplies the rack installation, not the weapons it will hold."
 

@@ -50,6 +50,7 @@ ITEM.functions.use = {
 		local hunger = item.player:GetCharacter():GetData("hunger", 100)
 		local thirst = item.player:GetCharacter():GetData("thirst", 100)
 		local client = item.player
+		local character = client:GetCharacter()
 		if not (hunger > 150 and item:GetHunger() > 0) and not (thirst > 150 and item:GetThirst() > 0) then
 			client:EmitSound(item.sound or "items/battery_pickup.wav")
 			if item.message then
@@ -61,6 +62,9 @@ ITEM.functions.use = {
 				player:SetThirst(thirst + item:GetThirst())
 				player:UpdateHungerState(player)
 				item.blackScreenAction(item, player)
+				if player:GetCharacter() == character then
+					ix.economyStats.RecordConsumption(character, item)
+				end
 			end)
 			return true
 		else

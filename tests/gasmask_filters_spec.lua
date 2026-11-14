@@ -30,6 +30,7 @@ end
 
 SERVER, CLIENT = true, false
 math.Clamp = function(value, minimum, maximum) return math.max(minimum, math.min(value, maximum)) end
+math.Round = function(value) return math.floor(value + 0.5) end
 IsValid = function(value) return type(value) == "table" and not value.invalid end
 istable = function(value) return type(value) == "table" end
 isnumber = function(value) return type(value) == "number" end
@@ -732,6 +733,14 @@ surface = {
 derma = {SkinFunc = function() end}
 dofile("gamemodes/ix_cotz/plugins/suits/sh_filters.lua")
 dofile("gamemodes/ix_cotz/schema/libs/sh_itemproperties.lua")
+-- PropertyDesc's child panels and semantic updates are exercised in item_properties_spec.lua.
+ix.util.PropertyDesc = function(panel, text, color, rowID)
+	if not panel:GetRow("propertyheader") then panel:AddRow("propertyheader") end
+	local row = panel:GetRow(rowID) or panel:AddRow(rowID)
+	row:SetText(text)
+
+	return row
+end
 dofile("gamemodes/ix_cotz/schema/libs/cl_itemproperties.lua")
 local tooltip = {rows = {}}
 function tooltip:GetRow(id) return self.rows[id] end
@@ -749,12 +758,16 @@ function tooltip:AddRow(id)
 end
 mask.data.filterCondition = false
 ix.util.PopulateGasmaskFilterTooltip(tooltip, mask)
-check(tooltip.rows["cotz/property/filter"].text == "• Civilian Gasmask Filter: No filter", "empty socket tooltip")
+check(tooltip.rows["cotz/property/filter"].text == "Civilian Gasmask Filter: No filter", "empty socket tooltip")
 mask.data.filterCondition = 37
 ix.util.PopulateGasmaskFilterTooltip(tooltip, mask)
-check(tooltip.rows["cotz/property/filter"].text == "• Civilian Gasmask Filter: 37%", "partial installed filter tooltip")
+check(tooltip.rows["cotz/property/filter"].text == "Civilian Gasmask Filter: 37%", "partial installed filter tooltip")
 ix.util.PopulateGasmaskFilterTooltip(tooltip, spent)
-check(tooltip.rows["cotz/property/filter"].text == "• Civilian Gasmask Filter: 0%", "spent loose cartridge tooltip")
+check(tooltip.rows["cotz/property/filter"].text == "Civilian Gasmask Filter: 0%", "spent loose cartridge tooltip")
+spent.entity = {}
+local worldTooltip = {GetRow = function() error("World filter must not add converted rows") end}
+ix.util.PopulateGasmaskFilterTooltip(worldTooltip, spent)
+spent.entity = nil
 ix.util.PaintGasmaskFilter(mask, 64, 64)
 near(rectangles[#rectangles].width, 38 * 0.37, "backpack icon shows real filter condition")
 mask.data.filterCondition = false

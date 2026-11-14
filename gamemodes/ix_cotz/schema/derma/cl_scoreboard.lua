@@ -368,6 +368,22 @@ local function dossierLabel(parent, text, font, color)
 	return label
 end
 
+local function dossierField(parent, definition)
+	local card = parent:Add("DPanel")
+	card:Dock(TOP)
+	card:DockMargin(0, 0, 0, 8)
+	card:DockPadding(10, 8, 10, 8)
+	card.Paint = paintCard
+	local caption = dossierLabel(card, definition[2], "ixSmallFont", COLORS.muted)
+	caption:DockMargin(0, 0, 0, 4)
+	local value = dossierLabel(card, "—", "ixMediumFont", COLORS.text)
+	card.PerformLayout = function(panel)
+		panel:SetTall(caption:GetTall() + value:GetTall() + 20)
+	end
+
+	return {caption = caption, value = value, card = card, format = definition[3]}
+end
+
 function PANEL:Init()
 	if IsValid(ix.gui.scoreboard) then ix.gui.scoreboard:Remove() end
 	ix.gui.scoreboard = self
@@ -439,22 +455,31 @@ function PANEL:Init()
 	self.details:DockMargin(0, 0, 0, 16)
 	self.dossierFields = {}
 	for _, definition in ipairs(DOSSIER_FIELDS) do
-		local card = self.detailScroll:Add("DPanel")
-		card:Dock(TOP)
-		card:DockMargin(0, 0, 0, 8)
-		card:DockPadding(10, 8, 10, 8)
-		card.Paint = paintCard
-		local caption = dossierLabel(card, definition[2], "ixSmallFont", COLORS.muted)
-		caption:DockMargin(0, 0, 0, 4)
-		local value = dossierLabel(card, "—", "ixMediumFont", COLORS.text)
-		card.PerformLayout = function(panel)
-			panel:SetTall(caption:GetTall() + value:GetTall() + 20)
-		end
-		self.dossierFields[definition[1]] = {caption = caption, value = value, card = card}
+		self.dossierFields[definition[1]] = dossierField(self.detailScroll, definition)
 	end
 	self.dossierNote = dossierLabel(self.detailScroll,
 		"Recorded encounters and completed work.",
 		"ixSmallFont", COLORS.muted)
+	self.economySection = self.detailScroll:Add("DPanel")
+	self.economySection:Dock(TOP)
+	self.economySection:DockMargin(0, 24, 0, 12)
+	self.economySection:DockPadding(0, 12, 0, 0)
+	self.economySection.Paint = function(_, width)
+		surface.SetDrawColor(COLORS.border)
+		surface.DrawRect(0, 0, width, 1)
+	end
+	self.economyTitle = dossierLabel(self.economySection, "ECONOMY · ADMIN ONLY", "ixSmallFont", COLORS.amber)
+	self.economyNote = dossierLabel(self.economySection, "", "ixSmallFont", COLORS.muted)
+	self.economySection.PerformLayout = function(section)
+		section:SetTall(self.economyTitle:GetTall() + self.economyNote:GetTall() + 16)
+	end
+	self.economySection:SetVisible(false)
+	self.economyFields = {}
+	for _, definition in ipairs(ix.economyStats.fields) do
+		local field = dossierField(self.detailScroll, definition)
+		field.card:SetVisible(false)
+		self.economyFields[definition[1]] = field
+	end
 	self.list = self:Add("DScrollPanel")
 	self.list:Dock(FILL)
 	self.list:DockMargin(0, 12, 0, 0)
@@ -465,6 +490,30 @@ function PANEL:SelectRecord(record)
 	self.selected = record.characterID
 	self.portrait:SetImage(record.pdaavatar or "vgui/icons/face_31.png")
 	local stats = record.profile.leaderboardStats or {}
+	local economy = record.profile.economyStats
+	local showEconomy = LocalPlayer():IsAdmin() and not record.awaitingCharacter and economy ~= nil
+	self.economySection:SetVisible(showEconomy)
+	self.economyNote:SetText(economy and economy.startedAt
+		and ("Cash transactions recorded since " .. os.date("%Y-%m-%d", economy.startedAt) .. ".")
+		or "No cash transactions recorded yet.")
+	self.economySection:InvalidateLayout(true)
+	for key, field in pairs(self.economyFields) do
+		field.card:SetVisible(showEconomy)
+		local text = "—"
+		if showEconomy and field.format == "ranking" then
+			local lines = {}
+			for index, entry in ipairs(economy[key] or {}) do
+				local amount = string.Comma(math.Round(entry.amount, 2))
+				lines[#lines + 1] = index .. ". " .. entry.name .. " · " .. amount
+					.. (key == "topSales" and " RU" or " servings")
+			end
+			text = #lines > 0 and table.concat(lines, "\n") or "None recorded"
+		elseif showEconomy then
+			text = string.Comma(math.Round(economy[key] or 0, 2)) .. " RU"
+		end
+		field.value:SetText(text)
+		field.card:InvalidateLayout(true)
+	end
 	local access = table.Copy(self.networkAccess or {})
 	local character = LocalPlayer():GetCharacter()
 	local ownRecord = character and record.characterID == character:GetID()
@@ -518,6 +567,15 @@ function PANEL:PerformLayout(width, height)
 		self.details:SetFont("cotzDossierTitle")
 		self.portrait:SetTall(math.floor(96 * scale))
 		self.dossierNote:SetFont("cotzDossierCaption")
+		self.economyTitle:SetFont("cotzDossierCaption")
+		self.economyNote:SetFont("cotzDossierCaption")
+		self.economySection:DockMargin(0, math.floor(24 * scale), 0, math.floor(12 * scale))
+		self.economySection:InvalidateLayout(true)
+		for _, field in pairs(self.economyFields) do
+			field.caption:SetFont("cotzDossierCaption")
+			field.value:SetFont("cotzDossierValue")
+			field.card:InvalidateLayout(true)
+		end
 		for _, field in pairs(self.dossierFields) do
 			field.caption:SetFont("cotzDossierCaption")
 			field.value:SetFont("cotzDossierValue")
@@ -545,6 +603,8 @@ function PANEL:Think()
 		for id, row in pairs(self.rows) do row:Remove() self.rows[id] = nil end
 		self.portrait:SetImage("vgui/icons/face_31.png")
 		self.details:SetText("Select a stalker")
+		self.economySection:SetVisible(false)
+		for _, field in pairs(self.economyFields) do field.card:SetVisible(false) end
 		for _, field in pairs(self.dossierFields) do field.value:SetText("—") field.card:SetVisible(false) end
 		return
 	end
@@ -651,6 +711,8 @@ function PANEL:Think()
 		self.selected = nil
 		self.portrait:SetImage("vgui/icons/face_31.png")
 		self.details:SetText("Select a stalker")
+		self.economySection:SetVisible(false)
+		for _, field in pairs(self.economyFields) do field.card:SetVisible(false) end
 		for _, field in pairs(self.dossierFields) do field.value:SetText("—") end
 	end
 end

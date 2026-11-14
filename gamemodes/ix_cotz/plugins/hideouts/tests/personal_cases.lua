@@ -52,6 +52,73 @@ Test("locations claim one free room each while admin grants allow several at one
 	assert(TEST_COMMANDS.HideoutLocationAdd.adminOnly and TEST_COMMANDS.HideoutGrant.adminOnly)
 end)
 
+Test("deleting a personal room permits a fresh location claim without restoring its upgrades", function()
+	local owner, inventory, instance, record, target = personalHome()
+	assert(PLUGIN:AddPersonalLocation("village", "room", "gate", "Village room"):find("registered"))
+	owner:GetCharacter().completed["cotz/town/ballast/v3/hideout/access"] = true
+	record.location, record.propTier = "village", 4
+	PLUGIN.state.nextID = tonumber(record.id) + 1
+	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "village"))
+	PLUGIN:ShowManagement(owner, record.id, "entrance")
+	assert(PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
+	assert(not PLUGIN:OwnsPersonalLocation(owner:GetCharacter(), "village", PLUGIN.state.locations.village))
+	owner.position, target.position = PLUGIN.state.entrances.gate.pos, PLUGIN.state.entrances.gate.pos
+	assert(PLUGIN:ClaimPersonalLocation(owner, target, "village"))
+	local replacement = PLUGIN.state.hideouts[tostring(PLUGIN.state.nextID - 1)]
+	assert(replacement and replacement.id ~= record.id and replacement.location == "village")
+	assert(not replacement.propTier and not replacement.personal)
+	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "village"))
+end)
+
+Test("admin location overrides and removal preserve existing rooms and validate new bindings", function()
+	local owner, inventory, instance, record, target = personalHome()
+	assert(TEST_COMMANDS.HideoutLocationOverride.adminOnly and TEST_COMMANDS.HideoutLocationDelete.adminOnly)
+	assert(PLUGIN:AddPersonalLocation("village", "room", "gate", "Village room"):find("registered"))
+	record.location = "village"
+	local originalLocation = PLUGIN.state.locations.village
+	PLUGIN.state.templates.other = table.Copy(PLUGIN.state.templates.room)
+	PLUGIN.state.entrances.other = table.Copy(PLUGIN.state.entrances.gate)
+	assert(PLUGIN:AddPersonalLocation("village", "other", "other", "New room"):find("Override"))
+	assert(PLUGIN.state.locations.village == originalLocation)
+	assert(PLUGIN:AddPersonalLocation("village", "missing", "other", "New room", true):find("Choose"))
+	assert(PLUGIN.state.locations.village == originalLocation)
+	assert(PLUGIN:AddPersonalLocation("missing", "other", "other", "New room", true):find("Unknown"))
+	assert(TEST_COMMANDS.HideoutLocationOverride:OnRun(owner, "village", "other", "other", "New room"))
+	local location = PLUGIN.state.locations.village
+	assert(location.template == "other" and location.entrance == "other" and location.name == "New room")
+	assert(record.template == "room" and record.entrance == "gate" and record.location == "village")
+	assert(PLUGIN:OwnsPersonalLocation(owner:GetCharacter(), "village", location))
+	local claimant = FeatureClient(2)
+	claimant:GetCharacter().completed = {["cotz/town/ballast/v3/hideout/access"] = true}
+	local entrance = NewEntity(nil, target:GetPos())
+	entrance.GetClass = function() return "ix_hideout_entrance" end
+	entrance.ixEntranceID = "other"
+	PLUGIN.entranceEntities.other = entrance
+	claimant.position = entrance:GetPos()
+	PLUGIN.state.nextID = tonumber(record.id) + 1
+	assert(PLUGIN:ClaimPersonalLocation(claimant, entrance, "village"))
+	local replacement = PLUGIN:GetHideout(tostring(PLUGIN.state.nextID - 1))
+	assert(replacement.template == "other" and replacement.entrance == "other")
+	assert(TEST_COMMANDS.HideoutLocationDelete:OnRun(owner, "village"))
+	assert(not PLUGIN.state.locations.village and PLUGIN:GetHideout(record.id) == record)
+	assert(PLUGIN:GetHideout(replacement.id) == replacement)
+	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "village"))
+	assert(PLUGIN:DeletePersonalLocation("village"):find("Unknown"))
+end)
+
+Test("admin location changes roll back when configuration cannot be persisted", function()
+	local owner = personalHome()
+	PLUGIN:AddPersonalLocation("village", "room", "gate", "Village room")
+	local previous = PLUGIN.state.locations.village
+	local persist = PLUGIN.Persist
+	PLUGIN.Persist = function() return false end
+	assert(PLUGIN:AddPersonalLocation("village", "room", "gate", "Renamed", true):find("Could not save"))
+	assert(PLUGIN.state.locations.village == previous)
+	assert(PLUGIN:DeletePersonalLocation("village"):find("Could not save"))
+	assert(PLUGIN.state.locations.village == previous)
+	PLUGIN.Persist = persist
+end)
+
 Test("personal rooms begin with exactly one private 2 by 3 crate and no unpurchased entities", function()
 	local owner, inventory, instance, record = personalHome()
 	instance.state = "loading"

@@ -4,7 +4,15 @@
 
 Town traders use the shared stock inspector with **Buy / Sell** tabs. The left pane lists catalogue
 goods or eligible personal item instances; the right pane shows the selected item's icon, description,
-price, stock information and Purchase/Sell action. Personal sale rows use descending instance IDs, placing the oldest items at the bottom.
+price, stock information and Purchase/Sell action. **Category** filters use the items' existing categories,
+with an **All categories** option and a separate selection for each tab. Categories update from eligible
+items as stock and inventory change. Choosing a category packs matching rows at the top and resets
+the list's scroll position. A filter that has no matches shows an empty message and clears
+any hidden selection. In Sherpa/squad windows, stock filters apply to the current server-provided page.
+Catalogue rows sort by displayed name; personal sale/donation rows use descending instance IDs,
+placing the oldest created items at the bottom. This tracks creation order, not when an existing item
+was picked up or transferred. Sorted rows receive small sequential display positions because the
+engine's signed 16-bit z positions cannot safely hold database item IDs.
 Personal items retain instance-specific descriptions
 and saved quantity/condition values where present. Icons and normal item tooltips are retained.
 List and selected-item previews fit the complete icon inside their bounds with its aspect ratio preserved,

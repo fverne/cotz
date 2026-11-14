@@ -21,6 +21,13 @@ function PLUGIN:LoadData()
 	self.state.entrances = self:NormalizeIDKeys(self.state.entrances)
 	self.state.retired = self:NormalizeIDKeys(self.state.retired)
 	self.state.locations = self:NormalizeIDKeys(self.state.locations)
+	self.state.migrationOffers = self:NormalizeIDKeys(self.state.migrationOffers)
+	for _, offer in pairs(self.state.migrationOffers) do
+		offer.definitions = self:NormalizeIDKeys(offer.definitions)
+		if offer.targetTemplate and offer.targetTemplate.containers then
+			offer.targetTemplate.containers = self:NormalizeIDKeys(offer.targetTemplate.containers)
+		end
+	end
 	for _, template in pairs(self.state.templates) do
 		template.containers = self:NormalizeIDKeys(template.containers)
 	end
@@ -507,6 +514,16 @@ function PLUGIN:SerializeProp(entity, origin)
 			data.submaterials[tostring(index - 1)] = material
 		end
 	end
+	if entity:GetClass() == "gmod_lamp" then
+		data.lamp = {
+			on = entity:GetOn(),
+			toggle = entity:GetToggle(),
+			texture = entity:GetFlashlightTexture(),
+			fov = entity:GetLightFOV(),
+			distance = entity:GetDistance(),
+			brightness = entity:GetBrightness(),
+		}
+	end
 
 	return data
 end
@@ -527,6 +544,23 @@ function PLUGIN:ApplyPropData(entity, data, origin)
 	local physics = entity:GetPhysicsObject()
 	if IsValid(physics) then
 		physics:EnableMotion(data.movable == true)
+	end
+	if entity:GetClass() == "gmod_lamp" and data.lamp then
+		-- Configure before enabling: SetOn creates the lamp's projected-light child immediately.
+		entity:SetOn(false)
+		entity:SetFlashlightTexture(data.lamp.texture)
+		entity:SetLightFOV(data.lamp.fov)
+		entity:SetDistance(data.lamp.distance)
+		entity:SetBrightness(data.lamp.brightness)
+		entity:SetToggle(data.lamp.toggle)
+		entity:SetOn(data.lamp.on)
+		entity:UpdateLight()
+		-- Keep the Sandbox duplicator fields in sync with the restored networked settings.
+		entity.fov = data.lamp.fov
+		entity.distance = data.lamp.distance
+		entity.brightness = data.lamp.brightness
+		local color = entity:GetColor()
+		entity.r, entity.g, entity.b = color.r, color.g, color.b
 	end
 end
 

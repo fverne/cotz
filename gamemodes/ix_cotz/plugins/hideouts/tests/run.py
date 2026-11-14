@@ -9,6 +9,7 @@ import ctypes.util
 from pathlib import Path
 import re
 import sqlite3
+import sys
 
 ROOT = Path(__file__).resolve().parents[4]
 HERE = Path(__file__).resolve().parent
@@ -194,11 +195,14 @@ def main():
     lua.run("townPlugin = PLUGIN; PLUGIN = hideoutPlugin", "restore hideouts after town services")
     lua.run((HERE / "safezone_storage_cases.lua").read_text(), "safezone and personal storage cases")
     lua.run((ROOT / "ix_cotz/plugins/hideouts/sh_commands.lua").read_text(), "hideout commands")
+    lua.run((HERE / "bounds_cases.lua").read_text(), "template depth and shell bounds cases")
     lua.run('''Test("hideout chat commands remain administrator-only", function()
         assert(TEST_COMMANDS.HideoutEnter and TEST_COMMANDS.HideoutLegacyStorage)
         for name, command in pairs(TEST_COMMANDS) do assert(command.adminOnly == true, name) end
     end)
     ix.command.Add = TEST_COMMAND_ADD''', "command access flags")
+    if "--bounds-only" in sys.argv:
+        return
     lua.run("hideoutPlugin = PLUGIN; PLUGIN = {}", "schema saver setup")
     lua.run((ROOT / "ix_cotz/plugins/spawnsaver.lua").read_text(), "schema spawn saver")
     lua.run("schemaSaver = PLUGIN; PLUGIN = hideoutPlugin", "schema saver restore")
@@ -224,14 +228,20 @@ def main():
     ):
         lua.run((ROOT / path).read_text(), path)
     lua.run('mysql.module = "sqlite"', "SQLite adapter")
-    for file in ("sh_definitions.lua", "sh_personal.lua", "sh_crates.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua",
+    for file in ("sh_plugin.lua", "sh_definitions.lua", "sh_personal.lua", "sh_crates.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua",
                  "sv_containers.lua", "sv_trading.lua", "sh_building.lua", "sv_layout.lua", "sv_travel.lua", "sh_management.lua",
-                 "sv_menus.lua", "sv_personal.lua", "sv_crates.lua", "sv_funding.lua"):
+                 "sv_menus.lua", "sv_personal.lua", "sv_crates.lua", "sv_funding.lua", "sh_migration.lua", "sv_migration.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
     lua.run("""for family, recipe in pairs(PLUGIN.personalContainerRecipes) do
         ix.item.list["hideout_crate_" .. family] = {uniqueID = "hideout_crate_" .. family,
             model = recipe.models[1], name = recipe.name, width = 2, height = 2}
     end""", "crate item fixtures")
+    lua.run((HERE / "lamp_cases.lua").read_text(), "hideout lamp cases")
+    if "--lamps-only" in sys.argv:
+        return
+    if "--migration-only" in sys.argv:
+        lua.run((HERE / "migration_cases.lua").read_text(), "template migration cases")
+        return
     lua.run("PLUGIN = {}; ix.char.RegisterVar = function() end", "sherpa shared setup")
     lua.run((ROOT / "ix_cotz/plugins/sherpas/sh_plugin.lua").read_text(), "sherpa shared")
     lua.run((ROOT / "ix_cotz/plugins/sherpas/sv_stock.lua").read_text(), "sherpa stock")
@@ -251,6 +261,7 @@ def main():
     lua.run((HERE / "cassette_cases.lua").read_text(), "cassette timer cases")
     lua.run((HERE / "personal_cases.lua").read_text(), "personal hideout progression cases")
     lua.run((HERE / "crate_cases.lua").read_text(), "crate crafting cases")
+    lua.run((HERE / "migration_cases.lua").read_text(), "template migration cases")
 
 
 if __name__ == "__main__":

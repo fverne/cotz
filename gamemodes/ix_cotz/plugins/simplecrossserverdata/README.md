@@ -99,3 +99,45 @@ Presence labels use simplecrossserver's friendly map names for local and remote 
 an ON THIS SERVER label. STALKERnet and squads share green local, teal remote, amber travelling and
 muted unavailable colors. Loner squad labels remain grey. Character dossiers show one location line
 and include the persistent mutantsPoached statistic (completed poaches only; old saves start at zero).
+
+## Administrator economy dossier
+
+The right-hand STALKERnet card separates public statistics from **ECONOMY · ADMIN ONLY** with
+extra spacing and a divider. Administrators (`Player:IsAdmin`, including superadmins) see the selected
+character's current wallet, tracked income, spending and net cash flow, plus these cumulative totals:
+
+- Repairs/weapon cleaning and workshop component commissions, after discounts and service credits.
+- Ammunition, food, drink and other advanced NPC vendor purchases, in separate spending categories.
+- Top three foods eaten and drinks consumed, by completed servings (not packages purchased).
+- Top three vendor sale categories, ranked by gross cash paid, with rubles earned per category.
+- Other progression service fees (treatment, storage, wishes and air refills), and suit conversions.
+- Progression completion cash, ordinary task cash, task bonus cash, barter cash and NPC vendor sale income.
+
+These are actual cash transactions, not base prices, delivered-item values or promised rewards.
+Free services, non-cash rewards, rejected requests and replayed claims do not add cash totals.
+Income/spending totals sum the listed categories once; net flow is income minus spending. This is
+not a complete wallet ledger: player transfers, loot/currency items, admin adjustments, hideout/squad
+transactions, gear painting and legacy dialogue-only payments are outside these counters.
+The tracking date is the character's first recorded positive cash transaction after deployment.
+Existing characters start with zero history; public task earnings retain their existing history.
+
+`schema/libs/sh_economystats.lua` owns the field list, recording and summary API. Persistent
+`economyStats` character data is written with replication suppressed and excluded from initial owner
+sync. The server attaches only whitelisted summaries to administrator roster snapshots, after public
+filtering. Ordinary players receive none of these totals, including their own. Permission changes
+replace snapshots; the client also hides/strips cached administrator data after demotion.
+Local snapshots use live cash/counters; remote values use the existing character save/poll cadence.
+No SQL migration, reset or first-time setup is needed. Deploy matching code to all map servers.
+
+Run `luatex --luaonly tests/economy_stats_spec.lua`, `tests/character_sync_spec.lua`,
+`tests/crossserver_presence_spec.lua`, `tests/squads_menu_scoreboard_spec.lua`,
+`tests/progression_services_spec.lua` and `tests/helix_vendor_trade_spec.lua` with the same runner.
+In multiplayer, verify admin/non-admin payloads, demotion, local/remote saves, paid/credited repairs,
+ammo purchases and progression payouts, and scroll the card at narrow, 1080p and 4K sizes.
+
+Consumption rankings count completed eating/drinking actions, including cooked meals and alcohol; cancelled
+actions do not count. Each use counts one serving regardless of item quantity or weight. Rankings use
+item names and existing item categories, break ties by identifier/category, and send only three entries
+per list. Food/drink purchase spending begins with this update; older amounts remain in their original
+other-purchases total. Category rankings also start now; earlier vendor income remains in the total.
+Run `luatex --luaonly tests/consumable_actions_spec.lua` for the consumption callback checks.

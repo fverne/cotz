@@ -1,7 +1,23 @@
 local PLUGIN = PLUGIN
 local RESET_COOLDOWN = 5
 
+local function fitContainer(instance, entity)
+	local mins, maxs = entity:WorldSpaceAABB()
+	local size = maxs - mins
+	local available = instance.maxs - instance.mins
+	if size.x > available.x or size.y > available.y or size.z > available.z then return end
+	local offset = Vector(
+		math.Clamp(0, instance.mins.x - mins.x, instance.maxs.x - maxs.x),
+		math.Clamp(0, instance.mins.y - mins.y, instance.maxs.y - maxs.y),
+		math.Clamp(0, instance.mins.z - mins.z, instance.maxs.z - maxs.z)
+	)
+	entity:SetPos(entity:GetPos() + offset)
+end
+
 function PLUGIN:RememberContainerPosition(instance, slotID, entity)
+	local mins, maxs = entity:WorldSpaceAABB()
+	if not self:Contains(mins, instance.mins, instance.maxs)
+		or not self:Contains(maxs, instance.mins, instance.maxs) then return end
 	instance.containerValid = instance.containerValid or {}
 	instance.containerValid[slotID] = {
 		pos = entity:GetPos() - instance.origin,
@@ -36,12 +52,14 @@ function PLUGIN:AuditContainers(instance)
 			local previous = (instance.containerValid or {})[slotID] or definition
 			entity:SetPos(instance.origin + previous.pos)
 			entity:SetAngles(previous.angles or angle_zero)
+			-- A new or upgraded model may extend beyond its authored placement, including below the floor.
+			fitContainer(instance, entity)
 			local physics = entity:GetPhysicsObject()
 			if IsValid(physics) then physics:EnableMotion(false) end
-			self:CloseStorage(instance)
-		else
-			self:RememberContainerPosition(instance, slotID, entity)
+			local inventory = slot.inventoryID and ix.inventory.Get(slot.inventoryID)
+			if inventory then self:CloseInventoryStorage(inventory) end
 		end
+		self:RememberContainerPosition(instance, slotID, entity)
 		local position = (instance.containerValid or {})[slotID]
 		if position then slot.transform = table.Copy(position) end
 	end

@@ -20,6 +20,8 @@ PLUGIN.mobileActionItems = {
 
 An explicit true/false entry overrides hotkey eligibility. Set `useHotkeyActionDefaults = false`
 to use only this separate allowlist. Items absent from both retain black-screen actions.
+Medkits `medic_medkit_1`, `medic_medkit_3` and `medic_medkit_5` explicitly use black-screen
+treatment for self-use and target-use. Syrettes retain moving actions.
 Immediate item effects retain their existing timing.
 
 Item-owned timed work calls `ix.util.PlayerPerformItemAction(client, item, text, seconds, callback)`.

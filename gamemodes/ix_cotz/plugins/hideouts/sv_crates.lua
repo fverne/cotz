@@ -149,6 +149,11 @@ function PLUGIN:CraftCrate(client, target, token, callback)
 		return
 	end
 	local recipe = quote.recipe
+	if not recipe.squad and (quote.record or quote.funding.treasury ~= 0
+		or quote.funding.player ~= recipe.price) then
+		callback(false, "Personal crates must be paid for from your wallet.")
+		return
+	end
 	local inventory = character:GetInventory()
 	local inputs, reason = self:CollectCrateInputs(client, recipe)
 	if not inputs then callback(false, reason) return end

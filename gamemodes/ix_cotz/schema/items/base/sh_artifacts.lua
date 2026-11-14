@@ -39,7 +39,7 @@ end
 
 function ITEM:PopulateTooltip(tooltip)
     if (!self.entity) then
-        ix.util.PropertyDesc(tooltip, "Artifact", Color(255, 255, 0), Material("materials/vgui/ui/stalker/weaponupgrades/genericmod.png"))
+		ix.util.PropertyDesc(tooltip, "Artifact", Color(255, 255, 0), ix.util.GetMaterial("materials/vgui/ui/stalker/weaponupgrades/genericmod.png"))
     end
 
     if (self.PopulateTooltipIndividual) then
