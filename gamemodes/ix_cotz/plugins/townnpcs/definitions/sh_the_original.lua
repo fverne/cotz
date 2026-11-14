@@ -1,6 +1,7 @@
 PLUGIN:Register("the-original", {
 	name = "'The Original'",
 	template = "firststalkernpc",
+	buyScale = 0.15,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
 	job = {

@@ -1,6 +1,7 @@
 PLUGIN:Register("jitters", {
 	name = "'Jitters'",
 	template = "medicnpc",
+	buyScale = 0.15,
 	difficultyMultiplier = 1.5,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",

@@ -1,6 +1,7 @@
 PLUGIN:Register("old-timer", {
 	name = "'Old Timer'",
 	template = "tutorialnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
 	preserveProgression = true,

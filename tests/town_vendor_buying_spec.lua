@@ -85,6 +85,40 @@ PLUGIN = {}
 dofile("gamemodes/ix_cotz/plugins/vendor_adv/libs/sh_towncontacts.lua")
 local vendors = PLUGIN
 local stock = {initial = 1, maximum = 1, interval = 48, amount = 1}
+local entityFile = assert(io.open("gamemodes/ix_cotz/plugins/vendor_adv/entities/entities/ix_vendor_adv.lua"))
+local entitySource = entityFile:read("*a")
+entityFile:close()
+local priceMethod = assert(entitySource:match("(function ENT:GetPrice%([^\n]*.-\nend)"))
+local vendorMeta = {}
+assert(load(priceMethod, "vendor-price", "t", setmetatable({ENT = vendorMeta}, {__index = _G})))()
+VENDOR_PRICE = 1
+ix.item.instances = ix.item.instances or {}
+ix.item.list.town_scale_test = {price = 100}
+for _, mode in ipairs({"omitted", "false"}) do
+	local contact = {
+		name = "Scale test", template = "town_scale_test", enforceCatalogue = true,
+		buyScale = 0.2, supplies = {"town_scale_test"}, buyingItems = {town_scale_test = true},
+	}
+	if mode == "false" then contact.buyAll = false end
+	ix.npctemplates.templates[contact.template] = {}
+	vendors:ConfigureTownTemplate(contact, {}, stock)
+	local template = ix.npctemplates.templates[contact.template]
+	check(template.scale == 0.2 and template.buyAll == false,
+		"Templates apply buyScale with buyAll " .. mode)
+	local vendor = setmetatable({items = {}, scale = 0.5}, {__index = vendorMeta})
+	function vendor:GetBuyAll() return self.buyAll or false end
+	function vendor:SetBuyAll(value) self.buyAll = value end
+	check(vendors:RefreshTownVendor(vendor, contact, {}, stock), "Saved vendors receive buyScale")
+	check(vendor.scale == 0.2 and not vendor:GetBuyAll(), "Scaling keeps restricted buying")
+	check(vendor:GetPrice("town_scale_test", true) == 20, "Restricted buyers pay the scaled price")
+	check(vendor:GetPrice("town_scale_test") == 100, "Buy scale preserves player purchase prices")
+	check(not vendors:RefreshTownVendor(vendor, contact, {}, stock), "Scale refresh is idempotent")
+	contact.buyScale = 0
+	check(vendors:RefreshTownVendor(vendor, contact, {}, stock), "Zero buy scale refreshes saved vendors")
+	check(vendor:GetPrice("town_scale_test", true) == 0, "Zero buy scale produces zero payout")
+end
+ix.npctemplates.templates.town_scale_test = nil
+ix.item.list.town_scale_test = nil
 local atlas = town.contacts.atlas
 ix.npctemplates.templates[atlas.template] = {}
 vendors:ConfigureTownTemplate(atlas, town.catalogues[atlas.name], stock)

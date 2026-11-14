@@ -1,6 +1,7 @@
 PLUGIN:Register("gasket", {
 	name = "'Gasket'",
 	template = "gasketnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",

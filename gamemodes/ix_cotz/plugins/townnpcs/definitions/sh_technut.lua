@@ -1,6 +1,7 @@
 PLUGIN:Register("technut", {
 	name = "'Technut'",
 	template = "technpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 3,
 	preserveProgression = true,
 	enforceCatalogue = true,

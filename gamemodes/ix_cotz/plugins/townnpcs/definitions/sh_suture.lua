@@ -1,6 +1,7 @@
 PLUGIN:Register("suture", {
 	name = "'Suture'",
 	template = "suturenpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
 	map = "rp_waystation",

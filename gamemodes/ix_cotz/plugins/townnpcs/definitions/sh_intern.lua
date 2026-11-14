@@ -1,6 +1,7 @@
 PLUGIN:Register("intern", {
 	name = "'Intern'",
 	template = "ecologistnpc3",
+	buyScale = 0.15,
 	difficultyMultiplier = 4,
 	enforceCatalogue = true,
 	buyCategories = {Artifacts = true, ["Mutant Parts"] = true},

@@ -1,6 +1,7 @@
 PLUGIN:Register("atlas", {
 	name = "'Atlas'",
 	template = "atlasnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",

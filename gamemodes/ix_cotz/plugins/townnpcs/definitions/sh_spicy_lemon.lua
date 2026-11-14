@@ -1,6 +1,7 @@
 PLUGIN:Register("spicy-lemon", {
 	name = "'Spicy Lemon'",
 	template = "cooknpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 1,
 	enforceCatalogue = true,
 	buyCategories = {["Cookable Meat"] = true, ["Cooked Meat"] = true},

@@ -1,6 +1,7 @@
 PLUGIN:Register("smartass", {
 	name = "'Smartass'",
 	template = "unisgnpc3",
+	buyScale = 0.3,
 	difficultyMultiplier = 2.5,
 	enforceCatalogue = true,
 	map = "rp_waystation",

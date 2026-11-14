@@ -1,6 +1,7 @@
 PLUGIN:Register("brass", {
 	name = "'Brass'",
 	template = "brassnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_garbage_cotz",

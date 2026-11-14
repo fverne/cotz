@@ -1,6 +1,7 @@
 PLUGIN:Register("wake", {
 	name = "'Wake'",
 	template = "wakenpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 1.5,
 	enforceCatalogue = true,
 	preserveProgression = true,

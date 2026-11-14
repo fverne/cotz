@@ -1,6 +1,7 @@
 PLUGIN:Register("arena-master", {
 	name = "'Arena Master'",
 	template = "arenanpc",
+	buyScale = 0.15,
 	map = "rp_marsh_cs",
 	courierPools = {
 		"valuables_protective_textiles",

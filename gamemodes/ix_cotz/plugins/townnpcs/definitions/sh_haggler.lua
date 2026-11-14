@@ -1,6 +1,7 @@
 PLUGIN:Register("haggler", {
 	name = "'Haggler'",
 	template = "tradernpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	buyCategories = {Ammunition = true, Weapons = true},

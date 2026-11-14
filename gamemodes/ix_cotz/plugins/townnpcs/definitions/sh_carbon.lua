@@ -1,6 +1,7 @@
 PLUGIN:Register("carbon", {
 	name = "'Carbon'",
 	template = "carbonnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 4,
 	enforceCatalogue = true,
 	map = "rp_waystation",

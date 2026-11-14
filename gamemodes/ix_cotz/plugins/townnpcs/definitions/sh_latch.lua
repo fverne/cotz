@@ -1,6 +1,7 @@
 PLUGIN:Register("latch", {
 	name = "'Latch'",
 	template = "latchnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	preserveProgression = true,

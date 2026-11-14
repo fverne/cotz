@@ -1,6 +1,7 @@
 PLUGIN:Register("mute", {
 	name = "'Mute'",
 	template = "stalkernetnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",

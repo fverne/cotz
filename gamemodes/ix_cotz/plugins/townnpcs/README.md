@@ -219,6 +219,12 @@ is earned, then become SELLANDBUY. The server enforces both purchase and sale as
 stale vendor rows. Template assembly and saved-vendor refresh apply the current buying lists and catalogue.
 Character-owned stock histories are retained and clamped by the existing stock policy, not reset.
 
+Set `buyScale = 0.2` in a town contact definition to pay 20% of the item's value when buying from
+players. This works with `buyAll = false` or with `buyAll` omitted; the contact still buys only its
+accepted goods. Templates and existing placements receive the scale through normal refresh.
+Player purchase prices are unchanged. Explicit per-item price factors below 5 take precedence over
+the contact scale. Run `luatex --luaonly tests/town_vendor_buying_spec.lua` for coverage.
+
 All town buying lists also include the weapon workshop's barrels and receivers as buy-only goods,
 at their low 20–200 RU nominal item values before the contact's buy scale. This does not add component
 purchase routes or salvage buying. Existing vendor placements receive these rows through normal refresh.

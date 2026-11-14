@@ -1,6 +1,7 @@
 PLUGIN:Register("beanstalk", {
 	name = "'Beanstalk'",
 	template = "ecologistnpc2",
+	buyScale = 0.3,
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
 	buyCategories = {Artifacts = true, ["Mutant Parts"] = true},

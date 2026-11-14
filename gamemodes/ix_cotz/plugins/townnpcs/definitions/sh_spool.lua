@@ -1,6 +1,7 @@
 PLUGIN:Register("spool", {
 	name = "'Spool'",
 	template = "spoolnpc",
+	buyScale = 0.3,
 	difficultyMultiplier = 3.5,
 	enforceCatalogue = true,
 	preserveProgression = true,
