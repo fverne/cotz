@@ -628,7 +628,7 @@ check(scene.location == "near the old road" and scene.spawnPoints[1][1] == 3000,
 local warning = announcements[#announcements]
 check(warning.speaker == nil and warning.anonymous and warning.id == "cotz/mutantdefense/announcement",
 	"warning uses the local system chat class")
-check(warning.message == "The supply van has crashed near the old road. Go secure the site if you want supplies back in town! Mutant waves begin in 10 minutes.",
+check(warning.message == "The supply truck has crashed near the old road. Go secure the site if you want supplies back in town! Mutant waves begin in 10 minutes.",
 	"warning includes eventadd text and the ten-minute lead time")
 check(scene.nextWave == now + 600 and scene.started == nil, "combat timeout has not begun during the warning")
 check(commands.MutantDefenseStatus.OnRun():find("countdown 600 seconds", 1, true)

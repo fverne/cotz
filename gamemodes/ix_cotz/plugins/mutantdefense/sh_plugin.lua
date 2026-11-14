@@ -39,7 +39,7 @@ ix.util.Include("sv_event.lua")
 ix.util.Include("sv_rewards.lua")
 
 ix.command.Add("MutantDefenseStart", {
-	description = "Place a supply van at a research-defense site and begin its warning countdown.",
+	description = "Place a supply truck at a research-defense site and begin its warning countdown.",
 	adminOnly = true,
 	arguments = {},
 	OnRun = function()

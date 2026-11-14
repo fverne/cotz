@@ -29,7 +29,7 @@ Vouchers remain the encounter reward.
 
 After a successful paste creates the scene, all loaded characters on this server receive LPDA news:
 
-> The supply van has crashed %s. Go secure the site if you want supplies back in town! Mutant waves begin in 10 minutes.
+> The supply truck has crashed %s. Go secure the site if you want supplies back in town! Mutant waves begin in 10 minutes.
 
 `%s` is the selected point's location text. No equipped PDA is required, and the message is not relayed to
 other servers. The countdown starts after paste completion. Missing, failed or empty pastes do not announce
