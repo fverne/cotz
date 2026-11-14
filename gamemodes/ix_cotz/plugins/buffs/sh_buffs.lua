@@ -10,7 +10,15 @@
 ]]--
 
 local PLUGIN = PLUGIN
-
+ix.command.Add("CheckBuffs", {
+	superAdminOnly = true,
+	arguments = {
+		ix.type.player,
+	},
+	OnRun = function(self, client, target)
+		client:PrintMessage(HUD_PRINTCONSOLE, table.ToString(target:GetBuffs()))
+	end
+})
 PLUGIN.buffs[ "buff_slowheal" ] = {
 	name = "Healing",
 	desc = "You're healing.",
@@ -250,12 +258,13 @@ PLUGIN.buffs[ "buff_sprintboost" ] = {
 }
 
 PLUGIN.buffs[ "buff_meditation" ] = {
+	-- { min = 1, max = 3, aoe = 300, aoeMult = 1, healthNoStop = true, damageNoStop = true }
 	name = "Meditation",
 	desc = "Slowly regenerate health while not moving",
 	func = function( player, parameter)
 		player.timeNextMeditatonTick = player.timeNextMeditatonTick or CurTime() + 1
 		player.timeNextMeditatonTickSound = player.timeNextMeditatonTickSound or CurTime()
-		if player:Health() < player.meditationHealth or player:Health() == player:GetMaxHealth() then 
+		if (player:Health() < player.meditationHealth and !parameter.damageNoStop) or (player:Health() == player:GetMaxHealth() and !parameter.healthNoStop) then 
 			ix.util.PlayerActionInterrupt(player) 
 		end
 		player.meditationHealth = player:Health()
@@ -271,7 +280,15 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 		if CurTime() > player.timeNextMeditatonTick then
 			player:SetHealth(math.Clamp(player:Health() + player.meditationHealing, 0, player:GetMaxHealth()))
 			player.timeNextMeditatonTick = CurTime() + 1
-			-- print(player.meditationHealing)
+			if parameter.aoe then
+				for _, v in ipairs(ents.FindInSphere(player:GetPos(), parameter.aoe)) do
+     				if v:IsPlayer() and v ~= player then
+     					player:SetHealth(math.Clamp(player:Health() + player.meditationHealing * parameter.aoeMult, 0, player:GetMaxHealth()))
+     					v:AddBuff("buff_meditation_tick", 2, {}) 
+
+     				end
+     			end
+     		end
 			player.meditationHealing = math.min(player.meditationHealing + 0.5, parameter.max)
 		end
 	end,
@@ -292,5 +309,16 @@ PLUGIN.buffs["buff_bandageclotting"] = {
 	onbuffed = function(client)
 		client.cotzClottingTime = CurTime()
 		client.cotzClottingCharacter = client:GetCharacter()
+	end,
+}
+
+PLUGIN.buffs[ "buff_meditation_tick" ] = {
+	name = "MeditationTick",
+	desc = "Regenerative tick as a AOE recipient",
+	func = function( player, parameter)
+	end,
+	onbuffed = function( player, parameter )
+	end,
+	ondebuffed = function( player, parameter )
 	end,
 }

@@ -42,9 +42,10 @@ if (SERVER) then
 		local tblBuffs = self:GetNetVar( "buffs" ) or {}
 		local tblBuffInfo = PLUGIN.buffs[strBuff]
 		if tblBuffInfo and tblBuffInfo.onbuffed then
-			if not self:HasBuff( strBuff ) then
-				tblBuffInfo.onbuffed( self, parameter )
+			if self:HasBuff( strBuff ) then
+				self:RemoveBuff(strBuff, parameter)
 			end
+			tblBuffInfo.onbuffed( self, parameter )
 		end
 		tblBuffs[ strBuff ] = { CurTime() + intDuration, parameter }
 		hook.Call( "OnBuffed", GAMEMODE, strBuff, intDuration, parameter )
