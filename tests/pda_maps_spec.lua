@@ -136,12 +136,13 @@ Schema = {folder = "ix_cotz"}
 local disk, requests = {}, {}
 file = {
 	Read = function(path) return disk[path] end,
+	Exists = function(path) return disk[path] ~= nil end,
 	Write = function(path, value) disk[path] = value end,
 	CreateDir = function() end,
 }
 util = {
 	SHA256 = function(url) return url:gsub("[^%w]", "_") end,
-	Base64Encode = function() return "aW1hZ2U=" end,
+	Base64Decode = function(value) return value == "aW1hZ2U=" and "image" or nil end,
 }
 http = {Fetch = function(url, success, failure)
 	requests[#requests + 1] = {url = url, success = success, failure = failure}
@@ -156,7 +157,11 @@ plugin:LoadMapImage("test", "https://example.org/map.png", receive)
 plugin:LoadMapImage("test", "https://example.org/map.png", receive)
 check(#requests == 1, "Concurrent viewers share a request")
 requests[1].success("image", 5, {["Content-Type"] = "image/webp"}, 200)
-check(result:find("data:image/webp;base64,", 1, true), "Image is embedded locally with its format")
+check(result:find("asset://garrysmod/data/helix/ix_cotz/pda/maps/", 1, true),
+	"Viewer loads the local image file")
+check(result:find("img-src asset:;", 1, true), "Content policy permits local image files")
+check(disk["helix/ix_cotz/pda/maps/https___example_org_map_png.png"] == "image",
+	"Downloaded image bytes are saved without encoding")
 check(result:find("object-fit: contain", 1, true), "Map retains aspect ratio")
 plugin:LoadMapImage("test", "https://example.org/map.png", receive)
 check(#requests == 1, "Memory cache avoids repeat downloads")
@@ -170,6 +175,20 @@ check(result == nil, "HTTP errors are not cached")
 plugin:LoadMapImage("test", "https://example.org/map.png?v=2", receive)
 check(#requests == 3, "Failed downloads can be retried")
 requests[3].failure("unavailable")
+
+local legacyURL = "https://example.org/legacy.webp"
+local legacyPath = "helix/ix_cotz/pda/maps/" .. util.SHA256(legacyURL)
+disk[legacyPath .. ".txt"] = "data:image/webp;base64,aW1hZ2U="
+plugin:LoadMapImage("legacy", legacyURL, receive)
+check(disk[legacyPath .. ".png"] == "image", "Previous cache converts to a local image file")
+check(#requests == 3, "Previous cache is reused without downloading")
+
+plugin:LoadMapImage("large", "https://example.org/large.webp", receive)
+local largeImage = string.rep("a", 1800000)
+requests[#requests].success(largeImage, #largeImage, {["Content-Type"] = "image/webp"}, 200)
+check(#result < 2048, "Large images keep the HTML document small")
+check(disk["helix/ix_cotz/pda/maps/https___example_org_large_webp.png"] == largeImage,
+	"Large images retain all downloaded bytes")
 
 local image, selector, status
 local container = {}
@@ -208,7 +227,7 @@ selector:OnSelect(1, "Swamps", "swamps")
 oldRequest.success("image", 5, {}, 200)
 check(not image.visible, "Stale download cannot replace the selected map")
 requests[#requests].success("image", 5, {}, 200)
-check(image.visible and image.html:find("data:image/", 1, true), "Selected map displays cached data")
+check(image.visible and image.html:find("asset://garrysmod/data/", 1, true), "Selected map displays cached data")
 configs.pdaMapSwampsURL = ""
 selector:OnSelect(1, "Swamps", "swamps")
 check(not image.visible and status.visible, "Blank config displays a readable empty state")

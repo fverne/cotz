@@ -3,7 +3,7 @@ ix.lang.AddTable("english", {maps = "Maps"})
 
 local HTML_PREFIX = [=[<!doctype html><html><head><meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy"
-content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+content="default-src 'none'; img-src asset:; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
 <style>
 html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #131214; }
 img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
@@ -35,10 +35,21 @@ function PLUGIN:LoadMapImage(id, url, callback)
 	end
 
 	local directory = "helix/" .. Schema.folder .. "/pda/maps/"
-	local path = directory .. util.SHA256(url) .. ".txt"
-	local source = file.Read(path, "DATA")
-	if source and source:match("^data:image/[%w.+-]+;base64,") then
-		local html = HTML_PREFIX .. source .. HTML_SUFFIX
+	local cacheKey = directory .. util.SHA256(url)
+	local path = cacheKey .. ".png"
+	local html = HTML_PREFIX .. "asset://garrysmod/data/" .. path .. HTML_SUFFIX
+
+	-- Convert the previous embedded-image cache without downloading the map again.
+	if not file.Exists(path, "DATA") then
+		local source = file.Read(cacheKey .. ".txt", "DATA")
+		local encoded = source and source:match("^data:image/[%w.+-]+;base64,(.+)$")
+		local body = encoded and util.Base64Decode(encoded)
+		if body and body ~= "" then
+			file.Write(path, body)
+		end
+	end
+
+	if file.Exists(path, "DATA") then
 		mapImages[id] = {url = url, html = html}
 		callback(html)
 
@@ -81,11 +92,10 @@ function PLUGIN:LoadMapImage(id, url, callback)
 			return
 		end
 
-		-- Keep DHTML support for formats such as WebP that engine materials cannot load.
-		local data = "data:" .. mime .. ";base64," .. util.Base64Encode(body, true)
+		-- Let the browser decode the file, including WebP, without embedding it in SetHTML.
 		file.CreateDir(directory)
-		file.Write(path, data)
-		finish(HTML_PREFIX .. data .. HTML_SUFFIX)
+		file.Write(path, body)
+		finish(html)
 	end, function()
 		finish(nil)
 	end)

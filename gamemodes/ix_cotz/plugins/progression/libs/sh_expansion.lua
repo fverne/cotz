@@ -100,7 +100,7 @@ end
 function ix.progression.GetBenefitSummary(definition, character)
 	local parts = benefitText(definition.completionBenefits or {})
 	if definition.requirementSlots then
-		parts[#parts + 1] = "Payment on completion: 60% of the accepted hand-in value"
+		-- parts[#parts + 1] = "Payment on completion: 60% of the accepted hand-in value"
 	end
 	for _, unlock in ipairs(definition.vendorUnlocks or {}) do
 		parts[#parts + 1] = "Purchase access: " .. ix.item.list[unlock.args[1]].name

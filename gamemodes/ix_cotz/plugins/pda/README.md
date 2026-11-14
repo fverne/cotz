@@ -21,7 +21,9 @@ Changing the configured URL downloads the replacement; for an image replaced at 
 same address, change its URL with a version query (for example, `?v=2`). Failed HTTP
 requests are not cached and can be retried by reopening the map.
 
-Cached images display in a DHTML image document, fit without changing
+Cached images load through a local `asset://garrysmod/data/` URL in a small DHTML
+document, avoiding large embedded HTML payloads. Previous encoded caches convert
+automatically without another download. Images fit without changing
 aspect ratio, and resize with the tab. Missing/invalid URLs show a message. Failed
 image requests show an unavailable message. Lua execution is disabled in the viewer.
 This is an image viewer, with no position markers or live navigation.
