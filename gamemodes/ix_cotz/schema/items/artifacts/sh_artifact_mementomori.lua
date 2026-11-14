@@ -4,7 +4,7 @@ ITEM.description = "An artifact shaped like a human skull."
 ITEM.longdesc = "A human skull that is missing its lower jaw.\nThis grisly artifact serves as a reminder to all STALKERs that death is around every corner in the exclusion zone. It seems to have a slightly unsettling aura around it, moreso than a normal skull. Some STALKERs carry these around, using them as a literal Memento Mori, a reminder that they're mortal, and that they should not attempt anything too heroic or daring. Because the Memento Mori is fairly common, the supply outweighs the demand in most cases, however some scientists are still interested in it, as it doesn't seem to be made of bone, and its origins are quite mysterious. Many different variants have been seen, made out of many kind of materials."
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 5750
+ITEM.price = 10781.25
 ITEM.flag = "A"
 ITEM.rarity = 2
 ITEM.baseweight = 1.050
@@ -43,7 +43,7 @@ ITEM.functions.use = {
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time()) then
         	item:SetData("cooldown", os.time()+(60*15) ) --15 minutes
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Looking deep into the skull", 3, function(player) 
+			ix.util.PlayerPerformItemAction(item.player, item, "Looking deep into the skull", 3, function(player)
                 player:HealPsyHealth(15)
             end)
         end

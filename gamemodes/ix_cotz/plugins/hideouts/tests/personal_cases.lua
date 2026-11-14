@@ -244,14 +244,14 @@ Test("floor limit blocks direct transfers to the world and counts guests against
 	local owner, inventory, instance, record = personalHome()
 	for index = 1, 4 do instance.items[index + 100] = NewEntity(nil, instance.origin) end
 	local item = FeatureItem(inventory)
-	assert(PLUGIN:CanPlayerDropItem(owner, item) == false)
+	assert(PLUGIN:CanPlayerDropItem(owner, item:GetID()) == false)
 	assert(not item:Transfer(0, nil, nil, owner, false, true))
 	assert(item.invID == inventory:GetID())
 	local guest = FeatureClient(2)
 	guest.position, PLUGIN.members[guest], record.guests["2"] = instance.origin, record.id, true
 	assert(PLUGIN:CanPlayerDropItem(guest, item) == false)
 	record.floorLevel = 1
-	assert(PLUGIN:CanPlayerDropItem(owner, item) == nil)
+	assert(PLUGIN:CanPlayerDropItem(owner, item:GetID()) == nil)
 	assert(item:Transfer(0, nil, nil, owner, false, true))
 end)
 

@@ -4,6 +4,7 @@ PLUGIN:Register("jitters", {
 	buyScale = 0.15,
 	difficultyMultiplier = 1.5,
 	enforceCatalogue = true,
+	buyCategories = {["Mutant Parts"] = true},
 	map = "rp_marsh_cs",
 	courierPools = {
 		"valuables_cleaning_supplies",

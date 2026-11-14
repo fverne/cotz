@@ -5,6 +5,7 @@ PLUGIN.desc = "Allows for use of hotkeys to be used for pre-defined item usage."
 
 ix.util.Include("cl_plugin.lua")
 ix.util.Include("sh_hotkeyitems.lua")
+ix.util.Include("sh_actionitems.lua")
 
 local playerMeta = FindMetaTable("Player")
 ix.meta.character = ix.meta.character or {}
@@ -247,3 +248,13 @@ ix.option.Add("Hotkey4", ix.type.array, "nil", {
 		netstream.Start("ixHotkeyChange", 4, newValue)
 	end
 })
+
+if SERVER then
+	function PLUGIN:PrePlayerLoadedCharacter(client)
+		if client:GetNetVar("ix_hasMobileAction") then ix.util.PlayerActionInterrupt(client) end
+	end
+
+	function PLUGIN:PlayerDeath(client)
+		if client:GetNetVar("ix_hasMobileAction") then ix.util.PlayerActionInterrupt(client) end
+	end
+end

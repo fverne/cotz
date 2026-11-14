@@ -154,6 +154,10 @@ function ix.util.PlayerPerformBlackScreenAction(client, _, duration, callback)
 	end)
 end
 
+function ix.util.PlayerPerformItemAction(client, _, ...)
+	return ix.util.PlayerPerformBlackScreenAction(client, ...)
+end
+
 PLUGIN = {}
 ix.char = {loaded = {}}
 dofile("gamemodes/ix_cotz/plugins/equipmentslots/sh_plugin.lua")

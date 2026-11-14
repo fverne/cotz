@@ -101,7 +101,7 @@ ITEM.functions.use = {
 				ix.chat.Send(client, "iteminternal", item.message, false)
 			end
 
-			ix.util.PlayerPerformBlackScreenAction(item.player, "Eating", 5, function(player) 
+			ix.util.PlayerPerformItemAction(item.player, item, "Eating", 5, function(player)
 				player:SetHunger(hunger + item:GetHunger())
 				player:SetThirst(thirst + item:GetThirst())
 				player:UpdateHungerState(player)

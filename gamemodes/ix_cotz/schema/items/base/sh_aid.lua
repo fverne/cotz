@@ -68,7 +68,7 @@ function ITEM:CanUseBandage()
 
 	local character = client:GetCharacter()
 	if not character or self.invID ~= character:GetInventory():GetID() then return false end
-	if client:GetNetVar("ix_hasBlackScreen", false) then return false end
+	if client:GetNetVar("ix_noMenuAllowed", false) then return false end
 
 	return self:GetData("quantity", self.quantity) >= 1
 end
@@ -81,7 +81,7 @@ function ITEM:StartBandageTreatment()
 	local restore, duration, bleedRestore = self.restore, self.restoreduration, self.bleedRestore
 	local token = {}
 	client.cotzBandageAction = token
-	ix.util.PlayerPerformBlackScreenAction(client, "Wrapping Bandages", 2, function(player)
+	ix.util.PlayerPerformItemAction(client, self, "Wrapping Bandages", 2, function(player)
 		if not IsValid(player) or not player:Alive() or player:GetCharacter() ~= character then return end
 		if player.cotzBandageAction ~= token then return end
 

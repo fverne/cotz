@@ -403,7 +403,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "unequipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)		
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 6, function(ply) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Taking off...", 6, function(ply)
 			item:RemoveOutfit(ply)
 			ply:RecalculateResistances()
 			ply:ReevaluateOverlay()
@@ -466,7 +466,7 @@ ITEM.functions.Equip = {
 		end
 
 		
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 6, function(ply) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Putting on...", 6, function(ply)
 			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 
 			item:SetData("equip", true)

@@ -67,6 +67,9 @@ for item, definition in pairs(ix.item.list) do
 	if categoryCounts[definition.category] then
 		specimenItems[#specimenItems + 1] = item
 		categoryCounts[definition.category] = categoryCounts[definition.category] + 1
+		if definition.category == "Mutant Parts" then
+			check(town:CanSellItem(item, town.contacts.jitters.name), "Jitters buys every mutant part: " .. item)
+		end
 		for _, id in ipairs({"beanstalk", "egghead", "intern"}) do
 			local contact = town.contacts[id]
 			check(town:CanSellItem(item, contact.name), "Bunker scientists buy every artifact and part: " .. id .. "/" .. item)
@@ -74,6 +77,7 @@ for item, definition in pairs(ix.item.list) do
 	end
 end
 check(categoryCounts.Artifacts > 0 and categoryCounts["Mutant Parts"] > 0, "Both specimen categories are loaded")
+check(town.contacts.egghead.buyScale == 0.32, "Egghead uses the revised buying scale")
 
 VENDOR_MODE, VENDOR_BUYONLY, VENDOR_SELLANDBUY = 3, 3, 1
 ix.vendorStock = {
@@ -116,6 +120,23 @@ for _, mode in ipairs({"omitted", "false"}) do
 	contact.buyScale = 0
 	check(vendors:RefreshTownVendor(vendor, contact, {}, stock), "Zero buy scale refreshes saved vendors")
 	check(vendor:GetPrice("town_scale_test", true) == 0, "Zero buy scale produces zero payout")
+end
+for _, id in ipairs({"egghead", "jitters"}) do
+	local contact = town.contacts[id]
+	ix.npctemplates.templates[contact.template] = {}
+	local catalogue = town.catalogues[contact.name]
+	vendors:ConfigureTownTemplate(contact, catalogue, stock)
+	local vendor = {items = {}, scale = 0.6}
+	function vendor:GetBuyAll() return false end
+	function vendor:SetBuyAll() end
+	check(vendors:RefreshTownVendor(vendor, contact, catalogue, stock), "Existing contact gets updated buying rules")
+	check(vendor.scale == contact.buyScale, "Saved contact uses its current buying scale")
+	for item, definition in pairs(ix.item.list) do
+		if definition.category == "Mutant Parts" then
+			check(vendor.items[item] and ix.npctemplates.templates[contact.template].items[item],
+				"Templates and saved contacts accept every mutant part: " .. id .. "/" .. item)
+		end
+	end
 end
 ix.npctemplates.templates.town_scale_test = nil
 ix.item.list.town_scale_test = nil

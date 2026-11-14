@@ -35,7 +35,7 @@ ITEM.functions.use = {
 		
 		ix.chat.Send(item.player, "iteminternal", "opens the "..item.name.." and injects himself with a syrette.", false)
 		
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Injecting Syrette", 3, function(player) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Injecting Syrette", 3, function(player)
 			player:AddBuff("buff_rapidheal", 20, { amount = item.restore/20 })
 		end)
 
@@ -65,7 +65,7 @@ ITEM.functions.usetarget = {
 		local quantity = item:GetData("quantity", item.quantity)
 		if (IsValid(target) and target:IsPlayer()) then
 			ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and injects "..target:Name().." with a syrette.", false)
-			ix.util.PlayerPerformBlackScreenAction(item.player, "Treating "..target:Name().."'s Wounds", 1.5, function(player) 
+			ix.util.PlayerPerformItemAction(item.player, item, "Treating "..target:Name().."'s Wounds", 1.5, function(player)
 				target:AddBuff("buff_rapidheal", 20, { amount = item.restore/20 })
 			end)
 			

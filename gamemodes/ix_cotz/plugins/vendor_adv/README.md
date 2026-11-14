@@ -4,7 +4,8 @@
 
 Town traders use the shared stock inspector with **Buy / Sell** tabs. The left pane lists catalogue
 goods or eligible personal item instances; the right pane shows the selected item's icon, description,
-price, stock information and Purchase/Sell action. Personal items retain instance-specific descriptions
+price, stock information and Purchase/Sell action. Personal sale rows use descending instance IDs, placing the oldest items at the bottom.
+Personal items retain instance-specific descriptions
 and saved quantity/condition values where present. Icons and normal item tooltips are retained.
 List and selected-item previews fit the complete icon inside their bounds with its aspect ratio preserved,
 including wide and tall items in the shared Sherpa/squad vendor window.

@@ -77,6 +77,7 @@ for _, name in ipairs({"Dock", "DockMargin", "DockPadding", "SetPaintBackground"
 	"SetMouseInputEnabled", "SetHideButtons", "InvalidateChildren", "MakePopup", "Center", "PerformLayout"}) do
 	methods[name] = function() end
 end
+function methods:SetZPos(value) self.zPos = value end
 IsValid = function(value) return type(value) == "table" and not value.removed end
 AccessorFunc = function(target, field, name)
 	target["Set" .. name] = function(self, value) self[field] = value end
@@ -147,6 +148,7 @@ dofile("gamemodes/ix_cotz/plugins/vendor_adv/derma/cl_vendor.lua")
 local town = create("ixVendorAdv")
 town:SetReadOnly(false)
 town:Setup(entity)
+check(town.buyingList[101].zPos == -101, "Sale rows use descending instance IDs")
 check(town.stockTab.text == "Buy" and town.personalTab.text == "Sell", "Town traders use Buy/Sell tabs")
 local row = town.sellingList.rifle
 row:DoClick()
@@ -229,6 +231,7 @@ check(not town.buyingList[101] and not town.vendorBuy.enabled, "Equipping a sele
 ownedData.equip = false
 town:SyncPersonalItems()
 check(IsValid(town.buyingList[101]), "Newly eligible inventory instances appear without reopening")
+check(town.buyingList[101].zPos == -101, "Refreshed rows retain descending instance order")
 inventory = {}
 town:SyncPersonalItems()
 town:RefreshInspector()

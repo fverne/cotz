@@ -2,7 +2,7 @@
 CLIENT = false
 local action
 ix = {util = {GetMaterial = function(path) return path end,
-	PlayerPerformBlackScreenAction = function(_, name) action = name end}, chat = {Send = function() end}}
+	PlayerPerformItemAction = function(_, _, name) action = name end}, chat = {Send = function() end}}
 IsValid = function(value) return type(value) == "table" end
 ITEM = {functions = {}}
 local file = assert(io.open("gamemodes/ix_cotz/schema/items/base/sh_consumables.lua"))

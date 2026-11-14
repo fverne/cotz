@@ -34,7 +34,7 @@ ITEM.functions.use = {
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 		
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Smoking", 6, function(player) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Smoking", 6, function(player)
 			local hunger = player:GetCharacter():GetData("hunger", 100)
 			player:AddBuff("buff_psyheal", 15, { amount = item.psyheal/30 })
 			player:SetHunger(hunger + item.hunger)

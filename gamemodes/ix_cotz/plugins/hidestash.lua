@@ -68,8 +68,8 @@ function PLUGIN:StashHide(client) -- No longer used, kept around commented for p
 end
 
 
-function PLUGIN:StashUnhide(client)
-	ix.util.PlayerPerformBlackScreenAction(client, "Searching for a stash...", 8, function(client) 
+function PLUGIN:StashUnhide(client, item)
+	ix.util.PlayerPerformItemAction(client, item, "Searching for a stash...", 8, function(client)
 		local trace = client:GetEyeTraceNoCursor()
 		local hitpos = trace.HitPos + trace.HitNormal*5
 		local dist = hitpos:Distance(client:GetPos())

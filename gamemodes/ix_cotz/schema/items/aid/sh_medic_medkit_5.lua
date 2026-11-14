@@ -38,7 +38,7 @@ ITEM.functions.use = {
 
 		ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it.", false)
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Treating Wounds", 8, function(player) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Treating Wounds", 8, function(player)
 			player:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 			player:AddBuff("buff_radiationremoval", 60*5, { amount = item.radrem/120 })
 			--player:HealBleeding(80)
@@ -70,7 +70,7 @@ ITEM.functions.usetarget = {
 		local quantity = item:GetData("quantity", item.quantity)
 		if (IsValid(target) and target:IsPlayer()) then
 			ix.chat.Send(item.player, "iteminternal", "opens a "..item.name.." and uses it on "..target:Name()..".", false)
-			ix.util.PlayerPerformBlackScreenAction(item.player, "Treating "..target:Name().."'s Wounds", 4, function(player) 
+			ix.util.PlayerPerformItemAction(item.player, item, "Treating "..target:Name().."'s Wounds", 4, function(player)
 				target:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 				target:AddBuff("buff_radiationremoval", 60*5, { amount = item.radrem/120 })
 			end)

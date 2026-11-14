@@ -83,7 +83,7 @@ ITEM.functions.Equip = {
 			end
 		end
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Putting on...", 4, function(ply) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Putting on...", 4, function(ply)
 			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 			item:SetData("equip", true)
 			ply:AddPart(item.uniqueID, item)
@@ -119,7 +119,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 			item.player:Notify("Removing this item would make you heavily overweight.")
 			return false
 		end
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Taking off...", 4, function(ply) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Taking off...", 4, function(ply)
 			item:RemovePart(ply)
 			char:UpdateWeight()
 		end)

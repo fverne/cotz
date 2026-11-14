@@ -295,6 +295,9 @@ local function flush()
 	for _, callback in ipairs(pendingCallbacks) do callback() end
 end
 ix.util = {PlayerPerformBlackScreenAction = function(_, _, _, callback) callback() end}
+ix.util.PlayerPerformItemAction = function(client, _, ...)
+	return ix.util.PlayerPerformBlackScreenAction(client, ...)
+end
 
 local function assign(character, kind, npc)
 	npc = npc or "Contact"

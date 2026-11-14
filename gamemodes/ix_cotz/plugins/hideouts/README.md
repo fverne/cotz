@@ -543,6 +543,11 @@ furnishings in any loaded room, including direct noclip visits without occupancy
 locks, proximity, storage filters and instance bounds still apply. Template shell props remain protected;
 storage remains movable even when its location was authored in the template.
 Normal loading, persistence and disabled-room checks still apply. Generic world-item persistence excludes hideout floor items.
+Both Throw Away and Drop Persistently use hideout-only item custody and placement records inside a room;
+normal floor limits still apply. The drop hook resolves Helix's numeric instance ID before checking that limit.
+The inventory-to-floor update stores the hideout location alongside world custody, preserving restart recovery
+without adding the item to the map-wide world save. Test numeric-ID drops with existing floor items,
+then unload/reenter and restart the server; confirm one copy inside the room and none at old world coordinates.
 Blowout temporary-item cleanup also excludes tagged hideout floor items, including template seeds and
 player drops. These items retain `bTemporary` for the separate hideout persistence path; the flag alone
 does not make them disposable world loot. Check with `luatex --luaonly tests/blowout_items_spec.lua`.

@@ -4,6 +4,19 @@ Town trading uses the shared [stock inspector](../vendor_adv/README.md#trading-i
 Buy/Sell tabs and a persistent selected-item pane. This changes presentation only; catalogue unlocks,
 personal stock, prices and trade eligibility retain their existing server rules.
 
+## Economy adjustments, 14 November 2026
+
+Egghead's buying scale is 0.32. All 35 concrete artifact prices are 1.875 times their previous values,
+preserving his previous artifact sale payouts at the new scale, including saved value multipliers.
+Other contacts use these increased artifact prices with their own buying scales. Jitters accepts every
+item in the Mutant Parts category independently of unlocks; his 0.15 buying scale is unchanged.
+Existing town placements receive their current buying scales and assortments through normal reconciliation.
+
+Intermediate rifle ammunition and larger cartridges cost 67% of their previous prices: 5.45x39,
+5.56x45, 7.62x39, 9x39, 7.62x51, 7.62x54, 9.3x64, .338 Lapua, 12.7x55, 14.5x114 and .700 Nitro,
+including existing HP/AP variants. The 27 prices remain explicit in their concrete item definitions.
+Restart matching code on all map servers; no save reset or first-time setup is required.
+
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over

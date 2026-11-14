@@ -127,7 +127,7 @@ ITEM.functions.useAll = {
         item.player:EmitSound(item.sound or "items/battery_pickup.wav")
         cookquantity = math.min(#cookables,math.max(fuelcount,(infinite and 1 or 0)*100))
         ix.chat.Send(item.player, "iteminternal", "uses their "..item.name.." to begin cooking "..cookquantity.." portions of meat.", false)
-        ix.util.PlayerPerformBlackScreenAction(item.player, "Cooking...", math.min(cookquantity*6, 60), function(player) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Cooking...", math.min(cookquantity*6, 60), function(player)
           for k,v in pairs(cookables) do
             if infinite then 
             elseif fuelcount <= 0 then
@@ -182,7 +182,7 @@ function ITEM:CookMeat(item, targetID)
   if (self:GetData("fuel", 0) > 0) then
     local client = self.player or item:GetOwner()
     
-    ix.util.PlayerPerformBlackScreenAction(client, "Cooking...", 6, function(player) 
+	ix.util.PlayerPerformItemAction(client, self, "Cooking...", 6, function(player)
       target:Remove()
       if not client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()}) then
         ix.item.Spawn(target.meal, item.player:GetItemDropPos(), nil, AngleRand(), {["weight"] = target:GetWeight()})

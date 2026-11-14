@@ -55,7 +55,7 @@ ITEM.functions.zFill = {
     sound = "stalkersound/inv_properties.mp3",
     OnRun = function(item)
         ix.chat.Send(item.player, "iteminternal", "Fills their "..item.name.." with dirty water.", false)
-        ix.util.PlayerPerformBlackScreenAction(item.player, "Filling water flask...", 3, function(player)
+		ix.util.PlayerPerformItemAction(item.player, item, "Filling water flask...", 3, function(player)
         	item:SetData("contains", 1)
         	item:SetData("quantity", 2)
         end)
@@ -80,7 +80,7 @@ ITEM.functions.zFilter ={
 		end
 		if found then
 	        ix.chat.Send(item.player, "iteminternal", "purifies their "..item.name..".", false)
-	        ix.util.PlayerPerformBlackScreenAction(item.player, "Purifying water flask...", 8, function(player)
+			ix.util.PlayerPerformItemAction(item.player, item, "Purifying water flask...", 8, function(player)
 	        	item:SetData("contains", 3)
 	        end)
 	    else 
@@ -131,7 +131,7 @@ ITEM.functions.zCook = {
 		if ( targetItem.cookertier and targetItem:GetData("fuel", 0) > 0 ) then
 			item.player:EmitSound("stalkersound/inv_cooking_cooker.ogg", 110)
         	ix.chat.Send(item.player, "iteminternal", "boils water for their "..item.name..".", false)
-	        ix.util.PlayerPerformBlackScreenAction(item.player, "Boiling water...", 6, function(player)
+			ix.util.PlayerPerformItemAction(item.player, item, "Boiling water...", 6, function(player)
 				item:SetData("contains", 2)
 				targetItem:SetData("fuel", targetItem:GetData("fuel", 1) - 1)
 	        end)
@@ -149,16 +149,16 @@ ITEM.functions.use = {
         local contains = item:GetData("contains",item.contains)
         local thirst = item.player:GetCharacter():GetData("thirst", 100)
         if contains == 3 then
-        	ix.util.PlayerPerformBlackScreenAction(item.player, "Drinking from water flask...", 5, function(player)
+			ix.util.PlayerPerformItemAction(item.player, item, "Drinking from water flask...", 5, function(player)
             	player:SetThirst(thirst + 15)
         	end)
         elseif contains == 2 then
-        	ix.util.PlayerPerformBlackScreenAction(item.player, "Drinking from water flask...", 5, function(player)
+			ix.util.PlayerPerformItemAction(item.player, item, "Drinking from water flask...", 5, function(player)
             	player:SetThirst(thirst + 12)
             	player:AddBuff("debuff_radiation", 10, { amount = 0.2 })
         	end)
         else
-        	ix.util.PlayerPerformBlackScreenAction(item.player, "Drinking from water flask...", 5, function(player)
+			ix.util.PlayerPerformItemAction(item.player, item, "Drinking from water flask...", 5, function(player)
 	        	player:SetThirst(thirst + 8)
 	        	player:AddBuff("debuff_radiation", 10, { amount = 0.5 })
 	            player:AddBuff("debuff_psy", 10, { amount = 0.25 })

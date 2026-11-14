@@ -4,7 +4,7 @@ ITEM.description = "A dark green lumpy rock, seemingly formed by a strong pressu
 ITEM.longdesc = "There seems to be a network of small tunnels going through it. Over time, a light green fuzzy coating grows on the surface of the rock. This mold-esque growth seems edible, and can be quite easily scraped off the surface and eaten. It is currently unknown if this fungus-like growth will spread to other surfaces than the artifact itself. Scientists are very interested in this artifact as an experimental food source."
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 7900
+ITEM.price = 14812.5
 ITEM.flag = "A"
 ITEM.rarity = 3
 ITEM.baseweight = 1.500
@@ -21,7 +21,7 @@ ITEM.functions.use = {
             ix.chat.Send(item.player, "iteminternal", "scrapes some mold off their "..item.name.." and eats it.", false)
 
             local hunger = item.player:GetCharacter():GetData("hunger", 100)
-            ix.util.PlayerPerformBlackScreenAction(item.player, "Scraping off mold and eating it...", 8, function(player)
+			ix.util.PlayerPerformItemAction(item.player, item, "Scraping off mold and eating it...", 8, function(player)
                 player:AddBuff("debuff_radiation", 10, { amount = 0.25 })
                 player:SetHunger(hunger + 25)
             end)

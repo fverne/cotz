@@ -54,7 +54,7 @@ end
 function PLUGIN:GetPending(client)
 	local pending = self.pending[client]
 	if pending and (pending.expires < CurTime()
-		or (pending.delayed and not client:GetNetVar("ix_hasBlackScreen"))) then
+		or (pending.delayed and not client:GetNetVar("ix_noMenuAllowed"))) then
 		self.pending[client] = nil
 		return
 	end

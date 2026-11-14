@@ -535,5 +535,6 @@ function PLUGIN:AuditPersonalFloorItems(instance)
 end
 
 function PLUGIN:CanPlayerDropItem(client, item)
+	if isnumber(item) then item = ix.item.instances[item] end
 	return self:CanDropPersonalItem(client, item)
 end

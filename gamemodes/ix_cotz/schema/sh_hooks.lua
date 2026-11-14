@@ -172,6 +172,7 @@ function Schema:PlayerSwitchWeapon(client, oldWeapon, weapon)
 end
 
 function Schema:CanPlayerInteractItem(client, action, item, data)
+	if client:GetNetVar("ix_hasMobileAction") then return false end
 	if client:Alive() or isentity(item) then return end
 	local instance = item
 	if isnumber(item) then instance = ix.item.instances[item] end

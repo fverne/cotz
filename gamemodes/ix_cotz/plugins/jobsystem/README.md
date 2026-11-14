@@ -24,6 +24,19 @@ camera/courier issuance. Per-assignment field settings, both route maps and carg
 Run `luatex --luaonly tests/regional_jobs_spec.lua` alongside the suites below.
 No server deployment, first-time setup or live-save reset is part of offline verification.
 
+## Hand-in quality
+
+Meal and raw-meat hand-ins use saved weight through their existing prices. Reference quotes use
+the raw meat's `BaseWeight`, including the corresponding cooked meal. Mutant-part hand-in value
+multiplies the existing tier price by saved weight divided by `baseweight`; missing saved weight
+uses the normal base weight. Ordinary vendor part prices retain their existing tier rules.
+Repeatable delivery cash scales with this value, including its tier minimum, so better specimens
+increase rewards even for inexpensive requests. Finite progression accrues the weighted value for
+completion cash and includes part weight in its reputation quote. Saved delivery credit remains intact.
+
+Run `luatex --luaonly tests/handin_quality_spec.lua`. Check actual mixed-quality deliveries and
+completion/reconnect behavior in multiplayer; standalone tests use mocked inventory boundaries.
+
 ## Task feedback and hand-ins
 
 Valuable couriers list every eligible receiving contact in the confirmation and task journal.

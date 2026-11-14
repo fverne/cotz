@@ -268,8 +268,8 @@ dofile("gamemodes/ix_cotz/schema/items/base/sh_aid.lua")
 local base = ITEM
 local pending, target
 ix.util.PropertyDesc = function() end
-ix.util.PlayerPerformBlackScreenAction = function(actor, _, _, callback)
-	actor.vars.ix_hasBlackScreen = true
+ix.util.PlayerPerformItemAction = function(actor, _, _, _, callback)
+	actor.vars.ix_noMenuAllowed = true
 	pending = callback
 end
 ix.chat = {Send = function() end}
@@ -286,12 +286,12 @@ for tier, strength in ipairs({20, 50, 90}) do
 	local item = setmetatable({player = actor, invID = 1, data = {}}, {__index = ITEM})
 	function item:GetData(key, default) return self.data[key] or default end
 	function item:SetData(key, value) self.data[key] = value end
-	actor.vars.ix_hasBlackScreen = false
+	actor.vars.ix_noMenuAllowed = false
 	buffs:SetBleedingSeverity(actor, 100)
 	check(item.functions.use.OnRun(item) == false, "multi-use bandage retained")
 	check(item.data.quantity == 2, "self-use consumes one charge at start")
 	check(item.functions.use.OnRun(item) == false and item.data.quantity == 2, "overlap rejected")
-	actor.vars.ix_hasBlackScreen = false
+	actor.vars.ix_noMenuAllowed = false
 	pending(actor)
 	near(buffs:GetBleeding(actor), 100 - strength, "self treatment strength")
 	target = player(100)
@@ -303,13 +303,13 @@ for tier, strength in ipairs({20, 50, 90}) do
 	item.functions.use.OnRun(item)
 	local callback = pending
 	buffs:PrePlayerLoadedCharacter(actor)
-	actor.vars.ix_hasBlackScreen = false
+	actor.vars.ix_noMenuAllowed = false
 	callback(actor)
 	near(buffs:GetBleeding(actor), 100, "character transition invalidates delayed action")
 	item.data.quantity = 3
 	item.functions.use.OnRun(item)
 	-- The shared black-screen helper suppresses callbacks on cancellation.
-	actor.vars.ix_hasBlackScreen = false
+	actor.vars.ix_noMenuAllowed = false
 	near(buffs:GetBleeding(actor), 100, "canceling does not treat bleeding")
 	check(item.data.quantity == 2, "cancellation retains start-time consumption")
 	item.functions.use.OnRun(item)
@@ -318,7 +318,7 @@ for tier, strength in ipairs({20, 50, 90}) do
 	callback(actor)
 	near(buffs:GetBleeding(actor), 100, "dead actor cannot receive delayed treatment")
 	actor.health = 100
-	actor.vars.ix_hasBlackScreen = false
+	actor.vars.ix_noMenuAllowed = false
 	target.invalid = true
 	local quantity = item.data.quantity
 	check(item.functions.usetarget.OnRun(item) == false and item.data.quantity == quantity,

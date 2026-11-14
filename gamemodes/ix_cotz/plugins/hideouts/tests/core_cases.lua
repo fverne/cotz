@@ -76,6 +76,19 @@ Test("real Helix drop records world custody and hideout placement together", fun
 		end
 	end
 	assert(atomic)
+	local entity = item:Spawn(client.position, Angle())
+	PLUGIN:SaveFloorItem(instance, entity)
+	assert(entity.bTemporary and entity.ixHideout == instance.id)
+	assert(PLUGIN:ShouldSaveWorldItem(entity) == false)
+	assert(PLUGIN:ShouldRestoreWorldItem(util.JSONToTable(DB.rows[item.id].data)) == false)
+	local id = item:GetID()
+	PLUGIN:DetachFloorItems(instance)
+	instance.state = "loading"
+	local restored
+	PLUGIN:RestoreFloorItems(instance, function(ok) restored = ok end)
+	assert(restored and table.Count(DB.rows) == 1)
+	assert(instance.items[id]:GetPos().x == client.position.x)
+	assert(ix.item.instances[id]:GetData("durability") == 35)
 end)
 
 Test("real Helix transfer guard runs before permissive general hooks", function()

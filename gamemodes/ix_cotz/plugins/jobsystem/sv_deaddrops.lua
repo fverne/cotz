@@ -40,9 +40,9 @@ function ix.jobs.field.StartDig(client, character, npc, job, tool, burying)
 		client:Notify("You need a usable stash digging tool to dig up or bury the parcel.")
 		return true
 	end
-	if client:GetNetVar("ix_hasBlackScreen") then return true end
+	if client:GetNetVar("ix_noMenuAllowed") then return true end
 	local claim, stage = job.rewardKey, job.fieldTask.stage
-	ix.util.PlayerPerformBlackScreenAction(client, burying and "Burying the parcel..." or "Digging up the parcel...",
+	ix.util.PlayerPerformItemAction(client, tool, burying and "Burying the parcel..." or "Digging up the parcel...",
 		DIG_SECONDS, function()
 			local current, active = ix.jobs.field.ActiveJob(client, npc, claim)
 			if current ~= character or active.fieldTask.stage ~= stage or not ownsTool(character, tool) then return end

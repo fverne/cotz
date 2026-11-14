@@ -1,7 +1,7 @@
 PLUGIN:Register("egghead", {
 	name = "'Egghead'",
 	template = "ecologistnpc",
-	buyScale = 0.6,
+	buyScale = 0.32,
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
 	buyCategories = {Artifacts = true, ["Mutant Parts"] = true},

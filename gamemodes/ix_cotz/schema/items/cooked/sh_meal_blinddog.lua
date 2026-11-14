@@ -4,7 +4,7 @@ ITEM.longdesc = "The low fat content leaves it dry, with a tough bite and little
 	.. " hungry camp, those objections rarely last long."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_dog.mdl"
 
-ITEM.price = 240
+ITEM.price = 288
 ITEM.width = 1
 ITEM.height = 1
 

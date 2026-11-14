@@ -150,7 +150,7 @@ ITEM.functions.unhidestash = {
 		if ix.jobs and ix.jobs.field and ix.jobs.field.DigDeadDrop(item.player, item) then return false end
         local quantity = item:GetData("quantity", item.quantity)
         ix.chat.Send(item.player, "iteminternal", "takes out their " .. item.name .. ".", false)
-        ix.plugin.list["hidestash"]:StashUnhide(item.player)
+        ix.plugin.list["hidestash"]:StashUnhide(item.player, item)
         quantity = quantity - 1
 
         if (quantity >= 1) then

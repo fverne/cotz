@@ -6,7 +6,42 @@ function ix.util.mapValueToRange(valToMap, origMinRange, origMaxRange, newMinRan
 end
 
 
+function ix.util.PlayerPerformMobileAction(client, actionText, duration, callback)
+	if client:GetNetVar("ix_hasBlackScreen") or client:GetNetVar("ix_hasMobileAction") then return false end
+
+	local character = client:GetCharacter()
+	local token = {}
+	client.cotzMobileAction = token
+	net.Start("ix_KillMenu")
+	net.Send(client)
+	client:SetNetVar("ix_hasMobileAction", true)
+	client:SetNetVar("ix_noMenuAllowed", true)
+	client:SetAction(actionText .. " (Press F to cancel)", duration)
+	timer.Create("cotz/mobile-action/" .. client:SteamID(), duration, 1, function()
+		if not IsValid(client) or client.cotzMobileAction ~= token then return end
+
+		client.cotzMobileAction = nil
+		client:SetNetVar("ix_hasMobileAction", nil)
+		client:SetNetVar("ix_noMenuAllowed", false)
+		if not client:Alive() or client:GetCharacter() ~= character then return end
+		if callback then callback(client) end
+	end)
+
+	return true
+end
+
+function ix.util.PlayerPerformItemAction(client, item, actionText, duration, callback)
+	local hotkeys = ix.plugin.Get("itemhotkeys")
+	if item and hotkeys and hotkeys:UsesMobileAction(item.uniqueID) then
+		return ix.util.PlayerPerformMobileAction(client, actionText, duration, callback)
+	end
+
+	return ix.util.PlayerPerformBlackScreenAction(client, actionText, duration, callback)
+end
+
 function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, callbackfunc)
+	-- World interactions can start stationary work without going through an item menu.
+	if player:GetNetVar("ix_hasMobileAction") then ix.util.PlayerActionInterrupt(player) end
 
 	net.Start("ix_KillMenu")
 	net.Send(player)
@@ -39,6 +74,13 @@ function ix.util.PlayerPerformBlackScreenAction(player, actiontext, actiondur, c
 end
 
 function ix.util.PlayerActionInterrupt(player)
+	if player:GetNetVar("ix_hasMobileAction") then
+		timer.Remove("cotz/mobile-action/" .. player:SteamID())
+		player.cotzMobileAction = nil
+		player:SetNetVar("ix_hasMobileAction", nil)
+		player:SetNetVar("ix_noMenuAllowed", false)
+		player:SetAction("Action Cancelled", 0.2)
+	end
     if (player:GetNetVar("ix_hasBlackScreen")) then
         player:SetAction("Action Cancelled", 0.2)
         player:Freeze(false)

@@ -9,7 +9,7 @@ ITEM.longdesc = "The crystalline structure is similar to quartz, and in general 
 	.. " alluring glow."
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 11400
+ITEM.price = 21375
 ITEM.flag = "A"
 ITEM.rarity = 5
 ITEM.baseweight = 6.500

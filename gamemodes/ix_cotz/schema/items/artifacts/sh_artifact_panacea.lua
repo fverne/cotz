@@ -4,7 +4,7 @@ ITEM.description = "A green bracelet, decorated with strange tree shapes."
 ITEM.longdesc = "When put on, it seems to send infections, viruses and parasites into a hibernation-like state, stopping their symptoms almost completely, as well as halting the progression of any illness. Contrary to the colloquial name 'Panacea', this artifact is in fact not a cure-all, since as soon as it is removed from the body the symptoms start right back up."
 ITEM.width = 1
 ITEM.height = 1
-ITEM.price = 13400
+ITEM.price = 25125
 ITEM.flag = "A"
 ITEM.rarity = 6
 ITEM.baseweight = 0.220
@@ -24,7 +24,7 @@ ITEM.functions.use = {
 
 		ix.chat.Send(item.player, "iteminternal", "Charges up a "..item.name.." and activates it.", false)
 
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Activating Panacea", 10, function(player) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Activating Panacea", 10, function(player)
 			player:AddBuff("buff_slowheal", item.restoreduration, { amount =  item.restore })
 		end)
 
@@ -48,7 +48,7 @@ ITEM.functions.usetarget = {
 		if (IsValid(target) and target:IsPlayer()) then
 			
 			ix.chat.Send(item.player, "iteminternal", "Charges up a "..item.name.." and uses it on "..target:Name()..".", false)
-			ix.util.PlayerPerformBlackScreenAction(item.player, "Activating Panacea on "..target:Name(), 10, function(player) 
+			ix.util.PlayerPerformItemAction(item.player, item, "Activating Panacea on "..target:Name(), 10, function(player)
 				target:AddBuff("buff_slowheal", item.restoreduration, { amount = item.restore })
 			end)
 			
@@ -60,7 +60,8 @@ ITEM.functions.usetarget = {
 					return false
 				end
 				ix.chat.Send(item.player, "iteminternal", "Charges up a "..item.name.." and uses it on "..target.player:Name()..".", false)
-				ix.util.PlayerPerformBlackScreenAction(item.player, "Activating Panacea on "..target.player:Name(), 10, function(player) 
+				ix.util.PlayerPerformItemAction(item.player, item,
+					"Activating Panacea on " .. target.player:Name(), 10, function(player)
 					if !(player:Alive()) then return end
 					if !(target.player) then return end
 					target.player:UnSpectate()

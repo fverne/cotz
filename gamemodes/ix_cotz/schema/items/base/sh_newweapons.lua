@@ -223,7 +223,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 	tip = "unequipTip",
 	icon = "icon16/stalker/unequip.png",
 	OnRun = function(item)
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Unequipping...", 4, function(ply) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Unequipping...", 4, function(ply)
 			item:Unequip(ply, true)
 		end)
 		return false
@@ -242,7 +242,7 @@ ITEM.functions.Equip = {
 	tip = "equipTip",
 	icon = "icon16/stalker/equip.png",
 	OnRun = function(item)
-		ix.util.PlayerPerformBlackScreenAction(item.player, "Equipping...", 4, function(ply) 
+		ix.util.PlayerPerformItemAction(item.player, item, "Equipping...", 4, function(ply)
 			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 			item:Equip(ply)
 		end)

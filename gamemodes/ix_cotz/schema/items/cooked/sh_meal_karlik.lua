@@ -4,7 +4,7 @@ ITEM.longdesc = "The thin broth does little to hide its unsettling aftertaste. C
 	.. " strange influence on the mind, which is hardly a recommendation at dinner."
 ITEM.model = "models/lostsignalproject/items/consumable/meat_flesh.mdl"
 
-ITEM.price = 708
+ITEM.price = 849.6
 ITEM.width = 1
 ITEM.height = 1
 

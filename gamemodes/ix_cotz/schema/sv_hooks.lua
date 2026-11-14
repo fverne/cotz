@@ -96,9 +96,9 @@ function Schema:Initialize()
 	game.ConsoleCommand("sv_allowcslua 0");
 end
 
--- Interrupts blackscreen
-function Schema:PlayerButtonDown(client,key)
-    if (client:GetNetVar("ix_hasBlackScreen") && key == KEY_F ) then
-       ix.util.PlayerActionInterrupt(client)
-    end
+-- Both timed action types use the same cancellation key.
+function Schema:PlayerButtonDown(client, key)
+	if key == KEY_F and (client:GetNetVar("ix_hasBlackScreen") or client:GetNetVar("ix_hasMobileAction")) then
+		ix.util.PlayerActionInterrupt(client)
+	end
 end

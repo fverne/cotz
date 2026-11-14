@@ -39,6 +39,11 @@ function ix.taskRewards.UnitValue(itemID)
 	if item.GetPrice then
 		local quote = setmetatable({GetData = function(_, key, default)
 			if key == "quantity" then return units end
+			if key == "weight" and item.category == "Cookable Meat" then return item.BaseWeight or default end
+			if key == "weight" and item.category == "Cooked Meat" then
+				local raw = ix.item.list[itemID:gsub("^meal_", "meat_")]
+				if raw and raw.meal == itemID then return raw.BaseWeight or default end
+			end
 
 			return default
 		end}, {__index = item})
@@ -198,13 +203,25 @@ function ix.taskRewards.SupplyCatalogue(character, npc)
 	return result
 end
 
+local function isWeightPricedHandIn(item)
+	return item.category == "Mutant Parts" or item.category == "Cookable Meat" or item.category == "Cooked Meat"
+end
+
 local function fixedMoney(job, count, deliveredValue, rate)
 	if job.requiredItem then
 		local amount = count or average(job.numberRec, 1)
 		local reference = ix.taskRewards.HandInUnitValue(job.requiredItem, nil, job.wholeItems) * amount
 		local minimum = ix.taskRewards.settings.jobHandInBaseMoney[math.Clamp(job.tier or 1, 1, 3)]
 
-		return math.max(minimum, math.ceil(math.max(reference, deliveredValue or 0) * rate - CASH_ROUNDING_EPSILON))
+		local value = math.max(reference, deliveredValue or 0) * rate
+		local item = ix.item.list[job.requiredItem]
+		if isWeightPricedHandIn(item) and reference > 0 then
+			-- Quality also scales the minimum payout for inexpensive specimens.
+			local quality = math.max(1, (deliveredValue or reference) / reference)
+			value = math.max(minimum, reference * rate) * quality
+		end
+
+		return math.max(minimum, math.ceil(value - CASH_ROUNDING_EPSILON))
 	end
 	local base = average(job.moneyReward, 0) + ix.taskRewards.JobBudget(job) * JOB_SUPPLY_CASH_SHARE
 
@@ -460,6 +477,14 @@ function ix.taskRewards.JobBudget(job)
 	return budget
 end
 
+function ix.taskRewards.HandInQualityMultiplier(item)
+	if item.category ~= "Mutant Parts" then return 1 end
+	local baseWeight = item.baseweight or 0
+	if baseWeight <= 0 then return 1 end
+
+	return math.max(0, item:GetData("weight", baseWeight)) / baseWeight
+end
+
 function ix.taskRewards.HandInUnitValue(itemID, instance, wholeItem)
 	local item = assert(ix.item.list[itemID], "Unknown task requirement: " .. tostring(itemID))
 	local quotedItem = instance or item
@@ -485,6 +510,8 @@ function ix.taskRewards.HandInUnitValue(itemID, instance, wholeItem)
 			consider({items = vendor.items, scale = vendor.scale, buyAll = vendor:GetBuyAll()})
 		end
 	end
+
+	if instance then value = value * ix.taskRewards.HandInQualityMultiplier(instance) end
 
 	return wholeItem and value * units or value
 end

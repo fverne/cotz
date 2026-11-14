@@ -21,6 +21,7 @@ function ix.util.GetValueFromProgressionTurnin(item, count, itemID)
 	}, {__index = item})
 	if item.GetPrice then fullValue = quote:GetPrice() end
 	local accepted = math.min(count or available, available)
+	fullValue = fullValue * ix.taskRewards.HandInQualityMultiplier(quote)
 	local unitPrice = fullValue / maximumQuantity
 	local fullReputation = TURN_IN_BASE_REPUTATION + (fullValue * TURN_IN_VALUE_FACTOR) ^ 0.25
 	local reputation = fullReputation * accepted / maximumQuantity * TURN_IN_REPUTATION_MULTIPLIER

@@ -237,6 +237,7 @@ function PANEL:addItem(uniqueID, listID, iteminstanceID)
 			and (allowed or self.entity:GetBuyAll()) and not IsValid(self.buyingList[iteminstanceID]) then
 			self.buyingList[iteminstanceID] = self:AddTradeRow(self.buyingItems,
 				{key = iteminstanceID, uniqueID = uniqueID, item = item, personal = true})
+			self.buyingList[iteminstanceID]:SetZPos(-iteminstanceID)
 		end
 	end
 end
