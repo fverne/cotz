@@ -97,7 +97,7 @@ StyleEntry = function(control) return control end, StyleCombo = function(control
 GetScale = function() return uiScale end, Query = function(text, title, cancel, onCancel, accept, onAccept)
 	confirmation = {text = text, cancel = onCancel, accept = onAccept}
 end}, jobs = {
-	list = {hunt = {icon = "vgui/icons/snorkdead.png"}, survey = {}},
+	list = {hunt = {icon = "entities/vj_mutant_snork.png"}, survey = {}},
 	getFormattedName = function(job) return "Task " .. job.identifier end,
 	getFormattedDesc = function(job) return "Description with reward " .. job.reward end,
 	GetMapName = function(map) return ({swamps = "Swamps", garbage = "Garbage"})[map] or map end,
@@ -131,7 +131,7 @@ check(menu.title.text == "TASKS · 2", "accepted jobs appear while the menu is o
 check(menu.journal.children[1].children[2].text == "Zulu", "field work sorts before ordinary tasks")
 local card = menu.journal.children[2]
 check(card.children[2].text == "Alpha", "ordinary tasks follow field work")
-check(card.children[7].image == "vgui/icons/snorkdead.png" and card.children[7].keepAspect,
+check(card.children[7].image == "entities/vj_mutant_snork.png" and card.children[7].keepAspect,
 	"cards restore their definition image and preserve its aspect ratio")
 check(menu.journal.children[1].children[7].image == "propic/event/area", "tasks without artwork use the area icon")
 check(card.children[3].text == "Description with reward bandages", "cards show descriptions and rewards")
@@ -298,7 +298,7 @@ for _, task in ipairs(menu.journal.children) do orderedNames[#orderedNames + 1] 
 check(table.concat(orderedNames, ",") == "Beta,Zulu,Alpha,Omega",
 	"saved and definition-only field tasks sort first, with contact ordering within each group")
 local regionalCard = menu.journal.children[3]
-check(regionalCard.children[7].image == "vgui/icons/snorkdead.png",
+check(regionalCard.children[7].image == "entities/vj_mutant_snork.png",
 	"regional Snork hunts reuse the legacy species photo instead of generic area artwork")
 regionalCard:PerformLayout()
 local icon = regionalCard.children[7]
