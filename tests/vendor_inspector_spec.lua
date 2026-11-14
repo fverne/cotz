@@ -84,6 +84,9 @@ AccessorFunc = function(target, field, name)
 end
 TOP, BOTTOM, LEFT, RIGHT, FILL, NODOCK = 1, 2, 3, 4, 5, 0
 FORCE_BOOL = true
+KEY_LSHIFT, KEY_RSHIFT, KEY_LCONTROL, KEY_RCONTROL, KEY_LALT, KEY_RALT = 79, 80, 83, 84, 81, 82
+local heldKey, quickModifier
+input = {IsKeyDown = function(key) return key == heldKey end}
 Color = function(...) return {...} end
 CurTime = function() return now end
 ScrW, ScrH = function() return screenWidth end, function() return screenHeight end
@@ -110,7 +113,10 @@ local player = {GetCharacter = function() return currentCharacter end,
 	GetPos = function() return {DistToSqr = function() return 0 end} end}
 LocalPlayer = function() return player end
 ix = {gui = {}, item = {list = {}, instances = {}}, type = {number = 1},
-	option = {Add = function() end, Get = function(_, default) return default end},
+	option = {Add = function() end, Get = function(key, default)
+		if key == "vendorQuickTrade" then return quickModifier or default end
+		return default
+	end},
 	currency = {Get = function(amount) return tostring(amount) .. " RU" end},
 	util = {GetItemIcon = function(item) return "icon:" .. item.uniqueID end},
 	hud = {PopulateItemTooltip = function() end},
@@ -162,6 +168,42 @@ now = now + 1
 town:TradeSelected(true)
 check(sent[#sent][2] == 101 and sent[#sent][3] == true and IsValid(town.buyingList[101]),
 	"Sales send the precise instance and await synchronization")
+town:SetTab("selling")
+before = #sent
+row:DoRightClick()
+check(#sent == before, "Plain right click does not trade")
+heldKey = KEY_LSHIFT
+now = now + 1
+row:DoRightClick()
+check(#sent == before + 1 and sent[#sent][1] == "rifle" and sent[#sent][3] == false,
+	"Shift right click purchases the clicked catalogue row")
+row:DoRightClick()
+check(#sent == before + 1, "Quick purchases retain the request cooldown")
+now = now + 1
+entity.items.rifle[VENDOR_STOCK] = 0
+row:DoRightClick()
+check(#sent == before + 1, "Quick purchases respect depleted stock")
+entity.items.rifle[VENDOR_STOCK] = 2
+town:SetReadOnly(true)
+row:DoRightClick()
+check(#sent == before + 1, "Read-only previews block quick trading")
+town:SetReadOnly(false)
+quickModifier = "Disabled"
+row:DoRightClick()
+check(#sent == before + 1, "The shortcut can be disabled")
+quickModifier = "Ctrl"
+row:DoRightClick()
+check(#sent == before + 1, "A changed modifier rejects the default Shift key")
+heldKey = KEY_RCONTROL
+row:DoRightClick()
+check(#sent == before + 2, "The configured modifier accepts the right-hand key")
+quickModifier, heldKey = nil, KEY_RSHIFT
+town:SetTab("buying")
+now = now + 1
+town.buyingList[101]:DoRightClick()
+check(sent[#sent][2] == 101 and sent[#sent][3] == true,
+	"Quick sales use the clicked personal instance with either Shift key")
+heldKey = nil
 town.activeSell = nil
 town:SetTab("selling")
 check(town.selected == nil, "Empty stock selection never falls through to the personal selection")
@@ -234,6 +276,18 @@ now = now + 1
 confirmation()
 check(sent[#sent][3] == 1 and sent[#sent][4] == 201 and sent[#sent][5] == 1500 and sent[#sent][6] == 4,
 	"Purchase confirmation retains instance, quoted price and revision")
+before, confirmation = #sent, nil
+heldKey = KEY_LSHIFT
+now = now + 1
+sherpa.sellingList[202]:DoRightClick()
+check(#sent == before, "Quick trading cannot purchase unlisted squad stock")
+sherpa.sellingList[201]:DoRightClick()
+check(#sent == before + 1 and not confirmation and sent[#sent][3] == 1
+	and sent[#sent][4] == 201 and sent[#sent][5] == 1500 and sent[#sent][6] == 4,
+	"Squad quick purchases bypass confirmation and retain instance, price and revision")
+sherpa.sellingList[201]:DoRightClick()
+check(#sent == before + 1, "Squad quick purchases retain the request cooldown")
+heldKey = nil
 sherpa:SetupStock(entity, 8, "squad", "Squad", 1, 900, 5, 1, 2, {
 	{id = 201, uniqueID = "rifle", name = "Named rifle", description = "condition: 43", price = 1600, revision = 5}})
 check(sherpa.selected == sherpa.sellingList[201] and sherpa.detailPrice.text:find("1600", 1, true),
@@ -251,6 +305,14 @@ inventory[102] = item(102, "medkit", "My medkit", {})
 ix.item.instances[102] = inventory[102]
 sherpa:SyncPersonalItems()
 sherpa:SetTab("buying")
+sherpa.buyingList[101]:DoClick()
+before, confirmation = #sent, nil
+heldKey = KEY_LSHIFT
+now = now + 1
+sherpa.buyingList[102]:DoRightClick()
+check(#sent == before + 1 and not confirmation and sent[#sent][3] == 2 and sent[#sent][4] == 102,
+	"Quick donations bypass confirmation and use the clicked instance rather than the old selection")
+heldKey = nil
 sherpa.buyingList[101]:DoClick()
 sherpa:TradeSelected(true)
 sherpa.buyingList[102]:DoClick()

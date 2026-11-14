@@ -1,5 +1,20 @@
 local PANEL = {}
 
+ix.option.Add("vendorQuickTrade", ix.type.array, "Shift", {
+	category = "_hotkeys",
+	phrase = "Quick trade modifier",
+	description = "Hold this key and right click an item to buy, sell or donate it immediately in trader menus.",
+	populate = function()
+		return {Shift = "Shift", Ctrl = "Ctrl", Alt = "Alt", Disabled = "Disabled"}
+	end,
+})
+
+local QUICK_TRADE_KEYS = {
+	Shift = {KEY_LSHIFT, KEY_RSHIFT},
+	Ctrl = {KEY_LCONTROL, KEY_RCONTROL},
+	Alt = {KEY_LALT, KEY_RALT},
+}
+
 AccessorFunc(PANEL, "bReadOnly", "ReadOnly", FORCE_BOOL)
 
 local function paintItemIcon(control, width, height)
@@ -88,6 +103,7 @@ function PANEL:Init()
 	self.footer:SetPaintBackground(false)
 	self.summary = ix.cotzUI.Label(self.footer, "")
 	self.summary:SetTextColor(ix.cotzUI.colors.text)
+	self.quickTradeHint = ix.cotzUI.Label(self.footer, "")
 	self.footer.PerformLayout = function(control)
 		control:SizeToChildren(false, true)
 	end
@@ -274,6 +290,8 @@ function PANEL:OnItemSelected(row)
 end
 
 function PANEL:RefreshInspector()
+	local modifier = ix.option.Get("vendorQuickTrade", "Shift")
+	self.quickTradeHint:SetText(QUICK_TRADE_KEYS[modifier] and "Quick trade: " .. modifier .. " + right click" or "")
 	local row = self.selected
 	if not IsValid(row) then
 		self.selected = nil
@@ -302,6 +320,15 @@ function PANEL:RefreshInspector()
 	self.vendorBuy:SetEnabled(ready and personal)
 	self.empty:SetVisible(not next(personal and self.buyingList or self.sellingList))
 	self.inspectorActions:InvalidateLayout(true)
+end
+
+function PANEL:QuickTrade(row)
+	if self:GetReadOnly() or not IsValid(row) or row.owner ~= self then return end
+	if (row.isLocal and self.tab ~= "buying") or (not row.isLocal and self.tab ~= "selling") then return end
+	self:OnItemSelected(row)
+	local action = row.isLocal and self.vendorBuy or self.vendorSell
+	if not action:IsVisible() or not action:IsEnabled() then return end
+	self:TradeSelected(row.isLocal, true)
 end
 
 function PANEL:TradeSelected(personal)
@@ -442,6 +469,12 @@ end
 
 function PANEL:SetCallback(callback)
 	self.DoClick = function() callback() end
+end
+
+function PANEL:DoRightClick()
+	local keys = QUICK_TRADE_KEYS[ix.option.Get("vendorQuickTrade", "Shift")]
+	if not keys or not (input.IsKeyDown(keys[1]) or input.IsKeyDown(keys[2])) then return end
+	self.owner:QuickTrade(self)
 end
 
 function PANEL:Paint(width, height)

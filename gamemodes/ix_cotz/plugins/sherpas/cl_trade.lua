@@ -25,17 +25,19 @@ function PANEL:AddStockRow(parent, itemID, uniqueID, name, description, price, r
 	return row
 end
 
-function PANEL:TradeSelected(personal)
+function PANEL:TradeSelected(personal, quick)
 	local row = self.selected
-	if not IsValid(row) or row.isLocal ~= personal then return end
+	if not IsValid(row) or row.isLocal ~= personal or self:GetReadOnly() then return end
 	local data = row.data
 	local itemID, price, revision = data.key, data.price, data.revision
 	if personal then
 		if self.rank < 0 then return end
+		if quick then self:SendAction(2, itemID) return end
 		ix.cotzUI.Query("This item becomes vendor stock. No payment is made.", "Donate item", "Donate", function()
 			if IsValid(self) then self:SendAction(2, itemID) end
 		end, "Cancel")
 	elseif price > 0 then
+		if quick then self:SendAction(1, itemID, price, revision) return end
 		ix.cotzUI.Query(data.description .. "\n\nTotal: " .. ix.currency.Get(price), "Purchase item",
 			"Purchase", function()
 				if IsValid(self) then self:SendAction(1, itemID, price, revision) end

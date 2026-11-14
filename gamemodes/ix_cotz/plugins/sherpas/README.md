@@ -42,6 +42,11 @@ Descriptions use the server's instance details for stock; local inventory items 
 The window resizes in place for resolution and COTZ font-scale changes. Trading waits for server stock
 and inventory updates; rejected requests leave the displayed items intact.
 
+**Shift + right click** an item row to purchase or donate it immediately without confirmation.
+Normal action buttons retain their confirmations. Change or disable the modifier under
+**Settings → Hotkeys → Quick trade modifier**. Quick trades retain stock permissions, quoted
+prices/revisions and the existing request cooldown; unlisted stock cannot be purchased this way.
+
 ## Squad integration
 
 `ix_hideout_vendor` inherits `ix_sherpa_vendor`, which inherits `ix_vendor_adv`. Squad membership/rank,

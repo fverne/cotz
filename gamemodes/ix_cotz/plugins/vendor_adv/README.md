@@ -11,6 +11,12 @@ including wide and tall items in the shared Sherpa/squad vendor window.
 Personal stock limits, fractional restock credit, progression gates and existing prices still apply.
 NPCs have no earnings account in this interface. Personal bank access stays in dialogue.
 
+Hold **Shift** and **right click** an item row to buy or sell that item immediately.
+**Settings → Hotkeys → Quick trade modifier** offers Shift (default), Ctrl, Alt or Disabled;
+either left or right modifier key works. The footer shows the active shortcut. Quick trades use
+the existing request cooldown and server validation; depleted stock and editor previews cannot trade.
+The same shortcut buys or donates instances in the shared Sherpa/squad window, skipping its confirmation.
+
 Trades wait for stock broadcasts and inventory synchronization before changing rows; rejected requests
 do not remove the selection. The vendor editor retains its read-only preview and existing update methods.
 The window uses COTZ fonts/scaling and reflows its panes on narrow screens. Run
