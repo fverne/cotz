@@ -5,6 +5,13 @@ local STORAGE_COOLDOWN = 1
 local AUDIT_INTERVAL = 1
 local MAX_HIDEOUT_ID_LENGTH = 20
 
+function PLUGIN:IsInsideHideout(client, instance)
+	if not IsValid(client) or not instance then return false end
+
+	return self.members[client] == instance.id or client:IsAdmin()
+		and self:Contains(client:GetPos(), instance.mins, instance.maxs)
+end
+
 function PLUGIN:PostLoadData()
 	self:SpawnEntrances()
 end
@@ -62,7 +69,7 @@ function PLUGIN:OpenLegacyStorage(client, id)
 	local instance = self.instances[id]
 	if
 		not instance
-		or self.members[client] ~= id
+		or not self:IsInsideHideout(client, instance)
 		or instance.state ~= "active"
 		or instance.saving
 		or not instance.inventory
@@ -203,7 +210,7 @@ function PLUGIN:CanTransferHideoutItem(item, current, target, client)
 	if (id or storageID) and (not instance or instance.state ~= "active" or instance.saving) then
 		return false
 	end
-	if id and (not IsValid(client) or self.members[client] ~= instance.id) then
+	if id and (not IsValid(client) or not self:IsInsideHideout(client, instance)) then
 		return false
 	end
 	if storageID and instance then
@@ -211,7 +218,7 @@ function PLUGIN:CanTransferHideoutItem(item, current, target, client)
 		-- operations after exit and operations outside the storage radius.
 		if
 			not IsValid(client)
-			or self.members[client] ~= instance.id
+			or not self:IsInsideHideout(client, instance)
 			or not IsValid(instance.storage)
 			or client:GetPos():DistToSqr(instance.storage:GetPos()) > STORAGE_DISTANCE_SQUARED
 		then
@@ -254,7 +261,7 @@ function PLUGIN:CanPlayerInteractItem(client, action, value)
 	local location = self:GetItemLocation(item)
 	if location and item.invID == 0 then
 		local instance = self.instances[tostring(location.id)]
-		if not instance or instance.state ~= "active" or instance.saving or membership ~= instance.id then
+		if not instance or instance.state ~= "active" or instance.saving or not self:IsInsideHideout(client, instance) then
 			return false
 		end
 	end
@@ -412,7 +419,7 @@ function PLUGIN:PhysgunPickup(client, entity)
 			not instance
 			or instance.state ~= "active"
 			or instance.saving
-			or self.members[client] ~= instance.id
+			or not self:IsInsideHideout(client, instance)
 		then
 			return false
 		end

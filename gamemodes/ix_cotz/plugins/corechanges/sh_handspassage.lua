@@ -1,4 +1,5 @@
 local PASSAGE_KEY = "cotz/hands/player-passage"
+local PHYSGUN_KEY = "cotz/hands/physgun-active"
 local RESTORE_INTERVAL = 0.25
 local playerMeta = FindMetaTable("Player")
 
@@ -8,7 +9,9 @@ end
 
 function PLUGIN:ShouldCollide(ent1, ent2)
 	if ent1.IsSTALKERNPC and ent2.IsSTALKERNPC then return false end
-	if ent1:IsPlayer() and ent2:IsPlayer() and (ent1.cotzHandsPassage or ent2.cotzHandsPassage) then
+	if ent1:IsPlayer() and ent2:IsPlayer()
+		and not ent1.cotzHandsPhysgun and not ent2.cotzHandsPhysgun
+		and (ent1.cotzHandsPassage or ent2.cotzHandsPassage) then
 		return false
 	end
 end
@@ -23,11 +26,22 @@ local function updateCollision(client, enabled)
 	client:CollisionRulesChanged()
 end
 
+local function updatePhysgun(client, enabled)
+	if not IsValid(client) then return end
+
+	client.cotzHandsPhysgun = enabled == true
+	client:CollisionRulesChanged()
+end
+
 if CLIENT then
 	local function initializePassage(client)
 		client:SetNWVarProxy(PASSAGE_KEY, function(entity, _, _, enabled)
 			updateCollision(entity, enabled)
 		end)
+		client:SetNWVarProxy(PHYSGUN_KEY, function(entity, _, _, enabled)
+			updatePhysgun(entity, enabled)
+		end)
+		client.cotzHandsPhysgun = client:GetNWBool(PHYSGUN_KEY, false)
 		updateCollision(client, client:GetHandsPassage())
 	end
 
@@ -41,6 +55,49 @@ if CLIENT then
 end
 
 if SERVER then
+	local pendingPhysgunRefresh = {}
+
+	local function refreshPhysgun(client)
+		local weapon = client:GetActiveWeapon()
+		local enabled = client:Alive() and IsValid(weapon) and weapon:GetClass() == "weapon_physgun"
+		if client.cotzHandsPhysgun == enabled then return end
+
+		updatePhysgun(client, enabled)
+		client:SetNWBool(PHYSGUN_KEY, enabled)
+	end
+
+	local function queuePhysgunRefresh(client)
+		if pendingPhysgunRefresh[client] then return end
+
+		pendingPhysgunRefresh[client] = true
+		-- Switches can be denied; pickups/drops have not finished updating the active weapon in their hooks.
+		timer.Simple(0, function()
+			pendingPhysgunRefresh[client] = nil
+			if IsValid(client) then refreshPhysgun(client) end
+		end)
+	end
+
+	function PLUGIN:PlayerSwitchWeapon(client, oldWeapon, newWeapon)
+		queuePhysgunRefresh(client)
+	end
+
+	function PLUGIN:WeaponEquip(weapon, client)
+		queuePhysgunRefresh(client)
+	end
+
+	function PLUGIN:PlayerDroppedWeapon(client, weapon)
+		if client:IsPlayer() then queuePhysgunRefresh(client) end
+	end
+
+	function PLUGIN:PlayerDeath(client)
+		queuePhysgunRefresh(client)
+	end
+
+	-- Initialize players already present during a Lua reload without permanent polling.
+	for _, client in player.Iterator() do
+		queuePhysgunRefresh(client)
+	end
+
 	local function getHull(client)
 		if client:Crouching() then return client:GetHullDuck() end
 
@@ -94,6 +151,7 @@ if SERVER then
 	end
 
 	function PLUGIN:PostPlayerLoadout(client)
+		queuePhysgunRefresh(client)
 		local character = client:GetCharacter()
 		local key = "cotz/hands/restore-collision/" .. client:EntIndex()
 		timer.Remove(key)

@@ -45,6 +45,9 @@ function methods:IsVisible() return self.visible end
 function methods:SetEnabled(value) self.enabled = value end
 function methods:IsEnabled() return self.enabled end
 function methods:SetMaterial(value) self.material = value end
+function methods:GetMaterial() return self.material end
+function methods:LoadMaterial() end
+function methods:PaintAt(x, y, width, height) self.drawn = {x, y, width, height} end
 function methods:SetFont(value) self.font = value end
 function methods:SetTextColor(value) self.color = value end
 function methods:SetHelixTooltip(value) self.tooltip = value end
@@ -202,6 +205,25 @@ check(sherpa.ClassName == "ixSherpaTrade" and sherpa.personalTab.visible, "Squad
 sherpa.sellingList[201]:DoClick()
 check(sherpa.detailName.text == "Named rifle" and sherpa.detailDescription.text == "condition: 43",
 	"Stock inspector displays server instance details without manufactured defaults")
+for _, image in ipairs({row.icon, town.preview, sherpa.sellingList[201].icon, sherpa.preview}) do
+	for _, texture in ipairs({{64, 64}, {512, 128}, {128, 512}, {64, 256}, {256, 64}}) do
+		image.ActualWidth, image.ActualHeight = texture[1], texture[2]
+		for _, bounds in ipairs({{44, 44}, {400, 100}, {80, 150}}) do
+			image.drawn = nil
+			image:Paint(bounds[1], bounds[2])
+			local drawn = image.drawn
+			check(drawn and drawn[1] >= 0 and drawn[2] >= 0
+				and drawn[1] + drawn[3] <= bounds[1] + 0.001
+				and drawn[2] + drawn[4] <= bounds[2] + 0.001,
+				"Town and squad list/inspector icons stay inside both preview bounds")
+			check(math.abs(drawn[3] / drawn[4] - texture[1] / texture[2]) < 0.001,
+				"Wide, tall and square icons retain their aspect ratio")
+			check(math.abs(drawn[1] * 2 + drawn[3] - bounds[1]) < 0.001
+				and math.abs(drawn[2] * 2 + drawn[4] - bounds[2]) < 0.001,
+				"Fitted icons remain centered in both previews")
+		end
+	end
+end
 check(sherpa.priceAction.visible and sherpa.recoverAction.enabled, "Officers have visible pricing and recovery")
 sherpa.sellingList[202]:DoClick()
 check(not sherpa.vendorSell.enabled and sherpa.recoverAction.enabled and not sherpa.unlistAction.enabled,

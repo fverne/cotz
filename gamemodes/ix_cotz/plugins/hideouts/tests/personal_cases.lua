@@ -16,8 +16,10 @@ local function personalHome()
 	end
 	assert(PLUGIN:PreparePersonalStorage(instance))
 	local target = NewEntity(nil, owner:GetPos())
-	target.GetClass = function() return "ix_vendor_adv" end
-	target.GetDisplayName = function() return "'Ballast'" end
+	target.GetClass = function() return "ix_hideout_entrance" end
+	target.ixEntranceID = "gate"
+	PLUGIN.entranceEntities = {gate = target}
+	PLUGIN.state.entrances.gate.pos = owner:GetPos()
 
 	return owner, inventory, instance, record, target
 end
@@ -45,7 +47,7 @@ Test("locations claim one free room each while admin grants allow several at one
 	assert(table.Count(PLUGIN.state.hideouts) == 2)
 	assert(owner:GetCharacter():GetMoney() == 100000)
 	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "missing"))
-	target.GetDisplayName = function() return "'Ledger'" end
+	target.ixEntranceID = "missing"
 	assert(not PLUGIN:ClaimPersonalLocation(owner, target, "village"))
 	assert(TEST_COMMANDS.HideoutLocationAdd.adminOnly and TEST_COMMANDS.HideoutGrant.adminOnly)
 end)
@@ -147,6 +149,10 @@ Test("container upgrades preserve inventory, sharing, contents and change model 
 	complete(owner, 3)
 	record.containers.general.public = true
 	local quote = PLUGIN:BuildPersonalOffer(owner, record, "container", "general")
+	target = instance.containers.general or NewEntity(nil, instance.origin)
+	target.GetClass = function() return "ix_hideout_storage" end
+	target.ixHideout, target.ixHideoutSlot = record.id, "general"
+	instance.containers.general = target
 	assert(PLUGIN:PurchasePersonalOffer(owner, target, quote))
 	local slot = record.containers.general
 	local id = slot.inventoryID
@@ -161,8 +167,8 @@ Test("container upgrades preserve inventory, sharing, contents and change model 
 	PLUGIN.instances, PLUGIN.members = {}, {}
 	local offline = PLUGIN:BuildPersonalOffer(owner, record, "container", "ammo")
 	local input = FeatureItem(inventory, {}, offline.item)
-	assert(PLUGIN:PurchasePersonalOffer(owner, target, offline))
-	assert(not ix.item.instances[input:GetID()] and record.containers.ammo.tier == 1)
+	assert(not PLUGIN:PurchasePersonalOffer(owner, target, offline))
+	assert(ix.item.instances[input:GetID()] and record.containers.ammo.tier == 0)
 end)
 
 Test("failed transactions retain cash, required items and entitlements", function()
@@ -272,7 +278,7 @@ end)
 Test("barter sessions reject stale confirmations, character switches, expiry and remote requests", function()
 	local owner, inventory, instance, record, target = personalHome()
 	complete(owner, 2)
-	PLUGIN:OpenPersonalBarter(owner, target)
+	PLUGIN:OpenPersonalBarter(owner, target, 1, false, record.id)
 	local session = owner.cotzPersonalBarter
 	assert(session and #session.offers > 0)
 	assert(not PLUGIN:HandlePersonalPurchase(owner, 1, session.revision + 1))
@@ -281,7 +287,7 @@ Test("barter sessions reject stale confirmations, character switches, expiry and
 	session.expires = -1
 	assert(not PLUGIN:HandlePersonalPurchase(owner, 1, session.revision))
 	owner.cotzPersonalBuyAt, owner.cotzPersonalOpenAt = 0, 0
-	PLUGIN:OpenPersonalBarter(owner, target)
+	PLUGIN:OpenPersonalBarter(owner, target, 1, false, record.id)
 	session = owner.cotzPersonalBarter
 	local guest = FeatureClient(2)
 	owner.character = guest:GetCharacter()
@@ -289,21 +295,6 @@ Test("barter sessions reject stale confirmations, character switches, expiry and
 	assert(record.floorLevel == nil)
 end)
 
-Test("all twelve levels grow monotonically while general crates remain far smaller", function()
-	for name, recipe in pairs(PLUGIN.personalContainerRecipes) do
-		assert(#recipe.tiers == 12)
-		for level, tier in ipairs(recipe.tiers) do
-			local previous = recipe.tiers[level - 1]
-			if previous then
-				assert(tier.width >= previous.width and tier.height >= previous.height)
-				assert(tier.width * tier.height > previous.width * previous.height)
-				assert(tier.price / (tier.width * tier.height) > previous.price / (previous.width * previous.height))
-			end
-			local general = PLUGIN.personalContainerRecipes.general.tiers[level]
-			if name ~= "general" then assert(tier.width * tier.height >= 2.5 * general.width * general.height) end
-		end
-	end
-end)
 
 Test("scripted overflow keeps original rows, waits for room and restores safely after unloading", function()
 	local owner, inventory, instance, record = personalHome()
@@ -370,43 +361,34 @@ Test("each map requires local initial claim access and retains saved improvement
 	game.GetMap = currentMap
 end)
 
-Test("all three contact conversations expose hideout purchases through barter", function()
+Test("town contacts no longer expose hideout purchases", function()
 	local previousDialogue = ix.dialogue
 	ix.dialogue = {}
 	dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_townservices.lua")
 	for _, id in ipairs({"ballast", "cleaner", "ledger"}) do
 		local dialogue = {tree = {GREETING = {options = {}}, BackTopic = {options = {}}}}
 		dialogue.addTopic = function(name, topic) dialogue.tree[name] = topic end
-		local preserved = function() return "existing barter" end
-		if id == "cleaner" then
-			dialogue.tree.StartBarter = {options = {"BackTopic"}, GetDynamicOptions = preserved}
-		end
 		ix.dialogue.ConfigureTownServices(dialogue, {id = id})
-		assert(table.HasValue(dialogue.tree.GREETING.options, "StartBarter"))
-		assert(table.HasValue(dialogue.tree.BackTopic.options, "StartBarter"))
-		assert(table.HasValue(dialogue.tree.StartBarter.options, "HideoutBarter"))
-		assert(dialogue.tree.HideoutBarter.postCallback)
-		if id == "cleaner" then assert(dialogue.tree.StartBarter.GetDynamicOptions == preserved) end
+		assert(not dialogue.tree.HideoutBarter)
 	end
 	ix.dialogue = previousDialogue
 end)
 
-Test("large personal estates paginate with bounded messages and preserve access to later rooms", function()
+Test("door offers are limited to its selected room and initial container installations", function()
 	local owner, inventory, instance, record, target = personalHome()
-	for index = 2, 20 do
-		local other = table.Copy(record)
-		other.id, other.name = tostring(index), "Room " .. index
-		PLUGIN.state.hideouts[other.id] = other
-	end
-	PLUGIN:OpenPersonalBarter(owner, target, 1)
+	local other = table.Copy(record)
+	other.id = "other"
+	PLUGIN.state.hideouts.other = other
+	PLUGIN:OpenPersonalBarter(owner, target, 1, false, record.id)
 	local session = owner.cotzPersonalBarter
-	assert(#session.offers == 61 and session.offers[61].feature == "page")
-	assert(session.offers[61].page == 2)
-	owner.cotzPersonalOpenAt = 0
-	assert(PLUGIN:HandlePersonalPurchase(owner, 61, session.revision))
-	session = owner.cotzPersonalBarter
-	assert(#session.offers <= 62 and owner.cotzPersonalPage == 2)
-	assert(session.offers[#session.offers].feature == "page")
+	assert(session and #session.offers > 0)
+	for _, offer in ipairs(session.offers) do
+		assert(offer.record == record.id)
+		if offer.feature == "container" then assert(offer.level == 1 and offer.slot ~= "general") end
+	end
+	local quote = PLUGIN:BuildPersonalOffer(owner, record, "container", "general")
+	complete(owner, 2)
+	assert(not PLUGIN:PurchasePersonalOffer(owner, target, quote))
 end)
 
 Test("failed inventory assignment releases purchase locks without charging or allocating again", function()
@@ -446,4 +428,95 @@ Test("unloading a stale overflow reference cannot discard a subsequently owned i
 	instance.queuedItems = {[item:GetID()] = true}
 	PLUGIN:DetachFloorItems(instance)
 	assert(ix.item.instances[item:GetID()] == item and item.invID == inventory:GetID())
+end)
+
+Test("fridge installation filters consumables and preserves its inventory through container upgrades", function()
+	local owner, inventory, instance, record, door = personalHome()
+	PLUGIN.state.templates.room.containers.fridge = {recipe = "fridge", pos = Vector(0, -64, 0)}
+	instance.template = nil
+	assert(PLUGIN:PreparePersonalStorage(instance))
+	complete(owner, 2)
+	local quote = PLUGIN:BuildPersonalOffer(owner, record, "container", "fridge")
+	FeatureItem(inventory, {}, quote.item)
+	assert(PLUGIN:PurchasePersonalOffer(owner, door, quote))
+	local slot = record.containers.fridge
+	local storage = ix.inventory.Get(slot.inventoryID)
+	local food = FeatureItem(storage)
+	food.base = "base_consumables"
+	assert(PLUGIN:ContainerAccepts(record, "fridge", food))
+	assert(not PLUGIN:ContainerAccepts(record, "fridge", FeatureItem(inventory)))
+	food.isBag = true
+	assert(not PLUGIN:ContainerAccepts(record, "fridge", food))
+	food.isBag = nil
+	local entity = instance.containers.fridge
+	local inventoryID = slot.inventoryID
+	quote = PLUGIN:BuildPersonalOffer(owner, record, "container", "fridge")
+	assert(not PLUGIN:PurchasePersonalOffer(owner, door, quote))
+	assert(PLUGIN:PurchasePersonalOffer(owner, entity, quote))
+	assert(slot.tier == 2 and slot.inventoryID == inventoryID and food.invID == inventoryID)
+	assert(entity.model == "models/props_c17/FurnitureFridge001a.mdl")
+end)
+
+Test("cassette purchases restore one persistent player and replay receipts without charging again", function()
+	local owner, inventory, instance, record, door = personalHome()
+	complete(owner, 1)
+	local quote = PLUGIN:BuildPersonalOffer(owner, record, "cassette")
+	local balance = owner:GetCharacter():GetMoney()
+	assert(PLUGIN:PurchasePersonalOffer(owner, door, quote))
+	local entity = instance.cassette
+	assert(IsValid(entity) and record.cassetteLevel == 1)
+	assert(owner:GetCharacter():GetMoney() == balance - quote.price)
+	assert(not PLUGIN:BuildPersonalOffer(owner, record, "cassette"))
+	PLUGIN:RefreshPersonalCassette(record)
+	assert(instance.cassette == entity)
+	entity:SetPos(instance.origin + Vector(30, 40, 20))
+	entity:SetAngles(Angle(0, 90, 0))
+	PLUGIN:AuditContainers(instance)
+	assert(record.cassetteTransform.pos.x == 30 and record.cassetteTransform.angles.y == 90)
+	entity:Remove()
+	PLUGIN:RefreshPersonalCassette(record)
+	assert(IsValid(instance.cassette) and instance.cassette ~= entity)
+	assert(instance.cassette:GetPos().x == instance.origin.x + 30)
+	record.cassetteLevel = nil
+	PLUGIN:RecoverUpgradeEntitlements(function(ok) assert(ok) end)
+	assert(record.cassetteLevel == 1 and owner:GetCharacter():GetMoney() == balance - quote.price)
+end)
+
+Test("management purchase submenus bind the selected room and container and reject stale locations", function()
+	local owner, inventory, instance, record, door = personalHome()
+	complete(owner, 2)
+	PLUGIN:ShowManagement(owner, record.id, "entrance")
+	PLUGIN:OpenPersonalManagementBarter(owner, record.id, "")
+	assert(owner.cotzPersonalBarter.target == door and owner.cotzPersonalBarter.record == record.id)
+	owner.cotzPersonalOpenAt = 0
+	instance.state = "loading"
+	PLUGIN:RestoreStorage(instance, function(ok) assert(ok) end)
+	instance.state = "active"
+	local entity = instance.containers.general
+	PLUGIN:ShowContainerMenu(owner, entity)
+	PLUGIN:OpenPersonalManagementBarter(owner, record.id, "")
+	local session = owner.cotzPersonalBarter
+	assert(session.target == entity and #session.offers == 1)
+	assert(session.offers[1].slot == "general" and session.offers[1].level == 2)
+	owner.position = Vector(10000, 0, 0)
+	assert(not PLUGIN:HandlePersonalPurchase(owner, 1, session.revision))
+	assert(record.containers.general.tier == 1)
+end)
+
+Test("all twelve levels grow monotonically while general crates remain far smaller", function()
+	for name, recipe in pairs(PLUGIN.personalContainerRecipes) do
+		assert(#recipe.tiers == 12)
+		for level, tier in ipairs(recipe.tiers) do
+			local previous = recipe.tiers[level - 1]
+			if previous then
+				assert(tier.width >= previous.width and tier.height >= previous.height)
+				assert(tier.width * tier.height > previous.width * previous.height)
+				assert(tier.price / (tier.width * tier.height) > previous.price / (previous.width * previous.height))
+			end
+			local general = PLUGIN.personalContainerRecipes.general.tiers[level]
+			if name ~= "general" then
+				assert(tier.width * tier.height >= 2.5 * general.width * general.height, name .. " level " .. level)
+			end
+		end
+	end
 end)

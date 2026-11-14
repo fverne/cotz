@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 local NEWS_COLOR = Color(0, 191, 255)
-local TEXT_COLOR = Color(0, 241, 255)
+local TEXT_COLOR = Color(224, 182, 104)
 local NEWS_ICON = Material("vgui/icons/news.png")
 
 function PLUGIN:InitializedChatClasses()

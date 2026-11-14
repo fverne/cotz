@@ -85,10 +85,11 @@ local function paintCard(card, width, height)
 		conditionColor = COLORS.teal
 	end
 	drawSegments(padding, barY, width - padding * 2, barHeight,
-		math.Clamp((filter and wear or condition) / 100, 0, 1), filter and COLORS.teal or conditionColor)
+		math.Clamp(condition / 100, 0, 1), conditionColor)
 	if wear ~= nil then
 		barY = barY - barHeight - math.max(2, math.floor(card.scale * 3))
-		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp((filter and condition or wear) / 100, 0, 1))
+		drawSegments(padding, barY, width - padding * 2, barHeight, math.Clamp(wear / 100, 0, 1),
+			filter and COLORS.teal or nil)
 	end
 end
 

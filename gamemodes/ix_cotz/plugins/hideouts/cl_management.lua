@@ -59,6 +59,9 @@ net.Receive("cotz/hideouts/manage", function()
 			end)
 		end
 		if manage then
+			if not squad and (scope == "entrance" or scope == "exit") then
+				button(scroll, "Hideout improvements", function() PLUGIN:RequestPersonalBarter(id) end)
+			end
 			if nextPropLimit > 0 then
 				button(scroll, "Upgrade prop capacity to " .. nextPropLimit .. " (" .. ix.currency.Get(propPrice) .. ")", function()
 					ix.cotzUI.Query("Increase this hideout's prop capacity to " .. nextPropLimit .. " for " .. ix.currency.Get(propPrice) .. "?",
@@ -135,14 +138,16 @@ net.Receive("cotz/hideouts/container", function()
 	else
 		ix.cotzUI.Label(scroll, "Container not installed")
 	end
-	if hasUpgrade then
+	if not squad then
+		button(scroll, "Upgrade this container", function() PLUGIN:RequestPersonalBarter(id) end)
+	elseif hasUpgrade then
 		local label = tier == 0 and "Install" or "Upgrade"
 		button(scroll, label .. " with " .. required .. " (" .. nextWidth .. " × " .. nextHeight .. ")", function()
 			ix.cotzUI.Query("Hand in " .. required .. " for " .. nextWidth .. " × " .. nextHeight .. " storage?",
 				label .. " container", "Hand in", function() sendManagement(panel, id, 4, slot, tier) end, "Cancel")
 		end)
 	else
-		ix.cotzUI.Label(scroll, squad and "Fully upgraded" or "Upgrades are available at the local hideout trader's barter menu.")
+		ix.cotzUI.Label(scroll, "Fully upgraded")
 	end
 	if squad then
 		local labels = {[0] = "Entire squad", [1] = "Officers and leader", [2] = "Leader only"}

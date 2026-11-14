@@ -53,6 +53,18 @@ local function isCompleted(job)
 	return job.isCompleted or job.progress >= job.numberRec
 end
 
+local function taskIcon(job, definition)
+	local species = job.targetSpecies or definition.targetSpecies
+	if species then
+		local trigger = species .. "Killed"
+		for _, candidate in SortedPairs(ix.jobs.list) do
+			if candidate.listenTrigger == trigger and candidate.icon then return candidate.icon end
+		end
+	end
+
+	return definition.icon or "propic/event/area"
+end
+
 local function taskMap(npc, job)
 	local definition = ix.jobs.list[job.identifier]
 	local contact = ix.townNPCs and ix.townNPCs.byName[npc]
@@ -177,7 +189,9 @@ function PANEL:AddTask(npc, job)
 	local card = self.journal:Add("DPanel")
 	card:Dock(TOP)
 	card:DockMargin(0, 0, 10, 12)
-	card:DockPadding(16, 12, 16, 12)
+	local iconSize = math.ceil(96 * self.fontScale)
+	local iconGap = math.ceil(16 * self.fontScale)
+	card:DockPadding(16, 12, 16 + iconSize + iconGap, 12)
 	card.Paint = function(_, width, height)
 		surface.SetDrawColor(COLORS.card)
 		surface.DrawRect(0, 0, width, height)
@@ -234,12 +248,20 @@ function PANEL:AddTask(npc, job)
 			addButton(actions, option.label, function() ix.jobs.field.RequestAction(npc, option.action) end)
 		end
 	end
+	local icon = card:Add("DImage")
+	icon:SetImage(taskIcon(job, definition))
+	icon:SetKeepAspect(true)
+	icon:SetSize(iconSize, iconSize)
 	card.PerformLayout = function(this)
+		icon:SetPos(this:GetWide() - 16 - iconSize, 12)
 		local height = 24
 		for _, child in ipairs(this:GetChildren()) do
-			local _, top, _, bottom = child:GetDockMargin()
-			height = height + child:GetTall() + top + bottom
+			if child ~= icon then
+				local _, top, _, bottom = child:GetDockMargin()
+				height = height + child:GetTall() + top + bottom
+			end
 		end
+		height = math.max(height, iconSize + 24)
 		if this:GetTall() ~= height then this:SetTall(height) end
 	end
 end
@@ -265,14 +287,24 @@ function PANEL:Rebuild()
 	self.character = character
 	self.map = game.GetMap()
 	local count, total = 0, 0
+	local tasks = {}
 	for npc, job in SortedPairs(jobs) do
 		if ix.jobs.list[job.identifier] then
 			total = total + 1
 			if self:MatchesTask(npc, job) then
-				self:AddTask(npc, job)
+				tasks[#tasks + 1] = {npc = npc, job = job,
+					field = (job.fieldTask or ix.jobs.list[job.identifier].fieldType) and 1 or 0}
 				count = count + 1
 			end
 		end
+	end
+	table.sort(tasks, function(a, b)
+		if a.field ~= b.field then return a.field > b.field end
+
+		return a.npc < b.npc
+	end)
+	for _, task in ipairs(tasks) do
+		self:AddTask(task.npc, task.job)
 	end
 	local filtered = self.query ~= "" or self.statusFilter ~= "all" or self.zoneFilter ~= "all"
 	self.title:SetText("TASKS · " .. count .. (filtered and " / " .. total or ""))

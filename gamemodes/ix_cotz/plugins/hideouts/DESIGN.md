@@ -13,7 +13,8 @@ remote map space, share occupancy across visitors, and retain failed saves for r
 - Both room types use the same independently identified, upgraded container inventories. Personal
   slots default private and may be shared with all or selected invited guests. Squad slots default to all members and
   may require officer or leader rank. Only authorized managers upgrade them. Global banks stay separate.
-- Ballast, Cleaner and Ledger own their map's personal room claims and upgrade barter. Personal rooms
+- Ballast, Cleaner and Ledger gate their map's personal room claims and improvements; purchases live
+  at hideout doors (claims/installations/room improvements) and installed containers (later upgrades). Personal rooms
   start with one 2×3 general crate and four loose item entities. Milestones unlock purchases, while paid
   levels belong to each room. Specialized recipes, exponential prices and later locked levels live in
   `sh_personal.lua`; saved marker layouts keep exterior purchases independent of interior allocation.

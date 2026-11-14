@@ -477,6 +477,9 @@ function NewClient(id)
 	function client:Alive()
 		return true
 	end
+	function client:IsAdmin()
+		return false
+	end
 	function client:IsPlayer()
 		return true
 	end

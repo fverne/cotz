@@ -1,4 +1,14 @@
+local PLUGIN = PLUGIN
 local nextPurchase = 0
+
+function PLUGIN:RequestPersonalBarter(id, entrance)
+	if (self.nextPersonalRequest or 0) > CurTime() then return end
+	self.nextPersonalRequest = CurTime() + 0.5
+	net.Start("cotz/hideouts/personal-open")
+	net.WriteString(id or "")
+	net.WriteString(entrance or "")
+	net.SendToServer()
+end
 
 local function submit(panel, revision, index)
 	if nextPurchase > CurTime() then return end
@@ -12,12 +22,12 @@ end
 
 net.Receive("cotz/hideouts/personal-barter", function()
 	if IsValid(ix.gui.personalHideoutBarter) then ix.gui.personalHideoutBarter:Remove() end
-	local panel, scroll = ix.cotzUI.Frame("Personal hideout barter", 0.8, 0.75, 900)
+	local panel, scroll = ix.cotzUI.Frame("Hideout improvements", 0.8, 0.75, 900)
 	ix.gui.personalHideoutBarter = panel
 	local revision = net.ReadUInt(32)
 	local count = net.ReadUInt(9)
 	if count == 0 then
-		ix.cotzUI.Label(scroll, "No personal hideout offers are available here yet. Enter your room once to view its storage upgrades.")
+		ix.cotzUI.Label(scroll, "No improvements are available here. Enter your room once to resolve its container locations; use installed containers for their upgrades.")
 	end
 	for index = 1, count do
 		local offerIndex = index

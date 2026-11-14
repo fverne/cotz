@@ -7,17 +7,26 @@ PLUGIN.personalContacts = {
 }
 
 PLUGIN.personalUnlockSteps = {
+	fridge = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	general = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	ammo = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	medical = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	weapon = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	gear = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
-	floor = {2, 4}, furnishing = {3},
+	floor = {2, 4}, furnishing = {3}, cassette = {1},
 }
 PLUGIN.personalPriceMultiplier = 2.2
-PLUGIN.personalUpgradePrices = {floor = 500, furnishing = 5000}
+PLUGIN.personalUpgradePrices = {floor = 500, furnishing = 5000, cassette = 1500}
 
 PLUGIN.personalContainerRecipes = {
+	fridge = {
+		name = "Fridge", filter = "food", price = 1000, item = "value_container_smallitems",
+		sizes = {
+			{6, 4}, {7, 4}, {7, 6}, {8, 6}, {8, 8}, {9, 8},
+			{9, 10}, {10, 10}, {10, 12}, {11, 12}, {11, 14}, {12, 14},
+		},
+		models = {"models/props_c17/FurnitureFridge001a.mdl", "models/props_c17/FurnitureFridge001a.mdl"},
+	},
 	general = {
 		name = "General crate", filter = "general", price = 600, item = "value_container_smallitems",
 		sizes = {{2, 3}, {3, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 5}, {5, 6}, {6, 6}, {6, 7}, {7, 7}, {7, 8}, {8, 8}},

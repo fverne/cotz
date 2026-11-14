@@ -11,6 +11,20 @@ end
 
 function PLUGIN:AuditContainers(instance)
 	local record = self:GetHideout(instance.id)
+	if IsValid(instance.cassette) then
+		local entity = instance.cassette
+		local mins, maxs = entity:WorldSpaceAABB()
+		if not self:Contains(mins, instance.mins, instance.maxs)
+			or not self:Contains(maxs, instance.mins, instance.maxs) then
+			local placement = record.cassetteTransform or {pos = self:GetTemplate(record).storage + Vector(48, 0, 16)}
+			entity:SetPos(instance.origin + placement.pos)
+			entity:SetAngles(placement.angles or angle_zero)
+			local physics = entity:GetPhysicsObject()
+			if IsValid(physics) then physics:EnableMotion(false) end
+		else
+			record.cassetteTransform = {pos = entity:GetPos() - instance.origin, angles = entity:GetAngles()}
+		end
+	end
 	for slotID, entity in pairs(instance.containers or {}) do
 		if not IsValid(entity) then continue end
 		if entity.cotzContainerHeld and not entity:IsPlayerHolding() then entity.cotzContainerHeld = nil end

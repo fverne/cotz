@@ -266,7 +266,7 @@ function PLUGIN:TagEntity(instance, entity)
 	entity:SetNetVar("cotzHideoutID", instance.id)
 	local class = entity:GetClass()
 	entity:SetNetVar("hideoutEditable", instance.props[entity] == true
-		or class == "ix_hideout_vendor" or class == "ix_hideout_storage")
+		or class == "ix_hideout_vendor" or class == "ix_hideout_storage" or class == "ix_cassette_player")
 	entity.bNoPersist = true
 	instance.entities[entity] = true
 	local record = self:GetHideout(instance.id)

@@ -9,6 +9,12 @@ vectorMeta.__index = vectorMeta
 vectorMeta.__add = function(a, b) return setmetatable({x = a.x + b.x, y = a.y + b.y, z = a.z + b.z}, vectorMeta) end
 local function vector(x, y, z) return setmetatable({x = x, y = y, z = z}, vectorMeta) end
 local timers, playerMeta, players = {}, {}, {}
+local deferred = {}
+local function flushDeferred()
+	local callbacks = deferred
+	deferred = {}
+	for _, callback in ipairs(callbacks) do callback() end
+end
 SERVER, CLIENT = true, false
 COLLISION_GROUP_PLAYER, COLLISION_GROUP_PASSABLE_DOOR, COLLISION_GROUP_PLAYER_MOVEMENT = 5, 15, 8
 MASK_PLAYERSOLID = 123
@@ -16,6 +22,7 @@ PLUGIN = {}
 FindMetaTable = function() return playerMeta end
 IsValid = function(value) return type(value) == "table" and not value.invalid end
 timer = {
+	Simple = function(delay, callback) deferred[#deferred + 1] = callback end,
 	Remove = function(key) timers[key] = nil end,
 	Create = function(key, delay, count, callback) timers[key] = {delay = delay, callback = callback} end,
 }
@@ -39,6 +46,7 @@ local function entity(index, x)
 	players[#players + 1] = client
 	return client
 end
+function playerMeta:GetActiveWeapon() return self.weapon end
 function playerMeta:IsPlayer() return true end
 function playerMeta:Alive() return self.alive ~= false end
 function playerMeta:IsSolid() return self.solid ~= false end
@@ -74,6 +82,55 @@ check(owner:SetHandsPassage(true) and owner.group == 5, "passage preserves the n
 check(owner.customCollision and owner.passageAtRefresh, "enabling updates cached collision rules immediately")
 check(PLUGIN:ShouldCollide(owner, other) == false and PLUGIN:ShouldCollide(other, owner) == false,
 	"one enabled player permits passage in both movement directions")
+owner.weapon = {GetClass = function() return "weapon_physgun" end}
+PLUGIN:PlayerSwitchWeapon(owner)
+flushDeferred()
+check(PLUGIN:ShouldCollide(owner, other) == nil and PLUGIN:ShouldCollide(other, owner) == nil,
+	"physgun targeting retains normal player collisions in both orders")
+check(owner:GetHandsPassage() and owner.character.data.cotzHandsPassage,
+	"physgun use preserves the saved passage preference")
+local previousUpdates = owner.collisionUpdates
+PLUGIN:PlayerSwitchWeapon(owner)
+flushDeferred()
+check(owner.collisionUpdates == previousUpdates, "unchanged weapons do not refresh collision rules")
+owner.weapon = nil
+PLUGIN:PlayerSwitchWeapon(owner)
+flushDeferred()
+check(PLUGIN:ShouldCollide(owner, other) == false, "holstering restores passage")
+other.weapon = {GetClass = function() return "weapon_physgun" end}
+PLUGIN:PlayerSwitchWeapon(other)
+flushDeferred()
+check(PLUGIN:ShouldCollide(owner, other) == nil, "the target's physgun also preserves collisions")
+other.weapon = nil
+PLUGIN:PlayerSwitchWeapon(other)
+flushDeferred()
+PLUGIN:PlayerSwitchWeapon(owner, nil, {GetClass = function() return "weapon_physgun" end})
+flushDeferred()
+check(PLUGIN:ShouldCollide(owner, other) == false, "a denied switch uses the actual active weapon")
+PLUGIN:WeaponEquip({}, owner)
+PLUGIN:PlayerSwitchWeapon(owner)
+check(#deferred == 1, "multiple weapon events coalesce into one deferred check")
+owner.weapon = {GetClass = function() return "weapon_physgun" end}
+flushDeferred()
+check(PLUGIN:ShouldCollide(owner, other) == nil, "pickup checks the active weapon after equip completes")
+owner.weapon = nil
+PLUGIN:PlayerDroppedWeapon(owner, {})
+flushDeferred()
+check(PLUGIN:ShouldCollide(owner, other) == false, "dropping or stripping the physgun restores passage")
+owner.weapon = {GetClass = function() return "weapon_physgun" end}
+PLUGIN:PlayerSwitchWeapon(owner)
+flushDeferred()
+owner.alive = false
+PLUGIN:PlayerDeath(owner)
+flushDeferred()
+check(not owner.cotzHandsPhysgun, "death clears the exception even if the active weapon still exists")
+owner.alive, owner.weapon = true, nil
+PLUGIN:WeaponEquip({}, owner)
+owner.invalid = true
+flushDeferred()
+owner.invalid = nil
+check(#deferred == 0, "a queued refresh safely handles a disconnected player")
+check(PLUGIN.PlayerPostThink == nil, "passage installs no per-tick player hook")
 local prop = {IsPlayer = function() return false end}
 check(PLUGIN:ShouldCollide(owner, prop) == nil and PLUGIN:ShouldCollide(prop, owner) == nil,
 	"passage preserves collisions with non-player entities")
@@ -185,6 +242,7 @@ owner.nw["cotz/hands/player-passage"] = true
 PLUGIN:PostPlayerLoadout(owner)
 check(owner.group == 9 and owner.cotzHandsCollisionGroup == nil,
 	"loadout restores a collision group left by the previous implementation")
+flushDeferred()
 SERVER, CLIENT = false, true
 owner.nw["cotz/hands/player-passage"] = true
 dofile(path)
@@ -211,4 +269,10 @@ check(PLUGIN:ShouldCollide(remote, owner) == nil,
 proxy(remote, "cotz/hands/player-passage", false, true)
 check(PLUGIN:ShouldCollide(remote, owner) == false and PLUGIN:ShouldCollide(owner, remote) == false,
 	"replicated passage applies symmetrically on the client")
+local physgunProxy = remote.proxies["cotz/hands/physgun-active"]
+physgunProxy(remote, "cotz/hands/physgun-active", false, true)
+check(PLUGIN:ShouldCollide(remote, owner) == nil and PLUGIN:ShouldCollide(owner, remote) == nil,
+	"replicated physgun state suspends passage before the NW getter updates")
+physgunProxy(remote, "cotz/hands/physgun-active", true, false)
+check(PLUGIN:ShouldCollide(remote, owner) == false, "replicated holstering restores passage")
 print(string.format("PASS: %d hands passage checks", checks))

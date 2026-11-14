@@ -22,7 +22,7 @@ if (SERVER) then
 
 	function ENT:Use(activator, caller)
 		if (self.sound) then
-			timer.Remove("repeat_player")
+			timer.Remove("cotz/cassette/" .. self:EntIndex())
 			self.sound:Stop()
 			self:EmitSound("stalkersound/inv_slot.mp3", 40)
 		end
@@ -35,9 +35,9 @@ if (SERVER) then
 			options[#options + 1] = k
 		end
 
-		timer.Remove("repeat_player")
+		timer.Remove("cotz/cassette/" .. self:EntIndex())
 
-		timer.Create("repeat_player", data[string.sub(tostring(self.sound), 14, 33)].dur, 0, function()
+		timer.Create("cotz/cassette/" .. self:EntIndex(), data[string.sub(tostring(self.sound), 14, 33)].dur, 0, function()
 			if (self.sound) then
 				self.sound:Stop()
 			end
@@ -51,7 +51,7 @@ if (SERVER) then
 
 	function ENT:OnRemove()
 		if (self.sound) then
-			timer.Remove("repeat_player")
+			timer.Remove("cotz/cassette/" .. self:EntIndex())
 			self.sound:Stop()
 		end
 	end

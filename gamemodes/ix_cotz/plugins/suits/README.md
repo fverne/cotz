@@ -105,8 +105,8 @@ empty socket consumes the loose cartridge only when the action completes success
 cartridge at its remaining condition, including 0%. A fresh cartridge restores 100% filter condition
 without repairing the headgear. Removed filters can be reinstalled; repairs cannot recharge them.
 
-Tank tooltips and condition bars show remaining air. Other tooltips show the required filter and its percentage or **No filter**. Backpack icons have a teal
-filter bar above ordinary durability; equipment cards show ordinary durability above the filter bar.
+Tank tooltips and condition bars show remaining air. Other tooltips show the required filter and its percentage or **No filter**. Backpack icons use the durability texture and condition colors for the filter/tank bar above ordinary durability.
+Equipment cards show the teal filter/tank bar above ordinary durability. Tooltips list filter/tank condition before durability.
 Protection tooltips and the equipment footer use effective radiation resistance.
 
 ## Saved state and inventory safety

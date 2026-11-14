@@ -86,7 +86,7 @@ ix.command.Add("HideoutTemplateContainer", {
 			return "Stand inside a loaded hideout using that template."
 		end
 		if not slotID:match("^[%w_%-]+$") or #slotID > 32 or not PLUGIN.containerRecipes[recipeID] then
-			return "Use a stable slot ID (up to 32 letters/digits/_/-) and general, ammo, medical, or weapon."
+			return "Use a stable slot ID (up to 32 letters/digits/_/-) and general, ammo, medical, weapon, gear, or fridge."
 		end
 		for _, other in pairs(PLUGIN.instances) do
 			local markerRoles = other.template and other.template.dupeMarkerRoles
@@ -111,7 +111,7 @@ ix.command.Add("HideoutTemplateContainer", {
 		if not PLUGIN:Persist() then template.containers[slotID] = previous return "Could not save the slot." end
 		for _, other in pairs(PLUGIN.instances) do
 			local otherRecord = PLUGIN:GetHideout(other.id)
-			-- Personal slots are resolved on entry and only instantiate after their trader purchase.
+			-- Personal slots are resolved on entry and only instantiate after their door purchase.
 			if otherRecord.ownerType ~= "squad" then continue end
 			if otherRecord.template == templateID then
 				other.containers = other.containers or {}
@@ -127,7 +127,7 @@ ix.command.Add("HideoutTemplateContainer", {
 				entity:SetAngles(definition.angles)
 			end
 		end
-		return "Storage spot saved. Reload personal rooms to update trader offers; squad officers can install it inside."
+		return "Storage spot saved. Reload personal rooms to update door offers; squad officers can install it inside."
 	end,
 })
 

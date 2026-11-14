@@ -69,18 +69,27 @@ function ix.util.GetGasmaskFilterOptions(item, client)
 end
 
 if CLIENT then
-	local FILTER_COLOR = Color(73, 140, 143)
-	local EMPTY_COLOR = Color(154, 84, 70)
-	local TRACK_COLOR = Color(41, 43, 38)
+	local CONDITION_TEXTURE = Material("cotz/panels/hp1.png", "noclamp smooth")
+	local TRACK_COLOR = Color(120, 120, 120, 255)
+	local CONDITION_COLORS = {
+		Color(255, 120, 120, 255),
+		Color(255, 180, 120, 255),
+		Color(255, 255, 120, 255),
+		Color(180, 255, 120, 255),
+		Color(120, 255, 120, 255),
+	}
 
 	function ix.util.PaintGasmaskFilter(item, width, height)
 		local condition = item.isGasmaskFilter and item:GetData("filterCondition", FULL_CONDITION)
 			or ix.util.GetGasmaskFilterCondition(item)
 		local barWidth = math.max(0, math.min(38, width - 10))
+		local fraction = math.Clamp((condition or 0) / FULL_CONDITION, 0, 1)
+		local colorIndex = math.min(5, math.floor(fraction * 5) + 1)
+		surface.SetMaterial(CONDITION_TEXTURE)
 		surface.SetDrawColor(TRACK_COLOR)
-		surface.DrawRect(5, height - 17, barWidth, 4)
-		surface.SetDrawColor(condition and condition > 0 and FILTER_COLOR or EMPTY_COLOR)
-		surface.DrawRect(5, height - 17, barWidth * (condition or 0) / FULL_CONDITION, 4)
+		surface.DrawTexturedRectUV(5, height - 17, barWidth, 4.6, 0, 0, 0.2, 1)
+		surface.SetDrawColor(CONDITION_COLORS[colorIndex])
+		surface.DrawTexturedRectUV(5, height - 17, barWidth * fraction, 4.6, 0, 0, fraction * 0.2, 1)
 	end
 
 	function ix.util.PopulateGasmaskFilterTooltip(tooltip, item)

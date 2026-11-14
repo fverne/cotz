@@ -36,6 +36,9 @@ Every objective completion sends a task-completed notification and PDA sound onc
 At the default COTZ font scale of 1.30, the journal uses 33 px headers, 25 px task names
 and 22 px body/button text at 1080p. Adjust it under Settings → Appearance; action rows
 scale with the text, and cards wrap and scroll.
+Field-work tasks appear first, with contacts sorted by name within the field-work and ordinary task groups.
+Each card shows its task image on the right, preserving its aspect ratio. Regional species hunts reuse
+the matching legacy kill-task image, including the Snork photo; tasks without artwork use the area icon.
 Search above the task list matches task names, contacts, objective descriptions and current objective
 zone names as you type, without regard to case. The status filter offers All tasks, In progress and
 Completed. Completed means ready to return to the contact; handed-in assignments leave the list and

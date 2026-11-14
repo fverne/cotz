@@ -85,8 +85,9 @@ Test("personal gear locker purchases use existing milestone gates and retain slo
 	owner:GetCharacter().completed = {["cotz/town/ballast/v3/hideout/02"] = true}
 	offer = PLUGIN:BuildPersonalOffer(owner, record, "container", "locker")
 	assert(offer.allowed and offer.width >= slot.width and offer.height >= slot.height)
-	local target = NewEntity(nil, owner:GetPos())
-	target.GetClass = function() return "ix_vendor_adv" end
+	local target = instance.containers.locker
+	target.GetClass = function() return "ix_hideout_storage" end
+	target.ixHideout, target.ixHideoutSlot = record.id, "locker"
 	target.GetDisplayName = function() return "'Ballast'" end
 	local entity = instance.containers.locker
 	entity:SetPos(instance.origin + Vector(70, 40, 20))
@@ -297,5 +298,43 @@ Test("personal and squad furnishings enforce every capacity before and after spa
 		prop:Remove()
 		assert(PLUGIN:PlayerSpawnProp(owner, "chair.mdl") ~= false)
 		assert(IsValid(furnishing(owner, instance)))
+	end
+end)
+
+Test("visiting admins manipulate items and private rank-locked storage while template props stay fixed", function()
+	for _, squad in ipairs({false, true}) do
+		local owner, instance, record, slot, storage = home(squad)
+		local prop = furnishing(owner, instance)
+		record.furnishingLevel = nil
+		slot.minimumRank = 2
+		local admin, inventory = FeatureClient(3)
+		admin.IsAdmin = function() return true end
+		admin.position = instance.origin
+		assert(not PLUGIN.members[admin])
+		assert(PLUGIN:CanUseContainer(admin, record, "locker"))
+		assert(PLUGIN:IsNearUtility(admin, storage))
+		assert(PLUGIN:GetHideoutEntityPermission(admin, storage) == true)
+		assert(PLUGIN:PhysgunPickup(admin, storage) ~= false)
+		assert(PLUGIN:CanTool(admin, {Entity = storage}, "remover") == false)
+		PLUGIN:OpenContainerInventory(admin, storage)
+		assert(admin.ixOpenStorage)
+		local shell = NewEntity(nil, instance.origin)
+		PLUGIN:TagEntity(instance, shell)
+		assert(PLUGIN:GetHideoutEntityPermission(admin, prop) == true)
+		assert(PLUGIN:GetHideoutEntityPermission(admin, shell) == false)
+		assert(PLUGIN:GetHideoutEntityPermission(admin, shell, "remover") == false)
+		local item = FeatureItem(inventory, {cotzHideout = {
+			schema = Schema.folder, map = game.GetMap(), id = record.id, pos = Vector(),
+		}})
+		item.invID = 0
+		assert(PLUGIN:CanPlayerInteractItem(admin, "take", item) ~= false)
+		assert(PLUGIN:CanTransferHideoutItem(item, nil, inventory, admin) ~= false)
+		instance.saving = true
+		assert(not PLUGIN:IsNearUtility(admin, storage))
+		assert(PLUGIN:GetHideoutEntityPermission(admin, storage) == false)
+		assert(PLUGIN:CanPlayerInteractItem(admin, "take", item) == false)
+		instance.saving = nil
+		admin.position = Vector(10000, 0, 0)
+		assert(PLUGIN:CanPlayerInteractItem(admin, "take", item) == false)
 	end
 end)

@@ -58,7 +58,7 @@ Test("using a personal container opens its owner controls without a command", fu
 	assert(record.containers.left.public == true)
 end)
 
-Test("personal container menus direct purchases to the trader without consuming items", function()
+Test("legacy personal hand-in actions reject purchases without consuming items", function()
 	local owner, inventory, instance, record = containerHome()
 	ix.item.list.value_container_smallitems = {model = "case.mdl", name = "Case"}
 	local input = FeatureItem(inventory, {}, "value_container_smallitems")

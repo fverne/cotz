@@ -137,6 +137,7 @@ def main():
         ROOT / "ix_cotz/schema/items/artifacts/sh_artifact_moon.lua",
         ROOT / "ix_cotz/schema/items/artifacts/sh_artifact_photo.lua",
         ROOT / "ix_cotz/plugins/propprotect.lua",
+        ROOT / "ix_cotz/plugins/cassette_player/entities/entities/ix_cassette_player.lua",
         ROOT / "ix_cotz/plugins/simplecrossserver/sh_plugin.lua",
         ROOT / "ix_cotz/plugins/spawnsavercheckpoint/sh_plugin.lua",
         ROOT / "ix_cotz/plugins/spawnsavercheckpoint/entities/entities/ix_spawnsaver.lua",
@@ -240,6 +241,10 @@ def main():
     lua.run('TEST_MARKER_ENTITY = ENT; ENT = nil', "marker entity capture")
     lua.run((HERE / "markers_cases.lua").read_text(), "hideout marker cases")
     lua.run((HERE / "layout_cases.lua").read_text(), "hideout layout cases")
+    lua.run('ENT = {}; AddCSLuaFile = function() end', "cassette entity setup")
+    lua.run((ROOT / "ix_cotz/plugins/cassette_player/entities/entities/ix_cassette_player.lua").read_text(),
+            "cassette entity")
+    lua.run((HERE / "cassette_cases.lua").read_text(), "cassette timer cases")
     lua.run((HERE / "personal_cases.lua").read_text(), "personal hideout progression cases")
 
 

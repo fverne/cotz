@@ -28,7 +28,18 @@ function PLUGIN:GetHideoutEntityPermission(client, entity, property)
 	end
 	if SERVER then
 		local instance = self.instances[id]
-		if not instance or instance.state ~= "active" or instance.saving or memberID ~= id then return false end
+		if not instance or instance.state ~= "active" or instance.saving
+			or not self:IsInsideHideout(client, instance) then return false end
+		if client:IsAdmin() then
+			if property == "remover" then return instance.props[entity] == true end
+			if entity.ixHideoutSlot and (instance.containers or {})[entity.ixHideoutSlot] == entity then
+				return (instance.operations or 0) == 0
+					and (not entity.cotzContainerHeld or entity.cotzContainerHeld == client)
+			end
+
+			return instance.props[entity] == true or instance.vendor == entity
+				or instance.cassette == entity or entity:GetClass() == "ix_item"
+		end
 		if not self:CanBuildInHideout(client) then return false end
 		if property == "remover" then return self:CanRemoveHideoutProp(client, entity) end
 		if entity.ixHideoutSlot and (instance.containers or {})[entity.ixHideoutSlot] == entity then
@@ -37,7 +48,12 @@ function PLUGIN:GetHideoutEntityPermission(client, entity, property)
 			return self:CanManageContainer(client, self:GetHideout(id), entity.ixHideoutSlot)
 		end
 
-		return instance.props[entity] == true or instance.vendor == entity
+		return instance.props[entity] == true or instance.vendor == entity or instance.cassette == entity
+	end
+	if client:IsAdmin() then
+		if property == "remover" then return entity:GetNetVar("hideoutPlacedBy") ~= nil end
+
+		return entity:GetNetVar("hideoutEditable", false) or entity:GetClass() == "ix_item"
 	end
 	if property == "remover" then
 		return memberID == id and self:CanBuildInHideout(client) and self:CanRemoveHideoutProp(client, entity)
@@ -88,8 +104,10 @@ function PLUGIN:CanTool(client, trace, tool)
 		if trace.Entity:GetClass() == "ix_hideout_marker" then return end
 		if not self.furnishingTools[tool] then return false end
 		if (tool == "stacker" or tool == "stacker_improved")
-			and trace.Entity:GetClass() == "ix_hideout_vendor" then return false end
-		if trace.Entity:GetClass() == "ix_hideout_vendor" and tool == "remover" then return false end
+			and (trace.Entity:GetClass() == "ix_hideout_vendor"
+				or trace.Entity:GetClass() == "ix_cassette_player") then return false end
+		if (trace.Entity:GetClass() == "ix_hideout_vendor"
+			or trace.Entity:GetClass() == "ix_cassette_player") and tool == "remover" then return false end
 		if trace.Entity:GetClass() == "ix_hideout_storage" then return false end
 		if SERVER then
 			if tool == "remover" then

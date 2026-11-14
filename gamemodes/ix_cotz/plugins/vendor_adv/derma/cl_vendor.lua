@@ -2,6 +2,17 @@ local PANEL = {}
 
 AccessorFunc(PANEL, "bReadOnly", "ReadOnly", FORCE_BOOL)
 
+local function paintItemIcon(control, width, height)
+	control:LoadMaterial()
+	if not control:GetMaterial() then return end
+	local imageWidth, imageHeight = control.ActualWidth, control.ActualHeight
+	if imageWidth <= 0 or imageHeight <= 0 then return end
+	-- DImage's KeepAspect fills the panel, allowing rectangular icons to overflow.
+	local scale = math.min(width / imageWidth, height / imageHeight)
+	local drawWidth, drawHeight = imageWidth * scale, imageHeight * scale
+	control:PaintAt((width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight)
+end
+
 local function addToolbar(parent, dock)
 	local toolbar = parent:Add("DPanel")
 	toolbar:Dock(dock)
@@ -117,7 +128,7 @@ function PANEL:Init()
 	ix.cotzUI.StyleScroll(self.detailScroll)
 	self.preview = self.detailScroll:Add("DImage")
 	self.preview:Dock(TOP)
-	self.preview:SetKeepAspect(true)
+	self.preview.Paint = paintItemIcon
 	self.detailName = ix.cotzUI.Label(self.detailScroll, "Select an item", true)
 	self.detailName:SetTextColor(ix.cotzUI.colors.text)
 	self.detailPrice = ix.cotzUI.Label(self.detailScroll, "")
@@ -357,7 +368,7 @@ function PANEL:Init()
 	self:SetText("")
 	self:DockMargin(0, 0, ix.cotzUI.Scale(6), ix.cotzUI.Scale(6))
 	self.icon = self:Add("DImage")
-	self.icon:SetKeepAspect(true)
+	self.icon.Paint = paintItemIcon
 	self.name = ix.cotzUI.Label(self, "", true)
 	self.name:Dock(NODOCK)
 	self.name:SetTextColor(ix.cotzUI.colors.text)

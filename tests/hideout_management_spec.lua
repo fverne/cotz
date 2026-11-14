@@ -76,3 +76,16 @@ assert(confirmation and sent[2] ~= 0)
 confirmation()
 assert(sent[1] == "1" and sent[2] == 0 and sent[4] == 1)
 print("PASS: prop capacity upgrades confirm the price and send the displayed tier")
+
+dofile("gamemodes/ix_cotz/plugins/hideouts/cl_personal.lua")
+readIndex, reads = 0, {"entrance", 1, "1", "Home", false, "invite", true, false, 1, 30, 40, 5000, 0}
+callbacks["cotz/hideouts/manage"]()
+buttons["Hideout improvements"]()
+assert(sent[1] == "1" and sent[2] == "")
+PLUGIN.nextPersonalRequest = 0
+readIndex, reads = 0, {"1", "general", "General crate", 1, false, false, 0, 0, 2, 3, false, 0}
+callbacks["cotz/hideouts/container"]()
+assert(readIndex == #reads)
+buttons["Upgrade this container"]()
+assert(sent[1] == "1" and sent[2] == "")
+print("PASS: personal door and container controls request their server-bound purchase submenu")

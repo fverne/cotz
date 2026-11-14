@@ -41,7 +41,13 @@ while lowered to switch it off. The `cotzHandsPassage` character data flag is sa
 restored after loadout, including reconnects, respawns and server restarts. Existing characters default
 to disabled; no saved data migration is needed. Switching characters uses that character's own setting.
 `sh_handspassage.lua` uses a shared `ShouldCollide` rule for player pairs when either player has passage
-enabled. Collision groups stay unchanged: changing only the mover's group does not change the group
+enabled. Passage between a pair is suspended while either player equips a physgun, preserving
+targeting and existing pickup permissions. Holstering restores passage without changing the saved
+preference. Switch attempts, weapon pickups/drops, death and loadout queue one coalesced check of the
+actual active weapon after the event completes, so denied switches cannot leave stale state. Existing
+players are initialized once on Lua reload. There is no per-tick weapon polling. State is cached and
+replicated; collision rules and networking update only when the physgun flag changes.
+Collision groups stay unchanged: changing only the mover's group does not change the group
 used by player movement traces. The server and client cache the toggle and call `CollisionRulesChanged`
 when it changes. A client NWBool proxy applies incoming values before invalidating the collision cache;
 newly networked players initialize from their replicated value. Existing saved preferences are retained.

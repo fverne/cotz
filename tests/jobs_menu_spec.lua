@@ -41,6 +41,11 @@ function methods:SetFont(value) self.font = value end
 function methods:SetTall(value) self.height = value end
 function methods:GetTall() return self.height end
 function methods:SetWide(value) self.width = value end
+function methods:GetWide() return self.width end
+function methods:SetImage(value) self.image = value end
+function methods:SetKeepAspect(value) self.keepAspect = value end
+function methods:SetSize(width, height) self.width, self.height = width, height end
+function methods:SetPos(x, y) self.x, self.y = x, y end
 function methods:AddChoice(text, data, selected)
 	self.choices = self.choices or {}
 	self.choices[#self.choices + 1] = {text = text, data = data}
@@ -92,7 +97,7 @@ StyleEntry = function(control) return control end, StyleCombo = function(control
 GetScale = function() return uiScale end, Query = function(text, title, cancel, onCancel, accept, onAccept)
 	confirmation = {text = text, cancel = onCancel, accept = onAccept}
 end}, jobs = {
-	list = {hunt = {}, survey = {}},
+	list = {hunt = {icon = "vgui/icons/snorkdead.png"}, survey = {}},
 	getFormattedName = function(job) return "Task " .. job.identifier end,
 	getFormattedDesc = function(job) return "Description with reward " .. job.reward end,
 	GetMapName = function(map) return ({swamps = "Swamps", garbage = "Garbage"})[map] or map end,
@@ -123,8 +128,12 @@ activeJobs = {
 }
 menu:Think()
 check(menu.title.text == "TASKS · 2", "accepted jobs appear while the menu is open")
-local card = menu.journal.children[1]
-check(card.children[2].text == "Alpha", "tasks have stable contact ordering")
+check(menu.journal.children[1].children[2].text == "Zulu", "field work sorts before ordinary tasks")
+local card = menu.journal.children[2]
+check(card.children[2].text == "Alpha", "ordinary tasks follow field work")
+check(card.children[7].image == "vgui/icons/snorkdead.png" and card.children[7].keepAspect,
+	"cards restore their definition image and preserve its aspect ratio")
+check(menu.journal.children[1].children[7].image == "propic/event/area", "tasks without artwork use the area icon")
 check(card.children[3].text == "Description with reward bandages", "cards show descriptions and rewards")
 check(card.children[4].text == "Progress: 2 / 4", "cards show current objective progress")
 card.children[3]:SetTall(160)
@@ -160,24 +169,24 @@ character = {GetJobs = function() return activeJobs end}
 confirmation.accept()
 check(#sent == 1, "confirmation cannot abandon after a character switch")
 character = previousCharacter
-local fieldButtons = menu.journal.children[2].children[6].children
+local fieldButtons = menu.journal.children[1].children[6].children
 fieldButtons[3]:DoClick()
 check(fieldActions[1].npc == "Zulu" and fieldActions[1].action == "deploy", "field action uses its own assignment")
 activeJobs.Alpha.progress = 4
 activeJobs.Alpha.isCompleted = true
 clock = 1
 menu:Think()
-check(menu.journal.children[1].children[4].text == "Complete — return to Alpha",
+check(menu.journal.children[2].children[4].text == "Complete — return to Alpha",
 	"completion refreshes the return instruction")
-local stableCard = menu.journal.children[1]
+local stableCard = menu.journal.children[2]
 clock = 2
 menu:Think()
-check(menu.journal.children[1] == stableCard, "unchanged jobs preserve cards and scroll state")
+check(menu.journal.children[2] == stableCard, "unchanged jobs preserve cards and scroll state")
 uiScale = 1
 clock = 2.5
 menu:Think()
-check(fonts.cotzTasksSmall.size == 17 and menu.journal.children[1] ~= stableCard
-	and menu.journal.children[1].children[6]:GetTall() == 30,
+check(fonts.cotzTasksSmall.size == 17 and menu.journal.children[2] ~= stableCard
+	and menu.journal.children[2].children[6]:GetTall() == 30,
 	"Changing font scale refreshes open task cards and action rows")
 activeJobs.Alpha = nil
 clock = 3
@@ -274,6 +283,28 @@ fieldJob.fieldTask.recipientMap = "swamps"
 menu:Rebuild()
 check(menu.title.text == "TASKS · 0 / 1", "legacy receivers use the saved recipient map")
 menu.zone:OnSelect(1, "All zones", "all")
+ix.jobs.list.hunt.listenTrigger = "snorkKilled"
+ix.jobs.list.survey.fieldType = "sensor"
+ix.jobs.list.regional = {targetSpecies = "snork", icon = "propic/event/area"}
+activeJobs = {
+	Zulu = {identifier = "survey", progress = 0, numberRec = 1, reward = "sensor", fieldTask = {kind = "sensor"}},
+	Beta = {identifier = "survey", progress = 0, numberRec = 1, reward = "sensor"},
+	Alpha = {identifier = "regional", progress = 0, numberRec = 1, reward = "hunt"},
+	Omega = {identifier = "hunt", progress = 0, numberRec = 1, reward = "hunt"},
+}
+menu:Rebuild()
+local orderedNames = {}
+for _, task in ipairs(menu.journal.children) do orderedNames[#orderedNames + 1] = task.children[2].text end
+check(table.concat(orderedNames, ",") == "Beta,Zulu,Alpha,Omega",
+	"saved and definition-only field tasks sort first, with contact ordering within each group")
+local regionalCard = menu.journal.children[3]
+check(regionalCard.children[7].image == "vgui/icons/snorkdead.png",
+	"regional Snork hunts reuse the legacy species photo instead of generic area artwork")
+regionalCard:PerformLayout()
+local icon = regionalCard.children[7]
+check(icon.x + icon.width == regionalCard:GetWide() - 16 and icon.y == 12,
+	"task artwork sits inside the right edge of its card")
+check(regionalCard:GetTall() >= icon.height + 24, "the card remains tall enough for its artwork")
 character = nil
 clock = 6
 menu:Think()

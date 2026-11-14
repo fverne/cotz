@@ -716,8 +716,13 @@ check(not gearBase.functions.InstallFilter.OnCanRun(exempt), "exempt headgear ha
 -- Render actual client helpers and equipment bars with lightweight drawing mocks.
 SERVER, CLIENT = false, true
 Color = function(r, g, b, a) return {r = r, g = g, b = b, a = a} end
+Material = function(path) return path end
 local rectangles, currentColor = {}, nil
 surface = {
+	SetMaterial = function() end,
+	DrawTexturedRectUV = function(x, y, width, height)
+		rectangles[#rectangles + 1] = {x = x, y = y, width = width, height = height, color = currentColor}
+	end,
 	SetDrawColor = function(value) currentColor = value end,
 	DrawRect = function(x, y, width, height)
 		rectangles[#rectangles + 1] = {x = x, y = y, width = width, height = height, color = currentColor}
@@ -767,6 +772,6 @@ for _, rectangle in ipairs(rectangles) do
 		if rectangle.y == 133 then filledTop = filledTop + 1 end
 	end
 end
-check(filledTop == 9 and filledBottom == 4, "equipment displays ordinary durability above filter condition")
+check(filledTop == 4 and filledBottom == 9, "equipment displays filter condition above ordinary durability")
 
 print("Gasmask filter checks passed:", checks)

@@ -19,6 +19,14 @@ ix.config.Add("hideoutPersonalLimit", 0, "Maximum personal storage rooms per cha
 
 -- Administrators choose a recipe for each template spot; these do not install themselves.
 PLUGIN.containerRecipes = {
+	fridge = {
+		name = "Fridge", filter = "food",
+		tiers = {
+			{item = "value_container_smallitems", width = 4, height = 4, model = "models/props_c17/FurnitureFridge001a.mdl"},
+			{item = "value_container_junkbox", width = 6, height = 6, model = "models/props_c17/FurnitureFridge001a.mdl"},
+			{item = "value_container_parls", width = 10, height = 8, model = "models/props_c17/FurnitureFridge001a.mdl"},
+		},
+	},
 	general = {
 		name = "General storage", filter = "general",
 		tiers = {

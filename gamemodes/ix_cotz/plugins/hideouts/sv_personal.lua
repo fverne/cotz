@@ -1,11 +1,13 @@
 local PLUGIN = PLUGIN
 local PAGE_SIZE = 60
 local QUOTE_LIFETIME = 120
+local PERSONAL_USE_DISTANCE_SQUARED = 128 * 128
 local previousRestore = PLUGIN.RestoreStorage
 local previousSaveFloor = PLUGIN.SaveFloorItem
 PLUGIN.personalPurchases = PLUGIN.personalPurchases or {}
 util.AddNetworkString("cotz/hideouts/personal-barter")
 util.AddNetworkString("cotz/hideouts/personal-buy")
+util.AddNetworkString("cotz/hideouts/personal-open")
 
 function PLUGIN:AddPersonalLocation(id, template, entrance, name)
 	if not self.ready or not self.personalContacts[game.GetMap()] then return "No local hideout contact configured." end
@@ -25,11 +27,39 @@ function PLUGIN:AddPersonalLocation(id, template, entrance, name)
 end
 
 function PLUGIN:CanUsePersonalTrader(client, target)
-	local contact = self.personalContacts[game.GetMap()]
+	if not self.ready or not self.operationsReady or not client:GetCharacter() or not IsValid(target) then
+		return false
+	end
+	if target:GetClass() == "ix_hideout_entrance" then
+		return (self.entranceEntities or {})[target.ixEntranceID] == target
+			and self:IsNearEntrance(client, target.ixEntranceID)
+			and client:GetPos():DistToSqr(target:GetPos()) <= PERSONAL_USE_DISTANCE_SQUARED
+	end
+	if target:GetClass() == "ix_hideout_exit" or target:GetClass() == "ix_hideout_storage" then
+		return self:IsNearUtility(client, target)
+	end
 
-	return self.ready and self.operationsReady and contact and client:GetCharacter()
-		and IsValid(target) and target:GetClass() == "ix_vendor_adv" and target:GetDisplayName() == contact.name
-		and target:CanAccess(client) and client:GetPos():DistToSqr(target:GetPos()) <= 192 * 192
+	return false
+end
+
+function PLUGIN:IsPersonalOfferLocation(client, target, record, feature, slotID)
+	if not self:CanUsePersonalTrader(client, target) or not record then return false end
+	local class = target:GetClass()
+	if class == "ix_hideout_storage" then
+		local slot = self:GetContainer(record, slotID)
+
+		local instance = self.instances[record.id]
+
+		return instance and instance.containers[slotID] == target and target.ixHideout == record.id
+			and target.ixHideoutSlot == slotID and feature == "container" and slot and (slot.tier or 0) > 0
+	end
+	if feature == "container" then
+		local slot = self:GetContainer(record, slotID)
+		if not slot or (slot.tier or 0) > 0 then return false end
+	end
+	if class == "ix_hideout_exit" then return target.ixHideout == record.id end
+
+	return self:IsHideoutEntrance(record, target.ixEntranceID)
 end
 
 function PLUGIN:OwnsPersonalLocation(character, id, location)
@@ -44,10 +74,13 @@ function PLUGIN:OwnsPersonalLocation(character, id, location)
 end
 
 function PLUGIN:ClaimPersonalLocation(client, target, id)
-	if not self:CanUsePersonalTrader(client, target) then return false, "Speak to the local hideout contact." end
+	if not self:CanUsePersonalTrader(client, target) then return false, "Use the hideout door or its container." end
 	local location = (self.state.locations or {})[id]
 	local character = client:GetCharacter()
-	if not location or not self:GetPersonalUnlock(character, "claim", 1) then return false, "Location unavailable." end
+	if not location or target:GetClass() ~= "ix_hideout_entrance"
+		or location.entrance ~= target.ixEntranceID or not self:GetPersonalUnlock(character, "claim", 1) then
+		return false, "Location unavailable."
+	end
 	if self:OwnsPersonalLocation(character, id, location) then return false, "You already own a room at this location." end
 	local ok, result = self:GrantHideout(client, location.template, location.entrance, location.name, id)
 
@@ -107,7 +140,7 @@ function PLUGIN:PreparePersonalStorage(instance)
 		slot.recipe = definition.recipe
 		record.containers[id] = slot
 	end
-	-- Remember marker slots so the exterior trader can work while the interior is unloaded.
+	-- Remember marker slots for door purchases while the interior is unloaded.
 	record.personalLayout = definitions
 
 	return self:Persist(), "Could not save personal storage configuration."
@@ -117,7 +150,22 @@ function PLUGIN:RestoreStorage(instance, callback)
 	local ok, reason = self:PreparePersonalStorage(instance)
 	if not ok then callback(false, reason) return end
 
-	return previousRestore(self, instance, callback)
+	return previousRestore(self, instance, function(restored, reason)
+		if restored then self:RefreshPersonalCassette(self:GetHideout(instance.id)) end
+		callback(restored, reason)
+	end)
+end
+
+function PLUGIN:RefreshPersonalCassette(record)
+	local instance = self.instances[record.id]
+	if not instance or record.cassetteLevel ~= 1 or IsValid(instance.cassette) then return end
+	local template = self:GetTemplate(record)
+	local placement = record.cassetteTransform or {pos = template.storage + Vector(48, 0, 16)}
+	instance.cassette = self:CreateUtility(instance, "ix_cassette_player", placement.pos,
+		"models/lostsignalproject/items/misc/radio.mdl", placement.angles)
+	if not IsValid(instance.cassette) then
+		ErrorNoHalt("[Hideouts] Purchased cassette player could not spawn; retained for next entry.\n")
+	end
 end
 
 function PLUGIN:RefreshPersonalContainer(record, slotID)
@@ -174,6 +222,12 @@ function PLUGIN:BuildPersonalOffer(client, record, feature, slotID)
 		offer.allowed, offer.reason = self:GetPersonalUnlock(character, "floor", offer.level)
 		offer.label = "Loose items: " .. (4 + 2 * offer.level) .. " (+2)"
 		offer.detail = "Maximum item entities in this hideout."
+	elseif feature == "cassette" then
+		if record.cassetteLevel == 1 then return end
+		offer.level, offer.price = 1, self.personalUpgradePrices.cassette
+		offer.allowed, offer.reason = self:GetPersonalUnlock(character, "cassette", 1)
+		offer.label = "Cassette player"
+		offer.detail = "One movable player for this room. Bring your own tapes."
 	elseif feature == "furnishing" then
 		if record.furnishingLevel == 1 then return end
 		offer.level, offer.price = 1, self.personalUpgradePrices.furnishing
@@ -199,18 +253,21 @@ function PLUGIN:ApplyPersonalEntitlement(record, payload)
 		end
 	elseif payload.feature == "floor" then
 		record.floorLevel = math.max(record.floorLevel or 0, payload.level)
+	elseif payload.feature == "cassette" then
+		record.cassetteLevel = math.max(record.cassetteLevel or 0, payload.level)
 	elseif payload.feature == "furnishing" then
 		record.furnishingLevel = math.max(record.furnishingLevel or 0, payload.level)
 	end
 end
 
 function PLUGIN:PurchasePersonalOffer(client, target, quote)
-	if not self:CanUsePersonalTrader(client, target) then return false, "Speak to the local hideout contact." end
+	if not self:CanUsePersonalTrader(client, target) then return false, "Use the hideout door or its container." end
 	local record = self:GetHideout(quote.record)
 	local offer = self:BuildPersonalOffer(client, record, quote.feature, quote.slot)
-	if not offer or not offer.allowed or offer.level ~= quote.level or offer.price ~= quote.price
+	if not self:IsPersonalOfferLocation(client, target, record, quote.feature, quote.slot)
+		or not offer or not offer.allowed or offer.level ~= quote.level or offer.price ~= quote.price
 		or offer.item ~= quote.item or offer.width ~= quote.width or offer.height ~= quote.height
-		or offer.model ~= quote.model then return false, "That offer changed or is locked. Reopen barter." end
+		or offer.model ~= quote.model then return false, "That offer changed or is locked. Reopen hideout improvements." end
 	if self.personalPurchases[record.id] or (self.capacityPurchases or {})[record.id] then
 		return false, "This hideout already has a purchase pending."
 	end
@@ -228,6 +285,7 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 		local current = self:BuildPersonalOffer(client, record, quote.feature, quote.slot)
 
 		return client:GetCharacter() == character and self:CanUsePersonalTrader(client, target)
+			and self:IsPersonalOfferLocation(client, target, record, quote.feature, quote.slot)
 			and current and current.allowed and current.level == offer.level and current.price == offer.price
 	end
 	local function commit(storage)
@@ -247,6 +305,7 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 		}, function(ok, reason)
 			if ok then
 				self:ApplyPersonalEntitlement(record, payload)
+				if payload.feature == "cassette" then self:RefreshPersonalCassette(record) end
 				if storage then
 					storage:SetSize(payload.width, payload.height)
 					self:RefreshPersonalContainer(record, payload.slot)
@@ -260,7 +319,7 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 			if instance then instance.operations = instance.operations - 1 end
 			if IsValid(client) and client:GetCharacter() == character then
 				client:Notify(ok and "Hideout upgrade purchased." or reason)
-				if self:CanUsePersonalTrader(client, target) then self:OpenPersonalBarter(client, target, nil, true) end
+				if self:CanUsePersonalTrader(client, target) then self:OpenPersonalBarter(client, target, nil, true, record.id) end
 			end
 		end)
 	end
@@ -275,7 +334,7 @@ function PLUGIN:PurchasePersonalOffer(client, target, quote)
 	return true
 end
 
-function PLUGIN:OpenPersonalBarter(client, target, page, refresh)
+function PLUGIN:OpenPersonalBarter(client, target, page, refresh, recordID)
 	if not self:CanUsePersonalTrader(client, target) then return end
 	if not refresh and (client.cotzPersonalOpenAt or 0) > CurTime() then return end
 	client.cotzPersonalOpenAt = CurTime() + 0.5
@@ -288,23 +347,27 @@ function PLUGIN:OpenPersonalBarter(client, target, page, refresh)
 		if total > offset and #offers < PAGE_SIZE then offers[#offers + 1] = offer end
 	end
 	for id, location in SortedPairs(self.state.locations or {}) do
-		if not self:OwnsPersonalLocation(client:GetCharacter(), id, location) then
+		if not recordID and target:GetClass() == "ix_hideout_entrance"
+			and location.entrance == target.ixEntranceID
+			and not self:OwnsPersonalLocation(client:GetCharacter(), id, location) then
 			local allowed, reason = self:GetPersonalUnlock(client:GetCharacter(), "claim", 1)
 			appendOffer({feature = "claim", location = id, label = "Unlock: " .. location.name,
 				detail = "Free for now. One room per location.", allowed = allowed, reason = reason})
 		end
 	end
 	for _, record in SortedPairs(self.state.hideouts) do
-		if record.ownerType ~= "squad" and record.owner == client:GetCharacter():GetID() then
+		if record.id == recordID and record.ownerType ~= "squad"
+			and record.owner == client:GetCharacter():GetID() then
 			local function append(feature, slotID)
 				local offer = self:BuildPersonalOffer(client, record, feature, slotID)
-				if not offer then return end
+				if not offer or not self:IsPersonalOfferLocation(client, target, record, feature, slotID) then return end
 				offer.label = self:GetHideoutName(record):sub(1, 128) .. " (#" .. record.id .. ") / " .. offer.label
 				appendOffer(offer)
 			end
 			for slotID in SortedPairs(record.personalLayout or {}) do append("container", slotID) end
 			append("floor")
 			append("furnishing")
+			append("cassette")
 		end
 	end
 	if page > 1 then
@@ -316,7 +379,7 @@ function PLUGIN:OpenPersonalBarter(client, target, page, refresh)
 	client.cotzPersonalRevision = ((client.cotzPersonalRevision or 0) + 1) % 4294967296
 	client.cotzPersonalBarter = {
 		character = client:GetCharacter(), target = target, expires = CurTime() + QUOTE_LIFETIME,
-		offers = offers, revision = client.cotzPersonalRevision,
+		offers = offers, revision = client.cotzPersonalRevision, record = recordID,
 	}
 	net.Start("cotz/hideouts/personal-barter")
 	net.WriteUInt(client.cotzPersonalRevision, 32)
@@ -346,7 +409,7 @@ function PLUGIN:HandlePersonalPurchase(client, index, revision)
 	if not offer or not offer.allowed then return end
 	local ok, reason
 	if offer.feature == "page" then
-		self:OpenPersonalBarter(client, session.target, offer.page, true)
+		self:OpenPersonalBarter(client, session.target, offer.page, true, session.record)
 		return true
 	elseif offer.feature == "claim" then
 		ok, reason = self:ClaimPersonalLocation(client, session.target, offer.location)
@@ -358,6 +421,29 @@ function PLUGIN:HandlePersonalPurchase(client, index, revision)
 
 	return ok
 end
+
+function PLUGIN:OpenPersonalManagementBarter(client, id, entranceID)
+	if #id > 20 or #entranceID > 64 then return end
+	local target
+	if id == "" then
+		target = (self.entranceEntities or {})[entranceID]
+	else
+		if not self:CanUseManagementMenu(client, id) then return end
+		local record = self:GetHideout(id)
+		local session = client.cotzHideoutMenu
+		local instance = self.instances[id]
+		if session.scope == "entrance" then
+			target = (self.entranceEntities or {})[self:FindHideoutEntrance(client, record)]
+		elseif session.scope == "exit" then target = instance and instance.exit
+		elseif session.scope == "container" then target = instance and instance.containers[session.slot] end
+	end
+	self:OpenPersonalBarter(client, target, 1, false, id ~= "" and id or nil)
+end
+
+net.Receive("cotz/hideouts/personal-open", function(_, client)
+	local id, entranceID = net.ReadString(), net.ReadString()
+	PLUGIN:OpenPersonalManagementBarter(client, id, entranceID)
+end)
 
 net.Receive("cotz/hideouts/personal-buy", function(_, client)
 	local revision, index = net.ReadUInt(32), net.ReadUInt(9)

@@ -29,6 +29,7 @@ function PLUGIN:CanUseContainer(client, record, slotID)
 	local character = IsValid(client) and client:GetCharacter()
 	if not slot or not character or not self:CanAccess(client, record) then return false end
 
+	if client:IsAdmin() then return true end
 	if record.ownerType == "squad" then
 		local rank = self:GetSquadRank(client, record)
 
@@ -79,11 +80,7 @@ function PLUGIN:IsNearUtility(client, entity)
 	if not instance or instance.state ~= "active" or instance.saving then return false end
 	if entity.cotzContainerHeld then return false end
 	local record = self:GetHideout(instance.id)
-	-- Administrators may visit vendors by noclipping in without registering as occupants.
-	local visitingVendor = entity == instance.vendor and client:IsAdmin()
-		and self:Contains(client:GetPos(), instance.mins, instance.maxs)
-
-	return (self.members[client] == instance.id or visitingVendor) and self:CanAccess(client, record)
+	return self:IsInsideHideout(client, instance) and self:CanAccess(client, record)
 		and client:GetPos():DistToSqr(entity:GetPos()) <= USE_DISTANCE_SQUARED
 end
 
@@ -226,7 +223,7 @@ end
 
 function PLUGIN:UpgradeContainer(client, record, slotID, expectedTier)
 	if record and record.ownerType ~= "squad" then
-		return false, "Purchase personal storage upgrades through the local hideout contact's barter menu."
+		return false, "Use this container's upgrade submenu; install new containers through hideout management."
 	end
 	local slot, definition = self:GetContainer(record, slotID)
 	local instance = record and self.instances[record.id]
@@ -293,6 +290,7 @@ function PLUGIN:ContainerAccepts(record, slotID, item)
 	local recipe = definition and self:GetContainerRecipe(record, definition)
 	if not recipe or item.isBag or item:GetData("id") then return false end
 	if recipe.filter == "ammo" then return item.isAmmo == true end
+	if recipe.filter == "food" then return item.base == "base_consumables" end
 	if recipe.filter == "medical" then return item.base == "base_aid" end
 	if recipe.filter == "weapon" then return item.isWeapon == true end
 	if recipe.filter == "gear" then
@@ -323,7 +321,8 @@ function PLUGIN:CanTransferHideoutItem(item, current, target, client)
 	if currentID and targetID and currentID ~= targetID then return false end
 	if floor and item.invID == 0 then
 		local id = tostring(floor.id)
-		if not IsValid(client) or self.members[client] ~= id or targetID and targetID ~= id then return false end
+		if not IsValid(client) or not self:IsInsideHideout(client, self.instances[id])
+			or targetID and targetID ~= id then return false end
 	end
 	for _, inventory in pairs({current = current, target = target}) do
 		local id = inventory.vars and inventory.vars.hideout
@@ -343,7 +342,8 @@ function PLUGIN:CanTransferHideoutItem(item, current, target, client)
 		or (target and target.vars and target.vars.hideoutSlot)) then return end
 	local location = self:GetItemLocation(item)
 	local record = location and self:GetHideout(location.id)
-	if record and record.ownerType == "squad" and self:GetSquadRank(client, record) == nil then return false end
+	if record and record.ownerType == "squad" and not client:IsAdmin()
+		and self:GetSquadRank(client, record) == nil then return false end
 
 	return previousTransfer(self, item, current, target, client)
 end
@@ -392,7 +392,8 @@ function PLUGIN:CanPlayerInteractItem(client, action, value)
 		end
 		local location = self:GetItemLocation(item)
 		local record = location and self:GetHideout(location.id)
-		if record and record.ownerType == "squad" and self:GetSquadRank(client, record) == nil then return false end
+		if record and record.ownerType == "squad" and not client:IsAdmin()
+		and self:GetSquadRank(client, record) == nil then return false end
 	end
 
 	return previousInteract(self, client, action, value)

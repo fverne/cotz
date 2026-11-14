@@ -135,10 +135,11 @@ if (CLIENT) then
 		if !self.entity then
 			ix.util.DrawGearResistances(tooltip, self)
 
+			if self.filterType then ix.util.PopulateGasmaskFilterTooltip(tooltip, self) end
+
 			local duratitle = tooltip:AddRow("duratitle")
 			duratitle:SetText("\nDurability: " .. math.floor(self:GetData("durability", 100)) .. "%")
 			duratitle:SizeToContents()
-			if self.filterType then ix.util.PopulateGasmaskFilterTooltip(tooltip, self) end
 
 			if self.isGasmask then
 	        	ix.util.PropertyDesc2(tooltip, "Gasmask", Color(64, 224, 208), Material("vgui/ui/stalker/weaponupgrades/handling.png"))

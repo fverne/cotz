@@ -85,7 +85,7 @@ Test("visiting administrators can open and buy squad stock without gaining manag
 	assert(listed.invID == destination:GetID() and admin:GetCharacter():GetMoney() == 900)
 	local container = NewEntity(nil, instance.origin)
 	container.ixHideout = record.id
-	assert(not PLUGIN:IsNearUtility(admin, container))
+	assert(PLUGIN:IsNearUtility(admin, container))
 	instance.saving = true
 	assert(not PLUGIN:IsNearUtility(admin, instance.vendor))
 	instance.saving = nil
