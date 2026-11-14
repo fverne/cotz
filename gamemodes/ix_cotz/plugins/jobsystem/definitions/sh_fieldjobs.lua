@@ -2,26 +2,31 @@ local families = {
 	recovery = {
 		name = "Recover lost equipment.",
 		desc = "Search the assigned area for a lost equipment case and bring it back. Check your PDA for directions. Leave room for a 2.5 kg case.",
+		icon = "propic/event/acquire",
 		categories = {"stashpackagenpc_", "item_world_NPC_"},
 	},
 	sensor = {
 		name = "Deploy and retrieve a research sensor.",
 		desc = "Deploy a sensor at the assigned site, leave the area while it records, then retrieve it. Check your PDA for directions. Leave room for a 0.5 kg recorder.",
+		icon = "propic/event/radio",
 		categories = {"scanarea"},
 	},
 	triangulation = {
 		name = "Locate an unknown radio transmitter.",
 		desc = "Take signal readings from separated positions and bearings, find the transmitter and bring it back. Check your PDA for directions. Leave room for a 0.75 kg transmitter.",
+		icon = "propic/event/pathing",
 		categories = {"scanRF"},
 	},
 	deadDrop = {
 		name = "Complete a dead-drop circuit.",
 		desc = "Collect a sealed parcel at the pickup point and hide it at the delivery point. Check your PDA for directions. Leave room for a 5 kg parcel.",
+		icon = "propic/event/stash",
 		categories = {"stashpackagenpc_"},
 	},
 	defence = {
 		name = "Defend a field research sampler.",
 		desc = "Activate the sampler, stay nearby and drive back the mutants while it records. Nearby mutants disrupt and damage the sampler. Check your PDA for directions. Stay close until the attack is over. Bring back the results; leave room for a 0.5 kg recorder.",
+		icon = "propic/event/scout",
 		categories = {"scanarea", "mutantkill"},
 	},
 }
