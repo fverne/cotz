@@ -39,7 +39,11 @@ table.Copy = copy
 table.Shuffle = function() end
 game = {GetMap = function() return "test_map" end}
 SERVER, MOVETYPE_NOCLIP, MOVETYPE_OBSERVER, OBS_MODE_NONE = true, 8, 10, 0
-timer = {Simple = function(_, callback) timers[#timers + 1] = callback end}
+local lastTimerDelay
+timer = {Simple = function(delay, callback)
+	lastTimerDelay = delay
+	timers[#timers + 1] = callback
+end}
 local function flushTimers()
 	local pending = timers
 	timers = {}
@@ -628,7 +632,7 @@ check(scene.location == "near the old road" and scene.spawnPoints[1][1] == 3000,
 local warning = announcements[#announcements]
 check(warning.speaker == nil and warning.anonymous and warning.id == "cotz/mutantdefense/announcement",
 	"warning uses the local system chat class")
-check(warning.message == "The supply truck has crashed near the old road. Go secure the site if you want supplies back in town! Mutant waves begin in 10 minutes.",
+check(warning.message == "The supply truck has crashed near the old road. Help our driver out. I see multiple mutants incoming, you have 10 minutes to prepare.",
 	"warning includes eventadd text and the ten-minute lead time")
 check(scene.nextWave == now + 600 and scene.started == nil, "combat timeout has not begun during the warning")
 check(commands.MutantDefenseStatus.OnRun():find("countdown 600 seconds", 1, true)
@@ -646,7 +650,13 @@ check(scene.phase == "fighting" and scene.wave == 1 and scene.started == now,
 	"wave one begins at 600 seconds without another preparation period")
 now = scene.started + plugin.settings.timeout
 plugin:UpdateDefense()
-check(not plugin.event and despawns[scene.dupeID], "fight timeout cleans the tracked scene")
+check(not plugin.event and not despawns[scene.dupeID], "fight timeout retains scene during departure")
+check(lastTimerDelay == 60, "scene departure waits exactly sixty seconds")
+local driver = announcements[#announcements]
+check(driver.id == "cotz/mutantdefense/driver" and #driver.receivers == 1
+	and driver.receivers[1] == first, "driver updates reach nearby defenders only")
+flushTimers()
+check(despawns[scene.dupeID], "departure timer removes tracked scene")
 check(plugin.nextDefense >= now + 1800 and plugin.nextDefense <= now + 3600,
 	"event termination rolls the next full interval")
 
@@ -658,7 +668,9 @@ plugin:UpdateDefense()
 check(scene.emptySince == now and scene.wave == 0, "abandonment grace begins only at the warning deadline")
 now = now + plugin.settings.abandonGrace
 plugin:UpdateDefense()
-check(not plugin.event and despawns[scene.dupeID], "unattended crashes expire and remove their scene")
+check(not plugin.event and not despawns[scene.dupeID], "abandonment retains scene during departure")
+flushTimers()
+check(despawns[scene.dupeID], "abandonment departure removes scene")
 
 resetEvent()
 plugin:EndDefense("test")

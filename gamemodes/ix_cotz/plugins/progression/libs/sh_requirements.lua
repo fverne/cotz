@@ -58,7 +58,7 @@ function ix.progression.GetRequirementLabel(progressionID, itemID, character)
 	-- Category names were saved with the old region label; keep their choices and counters intact.
 	local categoryName = selection and selection.name and selection.name:gsub("%f[%a]Marsh%f[%A]", "Swamps")
 	if selection and selection.unitSizes then
-		return categoryName .. " batches (any mix; per batch: " .. table.concat(names, ", ") .. ")"
+		return categoryName .. " (any mix: " .. table.concat(names, ", ") .. ")"
 	end
 	if selection and selection.mode == "any" then
 		return categoryName .. " (any mix: " .. table.concat(names, ", ") .. ")"

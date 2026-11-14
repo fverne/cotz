@@ -38,9 +38,11 @@ function PLUGIN:GetDefenders()
 	return present, living
 end
 
-function PLUGIN:NotifyDefense(message)
-	local present = self:GetDefenders()
-	for _, client in pairs(present) do client:Notify(message) end
+function PLUGIN:DriverDefense(message)
+	local receivers = {}
+	for _, client in pairs(self:GetDefenders()) do receivers[#receivers + 1] = client end
+	if #receivers == 0 then return end
+	ix.chat.Send(nil, "cotz/mutantdefense/driver", message, true, receivers)
 end
 
 function PLUGIN:RemainingAttackers()
@@ -67,9 +69,9 @@ function PLUGIN:BeginDefenseWave(living)
 	for _, client in ipairs(living) do
 		event.candidates[client:GetCharacter():GetID()] = client:GetCharacter()
 	end
-	self:NotifyDefense(
-		"Mutant defense wave " .. event.wave .. "/" .. #self.settings.waves .. ": " .. #event.slots .. " attackers."
-	)
+	print("[COTZ mutantdefense] Wave", event.wave, "attackers:", #event.slots)
+	self:DriverDefense(event.wave == 1 and "Here they come! Keep them away from the truck!"
+		or "More mutants coming in! Watch the approaches!")
 end
 
 function PLUGIN:FindDefenseSpawn()
@@ -123,15 +125,28 @@ function PLUGIN:EntityRemoved(entity)
 	slot.entity, attackers[entity] = nil, nil
 end
 
-function PLUGIN:EndDefense(message, success)
+function PLUGIN:EndDefense(message, success, immediateCleanup)
 	local event = self.event
 	if not event then return end
 	local present = self:GetDefenders()
-	self:NotifyDefense(message)
+	print("[COTZ mutantdefense]", message)
+	if event.phase ~= "deploying" then
+		self:DriverDefense(success
+			and "That was the last of them. Thanks for covering me! I've got trader supplies for those who held them off."
+			or "I can't hold out here any longer! Get clear of the truck!")
+	end
 	-- Detach before removing actors or granting items: callbacks cannot finish this event twice.
 	self.event = nil
 	-- A pre-automation session may still be active when this plugin is reloaded.
-	if event.dupePlugin then event.dupePlugin:DespawnDupe(event.dupeID) end
+	if event.dupePlugin then
+		if immediateCleanup or event.phase == "deploying" then
+			event.dupePlugin:DespawnDupe(event.dupeID)
+		else
+			timer.Simple(self.settings.sceneCleanupDelay, function()
+				event.dupePlugin:DespawnDupe(event.dupeID)
+			end)
+		end
+	end
 	self:ScheduleDefense()
 	for _, slot in ipairs(event.slots) do
 		if slot.entity then attackers[slot.entity] = nil end
@@ -175,10 +190,8 @@ function PLUGIN:UpdateDefense()
 		event.spawnBlocked = "no living defenders in the area"
 		if not event.emptySince then
 			event.emptySince = CurTime()
-			self:NotifyDefense(
-				"No living defenders remain. Return within " .. self.settings.abandonGrace
-				.. " seconds or the defense fails."
-			)
+			print("[COTZ mutantdefense] No living defenders; abandonment grace:", self.settings.abandonGrace)
+			self:DriverDefense("Is anyone still out there? I need someone covering this truck!")
 		end
 		if CurTime() - event.emptySince >= self.settings.abandonGrace then
 			self:EndDefense("Mutant defense failed: the area was abandoned.")
@@ -201,7 +214,8 @@ function PLUGIN:UpdateDefense()
 		return
 	end
 	event.phase, event.nextWave = "break", CurTime() + self.settings.waveBreak
-	self:NotifyDefense("Wave cleared. The next wave begins in " .. self.settings.waveBreak .. " seconds.")
+	print("[COTZ mutantdefense] Wave cleared; next wave in seconds:", self.settings.waveBreak)
+	self:DriverDefense("Good job clearing those mutants, but I see more coming! Catch your breath and reload!")
 end
 
 function PLUGIN:Think()
@@ -237,12 +251,12 @@ function PLUGIN:PlayerDisconnected(client)
 end
 
 function PLUGIN:PreCleanupMap()
-	self:EndDefense("Mutant defense cancelled for map cleanup.")
+	self:EndDefense("Mutant defense cancelled for map cleanup.", false, true)
 end
 
 function PLUGIN:OnUnload()
 	self.enabled = false
-	self:EndDefense("Mutant defense cancelled because its plugin stopped.")
+	self:EndDefense("Mutant defense cancelled because its plugin stopped.", false, true)
 	self.nextDefense = nil
 	ix.mutantDefense = nil
 end
@@ -250,7 +264,7 @@ end
 function PLUGIN:OnLoaded()
 	ix.mutantDefense = self
 	-- Discard a running session when Helix reloads this existing plugin table.
-	if self.event then self:EndDefense("Mutant defense cancelled because its plugin reloaded.") end
+	if self.event then self:EndDefense("Mutant defense cancelled because its plugin reloaded.", false, true) end
 	self.enabled = true
 	nextUpdate = 0
 	self:ScheduleDefense()
@@ -262,11 +276,11 @@ function PLUGIN:PluginUnloaded(uniqueID)
 		return
 	end
 	if not self:IsDefenseDependency(uniqueID) then return end
-	self:EndDefense("Mutant defense cancelled because a required plugin stopped.")
+	self:EndDefense("Mutant defense cancelled because a required plugin stopped.", false, true)
 end
 
 function PLUGIN:PluginLoaded(uniqueID)
 	if self:IsDefenseDependency(uniqueID) then
-		self:EndDefense("Mutant defense cancelled because a required plugin reloaded.")
+		self:EndDefense("Mutant defense cancelled because a required plugin reloaded.", false, true)
 	end
 end

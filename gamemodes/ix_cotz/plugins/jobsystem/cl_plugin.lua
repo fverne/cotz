@@ -190,8 +190,9 @@ function PANEL:AddTask(npc, job)
 	card:Dock(TOP)
 	card:DockMargin(0, 0, 10, 12)
 	local iconSize = math.ceil(96 * self.fontScale)
+	local iconWidth = math.ceil(96 * self.fontScale * 1.1)
 	local iconGap = math.ceil(16 * self.fontScale)
-	card:DockPadding(16, 12, 16 + iconSize + iconGap, 12)
+	card:DockPadding(16, 12, 16, 12)
 	card.Paint = function(_, width, height)
 		surface.SetDrawColor(COLORS.card)
 		surface.DrawRect(0, 0, width, height)
@@ -251,9 +252,17 @@ function PANEL:AddTask(npc, job)
 	local icon = card:Add("DImage")
 	icon:SetImage(taskIcon(job, definition))
 	icon:SetKeepAspect(true)
-	icon:SetSize(iconSize, iconSize)
+	icon:SetSize(iconWidth, iconSize)
 	card.PerformLayout = function(this)
-		icon:SetPos(this:GetWide() - 16 - iconSize, 12)
+		icon:SetPos(this:GetWide() - 16 - iconWidth, 12)
+		local textHeight = 0
+		for _, child in ipairs(this:GetChildren()) do
+			if child == progress then break end
+			local _, top, _, bottom = child:GetDockMargin()
+			child:DockMargin(0, top, iconWidth + iconGap, bottom)
+			textHeight = textHeight + child:GetTall() + top + bottom
+		end
+		progress:DockMargin(0, math.max(0, iconSize + iconGap - textHeight), 0, 12)
 		local height = 24
 		for _, child in ipairs(this:GetChildren()) do
 			if child ~= icon then

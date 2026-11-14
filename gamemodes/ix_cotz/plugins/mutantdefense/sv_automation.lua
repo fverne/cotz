@@ -53,7 +53,7 @@ function PLUGIN:AnnounceDefense(event)
 	end
 	if #receivers == 0 then return end
 	local minutes = self.settings.warning / 60
-	local message = string.format("The supply truck has crashed %s. Go secure the site if you want supplies back in town! Mutant waves begin in %g minutes.", event.location, minutes)
+	local message = string.format("The supply truck has crashed %s. Help our driver out. I see multiple mutants incoming, you have %g minutes to prepare.", event.location, minutes)
 	ix.chat.Send(nil, "cotz/mutantdefense/announcement", message, true, receivers)
 end
 

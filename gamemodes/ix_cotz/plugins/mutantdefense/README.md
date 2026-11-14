@@ -29,7 +29,7 @@ Vouchers remain the encounter reward.
 
 After a successful paste creates the scene, all loaded characters on this server receive LPDA news:
 
-> The supply truck has crashed %s. Go secure the site if you want supplies back in town! Mutant waves begin in 10 minutes.
+> The supply truck has crashed %s. Help our driver out. I see multiple mutants incoming, you have 10 minutes to prepare.
 
 `%s` is the selected point's location text. No equipped PDA is required, and the message is not relayed to
 other servers. The countdown starts after paste completion. Missing, failed or empty pastes do not announce
@@ -52,7 +52,8 @@ The fight's 600-second timeout also starts at that deadline.
 All three commands require Helix administrator command access. Only one event runs per server.
 Edit `PLUGIN.settings` in `sh_plugin.lua` for tuning. Defaults include 10 seconds between waves,
 a 1,500-unit defense radius, 30 seconds of abandonment grace, and a 600-second fight timeout.
-Nearby characters receive notifications at wave start/clear, abandonment, and completion/failure.
+Nearby characters receive chat updates from the truck driver at wave start/clear, abandonment, and completion/failure.
+Technical encounter and reward messages print to the server console for debugging.
 
 Before each wave, count living, unrestricted defenders in the area, excluding noclip/observers and downed
 players. Freeze that wave's count at `N = min(defenders, 8)`; everyone can participate beyond the scaling cap.
@@ -86,7 +87,8 @@ combat packs, remain awake, and respect global/regional hard population limits, 
 Blocked slots remain required. Only `OnNPCKilled` completes a slot; unexpected removal causes replacement.
 The timeout prevents permanently blocked events. Clear navigation and approaches still require map testing.
 
-Every event ending removes its tracked crash scene. Cancellation, timeout, abandonment, map cleanup, and
+After an encounter ends, its tracked crash scene remains for 60 seconds (`sceneCleanupDelay`) before removal.
+Deployment failures, map cleanup and plugin unload/reload remove the active scene immediately. Cancellation, timeout, abandonment, map cleanup, and
 own/required plugin unload or reload also remove surviving attackers without rewards. Ordinary corpse cleanup
 manages killed mutants. Interrupted events and timers do not resume after restart.
 
@@ -106,7 +108,7 @@ Character load retries delivery. **Collect defense rewards** in vendor dialogue 
 **Hand over a trader supply** consumes one carried voucher after a successful restock of that character's
 stock with that vendor and pays 1,000 rubles to the redeeming character (`voucherReward` in settings).
 Failed hand-ins keep the voucher and pay nothing. The server checks access, distance (192 units), possession and a one-second cooldown.
-NPC responses remain empty; transaction notifications explain the result, including for silent contacts.
+NPC responses remain empty; transaction results print to the server console.
 
 Restocking uses `ix.vendorStock.RestockFraction(character, vendor, 0.5)`. Existing task completions use the
 same calculation at `0.2`, retaining their claim deduplication. Only currently unlocked sale goods with positive

@@ -18,4 +18,12 @@ function PLUGIN:InitializedChatClasses()
 			LocalPlayer():EmitSound("stalkersound/pda/pda_news.wav", 55, 100, 0.2, CHAN_AUTO)
 		end,
 	})
+	ix.chat.Register("cotz/mutantdefense/driver", {
+		prefix = {},
+		CanSay = function(_, speaker) return not IsValid(speaker) end,
+		CanHear = function() return true end,
+		OnChatAdd = function(_, _, text)
+			chat.AddText(TEXT_COLOR, "[Truck driver] ", color_white, text)
+		end,
+	})
 end
