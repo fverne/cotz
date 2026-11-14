@@ -101,7 +101,7 @@ function PLUGIN:StartDefense()
 		if not success then
 			self.event = nil
 			event.dupePlugin:DespawnDupe(event.dupeID)
-			failure = "Supply-van deployment failed: " .. tostring(result)
+			failure = "Supply-truck deployment failed: " .. tostring(result)
 			self:DefenseStartFailed(failure)
 			return
 		end
@@ -115,7 +115,7 @@ function PLUGIN:StartDefense()
 	if not ok and self.event == event then complete(false, err) end
 	if failure then return failure, false end
 
-	return "Supply-van defense placed at " .. location .. ". Waves begin after the warning countdown.", true
+	return "Supply-truck defense placed at " .. location .. ". Waves begin after the warning countdown.", true
 end
 
 function PLUGIN:UpdateDefenseSchedule()

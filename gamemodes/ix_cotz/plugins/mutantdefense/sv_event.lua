@@ -154,8 +154,8 @@ function PLUGIN:UpdateDefense()
 	end
 	if event.phase == "deploying" then
 		if CurTime() >= event.deployDeadline then
-			self:EndDefense("Supply-van deployment timed out.")
-			self:DefenseStartFailed("Supply-van deployment timed out.")
+			self:EndDefense("Supply-truck deployment timed out.")
+			self:DefenseStartFailed("Supply-truck deployment timed out.")
 		end
 		return
 	end

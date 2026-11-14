@@ -2,7 +2,7 @@ local PLUGIN = PLUGIN
 
 PLUGIN.name = "Mutant Defense"
 PLUGIN.author = "verne"
-PLUGIN.description = "Scheduled supply-van mutant defenses with personal vendor trader supplys."
+PLUGIN.description = "Scheduled Supply-truck mutant defenses with personal vendor trader supplys."
 
 ix.mutantDefense = PLUGIN
 

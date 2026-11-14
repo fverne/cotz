@@ -1,6 +1,6 @@
 # Mutant defense
 
-Scheduled, session-only supply-van defense events reward transferable personal vendor trader supplys.
+Scheduled, session-only Supply-truck defense events reward transferable personal vendor trader supplys.
 The `eventcontroller`, `jobsystem`, `advdupeint`, `vendor_adv`, and `dialogue` plugins must be enabled,
 with AdvDupe2 installed. No world setup or database migration is needed. Restart/changelevel to load changes.
 
@@ -13,13 +13,13 @@ dependencies, unsuitable sites or failed pastes retry after 60 seconds; identica
 reported once until the reason changes or a crash starts successfully. `automationEnabled = false` stops
 automatic attempts; administrators can still start an event manually.
 
-Supply-van sites use the research-defense selector on the current map: named eventcontroller points tagged
+Supply-truck sites use the research-defense selector on the current map: named eventcontroller points tagged
 `_outside_easy` or `_outside_hard`, with up to eight outdoor approaches 512–4,096 units away and within 256
 vertical units. Saved map entries override read-only FTS coordinates, including explicitly empty saved tables.
 The center must pass grounded placement checks and have 256 units of player clearance before pasting.
 Selected coordinates, approach points and the `/eventadd` location text are retained for that encounter.
 
-**Required deployment asset:** author/export a prop-only supply-van crash scene in Garry's Mod as
+**Required deployment asset:** author/export a prop-only Supply-truck crash scene in Garry's Mod as
 `event_mutantdefense_supplyvan.txt`, then install it in
 `data/advdupe2/STALKERDupes/` (or the installed `AdvDupe2.DataFolder` equivalent).
 Place the dupe's anchor at ground level. `dupeName` and `dupeOffset` in `PLUGIN.settings` select the filename

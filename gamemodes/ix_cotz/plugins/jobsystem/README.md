@@ -465,7 +465,7 @@ verify representative outdoor sites in-game.
 the selected event point's location text. Its optional `usable(site, name)` filter can reject unnamed or
 blocked sites. Server-side `ix.jobs.field.FindDefenceSpawn(defence)` shuffles `defence.spawnPoints` and applies
 shared placement, `defence.playerSafeDistance` and hard population checks, returning a position or
-`nil, reason`. Research encounters and automated supply-van mutant defenses both use these helpers;
+`nil, reason`. Research encounters and automated Supply-truck mutant defenses both use these helpers;
 their wave ownership, budgets, objectives and rewards remain separate.
 
 Wave class lists and counts, health, recording duration, disruption, radius and retry

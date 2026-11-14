@@ -620,7 +620,7 @@ resetEvent()
 local scene = plugin.event
 local lastPaste = pastes[#pastes]
 check(lastPaste.name == "event_mutantdefense_supplyvan" and lastPaste.options.noItems,
-	"the configured supply-van dupe is pasted without loose item conversion")
+	"the configured Supply-truck dupe is pasted without loose item conversion")
 check(lastPaste.position == scene.center and lastPaste.offset.x == 0,
 	"dupe anchors at the grounded research site with the configured offset")
 check(scene.location == "near the old road" and scene.spawnPoints[1][1] == 3000,
