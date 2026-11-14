@@ -35,8 +35,8 @@ PLUGIN:Register("spoor", {
 				label = "Fine edge upkeep",
 			},
 			{
-				items = {"hidestash_3"},
-				label = "Pripyat stash",
+				items = {"hidestash_2"},
+				label = "Stash",
 			},
 		},
 		packages = {
