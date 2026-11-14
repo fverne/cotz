@@ -140,6 +140,10 @@ function SWEP:IndividualInitialize()
 
 	if SERVER then
 		timer.Simple(0.1, function()
+			if not IsValid(self) then
+				return
+			end
+
 			self:attachSpecificAttachment("md_nightforce_nxs")
 		end)
 	end
