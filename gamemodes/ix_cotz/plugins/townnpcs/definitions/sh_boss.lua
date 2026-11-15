@@ -39,7 +39,8 @@ PLUGIN:Register("boss", {
 		quantities = {5, 9, 15},
 		trigger = "banditKilled",
 	},
-	supplies = {},
+	supplies = {"gasmask_filter_civilian"},
+	supplyStock = {initial = 4, maximum = 4, interval = 6, amount = 1},
 	rewards = {
 		bonusCash = true,
 		bonusPackages = {
@@ -80,11 +81,11 @@ PLUGIN:Register("boss", {
 	catalogue = {
 		gasmask_filter_military = {
 			step = "v3/helmets/gasmask_filter_military",
-			terms = {nil, 4, "SELLONLY", 4, 12, 1},
+			terms = {nil, 4, "SELLONLY", 4, 6, 1},
 		},
 		gasmask_filter_scientific = {
 			step = "v3/helmets/gasmask_filter_scientific",
-			terms = {nil, 4, "SELLONLY", 4, 12, 1},
+			terms = {nil, 4, "SELLONLY", 4, 6, 1},
 		},
 		helm_operator_rus_1 = {
 			step = "v3/helmets/helm_operator_rus_1",

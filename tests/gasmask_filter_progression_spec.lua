@@ -69,7 +69,7 @@ for slug, contact in pairs(town.contacts) do
 		if itemID:match("^gasmask_filter_") then
 			filterCount = filterCount + 1
 			check(routes[slug] and routes[slug][itemID:match("^gasmask_filter_(.+)$")],
-				"only sellers of matching masks receive filter stock")
+				"only sellers of matching masks receive filter progression stock")
 		end
 	end
 end
@@ -137,6 +137,11 @@ for slug, tiers in pairs(routes) do
 	end
 end
 
+check(ix.progression.CanBuyItem(context.fixture.character(), "'Boss'", "gasmask_filter_civilian"),
+	"Boss civilian filters are purchasable without progression")
+check(not ix.progression.CanBuyItem(context.fixture.character(), "'Latch'", "gasmask_filter_civilian"),
+	"Boss default civilian supply does not unlock Latch")
+
 for _, tier in ipairs({"military", "scientific"}) do
 	local character = context.fixture.character()
 	local filterID = "gasmask_filter_" .. tier
@@ -159,16 +164,25 @@ for slug, tiers in pairs(routes) do
 	local contact = town.contacts[slug]
 	ix.npctemplates.templates[contact.template] = {items = {}}
 	local catalogue = town.catalogues[contact.name]
-	vendors:ConfigureTownTemplate(contact, catalogue, town.settings.supplyStock)
+	local stock = contact.supplyStock or town.settings.supplyStock
+	vendors:ConfigureTownTemplate(contact, catalogue, stock)
 	local saved = {items = {}, GetBuyAll = function() return false end, SetBuyAll = function() end}
-	vendors:RefreshTownVendor(saved, contact, catalogue, town.settings.supplyStock)
-	for tier in pairs(tiers) do
-		local filterID = "gasmask_filter_" .. tier
-		local row = ix.npctemplates.templates[contact.template].items[filterID]
-		check(row and row[2] == 4 and row[3] == 1 and row[4] == 4 and row[5] == 12 and row[6] == 1,
-			"compiled template contains replenishing filter stock")
-		check(saved.items[filterID] and saved.items[filterID][4] == 4,
-			"saved vendors gain the filter stock through normal refresh")
+	vendors:RefreshTownVendor(saved, contact, catalogue, stock)
+	if slug == "boss" then
+		for _, items in ipairs({ix.npctemplates.templates[contact.template].items, saved.items}) do
+			local row = items.gasmask_filter_civilian
+			check(row and row[2] == 4 and row[3] == 1 and row[4] == 4 and row[5] == 6 and row[6] == 1,
+				"Boss civilian supply retains four stock and a six-hour refill in templates and saved vendors")
+		end
+	end
+	for filterID in pairs(contact.catalogue) do
+		if filterID:match("^gasmask_filter_") then
+			local row = ix.npctemplates.templates[contact.template].items[filterID]
+			check(row and row[2] == 4 and row[3] == 1 and row[4] == 4 and row[5] == 6 and row[6] == 1,
+				"compiled template contains replenishing filter stock")
+			check(saved.items[filterID] and saved.items[filterID][4] == 4 and saved.items[filterID][5] == 6,
+				"saved vendors gain the filter stock through normal refresh")
+		end
 	end
 end
 

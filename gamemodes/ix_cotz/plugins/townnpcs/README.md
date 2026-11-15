@@ -163,9 +163,10 @@ outside the authoritative town catalogue and do not create additional sale route
 
 These five delivery stages grant purchase access only. Each inherits the following mask's existing
 prerequisites and sits after any stock preparation, immediately before that mask's purchase delivery.
-Each seller stocks four cartridges initially, with a maximum of four and one cartridge refilled every 12 hours;
+Each seller stocks four cartridges initially, with a maximum of four and one cartridge refilled every 6 hours;
 prices come from the concrete filter items. Normal vendor refresh adds the catalogue rows on restart.
-Latch remains the canonical supplier; Boss grants independent local military/scientific purchase access.
+Latch remains the canonical supplier; Boss grants independent local access to all three cartridge types.
+Boss civilian filters are available by default, with four starting/maximum stock and one refilled every 6 hours.
 Boss now joins the contacts marked `preserveProgression`, so authoring regeneration retains this ordering.
 
 New filter stages declare `defaultActive = true` while retaining their prerequisites, so they become

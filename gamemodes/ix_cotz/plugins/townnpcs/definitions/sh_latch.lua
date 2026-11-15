@@ -78,15 +78,15 @@ PLUGIN:Register("latch", {
 	catalogue = {
 		gasmask_filter_civilian = {
 			step = "v3/masks-headwear/gasmask_filter_civilian",
-			terms = {nil, 4, "SELLONLY", 4, 12, 1},
+			terms = {nil, 4, "SELLONLY", 4, 6, 1},
 		},
 		gasmask_filter_military = {
 			step = "v3/masks-headwear/gasmask_filter_military",
-			terms = {nil, 4, "SELLONLY", 4, 12, 1},
+			terms = {nil, 4, "SELLONLY", 4, 6, 1},
 		},
 		gasmask_filter_scientific = {
 			step = "v3/masks-headwear/gasmask_filter_scientific",
-			terms = {nil, 4, "SELLONLY", 4, 12, 1},
+			terms = {nil, 4, "SELLONLY", 4, 6, 1},
 		},
 		mask_halfmask = {
 			step = "v3/masks-headwear/mask_halfmask",

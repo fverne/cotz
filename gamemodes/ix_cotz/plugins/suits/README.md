@@ -40,9 +40,9 @@ its closed-respiratory description.
 
 Filters are available through normal admin item spawning/giving and seller-specific progression.
 Latch unlocks civilian filters before Halfmask, military before EO-20, and scientific before M40.
-Boss unlocks military filters before CS-4 and scientific before Screen. Each unlock is a separate
+Boss sells civilian filters by default, unlocking military filters before CS-4 and scientific before Screen. Each unlock is a separate
 delivery immediately before that seller's first mask of its type. Filters have four starting/maximum
-stock with a refill amount of one every 12 hours. Filter and mask purchase
+stock with a refill amount of one every 6 hours. Filter and mask purchase
 permissions remain personal to the character and seller. No loot or reward pools are added.
 Each cartridge occupies 1×1 cells and weighs 0.2 kg, whether loose or installed. Equipment's existing
 weight describes the equipment without its cartridge. See the [town progression guide](../townnpcs/README.md#gasmask-filter-purchases).
