@@ -35,7 +35,8 @@ function PLUGIN:LoadData()
 	self.state.migrationOffers = self:NormalizeIDKeys(self.state.migrationOffers)
 	for _, offer in pairs(self.state.migrationOffers) do
 		offer.definitions = self:NormalizeIDKeys(offer.definitions)
-		if offer.targetTemplate and offer.targetTemplate.containers then
+		-- Marker-only templates gain an empty container table below; normalize their saved offers identically.
+		if offer.targetTemplate then
 			offer.targetTemplate.containers = self:NormalizeIDKeys(offer.targetTemplate.containers)
 		end
 	end

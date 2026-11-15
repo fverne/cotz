@@ -498,5 +498,26 @@ Test("only administrators can publish player migration offers and failed saves r
 	assert(PLUGIN:GetPersonalMigrationOffer(PLUGIN:GetHideout("2")).target == "new")
 end)
 
+Test("marker-only migration offers survive a cold restart without a loaded test room", function()
+	local admin, pilot, source = setup()
+	-- Marker-only templates have no manually configured container table before their first restart.
+	PLUGIN.state.templates.new.containers = nil
+	assert(PLUGIN:ConfigurePersonalMigration(admin, "old", "1"))
+	assert(PLUGIN:GetPersonalMigrationOffer(source))
+	PLUGIN.state, PLUGIN.instances, PLUGIN.members = nil, {}, {}
+	PLUGIN:LoadData()
+	local restored = PLUGIN:GetPersonalMigrationOffer(PLUGIN:GetHideout("2"))
+	assert(restored and restored.target == "new", "The saved offer disappeared after restart")
+	assert(restored.definitions.general.recipe == "general")
+	local owner = FeatureClient(22)
+	owner.SteamID64 = function() return "owner22" end
+	owner.position = PLUGIN.state.entrances.gate.pos
+	PLUGIN:ShowManagement(owner, "2", "entrance")
+	assert(owner.cotzHideoutMenu.migrations["2"].target == "new")
+	assert(PLUGIN:MigratePersonalHideout(owner, PLUGIN:GetHideout("2")))
+	assert(PLUGIN:GetHideout("2").template == "new")
+	assert(PLUGIN:GetHideout("2").containers.general.inventoryID == 800)
+end)
+
 file, AdvDupe2, util.SHA256 = originalFile, originalAdvDupe, originalHash
 string.GetPathFromFilename = originalPath

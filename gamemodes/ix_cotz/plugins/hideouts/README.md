@@ -158,6 +158,9 @@ The second argument is the loaded test room's hideout ID. This saves the destina
 layout and dupe fingerprint. It does not move any rooms or change location definitions. Use
 `/HideoutLocationOverride` separately if new claims should start on the destination template.
 Reissue the offer after changing the destination template or dupe; stale offers cannot migrate rooms.
+Offers are saved per map and survive restarts, including templates whose containers are defined only
+by dupe markers. Neither the administrator nor the test room needs to remain online or loaded after
+the offer has been published. Existing saved offers are normalized on load without reissuing the command.
 Use administrator command `/HideoutList` to find actual source template IDs and destination test room
 IDs. It lists every room on the current map, including unloaded or unavailable rooms, with template,
 entrance and owning character/squad IDs. The room name also identifies its owner for personal rooms.
