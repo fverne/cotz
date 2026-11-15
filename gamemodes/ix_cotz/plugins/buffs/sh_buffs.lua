@@ -283,9 +283,8 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 			if parameter.aoe then
 				for _, v in ipairs(ents.FindInSphere(player:GetPos(), parameter.aoe)) do
      				if v:IsPlayer() and v ~= player then
-     					player:SetHealth(math.Clamp(player:Health() + player.meditationHealing * parameter.aoeMult, 0, player:GetMaxHealth()))
+     					v:SetHealth(math.Clamp(v:Health() + player.meditationHealing * parameter.aoeMult, 0, v:GetMaxHealth()))
      					v:AddBuff("buff_meditation_tick", 2, {}) 
-
      				end
      			end
      		end
