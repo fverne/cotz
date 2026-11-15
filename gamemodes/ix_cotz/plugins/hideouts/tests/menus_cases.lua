@@ -212,6 +212,30 @@ Test("management sends actual invitations and permits revoking an offline invite
 	assert(not PLUGIN:HandleManagementAction(owner, record.id, 7, "3", 0))
 end)
 
+Test("container sharing lists only invitations and labels guests with missing names", function()
+	local owner, inventory, instance, record = containerHome()
+	local guest = FeatureClient(2)
+	FeatureClient(5)
+	record.guests = {["2"] = true, ["3"] = false, ["4"] = true, ["5"] = true}
+	record.containers.left.guests = {["2"] = true}
+	local writeUInt, writeString, writeBool = net.WriteUInt, net.WriteString, net.WriteBool
+	for _, blankName in ipairs({"", " \t "}) do
+		guest:GetCharacter().GetName = function() return blankName end
+		local ids, names, flags, count = {}, {}, {}, nil
+		net.WriteUInt = function(value, bits)
+			if bits == 7 then count = value end
+			if bits == 32 then ids[#ids + 1] = value end
+		end
+		net.WriteString = function(value) names[#names + 1] = value end
+		net.WriteBool = function(value) flags[#flags + 1] = value end
+		PLUGIN:ShowContainerMenu(owner, instance.containers.left)
+		assert(count == 3 and #ids == 3 and ids[1] == 2 and ids[2] == 4 and ids[3] == 5)
+		assert(names[4] == "Character #2" and names[5] == "Character #4" and names[6] == "Character 5")
+		assert(flags[#flags - 2] == true and flags[#flags - 1] == false and flags[#flags] == false)
+	end
+	net.WriteUInt, net.WriteString, net.WriteBool = writeUInt, writeString, writeBool
+end)
+
 Test("administrator keypads list public squad rooms alongside owned rooms and invitations", function()
 	local owner, inventory, instance, record = containerHome()
 	local admin = FeatureClient(2)

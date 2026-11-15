@@ -7,6 +7,16 @@ util.AddNetworkString("cotz/hideouts/manage-open")
 util.AddNetworkString("cotz/hideouts/manage-action")
 util.AddNetworkString("cotz/hideouts/container")
 
+local function guestName(characterID)
+	local character = ix.char.loaded[tonumber(characterID)]
+	local name = character and character:GetName()
+	if not name or not name:find("%S") then
+		return "Character #" .. characterID
+	end
+
+	return name
+end
+
 function PLUGIN:IsManagementLocation(client, record, scope, slotID)
 	if not record then return false end
 	if scope == "admin" then return client:IsAdmin() end
@@ -81,9 +91,8 @@ function PLUGIN:ShowManagement(client, id, scope)
 			if self:CanManageHideout(client, record) then
 				for guestID, invited in SortedPairs(record.guests or {}) do
 					if invited == true then
-						local character = ix.char.loaded[tonumber(guestID)]
 						guests[#guests + 1] = {
-							id = tonumber(guestID), name = character and character:GetName() or "Character #" .. guestID,
+							id = tonumber(guestID), name = guestName(guestID),
 						}
 						if #guests == MAX_MANAGEMENT_GUESTS then break end
 					end
@@ -158,9 +167,9 @@ function PLUGIN:ShowContainerMenu(client, entity)
 	end
 	local guests = {}
 	if record.ownerType ~= "squad" then
-		for id in SortedPairs(record.guests or {}) do
-			local character = ix.char.loaded[tonumber(id)]
-			guests[#guests + 1] = {id = tonumber(id), name = character and character:GetName() or "Character #" .. id}
+		for id, invited in SortedPairs(record.guests or {}) do
+			if invited ~= true then continue end
+			guests[#guests + 1] = {id = tonumber(id), name = guestName(id)}
 			if #guests >= 64 then break end
 		end
 	end

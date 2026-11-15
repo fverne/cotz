@@ -311,6 +311,9 @@ New or upgraded container models that cross the template bounds are shifted insi
 Bounds corrections close only that container's storage session. Models larger than the entire
 template still require an administrator to correct the template bounds or configured model.
 
+Personal container sharing lists only active hideout invitations. Guests whose character name is
+blank or unavailable appear as `Character #ID` in sharing and invitation-revocation menus.
+
 | Recipe | Initial size | Permitted contents | Personal level-1 assembly cash |
 | --- | --- | --- | ---: |
 | general | 2×3 | Ordinary storable items | 600 roubles; starter is free |
