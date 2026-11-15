@@ -1,5 +1,16 @@
 local PLUGIN = PLUGIN
 
+local function repairMigratedContainerRecipes(record)
+	if record.ownerType == "squad" or not (record.templateMigration or record.personalMigration) then return end
+
+	-- Earlier migrations saved the destination layout but retained unused slots' source recipes.
+	for id, slot in pairs(record.containers) do
+		if id == record.starterSlot or (slot.tier or 0) > 0 or slot.inventoryID then continue end
+		local definition = record.personalLayout[id]
+		if definition and definition.recipe then slot.recipe = definition.recipe end
+	end
+end
+
 function PLUGIN:NormalizeIDKeys(records)
 	local normalized = {}
 	for id, value in pairs(records or {}) do
@@ -50,6 +61,7 @@ function PLUGIN:LoadData()
 		record.containers = self:NormalizeIDKeys(record.containers)
 		for _, slot in pairs(record.containers) do slot.guests = self:NormalizeIDKeys(slot.guests) end
 		record.personalLayout = self:NormalizeIDKeys(record.personalLayout)
+		repairMigratedContainerRecipes(record)
 		if tonumber(id) then
 			nextID = math.max(nextID, tonumber(id) + 1)
 		end

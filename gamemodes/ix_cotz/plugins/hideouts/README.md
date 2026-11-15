@@ -179,6 +179,9 @@ destination dupe and saved state before committing.
 Empty, uninstalled slots (tier 0 with no inventory ID) adopt the destination recipe or are omitted if
 the destination has no such slot. This also applies to bulk migration and rollback; installed slots,
 slots retaining inventory IDs and the general starter still require compatible destination definitions.
+Rooms migrated by older code also reconcile unused slot recipes from their saved destination layout
+when plugin data loads. Installed containers, inventory references and the starter slot are never
+retuned by this repair; destination markers still have to match the saved recipes.
 
 Each accepted move first writes and verifies a room backup beneath
 `garrysmod/data/cotz_hideout_migrations/`. Keep these for administrator recovery; the bulk migration

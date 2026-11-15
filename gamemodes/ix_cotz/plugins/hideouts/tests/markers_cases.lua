@@ -164,6 +164,73 @@ Test("marker container identity survives dupe relocation and cold reload", funct
 	assert(definition.pos.x == 100 and retained.width == 6 and retained.height == 6)
 end)
 
+Test("previously migrated rooms repair unused recipes before loading destination markers", function()
+	for _, migrationKey in ipairs({"templateMigration", "personalMigration"}) do
+		local instance, record, template = home()
+		record[migrationKey] = "previous-migration"
+		record.personalVersion, record.starterSlot = 1, "old"
+		record.containers.old = {recipe = "general", tier = 1, inventoryID = 77, width = 6, height = 6}
+		record.containers.ammo_2 = {recipe = "general", tier = 0, public = false, guests = {}}
+		record.personalLayout = {
+			old = table.Copy(template.containers.old),
+			ammo_2 = {recipe = "ammo", pos = Vector(80, 0, 24)},
+		}
+		assert(PLUGIN:Persist())
+		PLUGIN.instances, PLUGIN.members = {}, {}
+		PLUGIN:LoadData()
+		record = PLUGIN:GetHideout(record.id)
+		assert(record.containers.ammo_2.recipe == "ammo", "stale unused recipe must adopt saved migration layout")
+		assert(record.containers.ammo_2.tier == 0 and not record.containers.ammo_2.inventoryID)
+		assert(record.containers.old.inventoryID == 77 and record.containers.old.width == 6)
+		instance = {id = record.id, origin = Vector(2000, 2000, 0)}
+		PLUGIN.instances[record.id] = instance
+		local source = {
+			marker("container", "old", "general", instance.origin),
+			marker("container", "ammo_2", "ammo", instance.origin + Vector(80, 0, 24)),
+		}
+		instance.template = assert(PLUGIN:ResolveTemplateMarkers(instance, source, PLUGIN:GetTemplate(record)))
+		assert(PLUGIN:PreparePersonalStorage(instance))
+		local slot = assert(PLUGIN:GetContainer(record, "ammo_2"))
+		assert(slot.recipe == "ammo" and slot.tier == 0 and not slot.inventoryID)
+		PLUGIN.instances = {}
+		PLUGIN:LoadData()
+		assert(PLUGIN:GetHideout(record.id).containers.ammo_2.recipe == "ammo")
+	end
+end)
+
+Test("migration recipe repair preserves protected slots and rejects changed destination markers", function()
+	for _, scenario in ipairs({"installed", "inventory", "starter", "no-layout", "unmigrated", "squad"}) do
+		local instance, record, template = home()
+		record.personalMigration = scenario ~= "unmigrated" and "previous-migration" or nil
+		record.ownerType = scenario == "squad" and "squad" or "character"
+		record.starterSlot = scenario == "starter" and "ammo_2" or "old"
+		record.containers.ammo_2 = {
+			recipe = "general", tier = scenario == "installed" and 1 or 0,
+			inventoryID = scenario == "inventory" and 77 or nil,
+		}
+		record.personalLayout = scenario ~= "no-layout" and {
+			ammo_2 = {recipe = "ammo", pos = Vector(80, 0, 24)},
+		} or nil
+		assert(PLUGIN:Persist())
+		PLUGIN.instances, PLUGIN.members = {}, {}
+		PLUGIN:LoadData()
+		record = PLUGIN:GetHideout(record.id)
+		assert(record.containers.ammo_2.recipe == "general", scenario)
+		local changed = marker("container", "ammo_2", "ammo", instance.origin)
+		local resolved, reason = PLUGIN:ResolveTemplateMarkers(instance, {changed}, template)
+		assert(not resolved and reason:find("changed recipe", 1, true), scenario)
+		assert(IsValid(changed))
+	end
+	local instance, record, template = home()
+	record.templateMigration = "previous-migration"
+	record.containers.ammo_2 = {recipe = "general", tier = 0}
+	record.personalLayout = {ammo_2 = {recipe = "ammo", pos = Vector()}}
+	assert(PLUGIN:Persist())
+	PLUGIN:LoadData()
+	local changed = marker("container", "ammo_2", "medical", instance.origin)
+	assert(not PLUGIN:ResolveTemplateMarkers(instance, {changed}, template))
+end)
+
 Test("squad vendor reset uses the marker transform while saved vendor movement remains independent", function()
 	local instance, record, template, owner = home()
 	record.ownerType, record.squadID = "squad", "squad1"
