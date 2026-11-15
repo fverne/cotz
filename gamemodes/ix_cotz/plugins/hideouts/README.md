@@ -176,6 +176,9 @@ local positions stay unchanged, so the inspected destination must also provide w
 at those positions. Migration does not generate fresh template loot. Server checks lock the room
 during the database read and recheck character identity, ownership, entrance proximity, offer,
 destination dupe and saved state before committing.
+Empty, uninstalled slots (tier 0 with no inventory ID) adopt the destination recipe or are omitted if
+the destination has no such slot. This also applies to bulk migration and rollback; installed slots,
+slots retaining inventory IDs and the general starter still require compatible destination definitions.
 
 Each accepted move first writes and verifies a room backup beneath
 `garrysmod/data/cotz_hideout_migrations/`. Keep these for administrator recovery; the bulk migration

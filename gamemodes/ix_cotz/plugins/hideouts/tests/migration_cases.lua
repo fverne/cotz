@@ -171,7 +171,7 @@ Test("migration and rollback preserve lamp furnishings and restore original shel
 	assert(record.containers.general.inventoryID == 800 and record.containers.general.tier == 5)
 end)
 
-Test("migration rejects missing or changed slot recipes including uninstalled saved slots", function()
+Test("migration rejects missing or changed installed slot recipes and incompatible starter slots", function()
 	for _, mode in ipairs({"missing", "recipe", "starter", "uninstalled"}) do
 		local admin, pilot, source = setup()
 		if mode == "missing" then pilot.template.containers.general = nil end
@@ -320,6 +320,31 @@ Test("migrated room reload skips new dummy loot and preserves existing seed hist
 	assert(record.containers.general.inventoryID == 800 and record.containers.general.tier == 5)
 end)
 
+Test("bulk migration accepts unused slot recipe changes and reconciles them on rollback", function()
+	local admin, pilot, source = setup()
+	source.containers.ammo_2 = {recipe = "general", tier = 0, public = false, guests = {}}
+	source.personalLayout.ammo_2 = {recipe = "general", pos = Vector()}
+	source.containers.retired_empty = {recipe = "general", tier = 0}
+	pilot.template.containers.ammo_2 = {recipe = "ammo", pos = Vector(80, 40, 8)}
+	local token = preview(admin)
+	apply(admin, token)
+	local moved = PLUGIN:GetHideout("2")
+	assert(moved.containers.ammo_2.recipe == "ammo" and moved.containers.ammo_2.tier == 0)
+	assert(not moved.containers.ammo_2.inventoryID and not moved.containers.retired_empty)
+	assert(moved.containers.general.inventoryID == 800 and moved.containers.general.tier == 5)
+	assert(PLUGIN:RollbackTemplateMigration(admin, token))
+	assert(PLUGIN:GetHideout("2").template == "old")
+	assert(PLUGIN:GetHideout("2").containers.ammo_2.recipe == "general")
+end)
+
+Test("unused-looking slots with inventory references still require matching recipes", function()
+	local admin, pilot, source = setup()
+	source.containers.ammo_2 = {recipe = "general", tier = 0, inventoryID = 801}
+	pilot.template.containers.ammo_2 = {recipe = "ammo", pos = Vector()}
+	assert(not PLUGIN:PreviewTemplateMigration(admin, "old", "1"))
+	assert(source.containers.ammo_2.inventoryID == 801 and source.template == "old")
+end)
+
 local function personalOffer()
 	local admin, pilot, source = setup()
 	PLUGIN.personalPurchases = {}
@@ -361,6 +386,21 @@ Test("player migration preserves storage, upgrades and floor rows while discardi
 	assert(PLUGIN:GetHideout(moved.id).template == "new")
 	assert(PLUGIN:GetHideout(moved.id).containers.general.inventoryID == 800)
 	assert(not PLUGIN:GetPersonalMigrationOffer(PLUGIN:GetHideout(moved.id)))
+end)
+
+Test("player migration adopts destination recipes only for empty uninstalled slots", function()
+	local owner, source, admin, pilot = personalOffer()
+	source.containers.ammo_2 = {recipe = "general", tier = 0, public = false, guests = {}}
+	source.personalLayout.ammo_2 = {recipe = "general", pos = Vector()}
+	pilot.template.containers.ammo_2 = {recipe = "ammo", pos = Vector(80, 40, 8)}
+	assert(PLUGIN:ConfigurePersonalMigration(admin, "old", "1"))
+	PLUGIN:ShowManagement(owner, source.id, "entrance")
+	assert(PLUGIN:MigratePersonalHideout(owner, source))
+	PLUGIN:LoadData()
+	local moved = PLUGIN:GetHideout(source.id)
+	assert(moved.template == "new" and moved.containers.ammo_2.recipe == "ammo")
+	assert(moved.containers.ammo_2.tier == 0 and not moved.containers.ammo_2.inventoryID)
+	assert(moved.containers.general.inventoryID == 800 and moved.containers.general.tier == 5)
 end)
 
 Test("player migration requires an owner, a quoted offer and an unloaded room at its entrance", function()

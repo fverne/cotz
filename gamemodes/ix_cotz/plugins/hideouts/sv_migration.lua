@@ -76,7 +76,7 @@ end
 local function validateContainers(record, definitions, sourceDefinitions)
 	for id, slot in pairs(record.containers or {}) do
 		local definition = definitions[id]
-		if not definition and (slot.tier or 0) <= 0 and not slot.inventoryID then continue end
+		if (slot.tier or 0) <= 0 and not slot.inventoryID then continue end
 		local recipe = slot.recipe or (sourceDefinitions[id] or {}).recipe
 		if not definition or not recipe or recipe ~= definition.recipe then
 			return false, "Room " .. record.id .. " needs matching slot/recipe: " .. id
@@ -88,6 +88,18 @@ local function validateContainers(record, definitions, sourceDefinitions)
 	end
 
 	return true
+end
+
+local function reconcileUninstalledContainers(record, definitions)
+	for id, slot in pairs(record.containers or {}) do
+		if (slot.tier or 0) > 0 or slot.inventoryID then continue end
+		local definition = definitions[id]
+		if definition then
+			slot.recipe = definition.recipe
+		else
+			record.containers[id] = nil
+		end
+	end
 end
 
 local function pendingSeedsFit(plugin, record, template)
@@ -213,6 +225,7 @@ local function applyMigration(self, client, token)
 		record.cassetteTransform = nil
 		record.ignoreTemplateSeeds = true
 		record.templateMigration = token
+		reconcileUninstalledContainers(record, plan.definitions)
 		for _, slot in pairs(record.containers or {}) do slot.transform = nil end
 	end
 	for _, location in pairs(self.state.locations or {}) do
@@ -279,6 +292,7 @@ local function rollbackMigration(self, client, token)
 			record[key] = istable(before[key]) and table.Copy(before[key]) or before[key]
 		end
 		record.templateMigration = before.templateMigration
+		reconcileUninstalledContainers(record, before.personalLayout or plan.sourceTemplate.containers or {})
 		for slotID, slot in pairs(record.containers or {}) do
 			slot.transform = before.containers and before.containers[slotID] and before.containers[slotID].transform
 		end
@@ -445,6 +459,7 @@ function PLUGIN:MigratePersonalHideout(client, record)
 			moved.cassetteTransform = nil
 			moved.ignoreTemplateSeeds = true
 			moved.personalMigration = token
+			reconcileUninstalledContainers(moved, quotedOffer.definitions)
 			for _, slot in pairs(moved.containers or {}) do slot.transform = nil end
 			self.state.hideouts[record.id] = moved
 			if not self:Persist() then
