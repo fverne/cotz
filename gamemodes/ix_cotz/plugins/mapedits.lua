@@ -29,6 +29,11 @@ function PLUGIN:EntityKeyValue(ent, key, value)
             ent:Remove()
         end
 
+        -- locks right bunker, as its used as a hideout.
+        if IsValid(ent) and ent:MapCreationID() == 1671 then
+            ent:SetKeyValue("spawnflags", 2048) -- Starts Locked
+        end
+
         --removes BTR with missing textures
         if IsValid(ent) and ent:MapCreationID() == 1627 then
             ent:Remove()
