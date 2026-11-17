@@ -1,15 +1,6 @@
 name: Validate balancing tools
 
 on:
-  pull_request:
-    paths:
-      - 'gamemodes/ix_cotz/**'
-      - 'lua/entities/**'
-      - 'lua/weapons/**'
-      - 'docs/balance/**'
-      - 'tests/progression_spec.lua'
-      - 'tests/vendor_stock_spec.lua'
-      - '.github/workflows/balance-*.yml'
   workflow_dispatch:
 
 permissions:
