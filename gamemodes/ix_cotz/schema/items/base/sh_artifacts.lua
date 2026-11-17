@@ -35,6 +35,11 @@ if (CLIENT) then
 
         entity:DrawModel()
     end
+    function ITEM:PaintOver(item, w, h)
+        if item:GetData("cooldown",0) >= os.time() then
+            draw.SimpleText(item:GetData("cooldown",0) - os.time() + 1, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+        end
+    end
 end
 
 function ITEM:PopulateTooltip(tooltip)
