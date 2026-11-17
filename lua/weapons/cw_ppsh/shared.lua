@@ -106,11 +106,12 @@ SWEP.Primary.ClipSize		= 35
 SWEP.Primary.DefaultClip	= 0
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "7.62x25MM"
+SWEP.Chamberable = false -- PPSh-41 is an open-bolt weapon
 
 SWEP.FireDelay = 0.06315789473
 SWEP.FireSound = "CW_PPSH_FIRE"
 SWEP.FireSoundSuppressed = "CW_MP5_FIRE_SUPPRESSED"
-SWEP.Recoil = 0.95
+SWEP.Recoil = 0.55
 SWEP.DurabilityDamageChance = 0.005
 SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
@@ -125,7 +126,7 @@ SWEP.Shots = 1
 SWEP.Damage = 39
 SWEP.DeployTime = 0.8
 
-SWEP.ReloadSpeed = 1
+SWEP.ReloadSpeed = 1.2
 SWEP.ReloadTime = 2.5
 SWEP.ReloadTime_Empty = 3.9
 SWEP.ReloadHalt = 2.9
