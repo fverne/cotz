@@ -201,10 +201,11 @@ function PLUGIN:HUDPaint()
 				if ((game.GetAmmoName(wep:GetPrimaryAmmoType()) or "") != "") then
 					if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
 						ammoSubClass = string.lower(string.sub(game.GetAmmoName(ammoType), -3, -2))
-						ammoBox = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType), 1, -6)].uID
-						ammoBox = ammoBox..ammoSubClass
+						local ammoDefinition = ix.weapontables.ammotypes[string.sub(game.GetAmmoName(ammoType), 1, -6)]
+						ammoBox = ammoDefinition and ammoDefinition.uID and (ammoDefinition.uID .. ammoSubClass)
 					else
-						ammoBox = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)].uID
+						local ammoDefinition = ix.weapontables.ammotypes[game.GetAmmoName(ammoType)]
+						ammoBox = ammoDefinition and ammoDefinition.uID
 					end
 
 					if ammoBox then
@@ -235,7 +236,7 @@ function PLUGIN:HUDPaint()
 			draw.DrawText(tostring(lp:GetAmmoCount( wep:GetPrimaryAmmoType() )), "stalkerregularfont", ScrW()*0.865, ScrH()*0.905, Color( 193, 136, 21, 255 ), TEXT_ALIGN_CENTER )
 
 			if string.sub(wep:GetClass(),1,3) == "cw_" then
-				if wep:GetPrimaryAmmoType() then
+				if game.GetAmmoName(wep:GetPrimaryAmmoType()) then
 					draw.DrawText( language.GetPhrase(game.GetAmmoName(wep:GetPrimaryAmmoType()).."_ammo"), "stalkerregularsmallfont2", ScrW()*0.83, ScrH()*0.838, Color( 193, 136, 21, 255 ), TEXT_ALIGN_LEFT )
 				end
 

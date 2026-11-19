@@ -21,3 +21,9 @@ ITEM.iconCam = {
 	ang = Angle(25, 220, 28.235294342041),
 	fov = 2.2,
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "passiveEffect", text = "While carried, another bolt appears in your hand as you throw it."},
+	}
+end
