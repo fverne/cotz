@@ -10,11 +10,3 @@ ITEM.flag = "A"
 ITEM.rarity = 3
 ITEM.baseweight = 1.500
 ITEM.varweight  = 0.550
-
-
-function ITEM:GetIndividualProperties()
-	return {
-		{id = "passiveEffect", text = "Protects from electrical damage."},
-        {id = "cooldown", text = "Recovery cooldown: 5 s"},
-	}
-end
