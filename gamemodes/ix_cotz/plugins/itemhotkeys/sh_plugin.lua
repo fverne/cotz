@@ -32,7 +32,6 @@ end)
 if (CLIENT) then
 	netstream.Hook("ixHotkeyItemUpdate", function(hotkeyindex)
 		local hotkeyitem = ix.option.Get("Hotkey" .. hotkeyindex, "nil")
-
 		for i = 1, 4 do
 			if ix.option.Get("Hotkey" .. i, "nil") == hotkeyitem then
 				ix.option.Set("Hotkey" .. i, "nil")
@@ -65,23 +64,30 @@ function playerMeta:ActivateHotkey(hotkeyindex)
 	local client = self
 	local char = self:GetCharacter()
 	local inv = char:GetInventory()
-	local item = inv:HasItem(char:GetHotkeyItemName(hotkeyindex))
-	local info, action
-
+	local info, action, item
 	--items shouldnt be overlapping blackscreens
 	if self:GetNetVar("ix_noMenuAllowed") then
 		return
 	end
-
-	if item then
+	local items = inv:GetItemsByUniqueID(char:GetHotkeyItemName(hotkeyindex))
+	if #items ~= 0 then
 		for k, v in pairs(PLUGIN.hotkeyitems) do
-			if item.uniqueID == k then
-				info = item.functions[v]
-				action = v
+			if items[1].uniqueID == k then
+				for _, j in pairs(items) do
+					j.player = client
+					info = j.functions[v]
+					if info and info.OnCanRun and info.OnCanRun(j) != false then
+						action = v
+						item = j
+						item.player = nil
+						break
+					end
+					j.player = nil
+				end
 			end
 		end
 
-		if (IsValid(client) and client:GetCharacter()) then
+		if (item and IsValid(client) and client:GetCharacter()) then
 			item.player = client
 	
 			if (info and info.OnCanRun and info.OnCanRun(item) != false) then
