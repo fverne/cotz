@@ -228,7 +228,7 @@ local suit = {isBodyArmor = true, scale = 1, GetData = bread.GetData, data = {},
 }
 ix.suits.anomalyTypes = {{network = "thermal", name = "Thermal", field = "thermalRes", flatField = "flatThermalRes"}}
 local protection = ix.itemProperties.GetProtection(suit)
-check(protection[1].text == "Ballistics: 1,000 J", "suit protection omits absorption")
+check(protection[1].text == "Ballistics: 40%", "suit protection omits absorption")
 for _, row in ipairs(protection) do
 	check(row.id ~= "protection/rupture" and row.id ~= "protection/psychic", "zero protection rows omitted")
 end
@@ -240,16 +240,16 @@ gp5.getRadProt = function(self) return self.radProt end
 local maskRows = ix.itemProperties.GetProtection(gp5)
 check(#maskRows == 1 and maskRows[1].id == "protection/radiation", "GP5 only shows actual resistance")
 suit.scale = 0.5
-check(ix.itemProperties.GetProtection(suit)[1].text == "Ballistics: 500 J", "effective condition")
+check(ix.itemProperties.GetProtection(suit)[1].text == "Ballistics: 20%", "effective condition")
 local gear = {GetDurabilityScale = function() return 0.5 end}
 for key, value in pairs(suit) do if gear[key] == nil then gear[key] = value end end
 gear.isBodyArmor = false
-check(ix.itemProperties.GetProtection(gear)[1].text == "Ballistics: 2,000 J", "gear omits absorption")
+check(ix.itemProperties.GetProtection(gear)[1].text == "Ballistics: 80%", "gear omits absorption")
 ix.armortables = {attachments = {plate = {br = 0.05, ar = -0.05}}}
 local attachment = {attachName = "plate"}
 local attachmentRows = ix.itemProperties.GetProtection(attachment)
-check(attachmentRows[1].text == "Ballistics: 125 J", "attachment resistance uses common calibration")
-check(attachmentRows[2].text == "Thermal: -15 kW/m²", "attachment drawbacks remain negative")
+check(attachmentRows[1].text == "Ballistics: 5%", "attachment resistance uses percentages")
+check(attachmentRows[2].text == "Thermal: -5%", "attachment drawbacks remain negative")
 local function tooltip()
 	local value = {rows = {}, count = 0}
 	function value:GetRow(id) return self.rows[id] end

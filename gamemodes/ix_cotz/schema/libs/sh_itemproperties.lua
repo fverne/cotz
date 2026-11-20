@@ -6,9 +6,10 @@ local UNITS = {
 	healthRate = {1, "%"}, health = {1, "HP"}, psychicRate = {1, "%/s"},
 	radiationRate = {300, "mSv/s"}, radiationAmount = {300, "mSv"},
 	clotting = {1500, "mL/min"}, staminaRate = {1000, "µg/s"},
-	thermal = {300, "kW/m²"}, electrical = {480, "V"}, chemical = {100, "%"}, anomalous = {100, "%"},
-	ballistics = {2500, "J"}, rupture = {2500, "J"}, gravitational = {2500, "J"},
-	psychic = {300, "mT"}, radiation = {3000, "mSv"},
+	-- Protection readings are resistance fractions shown as percentages.
+	thermal = {100, "%"}, electrical = {100, "%"}, chemical = {100, "%"}, anomalous = {100, "%"},
+	ballistics = {100, "%"}, rupture = {100, "%"}, gravitational = {100, "%"},
+	psychic = {100, "%"}, radiation = {100, "%"},
 	distance = {1, "units"}, jumpSpeed = {1, "units/s"},
 	weight = {1, "kg"}, duration = {1, "s"}, percent = {1, "%"}, number = {1, ""},
 }
@@ -57,7 +58,7 @@ function ix.itemProperties.GetProtection(item)
 
 		local text = label .. ": " .. ix.itemProperties.Format(id, reduction or 0)
 		if flat ~= nil then
-			text = text .. "; absorption " .. ix.itemProperties.Format(id, flat / 100)
+			text = text .. "; absorption " .. ix.itemProperties.Format("number", flat)
 		end
 		rows[#rows + 1] = {id = "protection/" .. id, text = text}
 	end
@@ -110,7 +111,7 @@ local EFFECTS = {
 	debuff_radiation = {"Radiation exposure", "radiationRate", 2},
 	buff_psyheal = {"Psychic recovery", "psychicRate", 2},
 	debuff_psy = {"Psychic damage", "psychicRate", -2},
-	buff_psyblock = {"Psychic shielding", "psychic", 0.01},
+	buff_psyblock = {"Psychic shielding", "number", 1},
 	buff_hijump = {"Jump boost", "jumpSpeed", 1},
 }
 
