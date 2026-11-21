@@ -190,6 +190,29 @@ function ix.itemProperties.GetAmmoNames(item, weapon)
 	return names
 end
 
+local function attachmentNames(ids)
+	local definitions = ix.weapontables and ix.weapontables.attachments or {}
+	local names = {}
+	for _, id in ipairs(ids) do
+		if definitions[id] then names[#names + 1] = definitions[id].name end
+	end
+
+	return names
+end
+
+function ix.itemProperties.GetAttachmentRows(item)
+	local rows = {}
+	local installed = attachmentNames(item:GetData("attachments", {}))
+	if #installed > 0 then
+		addText(rows, "installedAttachments", "Installed attachments: " .. table.concat(installed, ", "))
+	end
+	local compatible = item.canAttach and attachmentNames(item.validAttachments or {}) or {}
+	local text = #compatible > 0 and table.concat(compatible, ", ") or "None"
+	addText(rows, "attachments", "Compatible attachments: " .. text)
+
+	return rows
+end
+
 function ix.itemProperties.GetRows(item)
 	local rows = {}
 	local hunger = item.GetHunger and item:GetHunger() or item.hunger
@@ -228,6 +251,7 @@ function ix.itemProperties.GetRows(item)
 			end
 		end
 		if item.base == "base_newweapons" then
+			for _, row in ipairs(ix.itemProperties.GetAttachmentRows(item)) do rows[#rows + 1] = row end
 			add(rows, "cleanliness", "Cleanliness", "percent", item:GetData("wear", 100))
 		end
 		if item.base == "base_newweapons" or item:GetData("durability") ~= nil then
