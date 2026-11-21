@@ -156,7 +156,8 @@ cannot extend that grace. Once players leave, grounded actors forget their targe
 work and sleep even if they were fighting. Airborne actors finish their movement before sleeping.
 
 Bandits, mercenaries and military are internally allied and mutually hostile. Zombified humans ally
-with undead mutants. Spawned human squads alert nearby awake faction allies to threats (see below). Idle
+with undead mutants. Undead (zombies and zombified humans) side with mutants: they never fight or
+damage mutants from any pack and do not join ambient pack feuds, but stay hostile to living factions. Spawned human squads alert nearby awake faction allies to threats (see below). Idle
 followers regroup beyond 512 units and stop within 256; the living member with the lowest entity
 index leads. Members outside 2,048 units return toward their encounter origin. Regrouping never
 teleports or follows a sleeping leader; blocked attempts retry after ten seconds. Actual movement

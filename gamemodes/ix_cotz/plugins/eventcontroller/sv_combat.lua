@@ -193,7 +193,9 @@ function PLUGIN:ActorsHostile(first, second)
 	if firstPack and firstPack == secondPack then return false end
 	if (firstPack and firstPack.isolated) or (secondPack and secondPack.isolated) then return false end
 	if first.cotzFaction and second.cotzFaction then return first.cotzFaction ~= second.cotzFaction end
-	if first.cotzFaction or second.cotzFaction then return true end
+	-- Undead side with mutants; only living human factions treat mutants as enemies.
+	local faction = first.cotzFaction or second.cotzFaction
+	if faction then return faction ~= "undead" end
 	if first.cotzSpecies == second.cotzSpecies then return false end
 
 	return firstPack ~= nil and firstPack.opponent == secondPack and CurTime() < firstPack.conflictUntil
@@ -544,14 +546,14 @@ function PLUGIN:UpdateAmbientPack(pack, leader)
 	if GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if pack.isolated or pack.opponent or CurTime() < pack.nextAmbient then return end
 	pack.nextAmbient = CurTime() + AMBIENT_INTERVAL
-	if not leader or leader.cotzHuman or leader.cotzSleeping or CurTime() < pack.cooldown then return end
+	if not leader or leader.cotzFaction or leader.cotzSleeping or CurTime() < pack.cooldown then return end
 	if self:GetCombatPlayerFocus(leader) or IsValid(leader:GetEnemy()) or targetBusy(leader) then return end
 	if not self:TakeSearchBudget() then pack.nextAmbient = CurTime() + 1 return end
 	local prey, rival
 	for _, other in ipairs(self:NearbyCombatActors(leader:GetPos(), AMBIENT_RANGE)) do
 		local otherPack = other.cotzCombatPack
 		if otherPack ~= pack and not otherPack.isolated and not otherPack.opponent and not other.cotzSleeping
-			and not other.cotzHuman and other.cotzSpecies ~= leader.cotzSpecies
+			and not other.cotzFaction and other.cotzSpecies ~= leader.cotzSpecies
 			and not self:ActorsAllied(leader, other)
 			and CurTime() >= otherPack.cooldown and leader:Visible(other) then
 			rival = rival or other

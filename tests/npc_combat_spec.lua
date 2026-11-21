@@ -232,6 +232,19 @@ lowMutant.removed = true
 bandit.enemy = nil
 check(manager:ActorsAllied(zombified, zombie) and manager:CanActorAttack(zombified, merc),
 	"zombified humans ally with undead rather than their former faction")
+local controller = actor("npc_mutant_controller", 1350)
+check(not manager:ActorsHostile(zombie, controller) and not manager:CanActorAttack(zombie, controller)
+	and not manager:CanActorAttack(controller, zombie) and not manager:CanActorAttack(zombified, controller),
+	"undead never fight mutants from other packs")
+check(manager:CanActorAttack(zombie, merc) and manager:CanActorAttack(merc, zombie),
+	"undead remain hostile to living human factions")
+manager:SetCombatRelationship(controller, zombie)
+check(controller.relationships[zombie] == D_LI, "mutants treat undead as friendly in engine targeting")
+local mutantDamage = {amount = 20, GetAttacker = function() return controller end, GetInflictor = function() end,
+	SetDamage = function(self, value) self.amount = value end}
+check(not manager:AllowCombatDamage(zombie, mutantDamage), "mutant damage cannot hurt undead")
+manager:RemoveCombatActor(controller)
+controller.removed = true
 merc.cotzSleeping = true
 check(not manager:CanActorAttack(bandit, merc) and not manager:CanActorAttack(merc, bandit),
 	"both attacker and NPC target must be awake")
