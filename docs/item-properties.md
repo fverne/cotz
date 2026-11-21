@@ -45,7 +45,8 @@ filter/tank state and installed attachment getters. Equipped firearms use their 
 available; other previews use registered SWEP definitions. Magazine size and cyclic rate come from
 that weapon rather than historical figures in prose. Firearms list all compatible ammunition by item name, including variants offered by their SWEP
 ammo attachments. Ammo items omit the cartridge row and expand special variant labels such as
-HP to Hollow Point. Long ammunition lists wrap within the tooltip width. Melee weapons have no cartridge, magazine capacity or cyclic-rate rows. Unsupported or missing SWEP definitions
+HP to Hollow Point. Long ammunition lists wrap within the tooltip width. Firearms on `base_newweapons` then list installed
+attachments (when any) and compatible attachments by `ix.weapontables` name, before cleanliness. Melee weapons have no cartridge, magazine capacity or cyclic-rate rows. Unsupported or missing SWEP definitions
 do not produce invented capacities.
 
 ## Cosmetic conversions

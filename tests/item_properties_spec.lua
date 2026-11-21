@@ -202,6 +202,18 @@ gun.GetOwner = function() return {
 gun.data.equip = true
 check(rowsById(gun).cartridge == judgeRows.cartridge, "equipped variant retains full compatible ammo list")
 gun.GetOwner, gun.data.equip = nil, nil
+check(rowsById(gun).attachments == "Compatible attachments: None" and rowsById(gun).installedAttachments == nil,
+	"non-attachable firearm states no compatible attachments")
+gun.canAttach, gun.validAttachments = true, {"md_kobra", "md_pbs1", "md_unknown"}
+gun.data.attachments = {"md_pbs1"}
+rows = rowsById(gun)
+check(rows.attachments == "Compatible attachments: Kobra Sight, PBS Supressor", "compatible attachments by name")
+check(rows.installedAttachments == "Installed attachments: PBS Supressor", "installed attachments by name")
+positions = {}
+for index, row in ipairs(ix.itemProperties.GetRows(gun)) do positions[row.id] = index end
+check(positions.cartridge < positions.installedAttachments and positions.attachments < positions.cleanliness,
+	"attachments follow ammunition readings and precede condition")
+gun.canAttach, gun.validAttachments, gun.data.attachments = nil, nil, nil
 weapons.Get = registeredWeapon
 ix.option = {Get = function() return false end}
 local weighted = {GetWeight = function() return 0.44 end, GetCarryInc = function() return 0.5 end}
