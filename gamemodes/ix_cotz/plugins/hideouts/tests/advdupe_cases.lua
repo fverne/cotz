@@ -25,6 +25,36 @@ Test("AdvDupe instances clean up independently and reject duplicate IDs", functi
 	integration:DespawnDupe("b")
 end)
 
+Test("AdvDupe restores saved prop tint and transparency before completion", function()
+	local tinted, plain = NewEntity(), NewEntity()
+	local savedColor = { r = 10, g = 20, b = 30, a = 128 }
+	local decode = AdvDupe2.Decode
+	AdvDupe2.Decode = function()
+		return true, {
+			Entities = {
+				[2] = { Class = "prop_physics" },
+				[7] = { Class = "prop_physics", EntityMods = { colour = { Color = savedColor } } },
+			},
+			HeadEnt = { Pos = Vector() },
+		}
+	end
+	AdvDupe2.duplicator.Paste = function()
+		return { [2] = plain, [7] = tinted }, {}
+	end
+	tinted.SetColor = function(self, value) self.color = value end
+	tinted.SetRenderMode = function(self, value) self.renderMode = value end
+	plain.SetColor = function(self, value) self.color = value end
+
+	assert(integration:SpawnDupe("room", "coloured", nil, nil, { noItems = true }, function(ok)
+		assert(ok)
+		assert(tinted.color.r == 10 and tinted.color.g == 20 and tinted.color.b == 30 and tinted.color.a == 128)
+		assert(tinted.renderMode == RENDERMODE_TRANSCOLOR)
+		assert(plain.color == nil)
+	end))
+	integration:DespawnDupe("coloured")
+	AdvDupe2.Decode = decode
+end)
+
 Test("AdvDupe partial-paste errors clean captured entities", function()
 	local ent = NewEntity()
 	AdvDupe2.duplicator.Paste = function()
