@@ -4,6 +4,7 @@ PLUGIN:Register("the-original", {
 	buyScale = 0.15,
 	enforceCatalogue = true,
 	map = "rp_marsh_cs",
+	taskRecipient = false,
 	job = {
 		kind = "none",
 		category = "No ordinary repeatable work",

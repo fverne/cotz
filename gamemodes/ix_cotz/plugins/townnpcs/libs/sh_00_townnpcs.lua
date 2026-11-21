@@ -115,10 +115,15 @@ function PLUGIN:BuildBuyingItems(contact)
 	contact.buyingItems = buying
 end
 
+-- Contacts declaring taskRecipient = false are never chosen as a delivery target for any task.
+function PLUGIN:IsTaskRecipient(contact)
+	return contact.taskRecipient ~= false
+end
+
 function PLUGIN:WantsCourierItem(contact, item, includeLegacy)
+	if not self:IsTaskRecipient(contact) then return false end
 	if contact.disabledItems and contact.disabledItems[item] then return false end
 	local legacy = (contact.wantedItems or {})[item] == true
-	if contact.id == "the-original" then return includeLegacy == true and legacy end
 
 	return (contact.courierItems or {})[item] == true or legacy
 end

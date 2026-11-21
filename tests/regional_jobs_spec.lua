@@ -270,6 +270,13 @@ for tier, difficulty in ipairs({"easy", "medium", "hard"}) do
 	for _, slug in ipairs({"beanstalk", "egghead", "intern"}) do
 		check((recipients[slug] == true) == (tier == 3), "all three bunker scientists are hard courier recipients only")
 	end
+	check(not recipients["the-original"], "information couriers never target The Original")
+end
+local original = ix.townNPCs.contacts["the-original"]
+check(not ix.townNPCs:IsTaskRecipient(original), "The Original is excluded from every task recipient pool")
+for itemID in pairs(original.wantedItems or {}) do
+	check(not ix.townNPCs:WantsCourierItem(original, itemID, true),
+		"The Original accepts no deliveries, including legacy ones")
 end
 char.jobs.test = {identifier = "cotz/town/v2/atlas/easy/mutant", rewardKey = "photo:1",
 	photoKind = "mutant", progress = 0, numberRec = 3}

@@ -124,7 +124,8 @@ function PLUGIN:ValidateContacts()
 			end
 			if step.kind == "field" and step.field.recipient then
 				local recipient = self.contacts[step.field.recipient]
-				if not recipient or recipient == contact or recipient.map == "rp_pripyat_remaster"
+				if not recipient or recipient == contact or not self:IsTaskRecipient(recipient)
+					or recipient.map == "rp_pripyat_remaster"
 					or step.field.kind == "deadDrop" or step.field.kind == "defence" then
 					report(step.id .. " uses invalid delivery recipient " .. step.field.recipient)
 				end

@@ -106,7 +106,7 @@ function PLUGIN:SpawnDefenseAttackers(living)
 				self.event.spawnBlocked = "attacker removed or rejected during creation"
 				slot.entity, attackers[entity] = nil, nil
 			elseif not slot.killed and ix.eventController:CanActorAttack(entity, defender) then
-				ix.eventController:SetCombatSpawnApproach(entity, defender:GetPos())
+				ix.eventController:SetCombatApproach(entity, defender:GetPos(), true)
 			end
 		end
 	end

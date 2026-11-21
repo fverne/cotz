@@ -258,7 +258,8 @@ fixture.SetTime(fixture.GetTime() + 1)
 manager:UpdateCombatActors()
 check(not bandit.cotzSleeping and not merc.cotzSleeping, "player proximity activates both factions")
 manager:FindCombatEnemy(bandit, 1500, 90, true)
-check(bandit.enemy == merc and ally.enemy == merc, "visible rival acquisition alerts nearby faction allies")
+check(bandit.enemy == merc and not ally.enemy and ally.cotzCombatApproach.x == 1100,
+	"visible rival acquisition sends nearby faction allies toward the rival without assigning it")
 merc.hidden, military.hidden, zombie.hidden, zombified.hidden = true, true, true, true
 bandit.enemy = nil
 manager:FindCombatEnemy(bandit, 1500, 90, true)
@@ -537,27 +538,28 @@ local alertAlly = actor("npc_mutant_dog", 100, huntingDog.cotzCombatPack)
 alertAlly.cotzSpecies = "blinddog"
 huntingDog.enemy = nil
 manager:ShareCombatThreat(alertAlly, huntingPrey)
-check(not huntingDog.enemy and huntingDog.cotzPlayerFocus == huntingPlayer,
+check(not huntingDog.enemy and not huntingDog.cotzCombatApproach and huntingDog.cotzPlayerFocus == huntingPlayer,
 	"squad alerts cannot replace remembered player focus after engine target loss")
 manager:ValidateCombatEnemy(huntingDog)
 manager:ShareCombatThreat(huntingDog, huntingPlayer)
-check(alertAlly.enemy == huntingPlayer and alertAlly.cotzPlayerPosition == huntingDog.cotzPlayerPosition,
-	"squad player alerts carry an observed position")
-local sharedContact = alertAlly.cotzPlayerContact
+check(not alertAlly.enemy and not alertAlly.cotzPlayerFocus
+	and alertAlly.cotzCombatApproach == huntingDog.cotzPlayerPosition,
+	"squad player alerts send allies to the observed position without assigning the player")
 huntingPlayer.hidden, huntingPlayer.position = true, Vector(900)
 advance(2)
-alertAlly.enemy = nil
 manager:ShareCombatThreat(huntingDog, huntingPlayer)
-check(alertAlly.cotzPlayerContact == sharedContact and alertAlly.cotzPlayerPosition.x == 300,
-	"repeated squad alerts cannot refresh stale contact or reveal hidden movement")
-manager:RetaliateCombatActor(alertAlly, huntingPlayer)
-local newerContact, newerPosition = alertAlly.cotzPlayerContact, alertAlly.cotzPlayerPosition
-alertAlly.enemy = nil
-manager:ShareCombatThreat(huntingDog, huntingPlayer)
-check(alertAlly.cotzPlayerContact == newerContact and alertAlly.cotzPlayerPosition == newerPosition,
-	"stale squad alerts cannot overwrite an ally's more recent contact")
+check(alertAlly.cotzCombatApproach.x == 300, "repeated squad alerts cannot reveal hidden movement")
+manager:UpdateCombatSchedule(alertAlly)
+check(alertAlly.schedule == SCHED_FORCED_GO_RUN and alertAlly.destination.x == 300,
+	"alerted allies run toward the reported position")
+local alertRival = actor("npc_human_merc_rifleman", 150)
+manager:FindCombatEnemy(alertAlly, 1500, 90, true)
+check(alertAlly.enemy == alertRival and manager:UpdateCombatSchedule(alertAlly) == nil
+	and not alertAlly.cotzCombatApproach and not alertAlly.schedule,
+	"alerted allies engage a different target spotted on the way")
+manager:RemoveCombatActor(alertRival)
 manager:RemoveCombatActor(alertAlly)
-check(not alertAlly.cotzPlayerFocus and not alertAlly.cotzCombatScheduleDirty,
+check(not alertAlly.cotzPlayerFocus and not alertAlly.cotzCombatScheduleDirty and not alertAlly.cotzCombatApproach,
 	"actor removal clears player memory and queued schedule work")
 
 local function loadEntityMethod(path, method)
@@ -581,7 +583,7 @@ do
 	local initialDefender, visibleDefender = targetPlayer(500), targetPlayer(700)
 	initialDefender.hidden = true
 	fixture.SetPlayers({initialDefender})
-	manager:SetCombatSpawnApproach(mutant, initialDefender:GetPos())
+	manager:SetCombatApproach(mutant, initialDefender:GetPos())
 	initialDefender.position = Vector(900)
 	manager:FindCombatEnemy(mutant, 1500, 90, true)
 	manager:UpdateCombatSchedule(mutant)
@@ -593,20 +595,20 @@ do
 	advance(1)
 	manager:FindCombatEnemy(mutant, 1500, 90, true)
 	check(manager:UpdateCombatSchedule(mutant) == nil and mutant.enemy == visibleDefender
-		and not mutant.cotzSpawnApproach and not mutant.schedule,
+		and not mutant.cotzCombatApproach and not mutant.schedule,
 		"normal sight-based acquisition cancels the spawn approach for a different defender")
 
 	local idleMutant = actor("npc_mutant_dog", 0)
-	manager:SetCombatSpawnApproach(idleMutant, Vector(500))
+	manager:SetCombatApproach(idleMutant, Vector(500))
 	manager:UpdateCombatSchedule(idleMutant)
 	idleMutant.position = Vector(490)
 	check(manager:UpdateCombatSchedule(idleMutant) == nil and not idleMutant.schedule
-		and not idleMutant.cotzSpawnApproach, "arrival releases movement to normal AI")
-	manager:SetCombatSpawnApproach(idleMutant, Vector(1000))
+		and not idleMutant.cotzCombatApproach, "arrival releases movement to normal AI")
+	manager:SetCombatApproach(idleMutant, Vector(1000))
 	manager:UpdateCombatSchedule(idleMutant)
 	advance(10)
 	check(manager:UpdateCombatSchedule(idleMutant) == nil and not idleMutant.schedule
-		and not idleMutant.cotzSpawnApproach, "an unfinished approach expires")
+		and not idleMutant.cotzCombatApproach, "an unfinished approach expires")
 end
 
 do

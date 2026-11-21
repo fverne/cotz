@@ -87,7 +87,7 @@ ix = {
 			entity.cotzPopulationRejected = rejectSpawn
 		end,
 		CanActorAttack = function(_, _, target) return IsValid(target) and target:Alive() end,
-		SetCombatSpawnApproach = function(_, entity, position) entity.destination = position end,
+		SetCombatApproach = function(_, entity, position) entity.destination = position end,
 	},
 }
 ix.plugin.Get = function(id) return ix.plugin.list[id] end
