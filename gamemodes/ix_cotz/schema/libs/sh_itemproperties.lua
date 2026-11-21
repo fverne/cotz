@@ -56,11 +56,15 @@ function ix.itemProperties.GetProtection(item)
 	local function protection(id, label, reduction, flat)
 		if (reduction == nil or reduction == 0) and (flat == nil or flat == 0) then return end
 
-		local text = label .. ": " .. ix.itemProperties.Format(id, reduction or 0)
+		reduction = reduction or 0
+		local valueText = ix.itemProperties.Format(id, reduction)
 		if flat ~= nil then
-			text = text .. "; absorption " .. ix.itemProperties.Format("number", flat)
+			valueText = valueText .. " + " .. ix.itemProperties.Format("number", math.Round(flat, 1))
 		end
-		rows[#rows + 1] = {id = "protection/" .. id, text = text}
+		rows[#rows + 1] = {
+			id = "protection/" .. id, text = label .. ": " .. valueText,
+			label = label .. ":", valueText = valueText, value = reduction,
+		}
 	end
 	if item.getBR then
 		local function reduction(method, field)
@@ -70,21 +74,24 @@ function ix.itemProperties.GetProtection(item)
 
 			return item.isBodyArmor and 1 - value or value
 		end
-		protection("ballistics", "Ballistics", reduction("getBR"))
-		protection("rupture", "Rupture", reduction("getSR"))
+		protection("ballistics", "Ballistics", reduction("getBR"), item:getFBR())
+		protection("rupture", "Rupture", reduction("getSR"), item:getFSR())
 		if item.isBodyArmor then
 			for _, definition in ipairs(ix.suits.anomalyTypes) do
-				protection(definition.network, definition.name, reduction("getAR", definition.field))
+				protection(definition.network, definition.name, reduction("getAR", definition.field),
+					item:getFAR(definition.flatField))
 			end
 		else
 			-- Installed headgear uses its broad anomaly resistance for each damage family.
+			local scale = item:GetDurabilityScale()
 			for _, definition in ipairs(ix.suits.anomalyTypes) do
 				local value = item[definition.field]
-				local scale = item:GetDurabilityScale()
-				protection(definition.network, definition.name, value and value * scale or item:getAR())
+				local flat = item[definition.flatField]
+				protection(definition.network, definition.name, value and value * scale or item:getAR(),
+					flat and flat * scale or item:getFAR())
 			end
 		end
-		protection("psychic", "Psychic", reduction("getPR"))
+		protection("psychic", "Psychic", reduction("getPR"), item:getFPR())
 		protection("radiation", "Radiation", item:getRadProt())
 	elseif item.attachName and ix.armortables and ix.armortables.attachments[item.attachName] then
 		local attachment = ix.armortables.attachments[item.attachName]

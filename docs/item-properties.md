@@ -81,10 +81,11 @@ For example, a 2 HP tick at 200 maximum HP reads `+1% per 1 second over 300 seco
 readers account for their actual callback interval. Durations describe the effect after application, separately from application time.
 
 Protection readings show each effective resistance fraction as a whole-number percentage, without
-cosmetic unit conversion. Gear and suit property rows omit flat absorption; their gameplay calculations
-and the equipment summary remain unchanged. Psychic shielding from `buff_psyblock` is flat absorption
-and shows its raw amount. Attachment property rows can still show their raw flat absorption points.
-Zero protection rows are omitted; adverse protection remains visible.
+cosmetic unit conversion, followed by flat absorption rounded to one decimal (for example
+`Ballistics: 40% + 8`). Radiation has no flat absorption reading. The value is coloured on the legacy
+scale from red (0%) to blue (100%), with full saturation outside that range. Psychic shielding from
+`buff_psyblock` is flat absorption and shows its raw amount. Attachment rows show flat absorption only
+when the attachment defines it. Zero protection rows are omitted; adverse protection remains visible.
 
 Examples: Bread restores 9 hunger and reads **+90 kcal** per portion. Old antirad removes a nominal
 50 radiation points in 120 seconds and reads **−125 mSv/s for 120 s**. Gauze supplies 20 additional

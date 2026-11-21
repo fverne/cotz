@@ -16,6 +16,7 @@ Material = function(path) return path end
 CLIENT, SERVER = false, false
 LocalPlayer = function() return nil end
 ix.util.GetMaterial = Material
+ix.util.GetColorFromValue = function(value) return {value = value} end
 color_white = Color(255, 255, 255)
 math.Round = function(value, decimals)
 	local scale = 10 ^ (decimals or 0)
@@ -240,23 +241,25 @@ local suit = {isBodyArmor = true, scale = 1, GetData = bread.GetData, data = {},
 }
 ix.suits.anomalyTypes = {{network = "thermal", name = "Thermal", field = "thermalRes", flatField = "flatThermalRes"}}
 local protection = ix.itemProperties.GetProtection(suit)
-check(protection[1].text == "Ballistics: 40%", "suit protection omits absorption")
+check(protection[1].text == "Ballistics: 40% + 8", "suit protection shows flat absorption")
 for _, row in ipairs(protection) do
 	check(row.id ~= "protection/rupture" and row.id ~= "protection/psychic", "zero protection rows omitted")
 end
 local gp5 = item(root .. "gear/sh_mask_gp5.lua")
 gp5.GetDurabilityScale = function() return 1 end
 gp5.getBR, gp5.getSR, gp5.getPR = function() return 0 end, function() return 0 end, function() return 0 end
+gp5.getFBR, gp5.getFSR, gp5.getFPR = function() return 0 end, function() return 0 end, function() return 0 end
+gp5.getFAR = function(self) return self.far or 0 end
 gp5.getAR = function(self) return self.ar end
 gp5.getRadProt = function(self) return self.radProt end
 local maskRows = ix.itemProperties.GetProtection(gp5)
 check(#maskRows == 1 and maskRows[1].id == "protection/radiation", "GP5 only shows actual resistance")
 suit.scale = 0.5
-check(ix.itemProperties.GetProtection(suit)[1].text == "Ballistics: 20%", "effective condition")
+check(ix.itemProperties.GetProtection(suit)[1].text == "Ballistics: 20% + 4", "effective condition")
 local gear = {GetDurabilityScale = function() return 0.5 end}
 for key, value in pairs(suit) do if gear[key] == nil then gear[key] = value end end
 gear.isBodyArmor = false
-check(ix.itemProperties.GetProtection(gear)[1].text == "Ballistics: 80%", "gear omits absorption")
+check(ix.itemProperties.GetProtection(gear)[1].text == "Ballistics: 80% + 4", "gear shows flat absorption")
 ix.armortables = {attachments = {plate = {br = 0.05, ar = -0.05}}}
 local attachment = {attachName = "plate"}
 local attachmentRows = ix.itemProperties.GetProtection(attachment)

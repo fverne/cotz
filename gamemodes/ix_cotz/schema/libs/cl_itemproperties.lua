@@ -1,6 +1,7 @@
 ix.itemProperties = ix.itemProperties or {}
 
 local PROPERTY_COLOR = Color(200, 205, 185)
+local PROTECTION_VALUE_GAP = 4
 local LEGACY_ICONS = {
 	weight = ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/weight.png"),
 	carry = ix.util.GetMaterial("vgui/ui/stalker/armorupgrades/carryweightinc.png"),
@@ -18,13 +19,32 @@ function ix.itemProperties.AddRow(tooltip, id, text)
 	return row
 end
 
+-- Protection values keep the legacy colour scale: red for none through blue for full resistance.
+function ix.itemProperties.AddProtectionRow(tooltip, protection)
+	local row = ix.itemProperties.AddRow(tooltip, protection.id, protection.label)
+	if not row.protectionValue then
+		row.protectionValue = row:Add("DLabel")
+		row.protectionValue:SetFont("ixSmallFont")
+	end
+
+	local valueLabel = row.protectionValue
+	valueLabel:SetText(protection.valueText)
+	valueLabel:SetTextColor(ix.util.GetColorFromValue(protection.value, 0, 1))
+	valueLabel:SizeToContents()
+	valueLabel:MoveRightOf(row.propertyLabel, PROTECTION_VALUE_GAP)
+	row:SetWide(row:GetWide() + PROTECTION_VALUE_GAP + valueLabel:GetWide())
+	tooltip:SizeToContents()
+
+	return row
+end
+
 function ix.itemProperties.PopulateProtection(tooltip, item)
 	if item.entity then return end
 
 	local rows = ix.itemProperties.GetProtection(item)
 	if #rows == 0 then return end
 
-	for _, row in ipairs(rows) do ix.itemProperties.AddRow(tooltip, row.id, row.text) end
+	for _, row in ipairs(rows) do ix.itemProperties.AddProtectionRow(tooltip, row) end
 end
 
 function ix.itemProperties.Populate(tooltip, item)
