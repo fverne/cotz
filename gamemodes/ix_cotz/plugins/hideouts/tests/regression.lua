@@ -36,6 +36,12 @@ end
 function isstring(v)
 	return type(v) == "string"
 end
+RENDERMODE_NORMAL = 0
+RENDERMODE_TRANSCOLOR = 1
+function Color(r, g, b, a)
+	return { r = r, g = g, b = b, a = a }
+end
+
 function isnumber(v)
 	return type(v) == "number"
 end

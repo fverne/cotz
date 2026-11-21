@@ -58,7 +58,7 @@ function ix.util.DrawResistance(tooltip, resistanceName, value, flatValue)
 	local kind = name:lower()
 	local text = name .. ": " .. ix.itemProperties.Format(kind, value)
 	if flatValue ~= nil then
-		text = text .. "; absorption " .. ix.itemProperties.Format(kind, flatValue / 100)
+		text = text .. "; absorption " .. ix.itemProperties.Format("number", flatValue)
 	end
 
 	ix.itemProperties.AddRow(tooltip, "protection/" .. kind, text)

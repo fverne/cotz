@@ -156,7 +156,7 @@ cannot extend that grace. Once players leave, grounded actors forget their targe
 work and sleep even if they were fighting. Airborne actors finish their movement before sleeping.
 
 Bandits, mercenaries and military are internally allied and mutually hostile. Zombified humans ally
-with undead mutants. Spawned human squads share threats with nearby awake faction allies. Idle
+with undead mutants. Spawned human squads alert nearby awake faction allies to threats (see below). Idle
 followers regroup beyond 512 units and stop within 256; the living member with the lowest entity
 index leads. Members outside 2,048 units return toward their encounter origin. Regrouping never
 teleports or follows a sleeping leader; blocked attempts retry after ten seconds. Actual movement
@@ -186,7 +186,7 @@ The policy and tuning constants live in `sv_combat.lua`. `ai_disabled` stops amb
 regrouping; existing `ai_ignoreplayers` behavior remains supported.
 
 Mutants and human NPCs keep their engaged player target instead of switching to a closer NPC,
-retaliating against an NPC, or accepting a competing squad alert. Ambient mutant conflicts start only
+retaliating against an NPC, or following a squad alert. Ambient mutant conflicts start only
 when their leader is idle. Idle target acquisition still selects the nearest visible hostile inside the
 existing detection range and forward cone (1,500 units/90-degree half-angle for mutants and
 7,000 units/45-degree half-angle for humans).
@@ -195,7 +195,11 @@ Each actor remembers one player and their last observed position for ten seconds
 Seeing that player or receiving damage from them refreshes contact. A remembered player can be
 recognized from behind; after expiry, ordinary detection rules apply again. During occlusion actors
 move toward the recorded position and wait there, rather than tracking the player's hidden movement.
-Squad alerts share the observed position and original contact time; repeated alerts do not extend it.
+Squad alerts never assign an enemy. Idle allies without player focus run toward the alerting actor's
+observed position (a player's last seen position, or an NPC's position at alert time) for up to ten
+seconds. Sight-based acquisition or retaliation against any eligible target ends the approach, as do
+arrival and timeout. Alerts reset the ally's search cooldown and pause regrouping; repeated alerts
+cannot reveal a hidden player's movement. Mutant-defence attackers use the same approach at spawn.
 Regular visibility checks run at most once per quarter-second for the remembered player; target
 assignments and damage also evaluate contact when they occur.
 

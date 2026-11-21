@@ -84,6 +84,7 @@ end
 function PLUGIN:SpawnDefenseAttackers(living)
 	self.event.spawnBlocked = nil
 	local budget = self.settings.spawnBudget
+	local defender = living[1]
 	for _, slot in ipairs(self.event.slots) do
 		if not slot.killed and not IsValid(slot.entity) then
 			if budget <= 0 then break end
@@ -104,9 +105,8 @@ function PLUGIN:SpawnDefenseAttackers(living)
 			if not IsValid(entity) or entity.cotzPopulationRejected then
 				self.event.spawnBlocked = "attacker removed or rejected during creation"
 				slot.entity, attackers[entity] = nil, nil
-			elseif not slot.killed and IsValid(living[1]) then
-				local target = living[1]
-				ix.eventController:SetCombatTarget(entity, target, target:GetPos(), CurTime())
+			elseif not slot.killed and ix.eventController:CanActorAttack(entity, defender) then
+				ix.eventController:SetCombatApproach(entity, defender:GetPos(), true)
 			end
 		end
 	end

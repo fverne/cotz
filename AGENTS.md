@@ -175,6 +175,22 @@ The remaining rules are proposed project defaults.
   Follow the affected plugin's README for its relevant specs.
 - Balance tooling tests use `python -m unittest discover -s docs/balance/tests -v` in an environment
   with `docs/balance/requirements.txt` installed. Do not assume a machine-specific virtualenv exists.
+- Test cadence:
+  - Small edits: do not run tests automatically. Make the change and summarize the expected verification.
+  - Run a targeted spec only when the touched file has an obvious nearby spec, the change affects shared
+    behavior (schema libraries, item bases, shared `ix.cotz*` helpers), or the user asks.
+  - Run the full suite (`tests/run.sh` plus `tests/run.sh --balance` when balance tooling is affected) only
+    before handoff or a commit, or after changes touching persistence, rewards, inventories, permissions,
+    networking, or shared utilities.
+  - Prefer the cheapest check first: `tests/run.sh --syntax <file>` for standard-Lua files, then one spec,
+    then the full suite. The syntax check rejects GMod-only operators, so skip it for legacy files using them.
+- Run tests through `tests/run.sh`, which writes full output to `outputs/test-logs/` and prints one line per
+  test with a short excerpt for each failure. Open the full log only when the excerpt does not explain it.
+  The runner also fails any test that modifies tracked files; it does not restore them, so review `git diff`.
+  Several specs and generators discover files with `rg`; without ripgrep installed they fail or, in
+  `tests/fts_delivery_balance_spec.py`, rewrite `sh_requirementpools.lua` with empty pools.
+- If a test fails, stop after one focused investigation pass and report the failing command, likely cause,
+  and proposed next action instead of entering a long debug loop.
 - Standalone tests use mocks and do not establish Garry's Mod runtime correctness.
   For realm, UI, networking, loading, or database changes, identify and perform relevant multiplayer
   checks when a development session is available; otherwise state what remains unverified.

@@ -744,6 +744,8 @@ DepawnAdvDupe2Dupe helper. Optional per-paste validation, completion callbacks,
 scoped dummy conversion, entity accounting, and partial-paste cleanup support
 independent instances. The paste call uses the existing synchronous paste API;
 confirm behavior against the server's installed AdvDupe2 version.
+Shell props restore Color tool tints and opacity from the template dupe before
+saved room overrides are applied.
 
 ## Validation
 

@@ -12,6 +12,7 @@ local PLAYER_MEMORY_SECONDS = 10
 local PLAYER_CONTACT_INTERVAL = 0.25
 local PURSUIT_RETRY = 1
 local PURSUIT_ARRIVAL = 64
+local APPROACH_SECONDS = 10
 local TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing"}
 local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
 	chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true}
@@ -127,6 +128,7 @@ function PLUGIN:RemoveCombatActor(entity)
 	entity.cotzCombatEnemy, entity.cotzCombatScheduleDirty = nil, nil
 	entity.cotzPursuitScheduled, entity.cotzNextPursuit = nil, nil
 	entity.cotzCombatObjective, entity.cotzCombatObjectiveRadius = nil, nil
+	entity.cotzCombatApproach, entity.cotzCombatApproachUntil, entity.cotzCombatApproachPlayer = nil, nil, nil
 end
 
 function PLUGIN:RegisterCombatActor(entity, pack)
@@ -308,10 +310,30 @@ function PLUGIN:ValidateCombatEnemy(actor)
 	end
 end
 
+-- Moves an idle actor toward a reported position without assigning an enemy, so its own sight and
+-- retaliation decide whom it engages on the way.
+function PLUGIN:SetCombatApproach(actor, position, towardPlayer)
+	actor.cotzCombatApproach = position
+	actor.cotzCombatApproachUntil = CurTime() + APPROACH_SECONDS
+	actor.cotzCombatApproachPlayer = towardPlayer or nil
+	actor.cotzRegrouping = nil
+	actor.cotzNextEnemySearch, actor.cotzNextHumanSearch = 0, 0
+end
+
 function PLUGIN:UpdateCombatSchedule(actor)
 	if actor.cotzSleeping or not living(actor) or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if targetBusy(actor) then return end
 	if actor.cotzNavigationRecovery or actor.cotzNavigationRetreat then return true end
+
+	local approach = actor.cotzCombatApproach
+	local hasEnemy = IsValid(actor:GetEnemy())
+	if approach and (hasEnemy or CurTime() >= actor.cotzCombatApproachUntil
+		or (actor.cotzCombatApproachPlayer and GetConVar("ai_ignoreplayers"):GetInt() ~= 0)
+		or actor:GetPos():DistToSqr(approach) <= PURSUIT_ARRIVAL ^ 2) then
+		actor.cotzCombatApproach, actor.cotzCombatApproachUntil, actor.cotzCombatApproachPlayer = nil, nil, nil
+		if actor.cotzPursuitScheduled then actor.cotzCombatScheduleDirty = true end
+		approach = nil
+	end
 
 	if actor.cotzCombatScheduleDirty then
 		actor.cotzNavigationIntent, actor.cotzNavigationMotion = nil, nil
@@ -326,11 +348,13 @@ function PLUGIN:UpdateCombatSchedule(actor)
 	if focus and actor.cotzPlayerVisible == false and actor:GetEnemy() == focus then
 		-- Use the observed position, never the hidden player's current position, for pursuit.
 		destination, arrivalRadius = actor.cotzPlayerPosition, PURSUIT_ARRIVAL
-	elseif not IsValid(actor:GetEnemy()) and IsValid(actor.cotzCombatObjective) then
+	elseif not hasEnemy and IsValid(actor.cotzCombatObjective) then
 		-- Task devices are props, so idle mutants approach them without making them combat enemies.
 		objective = actor.cotzCombatObjective
 		destination = objective:GetPos()
 		arrivalRadius = actor.cotzCombatObjectiveRadius or PURSUIT_ARRIVAL
+	elseif approach then
+		destination, arrivalRadius = approach, PURSUIT_ARRIVAL
 	else
 		return
 	end
@@ -478,11 +502,15 @@ function PLUGIN:FindCombatEnemy(actor, range, halfAngle, budgetTaken)
 end
 
 function PLUGIN:ShareCombatThreat(actor, target)
+	local towardPlayer = target:IsPlayer()
+	-- Share only what the alerting actor observed, never a hidden player's current position.
+	local position = towardPlayer and actor.cotzPlayerPosition or target:GetPos()
+	if not position then return end
 	for _, ally in ipairs(self:NearbyCombatActors(actor:GetPos(), AMBIENT_RANGE)) do
 		if ally ~= actor and not ally.cotzSleeping and self:ActorsAllied(actor, ally)
-			and self:CanActorAttack(ally, target) and not IsValid(ally:GetEnemy()) then
-			local position = target:IsPlayer() and actor.cotzPlayerPosition or nil
-			self:SetCombatTarget(ally, target, position, actor.cotzPlayerContact)
+			and self:CanActorAttack(ally, target) and not IsValid(ally:GetEnemy())
+			and not self:GetCombatPlayerFocus(ally) then
+			self:SetCombatApproach(ally, position, towardPlayer)
 		end
 	end
 end
@@ -542,7 +570,10 @@ end
 function PLUGIN:RegroupCombatActor(actor, leader)
 	if GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if not actor.cotzHuman or actor.cotzSleeping or actor.cotzCombatPack.isolated or not leader
-		or leader.cotzSleeping or IsValid(actor:GetEnemy()) then actor.cotzRegrouping = nil return end
+		or leader.cotzSleeping or IsValid(actor:GetEnemy()) or actor.cotzCombatApproach then
+		actor.cotzRegrouping = nil
+		return
+	end
 	if (actor.cotzNextRegroup or 0) > CurTime() then return end
 	actor.cotzNextRegroup = CurTime() + 1
 	local origin = actor.cotzCombatPack.origin

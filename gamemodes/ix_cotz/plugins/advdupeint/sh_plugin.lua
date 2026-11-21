@@ -30,6 +30,27 @@ if SERVER then
 		end
 	end
 
+	local function restoreDupeColour(entity, data)
+		local mods = data and data.EntityMods
+		local appearance = istable(mods) and mods.colour
+		local color = istable(appearance) and appearance.Color
+		if not istable(color) then
+			return
+		end
+		if not isnumber(color.r) or not isnumber(color.g) or not isnumber(color.b) or not isnumber(color.a) then
+			return
+		end
+
+		-- The Sandbox colour modifier may be unavailable in derived gamemodes.
+		entity:SetColor(Color(color.r, color.g, color.b, color.a))
+		local renderMode = isnumber(appearance.RenderMode) and math.Clamp(appearance.RenderMode, 0, 9)
+			or RENDERMODE_NORMAL
+		if color.a < 255 and renderMode == RENDERMODE_NORMAL then
+			renderMode = RENDERMODE_TRANSCOLOR
+		end
+		entity:SetRenderMode(renderMode)
+	end
+
 	function PLUGIN:ReadDupe(name)
 		if not AdvDupe2 or not AdvDupe2.duplicator then
 			return nil, "AdvDupe2 is unavailable."
@@ -116,12 +137,13 @@ if SERVER then
 			return false, "AdvDupe2 paste failed."
 		end
 		operation.source = entities
-		for _, entity in pairs(entities) do
+		for key, entity in pairs(entities) do
 			if not IsValid(entity) then
 				continue
 			end
 
 			trackEntity(operation, entity)
+			restoreDupeColour(entity, dupe.Entities[key])
 			freezeEntity(entity)
 		end
 		for _, entity in pairs(istable(constraints) and constraints or {}) do

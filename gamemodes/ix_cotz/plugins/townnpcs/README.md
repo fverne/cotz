@@ -1031,5 +1031,8 @@ character with no saved evidence must greet that scientist again. No saves are r
 Valuable-courier offers, previews, task journals and server hand-ins use the same discovery filter.
 Wake's information-parcel assignments also exclude undiscovered bunker scientists, retaining their
 existing regional and bunker-card gates. Accepted parcel destinations remain saved without rerolling.
+A contact declaring `taskRecipient = false` is never chosen as a recipient for any task: information
+parcels, valuable-courier hand-ins (including legacy ones), or progression field deliveries, which
+fail validation if they name it. The Original declares it because he is no longer used.
 Verify greeting each scientist, switching characters, reconnecting, previews and deliveries in multiplayer.
 Run `luatex --luaonly tests/regional_jobs_spec.lua` for standalone regression coverage.

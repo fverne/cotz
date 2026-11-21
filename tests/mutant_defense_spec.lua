@@ -86,7 +86,8 @@ ix = {
 			check(enforce and pack.isolated, "event actors obey population limits in an isolated pack")
 			entity.cotzPopulationRejected = rejectSpawn
 		end,
-		SetCombatTarget = function(_, entity, target) entity.target = target end,
+		CanActorAttack = function(_, _, target) return IsValid(target) and target:Alive() end,
+		SetCombatApproach = function(_, entity, position) entity.destination = position end,
 	},
 }
 ix.plugin.Get = function(id) return ix.plugin.list[id] end
@@ -365,6 +366,7 @@ clearWave()
 beginWave()
 for _, slot in ipairs(plugin.event.slots) do
 	while not slot.entity do plugin:SpawnDefenseAttackers({first}) end
+	check(slot.entity.destination == first:GetPos(), "wave attackers receive the defender's spawn-time position")
 	plugin:OnNPCKilled(slot.entity)
 end
 plugin:PlayerDeath(first)

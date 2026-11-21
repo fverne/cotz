@@ -16,6 +16,7 @@ Material = function(path) return path end
 CLIENT, SERVER = false, false
 LocalPlayer = function() return nil end
 ix.util.GetMaterial = Material
+ix.util.GetColorFromValue = function(value) return {value = value} end
 color_white = Color(255, 255, 255)
 math.Round = function(value, decimals)
 	local scale = 10 ^ (decimals or 0)
@@ -202,6 +203,18 @@ gun.GetOwner = function() return {
 gun.data.equip = true
 check(rowsById(gun).cartridge == judgeRows.cartridge, "equipped variant retains full compatible ammo list")
 gun.GetOwner, gun.data.equip = nil, nil
+check(rowsById(gun).attachments == "Compatible attachments: None" and rowsById(gun).installedAttachments == nil,
+	"non-attachable firearm states no compatible attachments")
+gun.canAttach, gun.validAttachments = true, {"md_kobra", "md_pbs1", "md_unknown"}
+gun.data.attachments = {"md_pbs1"}
+rows = rowsById(gun)
+check(rows.attachments == "Compatible attachments: Kobra Sight, PBS Supressor", "compatible attachments by name")
+check(rows.installedAttachments == "Installed attachments: PBS Supressor", "installed attachments by name")
+positions = {}
+for index, row in ipairs(ix.itemProperties.GetRows(gun)) do positions[row.id] = index end
+check(positions.cartridge < positions.installedAttachments and positions.attachments < positions.cleanliness,
+	"attachments follow ammunition readings and precede condition")
+gun.canAttach, gun.validAttachments, gun.data.attachments = nil, nil, nil
 weapons.Get = registeredWeapon
 ix.option = {Get = function() return false end}
 local weighted = {GetWeight = function() return 0.44 end, GetCarryInc = function() return 0.5 end}
@@ -228,28 +241,30 @@ local suit = {isBodyArmor = true, scale = 1, GetData = bread.GetData, data = {},
 }
 ix.suits.anomalyTypes = {{network = "thermal", name = "Thermal", field = "thermalRes", flatField = "flatThermalRes"}}
 local protection = ix.itemProperties.GetProtection(suit)
-check(protection[1].text == "Ballistics: 1,000 J", "suit protection omits absorption")
+check(protection[1].text == "Ballistics: 40% + 8", "suit protection shows flat absorption")
 for _, row in ipairs(protection) do
 	check(row.id ~= "protection/rupture" and row.id ~= "protection/psychic", "zero protection rows omitted")
 end
 local gp5 = item(root .. "gear/sh_mask_gp5.lua")
 gp5.GetDurabilityScale = function() return 1 end
 gp5.getBR, gp5.getSR, gp5.getPR = function() return 0 end, function() return 0 end, function() return 0 end
+gp5.getFBR, gp5.getFSR, gp5.getFPR = function() return 0 end, function() return 0 end, function() return 0 end
+gp5.getFAR = function(self) return self.far or 0 end
 gp5.getAR = function(self) return self.ar end
 gp5.getRadProt = function(self) return self.radProt end
 local maskRows = ix.itemProperties.GetProtection(gp5)
 check(#maskRows == 1 and maskRows[1].id == "protection/radiation", "GP5 only shows actual resistance")
 suit.scale = 0.5
-check(ix.itemProperties.GetProtection(suit)[1].text == "Ballistics: 500 J", "effective condition")
+check(ix.itemProperties.GetProtection(suit)[1].text == "Ballistics: 20% + 4", "effective condition")
 local gear = {GetDurabilityScale = function() return 0.5 end}
 for key, value in pairs(suit) do if gear[key] == nil then gear[key] = value end end
 gear.isBodyArmor = false
-check(ix.itemProperties.GetProtection(gear)[1].text == "Ballistics: 2,000 J", "gear omits absorption")
+check(ix.itemProperties.GetProtection(gear)[1].text == "Ballistics: 80% + 4", "gear shows flat absorption")
 ix.armortables = {attachments = {plate = {br = 0.05, ar = -0.05}}}
 local attachment = {attachName = "plate"}
 local attachmentRows = ix.itemProperties.GetProtection(attachment)
-check(attachmentRows[1].text == "Ballistics: 125 J", "attachment resistance uses common calibration")
-check(attachmentRows[2].text == "Thermal: -15 kW/m²", "attachment drawbacks remain negative")
+check(attachmentRows[1].text == "Ballistics: 5%", "attachment resistance uses percentages")
+check(attachmentRows[2].text == "Thermal: -5%", "attachment drawbacks remain negative")
 local function tooltip()
 	local value = {rows = {}, count = 0}
 	function value:GetRow(id) return self.rows[id] end
