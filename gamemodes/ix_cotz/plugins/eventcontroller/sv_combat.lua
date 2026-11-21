@@ -12,6 +12,7 @@ local PLAYER_MEMORY_SECONDS = 10
 local PLAYER_CONTACT_INTERVAL = 0.25
 local PURSUIT_RETRY = 1
 local PURSUIT_ARRIVAL = 64
+local SPAWN_APPROACH_SECONDS = 10
 local TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing"}
 local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
 	chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true}
@@ -127,6 +128,7 @@ function PLUGIN:RemoveCombatActor(entity)
 	entity.cotzCombatEnemy, entity.cotzCombatScheduleDirty = nil, nil
 	entity.cotzPursuitScheduled, entity.cotzNextPursuit = nil, nil
 	entity.cotzCombatObjective, entity.cotzCombatObjectiveRadius = nil, nil
+	entity.cotzSpawnApproach, entity.cotzSpawnApproachUntil = nil, nil
 end
 
 function PLUGIN:RegisterCombatActor(entity, pack)
@@ -308,10 +310,25 @@ function PLUGIN:ValidateCombatEnemy(actor)
 	end
 end
 
+function PLUGIN:SetCombatSpawnApproach(actor, position)
+	actor.cotzSpawnApproach = position
+	actor.cotzSpawnApproachUntil = CurTime() + SPAWN_APPROACH_SECONDS
+end
+
 function PLUGIN:UpdateCombatSchedule(actor)
 	if actor.cotzSleeping or not living(actor) or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
 	if targetBusy(actor) then return end
 	if actor.cotzNavigationRecovery or actor.cotzNavigationRetreat then return true end
+
+	local approach = actor.cotzSpawnApproach
+	local hasEnemy = IsValid(actor:GetEnemy())
+	if approach and (hasEnemy or CurTime() >= actor.cotzSpawnApproachUntil
+		or GetConVar("ai_ignoreplayers"):GetInt() ~= 0
+		or actor:GetPos():DistToSqr(approach) <= PURSUIT_ARRIVAL ^ 2) then
+		actor.cotzSpawnApproach, actor.cotzSpawnApproachUntil = nil, nil
+		if actor.cotzPursuitScheduled then actor.cotzCombatScheduleDirty = true end
+		approach = nil
+	end
 
 	if actor.cotzCombatScheduleDirty then
 		actor.cotzNavigationIntent, actor.cotzNavigationMotion = nil, nil
@@ -326,11 +343,13 @@ function PLUGIN:UpdateCombatSchedule(actor)
 	if focus and actor.cotzPlayerVisible == false and actor:GetEnemy() == focus then
 		-- Use the observed position, never the hidden player's current position, for pursuit.
 		destination, arrivalRadius = actor.cotzPlayerPosition, PURSUIT_ARRIVAL
-	elseif not IsValid(actor:GetEnemy()) and IsValid(actor.cotzCombatObjective) then
+	elseif not hasEnemy and IsValid(actor.cotzCombatObjective) then
 		-- Task devices are props, so idle mutants approach them without making them combat enemies.
 		objective = actor.cotzCombatObjective
 		destination = objective:GetPos()
 		arrivalRadius = actor.cotzCombatObjectiveRadius or PURSUIT_ARRIVAL
+	elseif approach then
+		destination, arrivalRadius = approach, PURSUIT_ARRIVAL
 	else
 		return
 	end

@@ -84,6 +84,9 @@ and calling eventcontroller's nodegraph/floor placement service with its default
 positions are used directly, with 256 units of player clearance and no separate center-ring restriction.
 At most two creation attempts occur per one-second update. Event attackers use isolated
 combat packs, remain awake, and respect global/regional hard population limits, including queued spawns.
+Attackers initially run toward the lead defender's position at spawn when that player can be targeted.
+The approach ends at arrival, enemy acquisition, or after ten seconds. Normal sight-based targeting
+and retaliation can interrupt the approach at any point.
 Blocked slots remain required. Only `OnNPCKilled` completes a slot; unexpected removal causes replacement.
 The timeout prevents permanently blocked events. Clear navigation and approaches still require map testing.
 

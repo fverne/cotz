@@ -577,6 +577,40 @@ end
 
 do
 	fixture.Reset()
+	local mutant = actor("npc_mutant_dog", 0, manager:CreateCombatPack(Vector(0), true))
+	local initialDefender, visibleDefender = targetPlayer(500), targetPlayer(700)
+	initialDefender.hidden = true
+	fixture.SetPlayers({initialDefender})
+	manager:SetCombatSpawnApproach(mutant, initialDefender:GetPos())
+	initialDefender.position = Vector(900)
+	manager:FindCombatEnemy(mutant, 1500, 90, true)
+	manager:UpdateCombatSchedule(mutant)
+	check(mutant.destination.x == 500 and mutant.schedule == SCHED_FORCED_GO_RUN
+		and not mutant.enemy and not mutant.cotzPlayerFocus and not mutant.memoryCalls,
+		"the spawn approach uses a fixed point without engaging or tracking the hidden defender")
+
+	fixture.SetPlayers({initialDefender, visibleDefender})
+	advance(1)
+	manager:FindCombatEnemy(mutant, 1500, 90, true)
+	check(manager:UpdateCombatSchedule(mutant) == nil and mutant.enemy == visibleDefender
+		and not mutant.cotzSpawnApproach and not mutant.schedule,
+		"normal sight-based acquisition cancels the spawn approach for a different defender")
+
+	local idleMutant = actor("npc_mutant_dog", 0)
+	manager:SetCombatSpawnApproach(idleMutant, Vector(500))
+	manager:UpdateCombatSchedule(idleMutant)
+	idleMutant.position = Vector(490)
+	check(manager:UpdateCombatSchedule(idleMutant) == nil and not idleMutant.schedule
+		and not idleMutant.cotzSpawnApproach, "arrival releases movement to normal AI")
+	manager:SetCombatSpawnApproach(idleMutant, Vector(1000))
+	manager:UpdateCombatSchedule(idleMutant)
+	advance(10)
+	check(manager:UpdateCombatSchedule(idleMutant) == nil and not idleMutant.schedule
+		and not idleMutant.cotzSpawnApproach, "an unfinished approach expires")
+end
+
+do
+	fixture.Reset()
 	local researcher = actor("npc_mutant_dog", 0, manager:CreateCombatPack(Vector(0), true))
 	local sampler = {GetPos = function() return Vector(1000) end}
 	local defender = targetPlayer(300)
