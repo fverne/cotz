@@ -21,6 +21,9 @@ function ITEM:PaintOver(item, w, h)
     surface.SetMaterial(ix.util.GetMaterial(item:GetData("img", item.img)))
     surface.SetDrawColor(255, 255, 255)
     surface.DrawTexturedRect(2, 2, w-4, h-4)
+    if item:GetData("cooldown",0) >= os.time() then
+        draw.SimpleText(item:GetData("cooldown",0) - os.time() + 1, "stalkerregularinvfont", 3, h - 1, color_white, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, 1, color_black)
+    end
 end
 
 ITEM.functions.use = {
