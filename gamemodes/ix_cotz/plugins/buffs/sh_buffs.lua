@@ -264,14 +264,14 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 	func = function( player, parameter)
 		player.timeNextMeditatonTick = player.timeNextMeditatonTick or CurTime() + 1
 		player.timeNextMeditatonTickSound = player.timeNextMeditatonTickSound or CurTime()
-		if (player:Health() < player.meditationHealth and !parameter.damageNoStop) or (player:Health() == player:GetMaxHealth() and !parameter.healthNoStop) then 
-			ix.util.PlayerActionInterrupt(player) 
+
+		if (player:Health() < player.meditationHealth and !parameter.damageNoStop) 
+		or (player:Health() == player:GetMaxHealth() and !parameter.healthNoStop) 
+		or not player:GetNetVar("ix_hasBlackScreen") then 
+			player:RemoveBuff("buff_meditation")  
 		end
+
 		player.meditationHealth = player:Health()
-		if not player:GetNetVar("ix_hasBlackScreen") then
-			player:RemoveBuff("buff_meditation") 
-			return
-		end
 		if CurTime() > player.timeNextMeditatonTickSound then
 			player:StopSound("sleep/heartbeat.ogg")
 			player:EmitSound("sleep/heartbeat.ogg")
@@ -282,9 +282,8 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 			player.timeNextMeditatonTick = CurTime() + 1
 			if parameter.aoe then
 				for _, v in ipairs(ents.FindInSphere(player:GetPos(), parameter.aoe)) do
-     				if v:IsPlayer() and v ~= player then
-     					v:SetHealth(math.Clamp(v:Health() + player.meditationHealing * parameter.aoeMult, 0, v:GetMaxHealth()))
-     					v:AddBuff("buff_meditation_tick", 2, {}) 
+     				if v:IsPlayer() and v:Alive() and v ~= player then
+     					v:AddBuff("buff_meditation_tick", 2, {amount = player.meditationHealing * parameter.aoeMult}) 
      				end
      			end
      		end
@@ -294,11 +293,12 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 	onbuffed = function( player, parameter )
 		player.meditationHealth = player:Health()
 		player.meditationHealing = parameter.min
-		ix.util.PlayerPerformBlackScreenAction(player, "Meditating", 60, function(player) 
+		ix.util.PlayerPerformBlackScreenAction(player, "Meditating", parameter.dur or 60, function(player) 
 		end)
 	end,
 	ondebuffed = function( player, parameter )
 		player.timeNextMeditatonTick = nil
+		ix.util.PlayerActionInterrupt(player) 
 		player:StopSound("sleep/heartbeat.ogg")
 	end,
 }
@@ -317,6 +317,7 @@ PLUGIN.buffs[ "buff_meditation_tick" ] = {
 	func = function( player, parameter)
 	end,
 	onbuffed = function( player, parameter )
+		player:SetHealth(math.Clamp(player:Health() + parameter.amount, 0, player:GetMaxHealth()))
 	end,
 	ondebuffed = function( player, parameter )
 	end,

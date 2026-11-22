@@ -9,6 +9,7 @@ ITEM.flag = "A"
 ITEM.rarity = 7
 ITEM.baseweight = 1.200
 ITEM.varweight  = 0.300
+ITEM.restoreduration = 300
 
 ITEM.JumpPower = 400
 
@@ -19,10 +20,7 @@ ITEM.functions.use = {
  	icon = "icon16/stalker/heal.png",
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
-        if item.player:HasBuff("buff_meditation") then
-            item.player:RemoveBuff("buff_meditation")
-        end
-        item.player:AddBuff("buff_meditation", 60, { min = 1, max = 3, aoe = 300, aoeMult = 1, healthNoStop = true, damageNoStop = true })
+        item.player:AddBuff("buff_meditation", item.restoreduration, { min = 1, max = 3, dur = item.restoreduration, aoe = 400, aoeMult = 1, healthNoStop = true, damageNoStop = true })
         return false
     end,
     OnCanRun = function(item)
