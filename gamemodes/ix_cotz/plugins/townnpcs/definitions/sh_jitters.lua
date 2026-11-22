@@ -1,7 +1,7 @@
 PLUGIN:Register("jitters", {
 	name = "'Jitters'",
 	template = "medicnpc",
-	buyScale = 0.15,
+	buyScale = 0.3,
 	difficultyMultiplier = 1.5,
 	enforceCatalogue = true,
 	buyCategories = {["Mutant Parts"] = true},

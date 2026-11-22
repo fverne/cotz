@@ -1,7 +1,7 @@
 PLUGIN:Register("boss", {
 	name = "'Boss'",
 	template = "unisgnpc2",
-	buyScale = 0.15,
+	buyScale = 0.3,
 	difficultyMultiplier = 3,
 	enforceCatalogue = true,
 	preserveProgression = true,

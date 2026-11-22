@@ -1,7 +1,7 @@
 PLUGIN:Register("quartermaster", {
 	name = "'Quartermaster'",
 	template = "unisgnpc",
-	buyScale = 0.15,
+	buyScale = 0.3,
 	difficultyMultiplier = 5,
 	enforceCatalogue = true,
 	map = "rp_waystation",
