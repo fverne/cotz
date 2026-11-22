@@ -7,7 +7,18 @@ ITEM.weaponCategory = "primary"
 ITEM.price = 7500
 ITEM.width = 6
 ITEM.height = 1
-ITEM.canAttach = false
+ITEM.canAttach = true
+ITEM.validAttachments = {
+	"md_nightforce_nxs",
+	"md_kobra",
+	"md_microt1",
+	"md_eotech",
+	"md_aimpoint",
+	"md_cmore",
+	"md_reflex",
+	"md_schmidt_shortdot",
+	"md_acog",
+}
 
 ITEM.bulletweight = 0.031
 ITEM.unloadedweight = 3.3

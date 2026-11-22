@@ -121,7 +121,6 @@ if CLIENT then
 	end
 end
 
-SWEP.RailBGs = {main = 3, on = 1, off = 0}
 SWEP.BipodBGs = {main = 4, on = 1, off = 0}
 SWEP.SightBGs = {main = 2, sg1 = 1, none = 0}
 SWEP.LuaViewmodelRecoil = true

@@ -1059,12 +1059,14 @@ function SWEP:drawAttachments()
 	end
 
 	local preview = self.cotzAttachmentPreview
+	local previewData = preview and (preview.data or self.AttachmentModelsVM[preview.id])
+	if previewData and IsValid(previewData.ent) and previewData._bone
+		and self.CW_VM:GetBoneMatrix(previewData._bone) then
+		self:_drawAttachmentModel(previewData, preview.pos)
+	end
+
 	for k, v in pairs(self.AttachmentModelsVM) do
-		if preview and k == preview.id then
-			if IsValid(v.ent) and v._bone and self.CW_VM:GetBoneMatrix(v._bone) then
-				self:_drawAttachmentModel(v, preview.pos)
-			end
-		elseif v.active and (not preview or not preview.slot[k]) then
+		if v.active and (not preview or (k ~= preview.id and not preview.slot[k])) then
 			self:_drawAttachmentModels(v)
 		end
 	end
