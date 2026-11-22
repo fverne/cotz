@@ -9,6 +9,7 @@ ITEM.flag = "A"
 ITEM.rarity = 7
 ITEM.baseweight = 1.800
 ITEM.varweight  = 0.300
+ITEM.restoreduration = 60
 
 ITEM.JumpPower = 400
 
@@ -20,7 +21,7 @@ ITEM.functions.use = {
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
         if item.player:Health() < item.player:GetMaxHealth() then
-        	item.player:AddBuff("buff_meditation", -1, { min = 1, max = 5 })
+        	item.player:AddBuff("buff_meditation", item.restoreduration, { min = 1, max = 5, dur = item.restoreduration })
         end
         return false
     end,
@@ -31,6 +32,6 @@ ITEM.functions.use = {
 
 function ITEM:GetPropertyEffects()
 	return {
-		{buff = "buff_meditation", duration = -1, min = 1, max = 5},
+		{buff = "buff_meditation", duration = self.restoreduration, min = 1, max = 5},
 	}
 end
