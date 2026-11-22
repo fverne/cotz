@@ -16,6 +16,101 @@ if CLIENT then
 		
 	SWEP.IronsightPos = Vector(-1.986, -3.319, 2.009)
 	SWEP.IronsightAng = Vector(0, 0.008, 0)
+
+	SWEP.NXSPos = Vector(-2.004, -3.69, 1.616)
+	SWEP.NXSAng = Vector(0, 0, 0)
+	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
+
+	-- Starting aim offsets transferred from the Saiga Sport relative to its NXS.
+	SWEP.KobraPos = Vector(-1.974, -4.69, 2.0595)
+	SWEP.KobraAng = Vector(0, 0, 0)
+	SWEP.MicroT1Pos = Vector(-1.979, -3.69, 1.641)
+	SWEP.MicroT1Ang = Vector(0, 0, 0)
+	SWEP.EoTechPos = Vector(-1.979, -3.69, 1.541)
+	SWEP.EoTechAng = Vector(0, 0, 0)
+	SWEP.AimpointPos = Vector(-1.979, -3.69, 1.541)
+	SWEP.AimpointAng = Vector(0, 0, 0)
+	SWEP.CmorePos = Vector(-1.979, -3.69, 1.641)
+	SWEP.CmoreAng = Vector(0, 0, 0)
+	SWEP.ReflexPos = Vector(-1.979, -3.69, 1.776)
+	SWEP.ReflexAng = Vector(0, 0, 0)
+	SWEP.ShortDotPos = Vector(-1.979, -3.69, 1.666)
+	SWEP.ShortDotAng = Vector(0, 0, 0)
+
+
+	SWEP.ACOGPos = Vector(-1.9835, -4.69, 1.566)
+	SWEP.ACOGAng = Vector(0, 0, 0)
+
+	SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
+	SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
+
+	-- The shared optics use AK-74 offsets relative to the TOZ-34 Micro T-1.
+	SWEP.AttachmentModelsVM = {
+		["md_nightforce_nxs"] = {
+			model = "models/cw2/attachments/l96_scope.mdl",
+			bone = "Tube02",
+			pos = Vector(-0.066, -2.181, 0),
+			angle = Angle(90, -90, 0),
+			size = Vector(0.5, 0.5, 0.5),
+		},
+		["md_kobra"] = {
+			model = "models/cw2/attachments/kobra.mdl",
+			bone = "Tube02",
+			pos = Vector(0.203, 0.563, 0.2545),
+			angle = Angle(0, -180, 90),
+			size = Vector(0.3, 0.3, 0.3),
+		},
+		["md_microt1"] = {
+			model = "models/cw2/attachments/microt1.mdl",
+			bone = "Tube02",
+			pos = Vector(0.009, -1.731, 0.12),
+			angle = Angle(0, -180, 90),
+			size = Vector(0.2, 0.2, 0.2),
+		},
+		["md_eotech"] = {
+			model = "models/wystan/attachments/2otech557sight.mdl",
+			bone = "Tube02",
+			pos = Vector(0.1465, 3.711, -5.1845),
+			angle = Angle(90, -90, 0),
+			size = Vector(0.5, 0.5, 0.5),
+		},
+		["md_aimpoint"] = {
+			model = "models/wystan/attachments/aimpoint.mdl",
+			bone = "Tube02",
+			pos = Vector(-0.1145, 1.189, -2.68),
+			angle = Angle(0, 0, -90),
+			size = Vector(0.5, 0.5, 0.5),
+		},
+		["md_cmore"] = {
+			model = "models/attachments/cmore.mdl",
+			bone = "Tube02",
+			pos = Vector(0.009, -1.631, 0.62),
+			angle = Angle(0, 0, -90),
+			size = Vector(0.3245, 0.3245, 0.3245),
+		},
+		["md_reflex"] = {
+			model = "models/attachments/kascope.mdl",
+			bone = "Tube02",
+			pos = Vector(0.009, -1.706, 1.12),
+			angle = Angle(0, 0, -90),
+			size = Vector(0.275, 0.275, 0.275),
+		},
+		["md_schmidt_shortdot"] = {
+			model = "models/cw2/attachments/schmidt.mdl",
+			bone = "Tube02",
+			pos = Vector(-0.142, 0.629, -1.659),
+			angle = Angle(90, -90, 0),
+			size = Vector(0.4, 0.4, 0.4),
+		},
+
+		["md_acog"] = {
+			model = "models/wystan/attachments/2cog.mdl",
+			bone = "Tube02",
+			pos = Vector(-0.191, 1.244, -1.88),
+			angle = Angle(0, 0, -90),
+			size = Vector(0.375, 0.375, 0.375),
+		},
+	}
 	
 	SWEP.SprintPos = Vector(0.256, 0.01, 1.2)
 	SWEP.SprintAng = Vector(-17.778, 0, 0)
@@ -37,7 +132,26 @@ SWEP.CanRestOnObjects = false
 SWEP.ADSFireAnim = false
 
 SWEP.Attachments = {
-["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
+	[1] = {
+		header = "Sight",
+		offset = {300, -300},
+		atts = {
+			"md_nightforce_nxs",
+			"md_kobra",
+			"md_microt1",
+			"md_eotech",
+			"md_aimpoint",
+			"md_cmore",
+			"md_reflex",
+			"md_schmidt_shortdot",
+			"md_acog",
+		},
+	},
+	["+reload"] = {
+		header = "Ammo",
+		offset = {700, 325},
+		atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"},
+	},
 }
 	
 SWEP.Animations = {fire = "fire01",
