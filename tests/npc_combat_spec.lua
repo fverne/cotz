@@ -293,6 +293,28 @@ check(manager:GetCombatDamageActor(damage) == bandit and not manager:AllowCombat
 	"weapon-owned damage obeys faction policy")
 local player = {GetPos = function() return Vector(4000) end, IsNPC = function() return false end,
 	IsPlayer = function() return true end, Alive = function() return true end, GetMoveType = function() return 0 end}
+local deathDamage = {
+	amount = 20,
+	GetAttacker = function() return zombie end,
+	GetInflictor = function() return zombie end,
+	SetDamage = damage.SetDamage,
+}
+zombie.health, zombie.IsAlive = 0, false
+check(not manager:AllowCombatDamage(player, deathDamage) and deathDamage.amount == 0,
+	"dead mutants cannot deal ordinary damage")
+zombie.cotzApplyingDeathEffect = true
+deathDamage.amount = 20
+check(manager:AllowCombatDamage(player, deathDamage) and deathDamage.amount == 20,
+	"direct mutant death effects can damage living players")
+check(manager:AllowCombatDamage(merc, deathDamage), "direct mutant death effects can damage hostile NPCs")
+check(not manager:AllowCombatDamage(zombified, deathDamage), "mutant death effects still protect allied NPCs")
+check(not manager:CanActorAttack(zombie, player), "death effects do not let dead mutants select targets")
+deathDamage.GetInflictor = function() return weapon end
+check(not manager:AllowCombatDamage(player, deathDamage), "indirect damage still requires a living mutant")
+zombie.cotzApplyingDeathEffect = nil
+deathDamage.GetInflictor = deathDamage.GetAttacker
+check(not manager:AllowCombatDamage(player, deathDamage), "death effect damage is limited to the callback")
+zombie.health, zombie.IsAlive = 100, true
 fixture.SetPlayers({player})
 fixture.SetTime(fixture.GetTime() + 1)
 manager:UpdateCombatActors()

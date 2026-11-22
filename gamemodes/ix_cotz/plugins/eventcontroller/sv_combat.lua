@@ -229,10 +229,10 @@ function PLUGIN:ActorsAllied(first, second)
 	return first.cotzSpecies == second.cotzSpecies
 end
 
-function PLUGIN:CanActorAttack(actor, target)
-	if not living(actor) or actor.cotzSleeping or not IsValid(target) or target == actor then return false end
-	if self:IsCombatActor(target) then
-		return living(target) and not target.cotzSleeping and self:ActorsHostile(actor, target)
+local function canDamageTarget(controller, actor, target)
+	if not IsValid(target) or target == actor then return false end
+	if controller:IsCombatActor(target) then
+		return living(target) and not target.cotzSleeping and controller:ActorsHostile(actor, target)
 	end
 	if target:IsPlayer() then
 		return target:Alive() and GetConVar("ai_ignoreplayers"):GetInt() == 0
@@ -240,6 +240,12 @@ function PLUGIN:CanActorAttack(actor, target)
 	end
 
 	return true
+end
+
+function PLUGIN:CanActorAttack(actor, target)
+	if not living(actor) or actor.cotzSleeping then return false end
+
+	return canDamageTarget(self, actor, target)
 end
 
 function PLUGIN:ClearCombatPlayerFocus(actor)
@@ -683,6 +689,9 @@ function PLUGIN:AllowCombatDamage(victim, damage)
 	if not attacker then return true end
 	self:RegisterCombatActor(attacker)
 	if self:IsCombatActor(victim) then self:RegisterCombatActor(victim) end
+	-- Direct damage from a mutant's death callback keeps the normal target checks.
+	if attacker.cotzApplyingDeathEffect and damage:GetAttacker() == attacker and damage:GetInflictor() == attacker
+		and canDamageTarget(self, attacker, victim) then return true end
 	if self:CanActorAttack(attacker, victim) then return true end
 	damage:SetDamage(0)
 
