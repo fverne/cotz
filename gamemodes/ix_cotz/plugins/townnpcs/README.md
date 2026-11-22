@@ -42,8 +42,9 @@ Restart matching code on all map servers; no save reset or first-time setup is r
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 631 milestones (595 hand-ins and 36 hideout installation objectives)
-in 52 branches, retaining current `v3/` IDs and adding 212 `/stock` intermissions.
+the earlier progression, catalogue and service descriptions below. There are 650 milestones (614 hand-ins and 36 hideout installation objectives)
+in 52 branches, retaining current `v3/` IDs and adding 231 stock deliveries. Brass's regular-ammunition stock
+deliveries branch off their calibre milestones; the other contacts' `/stock` intermissions precede the next unlock.
 Technut's initial anorak stock delivery and eleven intermediate stock-preparation deliveries are retired.
 Anoraks remain starting stock; suit progression starts with the Mail Jacket and follows each preceding suit
 directly. The independent painting branch remains. Existing regional ranks are retained for later suits.
@@ -94,8 +95,8 @@ earned credit and completed unlocks. Subsequent assignments keep their saved cho
 All progression briefings in the dialogue menu include assigned item names and remaining quantities.
 Stock-capacity milestones use "<item> stock increase" as their title in dialogue and the progression menu.
 
-All 631 active milestones have individual authored `briefing` and `completion` replies in their
-contact definitions, including the 212 stock-preparation deliveries. Read each contact's existing
+All 650 active milestones have individual authored `briefing` and `completion` replies in their
+contact definitions, including the 231 stock-preparation deliveries. Read each contact's existing
 profile and bound conversation before editing its voice. The current requirements, catalogue and
 benefits determine what a reply can promise; the older story tables and retired commissions do not.
 Requests leave assigned item names/counts to the existing objective display so valid saved deliveries
@@ -151,6 +152,31 @@ Regenerate reports with `progression_rewards.py --write` and `ammo_progression.p
 
 Deploy all map servers together and restart without resetting saves or running first-time setup.
 The linked overhaul guide records default quantities, current allocations, compatibility and live checks.
+
+## Brass stock reserve tracks, 22 November 2026
+
+Brass's regular-ammunition chain is now 24 calibre milestones. Each milestone requires only the
+previous one. Stock reserves no longer sit between calibres. Each calibre's reserves form a short side
+track that opens when that calibre's milestone is complete. Reserve steps keep `intermissionFor`,
+which now names the calibre milestone they branch from. The engine activates them as soon as their
+prerequisites are complete, and the tooling still treats them as category-wide stock deliveries.
+
+Stock targets are unchanged: 4 → 7 → 10, and buckshot/slugs 2 → 4 → 5. Starting-supply calibres
+(.22, 7.62x25, .410, 9x19, .45, buckshot, 9x18) still get their first rise from the chain milestone,
+then have one reserve step. Purchased calibres open with no stock bonus, then have two reserve steps.
+The second rise used to be bundled into the next calibre's purchase milestone. It is now a separate
+`<calibre>/stock-2` delivery that copies the first reserve's request quantities. .22 adds `22lr/stock-2`.
+9.3x64 adds `93x64/stock-1` and `93x64/stock-2`, so it follows the same path instead of jumping from
+4 to 10 on purchase. Existing step IDs, request quantities and the purchase milestones' requirements
+are unchanged. Three existing reserves moved to their calibre's region position, so their pools changed:
+`545x39/stock`, `357magnum/stock` and `50ae/stock`. Saved selections stay fixed.
+
+Existing reserve IDs keep their historical names. For example, `556x45/stock` raises 7.62x39.
+Stock is derived from completed steps. Characters who completed a later purchase milestone under the
+old layout lose its bundled second rise until they deliver the matching `stock-2` request.
+Unfinished purchase deliveries remain intact and no longer wait for a reserve.
+Regenerate with `python3 docs/npc-overhaul/tools/expand_progression.py --write` and
+`python3 docs/npc-overhaul/tools/progression_rewards.py --write` after editing Brass's progression.
 
 ## Gasmask filter purchases
 

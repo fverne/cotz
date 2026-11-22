@@ -177,10 +177,8 @@ for _, item in ipairs(ix.townNPCs.regularAmmoChain) do
 	local shotgun = item == "12gauge"
 	check(baseStock(item) == (shotgun and 2 or 4) and baseStock(item) + (finalStock[item] or 0) == (shotgun and 5 or 10),
 		"Brass regular ammunition reaches its starting and final stock targets: " .. item)
-	if item ~= "93x64" then
-		check(table.concat(tiers[item], "/") == (shotgun and "4/5" or "7/10"),
-			"Brass stock rises through its intermediate tier: " .. item)
-	end
+	check(table.concat(tiers[item], "/") == (shotgun and "4/5" or "7/10"),
+		"Brass stock rises through its intermediate tier: " .. item)
 end
 check(baseStock("12gaugesg") == 2 and table.concat(tiers["12gaugesg"], "/") == "4/5",
 	"slugs share the buckshot stock targets")
@@ -189,7 +187,24 @@ for _, item in ipairs(ix.townNPCs.regularAmmoChain) do
 	local id = stepID("brass", "regular-ammo", item)
 	check(ix.progression.definitions[id] ~= nil, "every authored calibre retains a Brass milestone")
 	if previous then check(depends(id, previous), "regular ammo follows the authored chain exactly") end
+	check(#ix.progression.definitions[id].prerequisites == (previous and 1 or 0),
+		"a calibre milestone waits only for the previous calibre, never for a stock reserve: " .. item)
 	previous = id
+end
+-- Each calibre's stock reserves form a side track that starts at its milestone.
+for _, step in ipairs(brass.progression) do
+	if step.branch == "regular-ammo" and step.intermissionFor then
+		local id = ix.townNPCs:StepID("brass", step.id)
+		local milestone = ix.townNPCs:StepID("brass", step.intermissionFor)
+		for _, parent in ipairs(ix.progression.definitions[id].prerequisites) do
+			check(parent == milestone or ix.townNPCs.steps[parent].intermissionFor == step.intermissionFor,
+				"stock reserves follow their own calibre milestone: " .. step.id)
+		end
+		for _, nextID in ipairs(ix.progression.definitions[id].nextProgressions) do
+			check(ix.townNPCs.steps[nextID].intermissionFor == step.intermissionFor,
+				"stock reserves never gate another calibre: " .. step.id)
+		end
+	end
 end
 local loads = {"12gaugetr", "12gaugedt", "12gaugemg"}
 for index = 2, #loads do

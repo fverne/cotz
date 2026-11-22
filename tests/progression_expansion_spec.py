@@ -22,10 +22,10 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 631)
-        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 212)
+        self.assertEqual(len(steps), 650)
+        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 231)
         output, count = expansion.outputs()
-        self.assertEqual(count, 212)
+        self.assertEqual(count, 231)
         for path, content in output.items():
             self.assertEqual(path.read_text(), content, str(path))
 
@@ -128,9 +128,18 @@ class ProgressionExpansionTests(unittest.TestCase):
                 self.assertEqual(step["branchIndex"], target["branchIndex"])
                 self.assertEqual(step["branchLength"], target["branchLength"])
                 self.assertEqual(step["acquisitionMaps"], target["acquisitionMaps"])
-                self.assertEqual([s["quantity"] for s in step["requirements"]],
-                                 [(s["quantity"] + 1) // 2 for s in target["requirements"]])
-                self.assertIn(step["id"], target["requires"])
+                if slug == "brass" and step["branch"] == "regular-ammo":
+                    # Brass's reserves branch off their calibre milestone and never gate the next calibre.
+                    self.assertNotIn(step["id"], target["requires"])
+                    parent = by_id[step["requires"][0]]
+                    self.assertEqual(len(step["requires"]), 1)
+                    self.assertIn(step["intermissionFor"], (parent["id"], parent.get("intermissionFor")))
+                    self.assertFalse(any(step["id"] in s["requires"] for s in contact["progression"]
+                                         if not s.get("intermissionFor")))
+                else:
+                    self.assertEqual([s["quantity"] for s in step["requirements"]],
+                                     [(s["quantity"] + 1) // 2 for s in target["requirements"]])
+                    self.assertIn(step["id"], target["requires"])
                 limit = rewards.MAX_STOCK_BONUS if slug == "brass" else 4
                 self.assertTrue(all(1 <= bonus <= limit for bonus in rewards.stock_bonuses(step["stock"]).values()))
                 identifier = rewards.progression_id(slug, step["id"])

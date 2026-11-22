@@ -4,8 +4,8 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**631 active steps; 631 have functional unlocks; 0 have TODO-only unlock plans;
-36 have multiple assigned unlocks; 0 have no assigned unlock.**
+**650 active steps; 650 have functional unlocks; 0 have TODO-only unlock plans;
+20 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
 Medicine retains family branches; Jitters gates antirads, Asenapine/Modafines and stimpaks after medkits 2, 4 and 6. Listed starter supplies are available immediately.
@@ -28,7 +28,7 @@ Validation passed.
 | ballast | 13 | 13 | 0 | 0 |
 | beanstalk | 27 | 27 | 0 | 0 |
 | boss | 15 | 15 | 0 | 0 |
-| brass | 68 | 68 | 0 | 18 |
+| brass | 87 | 87 | 0 | 2 |
 | carbon | 19 | 19 | 0 | 0 |
 | cleaner | 13 | 13 | 0 | 0 |
 | egghead | 5 | 5 | 0 | 0 |
@@ -93,7 +93,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | ballast | 4 | 17 | 9 |
 | beanstalk | 4 | 54 | 11 |
 | boss | 2 | 24 | 8 |
-| brass | 10 | 107 | 36 |
+| brass | 10 | 156 | 36 |
 | carbon | 4 | 25 | 15 |
 | cleaner | 4 | 17 | 9 |
 | egghead | 1 | 11 | 2 |
@@ -185,7 +185,8 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | boss | v3/helmets/headwear_psz12/stock | Stock: headwear_pracs +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | boss | v3/helmets/headwear_psz12 | Purchase: headwear_psz12 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | brass | v3/regular-ammo/22lr | Stock: 22lr +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
-| brass | v3/regular-ammo/762x25 | Stock: 22lr +6 total; Stock: 762x25 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/22lr/stock-2 | Stock: 22lr +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
+| brass | v3/regular-ammo/762x25 | Stock: 762x25 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/45acp41/stock | Stock: 762x25 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/45acp41 | Stock: 45acp41 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/9x19/stock | Stock: 45acp41 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
@@ -195,41 +196,59 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | brass | v3/regular-ammo/545x39/stock | Stock: 45acp +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/545x39 | Purchase: 545x39 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/12gauge/stock | Stock: 545x39 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| brass | v3/regular-ammo/12gauge | Stock: 12gauge +2 total; Stock: 12gaugesg +2 total; Stock: 545x39 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/545x39/stock-2 | Stock: 545x39 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/12gauge | Stock: 12gauge +2 total; Stock: 12gaugesg +2 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/762x39/stock | Stock: 12gauge +3 total; Stock: 12gaugesg +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/762x39 | Purchase: 762x39 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/556x45/stock | Stock: 762x39 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| brass | v3/regular-ammo/556x45 | Purchase: 556x45; Stock: 762x39 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/762x39/stock-2 | Stock: 762x39 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/556x45 | Purchase: 556x45 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/9x18/stock | Stock: 556x45 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| brass | v3/regular-ammo/9x18 | Stock: 556x45 +6 total; Stock: 9x18 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/556x45/stock-2 | Stock: 556x45 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/9x18 | Stock: 9x18 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/762x54/stock | Stock: 9x18 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/regular-ammo/762x54 | Purchase: 762x54 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
-| brass | v3/regular-ammo/357magnum/stock | Stock: 762x54 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/357magnum | Purchase: 357magnum; Stock: 762x54 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/357magnum/stock | Stock: 762x54 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/762x54/stock-2 | Stock: 762x54 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| brass | v3/regular-ammo/357magnum | Purchase: 357magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | brass | v3/regular-ammo/9x39/stock | Stock: 357magnum +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/9x39 | Purchase: 9x39; Stock: 357magnum +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/357magnum/stock-2 | Stock: 357magnum +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/9x39 | Purchase: 9x39 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | brass | v3/regular-ammo/44magnum/stock | Stock: 9x39 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/44magnum | Purchase: 44magnum; Stock: 9x39 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/9x39/stock-2 | Stock: 9x39 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/44magnum | Purchase: 44magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | brass | v3/regular-ammo/9x21/stock | Stock: 44magnum +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/9x21 | Purchase: 9x21; Stock: 44magnum +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/44magnum/stock-2 | Stock: 44magnum +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/9x21 | Purchase: 9x21 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | brass | v3/regular-ammo/762x51/stock | Stock: 9x21 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/762x51 | Purchase: 762x51; Stock: 9x21 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/9x21/stock-2 | Stock: 9x21 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/762x51 | Purchase: 762x51 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | brass | v3/regular-ammo/500magnum/stock | Stock: 762x51 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/500magnum | Purchase: 500magnum; Stock: 762x51 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/762x51/stock-2 | Stock: 762x51 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/500magnum | Purchase: 500magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | brass | v3/regular-ammo/338lapua/stock | Stock: 500magnum +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/338lapua | Purchase: 338lapua; Stock: 500magnum +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| brass | v3/regular-ammo/50ae/stock | Stock: 338lapua +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| brass | v3/regular-ammo/50ae | Purchase: 50ae; Stock: 338lapua +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/500magnum/stock-2 | Stock: 500magnum +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/338lapua | Purchase: 338lapua | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/50ae/stock | Stock: 338lapua +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/338lapua/stock-2 | Stock: 338lapua +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| brass | v3/regular-ammo/50ae | Purchase: 50ae | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | brass | v3/regular-ammo/57x28/stock | Stock: 50ae +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| brass | v3/regular-ammo/57x28 | Purchase: 57x28; Stock: 50ae +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/50ae/stock-2 | Stock: 50ae +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/57x28 | Purchase: 57x28 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | brass | v3/regular-ammo/127x55/stock | Stock: 57x28 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| brass | v3/regular-ammo/127x55 | Purchase: 127x55; Stock: 57x28 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/57x28/stock-2 | Stock: 57x28 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/127x55 | Purchase: 127x55 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | brass | v3/regular-ammo/145x114/stock | Stock: 127x55 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| brass | v3/regular-ammo/145x114 | Purchase: 145x114; Stock: 127x55 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/127x55/stock-2 | Stock: 127x55 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/145x114 | Purchase: 145x114 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | brass | v3/regular-ammo/700nitro/stock | Stock: 145x114 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| brass | v3/regular-ammo/700nitro | Purchase: 700nitro; Stock: 145x114 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/145x114/stock-2 | Stock: 145x114 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/700nitro | Purchase: 700nitro | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | brass | v3/regular-ammo/93x64/stock | Stock: 700nitro +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| brass | v3/regular-ammo/93x64 | Purchase: 93x64; Stock: 700nitro +6 total; Stock: 93x64 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/700nitro/stock-2 | Stock: 700nitro +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/93x64 | Purchase: 93x64 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/93x64/stock-1 | Stock: 93x64 +3 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| brass | v3/regular-ammo/93x64/stock-2 | Stock: 93x64 +6 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | brass | v3/hp-ammo/22lrhp | Barter: 2 boxes 22lr for one box 22lrhp | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | brass | v3/hp-ammo/762x25hp | Barter: 2 boxes 762x25 for one box 762x25hp | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | brass | v3/hp-ammo/9x19hp | Barter: 2 boxes 9x19 for one box 9x19hp | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
