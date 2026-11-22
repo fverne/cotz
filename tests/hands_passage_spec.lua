@@ -76,8 +76,19 @@ local path = "gamemodes/ix_cotz/plugins/corechanges/sh_handspassage.lua"
 dofile(path)
 local owner, other = entity(1, 0), entity(2, 100)
 check(PLUGIN:ShouldCollide(owner, other) == nil, "ordinary player collisions do not override other handlers")
+ix = {}
 check(PLUGIN:ShouldCollide({IsSTALKERNPC = true}, {IsSTALKERNPC = true}) == false,
-	"the unrelated STALKER NPC collision rule survives")
+	"STALKER NPCs pass through each other without the event controller")
+local blockingPairs = {}
+ix.eventController = {ActorsBlockEachOther = function(_, first, second) return blockingPairs[first] == second end}
+local gunman, dog, packmate = {IsSTALKERNPC = true}, {IsSTALKERNPC = true}, {IsSTALKERNPC = true}
+blockingPairs[gunman] = dog
+check(PLUGIN:ShouldCollide(gunman, dog) == nil, "hostile gunmen and targets collide so bullets can hit")
+check(PLUGIN:ShouldCollide(gunman, packmate) == false, "non-blocking STALKER NPC pairs keep passing through")
+SERVER = false
+check(PLUGIN:ShouldCollide(gunman, dog) == false, "clients keep the pass-through rule without combat relations")
+SERVER = true
+ix = nil
 check(owner:SetHandsPassage(true) and owner.group == 5, "passage preserves the normal collision group")
 check(owner.customCollision and owner.passageAtRefresh, "enabling updates cached collision rules immediately")
 check(PLUGIN:ShouldCollide(owner, other) == false and PLUGIN:ShouldCollide(other, owner) == false,

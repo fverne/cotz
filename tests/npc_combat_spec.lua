@@ -1,4 +1,6 @@
 -- Run from the addon root: luatex --luaonly tests/npc_combat_spec.lua
+-- Engine constants exist before plugin files load; sv_combat.lua captures them at file scope.
+HITGROUP_GENERIC, HITGROUP_HEAD, HITGROUP_CHEST, HITGROUP_STOMACH, HITGROUP_LEFTLEG = 0, 1, 2, 3, 6
 local fixture = dofile("tests/population_performance_spec.lua")
 local manager = fixture.manager
 PLUGIN, ix.eventController = manager, manager
@@ -27,7 +29,6 @@ end
 function vectorMeta:Angle() return {y = math.deg(math.atan(self.y, self.x))} end
 math.NormalizeAngle = function(value) return (value + 180) % 360 - 180 end
 D_HT, D_LI, D_NU = 1, 3, 4
-HITGROUP_GENERIC, HITGROUP_HEAD, HITGROUP_CHEST = 0, 1, 2
 MOVETYPE_OBSERVER, MOVETYPE_NOCLIP, SCHED_FORCED_GO_RUN = 10, 8, 200
 GetConVar = function() return {GetInt = function() return 0 end} end
 local function hitboxData(entity, hitbox, hitboxSet)
@@ -94,6 +95,21 @@ local zombie = actor("npc_mutant_classiczombie", 1300)
 zombie.cotzSpecies, zombie.cotzFaction = "zombie", "undead"
 local zombified = actor("npc_human_z_merc_rifleman", 1400)
 local lowMutant = actor("npc_mutant_dog", 500)
+check(manager:ActorsBlockEachOther(bandit, lowMutant) and manager:ActorsBlockEachOther(lowMutant, bandit),
+	"living gunmen and hostile mutants collide so bullet traces can hit")
+check(manager:ActorsBlockEachOther(bandit, merc), "rival human factions collide so their bullets hit")
+check(not manager:ActorsBlockEachOther(bandit, ally) and not manager:ActorsBlockEachOther(bandit, otherBandit),
+	"faction allies keep passing through each other")
+check(not manager:ActorsBlockEachOther(zombified, lowMutant) and not manager:ActorsBlockEachOther(zombie, lowMutant),
+	"undead and mutants share a side and pass through each other")
+check(manager:ActorsBlockEachOther(zombified, bandit), "zombified gunmen collide with living factions")
+check(not manager:ActorsBlockEachOther(zombie, actor("npc_mutant_boar", 1500)),
+	"mutant-only pairs keep passing through regardless of timed species conflicts")
+check((lowMutant.collisionRefreshes or 0) > 0, "registering a combat actor refreshes cached collision rules")
+local refreshesBeforeRemoval = lowMutant.collisionRefreshes
+manager:RemoveCombatActor(lowMutant)
+check(lowMutant.collisionRefreshes == refreshesBeforeRemoval + 1, "removing a combat actor refreshes collision rules")
+manager:RegisterCombatActor(lowMutant)
 lowMutant.WorldSpaceCenter = function() return Vector(500, 0, 12) end
 bandit.enemy = lowMutant
 local spread = Vector(0.1, 0.1, 0)
@@ -159,6 +175,17 @@ do
 	}}
 	lowMutant.boneMatrices = {[0] = aimMatrix(Vector(500, 0, 14))}
 	aimsAt(bandit, lowMutant, Vector(500, 0, 10), "mutants without a chest group use an actual hitbox center")
+	lowMutant.hitboxSets[0] = {
+		count = 3,
+		[0] = {group = HITGROUP_LEFTLEG, bone = 0, mins = Vector(-2, -2, -2), maxs = Vector(2, 2, 2)},
+		[1] = {group = HITGROUP_STOMACH, bone = 1, mins = Vector(-8, -4, -4), maxs = Vector(8, 4, 4)},
+		[2] = {group = HITGROUP_HEAD, bone = 2, mins = Vector(-3, -3, -3), maxs = Vector(3, 3, 3)},
+	}
+	lowMutant.boneMatrices = {[0] = aimMatrix(Vector(500, 0, 1)), [1] = aimMatrix(Vector(500, 0, 23)),
+		[2] = aimMatrix(Vector(520, 0, 35))}
+	aimsAt(bandit, lowMutant, Vector(500, 0, 23), "mutants with a stomach-tagged torso are aimed at the torso, not a paw")
+	lowMutant.hitboxSets[0][0].group = HITGROUP_CHEST
+	aimsAt(bandit, lowMutant, Vector(500, 0, 1), "a chest hitbox still takes priority over the stomach")
 	local client = {
 		Health = function() return 100 end,
 		IsNPC = function() return false end,

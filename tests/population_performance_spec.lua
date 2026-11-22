@@ -55,6 +55,7 @@ local function mutant(index, position)
 	}
 	entity.GetClass = function(self) return self.class end
 	entity.IsNPC = function() return true end
+	entity.CollisionRulesChanged = function(self) self.collisionRefreshes = (self.collisionRefreshes or 0) + 1 end
 	entity.Health = function(self) return self.health end
 	entity.GetPos = function(self) return self.position end
 	entity.EntIndex = function(self) return self.index end

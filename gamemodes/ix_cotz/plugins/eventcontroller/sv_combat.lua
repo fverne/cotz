@@ -13,6 +13,7 @@ local PLAYER_CONTACT_INTERVAL = 0.25
 local PURSUIT_RETRY = 1
 local PURSUIT_ARRIVAL = 64
 local APPROACH_SECONDS = 10
+local AIM_HITGROUPS = {HITGROUP_CHEST, HITGROUP_STOMACH}
 local TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing"}
 local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
 	chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true}
@@ -28,6 +29,11 @@ local nextPackID = 0
 
 local function living(entity)
 	return IsValid(entity) and entity:Health() > 0 and entity.IsAlive ~= false and not entity.cotzPopulationRejected
+end
+
+-- ShouldCollide answers depend on combat registration; cached physics pairs must be refreshed.
+local function refreshCollisionRules(entity)
+	if IsValid(entity) then entity:CollisionRulesChanged() end
 end
 
 local function cellKey(position)
@@ -66,10 +72,13 @@ local function enemyAimPosition(enemy)
 	local hitboxSet = enemy:GetHitboxSet()
 	if hitboxSet == nil then return enemy:WorldSpaceCenter() end
 	local hitboxCount = enemy:GetHitBoxCount(hitboxSet) or 0
-	for hitbox = 0, hitboxCount - 1 do
-		if enemy:GetHitBoxHitGroup(hitbox, hitboxSet) == HITGROUP_CHEST then
-			local position = hitboxAimPosition(enemy, hitbox, hitboxSet)
-			if position then return position end
+	-- Many mutant skeletons tag their torso hitbox as stomach rather than chest.
+	for _, hitGroup in ipairs(AIM_HITGROUPS) do
+		for hitbox = 0, hitboxCount - 1 do
+			if enemy:GetHitBoxHitGroup(hitbox, hitboxSet) == hitGroup then
+				local position = hitboxAimPosition(enemy, hitbox, hitboxSet)
+				if position then return position end
+			end
 		end
 	end
 
@@ -129,6 +138,7 @@ function PLUGIN:RemoveCombatActor(entity)
 	entity.cotzPursuitScheduled, entity.cotzNextPursuit = nil, nil
 	entity.cotzCombatObjective, entity.cotzCombatObjectiveRadius = nil, nil
 	entity.cotzCombatApproach, entity.cotzCombatApproachUntil, entity.cotzCombatApproachPlayer = nil, nil, nil
+	refreshCollisionRules(entity)
 end
 
 function PLUGIN:RegisterCombatActor(entity, pack)
@@ -155,6 +165,7 @@ function PLUGIN:RegisterCombatActor(entity, pack)
 		entity:SetSquad("cotz/encounter/" .. pack.id .. "/" .. (entity.cotzFaction or "human"))
 	end
 	self:UpdateCombatCell(entity)
+	refreshCollisionRules(entity)
 end
 
 function PLUGIN:UpdateCombatCell(entity)
@@ -199,6 +210,15 @@ function PLUGIN:ActorsHostile(first, second)
 	if first.cotzSpecies == second.cotzSpecies then return false end
 
 	return firstPack ~= nil and firstPack.opponent == secondPack and CurTime() < firstPack.conflictUntil
+end
+
+-- STALKER NPCs pass through each other so groups do not get stuck, but bullet traces use the same
+-- collision rules, so hostile pairs that include a human gunman must stay solid. Mutant-only pairs keep
+-- passing through: their timed species conflicts would make the answer change without a rules refresh.
+function PLUGIN:ActorsBlockEachOther(first, second)
+	if not first.cotzHuman and not second.cotzHuman then return false end
+
+	return self:ActorsHostile(first, second)
 end
 
 function PLUGIN:ActorsAllied(first, second)

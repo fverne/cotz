@@ -251,6 +251,8 @@ function PLUGIN:OnUnload()
 			end
 			entity.cotzCombatPack, entity.cotzCombatCell = nil, nil
 			entity.cotzRelations, entity.cotzOriginalRelations = nil, nil
+			-- Without the controller every STALKER NPC pair passes through again.
+			entity:CollisionRulesChanged()
 		end
 	end
 	for _, record in ipairs(self.corpses) do

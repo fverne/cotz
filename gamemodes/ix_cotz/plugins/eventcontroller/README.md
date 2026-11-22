@@ -124,12 +124,21 @@ controllers have not been added to Garbage.
 ## Aim and regional PDA reports
 
 Living and zombified `npc_human_*` gunmen aim at the center of a chest hitbox in their enemy's active
-hitbox set. This applies to players, humans and mutants. Hitbox centers include their bone-local
-offset, current rotation and model scale. If no chest hitbox has a usable transform, each shot chooses
+hitbox set, or a stomach hitbox when there is no usable chest; many mutant skeletons tag their torso as
+stomach. This applies to players, humans and mutants. Hitbox centers include their bone-local
+offset, current rotation and model scale. If no torso hitbox has a usable transform, each shot chooses
 a random hitbox and tries the remaining hitboxes if necessary. Targets without usable hitboxes fall
 back to their world collision center. Positions are read for each shot; weapon spread, pellet count
 and damage remain unchanged. The server `EntityFireBullets` plugin hook returns `true` to apply the
 direction, following the engine hook contract.
+
+STALKER NPCs (`IsSTALKERNPC`) normally pass through each other so groups do not get stuck. Bullet traces
+use the same `ShouldCollide` rules, so `ActorsBlockEachOther` keeps hostile pairs that include a living or
+zombified gunman solid; otherwise their shots passed straight through mutants and rival humans. Allies,
+mutants with undead, and mutant-only pairs still pass through. Mutant-only pairs ignore timed species
+conflicts so the rule never changes without a refresh. Registering or removing a combat actor, and
+unloading the controller, call `CollisionRulesChanged`. Clients keep the pass-through rule because combat
+relations are server-only.
 
 Routine encounter PDA chatter checks Mute's permission for the current map through
 `CanReceiveMutantReports`: Swamps, Garbage, Waystation, then Pripyat. Delivery remains private to each

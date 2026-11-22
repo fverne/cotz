@@ -56,5 +56,7 @@ Disabling is refused while a normal movement hull trace starts solid or another 
 standing/crouched hull overlaps, including players with passage enabled. Move clear and try again.
 If a loadout requests disabling while overlapping, a short retry restores collisions once clear without
 changing the saved preference. There is no expiry timer. Raised-hand pushing is unchanged.
+The same rule lets STALKER NPCs pass through each other, except pairs the event controller reports through
+`ActorsBlockEachOther` (hostile gunmen and their targets), which stay solid so NPC bullets can hit.
 Run `luatex --luaonly tests/hands_passage_spec.lua`, then verify with two clients, props, doors and NPCs,
 both movement directions, crouching, joining before character load, character switches and reconnect/restart persistence.

@@ -8,7 +8,13 @@ function playerMeta:GetHandsPassage()
 end
 
 function PLUGIN:ShouldCollide(ent1, ent2)
-	if ent1.IsSTALKERNPC and ent2.IsSTALKERNPC then return false end
+	if ent1.IsSTALKERNPC and ent2.IsSTALKERNPC then
+		-- Bullet traces use these rules too, so hostile gunmen and their targets must stay solid.
+		-- Combat relations exist only on the server; clients keep the pass-through rule.
+		if SERVER and ix.eventController and ix.eventController:ActorsBlockEachOther(ent1, ent2) then return end
+
+		return false
+	end
 	if ent1:IsPlayer() and ent2:IsPlayer()
 		and not ent1.cotzHandsPhysgun and not ent2.cotzHandsPhysgun
 		and (ent1.cotzHandsPassage or ent2.cotzHandsPassage) then
