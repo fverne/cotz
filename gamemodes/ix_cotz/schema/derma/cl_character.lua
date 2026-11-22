@@ -293,13 +293,12 @@ function PANEL:Init()
 			self.reloadMenuButton:SizeToContents()
 			self.reloadMenuButton.DoClick = function()
 				self.reloadMenuButton:Hide()
-				if (ix.config.Get("charloadremove", false) and bHasCharacter and LocalPlayer().GetCharacter) then
+				if bHasCharacter and LocalPlayer().GetCharacter then
 					self.loadButton:Show()
 					self.loadButton:SlideDown(0)
 				end
 				if (#ix.characters < charmaximum) then
 					self.createButton:Show()
-					self.createButton:SlideDown(0)
 				end
 			end
 		end
