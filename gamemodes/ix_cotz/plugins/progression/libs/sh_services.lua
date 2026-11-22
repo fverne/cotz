@@ -10,8 +10,8 @@ local SERVICE_CONTACTS = {
 	treatment = { ["'Jitters'"] = true, ["'Arena Master'"] = true },
 	wish = { ["'???'"] = true },
 }
-local CREDIT_LIMITS = {repair = 20000, treatment = 5000, storage = 50000, wish = 100000}
 local TREATMENT_RATES = {hp = 2, rad = 3, psy = 4}
+local TREATMENT_COST_MULTIPLIERS = {["'Jitters'"] = 2}
 local WISH_PRICE = 1000000
 local MAX_WISH_PRICE = 4000000
 local WISH_TYPES = {carryinc = true, far = true, fbsr = true, hp = true, weapon = true, suit = true}
@@ -34,7 +34,7 @@ function ix.progression.ServiceCreditCapacity(character, npc, service)
 	if not SERVICE_CONTACTS[service] or not SERVICE_CONTACTS[service][npc]
 		or not ix.progression.CanUseNPC(character, npc) then return 0 end
 
-	return math.max(0, CREDIT_LIMITS[service] - ix.progression.GetServiceCredit(character, npc, service))
+	return math.huge
 end
 
 function ix.progression.AddServiceCredit(character, npc, service, amount)
@@ -132,7 +132,7 @@ local function treatmentOffer(client, data, npc)
 		end
 	end
 
-	return {type = requested, baseCost = cost}
+	return {type = requested, baseCost = cost * (TREATMENT_COST_MULTIPLIERS[npc] or 1)}
 end
 
 local function storageOffer(client, data)
@@ -350,8 +350,7 @@ function ix.progression.ValidateBenefits(definition)
 		for _, reward in ipairs(benefits.services or {}) do
 			assert(SERVICE_CONTACTS[reward.service] and SERVICE_CONTACTS[reward.service][reward.npc],
 				"Unsupported service reward")
-			assert(type(reward.amount) == "number" and reward.amount > 0
-				and reward.amount <= CREDIT_LIMITS[reward.service] and reward.amount % 1 == 0,
+			assert(type(reward.amount) == "number" and reward.amount > 0 and reward.amount % 1 == 0,
 				"Invalid service credit amount")
 		end
 	end
@@ -393,7 +392,7 @@ if SERVER then
 		local credits = table.Copy(character:GetData(CREDIT_KEY, {}) or {})
 		for _, benefit in ipairs(benefits.services or {}) do
 			local key = benefit.npc .. "/" .. benefit.service
-			credits[key] = math.min(CREDIT_LIMITS[benefit.service], (credits[key] or 0) + benefit.amount)
+			credits[key] = (credits[key] or 0) + benefit.amount
 		end
 		line.benefitsClaimed[claimID] = true
 		record.lines[progressionID] = line

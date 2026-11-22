@@ -184,6 +184,14 @@ check(not ix.progression.GrantBenefits(first, "creditFixture", credit, "once"), 
 check(ix.progression.GetServiceCredit(first, "'Technut'", "repair") == 100, "credit has the stated face value")
 check(ix.progression.GetServiceCredit(first, "'Boss'", "repair") == 0, "credit belongs to the named provider")
 check(ix.progression.GetServiceCredit(second, "'Technut'", "repair") == 0, "another character has no credit")
+local clinicOwner = actor()
+local clinicBenefit = {services = {{npc = "'Jitters'", service = "treatment", amount = 6000}}}
+ix.progression.ValidateBenefits({completionBenefits = clinicBenefit})
+check(ix.progression.AddServiceCredit(clinicOwner, "'Jitters'", "treatment", 5000), "old clinic cap can be reached")
+check(ix.progression.GrantBenefits(clinicOwner, "clinicFixture", clinicBenefit, "once"),
+	"clinic benefits can exceed the old clinic cap")
+check(ix.progression.GetServiceCredit(clinicOwner, "'Jitters'", "treatment") == 11000,
+	"clinic benefits keep their full value above the old cap")
 local noGiftOwner = actor()
 check(ix.progression.GrantBenefits(noGiftOwner, "noGiftFixture", {
 	items = {{item = "medic_bandage_1"}},
@@ -242,7 +250,7 @@ ix.progression.GrantBenefits(
 local medical = ix.progression.GetTreatmentOptions(first.client, doctor)
 check(#medical == 4, "clinic retains all four treatment options")
 local allOffer = ix.progression.BuildServiceOffer(first.client, doctor, "treatment", {type = "all", cost = 0})
-check(allOffer.baseCost == 260 and allOffer.credit == 260 and allOffer.cost == 0,
+check(allOffer.baseCost == 520 and allOffer.credit == 520 and allOffer.cost == 0,
 	"combined treatment applies credit once and respects increased maximum health")
 local clinicBefore = ix.progression.GetServiceCredit(first, "'Jitters'", "treatment")
 ix.progression.ConfirmService({}, first.client, doctor, "treatment", {type = "all"})
@@ -250,7 +258,7 @@ check(ix.progression.ExecuteService(first.client, doctor, "treatment", true), "c
 check(first.client.health == 125 and first.client.radiation == 0 and first.client.psyHealth == 100,
 	"treatment restores the intended state without reducing wished health")
 check(
-	ix.progression.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 260,
+	ix.progression.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 520,
 	"unused treatment credit is retained"
 )
 ix.progression.ConfirmService({}, first.client, doctor, "treatment", {type = "all"})
@@ -259,7 +267,7 @@ check(
 	"zero-cost already-healthy treatment is safe"
 )
 check(
-	ix.progression.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 260,
+	ix.progression.GetServiceCredit(first, "'Jitters'", "treatment") == clinicBefore - 520,
 	"zero fee consumes no credit"
 )
 check(
@@ -444,7 +452,7 @@ do
 		and ix.progression.GetServiceCredit(owner, "'Jitters'", "treatment") == 200,
 		"repair leaves the separate clinic credit intact")
 	local treatment = ix.progression.BuildServiceOffer(owner.client, doctor, "treatment", {type = "all"})
-	check(treatment.credit == 200 and treatment.cost == 60, "town treatment quotes apply Jitters's credit")
+	check(treatment.credit == 200 and treatment.cost == 320, "town treatment quotes apply Jitters's credit")
 	ix.progression.ConfirmService({}, owner.client, doctor, "treatment", {type = "all"})
 	check(ix.progression.ExecuteService(owner.client, doctor, "treatment", true), "town treatment spends reward credit")
 	check(ix.progression.GetServiceCredit(owner, "'Jitters'", "treatment") == 0

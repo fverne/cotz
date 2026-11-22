@@ -168,8 +168,8 @@ individual contact prose. Run `luatex --luaonly tests/progression_dialogue_spec.
 
 Technut and Jitters accept provider-bound repeatable-job credits for repair and treatment respectively.
 Their contact reward profiles opt into credit use; other town contacts retain disabled credit balances.
-The existing service quotes and confirmations spend credit before charging cash. Balance caps remain
-20,000 repair / 5,000 treatment credits; jobsystem retains excess reward value as a recoverable offer.
+Jitters charges double the standard rate for health, radiation, and psy treatment, including combined care.
+Service credit balances have no cap. Service quotes and confirmations spend credit before charging cash.
 No new finite-progression credit rewards are introduced.
 
 ## Runtime and checks
