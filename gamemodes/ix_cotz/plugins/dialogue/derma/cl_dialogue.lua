@@ -3,9 +3,11 @@ local gradient = ix.util.GetMaterial("vgui/gradient-d")
 local OPTION_INPUT_DELAY = 0.6
 local DIALOGUE_MATERIAL = ix.util.GetMaterial("cotz/panels/dialogue.png")
 
-local ESCAPE_HOLD_TIME = 1
-local escapeStarted
-local escapePanel
+local CLOSE_HOLD_TIME = 1
+local closeHoldStarted
+local closeHoldPanel
+local closeHoldKey
+local tabWasDown = false
 local relatedPanels = {}
 local OPTION_COLORS = {
 	text = Color(216, 215, 201),
@@ -64,20 +66,64 @@ local function closeRelated(force)
 	end
 end
 
-local function escapeThink()
-	if not escapeStarted then return end
-	if not input.IsKeyDown(KEY_ESCAPE) then
-		escapeStarted = nil
-		escapePanel = nil
+local function startCloseHold(key, panel)
+	closeHoldStarted, closeHoldPanel, closeHoldKey = RealTime(), panel, key
+end
+
+local function closeHoldThink()
+	if not closeHoldStarted then return end
+	if not input.IsKeyDown(closeHoldKey) then
+		closeHoldStarted = nil
+		closeHoldPanel = nil
 
 		return
 	end
-	if RealTime() - escapeStarted < ESCAPE_HOLD_TIME then return end
+	if RealTime() - closeHoldStarted < CLOSE_HOLD_TIME then return end
 	closeRelated(true)
 	if IsValid(ix.gui.vendor) then ix.gui.vendor:Close() end
-	if IsValid(escapePanel) and not escapePanel.exiting then escapePanel:exit() end
-	escapeStarted = nil
-	escapePanel = nil
+	if IsValid(closeHoldPanel) and not closeHoldPanel.exiting then closeHoldPanel:exit() end
+	closeHoldStarted = nil
+	closeHoldPanel = nil
+end
+
+-- Closes the front-most service overlay, trader, or dialogue step. Returns true when a press was consumed.
+local function handleClosePress(key)
+	local panel = ix.gui.dialogue
+	local vendor = ix.gui.vendor
+	if closeRelated(false) then
+		startCloseHold(key, panel)
+
+		return true
+	end
+	if IsValid(vendor) and vendor:IsVisible() then
+		startCloseHold(key, panel)
+		vendor:Close()
+
+		return true
+	end
+	if not IsValid(panel) or panel.exiting or not panel:HasFocus() then return end
+	startCloseHold(key, panel)
+	panel:GoBack()
+
+	return true
+end
+
+local function isTypingInTextEntry()
+	local focus = vgui.GetKeyboardFocus()
+
+	return IsValid(focus) and focus:GetClassName() == "TextEntry"
+end
+
+-- Popups capture keyboard input, so Tab never reaches its bind here; poll the key edge instead.
+local function closeKeysThink()
+	closeHoldThink()
+
+	local tabDown = input.IsKeyDown(KEY_TAB)
+	local tabPressed = tabDown and not tabWasDown
+	tabWasDown = tabDown
+	if not tabPressed or closeHoldStarted then return end
+	if gui.IsGameUIVisible() or isTypingInTextEntry() then return end
+	handleClosePress(KEY_TAB)
 end
 
 function PANEL:Init()
@@ -503,28 +549,11 @@ vgui.Register("ixDialogue", PANEL, "EditablePanel")
 
 -- Keep this at the original hook stage, after Helix plugins (including chatbox).
 hook.Add("OnPauseMenuShow", "cotz/dialogue/escape-exit", function()
-	if escapeStarted then return false end
-	local panel = ix.gui.dialogue
-	local vendor = ix.gui.vendor
-	if closeRelated(false) then
-		escapeStarted, escapePanel = RealTime(), panel
-
-		return false
-	end
-	if IsValid(vendor) and vendor:IsVisible() then
-		escapeStarted, escapePanel = RealTime(), panel
-		vendor:Close()
-
-		return false
-	end
-	if not IsValid(panel) or panel.exiting or not panel:HasFocus() then return end
-	escapeStarted, escapePanel = RealTime(), panel
-	panel:GoBack()
-
-	return false
+	if closeHoldStarted then return false end
+	if handleClosePress(KEY_ESCAPE) then return false end
 end)
 
-hook.Add("Think", "cotz/dialogue/escape-hold", escapeThink)
+hook.Add("Think", "cotz/dialogue/escape-hold", closeKeysThink)
 
 net.Receive("ixDialogue", function()
 	local target = net.ReadEntity()

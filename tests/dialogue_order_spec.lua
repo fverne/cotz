@@ -168,8 +168,9 @@ check(clicked[1] == "GOODBYE", "the final dynamic exit still closes through GOOD
 KEY_0, KEY_9, KEY_PAD_0, KEY_PAD_9 = 1, 10, 37, 46
 IsValid = function(value) return type(value) == "table" end
 local now = 0
-local escapeDown = false
-input = {IsKeyDown = function() return escapeDown end}
+local escapeDown, tabDown = false, false
+KEY_ESCAPE, KEY_TAB = 70, 67
+input = {IsKeyDown = function(key) if key == KEY_TAB then return tabDown end return escapeDown end}
 RealTime = function() return now end
 gui = {EnableScreenClicker = function() end}
 panel.HasFocus = function() return true end
@@ -377,6 +378,29 @@ ix.dialogue.TrackRelatedPanel(overlay, function() cancelled = true overlay:Close
 navigation.exiting = false
 check(pauseMenuHook() == false and cancelled and overlay.closed,
 	"Escape cancels the front service overlay before navigating dialogue")
+escapeThink()
+gui.IsGameUIVisible = function() return false end
+vgui.GetKeyboardFocus = function() return nil end
+local tabOverlay = {IsVisible = function() return true end, Close = function(self) self.closed = true end}
+ix.dialogue.TrackRelatedPanel(tabOverlay)
+tabDown = true
+escapeThink()
+check(tabOverlay.closed and not navigation.exiting, "Tab closes the front service overlay like Escape")
+local backs = #visited
+escapeThink()
+check(#visited == backs, "holding Tab does not repeat the close press")
+now = now + 1.01
+escapeThink()
+check(navigation.exiting, "holding Tab for a second closes the conversation")
+tabDown = false
+escapeThink()
+navigation.exiting = false
+local typing = {GetClassName = function() return "TextEntry" end}
+vgui.GetKeyboardFocus = function() return typing end
+tabDown = true
+escapeThink()
+check(#visited == backs, "Tab is ignored while typing in a text entry")
+tabDown = false
 escapeThink()
 -- Opening a trader must not replace the current choices or current topic.
 local exchanges = 0
