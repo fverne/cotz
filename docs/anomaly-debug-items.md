@@ -11,3 +11,9 @@ The normal weapon base handles equip, saved ammunition and condition. Firearms s
 All 160 definitions passed Lua syntax and class/model mapping checks. Garry's Mod equip, rendering and multiplayer behavior remain unverified. Remove or migrate saved debug instances before deleting these definitions later.
 
 Only existing COTZ ammo types are used. The Kar98k, G43, RPG-7 and Gauss rifle have no equivalent ammunition and deliberately cannot load or fire. Their debug items remain available for inspecting models and equip behavior. The conversion uses `7.62x54MMR` for COTZ rifle ammunition.
+
+## Viewmodel-recoil comparison items
+
+147 further definitions, `sh_debug_cw_anomaly_<id>_vmrecoil.lua`, appear in **Debug - Anomaly CW2.0 VM recoil** with IDs such as `debug_cw_anomaly_ak74_vmrecoil`. Each one copies its source debug item (model, size, slot and zeroed debug values) and equips the matching `cw_anomaly_<id>_vmrecoil` SWEP. Those SWEPs use CW Lua viewmodel recoil and bolt/slide bone offsets instead of the source firing animation; see the content workspace's `packs/anomaly_cw20/README.md`. Melee weapons and throwables have no variants.
+
+Original and variant share an equipment slot, so unequip one before equipping the other when comparing. These items need the variant SWEP files from the content workspace in the installed `cotz_anomaly_cw20` addon.
