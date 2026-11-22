@@ -13,6 +13,23 @@ function ix.util.GetGasmaskFilterCondition(item)
 	return math.Clamp(condition, 0, FULL_CONDITION)
 end
 
+-- Equipment without a recorded filter item holds its type's standard definition (the medium air tank for suits).
+function ix.util.GetInstalledFilterID(item)
+	local uniqueID = item:GetData("filterUniqueID")
+	if uniqueID and ix.item.list[uniqueID] then return uniqueID end
+
+	return "gasmask_filter_" .. item.filterType
+end
+
+-- A recorded swap uses that filter's capacity; otherwise the equipment's own included-filter divisor applies.
+function ix.util.GetFilterWearDivisor(item)
+	local uniqueID = item:GetData("filterUniqueID")
+	local installed = uniqueID and ix.item.list[uniqueID]
+	if installed and installed.filterWearDivisor then return installed.filterWearDivisor end
+
+	return item.filterWearDivisor or ix.item.list["gasmask_filter_" .. item.filterType].filterWearDivisor
+end
+
 local function inMainBackpack(item, inventory)
 	if item.invID ~= inventory:GetID() or inventory:GetItemByID(item.id, true) ~= item then return false end
 	local width, height = inventory:GetSize()

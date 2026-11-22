@@ -65,7 +65,7 @@ local function canInteract(item, filter, client)
 end
 
 local function monitorInstallation(context)
-	if context.client.cotzFilterAction ~= context then return end
+	if context.client.cotzFilterAction ~= context or not context.installing then return end
 	if not validContext(context) or not context.client:GetNetVar("ix_hasBlackScreen", false)
 		or CurTime() > context.expires then
 		releaseAction(context, true)
@@ -75,6 +75,72 @@ local function monitorInstallation(context)
 	timer.Simple(ACTION_CHECK_INTERVAL, function() monitorInstallation(context) end)
 end
 
+local function findReturnSlot(inventory, returned, incoming)
+	local width, height = inventory:GetSize()
+	local function fits(x, y)
+		return x and y and x >= 1 and y >= 1 and x + returned.width - 1 <= width and y + returned.height - 1 <= height
+			and inventory:CanItemFit(x, y, returned.width, returned.height, incoming)
+	end
+	if fits(incoming.gridX, incoming.gridY) then return incoming.gridX, incoming.gridY end
+	for y = 1, height - returned.height + 1 do
+		for x = 1, width - returned.width + 1 do
+			if fits(x, y) then return x, y end
+		end
+	end
+end
+
+local function completeSwap(context, incoming)
+	local item, filter = context.item, context.filter
+	item:SetData("filterCondition", incoming)
+	if ix.util.GetInstalledFilterID(item) ~= filter.uniqueID then item:SetData("filterUniqueID", filter.uniqueID) end
+	releaseAction(context)
+	ix.weight.Update(context.character)
+	context.client:EmitSound("stalkersound/inv_slot.mp3", 40)
+end
+
+-- A different-size tank cannot reuse the incoming item, so the outgoing one is created asynchronously.
+local function swapDifferentFilter(context)
+	local item, filter, client, character = context.item, context.filter, context.client, context.character
+	local inventory = context.inventory
+	context.installing = nil
+	timer.Simple(CREATION_TIMEOUT, function()
+		if item.cotzFilterPending ~= context then return end
+		releaseAction(context)
+		if IsValid(client) and client:GetCharacter() == character then
+			client:Notify("The tank swap timed out. The installed tank was kept.")
+		end
+	end)
+
+	local outgoingData = {filterCondition = item:GetFilterCondition()}
+	ix.item.Instance(0, ix.util.GetInstalledFilterID(item), outgoingData, 0, 0, function(returned)
+		local valid = validContext(context) and canInteract(item, filter, client)
+		local x, y
+		if valid then x, y = findReturnSlot(inventory, returned, filter) end
+		if not x or not y then
+			returned:Remove()
+			releaseAction(context)
+			if valid then client:Notify("Make room in your backpack for the returning tank.") end
+
+			return
+		end
+		local incoming = math.Clamp(filter:GetData("filterCondition", 100), 0, 100)
+		returned:SetData("filterCondition", item:GetFilterCondition())
+		if not filter:Remove() then
+			returned:Remove()
+			releaseAction(context)
+
+			return
+		end
+		-- The outgoing tank's mass is already carried with the suit; the swap recalculates weight afterwards.
+		returned.cotzFilterReturning = true
+		local added = inventory:Add(returned.id, 1, nil, x, y)
+		returned.cotzFilterReturning = nil
+		-- The fit was checked above; if a hook still vetoes placement, keep the newly installed tank.
+		if not added then returned:Remove() end
+		completeSwap(context, incoming)
+	end, character:GetID(), client:SteamID64())
+end
+
 function ix.util.InstallGasmaskFilter(item, client, data)
 	if not beginAction(item, client) then return end
 	local filterID = istable(data) and data[1]
@@ -82,14 +148,26 @@ function ix.util.InstallGasmaskFilter(item, client, data)
 	local filter = client:GetCharacter():GetInventory():GetItemByID(filterID, true)
 	if not ix.util.CanInstallGasmaskFilter(item, filter, client) then return end
 	if not canInteract(item, filter, client) then return end
+	local outgoingID = item:GetFilterCondition() ~= false and ix.util.GetInstalledFilterID(item)
+	if outgoingID and outgoingID ~= filter.uniqueID
+		and not findReturnSlot(client:GetCharacter():GetInventory(), ix.item.list[outgoingID], filter) then
+		client:Notify("Make room in your backpack for the returning tank.")
+
+		return
+	end
 	local context = newContext(item, client, filter)
 	context.installing = true
 	context.expires = CurTime() + INSTALL_DURATION + 1
 	timer.Simple(ACTION_CHECK_INTERVAL, function() monitorInstallation(context) end)
 	ix.util.PlayerPerformBlackScreenAction(client, item.isAirTank and "Swapping gas tank..." or "Installing filter...", INSTALL_DURATION, function()
 		if not validContext(context) or not canInteract(item, filter, client) then releaseAction(context) return end
-		local incoming = math.Clamp(filter:GetData("filterCondition", 100), 0, 100)
 		local outgoing = item:GetFilterCondition()
+		if outgoing ~= false and ix.util.GetInstalledFilterID(item) ~= filter.uniqueID then
+			swapDifferentFilter(context)
+
+			return
+		end
+		local incoming = math.Clamp(filter:GetData("filterCondition", 100), 0, 100)
 		if outgoing == false then
 			if not filter:Remove() then releaseAction(context) return end
 		else
@@ -97,10 +175,7 @@ function ix.util.InstallGasmaskFilter(item, client, data)
 			-- Read condition at completion so exposure during installation cannot recharge the old filter.
 			filter:SetData("filterCondition", outgoing)
 		end
-		item:SetData("filterCondition", incoming)
-		releaseAction(context)
-		ix.weight.Update(context.character)
-		client:EmitSound("stalkersound/inv_slot.mp3", 40)
+		completeSwap(context, incoming)
 	end)
 end
 
@@ -126,7 +201,7 @@ function ix.util.RemoveGasmaskFilter(item, client)
 	end)
 
 	-- Add(string) returns before database creation completes in the installed Helix version.
-	ix.item.Instance(0, "gasmask_filter_" .. item.filterType, {filterCondition = condition}, 0, 0, function(filter)
+	ix.item.Instance(0, ix.util.GetInstalledFilterID(item), {filterCondition = condition}, 0, 0, function(filter)
 		local valid = validContext(context)
 		local x, y
 		if valid then x, y = inventory:FindEmptySlot(1, 1, true) end
@@ -140,6 +215,7 @@ function ix.util.RemoveGasmaskFilter(item, client)
 		end
 		if added then
 			item:SetData("filterCondition", false)
+			item:SetData("filterUniqueID", nil)
 			ix.weight.Update(character)
 			client:EmitSound("stalkersound/inv_slot.mp3", 40)
 		else
@@ -160,8 +236,7 @@ function ix.util.DamageGasmaskFilters(client, damageInfo)
 			and not item:GetData("unlimitedDurability", false) then
 			local condition = item:GetFilterCondition()
 			if condition and condition > 0 then
-				local definition = ix.item.list["gasmask_filter_" .. item.filterType]
-				local wearDivisor = item.filterWearDivisor or definition.filterWearDivisor
+				local wearDivisor = ix.util.GetFilterWearDivisor(item)
 				item:SetData("filterCondition", math.max(0, condition - damageInfo:GetDamage() / wearDivisor))
 			end
 		end

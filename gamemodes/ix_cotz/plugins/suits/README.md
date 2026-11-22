@@ -17,20 +17,35 @@ replace a civilian or military cartridge. Equipment declared with `false` has no
 | Scientific | `gasmask_filter_scientific` | M40, M50, Exohelm with Respirator, Spartan, Screen | 20 minutes | 2,550 |
 
 SSP-99, SSP-99M and all SEVA and NBC variants use air tanks that provide full tank-dependent radiation protection until empty.
-Their current concrete wear divisor is 700, preserved by tank swaps. The replacement `gasmask_filter_air_tank`
-item costs 6,000 RU, occupies 2×2 cells and weighs 6 kg loose. It only fits these suits; scientific
-cartridges and gas tanks cannot substitute for one another.
+Three tank sizes share the `air_tank` socket; scientific cartridges and gas tanks cannot substitute for one another.
+
+| Tank | Item ID | Wear divisor | Reference lifetime | Price | Full refill | Size | Weight |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Small | `gasmask_filter_air_tank_small` | 400 | 33 minutes | 3,500 | 2,300 | 1×2 | 3.5 kg |
+| Medium | `gasmask_filter_air_tank` | 700 | 58 minutes | 6,000 | 4,000 | 2×2 | 6 kg |
+| Large | `gasmask_filter_air_tank_large` | 1,000 | 83 minutes | 8,500 | 5,700 | 2×3 | 9 kg |
+
+Reference lifetimes use 20 raw radiation damage per second. The medium tank keeps the original item ID,
+so existing loose tanks became medium tanks. Suits record a swapped-in size in the `filterUniqueID` item
+data; suits without it, including all existing and new suits, hold a medium tank and use their concrete
+wear divisor of 700. Suit weights include a medium tank; another installed size adds or removes the difference.
 Drag a tank onto a backpack suit or its equipped card, or use **Swap Gas Tank**. Swapping uses the
-same six-second cancellable action and ownership/placement checks as filters. The outgoing tank
+same six-second cancellable action and ownership/placement checks as filters. A same-size outgoing tank
 returns in the incoming tank's backpack space with its actual air remaining at completion, including
-0%, so swaps work with a full backpack. Tanks cannot be removed without replacing them.
+0%, so those swaps work with a full backpack. A different-size outgoing tank is created asynchronously
+and placed in the incoming tank's space or any main-backpack space freed by it; the swap is refused up
+front when it would not fit, and kept intact if room disappears before creation completes. Both items stay
+locked until then, with a 15-second timeout. Tanks cannot be removed without replacing them.
 Suit durability deteriorates normally from combat and anomalies regardless of remaining air.
 Tank depletion does not taper radiation protection: any air above 0%, including fractional percentages,
 provides the full tank protection scale; at 0% the tank-dependent protection is lost.
 Unlimited durability retains its existing behavior.
-Technut offers a separate air tank repair/refill even when suit durability is full, restoring tank
-condition without repairing the suit. It costs 40 RU per missing percentage point, up to 4,000 RU for an empty tank on any suit, before earned discounts
-and repair credit. Ordinary suit repairs do not refill tanks. Existing and new suits start with full tanks;
+Technut refills filters and tanks separately from durability repairs, including loose cartridges and
+tanks, mask filters and suit tanks, even when equipment durability is full. Each concrete filter declares
+`refillCost`, the price of refilling it from empty: 550, 1,100 and 1,700 RU for civilian, military and
+scientific cartridges, and the tank costs in the table above. The quote scales with the missing percentage
+before earned discounts and repair credit. Empty sockets and filters locked by an installation cannot be
+refilled, and Boss offers no refills. Ordinary repairs do not refill filters or tanks. Existing and new suits start with full tanks;
 partial and exhausted tanks persist in `filterCondition`. Tank mass is included in existing suit weight.
 Suit percentage and flat radiation protection still scale with suit durability;
 independent upgrades and attachments retain their existing behavior.
@@ -104,7 +119,7 @@ its actual remaining condition at completion. This works with a full backpack. I
 empty socket consumes the loose cartridge only when the action completes successfully.
 **Remove Filter** also works while equipped, requires a free backpack cell and returns a matching
 cartridge at its remaining condition, including 0%. A fresh cartridge restores 100% filter condition
-without repairing the headgear. Removed filters can be reinstalled; repairs cannot recharge them.
+without repairing the headgear. Removed filters can be reinstalled; durability repairs cannot recharge them, but Technut refills can.
 
 Tank tooltips and condition bars show remaining air. Other tooltips show the required filter and its percentage or **No filter**. Backpack icons use the durability texture and condition colors for the filter/tank bar above ordinary durability.
 Equipment cards show the teal filter/tank bar above ordinary durability. Tooltips list filter/tank condition before durability.
@@ -153,7 +168,7 @@ luatex --luaonly tests/item_descriptions_spec.lua
 
 These standalone checks use mocks. In multiplayer, verify all three cartridges load and spawn, exact
 compatibility, percentage taper, moderate exposure lifetimes, fully blocked radiation, safe zones,
-ordinary combat durability and all exemptions and built-in tanks. Check Technut tank quotes, refill of undamaged suits, and rejection at Boss. Check actions and bars on ordinary masks and linked
+ordinary combat durability and all exemptions and built-in tanks. Check Technut refill quotes for loose and installed filters and all three tank sizes, refill of undamaged suits, rejection at Boss, and small/large tank swaps with full and nearly full backpacks. Check actions and bars on ordinary masks and linked
 helmet slots, including Screen. Reconnect, restart and transfer between identically configured servers
 with partial, empty and exhausted filters. Try repeated and foreign requests, full backpacks, a
 backpack filled during removal, death or character switching during installation/removal, and normal carry limits.

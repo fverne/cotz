@@ -99,7 +99,7 @@ Paths below are relative to `gamemodes/ix_cotz/plugins/`.
 
 `suits/` owns tiered replaceable gasmask filters, their shared/server modules and immediate
 `items/gasmaskfilters/` definitions. Concrete headgear declares exact compatibility; closed-respiratory
-suit families use built-in air tanks serviced by Technut. See the [filter guide](../gamemodes/ix_cotz/plugins/suits/README.md).
+suit families use small, medium or large air tanks; Technut refills filters and tanks. See the [filter guide](../gamemodes/ix_cotz/plugins/suits/README.md).
 
 `weaponservice/` owns the technician weapon workshop: 260 exact-model barrel/receiver definitions,
 four salvage families, the reviewed firearm tier catalogue, fixed recipes, durability rebuilding,

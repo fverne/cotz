@@ -4,7 +4,7 @@ local CREDIT_KEY = "progressionServiceCredits"
 local QUOTE_LIFETIME = 60
 local MAX_DISCOUNT = 0.15
 local REPAIR_COST_MULTIPLIER = 2
-local AIR_TANK_REFILL_COST = 4000
+local FILTER_REFILL_CONTACTS = { ["'Technut'"] = true }
 local SERVICE_CONTACTS = {
 	repair = { ["'Technut'"] = true, ["'Boss'"] = true },
 	treatment = { ["'Jitters'"] = true, ["'Arena Master'"] = true },
@@ -85,29 +85,34 @@ local function ownedItem(character, itemID)
 	end
 end
 
+-- Loose cartridges and tanks, and those installed in masks or suits, refill by their definition's refill cost.
+local function filterRefillOffer(item, npc)
+	if not FILTER_REFILL_CONTACTS[npc] or item.cotzFilterPending then return end
+	local condition, definition
+	if item.isGasmaskFilter then
+		condition, definition = item:GetData("filterCondition", 100), item
+	elseif item.filterType and item.GetFilterCondition then
+		condition, definition = item:GetFilterCondition(), ix.item.list[ix.util.GetInstalledFilterID(item)]
+	end
+	if not condition or not definition or not definition.refillCost then return end
+	local missing = 100 - math.Clamp(condition, 0, 100)
+	if missing < 0.5 then return end
+
+	return {item = item, field = "filterCondition", baseCost = math.Round(missing / 100 * definition.refillCost)}
+end
+
 local function repairOffer(client, data, npc)
 	local item = ownedItem(client:GetCharacter(), data.itemid)
-	if not item or not item.canRepair then
-		return
-	end
+	if not item then return end
+	if data.type == "filter" then return filterRefillOffer(item, npc) end
+	if not item.canRepair or item.cotzFilterPending then return end
 	local field = item.isWeapon and "wear" or "durability"
-	if data.type == "airTank" then
-		if not item.isAirTank or npc ~= "'Technut'" then return end
-		field = "filterCondition"
-	end
-	if item.cotzFilterPending then return end
-	local condition = field == "filterCondition" and (item:GetFilterCondition() or 0) or item:GetData(field, 100)
-	local missing = 100 - condition
+	local missing = 100 - item:GetData(field, 100)
 	if missing < 0.5 then
 		return
 	end
 
-	local baseCost
-	if field == "filterCondition" then
-		baseCost = math.Round(missing / 100 * AIR_TANK_REFILL_COST)
-	else
-		baseCost = math.max(0, math.Round(missing * item:GetRepairCost())) * REPAIR_COST_MULTIPLIER
-	end
+	local baseCost = math.max(0, math.Round(missing * item:GetRepairCost())) * REPAIR_COST_MULTIPLIER
 
 	return {item = item, field = field, baseCost = baseCost}
 end
@@ -286,12 +291,15 @@ end
 function ix.progression.GetRepairOptions(client, target)
 	local options = {}
 	for id, item in pairs(client:GetCharacter():GetInventory():GetItems()) do
-		for _, kind in ipairs({"durability", "airTank"}) do
+		for _, kind in ipairs({"durability", "filter"}) do
 			local data = {itemid = id, type = kind}
 			local offer = ix.progression.BuildServiceOffer(client, target, "repair", data)
 			if offer then
 				data.cost = offer.cost
-				local label = item:GetName() .. (kind == "airTank" and " (air tank)" or "")
+				local label = item:GetName()
+				if kind == "filter" and not item.isGasmaskFilter then
+					label = label .. (item.isAirTank and " (air tank)" or " (filter)")
+				end
 				options[#options + 1] = {statement = label .. " - " .. ix.progression.ServicePriceText(offer),
 					topicID = "RepairItems", dyndata = data}
 			end
@@ -447,7 +455,9 @@ if SERVER then
 
 	local function applyRepair(client, offer)
 		offer.item:SetData(offer.field, 100)
-		if offer.item.GetDurabilityScale or offer.item.isAirTank then client:RecalculateResistances() end
+		if offer.item.GetDurabilityScale or offer.item.filterType and not offer.item.isGasmaskFilter then
+			client:RecalculateResistances()
+		end
 		if offer.item.isWeapon and offer.item.class then
 			local weapon = client:GetWeapon(offer.item.class)
 			if IsValid(weapon) then weapon:SetWeaponWear(100) end
