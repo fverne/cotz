@@ -137,9 +137,13 @@ if CLIENT then
 			subTitle = L(subTitle:sub(2))
 		end
 
-		Derma_Query(subTitle, title, "Yes", function()
+		local frame
+		frame = ix.cotzUI.TrackClosable(Derma_Query(subTitle, title, "Yes", function()
 			netstream.Start("qurReq", time, true)
 		end, "No", function()
+			netstream.Start("qurReq", time, false)
+		end), function()
+			frame:Close()
 			netstream.Start("qurReq", time, false)
 		end)
 	end)

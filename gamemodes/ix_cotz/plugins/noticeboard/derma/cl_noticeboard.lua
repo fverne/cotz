@@ -90,7 +90,7 @@ local PANEL = {}
 				removeText:SetText("Remove Notice")
 				removeText:SetDisabled(false) --WAS TRUE
 				removeText.DoClick = function()
-					Derma_Query("Are you sure you want to remove this notice? (This cannot be undone!)", "Are You Sure?", "Yes", function()
+					ix.cotzUI.TrackClosable(Derma_Query("Are you sure you want to remove this notice? (This cannot be undone!)", "Are You Sure?", "Yes", function()
 						table.remove(notices, index)
 						netstream.Start("noticeRemoveEntry", index)
 
@@ -104,7 +104,7 @@ local PANEL = {}
 							s2:AlphaTo(255, 0.3)
 							s1:AlphaTo(255, 0.3)
 						end)
-					end, "No")
+					end, "No"))
 				end
 			editText = s2:Add("DButton")
 				editText:Dock(BOTTOM)
@@ -196,13 +196,13 @@ local PANEL = {}
 					end
 				end
 
-				Derma_StringRequest("Notice Name", "What would you like to title your notice?", "", function(titleLabel)
+				ix.cotzUI.TrackClosable(Derma_StringRequest("Notice Name", "What would you like to title your notice?", "", function(titleLabel)
 					if (string.len(titleLabel) < 6) then LocalPlayer():Notify("The title is too short!") return end
 					if (string.len(titleLabel) > 23) then LocalPlayer():Notify("The title is too long!") return end
 					table.insert(notices, {owner = LocalPlayer():GetCharacter():GetID(), label = titleLabel, text = ""})
 					self:populate(notices)
 					self:editText(#notices)
-				end)
+				end))
 			end
 
 			newNotice.Paint = function()

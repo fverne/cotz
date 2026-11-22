@@ -305,10 +305,10 @@ function PANEL:BuildOverview()
 	local title = L(self.leader and "squad_menu_btn_disband" or "squad_menu_btn_leave")
 	addButton(card, title, function()
 		local prompt = self.leader and L("squad_menu_btn_ask_disband") or "Leave this squad?"
-		Derma_Query(prompt, title, L("text_yes"), function()
+		ix.cotzUI.TrackClosable(Derma_Query(prompt, title, L("text_yes"), function()
 			net.Start(action)
 			net.SendToServer()
-		end, L("text_no"))
+		end, L("text_no")))
 	end, true)
 end
 
@@ -402,12 +402,12 @@ function PANEL:Init()
 end
 
 local function requestMemberAction(characterID, event, prompt, title, desiredRank)
-	Derma_Query(prompt, title, L("text_yes"), function()
+	ix.cotzUI.TrackClosable(Derma_Query(prompt, title, L("text_yes"), function()
 		net.Start(event)
 			net.WriteUInt(characterID, 32)
 			if (desiredRank ~= nil) then net.WriteUInt(desiredRank, 2) end
 		net.SendToServer()
-	end, L("text_no"))
+	end, L("text_no")))
 end
 
 function PANEL:OnMousePressed(code)
@@ -422,12 +422,13 @@ function PANEL:OnMousePressed(code)
 
 	if (target) then
 		menu:AddOption(L("squad_menu_opt_sendpm"), function()
-			Derma_StringRequest(L("squad_menu_opt_sendpm"), L("squad_menu_opt_message"), "", function(text)
-				local currentTarget = ix.squad.GetPlayer(self.characterID)
-				if (currentTarget and text ~= "") then
-					RunConsoleCommand("say", "/pm", currentTarget:GetCharacter():GetName(), text)
-				end
-			end)
+			ix.cotzUI.TrackClosable(Derma_StringRequest(L("squad_menu_opt_sendpm"), L("squad_menu_opt_message"), "",
+				function(text)
+					local currentTarget = ix.squad.GetPlayer(self.characterID)
+					if (currentTarget and text ~= "") then
+						RunConsoleCommand("say", "/pm", currentTarget:GetCharacter():GetName(), text)
+					end
+				end))
 		end):SetImage("icon16/user_comment.png")
 	end
 
