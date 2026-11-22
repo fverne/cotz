@@ -117,7 +117,7 @@ check(not ix.progression.CanBuyItem(known, "'Gasket'", "tokarev"), "old completi
 check(not ix.townNPCs:HasService(known, "storage"), "old bank completion cannot restore a retired service")
 known:SetData("progressionServiceCredits", {["'Technut'/repair"] = 500})
 check(ix.progression.GetServiceCredit(known, "'Technut'", "repair") == 500
-	and ix.progression.ServiceCreditCapacity(known, "'Technut'", "repair") == 19500,
+	and ix.progression.ServiceCreditCapacity(known, "'Technut'", "repair") == math.huge,
 	"Technut's task credit profile restores the saved provider balance without resetting it")
 check(ix.progression.ServiceCreditCapacity(known, "'Boss'", "repair") == 0,
 	"town providers without a task credit profile remain ineligible")

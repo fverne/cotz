@@ -728,19 +728,15 @@ check(
 	"credit bonus cannot be replayed"
 )
 creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 19900})
-local capacityChoices = ix.taskRewards.BuildBonusChoices(creditOwner, "'Technut'", 100, "bonus:cap")
-for _, choice in ipairs(capacityChoices) do check(not choice.services, "insufficient credit capacity hides the credit choice") end
-creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 0})
-creditOwner:SetData("taskRewardOffers", {["bonus:cap"] = {npc = "'Technut'", earned = true,
-	label = "Five-task bonus", budget = 100, choices = creditChoices}})
-creditOwner:SetData("progressionServiceCredits", {["'Technut'/repair"] = 19900})
-ix.taskRewards.SelectOffer(creditOwner, "'Technut'", "bonus:cap", creditIndex)
-check(ix.progression.GetServiceCredit(creditOwner, "'Technut'", "repair") == 19900
-	and creditOwner:GetData("taskRewardOffers")["bonus:cap"], "capacity changes preserve the whole unclaimed bonus")
-check(
-	ix.taskRewards.SelectOffer(creditOwner, "'Technut'", "bonus:cap", 1),
-	"a blocked credit claim can choose supplies instead"
-)
+local uncappedChoices = ix.taskRewards.BuildBonusChoices(creditOwner, "'Technut'", 100, "bonus:uncapped")
+check(uncappedChoices[#uncappedChoices].services[1].amount == 130,
+	"repair credit stays available near the old cap")
+creditOwner:SetData("taskRewardOffers", {["bonus:uncapped"] = {npc = "'Technut'", earned = true,
+	label = "Five-task bonus", budget = 100, choices = uncappedChoices}})
+check(ix.taskRewards.SelectOffer(creditOwner, "'Technut'", "bonus:uncapped", #uncappedChoices),
+	"repair credit bonus can be claimed above the old cap")
+check(ix.progression.GetServiceCredit(creditOwner, "'Technut'", "repair") == 20030,
+	"the entire bonus is added to the existing repair balance")
 ix.item.list.advancedAmmo = {name = "Advanced ammunition", isAmmo = true, price = 100, ammoAmount = 10}
 ix.progression.definitions.supplyGate = {vendorUnlocks = {{npc = "'Old Timer'", args = {"advancedAmmo"}}}}
 local catalogue = ix.taskRewards.SupplyCatalogue(creditOwner, "'Old Timer'")
@@ -1375,67 +1371,57 @@ do
 				ix.jobs.list.serviceFlow = {name = "Service work", desc = "Work", numberRec = 1,
 					requiredItem = "12gauge", moneyReward = 1000 * tier, repReward = 15, reward = {}, tier = tier}
 				local allowance = ({600, 1000, 1500})[tier]
+				local regularCredit = contact.rewards.creditPerTier * tier
 				for serial = 1, 5 do
 					check(recipient.client:ixJobAdd("serviceFlow", npc), "service reward task accepts")
 					local job = recipient.jobs[npc]
 					job.isCompleted = true
 					check(ix.taskRewards.RevealJobOffer(recipient.client, npc), "completed work reveals credit")
 					local offer = recipient:GetData("taskRewardOffers")[job.rewardKey]
-					check(#offer.choices == 1 and offer.choices[1].services[1].amount == 200 * tier
+					check(#offer.choices == 1 and offer.choices[1].services[1].amount == regularCredit
 						and #offer.choices[1].items == 0 and not offer.choices[1].money,
-						"regular work offers only 200 service credits per difficulty tier")
+						"regular work offers the configured service credit per difficulty tier")
 					check(ix.taskRewards.SelectOffer(recipient, npc, job.rewardKey, 1), "regular credit can be claimed")
-					check(ix.progression.GetServiceCredit(recipient, npc, service) == serial * 200 * tier,
+					check(ix.progression.GetServiceCredit(recipient, npc, service) == serial * regularCredit,
 						"credits accumulate at their issuing service despite a full inventory")
 					check(recipient.money == serial * ({500, 750, 1000})[tier]
 						and recipient.client.rep == serial * 15, "normal cash and reputation are paid separately")
 					check(not ix.taskRewards.SelectOffer(recipient, npc, job.rewardKey, 1), "regular credit cannot replay")
 					if serial < 5 then
-						check(ix.taskRewards.TraderBonusProgress(recipient, npc).budget == serial * (allowance - 200 * tier),
+						check(ix.taskRewards.TraderBonusProgress(recipient, npc).budget == serial * (allowance - regularCredit),
 							"regular credit face value is deducted from the bonus allowance")
 					else
 						local key = "bonus:" .. job.progressionClaim
 						local bonus = recipient:GetData("taskRewardOffers")[key]
-						local amount = 5 * (allowance - 200 * tier)
+						local amount = 5 * (allowance - regularCredit)
 						check(bonus.budget == amount and #bonus.choices == 1
 							and bonus.choices[1].services[1].amount == amount,
 							"five completed jobs convert exactly the remaining allowance to service credit")
 						local beforeMoney = recipient.money
-						ix.taskRewards.SelectOffer(recipient, npc, key, 1)
-						local pending = recipient:GetData("taskRewardOffers")[key]
-						if pending then
-							check(ix.taskRewards.HasUnclaimedRewards(recipient, npc), "capped credit keeps the reward pending")
-							recipient:SetData("progressionServiceCredits", {})
-							check(ix.taskRewards.SelectOffer(recipient, npc, key, 1), "remaining bonus credits recover after spending")
-						end
+						check(ix.taskRewards.SelectOffer(recipient, npc, key, 1), "bonus credit can be claimed")
+						check(ix.progression.GetServiceCredit(recipient, npc, service) == 5 * regularCredit + amount,
+							"the entire bonus is added to the service balance")
 						check(not recipient:GetData("taskRewardOffers")[key] and recipient.money == beforeMoney,
 							"bonus credits never grant extra cash")
 						check(not ix.taskRewards.SelectOffer(recipient, npc, key, 1), "bonus credit cannot replay")
 					end
 				end
 			end
-			local capped = actor()
-			local limit = id == "technut" and 20000 or 5000
-			capped:SetData("progressionServiceCredits", {[npc .. "/" .. service] = limit - 100})
+			local recipient = actor()
+			local oldCap = id == "technut" and 20000 or 5000
+			recipient:SetData("progressionServiceCredits", {[npc .. "/" .. service] = oldCap - 100})
 			ix.jobs.list.serviceFlow.tier = 1
-			check(capped.client:ixJobAdd("serviceFlow", npc), "capped credit permits completing an existing task")
-			local cappedJob = capped.jobs[npc]
-			cappedJob.isCompleted = true
-			finishJob(capped, npc)
-			local pending = capped:GetData("taskRewardOffers")[cappedJob.rewardKey]
-			check(pending and pending.retrySelected and pending.budget == 100
-				and pending.choices[1].services[1].amount == 100, "unpaid regular credits remain a locked earned claim")
-			check(capped.money == 500 and capped.client.rep == 15
-				and ix.taskRewards.TraderBonusProgress(capped, npc).budget == 400,
-				"partial credit delivery pays normal rewards and counts the full selected credit once")
-			check(not capped.client:ixJobAdd("serviceFlow", npc), "pending credit blocks new work at that provider")
-			ix.taskRewards.SelectOffer(capped, npc, cappedJob.rewardKey, 1)
-			capped:SetData("progressionServiceCredits", {[npc .. "/" .. service] = limit - 100})
-			ix.taskRewards.SelectOffer(capped, npc, cappedJob.rewardKey, 1)
-			check(not capped:GetData("taskRewardOffers")[cappedJob.rewardKey]
-				and capped.money == 500 and capped.client.rep == 15
-				and ix.taskRewards.TraderBonusProgress(capped, npc).count == 1,
-				"retrying capped regular credit cannot repeat cash, reputation or completion progress")
+			check(recipient.client:ixJobAdd("serviceFlow", npc), "work is available near the old credit cap")
+			local job = recipient.jobs[npc]
+			job.isCompleted = true
+			finishJob(recipient, npc)
+			check(ix.progression.GetServiceCredit(recipient, npc, service) == oldCap - 100 + contact.rewards.creditPerTier
+				and not recipient:GetData("taskRewardOffers")[job.rewardKey],
+				"regular work awards full credit above the old cap")
+			check(recipient.money == 500 and recipient.client.rep == 15
+				and ix.taskRewards.TraderBonusProgress(recipient, npc).budget == 600 - contact.rewards.creditPerTier,
+				"regular work pays cash and reputation and counts the credit once")
+			check(recipient.client:ixJobAdd("serviceFlow", npc), "a high credit balance does not block new work")
 			local saved = actor()
 			saved:SetData("taskRewardOffers", {["bonus:service-migrate"] = {npc = npc, earned = true,
 				budget = 6000, version = 6, choices = {{label = "Old supplies", items = {}}}}})
@@ -1445,34 +1431,19 @@ do
 			check(migrated.budget == 6000 and migrated.choices[1].services[1].amount == 6000,
 				"unpaid item bonuses migrate to credit without losing earned value")
 			check(not ix.taskRewards.SelectOffer(saved, npc, key, 1, "Old supplies"), "old supply labels cannot claim credit")
-			saved:SetData("progressionServiceCredits", {[npc .. "/" .. service] = limit})
-			ix.taskRewards.SelectOffer(saved, npc, key, 1)
-			check(saved:GetData("taskRewardOffers")[key].choices[1].services[1].amount == 6000,
-				"a full balance retains the entire service reward")
-			saved:SetData("progressionServiceCredits", {[npc .. "/" .. service] = limit - 100})
-			ix.taskRewards.SelectOffer(saved, npc, key, 1)
-			local partial = saved:GetData("taskRewardOffers")[key]
-			check(ix.progression.GetServiceCredit(saved, npc, service) == limit
-				and partial.budget == 5900 and partial.choices[1].services[1].amount == 5900,
-				"partial claims fill the balance and retain only the unpaid amount")
+			saved:SetData("progressionServiceCredits", {[npc .. "/" .. service] = oldCap})
+			check(ix.taskRewards.SelectOffer(saved, npc, key, 1), "a migrated bonus can be claimed at the old cap")
+			check(ix.progression.GetServiceCredit(saved, npc, service) == oldCap + 6000
+				and not saved:GetData("taskRewardOffers")[key], "a migrated bonus pays its entire saved value once")
+
 			local restored = actor()
-			restored.data = copy(saved.data)
-			local offers = restored:GetData("taskRewardOffers")
-			offers[key].version = 6
-			restored:SetData("taskRewardOffers", offers)
+			restored:SetData("progressionServiceCredits", {[npc .. "/" .. service] = oldCap})
+			restored:SetData("taskRewardOffers", {[key] = {npc = npc, earned = true,
+				budget = 5900, version = 6, choices = {ix.taskRewards.BuildServiceChoice(npc, service, 5900)}}})
 			ix.taskRewards.ReconcileCharacter(restored)
-			check(restored:GetData("taskRewardOffers")[key].choices[1].services[1].amount == 5900,
-				"reconnect and catalogue migration preserve the unpaid remainder without restoring spent credit")
-			local remaining = 5900
-			while remaining > 0 do
-				restored:SetData("progressionServiceCredits", {})
-				ix.taskRewards.SelectOffer(restored, npc, key, 1)
-				local paid = math.min(remaining, limit)
-				check(ix.progression.GetServiceCredit(restored, npc, service) == paid,
-					"large bonus installments grant only the remaining credits")
-				remaining = remaining - paid
-			end
-			check(not restored:GetData("taskRewardOffers")[key], "fully collected installments remove the offer")
+			check(ix.taskRewards.SelectOffer(restored, npc, key, 1), "a previously partial bonus can be collected")
+			check(ix.progression.GetServiceCredit(restored, npc, service) == oldCap + 5900
+				and not restored:GetData("taskRewardOffers")[key], "a partial bonus pays only the saved remainder")
 		end
 		ix.townNPCs = previousTown
 	end

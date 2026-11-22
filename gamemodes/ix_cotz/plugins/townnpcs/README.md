@@ -250,9 +250,9 @@ Reward candidates are defined in each contact's `rewards` table, independently o
 Regular choices are revealed at completed hand-in; bonus choices are revealed once earned.
 New town rewards contain consumables or limited-use items, stash spawners, euros and dollars.
 Reusable equipment, attachments and other valuables are excluded. Technut and Jitters replace
-regular item rewards with 200/400/600 repair/treatment credits and convert the five-task bonus
-allowance to the same provider-bound credit at face value. Credit exceeding the balance cap stays
-pending until spent; cash and reputation payments remain separate.
+regular item rewards with 300/600/900 repair/treatment credits and convert the five-task bonus
+allowance to the same provider-bound credit at face value. Service credit balances have no cap.
+Cash and reputation payments remain separate.
 Every ammunition reward is half its normal pack. Old Timer offers .410 rather than 12g or .22;
 Cleaner keeps cutlery and cleaning kits as regular choices and stash spawners as bonus choices.
 Spicy Lemon also offers cutlery. Mute, Spool and Ballast offer 200/400/600 rubles as their regular

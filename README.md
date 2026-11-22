@@ -123,6 +123,7 @@ COTZ uses Garry's Mod Lua and Helix's plugin/schema conventions. A useful starti
 - [`schema/`](gamemodes/ix_cotz/schema/) for items, factions, hooks, and interface code.
 - [`plugins/`](gamemodes/ix_cotz/plugins/) for self-contained gameplay systems.
 - [Helix documentation](https://docs.gethelix.co/) for framework concepts and extension points.
+- [CW attachment placement](docs/attachment-placement.md) for fitting first-person attachment models from hand-placed references.
 
 Follow each file's `cl_`, `sh_`, and `sv_` conventions when changing client, shared, or server logic. Test changes in a multiplayer development environment; database, network, and state changes deserve particular care.
 

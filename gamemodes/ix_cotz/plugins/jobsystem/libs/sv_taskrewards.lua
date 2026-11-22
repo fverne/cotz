@@ -40,7 +40,7 @@ local function paySelected(character, key, offers)
 		local amount = math.min(service.amount,
 			ix.progression.ServiceCreditCapacity(character, service.npc, service.service))
 		if amount <= 0 then
-			character:GetPlayer():Notify("Spend some service credit first. Your remaining reward is saved.")
+			character:GetPlayer():Notify("This service is unavailable. Your remaining reward is saved.")
 
 			return false
 		end
@@ -65,7 +65,7 @@ local function paySelected(character, key, offers)
 	end
 	for _, service in ipairs(choice.services or {}) do
 		if ix.progression.ServiceCreditCapacity(character, service.npc, service.service) < service.amount then
-			character:GetPlayer():Notify("Service credit is full. Choose another bonus reward or spend credit first.")
+			character:GetPlayer():Notify("This service is unavailable. Choose another reward or claim your credit later.")
 
 			return false
 		end

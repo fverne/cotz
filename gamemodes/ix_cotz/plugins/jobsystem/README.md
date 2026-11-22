@@ -325,16 +325,13 @@ Unaffordable bonus value carries into the next cycle; a zero-value cycle creates
 Revealed current-version bonus choices persist without rerolling on menu reopen or reconnect.
 
 Technut's repair credits and Jitters's treatment credits replace their item and extra-cash reward
-choices. Regular rewards are 200 / 400 / 600 credits; one credit covers one ruble of that provider's
-service fee. Their item-hand-in allowances leave 400 / 600 / 900 credits per job for the bonus,
-so five jobs of one difficulty yield 2,000 / 3,000 / 4,500 bonus credits. Normal cash and reputation
+choices. Regular rewards are 300 / 600 / 900 credits; one credit covers one ruble of that provider's
+service fee. Their item-hand-in allowances leave 300 / 400 / 600 credits per job for the bonus,
+so five jobs of one difficulty yield 1,500 / 2,000 / 3,000 bonus credits. Normal cash and reputation
 remain separate. There is no credit premium or ruble remainder for these profiles.
 
-Credit balances retain the existing caps: 20,000 for Technut's repairs and 5,000 for Jitters's treatment.
-A claim fills available balance space and saves any excess as a pending reward. Spend credits and
-return to Task rewards to collect the remainder; this also supports bonuses larger than the balance
-cap. Pending credit blocks new work at that contact. Inventory space is irrelevant, and retries
-cannot pay ordinary cash, reputation or completion progress again.
+Service credit balances have no cap. Claims grant the full amount of credit regardless of inventory
+space. Any unpaid credit left over from a previous partial claim can be collected through Task rewards.
 
 ### Compatibility and ammunition barters
 
