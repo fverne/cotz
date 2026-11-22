@@ -12,6 +12,8 @@ DEFINITIONS = ROOT / "gamemodes/ix_cotz/plugins/townnpcs/definitions"
 # Existing consumers check these exact milestones. These are functional, not future services.
 SERVICES = {}
 KINDS = {"passage", "cosmetic", "storage", "barter", "supplyExchange", "information", "recipe"}
+# Matches MAX_STOCK_BONUS in townnpcs/libs/sh_validation.lua.
+MAX_STOCK_BONUS = 8
 
 
 def snapshot():
@@ -35,8 +37,20 @@ def progression_id(contact, step):
     return f"cotz/town/{contact}/{step}"
 
 
+def stock_grants(stock):
+    """A step's stock is one grant, or a list when it raises several items by different amounts."""
+    if not stock:
+        return []
+    return stock if isinstance(stock, list) else [stock]
+
+
 def stock_items(stock):
-    return stock.get("items", [stock["item"]] if "item" in stock else [])
+    return [item for grant in stock_grants(stock)
+            for item in grant.get("items", [grant["item"]] if "item" in grant else [])]
+
+
+def stock_bonuses(stock):
+    return {item: grant["bonus"] for grant in stock_grants(stock) for item in stock_items(grant)}
 
 
 def rewards(data, contact, step):
@@ -44,8 +58,7 @@ def rewards(data, contact, step):
     live = ["Purchase: " + u["args"][0] for u in compiled.get("vendorUnlocks", [])]
     live += ["Conversion: " + item for item in compiled.get("variantUnlocks", [])]
     if step.get("stock"):
-        stock = step["stock"]
-        live += [f"Stock: {item} +{stock['bonus']} total" for item in stock_items(stock)]
+        live += [f"Stock: {item} +{bonus} total" for item, bonus in stock_bonuses(step["stock"]).items()]
     if step.get("capacity"):
         capacity = step["capacity"]
         live.append(f"Carried capacity: +{capacity['amount']} {capacity['kind']}")
@@ -53,7 +66,10 @@ def rewards(data, contact, step):
     live += [service["name"] for service in step.get("services", [])]
     if step.get("ammoExchange"):
         exchange = step["ammoExchange"]
-        live.append(f"Barter: {exchange['boxes']} boxes {exchange['input']} for one box {exchange['output']}")
+        inputs = exchange.get("inputs") or [{"item": exchange["input"], "boxes": exchange["boxes"]}]
+        cost = " and ".join(f"{entry['boxes']} {'box' if entry['boxes'] == 1 else 'boxes'} {entry['item']}"
+                            for entry in inputs)
+        live.append(f"Barter: {cost} for one box {exchange['output']}")
     if (contact, step["id"]) in SERVICES:
         live.append(SERVICES[contact, step["id"]])
     return sorted(live), step.get("plannedUnlocks", [])
@@ -133,20 +149,18 @@ def validate(data):
                     maximum = {"width": 10, "height": 8}.get(p.get("dimension"), 0)
                     if not 2 < p.get("target", 0) <= maximum:
                         errors.append(identifier + ": storage proposal exceeds default bounds")
-            stock = step.get("stock")
-            if stock:
-                for item in stock_items(stock):
-                    if item in disabled:
-                        errors.append(identifier + ": disabled suggestion received stock")
-                    if not 1 <= stock["bonus"] <= 4 or item not in items:
-                        errors.append(identifier + ": invalid stock tier")
-                    if item not in contact["supplies"] and item not in contact["catalogue"]:
-                        errors.append(identifier + ": stock target has no intended assortment route")
-                    for earlier in contact["progression"]:
-                        old = earlier.get("stock")
-                        if (old and item in stock_items(old) and old["bonus"] >= stock["bonus"]
-                                and progression_id(slug, earlier["id"]) in ancestors[identifier]):
-                            errors.append(identifier + ": redundant stock improvement")
+            for item, bonus in stock_bonuses(step.get("stock")).items():
+                if item in disabled:
+                    errors.append(identifier + ": disabled suggestion received stock")
+                if not 1 <= bonus <= MAX_STOCK_BONUS or item not in items:
+                    errors.append(identifier + ": invalid stock tier")
+                if item not in contact["supplies"] and item not in contact["catalogue"]:
+                    errors.append(identifier + ": stock target has no intended assortment route")
+                for earlier in contact["progression"]:
+                    old = stock_bonuses(earlier.get("stock"))
+                    if (item in old and old[item] >= bonus
+                            and progression_id(slug, earlier["id"]) in ancestors[identifier]):
+                        errors.append(identifier + ": redundant stock improvement")
     return errors
 
 

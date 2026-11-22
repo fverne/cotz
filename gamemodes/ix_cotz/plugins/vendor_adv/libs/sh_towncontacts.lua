@@ -1,6 +1,11 @@
 local PLUGIN = PLUGIN
 local TRADE_MODES = {SELLANDBUY = 1, SELLONLY = 2, BUYONLY = 3}
 
+-- A contact can give individual supplies their own stock terms, such as Brass's smaller shotgun shelves.
+local function supplyStock(contact, item, stock)
+	return contact.supplyStockOverrides and contact.supplyStockOverrides[item] or stock
+end
+
 local function plannedItems(contact, catalogue, stock)
 	local items = {}
 	for item in pairs(contact.buyingItems or contact.wantedItems or {}) do
@@ -13,7 +18,8 @@ local function plannedItems(contact, catalogue, stock)
 	end
 	for _, item in ipairs(contact.supplies) do
 		if not items[item] or items[item][3] == TRADE_MODES.BUYONLY then
-			items[item] = {nil, stock.initial, TRADE_MODES.SELLANDBUY, stock.maximum, stock.interval, stock.amount}
+			local terms = supplyStock(contact, item, stock)
+			items[item] = {nil, terms.initial, TRADE_MODES.SELLANDBUY, terms.maximum, terms.interval, terms.amount}
 		end
 	end
 	for item in pairs(contact.disabledItems or {}) do items[item] = nil end
@@ -50,8 +56,9 @@ function PLUGIN:ConfigureTownTemplate(contact, catalogue, stock)
 	removeDisabledItems(template.items, contact)
 	for _, item in ipairs(contact.supplies) do
 		if not isDisabled(contact, item) then
+			local terms = supplyStock(contact, item, stock)
 			template.items[item] = template.items[item] or
-				{nil, stock.initial, 1, stock.maximum, stock.interval, stock.amount}
+				{nil, terms.initial, 1, terms.maximum, terms.interval, terms.amount}
 		end
 	end
 	for _, unlock in ipairs(catalogue) do
@@ -92,8 +99,9 @@ if SERVER then
 		local changed = removeDisabledItems(vendor.items, contact) or settingsChanged
 		for _, item in ipairs(contact.supplies) do
 			if not isDisabled(contact, item) and not vendor.items[item] then
-				vendor:AddItemToList(item, nil, stock.initial, "SELLANDBUY",
-					stock.maximum, stock.interval, stock.amount)
+				local terms = supplyStock(contact, item, stock)
+				vendor:AddItemToList(item, nil, terms.initial, "SELLANDBUY",
+					terms.maximum, terms.interval, terms.amount)
 				changed = true
 			end
 		end

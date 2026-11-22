@@ -112,10 +112,10 @@ function ix.dialogue.ConfigureTownServices(dialogue, contact)
 				local options = {}
 				local credits = client:GetCharacter():GetData("townAmmoExchangeRounds", {})
 				for _, exchange in ipairs(ix.townNPCs:GetAmmoExchanges(client:GetCharacter(), target:GetDisplayName())) do
-					local credit = credits[exchange.input] or 0
+					local credit = 0
+					for _, input in ipairs(exchange.inputs) do credit = credit + (credits[input.item] or 0) end
 					options[#options + 1] = {
-						statement = string.format("%d boxes of %s for one box of %s", exchange.boxes,
-							ix.item.list[exchange.input].name, ix.item.list[exchange.output].name)
+						statement = ix.townNPCs:DescribeAmmoExchange(exchange)
 							.. (credit > 0 and " (" .. credit .. " rounds already handed in)" or ""),
 						topicID = "AmmoExchange", dyndata = {output = exchange.output},
 					}

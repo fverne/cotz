@@ -1,3 +1,6 @@
+local PLUGIN = PLUGIN
+local ITEMS_REQUEST_INTERVAL = 1
+
 -- The server owns hideout state; these snapshots feed the contact's dynamic upgrade dialogue.
 local function refreshDialogue(target, topicID)
 	local panel = ix.gui.dialogue
@@ -29,4 +32,32 @@ net.Receive("cotz/hideouts/upgrade-offers", function()
 	end
 	LocalPlayer().cotzHideoutUpgradeOffers = {target = target, hideout = hideout, revision = revision, offers = offers}
 	refreshDialogue(target, "HideoutUpgradeList")
+end)
+
+
+-- Inventory panels ask for fresh upgrade materials when they open; tooltips read the latest reply on hover.
+function PLUGIN:RequestUpgradeItems()
+	if (self.upgradeItemsRequestedAt or 0) > RealTime() then return end
+	self.upgradeItemsRequestedAt = RealTime() + ITEMS_REQUEST_INTERVAL
+	net.Start("cotz/hideouts/upgrade-items")
+	net.SendToServer()
+end
+
+function PLUGIN:GetUpgradeItemHideouts(uniqueID)
+	local cache = self.upgradeItems
+	local character = LocalPlayer():GetCharacter()
+	if not cache or not character or cache.character ~= character:GetID() then return end
+
+	return cache.items[uniqueID]
+end
+
+net.Receive("cotz/hideouts/upgrade-items", function()
+	local items = {}
+	for _ = 1, net.ReadUInt(8) do
+		local itemID, names = net.ReadString(), {}
+		for _ = 1, net.ReadUInt(6) do names[net.ReadString()] = true end
+		items[itemID] = names
+	end
+	local character = LocalPlayer():GetCharacter()
+	PLUGIN.upgradeItems = {character = character and character:GetID(), items = items}
 end)

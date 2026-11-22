@@ -160,7 +160,7 @@ regeneration of these intermissions. Intern, Egghead and
 Beanstalk have preparation between every equipment tier. A preparation delivery requests half the next
 milestone's base units, rounded upward with minimum one, before applying contact difficulty once.
 Its reward increases personal capacity for the previous purchase group, including grouped equipment.
-Highest-earned bonuses apply once, up to +4 total; current stock, refill interval and amount stay unchanged.
+Highest-earned bonuses apply once, up to +4 total (+8 for Brass's ammunition); current stock, refill interval and amount stay unchanged.
 Existing single-item `stock.item` definitions and grouped `stock.items` are both supported.
 All scoreboard tools and dossier fields are available immediately, including server-supplied remote records.
 Mute's retained `networkSearch`, `networkSquads`, `networkRanking` and `eventBroadcasts` milestone IDs now
@@ -181,7 +181,7 @@ and town completion does not trigger ordinary job restocking. Repeatable job rew
 progression requirements are unchanged.
 
 Brass's matching regular milestone makes HP progression eligible; completing its HP milestone enables
-the 2:1 exchange and makes Carbon's matching AP progression eligible. Completing AP enables a 3:1
+the 2:1 exchange and makes Carbon's matching AP progression eligible. Completing AP enables another 2:1
 exchange. Both exchanges consume regular ammunition, measured in standard-box round equivalents;
 partial stacks can be combined. HP/AP cash sales are removed. Debit credit survives failed removals,
 and paid outputs use the existing stored-reward queue, including full-inventory and asynchronous

@@ -102,8 +102,8 @@ function PLUGIN:BuildCatalogue()
 	-- Stock milestones must follow their own shop's purchase unlock, including across story branches.
 	for slug, contact in pairs(self.contacts) do
 		for _, step in ipairs(contact.progression) do
-			if step.stock then
-				for _, itemID in ipairs(step.stock.items or {step.stock.item}) do
+			for _, grant in ipairs(self:GetStockGrants(step.stock)) do
+				for _, itemID in ipairs(grant.items or {grant.item}) do
 					local item = self.itemGates[itemID]
 					local purchase = item and item.sellers[contact.name]
 					requireGate(purchase, {id = self:StepID(slug, step.id)})

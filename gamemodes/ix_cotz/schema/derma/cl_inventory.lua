@@ -376,6 +376,7 @@ function PANEL:ExtraPaint(width, height) end
 local blackCol = Color(0, 0, 0, 85)
 local yellowCol = Color(255, 192, 0, 20)
 local purpleCol = Color(127, 0, 255, 20)
+local greenCol = Color(80, 200, 100, 20)
 local gradientMat = Material("vgui/gradient-u")
 local gradientLMat = Material("vgui/gradient-l")
 local gradientRMat = Material("vgui/gradient-r")
@@ -475,6 +476,9 @@ function PANEL:Init()
 	for item in pairs(self.highlightContacts.Progression) do
 		self.highlghtItems[item] = self.highlghtItems[item] == "Task" and "Both" or "Progression"
 	end
+
+	local hideouts = ix.plugin.Get("hideouts")
+	if hideouts then hideouts:RequestUpgradeItems() end
 end
 
 function PANEL:GetPadding(index)
@@ -635,6 +639,11 @@ function PANEL:SetInventory(inventory, bFitParent)
 									addRequirementContacts(tooltip, "Progression",
 										self.highlightContacts.Progression[item.uniqueID], purpleCol)
 								end
+							end
+							local hideouts = ix.plugin.Get("hideouts")
+							local upgradeHideouts = hideouts and hideouts:GetUpgradeItemHideouts(item.uniqueID)
+							if upgradeHideouts then
+								addRequirementContacts(tooltip, "Hideout", upgradeHideouts, greenCol)
 							end
 							tooltip:SizeToContents()
 						end)

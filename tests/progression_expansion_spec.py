@@ -131,7 +131,8 @@ class ProgressionExpansionTests(unittest.TestCase):
                 self.assertEqual([s["quantity"] for s in step["requirements"]],
                                  [(s["quantity"] + 1) // 2 for s in target["requirements"]])
                 self.assertIn(step["id"], target["requires"])
-                self.assertTrue(1 <= step["stock"]["bonus"] <= 4)
+                limit = rewards.MAX_STOCK_BONUS if slug == "brass" else 4
+                self.assertTrue(all(1 <= bonus <= limit for bonus in rewards.stock_bonuses(step["stock"]).values()))
                 identifier = rewards.progression_id(slug, step["id"])
                 parents = self.compiled["compiled"][identifier]["prerequisites"]
                 for item in expansion.stock_items(step["stock"]):

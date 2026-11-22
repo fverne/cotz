@@ -73,6 +73,13 @@ def allocations(data, ammo):
     return routes, orders
 
 
+def exchange_cost(exchange):
+    inputs = exchange.get("inputs") or [{"item": exchange["input"], "boxes": exchange["boxes"]}]
+    if len(inputs) == 1:
+        return f"{inputs[0]['boxes']}:1"
+    return " + ".join(f"{entry['boxes']} {entry['item']}" for entry in inputs) + " → 1"
+
+
 def render(data, ammo, routes):
     regulars, first_uses = regular_order(data, ammo)
     ranks = {item: index for index, item in enumerate(regulars)}
@@ -83,9 +90,9 @@ def render(data, ammo, routes):
              "This report never rewrites equipment chains, calibre order or contact allocations.",
              "Brass owns regular-calibre and HP branches; Carbon owns the AP branch.",
              "Each HP milestone requires its matching regular milestone; AP requires the matching HP milestone at Brass.",
-             "HP and AP have no town cash sale routes. Exchanges consume two or three regular boxes respectively.",
+             "HP and AP have no town cash sale routes. Their exchanges each consume two regular boxes.",
              "Boxes are measured using their standard round counts; partial stacks can be combined.",
-             "Brass also starts with buckshot and slugs; special loads unlock in TR, DT, MG order after regular buckshot.",
+             "Brass also starts with buckshot and slugs; special loads unlock as exchanges in TR, DT, MG order after regular buckshot.",
              "Listed starter ammunition is ungated. Box prices, round counts and damage values are unchanged.", "",
              "The legacy ID `45acp41` is .410 bore, a separate cartridge rather than a .45 ACP upgrade.", "",
              "## Regular chain", "", " → ".join(regulars), "",
@@ -100,7 +107,7 @@ def render(data, ammo, routes):
         sellers = [f"{slug}: {r[item]}" for slug, r in sorted(routes.items()) if item in r]
         supplies = [slug + ": ungated" for slug, c in sorted(data["contacts"].items())
                     if item in c["supplies"] and item not in routes[slug]]
-        barters = [f"{slug}: {step['id']} (barter {step['ammoExchange']['boxes']}:1)"
+        barters = [f"{slug}: {step['id']} (barter {exchange_cost(step['ammoExchange'])})"
                    for slug, contact in sorted(data["contacts"].items()) for step in contact["progression"]
                    if step.get("ammoExchange", {}).get("output") == item]
         lines.append(f"| {item} | {entry['price']} | {entry['ammoAmount']} | {float(entry['cost']):.4f} | "

@@ -77,4 +77,14 @@ check(vendorPlugin:RefreshTownVendor(vendor, contact, catalogue, stock),
 check(vendor:GetBuyAll() and vendor.scale == 0.3, "saved buyers receive the approved thirty-percent rate")
 check(not vendorPlugin:RefreshTownVendor(vendor, contact, catalogue, stock), "buyer policy refresh is idempotent")
 check(town:CanSellItem("unrequested", "Test"), "buy-all contacts accept goods outside their wanted pools")
+local override = {initial = 1, maximum = 1, interval = 12, amount = 1}
+contact.supplyStockOverrides = {water = override}
+contact.enforceCatalogue = true
+vendorPlugin:ConfigureTownTemplate(contact, catalogue, {initial = 4, maximum = 4, interval = 12, amount = 1})
+check(ix.npctemplates.templates.test.items.water[4] == 1, "enforced catalogues apply per-item supply stock")
+contact.enforceCatalogue = nil
+ix.npctemplates.templates.test.items = {}
+vendorPlugin:ConfigureTownTemplate(contact, catalogue, stock)
+check(ix.npctemplates.templates.test.items.water[4] == 1, "open templates apply per-item supply stock")
+contact.supplyStockOverrides = nil
 print("PASS: " .. checks .. " disabled town item checks")

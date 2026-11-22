@@ -142,8 +142,48 @@ local function depends(id, parent)
 end
 check(depends(hp, regular), "HP requires Brass's regular-calibre milestone even when regular ammo starts in stock")
 check(depends(ap, hp), "Carbon AP requires the matching HP completion at Brass")
-check(ix.townNPCs.ammoExchanges["9x19hp"].boxes == 2
-	and ix.townNPCs.ammoExchanges["9x19ap"].boxes == 3, "exchanges use the approved 2:1 and 3:1 ratios")
+check(ix.townNPCs.ammoExchanges["9x19hp"].inputs[1].boxes == 2
+	and ix.townNPCs.ammoExchanges["9x19ap"].inputs[1].boxes == 2, "HP and AP exchanges both use the 2:1 ratio")
+local tri = ix.townNPCs.ammoExchanges["12gaugetr"]
+check(tri and tri.npc == "'Brass'" and #tri.inputs == 2 and ix.townNPCs.ammoExchanges["12gaugedt"].inputs[1].item
+	== "12gaugesg" and ix.townNPCs.ammoExchanges["12gaugemg"].inputs[1].item == "12gauge",
+	"special shotgun loads are Brass exchanges")
+local brass = ix.townNPCs.contacts.brass
+check(not brass.catalogue["12gaugetr"] and not brass.catalogue["12gaugedt"] and not brass.catalogue["12gaugemg"],
+	"special shotgun loads have no cash route")
+local finalStock = {}
+for _, step in ipairs(brass.progression) do
+	for _, grant in ipairs(ix.townNPCs:GetStockGrants(step.stock)) do
+		for _, item in ipairs(grant.items or {grant.item}) do
+			finalStock[item] = math.max(finalStock[item] or 0, grant.bonus)
+		end
+	end
+end
+local function baseStock(item)
+	if brass.catalogue[item] then return brass.catalogue[item].terms[4] end
+
+	return (brass.supplyStockOverrides[item] or brass.supplyStock).maximum
+end
+local tiers = {}
+for _, step in ipairs(brass.progression) do
+	for _, grant in ipairs(ix.townNPCs:GetStockGrants(step.stock)) do
+		for _, item in ipairs(grant.items) do
+			tiers[item] = tiers[item] or {}
+			table.insert(tiers[item], baseStock(item) + grant.bonus)
+		end
+	end
+end
+for _, item in ipairs(ix.townNPCs.regularAmmoChain) do
+	local shotgun = item == "12gauge"
+	check(baseStock(item) == (shotgun and 2 or 4) and baseStock(item) + (finalStock[item] or 0) == (shotgun and 5 or 10),
+		"Brass regular ammunition reaches its starting and final stock targets: " .. item)
+	if item ~= "93x64" then
+		check(table.concat(tiers[item], "/") == (shotgun and "4/5" or "7/10"),
+			"Brass stock rises through its intermediate tier: " .. item)
+	end
+end
+check(baseStock("12gaugesg") == 2 and table.concat(tiers["12gaugesg"], "/") == "4/5",
+	"slugs share the buckshot stock targets")
 local previous
 for _, item in ipairs(ix.townNPCs.regularAmmoChain) do
 	local id = stepID("brass", "regular-ammo", item)

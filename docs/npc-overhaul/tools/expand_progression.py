@@ -96,8 +96,7 @@ def allowed_maps(home, index, length):
     return [m for m in supply.MAPS if m in maps]
 
 
-def stock_items(stock):
-    return stock.get("items", [stock["item"]] if "item" in stock else [])
+stock_items = rewards.stock_items
 
 
 def expand_contacts(contacts):
@@ -161,9 +160,8 @@ def expand_contacts(contacts):
                     output.append(intermission)
                     step["requires"].append(intermission["id"])
                     count += 1
-                if step.get("stock"):
-                    for item in stock_items(step["stock"]):
-                        ranks[item] = max(ranks[item], step["stock"]["bonus"])
+                for item, bonus in rewards.stock_bonuses(step.get("stock")).items():
+                    ranks[item] = max(ranks[item], bonus)
                 output.append(step)
         contact["progression"] = output
     return count

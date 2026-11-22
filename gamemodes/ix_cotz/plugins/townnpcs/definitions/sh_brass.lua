@@ -4,6 +4,8 @@ PLUGIN:Register("brass", {
 	buyScale = 0.3,
 	difficultyMultiplier = 2,
 	enforceCatalogue = true,
+	-- Stock targets and shotgun-load exchanges are hand-tuned; regeneration must not rewrite them.
+	preserveProgression = true,
 	map = "rp_garbage_cotz",
 	courierPools = {
 		"valuables_ordnance_salvage",
@@ -42,6 +44,11 @@ PLUGIN:Register("brass", {
 		category = "Information courier and return",
 		description = "Information courier and return",
 		kind = "courier",
+	},
+	supplyStock = {initial = 4, maximum = 4, interval = 12, amount = 1},
+	supplyStockOverrides = {
+		["12gauge"] = {initial = 2, maximum = 2, interval = 12, amount = 1},
+		["12gaugesg"] = {initial = 2, maximum = 2, interval = 12, amount = 1},
 	},
 	supplies = {"22lr", "762x25", "9x18", "9x19", "45acp", "45acp41", "12gauge", "12gaugesg"},
 	rewards = {
@@ -82,83 +89,71 @@ PLUGIN:Register("brass", {
 	catalogue = {
 		["545x39"] = {
 			step = "v3/regular-ammo/545x39",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["762x39"] = {
 			step = "v3/regular-ammo/762x39",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["556x45"] = {
 			step = "v3/regular-ammo/556x45",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["762x54"] = {
 			step = "v3/regular-ammo/762x54",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["357magnum"] = {
 			step = "v3/regular-ammo/357magnum",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["9x39"] = {
 			step = "v3/regular-ammo/9x39",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["44magnum"] = {
 			step = "v3/regular-ammo/44magnum",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["9x21"] = {
 			step = "v3/regular-ammo/9x21",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["762x51"] = {
 			step = "v3/regular-ammo/762x51",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["500magnum"] = {
 			step = "v3/regular-ammo/500magnum",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["338lapua"] = {
 			step = "v3/regular-ammo/338lapua",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["50ae"] = {
 			step = "v3/regular-ammo/50ae",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["57x28"] = {
 			step = "v3/regular-ammo/57x28",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["127x55"] = {
 			step = "v3/regular-ammo/127x55",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["145x114"] = {
 			step = "v3/regular-ammo/145x114",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["700nitro"] = {
 			step = "v3/regular-ammo/700nitro",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 		["93x64"] = {
 			step = "v3/regular-ammo/93x64",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
-		["12gaugetr"] = {
-			step = "v3/shotgun-loads/12gaugetr",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
-		["12gaugedt"] = {
-			step = "v3/shotgun-loads/12gaugedt",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
-		["12gaugemg"] = {
-			step = "v3/shotgun-loads/12gaugemg",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
+			terms = {nil, 4, "SELLONLY", 4, 48, 1},
 		},
 	},
 	progressionIdentity = {
@@ -179,7 +174,10 @@ PLUGIN:Register("brass", {
 			requirements = {
 				{pool = "town_expansion_11432963f8ae", quantity = 1, mode = "any"},
 			},
-			stock = {bonus = 1, item = "22lr"},
+			stock = {
+				bonus = 3,
+				items = {"22lr"},
+			},
 			branchIndex = 1,
 			branchLength = 24,
 			acquisitionMaps = {"rp_garbage_cotz"},
@@ -197,7 +195,16 @@ PLUGIN:Register("brass", {
 			requirements = {
 				{pool = "town_expansion_64a8e2e09127", quantity = 1, mode = "any"},
 			},
-			stock = {bonus = 1, item = "762x25"},
+			stock = {
+				{
+					bonus = 6,
+					items = {"22lr"},
+				},
+				{
+					bonus = 3,
+					items = {"762x25"},
+				},
+			},
 			branchIndex = 2,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
@@ -216,8 +223,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_64a8e2e09127", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 6,
 				items = {"762x25"},
-				bonus = 2,
 			},
 			intermissionFor = "v3/regular-ammo/45acp41",
 			branchIndex = 3,
@@ -237,7 +244,10 @@ PLUGIN:Register("brass", {
 			requirements = {
 				{pool = "town_expansion_64a8e2e09127", quantity = 1, mode = "any"},
 			},
-			stock = {bonus = 1, item = "45acp41"},
+			stock = {
+				bonus = 3,
+				items = {"45acp41"},
+			},
 			branchIndex = 3,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
@@ -256,8 +266,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_64a8e2e09127", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 6,
 				items = {"45acp41"},
-				bonus = 2,
 			},
 			intermissionFor = "v3/regular-ammo/9x19",
 			branchIndex = 4,
@@ -277,7 +287,10 @@ PLUGIN:Register("brass", {
 			requirements = {
 				{pool = "town_expansion_64a8e2e09127", quantity = 1, mode = "any"},
 			},
-			stock = {bonus = 1, item = "9x19"},
+			stock = {
+				bonus = 3,
+				items = {"9x19"},
+			},
 			branchIndex = 4,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
@@ -296,8 +309,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_64a8e2e09127", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 6,
 				items = {"9x19"},
-				bonus = 2,
 			},
 			intermissionFor = "v3/regular-ammo/45acp",
 			branchIndex = 5,
@@ -317,7 +330,10 @@ PLUGIN:Register("brass", {
 			requirements = {
 				{pool = "town_expansion_64a8e2e09127", quantity = 1, mode = "any"},
 			},
-			stock = {bonus = 1, item = "45acp"},
+			stock = {
+				bonus = 3,
+				items = {"45acp"},
+			},
 			branchIndex = 5,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
@@ -336,8 +352,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_dc0d9e9b2d00", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 6,
 				items = {"45acp"},
-				bonus = 2,
 			},
 			intermissionFor = "v3/regular-ammo/545x39",
 			branchIndex = 6,
@@ -375,8 +391,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_dc0d9e9b2d00", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"545x39"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/12gauge",
 			branchIndex = 7,
@@ -396,7 +412,16 @@ PLUGIN:Register("brass", {
 			requirements = {
 				{pool = "town_expansion_e00696cd67cf", quantity = 1, mode = "random"},
 			},
-			stock = {bonus = 1, item = "12gauge"},
+			stock = {
+				{
+					bonus = 2,
+					items = {"12gauge", "12gaugesg"},
+				},
+				{
+					bonus = 6,
+					items = {"545x39"},
+				},
+			},
 			branchIndex = 7,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
@@ -415,8 +440,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_dc0d9e9b2d00", quantity = 1, mode = "any"},
 			},
 			stock = {
-				items = {"12gauge"},
-				bonus = 2,
+				bonus = 3,
+				items = {"12gauge", "12gaugesg"},
 			},
 			intermissionFor = "v3/regular-ammo/762x39",
 			branchIndex = 8,
@@ -443,16 +468,44 @@ PLUGIN:Register("brass", {
 			categoryOnly = false,
 		},
 		{
+			id = "v3/regular-ammo/556x45/stock",
+			branch = "regular-ammo",
+			name = "7.62x39mm stock increase",
+			kind = "delivery",
+			requires = {"v3/regular-ammo/762x39"},
+			briefing = "Before the 5.56 arrangement, the 7.62x39 reserve needs this smaller order. It raises capacity for the rifle rounds you've just opened; the shelf still refills on its usual schedule. I'd rather settle one calibre's allowance before we start counting the next.",
+			completion = "Your 7.62x39 capacity is larger. The reserve is recorded, and refill stays ordinary.",
+			requirements = {
+				{pool = "town_expansion_e5d6c53061f3", quantity = 1, mode = "any"},
+				{pool = "town_expansion_7be8fdb53f87", quantity = 1, mode = "any"},
+			},
+			stock = {
+				bonus = 3,
+				items = {"762x39"},
+			},
+			intermissionFor = "v3/regular-ammo/556x45",
+			branchIndex = 9,
+			branchLength = 24,
+			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
+			requirementPolicy = 4,
+			categoryOnly = false,
+			defaultActive = true,
+		},
+		{
 			id = "v3/regular-ammo/556x45",
 			branch = "regular-ammo",
 			name = "5.56x45mm",
 			kind = "delivery",
-			requires = {"v3/regular-ammo/762x39"},
+			requires = {"v3/regular-ammo/762x39", "v3/regular-ammo/556x45/stock"},
 			briefing = "The 5.56x45 purchase arrangement needs these materials. Bring the full list back here. I keep the requests distinct because a familiar-looking label can make somebody stop looking before the useful part.",
 			completion = "Regular 5.56x45 is available to buy. This order is complete on its own terms.",
 			requirements = {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_85f15f41a5ef", quantity = 1, mode = "random"},
+			},
+			stock = {
+				bonus = 6,
+				items = {"762x39"},
 			},
 			branchIndex = 9,
 			branchLength = 24,
@@ -473,8 +526,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_7be8fdb53f87", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"556x45"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/9x18",
 			branchIndex = 10,
@@ -495,7 +548,16 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_85f15f41a5ef", quantity = 1, mode = "random"},
 			},
-			stock = {bonus = 1, item = "9x18"},
+			stock = {
+				{
+					bonus = 6,
+					items = {"556x45"},
+				},
+				{
+					bonus = 3,
+					items = {"9x18"},
+				},
+			},
 			branchIndex = 10,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz"},
@@ -515,8 +577,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_7be8fdb53f87", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 6,
 				items = {"9x18"},
-				bonus = 2,
 			},
 			intermissionFor = "v3/regular-ammo/762x54",
 			branchIndex = 11,
@@ -556,8 +618,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_b831b88bf8a7", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"762x54"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/357magnum",
 			branchIndex = 12,
@@ -578,6 +640,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_90de7166a430", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"762x54"},
+			},
 			branchIndex = 12,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
@@ -597,8 +663,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_b831b88bf8a7", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"357magnum"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/9x39",
 			branchIndex = 13,
@@ -619,6 +685,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_90de7166a430", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"357magnum"},
+			},
 			branchIndex = 13,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
@@ -638,8 +708,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_b831b88bf8a7", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"9x39"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/44magnum",
 			branchIndex = 14,
@@ -660,6 +730,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_c49ce575cf50", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"9x39"},
+			},
 			branchIndex = 14,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
@@ -679,8 +753,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_b831b88bf8a7", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"44magnum"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/9x21",
 			branchIndex = 15,
@@ -701,6 +775,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_c49ce575cf50", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"44magnum"},
+			},
 			branchIndex = 15,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
@@ -720,8 +798,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_b831b88bf8a7", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"9x21"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/762x51",
 			branchIndex = 16,
@@ -741,6 +819,10 @@ PLUGIN:Register("brass", {
 			requirements = {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_c49ce575cf50", quantity = 1, mode = "random"},
+			},
+			stock = {
+				bonus = 6,
+				items = {"9x21"},
 			},
 			branchIndex = 16,
 			branchLength = 24,
@@ -762,8 +844,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_60d977cc67e0", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"762x51"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/500magnum",
 			branchIndex = 17,
@@ -785,6 +867,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_dd5ba6faf7e5", quantity = 2, mode = "any"},
 				{pool = "town_expansion_91612d91ad03", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"762x51"},
+			},
 			branchIndex = 17,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
@@ -805,8 +891,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_60d977cc67e0", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"500magnum"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/338lapua",
 			branchIndex = 18,
@@ -828,6 +914,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_dd5ba6faf7e5", quantity = 2, mode = "any"},
 				{pool = "town_expansion_91612d91ad03", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"500magnum"},
+			},
 			branchIndex = 18,
 			branchLength = 24,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
@@ -848,8 +938,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_2bcd5ac29800", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"338lapua"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/50ae",
 			branchIndex = 19,
@@ -876,6 +966,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_df7b8b770885", quantity = 2, mode = "any"},
 				{pool = "town_expansion_5b31b14470db", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"338lapua"},
+			},
 			branchIndex = 19,
 			branchLength = 24,
 			acquisitionMaps = {
@@ -901,8 +995,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_2bcd5ac29800", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"50ae"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/57x28",
 			branchIndex = 20,
@@ -929,6 +1023,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_df7b8b770885", quantity = 2, mode = "any"},
 				{pool = "town_expansion_5b31b14470db", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"50ae"},
+			},
 			branchIndex = 20,
 			branchLength = 24,
 			acquisitionMaps = {
@@ -954,8 +1052,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_2bcd5ac29800", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"57x28"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/127x55",
 			branchIndex = 21,
@@ -982,6 +1080,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_df7b8b770885", quantity = 2, mode = "any"},
 				{pool = "town_expansion_dc7e0ab4a6de", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"57x28"},
+			},
 			branchIndex = 21,
 			branchLength = 24,
 			acquisitionMaps = {
@@ -1007,8 +1109,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_2bcd5ac29800", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"127x55"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/145x114",
 			branchIndex = 22,
@@ -1035,6 +1137,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_df7b8b770885", quantity = 2, mode = "any"},
 				{pool = "town_expansion_dc7e0ab4a6de", quantity = 1, mode = "random"},
 			},
+			stock = {
+				bonus = 6,
+				items = {"127x55"},
+			},
 			branchIndex = 22,
 			branchLength = 24,
 			acquisitionMaps = {
@@ -1060,8 +1166,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_2bcd5ac29800", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"145x114"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/700nitro",
 			branchIndex = 23,
@@ -1087,6 +1193,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 3, mode = "any"},
 				{pool = "town_expansion_df7b8b770885", quantity = 2, mode = "any"},
 				{pool = "town_expansion_dc7e0ab4a6de", quantity = 1, mode = "random"},
+			},
+			stock = {
+				bonus = 6,
+				items = {"145x114"},
 			},
 			branchIndex = 23,
 			branchLength = 24,
@@ -1114,8 +1224,8 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_aea4e8575719", quantity = 1, mode = "any"},
 			},
 			stock = {
+				bonus = 3,
 				items = {"700nitro"},
-				bonus = 1,
 			},
 			intermissionFor = "v3/regular-ammo/93x64",
 			branchIndex = 24,
@@ -1142,6 +1252,10 @@ PLUGIN:Register("brass", {
 				{pool = "town_expansion_dd5ba6faf7e5", quantity = 3, mode = "any"},
 				{pool = "town_expansion_2ef4539083ea", quantity = 2, mode = "any"},
 				{pool = "town_expansion_4edbd45ed05d", quantity = 1, mode = "random"},
+			},
+			stock = {
+				bonus = 6,
+				items = {"700nitro", "93x64"},
 			},
 			branchIndex = 24,
 			branchLength = 24,
@@ -1608,10 +1722,17 @@ PLUGIN:Register("brass", {
 			crossRequires = {
 				{contact = "brass", step = "v3/regular-ammo/12gauge"},
 			},
-			briefing = "Tri-Ball has a separate purchase request. Bring the supplies listed here. This one opens a cash purchase route for the shotgun load, unlike the special-load barters; I would rather explain the difference before checking your order.",
-			completion = "Tri-Ball is available to purchase. Your bench-supply delivery is complete.",
+			briefing = "Tri-Ball comes through an exchange once this bench-supply request is complete. The barter takes one standard box's worth of buckshot and one of slugs for each box of Tri-Ball. The delivery earns access to that exchange; it doesn't put shells in your pack, and I would rather explain that before checking your order.",
+			completion = "The Tri-Ball exchange is open. One box's worth of buckshot and one of slugs make each box.",
 			requirements = {
 				{pool = "town_expansion_11432963f8ae", quantity = 1, mode = "any"},
+			},
+			ammoExchange = {
+				inputs = {
+					{boxes = 1, item = "12gauge"},
+					{boxes = 1, item = "12gaugesg"},
+				},
+				output = "12gaugetr",
 			},
 			branchIndex = 1,
 			branchLength = 3,
@@ -1625,45 +1746,16 @@ PLUGIN:Register("brass", {
 			name = "12g Dart Rounds",
 			kind = "delivery",
 			requires = {"v3/shotgun-loads/12gaugetr"},
-			briefing = "For the dart rounds, complete this supply delivery. They become available to buy once the request is finished. I can discuss a different load without pretending its name tells you every property worth checking.",
-			completion = "Dart rounds are open for purchase. All requested supplies have arrived.",
+			briefing = "For the dart rounds, complete this supply delivery. It opens a barter rather than a sale: two standard boxes' worth of slugs for one box of darts. I can discuss a different load without pretending its name tells you every property worth checking.",
+			completion = "The dart-round exchange is open. Two boxes' worth of slugs pay for each box of darts.",
 			requirements = {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
 				{pool = "town_expansion_90de7166a430", quantity = 1, mode = "random"},
 			},
+			ammoExchange = {boxes = 2, input = "12gaugesg", output = "12gaugedt"},
 			branchIndex = 2,
 			branchLength = 3,
 			acquisitionMaps = {"rp_marsh_cs", "rp_garbage_cotz", "rp_waystation"},
-			requirementPolicy = 4,
-			categoryOnly = false,
-		},
-		{
-			id = "v3/shotgun-loads/12gaugemg/stock",
-			branch = "shotgun-loads",
-			name = "12g Dart Rounds stock increase",
-			kind = "delivery",
-			requires = {"v3/shotgun-loads/12gaugedt"},
-			briefing = "Before the Magnum buckshot, support the dart-round reserve with this smaller order. It increases stock capacity, with ordinary refill. No shells are included merely for finishing the reserve arrangement.",
-			completion = "Your dart-round allowance is larger. Actual shells still have to come into stock normally.",
-			requirements = {
-				{pool = "town_expansion_e5d6c53061f3", quantity = 2, mode = "any"},
-				{pool = "town_expansion_dd5ba6faf7e5", quantity = 2, mode = "any"},
-				{pool = "town_expansion_2ef4539083ea", quantity = 1, mode = "any"},
-				{pool = "town_expansion_aea4e8575719", quantity = 1, mode = "any"},
-			},
-			stock = {
-				items = {"12gaugedt"},
-				bonus = 1,
-			},
-			intermissionFor = "v3/shotgun-loads/12gaugemg",
-			branchIndex = 3,
-			branchLength = 3,
-			acquisitionMaps = {
-				"rp_marsh_cs",
-				"rp_garbage_cotz",
-				"rp_waystation",
-				"rp_pripyat_remaster",
-			},
 			requirementPolicy = 4,
 			categoryOnly = false,
 		},
@@ -1672,15 +1764,16 @@ PLUGIN:Register("brass", {
 			branch = "shotgun-loads",
 			name = "12g Magnum Buckshot",
 			kind = "delivery",
-			requires = {"v3/shotgun-loads/12gaugedt", "v3/shotgun-loads/12gaugemg/stock"},
-			briefing = "Magnum buckshot closes this shotgun-load line. Bring the full bench-supply request and I'll open its purchase route. We can finish the last account with the same care as the first; I see no reason to hurry it now.",
-			completion = "Magnum buckshot is available to buy. The shotgun-load arrangements are finished and the deliveries checked.",
+			requires = {"v3/shotgun-loads/12gaugedt"},
+			briefing = "Magnum buckshot closes this shotgun-load line. Bring the full bench-supply request and I'll open its exchange: two standard boxes' worth of regular buckshot for one Magnum box. We can finish the last account with the same care as the first; I see no reason to hurry it now.",
+			completion = "The Magnum buckshot exchange is open. Two regular buckshot boxes' worth pay for each box, and the shotgun-load arrangements are finished.",
 			requirements = {
 				{pool = "town_expansion_e5d6c53061f3", quantity = 4, mode = "any"},
 				{pool = "town_expansion_dd5ba6faf7e5", quantity = 3, mode = "any"},
 				{pool = "town_expansion_2ef4539083ea", quantity = 2, mode = "any"},
 				{pool = "town_expansion_4edbd45ed05d", quantity = 1, mode = "random"},
 			},
+			ammoExchange = {boxes = 2, input = "12gauge", output = "12gaugemg"},
 			branchIndex = 3,
 			branchLength = 3,
 			acquisitionMaps = {
@@ -1691,6 +1784,7 @@ PLUGIN:Register("brass", {
 			},
 			requirementPolicy = 4,
 			categoryOnly = false,
+			defaultActive = true,
 		},
 	},
 	startingServices = {},

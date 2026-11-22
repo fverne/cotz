@@ -11,15 +11,22 @@ PLUGIN = {}
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sh_00_townnpcs.lua")
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_services.lua")
 ix.townNPCs.settings = {actionInterval = 0.25, interactionDistance = 192}
-local hpID, apID = "exchange/hp", "exchange/ap"
+local hpID, apID, triID = "exchange/hp", "exchange/ap", "exchange/tri"
 ix.townNPCs.ammoExchanges = {
-	["9x19hp"] = {id = hpID, npc = "Brass", input = "9x19", output = "9x19hp", boxes = 2},
-	["9x19ap"] = {id = apID, npc = "Carbon", input = "9x19", output = "9x19ap", boxes = 3},
+	["9x19hp"] = {id = hpID, npc = "Brass", output = "9x19hp", inputs = {{item = "9x19", boxes = 2}}},
+	["9x19ap"] = {id = apID, npc = "Carbon", output = "9x19ap", inputs = {{item = "9x19", boxes = 2}}},
+	["12gaugetr"] = {id = triID, npc = "Brass", output = "12gaugetr",
+		inputs = {{item = "12gauge", boxes = 1}, {item = "12gaugesg", boxes = 1}}},
 }
 ix.item.list["9x19"] = {name = "9x19", ammoAmount = 60}
 ix.item.list["9x19hp"] = {name = "HP", ammoAmount = 60}
 ix.item.list["9x19ap"] = {name = "AP", ammoAmount = 60}
-for _, id in ipairs({hpID, apID}) do
+ix.item.list["12gauge"] = {name = "Buckshot", ammoAmount = 30}
+ix.item.list["12gaugesg"] = {name = "Slug", ammoAmount = 30}
+ix.item.list["12gaugetr"] = {name = "Tri-Ball", ammoAmount = 30}
+check(ix.townNPCs:DescribeAmmoExchange(ix.townNPCs.ammoExchanges["12gaugetr"])
+	== "1 box of Buckshot and 1 box of Slug for one box of Tri-Ball", "compound exchanges describe every input")
+for _, id in ipairs({hpID, apID, triID}) do
 	ix.progression.Register(id, {name = id, keyNpc = "Brass", defaultActive = true, nextProgressions = {}})
 end
 local target = {name = "Brass", GetClass = function() return "ix_vendor_adv" end,
@@ -38,8 +45,8 @@ local function character(completed)
 	ix.progression.SetCharacterProgression(owner, record)
 	return owner
 end
-local function addAmmo(owner, id, quantity, fail)
-	local item = {uniqueID = "9x19", ammoAmount = 60, quantity = quantity, invID = 1}
+local function addAmmo(owner, id, quantity, fail, uniqueID)
+	local item = {uniqueID = uniqueID or "9x19", ammoAmount = 60, quantity = quantity, invID = 1}
 	function item:GetID() return id end
 	function item:GetData(key, default) if key == "quantity" then return self.quantity end return default end
 	function item:SetData(key, value) if key == "quantity" then self.quantity = value end end
@@ -106,8 +113,20 @@ addAmmo(short, 1, 119)
 check(not exchange(short, "9x19hp") and short.items[1].quantity == 119, "insufficient rounds never partially consume inputs")
 target.name = "Carbon"
 local ap = character({apID})
-addAmmo(ap, 1, 180)
-check(exchange(ap, "9x19ap") and ap.inventory.rewards[1].item == "9x19ap", "AP consumes three regular boxes at Carbon")
+local apStack = addAmmo(ap, 1, 150)
+check(exchange(ap, "9x19ap") and ap.inventory.rewards[1].item == "9x19ap" and apStack.quantity == 30,
+	"AP consumes two regular boxes at Carbon")
+target.name = "Brass"
+local tri = character({triID})
+local buck = addAmmo(tri, 1, 40, false, "12gauge")
+check(not exchange(tri, "12gaugetr") and buck.quantity == 40, "a missing slug box leaves the buckshot untouched")
+local slug = addAmmo(tri, 2, 30, false, "12gaugesg")
+check(exchange(tri, "12gaugetr") and tri.inventory.rewards[1].item == "12gaugetr", "Tri-Ball takes buckshot and slugs")
+check(buck.quantity == 10 and not tri.items[2], "Tri-Ball consumes one box of each input")
+local credits = tri:GetData("townAmmoExchangeRounds")
+check(credits["12gauge"] == 0 and credits["12gaugesg"] == 0, "compound exchanges spend every input credit")
+check(slug.quantity == 30, "the removed slug stack is not partially debited")
+target.name = "Carbon"
 target.CanAccess = function() return false end
 check(not exchange(ap, "9x19ap"), "vendor access is revalidated on the server")
 print("PASS: " .. checks .. " town ammunition exchange checks")

@@ -125,7 +125,7 @@ medkits, antirads, painkillers and ordinary calibre access require no external N
 Haggler, Spoor, Arena Master and scientists provide appropriate additional overlap.
 
 Spread crowded purchase groups before using stock or TODO rewards. Stock tiers use highest-earned
-bonuses, not addition: +1 through +4 total per item/provider, with no redundant prerequisite tiers or
+bonuses, not addition: +1 through +4 total per item/provider (up to +8 for Brass's ammunition), with no redundant prerequisite tiers or
 instant refill. Default stock quantities, refill rates and prices will be reworked separately.
 
 Atlas owns the binoculars_2 → binoculars_1 → binoculars_4 → binoculars_3 chain at AT01/05/13/17.

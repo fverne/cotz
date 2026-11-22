@@ -1,6 +1,8 @@
 local PLUGIN = PLUGIN
 local DIFFICULTIES = {"easy", "medium", "hard"}
 local KINDS = {delivery = true, tracker = true, field = true, arena = true}
+-- Brass's regular calibres grow from 2 to 10 stock through their reserve milestones.
+local MAX_STOCK_BONUS = 8
 local PLANNED_KINDS = {
 	passage = true, cosmetic = true, storage = true, barter = true,
 	supplyExchange = true, information = true, recipe = true,
@@ -31,6 +33,25 @@ local function validatePlannedUnlock(reward, contact, ids, report)
 	if reward.baseSuit and not ix.item.list[reward.baseSuit] then report("invalid planned cosmetic suit") end
 end
 
+local function isAmmoBox(item)
+	return item ~= nil and isnumber(item.ammoAmount) and item.ammoAmount > 0
+end
+
+-- Inputs must be the output's regular load or another variant of that same load, such as slugs.
+local function isValidAmmoExchange(variants, exchange)
+	local regular = variants[exchange.output]
+	local inputs = exchange.inputs or {{item = exchange.input, boxes = exchange.boxes}}
+	if not regular or not isAmmoBox(ix.item.list[exchange.output]) or #inputs == 0 then return false end
+	for _, input in ipairs(inputs) do
+		if not isAmmoBox(ix.item.list[input.item]) or (input.item ~= regular and variants[input.item] ~= regular)
+			or not isnumber(input.boxes) or input.boxes < 1 or input.boxes > 3 or input.boxes % 1 ~= 0 then
+			return false
+		end
+	end
+
+	return true
+end
+
 function PLUGIN:ValidateContacts()
 	local errors = {}
 	local plannedIDs = {}
@@ -58,15 +79,8 @@ function PLUGIN:ValidateContacts()
 			end
 		end
 		for _, step in ipairs(contact.progression) do
-			if step.ammoExchange then
-				local exchange = step.ammoExchange
-				local input, output = ix.item.list[exchange.input], ix.item.list[exchange.output]
-				if not input or not output or (exchange.boxes ~= 2 and exchange.boxes ~= 3)
-					or not isnumber(input.ammoAmount) or not isnumber(output.ammoAmount)
-					or input.ammoAmount <= 0 or output.ammoAmount <= 0
-					or (self.ammoVariants or {})[exchange.output] ~= exchange.input then
-					report("invalid ammunition exchange on " .. step.id)
-				end
+			if step.ammoExchange and not isValidAmmoExchange(self.ammoVariants or {}, step.ammoExchange) then
+				report("invalid ammunition exchange on " .. step.id)
 			end
 			if ids[step.id] then report("duplicate step " .. step.id) end
 			ids[step.id] = true
@@ -94,11 +108,11 @@ function PLUGIN:ValidateContacts()
 			for _, reward in ipairs(step.plannedUnlocks or {}) do
 				validatePlannedUnlock(reward, contact, plannedIDs, report)
 			end
-			if step.stock then
-				local bonus = step.stock.bonus
-				local items = step.stock.items or {step.stock.item}
+			for _, grant in ipairs(self:GetStockGrants(step.stock)) do
+				local bonus = grant.bonus
+				local items = grant.items or {grant.item}
 				if #items == 0 or type(bonus) ~= "number"
-					or bonus < 1 or bonus > 4 or bonus % 1 ~= 0 then
+					or bonus < 1 or bonus > MAX_STOCK_BONUS or bonus % 1 ~= 0 then
 					report("invalid stock tier on " .. step.id)
 				end
 				for _, itemID in ipairs(items) do

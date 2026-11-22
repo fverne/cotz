@@ -4,8 +4,11 @@ local CONTACT_DISTANCE_SQUARED = 192 * 192
 local MAX_LISTED_HIDEOUTS = 32
 local MAX_UPGRADE_OFFERS = 63
 local REQUEST_INTERVAL = 0.3
+local ITEMS_REQUEST_INTERVAL = 1
+local MAX_UPGRADE_ITEMS = 255
 util.AddNetworkString("cotz/hideouts/upgrade-hideouts")
 util.AddNetworkString("cotz/hideouts/upgrade-offers")
+util.AddNetworkString("cotz/hideouts/upgrade-items")
 
 function PLUGIN:CanUseUpgradeContact(client, target)
 	local contact = self.personalContacts[game.GetMap()]
@@ -106,6 +109,52 @@ function PLUGIN:CollectUpgradeOffers(client, record)
 
 	return offers
 end
+
+local function addOfferItems(items, offer, name)
+	if offer.allowed ~= true or not offer.materials then return end
+	for _, group in ipairs(offer.materials.groups) do
+		for _, itemID in ipairs(group.items) do
+			items[itemID] = items[itemID] or {}
+			items[itemID][name] = true
+		end
+	end
+end
+
+-- Materials accepted by the next unlocked upgrade of each hideout the character can improve, keyed by item
+-- ID with the hideout names that need them. Inventory tooltips show these beside task and progression needs.
+function PLUGIN:CollectUpgradeItems(client)
+	local items = {}
+	if not self.ready or not IsValid(client) or not client:GetCharacter() then return items end
+	for _, record in SortedPairs(self.state.hideouts or {}) do
+		if self:IsUpgradeHideout(client, record) then
+			local name = self:GetHideoutName(record):sub(1, 128)
+			for _, offer in ipairs(self:CollectUpgradeOffers(client, record)) do addOfferItems(items, offer, name) end
+		end
+	end
+
+	return items
+end
+
+function PLUGIN:SendUpgradeItems(client)
+	if (client.cotzUpgradeItemsAt or 0) > CurTime() then return end
+	client.cotzUpgradeItemsAt = CurTime() + ITEMS_REQUEST_INTERVAL
+	local entries = {}
+	for itemID, names in SortedPairs(self:CollectUpgradeItems(client)) do
+		if #entries < MAX_UPGRADE_ITEMS then entries[#entries + 1] = {itemID, table.GetKeys(names)} end
+	end
+	net.Start("cotz/hideouts/upgrade-items")
+	net.WriteUInt(#entries, 8)
+	for _, entry in ipairs(entries) do
+		net.WriteString(entry[1])
+		net.WriteUInt(math.min(#entry[2], MAX_LISTED_HIDEOUTS), 6)
+		for index = 1, math.min(#entry[2], MAX_LISTED_HIDEOUTS) do net.WriteString(entry[2][index]) end
+	end
+	net.Send(client)
+end
+
+net.Receive("cotz/hideouts/upgrade-items", function(_, client)
+	PLUGIN:SendUpgradeItems(client)
+end)
 
 function PLUGIN:DescribeUpgradeMaterials(materials)
 	local lines = {}

@@ -5116,11 +5116,13 @@ ix.progression.itemPools.town_expansion_e5d6c53061f3 = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_85f15f41a5ef = {
+ix.progression.itemPools.town_expansion_7be8fdb53f87 = {
 	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
+		{item = "value_container_ammo"},
 		{item = "value_guncleaner"},
+		{item = "value_gunoil"},
 		{item = "value_gunpowder_blue"},
 		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},
@@ -5129,13 +5131,11 @@ ix.progression.itemPools.town_expansion_85f15f41a5ef = {
 	},
 }
 
-ix.progression.itemPools.town_expansion_7be8fdb53f87 = {
+ix.progression.itemPools.town_expansion_85f15f41a5ef = {
 	name = "Reloading components and ammunition storage: general supplies (Swamps, Garbage)",
 	tier = "common",
 	candidates = {
-		{item = "value_container_ammo"},
 		{item = "value_guncleaner"},
-		{item = "value_gunoil"},
 		{item = "value_gunpowder_blue"},
 		{item = "value_gunpowder_green"},
 		{item = "value_gunpowder_red"},

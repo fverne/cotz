@@ -3,45 +3,68 @@ local CONVERSION_TIMEOUT = 15
 local AMMO_CREDIT_KEY = "townAmmoExchangeRounds"
 local CLAIM_LINE = "taskRewardClaims"
 
-local function exchangeAmmunition(character, exchange)
-	local inventory = character:GetInventory()
-	local credits = table.Copy(character:GetData(AMMO_CREDIT_KEY, {}))
-	local required = ix.item.list[exchange.input].ammoAmount * exchange.boxes
-	local balance = credits[exchange.input] or 0
-	local available, inputs = balance, {}
+-- Collects the stacks that can pay for one input; banked credit from an interrupted exchange counts first.
+local function gatherInput(inventory, credits, input)
+	local balance = credits[input.item] or 0
+	local stacks, available = {}, balance
 	for _, item in pairs(inventory:GetItems(true)) do
-		if item.uniqueID == exchange.input and not item:GetData("equip", false) then
+		if item.uniqueID == input.item and not item:GetData("equip", false) then
 			local quantity = item:GetData("quantity", item.ammoAmount)
 			if type(quantity) == "number" and quantity > 0 and quantity % 1 == 0 then
-				inputs[#inputs + 1] = {item = item, quantity = quantity}
+				stacks[#stacks + 1] = {item = item, quantity = quantity}
 				available = available + quantity
 			end
 		end
 	end
-	local record = ix.progression.GetCharacterProgression(character)
-	local line = record.lines[CLAIM_LINE] or {}
-	line.pendingRewards = line.pendingRewards or {}
-	if available < required or #line.pendingRewards >= ix.taskRewards.settings.maxPendingRewards then return false end
-	table.sort(inputs, function(first, second) return first.item:GetID() < second.item:GetID() end)
-	for _, input in ipairs(inputs) do
-		if balance >= required then break end
-		local consumed = math.min(required - balance, input.quantity)
-		if consumed == input.quantity then
-			if not input.item:Remove() then return false end
+	table.sort(stacks, function(first, second) return first.item:GetID() < second.item:GetID() end)
+
+	return {item = input.item, required = ix.item.list[input.item].ammoAmount * input.boxes,
+		balance = balance, available = available, stacks = stacks}
+end
+
+local function debitInput(character, credits, payment)
+	for _, stack in ipairs(payment.stacks) do
+		if payment.balance >= payment.required then break end
+		local consumed = math.min(payment.required - payment.balance, stack.quantity)
+		if consumed == stack.quantity then
+			if not stack.item:Remove() then return false end
 		else
-			input.item:SetData("quantity", input.quantity - consumed)
+			stack.item:SetData("quantity", stack.quantity - consumed)
 		end
 		-- Save acknowledged debits so a failed later removal can be retried without losing earlier inputs.
-		balance = balance + consumed
-		credits[exchange.input] = balance
+		payment.balance = payment.balance + consumed
+		credits[payment.item] = payment.balance
 		character:SetData(AMMO_CREDIT_KEY, credits)
 		character:Save()
 	end
-	record = ix.progression.GetCharacterProgression(character)
-	line = record.lines[CLAIM_LINE] or {}
+
+	return true
+end
+
+local function hasPendingRoom(character)
+	local line = ix.progression.GetCharacterProgression(character).lines[CLAIM_LINE] or {}
+
+	return #(line.pendingRewards or {}) < ix.taskRewards.settings.maxPendingRewards
+end
+
+local function exchangeAmmunition(character, exchange)
+	local inventory = character:GetInventory()
+	local credits = table.Copy(character:GetData(AMMO_CREDIT_KEY, {}))
+	local payments = {}
+	for _, input in ipairs(exchange.inputs) do
+		local payment = gatherInput(inventory, credits, input)
+		if payment.available < payment.required then return false end
+		payments[#payments + 1] = payment
+	end
+	if not hasPendingRoom(character) then return false end
+	for _, payment in ipairs(payments) do
+		if not debitInput(character, credits, payment) then return false end
+	end
+	if not hasPendingRoom(character) then return false end
+	local record = ix.progression.GetCharacterProgression(character)
+	local line = record.lines[CLAIM_LINE] or {}
 	line.pendingRewards = line.pendingRewards or {}
-	if #line.pendingRewards >= ix.taskRewards.settings.maxPendingRewards then return false end
-	credits[exchange.input] = balance - required
+	for _, payment in ipairs(payments) do credits[payment.item] = payment.balance - payment.required end
 	local reward = {item = exchange.output, quantity = ix.item.list[exchange.output].ammoAmount}
 	line.pendingRewards[#line.pendingRewards + 1] = ix.progression.PrepareReward(character, CLAIM_LINE, line, reward)
 	record.lines[CLAIM_LINE] = line

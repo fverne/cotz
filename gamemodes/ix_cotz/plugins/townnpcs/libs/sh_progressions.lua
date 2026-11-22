@@ -16,6 +16,16 @@ local function addDependency(definition, id)
 	definition.prerequisites[#definition.prerequisites + 1] = id
 end
 
+-- Single-input exchanges keep their authored input/boxes fields; compound recipes list inputs directly.
+local function normalizeExchange(id, npc, exchange)
+	local inputs = {}
+	for _, input in ipairs(exchange.inputs or {{item = exchange.input, boxes = exchange.boxes}}) do
+		inputs[#inputs + 1] = {item = input.item, boxes = input.boxes}
+	end
+
+	return {id = id, npc = npc, output = exchange.output, inputs = inputs}
+end
+
 local function buildAllowedRequirements(maps)
 	local regions, allowed = {}, {}
 	for _, region in ipairs(maps) do regions[region] = true end
@@ -73,7 +83,7 @@ function PLUGIN:BuildProgressions()
 				recognition = step.recognition,
 				serviceDiscounts = step.discounts,
 				townServices = step.services,
-				ammoExchange = step.ammoExchange,
+				ammoExchange = step.ammoExchange and normalizeExchange(id, contact.name, step.ammoExchange),
 			}
 			if step.id ~= "v3/hideout/access" then
 				definition.categoryChoiceRange = self.settings.progressionCategoryChoices
@@ -87,19 +97,17 @@ function PLUGIN:BuildProgressions()
 				definition.allowedRequirements = allowedByMaps[key]
 			end
 			if step.ammoExchange then
-				self.ammoExchanges[step.ammoExchange.output] = {
-					id = id, npc = contact.name, input = step.ammoExchange.input,
-					output = step.ammoExchange.output, boxes = step.ammoExchange.boxes,
-				}
+				self.ammoExchanges[step.ammoExchange.output] = definition.ammoExchange
 			end
 			if step.variantBase then self.variantBaseGates[step.variantBase] = id end
 			for _, service in ipairs(step.services or {}) do
 				assert(not self.serviceGates[service.id], "Duplicate town service: " .. service.id)
 				self.serviceGates[service.id] = {id = id, npc = contact.name}
 			end
-			if step.stock then
-				definition.stockUnlocks = {{npc = contact.name,
-					items = step.stock.items or {step.stock.item}, bonus = step.stock.bonus}}
+			for _, grant in ipairs(self:GetStockGrants(step.stock)) do
+				definition.stockUnlocks = definition.stockUnlocks or {}
+				definition.stockUnlocks[#definition.stockUnlocks + 1] = {npc = contact.name,
+					items = grant.items or {grant.item}, bonus = grant.bonus}
 			end
 			for _, required in ipairs(step.requires) do addDependency(definition, self:StepID(slug, required)) end
 			for _, required in ipairs(step.crossRequires or {}) do

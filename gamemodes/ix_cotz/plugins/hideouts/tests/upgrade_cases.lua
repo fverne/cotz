@@ -121,6 +121,20 @@ Test("offers list every personal improvement with costs, materials and locked re
 	assert(features.props.payable and features.props.price == 5000)
 end)
 
+Test("tooltip materials list only unlocked next-level upgrades with their hideout names", function()
+	local owner, _, record = upgradeHome(false)
+	local name = PLUGIN:GetHideoutName(record):sub(1, 128)
+	-- Installing the starter storage completes step 01; clear it so general level 2 is locked.
+	owner:GetCharacter().completed["cotz/town/ballast/v3/hideout/01"] = nil
+	local items = PLUGIN:CollectUpgradeItems(owner)
+	assert(items.value_nuts[name] and items.value_gunoil[name] and items.value_paracord[name])
+	assert(not items.value_tape_duct, "Locked general level 2 materials stay hidden")
+	unlock(owner, 1)
+	items = PLUGIN:CollectUpgradeItems(owner)
+	assert(items.value_tape_duct[name] and items.value_rope[name])
+	assert(next(PLUGIN:CollectUpgradeItems(FeatureClient(2, 0))) == nil, "Other characters' rooms are excluded")
+end)
+
 Test("squad upgrades take treasury first and only the remainder from the officer", function()
 	for _, funds in ipairs({0, 1000, 2700, 4000}) do
 		local owner, inventory, record = upgradeHome(true)

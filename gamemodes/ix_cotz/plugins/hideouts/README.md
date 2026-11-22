@@ -342,6 +342,10 @@ that the dialogue renders; confirmation binds the character, contact, hideout, r
 split and a two-minute expiry, then rebuilds the offer and rejects any change. Moving away from the contact,
 switching characters, demotion or a changed treasury balance cancels the purchase without a charge.
 
+Inventory tooltips list green **Hideout: name** rows for every material accepted by an unlocked next-level
+upgrade of a hideout the character can improve. Each inventory panel requests a fresh list on opening
+(`cotz/hideouts/upgrade-items`, rate-limited to once per second); locked upgrades are not listed.
+
 All three contacts use the same recipes. Cash increases by 1.5× per level, rounded up; squad upgrades
 cost exactly three times the personal cash and every raw material amount. Personal upgrades always charge
 the buyer's wallet, even when squad upgrade funding is enabled.

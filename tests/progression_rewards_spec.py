@@ -76,7 +76,8 @@ class ProgressionRewardsSpec(unittest.TestCase):
             with patch.object(ammo, "REPORT", report), patch("sys.argv", ["ammo", "--write"]):
                 ammo.main()
             self.assertIn("barter 2:1", report.read_text())
-            self.assertIn("barter 3:1", report.read_text())
+            self.assertNotIn("barter 3:1", report.read_text())
+            self.assertIn("barter 1 12gauge + 1 12gaugesg", report.read_text())
         self.assertEqual(before, {p: p.read_bytes() for p in files})
 
     def test_no_cash_routes_for_meat_meals_or_variant_ammo(self):
@@ -91,11 +92,14 @@ class ProgressionRewardsSpec(unittest.TestCase):
                 exchange = step.get("ammoExchange")
                 if not exchange:
                     continue
+                if not exchange["output"].endswith(("hp", "ap")):
+                    self.assertEqual(slug, "brass")
+                    continue
                 regular = exchange["input"]
                 hp = exchange["output"].endswith("hp")
                 branch = "regular-ammo/" + regular if hp else "hp-ammo/" + regular + "hp"
                 self.assertEqual(slug, "brass" if hp else "carbon")
-                self.assertEqual(exchange["boxes"], 2 if hp else 3)
+                self.assertEqual(exchange["boxes"], 2)
                 self.assertIn("cotz/town/brass/v3/" + branch,
                               self.data["compiled"][rewards.progression_id(slug, step["id"])]["prerequisites"])
 

@@ -821,8 +821,8 @@ compact pistol/SMG routes, while Spool sells existing music cassettes alongside 
 Cooking-fuel purchases, ordinary supplies and stock rewards are removed from the clinic, archive,
 research/communications desks and outfitter. Their affected rewards now improve medical, measuring,
 computing, recording or textile equipment and appropriate working provisions. Field/camp contacts
-retain fuel where it supports expeditions or utilities. All stock increases remain capped at +4 and
-are usable at the earning milestone. TODO plans and progression IDs are unchanged; progression gifts are removed.
+retain fuel where it supports expeditions or utilities. Stock increases are capped at +4, except Brass's
+ammunition reserves (see below), and are usable at the earning milestone. TODO plans and progression IDs are unchanged; progression gifts are removed.
 
 There are 234 active planned entries plus eight retained in Arena Master's inactive reference tree.
 Each `plannedUnlocks` entry has its own adjacent `-- TODO:` comment, stable ID, provider, kind,
@@ -837,6 +837,7 @@ against stale saved vendors. Atlas owns binoculars_2/1/4/3 at AT01/AT05/AT13/AT1
 local routes. The canonical predecessor chain remains enforced.
 
 Stock bonuses are highest-earned **total bonuses**, capped by authoring policy at +4 per item/provider.
+Brass's regular ammunition is the exception; validation allows up to +8 (`MAX_STOCK_BONUS`).
 Do not repeat an equal tier after its prerequisite: it grants no improvement. Existing quantities,
 refill intervals, refill amounts and prices are not retuned here. Default assortment/stock rework is separate.
 
@@ -851,6 +852,30 @@ pending claims and paid benefits remain intact; gifts are not replayed and old s
 No save reset or first-time setup is needed. Restart map servers together and verify regional vendors,
 independent sellers, conversions, stock synchronization, pending claims and existing characters in multiplayer.
 Standalone specs cannot establish those runtime behaviours.
+
+## Brass and Carbon ammunition (November 2026)
+
+Brass's regular ammunition starts at 4/4 stock: supplies use the contact's `supplyStock`, and unlocked
+calibres use catalogue terms of 4/4. Buckshot and slugs keep 2/2 through `supplyStockOverrides`, which gives
+individual supplies their own stock terms. Each calibre rises to 7/7 at its first reserve milestone and to 10/10
+at the next one. Calibres with a single reserve step get the second rise from the following calibre's purchase
+milestone. .410 follows the same 4 → 7 → 10 path. Buckshot and slugs go 2 → 4 → 5 and share milestones.
+7.62x39 has its own reserve step (`v3/regular-ammo/556x45/stock`), added before the 5.56x45 purchase.
+It declares `defaultActive`, so characters who already unlocked 7.62x39 can take it. An unfinished 5.56x45
+delivery waits until that reserve is complete, and saved hand-ins are kept. 9.3x64 is last in the line, so it goes
+from 4 to 10 on its purchase milestone. A step's `stock` can be a list of grants
+(`{bonus = n, items = {...}}`) when it raises several items by different amounts.
+Brass sets `preserveProgression`, so `expand_progression.py` keeps these hand-tuned targets.
+
+Carbon's AP exchanges now consume two regular boxes, matching Brass's HP exchanges. Brass no longer sells
+Tri-Ball, darts or Magnum buckshot. Their shotgun-load milestones open exchanges instead:
+one buckshot box plus one slug box for Tri-Ball, two slug boxes for darts and two buckshot boxes for Magnum
+buckshot. A compound recipe lists `ammoExchange.inputs`; single-input recipes keep `input` and `boxes`.
+Each input banks its own round credit, so a failed stack removal can be retried without loss.
+
+The dart reserve intermission (`v3/shotgun-loads/12gaugemg/stock`) is retired. Saved lines for it remain
+inert history. The Magnum buckshot milestone now requires only darts and declares `defaultActive`, so
+characters who finished darts before the update can take it immediately.
 
 ## Alternate spawn positions
 
