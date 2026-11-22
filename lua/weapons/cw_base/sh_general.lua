@@ -890,13 +890,8 @@ if CLIENT then
 	end
 
 	function SWEP:getTelescopeAngles()
-		if self.freeAimOn then
-			return self.Owner:EyeAngles()
-		end
-
-		local muzzle = self:getMuzzlePosition()
-
-		return muzzle and muzzle.Ang or self.Owner:EyeAngles()
+		-- Viewmodel muzzle attachments can express pitch as roll.
+		return self.Owner:EyeAngles()
 	end
 
 	function SWEP:getLaserAngles(model)

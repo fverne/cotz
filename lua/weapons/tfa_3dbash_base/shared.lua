@@ -126,7 +126,6 @@ SWEP.Callback.Deploy = function(self)
 	end)
 end
 
-local flipcv
 
 local cd = {}
 
@@ -140,7 +139,6 @@ SWEP.RTCode = function( self, rt, scrw, scrh )
 	if !self.myreticule then self.myreticule = Material(self.ScopeReticule or "scope/gdcw_scopesightonly") end
 	if !self.mydirt then self.mydirt = Material(self.ScopeDirt or "vgui/scope_dirt") end
 	
-	if !flipcv then flipcv=GetConVar("cl_tfa_viewmodel_flip") end
 
 	local vm = self.Owner:GetViewModel()
 	
@@ -182,28 +180,18 @@ SWEP.RTCode = function( self, rt, scrw, scrh )
 	surface.DrawRect(-512,-512,1024,1024)
 	render.OverrideAlphaWriteEnable( true, true)
 	
-	local ang = EyeAngles()
-	
-	local AngPos = self.Owner:GetViewModel():GetAttachment(3)
-	
-	if AngPos then
-	
-		ang = AngPos.Ang
-		if flipcv:GetBool() then
-			ang.y = -ang.y
-		end
-		
-		for k,v in pairs(self.ScopeAngleTransforms) do
-			if v[1] == "P" then
-				ang:RotateAroundAxis(ang:Right(),v[2])				
-			elseif v[1] == "Y" then
-				ang:RotateAroundAxis(ang:Up(),v[2])			
-			elseif v[1] == "R" then
-				ang:RotateAroundAxis(ang:Forward(),v[2])		
-			end
+	local ang = self.Owner:EyeAngles()
+	for _, transform in pairs(self.ScopeAngleTransforms) do
+		local axis, degrees = transform[1], transform[2]
+		if axis == "P" then
+			ang:RotateAroundAxis(ang:Right(), degrees)
+		elseif axis == "Y" then
+			ang:RotateAroundAxis(ang:Up(), degrees)
+		elseif axis == "R" then
+			ang:RotateAroundAxis(ang:Forward(), degrees)
 		end
 	end
-	
+
 	cd.angles = ang
 	cd.origin = self.Owner:GetShootPos()
 	

@@ -212,7 +212,7 @@ if CLIENT then
 		x, y = ScrW(), ScrH()
 		old = render.GetRenderTarget()
 
-		ang = self:getReticleAngles() --self:getTelescopeAngles()
+		ang = self:getTelescopeAngles()
 		
 		if self.ViewModelFlip then
 			ang.r = -self.BlendAng.z

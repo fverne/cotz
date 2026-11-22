@@ -106,7 +106,8 @@ if CLIENT then
 		["md_acog"] = {
 			model = "models/wystan/attachments/2cog.mdl",
 			bone = "Tube02",
-			pos = Vector(-0.191, 1.244, -1.88),
+			-- The Saiga Sport's ACOG offset from its Nightforce, applied to the hand-placed Nightforce.
+			pos = Vector(-0.141, 0.469, -2.1),
 			angle = Angle(0, 0, -90),
 			size = Vector(0.375, 0.375, 0.375),
 		},
