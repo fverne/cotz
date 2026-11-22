@@ -455,10 +455,16 @@ end
 do
 	local owner = actor()
 	local item = repairItem(owner, 990, false)
-	item.isAirTank = true
+	item.isAirTank, item.filterType = true, "air_tank"
 	item.data.durability, item.data.filterCondition = 100, 0
+	ix.item.list.gasmask_filter_air_tank = {name = "Medium Gas Tank", refillCost = 4000}
+	ix.item.list.gasmask_filter_air_tank_large = {name = "Large Gas Tank", refillCost = 5700}
+	ix.util = ix.util or {}
+	ix.util.GetInstalledFilterID = function(installed)
+		return installed:GetData("filterUniqueID") or "gasmask_filter_" .. installed.filterType
+	end
 	function item:GetFilterCondition() return self:GetData("filterCondition", 100) end
-	local request = {itemid = 990, type = "airTank"}
+	local request = {itemid = 990, type = "filter"}
 	local offer = ix.progression.BuildServiceOffer(owner.client, tech, "repair", request)
 	check(offer and offer.field == "filterCondition" and offer.baseCost == 4000,
 		"Technut quotes an exhausted tank on an undamaged suit")
@@ -471,9 +477,13 @@ do
 				"refill price scales with missing air independently of suit repair rate")
 		end
 	end
+	item.data.filterUniqueID, item.data.filterCondition = "gasmask_filter_air_tank_large", 50
+	check(ix.progression.BuildServiceOffer(owner.client, tech, "repair", request).baseCost == 2850,
+		"installed tank size sets its refill price")
+	item.data.filterUniqueID = nil
 	item.data.filterCondition = 0
 	check(not ix.progression.BuildServiceOffer(owner.client, vendor("'Boss'"), "repair", request),
-		"tank service is restricted to Technut")
+		"filter service is restricted to Technut")
 	check(#ix.progression.GetRepairOptions(owner.client, tech) == 1, "depleted tank appears separately")
 	ix.progression.ConfirmService({}, owner.client, tech, "repair", request)
 	check(ix.progression.ExecuteService(owner.client, tech, "repair", true), "tank refill executes")
@@ -481,8 +491,27 @@ do
 		"tank service restores air and recalculates protection")
 	check(not ix.progression.ExecuteService(owner.client, tech, "repair", true), "tank quote cannot replay")
 	check(not ix.progression.BuildServiceOffer(owner.client, tech, "repair", request), "full tank needs no service")
-	item.isAirTank = false
+	item.data.filterCondition = false
+	check(not ix.progression.BuildServiceOffer(owner.client, tech, "repair", request), "empty sockets cannot be refilled")
+	item.isAirTank, item.filterType = false, nil
 	check(not ix.progression.BuildServiceOffer(owner.client, tech, "repair", request),
-		"ordinary filters cannot be recharged by forged tank requests")
+		"items without filters cannot be refilled by forged requests")
+end
+do
+	local owner = actor()
+	local cartridge = repairItem(owner, 991, false)
+	cartridge.canRepair, cartridge.isGasmaskFilter, cartridge.refillCost = nil, true, 550
+	cartridge.data.filterCondition = 40
+	local request = {itemid = 991, type = "filter"}
+	local offer = ix.progression.BuildServiceOffer(owner.client, tech, "repair", request)
+	check(offer and offer.field == "filterCondition" and offer.baseCost == 330, "loose cartridge refill is quoted")
+	check(not ix.progression.BuildServiceOffer(owner.client, tech, "repair", {itemid = 991, type = "durability"}),
+		"loose cartridges have no durability repair")
+	ix.progression.ConfirmService({}, owner.client, tech, "repair", request)
+	check(ix.progression.ExecuteService(owner.client, tech, "repair", true) and cartridge.data.filterCondition == 100,
+		"loose cartridge refill restores its condition")
+	cartridge.data.filterCondition, cartridge.cotzFilterPending = 10, {}
+	check(not ix.progression.BuildServiceOffer(owner.client, tech, "repair", request),
+		"cartridges locked by an installation cannot be refilled")
 end
 print(string.format("PASS: %d progression service checks", checks))

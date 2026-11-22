@@ -11,6 +11,7 @@ ITEM.weight = 0.2
 
 ITEM.filterType = "scientific"
 ITEM.filterCondition = 100
+ITEM.refillCost = 1700
 ITEM.filterWearDivisor = 240
 
 ITEM.exRender = true

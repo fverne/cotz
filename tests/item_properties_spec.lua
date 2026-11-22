@@ -230,8 +230,9 @@ weighted.entity = {}
 check(rowsById(weighted).carry == nil, "world item keeps legacy carry omission")
 CLIENT = false
 ix.item.list.gasmask_filter_civilian = {name = "Civilian filter"}
+ix.util.GetInstalledFilterID = function(item) return "gasmask_filter_" .. item.filterType end
 local tank = {filterType = "civilian", isAirTank = true, GetFilterCondition = function() return 72.7 end}
-check(ix.itemProperties.GetFilterRows(tank)[1].text == "Air tank: 73%", "air tank percentage rounds")
+check(ix.itemProperties.GetFilterRows(tank)[1].text == "Civilian filter: 73%", "installed tank percentage rounds")
 local suit = {isBodyArmor = true, scale = 1, GetData = bread.GetData, data = {},
 	getBR = function(self) return 1 - 0.4 * self.scale end, getFBR = function(self) return 8 * self.scale end,
 	getSR = function() return 1 end, getFSR = function() return 0 end,
