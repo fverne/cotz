@@ -6,7 +6,7 @@ ITEM.category = "Debug - Anomaly CW2.0 VM recoil"
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak104.mdl"
 
 ITEM.price = 0
-ITEM.width = 5
+ITEM.width = 4
 ITEM.height = 2
 ITEM.weight = 0
 ITEM.unloadedweight = 0

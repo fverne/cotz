@@ -7,7 +7,7 @@ ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_vintorez_w.mdl"
 
 ITEM.price = 0
 ITEM.width = 5
-ITEM.height = 2
+ITEM.height = 1
 ITEM.weight = 0
 ITEM.unloadedweight = 0
 ITEM.bulletweight = 0

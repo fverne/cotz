@@ -6,7 +6,7 @@ ITEM.category = "Debug - Anomaly CW2.0"
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_m82_w.mdl"
 
 ITEM.price = 0
-ITEM.width = 5
+ITEM.width = 7
 ITEM.height = 2
 ITEM.weight = 0
 ITEM.unloadedweight = 0
