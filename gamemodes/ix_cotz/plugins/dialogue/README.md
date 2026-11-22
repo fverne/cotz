@@ -136,9 +136,11 @@ the reward resolver declare their service category. Static and dynamic options b
 mouseover while preserving their category tint.
 
 Trading and Technut's customization window open without replacing the current dialogue choices.
-Escape cancels the foremost related window or returns through the dialogue's back choice; at the
-root it says goodbye. Holding Escape for one second closes the entire interaction. Shared COTZ
-frames opened during dialogue participate in this navigation, including confirmation cancellation.
+Escape or Tab cancels the foremost related window or returns through the dialogue's back choice; at
+the root it says goodbye. Holding either key for one second closes the entire interaction. Tab is
+ignored while a text entry has focus. The same close stack also serves popups outside dialogue:
+`ix.cotzUI.TrackClosable(panel, cancel)` registers shared COTZ frames and prompts, the storage view,
+and stock `Derma_Query`/`Derma_StringRequest` prompts, including confirmation cancellation.
 The Escape handler remains at the original Garry's Mod hook stage after Helix plugin dispatch.
 
 Repeatable task acceptance reveals no reward choices. Once the objective is complete, the issuing

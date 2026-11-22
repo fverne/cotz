@@ -241,7 +241,7 @@ else
 	net.Receive("ixContainerPassword", function(length)
 		local entity = net.ReadEntity()
 
-		Derma_StringRequest(
+		ix.cotzUI.TrackClosable(Derma_StringRequest(
 			L("containerPasswordWrite"),
 			L("containerPasswordWrite"),
 			"",
@@ -251,7 +251,7 @@ else
 					net.WriteString(val)
 				net.SendToServer()
 			end
-		)
+		))
 	end)
 end
 
@@ -280,12 +280,12 @@ properties.Add("container_setpassword", {
 	end,
 
 	Action = function(self, entity)
-		Derma_StringRequest(L("containerPasswordWrite"), "", "", function(text)
+		ix.cotzUI.TrackClosable(Derma_StringRequest(L("containerPasswordWrite"), "", "", function(text)
 			self:MsgStart()
 				net.WriteEntity(entity)
 				net.WriteString(text)
 			self:MsgEnd()
-		end)
+		end))
 	end,
 
 	Receive = function(self, length, client)
@@ -330,12 +330,12 @@ properties.Add("container_setname", {
 	end,
 
 	Action = function(self, entity)
-		Derma_StringRequest(L("containerNameWrite"), "", "", function(text)
+		ix.cotzUI.TrackClosable(Derma_StringRequest(L("containerNameWrite"), "", "", function(text)
 			self:MsgStart()
 				net.WriteEntity(entity)
 				net.WriteString(text)
 			self:MsgEnd()
-		end)
+		end))
 	end,
 
 	Receive = function(self, length, client)

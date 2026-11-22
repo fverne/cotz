@@ -134,7 +134,15 @@ function PANEL:Init()
 			net.Start("ixStorageClose")
 			net.SendToServer()
 		end
+
+		return
 	end
+
+	local frame = ix.gui.frame
+	ix.cotzUI.TrackClosable(frame, function()
+		-- The view fades out before removal; avoid sending a second close request during the fade.
+		if not self.closing then frame:Close() end
+	end)
 end
 
 function PANEL:OnChildAdded(panel)
@@ -189,6 +197,7 @@ function PANEL:Paint(width, height)
 end
 
 function PANEL:Remove()
+	self.closing = true
 	self:SetAlpha(255)
 	self:AlphaTo(0, self:GetFadeTime(), 0, function()
 		BaseClass.Remove(self)

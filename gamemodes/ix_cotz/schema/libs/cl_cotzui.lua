@@ -136,6 +136,16 @@ function ix.cotzUI.StyleFrame(frame)
 	return frame
 end
 
+-- Registers a popup with the dialogue plugin's close stack so Escape and Tab close it. The optional cancel
+-- callback replaces the default panel:Close() and must close the panel itself.
+function ix.cotzUI.TrackClosable(panel, cancel)
+	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(panel) then
+		ix.dialogue.TrackRelatedPanel(panel, cancel)
+	end
+
+	return panel
+end
+
 function ix.cotzUI.Frame(title, widthFraction, heightFraction, maxWidth)
 	local frame = ix.cotzUI.StyleFrame(vgui.Create("DFrame"))
 	frame:SetTitle(title)
@@ -156,9 +166,7 @@ function ix.cotzUI.Frame(title, widthFraction, heightFraction, maxWidth)
 	end
 	resize(frame)
 	frame:MakePopup()
-	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(ix.gui.dialogue) then
-		ix.dialogue.TrackRelatedPanel(frame)
-	end
+	ix.cotzUI.TrackClosable(frame)
 	local scroll = frame:Add("DScrollPanel")
 	scroll:SetZPos(1)
 	scroll:Dock(FILL)
@@ -292,14 +300,12 @@ end
 function ix.cotzUI.Query(text, title, ...)
 	local frame, _, actions = dialog(title, text)
 	local options = {...}
-	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(ix.gui.dialogue) then
-		ix.dialogue.TrackRelatedPanel(frame, function()
-			frame:Close()
-			for index = 1, #options, 2 do
-				if options[index] == "Cancel" and options[index + 1] then options[index + 1]() return end
-			end
-		end)
-	end
+	ix.cotzUI.TrackClosable(frame, function()
+		frame:Close()
+		for index = 1, #options, 2 do
+			if options[index] == "Cancel" and options[index + 1] then options[index + 1]() return end
+		end
+	end)
 	for index = 1, #options, 2 do
 		local callback = options[index + 1]
 		dialogButton(actions, options[index], function()
@@ -328,13 +334,11 @@ function ix.cotzUI.StringRequest(title, text, default, onEnter, onCancel)
 		frame:Close()
 		if onCancel then onCancel(value) end
 	end)
-	if ix.dialogue and ix.dialogue.TrackRelatedPanel and IsValid(ix.gui.dialogue) then
-		ix.dialogue.TrackRelatedPanel(frame, function()
-			local value = entry:GetValue()
-			frame:Close()
-			if onCancel then onCancel(value) end
-		end)
-	end
+	ix.cotzUI.TrackClosable(frame, function()
+		local value = entry:GetValue()
+		frame:Close()
+		if onCancel then onCancel(value) end
+	end)
 	entry.OnEnter = accept
 	entry:RequestFocus()
 	entry:SelectAllText(true)

@@ -229,7 +229,7 @@ function PANEL:Init()
 
 			-- Set the price of the item.
 			menu:AddOption(L"price", function()
-				Derma_StringRequest(
+				ix.cotzUI.TrackClosable(Derma_StringRequest(
 					itemTable.GetName and itemTable:GetName() or L(itemTable.name),
 					L"vendorPriceReq",
 					entity:GetPrice(uniqueID),
@@ -242,7 +242,7 @@ function PANEL:Init()
 
 						self:updateVendor("price", {uniqueID, text})
 					end
-				)
+				))
 			end):SetImage("icon16/coins.png")
 
 			-- Set the stock of the item or disable it.
@@ -258,54 +258,54 @@ function PANEL:Init()
 			stock:AddOption(L"edit", function()
 				local _, max = entity:GetStock(uniqueID)
 
-				Derma_StringRequest(
+				ix.cotzUI.TrackClosable(Derma_StringRequest(
 					itemTable.GetName and itemTable:GetName() or L(itemTable.name),
 					L"vendorStockReq",
 					max or 1,
 					function(text)
 						self:updateVendor("stockMax", {uniqueID, text})
 					end
-				)
+				))
 			end):SetImage("icon16/table_edit.png")
 
 			-- Edit the current stock of this item.
 			stock:AddOption(L"vendorEditCurStock", function()
-				Derma_StringRequest(
+				ix.cotzUI.TrackClosable(Derma_StringRequest(
 					itemTable.GetName and itemTable:GetName() or L(itemTable.name),
 					L"vendorStockCurReq",
 					entity:GetStock(uniqueID) or 0,
 					function(text)
 						self:updateVendor("stock", {uniqueID, text})
 					end
-				)
+				))
 			end):SetImage("icon16/table_edit.png")
 
 			-- Edit the restock interval
 			stock:AddOption("Edit the restock interval", function()
 				local interval, _ = entity:GetStockInterval(uniqueID)
 
-				Derma_StringRequest(
+				ix.cotzUI.TrackClosable(Derma_StringRequest(
 					itemTable.GetName and itemTable:GetName() or L(itemTable.name),
 					"Set Vendor restock interval (in hours)",
 					interval or 0.1,
 					function(text)
 						self:updateVendor("stockInterval", {uniqueID, text})
 					end
-				)
+				))
 			end):SetImage("icon16/table_edit.png")
 
 			-- Edit the restock amount
 			stock:AddOption("Edit the restock amount", function()
 				local _, amt = entity:GetStockInterval(uniqueID)
 
-				Derma_StringRequest(
+				ix.cotzUI.TrackClosable(Derma_StringRequest(
 					itemTable.GetName and itemTable:GetName() or L(itemTable.name),
 					"Set Vendor restock amount",
 					amt or 0,
 					function(text)
 						self:updateVendor("stockAmount", {uniqueID, text})
 					end
-				)
+				))
 			end):SetImage("icon16/table_edit.png")
 		menu:Open()
 	end
