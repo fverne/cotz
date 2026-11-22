@@ -58,7 +58,7 @@ end
 ITEM.functions.split = {
     name = "Split",
     tip = "useTip",
-    icon = "icon16/stalker/split.png",
+    icon = "icon16/stalker_grey/split.png",
     isMulti = true,
     multiOptions = function(item, client)
 		local targets = {}

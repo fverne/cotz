@@ -30,7 +30,7 @@ end
 
 ITEM.functions.use = {
 	name = "Smoke",
-	icon = "icon16/stalker/smoke.png",
+	icon = "icon16/stalker_grey/smoke.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 		

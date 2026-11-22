@@ -741,6 +741,9 @@ ix.util.PropertyDesc = function(panel, text, color, rowID)
 
 	return row
 end
+ix.util.PropertyDesc2 = function(panel, text, color, material, rowID)
+	return ix.util.PropertyDesc(panel, text, color, rowID)
+end
 dofile("gamemodes/ix_cotz/schema/libs/cl_itemproperties.lua")
 local tooltip = {rows = {}}
 function tooltip:GetRow(id) return self.rows[id] end

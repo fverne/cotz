@@ -38,16 +38,17 @@ end
 if (CLIENT) then
 	function ITEM:PopulateTooltip(tooltip)
 		if !self.entity then
+			local sellIcon = "icon16/stalker_grey/sell.png"
 			ix.util.PropertyDesc(tooltip, "Very Rare Item", Color(200, 200, 200))
 			ix.util.PropertyDesc(tooltip, "Fits into cassette players", Color(200, 200, 200))
-			ix.util.PropertyDesc2(tooltip, "Valuable", Color(218, 165, 32), ix.util.GetMaterial("icon16/stalker/sell.png"))
+			ix.util.PropertyDesc2(tooltip, "Valuable", ix.cotzIcons.GetColor(sellIcon), ix.util.GetMaterial(sellIcon))
 		end
 	end
 end
 
 ITEM.functions.insert = {
 	name = "Insert into Target",
-	icon = "icon16/stalker/attach.png",
+	icon = "icon16/stalker_grey/attach.png",
 	OnRun = function(item)
 		local client = item.player
 		local Hit = client:GetEyeTraceNoCursor()

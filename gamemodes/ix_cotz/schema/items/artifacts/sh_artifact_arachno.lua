@@ -10,6 +10,10 @@ ITEM.rarity = 5
 ITEM.baseweight = 1.800
 ITEM.varweight  = 0.200
 
+ITEM.leapHorizontalSpeed = 400
+ITEM.leapVerticalSpeed = 350
+ITEM.useCooldown = 4
+
 ITEM.functions.use = {
 	name = "Grasp",
     icon = "icon16/help.png",
@@ -22,8 +26,8 @@ ITEM.functions.use = {
 
         	player:SetPos( pos + Vector(0,0,2) )
         	if player:IsStuck() then player:SetPos(pos) end
-        	player:SetVelocity( player:EyeAngles():Forward()*Vector(400,400,0) + Vector(0,0,350) - player:GetVelocity())
-        	item:SetData("cooldown", os.time() + 4 )
+        	player:SetVelocity( player:EyeAngles():Forward()*Vector(item.leapHorizontalSpeed,item.leapHorizontalSpeed,0) + Vector(0,0,item.leapVerticalSpeed) - player:GetVelocity())
+        	item:SetData("cooldown", os.time() + item.useCooldown )
         end
 
         return false
@@ -32,3 +36,14 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "use", text = "Use: Leap in the direction you are facing"},
+		{id = "horizontalForce", text = "Horizontal force: "
+			.. ix.itemProperties.Format("jumpSpeed", self.leapHorizontalSpeed), icon = "effect/movement"},
+		{id = "verticalForce", text = "Vertical force: "
+			.. ix.itemProperties.Format("jumpSpeed", self.leapVerticalSpeed), icon = "effect/movement"},
+		{id = "cooldown", text = "Cooldown: " .. ix.itemProperties.Format("duration", self.useCooldown)},
+	}
+end

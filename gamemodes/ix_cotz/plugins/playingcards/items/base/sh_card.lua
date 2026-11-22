@@ -38,7 +38,7 @@ end
 
 ITEM.functions.Flip = {
     name = "Flip the card",
-    icon = "icon16/stalker/scrap.png",
+    icon = "icon16/stalker_grey/scrap.png",
     OnRun = function(itemTable)
         local client = itemTable.player
         local vStart = client:GetShootPos()

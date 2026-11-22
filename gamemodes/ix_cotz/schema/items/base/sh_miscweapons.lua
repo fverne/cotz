@@ -138,7 +138,7 @@ end)
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "unequip",
 	tip = "unequipTip",
-	icon = "icon16/stalker/unequip.png",
+	icon = "icon16/stalker_grey/unequip.png",
 	OnRun = function(item)
 		ix.util.PlayerPerformItemAction(item.player, item, "Unequipping...", 4, function(ply)
 			item:Unequip(ply, true)
@@ -157,7 +157,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 ITEM.functions.Equip = {
 	name = "equip",
 	tip = "equipTip",
-	icon = "icon16/stalker/equip.png",
+	icon = "icon16/stalker_grey/equip.png",
 	OnRun = function(item)
 		ix.util.PlayerPerformItemAction(item.player, item, "Equipping...", 4, function(ply)
 			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end

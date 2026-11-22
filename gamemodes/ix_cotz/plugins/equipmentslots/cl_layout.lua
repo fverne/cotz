@@ -1,14 +1,18 @@
 local PLUGIN = PLUGIN
 
+-- Icon keys select the ix.itemProperties protection icons shared with item tooltips.
 PLUGIN.protectionTypes = {
-	{name = "Ballistic", multiplier = "ixperbulletres", flat = "ixflatbulletres"},
-	{name = "Rupture", multiplier = "ixperslashres", flat = "ixflatslashres"},
-	{name = "Radiation", radiation = true},
-	{name = "Thermal", multiplier = "ixperthermalres", flat = "ixflatthermalres"},
-	{name = "Electrical", multiplier = "ixperelectricalres", flat = "ixflatelectricalres"},
-	{name = "Chemical", multiplier = "ixperchemicalres", flat = "ixflatchemicalres"},
-	{name = "Gravitational", multiplier = "ixpergravitationalres", flat = "ixflatgravitationalres"},
-	{name = "Psy", multiplier = "ixperpsyres", flat = "ixflatpsyres"},
+	{name = "Ballistic", icon = "protection/ballistics", multiplier = "ixperbulletres", flat = "ixflatbulletres"},
+	{name = "Rupture", icon = "protection/rupture", multiplier = "ixperslashres", flat = "ixflatslashres"},
+	{name = "Radiation", icon = "protection/radiation", radiation = true},
+	{name = "Thermal", icon = "protection/thermal", multiplier = "ixperthermalres", flat = "ixflatthermalres"},
+	{name = "Electrical", icon = "protection/electrical", multiplier = "ixperelectricalres", flat = "ixflatelectricalres"},
+	{name = "Chemical", icon = "protection/chemical", multiplier = "ixperchemicalres", flat = "ixflatchemicalres"},
+	{
+		name = "Gravitational", icon = "protection/gravitational",
+		multiplier = "ixpergravitationalres", flat = "ixflatgravitationalres",
+	},
+	{name = "Psy", icon = "protection/psychic", multiplier = "ixperpsyres", flat = "ixflatpsyres"},
 }
 
 function PLUGIN:GetStorageEquipmentBounds(width, height, inventoryWidth, inventoryHeight, storageWidth, storageHeight)

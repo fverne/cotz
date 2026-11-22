@@ -49,7 +49,7 @@ end
 ITEM.functions.play = {
     name = "Play Tape",
     tip = "useTip",
-    icon = "icon16/stalker/split.png",
+    icon = "icon16/stalker_grey/split.png",
     OnCanRun = function(item)				
 		return (!IsValid(item.entity) and item:GetData("CurTape", nil) != nil)
 	end,
@@ -81,7 +81,7 @@ ITEM.functions.play = {
 ITEM.functions.insert = {
     name = "Insert Tape",
     tip = "useTip",
-    icon = "icon16/stalker/attach.png",
+    icon = "icon16/stalker_grey/attach.png",
     isMulti = true,
     OnCanRun = function(item)				
 		return (!IsValid(item.entity) and item:GetData("CurTape", nil) == nil)
@@ -143,7 +143,7 @@ ITEM.functions.insert = {
 ITEM.functions.remove = {
     name = "Remove Tape",
     tip = "useTip",
-    icon = "icon16/stalker/detach.png",
+    icon = "icon16/stalker_grey/detach.png",
     OnCanRun = function(item)				
 		return (!IsValid(item.entity) and item:GetData("CurTape", nil) != nil)
 	end,
@@ -163,7 +163,7 @@ ITEM.functions.remove = {
 ITEM.functions.stopsound = {
     name = "Stop Playing",
     tip = "useTip",
-    icon = "icon16/stalker/throw.png",
+    icon = "icon16/stalker_grey/throw.png",
     OnCanRun = function(item)
 		return (!IsValid(item.entity) and item:GetData("CurTape", nil) != nil)
 	end,

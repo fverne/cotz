@@ -28,7 +28,7 @@ end
 
 ITEM.functions.use = {
 	name = "Heal",
-	icon = "icon16/stalker/heal.png",
+	icon = "icon16/stalker_grey/heal.png",
 	OnRun = function(item)
 		if not item:CanUseBandage() then return false end
 
@@ -52,7 +52,7 @@ ITEM.functions.use = {
 
 ITEM.functions.usetarget = {
 	name = "Heal Target",
-	icon = "icon16/stalker/heal.png",
+	icon = "icon16/stalker_grey/heal.png",
 	OnRun = function(item)
 		if not item:CanUseBandage() then return false end
 

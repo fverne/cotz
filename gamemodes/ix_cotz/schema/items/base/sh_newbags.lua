@@ -49,7 +49,7 @@ end
 ITEM.functions.Equip = {
 	name = "Put On",
 	tip = "equipTip",
-	icon = "icon16/stalker/equip.png",
+	icon = "icon16/stalker_grey/equip.png",
 	OnRun = function(item)
 		local char = item.player:GetCharacter()
 		local items = char:GetInventory():GetItems()
@@ -99,7 +99,7 @@ ITEM.functions.Equip = {
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
 	tip = "unequipTip",
-	icon = "icon16/stalker/unequip.png",
+	icon = "icon16/stalker_grey/unequip.png",
 	OnRun = function(item)
 		local char = item.player:GetCharacter()
 

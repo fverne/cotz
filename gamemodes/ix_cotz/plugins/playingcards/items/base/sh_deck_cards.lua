@@ -43,7 +43,7 @@ end
 
 ITEM.functions.PickUp = {
     name = "Take a card",
-    icon = "icon16/stalker/equip.png",
+    icon = "icon16/stalker_grey/equip.png",
     OnRun = function(itemTable)
         local client = itemTable.player
 
@@ -77,7 +77,7 @@ ITEM.functions.PickUp = {
 
 ITEM.functions.Reset = {
     name = "Reset deck order",
-    icon = "icon16/stalker/customize.png",
+    icon = "icon16/stalker_grey/customize.png",
     OnRun = function(itemTable)
         local client = itemTable.player
 
@@ -104,7 +104,7 @@ ITEM.functions.Reset = {
 ITEM.functions.Put2 = {
     name = "Put a card into the deck",
     tip = "useTip",
-    icon = "icon16/stalker/attach.png",
+    icon = "icon16/stalker_grey/attach.png",
     isMulti = true,
     OnCanRun = function(item)
         local client = item.player
@@ -191,7 +191,7 @@ ITEM.functions.Put2 = {
 
 ITEM.functions.Put1 = {
     name = "Put a card into the deck",
-    icon = "icon16/stalker/split.png",
+    icon = "icon16/stalker_grey/split.png",
     OnRun = function(itemTable)
         local client = itemTable.player
 
@@ -238,7 +238,7 @@ ITEM.functions.Put1 = {
 
 ITEM.functions.Shuffle = {
     name = "Shuffle the deck",
-    icon = "icon16/stalker/dice.png",
+    icon = "icon16/stalker_grey/dice.png",
     OnRun = function(itemTable)
         local client = itemTable.player
 

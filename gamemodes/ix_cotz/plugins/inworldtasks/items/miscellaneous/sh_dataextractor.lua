@@ -25,7 +25,7 @@ ITEM.iconCam = {
 
 ITEM.functions.use = {
 	name = "Insert Flash Drive",
-	icon = "icon16/stalker/repair.png",
+	icon = "icon16/stalker_grey/repair.png",
 	OnRun = function(item)
 		local trace = item.player:GetEyeTraceNoCursor()
 		local ent = trace.Entity

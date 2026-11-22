@@ -44,11 +44,17 @@ local function add(rows, id, label, kind, value, signed, duration)
 
 	local text = label .. ": " .. ix.itemProperties.Format(kind, value, signed)
 	if duration then text = text .. " for " .. ix.itemProperties.Format("duration", duration) end
-	rows[#rows + 1] = {id = id, text = text}
+	local row = {id = id, text = text}
+	rows[#rows + 1] = row
+
+	return row
 end
 
 local function addText(rows, id, text)
-	rows[#rows + 1] = {id = id, text = text}
+	local row = {id = id, text = text}
+	rows[#rows + 1] = row
+
+	return row
 end
 
 function ix.itemProperties.GetProtection(item)
@@ -122,6 +128,41 @@ local EFFECTS = {
 	buff_hijump = {"Jump boost", "jumpSpeed", 1},
 }
 
+-- Client icon keys for effect rows, whose row IDs are positional.
+local EFFECT_ICONS = {
+	buff_slowheal = "effect/healing",
+	buff_rapidheal = "effect/healing",
+	buff_staminarestore = "effect/stamina",
+	buff_radiationremoval = "effect/radiationRemoval",
+	debuff_radiation = "effect/radiationExposure",
+	buff_psyheal = "effect/psychicRecovery",
+	debuff_psy = "effect/psychicDamage",
+	buff_psyblock = "effect/psychicRecovery",
+	buff_psysuppress = "effect/psychicRecovery",
+	buff_meditation = "effect/psychicRecovery",
+	buff_hijump = "effect/movement",
+	buff_sprintboost = "effect/movement",
+	debuff_psypillmovement = "effect/movementImpairment",
+}
+
+-- CW 2.0 fire mode keys grouped by firing style; a weapon is shown by its fastest available group.
+local FIRE_MODE_GROUPS = {
+	auto = "auto", ["2burst"] = "burst", ["3burst"] = "burst", semi = "semi",
+	pump = "pump", double = "break", ["break"] = "break", bolt = "bolt",
+}
+local FIRE_MODE_PRIORITY = {"auto", "burst", "semi", "pump", "break", "bolt"}
+
+function ix.itemProperties.GetFireModeGroup(weapon)
+	local available = {}
+	for _, mode in ipairs(weapon.FireModes or {}) do
+		local group = FIRE_MODE_GROUPS[mode]
+		if group then available[group] = true end
+	end
+	for _, group in ipairs(FIRE_MODE_PRIORITY) do
+		if available[group] then return group end
+	end
+end
+
 function ix.itemProperties.GetEffects(item)
 	local rows = {}
 	local effects = item.GetPropertyEffects and item:GetPropertyEffects() or {}
@@ -147,6 +188,8 @@ function ix.itemProperties.GetEffects(item)
 		elseif effect.buff == "buff_meditation" then
 			addText(rows, id, "Meditation while stationary")
 		end
+		local row = rows[#rows]
+		if row and row.id == id then row.icon = EFFECT_ICONS[effect.buff] end
 	end
 
 	return rows
@@ -254,7 +297,8 @@ function ix.itemProperties.GetRows(item)
 				local delay = weapon.FireDelay or primary.Delay
 				local rpm = primary.RPM or (delay and delay > 0 and 60 / delay)
 				if rpm then
-					addText(rows, "fireRate", "Cyclic rate: " .. ix.itemProperties.Format("number", rpm) .. " rpm")
+					local text = "Cyclic rate: " .. ix.itemProperties.Format("number", rpm) .. " rpm"
+					addText(rows, "fireRate", text).variant = ix.itemProperties.GetFireModeGroup(weapon)
 				end
 			end
 		end

@@ -10,6 +10,7 @@ ITEM.rarity = 7
 ITEM.baseweight = 1.200
 ITEM.varweight  = 0.300
 ITEM.restoreduration = 300
+ITEM.meditationRadius = 400
 
 ITEM.JumpPower = 400
 
@@ -17,13 +18,26 @@ ITEM.exRender = true
 
 ITEM.functions.use = {
 	name = "Meditate",
- 	icon = "icon16/stalker/heal.png",
+ 	icon = "icon16/stalker_grey/heal.png",
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
-        item.player:AddBuff("buff_meditation", item.restoreduration, { min = 1, max = 3, dur = item.restoreduration, aoe = 400, aoeMult = 1, healthNoStop = true, damageNoStop = true })
+        item.player:AddBuff("buff_meditation", item.restoreduration, { min = 1, max = 3, dur = item.restoreduration, aoe = item.meditationRadius, aoeMult = 1, healthNoStop = true, damageNoStop = true })
         return false
     end,
     OnCanRun = function(item)
         return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetPropertyEffects()
+	return {
+		{buff = "buff_meditation", duration = self.restoreduration, min = 1, max = 3},
+	}
+end
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "meditationRadius", text = "Area of effect: "
+			.. ix.itemProperties.Format("distance", self.meditationRadius)},
+	}
+end

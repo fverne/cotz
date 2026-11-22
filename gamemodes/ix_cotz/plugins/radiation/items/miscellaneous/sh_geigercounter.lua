@@ -42,7 +42,7 @@ end
 ITEM.functions.Equip = { -- sorry, for name order.
 	name = "Attach to Belt",
 	tip = "useTip",
-	icon = "icon16/stalker/equip.png",
+	icon = "icon16/stalker_grey/equip.png",
 	sound = "stalkersound/inv_dozimetr.ogg",
 	OnRun = function(item)
 		item:Equip(item.player)
@@ -60,7 +60,7 @@ ITEM.functions.Equip = { -- sorry, for name order.
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Detach from Belt",
 	tip = "equipTip",
-	icon = "icon16/stalker/unequip.png",
+	icon = "icon16/stalker_grey/unequip.png",
 	OnRun = function(item)
 		item:UnEquip(item.player)
 

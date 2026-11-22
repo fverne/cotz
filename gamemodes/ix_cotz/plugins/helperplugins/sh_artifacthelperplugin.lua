@@ -12,7 +12,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
         if dmginfo:IsDamageType(DMG_SHOCK) then
             local cap = target:GetCharacter():GetInventory():HasItem("artifact_capacitor")
             if cap and cap:GetData("cooldown", 0) < os.time() then
-                cap:SetData("cooldown", os.time() + 5)
+                cap:SetData("cooldown", os.time() + cap.absorbCooldown)
                 dmginfo:SetDamage(0)
                 ix.chat.Send(target, "iteminternal", "'s Capacitor artifact absorbs the shock.", false)
                 return
@@ -20,15 +20,15 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
         else
             local halo = target:GetCharacter():GetInventory():HasItem("artifact_halo")
             if halo and halo:GetData("cooldown", 0) < os.time() and (target:Health() - dmginfo:GetDamage()) <= 0 and target:Alive() then
-                if math.random(1, 100) <= 10 then
-                    halo:SetData("cooldown", os.time() + 15)
+                if math.random(1, 100) <= halo.saveChance then
+                    halo:SetData("cooldown", os.time() + halo.saveCooldown)
                     dmginfo:SetDamage(0)
                     target:GodEnable()
                     ix.chat.Send(target, "iteminternal", "'s Halo flares brilliantly, defying death.", false)
                     ParticleEffect( "aurora_shockwave", target:GetPos() + Vector(0,0,16), Angle( 0, 0, 0 ) )
                     target:ScreenFade(SCREENFADE.IN, Color(255, 255, 255, 150), 0.5, 0.5)
                     target:EmitSound("plasma_impact1.wav")
-                    timer.Simple(5, function() if IsValid(target) then target:GodDisable() end end)
+                    timer.Simple(halo.invulnerabilityDuration, function() if IsValid(target) then target:GodDisable() end end)
                 end
             end
         end

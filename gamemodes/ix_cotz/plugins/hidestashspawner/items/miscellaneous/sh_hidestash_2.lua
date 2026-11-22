@@ -37,7 +37,7 @@ end
 
 ITEM.functions.use = {
 	name = "Check for information",
-	icon = "icon16/stalker/unlock.png",
+	icon = "icon16/stalker_grey/unlock.png",
 	OnRun = function(item)
 		local loot = { ix.util.GetRandomItemFromPool(item.CustomSpawngroup or "ix_entbox_drops") }
 		local spawnpoint = ix.plugin.list["hidestashspawner"]:GetPoint(item.mapToGenerateStashOn)
@@ -78,7 +78,7 @@ ITEM.functions.use = {
 
 ITEM.functions.stashpointer = {
 	name = "Check stash coordinates",
-	icon = "icon16/stalker/throw.png",
+	icon = "icon16/stalker_grey/throw.png",
 	OnRun = function(item)
 		if game.GetMap() == item:GetData("map", "gm_construct") then
 			item.player:Notify( "You take a close look at the stash coordinates..." )

@@ -9,7 +9,7 @@ ITEM.flag = "A"
 
 ITEM.functions.use = {
 	name = "Revive",
-	icon = "icon16/stalker/unlock.png",
+	icon = "icon16/stalker_grey/unlock.png",
 	OnRun = function(item)
 		local ply = item.player
 		local traceRes = ply:GetEyeTrace()

@@ -25,7 +25,7 @@ ITEM.iconCam = {
 
 ITEM.functions.use = {
 	name = "Take Measurement",
-	icon = "icon16/stalker/repair.png",
+	icon = "icon16/stalker_grey/repair.png",
 	OnRun = function(item)
 		ix.chat.Send(item.player, "iteminternal", "holds out their RF receiver, taking some measurements.", false)
 
@@ -58,7 +58,7 @@ ITEM.functions.use = {
 
 ITEM.functions.zCheck = {
 	name = "Check Assigned Points",
-	icon = "icon16/stalker/repair.png",
+	icon = "icon16/stalker_grey/repair.png",
 	OnRun = function(item)
 		if (item:GetData("map", "") == game.GetMap()) then
 			ix.chat.Send(item.player, "iteminternal", "looks at their RF receiver.", false)
@@ -79,7 +79,7 @@ ITEM.functions.zCheck = {
 
 -- ITEM.functions.zzDestroy = {
 -- 	name = "Destroy Item",
--- 	icon = "icon16/stalker/drop.png",
+-- 	icon = "icon16/stalker_grey/drop.png",
 -- 	OnRun = function(item)
 -- 		return true
 -- 	end,

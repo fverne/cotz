@@ -54,7 +54,7 @@ function ITEM:DecideFunction()
 	if ITEM.thirst > 0 or ITEM.isDrink then
 		ITEM.functions.use = {
 			name = "Drink",
-			icon = "icon16/stalker/drink.png",
+			icon = "icon16/stalker_grey/drink.png",
 			OnCanRun = function(item)
 
 				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
@@ -108,7 +108,7 @@ function ITEM:DecideFunction()
 	elseif ITEM.hunger > 0 then
 		ITEM.functions.use = {
 			name = "Eat",
-			icon = "icon16/stalker/eat.png",
+			icon = "icon16/stalker_grey/eat.png",
 			OnCanRun = function(item)
 
 				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
@@ -157,7 +157,7 @@ function ITEM:DecideFunction()
 	elseif ITEM.hunger > 0 and ITEM.thirst > 0 then
 		ITEM.functions.use = {
 			name = "Consume",
-			icon = "icon16/stalker/eat.png",
+			icon = "icon16/stalker_grey/eat.png",
 			OnCanRun = function(item)
 
 				return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()

@@ -22,7 +22,7 @@ end
 ITEM.functions.setavatar = { -- sorry, for name order.
 	name = "Select Avatar",
 	tip = "useTip",
-	icon = "icon16/stalker/customize.png",
+	icon = "icon16/stalker_grey/customize.png",
 	OnRun = function(item)
 		item.player:RequestString("Set Avatar", "What avatar do you want this PDA to use? Select any material path.", function(text)
 			if text != "" then
@@ -42,7 +42,7 @@ ITEM.functions.setavatar = { -- sorry, for name order.
 ITEM.functions.setnickname = { -- sorry, for name order.
 	name = "Set your nickname",
 	tip = "useTip",
-	icon = "icon16/stalker/customize.png",
+	icon = "icon16/stalker_grey/customize.png",
 	OnRun = function(item)
 		item.player:RequestString("Set Nickname", "What nickname do you want to use with this PDA?", function(text)
 			item:SetData("nickname", text)

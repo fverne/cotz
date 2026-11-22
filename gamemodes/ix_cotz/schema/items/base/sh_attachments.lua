@@ -32,7 +32,7 @@ end
 ITEM.functions.use = {
 	name = "Install",
 	tip = "useTip",
-	icon = "icon16/stalker/attach.png",
+	icon = "icon16/stalker_grey/attach.png",
 	isMulti = true,
 	multiOptions = function(item, client)
 		local targets = {}

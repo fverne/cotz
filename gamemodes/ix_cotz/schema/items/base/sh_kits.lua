@@ -43,7 +43,7 @@ function ITEM:PopulateTooltip(tooltip)
 end
 
 ITEM.functions.Open = {
-    icon = "icon16/stalker/unlock.png",
+    icon = "icon16/stalker_grey/unlock.png",
     sound = "stalkersound/inv_ruck.mp3",
     OnRun = function(item)
         local position = item.player:GetItemDropPos()

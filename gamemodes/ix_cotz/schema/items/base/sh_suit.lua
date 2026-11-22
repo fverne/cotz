@@ -61,7 +61,7 @@ end
 
 ITEM.functions.InstallFilter = {
 	name = "Swap Gas Tank",
-	icon = "icon16/stalker/attach.png",
+	icon = "icon16/stalker_grey/attach.png",
 	isMulti = true,
 	multiOptions = function(item, client)
 		return ix.util.GetGasmaskFilterOptions(item, client)
@@ -331,7 +331,7 @@ end
 ITEM.functions.zCustomizeSkin = {
 	name = "Customize Skin",
 	tip = "useTip",
-	icon = "icon16/stalker/customize.png",
+	icon = "icon16/stalker_grey/customize.png",
 	isMulti = true,
 	multiOptions = function(item, client)
 		local targets = {}
@@ -379,7 +379,7 @@ end)
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
 	tip = "unequipTip",
-	icon = "icon16/stalker/unequip.png",
+	icon = "icon16/stalker_grey/unequip.png",
 	OnRun = function(item)		
 		ix.util.PlayerPerformItemAction(item.player, item, "Taking off...", 6, function(ply)
 			item:RemoveOutfit(ply)
@@ -402,7 +402,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 ITEM.functions.Equip = {
 	name = "Put On",
 	tip = "equipTip",
-	icon = "icon16/stalker/equip.png",
+	icon = "icon16/stalker_grey/equip.png",
 	OnRun = function(item)
 		local client = item.player
 		local char = client:GetCharacter()
@@ -488,7 +488,7 @@ ITEM.functions.Equip = {
 
 ITEM.functions.detach = {
 	name = "Detach",
-	icon = "icon16/stalker/detach.png",
+	icon = "icon16/stalker_grey/detach.png",
 	isMulti = true,
 	multiOptions = function(item, client)
 		local targets = {}

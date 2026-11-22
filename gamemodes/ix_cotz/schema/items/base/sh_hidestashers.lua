@@ -65,7 +65,7 @@ end
 -- ITEM.functions.hidestash = {
 --     name = "Hide the Stash",
 --     tip = "equipTip",
---     icon = "icon16/stalker/drop.png",
+--     icon = "icon16/stalker_grey/drop.png",
 --     OnRun = function(item)
 --         local trace = item.player:GetEyeTraceNoCursor()
 --         local texturecheck = false
@@ -130,7 +130,7 @@ end
 ITEM.functions.unhidestash = {
     name = "Search for a Stash",
     tip = "equipTip",
-    icon = "icon16/stalker/open.png",
+    icon = "icon16/stalker_grey/open.png",
     OnRun = function(item)
 		local character = item.player:GetCharacter()
 		if not character or item.invID ~= character:GetInventory():GetID() then return false end

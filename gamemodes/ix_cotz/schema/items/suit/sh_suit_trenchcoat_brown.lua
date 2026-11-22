@@ -43,7 +43,7 @@ ITEM.bodyGroups = {
 ITEM.functions.Lift = {
 	name = "Lift Hood",
 	tip = "equipTip",
-	icon = "icon16/stalker/customize.png",
+	icon = "icon16/stalker_grey/customize.png",
 	OnRun = function(item)
 	if item.player:GetBodygroup(1) != 3 then
 		item.player:SetBodygroup(1, 3)

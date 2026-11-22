@@ -138,9 +138,18 @@ function PANEL:Init()
 	for index, definition in ipairs(PLUGIN.protectionTypes) do
 		local statistic = self.footer:Add("DPanel")
 		statistic.name = definition.name
+		statistic.icon = ix.itemProperties.GetIcon(definition.icon)
 		statistic.fraction = 0
 		statistic.Paint = function(this, width, height)
-			draw.SimpleText(this.name, "cotzEquipmentSmall", 0, 0, COLORS.text)
+			local nameX = 0
+			if this.icon then
+				local iconSize = draw.GetFontHeight("cotzEquipmentSmall")
+				surface.SetMaterial(this.icon.material)
+				surface.SetDrawColor(this.icon.color)
+				surface.DrawTexturedRect(0, 0, iconSize, iconSize)
+				nameX = iconSize + math.max(2, PLUGIN.uiScale * 4)
+			end
+			draw.SimpleText(this.name, "cotzEquipmentSmall", nameX, 0, COLORS.text)
 			draw.SimpleText(this.value or "--", "cotzEquipmentSmall", width, 0, COLORS.text, TEXT_ALIGN_RIGHT)
 			drawSegments(0, height - math.max(4, PLUGIN.uiScale * 5), width,
 				math.max(4, PLUGIN.uiScale * 5), this.fraction)

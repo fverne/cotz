@@ -9,3 +9,16 @@ ITEM.flag = "A"
 ITEM.rarity = 5
 ITEM.baseweight = 1.200
 ITEM.varweight  = 0.125
+
+ITEM.saveChance = 10
+ITEM.invulnerabilityDuration = 5
+ITEM.saveCooldown = 15
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "passiveEffect", text = "Passive: " .. ix.itemProperties.Format("percent", self.saveChance)
+			.. " chance to survive a lethal hit, then invulnerable for "
+			.. ix.itemProperties.Format("duration", self.invulnerabilityDuration)},
+		{id = "cooldown", text = "Recovery cooldown: " .. ix.itemProperties.Format("duration", self.saveCooldown)},
+	}
+end

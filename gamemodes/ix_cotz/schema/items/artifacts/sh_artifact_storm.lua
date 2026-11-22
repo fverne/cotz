@@ -10,6 +10,10 @@ ITEM.rarity = 5
 ITEM.baseweight = 0.700
 ITEM.varweight  = 0.250
 ITEM.JumpPower = 300
+
+ITEM.sprintMultiplier = 1.6
+ITEM.sprintDamage = 5
+
 ITEM.exRender = true
 
 ITEM.iconCam = {
@@ -26,7 +30,7 @@ ITEM.functions.use = {
         if item.player:HasBuff("buff_lightningsprint") then
         	item.player:RemoveBuff("buff_lightningsprint")
         else
-        	item.player:AddBuff("buff_lightningsprint", -1, { dps = 5, multiplier = 1.6 })
+        	item.player:AddBuff("buff_lightningsprint", -1, { dps = item.sprintDamage, multiplier = item.sprintMultiplier })
         end
         return false
     end,
@@ -34,3 +38,13 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "use", text = "Use: Toggle lightning sprint until out of breath or at 10 HP"},
+		{id = "sprintSpeed", text = "Sprint speed: "
+			.. ix.itemProperties.Format("percent", (self.sprintMultiplier - 1) * 100, true), icon = "effect/movement"},
+		{id = "sprintDamage", text = "Electrical damage: "
+			.. ix.itemProperties.Format("health", -self.sprintDamage) .. " per second"},
+	}
+end

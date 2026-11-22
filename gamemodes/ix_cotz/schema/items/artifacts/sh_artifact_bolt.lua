@@ -24,6 +24,6 @@ ITEM.iconCam = {
 
 function ITEM:GetIndividualProperties()
 	return {
-		{id = "passiveEffect", text = "While carried, another bolt appears in your hand as you throw it."},
+		{id = "passiveEffect", text = "Passive: Infinite detector bolts while carried"},
 	}
 end

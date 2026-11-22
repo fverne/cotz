@@ -34,3 +34,11 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "use", text = "Use: Travel to your saved spawn point"},
+		{id = "application", text = "Travel time: " .. ix.itemProperties.Format("duration", 30)},
+		{id = "cooldown", text = "Cooldown: " .. ix.itemProperties.Format("duration", 15 * 60)},
+	}
+end

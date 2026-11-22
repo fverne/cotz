@@ -26,7 +26,7 @@ ITEM.iconCam = {
 
 ITEM.functions.use = {
 	name = "Stash",
-	icon = "icon16/stalker/repair.png",
+	icon = "icon16/stalker_grey/repair.png",
 	OnRun = function(item)
 
 		local stashdata = item:GetData("stashdata", {})
@@ -53,7 +53,7 @@ ITEM.functions.use = {
 
 ITEM.functions.zCheck = {
 	name = "Check stash location",
-	icon = "icon16/stalker/repair.png",
+	icon = "icon16/stalker_grey/repair.png",
 	OnRun = function(item)
 		if (item:GetData("map", "") == game.GetMap()) then
 			ix.chat.Send(item.player, "iteminternal", "checks his PDA notes.", false)
@@ -74,7 +74,7 @@ ITEM.functions.zCheck = {
 
 -- ITEM.functions.zzDestroy = {
 -- 	name = "Destroy Item",
--- 	icon = "icon16/stalker/drop.png",
+-- 	icon = "icon16/stalker_grey/drop.png",
 -- 	OnRun = function(item)
 -- 		return true
 -- 	end,

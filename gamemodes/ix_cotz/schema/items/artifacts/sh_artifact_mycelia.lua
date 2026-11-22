@@ -10,13 +10,15 @@ ITEM.rarity = 3
 ITEM.baseweight = 1.500
 ITEM.varweight  = 0.500
 
+ITEM.useCooldown = 15 * 60
+
 ITEM.functions.use = {
 	name = "Eat",
     icon = "icon16/help.png",
     sound = "stalkersound/inv_eat_mutant_food.mp3",
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
-        	item:SetData("cooldown", os.time()+(60*15) ) --15 minutes
+        	item:SetData("cooldown", os.time() + item.useCooldown )
 
             ix.chat.Send(item.player, "iteminternal", "scrapes some mold off their "..item.name.." and eats it.", false)
 
@@ -37,5 +39,11 @@ ITEM.functions.use = {
 function ITEM:GetPropertyEffects()
 	return {
 		{buff = "debuff_radiation", duration = 10, amount = 0.25},
+	}
+end
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "cooldown", text = "Cooldown: " .. ix.itemProperties.Format("duration", self.useCooldown)},
 	}
 end

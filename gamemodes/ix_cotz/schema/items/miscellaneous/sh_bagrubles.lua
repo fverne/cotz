@@ -26,7 +26,7 @@ end
 
 ITEM.functions.use = {
 	name = "Put in Wallet",
-	icon = "icon16/stalker/sell.png",
+	icon = "icon16/stalker_grey/sell.png",
 	sound = "stalkersound/money_1.mp3",
 	OnRun = function(item)
 		local position = item.player:GetItemDropPos()

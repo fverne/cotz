@@ -11,10 +11,13 @@ ITEM.rarity = 3
 ITEM.baseweight = 1.500
 ITEM.varweight  = 0.550
 
+ITEM.absorbCooldown = 5
+
 
 function ITEM:GetIndividualProperties()
 	return {
-		{id = "passiveEffect", text = "Protects from electrical damage."},
-        {id = "cooldown", text = "Recovery cooldown: 5 s"},
+		{id = "passiveEffect", text = "Passive: Absorbs an electrical shock while carried",
+			icon = "protection/electrical"},
+		{id = "cooldown", text = "Recovery cooldown: " .. ix.itemProperties.Format("duration", self.absorbCooldown)},
 	}
 end

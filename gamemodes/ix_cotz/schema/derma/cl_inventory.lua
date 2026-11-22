@@ -198,7 +198,7 @@ function PANEL:DoRightClick()
 					end
 					itemTable.player = nil
 				end)
-				subMenuOption:SetImage(v.icon or "icon16/brick.png")
+				ix.cotzIcons.SetMenuImage(subMenuOption, v.icon or "icon16/brick.png")
 
 				if v.multiOptions then
 					local options = isfunction(v.multiOptions) and v.multiOptions(itemTable, LocalPlayer())
@@ -225,7 +225,7 @@ function PANEL:DoRightClick()
 					end
 				end
 			else
-				menu:AddOption(L(v.name or k), function()
+				local option = menu:AddOption(L(v.name or k), function()
 					itemTable.player = LocalPlayer()
 					local send = true
 
@@ -241,7 +241,8 @@ function PANEL:DoRightClick()
 						inventoryAction(k, itemTable.id, inventory)
 					end
 					itemTable.player = nil
-				end):SetImage(v.icon or "icon16/brick.png")
+				end)
+				ix.cotzIcons.SetMenuImage(option, v.icon or "icon16/brick.png")
 			end
 		end
 
@@ -266,7 +267,7 @@ function PANEL:DoRightClick()
 				end
 				itemTable.player = nil
 			end)
-			subMenuOption:SetImage("icon16/stalker/drop.png")
+			ix.cotzIcons.SetMenuImage(subMenuOption, "icon16/stalker_grey/drop.png")
 
 			local dropInfo = itemTable.functions.drop
 			local dropOption = subMenu:AddOption("Drop Persistently", function()
@@ -286,7 +287,7 @@ function PANEL:DoRightClick()
 				end
 				itemTable.player = nil
 			end)
-			dropOption:SetImage("icon16/stalker/drop.png")
+			ix.cotzIcons.SetMenuImage(dropOption, "icon16/stalker_grey/drop.png")
 		end
 
 		menu:Open()

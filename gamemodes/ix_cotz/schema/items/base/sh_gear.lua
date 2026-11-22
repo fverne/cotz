@@ -156,7 +156,7 @@ end
 
 ITEM.functions.InstallFilter = {
 	name = "Install Filter",
-	icon = "icon16/stalker/attach.png",
+	icon = "icon16/stalker_grey/attach.png",
 	isMulti = true,
 	multiOptions = function(item, client)
 		return ix.util.GetGasmaskFilterOptions(item, client)
@@ -173,7 +173,7 @@ ITEM.functions.InstallFilter = {
 
 ITEM.functions.RemoveFilter = {
 	name = "Remove Filter",
-	icon = "icon16/stalker/detach.png",
+	icon = "icon16/stalker_grey/detach.png",
 	OnCanRun = function(item)
 		return ix.util.CanChangeGasmaskFilter(item, item.player) and item:GetFilterCondition() ~= false
 	end,
@@ -208,7 +208,7 @@ end)
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Take Off",
 	tip = "unequipTip",
-	icon = "icon16/stalker/unequip.png",
+	icon = "icon16/stalker_grey/unequip.png",
 	OnRun = function(item)
 		ix.util.PlayerPerformItemAction(item.player, item, "Taking off...", 4, function(ply)
 			item:SetData("equip", false)
@@ -233,7 +233,7 @@ ITEM.functions.EquipUn = { -- sorry, for name order.
 ITEM.functions.Equip = {
 	name = "Put On",
 	tip = "equipTip",
-	icon = "icon16/stalker/equip.png",
+	icon = "icon16/stalker_grey/equip.png",
 	OnRun = function(item)
 		local char = item.player:GetCharacter()
 		local items = char:GetInventory():GetItems()

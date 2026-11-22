@@ -37,7 +37,8 @@ Journal space is reserved only for an actual `ixCharacterJournalPanel`; transien
 subpanel controls during menu creation do not reduce the equipment width.
 The footer shows ballistic, rupture, radiation, thermal, electrical, chemical, gravitational and psy
 percentage reduction. Its eight statistics wrap into rows with room for the longer protection names;
-the slot cards scroll above the fixed footer.
+the slot cards scroll above the fixed footer. Each name follows the same tinted protection icon as item
+tooltips, read through `ix.itemProperties.GetIcon` with the `icon` key in `PLUGIN.protectionTypes`.
 Its tooltips report flat absorption separately, matching the existing damage formulas.
 Values refresh while the page is visible, and real item durability appears on cards
 where that state exists. The summary uses the same resistance values as damage calculations.

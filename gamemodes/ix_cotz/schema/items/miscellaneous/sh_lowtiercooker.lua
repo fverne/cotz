@@ -48,7 +48,7 @@ end
 ITEM.functions.use = {
   name = "Cook",
   tip = "useTip",
-  icon = "icon16/stalker/eat.png",
+  icon = "icon16/stalker_grey/eat.png",
   isMulti = true,
   multiOptions = function(item, client)
     local targets = {}
@@ -88,7 +88,7 @@ ITEM.functions.use = {
 ITEM.functions.useAll = {
   name = "Cook All",
   tip = "useTip",
-  icon = "icon16/stalker/eat.png",
+  icon = "icon16/stalker_grey/eat.png",
   OnCanRun = function(item)
     return (!IsValid(item.entity)) and item.invID == item.player:GetCharacter():GetInventory():GetID()
   end,

@@ -10,13 +10,15 @@ ITEM.rarity = 6
 ITEM.baseweight = 0.400
 ITEM.varweight  = 0.030
 
+ITEM.useCooldown = 300
+
 ITEM.functions.use = {
 	name = "Inspect",
     icon = "icon16/help.png",
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
-        	item:SetData("cooldown", os.time()+300 ) --5 minutes
+        	item:SetData("cooldown", os.time() + item.useCooldown )
 			ix.util.PlayerPerformItemAction(item.player, item, "Counting out the beads...", 10, function(player)
                 player:AddBuff("buff_psyblock", 60, { amount = 50 })
             end)
@@ -32,5 +34,11 @@ ITEM.functions.use = {
 function ITEM:GetPropertyEffects()
 	return {
 		{buff = "buff_psyblock", duration = 60, amount = 50},
+	}
+end
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "cooldown", text = "Cooldown: " .. ix.itemProperties.Format("duration", self.useCooldown)},
 	}
 end

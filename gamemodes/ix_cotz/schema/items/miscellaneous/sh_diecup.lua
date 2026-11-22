@@ -22,7 +22,7 @@ if (CLIENT) then
 end
 
 ITEM.functions.Roll = {
-	icon = "icon16/stalker/dice.png",
+	icon = "icon16/stalker_grey/dice.png",
 	sound = "stalkersound/inv_slot.mp3",
 	OnRun = function(item)
 		local client = item.player

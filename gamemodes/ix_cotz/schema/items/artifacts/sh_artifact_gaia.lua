@@ -17,7 +17,7 @@ ITEM.exRender = true
 
 ITEM.functions.use = {
 	name = "Meditate",
- 	icon = "icon16/stalker/heal.png",
+ 	icon = "icon16/stalker_grey/heal.png",
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
         if item.player:Health() < item.player:GetMaxHealth() then

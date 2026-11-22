@@ -10,13 +10,15 @@ ITEM.rarity = 4
 ITEM.baseweight = 0.450
 ITEM.varweight  = 0.100
 
+ITEM.useCooldown = 15
+
 ITEM.functions.use = {
 	name = "Grasp",
     icon = "icon16/help.png",
     sound = "physics/metal/chain_impact_soft2.wav",
     OnRun = function(item)
         if(item:GetData("cooldown",0) < os.time())then
-        	item:SetData("cooldown", os.time() + 15 )
+        	item:SetData("cooldown", os.time() + item.useCooldown )
             item.player:RemoveBuff( "buff_hijump" , {})
             item.player:AddBuff("buff_hijump", 5, { amount = 200 })
         end
@@ -31,5 +33,11 @@ ITEM.functions.use = {
 function ITEM:GetPropertyEffects()
 	return {
 		{buff = "buff_hijump", duration = 5, amount = 200},
+	}
+end
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "cooldown", text = "Cooldown: " .. ix.itemProperties.Format("duration", self.useCooldown)},
 	}
 end

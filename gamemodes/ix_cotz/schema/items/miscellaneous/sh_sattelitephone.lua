@@ -9,7 +9,7 @@ ITEM.flag = "1"
 
 ITEM.functions.connection = { -- sorry, for name order.
 	name = "Contact Connections",
-	icon = "icon16/stalker/sell.png",
+	icon = "icon16/stalker_grey/sell.png",
 	OnRun = function(item)
 		
 		netstream.Start( item.player, "traderupmenu", item.player)
@@ -22,7 +22,7 @@ ITEM.functions.connection = { -- sorry, for name order.
 
 ITEM.functions.storage = { -- sorry, for name order.
 	name = "Open Traders Storage",
-	icon = "icon16/stalker/unlock.png",
+	icon = "icon16/stalker_grey/unlock.png",
 	OnRun = function(item)
 		
 		if item.player:GetCharacter():GetData("stashid", nil) == nil then

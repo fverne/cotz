@@ -28,8 +28,8 @@ end
 
 ITEM.functions.use = {
 	name = "Stare",
-    icon = "icon16/help.png",
-    sound = "icon16/stalker/read.png",
+    icon = "icon16/stalker/read.png",
+    sound = "",
 	OnRun = function(item)
 		local destination = {Vector(-7182.672852, -10445.850586, 4972.751465), Angle(), "rp_marsh_cs"}
 		ix.util.UseTravelArtifact(item, destination, "Reminiscing")
@@ -40,3 +40,11 @@ ITEM.functions.use = {
         return !IsValid(item.entity) and item:GetData("cooldown",0) < os.time() and item.invID == item.player:GetCharacter():GetInventory():GetID()
     end
 }
+
+function ITEM:GetIndividualProperties()
+	return {
+		{id = "use", text = "Use: Travel to the starting spawn point"},
+		{id = "application", text = "Travel time: " .. ix.itemProperties.Format("duration", 30)},
+		{id = "cooldown", text = "Cooldown: " .. ix.itemProperties.Format("duration", 15 * 60)},
+	}
+end

@@ -23,7 +23,7 @@ ITEM.iconCam = {
 
 ITEM.functions.use = {
 	name = "Swallow",
-	icon = "icon16/stalker/heal.png",
+	icon = "icon16/stalker_grey/heal.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 		item.player:AddBuff("buff_staminarestore", 100, { amount = 2 })

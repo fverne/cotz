@@ -40,7 +40,7 @@ end
 ITEM.functions.Equip = { -- sorry, for name order.
 	name = "Attach to Head",
 	tip = "useTip",
-	icon = "icon16/stalker/equip.png",
+	icon = "icon16/stalker_grey/equip.png",
 	OnRun = function(item)
 		local client = item.player
 		local char = client:GetCharacter()
@@ -80,7 +80,7 @@ ITEM.functions.Equip = { -- sorry, for name order.
 ITEM.functions.EquipUn = { -- sorry, for name order.
 	name = "Detach from Head",
 	tip = "equipTip",
-	icon = "icon16/stalker/unequip.png",
+	icon = "icon16/stalker_grey/unequip.png",
 	OnRun = function(item)
 		local client = item.player
 		item:SetData("equip", false)

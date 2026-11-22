@@ -38,7 +38,7 @@ end
 
 ITEM.functions.usetarget = {
 	name = "Unlock Ecobunker Door",
-	icon = "icon16/stalker/unlock.png",
+	icon = "icon16/stalker_grey/unlock.png",
 	OnRun = function(item)
 		local data = {}
 			data.start = item.player:GetShootPos()

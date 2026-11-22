@@ -51,7 +51,7 @@ end
 
 ITEM.functions.zFill = {
 	name = "Fill",
-    icon = "icon16/stalker/drink.png",
+    icon = "icon16/stalker_grey/drink.png",
     sound = "stalkersound/inv_properties.mp3",
     OnRun = function(item)
         ix.chat.Send(item.player, "iteminternal", "Fills their "..item.name.." with dirty water.", false)
@@ -96,7 +96,7 @@ ITEM.functions.zFilter ={
 ITEM.functions.zCook = {
 	name = "Boil",
 	tip = "useTip",
-	icon = "icon16/stalker/attach.png",
+	icon = "icon16/stalker_grey/attach.png",
 	isMulti = true,
 	multiOptions = function(item, client)
 		local targets = {}
@@ -142,7 +142,7 @@ ITEM.functions.zCook = {
 
 ITEM.functions.use = {
 	name = "Drink",
-    icon = "icon16/stalker/drink.png",
+    icon = "icon16/stalker_grey/drink.png",
     sound = "stalkersound/inv_flask.mp3",
     OnRun = function(item)
         ix.chat.Send(item.player, "iteminternal", "drinks from their "..item.name, false)

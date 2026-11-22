@@ -10,7 +10,7 @@ ITEM.data = { customName = ITEM.name, customDesc = ITEM.description, isUsed = 0}
 ITEM.functions.Custom = {
 	name = "Assign",
 	tip = "Assign card to someone",
-	icon = "icon16/stalker/customize.png",
+	icon = "icon16/stalker_grey/customize.png",
 	OnRun = function(item)
 		local client = item.player
 		client:RequestString("Change Name", "What organization does the card belong to?", function(text)
@@ -32,7 +32,7 @@ ITEM.functions.Custom = {
 }
 
 ITEM.functions.Show = {
-	icon = "icon16/stalker/read.png",
+	icon = "icon16/stalker_grey/read.png",
 	OnRun = function(item)
 		ix.chat.Send(item.player, "iteminternal", "shows their "..item:GetData("customName", "Unknown")..", "..item:GetData("customDesc", "Unknown")..".", false)
 		

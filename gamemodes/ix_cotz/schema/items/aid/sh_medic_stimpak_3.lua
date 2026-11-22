@@ -29,7 +29,7 @@ end
 
 ITEM.functions.use = {
 	name = "Inject",
-	icon = "icon16/stalker/heal.png",
+	icon = "icon16/stalker_grey/heal.png",
 	OnRun = function(item)
 		local quantity = item:GetData("quantity", item.quantity)
 
@@ -53,7 +53,7 @@ ITEM.functions.use = {
 
 ITEM.functions.usetarget = {
 	name = "Inject Target",
-	icon = "icon16/stalker/heal.png",
+	icon = "icon16/stalker_grey/heal.png",
 	OnRun = function(item)
 		local data = {}
 			data.start = item.player:GetShootPos()

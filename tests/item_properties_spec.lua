@@ -111,6 +111,7 @@ for tier, health in ipairs({6, 9, 12}) do
 end
 local antirad = item(root .. "aid/sh_medic_antirad_1.lua", "base_aid")
 check(rowsById(antirad)["effect/1"] == "Radiation removal: -125 mSv/s for 120 s", "real antirad callback rate")
+check(ix.itemProperties.GetEffects(antirad)[1].icon == "effect/radiationRemoval", "effects carry icon keys")
 local medkit = item(root .. "aid/sh_medic_medkit_2.lua", "base_aid")
 check(rowsById(medkit)["effect/1"] == "Health restoration: +3% per 0.5 second over 20 seconds", "rapid healing states amount per tick")
 local food = {data = {weight = 0.44}, GetData = bread.GetData, GetWeight = function(self) return self.data.weight end}
@@ -123,6 +124,10 @@ rows = rowsById(gun)
 check(rows.cleanliness == "Cleanliness: 42%" and rows.durability == "Durability: 64%", "saved weapon condition")
 check(rows.magazine == "Magazine capacity: 30" and rows.fireRate == "Cyclic rate: 600 rpm", "SWEP source values")
 check(rows.cartridge == nil, "missing ammo definitions do not expose engine identifiers")
+check(ix.itemProperties.GetFireModeGroup({FireModes = {"semi", "3burst", "auto"}}) == "auto", "fastest fire mode wins")
+check(ix.itemProperties.GetFireModeGroup({FireModes = {"break", "2burst"}}) == "burst", "burst beats break action")
+check(ix.itemProperties.GetFireModeGroup({FireModes = {"bolt"}}) == "bolt", "bolt action group")
+check(ix.itemProperties.GetFireModeGroup({}) == nil, "weapons without CW fire modes have no group")
 local ordered = ix.itemProperties.GetRows(gun)
 local positions = {}
 for index, row in ipairs(ordered) do positions[row.id] = index end
@@ -335,15 +340,19 @@ for _, context in ipairs({"inventory", "vendor", "equipment"}) do
 	local nextPosition = gunPanel.rows["cotz/property/durability"].z
 	local previous = gunPanel.rows["cotz/property/cleanliness"].z
 	check(previous % 1 == 0 and nextPosition > previous, context .. " property order uses distinct integer Z positions")
-	check(panel.rows["cotz/property/nutrition"].propertyBullet.class == "DLabel", "PropertyDesc creates a bullet")
+	check(panel.rows["cotz/property/nutrition"].propertyImage.material
+		== "vgui/ui/stalker/armorupgrades_grey/hunger.png", "mapped properties use their icon")
+	ix.itemProperties.AddRow(panel, "unmapped", "Plain statistic")
+	check(panel.rows["cotz/property/unmapped"].propertyBullet.class == "DLabel", "unmapped properties keep a bullet")
+	count = panel.count
 	local row = ix.itemProperties.AddRow(panel, "nutrition", "Updated energy")
 	check(panel.count == count and row.propertyLabel.text == "  Updated energy", "semantic updates reuse icon rows")
 	ix.itemProperties.PopulateProtection(panel, suit)
 	check(not panel.rows["cotz/property/protectionHeader"], "no protection subheader")
 	local protectionCount = panel.count
 	ix.itemProperties.PopulateProtection(panel, suit)
-	check(panel.count == protectionCount and panel.rows["cotz/property/protection/ballistics"].propertyBullet,
-		"protection reuses semantic bullet rows")
+	check(panel.count == protectionCount and panel.rows["cotz/property/protection/ballistics"].propertyImage,
+		"protection reuses semantic icon rows")
 	local weightedPanel = tooltip()
 	ix.itemProperties.Populate(weightedPanel, weighted)
 	local weightRow = weightedPanel.rows["cotz/property/weight"]
@@ -359,7 +368,7 @@ weighted.GetIndividualProperties = function() error("World tooltip must not eval
 ix.itemProperties.Populate(worldPanel, weighted)
 check(worldPanel.count == 2 and worldPanel.rows["cotz/property/weight"], "world shows only legacy weight")
 check(worldPanel.rows["cotz/property/weight"].propertyImage.material
-	== "vgui/ui/stalker/weaponupgrades/weight.png", "legacy weight icon restored")
+	== "vgui/ui/stalker/weaponupgrades_grey/weight.png", "legacy weight icon restored")
 suit.entity = {}
 ix.itemProperties.PopulateProtection(worldPanel, suit)
 check(worldPanel.count == 2, "world protection helper does not add converted rows")
@@ -367,7 +376,7 @@ suit.entity = nil
 local carryPanel = tooltip()
 ix.itemProperties.AddRow(carryPanel, "carry", "Carry Capacity Increase: 5 kg")
 check(carryPanel.rows["cotz/property/carry"].propertyImage.material
-	== "vgui/ui/stalker/armorupgrades/carryweightinc.png", "legacy carry icon restored")
+	== "vgui/ui/stalker/armorupgrades_grey/carryweightinc.png", "legacy carry icon restored")
 local wrappedPanel = tooltip()
 local wrappedRow = ix.itemProperties.AddRow(wrappedPanel, "cartridge", "Short")
 wrappedRow.maxWidth = 240
@@ -466,7 +475,9 @@ flask.data.contains = 2
 check(#flask:GetPropertyEffects() == 1 and flask:GetPropertyEffects()[1].amount == 0.2, "boiled flask effects")
 flask.data.contains = 1
 check(#flask:GetPropertyEffects() == 2, "dirty flask effects")
-for _, name in ipairs({"urchin", "kolobok", "eye", "flame", "sparkler", "flash", "moonlight"}) do
+for _, name in ipairs({"urchin", "kolobok", "eye", "flame", "sparkler", "flash", "moonlight", "bolt", "arachno",
+	"grapes", "capacitor", "compass", "moon", "photo", "dwarfgalaxy", "galaxy", "gmamasbeads", "mamasbeads", "halo",
+	"mycelia", "seraphim", "storm"}) do
 	local artifact = item(root .. "artifacts/sh_artifact_" .. name .. ".lua")
 	check(#artifact:GetIndividualProperties() > 0, name .. " exposes unique effects")
 	if artifact.contactDamage then
