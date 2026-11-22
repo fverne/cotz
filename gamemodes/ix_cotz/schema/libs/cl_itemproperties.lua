@@ -26,9 +26,9 @@ end
 local ICONS = {
 	weight = icon(WEAPON_ICONS .. "weight.png", WEAPON_COLOR),
 	carry = icon(ARMOR_ICONS .. "carryweightinc.png", ARMOR_COLOR),
-	nutrition = icon(ARMOR_ICONS .. "hunger.png", Color(225, 175, 95)),
+	nutrition = icon(ARMOR_ICONS .. "hunger.png", WEAPON_COLOR),
 	hydration = icon(ARMOR_ICONS .. "bleeding.png", Color(95, 165, 235)),
-	alcohol = icon(ARMOR_ICONS .. "bottlefeather.png", Color(205, 150, 80)),
+	alcohol = icon(ARMOR_ICONS .. "bottlefeather.png", WEAPON_COLOR),
 	clotting = icon(ARMOR_ICONS .. "bleeding.png", BLOOD_COLOR),
 	clottingDuration = icon(MISC_ICONS .. "time.png", PROPERTY_COLOR),
 	application = icon(MISC_ICONS .. "time.png", PROPERTY_COLOR),

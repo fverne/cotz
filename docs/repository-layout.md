@@ -32,7 +32,8 @@ gameplay plugins through the existing library loader. See [UI and HUD style](ui-
 The client schema library `schema/libs/cl_cotzicons.lua` owns `ix.cotzIcons`, the tints that restore the
 original colours of the greyscale `icon16/stalker_grey` and `icon16/ws2_grey` sets from `cotz_ui`. Item
 actions declare the greyscale path as their `icon`; the inventory menu tints it through
-`ix.cotzIcons.SetMenuImage`, and other panels can read the tint with `ix.cotzIcons.GetColor(path)`.
+`ix.cotzIcons.SetMenuImage`. The original-colour (gold) tints are reserved for menu buttons; tooltips and
+other panels tint greyscale icons with the teal `ix.cotzIcons.propertyColor`.
 
 `schema/libs/sh_economystats.lua` owns persistent per-character cash-flow counters and the admin
 scoreboard field list. Transaction owners record successful cash payments; simplecrossserverdata

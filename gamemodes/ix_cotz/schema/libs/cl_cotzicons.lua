@@ -1,8 +1,12 @@
 ix.cotzIcons = ix.cotzIcons or {}
 
--- Tints for the greyscale icon16 sets in cotz_ui. Each colour is a least-squares fit of the original
+-- Teal used for greyscale icons outside menu buttons, matching the weapon upgrade icons in item properties.
+ix.cotzIcons.propertyColor = Color(95, 201, 193)
+
+-- Menu button tints for the greyscale icon16 sets in cotz_ui. Each colour is a least-squares fit of the original
 -- full-colour icon against its greyscale master, so tinted icons match the originals. The ws2 originals
--- are multicoloured, so their tints only approximate the dominant hue.
+-- are multicoloured, so their tints only approximate the dominant hue. Reserve the stalker gold for menu
+-- buttons; tooltips and other panels use propertyColor.
 ix.cotzIcons.colors = {
 	["icon16/stalker_grey/accept.png"] = Color(246, 188, 43),
 	["icon16/stalker_grey/attach.png"] = Color(240, 188, 57),
