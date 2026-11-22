@@ -1174,7 +1174,9 @@ function ENT:OnTakeDamage(dmginfo)
 		end
 	elseif(self:Health()<1&&self.IsAlive==true) then
 		self:STALKERNPCKill(dmginfo)
+		self.cotzApplyingDeathEffect = self:GetClass():sub(1, 11) == "npc_mutant_"
 		self:STALKERNPCOnDeath()
+		self.cotzApplyingDeathEffect = nil
 	end
 
 	if ix and ix.eventController then

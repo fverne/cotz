@@ -159,6 +159,7 @@ consumed in the latest search-budget tick.
 
 Both participants in an NPC fight must be awake and hostile. Sleeping rivals become neutral to
 engine targeting; target selection, retaliation, schedules and damage use the same server policy.
+Direct damage from a mutant's death callback can hit eligible targets after the mutant dies.
 Allied NPC damage is suppressed. Player damage wakes its victim. The existing wake/sleep distances
 are 5,000/6,000 units, with 15 seconds of grace after player proximity or external damage. NPC damage
 cannot extend that grace. Once players leave, grounded actors forget their targets, cancel offensive
