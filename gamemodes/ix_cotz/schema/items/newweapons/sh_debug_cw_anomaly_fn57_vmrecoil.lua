@@ -19,3 +19,9 @@ ITEM.noBusiness = true
 ITEM.canRepair = false
 ITEM.canAttach = false
 ITEM.validAttachments = {}
+
+ITEM.iconCam = {
+	pos = Vector(1.9, -205, 3.1),
+	ang = Angle(0, 90, 0),
+	fov = 3.2,
+}

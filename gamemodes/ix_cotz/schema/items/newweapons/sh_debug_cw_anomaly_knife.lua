@@ -6,8 +6,8 @@ ITEM.category = "Debug - Anomaly CW2.0"
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_knife_w.mdl"
 
 ITEM.price = 0
-ITEM.width = 1
-ITEM.height = 2
+ITEM.width = 2
+ITEM.height = 1
 ITEM.weight = 0
 ITEM.unloadedweight = 0
 ITEM.bulletweight = 0
@@ -19,3 +19,9 @@ ITEM.noBusiness = true
 ITEM.canRepair = false
 ITEM.canAttach = false
 ITEM.validAttachments = {}
+
+ITEM.iconCam = {
+	pos = Vector(-0.5, 205, 0.1),
+	ang = Angle(0, 270, 0),
+	fov = 2.7,
+}
