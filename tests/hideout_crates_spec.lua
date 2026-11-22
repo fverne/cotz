@@ -16,7 +16,7 @@ assert(next(ix.progression.GetRequirements(fresh, id)) == nil)
 assert(#ix.progression.GetDeliveryOptions(fresh, id) == 0)
 local definition = ix.progression.definitions[id]
 local text = ix.progression.DescribeTask(definition, definition.keyNpc, {}, fresh)
-assert(text:find("Craft and install", 1, true))
+assert(text:find("Have the local contact fit", 1, true))
 assert(not text:find("Qualified matches", 1, true))
 print("PASS: new hideout objectives require installation without assigning duplicate supply deliveries")
 
@@ -62,7 +62,7 @@ for _, family in ipairs({"general", "ammo", "medical", "weapon", "gear", "fridge
 	ITEM.data.cotzHideoutCrate.level = 1
 	assert(ITEM:GetIndividualProperties()[1].text == "Installs tier 1 " .. ITEM.name:lower())
 	assert(ITEM:GetDescription():find(ITEM.longdesc, 1, true))
-	assert(ITEM:GetDescription():find("upgrade menu", 1, true))
+	assert(ITEM:GetDescription():find("local hideout contact", 1, true))
 end
 ITEM = savedItem
 print("PASS: all six concrete crate items display scope, level, authored background and installation instructions")

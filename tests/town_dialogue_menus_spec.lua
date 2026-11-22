@@ -115,28 +115,63 @@ local ballastTree = ix.dialogue.list.ballastnpc.tree
 for _, rootID in ipairs({"GREETING", "BackTopic"}) do
 	local options = ballastTree[rootID].options
 	check(table.concat(options, ",") == table.concat(ix.dialogue.OrderOptions(options, true), ","),
-		"crate integration preserves service ordering in " .. rootID)
-	check(options[#options] == "GOODBYE", "crate service stays before goodbye in " .. rootID)
+		"upgrade integration preserves service ordering in " .. rootID)
+	check(options[#options] == "GOODBYE", "upgrade service stays before goodbye in " .. rootID)
 end
 local originalGet = ix.plugin.Get
-local opened
-local hideouts = {GetCrateRecipe = function() end, OpenCrateBarter = function(_, player, vendor)
-	opened = {player, vendor}
-end}
+local requested
+local hideouts = {
+	SendUpgradeHideouts = function(_, player, vendor) requested = {"hideouts", player, vendor} end,
+	SendUpgradeOffers = function(_, player, vendor, id) requested = {"offers", player, vendor, id} end,
+	ExecuteUpgrade = function(_, player, vendor, data) requested = {"execute", player, vendor, data} return true end,
+}
 ix.plugin.Get = function(id) if id == "hideouts" then return hideouts end return originalGet(id) end
-check(ballastTree.HideoutBarter:ShouldAdd(client, target("'Ballast'")),
-	"the local hideout contact exposes crate barter when its plugin is available")
-local wasServer = SERVER
-SERVER = true
 local ballast = target("'Ballast'")
-ballastTree.HideoutBarter:preCallback(client, ballast)
-SERVER = wasServer
-check(opened and opened[1] == client and opened[2] == ballast, "the barter topic opens the authoritative crate menu")
+check(ballastTree.HideoutUpgrades:ShouldAdd(client, ballast),
+	"the local hideout contact offers upgrades when its plugin is available")
+local wasServer, wasClient = SERVER, CLIENT
+SERVER, CLIENT = true, false
+ballastTree.HideoutUpgrades:preCallback(client, ballast)
+check(requested and requested[1] == "hideouts" and requested[2] == client and requested[3] == ballast,
+	"the upgrade topic requests the authoritative hideout list")
+ballastTree.HideoutUpgradeList:DynamicPreCallback(client, ballast, {hideout = "7"})
+check(requested[1] == "offers" and requested[4] == "7", "choosing a hideout requests its authoritative offers")
+requested = nil
+ballastTree.HideoutUpgradeList:DynamicPreCallback(client, ballast, {hideout = 7})
+check(requested == nil, "malformed hideout choices are ignored")
+ballastTree.HideoutUpgradeConfirm.ResolveDynamicOption(nil, client, ballast, {accepted = false})
+check(requested == nil, "declining an upgrade never executes it")
+ballastTree.HideoutUpgradeConfirm.ResolveDynamicOption(nil, client, ballast, {accepted = true, index = 1, revision = 3})
+check(requested[1] == "execute" and requested[4].revision == 3, "accepting forwards the reviewed offer to the server")
+SERVER, CLIENT = false, true
+client.cotzHideoutUpgradeList = {target = ballast, hideouts = {{id = "7", name = "Room", squad = false},
+	{id = "9", name = "Den", squad = true}}}
+local listed = ballastTree.HideoutUpgrades.GetDynamicOptions(nil, client, ballast)
+check(#listed == 2 and listed[2].statement == "Squad hideout: Den" and listed[1].dyndata.hideout == "7",
+	"cached hideouts become dynamic choices")
+client.cotzHideoutUpgradeOffers = {target = ballast, hideout = "7", revision = 5, offers = {
+	{label = "Floor", summary = "500", description = "More floor.", payable = true, redeemable = false},
+	{label = "Crate", summary = "900", description = "Locked.", payable = false, redeemable = true},
+}}
+check(#ballastTree.HideoutUpgradeList.GetDynamicOptions(nil, client, ballast) == 2, "cached offers are listed")
+local confirm = ballastTree.HideoutUpgradeConfirm
+confirm.DynamicPreCallback(confirm, client, ballast, {index = 1})
+local choices = confirm.GetDynamicOptions(confirm, client, ballast)
+check(#choices == 2 and choices[1].dyndata.accepted and choices[1].dyndata.revision == 5
+	and confirm.response:find("More floor.", 1, true), "a payable offer can be confirmed with its revision")
+confirm.DynamicPreCallback(confirm, client, ballast, {index = 2})
+choices = confirm.GetDynamicOptions(confirm, client, ballast)
+check(#choices == 2 and choices[1].dyndata.crate and not choices[2].dyndata.accepted,
+	"an unpayable offer only offers a carried crate and a way back")
+local nextTopic, data = confirm.ResolveDynamicOption(nil, client, ballast, {accepted = false})
+check(nextTopic == "HideoutUpgradeList" and data.hideout == "7", "the confirmation returns to the hideout's offers")
+SERVER, CLIENT = wasServer, wasClient
+client.cotzHideoutUpgradeList, client.cotzHideoutUpgradeOffers = nil, nil
 ix.plugin.Get = function(id) if id ~= "hideouts" then return originalGet(id) end end
-check(not ballastTree.HideoutBarter:ShouldAdd(client, ballast), "crate barter hides when hideouts are unavailable")
+check(not ballastTree.HideoutUpgrades:ShouldAdd(client, ballast), "hideout upgrades hide when hideouts are unavailable")
 ix.plugin.Get = originalGet
 check(brassTree.StartBarter:ShouldAdd(client, brass), "unlocked barter remains visible after service grouping")
-check(includes(ballastTree.GREETING, "HideoutBarter"), "a lone hideout barter keeps its direct action")
+check(includes(ballastTree.GREETING, "HideoutUpgrades"), "a lone hideout upgrade service keeps its direct action")
 local grouped = 0
 for id, dialogue in pairs(ix.dialogue.list) do
 	if dialogue.townContact and dialogue.tree.ServicesTopic then

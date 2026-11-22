@@ -175,3 +175,61 @@ ix.plugin.Get = function(name)
 	if name == "vendor_adv" then return {SaveData = function() end} end
 	return originalPluginGet(name)
 end
+
+net.Start = net.Start or function() end
+net.Send = net.Send or function() end
+net.WriteUInt = net.WriteUInt or function() end
+
+-- Places the map's hideout contact beside the client, as the dialogue upgrade service requires.
+function FeatureContact(client)
+	PLUGIN.personalContacts.testmap = PLUGIN.personalContacts.testmap or PLUGIN.personalContacts.rp_marsh_cs
+	PLUGIN.personalPurchases = PLUGIN.personalPurchases or {}
+	ix.progression = ix.progression or {}
+	ix.progression.IsCompleted = ix.progression.IsCompleted
+		or function(character, id) return (character.completed or {})[id] == true end
+	ix.progression.CanUseNPC = ix.progression.CanUseNPC or function() return true end
+	ix.currency = ix.currency or {}
+	ix.currency.Get = ix.currency.Get or function(amount) return amount .. " roubles" end
+	local vendor = NewEntity(nil, client:GetPos())
+	vendor.GetClass = function() return "ix_vendor_adv" end
+	vendor.GetDisplayName = function() return PLUGIN.personalContacts.testmap.name end
+	vendor.CanAccess = function() return true end
+
+	return vendor
+end
+
+-- Reviews the current contact offers and confirms one, returning the offer and ExecuteUpgrade's result.
+function FeatureUpgradeOffer(client, record, feature, slotID, vendor)
+	vendor = vendor or FeatureContact(client)
+	client.cotzHideoutUpgrades = nil
+	PLUGIN:SendUpgradeOffers(client, vendor, record.id, true)
+	local session = client.cotzHideoutUpgrades
+	for index, offer in ipairs(session and session.offers or {}) do
+		if offer.feature == feature and offer.slot == slotID then return offer, index, session, vendor end
+	end
+end
+
+function FeatureUpgrade(client, record, feature, slotID, options)
+	options = options or {}
+	local offer, index, session, vendor = FeatureUpgradeOffer(client, record, feature, slotID, options.vendor)
+	if not offer then return false, "No offer" end
+	if options.prepare then options.prepare(session, offer) end
+	client.cotzUpgradeBuyAt = nil
+	local ok, reason = PLUGIN:ExecuteUpgrade(client, vendor, {revision = session.revision, index = index,
+		crate = options.crate == true or nil})
+
+	return ok, reason, offer
+end
+
+-- Gives the client every raw material in an upgrade recipe, using the first alternative of each group.
+function FeatureMaterials(inventory, materials)
+	local items = {}
+	for _, group in ipairs(materials.groups) do
+		local itemID = group.items[1]
+		ix.item.list[itemID] = ix.item.list[itemID] or {name = itemID, width = 1, height = 1}
+		items[#items + 1] = FeatureItem(inventory, {quantity = group.quantity * (PLUGIN.crateBatchSizes[itemID] or 1)},
+			itemID)
+	end
+
+	return items
+end

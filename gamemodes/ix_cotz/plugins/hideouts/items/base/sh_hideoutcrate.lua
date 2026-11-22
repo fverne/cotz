@@ -15,7 +15,7 @@ function ITEM:GetName()
 end
 
 function ITEM:GetDescription()
-	return self.description .. "\n\n" .. self.longdesc .. "\n\nInstall this crate through the matching hideout container's upgrade menu."
+	return self.description .. "\n\n" .. self.longdesc .. "\n\nNo new crates are assembled. Choose the matching upgrade at your local hideout contact to have this one fitted instead of paying its cash and materials."
 end
 
 function ITEM:GetIndividualProperties()

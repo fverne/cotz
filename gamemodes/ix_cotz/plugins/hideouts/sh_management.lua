@@ -40,15 +40,6 @@ ix.command.Add("HideoutVendorReset", {
 	end,
 })
 
-ix.command.Add("HideoutContainerUpgrade", {
-	adminOnly = true,
-	arguments = {ix.type.string, ix.type.string},
-	OnRun = function(self, client, id, slotID)
-		local _, reason = PLUGIN:UpgradeContainer(client, PLUGIN:GetHideout(id), slotID)
-		return reason
-	end,
-})
-
 ix.command.Add("HideoutContainerPublic", {
 	adminOnly = true,
 	arguments = {ix.type.string, ix.type.string, ix.type.bool},

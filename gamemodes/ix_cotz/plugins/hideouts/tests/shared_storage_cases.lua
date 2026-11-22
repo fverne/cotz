@@ -38,12 +38,17 @@ Test("squad storage upgrades require an officer and preserve contents and access
 	ix.item.list.value_container_smallitems = {model = "case.mdl", name = "Case"}
 	local input = FeatureItem(officer:GetCharacter():GetInventory(),
 		{cotzHideoutCrate = {level = 1, squad = true, version = 1}}, "hideout_crate_general")
-	assert(not PLUGIN:UpgradeContainer(member, record, "left", 0))
+	assert(not FeatureUpgrade(member, record, "container", "left", {crate = true}))
 	assert(PLUGIN:SetContainerRank(leader, record, "left", 1))
-	assert(PLUGIN:UpgradeContainer(officer, record, "left", 0))
+	assert(FeatureUpgrade(officer, record, "container", "left", {crate = true}))
 	local slot = record.containers.left
 	assert(slot.tier == 1 and slot.minimumRank == 1 and not ix.item.instances[input:GetID()])
-	assert(not PLUGIN:UpgradeContainer(officer, record, "left", 0))
+	assert(not FeatureUpgrade(officer, record, "container", "left", {crate = true}))
+	assert(PLUGIN:SetContainerRank(leader, record, "left", 2))
+	FeatureItem(officer:GetCharacter():GetInventory(), {cotzHideoutCrate = {level = 2, squad = true, version = 1}},
+		"hideout_crate_general")
+	assert(not FeatureUpgrade(officer, record, "container", "left", {crate = true}) and slot.tier == 1)
+	assert(PLUGIN:SetContainerRank(leader, record, "left", 1))
 	assert(not PLUGIN:CanUseContainer(member, record, "left"))
 	PLUGIN:OpenStorage(officer, instance.containers.left)
 	assert(officer.cotzHideoutMenu.scope == "container")
@@ -64,7 +69,7 @@ Test("a demotion while a squad upgrade awaits SQL prevents consumption", functio
 			query:Execute()
 		else originalQuery(query, callback) end
 	end
-	assert(PLUGIN:UpgradeContainer(officer, record, "left", 0))
+	assert(FeatureUpgrade(officer, record, "container", "left", {crate = true}))
 	assert(resume and officer.cotzHideoutOperation)
 	ix.squad.list.squad1.members[2] = 0
 	ix.crossserver.Query = originalQuery

@@ -230,7 +230,7 @@ def main():
     lua.run('mysql.module = "sqlite"', "SQLite adapter")
     for file in ("sh_plugin.lua", "sh_definitions.lua", "sh_personal.lua", "sh_crates.lua", "sv_ownership.lua", "sv_operations.lua", "sv_access.lua",
                  "sv_containers.lua", "sv_trading.lua", "sh_building.lua", "sv_layout.lua", "sv_travel.lua", "sh_management.lua",
-                 "sv_menus.lua", "sv_personal.lua", "sv_crates.lua", "sv_funding.lua", "sh_migration.lua", "sv_migration.lua"):
+                 "sv_menus.lua", "sv_personal.lua", "sv_crates.lua", "sv_upgrades.lua", "sv_funding.lua", "sh_migration.lua", "sv_migration.lua"):
         lua.run((ROOT / "ix_cotz/plugins/hideouts" / file).read_text(), file)
     lua.run("""for family, recipe in pairs(PLUGIN.personalContainerRecipes) do
         ix.item.list["hideout_crate_" .. family] = {uniqueID = "hideout_crate_" .. family,
@@ -260,7 +260,7 @@ def main():
             "cassette entity")
     lua.run((HERE / "cassette_cases.lua").read_text(), "cassette timer cases")
     lua.run((HERE / "personal_cases.lua").read_text(), "personal hideout progression cases")
-    lua.run((HERE / "crate_cases.lua").read_text(), "crate crafting cases")
+    lua.run((HERE / "upgrade_cases.lua").read_text(), "contact upgrade cases")
     lua.run((HERE / "migration_cases.lua").read_text(), "template migration cases")
 
 

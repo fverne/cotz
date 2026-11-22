@@ -66,7 +66,6 @@ end
 local function roomBusy(plugin, record)
 	return record.deleting or record.frozen or record.homePending or record.homeConflict
 		or plugin.instances[record.id] or (plugin.personalPurchases or {})[record.id]
-		or (plugin.capacityPurchases or {})[record.id]
 end
 
 local function migrationReady(plugin)

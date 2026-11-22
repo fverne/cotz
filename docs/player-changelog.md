@@ -45,6 +45,10 @@ This describes the development build; availability on a live server depends on d
   New Swamps claims require Ballast's crowbar-or-bat hand-in.
 - Unlock and purchase larger general, ammunition, medical and weapon storage, extra loose-item space
   and furnishing access. Invite guests and control access separately for each container.
+- Hideout upgrades are bought by talking to Ballast, Cleaner or Ledger: choose **I want to improve my
+  hideout.**, pick your room or squad hideout, and the upgrade is fitted straight away for cash and
+  materials. Storage crates are no longer assembled; any crate you still carry can be fitted instead
+  of paying for its matching upgrade. Prop capacity is bought there too.
 - Added squad headquarters with shared storage, rank-based container permissions, furnishings and
   configurable visitor access. Officers can place or relocate the squad entrance.
 - Squad hideout vendors sell actual donated items and put sale proceeds into a shared treasury.

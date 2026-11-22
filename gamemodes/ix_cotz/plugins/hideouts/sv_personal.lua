@@ -56,26 +56,6 @@ function PLUGIN:CanUsePersonalTrader(client, target)
 	return false
 end
 
-function PLUGIN:IsPersonalOfferLocation(client, target, record, feature, slotID)
-	if not self:CanUsePersonalTrader(client, target) or not record then return false end
-	local class = target:GetClass()
-	if class == "ix_hideout_storage" then
-		local slot = self:GetContainer(record, slotID)
-
-		local instance = self.instances[record.id]
-
-		return instance and instance.containers[slotID] == target and target.ixHideout == record.id
-			and target.ixHideoutSlot == slotID and feature == "container" and slot and (slot.tier or 0) > 0
-	end
-	if feature == "container" then
-		local slot = self:GetContainer(record, slotID)
-		if not slot or (slot.tier or 0) > 0 then return false end
-	end
-	if class == "ix_hideout_exit" then return target.ixHideout == record.id end
-
-	return self:IsHideoutEntrance(record, target.ixEntranceID)
-end
-
 function PLUGIN:OwnsPersonalLocation(character, id, location)
 	for _, record in pairs(self.state.hideouts) do
 		if record.ownerType ~= "squad" and record.owner == character:GetID()
@@ -231,7 +211,10 @@ function PLUGIN:BuildPersonalOffer(client, record, feature, slotID)
 		local tier = recipe and recipe.tiers[offer.level]
 		if not tier or tier.width < (slot.width or 1) or tier.height < (slot.height or 1) then return end
 		offer.recipe, offer.width, offer.height, offer.model = definition.recipe, tier.width, tier.height, tier.model
-		offer.price, offer.item = tier.price, tier.item
+		local materials = self:GetCrateRecipe(definition.recipe, offer.level, false)
+		if not materials then return end
+		-- item names the legacy crate that may still be redeemed instead of paying.
+		offer.price, offer.materials, offer.item = materials.price, materials, materials.item
 		offer.allowed, offer.reason = self:GetCrateUnlock(character, offer.level)
 		offer.label = slotID .. ": " .. recipe.name .. " level " .. offer.level
 		offer.detail = string.format("%d × %d slots; %s items", tier.width, tier.height, recipe.filter)
@@ -257,7 +240,7 @@ function PLUGIN:BuildPersonalOffer(client, record, feature, slotID)
 	else
 		return
 	end
-	if offer.item and not ix.item.list[offer.item] then return end
+	if offer.item and not ix.item.list[offer.item] then offer.item = nil end
 
 	return offer
 end
@@ -280,83 +263,8 @@ function PLUGIN:ApplyPersonalEntitlement(record, payload)
 	end
 end
 
-function PLUGIN:PurchasePersonalOffer(client, target, quote)
-	if not self:CanUsePersonalTrader(client, target) then return false, "Use the hideout door or its container." end
-	local record = self:GetHideout(quote.record)
-	local offer = self:BuildPersonalOffer(client, record, quote.feature, quote.slot)
-	if not self:IsPersonalOfferLocation(client, target, record, quote.feature, quote.slot)
-		or not offer or not offer.allowed or offer.level ~= quote.level or offer.price ~= quote.price
-		or offer.item ~= quote.item or offer.width ~= quote.width or offer.height ~= quote.height
-		or offer.model ~= quote.model then return false, "That offer changed or is locked. Reopen hideout improvements." end
-	if self.personalPurchases[record.id] or (self.capacityPurchases or {})[record.id] then
-		return false, "This hideout already has a purchase pending."
-	end
-	local character = client:GetCharacter()
-	local inventory = character:GetInventory()
-	local input = offer.item and self:FindUpgradeCrate(client, offer.recipe, offer.level, false)
-	if offer.item and (not input or input.invID ~= inventory:GetID() or not self:CanStockItem(client, input)) then
-		return false, "Bring the required container item in your main inventory."
-	end
-	if not character:HasMoney(offer.price) then return false, "Not enough roubles." end
-	self.personalPurchases[record.id] = true
-	local instance = self.instances[record.id]
-	if instance then instance.operations = (instance.operations or 0) + 1 end
-	local function authorize()
-		local current = self:BuildPersonalOffer(client, record, quote.feature, quote.slot)
-
-		return client:GetCharacter() == character and self:CanUsePersonalTrader(client, target)
-			and self:IsPersonalOfferLocation(client, target, record, quote.feature, quote.slot)
-			and current and current.allowed and current.level == offer.level and current.price == offer.price
-			and (not input or self:IsUpgradeCrate(client, input, offer.recipe, offer.level, false))
-	end
-	local function commit(storage)
-		if not IsValid(client) or not authorize() or offer.feature == "container" and not storage then
-			self.personalPurchases[record.id] = nil
-			if instance then instance.operations = instance.operations - 1 end
-			return
-		end
-		if storage then self:CloseInventoryStorage(storage) end
-		local payload = {
-			kind = "personal", feature = offer.feature, slot = offer.slot, level = offer.level,
-			recipe = offer.recipe, width = offer.width, height = offer.height, model = offer.model,
-		}
-		self:CommitOperation(client, record, {
-			item = input, from = input and inventory, consume = input ~= nil,
-			moneyDelta = -offer.price, payload = payload, authorize = authorize,
-		}, function(ok, reason)
-			if ok then
-				self:ApplyPersonalEntitlement(record, payload)
-				if payload.feature == "container" then self:CompleteInstalledLevel(character, payload.level) end
-				if payload.feature == "cassette" then self:RefreshPersonalCassette(record) end
-				if storage then
-					storage:SetSize(payload.width, payload.height)
-					self:RefreshPersonalContainer(record, payload.slot)
-				end
-				if not self:Persist() then
-					self.operationsReady = false
-					ErrorNoHalt("[Hideouts] Personal purchase committed; restart to replay its entitlement.\n")
-				end
-			end
-			self.personalPurchases[record.id] = nil
-			if instance then instance.operations = instance.operations - 1 end
-			if IsValid(client) and client:GetCharacter() == character then
-				client:Notify(ok and "Hideout upgrade purchased." or reason)
-				if self:CanUsePersonalTrader(client, target) then self:OpenPersonalBarter(client, target, nil, true, record.id) end
-			end
-		end)
-	end
-	if offer.feature == "container" then
-		local slot = self:GetContainer(record, offer.slot)
-		self:LoadOwnedInventory(record, offer.slot, slot, "cotzHideoutContainer",
-			slot.width or 1, slot.height or 1, commit)
-	else
-		commit()
-	end
-
-	return true
-end
-
-function PLUGIN:OpenPersonalBarter(client, target, page, refresh, recordID)
+-- Room claims stay at the entrance; upgrades are bought from the local contact's dialogue.
+function PLUGIN:OpenPersonalBarter(client, target, page, refresh)
 	if not self:CanUsePersonalTrader(client, target) then return end
 	if not refresh and (client.cotzPersonalOpenAt or 0) > CurTime() then return end
 	client.cotzPersonalOpenAt = CurTime() + 0.5
@@ -364,32 +272,15 @@ function PLUGIN:OpenPersonalBarter(client, target, page, refresh, recordID)
 	client.cotzPersonalPage = page
 	local offers = {}
 	local total, offset = 0, (page - 1) * PAGE_SIZE
-	local function appendOffer(offer)
-		total = total + 1
-		if total > offset and #offers < PAGE_SIZE then offers[#offers + 1] = offer end
-	end
 	for id, location in SortedPairs(self.state.locations or {}) do
-		if not recordID and target:GetClass() == "ix_hideout_entrance"
-			and location.entrance == target.ixEntranceID
+		if target:GetClass() == "ix_hideout_entrance" and location.entrance == target.ixEntranceID
 			and not self:OwnsPersonalLocation(client:GetCharacter(), id, location) then
 			local allowed, reason = self:GetPersonalUnlock(client:GetCharacter(), "claim", 1)
-			appendOffer({feature = "claim", location = id, label = "Unlock: " .. location.name,
-				detail = "Free for now. One room per location.", allowed = allowed, reason = reason})
-		end
-	end
-	for _, record in SortedPairs(self.state.hideouts) do
-		if record.id == recordID and record.ownerType ~= "squad"
-			and record.owner == client:GetCharacter():GetID() then
-			local function append(feature, slotID)
-				local offer = self:BuildPersonalOffer(client, record, feature, slotID)
-				if not offer or not self:IsPersonalOfferLocation(client, target, record, feature, slotID) then return end
-				offer.label = self:GetHideoutName(record):sub(1, 128) .. " (#" .. record.id .. ") / " .. offer.label
-				appendOffer(offer)
+			total = total + 1
+			if total > offset and #offers < PAGE_SIZE then
+				offers[#offers + 1] = {feature = "claim", location = id, label = "Unlock: " .. location.name,
+					detail = "Free for now. One room per location.", allowed = allowed, reason = reason}
 			end
-			for slotID in SortedPairs(record.personalLayout or {}) do append("container", slotID) end
-			append("floor")
-			append("furnishing")
-			append("cassette")
 		end
 	end
 	if page > 1 then
@@ -401,20 +292,15 @@ function PLUGIN:OpenPersonalBarter(client, target, page, refresh, recordID)
 	client.cotzPersonalRevision = ((client.cotzPersonalRevision or 0) + 1) % 4294967296
 	client.cotzPersonalBarter = {
 		character = client:GetCharacter(), target = target, expires = CurTime() + QUOTE_LIFETIME,
-		offers = offers, revision = client.cotzPersonalRevision, record = recordID,
+		offers = offers, revision = client.cotzPersonalRevision,
 	}
 	net.Start("cotz/hideouts/personal-barter")
 	net.WriteUInt(client.cotzPersonalRevision, 32)
 	net.WriteUInt(#offers, 9)
 	for _, offer in ipairs(offers) do
 		net.WriteString(offer.label:sub(1, 256))
-		local cost = ix.currency.Get(offer.price or 0)
-		if offer.item then
-			cost = offer.price == 0 and ix.item.list[offer.item].name
-				or cost .. " + " .. ix.item.list[offer.item].name
-		end
 		local detail = offer.feature == "page" and "Browse more offers."
-			or offer.detail .. "\n" .. cost .. (offer.allowed and "" or "\n" .. offer.reason)
+			or offer.detail .. (offer.allowed and "" or "\n" .. offer.reason)
 		net.WriteString(detail:sub(1, 512))
 		net.WriteBool(offer.allowed == true)
 		net.WriteBool(offer.feature == "page")
@@ -432,42 +318,22 @@ function PLUGIN:HandlePersonalPurchase(client, index, revision)
 		or not self:CanUsePersonalTrader(client, session.target) then return false end
 	local offer = session.offers[index]
 	if not offer or not offer.allowed then return end
-	local ok, reason
 	if offer.feature == "page" then
-		self:OpenPersonalBarter(client, session.target, offer.page, true, session.record)
+		self:OpenPersonalBarter(client, session.target, offer.page, true)
 		return true
-	elseif offer.feature == "claim" then
-		ok, reason = self:ClaimPersonalLocation(client, session.target, offer.location)
-		if ok then self:OpenPersonalBarter(client, session.target, nil, true) end
-	else
-		ok, reason = self:PurchasePersonalOffer(client, session.target, offer)
 	end
+	if offer.feature ~= "claim" then return false end
+	local ok, reason = self:ClaimPersonalLocation(client, session.target, offer.location)
+	if ok then self:OpenPersonalBarter(client, session.target, nil, true) end
 	if reason then client:Notify(reason) end
 
 	return ok
 end
 
-function PLUGIN:OpenPersonalManagementBarter(client, id, entranceID)
-	if #id > 20 or #entranceID > 64 then return end
-	local target
-	if id == "" then
-		target = (self.entranceEntities or {})[entranceID]
-	else
-		if not self:CanUseManagementMenu(client, id) then return end
-		local record = self:GetHideout(id)
-		local session = client.cotzHideoutMenu
-		local instance = self.instances[id]
-		if session.scope == "entrance" then
-			target = (self.entranceEntities or {})[self:FindHideoutEntrance(client, record)]
-		elseif session.scope == "exit" then target = instance and instance.exit
-		elseif session.scope == "container" then target = instance and instance.containers[session.slot] end
-	end
-	self:OpenPersonalBarter(client, target, 1, false, id ~= "" and id or nil)
-end
-
 net.Receive("cotz/hideouts/personal-open", function(_, client)
-	local id, entranceID = net.ReadString(), net.ReadString()
-	PLUGIN:OpenPersonalManagementBarter(client, id, entranceID)
+	local entranceID = net.ReadString()
+	if #entranceID > 64 then return end
+	PLUGIN:OpenPersonalBarter(client, (PLUGIN.entranceEntities or {})[entranceID], 1, false)
 end)
 
 net.Receive("cotz/hideouts/personal-buy", function(_, client)

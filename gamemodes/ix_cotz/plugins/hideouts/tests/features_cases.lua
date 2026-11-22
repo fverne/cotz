@@ -215,10 +215,11 @@ Test("upgrade consumption recovers its entitlement without consuming a second co
 	local entity = NewEntity(nil, instance.origin)
 	entity.ixHideout, entity.ixHideoutSlot = record.id, "left"
 	instance.containers.left = entity
-	assert(PLUGIN:UpgradeContainer(owner, record, "left"))
+	local upgraded, reason = FeatureUpgrade(owner, record, "container", "left", {crate = true})
+	assert(upgraded, reason)
 	assert(not ix.item.instances[input:GetID()])
 	assert(record.containers.left.tier == 1 and record.containers.left.public == false)
-	assert((record.containers.right or {}).tier == nil)
+	assert(((record.containers.right or {}).tier or 0) == 0)
 	assert(tonumber(sql.QueryValue("SELECT COUNT(*) FROM ix_items")) == 0)
 	record.containers.left.tier = 0
 	PLUGIN:RecoverUpgradeEntitlements(function(ok) assert(ok) end)

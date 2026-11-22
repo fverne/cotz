@@ -44,10 +44,8 @@ net.Receive("cotz/hideouts/manage", function()
 		local id, name = net.ReadString(), net.ReadString()
 		local squad, access = net.ReadBool(), net.ReadString()
 		local manage, canReset = net.ReadBool(), net.ReadBool()
-		local propTier, propLimit = net.ReadUInt(3), net.ReadUInt(7)
-		local nextPropLimit, propPrice = net.ReadUInt(7), net.ReadUInt(32)
+		local propLimit = net.ReadUInt(7)
 		local leader, fundUpgrades = net.ReadBool(), net.ReadBool()
-		local treasuryShare, playerShare = net.ReadUInt(32), net.ReadUInt(32)
 		local guests = {}
 		for _ = 1, net.ReadUInt(16) do
 			guests[#guests + 1] = {id = net.ReadUInt(32), name = net.ReadString()}
@@ -72,20 +70,11 @@ net.Receive("cotz/hideouts/manage", function()
 				end)
 			end
 			if not squad and (scope == "entrance" or scope == "exit") then
-				button(scroll, "Hideout improvements", function() PLUGIN:RequestPersonalBarter(id) end)
 				button(scroll, "Delete personal hideout", function()
 					ix.cotzUI.Query("Permanently delete this hideout? Everyone inside will be moved outside. Furnishings, loose items and upgrades are lost, with no refund. Empty your containers first; their contents will only be recoverable by an administrator. You can arrange a new hideout at a configured entrance afterward.",
 						"Delete personal hideout", "Delete hideout", function()
 							sendManagement(panel, id, 17)
 							panel:Remove()
-						end, "Cancel")
-				end)
-			end
-			if nextPropLimit > 0 then
-				button(scroll, "Upgrade prop capacity to " .. nextPropLimit .. " (" .. ix.currency.Get(propPrice) .. ")", function()
-					ix.cotzUI.Query("Increase this hideout's prop capacity to " .. nextPropLimit .. " for " .. ix.currency.Get(propPrice) .. "? Treasury: " .. ix.currency.Get(treasuryShare) .. "; your share: " .. ix.currency.Get(playerShare) .. ".",
-						"Upgrade prop capacity", "Purchase", function()
-							sendManagement(panel, id, 0, "", propTier)
 						end, "Cancel")
 				end)
 			end
@@ -146,9 +135,7 @@ net.Receive("cotz/hideouts/container", function()
 	local id, slot, name = net.ReadString(), net.ReadString(), net.ReadString()
 	local tier, public = net.ReadUInt(8), net.ReadBool()
 	local squad, minimumRank, rank = net.ReadBool(), net.ReadUInt(2), net.ReadUInt(2)
-	local width, height, hasUpgrade = net.ReadUInt(6), net.ReadUInt(6), net.ReadBool()
-	local required, nextWidth, nextHeight
-	if hasUpgrade then required, nextWidth, nextHeight = net.ReadString(), net.ReadUInt(6), net.ReadUInt(6) end
+	local width, height, contact = net.ReadUInt(6), net.ReadUInt(6), net.ReadString()
 	local guests = {}
 	for _ = 1, net.ReadUInt(7) do
 		guests[#guests + 1] = {id = net.ReadUInt(32), name = net.ReadString(), allowed = net.ReadBool()}
@@ -163,16 +150,8 @@ net.Receive("cotz/hideouts/container", function()
 	else
 		ix.cotzUI.Label(scroll, "Container not installed")
 	end
-	if not squad then
-		button(scroll, "Upgrade this container", function() PLUGIN:RequestPersonalBarter(id) end)
-	elseif hasUpgrade then
-		local label = tier == 0 and "Install" or "Upgrade"
-		button(scroll, label .. " with " .. required .. " (" .. nextWidth .. " × " .. nextHeight .. ")", function()
-			ix.cotzUI.Query("Hand in " .. required .. " for " .. nextWidth .. " × " .. nextHeight .. " storage?",
-				label .. " container", "Hand in", function() sendManagement(panel, id, 4, slot, tier) end, "Cancel")
-		end)
-	else
-		ix.cotzUI.Label(scroll, "Fully upgraded")
+	if contact ~= "" then
+		ix.cotzUI.Label(scroll, "Installation and upgrades are arranged with " .. contact .. ".")
 	end
 	if squad then
 		local labels = {[0] = "Entire squad", [1] = "Officers and leader", [2] = "Leader only"}
@@ -209,7 +188,8 @@ end)
 net.Receive("cotz/hideouts/history", function()
 	local panel, scroll = frame("Recent squad transactions")
 	local labels = {sale = "Sale", withdraw = "Treasury withdrawal", donate = "Stock donation",
-		recover = "Stock recovery", props = "Prop capacity upgrade", craft = "Storage crate assembly"}
+		recover = "Stock recovery", props = "Prop capacity upgrade", craft = "Storage crate assembly",
+		upgrade = "Storage upgrade"}
 	for _ = 1, net.ReadUInt(6) do
 		local timestamp, name, kind, delta = net.ReadUInt(32), net.ReadString(), net.ReadString(), net.ReadInt(32)
 		ix.cotzUI.Label(scroll, os.date("%Y-%m-%d %H:%M", timestamp) .. " — " .. name .. " — "

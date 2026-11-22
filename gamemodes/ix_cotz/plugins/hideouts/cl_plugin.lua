@@ -8,7 +8,7 @@ netstream.Hook("ixHideoutMenu", function(entrance, records)
 		ix.cotzUI.Label(list, "No accessible hideouts at this entrance.")
 	end
 	ix.cotzUI.Button(list, "Arrange a personal hideout", function()
-		ix.plugin.Get("hideouts"):RequestPersonalBarter(nil, entrance)
+		ix.plugin.Get("hideouts"):RequestPersonalBarter(entrance)
 	end)
 	for _, record in ipairs(records) do
 		ix.cotzUI.Button(list, "Enter " .. record.name, function()

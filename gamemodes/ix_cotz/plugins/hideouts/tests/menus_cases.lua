@@ -40,7 +40,7 @@ end)
 
 Test("menu actions retain administrator-only chat counterparts", function()
 	for _, name in ipairs({"HideoutManage", "HideoutEntrancePlace", "HideoutAccess", "HideoutVendorReset",
-		"HideoutContainerUpgrade", "HideoutContainerPublic"}) do
+		"HideoutContainerPublic"}) do
 		assert(TEST_COMMANDS[name].adminOnly == true, name)
 	end
 end)
@@ -194,18 +194,15 @@ Test("management sends actual invitations and permits revoking an offline invite
 	local guest = FeatureClient(2)
 	record.guests = {["2"] = true, ["3"] = false, ["4"] = true}
 	local writeUInt, writeString = net.WriteUInt, net.WriteString
-	local ids, names, price = {}, {}, nil
+	local ids, names = {}, {}
 	net.WriteUInt = function(value, bits)
-		if bits == 32 then
-			if not price then price = value else ids[#ids + 1] = value end
-		end
+		if bits == 32 then ids[#ids + 1] = value end
 	end
 	net.WriteString = function(value) names[value] = true end
 	owner.position = PLUGIN.state.entrances.gate.pos
 	PLUGIN:ShowManagement(owner, record.id, "entrance")
 	net.WriteUInt, net.WriteString = writeUInt, writeString
-	assert(price == 5000 and ids[1] == 0 and ids[2] == 5000)
-	assert(#ids == 4 and ids[3] == 2 and ids[4] == 4)
+	assert(#ids == 2 and ids[1] == 2 and ids[2] == 4)
 	assert(names["Character 2"] and names["Character #4"])
 	assert(PLUGIN:HandleManagementAction(owner, record.id, 7, "4", 0))
 	assert(record.guests["4"] == nil and record.guests["2"] == true)
@@ -230,7 +227,8 @@ Test("container sharing lists only invitations and labels guests with missing na
 		net.WriteBool = function(value) flags[#flags + 1] = value end
 		PLUGIN:ShowContainerMenu(owner, instance.containers.left)
 		assert(count == 3 and #ids == 3 and ids[1] == 2 and ids[2] == 4 and ids[3] == 5)
-		assert(names[4] == "Character #2" and names[5] == "Character #4" and names[6] == "Character 5")
+		assert(names[4] == ((PLUGIN.personalContacts[game.GetMap()] or {}).name or ""))
+		assert(names[5] == "Character #2" and names[6] == "Character #4" and names[7] == "Character 5")
 		assert(flags[#flags - 2] == true and flags[#flags - 1] == false and flags[#flags] == false)
 	end
 	net.WriteUInt, net.WriteString, net.WriteBool = writeUInt, writeString, writeBool
@@ -324,71 +322,79 @@ Test("squad admission rechecks its dedicated entrance after character save", fun
 	assert(not PLUGIN.members[leader] and not instance.occupants[leader])
 end)
 
-Test("prop capacity upgrades charge once and replay after a lost projection for both owner types", function()
+Test("prop capacity upgrades charge once at the contact and replay after a lost projection for both owner types", function()
 	for _, squad in ipairs({false, true}) do
 		FeatureReset()
 		local owner = FeatureClient(1, 100000)
 		local instance, record = FeatureHome(owner, squad)
-		instance.exit = NewEntity(nil, instance.origin)
-		PLUGIN:ShowManagement(owner, record.id, "exit")
+		local vendor = FeatureContact(owner)
 		assert(PLUGIN:GetHideoutPropLimit(record) == 30)
-		for tier, limit in ipairs({40, 50, 60}) do
-			assert(PLUGIN:HandleManagementAction(owner, record.id, 0, "", tier))
-			assert(PLUGIN:GetHideoutPropLimit(record) == limit)
+		for _, limit in ipairs({40, 50, 60}) do
+			local offer, index, session = FeatureUpgradeOffer(owner, record, "props", nil, vendor)
+			owner.cotzUpgradeBuyAt = nil
+			assert(PLUGIN:ExecuteUpgrade(owner, vendor, {revision = session.revision, index = index}))
+			assert(PLUGIN:GetHideoutPropLimit(record) == limit and offer.price)
 			local balance = owner:GetCharacter():GetMoney()
-			assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", tier))
+			owner.cotzUpgradeBuyAt = nil
+			assert(not PLUGIN:ExecuteUpgrade(owner, vendor, {revision = session.revision, index = index}))
 			assert(owner:GetCharacter():GetMoney() == balance)
 		end
 		assert(owner:GetCharacter():GetMoney() == 65000)
-		assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 4))
+		assert(not FeatureUpgradeOffer(owner, record, "props", nil, vendor))
 		record.propTier = nil
 		PLUGIN:RecoverUpgradeEntitlements(function(ok) assert(ok) end)
 		assert(PLUGIN:GetHideoutPropLimit(record) == 60 and owner:GetCharacter():GetMoney() == 65000)
 	end
 end)
 
-Test("prop capacity purchases reject insufficient funds, guests, demotion and failed commits", function()
+Test("management menus no longer sell prop capacity", function()
 	FeatureReset()
 	local owner = FeatureClient(1, 100000)
 	local instance, record = FeatureHome(owner, true)
 	instance.exit = NewEntity(nil, instance.origin)
 	PLUGIN:ShowManagement(owner, record.id, "exit")
-	owner:GetCharacter().money = 0
 	assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	assert(not record.propTier and owner:GetCharacter():GetMoney() == 100000)
+end)
+
+Test("prop capacity purchases reject insufficient funds, guests, demotion and failed commits", function()
+	FeatureReset()
+	local owner = FeatureClient(1, 100000)
+	local instance, record = FeatureHome(owner, true)
+	owner:GetCharacter().money = 0
+	assert(not FeatureUpgrade(owner, record, "props"))
 	assert(not record.propTier)
 	owner:GetCharacter().money = 100000
 	local commit = PLUGIN.CommitOperation
 	PLUGIN.CommitOperation = function(_, _, _, _, callback) callback(false, "Database failure") end
-	assert(PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	assert(FeatureUpgrade(owner, record, "props"))
 	PLUGIN.CommitOperation = commit
-	assert(not record.propTier and not PLUGIN.capacityPurchases[record.id] and instance.operations == 0)
+	assert(not record.propTier and not PLUGIN.personalPurchases[record.id] and instance.operations == 0)
 	assert(owner:GetCharacter():GetMoney() == 100000)
 	ix.squad.list.squad1.members[1] = 0
-	assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	assert(not FeatureUpgrade(owner, record, "props"))
 	local guest = FeatureClient(2, 100000)
 	record.guests["2"] = true
 	guest.position, PLUGIN.members[guest] = instance.origin, record.id
-	PLUGIN:ShowManagement(guest, record.id, "exit")
-	assert(not PLUGIN:HandleManagementAction(guest, record.id, 0, "", 1))
+	assert(not FeatureUpgrade(guest, record, "props"))
 end)
 
 Test("pending prop purchases reject duplicates and recheck a delayed role response", function()
 	FeatureReset()
 	local owner = FeatureClient(1, 100000)
 	local instance, record = FeatureHome(owner, true)
-	instance.exit = NewEntity(nil, instance.origin)
-	PLUGIN:ShowManagement(owner, record.id, "exit")
+	local vendor = FeatureContact(owner)
 	local checkRole, pending = PLUGIN.CheckSquadRole, nil
 	PLUGIN.CheckSquadRole = function(_, _, _, _, callback) pending = callback end
-	assert(PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1) and pending)
-	assert(not PLUGIN:HandleManagementAction(owner, record.id, 0, "", 1))
+	assert(FeatureUpgrade(owner, record, "props", nil, {vendor = vendor}) and pending)
+	assert(not FeatureUpgrade(owner, record, "props", nil, {vendor = vendor}))
 	local deleted
 	PLUGIN:DeleteHideout(record.id, function(ok) deleted = ok end)
 	assert(deleted == false and not record.deleting)
 	ix.squad.list.squad1.members[1] = 0
 	pending(true)
 	PLUGIN.CheckSquadRole = checkRole
-	assert(not record.propTier and not PLUGIN.capacityPurchases[record.id] and instance.operations == 0)
+	assert(not record.propTier and not PLUGIN.personalPurchases[record.id] and instance.operations == 0)
 	assert(owner:GetCharacter():GetMoney() == 100000)
 end)
 
@@ -448,12 +454,10 @@ Test("personal deletion waits for saves and pending economic operations", functi
 	instance.saving = true
 	assert(not PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0))
 	instance.saving = nil
-	for _, lock in ipairs({"personalPurchases", "capacityPurchases"}) do
-		PLUGIN[lock][record.id] = true
-		PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0)
-		assert(PLUGIN:GetHideout(record.id) == record and not record.deleting)
-		PLUGIN[lock][record.id] = nil
-	end
+	PLUGIN.personalPurchases[record.id] = true
+	PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0)
+	assert(PLUGIN:GetHideout(record.id) == record and not record.deleting)
+	PLUGIN.personalPurchases[record.id] = nil
 	instance.operations = 1
 	PLUGIN:HandleManagementAction(owner, record.id, 17, "", 0)
 	assert(PLUGIN:GetHideout(record.id) == record and not record.deleting)

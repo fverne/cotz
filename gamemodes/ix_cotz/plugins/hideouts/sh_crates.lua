@@ -31,6 +31,8 @@ PLUGIN.crateMaterials = {
 	},
 }
 
+-- Cash and materials for installing or upgrading a storage container to this level. item names the
+-- legacy crate that previously carried this recipe and may still be redeemed instead.
 function PLUGIN:GetCrateRecipe(family, level, squad)
 	local recipe = self.personalContainerRecipes[family]
 	local materials = self.crateMaterials[family]
@@ -56,7 +58,6 @@ function PLUGIN:GetCrateRecipe(family, level, squad)
 		family = family, level = level, squad = squad == true, groups = groups,
 		item = recipe.item,
 		price = math.ceil(recipe.price * self.cratePriceMultiplier ^ (level - 1)) * multiplier,
-		data = {cotzHideoutCrate = {level = level, squad = squad == true, version = self.crateVersion}},
 	}
 end
 

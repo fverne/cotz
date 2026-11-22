@@ -15,7 +15,7 @@ PLUGIN.personalUnlockSteps = {
 	gear = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
 	floor = {3, 4}, furnishing = {2}, cassette = {1},
 }
--- Retain the existing loose-item allowance price curve. Crates have their own assembly curve.
+-- Retain the existing loose-item allowance price curve. Storage upgrades have their own recipe curve.
 PLUGIN.personalPriceMultiplier = 2.2
 PLUGIN.personalUpgradePrices = {floor = 500, furnishing = 5000, cassette = 1500}
 
@@ -62,7 +62,7 @@ PLUGIN.personalContainerRecipes = {
 	},
 }
 
--- Assembly pays the cash and salvage cost. Installation consumes one matching crate at every level.
+-- The local contact charges each level's upgrade recipe. item names the legacy crate redeemable instead.
 for _, recipe in pairs(PLUGIN.personalContainerRecipes) do
 	recipe.tiers = {}
 	for level, size in ipairs(recipe.sizes) do

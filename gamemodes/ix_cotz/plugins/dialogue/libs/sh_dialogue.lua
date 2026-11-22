@@ -5,7 +5,7 @@ local MENU_ORDER = {
 	TradeTopic = 10,
 	ServicesTopic = 20,
 	StartBarter = 20,
-	HideoutBarter = 41,
+	HideoutUpgrades = 41,
 	HealTopic = 30,
 	RepairItems = 35,
 	WeaponWorkshop = 36,
@@ -41,7 +41,7 @@ local MENU_ORDER = {
 
 local TOPIC_CATEGORIES = {
 	TradeTopic = "trade", ServicesTopic = "service",
-	StartBarter = "service", AmmoExchange = "service", HideoutBarter = "service",
+	StartBarter = "service", AmmoExchange = "service", HideoutUpgrades = "service",
 	HealTopic = "service", ConfirmHeal = "service", RepairItems = "service", ConfirmRepair = "service",
 	StorageTopic = "service", OpenStorage = "service", ConfirmStorageUpgrade = "service",
 	GearCustomizationTopic = "service", CustomizeGear = "service", PaintSuit = "service",
@@ -404,7 +404,7 @@ function ix.dialogue.getTopic(id, topicID)
 end
 
 ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_trade.lua")
-ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_hideoutcrates.lua")
+ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_hideoutupgrades.lua")
 ix.util.Include("ix_cotz/plugins/dialogue/integrations/sh_mutantdefense.lua")
 
 -- Reward topics must be available before DoPluginIncludes registers NPC conversations.

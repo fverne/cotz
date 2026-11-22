@@ -269,8 +269,8 @@ Use `/HideoutDelete ID` to retire an individual player's room administratively. 
 workflow below when existing rooms should move to another interior along with their contents.
 It does not place a shell, entrance or NPC. No preset or first-time setup is run automatically.
 
-At a configured entrance, choose **Arrange a personal hideout** to claim a room. Owners use
-**Manage → Hideout improvements** at the entrance, or **Hideout improvements** at the interior exit. Players can unlock
+At a configured entrance, choose **Arrange a personal hideout** to claim a room. Owners buy every room
+upgrade from the map's contact (see [Upgrading at the contact](#upgrading-at-the-contact)). Players can unlock
 one free room at each configured location after the local `v3/hideout/access` milestone: hand in one
 unequipped crowbar or bat to Ballast, one sledgehammer to Cleaner, or one FUBar to Ledger.
 Each access hand-in consumes exactly one tool, independent of the contact's delivery difficulty.
@@ -289,10 +289,10 @@ New grants save the owner's name for offline display; loaded characters supply t
 Legacy rooms without a saved owner name display their character ID while the owner is unloaded.
 
 Enter a room once to resolve its dupe markers. The saved layout then supplies the entrance management
-menu even while that room is unloaded. Each room has its own paid levels and inventories;
+contact's upgrade offers even while that room is unloaded. Each room has its own paid levels and inventories;
 completing a contact milestone only unlocks permission to purchase. Offers show costs and locked gates.
 The exterior contacts' [progression branches](../../../../docs/npc-overhaul/progression-overhaul.md)
-track installed storage levels and unlock subsequent crate recipes. Assembly is paid at the contact.
+track installed storage levels and unlock subsequent storage levels.
 
 ### Storage and sharing
 
@@ -306,9 +306,7 @@ The marker editor now includes weapon storage. Unmarked templates can add spots 
     /HideoutTemplateContainer cabin medical_shelf medical
     /HideoutTemplateContainer cabin weapon_rack weapon
 
-Install level-1 containers through the door management submenu. Use an installed container, then
-**Upgrade this container**, for later levels. Each consumes a matching crafted upgrade crate;
-assembly at the local contact pays its cash and salvage cost, with no second installation charge.
+Install and upgrade containers at the local contact; each level charges its cash and salvage recipe.
 An active room receives a new container
 immediately; unloaded rooms instantiate it on next entry. Container size and model can change per level.
 Allow clearance for the largest configured model when placing markers. Inventory IDs, contents and access
@@ -320,7 +318,7 @@ template still require an administrator to correct the template bounds or config
 Personal container sharing lists only active hideout invitations. Guests whose character name is
 blank or unavailable appear as `Character #ID` in sharing and invitation-revocation menus.
 
-| Recipe | Initial size | Permitted contents | Personal level-1 assembly cash |
+| Recipe | Initial size | Permitted contents | Personal level-1 cash |
 | --- | --- | --- | ---: |
 | general | 2×3 | Ordinary storable items | 600 roubles; starter is free |
 | ammo | 4×4 | `isAmmo == true` | 900 roubles |
@@ -329,14 +327,24 @@ blank or unavailable appear as `Character #ID` in sharing and invitation-revocat
 | weapon | 6×4 | `isWeapon == true` | 1,400 roubles |
 | fridge | 6×4 | `base_consumables` | 1,000 roubles |
 
-### Crafting upgrade crates
+### Upgrading at the contact
 
-Choose **Can you assemble storage crates?** at Ballast, Cleaner or Ledger, then select personal/squad,
-family and tier. The dialogue action sits with services, and the barter list shows only unlocked tiers.
-Crate names show their destination tier; their properties identify the previous and destination tiers
-(or a tier 1 installation). All three contacts use the same recipes. Cash increases by 1.5× per level, rounded
-up; squad crates cost exactly three times the personal cash and every raw material amount.
-Personal crates always charge the buyer's wallet, even when squad upgrade funding is enabled.
+Choose **I want to improve my hideout.** at Ballast, Cleaner or Ledger on their own map. The dialogue lists
+your personal rooms on that map and, for squad officers and leaders, the squad hideout. Choosing a hideout
+lists its upgrades: each container slot's next level, and for personal rooms the loose-item allowance,
+props/PET access and cassette player, plus prop capacity for either type. Each offer shows its cost,
+materials and any locked gate. Confirming it charges the payment and applies the upgrade to the room at
+once; there is no item to carry or install. Loaded rooms resize the container and spawn or restyle its
+entity immediately; unloaded rooms pick up the change on next entry. The action sits with services.
+
+The server owns every offer. Choosing a hideout sends a fresh snapshot (`cotz/hideouts/upgrade-offers`)
+that the dialogue renders; confirmation binds the character, contact, hideout, revision, offer, payment
+split and a two-minute expiry, then rebuilds the offer and rejects any change. Moving away from the contact,
+switching characters, demotion or a changed treasury balance cancels the purchase without a charge.
+
+All three contacts use the same recipes. Cash increases by 1.5× per level, rounded up; squad upgrades
+cost exactly three times the personal cash and every raw material amount. Personal upgrades always charge
+the buyer's wallet, even when squad upgrade funding is enabled.
 The [generated recipe matrix](../../../../docs/balance/hideout-crates.md) lists all costs and loot evidence.
 
 Fasteners accept mixtures of nuts, bolts, nails and screws. Three raw nuts or four bolts make one batch;
@@ -345,18 +353,19 @@ three family-specific alternatives. Levels 1–3 use common Swamps/Garbage salva
 material, 6–9 introduce Waystation supplies, and 10–12 add Pripyat boards, textolite and a controller.
 Recipes preview all materials and regions. They are fixed rather than rolled per character.
 
-Keep a free 2×2 space in the main inventory before confirming assembly. Inputs must be unequipped,
-unbound and transferable main-inventory items. Surplus raw quantities stay in their original stacks.
-Carrying checks account for consumed salvage and the finished crate. Insufficient materials, funds,
-carrying capacity or space cause no charge. Confirmation binds the recipe, vendor, character,
-payment split and expiry. Database transactions commit cash, all input changes, output and receipt together.
-Uncertain outcomes are verified rather than refunded speculatively. An interrupted in-memory delivery
-restores the already committed crate row on a fresh character/server restore.
+Inputs must be unequipped, unbound and transferable main-inventory items. Surplus raw quantities stay in
+their original stacks. Insufficient materials or funds cause no charge. Database transactions commit cash,
+treasury, all input changes and the receipt together; the entitlement is applied from that receipt and
+replays after a restart if the plugin-data save was interrupted. Uncertain outcomes are verified rather
+than refunded speculatively.
 
-Six new crate item types carry saved level and personal/squad metadata. Installation validates the exact
-family, scope, level and version. Existing valuable cases remain ordinary loot, rather than substitute
-upgrade crates. Any current squad member can craft crates for this map's squad hideout using their own local personal
-progression; only officers/leaders can install them. Squad installations do not advance personal milestones.
+#### Legacy crates
+
+Crates are no longer assembled. The six crate item types stay registered so saved crates keep loading.
+A carried crate matching the slot's family, scope (personal/squad) and next level is offered as
+**Fit it using the crate I'm carrying.**, which consumes it instead of the cash and materials. Personal
+crates still need the level's milestone; squad crates need only the required squad rank. Existing
+valuable cases remain ordinary loot. Squad installations do not advance personal milestones.
 
 Inventory-bearing bags are rejected by every storage recipe. Personal capacities remain unchanged;
 squad capacities are the matching personal size plus two columns and one row at each of twelve levels.
@@ -379,22 +388,22 @@ and transfers recheck current invitation and per-container access. Guests cannot
 Each local contact retains twelve `v3/hideout/01`–`12` milestones and the separate initial-access tool
 hand-in. New milestones require installation instead of another supply delivery. Claiming a room completes
 step 01 because its free general crate is included. The first personal installation at level N completes
-step N and unlocks the next crate level for all owned personal rooms on this map. Every subsequent room
-or container still needs its own matching crate. Installing the same level twice grants no extra progression.
+step N and unlocks the next storage level for all owned personal rooms on this map. Every subsequent room
+or container is still paid for separately. Installing the same level twice grants no extra progression.
 
 | Local completed step | Available recipes and other purchases |
 | --- | --- |
-| 01, from room claim | Crates through level 2; cassette player |
-| 02, from installation | Crates through level 3; first loose-item upgrade, 4 → 6 (500 roubles) |
-| 03, from installation | Crates through level 4; props/PET access (5,000 roubles) |
-| 04, from installation | Crates through level 5; second loose-item upgrade, 6 → 8 (1,100 roubles) |
-| 05–11 | Crates through the next level |
-| 12 | Final installed personal level; no additional crate levels |
+| 01, from room claim | Storage through level 2; cassette player |
+| 02, from installation | Storage through level 3; props/PET access (5,000 roubles) |
+| 03, from installation | Storage through level 4; first loose-item upgrade, 4 → 6 (500 roubles) |
+| 04, from installation | Storage through level 5; second loose-item upgrade, 6 → 8 (1,100 roubles) |
+| 05–11 | Storage through the next level |
+| 12 | Final installed personal level; no additional storage levels |
 
 Previously completed milestones remain earned. Saved unfinished supply requests retain their assigned
 choices, quantities, contributions and earned reward credit; finishing that request remains an alternative
 to installing its level. New requests never assign another supply hand-in. On character load, room claim,
-room preparation or opening crate barter, owned personal storage reconciles its installed milestones.
+room preparation or opening the contact's upgrade list, owned personal storage reconciles its installed milestones.
 Squad storage and other characters' rooms never contribute. Existing oversized storage is never shrunk.
 
 A room permits four loose item entities by default; floor purchases increase this by two each time.
@@ -425,10 +434,9 @@ Banks remain stored separately; Ballast's bank service is retired by the progres
 remain available to administrators through `/HideoutLegacyStorage ID`.
 
 Purchases use the existing atomic item/rouble/receipt adapter. A per-room lock also protects asynchronous
-inventory creation, deletion and entry. Confirmation binds to character, door/container, selected room,
-quote revision, expiry and current upgrade level. Moving away or changing the container/room invalidates
-the purchase. Required container items must be unequipped, unbound instances in the main inventory.
-Inventory assignment failure prevents payment and retains that inventory ID for retry.
+inventory creation, deletion and entry. Confirmation binds to character, contact, selected room,
+offer revision, expiry and current upgrade level. Moving away or changing the container/room invalidates
+the purchase. Inventory assignment failure prevents payment and retains that inventory ID for retry.
 
 ### Other progression ideas (proposals only)
 
@@ -477,10 +485,12 @@ unsafe tools, duplicators and arbitrary scripted entity spawning remain protecte
 
 ### Shared containers and furnishings
 
-Squad rooms instantiate their template container slots and use twelve crafted squad crate levels.
+Squad rooms instantiate their template container slots and use twelve squad storage levels.
 Their storage dimensions are the personal level dimensions plus two columns and one row. All members can use installed containers by default; outside visitors cannot use squad containers.
-An officer or leader uses a container to install/upgrade it and choose **Entire squad**, **Officers and
-leader**, or **Leader only** access for that slot. Officers cannot change or upgrade leader-only containers
+Officers and leaders install and upgrade containers at the map's contact, and use a container to choose
+**Entire squad**, **Officers and leader**, or **Leader only** access for that slot. Ordinary members are
+offered no squad upgrades. Squad levels use the officer's own local storage milestones, as crafting did.
+Officers cannot change or upgrade leader-only containers
 or set a restriction above their own rank. Leaders can change every slot. Changing access closes open
 sessions; transfers and periodic session audits recheck current membership and rank.
 
@@ -491,8 +501,7 @@ The personal room limit applies to new grants on this map and never removes room
 ### Prop capacity upgrades
 
 Each personal or squad hideout starts with a **30-prop** furnishing capacity. Owners and squad
-leaders/officers can buy **40**, **50**, then **60** props through hideout management at an entrance
-or the interior exit (also available from squad management). The three upgrades cost **5,000**,
+leaders/officers can buy **40**, **50**, then **60** props from the map's contact. The three upgrades cost **5,000**,
 **10,000**, and **20,000 roubles**, once per room. The managing character pays unless the leader has
 enabled vendor funding, in which case the treasury contributes first and the character pays the remainder. Capacity purchases
 do not grant furnishing permissions; personal rooms still need their existing props/PET purchase.
@@ -509,8 +518,8 @@ if the plugin-data save was interrupted. Deploy client and server changes togeth
 The marker editor includes a **Suit and gear storage** recipe (`gear`) for suits, helmets, masks,
 backpacks and exoskeleton frames. Inventory-bearing bags remain excluded. Add a new permanent
 container slot with this recipe to the authored shell; existing slots keep their recipes and contents.
-Personal lockers use the existing twelve hideout improvement gates and door/container purchase flow.
-Squad lockers use the matching twelve squad crate levels.
+Personal lockers use the existing twelve hideout improvement gates and the contact's upgrade list.
+Squad lockers use the matching twelve squad storage levels.
 
 Players with furnishing/building access can move and freeze containers with the physgun. Squad
 container rank restrictions also apply to movement. Container position and rotation survive checkpoints,
@@ -574,8 +583,8 @@ The stock rules remain:
 
 The squad leader can toggle **Use squad vendor funds for hideout upgrades** in hideout management
 (the hideout properties menu at the entrance, exit, vendor or squad menu). It starts disabled and persists
-with the hideout. When enabled, squad crate assembly and prop-capacity purchases spend the shared vendor
-treasury first, then charge the crafting member or managing officer/leader the remainder. Personal room costs always use
+with the hideout. When enabled, squad storage and prop-capacity upgrades at the contact spend the shared vendor
+treasury first, then charge the buying officer/leader the remainder. Personal room costs always use
 personal funds. Confirmations show both shares. A changed funding setting, rank or quoted balance rejects
 the purchase for a fresh quote; combined insufficient funds consume nothing. Treasury debits and player
 charges share the same atomic receipt, and transaction history shows the treasury contribution.
@@ -593,9 +602,10 @@ Players do not need chat commands. All hideout commands are restricted to admini
 | --- | --- |
 | Use the entrance keypad or squad entrance | Enter an accessible hideout; owners/officers can manage access and invitations |
 | Use the interior exit | Leave; owners/officers can manage invitations/access, reset the layout and reset the vendor |
-| Use a container | Personal owner: open/set sharing; squad officer: open/install/upgrade/set rank; other permitted users: open |
+| Use a container | Personal owner: open/set sharing; squad officer: open/set rank; other permitted users: open |
 | Use the squad vendor | Dialogue opens trading, donations and personal bank; the inspector footer exposes authorized management and treasury actions |
-| Tab → Squads → Squad hideout | Leaders/officers can optionally place/relocate a dedicated entrance and upgrade prop capacity |
+| Tab → Squads → Squad hideout | Leaders/officers can optionally place/relocate a dedicated entrance |
+| Talk to Ballast, Cleaner or Ledger | **I want to improve my hideout.** buys storage, room and prop capacity upgrades |
 
 Management requests bind to the active character and the relevant entrance, exit, vendor, or container.
 Actions recheck the current role and location. Container actions apply only to the container whose
@@ -767,7 +777,9 @@ purchases, rollback, saved wallet changes, treasury overdrafts/demotion, vendor 
 destinations and cross-map arrival/rejection, alongside existing allocation and item persistence cases.
 Layout cases cover gear filtering and progression, placer ownership across reloads, rank-restricted movement,
 container checkpoints/reallocation, and loaded/unloaded resets including failed saves and stale sessions.
-Menu cases load the actual menu server module and cover container hand-ins/sharing/opening, invitation
+Upgrade cases drive the contact service end to end: offers, materials, treasury splits, legacy crate
+redemption, stale sessions, pending locks and receipt replay.
+Menu cases load the actual menu server module and cover container sharing/opening, invitation
 updates, guest exit, initial entrance placement, vendor reset, role/location/character changes, and
 administrator-only command counterparts. Shared-storage cases also exercise squad rank restrictions,
 demotion during upgrades, global home claims, personal limits, and individual Sherpa custody/earnings
