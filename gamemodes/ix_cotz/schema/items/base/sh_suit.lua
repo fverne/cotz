@@ -94,6 +94,16 @@ function ITEM:GetFlatRadProt()
 	return self.flatRadProt * durabilityScale * self:GetFilterScale()
 end
 
+-- Suit weights include the standard tank; a different installed size adds or removes only the difference.
+function ITEM:GetAirTankWeightOffset()
+	if not self.isAirTank or self:GetFilterCondition() == false then return 0 end
+	local standard = ix.item.list["gasmask_filter_" .. self.filterType]
+	local installed = ix.item.list[ix.util.GetInstalledFilterID(self)]
+	if not standard or not installed then return 0 end
+
+	return installed.weight - standard.weight
+end
+
 function ITEM:GetDescription()
 	local description = self:GetData("description", self.description)
 	if self.entity or not self.longdesc or self.longdesc == "" then return description end
@@ -900,6 +910,8 @@ function ITEM:GetWeight()
 			end
 		end
 	end
+
+	retval = retval + self:GetAirTankWeightOffset()
 
   return retval
 end

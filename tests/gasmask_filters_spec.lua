@@ -138,6 +138,7 @@ local function newInventory(id)
 	function inventory:FindEmptySlot()
 		if not self.full then return 6, 6 end
 	end
+	function inventory:CanItemFit() return not self.blocked end
 	function inventory:Add(id, _, _, x, y)
 		local item = ix.item.instances[id]
 		if self.full or self.rejectAdd or filterPlugin:CanTransferItem(item) == false then return false end
@@ -304,11 +305,20 @@ end
 
 mask = newMask("civilian", false)
 local civilian = newFilter("civilian", 37)
-ITEM = setmetatable({}, {__index = filterBase})
-dofile("gamemodes/ix_cotz/plugins/suits/items/gasmaskfilters/sh_gasmask_filter_air_tank.lua")
-ix.item.list.gasmask_filter_air_tank = ITEM
-check(ITEM.price == 6000 and ITEM.width == 2 and ITEM.height == 2 and ITEM.weight == 6,
-	"Gas tank declares requested price, footprint and mass")
+local tankTuning = {
+	air_tank = {price = 6000, width = 2, height = 2, weight = 6, refillCost = 4000, filterWearDivisor = 700},
+	air_tank_small = {price = 3500, width = 1, height = 2, weight = 3.5, refillCost = 2300, filterWearDivisor = 400},
+	air_tank_large = {price = 8500, width = 2, height = 3, weight = 9, refillCost = 5700, filterWearDivisor = 1000},
+}
+for id, tuning in pairs(tankTuning) do
+	ITEM = setmetatable({}, {__index = filterBase})
+	dofile("gamemodes/ix_cotz/plugins/suits/items/gasmaskfilters/sh_gasmask_filter_" .. id .. ".lua")
+	ITEM.uniqueID = "gasmask_filter_" .. id
+	ix.item.list[ITEM.uniqueID] = ITEM
+	check(ITEM.filterType == "air_tank" and ITEM.filterCondition == 100, "tank fits suit sockets: " .. id)
+	for field, value in pairs(tuning) do check(ITEM[field] == value, "tank declares " .. field .. ": " .. id) end
+end
+check(ix.item.list.gasmask_filter_air_tank.name == "Medium Gas Tank", "existing tank item is the medium size")
 local spareTank = newFilter("air_tank", 80)
 local tankSuit = newMask("air_tank", 25)
 tankSuit.isAirTank = true
@@ -333,6 +343,39 @@ advance()
 ix.util.RemoveGasmaskFilter(tankSuit, client)
 check(#creations == tankCreations and tankSuit:GetFilterCondition() == 80, "Tank cannot be removed after swapping")
 inventory.full = false
+check(ix.util.GetInstalledFilterID(tankSuit) == "gasmask_filter_air_tank", "unrecorded suit tank is medium")
+
+local smallTank = newFilter("air_tank_small", 50)
+advance()
+ix.util.InstallGasmaskFilter(tankSuit, client, {smallTank.id})
+advance(6)
+check(#creations == tankCreations + 1 and tankSuit:GetFilterCondition() == 80 and ix.item.instances[smallTank.id],
+	"different-size swap waits for the outgoing tank's creation")
+local returnedTank = completeCreation()
+check(returnedTank.uniqueID == "gasmask_filter_air_tank" and returnedTank.data.filterCondition == 80
+	and returnedTank.invID == inventory.id and not ix.item.instances[smallTank.id],
+	"different-size swap returns the outgoing size with its air and consumes the incoming tank")
+check(tankSuit:GetFilterCondition() == 50 and ix.util.GetInstalledFilterID(tankSuit) == "gasmask_filter_air_tank_small"
+	and not tankSuit.cotzFilterPending, "suit records the installed tank size and releases locks")
+check(ix.util.GetFilterWearDivisor(tankSuit) == 400, "installed tank size sets air consumption")
+
+local largeTank = newFilter("air_tank_large", 100)
+inventory.blocked = true
+advance()
+local blockedCreations = #creations
+ix.util.InstallGasmaskFilter(tankSuit, client, {largeTank.id})
+advance(6)
+check(#creations == blockedCreations and not client.busy and tankSuit:GetFilterCondition() == 50,
+	"swap is refused when the returning tank has no room")
+inventory.blocked = false
+advance()
+ix.util.InstallGasmaskFilter(tankSuit, client, {largeTank.id})
+advance(6)
+inventory.blocked = true
+local discarded = completeCreation()
+check(not ix.item.instances[discarded.id] and ix.item.instances[largeTank.id] and tankSuit:GetFilterCondition() == 50
+	and not tankSuit.cotzFilterPending, "swap keeps both tanks when room disappears before creation")
+inventory.blocked = false
 tankSuit.data.equip = false
 
 local tank = newMask("scientific", 100)

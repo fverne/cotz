@@ -198,10 +198,10 @@ end
 function ix.itemProperties.GetFilterRows(item)
 	local rows = {}
 	if not item.filterType and not item.isGasmaskFilter then return rows end
-	local definition = item.isGasmaskFilter and item or ix.item.list["gasmask_filter_" .. item.filterType]
+	local definition = item.isGasmaskFilter and item or ix.item.list[ix.util.GetInstalledFilterID(item)]
 	local condition = item.isGasmaskFilter and item:GetData("filterCondition", 100)
 		or item:GetFilterCondition()
-	local label = item.isAirTank and "Air tank" or definition.name
+	local label = definition.name
 	if condition == false then
 		addText(rows, "filter", label .. ": No filter")
 	else

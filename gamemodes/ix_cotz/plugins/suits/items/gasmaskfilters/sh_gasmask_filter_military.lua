@@ -11,6 +11,7 @@ ITEM.weight = 0.2
 
 ITEM.filterType = "military"
 ITEM.filterCondition = 100
+ITEM.refillCost = 1100
 ITEM.filterWearDivisor = 180
 
 ITEM.exRender = true
