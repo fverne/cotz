@@ -1,13 +1,13 @@
 ITEM.name = "SVT 40"
 ITEM.description= "A semi-automatic battle rifle that fires 7.62x54mm rounds."
 ITEM.longdesc = "The SVT-40 is a Soviet semi-automatic battle rifle.\nThe SVT-40 saw widespread service during and after World War II.\nAfter the war, SVTs were mostly withdrawn from service and refurbished in arsenals, then stored.\nMany of these storages have since then been found, and black market operatives have ensured a steady influx of SVT-40's to the zone."
-ITEM.model = ("models/weapons/w_svt40.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_svt40_w.mdl"
 ITEM.class = "cw_svt40"
 ITEM.weaponCategory = "primary"
 ITEM.price = 33000
 ITEM.width = 6
 ITEM.height = 1
-ITEM.validAttachments = {"md_pso1","md_pbs1"}
+ITEM.validAttachments = {"md_pbs1"}
 
 ITEM.bulletweight = 0.022
 ITEM.unloadedweight = 3.85
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(3, 200, 1.5),
-	ang = Angle(0, 270, 0),
-	fov = 12.7,
+	pos = Vector(12.2, -205, 3.5),
+	ang = Angle(0, 90, 0),
+	fov = 13.6,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(-1.1, -5.078, -2.039),
-						["Model"] = "models/weapons/w_svt40.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_svt40_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

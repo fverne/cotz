@@ -111,6 +111,35 @@ class WeaponTests(unittest.TestCase):
         self.assertEqual(text, apply.apply_weapon(text, export))
 
 
+class ReplaceTests(unittest.TestCase):
+    def test_replaces_the_sight_list(self):
+        slot = dict(EXPORT["slot"], replace=True)
+        text = apply.apply_slot(WEAPON, slot, ["md_eotech"])
+        self.assertIn('[1] = {header = "Sight", offset = {800, -300}, atts = {"md_eotech"}},', text)
+        self.assertEqual(text, apply.apply_slot(text, slot, ["md_eotech"]))
+
+    def test_removes_an_emptied_sight_slot(self):
+        text = apply.apply_slot(WEAPON, dict(EXPORT["slot"], replace=True), [])
+        self.assertNotIn('header = "Sight", offset', text)
+        self.assertIn('SWEP.Attachments = {\t[2] = {header = "Barrel"', text.replace("\n", ""))
+        self.assertIn('--SWEP.Attachments = {[1] = {header = "Sight", atts = {"md_old"}}}', text)
+
+    def test_removes_ids_from_every_slot(self):
+        text = apply.apply_weapon(WEAPON, dict(EXPORT, models=[], fields=[], attachments=[],
+            removeAttachments=["md_pbs1", "md_kobra"]))
+        self.assertNotIn('header = "Barrel"', text)
+        self.assertNotIn('header = "Sight", offset', text)
+        self.assertIn('SWEP.Attachments = {\n\t["+reload"]', text)
+        self.assertEqual(text, apply.apply_weapon(text, dict(EXPORT, models=[], fields=[], attachments=[],
+            removeAttachments=["md_pbs1", "md_kobra"])))
+
+    def test_removes_unplaced_ids_from_items(self):
+        text = apply.apply_item(ITEM, [], ["md_kobra"])
+        self.assertIn('ITEM.validAttachments = {"md_pbs1"}', text)
+        text = apply.apply_item(ITEM, ["md_eotech"], ["md_pbs1"])
+        self.assertIn('ITEM.validAttachments = {"md_kobra", "md_eotech"}', text)
+
+
 class ItemTests(unittest.TestCase):
     def test_adds_ids_and_enables_attaching(self):
         text = apply.apply_item(ITEM, ["md_eotech", "md_kobra"])

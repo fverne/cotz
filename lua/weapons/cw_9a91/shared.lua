@@ -45,7 +45,7 @@ if CLIENT then
 	SWEP.ACOGPos = Vector(-3.573954, -4.079, 0.182737)
 	SWEP.ACOGAng = Vector(0.24, 0.495, 0)
 
-	SWEP.NXSPos = Vector(-3.720110, -4.079, 0.501499)
+	SWEP.NXSPos = Vector(-3.634, -4.079, 0.566)
 	SWEP.NXSAng = Vector(0.24, 0.495, 0)
 	
 	SWEP.CustomizePos = Vector(12.121, -4.907, -0.461)

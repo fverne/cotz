@@ -1,13 +1,13 @@
 ITEM.name = "AN-94"
 ITEM.description= "A soviet-designed assault rifle chambered for 5.45x39mm"
 ITEM.longdesc = "The AN-94 offers a unique two-shot burst function with an unusually short interval between shots.\nThe Nikonov mechanism fires the second shot in the burst quickly enough to allow it to escape before the recoil of the first shot is felt, thus potentially allowing the two shots to hit extremely close together, for example to aid in piercing body armor.\nThis makes it the weapon of choice when fighting heavily armored enemies."
-ITEM.model = "models/srp/weapons/w_abakan.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_abakan.mdl"
 ITEM.class = "cw_an94k"
 ITEM.weaponCategory = "primary"
 ITEM.price = 28600
 ITEM.width = 5
 ITEM.height = 2
-ITEM.validAttachments = {"md_kobra", "md_pso1", "md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
+ITEM.validAttachments = {"md_kobra", "md_pso1", "md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.011
 ITEM.unloadedweight = 3.85
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(13, -205, 0),
+	pos = Vector(8.4, -205, 0.9),
 	ang = Angle(0, 90, 0),
-	fov = 11.5,
+	fov = 11.3,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
 						["Position"] =	Vector(15.89, -4.626, -1.283),
-						["Model"] = "models/srp/weapons/w_abakan.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_abakan.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

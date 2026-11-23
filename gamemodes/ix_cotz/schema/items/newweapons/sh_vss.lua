@@ -1,13 +1,13 @@
 ITEM.name = "VSS Vintorez"
 ITEM.description= "A special forces sniper rifle chambered for 9x39mm."
 ITEM.longdesc = "The VSS 'Vintorez' is issued primarily to Spetsnaz units for undercover or clandestine operations, a role made evident by its ability to be stripped down for transport in a specially fitted briefcase.\nFor this reason, it is hard to get ahold of in the Zone.\nThe weapon has an integral suppressor which wraps around the barrel.\nThe barrel itself has a series of small ports drilled in the rifling grooves, leading into the suppressor which slows and cools the exhaust gases.\nIt uses a subsonic 9x39 mm SP-5 cartridge to avoid a sonic boom."
-ITEM.model = ("models/cw2/rifles/w_vss.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_vintorez_w.mdl"
 ITEM.class = "cw_vss"
 ITEM.weaponCategory = "primary"
 ITEM.width = 5
 ITEM.price = 45000
 ITEM.height = 1
-ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_foregrip"}
+ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.023
 ITEM.unloadedweight = 2.6
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(0, 200, 0),
-	ang = Angle(0, 270, 0),
-	fov = 13,
+	pos = Vector(4.2, -205, 3.3),
+	ang = Angle(0, 90, 0),
+	fov = 9.8,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(3.6, -4.3, -3.6),
-						["Model"] = "models/cw2/rifles/w_vss.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_vintorez_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

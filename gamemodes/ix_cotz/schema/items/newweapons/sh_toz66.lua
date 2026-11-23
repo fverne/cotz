@@ -1,7 +1,7 @@
 ITEM.name = "TOZ-66"
 ITEM.description= "A break-action hunting shotgun firing 12 gauge shells."
 ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThe cheap price and long barrel makes it useful for engaging animals and unarmed targets at ranges up to fifty meters.\nThe side-by-side barrels makes the weapon simpler built compared to the TOZ, but the sights are not aligned to both barrels."
-ITEM.model = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_bm16_full_w.mdl"
 
 ITEM.width = 5
 ITEM.height = 1
@@ -23,9 +23,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-9, 52, -0.30000001192093),
-	ang = Angle(0, 270, 0),
-	fov = 45,
+	pos = Vector(8.5, -205, 2.5),
+	ang = Angle(0, 90, 0),
+	fov = 11.7,
 }
 
 ITEM.pacData = {
@@ -37,7 +37,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_toz66.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_bm16_full_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Angles"] = Angle(0, 0, 180),

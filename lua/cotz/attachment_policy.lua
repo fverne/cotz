@@ -37,9 +37,12 @@ return {
 	-- `SWEP.HasDovetailMount = true`.
 	dovetailSights = {md_pso1 = true},
 
-	-- Verified sight mounts on the viewmodel itself. Rail adapter models do not count.
-	-- The TOZ-34 family uses the hand-placed mounts on its top barrel.
+	-- Verified sight mounts on the viewmodel itself. Rail adapter models do not count. The Anomaly
+	-- Remington 870 and Saiga-12 models support rail and dovetail sights; the TOZ-34 family keeps sights
+	-- over its barrel.
 	mounts = {
+		cw_rem870ae = "rail",
+		cw_saiga12 = "dovetail",
 		cw_toz34 = "rail",
 		cw_toz34short = "rail",
 	},

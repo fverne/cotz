@@ -6,7 +6,6 @@ local UNIT_SCALE = Vector(1, 1, 1)
 local ZERO = Vector(0, 0, 0)
 local ZERO_ANGLE = Angle(0, 0, 0)
 local FORWARD = Vector(1, 0, 0)
-local SCOPE_FORWARD = Vector(0, -1, 0)
 local MIN_FORWARD_ALIGNMENT = 0.95
 local IDLE_SAMPLES = 16
 local MATCH_EPSILON = 0.0005
@@ -16,11 +15,12 @@ local OUTPUT_DIR = "cotz_attachment_placement"
 local RAIL_ID = "md_rail"
 local RAIL_ADAPTER = "models/wystan/attachments/akrailmount.mdl"
 
--- Model-space centers of the rear lens mesh. Other sights derive their axis from a donor's aim.
+-- Model-space aperture centers and lines of sight. Unmeasured sights derive their axis from a donor's aim.
 local SCOPE_GEOMETRY = {
-	["models/cw2/attachments/schmidt.mdl"] = Vector(0.36735, -3.4249, 6.78505),
-	["models/wystan/attachments/2cog.mdl"] = Vector(0.36575, -3.2889, 7.10015),
-	["models/cw2/attachments/l96_scope.mdl"] = Vector(0.09362, 4.07048, -0.085635),
+	["models/cw2/attachments/microt1.mdl"] = {lens = Vector(0.0471, -2.3467, 1.9022), forward = Vector(0, 1, 0)},
+	["models/cw2/attachments/schmidt.mdl"] = {lens = Vector(0, 0.36735, 6.78505), forward = Vector(1, 0, 0)},
+	["models/wystan/attachments/2cog.mdl"] = {lens = Vector(0.36575, -3.2889, 7.10015), forward = Vector(0, -1, 0)},
+	["models/cw2/attachments/l96_scope.mdl"] = {lens = Vector(0, 0.09362, -0.085635), forward = Vector(1, 0, 0)},
 }
 
 -- Scope render functions index these tables without a nil check, so new scopes need them.
@@ -89,7 +89,8 @@ local function sampleIdleBone(swep, boneName)
 	probe:SetNoDraw(true)
 	probe:SetPos(ZERO)
 	probe:SetAngles(ZERO_ANGLE)
-	local sequence = probe:LookupSequence(idle)
+	-- Some SWEPs name an idle sequence their model lacks; the engine then shows the first sequence.
+	local sequence = math.max(probe:LookupSequence(idle), 0)
 	local bone = probe:LookupBone(boneName)
 	local samples = {}
 	if sequence >= 0 and bone then
@@ -138,12 +139,13 @@ local function deriveSightAxis(swep, id, placement, samples)
 	end
 	forward:Normalize()
 
-	return {lens = lens / #samples, forward = forward}
+	-- The point is only somewhere on the sight line, so it may sit behind the eye.
+	return {lens = lens / #samples, forward = forward, derived = true}
 end
 
 local function sightGeometry(placement)
-	local lens = SCOPE_GEOMETRY[placement.model]
-	if lens then return {lens = lens, forward = SCOPE_FORWARD} end
+	local geometry = SCOPE_GEOMETRY[placement.model]
+	if geometry then return geometry end
 
 	local source = placement.aimSource
 	local samples = source and sampleIdleBone(source.swep, source.placement.bone)
@@ -184,7 +186,7 @@ local function fitScopeAim(target, placement, pos, samples)
 	for _, sample in ipairs(samples) do
 		local center = LocalToWorld(lens, ZERO_ANGLE, sample:GetTranslation(), sample:GetAngles())
 		local distance = (center.x + relief) / ray.x
-		if distance <= 0 then return end
+		if distance <= 0 and not geometry.derived then return end
 
 		x = x + center.y - ray.y * distance
 		z = z - center.z + ray.z * distance
@@ -861,4 +863,8 @@ return {
 	computePositions = computePositions,
 	deriveSightAxis = deriveSightAxis,
 	fitScopeAim = fitScopeAim,
+	sampleIdleBone = sampleIdleBone,
+	sightGeometry = sightGeometry,
+	modelPoint = modelPoint,
+	aimRay = aimRay,
 }

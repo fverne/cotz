@@ -1,13 +1,25 @@
 ITEM.name = "Saiga-12"
 ITEM.description= "A semi-automatic shotgun. Fires 12 gauge."
 ITEM.longdesc = "The Saiga-12 is a 12-gauge shotgun available in a wide range of configurations, patterned after the Kalashnikov series of assault rifles and named for the Saiga antelope.\nLike the Kalashnikov rifle variants, it is a rotating bolt, gas-operated gun that feeds from a box magazine.\nAll Saiga-12 configurations are recognizable as Kalashnikov-pattern guns by the large lever-safety on the right side of the receiver, the optic mounting rail on the left side of the receiver and the large top-mounted dust cover held in place by the rear of the recoil spring assembly."
-ITEM.model = "models/cw2/weapons/w_saiga_chan.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_saiga12s_w.mdl"
 ITEM.class = "cw_saiga12"
 ITEM.weaponCategory = "primary"
 ITEM.price = 20600
 ITEM.width = 5
 ITEM.height = 2
-ITEM.canAttach = false
+ITEM.validAttachments = {
+	"md_kobra",
+	"md_pso1",
+	"md_schmidt_shortdot",
+	"md_acog",
+	"md_nightforce_nxs",
+	"md_microt1",
+	"md_eotech",
+	"md_aimpoint",
+	"md_cmore",
+	"md_reflex",
+}
+ITEM.canAttach = true
 
 ITEM.bulletweight = 0.031
 ITEM.unloadedweight = 3.6
@@ -20,9 +32,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(7, -205, 1.6000000238419),
+	pos = Vector(5.2, -205, 5.6),
 	ang = Angle(0, 90, 0),
-	fov = 11,
+	fov = 10.1,
 }
 
 ITEM.pacData = {
@@ -34,7 +46,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/cw2/weapons/w_saiga_chan.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_saiga12s_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(12.524, -4.193, -1.228),

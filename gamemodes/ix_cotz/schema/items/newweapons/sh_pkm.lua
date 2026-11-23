@@ -1,13 +1,13 @@
 ITEM.name = "PKM"
 ITEM.description= "A large machinegun. Fires 7.62x54mm."
 ITEM.longdesc = "The PK is a 7.62x54mm general-purpose machine gun designed in the Soviet Union and currently in production in Russia.\nThe original PK machine gun was introduced in 1961 and then the improved PKM in 1969 to replace the SGM and RP-46 machine guns in Soviet service.\nIt remains in use as a front-line infantry and vehicle-mounted weapon with Russia's armed forces.\nThe PK has been exported extensively and produced in several other countries under license."
-ITEM.model = ("models/weapons/w_mach_pkmbenis.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_pkm_w.mdl"
 ITEM.class = "cw_pkm"
 ITEM.weaponCategory = "primary"
 ITEM.price = 50000
 ITEM.width = 6
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_pbs1"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_pbs1", "md_acog", "md_schmidt_shortdot", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.022
 ITEM.unloadedweight = 7.9
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(9.5, -205, 2.5),
-	ang = Angle(0, 90, -2),
-	fov = 12.5,
+	pos = Vector(7.9, -205, 4.9),
+	ang = Angle(0, 90, 0),
+	fov = 12.9,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
 						["Position"] = Vector(11.188, -4.175, -0.658),
-						["Model"] = "models/weapons/w_mach_pkmbenis.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_pkm_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

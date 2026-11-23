@@ -29,7 +29,7 @@ if CLIENT then
 	SWEP.LongPos = Vector(-2.572, 0, 1.169)
 	SWEP.LongAng = Vector(0.9, -0.041, 0)
 	
-	SWEP.MicroT1Pos = Vector(-2.529, 0, 0.385)
+	SWEP.MicroT1Pos = Vector(-2.533, 0, 0.345)
 	SWEP.MicroT1Ang = Vector(-0.661, 0.25, 0)
 
 	SWEP.EoTechPos = Vector(-2.546, 0, -0.57)

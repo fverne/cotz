@@ -203,20 +203,22 @@ def apply_models(text, models):
     table = find_table(text, r"SWEP\.AttachmentModelsVM")
     if table is None:
         anchor = re.compile(r"^SWEP\.Attachments\s*=", re.M).search(mask(text))
-        block = "if CLIENT then\n\tSWEP.AttachmentModelsVM = {\n\t}\nend\n\n"
-        position = anchor.start() if anchor else len(text)
-        text = text[:position] + block + text[position:]
+        block = "if CLIENT then\n\tSWEP.AttachmentModelsVM = {\n\t}\nend\n"
+        if anchor:
+            text = text[:anchor.start()] + block + "\n" + text[anchor.start():]
+        else:
+            text = text.rstrip("\n") + "\n\n" + block
         table = find_table(text, r"SWEP\.AttachmentModelsVM")
 
     for model in models:
         open_index, close_index = table
         span = entry_span(text, open_index, close_index, model["id"])
         if span:
-            for name, pattern in (("pos", "Vector"), ("angle", "Angle")):
-                values = model["pos"] if name == "pos" else model["angle"]
+            for name, pattern in (("pos", "Vector"), ("angle", "Angle"), ("size", "Vector")):
                 text, found = replace_in_span(text, span[0], span[1], r"\b%s\s*=\s*%s\([^)]*\)" % (name, pattern),
-                    "%s = %s" % (name, format_triple(pattern, values)))
-                if not found:
+                    "%s = %s" % (name, format_triple(pattern, model[name])))
+                span = entry_span(text, open_index, match_brace(text, open_index), model["id"])
+                if not found and name != "size":
                     raise ApplyError("%s has no %s field to update" % (model["id"], name))
         else:
             first = re.compile(r"(\[\s*\"[^\"]+\"\s*\]|\w+)\s*=\s*\{").search(mask(text), open_index + 1, close_index)
@@ -276,8 +278,30 @@ def top_level_entries(text, open_index, close_index):
             index += 1
 
 
+def remove_entry(text, open_index, close_index):
+    """Remove a table entry (`key = {...},`) and its line when nothing else shares it."""
+    code = mask(text)
+    start = open_index
+    key = re.search(r"(\[[^\]]*\]|\w+)\s*=\s*$", code[:open_index])
+    if key:
+        start = key.start()
+    end = close_index + 1
+    trailing = re.match(r"\s*,", code[end:])
+    if trailing:
+        end += trailing.end()
+    line_start = text.rfind("\n", 0, start) + 1
+    if not text[line_start:start].strip():
+        start = line_start
+        newline = text.find("\n", end)
+        if newline >= 0 and not text[end:newline].strip():
+            end = newline + 1
+    return text[:start] + text[end:]
+
+
 def apply_slot(text, slot, ids):
-    if not ids:
+    """Add IDs to the slot with the export's header, or set its list exactly when `replace` is set."""
+    replace = slot.get("replace")
+    if not ids and not replace:
         return text
 
     table = find_table(text, r"SWEP\.Attachments")
@@ -287,10 +311,19 @@ def apply_slot(text, slot, ids):
     header = re.compile(r"\bheader\s*=\s*%s" % re.escape(json.dumps(slot["header"])))
     for open_index, close_index in top_level_entries(text, *table):
         if header.search(text, open_index, close_index):
+            if replace and not ids:
+                return remove_entry(text, open_index, close_index)
             atts = find_table(text, r"\batts", open_index, close_index)
             if atts is None:
                 raise ApplyError("%s slot has no atts list" % slot["header"])
+            if replace:
+                indent = line_indent(text, open_index) if "\n" in text[atts[0]:atts[1]] else ""
+                indent = indent.expandtabs(4).replace("    ", "\t")
+                return text[:atts[0]] + format_id_list(ids, indent) + text[atts[1] + 1:]
             return add_string_items(text, atts[0], atts[1], ids)
+
+    if not ids:
+        return text
 
     entry = "\n\t%s = {header = %s, offset = {%s}, atts = %s}," % (
         lua_key(slot["key"]), json.dumps(slot["header"]), ", ".join(str(value) for value in slot["offset"]),
@@ -299,13 +332,58 @@ def apply_slot(text, slot, ids):
     return text[:open_index + 1] + entry + text[open_index + 1:]
 
 
+def remove_from_slots(text, ids):
+    """Remove IDs from every attachment slot, dropping slots left empty."""
+    if not ids:
+        return text
+    while True:
+        table = find_table(text, r"SWEP\.Attachments")
+        if table is None:
+            return text
+        for open_index, close_index in top_level_entries(text, *table):
+            atts = find_table(text, r"\batts", open_index, close_index)
+            if atts is None:
+                continue
+            present = set(re.findall(r'"([^"]+)"', text[atts[0]:atts[1]]))
+            doomed = [item_id for item_id in ids if item_id in present]
+            if not doomed:
+                continue
+            if present <= set(ids):
+                text = remove_entry(text, open_index, close_index)
+            else:
+                text = remove_string_items(text, atts[0], atts[1], doomed)
+            break
+        else:
+            return text
+
+
 def apply_weapon(text, export):
     text = apply_models(text, export.get("models", []))
     text = apply_fields(text, export.get("fields", []))
-    return apply_slot(text, export["slot"], export.get("attachments", []))
+    text = apply_slot(text, export["slot"], export.get("attachments", []))
+    removed = [item_id for item_id in export.get("removeAttachments", []) if item_id not in export.get("attachments", [])]
+    return remove_from_slots(text, removed)
 
 
-def apply_item(text, ids):
+def remove_string_items(text, open_index, close_index, ids):
+    """Remove string IDs from a list table, keeping the list's layout."""
+    for item_id in ids:
+        body = text[open_index + 1:close_index]
+        updated = re.sub(r'\s*%s\s*,?' % re.escape(json.dumps(item_id)), "", body, count=1)
+        if updated != body:
+            # A removed last element can leave a dangling separator.
+            updated = re.sub(r",(\s*)$", r"\1", updated) if not body.rstrip().endswith(",") else updated
+            if "\n" not in updated:
+                updated = updated.strip()
+            text = text[:open_index + 1] + updated + text[close_index:]
+            close_index = match_brace(text, open_index)
+    return text
+
+
+def apply_item(text, ids, removed=()):
+    table = find_table(text, r"(?m)^ITEM\.validAttachments")
+    if table and removed:
+        text = remove_string_items(text, table[0], table[1], removed)
     if not ids:
         return text
 
@@ -345,8 +423,9 @@ def apply_export(root, export, dry_run=False):
 
     targets = [(weapon_path, lambda text: apply_weapon(text, export))]
     attachments = export.get("attachments", [])
-    for path in item_files(root, export["class"]) if attachments else []:
-        targets.append((path, lambda text: apply_item(text, attachments)))
+    removed = [item_id for item_id in export.get("removeAttachments", []) if item_id not in attachments]
+    for path in item_files(root, export["class"]) if attachments or removed else []:
+        targets.append((path, lambda text: apply_item(text, attachments, removed)))
 
     changed = []
     for path, transform in targets:

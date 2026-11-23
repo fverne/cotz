@@ -1,7 +1,7 @@
 ITEM.name = "Fort-12"
 ITEM.description= "A semi-automatic pistol chambered for 9x18mm."
 ITEM.longdesc = "An Ukranian-made service pistol that has been adopted by many east-block countries.\nAlmost as common as the PMm and is more popular due to its larger magazine capacity."
-ITEM.model = "models/srp/weapons/w_fort12.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_fort_w.mdl"
 ITEM.class = "cw_fort12"
 ITEM.weaponCategory = "secondary"
 ITEM.width = 2
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(6, -15, 1.5),
+	pos = Vector(1.3, -205, 3.6),
 	ang = Angle(0, 90, 0),
-	fov = 45,
+	fov = 3.5,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/srp/weapons/w_fort12.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_fort_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-9.11, 8.792, 0.84),

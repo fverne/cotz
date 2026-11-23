@@ -1,7 +1,7 @@
 ITEM.name = "M1911"
 ITEM.description= "An American military surplus semi-automatic pistol chambered for .45 ACP."
 ITEM.longdesc = "The M1911 first came into service in the American army in 1911 and has yet to be phased out of production, this pistol is a military surplus from the Vietnam war.\nIt's very reliable even in an area as extreme as the Zone, plus the heavy round has exceptional stopping power against unarmored targets."
-ITEM.model = "models/weapons/cw_pist_m1911.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_colt1911_w.mdl"
 ITEM.class = "cw_m1911"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 6600
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(7, -205, 1.2000000476837),
+	pos = Vector(2.2, -205, 3),
 	ang = Angle(0, 90, 0),
-	fov = 4,
+	fov = 3.2,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/cw_pist_m1911.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_colt1911_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-9.071, 9.525, 0.823),

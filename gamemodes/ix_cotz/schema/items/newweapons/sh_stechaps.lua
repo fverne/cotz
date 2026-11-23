@@ -1,7 +1,7 @@
 ITEM.name = "Stechkin APS"
 ITEM.description= "A fully-automatic handgun with a large magazine. Fires 9x18mm."
 ITEM.longdesc = "When the Stetchkin automatic pistol was phased out of Soviet army service, a few hundred mysteriously made their way into the Zone.\nIt's low weight, fully automatic capacity and concealability makes it an useful alternative to a submachinegun.\nAutomatic fire makes recoil control an issue."
-ITEM.model = "models/weapons/w_ma85_wf_pt10.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_aps.mdl"
 ITEM.class = "cw_stechaps"
 ITEM.weaponCategory = "secondary"
 ITEM.price =  7500
@@ -31,7 +31,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_ma85_wf_pt10.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_aps.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-6.72, -1.028, 4.074),
@@ -61,4 +61,10 @@ ITEM.pacData = {
 		["EditorExpand"] = true,
 	},
 },
+}
+
+ITEM.iconCam = {
+	pos = Vector(1.9, -205, -1.9),
+	ang = Angle(0, 90, 0),
+	fov = 3.3,
 }

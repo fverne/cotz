@@ -6,7 +6,7 @@ ITEM.longdesc = "Originally made for the civilian market, its gas-operated actio
 	.. "\n"
 	.. "Ammo: 12 Gauge\n"
 	.. "Magazine Capacity: 7"
-ITEM.model = ("models/wick/weapons/stalker/stcopwep/w_mp153_model.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_mp153_w.mdl"
 ITEM.class = "cw_mp153"
 ITEM.weaponCategory = "primary"
 ITEM.price = 11000
@@ -25,9 +25,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-10, 184, -1),
-	ang = Angle(0, 270, 0),
-	fov = 12.5,
+	pos = Vector(10.3, -205, 3.1),
+	ang = Angle(0, 90, 0),
+	fov = 11.6,
 }
 
 ITEM.pacData = {
@@ -41,7 +41,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(11.98, -4.153, -3.575),
-						["Model"] = "models/wick/weapons/stalker/stcopwep/w_mp153_model.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_mp153_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

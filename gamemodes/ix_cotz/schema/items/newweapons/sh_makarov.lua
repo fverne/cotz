@@ -1,7 +1,7 @@
 ITEM.name = "Makarov"
 ITEM.description= "A Russian steel-framed police pistol that fires 9x18 rounds."
 ITEM.longdesc = "The Makarov is the replacement for the Tokarev pistol.\nIt's a cheap, compact and reliable choice, but it's not very comfortable and has a smaller magazine than other handguns of same weight category."
-ITEM.model = "models/weapons/w_makarov_pm_fixed.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_pm_w.mdl"
 ITEM.class = "cw_makarov"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 900
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-7.5, -205, 4.5),
-	ang = Angle(0, 90, -5),
-	fov = 3.5,
+	pos = Vector(1.3, -205, 2.9),
+	ang = Angle(0, 90, 0),
+	fov = 3.1,
 }
 
 ITEM.pacData = {

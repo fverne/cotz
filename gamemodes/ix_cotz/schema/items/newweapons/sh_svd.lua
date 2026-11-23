@@ -1,7 +1,7 @@
 ITEM.name = "Dragunov SVD"
 ITEM.description= "A sharpshooter rifle based on the AK. Fires 7.62x54mm."
 ITEM.longdesc = "The SVD is a marksman's rifle designed to fill the gap between assault and sniper rifle for infantry squads. It was designed from the AK rifle. \nThe SVD is able to deliver accurate shots in rapid succession, but it is not as precise as a sniper rifle."
-ITEM.model = ("models/weapons/drag/w_snip_dragn.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_svd_w.mdl"
 ITEM.class = "cw_dragunov"
 ITEM.weaponCategory = "primary"
 ITEM.price = 44000
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(15, -205, 1.6000000238419),
-	ang = Angle(0, 90, -3),
-	fov = 12,
+	pos = Vector(13.2, -205, 3.7),
+	ang = Angle(0, 90, 0),
+	fov = 14,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/drag/w_snip_dragn.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_svd_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(17.784, -5.054, -1.356),

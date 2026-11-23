@@ -1,7 +1,7 @@
 ITEM.name = "Beretta 92"
 ITEM.description= "A semi-automatic pistol chambered for 9x19mm."
 ITEM.longdesc = "The Beretta 92, also known as the M9, is the Italian-made replacement for the M1911 pistol in the American army.\nIt is a semi-automatic pistol firing the 9x19mm cartridge.\nIt's popular with many stalkers as a sidearm since its ammo is easy to come across and it's very reliable."
-ITEM.model = ("models/weapons/w_M92f_p228.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_beretta92fs.mdl"
 ITEM.class = "cw_beretta92"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 3000
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(6.5, -205, 1.5),
+	pos = Vector(2.1, -205, 2.9),
 	ang = Angle(0, 90, 0),
-	fov = 4,
+	fov = 3.4,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_M92f_p228.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_beretta92fs.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-9.48, 8.311, 0.71),

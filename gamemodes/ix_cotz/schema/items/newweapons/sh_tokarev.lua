@@ -1,7 +1,7 @@
 ITEM.name = "Tokarev TT-33"
 ITEM.description= "An old semi-automatic handgun. Fires 7.62x25mm."
 ITEM.longdesc = "The TT-33 is a Russian semi-automatic pistol.\nIt was developed in the early 1930s by Fedor Tokarev as a service pistol for the Soviet military to replace the Nagant M1895 revolver that had been in use since Tsarist times, though it ended up being used in conjunction with rather than replacing the M1895.\nIt served until 1952, when it was replaced by the Makarov pistol."
-ITEM.model = ("models/weapons/w_pist_tt38.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_tt33_w.mdl"
 ITEM.class = "cw_tokarev"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 800
@@ -21,9 +21,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-0.5, 200, -1.7000000476837),
-	ang = Angle(0, 270, 0),
-	fov = 4,
+	pos = Vector(1.8, -205, 3.1),
+	ang = Angle(0, 90, 0),
+	fov = 3.4,
 }
 
 ITEM.pacData = {
@@ -35,7 +35,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_pist_tt38.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_tt33_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-6.973, 2.927, 2.687),

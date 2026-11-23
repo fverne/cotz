@@ -1,13 +1,13 @@
 ITEM.name = "SVU-A"
 ITEM.description = "A bullpup rifle chambered for 7.62x54mmR."
 ITEM.longdesc = "The SVU-A places its action and magazine behind the pistol grip. That bullpup arrangement retains a substantial rifle mechanism within a shorter overall body. The unusual layout is visible in its balance and in the amount of the weapon carried behind the shooting hand."
-ITEM.model = ("models/weapons/w_snip_svu.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_svu_w.mdl"
 ITEM.class = "cw_svu"
 ITEM.weaponCategory = "primary"
 ITEM.price = 76000
 ITEM.width = 5
 ITEM.height = 2
-ITEM.validAttachments = {"md_kobra","md_pso1"}
+ITEM.validAttachments = {"md_kobra","md_pso1", "md_schmidt_shortdot", "md_acog", "md_nightforce_nxs", "md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex"}
 
 ITEM.bulletweight = 0.022
 ITEM.unloadedweight = 3.6
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-6.95, -199.12, 17.43),
-	ang = Angle(4.6, 85.73, 0),
-	fov = 13.36
+	pos = Vector(2.7, -205, 3.4),
+	ang = Angle(0, 90, 0),
+	fov = 9.8,
 }
 
 
@@ -35,7 +35,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_snip_svu.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_svu_w.mdl",
 						["ClassName"] = "model",
 												["Translucent"] = true,
 						["Position"] = Vector(9.2, -4, -2.7),

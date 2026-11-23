@@ -1,13 +1,13 @@
 ITEM.name = "Barrett M98b"
 ITEM.description = "A bolt-action rifle chambered for .338 Lapua Magnum."
 ITEM.longdesc = "The Barrett M98b builds a long bolt-action rifle around a substantial metal chassis. Its stock, barrel and optical mounting space favour a deliberate firing position. The heavy assembly takes up considerable room in a travelling load, well before a sight and ammunition are added."
-ITEM.model = "models/weapons/w_ins2_warface_barret_m98b.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_m98b_w.mdl"
 ITEM.class = "cw_barrettm98b"
 ITEM.weaponCategory = "primary"
 ITEM.price = 98000
 ITEM.width = 6
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_nightforce_nxs","md_saker"}
+ITEM.validAttachments = {"md_saker"}
 
 ITEM.bulletweight = 0.011
 ITEM.unloadedweight = 6.5
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-26.58, -197.02, 13.53),
-	ang = Angle(3.44, 78.94, 0),
-	fov = 16.08
+	pos = Vector(10.8, -205, 4.6),
+	ang = Angle(0, 90, 0),
+	fov = 12.6,
 }
 
 
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Model"] = "models/weapons/w_ins2_warface_barret_m98b.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_m98b_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] =	Vector(14.702, -4.244, -1.16),

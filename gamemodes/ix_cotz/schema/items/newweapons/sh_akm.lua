@@ -7,13 +7,13 @@ ITEM.longdesc = "Despite being replaced in the late 1970s by the AK-74 the AKM i
 	.. "\n"
 	.. "Ammo: 7.62x39mm\n"
 	.. "Magazine Capacity: 30"
-ITEM.model = "models/weapons/w_ops_ak47.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_akm.mdl"
 ITEM.class = "cw_akm"
 ITEM.weaponCategory = "primary"
 ITEM.price = 19250
 ITEM.width = 5
 ITEM.height = 2
-ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
+ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.019
 ITEM.unloadedweight = 3.3
@@ -26,9 +26,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(8, -205, 0),
-	ang = Angle(0, 90, 5),
-	fov = 10.6,
+	pos = Vector(5.7, -205, 1.1),
+	ang = Angle(0, 90, 0),
+	fov = 9.6,
 }
 
 ITEM.pacData = {
@@ -41,7 +41,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Model"] = "models/weapons/w_ops_ak47.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_akm.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] =	Vector(11.522, -4.244, -1.16),

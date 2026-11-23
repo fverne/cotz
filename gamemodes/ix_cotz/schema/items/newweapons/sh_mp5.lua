@@ -1,13 +1,13 @@
 ITEM.name = "HK MP5"
 ITEM.description= "A black submachinegun. Fires 9x19mm."
 ITEM.longdesc = "The MP5 is an iconic German submachinegun developed in the 1960s, known for it's reliability and effectiveness.\nThe MP5 differentiates from other submachineguns because it fires from a closed bolt.\nIt uses the same operating mechanism as the G3 rifle which has made it one of the most accurate submachineguns in the world."
-ITEM.model = "models/srp/weapons/w_mp5.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_mp5_w.mdl"
 ITEM.class = "cw_mp5"
 ITEM.weaponCategory = "primary"
 ITEM.price = 12750
 ITEM.width = 3
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm", "md_schmidt_shortdot", "md_acog", "md_nightforce_nxs"}
 ITEM.validUpgrades = {"up_firerate1"}
 
 ITEM.bulletweight = 0.008
@@ -21,9 +21,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(10, -205, 2),
+	pos = Vector(1.2, -205, 5.6),
 	ang = Angle(0, 90, 0),
-	fov = 9.7,
+	fov = 7.7,
 }
 
 
@@ -38,7 +38,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
 						["Position"] = Vector(17.39, -4.308, 0.361),
-						["Model"] = "models/srp/weapons/w_mp5.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_mp5_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

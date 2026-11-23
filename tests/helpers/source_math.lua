@@ -104,4 +104,4 @@ function SourceMathMatrix(pos, angle)
 	}
 end
 
-return {toMatrix = toMatrix}
+return {toMatrix = toMatrix, toAngle = toAngle}

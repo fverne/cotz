@@ -1,7 +1,7 @@
 ITEM.name = "TOZ BM-16 Sawnoff"
 ITEM.description= "A sawn-off hunting shotgun. Fires 12 gauge."
 ITEM.longdesc = "This sawn-off double barrelled shotgun is a must-have in many rookies eyes.\nIt dispatches mutants and unarmored stalkers with ease, and is cheap to keep supplied with ammo."
-ITEM.model = "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_bm16_w.mdl"
 ITEM.class = "cw_toz66short"
 ITEM.weaponCategory = "primary"
 ITEM.price = 4400
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-5, 25, 0.5),
-	ang = Angle(0, 270, 0),
-	fov = 45,
+	pos = Vector(4.7, -205, 3.8),
+	ang = Angle(0, 90, 0),
+	fov = 5.4,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_bm16_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(9.6, -4.18, -4.8),

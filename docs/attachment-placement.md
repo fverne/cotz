@@ -10,6 +10,8 @@ weapon and item definitions.
 | `lua/autorun/client/cotz_attachment_placement.lua` | In-game editor and batch command (client, listen host or singleplayer). |
 | `lua/cotz/attachment_policy.lua` | Which sights each weapon family may receive, mounts, and the ranked donor list. |
 | `docs/attachments/apply_placements.py` | Applies the saved exports to `lua/weapons/<class>/shared.lua` and the item files. |
+| `docs/attachments/offline_placement.lua` | Runs the tool's transfer and aim fits without the game (run with `luatex --luaonly`). |
+| `docs/attachments/mdl_pose.py` | Samples bone and attachment matrices from `.mdl` animations for the offline runner. |
 
 ## Rollout policy
 
@@ -20,7 +22,8 @@ The policy file decides which sights the tool may add. Weapons default to a fami
 - **Pistols** take rail red dots only: Micro T-1, EoTech, Aimpoint, C-More, Reflex, and RMR.
 - **Revolvers** take the pistol red dots and the Schmidt ShortDot.
 - **Shotguns** take sights only when `mounts` lists a rail or dovetail on the viewmodel itself.
-  Rail adapter models do not count. The TOZ-34 and its sawn-off use the hand-placed barrel mounts.
+  Rail adapter models do not count. The Anomaly Remington 870 and Saiga-12 qualify; the TOZ-34 and its
+  sawn-off keep sights over the barrel.
 - **WW2 and period weapons** take suppressors only.
 - New PSO-1 entries need a dovetail: `mounts[class] = "dovetail"` or `SWEP.HasDovetailMount = true`.
   Keep the existing PSO-1 setups on the Mosin, SVT-40, and Obrez Malfunction.
@@ -53,9 +56,10 @@ policy donors; pass the weapon's own class to move only its existing models as a
 ## Aim offsets
 
 Saving fits the aim offset of every new or moved sight against the target's idle animation and keeps
-the authored aim angle. The Schmidt ShortDot, ACOG, and Nightforce NXS use their measured rear lens
-centers. Every other sight recovers its line of sight from the donor's hand-tuned aim, so new red
-dots and PSO-1s align the same way they do on the donor. Without an authored aim, the eye relief follows
+the authored aim angle. If the idle sequence the SWEP names is missing from its model, sampling uses the
+first sequence, as the engine does. The Micro T-1 uses the measured center of its rear aperture.
+The Schmidt ShortDot, ACOG, and Nightforce NXS use measured lens axes. Other sights recover their line
+of sight from the donor's hand-tuned aim. Without an authored aim, the eye relief follows
 the donor's aim relative to its ironsights. New scopes also receive zeroed alignment tables
 (`PSO1AxisAlign` and similar) when the weapon lacks them.
 
@@ -86,4 +90,24 @@ Rail optics on a dovetail weapon without a rail receive an `md_rail` entry using
 `models/wystan/attachments/akrailmount.mdl` and `SWEP.SightWithRail = true`. Use the model's existing
 rail or rail bodygroup where present.
 
-Run `tests/run.sh attachment_placement attachment_apply` after changing the tool or the script.
+Exports can also replace a slot's list (`slot.replace`) and remove IDs from every slot and from the
+items (`removeAttachments`); the Anomaly reskin uses both.
+
+## Offline runner
+
+`docs/attachments/offline_placement.lua` loads weapon files with stubs, translating GMod-only syntax, and
+samples viewmodel animations through `mdl_pose.py`, which reads models from the sibling addons. It runs
+the same placement and fitting code as the editor:
+
+```sh
+luatex --luaonly docs/attachments/offline_placement.lua validate cw_ak74 cw_dragunov
+luatex --luaonly docs/attachments/offline_placement.lua axes md_schmidt_shortdot cw_ak74 cw_sks
+luatex --luaonly docs/attachments/offline_placement.lua anomaly OUT_DIR SPEC.lua
+luatex --luaonly docs/attachments/offline_placement.lua suppressors OUT_DIR SPEC.lua
+```
+
+`validate` compares fits with authored aims, `axes` prints each gun's line of sight in a sight's model
+space, and the last two produce the exports for the [Anomaly reskins](anomaly-reskin.md). Mirrored
+viewmodels cannot be sampled.
+
+Run `tests/run.sh attachment_placement attachment_apply` after changing the tool or the scripts.

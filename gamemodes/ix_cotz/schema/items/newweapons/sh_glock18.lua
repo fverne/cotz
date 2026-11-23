@@ -1,14 +1,14 @@
 ITEM.name = "Glock 18"
 ITEM.description= "An Austrian handgun that fires 9x19mm."
 ITEM.longdesc = "The Glock is an Austrian polymer handgun, famous for it's price, reliability and trigger safety mechanism. The Glock 18 is a variant on the Glock 17 pattern, enabling it to fire in full auto.\nIt's favored by police agencies around the world and comes in many flavors."
-ITEM.model = "models/cw2_g18/w_dmg_glock.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_glock_w.mdl"
 ITEM.class = "cw_glock18"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 6700
 ITEM.width = 2
 ITEM.height = 1
 
-ITEM.validAttachments = {"md_tundra9mm"}
+ITEM.validAttachments = {"md_tundra9mm", "md_microt1", "md_eotech", "md_rmr"}
 
 ITEM.bulletweight = 0.008
 ITEM.unloadedweight = 0.625
@@ -21,9 +21,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(20, 0, -2.9000000953674),
-	ang = Angle(0, 180, 5),
-	fov = 45,
+	pos = Vector(1.6, -205, 2.7),
+	ang = Angle(0, 90, 0),
+	fov = 3.3,
 }
 
 ITEM.pacData = {
@@ -35,7 +35,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/cw2_g18/w_dmg_glock.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_glock_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-6.774, 4.172, 3.359),

@@ -1,7 +1,7 @@
 ITEM.name = "PPSh-41"
 ITEM.description= "A heavy submachinegun with a wooden stock. Fires 7.62x25mm."
 ITEM.longdesc = "The PPSh is a Soviet submachinegun that gained a fearful reputation in World War II as a fast and effective weapon. \nIt's substantial weight coupled with a gas compensator grants it low recoil in bursts and automatic fire. It fires from the open bolt. \nThese have been a popular choice with rookies compared to western, newer submachineguns because of the price and ammunition accessibility."
-ITEM.model = "models/weapons/w_grub_ppsh_stick.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ppsh41_w.mdl"
 ITEM.class = "cw_ppsh"
 ITEM.weaponCategory = "primary"
 ITEM.price = 4200
@@ -21,9 +21,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(0, 10.5, -235),
-	ang = Angle(-87.658996582031, 0, -178),
-	fov = 10.8,
+	pos = Vector(4.2, -205, 4.3),
+	ang = Angle(0, 90, 0),
+	fov = 8.7,
 }
 
 ITEM.pacData = {
@@ -43,7 +43,7 @@ ITEM.pacData = {
 						["UniqueID"] = "3544245692",
 						["Angles"] = Angle(60.521, 89.241, 4.292),
 						["Bone"] = "spine 2",
-						["Model"] = "models/weapons/w_grub_ppsh_stick.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_ppsh41_w.mdl",
 						["EditorExpand"] = true,
 					},
 				},
