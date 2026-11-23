@@ -15,7 +15,14 @@ weapon and item definitions.
 
 ## Rollout policy
 
-The policy file decides which sights the tool may add. Weapons default to a family by
+Regular Helix CW firearms use the sight rules below and have at most one detachable suppressor
+per class. `lua/cotz/weapon_attachment_profiles.lua` applies the rules to inventory and SWEP slots
+and records existing sight exceptions. CW keeps authored mounts and sight aims and fills the remaining placements from
+`lua/cotz/weapon_attachment_poses.lua`. Those fallback positions sample each viewmodel's idle pose
+and use the receiver surface and the sight's optical axis as placement references. Check the
+fallback entries after changing viewmodels.
+
+Weapons default to a family by
 `ITEM.weaponCategory` (primary: rifle, secondary: pistol), with per-class overrides.
 
 - **Rifles** take every sight.
@@ -27,6 +34,9 @@ The policy file decides which sights the tool may add. Weapons default to a fami
 - **WW2 and period weapons** take suppressors only.
 - New PSO-1 entries need a dovetail: `mounts[class] = "dovetail"` or `SWEP.HasDovetailMount = true`.
   Keep the existing PSO-1 setups on the Mosin, SVT-40, and Obrez Malfunction.
+
+In the regular CotZ catalogue, the 1P29 fits listed dovetail mounts and the PU fits the Mosin,
+SVT-40 and SKS. The staged Anomaly weapons use shared CW hardware. Fixed optics stay with their guns.
 
 The tool never removes existing entries. It adds only sights, so suppressors stay limited to the
 calibre-specific ones each weapon already lists; other attachments are only repositioned.
@@ -65,10 +75,24 @@ the donor's aim relative to its ironsights. New scopes also receive zeroed align
 
 New sights that cannot be fitted are left out of the export and reported as skipped: aiming without an
 offset would break. This happens when a sight faces away from the sightline, or the donor has no aim for
-it. Mirrored viewmodels and third-person models need manual setup.
+it. The placement editor cannot fit mirrored viewmodels.
 
-The scope render camera follows the player's pitch and yaw. Keep model and mount orientation in the
-attachment placement, and use the scope camera alignment fields for sight calibration and lens roll.
+Red dots in standard ADS draw along the render camera's center ray. As ADS settles, CW also shifts the
+whole viewmodel sideways and vertically so the mounted optic's aperture sits on that ray. The
+correction uses the live mount, including static pistol slide mounts, and keeps the current eye relief.
+Free Aim and backup sights retain their own aim behavior. The CW scope cameras start from the scene view, and their dot or chevron is centered
+in the square render target and the simple scope overlay. Reticle texture offsets account for artwork
+whose aiming point is a few texels away from the texture center. Keep model and mount orientation in
+the placement and use the scope camera alignment fields for calibration and lens roll.
+
+## Third-person display
+
+CW copies installed attachment models and their offsets from the first-person idle pose, using the
+muzzle points to align them with the worldmodel. Where both models have a `wpn_body` bone, the distance
+from that bone to the muzzle estimates the difference in scale. Rail adapters follow the installed
+sight. The server replicates the installed attachment list so other players can see changes and
+clients entering visibility can draw the current setup. Placement is approximate, especially on
+legacy model pairs with differently oriented muzzle points.
 
 ## Applying exports
 
@@ -104,10 +128,20 @@ luatex --luaonly docs/attachments/offline_placement.lua validate cw_ak74 cw_drag
 luatex --luaonly docs/attachments/offline_placement.lua axes md_schmidt_shortdot cw_ak74 cw_sks
 luatex --luaonly docs/attachments/offline_placement.lua anomaly OUT_DIR SPEC.lua
 luatex --luaonly docs/attachments/offline_placement.lua suppressors OUT_DIR SPEC.lua
+luatex --luaonly docs/attachments/offline_placement.lua sizes /tmp/attachment-sizes.jsonl
 ```
 
 `validate` compares fits with authored aims, `axes` prints each gun's line of sight in a sight's model
-space, and the last two produce the exports for the [Anomaly reskins](anomaly-reskin.md). Mirrored
-viewmodels cannot be sampled.
+space, and `anomaly` and `suppressors` produce exports for the [Anomaly reskins](anomaly-reskin.md).
 
-Run `tests/run.sh attachment_placement attachment_apply` after changing the tool or the scripts.
+`sizes` audits the generated reskin placements and the profile fallback table against installed model
+meshes. Its report includes each before-and-after extent, receiver width where measurable, proposed
+model transforms and aim, contact clearance, and aperture deviation across sampled idle frames. Pistol rails use the
+slide's measured width, riser length is limited to the mounting footprint, and each optic and
+suppressor family has a reference size in game units. A resize preserves the seating height or
+muzzle pivot. The runner reseats nearby rail sights by mesh contact and refits ADS against the aperture. Unmeasured apertures still use the reference aim
+line. The audit uses the stored unreflected frame on mirrored viewmodels. Idle motion and client
+rendering still affect how the in-game lens appears.
+
+Run `tests/run.sh attachment_placement attachment_apply weapon_reticle scope_camera` after changing the
+placement or reticle code.

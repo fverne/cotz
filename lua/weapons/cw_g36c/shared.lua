@@ -23,9 +23,9 @@ if CLIENT then
 		["md_saker"] = {
 			model = "models/cw2/attachments/556suppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.004086, -1.063765, -11.853322),
+			pos = Vector(0.003677, -1.301837, -13.36434),
 			angle = Angle(-0.000868, 179.999836, 89.999727),
-			size = Vector(0.8, 0.8, 0.8),
+			size = Vector(0.72, 0.72, 0.72),
 		},
 	}
 end
@@ -153,7 +153,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_g36k_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1, 4.6324, -4.4206)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.G36K.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.G36K.FIRE_SILENCED"
 SWEP.LuaViewmodelRecoil = true

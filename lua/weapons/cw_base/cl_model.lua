@@ -1,3 +1,5 @@
+local OPTIC_APERTURES = include("cotz/optic_apertures.lua")
+
 SWEP.BlendPos = Vector(0, 0, 0)
 SWEP.BlendAng = Vector(0, 0, 0)
 SWEP.OldDelta = Angle(0, 0, 0)
@@ -384,72 +386,78 @@ function SWEP:offsetBones()
 	end
 end
 
+-- LookupAttachment returns 0 for a missing name, and 0 is not a usable attachment. Weapons that never
+-- named their muzzle fall back to the conventional name, then the configured index.
+local function getMuzzleAttachmentIndex(weapon, model)
+	local index = model:LookupAttachment(weapon.MuzzleAttachmentName)
+	if index > 0 then return index end
+
+	index = model:LookupAttachment("muzzle")
+	if index > 0 then return index end
+
+	return weapon.MuzzleAttachment
+end
+
+-- The flash uses only the muzzle attachment's position and is aimed along the view. Attaching the particle
+-- to the point would also follow its axes, and the Anomaly models orient them differently from the legacy
+-- CW2 models (forward points sideways, up points back toward the stock), which throws the flash off the gun.
 function SWEP:CreateMuzzle()
 	if self.Owner:ShouldDrawLocalPlayer() then
 		return
 	end
 
-	vm = self.CW_VM
+	local model = self.CW_VM
 
-	if IsValid(vm) then
-		vm:StopParticles()
-
-		muz = vm:LookupAttachment(self.MuzzleAttachmentName)
-
-		if muz then
-			muz2 = vm:GetAttachment(muz)
-
-			if muz2 then
-				EA = EyeAngles()
-
-				local pos = muz2.Pos
-				local ang = EA
-
-				if self.MuzzlePosMod then
-					pos = muz2.Pos + EA:Right() * self.MuzzlePosMod.x + EA:Forward() * self.MuzzlePosMod.y + EA:Up() * self.MuzzlePosMod.z
-				end
-
-				if self.dt.Suppressed then
-					if self.MuzzleEffectSupp then
-						if not self.NoSilMuz then
-							if (self.dt.State == CW_AIMING and self.SimulateCenterMuzzle) or (self.dt.State == CW_AIMING and self:canUseSimpleTelescopics()) then
-								ParticleEffect(self.MuzzleEffectSupp, pos + self.Owner:GetVelocity() * 0.03 + EA:Forward() * 70 - EA:Up() * 3, EA, vm)
-							else
-								if self.PosBasedMuz then
-									ParticleEffect(self.MuzzleEffectSupp, pos + self.Owner:GetVelocity() * 0.03, EA, vm) -- using velocity to add to the position 'simulates' attaching it to a control point
-								else
-									ParticleEffectAttach(self.MuzzleEffectSupp, PATTACH_POINT_FOLLOW, vm, muz)
-								end
-							end
-						end
-					end
-				else
-					if self.MuzzleEffect then
-						if (self.dt.State == CW_AIMING and self.SimulateCenterMuzzle) or (self.dt.State == CW_AIMING and self:canUseSimpleTelescopics()) then
-							ParticleEffect(self.MuzzleEffect, pos + self.Owner:GetVelocity() * 0.03 + EA:Forward() * 70 - EA:Up() * 3, EA, vm)
-						else
-							if self.PosBasedMuz then
-								ParticleEffect(self.MuzzleEffect, pos + self.Owner:GetVelocity() * 0.03, EA, vm)
-							else
-								ParticleEffectAttach(self.MuzzleEffect, PATTACH_POINT_FOLLOW, vm, muz)
-							end
-						end
-					end
-
-					local dlight = DynamicLight(self:EntIndex())
-
-					dlight.r = 255
-					dlight.g = 218
-					dlight.b = 74
-					dlight.Brightness = 4
-					dlight.Pos = pos + self.Owner:GetAimVector() * 3
-					dlight.Size = 96
-					dlight.Decay = 128
-					dlight.DieTime = CurTime() + FrameTime()
-				end
-			end
-		end
+	if not IsValid(model) then
+		return
 	end
+
+	model:StopParticles()
+
+	local muzzle = model:GetAttachment(getMuzzleAttachmentIndex(self, model))
+
+	if not muzzle then
+		return
+	end
+
+	local viewAngles = EyeAngles()
+	local pos = muzzle.Pos
+
+	local posMod = self.MuzzlePosMod
+
+	if posMod then
+		pos = pos + viewAngles:Right() * posMod.x + viewAngles:Forward() * posMod.y + viewAngles:Up() * posMod.z
+	end
+
+	-- Adding velocity 'simulates' attaching the effect to the moving muzzle.
+	local effectPos = pos + self.Owner:GetVelocity() * 0.03
+
+	if self.dt.State == CW_AIMING and (self.SimulateCenterMuzzle or self:canUseSimpleTelescopics()) then
+		effectPos = effectPos + viewAngles:Forward() * 70 - viewAngles:Up() * 3
+	end
+
+	if self.dt.Suppressed then
+		if self.MuzzleEffectSupp and not self.NoSilMuz then
+			ParticleEffect(self.MuzzleEffectSupp, effectPos, viewAngles, model)
+		end
+
+		return
+	end
+
+	if self.MuzzleEffect then
+		ParticleEffect(self.MuzzleEffect, effectPos, viewAngles, model)
+	end
+
+	local dlight = DynamicLight(self:EntIndex())
+
+	dlight.r = 255
+	dlight.g = 218
+	dlight.b = 74
+	dlight.Brightness = 4
+	dlight.Pos = pos + self.Owner:GetAimVector() * 3
+	dlight.Size = 96
+	dlight.Decay = 128
+	dlight.DieTime = CurTime() + FrameTime()
 end
 
 function SWEP:getMuzzleModel()
@@ -542,6 +550,74 @@ function SWEP:_setupAttachmentModel(data)
 	data.ent:SetupBones()
 end
 
+local function getAttachmentPoint(model, name, fallback)
+	local index = model:LookupAttachment(name)
+	return model:GetAttachment(index > 0 and index or fallback)
+end
+
+local function getMuzzleDistance(model, muzzle)
+	local bone = model:LookupBone("wpn_body")
+	local matrix = bone and model:GetBoneMatrix(bone)
+
+	if matrix then
+		return muzzle.Pos:Distance(matrix:GetTranslation())
+	end
+end
+
+local function sampleViewmodelMounts(weapon)
+	local vm = weapon.CW_VM
+	local idle = weapon.Animations and weapon.Animations.idle
+	if type(idle) == "table" then
+		idle = idle[1]
+	end
+
+	-- Initialization samples the idle pose before the draw animation starts.
+	if idle then
+		vm:ResetSequence(idle)
+		vm:SetCycle(0)
+		vm:InvalidateBoneCache()
+	end
+
+	vm:SetupBones()
+	local muzzle = getAttachmentPoint(vm, weapon.MuzzleAttachmentName, weapon.MuzzleAttachment)
+	if not muzzle then return end
+
+	weapon.cotzWorldAttachmentSource = {
+		muzzle = muzzle,
+		distance = getMuzzleDistance(vm, muzzle),
+		bones = {},
+	}
+end
+
+-- Rail-mounted sights on a moving slide bone can name a stationary bone in staticBone. The slide's idle pose
+-- is stored relative to that bone, so the sight stays put while the slide cycles.
+local function recordStaticMount(weapon, data)
+	data._staticRel, data._staticBone = nil, nil
+	if not data.staticBone or not data._bone then return end
+
+	local staticBone = weapon.CW_VM:LookupBone(data.staticBone)
+	local staticMatrix = staticBone and weapon.CW_VM:GetBoneMatrix(staticBone)
+	local boneMatrix = weapon.CW_VM:GetBoneMatrix(data._bone)
+	if not staticMatrix or not boneMatrix then return end
+
+	data._staticBone = staticBone
+	data._staticRel = staticMatrix:GetInverseTR() * boneMatrix
+end
+
+local function recordViewmodelMount(weapon, data)
+	recordStaticMount(weapon, data)
+
+	local source = weapon.cotzWorldAttachmentSource
+	local bone = data._bone
+	if not source or not bone or source.bones[bone] then return end
+
+	local pos, ang = weapon:getBoneOrientation(bone)
+	if not pos then return end
+
+	pos, ang = WorldToLocal(pos, ang, source.muzzle.Pos, source.muzzle.Ang)
+	source.bones[bone] = {pos = pos, ang = ang}
+end
+
 function SWEP:setupAttachmentModels()
 	if self.DefaultSightModel then
 		local sight = self:createManagedCModel(self.DefaultSightModel, RENDERGROUP_BOTH)
@@ -554,13 +630,17 @@ function SWEP:setupAttachmentModels()
 	end
 
 	if self.AttachmentModelsVM then
+		sampleViewmodelMounts(self)
+
 		for k, v in pairs(self.AttachmentModelsVM) do
 			if v.models then
 				for key, data in ipairs(v.models) do
 					self:_setupAttachmentModel(data)
+					recordViewmodelMount(self, data)
 				end
 			else
 				self:_setupAttachmentModel(v)
+				recordViewmodelMount(self, v)
 			end
 		end
 	end
@@ -692,8 +772,10 @@ function SWEP:applyOffsetToVM()
 		--return pos, ang
 	end
 
-	if CT > self.AimTime then
-		if ((self.MoveWepAwayWhenAiming and self.dt.State == CW_AIMING) or (self:canUseSimpleTelescopics() and self.dt.State == CW_AIMING)) and (self.dt.M203Active and (not self.M203Chamber or CustomizableWeaponry.grenadeTypes:canUseProperSights(self.Grenade40MM))  or not self.dt.M203Active) then
+	local hideModel = self.MoveWepAwayWhenAiming and not self:GetCotzIntegratedScope()
+	if CT > self.AimTime and self.dt.State == CW_AIMING and (hideModel or self:canUseSimpleTelescopics()) then
+		if not self.dt.M203Active or not self.M203Chamber
+			or CustomizableWeaponry.grenadeTypes:canUseProperSights(self.Grenade40MM) then
 			self.ViewModelFOV = 90
 			pos = pos - ang:Forward() * 100
 			--return pos, ang
@@ -759,6 +841,7 @@ function SWEP:_drawViewModel()
 
 	self.CW_VM:FrameAdvance(FrameTime())
 	self.CW_VM:SetupBones()
+	self:CenterCotzOptic()
 	self.CW_VM:DrawModel()
 
 	if self.ViewModelFlip then
@@ -903,6 +986,40 @@ function SWEP:lengthAngle(ang)
 	return ang
 end
 
+-- Normalized offsets from the texture center to the dot or chevron tip.
+local RETICLE_TEXTURE_OFFSETS = {
+	dot = {0.5 / 32, 0.5 / 32},
+	eotech = {0.24 / 128, -0.18 / 128},
+	delta = {0.5 / 64, 0.5 / 64},
+	kobra = {0.5 / 64, 0.5 / 64},
+}
+local RETICLE_DISTANCE = 100
+local RETICLE_FADE = 0.13
+
+function SWEP:DrawCotzReticleSprite(attachment, aimPos, aimAng, pattern)
+	if not self:isAiming() then return end
+	if not attachment.keepReticleAfterShot and not self:isReticleActive() then return end
+
+	local size = attachment._reticleSize
+	local difference = self:getDifferenceToAimPos(aimPos, aimAng, pattern == "dot" and 1 or size)
+	if difference <= 0.9 or difference >= 1.1 then return end
+
+	local angles = EyeAngles()
+	local direction = self.freeAimOn and self:getReticleAngles():Forward() or angles:Forward()
+	local offset = RETICLE_TEXTURE_OFFSETS[pattern]
+	local position = EyePos() + direction * RETICLE_DISTANCE
+		- angles:Right() * (offset[1] * size) + angles:Up() * (offset[2] * size)
+	local color = self:getSightColor(attachment.name)
+	local distance = math.min(math.abs(difference - 1) * math.sqrt(2), RETICLE_FADE)
+	color.a = (1 - distance / RETICLE_FADE) * 255
+
+	cam.IgnoreZ(true)
+		render.SetMaterial(attachment._reticle)
+		render.DrawSprite(position, size, size, color)
+		render.DrawSprite(position, size, size, color)
+	cam.IgnoreZ(false)
+end
+
 function SWEP:getDifferenceToAimPos(pos, ang, vertDependance, horDependance, dependMod)
 	dependMod = dependMod or 1
 	vertDependance = vertDependance or 1
@@ -1033,16 +1150,84 @@ function SWEP:getBoneOrientation(boneId)
 	end
 end
 
+local function offsetAttachment(pos, ang, offset, rotation)
+	pos = pos + ang:Forward() * offset.x + ang:Right() * offset.y + ang:Up() * offset.z
+	ang:RotateAroundAxis(ang:Up(), rotation.y)
+	ang:RotateAroundAxis(ang:Right(), rotation.p)
+	ang:RotateAroundAxis(ang:Forward(), rotation.r)
+
+	return pos, ang
+end
+
+function SWEP:getStaticMountOrientation(data)
+	local matrix = self.CW_VM:GetBoneMatrix(data._staticBone)
+	if not matrix then return end
+
+	matrix = matrix * data._staticRel
+	local ang = matrix:GetAngles()
+
+	-- fix model inversion, as in getBoneOrientation
+	if self.ViewModelFlip then
+		ang.r = -ang.r
+	end
+
+	return matrix:GetTranslation(), ang
+end
+
+local function attachmentOrientation(weapon, data, offset)
+	local pos, ang
+	if data._staticRel then
+		pos, ang = weapon:getStaticMountOrientation(data)
+	end
+	if not pos and data._bone then
+		pos, ang = weapon:getBoneOrientation(data._bone)
+	end
+	if not pos then return end
+
+	return offsetAttachment(pos, ang, offset or data.pos, data.angle)
+end
+
+local ADS_CENTER_BLEND_START = 0.5
+local ADS_CENTER_BLEND_END = 0.05
+local ADS_CENTER_EPSILON = 0.0001
+
+function SWEP:CenterCotzOptic()
+	local model = self.cotzAimModel
+	local aperture = model and OPTIC_APERTURES[model.model]
+	if not aperture or not model.active or not self:isAiming() or self.freeAimOn then return end
+	if not self.ActualSightPos or self.AimPos ~= self.ActualSightPos then return end
+
+	local offset = (self.BlendPos - self.ActualSightPos):Length()
+	local weight = math.Clamp((ADS_CENTER_BLEND_START - offset) / (ADS_CENTER_BLEND_START - ADS_CENTER_BLEND_END), 0, 1)
+	if weight == 0 then return end
+
+	local pos, ang = attachmentOrientation(self, model)
+	if not pos then return end
+
+	-- Use the same mount pose as the optic draw, including an anchored slide mount.
+	local center = LocalToWorld(model.size and aperture * model.size or aperture, Ang0, pos, ang)
+	local view = EyeAngles()
+	local forward = view:Forward()
+	local fromEye = center - EyePos()
+	local depth = fromEye:Dot(forward)
+	if depth <= 0 then return end
+
+	-- Shift the whole viewmodel sideways and vertically to put the aperture on the view ray.
+	local correction = (fromEye - forward * depth) * weight
+	if correction:LengthSqr() <= ADS_CENTER_EPSILON * ADS_CENTER_EPSILON then return end
+
+	local vm = self.CW_VM
+	vm:SetPos(vm:GetPos() - correction)
+	vm:InvalidateBoneCache()
+	vm:SetupBones()
+end
+
 function SWEP:_drawAttachmentModel(data, offset)
 	local model = data.ent
-	local pos, ang = self:getBoneOrientation(data._bone) --self.CW_VM:GetBonePosition(data.bone)
+	local pos, ang = attachmentOrientation(self, data, offset)
+	if not pos then return end
 
-	offset = offset or data.pos
-	model:SetPos(pos + ang:Forward() * offset.x + ang:Right() * offset.y + ang:Up() * offset.z)
-	ang:RotateAroundAxis(ang:Up(), data.angle.y)
-	ang:RotateAroundAxis(ang:Right(), data.angle.p)
-	ang:RotateAroundAxis(ang:Forward(), data.angle.r)
-
+	model:SetPos(pos)
 	model:SetAngles(ang)
 
 	if data.animated then
@@ -1135,9 +1320,33 @@ end
 
 local cw_alternative_vm_pos = GetConVar("cw_alternative_vm_pos")
 
+-- Looping idle sequences contain a built-in breathing sway. Hold them at their rest pose while aiming
+-- so the sights stay steady, and let them play again once the player stops aiming.
+function SWEP:suppressIdleSwayWhileAiming(vm)
+	local idle = self.Animations and self.Animations.idle
+	local sequence = vm:GetSequenceName(vm:GetSequence())
+	local isIdle = sequence == idle or (type(idle) == "table" and table.HasValue(idle, sequence))
+
+	if not isIdle then
+		self.idleSwayFrozen = nil
+		return
+	end
+
+	if self.dt.State == CW_AIMING then
+		vm:SetCycle(0)
+		vm:SetPlaybackRate(0)
+		self.idleSwayFrozen = true
+	elseif self.idleSwayFrozen then
+		vm:SetPlaybackRate(1)
+		self.idleSwayFrozen = nil
+	end
+end
+
 function SWEP:performViewmodelMovement()
 	CT = UnPredictedCurTime()
 	vm = self.CW_VM
+
+	self:suppressIdleSwayWhileAiming(vm)
 
 	self.Cycle = vm:GetCycle()
 	self.Sequence = vm:GetSequenceName(vm:GetSequence())
@@ -1502,6 +1711,108 @@ function SWEP:GetViewModelPosition(pos, ang)
 	return pos, ang
 end
 
+local function getWorldAttachmentSelection(weapon)
+	local replicated = weapon:GetWorldAttachments()
+	if replicated == weapon.cotzWorldAttachmentSnapshot then
+		return weapon.cotzWorldAttachmentSelection
+	end
+
+	local active = {}
+	for name in replicated:gmatch("%S+") do
+		active[name] = true
+		local attachment = CustomizableWeaponry.registeredAttachmentsSKey[name]
+		if weapon.SightWithRail and attachment and attachment.isSight and not attachment.withoutRail then
+			active.md_rail = true
+		end
+	end
+
+	weapon.cotzWorldAttachmentSnapshot = replicated
+	weapon.cotzWorldAttachmentSelection = active
+	return active
+end
+
+local function worldAttachmentOffset(default, overrides, name, active)
+	local options = overrides and overrides[name]
+	if options then
+		for dependency, offset in pairs(options) do
+			if active[dependency] then return offset end
+		end
+	end
+
+	return default
+end
+
+local function drawWorldAttachment(weapon, data, name, active, muzzle, scale)
+	if data.models then
+		for _, model in ipairs(data.models) do
+			drawWorldAttachment(weapon, model, name, active, muzzle, scale)
+		end
+		return
+	end
+
+	local bone = weapon.cotzWorldAttachmentSource.bones[data._bone]
+	if not bone then return end
+
+	local model = data.worldEnt
+	if not IsValid(model) then
+		model = ClientsideModel(data.model, RENDERGROUP_BOTH)
+		if not IsValid(model) then return end
+
+		model:SetNoDraw(true)
+		CustomizableWeaponry.cmodels:add(model, weapon)
+		data.worldEnt = model
+
+		data.worldScale = nil
+
+		if data.bodygroups then
+			for group, value in pairs(data.bodygroups) do
+				model:SetBodygroup(group, value)
+			end
+		end
+	end
+
+	if data.worldScale ~= scale then
+		local matrix = Matrix()
+		matrix:Scale(data.size and data.size * scale or Vector(scale, scale, scale))
+		model:EnableMatrix("RenderMultiply", matrix)
+		data.worldScale = scale
+	end
+
+	local offset = worldAttachmentOffset(data.origPos, weapon.AttachmentPosDependency, name, active)
+	local rotation = worldAttachmentOffset(data.origAng, weapon.AttachmentAngDependency, name, active)
+	local pos, ang = offsetAttachment(bone.pos, Angle(bone.ang.p, bone.ang.y, bone.ang.r), offset, rotation)
+	pos, ang = LocalToWorld(pos * scale, ang, muzzle.Pos, muzzle.Ang)
+
+	model:SetPos(pos)
+	model:SetAngles(ang)
+	model:DrawModel()
+end
+
+function SWEP:DrawWorldAttachments(worldModel)
+	local source = self.cotzWorldAttachmentSource
+	if not source then return end
+
+	local active = getWorldAttachmentSelection(self)
+	if not next(active) then return end
+
+	local muzzle = getAttachmentPoint(worldModel, "muzzle", self.WorldMuzzleAttachmentID)
+	if not muzzle then return end
+
+	-- The Anomaly pairs have the same muzzle axes, but their viewmodels can be larger.
+	local scale = 1
+	local distance = source.distance and getMuzzleDistance(worldModel, muzzle)
+	if distance and source.distance > 0 then
+		scale = math.Clamp(distance / source.distance, 0.5, 1.5)
+	end
+
+	for name in pairs(active) do
+		local data = self.AttachmentModelsVM[name]
+		if data then
+			drawWorldAttachment(self, data, name, active, muzzle, scale)
+		end
+	end
+end
+
 function SWEP:DrawWorldModel()
 	if (IsValid(self.Owner)) then
 		if not self.Owner:IsWepRaised() then
@@ -1534,6 +1845,7 @@ function SWEP:DrawWorldModel()
 		end
 
 		self:DrawModel()
+		self:DrawWorldAttachments(self)
 	else
 		local wm = self.WMEnt
 
@@ -1564,15 +1876,18 @@ function SWEP:DrawWorldModel()
 					wm:SetRenderOrigin(pos)
 					wm:SetRenderAngles(ang)
 					wm:DrawModel()
+					self:DrawWorldAttachments(wm)
 				end
 			else
 				wm:SetRenderOrigin(self:GetPos())
 				wm:SetRenderAngles(self:GetAngles())
 				wm:DrawModel()
+				self:DrawWorldAttachments(wm)
 				wm:DrawShadow()
 			end
 		else
 			self:DrawModel()
+			self:DrawWorldAttachments(self)
 		end
 	end
 end

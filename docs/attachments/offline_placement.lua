@@ -4,6 +4,7 @@
 --
 --   validate CLASS...                 Fit measured-lens scopes against their authored aims.
 --   export OUT_DIR SPEC.lua           Write placement exports described by a spec file.
+local POLICY = dofile("lua/cotz/attachment_policy.lua")
 local MODEL_ROOTS = {"..", "../../.."}
 local sourceMath = dofile("tests/helpers/source_math.lua")
 
@@ -139,7 +140,7 @@ weapons = {Get = function(class)
 	return registry[class] or nil
 end}
 
-local function findModel(model)
+local function locateModel(model)
 	for _, root in ipairs(MODEL_ROOTS) do
 		local handle = io.popen("ls " .. root .. "/*/" .. model .. " 2>/dev/null")
 		local found = handle:read("*l")
@@ -154,6 +155,15 @@ local function findModel(model)
 	handle:close()
 
 	return found
+end
+
+local modelPaths = {}
+local function findModel(model)
+	if modelPaths[model] == nil then
+		modelPaths[model] = locateModel(model) or false
+	end
+
+	return modelPaths[model] or nil
 end
 
 local sampleCache = {}
@@ -809,6 +819,7 @@ end
 -- stretched to the needed height) is seated on the gun under the anchor sight and the sights seat on it.
 local SPACER_MODEL = "models/wystan/attachments/rail.mdl"
 local SPACER_WIDTH = 1.0
+local MAX_SPACER_LENGTH = 6
 local POST_CLEARANCE = 0.4
 local SPACER_MINIMUM = 0.05
 
@@ -845,7 +856,8 @@ local function addSpacer(entry, target, setup, positions, fits, body)
 	end
 	if low > high then return end
 	local extent = spacerBounds.max - spacerBounds.min
-	local size = Vector(math.max(high - low, 1) / extent.x, SPACER_WIDTH / extent.y, deficit / extent.z)
+	local length = math.min(MAX_SPACER_LENGTH, math.max(high - low, 1))
+	local size = Vector(length / extent.x, SPACER_WIDTH / extent.y, deficit / extent.z)
 	local angle = uprightAngle(Vector(1, 0, 0), body)
 	local anchorMiddle = (anchorBounds.min + anchorBounds.max) / 2
 	local center = LocalToWorld(tool.modelPoint(anchorMiddle, anchor.size, positions[entry.anchor], anchor.angle), Angle(),
@@ -1174,6 +1186,305 @@ local function posts(classes)
 	end
 end
 
+-- One visual scale per asset family, calibrated in model units from the rail, optic, and muzzle meshes.
+-- Slide-mounted optics use a compact envelope. Side-mount and pack-specific models retain their fit.
+local STANDARD_SIZES = {
+	md_microt1 = 0.40,
+	md_eotech = 0.95,
+	md_aimpoint = 0.83,
+	md_cmore = 0.90,
+	md_reflex = 0.84,
+	md_rmr = 0.85,
+	md_schmidt_shortdot = 0.82,
+	md_acog = 0.92,
+	md_nightforce_nxs = 1.00,
+	md_pbs1 = 0.80,
+	md_cobram2 = 0.95,
+	md_saker = 0.72,
+	md_tundra9mm = 0.70,
+}
+local SIDE_MOUNTS = {md_kobra = true, md_pso1 = true, cw_anomaly_1p29 = true, cw_anomaly_mosin = true}
+local TRANSFERRED_9A91 = {md_rail = true, md_schmidt_shortdot = true, md_acog = true, md_nightforce_nxs = true}
+local PISTOL_RAIL = "models/cw2/attachments/pistolrail.mdl"
+local COMPACT_SCALE = 0.75
+local MIN_EYE_RELIEF = 1.5
+local STOCK_PISTOL_RAIL_SCALE = 0.145
+local MAX_RESEAT_DISTANCE = 0.4
+
+local function refitScale(id, data, bounds, compact, receiverWidth)
+	local scale = STANDARD_SIZES[id]
+	if id == "md_rail" and data.model == SPACER_MODEL then
+		local extent = bounds.max - bounds.min
+		-- The scope housing can overhang its mount. The spacer only needs to span the clamp.
+		return Vector(math.min(data.size.x, MAX_SPACER_LENGTH / extent.x), SPACER_WIDTH / extent.y, data.size.z)
+	elseif id == "md_rail" and data.model == PISTOL_RAIL then
+		local extent = bounds.max - bounds.min
+		local widthScale = receiverWidth and math.min(0.185, math.max(0.105, receiverWidth * 1.2 / extent.y))
+			or STOCK_PISTOL_RAIL_SCALE
+
+		local lengthFactor = math.min(1.08, math.max(0.9, widthScale / 0.12))
+		return Vector(STOCK_PISTOL_RAIL_SCALE * lengthFactor, widthScale, STOCK_PISTOL_RAIL_SCALE)
+	elseif scale and compact and not data.isMuzzle then
+		scale = scale * COMPACT_SCALE
+	end
+
+	return scale and Vector(scale, scale, scale) or data.size
+end
+
+local function pointInViewmodel(point, data, sample)
+	return (LocalToWorld(tool.modelPoint(point, data.size, data.pos, data.angle), Angle(),
+		sample:GetTranslation(), sample:GetAngles()))
+end
+
+local function modelExtents(data, bounds, sample)
+	local min, max = bounds.min, bounds.max
+	local low = Vector(math.huge, math.huge, math.huge)
+	local high = -low
+	for _, x in ipairs({min.x, max.x}) do
+		for _, y in ipairs({min.y, max.y}) do
+			for _, z in ipairs({min.z, max.z}) do
+				local point = pointInViewmodel(Vector(x, y, z), data, sample)
+				low = Vector(math.min(low.x, point.x), math.min(low.y, point.y), math.min(low.z, point.z))
+				high = Vector(math.max(high.x, point.x), math.max(high.y, point.y), math.max(high.z, point.z))
+			end
+		end
+	end
+
+	return low, high
+end
+
+local function refitModel(swep, id, data, compact, receiverWidth, clearance)
+	local attachment = attachments[id]
+	local keys = attachment and attachment.aimPos
+	local aimPos = keys and swep[keys[1]]
+	local aimAng = keys and swep[keys[2]] or swep.IronsightAng or Vector()
+	local bounds = meshBounds(data.model)
+	if not bounds then return nil, "missing attachment mesh" end
+
+	local samples = tool.sampleIdleBone(swep, data.bone)
+	if not samples then return nil, "missing idle bone" end
+
+	local sample = samples[1]
+	local low, high = modelExtents(data, bounds, sample)
+	local pos = (low + high) / 2
+	local aimSource = aimPos and {swep = swep, placement = data}
+	local geometry = aimSource and tool.sightGeometry({id = id, model = data.model, aimSource = aimSource})
+	if geometry then
+		pos.y = pointInViewmodel(geometry.lens, data, sample).y
+	end
+	if data.isMuzzle then
+		local muzzle = muzzleSample(swep)
+		if muzzle then pos = muzzle:GetTranslation() end
+	end
+	local bonePoint = WorldToLocal(pos, Angle(), sample:GetTranslation(), sample:GetAngles())
+	local scaledPoint = WorldToLocal(bonePoint, Angle(), sp(data.pos), cwAngle(data.angle))
+	local pivot = Vector(scaledPoint.x / data.size.x, scaledPoint.y / data.size.y, scaledPoint.z / data.size.z)
+	local size = refitScale(id, data, bounds, compact, receiverWidth)
+	local changed = (size - data.size):Length() > 0.001
+	local result = {model = data.model, bone = data.bone, angle = data.angle, size = size, pos = data.pos}
+
+	if changed then
+		result.pos = toBone(pos, sample) - sp(tool.modelPoint(pivot, size, Vector(), data.angle))
+		if not data.isMuzzle then
+			local newLow, newHigh = modelExtents(result, bounds, sample)
+			-- Keep rails' seating surface and sights' clamp bottoms at their previous height.
+			local height = id == "md_rail" and data.model == PISTOL_RAIL and high.z - newHigh.z or low.z - newLow.z
+			result.pos = toBone(toViewmodel(result.pos, sample) + Vector(0, 0, height), sample)
+		end
+	end
+
+	if clearance then
+		result.pos = toBone(toViewmodel(result.pos, sample) - Vector(0, 0, clearance), sample)
+		changed = true
+	end
+
+	local fitted
+	if geometry then
+		result.id, result.aimSource = id, aimSource
+		local relief = aimPos.y
+		if not geometry.derived then
+			for _, idle in ipairs(samples) do
+				local center = pointInViewmodel(geometry.lens, result, idle)
+				relief = math.max(relief, MIN_EYE_RELIEF - center.x)
+			end
+		end
+
+		-- fitScopeAim takes the eye relief from the current SWEP aim.
+		swep[keys[1]] = Vector(aimPos.x, relief, aimPos.z)
+		fitted = tool.fitScopeAim(swep, result, result.pos, samples)
+		swep[keys[1]] = aimPos
+
+		if not fitted then return nil, "could not fit optical axis" end
+		-- A derived axis comes from the stored aim and is only needed when the geometry moves.
+		changed = changed or not geometry.derived and (aimPos - fitted.aimPos):Length() > 0.002
+	end
+
+	local newLow, newHigh = modelExtents(result, bounds, sample)
+	local apertureError
+	if fitted then
+		apertureError = 0
+		for _, idle in ipairs(samples) do
+			local center = pointInViewmodel(geometry.lens, result, idle)
+			local error = (center - eyeLinePoint(fitted.aimPos, aimAng, center.x)):Length()
+			apertureError = math.max(apertureError, error)
+		end
+	end
+
+	return {
+		pose = result, aim = fitted, changed = changed, extent = newHigh - newLow, before = high - low,
+		low = newLow, high = newHigh, apertureError = apertureError, sample = sample,
+	}
+end
+
+local function readProfileWeapon(class)
+	local swep = weapons.Get(class)
+	if swep then return swep end
+
+	local base = class:match("^(cw_anomaly_.*)_vmrecoil$")
+	local dir = "lua/weapons/"
+	local source = base and io.open(dir .. base .. ".lua")
+	if not source then return end
+
+	source:close()
+	return loadWeapon(dir .. base .. ".lua")
+end
+
+local function addFallbackModels(swep, layout, models)
+	for id, values in pairs(layout) do
+		if id ~= "bone" then
+			local data = {
+				model = models[id], bone = layout.bone,
+				pos = Vector(unpack(values, 1, 3)), angle = Angle(unpack(values, 4, 6)),
+				size = Vector(unpack(values, 7, 9)), fallback = true,
+			}
+			swep.AttachmentModelsVM[id] = data
+			local keys = attachments[id] and attachments[id].aimPos
+			if keys then
+				swep[keys[1]] = Vector(unpack(values, 10, 12))
+				swep[keys[2]] = Vector()
+			end
+		end
+	end
+end
+
+local function receiverWidths(swep, sites)
+	local idle = swep.Animations and swep.Animations.idle
+	local path = isstring(swep.ViewModel) and findModel(swep.ViewModel)
+	if not (path and isstring(idle)) or #sites == 0 then return {} end
+
+	local handle = io.popen(string.format("python3 docs/attachments/mdl_pose.py %q %q x --mount-widths %q --format lua",
+		path, idle, encode(sites)))
+	local output = handle:read("*a")
+	handle:close()
+
+	return output ~= "" and load("return " .. output)() or {}
+end
+
+local function contactItem(id, pose, sample)
+	return {
+		id = id, model = pose.model, pos = pose.pos, angle = pose.angle, size = pose.size, sample = sample,
+	}
+end
+
+local function auditClearances(swep, fits, rail)
+	local items = {}
+	for id, fit in SortedPairs(fits) do
+		local optic = attachments[id]
+		if fit.result and optic and optic.isSight and not SIDE_MOUNTS[id] then
+			items[#items + 1] = contactItem(id, fit.result.pose, fit.result.sample)
+		end
+	end
+
+	local mountFit = fits.md_rail and fits.md_rail.result
+	local mount = mountFit and mountFit.pose or rail
+	local mountSample = mountFit and mountFit.sample or mount and mount.pos and mount.bone and boneSample(swep, mount.bone)
+	local extras = swep.SightWithRail and mountSample and {contactItem("md_rail", mount, mountSample)} or {}
+
+	return contactClearances(swep, items, extras)
+end
+
+local function writeWeaponSizeAudit(out, class, profile, poses)
+	local swep = readProfileWeapon(class)
+	if not swep then
+		out:write(encode({class = class, reason = "missing SWEP definition"}), "\n")
+		return
+	end
+
+	swep.AttachmentModelsVM = swep.AttachmentModelsVM or {}
+	addFallbackModels(swep, poses.weapons[class], poses.models)
+	-- CW's stored aim and model offsets use the unreflected viewmodel frame.
+	local flipped = swep.ViewModelFlip
+	swep.ViewModelFlip = false
+	local rail = swep.AttachmentModelsVM.md_rail
+	local family = POLICY.weapons[class] or profile.family
+	local compact = family == "pistol" or family == "revolver" or rail and rail.model == PISTOL_RAIL
+	local reskin = isstring(swep.ViewModel) and swep.ViewModel:find("^models/flaymi/anomaly/")
+		and class ~= "cw_9a91" and not class:find("^cw_anomaly_")
+	local fits, sites, siteIds = {}, {}, {}
+	for id, data in SortedPairs(swep.AttachmentModelsVM) do
+		local att = attachments[id]
+		data.isMuzzle = id == profile.suppressor or table.HasValue(SUPPRESSORS, id)
+		local generated = data.fallback or class == "cw_9a91" and TRANSFERRED_9A91[id]
+			or reskin and (id == "md_rail" or data.isMuzzle or att and att.isSight)
+		if generated and data.pos and data.angle then
+			data.size = data.size or Vector(1, 1, 1)
+			local result, reason = refitModel(swep, id, data, compact)
+			fits[id] = {result = result, data = data, reason = reason}
+			if result and not data.isMuzzle and not SIDE_MOUNTS[id] then
+				local site = (result.low + result.high) / 2
+				site.z = id == "md_rail" and data.model == PISTOL_RAIL and result.high.z or result.low.z
+				sites[#sites + 1], siteIds[id] = vectorList(site), #sites + 1
+			end
+		end
+	end
+
+	local widths = receiverWidths(swep, sites)
+	local mount = fits.md_rail
+	local railWidth = widths[siteIds.md_rail]
+	if mount and mount.result and mount.data.model == PISTOL_RAIL and railWidth then
+		mount.result = refitModel(swep, "md_rail", mount.data, compact, railWidth)
+	end
+
+	local clearances = auditClearances(swep, fits, rail)
+	for id, fit in SortedPairs(fits) do
+		local result, data = fit.result, fit.data
+		if result then
+			local clearance = clearances[id]
+			-- Large gaps can come from a ray hitting a stock or hand below the mount.
+			if clearance and math.abs(clearance) > SEAT_TOLERANCE and math.abs(clearance) <= MAX_RESEAT_DISTANCE then
+				result = refitModel(swep, id, data, compact, nil, clearance) or result
+			end
+			local pose, aim = result.pose, result.aim
+			out:write(encode({
+				class = class, id = id, fallback = data.fallback or false, changed = result.changed,
+				extent = vectorList(result.extent), before = vectorList(result.before),
+				model = data.model, bone = data.bone, pos = vectorList(pose.pos),
+				size = vectorList(pose.size), angle = vectorList(Vector(pose.angle.p, pose.angle.y, pose.angle.r)),
+				aim = aim and vectorList(aim.aimPos), aimField = aim and aim.aimKeys[1],
+				receiverWidth = widths[siteIds[id]] or nil, apertureError = result.apertureError,
+				clearance = clearance, flipped = flipped or false,
+			}), "\n")
+		else
+			out:write(encode({class = class, id = id, reason = fit.reason}), "\n")
+		end
+	end
+	swep.ViewModelFlip = flipped
+end
+
+local function writeSizeAudit(out, classes)
+	local poses = dofile("lua/cotz/weapon_attachment_poses.lua")
+	local profiles = dofile("lua/cotz/weapon_attachment_profiles.lua")
+	for id in pairs(SIDE_MOUNTS) do
+		attachments[id] = attachments[id] or {isSight = true, aimPos = {id .. "Pos", id .. "Ang"}}
+	end
+
+	for class, profile in SortedPairs(profiles.weapons) do
+		if #classes == 0 or table.HasValue(classes, class) then
+			writeWeaponSizeAudit(out, class, profile, poses)
+		end
+	end
+end
+
 local mode = arg[1]
 -- Optional spec file before the class list supplies path overrides, for example the old donors.
 if arg[2] and arg[2]:find("%.lua$") then
@@ -1181,7 +1492,11 @@ if arg[2] and arg[2]:find("%.lua$") then
 	table.remove(arg, 2)
 end
 
-if mode == "posts" then
+if mode == "sizes" then
+	local out = assert(io.open(arg[2], "w"))
+	writeSizeAudit(out, {select(3, unpack(arg))})
+	out:close()
+elseif mode == "posts" then
 	posts({select(2, unpack(arg))})
 elseif mode == "seats" then
 	seats({select(2, unpack(arg))})

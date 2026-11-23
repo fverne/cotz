@@ -39,37 +39,37 @@ if CLIENT then
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.211588, 5.662215, 8.45691),
+			pos = Vector(-0.203545, 5.143205, 7.874018),
 			angle = Angle(-89.594979, 174.235759, 84.058448),
-			size = Vector(1, 1, 1),
+			size = Vector(0.95, 0.95, 0.95),
 		},
 		["md_aimpoint"] = {
 			model = "models/wystan/attachments/aimpoint.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.315356, 0.611729, 3.517295),
+			pos = Vector(0.257574, -0.328279, 2.415301),
 			angle = Angle(0.402845, -179.822542, 89.958074),
-			size = Vector(1, 1, 1),
+			size = Vector(0.83, 0.83, 0.83),
 		},
 		["md_cmore"] = {
 			model = "models/attachments/cmore.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.078114, -4.994657, -3.008472),
+			pos = Vector(0.078286, -4.986613, -3.044284),
 			angle = Angle(0.402845, -179.822542, 89.958074),
-			size = Vector(0.649, 0.649, 0.649),
+			size = Vector(0.9, 0.9, 0.9),
 		},
 		["md_reflex"] = {
 			model = "models/attachments/kascope.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.081604, -5.193592, -4.006363),
+			pos = Vector(0.078, -5.226499, -5.131678),
 			angle = Angle(0.402845, -179.822542, 89.958074),
-			size = Vector(0.55, 0.55, 0.55),
+			size = Vector(0.84, 0.84, 0.84),
 		},
 		["md_schmidt_shortdot"] = {
 			model = "models/cw2/attachments/schmidt.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.375561, -0.415567, 1.490464),
+			pos = Vector(0.383312, -0.28454, 1.617009),
 			angle = Angle(-89.95807, 90.177163, 0),
-			size = Vector(0.8, 0.8, 0.8),
+			size = Vector(0.82, 0.82, 0.82),
 		},
 		["md_pso1"] = {
 			model = "models/cw2/attachments/pso.mdl",
@@ -81,16 +81,16 @@ if CLIENT then
 		["md_acog"] = {
 			model = "models/wystan/attachments/2cog.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.475222, 0.708394, 1.916614),
+			pos = Vector(0.444647, 0.281657, 1.504218),
 			angle = Angle(-0.000637, -179.822837, 89.958075),
-			size = Vector(1, 1, 1),
+			size = Vector(0.92, 0.92, 0.92),
 		},
 		["md_nightforce_nxs"] = {
 			model = "models/cw2/attachments/l96_scope.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.074282, -5.714299, -2.117896),
+			pos = Vector(0.104554, -5.994169, -2.120148),
 			angle = Angle(-89.95807, 90.177163, 0),
-			size = Vector(0.667408, 0.667408, 0.667408),
+			size = Vector(1, 1, 1),
 		},
 		["md_rail"] = {
 			model = "models/wystan/attachments/akrailmount.mdl",
@@ -102,9 +102,9 @@ if CLIENT then
 		["md_pbs1"] = {
 			model = "models/cw2/attachments/pbs1.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.011755, -0.463598, -35.813891),
+			pos = Vector(-0.011321, -0.719412, -35.598078),
 			angle = Angle(0.000637, 0.177163, -89.958075),
-			size = Vector(1, 1, 1),
+			size = Vector(0.8, 0.8, 0.8),
 		},
 	}
 end
@@ -179,26 +179,26 @@ SWEP.IronsightAng = Vector(0, 0, 0)
 
 SWEP.KobraPos = Vector(-3.416434, -1.743, 0.401335)
 SWEP.KobraAng = Vector(0, 0, 0)
-SWEP.MicroT1Pos = Vector(-3.346361, 2.981, 0.517851)
+SWEP.MicroT1Pos = Vector(-3.361028, 2.981, 0.505236)
 SWEP.MicroT1Ang = Vector(0, 0, 0)
-SWEP.EoTechPos = Vector(-3.228099, -2.012, 0.143981)
+SWEP.EoTechPos = Vector(-3.227, -2.012, 0.218609)
 SWEP.EoTechAng = Vector(0, 0, 0)
-SWEP.AimpointPos = Vector(-3.245482, -1.109, 0.201952)
+SWEP.AimpointPos = Vector(-3.243429, -1.109, 0.411742)
 SWEP.AimpointAng = Vector(0, 0, 0)
-SWEP.CmorePos = Vector(-3.335571, 2.981, 0.410157)
+SWEP.CmorePos = Vector(-3.335476, 2.981, 0.051229)
 SWEP.CmoreAng = Vector(0, 0, 0)
-SWEP.ReflexPos = Vector(-3.344847, -2.342, 0.672808)
+SWEP.ReflexPos = Vector(-3.34269, -2.342, 0.383815)
 SWEP.ReflexAng = Vector(0, 0, 0)
-SWEP.ShortDotPos = Vector(-3.334008, -2.626, 0.504058)
+SWEP.ShortDotPos = Vector(-3.334248, -2.626, 0.499207)
 SWEP.ShortDotAng = Vector(0, 0, 0)
 SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
 SWEP.PSOPos = Vector(-3.384576, 2.131, 0.820439)
 SWEP.PSOAng = Vector(0, 0, 0)
 SWEP.PSO1AxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.ACOGPos = Vector(-3.352793, -0.626, -0.041677)
+SWEP.ACOGPos = Vector(-3.35253, -0.626, 0.099934)
 SWEP.ACOGAng = Vector(0, 0, 0)
 SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.NXSPos = Vector(-3.273621, -3.079, 0.695326)
+SWEP.NXSPos = Vector(-3.273578, -3.079, 0.444036)
 SWEP.NXSAng = Vector(0, 0, 0)
 SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
 SWEP.SightWithRail = true
@@ -271,7 +271,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_rpk_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1.2, 4.9997, -5.9584)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.RPK.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.RPK.FIRE"
 SWEP.LuaViewmodelRecoil = true

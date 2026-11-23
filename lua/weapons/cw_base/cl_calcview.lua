@@ -239,20 +239,22 @@ function SWEP:CalcView(ply, pos, ang, fov)
 		if self.dt.M203Active and self.M203Chamber and not CustomizableWeaponry.grenadeTypes:canUseProperSights(self.Grenade40MM) then
 			self.CurFOVMod = LerpCW20(FT * 10, self.CurFOVMod, 5)
 		else
-			local zoomAmount = self.ZoomAmount
+			local scope = self:GetCotzIntegratedScope()
+			local zoomAmount = scope and scope.complexZoom or self.ZoomAmount
+			local simpleZoom = scope and scope.simpleZoom or self.SimpleTelescopicsFOV
 			local simpleTelescopics = not self:canUseComplexTelescopics()
 			local shouldDelay = false
 
 			if simpleTelescopics then
-				if self.SimpleTelescopicsFOV then
-					zoomAmount = self.SimpleTelescopicsFOV
+				if simpleZoom then
+					zoomAmount = simpleZoom
 					shouldDelay = true
 				end
 			end
 
 			if self.DelayedZoom or shouldDelay then
 				if CT > self.AimTime then
-					if self.SnapZoom or (self.SimpleTelescopicsFOV and simpleTelescopics) then
+					if self.SnapZoom or (simpleZoom and simpleTelescopics) then
 						self.CurFOVMod = zoomAmount
 					else
 						self.CurFOVMod = LerpCW20(FT * 10, self.CurFOVMod, zoomAmount)
@@ -261,7 +263,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 					self.CurFOVMod = LerpCW20(FT * 10, self.CurFOVMod, 0)
 				end
 			else
-				if self.SnapZoom or (self.SimpleTelescopicsFOV and simpleTelescopics) then
+				if self.SnapZoom or (simpleZoom and simpleTelescopics) then
 					self.CurFOVMod = zoomAmount
 				else
 					self.CurFOVMod = LerpCW20(FT * 10, self.CurFOVMod, zoomAmount)

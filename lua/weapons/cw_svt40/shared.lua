@@ -30,9 +30,9 @@ if CLIENT then
 		["md_pbs1"] = {
 			model = "models/cw2/attachments/pbs1.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.004631, -1.67409, -36.045659),
+			pos = Vector(-0.004907, -1.616497, -36.094175),
 			angle = Angle(0.000203, 0, -89.999982),
-			size = Vector(0.755, 0.755, 0.755),
+			size = Vector(0.8, 0.8, 0.8),
 		},
 	}
 end
@@ -166,7 +166,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_svt40_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1.2, 4.118, -2.2675)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.SVT.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.SVT.FIRE"
 SWEP.LuaViewmodelRecoil = true

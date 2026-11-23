@@ -47,6 +47,13 @@ ix.weapontables.attachments["md_tundra9mm"] = {name = "Tundra Supressor", slot =
 ix.weapontables.attachments["md_saker"] = {name = "SAKER Supressor", slot = 2, uID = "sakersuppressor"}
 ix.weapontables.attachments["md_foregrip"] = {name = "Foregrip", slot = 3, uID = "foregrip"}
 
+ix.weapontables.attachments.cw_anomaly_1p29 = {
+	name = "USP-1 Tulip sight", slot = 1, uID = "anomaly_attachment_1p29",
+}
+ix.weapontables.attachments.cw_anomaly_mosin = {
+	name = "PU scope", slot = 1, uID = "anomaly_attachment_mosin",
+}
+
 ix.weapontables.ammosubtypes = {}
 
 ix.weapontables.ammosubtypes["SG"] = {uID = "am_slugrounds"}

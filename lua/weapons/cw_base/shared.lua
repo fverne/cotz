@@ -77,6 +77,7 @@ end
 AddCSLuaFile()
 AddCSLuaFile("sh_bullets.lua")
 AddCSLuaFile("cl_model.lua")
+AddCSLuaFile("cl_cotzintegratedscope.lua")
 AddCSLuaFile("cl_hud.lua")
 AddCSLuaFile("cl_hooks.lua")
 AddCSLuaFile("cl_calcview.lua")
@@ -86,6 +87,11 @@ AddCSLuaFile("sh_sounds.lua")
 AddCSLuaFile("sh_anims.lua")
 AddCSLuaFile("cl_playerbindpress.lua")
 AddCSLuaFile("sh_attachments.lua")
+AddCSLuaFile("sh_cotzattachments.lua")
+AddCSLuaFile("cotz/attachment_policy.lua")
+AddCSLuaFile("cotz/weapon_attachment_profiles.lua")
+AddCSLuaFile("cotz/weapon_attachment_poses.lua")
+AddCSLuaFile("cotz/optic_apertures.lua")
 AddCSLuaFile("sh_general.lua")
 AddCSLuaFile("cl_networking.lua")
 AddCSLuaFile("cl_cvars.lua")
@@ -100,6 +106,7 @@ include("sh_move.lua")
 include("sh_sounds.lua")
 include("sh_anims.lua")
 include("sh_attachments.lua")
+include("sh_cotzattachments.lua")
 include("sh_general.lua")
 include("sh_mixins.lua")
 include("sh_stats.lua")
@@ -111,6 +118,7 @@ if CLIENT then
 	include("cl_calcview.lua")
 	include("cl_playerbindpress.lua")
 	include("cl_model.lua")
+	include("cl_cotzintegratedscope.lua")
 	include("cl_hud.lua")
 	include("cl_hooks.lua")
 	include("cl_networking.lua")
@@ -204,7 +212,7 @@ if CLIENT then
 	SWEP.breathReleaseWait = 0
 
 	SWEP.SwayIntensity = 1
-	SWEP.AimSwayIntensity = 0.6
+	SWEP.AimSwayIntensity = 0
 	SWEP.HUD_3D2DScale = 0.015
 
 	SWEP.PresetResults = {}
@@ -382,6 +390,7 @@ local invalidPlayerBusyProneFunction = function(self)
 end
 
 function SWEP:Initialize()
+	self:ApplyCotzAttachmentProfile()
 	self:SetHoldType(self.NormalHoldType)
 	self:setupBallisticsInformation()
 	self:CalculateEffectiveRange()
@@ -433,7 +442,9 @@ function SWEP:Initialize()
 	end
 
 	if self.FireSoundSuppressed then
-		self.FireSoundSuppressed = Sound(CustomizableWeaponry:findFireSound(self.FireSoundSuppressed))
+		-- Some Anomaly ports name a suppressed sound that was never registered; firing falls back to FireSound.
+		local suppressedSound = CustomizableWeaponry:findFireSound(self.FireSoundSuppressed)
+		self.FireSoundSuppressed = suppressedSound and Sound(suppressedSound)
 		self.FireSoundSuppressed_Orig = self.FireSoundSuppressed
 	end
 
@@ -476,6 +487,7 @@ function SWEP:Initialize()
 
 		self._shellTable = CustomizableWeaponry.shells:getShell(self.Shell)
 		self:createCustomVM(self.ViewModel)
+		self:SetupCotzIntegratedScope()
 		self:createGrenadeModel()
 		self:setupAttachmentModels()
 		self:setupBoneTable()
@@ -527,6 +539,7 @@ end
 function SWEP:SetupDataTables()
 	self:NetworkVar("Int", 0, "State")
 	self:NetworkVar("Int", 1, "Shots")
+	self:NetworkVar("String", 0, "WorldAttachments")
 
 	self:NetworkVar("Float", 0, "HolsterDelay")
 

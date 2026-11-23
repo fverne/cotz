@@ -28,7 +28,10 @@ function EFFECT:Init(fx)
 	local lightPos = nil
 	
 	if attachment then
-		ParticleEffectAttach(particleEffect, PATTACH_POINT_FOLLOW, attachModel, ent.WorldMuzzleAttachmentID)
+		-- Anomaly world models orient their muzzle attachments sideways, so a particle attached to the point
+		-- lands beside the gun. Spawn it at the muzzle position, aimed along the owner's view instead.
+		-- Adding velocity 'simulates' attaching the effect to the moving muzzle.
+		ParticleEffect(particleEffect, attachment.Pos + ent.Owner:GetVelocity() * 0.03, ent.Owner:EyeAngles())
 		lightPos = attachment.Pos
 	else
 		local aimVec = ent.Owner:EyeAngles()

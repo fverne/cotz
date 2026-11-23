@@ -3,6 +3,19 @@
 ]]--
 SWEP.AttachSoundDelay = 0
 
+local function syncWorldAttachments(weapon)
+	local active = {}
+
+	for name, attached in pairs(weapon.ActiveAttachments) do
+		if attached then
+			active[#active + 1] = name
+		end
+	end
+
+	table.sort(active)
+	weapon:SetWorldAttachments(table.concat(active, " "))
+end
+
 function SWEP:_attach(cur, curPos, inherit)
 	self.LastPreset = nil
 	local attTable = self.Attachments[cur]
@@ -16,6 +29,7 @@ function SWEP:_attach(cur, curPos, inherit)
 	end
 
 	local att = inherit or CustomizableWeaponry:findAttachment(attTable.atts[curPos])
+	att = self:GetCotzAttachment(att)
 
 	if not att then
 		return false
@@ -50,6 +64,7 @@ function SWEP:_attach(cur, curPos, inherit)
 	if att.attachFunc then
 		att.attachFunc(self)
 	end
+	self:ApplyCotzSightView(att)
 
 	if CLIENT then
 		-- if there is a model with the provided name, make it visible
@@ -69,6 +84,7 @@ function SWEP:_attach(cur, curPos, inherit)
 
 				--if the current attachment has backup sights, we can swap to them
 
+				self.cotzAimModel = model
 				self.ActualSightPos = self.AimPos
 				self.ActualSightAng = self.AimAng
 
@@ -138,6 +154,10 @@ function SWEP:_attach(cur, curPos, inherit)
 
 	CustomizableWeaponry.callbacks.processCategory(self, "postAttachAttachment", cur, curPos)
 
+	if SERVER then
+		syncWorldAttachments(self)
+	end
+
 	return true
 end
 
@@ -149,16 +169,18 @@ function SWEP:resetPostDetach(att, attCategory)
 
 	if att.isSight then
 		self.ZoomAmount = self.ZoomAmount_Orig
+		self.cotzAimModel = nil
 		self.reticleFunc = nil
+		self.renderTargetFunc = nil
 
-		if self.SightWithRail then
-			if self.AttachmentModelsVM.md_rail then
-				-- make the rail inactive in case the weapon uses it for the sights
-				self.AttachmentModelsVM.md_rail.active = false
+		if CLIENT and self.SightWithRail then
+			local rail = self.AttachmentModelsVM and self.AttachmentModelsVM.md_rail
+			if rail then
+				rail.active = false
 			end
 
 			if self.RailBGs then
-				self.CW_VM:SetBodygroup(self.RailBGs.main, self.RailBGs.off)
+				self:setBodygroup(self.RailBGs.main, self.RailBGs.off)
 			end
 		end
 
@@ -193,7 +215,7 @@ function SWEP:_detach(category, pos, skipDependencyCheck)
 	self.LastPreset = nil
 	local att = self.Attachments[category]
 
-	local foundAtt = CustomizableWeaponry:findAttachment(att.atts[pos])
+	local foundAtt = self:GetCotzAttachment(CustomizableWeaponry:findAttachment(att.atts[pos]))
 
 	self:removeStatModifiers(foundAtt.statModifiers)
 
@@ -206,8 +228,13 @@ function SWEP:_detach(category, pos, skipDependencyCheck)
 	if foundAtt.detachFunc then
 		foundAtt.detachFunc(self)
 	end
+	self:ResetCotzSightView(foundAtt)
 
 	self:resetPostDetach(foundAtt, att)
+
+	if SERVER then
+		syncWorldAttachments(self)
+	end
 
 	-- only skip the dependency check if we're told to do so
 	if not skipDependencyCheck then

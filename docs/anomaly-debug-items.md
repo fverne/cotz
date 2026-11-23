@@ -1,19 +1,43 @@
-# Anomaly CW2.0 debug inventory items
+# Anomaly CW2.0 inventory weapons
 
-The 160 `schema/items/newweapons/sh_debug_cw_anomaly_*.lua` definitions inherit COTZ's existing `base_newweapons` through the bundled Helix directory loader. They appear in **Debug - Anomaly CW2.0**, with `[DEBUG]` names and IDs such as `debug_cw_anomaly_ak103`.
+The 82 regular `anomaly_<id>` inventory items cover the installed Anomaly pack's firearms and launcher
+variants without a regular CotZ counterpart. They equip the pack's VM-recoil SWEPs and use its world
+models and inventory cameras. The pack's SWEPs, including their bases, live in `lua/weapons/cw_anomaly_*`.
+Install `cotz_anomaly_cw20` alongside CotZ to supply the models, sounds, materials, attachment and
+projectile entities, and sound registrations. The items are available through administrator item spawning
+and have no business, loot, vendor, reward or progression entries.
 
-Install the converted `cotz_anomaly_cw20` addon from the content workspace alongside COTZ and restart the server. These definitions do not install the SWEPs or their assets. Use the existing administrator item-spawning tools to obtain individual debug items.
+## Balance
 
-Items use their matching SWEP world model and the existing primary, secondary, knife or grenade slot. Debug price and weight are explicitly zero; these are testing placeholders. Business-menu purchases, repairs and COTZ inventory attachment installation are disabled. Native SWEP customization remains available through CW controls. No vendor or loot pools were changed.
+Each firearm is balanced against its closest CotZ counterpart by calibre and role, for example the
+USAS-12 against the Saiga-12 and the PB against the Makarov:
 
-The normal weapon base handles equip, saved ammunition and condition. Firearms start empty; load compatible inventory ammunition. Throwable items use the base's grenade equip path. Test throwable consumption, reconnect restoration, weapon switching, reloads and customization in multiplayer before using these definitions beyond debugging.
+- Wear follows the counterpart's action type: magazine-fed semi-automatic and automatic guns use
+  `WearDamage = 0.05`, `DurabilityDamageChance = 0.005` and `WearEffect = 0.007`; manual actions use
+  0.33, 0.01 and 0.005; handguns use 0.14, 0.01 and 0.05. `FireMoveMod`, `SpeedDec` and hold types also
+  follow the counterpart.
+- Spread, recoil and movement penalties match the counterpart. Damage, magazine size, fire modes and
+  automatic fire rates keep the pack's distinctions, such as the USAS-12's 20-round automatic drum.
+  Semi-automatic handguns and marksman rifles use their counterpart's fire delay; bolt and pump actions
+  keep the delay of their firing animation.
+- Prices start from the counterpart's price, with a small premium for a larger magazine, integral
+  suppressor or optic, or a custom variant. `bulletweight` equals the per-round weight of the calibre's
+  standard ammunition item.
+- The Gauss rifle, RPG-7, M79 and RG-6 have no counterpart; only their wear follows the policy above.
 
-All 160 definitions passed Lua syntax and class/model mapping checks. Garry's Mod equip, rendering and multiplayer behavior remain unverified. Remove or migrate saved debug instances before deleting these definitions later.
+Anomaly firearms use the same inventory attachments as other CW 2.0 firearms. The shared attachment
+profiles select optics by family and mount and allow at most one compatible detachable suppressor.
+Pistols use red dots, and revolvers can also take the Schmidt ShortDot. Fixed optics remain part of
+their weapons. Pack-only customization entries are excluded from the regular Anomaly SWEP slots.
+Install and detach hardware through the inventory. Saved attachments that are no longer compatible
+can be removed with **Detach**.
 
-Only existing COTZ ammo types are used. The Kar98k, G43, RPG-7 and Gauss rifle have no equivalent ammunition and deliberately cannot load or fire. Their debug items remain available for inspecting models and equip behavior. The conversion uses `7.62x54MMR` for COTZ rifle ammunition.
+The Kar98k, G43, RPG-7 and Gauss rifle have no equivalent CotZ pack ammunition. The M79 and RG-6 have
+no CotZ inventory ammunition supply.
 
-## Viewmodel-recoil comparison items
+The 307 debug inventory definitions were removed. Helix skips saved instances whose item definitions
+are missing. Existing debug rows in a database can be recovered by restoring their definitions before
+loading an affected inventory. The regular `anomaly_<id>` and existing CotZ weapon IDs are still registered.
 
-147 further definitions, `sh_debug_cw_anomaly_<id>_vmrecoil.lua`, appear in **Debug - Anomaly CW2.0 VM recoil** with IDs such as `debug_cw_anomaly_ak74_vmrecoil`. Each one copies its source debug item (model, size, slot and zeroed debug values) and equips the matching `cw_anomaly_<id>_vmrecoil` SWEP. Those SWEPs use CW Lua viewmodel recoil and bolt/slide bone offsets instead of the source firing animation; see the content workspace's `packs/anomaly_cw20/README.md`. Melee weapons and throwables have no variants.
-
-Original and variant share an equipment slot, so unequip one before equipping the other when comparing. These items need the variant SWEP files from the content workspace in the installed `cotz_anomaly_cw20` addon.
+Run `tests/run.sh anomaly_inventory weapon_world_attachments anomaly_reskin` for the catalogue,
+installation and reskin checks.

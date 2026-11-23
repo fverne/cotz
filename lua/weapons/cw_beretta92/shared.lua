@@ -28,37 +28,41 @@ if CLIENT then
 		["md_microt1"] = {
 			model = "models/cw2/attachments/microt1.mdl",
 			bone = "slide",
-			pos = Vector(-0.004449, -0.343773, 0.166313),
+			staticBone = "wpn_body",
+			pos = Vector(0.004948, -0.336933, 0.146965),
 			angle = Angle(0.00383, -0.000004, -89.920958),
-			size = Vector(0.5, 0.5, 0.5),
+			size = Vector(0.3, 0.3, 0.3),
 		},
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "slide",
-			pos = Vector(-0.317554, 14.2626, 14.250068),
+			staticBone = "wpn_body",
+			pos = Vector(-0.133239, 7.471297, 6.808337),
 			angle = Angle(-89.920865, 87.225986, -2.774013),
-			size = Vector(1.351351, 1.351351, 1.351351),
+			size = Vector(0.7125, 0.7125, 0.7125),
 		},
 		["md_rmr"] = {
 			model = "models/cw2/attachments/pistolholo.mdl",
 			bone = "slide",
-			pos = Vector(0.507215, 7.534136, 7.602731),
+			staticBone = "wpn_body",
+			pos = Vector(0.253013, 3.414568, 3.660332),
 			angle = Angle(-89.920865, 87.225986, -2.774013),
-			size = Vector(1.351351, 1.351351, 1.351351),
+			size = Vector(0.6375, 0.6375, 0.6375),
 		},
 		["md_rail"] = {
 			model = "models/cw2/attachments/pistolrail.mdl",
 			bone = "slide",
-			pos = Vector(-0.00487, 2.65938, -1.434111),
+			staticBone = "wpn_body",
+			pos = Vector(-0.004777, 2.248878, -1.07349),
 			angle = Angle(-89.999036, 90, 0),
-			size = Vector(0.17, 0.17, 0.17),
+			size = Vector(0.1305, 0.105, 0.145),
 		},
 		["md_tundra9mm"] = {
 			model = "models/cw2/attachments/9mmsuppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.000069, -0.552515, -9.715205),
+			pos = Vector(0.000048, -0.922481, -8.847932),
 			angle = Angle(0.001359, 0, -89.999982),
-			size = Vector(1, 1, 1),
+			size = Vector(0.7, 0.7, 0.7),
 		},
 	}
 end
@@ -118,11 +122,11 @@ SWEP.UseHands = true
 SWEP.IronsightPos = Vector(-3.85, -1, 2.158)
 SWEP.IronsightAng = Vector(-0.5, 0, 0)
 
-SWEP.MicroT1Pos = Vector(-3.911579, -3.469, 0.9608)
+SWEP.MicroT1Pos = Vector(-3.90479, -3.469, 1.357516)
 SWEP.MicroT1Ang = Vector(-0.5, 0, 0)
-SWEP.EoTechPos = Vector(-3.954822, -5.469, 0.27987)
+SWEP.EoTechPos = Vector(-3.95665, -5.469, 1.172283)
 SWEP.EoTechAng = Vector(-0.5, 0, 0)
-SWEP.RMRPos = Vector(-3.910121, -3.469, 1.008187)
+SWEP.RMRPos = Vector(-3.911092, -3.469, 1.535865)
 SWEP.RMRAng = Vector(-0.5, 0, 0)
 SWEP.SightWithRail = true
 SWEP.SprintPos = Vector(0, -1, 3.5)
@@ -211,7 +215,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_beretta92fs.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1.3, 4.4817, -2.7009)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-7, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.BERETTA.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.BERETTA.FIRE_SILENCED"
 SWEP.LuaViewmodelRecoil = true

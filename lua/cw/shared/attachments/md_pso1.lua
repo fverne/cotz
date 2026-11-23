@@ -15,11 +15,14 @@ if CLIENT then
 	[2] = {t = "Narrow scope reduces awareness.", c = CustomizableWeaponry.textColors.NEGATIVE},
 	[3] = {t = "Can be disorienting at close range.", c = CustomizableWeaponry.textColors.NEGATIVE}}
 
-	local old, x, y, ang
+	local ang
 	local sight = surface.GetTextureID("cw2/reticles/scope_pso")
 	local sightIllum = surface.GetTextureID("cw2/reticles/scope_pso_illum")
-	att.zoomTextures = {[1] = {tex = sight, offset = {0, 1}},
-		[2] = {tex = sightIllum, offset = {0, 0}}}
+	local reticleTip = -3.5 / 1024
+	att.zoomTextures = {
+		{tex = sight, offset = {0, 0}, center = {0, reticleTip}},
+		{tex = sightIllum, offset = {0, 0}, center = {0, reticleTip}},
+	}
 	
 	local lens = surface.GetTextureID("cw2/gui/lense")
 	local lensMat = Material("cw2/gui/lense")
@@ -31,12 +34,13 @@ if CLIENT then
 	cd.y = 0
 	cd.w = 512
 	cd.h = 512
+	cd.aspectratio = 1
 	cd.fov = 4.5
 	cd.drawviewmodel = false
 	cd.drawhud = false
 	cd.dopostprocess = false
 	
-	function att:drawRenderTarget()
+	function att:drawRenderTarget(viewOrigin, viewAngles)
 		local complexTelescopics = self:canUseComplexTelescopics()
 		
 		-- if we don't have complex telescopics enabled, don't do anything complex, and just set the texture of the lens to a fallback 'lens' texture
@@ -51,10 +55,7 @@ if CLIENT then
 			alpha = math.Approach(alpha, 1, FrameTime() * 5)
 		end
 		
-		x, y = ScrW(), ScrH()
-		old = render.GetRenderTarget()
-	
-		ang = self:getTelescopeAngles()
+		ang = viewAngles and Angle(viewAngles.p, viewAngles.y, viewAngles.r) or self:getTelescopeAngles()
 		
 		if not self.freeAimOn then
 			ang:RotateAroundAxis(ang:Right(), self.PSO1AxisAlign.right)
@@ -69,9 +70,8 @@ if CLIENT then
 		cd.w = size
 		cd.h = size
 		cd.angles = ang
-		cd.origin = self.Owner:GetShootPos()
-		render.SetRenderTarget(self.ScopeRT)
-		render.SetViewPort(0, 0, size, size)
+		cd.origin = viewOrigin or EyePos()
+		render.PushRenderTarget(self.ScopeRT, 0, 0, size, size)
 			if alpha < 1 or Ini then
 				render.RenderView(cd)
 				Ini = false
@@ -85,21 +85,24 @@ if CLIENT then
 			
 			local light = render.ComputeLighting(self.Owner:GetShootPos(), ang)
 			
+			local clippingDisabled = DisableClipping(true)
 			cam.Start2D()
 				surface.SetDrawColor(255, 255, 255, 255)
 				surface.SetTexture(sight)
-				surface.DrawTexturedRectRotated(size * 0.5, size * 0.5, size * 0.8, size * 0.8, 90)
+				local reticleSize = size * 0.8
+				local reticleX = size * 0.5 - reticleTip * reticleSize
+				surface.DrawTexturedRectRotated(reticleX, size * 0.5, reticleSize, reticleSize, 90)
 				
 				surface.SetDrawColor(255, 255, 255, 255)
 				surface.SetTexture(sightIllum)
-				surface.DrawTexturedRectRotated(size * 0.5, size * 0.5, size * 0.8, size * 0.8, 90)
+				surface.DrawTexturedRectRotated(reticleX, size * 0.5, reticleSize, reticleSize, 90)
 				
 				surface.SetDrawColor(150 * light[1], 150 * light[2], 150 * light[3], 255 * alpha)
 				surface.SetTexture(lens)
 				surface.DrawTexturedRectRotated(size * 0.5, size * 0.5, size, size, 90)
 			cam.End2D()
-		render.SetViewPort(0, 0, x, y)
-		render.SetRenderTarget(old)
+			DisableClipping(clippingDisabled)
+		render.PopRenderTarget()
 		
 		if self.TSGlass then
 			self.TSGlass:SetTexture("$basetexture", self.ScopeRT)

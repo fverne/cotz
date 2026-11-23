@@ -24,9 +24,9 @@ if CLIENT then
 		["md_tundra9mm"] = {
 			model = "models/cw2/attachments/9mmsuppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.000094, -1.954645, -14.34655),
+			pos = Vector(0.000132, -1.708001, -14.924732),
 			angle = Angle(0.003743, 0, -89.999982),
-			size = Vector(0.5, 0.5, 0.5),
+			size = Vector(0.7, 0.7, 0.7),
 		},
 	}
 end
@@ -154,7 +154,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_kiparis_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1, 4.1081, -4.6758)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.KIPARIS.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.KIPARIS.FIRE_SILENCED"
 SWEP.LuaViewmodelRecoil = true

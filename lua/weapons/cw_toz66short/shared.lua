@@ -14,7 +14,7 @@ if CLIENT then
 	SWEP.ViewModelMovementScale = 0.8
 	SWEP.HUD_MagText = "CYLINDER: "
 
-	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1.5, roll = 3, forward = 1, pitch = 4}
+	SWEP.LuaVMRecoilAxisMod = {vert = 0.5, hor = 0.75, roll = 1, forward = 0.5, pitch = 1}
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.DisableSprintViewSimulation = true
 end
@@ -192,7 +192,7 @@ SWEP.Shell = false
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_bm16_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1, 4.265, -2.8827)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.BM16.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.BM16.FIRE"
 SWEP.LuaViewmodelRecoil = true

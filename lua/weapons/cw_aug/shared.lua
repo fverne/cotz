@@ -23,9 +23,9 @@ if CLIENT then
 		["md_saker"] = {
 			model = "models/cw2/attachments/556suppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.011904, -0.309483, -10.442868),
+			pos = Vector(-0.012368, 0.05369, -8.177305),
 			angle = Angle(0.0408, 179.570035, 89.846516),
-			size = Vector(0.6, 0.6, 0.6),
+			size = Vector(0.72, 0.72, 0.72),
 		},
 	}
 end
@@ -80,6 +80,8 @@ SWEP.SnapToIdlePostReload = true
 -- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_aug_a1.
 
 SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/wpn_aug_a1.mdl"
+SWEP.AnomalyScopeZoom = 1
+SWEP.AnomalyReticle = "models/flaymi/stalker/anomaly/weapons/aug_a1/wpn_crosshair_aug_a1"
 SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/w_aug_a1.mdl"
 SWEP.ViewModelFOV = 55
 SWEP.AimViewModelFOV = 55
@@ -155,7 +157,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/w_aug_a1.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1.2, 4.6324, -4.4206)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.AUG_A1.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.AUG_A1.FIRE_SILENCED"
 SWEP.LuaViewmodelRecoil = true

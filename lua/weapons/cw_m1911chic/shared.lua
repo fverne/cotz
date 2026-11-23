@@ -12,7 +12,6 @@ if CustomizableWeaponry then
 		SWEP.PrintName = "Colt Chigaco" -- What's this called in weapons spawn menu?
 		SWEP.CSMuzzleFlashes = true
 		SWEP.ZoomAmount = 15 -- Zoom FOV by this much while aiming
-		SWEP.AimSwayIntensity = 0.6
 		
 		SWEP.IconLetter = "f"
 

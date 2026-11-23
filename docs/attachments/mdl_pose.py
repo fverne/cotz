@@ -490,6 +490,35 @@ def contact_clearances(gun_path, sequence, sights, step=0.1, strip=0.2, contact_
     return results
 
 
+def mount_widths(path, sequence, sites):
+    """Measure receiver width just below each mount's seating surface in the idle pose.
+
+    Each site holds (x, y, z) at a mount's center. Horizontal slices below the top hit the
+    receiver shoulder while avoiding bevels, screw heads and rail lugs. Use the median of
+    several slices; narrow posts and tangencies are common in the triangle mesh.
+    """
+    from statistics import median
+
+    vertices = posed_vertices(path, sequence)
+    faces = [[(vertices[index][0], vertices[index][2], vertices[index][1]) for index in face]
+             for face in triangles(path) if max(face) < len(vertices)]
+    widths = []
+    for x, y, z in sites:
+        nearby = [face for face in faces if min(v[0] for v in face) <= x + 0.6
+                  and max(v[0] for v in face) >= x - 0.6
+                  and min(v[1] for v in face) <= z + 0.15 and max(v[1] for v in face) >= z - 0.65]
+        samples = []
+        for offset in (-0.6, -0.3, 0, 0.3, 0.6):
+            for depth in (0.15, 0.30, 0.50):
+                hits = _ray_hits(nearby, x + offset, z - depth)
+                left = [hit for hit in hits if y - 1.8 < hit < y - 0.20]
+                right = [hit for hit in hits if y + 0.20 < hit < y + 1.8]
+                if left and right:
+                    samples.append(min(right) - max(left))
+        widths.append(median(samples) if samples else None)
+    return widths
+
+
 def mesh_bounds(path):
     """Bounds of the LOD 0 vertices as rendered in the first sequence's first frame.
 
@@ -550,6 +579,7 @@ def main(argv=None):
     parser.add_argument("--skin-bone", action="store_true", help="print the bone most vertices are skinned to")
     parser.add_argument("--contact", metavar="JSON",
         help='print clearances for placed sights [{"model": path, "origin": [...], "axes": [[...] x3]}, ...]')
+    parser.add_argument("--mount-widths", metavar="JSON", help="measure width at each mount site [[x, y, z], ...]")
     args = parser.parse_args(argv)
     try:
         if args.skin_bone:
@@ -571,6 +601,11 @@ def main(argv=None):
                 clearances = contact_clearances(args.model, args.sequence, request)
             print(json.dumps(clearances) if args.format == "json" else
                 "{" + ", ".join("false" if c is None else repr(c) for c in clearances) + "}")
+            return 0
+        if args.mount_widths:
+            widths = mount_widths(args.model, args.sequence, json.loads(args.mount_widths))
+            print(json.dumps(widths) if args.format == "json" else
+                "{" + ", ".join("false" if width is None else repr(width) for width in widths) + "}")
             return 0
         if args.surface:
             windows = [{"x0": a, "x1": b, "y": c, "half_width": d} for a, b, c, d in json.loads(args.surface)]

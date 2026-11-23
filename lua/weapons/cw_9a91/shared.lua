@@ -39,13 +39,13 @@ if CLIENT then
 	SWEP.PSOPos = Vector(-3.393, -4, 0.965)
 	SWEP.PSOAng = Vector(0.295, 0.46, 0)
 
-	SWEP.ShortDotPos = Vector(-3.528, -4.969, 0.463)
+	SWEP.ShortDotPos = Vector(-3.569614, -4.969, 0.598615)
 	SWEP.ShortDotAng = Vector(0.24, 0.495, 0)
 
-	SWEP.ACOGPos = Vector(-3.573954, -4.079, 0.182737)
+	SWEP.ACOGPos = Vector(-3.574564, -4.079, 0.192375)
 	SWEP.ACOGAng = Vector(0.24, 0.495, 0)
 
-	SWEP.NXSPos = Vector(-3.634, -4.079, 0.566)
+	SWEP.NXSPos = Vector(-3.634324, -4.079, 0.559413)
 	SWEP.NXSAng = Vector(0.24, 0.495, 0)
 	
 	SWEP.CustomizePos = Vector(12.121, -4.907, -0.461)
@@ -78,24 +78,24 @@ if CLIENT then
 		["md_schmidt_shortdot"] = {
 			model = "models/cw2/attachments/schmidt.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.164850, 0.201224, 2.760623),
+			pos = Vector(0.173164, 0.347043, 2.887199),
 			angle = Angle(-90, 90, 0),
-			size = Vector(0.8, 0.8, 0.8),
+			size = Vector(0.82, 0.82, 0.82),
 		},
 		["md_acog"] = {
 			model = "models/wystan/attachments/2cog.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.213793, 0.686207, 2.743715),
+			pos = Vector(0.225206, 0.909659, 2.899033),
 			angle = Angle(0, 180, 90),
-			size = Vector(0.889878, 0.889878, 0.889878),
+			size = Vector(0.92, 0.92, 0.92),
 		},
 		-- Seated on the rail adapter as on the Saiga Sport, centred along the rail.
 		["md_nightforce_nxs"] = {
 			model = "models/cw2/attachments/l96_scope.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.030064, -5.326697, -1.787542),
+			pos = Vector(0.04041, -5.342543, -1.788348),
 			angle = Angle(-90, 90, 0),
-			size = Vector(0.889878, 0.889878, 0.889878),
+			size = Vector(1, 1, 1),
 		},
 	}
 

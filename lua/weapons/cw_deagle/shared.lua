@@ -28,37 +28,41 @@ if CLIENT then
 		["md_microt1"] = {
 			model = "models/cw2/attachments/microt1.mdl",
 			bone = "slide",
-			pos = Vector(-0.003065, -1.21764, 3.258698),
+			staticBone = "wpn_body",
+			pos = Vector(0.001645, -1.175399, 3.248842),
 			angle = Angle(0.002576, 0, -89.999905),
-			size = Vector(0.4, 0.4, 0.4),
+			size = Vector(0.3, 0.3, 0.3),
 		},
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "slide",
-			pos = Vector(-0.247487, 8.210371, 12.637671),
+			staticBone = "wpn_body",
+			pos = Vector(-0.208574, 6.716765, 11.075307),
 			angle = Angle(-88.499903, 89.901632, -0.098399),
-			size = Vector(0.85, 0.85, 0.85),
+			size = Vector(0.7125, 0.7125, 0.7125),
 		},
 		["md_rmr"] = {
 			model = "models/cw2/attachments/pistolholo.mdl",
 			bone = "slide",
-			pos = Vector(0.237785, 2.211809, 6.583703),
+			staticBone = "wpn_body",
+			pos = Vector(0.251832, 2.436341, 6.791113),
 			angle = Angle(-89.997422, 90, 0),
-			size = Vector(0.6, 0.6, 0.6),
+			size = Vector(0.6375, 0.6375, 0.6375),
 		},
 		["md_rail"] = {
 			model = "models/cw2/attachments/pistolrail.mdl",
 			bone = "slide",
-			pos = Vector(-0.003451, 1.742757, 1.667177),
+			staticBone = "wpn_body",
+			pos = Vector(-0.003386, 1.332254, 1.844534),
 			angle = Angle(-89.997501, 90, 0),
-			size = Vector(0.17, 0.17, 0.17),
+			size = Vector(0.150574, 0.124613, 0.145),
 		},
 		["md_cobram2"] = {
 			model = "models/cw2/attachments/cobra_m2.mdl",
 			bone = "wpn_body",
-			pos = Vector(0, -1.809, -9.995721),
+			pos = Vector(0, -1.8096, -10.609054),
 			angle = Angle(89.997501, -90, 0),
-			size = Vector(0.75, 0.75, 0.75),
+			size = Vector(0.95, 0.95, 0.95),
 		},
 	}
 end
@@ -118,11 +122,11 @@ SWEP.UseHands = true
 SWEP.IronsightPos = Vector(-3.75, -1, 1.853)
 SWEP.IronsightAng = Vector(-0.3, 0, 0)
 
-SWEP.MicroT1Pos = Vector(-3.840944, -2, 0.892907)
+SWEP.MicroT1Pos = Vector(-3.833523, -2, 1.102484)
 SWEP.MicroT1Ang = Vector(-0.3, 0, 0)
-SWEP.EoTechPos = Vector(-3.80849, -8.198, 0.656178)
+SWEP.EoTechPos = Vector(-3.808948, -8.198, 0.841519)
 SWEP.EoTechAng = Vector(-0.3, 0, 0)
-SWEP.RMRPos = Vector(-3.83007, -5, 1.152623)
+SWEP.RMRPos = Vector(-3.830037, -5, 1.133834)
 SWEP.RMRAng = Vector(-0.3, 0, 0)
 SWEP.SightWithRail = true
 SWEP.SprintPos = Vector(0, -1, 3.8)
@@ -211,7 +215,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_desert_eagle_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1.2, 4.1828, -2.6747)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-7, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.DESERT_EAGLE.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.DESERT_EAGLE.FIRE"
 SWEP.LuaViewmodelRecoil = true
