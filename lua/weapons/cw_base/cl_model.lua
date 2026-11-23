@@ -1787,7 +1787,15 @@ local function drawWorldAttachment(weapon, data, name, active, muzzle, scale)
 	local offset = worldAttachmentOffset(data.origPos, weapon.AttachmentPosDependency, name, active)
 	local rotation = worldAttachmentOffset(data.origAng, weapon.AttachmentAngDependency, name, active)
 	local pos, ang = offsetAttachment(bone.pos, Angle(bone.ang.p, bone.ang.y, bone.ang.r), offset, rotation)
-	pos, ang = LocalToWorld(pos * scale, ang, muzzle.Pos, muzzle.Ang)
+
+	-- Optional fit of the viewmodel muzzle frame inside the worldmodel's (WorldAttachmentShift, WorldAttachmentAngle).
+	pos = pos * scale
+	local shift, turn = weapon.WorldAttachmentShift, weapon.WorldAttachmentAngle
+	if shift or turn then
+		pos, ang = LocalToWorld(pos, ang, shift or vector_origin, turn or angle_zero)
+	end
+
+	pos, ang = LocalToWorld(pos, ang, muzzle.Pos, muzzle.Ang)
 
 	model:SetPos(pos)
 	model:SetAngles(ang)
@@ -1804,9 +1812,11 @@ function SWEP:DrawWorldAttachments(worldModel)
 	local muzzle = getAttachmentPoint(worldModel, "muzzle", self.WorldMuzzleAttachmentID)
 	if not muzzle then return end
 
-	-- The Anomaly pairs have the same muzzle axes, but their viewmodels can be larger.
-	local scale = 1
-	local distance = source.distance and getMuzzleDistance(worldModel, muzzle)
+	-- The Anomaly pairs have the same muzzle axes, but their viewmodels can be larger. A weapon that measured
+	-- its own pair (docs/attachments/weapon_fit.py) names the scale; the muzzle-to-wpn_body estimate is wrong
+	-- when that bone is not at the same place of both models.
+	local scale = self.WorldAttachmentScale or 1
+	local distance = not self.WorldAttachmentScale and source.distance and getMuzzleDistance(worldModel, muzzle)
 	if distance and source.distance > 0 then
 		scale = math.Clamp(distance / source.distance, 0.5, 1.5)
 	end

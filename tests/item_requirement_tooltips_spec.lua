@@ -32,12 +32,23 @@ local inventory = {
 function character:GetInventory() return inventory end
 local upgradeRequests = 0
 local hideouts = {}
+local upgradeItems = {shared = {["Marsh room"] = true}, unneeded = {["Squad base"] = true, ["Marsh room"] = true}}
 function hideouts:RequestUpgradeItems() upgradeRequests = upgradeRequests + 1 end
 function hideouts:GetUpgradeItemHideouts(uniqueID)
-	return ({shared = {["Marsh room"] = true}, unneeded = {["Squad base"] = true, ["Marsh room"] = true}})[uniqueID]
+	return upgradeItems[uniqueID]
 end
+local drawColors = {}
 local environment = {
-	PANEL = methods, yellowCol = "yellow", purpleCol = "purple", greenCol = "green",
+	PANEL = methods, yellowCol = "yellow", purpleCol = "purple",
+	Color = function(r, g, b, a) return {r = r, g = g, b = b, a = a} end,
+	ColorAlpha = function(color, a) return {r = color.r, g = color.g, b = color.b, a = a} end,
+	Material = function(path) return path end,
+	surface = {
+		SetDrawColor = function(color) drawColors[#drawColors + 1] = color end,
+		DrawRect = function() end,
+		SetMaterial = function() end,
+		DrawTexturedRect = function() end,
+	},
 	LocalPlayer = function() return player end,
 	IsValid = function(value) return type(value) == "table" end,
 	ix = {
@@ -59,6 +70,12 @@ local environment = {
 	},
 }
 setmetatable(environment, {__index = _G})
+local paintCode = section("local blackCol = ", 'vgui.Register("ixItemIcon"')
+	.. "return getUpgradeItemHideouts, HIDEOUT_COLOR, HIDEOUT_BACKGROUND, blackCol"
+local getUpgradeItemHideouts, hideoutColor, hideoutBackground, blackColor =
+	assert(load(paintCode, "@inventory/paint", "t", environment))()
+environment.getUpgradeItemHideouts = getUpgradeItemHideouts
+environment.HIDEOUT_COLOR = hideoutColor
 local init = "function PANEL:BuildHighlights()\n"
 	.. section("\tself.highlghtItems = {}", "function PANEL:GetPadding(")
 assert(load(init, "@inventory/highlights", "t", environment))()
@@ -95,8 +112,9 @@ check(properties[1][1] == "Task: Alpha" and properties[2][1] == "Task: Beta"
 	and properties[5][1] == "Progression: Delta", "Contact rows are sorted within each requirement type")
 check(properties[1][2] == "yellow" and properties[4][2] == "purple",
 	"Task and progression rows keep their established colors")
-check(properties[6][1] == "Hideout: Marsh room" and properties[6][2] == "green",
-	"Hideout upgrade materials follow requirement rows in green")
+check(properties[6][1] == "Hideout: Marsh room" and properties[6][2] == hideoutColor
+	and hideoutColor.r > hideoutColor.g and hideoutColor.r > hideoutColor.b,
+	"Hideout upgrade materials follow requirement rows in red")
 properties = {}
 icons[2].tooltip(tooltip)
 check(#properties == 1 and properties[1][1] == "Progression: Delta",
@@ -109,4 +127,21 @@ properties = {}
 icons[4].tooltip(tooltip)
 check(#properties == 2 and properties[1][1] == "Hideout: Marsh room" and properties[2][1] == "Hideout: Squad base",
 	"Hideout-only materials list every hideout that needs them")
+local icon = {
+	itemTable = environment.ix.item.instances[1],
+	GetParent = function() return panel end,
+	GetWide = function() return 32 end,
+	ExtraPaint = function() end,
+}
+methods.Paint(icon, 32, 32)
+check(drawColors[1] == hideoutBackground and #drawColors == 3,
+	"Shared items draw a red background under both requirement highlights")
+icon.itemTable = environment.ix.item.instances[4]
+drawColors = {}
+methods.Paint(icon, 32, 32)
+check(drawColors[1] == hideoutBackground and #drawColors == 1, "Hideout-only materials draw a red background")
+upgradeItems.unneeded = nil
+drawColors = {}
+methods.Paint(icon, 32, 32)
+check(drawColors[1] == blackColor and #drawColors == 1, "Open icons reflect updated hideout material needs")
 print(string.format("PASS: %d item requirement tooltip checks", checks))

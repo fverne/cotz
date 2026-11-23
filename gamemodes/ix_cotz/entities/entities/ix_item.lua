@@ -93,8 +93,17 @@ if (SERVER) then
 			local physObj = self:GetPhysicsObject()
 
 			if (!IsValid(physObj)) then
-				self:PhysicsInitBox(invalidBoundsMin, invalidBoundsMax)
-				self:SetCollisionBounds(invalidBoundsMin, invalidBoundsMax)
+				-- Models without a collision mesh, such as the Anomaly attachment world models, collide as their
+				-- compiled hull. The hull can sit far from the model origin, so a fixed box would float the mesh.
+				local mins, maxs = self:GetModelBounds()
+
+				if (!mins or (maxs - mins):LengthSqr() < 1) then
+					mins, maxs = invalidBoundsMin, invalidBoundsMax
+				end
+
+				self:PhysicsInitBox(mins, maxs)
+				self:SetCollisionBounds(mins, maxs)
+				physObj = self:GetPhysicsObject()
 			end
 
 			if (IsValid(physObj)) then

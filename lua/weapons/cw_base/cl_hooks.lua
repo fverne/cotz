@@ -2,17 +2,19 @@ local function CW20_RenderScene(origin, angles, fov)
 	local ply = LocalPlayer()
 	local wep = ply:GetActiveWeapon()
 
-	if IsValid(wep) and wep.CW20Weapon then
+	-- Scope views share a render target. A nested view must not draw another scope into it.
+	if IsValid(wep) and wep.CW20Weapon and wep.ScopeRT and render.GetRenderTarget() ~= wep.ScopeRT then
 		-- this is the weapon's render target func
 		if wep.RenderTargetFunc then
 			wep.RenderTargetFunc(wep)
 		end
 
 		wep:DrawCotzIntegratedScope(origin, angles, fov)
+		wep:DrawCotzLensScope(origin, angles, fov)
 
 		-- this is some attachment's render target func
 		if wep.renderTargetFunc then
-			wep.renderTargetFunc(wep, origin, angles)
+			wep.renderTargetFunc(wep, origin, angles, wep:GetCotzLegacyAttachmentLens())
 		end
 
 		-- ...amazing, isn't it?

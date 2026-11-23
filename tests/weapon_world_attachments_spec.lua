@@ -86,6 +86,7 @@ function angleMethods:RotateAroundAxis(_, degrees) assert(degrees == 0) end
 local vectorMethods = getmetatable(Vector()).__index
 function vectorMethods:Distance(other) return (self - other):Length() end
 function math.Clamp(value, min, max) return math.min(max, math.max(min, value)) end
+vector_origin, angle_zero = Vector(), Angle()
 
 local drawn = {}
 local created = 0
@@ -144,6 +145,25 @@ assert(math.abs(drawn.optic.ang.y - 90) < 1e-6, "rotate the attachment with the 
 assert(drawn.optic.scale.x == 0.8, "scale the mesh with the copied offset")
 weapon:DrawWorldAttachments(worldModel)
 assert(created == 2, "repeat draws should reuse the existing client models")
+
+-- A weapon that measured its model pair names the scale instead of the muzzle-to-wpn_body estimate.
+drawn = {}
+weapon.WorldAttachmentScale = 0.5
+weapon:DrawWorldAttachments(worldModel)
+assert((drawn.optic.pos - Vector(10, 18, 31.6 - 0.6)):Length() < 1e-6, "use the measured scale")
+assert(drawn.optic.scale.x == 0.5, "scale the mesh with the measured scale")
+
+drawn = {}
+weapon.WorldAttachmentShift = Vector(0, 0, 1)
+weapon:DrawWorldAttachments(worldModel)
+assert((drawn.optic.pos - Vector(10, 18, 32)):Length() < 1e-6, "shift along the worldmodel muzzle axes")
+
+-- Opposite muzzle frames: 180 degrees of roll turns the viewmodel offsets onto the worldmodel's.
+drawn = {}
+weapon.WorldAttachmentAngle = Angle(0, 0, 180)
+weapon:DrawWorldAttachments(worldModel)
+assert((drawn.optic.pos - Vector(10, 18, 30)):Length() < 1e-6, "turn the viewmodel muzzle frame before shifting")
+weapon.WorldAttachmentScale, weapon.WorldAttachmentShift, weapon.WorldAttachmentAngle = nil, nil, nil
 
 drawn = {}
 weapon:SetWorldAttachments("dovetail")

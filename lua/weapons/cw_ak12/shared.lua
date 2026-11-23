@@ -25,65 +25,65 @@ if CLIENT then
 	SWEP.AttachmentModelsVM = {
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
-			bone = "wpn_body",
-			pos = Vector(6.575258, 5.424883, -8.649033),
-			angle = Angle(-89.290422, -84.248866, -174.249138),
+			bone = "body",
+			pos = Vector(-0.299564, 5.671671, 4.992216),
+			angle = Angle(-89.446853, -87.458695, -177.028994),
 			size = Vector(0.95, 0.95, 0.95),
 		},
 		["md_microt1"] = {
 			model = "models/cw2/attachments/microt1.mdl",
-			bone = "wpn_body",
-			pos = Vector(6.821825, -4.596453, -19.630192),
-			angle = Angle(0.063484, -0.000268, -89.905992),
+			bone = "body",
+			pos = Vector(0.014327, -4.376995, -5.962217),
+			angle = Angle(0.021051, -0.430521, -89.752389),
 			size = Vector(0.4, 0.4, 0.4),
 		},
 		["md_aimpoint"] = {
 			model = "models/wystan/attachments/aimpoint.mdl",
-			bone = "wpn_body",
-			pos = Vector(7.063261, 0.148249, -14.635365),
-			angle = Angle(-0.0711, -179.99929, 90.706007),
+			bone = "body",
+			pos = Vector(0.223731, 0.382787, -0.980308),
+			angle = Angle(-0.028669, 179.570437, 90.552403),
 			size = Vector(0.83, 0.83, 0.83),
 		},
 		["md_reflex"] = {
 			model = "models/attachments/kascope.mdl",
-			bone = "wpn_body",
-			pos = Vector(6.891051, -4.696456, -22.841545),
-			angle = Angle(-0.0711, -179.99929, 90.706007),
+			bone = "body",
+			pos = Vector(0.081989, -4.485102, -9.173341),
+			angle = Angle(-0.028669, 179.570437, 90.552403),
 			size = Vector(0.84, 0.84, 0.84),
 		},
 		["md_cmore"] = {
 			model = "models/attachments/cmore.mdl",
-			bone = "wpn_body",
-			pos = Vector(6.858803, -4.430299, -19.602425),
-			angle = Angle(-0.0711, -179.99929, 90.706007),
+			bone = "body",
+			pos = Vector(0.050077, -4.210494, -5.934923),
+			angle = Angle(-0.028669, 179.570437, 90.552403),
 			size = Vector(0.9, 0.9, 0.9),
 		},
 		["md_schmidt_shortdot"] = {
 			model = "models/cw2/attachments/schmidt.mdl",
-			bone = "wpn_body",
-			pos = Vector(7.136608, 0.218957, -15.756052),
-			angle = Angle(-89.999681, 89.999836, 0),
+			bone = "body",
+			pos = Vector(0.295737, 0.451032, -2.101235),
+			angle = Angle(-89.840336, 104.981998, 15.412301),
 			size = Vector(0.82, 0.82, 0.82),
 		},
 		["md_acog"] = {
 			model = "models/wystan/attachments/2cog.mdl",
-			bone = "wpn_body",
-			pos = Vector(7.173435, 0.779658, -14.667733),
-			angle = Angle(-0.000164, 179.999836, 89.999727),
+			bone = "body",
+			pos = Vector(0.329137, 1.014916, -1.01445),
+			angle = Angle(0.042269, 179.569753, 89.846124),
 			size = Vector(0.92, 0.92, 0.92),
 		},
 		["md_nightforce_nxs"] = {
 			model = "models/cw2/attachments/l96_scope.mdl",
-			bone = "wpn_body",
-			pos = Vector(6.963575, -5.700888, -18.161685),
-			angle = Angle(-89.999681, 89.999836, 0),
+			bone = "body",
+			pos = Vector(0.165424, -5.476386, -4.49086),
+			angle = Angle(-89.840336, 104.981998, 15.412301),
 			size = Vector(1, 1, 1),
 		},
 		["md_pbs1"] = {
 			model = "models/cw2/attachments/pbs1.mdl",
-			bone = "wpn_body",
-			pos = Vector(6.82227, -1.357398, -38.03126),
-			angle = Angle(0.000164, -0.000164, -89.999727),
+			bone = "body",
+			pos = Vector(-0.022804, -1.187471, -24.371898),
+			angle = Angle(-0.042269, -0.430247, -89.846124),
 			size = Vector(0.8, 0.8, 0.8),
 		},
 	}
@@ -290,6 +290,8 @@ SWEP.InsertShellTime = 1
 SWEP.ReloadFinishWait = 1
 SWEP.AlwaysPlayReloadEnd = true
 SWEP.MuzzleAttachmentName = "muzzle"
+SWEP.WorldAttachmentScale = 0.844
+SWEP.WorldAttachmentShift = Vector(0, 0, 2.64)
 SWEP.MuzzleEffect = "muzzleflash_ak74"
 SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_ak12.mdl"

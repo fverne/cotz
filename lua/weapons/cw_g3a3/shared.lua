@@ -239,6 +239,7 @@ SWEP.InsertShellTime = 1
 SWEP.ReloadFinishWait = 1
 SWEP.AlwaysPlayReloadEnd = true
 SWEP.MuzzleAttachmentName = "muzzle"
+SWEP.WorldAttachmentScale = 0.824
 SWEP.MuzzleEffect = "muzzleflash_ak74"
 SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_g3_w.mdl"

@@ -51,6 +51,7 @@ surface = {
 	SetDrawColor = function() end,
 	SetMaterial = function(value) material = value end,
 	DrawTexturedRect = function(...) rect = {...} end,
+	DrawTexturedRectUV = function(...) rect = {...} end,
 	DrawRect = function() end,
 }
 
@@ -119,5 +120,128 @@ local custom = setmetatable({
 }, {__index = SWEP})
 custom:SetupCotzIntegratedScope()
 assert(not custom.cotzIntegratedScope, "an existing CW renderer owns its own lens")
+
+local lensOverride
+local sightPos = {}
+local tulip = setmetatable({
+	AimPos = sightPos,
+	ActualSightPos = sightPos,
+	cotzLensScope = {zoom = 4, reticlePath = "tulip/reticle", reticleCenter = {0, -0.25}},
+	cotzAimModel = {
+		active = true,
+		ent = {
+			GetMaterials = function() return {"scope/body", "scope/lense_rt"} end,
+			GetSubMaterial = function() return lensOverride end,
+			SetSubMaterial = function(_, slot, value)
+				assert(slot == 1)
+				lensOverride = value
+			end,
+		},
+	},
+	dt = {},
+	ScopeRT = {},
+	getRenderTargetSize = function() return 512 end,
+	isAiming = function(self) return self.aiming end,
+	canUseComplexTelescopics = function(self) return not self.simple end,
+}, {__index = SWEP})
+local attachmentLens = created.cotz_attachment_scope_lens
+
+tulip:DrawCotzLensScope(origin, angles, 75)
+assert(lensOverride == "!cotz_attachment_scope_lens" and draws == 1)
+assert(attachmentLens.base:GetName() == "cw2/gui/lense", "an attachment lens needs a fallback before aiming")
+
+tulip.aiming = true
+tulip:DrawCotzLensScope(origin, angles, 75)
+assert(draws == 2 and frame.fov < 10 and attachmentLens.base == tulip.ScopeRT)
+assert(rect[3] == 512 and rect[6] == -0.25 and rect[8] == 0.75, "the reticle keeps its configured centre")
+assert(material == created.cotz_integrated_scope_reticle)
+
+tulip.AimPos = {}
+tulip:DrawCotzLensScope(origin, angles, 75)
+assert(draws == 2 and attachmentLens.base:GetName() == "cw2/gui/lense", "backup sights do not render the lens")
+
+tulip.AimPos = sightPos
+tulip.simple = true
+tulip:DrawCotzLensScope(origin, angles, 75)
+assert(draws == 2, "simple telescopics keep the full-screen reticle")
+
+tulip.cotzAimModel.active = false
+assert(not tulip:GetCotzLensScope())
+
+local legacy = setmetatable({
+	CW20Weapon = true,
+	ScopeRT = {},
+	cotzAimModel = {
+		active = true,
+		ent = {
+			GetMaterials = function() return {"cw2/attachments/lens/rt", "scope/body"} end,
+			GetSubMaterial = function() return lensOverride end,
+			SetSubMaterial = function(_, slot, value)
+				assert(slot == 0)
+				lensOverride = value
+			end,
+		},
+	},
+}, {__index = SWEP})
+
+local renderScene
+hook = {Add = function(event, _, callback)
+	if event == "RenderScene" then renderScene = callback end
+end}
+function LocalPlayer() return {GetActiveWeapon = function() return legacy end} end
+
+local currentTarget
+render.GetRenderTarget = function() return currentTarget end
+local shortdot
+CLIENT = true
+CustomizableWeaponry = {
+	textColors = {},
+	registerAttachment = function(_, attachment) shortdot = attachment end,
+}
+surface.GetTextureID = function(path) return path end
+surface.SetTexture = function() end
+surface.DrawTexturedRectRotated = function() end
+function Color(...) return {...} end
+function Angle(p, y, r)
+	return {p = p, y = y, r = r, Forward = function() return 1 end}
+end
+function FrameTime() return 0.1 end
+function math.Approach(current, target, step)
+	return current < target and math.min(current + step, target) or math.max(current - step, target)
+end
+render.ComputeLighting = function() return {1, 1, 1} end
+dofile("lua/cw/shared/attachments/md_schmidt_shortdot.lua")
+
+legacy.freeAimOn = true
+legacy.BlendAng = {x = 0, y = 0, z = 0}
+legacy.Owner = {EyeAngles = function() return Angle(0, 0, 0) end, GetShootPos = function() return origin end}
+legacy.getRenderTargetSize = function() return 512 end
+legacy.canSeeThroughTelescopics = function() return true end
+legacy.canUseComplexTelescopics = function(self) return not self.simple end
+legacy.TSGlass = {SetTexture = function() error("the weapon's built-in lens was changed") end}
+shortdot.attachFunc(legacy)
+assert(shortdot.FOVModifier == 15 and legacy.SimpleTelescopicsFOV == 55)
+
+local lensDraws = 0
+legacy.renderTargetFunc = function(self, sceneOrigin, sceneAngles, glass)
+	assert(sceneOrigin == origin and sceneAngles == angles)
+	assert(glass == attachmentLens and lensOverride == "!cotz_attachment_scope_lens")
+	lensDraws = lensDraws + 1
+	currentTarget = self.ScopeRT
+	renderScene(origin, angles, 75)
+	currentTarget = nil
+	shortdot.drawRenderTarget(self, sceneOrigin, sceneAngles, glass)
+end
+
+dofile("lua/weapons/cw_base/cl_hooks.lua")
+lensOverride = nil
+angles.p, angles.y, angles.r = 0, 0, 0
+renderScene(origin, angles, 75)
+assert(lensDraws == 1, "the attachment renderer owns its lens and skips nested scope views")
+assert(draws == 3 and frame.fov == 9 and attachmentLens.base == legacy.ScopeRT)
+
+legacy.simple = true
+renderScene(origin, angles, 75)
+assert(draws == 3 and attachmentLens.base:GetName() == "cw2/gui/lense")
 
 print("Anomaly integrated scope spec passed")

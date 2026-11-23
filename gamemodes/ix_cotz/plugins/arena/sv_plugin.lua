@@ -150,6 +150,9 @@ end)
 function PLUGIN:SaveData()
 	local data = {}
 	for k, v in ipairs(ents.FindByClass("ix_arenaspectate")) do
+		-- Helix persistence owns TVs made persistent; saving them here would duplicate them on load.
+		if v:GetNetVar("Persistent", false) then continue end
+
 		data[#data + 1] = {v:GetPos(), v:GetAngles()}
 	end
 	self:SetData(data)

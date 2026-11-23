@@ -35,12 +35,13 @@ if CLIENT then
 	cd.drawhud = false
 	cd.dopostprocess = false
 	
-	function att:drawRenderTarget()
+	function att:drawRenderTarget(_, _, glass)
+		glass = glass or self.TSGlass
 		local complexTelescopics = self:canUseComplexTelescopics()
 		
 		-- if we don't have complex telescopics enabled, don't do anything complex, and just set the texture of the lens to a fallback 'lens' texture
 		if not complexTelescopics then
-			self.TSGlass:SetTexture("$basetexture", lensMat:GetTexture("$basetexture"))
+			glass:SetTexture("$basetexture", lensMat:GetTexture("$basetexture"))
 			return
 		end
 		
@@ -95,8 +96,8 @@ if CLIENT then
 		render.SetViewPort(0, 0, x, y)
 		render.SetRenderTarget(old)
 		
-		if self.TSGlass then
-			self.TSGlass:SetTexture("$basetexture", self.ScopeRT)
+		if glass then
+			glass:SetTexture("$basetexture", self.ScopeRT)
 		end
 	end
 end

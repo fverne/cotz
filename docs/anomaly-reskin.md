@@ -35,6 +35,13 @@ render target. A client-side override on the lens replaces the TFA material prox
 the magnified scene and reticle in the lens. The simple telescopics option keeps the full-screen scope
 overlay. Weapons with their own CW scope renderer, such as the VSSK, keep that renderer.
 
+The USP-1 "Tulip" (`cw_anomaly_1p29`) on COTZ dovetail guns works the same way through its attachment model's
+`lense_rt` slot, configured by `lensZoom` in `SCOPES` (`sh_cotzattachments.lua`). It switches to the
+full-screen reticle with simple telescopics or the gun's backup iron sights. The PU scope keeps the full-screen overlay.
+
+Anomaly attachment world models ship without a collision mesh. A dropped item then collides as the model's compiled
+hull (`ix_item.lua`) rather than a fixed 16-unit box around the origin, which left the Tulip floating.
+
 ```sh
 python3 docs/anomaly/reskin_weapons.py --dry-run
 python3 docs/anomaly/reskin_weapons.py --base HEAD   # regenerate from committed sources
@@ -49,7 +56,7 @@ python3 docs/anomaly/reskin_weapons.py --base HEAD   # regenerate from committed
 
 ## Attachments
 
-Every Anomaly viewmodel has the same `wpn_body` bone orientation. `docs/anomaly/attachment_spec.py` writes
+Every Anomaly viewmodel has the same `wpn_body` bone orientation, but not every one animates it: on the AEK-971, AK-12 and AKS-74U it stays put while `body` carries the gun, so those sights were moved to `body` with `weapon_fit.py rebone` (see [attachment placement](attachment-placement.md#attachment-bones)). Run `weapon_fit.py bones all` after regenerating the reskins. `docs/anomaly/attachment_spec.py` writes
 a spec (and exports the pre-reskin weapons from git as donors) for the offline placement runner, which
 places one anchor sight per gun and lets the placement tool add the others from hand-placed donors,
 fitting every aim offline:
