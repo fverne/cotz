@@ -8,18 +8,13 @@ ITEM.price = 34000
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 4.3
-ITEM.bulletweight = 0.025
+ITEM.bulletweight = 0.026
 
 ITEM.class = "cw_anomaly_galil_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_pbs1",
-	"cw_anomaly_galilscope",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.8, -205, 6.4),

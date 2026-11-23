@@ -4,21 +4,17 @@ ITEM.longdesc = "The frame is polymer, but the broad slide and double-stack grip
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_fnp45_w.mdl"
 
-ITEM.price = 10000
+ITEM.price = 7600
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.94
-ITEM.bulletweight = 0.021
+ITEM.bulletweight = 0.020
 
 ITEM.class = "cw_anomaly_fnp45_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_gemtech",
-}
 
 ITEM.iconCam = {
 	pos = Vector(2.1, -205, 3),

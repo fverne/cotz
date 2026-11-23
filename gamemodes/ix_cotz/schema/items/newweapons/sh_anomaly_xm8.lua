@@ -4,7 +4,7 @@ ITEM.longdesc = "The curved polymer shell encloses the receiver and gives the XM
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_xm8_w.mdl"
 
-ITEM.price = 36700
+ITEM.price = 27500
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 3.4
@@ -14,16 +14,7 @@ ITEM.class = "cw_anomaly_xm8_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_nato",
-	"cw_anomaly_ac10632",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-	"cw_anomaly_ac11090",
-	"cw_anomaly_cmore",
-}
 
 ITEM.iconCam = {
 	pos = Vector(7.3, -205, 5.5),

@@ -4,19 +4,17 @@ ITEM.longdesc = "The extended front end and magazine distinguish this automatic 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_cz75_auto_w.mdl"
 
-ITEM.price = 11500
+ITEM.price = 7500
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 1.15
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_cz75_auto_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(2.8, -205, 2.8),

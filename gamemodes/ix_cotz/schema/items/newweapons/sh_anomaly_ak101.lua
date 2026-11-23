@@ -4,7 +4,7 @@ ITEM.longdesc = "The AK-101 combines an AK-74M-style folding polymer stock with 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak101_w.mdl"
 
-ITEM.price = 22500
+ITEM.price = 17000
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 3.6
@@ -14,18 +14,7 @@ ITEM.class = "cw_anomaly_ak101_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_atg",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-	"cw_anomaly_ac10632",
-	"cw_anomaly_kobra",
-	"cw_anomaly_pso1",
-	"cw_anomaly_1p29",
-	"cw_anomaly_gl",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.7, -205, 5.7),

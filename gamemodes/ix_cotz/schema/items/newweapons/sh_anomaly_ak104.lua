@@ -4,24 +4,17 @@ ITEM.longdesc = "A short front end gives the AK-104 a noticeably different balan
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak104.mdl"
 
-ITEM.price = 23000
+ITEM.price = 20500
 ITEM.width = 4
 ITEM.height = 2
 ITEM.unloadedweight = 3.2
-ITEM.bulletweight = 0.016
+ITEM.bulletweight = 0.019
 
 ITEM.class = "cw_anomaly_ak104_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_pbs1",
-	"cw_anomaly_kobra",
-	"cw_anomaly_pso1",
-	"cw_anomaly_1p29",
-}
 
 ITEM.iconCam = {
 	pos = Vector(4.7, -205, 0.8),

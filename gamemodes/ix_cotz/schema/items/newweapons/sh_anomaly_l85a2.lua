@@ -4,7 +4,7 @@ ITEM.longdesc = "The revised charging handle is an easy way to pick the A2 out f
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_l85a2_w.mdl"
 
-ITEM.price = 34500
+ITEM.price = 27000
 ITEM.width = 4
 ITEM.height = 2
 ITEM.unloadedweight = 4.2
@@ -14,11 +14,7 @@ ITEM.class = "cw_anomaly_l85a2_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_gemtech",
-}
 
 ITEM.iconCam = {
 	pos = Vector(1.3, -205, 5.8),

@@ -14,12 +14,7 @@ ITEM.class = "cw_anomaly_groza_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_gl_groza",
-	"cw_anomaly_scope_po4x34",
-}
 
 ITEM.iconCam = {
 	pos = Vector(-2.2, -205, 6.3),

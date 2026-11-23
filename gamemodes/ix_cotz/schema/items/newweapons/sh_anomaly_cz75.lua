@@ -4,21 +4,17 @@ ITEM.longdesc = "The slide runs inside the frame rails, giving the CZ its narrow
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_cz75_w.mdl"
 
-ITEM.price = 6600
+ITEM.price = 3600
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.98
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_cz75_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_9mm",
-}
 
 ITEM.iconCam = {
 	pos = Vector(2, -205, 3),

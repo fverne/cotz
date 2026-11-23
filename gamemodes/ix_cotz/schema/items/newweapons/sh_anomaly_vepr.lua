@@ -4,24 +4,17 @@ ITEM.longdesc = "The reinforced receiver and wide box magazine give the Vepr a h
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_vepr_w.mdl"
 
-ITEM.price = 28500
+ITEM.price = 23500
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 4.4
-ITEM.bulletweight = 0.04
+ITEM.bulletweight = 0.031
 
 ITEM.class = "cw_anomaly_vepr_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_pbs1",
-	"cw_anomaly_kobra",
-	"cw_anomaly_pso1",
-	"cw_anomaly_1p29",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.6, -205, 5.3),

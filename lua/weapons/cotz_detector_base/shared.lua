@@ -51,9 +51,9 @@ local BEEP_SOUND = "stalkerdetectors/echo.wav"
 local BEEP_LEVEL = 70
 
 local BOLT_COOLDOWN = 3
--- The bolt hand's Throw and Toss animations both release on frame 9 of 30 per second.
-local BOLT_RELEASE_DELAY = 0.3
-local BOLT_VIEWMODEL = "models/jessev92/stalker/weapons/bolt_c.mdl"
+-- Match the release point in the Anomaly pack's throw animations.
+local BOLT_RELEASE_DELAY = 0.23
+local BOLT_WEAPON_CLASS = "cw_anomaly_bolt"
 local BOLT_LIFETIME = 12
 local BOLT_SPAWN_OFFSET = 10
 local BOLT_SPIN = 500
@@ -498,6 +498,17 @@ if SERVER then
 end
 
 local rotateYaw = Angle()
+local LEFT_ARM_BONE_PREFIX = "ValveBiped.Bip01_L_"
+-- NaN hides weighted vertices instead of collapsing them into visible spikes.
+local HIDDEN_ARM_SCALE = Vector(0 / 0, 0 / 0, 0 / 0)
+
+local function hideLeftArm(model)
+	for bone = 0, model:GetBoneCount() - 1 do
+		if string.StartWith(model:GetBoneName(bone), LEFT_ARM_BONE_PREFIX) then
+			model:ManipulateBoneScale(bone, HIDDEN_ARM_SCALE)
+		end
+	end
+end
 
 local function trackBone(viewModel, bone)
 	viewModel.cotzDetectorBones = viewModel.cotzDetectorBones or {}
@@ -708,13 +719,20 @@ function SWEP:GetBoltHandModels(owner)
 	end
 
 	if not IsValid(self.boltViewModel) then
-		self.boltViewModel = ClientsideModel(BOLT_VIEWMODEL, RENDERGROUP_VIEWMODEL)
+		local boltWeapon = weapons.GetStored(BOLT_WEAPON_CLASS)
+
+		if not boltWeapon then
+			return
+		end
+
+		self.boltViewModel = ClientsideModel(boltWeapon.ViewModel, RENDERGROUP_VIEWMODEL)
 
 		if not IsValid(self.boltViewModel) then
 			return
 		end
 
 		self.boltViewModel:SetNoDraw(true)
+		hideLeftArm(self.boltViewModel)
 	end
 
 	local handsModel = hands:GetModel()
@@ -733,6 +751,7 @@ function SWEP:GetBoltHandModels(owner)
 		self.boltHands:SetNoDraw(true)
 		self.boltHands:SetParent(self.boltViewModel)
 		self.boltHands:AddEffects(EF_BONEMERGE)
+		hideLeftArm(self.boltHands)
 
 		-- Read by the c_hands PlayerColor material proxy.
 		self.boltHands.GetPlayerColor = function()
@@ -749,8 +768,7 @@ function SWEP:GetBoltHandModels(owner)
 	return self.boltViewModel, self.boltHands
 end
 
--- Draws the right hand throwing a bolt, using the stalker_bolt c_model alongside the detector.
--- Its left arm is posed out of view, so only the throwing hand appears.
+-- Draw the Anomaly bolt’s throwing hand alongside the detector’s own left hand.
 function SWEP:DrawBoltHand(viewModel)
 	local throwTime = self:GetBoltThrowTime()
 	local owner = self:GetOwner()
@@ -765,7 +783,7 @@ function SWEP:DrawBoltHand(viewModel)
 		return
 	end
 
-	local sequence = model:LookupSequence(self:GetBoltThrowShort() and "Toss" or "Throw")
+	local sequence = model:LookupSequence(self:GetBoltThrowShort() and "anm_throw_low" or "anm_throw")
 
 	if sequence < 0 then
 		return
@@ -860,7 +878,7 @@ function SWEP:OnRemove()
 		resetViewModel(owner:GetViewModel())
 	end
 
-	for _, model in ipairs({self.worldModelEntity, self.boltHands, self.boltViewModel}) do
+	for _, model in pairs({self.worldModelEntity, self.boltHands, self.boltViewModel}) do
 		if IsValid(model) then
 			model:Remove()
 		end

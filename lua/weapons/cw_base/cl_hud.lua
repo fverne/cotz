@@ -119,6 +119,15 @@ local cw_crosshair = GetConVar("cw_crosshair")
 local cw_customhud = GetConVar("cw_customhud")
 local cw_customhud_ammo = GetConVar("cw_customhud_ammo")
 
+local function drawScopeTexture(texture, x, y, width, height)
+	local offset = texture.offset
+	local center = texture.center
+	x = x + offset[1] - (center and center[1] * width or 0)
+	y = y + offset[2] - (center and center[2] * height or 0)
+	surface.SetTexture(texture.tex)
+	surface.DrawTexturedRect(x, y, width, height)
+end
+
 function SWEP:DrawHUD()
 	FT, CT, x, y = FrameTime(), CurTime(), ScrW(), ScrH()
 	UCT = UnPredictedCurTime()
@@ -128,7 +137,12 @@ function SWEP:DrawHUD()
 		if (self.dt.M203Active and (not self.M203Chamber or CustomizableWeaponry.grenadeTypes:canUseProperSights(self.Grenade40MM))) or not self.dt.M203Active then
 			local simpleTelescopics = not self:canUseComplexTelescopics()
 
-			local hasZoom = (self.SimpleTelescopicsFOV)
+			local scope = simpleTelescopics and self:GetCotzIntegratedScope()
+			if scope and UCT > self.AimTime then
+				self:DrawCotzSimpleIntegratedScope(scope, x, y)
+			end
+
+			local hasZoom = self.SimpleTelescopicsFOV and not scope
 			local canUseSimpleTelescopics = (simpleTelescopics and hasZoom)
 
 			if UCT > self.AimTime or self.InstantDissapearOnAim then
@@ -177,8 +191,7 @@ function SWEP:DrawHUD()
 									surface.SetDrawColor(255, 255, 255, 255)
 								end
 
-								surface.SetTexture(v.tex)
-								surface.DrawTexturedRect(v.offset[1], v.offset[2], x, y)
+								drawScopeTexture(v, 0, 0, x, y)
 							end
 						else
 							surface.DrawTexturedRect(0, 0, x, y)
@@ -187,11 +200,16 @@ function SWEP:DrawHUD()
 					elseif self.ScaleOverlayToScreenHeight then
 						if canUseSimpleTelescopics then
 							for k, v in ipairs(self.ZoomTextures) do
-								surface.SetTexture(v.tex)
-								surface.DrawTexturedRect(x * 0.5 - y * 0.5 + v.offset[1], y * 0.5 - y * 0.5 + v.offset[2], y, y)
+								drawScopeTexture(v, (x - y) * 0.5, 0, y, y)
 							end
 						else
-							surface.DrawTexturedRect(x * 0.5 - y * 0.5, y * 0.5 - y * 0.5, y, y)
+							local center = self.cotzScopeReticleCenter
+							if center then
+								surface.DrawTexturedRectUV((x - y) * 0.5, 0, y, y, center[1], center[2],
+									1 + center[1], 1 + center[2])
+							else
+								surface.DrawTexturedRect((x - y) * 0.5, 0, y, y)
+							end
 						end
 					else
 						if canUseSimpleTelescopics then
@@ -209,8 +227,7 @@ function SWEP:DrawHUD()
 									surface.SetDrawColor(255, 255, 255, 255)
 								end
 
-								surface.SetTexture(v.tex)
-								surface.DrawTexturedRect(x * 0.5 - xSize * 0.5 + v.offset[1], y * 0.5 - ySize * 0.5 + v.offset[2], xSize, ySize)
+								drawScopeTexture(v, (x - xSize) * 0.5, (y - ySize) * 0.5, xSize, ySize)
 							end
 						else
 							surface.DrawTexturedRect(x * 0.5 - 512, y * 0.5 - 512, 1024, 1024)

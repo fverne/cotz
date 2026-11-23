@@ -4,23 +4,17 @@ ITEM.longdesc = "The shroud blends into the integral suppressor, giving the SD6 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_mp5sd_w.mdl"
 
-ITEM.price = 17500
+ITEM.price = 15000
 ITEM.width = 3
 ITEM.height = 2
 ITEM.unloadedweight = 3.1
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_mp5sd_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_ac10632",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-}
 
 ITEM.iconCam = {
 	pos = Vector(2.8, -205, 5.8),

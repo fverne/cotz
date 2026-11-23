@@ -4,19 +4,17 @@ ITEM.longdesc = "The Grach foregoes a round hammer spur in favor of a flat, squa
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_grach_w.mdl"
 
-ITEM.price = 8800
+ITEM.price = 3400
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.95
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_grach_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(1.4, -205, 2.9),

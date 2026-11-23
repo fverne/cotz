@@ -84,7 +84,7 @@ ITEM.iconCam = {
 ITEM.pacData = {[1] = {["self"] = {["Model"] = "models/old_w.mdl"}}}
 '''
 
-DEBUG_ITEM = '''ITEM.model = "models/new_w.mdl"
+RESKINNED_ITEM = '''ITEM.model = "models/new_w.mdl"
 
 ITEM.iconCam = {
 \tpos = Vector(0.6, -205, -0.4),
@@ -130,7 +130,7 @@ class WeaponTests(unittest.TestCase):
 
 class ItemTests(unittest.TestCase):
     def test_uses_anomaly_world_model_and_icon(self):
-        text = reskin.reskin_item(ITEM, DEBUG_ITEM)
+        text = reskin.reskin_item(ITEM, "models/new_w.mdl", RESKINNED_ITEM)
         self.assertIn('ITEM.model = "models/new_w.mdl"', text)
         self.assertIn('["Model"] = "models/new_w.mdl"', text)
         self.assertIn("\tpos = Vector(0.6, -205, -0.4),\n\tang = Angle(0, 90, 0),\n\tfov = 7,\n}", text)

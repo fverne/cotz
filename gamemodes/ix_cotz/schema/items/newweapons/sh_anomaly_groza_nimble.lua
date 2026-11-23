@@ -4,22 +4,17 @@ ITEM.longdesc = "The magazine sits behind the grip, keeping the Groza-1 short wi
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_groza_nimble_w.mdl"
 
-ITEM.price = 38800
+ITEM.price = 24000
 ITEM.width = 4
 ITEM.height = 2
 ITEM.unloadedweight = 3.2
-ITEM.bulletweight = 0.016
+ITEM.bulletweight = 0.019
 
 ITEM.class = "cw_anomaly_groza_nimble_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_gl_groza",
-	"cw_anomaly_scope_po4x34",
-}
 
 ITEM.iconCam = {
 	pos = Vector(-2.2, -205, 5.8),

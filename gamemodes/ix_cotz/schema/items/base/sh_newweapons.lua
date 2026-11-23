@@ -21,6 +21,34 @@ ITEM.canAttach = true
 
 ITEM.unloadedweight = 0
 
+local ATTACHMENT_PROFILES = include("cotz/weapon_attachment_profiles.lua")
+
+function ITEM:OnRegistered()
+	local profile = ATTACHMENT_PROFILES.weapons[self.class]
+	if not profile or string.StartWith(self.uniqueID, "debug_") then return end
+
+	local attachments = ATTACHMENT_PROFILES.GetSights(self.class)
+	if profile.suppressor then
+		attachments[#attachments + 1] = profile.suppressor
+	end
+
+	for _, id in ipairs(self.validAttachments) do
+		local definition = ix.weapontables.attachments[id]
+		if definition and definition.slot > 2 then
+			attachments[#attachments + 1] = id
+		end
+	end
+
+	self.validAttachments = attachments
+	self.canAttach = #attachments > 0
+end
+
+local function getAttachmentItem(id)
+	local definition = ix.weapontables.attachments[id]
+
+	return definition and ix.item.list[definition.uID]
+end
+
 function ITEM:GetWeight()
 	if self.bulletweight == nil then
 		return self:GetData("weight", self.weight)
@@ -103,12 +131,12 @@ if (CLIENT) then
 		surface.DrawTexturedRectUV(5, h - 16, math.Clamp(wear/100, 0, 1)*38, 4.6, 0, 0, math.Clamp(wear/100, 0, 1)*0.2, 1)
 
 
-		//Attachment Icons
 		local iterator = 1
-		if item:GetData("attachments") then
-			for k, v in pairs(item:GetData("attachments")) do
+		for _, id in ipairs(item:GetData("attachments", {})) do
+			local attachment = getAttachmentItem(id)
+			if attachment and attachment.upgradeIcon then
 				surface.SetDrawColor( Color( 255, 255, 255, 255 ) )
-				surface.SetMaterial(ix.item.list[ix.weapontables.attachments[v].uID].upgradeIcon)
+				surface.SetMaterial(attachment.upgradeIcon)
 				surface.DrawTexturedRect(w-2-(22*iterator),4,19,19)
 				iterator = iterator + 1
 			end
@@ -482,7 +510,9 @@ function ITEM:RestoreWeaponAmmo(client, weapon)
 		if not self:GetData("equip") then return end
 		if self.canAttach and weapon.attachSpecificAttachment then
 			for _, attachment in ipairs(self:GetData("attachments", {})) do
-				weapon:attachSpecificAttachment(attachment)
+				if table.HasValue(self.validAttachments, attachment) then
+					weapon:attachSpecificAttachment(attachment)
+				end
 			end
 		end
 		local rechamber = self:GetData("ammoRechamber")
@@ -606,58 +636,44 @@ ITEM.functions.detach = {
 	name = "Detach",
 	icon = "icon16/stalker/detach.png",
 	isMulti = true,
-	multiOptions = function(item, client)
+	multiOptions = function(item)
 		local targets = {}
-		local curattach = item:GetData("attachments") or {}
-
-		for k = 1, #curattach do
-			table.insert(targets, {
-				name = ix.weapontables.attachments[curattach[k]].name,
-				data = {curattach[k]},
-			})
+		for _, id in ipairs(item:GetData("attachments", {})) do
+			local definition = ix.weapontables.attachments[id]
+			local name = definition and definition.name or "Retired attachment"
+			targets[#targets + 1] = {name = name, data = {id}}
 		end
 
 		return targets
-		end,
+	end,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity) and item.canAttach and (#(item:GetData("attachments",{})) > 0))
+		return not IsValid(item.entity) and #item:GetData("attachments", {}) > 0
 	end,
 	OnRun = function(item, data)
-		if data[1] then
+		local id = istable(data) and data[1]
+		if not isstring(id) then return false end
 
-			local curattach = item:GetData("attachments") or {}
-			local iterator = 0
-			for i = 1, #curattach do
-				iterator = iterator+1
-				if curattach[i] == data[1] then
-					break
-				end
-			end
-			
-			if curattach[iterator] ~= data[1] then
-				return false
-			end
-			table.remove(curattach,iterator)
+		local attachments = item:GetData("attachments", {})
+		local index = table.KeyFromValue(attachments, id)
+		if not index then return false end
 
-			
-			if not item.player:GetCharacter():GetInventory():Add(ix.weapontables.attachments[data[1]].uID) then
-				local position = item.player:GetItemDropPos()
-				ix.item.Spawn(ix.weapontables.attachments[data[1]].uID, position, nil, AngleRand())
-				position = position + Vector(0, 0, 5)
-				item.player:Notify("No space in your inventory! Items have been dropped.")
-			end	
+		local client = item.player
+		local character = client:GetCharacter()
+		local attachment = getAttachmentItem(id)
+		table.remove(attachments, index)
 
-			
-			local weapon = item.player:GetWeapon(item.class)
-			if IsValid(weapon) and weapon.ixItem == item then
-				weapon:detachSpecificAttachment(data[1])
-			end
-			item:SetData("attachments", curattach)
-			ix.weight.Update(item.player:GetCharacter())
-		else
-			item.player:Notify("No attachment selected.")
-			
+		if attachment and not character:GetInventory():Add(attachment.uniqueID) then
+			ix.item.Spawn(attachment.uniqueID, client:GetItemDropPos(), nil, AngleRand())
+			client:Notify("No space in your inventory! Items have been dropped.")
 		end
+
+		local weapon = client:GetWeapon(item.class)
+		if IsValid(weapon) and weapon.ixItem == item then
+			weapon:detachSpecificAttachment(id)
+		end
+		item:SetData("attachments", attachments)
+		ix.weight.Update(character)
+
 		return false
 	end,
 }

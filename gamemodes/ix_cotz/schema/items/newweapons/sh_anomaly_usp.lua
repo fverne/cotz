@@ -4,21 +4,17 @@ ITEM.longdesc = "An enclosed recoil assembly sits under the barrel inside the br
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_usp45_w.mdl"
 
-ITEM.price = 10400
+ITEM.price = 7400
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.89
-ITEM.bulletweight = 0.021
+ITEM.bulletweight = 0.020
 
 ITEM.class = "cw_anomaly_usp_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_45",
-}
 
 ITEM.iconCam = {
 	pos = Vector(2, -205, 3.2),

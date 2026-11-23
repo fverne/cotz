@@ -4,24 +4,17 @@ ITEM.longdesc = "The wider magazine well and heavier receiver distinguish the HK
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_hk417_w.mdl"
 
-ITEM.price = 49000
+ITEM.price = 40000
 ITEM.width = 6
 ITEM.height = 2
 ITEM.unloadedweight = 4.4
-ITEM.bulletweight = 0.025
+ITEM.bulletweight = 0.026
 
 ITEM.class = "cw_anomaly_hk417_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_nato",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-	"cw_anomaly_gl_m202",
-}
 
 ITEM.iconCam = {
 	pos = Vector(9.5, -205, 5.2),

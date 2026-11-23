@@ -4,19 +4,17 @@ ITEM.longdesc = "The perforated heat shield and oversized fore-end leave little 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_spas12_w.mdl"
 
-ITEM.price = 19750
+ITEM.price = 14000
 ITEM.width = 5
 ITEM.height = 1
 ITEM.unloadedweight = 4.4
-ITEM.bulletweight = 0.04
+ITEM.bulletweight = 0.031
 
 ITEM.class = "cw_anomaly_spas12_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(12.4, -205, 3.5),

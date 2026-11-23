@@ -4,21 +4,17 @@ ITEM.longdesc = "A barrel weight extends past the slide and gives the Match its 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_usp_match_w.mdl"
 
-ITEM.price = 12400
+ITEM.price = 5500
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 1.1
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_usp_match_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_45",
-}
 
 ITEM.iconCam = {
 	pos = Vector(2.8, -205, 3.2),

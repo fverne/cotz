@@ -4,21 +4,17 @@ ITEM.longdesc = "The P220's single-stack grip stays slender below its full-sized
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_sig220_w.mdl"
 
-ITEM.price = 8900
+ITEM.price = 6900
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.83
-ITEM.bulletweight = 0.021
+ITEM.bulletweight = 0.020
 
 ITEM.class = "cw_anomaly_sig220_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_45",
-}
 
 ITEM.iconCam = {
 	pos = Vector(1.7, -205, 3.1),

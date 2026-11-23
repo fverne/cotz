@@ -84,6 +84,8 @@ end
 -- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_m98b.
 
 SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/m98b.mdl"
+SWEP.AnomalyScopeZoom = 4
+SWEP.AnomalyReticle = "models/flaymi/stalker/anomaly/weapons/m98b/wpn_crosshair_modern1"
 SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/wpn_m98b_w.mdl"
 SWEP.ViewModelFOV = 55
 SWEP.AimViewModelFOV = 55
@@ -186,9 +188,9 @@ if CLIENT then
 		["md_saker"] = {
 			model = "models/cw2/attachments/556suppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.016427, 0.317881, -15.406176),
+			pos = Vector(-0.013526, -1.285469, -25.412521),
 			angle = Angle(0.035855, 179.570239, 89.850293),
-			size = Vector(1.25, 1.25, 1.25),
+			size = Vector(0.72, 0.72, 0.72),
 		},
 	}
 end

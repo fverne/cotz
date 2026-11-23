@@ -4,7 +4,7 @@ ITEM.longdesc = "The full-length G36 carries its optic in the raised handle abov
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_g36_w.mdl"
 
-ITEM.price = 34000
+ITEM.price = 27500
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 3.6
@@ -14,12 +14,7 @@ ITEM.class = "cw_anomaly_g36_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_nato",
-	"cw_anomaly_gl_m202",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.5, -205, 6.4),

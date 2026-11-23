@@ -7,7 +7,7 @@ Each mapped COTZ SWEP keeps its class, balance, ammunition and attachment slots.
 fields tied to the old viewmodel and appends the Anomaly model, animations, fire and animation sounds,
 ironsights, reload timings and viewmodel-recoil settings from `cw_anomaly_<id>` and its `_vmrecoil`
 variant. Reloads play at the Anomaly speed, so animations and their sounds stay in sync. Matching items take
-the Anomaly world model and the debug item's iconCam. See docs/anomaly-reskin.md.
+the Anomaly world model while preserving inventory camera tuning. See docs/anomaly-reskin.md.
 """
 
 import argparse
@@ -21,8 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "attachments"))
 from apply_placements import mask, match_brace, item_files  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-ANOMALY_WEAPONS = REPO_ROOT.parent / "cotz_anomaly_cw20" / "lua" / "weapons"
-DEBUG_ITEMS = Path("gamemodes/ix_cotz/schema/items/newweapons")
+ANOMALY_WEAPONS = REPO_ROOT / "lua" / "weapons"
 
 # COTZ class -> Anomaly id. Guns with integrated-scope render targets or custom world model drawing
 # (L85, L115, VSSK, Mosin, TOZ-194) need manual conversion and are not listed. The 9A-91 already uses
@@ -50,7 +49,7 @@ COPIED_FIELDS = (
     "IronsightPos", "IronsightAng", "SprintPos", "SprintAng", "Animations", "Sounds",
     "ReloadSpeed", "ReloadTime", "ReloadTime_Empty", "ReloadHalt", "ReloadHalt_Empty", "ShotgunReload", "ReloadStartTime",
     "InsertShellTime", "ReloadFinishWait", "AlwaysPlayReloadEnd", "MuzzleAttachmentName", "MuzzleEffect",
-    "Shell", "WM", "DrawTraditionalWorldModel", "WMPos", "WMAng", "FireSound", "FireSoundSuppressed",
+    "AnomalyScopeZoom", "AnomalyReticle", "Shell", "WM", "DrawTraditionalWorldModel", "WMPos", "WMAng", "FireSound", "FireSoundSuppressed",
 )
 
 # World model pitch (SWEP.WMAng[1]) replacing the pack's -5, which aims low and clips the hands and face.
@@ -254,9 +253,8 @@ def lua_value(text, name):
     return match, len(text) if end < 0 else end
 
 
-def reskin_item(text, debug_text):
-    """Point an item at the Anomaly world model and take the debug item's iconCam."""
-    world_model = re.search(r'^ITEM\.model\s*=\s*"([^"]+)"', debug_text, re.M).group(1)
+def reskin_item(text, world_model, current_text):
+    """Use the pack world model and reuse a camera already tuned for it."""
     match, end = lua_value(text, "model")
     old_model = None
     if match:
@@ -266,9 +264,10 @@ def reskin_item(text, debug_text):
         # The back-slot PAC part shows the same world model.
         text = text.replace('"%s"' % old_model.group(1), '"%s"' % world_model)
 
-    debug_match, debug_end = lua_value(debug_text, "iconCam")
-    if debug_match:
-        icon = debug_text[debug_match.start():debug_end]
+    current_model = re.search(r'^ITEM\.model\s*=\s*"([^"]+)"', current_text, re.M)
+    camera, camera_end = lua_value(current_text, "iconCam")
+    if current_model and current_model.group(1) == world_model and camera:
+        icon = current_text[camera.start():camera_end]
         match, end = lua_value(text, "iconCam")
         if match:
             text = text[:match.start()] + icon + text[end:]
@@ -303,16 +302,16 @@ def main(argv=None):
             weapon_path = REPO_ROOT / "lua/weapons" / weapon_class / "shared.lua"
             anomaly_text = (ANOMALY_WEAPONS / ("cw_anomaly_%s.lua" % anomaly_id)).read_text(encoding="utf-8")
             variant_text = (ANOMALY_WEAPONS / ("cw_anomaly_%s_vmrecoil.lua" % anomaly_id)).read_text(encoding="utf-8")
-            debug_text = (REPO_ROOT / DEBUG_ITEMS / ("sh_debug_cw_anomaly_%s.lua" % anomaly_id)).read_text(encoding="utf-8")
             text = source(weapon_path)
             if "Anomaly CW2.0 model" in text:
                 print("SKIP %s: already reskinned" % weapon_class)
                 continue
             updated = {weapon_path: reskin_weapon(text, anomaly_text, variant_text, "cw_anomaly_" + anomaly_id,
                 aim_fields)}
+            world_model = anomaly_values(anomaly_text)["WorldModel"].strip('"')
             for path in item_files(REPO_ROOT, weapon_class):
-                updated[path] = reskin_item(source(path), debug_text)
-        except (OSError, ReskinError, AttributeError, subprocess.CalledProcessError) as error:
+                updated[path] = reskin_item(source(path), world_model, path.read_text(encoding="utf-8"))
+        except (OSError, ReskinError, AttributeError, KeyError, subprocess.CalledProcessError) as error:
             print("FAIL %s: %s" % (weapon_class, error))
             status = 1
             continue

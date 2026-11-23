@@ -76,6 +76,8 @@ SWEP.Chamberable = false
 -- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_trg.
 
 SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/trg.mdl"
+SWEP.AnomalyScopeZoom = 10
+SWEP.AnomalyReticle = "models/flaymi/stalker/anomaly/weapons/trg/wpn_crosshair_findot"
 SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/wpn_trg_w.mdl"
 SWEP.ViewModelFOV = 55
 SWEP.AimViewModelFOV = 55
@@ -178,9 +180,9 @@ if CLIENT then
 		["md_saker"] = {
 			model = "models/cw2/attachments/556suppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.014896, -0.3462, -17.548966),
+			pos = Vector(-0.013409, -1.193584, -22.835284),
 			angle = Angle(0.036246, 179.57105, 89.84671),
-			size = Vector(1, 1, 1),
+			size = Vector(0.72, 0.72, 0.72),
 		},
 	}
 end

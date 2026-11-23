@@ -4,19 +4,17 @@ ITEM.longdesc = "The action sits behind the grip and the long barrel runs betwee
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_wa2000_w.mdl"
 
-ITEM.price = 73500
+ITEM.price = 52000
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 6.95
-ITEM.bulletweight = 0.025
+ITEM.bulletweight = 0.026
 
 ITEM.class = "cw_anomaly_wa2000_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(6.8, -205, 7.4),

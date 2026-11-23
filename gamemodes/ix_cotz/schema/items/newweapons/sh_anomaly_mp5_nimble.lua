@@ -8,20 +8,13 @@ ITEM.price = 16200
 ITEM.width = 3
 ITEM.height = 2
 ITEM.unloadedweight = 2.9
-ITEM.bulletweight = 0.021
+ITEM.bulletweight = 0.020
 
 ITEM.class = "cw_anomaly_mp5_nimble_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_9mm",
-	"cw_anomaly_ac10632",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-}
 
 ITEM.iconCam = {
 	pos = Vector(1.2, -205, 5.6),

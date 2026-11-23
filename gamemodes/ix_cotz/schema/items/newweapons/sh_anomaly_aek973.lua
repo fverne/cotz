@@ -4,25 +4,17 @@ ITEM.longdesc = "The AEK-973 pairs the AEK family's balanced action with a notic
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_aek973.mdl"
 
-ITEM.price = 38000
+ITEM.price = 26500
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 3.35
-ITEM.bulletweight = 0.016
+ITEM.bulletweight = 0.019
 
 ITEM.class = "cw_anomaly_aek973_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_tgpa",
-	"cw_anomaly_kobra",
-	"cw_anomaly_pso1",
-	"cw_anomaly_1p29",
-	"cw_anomaly_gl",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.4, -205, 0.7),

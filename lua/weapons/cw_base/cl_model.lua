@@ -1,3 +1,5 @@
+local OPTIC_APERTURES = include("cotz/optic_apertures.lua")
+
 SWEP.BlendPos = Vector(0, 0, 0)
 SWEP.BlendAng = Vector(0, 0, 0)
 SWEP.OldDelta = Angle(0, 0, 0)
@@ -770,8 +772,10 @@ function SWEP:applyOffsetToVM()
 		--return pos, ang
 	end
 
-	if CT > self.AimTime then
-		if ((self.MoveWepAwayWhenAiming and self.dt.State == CW_AIMING) or (self:canUseSimpleTelescopics() and self.dt.State == CW_AIMING)) and (self.dt.M203Active and (not self.M203Chamber or CustomizableWeaponry.grenadeTypes:canUseProperSights(self.Grenade40MM))  or not self.dt.M203Active) then
+	local hideModel = self.MoveWepAwayWhenAiming and not self:GetCotzIntegratedScope()
+	if CT > self.AimTime and self.dt.State == CW_AIMING and (hideModel or self:canUseSimpleTelescopics()) then
+		if not self.dt.M203Active or not self.M203Chamber
+			or CustomizableWeaponry.grenadeTypes:canUseProperSights(self.Grenade40MM) then
 			self.ViewModelFOV = 90
 			pos = pos - ang:Forward() * 100
 			--return pos, ang
@@ -837,6 +841,7 @@ function SWEP:_drawViewModel()
 
 	self.CW_VM:FrameAdvance(FrameTime())
 	self.CW_VM:SetupBones()
+	self:CenterCotzOptic()
 	self.CW_VM:DrawModel()
 
 	if self.ViewModelFlip then
@@ -979,6 +984,40 @@ end
 function SWEP:lengthAngle(ang)
 	ang.p, ang.y, ang.r = math.abs(ang.p), math.abs(ang.y), math.abs(ang.r)
 	return ang
+end
+
+-- Normalized offsets from the texture center to the dot or chevron tip.
+local RETICLE_TEXTURE_OFFSETS = {
+	dot = {0.5 / 32, 0.5 / 32},
+	eotech = {0.24 / 128, -0.18 / 128},
+	delta = {0.5 / 64, 0.5 / 64},
+	kobra = {0.5 / 64, 0.5 / 64},
+}
+local RETICLE_DISTANCE = 100
+local RETICLE_FADE = 0.13
+
+function SWEP:DrawCotzReticleSprite(attachment, aimPos, aimAng, pattern)
+	if not self:isAiming() then return end
+	if not attachment.keepReticleAfterShot and not self:isReticleActive() then return end
+
+	local size = attachment._reticleSize
+	local difference = self:getDifferenceToAimPos(aimPos, aimAng, pattern == "dot" and 1 or size)
+	if difference <= 0.9 or difference >= 1.1 then return end
+
+	local angles = EyeAngles()
+	local direction = self.freeAimOn and self:getReticleAngles():Forward() or angles:Forward()
+	local offset = RETICLE_TEXTURE_OFFSETS[pattern]
+	local position = EyePos() + direction * RETICLE_DISTANCE
+		- angles:Right() * (offset[1] * size) + angles:Up() * (offset[2] * size)
+	local color = self:getSightColor(attachment.name)
+	local distance = math.min(math.abs(difference - 1) * math.sqrt(2), RETICLE_FADE)
+	color.a = (1 - distance / RETICLE_FADE) * 255
+
+	cam.IgnoreZ(true)
+		render.SetMaterial(attachment._reticle)
+		render.DrawSprite(position, size, size, color)
+		render.DrawSprite(position, size, size, color)
+	cam.IgnoreZ(false)
 end
 
 function SWEP:getDifferenceToAimPos(pos, ang, vertDependance, horDependance, dependMod)
@@ -1135,19 +1174,59 @@ function SWEP:getStaticMountOrientation(data)
 	return matrix:GetTranslation(), ang
 end
 
+local function attachmentOrientation(weapon, data, offset)
+	local pos, ang
+	if data._staticRel then
+		pos, ang = weapon:getStaticMountOrientation(data)
+	end
+	if not pos and data._bone then
+		pos, ang = weapon:getBoneOrientation(data._bone)
+	end
+	if not pos then return end
+
+	return offsetAttachment(pos, ang, offset or data.pos, data.angle)
+end
+
+local ADS_CENTER_BLEND_START = 0.5
+local ADS_CENTER_BLEND_END = 0.05
+local ADS_CENTER_EPSILON = 0.0001
+
+function SWEP:CenterCotzOptic()
+	local model = self.cotzAimModel
+	local aperture = model and OPTIC_APERTURES[model.model]
+	if not aperture or not model.active or not self:isAiming() or self.freeAimOn then return end
+	if not self.ActualSightPos or self.AimPos ~= self.ActualSightPos then return end
+
+	local offset = (self.BlendPos - self.ActualSightPos):Length()
+	local weight = math.Clamp((ADS_CENTER_BLEND_START - offset) / (ADS_CENTER_BLEND_START - ADS_CENTER_BLEND_END), 0, 1)
+	if weight == 0 then return end
+
+	local pos, ang = attachmentOrientation(self, model)
+	if not pos then return end
+
+	-- Use the same mount pose as the optic draw, including an anchored slide mount.
+	local center = LocalToWorld(model.size and aperture * model.size or aperture, Ang0, pos, ang)
+	local view = EyeAngles()
+	local forward = view:Forward()
+	local fromEye = center - EyePos()
+	local depth = fromEye:Dot(forward)
+	if depth <= 0 then return end
+
+	-- Shift the whole viewmodel sideways and vertically to put the aperture on the view ray.
+	local correction = (fromEye - forward * depth) * weight
+	if correction:LengthSqr() <= ADS_CENTER_EPSILON * ADS_CENTER_EPSILON then return end
+
+	local vm = self.CW_VM
+	vm:SetPos(vm:GetPos() - correction)
+	vm:InvalidateBoneCache()
+	vm:SetupBones()
+end
+
 function SWEP:_drawAttachmentModel(data, offset)
 	local model = data.ent
-	local pos, ang
+	local pos, ang = attachmentOrientation(self, data, offset)
+	if not pos then return end
 
-	if data._staticRel then
-		pos, ang = self:getStaticMountOrientation(data)
-	end
-
-	if not pos then
-		pos, ang = self:getBoneOrientation(data._bone)
-	end
-
-	pos, ang = offsetAttachment(pos, ang, offset or data.pos, data.angle)
 	model:SetPos(pos)
 	model:SetAngles(ang)
 

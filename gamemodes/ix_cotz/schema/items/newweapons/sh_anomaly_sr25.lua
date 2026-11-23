@@ -4,22 +4,17 @@ ITEM.longdesc = "The long receiver and wide magazine well distinguish the SR-25 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_sr25_w.mdl"
 
-ITEM.price = 51500
+ITEM.price = 42000
 ITEM.width = 6
 ITEM.height = 2
 ITEM.unloadedweight = 4.9
-ITEM.bulletweight = 0.025
+ITEM.bulletweight = 0.026
 
 ITEM.class = "cw_anomaly_sr25_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_sr25",
-	"cw_anomaly_gl_m202",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.4, -205, 7),

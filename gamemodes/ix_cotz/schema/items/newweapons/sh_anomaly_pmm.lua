@@ -4,19 +4,17 @@ ITEM.longdesc = "The wider grip accommodates a larger magazine than the original
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_pmm_w.mdl"
 
-ITEM.price = 7300
+ITEM.price = 1100
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.76
-ITEM.bulletweight = 0.01
+ITEM.bulletweight = 0.011
 
 ITEM.class = "cw_anomaly_pmm_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(1.1, -205, 2.9),

@@ -4,19 +4,17 @@ ITEM.longdesc = "The Tactical model's tall iron sights stand above its squared s
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_fnx45_w.mdl"
 
-ITEM.price = 13200
+ITEM.price = 8000
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.95
-ITEM.bulletweight = 0.021
+ITEM.bulletweight = 0.020
 
 ITEM.class = "cw_anomaly_fnx45_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(6.2, -205, 3.2),

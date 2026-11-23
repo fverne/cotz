@@ -3,11 +3,10 @@ function SWEP:attachSpecificAttachment(attachmentName)
 	for category, data in pairs(self.Attachments) do
 		for key, attachment in ipairs(data.atts) do
 			if attachment == attachmentName then
-				-- Inventory-managed Anomaly hardware is already validated and owned by this item.
+				-- Inventory hardware is already validated and owned by this item.
 				local item = self.ixItem
-				if item and item.anomalyInventoryAttachments then
-					if not table.HasValue(item.validAttachments, attachmentName) then return end
-					if not table.HasValue(item:GetData("attachments", {}), attachmentName) then return end
+				if item and table.HasValue(item.validAttachments, attachmentName)
+					and table.HasValue(item:GetData("attachments", {}), attachmentName) then
 					if self.ActiveAttachments[attachmentName] then return end
 
 					local definition = CustomizableWeaponry:findAttachment(attachmentName)
@@ -15,6 +14,7 @@ function SWEP:attachSpecificAttachment(attachmentName)
 
 					return self:_attach(category, key, definition)
 				end
+				if item and item.anomalyInventoryAttachments then return end
 
 				self:attach(category, key - 1, false)
 			end
@@ -23,9 +23,7 @@ function SWEP:attachSpecificAttachment(attachmentName)
 end
 
 function SWEP:detachSpecificAttachment(attachmentName)
-	if self.ixItem and self.ixItem.anomalyInventoryAttachments and not self.ActiveAttachments[attachmentName] then
-		return
-	end
+	if not self.ActiveAttachments[attachmentName] then return end
 
 	-- since we don't know the category, we'll just have to iterate over all attachments, find the one we want, and detach it there
 	for category, data in pairs(self.Attachments) do

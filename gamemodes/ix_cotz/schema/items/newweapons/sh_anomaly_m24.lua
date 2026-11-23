@@ -4,19 +4,17 @@ ITEM.longdesc = "The Green Dragon's long barrel and conventional bolt sit in a h
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_m24_w.mdl"
 
-ITEM.price = 50000
+ITEM.price = 36000
 ITEM.width = 6
 ITEM.height = 1
 ITEM.unloadedweight = 5.4
-ITEM.bulletweight = 0.045
+ITEM.bulletweight = 0.017
 
 ITEM.class = "cw_anomaly_m24_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(11.1, -205, 4.7),

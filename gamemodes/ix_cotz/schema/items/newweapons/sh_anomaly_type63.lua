@@ -8,17 +8,13 @@ ITEM.price = 17800
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 3.8
-ITEM.bulletweight = 0.016
+ITEM.bulletweight = 0.019
 
 ITEM.class = "cw_anomaly_type63_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_mosin",
-}
 
 ITEM.iconCam = {
 	pos = Vector(7.2, -205, 4.4),

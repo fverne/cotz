@@ -8,15 +8,13 @@ ITEM.price = 37000
 ITEM.width = 6
 ITEM.height = 2
 ITEM.unloadedweight = 7.4
-ITEM.bulletweight = 0.016
+ITEM.bulletweight = 0.019
 
 ITEM.class = "cw_anomaly_rpd_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(6.3, -205, 3.5),

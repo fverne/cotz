@@ -4,19 +4,17 @@ ITEM.longdesc = "The Bizon retains the narrow over-under barrel arrangement of t
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_mark4_w.mdl"
 
-ITEM.price = 11500
+ITEM.price = 9500
 ITEM.width = 6
 ITEM.height = 1
 ITEM.unloadedweight = 3.25
-ITEM.bulletweight = 0.04
+ITEM.bulletweight = 0.031
 
 ITEM.class = "cw_anomaly_toz34_mark4_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(9.3, -205, 5.8),

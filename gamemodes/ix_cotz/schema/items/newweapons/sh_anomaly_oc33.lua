@@ -4,21 +4,17 @@ ITEM.longdesc = "The Pernach has an extended grip and a shoulder-stock fitting a
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_oc33_w.mdl"
 
-ITEM.price = 12500
+ITEM.price = 8500
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 1.15
-ITEM.bulletweight = 0.01
+ITEM.bulletweight = 0.011
 
 ITEM.class = "cw_anomaly_oc33_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_aps",
-}
 
 ITEM.iconCam = {
 	pos = Vector(2.2, -205, 2),

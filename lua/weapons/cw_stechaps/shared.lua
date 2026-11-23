@@ -23,9 +23,9 @@ if CLIENT then
 		["md_tundra9mm"] = {
 			model = "models/cw2/attachments/9mmsuppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.00014, -0.177755, -9.39026),
+			pos = Vector(0.000098, -0.547721, -8.522987),
 			angle = Angle(0.002769, 0, -89.999982),
-			size = Vector(1, 1, 1),
+			size = Vector(0.7, 0.7, 0.7),
 		},
 	}
 end

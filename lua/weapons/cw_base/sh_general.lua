@@ -675,7 +675,8 @@ function SWEP:canUseComplexTelescopics()
 end
 
 function SWEP:canUseSimpleTelescopics()
-	if not self:canUseComplexTelescopics() and self.SimpleTelescopicsFOV then
+	if not self:canUseComplexTelescopics()
+		and (self.SimpleTelescopicsFOV or CLIENT and self:GetCotzIntegratedScope()) then
 		return true
 	end
 

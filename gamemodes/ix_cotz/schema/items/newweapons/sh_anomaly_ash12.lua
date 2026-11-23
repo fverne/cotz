@@ -4,24 +4,17 @@ ITEM.longdesc = "The broad magazine sits behind the grip, leaving room for a sub
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ash12.mdl"
 
-ITEM.price = 57000
+ITEM.price = 48000
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 5.2
-ITEM.bulletweight = 0.075
+ITEM.bulletweight = 0.069
 
 ITEM.class = "cw_anomaly_ash12_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_ac10632",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-	"cw_anomaly_cmore",
-}
 
 ITEM.iconCam = {
 	pos = Vector(-1, -205, 0.4),

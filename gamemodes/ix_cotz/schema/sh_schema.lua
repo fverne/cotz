@@ -35,6 +35,7 @@ ix.flag.Add("N", "Event/Customization")
 
 ALWAYS_RAISED["weapon_flashlight"] = true
 ALWAYS_RAISED["stalker_bolt"] = true
+ALWAYS_RAISED["cw_anomaly_bolt"] = true
 ALWAYS_RAISED["detector_bear"] = true
 ALWAYS_RAISED["detector_veles"] = true
 ALWAYS_RAISED["detector_echo"] = true

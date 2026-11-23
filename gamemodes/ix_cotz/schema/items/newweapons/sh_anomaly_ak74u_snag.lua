@@ -4,7 +4,7 @@ ITEM.longdesc = "The compact AKS-74UNB has a custom sight arrangement on its abb
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak74u_snag_w.mdl"
 
-ITEM.price = 22000
+ITEM.price = 15500
 ITEM.width = 4
 ITEM.height = 2
 ITEM.unloadedweight = 2.9
@@ -14,9 +14,7 @@ ITEM.class = "cw_anomaly_ak74u_snag_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(5.8, -205, 5.5),

@@ -4,7 +4,7 @@ ITEM.longdesc = "The Steppe Eagle shares the broad slide and heavy frame of the 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_desert_eagle_nimble_w.mdl"
 
-ITEM.price = 19800
+ITEM.price = 15000
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 1.9
@@ -14,9 +14,7 @@ ITEM.class = "cw_anomaly_desert_eagle_nimble_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(3.5, -205, 3.8),

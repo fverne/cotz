@@ -29,6 +29,7 @@ function SWEP:_attach(cur, curPos, inherit)
 	end
 
 	local att = inherit or CustomizableWeaponry:findAttachment(attTable.atts[curPos])
+	att = self:GetCotzAttachment(att)
 
 	if not att then
 		return false
@@ -63,6 +64,7 @@ function SWEP:_attach(cur, curPos, inherit)
 	if att.attachFunc then
 		att.attachFunc(self)
 	end
+	self:ApplyCotzSightView(att)
 
 	if CLIENT then
 		-- if there is a model with the provided name, make it visible
@@ -82,6 +84,7 @@ function SWEP:_attach(cur, curPos, inherit)
 
 				--if the current attachment has backup sights, we can swap to them
 
+				self.cotzAimModel = model
 				self.ActualSightPos = self.AimPos
 				self.ActualSightAng = self.AimAng
 
@@ -166,7 +169,9 @@ function SWEP:resetPostDetach(att, attCategory)
 
 	if att.isSight then
 		self.ZoomAmount = self.ZoomAmount_Orig
+		self.cotzAimModel = nil
 		self.reticleFunc = nil
+		self.renderTargetFunc = nil
 
 		if CLIENT and self.SightWithRail then
 			local rail = self.AttachmentModelsVM and self.AttachmentModelsVM.md_rail
@@ -210,7 +215,7 @@ function SWEP:_detach(category, pos, skipDependencyCheck)
 	self.LastPreset = nil
 	local att = self.Attachments[category]
 
-	local foundAtt = CustomizableWeaponry:findAttachment(att.atts[pos])
+	local foundAtt = self:GetCotzAttachment(CustomizableWeaponry:findAttachment(att.atts[pos]))
 
 	self:removeStatModifiers(foundAtt.statModifiers)
 
@@ -223,6 +228,7 @@ function SWEP:_detach(category, pos, skipDependencyCheck)
 	if foundAtt.detachFunc then
 		foundAtt.detachFunc(self)
 	end
+	self:ResetCotzSightView(foundAtt)
 
 	self:resetPostDetach(foundAtt, att)
 

@@ -4,7 +4,7 @@ ITEM.longdesc = "The Arrow retains the long SG550 fore-end under its custom uppe
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_sig550_luckygun_w.mdl"
 
-ITEM.price = 36500
+ITEM.price = 29500
 ITEM.width = 5
 ITEM.height = 2
 ITEM.unloadedweight = 4.2
@@ -14,15 +14,7 @@ ITEM.class = "cw_anomaly_sig550_luckygun_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_nato",
-	"cw_anomaly_ac10632",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-	"cw_anomaly_gl_m202",
-}
 
 ITEM.iconCam = {
 	pos = Vector(7.2, -205, 3.7),

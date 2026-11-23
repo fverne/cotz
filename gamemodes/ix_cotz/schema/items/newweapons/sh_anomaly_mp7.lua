@@ -4,25 +4,17 @@ ITEM.longdesc = "The magazine fits inside the grip, leaving a short nose beneath
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_mp7_w.mdl"
 
-ITEM.price = 22400
+ITEM.price = 14500
 ITEM.width = 2
 ITEM.height = 2
 ITEM.unloadedweight = 1.9
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_mp7_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_9p",
-	"cw_anomaly_ac10632",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-	"cw_anomaly_cmore",
-}
 
 ITEM.iconCam = {
 	pos = Vector(-3.8, -205, 3.1),

@@ -4,19 +4,17 @@ ITEM.longdesc = "The light polymer frame contrasts with the deep cuts in the met
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_gsh18_w.mdl"
 
-ITEM.price = 9500
+ITEM.price = 5000
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.59
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_gsh18_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(1.4, -205, 3.2),

@@ -4,7 +4,7 @@ ITEM.longdesc = "The AK-102 keeps the full-size furniture around a shorter barre
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak102.mdl"
 
-ITEM.price = 21000
+ITEM.price = 14500
 ITEM.width = 4
 ITEM.height = 2
 ITEM.unloadedweight = 3.0
@@ -14,15 +14,7 @@ ITEM.class = "cw_anomaly_ak102_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_pbs1",
-	"cw_anomaly_acog",
-	"cw_anomaly_eotech",
-	"cw_anomaly_ac10632",
-	"cw_anomaly_kobra",
-}
 
 ITEM.iconCam = {
 	pos = Vector(4.4, -205, 0.8),

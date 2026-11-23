@@ -4,21 +4,17 @@ ITEM.longdesc = "A raised cheek rest and a fitted bipod set the SG1 apart from t
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_g3sg1_w.mdl"
 
-ITEM.price = 47000
+ITEM.price = 40000
 ITEM.width = 6
 ITEM.height = 2
 ITEM.unloadedweight = 5.5
-ITEM.bulletweight = 0.025
+ITEM.bulletweight = 0.026
 
 ITEM.class = "cw_anomaly_g3sg1_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_nato",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.5, -205, 6.8),

@@ -8,15 +8,13 @@ ITEM.price = 53500
 ITEM.width = 6
 ITEM.height = 2
 ITEM.unloadedweight = 8.1
-ITEM.bulletweight = 0.024
+ITEM.bulletweight = 0.022
 
 ITEM.class = "cw_anomaly_pkm_zulus_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(7.9, -205, 5.5),

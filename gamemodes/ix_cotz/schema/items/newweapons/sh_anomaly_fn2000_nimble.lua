@@ -4,7 +4,7 @@ ITEM.longdesc = "The EOTech sits above the rounded bullpup receiver, which house
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_fn2000_nimble_w.mdl"
 
-ITEM.price = 45400
+ITEM.price = 33000
 ITEM.width = 4
 ITEM.height = 2
 ITEM.unloadedweight = 3.6
@@ -14,11 +14,7 @@ ITEM.class = "cw_anomaly_fn2000_nimble_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_nato",
-}
 
 ITEM.iconCam = {
 	pos = Vector(-0.1, -205, 5.6),

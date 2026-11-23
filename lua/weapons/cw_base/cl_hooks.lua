@@ -1,4 +1,4 @@
-local function CW20_RenderScene()
+local function CW20_RenderScene(origin, angles, fov)
 	local ply = LocalPlayer()
 	local wep = ply:GetActiveWeapon()
 
@@ -8,9 +8,11 @@ local function CW20_RenderScene()
 			wep.RenderTargetFunc(wep)
 		end
 
+		wep:DrawCotzIntegratedScope(origin, angles, fov)
+
 		-- this is some attachment's render target func
 		if wep.renderTargetFunc then
-			wep.renderTargetFunc(wep)
+			wep.renderTargetFunc(wep, origin, angles)
 		end
 
 		-- ...amazing, isn't it?

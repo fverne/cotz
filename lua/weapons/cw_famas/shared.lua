@@ -18,65 +18,65 @@ if CLIENT then
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.328869, 7.158557, 12.278635),
+			pos = Vector(-0.188588, 3.051218, 7.683873),
 			angle = Angle(-89.445764, -87.431758, -177.002252),
-			size = Vector(1.340196, 1.340196, 1.340196),
+			size = Vector(0.95, 0.95, 0.95),
 		},
 		["md_microt1"] = {
 			model = "models/cw2/attachments/microt1.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.1207, -7.072309, -3.273543),
+			pos = Vector(0.12631, -7.014054, -3.286821),
 			angle = Angle(0.021365, -0.430323, -89.753464),
-			size = Vector(0.536078, 0.536078, 0.536078),
+			size = Vector(0.4, 0.4, 0.4),
 		},
 		["md_aimpoint"] = {
 			model = "models/wystan/attachments/aimpoint.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.389862, -0.542099, 3.757429),
+			pos = Vector(0.332451, -2.251826, 1.730271),
 			angle = Angle(-0.028984, 179.570634, 90.553478),
-			size = Vector(1.139166, 1.139166, 1.139166),
+			size = Vector(0.83, 0.83, 0.83),
 		},
 		["md_reflex"] = {
 			model = "models/attachments/kascope.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.191191, -7.131506, -6.625313),
+			pos = Vector(0.190685, -7.114303, -6.504764),
 			angle = Angle(-0.028984, 179.570634, 90.553478),
-			size = Vector(0.871127, 0.871127, 0.871127),
+			size = Vector(0.84, 0.84, 0.84),
 		},
 		["md_cmore"] = {
 			model = "models/attachments/cmore.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.160623, -6.855562, -3.270861),
+			pos = Vector(0.160743, -6.862204, -3.274778),
 			angle = Angle(-0.028984, 179.570634, 90.553478),
-			size = Vector(0.869787, 0.869787, 0.869787),
+			size = Vector(0.9, 0.9, 0.9),
 		},
 		["md_schmidt_shortdot"] = {
 			model = "models/cw2/attachments/schmidt.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.5349, -0.001156, 3.11175),
+			pos = Vector(0.408146, -2.186142, 0.680875),
 			angle = Angle(-89.841543, 104.922958, 15.353065),
-			size = Vector(1.204836, 1.204836, 1.204836),
+			size = Vector(0.82, 0.82, 0.82),
 		},
 		["md_acog"] = {
 			model = "models/wystan/attachments/2cog.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.53488, 0.001496, 3.111743),
+			pos = Vector(0.441321, -1.622638, 1.639805),
 			angle = Angle(0.041954, 179.569949, 89.847198),
-			size = Vector(1.206176, 1.206176, 1.206176),
+			size = Vector(0.92, 0.92, 0.92),
 		},
 		["md_nightforce_nxs"] = {
 			model = "models/cw2/attachments/l96_scope.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.273958, -7.94047, -1.942187),
+			pos = Vector(0.273423, -7.933392, -1.942168),
 			angle = Angle(-89.841543, 104.922958, 15.353065),
-			size = Vector(1.005147, 1.005147, 1.005147),
+			size = Vector(1, 1, 1),
 		},
 		["md_saker"] = {
 			model = "models/cw2/attachments/556suppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.011816, -0.558107, -10.471558),
+			pos = Vector(-0.012262, -0.19496, -8.20599),
 			angle = Angle(0.04125, 179.569947, 89.847198),
-			size = Vector(0.6, 0.6, 0.6),
+			size = Vector(0.72, 0.72, 0.72),
 		},
 	}
 end
@@ -147,23 +147,23 @@ SWEP.UseHands = true
 SWEP.IronsightPos = Vector(-3.81, 0, 1.714)
 SWEP.IronsightAng = Vector(-0.2, 0.01, 0)
 
-SWEP.EoTechPos = Vector(-3.818933, 0, -0.704494)
+SWEP.EoTechPos = Vector(-3.817799, 0, -0.210672)
 SWEP.EoTechAng = Vector(-0.2, 0.01, 0)
-SWEP.MicroT1Pos = Vector(-3.822722, 0, -0.139379)
+SWEP.MicroT1Pos = Vector(-3.805875, 0, 0.162619)
 SWEP.MicroT1Ang = Vector(-0.2, 0.01, 0)
-SWEP.AimpointPos = Vector(-3.843181, 0, -0.220064)
+SWEP.AimpointPos = Vector(-3.842672, 0, 0.138117)
 SWEP.AimpointAng = Vector(-0.2, 0.01, 0)
-SWEP.ReflexPos = Vector(-3.840497, 0, -0.048378)
+SWEP.ReflexPos = Vector(-3.840523, 0, -0.000604)
 SWEP.ReflexAng = Vector(-0.2, 0.01, 0)
-SWEP.CmorePos = Vector(-3.821253, 0, -0.181832)
+SWEP.CmorePos = Vector(-3.821255, 0, -0.2324)
 SWEP.CmoreAng = Vector(-0.2, 0.01, 0)
-SWEP.ShortDotPos = Vector(-3.803342, 0, -0.279573)
+SWEP.ShortDotPos = Vector(-3.802733, 0, 0.162619)
 SWEP.ShortDotAng = Vector(-0.2, 0.01, 0)
 SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.ACOGPos = Vector(-3.803853, 0, -0.65217)
+SWEP.ACOGPos = Vector(-3.803701, 0, -0.237855)
 SWEP.ACOGAng = Vector(-0.2, 0.01, 0)
 SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.NXSPos = Vector(-3.833778, 0, 0.075548)
+SWEP.NXSPos = Vector(-3.833778, 0, 0.082189)
 SWEP.NXSAng = Vector(-0.2, 0.01, 0)
 SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
 SWEP.SprintPos = Vector(7.2, -7.3, 0.85)

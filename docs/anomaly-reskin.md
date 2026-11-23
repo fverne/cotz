@@ -20,11 +20,19 @@ attachment slots. Saved weapons and loot tables are unaffected. The conversion a
   At -5 the third-person gun aimed below the player's aim, so it clipped the support hand and the stock the face.
 - Reloads play at the Anomaly speed (`ReloadSpeed = 1`), so the reload sounds stay in sync with the
   animation. Reload durations therefore follow the Anomaly animations rather than the old COTZ values.
-- Items with that class take the Anomaly world model, including in the back-slot PAC part, and the
-  `iconCam` from the matching `sh_debug_cw_anomaly_<id>.lua`. Item sizes already matched.
+- Items with that class take the Anomaly world model, including in the back-slot PAC part. Regeneration
+  reuses an existing `iconCam` tuned for that world model.
 - The M16A4, P90, LR-300, HK416, and Remington 870 use the pack's separate stock sight
   model. CW draws it on the viewmodel whenever the weapon uses its iron-sight aim pose,
   and installing an optic hides it until the weapon returns to irons.
+
+### Integrated scopes
+
+The AUG, F2000, M98B, SV-98, and TRG-42 reskins copy their reticle and magnification from their source
+SWEP. Those reskins and native Anomaly guns that have a `lense_rt` viewmodel material use CW's square
+render target. A client-side override on the lens replaces the TFA material proxy. Complex mode draws
+the magnified scene and reticle in the lens. The simple telescopics option keeps the full-screen scope
+overlay. Weapons with their own CW scope renderer, such as the VSSK, keep that renderer.
 
 ```sh
 python3 docs/anomaly/reskin_weapons.py --dry-run
@@ -88,8 +96,8 @@ dovetail guns, and the Kobra is left off guns without a dovetail.
 
 Each sight line must then pass at least 0.4 units over the gun between the sight and the muzzle. Where it
 does not (the M16A4, SG552, UMP45 and both TOZ-34s), a spacer goes under the sights: the Picatinny segment
-`models/wystan/attachments/rail.mdl`, stretched to the sights' combined footprint and to the missing height,
-seated on the gun as `md_rail`. No dedicated riser model exists locally or in the subscribed workshop
+`models/wystan/attachments/rail.mdl`, fitted to the missing height and up to six units of the sights'
+combined footprint, seated on the gun as `md_rail`. No dedicated riser model exists locally or in the subscribed workshop
 items; swap `SPACER_MODEL` in `offline_placement.lua` to use one. Aims are refitted after every move.
 Pistol sights and rails finally move onto the slide bone that the vm-recoil variant animates.
 

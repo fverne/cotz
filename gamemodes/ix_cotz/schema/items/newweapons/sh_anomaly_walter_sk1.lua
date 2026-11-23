@@ -4,21 +4,17 @@ ITEM.longdesc = "The custom P99 keeps the molded grip and low, squared slide of 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_walter99_sk1_w.mdl"
 
-ITEM.price = 9800
+ITEM.price = 4900
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.78
-ITEM.bulletweight = 0.012
+ITEM.bulletweight = 0.008
 
 ITEM.class = "cw_anomaly_walter_sk1_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_9mm",
-}
 
 ITEM.iconCam = {
 	pos = Vector(1.6, -205, 3.3),

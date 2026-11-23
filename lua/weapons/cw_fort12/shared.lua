@@ -29,40 +29,40 @@ if CLIENT then
 			model = "models/cw2/attachments/microt1.mdl",
 			bone = "slide",
 			staticBone = "wpn_body",
-			pos = Vector(-0.005451, -0.738341, 2.961673),
+			pos = Vector(-0.000752, -0.773828, 2.951999),
 			angle = Angle(0.004425, -0.000004, -89.920958),
-			size = Vector(0.4, 0.4, 0.4),
+			size = Vector(0.3, 0.3, 0.3),
 		},
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "slide",
 			staticBone = "wpn_body",
-			pos = Vector(-0.256051, 10.897281, 14.228674),
+			pos = Vector(-0.149676, 7.017479, 9.935216),
 			angle = Angle(-89.920834, 86.79607, -3.203929),
-			size = Vector(1.081081, 1.081081, 1.081081),
+			size = Vector(0.7125, 0.7125, 0.7125),
 		},
 		["md_rmr"] = {
 			model = "models/cw2/attachments/pistolholo.mdl",
 			bone = "slide",
 			staticBone = "wpn_body",
-			pos = Vector(0.403819, 5.563899, 8.910812),
+			pos = Vector(0.24588, 2.968123, 6.461037),
 			angle = Angle(-89.920834, 86.79607, -3.203929),
-			size = Vector(1.081081, 1.081081, 1.081081),
+			size = Vector(0.6375, 0.6375, 0.6375),
 		},
 		["md_rail"] = {
 			model = "models/cw2/attachments/pistolrail.mdl",
 			bone = "slide",
 			staticBone = "wpn_body",
-			pos = Vector(-0.005835, 2.222475, 1.370906),
+			pos = Vector(-0.005742, 1.811971, 1.73153),
 			angle = Angle(-89.998441, 90, 0),
-			size = Vector(0.17, 0.17, 0.17),
+			size = Vector(0.1305, 0.105, 0.145),
 		},
 		["md_tundra9mm"] = {
 			model = "models/cw2/attachments/9mmsuppressor.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.000099, -0.280895, -8.556859),
+			pos = Vector(0.000069, -0.650861, -7.689586),
 			angle = Angle(0.001954, 0, -89.999982),
-			size = Vector(1, 1, 1),
+			size = Vector(0.7, 0.7, 0.7),
 		},
 	}
 end
@@ -126,11 +126,11 @@ SWEP.UseHands = true
 SWEP.IronsightPos = Vector(-3.8, -1, 2.297)
 SWEP.IronsightAng = Vector(0, 0, 0)
 
-SWEP.MicroT1Pos = Vector(-3.863644, -3.469, 1.276404)
+SWEP.MicroT1Pos = Vector(-3.858158, -3.469, 1.443528)
 SWEP.MicroT1Ang = Vector(0, 0, 0)
-SWEP.EoTechPos = Vector(-3.898006, -5.469, 0.794757)
+SWEP.EoTechPos = Vector(-3.899154, -5.469, 1.310619)
 SWEP.EoTechAng = Vector(0, 0, 0)
-SWEP.RMRPos = Vector(-3.862348, -3.469, 1.366296)
+SWEP.RMRPos = Vector(-3.863003, -3.469, 1.636917)
 SWEP.RMRAng = Vector(0, 0, 0)
 SWEP.SightWithRail = true
 SWEP.SprintPos = Vector(0, -1, 3.5)

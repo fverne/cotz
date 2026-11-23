@@ -14,15 +14,7 @@ ITEM.class = "cw_anomaly_aks74_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_tgpa",
-	"cw_anomaly_kobra",
-	"cw_anomaly_pso1",
-	"cw_anomaly_1p29",
-	"cw_anomaly_gl",
-}
 
 ITEM.iconCam = {
 	pos = Vector(6.7, -205, 5.9),

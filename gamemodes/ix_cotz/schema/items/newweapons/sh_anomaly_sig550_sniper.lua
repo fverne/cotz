@@ -4,7 +4,7 @@ ITEM.longdesc = "The extended barrel and substantial stock distinguish this from
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_sig550_sniper_w.mdl"
 
-ITEM.price = 46800
+ITEM.price = 34000
 ITEM.width = 6
 ITEM.height = 2
 ITEM.unloadedweight = 7.0
@@ -14,12 +14,7 @@ ITEM.class = "cw_anomaly_sig550_sniper_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_nato",
-	"cw_anomaly_gl_m202",
-}
 
 ITEM.iconCam = {
 	pos = Vector(8.3, -205, 4.7),

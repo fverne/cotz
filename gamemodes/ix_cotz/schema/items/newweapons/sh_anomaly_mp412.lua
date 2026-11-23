@@ -4,7 +4,7 @@ ITEM.longdesc = "The top-break frame opens at the rear of the cylinder and tips 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_mp412_w.mdl"
 
-ITEM.price = 14000
+ITEM.price = 9500
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.9
@@ -14,9 +14,7 @@ ITEM.class = "cw_anomaly_mp412_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(2.8, -205, 3.3),

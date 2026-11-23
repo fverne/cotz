@@ -26,58 +26,58 @@ if CLIENT then
 		["md_microt1"] = {
 			model = "models/cw2/attachments/microt1.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.008576, -2.823974, -3.794504),
+			pos = Vector(-0.017994, -2.90829, -3.774895),
 			angle = Angle(0.00315, 0, -89.97769),
-			size = Vector(0.2, 0.2, 0.2),
+			size = Vector(0.4, 0.4, 0.4),
 		},
 		["md_nightforce_nxs"] = {
 			model = "models/cw2/attachments/l96_scope.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.066417, -3.282338, -3.674325),
+			pos = Vector(0.113227, -3.82576, -3.678017),
 			angle = Angle(-89.997215, 90, 0),
-			size = Vector(0.5, 0.5, 0.5),
+			size = Vector(1, 1, 1),
 		},
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.146368, 2.493214, 1.507869),
+			pos = Vector(-0.273867, 7.279851, 6.754803),
 			angle = Angle(-89.977469, 90, 0),
-			size = Vector(0.5, 0.5, 0.5),
+			size = Vector(0.95, 0.95, 0.95),
 		},
 		["md_aimpoint"] = {
 			model = "models/wystan/attachments/aimpoint.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.11477, 0.057739, -0.995634),
+			pos = Vector(0.193625, 1.90604, 1.144535),
 			angle = Angle(-0.00315, 180, 89.97769),
-			size = Vector(0.5, 0.5, 0.5),
+			size = Vector(0.83, 0.83, 0.83),
 		},
 		["md_cmore"] = {
 			model = "models/attachments/cmore.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.008549, -2.740664, -4.294543),
+			pos = Vector(-0.015366, -2.741059, -4.376867),
 			angle = Angle(-0.00315, 180, 89.97769),
-			size = Vector(0.3245, 0.3245, 0.3245),
+			size = Vector(0.9, 0.9, 0.9),
 		},
 		["md_reflex"] = {
 			model = "models/attachments/kascope.mdl",
 			bone = "wpn_body",
-			pos = Vector(-0.008521, -2.837618, -4.794514),
+			pos = Vector(-0.016309, -3.041204, -6.987076),
 			angle = Angle(-0.00315, 180, 89.97769),
-			size = Vector(0.275, 0.275, 0.275),
+			size = Vector(0.84, 0.84, 0.84),
 		},
 		["md_schmidt_shortdot"] = {
 			model = "models/cw2/attachments/schmidt.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.142326, -0.490214, -2.016415),
+			pos = Vector(0.296484, 1.901386, 0.642902),
 			angle = Angle(-89.997215, 90, 0),
-			size = Vector(0.4, 0.4, 0.4),
+			size = Vector(0.82, 0.82, 0.82),
 		},
 		["md_acog"] = {
 			model = "models/wystan/attachments/2cog.mdl",
 			bone = "wpn_body",
-			pos = Vector(0.141302, -0.668718, -1.575353),
+			pos = Vector(0.340499, 2.462984, 1.236229),
 			angle = Angle(-0.002785, 180, 89.999982),
-			size = Vector(0.375, 0.375, 0.375),
+			size = Vector(0.92, 0.92, 0.92),
 		},
 		["md_rail"] = {
 			model = "models/wystan/attachments/rail.mdl",
@@ -177,23 +177,23 @@ SWEP.UseHands = true
 SWEP.IronsightPos = Vector(-3.26, -1, 2.515)
 SWEP.IronsightAng = Vector(0.305, 0, 0)
 
-SWEP.MicroT1Pos = Vector(-3.234323, -1.371, 1.932204)
+SWEP.MicroT1Pos = Vector(-3.239891, -1.371, 1.471616)
 SWEP.MicroT1Ang = Vector(0.305, 0, 0)
-SWEP.NXSPos = Vector(-3.258663, -1.371, 1.896437)
+SWEP.NXSPos = Vector(-3.258663, -1.371, 1.395813)
 SWEP.NXSAng = Vector(0.305, 0, 0)
 SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
-SWEP.EoTechPos = Vector(-3.234322, -1.371, 1.733553)
+SWEP.EoTechPos = Vector(-3.234322, -1.371, 1.217236)
 SWEP.EoTechAng = Vector(0.305, 0, 0)
-SWEP.AimpointPos = Vector(-3.234322, -1.371, 1.807726)
+SWEP.AimpointPos = Vector(-3.234322, -1.371, 1.423268)
 SWEP.AimpointAng = Vector(0.305, 0, 0)
-SWEP.CmorePos = Vector(-3.234323, -1.371, 1.913047)
+SWEP.CmorePos = Vector(-3.234323, -1.371, 1.062806)
 SWEP.CmoreAng = Vector(0.305, 0, 0)
-SWEP.ReflexPos = Vector(-3.234323, -1.371, 2.023627)
+SWEP.ReflexPos = Vector(-3.234323, -1.371, 1.256212)
 SWEP.ReflexAng = Vector(0.305, 0, 0)
-SWEP.ShortDotPos = Vector(-3.234522, -1.371, 1.940549)
+SWEP.ShortDotPos = Vector(-3.234523, -1.371, 1.496584)
 SWEP.ShortDotAng = Vector(0.305, 0, 0)
 SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.ACOGPos = Vector(-3.243303, -2.371, 1.814614)
+SWEP.ACOGPos = Vector(-3.243304, -2.371, 1.082158)
 SWEP.ACOGAng = Vector(0.305, 0, 0)
 SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
 SWEP.SightWithRail = true

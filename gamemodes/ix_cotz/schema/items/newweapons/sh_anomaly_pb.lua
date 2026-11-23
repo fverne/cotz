@@ -4,19 +4,17 @@ ITEM.longdesc = "The PB's round suppressor housing gives it a much longer front 
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_pb_w.mdl"
 
-ITEM.price = 7100
+ITEM.price = 1500
 ITEM.width = 2
 ITEM.height = 1
 ITEM.unloadedweight = 0.97
-ITEM.bulletweight = 0.01
+ITEM.bulletweight = 0.011
 
 ITEM.class = "cw_anomaly_pb_vmrecoil"
 ITEM.weaponCategory = "secondary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = false
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {}
 
 ITEM.iconCam = {
 	pos = Vector(3.8, -205, 2.6),

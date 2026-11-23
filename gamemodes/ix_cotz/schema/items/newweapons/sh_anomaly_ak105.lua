@@ -4,7 +4,7 @@ ITEM.longdesc = "The AK-105 sits between a full-length AK-74M and the stubby AKS
 
 ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak105_w.mdl"
 
-ITEM.price = 21500
+ITEM.price = 14500
 ITEM.width = 4
 ITEM.height = 2
 ITEM.unloadedweight = 3.2
@@ -14,14 +14,7 @@ ITEM.class = "cw_anomaly_ak105_vmrecoil"
 ITEM.weaponCategory = "primary"
 ITEM.noBusiness = true
 ITEM.canRepair = true
-ITEM.canAttach = true
 ITEM.anomalyInventoryAttachments = true
-ITEM.validAttachments = {
-	"cw_anomaly_sil_tgpa",
-	"cw_anomaly_kobra",
-	"cw_anomaly_pso1",
-	"cw_anomaly_1p29",
-}
 
 ITEM.iconCam = {
 	pos = Vector(4.5, -205, 5.9),

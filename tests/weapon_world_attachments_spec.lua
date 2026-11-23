@@ -21,6 +21,8 @@ function CustomizableWeaponry:findAttachment(name)
 	return self.registeredAttachmentsSKey[name]
 end
 
+include = function(path) return dofile("lua/" .. path) end
+assert(load(read("sh_cotzattachments.lua")))()
 assert(load(read("sh_attachments.lua")))()
 local weapon = setmetatable({
 	Attachments = {[1] = {atts = {"optic"}}},
@@ -51,7 +53,9 @@ weapon.setBodygroup = function(_, group, value)
 end
 local optic = CustomizableWeaponry.registeredAttachmentsSKey.optic
 weapon.Attachments[1].last = 1
+weapon.renderTargetFunc = function() end
 weapon:resetPostDetach(optic, weapon.Attachments[1])
+assert(weapon.renderTargetFunc == nil, "detached scope camera must stop rendering")
 assert(weapon.aimReset, "client detach must reset aim even before the models are available")
 
 weapon.AttachmentModelsVM = {optic = {active = true}, md_rail = {active = true}}
