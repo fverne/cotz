@@ -54,7 +54,7 @@ ZIP and tarball downloads omit development tools, tests, workflows, planning doc
 - **Garry's Mod** and a working multiplayer or dedicated server environment.
 - **Helix**, included in this repository under `gamemodes/helix/`.
 - **MySQL** and the [mySQLOO](https://github.com/FredyH/MySQLOO) module for the recommended database configuration, particularly for cross-server features.
-- **The Anomaly CW 2.0 pack** (`cotz_anomaly_cw20`) supplies the models, sounds, materials, attachment entities and sound registrations for the Anomaly SWEPs in `lua/weapons/cw_anomaly_*`, including the standalone Bolt SWEP and the right-hand throw animations for Echo, Bear, and Veles. The legacy `stalker_bolt` class inherits `cw_anomaly_bolt`.
+- **The Anomaly CW 2.0 pack** (merged into `cotz_general` for models, sounds and Lua, and `cotz_wepmats` for materials) supplies the models, sounds, materials, attachment entities and sound registrations for the Anomaly SWEPs in `lua/weapons/cw_anomaly_*`, including the standalone Bolt SWEP and the right-hand throw animations for Echo, Bear, and Veles. The legacy `stalker_bolt` class inherits `cw_anomaly_bolt`.
 - **Compatible maps, models, sounds, materials, weapons, and other assets** referenced by the schema. Not all required assets are necessarily included in this code repository; examine the schema and your server's content setup before deployment.
 
 The gamemode definition references Steam Workshop item [`2290918731`](https://steamcommunity.com/sharedfiles/filedetails/?id=2290918731). Verify its contents and any additional asset dependencies for your own server.

@@ -7,8 +7,8 @@ SWEP.AdminSpawnable = true
 SWEP.Slot = 4
 SWEP.SlotPos = 1
 
--- cotz_weapon_chands ships a copy of the Echo viewmodel with its legend plate lifted off the front
--- panel, which otherwise z-fights. Fall back to the Workshop original when that addon is missing.
+-- cotz_general ships a copy of the Echo viewmodel with its legend plate lifted off the front
+-- panel, which otherwise z-fights. Fall back to the Workshop original when that content is missing.
 local FIXED_VIEWMODEL = "models/cotz/chands/dar_anomaly/dev_diolator_detector_1_hud.mdl"
 local ORIGINAL_VIEWMODEL = "models/flaymi/stalker/dar_anomaly/weapons/v_models/dev_diolator_detector_1_hud.mdl"
 

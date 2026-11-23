@@ -1,8 +1,9 @@
 # Anomaly model reskins
 
-COTZ weapons with a counterpart in the Anomaly CW2.0 conversion (`cotz_anomaly_cw20`) use its view model,
-world model, sounds and item icon while keeping their COTZ class, item IDs, balance, ammunition and
-attachment slots. Saved weapons and loot tables are unaffected. The conversion addon must be installed.
+COTZ weapons with a counterpart in the Anomaly CW2.0 conversion (in `cotz_general` and
+`cotz_wepmats`) use its view model, world model, sounds and item icon while keeping their COTZ class,
+item IDs, balance, ammunition and attachment slots. Saved weapons and loot tables are unaffected.
+The conversion content must be installed.
 
 ## Weapon reskin
 
@@ -111,8 +112,9 @@ list with the placed sights and removes dropped sights and foregrips from the we
 `ITEM.validAttachments`. `offline_placement.lua inspect SPEC CLASS...` prints each model's mesh center
 next to the gun's `wpn_body`, `wpn_scope` and muzzle for a quick check.
 
-The `cotz_weapon_chands` addon replaces listed viewmodels with c_hands conversions of the old models; it
-skips guns whose viewmodel is under `models/flaymi/anomaly/` so the reskins keep their Anomaly models.
+The c_hands conversions in `cotz_general` (formerly the `cotz_weapon_chands` addon) replace listed
+viewmodels with c_hands conversions of the old models; it skips guns whose viewmodel is under
+`models/flaymi/anomaly/` so the reskins keep their Anomaly models.
 
 ## Verification
 

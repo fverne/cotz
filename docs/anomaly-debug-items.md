@@ -3,9 +3,10 @@
 The 82 regular `anomaly_<id>` inventory items cover the installed Anomaly pack's firearms and launcher
 variants without a regular CotZ counterpart. They equip the pack's VM-recoil SWEPs and use its world
 models and inventory cameras. The pack's SWEPs, including their bases, live in `lua/weapons/cw_anomaly_*`.
-Install `cotz_anomaly_cw20` alongside CotZ to supply the models, sounds, materials, attachment and
-projectile entities, and sound registrations. The items are available through administrator item spawning
-and have no business, loot, vendor, reward or progression entries.
+Install the Anomaly CW2.0 content in `cotz_general` and `cotz_wepmats` alongside CotZ to supply the
+models, sounds, materials, attachment and projectile entities, and sound registrations. The items are
+available through administrator item spawning and have no business, loot, vendor, reward or progression
+entries.
 
 ## Balance
 
