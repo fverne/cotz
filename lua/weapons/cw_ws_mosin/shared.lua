@@ -34,7 +34,7 @@ if CLIENT then
 	SWEP.AimpointPos = Vector(-2.85, 0, -0.07)
 	SWEP.AimpointAng = Vector(0, 0, 0)
 
-	SWEP.MicroT1Pos = Vector(-2.85, 0, -0.04)
+	SWEP.MicroT1Pos = Vector(-2.934, 0, 0.262)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
 	
 	SWEP.ReflexPos = Vector(-2.83, -7, 0.5)

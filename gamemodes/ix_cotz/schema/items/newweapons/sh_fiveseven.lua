@@ -1,7 +1,7 @@
 ITEM.name = "Five-seveN"
 ITEM.description= "A polymer-framed pistol chambered for 5.7x28mm."
 ITEM.longdesc = "The Five-seveN and its iconic cartridge, the FN 5.7x28mm, was designed to replace the aging 9x19mm cartridge.\nThe cartridge sports excellent penetration power and impressively tight groupings.\nAcquiring the FiveseveN in the Zone is fairly tough and will cost you dearly, as will supplying the pistol with ammunition."
-ITEM.model = "models/weapons/w_pist_fiveseven.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_fn57_w.mdl"
 ITEM.class = "cw_fiveseven"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 17500
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(3, -205, 3.4000000953674),
+	pos = Vector(1.9, -205, 3.1),
 	ang = Angle(0, 90, 0),
-	fov = 4,
+	fov = 3.2,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_pist_fiveseven.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_fn57_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-9.746, 4.888, -1.755),

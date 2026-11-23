@@ -1,13 +1,13 @@
 ITEM.name = "LR-300"
 ITEM.description= "A modern assault rifle. Fires 5.56x45mm."
 ITEM.longdesc = "When one is looking for an M4 in the Zone, chances are he'll settle for the LR-300 carbine instead. While there are some differences in design and build, the LR-300 was imported in much greater quantities than any other automatic rifle of this caliber. \nIt's well-used in close-quarters combat thanks to its compact construction. \nIt's bolt is placed further forward in the weapon, allowing the use of a foldable stock."
-ITEM.model = "models/weapons/w_lr300.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_lr300_w.mdl"
 ITEM.class = "cw_lr300"
 ITEM.weaponCategory = "primary"
 ITEM.price = 23100
 ITEM.width = 5
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.012
 ITEM.unloadedweight = 3.1
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(-5, -205, 5),
+	pos = Vector(3.5, -205, 4.8),
 	ang = Angle(0, 90, 0),
-	fov = 12,
+	fov = 9.3,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
 						["Position"] = Vector(0, -4.313, 2.519),
-						["Model"] = "models/weapons/w_lr300.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_lr300_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

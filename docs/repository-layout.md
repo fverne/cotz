@@ -14,6 +14,7 @@ Moved Lua files retain their original contents; loaders, documentation, and tool
 | `gamemodes/ix_cotz/schema/items/` | Active item definitions and bases. Immediate folder names select `base_<folder>`. |
 | `gamemodes/ix_cotz/plugins/` | Gameplay systems. Folder names and standalone filenames are persistent plugin IDs. |
 | `lua/autorun/` | Automatically loaded entry points for bundled resources. |
+| `lua/cotz/` | Standard-Lua data files included explicitly, such as the [attachment placement](attachment-placement.md) policy. |
 | `lua/cw/`, `lua/ecw/`, `lua/tfa/` | Weapon framework support at paths expected by those frameworks. |
 | `lua/entities/`, `lua/weapons/`, `lua/effects/` | Registered entities, SWEPs, and effects; paths determine class names. |
 | `lua/stalkernpcbasevars.lua` | Shared NPC definitions included by the NPC autorun files. |

@@ -1,7 +1,7 @@
 ﻿ITEM.name = "OTs-02 Kiparis"
 ITEM.description= "A submachinegun with a folded stock. Fires 9x18mm."
 ITEM.longdesc = "A russian submachinegun, the OTS-02 is a blowback-operated weapon of a conventional design chambered in 9×18mm Makarov."
-ITEM.model = ("models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_kiparis_w.mdl"
 ITEM.class = "cw_kiparis"
 ITEM.weaponCategory = "primary"
 ITEM.price = 6300
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	ang = Angle(0, 270, 0),
-	fov = 5,
-	pos = Vector(1, 320, 0),
+	pos = Vector(-1.2, -205, 3.9),
+	ang = Angle(0, 90, 0),
+	fov = 9.7,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(4.75, -3.5, -5.38),
-						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_kiparis_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

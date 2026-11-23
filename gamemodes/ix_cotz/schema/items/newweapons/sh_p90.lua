@@ -1,13 +1,13 @@
 ITEM.name = "FN P90"
 ITEM.description= "A sub machine gun chambered in 5.7x28mm."
 ITEM.longdesc = "The FN P90 is the sister gun to the FN FiveSeven pistol, developed alongside it and its special cartridge, the 5.7x28mm.\nIntending to replace the classic 9x19mm pistol round, it hasn't quite worked out yet, making this a niche weapon.\nThe weapon is rare and so is its ammo."
-ITEM.model = ("models/weapons/therambotnic09/w_cst_p90.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_p90_w.mdl"
 ITEM.class = "cw_p90"
 ITEM.weaponCategory = "primary"
 ITEM.price = 19000
 ITEM.width = 3
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex","md_tundra9mm", "md_schmidt_shortdot", "md_acog", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.006
 ITEM.unloadedweight = 2.6
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(7, -205, 3.5),
+	pos = Vector(-2.5, -205, 6.4),
 	ang = Angle(0, 90, 0),
-	fov = 6.5,
+	fov = 6.6,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
 						["Position"] = Vector(11.188, -4.175, -0.658),
-						["Model"] = "models/weapons/therambotnic09/w_cst_p90.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_p90_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

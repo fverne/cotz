@@ -1,13 +1,13 @@
 ﻿ITEM.name = "FN FAL"
 ITEM.description= "A battle rifle that fires 7.62x51mm rounds."
 ITEM.longdesc = "Nicknamed ”The Right Arm of The Free World”, the FAL was a popular choice for revolutionaries and armies alike.\nIt earned it's reputation in various African wars as a heavy-hitting automatic rifle that could withstand the jungle's conditions."
-ITEM.model = "models/hgn/srp/weapons/w_rif_fnfal.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_fal_w.mdl"
 ITEM.class = "cw_fnfal"
 ITEM.weaponCategory = "primary"
 ITEM.price = 36000
 ITEM.width = 6
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.026
 ITEM.unloadedweight = 4.45
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(12, -205, 1),
-	ang = Angle(0, 90, 2),
-	fov = 12.3,
+	pos = Vector(5.3, -205, 3.8),
+	ang = Angle(0, 90, 0),
+	fov = 10,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
 						["Position"] = Vector(13.596, -4.444, -1.874),
-						["Model"] = "models/hgn/srp/weapons/w_rif_fnfal.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_fal_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

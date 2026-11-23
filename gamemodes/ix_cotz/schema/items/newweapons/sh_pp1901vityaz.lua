@@ -1,13 +1,13 @@
 ITEM.name = "PP-19-01 'Vityaz'"
 ITEM.description= "A folding-stock sub machine gun chambered for 9x19mm."
 ITEM.longdesc = "The Vityaz-SN is a 9×19mm Parabellum submachine gun developed in 2004 by Izhmash (now Kalashnikov). It is based on the AK-74 and offers a high degree of parts commonality with the AK-74. The gun is directly developed from the PP-19 Bizon."
-ITEM.model = ("models/weapons/w_smg_pp19vityaz.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_vityaz_w.mdl"
 ITEM.class = "cw_pp1901_vityaz"
 ITEM.weaponCategory = "primary"
 ITEM.width = 3
 ITEM.price = 17500
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex", "md_schmidt_shortdot", "md_tundra9mm"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_reflex", "md_schmidt_shortdot", "md_tundra9mm", "md_acog", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.008
 ITEM.unloadedweight = 2.9
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(9.5, -45, 0.80000001192093),
+	pos = Vector(2.6, -205, 5.3),
 	ang = Angle(0, 90, 0),
-	fov = 45,
+	fov = 7.7,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
 						["Position"] = Vector(16.922, -4.424, -0.666),
-						["Model"] = "models/weapons/w_smg_pp19vityaz.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_vityaz_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

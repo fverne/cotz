@@ -1,7 +1,7 @@
 ITEM.name = "P99"
 ITEM.description= "A German handgun, firing the 9x19mm cartridge."
 ITEM.longdesc = "The Walther P99 is a semi-automatic pistol developed by the German company Carl Walther GmbH Sportwaffen of Ulm.\nIt is designed for law enforcement, security forces and the civilian shooting market as a replacement for the Walther P5 and the P88."
-ITEM.model = ("models/srp/weapons/w_p99.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_walter99_w.mdl"
 ITEM.class = "cw_p99"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 4250
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(5.5, -205, 1.5),
+	pos = Vector(1.7, -205, 3.2),
 	ang = Angle(0, 90, 0),
-	fov = 3.5,
+	fov = 3.4,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/srp/weapons/w_p99.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_walter99_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-8.935, 7.563, 0.783),

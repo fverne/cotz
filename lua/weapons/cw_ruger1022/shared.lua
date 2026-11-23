@@ -42,7 +42,7 @@ if CLIENT then
 	SWEP.CmorePos = Vector(-3.01, -5, 1.03)
 	SWEP.CmoreAng = Vector(0, 0, 0)
 	
-	SWEP.MicroT1Pos = Vector(-3.03, -3, 1)
+	SWEP.MicroT1Pos = Vector(-3.048, -3, 0.923)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)
 	
 	SWEP.ReflexPos = Vector(-2.99, -5, 1.1)

@@ -543,6 +543,16 @@ function SWEP:_setupAttachmentModel(data)
 end
 
 function SWEP:setupAttachmentModels()
+	if self.DefaultSightModel then
+		local sight = self:createManagedCModel(self.DefaultSightModel, RENDERGROUP_BOTH)
+		if IsValid(sight) then
+			sight:SetNoDraw(true)
+			sight:SetParent(self.CW_VM)
+			sight:AddEffects(EF_BONEMERGE)
+			self.defaultSight = sight
+		end
+	end
+
 	if self.AttachmentModelsVM then
 		for k, v in pairs(self.AttachmentModelsVM) do
 			if v.models then
@@ -1054,6 +1064,11 @@ function SWEP:_drawAttachmentModels(data)
 end
 
 function SWEP:drawAttachments()
+	if self.DefaultSightModel and self.AimPos == self.CurIronsightPos and IsValid(self.defaultSight) then
+		self.defaultSight:SetupBones()
+		self.defaultSight:DrawModel()
+	end
+
 	if not self.AttachmentModelsVM then
 		return false
 	end

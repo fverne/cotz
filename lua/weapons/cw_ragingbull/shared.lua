@@ -53,7 +53,7 @@ if CLIENT then
 	["md_nightforce_nxs"] = { type = "Model", model = "models/cw2/attachments/l96_scope.mdl", bone = "weapon", rel = "", pos = Vector(-0.101, -2.35, 1.5), angle = Angle(90, 0, -90), size = Vector(0.649, 0.649, 0.649), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 	}
 	
-	SWEP.NXSAlign = {right = 0, up = -90, forward = 0}
+	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
 
 end
 

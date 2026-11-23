@@ -1,13 +1,13 @@
 ITEM.name = "SV-98"
 ITEM.description= "A Russian sniper rifle. Fires 7.62x54mm."
 ITEM.longdesc = "The SV-98 is a Russian-made sniper rifle that was based on a civillian sport shooting rifle by Izhmash. \nAccording to the manufacturer, the rifle can be used to engage targets up to 1000 meters. But that requires match ammunition, which is hard to find in the Zone. \nEven without a sight or suppressor, the rifle is a substantial load."
-ITEM.model = ("models/weapons/w_sv98_scopeless.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_sv98_w.mdl"
 ITEM.class = "cw_sv98"
 ITEM.weaponCategory = "primary"
 ITEM.price = 38500
 ITEM.width = 6
 ITEM.height = 1
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_nightforce_nxs","md_reflex","md_saker","md_foregrip"}
+ITEM.validAttachments = {"md_saker"}
 
 ITEM.bulletweight = 0.022
 ITEM.unloadedweight = 5.8
@@ -33,7 +33,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(2.152, -5.054, -3.132),
-						["Model"] = "models/weapons/w_sv98_scopeless.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_sv98_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,
@@ -61,4 +61,10 @@ ITEM.pacData = {
 		["EditorExpand"] = true,
 	},
 },
+}
+
+ITEM.iconCam = {
+	pos = Vector(10.5, -205, 4.2),
+	ang = Angle(0, 90, 0),
+	fov = 19,
 }

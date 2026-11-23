@@ -1,13 +1,13 @@
 ITEM.name = "AK74"
 ITEM.description= "A soviet-designed assault rifle chambered for 5.45x39mm."
 ITEM.longdesc = "The AK-74 is the replacement for the AKM and the most notable difference between the two is the drop in caliber from 7.62x39mm to 5.45x39mm.\nThis means the recoil is less intense but the penetration of the bullet also suffers slightly.\nThe 5.45x39mm cartridge is popular with many stalkers since it takes care of mutant and armored humans alike."
-ITEM.model = "models/weapons/w_ops_ak74.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak74.mdl"
 ITEM.class = "cw_ak74"
 ITEM.weaponCategory = "primary"
 ITEM.price = 15000
 ITEM.width = 5
 ITEM.height = 2
-ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
+ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.011
 ITEM.unloadedweight = 3.07
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(10, -205, 2),
-	ang = Angle(0, 90, 4.5),
-	fov = 12.5,
+	pos = Vector(6.9, -205, 0.7),
+	ang = Angle(0, 90, 0),
+	fov = 10.4,
 }
 
 ITEM.pacData = {
@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Model"] = "models/weapons/w_ops_ak74.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_ak74.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] =	Vector(11.522, -4.244, -1.16),

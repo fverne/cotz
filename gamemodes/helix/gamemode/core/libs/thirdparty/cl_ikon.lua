@@ -146,7 +146,9 @@ function ikon:renderHook()
 	xpcall(function()
 			render.OverrideAlphaWriteEnable(true, true) -- some playermodel eyeballs will not render without this
 			render.SetWriteDepthToDestAlpha(false)
-			render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+			-- COTZ: colour must overwrite, not add; additive colour let earlier-drawn hidden meshes
+			-- (e.g. a magazine inside a receiver) bleed through later front faces. Alpha stays additive.
+			render.OverrideBlend(true, BLEND_ONE, BLEND_ZERO, BLENDFUNC_ADD, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 			render.SuppressEngineLighting(true)
 			render.Clear(0, 0, 0, 0, true, true)
 

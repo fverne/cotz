@@ -1,13 +1,13 @@
 ITEM.name = "AK-12"
 ITEM.description= "A Russian assault rifle. Fires 5.45x39mm."
 ITEM.longdesc = "The AK-12, also known as the AK-200, is the newest member of the AK family.\nWhile the Russian army had no interest in purchasing any of these because of their massive supply of AK-74's, the AK-12 is still a highly modular and effective weapon platform.\nThis rifle is rare to find, but easy to keep in good condition and easy to find ammunition for."
-ITEM.model = "models/weapons/w_rif_ak12.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak12.mdl"
 ITEM.class = "cw_ak12"
 ITEM.weaponCategory = "primary"
 ITEM.price = 29600
 ITEM.width = 5
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.011
 ITEM.unloadedweight = 3.3
@@ -23,9 +23,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(8.8999996185303, -205, 0),
-	ang = Angle(0, 90, 2.3529412746429),
-	fov = 11.5,
+	pos = Vector(7.3, -205, 0.9),
+	ang = Angle(0, 90, 0),
+	fov = 10.3,
 }
 
 ITEM.pacData = {
@@ -38,7 +38,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Model"] = "models/weapons/w_rif_ak12.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_ak12.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] =	Vector(12, -4, -3),

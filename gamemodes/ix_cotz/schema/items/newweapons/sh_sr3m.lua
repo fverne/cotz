@@ -1,13 +1,13 @@
 ITEM.name = "SR-3M 'Vikhr'"
 ITEM.description= "A special forces assault rifle chambered for 9x39mm."
 ITEM.longdesc = "The SR-3M 'Vikhr' is based on the AS 'Val' silenced assault rifle but lacks an integral suppressor and has a newly-designed folding stock and cocking handle for ease of concealed carry.\nThe iron sights have also been relocated to the upper front handguard as opposed to being located on the suppressor, apparently for when the gun is used without the suppressor attached."
-ITEM.model = ("models/weapons/w_dmg_vikhr.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_vihr_w.mdl"
 ITEM.class = "cw_sr3m"
 ITEM.weaponCategory = "primary"
 ITEM.price = 45000
 ITEM.width = 4
 ITEM.height = 2
-ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_pso1","md_reflex","md_pbs1","md_foregrip"}
+ITEM.validAttachments = {"md_kobra","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_pso1","md_reflex","md_pbs1", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.023
 ITEM.unloadedweight = 2.2
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(11, 200, -1.8999999761581),
-	ang = Angle(0, 270, 10),
-	fov = 10,
+	pos = Vector(0.6, -205, 3.5),
+	ang = Angle(0, 90, 0),
+	fov = 7.2,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(-12, 0, 180),
 						["Position"] = Vector(-2.7, -4.3, -6.3),
-						["Model"] = "models/weapons/w_dmg_vikhr.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_vihr_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

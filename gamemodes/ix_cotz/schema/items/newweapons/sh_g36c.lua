@@ -1,13 +1,13 @@
 ITEM.name = "HK G36C"
 ITEM.description= "An assault rifle that fires 5.56x45mm rounds."
 ITEM.longdesc = "This subcarbine model is a further development of the G36K.\nIt has a shorter barrel than the G36K, and a four-prong open-type flash hider.\nThe extremely short barrel forced designers to move the gas block closer to the muzzle end and reduce the length of the gas piston operating rod.\nThe handguard and stock were also shortened and the fixed carry handle (with optics) was replaced with a carrying handle with an integrated Picatinny rail."
-ITEM.model = "models/weapons/cw20_g36c.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_g36k_w.mdl"
 ITEM.class = "cw_g36c"
 ITEM.weaponCategory = "primary"
 ITEM.price = 24900
 ITEM.width = 4
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker","md_foregrip"}
+ITEM.validAttachments = {"md_saker"}
 
 ITEM.bulletweight = 0.012
 ITEM.unloadedweight = 2.82
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(6.5, -205, 1.3999999761581),
+	pos = Vector(4.7, -205, 5.9),
 	ang = Angle(0, 90, 0),
-	fov = 9,
+	fov = 9.2,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
 						["Position"] = Vector(14.673, -4.309, -1.334),
-						["Model"] = "models/weapons/cw20_g36c.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_g36k_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

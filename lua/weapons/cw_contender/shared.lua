@@ -40,7 +40,7 @@ if CLIENT then
 	SWEP.LeupoldPos = Vector(-2.81, 0, 0.4)
 	SWEP.LeupoldAng = Vector(0, 0, 0)
 	
-	SWEP.MicroT1Pos = Vector(-2.82, 0, 0.48)
+	SWEP.MicroT1Pos = Vector(-2.809, 0, 0.439)
 	SWEP.MicroT1Ang = Vector(0, 0, 0)	
 
 	SWEP.AlternativePos = Vector(-2.81, 0, 0)

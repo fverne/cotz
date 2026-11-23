@@ -175,11 +175,7 @@ ITEM:Hook("drop", function(item)
 			weapon.ixItem = nil
 
 			if not weapon.ixAmmoRestorePending then
-				if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-					item:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
-				else
-					item:SetData("ammoType", nil)
-				end
+				item:SetData("ammoType", item:GetAmmoSubtype(ammoType))
 
 				item:SetData("ammo", weapon:Clip1())
 			end
@@ -426,11 +422,7 @@ function ITEM:Unequip(client, bPlaySound, bRemoveItem)
 
 		if not weapon.ixAmmoRestorePending then
 			self:SetData("ammo", weapon:Clip1())
-			if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-				self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
-			else
-				self:SetData("ammoType", nil)
-			end
+			self:SetData("ammoType", self:GetAmmoSubtype(ammoType))
 		end
 		self:SetData("durability", weapon:GetWeaponDurability())
 		self:SetData("wear", weapon:GetWeaponWear())
@@ -543,10 +535,24 @@ end
 function ITEM:GetWeaponAmmoType(weapon)
 	-- CW attachments update Primary.Ammo before the engine ammo ID refreshes on deploy.
 	if weapon.CW20Weapon and weapon.Primary and weapon.Primary.Ammo then
-		return game.GetAmmoID(weapon.Primary.Ammo)
+		local ammoID = game.GetAmmoID(weapon.Primary.Ammo)
+
+		-- Unregistered names (e.g. "none" on melee) return -1; defer to the engine's ammo type.
+		if ammoID ~= -1 then
+			return ammoID
+		end
 	end
 
 	return weapon:GetPrimaryAmmoType()
+end
+
+-- Returns the uppercase ammo subtype (e.g. "AP" from "9x18 -AP-"), or nil when the ammo has none.
+function ITEM:GetAmmoSubtype(ammoType)
+	local ammoName = game.GetAmmoName(ammoType)
+
+	if not ammoName or string.sub(ammoName, -1) ~= "-" then return end
+
+	return string.upper(string.sub(ammoName, -3, -2))
 end
 
 function ITEM:OnSave()
@@ -561,11 +567,7 @@ function ITEM:OnSave()
 
 		local ammoType = self:GetWeaponAmmoType(weapon)
 
-		if string.sub(game.GetAmmoName(ammoType), -1) == "-" then
-			self:SetData("ammoType", string.upper(string.sub(game.GetAmmoName(ammoType), -3, -2)))
-		else
-			self:SetData("ammoType", nil)
-		end
+		self:SetData("ammoType", self:GetAmmoSubtype(ammoType))
 	end
 end
 

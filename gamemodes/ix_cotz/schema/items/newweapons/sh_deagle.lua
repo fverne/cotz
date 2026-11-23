@@ -1,7 +1,7 @@
 ITEM.name = "IMI Desert Eagle"
 ITEM.description= "A large semi-automatic pistol chambered for .50 AE."
 ITEM.longdesc = "The IMI Desert Eagle is a semi-automatic handgun notable for chambering the largest centerfire cartridge of any magazine fed, self-loading pistol. It has a unique design with a triangular barrel and large muzzle.\nThe Desert Eagle uses a gas-operated mechanism normally found in rifles, as opposed to the short recoil or blow-back designs most commonly seen in semi-automatic pistols.\nThe advantage of the gas operation is that it allows the use of far more powerful cartridges than traditional semi-automatic pistol designs.\nThus it allows the Desert Eagle to compete in an area that had previously been dominated by magnum revolvers."
-ITEM.model = "models/weapons/w_pist_deagle.mdl"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_desert_eagle_w.mdl"
 ITEM.class = "cw_deagle"
 ITEM.weaponCategory = "secondary"
 ITEM.price = 14000
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(4, -205, 3.7000000476837),
+	pos = Vector(2.7, -205, 3.3),
 	ang = Angle(0, 90, 0),
-	fov = 4.5,
+	fov = 3.5,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_pist_deagle.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_desert_eagle_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(-9.88, 5.552, -2.062),

@@ -1,13 +1,13 @@
 ITEM.name = "SIG SG 552"
 ITEM.description= "A Swiss assault rifle. Fires 5.56x45mm."
 ITEM.longdesc = "The Sig 552 is the carbine version of the 550 rifle, often agreed to be one of the best modern assault rifles. It's accurate, reliable and easy to use. \nIt's high price and rather rare match ammunition has put many STALKERs off from using this weapon, instead choosing a more common alternative. It has a 700 round per minute rate of fire."
-ITEM.model = ("models/weapons/w_rif_tg552.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_sig552_w.mdl"
 ITEM.class = "cw_sg552"
 ITEM.weaponCategory = "primary"
 ITEM.price = 24000
 ITEM.width = 5
 ITEM.height = 2
-ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker"}
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_saker", "md_nightforce_nxs"}
 
 ITEM.bulletweight = 0.012
 ITEM.unloadedweight = 3.2
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(7.5, -205, 1),
+	pos = Vector(2.2, -205, 3.7),
 	ang = Angle(0, 90, 0),
-	fov = 10.5,
+	fov = 7.1,
 }
 
 ITEM.pacData = {
@@ -34,7 +34,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Model"] = "models/weapons/w_rif_tg552.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_sig552_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["Position"] = Vector(12, -4.195, -1.495),

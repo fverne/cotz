@@ -1,7 +1,7 @@
 ITEM.name = "TOZ-34 Hunting Shotgun"
 ITEM.description= "A break-action hunting shotgun firing 12 gauge shells."
 ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThe cheap price and long barrel makes it useful for engaging animals and unarmed targets at ranges up to fifty meters.\nThe over-and-under barrel placement helps to place shots in the center, but makes the gun more mechanically complex."
-ITEM.model = ("models/weapons/w_sv10.mdl")
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_w.mdl"
 ITEM.class = "cw_toz34"
 ITEM.weaponCategory = "primary"
 ITEM.price = 7500
@@ -10,7 +10,6 @@ ITEM.height = 1
 ITEM.canAttach = true
 ITEM.validAttachments = {
 	"md_nightforce_nxs",
-	"md_kobra",
 	"md_microt1",
 	"md_eotech",
 	"md_aimpoint",
@@ -31,9 +30,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(4, 200, -0.5),
-	ang = Angle(0, 270, 0),
-	fov = 14,
+	pos = Vector(8.3, -205, 4.2),
+	ang = Angle(0, 90, 0),
+	fov = 12.4,
 }
 
 ITEM.pacData = {
@@ -47,7 +46,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(0.066, -5.077, -3.147),
-						["Model"] = "models/weapons/w_sv10.mdl",
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,
