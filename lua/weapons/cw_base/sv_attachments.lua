@@ -3,6 +3,19 @@ function SWEP:attachSpecificAttachment(attachmentName)
 	for category, data in pairs(self.Attachments) do
 		for key, attachment in ipairs(data.atts) do
 			if attachment == attachmentName then
+				-- Inventory-managed Anomaly hardware is already validated and owned by this item.
+				local item = self.ixItem
+				if item and item.anomalyInventoryAttachments then
+					if not table.HasValue(item.validAttachments, attachmentName) then return end
+					if not table.HasValue(item:GetData("attachments", {}), attachmentName) then return end
+					if self.ActiveAttachments[attachmentName] then return end
+
+					local definition = CustomizableWeaponry:findAttachment(attachmentName)
+					if not definition then return end
+
+					return self:_attach(category, key, definition)
+				end
+
 				self:attach(category, key - 1, false)
 			end
 		end
@@ -10,6 +23,10 @@ function SWEP:attachSpecificAttachment(attachmentName)
 end
 
 function SWEP:detachSpecificAttachment(attachmentName)
+	if self.ixItem and self.ixItem.anomalyInventoryAttachments and not self.ActiveAttachments[attachmentName] then
+		return
+	end
+
 	-- since we don't know the category, we'll just have to iterate over all attachments, find the one we want, and detach it there
 	for category, data in pairs(self.Attachments) do
 		for key, attachment in ipairs(data.atts) do
@@ -171,6 +188,8 @@ local function CW20_Attach(ply, com, args)
 		return
 	end
 
+	if wep:GetNWBool("cotz/anomaly/inventory-attachments", false) then return end
+
 	if CustomizableWeaponry.callbacks.processCategory(wep, "disableInteractionMenu") then
 		return
 	end
@@ -235,6 +254,8 @@ local function CW20_Customize(ply, com, args)
 	if not IsValid(wep) or not wep.CW20Weapon then
 		return
 	end
+
+	if wep:GetNWBool("cotz/anomaly/inventory-attachments", false) then return end
 
 	if wep:canCustomize() then
 		wep:toggleCustomization()

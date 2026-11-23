@@ -44,14 +44,13 @@ ITEM.functions.use = {
 			if (inv) then
 				local items = inv:GetItems()
 
-				for k, v in pairs(items) do
-					if (v.isWeapon and v.canAttach) then
+				for _, weapon in pairs(items) do
+					if weapon.isWeapon and weapon.canAttach
+						and table.HasValue(weapon.validAttachments, item.attachName) then
 						table.insert(targets, {
-							name = L(v.name),
-							data = {v:GetID()},
+							name = L(weapon.name),
+							data = {weapon:GetID()},
 						})
-					else
-						continue
 					end
 				end
 			end
@@ -67,48 +66,36 @@ ITEM.functions.use = {
 		local char = client:GetCharacter()
 		local inv = char:GetInventory()
 		local items = inv:GetItems()
-		local target = data[1]
-		
-		for k, invItem in pairs(items) do
-			if (data[1]) then
-				if (invItem:GetID() == data[1]) then
-					target = invItem
+		local target = istable(data) and items[data[1]]
+		if not target or not target.isWeapon or not target.canAttach then
+			client:Notify("No compatible weapon selected.")
+			return false
+		end
 
-					break
-				end
-			else
-				client:Notify("No weapon selected.")
+		if not table.HasValue(target.validAttachments, item.attachName) then
+			client:Notify(target.name .. " does not support this attachment.")
+			return false
+		end
+
+		local attachments = target:GetData("attachments", {})
+		for _, attachment in ipairs(attachments) do
+			local definition = ix.weapontables.attachments[attachment]
+			if definition and definition.slot == item.attachSlot then
+				client:Notify("Weapon already has an attachment of this type installed.")
 				return false
 			end
 		end
-		
-		targetAttach = target:GetData("attachments") or {}
-		if targetAttach then
-			for k = 1, #targetAttach do
-				if ix.weapontables.attachments[targetAttach[k]].slot == item.attachSlot then
-					client:Notify("Weapon already has an attachment of this type installed.")
-					return false
-				end
-			end
+
+		ix.weight.Update(char)
+		attachments[#attachments + 1] = item.attachName
+		target:SetData("attachments", attachments)
+		client:Notify("Installed " .. item.name .. " on " .. target.name)
+
+		local weapon = client:GetWeapon(target.class)
+		if IsValid(weapon) and weapon.ixItem == target then
+			weapon:attachSpecificAttachment(item.attachName)
 		end
 
-		for k = 1, #target.validAttachments do
-			if target.validAttachments[k] == item.attachName then
-				ix.weight.Update(char)
-				table.Add(targetAttach,{item.attachName})
-				target:SetData("attachments", targetAttach)
-				client:Notify("Installed "..item.name.." on "..target.name)
-				
-				local wepon = client:GetWeapon(target.class)
-                -- If you're holding right weapon, just mod it out.
-                if (IsValid(wepon) and wepon:GetClass() == target.class) then
-                    wepon:attachSpecificAttachment(item.attachName)
-				end
-				return true
-			end
-		end
-
-		client:Notify(target.name.." does not support this attachment.")
-		return false
+		return true
 	end,
 }

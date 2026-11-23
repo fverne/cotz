@@ -608,6 +608,8 @@ function SWEP:isReloading()
 end
 
 function SWEP:canOpenInteractionMenu()
+	if self:GetNWBool("cotz/anomaly/inventory-attachments", false) then return false end
+
 	if self.dt.State == CW_CUSTOMIZE then
 		return true
 	end

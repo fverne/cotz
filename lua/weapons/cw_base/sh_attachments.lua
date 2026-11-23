@@ -3,6 +3,19 @@
 ]]--
 SWEP.AttachSoundDelay = 0
 
+local function syncWorldAttachments(weapon)
+	local active = {}
+
+	for name, attached in pairs(weapon.ActiveAttachments) do
+		if attached then
+			active[#active + 1] = name
+		end
+	end
+
+	table.sort(active)
+	weapon:SetWorldAttachments(table.concat(active, " "))
+end
+
 function SWEP:_attach(cur, curPos, inherit)
 	self.LastPreset = nil
 	local attTable = self.Attachments[cur]
@@ -138,6 +151,10 @@ function SWEP:_attach(cur, curPos, inherit)
 
 	CustomizableWeaponry.callbacks.processCategory(self, "postAttachAttachment", cur, curPos)
 
+	if SERVER then
+		syncWorldAttachments(self)
+	end
+
 	return true
 end
 
@@ -151,14 +168,14 @@ function SWEP:resetPostDetach(att, attCategory)
 		self.ZoomAmount = self.ZoomAmount_Orig
 		self.reticleFunc = nil
 
-		if self.SightWithRail then
-			if self.AttachmentModelsVM.md_rail then
-				-- make the rail inactive in case the weapon uses it for the sights
-				self.AttachmentModelsVM.md_rail.active = false
+		if CLIENT and self.SightWithRail then
+			local rail = self.AttachmentModelsVM and self.AttachmentModelsVM.md_rail
+			if rail then
+				rail.active = false
 			end
 
 			if self.RailBGs then
-				self.CW_VM:SetBodygroup(self.RailBGs.main, self.RailBGs.off)
+				self:setBodygroup(self.RailBGs.main, self.RailBGs.off)
 			end
 		end
 
@@ -208,6 +225,10 @@ function SWEP:_detach(category, pos, skipDependencyCheck)
 	end
 
 	self:resetPostDetach(foundAtt, att)
+
+	if SERVER then
+		syncWorldAttachments(self)
+	end
 
 	-- only skip the dependency check if we're told to do so
 	if not skipDependencyCheck then

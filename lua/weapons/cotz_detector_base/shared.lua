@@ -16,7 +16,8 @@ SWEP.IsCotzDetector = true
 
 SWEP.Slot = 4
 SWEP.SlotPos = 1
-SWEP.HoldType = "idle_melee"
+-- Helix lowers "slam" to "normal" (device at the side); raised, it holds the detector forward at chest height.
+SWEP.HoldType = "slam"
 SWEP.ViewModelFOV = 70
 SWEP.ViewModelFlip = false
 -- The Devices of Anomaly Redone viewmodels carry ValveBiped arm bones for the player's c_hands.

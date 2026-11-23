@@ -16,6 +16,8 @@ attachment slots. Saved weapons and loot tables are unaffected. The conversion a
   model offsets and selection icon. It then adds the `_vmrecoil` variant's settings: Lua viewmodel recoil, bolt or slide
   bone offsets and, where the variant has one, an empty `fireAnimFunc`. Manually operated actions keep
   their firing animation.
+- The world model pitch is raised from the pack's -5 to -10 (-7 for pistol hold types) in `SWEP.WMAng`.
+  At -5 the third-person gun aimed below the player's aim, so it clipped the support hand and the stock the face.
 - Reloads play at the Anomaly speed (`ReloadSpeed = 1`), so the reload sounds stay in sync with the
   animation. Reload durations therefore follow the Anomaly animations rather than the old COTZ values.
 - Items with that class take the Anomaly world model, including in the back-slot PAC part, and the

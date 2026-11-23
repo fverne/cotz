@@ -21,6 +21,13 @@ ITEM.canAttach = true
 
 ITEM.unloadedweight = 0
 
+function ITEM:GetWeight()
+	if self.bulletweight == nil then
+		return self:GetData("weight", self.weight)
+	end
+
+	return self:GetData("weight", self.unloadedweight) + self.bulletweight * self:GetData("ammo", 0)
+end
 
 -- Inventory drawing
 if (CLIENT) then
@@ -464,6 +471,10 @@ function ITEM:CanTransfer(oldInventory, newInventory)
 end
 
 function ITEM:RestoreWeaponAmmo(client, weapon)
+	if self.anomalyInventoryAttachments then
+		weapon:SetNWBool("cotz/anomaly/inventory-attachments", true)
+	end
+
 	weapon.ixAmmoRestorePending = true
 	timer.Simple(0.1, function()
 		if not IsValid(client) or not client:Alive() or not IsValid(weapon) then return end
@@ -637,10 +648,9 @@ ITEM.functions.detach = {
 			end	
 
 			
-			local wepon = item.player:GetWeapon(item.class)
-			-- If you're holding right weapon, just mod it out.
-            if (IsValid(wepon) and wepon:GetClass() == item.class) then
-                wepon:detachSpecificAttachment(data[1])
+			local weapon = item.player:GetWeapon(item.class)
+			if IsValid(weapon) and weapon.ixItem == item then
+				weapon:detachSpecificAttachment(data[1])
 			end
 			item:SetData("attachments", curattach)
 			ix.weight.Update(item.player:GetCharacter())

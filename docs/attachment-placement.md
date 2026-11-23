@@ -65,10 +65,19 @@ the donor's aim relative to its ironsights. New scopes also receive zeroed align
 
 New sights that cannot be fitted are left out of the export and reported as skipped: aiming without an
 offset would break. This happens when a sight faces away from the sightline, or the donor has no aim for
-it. Mirrored viewmodels and third-person models need manual setup.
+it. The placement editor cannot fit mirrored viewmodels.
 
 The scope render camera follows the player's pitch and yaw. Keep model and mount orientation in the
 attachment placement, and use the scope camera alignment fields for sight calibration and lens roll.
+
+## Third-person display
+
+CW copies installed attachment models and their offsets from the first-person idle pose, using the
+muzzle points to align them with the worldmodel. Where both models have a `wpn_body` bone, the distance
+from that bone to the muzzle estimates the difference in scale. Rail adapters follow the installed
+sight. The server replicates the installed attachment list so other players can see changes and
+clients entering visibility can draw the current setup. Placement is approximate, especially on
+legacy model pairs with differently oriented muzzle points.
 
 ## Applying exports
 

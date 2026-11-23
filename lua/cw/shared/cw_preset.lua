@@ -366,6 +366,8 @@ function CustomizableWeaponry.preset:load(data, name_sv)
 		return false
 	end
 
+	if self:GetNWBool("cotz/anomaly/inventory-attachments", false) then return false end
+
 	-- can't load if preset system is disabled
 	if not CustomizableWeaponry.preset.enabled then
 		return

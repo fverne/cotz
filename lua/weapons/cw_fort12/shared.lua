@@ -16,7 +16,7 @@ if CLIENT then
 	SWEP.DontHoldWhenReloading = true
 	SWEP.DisableSprintViewSimulation = true
 
-	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1.5, roll = 3, forward = 1, pitch = 4}
+	SWEP.LuaVMRecoilAxisMod = {vert = 0.5, hor = 0.75, roll = 1, forward = 0.5, pitch = 1}
 	SWEP.CustomizationMenuScale = 0.01
 
 end
@@ -28,6 +28,7 @@ if CLIENT then
 		["md_microt1"] = {
 			model = "models/cw2/attachments/microt1.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(-0.005451, -0.738341, 2.961673),
 			angle = Angle(0.004425, -0.000004, -89.920958),
 			size = Vector(0.4, 0.4, 0.4),
@@ -35,6 +36,7 @@ if CLIENT then
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(-0.256051, 10.897281, 14.228674),
 			angle = Angle(-89.920834, 86.79607, -3.203929),
 			size = Vector(1.081081, 1.081081, 1.081081),
@@ -42,6 +44,7 @@ if CLIENT then
 		["md_rmr"] = {
 			model = "models/cw2/attachments/pistolholo.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(0.403819, 5.563899, 8.910812),
 			angle = Angle(-89.920834, 86.79607, -3.203929),
 			size = Vector(1.081081, 1.081081, 1.081081),
@@ -49,6 +52,7 @@ if CLIENT then
 		["md_rail"] = {
 			model = "models/cw2/attachments/pistolrail.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(-0.005835, 2.222475, 1.370906),
 			angle = Angle(-89.998441, 90, 0),
 			size = Vector(0.17, 0.17, 0.17),
@@ -215,7 +219,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_fort_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1.3, 4.4206, -3.3982)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-7, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.FORT.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.FORT.FIRE_SILENCED"
 SWEP.LuaViewmodelRecoil = true

@@ -53,6 +53,11 @@ COPIED_FIELDS = (
     "Shell", "WM", "DrawTraditionalWorldModel", "WMPos", "WMAng", "FireSound", "FireSoundSuppressed",
 )
 
+# World model pitch (SWEP.WMAng[1]) replacing the pack's -5, which aims low and clips the hands and face.
+# More negative raises the muzzle around the right hand bone.
+WM_PITCH = -10
+WM_PITCH_PISTOL = -7
+
 DEFAULT_SIGHT_MODELS = {
     "cw_anomaly_m16": "wpn_m16_ironsight_hud",
     "cw_anomaly_p90": "wpn_p90_sight_hud",
@@ -194,6 +199,13 @@ def client_block(text):
     return text[match.end():match.end() + end.start()]
 
 
+def world_model_angle(text, value):
+    """Raise the pack's world model pitch so the gun follows the player's aim instead of sagging into the hands."""
+    pistol = re.search(r'^[ \t]*SWEP\.(?:Normal)?HoldType[ \t]*=[ \t]*"pistol"', text, re.M)
+    pitch = WM_PITCH_PISTOL if pistol else WM_PITCH
+    return re.sub(r"^Vector\(\s*-?[\d.]+\s*,", "Vector(%d," % pitch, value)
+
+
 def reskin_weapon(text, anomaly_text, variant_text, anomaly_class, aim_fields):
     anomaly = anomaly_values(anomaly_text)
     variant = anomaly_values(variant_text, shared_only=True)
@@ -207,6 +219,8 @@ def reskin_weapon(text, anomaly_text, variant_text, anomaly_class, aim_fields):
     text = re.sub(r"[ \t]+\n", "\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text).rstrip() + "\n"
 
+    if "WMAng" in anomaly:
+        anomaly["WMAng"] = world_model_angle(text, anomaly["WMAng"])
     shared = ["SWEP.%s = %s" % (name, anomaly[name]) for name in COPIED_FIELDS if name in anomaly]
     shared += ["SWEP.%s = %s" % (name, value) for name, value in variant.items() if name not in VARIANT_SKIPPED]
 

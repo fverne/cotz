@@ -33,7 +33,7 @@ if CLIENT then
 	SWEP.HUD_MagText = "CYLINDER: "
 	SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
 
-	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1.5, roll = 3, forward = 1, pitch = 4}
+	SWEP.LuaVMRecoilAxisMod = {vert = 0.5, hor = 0.75, roll = 1, forward = 0.5, pitch = 1}
 	SWEP.CustomizationMenuScale = 0.01
 	SWEP.DisableSprintViewSimulation = true
 end

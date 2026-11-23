@@ -28,6 +28,7 @@ if CLIENT then
 		["md_microt1"] = {
 			model = "models/cw2/attachments/microt1.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(-0.004205, -0.977604, 2.110452),
 			angle = Angle(0.005616, -0.00006, -89.306982),
 			size = Vector(0.4, 0.4, 0.4),
@@ -35,6 +36,7 @@ if CLIENT then
 		["md_eotech"] = {
 			model = "models/wystan/attachments/2otech557sight.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(-0.255283, 9.910851, 12.99582),
 			angle = Angle(-89.306959, 89.535656, -0.464318),
 			size = Vector(1, 1, 1),
@@ -42,6 +44,7 @@ if CLIENT then
 		["md_rmr"] = {
 			model = "models/cw2/attachments/pistolholo.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(0.345304, 4.349781, 7.064015),
 			angle = Angle(-89.306959, 89.535656, -0.464318),
 			size = Vector(0.9, 0.9, 0.9),
@@ -49,6 +52,7 @@ if CLIENT then
 		["md_rail"] = {
 			model = "models/cw2/attachments/pistolrail.mdl",
 			bone = "slide",
+			staticBone = "wpn_body",
 			pos = Vector(-0.004589, 1.986518, 0.525368),
 			angle = Angle(-89.999324, 90, 0),
 			size = Vector(0.17, 0.17, 0.17),
@@ -213,7 +217,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_hpsa_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1.3, 4.4817, -2.7009)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-7, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.HPSA.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.HPSA.FIRE_SILENCED"
 SWEP.LuaViewmodelRecoil = true

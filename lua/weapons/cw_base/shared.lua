@@ -204,7 +204,7 @@ if CLIENT then
 	SWEP.breathReleaseWait = 0
 
 	SWEP.SwayIntensity = 1
-	SWEP.AimSwayIntensity = 0.6
+	SWEP.AimSwayIntensity = 0
 	SWEP.HUD_3D2DScale = 0.015
 
 	SWEP.PresetResults = {}
@@ -527,6 +527,7 @@ end
 function SWEP:SetupDataTables()
 	self:NetworkVar("Int", 0, "State")
 	self:NetworkVar("Int", 1, "Shots")
+	self:NetworkVar("String", 0, "WorldAttachments")
 
 	self:NetworkVar("Float", 0, "HolsterDelay")
 

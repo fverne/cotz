@@ -20,7 +20,6 @@ if CLIENT then
 	SWEP.DontHoldWhenReloading = false
 
 	SWEP.DrawCrosshair = false
-	SWEP.AimSwayIntensity = 0.6
 
 	SWEP.CustomizationMenuScale = 0.0135
 
@@ -267,7 +266,7 @@ SWEP.Shell = "mainshell"
 SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_hk416_w.mdl"
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WMPos = Vector(-1, 4.6324, -4.4206)
-SWEP.WMAng = Vector(-5, 0, 180)
+SWEP.WMAng = Vector(-10, 0, 180)
 SWEP.FireSound = "TFA_ANOMALY.HK416.FIRE"
 SWEP.FireSoundSuppressed = "TFA_ANOMALY.HK416.FIRE_SILENCED"
 SWEP.LuaViewmodelRecoil = true
