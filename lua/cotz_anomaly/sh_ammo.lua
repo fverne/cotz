@@ -1,0 +1,1 @@
+-- Ammunition is supplied by COTZ; no Anomaly ammo types are registered.

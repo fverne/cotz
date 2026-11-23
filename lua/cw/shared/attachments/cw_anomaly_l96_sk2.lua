@@ -1,0 +1,44 @@
+-- Original attachment configuration: Flaymi / Anomaly pack authors. CW adapter: COTZ.
+
+local att = {}
+
+att.name = "cw_anomaly_l96_sk2"
+
+att.displayName = "L96 AWSM"
+
+att.displayNameShort = "L96 AWSM"
+
+att.anomalyEffect = {
+	 MaterialTable_V = {
+	[1]	= "models/flaymi/stalker/anomaly/skins/l96/wpn_l96_sk2",
+	[2]	= "models/flaymi/stalker/anomaly/skins/l96/wpn_addon_scope_l96_sk2",
+	},
+	 MaterialTable_W = {
+	[1]	= "models/flaymi/stalker/anomaly/skins/l96/wpn_l96_sk2",
+	[2]	= "models/flaymi/stalker/anomaly/skins/l96/wpn_addon_scope_l96_sk2",
+	},
+}
+
+att.anomalyLauncher = {}
+
+if CLIENT then
+
+	att.displayIcon = surface.GetTextureID("entities/anomaly/addons/addon_l96_sk2")
+
+	att.description = {{t = "", c = CustomizableWeaponry.textColors.REGULAR}}
+
+end
+
+function att:attachFunc()
+
+	self:ApplyAnomalyAttachments("cw_anomaly_l96_sk2", true)
+
+end
+
+function att:detachFunc()
+
+	self:ApplyAnomalyAttachments("cw_anomaly_l96_sk2", false)
+
+end
+
+CustomizableWeaponry:registerAttachment(att)

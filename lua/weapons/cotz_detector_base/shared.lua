@@ -498,13 +498,27 @@ if SERVER then
 end
 
 local rotateYaw = Angle()
-local LEFT_ARM_BONE_PREFIX = "ValveBiped.Bip01_L_"
+-- The Anomaly viewmodels carry two left-arm chains: the ValveBiped bones that c_hands merges with,
+-- and the animation rig (l_*, bip01_l_*) that the model's own hands mesh is weighted to.
+local LEFT_ARM_BONE_PREFIXES = {"valvebiped.bip01_l_", "bip01_l_", "l_"}
 -- NaN hides weighted vertices instead of collapsing them into visible spikes.
 local HIDDEN_ARM_SCALE = Vector(0 / 0, 0 / 0, 0 / 0)
 
+local function isLeftArmBone(name)
+	name = string.lower(name)
+
+	for _, prefix in ipairs(LEFT_ARM_BONE_PREFIXES) do
+		if string.StartWith(name, prefix) then
+			return true
+		end
+	end
+
+	return false
+end
+
 local function hideLeftArm(model)
 	for bone = 0, model:GetBoneCount() - 1 do
-		if string.StartWith(model:GetBoneName(bone), LEFT_ARM_BONE_PREFIX) then
+		if isLeftArmBone(model:GetBoneName(bone)) then
 			model:ManipulateBoneScale(bone, HIDDEN_ARM_SCALE)
 		end
 	end

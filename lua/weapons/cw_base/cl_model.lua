@@ -1346,6 +1346,12 @@ function SWEP:performViewmodelMovement()
 	CT = UnPredictedCurTime()
 	vm = self.CW_VM
 
+	-- PostDrawViewModel can run before the custom viewmodel exists, e.g. while the weapon is still
+	-- being equipped. drawViewModel skips the same case.
+	if not IsValid(vm) then
+		return
+	end
+
 	self:suppressIdleSwayWhileAiming(vm)
 
 	self.Cycle = vm:GetCycle()
