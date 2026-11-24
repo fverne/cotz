@@ -93,16 +93,22 @@ SWEP.LuaViewmodelRecoil = false
 SWEP.Animations = {
 	fire = {"fire1"}, //base_fire_start
 	reload_start = "reload_start",
+	reload_start_empty = "reload_start_empty",
 	insert = "reload",
+	insert_empty = "reload_empty",
 	reload_end = "reload_end",
+	reload_end_empty = "reload_end_empty",
 	idle = "idle", //base_idle
 	draw = "draw"}
 	
 SWEP.Sounds = {
 	
 	reload_start = {[1] = {time = 0.5, sound = "CW_W9422_BOLTBACK"}},
+	reload_start_empty = {{time = 0.5, sound = "CW_W9422_BOLTBACK"}},
 	reload = {[1] = {time = 0.4, sound = "CW_W9422_INSERT"}},
+	reload_empty = {{time = 0.375, sound = "CW_W9422_INSERT"}},
 	reload_end = {[1] = {time = 0.3, sound = "CW_W9422_BOLTFORWORD"}},
+	reload_end_empty = {{time = 0.583, sound = "CW_W9422_BOLTFORWORD"}},
 
 	fire1 = {
 	[1] = {time = 0.6, sound = "CW_W9422_BOLTBACK"},
@@ -174,9 +180,11 @@ SWEP.ReloadTime_Empty = 3.8
 SWEP.ReloadHalt = 2.7
 SWEP.ReloadHalt_Empty = 4.1
 */
-SWEP.ReloadStartTime = 0.6
+SWEP.ReloadStartTime = 0.57
+SWEP.ReloadStartTime_Empty = 0.57
 SWEP.InsertShellTime = 1
-SWEP.ReloadFinishWait = 0.6
+SWEP.ReloadFinishWait = 0.65
+SWEP.ReloadFinishWait_Empty = 0.95
 SWEP.ShotgunReload = true
 SWEP.AlwaysPlayReloadEnd = true
 

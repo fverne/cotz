@@ -126,8 +126,8 @@ SWEP.ADSFireAnim = true
 SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1.1
-SWEP.ReloadTime = 2.9
-SWEP.ReloadHalt = 2.9
+SWEP.ReloadTime = 2.97
+SWEP.ReloadHalt = 2.97
 
-SWEP.ReloadTime_Empty = 2.9
-SWEP.ReloadHalt_Empty = 2.9
+SWEP.ReloadTime_Empty = 2.97
+SWEP.ReloadHalt_Empty = 2.97

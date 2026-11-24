@@ -160,10 +160,10 @@ SWEP.DeployTime = 0.7
 SWEP.DrawSpeed = 0.98
 
 SWEP.ReloadSpeed = 0.95
-SWEP.ReloadTime = 1.82
-SWEP.ReloadTime_Empty = 2.6
-SWEP.ReloadHalt = 2.0
-SWEP.ReloadHalt_Empty = 3.1
+SWEP.ReloadTime = 3.28
+SWEP.ReloadTime_Empty = 3.28
+SWEP.ReloadHalt = 3.28
+SWEP.ReloadHalt_Empty = 3.28
 SWEP.SnapToIdlePostReload = true
 
 -- such a pain in the ass to fucking do this

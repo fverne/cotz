@@ -71,6 +71,7 @@ SWEP.TSGlass = Material("models/flaymi/stalker/anomaly/weapons/vssk/lense_rt")
 
 SWEP.Animations = {fire = {"anm_shots"},
 	reload = "anm_reload",
+	reload_empty = "anm_reload_empty",
 	idle = "anm_idle",
 	draw = "anm_show"}
 	
@@ -79,12 +80,8 @@ SWEP.Sounds = {anm_shots = {{time = 0.7, sound = "CW_L96_BOLTUP"},
 
 	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 
-	anm_reload = {{time = 0.6, sound = "CW_L96_MAGOUT"},
-	{time = 1.67, sound = "CW_FOLEY_LIGHT"},
-	{time = 1.6, sound = "CW_L96_MAGIN"},
-	{time = 2.86, sound = "CW_L96_BOLTPUSH"},
-	{time = 3.15, sound = "CW_L96_BOLTDOWN"},
-	{time = 3.3, sound = "CW_FOLEY_LIGHT"}}
+	anm_reload = {{time = 0, sound = "TFA_ANOMALY.VSSK.Reload"}},
+	anm_reload_empty = {{time = 0, sound = "TFA_ANOMALY.VSSK.Reload"}}
 }
 
 SWEP.SpeedDec = 35
@@ -134,10 +131,13 @@ SWEP.Damage = 650
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.42
-SWEP.ReloadTime_Empty = 2.42
-SWEP.ReloadHalt = 3.48
-SWEP.ReloadHalt_Empty = 3.48
+SWEP.ReloadChamberCuts = {
+	anm_reload = {from = 2.733333, to = 3.300000},
+}
+SWEP.ReloadTime = 3.633333
+SWEP.ReloadTime_Empty = 3.633333
+SWEP.ReloadHalt = 3.633333
+SWEP.ReloadHalt_Empty = 3.633333
 
 if CLIENT then
 	local old, x, y, ang

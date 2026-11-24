@@ -76,16 +76,23 @@ SWEP.Attachments = {["+reload"] = {header = "Ammo", offset = {700, 325}, atts = 
 
 SWEP.Animations = {fire = {"fire01", "fire02", "fire03"},
 	reload_start = "start",
+	reload_start_empty = "start_empty",
 	insert = "insert",
-	reload_end = "end",
+	reload_end = "end_nopump",
+	reload_end_empty = "end",
 	idle = "idle",
 	draw = "draw"}
 	
-SWEP.Sounds = {start_reload = {{time = 0.05, sound = "CW_FOLEY_LIGHT"}},
-	insert = {{time = 0.1, sound = "CW_M3SUPER90_INSERT"}},
+SWEP.Sounds = {start = {{time = 0.05, sound = "CW_FOLEY_LIGHT"}},
+	start_empty = {
+		{time = 0, sound = "CW_M3SUPER90_HANDLE"},
+		{time = 0.567, sound = "CW_M3SUPER90_INSERT"},
+		{time = 1.3, sound = "CW_M3SUPER90_PUMP"},
+	},
+	insert = {{time = 0.3, sound = "CW_M3SUPER90_INSERT"}},
 	
-	after_reload = {{time = 0.1, sound = "CW_M3SUPER90_PUMP"},
-	{time = 0.6, sound = "CW_FOLEY_LIGHT"}},
+	["end"] = {{time = 0.467, sound = "CW_M3SUPER90_HANDLE"},
+	{time = 0.667, sound = "CW_M3SUPER90_PUMP"}},
 	
 	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
 	{time = 0.55, sound = "CW_M3SUPER90_PUMP"}}}
@@ -138,10 +145,15 @@ SWEP.Damage = 35
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1.5
-SWEP.ReloadStartTime = 0.3
+SWEP.ReloadStartTime = 0.4
+SWEP.ReloadStartTime_Empty = 2.1
+SWEP.ReloadStartLoadsRound_Empty = true
+SWEP.ReloadStartChambersRound_Empty = true
 SWEP.InsertShellTime = 1
-SWEP.ReloadFinishWait = 1
+SWEP.ReloadFinishWait = 0.533333
+SWEP.ReloadFinishWait_Empty = 1
 SWEP.ShotgunReload = true
+SWEP.AlwaysPlayReloadEnd = true
 
 SWEP.Chamberable = true
 

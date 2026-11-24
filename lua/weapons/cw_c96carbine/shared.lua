@@ -174,10 +174,10 @@ SWEP.RecoilToSpreadAuto = 1
 SWEP.RecoilToSpreadSemi = -.25
 
 SWEP.ReloadSpeed = 1.3
-SWEP.ReloadTime = 2.3
-SWEP.ReloadHalt = 3
-SWEP.ReloadTime_Empty = 3.4
-SWEP.ReloadHalt_Empty = 4.2
+SWEP.ReloadTime = 3.09
+SWEP.ReloadHalt = 3.09
+SWEP.ReloadTime_Empty = 4.38
+SWEP.ReloadHalt_Empty = 4.38
 
 function SWEP:IndividualThink()
 	

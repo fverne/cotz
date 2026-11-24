@@ -150,6 +150,9 @@ SWEP.Sounds = {
 	},
 }
 SWEP.ReloadSpeed = 1
+SWEP.ReloadChamberCuts = {
+	anm_reload = {from = 2.533333, to = 4.133333},
+}
 SWEP.ReloadTime = 4.466667
 SWEP.ReloadTime_Empty = 4.466667
 SWEP.ReloadHalt = 4.466667

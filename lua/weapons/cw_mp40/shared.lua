@@ -171,10 +171,10 @@ SWEP.ADSFireAnim = true
 SWEP.RecoilToSpread = .2
 
 SWEP.ReloadSpeed = 1.1
-SWEP.ReloadTime = 2.225
-SWEP.ReloadHalt = 2.8
-SWEP.ReloadTime_Empty = 4
-SWEP.ReloadHalt_Empty = 4.4
+SWEP.ReloadTime = 3.0
+SWEP.ReloadHalt = 3.0
+SWEP.ReloadTime_Empty = 4.64
+SWEP.ReloadHalt_Empty = 4.64
 
 function SWEP:IndividualThink()
 

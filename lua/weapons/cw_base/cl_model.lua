@@ -93,7 +93,13 @@ function SWEP:FireAnimationEvent(pos, ang, event, name)
 end
 
 function SWEP:getAnimSeek()
-	return self.CW_VM:GetCycle() * self.CW_VM:SequenceDuration()
+	local seek = self.CW_VM:GetCycle() * self.CW_VM:SequenceDuration()
+	local cut = self.ActiveReloadChamberCut
+	if cut and self.ReloadChamberCutPassed then
+		seek = seek - (cut.to - cut.from)
+	end
+
+	return seek
 end
 
 function SWEP:CreateShell(sh)
@@ -830,6 +836,19 @@ end
 
 local cw_customhud_ammo = GetConVar("cw_customhud_ammo")
 
+local function advanceReloadChamberCut(weapon, vm)
+	local cut = weapon.ActiveReloadChamberCut
+	if not cut or weapon.ReloadChamberCutPassed then return end
+
+	local duration = vm:SequenceDuration()
+	local cycle = vm:GetCycle()
+	if duration <= 0 or cycle * duration < cut.from then return end
+
+	vm:SetCycle(math.min(1, cycle + (cut.to - cut.from) / duration))
+	vm:InvalidateBoneCache()
+	weapon.ReloadChamberCutPassed = true
+end
+
 function SWEP:_drawViewModel()
 	-- draw the viewmodel
 
@@ -840,6 +859,7 @@ function SWEP:_drawViewModel()
 	local POS = EyePos() - self.CW_VM:GetPos()
 
 	self.CW_VM:FrameAdvance(FrameTime())
+	advanceReloadChamberCut(self, self.CW_VM)
 	self.CW_VM:SetupBones()
 	self:CenterCotzOptic()
 	self.CW_VM:DrawModel()
@@ -1359,7 +1379,11 @@ function SWEP:performViewmodelMovement()
 	self.IsReloading = (self.Sequence == self.Animations.reload or self.Sequence == self.Animations.reload_empty or self.Sequence == self.Animations.reload_start or self.Sequence == self.Animations.reload_end)
 
 	if not self.IsReloading then
-		self.IsReloading = self.Sequence:find("insert")
+		self.IsReloading = self.Sequence == self.Animations.insert
+			or self.Sequence == self.Animations.reload_start_empty
+			or self.Sequence == self.Animations.reload_end_empty
+			or self.Sequence == self.Animations.insert_empty
+			or self.Sequence:find("insert")
 	end
 
 	if not self.IsReloading then

@@ -85,6 +85,7 @@ SWEP.Animations = {fire = {"base_fire","base_fire2"},
 	fire_last = {"base_fire_last"},
 	fire_last_aim = {"iron_fire_last"},
 	reload_start = "base_reload_start",
+	reload_start_empty = "base_reload_start_empty",
 	insert = "base_reload_insert",
 	reload_end = "base_reload_end",
 	reload = "base_reload_clip",
@@ -167,8 +168,9 @@ SWEP.SprintingEnabled = true
 SWEP.AlwaysPlayReloadEnd = true
 
 SWEP.ReloadStartTime = 2.25
+SWEP.ReloadStartTime_Empty = 2.911765
 SWEP.InsertShellTime = .95
-SWEP.ReloadFinishWait = 1.5
+SWEP.ReloadFinishWait = 1.86
 
 SWEP.ReloadSpeed = 1.5
 SWEP.ReloadTime = 4.575

@@ -117,7 +117,7 @@ SWEP.Attachments = {[2] = {header = "Barrel Extension", offset = {-650, -450}, a
 SWEP.Animations = {fire = {"base_fire_1"},
 	fire_aim = {"iron_fire_1","iron_fire_2"},
 	reload = "base_reload",
-	reload_empty = "base_reload",
+	reload_empty = "base_reloadempty",
 	idle = "base_idle",
 	draw = "base_draw"}
 
@@ -193,10 +193,10 @@ SWEP.RecoilToSpread = .35
 
 
 SWEP.ReloadSpeed = 1.1
-SWEP.ReloadTime = 2.4
-SWEP.ReloadHalt = 3.2
-SWEP.ReloadTime_Empty = 2.4
-SWEP.ReloadHalt_Empty = 3.2
+SWEP.ReloadTime = 3.21
+SWEP.ReloadHalt = 3.21
+SWEP.ReloadTime_Empty = 4.761905
+SWEP.ReloadHalt_Empty = 4.761905
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup(self.GripBGs.main, self.GripBGs.on)
@@ -210,13 +210,13 @@ function SWEP:IndividualInitialize()
 	fire_last = {"base_firelast"},
 	fire_last_aim = {"iron_firelast"},
 	reload = "base_reload_drum",
-	reload_empty = "base_reload_drum",
+	reload_empty = "base_reloadempty_drum",
 	idle = "base_idle",
 	draw = "base_draw"}
-	self.ReloadTime = 3.8
-	self.ReloadHalt = 5.3
-	self.ReloadTime_Empty = 3.8
-	self.ReloadHalt_Empty = 5.3
+	self.ReloadTime = 5.36
+	self.ReloadHalt = 5.36
+	self.ReloadTime_Empty = 6.8
+	self.ReloadHalt_Empty = 6.8
 
 	self.AlternativePos = self.Alternative1Pos
 	self.AlternativeAng = self.Alternative1Ang

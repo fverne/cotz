@@ -202,8 +202,8 @@ SWEP.DeployTime = .6
 SWEP.FireAnimSpeed = 1.3
 SWEP.ReloadSpeed = 1.2
 SWEP.ReloadStartTime = 0.9
-SWEP.InsertShellTime = .75
-SWEP.ReloadFinishWait = 1
+SWEP.InsertShellTime = 0.84
+SWEP.ReloadFinishWait = 0.9
 SWEP.ShotgunReload = true
 SWEP.AlwaysPlayReloadEnd = true
 

@@ -142,9 +142,9 @@ SWEP.HolsterOnLadder = false
 SWEP.SprintingEnabled = false
 
 SWEP.ReloadSpeed = 1.45
-SWEP.ReloadTime = 2.15
-SWEP.ReloadHalt = 2.9
-SWEP.ReloadTime_Empty = 2.95
+SWEP.ReloadTime = 3.0
+SWEP.ReloadHalt = 3.0
+SWEP.ReloadTime_Empty = 4.0
 SWEP.ReloadHalt_Empty = 4
 
 function SWEP:IndividualInitialize()

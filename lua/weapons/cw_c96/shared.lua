@@ -222,10 +222,10 @@ SWEP.RecoilToSpreadAuto = 1
 SWEP.RecoilToSpreadSemi = 0
 
 SWEP.ReloadSpeed = 1.4
-SWEP.ReloadTime = 3.4
-SWEP.ReloadHalt = 6
-SWEP.ReloadTime_Empty = 3.1
-SWEP.ReloadHalt_Empty = 4.2
+SWEP.ReloadTime = 6.17
+SWEP.ReloadHalt = 6.17
+SWEP.ReloadTime_Empty = 4.34
+SWEP.ReloadHalt_Empty = 4.34
 
 
 function SWEP:fireAnimFunc()

@@ -77,6 +77,9 @@ SWEP.SpeedDec = 20
 SWEP.DeployTime = 1.033333
 
 SWEP.ReloadSpeed = 1
+SWEP.ReloadChamberCuts = {
+	anm_reload = {from = 2.428571, to = 3.342857},
+}
 
 SWEP.ReloadTime = 3.857143
 

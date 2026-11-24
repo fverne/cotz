@@ -182,10 +182,10 @@ SWEP.DeployTime = 0.6
 
 
 SWEP.ReloadSpeed = 1.5
-SWEP.ReloadTime = 2.3
-SWEP.ReloadTime_Empty = 3.75
-SWEP.ReloadHalt = 2.5
-SWEP.ReloadHalt_Empty = 3.9
+SWEP.ReloadTime = 2.87
+SWEP.ReloadTime_Empty = 4.17
+SWEP.ReloadHalt = 2.87
+SWEP.ReloadHalt_Empty = 4.17
 
 SWEP.SnapToIdlePostReload = true
 

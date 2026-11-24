@@ -161,10 +161,10 @@ SWEP.BurstCooldownMul = 3
 SWEP.RecoilToSpread = .77
 
 SWEP.ReloadSpeed = 1.325
-SWEP.ReloadTime = 2.5
-SWEP.ReloadHalt = 3.6
-SWEP.ReloadTime_Empty = 3.5
-SWEP.ReloadHalt_Empty = 4.6	
+SWEP.ReloadTime = 3.67
+SWEP.ReloadHalt = 3.67
+SWEP.ReloadTime_Empty = 4.67
+SWEP.ReloadHalt_Empty = 4.67
 
 SWEP.NearWallEnabled = false
 

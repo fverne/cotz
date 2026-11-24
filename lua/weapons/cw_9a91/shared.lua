@@ -119,20 +119,14 @@ SWEP.Attachments = {
 
 SWEP.Animations = {fire = "anm_shots",
 	reload = "anm_reload",
+	reload_empty = "anm_reload_empty",
 	idle = "anm_idle",
 	draw = "anm_show"}
 	
 SWEP.Sounds = {anm_show = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
 	
-	anm_reload = {{time = 0.4, sound = "CW_FOLEY_LIGHT"},
-	{time = 0.5, sound = "CW_G3A3_HANDLE"},
-	{time = 0.7, sound = "CW_VSS_MAGOUT"},
-	{time = 1.4, sound = "CW_FOLEY_LIGHT"},
-	{time = 1.6, sound = "CW_VSS_MAGIN"},
-	{time = 2.5, sound = "CW_FOLEY_MEDIUM"},
-	{time = 1.73, sound = "CW_VSS_BOLTBACK"},
-	{time = 1.97, sound = "CW_VSS_BOLTFORWARD"},
-	{time = 3, sound = "CW_FOLEY_LIGHT"}},
+	anm_reload = {{time = 0, sound = "TFA_ANOMALY.9A91.Reload"}},
+	anm_reload_empty = {{time = 0, sound = "TFA_ANOMALY.9A91.Reload"}},
 }
 
 SWEP.UseHands = true
@@ -189,8 +183,8 @@ SWEP.Shots = 1
 SWEP.Damage = 160
 SWEP.DeployTime = 1.2
 
-SWEP.ReloadSpeed = 1.2
-SWEP.ReloadTime = 2.63
-SWEP.ReloadTime_Empty = 2.63
-SWEP.ReloadHalt = 3.4
-SWEP.ReloadHalt_Empty = 3.4
+SWEP.ReloadSpeed = 1
+SWEP.ReloadTime = 3.1
+SWEP.ReloadTime_Empty = 3.1
+SWEP.ReloadHalt = 3.1
+SWEP.ReloadHalt_Empty = 3.1

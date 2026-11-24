@@ -175,11 +175,11 @@ SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
 SWEP.ReloadSpeed = 1.2
-SWEP.ReloadTime = 3.5
-SWEP.ReloadHalt = 3.5
+SWEP.ReloadTime = 3.83
+SWEP.ReloadHalt = 3.83
 
-SWEP.ReloadTime_Empty = 3.5
-SWEP.ReloadHalt_Empty = 3.5
+SWEP.ReloadTime_Empty = 3.83
+SWEP.ReloadHalt_Empty = 3.83
 
 SWEP.SnapToIdlePostReload = true
 

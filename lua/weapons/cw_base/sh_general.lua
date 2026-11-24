@@ -855,19 +855,33 @@ function SWEP:getMagCapacity()
 end
 
 function SWEP:getReloadProgress()
-	if self.IsReloading and self.Cycle <= 0.98 then
-		if self.ShotgunReload then
-			return math.Clamp(math.ceil(self:getAnimSeek() / self.InsertShellTime * 100), 0, 100)
+	if not self.IsReloading or self.Cycle > 0.98 then return end
+
+	local duration
+	if self.ShotgunReload then
+		local sequence = self.Sequence
+		if sequence == self.Animations.reload_start_empty then
+			duration = self.ReloadStartTime_Empty or self.ReloadStartTime
+		elseif sequence == self.Animations.reload_start then
+			duration = self.ReloadStartTime
+		elseif sequence == self.Animations.reload_end_empty then
+			duration = self.ReloadFinishWait_Empty or self.ReloadFinishWait
+		elseif sequence == self.Animations.reload_end then
+			duration = self.ReloadFinishWait
 		else
-			if self.wasEmpty then
-				return math.Clamp(math.ceil(self:getAnimSeek() / self.ReloadHalt_Empty * 100), 0, 100)
-			else
-				return math.Clamp(math.ceil(self:getAnimSeek() / self.ReloadHalt * 100), 0, 100)
-			end
+			duration = self.InsertShellTime
+		end
+	elseif self.wasEmpty then
+		duration = math.max(self.ReloadTime_Empty, self.ReloadHalt_Empty)
+	else
+		duration = math.max(self.ReloadTime, self.ReloadHalt)
+		local cut = self.ActiveReloadChamberCut
+		if cut then
+			duration = duration - (cut.to - cut.from)
 		end
 	end
 
-	return nil
+	return math.Clamp(math.ceil(self:getAnimSeek() / duration * 100), 0, 100)
 end
 
 function SWEP:isReticleActive()

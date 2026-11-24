@@ -129,11 +129,11 @@ SWEP.Chamberable = false
 SWEP.ADSFireAnim = false
 
 SWEP.ReloadSpeed = .9
-SWEP.ReloadTime = 3.4
-SWEP.ReloadHalt = 3.4
+SWEP.ReloadTime = 3.47
+SWEP.ReloadHalt = 3.47
 
-SWEP.ReloadTime_Empty = 3.4
-SWEP.ReloadHalt_Empty = 3.4
+SWEP.ReloadTime_Empty = 3.47
+SWEP.ReloadHalt_Empty = 3.47
 
 SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05

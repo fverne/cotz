@@ -137,9 +137,9 @@ SWEP.Damage = 35
 SWEP.DeployTime = 1.5
 
 SWEP.ReloadSpeed = .7
-SWEP.ReloadStartTime = 0.3
+SWEP.ReloadStartTime = 0.38
 SWEP.InsertShellTime = 0.5
-SWEP.ReloadFinishWait = .4
+SWEP.ReloadFinishWait = 0.48
 SWEP.ShotgunReload = true
 SWEP.AlwaysPlayReloadEnd = true
 

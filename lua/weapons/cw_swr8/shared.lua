@@ -129,11 +129,11 @@ SWEP.Chamberable = false
 SWEP.ADSFireAnim = false
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.5
-SWEP.ReloadHalt = 2.5
+SWEP.ReloadTime = 2.64
+SWEP.ReloadHalt = 2.64
 
-SWEP.ReloadTime_Empty = 2.5
-SWEP.ReloadHalt_Empty = 2.5
+SWEP.ReloadTime_Empty = 2.64
+SWEP.ReloadHalt_Empty = 2.64
 
 function SWEP:IndividualThink()
 	self.EffectiveRange = 51.3 * 39.37

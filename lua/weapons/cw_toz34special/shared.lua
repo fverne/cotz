@@ -56,10 +56,10 @@ SWEP.WElements = {
 }
 
 SWEP.Animations = {fire = "fire01",
-	reload = "reload_empty",
+	reload = "reload",
 	reload_empty = "reload_empty",
 	idle = "idle",
-	draw = "reload"}
+	draw = "draw"}
 	
 SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
 
@@ -128,10 +128,10 @@ SWEP.Damage = 48
 SWEP.DeployTime = 0.5
 
 SWEP.ReloadSpeed = 1.5
-SWEP.ReloadTime = 5
-SWEP.ReloadTime_Empty = 4.5
-SWEP.ReloadHalt = 5
-SWEP.ReloadHalt_Empty = 4.5
+SWEP.ReloadTime = 6
+SWEP.ReloadTime_Empty = 5
+SWEP.ReloadHalt = 6
+SWEP.ReloadHalt_Empty = 5
 
 function SWEP:IndividualInitialize()
 	if(CLIENT)then

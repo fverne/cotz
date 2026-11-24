@@ -149,11 +149,11 @@ SWEP.DeployTime = 0.5
 SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1.3
-SWEP.ReloadTime = 2.7
-SWEP.ReloadHalt = 4
+SWEP.ReloadTime = 4.15
+SWEP.ReloadHalt = 4.15
 
-SWEP.ReloadTime_Empty = 2.7
-SWEP.ReloadHalt_Empty = 4
+SWEP.ReloadTime_Empty = 4.15
+SWEP.ReloadHalt_Empty = 4.15
 
 SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05

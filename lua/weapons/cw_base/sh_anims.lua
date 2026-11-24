@@ -51,6 +51,12 @@ function SWEP:sendWeaponAnim(anim, speed, cycle)
 	self:playAnim(anim, speed, cycle)
 end
 
+function SWEP:GetLoadedReloadCut(sequence)
+	if self.reloadAnimFunc or not self.ReloadChamberCuts or not isstring(sequence) then return end
+
+	return self.ReloadChamberCuts[sequence]
+end
+
 function SWEP:playAnim(anim, speed, cycle, ent)
 	ent = ent or self.CW_VM
 	cycle = cycle or 0
@@ -68,6 +74,15 @@ function SWEP:playAnim(anim, speed, cycle, ent)
 		if type(foundAnim) == "table" then
 			foundAnim = table.Random(foundAnim)
 		end
+
+		if self.ReloadChamberSound then
+			self:StopSound(self.ReloadChamberSound)
+			self.ReloadChamberSound = nil
+		end
+
+		local loadedReload = anim == "reload" and self:Clip1() > 0
+		self.ActiveReloadChamberCut = loadedReload and self:GetLoadedReloadCut(foundAnim) or nil
+		self.ReloadChamberCutPassed = false
 
 		if self.Sounds[foundAnim] then
 			self:setCurSoundTable(self.Sounds[foundAnim], speed, cycle, foundAnim)

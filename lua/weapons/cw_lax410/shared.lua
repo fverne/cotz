@@ -90,6 +90,7 @@ SWEP.Attachments = {
 
 SWEP.Animations = {fire = {"fire"},
 	reload_start = "reload_in",
+	reload_start_empty = "reload_in_empty",
 	insert = "reload_loop",
 	reload_end = "reload_out",
 	idle = "idle",
@@ -105,6 +106,11 @@ function SWEP:postPrimaryAttack()
 end
 	
 SWEP.Sounds = {reload_in = {{time = 0.05, sound = "LAX410_OPEN"}},
+	reload_in_empty = {
+		{time = 0.233, sound = "LAX410_OPEN"},
+		{time = 0.433, sound = "LAX410_CLOSE"},
+		{time = 1.367, sound = "LAX410_INSERT"},
+	},
 	reload_loop = {{time = 0.3, sound = "LAX410_INSERT"}},
 	
 	reload_out = {{time = 0.05, sound = "LAX410_OPEN"},
@@ -161,9 +167,11 @@ SWEP.Damage = 75
 SWEP.DeployTime = .5
 
 SWEP.ReloadSpeed = 1.4
-SWEP.ReloadStartTime = .5
-SWEP.InsertShellTime = 1.2
-SWEP.ReloadFinishWait = 1.2
+SWEP.ReloadStartTime = 0.4
+SWEP.ReloadStartTime_Empty = 1.966667
+SWEP.ReloadStartLoadsRound_Empty = true
+SWEP.InsertShellTime = 1.1
+SWEP.ReloadFinishWait = 1.57
 SWEP.ShotgunReload = true
 
 SWEP.Chamberable = true

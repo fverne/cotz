@@ -197,10 +197,10 @@ SWEP.Damage = 87
 SWEP.DeployTime = 0.6
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.1
-SWEP.ReloadTime_Empty = 2.2
-SWEP.ReloadHalt = 2.9
-SWEP.ReloadHalt_Empty = 3.9
+SWEP.ReloadTime = 3.04
+SWEP.ReloadTime_Empty = 4.0
+SWEP.ReloadHalt = 3.04
+SWEP.ReloadHalt_Empty = 4.0
 SWEP.SnapToIdlePostReload = true
 
 function SWEP:IndividualInitialize()

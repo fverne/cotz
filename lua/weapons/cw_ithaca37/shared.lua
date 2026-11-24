@@ -163,7 +163,7 @@ SWEP.PreventQuickScoping = false
 SWEP.ReloadSpeed = 1
 SWEP.ReloadStartTime = 0.5
 SWEP.InsertShellTime = .85
-SWEP.ReloadFinishWait = 1
+SWEP.ReloadFinishWait = 1.87
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup(self.BarrelBGs.main, self.BarrelBGs.hs)

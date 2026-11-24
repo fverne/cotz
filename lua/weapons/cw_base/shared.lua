@@ -779,17 +779,19 @@ function SWEP:beginReload()
 	end
 
 	if self.ShotgunReload then
-		local time = CurTime() + self.ReloadStartTime / self.ReloadSpeed
-
 		self.WasEmpty = mag == 0
+		local hasEmptyStart = self.WasEmpty and self.Animations.reload_start_empty
+		local startTime = hasEmptyStart and self.ReloadStartTime_Empty or self.ReloadStartTime
+		local time = CurTime() + startTime / self.ReloadSpeed
+
+		self.ReloadStage = hasEmptyStart and self.ReloadStartLoadsRound_Empty and "opening" or nil
 		self.ReloadDelay = time
 		self:SetNextPrimaryFire(time)
 		self:SetNextSecondaryFire(time)
 		self.GlobalDelay = time
 		self.ShotgunReloadState = 1
-		self.ForcedReloadStop = false
 
-		self:sendWeaponAnim("reload_start", self.ReloadSpeed)
+		self:sendWeaponAnim(hasEmptyStart and "reload_start_empty" or "reload_start", self.ReloadSpeed)
 	else
 		local reloadTime
 		local reloadHalt
@@ -804,6 +806,13 @@ function SWEP:beginReload()
 		else
 			reloadTime = self.ReloadTime
 			reloadHalt = self.ReloadHalt
+
+			local cut = self:GetLoadedReloadCut(self.Animations.reload)
+			if cut then
+				local skipped = cut.to - cut.from
+				reloadTime = reloadTime - skipped
+				reloadHalt = reloadHalt - skipped
+			end
 
 			if self.Chamberable then
 				self.Primary.ClipSize = self.Primary.ClipSize_Orig + 1
@@ -893,6 +902,90 @@ function SWEP:finishReload()
 	CustomizableWeaponry.callbacks.processCategory(self, "finishReload")
 
 	self.ReloadDelay = nil
+end
+
+local function finishShotgunReload(weapon, now, clip, ammo)
+	local animation = "idle"
+	local waitTime = 0.25
+	if weapon.WasEmpty and weapon.Animations.reload_end_empty then
+		animation = "reload_end_empty"
+		waitTime = weapon.ReloadFinishWait_Empty or weapon.ReloadFinishWait
+	elseif weapon.WasEmpty or weapon.AlwaysPlayReloadEnd then
+		animation = "reload_end"
+		waitTime = weapon.ReloadFinishWait
+	end
+
+	-- An empty tube-fed gun can only take its extra round after the pump chambers one.
+	local canResume = weapon.ShotgunReloadState == 1 and weapon.WasEmpty and weapon.Chamberable
+		and clip > 0 and clip < weapon.Primary.ClipSize + 1 and ammo > 0
+	if canResume then
+		waitTime = weapon.PumpMidReloadWait or waitTime
+	end
+
+	weapon:sendWeaponAnim(animation, weapon.ReloadSpeed)
+	local readyAt = now + waitTime / weapon.ReloadSpeed
+	weapon:SetNextPrimaryFire(readyAt)
+	weapon:SetNextSecondaryFire(readyAt)
+	weapon.ReloadWait = readyAt
+	weapon.GlobalDelay = math.max(weapon.GlobalDelay, readyAt)
+	weapon.ShotgunReloadState = canResume and 1 or 0
+	weapon.ReloadDelay = canResume and readyAt or nil
+	weapon.ReloadStage = canResume and "chambering" or nil
+	weapon.WasEmpty = false
+end
+
+local function updateShotgunReload(weapon, now)
+	local owner = weapon:GetOwner()
+	if owner:KeyPressed(IN_ATTACK) and (weapon.ReloadStage or weapon:Clip1() > 0) then
+		weapon.ShotgunReloadState = 2
+	end
+
+	if now <= weapon.ReloadDelay then return end
+
+	weapon:RefreshInventoryAmmo()
+	local ammoType = weapon.Primary.Ammo
+	local clip, ammo = weapon:Clip1(), owner:GetAmmoCount(ammoType)
+	local capacity = weapon.Primary.ClipSize
+	if weapon.Chamberable and not weapon.WasEmpty then
+		capacity = capacity + 1
+	end
+
+	local stage = weapon.ReloadStage
+	weapon.ReloadStage = nil
+	local finishedChambering = stage == "chambering"
+	if stage and not finishedChambering and ammo > 0 and clip < capacity then
+		clip, ammo = clip + 1, ammo - 1
+		if SERVER then
+			weapon:SetClip1(clip)
+			owner:SetAmmo(ammo, ammoType)
+			hook.Run("ProcessShotgunReload", owner, weapon)
+		end
+
+		if stage == "opening" and weapon.ReloadStartChambersRound_Empty then
+			weapon.WasEmpty = false
+			capacity = weapon.Primary.ClipSize + 1
+		end
+	end
+
+	if weapon.ShotgunReloadState == 2 or clip >= capacity or ammo == 0 then
+		if finishedChambering then
+			weapon.ShotgunReloadState = 0
+			weapon.ReloadDelay = nil
+		else
+			finishShotgunReload(weapon, now, clip, ammo)
+		end
+
+		return
+	end
+
+	local animation = weapon.WasEmpty and weapon.Animations.insert_empty and "insert_empty" or "insert"
+	weapon:sendWeaponAnim(animation, weapon.ReloadSpeed)
+	if SERVER and not SP then
+		owner:SetAnimation(PLAYER_RELOAD)
+	end
+
+	weapon.ReloadStage = "insert"
+	weapon.ReloadDelay = now + weapon.InsertShellTime / weapon.ReloadSpeed
 end
 
 function SWEP:CycleFiremodes()
@@ -1134,6 +1227,11 @@ function SWEP:Think()
 	end
 
 	if SERVER then
+		if self.ReloadChamberSound and CT >= self.ReloadChamberSoundUntil then
+			self:StopSound(self.ReloadChamberSound)
+			self.ReloadChamberSound = nil
+		end
+
 		if self.CurSoundTable then
 			local t = self.CurSoundTable[self.CurSoundEntry]
 
@@ -1151,7 +1249,15 @@ function SWEP:Think()
 			else]]--
 			if CT >= self.SoundTime + t.time / self.SoundSpeed then
 				if t.sound and t.sound ~= "" then
-					self:EmitSound(t.sound, 70, 100)
+					local pitch = 100
+					local cut = self.ActiveReloadChamberCut
+					if cut and t.time == 0 then
+						pitch = math.Clamp(math.Round(100 * self.SoundSpeed), 1, 255)
+						self.ReloadChamberSound = t.sound
+						self.ReloadChamberSoundUntil = CT + (cut.soundEnd or cut.from) * 100 / pitch
+					end
+
+					self:EmitSound(t.sound, 70, pitch)
 				end
 
 				if t.callback then
@@ -1186,106 +1292,8 @@ function SWEP:Think()
 		end
 	end
 
-	if IFTP then
-	--[[SWEP.AimBreathingIntensity = 1
-	SWEP.CurBreatheIntensity = 1
-	SWEP.BreathLeft = 1
-	SWEP.BreathRegenRate = 10
-	SWEP.BreathDrainRate = 5
-	SWEP.BreathIntensityDrainRate = 10
-	SWEP.BreathIntensityRegenRate = 10]]--
-
-		if self.ShotgunReloadState == 1 then
-			if self.Owner:KeyPressed(IN_ATTACK) and self:Clip1() ~= 0 then
-				self.ShotgunReloadState = 2
-				self.ForcedReloadStop = true
-			end
-
-			if CT > self.ReloadDelay then
-				self:sendWeaponAnim("insert", self.ReloadSpeed)
-
-				if SERVER and not SP then
-					self.Owner:SetAnimation(PLAYER_RELOAD)
-				end
-
-				self:RefreshInventoryAmmo()
-				local mag, ammo = self:Clip1(), self:GetOwner():GetAmmoCount(self.Primary.Ammo)
-
-				if SERVER and ammo > 0 then
-					self:SetClip1(mag + 1)
-					self:GetOwner():SetAmmo(ammo - 1, self.Primary.Ammo)
-					hook.Run("ProcessShotgunReload", self:GetOwner(), self)
-				end
-
-				self.ReloadDelay = CT + self.InsertShellTime / self.ReloadSpeed
-
-				local maxReloadAmount = self.Primary.ClipSize
-
-				if self.Chamberable and not self.WasEmpty then  -- if the weapon is chamberable + we've cocked it - we can add another shell in there
-					maxReloadAmount = self.Primary.ClipSize + 1
-				end
-
-				-- if we've filled up the weapon (or we have no ammo left), we go to the "end reload" state
-				if mag + 1 >= maxReloadAmount or ammo <= 1 then
-					self.ShotgunReloadState = 2
-				end
-			end
-		elseif self.ShotgunReloadState == 2 then
-			if self.Owner:KeyPressed(IN_ATTACK) then
-				self.ShotgunReloadState = 2
-				self.ForcedReloadStop = true
-			end
-
-			if CT > self.ReloadDelay then
-				if not self.WasEmpty then
-					self:sendWeaponAnim("idle", self.ReloadSpeed)
-					self.ShotgunReloadState = 0
-
-					local time = 0.25 / self.ReloadSpeed
-					self:SetNextPrimaryFire(time)
-					self:SetNextSecondaryFire(time)
-					self.ReloadWait = time
-					self.ReloadDelay = nil
-					if self.AlwaysPlayReloadEnd then
-						self:sendWeaponAnim("reload_end", self.ReloadSpeed)
-						self.ShotgunReloadState = 0
-						local waitTime = self.ReloadFinishWait
-						local time = CT + waitTime / self.ReloadSpeed
-						self:SetNextPrimaryFire(time)
-						self:SetNextSecondaryFire(time)
-						self.ReloadWait = time
-					end
-				else
-					local canInsertMore = false
-					local waitTime = self.ReloadFinishWait
-
-					if not self.ForcedReloadStop and self.Chamberable and self:Clip1() < self.Primary.ClipSize + 1 and self.Owner:GetAmmoCount(self.Primary.Ammo) > 0 then
-						waitTime = self.PumpMidReloadWait or waitTime
-						canInsertMore = true
-					end
-
-					self:sendWeaponAnim("reload_end", self.ReloadSpeed)
-					self.ShotgunReloadState = 0
-
-					local time = CT + waitTime / self.ReloadSpeed
-					self:SetNextPrimaryFire(time)
-					self:SetNextSecondaryFire(time)
-					self.ReloadWait = time
-
-					if not canInsertMore then
-						self.ReloadDelay = nil
-					else
-						self.ReloadDelay = time
-					end
-
-					if canInsertMore then -- if we can chamber and we haven't chambered up fully + we have some ammo to spare
-						self.ShotgunReloadState = 1 -- we add another shell in there
-						self.WasEmpty = false
-
-					end
-				end
-			end
-		end
+	if IFTP and self.ShotgunReloadState ~= 0 then
+		updateShotgunReload(self, CT)
 	end
 
 	if SERVER then

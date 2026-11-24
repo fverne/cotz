@@ -159,11 +159,11 @@ if CustomizableWeaponry then
 	SWEP.DeployTime = 1
 
 	SWEP.ReloadSpeed = 1
-	SWEP.ReloadTime = 1.9
-	SWEP.ReloadHalt = 1.8
+	SWEP.ReloadTime = 2.17
+	SWEP.ReloadHalt = 2.17
 
-	SWEP.ReloadTime_Empty = 2.5
-	SWEP.ReloadHalt_Empty = 2.4
+	SWEP.ReloadTime_Empty = 2.85
+	SWEP.ReloadHalt_Empty = 2.85
 	SWEP.SnapToIdlePostReload = false
 end
 

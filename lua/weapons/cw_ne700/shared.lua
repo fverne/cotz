@@ -157,10 +157,10 @@ SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
 SWEP.ReloadSpeed = 0.6
-SWEP.ReloadTime = 3
-SWEP.ReloadTime_Empty = 3
-SWEP.ReloadHalt = 3.05
-SWEP.ReloadHalt_Empty = 3.05
+SWEP.ReloadTime = 3.55
+SWEP.ReloadTime_Empty = 3.54
+SWEP.ReloadHalt = 3.55
+SWEP.ReloadHalt_Empty = 3.54
 SWEP.Knockback = 250
 
 function SWEP:postPrimaryAttack()

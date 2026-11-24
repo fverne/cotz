@@ -106,11 +106,11 @@ SWEP.DeployTime = 0.7
 SWEP.Chamberable = false
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 1.6
-SWEP.ReloadHalt = 2.7
+SWEP.ReloadTime = 2.57
+SWEP.ReloadHalt = 2.57
 
-SWEP.ReloadTime_Empty = 1.6
-SWEP.ReloadHalt_Empty = 2.7
+SWEP.ReloadTime_Empty = 2.57
+SWEP.ReloadHalt_Empty = 2.57
 
 function SWEP:IndividualInitialize()
 	self:setBodygroup( 1 , 2 )

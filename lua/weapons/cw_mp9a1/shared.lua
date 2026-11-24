@@ -163,9 +163,9 @@ SWEP.Damage = 58
 SWEP.DeployTime = 0.45
 
 SWEP.ReloadSpeed = 1.3
-SWEP.ReloadTime = 2.26
-SWEP.ReloadTime_Empty = 2.26
-SWEP.ReloadHalt = 3
-SWEP.ReloadHalt_Empty = 3
+SWEP.ReloadTime = 2.9
+SWEP.ReloadTime_Empty = 2.9
+SWEP.ReloadHalt = 2.9
+SWEP.ReloadHalt_Empty = 2.9
 
 SWEP.SnapToIdlePostReload = false

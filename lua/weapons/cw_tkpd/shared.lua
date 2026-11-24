@@ -166,10 +166,10 @@ SWEP.DeployTime = 1
 SWEP.RecoilToSpread = 0.8
 
 SWEP.ReloadSpeed = 1.10
-SWEP.ReloadTime = 2.35
-SWEP.ReloadTime_Empty = 3.8
-SWEP.ReloadHalt = 0.1
-SWEP.ReloadHalt_Empty = 0.1
+SWEP.ReloadTime = 3.97
+SWEP.ReloadTime_Empty = 3.97
+SWEP.ReloadHalt = 3.97
+SWEP.ReloadHalt_Empty = 3.97
 SWEP.SnapToIdlePostReload = true
 
 if CLIENT then

@@ -133,10 +133,10 @@ SWEP.Damage = 450
 SWEP.DeployTime = 1
 
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.42
-SWEP.ReloadTime_Empty = 2.42
-SWEP.ReloadHalt = 3.48
-SWEP.ReloadHalt_Empty = 3.48
+SWEP.ReloadTime = 3.64
+SWEP.ReloadTime_Empty = 3.64
+SWEP.ReloadHalt = 3.64
+SWEP.ReloadHalt_Empty = 3.64
 
 if CLIENT then
 	local old, x, y, ang
