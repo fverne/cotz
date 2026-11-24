@@ -343,8 +343,8 @@ split and a two-minute expiry, then rebuilds the offer and rejects any change. M
 switching characters, demotion or a changed treasury balance cancels the purchase without a charge.
 
 Inventory tooltips list red **Hideout: name** rows for every material accepted by an unlocked next-level
-upgrade of a hideout the character can improve. The same materials have red inventory icon backgrounds,
-with task and progression highlights layered over the tint. Each inventory panel requests a fresh list on opening
+upgrade of a hideout the character can improve. The same materials have a red gradient fading inward from
+the right edge of their inventory icons. Each inventory panel requests a fresh list on opening
 (`cotz/hideouts/upgrade-items`, rate-limited to once per second); locked upgrades are not listed.
 
 All three contacts use the same recipes. Cash increases by 1.5× per level, rounded up; squad upgrades

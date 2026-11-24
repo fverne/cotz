@@ -38,6 +38,8 @@ function hideouts:GetUpgradeItemHideouts(uniqueID)
 	return upgradeItems[uniqueID]
 end
 local drawColors = {}
+local gradientMaterial
+local gradientX
 local environment = {
 	PANEL = methods, yellowCol = "yellow", purpleCol = "purple",
 	Color = function(r, g, b, a) return {r = r, g = g, b = b, a = a} end,
@@ -46,8 +48,8 @@ local environment = {
 	surface = {
 		SetDrawColor = function(color) drawColors[#drawColors + 1] = color end,
 		DrawRect = function() end,
-		SetMaterial = function() end,
-		DrawTexturedRect = function() end,
+		SetMaterial = function(material) gradientMaterial = material end,
+		DrawTexturedRect = function(x) gradientX = x end,
 	},
 	LocalPlayer = function() return player end,
 	IsValid = function(value) return type(value) == "table" end,
@@ -134,12 +136,14 @@ local icon = {
 	ExtraPaint = function() end,
 }
 methods.Paint(icon, 32, 32)
-check(drawColors[1] == hideoutBackground and #drawColors == 3,
-	"Shared items draw a red background under both requirement highlights")
+check(drawColors[1] == blackColor and drawColors[2] == hideoutBackground and #drawColors == 4,
+	"Shared items draw a red gradient under both requirement highlights")
 icon.itemTable = environment.ix.item.instances[4]
 drawColors = {}
 methods.Paint(icon, 32, 32)
-check(drawColors[1] == hideoutBackground and #drawColors == 1, "Hideout-only materials draw a red background")
+check(drawColors[1] == blackColor and drawColors[2] == hideoutBackground and #drawColors == 2
+	and gradientMaterial == "vgui/gradient-r" and gradientX == 18,
+	"Hideout-only materials draw a red gradient on the right half")
 upgradeItems.unneeded = nil
 drawColors = {}
 methods.Paint(icon, 32, 32)

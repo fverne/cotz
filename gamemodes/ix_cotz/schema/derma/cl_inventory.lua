@@ -393,8 +393,15 @@ function PANEL:Paint(width, height)
 	local itemTable = self.itemTable
 	local upgradeHideouts = itemTable and itemTable.uniqueID and getUpgradeItemHideouts(itemTable.uniqueID)
 
-	surface.SetDrawColor(upgradeHideouts and HIDEOUT_BACKGROUND or blackCol)
-	surface.DrawRect(2, 2, width - self:GetWide() * 0.002, height - self:GetWide() * 0.002)
+	local inset = self:GetWide() * 0.002
+	surface.SetDrawColor(blackCol)
+	surface.DrawRect(2, 2, width - inset, height - inset)
+
+	if upgradeHideouts then
+		surface.SetDrawColor(HIDEOUT_BACKGROUND)
+		surface.SetMaterial(gradientRMat)
+		surface.DrawTexturedRect(width * 0.5 + 2, 2, width * 0.5 - inset, height - inset)
+	end
 
 	local parent = self:GetParent()
 
