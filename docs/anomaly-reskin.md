@@ -39,8 +39,8 @@ The USP-1 "Tulip" (`cw_anomaly_1p29`) on COTZ dovetail guns works the same way t
 `lense_rt` slot, configured by `lensZoom` in `SCOPES` (`sh_cotzattachments.lua`). It switches to the
 full-screen reticle with simple telescopics or the gun's backup iron sights. The PU scope keeps the full-screen overlay.
 
-Anomaly attachment world models ship without a collision mesh. A dropped item then collides as the model's compiled
-hull (`ix_item.lua`) rather than a fixed 16-unit box around the origin, which left the Tulip floating.
+The Tulip inventory item uses the same dropped model as the ACOG item. For Anomaly attachment world models
+without a collision mesh, dropped items use the model's compiled hull for collision (`ix_item.lua`).
 
 ```sh
 python3 docs/anomaly/reskin_weapons.py --dry-run
