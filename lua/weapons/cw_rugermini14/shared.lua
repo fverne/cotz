@@ -151,6 +151,9 @@ SWEP.ViewModelFOV	= 50
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_tfa_mini14.mdl"
 SWEP.WorldModel		= "models/weapons/w_tfa_mn14_classic_hd.mdl"
+SWEP.WorldAttachmentScale = 0.861
+SWEP.WorldAttachmentShift = Vector(1.98, 0.49, -1.42)
+SWEP.WorldAttachmentAngle = Angle(-10.63, -178.45, 85.62)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

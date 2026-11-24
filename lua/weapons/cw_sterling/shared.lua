@@ -118,6 +118,8 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/a_sterling.mdl"
 SWEP.WorldModel		= "models/weapons/b_sterling.mdl"
+SWEP.WorldAttachmentScale = 1.286
+SWEP.WorldAttachmentShift = Vector(0.06, -0.37, 0.04)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

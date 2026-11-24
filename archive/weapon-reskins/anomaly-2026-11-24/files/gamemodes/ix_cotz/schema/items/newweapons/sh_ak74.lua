@@ -1,0 +1,67 @@
+ITEM.name = "AK74"
+ITEM.description= "A soviet-designed assault rifle chambered for 5.45x39mm."
+ITEM.longdesc = "The AK-74 is the replacement for the AKM and the most notable difference between the two is the drop in caliber from 7.62x39mm to 5.45x39mm.\nThis means the recoil is less intense but the penetration of the bullet also suffers slightly.\nThe 5.45x39mm cartridge is popular with many stalkers since it takes care of mutant and armored humans alike."
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_ak74.mdl"
+ITEM.class = "cw_ak74"
+ITEM.weaponCategory = "primary"
+ITEM.price = 15000
+ITEM.width = 5
+ITEM.height = 2
+ITEM.validAttachments = {"md_kobra","md_pso1","md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_acog","md_reflex","md_pbs1","md_foregrip", "md_nightforce_nxs"}
+
+ITEM.bulletweight = 0.011
+ITEM.unloadedweight = 3.07
+
+
+
+
+function ITEM:GetWeight()
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
+end
+
+ITEM.iconCam = {
+	pos = Vector(6.9, -205, 0.7),
+	ang = Angle(0, 90, 0),
+	fov = 10.4,
+}
+
+ITEM.pacData = {
+[1] = {
+	["children"] = {
+		[1] = {
+			["children"] = {
+				[1] = {
+					["children"] = {
+					},
+					["self"] = {
+						["Angles"] = Angle(180, 0, 0),
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_ak74.mdl",
+						["ClassName"] = "model",
+						["Translucent"] = true,
+						["Position"] =	Vector(11.522, -4.244, -1.16),
+						["EditorExpand"] = true,
+						["UniqueID"] = "3543431291",
+						["Bone"] = "spine 2",
+						["Name"] = "ak74",
+					},
+				},
+			},
+			["self"] = {
+				["AffectChildrenOnly"] = true,
+				["ClassName"] = "event",
+				["UniqueID"] = "1053212402",
+				["Event"] = "weapon_class",
+				["Invert"] = false,
+				["EditorExpand"] = true,
+				["Name"] = "weapon class find simple\"@@1\"",
+				["Arguments"] = "cw_ak74@@0",
+			},
+		},
+	},
+	["self"] = {
+		["ClassName"] = "group",
+		["UniqueID"] = "1512342183",
+		["EditorExpand"] = true,
+	},
+},
+}

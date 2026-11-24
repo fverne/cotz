@@ -223,7 +223,7 @@ end
 
 function SWEP:ApplyCotzAttachmentProfile()
 	local class = self:GetClass()
-	local profile = PROFILES.weapons[class]
+	local profile = PROFILES.GetForModel(class, self.ViewModel)
 	if not profile or self.cotzAttachmentDefinitions then return end
 
 	local suppressor = profile.suppressor
@@ -259,7 +259,7 @@ function SWEP:ApplyCotzAttachmentProfile()
 	end
 
 	if CLIENT then
-		addModels(self, class)
+		addModels(self, PROFILES.GetSourceClass(class))
 	end
 	if self.ApplyAnomalyAttachments then
 		applyAnomalyAdapters(self, suppressor)

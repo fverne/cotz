@@ -110,7 +110,16 @@ true 0.84 to 0.90), a weapon can name its own fit:
 at a uniform scale, so it compares the gun-only vertices of both models in their muzzle frames and accepts a
 fit only when the length and width ratios agree (the AN-94 pair is accepted on its turn alone, because its
 worldmodel carries extra width). It writes the fields after `SWEP.MuzzleAttachmentName` only where the fit moves a
-sight by at least a unit. Legacy model pairs and pairs whose meshes disagree (G36C, PKM, SKS, M98B) keep the estimate.
+sight by at least a unit.
+
+`python3 docs/attachments/weapon_fit.py legacy-world all` audits legacy pairs. It measures visible
+gun geometry with the active c_hands viewmodel and authored startup bodygroups where applicable.
+It checks the scale against a second dimension or compares compatible muzzle tips when the models
+have different stock or handguard lengths. For legacy muzzle attachments with a rotated frame,
+it aligns the barrel and the top of the gun before computing the shift and angle. For models with
+no muzzle attachment and a distinguishable barrel tip, it uses the configured `WorldAttachmentBone`
+to follow the worldmodel. Add `--write` to update the accepted fields. Skipped models use the
+shared estimate and may need manual measurements. Check the resulting positions and size in multiplayer.
 
 ## Attachment bones
 

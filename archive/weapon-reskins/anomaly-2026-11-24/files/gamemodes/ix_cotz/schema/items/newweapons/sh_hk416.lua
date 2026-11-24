@@ -1,0 +1,67 @@
+ITEM.name = "HK416"
+ITEM.description= "A German combat rifle chambered for 5.56x45mm."
+ITEM.longdesc = "The Heckler & Koch HK416 is a rifle based on the AR-15 class of firearm, specifically the Colt M4 carbine family issued to the U.S. military, however it uses a proprietary short-stroke gas piston system derived from the ArmaLite AR-18 (the same system was also used in Heckler & Koch's earlier G36 family of rifles). It is used by militaries around the world, including the Norwegian and the French. A modified variant is also in use by the United States Marine Corps, under the moniker 'M27 Infantry Automatic Rifle'."
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_hk416_w.mdl"
+ITEM.class = "cw_hk416"
+ITEM.weaponCategory = "primary"
+ITEM.price = 29000
+ITEM.width = 5
+ITEM.height = 2
+ITEM.validAttachments = {"md_microt1","md_eotech","md_aimpoint","md_cmore","md_schmidt_shortdot","md_reflex","md_saker", "md_acog", "md_nightforce_nxs"}
+
+ITEM.bulletweight = 0.012
+ITEM.unloadedweight = 3.5
+
+
+
+
+function ITEM:GetWeight()
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
+end
+
+ITEM.iconCam = {
+	pos = Vector(3.5, -205, 4.8),
+	ang = Angle(0, 90, 0),
+	fov = 10.3,
+}
+
+ITEM.pacData = {
+[1] = {
+	["children"] = {
+		[1] = {
+			["children"] = {
+				[1] = {
+					["children"] = {
+					},
+					["self"] = {
+						["Angles"] = Angle(84, 165, -115),
+						["Position"] = Vector(-7, -3.2, 9.8),
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_hk416_w.mdl",
+						["ClassName"] = "model",
+						["Translucent"] = true,
+						["EditorExpand"] = true,
+						["UniqueID"] = "8551155421",
+						["Bone"] = "chest",
+						["Name"] = "hk416",
+					},
+				},
+			},
+			["self"] = {
+				["AffectChildrenOnly"] = true,
+				["ClassName"] = "event",
+				["UniqueID"] = "1057333672",
+				["Event"] = "weapon_class",
+				["Invert"] = false,
+				["EditorExpand"] = true,
+				["Name"] = "weapon class find simple\"@@1\"",
+				["Arguments"] = "cw_hk416@@0",
+			},
+		},
+	},
+	["self"] = {
+		["ClassName"] = "group",
+		["UniqueID"] = "8736555483",
+		["EditorExpand"] = true,
+	},
+},
+}

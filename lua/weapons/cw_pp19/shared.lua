@@ -11,119 +11,91 @@ if CLIENT then
 	SWEP.IconLetter = "x"
 	killicon.AddFont("cw_mp5", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 150))
 
+	SWEP.MuzzleEffect = "muzzleflash_smg"
+	SWEP.PosBasedMuz = true
+	SWEP.SnapToGrip = true
+	SWEP.Shell = "smallshell"
+	SWEP.ShellScale = 0.7
+	SWEP.ShellOffsetMul = 1
+	SWEP.ShellPosOffset = {x = -1, y = 0, z = -4}
+	SWEP.ForeGripOffsetCycle_Draw = 0
+	SWEP.ForeGripOffsetCycle_Reload = 0.8
+	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.87
+
+	SWEP.IronsightPos = Vector(3.38, 0, 0.839)
+	SWEP.IronsightAng = Vector(0.703, -0.405, 0)
+
+	SWEP.KobraPos = Vector(3.39, 0, 0.55)
+	SWEP.KobraAng = Vector(0, 0, 0)
+
+	SWEP.SprintPos = Vector(-4.444, -1, 0.082)
+	SWEP.SprintAng = Vector(-12.849, -39.23, 0)
+
+	SWEP.CustomizePos = Vector(-8.174, -1.27, -1.288)
+	SWEP.CustomizeAng = Vector(17.954, -40.578, -18.357)
+
+	SWEP.AimpointPos = Vector(3.51, 0, -0.7)
+	SWEP.AimpointAng = Vector(0, 0, 0)
+
+	SWEP.EoTechPos = Vector(3.54, 1.5, -0.72)
+	SWEP.EoTechAng = Vector(0, 0, 0)
+
+	SWEP.MicroT1Pos = Vector(3.51, 1.5, -0.52)
+	SWEP.MicroT1Ang = Vector(0, 0, 0)
+
+	SWEP.CmorePos = Vector(3.51, 1.5, -0.52)
+	SWEP.CmoreAng = Vector(0, 0, 0)
+
+	SWEP.ReflexPos = Vector(3.495, 1.5, -0.28)
+	SWEP.ReflexAng = Vector(0, 0, 0)
+
+	SWEP.ShortDotPos = Vector(2.009, -5.844, 0.263)
+	SWEP.ShortDotAng = Vector(0, 0, 0)
+
+	SWEP.SightWithRail = true
 	SWEP.LuaVMRecoilAxisMod = {vert = 1.5, hor = 3, roll = 1, forward = 1, pitch = 1}
 	SWEP.SprintViewNormals = {x = 1, y = -1, z = 1}
 
+	SWEP.AttachmentModelsVM = {
+		["md_rail"] = {model = "models/wystan/attachments/akrailmount.mdl", bone = "a_bizon", pos = Vector(0.27, -1.4, 0.7), angle = Angle(180, 0, -90), size = Vector(1, 1, 1)},
+		["md_microt1"] = {model = "models/cw2/attachments/microt1.mdl", bone = "a_bizon", pos = Vector(0.03, -3.4, 1), angle = Angle(180, 180, 90), adjustment = {min = -1.3, max = 0.5, inverseOffsetCalc = true, axis = "y"}, size = Vector(0.4, 0.4, 0.4)},
+		["md_eotech"] = {model = "models/wystan/attachments/2otech557sight.mdl", bone = "a_bizon", pos = Vector(-0.2, 7.5, 11), angle = Angle(-90, 90, 0), size = Vector(1, 1, 1)},
+		["md_kobra"] = {model = "models/cw2/attachments/kobra.mdl", bone = "a_bizon", pos = Vector(-0.45, 0.7, 1.5), angle = Angle(180, 180, 90), size = Vector(0.5, 0.5, 0.5)},
+		["md_tundra9mm"] = {model = "models/cw2/attachments/9mmsuppressor.mdl", bone = "a_bizon", pos = Vector(0.1, -0.1, -11.87), angle = Angle(0, 0, -90), size = Vector(0.6, 0.6, 0.6)},
+		["md_reflex"] = { type = "Model", model = "models/attachments/kascope.mdl", bone = "a_bizon", rel = "", pos = Vector(0.04, -3.4, -1), angle = Angle(0, 180, 90), size = Vector(0.55, 0.55, 0.55), color = Color(255, 255, 255, 0)},
+		["md_cmore"] = { type = "Model", model = "models/attachments/cmore.mdl", bone = "a_bizon", rel = "", pos = Vector(0.04, -3.2, 0), angle = Angle(0, 180, 90), size = Vector(0.649, 0.649, 0.649), color = Color(255, 255, 255, 0)},
+		["md_aimpoint"] = {model = "models/wystan/attachments/aimpoint.mdl", bone = "a_bizon", pos = Vector(0.3, 2.4, 7), angle = Angle(180, 0, -90), size = Vector(1, 1, 1)},
+	}
+
+	SWEP.LaserPosAdjust = {x = 1, y = 0, z = 0}
+	SWEP.LaserAngAdjust = {p = 2, y = 180, r = 0}
+	SWEP.SightWithRail = true
 	SWEP.CustomizationMenuScale = 0.012
 end
 
-if CLIENT then
-	SWEP.AttachmentModelsVM = {
-		["md_kobra"] = {
-			model = "models/cw2/attachments/kobra.mdl",
-			bone = "wpn_body",
-			pos = Vector(-0.324783, -0.008515, -1.904732),
-			angle = Angle(-0.068189, -0.429555, -89.91067),
-			size = Vector(0.8, 0.8, 0.8),
-		},
-		["md_pso1"] = {
-			model = "models/cw2/attachments/pso.mdl",
-			bone = "wpn_body",
-			pos = Vector(-0.034783, -1.008515, 3.095268),
-			angle = Angle(-0.032822, -0.429618, -89.855908),
-			size = Vector(0.8, 0.8, 0.8),
-		},
-		["md_schmidt_shortdot"] = {
-			model = "models/cw2/attachments/schmidt.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.336322, -0.149563, 2.982105),
-			angle = Angle(-89.841301, 104.538612, 14.968264),
-			size = Vector(0.82, 0.82, 0.82),
-		},
-		["md_acog"] = {
-			model = "models/wystan/attachments/2cog.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.388411, 0.408053, 2.993754),
-			angle = Angle(0.040989, 179.570403, 89.846686),
-			size = Vector(0.92, 0.92, 0.92),
-		},
-		["md_nightforce_nxs"] = {
-			model = "models/cw2/attachments/l96_scope.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.205726, -5.853267, -1.693047),
-			angle = Angle(-89.841301, 104.538612, 14.968264),
-			size = Vector(1, 1, 1),
-		},
-		["md_microt1"] = {
-			model = "models/cw2/attachments/microt1.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.192381, -4.97335, -1.562297),
-			angle = Angle(-0.44447, -0.428518, -89.846682),
-			size = Vector(0.4, 0.4, 0.4),
-		},
-		["md_eotech"] = {
-			model = "models/wystan/attachments/2otech557sight.mdl",
-			bone = "wpn_body",
-			pos = Vector(-0.080983, 5.172811, 8.136055),
-			angle = Angle(-89.52983, 160.539559, 70.968671),
-			size = Vector(0.95, 0.95, 0.95),
-		},
-		["md_aimpoint"] = {
-			model = "models/wystan/attachments/aimpoint.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.36939, -0.14446, 2.660737),
-			angle = Angle(0.44447, 179.571482, 89.846682),
-			size = Vector(0.83, 0.83, 0.83),
-		},
-		["md_cmore"] = {
-			model = "models/attachments/cmore.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.184711, -4.809145, -2.887154),
-			angle = Angle(0.44447, 179.571482, 89.846682),
-			size = Vector(0.9, 0.9, 0.9),
-		},
-		["md_reflex"] = {
-			model = "models/attachments/kascope.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.183964, -5.121068, -4.629162),
-			angle = Angle(0.44447, 179.571482, 89.846682),
-			size = Vector(0.84, 0.84, 0.84),
-		},
-		["md_rail"] = {
-			model = "models/wystan/attachments/akrailmount.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.251758, -3.254566, -1.692274),
-			angle = Angle(0, 180, 90),
-			size = Vector(0.889878, 0.889878, 0.889878),
-		},
-		["md_tundra9mm"] = {
-			model = "models/cw2/attachments/9mmsuppressor.mdl",
-			bone = "wpn_body",
-			pos = Vector(-0.017449, -1.335557, -19.516564),
-			angle = Angle(-0.040595, -0.429598, -89.846686),
-			size = Vector(0.7, 0.7, 0.7),
-		},
-	}
-end
+SWEP.LuaViewmodelRecoil = true
 
-SWEP.Attachments = {[1] = {header = "Sight", offset = {700, -400}, atts = {
-	"md_kobra",
-	"md_pso1",
-	"md_schmidt_shortdot",
-	"md_acog",
-	"md_nightforce_nxs",
-	"md_microt1",
-	"md_eotech",
-	"md_aimpoint",
-	"md_cmore",
-	"md_reflex",
-}},
+SWEP.Attachments = {[1] = {header = "Sight", offset = {700, -400}, atts = {"md_kobra", "md_microt1", "md_eotech", "md_aimpoint", "md_cmore", "md_reflex"}},
 [2] = {header = "Barrel", offset = {200, -400}, atts = {"md_tundra9mm"}},
 ["+reload"] = {header = "Ammo", offset = {700, 0}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
+
+SWEP.Animations = {fire = {"shoot1", "shoot2"},
+	reload = "reload",
+	reload_empty = "reload",
+	idle = "idle",
+	draw = "draw"}
+
+SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
+
+	reload = {[1] = {time = 0.4, sound = "CW_MP5_BOLTBACK"},
+	[2] = {time = 1.5, sound = "CW_MP5_MAGOUT"},
+	[3] = {time = 1.8, sound = "CW_MP5_MAGIN"},
+	[4] = {time = 2.6, sound = "CW_MP5_BOLTFORWARD"}}}
 
 SWEP.SpeedDec = 10
 
 SWEP.Slot = 3
+SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
@@ -136,6 +108,14 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
+SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFlip	= true
+SWEP.ViewModel		= "models/weapons/v_smg_biz.mdl"
+SWEP.WorldModel		= "models/weapons/w_smg_biz.mdl"
+SWEP.WorldAttachmentScale = 1.261
+SWEP.WorldAttachmentShift = Vector(3.06, -1.14, -0.2)
+SWEP.WorldAttachmentAngle = Angle(-2.18, 1.93, 178.19)
+
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
@@ -145,6 +125,8 @@ SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x18MM"
 
 SWEP.FireDelay = 0.075
+SWEP.FireSound = "CW_BIZON_FIRE"
+SWEP.FireSoundSuppressed = "CW_BIZON_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.2
 
 SWEP.DurabilityDamageChance = 0.005
@@ -161,128 +143,9 @@ SWEP.Shots = 1
 SWEP.Damage = 49
 SWEP.DeployTime = 0.8
 
+SWEP.ReloadSpeed = 1.3
+SWEP.ReloadTime = 2
+SWEP.ReloadTime_Empty = 2.2
+SWEP.ReloadHalt = 2.6
+SWEP.ReloadHalt_Empty = 3.5
 SWEP.SnapToIdlePostReload = true
-
--- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_bizon.
-
-SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/bizon.mdl"
-SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/wpn_bizon_w.mdl"
-SWEP.ViewModelFOV = 55
-SWEP.AimViewModelFOV = 55
-SWEP.ViewModelFlip = false
-SWEP.UseHands = true
-SWEP.IronsightPos = Vector(-5.113, -2, 1.505)
-SWEP.IronsightAng = Vector(1.1, -1.1, -1)
-
-SWEP.KobraPos = Vector(-5.114452, -4, -0.01741)
-SWEP.KobraAng = Vector(1.1, -1.1, -1)
-SWEP.PSOPos = Vector(-4.574284, -3, 0.901525)
-SWEP.PSOAng = Vector(1.1, -1.1, -1)
-SWEP.PSO1AxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.ShortDotPos = Vector(-4.737505, -3.969, 0.550349)
-SWEP.ShortDotAng = Vector(1.1, -1.1, -1)
-SWEP.SchmidtShortDotAxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.ACOGPos = Vector(-4.834631, -3.079, 0.065562)
-SWEP.ACOGAng = Vector(1.1, -1.1, -1)
-SWEP.ACOGAxisAlign = {right = 0, up = 0, forward = 0}
-SWEP.NXSPos = Vector(-4.88391, -3.079, 0.404501)
-SWEP.NXSAng = Vector(1.1, -1.1, -1)
-SWEP.NXSAlign = {right = 0, up = 0, forward = 0}
-SWEP.MicroT1Pos = Vector(-5.100461, 3.33, 0.336937)
-SWEP.MicroT1Ang = Vector(1.1, -1.1, -1)
-SWEP.EoTechPos = Vector(-4.785217, -1.663, 0.219128)
-SWEP.EoTechAng = Vector(1.1, -1.1, -1)
-SWEP.AimpointPos = Vector(-4.873051, -0.76, 0.447347)
-SWEP.AimpointAng = Vector(1.1, -1.1, -1)
-SWEP.CmorePos = Vector(-5.113107, 3.33, -0.093145)
-SWEP.CmoreAng = Vector(1.1, -1.1, -1)
-SWEP.ReflexPos = Vector(-5.051927, -1.993, 0.236347)
-SWEP.ReflexAng = Vector(1.1, -1.1, -1)
-SWEP.SightWithRail = true
-SWEP.HasDovetailMount = true
-SWEP.SprintPos = Vector(5.5, -7.2, 0.5)
-SWEP.SprintAng = Vector(-13, 49, -10)
-SWEP.Animations = {
-	["idle"] = "anm_idle",
-	["draw"] = "anm_show",
-	["holster"] = "anm_hide",
-	["fire"] = "anm_shots",
-	["reload"] = "anm_reload",
-	["reload_empty"] = "anm_reload_empty",
-	["anm_hide"] = "anm_hide",
-	["anm_idle"] = "anm_idle",
-	["anm_idle_aim"] = "anm_idle_aim",
-	["anm_idle_sprint"] = "anm_idle_sprint",
-	["anm_reload"] = "anm_reload",
-	["anm_reload_empty"] = "anm_reload_empty",
-	["anm_shots"] = "anm_shots",
-	["anm_shots_aim"] = "anm_shots_aim",
-	["anm_show"] = "anm_show",
-	["anm_show_first"] = "anm_show_first",
-}
-SWEP.Sounds = {
-	["anm_hide"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.BIZON.Holster",
-		},
-	},
-	["anm_reload"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.BIZON.Reload",
-		},
-	},
-	["anm_reload_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.BIZON.Reload",
-		},
-	},
-	["anm_show"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.BIZON.Draw",
-		},
-	},
-	["anm_show_first"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.BIZON.Draw",
-		},
-	},
-}
-SWEP.ReloadSpeed = 1
-SWEP.ReloadChamberCuts = {
-	anm_reload = {from = 2.966667, to = 4.233333, soundEnd = 2.93},
-}
-SWEP.ReloadTime = 4.233333
-SWEP.ReloadTime_Empty = 4.233333
-SWEP.ReloadHalt = 4.233333
-SWEP.ReloadHalt_Empty = 4.233333
-SWEP.ShotgunReload = false
-SWEP.ReloadStartTime = 1
-SWEP.InsertShellTime = 1
-SWEP.ReloadFinishWait = 1
-SWEP.AlwaysPlayReloadEnd = true
-SWEP.MuzzleAttachmentName = "muzzle"
-SWEP.MuzzleEffect = "muzzleflash_ak74"
-SWEP.Shell = "mainshell"
-SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_bizon_w.mdl"
-SWEP.DrawTraditionalWorldModel = false
-SWEP.WMPos = Vector(-1.3, 5.5152, -5.8028)
-SWEP.WMAng = Vector(-10, 0, 180)
-SWEP.FireSound = "TFA_ANOMALY.BIZON.FIRE"
-SWEP.FireSoundSuppressed = "TFA_ANOMALY.BIZON.FIRE_SILENCED"
-SWEP.LuaViewmodelRecoil = true
-SWEP.LuaViewmodelRecoilOverride = false
-
-if CLIENT then
-	SWEP.SelectIcon = surface.GetTextureID("vgui/entities/tfa_anomaly_bizon")
-	SWEP.BoltBone = "zatvor"
-	SWEP.BoltShootOffset = Vector(0, -0.001, 4.748)
-	SWEP.BoltBonePositionRecoverySpeed = 72
-end
-
-function SWEP:fireAnimFunc()
-end

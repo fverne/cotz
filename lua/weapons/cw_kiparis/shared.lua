@@ -11,32 +11,81 @@ if CLIENT then
 	SWEP.IconLetter = "q"
 	killicon.AddFont("cw_ump45", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 150))
 
+	SWEP.MuzzleEffect = "muzzleflash_smg"
+	SWEP.PosBasedMuz = true
+	SWEP.SnapToGrip = true
+	SWEP.ShellScale = 0.7
+	SWEP.ShellOffsetMul = 1
+	SWEP.Shell = "smallshell"
+	SWEP.ShellPosOffset = {x = -6, y = 0, z = -3}
+	SWEP.ForeGripOffsetCycle_Draw = 0
+	SWEP.ForeGripOffsetCycle_Reload = 0.9
+	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.8
 	SWEP.FireMoveMod = 1
+
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl"
+	SWEP.WMPos = Vector(2, -3, 1)
+	SWEP.WMAng = Vector(-5, 180, 180)
+
+	SWEP.BoltBone = "Bolt"
+	SWEP.BoltShootOffset = Vector(-2, 0, 0)
+
+	SWEP.IronsightPos = Vector(-2.48, 0, 0.79)
+	SWEP.IronsightAng = Vector(0, 0.05, 0)
+
+	SWEP.MicroT1Pos = Vector(-3.045, 0, -0.6881)
+	SWEP.MicroT1Ang = Vector(0.4029, 0, 0)
+
+	SWEP.AimpointPos = Vector(-3.045, 0, -0.8881)
+	SWEP.AimpointAng = Vector(0.4029, 0, 0)
+
+	SWEP.ReflexPos = Vector(-3.045, 0, -0.62)
+	SWEP.ReflexAng = Vector(0.4029, 0, 0)
+
+	SWEP.SprintPos = Vector(2.605, -1.117, -0.559)
+	SWEP.SprintAng = Vector(-39.535, 30.604, -32.931)
+
+	SWEP.CustomizePos = Vector(7.711, -0.482, -2)
+	SWEP.CustomizeAng = Vector(20, 40.741, 15.277)
+
+	SWEP.SightWithRail = true
 
 	SWEP.CustomizationMenuScale = 0.012
 
+	SWEP.AttachmentModelsVM = {
+		["md_tundra9mm"] = {model = "models/cw2/attachments/9mmsuppressor.mdl", bone = "body", pos = Vector(-9.1, -0.4, 1.12), angle = Angle(90, 0, 90), size = Vector(0.5, 0.5, 0.5)},
+	}
+
 	SWEP.LuaVMRecoilAxisMod = {vert = 1.5, hor = 2, roll = 1, forward = 1, pitch = 1}
 
+	SWEP.LaserPosAdjust = Vector(0.8, 0, 0.3)
+	SWEP.LaserAngAdjust = Angle(0, 180, 0)
 end
 
-if CLIENT then
-	SWEP.AttachmentModelsVM = {
-		["md_tundra9mm"] = {
-			model = "models/cw2/attachments/9mmsuppressor.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.000132, -1.708001, -14.924732),
-			angle = Angle(0.003743, 0, -89.999982),
-			size = Vector(0.7, 0.7, 0.7),
-		},
-	}
-end
+SWEP.SightBGs = {main = 2, none = 1}
+SWEP.LuaViewmodelRecoil = true
 
 SWEP.Attachments = {[2] = {header = "Barrel", offset = {-400, -300},  atts = {"md_tundra9mm"}},
 	["+reload"] = {header = "Ammo", offset = {-400, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
+SWEP.Animations = {fire = {"shoot1", "shoot2", "shoot3"},
+	reload = "reload1",
+	idle = "draw",
+	draw = "draw"}
+
+SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"}},
+
+	reload1 = {{time = 0.45, sound = "CW_SKORPION_MAGOUT"},
+	{time = 1, sound = "CW_FOLEY_LIGHT"},
+	{time = 1.8, sound = "CW_SKORPION_MAGIN"},
+	{time = 2.4, sound = "CW_SKORPION_BOLTBACK"}},
+}
+
 SWEP.SpeedDec = 0
 
 SWEP.Slot = 3
+SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
@@ -49,6 +98,14 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
+SWEP.ViewModelFOV	= 90
+SWEP.ViewModelFlip	= false
+SWEP.ViewModel		= "models/weapons/v_notmicro_kiparis.mdl"
+SWEP.WorldModel		= "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl"
+SWEP.WorldAttachmentScale = 1.523
+SWEP.WorldAttachmentShift = Vector(2.53, -0.28, 0.24)
+SWEP.WorldAttachmentAngle = Angle(0, -1.45, 0)
+
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
@@ -58,6 +115,8 @@ SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "9x18MM"
 
 SWEP.FireDelay = 0.0705
+SWEP.FireSound = "CW_KIPARIS_FIRE"
+SWEP.FireSoundSuppressed = "CW_SKORPION_FIRE_SUPPRESSED"
 SWEP.Recoil = 0.9
 
 SWEP.DurabilityDamageChance = 0.005
@@ -74,98 +133,10 @@ SWEP.Shots = 1
 SWEP.Damage = 40
 SWEP.DeployTime = 0.5
 
-SWEP.SnapToIdlePostReload = true
-
--- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_kiparis.
-
-SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/kiparis.mdl"
-SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/wpn_kiparis_w.mdl"
-SWEP.ViewModelFOV = 55
-SWEP.AimViewModelFOV = 55
-SWEP.ViewModelFlip = false
-SWEP.UseHands = true
-SWEP.IronsightPos = Vector(-3.73, -1, 2.302)
-SWEP.IronsightAng = Vector(0, 0, 0)
-SWEP.SprintPos = Vector(7, -9.9, 0.95)
-SWEP.SprintAng = Vector(-17, 50, -14)
-SWEP.Animations = {
-	["idle"] = "anm_idle",
-	["draw"] = "anm_show",
-	["holster"] = "anm_hide",
-	["fire"] = "anm_shots",
-	["reload"] = "anm_reload",
-	["reload_empty"] = "anm_reload_empty",
-	["anm_hide"] = "anm_hide",
-	["anm_idle"] = "anm_idle",
-	["anm_idle_aim"] = "anm_idle_aim",
-	["anm_idle_sprint"] = "anm_idle_sprint",
-	["anm_reload"] = "anm_reload",
-	["anm_reload_empty"] = "anm_reload_empty",
-	["anm_shots"] = "anm_shots",
-	["anm_shots_aim"] = "anm_shots_aim",
-	["anm_show"] = "anm_show",
-	["anm_show_first"] = "anm_show_first",
-}
-SWEP.Sounds = {
-	["anm_hide"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.KIPARIS.Holster",
-		},
-	},
-	["anm_reload"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.KIPARIS.Reload",
-		},
-	},
-	["anm_reload_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.KIPARIS.Reload",
-		},
-	},
-	["anm_show"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.KIPARIS.Draw",
-		},
-	},
-	["anm_show_first"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.KIPARIS.Draw",
-		},
-	},
-}
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 3.033333
-SWEP.ReloadTime_Empty = 3.033333
-SWEP.ReloadHalt = 3.033333
-SWEP.ReloadHalt_Empty = 3.033333
-SWEP.ShotgunReload = false
-SWEP.ReloadStartTime = 1
-SWEP.InsertShellTime = 1
-SWEP.ReloadFinishWait = 1
-SWEP.AlwaysPlayReloadEnd = true
-SWEP.MuzzleAttachmentName = "muzzle"
-SWEP.MuzzleEffect = "muzzleflash_ak74"
-SWEP.Shell = "mainshell"
-SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_kiparis_w.mdl"
-SWEP.DrawTraditionalWorldModel = false
-SWEP.WMPos = Vector(-1, 4.1081, -4.6758)
-SWEP.WMAng = Vector(-10, 0, 180)
-SWEP.FireSound = "TFA_ANOMALY.KIPARIS.FIRE"
-SWEP.FireSoundSuppressed = "TFA_ANOMALY.KIPARIS.FIRE_SILENCED"
-SWEP.LuaViewmodelRecoil = true
-SWEP.LuaViewmodelRecoilOverride = false
+SWEP.ReloadTime = 1.85
+SWEP.ReloadTime_Empty = 3
+SWEP.ReloadHalt = 1.86
+SWEP.ReloadHalt_Empty = 3
 
-if CLIENT then
-	SWEP.SelectIcon = surface.GetTextureID("vgui/entities/tfa_anomaly_kiparis")
-	SWEP.BoltBone = "zatvor"
-	SWEP.BoltShootOffset = Vector(0, 0, 2.981)
-	SWEP.BoltBonePositionRecoverySpeed = 57
-end
-
-function SWEP:fireAnimFunc()
-end
+SWEP.SnapToIdlePostReload = true

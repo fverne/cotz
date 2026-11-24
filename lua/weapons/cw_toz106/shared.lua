@@ -106,6 +106,7 @@ SWEP.ViewModelFOV	= 55
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/arc9/darsu_eft/c_toz106.mdl"
 SWEP.WorldModel		= "models/weapons/arc9/darsu_eft/w_toz106.mdl"
+SWEP.WorldAttachmentScale = 1
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

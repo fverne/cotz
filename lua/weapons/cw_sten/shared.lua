@@ -109,6 +109,9 @@ SWEP.ViewModelFOV	= 80
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel		= "models/weapons/v_smg_ste.mdl"
 SWEP.WorldModel		= "models/weapons/w_smg_ste.mdl"
+SWEP.WorldAttachmentScale = 1.593
+SWEP.WorldAttachmentShift = Vector(12.02, 0.8, -0.17)
+SWEP.WorldAttachmentAngle = Angle(86.79, -32.31, -34.25)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

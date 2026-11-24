@@ -47,21 +47,40 @@ local function loadBase(name)
 end
 
 local base = loadBase("sh_newweapons.lua")
-local firearmCount = 0
+local firearmCount, reskinCount = 0, 0
 local classes, anomalyHardware, standardHardware = {}, {}, {}
 for file in lfs.dir(PREFIX .. "items/newweapons") do
 	assert(not file:match("^sh_debug_cw_anomaly_"), "Unexpected Anomaly debug weapon " .. file)
 	if file:match("^sh_.*%.lua$") and not file:match("^sh_debug_") then
 		local firearm = setmetatable(loadItem("newweapons", file), {__index = base})
 		firearm.uniqueID = file:match("^sh_(.*)%.lua$")
-		local profile = assert(PROFILES.weapons[firearm.class], file)
-		local suppressor = profile.suppressor
+		local sourceClass = PROFILES.GetSourceClass(firearm.class)
+		assert(PROFILES.weapons[sourceClass], file)
+		local isReskin = file:match("^sh_anomaly_reskin_")
+		local isStandalone = not isReskin and file:match("^sh_anomaly_")
+		local profile = PROFILES.GetForModel(firearm.class, firearm.model)
+		local suppressor = profile and profile.suppressor
 		classes[firearm.class] = true
+		local declaredAttachments, declaredCanAttach = firearm.validAttachments, firearm.canAttach
 		local extra = table.HasValue(firearm.validAttachments, "md_foregrip")
 		firearm:OnRegistered()
-		assert(firearm.canAttach == (#firearm.validAttachments > 0), file)
+		if profile then
+			assert(firearm.canAttach == (#firearm.validAttachments > 0), file)
+		else
+			assert(firearm.validAttachments == declaredAttachments and firearm.canAttach == declaredCanAttach, file)
+		end
 		assert(table.HasValue(firearm.validAttachments, "md_foregrip") == extra, file)
-		if file:match("^sh_anomaly_") then
+		if isReskin then
+			assert(firearm.category == "Anomaly Reskins" and firearm.noBusiness and sourceClass ~= firearm.class, file)
+			assert(profile and profile.anomalyModel, file)
+			local weapon = assert(io.open("lua/weapons/" .. firearm.class .. "/shared.lua"))
+			local source = weapon:read("*a")
+			weapon:close()
+			assert(source:find('SWEP.Category = "Anomaly Reskins"', 1, true), file)
+			assert(source:find('SWEP.AdminOnly = true', 1, true), file)
+			assert(firearm.pacData[1].children[1].self.Arguments == firearm.class .. "@@0", file)
+			reskinCount = reskinCount + 1
+		elseif isStandalone then
 			assert(firearm.noBusiness and firearm.anomalyInventoryAttachments, file)
 			assert(firearm.price > 0 and firearm.unloadedweight > 0, file)
 			firearmCount = firearmCount + 1
@@ -69,7 +88,7 @@ for file in lfs.dir(PREFIX .. "items/newweapons") do
 
 		local muzzleCount = 0
 		for _, id in ipairs(firearm.validAttachments) do
-			if file:match("^sh_anomaly_") then
+			if isStandalone then
 				assert(not id:match("^cw_anomaly_"), file .. " uses pack-only hardware " .. id)
 				assert(poses.weapons[firearm.class][id], file .. " needs a CW placement for " .. id)
 				anomalyHardware[id] = true
@@ -79,22 +98,30 @@ for file in lfs.dir(PREFIX .. "items/newweapons") do
 			local definition = assert(ix.weapontables.attachments[id], id)
 			local hardware = loadItem("attachments", "sh_" .. definition.uID .. ".lua")
 			assert(hardware.attachName == id and hardware.attachSlot == definition.slot, file)
-			if definition.slot == 2 then
+			if profile and definition.slot == 2 then
 				assert(id == suppressor, file)
 				muzzleCount = muzzleCount + 1
 			end
 		end
-		assert(muzzleCount == (suppressor and 1 or 0), file)
-		for _, id in ipairs(PROFILES.GetSights(firearm.class)) do
-			assert(table.HasValue(firearm.validAttachments, id), file .. " missing " .. id)
+		if profile then
+			assert(muzzleCount == (suppressor and 1 or 0), file)
+			for _, id in ipairs(PROFILES.GetSights(firearm.class)) do
+				assert(table.HasValue(firearm.validAttachments, id), file .. " missing " .. id)
+			end
 		end
 	end
 end
 assert(firearmCount == 82)
+assert(reskinCount == 61)
 for id in pairs(anomalyHardware) do
 	assert(standardHardware[id], id .. " must also be available on a regular CW firearm")
 end
 for class in pairs(PROFILES.weapons) do assert(classes[class], class) end
+
+assert(not PROFILES.GetForModel("cw_mp5", "models/srp/weapons/w_mp5.mdl"))
+assert(PROFILES.GetForModel("cw_mp5", "models/flaymi/anomaly/weapons/w_models/wpn_mp5.mdl"))
+assert(PROFILES.GetForModel("cw_cotz_anomaly_mp5", "models/flaymi/anomaly/weapons/w_models/wpn_mp5.mdl"))
+assert(not PROFILES.GetForModel("cw_cotz_anomaly_mp5", "models/srp/weapons/w_mp5.mdl"))
 
 local pistolSights = PROFILES.GetSights("cw_p99")
 assert(table.HasValue(pistolSights, "md_microt1") and not table.HasValue(pistolSights, "md_schmidt_shortdot"))
@@ -253,7 +280,15 @@ local function configure(isClient)
 		end
 	end
 	assert(firearm:GetCotzAttachment(definitions[OPTIC]) == definitions[OPTIC])
+	local mp5 = setmetatable({
+		GetClass = function() return "cw_cotz_anomaly_mp5" end,
+		ViewModel = "models/flaymi/anomaly/weapons/v_models/mp5.mdl",
+		Attachments = {},
+	}, {__index = SWEP})
+	mp5:ApplyCotzAttachmentProfile()
+	assert(table.HasValue(mp5.Attachments[1].atts, OPTIC))
 	if isClient then
+		assert(mp5.AttachmentModelsVM.md_rmr and mp5.md_rmrPos)
 		assert(firearm.AttachmentModelsVM[OPTIC] and firearm[OPTIC .. "Pos"], "shared optic must have a model and aim")
 		local mosin = setmetatable({
 			GetClass = function() return "cw_ws_mosin" end,

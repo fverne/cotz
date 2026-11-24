@@ -11,7 +11,11 @@ ITEMS = ROOT / "gamemodes/ix_cotz/schema/items/newweapons"
 WEAPONS = ROOT / "lua/weapons"
 sys.path.insert(0, str(ROOT / "docs/anomaly"))
 
-from reskin_weapons import mask, statements  # noqa: E402
+from reskin_weapons import WEAPON_MAP, mask, statements  # noqa: E402
+
+
+def uses_legacy_model(weapon_class, definition):
+    return weapon_class in WEAPON_MAP and not definition["ViewModel"].strip('"').startswith("models/flaymi/anomaly/")
 
 
 @lru_cache(maxsize=None)
@@ -32,6 +36,12 @@ def reload_definition(weapon_class):
 class WeaponReloadCatalogueSpec(unittest.TestCase):
     def test_regular_mp5_uses_authored_bolt_release_only_from_empty(self):
         source = reload_definition("cw_mp5")
+        if uses_legacy_model("cw_mp5", source):
+            self.assertEqual(float(source["ReloadSpeed"]), 1.3)
+            self.assertEqual(float(source["ReloadHalt"]), 2.6)
+            self.assertEqual(float(source["ReloadHalt_Empty"]), 3.5)
+            return
+
         self.assertRegex(source["Animations"], r'\["reload"\]\s*=\s*"anm_reload"')
         self.assertRegex(source["Animations"], r'\["reload_empty"\]\s*=\s*"anm_reload_empty"')
         self.assertRegex(source["Sounds"], r'(?s)\["anm_reload"\].*?"TFA_ANOMALY\.MP5\.Reload"')
@@ -66,7 +76,8 @@ class WeaponReloadCatalogueSpec(unittest.TestCase):
                 else:
                     self.assertIn("reload", animations)
                     timings += ["ReloadTime", "ReloadTime_Empty", "ReloadHalt", "ReloadHalt_Empty"]
-                    if animations.get("reload_empty", animations["reload"]) == animations["reload"]:
+                    same_sequence = animations.get("reload_empty", animations["reload"]) == animations["reload"]
+                    if same_sequence and not uses_legacy_model(weapon_class, definition):
                         for field in ("ReloadTime", "ReloadHalt"):
                             self.assertEqual(float(definition[field]), float(definition[field + "_Empty"]))
 

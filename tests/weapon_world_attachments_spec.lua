@@ -166,6 +166,21 @@ assert((drawn.optic.pos - Vector(10, 18, 30)):Length() < 1e-6, "turn the viewmod
 weapon.WorldAttachmentScale, weapon.WorldAttachmentShift, weapon.WorldAttachmentAngle = nil, nil, nil
 
 drawn = {}
+weapon.WorldAttachmentBone = "receiver"
+weapon.WorldAttachmentScale = 0.5
+local receiverModel = {
+	LookupBone = function(_, name)
+		assert(name == "receiver")
+		return 0
+	end,
+	GetBoneMatrix = function() return SourceMathMatrix(Vector(10, 20, 30), Angle(0, 90, 0)) end,
+}
+weapon:DrawWorldAttachments(receiverModel)
+assert((drawn.optic.pos - Vector(10, 18, 31)):Length() < 1e-6, "an authored bone also works without a muzzle")
+assert(drawn.optic.scale.x == 0.5)
+weapon.WorldAttachmentBone, weapon.WorldAttachmentScale = nil, nil
+
+drawn = {}
 weapon:SetWorldAttachments("dovetail")
 weapon:DrawWorldAttachments(worldModel)
 assert(drawn.dovetail and not drawn.rail and not drawn.optic, "replace the visual and hide the unneeded adapter")

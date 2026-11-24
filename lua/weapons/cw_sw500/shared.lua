@@ -121,6 +121,8 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_pist_500.mdl"
 SWEP.WorldModel		= "models/weapons/w_erect_re500.mdl"
+SWEP.WorldAttachmentScale = 0.755
+SWEP.WorldAttachmentAngle = Angle(0, -0.01, -94.04)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

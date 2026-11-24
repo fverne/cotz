@@ -130,6 +130,9 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= true
 SWEP.ViewModel 		= "models/weapons/v_rif_l852_mod2.mdl" -- recompiled model to not have snappy reload animation
 SWEP.WorldModel 	= "models/weapons/w_rif_l852.mdl"
+SWEP.WorldAttachmentScale = 1.318
+SWEP.WorldAttachmentShift = Vector(-1.47, -0.02, 0.01)
+SWEP.WorldAttachmentAngle = Angle(90, 89.99, 0)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

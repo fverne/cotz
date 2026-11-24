@@ -1,0 +1,72 @@
+ITEM.name = "Baikal MP-153"
+ITEM.description= "A semi-automatic shotgun. Fires 12 gauge."
+ITEM.longdesc = "Originally made for the civilian market, its gas-operated action has found a new audience beyond"
+	.. " the perimeter. Usually used for shooting skeet, or hunting small or medium game, however in the"
+	.. " zone it becomes an excellent tool for survival.\n"
+	.. "\n"
+	.. "Ammo: 12 Gauge\n"
+	.. "Magazine Capacity: 7"
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_mp153_w.mdl"
+ITEM.class = "cw_mp153"
+ITEM.weaponCategory = "primary"
+ITEM.price = 11000
+ITEM.width = 6
+ITEM.height = 1
+ITEM.canAttach = false
+
+ITEM.bulletweight = 0.031
+ITEM.unloadedweight = 3.45
+
+
+
+
+function ITEM:GetWeight()
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
+end
+
+ITEM.iconCam = {
+	pos = Vector(10.3, -205, 3.1),
+	ang = Angle(0, 90, 0),
+	fov = 11.6,
+}
+
+ITEM.pacData = {
+[1] = {
+	["children"] = {
+		[1] = {
+			["children"] = {
+				[1] = {
+					["children"] = {
+					},
+					["self"] = {
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(11.98, -4.153, -3.575),
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_mp153_w.mdl",
+						["ClassName"] = "model",
+						["Translucent"] = true,
+						["EditorExpand"] = true,
+						["UniqueID"] = "15635315",
+						["Bone"] = "spine 2",
+						["Name"] = "mp153",
+					},
+				},
+			},
+			["self"] = {
+				["AffectChildrenOnly"] = true,
+				["ClassName"] = "event",
+				["UniqueID"] = "5312253",
+				["Event"] = "weapon_class",
+				["Invert"] = false,
+				["EditorExpand"] = true,
+				["Name"] = "weapon class find simple\"@@1\"",
+				["Arguments"] = "cw_mp153@@0",
+			},
+		},
+	},
+	["self"] = {
+		["ClassName"] = "group",
+		["UniqueID"] = "132562561",
+		["EditorExpand"] = true,
+	},
+},
+}

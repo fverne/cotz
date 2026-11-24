@@ -10,24 +10,70 @@ if CLIENT then
 	SWEP.IconLetter = ""
 	killicon.AddFont("", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 150))
 
+	SWEP.MuzzleEffect = "muzzleflash_pistol"
+	SWEP.PosBasedMuz = true
+
+	SWEP.Shell = "mainshell"
+	SWEP.ShellScale = .28
+	SWEP.ShellOffsetMul = 0
+	SWEP.ShellPosOffset = {x = 2, y = 0, z = 0}
+
+	SWEP.IronsightPos = Vector(-2.28, 0, 0.109)
+	SWEP.IronsightAng = Vector(1.2, 0.021, 0)
+
+	SWEP.SprintPos = Vector(0.602, -0.202, 0)
+	SWEP.SprintAng = Vector(-11.961, 3.517, 0)
+
+	SWEP.CustomizePos = Vector(5.427, -3.418, -2.01)
+	SWEP.CustomizeAng = Vector(19.697, 27.437, 24.622)
+
+	SWEP.AlternativePos = Vector(-0.64, -1, -1.121)
+	SWEP.AlternativeAng = Vector(0, 0.703, 0)
+
+
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.8
+	SWEP.BoltBone = "slide"
+	SWEP.BoltShootOffset = Vector(-1.5, 0, 0)
+	SWEP.BoltReloadOffset = Vector(-0, 0, 0)
+	SWEP.ReloadBoltBonePositionRecoverySpeed = 99999
+	SWEP.ReloadBoltBonePositionMoveSpeed = 99999
+	SWEP.HoldBoltWhileEmpty = true
 	SWEP.DontHoldWhenReloading = true
 	SWEP.DisableSprintViewSimulation = false
 
 	SWEP.LuaVMRecoilAxisMod = {vert = 1, hor = 1, roll = 1, forward = 1, pitch = 1.5}
 	SWEP.CustomizationMenuScale = 0.013
+	SWEP.BoltBonePositionRecoverySpeed = 35 -- how fast does the bolt bone move back into it's initial position after the weapon has fired
 
+	SWEP.AttachmentModelsVM = {
+
+	["md_tokasup"] = { type = "Model", model = "models/cw2/attachments/556suppressor.mdl", bone = "body", rel = "", pos = Vector(0, -2.86, -0.401), angle = Angle(0, 0, 0), size = Vector(0.4, 0.4, 0.4), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	}
 end
 
+SWEP.LuaViewmodelRecoil = true
 SWEP.CanRestOnObjects = false
 
 SWEP.Attachments = {[1] = {header = "Barrel Extension", offset = {-600, -450}, atts = {"md_tokasup"}},
 ["+reload"] = {header = "Ammo", offset = {400, -100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
+
+SWEP.Animations = {fire = {"shoot1", "shoot2"},
+	reload = "reload",
+	idle = "idle",
+	draw = "draw"}
+
+SWEP.Sounds = {draw = {{time = 0, sound = "TT_SLIDE"}},
+
+	reload = {[1] = {time = 0.40, sound = "TT_CLIPOUT"},
+	[2] = {time = 1.15, sound = "TT_CLIPIN"},
+	[3] = {time = 1.6, sound = "TT_SLIDE"}}}
+
 SWEP.SpeedDec = 0
 
 SWEP.Slot = 2
+SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "pistol"
 SWEP.RunHoldType = "normal"
@@ -40,6 +86,12 @@ SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
 
+SWEP.ViewModelFOV	= 75
+SWEP.AimViewModelFOV = 70
+SWEP.ViewModelFlip	= false
+SWEP.ViewModel		= "models/weapons/v_khri_tt33tokar.mdl"
+SWEP.WorldModel		= "models/weapons/w_pist_tt38.mdl"
+
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
 
@@ -49,6 +101,8 @@ SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "7.62x25MM"
 
 SWEP.FireDelay = 0.08
+SWEP.FireSound = "TT_FIRE"
+SWEP.FireSoundSuppressed = "TT_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.55
 SWEP.FOVPerShot = 0.2
 
@@ -64,118 +118,12 @@ SWEP.SpreadCooldown = 0.2
 SWEP.Shots = 1
 SWEP.Damage = 43
 SWEP.DeployTime = .7
+SWEP.ADSFireAnim = false
 SWEP.Chamberable = false
 
--- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_tt33.
+SWEP.ReloadSpeed = 1.5
+SWEP.ReloadTime = 2.5
+SWEP.ReloadHalt = 2.5
 
-SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/tt33.mdl"
-SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/wpn_tt33_w.mdl"
-SWEP.ViewModelFOV = 55
-SWEP.AimViewModelFOV = 55
-SWEP.ViewModelFlip = false
-SWEP.UseHands = true
-SWEP.IronsightPos = Vector(-3.805, -1, 1.885)
-SWEP.IronsightAng = Vector(1, 0, 0)
-SWEP.SprintPos = Vector(0, 0, 3.8)
-SWEP.SprintAng = Vector(-19, 3, -6)
-SWEP.Animations = {
-	["idle"] = "anm_idle",
-	["draw"] = "anm_show",
-	["holster"] = "anm_hide",
-	["fire"] = "anm_shots",
-	["reload"] = "anm_reload",
-	["reload_empty"] = "anm_reload_empty",
-	["fire_dry"] = "anm_shots_last",
-	["anm_hide"] = "anm_hide",
-	["anm_hide_empty"] = "anm_hide_empty",
-	["anm_idle"] = "anm_idle",
-	["anm_idle_empty"] = "anm_idle_empty",
-	["anm_idle_aim"] = "anm_idle_aim",
-	["anm_idle_aim_empty"] = "anm_idle_aim_empty",
-	["anm_idle_sprint"] = "anm_idle_sprint",
-	["anm_idle_sprint_empty"] = "anm_idle_sprint_empty",
-	["anm_reload"] = "anm_reload",
-	["anm_reload_empty"] = "anm_reload_empty",
-	["anm_shots"] = "anm_shots",
-	["anm_shots_last"] = "anm_shots_last",
-	["anm_show"] = "anm_show",
-	["anm_show_empty"] = "anm_show_empty",
-	["anm_show_first"] = "anm_show_first",
-}
-SWEP.Sounds = {
-	["anm_hide"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.TT33.Holster",
-		},
-	},
-	["anm_hide_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.TT33.Holster",
-		},
-	},
-	["anm_reload"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.TT33.Reload",
-		},
-	},
-	["anm_reload_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.TT33.Reload_Empty",
-		},
-	},
-	["anm_show"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.TT33.Draw",
-		},
-	},
-	["anm_show_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.TT33.Draw",
-		},
-	},
-	["anm_show_first"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.TT33.Draw",
-		},
-	},
-}
-SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.133333
-SWEP.ReloadTime_Empty = 2.266667
-SWEP.ReloadHalt = 2.133333
-SWEP.ReloadHalt_Empty = 2.266667
-SWEP.ShotgunReload = false
-SWEP.ReloadStartTime = 1
-SWEP.InsertShellTime = 1
-SWEP.ReloadFinishWait = 1
-SWEP.AlwaysPlayReloadEnd = true
-SWEP.MuzzleAttachmentName = "muzzle"
-SWEP.MuzzleEffect = "muzzleflash_pistol"
-SWEP.Shell = "mainshell"
-SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_tt33_w.mdl"
-SWEP.DrawTraditionalWorldModel = false
-SWEP.WMPos = Vector(-1.3, 4.4642, -2.9001)
-SWEP.WMAng = Vector(-7, 0, 180)
-SWEP.FireSound = "TFA_ANOMALY.TT33.FIRE"
-SWEP.FireSoundSuppressed = "TFA_ANOMALY.TT33.FIRE"
-SWEP.LuaViewmodelRecoil = true
-SWEP.LuaViewmodelRecoilOverride = false
-
-if CLIENT then
-	SWEP.SelectIcon = surface.GetTextureID("vgui/entities/tfa_anomaly_tt33")
-	SWEP.BoltBone = "slide"
-	SWEP.BoltShootOffset = Vector(0, 0, 0.988)
-	SWEP.BoltBonePositionRecoverySpeed = 15
-	SWEP.HoldBoltWhileEmpty = true
-	SWEP.DontHoldWhenReloading = true
-end
-
-function SWEP:fireAnimFunc()
-end
+SWEP.ReloadTime_Empty = 2.5
+SWEP.ReloadHalt_Empty = 2.5

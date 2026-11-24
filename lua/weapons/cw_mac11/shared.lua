@@ -136,6 +136,7 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/smgs/mac11.mdl"
 SWEP.WorldModel		= "models/weapons/w_cst_mac11.mdl"
+SWEP.WorldAttachmentScale = 1.333
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

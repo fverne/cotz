@@ -24,7 +24,7 @@ ITEM.unloadedweight = 0
 local ATTACHMENT_PROFILES = include("cotz/weapon_attachment_profiles.lua")
 
 function ITEM:OnRegistered()
-	local profile = ATTACHMENT_PROFILES.weapons[self.class]
+	local profile = ATTACHMENT_PROFILES.GetForModel(self.class, self.model)
 	if not profile or string.StartWith(self.uniqueID, "debug_") then return end
 
 	local attachments = ATTACHMENT_PROFILES.GetSights(self.class)

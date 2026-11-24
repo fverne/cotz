@@ -142,6 +142,9 @@ SWEP.ViewModelFOV	= 75
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_bocw_ironhide.mdl"
 SWEP.WorldModel		= "models/weapons/w_bocw_ironhide.mdl"
+SWEP.WorldAttachmentScale = 0.792
+SWEP.WorldAttachmentBone = "tag_weapon"
+SWEP.WorldAttachmentShift = Vector(25.48, 0, 2.7)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

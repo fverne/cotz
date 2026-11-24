@@ -342,8 +342,8 @@ def posed_vertices(path, sequence=None):
     return vertices
 
 
-def triangles(path):
-    """LOD 0 triangles of each body part's default model as vertex index triplets, from the .dx90.vtx."""
+def triangles(path, bodygroups=None):
+    """LOD 0 triangles for the selected bodygroups as vertex index triplets, from the .dx90.vtx."""
     with open(path, "rb") as handle:
         mdl = handle.read()
     vtx_path = path[:-4] + ".dx90.vtx"
@@ -359,10 +359,12 @@ def triangles(path):
         vtx_models, vtx_model_offset = struct.unpack_from("<ii", vtx, vtx_body)
         if model_count < 1 or vtx_models < 1:
             continue
-        # Only the default (first) model of each body part is drawn without bodygroup changes.
-        mdl_model = mdl_body + model_index
+        selected = (bodygroups or {}).get(body, 0)
+        if not 0 <= selected < min(model_count, vtx_models):
+            raise MdlError("invalid model %s for bodygroup %s in %s" % (selected, body, path))
+        mdl_model = mdl_body + model_index + selected * 148
         mesh_count, mesh_index, _, vertex_index = struct.unpack_from("<iiii", mdl, mdl_model + 72)
-        vtx_model = vtx_body + vtx_model_offset
+        vtx_model = vtx_body + vtx_model_offset + selected * 8
         lod_count, lod_offset = struct.unpack_from("<ii", vtx, vtx_model)
         vtx_lod = vtx_model + lod_offset
         vtx_meshes, vtx_mesh_offset = struct.unpack_from("<ii", vtx, vtx_lod)

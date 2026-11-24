@@ -9,72 +9,101 @@ if CLIENT then
 	SWEP.IconLetter = "u"
 	killicon.AddFont("cw_fiveseven", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 150))
 
+	SWEP.MuzzleEffect = "muzzleflash_pistol"
+	SWEP.PosBasedMuz = false
+
+	SWEP.Shell = "smallshell"
+	SWEP.ShellScale = 0.5
+	SWEP.ShellOffsetMul = 1
+	SWEP.ShellPosOffset = {x = 2, y = 0, z = 0}
+
+	SWEP.IronsightPos = Vector(-2.721, 0, 1.276)
+	SWEP.IronsightAng = Vector(0.273, -1.461, 0)
+
+	SWEP.SprintPos = Vector(3.632, -9.933, -8.775)
+	SWEP.SprintAng = Vector(70, 0, 0)
+
+	SWEP.MicroT1Pos = Vector(-2.889, 0, -0.009)
+	SWEP.MicroT1Ang = Vector(0, -1.943, 0)
+
+	SWEP.EoTechPos = Vector(-2.41, -2, 0.1)
+	SWEP.EoTechAng = Vector(0, 0, 0)
+
+	SWEP.RMRPos = Vector(-2.758, -4.185, 0.65)
+	SWEP.RMRAng = Vector(0, -1.943, 0)
+
 	SWEP.MoveType = 1
 	SWEP.ViewModelMovementScale = 0.8
 	SWEP.FullAimViewmodelRecoil = false
+	SWEP.BoltBone = "Object014"
+	SWEP.BoltShootOffset = Vector(-1.5, 0, 0)
+	SWEP.BoltBonePositionRecoverySpeed = 25
+	SWEP.OffsetBoltDuringNonEmptyReload = true
+	SWEP.BoltReloadOffset = Vector(0, 0, 0)
+	SWEP.ReloadBoltBonePositionRecoverySpeed = 20
+	SWEP.ReloadBoltBonePositionMoveSpeed = 100
+	SWEP.StopReloadBoneOffset = 0.4
+	SWEP.HoldBoltWhileEmpty = true
 	SWEP.DontHoldWhenReloading = true
+	SWEP.DontMoveBoltOnHipFire = true
 	SWEP.DisableSprintViewSimulation = true
 	SWEP.FOVPerShot = 0.3
 
+	SWEP.SightWithRail = true
+
+	SWEP.AttachmentModelsVM = {
+		["md_rail"] = {model = "models/cw2/attachments/pistolrail.mdl", bone = "Object007", pos = Vector(0.076, 1.534, -0.343), angle = Angle(0, -90, 0), size = Vector(0.18, 0.18, 0.18)},
+		["md_tundra9mm"] = {model = "models/cw2/attachments/9mmsuppressor.mdl", bone = "Object007", pos = Vector(0, -4.5, 1), angle = Angle(0, 0, 0), size = Vector(0.5, 0.5, 0.5)},
+		["md_microt1"] = {model = "models/cw2/attachments/microt1.mdl", bone = "Object007", pos = Vector(0.064, 0.805, 2.819), angle = Angle(0, 0, 0), size = Vector(0.479, 0.479, 0.479)},
+		["md_insight_x2"] = {model = "models/cw2/attachments/pistollaser.mdl", bone = "Object007", pos = Vector(0.034, 0.37, 0.767), angle = Angle(0, -90, 0), size = Vector(0.14, 0.14, 0.14)},
+		["md_eotech"] = {model = "models/wystan/attachments/2otech557sight.mdl", bone = "Object007", pos = Vector(-0.15, 10, -6.5), angle = Angle(0, 90, 0), size = Vector(0.85, 0.85, 0.85)},
+		["md_rmr"] = {model = "models/cw2/attachments/pistolholo.mdl", bone = "Object007", pos = Vector(0.3, 4, -0.8), angle = Angle(0, 90, 0), size = Vector(0.6, 0.6, 0.6)},
+		}
+
 	SWEP.LuaVMRecoilAxisMod = {vert = 0.25, hor = 0.5, roll = 2, forward = 0, pitch = 1}
 	SWEP.CustomizationMenuScale = 0.01
+	SWEP.BoltBonePositionRecoverySpeed = 17 -- how fast does the bolt bone move back into it's initial position after the weapon has fired
 
+	SWEP.LaserPosAdjust = Vector(0.5, 0, -2)
+	SWEP.LaserAngAdjust = Angle(0, 180 + -1.7, 0)
+
+	SWEP.LaserAngAdjustAim = Angle(0, 180 - 0.5, 0)
+
+	SWEP.SlideBGs = {main = 1, pm = 0, pb = 1}
+	SWEP.SuppressorBGs = {main = 2, pm = 1, pb = 2, none = 0}
+	SWEP.MagBGs = {main = 3, regular = 0, extended = 1}
+
+	SWEP.AttachmentPosDependency = {["md_insight_x2"] = {["md_microt1"] = Vector(0.093, 0.37, 0.358)}}
 end
 
+SWEP.LuaViewmodelRecoil = true
+SWEP.LuaViewmodelRecoilOverride = true
 SWEP.CanRestOnObjects = false
-
-if CLIENT then
-	SWEP.AttachmentModelsVM = {
-		["md_microt1"] = {
-			model = "models/cw2/attachments/microt1.mdl",
-			bone = "zatvor",
-			staticBone = "wpn_body",
-			pos = Vector(0.161955, -0.823761, 0.174686),
-			angle = Angle(-0.053533, 0, -89.999982),
-			size = Vector(0.3, 0.3, 0.3),
-		},
-		["md_eotech"] = {
-			model = "models/wystan/attachments/2otech557sight.mdl",
-			bone = "zatvor",
-			staticBone = "wpn_body",
-			pos = Vector(-0.067984, 7.024151, 7.7837),
-			angle = Angle(-88.003467, 179.999484, 89.999484),
-			size = Vector(0.7125, 0.7125, 0.7125),
-		},
-		["md_rmr"] = {
-			model = "models/cw2/attachments/pistolholo.mdl",
-			bone = "zatvor",
-			staticBone = "wpn_body",
-			pos = Vector(0.404595, 2.917318, 3.594309),
-			angle = Angle(-89.946467, 90, 0),
-			size = Vector(0.6375, 0.6375, 0.6375),
-		},
-		["md_rail"] = {
-			model = "models/cw2/attachments/pistolrail.mdl",
-			bone = "zatvor",
-			staticBone = "wpn_body",
-			pos = Vector(0.152753, 1.762407, -1.046329),
-			angle = Angle(-89.998441, 90, 0),
-			size = Vector(0.1305, 0.105, 0.145),
-		},
-		["md_tundra9mm"] = {
-			model = "models/cw2/attachments/9mmsuppressor.mdl",
-			bone = "wpn_body",
-			pos = Vector(0.000069, -0.469826, -8.186521),
-			angle = Angle(0.001954, 0, -89.999982),
-			size = Vector(0.7, 0.7, 0.7),
-		},
-	}
-end
 
 SWEP.Attachments = {[1] = {header = "Barrel", offset = {-350, -200}, atts = {"md_tundra9mm"}},
 	[2] = {header = "Sight", offset = {400, -300}, atts = {"md_microt1", "md_eotech", "md_rmr"}},
 	[3] = {header = "Rail", offset = {-350, 200}, atts = {"md_insight_x2"}},
 	["+reload"] = {header = "Ammo", offset = {800, 100}, atts = {"am_hollowpoint", "am_armorpiercing"}}}
 
+SWEP.Animations = {reload = "reload_cham",
+	reload_empty = "reload",
+	fire = {"shoot1", "shoot2", "shoot3"},
+	idle = "idle",
+	draw = "draw"}
+
+SWEP.Sounds = {draw = {{time = 0, sound = "CW_FOLEY_LIGHT"}},
+	reload_cham = {{time = 0.15, sound = "CW_FIVESEVEN_MAGOUT"},
+	{time = 1.2, sound = "CW_FIVESEVEN_MAGIN"}},
+
+	reload = {{time = 0.15, sound = "CW_FIVESEVEN_MAGOUT"},
+	{time = 1.2, sound = "CW_FIVESEVEN_MAGIN"},
+	{time = 1.88, sound = "CW_FIVESEVEN_SLIDERELEASE"}}
+}
+
 SWEP.SpeedDec = 10
 
 SWEP.Slot = 2
+SWEP.SlotPos = 0
 SWEP.HoldType = "pistol"
 SWEP.NormalHoldType = "pistol"
 SWEP.RunHoldType = "normal"
@@ -86,6 +115,11 @@ SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
+
+SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFlip	= false
+SWEP.ViewModel		= "models/cw2/pistols/fiveseven.mdl"
+SWEP.WorldModel		= "models/weapons/w_pist_fiveseven.mdl"
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
@@ -99,6 +133,8 @@ SWEP.WearDamage = 0.14
 SWEP.WearEffect = 0.05
 
 SWEP.FireDelay = 0.08
+SWEP.FireSound = "CW_FIVESEVEN_FIRE"
+SWEP.FireSoundSuppressed = "CW_FIVESEVEN_FIRE_SUPPRESSED"
 SWEP.Recoil = 0.9
 
 SWEP.HipSpread = 0.06
@@ -112,124 +148,9 @@ SWEP.Damage = 75
 SWEP.DeployTime = 0.4
 --SWEP.Chamberable = false
 
--- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_fn57.
-
-SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/fn57.mdl"
-SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/wpn_fn57_w.mdl"
-SWEP.ViewModelFOV = 55
-SWEP.AimViewModelFOV = 55
-SWEP.ViewModelFlip = false
-SWEP.UseHands = true
-SWEP.IronsightPos = Vector(-4.1345, -3, 2.546)
-SWEP.IronsightAng = Vector(-0.5, 0, 0)
-
-SWEP.MicroT1Pos = Vector(-4.363286, -3, 1.780378)
-SWEP.MicroT1Ang = Vector(-0.5, 0, 0)
-SWEP.EoTechPos = Vector(-4.035491, -5, 1.632012)
-SWEP.EoTechAng = Vector(-0.5, 0, 0)
-SWEP.RMRPos = Vector(-4.378144, -7.185, 1.918467)
-SWEP.RMRAng = Vector(-0.5, 0, 0)
-SWEP.SightWithRail = true
-SWEP.SprintPos = Vector(0, -1, 3.8)
-SWEP.SprintAng = Vector(-19, 3, -6)
-SWEP.Animations = {
-	["idle"] = "anm_idle",
-	["draw"] = "anm_show",
-	["holster"] = "anm_hide",
-	["fire"] = "anm_shots",
-	["reload"] = "anm_reload",
-	["reload_empty"] = "anm_reload_empty",
-	["fire_dry"] = "anm_shots_last",
-	["anm_hide"] = "anm_hide",
-	["anm_hide_empty"] = "anm_hide_empty",
-	["anm_idle"] = "anm_idle",
-	["anm_idle_empty"] = "anm_idle_empty",
-	["anm_idle_aim"] = "anm_idle_aim",
-	["anm_idle_aim_empty"] = "anm_idle_aim_empty",
-	["anm_idle_sprint"] = "anm_idle_sprint",
-	["anm_idle_sprint_empty"] = "anm_idle_sprint_empty",
-	["anm_reload"] = "anm_reload",
-	["anm_reload_empty"] = "anm_reload_empty",
-	["anm_shots"] = "anm_shots",
-	["anm_shots_last"] = "anm_shots_last",
-	["anm_show"] = "anm_show",
-	["anm_show_empty"] = "anm_show_empty",
-	["anm_show_first"] = "anm_show_first",
-}
-SWEP.Sounds = {
-	["anm_hide"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.FN57.Holster",
-		},
-	},
-	["anm_hide_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.FN57.Holster",
-		},
-	},
-	["anm_reload"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.FN57.Reload",
-		},
-	},
-	["anm_reload_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.FN57.Reload_Empty",
-		},
-	},
-	["anm_show"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.FN57.Draw",
-		},
-	},
-	["anm_show_empty"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.FN57.Draw",
-		},
-	},
-	["anm_show_first"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.FN57.Draw",
-		},
-	},
-}
 SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 2.833333
-SWEP.ReloadTime_Empty = 4.033333
-SWEP.ReloadHalt = 2.833333
-SWEP.ReloadHalt_Empty = 4.033333
-SWEP.ShotgunReload = false
-SWEP.ReloadStartTime = 1
-SWEP.InsertShellTime = 1
-SWEP.ReloadFinishWait = 1
-SWEP.AlwaysPlayReloadEnd = true
-SWEP.MuzzleAttachmentName = "muzzle"
-SWEP.MuzzleEffect = "muzzleflash_pistol"
-SWEP.Shell = "mainshell"
-SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_fn57_w.mdl"
-SWEP.DrawTraditionalWorldModel = false
-SWEP.WMPos = Vector(-1.3, 4.4817, -2.7009)
-SWEP.WMAng = Vector(-7, 0, 180)
-SWEP.FireSound = "TFA_ANOMALY.FN57.FIRE"
-SWEP.FireSoundSuppressed = "TFA_ANOMALY.FN57.FIRE_SILENCED"
-SWEP.LuaViewmodelRecoil = true
-SWEP.LuaViewmodelRecoilOverride = false
+SWEP.ReloadTime = 1.8
+SWEP.ReloadHalt = 2.1
 
-if CLIENT then
-	SWEP.SelectIcon = surface.GetTextureID("vgui/entities/tfa_anomaly_fn57")
-	SWEP.BoltBone = "zatvor"
-	SWEP.BoltShootOffset = Vector(0, 0, 1.684)
-	SWEP.BoltBonePositionRecoverySpeed = 26
-	SWEP.HoldBoltWhileEmpty = true
-	SWEP.DontHoldWhenReloading = true
-end
-
-function SWEP:fireAnimFunc()
-end
+SWEP.ReloadTime_Empty = 1.69
+SWEP.ReloadHalt_Empty = 2.3

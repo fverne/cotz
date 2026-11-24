@@ -1,7 +1,7 @@
 ITEM.name = "TOZ-34 Sawnoff"
 ITEM.description= "A sawnoff break-action hunting shotgun firing 12 gauge shells."
 ITEM.longdesc = "A double barrel hunting shotgun, a classic Russian design popular with hunters and loners alike.\nThis one has had its barrel cut, sacrificing accuracy for portability.\nThe over-and-under barrel placement helps to place shots in the center, but makes the gun more mechanically complex."
-ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_obrez_w.mdl"
+ITEM.model = ("models/weapons/w_sv10s.mdl")
 ITEM.class = "cw_toz34short"
 ITEM.weaponCategory = "primary"
 ITEM.price = 4000
@@ -9,6 +9,7 @@ ITEM.width = 3
 ITEM.height = 1
 ITEM.validAttachments = {
 	"md_nightforce_nxs",
+	"md_kobra",
 	"md_microt1",
 	"md_eotech",
 	"md_aimpoint",
@@ -30,9 +31,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(6.1, -205, 3.8),
-	ang = Angle(0, 90, 0),
-	fov = 6.1,
+	pos = Vector(-10.60000038147, -2.5, 200),
+	ang = Angle(90, 0, 80),
+	fov = 7,
 }
 
 ITEM.pacData = {
@@ -46,7 +47,7 @@ ITEM.pacData = {
 						["self"] = {
 							["Angles"] = Angle(0, 20, 90),
 							["Position"] = Vector(8.9, 11.7, -2.5),
-							["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_obrez_w.mdl",
+							["Model"] = "models/weapons/w_sv10s.mdl",
 							["ClassName"] = "model",
 						["Translucent"] = true,
 							["EditorExpand"] = true,

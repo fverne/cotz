@@ -175,6 +175,9 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/v_bfh_saiga308.mdl"
 SWEP.WorldModel		= "models/weapons/w_bfh_saiga308.mdl"
+SWEP.WorldAttachmentScale = 1.213
+SWEP.WorldAttachmentShift = Vector(9.36, 0.66, 0.17)
+SWEP.WorldAttachmentAngle = Angle(0, -0.01, -90)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

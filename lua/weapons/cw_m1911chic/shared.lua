@@ -126,6 +126,9 @@ if CustomizableWeaponry then
 	SWEP.ViewModelFlip	= false --Mirror ViewModel horizontally?
 	SWEP.ViewModel		= "models/cw2/pistols/silverballer.mdl"
 	SWEP.WorldModel		= "models/weapons/w_silverballer.mdl"
+	SWEP.WorldAttachmentScale = 1.535
+	SWEP.WorldAttachmentShift = Vector(-0.38, 0.01, 0)
+	SWEP.WorldAttachmentAngle = Angle(-1.04, 0.54, 0.2)
 	SWEP.DrawTraditionalWorldModel = false	--Whether to use world model's embedded/compiled origin
 	SWEP.WM = "models/weapons/w_silverballer.mdl"
 	SWEP.WMPos = Vector(1.3,-5.2,2.8)		--world model origin X,Y,Z

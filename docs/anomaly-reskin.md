@@ -1,9 +1,18 @@
 # Anomaly model reskins
 
-COTZ weapons with a counterpart in the Anomaly CW2.0 conversion (in `cotz_general` and
-`cotz_wepmats`) use its view model, world model, sounds and item icon while keeping their COTZ class,
-item IDs, balance, ammunition and attachment slots. Saved weapons and loot tables are unaffected.
-The conversion content must be installed.
+The 61 converted COTZ firearms are available side by side with their legacy counterparts. In the
+Garry's Mod Weapons spawn menu, administrators can find the test SWEPs under **Anomaly Reskins**.
+The Helix items use the same category. For example, a superadmin can give the test MP5 to a
+character with `/CharGiveItem "Character Name" anomaly_reskin_mp5`. The test SWEP class is
+`cw_cotz_anomaly_mp5`. Use the new item IDs to distinguish the test versions by name.
+
+The legacy firearms keep their existing class and item IDs. The reskins share the existing CW base
+and their Anomaly attachment profiles. Test items are excluded from Helix business and have no loot,
+vendor, or progression entries. See the [original backup](../archive/weapon-reskins/anomaly-2026-11-24/README.md)
+or the [standalone Anomaly catalogue](anomaly-debug-items.md).
+
+The sections below document the conversion. It uses models and sounds from
+`cotz_general` and materials from `cotz_wepmats` while retaining the COTZ class and item IDs.
 
 ## Weapon reskin
 

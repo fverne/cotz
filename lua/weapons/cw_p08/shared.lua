@@ -96,6 +96,8 @@ SWEP.ZoomAmount = 5
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/khrcw2/doipack/lugerp08.mdl"
 SWEP.WorldModel		= "models/khrcw2/doipack/w_lugerp08.mdl"
+SWEP.WorldAttachmentScale = 1.548
+SWEP.WorldAttachmentAngle = Angle(-0.01, 0.92, -96.61)
 
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/khrcw2/doipack/w_lugerp08.mdl"

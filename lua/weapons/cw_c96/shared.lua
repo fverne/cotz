@@ -174,6 +174,9 @@ SWEP.ZoomAmount = 15
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/khrcw2/doipack/c96.mdl"
 SWEP.WorldModel		= "models/khrcw2/doipack/w_c96.mdl"
+SWEP.WorldAttachmentScale = 1.436
+SWEP.WorldAttachmentShift = Vector(0.1, 0.05, 0.04)
+SWEP.WorldAttachmentAngle = Angle(0.01, 0.92, -90)
 
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/khrcw2/doipack/w_c96.mdl"

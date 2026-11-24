@@ -11,22 +11,86 @@ if CLIENT then
 	SWEP.IconLetter = "k"
 	killicon.AddFont("cw_ump45", "CW_KillIcons", SWEP.IconLetter, Color(255, 80, 0, 150))
 
+	SWEP.MuzzleEffect = "muzzleflash_m3"
+	SWEP.PosBasedMuz = false
+	SWEP.SnapToGrip = true
+	SWEP.ShellScale = 0.7
+	SWEP.ShellOffsetMul = 1
+	SWEP.Shell = "shotshell"
+	SWEP.ShellDelay = 0.3
+
+	SWEP.DrawTraditionalWorldModel = false
+	SWEP.WM = "models/weapons/w_shot_mossberg5.mdl"
+	SWEP.WMPos = Vector(0, -13, 0)
+	SWEP.WMAng = Vector(-10, 180, 180)
+
+	SWEP.ShellPosOffset = {x = 4, y = 0, z = -3}
+	SWEP.ForeGripOffsetCycle_Draw = 0
+	SWEP.ForeGripOffsetCycle_Reload = 0.9
+	SWEP.ForeGripOffsetCycle_Reload_Empty = 0.8
 	SWEP.FireMoveMod = 1
+
+	SWEP.SightWithRail = true
+
+	SWEP.IronsightPos = Vector(5.74, -3, 3.3)
+	SWEP.IronsightAng = Vector(0, 0, 0)
+
+	SWEP.MicroT1Pos = Vector(5.739, -5, 2.48)
+	SWEP.MicroT1Ang = Vector(0.2, 0, 0)
+
+	SWEP.EoTechPos = Vector(5.76, -5, 2.65)
+	SWEP.EoTechAng = Vector(0, 0, 0)
+
+	SWEP.SprintPos = Vector(1.786, 0, -1)
+	SWEP.SprintAng = Vector(-10.778, 27.573, 0)
+
+	SWEP.CustomizePos = Vector(0, 0, 0)
+	SWEP.CustomizeAng = Vector(5, -5, 5)
+
+	SWEP.SprintPos = Vector(0, -5, 5)
+	SWEP.SprintAng = Vector(-20, -30, -20)
 
 	SWEP.CustomizationMenuScale = 0.016
 	SWEP.ReticleInactivityPostFire = 0.6
 
+	SWEP.AttachmentModelsVM = {
+		["md_eotech"] = {model = "models/wystan/attachments/2otech557sight.mdl", bone = "v_weapon.M3_PARENT", pos = Vector(-0.1, -1.1, -1.481), angle = Angle(90, 0, 90), size = Vector(0.5, 0.5, 0.5)},
+		["md_rail"] = {model = "models/wystan/attachments/rail.mdl", bone = "v_weapon.M3_PARENT", pos = Vector(-0.151, 3.299, 4.5), angle = Angle(-90, 90, 180), size = Vector(0.55, 0.718, 0.55)},
+		["md_microt1"] = {model = "models/cw2/attachments/microt1.mdl", bone = "v_weapon.M3_PARENT", pos = Vector(0, 4.4, 4.5), angle = Angle(0, 0, 90), size = Vector(0.3, 0.3, 0.3)}
+	}
+
 	SWEP.LuaVMRecoilAxisMod = {vert = 1.5, hor = 2, roll = 1, forward = 1, pitch = 1}
 
+	SWEP.LaserPosAdjust = Vector(0.8, 0, 0.3)
+	SWEP.LaserAngAdjust = Angle(0, 180, 0)
 end
 
-SWEP.Attachments = {
+SWEP.ADSFireAnim = true
+
+SWEP.Attachments = {[1] = {header = "Sight", offset = {800, -300}, atts = {"md_microt1", "md_eotech"}},
 ["+reload"] = {header = "Ammo", offset = {700, 325}, atts = {"am_slugrounds", "am_trishot", "am_dartrounds", "am_magnumbuck"}}
 }
+
+SWEP.Animations = {fire = {"shoot1", "shoot2"},
+	reload_start = "start_reload",
+	insert = "insert",
+	reload_end = "after_reload",
+	idle = "idle",
+	draw = "draw"}
+
+SWEP.Sounds = {start_reload = {{time = 0.05, sound = "CW_FOLEY_LIGHT"}},
+	insert = {{time = 0.1, sound = "CW_M3SUPER90_INSERT"}},
+
+	after_reload = {{time = 0.1, sound = "CW_M3SUPER90_PUMP"},
+	{time = 0.6, sound = "CW_FOLEY_LIGHT"}},
+
+	draw = {{time = 0, sound = "CW_FOLEY_MEDIUM"},
+	{time = 0.55, sound = "CW_M3SUPER90_PUMP"}}}
 
 SWEP.SpeedDec = 15
 
 SWEP.Slot = 3
+SWEP.SlotPos = 0
 SWEP.HoldType = "ar2"
 SWEP.NormalHoldType = "ar2"
 SWEP.RunHoldType = "passive"
@@ -38,6 +102,14 @@ SWEP.Author			= "gumlefar & verne"
 SWEP.Contact		= ""
 SWEP.Purpose		= ""
 SWEP.Instructions	= ""
+
+SWEP.ViewModelFOV	= 70
+SWEP.ViewModelFlip	= true
+SWEP.ViewModel		= "models/weapons/v_shot_mossberg5.mdl"
+SWEP.WorldModel		= "models/weapons/w_shot_mossberg5.mdl"
+SWEP.WorldAttachmentScale = 1.414
+SWEP.WorldAttachmentShift = Vector(-2.19, 0.13, 0.01)
+SWEP.WorldAttachmentAngle = Angle(85.7, 104.77, 96.2)
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true
@@ -51,6 +123,7 @@ SWEP.WearDamage = 0.33
 SWEP.WearEffect = 0.005
 
 SWEP.FireDelay = 1.0
+SWEP.FireSound = "CW_M3SUPER90_FIRE"
 SWEP.Recoil = 4.5
 
 SWEP.HipSpread = 0.06
@@ -64,100 +137,10 @@ SWEP.Shots = 9
 SWEP.Damage = 38
 SWEP.DeployTime = 1
 
-SWEP.Chamberable = true
-
--- Anomaly CW2.0 model, animations and viewmodel recoil from cw_anomaly_mossberg590.
-
-SWEP.ViewModel = "models/flaymi/anomaly/weapons/v_models/mossberg590.mdl"
-SWEP.WorldModel = "models/flaymi/anomaly/weapons/w_models/wpn_mossberg590_w.mdl"
-SWEP.ViewModelFOV = 55
-SWEP.AimViewModelFOV = 55
-SWEP.ViewModelFlip = false
-SWEP.UseHands = true
-SWEP.IronsightPos = Vector(-3.01, 0, 3.1)
-SWEP.IronsightAng = Vector(-0.061, 0.01, 0)
-SWEP.SprintPos = Vector(5.8, -7.6, 1.2)
-SWEP.SprintAng = Vector(-14, 49, -10)
-SWEP.Animations = {
-	["idle"] = "anm_idle",
-	["draw"] = "anm_show",
-	["holster"] = "anm_hide",
-	["fire"] = "anm_shots",
-	["reload"] = "anm_open",
-	["reload_start"] = "anm_open",
-	["insert"] = "anm_add_cartridge",
-	["reload_end"] = "anm_close",
-	["anm_hide"] = "anm_hide",
-	["anm_idle"] = "anm_idle",
-	["anm_idle_aim"] = "anm_idle_aim",
-	["anm_idle_sprint"] = "anm_idle_sprint",
-	["anm_open"] = "anm_open",
-	["anm_add_cartridge"] = "anm_add_cartridge",
-	["anm_close"] = "anm_close",
-	["anm_shots"] = "anm_shots",
-	["anm_show"] = "anm_show",
-	["anm_show_first"] = "anm_show_first",
-}
-SWEP.Sounds = {
-	["anm_hide"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.MOSSBERG590.Holster",
-		},
-	},
-	["anm_add_cartridge"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.MOSSBERG590.ReloadInsert",
-		},
-	},
-	["anm_close"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.MOSSBERG590.ReloadEnd",
-		},
-	},
-	["anm_shots"] = {
-		[1] = {
-			["time"] = 0.066667,
-			["sound"] = "TFA_ANOMALY.MOSSBERG590.Pump",
-		},
-	},
-	["anm_show"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.MOSSBERG590.Draw",
-		},
-	},
-	["anm_show_first"] = {
-		[1] = {
-			["time"] = 0.0,
-			["sound"] = "TFA_ANOMALY.MOSSBERG590.Draw",
-		},
-	},
-}
-SWEP.ReloadSpeed = 1
-SWEP.ReloadTime = 0.766667
-SWEP.ReloadTime_Empty = 1
-SWEP.ReloadHalt = 0.766667
-SWEP.ReloadHalt_Empty = 1
+SWEP.ReloadStartTime = 0.45
+SWEP.InsertShellTime = 0.6
+SWEP.ReloadFinishWait = 1
 SWEP.ShotgunReload = true
-SWEP.ReloadStartTime = 0.766667
-SWEP.InsertShellTime = 0.8
-SWEP.ReloadFinishWait = 1.466667
-SWEP.AlwaysPlayReloadEnd = true
-SWEP.MuzzleAttachmentName = "muzzle"
-SWEP.MuzzleEffect = "muzzleflash_ak74"
-SWEP.Shell = false
-SWEP.WM = "models/flaymi/anomaly/weapons/w_models/wpn_mossberg590_w.mdl"
-SWEP.DrawTraditionalWorldModel = false
-SWEP.WMPos = Vector(-1, 4.0222, -3.3634)
-SWEP.WMAng = Vector(-10, 0, 180)
-SWEP.FireSound = "TFA_ANOMALY.MOSSBERG590.FIRE"
-SWEP.FireSoundSuppressed = "TFA_ANOMALY.MOSSBERG590.FIRE"
-SWEP.LuaViewmodelRecoil = true
-SWEP.LuaViewmodelRecoilOverride = true
+SWEP.AlwaysPlayReloadEnd = false
 
-if CLIENT then
-	SWEP.SelectIcon = surface.GetTextureID("vgui/entities/tfa_anomaly_mossberg590")
-end
+SWEP.Chamberable = true

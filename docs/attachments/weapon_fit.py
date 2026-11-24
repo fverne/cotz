@@ -164,7 +164,7 @@ def weapon_info(weapon_class):
     idle = re.search(r'(?:\["idle"\]|\bidle)\s*=\s*"([^"]+)"', code)
     return {
         "class": weapon_class, "text": text, "code": code,
-        "viewmodel": string("ViewModel"), "worldmodel": string("WorldModel"),
+        "viewmodel": string("ViewModel"), "worldmodel": string("WM") or string("WorldModel"),
         "idle": idle.group(1) if idle else None,
         "muzzle": string("MuzzleAttachmentName") or "1", "muzzleIndex": number("MuzzleAttachment", 1),
         "worldMuzzleIndex": number("WorldMuzzleAttachmentID", 1),
@@ -422,9 +422,125 @@ def format_world_fields(fitted):
     return lines
 
 
+def legacy_vertices(path, model, sequence, viewmodel, bodygroups=None):
+    """Use the visible model variant instead of measuring every alternate stock and barrel."""
+    vertices = mdl_pose.posed_vertices(str(path), sequence)
+    indices = {index for face in mdl_pose.triangles(str(path), bodygroups) for index in face if index < len(vertices)}
+    if viewmodel:
+        data = path.with_suffix(".vvd").read_bytes()
+        start = struct.unpack_from("<i", data, 56)[0]
+        excluded = NON_RECEIVER + ("left ", "right ", "l-", "r-", "clavicle", "elbow")
+        gun_bones = {
+            index for index, bone in enumerate(model.bones)
+            if not any(part in bone["name"].lower() for part in excluded)
+        }
+        indices = {
+            index for index in indices
+            if data[start + index * 48 + 12] in gun_bones
+        }
+    if not indices:
+        raise FitError("no visible gun geometry in %s" % path.name)
+    return [vertices[index] for index in indices]
+
+
+def barrel_frame(points, muzzle):
+    """Legacy models use different muzzle rolls. Recover a common barrel-forward, top-up frame."""
+    low, high = bounds(points)
+    lengths = sub(high, low)
+    axis = max(range(2), key=lambda i: lengths[i])
+    length = lengths[axis]
+    if length <= lengths[2] or length == 0:
+        raise FitError("could not identify the barrel axis")
+
+    if muzzle:
+        position = muzzle[axis]
+        front = 1 if position > (low[axis] + high[axis]) / 2 else -1
+        if low[axis] + length * 0.37 < position < high[axis] - length * 0.37:
+            raise FitError("muzzle is too far from either end of the mesh")
+    else:
+        # On a model without muzzle metadata, accept only a clear, narrow barrel tip.
+        def section_size(edge):
+            section = [p for p in points if abs(p[axis] - edge) <= length * 0.15]
+            section_low, section_high = bounds(section)
+            return max(section_high[2] - section_low[2], section_high[1 - axis] - section_low[1 - axis])
+
+        rear, tip = section_size(low[axis]), section_size(high[axis])
+        if max(rear, tip) < 1.6 * min(rear, tip) or rear == tip:
+            raise FitError("no authored muzzle and neither end is clearly the barrel tip")
+        front = 1 if tip < rear else -1
+
+    edge = high[axis] if front > 0 else low[axis]
+    tip_low, tip_high = bounds([p for p in points if abs(p[axis] - edge) <= min(1.0, length * 0.05)])
+    origin = scale(add(tip_low, tip_high), 0.5)
+    origin[axis] = edge
+    angles = angle_matrix(0, (0 if front > 0 else 180) if axis == 0 else 90 * front, 0)
+    tip_size = sub(tip_high, tip_low)
+    return origin, angles, (length, lengths[1 - axis], lengths[2]), (tip_size[1 - axis], tip_size[2])
+
+
+def legacy_world_fields(info):
+    view_path = find_model(info.get("handsModel") or info["viewmodel"])
+    world_path = find_model(info["worldmodel"])
+    view, world = mdl_pose.Model(view_path), mdl_pose.Model(world_path)
+    idle, world_idle = info["idle"], first_sequence(world)
+    view_muzzle, view_axes = bone_frame(attachment_point(view, info["muzzle"], info["muzzleIndex"], idle))
+    world_bone = None
+    try:
+        world_origin, world_axes = bone_frame(attachment_point(world, "muzzle", info["worldMuzzleIndex"], world_idle))
+    except FitError:
+        root = world.bones[0]
+        world_bone = root["name"]
+        try:
+            world_origin, world_axes = bone_frame(world.sample(world_idle, world_bone, 1)[0])
+        except (mdl_pose.MdlError, IndexError, struct.error):
+            # Static props can have an empty animation. posed_vertices also uses their bind pose.
+            world_origin, world_axes = root["pos"], list(zip(*mdl_pose.quat_matrix(root["quat"])))
+
+    initialize = re.search(r"^function SWEP:IndividualInitialize\(\).*?^end", info["code"], re.M | re.S)
+    bodygroups = {
+        int(group): int(value)
+        for group, value in re.findall(r"self:setBodygroup\(\s*(\d+)\s*,\s*(\d+)\s*\)",
+            initialize[0] if initialize else "")
+    }
+    view_tip, view_barrel, view_dimensions, view_tip_size = barrel_frame(
+        legacy_vertices(view_path, view, idle, True, bodygroups), view_muzzle,
+    )
+    world_tip, world_barrel, world_dimensions, world_tip_size = barrel_frame(
+        legacy_vertices(world_path, world, world_idle, False), world_origin if world_bone is None else None,
+    )
+    length, width, height = [b / max(a, 1e-6) for a, b in zip(view_dimensions, world_dimensions)]
+    model_scale = length
+    if min(abs(width - length), abs(height - length)) > length * 0.25:
+        # A stock or handguard variant changes the overall length. A matching narrow muzzle can still size the mount.
+        ratios = [b / max(a, 1e-6) for a, b in zip(view_tip_size, world_tip_size)]
+        if (min(*view_tip_size, *world_tip_size) < 0.1
+                or max(view_tip_size) > view_dimensions[0] * 0.15
+                or max(world_tip_size) > world_dimensions[0] * 0.15
+                or min(ratios) < max(ratios) * 0.8):
+            raise FitError("mesh sizes disagree (length %.2f, width %.2f, height %.2f)" % (length, width, height))
+        model_scale = sum(ratios) / len(ratios)
+    if not 0.55 <= model_scale <= 1.65:
+        raise FitError("implausible model scale %.2f" % model_scale)
+
+    def turn(vector):
+        return rotate(world_barrel, unrotate(view_barrel, vector))
+
+    # Map from the viewmodel attachment frame into the live world attachment or bone frame.
+    shift = unrotate(world_axes, sub(add(world_tip, scale(turn(sub(view_muzzle, view_tip)), model_scale)), world_origin))
+    angles = matrix_angle([unrotate(world_axes, turn(column)) for column in view_axes])
+    fields = ["SWEP.WorldAttachmentScale = %s" % format_number(round(model_scale, 3))]
+    if world_bone:
+        fields.append('SWEP.WorldAttachmentBone = "%s"' % world_bone)
+    if math.dist(shift, (0, 0, 0)) >= 0.1:
+        fields.append("SWEP.WorldAttachmentShift = " + format_triple("Vector", [round(value, 2) for value in shift]))
+    if math.dist(angles, (0, 0, 0)) >= 0.1:
+        fields.append("SWEP.WorldAttachmentAngle = " + format_triple("Angle", [round(value, 2) for value in angles]))
+    return fields
+
+
 def write_world_fields(info, lines):
     text = info["text"]
-    text = re.sub(r"^[ \t]*SWEP\.WorldAttachment(?:Scale|Shift|Angle)\s*=.*\n", "", text, flags=re.M)
+    text = re.sub(r"^[ \t]*SWEP\.WorldAttachment(?:Scale|Shift|Angle|Bone)\s*=.*\n", "", text, flags=re.M)
     code = mask(text)
     anchor = (re.search(r"^([ \t]*)SWEP\.MuzzleAttachmentName\s*=.*$", code, re.M)
         or re.search(r"^([ \t]*)SWEP\.WorldModel\s*=.*$", code, re.M))
@@ -457,13 +573,32 @@ def all_classes():
     return sorted(path.parent.name for path in WEAPONS.glob("cw_*/shared.lua") if path.parent.name != "cw_base")
 
 
+def command_legacy_world(classes, write):
+    hands = (REPO_ROOT / "lua/cotz_weapon_chands/sh_definitions.lua").read_text(encoding="utf-8")
+    hands_models = dict(re.findall(r'\["(cw_\w+)"\]\s*=\s*{\s*model\s*=\s*"([^"]+)"', hands))
+    for weapon_class in classes:
+        info = weapon_info(weapon_class)
+        if not info["viewmodel"] or "models/flaymi/anomaly/" in info["viewmodel"] or not attachment_bones(info):
+            continue
+        info["handsModel"] = hands_models.get(weapon_class)
+        try:
+            fields = legacy_world_fields(info)
+        except (FitError, mdl_pose.MdlError, struct.error, OSError, IndexError) as error:
+            print("%-18s skipped: %s" % (weapon_class, error))
+            continue
+
+        print("%-18s %s" % (weapon_class, "; ".join(fields)))
+        if write:
+            write_world_fields(info, fields)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("bones", "world"):
+    for name in ("bones", "world", "legacy-world"):
         sub_parser = commands.add_parser(name)
         sub_parser.add_argument("classes", nargs="+")
-        if name == "world":
+        if name in ("world", "legacy-world"):
             sub_parser.add_argument("--write", action="store_true")
     rebone = commands.add_parser("rebone")
     rebone.add_argument("weapon_class")
@@ -479,6 +614,8 @@ def main(argv=None):
             classes = all_classes() if args.classes == ["all"] else args.classes
             if args.command == "bones":
                 command_bones(classes)
+            elif args.command == "legacy-world":
+                command_legacy_world(classes, args.write)
             else:
                 command_world(classes, args.write, args.classes != ["all"])
     except (FitError, mdl_pose.MdlError) as error:

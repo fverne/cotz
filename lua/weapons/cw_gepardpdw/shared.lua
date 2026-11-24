@@ -139,6 +139,7 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/weapons/tfa_l4d2/c_gepard.mdl"
 SWEP.WorldModel		= "models/weapons/tfa_l4d2/w_gepard.mdl"
+SWEP.WorldAttachmentScale = 1
 
 SWEP.Spawnable			= true
 SWEP.AdminSpawnable		= true

@@ -123,6 +123,9 @@ SWEP.ViewModelFOV	= 70
 SWEP.ViewModelFlip	= false
 SWEP.ViewModel		= "models/cw2/weapons/v_cam_m49mm.mdl"
 SWEP.WorldModel		= "models/cw2/weapons/w_cam_m49m.mdl"
+SWEP.WorldAttachmentScale = 1.273
+SWEP.WorldAttachmentShift = Vector(-6.92, 0.41, -0.01)
+SWEP.WorldAttachmentAngle = Angle(0, -0.01, -90)
 
 SWEP.DrawTraditionalWorldModel = false
 SWEP.WM = "models/cw2/weapons/w_cam_m49m.mdl"

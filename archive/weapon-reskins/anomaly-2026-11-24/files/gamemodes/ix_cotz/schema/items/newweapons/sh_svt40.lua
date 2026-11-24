@@ -1,0 +1,67 @@
+ITEM.name = "SVT 40"
+ITEM.description= "A semi-automatic battle rifle that fires 7.62x54mm rounds."
+ITEM.longdesc = "The SVT-40 is a Soviet semi-automatic battle rifle.\nThe SVT-40 saw widespread service during and after World War II.\nAfter the war, SVTs were mostly withdrawn from service and refurbished in arsenals, then stored.\nMany of these storages have since then been found, and black market operatives have ensured a steady influx of SVT-40's to the zone."
+ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_svt40_w.mdl"
+ITEM.class = "cw_svt40"
+ITEM.weaponCategory = "primary"
+ITEM.price = 33000
+ITEM.width = 6
+ITEM.height = 1
+ITEM.validAttachments = {"md_pbs1"}
+
+ITEM.bulletweight = 0.022
+ITEM.unloadedweight = 3.85
+
+
+
+
+function ITEM:GetWeight()
+  return self:GetData("weight", self.unloadedweight) + (self.bulletweight * self:GetData("ammo", 0))
+end
+
+ITEM.iconCam = {
+	pos = Vector(12.2, -205, 3.5),
+	ang = Angle(0, 90, 0),
+	fov = 13.6,
+}
+
+ITEM.pacData = {
+[1] = {
+	["children"] = {
+		[1] = {
+			["children"] = {
+				[1] = {
+					["children"] = {
+					},
+					["self"] = {
+						["Angles"] = Angle(0, 0, 180),
+						["Position"] = Vector(-1.1, -5.078, -2.039),
+						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_svt40_w.mdl",
+						["ClassName"] = "model",
+						["Translucent"] = true,
+						["EditorExpand"] = true,
+						["UniqueID"] = "8824425421",
+						["Bone"] = "spine 2",
+						["Name"] = "svt40",
+					},
+				},
+			},
+			["self"] = {
+				["AffectChildrenOnly"] = true,
+				["ClassName"] = "event",
+				["UniqueID"] = "1062346542",
+				["Event"] = "weapon_class",
+				["Invert"] = false,
+				["EditorExpand"] = true,
+				["Name"] = "weapon class find simple\"@@1\"",
+				["Arguments"] = "cw_svt40@@0",
+			},
+		},
+	},
+	["self"] = {
+		["ClassName"] = "group",
+		["UniqueID"] = "8123985183",
+		["EditorExpand"] = true,
+	},
+},
+}

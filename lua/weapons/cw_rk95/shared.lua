@@ -39,6 +39,9 @@ if CLIENT then
 	
 	SWEP.MuzzleEffect = "muzzleflash_ak74"
 	SWEP.MuzzleAttachmentName = "muzzle"
+	SWEP.WorldAttachmentScale = 1.388
+	SWEP.WorldAttachmentShift = Vector(-1.17, -0.06, -0.04)
+	SWEP.WorldAttachmentAngle = Angle(0, 0.13, 0)
 	SWEP.PosBasedMuz = false
 	SWEP.ShellScale = 0.7
 	SWEP.ShellOffsetMul = 1

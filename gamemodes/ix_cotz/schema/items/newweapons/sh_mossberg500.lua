@@ -1,13 +1,13 @@
 ITEM.name = "Mossberg 500"
 ITEM.description= "A 12 gauge pump-action shotgun. Seems modern."
 ITEM.longdesc = "The Mossberg 500 is one of the most popular smooth-bore pump action shotguns in the world.\nA low price and an inherently reliable design makes it a good choice for hunters and police officers alike."
-ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_mossberg590_w.mdl"
+ITEM.model = "models/weapons/w_shot_mossberg5.mdl"
 ITEM.class = "cw_mossberg500"
 ITEM.weaponCategory = "primary"
 ITEM.width = 4
 ITEM.price = 10200
 ITEM.height = 1
-ITEM.validAttachments = {}
+ITEM.validAttachments = {"md_eotech","md_microt1"}
 
 ITEM.bulletweight = 0.031
 ITEM.unloadedweight = 3.1
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(12.6, -205, 4.2),
-	ang = Angle(0, 90, 0),
-	fov = 8.6,
+	pos = Vector(2, 200, 0.5),
+	ang = Angle(0, 270, 5),
+	fov = 10,
 }
 
 ITEM.pacData = {
@@ -36,7 +36,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
 						["Position"] = Vector(-2.502, -4.31, -2.254),
-						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_mossberg590_w.mdl",
+						["Model"] = "models/weapons/w_shot_mossberg5.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,

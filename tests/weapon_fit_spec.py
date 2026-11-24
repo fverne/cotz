@@ -53,6 +53,19 @@ class RebonePose(unittest.TestCase):
 
 
 class WorldFit(unittest.TestCase):
+    def test_legacy_barrel_frame_uses_model_mesh_and_muzzle_side(self):
+        points = [[x, y, z] for x in (-2, 2) for y in (-10, 20) for z in (-1, 1)]
+        origin, axes, dimensions, tip_size = fit.barrel_frame(points, [0, -10, 0])
+        self.assertEqual(origin, [0, -10, 0])
+        self.assertLess(math.dist(axes[0], [0, -1, 0]), 1e-6)
+        self.assertEqual(dimensions, (30, 4, 2))
+        self.assertEqual(tip_size, (4, 2))
+
+    def test_legacy_barrel_frame_rejects_a_symmetric_mesh_without_a_muzzle(self):
+        points = [[x, y, z] for x in (-10, 10) for y in (-2, 2) for z in (-1, 1)]
+        with self.assertRaises(fit.FitError):
+            fit.barrel_frame(points, None)
+
     def test_turns_pick_the_frame_that_overlaps(self):
         world = [[-1, -5, 0], [2, 1, 10]]
         view = [[-2, -1, -9], [1, 5, 0]]

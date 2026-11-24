@@ -12,6 +12,7 @@ if CLIENT then
 	
 	SWEP.MuzzleEffect = "muzzleflash_SR25"
 	SWEP.MuzzleAttachmentName = "1"
+	SWEP.WorldAttachmentScale = 1
 	SWEP.PosBasedMuz = true
 	SWEP.SnapToGrip = true
 	SWEP.ShellScale = 1.3

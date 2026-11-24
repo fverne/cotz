@@ -1833,7 +1833,16 @@ function SWEP:DrawWorldAttachments(worldModel)
 	local active = getWorldAttachmentSelection(self)
 	if not next(active) then return end
 
-	local muzzle = getAttachmentPoint(worldModel, "muzzle", self.WorldMuzzleAttachmentID)
+	local muzzle
+	if self.WorldAttachmentBone then
+		local bone = worldModel:LookupBone(self.WorldAttachmentBone)
+		local matrix = bone and worldModel:GetBoneMatrix(bone)
+		if matrix then
+			muzzle = {Pos = matrix:GetTranslation(), Ang = matrix:GetAngles()}
+		end
+	else
+		muzzle = getAttachmentPoint(worldModel, "muzzle", self.WorldMuzzleAttachmentID)
+	end
 	if not muzzle then return end
 
 	-- The Anomaly pairs have the same muzzle axes, but their viewmodels can be larger. A weapon that measured

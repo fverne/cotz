@@ -1,7 +1,7 @@
 ITEM.name = "Striker"
 ITEM.description= "A revolver-magazine fed shotgun. 12 gauge."
 ITEM.longdesc = "The Striker-12 is an unique shotgun, as it is fed by a permanently attached revolver magazine.\nWhile being an effective tool in combat and priceless for mutant hunting, it's unwieldy and has a non-adjustible stock.\nThe drum has to be manually winded up, each shell has to be manually ejected and it features a very janky trigger."
-ITEM.model = "models/flaymi/anomaly/weapons/w_models/wpn_protecta_w.mdl"
+ITEM.model = ("models/weapons/w_shot_strike.mdl")
 ITEM.class = "cw_striker"
 ITEM.weaponCategory = "primary"
 ITEM.price = 28900
@@ -20,9 +20,9 @@ function ITEM:GetWeight()
 end
 
 ITEM.iconCam = {
-	pos = Vector(2.6, -205, 4.6),
+	pos = Vector(1, -205, -1.5),
 	ang = Angle(0, 90, 0),
-	fov = 10.9,
+	fov = 7.5,
 }
 ITEM.pacData = {
 [1] = {
@@ -35,7 +35,7 @@ ITEM.pacData = {
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
 						["Position"] = Vector(5.922, -5.054, -4.465),
-						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_protecta_w.mdl",
+						["Model"] = "models/weapons/w_shot_strike.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
 						["EditorExpand"] = true,
