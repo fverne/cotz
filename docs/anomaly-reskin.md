@@ -44,11 +44,11 @@ render target. A client-side override on the lens replaces the TFA material prox
 the magnified scene and reticle in the lens. The simple telescopics option keeps the full-screen scope
 overlay. Weapons with their own CW scope renderer, such as the VSSK, keep that renderer.
 
-The USP-1 "Tulip" (`cw_anomaly_1p29`) on COTZ dovetail guns works the same way through its attachment model's
-`lense_rt` slot, configured by `lensZoom` in `SCOPES` (`sh_cotzattachments.lua`). It switches to the
-full-screen reticle with simple telescopics or the gun's backup iron sights. The PU scope keeps the full-screen overlay.
+The USP-1 "Tulip" (`cw_anomaly_1p29`) and PU scope (`cw_anomaly_mosin`) on COTZ guns work the same way through
+their attachment models' `lense_rt` slots, configured by `lensZoom` in `SCOPES` (`sh_cotzattachments.lua`). They
+switch to the full-screen reticle with simple telescopics or the gun's backup iron sights.
 
-The Tulip inventory item uses the same dropped model as the ACOG item. For Anomaly attachment world models
+The Tulip and PU scope inventory items use the PSO-1 model, the same dropped model as the ACOG item. For Anomaly attachment world models
 without a collision mesh, dropped items use the model's compiled hull for collision (`ix_item.lua`).
 
 ```sh

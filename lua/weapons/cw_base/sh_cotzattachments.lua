@@ -16,6 +16,7 @@ local SCOPES = {
 	},
 	cw_anomaly_mosin = {
 		zoom = 64.3,
+		lensZoom = 15,
 		reticleCenter = {-0.5 / 1024, -3.5 / 1024},
 		overlay = "models/flaymi/stalker/anomaly/attachments/wpn_crosshair_mosin",
 	},
