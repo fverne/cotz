@@ -2,6 +2,7 @@ ix.randomitems.tables["worldspawn_garbage_rare"] = {
   {115, {"value_gunoil"}},
 
 	-- Recovered valuables share the same weighting policy as the entries above.
+	{600, {"fubar"}},
 	{211, {"value_ballistic1"}},
 	{278, {"value_ballistic11"}},
 	{162, {"value_ballistic3"}},
