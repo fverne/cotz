@@ -142,6 +142,7 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:RunAway()
+	if self.cotzCombatLeash then return end
 	if (!self.HasLeader) then
 		self.MustFlee = true
 		self:SetSchedule(SCHED_RUN_FROM_ENEMY)

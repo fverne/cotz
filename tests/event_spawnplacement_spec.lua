@@ -104,6 +104,13 @@ check(not loadGraph(makeGraph({{}, {}}, {{0, 2}}), 2, 2) and #notices == 0 and #
 check(not loadGraph(makeGraph({{}, {}}, {{0, 2}}), 2), "invalid link endpoints are rejected")
 check(not loadGraph(makeGraph({{x = math.huge}, {}}, {{0, 1}}), 2), "non-finite positions are rejected")
 check(#loadGraph(makeGraph({{}, {}}, {}), 2) == 0, "valid graph without connections yields no node candidates")
+local islands = loadGraph(makeGraph({{x = 100}, {x = 300}, {x = 500}, {x = 600}, {x = 700}},
+	{{0, 1}, {1, 2}, {3, 4}, {2, 3, 2}}), 5)
+local _, components = PLUGIN:GetSpawnNodes()
+check(components[islands[1]] == components[islands[3]]
+	and components[islands[3]] ~= components[islands[4]]
+	and components[islands[4]] == components[islands[5]],
+	"multi-hop ground links join components while a jump-only link leaves them separate")
 print = originalPrint
 
 local floor, blocked, inWorld, hullCalls, lineCalls = {}, false, true, 0, 0
@@ -151,11 +158,24 @@ check(not PLUGIN:GetGroundedSpawnLocation(Vector(100, 0, 8)), "outside-world spa
 
 local originalRandom = math.random
 math.random = function(minimum, maximum) return maximum and maximum or 1 end
+resetFloor()
+check(not PLUGIN:GetSpawnLocation(Vector(600, 0, 0), 80, nil, nil, components[islands[1]]) and lineCalls == 0,
+	"a graph-only search rejects disconnected nodes and skips floor fallback")
 PLUGIN.GetSpawnNodes = function() return {Vector(100, 0, 8), Vector(300, 0, 8),
 	Vector(2000, 0, 8), Vector(0, 0, 300)} end
 resetFloor()
 position = PLUGIN:GetSpawnLocation(Vector(0, 0, 5))
 check(position and position.x == 100 and hullCalls == 1, "nearby graph placement needs no sweep from the event center")
+resetFloor()
+local candidates = 0
+position = PLUGIN:GetSpawnLocation(Vector(0, 0, 5), nil, nil, function(grounded)
+	check(grounded.z == 2, "placement filters receive the final grounded candidate")
+	candidates = candidates + 1
+	return candidates == 2
+end)
+check(position and candidates == 2, "a rejected graph candidate does not discard the rest")
+check(not PLUGIN:GetSpawnLocation(Vector(0, 0, 5), nil, nil, function() return false end),
+	"the caller's placement filter also applies to the fallback and the center")
 blocked, lineCalls = true, 0
 check(not PLUGIN:GetSpawnLocation(Vector(0, 0, 5)) and lineCalls == 3,
 	"blocked graph candidates are tried once each, followed by the validated fallback center")

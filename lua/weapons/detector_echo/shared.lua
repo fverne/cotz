@@ -15,6 +15,9 @@ local ORIGINAL_VIEWMODEL = "models/flaymi/stalker/dar_anomaly/weapons/v_models/d
 SWEP.ViewModel = file.Exists(FIXED_VIEWMODEL, "GAME") and FIXED_VIEWMODEL or ORIGINAL_VIEWMODEL
 SWEP.WorldModel = "models/flaymi/stalker/dar_anomaly/weapons/w_models/dev_diolator_detector_echo.mdl"
 
+-- Release at the peak of the hand flick in anm_throw_e.
+SWEP.BoltReleaseCycle = 4 / 40
+
 -- Like Anomaly's CSimpleDetector, the Echo only reports distance: it beeps and flashes its indicator light.
 SWEP.DetectRadius = 150
 SWEP.DisplayMode = "flash"

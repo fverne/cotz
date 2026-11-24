@@ -1,6 +1,38 @@
 local encounters, attackers = {}, {}
 local spawnBudget = ix.jobs.field.defenceSpawnBudget
 local LEGACY_DEFEND_DISTANCE = 768
+local APPROACH_TRACE_HEIGHT = Vector(0, 0, 36)
+
+local function samplerComponent(sampler)
+	local nodes, components = ix.eventController:GetSpawnNodes()
+	if not nodes then return end
+	local center = sampler:GetPos()
+	local settings = ix.jobs.field.settings.defence
+	local routes = {}
+	for _, node in ipairs(nodes) do
+		local distance = center:DistToSqr(node)
+		if distance >= settings.minAttackDistance ^ 2 and distance <= settings.maxAttackDistance ^ 2
+			and math.abs(center.z - node.z) <= settings.maxHeightDifference then
+			routes[components[node]] = true
+		end
+	end
+	local bestDistance = settings.nodeLinkRadius ^ 2
+	local component, anchor
+	for _, node in ipairs(nodes) do
+		local distance = center:DistToSqr(node)
+		if distance <= bestDistance and routes[components[node]] then
+			local trace = util.TraceLine({
+				start = center + APPROACH_TRACE_HEIGHT, endpos = node + APPROACH_TRACE_HEIGHT,
+				filter = sampler, mask = MASK_PLAYERSOLID_BRUSHONLY,
+			})
+			if not trace.Hit and not trace.StartSolid and not trace.AllSolid then
+				bestDistance, component, anchor = distance, components[node], node
+			end
+		end
+	end
+
+	return component, anchor
+end
 
 local function claimKey(character, job)
 	return character:GetID() .. ":" .. job.rewardKey
@@ -53,10 +85,11 @@ local function waveSlots(defence)
 	return slots
 end
 
-local function createEncounter(character, npc, job, sampler)
+local function createEncounter(character, npc, job, sampler, component, anchor)
 	local defence = job.fieldTask.defence
 	local encounter = {character = character, npc = npc, claim = job.rewardKey, sampler = sampler,
-		health = defence.health, wave = defence.completedWaves + 1, slots = waveSlots(defence), lastTick = CurTime()}
+		component = component, anchor = anchor, health = defence.health, wave = defence.completedWaves + 1,
+		slots = waveSlots(defence), lastTick = CurTime()}
 	encounters[claimKey(character, job)] = encounter
 
 	return encounter
@@ -92,10 +125,44 @@ function ix.jobs.field.StartDefence(client, character, npc, job)
 	defence.waveKills = nil
 	local sampler = ix.jobs.field.SpawnObject(character, npc, job)
 	if not IsValid(sampler) then return end
+	local component, anchor = samplerComponent(sampler)
+	if not component then
+		ix.jobs.field.Cleanup(character, job)
+		client:Notify("Research cannot start here. The sampler has no connected mutant approach.")
+		return
+	end
 	state.stage = "defending"
-	createEncounter(character, npc, job, sampler)
+	createEncounter(character, npc, job, sampler, component, anchor)
 	ix.jobs.field.SaveJob(character, npc, job)
 	client:Notify("Research started. Stay near the sampler, clear the waves and keep mutants away from it.")
+end
+
+local function findResearchSpawn(defence, encounter, recovering)
+	local sampler, component = encounter.sampler, encounter.component
+	local center = sampler:GetPos()
+	local settings = ix.jobs.field.settings.defence
+	local radius = recovering and math.min(settings.localSpawnRadius, defence.defendDistance)
+		or settings.maxAttackDistance
+	local minimum = recovering and math.min(defence.playerSafeDistance, radius / 2) or settings.minAttackDistance
+	local function usable(position)
+		local distance = center:DistToSqr(position)
+		return distance <= radius ^ 2 and distance >= minimum ^ 2
+			and math.abs(center.z - position.z) <= settings.maxHeightDifference
+			and not ix.eventController:HasPlayerNear(position, defence.playerSafeDistance)
+			and (recovering or ix.eventController:CanSpawnMutant(position, true))
+	end
+
+	if not recovering then
+		local points = table.Copy(defence.spawnPoints)
+		table.Shuffle(points)
+		if points[1] then
+			local approach = ix.jobs.field.Unpack(points[1])
+			local position = ix.eventController:GetSpawnLocation(approach, nil, nil, usable, component)
+			if position then return position end
+		end
+	end
+
+	return ix.eventController:GetSpawnLocation(center, radius, nil, usable, component)
 end
 
 function ix.jobs.field.FindDefenceSpawn(defence)
@@ -117,9 +184,13 @@ function ix.jobs.field.FindDefenceSpawn(defence)
 end
 
 local function spawnAttacker(defence, encounter, slot)
-	if spawnBudget <= 0 then return end
-	local position = ix.jobs.field.FindDefenceSpawn(defence)
-	if not position then return end
+	local now = CurTime()
+	if spawnBudget <= 0 or now < (encounter.nextSpawn or 0) then return end
+	local position = findResearchSpawn(defence, encounter)
+	if not position then
+		encounter.nextSpawn = now + ix.jobs.field.updateInterval
+		return
+	end
 	spawnBudget = spawnBudget - 1
 	local npc = ents.Create(slot.class)
 	if not IsValid(npc) then
@@ -133,8 +204,12 @@ local function spawnAttacker(defence, encounter, slot)
 	ix.eventController:RegisterMutant(npc, true)
 	if not IsValid(npc) or npc.cotzPopulationRejected then return end
 	npc.cotzCombatObjective, npc.cotzCombatObjectiveRadius = encounter.sampler, defence.threatRadius
+	npc.cotzCombatObjectiveApproach = encounter.anchor
+	npc.cotzCombatLeash = defence.defendDistance
 	ix.eventController:UpdateCombatSchedule(npc)
 	slot.entity = npc
+	slot.lastPosition, slot.lastProgress, slot.nextRecovery = position, now, nil
+	slot.engaged = nil
 	attackers[npc] = {encounter = encounter, slot = slot}
 end
 
@@ -164,6 +239,45 @@ function ix.jobs.field.DefenceDamage(entity, damage)
 	entity:SetHealth(encounter.health)
 end
 
+local function recoverAttacker(defence, encounter, slot, disrupting)
+	local actor = slot.entity
+	local now, position = CurTime(), actor:GetPos()
+	if GetConVar("ai_disabled"):GetInt() ~= 0 then
+		slot.lastPosition, slot.lastProgress = position, now
+		return
+	end
+
+	local settings = ix.jobs.field.settings.defence
+	local enemy = actor:GetEnemy()
+	local beyondRadius = position:DistToSqr(encounter.sampler:GetPos()) > defence.defendDistance ^ 2
+	if not beyondRadius and (disrupting or IsValid(enemy)) then slot.engaged = true end
+	local canMelee = IsValid(enemy) and actor:Visible(enemy)
+		and actor:STALKERNPCEnemyInMeleeRange(enemy, actor.MeleeAttackDistanceMin, actor.MeleeAttackDistance) ~= 0
+	local outside = slot.engaged and beyondRadius
+	if (not outside and (disrupting or canMelee))
+		or position:DistToSqr(slot.lastPosition) >= settings.stallProgress ^ 2 then
+		slot.lastPosition, slot.lastProgress = position, now
+	end
+
+	local stalled = now - slot.lastProgress >= settings.stallSeconds
+	if spawnBudget <= 0 or now < (slot.nextRecovery or 0) or actor:STALKERNPCNavigationBusy()
+		or (not stalled and not (outside and actor:IsOnGround())) then return end
+
+	slot.nextRecovery = now + settings.recoveryInterval
+	local destination = findResearchSpawn(defence, encounter, true)
+	if not destination then return end
+	spawnBudget = spawnBudget - 1
+	actor:StopMoving()
+	actor:SetLocalVelocity(vector_origin)
+	actor:SetPos(destination)
+	actor.cotzNavigationRecovery, actor.cotzNavigationRetreat, actor.cotzUnreachableRecovery = nil, nil, nil
+	actor.cotzNavigationSafePosition = nil
+	actor.cotzCombatObjectiveApproach = encounter.anchor
+	ix.eventController:ClearCombatEnemy(actor)
+	ix.eventController:UpdateCombatSchedule(actor)
+	slot.lastPosition, slot.lastProgress = destination, now
+end
+
 -- Bundled stalker_ai cannot melee sampler props. Idle attackers disrupt the device
 -- on arrival; seeing or being damaged by a player gives ordinary combat priority.
 local function updateWave(defence, encounter, elapsed)
@@ -178,9 +292,11 @@ local function updateWave(defence, encounter, elapsed)
 				spawnAttacker(defence, encounter, slot)
 			end
 			if IsValid(slot.entity) and slot.entity:Health() > 0 then
-				if not IsValid(slot.entity:GetEnemy())
+				local disrupting = not IsValid(slot.entity:GetEnemy())
 					and slot.entity:GetPos():DistToSqr(encounter.sampler:GetPos()) <= defence.threatRadius ^ 2
-					and slot.entity:Visible(encounter.sampler) then pressure = pressure + 1 end
+					and slot.entity:Visible(encounter.sampler)
+				if disrupting then pressure = pressure + 1 end
+				recoverAttacker(defence, encounter, slot, disrupting)
 			end
 		end
 	end
@@ -207,7 +323,9 @@ function ix.jobs.field.UpdateDefence(client, character, npc, job, keep)
 		local sampler = ix.jobs.field.GetObject(character, job)
 		if not IsValid(sampler) then sampler = ix.jobs.field.SpawnObject(character, npc, job) end
 		if not IsValid(sampler) then return end
-		encounter = createEncounter(character, npc, job, sampler)
+		local component, anchor = samplerComponent(sampler)
+		if not component then return end
+		encounter = createEncounter(character, npc, job, sampler, component, anchor)
 	end
 	if not IsValid(encounter.sampler) then ix.jobs.field.StopDefence(character, job) return end
 	keep[key] = true

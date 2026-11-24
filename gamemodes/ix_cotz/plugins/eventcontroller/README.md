@@ -59,8 +59,9 @@ the node candidates and ordinary floor checks fail. Fully rejected encounters do
 Routine queued mutants recheck clearance immediately before creation, so another queued NPC or a
 new blocker cannot occupy the same placement unnoticed. Population limits, player exclusion and pack
 ownership remain in effect. Existing event points and saves need no migration. Advanced event dupes
-and scripted advanced-event spawns retain their own behavior. Research-defence attackers use
-this placement service around their saved approaches, retaining task-owned spawning and population checks.
+and scripted advanced-event spawns retain their own behavior. Research-defence attackers request
+nodes connected by ground links to their sampler's approach node. That search skips floor fallback
+and can follow a route around obstacles between the spawn and sampler.
 
 Psydog phantoms and controller zombies use the same placement service through the NPC base's
 server-only `sv_summoning.lua`. Each owner declares a 256-unit `summonSpawnRadius`; node selection
@@ -179,11 +180,12 @@ singleton packs. Each research-defence wave has an isolated pack and retains its
 Pack identities and feuds are not persisted or added to character data.
 
 Research attackers carry their sampler as `cotzCombatObjective`, with `cotzCombatObjectiveRadius`
-set to the task's disruption radius. When idle they run toward it and hold within visible disruption
+set to the task's disruption radius. When idle they run to the sampler's approach node, then toward
+the sampler, and hold within visible disruption
 range. This uses the same schedule handling as remembered pursuit, so normal mutant schedule selection
 does not replace the approach with wandering. Visible or remembered enemies take priority; player
-acquisition and retaliation remain unchanged. Target loss resumes the objective. Cleanup clears the
-objective reference along with ordinary pursuit state.
+acquisition and retaliation apply inside the defence radius. Target loss or a player leaving that
+radius resumes the objective. Cleanup clears the objective and leash along with ordinary pursuit state.
 
 For research defence, verify attacks on the sampler before player contact, interruption by sight or
 incoming fire, and return to the device after player contact expires. Check near-wall approaches and
@@ -251,7 +253,7 @@ animations and damage remain intact. The feasibility test and actual launch shar
 and concrete definition fields. Normal reachable-target jumps retain their random rolls. Unchecked
 random jumps and new ranged ability windups are suppressed during unreachable recovery/retreat.
 
-If jumping cannot solve the approach and the two direct retries fail, mutants commit to running
+If jumping cannot solve the approach and the two direct retries fail, unleased mutants commit to running
 2000–3000 units from their starting position, away from the last observed target position. Up to four
 grounded graph candidates within that band are retained. Missing or blocked graph candidates fall back
 to grounded directional sampling; failed sampling or an exhausted search budget requests native flee

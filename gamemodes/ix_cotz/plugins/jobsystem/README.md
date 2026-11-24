@@ -465,20 +465,20 @@ eventcontroller points tagged with a regional `_outside_easy` or `_outside_hard`
 Building, underground, sniper, untagged and authored town points are excluded, including
 when collecting from FTS presets. Existing accepted assignments keep their saved locations.
 A site needs at least one approach 512–4,096
-units away and within 256 vertical units. Up to eight approaches are saved. Attackers use
-the event controller's shared placement service around those approaches: connected ground
-nodes within its 750-unit spawn radius are preferred, with the same validated floor/clearance
-fallback when graph candidates are unavailable or blocked. The validated position is used
-directly without another `DropToFloor`. Positions occupied by nearby players are skipped;
-unsafe or population-limited spawns remain pending. Existing point data cannot guarantee navigable NPC paths;
-verify representative outdoor sites in-game.
+units away and within 256 vertical units. Up to eight approaches are saved. The sampler links to
+the nearest ground node within 384 units with a clear trace that includes player clips. Research
+attackers spawn 512–4,096 units from the sampler on that node's ground-connected component.
+Placement prefers the saved approaches and can try other nodes in the same range and component.
+Occupied, unsafe and population-limited positions remain pending. A sampler with no nearby
+connected approach cannot start. Ground links describe the map's authored routes. Moving props
+and other runtime obstacles may still block a route.
 
 `ix.jobs.field.SelectDefenceSite(settings, map, usable)` returns the site vector, packed approaches and
 the selected event point's location text. Its optional `usable(site, name)` filter can reject unnamed or
 blocked sites. Server-side `ix.jobs.field.FindDefenceSpawn(defence)` shuffles `defence.spawnPoints` and applies
 shared placement, `defence.playerSafeDistance` and hard population checks, returning a position or
-`nil, reason`. Research encounters and automated Supply-truck mutant defenses both use these helpers;
-their wave ownership, budgets, objectives and rewards remain separate.
+`nil, reason`. Automated Supply-truck mutant defenses use that spawn helper. Research uses the same
+underlying placement service with its sampler-specific checks.
 
 Wave class lists and counts, health, recording duration, disruption, radius and retry
 parameters live in `field.settings.defence`. Wave compositions are rolled once on
@@ -494,11 +494,17 @@ The existing jobsystem kill listener forwards deaths without changing dispatch o
 ordinary kill credit. Removing an NPC without a death event does not clear its wave;
 the missing attacker is replaced subject to the same spawn/cap checks.
 
-Research attackers remain awake in isolated packs. Their sampler is a movement objective,
+Research attackers remain awake in isolated packs and run immediately toward the sampler's
+connected node, then advance to the sampler. The sampler is a movement objective,
 not a combat enemy: the NPC base cannot melee props, so the existing proximity disruption
 damages it on arrival. Ordinary visible-player acquisition and damage retaliation take priority.
-Player pursuit retains the combat system's ten-second last-contact memory; losing that contact
-or the player's death resumes the sampler approach. Movement respects attack recovery and `ai_disabled`.
+Player pursuit retains the combat system's ten-second last-contact memory within the defence radius.
+Losing contact, a player's death, or a player leaving the radius returns the attacker to the sampler.
+Research dogs skip pack-death fleeing, and exhausted chase retries hold position for encounter recovery.
+Inbound attackers can follow paths outside the defence radius before engaging. Attackers that
+leave the radius after engaging, or make no progress for 12 seconds while outside attack range,
+can be moved to a validated nearby node in the same component. Recovery waits for
+attack animations, respects `ai_disabled`, and retains the same NPC, health and wave slot.
 
 Defence recording advances only while the assigned character is alive and within 2,048 units of the
 sampler. Accepted assignments with the former 768-unit default receive this wider radius on their
@@ -570,7 +576,8 @@ inventories, PDA layout and compass bearings, obstruction/ground clearance at re
 source points, map travel, character switches, disconnect/restart recovery, abandonment,
 admin reset, and single payment with the ordinary supplies/bonus/restock flow.
 For circuits, verify both endpoints, missing cargo, repeated delivery and post-delivery
-reconnects. For defence, verify navigation, population saturation, sampler disruption,
+reconnects. For defence, verify navigation, recovery from bushes and player-clip boundaries,
+population saturation, sampler disruption,
 group assistance, failure/retry, interruption during each wave, and attacker cleanup.
 
 ## Leaderboard statistics

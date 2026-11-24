@@ -137,6 +137,8 @@ function PLUGIN:RemoveCombatActor(entity)
 	entity.cotzCombatEnemy, entity.cotzCombatScheduleDirty = nil, nil
 	entity.cotzPursuitScheduled, entity.cotzNextPursuit = nil, nil
 	entity.cotzCombatObjective, entity.cotzCombatObjectiveRadius = nil, nil
+	entity.cotzCombatObjectiveApproach = nil
+	entity.cotzCombatLeash = nil
 	entity.cotzCombatApproach, entity.cotzCombatApproachUntil, entity.cotzCombatApproachPlayer = nil, nil, nil
 	refreshCollisionRules(entity)
 end
@@ -235,6 +237,11 @@ local function canDamageTarget(controller, actor, target)
 		return living(target) and not target.cotzSleeping and controller:ActorsHostile(actor, target)
 	end
 	if target:IsPlayer() then
+		local objective = actor.cotzCombatObjective
+		local leash = actor.cotzCombatLeash
+		if leash and IsValid(objective) and target:GetPos():DistToSqr(objective:GetPos()) > leash ^ 2 then
+			return false
+		end
 		return target:Alive() and GetConVar("ai_ignoreplayers"):GetInt() == 0
 			and target:GetMoveType() ~= MOVETYPE_OBSERVER and target:GetMoveType() ~= MOVETYPE_NOCLIP
 	end
@@ -373,9 +380,23 @@ function PLUGIN:UpdateCombatSchedule(actor)
 	end
 	local focus = self:GetCombatPlayerFocus(actor)
 	local destination, arrivalRadius, objective
+	local objectiveApproach = actor.cotzCombatObjectiveApproach
+	if not hasEnemy and objectiveApproach and IsValid(actor.cotzCombatObjective) then
+		local withinRange = actor:GetPos():DistToSqr(actor.cotzCombatObjective:GetPos())
+			<= (actor.cotzCombatObjectiveRadius or PURSUIT_ARRIVAL) ^ 2
+		if actor:GetPos():DistToSqr(objectiveApproach) <= PURSUIT_ARRIVAL ^ 2
+			or (withinRange and actor:Visible(actor.cotzCombatObjective)) then
+			actor.cotzCombatObjectiveApproach, actor.cotzNextPursuit = nil, nil
+			if actor.cotzPursuitScheduled then actor:ClearSchedule() end
+			actor.cotzPursuitScheduled = nil
+			objectiveApproach = nil
+		end
+	end
 	if focus and actor.cotzPlayerVisible == false and actor:GetEnemy() == focus then
 		-- Use the observed position, never the hidden player's current position, for pursuit.
 		destination, arrivalRadius = actor.cotzPlayerPosition, PURSUIT_ARRIVAL
+	elseif not hasEnemy and objectiveApproach and IsValid(actor.cotzCombatObjective) then
+		destination, arrivalRadius = objectiveApproach, PURSUIT_ARRIVAL
 	elseif not hasEnemy and IsValid(actor.cotzCombatObjective) then
 		-- Task devices are props, so idle mutants approach them without making them combat enemies.
 		objective = actor.cotzCombatObjective

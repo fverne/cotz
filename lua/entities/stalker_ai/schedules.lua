@@ -78,6 +78,8 @@ local function updateUnreachableRecovery(actor, enemy)
 		recovery.nextRetry = now + UNREACHABLE_RETRY_INTERVAL
 		-- Position goals retry navigation without the chase task rejecting remembered unreachable enemies.
 		actor:STALKERNPCMoveToPosition(position)
+	elseif actor.cotzCombatLeash then
+		actor:STALKERNPCHoldNavigationPosition()
 	else
 		recovery.retreating = true
 		actor:STALKERNPCWithdrawUnreachable(recovery)

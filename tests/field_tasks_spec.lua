@@ -37,9 +37,18 @@ local now, map, blocked = 1000, "rp_marsh_cs", false
 CurTime = function() return now end
 os.time = function() return now end
 game = {GetMap = function() return map end}
-MASK_SOLID = 1
+MASK_SOLID, MASK_PLAYERSOLID_BRUSHONLY, CONTENTS_PLAYERCLIP = 1, 2, 4
+vector_origin = Vector(0, 0, 0)
+local clipBoundary, aiDisabled
+GetConVar = function(name)
+	assert(name == "ai_disabled")
+	return {GetInt = function() return aiDisabled and 1 or 0 end}
+end
 util = {
 	AddNetworkString = function() end,
+	TraceLine = function(trace)
+		return {Hit = clipBoundary and (trace.start.x < clipBoundary) ~= (trace.endpos.x < clipBoundary)}
+	end,
 	TraceHull = function(trace)
 		return {Hit = not blocked, StartSolid = blocked, HitNormal = Vector(0, 0, 1),
 			HitPos = trace.start - Vector(0, 0, 32)}
@@ -86,6 +95,11 @@ ents = {Create = function(class)
 	function entity:DropToFloor() self.droppedToFloor = true end
 	function entity:SetEnemy(enemy) self.enemy = enemy end
 	function entity:GetEnemy() return self.enemy end
+	function entity:IsOnGround() return true end
+	function entity:StopMoving() self.stopped = true end
+	function entity:SetLocalVelocity(velocity) self.velocity = velocity end
+	function entity:STALKERNPCNavigationBusy() return self.busy end
+	function entity:STALKERNPCEnemyInMeleeRange() return self.inMeleeRange and 2 or 0 end
 	function entity:UpdateEnemyMemory() end
 	function entity:Visible() return not self.hidden end
 	objects[#objects + 1] = entity
@@ -94,6 +108,7 @@ ents = {Create = function(class)
 end}
 
 local base = "gamemodes/ix_cotz/plugins/jobsystem/"
+dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 ix.jobs = ix.jobs or {}
 ix.jobs.field = ix.jobs.field or {}
 ix.taskRewards = ix.taskRewards or {}
@@ -716,19 +731,30 @@ check(
 	"defence is hidden without the population manager"
 )
 local populationBlocked, spawnBlocked, checkedQueued, enforcedRegistration = false, false, false, false
-local placementBlocked, placedPosition, placementOrigin = false
+local placementBlocked, placedPosition, placementOrigin, graphMissing = false
+local placementOffset = Vector(64, 0, 2)
+local researchComponent = 14
 local registered = {}
 ix.eventController = {
-	GetSpawnLocation = function(_, position)
+	GetSpawnNodes = function()
+		if graphMissing then return end
+		local anchor = client:GetPos()
+		local approach = anchor + Vector(1000, 0, 0)
+		return {anchor, approach}, {[anchor] = researchComponent, [approach] = researchComponent}
+	end,
+	GetSpawnLocation = function(_, position, radius, _, usable, component)
+		check(component == researchComponent, "research placement requires the sampler's graph component")
 		placementOrigin = position
 		if placementBlocked then return end
-		placedPosition = position + Vector(64, 0, 2)
+		local offset = radius and Vector(0, radius <= 768 and 500 or 700, 0) or placementOffset
+		placedPosition = position + offset
 
-		return placedPosition
+		if usable(placedPosition) then return placedPosition end
 	end,
 	UpdateCombatSchedule = function(_, npc)
 		npc.destination = npc.cotzCombatObjective:GetPos()
 	end,
+	ClearCombatEnemy = function(_, npc) npc:SetEnemy(nil) end,
 	CreateCombatPack = function(_, origin, isolated) return {origin = origin, isolated = isolated} end,
 	CanSpawnMutant = function(_, _, includeQueued)
 		checkedQueued = includeQueued
@@ -788,6 +814,11 @@ now = now + 2
 ix.jobs.field.Action(client, "Contact", "start")
 check(character.jobs.Contact.fieldTask.stage == "deploy", "population cap blocks research startup")
 populationBlocked = false
+graphMissing = true
+now = now + 2
+ix.jobs.field.Action(client, "Contact", "start")
+check(character.jobs.Contact.fieldTask.stage == "deploy", "research cannot start without a connected sampler approach")
+graphMissing = false
 now = now + 2
 ix.jobs.field.Action(client, "Contact", "start")
 entity = ix.jobs.field.GetObject(character, character.jobs.Contact)
@@ -849,6 +880,46 @@ check(character.jobs.Contact.fieldTask.defence.defendDistance == 3072,
 	"radius migration preserves customized saved defence distances")
 character.jobs.Contact.fieldTask.defence.defendDistance = 2048
 client.position = ix.jobs.field.Unpack(job.fieldTask.point)
+local center = entity:GetPos()
+local otherAttacker = livingAttackers()[2]
+local originalAttackerPosition = attackingNPC:GetPos()
+attackingNPC:SetEnemy(client)
+update(client, character)
+attackingNPC.position = center + Vector(2200, 0, 0)
+attackingNPC:SetHealth(70)
+attackingNPC.cotzNavigationRetreat = {}
+attackingNPC.busy = true
+update(client, character)
+check(attackingNPC:GetPos():DistToSqr(center) > 2048 ^ 2, "recovery waits for an active attack")
+attackingNPC.busy, aiDisabled = false, true
+update(client, character)
+check(attackingNPC:GetPos():DistToSqr(center) > 2048 ^ 2, "disabled AI does not relocate outside attackers")
+aiDisabled = false
+local registeredBeforeRecovery = #registered
+update(client, character)
+check(attackingNPC:GetPos():DistToSqr(center) == 500 ^ 2 and attackingNPC:Health() == 70
+	and attackingNPC.stopped and not attackingNPC:GetEnemy() and not attackingNPC.cotzNavigationRetreat
+	and #registered == registeredBeforeRecovery and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
+	"an escaped attacker returns on the same entity without healing or crediting the wave")
+clipBoundary = center.x + 800
+otherAttacker.position = center + Vector(2500, 0, 0)
+update(client, character)
+check(otherAttacker:GetPos():DistToSqr(center) == 2500 ^ 2,
+	"an inbound attacker can follow a long or indirect node route before engaging")
+clipBoundary = nil
+attackingNPC.position, attackingNPC.hidden = originalAttackerPosition, true
+update(client, character)
+for _ = 1, 4 do update(client, character) end
+check(attackingNPC:GetPos() == originalAttackerPosition, "briefly blocked movement is given time to resolve")
+placementBlocked = true
+for _ = 1, 2 do update(client, character) end
+check(attackingNPC:GetPos() == originalAttackerPosition and not attackingNPC.invalid,
+	"stalled attackers wait when all recovery positions are blocked")
+placementBlocked = false
+for _ = 1, 2 do update(client, character) end
+check(attackingNPC:GetPos():DistToSqr(center) == 500 ^ 2 and attackingNPC:Health() == 70,
+	"a stalled attacker gets a fresh approach once safe placement is available")
+attackingNPC.hidden = false
 local health = entity:Health()
 ix.jobs.field.DefenceDamage(
 	entity,
@@ -877,9 +948,13 @@ check(character.jobs.Contact.fieldTask.defence.health < health,
 	"losing the combat target resumes sampler disruption")
 check(character.jobs.Contact.fieldTask.stage == "defending", "elapsed recording time cannot bypass uncleared waves")
 attackingNPC:Remove()
+placementOffset = Vector(4500, 0, 2)
 update(client, character)
 check(#livingAttackers() == 2 and character.jobs.Contact.fieldTask.defence.completedWaves == 0,
 	"removed attackers are replaced rather than counted as kills")
+check(registered[#registered]:GetPos():DistToSqr(center) == 700 ^ 2,
+	"a spawn outside the original range falls back to another connected node in that range")
+placementOffset = Vector(64, 0, 2)
 ix.jobs.field.DefenceKilled(attackingNPC)
 update(client, character)
 check(character.jobs.Contact.fieldTask.defence.completedWaves == 0,

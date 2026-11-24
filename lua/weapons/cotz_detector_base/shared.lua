@@ -39,6 +39,7 @@ SWEP.ExtraArtifactModels = nil
 SWEP.EmissionBodygroup = nil
 SWEP.OverlayLifts = nil
 SWEP.HiddenBones = nil
+SWEP.BoltReleaseCycle = 0
 SWEP.WorldModelOffset = {
 	bone = "ValveBiped.Bip01_R_Hand",
 	pos = Vector(4.675, 1.557, -2.597),
@@ -51,9 +52,6 @@ local BEEP_SOUND = "stalkerdetectors/echo.wav"
 local BEEP_LEVEL = 70
 
 local BOLT_COOLDOWN = 3
--- Match the release point in the Anomaly pack's throw animations.
-local BOLT_RELEASE_DELAY = 0.23
-local BOLT_WEAPON_CLASS = "cw_anomaly_bolt"
 local BOLT_LIFETIME = 12
 local BOLT_SPAWN_OFFSET = 10
 local BOLT_SPIN = 500
@@ -182,8 +180,8 @@ function SWEP:SetupDataTables()
 	-- 0 while deployed, the hide animation's end time while holstering, -1 once it has finished.
 	self:NetworkVar("Float", 1, "HolsterTime")
 	self:NetworkVar("Entity", 0, "HolsterTarget")
+	-- End of the predicted throw windup. Zero outside the windup.
 	self:NetworkVar("Float", 2, "BoltThrowTime")
-	self:NetworkVar("Bool", 0, "BoltThrowShort")
 end
 
 function SWEP:Initialize()
@@ -192,7 +190,6 @@ function SWEP:Initialize()
 	self.artifacts = {}
 	self.nextScan = 0
 	self.lastBeep = 0
-	self.nextBoltThrow = 0
 	self.arrowYaw = 0
 	self.flashUntil = 0
 end
@@ -317,6 +314,7 @@ function SWEP:Deploy()
 	self:SetHolsterTime(0)
 	self:SetHolsterTarget(NULL)
 	self:SetBoltThrowTime(0)
+	self.pendingBolt = nil
 	self:PlaySequence("anm_show")
 
 	return true
@@ -325,6 +323,9 @@ end
 -- Delays the switch until the hide animation has played, then selects the requested weapon.
 -- Switches without a target (death, stripping) still happen immediately.
 function SWEP:Holster(nextWeapon)
+	self:SetBoltThrowTime(0)
+	self.pendingBolt = nil
+
 	if self:GetHolsterTime() < 0 or not IsValid(nextWeapon) or nextWeapon == self then
 		self:SetHolsterTime(0)
 		self:OnHolsterFinished()
@@ -381,10 +382,15 @@ function SWEP:CanThrowBolt(owner)
 	return inventory:HasItem("artifact_bolt") or inventory:HasItem("value_bolts") or false
 end
 
-function SWEP:ThrowBolt(force, punch, short)
+function SWEP:ThrowBolt(force, punch)
 	local owner = self:GetOwner()
+	local now = CurTime()
 
-	if not IsValid(owner) or self:GetHolsterTime() ~= 0 or self.nextBoltThrow > CurTime() then
+	if not IsValid(owner) or self:GetHolsterTime() ~= 0 then
+		return
+	end
+
+	if self:GetBoltThrowTime() > 0 or self:GetNextPrimaryFire() > now then
 		return
 	end
 
@@ -392,29 +398,56 @@ function SWEP:ThrowBolt(force, punch, short)
 		return
 	end
 
-	self.nextBoltThrow = CurTime() + BOLT_COOLDOWN
-	owner:DoAttackEvent()
-	owner:ViewPunch(punch)
-
-	-- The detector models only animate the left hand. As in Anomaly, the throw is drawn by a
-	-- separate right-hand bolt model; see DrawBoltHand.
-	self:SetBoltThrowTime(CurTime())
-	self:SetBoltThrowShort(short)
-
-	if CLIENT then
+	if self:PlaySequence("anm_throw_s") <= 0 then
 		return
 	end
 
-	local character = owner:GetCharacter()
+	self:SetBoltThrowTime(self:GetIdleTime())
+	self:SetNextPrimaryFire(now + BOLT_COOLDOWN)
+	self:SetNextSecondaryFire(now + BOLT_COOLDOWN)
 
-	timer.Simple(BOLT_RELEASE_DELAY, function()
-		if IsValid(self) then
-			self:ReleaseBolt(owner, character, force)
-		end
-	end)
+	if SERVER then
+		self.pendingBolt = {
+			owner = owner,
+			character = owner:GetCharacter(),
+			force = force,
+			punch = punch,
+		}
+	end
 end
 
-function SWEP:ReleaseBolt(owner, character, force)
+function SWEP:UpdateBoltThrow()
+	local now = CurTime()
+	local windupEnd = self:GetBoltThrowTime()
+	local pending = self.pendingBolt
+
+	if windupEnd > 0 and now >= windupEnd then
+		self:SetBoltThrowTime(0)
+
+		-- The looping anm_throw pose is for holding a throw. Clicks go straight into follow-through.
+		local duration = self:PlaySequence("anm_throw_e")
+
+		if duration <= 0 then
+			self.pendingBolt = nil
+			return
+		end
+
+		local nextThrow = math.max(self:GetNextPrimaryFire(), self:GetIdleTime())
+		self:SetNextPrimaryFire(nextThrow)
+		self:SetNextSecondaryFire(nextThrow)
+
+		if pending then
+			pending.releaseAt = now + duration * self.BoltReleaseCycle
+		end
+	end
+
+	if pending and pending.releaseAt and now >= pending.releaseAt then
+		self.pendingBolt = nil
+		self:ReleaseBolt(pending.owner, pending.character, pending.force, pending.punch)
+	end
+end
+
+function SWEP:ReleaseBolt(owner, character, force, punch)
 	if not IsValid(owner) or not owner:Alive() or owner:GetActiveWeapon() ~= self then
 		return
 	end
@@ -427,6 +460,8 @@ function SWEP:ReleaseBolt(owner, character, force)
 		return
 	end
 
+	owner:DoAttackEvent()
+	owner:ViewPunch(punch)
 	self:EmitSound(BOLT_THROW_SOUND)
 
 	local bolt = ents.Create("ent_stalker_bolt")
@@ -451,11 +486,11 @@ function SWEP:ReleaseBolt(owner, character, force)
 end
 
 function SWEP:PrimaryAttack()
-	self:ThrowBolt(5000, Angle(10, -10, 0), false)
+	self:ThrowBolt(5000, Angle(10, -10, 0))
 end
 
 function SWEP:SecondaryAttack()
-	self:ThrowBolt(2500, Angle(-2, 0, 0), true)
+	self:ThrowBolt(2500, Angle(-2, 0, 0))
 end
 
 function SWEP:Reload()
@@ -469,6 +504,7 @@ function SWEP:Think()
 	end
 
 	self:UpdateHolster(owner)
+	self:UpdateBoltThrow()
 	self:UpdateIdle(owner)
 
 	if CLIENT then
@@ -498,31 +534,6 @@ if SERVER then
 end
 
 local rotateYaw = Angle()
--- The Anomaly viewmodels carry two left-arm chains: the ValveBiped bones that c_hands merges with,
--- and the animation rig (l_*, bip01_l_*) that the model's own hands mesh is weighted to.
-local LEFT_ARM_BONE_PREFIXES = {"valvebiped.bip01_l_", "bip01_l_", "l_"}
--- NaN hides weighted vertices instead of collapsing them into visible spikes.
-local HIDDEN_ARM_SCALE = Vector(0 / 0, 0 / 0, 0 / 0)
-
-local function isLeftArmBone(name)
-	name = string.lower(name)
-
-	for _, prefix in ipairs(LEFT_ARM_BONE_PREFIXES) do
-		if string.StartWith(name, prefix) then
-			return true
-		end
-	end
-
-	return false
-end
-
-local function hideLeftArm(model)
-	for bone = 0, model:GetBoneCount() - 1 do
-		if isLeftArmBone(model:GetBoneName(bone)) then
-			model:ManipulateBoneScale(bone, HIDDEN_ARM_SCALE)
-		end
-	end
-end
 
 local function trackBone(viewModel, bone)
 	viewModel.cotzDetectorBones = viewModel.cotzDetectorBones or {}
@@ -725,103 +736,6 @@ function SWEP:DrawScreen(viewModel)
 	cam.End3D2D()
 end
 
-function SWEP:GetBoltHandModels(owner)
-	local hands = owner:GetHands()
-
-	if not IsValid(hands) then
-		return
-	end
-
-	if not IsValid(self.boltViewModel) then
-		local boltWeapon = weapons.GetStored(BOLT_WEAPON_CLASS)
-
-		if not boltWeapon then
-			return
-		end
-
-		self.boltViewModel = ClientsideModel(boltWeapon.ViewModel, RENDERGROUP_VIEWMODEL)
-
-		if not IsValid(self.boltViewModel) then
-			return
-		end
-
-		self.boltViewModel:SetNoDraw(true)
-		hideLeftArm(self.boltViewModel)
-	end
-
-	local handsModel = hands:GetModel()
-
-	if not IsValid(self.boltHands) or self.boltHands:GetModel() ~= handsModel then
-		if IsValid(self.boltHands) then
-			self.boltHands:Remove()
-		end
-
-		self.boltHands = ClientsideModel(handsModel, RENDERGROUP_VIEWMODEL)
-
-		if not IsValid(self.boltHands) then
-			return
-		end
-
-		self.boltHands:SetNoDraw(true)
-		self.boltHands:SetParent(self.boltViewModel)
-		self.boltHands:AddEffects(EF_BONEMERGE)
-		hideLeftArm(self.boltHands)
-
-		-- Read by the c_hands PlayerColor material proxy.
-		self.boltHands.GetPlayerColor = function()
-			return IsValid(owner) and owner:GetPlayerColor() or Vector(1, 1, 1)
-		end
-	end
-
-	self.boltHands:SetSkin(hands:GetSkin())
-
-	for group = 0, hands:GetNumBodyGroups() - 1 do
-		self.boltHands:SetBodygroup(group, hands:GetBodygroup(group))
-	end
-
-	return self.boltViewModel, self.boltHands
-end
-
--- Draw the Anomaly bolt’s throwing hand alongside the detector’s own left hand.
-function SWEP:DrawBoltHand(viewModel)
-	local throwTime = self:GetBoltThrowTime()
-	local owner = self:GetOwner()
-
-	if throwTime <= 0 or not IsValid(owner) then
-		return
-	end
-
-	local model, hands = self:GetBoltHandModels(owner)
-
-	if not model then
-		return
-	end
-
-	local sequence = model:LookupSequence(self:GetBoltThrowShort() and "anm_throw_low" or "anm_throw")
-
-	if sequence < 0 then
-		return
-	end
-
-	local cycle = (CurTime() - throwTime) / model:SequenceDuration(sequence)
-
-	if cycle >= 1 then
-		return
-	end
-
-	if model:GetSequence() ~= sequence then
-		model:ResetSequence(sequence)
-	end
-
-	model:SetPos(viewModel:GetPos())
-	model:SetAngles(viewModel:GetAngles())
-	model:SetCycle(math.max(cycle, 0))
-	model:InvalidateBoneCache()
-	model:SetupBones()
-	model:DrawModel()
-	hands:DrawModel()
-end
-
 function SWEP:PostDrawViewModel(viewModel)
 	if self.restoreBodygroup then
 		viewModel:SetBodygroup(self.restoreBodygroup[1], self.restoreBodygroup[2])
@@ -831,8 +745,6 @@ function SWEP:PostDrawViewModel(viewModel)
 	if self.DisplayMode == "screen" then
 		self:DrawScreen(viewModel)
 	end
-
-	self:DrawBoltHand(viewModel)
 end
 
 function SWEP:OnHolsterFinished()
@@ -892,9 +804,7 @@ function SWEP:OnRemove()
 		resetViewModel(owner:GetViewModel())
 	end
 
-	for _, model in pairs({self.worldModelEntity, self.boltHands, self.boltViewModel}) do
-		if IsValid(model) then
-			model:Remove()
-		end
+	if IsValid(self.worldModelEntity) then
+		self.worldModelEntity:Remove()
 	end
 end

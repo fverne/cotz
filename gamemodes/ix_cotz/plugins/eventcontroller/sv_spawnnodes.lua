@@ -6,7 +6,16 @@ local NODE_TYPE_OFFSET = 56
 local NODE_GROUND = 2
 local MAX_NODES = 32768
 local BSP_REVISION_OFFSET = 1032
-local cachedMap, cachedNodes
+local cachedMap, cachedNodes, cachedComponents
+
+local function componentRoot(parents, index)
+	while parents[index] ~= index do
+		parents[index] = parents[parents[index]]
+		index = parents[index]
+	end
+
+	return index
+end
 
 local function readSpawnNodes(graph)
 	local size = graph:Size()
@@ -59,6 +68,7 @@ local function readSpawnNodes(graph)
 	if linkCount < 0 or size < linksOffset + 4 + linkCount * LINK_BYTES + count * 4 then
 		return nil, "truncated or invalid node links"
 	end
+	local parents = {}
 	for index = 1, linkCount do
 		local source, destination = graph:ReadShort() + 1, graph:ReadShort() + 1
 		local humanMovement = graph:ReadByte()
@@ -68,27 +78,32 @@ local function readSpawnNodes(graph)
 		end
 		if source ~= destination and nodes[source] and nodes[destination]
 			and bit.band(humanMovement, CAP_MOVE_GROUND) ~= 0 then
-			nodes[source].connected, nodes[destination].connected = true, true
+			parents[source] = parents[source] or source
+			parents[destination] = parents[destination] or destination
+			parents[componentRoot(parents, source)] = componentRoot(parents, destination)
 		end
 	end
 
-	local positions = {}
+	local positions, components = {}, {}
 	for index = 1, count do
-		local node = nodes[index]
-		if node and node.connected then positions[#positions + 1] = node.position end
+		if parents[index] then
+			local position = nodes[index].position
+			positions[#positions + 1] = position
+			components[position] = componentRoot(parents, index)
+		end
 	end
 
-	return positions, revisionNotice
+	return positions, revisionNotice, components
 end
 
 function PLUGIN:GetSpawnNodes()
 	local mapName = game.GetMap()
-	if cachedMap == mapName then return cachedNodes end
-	cachedMap, cachedNodes = mapName, nil
+	if cachedMap == mapName then return cachedNodes, cachedComponents end
+	cachedMap, cachedNodes, cachedComponents = mapName, nil, nil
 	local graph = file.Open("maps/graphs/" .. mapName .. ".ain", "rb", "GAME")
 	local reason = "nodegraph file unavailable"
 	if graph then
-		cachedNodes, reason = readSpawnNodes(graph)
+		cachedNodes, reason, cachedComponents = readSpawnNodes(graph)
 		graph:Close()
 	end
 	if not cachedNodes then
@@ -97,5 +112,5 @@ function PLUGIN:GetSpawnNodes()
 		print("[COTZ eventcontroller] " .. reason .. "; using validated nodegraph positions.")
 	end
 
-	return cachedNodes
+	return cachedNodes, cachedComponents
 end

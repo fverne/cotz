@@ -239,6 +239,12 @@ check(actor.cotzNavigationRetreat and not actor.isAttacking,
 	"jump cooldowns cause retreat rather than an infinite hold")
 
 actor = mutant(target(true))
+actor.cotzCombatLeash = 2048
+exhaustRetries(actor)
+check(not actor.cotzNavigationRetreat and actor.schedule == SCHED_COMBAT_FACE,
+	"leashed research attackers hold for encounter recovery instead of fleeing on the last failed retry")
+
+actor = mutant(target(true))
 applySpecies(actor, "spider")
 actor.health, actor.enemy.position = 50, Vector(400)
 exhaustRetries(actor)

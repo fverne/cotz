@@ -43,14 +43,16 @@ function PLUGIN:GetGroundedSpawnLocation(position, onNodegraph)
 	return grounded
 end
 
-function PLUGIN:GetSpawnLocation(position, radius, sweepFilter)
+function PLUGIN:GetSpawnLocation(position, radius, sweepFilter, usable, component)
 	radius = radius or self.spawnradius
-	local nodes = self:GetSpawnNodes()
+	local nodes, components = self:GetSpawnNodes()
 	if nodes then
 		local candidates = {}
 		local radiusSquared = radius * radius
 		for _, node in ipairs(nodes) do
-			if node:DistToSqr(position) <= radiusSquared and math.abs(node.z - position.z) <= NODE_HEIGHT_RANGE then
+			local eligible = component and components[node] == component
+				or not component and math.abs(node.z - position.z) <= NODE_HEIGHT_RANGE
+			if eligible and node:DistToSqr(position) <= radiusSquared then
 				candidates[#candidates + 1] = node
 			end
 		end
@@ -60,9 +62,10 @@ function PLUGIN:GetSpawnLocation(position, radius, sweepFilter)
 			candidates[index] = candidates[#candidates]
 			candidates[#candidates] = nil
 			local grounded = self:GetGroundedSpawnLocation(candidate, true)
-			if grounded then return grounded end
+			if grounded and (not usable or usable(grounded)) then return grounded end
 		end
 	end
+	if component then return end
 
 	for _ = 1, MAX_SPAWN_ATTEMPTS do
 		local candidate = position + Vector(
@@ -81,10 +84,11 @@ function PLUGIN:GetSpawnLocation(position, radius, sweepFilter)
 		})
 		if not trace.Hit and not trace.StartSolid and not trace.AllSolid then
 			local grounded = self:GetGroundedSpawnLocation(candidate)
-			if grounded then return grounded end
+			if grounded and (not usable or usable(grounded)) then return grounded end
 		end
 	end
 
 	-- The center is only a fallback if it passes the same floor and clearance checks.
-	return self:GetGroundedSpawnLocation(position)
+	local grounded = self:GetGroundedSpawnLocation(position)
+	if grounded and (not usable or usable(grounded)) then return grounded end
 end

@@ -11,6 +11,9 @@ SWEP.SlotPos = 5
 SWEP.ViewModel = "models/flaymi/stalker/dar_anomaly/weapons/v_models/dev_diolator_detector_3_hud.mdl"
 SWEP.WorldModel = "models/flaymi/stalker/dar_anomaly/weapons/w_models/dev_diolator_detector_elite.mdl"
 
+-- Release as the detector starts to recoil in anm_throw_e.
+SWEP.BoltReleaseCycle = 4 / 59
+
 -- Like Anomaly's CEliteDetector, the Veles plots every artifact in range on its radar screen.
 SWEP.DetectRadius = 400
 SWEP.DisplayMode = "screen"

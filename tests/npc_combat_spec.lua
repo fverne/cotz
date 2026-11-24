@@ -681,12 +681,18 @@ do
 	defender.hidden = true
 	fixture.SetPlayers({defender})
 	researcher.cotzCombatObjective, researcher.cotzCombatObjectiveRadius = sampler, 160
+	researcher.cotzCombatLeash = 2048
+	researcher.cotzCombatObjectiveApproach = Vector(700)
 	manager:FindCombatEnemy(researcher, 1500, 90, true)
 	local selectSchedule = loadEntityMethod("lua/entities/stalker_ai/schedules.lua", "SelectSchedule")
 	selectSchedule(researcher)
+	check(not researcher.enemy and researcher.destination.x == 700
+		and researcher.schedule == SCHED_FORCED_GO_RUN, "research attackers immediately move toward the connected node")
+	researcher.position = Vector(700)
+	selectSchedule(researcher)
 	check(not researcher.enemy and researcher.destination.x == 1000
-		and researcher.schedule == SCHED_FORCED_GO_RUN,
-		"research attackers approach the device through real schedule selection without knowing hidden players")
+		and researcher.schedule == SCHED_FORCED_GO_RUN and not researcher.cotzCombatObjectiveApproach,
+		"research attackers continue from the node to the sampler without knowing hidden players")
 	local scheduleCalls = researcher.scheduleCalls
 	advance(2)
 	selectSchedule(researcher)
@@ -730,11 +736,31 @@ do
 	researcher.PlayingAnimation = false
 	manager:UpdateCombatSchedule(researcher)
 	check(researcher.destination.x == 1000, "player death releases the attacker back to the device")
+	defender.health, defender.hidden, defender.position = 100, false, Vector(3000)
+	check(manager:SetCombatTarget(researcher, defender), "research attackers can fight inside the defence area")
+	defender.position = Vector(3100)
+	manager:ValidateCombatEnemy(researcher)
+	manager:UpdateCombatSchedule(researcher)
+	check(not IsValid(researcher:GetEnemy()) and researcher.destination.x == 1000
+		and not manager:SetCombatTarget(researcher, defender),
+		"players leaving the defence radius cannot pull attackers with them or reacquire them")
 	sampler.invalid = true
 	check(manager:UpdateCombatSchedule(researcher) == nil, "removed devices stop owning movement schedules")
 	manager:RemoveCombatActor(researcher)
-	check(not researcher.cotzCombatObjective and not researcher.cotzCombatObjectiveRadius,
+	check(not researcher.cotzCombatObjective and not researcher.cotzCombatObjectiveRadius
+		and not researcher.cotzCombatLeash,
 		"actor cleanup releases device references")
+end
+
+do
+	local runAway = loadEntityMethod("lua/entities/npc_mutant_dog/init.lua", "RunAway")
+	local dog = {SetSchedule = function(self) self.fleeScheduled = true end}
+	dog.cotzCombatLeash = 2048
+	runAway(dog)
+	check(not dog.MustFlee and not dog.fleeScheduled, "research dogs ignore pack-death fleeing")
+	dog.cotzCombatLeash = nil
+	runAway(dog)
+	check(dog.MustFlee and dog.fleeScheduled, "ambient dogs retain pack-death fleeing")
 end
 
 fixture.Reset()

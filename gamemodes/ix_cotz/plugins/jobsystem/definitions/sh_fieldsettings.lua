@@ -26,6 +26,7 @@ ix.jobs.field.settings = {
 		minAttackDistance = 512, maxAttackDistance = 4096, maxHeightDifference = 256, maxSpawnPoints = 8,
 		defendDistance = 2048, duration = 90, samplerHealth = 250, threatRadius = 160, threatDamage = 8,
 		waveInterval = 10, attemptTimeout = 300, retryDelay = 30, playerSafeDistance = 256,
+		nodeLinkRadius = 384, localSpawnRadius = 768, stallSeconds = 12, stallProgress = 32, recoveryInterval = 4,
 		waves = {
 			{{classes = {"npc_mutant_dog"}, count = 2},
 				{classes = {"npc_mutant_dog", "npc_mutant_pseudodog"}, count = 2}},

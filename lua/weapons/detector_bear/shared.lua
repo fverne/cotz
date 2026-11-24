@@ -10,6 +10,9 @@ SWEP.SlotPos = 1
 SWEP.ViewModel = "models/flaymi/stalker/dar_anomaly/weapons/v_models/dev_diolator_detector_2_hud.mdl"
 SWEP.WorldModel = "models/flaymi/stalker/dar_anomaly/weapons/w_models/dev_diolator_detector_bear.mdl"
 
+-- Release as the detector starts to recoil in anm_throw_e.
+SWEP.BoltReleaseCycle = 3 / 38
+
 -- Like Anomaly's CAdvancedDetector, the Bear's LED segment turns towards the nearest artifact.
 SWEP.DetectRadius = 300
 SWEP.DisplayMode = "arrow"
