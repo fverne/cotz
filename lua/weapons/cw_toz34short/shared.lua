@@ -12,7 +12,8 @@ if CLIENT then
 	SWEP.PosBasedMuz = false
 	SWEP.NoShells = true
 
-	SWEP.IronsightPos = Vector(-1.986, -3.319, 2.009)
+	-- Keep the fitted wrist in front of the viewmodel near plane when aiming.
+	SWEP.IronsightPos = Vector(-1.986, 2.681, 2.009)
 	SWEP.IronsightAng = Vector(0, 0, 0)
 
 	SWEP.NXSPos = Vector(-2.004, -3.69, 1.616)

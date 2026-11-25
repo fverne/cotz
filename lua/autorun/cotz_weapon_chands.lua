@@ -1,6 +1,7 @@
 if SERVER then
 	AddCSLuaFile()
 	AddCSLuaFile("cotz_weapon_chands/sh_definitions.lua")
+	AddCSLuaFile("cotz_weapon_chands/sh_rigged_models.lua")
 	AddCSLuaFile("cotz_weapon_chands/sh_models.lua")
 	AddCSLuaFile("cotz_weapon_chands/cl_grips.lua")
 	AddCSLuaFile("cotz_weapon_chands/cl_hands.lua")

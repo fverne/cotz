@@ -99,6 +99,12 @@ def load(path):
 
 
 MODELS_INSTALLED = (ROOT.parent / "cotz_general" / "models" / "cotz" / "chands").is_dir()
+FITTED = weapon_fit.fitted_hand_models()
+
+
+def installed_fitted(path):
+    target = FITTED.get(path)
+    return target and (ROOT.parent / "cotz_general" / target).is_file()
 
 
 @unittest.skipUnless(MODELS_INSTALLED, "converted viewmodels are not installed")
@@ -106,6 +112,8 @@ class WeaponGrips(unittest.TestCase):
     def test_grip_sources_are_evaluated_in_game(self):
         # cl_hands.lua reads only bones the bonemerge sets up; any other source falls back to the converted pose.
         for path, poses in read_grips().items():
+            if installed_fitted(path):
+                continue
             model = load(path)
             names = {bone["name"]: index for index, bone in enumerate(model.bones)}
             flags = bone_flags(model)
@@ -117,6 +125,8 @@ class WeaponGrips(unittest.TestCase):
     def test_converted_arms_keep_their_elbows(self):
         grips = read_grips()
         for path in converted_models():
+            if installed_fitted(path):
+                continue
             model = load(path)
             names = {bone["name"]: index for index, bone in enumerate(model.bones)}
             world = world_pose(model, idle_sequence(model), 0)
@@ -136,6 +146,23 @@ class WeaponGrips(unittest.TestCase):
                     self.assertGreater(math.dist(hand, forearm), MIN_SEGMENT, "the forearm starts at the hand")
                     self.assertGreater(math.dist(forearm, upper_arm), MIN_SEGMENT, "the upper arm covers the forearm")
                     self.assertGreater(math.dist(hand, upper_arm), math.dist(hand, forearm))
+
+    def test_named_viewmodels_have_matching_sidecars_and_hand_bones(self):
+        for original, path in FITTED.items():
+            if not installed_fitted(original):
+                continue
+            with self.subTest(model=path):
+                file = weapon_fit.find_model(path)
+                model = mdl_pose.Model(str(file))
+                name = path.removeprefix("models/").encode()
+                self.assertEqual(model.data[12:76].split(b"\0")[0], name)
+                self.assertEqual(file.with_suffix(".vvd").read_bytes()[8:12], model.data[8:12])
+                self.assertEqual(file.with_suffix(".dx90.vtx").read_bytes()[16:20], model.data[8:12])
+                flags = bone_flags(model)
+                names = {bone["name"].lower(): i for i, bone in enumerate(model.bones)}
+                for side in "lr":
+                    for part in ("hand", "forearm", "finger0", "finger1", "finger2", "finger3", "finger4"):
+                        self.assertTrue(flags[names[f"valvebiped.bip01_{side}_{part}"]] & BONE_USED_BY_BONE_MERGE)
 
 
 if __name__ == "__main__":

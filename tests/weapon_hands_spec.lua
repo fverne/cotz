@@ -63,6 +63,7 @@ EF_BONEMERGE = 1
 SERVER, CLIENT = true, false
 include("autorun/cotz_weapon_chands.lua")
 assert(sent["cotz_weapon_chands/cl_grips.lua"], "Grip definitions must be available to clients")
+assert(sent["cotz_weapon_chands/sh_rigged_models.lua"], "Clients need the same fitted model map as the server")
 
 SERVER, CLIENT = false, true
 include("autorun/cotz_weapon_chands.lua")
@@ -202,4 +203,55 @@ include("cotz_weapon_chands/cl_hands.lua")
 hooks["cotz/weapon-hands/fit"](hands, engineViewModel, nil, native)
 assert(not hands.callback and not hands.cotzWeaponHandsCallback, "A Lua reload must remove stale callbacks")
 
-print("Weapon hand fitting follows the active model, animated source bones and equipped hand model.")
+local riggedModels = include("cotz_weapon_chands/sh_rigged_models.lua")
+local originalAnomaly = "models/flaymi/anomaly/weapons/v_models/9a91.mdl"
+local legacyRig = riggedModels[conversions.cw_dp28.model].model
+local stored = {
+	cw_dp28 = {ViewModel = "models/legacy/dp28.mdl"},
+	cw_9a91 = {ViewModel = originalAnomaly},
+	cw_anomaly_9a91 = {ViewModel = originalAnomaly},
+}
+local installed = {}
+
+string.StartWith = function(value, prefix) return value:sub(1, #prefix) == prefix end
+file = {Exists = function(path, realm)
+	assert(realm == "GAME")
+	return installed[path]
+end}
+weapons = {
+	GetStored = function(class) return stored[class] end,
+	IsBasedOn = function(_, base) return base == "cw_base" end,
+}
+
+local applyModels = hooks["cotz/weapon-hands/models"]
+applyModels()
+assert(stored.cw_dp28.ViewModel == conversions.cw_dp28.model, "Use the original conversion without the content pack")
+assert(stored.cw_9a91.ViewModel == originalAnomaly, "Native rigs use their existing model paths")
+
+installed[legacyRig] = true
+applyModels()
+assert(stored.cw_dp28.ViewModel == legacyRig and stored.cw_dp28.UseHands)
+assert(stored.cw_9a91.ViewModel == originalAnomaly and stored.cw_anomaly_9a91.ViewModel == originalAnomaly)
+applyModels()
+assert(stored.cw_dp28.ViewModel == legacyRig and stored.cw_9a91.ViewModel == originalAnomaly)
+
+local baked = {
+	GetClass = function() return "cw_dp28" end,
+	ViewModel = legacyRig,
+	CW_VM = {GetModel = function() return legacyRig end},
+	CW20Weapon = true,
+}
+
+fit = hooks["cotz/weapon-hands/fit"]
+fit(hands, engineViewModel, nil, baked)
+assert(not hands.callback, "The compiled grip must use normal c_hands with no Lua pose callback")
+
+CustomizableWeaponry = {}
+include("cw/client/cw_hooks.lua")
+local drawHands = hooks["CustomizableWeaponry.PreDrawPlayerHands"]
+drawHands(hands, engineViewModel, nil, baked)
+assert(hands:GetParent() == baked.CW_VM)
+drawHands(hands, engineViewModel, nil, native)
+assert(hands:GetParent() == engineViewModel, "Returning to a stock viewmodel must restore the normal parent")
+
+print("Compiled grips use named conversions and preserve native viewmodel paths.")

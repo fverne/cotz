@@ -606,14 +606,24 @@ def all_classes():
     return sorted(path.parent.name for path in WEAPONS.glob("cw_*/shared.lua") if path.parent.name != "cw_base")
 
 
+def fitted_hand_models():
+    path = REPO_ROOT / "lua/cotz_weapon_chands/sh_rigged_models.lua"
+    return dict(re.findall(r'\["(models/[^"]+)"\]\s*=\s*{\s*model\s*=\s*"([^"]+)"', path.read_text()))
+
+
 def command_legacy_world(classes, write):
     hands = (REPO_ROOT / "lua/cotz_weapon_chands/sh_definitions.lua").read_text(encoding="utf-8")
     hands_models = dict(re.findall(r'\["(cw_\w+)"\]\s*=\s*{\s*model\s*=\s*"([^"]+)"', hands))
+    fitted = fitted_hand_models()
     for weapon_class in classes:
         info = weapon_info(weapon_class)
         if not info["viewmodel"] or "models/flaymi/anomaly/" in info["viewmodel"] or not attachment_bones(info):
             continue
         info["handsModel"] = hands_models.get(weapon_class)
+        if info["handsModel"] in fitted:
+            model = fitted[info["handsModel"]]
+            if (REPO_ROOT.parent / "cotz_general" / model).is_file():
+                info["handsModel"] = model
         try:
             fields = legacy_world_fields(info)
         except (FitError, mdl_pose.MdlError, struct.error, OSError, IndexError) as error:

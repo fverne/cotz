@@ -128,37 +128,23 @@ list with the placed sights and removes dropped sights and foregrips from the we
 `ITEM.validAttachments`. `offline_placement.lua inspect SPEC CLASS...` prints each model's mesh center
 next to the gun's `wpn_body`, `wpn_scope` and muzzle for a quick check.
 
-The c_hands conversions in `cotz_general` (formerly the `cotz_weapon_chands` addon) replace listed
-viewmodels with c_hands conversions of the old models; it skips guns whose viewmodel is under
-`models/flaymi/anomaly/` so the reskins keep their Anomaly models.
+### Compiled grips for regular COTZ firearms
 
-The conversion hand scales are in `lua/cotz_weapon_chands/sh_definitions.lua`. The client applies
-the grip corrections in `cl_grips.lua` to the matching converted model. The offsets follow the
-animated wrists through firing, drawing and reloading. The legacy Beretta also takes its finger and
-elbow poses directly from the original animation bones. The DP-28 has a closer support-hand fit, and
-both Contenders share a slimmer fit with the support palm under the fore-end. Their four support fingers
-follow the original phalanges so the hand closes below the iron sights and opens during reload.
-The Nagant revolver's support hand is shifted onto the firing hand. The Contender, Kiparis, M1911 (chic) and
-Stechkin APS conversions placed arm bones wrongly: the first three laid the upper arms over the forearms, and the
-Stechkin hung its right arm from the wrist, so the forearm reached past the muzzle. Their upper arms, and the
-Stechkin's right forearm, now follow the original rig's arm bones.
-Grip offsets were measured against the original animated hand and gun meshes using the stock COTZ
-arms and Anomaly Novice hands.
+Mount the updated `cotz_general` on the server and clients, then restart both. It contains 112 fitted
+first-person rigs for 130 regular COTZ CW2.0 classes. The [model map](../lua/cotz_weapon_chands/sh_rigged_models.lua)
+selects the gun-specific names for legacy conversions in `models/cotz/chands/`. The other rigs
+load at their existing model paths. Grip and sleeve adjustments live in the models' c_hands
+animation tracks. CW draws the suit-selected hands, with the novice loner hands used as the fitting reference.
+The short TOZ-34 sits farther forward in ironsights so its close-up sleeves clear the viewmodel near plane.
 
-Source only poses bones that carry a usage flag, so a grip may only take its pose from a `$bonemerge` bone. `cl_hands.lua`
-ignores any other source and leaves that bone on the bonemerged pose, and `tests/weapon_grips_spec.py` checks
-every source against the installed models, along with the arm lengths of all converted viewmodels. The Beretta's
-elbow chains are flagged in `models/cotz/chands/51c713667a.mdl`. Copies of that model from before 24 November 2026
-fall back to the conversion's own arm pose until the content addon is republished.
-
-The offline audit of the converted guns found no hand on the sight line at rest. Hands that cross it while cycling
-a bolt, pump or lever are part of the original animations.
+The 9A-91 and VSSK Anomaly test variants share the updated model paths. Older copies of `cotz_general`
+load their hashed legacy conversions and Lua grip profiles.
 
 ## Verification
 
 Run `tests/run.sh anomaly_reskin attachment_apply attachment_placement weapon_hands weapon_grips`. Offline aim fits
 reproduce the hand-tuned ACOG aims on the old guns to within about 0.005 units. In game, check each
 reskinned gun's sight pictures, how attachments sit on the model, reload speed, the back-slot PAC
-position and the inventory icon. Check hand contact during hip fire, ADS and partial and empty reloads
-with both light sleeves and bulky gloves. Switch between legacy and Anomaly viewmodels and repeat
-after changing suits.
+position and the inventory icon. Check hand contact during hip fire, clearance around the front post
+and rear notch in ADS, and partial and empty reloads. Repeat with light sleeves and bulky gloves.
+Switch between CW and a stock c_hands weapon to check that the hands follow the current viewmodel.

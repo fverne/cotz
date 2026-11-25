@@ -1,4 +1,5 @@
 local conversions = include("cotz_weapon_chands/sh_definitions.lua")
+local riggedModels = include("cotz_weapon_chands/sh_rigged_models.lua")
 
 local function buildBoneTable(self)
 	local viewModel = self.CW_VM
@@ -26,6 +27,19 @@ end
 -- COTZ reskins some guns with Anomaly CW2.0 viewmodels, which already use the player's c_hands.
 local ANOMALY_VIEWMODELS = "models/flaymi/anomaly/"
 
+local function applyRiggedModel(source, data)
+	if not file.Exists(data.model, "GAME") then return end
+
+	for _, class in ipairs(data.classes) do
+		local weapon = weapons.GetStored(class)
+
+		if weapon and weapon.ViewModel == source then
+			weapon.ViewModel = data.model
+			weapon.UseHands = true
+		end
+	end
+end
+
 local function applyModels()
 	for class, data in pairs(conversions) do
 		local weapon = weapons.GetStored(class)
@@ -38,6 +52,10 @@ local function applyModels()
 				weapon.buildBoneTable = buildBoneTable
 			end
 		end
+	end
+
+	for source, data in pairs(riggedModels) do
+		applyRiggedModel(source, data)
 	end
 end
 
