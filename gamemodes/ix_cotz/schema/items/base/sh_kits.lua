@@ -70,7 +70,7 @@ ITEM.functions.Open = {
   			local droppedItem = ix.util.GetRandomItemFromPool(grouptospawn)
 			timer.Simple(k/10, function()
 				if (IsValid(client) and client:GetCharacter() and !client:GetCharacter():GetInventory():Add(droppedItem[1], 1, droppedItem[2] or {})) then
-					ix.item.Spawn(droppedItem[1], position, nil, AngleRand(), droppedItem[2] or {})
+					ix.item.SpawnTemporary(droppedItem[1], position, AngleRand(), droppedItem[2] or {})
 				end
 			end)
         end
@@ -79,7 +79,7 @@ ITEM.functions.Open = {
 			for i = 1, #item.itemsForcedDrop do
 				timer.Simple(i/10, function()
                 if (IsValid(client) and client:GetCharacter() and !client:GetCharacter():GetInventory():Add(item.itemsForcedDrop[i][1], 1, item.itemsForcedDrop[i][2] or {})) then
-                    ix.item.Spawn(item.itemsForcedDrop[i][1], position, nil, AngleRand(), item.itemsForcedDrop[i][2] or {})
+                    ix.item.SpawnTemporary(item.itemsForcedDrop[i][1], position, AngleRand(), item.itemsForcedDrop[i][2] or {})
                 end
 			end)
 			end

@@ -549,7 +549,7 @@ ITEM.functions.detach = {
 			
 			if not item.player:GetCharacter():GetInventory():Add(ix.armortables.attachments[data[1]].uID) then
 				local position = item.player:GetItemDropPos()
-				ix.item.Spawn(ix.armortables.attachments[data[1]].uID, position, nil, AngleRand())
+				ix.item.SpawnTemporary(ix.armortables.attachments[data[1]].uID, position, AngleRand())
 				position = position + Vector(0, 0, 5)
 				item.player:Notify("No space in your inventory! Items have been dropped.")
 			end			

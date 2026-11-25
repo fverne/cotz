@@ -147,7 +147,7 @@ ITEM.functions.useAll = {
             end
             v:Remove()
             if not char:GetInventory():Add(v.meal, 1, {["weight"] = v:GetWeight()}) then
-              ix.item.Spawn(v.meal, item.player:GetItemDropPos(), nil, AngleRand(), {["weight"] = v:GetWeight()})
+              ix.item.SpawnTemporary(v.meal, item.player:GetItemDropPos(), AngleRand(), {["weight"] = v:GetWeight()})
               item.player:Notify("No space in your inventory! Items have been dropped.")
             end
           end
@@ -185,7 +185,7 @@ function ITEM:CookMeat(item, targetID)
 	ix.util.PlayerPerformItemAction(client, self, "Cooking...", 6, function(player)
       target:Remove()
       if not client:GetCharacter():GetInventory():Add(target.meal, 1, {["weight"] = target:GetWeight()}) then
-        ix.item.Spawn(target.meal, item.player:GetItemDropPos(), nil, AngleRand(), {["weight"] = target:GetWeight()})
+        ix.item.SpawnTemporary(target.meal, item.player:GetItemDropPos(), AngleRand(), {["weight"] = target:GetWeight()})
         item.player:Notify("No space in your inventory! Items have been dropped.")
       end
       player:Notify(target.name.." successfully cooked.")

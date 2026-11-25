@@ -15,6 +15,18 @@ ix.chat.Register("iteminternal", {
 	deadCanChat = true
 })
 
+-- Spawns an overflow drop flagged as temporary so the world item cleanup removes it instead of saving it.
+-- Matches the flagging used by NPC and world spawner drops: item data plus the entity field.
+function ix.item.SpawnTemporary(uniqueID, position, angles, data)
+	return ix.item.Spawn(uniqueID, position, function(item, entity)
+		item:SetData("bTemporary", true)
+
+		if IsValid(entity) then
+			entity.bTemporary = true
+		end
+	end, angles, data)
+end
+
 --adds automatic me's when picking up and dropping items
 function PLUGIN:OnItemTransferred(item, curInv, targetInv)
 	if curInv:GetID() == 0 then

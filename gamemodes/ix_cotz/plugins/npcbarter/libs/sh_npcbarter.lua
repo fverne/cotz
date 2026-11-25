@@ -156,10 +156,9 @@ else
 								:GetInventory()
 								:Add(rewardItem[1], 1, rewardItem[3] or {})
 						then
-							ix.item.Spawn(
+							ix.item.SpawnTemporary(
 								rewardItem[1],
 								pl:GetItemDropPos(),
-								nil,
 								AngleRand(),
 								rewardItem[3] or {}
 							)

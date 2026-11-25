@@ -628,7 +628,7 @@ if SERVER then
 				end
 
 				if not client:GetCharacter():GetInventory():Add(uniqueID) then
-					ix.item.Spawn(uniqueID, client)
+					ix.item.SpawnTemporary(uniqueID, client:GetItemDropPos())
 					client:NotifyLocalized("vendorItemDropped")
 				else
 					net.Start("ixVendorAdvAddItem")

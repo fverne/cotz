@@ -227,7 +227,7 @@ local function givePoachingLoot(client, inventory, mutant, knifeTier)
 			tier = knifeTier,
 		}
 		if not inventory:Add(uniqueID, 1, data) then
-			ix.item.Spawn(uniqueID, position, function(_, entity) entity.bTemporary = true end, AngleRand(), data)
+			ix.item.SpawnTemporary(uniqueID, position, AngleRand(), data)
 			position = position + Vector(0, 0, 5)
 			client:Notify("No space in your inventory! Items have been dropped.")
 		end

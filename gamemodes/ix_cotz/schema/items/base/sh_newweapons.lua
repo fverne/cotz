@@ -333,7 +333,7 @@ function ITEM:Unload(player)
 		if addbox then
 			if(!client:GetCharacter():GetInventory():Add(ammoBox, 1, {["quantity"] = ammoAmount})) then
 				client:Notify("No space in inventory for unloaded ammo, dropping to floor.")
-				ix.item.Spawn(ammoBox, client:GetItemDropPos(), nil, AngleRand(), {["quantity"] = ammoAmount})
+				ix.item.SpawnTemporary(ammoBox, client:GetItemDropPos(), AngleRand(), {["quantity"] = ammoAmount})
 			end
 		end
 
@@ -663,7 +663,7 @@ ITEM.functions.detach = {
 		table.remove(attachments, index)
 
 		if attachment and not character:GetInventory():Add(attachment.uniqueID) then
-			ix.item.Spawn(attachment.uniqueID, client:GetItemDropPos(), nil, AngleRand())
+			ix.item.SpawnTemporary(attachment.uniqueID, client:GetItemDropPos(), AngleRand())
 			client:Notify("No space in your inventory! Items have been dropped.")
 		end
 
