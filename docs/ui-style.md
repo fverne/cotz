@@ -13,6 +13,10 @@ for generic management windows. Keep established PDA artwork where an interface 
 - Plain section labels with thin dividers; consistent padding and compact controls.
 - Read-only state uses labels/cards. Actions use buttons with visible hover and disabled states.
 - Equipment interiors retain the inventory slot skin. Preserve icon aspect ratios and image caches.
+- Bundled Helix model icons use opacity-weighted destination blending so translucent layers retain
+  underlying detail and opaque surfaces cover earlier draws. If this changes, bump the renderer's
+  cache prefix so clients regenerate model icons. Check layered artifacts and firearms with inset
+  magazines in-game after regeneration.
 
 `schema/libs/cl_cotzui.lua` provides `ix.cotzUI` for feature-owned frames, scrolling lists, wrapping
 buttons, labels/cards, entries, combo boxes, menus, confirmations, string requests and world markers.

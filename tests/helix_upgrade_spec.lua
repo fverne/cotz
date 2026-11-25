@@ -182,7 +182,7 @@ renderer.renderHook = function(self)
 end
 local rendererEnvironment = {
 	ikon = renderer,
-	schemaName = "test",
+	iconPath = function(name) return "helix/icons/test/v2_" .. name .. ".png" end,
 	ScrW = function() return 1920 end,
 	ScrH = function() return 1080 end,
 	IsValid = function() return true end,
@@ -212,5 +212,30 @@ check(renderedMaterial == "", "unmodified icon resets the previous material")
 check(renderer.cache.normal ~= nil and renderer.cache.custom == nil,
 	"upstream updateCache argument retains its position and meaning")
 check(captures == 2 and writes == 3, "each call captures once and optional cache refresh writes once more")
+
+local blendCalls = {}
+local function noop() end
+rendererEnvironment.halo = {RenderedEntity = noop}
+rendererEnvironment.PositionSpawnIcon = function() return {} end
+rendererEnvironment.cam = {Start3D = noop, End3D = noop}
+rendererEnvironment.lightPositions = {}
+rendererEnvironment.BLEND_ONE = 1
+rendererEnvironment.BLEND_ONE_MINUS_SRC_ALPHA = 2
+rendererEnvironment.BLENDFUNC_ADD = 3
+rendererEnvironment.render = setmetatable({
+	OverrideBlend = function(...) blendCalls[#blendCalls + 1] = {...} end,
+}, {__index = function() return noop end})
+renderer.renderEntity.GetPos = noop
+renderer.renderEntity.DrawModel = function()
+	check(blendCalls[1] and #blendCalls == 1, "model draws with the icon blend override enabled")
+end
+loadMethod("gamemodes/helix/gamemode/core/libs/thirdparty/cl_ikon.lua",
+	"function ikon:renderHook(", rendererEnvironment)
+renderer:renderHook()
+local blend = blendCalls[1]
+check(blend and blend[1] and blend[2] == 1 and blend[3] == 2 and blend[4] == 3
+	and blend[5] == 1 and blend[6] == 2 and blend[7] == 3,
+	"opaque fragments replace earlier pixels and translucent fragments retain underlying colour and coverage")
+check(blendCalls[2] and blendCalls[2][1] == false, "icon rendering releases the blend override")
 
 print(string.format("PASS: %d Helix upgrade regression checks", checks))
