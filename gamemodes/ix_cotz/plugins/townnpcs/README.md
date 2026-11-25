@@ -42,7 +42,7 @@ Restart matching code on all map servers; no save reset or first-time setup is r
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 650 milestones (614 hand-ins and 36 hideout installation objectives)
+the earlier progression, catalogue and service descriptions below. There are 675 milestones (639 hand-ins and 36 hideout installation objectives)
 in 52 branches, retaining current `v3/` IDs and adding 231 stock deliveries. Brass's regular-ammunition stock
 deliveries branch off their calibre milestones; the other contacts' `/stock` intermissions precede the next unlock.
 Technut's initial anorak stock delivery and eleven intermediate stock-preparation deliveries are retired.
@@ -177,6 +177,34 @@ old layout lose its bundled second rise until they deliver the matching `stock-2
 Unfinished purchase deliveries remain intact and no longer wait for a reserve.
 Regenerate with `python3 docs/npc-overhaul/tools/expand_progression.py --write` and
 `python3 docs/npc-overhaul/tools/progression_rewards.py --write` after editing Brass's progression.
+
+## Ammunition unlock branches, 25 November 2026
+
+Gun-unlocking contacts now sell the ammunition for the guns they unlock. When a gun is the first at its
+contact to use a cartridge the contact does not already stock, a side step `<gun step>/ammo` branches off
+that gun unlock. It is an `intermissionFor` step with no `stock` field and a single category-only
+delivery (one item from the gun step's own pool). Completing it adds the cartridge to the contact's
+catalogue at Brass's default stock: four boxes initial and maximum (48-hour refill), and two for
+12-gauge buckshot (12-hour refill). There are no stock-increase steps for these cartridges. Cartridges a
+contact already sells are skipped.
+
+Twenty-five steps were added: Haggler 12-gauge and 9x21; Gasket 9x19, .357, .44, .500, 5.7x28 and .50AE;
+Quartermaster 5.56x45 and 7.62x51; Smartass 7.62x25, 9x19, 12-gauge, .45 ACP and 5.7x28; Spoor 7.62x54,
+5.56x45, .357, 7.62x51, .44 and .338 Lapua; Vesper 5.45x39, 7.62x39, 7.62x54 and 9x39. Each opens as
+soon as its gun unlock is complete, including for characters who finished it earlier. No existing
+milestone, ID or saved delivery changes, and nothing is gated behind the new steps.
+
+Catalogue entries marked `unchained = true` are skipped by the per-shop regular-ammunition ordering in
+`sh_catalogue.lua`, so these purchases need only their own gun unlock. `expand_progression.py` keeps
+stock-less intermissions beside their gun. It still mints new pool names for them, which is why the
+step pools reuse each gun's existing pool until the generator is next run.
+
+    luatex --luaonly tests/town_ammo_unlock_spec.lua
+    luatex --luaonly tests/regular_ammo_spec.lua
+    luatex --luaonly tests/progression_dialogue_spec.lua
+
+Restart all map servers together; no save reset or first-time setup is required. Check in multiplayer
+that each branch appears after its gun unlock and that purchases and refills behave as expected.
 
 ## Gasmask filter purchases
 

@@ -22,12 +22,25 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 650)
-        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 231)
+        self.assertEqual(len(steps), 675)
+        self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 256)
         output, count = expansion.outputs()
         self.assertEqual(count, 231)
         for path, content in output.items():
             self.assertEqual(path.read_text(), content, str(path))
+
+    def test_ammunition_unlocks_survive_regeneration(self):
+        contacts = deepcopy(self.data["contacts"])
+        expected = {slug: [s for s in c["progression"] if s.get("intermissionFor") and not s.get("stock")]
+                    for slug, c in contacts.items()}
+        self.assertEqual(sum(len(steps) for steps in expected.values()), 25)
+        expansion.expand_contacts(contacts)
+        for slug, steps in expected.items():
+            actual = [s for s in contacts[slug]["progression"] if s.get("intermissionFor") and not s.get("stock")]
+            self.assertEqual(sorted(s["id"] for s in actual), sorted(s["id"] for s in steps), slug)
+            ids = [s["id"] for s in contacts[slug]["progression"]]
+            for step in actual:
+                self.assertGreater(ids.index(step["id"]), ids.index(step["intermissionFor"]), step["id"])
 
     def test_stock_dialogue_survives_regeneration_by_id(self):
         contacts = deepcopy(self.data["contacts"])
@@ -128,6 +141,16 @@ class ProgressionExpansionTests(unittest.TestCase):
                 self.assertEqual(step["branchIndex"], target["branchIndex"])
                 self.assertEqual(step["branchLength"], target["branchLength"])
                 self.assertEqual(step["acquisitionMaps"], target["acquisitionMaps"])
+                if "stock" not in step:
+                    # Ammunition unlocks branch off a gun unlock without gating it or its successors.
+                    self.assertEqual(step["requires"], [target["id"]])
+                    self.assertEqual(step["id"], target["id"] + "/ammo")
+                    self.assertFalse(any(step["id"] in s["requires"] for s in contact["progression"]))
+                    self.assertEqual(len(step["requirements"]), 1)
+                    self.assertEqual(step["requirements"][0]["quantity"], 1)
+                    self.assertEqual(step["requirements"][0]["mode"], "any")
+                    self.assertEqual(step["categoryOnly"], target["categoryOnly"])
+                    continue
                 if slug == "brass" and step["branch"] == "regular-ammo":
                     # Brass's reserves branch off their calibre milestone and never gate the next calibre.
                     self.assertNotIn(step["id"], target["requires"])
@@ -242,7 +265,8 @@ class ProgressionExpansionTests(unittest.TestCase):
         regular = {row[1][0] for row in self.data["loot"]["worldspawn_1"]}
         contact = self.data["contacts"]["haggler"]
         early = [step for step in contact["progression"] if step["categoryOnly"]]
-        self.assertEqual(len(early), 6)
+        # Four weapon unlocks, two stock intermissions and the buckshot ammunition unlock.
+        self.assertEqual(len(early), 7)
         for step in early:
             self.assertEqual(step["requirementModesVersion"], 3)
             for slot in step["requirements"]:

@@ -18,13 +18,14 @@ for _, item in ipairs({"first", "gap", "last", "unused", "lasthp", "lastap"}) do
 	ix.item.list[item] = {name = item, isAmmo = true}
 end
 for slug, items in pairs({a = {"first", "gap", "last", "lasthp", "lastap"},
-	b = {"first", "last", "lasthp", "lastap"}}) do
+	b = {"first", "last", "lasthp", "lastap"}, c = {"first", "gap", "last"}}) do
 	local contact = {id = slug, name = slug, supplies = {}, catalogue = {}, progression = {}}
 	town.contacts[slug] = contact
 	for index, item in ipairs(items) do
 		local step = "S" .. index
 		local id = town:StepID(slug, step)
-		contact.catalogue[item] = {step = step, terms = {100, 1, "SELLONLY", 1, 48, 1}}
+		contact.catalogue[item] = {step = step, terms = {100, 1, "SELLONLY", 1, 48, 1},
+			unchained = slug == "c" and item == "gap" or nil}
 		town.steps[id] = {}
 		ix.progression.Register(id, {keyNpc = slug, defaultActive = true, prerequisites = {},
 			nextProgressions = {}, vendorUnlocks = {}})
@@ -39,6 +40,12 @@ local prerequisites = ix.progression.definitions[last].prerequisites
 check(#prerequisites == 1 and prerequisites[1] == first,
 	"a shop skips absent calibres and requires its own preceding regular load")
 check(not town.itemGates.unused, "unstocked tail ammunition creates no purchase route")
+-- An unchained load opens from its own unlock: it has no regular-chain prerequisites and gates no neighbours.
+local unchained = ix.progression.definitions[town:StepID("c", "S2")]
+local afterUnchained = ix.progression.definitions[town:StepID("c", "S3")].prerequisites
+check(#unchained.prerequisites == 0, "an unchained load does not wait for the preceding regular load")
+check(#afterUnchained == 1 and afterUnchained[1] == town:StepID("c", "S1"),
+	"the next regular load skips an unchained load and follows the preceding chained one")
 local owner = fixture.character()
 check(not ix.progression.IsActive(owner, last), "the later regular load starts locked")
 local state = ix.progression.GetCharacterProgression(owner)

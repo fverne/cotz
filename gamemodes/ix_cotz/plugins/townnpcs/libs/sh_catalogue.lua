@@ -33,7 +33,7 @@ function PLUGIN:BuildCatalogue()
 			end
 			definition.vendorUnlocks[#definition.vendorUnlocks + 1] = {npc = contact.name, args = args}
 			local gate = self.itemGates[item] or {sellers = {}}
-			gate.sellers[contact.name] = {id = id, npc = contact.name}
+			gate.sellers[contact.name] = {id = id, npc = contact.name, unchained = allocation.unchained}
 			self.itemGates[item] = gate
 		end
 	end
@@ -77,7 +77,8 @@ function PLUGIN:BuildCatalogue()
 		for _, itemID in ipairs(self.regularAmmoChain or {}) do
 			local item = self.itemGates[itemID]
 			local gate = item and item.sellers[contact.name]
-			if gate then
+			-- Unchained ammunition opens from its own gun unlock, so it neither waits for nor gates its neighbours.
+			if gate and not gate.unchained then
 				requireGate(previous, gate)
 				previous = gate
 			end

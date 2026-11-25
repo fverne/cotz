@@ -4,7 +4,7 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**650 active steps; 650 have functional unlocks; 0 have TODO-only unlock plans;
+**675 active steps; 675 have functional unlocks; 0 have TODO-only unlock plans;
 20 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
@@ -32,23 +32,23 @@ Validation passed.
 | carbon | 19 | 19 | 0 | 0 |
 | cleaner | 13 | 13 | 0 | 0 |
 | egghead | 5 | 5 | 0 | 0 |
-| gasket | 68 | 68 | 0 | 0 |
-| haggler | 35 | 35 | 0 | 0 |
+| gasket | 74 | 74 | 0 | 0 |
+| haggler | 37 | 37 | 0 | 0 |
 | intern | 5 | 5 | 0 | 0 |
 | jitters | 23 | 23 | 0 | 0 |
 | latch | 23 | 23 | 0 | 0 |
 | ledger | 13 | 13 | 0 | 0 |
 | mute | 5 | 5 | 0 | 0 |
 | old-timer | 12 | 12 | 0 | 4 |
-| quartermaster | 23 | 23 | 0 | 0 |
-| smartass | 47 | 47 | 0 | 0 |
+| quartermaster | 25 | 25 | 0 | 0 |
+| smartass | 52 | 52 | 0 | 0 |
 | spicy-lemon | 51 | 51 | 0 | 0 |
 | spool | 15 | 15 | 0 | 0 |
-| spoor | 21 | 21 | 0 | 0 |
+| spoor | 27 | 27 | 0 | 0 |
 | suture | 37 | 37 | 0 | 13 |
 | technut | 14 | 14 | 0 | 1 |
 | the-original | 0 | 0 | 0 | 0 |
-| vesper | 31 | 31 | 0 | 0 |
+| vesper | 35 | 35 | 0 | 0 |
 | wake | 38 | 38 | 0 | 0 |
 
 ## Request specialties
@@ -97,22 +97,22 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | carbon | 4 | 25 | 15 |
 | cleaner | 4 | 17 | 9 |
 | egghead | 1 | 11 | 2 |
-| gasket | 9 | 116 | 28 |
-| haggler | 4 | 61 | 15 |
+| gasket | 9 | 122 | 28 |
+| haggler | 4 | 63 | 15 |
 | intern | 1 | 11 | 2 |
 | jitters | 7 | 48 | 11 |
 | latch | 3 | 40 | 11 |
 | ledger | 4 | 17 | 9 |
 | mute | 1 | 3 | 4 |
 | old-timer | 4 | 23 | 6 |
-| quartermaster | 3 | 42 | 10 |
-| smartass | 6 | 79 | 20 |
+| quartermaster | 3 | 44 | 10 |
+| smartass | 6 | 84 | 20 |
 | spicy-lemon | 8 | 92 | 22 |
 | spool | 3 | 32 | 7 |
-| spoor | 3 | 37 | 9 |
+| spoor | 3 | 43 | 9 |
 | suture | 6 | 60 | 21 |
 | technut | 4 | 19 | 10 |
-| vesper | 4 | 53 | 13 |
+| vesper | 4 | 57 | 13 |
 | wake | 11 | 69 | 13 |
 
 ## Every progression step
@@ -312,6 +312,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | gasket | v3/sidearms/makarov | Purchase: makarov | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | gasket | v3/sidearms/lugerp08/stock | Stock: makarov +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | gasket | v3/sidearms/lugerp08 | Purchase: lugerp08 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| gasket | v3/sidearms/lugerp08/ammo | Purchase: 9x19 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | gasket | v3/sidearms/cz52/stock | Stock: lugerp08 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | gasket | v3/sidearms/cz52 | Purchase: cz52 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | gasket | v3/sidearms/c96/stock | Stock: cz52 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
@@ -335,14 +336,17 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | gasket | v3/sidearms/glock18 | Purchase: glock18 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/g2contender500/stock | Stock: glock18 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/g2contender500 | Purchase: g2contender500 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| gasket | v3/sidearms/g2contender500/ammo | Purchase: 500magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/mr96/stock | Stock: g2contender500 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/mr96 | Purchase: mr96 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| gasket | v3/sidearms/mr96/ammo | Purchase: 357magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/swr8/stock | Stock: mr96 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/swr8 | Purchase: swr8 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/taurusjudge/stock | Stock: swr8 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/taurusjudge | Purchase: taurusjudge | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/swmodel29/stock | Stock: taurusjudge +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/swmodel29 | Purchase: swmodel29 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| gasket | v3/sidearms/swmodel29/ammo | Purchase: 44magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | gasket | v3/sidearms/taurusragingbull/stock | Stock: swmodel29 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/taurusragingbull | Purchase: taurusragingbull | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/mateba/stock | Stock: taurusragingbull +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -353,8 +357,10 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | gasket | v3/sidearms/m1911chic | Purchase: m1911chic | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/fiveseven/stock | Stock: m1911chic +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/fiveseven | Purchase: fiveseven | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| gasket | v3/sidearms/fiveseven/ammo | Purchase: 57x28 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/deagle/stock | Stock: fiveseven +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/deagle | Purchase: deagle | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| gasket | v3/sidearms/deagle/ammo | Purchase: 50ae | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/sw500/stock | Stock: deagle +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/sidearms/sw500 | Purchase: sw500 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | gasket | v3/strong-alcohol/drink_moonshine | Purchase: drink_moonshine | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
@@ -380,6 +386,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | haggler | v3/pact-cqb/mp27 | Purchase: mp27 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | haggler | v3/pact-cqb/toz66short/stock | Stock: mp27 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | haggler | v3/pact-cqb/toz66short | Purchase: toz66short | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| haggler | v3/pact-cqb/toz66short/ammo | Purchase: 12gauge | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | haggler | v3/pact-cqb/skorpion/stock | Stock: toz66short +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | haggler | v3/pact-cqb/skorpion | Purchase: skorpion | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | haggler | v3/pact-cqb/toz34short/stock | Stock: skorpion +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
@@ -401,6 +408,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | haggler | v3/pact-cqb/saiga410 | Purchase: saiga410 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | haggler | v3/pact-cqb/gepardpdw/stock | Stock: saiga410 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | haggler | v3/pact-cqb/gepardpdw | Purchase: gepardpdw | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| haggler | v3/pact-cqb/gepardpdw/ammo | Purchase: 9x21 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | haggler | v3/pact-cqb/pp19/stock | Stock: gepardpdw +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | haggler | v3/pact-cqb/pp19 | Purchase: pp19 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | haggler | v3/pact-cqb/mp153/stock | Stock: pp19 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -493,6 +501,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | old-timer | v3/hidestashers/hidestasher_cleaningkit | Purchase: hidestasher_cleaningkit | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | old-timer | v3/hidestashers/hidestasher_shovel | Purchase: hidestasher_shovel | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | quartermaster | v3/nato-rifles/rugermini14 | Purchase: rugermini14 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
+| quartermaster | v3/nato-rifles/rugermini14/ammo | Purchase: 556x45 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | quartermaster | v3/nato-rifles/famas | Purchase: famas | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | quartermaster | v3/nato-rifles/l85/stock | Stock: famas +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | quartermaster | v3/nato-rifles/l85 | Purchase: l85 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -511,14 +520,18 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | quartermaster | v3/nato-rifles/hk416 | Purchase: hk416 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | quartermaster | v3/nato-rifles/g3a3/stock | Stock: hk416 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | quartermaster | v3/nato-rifles/g3a3 | Purchase: g3a3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| quartermaster | v3/nato-rifles/g3a3/ammo | Purchase: 762x51 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | quartermaster | v3/nato-rifles/fnfal/stock | Stock: g3a3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | quartermaster | v3/nato-rifles/fnfal | Purchase: fnfal | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | quartermaster | v3/nato-rifles/m14/stock | Stock: fnfal +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | quartermaster | v3/nato-rifles/m14 | Purchase: m14 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/nato-cqb/c96carbine | Purchase: c96carbine | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
+| smartass | v3/nato-cqb/c96carbine/ammo | Purchase: 762x25 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
 | smartass | v3/nato-cqb/stoegerddshort | Purchase: stoegerddshort | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| smartass | v3/nato-cqb/stoegerddshort/ammo | Purchase: 12gauge | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/sten/stock | Stock: stoegerddshort +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/sten | Purchase: sten | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| smartass | v3/nato-cqb/sten/ammo | Purchase: 9x19 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/stoegerdd/stock | Stock: sten +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/stoegerdd | Purchase: stoegerdd | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/mac11/stock | Stock: stoegerdd +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -548,6 +561,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | smartass | v3/nato-cqb/m1887 | Purchase: m1887 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/ump45/stock | Stock: m1887 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/ump45 | Purchase: ump45 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| smartass | v3/nato-cqb/ump45/ammo | Purchase: 45acp | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | smartass | v3/nato-cqb/rem870ae/stock | Stock: ump45 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/nato-cqb/rem870ae | Purchase: rem870ae | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/nato-cqb/m3super90/stock | Stock: rem870ae +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -558,6 +572,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | smartass | v3/nato-cqb/m1928 | Purchase: m1928 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/nato-cqb/p90/stock | Stock: m1928 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/nato-cqb/p90 | Purchase: p90 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| smartass | v3/nato-cqb/p90/ammo | Purchase: 57x28 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/nato-cqb/striker/stock | Stock: p90 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/nato-cqb/striker | Purchase: striker | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | smartass | v3/access-cards/accesscard_bunker | Purchase: accesscard_bunker | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
@@ -629,14 +644,18 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | spool | v3/strong-drugs/drug_cocaine/stock | Stock: drug_glucose +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spool | v3/strong-drugs/drug_cocaine | Purchase: drug_cocaine | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spoor | v3/slow-rifles/mp18 | Purchase: mp18 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
+| spoor | v3/slow-rifles/mp18/ammo | Purchase: 762x54 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | spoor | v3/slow-rifles/sako85nato | Purchase: sako85nato | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| spoor | v3/slow-rifles/sako85nato/ammo | Purchase: 556x45 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | spoor | v3/slow-rifles/obrez/stock | Stock: sako85nato +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | spoor | v3/slow-rifles/obrez | Purchase: obrez | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | spoor | v3/slow-rifles/w9422357/stock | Stock: obrez +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | spoor | v3/slow-rifles/w9422357 | Purchase: w9422357 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| spoor | v3/slow-rifles/w9422357/ammo | Purchase: 357magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | spoor | v3/slow-rifles/mosin | Purchase: mosin | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | spoor | v3/slow-rifles/sako85/stock | Stock: mosin +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spoor | v3/slow-rifles/sako85 | Purchase: sako85 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| spoor | v3/slow-rifles/sako85/ammo | Purchase: 762x51 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spoor | v3/slow-rifles/w1895/stock | Stock: sako85 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spoor | v3/slow-rifles/w1895 | Purchase: w1895 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spoor | v3/slow-rifles/obrezmalfunction/stock | Stock: w1895 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
@@ -645,8 +664,10 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | spoor | v3/slow-rifles/sv98 | Purchase: sv98 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | spoor | v3/slow-rifles/lax44/stock | Stock: sv98 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spoor | v3/slow-rifles/lax44 | Purchase: lax44 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| spoor | v3/slow-rifles/lax44/ammo | Purchase: 44magnum | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spoor | v3/slow-rifles/l115/stock | Stock: lax44 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spoor | v3/slow-rifles/l115 | Purchase: l115 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| spoor | v3/slow-rifles/l115/ammo | Purchase: 338lapua | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spoor | v3/slow-rifles/trg42/stock | Stock: l115 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | spoor | v3/slow-rifles/trg42 | Purchase: trg42 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-attachments/attachment_ceramicplate_1 | Purchase: attachment_ceramicplate_1 | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
@@ -701,7 +722,9 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | technut | v3/suits/suit_skat9 | Purchase: suit_skat9 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/painting/painting | Suit painting | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | vesper | v3/pact-rifles/saigasemi545 | Purchase: saigasemi545 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
+| vesper | v3/pact-rifles/saigasemi545/ammo | Purchase: 545x39 | — | 60% of accepted hand-in value on completion; Sources: rp_garbage_cotz |
 | vesper | v3/pact-rifles/saigasemi | Purchase: saigasemi | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
+| vesper | v3/pact-rifles/saigasemi/ammo | Purchase: 762x39 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | vesper | v3/pact-rifles/aks74u/stock | Stock: saigasemi +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | vesper | v3/pact-rifles/aks74u | Purchase: aks74u | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
 | vesper | v3/pact-rifles/sks/stock | Stock: aks74u +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz |
@@ -719,8 +742,10 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | vesper | v3/pact-rifles/rk95 | Purchase: rk95 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | vesper | v3/pact-rifles/svt40/stock | Stock: rk95 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | vesper | v3/pact-rifles/svt40 | Purchase: svt40 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| vesper | v3/pact-rifles/svt40/ammo | Purchase: 762x54 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | vesper | v3/pact-rifles/vss/stock | Stock: svt40 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | vesper | v3/pact-rifles/vss | Purchase: vss | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| vesper | v3/pact-rifles/vss/ammo | Purchase: 9x39 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | vesper | v3/pact-rifles/rpk/stock | Stock: vss +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | vesper | v3/pact-rifles/rpk | Purchase: rpk | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | vesper | v3/pact-rifles/9a91/stock | Stock: rpk +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
@@ -827,6 +852,12 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | suit_seva | egghead | v3/science-suits/suit_seva | egghead |
 | suit_ssp99 | egghead | v3/science-suits/suit_ssp99 | egghead |
 | suit_ssp99m | egghead | v3/science-suits/suit_ssp99m | egghead |
+| 357magnum | gasket | v3/sidearms/mr96/ammo | brass |
+| 44magnum | gasket | v3/sidearms/swmodel29/ammo | brass |
+| 500magnum | gasket | v3/sidearms/g2contender500/ammo | brass |
+| 50ae | gasket | v3/sidearms/deagle/ammo | brass |
+| 57x28 | gasket | v3/sidearms/fiveseven/ammo | brass |
+| 9x19 | gasket | v3/sidearms/lugerp08/ammo | brass |
 | beretta92 | gasket | v3/sidearms/beretta92 | gasket |
 | brhp | gasket | v3/sidearms/brhp | gasket |
 | c96 | gasket | v3/sidearms/c96 | gasket |
@@ -864,6 +895,8 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | taurusjudge | gasket | v3/sidearms/taurusjudge | gasket |
 | taurusragingbull | gasket | v3/sidearms/taurusragingbull | gasket |
 | tokarev | gasket | v3/sidearms/tokarev | gasket |
+| 12gauge | haggler | v3/pact-cqb/toz66short/ammo | brass |
+| 9x21 | haggler | v3/pact-cqb/gepardpdw/ammo | brass |
 | gepardpdw | haggler | v3/pact-cqb/gepardpdw | haggler |
 | kiparis | haggler | v3/pact-cqb/kiparis | haggler |
 | mp153 | haggler | v3/pact-cqb/mp153 | haggler |
@@ -931,6 +964,8 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | knife4 | old-timer | v3/knives/knife4 | old-timer |
 | machete | old-timer | v3/melee/hatchet | old-timer |
 | sledgehammer | old-timer | v3/melee/sledgehammer | old-timer |
+| 556x45 | quartermaster | v3/nato-rifles/rugermini14/ammo | brass |
+| 762x51 | quartermaster | v3/nato-rifles/g3a3/ammo | brass |
 | aug | quartermaster | v3/nato-rifles/aug | quartermaster |
 | f2000 | quartermaster | v3/nato-rifles/f2000 | quartermaster |
 | famas | quartermaster | v3/nato-rifles/famas | quartermaster |
@@ -944,6 +979,11 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | m16a4 | quartermaster | v3/nato-rifles/m16a4 | quartermaster |
 | rugermini14 | quartermaster | v3/nato-rifles/rugermini14 | quartermaster |
 | sg552 | quartermaster | v3/nato-rifles/sg552 | quartermaster |
+| 12gauge | smartass | v3/nato-cqb/stoegerddshort/ammo | brass |
+| 45acp | smartass | v3/nato-cqb/ump45/ammo | brass |
+| 57x28 | smartass | v3/nato-cqb/p90/ammo | brass |
+| 762x25 | smartass | v3/nato-cqb/c96carbine/ammo | brass |
+| 9x19 | smartass | v3/nato-cqb/sten/ammo | brass |
 | accesscard_bunker | smartass | v3/access-cards/accesscard_bunker | smartass |
 | accesscard_laboratory | smartass | v3/access-cards/accesscard_laboratory | smartass |
 | ar159mm | smartass | v3/nato-cqb/ar159mm | smartass |
@@ -1008,6 +1048,12 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | helm_steel_ger | spool | v3/steel-headwear/helm_steel_ger | spool |
 | helm_steel_rus | spool | v3/steel-headwear/helm_steel_rus | spool |
 | miscaid_swampbrew | spool | v3/strong-drugs/miscaid_swampbrew | spool |
+| 338lapua | spoor | v3/slow-rifles/l115/ammo | brass |
+| 357magnum | spoor | v3/slow-rifles/w9422357/ammo | brass |
+| 44magnum | spoor | v3/slow-rifles/lax44/ammo | brass |
+| 556x45 | spoor | v3/slow-rifles/sako85nato/ammo | brass |
+| 762x51 | spoor | v3/slow-rifles/sako85/ammo | brass |
+| 762x54 | spoor | v3/slow-rifles/mp18/ammo | brass |
 | l115 | spoor | v3/slow-rifles/l115 | spoor |
 | lax44 | spoor | v3/slow-rifles/lax44 | spoor |
 | mosin | spoor | v3/slow-rifles/mosin | spoor |
@@ -1049,7 +1095,11 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | suit_trenchcoat_green | technut | v3/suits/suit_trenchcoat_black | technut |
 | suit_trenchcoat_tan | technut | v3/suits/suit_trenchcoat_black | technut |
 | suit_wind | technut | v3/suits/suit_wind | technut |
+| 545x39 | vesper | v3/pact-rifles/saigasemi545/ammo | brass |
+| 762x39 | vesper | v3/pact-rifles/saigasemi/ammo | brass |
+| 762x54 | vesper | v3/pact-rifles/svt40/ammo | brass |
 | 9a91 | vesper | v3/pact-rifles/9a91 | vesper |
+| 9x39 | vesper | v3/pact-rifles/vss/ammo | brass |
 | aek971 | vesper | v3/pact-rifles/aek971 | vesper |
 | ak12 | vesper | v3/pact-rifles/ak12 | vesper |
 | ak74 | vesper | v3/pact-rifles/ak74 | vesper |

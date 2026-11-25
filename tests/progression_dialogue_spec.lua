@@ -33,5 +33,5 @@ for slug, contact in pairs(ix.townNPCs.contacts) do
 	end
 end
 
-check(contacts == 25 and steps == 650 and reserves == 231, "all active town progression dialogue is covered")
+check(contacts == 25 and steps == 675 and reserves == 256, "all active town progression dialogue is covered")
 print(string.format("PASS: %d contacts, %d dialogue pairs, %d stock conversations", contacts, steps, reserves))

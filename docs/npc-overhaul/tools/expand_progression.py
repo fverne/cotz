@@ -114,6 +114,8 @@ def expand_contacts(contacts):
             if not step.get("intermissionFor") and step["id"] != "v3/stalkernet/networkRemote":
                 branches[step["branch"]].append(step)
         output = list(authored)
+        # Ammunition unlocks are authored side steps without stock; regeneration keeps them beside their gun.
+        ammo_unlocks = [s for s in contact["progression"] if s.get("intermissionFor") and not s.get("stock")]
         ranks = defaultdict(int)
         for branch in branches.values():
             for index, step in enumerate(branch):
@@ -163,6 +165,11 @@ def expand_contacts(contacts):
                 for item, bonus in rewards.stock_bonuses(step.get("stock")).items():
                     ranks[item] = max(ranks[item], bonus)
                 output.append(step)
+        for step in ammo_unlocks:
+            position = next(i for i, s in enumerate(output) if s["id"] == step["intermissionFor"])
+            while position + 1 < len(output) and output[position + 1].get("intermissionFor") == step["intermissionFor"]:
+                position += 1
+            output.insert(position + 1, step)
         contact["progression"] = output
     return count
 
