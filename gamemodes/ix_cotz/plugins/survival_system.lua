@@ -85,15 +85,40 @@ if SERVER then
 		end
 	end
 
-	function PLUGIN:PlayerTick(ply)
-		if ply:GetNetVar("hungertick", 0) <= CurTime() then
-			ply:SetNetVar("hungertick", 200 + CurTime())
-			ply:TickHunger(1)
+	local function isNearTownNPC(client)
+		local radius = ix.config.Get("regenHealRadiusVendorMult", ix.config.Get("regenHealRadius", 256) * 8)
+		local position = client:GetPos()
+
+		for _, npc in ipairs(ents.FindByClass("ix_vendor_adv")) do
+			if position:DistToSqr(npc:GetPos()) <= radius * radius then
+				return true
+			end
 		end
 
-		if ply:GetNetVar("thirsttick", 0) <= CurTime() then
-			ply:SetNetVar("thirsttick", 300 + CurTime())
-			ply:TickThirst(1)
+		return false
+	end
+
+	function PLUGIN:PlayerTick(ply)
+		local now = CurTime()
+		local hungerDue = ply:GetNetVar("hungertick", 0) <= now
+		local thirstDue = ply:GetNetVar("thirsttick", 0) <= now
+		if not hungerDue and not thirstDue then
+			return
+		end
+
+		local protected = isNearTownNPC(ply)
+		if hungerDue then
+			ply:SetNetVar("hungertick", now + 200)
+			if not protected then
+				ply:TickHunger(1)
+			end
+		end
+
+		if thirstDue then
+			ply:SetNetVar("thirsttick", now + 300)
+			if not protected then
+				ply:TickThirst(1)
+			end
 		end
 	end
 

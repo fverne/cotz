@@ -1,5 +1,7 @@
 # Town NPCs
 
+Passive hunger and thirst loss pauses within the town NPC healing radius (`regenHealRadiusVendorMult`).
+
 ## Hideout crate progression
 
 Ballast, Cleaner and Ledger now assemble personal/squad upgrade crates through **Can you assemble storage
