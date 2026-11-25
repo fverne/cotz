@@ -71,6 +71,7 @@ function ix.suitAppearance.ApplyWorn(client, item)
 	end
 	character:SetData("groups", groups)
 	ix.suitAppearance.RefreshHands(client)
+	ix.plugin.Get("legs"):RefreshLegs(client)
 end
 
 local function getWornSuit(character)

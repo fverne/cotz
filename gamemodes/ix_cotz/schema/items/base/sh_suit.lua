@@ -323,6 +323,7 @@ function ITEM:RemoveOutfit(client)
 
 	self:GetOwner():GetCharacter():SetData("groups", bgroups)
 	client:SetupHands()
+	ix.plugin.Get("legs"):RefreshLegs(client)
 end
 
 function ITEM:OnInstanced()

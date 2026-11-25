@@ -10,6 +10,16 @@ ix.lang.AddTable("english", {
 	optLegsInVehicle = "Enable legs in vehicles"
 })
 
+if (SERVER) then
+	util.AddNetworkString("cotz/legs/refresh")
+
+	-- Tells a player's client to rebuild its first-person legs after a suit equip, unequip, or repaint.
+	function PLUGIN:RefreshLegs(client)
+		net.Start("cotz/legs/refresh")
+		net.Send(client)
+	end
+end
+
 if (CLIENT) then
 	ix.option.Add("legsEnabled", ix.type.bool, true, {
 		category = "legs"
@@ -84,37 +94,6 @@ if (CLIENT) then
 		self:Update(0)
 	end
 
-	-- Suits change the model, skin, and bodygroups server-side, and the networked values can arrive after
-	-- PlayerModelChanged. Re-sync every update so the legs always match the worn suit.
-	function Legs:SyncAppearance()
-		local client = LocalPlayer()
-
-		if (self.LegEnt:GetModel() ~= client:GetModel()) then
-			self.LegEnt:SetModel(client:GetModel())
-			self:FixBones()
-		end
-
-		if (self.LegEnt:GetSkin() ~= client:GetSkin()) then
-			self.LegEnt:SetSkin(client:GetSkin())
-		end
-
-		for _, group in ipairs(client:GetBodyGroups()) do
-			local current = client:GetBodygroup(group.id)
-
-			if (self.LegEnt:GetBodygroup(group.id) ~= current) then
-				self.LegEnt:SetBodygroup(group.id, current)
-			end
-		end
-
-		for index = 0, #client:GetMaterials() - 1 do
-			local subMaterial = client:GetSubMaterial(index)
-
-			if (self.LegEnt:GetSubMaterial(index) ~= subMaterial) then
-				self.LegEnt:SetSubMaterial(index, subMaterial)
-			end
-		end
-	end
-
 	Legs.PlaybackRate = 1
 	Legs.Sequence = nil
 	Legs.Velocity = 0
@@ -133,8 +112,6 @@ if (CLIENT) then
 
 	function Legs:Update(maxSeqGroundSpeed)
 		if (IsValid(self.LegEnt)) then
-			self:SyncAppearance()
-
 			self.Velocity = LocalPlayer():GetVelocity():Length2D()
 
 			self.PlaybackRate = 1
@@ -317,6 +294,17 @@ if (CLIENT) then
 			end
 		end
 	end
+
+	-- Suit skins and bodygroups are set server-side and may arrive after PlayerModelChanged, or without
+	-- any model change at all (Technut repaints), so rebuild once after the networked values settle.
+	net.Receive("cotz/legs/refresh", function()
+		timer.Simple(0.3, function()
+			if (IsValid(LocalPlayer()) and IsValid(Legs.LegEnt)) then
+				Legs:Setup()
+				Legs:FixBones()
+			end
+		end)
+	end)
 
 	function PLUGIN:PlayerModelChanged(client, model)
 		if (client == LocalPlayer()) then
