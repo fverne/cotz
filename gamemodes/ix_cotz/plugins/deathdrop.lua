@@ -22,6 +22,21 @@ ix.config.Add("deathDropValuable", false, "If true valuables will drop when play
 
 if(SERVER)then
 
+local AMMO_DEATH_KEEP_FRACTION = 0.75
+
+-- Packs keep 75% of their current rounds on death; no cap, as packs can hold more than 100.
+local function applyAmmoDeathLoss(item)
+	if not item.ammoAmount then return end
+
+	local quantity = math.Round(item:GetData("quantity", item.ammoAmount) * AMMO_DEATH_KEEP_FRACTION)
+	if quantity <= 0 then
+		item:Remove()
+		return
+	end
+
+	item:SetData("quantity", quantity)
+end
+
 function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 	
 	if(ix.plugin.list["revive"] ~= nil) then return end
@@ -40,12 +55,7 @@ function PLUGIN:DoPlayerDeath( client, attacker, dmg )
 				end
 			end
 
-			if item.ammoAmount then
-				item:SetData("quantity", math.Clamp( math.Round(item:GetData("quantity") - item.ammoAmount/4), 0, 100 ) )
-				if item:GetData("quantity", 100) == 0 then
-					item:Remove()
-				end
-			end
+			applyAmmoDeathLoss(item)
 
 			if ( ix.config.Get("deathDropValuable") and item.DropOnDeath ) then
 				ix.util.AddItemToDroppedPool(item.uniqueID, item.data)
@@ -70,12 +80,7 @@ function PLUGIN:DoDeathDrop( client, deathpos )
 				end
 			end
 
-			if item.ammoAmount then
-				item:SetData("quantity", math.Clamp( math.Round(item:GetData("quantity") - item.ammoAmount/4), 0, 100 ) )
-				if item:GetData("quantity", 100) == 0 then
-					item:Remove()
-				end
-			end
+			applyAmmoDeathLoss(item)
 
 			if ( ix.config.Get("deathDropValuable") and item.DropOnDeath ) then
 				ix.util.AddItemToDroppedPool(item.uniqueID, item.data)
