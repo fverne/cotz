@@ -22,6 +22,17 @@ and records existing sight exceptions. CW keeps authored mounts and sight aims a
 and use the receiver surface and the sight's optical axis as placement references. Check the
 fallback entries after changing viewmodels.
 
+`python3 docs/attachments/weapon_fit.py fallback all` audits those entries against the idle pose of each
+viewmodel, using the bodygroups the weapon sets in `IndividualInitialize` or `IndividualThink`. The original
+table placed every sight on a gun at one shared distance from the eye, so on short viewmodels (pistols, revolvers
+and compact SMGs) the sights hung behind the frame. The audit moves a sight with less than half of its mount over
+the gun forward or back along its line of sight to the nearest flat stretch of the gun's top, seats it, and
+lowers or raises its aim by the same height. Aim depth is unchanged, since the fallback aims keep the gun's
+ironsight-relative ADS position. It also moves suppressors that stand in front of the visible barrel back onto it.
+Some models put their muzzle attachment past the barrel, and the M29 and Obrez show a shorter barrel than
+that point. Add `--write` to update the table. Arm and hand bones are excluded by name. Side-mounted optics and
+long scopes that only overhang the end of a receiver are left alone.
+
 Weapons default to a family by
 `ITEM.weaponCategory` (primary: rifle, secondary: pistol), with per-class overrides.
 

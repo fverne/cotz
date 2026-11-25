@@ -47,6 +47,7 @@ ix = {
 }
 dofile("gamemodes/ix_cotz/plugins/suits/sh_resistances.lua")
 dofile("gamemodes/ix_cotz/plugins/suits/sh_durability.lua")
+dofile("gamemodes/ix_cotz/schema/libs/sh_suitappearance.lua")
 ITEM = {ar = 0, far = 0, miscSlots = {}, isBodyArmor = true}
 loadMethod("gamemodes/ix_cotz/schema/items/base/sh_suit.lua", "function ITEM:getAR(")
 loadMethod("gamemodes/ix_cotz/schema/items/base/sh_suit.lua", "function ITEM:getFAR(")

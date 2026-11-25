@@ -1,6 +1,7 @@
 ITEM.name = "X-8 Patchwork Scientific Suit"
 ITEM.model ="models/kek1ch/stalker_outfit.mdl"
-ITEM.newModel = "models/nasca/stalker/male_nbc_mono.mdl"
+ITEM.newModel = "models/cotz/sectorfour/male_nbc_lone.mdl"
+ITEM.newSkin = 32
 ITEM.description= "An NBC Suit."
 ITEM.longdesc = "This suit is a modified version of the standard Sunrise outfit, composed of a camouflaged CBRN suit with a Class II-a Kevlar vest. Favored by diggers and underground explorers."
 
@@ -46,11 +47,9 @@ ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 1
 ITEM.extraSlots = 0
 
-ITEM.skincustom[1] = {
-	name = "Skin 0",
-	skingroup = 0,
+ITEM.bodyGroups = {
+	["Head"] = 1,
+	["Hood"] = 0,
+	["Gasmask"] = 1,
 }
-ITEM.skincustom[2] = {
-	name = "Skin 1",
-	skingroup = 1,
-}
+ITEM.skincustom = ix.suitAppearance.SkinOptions(0, 50)

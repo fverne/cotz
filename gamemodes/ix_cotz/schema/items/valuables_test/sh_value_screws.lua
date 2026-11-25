@@ -5,7 +5,7 @@ ITEM.valuableCategory = "repair parts"
 
 ITEM.model = "models/illusion/eftcontainers/packofscrews.mdl"
 
-ITEM.price = 162.5
+ITEM.price = 163
 ITEM.width = 1
 ITEM.height = 1
 ITEM.flatweight = 0

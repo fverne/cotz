@@ -35,6 +35,8 @@ CurTime = function() return now end
 IsValid = function(value) return type(value) == "table" and value.valid == true end
 util = {AddNetworkString = function() end, TableToJSON = serialize, CRC = function(value) return value end}
 ix = {pac = {}, plugin = {}, util = {GetMaterial = function() end}}
+dofile("gamemodes/ix_cotz/schema/libs/sh_suitappearance.lua")
+dofile("gamemodes/ix_cotz/schema/libs/sv_suitappearance.lua")
 local paintAllowed = true
 ix.townNPCs = {HasService = function(_, _, name, npc)
 	return paintAllowed and name == "painting" and npc == "'Technut'"
@@ -193,12 +195,23 @@ local function suitFixture()
 	local player, target, suit, owner, inv, data, pos = fixture()
 	suit.isBodyArmor, suit.newModel, suit.newSkin = true, "suit.mdl", 0
 	suit.appearanceCustomization, suit.pacData = nil, nil
-	suit.skincustom = {
-		[1] = {name = "Skin 0", skingroup = 0},
-		[5] = {name = "Skin 3", skingroup = 3, modelOverride = "alternate.mdl"},
-	}
+	suit.skincustom = ix.suitAppearance.SkinOptions({0, 3})
+	suit.bodyGroups = {Head = 1}
+	owner.model, owner.data = "suit.mdl", {}
+	owner.GetModel = function(self) return self.model end
 	owner.SetModel = function(self, model) self.model = model end
+	owner.GetData = function(self, key, default)
+		if self.data[key] == nil then return default end
+
+		return self.data[key]
+	end
+	owner.SetData = function(self, key, value) self.data[key] = value end
+	player.groups = {}
+	player.GetModel = function() return owner:GetModel() end
 	player.SetSkin = function(self, skin) self.skin = skin end
+	player.ResetBodygroups = function(self) self.groups = {} end
+	player.FindBodygroupByName = function(_, name) return name == "Head" and 1 or -1 end
+	player.SetBodygroup = function(self, index, value) self.groups[index] = value end
 
 	return player, target, suit, owner, inv, data, pos
 end
@@ -208,8 +221,12 @@ check(not ix.gearAppearance.IsSupported(suit), "suit paints do not enter PAC gea
 check(not service:CreateQuote(painter, workshop, 1, paint), "suit painting retains its progression gate")
 paintAllowed = true
 check(ix.gearAppearance.Normalize(suit).skin == "0", "existing suits use their saved/default skin")
+suitData.setSkin = 3
+check(ix.gearAppearance.Normalize(suit).skin == "0",
+	"finishes saved for the legacy playermodels show the factory finish")
+suitData.setSkin, suitData.setSkinOverrideModel = nil, "alternate.mdl"
 check(not service:CreateQuote(painter, workshop, 1, {skin = "2", bodygroups = {}}),
-	"suit painting rejects finishes outside the item's sparse allowlist")
+	"suit painting rejects finishes outside the item's skin list")
 local paintQuote = assert(service:CreateQuote(painter, workshop, 1, paint))
 check(suitData.setSkin == nil and wearer.money == 500, "suit preview and quoting preserve saved state and money")
 paintAllowed = false
@@ -217,18 +234,22 @@ check(not service:Confirm(painter, paintQuote.token, true) and wearer.money == 5
 	"confirmation rechecks the suit painting unlock")
 paintAllowed = true
 paintQuote = assert(service:CreateQuote(painter, workshop, 1, paint))
+wearer.model = "legacy.mdl"
 check(service:Confirm(painter, paintQuote.token, true), "a confirmed approved suit finish is applied")
-check(suitData.setSkin == 3 and suitData.setSkinOverrideModel == "alternate.mdl"
-	and wearer.model == "alternate.mdl" and painter.skin == 3,
-	"painting preserves the suit's existing skin/model-override persistence")
+check(suitData.setSkin == 3 and suitData.setSkinModel == "suit.mdl" and suitData.setSkinOverrideModel == nil
+	and wearer.model == "suit.mdl" and painter.skin == 3,
+	"painting saves the finish for the suit's own model and clears legacy model overrides")
+check(painter.groups[1] == 1 and wearer.data.groups[1] == 1,
+	"painting keeps the suit's fixed bodygroups, such as sealed helmets, in place")
+check(ix.gearAppearance.Normalize(suit).skin == "3", "the saved finish is current after painting")
 check(wearer.money == 400 and wearer.charges == 1 and painter.parts == 0 and suitData.gearAppearance == nil,
 	"painting charges once and never equips a suit as a PAC part")
 check(not service:Confirm(painter, paintQuote.token, true) and wearer.money == 400,
 	"suit paint confirmations cannot be replayed")
 paintQuote = assert(service:CreateQuote(painter, workshop, 1, {skin = "0", bodygroups = {}}))
-check(service:Confirm(painter, paintQuote.token, true) and suitData.setSkinOverrideModel == nil
+check(service:Confirm(painter, paintQuote.token, true) and suitData.setSkin == 0
 	and wearer.model == "suit.mdl" and painter.skin == 0,
-	"returning to a normal finish clears the old model override")
+	"returning to the factory finish is an ordinary paid finish")
 paintQuote = assert(service:CreateQuote(painter, workshop, 1, paint))
 suitData.equip = false
 check(not service:Confirm(painter, paintQuote.token, true) and wearer.money == 300,

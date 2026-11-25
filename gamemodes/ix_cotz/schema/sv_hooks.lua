@@ -1,23 +1,22 @@
 function Schema:OnCharacterCreated(client, character)
-	local inventory = character:GetInventory()
-
-	if (inventory) then		
-		local items = {}
-	
-		if (character:GetFaction() == FACTION_LONERS) then
-			items = {
-				--"kit_newchar",
-				--"knife_1",
-			}
-		end
-		
-		local i = 1
-		for k, v in pairs(items) do
-			timer.Simple(i + k, function()
-				inventory:Add(v)
-			end)
-		end
+	if character:GetFaction() == FACTION_LONERS then
+		ix.suitAppearance.GrantStarterAnorak(character)
 	end
+end
+
+function Schema:InventoryItemAdded(oldInventory, inventory, item)
+	ix.suitAppearance.FinishStarterAnorak(inventory, item)
+end
+
+function Schema:PlayerSetHandsModel(client, hands)
+	local model, skin = ix.suitAppearance.GetHandsModel(client)
+	if not model then return end
+
+	hands:SetModel(model)
+	hands:SetSkin(skin or 0)
+	hands:SetBodyGroups("0")
+
+	return true
 end
 
 function Schema:PlayerSpray(client)
@@ -78,7 +77,13 @@ function Schema:PlayerSpawnEffect(client, weapon, info)
 	return client:IsAdmin() or client:GetCharacter():HasFlags("N")
 end
 
+-- Runs before Helix's character setup applies the saved model, skin and bodygroups.
+function Schema:PrePlayerLoadedCharacter(client, character)
+	ix.suitAppearance.MigrateCharacter(character)
+end
+
 function Schema:PostPlayerLoadout(client)
+	ix.suitAppearance.RefreshHands(client)
 	client:SetCanZoom(false)
 
 	if client:IsAdmin() then

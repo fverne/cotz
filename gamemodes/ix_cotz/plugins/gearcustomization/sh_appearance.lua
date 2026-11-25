@@ -66,8 +66,7 @@ function ix.gearAppearance.GetConfiguration(item)
 	local skins = {}
 	for _, paint in pairs(item.skincustom) do
 		local name = paint.name:gsub("[Ss]kin", "Finish")
-		skins[#skins + 1] = {id = tostring(paint.skingroup), name = name, skin = paint.skingroup,
-			model = paint.modelOverride}
+		skins[#skins + 1] = {id = tostring(paint.skingroup), name = name, skin = paint.skingroup}
 	end
 	table.sort(skins, function(first, second) return first.skin < second.skin end)
 
@@ -98,7 +97,7 @@ function ix.gearAppearance.Normalize(item, state, strict)
 	local config = ix.gearAppearance.GetConfiguration(item)
 	if not config then return end
 	if not state and item.isBodyArmor then
-		state = {skin = tostring(item:GetData("setSkin", item.newSkin or 0)), bodygroups = {}}
+		state = {skin = tostring(ix.suitAppearance.GetSkin(item)), bodygroups = {}}
 	end
 	state = state or item:GetData("gearAppearance", {})
 	if type(state) ~= "table" or type(state.bodygroups or {}) ~= "table" then return end

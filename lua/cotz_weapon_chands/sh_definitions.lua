@@ -66,13 +66,13 @@ return {
 	},
 	["cw_contender"] = {
 		model = "models/cotz/chands/675694415c.mdl",
-		left = Vector(0.88, 0.88, 0.88),
-		right = Vector(0.86, 0.86, 0.86),
+		left = Vector(0.78, 0.78, 0.78),
+		right = Vector(0.8, 0.8, 0.8),
 	},
 	["cw_contender500"] = {
 		model = "models/cotz/chands/675694415c.mdl",
-		left = Vector(0.88, 0.88, 0.88),
-		right = Vector(0.86, 0.86, 0.86),
+		left = Vector(0.78, 0.78, 0.78),
+		right = Vector(0.8, 0.8, 0.8),
 	},
 	["cw_cz52"] = {
 		model = "models/cotz/chands/765eb067a7.mdl",
@@ -91,8 +91,8 @@ return {
 	},
 	["cw_dp28"] = {
 		model = "models/cotz/chands/e33ab5d990.mdl",
-		left = Vector(0.86, 0.86, 0.86),
-		right = Vector(0.87, 0.87, 0.87),
+		left = Vector(0.91, 0.91, 0.91),
+		right = Vector(0.92, 0.92, 0.92),
 	},
 	["cw_dragunov"] = {
 		model = "models/cotz/chands/6dd86ddd84.mdl",

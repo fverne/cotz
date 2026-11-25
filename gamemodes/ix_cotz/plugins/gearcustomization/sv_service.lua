@@ -69,7 +69,7 @@ function PLUGIN:CreateQuote(client, target, itemID, state)
 	local quote = {
 		token = self.nextQuote, character = character, target = target, item = item, itemID = itemID,
 		appearance = appearance, before = before, expires = CurTime() + QUOTE_LIFETIME,
-		suitSkin = item:GetData("setSkin"), suitModel = item:GetData("setSkinOverrideModel"),
+		suitSkin = item:GetData("setSkin"), suitModel = item:GetData("setSkinModel"),
 		definition = util.CRC(util.TableToJSON({ix.gearAppearance.GetConfiguration(item), item.newModel})),
 	}
 	self.quotes[client] = quote
@@ -90,7 +90,7 @@ function PLUGIN:Confirm(client, token, accepted)
 	if quote.definition ~= util.CRC(util.TableToJSON({ix.gearAppearance.GetConfiguration(item), item.newModel}))
 		or quote.before ~= ix.gearAppearance.Fingerprint(item)
 		or quote.suitSkin ~= item:GetData("setSkin")
-		or quote.suitModel ~= item:GetData("setSkinOverrideModel")
+		or quote.suitModel ~= item:GetData("setSkinModel")
 		or not ix.gearAppearance.Normalize(item, quote.appearance, true) then
 		return false, "The appearance changed. Please preview it again."
 	end
@@ -98,10 +98,9 @@ function PLUGIN:Confirm(client, token, accepted)
 	if item.isBodyArmor then
 		for _, paint in ipairs(ix.gearAppearance.GetConfiguration(item).skins) do
 			if paint.id == quote.appearance.skin then
-				item:SetData("setSkin", paint.skin)
-				item:SetData("setSkinOverrideModel", paint.model)
-				character:SetModel(paint.model or item.newModel)
-				client:SetSkin(paint.skin)
+				ix.suitAppearance.SaveSkin(item, paint.skin)
+				-- Reapplies the suit's fixed bodygroups too, so sealed helmets stay on.
+				ix.suitAppearance.ApplyWorn(client, item)
 			end
 		end
 	else

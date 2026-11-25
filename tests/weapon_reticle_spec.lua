@@ -28,10 +28,21 @@ local eye = Vector(8, -15, 2)
 local spritePos
 EyeAngles = function() return camera end
 EyePos = function() return eye end
-cam = {IgnoreZ = function() end}
+-- Garry's Mod has no MATERIAL_VAR_IGNOREZ global, and bit.bor rejects nil.
+bit = {bor = function(a, b)
+	assert(type(a) == "number" and type(b) == "number", "bad argument to 'bor'")
+	return a | b
+end}
+cam = {IgnoreZ = function() error("the reticle must not change the viewmodel pass's depth state") end}
+local boundMaterial
 render = {
-	SetMaterial = function() end,
+	SetMaterial = function(material) boundMaterial = material end,
 	DrawSprite = function(pos) spritePos = pos end,
+}
+local reticleFlags = 16
+local reticleMaterial = {
+	GetInt = function(_, key) assert(key == "$flags") return reticleFlags end,
+	SetInt = function(_, key, value) assert(key == "$flags") reticleFlags = value end,
 }
 local weapon = setmetatable({
 	isAiming = function() return true end,
@@ -40,8 +51,10 @@ local weapon = setmetatable({
 	getSightColor = function() return {} end,
 	getReticleAngles = function() return Angle(0, 0, 0) end,
 }, {__index = SWEP})
-local attachment = {name = "dot", _reticleSize = 1}
+local attachment = {name = "dot", _reticleSize = 1, _reticle = reticleMaterial}
 weapon:DrawCotzReticleSprite(attachment, Vector(), Vector(), "dot")
+-- The material skips the depth test so the c_hands drawn after the reticle keep their depth.
+assert(boundMaterial == reticleMaterial and reticleFlags == 16 | 32768, "reticle material must ignore depth")
 local dot = spritePos + camera:Right() * (0.5 / 32) - camera:Up() * (0.5 / 32)
 close((dot - (eye + camera:Forward() * 100)):Length(), 0)
 

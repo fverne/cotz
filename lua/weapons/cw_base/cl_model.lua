@@ -1015,6 +1015,21 @@ local RETICLE_TEXTURE_OFFSETS = {
 }
 local RETICLE_DISTANCE = 100
 local RETICLE_FADE = 0.13
+-- Source's MATERIAL_VAR_IGNOREZ material flag; Garry's Mod does not expose it as a global.
+local MATERIAL_FLAG_IGNOREZ = 32768
+local depthFreeReticles = {}
+
+-- Toggling cam.IgnoreZ inside the viewmodel pass leaves the bonemerged c_hands, drawn after it, behind the gun.
+-- The reticle material skips the depth test itself instead, so the pass's depth state is never changed.
+local function getDepthFreeReticle(attachment)
+	local material = attachment._reticle
+	if not depthFreeReticles[material] then
+		material:SetInt("$flags", bit.bor(material:GetInt("$flags") or 0, MATERIAL_FLAG_IGNOREZ))
+		depthFreeReticles[material] = true
+	end
+
+	return material
+end
 
 function SWEP:DrawCotzReticleSprite(attachment, aimPos, aimAng, pattern)
 	if not self:isAiming() then return end
@@ -1033,11 +1048,9 @@ function SWEP:DrawCotzReticleSprite(attachment, aimPos, aimAng, pattern)
 	local distance = math.min(math.abs(difference - 1) * math.sqrt(2), RETICLE_FADE)
 	color.a = (1 - distance / RETICLE_FADE) * 255
 
-	cam.IgnoreZ(true)
-		render.SetMaterial(attachment._reticle)
-		render.DrawSprite(position, size, size, color)
-		render.DrawSprite(position, size, size, color)
-	cam.IgnoreZ(false)
+	render.SetMaterial(getDepthFreeReticle(attachment))
+	render.DrawSprite(position, size, size, color)
+	render.DrawSprite(position, size, size, color)
 end
 
 function SWEP:getDifferenceToAimPos(pos, ang, vertDependance, horDependance, dependMod)

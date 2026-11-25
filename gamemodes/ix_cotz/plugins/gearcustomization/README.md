@@ -6,11 +6,14 @@ cells. The combined service requires Technut's painting progression unlock for b
 Each confirmed appearance change costs 100 rubles. All choices preview before confirmation, and
 unchanged selections cannot be purchased. The old separate suit-painting dialogue and preview are removed.
 
-Suit finishes come from the existing sparse `skincustom` allowlist, including approved model overrides.
-They retain `setSkin` and `setSkinOverrideModel` persistence and ordinary suit equip behavior; they do
-not use PAC gear descriptors or a new saved appearance field. Confirmation rechecks the item, allowlist,
-painting permission for both gear and suits, saved skin/model, equipped state, money and proximity.
-Existing saves need no migration.
+Suit finishes come from each suit's `skincustom` list: skins of the suit's own `newModel`, built with
+`ix.suitAppearance.SkinOptions`. There are no model overrides. A paid finish is saved as `setSkin` with
+`setSkinModel`, the model it belongs to; finishes saved for the legacy playermodels display the factory
+finish without being rewritten. Suits do not use PAC gear descriptors. Confirmation rechecks the item,
+skin list, painting permission for both gear and suits, saved finish, equipped state, money and proximity,
+then reapplies the suit's fixed bodygroups. The preview shows the same bodygroups, so NBC, SEVA and
+SSP-99 suits keep their helmets, masks and hidden balaclava heads; Technut offers no suit bodygroup choices.
+See [suit playermodels](../../../../docs/suit-playermodels.md).
 Suture's suit conversions remain his separate service under the gear customization dialogue submenu.
 
 The window previews the selected gear on a copy of the player's current character
@@ -142,6 +145,7 @@ From the repository root:
 luatex --luaonly tests/gear_customization_spec.lua
 luatex --luaonly tests/gear_rendering_spec.lua
 luatex --luaonly tests/gear_menu_spec.lua
+luatex --luaonly tests/suit_appearance_spec.lua
 luatex --luaonly tests/dialogue_order_spec.lua
 luatex --luaonly tests/equipment_slots_spec.lua
 luatex --luaonly tests/equipment_views_spec.lua

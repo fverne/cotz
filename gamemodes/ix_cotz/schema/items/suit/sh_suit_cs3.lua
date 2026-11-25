@@ -1,6 +1,6 @@
 ITEM.name = "Sky-3 Suit"
 ITEM.model = "models/kek1ch/cs_heavy_outfit.mdl"
-ITEM.newModel = "models/stalkerisaac/playermodel/male_01_cs4.mdl"
+ITEM.newModel = "models/cotz/sectorfour/male_cs4.mdl"
 ITEM.description= "A Sky-3 suit"
 ITEM.longdesc = "A pair of reinforced tactical pants, comfortable nomex jacket and a plate carrier with pouches, it's a bare minimum of equipment for a seasoned merc, faction soldier or professional bandit."
 
@@ -37,16 +37,4 @@ ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 2
 ITEM.extraSlots = 2
 
-
-ITEM.skincustom[1] = {
-	name = "Skin 0",
-	skingroup = 0,
-}
--- ITEM.skincustom[2] = {
--- 	name = "Skin 1",
--- 	skingroup = 1,
--- }
--- ITEM.skincustom[3] = {
--- 	name = "Skin 2",
--- 	skingroup = 2,
--- }
+ITEM.skincustom = ix.suitAppearance.SkinOptions(0, 4)

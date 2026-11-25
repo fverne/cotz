@@ -113,11 +113,15 @@ function ix.gearAppearance.OpenMenu(target)
 		if panel.item.isBodyArmor then
 			for _, paint in ipairs(ix.gearAppearance.GetConfiguration(panel.item).skins) do
 				if paint.id == panel.selection.skin then
-					local previewModel = paint.model or panel.item.newModel
-					if model:GetModel() ~= previewModel then model:SetModel(previewModel) end
+					if model:GetModel() ~= panel.item.newModel then model:SetModel(panel.item.newModel) end
 					pac.SetupENT(model.Entity)
 					model.Entity:SetSequence(model.Entity:LookupSequence("idle_all_01"))
 					model.Entity:SetSkin(paint.skin)
+					-- Show the suit as worn, with fixed equipment such as sealed helmets in place.
+					for index = 0, model.Entity:GetNumBodyGroups() - 1 do
+						model.Entity:SetBodygroup(index, 0)
+					end
+					ix.suitAppearance.ApplyBodygroups(model.Entity, panel.item)
 				end
 			end
 		else

@@ -1,6 +1,7 @@
 ITEM.name = "Hero of Anarchists"
 ITEM.model ="models/kek1ch/stalker_outfit.mdl"
-ITEM.newModel = "models/nasca/stalker/male_nbc_free.mdl"
+ITEM.newModel = "models/cotz/sectorfour/male_nbc_lone.mdl"
+ITEM.newSkin = 29
 ITEM.description= "An NBC Suit."
 ITEM.longdesc = "This suit is a modified version of the standard Sunrise outfit, composed of a camouflaged CBRN suit with a Class II-a Kevlar vest. Favored by diggers and underground explorers."
 
@@ -46,7 +47,9 @@ ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 1
 ITEM.extraSlots = 0
 
-ITEM.skincustom[1] = {
-	name = "Skin 0",
-	skingroup = 0,
+ITEM.bodyGroups = {
+	["Head"] = 1,
+	["Hood"] = 0,
+	["Gasmask"] = 1,
 }
+ITEM.skincustom = ix.suitAppearance.SkinOptions(0, 50)

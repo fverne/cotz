@@ -1,6 +1,7 @@
 ITEM.name = "X-8 Scientific Suit"
 ITEM.model = "models/kek1ch/scientific_outfit.mdl"
-ITEM.newModel = "models/nasca/stalker/male_seva_mono.mdl"
+ITEM.newModel = "models/cotz/sectorfour/male_seva.mdl"
+ITEM.newSkin = 59
 ITEM.description= "A SEVA Suit."
 ITEM.longdesc = "This suit was produced by one of Kiev's Defence Research institutes and represents a phenomenal alternative to stalker hand-made suits. It is an excellent combination of a bulletproof vest, a closed cycle breathing system and an integrated system of anomalous field suppression. Due to the perfect choice of materials, the suit is highly efficient and is often regarded as an excellent choice for veterans."
 
@@ -49,15 +50,7 @@ ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 2
 ITEM.extraSlots = 2
 
-ITEM.skincustom[1] = {
-	name = "Skin 0",
-	skingroup = 0,
+ITEM.bodyGroups = {
+	["Head"] = 0,
 }
-ITEM.skincustom[2] = {
-	name = "Skin 1",
-	skingroup = 1,
-}
-ITEM.skincustom[3] = {
-	name = "Skin 2",
-	skingroup = 2,
-}
+ITEM.skincustom = ix.suitAppearance.SkinOptions(0, 64)

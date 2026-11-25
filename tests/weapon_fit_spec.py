@@ -101,5 +101,91 @@ class WorldFit(unittest.TestCase):
             "SWEP.WorldAttachmentScale = 0.5\n")
 
 
+def slab(x0, x1, z, y0=-1.0, y1=1.0):
+    """Two triangles forming a flat horizontal surface."""
+    return [[[x0, y0, z], [x1, y0, z], [x1, y1, z]], [[x0, y0, z], [x1, y1, z], [x0, y1, z]]]
+
+
+class FallbackPoses(unittest.TestCase):
+    def test_arm_bones_are_told_apart_from_gun_parts(self):
+        arms = ["r_wrist", "l_armtwist_4", "Bip01 L Hand", "Right_L_Arm", "Left12", "Bone23", "twist_R01",
+            "L_Forearm", "R_Index1", "ValveBiped.Bip01_R_Finger4", "RightArm_1stP"]
+        guns = ["weapon", "Charging Handle", "pistol_rail_low", "f_frame", "lufa", "l1", "zatvor", "hammer",
+            "firing_pin", "handguard", "sw500-gun"]
+        for name in arms:
+            self.assertTrue(fit.ARM_BONE.search(name.lower()), name)
+        for name in guns:
+            self.assertFalse(fit.ARM_BONE.search(name.lower()), name)
+
+    def test_main_stretch_bridges_small_gaps_and_drops_stray_parts(self):
+        tops = [0.0] * 5 + [None] * 10 + [1.0] * 8 + [None] * 3 + [1.0] * 6
+        self.assertEqual(fit.main_stretch(tops), (15, 31))
+
+    def test_sight_behind_the_gun_moves_to_the_nearest_flat_stretch(self):
+        # A loose part behind the gun (a posed speedloader) must not hold the sight.
+        faces = slab(0, 3, -10) + slab(10, 20, 0)
+        profile = fit.SurfaceProfile(faces, 0.0)
+        box = [[2, -0.5, -3], [4, 0.5, -1]]
+        self.assertTrue(profile.misses(*fit.mount_span(box)))
+        shift = fit.nearest_mount(profile, box)
+        self.assertAlmostEqual(shift, 7.5, delta=fit.SURFACE_STEP + 1e-9)
+        low, high = fit.mount_span(box)
+        self.assertTrue(profile.supports(low + shift, high + shift))
+
+    def test_a_step_under_the_mount_is_not_flat(self):
+        faces = slab(0, 5, 0) + slab(5, 10, 2)
+        profile = fit.SurfaceProfile(faces, 0.0)
+        self.assertFalse(profile.misses(4, 6))
+        self.assertFalse(profile.supports(4, 6))
+        # A scope overhanging the rear of the receiver keeps its place.
+        self.assertFalse(profile.misses(-1, 1.5))
+        self.assertTrue(profile.supports(6, 8))
+
+    def test_startup_bodygroups_resolve_numbers_and_named_tables(self):
+        code = "\n".join([
+            "SWEP.BarrelBGs = {main = 1, regular = 1, rail = 2}",
+            "function SWEP:IndividualInitialize()",
+            "\tself:setBodygroup( 3 , 1 )",
+            "end",
+            "function SWEP:IndividualThink()",
+            "\tself:setBodygroup(self.BarrelBGs.main,self.BarrelBGs.rail)",
+            "end",
+            "function SWEP:Other()",
+            "\tself:setBodygroup(4, 1)",
+            "end",
+        ])
+        self.assertEqual(fit.startup_bodygroups([code]), {3: 1, 1: 2})
+
+    def test_fallback_values_are_rewritten_in_place(self):
+        text = "\n".join([
+            "return {",
+            "\tmodels = {",
+            '\t\tmd_rmr = "models/rmr.mdl",',
+            "\t},",
+            "\tweapons = {",
+            "\t\tcw_test = {",
+            '\t\t\tbone = "weapon",',
+            "\t\t\tmd_rmr = {0.1, -2, 3, 0, 90, 0, 0.85, 0.85, 0.85, -1, 2, 3e-05},",
+            "\t\t},",
+            "\t},",
+            "}",
+        ])
+        models, weapons = fit.read_fallback_poses(text)
+        self.assertEqual(models, {"md_rmr": "models/rmr.mdl"})
+        item = weapons["cw_test"]["items"]["md_rmr"]
+        self.assertEqual(weapons["cw_test"]["bone"], "weapon")
+        self.assertEqual(item["values"][11], 3e-05)
+        values = list(item["values"])
+        values[1], values[11] = 2.12345, 1.0
+        result = fit.write_fallback_values(text, {item["line"]: values})
+        self.assertIn("\t\t\tmd_rmr = {0.1, 2.123, 3, 0, 90, 0, 0.85, 0.85, 0.85, -1, 2, 1},", result)
+        self.assertEqual(result.count("\n"), text.count("\n"))
+
+    def test_bone_delta_uses_cws_right_axis(self):
+        bone = frame([0, 0, 0], 0, 90, 0)
+        self.assertLess(math.dist(fit.bone_delta(bone, [0, 1, 0]), [1, 0, 0]), 1e-9)
+        self.assertLess(math.dist(fit.bone_delta(bone, [1, 0, 0]), [0, 1, 0]), 1e-9)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -29,9 +29,11 @@ LEFT, FILL, BOTTOM, TOP = 1, 2, 3, 4
 local panels = {}
 local methods = {}
 local function entity()
-	local result = {valid = true, attachments = {}, removals = {}}
-	function result:SetSkin() end
-	function result:SetBodygroup() end
+	local result = {valid = true, attachments = {}, removals = {}, groups = {}}
+	function result:SetSkin(skin) self.skin = skin end
+	function result:SetBodygroup(index, value) self.groups[index] = value end
+	function result:GetNumBodyGroups() return 3 end
+	function result:FindBodygroupByName(name) return ({Head = 1, Gasmask = 2})[name] or -1 end
 	function result:LookupSequence() return 1 end
 	function result:SetSequence() end
 	function result:AttachPACPart(tree) self.attachments[#self.attachments + 1] = tree end
@@ -72,6 +74,7 @@ for _, name in ipairs({"Dock", "SetFOV", "SetLookAt", "SetCamPos", "SetSortItems
 	"SetDecimals", "SetValue", "MakePopup"}) do methods[name] = function() end end
 local frames, queries = {}, {}
 ix = {gearAppearance = {}, gui = {}, cotzUI = {}, currency = {Get = function(value) return value .. " rubles" end}}
+dofile("gamemodes/ix_cotz/schema/libs/sh_suitappearance.lua")
 ix.cotzUI.Scale = function(value) return value end
 ix.cotzUI.Frame = function()
 	local frame = panel("DFrame")
@@ -215,8 +218,8 @@ check(not find("DButton", "Apply — 100 rubles").enabled and not frame.item,
 frame:Close()
 item.data.equip = true
 local suit = {id = 3, uniqueID = "suit", isBodyArmor = true, newModel = "suit.mdl", newSkin = 0,
-	data = {equip = true}, skincustom = {{name = "Skin 0", skingroup = 0},
-		{name = "Skin 2", skingroup = 2, modelOverride = "suit_other.mdl"}},
+	data = {equip = true}, skincustom = {{name = "Skin 0", skingroup = 0}, {name = "Skin 2", skingroup = 2}},
+	bodyGroups = {Head = 1, Gasmask = 1},
 	GetData = item.GetData, GetID = item.GetID, GetName = function() return "Suit" end}
 inventory.GetItems = function() return {[2] = item, [3] = suit} end
 local paintAllowed = false
@@ -234,8 +237,10 @@ model = find("DModelPanel")
 check(model.model == "suit.mdl" and not model.gearTree, "a suit previews on the character model without a PAC part")
 local finish = find("DComboBox")
 finish.OnSelect(finish, 2, "Finish 2", "2")
-check(model.model == "suit_other.mdl" and suit:GetData("setSkin") == nil,
-	"suit finish/model previews leave saved appearance unchanged")
+check(model.model == "suit.mdl" and model.Entity.skin == 2 and suit:GetData("setSkin") == nil,
+	"suit finish previews leave saved appearance unchanged")
+check(model.Entity.groups[1] == 1 and model.Entity.groups[2] == 1 and model.Entity.groups[0] == 0,
+	"suit previews keep fixed equipment, such as sealed helmets and masks, in place")
 frame.SelectItem(item)
 check(model.model == "player.mdl" and model.gearTree, "switching back to gear restores the worn character preview")
 frame:Close()

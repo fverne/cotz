@@ -36,6 +36,10 @@ actions declare the greyscale path as their `icon`; the inventory menu tints it 
 `ix.cotzIcons.SetMenuImage`. The original-colour (gold) tints are reserved for menu buttons; tooltips and
 other panels tint greyscale icons with the teal `ix.cotzIcons.propertyColor`.
 
+`schema/libs/sh_suitappearance.lua` and `sv_suitappearance.lua` own `ix.suitAppearance`: worn suit
+models, finishes and named bodygroups, the shared vest-based skin lists, and the load-time migration
+of characters from the legacy playermodels. See [suit playermodels](suit-playermodels.md).
+
 `schema/libs/sh_economystats.lua` owns persistent per-character cash-flow counters and the admin
 scoreboard field list. Transaction owners record successful cash payments; simplecrossserverdata
 sends summaries only to administrators. See its [economy dossier guide](../gamemodes/ix_cotz/plugins/simplecrossserverdata/README.md#administrator-economy-dossier).

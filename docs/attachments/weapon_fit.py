@@ -4,6 +4,7 @@ Usage (from the repository root):
     python3 docs/attachments/weapon_fit.py bones  CLASS... | all
     python3 docs/attachments/weapon_fit.py rebone CLASS --to BONE [--from BONE] [--write]
     python3 docs/attachments/weapon_fit.py world  CLASS... | all [--write]
+    python3 docs/attachments/weapon_fit.py fallback CLASS... | all [--write]
 
 `bones` lists each attachment bone's drift from the receiver across every viewmodel sequence. A bone that
 stays put while the receiver recoils, reloads or is drawn leaves the sights floating in place.
@@ -15,6 +16,11 @@ model keeps its exact pose in the idle sequence (where CW samples third-person m
 worldmodel muzzle frame. The two meshes of an Anomaly pair are the same gun at a uniform scale, so the fit
 compares the gun-only meshes in each muzzle frame and reports SWEP.WorldAttachmentScale, WorldAttachmentShift
 and, when the muzzle frames face opposite ways, WorldAttachmentAngle. See docs/attachment-placement.md.
+
+`fallback` checks lua/cotz/weapon_attachment_poses.lua against each viewmodel's idle pose, with the bodygroups
+the weapon sets at startup. Sights with no gun under their mount move along the line of sight to the nearest
+flat stretch of the gun's top and are seated on it; their aim height follows. Suppressors standing in front of
+the barrel move back onto it.
 
 Without --write, nothing is changed. Models are read from the sibling addons.
 """
@@ -46,6 +52,33 @@ WIDTH_TOLERANCE = 0.08
 MIN_DISPLACEMENT = 1.0
 MIN_SHIFT = 0.25
 SIGHT_DISTANCE_SHARE = 0.45
+
+FALLBACK_POSES = REPO_ROOT / "lua" / "cotz" / "weapon_attachment_poses.lua"
+FALLBACK_SUPPRESSORS = ("md_cobram2", "md_pbs1", "md_saker", "md_tundra9mm")
+
+# Arm and hand bones across the CW, Anomaly, KHR and TFA rigs. Gun parts such as a charging handle stay in.
+ARM_BONE = re.compile(
+    r"(^|[^a-z0-9])[lr]([^a-z0-9]|$)|bip01|valvebiped|^left|^right|^bone\d|twist|wrist|elbow|clavicle|shoulder"
+    r"|(^|[^a-z])(upper|fore)?arm|(^|[^a-z])(hand(?!guard|le)|finger|thumb|index|middle|ring|pinky)"
+)
+
+# Fallback sight seating. The middle share of a sight's length is its mount. A sight with less than
+# MISPLACED_COVERAGE of its mount over the gun moves to the nearest flat stretch of the gun's top along its line
+# of sight. Only the gun's longest continuous stretch counts, so parts posed away from the gun (a revolver's
+# speedloader) cannot hold a sight. Scopes that merely overhang the end of a receiver stay where they are.
+SURFACE_STEP = 0.1
+MOUNT_SHARE = 0.5
+MISPLACED_COVERAGE = 0.5
+MOUNT_COVERAGE = 0.95
+FLAT_TOLERANCE = 0.75
+SURFACE_GAP = 0.5
+MIN_SIGHT_MOVE = 0.05
+# Side-mounted optics clamp to a dovetail beside the receiver rather than sitting on its top.
+SIDE_MOUNTS = ("md_kobra", "md_pso1", "cw_anomaly_1p29", "cw_anomaly_mosin")
+
+# A suppressor whose rear stands this far in front of the barrel moves back to overlap it slightly.
+SUPPRESSOR_GAP = 0.3
+SUPPRESSOR_OVERLAP = 0.15
 
 TURNS = {
     "none": ((1, 1, 1), None),
@@ -143,10 +176,10 @@ def find_model(model):
 
 
 def weapon_path(weapon_class):
-    path = WEAPONS / weapon_class / "shared.lua"
-    if not path.exists():
-        raise FitError("%s has no shared.lua" % weapon_class)
-    return path
+    for path in (WEAPONS / weapon_class / "shared.lua", WEAPONS / (weapon_class + ".lua")):
+        if path.exists():
+            return path
+    raise FitError("%s has no shared.lua" % weapon_class)
 
 
 def weapon_info(weapon_class):
@@ -592,13 +625,279 @@ def command_legacy_world(classes, write):
             write_world_fields(info, fields)
 
 
+# ---- fallback poses ----
+
+POSE_ENTRY = re.compile(r"^(\t\t\t)(\w+) = \{([^}]*)\},$")
+
+
+def read_fallback_poses(text):
+    """Models and per-weapon entries of weapon_attachment_poses.lua, with each value list's line number."""
+    lines = text.split("\n")
+    models, weapons, current = {}, {}, None
+    for number, line in enumerate(lines):
+        model = re.match(r'^\t\t(\w+) = "([^"]+)",$', line)
+        start = re.match(r"^\t\t(\w+) = \{$", line)
+        bone = re.match(r'^\t\t\tbone = "([^"]+)",$', line)
+        values = POSE_ENTRY.match(line)
+        if model:
+            models[model.group(1)] = model.group(2)
+        elif start:
+            current = weapons[start.group(1)] = {"bone": None, "items": {}}
+        elif bone and current:
+            current["bone"] = bone.group(1)
+        elif values and current:
+            current["items"][values.group(2)] = {
+                "line": number, "values": [float(value) for value in values.group(3).split(",")],
+            }
+    return models, weapons
+
+
+def write_fallback_values(text, changes):
+    """Replace the value lists of changed entries, keeping every other line as it was."""
+    lines = text.split("\n")
+    for number, values in changes.items():
+        match = POSE_ENTRY.match(lines[number])
+        numbers = ", ".join(format_number(round(value, 3)) for value in values)
+        lines[number] = "%s%s = {%s}," % (match.group(1), match.group(2), numbers)
+    return "\n".join(lines)
+
+
+def resolved_weapon_info(weapon_class):
+    """weapon_info, filling the viewmodel and idle animation from SWEP.Base where the class inherits them."""
+    info = weapon_info(weapon_class)
+    info["codes"] = [info["code"]]
+    seen, current = {weapon_class}, info
+    while not (info["viewmodel"] and info["idle"]):
+        base = re.search(r'^[ \t]*SWEP\.Base\s*=\s*"([^"]+)"', current["code"], re.M)
+        if not base or base.group(1) in seen:
+            break
+        seen.add(base.group(1))
+        try:
+            current = weapon_info(base.group(1))
+        except FitError:
+            break
+        info["codes"].append(current["code"])
+        info["viewmodel"] = info["viewmodel"] or current["viewmodel"]
+        info["idle"] = info["idle"] or current["idle"]
+        info["flipped"] = info["flipped"] or current["flipped"]
+    return info
+
+
+def startup_bodygroups(codes):
+    """Bodygroups a weapon sets in IndividualInitialize or IndividualThink, such as a longer barrel or a rail."""
+    groups = {}
+    for code in codes:
+        tables = {
+            name: {key: int(value) for key, value in re.findall(r"(\w+)\s*=\s*(\d+)", body)}
+            for name, body in re.findall(r"^[ \t]*SWEP\.(\w+)\s*=\s*\{([^}]*)\}", code, re.M)
+        }
+
+        def resolve(token):
+            if token.isdigit():
+                return int(token)
+            field = re.fullmatch(r"self\.(\w+)\.(\w+)", token)
+            return field and tables.get(field.group(1), {}).get(field.group(2))
+
+        for body in re.findall(r"^function SWEP:Individual(?:Initialize|Think)\(\).*?^end", code, re.M | re.S):
+            for group, value in re.findall(r"self:setBodygroup\(\s*([\w.]+)\s*,\s*([\w.]+)\s*\)", body):
+                group, value = resolve(group), resolve(value)
+                if group is not None and value is not None:
+                    groups.setdefault(group, value)
+    return groups
+
+
+def gun_faces(path, model, sequence, bodygroups):
+    """Posed triangles of the visible gun, without the arms and hands."""
+    vertices = mdl_pose.posed_vertices(str(path), sequence)
+    data = path.with_suffix(".vvd").read_bytes()
+    start = struct.unpack_from("<i", data, 56)[0]
+    gun = {index for index, bone in enumerate(model.bones) if not ARM_BONE.search(bone["name"].lower())}
+
+    def on_gun(index):
+        return index < len(vertices) and data[start + index * 48 + 12] in gun
+
+    return [[vertices[index] for index in face] for face in mdl_pose.triangles(str(path), bodygroups)
+        if all(on_gun(index) for index in face)]
+
+
+def placed_box(frame, values, extent):
+    """Model origin, scaled axes and bounding box of a placed attachment model in viewmodel space."""
+    world, rotation = cw_to_world(frame, values[0:3], values[3:6])
+    axes = [scale(rotation[axis], values[6 + axis]) for axis in range(3)]
+    corners = [[(extent["min"], extent["max"])[(corner >> axis) & 1][axis] for axis in range(3)] for corner in range(8)]
+    points = [add(world, add(add(scale(axes[0], c[0]), scale(axes[1], c[1])), scale(axes[2], c[2]))) for c in corners]
+    return world, axes, bounds(points)
+
+
+class SurfaceProfile:
+    """Top height of the gun's main body along a line of sight at a fixed lateral offset, every SURFACE_STEP."""
+
+    def __init__(self, faces, y):
+        band = [face for face in faces if min(v[1] for v in face) <= y <= max(v[1] for v in face)]
+        self.start = min((v[0] for face in band for v in face), default=0.0)
+        end = max((v[0] for face in band for v in face), default=0.0)
+        tops = []
+        for step in range(int((end - self.start) / SURFACE_STEP) + 1):
+            x = self.start + step * SURFACE_STEP
+            column = [face for face in band if min(v[0] for v in face) <= x <= max(v[0] for v in face)]
+            hits = mdl_pose._ray_hits(column, x, y)
+            tops.append(max(hits) if hits else None)
+        self.tops = [None] * len(tops)
+        first, last = main_stretch(tops)
+        self.tops[first:last + 1] = tops[first:last + 1]
+
+    def mount(self, low, high):
+        """Coverage and flatness of the gun's top under a mount spanning low..high."""
+        first = math.ceil((low - self.start) / SURFACE_STEP)
+        last = math.floor((high - self.start) / SURFACE_STEP)
+        inside = range(max(first, 0), min(last, len(self.tops) - 1) + 1)
+        tops = [self.tops[index] for index in inside if self.tops[index] is not None]
+        if not tops:
+            return 0.0, None
+        return len(tops) / max(1, last - first + 1), max(tops) - min(tops)
+
+    def misses(self, low, high):
+        return self.mount(low, high)[0] < MISPLACED_COVERAGE
+
+    def supports(self, low, high):
+        coverage, flatness = self.mount(low, high)
+        return coverage >= MOUNT_COVERAGE and flatness <= FLAT_TOLERANCE
+
+
+def main_stretch(tops):
+    """Indices of the longest run of samples that hit the gun, bridging gaps up to SURFACE_GAP."""
+    best, start, misses = (0, -1), None, 0
+    for index, top in enumerate(tops + [None] * (int(SURFACE_GAP / SURFACE_STEP) + 1)):
+        if top is not None:
+            start = index if start is None else start
+            misses = 0
+            if index - start > best[1] - best[0]:
+                best = (start, index)
+        elif start is not None:
+            misses += 1
+            if misses * SURFACE_STEP > SURFACE_GAP:
+                start, misses = None, 0
+    return best
+
+
+def mount_span(box):
+    middle, length = (box[0][0] + box[1][0]) / 2, box[1][0] - box[0][0]
+    return middle - length * MOUNT_SHARE / 2, middle + length * MOUNT_SHARE / 2
+
+
+def nearest_mount(profile, box):
+    """Forward shift that puts the sight's mount on the nearest supported stretch of the gun, or None."""
+    low, high = mount_span(box)
+    end = profile.start + len(profile.tops) * SURFACE_STEP
+    reach = max(end - low, high - profile.start, 0.0)
+    for step in range(int(reach / SURFACE_STEP) + 1):
+        for shift in (step * SURFACE_STEP, -step * SURFACE_STEP):
+            if profile.supports(low + shift, high + shift):
+                return shift
+    return None
+
+
+def barrel_tip(faces, box):
+    """Front of the gun inside a suppressor's bore, from the suppressor's placed bounding box."""
+    center = [(box[0][axis] + box[1][axis]) / 2 for axis in range(3)]
+    radius = min(box[1][1] - box[0][1], box[1][2] - box[0][2]) / 2
+    tips = [v[0] for face in faces for v in face
+        if (v[1] - center[1]) ** 2 + (v[2] - center[2]) ** 2 <= radius ** 2 and v[0] <= box[1][0]]
+    return max(tips, default=None)
+
+
+def bone_delta(frame, delta):
+    """A viewmodel-space translation as a change of CW's bone-relative pos (forward, right, up)."""
+    matrix = frame[1]
+    return [dot(delta, matrix[0]), -dot(delta, matrix[1]), dot(delta, matrix[2])]
+
+
+def fit_fallback(weapon_class, entry, models):
+    """New value lists for misplaced fallback sights and suppressors of one weapon, and a report line for each."""
+    info = resolved_weapon_info(weapon_class)
+    if not (info["viewmodel"] and info["idle"]):
+        raise FitError("needs a ViewModel and an idle animation")
+    path = find_model(info["viewmodel"])
+    model = mdl_pose.Model(path)
+    try:
+        model.bone_index(entry["bone"])
+    except mdl_pose.MdlError:
+        raise FitError("viewmodel has no %s bone (profile skips this model)" % entry["bone"])
+    frame = bone_frame(model.sample(info["idle"], entry["bone"], 1)[0])
+    faces = gun_faces(path, model, info["idle"], startup_bodygroups(info["codes"]))
+    if not faces:
+        raise FitError("no gun geometry")
+
+    changes, notes, profiles = {}, [], {}
+    for item_id, item in sorted(entry["items"].items()):
+        values = item["values"]
+        model_path = find_model(models[item_id])
+        world, axes, box = placed_box(frame, values, mdl_pose.mesh_bounds(str(model_path)))
+        if item_id in FALLBACK_SUPPRESSORS:
+            tip = barrel_tip(faces, box)
+            if tip is None or box[0][0] - tip <= SUPPRESSOR_GAP:
+                continue
+            delta = [tip - SUPPRESSOR_OVERLAP - box[0][0], 0.0, 0.0]
+            notes.append("%s back %.2f to the barrel" % (item_id, -delta[0]))
+        elif len(values) == 12 and item_id not in SIDE_MOUNTS:
+            line = round((box[0][1] + box[1][1]) / 2, 1)
+            profile = profiles.get(line) or profiles.setdefault(line, SurfaceProfile(faces, line))
+            if not profile.misses(*mount_span(box)):
+                continue
+            shift = nearest_mount(profile, box)
+            if shift is None:
+                notes.append("%s: no flat mount along its line of sight" % item_id)
+                continue
+            moved = add(world, [shift, 0.0, 0.0])
+            clearance = mdl_pose.face_clearances(faces, [{"model": str(model_path), "origin": moved, "axes": axes}])[0]
+            if clearance is None:
+                notes.append("%s: could not seat on the gun" % item_id)
+                continue
+            delta = [shift, 0.0, -clearance]
+            if math.hypot(*delta) < MIN_SIGHT_MOVE:
+                continue
+            notes.append("%s %+.2f forward, %+.2f up" % (item_id, delta[0], delta[2]))
+        else:
+            continue
+
+        moved = list(values)
+        moved[0:3] = add(values[0:3], bone_delta(frame, delta))
+        if len(values) == 12:
+            # Fallback aims have no angle, so the eye line follows the lens straight up or down. Moving the
+            # sight forward keeps the ironsight-relative eye relief the aim was built with.
+            moved[11] = values[11] - delta[2]
+        changes[item["line"]] = moved
+    return changes, notes
+
+
+def command_fallback(classes, write):
+    text = FALLBACK_POSES.read_text(encoding="utf-8")
+    models, weapons = read_fallback_poses(text)
+    changes = {}
+    for weapon_class in classes:
+        entry = weapons.get(weapon_class)
+        if not entry or not entry["items"]:
+            continue
+        try:
+            fitted, notes = fit_fallback(weapon_class, entry, models)
+        except (FitError, mdl_pose.MdlError, struct.error, OSError, IndexError, KeyError) as error:
+            print("%-36s skipped: %s" % (weapon_class, error))
+            continue
+        changes.update(fitted)
+        for note in notes:
+            print("%-36s %s" % (weapon_class, note))
+    print("%d fallback placements to change" % len(changes))
+    if write and changes:
+        FALLBACK_POSES.write_text(write_fallback_values(text, changes), encoding="utf-8")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("bones", "world", "legacy-world"):
+    for name in ("bones", "world", "legacy-world", "fallback"):
         sub_parser = commands.add_parser(name)
         sub_parser.add_argument("classes", nargs="+")
-        if name in ("world", "legacy-world"):
+        if name in ("world", "legacy-world", "fallback"):
             sub_parser.add_argument("--write", action="store_true")
     rebone = commands.add_parser("rebone")
     rebone.add_argument("weapon_class")
@@ -610,6 +909,9 @@ def main(argv=None):
     try:
         if args.command == "rebone":
             command_rebone(args.weapon_class, args.target, args.source, args.write)
+        elif args.command == "fallback":
+            every = sorted(read_fallback_poses(FALLBACK_POSES.read_text(encoding="utf-8"))[1])
+            command_fallback(every if args.classes == ["all"] else args.classes, args.write)
         else:
             classes = all_classes() if args.classes == ["all"] else args.classes
             if args.command == "bones":

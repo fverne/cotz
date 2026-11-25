@@ -462,6 +462,11 @@ def contact_clearances(gun_path, sequence, sights, step=0.1, strip=0.2, contact_
     # Placed mounts (rail adapters, spacers) count as part of the gun's surface.
     for extra in extras:
         gun_faces += _placed_faces(extra)
+    return face_clearances(gun_faces, sights, step, strip, contact_share)
+
+
+def face_clearances(gun_faces, sights, step=0.1, strip=0.2, contact_share=0.15):
+    """contact_clearances against gun triangles that are already posed, such as a filtered gun-only mesh."""
     results = []
     for sight in sights:
         faces = _placed_faces(sight)

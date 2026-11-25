@@ -1,6 +1,6 @@
 ITEM.name = "Sunset STALKER Suit"
 ITEM.model = "models/kek1ch/stalker_outfit.mdl"
-ITEM.newModel = "models/stalkerisaac/playermodel/male_01_sunrise.mdl"
+ITEM.newModel = "models/cotz/sectorfour/male_sunrise.mdl"
 ITEM.description= "A STALKER suit."
 ITEM.longdesc = "This DIY stalker bodysuit is a combination of twin-layered rubberised cloth with Plexiglas lining and built-in body armour. The vest stops slower, weaker pistol calibers. The suit enjoys great popularity due to its low cost and modification potential."
 
@@ -8,7 +8,7 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/sunrise.png")
 ITEM.weight = 6.200
-ITEM.newSkin = 5
+ITEM.newSkin = 24
 ITEM.baseSuit = "suit_sunrise"
 ITEM.suitVariant = "fanatic"
 
@@ -38,12 +38,4 @@ ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 1
 ITEM.extraSlots = 0
 
-
-ITEM.skincustom[5] = {
-	name = "Skin 4",
-	skingroup = 4,
-}
-ITEM.skincustom[6] = {
-	name = "Skin 5",
-	skingroup = 5,
-}
+ITEM.skincustom = ix.suitAppearance.SkinOptions(ix.suitAppearance.SUNRISE_SKINS)

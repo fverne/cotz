@@ -43,16 +43,21 @@ ITEM.miscSlots = {
 }
 
 --[[
--- This will change a player's skin after changing the model. Keep in mind it starts at 0.
-ITEM.newSkin = 1
 -- This will change the player's model completely.
 ITEM.newModel = "models/manhack.mdl"
+-- The factory finish (skin) applied with the model. Keep in mind it starts at 0.
+ITEM.newSkin = 1
+-- Finishes Technut may apply; each must be a skin of ITEM.newModel.
+ITEM.skincustom = ix.suitAppearance.SkinOptions(0, 4)
 
--- This will apply body groups.
+-- This will apply body groups by name on ITEM.newModel.
 ITEM.bodyGroups = {
 	["blade"] = 1,
 	["bladeblur"] = 1
 }
+
+-- Adds the Lift Hood action, toggling this bodygroup between its down and up values.
+ITEM.hoodBodygroup = {name = "Neck", down = 0, up = 1}
 ]]--
 
 function ITEM:GetRepairCost()
@@ -240,9 +245,9 @@ if (CLIENT) then
 				end
 			end
 			
-			if self:GetData("setSkin", self.newSkin) then
+			if self.newModel then
 				local skintitle = tooltip:AddRow("skintitle")
-				skintitle:SetText("\nCurrent skin: "..self:GetData("setSkin", self.newSkin))
+				skintitle:SetText("\nCurrent skin: " .. ix.suitAppearance.GetSkin(self))
 				skintitle:SizeToContents()
 			end
 
@@ -284,6 +289,7 @@ function ITEM:RemoveOutfit(client)
 	if (character:GetData("oldModel" .. self.outfitCategory)) then
 		character:SetModel(character:GetData("oldModel" .. self.outfitCategory))
 		character:SetData("oldModel" .. self.outfitCategory, nil)
+		client:ResetBodygroups()
 	end
 
 	if (self.newSkin) then
@@ -346,34 +352,46 @@ ITEM.functions.zCustomizeSkin = {
 	multiOptions = function(item, client)
 		local targets = {}
 
-		for k, v in pairs(item.skincustom) do
+		for _, option in ipairs(item.skincustom) do
 			table.insert(targets, {
-				name = v.name,
-				data = {v.skingroup, v.modelOverride or nil},
+				name = option.name,
+				data = {option.skingroup},
 			})
 		end
 
 		return targets
 	end,
-	OnCanRun = function(item)				
+	OnCanRun = function(item)
 		return (!IsValid(item.entity) and #item.skincustom > 0 and item:GetData("equip") == true and item:GetOwner():GetCharacter():GetInventory():HasItem("paint") and item:GetOwner():GetCharacter():GetFlags("T"))
 	end,
 	OnRun = function(item, data)
-		if !data[1] then
-			return false
-		end
+		local skin = istable(data) and data[1]
+		if not ix.suitAppearance.IsAllowedSkin(item, skin) then return false end
 
-		item.player:SetSkin(data[1])
-		item:SetData("setSkin", data[1])
-		if data[2] then
-			item.player:GetCharacter():SetModel(data[2])
-			item:SetData("setSkinOverrideModel", data[2])
-		else
-			item.player:GetCharacter():SetModel(item.newModel)
-			item:SetData("setSkinOverrideModel", nil)
-		end
+		ix.suitAppearance.SaveSkin(item, skin)
+		ix.suitAppearance.ApplyWorn(item.player, item)
 
 		return false
+	end,
+}
+
+ITEM.functions.Lift = {
+	name = "Lift Hood",
+	tip = "equipTip",
+	icon = "icon16/stalker_grey/customize.png",
+	OnRun = function(item)
+		local hood = item.hoodBodygroup
+		local index = item.player:FindBodygroupByName(hood.name)
+		if index < 0 then return false end
+
+		local lowered = item.player:GetBodygroup(index) ~= hood.up
+		item.player:SetBodygroup(index, lowered and hood.up or hood.down)
+
+		return false
+	end,
+	OnCanRun = function(item)
+		return item.hoodBodygroup ~= nil and not IsValid(item.entity) and IsValid(item.player)
+			and item:GetData("equip") == true
 	end,
 }
 
@@ -470,17 +488,8 @@ ITEM.functions.Equip = {
 			ply:ReevaluateOverlay()
 			ix.weight.Update(ply:GetCharacter())
 			char:SetData("oldModel" .. item.outfitCategory, char:GetData("oldModel" .. item.outfitCategory, ply:GetModel()))
-			char:SetModel(item.newModel)
+			char:SetData("oldSkin" .. item.outfitCategory, ply:GetSkin())
 
-			if (item.newSkin) then
-				char:SetData("oldSkin" .. item.outfitCategory, ply:GetSkin())
-				ply:SetSkin(item.newSkin)
-				if item:GetData("setSkin", nil) != nil then
-					client:SetSkin( item:GetData("setSkin", item.newSkin) )
-				end
-			end
-
-			ply:SetupHands()
 			item:OnLoadout()
 		end)
 
@@ -563,47 +572,12 @@ ITEM.functions.detach = {
 	end,
 }
 
+-- Also reapplies the model, so a worn suit follows definition changes after respawns and transfers.
+-- Index-based `setBG` data from the legacy models is no longer applied.
 function ITEM:OnLoadout()
-	if (self:GetData("equip")) then
-		local client = self:GetOwner()
+	if not self:GetData("equip") then return end
 
-		if self:GetData("setSkin", self.newSkin) then
-			client:SetSkin( self:GetData("setSkin", self.newSkin) )
-		end
-
-		if self:GetData("setBG", nil) then
-			local data = self:GetData("setBG", nil)
-			local bgroup = data[1]
-			local bgroupsub = data[2]
-
-			for i=1,#bgroup do
-				client:SetBodygroup( bgroup[i], bgroupsub[i] )
-			end
-		end
-
-		if (self.bodyGroups) then
-			local groups = {}
-
-			for k, value in pairs(self.bodyGroups) do
-				local index = client:FindBodygroupByName(k)
-
-				if (index > -1) then
-					groups[index] = value
-				end
-			end
-
-			local newGroups = client:GetCharacter():GetData("groups", {})
-
-			for index, value in pairs(groups) do
-				newGroups[index] = value
-				client:SetBodygroup(index, value)
-			end
-
-			if (table.Count(newGroups) > 0) then
-				client:GetCharacter():SetData("groups", newGroups)
-			end
-		end
-	end
+	ix.suitAppearance.ApplyWorn(self:GetOwner(), self)
 end
 
 function ITEM:CanTransfer(oldInventory, newInventory)
