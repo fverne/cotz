@@ -37,7 +37,7 @@ ITEM.pacData = {
 					},
 				},
 				["self"] = {
-					["Position"] = Vector(-0.5, 0, -15),
+					["Position"] = Vector(-3, 0, -15),
 					["UniqueID"] = "backpack_sling",
 					-- ["Size"] = 0.85,
 					["Bone"] = "chest",

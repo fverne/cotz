@@ -36,7 +36,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(11.8, -5, -2.1),
+						["Position"] = Vector(11.8, -4, -2.1),
 						["Model"] = "models/weapons/w_fc4_700nitro_fixed.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

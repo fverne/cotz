@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
-						["Position"] = Vector(-2.502, -4.31, -2.254),
+						["Position"] = Vector(-2.502, -4.56, -2.254),
 						["Model"] = "models/weapons/w_shot_mossberg5.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

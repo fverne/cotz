@@ -26,7 +26,7 @@ ITEM.pacData = {
 				},
 				["self"] = {
 				["Angles"] = Angle(90, -90.016, 89.957),
-				["Position"] = Vector(-6.333, 0.016, -1.611),
+				["Position"] = Vector(-7.583, 0.016, -1.611),
 					["UniqueID"] = "backpack_misery3xd",
 					["Size"] = 0.9,
 					["Bone"] = "chest",

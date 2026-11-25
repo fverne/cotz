@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
-						["Position"] = Vector(4.75, -3.5, -5.38),
+						["Position"] = Vector(4.75, -4.25, -5.38),
 						["Model"] = "models/dobytchick/weapons/gmzone/deadair/w_kiparis.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

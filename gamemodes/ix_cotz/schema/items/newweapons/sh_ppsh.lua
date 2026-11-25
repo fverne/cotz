@@ -35,7 +35,7 @@ ITEM.pacData = {
 					["children"] = {
 					},
 					["self"] = {
-						["Position"] = Vector(16.759, -7.327, 4.486),
+						["Position"] = Vector(16.759, -7.827, 4.486),
 						["Name"] = "ppsh",
 						["ClassName"] = "model",
 						["Translucent"] = true,

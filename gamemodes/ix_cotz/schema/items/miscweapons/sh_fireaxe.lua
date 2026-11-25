@@ -30,7 +30,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-7.244, -7.084, -0.487),
+						["Position"] = Vector(-6.244, -7.084, -0.487),
 						["Model"] = "models/weapons/tfa_nmrih/w_me_axe_fire.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

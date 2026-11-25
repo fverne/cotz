@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(16.543, -4.312, -1.374),
+						["Position"] = Vector(16.543, -5.812, -1.374),
 						["Model"] = "models/cw2/weapons/w_cam_m49m.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

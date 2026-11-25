@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Position"] =	Vector(4.093, -4.807, -4.414),
+						["Position"] =	Vector(4.093, -5.557, -4.414),
 						["Model"] = "models/weapons/w_smg_aks.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

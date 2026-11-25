@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(14.98, -4.153, -1.175),
+						["Position"] = Vector(14.98, -3.903, -1.175),
 						["Model"] = "models/weapons/w_shot_remington.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

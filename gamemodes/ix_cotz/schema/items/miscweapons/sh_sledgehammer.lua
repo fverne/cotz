@@ -31,7 +31,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-6.557, -7.391, 6.482),
+						["Position"] = Vector(-6.307, -7.391, 6.482),
 						["Model"] = "models/weapons/tfa_nmrih/w_me_sledge.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

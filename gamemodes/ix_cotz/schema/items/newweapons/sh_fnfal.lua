@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Position"] = Vector(13.596, -4.444, -1.874),
+						["Position"] = Vector(13.596, -4.944, -1.874),
 						["Model"] = "models/hgn/srp/weapons/w_rif_fnfal.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

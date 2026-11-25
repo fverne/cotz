@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Position"] =	Vector(15.89, -4.626, -1.283),
+						["Position"] =	Vector(15.89, -4.876, -1.283),
 						["Model"] = "models/srp/weapons/w_abakan.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

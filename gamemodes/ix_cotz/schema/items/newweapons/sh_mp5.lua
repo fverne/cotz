@@ -37,7 +37,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(17.39, -4.308, 0.361),
+						["Position"] = Vector(17.39, -5.058, 0.361),
 						["Model"] = "models/srp/weapons/w_mp5.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

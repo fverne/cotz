@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(15.528, -4.265, -3.556),
+						["Position"] = Vector(15.528, -3.515, -3.556),
 						["Model"] = "models/weapons/tfa_nmrih/w_fa_win1892.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

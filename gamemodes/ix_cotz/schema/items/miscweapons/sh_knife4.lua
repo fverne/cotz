@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(7.2459273338318, 74.650802612305, 92.232429504395),
-						["Position"] = Vector(5.11865234375, -4.373046875, -4.71630859375),
+						["Position"] = Vector(5.119, -4.373, -3.966),
 						["Model"] = "models/weapons/w_csgo_bayonet.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

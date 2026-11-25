@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(-15.857076644897, 180, -180),
-						["Position"] = Vector(15.658203125, 0.03999999910593, -12.88525390625),
+						["Position"] = Vector(15.658, 0.29, -12.885),
 						["Model"] = "models/weapons/arc9/darsu_eft/w_toz106.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

@@ -40,7 +40,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(11, -5.1, 0.1),
+						["Position"] = Vector(11, -3.85, 0.1),
 						["Model"] = "models/weapons/tfa_ins2/wpn_mp27_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

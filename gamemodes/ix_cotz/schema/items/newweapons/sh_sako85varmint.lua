@@ -39,7 +39,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(14.155, -4.192, -4.03),
+						["Position"] = Vector(14.155, -3.942, -4.03),
 						["Model"] = "models/weapons/tfa_nmrih/w_fa_sako85_ironsights.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

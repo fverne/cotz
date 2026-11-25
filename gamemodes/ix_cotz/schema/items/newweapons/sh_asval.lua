@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 90, 0),
-						["Position"] = Vector(4.252, -5.172, -5.865),
+						["Position"] = Vector(4.252, -5.672, -5.865),
 						["Model"] = "models/weapons/w_dmg_vally.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

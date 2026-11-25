@@ -31,7 +31,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(-77.061, -138.578, 48.449),
-						["Position"] = Vector(-9.333, -2.007, -2.832),
+						["Position"] = Vector(-7.583, -2.007, -2.832),
 						["Model"] = "models/weapons/tfa_nmrih/w_me_hatchet.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

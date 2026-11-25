@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(-77.919311523438, -0.00019300662097521, -74.558158874512),
-						["Position"] = Vector(5.06103515625, -0.376953125, -4.6669921875),
+						["Position"] = Vector(5.061, -0.377, -4.417),
 						["Model"] = "models/splatolivia/knife/knife.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(12.493, -4.312, -3.803),
+						["Position"] = Vector(12.493, -3.812, -3.803),
 						["Model"] = "models/weapons/ws mosin/w_ws_mosin.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

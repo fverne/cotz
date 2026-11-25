@@ -31,7 +31,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-6.38, -10.539, 6.522),
+						["Position"] = Vector(-6.63, -10.539, 6.522),
 						["Model"] = "models/weapons/tfa_nmrih/w_me_fubar.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

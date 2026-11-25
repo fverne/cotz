@@ -34,7 +34,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(5.922, -5.054, -4.465),
+						["Position"] = Vector(5.922, -6.554, -4.465),
 						["Model"] = "models/weapons/w_shot_strike.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

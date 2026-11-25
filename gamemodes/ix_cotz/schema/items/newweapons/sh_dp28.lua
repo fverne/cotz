@@ -39,7 +39,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(180, 0, 0),
-						["Position"] = Vector(11.765, -4.449, -1.126),
+						["Position"] = Vector(11.765, -4.199, -1.126),
 						["Model"] = "models/weapons/w_ro2_dp28.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

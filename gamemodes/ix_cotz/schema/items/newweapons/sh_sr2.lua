@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 90, 180),
-						["Position"] = Vector(2.7, -4.8, 4.2),
+						["Position"] = Vector(2.7, -4.55, 4.2),
 						["Model"] = "models/sr-2m veresk/sr2.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
-						["Position"] = Vector(11.662, -4.309, -2.877),
+						["Position"] = Vector(11.662, -4.059, -2.877),
 						["Model"] = "models/khrcw2/doipack/w_suomi.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

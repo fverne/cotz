@@ -31,7 +31,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(2.544, 93.658, 25.026),
-						["Position"] = Vector(5.145, 3.09, 3.893),
+						["Position"] = Vector(5.645, 3.09, 3.893),
 						["UniqueID"] = "3522654987",
 						["EditorExpand"] = true,
 						["Bone"] = "pelvis",

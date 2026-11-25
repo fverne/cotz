@@ -30,7 +30,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(120, 90, 0),
-						["Position"] = Vector(-5, 3, -9.188),
+						["Position"] = Vector(-5, 3, -8.688),
 						["Model"] = "models/weapons/w_binocularsbp.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

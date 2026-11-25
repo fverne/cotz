@@ -38,7 +38,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(8.791, -4.174, -1.903),
+						["Position"] = Vector(8.791, -4.424, -1.903),
 						["Model"] = "models/khrcw2/doipack/w_mp40.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

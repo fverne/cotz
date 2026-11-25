@@ -32,7 +32,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(-64, 95, -173),
-						["Position"] = Vector(-8, -1, 9),
+						["Position"] = Vector(-8.25, -1, 9),
 						["Model"] = "models/weapons/w_shot_m1887.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

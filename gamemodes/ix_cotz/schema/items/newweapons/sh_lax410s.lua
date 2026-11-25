@@ -37,7 +37,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, -90, 180),
-						["Position"] = Vector(11.98, -4.153, -3.575),
+						["Position"] = Vector(11.98, -4.653, -3.575),
 						["Model"] = "models/weapons/w_bocw_ironhides.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

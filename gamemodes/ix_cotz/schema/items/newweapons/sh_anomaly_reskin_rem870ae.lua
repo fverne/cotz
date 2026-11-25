@@ -47,7 +47,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(14.98, -4.153, -1.175),
+						["Position"] = Vector(14.98, -3.403, -1.175),
 						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_remington870_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

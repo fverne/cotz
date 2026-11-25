@@ -32,7 +32,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
-						["Position"] = Vector(2.152, -5.054, -3.132),
+						["Position"] = Vector(2.152, -4.554, -3.132),
 						["Model"] = "models/weapons/w_sv98_scopeless.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

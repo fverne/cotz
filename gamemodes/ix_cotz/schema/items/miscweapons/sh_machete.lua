@@ -31,7 +31,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0.719, 93.188, -174.281),
-						["Position"] = Vector(-7.366, 6.884, 6.301),
+						["Position"] = Vector(-6.366, 6.884, 6.301),
 						["Model"] = "models/weapons/tfa_nmrih/w_me_machete.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

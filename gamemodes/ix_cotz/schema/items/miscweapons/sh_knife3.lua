@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(17.872457504272, 79.804008483887, 87.52286529541),
-						["Position"] = Vector(4.77294921875, 0.873046875, -5.71826171875),
+						["Position"] = Vector(4.773, 0.873, -5.468),
 						["Model"] = "models/bf4_sweps/w_knife_dive.mdl",
 						["ClassName"] = "model",
 						["EditorExpand"] = true,

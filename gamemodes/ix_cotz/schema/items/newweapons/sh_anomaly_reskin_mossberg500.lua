@@ -37,7 +37,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 0, 180),
-						["Position"] = Vector(-2.502, -4.31, -2.254),
+						["Position"] = Vector(-2.502, -3.06, -2.254),
 						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_mossberg590_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

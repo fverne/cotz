@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(13.989, -4.313, -1.375),
+						["Position"] = Vector(13.989, -4.063, -1.375),
 						["Model"] = "models/weapons/w_cstm_m3super90.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

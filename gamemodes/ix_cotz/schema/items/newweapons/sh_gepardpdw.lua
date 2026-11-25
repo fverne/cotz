@@ -36,7 +36,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(4.8, -4, -4),
+						["Position"] = Vector(4.8, -4.75, -4),
 						["Model"] = "models/weapons/tfa_l4d2/w_gepard.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

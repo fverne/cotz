@@ -37,7 +37,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(8.614, -4.265, 3.43),
+						["Position"] = Vector(8.614, -5.015, 3.43),
 						["Model"] = "models/flaymi/anomaly/weapons/w_models/wpn_ump45_w.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

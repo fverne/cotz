@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(14.673, -4.309, -1.334),
+						["Position"] = Vector(14.673, -5.309, -1.334),
 						["Model"] = "models/weapons/cw20_g36c.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,

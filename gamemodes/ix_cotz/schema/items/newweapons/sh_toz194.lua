@@ -35,7 +35,7 @@ ITEM.pacData = {
 					},
 					["self"] = {
 						["Angles"] = Angle(0, 180, 180),
-						["Position"] = Vector(14.98, -4.153, -1.175),
+						["Position"] = Vector(14.98, -4.403, -1.175),
 						["Model"] = "models/khrcw2/w_khri_khrtoz194.mdl",
 						["ClassName"] = "model",
 						["Translucent"] = true,
