@@ -27,7 +27,7 @@ ENT.ChasingSound.chance = 20
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.hp = 80000
+ENT.hp = 5
 
 ENT.CanJump = 0
 ENT.isAttacking = 0
@@ -131,22 +131,26 @@ end
 
 
 function ENT:STALKERNPCHitSomething()
-	self:TakeDamage( 5, self, self )
+	self:Disperse()
 end
 
-function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	local TEMP_CEffectData = EffectData()
-	TEMP_CEffectData:SetOrigin(self:GetPos() + Vector(0,0,32))
-	TEMP_CEffectData:SetColor(0)
-	TEMP_CEffectData:SetScale(120)
-	TEMP_CEffectData:SetNormal(self:GetAngles():Forward())
-	TEMP_CEffectData:SetEntity(self)
-	TEMP_CEffectData:SetAngles(self:GetAngles())
-	util.Effect( "ThumperDust", TEMP_CEffectData, false )
+function ENT:Disperse()
+	if self.dispersing then return end
+	self.dispersing = true
 
-	self:Remove()
+	local effectData = EffectData()
+	effectData:SetOrigin(self:GetPos() + Vector(0, 0, 32))
+	effectData:SetScale(120)
+	effectData:SetNormal(self:GetForward())
+	effectData:SetAngles(self:GetAngles())
+	util.Effect("ThumperDust", effectData)
 
-	return mul
+	SafeRemoveEntityDelayed(self, 0)
+end
+
+function ENT:STALKERNPCDamageTake(dmginfo, mul)
+	self:Disperse()
+	return 0
 end
 
 function ENT:STALKERNPCOnDeath()							

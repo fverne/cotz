@@ -179,20 +179,12 @@ function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
 end
 
 function ENT:STALKERNPCRemove()
-
-	local TEMP_TargetDamage = DamageInfo()						
-
-	if IsValid(self.Clone1) then self.Clone1:TakeDamage( 5, self, self ) end
-	if IsValid(self.Clone2) then self.Clone2:TakeDamage( 5, self, self ) end
-	if IsValid(self.Clone3) then self.Clone3:TakeDamage( 5, self, self ) end
-	if IsValid(self.Clone4) then self.Clone4:TakeDamage( 5, self, self ) end
-
-	
+	for index = 1, #CLONE_OFFSETS do
+		local clone = self["Clone" .. index]
+		if IsValid(clone) then clone:Disperse() end
+	end
 end
 
-function ENT:STALKERNPCOnDeath()							
-	if IsValid(self.Clone1) then self.Clone1:TakeDamage( 5, self, self ) end
-	if IsValid(self.Clone2) then self.Clone2:TakeDamage( 5, self, self ) end
-	if IsValid(self.Clone3) then self.Clone3:TakeDamage( 5, self, self ) end
-	if IsValid(self.Clone4) then self.Clone4:TakeDamage( 5, self, self ) end
+function ENT:STALKERNPCOnDeath()
+	self:STALKERNPCRemove()
 end
