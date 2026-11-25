@@ -162,7 +162,7 @@ ITEM.functions.InstallFilter = {
 		return ix.util.GetGasmaskFilterOptions(item, client)
 	end,
 	OnCanRun = function(item)
-		return ix.util.CanChangeGasmaskFilter(item, item.player)
+		return #ix.util.GetGasmaskFilterOptions(item, item.player) > 0
 	end,
 	OnRun = function(item, data)
 		ix.util.InstallGasmaskFilter(item, item.player, data)
@@ -176,6 +176,7 @@ ITEM.functions.RemoveFilter = {
 	icon = "icon16/stalker_grey/detach.png",
 	OnCanRun = function(item)
 		return ix.util.CanChangeGasmaskFilter(item, item.player) and item:GetFilterCondition() ~= false
+			and item.player:GetCharacter():GetInventory():FindEmptySlot(1, 1, true) ~= nil
 	end,
 	OnRun = function(item)
 		ix.util.RemoveGasmaskFilter(item, item.player)

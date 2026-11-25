@@ -69,12 +69,28 @@ function ix.util.CanInstallGasmaskFilter(item, filter, client, pending)
 	return inMainBackpack(filter, client:GetCharacter():GetInventory())
 end
 
+function ix.util.FindFilterReturnSlot(inventory, returned, incoming)
+	local width, height = inventory:GetSize()
+	local function fits(x, y)
+		return x and y and x >= 1 and y >= 1 and x + returned.width - 1 <= width and y + returned.height - 1 <= height
+			and inventory:CanItemFit(x, y, returned.width, returned.height, incoming)
+	end
+	if fits(incoming.gridX, incoming.gridY) then return incoming.gridX, incoming.gridY end
+	for y = 1, height - returned.height + 1 do
+		for x = 1, width - returned.width + 1 do
+			if fits(x, y) then return x, y end
+		end
+	end
+end
+
 function ix.util.GetGasmaskFilterOptions(item, client)
 	local options = {}
 	if not ix.util.CanChangeGasmaskFilter(item, client) then return options end
 	local inventory = client:GetCharacter():GetInventory()
+	local outgoingID = item.isAirTank and item:GetFilterCondition() ~= false and ix.util.GetInstalledFilterID(item)
 	for _, filter in pairs(inventory:GetItems(true)) do
-		if ix.util.CanInstallGasmaskFilter(item, filter, client) then
+		if ix.util.CanInstallGasmaskFilter(item, filter, client) and (not outgoingID or outgoingID == filter.uniqueID
+			or ix.util.FindFilterReturnSlot(inventory, ix.item.list[outgoingID], filter)) then
 			local condition = math.floor(filter:GetData("filterCondition", FULL_CONDITION))
 			local label = string.format("%s (%d%%)", filter:GetName(), condition)
 			options[#options + 1] = {name = label:gsub("%%", "%%%%"), data = {filter.id}}

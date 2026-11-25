@@ -72,7 +72,7 @@ ITEM.functions.InstallFilter = {
 		return ix.util.GetGasmaskFilterOptions(item, client)
 	end,
 	OnCanRun = function(item)
-		return item.isAirTank and ix.util.CanChangeGasmaskFilter(item, item.player)
+		return item.isAirTank == true and #ix.util.GetGasmaskFilterOptions(item, item.player) > 0
 	end,
 	OnRun = function(item, data)
 		ix.util.InstallGasmaskFilter(item, item.player, data)
@@ -505,30 +505,27 @@ ITEM.functions.Equip = {
 	end
 }
 
+local function getDetachOptions(item)
+	local options = {}
+	for _, slots in pairs(item:GetData("attachments", item.miscSlots)) do
+		for _, id in pairs(slots) do
+			local attachment = ix.armortables.attachments[id]
+			if attachment then
+				options[#options + 1] = {name = attachment.name, data = {id}}
+			end
+		end
+	end
+
+	return options
+end
+
 ITEM.functions.detach = {
 	name = "Detach",
 	icon = "icon16/stalker_grey/detach.png",
 	isMulti = true,
-	multiOptions = function(item, client)
-		local targets = {}
-		local curattach = {}
-		for _, v in pairs(item:GetData("attachments", item.miscSlots)) do
-			for _, suitAttachment in pairs(v) do
-				table.insert(curattach, suitAttachment)
-			end
-		end
-
-		for k = 1, #curattach do
-			table.insert(targets, {
-				name = ix.armortables.attachments[curattach[k]].name,
-				data = {curattach[k]},
-			})
-		end
-
-		return targets
-		end,
+	multiOptions = getDetachOptions,
 	OnCanRun = function(item)
-		return (!IsValid(item.entity) and item.canAttach and (#(item:GetData("attachments",{})) > 0))
+		return not IsValid(item.entity) and #getDetachOptions(item) > 0
 	end,
 	OnRun = function(item, data)
 		if data[1] then

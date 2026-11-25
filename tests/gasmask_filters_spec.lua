@@ -362,6 +362,9 @@ check(ix.util.GetFilterWearDivisor(tankSuit) == 400, "installed tank size sets a
 local largeTank = newFilter("air_tank_large", 100)
 inventory.blocked = true
 advance()
+for _, option in ipairs(ix.util.GetGasmaskFilterOptions(tankSuit, client)) do
+	check(option.data[1] ~= largeTank.id, "swap menu excludes tanks without room for the outgoing tank")
+end
 local blockedCreations = #creations
 ix.util.InstallGasmaskFilter(tankSuit, client, {largeTank.id})
 advance(6)
@@ -421,6 +424,18 @@ local scientific = newFilter("scientific", 100)
 local options = ix.util.GetGasmaskFilterOptions(mask, client)
 check(#options == 1 and options[1].data[1] == civilian.id and options[1].name:find("37%%%%"),
 	"picker lists only matching owned filters with escaped percentages")
+mask.player = client
+check(gearBase.functions.InstallFilter.OnCanRun(mask), "matching cartridge enables installation")
+civilian.cotzFilterPending = true
+check(gearBase.functions.InstallFilter.OnCanRun(mask) == false, "only unusable cartridges hide installation")
+civilian.cotzFilterPending = nil
+check(gearBase.functions.RemoveFilter.OnCanRun(mask) == false, "empty socket hides removal")
+mask.data.filterCondition = 0
+check(gearBase.functions.RemoveFilter.OnCanRun(mask), "exhausted cartridge can be removed")
+inventory.full = true
+check(gearBase.functions.RemoveFilter.OnCanRun(mask) == false, "full backpack hides removal")
+inventory.full = false
+mask.data.filterCondition = false
 for _, filter in ipairs({military, scientific}) do
 	advance()
 	ix.util.InstallGasmaskFilter(mask, client, {filter.id})

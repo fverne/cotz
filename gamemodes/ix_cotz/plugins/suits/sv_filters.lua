@@ -75,20 +75,6 @@ local function monitorInstallation(context)
 	timer.Simple(ACTION_CHECK_INTERVAL, function() monitorInstallation(context) end)
 end
 
-local function findReturnSlot(inventory, returned, incoming)
-	local width, height = inventory:GetSize()
-	local function fits(x, y)
-		return x and y and x >= 1 and y >= 1 and x + returned.width - 1 <= width and y + returned.height - 1 <= height
-			and inventory:CanItemFit(x, y, returned.width, returned.height, incoming)
-	end
-	if fits(incoming.gridX, incoming.gridY) then return incoming.gridX, incoming.gridY end
-	for y = 1, height - returned.height + 1 do
-		for x = 1, width - returned.width + 1 do
-			if fits(x, y) then return x, y end
-		end
-	end
-end
-
 local function completeSwap(context, incoming)
 	local item, filter = context.item, context.filter
 	item:SetData("filterCondition", incoming)
@@ -115,7 +101,7 @@ local function swapDifferentFilter(context)
 	ix.item.Instance(0, ix.util.GetInstalledFilterID(item), outgoingData, 0, 0, function(returned)
 		local valid = validContext(context) and canInteract(item, filter, client)
 		local x, y
-		if valid then x, y = findReturnSlot(inventory, returned, filter) end
+		if valid then x, y = ix.util.FindFilterReturnSlot(inventory, returned, filter) end
 		if not x or not y then
 			returned:Remove()
 			releaseAction(context)
@@ -150,7 +136,7 @@ function ix.util.InstallGasmaskFilter(item, client, data)
 	if not canInteract(item, filter, client) then return end
 	local outgoingID = item:GetFilterCondition() ~= false and ix.util.GetInstalledFilterID(item)
 	if outgoingID and outgoingID ~= filter.uniqueID
-		and not findReturnSlot(client:GetCharacter():GetInventory(), ix.item.list[outgoingID], filter) then
+		and not ix.util.FindFilterReturnSlot(client:GetCharacter():GetInventory(), ix.item.list[outgoingID], filter) then
 		client:Notify("Make room in your backpack for the returning tank.")
 
 		return

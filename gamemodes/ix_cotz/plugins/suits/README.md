@@ -109,7 +109,7 @@ Radiation no longer wears ordinary durability on filter-dependent headgear. Othe
 
 Drag a matching cartridge from the main backpack onto a mask in the backpack or onto its equipped
 card or icon, including any linked helmet/backpack card for integrated equipment. The mask can stay
-equipped. Its **Install Filter** context-menu action also lists matching backpack cartridges.
+equipped. Its **Install Filter** context-menu action appears only when a matching backpack cartridge is available.
 Installing or replacing a filter takes six seconds through the existing black-screen action bar;
 press **F** to cancel. Both cartridges stay unchanged until completion, apart from normal exposure
 wear on the installed one. The old filter continues providing its current protection during the delay.
@@ -117,7 +117,7 @@ wear on the installed one. The old filter continues providing its current protec
 Replacing an installed cartridge returns it in the incoming cartridge's backpack cell, retaining
 its actual remaining condition at completion. This works with a full backpack. Installing into an
 empty socket consumes the loose cartridge only when the action completes successfully.
-**Remove Filter** also works while equipped, requires a free backpack cell and returns a matching
+**Remove Filter** appears when a cartridge is installed and a backpack cell is free. It also works while equipped and returns a matching
 cartridge at its remaining condition, including 0%. A fresh cartridge restores 100% filter condition
 without repairing the headgear. Removed filters can be reinstalled; durability repairs cannot recharge them, but Technut refills can.
 
