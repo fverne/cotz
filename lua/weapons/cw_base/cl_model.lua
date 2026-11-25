@@ -1353,14 +1353,31 @@ end
 
 local cw_alternative_vm_pos = GetConVar("cw_alternative_vm_pos")
 
+local STUDIO_LOOPING_FLAG = 1
+
 -- Looping idle sequences contain a built-in breathing sway. Hold them at their rest pose while aiming
 -- so the sights stay steady, and let them play again once the player stops aiming.
 function SWEP:suppressIdleSwayWhileAiming(vm)
 	local idle = self.Animations and self.Animations.idle
-	local sequence = vm:GetSequenceName(vm:GetSequence())
+	local sequenceID = vm:GetSequence()
+	local sequence = vm:GetSequenceName(sequenceID)
 	local isIdle = sequence == idle or (type(idle) == "table" and table.HasValue(idle, sequence))
 
 	if not isIdle then
+		self.idleSwayFrozen = nil
+		return
+	end
+
+	-- Some weapons use the final pose of a one-shot reload as their idle.
+	local model = vm:GetModel()
+	if self.idleSwaySequenceID ~= sequenceID or self.idleSwayModel ~= model then
+		self.idleSwaySequenceID = sequenceID
+		self.idleSwayModel = model
+		local info = vm:GetSequenceInfo(sequenceID)
+		self.idleSwayLoops = info and bit.band(info.flags, STUDIO_LOOPING_FLAG) ~= 0
+	end
+
+	if not self.idleSwayLoops then
 		self.idleSwayFrozen = nil
 		return
 	end
