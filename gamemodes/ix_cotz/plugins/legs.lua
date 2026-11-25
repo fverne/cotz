@@ -84,6 +84,37 @@ if (CLIENT) then
 		self:Update(0)
 	end
 
+	-- Suits change the model, skin, and bodygroups server-side, and the networked values can arrive after
+	-- PlayerModelChanged. Re-sync every update so the legs always match the worn suit.
+	function Legs:SyncAppearance()
+		local client = LocalPlayer()
+
+		if (self.LegEnt:GetModel() ~= client:GetModel()) then
+			self.LegEnt:SetModel(client:GetModel())
+			self:FixBones()
+		end
+
+		if (self.LegEnt:GetSkin() ~= client:GetSkin()) then
+			self.LegEnt:SetSkin(client:GetSkin())
+		end
+
+		for _, group in ipairs(client:GetBodyGroups()) do
+			local current = client:GetBodygroup(group.id)
+
+			if (self.LegEnt:GetBodygroup(group.id) ~= current) then
+				self.LegEnt:SetBodygroup(group.id, current)
+			end
+		end
+
+		for index = 0, #client:GetMaterials() - 1 do
+			local subMaterial = client:GetSubMaterial(index)
+
+			if (self.LegEnt:GetSubMaterial(index) ~= subMaterial) then
+				self.LegEnt:SetSubMaterial(index, subMaterial)
+			end
+		end
+	end
+
 	Legs.PlaybackRate = 1
 	Legs.Sequence = nil
 	Legs.Velocity = 0
@@ -102,6 +133,8 @@ if (CLIENT) then
 
 	function Legs:Update(maxSeqGroundSpeed)
 		if (IsValid(self.LegEnt)) then
+			self:SyncAppearance()
+
 			self.Velocity = LocalPlayer():GetVelocity():Length2D()
 
 			self.PlaybackRate = 1
