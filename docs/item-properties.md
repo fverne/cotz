@@ -21,8 +21,8 @@ their raw Source-unit values, without conversion to metres.
 
 - `Convert(kind, value)` returns the numeric display value and unit. It rejects unknown kinds and
   nonfinite values. Negative values remain negative; conversions do not clamp gameplay values.
-- `Format(kind, value, signed)` rounds percentages except medicinal healing to whole numbers, formats other readings with at
-  most two decimals, groups thousands and optionally prefixes positive values with `+`. A nonzero
+- `Format(kind, value, signed)` keeps one decimal on protection percentages (omitting `.0`), rounds other percentages
+  except medicinal healing to whole numbers, formats other readings with at most two decimals, groups thousands and optionally prefixes positive values with `+`. A nonzero
   reading small enough to round to zero displays zero. Cleanliness appears before durability.
 - `GetRows(item)`, `GetProtection(item)`, `GetFilterRows(item)` and `GetEffects(item)` return ordered
   `{id, text}` rows without constructing panels or invoking gameplay callbacks.
@@ -84,8 +84,8 @@ tick (0.5 seconds for rapid healing or one second for slow healing), followed by
 For example, a 2 HP tick at 200 maximum HP reads `+1% per 1 second over 300 seconds`. Other buff
 readers account for their actual callback interval. Durations describe the effect after application, separately from application time.
 
-Protection readings show each effective resistance fraction as a whole-number percentage, without
-cosmetic unit conversion, followed by flat absorption rounded to one decimal (for example
+Protection readings show each effective resistance fraction as a percentage with up to one decimal. Every
+reading except radiation is capped at 90%. They have no cosmetic unit conversion, followed by flat absorption rounded to one decimal (for example
 `Ballistics: 40% + 8`). Radiation has no flat absorption reading. The value is coloured on the legacy
 scale from red (0%) to blue (100%), with full saturation outside that range. Psychic shielding from
 `buff_psyblock` is flat absorption and shows its raw amount. Attachment rows show flat absorption only

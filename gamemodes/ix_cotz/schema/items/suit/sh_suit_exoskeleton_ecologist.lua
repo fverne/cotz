@@ -14,24 +14,25 @@ ITEM.suitVariant = "ecologist"
 
 ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 430890
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 ITEM.isExoskeleton = true
 
-ITEM.br = 0.45
+ITEM.br = 0.423
 ITEM.fbr = 5
-ITEM.sr = 0.81
+ITEM.sr = 0.761
 ITEM.fsr = 5
-ITEM.impactRes = 0.30
+ITEM.impactRes = 0.662
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.30
+ITEM.ar = 0.275
 ITEM.far = 2
-ITEM.thermalRes = 0.30
+ITEM.thermalRes = 0.275
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.30
+ITEM.electricalRes = 0.275
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.30
+ITEM.chemicalRes = 0.275
 ITEM.flatChemicalRes = 2
 
 ITEM.carryinc = 64.000

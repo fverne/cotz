@@ -13,6 +13,7 @@ ITEM.baseSuit = "suit_exoskeleton"
 
 ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 430890
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
@@ -22,7 +23,7 @@ ITEM.br = 0.45
 ITEM.fbr = 5
 ITEM.sr = 0.81
 ITEM.fsr = 5
-ITEM.impactRes = 0.25
+ITEM.impactRes = 0.63
 ITEM.flatImpactRes = 2
 ITEM.ar = 0.25
 ITEM.far = 2

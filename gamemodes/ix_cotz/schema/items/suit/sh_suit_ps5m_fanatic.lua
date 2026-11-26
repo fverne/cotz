@@ -12,26 +12,29 @@ ITEM.newSkin = 26
 ITEM.baseSuit = "suit_ps5m"
 ITEM.suitVariant = "fanatic"
 
-ITEM.price = 119108
+ITEM.price = 127600
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 9530
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.18
+ITEM.br = 0.15
 ITEM.fbr = 2
-ITEM.sr = 0.24
+ITEM.sr = 0.203
 ITEM.fsr = 2
-ITEM.impactRes = 0.17
+ITEM.impactRes = 0.177
 ITEM.flatImpactRes = 1
-ITEM.ar = 0.17
+ITEM.ar = 0.144
 ITEM.far = 1
-ITEM.thermalRes = 0.17
+ITEM.thermalRes = 0.144
 ITEM.flatThermalRes = 1
-ITEM.electricalRes = 0.17
+ITEM.electricalRes = 0.144
 ITEM.flatElectricalRes = 1
-ITEM.chemicalRes = 0.17
+ITEM.chemicalRes = 0.144
 ITEM.flatChemicalRes = 1
+ITEM.pr = 0.16
+ITEM.fpr = 0
 
 ITEM.carryinc = 8.710
 ITEM.exteriorSlots = 2

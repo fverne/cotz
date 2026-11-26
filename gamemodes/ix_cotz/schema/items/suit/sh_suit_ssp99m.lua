@@ -11,8 +11,9 @@ ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.weight = 3.900
 ITEM.newSkin = 2
 
-ITEM.price = 315500
+ITEM.price = 143000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 9160
 
 ITEM.isGasmask = true
 ITEM.filterType = "air_tank"
@@ -25,7 +26,7 @@ ITEM.br = 0.10
 ITEM.fbr = 1
 ITEM.sr = 0.20
 ITEM.fsr = 0
-ITEM.impactRes = 0.70
+ITEM.impactRes = 0.15
 ITEM.flatImpactRes = 5
 ITEM.ar = 0.70
 ITEM.far = 5

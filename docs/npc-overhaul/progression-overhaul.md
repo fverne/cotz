@@ -37,7 +37,7 @@ introduction or joined ending. The Original and Arena Master retain no finite pr
 | Intern | Echo, Bear, Veles artifact detectors | None |
 
 Latch starts with the cloth mask and unlocks the remaining mask chain and operator-Russian-2/CS1/CS2 headwear. Spool starts with the Russian tank helmet and unlocks three steel helmets and the riot helmet; Haggler's tanker starter is an intentional duplicate. Boss owns
-the remainder of the helmet chain. All four trenchcoat colours share Technut's black-trenchcoat step.
+the remainder of the helmet chain. The single Trenchcoat uses Technut's former black-trenchcoat step; colour is a painted finish.
 
 Latch unlocks civilian filters immediately before Halfmask, military before EO-20, and scientific
 before M40. Boss unlocks military filters before CS-4 and scientific before Screen. These five
@@ -66,7 +66,7 @@ A stock intermission inherits its following unlock's opening classification. All
 remain category-wide even later in the chain. After the opening, a normal delivery's last, smallest
 slot uses `random`; earlier slots remain `any`. A one-slot delivery therefore becomes a specific-item
 request after its opening. Technut's first three of thirteen suit purchases are category-only:
-Mail Jacket, the trenchcoat group and Sunrise. Painting is its own category-only one-step branch.
+Mail Jacket, the Trenchcoat and Sunrise. Painting is its own category-only one-step branch.
 
 Catalogue pools may overlap, but accepted subsets are partitioned per character: one item can only
 contribute to one counter in a request. Assignment allocates the most constrained categories first,

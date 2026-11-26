@@ -1,0 +1,46 @@
+ITEM.name = "Looted Radsuit"
+ITEM.model = "models/kek1ch/exolight_outfit.mdl"
+ITEM.newModel = "models/cotz/sectorfour/male_exoskeleton.mdl"
+ITEM.description= "A radsuit"
+ITEM.longdesc = "A competently made western entry-man suit worn for high risk assaults. Bodysuit reinforced with plates can stop some assault rifle bullets, while heavy assault vest stops most ballistic threats on the battlefield. It's heavy weight makes it most useful in close quarters and a liability in open spaces."
+
+ITEM.width = 2
+ITEM.height = 3
+ITEM.img = ix.util.GetMaterial("vgui/hud/radsuit.png")
+ITEM.weight = 22.725
+ITEM.newSkin = 8
+ITEM.baseSuit = "suit_radsuit"
+ITEM.suitVariant = "looted"
+
+ITEM.price = 11000000
+ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 28850
+ITEM.meleeDamageBonus = 0.393
+
+ITEM.isGasmask = false
+ITEM.isHelmet = false
+
+ITEM.br = 0.429
+ITEM.fbr = 4
+ITEM.sr = 0.563
+ITEM.fsr = 4
+ITEM.impactRes = 0.47
+ITEM.flatImpactRes = 2
+ITEM.ar = 0.291
+ITEM.far = 2
+ITEM.thermalRes = 0.291
+ITEM.flatThermalRes = 2
+ITEM.electricalRes = 0.291
+ITEM.flatElectricalRes = 2
+ITEM.chemicalRes = 0.291
+ITEM.flatChemicalRes = 2
+
+ITEM.carryinc = 17.46
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 3
+ITEM.extraSlots = 2
+
+ITEM.bodyGroups = {
+	["Exoskeleton"] = 1,
+}
+ITEM.skincustom = ix.suitAppearance.SkinOptions(0, 36)

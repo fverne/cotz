@@ -1,5 +1,13 @@
 ix.suits = ix.suits or {}
 
+-- No protection except radiation goes above this, on a definition's tooltip or as a worn total.
+ix.suits.MAX_PROTECTION = 0.9
+
+-- Worn totals are damage multipliers, so the protection cap is their floor.
+function ix.suits.CapDamageMultiplier(multiplier)
+	return math.max(multiplier, 1 - ix.suits.MAX_PROTECTION)
+end
+
 ix.suits.anomalyTypes = {
 	{
 		name = "Thermal", field = "thermalRes", flatField = "flatThermalRes", network = "thermal",

@@ -12,17 +12,18 @@ ITEM.newSkin = 8
 ITEM.baseSuit = "suit_skat10"
 ITEM.suitVariant = "authority"
 
-ITEM.price = 666820
+ITEM.price = 2805000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 16930
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.30
+ITEM.br = 0.301
 ITEM.fbr = 3
-ITEM.sr = 0.52
-ITEM.fsr = 4
-ITEM.impactRes = 0.20
+ITEM.sr = 0.551
+ITEM.fsr = 3
+ITEM.impactRes = 0.376
 ITEM.flatImpactRes = 2
 ITEM.ar = 0.20
 ITEM.far = 2

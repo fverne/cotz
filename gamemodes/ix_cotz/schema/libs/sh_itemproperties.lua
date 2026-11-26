@@ -14,6 +14,12 @@ local UNITS = {
 	weight = {1, "kg"}, duration = {1, "s"}, percent = {1, "%"}, number = {1, ""},
 }
 
+-- Protection keeps one decimal, so small differences between suit variants stay visible.
+local PROTECTION_KINDS = {
+	thermal = true, electrical = true, chemical = true, anomalous = true, ballistics = true,
+	rupture = true, impact = true, psychic = true, radiation = true,
+}
+
 function ix.itemProperties.Convert(kind, value)
 	local definition = assert(UNITS[kind], "Unknown item property unit: " .. tostring(kind))
 	assert(type(value) == "number" and value == value and math.abs(value) < math.huge, "Invalid property value")
@@ -24,7 +30,9 @@ end
 function ix.itemProperties.Format(kind, value, signed)
 	local converted, unit = ix.itemProperties.Convert(kind, value)
 	local text
-	if (unit == "%" or unit == "%/s") and kind ~= "healthRate" then
+	if PROTECTION_KINDS[kind] then
+		text = string.format("%.1f", math.Round(converted, 1)):gsub("%.0$", "")
+	elseif (unit == "%" or unit == "%/s") and kind ~= "healthRate" then
 		text = string.format("%.0f", math.Round(converted))
 	else
 		text = string.format("%.2f", converted):gsub("0+$", ""):gsub("%.$", "")
@@ -63,6 +71,7 @@ function ix.itemProperties.GetProtection(item)
 		if (reduction == nil or reduction == 0) and (flat == nil or flat == 0) then return end
 
 		reduction = reduction or 0
+		if id ~= "radiation" then reduction = math.min(reduction, ix.suits.MAX_PROTECTION) end
 		local valueText = ix.itemProperties.Format(id, reduction)
 		if flat ~= nil then
 			valueText = valueText .. " + " .. ix.itemProperties.Format("number", math.Round(flat, 1))

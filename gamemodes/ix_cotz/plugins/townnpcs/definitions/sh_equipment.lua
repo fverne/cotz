@@ -160,12 +160,12 @@ PLUGIN.upgradeChains = {
 	{
 		"suit_anorak",
 		"suit_mailjacket",
-		"suit_trenchcoat_black",
+		"suit_trenchcoat",
 		"suit_sunrise",
 		"suit_wind",
 		"suit_nbc",
 	},
-	{"suit_cs1", "suit_cs2", "suit_cs3"},
+	{"suit_cs1", "suit_cs2", "suit_cs5"},
 	{"suit_io7a", "suit_ps5m", "suit_berill", "suit_skat10", "suit_skat9"},
 	{"suit_ssp99", "suit_ssp99m", "suit_seva"},
 	{"mask_cloth", "mask_halfmask", "mask_respirator", "mask_gp5", "mask_eo20",
@@ -424,10 +424,10 @@ PLUGIN.variantUnlocks = {
 		step = "v3/suit-variants/suit_berill",
 		base = "suit_berill",
 	},
-	suit_cs3_ecologist = {
+	suit_cs5_ecologist = {
 		contact = "suture",
 		step = "v3/suit-variants/suit_cs3",
-		base = "suit_cs3",
+		base = "suit_cs5",
 	},
 	suit_seva_ecologist = {
 		contact = "suture",
@@ -498,6 +498,201 @@ PLUGIN.variantUnlocks = {
 		contact = "suture",
 		step = "v3/suit-variants/suit_skat9",
 		base = "suit_skat9",
+	},
+	suit_anorak_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_anorak",
+		base = "suit_anorak",
+	},
+	suit_mailjacket_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_mailjacket",
+		base = "suit_mailjacket",
+	},
+	suit_trenchcoat_authority = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_trenchcoat",
+		base = "suit_trenchcoat",
+	},
+	suit_trenchcoat_mercenary = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_trenchcoat",
+		base = "suit_trenchcoat",
+	},
+	suit_trenchcoat_ecologist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_trenchcoat",
+		base = "suit_trenchcoat",
+	},
+	suit_trenchcoat_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_trenchcoat",
+		base = "suit_trenchcoat",
+	},
+	suit_trenchcoat_anarchist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_trenchcoat",
+		base = "suit_trenchcoat",
+	},
+	suit_trenchcoat_scavenger = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_trenchcoat",
+		base = "suit_trenchcoat",
+	},
+	suit_sunrise_ecologist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_sunrise",
+		base = "suit_sunrise",
+	},
+	suit_cs1_authority = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs1",
+		base = "suit_cs1",
+	},
+	suit_cs1_mercenary = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs1",
+		base = "suit_cs1",
+	},
+	suit_cs1_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs1",
+		base = "suit_cs1",
+	},
+	suit_cs1_anarchist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs1",
+		base = "suit_cs1",
+	},
+	suit_wind_mercenary = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_wind",
+		base = "suit_wind",
+	},
+	suit_wind_ecologist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_wind",
+		base = "suit_wind",
+	},
+	suit_wind_scavenger = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_wind",
+		base = "suit_wind",
+	},
+	suit_ps5m_scavenger = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_ps5m",
+		base = "suit_ps5m",
+	},
+	suit_cs2_authority = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs2",
+		base = "suit_cs2",
+	},
+	suit_cs2_mercenary = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs2",
+		base = "suit_cs2",
+	},
+	suit_cs2_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs2",
+		base = "suit_cs2",
+	},
+	suit_cs2_anarchist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs2",
+		base = "suit_cs2",
+	},
+	suit_nbc_mercenary = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_nbc",
+		base = "suit_nbc",
+	},
+	suit_nbc_ecologist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_nbc",
+		base = "suit_nbc",
+	},
+	suit_nbc_scavenger = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_nbc",
+		base = "suit_nbc",
+	},
+	suit_berill_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_berill",
+		base = "suit_berill",
+	},
+	suit_seva_scavenger = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_seva",
+		base = "suit_seva",
+	},
+	suit_skat10_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_skat10",
+		base = "suit_skat10",
+	},
+	suit_skat10_scavenger = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_skat10",
+		base = "suit_skat10",
+	},
+	suit_skat9_mercenary = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_skat9",
+		base = "suit_skat9",
+	},
+	suit_cs5_authority = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs3",
+		base = "suit_cs5",
+	},
+	suit_cs5_mercenary = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs3",
+		base = "suit_cs5",
+	},
+	suit_cs5_fanatic = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs3",
+		base = "suit_cs5",
+	},
+	suit_cs5_anarchist = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs3",
+		base = "suit_cs5",
+	},
+	suit_cs5_scavenger = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_cs3",
+		base = "suit_cs5",
+	},
+	suit_ssp99_ruby = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_ssp99",
+		base = "suit_ssp99",
+	},
+	suit_ssp99_sapphire = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_ssp99",
+		base = "suit_ssp99",
+	},
+	suit_ssp99_emerald = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_ssp99",
+		base = "suit_ssp99",
+	},
+	suit_ssp99_amethyst = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_ssp99",
+		base = "suit_ssp99",
+	},
+	suit_ssp99_diamond = {
+		contact = "suture",
+		step = "v3/suit-variants/suit_ssp99",
+		base = "suit_ssp99",
 	},
 }
 
@@ -784,7 +979,7 @@ PLUGIN.canonicalSellers = {
 	suit_berill = "technut",
 	suit_cs1 = "technut",
 	suit_cs2 = "technut",
-	suit_cs3 = "technut",
+	suit_cs5 = "technut",
 	suit_io7a = "technut",
 	suit_mailjacket = "technut",
 	suit_nbc = "technut",
@@ -795,10 +990,7 @@ PLUGIN.canonicalSellers = {
 	suit_ssp99 = "egghead",
 	suit_ssp99m = "egghead",
 	suit_sunrise = "technut",
-	suit_trenchcoat_black = "technut",
-	suit_trenchcoat_brown = "technut",
-	suit_trenchcoat_green = "technut",
-	suit_trenchcoat_tan = "technut",
+	suit_trenchcoat = "technut",
 	suit_wind = "technut",
 	sv98 = "spoor",
 	svd = "vesper",

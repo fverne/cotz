@@ -8,10 +8,12 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/radsuit.png")
 ITEM.weight = 35.00
+ITEM.baseSuit = "suit_nosorog"
 ITEM.newSkin = 28
 
 ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 430890
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
@@ -20,7 +22,7 @@ ITEM.br = 0.48
 ITEM.fbr = 5
 ITEM.sr = 0.86
 ITEM.fsr = 5
-ITEM.impactRes = 0.26
+ITEM.impactRes = 0.67
 ITEM.flatImpactRes = 2
 ITEM.ar = 0.26
 ITEM.far = 2

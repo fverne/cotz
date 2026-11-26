@@ -128,6 +128,46 @@ Tank tooltips and condition bars show remaining air. Other tooltips show the req
 Equipment cards show the teal filter/tank bar above ordinary durability. Tooltips list filter/tank condition before durability.
 Protection tooltips and the equipment footer use effective radiation resistance.
 
+## Suit families and variants
+
+Each concrete suit declares its own protection, price, repair cost, weight, carry bonus and slots. The
+[variant plan](../../../../docs/suit-variant-plan.md) records the rules behind the values and full tables.
+
+- Every family offers Authority, Mercenary, Ecologist, Fanatic, Anarchist, Scavenger and Looted variants.
+  SSP-99 offers Ruby, Sapphire, Emerald, Amethyst and Diamond instead. SSP-99M has none.
+- Variants keep the base suit's flat protection, repair cost and slots; Anarchist adds one misc slot.
+- Base impact is the average of bullet and rupture. SEVA's rupture and impact are lower by hand.
+- Sky-3, Sky-4 and Expedition have definitions but no shop entry or progression yet, so players cannot get
+  them. Looted variants are not offered by Suture's conversion service.
+
+**Protection cap.** Worn totals in every family except radiation stop at 90% (`ix.suits.MAX_PROTECTION`).
+The damage multiplier cannot go below 0.1 however suits, headgear, attachments and upgrades stack. Protection
+tooltips show the same cap.
+
+**Repair cost.** `ITEM.fullRepairCost` is what a full repair costs before discounts, independent of price.
+`GetRepairCost` returns 1/200 of it because the repair service charges per missing point and doubles it.
+
+**Misc slots.** A suit saves its slot limits in `maxMiscSlots` when created and refreshes them only through the
+Equip action. An owned Anarchist suit gains its new slot after being taken off and put on again. Tooltips show
+the saved limit.
+
+**Looted melee.** A definition's `meleeDamageBonus` (the average of the base suit's bullet, rupture, impact
+and three anomaly values) raises damage from `tfa_nmrimelee_base` weapons against players and NPCs, and returns
+the stamina of a swing that hits. Wear and attachments do not change it. Misses cost stamina, the 20 stamina
+minimum to swing still applies, and fists are excluded. It does not apply where this plugin skips damage
+handling (PVP disabled or arena fights between players).
+
+**Saved-item conversion.** On every database connection, `sv_migration.lua` converts rows in `ix_items`:
+
+- The four colour trenchcoats become `suit_trenchcoat` and keep their colour in `legacyCoatSkin` until repainted.
+- Old Sky-3 (`suit_cs3`, `suit_cs3_ecologist`) becomes Sky-5. New Sky-3 items reuse those IDs and carry
+  `skyLineVersion`, so the conversion skips them. Keep `ITEM.skyLineVersion` on those two definitions.
+
+Each statement is one `UPDATE` that no longer matches what it changed, so repeat boots and several map servers
+are safe. Deploy all map servers together: a server still on the old definitions cannot load converted items.
+Back up the database before the first deployment. Characters keep their purchase and conversion unlocks,
+because Sky-5 and the Trenchcoat reuse the old progression step IDs.
+
 ## Saved state and inventory safety
 
 Installed condition lives in the equipment's `filterCondition` item data. Numbers from 0–100 mean an
@@ -158,6 +198,8 @@ Placement counts the returning cartridge's existing carried mass only once, incl
 Run from the repository root:
 
 ```sh
+luatex --luaonly tests/suit_variants_spec.lua
+python3 tests/suit_migration_spec.py
 luatex --luaonly tests/anomaly_resistance_spec.lua
 luatex --luaonly tests/gasmask_filters_spec.lua
 luatex --luaonly tests/headgear_durability_spec.lua

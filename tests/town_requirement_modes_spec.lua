@@ -33,7 +33,7 @@ for slug, contact in pairs(ix.townNPCs.contacts) do
 		end
 	end
 end
-check(contacts == 25 and branches == 52, "all finite town contacts and independent branches are covered")
+check(contacts == 25 and branches == 54, "all finite town contacts and independent branches are covered")
 ix.progression.AuditDefinitions()
 local fresh = context.fixture.character()
 ix.progression.AssignActiveRequirements(fresh)

@@ -13,8 +13,9 @@ ITEM.weight = 10.608
 ITEM.baseSuit = "suit_seva"
 ITEM.suitVariant = "mercenary"
 
-ITEM.price = 588500
+ITEM.price = 1650000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 16240
 
 ITEM.isGasmask = true
 ITEM.filterType = "air_tank"
@@ -23,22 +24,22 @@ ITEM.filterWearDivisor = 700
 ITEM.isHelmet = true
 ITEM.isBackpack = true
 
-ITEM.br = 0.25
-ITEM.fbr = 2
-ITEM.sr = 0.35
+ITEM.br = 0.253
+ITEM.fbr = 1
+ITEM.sr = 0.291
 ITEM.fsr = 2
-ITEM.impactRes = 0.53
+ITEM.impactRes = 0.27
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.53
+ITEM.ar = 0.558
 ITEM.far = 2
-ITEM.thermalRes = 0.53
+ITEM.thermalRes = 0.605
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.53
+ITEM.electricalRes = 0.534
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.53
+ITEM.chemicalRes = 0.534
 ITEM.flatChemicalRes = 2
 
-ITEM.pr = 0.45
+ITEM.pr = 0.437
 ITEM.fpr = 0
 
 ITEM.radProt = 0.98

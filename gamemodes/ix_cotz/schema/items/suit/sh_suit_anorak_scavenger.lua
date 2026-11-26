@@ -14,24 +14,26 @@ ITEM.suitVariant = "scavenger"
 
 ITEM.price = 7359
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 3770
 
 ITEM.isGasmask = false 
 ITEM.isHelmet = false
 
 ITEM.br = 0.01
 ITEM.fbr = 1
-ITEM.sr = 0.13
+ITEM.sr = 0.107
 ITEM.fsr = 1
-ITEM.impactRes = 0.06
+ITEM.impactRes = 0.058
 ITEM.flatImpactRes = 1
-ITEM.ar = 0.06
+ITEM.ar = 0.051
 ITEM.far = 1
-ITEM.thermalRes = 0.06
+ITEM.thermalRes = 0.049
 ITEM.flatThermalRes = 1
-ITEM.electricalRes = 0.06
+ITEM.electricalRes = 0.055
 ITEM.flatElectricalRes = 1
-ITEM.chemicalRes = 0.06
+ITEM.chemicalRes = 0.049
 ITEM.flatChemicalRes = 1
+ITEM.radProt = 0.049
 
 ITEM.carryinc = 6.180
 ITEM.exteriorSlots = 1

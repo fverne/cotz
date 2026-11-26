@@ -14,23 +14,24 @@ ITEM.suitVariant = "authority"
 
 ITEM.price = 53570
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 7300
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.13
+ITEM.br = 0.11
 ITEM.fbr = 2
-ITEM.sr = 0.22
-ITEM.fsr = 2
-ITEM.impactRes = 0.06
+ITEM.sr = 0.197
+ITEM.fsr = 1
+ITEM.impactRes = 0.135
 ITEM.flatImpactRes = 1
-ITEM.ar = 0.06
+ITEM.ar = 0.051
 ITEM.far = 1
-ITEM.thermalRes = 0.06
+ITEM.thermalRes = 0.051
 ITEM.flatThermalRes = 1
-ITEM.electricalRes = 0.06
+ITEM.electricalRes = 0.051
 ITEM.flatElectricalRes = 1
-ITEM.chemicalRes = 0.06
+ITEM.chemicalRes = 0.051
 ITEM.flatChemicalRes = 1
 
 ITEM.carryinc = 7.340

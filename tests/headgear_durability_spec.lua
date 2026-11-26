@@ -142,6 +142,8 @@ local suitsPath = "gamemodes/ix_cotz/plugins/suits/sh_plugin.lua"
 local suitsSource = readSource(suitsPath)
 suitsSource = suitsSource:gsub("!=", "~="):gsub("!", "not ")
 assert(load(suitsSource, "@" .. suitsPath, "t", _G))()
+-- The Looted melee perk lives in sv_meleeperk.lua and is covered by suit_variants_spec.
+PLUGIN.ApplyMeleePerk = function() end
 client.GetNWFloat = function() return 1 end
 client.GetNWInt = function() return 0 end
 client.getEquippedBodyArmor = function() return nil end

@@ -9,12 +9,13 @@ ITEM.width = 2
 ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/seva.png")
 ITEM.overlayPath = "vgui/overlays/hud_sci"
-ITEM.weight = 6.204
+ITEM.weight = 6.24
 ITEM.baseSuit = "suit_seva"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 588500
+ITEM.price = 1650000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 16240
 
 ITEM.isGasmask = true
 ITEM.filterType = "air_tank"
@@ -23,22 +24,22 @@ ITEM.filterWearDivisor = 700
 ITEM.isHelmet = true
 ITEM.isBackpack = true
 
-ITEM.br = 0.22
+ITEM.br = 0.207
 ITEM.fbr = 1
-ITEM.sr = 0.35
+ITEM.sr = 0.282
 ITEM.fsr = 2
-ITEM.impactRes = 0.77
-ITEM.flatImpactRes = 3
-ITEM.ar = 0.77
-ITEM.far = 3
-ITEM.thermalRes = 0.77
-ITEM.flatThermalRes = 3
-ITEM.electricalRes = 0.77
-ITEM.flatElectricalRes = 3
-ITEM.chemicalRes = 0.77
-ITEM.flatChemicalRes = 3
+ITEM.impactRes = 0.247
+ITEM.flatImpactRes = 2
+ITEM.ar = 0.605
+ITEM.far = 2
+ITEM.thermalRes = 0.605
+ITEM.flatThermalRes = 2
+ITEM.electricalRes = 0.605
+ITEM.flatElectricalRes = 2
+ITEM.chemicalRes = 0.605
+ITEM.flatChemicalRes = 2
 
-ITEM.pr = 0.47
+ITEM.pr = 0.423
 ITEM.fpr = 0
 
 ITEM.radProt = 0.98

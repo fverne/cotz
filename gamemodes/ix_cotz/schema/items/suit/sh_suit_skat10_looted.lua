@@ -12,25 +12,27 @@ ITEM.newSkin = 24
 ITEM.baseSuit = "suit_skat10"
 ITEM.suitVariant = "looted"
 
-ITEM.price = 242480
+ITEM.price = 2805000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 16930
+ITEM.meleeDamageBonus = 0.306
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.29
+ITEM.br = 0.352
 ITEM.fbr = 3
-ITEM.sr = 0.44
+ITEM.sr = 0.465
 ITEM.fsr = 3
-ITEM.impactRes = 0.20
+ITEM.impactRes = 0.388
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.20
+ITEM.ar = 0.207
 ITEM.far = 2
-ITEM.thermalRes = 0.20
+ITEM.thermalRes = 0.207
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.20
+ITEM.electricalRes = 0.207
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.20
+ITEM.chemicalRes = 0.207
 ITEM.flatChemicalRes = 2
 
 ITEM.carryinc = 11.43

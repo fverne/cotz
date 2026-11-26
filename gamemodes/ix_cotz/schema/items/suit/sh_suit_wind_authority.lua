@@ -12,25 +12,26 @@ ITEM.newSkin = 37
 ITEM.baseSuit = "suit_wind"
 ITEM.suitVariant = "authority"
 
-ITEM.price = 109450
+ITEM.price = 118800
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 9270
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.14
+ITEM.br = 0.118
 ITEM.fbr = 2
-ITEM.sr = 0.28
-ITEM.fsr = 2
-ITEM.impactRes = 0.17
+ITEM.sr = 0.248
+ITEM.fsr = 1
+ITEM.impactRes = 0.161
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.17
+ITEM.ar = 0.144
 ITEM.far = 2
-ITEM.thermalRes = 0.17
+ITEM.thermalRes = 0.144
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.17
+ITEM.electricalRes = 0.144
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.17
+ITEM.chemicalRes = 0.144
 ITEM.flatChemicalRes = 2
 
 ITEM.carryinc = 5.100

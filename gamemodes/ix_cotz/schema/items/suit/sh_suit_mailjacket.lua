@@ -13,23 +13,24 @@ ITEM.baseSuit = "suit_mailjacket"
 
 ITEM.price = 17530
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 5200
 
 ITEM.isGasmask = false 
 ITEM.isHelmet = false
 
-ITEM.br = 0.06
+ITEM.br = 0.057
 ITEM.fbr = 1
-ITEM.sr = 0.14
+ITEM.sr = 0.132
 ITEM.fsr = 1
-ITEM.impactRes = 0.06
+ITEM.impactRes = 0.095
 ITEM.flatImpactRes = 1
-ITEM.ar = 0.06
+ITEM.ar = 0.057
 ITEM.far = 1
-ITEM.thermalRes = 0.06
+ITEM.thermalRes = 0.057
 ITEM.flatThermalRes = 1
-ITEM.electricalRes = 0.06
+ITEM.electricalRes = 0.057
 ITEM.flatElectricalRes = 1
-ITEM.chemicalRes = 0.06
+ITEM.chemicalRes = 0.057
 ITEM.flatChemicalRes = 1
 
 ITEM.carryinc = 4.840

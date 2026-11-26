@@ -10,28 +10,32 @@ ITEM.img = ix.util.GetMaterial("vgui/hud/radsuit.png")
 ITEM.weight = 33.00
 ITEM.newSkin = 29
 ITEM.baseSuit = "suit_exoskeleton"
+ITEM.suitVariant = "fanatic"
 
 ITEM.price = 9999999999
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 430890
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 ITEM.isExoskeleton = true
 
-ITEM.br = 0.46
-ITEM.fbr = 6
-ITEM.sr = 0.82
-ITEM.fsr = 6
-ITEM.impactRes = 0.26
-ITEM.flatImpactRes = 3
-ITEM.ar = 0.26
-ITEM.far = 3
-ITEM.thermalRes = 0.26
-ITEM.flatThermalRes = 3
-ITEM.electricalRes = 0.26
-ITEM.flatElectricalRes = 3
-ITEM.chemicalRes = 0.26
-ITEM.flatChemicalRes = 3
+ITEM.br = 0.437
+ITEM.fbr = 5
+ITEM.sr = 0.786
+ITEM.fsr = 5
+ITEM.impactRes = 0.611
+ITEM.flatImpactRes = 2
+ITEM.ar = 0.263
+ITEM.far = 2
+ITEM.thermalRes = 0.263
+ITEM.flatThermalRes = 2
+ITEM.electricalRes = 0.263
+ITEM.flatElectricalRes = 2
+ITEM.chemicalRes = 0.263
+ITEM.flatChemicalRes = 2
+ITEM.pr = 0.437
+ITEM.fpr = 0
 
 ITEM.carryinc = 64.000
 ITEM.exteriorSlots = 2

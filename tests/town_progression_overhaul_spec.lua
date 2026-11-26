@@ -95,9 +95,10 @@ check(ix.progression.CanBuyItem(previousStashCharacter, "'Old Timer'", "hidestas
 check(ix.progression.CanBuyItem(previousStashCharacter, "'Old Timer'", "hidestasher_shovel"),
 	"saved shovel access survives the inserted prerequisite")
 local technut = ix.townNPCs.contacts.technut
-for _, colour in ipairs({"brown", "green", "tan"}) do
-	check(technut.catalogue["suit_trenchcoat_" .. colour].step == technut.catalogue.suit_trenchcoat_black.step,
-		"all trenchcoat colours share a purchase unlock")
+check(technut.catalogue.suit_trenchcoat.step == "v3/suits/suit_trenchcoat_black",
+	"the single trenchcoat keeps the saved purchase unlock")
+for _, colour in ipairs({"black", "brown", "green", "tan"}) do
+	check(not technut.catalogue["suit_trenchcoat_" .. colour], "retired coat colours are not sold")
 end
 local weight, rows = 0, 0
 for slug, contact in pairs(ix.townNPCs.contacts) do

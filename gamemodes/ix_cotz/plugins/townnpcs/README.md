@@ -44,8 +44,8 @@ Restart matching code on all map servers; no save reset or first-time setup is r
 ## Current progression, 9 November 2026
 
 The [progression overhaul](../../../../docs/npc-overhaul/progression-overhaul.md) is authoritative over
-the earlier progression, catalogue and service descriptions below. There are 675 milestones (639 hand-ins and 36 hideout installation objectives)
-in 52 branches, retaining current `v3/` IDs and adding 231 stock deliveries. Brass's regular-ammunition stock
+the earlier progression, catalogue and service descriptions below. There are 677 milestones (641 hand-ins and 36 hideout installation objectives)
+in 54 branches, retaining current `v3/` IDs and adding 231 stock deliveries. Brass's regular-ammunition stock
 deliveries branch off their calibre milestones; the other contacts' `/stock` intermissions precede the next unlock.
 Technut's initial anorak stock delivery and eleven intermediate stock-preparation deliveries are retired.
 Anoraks remain starting stock; suit progression starts with the Mail Jacket and follows each preceding suit
@@ -125,7 +125,9 @@ are removed. Suture's conversion milestones explicitly say "variants". Old Timer
 `preserveProgression = true` so the authoring tool retains their ordering, quantities and stock stages.
 Mode and candidate-pool authoring still applies to these contacts.
 Technut also declares it to preserve the suit route without regenerating stock intermissions.
-Technut keeps painting and all ordinary suits; Egghead owns science suits. All trenchcoat colours share a step. Suture owns the starting
+Technut keeps painting and all ordinary suits; Egghead owns science suits. Technut sells one Trenchcoat on the former black trenchcoat step. Sky-5 uses the former Sky-3 step IDs;
+Sky-3, Sky-4 and Expedition are not in progression. Suture converts every non-looted variant of the suits it
+serves, with separate one-step branches for Trenchcoat and SSP-99 variants. Suture owns the starting
 conversion menu and per-suit non-looted finishes. Intern owns artifact detectors. Brass/Carbon provide
 HP/AP barter only, gated by regular/HP completions respectively. Starter stock is explicitly declared.
 Ballast, Cleaner and Ledger buy all at 0.3 and provide twelve local hideout improvement stages.

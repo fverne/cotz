@@ -12,28 +12,29 @@ ITEM.newSkin = 14
 ITEM.baseSuit = "suit_radsuit"
 ITEM.suitVariant = "authority"
 
-ITEM.price = 3301012
+ITEM.price = 11000000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 28850
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.39
+ITEM.br = 0.367
 ITEM.fbr = 4
-ITEM.sr = 0.67
-ITEM.fsr = 5
-ITEM.impactRes = 0.29
+ITEM.sr = 0.667
+ITEM.fsr = 4
+ITEM.impactRes = 0.456
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.29
+ITEM.ar = 0.282
 ITEM.far = 2
-ITEM.thermalRes = 0.29
+ITEM.thermalRes = 0.282
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.29
+ITEM.electricalRes = 0.282
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.29
+ITEM.chemicalRes = 0.282
 ITEM.flatChemicalRes = 2
 
-ITEM.carryinc = 18.36
+ITEM.carryinc = 17.99
 ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 3
 ITEM.extraSlots = 2

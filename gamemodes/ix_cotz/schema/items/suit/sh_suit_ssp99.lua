@@ -9,10 +9,12 @@ ITEM.height = 3
 ITEM.img = ix.util.GetMaterial("vgui/hud/ssp99.png")
 ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.weight = 2.900
+ITEM.baseSuit = "suit_ssp99"
 ITEM.newSkin = 1
 
-ITEM.price = 96000
+ITEM.price = 143000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 9160
 
 ITEM.isGasmask = true
 ITEM.filterType = "air_tank"
@@ -25,7 +27,7 @@ ITEM.br = 0.01
 ITEM.fbr = 1
 ITEM.sr = 0.01
 ITEM.fsr = 0
-ITEM.impactRes = 0.70
+ITEM.impactRes = 0.01
 ITEM.flatImpactRes = 5
 ITEM.ar = 0.70
 ITEM.far = 5

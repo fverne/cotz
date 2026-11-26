@@ -11,25 +11,26 @@ ITEM.weight = 11.000
 ITEM.newSkin = 0
 ITEM.baseSuit = "suit_ps5m"
 
-ITEM.price = 108280
+ITEM.price = 116000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 9530
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.17
+ITEM.br = 0.155
 ITEM.fbr = 2
-ITEM.sr = 0.23
+ITEM.sr = 0.209
 ITEM.fsr = 2
-ITEM.impactRes = 0.15
+ITEM.impactRes = 0.182
 ITEM.flatImpactRes = 1
-ITEM.ar = 0.15
+ITEM.ar = 0.137
 ITEM.far = 1
-ITEM.thermalRes = 0.15
+ITEM.thermalRes = 0.137
 ITEM.flatThermalRes = 1
-ITEM.electricalRes = 0.15
+ITEM.electricalRes = 0.137
 ITEM.flatElectricalRes = 1
-ITEM.chemicalRes = 0.15
+ITEM.chemicalRes = 0.137
 ITEM.flatChemicalRes = 1
 
 ITEM.carryinc = 8.800

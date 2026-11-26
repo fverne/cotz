@@ -12,28 +12,29 @@ ITEM.newSkin = 4
 ITEM.baseSuit = "suit_skat9"
 ITEM.suitVariant = "scavenger"
 
-ITEM.price = 1199000
+ITEM.price = 5500000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 20580
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.35
+ITEM.br = 0.354
 ITEM.fbr = 4
-ITEM.sr = 0.52
+ITEM.sr = 0.516
 ITEM.fsr = 3
-ITEM.impactRes = 0.22
+ITEM.impactRes = 0.436
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.22
+ITEM.ar = 0.232
 ITEM.far = 2
-ITEM.thermalRes = 0.22
+ITEM.thermalRes = 0.222
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.22
+ITEM.electricalRes = 0.252
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.22
+ITEM.chemicalRes = 0.222
 ITEM.flatChemicalRes = 2
 
-ITEM.carryinc = 33.620
+ITEM.carryinc = 33.60
 ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 3
 ITEM.extraSlots = 1

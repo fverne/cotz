@@ -8,6 +8,8 @@ ix.util.Include("sh_resistances.lua")
 ix.util.Include("sh_durability.lua")
 ix.util.Include("sh_filters.lua")
 ix.util.Include("sv_filters.lua")
+ix.util.Include("sv_meleeperk.lua")
+ix.util.Include("sv_migration.lua")
 
 ix.config.Add("disablePVP", true, "If true, disables player versus player damage.", nil, {
 	category = "pvp",
@@ -33,6 +35,9 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 			return
 		end
 	end
+
+	-- Before the target's own protection, so the bonus raises the attack rather than bypassing armor.
+	if SERVER then self:ApplyMeleePerk(target, dmginfo) end
 
 	-- Radiation and psychic damage are handled before their respective health overrides.
 	if target:IsPlayer() and not dmginfo:IsDamageType(DMG_RADIATION)
@@ -167,7 +172,7 @@ function playerMeta:getPercentageBulletRes()
 		end
 	end
 
-	return res
+	return ix.suits.CapDamageMultiplier(res)
 end
 
 function playerMeta:getFlatBulletRes()
@@ -208,7 +213,7 @@ function playerMeta:getPercentageSlashRes()
 		end
 	end
 
-	return res
+	return ix.suits.CapDamageMultiplier(res)
 end
 
 function playerMeta:getFlatSlashRes()
@@ -250,7 +255,7 @@ function playerMeta:getPercentageAnomalyRes(field)
 		end
 	end
 
-	return res
+	return ix.suits.CapDamageMultiplier(res)
 end
 
 function playerMeta:getFlatAnomalyRes(field)
@@ -292,7 +297,7 @@ function playerMeta:getPercentagePsyRes()
 		end
 	end
 
-	return res
+	return ix.suits.CapDamageMultiplier(res)
 end
 
 function playerMeta:getFlatPsyRes()

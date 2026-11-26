@@ -15,6 +15,7 @@ ITEM.suitVariant = "anarchist"
 
 ITEM.price = 181500
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 10970
 
 ITEM.isGasmask = true
 ITEM.filterType = "air_tank"
@@ -22,22 +23,22 @@ ITEM.isAirTank = true
 ITEM.filterWearDivisor = 700
 ITEM.isHelmet = true
 
-ITEM.br = 0.09
+ITEM.br = 0.087
 ITEM.fbr = 1
-ITEM.sr = 0.17
+ITEM.sr = 0.165
 ITEM.fsr = 1
-ITEM.impactRes = 0.20
+ITEM.impactRes = 0.126
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.20
+ITEM.ar = 0.203
 ITEM.far = 2
-ITEM.thermalRes = 0.20
+ITEM.thermalRes = 0.194
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.20
+ITEM.electricalRes = 0.194
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.20
+ITEM.chemicalRes = 0.22
 ITEM.flatChemicalRes = 2
 
-ITEM.pr = 0.13
+ITEM.pr = 0.097
 ITEM.fpr = 0
 ITEM.radProt = 0.90
 ITEM.flatRadProt = 0.02
@@ -45,7 +46,7 @@ ITEM.flatRadProt = 0.02
 ITEM.carryinc = 6.190
 ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 1
-ITEM.extraSlots = 0
+ITEM.extraSlots = 1
 
 ITEM.bodyGroups = {
 	["Head"] = 1,

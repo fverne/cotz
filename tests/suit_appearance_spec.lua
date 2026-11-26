@@ -73,6 +73,7 @@ local MODELS = {
 	["models/cotz/sectorfour/male_exoskeleton.mdl"] = {
 		skins = 37, groups = {Head = 2, gloves = 2, Exoskeleton = 2},
 	},
+	["models/cotz/sectorfour/male_outfit_expedition.mdl"] = {skins = 11, groups = {Head = 2, gloves = 2}},
 	["models/cotz/sectorfour/male_hawk.mdl"] = {skins = 40, groups = {Head = 2, Neck = 3, gloves = 2}},
 	["models/cotz/sectorfour/male_psz9.mdl"] = {skins = 65, groups = {Head = 2, Neck = 3, gloves = 2}},
 	["models/cotz/sectorfour/male_stingray9.mdl"] = {skins = 31, groups = {Head = 2, gloves = 2}},
@@ -163,7 +164,7 @@ local function countDefinitions()
 
 	return count
 end
-check(countDefinitions() == 95, "every concrete suit definition was checked")
+check(countDefinitions() == 175, "every concrete suit definition was checked")
 for id, definition in pairs(definitions) do
 	local allowed = set((function()
 		local values = {}
@@ -207,6 +208,9 @@ for _, skin in pairs(legacyAnorak.skins) do
 		"legacy creator skins map to distinct Loner finishes")
 	mapped[skin] = true
 end
+
+-- Applying a worn suit refreshes the legs plugin.
+ix.plugin = {Get = function() return {RefreshLegs = function() end} end}
 
 -- Suit base: worn appearance, painting and hood.
 ITEM = {functions = {}}

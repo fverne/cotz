@@ -12,30 +12,31 @@ ITEM.newSkin = 14
 ITEM.baseSuit = "suit_skat9"
 ITEM.suitVariant = "anarchist"
 
-ITEM.price = 1199000
+ITEM.price = 5500000
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 20580
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.35
+ITEM.br = 0.354
 ITEM.fbr = 4
-ITEM.sr = 0.51
+ITEM.sr = 0.516
 ITEM.fsr = 3
-ITEM.impactRes = 0.22
-ITEM.flatImpactRes = 3
-ITEM.ar = 0.22
-ITEM.far = 3
-ITEM.thermalRes = 0.22
-ITEM.flatThermalRes = 3
-ITEM.electricalRes = 0.22
-ITEM.flatElectricalRes = 3
-ITEM.chemicalRes = 0.22
-ITEM.flatChemicalRes = 3
+ITEM.impactRes = 0.436
+ITEM.flatImpactRes = 2
+ITEM.ar = 0.232
+ITEM.far = 2
+ITEM.thermalRes = 0.222
+ITEM.flatThermalRes = 2
+ITEM.electricalRes = 0.222
+ITEM.flatElectricalRes = 2
+ITEM.chemicalRes = 0.252
+ITEM.flatChemicalRes = 2
 
 ITEM.carryinc = 16.46
 ITEM.exteriorSlots = 2
 ITEM.interiorSlots = 3
-ITEM.extraSlots = 1
+ITEM.extraSlots = 2
 
 ITEM.skincustom = ix.suitAppearance.SkinOptions(ix.suitAppearance.SKAT9_SKINS)

@@ -112,10 +112,10 @@ class ProgressionRewardsSpec(unittest.TestCase):
                     totals[step["capacity"]["kind"]] += step["capacity"]["amount"]
         self.assertEqual(totals, {"weight": 5, "rows": 2})
 
-    def test_trenchcoat_colours_share_one_step(self):
+    def test_one_trenchcoat_keeps_its_saved_purchase_step(self):
         catalogue = self.data["contacts"]["technut"]["catalogue"]
-        self.assertEqual(len({catalogue["suit_trenchcoat_" + c]["step"]
-                              for c in ("black", "brown", "green", "tan")}), 1)
+        self.assertEqual(catalogue["suit_trenchcoat"]["step"], "v3/suits/suit_trenchcoat_black")
+        self.assertFalse([item for item in catalogue if item.startswith("suit_trenchcoat_")])
 
     def test_suture_variants_exclude_looted_finishes(self):
         for item, allocation in self.data["variants"].items():

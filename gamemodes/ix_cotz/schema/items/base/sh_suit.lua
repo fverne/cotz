@@ -60,8 +60,32 @@ ITEM.bodyGroups = {
 ITEM.hoodBodygroup = {name = "Neck", down = 0, up = 1}
 ]]--
 
+-- Services charge this per missing durability point and double it, so a full repair costs
+-- `fullRepairCost` before discounts. It is set on each definition, apart from the purchase price.
 function ITEM:GetRepairCost()
+	if self.fullRepairCost then return self.fullRepairCost / 200 end
+
 	return math.pow(self.price, 1/3)
+end
+
+function ITEM:GetDefinitionSlots()
+	return {
+		["exteriorSlots"] = self.exteriorSlots,
+		["interiorSlots"] = self.interiorSlots,
+		["extraSlots"] = self.extraSlots,
+	}
+end
+
+-- The limit saved on this suit, which installing attachments checks. It follows the definition only
+-- when the suit is created or equipped again.
+function ITEM:GetMiscSlotLimit(slot)
+	local saved = self:GetData("maxMiscSlots")
+
+	return saved and saved[slot] or self[slot] or 0
+end
+
+function ITEM:RefreshMiscSlotLimits()
+	self:SetData("maxMiscSlots", self:GetDefinitionSlots())
 end
 
 ITEM.functions.InstallFilter = {
@@ -164,7 +188,7 @@ if (CLIENT) then
 		if !self.entity then
 			ix.util.DrawSuitResistances(tooltip, self)
 
-			if((self.exteriorSlots or 0) > 0) then
+			if self:GetMiscSlotLimit("exteriorSlots") > 0 then
 				local attachmenttitle = tooltip:AddRow("attachments1")
 				attachmenttitle:SetText("\nExterior Attachments: ")
 				attachmenttitle:SizeToContents()
@@ -172,7 +196,7 @@ if (CLIENT) then
 				local lastrow = attachmenttitle
 
 				local attachmentdata = self:GetData("attachments", self.miscSlots)["exteriorSlots"]
-				for i = 1, (self.exteriorSlots or 0) do
+				for i = 1, self:GetMiscSlotLimit("exteriorSlots") do
 					local attachmenttmp = tooltip:AddRowAfter("attachments1", "attachment1"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
@@ -191,7 +215,7 @@ if (CLIENT) then
 				end
 			end
 
-			if((self.interiorSlots or 0) > 0) then
+			if self:GetMiscSlotLimit("interiorSlots") > 0 then
 				local attachmenttitle = tooltip:AddRow("attachments2")
 				attachmenttitle:SetText("\nInterior Attachments: ")
 				attachmenttitle:SizeToContents()
@@ -199,7 +223,7 @@ if (CLIENT) then
 				local lastrow = attachmenttitle
 
 				local attachmentdata = self:GetData("attachments", self.miscSlots)["interiorSlots"]
-				for i = 1, (self.interiorSlots or 0) do
+				for i = 1, self:GetMiscSlotLimit("interiorSlots") do
 					local attachmenttmp = tooltip:AddRowAfter("attachments2", "attachment2"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
@@ -218,7 +242,7 @@ if (CLIENT) then
 				end
 			end
 
-			if((self.extraSlots or 0) > 0) then
+			if self:GetMiscSlotLimit("extraSlots") > 0 then
 				local attachmenttitle = tooltip:AddRow("attachments3")
 				attachmenttitle:SetText("\nMiscellaneous Attachments: ")
 				attachmenttitle:SizeToContents()
@@ -226,7 +250,7 @@ if (CLIENT) then
 				local lastrow = attachmenttitle
 
 				local attachmentdata = self:GetData("attachments", self.miscSlots)["extraSlots"]
-				for i = 1, (self.extraSlots or 0) do
+				for i = 1, self:GetMiscSlotLimit("extraSlots") do
 					local attachmenttmp = tooltip:AddRowAfter("attachments3", "attachment3"..i)
 					local attachmentstr = "  ⬜ None"
 					attachmenttmp:SetTextColor(Color(120,120,120))
@@ -252,6 +276,12 @@ if (CLIENT) then
 			end
 
 			if self.filterType then ix.util.PopulateGasmaskFilterTooltip(tooltip, self) end
+
+			if self.meleeDamageBonus then
+				local bonus = ix.itemProperties.Format("impact", self.meleeDamageBonus)
+				ix.util.PropertyDesc(tooltip, "Melee damage +" .. bonus .. ". Melee hits cost no stamina.",
+					Color(64, 224, 208))
+			end
 
 
 			ix.util.PropertyDesc2(tooltip, "Protective Suit", Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
@@ -329,13 +359,10 @@ end
 function ITEM:OnInstanced()
 	if self.filterType then self:GetFilterCondition() end
 	self:SetData("durability", 100)
+	if self.skyLineVersion then self:SetData("skyLineVersion", self.skyLineVersion) end
 
-	self:SetData("maxMiscSlots", {
-		["exteriorSlots"] = self.exteriorSlots,
-		["interiorSlots"] = self.interiorSlots,
-		["extraSlots"] = self.extraSlots,
-	})
-	
+	self:RefreshMiscSlotLimits()
+
 	if !self:GetData("attachments") then
 		self:SetData("attachments", {
 			["exteriorSlots"] = {},
@@ -477,6 +504,7 @@ ITEM.functions.Equip = {
 			if item.invID != ply:GetCharacter():GetInventory():GetID() then return end
 
 			item:SetData("equip", true)
+			item:RefreshMiscSlotLimits()
 			ply:AddPart(item.uniqueID, item)
 
 			local origbgroups = {}

@@ -12,26 +12,27 @@ ITEM.newSkin = 3
 ITEM.baseSuit = "suit_cs1"
 ITEM.suitVariant = "ecologist"
 
-ITEM.price = 54175
+ITEM.price = 80520
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 7330
 
 ITEM.isGasmask = false
 ITEM.isHelmet = true
 
-ITEM.br = 0.13
+ITEM.br = 0.114
 ITEM.fbr = 1
-ITEM.sr = 0.19
+ITEM.sr = 0.166
 ITEM.fsr = 1
-ITEM.impactRes = 0.20
-ITEM.flatImpactRes = 2
-ITEM.ar = 0.20
-ITEM.far = 2
-ITEM.thermalRes = 0.20
-ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.20
-ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.20
-ITEM.flatChemicalRes = 2
+ITEM.impactRes = 0.156
+ITEM.flatImpactRes = 1
+ITEM.ar = 0.144
+ITEM.far = 1
+ITEM.thermalRes = 0.144
+ITEM.flatThermalRes = 1
+ITEM.electricalRes = 0.144
+ITEM.flatElectricalRes = 1
+ITEM.chemicalRes = 0.144
+ITEM.flatChemicalRes = 1
 
 ITEM.carryinc = 5.040
 ITEM.exteriorSlots = 2

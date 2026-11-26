@@ -14,11 +14,14 @@ Every suit offers every skin of its model, except where two families share a mod
 | Suits | Model | Finishes | Fixed bodygroups |
 |---|---|---|---|
 | Anorak, Mail Jacket | `male_anorak` | 0–60 | Hood action (`Neck` 0/1) |
-| Trenchcoats | `male_trenchcoat` | 0–8 | Hood action (`Neck` 0/1) |
+| Trenchcoat (all variants) | `male_trenchcoat` | 0–8 | Hood action (`Neck` 0/1) |
 | Berill | `male_berill5m` | 0–12 | |
-| Sky-1, Sky-1a, Sky-1b | `male_cs1`, `male_cs1a`, `male_cs1b` | all skins of each | |
+| Sky-1 (all variants) | `male_cs1b` | 0–4 | |
 | Sky-2 | `male_cs2` | 0–6 | |
-| Sky-3 | `male_cs4` | 0–4 | |
+| Sky-3 | `male_cs1a` | 0–5 | |
+| Sky-4 | `male_cs1` | 0–11 | |
+| Sky-5 | `male_cs4` | 0–4 | |
+| Expedition | `male_outfit_expedition` | 0–10 | |
 | IO7a | `male_hawk` | 0–39 | |
 | PS5-M | `male_psz9` | 0–64 | |
 | Skat-9 | `male_stingray9` | `SKAT9_SKINS` | |

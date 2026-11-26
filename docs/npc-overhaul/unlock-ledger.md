@@ -4,8 +4,8 @@ Generated from authoritative town definitions and their compiled purchase prereq
 Regenerate: `python3 docs/npc-overhaul/tools/progression_rewards.py --write`.
 Verify: `python3 docs/npc-overhaul/tools/progression_rewards.py --check`.
 
-**675 active steps; 675 have functional unlocks; 0 have TODO-only unlock plans;
-20 have multiple assigned unlocks; 0 have no assigned unlock.**
+**677 active steps; 677 have functional unlocks; 0 have TODO-only unlock plans;
+22 have multiple assigned unlocks; 0 have no assigned unlock.**
 
 Purchase access is local to the seller. Canonical owners define equipment tier dependencies, not shared shop access.
 Medicine retains family branches; Jitters gates antirads, Asenapine/Modafines and stimpaks after medkits 2, 4 and 6. Listed starter supplies are available immediately.
@@ -45,8 +45,8 @@ Validation passed.
 | spicy-lemon | 51 | 51 | 0 | 0 |
 | spool | 15 | 15 | 0 | 0 |
 | spoor | 27 | 27 | 0 | 0 |
-| suture | 37 | 37 | 0 | 13 |
-| technut | 14 | 14 | 0 | 1 |
+| suture | 39 | 39 | 0 | 16 |
+| technut | 14 | 14 | 0 | 0 |
 | the-original | 0 | 0 | 0 | 0 |
 | vesper | 35 | 35 | 0 | 0 |
 | wake | 38 | 38 | 0 | 0 |
@@ -110,7 +110,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | spicy-lemon | 8 | 92 | 22 |
 | spool | 3 | 32 | 7 |
 | spoor | 3 | 43 | 9 |
-| suture | 6 | 60 | 21 |
+| suture | 8 | 62 | 21 |
 | technut | 4 | 19 | 10 |
 | vesper | 4 | 57 | 13 |
 | wake | 11 | 69 | 13 |
@@ -693,22 +693,24 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | suture | v3/suit-attachments/attachment_ceramicplate_3 | Purchase: attachment_ceramicplate_3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-attachments/attachment_kevlar_2/stock | Stock: attachment_ceramicplate_3 +1 total | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | suture | v3/suit-attachments/attachment_kevlar_2 | Purchase: attachment_kevlar_2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| suture | v3/suit-variants/suit_anorak | Conversion: suit_anorak_anarchist; Conversion: suit_anorak_authority; Conversion: suit_anorak_ecologist; Conversion: suit_anorak_mercenary; Conversion: suit_anorak_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
-| suture | v3/suit-variants/suit_mailjacket | Conversion: suit_mailjacket_anarchist; Conversion: suit_mailjacket_authority; Conversion: suit_mailjacket_ecologist; Conversion: suit_mailjacket_mercenary; Conversion: suit_mailjacket_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_sunrise | Conversion: suit_sunrise_anarchist; Conversion: suit_sunrise_authority; Conversion: suit_sunrise_fanatic; Conversion: suit_sunrise_mercenary; Conversion: suit_sunrise_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_anorak | Conversion: suit_anorak_anarchist; Conversion: suit_anorak_authority; Conversion: suit_anorak_ecologist; Conversion: suit_anorak_fanatic; Conversion: suit_anorak_mercenary; Conversion: suit_anorak_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
+| suture | v3/suit-variants/suit_ssp99 | Conversion: suit_ssp99_amethyst; Conversion: suit_ssp99_diamond; Conversion: suit_ssp99_emerald; Conversion: suit_ssp99_ruby; Conversion: suit_ssp99_sapphire | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
+| suture | v3/suit-variants/suit_mailjacket | Conversion: suit_mailjacket_anarchist; Conversion: suit_mailjacket_authority; Conversion: suit_mailjacket_ecologist; Conversion: suit_mailjacket_fanatic; Conversion: suit_mailjacket_mercenary; Conversion: suit_mailjacket_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_trenchcoat | Conversion: suit_trenchcoat_anarchist; Conversion: suit_trenchcoat_authority; Conversion: suit_trenchcoat_ecologist; Conversion: suit_trenchcoat_fanatic; Conversion: suit_trenchcoat_mercenary; Conversion: suit_trenchcoat_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_waystation |
+| suture | v3/suit-variants/suit_sunrise | Conversion: suit_sunrise_anarchist; Conversion: suit_sunrise_authority; Conversion: suit_sunrise_ecologist; Conversion: suit_sunrise_fanatic; Conversion: suit_sunrise_mercenary; Conversion: suit_sunrise_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | suture | v3/suit-variants/suit_io7a | Conversion: suit_io7a_anarchist; Conversion: suit_io7a_authority; Conversion: suit_io7a_ecologist; Conversion: suit_io7a_fanatic; Conversion: suit_io7a_mercenary; Conversion: suit_io7a_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_cs1 | Conversion: suit_cs1_ecologist; Conversion: suit_cs1_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_wind | Conversion: suit_wind_anarchist; Conversion: suit_wind_authority; Conversion: suit_wind_fanatic | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_ps5m | Conversion: suit_ps5m_anarchist; Conversion: suit_ps5m_authority; Conversion: suit_ps5m_ecologist; Conversion: suit_ps5m_fanatic; Conversion: suit_ps5m_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_cs2 | Conversion: suit_cs2_ecologist; Conversion: suit_cs2_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_nbc | Conversion: suit_nbc_anarchist; Conversion: suit_nbc_authority; Conversion: suit_nbc_fanatic | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_berill | Conversion: suit_berill_anarchist; Conversion: suit_berill_authority; Conversion: suit_berill_ecologist; Conversion: suit_berill_mercenary; Conversion: suit_berill_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
-| suture | v3/suit-variants/suit_cs3 | Conversion: suit_cs3_ecologist | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| suture | v3/suit-variants/suit_seva | Conversion: suit_seva_anarchist; Conversion: suit_seva_authority; Conversion: suit_seva_ecologist; Conversion: suit_seva_fanatic; Conversion: suit_seva_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| suture | v3/suit-variants/suit_skat10 | Conversion: suit_skat10_anarchist; Conversion: suit_skat10_authority; Conversion: suit_skat10_ecologist; Conversion: suit_skat10_mercenary | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| suture | v3/suit-variants/suit_skat9 | Conversion: suit_skat9_anarchist; Conversion: suit_skat9_authority; Conversion: suit_skat9_ecologist; Conversion: suit_skat9_fanatic; Conversion: suit_skat9_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| suture | v3/suit-variants/suit_cs1 | Conversion: suit_cs1_anarchist; Conversion: suit_cs1_authority; Conversion: suit_cs1_ecologist; Conversion: suit_cs1_fanatic; Conversion: suit_cs1_mercenary; Conversion: suit_cs1_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_wind | Conversion: suit_wind_anarchist; Conversion: suit_wind_authority; Conversion: suit_wind_ecologist; Conversion: suit_wind_fanatic; Conversion: suit_wind_mercenary; Conversion: suit_wind_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_ps5m | Conversion: suit_ps5m_anarchist; Conversion: suit_ps5m_authority; Conversion: suit_ps5m_ecologist; Conversion: suit_ps5m_fanatic; Conversion: suit_ps5m_mercenary; Conversion: suit_ps5m_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_cs2 | Conversion: suit_cs2_anarchist; Conversion: suit_cs2_authority; Conversion: suit_cs2_ecologist; Conversion: suit_cs2_fanatic; Conversion: suit_cs2_mercenary; Conversion: suit_cs2_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_nbc | Conversion: suit_nbc_anarchist; Conversion: suit_nbc_authority; Conversion: suit_nbc_ecologist; Conversion: suit_nbc_fanatic; Conversion: suit_nbc_mercenary; Conversion: suit_nbc_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_berill | Conversion: suit_berill_anarchist; Conversion: suit_berill_authority; Conversion: suit_berill_ecologist; Conversion: suit_berill_fanatic; Conversion: suit_berill_mercenary; Conversion: suit_berill_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
+| suture | v3/suit-variants/suit_cs3 | Conversion: suit_cs5_anarchist; Conversion: suit_cs5_authority; Conversion: suit_cs5_ecologist; Conversion: suit_cs5_fanatic; Conversion: suit_cs5_mercenary; Conversion: suit_cs5_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| suture | v3/suit-variants/suit_seva | Conversion: suit_seva_anarchist; Conversion: suit_seva_authority; Conversion: suit_seva_ecologist; Conversion: suit_seva_fanatic; Conversion: suit_seva_mercenary; Conversion: suit_seva_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| suture | v3/suit-variants/suit_skat10 | Conversion: suit_skat10_anarchist; Conversion: suit_skat10_authority; Conversion: suit_skat10_ecologist; Conversion: suit_skat10_fanatic; Conversion: suit_skat10_mercenary; Conversion: suit_skat10_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| suture | v3/suit-variants/suit_skat9 | Conversion: suit_skat9_anarchist; Conversion: suit_skat9_authority; Conversion: suit_skat9_ecologist; Conversion: suit_skat9_fanatic; Conversion: suit_skat9_mercenary; Conversion: suit_skat9_scavenger | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_mailjacket | Purchase: suit_mailjacket | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
-| technut | v3/suits/suit_trenchcoat_black | Purchase: suit_trenchcoat_black; Purchase: suit_trenchcoat_brown; Purchase: suit_trenchcoat_green; Purchase: suit_trenchcoat_tan | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
+| technut | v3/suits/suit_trenchcoat_black | Purchase: suit_trenchcoat | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_sunrise | Purchase: suit_sunrise | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_io7a | Purchase: suit_io7a | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
 | technut | v3/suits/suit_cs1 | Purchase: suit_cs1 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
@@ -717,7 +719,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | technut | v3/suits/suit_cs2 | Purchase: suit_cs2 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_nbc | Purchase: suit_nbc | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation |
 | technut | v3/suits/suit_berill | Purchase: suit_berill | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
-| technut | v3/suits/suit_cs3 | Purchase: suit_cs3 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
+| technut | v3/suits/suit_cs3 | Purchase: suit_cs5 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_skat10 | Purchase: suit_skat10 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/suits/suit_skat9 | Purchase: suit_skat9 | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs, rp_garbage_cotz, rp_waystation, rp_pripyat_remaster |
 | technut | v3/painting/painting | Suit painting | — | 60% of accepted hand-in value on completion; Sources: rp_marsh_cs |
@@ -1082,7 +1084,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | suit_berill | technut | v3/suits/suit_berill | technut |
 | suit_cs1 | technut | v3/suits/suit_cs1 | technut |
 | suit_cs2 | technut | v3/suits/suit_cs2 | technut |
-| suit_cs3 | technut | v3/suits/suit_cs3 | technut |
+| suit_cs5 | technut | v3/suits/suit_cs3 | technut |
 | suit_io7a | technut | v3/suits/suit_io7a | technut |
 | suit_mailjacket | technut | v3/suits/suit_mailjacket | technut |
 | suit_nbc | technut | v3/suits/suit_nbc | technut |
@@ -1090,10 +1092,7 @@ The first 20% of actual unlocks in each branch, rounded up, are category-only. S
 | suit_skat10 | technut | v3/suits/suit_skat10 | technut |
 | suit_skat9 | technut | v3/suits/suit_skat9 | technut |
 | suit_sunrise | technut | v3/suits/suit_sunrise | technut |
-| suit_trenchcoat_black | technut | v3/suits/suit_trenchcoat_black | technut |
-| suit_trenchcoat_brown | technut | v3/suits/suit_trenchcoat_black | technut |
-| suit_trenchcoat_green | technut | v3/suits/suit_trenchcoat_black | technut |
-| suit_trenchcoat_tan | technut | v3/suits/suit_trenchcoat_black | technut |
+| suit_trenchcoat | technut | v3/suits/suit_trenchcoat_black | technut |
 | suit_wind | technut | v3/suits/suit_wind | technut |
 | 545x39 | vesper | v3/pact-rifles/saigasemi545/ammo | brass |
 | 762x39 | vesper | v3/pact-rifles/saigasemi/ammo | brass |
@@ -1143,18 +1142,33 @@ Both canonical base-suit and exact variant milestones are required.
 | suit_anorak_anarchist | suture | v3/suit-variants/suit_anorak | suit_anorak |
 | suit_anorak_authority | suture | v3/suit-variants/suit_anorak | suit_anorak |
 | suit_anorak_ecologist | suture | v3/suit-variants/suit_anorak | suit_anorak |
+| suit_anorak_fanatic | suture | v3/suit-variants/suit_anorak | suit_anorak |
 | suit_anorak_mercenary | suture | v3/suit-variants/suit_anorak | suit_anorak |
 | suit_anorak_scavenger | suture | v3/suit-variants/suit_anorak | suit_anorak |
 | suit_berill_anarchist | suture | v3/suit-variants/suit_berill | suit_berill |
 | suit_berill_authority | suture | v3/suit-variants/suit_berill | suit_berill |
 | suit_berill_ecologist | suture | v3/suit-variants/suit_berill | suit_berill |
+| suit_berill_fanatic | suture | v3/suit-variants/suit_berill | suit_berill |
 | suit_berill_mercenary | suture | v3/suit-variants/suit_berill | suit_berill |
 | suit_berill_scavenger | suture | v3/suit-variants/suit_berill | suit_berill |
+| suit_cs1_anarchist | suture | v3/suit-variants/suit_cs1 | suit_cs1 |
+| suit_cs1_authority | suture | v3/suit-variants/suit_cs1 | suit_cs1 |
 | suit_cs1_ecologist | suture | v3/suit-variants/suit_cs1 | suit_cs1 |
+| suit_cs1_fanatic | suture | v3/suit-variants/suit_cs1 | suit_cs1 |
+| suit_cs1_mercenary | suture | v3/suit-variants/suit_cs1 | suit_cs1 |
 | suit_cs1_scavenger | suture | v3/suit-variants/suit_cs1 | suit_cs1 |
+| suit_cs2_anarchist | suture | v3/suit-variants/suit_cs2 | suit_cs2 |
+| suit_cs2_authority | suture | v3/suit-variants/suit_cs2 | suit_cs2 |
 | suit_cs2_ecologist | suture | v3/suit-variants/suit_cs2 | suit_cs2 |
+| suit_cs2_fanatic | suture | v3/suit-variants/suit_cs2 | suit_cs2 |
+| suit_cs2_mercenary | suture | v3/suit-variants/suit_cs2 | suit_cs2 |
 | suit_cs2_scavenger | suture | v3/suit-variants/suit_cs2 | suit_cs2 |
-| suit_cs3_ecologist | suture | v3/suit-variants/suit_cs3 | suit_cs3 |
+| suit_cs5_anarchist | suture | v3/suit-variants/suit_cs3 | suit_cs5 |
+| suit_cs5_authority | suture | v3/suit-variants/suit_cs3 | suit_cs5 |
+| suit_cs5_ecologist | suture | v3/suit-variants/suit_cs3 | suit_cs5 |
+| suit_cs5_fanatic | suture | v3/suit-variants/suit_cs3 | suit_cs5 |
+| suit_cs5_mercenary | suture | v3/suit-variants/suit_cs3 | suit_cs5 |
+| suit_cs5_scavenger | suture | v3/suit-variants/suit_cs3 | suit_cs5 |
 | suit_io7a_anarchist | suture | v3/suit-variants/suit_io7a | suit_io7a |
 | suit_io7a_authority | suture | v3/suit-variants/suit_io7a | suit_io7a |
 | suit_io7a_ecologist | suture | v3/suit-variants/suit_io7a | suit_io7a |
@@ -1164,38 +1178,62 @@ Both canonical base-suit and exact variant milestones are required.
 | suit_mailjacket_anarchist | suture | v3/suit-variants/suit_mailjacket | suit_mailjacket |
 | suit_mailjacket_authority | suture | v3/suit-variants/suit_mailjacket | suit_mailjacket |
 | suit_mailjacket_ecologist | suture | v3/suit-variants/suit_mailjacket | suit_mailjacket |
+| suit_mailjacket_fanatic | suture | v3/suit-variants/suit_mailjacket | suit_mailjacket |
 | suit_mailjacket_mercenary | suture | v3/suit-variants/suit_mailjacket | suit_mailjacket |
 | suit_mailjacket_scavenger | suture | v3/suit-variants/suit_mailjacket | suit_mailjacket |
 | suit_nbc_anarchist | suture | v3/suit-variants/suit_nbc | suit_nbc |
 | suit_nbc_authority | suture | v3/suit-variants/suit_nbc | suit_nbc |
+| suit_nbc_ecologist | suture | v3/suit-variants/suit_nbc | suit_nbc |
 | suit_nbc_fanatic | suture | v3/suit-variants/suit_nbc | suit_nbc |
+| suit_nbc_mercenary | suture | v3/suit-variants/suit_nbc | suit_nbc |
+| suit_nbc_scavenger | suture | v3/suit-variants/suit_nbc | suit_nbc |
 | suit_ps5m_anarchist | suture | v3/suit-variants/suit_ps5m | suit_ps5m |
 | suit_ps5m_authority | suture | v3/suit-variants/suit_ps5m | suit_ps5m |
 | suit_ps5m_ecologist | suture | v3/suit-variants/suit_ps5m | suit_ps5m |
 | suit_ps5m_fanatic | suture | v3/suit-variants/suit_ps5m | suit_ps5m |
 | suit_ps5m_mercenary | suture | v3/suit-variants/suit_ps5m | suit_ps5m |
+| suit_ps5m_scavenger | suture | v3/suit-variants/suit_ps5m | suit_ps5m |
 | suit_seva_anarchist | suture | v3/suit-variants/suit_seva | suit_seva |
 | suit_seva_authority | suture | v3/suit-variants/suit_seva | suit_seva |
 | suit_seva_ecologist | suture | v3/suit-variants/suit_seva | suit_seva |
 | suit_seva_fanatic | suture | v3/suit-variants/suit_seva | suit_seva |
 | suit_seva_mercenary | suture | v3/suit-variants/suit_seva | suit_seva |
+| suit_seva_scavenger | suture | v3/suit-variants/suit_seva | suit_seva |
 | suit_skat10_anarchist | suture | v3/suit-variants/suit_skat10 | suit_skat10 |
 | suit_skat10_authority | suture | v3/suit-variants/suit_skat10 | suit_skat10 |
 | suit_skat10_ecologist | suture | v3/suit-variants/suit_skat10 | suit_skat10 |
+| suit_skat10_fanatic | suture | v3/suit-variants/suit_skat10 | suit_skat10 |
 | suit_skat10_mercenary | suture | v3/suit-variants/suit_skat10 | suit_skat10 |
+| suit_skat10_scavenger | suture | v3/suit-variants/suit_skat10 | suit_skat10 |
 | suit_skat9_anarchist | suture | v3/suit-variants/suit_skat9 | suit_skat9 |
 | suit_skat9_authority | suture | v3/suit-variants/suit_skat9 | suit_skat9 |
 | suit_skat9_ecologist | suture | v3/suit-variants/suit_skat9 | suit_skat9 |
 | suit_skat9_fanatic | suture | v3/suit-variants/suit_skat9 | suit_skat9 |
+| suit_skat9_mercenary | suture | v3/suit-variants/suit_skat9 | suit_skat9 |
 | suit_skat9_scavenger | suture | v3/suit-variants/suit_skat9 | suit_skat9 |
+| suit_ssp99_amethyst | suture | v3/suit-variants/suit_ssp99 | suit_ssp99 |
+| suit_ssp99_diamond | suture | v3/suit-variants/suit_ssp99 | suit_ssp99 |
+| suit_ssp99_emerald | suture | v3/suit-variants/suit_ssp99 | suit_ssp99 |
+| suit_ssp99_ruby | suture | v3/suit-variants/suit_ssp99 | suit_ssp99 |
+| suit_ssp99_sapphire | suture | v3/suit-variants/suit_ssp99 | suit_ssp99 |
 | suit_sunrise_anarchist | suture | v3/suit-variants/suit_sunrise | suit_sunrise |
 | suit_sunrise_authority | suture | v3/suit-variants/suit_sunrise | suit_sunrise |
+| suit_sunrise_ecologist | suture | v3/suit-variants/suit_sunrise | suit_sunrise |
 | suit_sunrise_fanatic | suture | v3/suit-variants/suit_sunrise | suit_sunrise |
 | suit_sunrise_mercenary | suture | v3/suit-variants/suit_sunrise | suit_sunrise |
 | suit_sunrise_scavenger | suture | v3/suit-variants/suit_sunrise | suit_sunrise |
+| suit_trenchcoat_anarchist | suture | v3/suit-variants/suit_trenchcoat | suit_trenchcoat |
+| suit_trenchcoat_authority | suture | v3/suit-variants/suit_trenchcoat | suit_trenchcoat |
+| suit_trenchcoat_ecologist | suture | v3/suit-variants/suit_trenchcoat | suit_trenchcoat |
+| suit_trenchcoat_fanatic | suture | v3/suit-variants/suit_trenchcoat | suit_trenchcoat |
+| suit_trenchcoat_mercenary | suture | v3/suit-variants/suit_trenchcoat | suit_trenchcoat |
+| suit_trenchcoat_scavenger | suture | v3/suit-variants/suit_trenchcoat | suit_trenchcoat |
 | suit_wind_anarchist | suture | v3/suit-variants/suit_wind | suit_wind |
 | suit_wind_authority | suture | v3/suit-variants/suit_wind | suit_wind |
+| suit_wind_ecologist | suture | v3/suit-variants/suit_wind | suit_wind |
 | suit_wind_fanatic | suture | v3/suit-variants/suit_wind | suit_wind |
+| suit_wind_mercenary | suture | v3/suit-variants/suit_wind | suit_wind |
+| suit_wind_scavenger | suture | v3/suit-variants/suit_wind | suit_wind |
 
 ## Unimplemented unlock terms
 

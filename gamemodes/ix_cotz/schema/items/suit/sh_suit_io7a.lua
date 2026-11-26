@@ -13,23 +13,24 @@ ITEM.baseSuit = "suit_io7a"
 
 ITEM.price = 48700
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 7300
 
 ITEM.isGasmask = false
 ITEM.isHelmet = false
 
-ITEM.br = 0.13
+ITEM.br = 0.117
 ITEM.fbr = 2
-ITEM.sr = 0.19
+ITEM.sr = 0.171
 ITEM.fsr = 1
-ITEM.impactRes = 0.06
+ITEM.impactRes = 0.144
 ITEM.flatImpactRes = 1
-ITEM.ar = 0.06
+ITEM.ar = 0.054
 ITEM.far = 1
-ITEM.thermalRes = 0.06
+ITEM.thermalRes = 0.054
 ITEM.flatThermalRes = 1
-ITEM.electricalRes = 0.06
+ITEM.electricalRes = 0.054
 ITEM.flatElectricalRes = 1
-ITEM.chemicalRes = 0.06
+ITEM.chemicalRes = 0.054
 ITEM.flatChemicalRes = 1
 
 ITEM.carryinc = 7.200

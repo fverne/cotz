@@ -62,19 +62,8 @@ PLUGIN:Register("technut", {
 			step = "v3/suits/suit_mailjacket",
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
-		suit_trenchcoat_black = {
-			step = "v3/suits/suit_trenchcoat_black",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
-		suit_trenchcoat_brown = {
-			step = "v3/suits/suit_trenchcoat_black",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
-		suit_trenchcoat_green = {
-			step = "v3/suits/suit_trenchcoat_black",
-			terms = {nil, 1, "SELLONLY", 1, 48, 1},
-		},
-		suit_trenchcoat_tan = {
+		-- Step IDs are saved on characters, so they keep naming the items they first unlocked.
+		suit_trenchcoat = {
 			step = "v3/suits/suit_trenchcoat_black",
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
@@ -110,7 +99,7 @@ PLUGIN:Register("technut", {
 			step = "v3/suits/suit_berill",
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
-		suit_cs3 = {
+		suit_cs5 = {
 			step = "v3/suits/suit_cs3",
 			terms = {nil, 1, "SELLONLY", 1, 48, 1},
 		},
@@ -161,11 +150,11 @@ PLUGIN:Register("technut", {
 		{
 			id = "v3/suits/suit_trenchcoat_black",
 			branch = "suits",
-			name = "Black Trenchcoat",
+			name = "Trenchcoat",
 			kind = "delivery",
 			requires = {"v3/suits/suit_mailjacket"},
-			briefing = "Trenchcoats. All four colours go through this purchase arrangement, so don't let me turn your colour preference into four deliveries. Bring the workshop supplies listed here and the group becomes available. You can choose on the day you buy.",
-			completion = "The trenchcoat group is open for purchase: black, brown, green and tan. One delivery did the job.",
+			briefing = "Trenchcoats! One coat goes through this purchase arrangement now, so whatever colour you've got your eye on doesn't need a delivery of its own. Bring the workshop supplies listed here and I can open its purchase route. It comes in black. Once my painting service is open to you, we can talk about the other finishes.",
+			completion = "The trenchcoat is open for purchase. It comes in black, and the other finishes belong to the painting service. One delivery did the job.",
 			requirements = {
 				{pool = "town_expansion_c7169f14696b", quantity = 1, mode = "any"},
 			},
@@ -327,11 +316,11 @@ PLUGIN:Register("technut", {
 		{
 			id = "v3/suits/suit_cs3",
 			branch = "suits",
-			name = "Sky-3 Suit",
+			name = "Sky-5 Suit",
 			kind = "delivery",
 			requires = {"v3/suits/suit_berill"},
-			briefing = "For the Sky-3, complete this workshop request. By now you know I can find something to explain in almost any suit. You can still buy one without agreeing to remain here until I've exhausted the subject.",
-			completion = "The Sky-3 is open for purchase. I promise the completed order fits in this sentence.",
+			briefing = "For the Sky-5, complete this workshop request. By now you know I can find something to explain in almost any suit. You can still buy one without agreeing to remain here until I've exhausted the subject.",
+			completion = "The Sky-5 is open for purchase. I promise the completed order fits in this sentence.",
 			requirements = {
 				{pool = "town_expansion_3d13120ddff7", quantity = 3, mode = "any"},
 				{pool = "town_expansion_92bc90ddebaf", quantity = 2, mode = "any"},

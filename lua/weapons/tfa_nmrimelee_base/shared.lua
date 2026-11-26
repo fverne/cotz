@@ -500,6 +500,9 @@ function SWEP:PrimarySlash()
 	
 	if self.meleedmgcvar then pain = pain * self.meleedmgcvar:GetFloat() end
 
+	-- CotZ: remember what this swing spent, so a suit perk can return it on a hit.
+	self.cotzSwingStamina = nil
+
 	if (ix && ix.plugin.Get("stm")) then
 		local value = self:GetOwner():GetLocalVar("stm", 0) - 20
 
@@ -508,6 +511,7 @@ function SWEP:PrimarySlash()
 		elseif (SERVER) then
 			local staminaUse = ix.config.Get("punchStamina")
 			self:GetOwner():ConsumeStamina(staminaUse)
+			self.cotzSwingStamina = staminaUse
 		end
 	end
 	
@@ -626,6 +630,9 @@ function SWEP:SecondarySlash()
 	
 	if self.meleedmgcvar then pain = pain * self.meleedmgcvar:GetFloat() end
 
+	-- CotZ: remember what this swing spent, so a suit perk can return it on a hit.
+	self.cotzSwingStamina = nil
+
 	if (ix && ix.plugin.Get("stm")) then
 		local value = self:GetOwner():GetLocalVar("stm", 0) - 20
 
@@ -634,6 +641,7 @@ function SWEP:SecondarySlash()
 		elseif (SERVER) then
 			local staminaUse = ix.config.Get("punchStamina")
 			self:GetOwner():ConsumeStamina(staminaUse)
+			self.cotzSwingStamina = staminaUse
 		end
 	end
 	

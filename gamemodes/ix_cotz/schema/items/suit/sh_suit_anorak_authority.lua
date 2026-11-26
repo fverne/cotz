@@ -12,26 +12,28 @@ ITEM.newSkin = 48
 ITEM.baseSuit = "suit_anorak"
 ITEM.suitVariant = "authority"
 
-ITEM.price = 7539
+ITEM.price = 7359
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 3770
 
 ITEM.isGasmask = false 
 ITEM.isHelmet = false
 
-ITEM.br = 0.01
+ITEM.br = 0.009
 ITEM.fbr = 1
-ITEM.sr = 0.13
-ITEM.fsr = 2
-ITEM.impactRes = 0.05
+ITEM.sr = 0.127
+ITEM.fsr = 1
+ITEM.impactRes = 0.056
 ITEM.flatImpactRes = 1
-ITEM.ar = 0.05
+ITEM.ar = 0.047
 ITEM.far = 1
-ITEM.thermalRes = 0.05
+ITEM.thermalRes = 0.047
 ITEM.flatThermalRes = 1
-ITEM.electricalRes = 0.05
+ITEM.electricalRes = 0.047
 ITEM.flatElectricalRes = 1
-ITEM.chemicalRes = 0.05
+ITEM.chemicalRes = 0.047
 ITEM.flatChemicalRes = 1
+ITEM.radProt = 0.047
 
 ITEM.carryinc = 3.150
 ITEM.exteriorSlots = 1

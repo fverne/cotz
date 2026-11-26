@@ -15,6 +15,7 @@ ITEM.suitVariant = "authority"
 
 ITEM.price = 181500
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 10970
 
 ITEM.isGasmask = true
 ITEM.filterType = "air_tank"
@@ -22,22 +23,22 @@ ITEM.isAirTank = true
 ITEM.filterWearDivisor = 700
 ITEM.isHelmet = true
 
-ITEM.br = 0.09
+ITEM.br = 0.085
 ITEM.fbr = 1
-ITEM.sr = 0.20
-ITEM.fsr = 2
-ITEM.impactRes = 0.20
+ITEM.sr = 0.196
+ITEM.fsr = 1
+ITEM.impactRes = 0.122
 ITEM.flatImpactRes = 2
-ITEM.ar = 0.20
+ITEM.ar = 0.188
 ITEM.far = 2
-ITEM.thermalRes = 0.20
+ITEM.thermalRes = 0.188
 ITEM.flatThermalRes = 2
-ITEM.electricalRes = 0.20
+ITEM.electricalRes = 0.188
 ITEM.flatElectricalRes = 2
-ITEM.chemicalRes = 0.20
+ITEM.chemicalRes = 0.188
 ITEM.flatChemicalRes = 2
 
-ITEM.pr = 0.10
+ITEM.pr = 0.094
 ITEM.fpr = 0
 ITEM.radProt = 0.90
 ITEM.flatRadProt = 0.02

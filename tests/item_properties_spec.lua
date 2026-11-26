@@ -247,6 +247,7 @@ local suit = {isBodyArmor = true, scale = 1, GetData = bread.GetData, data = {},
 }
 ix.suits.anomalyTypes = {{network = "thermal", name = "Thermal", field = "thermalRes", flatField = "flatThermalRes"}}
 ix.suits.GetProtectionFamilies = function() return ix.suits.anomalyTypes end
+ix.suits.MAX_PROTECTION = 0.9
 local protection = ix.itemProperties.GetProtection(suit)
 check(protection[1].text == "Ballistics: 40% + 8", "suit protection shows flat absorption")
 for _, row in ipairs(protection) do

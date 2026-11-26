@@ -1,0 +1,42 @@
+ITEM.name = "Mercenary Skat-9 Armored Suit"
+ITEM.model = "models/kek1ch/military_outfit.mdl"
+ITEM.newModel = "models/cotz/sectorfour/male_stingray9.mdl"
+ITEM.description= "A military-grade body armor"
+ITEM.longdesc = "This military armoured suit is designed for assault operations in anomalous areas. Has a built-in compensation suit, and an anomalous protection bodysuit. The armour provides excellent protection against bullet and fragmentation damage, without greatly reducing the wearer’s mobility."
+
+ITEM.width = 2
+ITEM.height = 3
+ITEM.img = ix.util.GetMaterial("vgui/hud/skat.png")
+ITEM.weight = 21.42
+ITEM.newSkin = 22
+ITEM.baseSuit = "suit_skat9"
+ITEM.suitVariant = "mercenary"
+
+ITEM.price = 5500000
+ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 20580
+
+ITEM.isGasmask = false
+ITEM.isHelmet = false
+
+ITEM.br = 0.42
+ITEM.fbr = 4
+ITEM.sr = 0.516
+ITEM.fsr = 3
+ITEM.impactRes = 0.516
+ITEM.flatImpactRes = 2
+ITEM.ar = 0.232
+ITEM.far = 2
+ITEM.thermalRes = 0.252
+ITEM.flatThermalRes = 2
+ITEM.electricalRes = 0.222
+ITEM.flatElectricalRes = 2
+ITEM.chemicalRes = 0.222
+ITEM.flatChemicalRes = 2
+
+ITEM.carryinc = 16.97
+ITEM.exteriorSlots = 2
+ITEM.interiorSlots = 3
+ITEM.extraSlots = 1
+
+ITEM.skincustom = ix.suitAppearance.SkinOptions(ix.suitAppearance.SKAT9_SKINS)

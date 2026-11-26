@@ -22,7 +22,7 @@ class ProgressionExpansionTests(unittest.TestCase):
 
     def test_counts_and_regeneration(self):
         steps = [s for c in self.data["contacts"].values() for s in c["progression"]]
-        self.assertEqual(len(steps), 675)
+        self.assertEqual(len(steps), 677)
         self.assertEqual(sum(bool(s.get("intermissionFor")) for s in steps), 256)
         output, count = expansion.outputs()
         self.assertEqual(count, 231)
@@ -196,7 +196,7 @@ class ProgressionExpansionTests(unittest.TestCase):
         self.assertGreater(random_count, 100)
         technut = [s for s in self.data["contacts"]["technut"]["progression"] if s["branch"] == "suits"]
         self.assertEqual([s["name"] for s in technut if s["categoryOnly"]],
-                         ["Mail Jacket", "Black Trenchcoat", "Sunrise STALKER Suit"])
+                         ["Mail Jacket", "Trenchcoat", "Sunrise STALKER Suit"])
 
     def test_batch_sizes_use_spawned_amounts_instead_of_stack_capacity(self):
         self.assertEqual(self.batches["value_nuts"], 3)

@@ -96,14 +96,18 @@ near(suit:getAR("thermalRes"), 0.32, "Typed zero upgrade overrides its broad bon
 near(suit:getFAR("flatThermalRes"), 8, "Typed zero flat upgrade overrides its broad bonus")
 suit.data.upgrades, suit.data.attachments = nil, nil
 
--- Load every concrete definition, including faction variants, and preserve its existing tuning.
+-- Load every concrete definition, including faction variants. Typed percentages are tuned separately;
+-- `ar` stays the broad anomaly value, and flat protection stays uniform.
 local paths = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/suit"))
 local suitCount = 0
 for path in paths:lines() do
 	ITEM = {skincustom = {}, bgcustom = {}, functions = {}}
 	assert(load(read(path):gsub("!=", "~="):gsub("!", "not "), "@" .. path))()
+	local anomalyMean = (ITEM.thermalRes + ITEM.electricalRes + ITEM.chemicalRes) / 3
+	check(math.abs(ITEM.ar - anomalyMean) <= 0.0006, path .. " keeps ar at its anomaly average")
 	for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
-		check(ITEM[definition.field] == ITEM.ar, path .. " preserves percentage: " .. definition.name)
+		check(ITEM[definition.field] and ITEM[definition.field] <= ix.suits.MAX_PROTECTION,
+			path .. " declares a capped percentage: " .. definition.name)
 		check(ITEM[definition.flatField] == ITEM.far, path .. " preserves flat protection: " .. definition.name)
 	end
 	suitCount = suitCount + 1
@@ -115,6 +119,8 @@ local playerMeta = {}
 FindMetaTable = function() return playerMeta end
 PLUGIN = {}
 dofile("gamemodes/ix_cotz/plugins/suits/sh_plugin.lua")
+-- The Looted melee perk lives in sv_meleeperk.lua and is covered by suit_variants_spec.
+PLUGIN.ApplyMeleePerk = function() end
 local suitsPlugin = PLUGIN
 local helmet = {
 	ar = 0.2, far = 2, isHelmet = true, data = {equip = true, durability = 40},

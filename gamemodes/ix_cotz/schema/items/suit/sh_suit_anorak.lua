@@ -13,6 +13,7 @@ ITEM.baseSuit = "suit_anorak"
 
 ITEM.price = 6690
 ITEM.repairCost = ITEM.price/100*1 -- cost to repair from 0% durability
+ITEM.fullRepairCost = 3770
 
 ITEM.isGasmask = false 
 ITEM.isHelmet = false
@@ -21,7 +22,7 @@ ITEM.br = 0.01
 ITEM.fbr = 1
 ITEM.sr = 0.11
 ITEM.fsr = 1
-ITEM.impactRes = 0.05
+ITEM.impactRes = 0.06
 ITEM.flatImpactRes = 1
 ITEM.ar = 0.05
 ITEM.far = 1

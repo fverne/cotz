@@ -49,6 +49,10 @@ function ix.suitAppearance.GetSkin(item)
 	local savedForModel = item:GetData("setSkinModel") == item.newModel
 	if skin ~= nil and savedForModel and ix.suitAppearance.IsAllowedSkin(item, skin) then return skin end
 
+	-- Coats merged from the former colour items keep their colour until repainted.
+	local coat = item:GetData("legacyCoatSkin")
+	if coat ~= nil and ix.suitAppearance.IsAllowedSkin(item, coat) then return coat end
+
 	return item.newSkin or 0
 end
 
