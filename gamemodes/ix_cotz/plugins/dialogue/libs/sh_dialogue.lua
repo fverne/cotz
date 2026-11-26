@@ -435,6 +435,14 @@ end
 
 if SERVER then
 
+-- The client lists the next topic's options before the server applies a choice, so it must rebuild them.
+function ix.dialogue.RefreshOptions(client, target, topicID)
+	net.Start("cotz/dialogue/refresh-options")
+	net.WriteEntity(target)
+	net.WriteString(topicID)
+	net.Send(client)
+end
+
 function ix.dialogue.notify(client, type, text)
 	net.Start("ixDialogueNotify")
 	net.WriteUInt(type, 4)

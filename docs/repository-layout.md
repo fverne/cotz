@@ -49,6 +49,12 @@ to the item meta (`GetStackCombineTarget`, `CombineStack`, and the overridable `
 `GetStackQuantity` and `GetStackCapacity`). They add no action: only items whose definition or base
 declares `ITEM.functions.combine` can merge stacks, so use-count items such as medicine stay separate.
 
+`plugins/ammo.lua` also merges ammunition automatically. When a box enters a character's inventory, one tick after
+`InventoryItemAdded`, its rounds top up existing boxes of the same ammo type, fullest first, up to `maxStack`.
+Any overflow stays in the new box. Stashes and other containers do not auto-merge, and stacks locked by a pending
+hideout operation are skipped. A new Split stack is exempt once through the `cotzKeepSeparate` item data.
+Run `luatex --luaonly tests/ammo_stacking_spec.lua`.
+
 `schema/meta/sv_character.lua` is explicitly included by `sh_schema.lua`. Its owner-sync override
 keeps legacy personal vendor stock/history keys out of the initial character network payload;
 other recipients retain Helix's normal visibility rules. The automatically loaded shared library

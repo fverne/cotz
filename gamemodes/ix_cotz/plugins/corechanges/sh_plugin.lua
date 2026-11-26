@@ -102,18 +102,32 @@ if (SERVER) then
     end
 
     function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
+        -- Spawn Saver consumes newpos on the next tick, so record how the character arrived now.
+        -- Load zones and travel artifacts place the player themselves; only a restore of the saved
+        -- logout position on the marked map can carry an exploited mid-air position.
+        local arrivedByTravel = character:GetData("newpos") ~= nil or character:GetData("pendingHideoutArrival") ~= nil
+
         -- wait for spawnsaver to setpos first
         timer.Simple(0.5, function()
-            if not IsValid(client) then return end
+            if not IsValid(client) or client:GetCharacter() ~= character then return end
+            local marked = character:GetData("markedexploiter", false)
+            if not marked then return end
+
             local savedpos = character:GetData("jumppos", false)
 
-            if character:GetData("markedexploiter", false) == game.GetMap():lower() and isvector(savedpos) then
-                client:SetPos(savedpos)
-                client:Notify("Your position was reset! Please stop trying to do the jump exploit. :^)")
-                ix.log.Add(client, "jumpExploit", game.GetMap():lower(), tostring(savedpos))
+            -- jumppos is not map-scoped and may have been overwritten elsewhere, so a stale mark must
+            -- never teleport; this is what sent players to another map's coordinates.
+            if marked ~= game.GetMap():lower() or arrivedByTravel or not isvector(savedpos) then
                 character:SetData("markedexploiter", false)
                 character:SetData("jumppos", false)
+                return
             end
+
+            client:SetPos(savedpos)
+            client:Notify("Your position was reset! Please stop trying to do the jump exploit. :^)")
+            ix.log.Add(client, "jumpExploit", game.GetMap():lower(), tostring(savedpos))
+            character:SetData("markedexploiter", false)
+            character:SetData("jumppos", false)
         end)
     end
 

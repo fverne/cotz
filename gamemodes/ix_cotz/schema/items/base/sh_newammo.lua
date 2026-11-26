@@ -55,6 +55,16 @@ function ITEM:OnInstanced(invID, x, y)
 	end
 end
 
+-- The last load size is the full box, so it is never a split option.
+local function canSplitAmount(item, amount)
+	if not isnumber(amount) or amount >= item:GetData("quantity", item.ammoAmount) then return false end
+	for i = 1, #item.loadSize - 1 do
+		if item.loadSize[i] == amount then return true end
+	end
+
+	return false
+end
+
 ITEM.functions.split = {
     name = "Split",
     tip = "useTip",
@@ -62,10 +72,8 @@ ITEM.functions.split = {
     isMulti = true,
     multiOptions = function(item, client)
 		local targets = {}
-        local quantity = item:GetData("quantity", item.ammoAmount)
-
-        for i=1,#item.loadSize-1 do
-			if quantity > item.loadSize[i] then
+		for i = 1, #item.loadSize - 1 do
+			if canSplitAmount(item, item.loadSize[i]) then
 				table.insert(targets, {
 					name = item.loadSize[i],
 					data = {item.loadSize[i]},
@@ -81,26 +89,21 @@ ITEM.functions.split = {
 
 		return (!IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID())
 	end,
-    OnRun = function(item, data)
-		if data[1] then
-			local quantity = item:GetData("quantity", item.ammoAmount)
-			local client = item.player
-
-			quantity = quantity - data[1]
-
-			if quantity <= 0 then
-				return false
-			end
-			if not client:GetCharacter():GetInventory():Add(item.uniqueID, 1, {["quantity"] = data[1]}) then
-				ix.item.SpawnTemporary(item.uniqueID, client:GetItemDropPos(), AngleRand(), {["quantity"] = data[1]})
-				client:Notify("No space in your inventory! Items have been dropped.")
-            end
-
-			item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-
-			item:SetData("quantity", quantity)
-
+	OnRun = function(item, data)
+		-- The client chooses data, so only accept an amount the menu could have offered.
+		if not istable(data) or not canSplitAmount(item, data[1]) then return false end
+		local amount = data[1]
+		local quantity = item:GetData("quantity", item.ammoAmount) - amount
+		local client = item.player
+		local splitData = {["quantity"] = amount, ["cotzKeepSeparate"] = true}
+		if not client:GetCharacter():GetInventory():Add(item.uniqueID, 1, splitData) then
+			ix.item.SpawnTemporary(item.uniqueID, client:GetItemDropPos(), AngleRand(), {["quantity"] = amount})
+			client:Notify("No space in your inventory! Items have been dropped.")
 		end
+
+		client:EmitSound("stalkersound/inv_properties.mp3", 110)
+		item:SetData("quantity", quantity)
+
 		return false
 	end,
 }

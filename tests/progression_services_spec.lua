@@ -36,7 +36,7 @@ ix = {
 	config = {Get = function(key, default) return config[key] or default end},
 	currency = {Get = function(value) return tostring(value) end},
 	item = {list = {medic_antirad_1 = {name = "Antirad"}}},
-	dialogue = {notifyMoneyLost = function() end}, chat = {Send = function() end},
+	dialogue = {notifyMoneyLost = function() end, RefreshOptions = function() end}, chat = {Send = function() end},
 }
 dofile("gamemodes/ix_cotz/schema/libs/sh_economystats.lua")
 local base = "gamemodes/ix_cotz/plugins/progression/"

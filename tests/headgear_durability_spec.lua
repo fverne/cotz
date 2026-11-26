@@ -236,6 +236,68 @@ helmet.data.durability = 100
 client.GetNWInt = function() return 100 end
 suitsPlugin:EntityTakeDamage(client, overrideDamage(DMG_BULLET))
 check(helmet.data.durability == 100, "Fully blocked damage does not wear headgear")
+-- Hits absorbed by an artifact wear neither the suit nor headgear.
+PLUGIN = {}
+loadMethod("gamemodes/ix_cotz/plugins/helperplugins/sh_artifacthelperplugin.lua",
+	"function PLUGIN:CotzArtifactAbsorbDamage(", _G)
+local artifactPlugin = PLUGIN
+local originalHookRun = hook.Run
+hook.Run = function(name, ...)
+	if name == "CotzArtifactAbsorbDamage" then return artifactPlugin:CotzArtifactAbsorbDamage(...) end
+end
+local now = 100
+CurTime = function() return now end
+os.time = function() return now end
+local function artifact(fields)
+	fields.data = {}
+	fields.GetData = ITEM.GetData
+	fields.SetData = ITEM.SetData
+
+	return fields
+end
+local carried = {}
+inventory.HasItem = function(_, uniqueID) return carried[uniqueID] end
+ix.chat = {Send = function() end}
+ParticleEffect, Vector, Angle, Color = function() end, function() return 0 end, function() end, function() end
+SCREENFADE = {IN = 1}
+timer = {Simple = function() end}
+client.Health = function() return 100 end
+client.GetPos = function() return 0 end
+client.GodEnable = function() end
+client.ScreenFade = function() end
+client.EmitSound = function() end
+client.GetNWFloat = function() return 1 end
+client.GetNWInt = function() return 0 end
+local function absorbedHit(damageType, amount)
+	helmet.data.durability, suit.data.durability = 100, 100
+	local damage = overrideDamage(damageType)
+	damage.value = amount
+	suitsPlugin:EntityTakeDamage(client, damage)
+
+	return damage.value, helmet.data.durability == 100 and suit.data.durability == 100
+end
+carried.artifact_capacitor = artifact({absorbCooldown = 5})
+local taken, unworn = absorbedHit(DMG_SHOCK, 50)
+check(taken == 0 and unworn, "Capacitor absorption wears no equipment")
+taken, unworn = absorbedHit(DMG_SHOCK, 50)
+check(taken == 50 and not unworn, "Shock on cooldown damages and wears equipment")
+carried.artifact_halo = artifact({saveChance = 100, saveCooldown = 15, invulnerabilityDuration = 5})
+taken, unworn = absorbedHit(DMG_BULLET, 50)
+check(taken == 50 and not unworn, "Survivable hits do not trigger Halo")
+client.GetNWFloat = function() return 0.5 end
+taken, unworn = absorbedHit(DMG_BULLET, 150)
+check(taken == 75 and not unworn, "Halo judges lethality after suit protection")
+client.GetNWFloat = function() return 1 end
+taken, unworn = absorbedHit(DMG_BULLET, 150)
+check(taken == 0 and unworn, "A Halo save wears no equipment")
+now = 104
+taken, unworn = absorbedHit(DMG_SLASH, 20)
+check(taken == 0 and unworn, "Hits during Halo invulnerability wear no equipment")
+now = 106
+taken, unworn = absorbedHit(DMG_SLASH, 20)
+check(taken == 20 and not unworn, "Wear resumes after Halo invulnerability")
+hook.Run = originalHookRun
+
 suit.data.durability = 100
 hook.Run = function(name)
 	if name == "ShouldBlockSafeZoneDamage" then return true end

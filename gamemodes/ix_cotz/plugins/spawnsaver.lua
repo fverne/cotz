@@ -3,6 +3,23 @@ PLUGIN.author = "Chessnut"
 PLUGIN.description = "Saves the position of a character."
 
 local pendingRestores = setmetatable({}, {__mode = "k"})
+local LOAD_ZONE_HEIGHT_OFFSET = 16
+
+-- Load zone positions sit slightly above the floor, but saved bedroll and compass locations are exact
+-- feet positions; lowering those buries the player in the floor, so only lower when the hull stays clear.
+local function LowerIfClear(client, position)
+	local lowered = position - Vector(0, 0, LOAD_ZONE_HEIGHT_OFFSET)
+	local trace = util.TraceHull({
+		start = lowered,
+		endpos = lowered,
+		mins = client:OBBMins(),
+		maxs = client:OBBMaxs(),
+		filter = client,
+		mask = MASK_PLAYERSOLID
+	})
+
+	return trace.StartSolid and position or lowered
+end
 
 function PLUGIN:PrePlayerLoadedCharacter(client, character)
 	pendingRestores[character] = true
@@ -52,8 +69,9 @@ function PLUGIN:PlayerLoadedCharacter(client, character, lastChar)
 					-- height reduced slightly to account for getpos offset
 					if restored then
 						xserverpos = restored
-					else
-						xserverpos[1].z = xserverpos[1].z - 16
+					elseif isvector(xserverpos[1]) then
+						local lowered = LowerIfClear(client, xserverpos[1])
+						xserverpos[1] = ix.util.FindClearSpawnPosition(client, lowered) or lowered
 					end
 					client:SetPos(xserverpos[1].x and xserverpos[1] or client:GetPos())
 					client:SetEyeAngles(xserverpos[2].p and xserverpos[2] or angle_zero)

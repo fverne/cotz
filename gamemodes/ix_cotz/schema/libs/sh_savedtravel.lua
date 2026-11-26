@@ -5,6 +5,27 @@ function ix.util.CaptureSavedLocation(client)
 	return {client:GetPos(), client:EyeAngles(), game.GetMap()}
 end
 
+local function IsClearFor(client, position)
+	return not util.TraceEntity({start = position, endpos = position, filter = client}, client).StartSolid
+end
+
+-- Saved spots are recorded at the player's feet and can be occupied by the bedroll itself, another player,
+-- or a gap that was only passable crouched. Returns the saved spot when it is clear, otherwise the nearest
+-- empty space around it, or nil when nothing nearby fits.
+function ix.util.FindClearSpawnPosition(client, position)
+	if IsClearFor(client, position) then return position end
+
+	-- FindEmptySpace searches around the entity's current position, so measure from the saved spot.
+	local original = client:GetPos()
+	client:SetPos(position)
+	local candidates = ix.util.FindEmptySpace(client, {client})
+	client:SetPos(original)
+
+	for _, candidate in ipairs(candidates) do
+		if IsClearFor(client, candidate) then return candidate end
+	end
+end
+
 function ix.util.TravelToSavedLocation(client, destination, callback, artifact)
 	callback = callback or function(ok, reason) if not ok then client:Notify(reason) end end
 	local hideouts = ix.plugin.Get("hideouts")
@@ -33,15 +54,17 @@ function ix.util.TravelToSavedLocation(client, destination, callback, artifact)
 			end
 		end
 	end
-	local trace = util.TraceHull({start = destination[1], endpos = destination[1],
-		mins = client:OBBMins(), maxs = client:OBBMaxs(), filter = client})
-	if not util.IsInWorld(destination[1]) or trace.Hit or trace.StartSolid then
+	local position = util.IsInWorld(destination[1]) and ix.util.FindClearSpawnPosition(client, destination[1])
+	if not position then
 		callback(false, "The recorded destination is blocked.")
 		return
 	end
 	if hideouts and hideouts.members[client] then hideouts:LeaveHideout(client, false) end
-	client:SetPos(destination[1])
+	client:SetPos(position)
 	client:SetEyeAngles(isangle(destination[2]) and destination[2] or angle_zero)
+	-- A mid-air jump mark from before the teleport no longer describes where the player is.
+	character:SetData("jumppos", nil)
+	character:SetData("markedexploiter", nil)
 	callback(true)
 end
 

@@ -26,12 +26,16 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 	local attacker = dmginfo:GetAttacker()
 	if ix.config.Get("disablePVP", true) then
 		if target:IsPlayer() and attacker:IsPlayer() and (target ~= attacker) then
+			hook.Run("CotzArtifactAbsorbDamage", target, dmginfo)
+
 			return
 		end
 	end
 
 	if target:IsPlayer() and attacker:IsPlayer() and (target ~= attacker) then
 		if attacker:GetLocalVar("inArena", false) and target:GetLocalVar("inArena", false) then
+			hook.Run("CotzArtifactAbsorbDamage", target, dmginfo)
+
 			return
 		end
 	end
@@ -39,18 +43,15 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 	-- Before the target's own protection, so the bonus raises the attack rather than bypassing armor.
 	if SERVER then self:ApplyMeleePerk(target, dmginfo) end
 
-	-- Radiation and psychic damage are handled before their respective health overrides.
-	if target:IsPlayer() and not dmginfo:IsDamageType(DMG_RADIATION)
-		and not dmginfo:IsDamageType(DMG_SONIC) then
-		ix.util.DamageHeadgear(target, dmginfo)
-	end
+	local incomingDamage = dmginfo:GetDamage()
+	local suit = target:IsPlayer() and target:getEquippedBodyArmor()
+	local suitWear = 0
 
 	-- Bullet resistance
 	if target:IsPlayer() and dmginfo:IsDamageType(DMG_BULLET) then
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperbulletres")
 		local flatRes = target:GetNWInt("ixflatbulletres")
-		local suit = target:getEquippedBodyArmor()
 
 		damage = damage * perRes
 		damage = damage - flatRes
@@ -62,10 +63,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 			damage = 0
 		end
 
-		-- wishes
-		if ix.util.CanWearSuit(suit) then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
-		end
+		suitWear = suitWear + damage / 100
 
 		dmginfo:SetDamage(damage)
 	end
@@ -75,7 +73,6 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperimpactres")
 		local flatRes = target:GetNWInt("ixflatimpactres")
-		local suit = target:getEquippedBodyArmor()
 
 		damage = damage * perRes
 		damage = damage - flatRes
@@ -85,9 +82,7 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 			damage = 0
 		end
 
-		if ix.util.CanWearSuit(suit) and not dmginfo:IsDamageType(DMG_FALL) then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
-		end
+		if not dmginfo:IsDamageType(DMG_FALL) then suitWear = suitWear + damage / 100 end
 
 		dmginfo:SetDamage(damage)
 	end
@@ -97,7 +92,6 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		local damage = dmginfo:GetDamage()
 		local perRes = target:GetNWFloat("ixperslashres")
 		local flatRes = target:GetNWInt("ixflatslashres")
-		local suit = target:getEquippedBodyArmor()
 
 		damage = damage * perRes
 		damage = damage - flatRes
@@ -109,24 +103,34 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 			damage = 0
 		end
 
-		-- wishes
-		if ix.util.CanWearSuit(suit) then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
-		end
+		suitWear = suitWear + damage / 100
 
 		dmginfo:SetDamage(damage)
 	end
 
-	if target:IsPlayer() then
-		local damage = ix.suits.GetAnomalyDamage(target, dmginfo)
-		if damage == nil then return end
-		local suit = target:getEquippedBodyArmor()
+	if not target:IsPlayer() then return end
 
-		if ix.util.CanWearSuit(suit) then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
-		end
+	local anomalyDamage = ix.suits.GetAnomalyDamage(target, dmginfo)
 
-		dmginfo:SetDamage(damage)
+	if anomalyDamage ~= nil then
+		suitWear = suitWear + anomalyDamage / 50
+		dmginfo:SetDamage(anomalyDamage)
+	end
+
+	-- Artifacts judge the mitigated hit, and a hit they absorb must not wear any equipment.
+	if hook.Run("CotzArtifactAbsorbDamage", target, dmginfo) then return end
+
+	-- Radiation and psychic damage are handled before their respective health overrides.
+	if not dmginfo:IsDamageType(DMG_RADIATION) and not dmginfo:IsDamageType(DMG_SONIC) then
+		-- Headgear wear applies its own protection, so it needs the unmitigated damage.
+		local mitigatedDamage = dmginfo:GetDamage()
+		dmginfo:SetDamage(incomingDamage)
+		ix.util.DamageHeadgear(target, dmginfo)
+		dmginfo:SetDamage(mitigatedDamage)
+	end
+
+	if suitWear > 0 and ix.util.CanWearSuit(suit) then
+		suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - suitWear, 0, 100))
 	end
 end
 

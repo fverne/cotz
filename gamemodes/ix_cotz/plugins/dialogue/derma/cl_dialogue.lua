@@ -573,6 +573,18 @@ net.Receive("cotz/dialogue/progression-response", function()
 	end
 end)
 
+net.Receive("cotz/dialogue/refresh-options", function()
+	local target = net.ReadEntity()
+	local topicID = net.ReadString()
+	local panel = ix.gui.dialogue
+	if not IsValid(panel) or panel.exiting or panel.target ~= target or panel.currentTopicID ~= topicID then
+		return
+	end
+	local topic = panel.tree[topicID]
+	panel.options:Clear()
+	panel:prepareDynamicOptions(topic.GetDynamicOptions(topic, LocalPlayer(), target), topic.options)
+end)
+
 net.Receive("ixDialogueNotify", function()
 	local notitype = net.ReadUInt(4)
 	local notidesc = net.ReadString()

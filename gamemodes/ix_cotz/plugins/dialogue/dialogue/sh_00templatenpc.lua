@@ -595,10 +595,11 @@ DIALOGUE.addTopic("ConfirmRepair", {
 		end
 		if SERVER then
 			target.repairstruct = nil
+			ix.dialogue.RefreshOptions(client, target, "RepairItems")
 		end
 		-- Return the next topicID
 
-		return "BackTopic"
+		return "RepairItems"
 	end,
 })
 

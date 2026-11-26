@@ -91,9 +91,10 @@ DIALOGUE.addTopic("ConfirmRepair", {
 			if accepted and not completed then
 				client:Notify("That service could not be completed. Please request a fresh quote.")
 			end
+			ix.dialogue.RefreshOptions(client, target, "RepairItems")
 		end
 
-		return "BackTopic"
+		return "RepairItems"
 	end,
 })
 
