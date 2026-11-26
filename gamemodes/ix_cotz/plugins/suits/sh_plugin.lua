@@ -95,8 +95,10 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		if damage == nil then return end
 		local suit = target:getEquippedBodyArmor()
 
-		if ix.util.CanWearSuit(suit) then
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
+		-- Falls never wear equipment; blunt hits wear it at the same rate as bullets and claws.
+		if ix.util.CanWearSuit(suit) and not dmginfo:IsDamageType(DMG_FALL) then
+			local wearDivisor = dmginfo:IsDamageType(DMG_CLUB) and 100 or 50
+			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / wearDivisor, 0, 100))
 		end
 
 		dmginfo:SetDamage(damage)

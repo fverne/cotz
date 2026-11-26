@@ -18,8 +18,8 @@ Red Razor and passive anomaly damage also use `DMG_ACID`. Whirlgig and Karusel u
 `util.BlastDamageInfo` with crush damage, retaining their radial damage amounts, origins and radii.
 Burners, Fruitpunch and Bubble no longer use generic damage, so suit protection applies to their hits.
 Burners use thermal resistance, Electros use electrical, Fruitpunch and Red Razor use chemical, and
-Bubbles, Whirlgig and Karusel use gravitational. See the [suit protection fields](../suits/README.md#protection-and-use).
-Crush damage is included in gravitational resistance and environmental headgear wear; this
+Bubbles, Whirlgig and Karusel use impact. See the [suit protection fields](../suits/README.md#protection-and-use).
+Crush damage is included in impact resistance and environmental headgear wear; this
 classification also applies to other crush damage, including physics impacts.
 
 ## Client effects

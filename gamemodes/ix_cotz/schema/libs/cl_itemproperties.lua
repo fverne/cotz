@@ -58,7 +58,7 @@ local ICONS = {
 	["protection/thermal"] = icon(ARMOR_ICONS .. "thermprot.png", Color(240, 130, 50)),
 	["protection/electrical"] = icon(ARMOR_ICONS .. "elect.png", Color(120, 190, 255)),
 	["protection/chemical"] = icon(ARMOR_ICONS .. "chemprot.png", Color(145, 210, 75)),
-	["protection/gravitational"] = icon(ARMOR_ICONS .. "impact.png", Color(160, 140, 230)),
+	["protection/impact"] = icon(ARMOR_ICONS .. "impact.png", Color(160, 140, 230)),
 	["protection/psychic"] = icon(ARMOR_ICONS .. "psiprot.png", PSYCHIC_COLOR),
 	["protection/radiation"] = icon(ARMOR_ICONS .. "radprot.png", RADIATION_COLOR),
 

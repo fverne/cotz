@@ -14,8 +14,8 @@ ix.suits.anomalyTypes = {
 		damageTypes = {DMG_ACID, DMG_DROWN, DMG_POISON, DMG_NERVEGAS},
 	},
 	{
-		name = "Gravitational", field = "gravitationalRes", flatField = "flatGravitationalRes", network = "gravitational",
-		damageTypes = {DMG_CRUSH, DMG_BLAST},
+		name = "Impact", field = "impactRes", flatField = "flatImpactRes", network = "impact",
+		damageTypes = {DMG_CRUSH, DMG_BLAST, DMG_CLUB, DMG_FALL},
 	},
 }
 

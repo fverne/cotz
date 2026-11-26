@@ -9,21 +9,21 @@ ix.randomitems.tables["task_reward_ammo_01"] = {
 
 ix.randomitems.tables["task_reward_ammo_01_small"] = { 
     {500, {"22lr", {["quantity"] = 30}}},
-    {500, {"9x18", {["quantity"] = 30}}},
+    {500, {"9x18", {["quantity"] = 50}}},
     {500, {"762x25", {["quantity"] = 30}}},
-    {500, {"45acp", {["quantity"] = 30}}},
+    {500, {"45acp", {["quantity"] = 50}}},
     {500, {"45acp41", {["quantity"] = 10}}},
 }
 
 ix.randomitems.tables["task_reward_ammo_01_aphp"] = { 
     {500, {"22lrap", {["quantity"] = 30}}},
     {500, {"22lrhp", {["quantity"] = 30}}},
-    {250,  {"9x18ap", {["quantity"] = 30}}},
-    {250,  {"9x18hp", {["quantity"] = 30}}},
+    {250,  {"9x18ap", {["quantity"] = 50}}},
+    {250,  {"9x18hp", {["quantity"] = 50}}},
     {250,  {"762x25ap", {["quantity"] = 30}}},
     {250,  {"762x25hp", {["quantity"] = 30}}},
-    {250,  {"45acpap", {["quantity"] = 30}}},
-    {250,  {"45acphp", {["quantity"] = 30}}},
+    {250,  {"45acpap", {["quantity"] = 50}}},
+    {250,  {"45acphp", {["quantity"] = 50}}},
     {250,  {"45acp41", {["quantity"] = 10}}}, -- doesnt have ap or hp
 }
 
@@ -40,24 +40,24 @@ ix.randomitems.tables["task_reward_ammo_02"] = {
 ix.randomitems.tables["task_reward_ammo_02_small"] = { 
     {250, {"12gauge", {["quantity"] = 15}}},
     {250,  {"12gaugesg", {["quantity"] = 15}}},
-    {250,  {"9x19", {["quantity"] = 30}}},
+    {250,  {"9x19", {["quantity"] = 50}}},
     {250,  {"357magnum", {["quantity"] = 30}}},
-    {250,  {"545x39", {["quantity"] = 30}}},
-    {250,  {"556x45", {["quantity"] = 30}}},
+    {250,  {"545x39", {["quantity"] = 50}}},
+    {250,  {"556x45", {["quantity"] = 50}}},
     {250,  {"762x54", {["quantity"] = 30}}},
 }
 
 ix.randomitems.tables["task_reward_ammo_02_aphp"] = { 
     {250, {"12gauge", {["quantity"] = 15}}}, -- doesnt have ap or hp
     {250,  {"12gaugesg", {["quantity"] = 15}}}, -- doesnt have ap or hp
-    {250,  {"9x19ap", {["quantity"] = 30}}},
-    {250,  {"9x19hp", {["quantity"] = 30}}},
+    {250,  {"9x19ap", {["quantity"] = 50}}},
+    {250,  {"9x19hp", {["quantity"] = 50}}},
     {250,  {"357magnumap", {["quantity"] = 30}}},
     {250,  {"357magnumhp", {["quantity"] = 30}}},
-    {250,  {"545x39ap", {["quantity"] = 30}}},
-    {250,  {"545x39hp", {["quantity"] = 30}}},
-    {250,  {"556x45ap", {["quantity"] = 30}}},
-    {250,  {"556x45hp", {["quantity"] = 30}}},
+    {250,  {"545x39ap", {["quantity"] = 50}}},
+    {250,  {"545x39hp", {["quantity"] = 50}}},
+    {250,  {"556x45ap", {["quantity"] = 50}}},
+    {250,  {"556x45hp", {["quantity"] = 50}}},
     {250,  {"762x54ap", {["quantity"] = 30}}},
     {250,  {"762x54hp", {["quantity"] = 30}}},
 }
@@ -74,21 +74,21 @@ ix.randomitems.tables["task_reward_ammo_03"] = {
 ix.randomitems.tables["task_reward_ammo_03_small"] = { 
     {250, {"12gaugetr", {["quantity"] = 15}}},
     {250,  {"12gaugedt", {["quantity"] = 15}}},
-    {250,  {"9x21", {["quantity"] = 30}}},
+    {250,  {"9x21", {["quantity"] = 50}}},
     {250,  {"44magnum", {["quantity"] = 30}}},
-    {250,  {"762x39", {["quantity"] = 30}}},
+    {250,  {"762x39", {["quantity"] = 50}}},
     {250,  {"762x51", {["quantity"] = 30}}},
 }
 
 ix.randomitems.tables["task_reward_ammo_03_aphp"] = { 
     {250, {"12gaugetr", {["quantity"] = 15}}}, -- doesnt have ap or hp
     {250, {"12gaugedt", {["quantity"] = 15}}}, -- doesnt have ap or hp
-    {250, {"9x21ap", {["quantity"] = 30}}},
-    {250, {"9x21hp", {["quantity"] = 30}}},
+    {250, {"9x21ap", {["quantity"] = 50}}},
+    {250, {"9x21hp", {["quantity"] = 50}}},
     {250, {"44magnumap", {["quantity"] = 30}}},
     {250, {"44magnumhp", {["quantity"] = 30}}},
-    {250, {"762x39ap", {["quantity"] = 30}}},
-    {250, {"762x39hp", {["quantity"] = 30}}},
+    {250, {"762x39ap", {["quantity"] = 50}}},
+    {250, {"762x39hp", {["quantity"] = 50}}},
     {250, {"762x51ap", {["quantity"] = 30}}},
     {250, {"762x51hp", {["quantity"] = 30}}},
 }
@@ -108,7 +108,7 @@ ix.randomitems.tables["task_reward_ammo_04_small"] = {
     {250, {"9x39", {["quantity"] = 30}}},
     {250, {"50ae", {["quantity"] = 30}}},
     {250, {"57x28", {["quantity"] = 30}}},
-    {250, {"338lapua", {["quantity"] = 30}}},
+    {250, {"338lapua", {["quantity"] = 15}}},
     {250, {"500magnum", {["quantity"] = 30}}},
     {250, {"700nitro", {["quantity"] = 4}}},
 }
@@ -121,8 +121,8 @@ ix.randomitems.tables["task_reward_ammo_04_aphp"] = {
     {250, {"50aehp", {["quantity"] = 30}}},
     {250, {"57x28ap", {["quantity"] = 30}}},
     {250, {"57x28hp", {["quantity"] = 30}}},
-    {250, {"338lapuaap", {["quantity"] = 30}}},
-    {250, {"338lapuahp", {["quantity"] = 30}}},
+    {250, {"338lapuaap", {["quantity"] = 15}}},
+    {250, {"338lapuahp", {["quantity"] = 15}}},
     {250, {"500magnumap", {["quantity"] = 30}}},
     {250, {"500magnumhp", {["quantity"] = 30}}},
     {250, {"700nitro", {["quantity"] = 4}}}, -- doesnt have ap or hp

@@ -83,7 +83,7 @@ end
 ix.randomitems.tables["default"] = {
   {2000, {"food_bread"}},
   {50, {"mp5",{ ["durability"] = 5, ["wear"] = 80}}},
-  {200, {"9x19", { ["quantity"] = 25}}},
+  {200, {"9x19", { ["quantity"] = 42}}},
 }
 
 ix.util.Include("ix_cotz/plugins/randomitem/pools/ix_entbox_drops.lua","shared")

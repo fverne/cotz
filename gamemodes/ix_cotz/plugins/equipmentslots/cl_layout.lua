@@ -8,10 +8,7 @@ PLUGIN.protectionTypes = {
 	{name = "Thermal", icon = "protection/thermal", multiplier = "ixperthermalres", flat = "ixflatthermalres"},
 	{name = "Electrical", icon = "protection/electrical", multiplier = "ixperelectricalres", flat = "ixflatelectricalres"},
 	{name = "Chemical", icon = "protection/chemical", multiplier = "ixperchemicalres", flat = "ixflatchemicalres"},
-	{
-		name = "Gravitational", icon = "protection/gravitational",
-		multiplier = "ixpergravitationalres", flat = "ixflatgravitationalres",
-	},
+	{name = "Impact", icon = "protection/impact", multiplier = "ixperimpactres", flat = "ixflatimpactres"},
 	{name = "Psy", icon = "protection/psychic", multiplier = "ixperpsyres", flat = "ixflatpsyres"},
 }
 

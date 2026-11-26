@@ -29,8 +29,8 @@ ITEM.electricalRes = 0.12
 ITEM.flatElectricalRes = 2
 ITEM.chemicalRes = 0.12
 ITEM.flatChemicalRes = 2
-ITEM.gravitationalRes = 0.12
-ITEM.flatGravitationalRes = 2
+ITEM.impactRes = 0.12
+ITEM.flatImpactRes = 2
 
 ITEM.carryinc = 9.600
 ITEM.exteriorSlots = 2

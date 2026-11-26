@@ -71,7 +71,7 @@ Suit anomaly protection has four independent percentage/flat pairs:
 | Thermal | `thermalRes` | `flatThermalRes` | Burn, slow burn |
 | Electrical | `electricalRes` | `flatElectricalRes` | Shock |
 | Chemical | `chemicalRes` | `flatChemicalRes` | Acid, drowning, poison, nerve gas |
-| Gravitational | `gravitationalRes` | `flatGravitationalRes` | Crush, blast |
+| Impact | `impactRes` | `flatImpactRes` | Crush (including gravitational anomalies), blast, blunt (club), fall |
 
 Every concrete suit declares all eight fields, initially copying its previous `ar`/`far` values.
 These are definition values, so existing instances use them without changing saved item data.
@@ -89,6 +89,11 @@ Equipped headgear may also supply these fields, otherwise its existing `ar`/`far
 The existing resistance refresh paths update each family's cached network values.
 Mixed damage flags use the weakest applicable family's protection once, without stacking reductions.
 Crush damage still uses environmental headgear wear, including gravitational anomalies and physics impacts.
+
+Impact covers explosions, gravitational anomalies, falls and blunt hits. Blunt sources are human NPC and
+controller melee, pseudogiant and Vareshka ground slams, player punches and blunt melee weapons.
+Fall damage is dealt as `DMG_FALL` and never wears the suit or headgear. Blunt hits wear the suit and
+headgear at the combat rates used for bullets and claws; crush and blast keep their previous wear rates.
 
 A filter has 0–100% condition. Effectiveness is `clamp(condition / 20, 0, 1)`: full at 20–100%, then
 linear below 20%. The headgear's percentage and flat radiation protection multiply its ordinary
@@ -176,6 +181,6 @@ Check equipped and unequipped drag/drop, full-backpack replacement, the complete
 F cancellation just before completion, permission changes, repeated requests and filter wear during the delay.
 Inspect tooltips, all eight equipment protection statistics and both condition bars at narrow, 1080p,
 ultrawide and 4K resolutions. Temporarily give a test suit different thermal, electrical, chemical and
-gravitational ratings; compare each field anomaly's damage and equipment wear with its matching tooltip
+impact ratings; compare each field anomaly's damage and equipment wear with its matching tooltip
 and footer value. Restore the definition afterward. Check low durability, upgrades, attachments, the
 flat anomaly wish, reconnects and mixed damage flags. Standalone specs do not verify live rendering or networking.

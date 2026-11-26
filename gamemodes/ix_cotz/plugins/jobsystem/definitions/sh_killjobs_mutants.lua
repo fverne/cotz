@@ -8,9 +8,9 @@ ix.jobs.register({
 	reward = {
 		{"762x25", { ["quantity"] = 25 }},
 		{"22lr", { ["quantity"] = 35 }},
-		{"9x18", { ["quantity"] = 25 }},
-		{"9x19", { ["quantity"] = 25 }},
-		{"45acp", { ["quantity"] = 25 }},
+		{"9x18", { ["quantity"] = 42 }},
+		{"9x19", { ["quantity"] = 42 }},
+		{"45acp", { ["quantity"] = 42 }},
 	},
 	rewardCount = 2,
 	repReward = 12,

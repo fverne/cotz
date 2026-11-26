@@ -1,10 +1,10 @@
 -- Each corpse yields one weighted pocket-loot selection; its weapon drop is handled by the NPC.
 
 ix.randomitems.tables["bandit_pistol_loot"] = {
-	{736, {"9x18", {["quantity"] = 9}}},
-	{736, {"9x19", {["quantity"] = 7}}},
+	{736, {"9x18", {["quantity"] = 15}}},
+	{736, {"9x19", {["quantity"] = 12}}},
 	{736, {"762x25", {["quantity"] = 7}}},
-	{736, {"45acp", {["quantity"] = 6}}},
+	{736, {"45acp", {["quantity"] = 10}}},
 	{736, {"22lr", {["quantity"] = 10}}},
 	{259, {"value_wallet"}},
 	{204, {"value_barter_walletwz"}},
@@ -42,8 +42,8 @@ ix.randomitems.tables["bandit_pistol_loot"] = {
 
 ix.randomitems.tables["bandit_rifle_loot"] = {
 	{965, {"762x25", {["quantity"] = 7}}},
-	{964, {"9x18", {["quantity"] = 9}}},
-	{788, {"545x39", {["quantity"] = 6}}},
+	{964, {"9x18", {["quantity"] = 15}}},
+	{788, {"545x39", {["quantity"] = 10}}},
 	{964, {"22lr", {["quantity"] = 10}}},
 	{259, {"value_wallet"}},
 	{204, {"value_barter_walletwz"}},
@@ -119,7 +119,7 @@ ix.randomitems.tables["bandit_shotgun_loot"] = {
 
 ix.randomitems.tables["bandit_sniper_loot"] = {
 	{1875, {"762x54", {["quantity"] = 3}}},
-	{1806, {"762x39", {["quantity"] = 4}}},
+	{1806, {"762x39", {["quantity"] = 7}}},
 	{259, {"value_wallet"}},
 	{204, {"value_barter_walletwz"}},
 	{259, {"value_crikent_0"}},
@@ -155,8 +155,8 @@ ix.randomitems.tables["bandit_sniper_loot"] = {
 }
 
 ix.randomitems.tables["merc_pistol_loot"] = {
-	{1400, {"9x18", {["quantity"] = 9}}},
-	{1399, {"9x19", {["quantity"] = 8}}},
+	{1400, {"9x18", {["quantity"] = 15}}},
+	{1399, {"9x19", {["quantity"] = 13}}},
 	{1399, {"357magnum", {["quantity"] = 4}}},
 	{185, {"value_chevron_bear"}},
 	{104, {"value_radio"}},
@@ -190,8 +190,8 @@ ix.randomitems.tables["merc_pistol_loot"] = {
 }
 
 ix.randomitems.tables["merc_rifle_loot"] = {
-	{2393, {"9x19", {["quantity"] = 10}}},
-	{1804, {"556x45", {["quantity"] = 8}}},
+	{2393, {"9x19", {["quantity"] = 17}}},
+	{1804, {"556x45", {["quantity"] = 13}}},
 	{185, {"value_chevron_bear"}},
 	{104, {"value_radio"}},
 	{169, {"value_energy_accum"}},
@@ -292,7 +292,7 @@ ix.randomitems.tables["merc_sniper_loot"] = {
 }
 
 ix.randomitems.tables["mili_pistol_loot"] = {
-	{4723, {"9x18", {["quantity"] = 8}}},
+	{4723, {"9x18", {["quantity"] = 13}}},
 	{163, {"value_bogatir_moreman_tag"}},
 	{101, {"value_milimap"}},
 	{90, {"value_radio"}},
@@ -321,8 +321,8 @@ ix.randomitems.tables["mili_pistol_loot"] = {
 }
 
 ix.randomitems.tables["mili_rifle_loot"] = {
-	{2061, {"545x39", {["quantity"] = 10}}},
-	{2661, {"545x39hp", {["quantity"] = 6}}},
+	{2061, {"545x39", {["quantity"] = 17}}},
+	{2661, {"545x39hp", {["quantity"] = 10}}},
 	{163, {"value_bogatir_moreman_tag"}},
 	{101, {"value_milimap"}},
 	{90, {"value_radio"}},
@@ -382,10 +382,10 @@ ix.randomitems.tables["mili_shotgun_loot"] = {
 }
 
 ix.randomitems.tables["z_rookie_pistol_loot"] = {
-	{881, {"9x18", {["quantity"] = 4}}},
-	{881, {"9x19", {["quantity"] = 3}}},
+	{881, {"9x18", {["quantity"] = 7}}},
+	{881, {"9x19", {["quantity"] = 5}}},
 	{881, {"762x25", {["quantity"] = 3}}},
-	{881, {"45acp", {["quantity"] = 3}}},
+	{881, {"45acp", {["quantity"] = 5}}},
 	{881, {"22lr", {["quantity"] = 5}}},
 	{405, {"value_wallet"}},
 	{405, {"value_crikent_0"}},
@@ -412,8 +412,8 @@ ix.randomitems.tables["z_rookie_pistol_loot"] = {
 
 ix.randomitems.tables["z_rookie_rifle_loot"] = {
 	{1102, {"762x25", {["quantity"] = 3}}},
-	{1102, {"9x18", {["quantity"] = 4}}},
-	{1102, {"545x39", {["quantity"] = 3}}},
+	{1102, {"9x18", {["quantity"] = 7}}},
+	{1102, {"545x39", {["quantity"] = 5}}},
 	{1102, {"22lr", {["quantity"] = 5}}},
 	{405, {"value_wallet"}},
 	{405, {"value_crikent_0"}},
@@ -466,8 +466,8 @@ ix.randomitems.tables["z_rookie_shotgun_loot"] = {
 }
 
 ix.randomitems.tables["z_merc_pistol_loot"] = {
-	{1466, {"9x18", {["quantity"] = 4}}},
-	{1465, {"9x19", {["quantity"] = 4}}},
+	{1466, {"9x18", {["quantity"] = 7}}},
+	{1465, {"9x19", {["quantity"] = 7}}},
 	{1465, {"357magnum", {["quantity"] = 2}}},
 	{371, {"value_chevron_bear"}},
 	{338, {"value_energy_accum"}},
@@ -492,8 +492,8 @@ ix.randomitems.tables["z_merc_pistol_loot"] = {
 }
 
 ix.randomitems.tables["z_merc_rifle_loot"] = {
-	{2250, {"9x19", {["quantity"] = 5}}},
-	{2145, {"556x45", {["quantity"] = 4}}},
+	{2250, {"9x19", {["quantity"] = 8}}},
+	{2145, {"556x45", {["quantity"] = 7}}},
 	{371, {"value_chevron_bear"}},
 	{338, {"value_energy_accum"}},
 	{208, {"value_radio"}},
@@ -542,7 +542,7 @@ ix.randomitems.tables["z_merc_shotgun_loot"] = {
 }
 
 ix.randomitems.tables["z_mili_pistol_loot"] = {
-	{4472, {"9x18", {["quantity"] = 4}}},
+	{4472, {"9x18", {["quantity"] = 7}}},
 	{388, {"value_bogatir_moreman_tag"}},
 	{240, {"value_milimap"}},
 	{518, {"value_battery_d_0"}},
@@ -564,8 +564,8 @@ ix.randomitems.tables["z_mili_pistol_loot"] = {
 }
 
 ix.randomitems.tables["z_mili_rifle_loot"] = {
-	{2112, {"545x39", {["quantity"] = 5}}},
-	{2360, {"545x39hp", {["quantity"] = 3}}},
+	{2112, {"545x39", {["quantity"] = 8}}},
+	{2360, {"545x39hp", {["quantity"] = 5}}},
 	{388, {"value_bogatir_moreman_tag"}},
 	{240, {"value_milimap"}},
 	{518, {"value_battery_d_0"}},

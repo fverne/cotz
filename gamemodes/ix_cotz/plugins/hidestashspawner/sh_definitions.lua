@@ -27,7 +27,7 @@ PLUGIN.StashItems = {
   ["tier2"] = {
     {
       {"makarov", {["durability"] = 5}},
-      {"9x18", {["quantity"] = 40}},
+      {"9x18", {["quantity"] = 67}},
     --  {"kit_hidestash2"},
     },
     {
@@ -46,7 +46,7 @@ PLUGIN.StashItems = {
   ["tier3"] = {
     {
       {"skorpion", {["durability"] = 5}},
-      {"9x18", {["quantity"] = 50}},
+      {"9x18", {["quantity"] = 83}},
     --  {"kit_hidestash3"},
     },
 

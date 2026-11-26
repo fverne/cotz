@@ -153,7 +153,12 @@ if (SERVER) then
 
 		if speed > 400 then
 			--ply:EmitSound(FallSound)
-			ply:TakeDamage(damage,game.GetWorld(),game.GetWorld())
+			local damageInfo = DamageInfo()
+			damageInfo:SetDamage(damage)
+			damageInfo:SetDamageType(DMG_FALL)
+			damageInfo:SetAttacker(game.GetWorld())
+			damageInfo:SetInflictor(game.GetWorld())
+			ply:TakeDamageInfo(damageInfo)
 			return true
 		else
 			return true

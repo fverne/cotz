@@ -4,10 +4,10 @@
 
 Firearms from every non-trader source spawn at exactly 5% durability, which is both the floor and the
 cap: world, box, cache, stash and reward pools, hidden stashes, NPC weapon drops and the default fallback.
-Cleanliness (`wear`),
-ammunition and attachments are unchanged. A found gun is nearly broken and stops after little use. New entries must set `durability` explicitly; an omitted value
-spawns a pristine weapon. Vendor stock, paid special sales, character starting kits, admin spawns and
-existing saved weapons keep their previous durability. Run
+Cleanliness (`wear`), ammunition and attachments are unchanged. A found gun is nearly broken and stops
+after little use. New entries must set `durability` explicitly; an omitted value spawns a pristine weapon.
+Vendor stock, paid special sales, character starting kits, admin spawns and existing saved weapons keep
+their previous durability. Run
 `luatex --luaonly tests/spawned_weapon_durability_spec.lua`.
 
 Worldspawn pool ownership is Swamps 1/2, Garbage regular/rare, Waystation 3/4, and Pripyat 5/6.

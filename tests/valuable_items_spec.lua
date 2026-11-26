@@ -331,8 +331,8 @@ ix.util.Include = include
 check(ix.item.list.medic_antipsychotic_1.functions.combine == nil, "use-count items such as asenapine stay uncombinable")
 local ammo = instance("556x45hp", nil, client, stash)
 local ammoTarget = instance("556x45hp", 290, client, stash)
-check(ammo:GetStackQuantity() == 60 and ammo:GetStackCapacity() == 300, "ammo stacks use ammoAmount and maxStack")
-check(combine(ammo, ammoTarget) == false and ammo:GetData("quantity") == 50 and ammoTarget:GetData("quantity") == 300,
+check(ammo:GetStackQuantity() == 100 and ammo:GetStackCapacity() == 300, "ammo stacks use ammoAmount and maxStack")
+check(combine(ammo, ammoTarget) == false and ammo:GetData("quantity") == 90 and ammoTarget:GetData("quantity") == 300,
 	"ammo merges up to its stack limit")
 local rubles = instance("bagrubles", 100, client, stash)
 check(not rubles.functions.combine.OnCanRun(rubles, {boltTarget.id}), "rubles only combine with rubles")

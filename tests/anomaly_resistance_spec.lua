@@ -69,12 +69,12 @@ end
 suit.thermalRes, suit.flatThermalRes = 0.6, 8
 suit.electricalRes, suit.flatElectricalRes = 0.4, 6
 suit.chemicalRes, suit.flatChemicalRes = 0.2, 2
-suit.gravitationalRes, suit.flatGravitationalRes = 0, 0
+suit.impactRes, suit.flatImpactRes = 0, 0
 near(suit:getAR("thermalRes"), 0.4, "Thermal tuning is independent")
 near(suit:getAR("electricalRes"), 0.6, "Electrical tuning is independent")
 near(suit:getAR("chemicalRes"), 0.8, "Chemical tuning is independent")
-near(suit:getAR("gravitationalRes"), 1, "Explicit zero overrides legacy percentage")
-near(suit:getFAR("flatGravitationalRes"), 0, "Explicit zero overrides legacy flat protection")
+near(suit:getAR("impactRes"), 1, "Explicit zero overrides legacy percentage")
+near(suit:getFAR("flatImpactRes"), 0, "Explicit zero overrides legacy flat protection")
 suit.data.durability = 40
 near(suit:getAR("thermalRes"), 0.7, "Durability tapers typed percentage protection")
 near(suit:getFAR("flatThermalRes"), 4, "Durability tapers typed flat protection")
@@ -186,8 +186,14 @@ for index, definition in ipairs(ix.suits.anomalyTypes) do
 		suitsPlugin:EntityTakeDamage(client, info)
 		local expected = (100 - index) * index / 10
 		near(info.amount, expected, "Damage selects matching protection: " .. damageType)
-		near(suit.data.durability, 100 - expected / 50, "Suit wear uses matching damage: " .. damageType)
-		near(helmet.data.durability, 100 - expected / 100, "Headgear wear uses matching damage: " .. damageType)
+		local suitWear, headgearWear = expected / 50, expected / 100
+		if damageType == DMG_CLUB then
+			suitWear, headgearWear = expected / 100, expected / 400
+		elseif damageType == DMG_FALL then
+			suitWear, headgearWear = 0, 0
+		end
+		near(suit.data.durability, 100 - suitWear, "Suit wear uses matching damage: " .. damageType)
+		near(helmet.data.durability, 100 - headgearWear, "Headgear wear uses matching damage: " .. damageType)
 	end
 end
 near(ix.suits.GetAnomalyDamage(client, damageInfo(DMG_BURN + DMG_SHOCK)), 19.6,
@@ -195,7 +201,7 @@ near(ix.suits.GetAnomalyDamage(client, damageInfo(DMG_BURN + DMG_SHOCK)), 19.6,
 near(ix.suits.GetAnomalyDamage(client, damageInfo(DMG_BURN + DMG_SLOWBURN)), 9.9,
 	"Mixed flags from one family do not stack")
 near(ix.suits.GetAnomalyDamage(client, damageInfo(DMG_BURN, 0)), 0, "Flat absorption cannot heal")
-for _, damageType in ipairs({DMG_GENERIC, DMG_FALL, DMG_RADIATION, DMG_SONIC, DMG_BULLET, DMG_CLUB}) do
+for _, damageType in ipairs({DMG_GENERIC, DMG_RADIATION, DMG_SONIC, DMG_BULLET, DMG_SLASH}) do
 	check(ix.suits.GetAnomalyDamage(client, damageInfo(damageType)) == nil,
 		"Other damage retains its existing handling: " .. damageType)
 end

@@ -36,8 +36,8 @@ ITEM.electricalRes = 0.58
 ITEM.flatElectricalRes = 2
 ITEM.chemicalRes = 0.58
 ITEM.flatChemicalRes = 2
-ITEM.gravitationalRes = 0.58
-ITEM.flatGravitationalRes = 2
+ITEM.impactRes = 0.58
+ITEM.flatImpactRes = 2
 
 ITEM.pr = 0.52
 ITEM.fpr = 0

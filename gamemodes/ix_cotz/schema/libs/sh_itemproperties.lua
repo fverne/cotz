@@ -8,7 +8,7 @@ local UNITS = {
 	clotting = {1500, "mL/min"}, staminaRate = {1000, "µg/s"},
 	-- Protection readings are resistance fractions shown as percentages.
 	thermal = {100, "%"}, electrical = {100, "%"}, chemical = {100, "%"}, anomalous = {100, "%"},
-	ballistics = {100, "%"}, rupture = {100, "%"}, gravitational = {100, "%"},
+	ballistics = {100, "%"}, rupture = {100, "%"}, impact = {100, "%"},
 	psychic = {100, "%"}, radiation = {100, "%"},
 	distance = {1, "units"}, jumpSpeed = {1, "units/s"},
 	weight = {1, "kg"}, duration = {1, "s"}, percent = {1, "%"}, number = {1, ""},
@@ -104,7 +104,7 @@ function ix.itemProperties.GetProtection(item)
 		for _, entry in ipairs({
 			{"ballistics", "Ballistics", "br", "fbr"}, {"rupture", "Rupture", "sr", "fsr"},
 			{"thermal", "Thermal", "ar", "far"}, {"electrical", "Electrical", "ar", "far"},
-			{"chemical", "Chemical", "ar", "far"}, {"gravitational", "Gravitational", "ar", "far"},
+			{"chemical", "Chemical", "ar", "far"}, {"impact", "Impact", "ar", "far"},
 			{"psychic", "Psychic", "pr", "fpr"}, {"radiation", "Radiation", "radProt", "flatRadProt"},
 		}) do
 			if attachment[entry[3]] or attachment[entry[4]] then

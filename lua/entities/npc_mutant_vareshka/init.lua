@@ -144,7 +144,7 @@ function ENT:STALKERNPCThink()
 									
 				TEMP_TargetDamage:SetDamage(fulldamage * ((512-distance)/512))
 				TEMP_TargetDamage:SetInflictor(self)
-				TEMP_TargetDamage:SetDamageType(DMG_BULLET)
+				TEMP_TargetDamage:SetDamageType(DMG_CLUB)
 				TEMP_TargetDamage:SetAttacker(self)
 				TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(self:GetPos()+self:OBBCenter()))
 				TEMP_TargetDamage:SetDamageForce(((v:GetPos() + self:OBBCenter()) - (self:GetPos())):GetNormal())
