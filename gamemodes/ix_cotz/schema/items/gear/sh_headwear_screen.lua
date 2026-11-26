@@ -10,11 +10,6 @@ ITEM.overlayPath = "vgui/overlays/hud_sci"
 ITEM.isGasmask = true
 ITEM.filterType = "scientific"
 ITEM.isHelmet = true
--- ITEM.isBackpack = true
--- ITEM.outfitCategory = "Backpack"
--- ITEM.carryinc = 18
-ITEM.baseSuit = "headwear_screen"
-ITEM.suitVariant = "baseline"
 
 ITEM.br = 0.01
 ITEM.fbr = 0
@@ -112,9 +107,6 @@ ITEM.iconCam = {
 	fov = 3.85
 }
 
-function ITEM:PopulateTooltipIndividual(tooltip)
-	ix.util.PropertyDesc2(tooltip, self.outfitCategory, Color(64, 224, 208), ix.util.GetMaterial("vgui/ui/stalker/weaponupgrades/handling.png"))
-end
 
 ITEM.pacData = {
 	[1] = {
