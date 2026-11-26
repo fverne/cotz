@@ -13,9 +13,9 @@ ENT.CombatRole = "sniper"
 ENT.ModelGroup = "merc"
 
 ENT.weapons = {
-	{{"sako85", { ["durability"] = 0.25, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_sv98"},
-	{{"sv98", { ["durability"] = 0.25, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_sv98"},
-	{{"sako85nato", { ["durability"] = 0.25, ["wear"] = 10, ["ammo"] = 4 }}, "weapon_npc_sv98"},
+	{{"sako85", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_sv98"},
+	{{"sv98", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_sv98"},
+	{{"sako85nato", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 4 }}, "weapon_npc_sv98"},
 }
 
 ENT.alertsounds = {

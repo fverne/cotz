@@ -16,11 +16,11 @@ ENT.CombatRole = "pistolman"
 ENT.ModelGroup = "zombie_rookie"
 
 ENT.weapons = {
-	{{"makarov", { ["durability"] = 0.2, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_makarov"},
-	{{"tokarev", { ["durability"] = 0.2, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_tokarev"},
-	{{"brhp", { ["durability"] = 0.2, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_brhp"},
-	{{"rugermk3", { ["durability"] = 0.2, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_rugermk3"},
-	{{"nagantrev", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
+	{{"makarov", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_makarov"},
+	{{"tokarev", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_tokarev"},
+	{{"brhp", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_brhp"},
+	{{"rugermk3", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_rugermk3"},
+	{{"nagantrev", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
 }
 
 ENT.alertsounds = {

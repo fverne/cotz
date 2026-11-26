@@ -1,5 +1,7 @@
 -- Run from the repository root: luatex --luaonly tests/spawned_weapon_durability_spec.lua
 -- Every firearm that enters the world outside a trader must be worn enough to need a technician.
+-- The floor and the cap coincide, so found firearms always spawn at exactly this value.
+local MIN_DURABILITY = 5
 local MAX_DURABILITY = 5
 local checks = 0
 local function check(condition, message)
@@ -34,7 +36,8 @@ local function checkEntry(itemID, data, source)
 	if not firearms[itemID] then return false end
 	local durability = data and data.durability
 	check(durability ~= nil, source .. " omits durability for " .. itemID .. ", which would spawn it pristine")
-	check(durability >= 0 and durability <= MAX_DURABILITY, source .. " spawns " .. itemID .. " above the cap")
+	check(durability >= MIN_DURABILITY and durability <= MAX_DURABILITY,
+		source .. " spawns " .. itemID .. " outside the found durability range")
 
 	return true
 end
@@ -54,7 +57,8 @@ end
 check(pooled > 700, "firearm loot and reward pools were inspected")
 
 local fallback = read(plugins .. "randomitem/libs/sh_randomitems.lua"):match('"mp5",%s*{.-%["durability"%]%s*=%s*([%d.]+)')
-check(tonumber(fallback) <= MAX_DURABILITY, "default pool firearm is capped")
+check(tonumber(fallback) >= MIN_DURABILITY and tonumber(fallback) <= MAX_DURABILITY,
+	"default pool firearm is within the found durability range")
 
 PLUGIN = {}
 dofile(plugins .. "hidestashspawner/sh_definitions.lua")

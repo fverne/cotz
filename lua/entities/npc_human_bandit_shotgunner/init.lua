@@ -13,12 +13,12 @@ ENT.CombatRole = "shotgunner"
 ENT.ModelGroup = "bandit"
 
 ENT.weapons = {
-	{{"toz106", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_toz34"},
-	{{"ij600", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 1 }}, "weapon_npc_toz34"},
-	{{"mp27", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_toz34"},
-	{{"lax410s", { ["durability"] = 0.15, ["wear"] = 5, ["ammo"] = 2 }}, "weapon_npc_sawnoff"},
-	{{"toz34short", { ["durability"] = 0.15, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_sawnoff"},
-	{{"toz66short", { ["durability"] = 0.15, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_sawnoff"},
+	{{"toz106", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_toz34"},
+	{{"ij600", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 1 }}, "weapon_npc_toz34"},
+	{{"mp27", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_toz34"},
+	{{"lax410s", { ["durability"] = 5, ["wear"] = 5, ["ammo"] = 2 }}, "weapon_npc_sawnoff"},
+	{{"toz34short", { ["durability"] = 5, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_sawnoff"},
+	{{"toz66short", { ["durability"] = 5, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_sawnoff"},
 }
 
 ENT.alertsounds = {

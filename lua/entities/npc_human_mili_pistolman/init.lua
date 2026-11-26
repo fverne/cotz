@@ -13,7 +13,7 @@ ENT.CombatRole = "pistolman"
 ENT.ModelGroup = "mili"
 
 ENT.weapons = {
-	{{"makarov", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_makarov"},
+	{{"makarov", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 2 }}, "weapon_npc_makarov"},
 }
 
 ENT.alertsounds = {

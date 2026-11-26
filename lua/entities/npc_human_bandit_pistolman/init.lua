@@ -13,11 +13,11 @@ ENT.CombatRole = "pistolman"
 ENT.ModelGroup = "bandit"
 
 ENT.weapons = {
-	{{"nagantrev", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
-	{{"m1917", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
-	{{"tokarev", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_tokarev"},
-	{{"brhp", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_brhp"},
-	{{"rugermk3", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_rugermk3"},
+	{{"nagantrev", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
+	{{"m1917", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
+	{{"tokarev", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_tokarev"},
+	{{"brhp", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_brhp"},
+	{{"rugermk3", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_rugermk3"},
 }
 
 ENT.alertsounds = {

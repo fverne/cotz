@@ -16,11 +16,11 @@ ENT.CombatRole = "pistolman"
 ENT.ModelGroup = "zombie_merc"
 
 ENT.weapons = {
-	{{"makarov", { ["durability"] = 0.1, ["wear"] = 4, ["ammo"] = 3 }}, "weapon_npc_makarov"},
-	{{"fort12", { ["durability"] = 0.1, ["wear"] = 3, ["ammo"] = 3 }}, "weapon_npc_tokarev"},
-	{{"beretta92", { ["durability"] = 0.1, ["wear"] = 2, ["ammo"] = 3 }}, "weapon_npc_brhp"},
-	{{"swr8", { ["durability"] = 0.05, ["wear"] = 2, ["ammo"] = 2 }}, "weapon_npc_brhp"},
-	{{"nagantrev", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
+	{{"makarov", { ["durability"] = 5, ["wear"] = 4, ["ammo"] = 3 }}, "weapon_npc_makarov"},
+	{{"fort12", { ["durability"] = 5, ["wear"] = 3, ["ammo"] = 3 }}, "weapon_npc_tokarev"},
+	{{"beretta92", { ["durability"] = 5, ["wear"] = 2, ["ammo"] = 3 }}, "weapon_npc_brhp"},
+	{{"swr8", { ["durability"] = 5, ["wear"] = 2, ["ammo"] = 2 }}, "weapon_npc_brhp"},
+	{{"nagantrev", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_brhp"},
 }
 
 ENT.alertsounds = {

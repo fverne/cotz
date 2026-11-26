@@ -16,8 +16,8 @@ ENT.CombatRole = "rifleman"
 ENT.ModelGroup = "zombie_rookie"
 
 ENT.weapons = {
-	{{"ppsh", { ["durability"] = 0.15, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_ppsh"},
-	{{"skorpion", { ["durability"] = 0.15, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_skorpion"},
+	{{"ppsh", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_ppsh"},
+	{{"skorpion", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_skorpion"},
 }
 
 ENT.alertsounds = {

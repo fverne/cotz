@@ -16,9 +16,9 @@ ENT.CombatRole = "rifleman"
 ENT.ModelGroup = "zombie_merc"
 
 ENT.weapons = {
-	{{"mp5k", { ["durability"] = 0.15, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_mp5"},
-	{{"uzi", { ["durability"] = 0.15, ["wear"] = 6, ["ammo"] = 7 }}, "weapon_npc_skorpion"},
-	{{"lr300", { ["durability"] = 0.1, ["wear"] = 3, ["ammo"] = 2 }}, "weapon_npc_lr300"},
+	{{"mp5k", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 5 }}, "weapon_npc_mp5"},
+	{{"uzi", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 7 }}, "weapon_npc_skorpion"},
+	{{"lr300", { ["durability"] = 5, ["wear"] = 3, ["ammo"] = 2 }}, "weapon_npc_lr300"},
 }
 
 ENT.alertsounds = {

@@ -16,8 +16,8 @@ ENT.CombatRole = "shotgunner"
 ENT.ModelGroup = "zombie_merc"
 
 ENT.weapons = {
-	{{"toz194", { ["durability"] = 0.15, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_spas12"},
-	{{"m3supershort", { ["durability"] = 0.1, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_spas12"},
+	{{"toz194", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_spas12"},
+	{{"m3supershort", { ["durability"] = 5, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_spas12"},
 }
 
 ENT.alertsounds = {

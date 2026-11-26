@@ -13,8 +13,8 @@ ENT.CombatRole = "sniper"
 ENT.ModelGroup = "bandit"
 
 ENT.weapons = {
-	{{"obrez", { ["durability"] = 0.25, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_obrez"},
-	{{"mp18", { ["durability"] = 0.25, ["wear"] = 10, ["ammo"] = 1 }}, "weapon_npc_obrez"},
+	{{"obrez", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_obrez"},
+	{{"mp18", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 1 }}, "weapon_npc_obrez"},
 }
 
 ENT.alertsounds = {

@@ -82,7 +82,7 @@ end
 -- Example and default/fallback item table
 ix.randomitems.tables["default"] = {
   {2000, {"food_bread"}},
-  {50, {"mp5",{ ["durability"] = 1.75, ["wear"] = 80}}},
+  {50, {"mp5",{ ["durability"] = 5, ["wear"] = 80}}},
   {200, {"9x19", { ["quantity"] = 25}}},
 }
 

@@ -13,8 +13,8 @@ ENT.CombatRole = "rifleman"
 ENT.ModelGroup = "mili"
 
 ENT.weapons = {
-	{{"aks74u", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_aksu"},
-	{{"ak74", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_ak74"},
+	{{"aks74u", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_aksu"},
+	{{"ak74", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_ak74"},
 }
 
 ENT.alertsounds = {

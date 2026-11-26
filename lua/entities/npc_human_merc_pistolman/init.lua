@@ -13,10 +13,10 @@ ENT.CombatRole = "pistolman"
 ENT.ModelGroup = "merc"
 
 ENT.weapons = {
-	{{"makarov", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_makarov"},
-	{{"fort12", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_tokarev"},
-	{{"beretta92", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_brhp"},
-	{{"swr8", { ["durability"] = 0.2, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_brhp"},
+	{{"makarov", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_makarov"},
+	{{"fort12", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_tokarev"},
+	{{"beretta92", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_brhp"},
+	{{"swr8", { ["durability"] = 5, ["wear"] = 10, ["ammo"] = 2 }}, "weapon_npc_brhp"},
 }
 
 ENT.alertsounds = {

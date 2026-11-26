@@ -13,9 +13,9 @@ ENT.CombatRole = "rifleman"
 ENT.ModelGroup = "merc"
 
 ENT.weapons = {
-	{{"mp5k", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 9 }}, "weapon_npc_mp5"},
-	{{"uzi", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 13 }}, "weapon_npc_skorpion"},
-	{{"lr300", { ["durability"] = 0.25, ["wear"] = 7, ["ammo"] = 7 }}, "weapon_npc_lr300"},
+	{{"mp5k", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 9 }}, "weapon_npc_mp5"},
+	{{"uzi", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 13 }}, "weapon_npc_skorpion"},
+	{{"lr300", { ["durability"] = 5, ["wear"] = 7, ["ammo"] = 7 }}, "weapon_npc_lr300"},
 }
 
 ENT.alertsounds = {

@@ -16,8 +16,8 @@ ENT.CombatRole = "shotgunner"
 ENT.ModelGroup = "zombie_mili"
 
 ENT.weapons = {
-	{{"mp153", { ["durability"] = 0.15, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_spas12"},
-	{{"saiga410", { ["durability"] = 0.1, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_spas12"},
+	{{"mp153", { ["durability"] = 5, ["wear"] = 6, ["ammo"] = 2 }}, "weapon_npc_spas12"},
+	{{"saiga410", { ["durability"] = 5, ["wear"] = 5, ["ammo"] = 1 }}, "weapon_npc_spas12"},
 }
 
 ENT.alertsounds = {

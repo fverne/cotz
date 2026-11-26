@@ -2,11 +2,10 @@
 
 ## Found weapon durability
 
-Firearms from every non-trader source spawn at no more than 5% durability: world, box, cache, stash and
-reward pools, hidden stashes, NPC weapon drops and the default fallback. Values keep their earlier ratios
-(previous durability × 0.05), and entries that used to omit durability now state 5. Cleanliness (`wear`),
-ammunition and attachments are unchanged. A gun at 0 cannot fire until a technician rebuilds it, and a
-nearly broken one stops after little use. New entries must set `durability` explicitly; an omitted value
+Firearms from every non-trader source spawn at exactly 5% durability, which is both the floor and the
+cap: world, box, cache, stash and reward pools, hidden stashes, NPC weapon drops and the default fallback.
+Cleanliness (`wear`),
+ammunition and attachments are unchanged. A found gun is nearly broken and stops after little use. New entries must set `durability` explicitly; an omitted value
 spawns a pristine weapon. Vendor stock, paid special sales, character starting kits, admin spawns and
 existing saved weapons keep their previous durability. Run
 `luatex --luaonly tests/spawned_weapon_durability_spec.lua`.

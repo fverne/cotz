@@ -13,10 +13,10 @@ ENT.CombatRole = "rifleman"
 ENT.ModelGroup = "bandit"
 
 ENT.weapons = {
-	{{"ppsh", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 7 }}, "weapon_npc_ppsh"},
-	{{"skorpion", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_skorpion"},
-	{{"saigasemi545", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_rugermini14"},
-	{{"ruger1022", { ["durability"] = 0.5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_rugermini14"},
+	{{"ppsh", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 7 }}, "weapon_npc_ppsh"},
+	{{"skorpion", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_skorpion"},
+	{{"saigasemi545", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 3 }}, "weapon_npc_rugermini14"},
+	{{"ruger1022", { ["durability"] = 5, ["wear"] = 15, ["ammo"] = 5 }}, "weapon_npc_rugermini14"},
 }
 
 ENT.alertsounds = {
