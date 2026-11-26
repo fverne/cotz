@@ -1,5 +1,5 @@
 -- Run from the repository root: luatex --luaonly tests/human_weaponprops_spec.lua
--- Every loadout weapon needs a hand placement for its world model, and the table must not hold stale entries.
+-- Every loadout weapon needs a hand placement for an Anomaly world model, and the table must not hold stale entries.
 -- The placements themselves come from the weapon models and the rig's hand frame, so they are checked in game.
 local function read(path)
 	local file = io.open(path)
@@ -59,9 +59,7 @@ for id in pairs(used) do
 		"Item class has no SWEP: " .. class)
 	local hold = swep:match('\n%s*SWEP.HoldType%s*=%s*"([^"]+)"')
 	check(entry.hold == (hold == "pistol" and "pistol" or "rifle"), id .. " hold style follows its SWEP hold type")
-	local model = swep:match("SWEP.DrawTraditionalWorldModel%s*=%s*false")
-		and swep:match('\n%s*SWEP.WM%s*=%s*"([^"]+)"') or swep:match('\n%s*SWEP.WorldModel%s*=%s*"([^"]+)"')
-	check(entry.model == model, id .. " uses the world model players see")
+	check(entry.model:find("^models/flaymi/anomaly/weapons/w_models/"), id .. " holds an Anomaly world model")
 	checkHand(entry.hand, id)
 end
 for id in pairs(props) do check(used[id], "Hand placement is unused by any loadout: " .. id) end

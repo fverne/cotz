@@ -1,174 +1,177 @@
--- Right-hand placement for each loadout weapon, as a position and angle in the hand's (RHand) frame, with the
--- barrel along the aim, the top up and the grip in the palm. Generated from the weapon models by
--- cotz_content_work/packs/bandit_anomaly_anims/tools/weapon_placement.
+-- Right-hand placement for each loadout weapon, as a position and angle in the hand's (RHand) frame.
+-- Each loadout weapon is shown as its closest Anomaly world model. Those models share one layout (barrel along +X,
+-- top up, origin under the grip), so every gun uses the grip fitted to the HK416 (two-handed) or the PM (pistols),
+-- which puts the grip in the closed hand with the receiver or slide just above the index finger.
 -- pos is where the weapon model's origin goes and ang turns the model about that origin, so adjusting ang alone
 -- turns a weapon in place.
--- model: the world model players see. hold: "pistol" for one-handed sidearms, "rifle" for two-handed firearms.
--- The server cannot read the models' world offsets from the SWEPs because they are only defined clientside.
+-- model: the world model held by the NPC. hold: "pistol" for one-handed sidearms, "rifle" for two-handed firearms.
+local RIFLE_HAND = {pos = {4.71, -1.32, 4.32}, ang = {11.6, 3.6, -176.1}}
+local PISTOL_HAND = {pos = {4.57, -1.09, 0.52}, ang = {14.5, 3.7, -175.5}}
+
 ENT.WeaponProps = {
 	ak74 = {
-		model = "models/weapons/w_ops_ak74.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_ak74.mdl",
 		hold = "rifle",
-		hand = {pos = {-0.65, 0.05, -1.38}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	aks74u = {
-		model = "models/weapons/w_smg_aks.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_ak74u.mdl",
 		hold = "rifle",
-		hand = {pos = {8.96, 1.83, -4.49}, ang = {4.9, 5.7, -176}},
+		hand = RIFLE_HAND,
 	},
 	beretta92 = {
-		model = "models/weapons/w_m92f_p228.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_beretta92fs.mdl",
 		hold = "pistol",
-		hand = {pos = {-1.42, 0.45, 0.4}, ang = {14.5, 3.7, -175.6}},
+		hand = PISTOL_HAND,
 	},
 	brhp = {
-		model = "models/weapons/w_pist_brhp.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_hpsa_w.mdl",
 		hold = "pistol",
-		hand = {pos = {4.59, 0.41, -6.07}, ang = {-4.3, 92.2, -179.4}},
+		hand = PISTOL_HAND,
 	},
 	fort12 = {
-		model = "models/srp/weapons/w_fort12.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_fort_w.mdl",
 		hold = "pistol",
-		hand = {pos = {-1.63, 0.79, -2.46}, ang = {0.4, 2.2, -175.7}},
+		hand = PISTOL_HAND,
 	},
 	ij600 = {
-		model = "models/weapons/w_sv10.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_w.mdl",
 		hold = "rifle",
-		hand = {pos = {14.73, 1.04, -4.6}, ang = {-7.8, -176.7, 176.2}},
+		hand = RIFLE_HAND,
 	},
 	lax410s = {
-		model = "models/weapons/w_bocw_ironhides.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_winchester1300_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-3.86, -0.07, -1.81}, ang = {-3.8, 92.8, -168.4}},
+		hand = RIFLE_HAND,
 	},
 	lr300 = {
-		model = "models/weapons/w_lr300.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_lr300_w.mdl",
 		hold = "rifle",
-		hand = {pos = {13.7, 0.73, -0.1}, ang = {8.5, 3.2, -176.2}},
+		hand = RIFLE_HAND,
 	},
 	m1917 = {
-		model = "models/khrcw2/doipack/w_sw1917.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_mp412_w.mdl",
 		hold = "pistol",
-		hand = {pos = {2.66, 0.43, -3.97}, ang = {14.5, 3.7, -175.6}},
+		hand = PISTOL_HAND,
 	},
 	m3supershort = {
-		model = "models/weapons/w_shot_shortygun.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_spas12_w.mdl",
 		hold = "rifle",
-		hand = {pos = {2.93, 2.26, -7.4}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	makarov = {
-		model = "models/cw2/pistols/w_makarov.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_pm_w.mdl",
 		hold = "pistol",
-		hand = {pos = {1.48, -0.14, -0.27}, ang = {14.5, 3.7, -175.6}},
+		hand = PISTOL_HAND,
 	},
 	mp153 = {
-		model = "models/wick/weapons/stalker/stcopwep/w_mp153_model.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_mp153_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-2.51, -0.16, -1.93}, ang = {-11.6, -176.4, 176.1}},
+		hand = RIFLE_HAND,
 	},
 	mp18 = {
-		model = "models/weapons/arc9/darsu_eft/w_mp18.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-12.91, -4.82, -3.62}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	mp27 = {
-		model = "models/weapons/tfa_ins2/wpn_mp27_w.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_w.mdl",
 		hold = "rifle",
-		hand = {pos = {0.44, -0.05, 0.97}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	mp5k = {
-		model = "models/weapons/w_tfa_dmm5k.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_mp5_w.mdl",
 		hold = "rifle",
-		hand = {pos = {2.36, -0.25, 3.73}, ang = {12.3, 3.7, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	nagantrev = {
-		model = "models/weapons/tfa_ins2/wpn_m1895_w.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_mp412_w.mdl",
 		hold = "pistol",
-		hand = {pos = {4.78, 0.21, 0.06}, ang = {14.5, 3.7, -175.6}},
+		hand = PISTOL_HAND,
 	},
 	obrez = {
-		model = "models/weapons3/mosina.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_mosin_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-7.97, 1.01, -17.22}, ang = {20.7, 18.8, -171.8}},
+		hand = RIFLE_HAND,
 	},
 	ppsh = {
-		model = "models/weapons/w_grub_ppsh_stick.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_ppsh41_w.mdl",
 		hold = "rifle",
-		hand = {pos = {0.29, -2.9, 7.94}, ang = {79.6, 161.4, -106}},
+		hand = RIFLE_HAND,
 	},
 	ruger1022 = {
-		model = "models/weapons/tfa_nmrih/w_fa_ruger1022.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_sks_w.mdl",
 		hold = "rifle",
-		hand = {pos = {1.94, 0.28, -2.78}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	rugermk3 = {
-		model = "models/weapons/w_pist_ruger23a1.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_walter99_w.mdl",
 		hold = "pistol",
-		hand = {pos = {4.3, 0.6, -5.99}, ang = {0.1, -178.2, 175.7}},
+		hand = PISTOL_HAND,
 	},
 	saiga410 = {
-		model = "models/cw2/weapons/w_saiga_chan.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_saiga12s_w.mdl",
 		hold = "rifle",
-		hand = {pos = {0.37, 0.11, -1.59}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	saigasemi545 = {
-		model = "models/weapons/w_bfh_saiga308.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_vepr_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-1.7, -0.02, -1.16}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	sako85 = {
-		model = "models/weapons/tfa_nmrih/w_fa_sako85_ironsights.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_trg_w.mdl",
 		hold = "rifle",
-		hand = {pos = {1.24, 0.2, -2.15}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	sako85nato = {
-		model = "models/weapons/tfa_nmrih/w_fa_sako85_ironsights.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_trg_w.mdl",
 		hold = "rifle",
-		hand = {pos = {1.24, 0.2, -2.15}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	skorpion = {
-		model = "models/weapons/w_smg_skorp.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_vz61_w.mdl",
 		hold = "rifle",
-		hand = {pos = {13.12, 2.04, -5.55}, ang = {3.6, 6.2, -176}},
+		hand = RIFLE_HAND,
 	},
 	sv98 = {
-		model = "models/weapons/w_sv98_scopeless.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_sv98_w.mdl",
 		hold = "rifle",
-		hand = {pos = {12.17, 0.91, -2.86}, ang = {-11.6, -176.4, 176.1}},
+		hand = RIFLE_HAND,
 	},
 	swr8 = {
-		model = "models/weapons/w_revolver_r8.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_mp412_w.mdl",
 		hold = "pistol",
-		hand = {pos = {-0.57, 0.53, 0.83}, ang = {14.5, 3.7, -175.6}},
+		hand = PISTOL_HAND,
 	},
 	tokarev = {
-		model = "models/weapons/w_pist_tt38.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_tt33_w.mdl",
 		hold = "pistol",
-		hand = {pos = {4.13, 0.42, -5.05}, ang = {-8.9, -176.4, 175.5}},
+		hand = PISTOL_HAND,
 	},
 	toz106 = {
-		model = "models/weapons/arc9/darsu_eft/w_toz106.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_bm16_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-11.47, -4.49, -5.35}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	toz194 = {
-		model = "models/khrcw2/w_khri_khrtoz194.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_winchester1300_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-10.55, -0.39, 3.16}, ang = {11.6, 3.6, -176.1}},
+		hand = RIFLE_HAND,
 	},
 	toz34short = {
-		model = "models/weapons/w_sv10s.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_toz34_obrez_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-2.8, -15.91, -3.24}, ang = {4.9, -163.3, 87.3}},
+		hand = RIFLE_HAND,
 	},
 	toz66short = {
-		model = "models/dobytchick/weapons/gmzone/deadair/w_toz66_obrez.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_bm16_w.mdl",
 		hold = "rifle",
-		hand = {pos = {-1.44, 0.06, -1.12}, ang = {-11.6, -176.4, 176.1}},
+		hand = RIFLE_HAND,
 	},
 	uzi = {
-		model = "models/weapons/w_uzi.mdl",
+		model = "models/flaymi/anomaly/weapons/w_models/wpn_mp7_w.mdl",
 		hold = "rifle",
-		hand = {pos = {14.03, 1.14, -3.32}, ang = {-11.6, -176.4, 176.1}},
+		hand = RIFLE_HAND,
 	},
 }

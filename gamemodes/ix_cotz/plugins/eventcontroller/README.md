@@ -171,13 +171,15 @@ NPC uses the crouched walk and stops when the target notices it. A player has no
 looking straight at it (within about 20 degrees, with a clear view), and stays noticed for six seconds. Zombified
 humans (`ENT.Undead`) never retreat, crouch or sneak.
 
-Held weapons are separate props on the right hand's `RHand` attachment, and the engine's own weapon is hidden, so
-each NPC shows the weapon it drops. `cotz_human_base/weaponprops.lua` holds one hand placement per loadout weapon: the
-barrel follows the aim direction, the top is up and the grip sits in the palm. The numbers are generated from the
-weapon models by `cotz_content_work/packs/bandit_anomaly_anims/tools/weapon_placement`. `pos` places the weapon
-model's origin and `ang` turns the model about it, so changing `ang` alone turns a weapon in place. Bone-merge is not used because the rig flags no bones for it.
-`tests/human_weaponprops_spec.lua` checks that every loadout weapon has a placement for the model players see.
-Generate an entry when adding a loadout weapon.
+Held weapons are separate props on the right hand's `RHand` attachment, and the engine's own weapon is hidden.
+NPCs hold Anomaly world models (`models/flaymi/anomaly/weapons/w_models/`), which share one layout: barrel along +X,
+top up, origin under the grip. `cotz_human_base/weaponprops.lua` shows each loadout weapon as its closest Anomaly
+model and gives every gun the hand placement for its hold, fitted to the HK416 (two-handed) or the PM (pistols), without
+measuring each grip. The grip sits in the closed hand with the receiver or slide just above the index finger. The placements were fitted against the rig's
+idle_rpg and idle_revolver hand poses with the tools in `cotz_content_work/packs/bandit_anomaly_anims/tools/weapon_placement`.
+`pos` places the weapon model's origin and `ang` turns the model about it, so changing `ang` alone turns a weapon in
+place. Bone-merge is not used because the rig flags no bones for it. `tests/human_weaponprops_spec.lua` checks that
+every loadout weapon uses an Anomaly model. Give a new loadout weapon its closest Anomaly model and its hold's placement.
 
 STALKER NPCs (`IsSTALKERNPC`) normally pass through each other so groups do not get stuck. Bullet traces
 use the same `ShouldCollide` rules, so `ActorsBlockEachOther` keeps hostile pairs that include a living or

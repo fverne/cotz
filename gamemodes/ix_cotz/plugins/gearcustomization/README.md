@@ -36,6 +36,13 @@ the ACH, Russian operator helmets, riot helmet, GP5 and Arab helmet.
 Twelve EO-20 Sunset finishes lack material definitions in the installed content and
 are also excluded. Check mounted materials before expanding any allowlist.
 
+The Screen helmet wears `models/cotz/sectorfour/headwear_screen.mdl` (in `cotz_playermodels`): the
+SEVA suit's helmet and visor without its breathing pack and hoses. It offers all 65 SEVA gear
+finishes in `male_seva` skin order, including the eight that share a texture with another finish,
+as the SEVA suit does. The original five finish IDs stay valid for saved items: Loner, Duty,
+Midnight (now Mercenary 1), Clear Sky and Freedom. The build lives in the content workspace
+under `packs/screen_helmet`.
+
 The installed wearable models have no cosmetic bodygroup alternatives. Backpack
 `root` groups switch between dropped, arms and worn geometry; those remain fixed.
 Bodygroup controls appear only after a concrete item declares approved alternatives.
