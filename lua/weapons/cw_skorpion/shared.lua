@@ -125,7 +125,7 @@ SWEP.FireSound = "CW_SKORPION_FIRE"
 SWEP.FireSoundSuppressed = "CW_SKORPION_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.4
 
-SWEP.DurabilityDamageChance = 0.005
+SWEP.DurabilityDamage = 0.005
 SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 

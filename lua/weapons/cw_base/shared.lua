@@ -299,8 +299,10 @@ SWEP.SuppressedOnEquip = false
 SWEP.CanCustomize = true
 
 local AMMO_CHECK_INTERVAL = 0.5
+-- Durability lost per shot once cleanliness has run out.
+local FOULED_DURABILITY_DAMAGE = 1
 
-SWEP.DurabilityDamageChance = 0.01
+SWEP.DurabilityDamage = 0.01
 SWEP.WearDamage = 0.0
 SWEP.WearEffect = 0.0
 
@@ -1594,9 +1596,11 @@ function SWEP:PrimaryAttack()
 
 		self:SetWeaponWear(math.Clamp(self:GetWeaponWear() - self.WearDamage,0,100))  -- WEAR REDUCTION
 
-		if(math.random() < self.DurabilityDamageChance || self:GetWeaponWear() == 0) then
-			self:SetWeaponDurability(self:GetWeaponDurability() - 1)
+		local durabilityDamage = self.DurabilityDamage
+		if self:GetWeaponWear() == 0 then
+			durabilityDamage = FOULED_DURABILITY_DAMAGE
 		end
+		self:SetWeaponDurability(math.max(self:GetWeaponDurability() - durabilityDamage, 0))
 		if CLIENT then
 			self:simulateRecoil()
 		end

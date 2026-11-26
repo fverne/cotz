@@ -30,7 +30,7 @@ from acquisition import build_audit as acquisition_audit
 SCHEMA = 2
 ROOT = Path(__file__).resolve().parents[2]
 ITEM_FIELDS = set("price width height weight flatweight baseweight varweight BaseWeight WeightPerLevel quantity restore restoreduration ammoAmount bulletweight unloadedweight br fbr ar far sr fsr pr fpr radProt flatRadProt rarity JumpPower carryinc exteriorSlots interiorSlots extraSlots hunger thirst alcohol psyheal psyblock radrem WeightPerHunger WeightPerThirst pricepertier upgradeCost meattier fueltier knifetier cookertier maxFuel maxStack".split())
-WEAPON_FIELDS = set("Damage FireDelay Primary.ClipSize Primary.DefaultClip Primary.Automatic DurabilityDamageChance WearDamage HipSpread AimSpread Recoil ClumpSpread VelocitySensitivity Shots".split())
+WEAPON_FIELDS = set("Damage FireDelay Primary.ClipSize Primary.DefaultClip Primary.Automatic DurabilityDamage WearDamage HipSpread AimSpread Recoil ClumpSpread VelocitySensitivity Shots".split())
 MUTANT_FIELDS = set("hp hpvar BR FBR FBRAP MinRangeDist MaxRangeDist".split())
 ANOMALY_FIELDS = set("BalanceDamage BalanceCooldown BalanceRadius".split())
 POOLS = {"commonArtifacts", "rareArtifacts", "veryRareArtifacts"}

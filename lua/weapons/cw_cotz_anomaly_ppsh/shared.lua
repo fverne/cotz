@@ -47,7 +47,7 @@ SWEP.Chamberable = false -- PPSh-41 is an open-bolt weapon
 
 SWEP.FireDelay = 0.06315789473
 SWEP.Recoil = 0.55
-SWEP.DurabilityDamageChance = 0.005
+SWEP.DurabilityDamage = 0.005
 SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 

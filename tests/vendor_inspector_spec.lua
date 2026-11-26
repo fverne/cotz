@@ -98,6 +98,10 @@ ScrW, ScrH = function() return screenWidth end, function() return screenHeight e
 isnumber = function(value) return type(value) == "number" end
 SortedPairs = pairs
 math.Clamp = function(value, low, high) return math.max(low, math.min(high, value)) end
+math.Round = function(value, decimals)
+	local scale = 10 ^ (decimals or 0)
+	return math.floor(value * scale + 0.5) / scale
+end
 surface = {SetFont = function() end, GetTextSize = function(text) return #text * 8, 20 end,
 	CreateFont = function() end, SetDrawColor = function() end, DrawRect = function() end,
 	DrawOutlinedRect = function() end, DrawLine = function() end}

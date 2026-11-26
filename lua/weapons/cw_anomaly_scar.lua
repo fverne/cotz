@@ -288,7 +288,7 @@ SWEP.CaseLength = 39
 
 SWEP.WearDamage = 0.05
 
-SWEP.DurabilityDamageChance = 0.005
+SWEP.DurabilityDamage = 0.005
 
 SWEP.FireMoveMod = 0.6
 

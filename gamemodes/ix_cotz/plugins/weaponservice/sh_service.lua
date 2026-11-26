@@ -127,7 +127,7 @@ end
 
 function PLUGIN:DescribeOffer(character, offer)
 	local lines = {offer.item.name .. " [#" .. offer.item.id .. "]"}
-	lines[#lines + 1] = string.format("Durability: %.1f%%; cleanliness: %.1f%%.",
+	lines[#lines + 1] = string.format("Durability: %.0f%%; cleanliness: %.0f%%.",
 		offer.durability, offer.cleanliness)
 	if offer.action == "dismantle" then
 		local chance = offer.extraChance * 100

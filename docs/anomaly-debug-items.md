@@ -14,7 +14,7 @@ Each firearm is balanced against its closest CotZ counterpart by calibre and rol
 USAS-12 against the Saiga-12 and the PB against the Makarov:
 
 - Wear follows the counterpart's action type: magazine-fed semi-automatic and automatic guns use
-  `WearDamage = 0.05`, `DurabilityDamageChance = 0.005` and `WearEffect = 0.007`; manual actions use
+  `WearDamage = 0.05`, `DurabilityDamage = 0.005` and `WearEffect = 0.007`; manual actions use
   0.33, 0.01 and 0.005; handguns use 0.14, 0.01 and 0.05. `FireMoveMod`, `SpeedDec` and hold types also
   follow the counterpart.
 - Spread, recoil and movement penalties match the counterpart. Damage, magazine size, fire modes and

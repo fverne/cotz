@@ -386,7 +386,7 @@ function ITEM:Equip(client)
 		-- if wish granted
 		if self:GetData("unlimitedDurability", nil) then
 			-- weapon.WearDamage = 0
-			weapon.DurabilityDamageChance = 0
+			weapon.DurabilityDamage = 0
 		end
 
 		client.carryWeapons[self.weaponCategory] = weapon
@@ -545,7 +545,7 @@ function ITEM:OnLoadout()
 			-- if wish granted
 			if self:GetData("unlimitedDurability", nil) then
 				-- weapon.WearDamage = 0
-				weapon.DurabilityDamageChance = 0
+				weapon.DurabilityDamage = 0
 			end
 
 			self:RestoreWeaponAmmo(client, weapon)

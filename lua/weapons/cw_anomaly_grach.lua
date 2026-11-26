@@ -211,7 +211,7 @@ SWEP.CaseLength = 39
 
 SWEP.WearDamage = 0.14
 
-SWEP.DurabilityDamageChance = 0.01
+SWEP.DurabilityDamage = 0.01
 
 SWEP.WearEffect = 0.05
 

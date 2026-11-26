@@ -75,7 +75,7 @@ local function describeItem(item)
 	if item.id then
 		for _, key in ipairs({"quantity", "durability", "condition"}) do
 			local value = item:GetData(key)
-			if isnumber(value) then description = description .. "\n" .. key .. ": " .. value end
+			if isnumber(value) then description = description .. "\n" .. key .. ": " .. math.Round(value) end
 		end
 	end
 

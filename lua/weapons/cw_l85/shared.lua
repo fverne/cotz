@@ -147,7 +147,7 @@ SWEP.FireSound = "CW_l85_FIRE"
 SWEP.FireSoundSuppressed = "CW_G3A3_FIRE_SUPPRESSED"
 SWEP.Recoil = 1.15
 
-SWEP.DurabilityDamageChance = 0.005
+SWEP.DurabilityDamage = 0.005
 SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 

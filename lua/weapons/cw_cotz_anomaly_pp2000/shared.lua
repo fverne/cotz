@@ -127,7 +127,7 @@ SWEP.Primary.Ammo			= "9x19MM"
 SWEP.FireDelay = 0.08571428571
 SWEP.Recoil = 1.3
 
-SWEP.DurabilityDamageChance = 0.005
+SWEP.DurabilityDamage = 0.005
 SWEP.WearDamage = 0.05
 SWEP.WearEffect = 0.007
 
