@@ -188,7 +188,7 @@ function ix.crossserver.BeginTransfer(character, destination, callback)
 end
 
 local SNAPSHOT_CHUNK = 32
-local ROSTER_STRINGS = {"name", "pdaavatar", "state", "map", "destination", "squadID", "squadName", "steamID64"}
+local ROSTER_STRINGS = {"name", "pdaavatar", "state", "map", "destination", "squadID", "squadName", "steamID64", "steamName"}
 
 local function writeRecord(record)
 	net.WriteUInt(record.characterID, 32)
@@ -233,6 +233,7 @@ function ix.crossserver.PublishRoster(rows)
 				reputation = tonumber(row.reputation) or 0}),
 			characterID = characterID, name = row.name or "",
 			steamID64 = row.steamID64 or "",
+			steamName = row.steamName and row.steamName ~= "NULL" and row.steamName or "",
 			pdaavatar = row.pdaavatar or "vgui/icons/face_31.png", state = row.state,
 			map = row.map or "", destination = row.destination or "",
 			squadID = row.squad_id or "", squadName = row.squad_name or "",
@@ -292,6 +293,9 @@ function ix.crossserver.RefreshRoster()
 	query:SelectColumn("leaderboard.reputation", "reputation")
 	query:SelectColumn("leaderboard.money", "money")
 	query:SelectColumn("leaderboard.steamid", "steamID64")
+	query:Join("ix_players", "account",
+		mysql.Compare("account.steamid", "=", mysql.Column("leaderboard.steamid")), "LEFT")
+	query:SelectColumn("account.steam_name", "steamName")
 	query:WhereExpr(mysql.All(mysql.Compare("p.scope", "=", scope()), mysql.Compare("p.hidden", "=", 0),
 		mysql.Compare("p.expires", ">", mysql.Now()), mysql.Any(mysql.Compare("p.state", "=", "online"),
 			mysql.Compare("p.state", "=", "travelling"))))

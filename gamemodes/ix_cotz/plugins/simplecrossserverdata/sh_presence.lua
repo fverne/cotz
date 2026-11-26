@@ -51,6 +51,7 @@ if (CLIENT) then
 			record.squadID = net.ReadString()
 			record.squadName = net.ReadString()
 			record.steamID64 = net.ReadString()
+			record.steamName = net.ReadString()
 			record.squadColor = Color(net.ReadUInt(8), net.ReadUInt(8), net.ReadUInt(8))
 			if record.squadID == "" or record.squadID == "NULL" then
 				record.squadColor = PRESENCE_COLORS.unavailable
@@ -97,6 +98,7 @@ if (CLIENT) then
 							leaderboardStats = stats,
 							economyStats = previous and previous.profile and previous.profile.economyStats},
 						characterID = id, player = client, name = character:GetName(), steamID64 = client:SteamID64(),
+						steamName = client:SteamName(),
 						pdaavatar = character:GetPdaavatar(), map = game.GetMap(), fresh = true,
 						state = previous and fresh and previous.state == "travelling" and "travelling" or "online",
 						destination = previous and previous.destination or "",

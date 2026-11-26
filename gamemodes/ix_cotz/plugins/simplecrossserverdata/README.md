@@ -55,6 +55,8 @@ Remote rows use saved character names/PDA portraits. Right-click offers the acco
 using its SteamID64 from the character owner column. Voice mute and entity-based actions remain
 available on local rows. The roster includes this public account ID as a string; deploy the updated
 reader and writer together on every map. No database migration is required.
+The dossier card shows the account's Steam name in parentheses below the character name. Local
+entities report it with `SteamName()`; remote rows left-join Helix's saved `ix_players.steam_name`.
 
 Snapshots are polled every five seconds, sent only when changed or needed by a newly loaded character,
 and split into typed chunks of at most 32 records. Clients replace the roster atomically after the

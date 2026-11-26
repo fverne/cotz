@@ -22,6 +22,8 @@ local function query(statement)
 end
 query([[CREATE TABLE ix_characters (id INTEGER PRIMARY KEY, schema TEXT, steamid TEXT,
 	name TEXT, pdaavatar TEXT, squad_id TEXT DEFAULT 'NULL', squad_officer INTEGER DEFAULT 0)]])
+query([[CREATE TABLE ix_players (steamid TEXT, steam_name TEXT)]])
+query([[INSERT INTO ix_players VALUES ('account','Account name')]])
 query([[CREATE TABLE ix_squads_squads (owner TEXT PRIMARY KEY, name TEXT, description TEXT, color TEXT)]])
 query([[INSERT INTO ix_characters VALUES (1,'ix_cotz','account','Leader','leader.png','char:1',0)]])
 query([[INSERT INTO ix_characters VALUES (2,'ix_cotz','other','Member','member.png','char:1',0)]])
@@ -292,6 +294,7 @@ check(#rosterRows == 2, "public roster includes active characters across maps an
 check(rosterRows[1].progression == '{"lines":{"fixture":{"completed":true}}}',
 	"the real roster SQL selects the separate progression column")
 check(rosterRows[1].steamID64 == "account", "the real roster SQL includes the character owner's Steam account")
+check(rosterRows[1].steamName == "Account name", "the real roster SQL includes the owner's saved Steam name")
 check(tonumber(rosterRows[1].money) == 0, "the roster SQL selects saved wallet cash for administrator summaries")
 check(rosterRows[1].squad_name == "New group" and rosterRows[2].squad_id == nil,
 	"public roster joins authoritative squad display metadata and includes loners")

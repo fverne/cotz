@@ -452,7 +452,8 @@ function PANEL:Init()
 	self.portrait:SetTall(96)
 	self.portrait:SetKeepAspect(true)
 	self.details = dossierLabel(self.detailScroll, "Select a stalker", "ixMediumFont", COLORS.text)
-	self.details:DockMargin(0, 0, 0, 16)
+	self.steamName = dossierLabel(self.detailScroll, "", "ixMediumFont", COLORS.text)
+	self.steamName:DockMargin(0, 0, 0, 16)
 	self.dossierFields = {}
 	for _, definition in ipairs(DOSSIER_FIELDS) do
 		self.dossierFields[definition[1]] = dossierField(self.detailScroll, definition)
@@ -525,6 +526,8 @@ function PANEL:SelectRecord(record)
 	local location = access.location
 		and ix.crossserver.GetPresenceText(record, record.fresh, IsValid(record.player)) or "LOCATION LOCKED"
 	self.details:SetText(record.name)
+	local steamName = not record.awaitingCharacter and record.steamName or ""
+	self.steamName:SetText(steamName ~= "" and "(" .. steamName .. ")" or "")
 	local values = table.Copy(stats)
 	values.rank = rankName(record)
 	values.reputation = math.floor(record.profile.reputation or 0)
@@ -565,6 +568,7 @@ function PANEL:PerformLayout(width, height)
 			font = "alsina", size = math.floor(16 * scale), weight = 500, extended = true,
 		})
 		self.details:SetFont("cotzDossierTitle")
+		self.steamName:SetFont("cotzDossierValue")
 		self.portrait:SetTall(math.floor(96 * scale))
 		self.dossierNote:SetFont("cotzDossierCaption")
 		self.economyTitle:SetFont("cotzDossierCaption")
@@ -603,6 +607,7 @@ function PANEL:Think()
 		for id, row in pairs(self.rows) do row:Remove() self.rows[id] = nil end
 		self.portrait:SetImage("vgui/icons/face_31.png")
 		self.details:SetText("Select a stalker")
+		self.steamName:SetText("")
 		self.economySection:SetVisible(false)
 		for _, field in pairs(self.economyFields) do field.card:SetVisible(false) end
 		for _, field in pairs(self.dossierFields) do field.value:SetText("—") field.card:SetVisible(false) end
@@ -711,6 +716,7 @@ function PANEL:Think()
 		self.selected = nil
 		self.portrait:SetImage("vgui/icons/face_31.png")
 		self.details:SetText("Select a stalker")
+		self.steamName:SetText("")
 		self.economySection:SetVisible(false)
 		for _, field in pairs(self.economyFields) do field.card:SetVisible(false) end
 		for _, field in pairs(self.dossierFields) do field.value:SetText("—") end
