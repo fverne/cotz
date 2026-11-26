@@ -510,7 +510,8 @@ function ENT:Think()
 	if controller then
 		controller:ValidateCombatEnemy(self)
 		if controller:UpdateCombatSchedule(self) then
-			self.combatMovement = nil
+			-- The controller owns the schedule now, so forget ours without clearing it.
+			self.combatMovement, self.firingMove, self.sneaking = nil, nil, nil
 			if self.swingAt then self:STALKERNPCClearAnimation() end
 			return true
 		end
