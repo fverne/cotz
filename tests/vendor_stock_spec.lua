@@ -526,4 +526,20 @@ for _, invalid in ipairs({0, -1, 2, "half", math.huge, 0 / 0}) do
 	check(not ix.vendorStock.RestockFraction(voucherOwner, voucherShop, invalid), "invalid restock fractions are rejected")
 end
 
+-- Contact supply overrides survive the category policy, and saved personal shelves follow a reduced cap.
+local reducedItems = {ammo = {nil, 4, VENDOR_SELLANDBUY, 4, 12, 1}}
+ix.vendorStock.ApplyDefaults(reducedItems, {ammo = {initial = 2, maximum = 2, interval = 12, amount = 1}})
+check(reducedItems.ammo[VENDOR_MAXSTOCK] == 2 and reducedItems.ammo[VENDOR_STOCK] == 2,
+	"explicit supply terms replace the category policy")
+local reducedShop = vendor()
+reducedShop.items = {ammo = {nil, 4, VENDOR_SELLANDBUY, 4, 12, 1}}
+local veteran = character()
+check(reducedShop:GetStock("ammo", veteran) == 4, "saved shelf starts at the previous cap")
+reducedShop.items = reducedItems
+count, maxStock = reducedShop:GetStock("ammo", veteran)
+check(count == 2 and maxStock == 2, "saved shelves drop to a reduced base cap without progression")
+veteran.rank = 2
+count, maxStock = reducedShop:GetStock("ammo", veteran)
+check(count == 4 and maxStock == 4, "earned stock increases apply on top of the reduced base")
+
 print(string.format("PASS: %d personal vendor stock checks", checks))

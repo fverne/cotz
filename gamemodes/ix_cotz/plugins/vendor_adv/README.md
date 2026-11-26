@@ -45,6 +45,10 @@ catalogue goods and supplies use SELLANDBUY, with catalogue purchases gated by s
 Before a purchase unlock, the trade menu retains the BUYONLY action.
 Saved town vendor rows are reconciled to this plan on load, including trade modes and removed routes.
 The server checks both sale and purchase eligibility. Existing personal stock history is not reset.
+Sold rows use the category stock policy in `ix.vendorStock.GetPolicy`, except items listed in a contact's
+`supplyStockOverrides`, such as Brass's two-box shotgun shelves. Those terms are kept in templates and
+restored on saved vendors at load. Saved personal shelves above a lowered cap drop to it on the next read;
+completed stock increases still add their bonus on top.
 The Original retains ordinary work and supplies without a finite progression catalogue.
 
 NPC traders have no cash balance or payout limit. Advanced vendors ignore legacy saved/template

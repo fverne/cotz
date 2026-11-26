@@ -492,7 +492,7 @@ function ENT:LoadTemplate(templateName)
 		end
 
 		if not template.sherpa then
-			ix.vendorStock.ApplyDefaults(items)
+			ix.vendorStock.ApplyDefaults(items, template.stockOverrides)
 		end
 		self.items = items
 		self.factions = template.factions or self.factions

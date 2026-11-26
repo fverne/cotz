@@ -92,14 +92,20 @@ function ix.vendorStock.GetPolicy(uniqueID)
 	return 1, 48
 end
 
-function ix.vendorStock.ApplyDefaults(items)
+-- Explicit per-item terms, such as a town contact's supplyStockOverrides, replace the category policy.
+function ix.vendorStock.ApplyDefaults(items, overrides)
 	for uniqueID, data in pairs(items) do
 		if data[VENDOR_MODE] ~= VENDOR_BUYONLY then
+			local terms = overrides and overrides[uniqueID]
 			local maximum, interval = ix.vendorStock.GetPolicy(uniqueID)
+			local amount = 1
+			if terms then
+				maximum, interval, amount = terms.maximum, terms.interval, terms.amount
+			end
 			data[VENDOR_STOCK] = math.Clamp(data[VENDOR_STOCK] or maximum, 0, maximum)
 			data[VENDOR_MAXSTOCK] = maximum
 			data[VENDOR_RESTOCK_INTERVAL] = interval
-			data[VENDOR_RESTOCK_AMOUNT] = 1
+			data[VENDOR_RESTOCK_AMOUNT] = amount
 		end
 	end
 end

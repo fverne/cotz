@@ -23,13 +23,28 @@ local function plannedItems(contact, catalogue, stock)
 		end
 	end
 	for item in pairs(contact.disabledItems or {}) do items[item] = nil end
-	ix.vendorStock.ApplyDefaults(items)
+	ix.vendorStock.ApplyDefaults(items, contact.supplyStockOverrides)
 
 	return items
 end
 
 local function isDisabled(contact, item)
 	return contact.disabledItems and contact.disabledItems[item]
+end
+
+-- Saved rows are reset to the category policy on load, so restore authored supply terms afterwards.
+local function applyStockOverrides(items, contact)
+	local changed = false
+	for item, terms in pairs(contact.supplyStockOverrides or {}) do
+		local row = items[item]
+		if row and row[3] ~= TRADE_MODES.BUYONLY
+			and (row[4] ~= terms.maximum or row[5] ~= terms.interval or row[6] ~= terms.amount) then
+			ix.vendorStock.ApplyDefaults({[item] = row}, contact.supplyStockOverrides)
+			changed = true
+		end
+	end
+
+	return changed
 end
 
 local function removeDisabledItems(items, contact)
@@ -48,6 +63,7 @@ function PLUGIN:ConfigureTownTemplate(contact, catalogue, stock)
 	local template = assert(ix.npctemplates.templates[contact.template], "Missing town vendor template")
 	template.buyAll = contact.buyAll == true
 	if contact.buyScale then template.scale = contact.buyScale end
+	template.stockOverrides = contact.supplyStockOverrides
 	if contact.enforceCatalogue then
 		template.items = plannedItems(contact, catalogue, stock)
 
@@ -68,7 +84,7 @@ function PLUGIN:ConfigureTownTemplate(contact, catalogue, stock)
 				{args[2], args[3], TRADE_MODES[args[4]], args[5], args[6], args[7]}
 		end
 	end
-	ix.vendorStock.ApplyDefaults(template.items)
+	ix.vendorStock.ApplyDefaults(template.items, contact.supplyStockOverrides)
 end
 
 if SERVER then
@@ -111,6 +127,7 @@ if SERVER then
 				changed = true
 			end
 		end
+		if applyStockOverrides(vendor.items, contact) then changed = true end
 
 		return changed
 	end
