@@ -62,7 +62,7 @@ end
 function suitBase:SetData(key, value) self.data[key] = value end
 
 local suit = setmetatable({ar = 0.3, far = 4, data = {equip = true, durability = 100}}, suitBase)
-for _, definition in ipairs(ix.suits.anomalyTypes) do
+for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 	near(suit:getAR(definition.field), 0.7, "Legacy percentage fallback: " .. definition.name)
 	near(suit:getFAR(definition.flatField), 4, "Legacy flat fallback: " .. definition.name)
 end
@@ -84,7 +84,7 @@ near(suit:getFAR("flatThermalRes"), 0, "Broken suits lose base flat protection")
 suit.data.durability = 100
 suit.data.upgrades = {"broad", "removed"}
 suit.data.attachments = {exteriorSlots = {"broad", "removed"}, interiorSlots = false}
-for _, definition in ipairs(ix.suits.anomalyTypes) do
+for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 	near(suit:getAR(definition.field), (1 - suit[definition.field] - 0.05) * 0.8,
 		"Broad upgrades and attachments retain their formula: " .. definition.name)
 	near(suit:getFAR(definition.flatField), suit[definition.flatField] + 2,
@@ -102,7 +102,7 @@ local suitCount = 0
 for path in paths:lines() do
 	ITEM = {skincustom = {}, bgcustom = {}, functions = {}}
 	assert(load(read(path):gsub("!=", "~="):gsub("!", "not "), "@" .. path))()
-	for _, definition in ipairs(ix.suits.anomalyTypes) do
+	for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 		check(ITEM[definition.field] == ITEM.ar, path .. " preserves percentage: " .. definition.name)
 		check(ITEM[definition.flatField] == ITEM.far, path .. " preserves flat protection: " .. definition.name)
 	end
@@ -143,7 +143,7 @@ for _, name in ipairs({
 }) do
 	client[name] = function() return 0 end
 end
-for _, definition in ipairs(ix.suits.anomalyTypes) do
+for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 	near(client:getPercentageAnomalyRes(definition.field), (1 - suit[definition.field]) * 0.9,
 		"Equipped headgear and suit percentage combine: " .. definition.name)
 	near(client:getFlatAnomalyRes(definition.flatField), suit[definition.flatField] + 1,
@@ -151,7 +151,7 @@ for _, definition in ipairs(ix.suits.anomalyTypes) do
 end
 wishes.far = true
 client:RecalculateResistances()
-for _, definition in ipairs(ix.suits.anomalyTypes) do
+for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 	near(client.network["ixper" .. definition.network .. "res"], (1 - suit[definition.field]) * 0.9,
 		"Each percentage is networked independently: " .. definition.name)
 	near(client.network["ixflat" .. definition.network .. "res"], suit[definition.flatField] + 6,
@@ -196,6 +196,17 @@ for index, definition in ipairs(ix.suits.anomalyTypes) do
 		near(helmet.data.durability, 100 - headgearWear, "Headgear wear uses matching damage: " .. damageType)
 	end
 end
+-- Impact is a combat stat: percentage applies before flat absorption, and falls never wear equipment.
+client.network.ixperimpactres, client.network.ixflatimpactres = 0.5, 3
+for _, damageType in ipairs({DMG_CLUB, DMG_CRUSH, DMG_BLAST, DMG_FALL}) do
+	suit.data.durability, helmet.data.durability = 100, 100
+	local info = damageInfo(damageType)
+	suitsPlugin:EntityTakeDamage(client, info)
+	local fall = damageType == DMG_FALL
+	near(info.amount, 47, "Impact applies percentage before flat: " .. damageType)
+	near(suit.data.durability, fall and 100 or 100 - 0.47, "Impact suit wear uses combat rate: " .. damageType)
+	near(helmet.data.durability, fall and 100 or 100 - 48.5 / 400, "Impact headgear wear uses combat rate: " .. damageType)
+end
 near(ix.suits.GetAnomalyDamage(client, damageInfo(DMG_BURN + DMG_SHOCK)), 19.6,
 	"Mixed families use weakest protection once")
 near(ix.suits.GetAnomalyDamage(client, damageInfo(DMG_BURN + DMG_SLOWBURN)), 9.9,
@@ -217,7 +228,7 @@ suit.isBodyArmor = true
 suit.data.durability = 40
 local rows = {}
 for _, row in ipairs(ix.itemProperties.GetProtection(suit)) do rows[row.id] = row.text end
-for _, definition in ipairs(ix.suits.anomalyTypes) do
+for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 	local reduction = suit[definition.field] / 2
 	local expected
 	if reduction ~= 0 then

@@ -26,6 +26,8 @@ ITEM.br = 0.10
 ITEM.fbr = 1
 ITEM.sr = 0.18
 ITEM.fsr = 1
+ITEM.impactRes = 0.21
+ITEM.flatImpactRes = 2
 ITEM.ar = 0.21
 ITEM.far = 2
 ITEM.thermalRes = 0.21
@@ -34,8 +36,6 @@ ITEM.electricalRes = 0.21
 ITEM.flatElectricalRes = 2
 ITEM.chemicalRes = 0.21
 ITEM.flatChemicalRes = 2
-ITEM.impactRes = 0.21
-ITEM.flatImpactRes = 2
 
 ITEM.pr = 0.12
 ITEM.fpr = 0

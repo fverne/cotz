@@ -7,7 +7,7 @@ end
 local COMBAT_WEAR_RATE = 1 / 400
 local ENVIRONMENT_WEAR_RATE = 1 / 100
 local ENVIRONMENT_DAMAGE_TYPES = {
-	DMG_SHOCK, DMG_BURN, DMG_ACID, DMG_BLAST, DMG_CRUSH, DMG_DROWN, DMG_POISON,
+	DMG_SHOCK, DMG_BURN, DMG_ACID, DMG_DROWN, DMG_POISON,
 	DMG_NERVEGAS, DMG_SLOWBURN, DMG_RADIATION, DMG_SONIC, DMG_AIRBOAT,
 }
 
@@ -23,7 +23,9 @@ local function getProtectedDamage(client, damageInfo, environmental)
 		resistance = "bullet"
 	elseif damageInfo:IsDamageType(DMG_SLASH) then
 		resistance = "slash"
-	elseif environmental or damageInfo:IsDamageType(DMG_CLUB) or damageInfo:GetDamageType() == DMG_GENERIC then
+	elseif ix.suits.IsImpactDamage(damageInfo) then
+		resistance = "impact"
+	elseif environmental or damageInfo:GetDamageType() == DMG_GENERIC then
 		local protectedDamage = ix.suits.GetAnomalyDamage(client, damageInfo)
 		if protectedDamage ~= nil then return protectedDamage end
 		resistance = "anom"

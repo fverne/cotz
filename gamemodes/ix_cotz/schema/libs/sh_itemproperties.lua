@@ -83,14 +83,14 @@ function ix.itemProperties.GetProtection(item)
 		protection("ballistics", "Ballistics", reduction("getBR"), item:getFBR())
 		protection("rupture", "Rupture", reduction("getSR"), item:getFSR())
 		if item.isBodyArmor then
-			for _, definition in ipairs(ix.suits.anomalyTypes) do
+			for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 				protection(definition.network, definition.name, reduction("getAR", definition.field),
 					item:getFAR(definition.flatField))
 			end
 		else
 			-- Installed headgear uses its broad anomaly resistance for each damage family.
 			local scale = item:GetDurabilityScale()
-			for _, definition in ipairs(ix.suits.anomalyTypes) do
+			for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 				local value = item[definition.field]
 				local flat = item[definition.flatField]
 				protection(definition.network, definition.name, value and value * scale or item:getAR(),
@@ -103,8 +103,9 @@ function ix.itemProperties.GetProtection(item)
 		local attachment = ix.armortables.attachments[item.attachName]
 		for _, entry in ipairs({
 			{"ballistics", "Ballistics", "br", "fbr"}, {"rupture", "Rupture", "sr", "fsr"},
+			{"impact", "Impact", "ar", "far"},
 			{"thermal", "Thermal", "ar", "far"}, {"electrical", "Electrical", "ar", "far"},
-			{"chemical", "Chemical", "ar", "far"}, {"impact", "Impact", "ar", "far"},
+			{"chemical", "Chemical", "ar", "far"},
 			{"psychic", "Psychic", "pr", "fpr"}, {"radiation", "Radiation", "radProt", "flatRadProt"},
 		}) do
 			if attachment[entry[3]] or attachment[entry[4]] then

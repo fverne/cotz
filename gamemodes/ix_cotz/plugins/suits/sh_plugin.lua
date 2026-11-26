@@ -65,6 +65,28 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		dmginfo:SetDamage(damage)
 	end
 
+	-- Impact is a combat stat, resolved between bullet and rupture. Falls reduce damage but never wear equipment.
+	if target:IsPlayer() and ix.suits.IsImpactDamage(dmginfo) then
+		local damage = dmginfo:GetDamage()
+		local perRes = target:GetNWFloat("ixperimpactres")
+		local flatRes = target:GetNWInt("ixflatimpactres")
+		local suit = target:getEquippedBodyArmor()
+
+		damage = damage * perRes
+		damage = damage - flatRes
+		damage = math.max(damage, 0)
+
+		if IsValid(ix.temp.Corpses[target]) then
+			damage = 0
+		end
+
+		if ix.util.CanWearSuit(suit) and not dmginfo:IsDamageType(DMG_FALL) then
+			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 100, 0, 100))
+		end
+
+		dmginfo:SetDamage(damage)
+	end
+
 	-- Slash (Mutant) resistance
 	if target:IsPlayer() and dmginfo:IsDamageType(DMG_SLASH) then
 		local damage = dmginfo:GetDamage()
@@ -95,10 +117,8 @@ function PLUGIN:EntityTakeDamage(target, dmginfo)
 		if damage == nil then return end
 		local suit = target:getEquippedBodyArmor()
 
-		-- Falls never wear equipment; blunt hits wear it at the same rate as bullets and claws.
-		if ix.util.CanWearSuit(suit) and not dmginfo:IsDamageType(DMG_FALL) then
-			local wearDivisor = dmginfo:IsDamageType(DMG_CLUB) and 100 or 50
-			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / wearDivisor, 0, 100))
+		if ix.util.CanWearSuit(suit) then
+			suit:SetData("durability", math.Clamp(suit:GetData("durability", 100) - damage / 50, 0, 100))
 		end
 
 		dmginfo:SetDamage(damage)
@@ -354,7 +374,7 @@ function playerMeta:RecalculateResistances()
 	self:SetNWInt("ixflatslashres", self:getFlatSlashRes())
 	self:SetNWFloat("ixperanomres", self:getPercentageAnomalyRes())
 	self:SetNWInt("ixflatanomres", self:getFlatAnomalyRes())
-	for _, definition in ipairs(ix.suits.anomalyTypes) do
+	for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 		self:SetNWFloat("ixper" .. definition.network .. "res", self:getPercentageAnomalyRes(definition.field))
 		self:SetNWInt("ixflat" .. definition.network .. "res", self:getFlatAnomalyRes(definition.flatField))
 	end

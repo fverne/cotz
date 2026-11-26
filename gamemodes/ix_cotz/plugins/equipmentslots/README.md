@@ -35,7 +35,7 @@ spacing, cards, and the footer scale with screen size; the journal retains space
 when present, and the equipment area uses the full remaining width otherwise.
 Journal space is reserved only for an actual `ixCharacterJournalPanel`; transient
 subpanel controls during menu creation do not reduce the equipment width.
-The footer shows ballistic, rupture, radiation, thermal, electrical, chemical, impact and psy
+The footer shows ballistic, rupture, impact, radiation, thermal, electrical, chemical and psy
 percentage reduction. Its eight statistics wrap into rows with room for the longer protection names;
 the slot cards scroll above the fixed footer. Each name follows the same tinted protection icon as item
 tooltips, read through `ix.itemProperties.GetIcon` with the `icon` key in `PLUGIN.protectionTypes`.

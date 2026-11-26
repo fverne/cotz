@@ -246,6 +246,7 @@ local suit = {isBodyArmor = true, scale = 1, GetData = bread.GetData, data = {},
 	getRadProt = function(self) return 0.5 * self.scale end, GetFlatRadProt = function() return 2 end,
 }
 ix.suits.anomalyTypes = {{network = "thermal", name = "Thermal", field = "thermalRes", flatField = "flatThermalRes"}}
+ix.suits.GetProtectionFamilies = function() return ix.suits.anomalyTypes end
 local protection = ix.itemProperties.GetProtection(suit)
 check(protection[1].text == "Ballistics: 40% + 8", "suit protection shows flat absorption")
 for _, row in ipairs(protection) do
@@ -270,7 +271,8 @@ ix.armortables = {attachments = {plate = {br = 0.05, ar = -0.05}}}
 local attachment = {attachName = "plate"}
 local attachmentRows = ix.itemProperties.GetProtection(attachment)
 check(attachmentRows[1].text == "Ballistics: 5%", "attachment resistance uses percentages")
-check(attachmentRows[2].text == "Thermal: -5%", "attachment drawbacks remain negative")
+check(attachmentRows[2].text == "Impact: -5%", "attachment impact follows rupture")
+check(attachmentRows[3].text == "Thermal: -5%", "attachment drawbacks remain negative")
 local function tooltip()
 	local value = {rows = {}, count = 0}
 	function value:GetRow(id) return self.rows[id] end

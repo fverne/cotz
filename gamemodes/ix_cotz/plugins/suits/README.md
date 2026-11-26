@@ -64,20 +64,19 @@ weight describes the equipment without its cartridge. See the [town progression 
 
 ## Protection and use
 
-Suit anomaly protection has four independent percentage/flat pairs:
+Suit anomaly protection has three independent percentage/flat pairs. Impact is a combat stat with its own pair:
 
 | Protection | Percentage field | Flat field | Damage types |
 | --- | --- | --- | --- |
 | Thermal | `thermalRes` | `flatThermalRes` | Burn, slow burn |
 | Electrical | `electricalRes` | `flatElectricalRes` | Shock |
 | Chemical | `chemicalRes` | `flatChemicalRes` | Acid, drowning, poison, nerve gas |
-| Impact | `impactRes` | `flatImpactRes` | Crush (including gravitational anomalies), blast, blunt (club), fall |
 
 Every concrete suit declares all eight fields, initially copying its previous `ar`/`far` values.
 These are definition values, so existing instances use them without changing saved item data.
 `getAR(field)` returns the remaining-damage multiplier; `getFAR(field)` returns flat absorption.
 Damage is `max((incoming - flat) * multiplier, 0)`. Base protection retains its ordinary durability
-taper below 80%. Suit tooltips list all four effective percentage reductions in their cosmetic units,
+taper below 80%. Suit tooltips list every effective percentage reduction in their cosmetic units,
 including zero ratings, without flat absorption or a protection subheader.
 The equipment footer shows each family's combined percentage reduction and flat absorption tooltip.
 
@@ -85,15 +84,14 @@ Legacy `ar`/`far` remain as fallback values and for existing untyped callers and
 headgear wear outside these families. Broad upgrades, attachments and the flat anomaly wish still
 apply to every family with their existing formulas. A type-specific field overrides its broad fallback,
 including explicit zero; flat attachments retain their existing behavior and do not add suit absorption.
-Equipped headgear may also supply these fields, otherwise its existing `ar`/`far` apply to all four.
+Equipped headgear may also supply these fields, otherwise its existing `ar`/`far` apply to every family, including impact.
 The existing resistance refresh paths update each family's cached network values.
-Mixed damage flags use the weakest applicable family's protection once, without stacking reductions.
-Crush damage still uses environmental headgear wear, including gravitational anomalies and physics impacts.
-
-Impact covers explosions, gravitational anomalies, falls and blunt hits. Blunt sources are human NPC and
-controller melee, pseudogiant and Vareshka ground slams, player punches and blunt melee weapons.
-Fall damage is dealt as `DMG_FALL` and never wears the suit or headgear. Blunt hits wear the suit and
-headgear at the combat rates used for bullets and claws; crush and blast keep their previous wear rates.
+Mixed anomaly flags use the weakest applicable anomaly family once, without stacking reductions.
+Impact is a combat stat, resolved between bullet and rupture. Explosions, gravitational anomalies, falls and
+blunt hits (human and mutant melee, controller melee, pseudogiant and Vareshka ground slams, player punches and
+blunt melee weapons) use its percentage first, then its flat absorption. Falls reduce damage but never wear
+suits or headgear. Other impact damage wears suits at the bullet rate and headgear at the combat rate.
+Tooltips and the equipment footer list Impact directly after Rupture.
 
 A filter has 0–100% condition. Effectiveness is `clamp(condition / 20, 0, 1)`: full at 20–100%, then
 linear below 20%. The headgear's percentage and flat radiation protection multiply its ordinary

@@ -22,6 +22,8 @@ ITEM.br = 0.35
 ITEM.fbr = 4
 ITEM.sr = 0.51
 ITEM.fsr = 3
+ITEM.impactRes = 0.22
+ITEM.flatImpactRes = 3
 ITEM.ar = 0.22
 ITEM.far = 3
 ITEM.thermalRes = 0.22
@@ -30,8 +32,6 @@ ITEM.electricalRes = 0.22
 ITEM.flatElectricalRes = 3
 ITEM.chemicalRes = 0.22
 ITEM.flatChemicalRes = 3
-ITEM.impactRes = 0.22
-ITEM.flatImpactRes = 3
 
 ITEM.carryinc = 16.46
 ITEM.exteriorSlots = 2
