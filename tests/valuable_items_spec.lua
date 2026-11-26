@@ -267,8 +267,38 @@ check(combine(stashSource, stashTarget) == true and stashTarget:GetData("quantit
 stash.receivers[client] = nil
 stashSource = instance("value_screws", 1, client, stash)
 check(combine(stashSource, stashTarget) == false, "inaccessible container is rejected")
-check(combine(source, instance("value_pcpart_cpu", 1, client, container({[client] = true}))) == false,
-	"stacks in different inventories are rejected")
+local transferChecks = {}
+local blockTransfer = false
+hook = {Run = function(event, item, from, to)
+	if event ~= "CanTransferItem" then return end
+	transferChecks[#transferChecks + 1] = {item = item, from = from, to = to}
+	if blockTransfer then return false end
+end}
+local ownerCharacter = {weightUpdates = 0}
+function ownerCharacter:UpdateWeight() self.weightUpdates = self.weightUpdates + 1 end
+ix.char = {loaded = {[77] = ownerCharacter}}
+inventory.owner = 77
+local cpuStash = container({[client] = true})
+local stored = instance("value_pcpart_cpu", 2, client, cpuStash)
+local carried = instance("value_pcpart_cpu", 3)
+check(combine(stored, carried) == true and carried:GetData("quantity") == 5, "storage stack merges into inventory")
+check(#transferChecks == 1 and transferChecks[1].from == cpuStash and transferChecks[1].to == inventory,
+	"storage merges run inventory transfer rules")
+check(ownerCharacter.weightUpdates == 1, "storage merge refreshes the character's carry weight")
+local stashed = instance("value_pcpart_cpu", 5, client, cpuStash)
+check(combine(carried, stashed) == false and carried:GetData("quantity") == 4 and stashed:GetData("quantity") == 6,
+	"inventory stack partially merges into storage")
+check(ownerCharacter.weightUpdates == 2, "inventory to storage merge refreshes carry weight")
+blockTransfer = true
+stored = instance("value_pcpart_cpu", 1, client, cpuStash)
+check(combine(stored, carried) == false and stored:GetData("quantity") == 1 and carried:GetData("quantity") == 4,
+	"blocked transfers leave both stacks unchanged")
+blockTransfer = false
+check(combine(source, instance("value_pcpart_cpu", 1, client, container({}))) == false,
+	"inaccessible storage target is rejected")
+check(combine(instance("value_pcpart_cpu", 1, client, container({})), carried) == false,
+	"inaccessible storage source is rejected")
+inventory.owner = nil
 target.entity = {valid = true}
 check(combine(source, target) == false, "world target is rejected")
 target.entity = nil

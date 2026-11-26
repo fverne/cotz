@@ -113,7 +113,7 @@ ITEM.functions.Equip = {
 	OnRun = function(item)
 		local char = item.player:GetCharacter()
 
-		for _, k in pairs(char:GetInventory():GetItems()) do
+		for k, _ in char:GetInventory():Iter() do
 			if (k.id != item.id) then
 				local itemTable = ix.item.instances[k.id]
 

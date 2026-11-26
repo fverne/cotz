@@ -126,6 +126,8 @@ else
 		local material = ix.util.GetItemIcon(i)
 
 		icon.Paint = function(_, width, height)
+			-- Freshly rendered icons load a tick later.
+			material = material or ix.util.GetItemIcon(i)
 			if not material then return end
 
 			local scale = math.min(width / i.width, height / i.height)

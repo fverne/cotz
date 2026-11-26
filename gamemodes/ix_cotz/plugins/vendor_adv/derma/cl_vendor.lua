@@ -18,6 +18,11 @@ local QUICK_TRADE_KEYS = {
 AccessorFunc(PANEL, "bReadOnly", "ReadOnly", FORCE_BOOL)
 
 local function paintItemIcon(control, width, height)
+	-- Freshly rendered item icons become available a tick later, so retry until one exists.
+	if not control:GetMaterial() and control.iconItem then
+		local material = ix.util.GetItemIcon(control.iconItem)
+		if material then control:SetMaterial(material) end
+	end
 	control:LoadMaterial()
 	if not control:GetMaterial() then return end
 	local imageWidth, imageHeight = control.ActualWidth, control.ActualHeight
@@ -378,6 +383,7 @@ function PANEL:RefreshInspector()
 	else
 		row:RefreshData()
 		self.preview:SetVisible(true)
+		self.preview.iconItem = row.data.item
 		self.preview:SetMaterial(row.iconMaterial)
 		self.detailName:SetText(row.data.name)
 		self.detailDescription:SetText(row.data.description)
@@ -487,6 +493,7 @@ function PANEL:SetupData(owner, data)
 	self.owner, self.data = owner, data
 	self.item, self.iteminstanceID, self.isLocal = data.uniqueID, data.personal and data.key or 0, data.personal
 	self.iconMaterial = ix.util.GetItemIcon(data.item)
+	self.icon.iconItem = data.item
 	self.icon:SetMaterial(self.iconMaterial)
 	self:RefreshData()
 	self:SetHelixTooltip(function(tooltip)

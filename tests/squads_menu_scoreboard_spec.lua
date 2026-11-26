@@ -183,6 +183,7 @@ local function client(id, name, reputation)
 	function value:SteamID64() return "7656119800000000" .. self.entityIndex end
 	function value:EntIndex() return self.entityIndex end
 	function value:Nick() return "Connecting player" end
+	function value:SteamName() return "Steam " .. self.entityIndex end
 	value.entityIndex = nextCharacterID
 	function value:getReputation() return reputation end
 	function value:getCurrentRankName() return "Tourist" end
@@ -323,6 +324,8 @@ ix.crossserver.roster[first.character:GetID()] = {
 }
 local otherRecord = ix.crossserver.GetScoreboardRoster(false)[first.character:GetID()]
 scoreboard:SelectRecord(otherRecord)
+check(scoreboard.steamName.text == "(Steam " .. first.entityIndex .. ")",
+	"the dossier shows the owner's Steam name below the character name")
 check(scoreboard.dossierFields.taskEarnings.card.visible
 	and scoreboard.dossierFields.reputation.card.visible, "other characters have fully available dossiers")
 check(scoreboard.dossierFields.tasksCompleted.value.text == "8"

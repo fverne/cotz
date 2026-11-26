@@ -251,6 +251,12 @@ else
 
 		icon = iconrow:Add("DImage")
 		icon:SetSize(48 * item.width, 48 * item.height)
+		-- Freshly rendered icons load a tick later, so pick the material up once it exists.
+		function icon:Think()
+			if self:GetMaterial() then return end
+			local material = ix.util.GetItemIcon(item)
+			if material then self:SetMaterial(material) end
+		end
 		icon:SetMaterial(iconMaterial)
 		iconrow:SetWide(icon:GetWide())
 

@@ -41,9 +41,12 @@ local inventoryMeta = {}
 local inventoryPath = "gamemodes/helix/gamemode/core/meta/sh_inventory.lua"
 local inventories = {}
 local environment = {META = inventoryMeta, ix = {item = {inventories = inventories}}}
-for _, method in ipairs({"Iter", "GetItems", "HasItems", "GetID"}) do
+for _, method in ipairs({"GetItems", "HasItems", "GetID"}) do
 	loadMethod(inventoryPath, "function META:" .. method .. "(", environment)
 end
+-- COTZ replaces the bundled iterator from its schema meta file; Helix itself is unmodified.
+environment.ix.meta = {inventory = inventoryMeta}
+loadMethod("gamemodes/ix_cotz/schema/meta/sh_inventory.lua", "function ix.meta.inventory:Iter(", environment)
 local function inventory(id, width, height, slots)
 	local result = setmetatable({id = id, w = width, h = height, slots = slots}, {__index = inventoryMeta})
 	inventories[id] = result
@@ -73,7 +76,8 @@ check(positions[rifle][1] == 1 and positions[rifle][2] == 1, "iterator returns t
 check(positions[bag][1] == 3 and positions[bag][2] == 2, "iterator reaches items after reserved cells")
 check(main:GetItems()[ammo.id] == ammo, "recursive enumeration retains nested bag items")
 check(main:GetItems(true)[ammo.id] == nil, "onlyMain excludes nested bags")
-check(main:HasItems({"rifle", "ammo"}), "multi-item search reaches nested bags")
+check(main:HasItems({"rifle", "bag"}), "multi-item search finds items in the inventory's own slots")
+check(not main:HasItems({"rifle", "ammo"}), "bundled multi-item search does not enter bags (COTZ has no bag items)")
 check(not main:HasItems({"rifle", "rifle"}), "one multi-slot rifle cannot satisfy two required rifles")
 local empty = inventory(40, 2, 2, {})
 check(empty:Iter()() == nil, "empty iterator terminates")
@@ -170,7 +174,7 @@ check(personalVendor:GetStock("rifle", {}) == 2, "another character retains inde
 check(personalVendor:GetStock("unknown", character) == nil, "unknown catalog entry has no stock")
 
 
-local renderer = {requestList = {}, cache = {}}
+local renderer = {requestList = {}, cache = {}, pending = {}, renderCount = 0}
 local renderedMaterial, renderedCamera, captures, writes = nil, nil, 0, 0
 renderer.renderEntity = {
 	SetModel = function() end,
@@ -199,7 +203,7 @@ local rendererEnvironment = {
 	timer = {Simple = function(_, callback) callback() end},
 	Material = function(path) return path end,
 }
-loadMethod("gamemodes/helix/gamemode/core/libs/thirdparty/cl_ikon.lua",
+loadMethod("gamemodes/ix_cotz/schema/libs/cl_ikon.lua",
 	"function ikon:renderIcon(", rendererEnvironment)
 local camera = {fov = 45}
 check(renderer:renderIcon("custom", 2, 2, "model", camera, false, "custom/material"),
@@ -212,6 +216,26 @@ check(renderedMaterial == "", "unmodified icon resets the previous material")
 check(renderer.cache.normal ~= nil and renderer.cache.custom == nil,
 	"upstream updateCache argument retains its position and meaning")
 check(captures == 2 and writes == 3, "each call captures once and optional cache refresh writes once more")
+check(renderer:renderIcon("other", 1, 1, "model", camera, true),
+	"a second refreshed icon renders in the same second")
+check(renderer.cache.other ~= renderer.cache.normal,
+	"refreshed icons rendered together load distinct temporary materials")
+check(next(renderer.pending) == nil, "deferred loads clear their pending marker")
+
+local deferredLoads = {}
+rendererEnvironment.timer = {Simple = function(_, callback) deferredLoads[#deferredLoads + 1] = callback end}
+rendererEnvironment.file.Exists = function() return true end
+loadMethod("gamemodes/ix_cotz/schema/libs/cl_ikon.lua",
+	"function ikon:GetIcon(", rendererEnvironment)
+check(renderer:renderIcon("deferred", 1, 1, "model", camera, true), "refreshed icon renders before its load")
+check(renderer:GetIcon("deferred") == false,
+	"a pending icon is not loaded from its on-disk path in the frame it was written")
+rendererEnvironment.IKON_PROCESSING = "processing"
+check(renderer:renderIcon("deferred", 1, 1, "model", camera, true) == "processing",
+	"a pending icon is not rendered again every frame")
+deferredLoads[1]()
+check(renderer:GetIcon("deferred") == "../data/ikon_3_deferred.png",
+	"the deferred load supplies the uniquely named material")
 
 local blendCalls = {}
 local function noop() end
@@ -229,7 +253,7 @@ renderer.renderEntity.GetPos = noop
 renderer.renderEntity.DrawModel = function()
 	check(blendCalls[1] and #blendCalls == 1, "model draws with the icon blend override enabled")
 end
-loadMethod("gamemodes/helix/gamemode/core/libs/thirdparty/cl_ikon.lua",
+loadMethod("gamemodes/ix_cotz/schema/libs/cl_ikon.lua",
 	"function ikon:renderHook(", rendererEnvironment)
 renderer:renderHook()
 local blend = blendCalls[1]

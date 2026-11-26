@@ -29,8 +29,15 @@ local function isValidStackQuantity(item)
 	return isnumber(quantity) and isnumber(capacity) and quantity >= 1 and quantity <= capacity and quantity % 1 == 0
 end
 
---- Returns the stack this stack can merge into, or nil. Both stacks must share one accessible inventory,
--- which can be the character's own inventory or an open container such as a stash.
+local function isAccessibleStack(item, client)
+	local inventory = ix.item.inventories[item.invID]
+
+	return inventory ~= nil and item.invID ~= 0 and inventory:OnCheckAccess(client)
+		and inventory:GetItemByID(item.id) == item
+end
+
+--- Returns the stack this stack can merge into, or nil. Each stack must sit in an inventory the player can
+-- access, such as the character's own inventory or an open container like a stash; they may differ.
 -- @realm shared
 function ix.meta.item:GetStackCombineTarget(data)
 	if not istable(data) or not isnumber(data[1]) then
@@ -43,11 +50,7 @@ function ix.meta.item:GetStackCombineTarget(data)
 	if not target or target == self or IsValid(target.entity) or not self:CanStackWith(target) then
 		return
 	end
-	local inventory = ix.item.inventories[self.invID]
-	if not inventory or self.invID == 0 or target.invID ~= self.invID or not inventory:OnCheckAccess(self.player) then
-		return
-	end
-	if inventory:GetItemByID(self.id) ~= self or inventory:GetItemByID(target.id) ~= target then
+	if not isAccessibleStack(self, self.player) or not isAccessibleStack(target, self.player) then
 		return
 	end
 	if not isValidStackQuantity(self) or not isValidStackQuantity(target) then
@@ -60,6 +63,14 @@ function ix.meta.item:GetStackCombineTarget(data)
 	return target
 end
 
+-- Quantity-scaled item weight changes without a transfer event, so refresh the owning character's carry.
+local function updateOwnerWeight(inventory)
+	local character = inventory.owner and ix.char.loaded[inventory.owner]
+	if character and character.UpdateWeight then
+		character:UpdateWeight()
+	end
+end
+
 --- Moves as many units as fit into the target. Returns true when the source is empty and should be removed.
 -- @realm server
 function ix.meta.item:CombineStack(target)
@@ -68,6 +79,13 @@ function ix.meta.item:CombineStack(target)
 		return false
 	end
 	nextStackCombineTimes[client] = CurTime() + STACK_COMBINE_INTERVAL
+	local sourceInventory = ix.item.inventories[self.invID]
+	local targetInventory = ix.item.inventories[target.invID]
+	local bCrossInventory = sourceInventory ~= targetInventory
+	-- Units leaving an inventory follow the same rules as moving the stack itself, including the carry limit.
+	if bCrossInventory and hook.Run("CanTransferItem", self, sourceInventory, targetInventory) == false then
+		return false
+	end
 	local sourceQuantity = self:GetStackQuantity()
 	local targetQuantity = target:GetStackQuantity()
 	local transferred = math.min(sourceQuantity, target:GetStackCapacity() - targetQuantity)
@@ -75,6 +93,10 @@ function ix.meta.item:CombineStack(target)
 	self:SetData("quantity", sourceQuantity - transferred)
 	target:SetData("quantity", targetQuantity + transferred)
 	client:EmitSound("stalkersound/inv_properties.mp3", 75)
+	if bCrossInventory then
+		updateOwnerWeight(sourceInventory)
+		updateOwnerWeight(targetInventory)
+	end
 
 	return transferred == sourceQuantity
 end

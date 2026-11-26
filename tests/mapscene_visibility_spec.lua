@@ -44,12 +44,23 @@ net = {
 	WriteVector = function(value) position = value end,
 	SendToServer = function() messages[#messages + 1] = {active = active, position = position} end,
 }
-local file = assert(io.open("gamemodes/helix/plugins/mapscene.lua"))
-local source = file:read("*a"):gsub("!=", "~="):gsub("!", "not ")
-file:close()
+-- COTZ extends the unmodified bundled plugin from a schema plugin that shares its unique ID.
+local function readPlugin(path)
+	local file = assert(io.open(path))
+	local source = file:read("*a"):gsub("!=", "~="):gsub("!", "not ")
+	file:close()
+
+	return source
+end
+local bundledSource = readPlugin("gamemodes/helix/plugins/mapscene.lua")
+local cotzSource = readPlugin("gamemodes/ix_cotz/plugins/mapscene.lua")
+local function loadPlugin()
+	assert(load(bundledSource))()
+	assert(load(cotzSource))()
+end
 CLIENT = false
 PLUGIN = {}
-assert(load(source))()
+loadPlugin()
 local serverPlugin = PLUGIN
 local staticOrigin = Vector(10000, 10000, 100)
 local start = Vector(20000, 0, 100)
@@ -103,7 +114,7 @@ check(client.ixMapSceneOrigin == start, "zero-length moving paths are supported"
 
 CLIENT = true
 PLUGIN = {scenes = {{staticOrigin, Angle()}}}
-assert(load(source))()
+loadPlugin()
 table.IsEmpty = function(value) return next(value) == nil end
 table.Random = function(value) return value[1], 1 end
 gui = {MousePos = function() return 400, 300 end}

@@ -10,6 +10,31 @@ function ix.meta.inventory:GetItemCountNonSpecific(onlyMain)
 	return count
 end
 
+-- Replaces the bundled Helix iterator, which returns a multi-slot item once per occupied cell.
+-- Like upstream, it covers only this inventory's own slots and skips reserved (boolean) cells.
+function ix.meta.inventory:Iter()
+	local x, y = 1, 1
+	local seen = {}
+
+	return function()
+		while y <= self.h do
+			local item = self.slots[x] and self.slots[x][y]
+			local itemX, itemY = x, y
+			x = x + 1
+
+			if x > self.w then
+				x, y = 1, y + 1
+			end
+
+			if istable(item) and not seen[item] then
+				seen[item] = true
+
+				return item, itemX, itemY
+			end
+		end
+	end
+end
+
 -- These overrides place hideout hooks inside the authoritative inventory update.
 if SERVER then
 	local function fillSlots(inventory, item, x, y, value)

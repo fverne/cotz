@@ -11,22 +11,13 @@ local function GetRealModel(entity)
 		or entity:GetModel()
 end
 
-local lightClasses = {
-	light = true,
-	light_dynamic = true,
-	light_environment = true,
-	light_spot = true
-}
-
 properties.Add("persist", {
 	MenuLabel = "#makepersistent",
 	Order = 400,
 	MenuIcon = "icon16/link.png",
 
 	Filter = function(self, entity, client)
-		if (entity:IsPlayer() or entity:IsVehicle() or entity.bNoPersist and not lightClasses[entity:GetClass()]) then
-			return false
-		end
+		if (entity:IsPlayer() or entity:IsVehicle() or entity.bNoPersist) then return false end
 		if (!gamemode.Call("CanProperty", client, "persist", entity)) then return false end
 
 		return !entity:GetNetVar("Persistent", false)
@@ -104,12 +95,6 @@ if (SERVER) then
 			local entity = ents.Create(v.Class)
 
 			if (IsValid(entity)) then
-				if (istable(v.KeyValues)) then
-					for key, value in pairs(v.KeyValues) do
-						entity:SetKeyValue(key, value)
-					end
-				end
-
 				entity:SetPos(v.Pos)
 				entity:SetAngles(v.Angle)
 				entity:SetModel(v.Model)
@@ -166,10 +151,6 @@ if (SERVER) then
 				data.Color = v:GetColor()
 				data.Material = v:GetMaterial()
 				data.bNoCollision = v:GetCollisionGroup() == COLLISION_GROUP_WORLD
-
-				if (lightClasses[v:GetClass()]) then
-					data.KeyValues = v:GetKeyValues()
-				end
 
 				local materials = v:GetMaterials()
 
