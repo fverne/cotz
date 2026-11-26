@@ -216,6 +216,7 @@ function PLUGIN:FindSafePosition(client, candidates)
 		if not isvector(position) or not util.IsInWorld(position) then
 			continue
 		end
+		-- Trace as player movement so passthrough entities such as dropped items cannot block arrivals.
 		local trace = util.TraceHull({
 			start = position,
 			endpos = position,
@@ -223,6 +224,7 @@ function PLUGIN:FindSafePosition(client, candidates)
 			maxs = maxs,
 			filter = client,
 			mask = MASK_PLAYERSOLID,
+			collisiongroup = COLLISION_GROUP_PLAYER_MOVEMENT,
 		})
 		local floor = util.TraceHull({
 			start = position,
@@ -231,6 +233,7 @@ function PLUGIN:FindSafePosition(client, candidates)
 			maxs = maxs,
 			filter = client,
 			mask = MASK_PLAYERSOLID,
+			collisiongroup = COLLISION_GROUP_PLAYER_MOVEMENT,
 		})
 		if
 			not trace.StartSolid
