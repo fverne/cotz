@@ -72,6 +72,23 @@ Test("allocator retains geometry checks when an area has sufficient dimensions",
 	assert(not origin and reason:find("No clear, unreserved", 1, true))
 end)
 
+Test("safe positions trace as player movement so dropped items cannot block them", function()
+	Reset()
+	local client = NewClient(1)
+	function client:GetHull() return Vector(-16, -16, 0), Vector(16, 16, 72) end
+	local traceHull = util.TraceHull
+	local traces = 0
+	util.TraceHull = function(trace)
+		traces = traces + 1
+		assert(trace.collisiongroup == COLLISION_GROUP_PLAYER_MOVEMENT and trace.mask == MASK_PLAYERSOLID)
+		local floor = trace.endpos.z < trace.start.z
+		return {Hit = floor, StartSolid = false, AllSolid = false, HitNormal = Vector(0, 0, 1)}
+	end
+	local position = Vector(10, 10, 8)
+	assert(PLUGIN:FindSafePosition(client, {position}) == position and traces == 2)
+	util.TraceHull = traceHull
+end)
+
 Test("allocator ignores non-blocking trigger brushes and map logic entities", function()
 	Reset()
 	PLUGIN.state.areas.remote = {mins = Vector(), maxs = Vector(256, 256, 256)}

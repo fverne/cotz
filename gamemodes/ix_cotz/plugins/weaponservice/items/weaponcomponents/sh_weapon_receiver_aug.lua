@@ -13,8 +13,9 @@ ITEM.weaponID = "aug"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 9,
-	value_gunoil = 1,
-	value_lubricant = 2,
+	value_large_parts = 1,
+	value_tape_heavy = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
 	weapon_parts_intermediate = 4,
 }

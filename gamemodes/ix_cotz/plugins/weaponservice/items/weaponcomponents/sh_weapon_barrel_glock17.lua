@@ -13,7 +13,6 @@ ITEM.weaponID = "glock17"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_nuts = 11,
-	value_wrench = 1,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_pistol_smg = 5,
 }

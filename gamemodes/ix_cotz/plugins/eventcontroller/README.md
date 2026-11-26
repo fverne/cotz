@@ -133,6 +133,52 @@ back to their world collision center. Positions are read for each shot; weapon s
 and damage remain unchanged. The server `EntityFireBullets` plugin hook returns `true` to apply the
 direction, following the engine hook contract.
 
+Living humans (bandits, mercenaries, military and bandit melee) share `lua/entities/cotz_human_base`. Their
+Think fires shots itself from the SWEP's `Primary` table, using `PLUGIN:GetHumanAimPosition`, and sets
+`cotzManagedHumanFire` so `EntityFireBullets` leaves that direction alone.
+
+Gunmen keep moving while they shoot at a target in range with a clear lane. Each firing move is a short
+`SCHED_FORCED_GO`/`SCHED_FORCED_GO_RUN` to a point picked around the target, because chase and cover schedules end
+as soon as the engine sees the target in range. Living humans run toward the target until they are within 60% of
+their range, strafe inside it and run back inside their role's `retreat` distance (riflemen and snipers). Moves are
+128-320 units, shortened before walls and dropped when there is no ground under the goal. Shooters still crouch
+now and then between moves, and sneaking NPCs stand to take their first shot. While firing, living humans keep
+their body on the target (`ENT:OverrideMoveFacing`) and the models' `move_x`/`move_y` blend plays the matching
+run, strafe or backpedal; the engine takes ground speed from that blend. Zombified humans only walk straight at
+the target, up to 256 units at a time and no closer than 250 units, face along their path and fire on the move
+only while it heads within 30 degrees of the target. Shot spread and fire rate are the same moving or standing.
+
+Melee bandits swing low-damage `DMG_CLUB` weapons. They hit only if the target is still in reach with a clear lane
+when the swing lands. Zombified humans use the same base with `ENT.Undead`.
+
+Human NPCs use the Anomaly STALKER playermodels, unmodified. `cotz_human_base/models.lua` lists the models of each
+faction; edit it to curate them (every spawn picks one active line at random). Every model of the Anomaly Bandits,
+Mercenaries, Military and Zombified Stalkers PM packs is installed in cotz_humannpc under its original
+`models/flaymi` path, with its materials, so none of those addons is needed at runtime. The `zombied4d` models use
+one material taken from the Duty PM pack, which the zombified pack lacks.
+The NPCs play the model's
+sequences through `ENT:TranslateActivity`. They use the `passive` poses while patrolling. Once engaged,
+pistols use `revolver` poses, two-handed firearms `rpg` and melee `melee2`. Activities without a sequence (engine
+reloads, rifle runs, cover) resolve to the closest locomotion pose instead of the T-pose. Ammo is counted on the
+NPC, not the SWEP clip, because an empty clip makes the engine start its own reload. Shooters spend 0.6 seconds
+switching to the aimed pose before their first shot. The arms are posed through
+`aim_pitch` and `aim_yaw` toward the same hitbox position the bullets use (`ENT:AimAt`) instead of the engine's own aim, which
+looked too high.
+
+Shooters sometimes crouch for a few seconds while firing from at least 400 units away, and NPCs within 1,600
+units creep toward targets that have neither shot them nor are fighting them (`ENT:IsTargetUnaware`). A creeping
+NPC uses the crouched walk and stops when the target notices it. A player has noticed an NPC after shooting it or
+looking straight at it (within about 20 degrees, with a clear view), and stays noticed for six seconds. Zombified
+humans (`ENT.Undead`) never retreat, crouch or sneak.
+
+Held weapons are separate props on the right hand's `RHand` attachment, and the engine's own weapon is hidden, so
+each NPC shows the weapon it drops. `cotz_human_base/weaponprops.lua` holds one hand placement per loadout weapon: the
+barrel follows the aim direction, the top is up and the grip sits in the palm. The numbers are generated from the
+weapon models by `cotz_content_work/packs/bandit_anomaly_anims/tools/weapon_placement`. `pos` places the weapon
+model's origin and `ang` turns the model about it, so changing `ang` alone turns a weapon in place. Bone-merge is not used because the rig flags no bones for it.
+`tests/human_weaponprops_spec.lua` checks that every loadout weapon has a placement for the model players see.
+Generate an entry when adding a loadout weapon.
+
 STALKER NPCs (`IsSTALKERNPC`) normally pass through each other so groups do not get stuck. Bullet traces
 use the same `ShouldCollide` rules, so `ActorsBlockEachOther` keeps hostile pairs that include a living or
 zombified gunman solid; otherwise their shots passed straight through mutants and rival humans. Allies,

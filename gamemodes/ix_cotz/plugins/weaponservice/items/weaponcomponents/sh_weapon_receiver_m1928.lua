@@ -13,8 +13,8 @@ ITEM.weaponID = "m1928"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 13,
-	value_gunoil = 1,
-	value_precisiontools = 1,
+	value_tools_advwrench = 1,
+	value_tools_screwdriver_flat_long = 1,
+	value_weaponparts = 1,
 	weapon_parts_pistol_smg = 6,
 }

@@ -13,7 +13,7 @@ ITEM.weaponID = "obrez"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_gunoil = 1,
+	value_multitul_0 = 1,
+	value_wrench = 1,
 	weapon_parts_long_rifle = 2,
 }

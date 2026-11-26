@@ -105,34 +105,21 @@ ITEM.functions.split = {
 	end,
 }
 
+-- Ammo stacks merge by ammo type and start from ammoAmount when no quantity is saved.
+function ITEM:CanStackWith(target)
+	return target.ammo ~= nil and target.ammo == self.ammo
+end
+
+function ITEM:GetStackQuantity()
+	return self:GetData("quantity", self.ammoAmount)
+end
+
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
-		if !data then
-			return false
-		end
-
-		local targetItem = ix.item.instances[data[1]]
-
-		if targetItem.ammo == item.ammo then
-			return true
-		else
-			return false
-		end
+		return item:GetStackCombineTarget(data) ~= nil
 	end,
 	OnRun = function(item, data)
-		local targetItem = ix.item.instances[data[1]]
-		local targetAmmoDiff = targetItem.maxStack - targetItem:GetData("quantity", targetItem.ammoAmount)
-		local localQuant = item:GetData("quantity", item.ammoAmount)
-		local targetQuant = targetItem:GetData("quantity", targetItem.ammoAmount)
-		item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-		if targetAmmoDiff >= localQuant then
-			targetItem:SetData("quantity", targetQuant + localQuant)
-			return true
-		else
-			item:SetData("quantity", localQuant - targetAmmoDiff)
-			targetItem:SetData("quantity", targetItem.maxStack)
-			return false
-		end
+		return item:CombineStack(item:GetStackCombineTarget(data))
 	end,
 }
 

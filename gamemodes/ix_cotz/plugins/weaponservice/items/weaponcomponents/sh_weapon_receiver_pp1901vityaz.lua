@@ -13,8 +13,8 @@ ITEM.weaponID = "pp1901vityaz"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_gunoil = 1,
-	value_precisiontools = 1,
+	value_large_parts = 1,
+	value_tools_advwrench = 1,
+	value_toolset = 1,
 	weapon_parts_pistol_smg = 5,
 }

@@ -13,8 +13,12 @@ ITEM.weaponID = "vss"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_lubricant = 2,
-	value_precisiontools = 2,
+	value_multitul_0 = 1,
+	value_precisiontools = 1,
+	value_tools_advwrench = 1,
+	value_tools_ratchetwrench = 1,
+	value_tools_screwdriver_flat_long = 1,
+	value_toolset = 1,
+	value_weaponparts = 2,
 	weapon_parts_intermediate = 5,
 }

@@ -13,11 +13,7 @@ ITEM.weaponID = "w1895"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 7,
-	value_gunoil = 1,
-	value_metalparts = 1,
-	value_nuts = 9,
-	value_screwdriver = 1,
-	value_wrench = 1,
+	value_handdrill = 1,
+	value_pipewrench = 1,
 	weapon_parts_long_rifle = 3,
 }

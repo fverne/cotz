@@ -13,6 +13,6 @@ ITEM.weaponID = "c96"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 16,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_pistol_smg = 2,
 }

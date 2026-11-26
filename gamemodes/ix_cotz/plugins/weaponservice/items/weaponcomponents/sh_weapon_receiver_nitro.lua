@@ -13,10 +13,13 @@ ITEM.weaponID = "nitro"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 15,
-	value_gunoil = 2,
-	value_lubricant = 2,
-	value_precisiontools = 2,
+	value_multitul_0 = 1,
+	value_tape_heavy = 1,
+	value_techtool_1 = 1,
 	value_techtool_3 = 9,
+	value_tools_ratchetwrench = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
+	value_wrench = 1,
 	weapon_parts_long_rifle = 7,
 }

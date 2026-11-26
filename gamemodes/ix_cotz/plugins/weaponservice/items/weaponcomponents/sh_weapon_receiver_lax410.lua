@@ -13,7 +13,6 @@ ITEM.weaponID = "lax410"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 7,
-	value_gunoil = 2,
+	value_precisiontools = 1,
 	weapon_parts_shotgun = 3,
 }

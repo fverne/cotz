@@ -12,6 +12,7 @@ local JOB_CASH_RATE = ix.taskRewards.settings.jobCashRate
 local JOB_REFERENCE_CASH_RATE = ix.taskRewards.settings.jobReferenceCashRate
 local CASH_ROUNDING_EPSILON = ix.taskRewards.settings.cashRoundingEpsilon
 local MAX_DEPTH = ix.taskRewards.settings.maxDepth
+local WEAPON_REFERENCE_DURABILITY = ix.taskRewards.settings.weaponReferenceDurability
 local townProfiles = {}
 
 function ix.taskRewards.SetProfile(npc, items)
@@ -75,7 +76,9 @@ expectedItem = function(itemID, data, depth)
 		local generated = ix.taskRewards.settings.generatedQuantities[itemID]
 			or average(item.quantity or item.ammoAmount, 1)
 		local quantity = average((data or {}).quantity, generated)
-		local condition = item.isWeapon and average((data or {}).durability, 100) / 100 or 1
+		-- An omitted durability is a pristine weapon, which never counts for more than full value.
+		local condition = item.isWeapon
+			and math.min(1, average((data or {}).durability, 100) / WEAPON_REFERENCE_DURABILITY) or 1
 
 		return ix.taskRewards.UnitValue(itemID) * quantity * condition
 	end

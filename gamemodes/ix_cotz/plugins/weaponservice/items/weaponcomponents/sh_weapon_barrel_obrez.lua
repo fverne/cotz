@@ -13,8 +13,7 @@ ITEM.weaponID = "obrez"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_gunoil = 1,
-	value_nuts = 7,
-	value_toiletpaper = 1,
+	value_tools_advwrench = 1,
+	value_wd40_100ml = 1,
 	weapon_parts_long_rifle = 2,
 }

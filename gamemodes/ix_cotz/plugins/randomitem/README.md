@@ -1,5 +1,16 @@
 # Regional world loot
 
+## Found weapon durability
+
+Firearms from every non-trader source spawn at no more than 5% durability: world, box, cache, stash and
+reward pools, hidden stashes, NPC weapon drops and the default fallback. Values keep their earlier ratios
+(previous durability × 0.05), and entries that used to omit durability now state 5. Cleanliness (`wear`),
+ammunition and attachments are unchanged. A gun at 0 cannot fire until a technician rebuilds it, and a
+nearly broken one stops after little use. New entries must set `durability` explicitly; an omitted value
+spawns a pristine weapon. Vendor stock, paid special sales, character starting kits, admin spawns and
+existing saved weapons keep their previous durability. Run
+`luatex --luaonly tests/spawned_weapon_durability_spec.lua`.
+
 Worldspawn pool ownership is Swamps 1/2, Garbage regular/rare, Waystation 3/4, and Pripyat 5/6.
 The randomitem library explicitly includes all eight pools on both realms. Map spawn definitions
 must select these pool IDs; registering a pool does not place loot spawners or change map presets.
@@ -17,7 +28,7 @@ pools. Early-region rare ceilings are 1,800/2,600/4,500; Pripyat has the remaini
 These are authoring choices reflected in explicit Lua rows, not runtime sorting rules.
 
 All active old and new rows are weighted together. Every pool totals **10,000 weight**, so
-100 weight is a 1% chance per selection. There is no separate old/new allowance. Existing quantities, loaded ammunition and durability are unchanged; disabled rows stay disabled.
+100 weight is a 1% chance per selection. There is no separate old/new allowance. Existing quantities and loaded ammunition are unchanged; disabled rows stay disabled.
 Twenty personal/identity/data valuables are moved from worldspawn to human pocket loot below.
 
 Regular pools budget about 70% salvage, 17% consumables, 8% ammunition, 3% weapons and 2% utility.
@@ -37,6 +48,7 @@ spawned round count; consumables by spawned uses; per-unit valuables by explicit
 quantity; fuel by its partial-container price; weapons by configured durability. These are nominal
 item-value estimates, not trader sale quotes or earnings per hour. Loaded rounds in weapons are not
 added to the weapon estimate. Rounding and random instance variation can change individual results.
+The table predates the 5% found-weapon durability cap, so it overstates the resale value of weapons.
 
 | Pool | All active rows | Estimated mean item value | New valuables chance |
 | --- | ---: | ---: | ---: |

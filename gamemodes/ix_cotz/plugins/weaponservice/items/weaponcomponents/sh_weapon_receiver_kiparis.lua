@@ -13,7 +13,7 @@ ITEM.weaponID = "kiparis"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_gunoil = 1,
+	value_hammer = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_pistol_smg = 2,
 }

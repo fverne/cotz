@@ -13,8 +13,11 @@ ITEM.weaponID = "svt40"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_gunoil = 1,
-	value_precisiontools = 2,
+	value_building_plexiglass = 1,
+	value_building_poxeram = 1,
+	value_large_parts = 1,
+	value_precisiontools = 1,
+	value_weaponparts = 1,
+	value_wrench = 1,
 	weapon_parts_long_rifle = 5,
 }

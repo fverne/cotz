@@ -211,9 +211,8 @@ if SERVER then
 	local function canAdvance(character, progressionID)
 		local definition = ix.progression.definitions[progressionID]
 
-		return definition
-			and (definition.progMap == game.GetMap() or definition.progMap == "*")
-			and ix.progression.IsActive(character, progressionID)
+		-- Assigned progress counts on any map; the contact's home map does not gate it.
+		return definition and ix.progression.IsActive(character, progressionID)
 	end
 
 	function ix.progression.InvokeProgressionLevel(character, progressionID, level)
@@ -351,7 +350,6 @@ if SERVER then
 			or target:GetDisplayName() ~= definition.keyNpc
 			or client:GetPos():DistToSqr(target:GetPos()) > 192 * 192
 			or not target:CanAccess(client)
-			or not (definition.progMap == game.GetMap() or definition.progMap == "*")
 			or not ix.progression.CanUseNPC(character, definition.keyNpc)
 		then
 			return false

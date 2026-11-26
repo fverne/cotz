@@ -13,8 +13,10 @@ ITEM.weaponID = "9a91"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_lubricant = 1,
-	value_precisiontools = 2,
+	value_precisiontools = 1,
+	value_tape_heavy = 1,
+	value_tools_advwrench = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
 	weapon_parts_intermediate = 5,
 }

@@ -92,6 +92,7 @@ function table.HasValue(t, value)
 end
 vector_origin, angle_zero, color_white = Vector(), Angle(), {}
 MASK_SOLID_BRUSHONLY, MASK_PLAYERSOLID, SOLID_NONE, MOVETYPE_NOCLIP = 1, 2, 0, 8
+COLLISION_GROUP_PLAYER_MOVEMENT = 8
 SOLID_VPHYSICS = 6
 SOLID_BSP = 1
 local now = 100

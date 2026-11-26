@@ -81,7 +81,7 @@ dofile(base .. "items/base/sh_weaponsalvage.lua")
 local salvageBase = ITEM
 local weightSource = read("gamemodes/ix_cotz/schema/items/base/sh_valuable.lua")
 local weightStart = assert(weightSource:find("function ITEM:GetWeight()", 1, true))
-weightSource = weightSource:sub(weightStart)
+weightSource = weightSource:sub(weightStart, assert(weightSource:find("\nend\n", weightStart, true)) + 3)
 assert(load(weightSource, "@valuable weight", "t", {ITEM = salvageBase}))()
 check(componentBase.base == "base_valuable" and salvageBase.base == "base_valuable",
 	"immediate folders select bases that retain valuable mechanics")
@@ -129,14 +129,14 @@ for _, pool in ipairs({"worldspawn_1", "worldspawn_garbage_regular", "worldspawn
 	dofile("gamemodes/ix_cotz/plugins/randomitem/pools/" .. pool .. ".lua")
 end
 local function ingredientAvailable(id, tier)
-	local pools = {"worldspawn_1"}
-	if tier >= 3 then pools[#pools + 1] = "worldspawn_garbage_regular" end
+	local pools = {"worldspawn_1", "worldspawn_garbage_regular"}
+	if tier >= 3 then pools[#pools + 1] = "worldspawn_garbage_rare" end
 	if tier >= 4 then pools[#pools + 1] = "worldspawn_3" end
-	if tier >= 5 then pools[#pools + 1], pools[#pools + 2] = "worldspawn_garbage_rare", "worldspawn_4" end
+	if tier >= 5 then pools[#pools + 1] = "worldspawn_4" end
 	if tier >= 6 then pools[#pools + 1], pools[#pools + 2] = "worldspawn_5", "worldspawn_6" end
 	for _, pool in ipairs(pools) do
 		for _, entry in ipairs(ix.randomitems.tables[pool]) do
-			if entry[2][1] == id and (tier >= 3 or entry[1] >= 50) then return true end
+			if entry[2][1] == id and (tier >= 3 or pool ~= "worldspawn_1" or entry[1] >= 50) then return true end
 		end
 	end
 
@@ -149,6 +149,13 @@ check(workshop.catalogue.f2000.tier == 5, "F2000 uses its highest-weight occurre
 check(workshop.catalogue.fnfal.family == "long_rifle", "full-power battle rifle uses long rifle salvage")
 check(workshop.catalogue.vss.family == "intermediate", "9x39 uses intermediate salvage")
 check(workshop.catalogue.sako85varmint.family == "pistol_smg", "rimfire uses light salvage")
+-- Gun care stock is in heavy demand from progression hand-ins, so technicians do not ask for it.
+local CONTESTED = {value_gunoil = true, value_lubricant = true, value_guncleaner = true, value_gunspray = true}
+local garbageStock = {}
+for _, pool in ipairs({"worldspawn_garbage_regular", "worldspawn_garbage_rare"}) do
+	for _, entry in ipairs(ix.randomitems.tables[pool]) do garbageStock[entry[2][1]] = true end
+end
+local garbageValue, ingredientValue = 0, 0
 for id, weapon in pairs(workshop.catalogue) do
 	local total = 0
 	for _, kind in ipairs({"barrel", "receiver"}) do
@@ -156,6 +163,12 @@ for id, weapon in pairs(workshop.catalogue) do
 		local materialValue = 0
 		for ingredient, quantity in pairs(item.recipe) do
 			materialValue = materialValue + ix.item.list[ingredient].price * quantity
+			check(not CONTESTED[ingredient], id .. " avoids contested gun care stock")
+			if not ix.item.list[ingredient].salvageFamily then
+				local value = ix.item.list[ingredient].price * quantity
+				ingredientValue = ingredientValue + value
+				if garbageStock[ingredient] then garbageValue = garbageValue + value end
+			end
 			check(ix.item.list[ingredient].salvageFamily or ingredientAvailable(ingredient, weapon.tier),
 				id .. " uses ingredients available in its map difficulty band")
 		end
@@ -174,6 +187,13 @@ for id, weapon in pairs(workshop.catalogue) do
 	local fraction = total / ix.item.list[id].price
 	check(fraction >= 0.6 and fraction <= 0.8, id .. " rebuild is within nominal budget")
 end
+local garbageShare = garbageValue / ingredientValue
+check(garbageShare >= 0.45 and garbageShare <= 0.75, "Garbage supplies most, but not all, recipe stock")
+-- Transaction checks below need two quantity-bearing inputs, independent of recipe balance.
+ix.item.list.weapon_barrel_makarov.recipe = {value_bolts = 1, value_nuts = 1, weapon_parts_pistol_smg = 2}
+for _, id in ipairs({"value_bolts", "value_nuts"}) do
+	ix.item.list[id] = ix.item.list[id] or {uniqueID = id, name = id, price = 20, quantity = 20}
+end
 local nextActor, nextItem = 0, 0
 local position = {DistToSqr = function(self) return self.distance or 0 end}
 local itemMethods = {}
@@ -191,11 +211,20 @@ function itemMethods:Remove()
 
 	return true
 end
+-- Shared item-meta stack helpers sit below item definitions, as they do on ix.meta.item.
+local stackMethods = {}
+ix.item.inventories = ix.item.inventories or {}
+assert(load(read("gamemodes/ix_cotz/schema/meta/sh_itemstack.lua"), "@item stack meta", "t", setmetatable({
+	ix = {meta = {item = stackMethods}, item = ix.item},
+	istable = function(value) return type(value) == "table" end,
+	isnumber = function(value) return type(value) == "number" end,
+}, {__index = _G})))()
 local function add(character, id, data)
 	nextItem = nextItem + 1
 	local item = setmetatable({id = nextItem, uniqueID = id, data = copy(data or {}), owner = character}, {
-		__index = function(_, key) return itemMethods[key] or ix.item.list[id][key] end,
+		__index = function(_, key) return itemMethods[key] or ix.item.list[id][key] or stackMethods[key] end,
 	})
+	item.invID = character.inventory.id
 	character.inventory.items[item.id] = item
 	ix.item.instances[item.id] = item
 
@@ -216,8 +245,11 @@ local function actor()
 		elseif callback then callback() end
 	end
 	function character:UpdateWeight() self.weightUpdated = true end
-	character.inventory = {items = {}, inserts = {}}
+	character.inventory = {id = 1000 + nextActor, items = {}, inserts = {}}
 	function character.inventory:GetItems() return self.items end
+	function character.inventory:GetItemByID(id) return self.items[id] end
+	function character.inventory:OnCheckAccess(client) return client == character.client end
+	ix.item.inventories[character.inventory.id] = character.inventory
 	function character.inventory:Add(id, _, data)
 		if self.full then return false, "noFit" end
 		self.inserts[#self.inserts + 1] = {item = id, data = copy(data)}
@@ -346,13 +378,18 @@ check(workshop:CountItem(stackSpend, partsID) == 8, "barter consumes exact part 
 settle(stackSpend)
 
 local guaranteed, chance = workshop:SalvageYield(1, 50, 80)
-check(guaranteed == 0 and math.abs(chance - 0.2) < 0.00001, "tier-one damaged/dirty probability")
+check(guaranteed == 0 and math.abs(chance - 0.275) < 0.00001, "tier-one damaged/dirty probability")
 guaranteed, chance = workshop:SalvageYield(5, 80, 80)
-check(guaranteed == 1 and math.abs(chance - 0.6) < 0.00001, "fractional multi-part probability")
+check(guaranteed == 1 and math.abs(chance - 0.825) < 0.00001, "fractional multi-part probability")
 guaranteed, chance = workshop:SalvageYield(7, 100, 100)
 check(guaranteed == 4 and chance == 0, "top tier yields four at perfect condition")
-check(workshop:SalvageYield(7, 100, 0) == 0, "zero cleanliness gives zero salvage")
-check(workshop:SalvageYield(7, -20, 200) == 0, "condition inputs are clamped")
+guaranteed, chance = workshop:SalvageYield(7, 0, 0)
+check(guaranteed == 1 and chance == 0, "a ruined weapon keeps a quarter of its full salvage")
+check(workshop:SalvageYield(7, 100, 0) == 1, "zero cleanliness keeps the condition floor")
+guaranteed, chance = workshop:SalvageYield(1, 0, 0)
+check(guaranteed == 0 and math.abs(chance - 0.125) < 0.00001, "ruined tier-one gun keeps a fractional chance")
+guaranteed, chance = workshop:SalvageYield(7, -20, 200)
+check(guaranteed == 1 and chance == 0, "condition inputs are clamped")
 
 local character, client = actor()
 local gun = add(character, "makarov", {durability = 30, wear = 80})
@@ -595,8 +632,11 @@ local zeroActor, zeroClient = actor()
 local zeroGun = add(zeroActor, "pkm", {durability = 100, wear = 0})
 local beforeRolls = rolls
 quote(zeroClient, tech, zeroGun, "dismantle")
-check(workshop:ExecuteWorkshop(zeroClient, tech, true), "confirmed zero-yield dismantle destroys weapon")
-check(#workshop:Pending(zeroActor) == 0 and rolls == beforeRolls, "integer zero yield does not roll or award parts")
+check(workshop:ExecuteWorkshop(zeroClient, tech, true), "confirmed floor-yield dismantle destroys weapon")
+check(#workshop:Pending(zeroActor) + #zeroActor.inventory.inserts > 0 and rolls == beforeRolls,
+	"integer floor yield awards parts without rolling")
+settle(zeroActor)
+check(workshop:CountItem(zeroActor, "weapon_parts_long_rifle") == 1, "floor yield delivers one part")
 
 local empty, emptyClient = actor()
 add(empty, "weapon_barrel_makarov")

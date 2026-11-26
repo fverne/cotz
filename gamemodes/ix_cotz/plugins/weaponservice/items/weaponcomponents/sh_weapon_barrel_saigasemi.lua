@@ -13,11 +13,8 @@ ITEM.weaponID = "saigasemi"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 7,
-	value_gunoil = 3,
-	value_metalparts = 1,
-	value_nuts = 9,
-	value_tools_nippers = 1,
+	value_electricdrill = 1,
+	value_precisiontools = 1,
 	value_wrench = 1,
 	weapon_parts_intermediate = 3,
 }

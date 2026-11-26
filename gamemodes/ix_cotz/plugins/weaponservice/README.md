@@ -52,11 +52,13 @@ New dismantling rewards arrive as one quantity-bearing stack. Existing quantity-
 still count as one, and previously queued single-part rewards remain claimable without conversion.
 
 Full-condition base expected yields for tiers 1–7 are 0.5, 1, 1.5, 2, 2.5, 3 and 4 parts.
-Multiply by durability/100 and cleanliness/100, clamped to 0–100. The integer portion is guaranteed;
-one fractional roll determines an extra part. The integer tiers do not perform a random roll.
-For example, a tier-5 gun at 80% durability and 80% cleanliness yields one guaranteed part and a
-60% chance of a second. Tier 7 at 100% on both readings gives exactly four. Saved `wear` means
-cleanliness, so zero cleanliness gives zero salvage; clean a gun before dismantling if worthwhile.
+A weapon with nothing left still keeps `salvageConditionFloor` (25%) of that yield. The rest scales with
+condition: `yield × (0.25 + 0.75 × durability/100 × cleanliness/100)`, with both readings clamped to 0–100.
+The integer portion is guaranteed; one fractional roll determines an extra part. Whole results do not roll.
+For example, a tier-5 gun at 80% durability and 80% cleanliness yields two guaranteed parts and a
+6.25% chance of a third. Tier 7 gives one part at 0%/0% and exactly four at 100%/100%.
+Saved `wear` means cleanliness. Durability and cleanliness multiply, so a nearly broken gun yields close
+to the floor however clean it is.
 
 ## Recipes and editing
 
@@ -70,11 +72,12 @@ Recipes were authored against current unit prices. Complete rebuilds total rough
 price before earned discounts/credits, with 40% as commission. Low-value firearms omit expensive oil
 or reduce fasteners/parts. Nuts and bolts consume individual saved quantity units across stacks;
 oils and tool sets consume whole items. Tools in recipes are barter inputs and are consumed.
-Barrels use civilian gun oil, spray lubricant, military cleaner and firearm lubricant, with supporting
-cleaning stock, fasteners and workshop supplies varying by model and tier. Higher tiers add precision
-tools and advanced/specialty tool boxes where affordable. Tools are consumed barter goods.
-The F2000 receiver requires five intermediate parts, eleven bolts, two precision screwdriver sets,
-one civilian oil and 5,700 RU commission before benefits. The barrel has a separate recipe.
+Barrels lean on wrenches, drills and cleaning stock; receivers on screwdrivers, mechanisms and repair
+materials. Selections vary by weapon so one item does not carry every recipe. Expensive firearms add
+basic, advanced or specialty tool boxes to keep hand-in counts manageable. Tools are consumed barter goods.
+The F2000 receiver requires five intermediate parts, a precision screwdriver set, adjustable wrench,
+assorted hand tools, loose weapon mechanisms and 5,700 RU commission before benefits. The barrel has a
+separate recipe.
 
 Component `ITEM.price` is the low nominal resale value, not commission plus ingredients. Keep it in
 20–200 RU when editing recipes. Commission still uses the firearm's price and `commissionRate`.
@@ -82,22 +85,31 @@ Keep each full rebuild's commission plus ingredient value within the intended 60
 The catalogue/budget spec detects drift. For a new gun, add an explicit tier/family catalogue entry
 and two concrete component files; preserve existing IDs to retain saved compatibility.
 
-Recipe difficulty follows the FTS source maps and actual loot weights, rather than item price alone.
+Recipes mostly ask for stock that other hand-ins leave alone. Gun oil, lubricant, gun cleaner and gun
+spray are in heavy progression demand and no recipe uses them. Loose Garbage salvage is treated as nearly
+free and supplies a little over half of non-salvage ingredient value. The rest comes from lightly requested
+supplies elsewhere: Alkaline Booster, military adhesive tape, tool boxes and Pripyat electronics.
+The core wrenches, hammer, long screwdriver, repair materials, precision tools and hand drill have little
+progression demand. Weapon mechanisms, assorted and large parts, the multitool, pipe wrench and cordless
+drill have moderate demand and are used for their Garbage supply and fit. Town delivery jobs can still
+request many of these, so review demand again after changing job or progression pools.
+Fasteners only close small budget gaps, mostly on firearms priced under 3,000 RU.
+
 Recipes stay fixed when a player travels; these bands describe where their supplies can be obtained.
+Garbage stock is available to low tiers deliberately, so repairing an early firearm can require a visit there.
 
 | Weapon tier | Ingredient access policy |
 | --- | --- |
-| 1–2 | Common Swamps `worldspawn_1` items, each with entry weight at least 50; no rare oil or tool requirements |
-| 3 | Adds regular Garbage stock, including metal spare parts, nippers, screwdrivers and wrenches |
-| 4 | Adds regular Waystation `worldspawn_3`, including spray lubricant and military cleaners |
-| 5 | Adds Garbage/Waystation rare stock and affordable precision/advanced workshop tools |
-| 6–7 | Adds Pripyat supplies; each barrel requires a Pripyat-sourced programmer, controller or precision gyroscope |
+| 1–2 | Garbage regular stock, plus Swamps `worldspawn_1` entries with weight at least 50 |
+| 3 | Adds Garbage rare stock, including precision tools, drills and weapon mechanisms |
+| 4 | Adds regular Waystation `worldspawn_3`; expensive rebuilds may ask for tool boxes |
+| 5 | Adds Waystation `worldspawn_4` |
+| 6–7 | Adds Pripyat; each barrel needs a Pripyat-sourced programmer, controller or precision gyroscope |
 
-Cheap guns keep affordable recipe exceptions. Low-tier receivers follow the same source limits;
-two tier-3 receiver recipes use common civilian oil and detergent instead of military cleaner.
-The standalone spec checks every ingredient against these live pool definitions and protects the
-early-tier common-loot threshold. The map/pool assignments come from the FTS presets and the
-[availability audit](../../../../docs/npc-overhaul/delivery-balance.md); live saved spawns can differ.
+The standalone spec checks ingredient access against live pool definitions, rejects the four gun care
+items and keeps the Garbage share of ingredient value between 45% and 75%. The map/pool assignments come
+from the FTS presets and the [availability audit](../../../../docs/npc-overhaul/delivery-balance.md);
+live saved spawns can differ.
 
 ## Authority, delivery and persistence
 

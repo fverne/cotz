@@ -13,6 +13,7 @@ ITEM.weaponID = "m3supershort"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 30,
+	value_tools_screwdriver_flat_long = 1,
+	value_wrench = 1,
 	weapon_parts_shotgun = 5,
 }

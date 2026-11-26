@@ -13,8 +13,9 @@ ITEM.weaponID = "uzi50ae"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 13,
 	value_precisiontools = 1,
-	value_techtool_3 = 1,
+	value_techtool_2 = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
 	weapon_parts_pistol_smg = 6,
 }

@@ -13,8 +13,14 @@ ITEM.weaponID = "tkpd"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 15,
-	value_gunoil = 1,
-	value_techtool_3 = 1,
+	value_building_poxeram = 1,
+	value_hammer = 1,
+	value_large_parts = 1,
+	value_multitul_0 = 1,
+	value_precisiontools = 1,
+	value_techtool_1 = 1,
+	value_tools_screwdriver_flat_long = 1,
+	value_toolset = 1,
+	value_weaponparts = 2,
 	weapon_parts_long_rifle = 7,
 }

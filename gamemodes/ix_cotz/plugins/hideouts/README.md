@@ -33,7 +33,8 @@ empty; author and verify each map's usable areas and entrances before exporting.
    points. Use noclip to mark the upper corner. The entire volume must be usable
    empty space inside the world. Stay clear of arenas and other dynamic systems.
 2. Return to normal playable ground and run /HideoutRecovery. This is the
-   fallback outside position if a player's original return point is blocked.
+   fallback outside position if a player's original return point is blocked. Entities players walk
+   through, such as dropped items, do not block arrival or return positions.
 3. Build the shell with **Hideout Template Marker** entities (see below), then save the complete build.
    Put the approved AdvDupe2 shell in the server's
    AdvDupe2.DataFolder/STALKERDupes/name.txt. Add a template, for example:

@@ -13,6 +13,6 @@ ITEM.weaponID = "toz34short"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 16,
+	value_building_plexiglass = 1,
 	weapon_parts_shotgun = 3,
 }

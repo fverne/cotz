@@ -13,8 +13,7 @@ ITEM.weaponID = "mr96"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 6,
-	value_gunspray = 1,
-	value_nuts = 8,
+	value_pipewrench = 1,
+	value_wd40_100ml = 1,
 	weapon_parts_pistol_smg = 4,
 }

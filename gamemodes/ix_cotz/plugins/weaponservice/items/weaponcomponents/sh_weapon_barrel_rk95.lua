@@ -13,10 +13,8 @@ ITEM.weaponID = "rk95"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_guncleaner = 1,
-	value_gunspray = 1,
-	value_nuts = 13,
-	value_precisiontools = 1,
-	value_wrench = 1,
+	value_electricdrill = 1,
+	value_handdrill = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_intermediate = 5,
 }

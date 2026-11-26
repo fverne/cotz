@@ -1,5 +1,11 @@
 local Category = "S.T.A.L.K.E.R RP Humans"
 
+list.Set("NPC", "npc_human_bandit_melee", {
+	Name = "Bandit (Melee)",
+	Class = "npc_human_bandit_melee",
+	Category = Category,
+})
+
 local NPC = { 	Name = "Bandit (Rifles)", 
 				Class = "npc_human_bandit_rifleman",
 				Category = Category	}

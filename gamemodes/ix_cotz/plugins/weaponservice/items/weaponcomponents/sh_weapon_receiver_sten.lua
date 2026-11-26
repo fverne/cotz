@@ -13,6 +13,6 @@ ITEM.weaponID = "sten"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 15,
+	value_wrench = 1,
 	weapon_parts_pistol_smg = 3,
 }

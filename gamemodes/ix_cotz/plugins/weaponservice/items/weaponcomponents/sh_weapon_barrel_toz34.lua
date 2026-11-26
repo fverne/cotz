@@ -13,8 +13,6 @@ ITEM.weaponID = "toz34"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 3,
-	value_gunspray = 1,
-	value_nuts = 4,
+	value_pipewrench = 1,
 	weapon_parts_shotgun = 4,
 }

@@ -13,6 +13,6 @@ ITEM.weaponID = "uzi"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_guncleaner = 1,
+	value_tape_heavy = 1,
 	weapon_parts_pistol_smg = 5,
 }

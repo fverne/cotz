@@ -30,6 +30,9 @@ Anomaly firearms use the same inventory attachments as other CW 2.0 firearms. Th
 profiles select optics by family and mount and allow at most one compatible detachable suppressor.
 Pistols use red dots, and revolvers can also take the Schmidt ShortDot. Fixed optics remain part of
 their weapons. Pack-only customization entries are excluded from the regular Anomaly SWEP slots.
+No `cw_anomaly_*` firearm offers a pack attachment: a pack base SWEP uses its `_vmrecoil` profile, and one
+without a profile takes no attachments. `cotz_general` therefore ships only the attachment models that can
+still be drawn; the `VElements` entries for the others remain in the weapon files and stay inactive.
 Install and detach hardware through the inventory. Saved attachments that are no longer compatible
 can be removed with **Detach**.
 

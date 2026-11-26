@@ -231,6 +231,10 @@ there are no active jobs. The You tab contains the backpack and equipment.
 
 ## Task rewards and existing kits
 
+Reward weapons spawn at no more than 5% durability. Budget calculations value them relative to
+`weaponReferenceDurability` in `definitions/sh_rewardsettings.lua`, not 100%, so the lower durability does
+not shrink job reward budgets. Keep that setting equal to the highest reward-pool weapon durability.
+
 Jobsystem owns repeatable reward preparation, hand-in choices, bonus accounting and stored claims.
 Town contacts configure rewards beside their jobs in `townnpcs/definitions/sh_<contact>.lua`.
 Reward lists are independent of vendor stock and purchase unlocks. NPC conversation/access checks

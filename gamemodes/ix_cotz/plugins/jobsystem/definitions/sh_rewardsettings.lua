@@ -62,6 +62,8 @@ ix.taskRewards.settings = {
 
 	supplyCatalogueVersion = 7,
 	ammoRewardFraction = 0.5,
+	-- Highest durability on looted or awarded weapons. A reward weapon at this value counts at full item value.
+	weaponReferenceDurability = 5,
 	maxPackageItems = 64,
 	maxOffers = 512,
 	maxPendingRewards = 1024,

@@ -13,8 +13,7 @@ ITEM.weaponID = "saiga12"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 13,
-	value_gunoil = 1,
 	value_precisiontools = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_shotgun = 6,
 }

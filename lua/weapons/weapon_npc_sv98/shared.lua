@@ -75,6 +75,9 @@ function SWEP:Initialize()
 end
 
 function SWEP:PrimaryAttack()
+	local owner = self:GetOwner()
+	if IsValid(owner) and owner.cotzManagedHumanFire then return end
+
   if not IsFirstTimePredicted() then return end
   if ( !self:CanPrimaryAttack() or self:GetNextPrimaryFire() > CurTime() ) then return end
 

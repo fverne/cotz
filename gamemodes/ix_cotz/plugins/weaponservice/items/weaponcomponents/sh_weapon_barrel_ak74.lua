@@ -13,10 +13,7 @@ ITEM.weaponID = "ak74"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 4,
-	value_gunspray = 1,
-	value_metalparts = 1,
-	value_nuts = 11,
-	value_wrench = 1,
+	value_handdrill = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_intermediate = 4,
 }

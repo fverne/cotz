@@ -13,6 +13,6 @@ ITEM.weaponID = "obrezmalfunction"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
+	value_tools_screwdriver_flat_long = 1,
 	weapon_parts_long_rifle = 5,
 }

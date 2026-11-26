@@ -13,8 +13,10 @@ ITEM.weaponID = "trg42"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_gunoil = 1,
-	value_precisiontools = 2,
+	value_hammer = 1,
+	value_precisiontools = 1,
+	value_tools_screwdriver_flat_long = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
 	weapon_parts_long_rifle = 5,
 }

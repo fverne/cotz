@@ -13,10 +13,12 @@ ITEM.weaponID = "l115"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_guncleaner = 1,
-	value_gunoil = 2,
-	value_lubricant = 2,
-	value_precisiontools = 2,
+	value_large_parts = 1,
+	value_precisiontools = 1,
+	value_techtool_1 = 1,
+	value_tools_advwrench = 1,
+	value_tools_screwdriver_flat_long = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
 	weapon_parts_long_rifle = 5,
 }

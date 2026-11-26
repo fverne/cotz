@@ -132,4 +132,25 @@ check(category:find("Swamps", 1, true) and not category:find("Marsh", 1, true),
 	"saved category labels display the corrected region name")
 check(ix.progression.GetLine(customer, hagglerID).selections[1].name == "Shop supplies (Marsh)",
 	"displaying the corrected region does not rewrite saved assignments")
+
+-- A region conversion keeps old category choices; the replacement must still credit its own counter.
+local staleID = ix.townNPCs:StepID("smartass", "v3/nato-cqb/c96carbine")
+local stale = context.fixture.character()
+local staleChoices = {"value_controller"}
+for _, candidate in ipairs(ix.progression.itemPools.town_expansion_bf3277df53ee.candidates) do
+	staleChoices[#staleChoices + 1] = candidate.item
+end
+putLine(stale, staleID, {
+	active = true, requirementModesVersion = ix.progression.definitions[staleID].requirementModesVersion,
+	requirements = {value_controller = 3}, complexData = {value_controller = 1},
+	selections = {{item = "value_controller", mode = "any", name = "Old supplies",
+		choices = staleChoices}},
+})
+ix.progression.AssignActiveRequirements(stale)
+local staleLine = ix.progression.GetLine(stale, staleID)
+local staleReplacement = staleLine.requirementConversions[1].to
+check(staleLine.requirements[staleReplacement] == 2 and staleLine.requirements.value_controller == 1,
+	"the out-of-region counter keeps its credit and moves outstanding units to a local item")
+check(ix.progression.GetRequirementKey(staleID, staleReplacement, stale) == staleReplacement,
+	"a converted item credits its outstanding counter, not the fulfilled stale category")
 print("PASS: " .. checks .. " progression expansion and saved-label checks")

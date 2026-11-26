@@ -13,6 +13,6 @@ ITEM.weaponID = "taurusjudge"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 31,
+	value_large_parts = 1,
 	weapon_parts_pistol_smg = 5,
 }

@@ -13,7 +13,7 @@ ITEM.weaponID = "rugermini14"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 7,
-	value_gunoil = 2,
+	value_tools_advwrench = 1,
+	value_weaponparts = 1,
 	weapon_parts_intermediate = 3,
 }

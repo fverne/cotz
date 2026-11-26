@@ -68,7 +68,7 @@ local function hitboxAimPosition(enemy, hitbox, hitboxSet)
 	return matrix * ((mins + maxs) * 0.5)
 end
 
-local function enemyAimPosition(enemy)
+function PLUGIN:GetHumanAimPosition(enemy)
 	local hitboxSet = enemy:GetHitboxSet()
 	if hitboxSet == nil then return enemy:WorldSpaceCenter() end
 	local hitboxCount = enemy:GetHitBoxCount(hitboxSet) or 0
@@ -100,7 +100,9 @@ function PLUGIN:EntityFireBullets(entity, data)
 	if not living(enemy) then return end
 	if not self:CanActorAttack(entity, enemy) then return false end
 
-	data.Dir = (enemyAimPosition(enemy) - data.Src):GetNormalized()
+	if entity.cotzManagedHumanFire then return end
+
+	data.Dir = (self:GetHumanAimPosition(enemy) - data.Src):GetNormalized()
 
 	return true
 end

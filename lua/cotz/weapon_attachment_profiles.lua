@@ -1,6 +1,7 @@
 local POLICY = include("cotz/attachment_policy.lua")
 local ANOMALY_MODEL_PREFIX = "models/flaymi/anomaly/"
 local RESKIN_CLASS_PREFIX = "cw_cotz_anomaly_"
+local VMRECOIL_SUFFIX = "_vmrecoil"
 
 local PROFILES = {
 	-- Sight IDs used by Helix, including the two retained Anomaly scopes.
@@ -230,6 +231,11 @@ local PROFILES = {
 function PROFILES.GetSourceClass(class)
 	if class and string.StartWith(class, RESKIN_CLASS_PREFIX) then
 		return "cw_" .. class:sub(#RESKIN_CLASS_PREFIX + 1)
+	end
+
+	-- The pack's base SWEPs share the profile of the VM-recoil variant that inventory items equip.
+	if class and not PROFILES.weapons[class] and PROFILES.weapons[class .. VMRECOIL_SUFFIX] then
+		return class .. VMRECOIL_SUFFIX
 	end
 
 	return class

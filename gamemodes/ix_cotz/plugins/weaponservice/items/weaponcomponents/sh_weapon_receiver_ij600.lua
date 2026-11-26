@@ -13,7 +13,7 @@ ITEM.weaponID = "ij600"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_gunoil = 1,
+	value_tools_advwrench = 1,
+	value_tools_screwdriver_flat_long = 1,
 	weapon_parts_shotgun = 2,
 }

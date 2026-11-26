@@ -48,7 +48,7 @@ SERVER = true
 ErrorNoHalt = error
 local now = 0
 CurTime = function() return now end
-ix = {item = {list = {}, base = {}, instances = {}}, util = {}, meta = {item = {}}}
+ix = {item = {list = {}, base = {}, instances = {}, inventories = {}}, util = {}, meta = {item = {}}}
 ix.meta.item.__index = ix.meta.item
 function ix.meta.item:GetData(key, default)
 	if self.data and self.data[key] ~= nil then return self.data[key] end
@@ -59,6 +59,7 @@ function ix.meta.item:SetData(key, value)
 	self.data = self.data or {}
 	self.data[key] = value
 end
+dofile("gamemodes/ix_cotz/schema/meta/sh_itemstack.lua")
 
 -- Exercise the installed registration and inheritance code, translating only its GLua operators.
 local loader = read("gamemodes/helix/gamemode/core/libs/sh_item.lua")
@@ -73,7 +74,7 @@ end
 local itemRoot = "gamemodes/ix_cotz/schema/items/"
 ix.item.Register("base_valuable", nil, true, itemRoot .. "base/sh_valuable.lua")
 ix.item.Register("base_valuables_test", nil, true, itemRoot .. "base/sh_valuables_test.lua")
-ix.item.Register("base_quests", nil, true, itemRoot .. "base/sh_quests.lua")
+ix.item.Register("base_zquests", nil, true, itemRoot .. "base/sh_zquests.lua")
 local capacities = {value_pcpart_ram = 5, value_screws = 4, value_pcpart_cpu = 6}
 ix.randomitems = {tables = {}, tableweights = {}}
 local itemIDs = {
@@ -134,7 +135,7 @@ for _, id in ipairs(itemIDs) do
 	if existing then
 		existing:close()
 	else
-		folder = "quests"
+		folder = "zquests"
 		existing = io.open(itemRoot .. folder .. "/sh_" .. id .. ".lua")
 		if existing then
 			existing:close()
@@ -175,15 +176,25 @@ tooltipItem:PopulateTooltip({})
 check(#properties == 0, "world item tooltips retain their existing property visibility")
 tooltipItem.entity = nil
 check(#itemIDs == 50, "all 50 new definitions are registered")
-check(ix.item.base.base_valuable.functions.combine == nil, "existing valuable base has no new actions")
+check(ix.item.base.base_valuable.functions.combine == nil, "the valuable base adds no combine action")
 check(ix.item.base.base_valuable_stack == nil, "no additional valuable base is registered")
 
-local function actor()
-	local inventory = {items = {}}
+local nextInventoryID = 0
+local function container(receivers)
+	nextInventoryID = nextInventoryID + 1
+	local inventory = {id = nextInventoryID, items = {}, receivers = receivers}
 	function inventory:GetItemByID(id) return self.items[id] end
+	function inventory:OnCheckAccess(client) return self.receivers[client] == true end
+	ix.item.inventories[inventory.id] = inventory
+
+	return inventory
+end
+local function actor()
+	local client = {valid = true}
+	local inventory = container({[client] = true})
 	local character = {inventory = inventory}
 	function character:GetInventory() return self.inventory end
-	local client = {valid = true, character = character}
+	client.character = character
 	function client:GetCharacter() return self.character end
 	function client:EmitSound() self.sounds = (self.sounds or 0) + 1 end
 
@@ -200,6 +211,7 @@ local function instance(id, quantity, owner, targetInventory)
 	ix.item.instances[item.id] = item
 	local ownerInventory = targetInventory or inventory
 	ownerInventory.items[item.id] = item
+	item.invID = ownerInventory.id
 
 	return item
 end
@@ -247,6 +259,16 @@ check(combine(source, foreign) == false, "foreign inventory target is rejected")
 inventory.items[source.id] = nil
 check(combine(source, target) == false, "source must belong to the current inventory")
 inventory.items[source.id] = source
+local stash = container({[client] = true})
+local stashSource = instance("value_screws", 1, client, stash)
+local stashTarget = instance("value_screws", 2, client, stash)
+check(combine(stashSource, stashTarget) == true and stashTarget:GetData("quantity") == 3,
+	"stacks combine inside an accessible container")
+stash.receivers[client] = nil
+stashSource = instance("value_screws", 1, client, stash)
+check(combine(stashSource, stashTarget) == false, "inaccessible container is rejected")
+check(combine(source, instance("value_pcpart_cpu", 1, client, container({[client] = true}))) == false,
+	"stacks in different inventories are rejected")
 target.entity = {valid = true}
 check(combine(source, target) == false, "world target is rejected")
 target.entity = nil
@@ -271,6 +293,52 @@ local another = instance("value_pcpart_cpu", 1)
 check(another.functions.combine.OnRun(another, {target.id}) == false, "per-player server cooldown applies")
 check(another:GetData("quantity") == 1 and target:GetData("quantity") == 4, "cooldown preserves quantities")
 
+ix.util.GetMaterial = ix.util.GetMaterial or function(path) return path end
+ix.item.Register("value_bolts", "base_valuable", false, itemRoot .. "valuable/sh_value_bolts.lua")
+ix.item.Register("value_kerosene", "base_valuable", false, itemRoot .. "valuable/sh_value_kerosene.lua")
+check(ix.item.list.value_bolts.functions.combine ~= nil, "original valuable stacks declare their own combine")
+check(ix.item.list.value_soap.functions.combine == nil, "items without a combine action stay uncombinable")
+local stash = container({[client] = true})
+local bolts = instance("value_bolts", 15, client, stash)
+local boltTarget = instance("value_bolts", 10, client, stash)
+check(combine(bolts, boltTarget) == false and bolts:GetData("quantity") == 5 and boltTarget:GetData("quantity") == 20,
+	"original valuable stacks merge to capacity inside containers")
+check(not bolts.functions.combine.OnCanRun(bolts, {boltTarget.id}), "full original stacks cannot be combined")
+local fuel = instance("value_kerosene", 3, client, stash)
+local fuelTarget = instance("value_kerosene", 4, client, stash)
+check(combine(fuel, fuelTarget) == true and fuelTarget:GetData("quantity") == 7, "fuel stacks use the base merge")
+local cooker = instance("value_bolts", 1, client, stash)
+cooker.cookertier, cooker.maxFuel = 2, 3
+fuel = instance("value_kerosene", 1, client, stash)
+check(fuel.functions.combine.OnCanRun(fuel, {cooker.id}), "fuel can still be combined into a matching cooker")
+check(combine(fuel, cooker) == true and cooker:GetData("fuel") == 1, "refuelling consumes one unit of fuel")
+check(not fuel.functions.combine.OnCanRun(fuel, {99999}), "fuel rejects a missing combine target")
+
+-- Other quantity families keep their own combine declarations and share the item-meta helpers.
+Vector = Vector or function(...) return {...} end
+Angle = Angle or function(...) return {...} end
+local include = ix.util.Include
+ix.util.Include = function(path)
+	-- Older item files use GMod line comments, which standard Lua cannot parse.
+	local source = read(path):gsub("%s//[^\n]*", ""):gsub("!=", "~="):gsub("!", "not ")
+	assert(load(source, "@" .. path))()
+end
+ix.item.Register("base_newammo", nil, true, itemRoot .. "base/sh_newammo.lua")
+ix.item.Register("556x45hp", "base_newammo", false, itemRoot .. "newammo/sh_556x45hp.lua")
+ix.item.Register("bagrubles", nil, false, itemRoot .. "miscellaneous/sh_bagrubles.lua")
+ix.item.Register("medic_antipsychotic_1", nil, false, itemRoot .. "aid/sh_medic_antipsychotic_1.lua")
+ix.util.Include = include
+check(ix.item.list.medic_antipsychotic_1.functions.combine == nil, "use-count items such as asenapine stay uncombinable")
+local ammo = instance("556x45hp", nil, client, stash)
+local ammoTarget = instance("556x45hp", 290, client, stash)
+check(ammo:GetStackQuantity() == 60 and ammo:GetStackCapacity() == 300, "ammo stacks use ammoAmount and maxStack")
+check(combine(ammo, ammoTarget) == false and ammo:GetData("quantity") == 50 and ammoTarget:GetData("quantity") == 300,
+	"ammo merges up to its stack limit")
+local rubles = instance("bagrubles", 100, client, stash)
+check(not rubles.functions.combine.OnCanRun(rubles, {boltTarget.id}), "rubles only combine with rubles")
+local moreRubles = instance("bagrubles", 50, client, stash)
+check(combine(rubles, moreRubles) == true and moreRubles:GetData("quantity") == 150, "ruble bundles merge")
+
 ix.taskRewards = {}
 ix.jobs = ix.jobs or {}
 ix.jobs.field = ix.jobs.field or {}
@@ -285,14 +353,14 @@ for id in pairs(capacities) do
 	check(ix.taskRewards.ExpectedValue(id) == item.price * 1.5, "task estimate uses the mean of the 1-2 spawn roll")
 	check(ix.taskRewards.ExpectedValue(id, {quantity = 2}) == item.price * 2, "explicit reward quantity is retained")
 end
-local questFiles = assert(io.popen("rg --files " .. itemRoot .. "quests"))
+local questFiles = assert(io.popen("rg --files " .. itemRoot .. "zquests"))
 local questCount = 0
 for path in questFiles:lines() do
 	local id = assert(path:match("/sh_(.+)%.lua$"))
 	check(not read(path):find("ITEM.base", 1, true), "quest definitions inherit through their folder")
-	ix.item.Register(id, "base_quests", false, path)
+	ix.item.Register(id, "base_zquests", false, path)
 	local item = ix.item.list[id]
-	check(item.base == "base_quests", "quest items use the folder base")
+	check(item.base == "base_zquests", "quest items use the folder base")
 	check(item.GetWeight == ix.item.base.base_valuable.GetWeight, "quest items retain valuable mechanics")
 	questCount = questCount + 1
 end

@@ -13,7 +13,9 @@ ITEM.weaponID = "sako85nato"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_gunoil = 2,
+	value_building_poxeram = 1,
+	value_multitul_0 = 1,
+	value_plastic = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_intermediate = 2,
 }

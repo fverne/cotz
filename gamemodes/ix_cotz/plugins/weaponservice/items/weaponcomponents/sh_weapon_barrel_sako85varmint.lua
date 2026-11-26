@@ -13,8 +13,7 @@ ITEM.weaponID = "sako85varmint"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 2,
-	value_gunoil = 1,
-	value_nuts = 2,
+	value_wd40_100ml = 1,
+	value_wrench = 1,
 	weapon_parts_pistol_smg = 1,
 }

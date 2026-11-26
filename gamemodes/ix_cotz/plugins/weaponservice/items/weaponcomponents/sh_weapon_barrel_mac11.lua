@@ -13,8 +13,6 @@ ITEM.weaponID = "mac11"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_gunoil = 1,
-	value_nuts = 7,
-	value_toiletpaper = 1,
+	value_tape_heavy = 1,
 	weapon_parts_pistol_smg = 2,
 }

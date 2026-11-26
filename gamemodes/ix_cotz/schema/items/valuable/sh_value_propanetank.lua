@@ -35,38 +35,29 @@ end
 
 ITEM.functions.combine = {
 	OnCanRun = function(item, data)
-		if !data or !data[1] then
-			return false
+		if item:GetStackCombineTarget(data) then
+			return true
 		end
+		local targetItem = istable(data) and ix.item.instances[data[1]]
 
-		local targetItem = ix.item.instances[data[1]]
-		return (targetItem.uniqueID == item.uniqueID or targetItem.cookertier and targetItem.cookertier == item.fueltier)
-
+		return targetItem and targetItem.cookertier ~= nil and targetItem.cookertier == item.fueltier or false
 	end,
 	OnRun = function(item, data)
-		local targetItem = ix.item.instances[data[1]]
-		if( targetItem.uniqueID == item.uniqueID ) then
-			local targetAmmoDiff = targetItem.quantity - targetItem:GetData("quantity", targetItem.quantity)
-			local localQuant = item:GetData("quantity", item.quantity)
-			local targetQuant = targetItem:GetData("quantity", targetItem.quantity)
-			item.player:EmitSound("stalkersound/inv_properties.mp3", 110)
-
-			if targetAmmoDiff >= localQuant then
-				targetItem:SetData("quantity", targetQuant + localQuant)
-				return true
-			else
-				item:SetData("quantity", localQuant - targetAmmoDiff)
-				targetItem:SetData("quantity", targetItem.quantity)
-				return false
-			end
-		elseif ( targetItem.cookertier and targetItem.cookertier == item.fueltier and targetItem:GetData("fuel") != targetItem.maxFuel) then
-			item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
-			targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
-
-			return (item:GetData("quantity", item.quantity) == 0)
+		local stackTarget = item:GetStackCombineTarget(data)
+		if stackTarget then
+			return item:CombineStack(stackTarget)
 		end
+		local targetItem = ix.item.instances[data[1]]
+		if not targetItem or not targetItem.cookertier or targetItem.cookertier ~= item.fueltier then
+			return false
+		end
+		if targetItem:GetData("fuel") == targetItem.maxFuel then
+			return false
+		end
+		item:SetData("quantity", item:GetData("quantity", item.quantity) - 1)
+		targetItem:SetData("fuel", targetItem:GetData("fuel", 0) + 1)
 
-		return false
+		return item:GetData("quantity", item.quantity) == 0
 	end,
 }
 

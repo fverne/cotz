@@ -13,7 +13,6 @@ ITEM.weaponID = "sks"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 9,
-	value_lubricant = 1,
+	value_precisiontools = 1,
 	weapon_parts_intermediate = 4,
 }

@@ -13,10 +13,9 @@ ITEM.weaponID = "m16a4"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 7,
-	value_guncleaner = 1,
-	value_nuts = 13,
-	value_precisiontools = 1,
+	value_detergent = 1,
+	value_electricdrill = 1,
+	value_tools_advwrench = 1,
 	value_wrench = 1,
 	weapon_parts_intermediate = 5,
 }

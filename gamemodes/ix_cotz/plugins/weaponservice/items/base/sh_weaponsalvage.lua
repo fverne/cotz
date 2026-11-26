@@ -2,21 +2,16 @@ ITEM.base = "base_valuable"
 ITEM.category = "Weapon Salvage"
 ITEM.isWeaponServiceItem = true
 
-local function combineTarget(item, data)
-	if type(data) ~= "table" or type(data[1]) ~= "number" then return end
-	local target = ix.item.instances[data[1]]
-	local client = item.player
-	local character = IsValid(client) and client:GetCharacter()
-	if not character or not target or target == item or target.uniqueID ~= item.uniqueID then return end
-	local items = character:GetInventory():GetItems()
-	if items[item.id] ~= item or items[target.id] ~= target
-		or item.cotzWorkshopLocked or target.cotzWorkshopLocked then return end
-	local sourceQuantity = item:GetData("quantity", item.quantity)
-	local targetQuantity = target:GetData("quantity", target.quantity)
-	if sourceQuantity < 1 or sourceQuantity > item.maxStack or sourceQuantity % 1 ~= 0
-		or targetQuantity < 1 or targetQuantity >= target.maxStack or targetQuantity % 1 ~= 0 then return end
+-- Workshop deliveries stay out of stacks until their receipt is saved.
+function ITEM:CanStackWith(target)
+	return target.uniqueID == self.uniqueID and not self.cotzWorkshopLocked and not target.cotzWorkshopLocked
+end
 
-	return target, sourceQuantity, targetQuantity
+local function combineTarget(item, data)
+	local target = item:GetStackCombineTarget(data)
+	if not target then return end
+
+	return target, item:GetStackQuantity(), target:GetStackQuantity()
 end
 
 ITEM.functions.combine = {

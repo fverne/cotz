@@ -13,10 +13,9 @@ ITEM.weaponID = "lr300"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_guncleaner = 1,
-	value_metalparts = 1,
-	value_nuts = 13,
+	value_pipewrench = 1,
 	value_precisiontools = 1,
+	value_tools_advwrench = 1,
+	value_wd40_100ml = 1,
 	weapon_parts_intermediate = 5,
 }

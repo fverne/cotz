@@ -13,11 +13,8 @@ ITEM.weaponID = "sako85nato"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_detergent = 1,
-	value_gunoil = 1,
-	value_hose = 1,
-	value_nuts = 7,
-	value_toiletpaper = 1,
+	value_tape_heavy = 1,
+	value_tools_advwrench = 1,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_intermediate = 2,
 }

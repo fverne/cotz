@@ -3,6 +3,8 @@
 Status: design recommendations accepted and implemented, 13 November 2026.
 See the [weapon workshop guide](../gamemodes/ix_cotz/plugins/weaponservice/README.md) for current recipes,
 implementation details and verification limits. The design rationale and original cost examples follow.
+Later tuning (26 November 2026) added a 25% salvage condition floor and moved recipes to lightly contested,
+largely Garbage-sourced stock. The workshop guide supersedes the yield formula and ingredient examples below.
 The original idea establishes the two-component repair loop, technician-only exchanges, four salvage
 families, condition-sensitive yields and reward-pool tiers. The user authorized the recommended defaults.
 

@@ -13,10 +13,8 @@ ITEM.weaponID = "saiga12"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 1,
 	value_electr_card_programmer = 1,
-	value_lubricant = 1,
-	value_nuts = 12,
-	value_wrench = 1,
+	value_electricdrill = 1,
+	value_pipewrench = 1,
 	weapon_parts_shotgun = 6,
 }

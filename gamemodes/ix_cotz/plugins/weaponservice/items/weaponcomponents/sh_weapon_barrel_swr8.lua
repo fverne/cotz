@@ -13,8 +13,7 @@ ITEM.weaponID = "swr8"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_guncleaner = 1,
-	value_metalparts = 1,
-	value_nuts = 13,
+	value_handdrill = 1,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_pistol_smg = 5,
 }

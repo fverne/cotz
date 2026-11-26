@@ -13,11 +13,9 @@ ITEM.weaponID = "toz34special"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 2,
-	value_guncleaner = 1,
-	value_lubricant = 1,
-	value_nuts = 13,
-	value_precisiontools = 1,
-	value_wrench = 1,
+	value_electricdrill = 1,
+	value_handdrill = 1,
+	value_pipewrench = 1,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_shotgun = 5,
 }

@@ -13,6 +13,6 @@ ITEM.weaponID = "g2contender"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_nuts = 1,
+	value_bolts = 2,
 	weapon_parts_pistol_smg = 1,
 }

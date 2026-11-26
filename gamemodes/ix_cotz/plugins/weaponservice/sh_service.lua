@@ -36,8 +36,9 @@ function PLUGIN:Conditions(client, item)
 end
 
 function PLUGIN:SalvageYield(tier, durability, cleanliness)
-	local expected = self.settings.yields[tier]
-		* math.Clamp(durability, 0, 100) / 100 * math.Clamp(cleanliness, 0, 100) / 100
+	local floor = self.settings.salvageConditionFloor
+	local condition = math.Clamp(durability, 0, 100) / 100 * math.Clamp(cleanliness, 0, 100) / 100
+	local expected = self.settings.yields[tier] * (floor + (1 - floor) * condition)
 	local guaranteed = math.floor(expected)
 
 	return guaranteed, expected - guaranteed

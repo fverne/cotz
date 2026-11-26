@@ -13,10 +13,8 @@ ITEM.weaponID = "lax410s"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 4,
 	value_detergent = 1,
-	value_gunoil = 1,
-	value_hose = 1,
-	value_nuts = 7,
+	value_tools_advwrench = 1,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_shotgun = 2,
 }

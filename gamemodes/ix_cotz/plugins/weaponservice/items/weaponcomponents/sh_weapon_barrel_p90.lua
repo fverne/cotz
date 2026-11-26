@@ -13,9 +13,8 @@ ITEM.weaponID = "p90"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 6,
 	value_electr_card_programmer = 1,
-	value_lubricant = 1,
-	value_nuts = 9,
+	value_handdrill = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_pistol_smg = 6,
 }

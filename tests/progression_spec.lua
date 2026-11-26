@@ -81,14 +81,11 @@ local target = {
 }
 check(not ix.progression.TurnIn(a.client, target, "otherFixture", "artifact_bolt"), "wrong NPC rejected")
 check(not ix.progression.TurnIn(a.client, target, "storageFixture", "invalid"), "wrong item rejected")
-currentMap = "rp_waystation"
-fixture.SetMap(currentMap)
-check(not ix.progression.TurnIn(a.client, target, "storageFixture", "artifact_bolt"), "wrong map rejected")
-currentMap = "rp_marsh_cs"
-fixture.SetMap(currentMap)
 check(not a.weightUpdates, "rejected hand-ins do not refresh carry weight")
+fixture.SetMap("rp_waystation")
 local accepted, response = ix.progression.TurnIn(a.client, target, "storageFixture", "artifact_bolt")
-check(accepted, "valid turn-in accepted")
+fixture.SetMap(currentMap)
+check(accepted, "assigned hand-ins are accepted away from the contact's home map")
 check(a.weightUpdates == 1, "partial-stack hand-in refreshes carry weight")
 check(#lostItems == 1 and lostItems[1].client == a.client, "only accepted delivery notifies its owner")
 check(lostItems[1].description == "artifact_bolt x1", "lost-item notification uses consumed quantity")

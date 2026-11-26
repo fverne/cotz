@@ -8,17 +8,36 @@ local function savedSelection(character, progressionID, itemID)
 	end
 end
 
-function ix.progression.GetRequirementKey(progressionID, itemID, character)
-	if character then
-		local line = ix.progression.GetLine(character, progressionID)
-		for _, selection in ipairs(line.selections or {}) do
-			for _, choice in ipairs(selection.choices or {}) do
-				if choice == itemID then return selection.item end
+local function hasOutstanding(line, key)
+	local required = (line.requirements or {})[key]
+
+	return required ~= nil and (line.complexData[key] or 0) < required
+end
+
+-- Returns the saved counter for an item, or nil plus true when the item is a category anchor it cannot satisfy.
+local function savedRequirementKey(line, itemID)
+	local fallback, anchored
+	for _, selection in ipairs(line.selections or {}) do
+		for _, choice in ipairs(selection.choices or {}) do
+			if choice == itemID then
+				if hasOutstanding(line, selection.item) then return selection.item end
+				fallback = fallback or selection.item
 			end
 		end
-		for _, selection in ipairs(line.selections or {}) do
-			if selection.item == itemID and selection.choices then return nil end
-		end
+		if selection.item == itemID and selection.choices then anchored = true end
+	end
+	-- Region conversions keep the old category choices, so a replacement can also be a stale choice
+	-- of an already fulfilled counter. Any outstanding assigned item is accepted directly.
+	if not anchored and hasOutstanding(line, itemID) then return itemID end
+	if fallback then return fallback end
+
+	return nil, anchored
+end
+
+function ix.progression.GetRequirementKey(progressionID, itemID, character)
+	if character then
+		local key, anchored = savedRequirementKey(ix.progression.GetLine(character, progressionID), itemID)
+		if key or anchored then return key end
 	end
 	local definition = ix.progression.definitions[progressionID]
 	local required = definition and (definition.requirementAlternatives or {})[itemID]

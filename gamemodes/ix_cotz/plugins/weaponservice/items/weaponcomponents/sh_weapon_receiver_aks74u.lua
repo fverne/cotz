@@ -13,7 +13,6 @@ ITEM.weaponID = "aks74u"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 7,
-	value_gunoil = 2,
+	value_large_parts = 2,
 	weapon_parts_intermediate = 3,
 }

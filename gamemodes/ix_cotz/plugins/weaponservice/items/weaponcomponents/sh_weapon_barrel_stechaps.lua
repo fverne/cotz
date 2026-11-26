@@ -13,6 +13,7 @@ ITEM.weaponID = "stechaps"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_guncleaner = 1,
+	value_tools_advwrench = 1,
+	value_wrench = 1,
 	weapon_parts_pistol_smg = 5,
 }

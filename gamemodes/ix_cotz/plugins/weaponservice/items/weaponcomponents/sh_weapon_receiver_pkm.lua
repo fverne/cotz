@@ -13,8 +13,9 @@ ITEM.weaponID = "pkm"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 15,
-	value_lubricant = 2,
-	value_precisiontools = 2,
+	value_large_parts = 1,
+	value_precisiontools = 1,
+	value_tape_heavy = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_long_rifle = 7,
 }

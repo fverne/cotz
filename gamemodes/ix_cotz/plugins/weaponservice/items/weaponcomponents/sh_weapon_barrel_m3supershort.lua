@@ -13,8 +13,6 @@ ITEM.weaponID = "m3supershort"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 2,
-	value_metalparts = 1,
-	value_nuts = 13,
+	value_tape_heavy = 1,
 	weapon_parts_shotgun = 5,
 }

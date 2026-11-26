@@ -13,8 +13,6 @@ ITEM.weaponID = "taurusjudge"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 3,
-	value_metalparts = 1,
-	value_nuts = 13,
+	value_pipewrench = 1,
 	weapon_parts_pistol_smg = 5,
 }

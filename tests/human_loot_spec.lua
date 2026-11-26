@@ -19,16 +19,22 @@ end
 files:close()
 local references = {}
 local entities = assert(io.popen("rg --files lua/entities | rg '/npc_human_[^/]+/init.lua$'"))
-local count = 0
+local count, meleeCount = 0, 0
 for path in entities:lines() do
-	local key = assert(read(path):match('ENT.lootGroup = "([^"]+)"'))
-	assert(ix.randomitems.tables[key], "NPC uses missing pool: " .. path)
+	local key = read(path):match('ENT.lootGroup = "([^"]+)"')
 	local class = path:match('/npc_human_([^/]+)/init.lua$')
-	local group, role = class:match("^(.*)_([^_]+)$")
-	role = ({pistolman = "pistol", rifleman = "rifle", shotgunner = "shotgun"})[role] or role
-	assert(key == group .. "_" .. role .. "_loot", "Wrong faction/role pool: " .. path)
-	references[key] = true
-	count = count + 1
+	if class == "bandit_melee" then
+		assert(not key and not read(path):find("ENT.weapons", 1, true), "Melee bandits should not drop firearm loot")
+		meleeCount = meleeCount + 1
+	else
+		assert(key, "Gunman is missing its pocket-loot pool: " .. path)
+		local group, role = class:match("^(.*)_([^_]+)$")
+		role = ({pistolman = "pistol", rifleman = "rifle", shotgunner = "shotgun"})[role] or role
+		assert(key == group .. "_" .. role .. "_loot", "Wrong faction/role pool: " .. path)
+		references[key] = true
+		count = count + 1
+		assert(ix.randomitems.tables[key], "NPC uses missing pool: " .. path)
+	end
 end
 entities:close()
 local pools = 0
@@ -57,7 +63,7 @@ for key, rows in pairs(ix.randomitems.tables) do
 		end
 	end
 end
-assert(pools == 20 and count == 20, "Every installed human NPC must use its faction and role pool")
+assert(pools == 20 and count == 20 and meleeCount == 1, "Every gunman must use its faction and role pool")
 for key, id in pairs({bandit_sniper_loot = "762x54", merc_sniper_loot = "762x51",
 	mili_rifle_loot = "545x39", merc_rifle_loot = "556x45", bandit_shotgun_loot = "12gauge"}) do
 	local found = false

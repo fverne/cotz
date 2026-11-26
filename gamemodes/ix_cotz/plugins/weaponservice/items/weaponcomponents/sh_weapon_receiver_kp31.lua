@@ -13,7 +13,7 @@ ITEM.weaponID = "kp31"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_gunoil = 1,
+	value_tools_screwdriver_flat_long = 1,
+	value_weaponparts = 1,
 	weapon_parts_pistol_smg = 5,
 }

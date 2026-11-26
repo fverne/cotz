@@ -13,7 +13,7 @@ ITEM.weaponID = "mp18"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 3,
-	value_gunoil = 2,
+	value_multitul_0 = 1,
+	value_tools_advwrench = 1,
 	weapon_parts_pistol_smg = 1,
 }

@@ -26,11 +26,14 @@ function vectorMeta:GetNormalized()
 
 	return Vector(self.x / length, self.y / length, self.z / length)
 end
-function vectorMeta:Angle() return {y = math.deg(math.atan(self.y, self.x))} end
+function vectorMeta:Angle()
+	return {p = math.deg(math.atan(-self.z, math.sqrt(self.x ^ 2 + self.y ^ 2))), y = math.deg(math.atan(self.y, self.x))}
+end
+function Lerp(fraction, from, to) return from + (to - from) * fraction end
 math.NormalizeAngle = function(value) return (value + 180) % 360 - 180 end
 D_HT, D_LI, D_NU = 1, 3, 4
 MOVETYPE_OBSERVER, MOVETYPE_NOCLIP, SCHED_FORCED_GO_RUN = 10, 8, 200
-GetConVar = function() return {GetInt = function() return 0 end} end
+GetConVar = function() return {GetInt = function() return 0 end, GetBool = function() return false end} end
 local function hitboxData(entity, hitbox, hitboxSet)
 	return ((entity.hitboxSets or {})[hitboxSet] or {})[hitbox] or {}
 end
@@ -824,6 +827,19 @@ local formerFind = ents.FindByClass
 ents.FindByClass = function() error("combat integration must not rescan all NPC classes") end
 AddCSLuaFile, include = function() end, function() end
 ai_schedule = {New = function() return {EngTask = function() end} end}
+ACT_IDLE, ACT_IDLE_ANGRY, ACT_WALK, ACT_WALK_AIM, ACT_RUN, ACT_RUN_AIM = 1, 2, 3, 4, 5, 6
+ACT_CROUCHIDLE, ACT_WALK_CROUCH, ACT_WALK_CROUCH_AIM = 7, 8, 9
+ACT_RELOAD_SMG1, ACT_RUN_RIFLE, ACT_COVER_LOW, ACT_JUMP, ACT_TURN_LEFT = 10, 11, 12, 13, 14
+ACT_HL2MP_IDLE_AR2, ACT_HL2MP_IDLE_RPG, ACT_HL2MP_RUN_AR2, ACT_HL2MP_RUN_RPG = 101, 102, 103, 104
+ACT_HL2MP_IDLE_CROUCH_RPG, ACT_HL2MP_WALK_CROUCH_RPG = 105, 106
+isstring = function(value) return type(value) == "string" end
+isnumber = function(value) return type(value) == "number" end
+SCHED_TAKE_COVER_FROM_ENEMY = 201
+ENT = {}
+dofile("lua/entities/cotz_human_base/init.lua")
+local humanBase = ENT
+dofile("lua/entities/cotz_human_base/weaponprops.lua")
+dofile("lua/entities/cotz_human_base/models.lua")
 fixture.Reset()
 local friendly = actor("npc_human_bandit_rifleman", 100)
 local enemy = actor("npc_human_merc_rifleman", 200)
@@ -836,8 +852,23 @@ for path in paths:lines() do
 	source = source:gsub("//([^\n]*)", "--%1")
 	ENT = {}
 	assert(load(source, "@" .. path))()
+	setmetatable(ENT, {__index = humanBase})
+	local group = humanBase.FactionModels[ENT.ModelGroup]
+	check(group and #group > 0, "every human's model group has an active model: " .. path)
+	for _, model in ipairs(group) do
+		check(model:find("^models/flaymi/anomaly/stalker_%a+/[%w_]+%.mdl$"), "humans use Anomaly models: " .. model)
+	end
+	check((path:find("/npc_human_z_", 1, true) ~= nil) == (ENT.Undead == true), "only zombified humans are undead: " .. path)
 	local human = actor(path:match("entities/([^/]+)/"), 0)
-	human.InitEnemies = ENT.InitEnemies
+	local mutantMethods = getmetatable(human) and getmetatable(human).__index
+	setmetatable(human, {__index = function(_, key)
+		local method = ENT[key]
+		if method ~= nil then return method end
+		if type(mutantMethods) == "function" then return mutantMethods(human, key) end
+
+		return (mutantMethods or {})[key]
+	end})
+	human.NextThink = function() end
 	ENT.InitEnemies(human)
 	check(manager.combatActors[human], "human relationship refresh uses the actor registry")
 	human.cotzSleeping = true
@@ -881,4 +912,380 @@ for path in paths:lines() do
 end
 paths:close()
 ents.FindByClass = formerFind
+
+local cornered = setmetatable(actor("npc_human_bandit_sniper", 0), {__index = humanBase})
+cornered.combatProfile = {range = 4000, retreat = 750, burst = 1}
+cornered.EngineScheduleFinish, cornered.StopMoving = function() end, function() end
+cornered.SetPoseParameter = function() end
+cornered.UpdateFiringMovement = function() end
+local weapon = {
+	Primary = {NumShots = 1, Cone = 4, Damage = 20, Force = 10, Tracer = 1, Ammo = "SMG1", Delay = 3},
+	GetMaxClip1 = function() return 1 end,
+	EmitSound = function() end,
+}
+cornered.clip = 1
+cornered.GetActiveWeapon = function() return weapon end
+cornered.GetCombatLane = function() return true, Vector(0), Vector(100) end
+cornered.FaceCombatTarget = function() return true end
+cornered.PlayCombatGesture = function() return 1 end
+cornered.MuzzleFlash = function() end
+local rounds = 0
+cornered.FireBullets = function(_, data)
+	rounds = rounds + 1
+	check(data.Damage == 20 and data.Inflictor == weapon, "the managed shot keeps SWEP damage and attribution")
+end
+local raises = 0
+cornered.IsMoving, cornered.ResetIdealActivity = function() return false end, function() raises = raises + 1 end
+cornered:UpdateGunCombat(enemy, manager, 5.4, 100 ^ 2)
+check(rounds == 0 and raises == 1, "an engaged shooter raises its gun before the first shot")
+cornered:UpdateGunCombat(enemy, manager, 5.8, 100 ^ 2)
+check(rounds == 0 and raises == 1, "the shooter keeps raising its gun for a moment")
+cornered:UpdateGunCombat(enemy, manager, 6, 100 ^ 2)
+check(rounds == 1 and cornered.clip == 0, "a cornered sniper fires and spends one round")
+check(weapon.clip == nil, "the engine weapon clip is never emptied, so the engine cannot start its own reload")
+cornered:UpdateGunCombat(enemy, manager, 6.1, 100 ^ 2)
+check(rounds == 1, "the sniper respects its weapon fire delay")
+cornered:UpdateGunCombat(enemy, manager, 9.2, 100 ^ 2)
+check(rounds == 1 and cornered.reloadAt, "an empty weapon starts a bounded reload")
+cornered.reloadAt, cornered.NextThink, cornered.GetEnemy = CurTime() - 1, function() end, function() end
+cornered.FindEnemyDan, cornered.STALKERNPCClearAnimation = function() end, function() end
+humanBase.Think(cornered)
+check(cornered.clip == 1 and not cornered.reloadAt, "a finished reload refills the managed clip")
+
+-- Moving fire: forced-go moves around the target, which combat conditions cannot interrupt.
+SCHED_FORCED_GO, SCHED_CHASE_ENEMY = SCHED_FORCED_GO or 199, SCHED_CHASE_ENEMY or 198
+local mover = setmetatable(actor("npc_human_bandit_rifleman", 0), {__index = humanBase})
+mover.combatProfile = {range = 2000, retreat = 550, burst = 99}
+for _, name in ipairs({"GetActiveWeapon", "GetCombatLane", "FaceCombatTarget", "PlayCombatGesture", "MuzzleFlash"}) do
+	mover[name] = cornered[name]
+end
+mover.AimAt, mover.StopMoving, mover.EngineScheduleFinish = function() end, function() end, function() end
+mover.ResetIdealActivity = function() end
+local unaware = false
+mover.IsTargetUnaware = function() return unaware end
+mover.IsWeaponRaised = function() return true end
+local moving, waypoint, shots = true, Vector(300, 0, 0), 0
+mover.IsMoving = function() return moving end
+mover.GetCurWaypointPos = function() return waypoint end
+mover.FireBullets = function() shots = shots + 1 end
+local wallFraction, groundHit = 1, true
+util = util or {}
+local formerTraceLine = util.TraceLine
+util.TraceLine = function(data)
+	if data.endpos.z < data.start.z then return {Hit = groundHit, HitPos = Vector(data.start.x, data.start.y, 0)} end
+
+	return {Fraction = wallFraction}
+end
+local formerRandom, formerRand = math.random, math.Rand
+math.random = function() return 1 end
+math.Rand = function(low) return low end
+local clock = 200
+local function shoot(distance)
+	clock = clock + 2
+	mover.clip, mover.nextShot = 5, 0
+	local before = shots
+	mover:UpdateGunCombat(enemy, manager, clock, distance ^ 2)
+
+	return shots > before
+end
+check(shoot(100) and mover.schedule == SCHED_FORCED_GO_RUN and mover.destination.x < 0
+	and mover.moveFireTarget == enemy, "a cornered shooter runs back from the target while it fires")
+local goal = mover.destination
+mover.destination = nil
+check(shoot(100) and not mover.destination, "a running firing move is not restarted")
+mover.schedule, mover.combatMovement, mover.firingMove = SCHED_CHASE_ENEMY, SCHED_CHASE_ENEMY, nil
+mover.nextMovement = math.huge
+check(shoot(1500) and mover.schedule == SCHED_FORCED_GO_RUN and mover.destination.x > 0,
+	"a chase that reaches firing range keeps advancing as a firing move")
+mover:ClearSchedule()
+check(shoot(1000) and mover.schedule == SCHED_FORCED_GO and math.abs(mover.destination.y) > 0,
+	"a shooter inside its holding distance strafes while it fires")
+mover:ClearSchedule()
+wallFraction = 0.5
+check(shoot(1000) and not mover.schedule and not mover.combatMovement, "a wall in the way leaves the shooter standing")
+wallFraction, groundHit = 1, false
+check(shoot(1000) and not mover.schedule, "a goal without ground is never used")
+groundHit, mover.crouching, mover.crouchUntil = true, true, math.huge
+check(shoot(1000) and not mover.schedule, "a crouching shooter holds still")
+mover.crouching, unaware = nil, true
+check(shoot(1000) and not mover.schedule, "a sneaking shooter stands for its first shot")
+unaware = false
+
+mover.Undead, mover.moveFireTarget = true, nil
+waypoint = enemy:GetPos()
+check(shoot(1500) and mover.schedule == SCHED_FORCED_GO and mover.destination.x > 0
+	and math.abs(mover.destination.y) < 0.001 and not mover.moveFireTarget,
+	"a zombie walks straight at the target while it fires and keeps the engine's facing")
+mover:ClearSchedule()
+check(shoot(200) and not mover.schedule, "a zombie stops walking once it is close")
+mover.schedule, mover.combatMovement, mover.firingMove = SCHED_FORCED_GO, SCHED_FORCED_GO, true
+waypoint = Vector(0, 100, 0)
+check(not shoot(1500), "a zombie never fires while its path turns sideways")
+waypoint = Vector(-100, 0, 0)
+check(not shoot(1500), "a zombie never fires while moving backward")
+moving = false
+check(shoot(1500), "a standing zombie can fire")
+math.random, math.Rand, util.TraceLine = formerRandom, formerRand, formerTraceLine
+check(goal.x == -96, "moves keep their clearance from where the probe ended")
+
+local blend, turnedTo = {}, nil
+mover.SetPoseParameter = function(_, name, value) blend[name] = value end
+mover.SetIdealYawAndUpdate = function(_, yaw) turnedTo = yaw end
+mover.GetAngles = function() return {y = 0} end
+mover.GetEnemy = function() return enemy end
+local function step(x, y)
+	local direction = Vector(x, y, 0)
+
+	return mover:OverrideMoveFacing(0.1, {dir = direction})
+end
+local function blends(x, y) return math.abs(blend.move_x - x) < 0.001 and math.abs(blend.move_y - y) < 0.001 end
+mover.moveFireTarget = enemy
+check(step(-1, 0) and turnedTo == 0 and blends(-1, 0), "backing away faces the target and backpedals")
+check(step(0, 1) and blends(0, -1), "a path to the left strafes left")
+check(step(0, -1) and blends(0, 1), "a path to the right strafes right")
+check(step(-1, -1) and blends(-1, 1), "diagonals stay on the edge of the blend")
+mover.moveFireTarget = nil
+check(not step(0, 1) and blends(0, 0), "without a shot the engine faces the path and runs forward")
+mover.moveFireTarget, mover.cotzSleeping = enemy, true
+mover.NextThink, mover.STALKERNPCClearAnimation = function() end, function() end
+humanBase.Think(mover)
+check(not mover.moveFireTarget, "a think that cannot shoot releases the facing")
+
+local melee = setmetatable(actor("npc_human_bandit_melee", 0), {__index = humanBase})
+melee.stance, melee.meleeDamage = {calm = "melee2", aim = "melee2"}, 7
+melee.FaceCombatTarget = function() return true end
+melee.PlayCombatGesture = function() end
+local clear = true
+melee.GetCombatLane = function() return clear, Vector(0), Vector(40) end
+DMG_CLUB = 128
+DamageInfo = function()
+	return {SetAttacker = function() end, SetInflictor = function() end, SetDamagePosition = function() end,
+		SetDamageType = function(self, kind) self.kind = kind end,
+		SetDamage = function(self, amount) self.amount = amount end}
+end
+local hits = 0
+enemy.TakeDamageInfo = function(_, info)
+	check(info.kind == DMG_CLUB and info.amount == 7, "melee uses only low blunt damage")
+	hits = hits + 1
+end
+melee:UpdateMeleeCombat(enemy, manager, 0, 40 ^ 2)
+melee:UpdateMeleeCombat(enemy, manager, 0.5, 90 ^ 2)
+check(hits == 0, "a target that leaves reach dodges the swing")
+melee:UpdateMeleeCombat(enemy, manager, 2, 40 ^ 2)
+clear = false
+melee:UpdateMeleeCombat(enemy, manager, 2.5, 40 ^ 2)
+check(hits == 0, "cover blocks a swing at impact")
+clear = true
+melee:UpdateMeleeCombat(enemy, manager, 4, 40 ^ 2)
+melee:UpdateMeleeCombat(enemy, manager, 4.5, 40 ^ 2)
+melee:UpdateMeleeCombat(enemy, manager, 4.6, 40 ^ 2)
+check(hits == 1, "one completed swing deals damage once")
+
+
+-- Stances: calm poses while patrolling, raised-gun poses once an enemy is engaged.
+local sequenceIds = {idle_ar2 = 1, run_mp_ar2 = 2, idle_rpg = 3, run_mp_rpg = 4, cidle_rpg = 5, cwalk_mp_rpg = 6}
+local sequenceActivities = {ACT_HL2MP_IDLE_AR2, ACT_HL2MP_RUN_AR2, ACT_HL2MP_IDLE_RPG, ACT_HL2MP_RUN_RPG,
+	ACT_HL2MP_IDLE_CROUCH_RPG, ACT_HL2MP_WALK_CROUCH_RPG}
+local engaged
+local gunman = setmetatable(actor("npc_human_bandit_rifleman", 0), {__index = humanBase})
+gunman.LookupSequence = function(_, name) return sequenceIds[name] or -1 end
+gunman.GetSequenceActivity = function(_, index) return sequenceActivities[index] end
+gunman.SelectWeightedSequence = function(_, activity) return activity == ACT_JUMP and 5 or -1 end
+gunman.GetEnemy = function() return engaged end
+gunman.stanceActivities = {
+	calm = gunman:BuildStanceActivities({"ar2", "rpg"}),
+	aim = gunman:BuildStanceActivities({"rpg", "ar2"}),
+}
+check(gunman:TranslateActivity(ACT_IDLE) == ACT_HL2MP_IDLE_AR2, "patrolling riflemen use the calm two-handed idle")
+check(gunman:TranslateActivity(ACT_RUN) == ACT_HL2MP_RUN_AR2, "patrolling riflemen use the calm two-handed run")
+check(gunman:TranslateActivity(ACT_IDLE_ANGRY) == ACT_HL2MP_IDLE_RPG, "an alerted idle raises the gun")
+engaged = enemy
+check(gunman:TranslateActivity(ACT_IDLE) == ACT_HL2MP_IDLE_RPG, "an engaged rifleman idles with the rpg pose")
+check(gunman:TranslateActivity(ACT_RUN) == ACT_HL2MP_RUN_RPG, "an engaged rifleman runs with the rpg pose")
+check(gunman:TranslateActivity(ACT_RUN_AIM) == ACT_HL2MP_RUN_RPG, "aimed running uses the rpg pose")
+check(gunman:TranslateActivity(ACT_RELOAD_SMG1) == ACT_HL2MP_IDLE_RPG, "engine reloads hold an aimed pose, not a T-pose")
+check(gunman:TranslateActivity(ACT_RUN_RIFLE) == ACT_HL2MP_RUN_RPG, "weapon-specific run activities still run")
+check(gunman:TranslateActivity(ACT_COVER_LOW) == ACT_HL2MP_IDLE_CROUCH_RPG, "cover activities without a sequence crouch")
+check(gunman:TranslateActivity(ACT_TURN_LEFT) == ACT_HL2MP_IDLE_RPG, "turn activities without a sequence idle")
+check(gunman:TranslateActivity(ACT_WALK) == ACT_HL2MP_IDLE_RPG, "a pose without a walk sequence idles instead of T-posing")
+check(gunman:TranslateActivity(9999) == ACT_HL2MP_IDLE_RPG, "unknown activities idle")
+check(gunman:TranslateActivity(ACT_JUMP) == nil, "activities the model animates itself are left alone")
+gunman.crouching = true
+check(gunman:TranslateActivity(ACT_IDLE_ANGRY) == ACT_HL2MP_IDLE_CROUCH_RPG, "a crouching shooter idles crouched")
+check(gunman:TranslateActivity(ACT_RUN) == ACT_HL2MP_RUN_RPG, "crouching alone does not slow movement")
+gunman.crouching, gunman.sneaking = nil, true
+check(gunman:TranslateActivity(ACT_RUN) == ACT_HL2MP_WALK_CROUCH_RPG, "a sneaking NPC creeps instead of running")
+check(gunman:TranslateActivity(ACT_WALK_AIM) == ACT_HL2MP_WALK_CROUCH_RPG, "a sneaking NPC creeps instead of walking")
+check(gunman:TranslateActivity(ACT_IDLE) == ACT_HL2MP_IDLE_RPG, "sneaking leaves standing idles alone")
+gunman.sneaking = nil
+gunman.dead = true
+check(gunman:TranslateActivity(ACT_IDLE) == nil, "a dying NPC is not translated")
+gunman.dead = nil
+engaged = nil
+
+-- The arms follow the bullets' aim point: pitch is positive downward, yaw positive to the left of the body.
+local posed = {}
+gunman.SetPoseParameter = function(_, name, value) posed[name] = value end
+gunman.GetAngles = function() return {y = 90} end
+for _ = 1, 12 do gunman:AimAt(Vector(0, 0, 55), Vector(0, 100, 55 - 100 * math.tan(math.rad(10)))) end
+check(math.abs(posed.aim_pitch - 10) < 0.1, "a lower target pitches the arms down")
+check(math.abs(posed.aim_yaw) < 0.1, "a target straight ahead needs no yaw")
+for _ = 1, 12 do gunman:AimAt(Vector(0, 0, 55), Vector(-100, 100, 55)) end
+check(math.abs(posed.aim_yaw - 45) < 0.1 and math.abs(posed.aim_pitch) < 0.1, "a target to the left yaws the arms left")
+gunman.ClearSchedule = gunman.ClearSchedule or function() end
+humanBase.STALKERNPCClearAnimation(gunman)
+check(posed.aim_pitch == 0 and posed.aim_yaw == 0 and not gunman.aimPitch, "ending combat lowers the arms")
+
+-- Zombies do not retreat, crouch or sneak.
+gunman.Undead = true
+gunman.combatProfile = {range = 2000, retreat = 500}
+local forward = gunman:GetFiringMove(100 ^ 2)
+check(forward == 1, "zombies do not back away")
+gunman.nextCrouchRoll, gunman.crouching = 0, nil
+gunman:UpdateCrouch(100, 800 ^ 2)
+check(not gunman.crouching, "zombies do not crouch")
+check(not gunman:IsTargetUnaware(hunter), "zombies do not sneak up on anyone")
+gunman.Undead, gunman.combatProfile, gunman.nextCrouchRoll = nil, nil, nil
+
+-- Crouching: occasional while shooting from a distance, never up close, and ended by movement.
+local resets = 0
+gunman.IsMoving = function() return false end
+gunman.ResetIdealActivity = function() resets = resets + 1 end
+local roll = 1
+local formerRandom, formerRand = math.random, math.Rand
+math.random = function() return roll end
+math.Rand = function(low) return low end
+gunman:UpdateCrouch(10, 100 ^ 2)
+check(not gunman.crouching, "shooters do not crouch point-blank")
+gunman:UpdateCrouch(10, 800 ^ 2)
+check(not gunman.crouching, "crouching is rolled at an interval")
+gunman:UpdateCrouch(15, 800 ^ 2)
+check(not gunman.crouching, "a failed roll keeps the shooter standing")
+roll, gunman.nextCrouchRoll = 0, 0
+gunman:UpdateCrouch(20, 800 ^ 2)
+check(gunman.crouching and gunman.crouchUntil == 22.5 and resets == 1, "a successful roll crouches and refreshes the pose")
+gunman:UpdateCrouch(21, 800 ^ 2)
+check(gunman.crouching and resets == 1, "the shooter stays crouched for a while")
+gunman:UpdateCrouch(23, 800 ^ 2)
+check(not gunman.crouching and resets == 2, "the shooter stands up again afterwards")
+math.random, math.Rand = formerRandom, formerRand
+gunman.crouching = true
+gunman.SetSchedule, gunman.IsCurrentSchedule = function(self, schedule) self.schedule = schedule end, function() return false end
+gunman:StartCombatMovement(SCHED_CHASE_ENEMY, 50, true)
+check(gunman.sneaking and not gunman.crouching, "moving ends a crouch and starts sneaking")
+local scheduled = gunman.schedule
+gunman.IsCurrentSchedule = function(self, schedule) return self.schedule == schedule end
+local scheduleCalls = 0
+gunman.SetSchedule = function(self, schedule) self.schedule, scheduleCalls = schedule, scheduleCalls + 1 end
+gunman:StartCombatMovement(SCHED_CHASE_ENEMY, 52, true)
+check(scheduleCalls == 0, "an unchanged sneak does not restart its movement")
+gunman:StartCombatMovement(SCHED_CHASE_ENEMY, 54, false)
+check(scheduleCalls == 1 and gunman.schedule == SCHED_CHASE_ENEMY and not gunman.sneaking,
+	"being noticed restarts movement upright")
+local notPlayer = function() return false end
+local watcher = {IsPlayer = notPlayer, GetEnemy = function() return gunman end}
+local hunter = {IsPlayer = notPlayer, GetEnemy = function() end}
+check(not gunman:IsTargetUnaware(watcher), "a target fighting us has engaged us")
+check(gunman:IsTargetUnaware(hunter), "targets fighting someone else have not engaged us")
+function vectorMeta:Dot(other) return self.x * other.x + self.y * other.y + self.z * other.z end
+local looking, visible = Vector(1, 0, 0), true
+local watcherPlayer = {
+	IsPlayer = function() return true end, EyePos = function() return Vector(-100, 0, 0) end,
+	GetAimVector = function() return looking end, Visible = function() return visible end,
+}
+check(not gunman:IsTargetUnaware(watcherPlayer), "a player looking straight at the NPC has noticed it")
+looking = Vector(0, 1, 0)
+check(not gunman:IsTargetUnaware(watcherPlayer), "a noticing player stays noticed for a few seconds")
+gunman.noticedUntil = nil
+check(gunman:IsTargetUnaware(watcherPlayer), "a player looking away has not noticed the NPC")
+looking, visible = Vector(1, 0, 0), false
+check(gunman:IsTargetUnaware(watcherPlayer), "a player facing the NPC through a wall has not noticed it")
+visible = true
+looking = Vector(0.9, 0.436, 0)
+check(gunman:IsTargetUnaware(watcherPlayer), "a player looking well off to the side has not noticed the NPC")
+gunman.noticedUntil = nil
+gunman.provokedBy = hunter
+check(not gunman:IsTargetUnaware(hunter), "a target that shot us has engaged us")
+gunman.provokedBy = nil
+
+-- Weapon props sit on the right hand's attachment at the placement stored for their weapon.
+function Angle(pitch, yaw, roll) return {pitch = pitch, yaw = yaw, roll = roll} end
+local props = {}
+ents.Create = function()
+	local prop = {}
+	for _, name in ipairs({"SetModel", "SetPos", "SetKeyValue", "Spawn"}) do prop[name] = function() end end
+	function prop:SetParent(parent, attachment) self.parent, self.attachment = parent, attachment end
+	function prop:SetLocalPos(position) self.localPosition = position end
+	function prop:SetLocalAngles(angles) self.localAngles = angles end
+	props[#props + 1] = prop
+
+	return prop
+end
+util = util or {}
+util.IsValidModel = function(model) return model ~= "models/missing.mdl" end
+ErrorNoHalt = function(message) error(message) end
+local holder = setmetatable(actor("npc_human_bandit_rifleman", 0), {__index = humanBase})
+holder.LookupAttachment = function() return 7 end
+holder.DeleteOnRemove = function() end
+local placed = holder:AttachCombatProp(humanBase.WeaponProps.ak74)
+local hand = humanBase.WeaponProps.ak74.hand
+check(placed.parent == holder and placed.attachment == 7, "weapon props parent to the right hand")
+check(placed.localPosition.x == hand.pos[1] and placed.localPosition.y == hand.pos[2]
+	and placed.localPosition.z == hand.pos[3], "weapon props use their stored hand position")
+check(placed.localAngles.pitch == hand.ang[1] and placed.localAngles.yaw == hand.ang[2]
+	and placed.localAngles.roll == hand.ang[3], "weapon props use their stored hand angles")
+check(holder:AttachCombatProp({model = "models/missing.mdl", hand = hand}) == nil, "missing models attach nothing")
+holder.LookupAttachment = function() return 0 end
+check(not pcall(holder.AttachCombatProp, holder, humanBase.WeaponProps.ak74), "a rig without a hand attachment is reported")
+holder.LookupAttachment = function() return 7 end
+
+-- Initialization: model before hull, raised-gun capabilities, the dropped weapon's own prop and stance.
+local calls = {}
+local function spawnHuman(fields)
+	local human = setmetatable({}, {__index = function(self, key)
+		if fields[key] ~= nil then return fields[key] end
+		if humanBase[key] ~= nil then return humanBase[key] end
+
+		return function(_, ...)
+			calls[#calls + 1] = key
+			return ...
+		end
+	end})
+	human.SkinCount, human.LookupSequence = function() return 1 end, function() return -1 end
+	human.GetSequenceActivity, human.LookupAttachment = function() return -1 end, function() return 7 end
+	human.InitEnemies = function() end
+	human:Initialize()
+
+	return human
+end
+bit = bit or {bor = function(...) local sum = 0 for _, value in ipairs({...}) do sum = sum + (value or 0) end return sum end}
+CAP_USE_WEAPONS, CAP_AIM_GUN = 16, 32
+local equipped = {GetMaxClip1 = function() return 30 end, SetNoDraw = function(self, hidden) self.hidden = hidden end}
+local base = {
+	ModelGroup = "bandit",
+	StartHealth = 100, Give = function() return equipped end, GetActiveWeapon = function() return equipped end,
+}
+base.weapons = {{{"mp18", {}}, "weapon_npc_ppsh"}}
+props = {}
+local rifleman = spawnHuman(base)
+check(calls[1] == "SetModel" and calls[#calls] ~= nil, "the model is set before anything else")
+local hullIndex
+for index, name in ipairs(calls) do if name == "SetHullType" then hullIndex = index end end
+check(hullIndex and hullIndex > 1, "the collision hull is configured after the model")
+check(rifleman.clip == 30 and rifleman.stance.aim == "rpg" and rifleman.stance.calm == "passive",
+	"a two-handed firearm patrols passively and aims with the rpg stance")
+check(rifleman.combatProp == props[1] and props[1].attachment == 7 and equipped.hidden,
+	"the mp18 loadout shows the mp18 prop and hides the engine weapon")
+base.weapons = {{{"tokarev", {}}, "weapon_npc_tokarev"}}
+equipped.hidden = nil
+local pistolman = spawnHuman(base)
+check(pistolman.stance.aim == "revolver" and pistolman.stance.calm == "passive",
+	"a one-handed pistol patrols passively and aims with the revolver stance")
+base.weapons = false
+base.MeleeLoadouts = {{model = "models/weapons/tfa_nmrih/w_me_crowbar.mdl", damage = 6,
+	hand = {pos = {1, 1, 1}, ang = {0, 0, 0}}}}
+local brawler = spawnHuman(base)
+check(brawler.stance.aim == "melee2" and brawler.meleeDamage == 6 and brawler.combatProp,
+	"melee bandits hold their weapon with the two-handed melee stance")
+
 print("PASS: " .. checks .. " NPC combat checks")

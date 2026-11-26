@@ -78,6 +78,10 @@ local function setSlot(weapon, matches, header, choices)
 	weapon.Attachments[key] = {header = header, atts = choices, offset = slot and slot.offset or {800, -250}}
 end
 
+local function isAnomalyAttachment(id)
+	return string.StartWith(id, "cw_anomaly_")
+end
+
 local function isSuppressor(id)
 	return CustomizableWeaponry.suppressors[id] ~= nil
 end
@@ -225,7 +229,18 @@ end
 function SWEP:ApplyCotzAttachmentProfile()
 	local class = self:GetClass()
 	local profile = PROFILES.GetForModel(class, self.ViewModel)
-	if not profile or self.cotzAttachmentDefinitions then return end
+	if self.cotzAttachmentDefinitions then return end
+
+	-- Anomaly firearms only take the COTZ CW 2.0 attachments, never the pack's own.
+	local isAnomalyWeapon = string.StartWith(class, "cw_anomaly_")
+	if not profile then
+		if isAnomalyWeapon and self.Attachments then
+			self.Attachments = table.Copy(self.Attachments)
+			setSlot(self, isAnomalyAttachment, nil, {})
+		end
+
+		return
+	end
 
 	local suppressor = profile.suppressor
 	self.cotzAttachmentDefinitions = {}
@@ -250,10 +265,8 @@ function SWEP:ApplyCotzAttachmentProfile()
 	if suppressor or not self.SuppressedOnEquip then
 		setSlot(self, isSuppressor, "Suppressor", suppressor and {suppressor} or {})
 	end
-	if string.StartWith(class, "cw_anomaly_") then
-		setSlot(self, function(id)
-			return string.StartWith(id, "cw_anomaly_")
-		end, nil, {})
+	if isAnomalyWeapon then
+		setSlot(self, isAnomalyAttachment, nil, {})
 	end
 	if suppressor and (not self.FireSoundSuppressed or self.FireSoundSuppressed == self.FireSound) then
 		self.FireSoundSuppressed = FALLBACK_SOUNDS[suppressor]

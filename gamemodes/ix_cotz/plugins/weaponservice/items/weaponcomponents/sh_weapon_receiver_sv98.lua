@@ -13,8 +13,14 @@ ITEM.weaponID = "sv98"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 11,
-	value_lubricant = 1,
-	value_precisiontools = 2,
+	value_building_plexiglass = 1,
+	value_building_poxeram = 1,
+	value_large_parts = 1,
+	value_multitul_0 = 1,
+	value_plastic = 1,
+	value_tools_advwrench = 1,
+	value_tools_screwdriver_flat_long = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
 	weapon_parts_long_rifle = 5,
 }

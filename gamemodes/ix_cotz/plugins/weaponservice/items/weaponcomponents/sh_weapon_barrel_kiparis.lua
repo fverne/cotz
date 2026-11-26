@@ -13,9 +13,7 @@ ITEM.weaponID = "kiparis"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 1,
-	value_gunoil = 1,
-	value_nuts = 7,
-	value_toiletpaper = 1,
+	value_detergent = 1,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_pistol_smg = 2,
 }

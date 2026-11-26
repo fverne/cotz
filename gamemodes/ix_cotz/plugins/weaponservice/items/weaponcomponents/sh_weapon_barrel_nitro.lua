@@ -13,12 +13,12 @@ ITEM.weaponID = "nitro"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 15,
+	value_detergent = 1,
 	value_gyroscope = 1,
-	value_lubricant = 1,
-	value_nuts = 17,
+	value_handdrill = 1,
+	value_pipewrench = 1,
 	value_precisiontools = 1,
-	value_techtool_3 = 11,
-	value_wrench = 1,
+	value_techtool_1 = 1,
+	value_techtool_3 = 9,
 	weapon_parts_long_rifle = 7,
 }

@@ -13,8 +13,8 @@ ITEM.weaponID = "ar159mm"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 7,
-	value_detergent = 1,
-	value_gunoil = 3,
+	value_tools_advwrench = 1,
+	value_toolset = 1,
+	value_weaponparts = 1,
 	weapon_parts_pistol_smg = 3,
 }

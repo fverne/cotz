@@ -13,10 +13,9 @@ ITEM.weaponID = "dp28"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 2,
 	value_controller = 1,
-	value_gunspray = 1,
-	value_lubricant = 1,
-	value_nuts = 17,
+	value_electricdrill = 1,
+	value_precisiontools = 1,
+	value_wd40_100ml = 1,
 	weapon_parts_long_rifle = 7,
 }

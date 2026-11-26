@@ -2,6 +2,7 @@
 ix.jobs.regionalCatalogue = {
 	["classes"] = {
 		["npc_human_bandit_pistolman"] = "bandit",
+		["npc_human_bandit_melee"] = "bandit",
 		["npc_human_bandit_rifleman"] = "bandit",
 		["npc_human_bandit_shotgunner"] = "bandit",
 		["npc_human_bandit_sniper"] = "bandit",

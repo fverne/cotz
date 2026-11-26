@@ -13,7 +13,5 @@ ITEM.weaponID = "fort12"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 2,
-	value_nuts = 2,
 	weapon_parts_pistol_smg = 3,
 }

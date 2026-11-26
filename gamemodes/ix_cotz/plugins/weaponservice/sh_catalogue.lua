@@ -6,6 +6,8 @@ PLUGIN.settings = {
 	maxPending = 64,
 	maxDeliveries = 128,
 	yields = {0.5, 1, 1.5, 2, 2.5, 3, 4},
+	-- Share of the tier yield kept by a weapon with no durability or cleanliness left.
+	salvageConditionFloor = 0.25,
 }
 
 PLUGIN.salvageFamilies = {

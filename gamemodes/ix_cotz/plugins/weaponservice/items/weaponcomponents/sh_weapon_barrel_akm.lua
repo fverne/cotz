@@ -13,9 +13,8 @@ ITEM.weaponID = "akm"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_guncleaner = 1,
-	value_nuts = 8,
-	value_precisiontools = 1,
+	value_electricdrill = 1,
+	value_tape_heavy = 1,
+	value_wd40_100ml = 1,
 	weapon_parts_intermediate = 5,
 }

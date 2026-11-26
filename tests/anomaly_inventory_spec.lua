@@ -298,6 +298,33 @@ local function configure(isClient)
 		assert(mosin:GetCotzAttachment(definitions[pu]) ~= definitions[pu])
 		assert(mosin.AttachmentModelsVM[pu] and mosin[pu .. "Pos"])
 	end
+	-- Pack base SWEPs share their item variant's slots; unprofiled pack weapons take no pack attachments.
+	local function packWeapon(class)
+		local weapon = setmetatable({
+			GetClass = function() return class end,
+			Attachments = {
+				[1] = {atts = {"cw_anomaly_sil_tgpa"}},
+				[2] = {atts = {"cw_anomaly_gl_m202"}},
+				[4] = {atts = {"cw_anomaly_ammo_545x39_ep"}},
+			},
+		}, {__index = SWEP})
+		weapon:ApplyCotzAttachmentProfile()
+		for _, slot in pairs(weapon.Attachments) do
+			for _, id in ipairs(slot.atts) do
+				assert(not id:match("^cw_anomaly_"), class .. " offers pack attachment " .. id)
+			end
+		end
+		return weapon
+	end
+	local baseFirearm = packWeapon("cw_anomaly_ak74m")
+	assert(baseFirearm.Attachments[1].atts[1] == "md_pbs1")
+	local offersOptic = false
+	for _, slot in pairs(baseFirearm.Attachments) do
+		offersOptic = offersOptic or table.HasValue(slot.atts, OPTIC)
+	end
+	assert(offersOptic)
+	assert(next(packWeapon("cw_anomaly_unprofiled").Attachments) == nil)
+
 	return firearm.Attachments
 end
 

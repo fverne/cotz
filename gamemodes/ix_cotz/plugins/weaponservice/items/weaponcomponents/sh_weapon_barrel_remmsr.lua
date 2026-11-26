@@ -13,12 +13,10 @@ ITEM.weaponID = "remmsr"
 ITEM.componentKind = "barrel"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 15,
-	value_guncleaner = 1,
+	value_electricdrill = 1,
 	value_gyroscope = 1,
-	value_lubricant = 1,
-	value_nuts = 17,
-	value_precisiontools = 1,
-	value_techtool_1 = 1,
+	value_handdrill = 1,
+	value_techtool_2 = 1,
+	value_tools_ratchetwrench = 1,
 	weapon_parts_long_rifle = 7,
 }

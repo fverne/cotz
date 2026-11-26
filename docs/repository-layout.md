@@ -44,6 +44,11 @@ of characters from the legacy playermodels. See [suit playermodels](suit-playerm
 scoreboard field list. Transaction owners record successful cash payments; simplecrossserverdata
 sends summaries only to administrators. See its [economy dossier guide](../gamemodes/ix_cotz/plugins/simplecrossserverdata/README.md#administrator-economy-dossier).
 
+`schema/meta/sh_itemstack.lua` is explicitly included by `sh_schema.lua` and adds stack-merge helpers
+to the item meta (`GetStackCombineTarget`, `CombineStack`, and the overridable `CanStackWith`,
+`GetStackQuantity` and `GetStackCapacity`). They add no action: only items whose definition or base
+declares `ITEM.functions.combine` can merge stacks, so use-count items such as medicine stay separate.
+
 `schema/meta/sv_character.lua` is explicitly included by `sh_schema.lua`. Its owner-sync override
 keeps legacy personal vendor stock/history keys out of the initial character network payload;
 other recipients retain Helix's normal visibility rules. The automatically loaded shared library

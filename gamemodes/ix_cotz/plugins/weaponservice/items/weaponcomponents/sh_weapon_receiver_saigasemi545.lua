@@ -13,7 +13,9 @@ ITEM.weaponID = "saigasemi545"
 ITEM.componentKind = "receiver"
 ITEM.commissionRate = 0.2
 ITEM.recipe = {
-	value_bolts = 5,
-	value_gunoil = 3,
+	value_hammer = 1,
+	value_tools_advwrench = 2,
+	value_tools_screwdriver_flat_long = 1,
+	value_wrench = 1,
 	weapon_parts_intermediate = 2,
 }
