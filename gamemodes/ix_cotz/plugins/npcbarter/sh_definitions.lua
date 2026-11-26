@@ -274,41 +274,41 @@ ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner3", {
 	reqItem = {"value_currency_euro", 20},
 })
 
-ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner4", {
-	name = "Eurofunny",
-	description = "I'll give you 10 Euro for a lost note.",
-	defaultActive = true,
+-- ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner4", {
+-- 	name = "Eurofunny",
+-- 	description = "I'll give you 10 Euro for a lost note.",
+-- 	defaultActive = true,
 
-	-- Item that will awarded when barter is completed
-	barterItem = {"value_currency_euro", 1, {["quantity"] = 10}},
+-- 	-- Item that will awarded when barter is completed
+-- 	barterItem = {"value_currency_euro", 1, {["quantity"] = 10}},
 
-	-- Only one type of item can be required at a time
-	reqItem = {"hidestash_1", 1},
-})
+-- 	-- Only one type of item can be required at a time
+-- 	reqItem = {"hidestash_1", 1},
+-- })
 
-ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner5", {
-	name = "Eurofunny",
-	description = "I'll give you 15 Euro for a lost rookie PDA.",
-	defaultActive = true,
+-- ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner5", {
+-- 	name = "Eurofunny",
+-- 	description = "I'll give you 15 Euro for a lost rookie PDA.",
+-- 	defaultActive = true,
 
-	-- Item that will awarded when barter is completed
-	barterItem = {"value_currency_euro", 1, {["quantity"] = 15}},
+-- 	-- Item that will awarded when barter is completed
+-- 	barterItem = {"value_currency_euro", 1, {["quantity"] = 15}},
 
-	-- Only one type of item can be required at a time
-	reqItem = {"hidestash_2", 1},
-})
+-- 	-- Only one type of item can be required at a time
+-- 	reqItem = {"hidestash_2", 1},
+-- })
 
-ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner6", {
-	name = "Eurofunny",
-	description = "I'll give you 25 Euro for a lost veteran PDA.",
-	defaultActive = true,
+-- ix.npcbarter.Register("'Cleaner'", "newbiebartercleaner6", {
+-- 	name = "Eurofunny",
+-- 	description = "I'll give you 25 Euro for a lost veteran PDA.",
+-- 	defaultActive = true,
 
-	-- Item that will awarded when barter is completed
-	barterItem = {"value_currency_euro", 1, {["quantity"] = 25}},
+-- 	-- Item that will awarded when barter is completed
+-- 	barterItem = {"value_currency_euro", 1, {["quantity"] = 25}},
 
-	-- Only one type of item can be required at a time
-	reqItem = {"hidestash_3", 1},
-})
+-- 	-- Only one type of item can be required at a time
+-- 	reqItem = {"hidestash_3", 1},
+-- })
 
 ix.npcbarter.Register("'Cleaner'", "stashbartercleaner1", {
 	name = "Eurofunny",
