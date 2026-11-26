@@ -58,10 +58,10 @@ function SWEP:PrimaryAttack()
 		if ( self.HasNightVision ) then
 			if self:GetNWBool( "nvon", true ) then 
 				self:SetNWBool( "nvon", false )
-				self:EmitSound( "items/flashlight1.wav", 60, 100 )
+				-- self:EmitSound( "items/flashlight1.wav", 60, 100 )
 			else
 				self:SetNWBool( "nvon", true )
-				self:EmitSound( "items/flashlight1.wav", 60, 120 )
+				-- self:EmitSound( "items/flashlight1.wav", 60, 120 )
 			end
 		end
 	elseif (self.Zoom_InZoom) then
