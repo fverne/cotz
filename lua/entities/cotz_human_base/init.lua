@@ -6,7 +6,7 @@ include("weaponprops.lua")
 include("models.lua")
 
 local THINK_INTERVAL = 0.1
-local SEARCH_RANGE = 7000
+local SEARCH_RANGE = 2000
 local SEARCH_ANGLE = 45
 local MOVEMENT_RETRY = 1
 local MIN_SHOT_DELAY = 0.12
@@ -19,7 +19,7 @@ local MELEE_RECOVERY = 1.7
 local MELEE_REACH = 76
 local DROP_HEIGHT = Vector(0, 0, 32)
 local RAISE_SECONDS = 0.6
-local SNEAK_RANGE = 1600
+local SNEAK_RANGE = 1200
 local LOOK_DOT = 0.94
 local NOTICE_SECONDS = 6
 local AIM_SMOOTHING = 0.5
