@@ -47,6 +47,7 @@ function ENT:Touch(ent)
 	if timer.Exists(self:EntIndex().."_par_activated_"..ent:EntIndex()) then return end
 	if self.ActiveOnce then 
 		timer.Create(self:EntIndex().."_par_activated_sound", 0, 1, function()
+			if not IsValid(self) then return end
 			self:EmitSound("par_blast")
 			ParticleEffectAttach( "par_anomaly", PATTACH_ABSORIGIN_FOLLOW, self, 1 )
 		end)	
@@ -54,6 +55,7 @@ function ENT:Touch(ent)
 	end
 	
 	timer.Create(self:EntIndex().."_par_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
+		if not IsValid(self) or not IsValid(ent) then return end
 		local damageInfo = DamageInfo()
 		damageInfo:SetDamage(self.BalanceDamage)
 		damageInfo:SetDamageType(DMG_BURN)
@@ -65,17 +67,19 @@ function ENT:Touch(ent)
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
 			ent:Remove()
-		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
+		elseif IsValid(ent) and ent.ixItemID and ix.item.instances[ent.ixItemID] and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
 		self.Active = false
 	end)	
 
 	timer.Create(self:EntIndex().."_par_cooldown", self.BalanceCooldown, 1, function()
+		if not IsValid(self) then return end
 		self.Active = true
 	end)
 
 	timer.Create(self:EntIndex().."_par_sound_cooldown", 11, 1, function()
+		if not IsValid(self) then return end
 		self:StopSound("par_blast")
 		self:StopParticles()
 		-- The client owns the idle effect so it can stop it outside visual range.

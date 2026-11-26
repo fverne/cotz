@@ -47,6 +47,7 @@ function ENT:Touch(ent)
 	if timer.Exists(self:EntIndex().."_myasorubka_activated_"..ent:EntIndex()) then return end
 	if self.ActiveOnce then 
 		timer.Create(self:EntIndex().."_myasorubka_activated_sound", 0, 1, function()
+			if not IsValid(self) then return end
 			self:EmitSound("anomaly/anomaly_gravy_hit1.mp3")
 			self:EmitSound("myasorubka_blast");
 			ParticleEffect( "myasorubka_activated", self:GetPos() + Vector(0,0,41), Angle( 0, 0, 0 ) )
@@ -58,6 +59,7 @@ function ENT:Touch(ent)
 	end
 	
 	timer.Create(self:EntIndex().."_myasorubka_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
+		if not IsValid(self) or not IsValid(ent) then return end
 		local damageInfo = DamageInfo()
 		damageInfo:SetDamage(self.BalanceDamage)
 		damageInfo:SetDamageType(DMG_CRUSH)
@@ -69,12 +71,13 @@ function ENT:Touch(ent)
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
 			ent:Remove()
-		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
+		elseif IsValid(ent) and ent.ixItemID and ix.item.instances[ent.ixItemID] and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
 		self.Active = false
 	end)	
 	timer.Create(self:EntIndex().."_myasorubka_cooldown", self.BalanceCooldown, 1, function()
+		if not IsValid(self) then return end
 		self:SetNWBool("StopParticle", false)
 		self.Active = true
 		self.ActiveOnce = true

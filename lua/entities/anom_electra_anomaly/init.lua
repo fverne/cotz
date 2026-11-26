@@ -47,6 +47,7 @@ function ENT:Touch(ent)
 	if timer.Exists(self:EntIndex().."_electra_activated_"..ent:EntIndex()) then return end
 	if self.ActiveOnce then 
 		timer.Create(self:EntIndex().."_electra_activated_sound", 0, 1, function()
+			if not IsValid(self) then return end
 			self:EmitSound("electra_blast")
 			ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 			self:StopParticles()
@@ -57,6 +58,7 @@ function ENT:Touch(ent)
 	end
 	
 	timer.Create(self:EntIndex().."_electra_activated_"..ent:EntIndex(), 0, 1, function()  -- Timer for multiple entity damage
+		if not IsValid(self) or not IsValid(ent) then return end
 		local dmg = DamageInfo()
 		dmg:SetDamage(self.BalanceDamage)
 		dmg:SetAttacker(self)
@@ -68,12 +70,13 @@ function ENT:Touch(ent)
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
 			ParticleEffect("wick_gore_bloodsplash_new" , ent:GetPos(), Angle( 0, 0, 0 ) )
 			ent:Remove()
-		elseif ent.ixItemID and ix.item.instances[ent.ixItemID].isWeapon then
+		elseif IsValid(ent) and ent.ixItemID and ix.item.instances[ent.ixItemID] and ix.item.instances[ent.ixItemID].isWeapon then
 			ent:Remove()
 		end
 		self.Active = false
 	end)	
 	timer.Create(self:EntIndex().."_electra_cooldown", self.BalanceCooldown, 1, function()
+		if not IsValid(self) then return end
 		self:SetNWBool("StopParticle", false)
 		self.Active = true
 		self.ActiveOnce = true
