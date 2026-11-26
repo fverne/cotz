@@ -4,6 +4,13 @@ tegnmanden = false
 local PANEL = {}
 	local MODEL_ANGLE = Angle(0, 45, 0)
 
+	-- The engine caches ShouldDrawLocalPlayer per frame and cam.Start resets it. Without a reset, the forced
+	-- preview result stays cached, so PAC treats the local player as visible and draws their outfit in first person.
+	local function resetLocalPlayerDrawCache()
+		cam.Start2D()
+		cam.End2D()
+	end
+
 	function PANEL:Init()
 		self.brightness = 1
 
@@ -122,24 +129,38 @@ local PANEL = {}
 		cam.IgnoreZ(true)
 
 		local pac = pac
+		local oldEyePos, oldEyeAng
+
 		if pac then
+			-- PAC's Think measures draw distance from pac.EyePos, so it must be restored after the preview.
+			oldEyePos, oldEyeAng = pac.EyePos, pac.EyeAng
+			pac.EyePos = campos
+			pac.EyeAng = (camtarget - campos):Angle()
+
+			-- PAC hides first-person outfits; show them for the preview and update them while PAC does not.
+			pac.ShowEntityParts(self.Entity)
 			pac.ForceRendering(true)
-			pac.RenderOverride(self.Entity,"opaque")
-			pac.RenderOverride(self.Entity,"translucent", true)
-			pac.EyePos = self:GetCamPos()
-			pac.EyeAng = (self.vLookatPos-self.vCamPos):Angle()
+
+			if not self.Entity.pac_is_drawing then
+				pac.RenderOverride(self.Entity, "update")
+			end
+
+			pac.RenderOverride(self.Entity, "opaque")
+			pac.RenderOverride(self.Entity, "translucent", true)
 		end
 
 		self:DrawModel()
 
 		if pac then
 			pac.ForceRendering(false)
+			pac.EyePos, pac.EyeAng = oldEyePos, oldEyeAng
 		end
 
 		cam.IgnoreZ(false)
 		cam.End3D()
 
 		tegnmanden = false
+		resetLocalPlayerDrawCache()
 
 		self.LastPaint = RealTime()
 	end

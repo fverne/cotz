@@ -117,6 +117,20 @@ if (SERVER) then
 		self:SetNetVar("parts", {})
 	end
 
+	-- Wears every equipped PAC item again, e.g. after parts were reset for spectating.
+	function meta:WearEquippedParts()
+		if (!pac) then return end
+
+		local character = self:GetCharacter()
+		if not character then return end
+
+		for _, v in pairs(character:GetInventory():GetItems()) do
+			if (v:GetData("equip") == true and v.pacData) then
+				self:AddPart(v.uniqueID, v)
+			end
+		end
+	end
+
 	-- A client can finish loading after the original wear broadcasts were sent.
 	net.Receive("cotz/gear-appearance/pac-ready", function(_, client)
 		if CurTime() < (client.cotzPACNextSync or 0) then return end
@@ -180,14 +194,7 @@ if (SERVER) then
 
 		-- If exiting of observer, re-add all parts.
 		if (!state) then
-			local character = client:GetCharacter()
-			local inventory = character:GetInventory()
-
-			for _, v in pairs(inventory:GetItems()) do
-				if (v:GetData("equip") == true and v.pacData) then
-					client:AddPart(v.uniqueID, v)
-				end
-			end
+			client:WearEquippedParts()
 		end
 	end
 else

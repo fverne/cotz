@@ -855,6 +855,7 @@ function PLUGIN:ToggleSpectateArena(ply)
 		ply:Spawn()
 		ply:SetPos(Vector(-5711,-10054, 4970))
 		ply:SetNetVar("canShoot", true)
+		ply:WearEquippedParts()
 
 		timer.Simple(0, function()
 			if not IsValid(ply) then return end
@@ -875,6 +876,8 @@ function PLUGIN:ToggleSpectateArena(ply)
 	table.insert(self.Arenas["rp_marsh_cs"]["swampsarena"]["spectators"], ply)
 	ply:SetLocalVar("arenaSpectate", true)
 	ply:SetLocalVar("arenaSpectateTargetIndex", 1)
+	-- Observers keep their PAC parts, which would follow the spectated fighter and draw over them.
+	ply:ResetParts()
 	ply:Spectate(OBS_MODE_CHASE)
 	ply:SpectateEntity(self.Arenas["rp_marsh_cs"]["swampsarena"]["players"][1].player)
 	ply:SetNetVar("canShoot", false)
