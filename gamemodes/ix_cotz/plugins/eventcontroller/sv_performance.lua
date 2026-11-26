@@ -6,7 +6,7 @@ PLUGIN.corpses = {}
 local PROXIMITY_INTERVAL = 0.5
 local PLAYER_CACHE_INTERVAL = 0.25
 local CORPSE_SAFE_RANGE = 1500
-local playerPositions, nextPlayerCache = {}, 0
+local playerPositions, activePositions, nextPlayerCache = {}, {}, 0
 local searchTick, searches = -1, 0
 local nextUpdate = 0
 local rejected = 0
@@ -18,24 +18,41 @@ function PLUGIN:UpdatePlayerCache()
 	local now = CurTime()
 	if now < nextPlayerCache then return end
 	nextPlayerCache = now + PLAYER_CACHE_INTERVAL
-	playerPositions = {}
+	playerPositions, activePositions = {}, {}
 	self.combatPlayers = {}
 	for _, client in player.Iterator() do
-		playerPositions[#playerPositions + 1] = client:GetPos()
+		local position = client:GetPos()
+		playerPositions[#playerPositions + 1] = position
+		-- Seated players also report noclip. Ragdolled players report observer movetype, so they still count.
+		if client:GetMoveType() ~= MOVETYPE_NOCLIP or client:InVehicle() then
+			activePositions[#activePositions + 1] = position
+		end
 		self.combatPlayers[#self.combatPlayers + 1] = client
 	end
 end
 
-function PLUGIN:HasPlayerNear(position, range)
-	self:UpdatePlayerCache()
+local function isAnyNear(positions, position, range)
 	local distanceSquared = range * range
-	for _, playerPosition in ipairs(playerPositions) do
+	for _, playerPosition in ipairs(positions) do
 		if position:DistToSqr(playerPosition) <= distanceSquared then
 			return true
 		end
 	end
 
 	return false
+end
+
+function PLUGIN:HasPlayerNear(position, range)
+	self:UpdatePlayerCache()
+
+	return isAnyNear(playerPositions, position, range)
+end
+
+-- Excludes observers, so they do not wake NPCs or keep them awake.
+function PLUGIN:HasActivePlayerNear(position, range)
+	self:UpdatePlayerCache()
+
+	return isAnyNear(activePositions, position, range)
 end
 
 function PLUGIN:GetPopulation(position, range, includeQueued)

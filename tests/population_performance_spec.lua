@@ -107,6 +107,11 @@ assert(load("local populate, spawntime = false, 0\n" .. thinkSource, "@eventcont
 table.IsEmpty = function(value) return next(value) == nil end
 PLUGIN.eventpoints = {}
 check(ix.eventController == PLUGIN, "eventcontroller owns the AI services and population policy")
+MOVETYPE_NOCLIP = MOVETYPE_NOCLIP or 8
+local function fakeClient(x, moveType, seated)
+	return {GetPos = function() return vector(x) end, GetMoveType = function() return moveType or 2 end,
+		InVehicle = function() return seated == true end}
+end
 local function reset()
 	performance.mutants = {}
 	performance.combatActors, performance.combatPacks, performance.combatBuckets = {}, {}, {}
@@ -165,12 +170,22 @@ check(not entity.cotzSleeping, "combat grace prevents immediate resleep")
 now = now + 16
 entity:STALKERNPCUpdateSleep()
 check(entity.cotzSleeping, "inactive mutant sleeps after combat grace")
-clients = {{GetPos = function() return vector(5500) end}}
+clients = {fakeClient(5500, MOVETYPE_NOCLIP)}
+now = now + 1
+entity:STALKERNPCUpdateSleep()
+check(entity.cotzSleeping, "observer does not wake sleeping mutant")
+check(performance:HasPlayerNear(vector(10000), 5000), "observer still counts for general proximity")
+clients = {fakeClient(5500, MOVETYPE_NOCLIP, true)}
+now = now + 1
+entity:STALKERNPCUpdateSleep()
+check(not entity.cotzSleeping, "seated player wakes mutant despite noclip movetype")
+entity.cotzSleeping, entity.cotzAwakeUntil = true, 0
+clients = {fakeClient(5500)}
 now = now + 1
 entity:STALKERNPCUpdateSleep()
 check(not entity.cotzSleeping, "player inside wake distance wakes mutant")
 entity.cotzAwakeUntil = 0
-clients = {{GetPos = function() return vector(4500) end}}
+clients = {fakeClient(4500)}
 now = now + 1
 entity:STALKERNPCUpdateSleep()
 check(not entity.cotzSleeping, "hysteresis keeps an awake mutant awake between the two distances")
@@ -226,7 +241,7 @@ bodyB.beingSkinned = false
 step()
 check(bodyB.invalid, "expired corpse is removed after skinning finishes")
 reset()
-clients = {{GetPos = function() return vector(0) end}}
+clients = {fakeClient(0)}
 local nearA, nearB = mutant(1, 0), mutant(2, 100)
 performance:TrackCorpse(nearA)
 performance:TrackCorpse(nearB)
@@ -240,7 +255,7 @@ step()
 check(created == before + 2, "spawn queue obeys the per-tick budget")
 step()
 check(created == before + 3, "remaining spawns run on later ticks")
-clients = {{GetPos = function() return vector(0) end}}
+clients = {fakeClient(0)}
 performance:QueueMutant("npc_mutant_dog", vector(0), 1500)
 step()
 check(created == before + 3, "queued spawns recheck player safety")

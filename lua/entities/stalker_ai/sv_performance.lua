@@ -42,7 +42,7 @@ function ENT:STALKERNPCUpdateSleep()
 
 	local wakeRange = getConfig("mutantWakeRange", 5000)
 	local range = self.cotzSleeping and wakeRange or math.max(wakeRange, getConfig("mutantSleepRange", 6000))
-	if ix.eventController:HasPlayerNear(self:GetPos(), range) then
+	if ix.eventController:HasActivePlayerNear(self:GetPos(), range) then
 		if self.cotzSleeping then self:STALKERNPCWake() end
 		self.cotzAwakeUntil = CurTime() + COMBAT_HOLD
 		return
