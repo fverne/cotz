@@ -1,46 +1,35 @@
 local PLUGIN = PLUGIN
 
-PLUGIN.HumanModels = {
-    --bandit
-    "models/bandit/bandit_regulare.mdl",
-    "models/bandit/bandit_veteran.mdl",
-    "models/bandit/bandit_novice.mdl",
+local LOOT_SOUND = "stalkersound/inv_medkit1.mp3"
+local LOOT_TIME = 2
+local activeLoots = {}
 
-    --zombifiedbandit
-    "models/zombied/zombi_novice.mdl",
-    "models/zombied/zombi_novice2.mdl",
-    "models/zombied/zombiestalker2a.mdl",
-    "models/zombied/zombiestalker2.mdl",
+local function finishLoot(client, operation)
+    if activeLoots[client] ~= operation then return end
 
-    --mercs
-    "models/killer/killer.mdl",
-    "models/killer/mask.mdl",
+    activeLoots[client] = nil
+    if IsValid(operation.npc) then operation.npc:SetNetVar("beingLooted", false) end
+    if IsValid(client) then client:SetNetVar("IsLooting", false) end
+end
 
-    --zombified mercs
-    "models/zombied/zombifiedstalker3.mdl",
+local function cancelLoot(client, operation)
+    if IsValid(operation.npc) then operation.npc:StopSound(LOOT_SOUND) end
+    ix.util.PlayerActionInterrupt(client)
+    finishLoot(client, operation)
+end
 
-    --military
-    "models/military/soldier.mdl",
-    "models/military/elita.mdl",
+function PLUGIN:PlayerButtonDown(client, key)
+    local operation = activeLoots[client]
+    if key ~= KEY_F or not operation then return end
 
-    --zombified military
-    "models/zombied/berillzombie.mdl",
-    "models/zombied/zombi_spec.mdl",
-    "models/zombied/zombi_skat.mdl",
-}
-
-function PLUGIN:PlayerButtonDown(client,key)
-    local Hit = client:GetEyeTraceNoCursor()
-    local npc = Hit.Entity
-    if (client:GetNetVar("IsLooting") == true && key == KEY_F ) then
-       ix.util.PlayerActionInterrupt(client)
-       npc:SetNetVar("beingLooted",false)
-    end
+    cancelLoot(client, operation)
 end
 
 function PLUGIN:KeyPress(client, key)
-    if (client:GetNetVar("IsLooting") == true ) then
-       ix.util.PlayerActionInterrupt(client)
+    local operation = activeLoots[client]
+    if operation then
+        cancelLoot(client, operation)
+        return
     end
 
     local Hit = client:GetEyeTraceNoCursor()
@@ -49,7 +38,7 @@ function PLUGIN:KeyPress(client, key)
     if !(IsValid(npc)) then
         return
     end
-    if !(table.HasValue(self.HumanModels, npc:GetModel())) then
+    if !npc.cotzHumanCorpse then
         return
     end
     if client:GetCharacter() and client:Alive() then
@@ -85,7 +74,7 @@ function PLUGIN:BeginLooting(client, npc)
     end
     if npc then
         if (npc:IsRagdoll() and npc:GetPos():Distance(client:GetPos()) <= 55) then
-            if !(table.HasValue(self.HumanModels, npc:GetModel())) then
+            if !npc.cotzHumanCorpse then
                 return
             end
 
@@ -102,20 +91,16 @@ function PLUGIN:BeginLooting(client, npc)
 
 
             npc:SetNetVar("beingLooted", true)
-            npc:EmitSound("stalkersound/inv_medkit1.mp3",60,120)
-            client:SetNetVar("isLooting", true)
+            local operation = {npc = npc}
+            activeLoots[client] = operation
+            npc:EmitSound(LOOT_SOUND, 60, 120)
+            client:SetNetVar("IsLooting", true)
 
-            timer.Simple(2, function()
-                if (IsValid(npc)) then
-                    npc:SetNetVar("beingLooted", false)
-                end
-            end)
+            ix.util.PlayerPerformBlackScreenAction(client, "Looting", LOOT_TIME, function(player)
+                if activeLoots[player] ~= operation then return end
+                finishLoot(player, operation)
+                if not IsValid(npc) then return end
 
-            ix.util.PlayerPerformBlackScreenAction(client, "Looting", 2, function(player)
-                if not player:GetNetVar("isLooting") then
-                    npc:StopSound("stalkersound/inv_medkit1.mp3")
-                    return
-                end
                 if lootclass then
                     local position = client:GetItemDropPos()
                     local idat = ix.util.GetRandomItemFromPool(lootclass)
@@ -131,7 +116,11 @@ function PLUGIN:BeginLooting(client, npc)
                     client:Notify("You found nothing.")
                 end
                 npc:SetNetVar("loot", "")
-                player:SetNetVar("IsLooting", false)
+            end)
+
+            -- The shared action helper skips its callback when another system interrupts it.
+            timer.Simple(LOOT_TIME + 0.1, function()
+                finishLoot(client, operation)
             end)
         end
     end
