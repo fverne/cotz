@@ -20,9 +20,10 @@ function ix.util.GetItemIcon(item)
 			item.height,
 			item:GetModel(),
 			item.iconCam,
-			nil,
+			true,
 			item:GetMaterial()
 		)
+        -- Stays false until ikon's deferred load finishes on the next tick; callers retry on later paints.
         icon = ikon:GetIcon(item.uniqueID)
     end
 

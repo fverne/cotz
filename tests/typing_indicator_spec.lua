@@ -36,13 +36,12 @@ local environment = {
 	},
 }
 
-local path = "gamemodes/helix/plugins/typing.lua"
+local path = "gamemodes/ix_cotz/plugins/typing.lua"
 local file = assert(io.open(path))
 local source = file:read("*a")
 file:close()
--- Load the actual server branch without parsing the client renderer's GLua-only syntax.
-local serverSource = assert(source:match("\nelse\n(.*)\nend%s*$"))
-assert(load(serverSource, "@" .. path, "t", environment))()
+-- The COTZ file replaces only the bundled plugin's server receiver and spawn reset.
+assert(load(source, "@" .. path, "t", environment))()
 
 local position = {}
 local client = {GetPos = function() return position end}

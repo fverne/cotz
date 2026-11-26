@@ -97,10 +97,12 @@ end}
 local inventoryPath = "gamemodes/helix/gamemode/core/meta/sh_inventory.lua"
 for _, method in ipairs({
 	"GetID", "GetSize", "SetSize", "GetItems", "GetItemByID", "GetItemAt", "GetBags",
-	"CanItemFit", "FindEmptySlot", "Remove", "Iter",
+	"CanItemFit", "FindEmptySlot", "Remove",
 }) do
 	loadMethod(inventoryPath, "function META:" .. method .. "(", {META = inventoryMeta, ix = ix})
 end
+-- COTZ replaces the bundled iterator from its schema meta file; Helix itself is unmodified.
+loadMethod("gamemodes/ix_cotz/schema/meta/sh_inventory.lua", "function ix.meta.inventory:Iter(", {ix = ix})
 function inventoryMeta:GetReceivers() return self.client and {self.client} or {} end
 function inventoryMeta:Sync() self.syncs = (self.syncs or 0) + 1 end
 function inventoryMeta:OnCheckAccess(client) return self.client == client end

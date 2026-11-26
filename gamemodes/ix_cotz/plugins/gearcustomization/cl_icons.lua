@@ -17,7 +17,7 @@ function ix.gearAppearance.GetIcon(item)
 	local material = ikon:GetIcon(key)
 	if material then return material end
 	renderContext = item
-	ikon:renderIcon(key, item.width, item.height, item:GetModel(), item.iconCam, nil, item:GetMaterial())
+	ikon:renderIcon(key, item.width, item.height, item:GetModel(), item.iconCam, true, item:GetMaterial())
 	renderContext = nil
 
 	return ikon:GetIcon(key)

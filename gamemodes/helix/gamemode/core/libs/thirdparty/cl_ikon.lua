@@ -43,11 +43,6 @@
 ]]--
 
 ikon = ikon or {}
-local ICON_CACHE_PREFIX = "v2_"
-if ikon.cachePrefix ~= ICON_CACHE_PREFIX then
-	ikon.cache = {}
-	ikon.cachePrefix = ICON_CACHE_PREFIX
-end
 ikon.cache = ikon.cache or {}
 ikon.requestList = ikon.requestList or {}
 ikon.dev = false
@@ -58,10 +53,6 @@ IKON_PROCESSING = 0
 IKON_SOMETHINGWRONG = -1
 
 local schemaName = schemaName or (Schema and Schema.folder)
-
-local function iconPath(name)
-	return "helix/icons/" .. schemaName .. "/" .. ICON_CACHE_PREFIX .. name .. ".png"
-end
 
 --[[
 	Initialize hooks and RT Screens.
@@ -155,12 +146,7 @@ function ikon:renderHook()
 	xpcall(function()
 			render.OverrideAlphaWriteEnable(true, true) -- some playermodel eyeballs will not render without this
 			render.SetWriteDepthToDestAlpha(false)
-			-- Keep the source colour for the PNG and attenuate underlying colour and coverage
-			-- by opacity. Opaque receiver faces fully replace magazine pixels drawn behind them.
-			render.OverrideBlend(true,
-				BLEND_ONE, BLEND_ONE_MINUS_SRC_ALPHA, BLENDFUNC_ADD,
-				BLEND_ONE, BLEND_ONE_MINUS_SRC_ALPHA, BLENDFUNC_ADD
-			)
+			render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
 			render.SuppressEngineLighting(true)
 			render.Clear(0, 0, 0, 0, true, true)
 
@@ -244,7 +230,6 @@ function ikon:renderHook()
 	end, function(message)
 		print(message)
 	end)
-	render.OverrideBlend(false)
 end
 
 function ikon:showResult()
@@ -262,7 +247,7 @@ end
 	Renders the Icon with given arguments.
 	returns nothing
 ]]--
-function ikon:renderIcon(name, w, h, mdl, camInfo, updateCache, material)
+function ikon:renderIcon(name, w, h, mdl, camInfo, updateCache)
 	if (#ikon.requestList > 0) then return IKON_BUSY end
 	if (ikon.requestList[name]) then return IKON_PROCESSING end
 	if (!w or !h or !mdl) then return IKON_SOMETHINGWRONG end
@@ -287,7 +272,6 @@ function ikon:renderIcon(name, w, h, mdl, camInfo, updateCache, material)
 	end
 
 	ikon.renderEntity:SetModel(ikon.renderModel)
-	ikon.renderEntity:SetMaterial(material or "")
 
 	local bone = ikon.renderEntity:LookupBone("ValveBiped.Bip01_Head1")
 
@@ -311,7 +295,7 @@ function ikon:renderIcon(name, w, h, mdl, camInfo, updateCache, material)
 		h = h
 	})
 
-	file.Write(iconPath(name), capturedIcon)
+	file.Write("helix/icons/" .. schemaName .. "/" .. name .. ".png", capturedIcon)
 	ikon.info = nil
 	render.PopRenderTarget()
 
@@ -340,9 +324,8 @@ function ikon:GetIcon(name)
 		return ikon.cache[name] -- yeah return cache
 	end
 
-	local path = iconPath(name)
-	if (file.Exists(path, "DATA")) then
-		ikon.cache[name] = Material("../data/" .. path)
+	if (file.Exists("helix/icons/" .. schemaName .. "/" .. name .. ".png", "DATA")) then
+		ikon.cache[name] = Material("../data/helix/icons/" .. schemaName .. "/".. name ..".png")
 		return ikon.cache[name] -- yeah return cache
 	else
 		return false -- retryd

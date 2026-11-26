@@ -95,7 +95,7 @@ if (SERVER) then
 		inventory.storageInfo = info
 
 		-- remove context from any bags this inventory might have
-		for _, k in pairs(inventory:GetItems()) do
+		for k, _ in inventory:Iter() do
 			if (k.isBag and k:GetInventory()) then
 				ix.storage.CreateContext(k:GetInventory(), table.Copy(info))
 			end
@@ -110,7 +110,7 @@ if (SERVER) then
 		inventory.storageInfo = nil
 
 		-- remove context from any bags this inventory might have
-		for _, k in pairs(inventory:GetItems()) do
+		for k, _ in inventory:Iter() do
 			if (k.isBag and k:GetInventory()) then
 				ix.storage.RemoveContext(k:GetInventory())
 			end
@@ -159,7 +159,7 @@ if (SERVER) then
 			client.ixOpenStorage = inventory
 
 			-- update receivers for any bags this inventory might have
-			for _, k in pairs(inventory:GetItems()) do
+			for k, _ in inventory:Iter() do
 				if (k.isBag and k:GetInventory()) then
 					k:GetInventory():AddReceiver(client)
 				end
@@ -192,7 +192,7 @@ if (SERVER) then
 			inventory:RemoveReceiver(client)
 
 			-- update receivers for any bags this inventory might have
-			for _, k in pairs(inventory:GetItems()) do
+			for k, _ in inventory:Iter() do
 				if (k.isBag and k:GetInventory()) then
 					k:GetInventory():RemoveReceiver(client)
 				end

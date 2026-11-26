@@ -160,7 +160,8 @@ Other generic records still need their owning plugin's save support. Existing ex
 | `ix_dataextractpc` | `inworldtasks` |
 
 For scenery or another unsupported entity, inspect its persistence mechanism.
-Helix's [`persistence`](../gamemodes/helix/plugins/persistence.lua) plugin provides
+Helix's [`persistence`](../gamemodes/helix/plugins/persistence.lua) plugin, extended by
+[COTZ](../gamemodes/ix_cotz/plugins/persistence.lua) to save light entities and their key values, provides
 a property-menu persistence action; FTS marks exported `persistent = true` records
 for it. Avoid assigning two persistence systems to the same entity. Verify the
 result after restarting; a frozen entity alone is not a saved entity.
