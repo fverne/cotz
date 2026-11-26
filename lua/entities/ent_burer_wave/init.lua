@@ -46,7 +46,7 @@ function ENT:Detonate(ent,data)
 						
 	TEMP_TargetDamage:SetDamage(self.TouchDamage)
 	TEMP_TargetDamage:SetAttacker(self)
-	TEMP_TargetDamage:SetDamageType(DMG_ACID)
+	TEMP_TargetDamage:SetDamageType(DMG_CRUSH)
 	TEMP_TargetDamage:SetInflictor(self)
 	TEMP_TargetDamage:SetDamagePosition(ent:NearestPoint(self:GetPos()))
 	TEMP_TargetDamage:SetDamageForce(self:GetForward()*10000)
