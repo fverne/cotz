@@ -82,17 +82,25 @@ function ENT:STALKERNPCFlightWanderGoal(now)
 	return self.cotzFlightWander
 end
 
+-- Where to steer while the enemy is in sight, and how close to get. Flyers with their own combat movement
+-- override this.
+function ENT:STALKERNPCFlightCombatGoal(enemy)
+	local goal = enemy:WorldSpaceCenter()
+	if self:GetPos():DistToSqr(goal) > self.FlightCruiseRange ^ 2 then
+		goal = goal + Vector(0, 0, self.FlightCruiseHeight)
+	end
+
+	return goal, self:STALKERNPCFlightHoldDistance()
+end
+
 -- Returns the goal, whether the flyer is engaged in combat, and the distance at which it should stop.
 function ENT:STALKERNPCFlightGoal(now)
 	local enemy = self:GetEnemy()
 	if IsValid(enemy) then
 		if self.cotzPlayerVisible ~= false and self:Visible(enemy) then
-			local goal = enemy:WorldSpaceCenter()
-			if self:GetPos():DistToSqr(goal) > self.FlightCruiseRange ^ 2 then
-				goal = goal + Vector(0, 0, self.FlightCruiseHeight)
-			end
+			local goal, stopDistance = self:STALKERNPCFlightCombatGoal(enemy, now)
 
-			return goal, true, self:STALKERNPCFlightHoldDistance()
+			return goal, true, stopDistance
 		end
 
 		-- Pursue the position COTZ last observed, never the hidden player's live position.

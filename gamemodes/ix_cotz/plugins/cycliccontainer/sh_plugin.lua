@@ -4,12 +4,19 @@ PLUGIN.desc = "Makes containers appear and disappear in semi-random intervals. U
 
 ix.util.Include("sh_definitions.lua")
 ix.util.Include("sh_stashtypes.lua")
+ix.util.Include("sv_mimicambush.lua")
+
+ix.config.Add("mimicAmbushChance", 8, "Percent chance, rolled once per appearance, that opening a cyclical container draws a Mimic.", nil, {
+	data = {min = 0, max = 100},
+	category = "Cyclical Containers",
+})
 
 if SERVER then
 
 	function PLUGIN:AppearContainer(containerent)
 		containerent:SetNoDraw(false)
 		containerent:SetCollisionGroup(COLLISION_GROUP_WORLD)
+		containerent.cotzMimicRolled = nil
 
 		local selectedStashType = table.Random(self.categoryDefs[containerent:GetCyclicalCategory()].allowedStashTypes)
 		local inventory = containerent:GetInventory()

@@ -46,7 +46,7 @@ ix.jobs.killCredit = {
 		triggers = {"catKilled", "groupPredatorKilled"},
 	},
 	{
-		classes = {"npc_mutant_bloodsucker"},
+		classes = {"npc_mutant_bloodsucker", "npc_mutant_bloodsucker_swamp"},
 		triggers = {"bloodsuckerKilled", "groupPredatorKilled", "groupHumanoidKilled"},
 	},
 	{
@@ -125,5 +125,17 @@ ix.jobs.killCredit = {
 	{
 		classes = {"npc_mutant_skeleton"},
 		triggers = {"skeletonKilled"},
+	},
+	{
+		classes = {"npc_mutant_mimic"},
+		triggers = {"mimicKilled", "groupPsyKilled"},
+	},
+	{
+		classes = {
+			"npc_mutant_poltergeist_fire",
+			"npc_mutant_poltergeist_electro",
+			"npc_mutant_poltergeist_tele",
+		},
+		triggers = {"poltergeistKilled", "groupPsyKilled"},
 	},
 }

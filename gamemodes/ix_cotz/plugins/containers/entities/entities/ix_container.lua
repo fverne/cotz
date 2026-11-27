@@ -86,6 +86,8 @@ if (SERVER) then
 					ix.log.Add(activator, "closeContainer", name, inventory:GetID())
 				end
 			})
+			-- Fires before the search timer; listeners must confirm the activator still has the storage open.
+			hook.Run("cotz/containers/open-started", self, activator, inventory)
 
 			if (self:GetLocked()) then
 				self.Sessions[activator:GetCharacter():GetID()] = true

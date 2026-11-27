@@ -455,6 +455,56 @@ ix.armortables.attachments["hide_pseudogiant"] = {
 }
 
 
+-- Placeholder hides grant no protection until they are balanced.
+ix.armortables.attachments["hide_izlom"] = {
+	name = "Izlom Hide",
+	weight = 1.400,
+	uID = "hide_izlom",
+	slot = "exteriorSlots",
+}
+
+ix.armortables.attachments["hide_hellhound"] = {
+	name = "Hellhound Hide",
+	weight = 1.600,
+	uID = "hide_hellhound",
+	slot = "exteriorSlots",
+}
+
+ix.armortables.attachments["hide_swampbloodsucker"] = {
+	name = "Swamp Bloodsucker Hide",
+	weight = 1.600,
+	uID = "hide_swampbloodsucker",
+	slot = "exteriorSlots",
+}
+
+ix.armortables.attachments["hide_mimic"] = {
+	name = "Mimic Hide",
+	weight = 1.200,
+	uID = "hide_mimic",
+	slot = "exteriorSlots",
+}
+
+ix.armortables.attachments["hide_firepoltergeist"] = {
+	name = "Fire Poltergeist Hide",
+	weight = 1.000,
+	uID = "hide_firepoltergeist",
+	slot = "exteriorSlots",
+}
+
+ix.armortables.attachments["hide_electropoltergeist"] = {
+	name = "Electric Poltergeist Hide",
+	weight = 1.000,
+	uID = "hide_electropoltergeist",
+	slot = "exteriorSlots",
+}
+
+ix.armortables.attachments["hide_telepoltergeist"] = {
+	name = "Telekinetic Poltergeist Hide",
+	weight = 1.000,
+	uID = "hide_telepoltergeist",
+	slot = "exteriorSlots",
+}
+
 -- ARMOR UPGRADES --
 ix.armortables.upgrades = {}
 ix.armortables.upgrades["integratedceramics"] = {

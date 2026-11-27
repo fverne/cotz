@@ -19,7 +19,8 @@ local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true,
 local PREY = {boar = true, flesh = true, tark = true, rodent = true, tushkano = true}
 local SPECIES_ALIASES = {dog = "blinddog", psydog_phantom = "psydog", rodent = "tushkano",
 	chimera_electro = "electrochimera", classiczombie = "zombie", classiczombie_babka = "zombie",
-	classiczombie_radio = "zombie", classiczombie_volatile = "zombie"}
+	classiczombie_radio = "zombie", classiczombie_volatile = "zombie", bloodsucker_swamp = "bloodsucker",
+	poltergeist_fire = "poltergeist", poltergeist_electro = "poltergeist", poltergeist_tele = "poltergeist"}
 
 PLUGIN.combatActors = {}
 PLUGIN.combatPacks = {}

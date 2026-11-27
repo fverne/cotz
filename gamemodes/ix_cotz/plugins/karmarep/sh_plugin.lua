@@ -275,6 +275,26 @@ function PLUGIN:OnNPCKilled(entity, attacker, inflictor)
 	  if class == "npc_mutant_tark" then
 	    attacker:addReputation(2)
 	  end
+
+	  if class == "npc_mutant_bloodsucker_swamp" then
+	    attacker:addReputation(1.5)
+	  end
+
+	  if class == "npc_mutant_mimic" then
+	    attacker:addReputation(3)
+	  end
+
+	  if class == "npc_mutant_poltergeist_fire" then
+	    attacker:addReputation(3)
+	  end
+
+	  if class == "npc_mutant_poltergeist_electro" then
+	    attacker:addReputation(3)
+	  end
+
+	  if class == "npc_mutant_poltergeist_tele" then
+	    attacker:addReputation(3)
+	  end
 	end
 end
 

@@ -97,6 +97,15 @@ The remaining rules are proposed project defaults.
   When a framework change is necessary, explain why and preserve its upstream conventions and credits.
 - Preserve unrelated local changes. Do not commit, push, or publish unless the user requests it.
 
+## Mutants
+
+- Every implemented mutant NPC ships with its harvest items. Where one should exist and has no finished
+  design, add a placeholder item rather than leaving a gap: a hide for every skinned creature, plus its part,
+  raw meat and cooked meal as appropriate. Placeholders have a real name, descriptions and model, but no
+  meaningful combat stats; mark their status in a Lua comment, never in player-facing text.
+- Make each item obtainable by poaching the mutant and complete the rest of the registration in the
+  [new mutant checklist](docs/mutant-base.md#new-mutant-checklist).
+
 ## Writing
 
 - Before authoring or revising COTZ prose, read [the writing guide](docs/writing-guide.md) and

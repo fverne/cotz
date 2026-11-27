@@ -5,12 +5,15 @@ ix.poaching = ix.poaching or {}
 ix.poaching.MutantTable = {
 	["models/monsters/izlom.mdl"] = "izlom",
 	["models/monsters/zombie.mdl"] = "classiczombie",
+	["models/monsters/zombie2.mdl"] = "classiczombie",
 	["models/monsters/babka.mdl"] = "classiczombie",
 	["models/stalkertnb/rodent1.mdl"] = "tushkano",
 	["models/monsters/snork2.mdl"] = "snork",
 	["models/monsters/psydog2.mdl"] = "pseudodog",
 	["models/monsters/psydog.mdl"] = "psydog",
 	["models/monsters/krovosos.mdl"] = "bloodsucker",
+	["models/monsters/krovosos2.mdl"] = "swampbloodsucker",
+	["models/monsters/mimikria.mdl"] = "mimic",
 	["models/monsters/plot.mdl"] = "flesh",
 	["models/monsters/slep_dog2.mdl"] = "dog",
 	["models/monsters/slep_dog.mdl"] = "hellhound",
@@ -42,7 +45,7 @@ ix.poaching.MutantParts = {
 	},
 	["izlom"] = {
 		["meattype"] = "meat_human",
-		["parts"] = {{"part_izlom", 15}}, -- {"hide_izlom", 2}},
+		["parts"] = {{"part_izlom", 15}, {"hide_izlom", 2}},
 	},
 	["classiczombie"] = {
 		["meattype"] = "meat_human",
@@ -67,6 +70,26 @@ ix.poaching.MutantParts = {
 	["bloodsucker"] = {
 		["meattype"] = "meat_bloodsucker",
 		["parts"] = {{"part_bloodsucker", 25}, {"hide_bloodsucker", 2}},
+	},
+	["swampbloodsucker"] = {
+		["meattype"] = "meat_bloodsucker",
+		["parts"] = {{"part_swampbloodsucker", 25}, {"hide_swampbloodsucker", 3}},
+	},
+	["mimic"] = {
+		["meattype"] = "meat_mimic",
+		["parts"] = {{"part_mimic", 25}, {"hide_mimic", 3}},
+	},
+	["firepoltergeist"] = {
+		["meattype"] = "meat_poltergeist",
+		["parts"] = {{"part_firepoltergeist", 25}, {"hide_firepoltergeist", 3}},
+	},
+	["electropoltergeist"] = {
+		["meattype"] = "meat_poltergeist",
+		["parts"] = {{"part_electropoltergeist", 25}, {"hide_electropoltergeist", 3}},
+	},
+	["telepoltergeist"] = {
+		["meattype"] = "meat_poltergeist",
+		["parts"] = {{"part_telepoltergeist", 25}, {"hide_telepoltergeist", 3}},
 	},
 	["flesh"] = {
 		["meattype"] = "meat_flesh",
@@ -126,7 +149,7 @@ ix.poaching.MutantParts = {
 	},
 	["hellhound"] = {
 		["meattype"] = "meat_hellhound",
-		["parts"] = {{"part_hellhound", 50}},-- {"hide_hellhound", 3}},
+		["parts"] = {{"part_hellhound", 50}, {"hide_hellhound", 3}},
 	},
 	["electrochimera"] = {
 		["meattype"] = "meat_chimera",
@@ -182,6 +205,11 @@ local function ownedKnife(client, knifeID)
 	return knife
 end
 
+-- Corpses may name their harvest directly; otherwise the ragdoll model identifies the mutant.
+local function corpseMutant(ragdoll)
+	return ragdoll.cotzPoachType or ix.poaching.MutantTable[ragdoll:GetModel()]
+end
+
 function PLUGIN:PlayerButtonDown(client, key)
 	local operation = activePoaches[client]
 	if key ~= KEY_F or not operation then return end
@@ -200,7 +228,7 @@ function PLUGIN:KeyPress(client, key)
 	if key ~= IN_USE or not client:Alive() or not client:GetCharacter() then return end
 	local npc = client:GetEyeTraceNoCursor().Entity
 	if not IsValid(npc) or not npc:IsRagdoll() then return end
-	local mutant = ix.poaching.MutantTable[npc:GetModel()]
+	local mutant = corpseMutant(npc)
 	if not mutant or npc:GetPos():Distance(client:GetPos()) > POACH_DISTANCE then return end
 	for _, knife in pairs(client:GetCharacter():GetInventory():GetItems()) do
 		if knife.isPoachKnife and knife:GetData("equip", false) then
@@ -252,7 +280,7 @@ function PLUGIN:OpenPoachMenu(client, mutant, knifeID)
 	end
 	local npc = client:GetEyeTraceNoCursor().Entity
 	if not IsValid(npc) or not npc:IsRagdoll() then return end
-	if ix.poaching.MutantTable[npc:GetModel()] ~= mutant then return end
+	if corpseMutant(npc) ~= mutant then return end
 	if npc:GetPos():Distance(client:GetPos()) > POACH_DISTANCE then return end
 	if npc:GetNetVar("beingSkinned", false) then
 		client:Notify("That mutant is being skinned by someone else!")
@@ -276,7 +304,7 @@ function PLUGIN:OpenPoachMenu(client, mutant, knifeID)
 		finishPoach(player, operation)
 		if not wasPoaching or not player:Alive() or player:GetCharacter() ~= character then return end
 		if ownedKnife(player, knifeID) ~= knife or ix.poaching.GetSharpness(knife) <= 0 then return end
-		if not IsValid(npc) or ix.poaching.MutantTable[npc:GetModel()] ~= mutant then return end
+		if not IsValid(npc) or corpseMutant(npc) ~= mutant then return end
 		if npc:GetPos():Distance(player:GetPos()) > POACH_DISTANCE then return end
 		local knifeTier = ix.poaching.GetKnifeTier(knife)
 		ix.poaching.WearKnife(knife)

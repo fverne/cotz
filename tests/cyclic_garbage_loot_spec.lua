@@ -11,9 +11,12 @@ end
 SERVER = true
 COLLISION_GROUP_WORLD = 20
 PLUGIN = {}
+Vector = function() return {} end
+hook = {Add = function() end}
 ix = {
 	util = {Include = function(path) dofile(root .. "cycliccontainer/" .. path) end},
 	command = {Add = function() end},
+	config = {Add = function() end},
 	type = {string = 1},
 	randomitems = {tables = {}},
 }

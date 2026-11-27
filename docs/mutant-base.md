@@ -175,12 +175,74 @@ position, a combat approach point or objective, and otherwise wander. They stop 
 animations and abilities. They sleep in the air under the normal population manager. Melee requires the
 target's height to overlap the flyer's hull, so melee flyers descend to the target's center.
 
+## Poltergeists
+
+`lua/entities/stalker_ai_poltergeist/` is the shared base of the three `npc_mutant_poltergeist_*` classes.
+It is an invisible flyer: the client draws only the element's orb (a looping `wick_*` particle, glow and light)
+and briefly shows the body as a distortion when it takes damage. The corpse is visible and falls on death.
+It senses in every direction, never melees, laughs while alive and circles a visible enemy at 300-560 units by
+overriding `STALKERNPCFlightCombatGoal(enemy, now)`, which any flyer may do to choose its own combat
+position. Each element is immune to its own damage type.
+
+Concrete classes inherit `stalker_ai_poltergeist` and must not include `STALKERNPCBaseVars.lua`, which would
+reset the shared tuning. Inherit from `stalker_ai` directly for any other variant of an existing mutant:
+GMod merges parent and child tables key by key, so a shorter child `ENT.Abilities` keeps the parent's extra
+abilities.
+
+| Class | Attacks |
+| --- | --- |
+| Fire | Three flames in turn where the enemy is heading. `ent_poltergeist_flame` smoulders, then burns a column. |
+| Electric | A volley of three slow, loosely homing `ent_poltergeist_spark`, and a close-range discharge. |
+| Telekinetic | Lifts and throws three objects, and shoves nearby players away. |
+
+The telekinetic poltergeist borrows nearby loose `prop_physics` (unfrozen, unconstrained, not persisted, up to
+80 mass) and conjures temporary debris for the rest. Each object belongs to one `ent_poltergeist_grip`, which
+deals the hit itself, keeps the object from colliding with players, and restores a borrowed prop's gravity and
+collision group after a throw, death, sleep or removal. Borrowed props stay where they land.
+
+## Mimic
+
+`npc_mutant_mimic` runs and claws on the ground. Every 6-9 seconds, while it can see its enemy and finds room,
+its `aerial` ability vanishes, takes a perch in the air with a clear line to the enemy, fires an
+`ent_mimic_ball`, takes a second perch, fires again and lands near the enemy. The orb deals separate impact
+(`DMG_CLUB`) and PsyHealth (`DMG_SONIC`) damage. `sv_perches.lua` owns the position searches, which run only
+when an aerial attack is considered or performed. If no landing spot passes, it returns to its takeoff point.
+
+Mimics also ambush players at cyclical containers (`cycliccontainer/sv_mimicambush.lua`). The first completed
+search of each appearance rolls the `mimicAmbushChance` config (8 percent; 0 disables); an interrupted search
+does not spend the roll, and later openers never reroll it. The mimic spawns on a nodegraph node in the same
+connected component as the node beside the container, falling back to other validated ground nearby, and obeys
+the mutant population limit. It calls out, then hunts the opener for 30 seconds, even around corners.
+
+`ent_cotz_orb` is the shared mutant projectile: Lua movement with one hull trace per tick, optional homing and
+an `Impact(trace)` override.
+
+## New mutant checklist
+
+1. Entity folder inheriting `stalker_ai` (or a shared base), with `PrintName` and `Information`.
+2. `lua/autorun/snpcmutants.lua`: spawn menu entry, death-notice name, sounds and any particles.
+3. Items, using placeholders where unfinished: part, hide, raw meat and meal (variants may share their
+   family's meat). Hides need an `ix.armortables.attachments` entry; placeholder entries have no resistances.
+4. Poaching: a `MutantParts` entry, reached through `MutantTable` when the corpse model is unique or through
+   `ENT.PoachingType` when it is shared.
+5. Vendor `BUYONLY` rows for parts and hides, and the matching `disabledItems` entries in
+   `townnpcs/definitions/sh_the_original.lua`.
+6. Kill credit, reputation, and a `SPECIES_ALIASES` entry in `eventcontroller/sv_combat.lua` for variants.
+
+Natural spawns (`eventcontroller/sh_eventdefs.lua`), hunting jobs and requirement pools are balance decisions;
+add them only when asked. `tests/mutant_harvest_spec.lua` checks steps 3 and 4 for every mutant.
+
+The swamp bloodsucker, mimic and poltergeists are only admin-spawnable (apart from mimic ambushes). Their
+health and damage values are first-pass tuning.
+
 ## Checks
 
 `tests/mutant_abilities_spec.lua`, `tests/mutant_flight_spec.lua`, `tests/burer_stamina_spec.lua` and
 `tests/mutant_complex_abilities_spec.lua` cover the runner, steering and the migrated mutants;
 `tests/mutant_navigation_spec.lua` covers navigation-started leaps, and
-`tests/mutant_target_safety_spec.lua` covers grabs and spits whose targets disappear. They use mocks; verify
+`tests/mutant_target_safety_spec.lua` covers grabs and spits whose targets disappear.
+`tests/elemental_mutants_spec.lua`, `tests/mimic_ambush_spec.lua` and `tests/mutant_harvest_spec.lua` cover
+the mimic, mutant orbs, poltergeist helpers, container ambushes and harvest coverage. They use mocks; verify
 in a multiplayer session:
 
 1. Burer: stamina drain, blast and shield play their animations, and the shield absorbs damage. A
@@ -196,5 +258,14 @@ in a multiplayer session:
    and the rodent uses its `attack3` animation.
 4. A test flyer (any mutant with `MovementMode = "fly"`) takes off, pursues around corners and over
    walls, holds for melee, follows a hidden player to the last seen position, sleeps and wakes.
-5. Mutants with translucent effects draw correctly: the bloodsucker's cloak, the burer's shield and
+5. Swamp bloodsucker: wears skin 2 or 5, cloaks beyond 150 units, lunges, never freezes players, and its
+   corpse yields the swamp harvest.
+6. Mimic: arrives from a searched cyclical container with its call and goes for the opener; stays put in the
+   air while perched, indoors and out; orbs lower health and PsyHealth; it lands and runs again; a mimic shot
+   in the air falls as a poachable corpse.
+7. Poltergeists (the first mutants to use flight in game): the body is invisible and hittable, each orb and
+   attack effect appears without missing textures, and looping effects stop with their entity. Flames, ball
+   lightning and thrown objects damage players; borrowed props regain collision. Killed poltergeists fall as
+   visible corpses that yield their element's harvest.
+8. Mutants with translucent effects draw correctly: the bloodsucker's cloak, the burer's shield and
    controller psy images. Compare client frame time near a mutant group with the previous version.
