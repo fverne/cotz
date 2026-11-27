@@ -125,6 +125,79 @@ actor.IsAlive = false
 actor:STALKERNPCAbandonAbility()
 check(#actor.positions == teleports, "a mimic killed in the air is left to fall")
 
+-- Shots lead a moving target so that projectile and target reach the aim point together.
+local wall
+util = util or {}
+util.TraceLine = function(trace)
+	if wall then return {Hit = true, HitPos = wall} end
+
+	return {Hit = false, HitPos = trace.endpos}
+end
+
+local shooter = fixture.Actor(base)
+local muzzle = Vector(0, 0, 36)
+local function runner(velocity, grounded)
+	return fixture.Target(Vector(600, 0, 0), {
+		player = true, velocity = velocity,
+		GetMoveType = function() return MOVETYPE_WALK end,
+		IsOnGround = function() return grounded ~= false end,
+	})
+end
+
+local function meets(aim, target, speed)
+	local flight = aim:Distance(muzzle) / speed
+	local arrival = target:WorldSpaceCenter() + target:GetVelocity() * flight
+
+	return aim:Distance(arrival) < 0.01
+end
+
+local still = runner(Vector())
+check(shooter:STALKERNPCPredictAim(still, muzzle, 420):Distance(still:WorldSpaceCenter()) == 0,
+	"a standing target is aimed at directly")
+for _, case in ipairs({
+	{velocity = Vector(0, 250, 0), speed = 420},
+	{velocity = Vector(200, 100, 0), speed = 1100},
+	{velocity = Vector(-300, 0, 0), speed = 2000},
+}) do
+	local target = runner(case.velocity)
+	check(meets(shooter:STALKERNPCPredictAim(target, muzzle, case.speed), target, case.speed),
+		"the projectile and a moving target arrive together")
+end
+local jumper = runner(Vector(0, 200, 300), false)
+check(shooter:STALKERNPCPredictAim(jumper, muzzle, 1100).z == jumper:WorldSpaceCenter().z,
+	"a jump is not extrapolated upwards")
+local sprinter = shooter:STALKERNPCPredictAim(runner(Vector(900, 0, 0)), muzzle, 420)
+check(sprinter.x > 600 and sprinter.x <= 600 + 900 * 3, "an uncatchable target still gets a bounded lead")
+wall = Vector(600, 90, 36)
+check(shooter:STALKERNPCPredictAim(runner(Vector(0, 250, 0)), muzzle, 420) == wall, "walls stop the prediction")
+wall = nil
+
+-- Physics projectiles are capped by the engine, so their lead must use the capped speed.
+local ledWith
+local launcher = fixture.Actor(base, {
+	STALKERNPCPredictAim = function(_, _, _, speed)
+		ledWith = speed
+
+		return Vector(100, 0, 0)
+	end,
+})
+local pushed
+local ballPhysics = {valid = true, SetVelocity = function(_, velocity) pushed = velocity end}
+local function projectile(physicsObject)
+	return {
+		valid = true, SetPos = function() end, SetAngles = function() end, Spawn = function() end,
+		SetOwner = function() end, GetPhysicsObject = function() return physicsObject end,
+	}
+end
+fixture.maxVelocity = 2000
+ents = {Create = function() return projectile(ballPhysics) end}
+launcher:STALKERNPCAbilityLaunchProjectile("ent_fastcontroller_ball", still, 2500, Vector())
+check(ledWith == 2000 and pushed:Length() > 0, "physics balls lead with the capped speed")
+ents = {Create = function() return projectile({valid = false}) end}
+launcher:STALKERNPCAbilityLaunchProjectile("ent_poltergeist_spark", still, 2500, Vector())
+check(ledWith == 2500, "Lua orbs lead with their own speed")
+fixture.maxVelocity = nil
+
 -- Orbs apply impact and psy damage as separate events, since PsyHealth zeroes the sonic one.
 AddCSLuaFile, include = function() end, function() end
 local function loadEntity(path)

@@ -15,14 +15,15 @@ local MUTANT_PARTICLE_FILES = {
 	"particles/wick_stalker_artefacts.pcf",
 	"particles/wick_stalker_anomaly_electra.pcf",
 	"particles/wick_stalker_anomaly_gravity.pcf",
+	"particles/cotz_poltergeist_orbs.pcf",
 }
 local MUTANT_PARTICLES = {
 	"wick_pfx_bloodsucker_invisible_in",
 	"wick_pfx_bloodsucker_invisible_out",
 	"wick_pfx_jarka_inactive",
 	"jarka_activated",
-	"wick_stalker_art_fire",
-	"wick_stalker_art_gravi",
+	"cotz_orb_fire",
+	"cotz_orb_gravity",
 	"wick_art_fire_smoke",
 	"wick_art_electro_sparks",
 	"wick_art_gravity_dist",

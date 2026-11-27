@@ -11,6 +11,6 @@ ENT.Spawnable = false
 ENT.AdminOnly = false
 
 -- Concrete poltergeists replace these with their element's looping particle and glow.
-ENT.OrbParticle = "wick_stalker_art_gravi"
+ENT.OrbParticle = "cotz_orb_gravity"
 ENT.OrbColor = {r = 255, g = 255, b = 255}
 ENT.OrbHeight = 32

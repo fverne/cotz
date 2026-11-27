@@ -9,5 +9,5 @@ ENT.Purpose = ENT.Information
 ENT.Spawnable = false
 ENT.AdminOnly = false
 
-ENT.OrbParticle = "wick_stalker_art_fire"
+ENT.OrbParticle = "cotz_orb_fire"
 ENT.OrbColor = {r = 255, g = 130, b = 40}

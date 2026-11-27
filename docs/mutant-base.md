@@ -84,7 +84,8 @@ Shared effects for ability methods:
   sets how long the current phase lasts. Call it from a `duration = 0` phase method, as the fake deaths and
   the spider's burrow do. The mutant does not turn during it.
 - `self:STALKERNPCAbilityLaunchProjectile(class, enemy, speed, offset)` spawns an owned projectile
-  aimed at the enemy's center. `offset` is local to the mutant (forward, right, up).
+  aimed ahead of the enemy (see [leading shots](#leading-shots)). `offset` is local to the mutant
+  (forward, right, up).
 - `self:STALKERNPCAbilityPulse(radius, damage, damageType, requireVisible)` damages living players and
   NPCs this mutant may attack, using one sphere query.
 - `self:STALKERNPCAbilityGroundSlam(radius, damage, damageType)` raises dust and damages every entity in
@@ -192,13 +193,19 @@ abilities.
 | Class | Attacks |
 | --- | --- |
 | Fire | Three flames in turn where the enemy is heading. `ent_poltergeist_flame` smoulders, then burns a column. |
-| Electric | A volley of three slow, loosely homing `ent_poltergeist_spark`, and a close-range discharge. |
+| Electric | A volley of three slow, straight `ent_poltergeist_spark`, and a close-range discharge. |
 | Telekinetic | Lifts and throws three objects, and shoves nearby players away. |
 
 The telekinetic poltergeist borrows nearby loose `prop_physics` (unfrozen, unconstrained, not persisted, up to
 80 mass) and conjures temporary debris for the rest. Each object belongs to one `ent_poltergeist_grip`, which
 deals the hit itself, keeps the object from colliding with players, and restores a borrowed prop's gravity and
 collision group after a throw, death, sleep or removal. Borrowed props stay where they land.
+
+The electric orb is an anomaly-sized `wick_*` system. Fire and telekinetic use `cotz_orb_fire` and
+`cotz_orb_gravity` from `particles/cotz_poltergeist_orbs.pcf`, copies of artefact effects enlarged 3.5 times
+to match it. Change `SCALE` in `tools/poltergeist_orbs_pcf.py` and rebuild to resize them; do not edit the
+binary. The server registers the file with `resource.AddFile`; servers that distribute content only through
+a Workshop pack must add it to that pack.
 
 ## Mimic
 
@@ -214,8 +221,19 @@ does not spend the roll, and later openers never reroll it. The mimic spawns on 
 connected component as the node beside the container, falling back to other validated ground nearby, and obeys
 the mutant population limit. It calls out, then hunts the opener for 30 seconds, even around corners.
 
-`ent_cotz_orb` is the shared mutant projectile: Lua movement with one hull trace per tick, optional homing and
-an `Impact(trace)` override.
+`ent_cotz_orb` is the shared mutant projectile: straight Lua movement with one hull trace per tick and an
+`Impact(trace)` override.
+
+## Leading shots
+
+Mutants aim where a moving target will be, not where it is. `self:STALKERNPCPredictAim(enemy, origin, speed)`
+returns the point where a projectile from `origin` meets the enemy if it keeps its current velocity, leading
+by at most three seconds. It stops at walls and ignores vertical speed for jumping or falling players.
+`STALKERNPCAbilityLaunchProjectile` uses it, with the engine's physics speed cap for physics projectiles;
+this covers the burer, karlik, fast and swamp controllers, mimic and electric poltergeist. The spider's spit
+leads before adding its arc, and the telekinetic grip leads each throw. New ranged attacks must use the helper
+or this method. Shots do not steer after launch, so changing direction dodges them. The fire poltergeist's
+flames keep their own short ground lead.
 
 ## New mutant checklist
 

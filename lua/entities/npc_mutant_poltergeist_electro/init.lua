@@ -58,6 +58,5 @@ end
 function ENT:PoltergeistSpark(enemy)
 	if not enemy or not self:Visible(enemy) then return end
 
-	local spark = self:STALKERNPCAbilityLaunchProjectile("ent_poltergeist_spark", enemy, SPARK_SPEED, SPARK_OFFSET)
-	if spark then spark.HomingTarget = enemy end
+	self:STALKERNPCAbilityLaunchProjectile("ent_poltergeist_spark", enemy, SPARK_SPEED, SPARK_OFFSET)
 end
