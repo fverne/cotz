@@ -326,7 +326,7 @@ blank or unavailable appear as `Character #ID` in sharing and invitation-revocat
 | medical | 4×4 | `base_aid` | 1,000 roubles |
 | gear | 6×6 | Suits, headgear and carrying gear | 1,400 roubles |
 | weapon | 6×4 | `isWeapon == true` | 1,400 roubles |
-| fridge | 6×4 | `base_consumables` | 1,000 roubles |
+| fridge | 6×4 | `base_consumables`, zone-cooked meals (`base_cooked`) and raw meat (`base_cookable`) | 1,000 roubles |
 
 ### Upgrading at the contact
 

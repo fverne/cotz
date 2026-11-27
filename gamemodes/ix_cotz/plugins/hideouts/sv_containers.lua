@@ -227,7 +227,9 @@ function PLUGIN:ContainerAccepts(record, slotID, item)
 	local recipe = definition and self:GetContainerRecipe(record, definition)
 	if not recipe or item.isBag or item:GetData("id") then return false end
 	if recipe.filter == "ammo" then return item.isAmmo == true end
-	if recipe.filter == "food" then return item.base == "base_consumables" end
+	if recipe.filter == "food" then
+		return item.base == "base_consumables" or item.base == "base_cooked" or item.base == "base_cookable"
+	end
 	if recipe.filter == "medical" then return item.base == "base_aid" end
 	if recipe.filter == "weapon" then return item.isWeapon == true end
 	if recipe.filter == "gear" then

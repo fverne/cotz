@@ -514,6 +514,10 @@ Test("fridge installation filters consumables and preserves its inventory throug
 	local food = FeatureItem(storage)
 	food.base = "base_consumables"
 	assert(PLUGIN:ContainerAccepts(record, "fridge", food))
+	food.base = "base_cooked"
+	assert(PLUGIN:ContainerAccepts(record, "fridge", food))
+	food.base = "base_cookable"
+	assert(PLUGIN:ContainerAccepts(record, "fridge", food))
 	assert(not PLUGIN:ContainerAccepts(record, "fridge", FeatureItem(inventory)))
 	food.isBag = true
 	assert(not PLUGIN:ContainerAccepts(record, "fridge", food))
