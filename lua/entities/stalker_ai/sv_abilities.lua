@@ -6,6 +6,7 @@ local DEFAULT_ATTACK_INDEX = 1
 local DUST_HEIGHT_MIN, DUST_HEIGHT_MAX = -100, 170
 local DUST_SCALE, DUST_RADIUS, DUST_MAGNITUDE = 200, 16, 8
 local MELEE_IN_RANGE = 2
+local MAX_LEAD_SECONDS = 3
 
 local validatedDefinitions = setmetatable({}, {__mode = "k"})
 
@@ -261,19 +262,54 @@ function ENT:STALKERNPCAbilityPlaySequence(state, sequence, duration)
 	state.phaseEnd = state.phaseStart + math.max(0, duration)
 end
 
+-- Time until a projectile can meet a target that keeps its velocity; offset runs from muzzle to target.
+local function interceptTime(offset, velocity, speed)
+	local a = velocity:LengthSqr() - speed ^ 2
+	-- A target as fast as the projectile may never be caught, so lead by the direct flight time.
+	if a >= 0 then return offset:Length() / speed end
+
+	local b = 2 * offset:Dot(velocity)
+
+	return (-b - math.sqrt(b ^ 2 - 4 * a * offset:LengthSqr())) / (2 * a)
+end
+
+-- Where to aim so a projectile leaving origin at speed meets the enemy, assuming it keeps moving as it is.
+function ENT:STALKERNPCPredictAim(enemy, origin, speed)
+	local position = enemy:WorldSpaceCenter()
+	local velocity = enemy:GetVelocity()
+	if velocity:LengthSqr() == 0 then return position end
+	-- Gravity bends jumps and falls, so a straight-line vertical lead would aim far above or below.
+	if enemy:IsPlayer() and enemy:GetMoveType() == MOVETYPE_WALK and not enemy:IsOnGround() then
+		velocity = Vector(velocity.x, velocity.y, 0)
+	end
+
+	local lead = math.min(interceptTime(position - origin, velocity, speed), MAX_LEAD_SECONDS)
+	local predicted = position + velocity * lead
+	-- A wall in the way stops the target short of the straight-line prediction.
+	local trace = util.TraceLine({start = position, endpos = predicted, mask = MASK_SOLID_BRUSHONLY, filter = enemy})
+	if trace.Hit then return trace.HitPos end
+
+	return predicted
+end
+
 function ENT:STALKERNPCAbilityLaunchProjectile(class, enemy, speed, offset)
 	local origin = self:GetPos() + self:GetForward() * offset.x + self:GetRight() * offset.y
 		+ self:GetUp() * offset.z
-	local target = enemy and enemy:WorldSpaceCenter() or origin + self:GetForward() * speed
-	local direction = (target - origin):GetNormalized()
 
 	local projectile = ents.Create(class)
 	if not IsValid(projectile) then return end
 	projectile:SetPos(origin)
-	projectile:SetAngles(direction:Angle())
 	projectile:Spawn()
 	projectile:SetOwner(self)
 	local physics = projectile:GetPhysicsObject()
+	local flightSpeed = speed
+	-- The physics engine caps object speed; leading with a faster nominal speed would aim short.
+	if IsValid(physics) then flightSpeed = math.min(speed, physenv.GetPerformanceSettings().MaxVelocity) end
+
+	local target = enemy and self:STALKERNPCPredictAim(enemy, origin, flightSpeed)
+		or origin + self:GetForward() * speed
+	local direction = (target - origin):GetNormalized()
+	projectile:SetAngles(direction:Angle())
 	if IsValid(physics) then physics:SetVelocity(direction * speed) end
 
 	return projectile

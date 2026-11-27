@@ -2,9 +2,8 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 
--- Slow and only loosely homing, so a moving target can outrun or sidestep it.
+-- Slow and straight: it is aimed ahead of its target, who can dodge by changing direction.
 ENT.Speed = 420
-ENT.TurnRate = 70
 ENT.LifeTime = 5
 ENT.HullRadius = 10
 ENT.DischargeDamage = 14

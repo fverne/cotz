@@ -20,6 +20,7 @@ Moved Lua files retain their original contents; loaders, documentation, and tool
 | `lua/entities/stalker_ai_poltergeist/`, `lua/entities/ent_cotz_orb/` | Shared poltergeist base and mutant projectile; see the [mutant base](mutant-base.md#poltergeists). |
 | `lua/entities/stalker_ai/` | Shared mutant base: combat, sleep, navigation, declarative abilities and flight. See the [mutant base](mutant-base.md). |
 | `lua/stalkernpcbasevars.lua` | Shared NPC definitions included by the NPC autorun files. |
+| `particles/`, `tools/` | Particle files shipped with this addon, and the scripts that generate them. |
 | `docs/` | Project guides and balance tooling, inputs, historical baselines, and tests. |
 | `tests/` | Standalone Lua regression checks. |
 | `.github/workflows/` | Balance export, import, and validation automation. |

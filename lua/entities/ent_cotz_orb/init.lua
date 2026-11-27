@@ -3,7 +3,6 @@ AddCSLuaFile("shared.lua")
 include("shared.lua")
 
 ENT.Speed = 1000
-ENT.TurnRate = 0 -- Degrees per second towards HomingTarget.
 ENT.LifeTime = 4
 ENT.HullRadius = 6
 
@@ -43,19 +42,6 @@ function ENT:DamageVictim(victim, amount, damageType)
 	return true
 end
 
-function ENT:Steer(elapsed)
-	local target = self.HomingTarget
-	if self.TurnRate <= 0 or not IsValid(target) or target:Health() <= 0 then return end
-
-	local current = self.cotzVelocity:GetNormalized()
-	local wanted = (target:WorldSpaceCenter() - self:GetPos()):GetNormalized()
-	local angle = math.deg(math.acos(math.Clamp(current:Dot(wanted), -1, 1)))
-	if angle <= 0 then return end
-
-	local blend = math.min(1, self.TurnRate * elapsed / angle)
-	self.cotzVelocity = LerpVector(blend, current, wanted):GetNormalized() * self.Speed
-end
-
 function ENT:Think()
 	if self.cotzFinished then return end
 
@@ -75,7 +61,6 @@ function ENT:Think()
 
 	local elapsed = now - self.cotzLastMove
 	self.cotzLastMove = now
-	self:Steer(elapsed)
 
 	local position = self:GetPos()
 	self.cotzTrace.start = position

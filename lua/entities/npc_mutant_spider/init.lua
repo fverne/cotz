@@ -183,9 +183,11 @@ end
 
 function ENT:SpiderSpitAim(enemy)
 	local origin = self:GetPos() + Vector(0, 0, SPIT_OFFSET_UP) + self:GetForward() * SPIT_OFFSET_FORWARD
-	local arc = Vector(0, 0, self:GetPos():Distance(enemy:GetPos()) / SPIT_ARC_DIVISOR)
+	-- Lead the shot first, then loft it for the distance to where the target will be.
+	local aim = self:STALKERNPCPredictAim(enemy, origin, SPIT_SPEED)
+	local arc = Vector(0, 0, self:GetPos():Distance(aim - enemy:OBBCenter()) / SPIT_ARC_DIVISOR)
 
-	return origin, enemy:GetPos() + enemy:OBBCenter() + arc
+	return origin, aim + arc
 end
 
 function ENT:SpiderAimSpit(enemy)

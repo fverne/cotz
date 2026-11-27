@@ -40,6 +40,8 @@ vector_origin = Vector()
 vector_up = Vector(0, 0, 1)
 NULL = {}
 MASK_NPCSOLID, MOVETYPE_FLY, CAP_MOVE_GROUND = 1, 2, 4
+MASK_SOLID_BRUSHONLY, MOVETYPE_WALK = 16, 32
+physenv = {GetPerformanceSettings = function() return {MaxVelocity = fixture.maxVelocity or 4000} end}
 DMG_AIRBOAT, DMG_SONIC = 16, 32
 
 function CurTime() return fixture.now end
@@ -78,6 +80,7 @@ function fixture.Target(position, extra)
 		GetPos = function(self) return self.position end,
 		WorldSpaceCenter = function(self) return self.position + Vector(0, 0, 36) end,
 		OBBCenter = function() return Vector(0, 0, 36) end,
+		GetVelocity = function(self) return self.velocity or Vector() end,
 		Health = function(self) return self.health end,
 		IsPlayer = function(self) return self.player == true end,
 		IsNPC = function(self) return self.player ~= true end,

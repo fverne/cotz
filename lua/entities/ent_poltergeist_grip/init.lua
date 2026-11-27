@@ -68,7 +68,8 @@ function ENT:Hurl(target, speed)
 		mask = MASK_SHOT_HULL, filter = {self, self.cotzObject, self:GetOwner()},
 	}
 	physics:Wake()
-	physics:SetVelocity((target:WorldSpaceCenter() - origin):GetNormalized() * speed)
+	local aim = self:GetOwner():STALKERNPCPredictAim(target, origin, speed)
+	physics:SetVelocity((aim - origin):GetNormalized() * speed)
 	physics:AddAngleVelocity(VectorRand() * THROW_SPIN)
 
 	return true
