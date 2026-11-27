@@ -22,6 +22,17 @@ Bubbles, Whirlgig and Karusel use impact. See the [suit protection fields](../su
 Crush damage is an impact combat stat: it is reduced like bullets and wears suits and headgear at combat rates,
 including crush from physics impacts.
 
+## Mutants in pulling anomalies
+
+Whirlgig and Karusel kill any live `npc_mutant_*` inside their pull sphere (100 units around the Whirlgig;
+300 units around the Karusel's core, 300 above it), regardless of health or damage immunities. The corpse
+is dragged to the core and held there without gravity until the next blast gibs it. A corpse caught while
+the anomaly recharges waits for the following blast. Removing the anomaly drops its corpses. As with other
+anomaly deaths, no player gets kill credit, and a gibbed corpse cannot be poached.
+
+`lua/cotz/anomalies/sv_mutantcapture.lua` owns this. Mutants without a ragdoll only die. Mutant corpses
+start the Karusel's blast cycle themselves; its touch trigger for everything else is unchanged.
+
 ## Client effects
 
 The existing `lua/autorun/stalker_anomaly_particles.lua` entry point distributes the helper and

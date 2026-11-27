@@ -39,7 +39,7 @@ local definitions = {
 }
 
 for _, definition in ipairs(definitions) do
-	local timers, received = {}, {}
+	local timers, received, bursts = {}, {}, 0
 	local target = {
 		EntIndex = function() return 20 end,
 		IsRagdoll = function() return false end,
@@ -57,7 +57,12 @@ for _, definition in ipairs(definitions) do
 	if definition.class == "anom_tramplin_anomaly" then entity.Active = false end
 	local environment = setmetatable({
 		ENT = meta, DMG_BURN = 8, DMG_ACID = 1048576, DMG_CRUSH = 1, DMG_SHOCK = 256,
-		AddCSLuaFile = function() end, include = function() end,
+		AddCSLuaFile = function() end,
+		include = function(file)
+			if file == "cotz/anomalies/sv_mutantcapture.lua" then
+				return {Burst = function() bursts = bursts + 1 end}
+			end
+		end,
 		hook = {Add = function() end}, sound = {Add = function() end},
 		DamageInfo = damageInfo, IsValid = function(value) return value ~= nil end,
 		Vector = vector, Angle = function() end,
@@ -98,6 +103,7 @@ for _, definition in ipairs(definitions) do
 		check(info.origin.x == expectedOrigin.x and info.origin.y == expectedOrigin.y
 			and info.origin.z == expectedOrigin.z, definition.class .. " retains its area damage origin")
 		check(info.position == info.origin, definition.class .. " supplies the area origin as damage position")
+		check(bursts == 1, definition.class .. " gibs captured mutant corpses with its blast")
 	else
 		entity:Touch(target)
 		check(#received == 1, definition.class .. " inactive contact cannot damage again")

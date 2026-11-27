@@ -446,6 +446,7 @@ function ENT:STALKERNPCKill(dmginfo)
 				TEMP_Ragdoll:TakeDamageInfo(dmginfo)
 				-- Mutants that share a ragdoll model tell poaching which harvest the corpse holds.
 				TEMP_Ragdoll.cotzPoachType = self.PoachingType
+				self.cotzRagdoll = TEMP_Ragdoll
 
 				if ix and ix.eventController and self:GetClass():sub(1, 11) == "npc_mutant_" then
 					ix.eventController:TrackCorpse(TEMP_Ragdoll)

@@ -2,6 +2,8 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
+local mutantCapture = include("cotz/anomalies/sv_mutantcapture.lua")
+
 hook.Add( "OnDamagedByExplosion", "DisableSound", function()
 	return true
 end )
@@ -44,6 +46,8 @@ function ENT:Think()
 
 		return true
 	end
+	mutantCapture.Update(self, self:GetPos(), 100, self:GetPos() + Vector(0, 0, 50),
+		"voronka_recharge" .. self:EntIndex(), function(ragdoll) self:StartTouch(ragdoll) end)
 	for _, v in ipairs(ents.FindInSphere(self:GetPos(),100)) do
 		if v:IsPlayer() then
 			v:SetVelocity( (self:GetPos() - v:GetPos()) * self.Power)
@@ -86,7 +90,9 @@ function ENT:StartTouch(ent)
 		damageInfo:SetInflictor(self)
 		damageInfo:SetDamagePosition(damageOrigin)
 		util.BlastDamageInfo(damageInfo, damageOrigin, 120)
-		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
+		mutantCapture.Burst(self)
+		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil
+			and not ent:IsMarkedForDeletion() then
 			ent:Remove()
 		end
 		--ent:TakeDamage(1100, self, self)
