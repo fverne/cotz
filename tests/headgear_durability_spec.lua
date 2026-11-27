@@ -209,12 +209,13 @@ for _, damageType in ipairs({DMG_BULLET, DMG_SLASH, DMG_BURN, DMG_ACID, DMG_CRUS
 	suit.data.durability = 100
 	local damage = overrideDamage(damageType)
 	suitsPlugin:EntityTakeDamage(client, damage)
-	-- Impact is a combat stat: percentage then flat, rather than anomaly flat-then-percentage.
-	local impact = damageType == DMG_CRUSH or damageType == DMG_BLAST
-	check(damage.value == (impact and 10 or 18), "Percentage and flat resistance apply to damage type: " .. damageType)
+	-- Ballistic, rupture and impact are combat stats: percentage then flat, rather than anomaly flat-then-percentage.
+	local combat = damageType == DMG_BULLET or damageType == DMG_SLASH or damageType == DMG_CRUSH
+		or damageType == DMG_BLAST
+	check(damage.value == (combat and 10 or 18), "Percentage and flat resistance apply to damage type: " .. damageType)
 	local headgearWear = 100 - helmet.data.durability
 	local suitWear = 100 - suit.data.durability
-	local ratio = (damageType == DMG_BULLET or damageType == DMG_SLASH or impact) and 0.25 or 0.5
+	local ratio = combat and 0.45 or 0.5
 	check(suitWear > 0 and math.abs(headgearWear / suitWear - ratio) < 0.000001,
 		"Headgear wears slower than suits after protection: " .. damageType)
 end
@@ -226,7 +227,9 @@ for _, remaining in ipairs({100, 1, 0.001, 0}) do
 		suit.data.durability = 100
 		local damage = overrideDamage(damageType)
 		suitsPlugin:EntityTakeDamage(client, damage)
-		check(damage.value == 18, "Tank wear immunity preserves incoming health damage")
+		local combat = damageType == DMG_BULLET or damageType == DMG_SLASH or damageType == DMG_CRUSH
+			or damageType == DMG_BLAST
+		check(damage.value == (combat and 10 or 18), "Tank wear immunity preserves incoming health damage")
 		check(suit.data.durability < 100,
 			"Suit wears regardless of remaining tank air: " .. remaining .. "/" .. damageType)
 	end
@@ -298,7 +301,8 @@ taken, unworn = absorbedHit(DMG_SLASH, 20)
 check(taken == 20 and not unworn, "Wear resumes after Halo invulnerability")
 hook.Run = originalHookRun
 
-suit.data.durability = 100
+-- The Halo cases above wear both pieces, so reset each before checking safe-zone preservation.
+helmet.data.durability, suit.data.durability = 100, 100
 hook.Run = function(name)
 	if name == "ShouldBlockSafeZoneDamage" then return true end
 end

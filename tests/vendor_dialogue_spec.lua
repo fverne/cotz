@@ -78,7 +78,8 @@ end
 for _, class in ipairs({"ix_hideout_vendor", "ix_sherpa_vendor", "ix_vendor_adv"}) do
 	-- Legacy advanced vendors can retain a template dialogue ID despite opening the Sherpa tree.
 	local entity = target(class, true, class == "ix_vendor_adv" and "00templatenpc" or "sherpa")
-	for _, topicID in ipairs({"TradeTopic", "DonateTopic", "ManageTopic", "StorageTopic"}) do
+	-- Donate, Manage and Storage are disabled in sherpas/dialogue/sh_sherpa.lua; only Trade remains.
+	for _, topicID in ipairs({"TradeTopic"}) do
 		local before = calls
 		receive("ixPostCallback", entity, "sherpa", topicID)
 		check(calls == before + 1, class .. " dispatches " .. topicID .. " to its server service")

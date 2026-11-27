@@ -47,7 +47,8 @@ the following, in order, each step optional:
 - `leap = "long"` or `"short"` launches the mutant at its enemy with the navigation leap ballistics
   (`navigationLeapAimHeight`/`Speed`, or their `Short` variants). Without an enemy it does not launch.
 - `melee = index` plays that melee table's sequence and schedules its hits, like a normal melee attack.
-  Otherwise `animation` plays a sequence. `attackIndex = 0` stops the mutant from turning towards its
+  Adding `animation` plays that sequence instead, keeping the table's hits. Without `melee`, `animation`
+  plays a sequence. `attackIndex = 0` stops the mutant from turning towards its
   target during the animation, matching attacks that originally passed no index.
 - `sound` is emitted from the mutant.
 - `method(enemy, state)` is called. The enemy is the current valid enemy or `nil`, so methods must
@@ -79,6 +80,9 @@ Other fields:
 
 Shared effects for ability methods:
 
+- `self:STALKERNPCAbilityPlaySequence(state, sequence, duration)` plays a sequence chosen at runtime and
+  sets how long the current phase lasts. Call it from a `duration = 0` phase method, as the fake deaths and
+  the spider's burrow do. The mutant does not turn during it.
 - `self:STALKERNPCAbilityLaunchProjectile(class, enemy, speed, offset)` spawns an owned projectile
   aimed at the enemy's center. `offset` is local to the mutant (forward, right, up).
 - `self:STALKERNPCAbilityPulse(radius, damage, damageType, requireVisible)` damages living players and
@@ -106,10 +110,22 @@ These mutants use the system:
 | Karlik | Damage-triggered teleport, queued knockback, single and double throws. |
 | Controllers (all four) | Psy attack: damage, lightning or a projectile, by variant. |
 | Psydog, phantom | Pounce; the psydog also summons phantoms into empty slots. |
+| Chimeras (all three) | Long leap. |
+| Classic zombies (all four) | Damage-triggered fake death. |
+| Dog, pseudodog | Pounce. |
+| Hellhound | Flame spew. |
+| Bear, cat, rodent, tark, sprig | Short leap. |
+| Skeleton | Damage-triggered fake death; draining grab. |
+| Izlom | Pull; grab and throw. |
+| Spider | Leap while healthy, web spit while wounded; damage-triggered burrow teleport. |
 
-Other mutants still use their original state machines and the fields listed in `BUSY_FIELDS` and the
-event controller's `TARGET_ABILITIES`. Keep those lists until no mutant uses a field. Migrate mutants
-one at a time, alongside a spec.
+Boar and flesh have no special attacks and need no abilities. The sprig's ambush pose is an idle state
+outside the runner. Continuous effects such as auras, self-ignition and the electric chimera's blast also
+stay in their own methods, because they run alongside attacks.
+
+Navigation, combat targeting and sleep read only `PlayingAnimation` and `cotzAbility` to decide whether a
+mutant is busy, so write any new special attack as an ability. Navigation recovery leaps only with a
+`navigationLeap` ability.
 
 Migrated mutants keep their original timings, damage and cooldowns, with these deliberate differences:
 
@@ -117,12 +133,26 @@ Migrated mutants keep their original timings, damage and cooldowns, with these d
   to keep attacks prompt.
 - Short leaps (snork, vareshka, psydog, phantom) end when their swing finishes. They previously kept the
   mutant busy for five seconds, which stopped it from re-pathing.
-- Leap, slow pseudogiant kick and burer blast windups are cancelled when the target is lost, as the
-  base did for older leaps. Throws, controller psy attacks, the karlik knockback and teleport, feeding
-  and summons keep running, as before.
+- The chimera, bear, cat, rodent, pseudodog, sprig and spider leaps end once the mutant has landed and its
+  swing has finished. Their old hold times (three seconds for the sprig, five for the rest) are now the
+  upper limit, so the three-second cooldown decides when they can leap again.
+- Dog and tark leaps still last at least a second and wait for landing. The wait is now capped, five
+  seconds after the launch, instead of unlimited.
+- Leap, slow pseudogiant kick, burer blast, hellhound spew and izlom pull windups are cancelled when the
+  target is lost, as the base did for older leaps. Throws, controller psy attacks, the karlik knockback and
+  teleport, feeding, summons, grabs, spits, fake deaths and the spider teleport keep running, as before.
+- Fake deaths and the spider teleport wait for any running ability, not only a running animation. For
+  example, a skeleton finishes its grab before collapsing. The izlom cannot start a grab during its pull
+  windup, and waits out the pull's half-second recovery first.
+- Fake deaths play each sequence once. Zombies and skeletons previously restarted the lying-still sequence
+  every tick.
+- Sleep abandons a fake death or burrow and restores collision and sounds, so the mutant does not resume
+  it on waking. Sleep also ends a grab and releases its player.
 - The psydog waits for its current attack to end before summoning, instead of overriding it.
-- A player the bloodsucker is feeding on is released when it dies. Previously the player stayed frozen
-  until the corpse entity was removed.
+- A player the bloodsucker is feeding on, or a skeleton or izlom is grabbing, is released when the mutant
+  dies. Previously the player stayed frozen until the corpse entity was removed: the base never called
+  the skeleton's and izlom's `STALKERNPCOnKilled`.
+- An izlom grab ends as soon as its victim disappears, instead of at the throw.
 
 ## Flight
 
@@ -149,8 +179,9 @@ target's height to overlap the flyer's hull, so melee flyers descend to the targ
 
 `tests/mutant_abilities_spec.lua`, `tests/mutant_flight_spec.lua`, `tests/burer_stamina_spec.lua` and
 `tests/mutant_complex_abilities_spec.lua` cover the runner, steering and the migrated mutants;
-`tests/mutant_navigation_spec.lua` covers navigation-started leaps. They use mocks; verify in a
-multiplayer session:
+`tests/mutant_navigation_spec.lua` covers navigation-started leaps, and
+`tests/mutant_target_safety_spec.lua` covers grabs and spits whose targets disappear. They use mocks; verify
+in a multiplayer session:
 
 1. Burer: stamina drain, blast and shield play their animations, and the shield absorbs damage. A
    lost target cancels the blast windup.
@@ -158,7 +189,12 @@ multiplayer session:
    releases (including when the bloodsucker is killed mid-feed), the karlik teleports and knocks back,
    controller psy attacks hit visible targets, and psydogs replace lost phantoms. Strand a leaping mutant
    below a ledge to check navigation-started leaps.
-3. A test flyer (any mutant with `MovementMode = "fly"`) takes off, pursues around corners and over
+3. Zombies and skeletons collapse, lie still without restarting or sliding, stand about fifteen seconds
+   after the hit and are solid again. Skeleton and izlom grabs freeze, then release or throw players,
+   including when the mutant dies mid-grab. Izlom pulls drag players in. Hellhound flames show and stop.
+   Spiders spit when wounded, and burrow and resurface. Chimeras and the small leapers swing mid-leap,
+   and the rodent uses its `attack3` animation.
+4. A test flyer (any mutant with `MovementMode = "fly"`) takes off, pursues around corners and over
    walls, holds for melee, follows a hidden player to the last seen position, sleeps and wakes.
-4. Mutants with translucent effects draw correctly: the bloodsucker's cloak, the burer's shield and
+5. Mutants with translucent effects draw correctly: the bloodsucker's cloak, the burer's shield and
    controller psy images. Compare client frame time near a mutant group with the previous version.

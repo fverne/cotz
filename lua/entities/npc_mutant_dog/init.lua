@@ -36,10 +36,6 @@ ENT.FBRAP = 4
 
 ENT.FleeTime = 0
 ENT.MustFlee = false
-ENT.CanJump = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
 
 ENT.NextAbilityTime = 0
 
@@ -53,6 +49,25 @@ ENT.navigationLeapRange = 200
 
 ENT.navigationLeapAimHeight = 32
 ENT.navigationLeapSpeed = 3
+
+ENT.Abilities = {
+	{
+		name = "jump",
+		navigationLeap = "long",
+		meleeRange = "outside",
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 3,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.2},
+			{
+				duration = 0.8, leap = "long", melee = 5, sound = "Stalker.Dog.Melee1",
+				untilGrounded = true, maxDuration = 5,
+			},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/slep_dog2.mdl"
@@ -114,21 +129,6 @@ function ENT:STALKERNPCThink()
 	else
 		self.RangeSchedule = SCHED_CHASE_ENEMY
 	end
-
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-
-		self:STALKERNPCPlayAnimation("jump_ataka_01",5)
-		self:STALKERNPCMakeMeleeAttack(5)
-		self:EmitSound("Stalker.Dog.Melee1")
-		self.isAttacking = 2
-	end
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 and self:IsOnGround() then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
 end
 
 function ENT:STALKERNPCOnDeath()
@@ -137,8 +137,6 @@ function ENT:STALKERNPCOnDeath()
 			i:RunAway()
 		end
 	end
-	
-	return mul
 end
 
 function ENT:RunAway()
@@ -147,25 +145,5 @@ function ENT:RunAway()
 		self.MustFlee = true
 		self:SetSchedule(SCHED_RUN_FROM_ENEMY)
 		self.FleeTime = CurTime() + 5
-	end
-end
-
-//little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < self.navigationLeapRange then
-			if(self.CanJump<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-				
-				if TEMP_Rand == 1 or forceJump then
-					self.CanJump = CurTime()+3
-					self.isAttacking = 1
-					self.jumping1 = CurTime()+0.2
-					self.jumping2 = CurTime()+1
-				end
-			end
-		end
 	end
 end

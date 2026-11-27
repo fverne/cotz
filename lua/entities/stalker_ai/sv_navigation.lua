@@ -19,10 +19,6 @@ local WITHDRAW_RETRY = 2
 local WITHDRAW_TIMEOUT = 60
 local WITHDRAW_ARRIVAL_SQR = 96 ^ 2
 local JUMP_SEGMENTS = 16
-local BUSY_FIELDS = {
-	"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing",
-	"IsSpitting", "SpecialAttack", "IsWarping", "IsThrow1", "IsThrow2", "IsBlast", "IsStamAttack",
-}
 
 local function takeBudget()
 	return not ix or not ix.eventController or ix.eventController:TakeSearchBudget()
@@ -74,12 +70,7 @@ function ENT:STALKERNPCNavigationGround(position)
 end
 
 function ENT:STALKERNPCNavigationBusy()
-	if self.PlayingAnimation or self.cotzAbility then return true end
-	for _, field in ipairs(BUSY_FIELDS) do
-		if (self[field] or 0) ~= 0 then return true end
-	end
-
-	return false
+	return self.PlayingAnimation == true or self.cotzAbility ~= nil
 end
 
 function ENT:STALKERNPCNavigationJumpVelocity(enemy, shortJump)
@@ -103,13 +94,8 @@ function ENT:STALKERNPCTryNavigationJump(enemy)
 	if not maximum or distance <= minimum or distance >= maximum then return false end
 	local shortJump = self.navigationShortLeapRange and distance < self.navigationShortLeapRange
 	local ability = self.Abilities and self:STALKERNPCNavigationLeapAbility(shortJump)
-	if (self.NextAbilityTime or 0) >= CurTime() then return false end
-	if ability then
-		if self.cotzAbilityReady[ability.name] >= CurTime() then return false end
-	else
-		local cooldown = shortJump and "CanJump" or (self.navigationLeapCooldown or "CanJump")
-		if (self[cooldown] or 0) >= CurTime() then return false end
-	end
+	if not ability or (self.NextAbilityTime or 0) >= CurTime()
+		or self.cotzAbilityReady[ability.name] >= CurTime() then return false end
 	if not takeBudget() then return false end
 
 	local start = self:GetPos()
@@ -146,10 +132,7 @@ function ENT:STALKERNPCTryNavigationJump(enemy)
 		previous = position
 	end
 
-	if ability then return self:STALKERNPCStartAbility(ability, enemy) end
-	self:STALKERNPCDistanceForMeleeTooBig(distance, true)
-
-	return self:STALKERNPCNavigationBusy()
+	return self:STALKERNPCStartAbility(ability, enemy)
 end
 
 function ENT:STALKERNPCNavigationAttackRange(distance)

@@ -99,6 +99,13 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
                 previous = min(scores)
                 seen.update(items)
 
+    # Steps whose slot quantities are hand-tuned away from the tier formula.
+    HAND_TUNED_QUANTITIES = {
+        ("latch", "v3/masks-headwear/gasmask_filter_military"): [1, 1],
+        ("latch", "v3/masks-headwear/gasmask_filter_scientific"): [2, 1, 1],
+        ("suture", "v3/suit-variants/suit_ssp99"): [2],
+    }
+
     def test_current_branches_use_obtainable_themed_pools(self):
         deliveries = 0
         for slug, contact in self.data["contacts"].items():
@@ -108,7 +115,12 @@ class FTSDeliveryBalanceTests(unittest.TestCase):
                 tier = len(step["requirements"])
                 self.assertTrue(1 <= tier <= 4)
                 for index, slot in enumerate(step["requirements"]):
-                    self.assertEqual(slot["quantity"], (tier - index + 1) // 2 if step.get("intermissionFor") else tier - index)
+                    tuned = self.HAND_TUNED_QUANTITIES.get((slug, step["id"]))
+                    if tuned:
+                        expected = tuned[index]
+                    else:
+                        expected = (tier - index + 1) // 2 if step.get("intermissionFor") else tier - index
+                    self.assertEqual(slot["quantity"], expected, (slug, step["id"], index))
                     candidates = self.data["pools"][slot["pool"]]["candidates"]
                     self.assertTrue(candidates)
                     for candidate in candidates:

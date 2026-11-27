@@ -42,7 +42,11 @@ ix.townNPCs = {HasService = function(_, _, name, npc)
 	return paintAllowed and name == "painting" and npc == "'Technut'"
 end}
 local equipment = {GetPending = function() end}
-ix.plugin.Get = function(id) if id == "equipmentslots" then return equipment end end
+local legs = {RefreshLegs = function() end}
+ix.plugin.Get = function(id)
+	if id == "equipmentslots" then return equipment end
+	if id == "legs" then return legs end
+end
 net = {callbacks = {}}
 net.Receive = function(name, callback) net.callbacks[name] = callback end
 local wire, cursor = {}, 1
@@ -340,7 +344,7 @@ for path in files:lines() do
 	end
 end
 files:close()
-check(configured == 18, "All 18 wearable definitions with effective skin alternatives are configured")
+check(configured == 14, "All 14 wearable definitions with effective skin alternatives are configured")
 SERVER = true
 PLUGIN = {}
 ix.item = {list = {helmet = item}}

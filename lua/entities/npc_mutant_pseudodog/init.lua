@@ -35,11 +35,6 @@ ENT.FBR = 2
 ENT.FBRAP = 8
 ENT.BR = 20
 
-ENT.CanJump = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-
 ENT.NextAbilityTime = 0
 ENT.PackTimer = 0
 
@@ -52,6 +47,26 @@ ENT.navigationLeapRange = 400
 
 ENT.navigationLeapAimHeight = 96
 ENT.navigationLeapSpeed = 2
+
+ENT.Abilities = {
+	{
+		name = "jump",
+		navigationLeap = "long",
+		meleeRange = "outside",
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 3,
+		recovery = 0.5,
+		phases = {
+			-- The swing starts on the ground and carries through the leap.
+			{duration = 0.4, melee = 3},
+			{
+				duration = 0, leap = "long", sound = "Stalker.Pseudodog.Melee1",
+				untilGrounded = true, untilAnimationDone = true, maxDuration = 4.6,
+			},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/psydog2.mdl"
@@ -118,19 +133,6 @@ function ENT:STALKERNPCThink()
 		end
 		self.PackTimer = CurTime()+10
 	end
-
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 && self:GetEnemy() then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-
-		self:EmitSound("Stalker.Pseudodog.Melee1")
-		self.isAttacking = 2
-	end
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
 end
 
 function ENT:STALKERNPCOnDeath()
@@ -140,31 +142,4 @@ function ENT:STALKERNPCOnDeath()
 			i:RunAway()
 		end
 	end
-	
-	return mul
 end
-
-//little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < self.navigationLeapRange then
-			if(self.CanJump<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-			
-				if TEMP_Rand == 1 or forceJump then
-					self.CanJump = CurTime()+3
-					self.isAttacking = 1
-					self.jumping1 = CurTime()+0.4
-					self.jumping2 = CurTime()+5
-
-					self:STALKERNPCPlayAnimation("jump_attack_all",3)
-					self:STALKERNPCMakeMeleeAttack(3)
-				end
-
-			end
-		end
-	end
-end
-

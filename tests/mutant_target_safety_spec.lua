@@ -1,74 +1,22 @@
 -- Run from the addon root: luatex --luaonly tests/mutant_target_safety_spec.lua
-local function readSource(name)
-	local file = assert(io.open("lua/entities/npc_mutant_" .. name .. "/init.lua"))
-	local source = file:read("*a")
-	file:close()
+-- Grabs and the spider spit must survive targets that are NPCs, disappear or die mid-attack.
+local fixture = dofile("tests/helpers/mutant_base.lua")
+local base = fixture.LoadBase("sv_abilities")
+local projectiles = 0
+ents = {Create = function()
+	projectiles = projectiles + 1
 
-	return source
-end
-
-local function compile(source)
-	source = source:gsub("!=", "~="):gsub("&&", " and "):gsub("||", " or "):gsub("!", "not ")
-	source = source:gsub("//([^\n]*)", "--%1")
-	ENT = {}
-	assert(load(source))()
-
-	return ENT
-end
-
-local function loadMethod(name, method)
-	local source = readSource(name)
-	local start = assert(source:find("function ENT:" .. method .. "(", 1, true))
-	local finish = source:find("\nfunction ENT:", start + 1, true)
-
-	return compile(source:sub(start, finish and finish - 1 or #source))[method]
-end
-
-local now = 10
-function CurTime() return now end
-function IsValid(entity) return entity ~= nil and entity.valid == true end
-local vectorMeta = {}
-vectorMeta.__index = vectorMeta
-function Vector(x, y, z) return setmetatable({x = x, y = y, z = z}, vectorMeta) end
-function vectorMeta.__add(a, b) return Vector(a.x + b.x, a.y + b.y, a.z + b.z) end
-function vectorMeta.__sub(a, b) return Vector(a.x - b.x, a.y - b.y, a.z - b.z) end
-function vectorMeta.__mul(a, b) return Vector(a.x * b, a.y * b, a.z * b) end
-function vectorMeta:Distance(other) return math.abs(self.x - other.x) end
-function vectorMeta:GetNormalized() return self end
-function vectorMeta:Angle() return self end
-local damageMeta = {}
-for _, method in ipairs({"SetDamage", "SetAttacker", "SetInflictor", "SetDamageType", "SetDamagePosition"}) do
-	damageMeta[method] = function() end
-end
-function DamageInfo() return damageMeta end
-math.Clamp = function(value, low, high) return math.max(low, math.min(value, high)) end
-
-local function makeActor()
 	return {
 		valid = true,
-		GetPos = function() return Vector(0, 0, 0) end,
-		GetForward = function() return Vector(1, 0, 0) end,
-		OBBCenter = function() return Vector(0, 0, 0) end,
-		GetEnemy = function(self) return self.enemy end,
-		Health = function(self) return self.health or 100 end,
-		GetMaxHealth = function() return 1000 end,
-		SetHealth = function(self, health) self.health = health end,
-		SetPos = function() end,
-		SetMovementActivity = function() end,
-		EmitSound = function() end,
-		STALKERNPCPlayAnimation = function(self) self.PlayingAnimation = true end,
-		STALKERNPCMakeMeleeAttack = function() end,
-		STALKERNPCStopAllTimers = function(self) self.stopped = true end,
-		STALKERNPCClearAnimation = function(self) self.PlayingAnimation = false end,
-		STALKERNPCPlaySoundRandom = function() end,
-		ControllerPlaySoundToPlayer = function() end,
+		SetPos = function() end, SetAngles = function() end, Spawn = function() end, SetOwner = function() end,
+		GetPhysicsObject = function() return {valid = true, SetVelocity = function() end} end,
 	}
-end
+end}
 
 local function makeTarget(isPlayer)
-	local target = makeActor()
-	target.IsPlayer = function() return isPlayer end
-	target.NearestPoint = target.GetPos
+	local target = fixture.Target(Vector(60), {player = isPlayer})
+	target.NearestPoint = function(self) return self.position end
+	target.SetLocalVelocity = function(self) assert(self.valid, "removed targets cannot be thrown") end
 	target.TakeDamageInfo = function(self)
 		assert(self.valid, "removed targets cannot take damage")
 		self.hits = (self.hits or 0) + 1
@@ -83,86 +31,100 @@ local function makeTarget(isPlayer)
 	return target
 end
 
-local originalRandom = math.random
-math.random = function() return 1 end
--- Bloodsucker feeding moved to the ability runner; tests/mutant_complex_abilities_spec.lua covers it.
-for _, name in ipairs({"skeleton"}) do
-	local think = loadMethod(name, "STALKERNPCThink")
-	local attack = loadMethod(name, "STALKERNPCDistanceForMeleeTooBig")
-	local victimField = "GrabTarget"
-	local stateField = "IsGrabbing"
-	local function makeGrabber()
-		local actor = makeActor()
-		actor.navigationLeapRange = 100
-		actor.NextAbilityTime, actor.CanJump, actor.CanGrab = 0, 100, 0
-		actor.PlayingAnimation, actor.FakeDeath = false, 0
-		actor.jumping1, actor.jumping2, actor.IsJumping = 0, 0, 0
-		actor.grabbing1, actor.grabbing2 = 0, 0
-		actor[stateField] = 0
+local function advance(actor, seconds)
+	fixture.now = fixture.now + seconds
+	if actor.cotzAbility then actor:STALKERNPCUpdateAbility() end
+end
+
+local GRABBERS = {
+	skeleton = {
+		methods = {"SkeletonSeize", "SkeletonHasVictim", "SkeletonDrain", "SkeletonFinishGrab",
+			"SkeletonReleaseVictim"},
+		hits = 2, steps = {1.2, 1.3},
+	},
+	izlom = {
+		methods = {"IzlomSeize", "IzlomHasVictim", "IzlomThrow", "IzlomReleaseVictim"},
+		steps = {0.1, 2},
+	},
+}
+for name, expected in pairs(GRABBERS) do
+	local class = fixture.LoadMutant(name, base, expected.methods)
+	local function startGrab(target)
+		fixture.now = 10
+		local actor = fixture.Actor(class)
+		actor.MeleeAttackSequence = {}
+		actor:STALKERNPCInitAbilities()
+		actor.enemy = target
+		assert(actor:STALKERNPCStartAbility(actor.cotzAbilityByName.grab, target), name .. " starts a grab")
 
 		return actor
 	end
+
 	for _, isPlayer in ipairs({false, true}) do
-		now = 10
-		local actor, target = makeGrabber(), makeTarget(isPlayer)
-		actor.enemy = target
-		attack(actor)
-		assert(actor[victimField] == target and actor[stateField] == 1, name .. " starts grabs on both types")
+		local target = makeTarget(isPlayer)
+		local actor = startGrab(target)
 		assert(target.frozen == (isPlayer and true or nil), name .. " freezes only players")
 		actor.enemy = nil
-		now = 20
-		think(actor)
-		assert(actor[stateField] == 0 and actor[victimField] == nil, name .. " completes the grab")
-		assert((isPlayer and target.frozen == false or not isPlayer and target.frozen == nil), name .. " releases players")
-		assert(target.hits == 2, "NPC and player grab damage stays intact")
-		for _, method in ipairs({"STALKERNPCOnKilled", "STALKERNPCRemove"}) do
-			actor[victimField] = target
-			target.frozen = isPlayer and true or nil
-			loadMethod(name, method)(actor)
-			local released = isPlayer and target.frozen == false or not isPlayer and target.frozen == nil
-			assert(released, name .. " cleanup releases players only")
-			target.valid = false
-			loadMethod(name, method)(actor)
-			target.valid = true
-		end
+		actor:STALKERNPCCancelAbilityWindup()
+		assert(actor.cotzAbility, name .. " keeps its grab when the enemy is lost")
+		for _, step in ipairs(expected.steps) do advance(actor, step + 0.01) end
+		actor.PlayingAnimation = false
+		advance(actor, 0.1)
+		assert(actor.cotzAbility == nil, name .. " completes the grab")
+		assert((isPlayer and target.frozen == false or not isPlayer and target.frozen == nil),
+			name .. " releases players")
+		assert(target.hits == expected.hits, name .. " deals the same grab damage to NPCs and players")
+
+		-- Death, removal and sleep all abandon the ability.
+		target = makeTarget(isPlayer)
+		actor = startGrab(target)
+		actor:STALKERNPCAbandonAbility()
+		assert((isPlayer and target.frozen == false or not isPlayer and target.frozen == nil),
+			name .. " cleanup releases players only")
+		actor = startGrab(target)
+		target.valid = false
+		actor:STALKERNPCAbandonAbility()
 	end
-	for _, stage in ipairs({1, 2}) do
-		local actor = makeGrabber()
-		actor[stateField], actor[victimField] = stage, {valid = false}
-		think(actor)
-		assert(actor[stateField] == 0 and actor[victimField] == nil and actor.stopped,
-			name .. " recovers when a captured target disappears at any stage")
+
+	for stage = 1, #expected.steps do
+		local target = makeTarget(true)
+		local actor = startGrab(target)
+		for step = 1, stage - 1 do advance(actor, expected.steps[step] + 0.01) end
+		target.valid = false
+		advance(actor, 0.01)
+		assert(actor.cotzAbility == nil, name .. " recovers when a captured target disappears at any stage")
 	end
-	local actor, target = makeGrabber(), makeTarget(false)
-	actor.IsGrabbing, actor.GrabTarget = 1, target
+end
+
+do
+	local class = fixture.LoadMutant("skeleton", base, GRABBERS.skeleton.methods)
+	fixture.now = 10
+	local actor, target = fixture.Actor(class), makeTarget(false)
+	actor.MeleeAttackSequence = {}
+	actor:STALKERNPCInitAbilities()
 	target.TakeDamageInfo = function(self) self.valid = false end
-	think(actor)
-	assert(actor.IsGrabbing == 0, "a first hit that removes the target cannot break the second hit")
+	actor:STALKERNPCStartAbility(actor.cotzAbilityByName.grab, target)
+	-- A late Think runs the first drain and the finishing drain in one update.
+	advance(actor, 5)
 end
-math.random = originalRandom
 
-local projectiles = 0
-ents = {Create = function()
-	projectiles = projectiles + 1
-	return {
-		SetPos = function() end, SetAngles = function() end, Spawn = function() end, SetOwner = function() end,
-		GetPhysicsObject = function() return {SetVelocity = function() end} end,
-	}
-end}
-local spiderThink = loadMethod("spider", "STALKERNPCThink")
-for _, enemy in ipairs({{valid = false}, false, makeTarget(false)}) do
-	local actor = makeActor()
-	actor.enemy = enemy or nil
+local spider = fixture.LoadMutant("spider", base, {"SpiderSpitAim", "SpiderAimSpit", "SpiderSpit"})
+local removed = makeTarget(false)
+removed.valid = false
+for _, enemy in ipairs({removed, false, makeTarget(false)}) do
+	fixture.now = 10
+	local actor = fixture.Actor(spider)
+	actor.MeleeAttackSequence = {}
+	actor:STALKERNPCInitAbilities()
 	if enemy then enemy.Visible = function() return true end end
-	actor.isAttacking, actor.jumping1, actor.jumping2 = 0, 0, 0
-	actor.IsTeleporting, actor.IsSpitting, actor.spitting = 0, 1, 0
+	actor.enemy = enemy or nil
+	assert(actor:STALKERNPCStartAbility(actor.cotzAbilityByName.spit, IsValid(actor.enemy) and enemy or nil))
 	local before = projectiles
-	spiderThink(actor)
+	advance(actor, 0.81)
 	assert(projectiles == before + (IsValid(actor.enemy) and 1 or 0), "spider spits only at valid targets")
-	now = now + 1
-	spiderThink(actor)
-	assert(actor.IsSpitting == 0, "spider recovers after a missed spit")
+	advance(actor, 0.5)
+	assert(actor.cotzAbility == nil, "spider recovers after a missed spit")
 end
 
--- Controller and karlik specials are covered by tests/mutant_complex_abilities_spec.lua.
+-- Bloodsucker, controller and karlik specials are covered by tests/mutant_complex_abilities_spec.lua.
 print("Mutant target safety regression checks passed")

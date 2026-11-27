@@ -92,6 +92,7 @@ ix = {
 		end,
 	},
 	log = { AddType = function() end },
+	economyStats = { GetConsumableKind = function() end, Record = function() end },
 	faction = { indices = { [1] = { uniqueID = "stalker" } } },
 	class = { list = {} },
 	item = { list = { apple = { name = "Apple", price = 10 } }, instances = {}, Spawn = function() end },

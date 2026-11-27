@@ -110,7 +110,7 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	TEMP_Mul = mul
+	local TEMP_Mul = mul
 	local headMultiplier = 0.75 // thick skull
 	local torsoMultiplier = 1 // boar is more vulnerable in torso
 	local limbMultiplier = 1

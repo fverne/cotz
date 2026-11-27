@@ -27,6 +27,11 @@ query([[INSERT INTO ix_characters VALUES (1,'ix_cotz','account','Leader','leader
 query([[INSERT INTO ix_characters VALUES (2,'ix_cotz','other','Member','member.png','char:1',0)]])
 query([[INSERT INTO ix_characters VALUES (3,'ix_cotz','account','Alt','alt.png','NULL',0)]])
 query([[INSERT INTO ix_characters VALUES (4,'another','other','Foreign','foreign.png','char:1',1)]])
+-- The public roster joins leaderboard columns and Steam names for the scoreboard.
+for _, column in ipairs({"data TEXT DEFAULT '{}'", "reputation INTEGER DEFAULT 0", "money INTEGER DEFAULT 0"}) do
+	query("ALTER TABLE ix_characters ADD COLUMN " .. column)
+end
+query([[CREATE TABLE ix_players (steamid TEXT PRIMARY KEY, steam_name TEXT)]])
 query([[INSERT INTO ix_squads_squads VALUES ('char:1','Legacy','Message','NULL')]])
 local humans, sent, errors = {}, {}, {}
 local now, map = 100, "map_a"
@@ -70,6 +75,8 @@ local mysqlFile = assert(io.open("gamemodes/helix/gamemode/core/libs/thirdparty/
 local mysqlSource = mysqlFile:read("*a"):gsub("!=", "~="):gsub("!", "not ")
 mysqlFile:close()
 assert(load(mysqlSource))()
+-- COTZ extends the bundled wrapper with composite keys and Build.
+dofile("gamemodes/ix_cotz/plugins/simplecrossserverdata/sv_mysql.lua")
 player = {GetHumans = function() return humans end}
 hook = {Run = function() end}
 net = {Start = function() end, WriteString = function() end, WriteTable = function() end,
@@ -120,6 +127,7 @@ local function character(id)
 	function value:SetSquadColor(entry) self.color = entry end
 	function value:GetName() return "Character " .. id end
 	function value:GetPdaavatar() return "avatar_" .. id .. ".png" end
+	function value:GetReputation() return math.huge end
 	function value:Kick() self.kicked = true end
 	return value
 end
@@ -129,6 +137,7 @@ local function client(char)
 	function value:SteamID64() return self.char.id == 2 and "other" or "account" end
 	function value:SetLocalVar(key, entry) self[key] = entry end
 	function value:Notify() end
+	function value:NotifyLocalized() end
 	function value:Alive() return false end
 	return value
 end

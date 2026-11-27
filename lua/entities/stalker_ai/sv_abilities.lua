@@ -179,7 +179,7 @@ function ENT:STALKERNPCSetAbilityPhase(state, index, start)
 	end
 	if phase.melee then
 		state.animated = true
-		self:STALKERNPCPlayAnimation(self.MeleeAttackSequence[phase.melee], phase.melee)
+		self:STALKERNPCPlayAnimation(phase.animation or self.MeleeAttackSequence[phase.melee], phase.melee)
 		self:STALKERNPCMakeMeleeAttack(phase.melee)
 	elseif phase.animation then
 		state.animated = true
@@ -251,6 +251,14 @@ function ENT:STALKERNPCCancelAbilityWindup()
 	if not state or state.phase ~= 1 or state.definition.cancelOnTargetLoss == false then return end
 
 	self:STALKERNPCFinishAbility(true)
+end
+
+-- For sequences only known at runtime: a phase method plays one and sets how long its phase lasts.
+-- The mutant does not turn towards its target during it.
+function ENT:STALKERNPCAbilityPlaySequence(state, sequence, duration)
+	state.animated = true
+	self:STALKERNPCPlayAnimation(sequence, 0)
+	state.phaseEnd = state.phaseStart + math.max(0, duration)
 end
 
 function ENT:STALKERNPCAbilityLaunchProjectile(class, enemy, speed, offset)

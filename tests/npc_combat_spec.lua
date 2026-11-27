@@ -582,21 +582,21 @@ manager:UpdateAmbientPack(huntingDog.cotzCombatPack, huntingDog)
 math.random = savedRandom
 check(not huntingDog.cotzCombatPack.opponent and huntingDog.enemy == huntingPlayer,
 	"ambient hunting cannot start while its leader is engaged with a player")
-huntingDog.PlayingAnimation, huntingDog.IsGrabbing = true, 2
+huntingDog.PlayingAnimation, huntingDog.cotzAbility = true, {}
 manager:UpdateCombatSchedule(huntingDog)
 check(huntingDog.cotzCombatScheduleDirty and not huntingDog.clearCalls,
 	"schedule refresh waits for active mutant animations and grabs")
 check(not manager:SetCombatTarget(huntingDog, huntingPrey), "active grabs do not voluntarily switch targets")
-huntingDog.PlayingAnimation, huntingDog.IsGrabbing = false, 0
+huntingDog.PlayingAnimation, huntingDog.cotzAbility = false, nil
 manager:UpdateCombatSchedule(huntingDog)
 check(not huntingDog.cotzCombatScheduleDirty and huntingDog.clearCalls == 1,
 	"schedule refresh runs once after grab recovery")
 manager:ClearCombatEnemy(huntingDog)
-huntingDog.PlayingAnimation, huntingDog.isAttacking = true, 2
+huntingDog.PlayingAnimation, huntingDog.cotzAbility = true, {}
 manager:RetaliateCombatActor(huntingDog, huntingPlayer)
 check(not huntingDog.enemy and huntingDog.cotzPlayerFocus == huntingPlayer,
 	"damage during an attack remembers the player without interrupting recovery")
-huntingDog.PlayingAnimation, huntingDog.isAttacking = false, 0
+huntingDog.PlayingAnimation, huntingDog.cotzAbility = false, nil
 manager:ValidateCombatEnemy(huntingDog)
 check(huntingDog.enemy == huntingPlayer, "deferred player retaliation takes effect after attack recovery")
 local alertAlly = actor("npc_mutant_dog", 100, huntingDog.cotzCombatPack)
@@ -780,7 +780,8 @@ check(not recoveringMutant.CurrentSchedule and not recoveringMutant.bDoingEngine
 recoveryPlayer.hidden, recoveryPlayer.position = true, Vector(900)
 advance(0.3)
 local recoveryTicks, newAttacks = 0, 0
-recoveringMutant.PlayingAnimation, recoveringMutant.isAttacking = true, 2
+recoveringMutant.PlayingAnimation, recoveringMutant.cotzAbility = true, {}
+recoveringMutant.STALKERNPCUpdateAbility = function() end
 recoveringMutant.STALKERNPCCancelPendingTargetAbilities = function() end
 recoveringMutant.STALKERNPCThink = function() recoveryTicks = recoveryTicks + 1 end
 recoveringMutant.STALKERNPCAnimationIsPlaying = function() end
@@ -791,9 +792,9 @@ recoveringMutant.STALKERNPCIsEnemyPlayer = function() return true end
 recoveringMutant.STALKERNPCThinkNoEnemy = function() end
 recoveringMutant.STALKERNPCThinkEnemyValidNoAnimCheck = function() newAttacks = newAttacks + 1 end
 loadEntityMethod("lua/entities/stalker_ai/init.lua", "Think")(recoveringMutant)
-check(recoveryTicks == 1 and newAttacks == 0 and recoveringMutant.isAttacking == 2,
+check(recoveryTicks == 1 and newAttacks == 0 and recoveringMutant.cotzAbility,
 	"real mutant Think continues attack recovery without starting new combat work during occlusion")
-recoveringMutant.PlayingAnimation, recoveringMutant.isAttacking = false, 0
+recoveringMutant.PlayingAnimation, recoveringMutant.cotzAbility = false, nil
 loadEntityMethod("lua/entities/stalker_ai/schedules.lua", "SelectSchedule")(recoveringMutant)
 check(recoveringMutant.destination.x == 500 and recoveringMutant.schedule == SCHED_FORCED_GO_RUN,
 	"real mutant SelectSchedule pursues remembered positions after recovery")
@@ -1279,8 +1280,8 @@ check(rifleman.combatProp == props[1] and props[1].attachment == 7 and equipped.
 base.weapons = {{{"tokarev", {}}, "weapon_npc_tokarev"}}
 equipped.hidden = nil
 local pistolman = spawnHuman(base)
-check(pistolman.stance.aim == "revolver" and pistolman.stance.calm == "passive",
-	"a one-handed pistol patrols passively and aims with the revolver stance")
+check(pistolman.stance.aim == "revolver" and pistolman.stance.calm == "all",
+	"a one-handed pistol idles with the all stance and aims with the revolver stance")
 base.weapons = false
 base.MeleeLoadouts = {{model = "models/weapons/tfa_nmrih/w_me_crowbar.mdl", damage = 6,
 	hand = {pos = {1, 1, 1}, ang = {0, 0, 0}}}}

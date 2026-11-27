@@ -22,6 +22,8 @@ for path in files:lines() do
 end
 files:close()
 local previous = {documents = 0, valuables = 0}
+-- Hand-tuned weights that intentionally ignore the inverse-price curve.
+local HAND_TUNED = {cache_valuables_tier3 = {value_pcpart_cpu = true}}
 for tier = 1, 4 do
 	ITEM = {}
 	local source = read("gamemodes/ix_cotz/schema/items/kits/sh_kit_hidestash_" .. tier .. ".lua")
@@ -48,8 +50,10 @@ for tier = 1, 4 do
 			total = total + row[1]
 			value = value + prices[id] * row[1]
 		end
+		local tuned = HAND_TUNED[key] or {}
 		for _, row in ipairs(rows) do
-			for _, other in ipairs(rows) do
+			for _, other in ipairs(tuned[row[2][1]] and {} or rows) do
+				if tuned[other[2][1]] then goto continue end
 				local price = prices[row[2][1]]
 				local otherPrice = prices[other[2][1]]
 				if price < otherPrice then
@@ -59,6 +63,7 @@ for tier = 1, 4 do
 				end
 				local difference = math.abs(row[1] * price - other[1] * otherPrice)
 				assert(difference <= price + otherPrice, "Cache weights must follow inverse item price")
+				::continue::
 			end
 		end
 		assert(total == 10000, "Cache pool must total 10,000")

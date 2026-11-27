@@ -36,6 +36,8 @@ ix.dialogue.ConfigureTownServices = function() end
 ix.dialogue.ConfigureTaskRewards = function() end
 ix.dialogue.ConfigureCustomization = function() end
 ix.dialogue.ConfigureBarterVisibility = function() end
+ix.dialogue.ConfigureHideoutUpgrades = function() end
+ix.dialogue.ConfigureServices = function() end
 dofile(base .. "dialogue/libs/sh_towncontacts.lua")
 local inventory, jobs = {items = {}}, {}
 function inventory:GetItems() return self.items end

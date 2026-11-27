@@ -29,11 +29,6 @@ ENT.CanSpecial = true
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.CanJump = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-
 ENT.hp = 850
 ENT.hpvar = 20
 ENT.injuredact = ACT_WALK_PISTOL
@@ -73,6 +68,27 @@ ENT.navigationLeapMinRange = 300
 ENT.navigationLeapAimHeight = 128
 ENT.navigationLeapSpeed = 1.5
 
+ENT.Abilities = {
+	{
+		name = "jump",
+		navigationLeap = "long",
+		meleeRange = "outside",
+		minRange = ENT.navigationLeapMinRange,
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 3,
+		initialCooldown = 1,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.2},
+			{
+				duration = 0, leap = "long", melee = 1, sound = "Stalker.Chimera.Hit4",
+				untilGrounded = true, untilAnimationDone = true, maxDuration = 4.8,
+			},
+		},
+	},
+}
+
 function ENT:Initialize()
 	self.Model = "models/monsters/chimera2.mdl"
 	self.ragdollModel = "models/monsters/chimera3.mdl" -- skins dont overlap, will anyone notice? x
@@ -109,8 +125,6 @@ function ENT:Initialize()
 	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	
 	self:SetMaxHealth(self:Health())
-
-	self.CanJump = CurTime()+1
 
 	self.NextAbilityTime = CurTime()+1
 	
@@ -151,43 +165,6 @@ function ENT:STALKERNPCThink()
 		end
 
 		self.farttimer = CurTime() + 0.5
-	end
-
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-		self:STALKERNPCPlayAnimation("jump_attack_0",1)
-		self:STALKERNPCMakeMeleeAttack(1)
-		self:EmitSound("Stalker.Chimera.Hit4")
-		self.isAttacking = 2
-	end
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
-end
-
-
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if(self.PlayingAnimation==false) then
-		if self:GetEnemy() then
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance > self.navigationLeapMinRange and distance < self.navigationLeapRange then
-				if(self.CanJump<CurTime()) then
-
-					local TEMP_Rand = math.random(1,5)
-				
-					if TEMP_Rand == 1 or forceJump then
-						self.CanJump = CurTime()+3
-						self.isAttacking = 1
-						self.jumping1 = CurTime()+0.2
-						self.jumping2 = CurTime()+5
-					end
-				end
-			end
-		end
 	end
 end
 

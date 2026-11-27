@@ -14,7 +14,6 @@ local PURSUIT_RETRY = 1
 local PURSUIT_ARRIVAL = 64
 local APPROACH_SECONDS = 10
 local AIM_HITGROUPS = {HITGROUP_CHEST, HITGROUP_STOMACH}
-local TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "isBigJumping", "IsSuccing", "IsGrabbing"}
 local PREDATORS = {blinddog = true, pseudodog = true, psydog = true, cat = true, bloodsucker = true,
 	chimera = true, electrochimera = true, hellhound = true, spider = true, sprig = true}
 local PREY = {boar = true, flesh = true, tark = true, rodent = true, tushkano = true}
@@ -41,12 +40,7 @@ local function cellKey(position)
 end
 
 local function targetBusy(actor)
-	if actor.PlayingAnimation or actor.cotzAbility then return true end
-	for _, field in ipairs(TARGET_ABILITIES) do
-		if (actor[field] or 0) ~= 0 then return true end
-	end
-
-	return false
+	return actor.PlayingAnimation == true or actor.cotzAbility ~= nil
 end
 
 function PLUGIN:IsCombatActor(entity)

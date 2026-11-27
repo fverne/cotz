@@ -56,7 +56,8 @@ ix = {
 	db = {AddToSchema = function() end}, type = {number = 1, string = 2},
 	command = {Add = function(name, command) commands[name] = command end},
 	util = {Include = function() end, FindPlayer = function(value) return value end},
-	progression = {AssignActiveRequirements = function() end},
+	progression = {AssignActiveRequirements = function() end,
+		GetCharacterProgression = function() return {lines = {}} end, SetCharacterProgression = function() end},
 }
 net = {Start = function() end, WriteUInt = function() end, WriteString = function() end,
 	WriteType = function() end, Broadcast = function() end}
@@ -101,6 +102,7 @@ execute(read("gamemodes/ix_cotz/plugins/townnpcs/sh_plugin.lua"))
 execute(read("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_runtime.lua"))
 local town = PLUGIN
 town.AdvanceCounters = function() end
+town.StepID = function(_, slug, id) return slug .. ":" .. id end
 town.RecoverCompletions = function(_, character)
 	if character.reward then
 		character.player:addReputation(character.reward)

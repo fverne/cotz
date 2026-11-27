@@ -153,34 +153,24 @@ local function applySpecies(entity, name)
 		if line:match("^ENT%.navigation") then declarations[#declarations + 1] = line end
 	end
 	assert(load(table.concat(declarations, "\n"), "@" .. name, "t", {ENT = entity}))()
-	entity.CanJump, entity.CanLongJump, entity.CanBigJump, entity.NextAbilityTime = 0, 0, 0, 0
-	entity.CanSuck = 1000
-	if contents:find("\nENT.Abilities = {", 1, true) then
-		-- Run the file-scope definitions so ability tables can reference the navigation fields.
-		local header = contents:sub(1, contents:find("\nfunction ENT:", 1, true)):gsub("^\239\187\191", "")
-		local class = setmetatable({}, {__index = function(definitions, key)
-			local value = {}
-			rawset(definitions, key, value)
+	entity.NextAbilityTime = 0
+	assert(contents:find("\nENT.Abilities = {", 1, true), name .. " lacks abilities")
+	-- Run the file-scope definitions so ability tables can reference the navigation fields.
+	local header = contents:sub(1, contents:find("\nfunction ENT:", 1, true)):gsub("^\239\187\191", "")
+	local class = setmetatable({}, {__index = function(definitions, key)
+		local value = {}
+		rawset(definitions, key, value)
 
-			return value
-		end})
-		local environment = setmetatable({ENT = class, include = function() end, AddCSLuaFile = function() end},
-			{__index = _G})
-		assert(load(header, "@" .. name .. ":header", "t", environment))()
-		entity.Abilities = rawget(class, "Abilities")
-		entity.MeleeAttackSequence = {}
-		entity:STALKERNPCInitAbilities()
-
-		return
-	end
-	local start = assert(contents:find("function ENT:STALKERNPCDistanceForMeleeTooBig(", 1, true))
-	local finish = contents:find("\nfunction ENT:", start + 1, true)
-	local callback = contents:sub(start, finish and finish - 1 or #contents)
-	callback = callback:gsub("!=", "~="):gsub("&&", " and "):gsub("||", " or "):gsub("!", "not ")
-	callback = callback:gsub("//([^\n]*)", "--%1")
-	local methods = {}
-	assert(load(callback, "@" .. name .. ":attack", "t", setmetatable({ENT = methods}, {__index = _G})))()
-	entity.STALKERNPCDistanceForMeleeTooBig = methods.STALKERNPCDistanceForMeleeTooBig
+		return value
+	end})
+	local environment = setmetatable({ENT = class, include = function() end, AddCSLuaFile = function() end,
+		sound = {Add = function() end}}, {__index = _G})
+	assert(load(header, "@" .. name .. ":header", "t", environment))()
+	entity.Abilities = rawget(class, "Abilities")
+	entity.MeleeAttackSequence = {}
+	entity:STALKERNPCInitAbilities()
+	-- Spawn cooldowns have already elapsed.
+	for ability in pairs(entity.cotzAbilityReady) do entity.cotzAbilityReady[ability] = 0 end
 end
 
 for _, isPlayer in ipairs({true, false}) do
@@ -247,17 +237,18 @@ end
 actor = mutant(target(true))
 applySpecies(actor, "dog")
 actor.enemy.position = Vector(150)
-actor:STALKERNPCDistanceForMeleeTooBig()
-check(not actor.isAttacking, "ordinary jump attacks still use their normal probability")
+actor:STALKERNPCTryAbilities(actor.enemy, 0)
+check(not actor.cotzAbility, "ordinary jump attacks still use their normal probability")
 selectAt(actor, 1)
-check(actor.isAttacking == 1 and actor.CanJump == 4, "an escape jump preserves the native cooldown")
+check(actor.cotzAbility.definition.name == "jump" and actor.cotzAbilityReady.jump == 4,
+	"an escape jump preserves the native cooldown")
 
 actor = mutant(target(true))
 applySpecies(actor, "dog")
 actor.enemy.position = Vector(150)
-actor.CanJump = 100
+actor.cotzAbilityReady.jump = 100
 exhaustRetries(actor)
-check(actor.cotzNavigationRetreat and not actor.isAttacking,
+check(actor.cotzNavigationRetreat and not actor.cotzAbility,
 	"jump cooldowns cause retreat rather than an infinite hold")
 
 actor = mutant(target(true))
@@ -270,7 +261,7 @@ actor = mutant(target(true))
 applySpecies(actor, "spider")
 actor.health, actor.enemy.position = 50, Vector(400)
 exhaustRetries(actor)
-check(actor.cotzNavigationRetreat and not actor.isAttacking, "wounded spiders cannot force a disabled leap")
+check(actor.cotzNavigationRetreat and not actor.cotzAbility, "wounded spiders cannot force a disabled leap")
 
 for _, name in ipairs({"snork", "vareshka", "pseudogiant_fast"}) do
 	actor = mutant(target(true))
@@ -287,7 +278,7 @@ actor.enemy.position = Vector(150)
 local formerTrace = util.TraceHull
 util.TraceHull = function() return {Hit = true, StartSolid = true} end
 exhaustRetries(actor)
-check(actor.cotzNavigationRetreat and not actor.isAttacking,
+check(actor.cotzNavigationRetreat and not actor.cotzAbility,
 	"blocked jump arcs retreat instead of jumping through props")
 util.TraceHull = formerTrace
 
@@ -298,7 +289,7 @@ util.TraceHull = function()
 	return {Hit = true, HitWorld = true, HitPos = Vector(60, 0, 80), HitNormal = Vector(0, 0, -1)}
 end
 selectAt(actor, 1)
-check(not actor.isAttacking, "a ceiling blocks a forced jump even when its endpoint is in range")
+check(not actor.cotzAbility, "a ceiling blocks a forced jump even when its endpoint is in range")
 util.TraceHull = formerTrace
 
 actor = mutant(target(true))
@@ -426,10 +417,9 @@ actor:STALKERNPCHoldNavigationPosition()
 for time = 32, 60 do navigationAt(actor, time) end
 check(not actor.cotzNavigationRecovery, "intentional ranged holds are never treated as movement failures")
 
-for _, field in ipairs({"PlayingAnimation", "isAttacking", "IsJumping", "IsLongJumping", "isBigJumping",
-	"IsSuccing", "IsGrabbing", "IsSpitting", "SpecialAttack", "IsWarping"}) do
+for field, value in pairs({PlayingAnimation = true, cotzAbility = {}}) do
 	actor = stranded()
-	actor[field] = field == "PlayingAnimation" and true or 1
+	actor[field] = value
 	navigationAt(actor, 20)
 	check(not actor.cotzNavigationRecovery and not actor.relocated, field .. " protects attack and movement recovery")
 end

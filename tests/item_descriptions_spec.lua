@@ -129,8 +129,8 @@ item.entity, item.data.fieldRecipient, item.data.fieldDescription = nil, nil, ni
 check(cargo(item) == combined .. "\nReturn this to the contact who issued your assignment.",
 	"unaddressed cargo retains its fallback instructions")
 local parcel = method("gamemodes/ix_cotz/plugins/jobsystem/items/jobcargo/sh_job_dead_drop_parcel.lua")
-check(parcel(item):find(combined, 1, true) == 1 and parcel(item):find("Use Field work", 1, true),
-	"dead-drop parcels retain prose and PDA delivery instructions")
+check(parcel(item):find(combined, 1, true) == 1 and parcel(item):find("Use Show assignment", 1, true),
+	"dead-drop parcels retain prose and burial instructions")
 
 local kit = method("gamemodes/ix_cotz/schema/items/base/sh_kits.lua")
 check(kit(item) == combined, "openable kits retain their background without NPC redemption instructions")

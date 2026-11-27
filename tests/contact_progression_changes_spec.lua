@@ -223,7 +223,8 @@ local dialogue = {townContact = "ballast", tree = {
 }}
 function dialogue.addTopic(name, topic) dialogue.tree[name] = topic end
 for _, method in ipairs({"ConfigureTownServices", "ConfigureTaskRewards",
-	"ConfigureCustomization", "ConfigureBarterVisibility"}) do
+	"ConfigureCustomization", "ConfigureBarterVisibility", "ConfigureHideoutUpgrades",
+	"ConfigureServices"}) do
 	ix.dialogue[method] = function() end
 end
 dofile("gamemodes/ix_cotz/plugins/dialogue/libs/sh_towncontacts.lua")

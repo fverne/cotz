@@ -29,9 +29,7 @@ ENT.FBRAP = 80
 ENT.BR = 0
 
 ENT.CanFakeDeath = true
-ENT.FakeDeath = 0
-ENT.FakeDeathTimer = 0
-ENT.FakeDeathTimer2 = 0
+ENT.FakeDeathPending = false
 ENT.FakeDeathResTimer = 0
 ENT.FakeDeathAnimSet = 0
 
@@ -42,11 +40,39 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.GrabTarget = nil
-ENT.CanGrab = 0
-ENT.IsGrabbing = 0
-ENT.grabbing1 = 0
-ENT.grabbing2 = 0
+local ANIMATION_END_MARGIN = 0.1
+local GRAB_DAMAGE = 7
+local GRAB_REACH = 25
+
+ENT.Abilities = {
+	{
+		name = "fakeDeath",
+		triggerOnly = true,
+		cancelOnTargetLoss = false,
+		onFinish = "SkeletonEndFakeDeath",
+		phases = {
+			{duration = 0, method = "SkeletonCollapse"},
+			{duration = 0, method = "SkeletonLieStill"},
+			{duration = 0, method = "SkeletonStandUp"},
+		},
+	},
+	{
+		name = "grab",
+		meleeRange = "outside",
+		maxRange = 100,
+		chance = 0.5,
+		cooldown = 15,
+		recovery = 10,
+		cancelOnTargetLoss = false,
+		validate = "SkeletonHasVictim",
+		onFinish = "SkeletonReleaseVictim",
+		phases = {
+			{duration = 1.2, melee = 6, method = "SkeletonSeize"},
+			{duration = 1.3, method = "SkeletonDrain"},
+			{duration = 0, method = "SkeletonFinishGrab", untilAnimationDone = true, maxDuration = 3},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/skelet.mdl"
@@ -128,83 +154,73 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
-	if (!self.PlayingAnimation) then
-		if (self.FakeDeath == 1) then
-			self:STALKERNPCPlayAnimation("fake_death_"..self.FakeDeathAnimSet.."_0")
-			local _, dur = self:LookupSequence("fake_death_"..self.FakeDeathAnimSet.."_0")
-			self.FakeDeath = 2
-			self.FakeDeathTimer = CurTime()+dur-0.1
-			self.ShouldEmitSound = false
-			self.OldCollisionGroup = self:GetCollisionGroup()
-			self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-		end
+	-- A queued fake death waits for the current attack to finish.
+	if self.FakeDeathPending and self:STALKERNPCTriggerAbility("fakeDeath") then
+		self.FakeDeathPending = false
 	end
+end
 
-	if (self.FakeDeath == 2 and self.FakeDeathTimer < CurTime()) then
-		self:STALKERNPCPlayAnimation("fake_death_"..self.FakeDeathAnimSet.."_1")
-		if (self.FakeDeathResTimer < CurTime()) then
-			self.FakeDeath = 3
-		end
-	end
+function ENT:SkeletonFakeDeathSequence(stage)
+	local sequence = "fake_death_" .. self.FakeDeathAnimSet .. "_" .. stage
+	local _, duration = self:LookupSequence(sequence)
 
-	if (self.FakeDeath == 3) then
-		self:STALKERNPCPlayAnimation("fake_death_"..self.FakeDeathAnimSet.."_2")
-		local _, dur = self:LookupSequence("fake_death_"..self.FakeDeathAnimSet.."_2")
-		self.FakeDeath = 4
-		self.FakeDeathTimer2 = CurTime() + dur-0.1
-	end
+	return sequence, duration - ANIMATION_END_MARGIN
+end
 
-	if (self.FakeDeath == 4 and self.FakeDeathTimer2 < CurTime()) then
-		self:STALKERNPCClearAnimation()
-		self.FakeDeath = 0
-		self.ShouldEmitSound = true
-		self:SetCollisionGroup(self.OldCollisionGroup)
-	end
+function ENT:SkeletonCollapse(_, state)
+	self:STALKERNPCAbilityPlaySequence(state, self:SkeletonFakeDeathSequence(0))
+	self.ShouldEmitSound = false
+	state.collisionGroup = self:GetCollisionGroup()
+	self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+end
 
-	-- GRAB
-	if self.IsGrabbing ~= 0 and not IsValid(self.GrabTarget) then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime() + 10
-		self.GrabTarget = nil
-		self.IsGrabbing = 0
-	end
+function ENT:SkeletonLieStill(_, state)
+	local sequence = self:SkeletonFakeDeathSequence(1)
+	self:STALKERNPCAbilityPlaySequence(state, sequence, self.FakeDeathResTimer - state.phaseStart)
+end
 
-	if self.grabbing1 < CurTime() && self.IsGrabbing == 1 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			local dmg = DamageInfo()
-			dmg:SetDamage(7)
-			dmg:SetAttacker(self)
-			dmg:SetDamageType(DMG_SONIC)
-			dmg:SetInflictor(self)
-			dmg:SetDamagePosition(self.GrabTarget:NearestPoint(self:GetPos()))
+function ENT:SkeletonStandUp(_, state)
+	self:STALKERNPCAbilityPlaySequence(state, self:SkeletonFakeDeathSequence(2))
+end
 
-			self.GrabTarget:TakeDamageInfo(dmg)
+function ENT:SkeletonEndFakeDeath(state)
+	self.ShouldEmitSound = true
+	self:SetCollisionGroup(state.collisionGroup)
+end
 
-			self.IsGrabbing = 2
-		end
-	end
+function ENT:SkeletonSeize(enemy, state)
+	self:SetPos(self:GetPos() + self:GetForward() * GRAB_REACH)
+	state.victim = enemy
+	if enemy and enemy:IsPlayer() then enemy:Freeze(true) end
+end
 
-	if self.grabbing2 < CurTime() and self.IsGrabbing == 2 then
-		self.NextAbilityTime = CurTime() + 10
-		local target = self.GrabTarget
-		if IsValid(target) then
-			local dmg = DamageInfo()
-			dmg:SetDamage(7)
-			dmg:SetAttacker(self)
-			dmg:SetDamageType(DMG_SONIC)
-			dmg:SetInflictor(self)
-			dmg:SetDamagePosition(target:NearestPoint(self:GetPos()))
+-- A victim that disappears mid-grab ends it; after the release, the grab animation may finish.
+function ENT:SkeletonHasVictim(state)
+	return state.released or IsValid(state.victim)
+end
 
-			target:TakeDamageInfo(dmg)
+function ENT:SkeletonDrain(_, state)
+	local victim = state.victim
+	if not IsValid(victim) then return end
 
-			if IsValid(target) and target:IsPlayer() then
-				target:Freeze(false)
-			end
-		end
-		self.GrabTarget = nil
-		self.IsGrabbing = 0
-	end
+	local damage = DamageInfo()
+	damage:SetDamage(GRAB_DAMAGE)
+	damage:SetAttacker(self)
+	damage:SetDamageType(DMG_SONIC)
+	damage:SetInflictor(self)
+	damage:SetDamagePosition(victim:NearestPoint(self:GetPos()))
+	victim:TakeDamageInfo(damage)
+end
+
+function ENT:SkeletonFinishGrab(_, state)
+	self:SkeletonDrain(nil, state)
+	self:SkeletonReleaseVictim(state)
+end
+
+function ENT:SkeletonReleaseVictim(state)
+	local victim = state.victim
+	state.victim, state.released = nil, true
+	if IsValid(victim) and victim:IsPlayer() then victim:Freeze(false) end
 end
 
 function ENT:STALKERNPCOnDeath()
@@ -217,60 +233,11 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 	if ( ((self:Health() - dmginfo:GetDamage()) < 30) and self.CanFakeDeath ) then
 		dmginfo:SetDamage(0)
 		self.CanFakeDeath = false
-		self.FakeDeath = 1
+		self.FakeDeathPending = true
 		self.FakeDeathResTimer = CurTime() + 15
 		self.FakeDeathAnimSet = math.random(0,3)
 		self:SetHealth(self:GetMaxHealth())
 	end
 
 	return mul
-end
-
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if self.NextAbilityTime < CurTime() then
-		if(self.PlayingAnimation==false) then
-			distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance < 100 then
-				if(self.CanGrab<CurTime()) then
-					local TEMP_Rand = math.random(1,5)
-				
-					if(TEMP_Rand==1) then		
-						self.CanGrab = CurTime()+15
-
-						self:SetPos(self:GetPos() + (self:GetForward()*25))
-
-						local target = self:GetEnemy()
-						if target:IsPlayer() then
-							target:Freeze(true)
-						end
-
-						self.GrabTarget = target
-
-						self.NextAbilityTime = CurTime()+4
-
-						self:STALKERNPCPlayAnimation("stand_attack_sasi",6)
-						self:STALKERNPCMakeMeleeAttack(6)
-
-						self.grabbing1 = CurTime() + 1.2
-						self.grabbing2 = CurTime() + 2.5
-
-						self.IsGrabbing = 1
-	
-					end
-				end
-			end
-		end
-	end
-end
-
-function ENT:STALKERNPCOnKilled()
-	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
-		self.GrabTarget:Freeze(false)
-	end
-end
-
-function ENT:STALKERNPCRemove() 
-	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
-		self.GrabTarget:Freeze(false)
-	end
 end

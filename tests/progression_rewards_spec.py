@@ -125,8 +125,8 @@ class ProgressionRewardsSpec(unittest.TestCase):
     def test_buyers_and_canned_job_rewards(self):
         for slug in ("ballast", "cleaner", "ledger"):
             self.assertTrue(self.data["contacts"][slug]["buyAll"])
-            self.assertEqual(self.data["contacts"][slug]["buyScale"], 0.3)
-        packages = self.data["contacts"]["spicy-lemon"]["rewards"]["packages"]
+            self.assertEqual(self.data["contacts"][slug]["buyScale"], 0.15)
+        packages = self.data["contacts"]["spicy-lemon"]["rewards"]["bonusPackages"]
         self.assertEqual(len({i for p in packages for i in p["items"] if i.startswith("food_can_")}), 8)
 
     def test_deferred_or_job_awarded_items_have_no_sale_route(self):

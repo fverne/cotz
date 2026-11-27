@@ -27,7 +27,7 @@ end
 function ENT:STALKERNPCIsInCombat()
 	local enemy = self:GetEnemy()
 	return (IsValid(enemy) and enemy:Health() > 0) or self.PlayingAnimation == true
-		or (self.isAttacking or 0) ~= 0 or self.cotzAbility ~= nil or (self.cotzAwakeUntil or 0) > CurTime()
+		or self.cotzAbility ~= nil or (self.cotzAwakeUntil or 0) > CurTime()
 end
 
 function ENT:STALKERNPCUpdateSleep()
@@ -60,7 +60,6 @@ function ENT:STALKERNPCUpdateSleep()
 	ix.eventController:ClearCombatEnemy(self)
 	if self.STALKERNPCStopAllTimers then self:STALKERNPCStopAllTimers(true) end
 	if self.STALKERNPCClearAnimation then self:STALKERNPCClearAnimation() end
-	self.isAttacking, self.IsJumping, self.IsLongJumping, self.isBigJumping = 0, 0, 0, 0
 	if self.STALKERNPCAbandonAbility then self:STALKERNPCAbandonAbility() end
 	if self.cotzFlying then self:STALKERNPCStopFlight() end
 	self:StopMoving()

@@ -12,7 +12,8 @@ ix.progression.npcRequirements = {}
 for seed = 1, 20 do
 	math.randomseed(seed)
 	for id, definition in pairs(catalogue) do
-		if definition.categoryChoiceRange then
+		-- Hideout levels roll their requirements through the hideout upgrade flow, not active assignment.
+		if definition.categoryChoiceRange and not definition.hideoutLevel then
 			local compiled = table.Copy(definition)
 			compiled.prerequisites = {}
 			compiled.defaultActive = true
@@ -114,7 +115,7 @@ check(ix.progression.GetRequirementUnitSize(id, "value_nuts", a) == 3
 	and ix.progression.GetRequirementUnitSize(id, "value_bolts", a) == 4,
 	"batch sizes use spawned quantities instead of stack capacities")
 local description = ix.progression.BuildDeliveryResponse(ix.progression.definitions[id], "Subset Test", nil, a)
-check(description:find("batches (any mix; per batch:", 1, true)
+check(description:find("(any mix: ", 1, true)
 	and description:find("value_nuts x3", 1, true) and description:find("value_bolts x4", 1, true),
 	"task text states the actual quantity cost of each accepted type")
 local valued, originalValue = {}, ix.util.GetValueFromProgressionTurnin

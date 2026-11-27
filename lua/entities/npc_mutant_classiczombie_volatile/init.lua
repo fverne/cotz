@@ -45,9 +45,7 @@ ENT.FBRAP = 0
 ENT.BR = 5
 
 ENT.CanFakeDeath = true
-ENT.FakeDeath = 0
-ENT.FakeDeathTimer = 0
-ENT.FakeDeathTimer2 = 0
+ENT.FakeDeathPending = false
 ENT.FakeDeathResTimer = 0
 ENT.FakeDeathAnimSet = 0
 
@@ -57,6 +55,22 @@ ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_IDLE_WANDER 
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
+
+local ANIMATION_END_MARGIN = 0.1
+
+ENT.Abilities = {
+	{
+		name = "fakeDeath",
+		triggerOnly = true,
+		cancelOnTargetLoss = false,
+		onFinish = "ZombieEndFakeDeath",
+		phases = {
+			{duration = 0, method = "ZombieCollapse"},
+			{duration = 0, method = "ZombieLieStill"},
+			{duration = 0, method = "ZombieStandUp"},
+		},
+	},
+}
 
 ENT.farttimer = 0
 
@@ -130,41 +144,39 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
-
-	if (!self.PlayingAnimation) then
-		if (self.FakeDeath == 1) then
-			self:STALKERNPCPlayAnimation("fake_death_"..self.FakeDeathAnimSet.."_0")
-			local _, dur = self:LookupSequence("fake_death_"..self.FakeDeathAnimSet.."_0")
-			self.FakeDeath = 2
-			self.FakeDeathTimer = CurTime()+dur-0.1
-			self:EmitSound("Stalker.Zombie.Die"..math.random(self.DieSound.min, self.DieSound.max ))
-			self.ShouldEmitSound = false
-			self.OldCollisionGroup = self:GetCollisionGroup()
-			self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-		end
+	-- A queued fake death waits for the current attack to finish.
+	if self.FakeDeathPending and self:STALKERNPCTriggerAbility("fakeDeath") then
+		self.FakeDeathPending = false
 	end
+end
 
-	if (self.FakeDeath == 2 and self.FakeDeathTimer < CurTime()) then
-		self:STALKERNPCPlayAnimation("fake_death_"..self.FakeDeathAnimSet.."_1")
-		if (self.FakeDeathResTimer < CurTime()) then
-			self.FakeDeath = 3
-		end
-	end
+function ENT:ZombieFakeDeathSequence(stage)
+	local sequence = "fake_death_" .. self.FakeDeathAnimSet .. "_" .. stage
+	local _, duration = self:LookupSequence(sequence)
 
-	if (self.FakeDeath == 3) then
-		self:STALKERNPCPlayAnimation("fake_death_"..self.FakeDeathAnimSet.."_2")
-		local _, dur = self:LookupSequence("fake_death_"..self.FakeDeathAnimSet.."_2")
-		self.FakeDeath = 4
-		self.FakeDeathTimer2 = CurTime() + dur-0.1
-	end
+	return sequence, duration - ANIMATION_END_MARGIN
+end
 
-	if (self.FakeDeath == 4 and self.FakeDeathTimer2 < CurTime()) then
-		self:STALKERNPCClearAnimation()
-		self.FakeDeath = 0
-		self.ShouldEmitSound = true
-		self:SetCollisionGroup(self.OldCollisionGroup)
-	end
+function ENT:ZombieCollapse(_, state)
+	self:STALKERNPCAbilityPlaySequence(state, self:ZombieFakeDeathSequence(0))
+	self:EmitSound("Stalker.Zombie.Die" .. math.random(self.DieSound.min, self.DieSound.max))
+	self.ShouldEmitSound = false
+	state.collisionGroup = self:GetCollisionGroup()
+	self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+end
 
+function ENT:ZombieLieStill(_, state)
+	local sequence = self:ZombieFakeDeathSequence(1)
+	self:STALKERNPCAbilityPlaySequence(state, sequence, self.FakeDeathResTimer - state.phaseStart)
+end
+
+function ENT:ZombieStandUp(_, state)
+	self:STALKERNPCAbilityPlaySequence(state, self:ZombieFakeDeathSequence(2))
+end
+
+function ENT:ZombieEndFakeDeath(state)
+	self.ShouldEmitSound = true
+	self:SetCollisionGroup(state.collisionGroup)
 end
 
 function ENT:STALKERNPCOnDeath()
@@ -194,13 +206,13 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	TEMP_Mul = mul
+	local TEMP_Mul = mul
 	--hacky shit code for checking for headshots
 	local pos = dmginfo:GetDamagePosition()
 	local hitgroup = 0
 
-	headbonepos, headboneang = self:GetBonePosition(self:GetHitBoxBone( 11, 0 ))
-	chestbonepos, chestboneang = self:GetBonePosition(self:GetHitBoxBone( 10, 0 ))
+	local headbonepos = self:GetBonePosition(self:GetHitBoxBone( 11, 0 ))
+	local chestbonepos = self:GetBonePosition(self:GetHitBoxBone( 10, 0 ))
 
 	headbonepos = headbonepos + Vector (0,0,4)
 	
@@ -218,7 +230,7 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 	if ( ((self:Health() - dmginfo:GetDamage()) < 30) and self.CanFakeDeath ) then
 		dmginfo:SetDamage(0)
 		self.CanFakeDeath = false
-		self.FakeDeath = 1
+		self.FakeDeathPending = true
 		self.FakeDeathResTimer = CurTime() + 15
 		self.FakeDeathAnimSet = math.random(0,3)
 		self:SetHealth(self:GetMaxHealth())

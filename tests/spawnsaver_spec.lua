@@ -15,11 +15,18 @@ hook = {Run = function(name)
 	if name == "GetCharacterSavePosition" then return saveOverride end
 	if name == "GetCharacterRestorePosition" then return restoreOverride end
 end}
+local vectorMeta = {}
+function Vector(x, y, z) return setmetatable({x = x, y = y, z = z}, vectorMeta) end
+vectorMeta.__sub = function(a, b) return Vector(a.x - b.x, a.y - b.y, a.z - b.z) end
+isvector = function(value) return getmetatable(value) == vectorMeta end
+-- Arrival hulls are clear and need no nudge, so the plain height adjustment applies.
+util = {TraceHull = function() return {StartSolid = false} end}
+ix = {util = {FindClearSpawnPosition = function() end}}
 PLUGIN = {}
 assert(loadfile("gamemodes/ix_cotz/plugins/spawnsaver.lua"))()
 
 local function point(x, z)
-	return {x = x, y = 20, z = z or 30}
+	return Vector(x, 20, z or 30)
 end
 
 local function actor()
@@ -31,6 +38,8 @@ local function actor()
 	function client:EyeAngles() return self.angles end
 	function client:SetPos(value) self.position = value end
 	function client:SetEyeAngles(value) self.angles = value end
+	function client:OBBMins() return Vector(-16, -16, 0) end
+	function client:OBBMaxs() return Vector(16, 16, 72) end
 	function character:GetPlayer() return client end
 	function character:GetData(key) return self.data[key] end
 	function character:SetData(key, value) self.data[key] = value end

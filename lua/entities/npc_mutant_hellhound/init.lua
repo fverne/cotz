@@ -37,11 +37,6 @@ ENT.BR = 20
 
 ENT.IgniteTime = 0
 
-ENT.CanSpew = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-
 ENT.NextAbilityTime = 0
 
 ENT.MinRangeDist = 800
@@ -51,6 +46,22 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
 
 ENT.navigationRangedRange = 200
+
+ENT.Abilities = {
+	{
+		name = "spew",
+		meleeRange = "outside",
+		maxRange = ENT.navigationRangedRange,
+		chance = 0.5,
+		cooldown = 3,
+		recovery = 0.5,
+		onFinish = "HellhoundStopFlames",
+		phases = {
+			{duration = 0.2},
+			{duration = 1.3, method = "HellhoundStartFlames", melee = 5, sound = "Stalker.Dog.Melee1"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/slep_dog2.mdl"
@@ -170,46 +181,14 @@ function ENT:STALKERNPCThink()
 		self:Ignite(30)
 		self.IgniteTime = CurTime() + 29
 	end
-
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-
-		self.Entity:SetNWBool( "Burn", true )
-
-		self:STALKERNPCPlayAnimation("stand_attack_0",5)
-		self:STALKERNPCMakeMeleeAttack(5)
-		self:EmitSound("Stalker.Dog.Melee1")
-		self.isAttacking = 2
-	end
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.Entity:SetNWBool( "Burn", false )
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
 end
 
-function ENT:STALKERNPCOnDeath()
-	self.Entity:SetNWBool( "Burn", false )
+function ENT:HellhoundStartFlames()
+	self:SetNWBool("Burn", true)
 end
 
-//little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < self.navigationRangedRange then
-			if(self.CanSpew < CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-				
-				if(TEMP_Rand==1) then		
-					self.CanSpew = CurTime()+3
-					self.isAttacking = 1
-					self.jumping1 = CurTime()+0.2
-					self.jumping2 = CurTime()+1.5
-				end
-			end
-		end
-	end
+function ENT:HellhoundStopFlames()
+	self:SetNWBool("Burn", false)
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
@@ -217,5 +196,5 @@ function ENT:STALKERNPCDamageTake(dmginfo,mul)
 		return 0
 	end
 
-	return TEMP_Mul
+	return mul
 end

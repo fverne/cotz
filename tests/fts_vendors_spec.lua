@@ -89,8 +89,11 @@ ix.util.SpawnAdvVendor = function(template, position, angles)
 	present[ix.npctemplates.templates[template].name] = row
 end
 file = assert(io.open(base .. "README.md"))
-local recovery = assert(file:read("*a"):match("```lua\nlua_run ([^\n]+)\n```"))
+local recoveryBlock = assert(file:read("*a"):match("```lua\n(lua_run .-)\n```"))
 file:close()
+-- The documented recovery is a sequence of console lines; run each one in order.
+local recovery = recoveryBlock:gsub("lua_run ", "")
+setup.PluginDataDeployFunctions.townnpcs = function() return true end
 assert(load(recovery))()
 check(#spawned == 9 and #saved == 9, "documented recovery creates and saves missing vendors")
 check(spawned[1] == existing and existing.position.x == 1 and existing.money == 123,

@@ -728,6 +728,8 @@ PLUGIN = {}
 assert(load(standardLua(read("gamemodes/ix_cotz/plugins/suits/sh_plugin.lua")), "@suits/plugin"))()
 -- The Looted melee perk lives in sv_meleeperk.lua and is covered by suit_variants_spec.
 PLUGIN.ApplyMeleePerk = function() end
+-- Player meta methods load into a throwaway table above; this client wears no body armor.
+client.getEquippedBodyArmor = function() end
 for _, radiationFirst in ipairs({false, true}) do
 	mask.data.filterCondition, mask.data.durability = 100, 100
 	info.value = 120

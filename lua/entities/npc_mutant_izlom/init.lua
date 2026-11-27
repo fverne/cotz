@@ -37,16 +37,6 @@ ENT.BR = 8
 
 ENT.FleeTime = 0
 ENT.MustFlee = false
-ENT.CanPull = 0
-ENT.isAttacking = 0
-ENT.pulling1 = 0
-ENT.pulling2 = 0
-
-ENT.CanGrab = 0
-ENT.grabbing1 = 0
-ENT.grabbing2 = 0
-ENT.grabbing3 = 0
-ENT.IsGrabbing = 0
 
 ENT.CanSpecial = true
 
@@ -60,6 +50,43 @@ ENT.TEMP_PunchDamage2 = 0
 
 ENT.navigationRangedRange = 512
 ENT.navigationRangedMinRange = 256
+
+local PULL_STRENGTH = 1.5
+local PULL_LIFT = 0.38
+local PULL_STAMINA = 35
+local THROW_LIFT = 5
+local THROW_SPEED = 120
+
+ENT.Abilities = {
+	{
+		name = "pull",
+		meleeRange = "outside",
+		minRange = ENT.navigationRangedMinRange,
+		maxRange = ENT.navigationRangedRange,
+		chance = 0.5,
+		cooldown = 7,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.2},
+			{duration = 0.7, method = "IzlomPull", melee = 3, sound = "Stalker.Izlom.Melee1"},
+		},
+	},
+	{
+		name = "grab",
+		meleeRange = "outside",
+		maxRange = 125,
+		chance = 0.5,
+		cooldown = 15,
+		cancelOnTargetLoss = false,
+		validate = "IzlomHasVictim",
+		onFinish = "IzlomReleaseVictim",
+		phases = {
+			{duration = 0.1, method = "IzlomSeize"},
+			{duration = 2, melee = 4, sound = "Stalker.Izlom.Chase10"},
+			{duration = 0, method = "IzlomThrow"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/izlom.mdl"
@@ -137,119 +164,38 @@ function ENT:STALKERNPCThink()
 		self:SetMovementActivity(self.injuredact)
 	end
 
-	-- PULLING
-	if (self.pulling1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		local dirnormal =((self:GetPos() + self:OBBCenter()) - (self:GetEnemy():GetPos())):GetNormal()
-		dirnormal[3] = 0.38
-
-		self:GetEnemy():SetVelocity((dirnormal*(distance*1.5)))
-
-		if(self:GetEnemy().ConsumeStamina) then
-			self:GetEnemy():ConsumeStamina(35)
-		end
-
-		self:STALKERNPCPlayAnimation("stand_run_attack_0",3)
-		self:STALKERNPCMakeMeleeAttack(3)
-		self:EmitSound("Stalker.Izlom.Melee1")
-		self.isAttacking = 2
-	end
-	if (self.pulling2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
-	-- PULLING END
-
-	-- GRAB
-	if self.grabbing1 < CurTime() && self.IsGrabbing == 1 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCStopAllTimers()
-			self:STALKERNPCClearAnimation()
-
-			self:STALKERNPCPlayAnimation("stand_attack_1",4)
-			self:STALKERNPCMakeMeleeAttack(4)
-
-			self:EmitSound("Stalker.Izlom.Chase10")
-			self.IsGrabbing = 2
-		end
-	end
-
-	if self.grabbing2 < CurTime() && self.IsGrabbing == 2 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) and self.GrabTarget then
-
-			if not IsValid(self.GrabTarget) then
-				self.IsGrabbing = 0
-				self.GrabTarget = nil
-
-				return
-			end
-			self:STALKERNPCStopAllTimers()
-			self:STALKERNPCClearAnimation()
-
-			if self.GrabTarget:IsPlayer() then
-				self.GrabTarget:Freeze(false)
-			end
-			self.GrabTarget:SetLocalVelocity(((self.GrabTarget:GetPos() - self:GetPos()):GetNormal() + self:GetUp()*5)*120)
-			self.GrabTarget = nil
-			self.IsGrabbing = 0
-		end
-	end
-	-- GRAB END
 end
 
-//little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos())) or 0
-		if distance > self.navigationRangedMinRange and distance < self.navigationRangedRange then
-			if(self.CanPull<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-				
-				if(TEMP_Rand==1) then		
-					self.CanPull = CurTime()+7
-					self.isAttacking = 1
-					self.pulling1 = CurTime()+0.2
-					self.pulling2 = CurTime()+0.9
-				end
-			end
-		end
+function ENT:IzlomPull(enemy)
+	if not enemy then return end
 
-		if distance < 125 then
-			if(self.CanGrab < CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-				
-				if(TEMP_Rand==1) then		
-					self.CanGrab = CurTime()+15
-
-					local target = self:GetEnemy()
-					self.GrabTarget = target
-					if target:IsPlayer() then
-						target:Freeze(true)
-					end
-
-					self.grabbing1 = CurTime() + 0.1
-					self.grabbing2 = CurTime() + 2.1
-					self.IsGrabbing = 1
-				end
-			end
-		end
-	end
+	local distance = self:GetPos():Distance(enemy:GetPos())
+	local direction = (self:GetPos() + self:OBBCenter() - enemy:GetPos()):GetNormalized()
+	direction.z = PULL_LIFT
+	enemy:SetVelocity(direction * (distance * PULL_STRENGTH))
+	if enemy.ConsumeStamina then enemy:ConsumeStamina(PULL_STAMINA) end
 end
 
-function ENT:STALKERNPCOnKilled()
-	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
-		self.GrabTarget:Freeze(false)
-	end
-	self.GrabTarget = nil
-	self.IsGrabbing = 0
+function ENT:IzlomSeize(enemy, state)
+	state.victim = enemy
+	if enemy and enemy:IsPlayer() then enemy:Freeze(true) end
 end
 
-function ENT:STALKERNPCRemove()
-	if IsValid(self.GrabTarget) and self.GrabTarget:IsPlayer() then
-		self.GrabTarget:Freeze(false)
-	end
-	self.GrabTarget = nil
-	self.IsGrabbing = 0
+function ENT:IzlomHasVictim(state)
+	return state.released or IsValid(state.victim)
+end
+
+function ENT:IzlomThrow(_, state)
+	local victim = state.victim
+	self:IzlomReleaseVictim(state)
+	if not IsValid(victim) then return end
+
+	local direction = (victim:GetPos() - self:GetPos()):GetNormalized() + self:GetUp() * THROW_LIFT
+	victim:SetLocalVelocity(direction * THROW_SPEED)
+end
+
+function ENT:IzlomReleaseVictim(state)
+	local victim = state.victim
+	state.victim, state.released = nil, true
+	if IsValid(victim) and victim:IsPlayer() then victim:Freeze(false) end
 end

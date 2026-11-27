@@ -171,7 +171,7 @@ function ENT:STALKERNPCOnDeath()
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 
-	TEMP_Mul = mul
+	local TEMP_Mul = mul
 	local headMultiplier = 1.5 // head is weakpoint for pseudogiant
 	local torsoMultiplier = 1 
 	local limbMultiplier = 1

@@ -34,19 +34,10 @@ ENT.FBR = 8
 ENT.FBRAP = 8
 ENT.BR = 20
 
-ENT.CanJump = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-
 ENT.NextAbilityTime = 0
 
-ENT.IsTeleporting = 0
+ENT.TeleportPending = false
 ENT.CanTeleportTimer = 0
-
-ENT.CanSpit = 0
-ENT.spitting = 0
-ENT.IsSpitting = 0
 
 ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1200
@@ -60,6 +51,55 @@ ENT.navigationRangedRange = 800
 
 ENT.navigationLeapAimHeight = 128
 ENT.navigationLeapSpeed = 1.5
+
+local SPIT_OFFSET_FORWARD = 15
+local SPIT_OFFSET_UP = 50
+local SPIT_ARC_DIVISOR = 8
+local SPIT_SPEED = 1500
+local BURROW_HOLD = 0.8
+
+ENT.Abilities = {
+	{
+		name = "jump",
+		navigationLeap = "long",
+		canUse = "SpiderCanLeap",
+		meleeRange = "outside",
+		minRange = ENT.navigationLeapMinRange,
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 3,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.2},
+			{
+				duration = 0, leap = "long", melee = 4, sound = "Stalker.Rodent.Melee2",
+				untilGrounded = true, untilAnimationDone = true, maxDuration = 4.8,
+			},
+		},
+	},
+	{
+		name = "spit",
+		canUse = "SpiderCanSpit",
+		meleeRange = "outside",
+		maxRange = ENT.navigationRangedRange,
+		cooldown = 4,
+		cancelOnTargetLoss = false,
+		phases = {
+			{duration = 0.8, animation = "attack_web", attackIndex = 0, method = "SpiderAimSpit"},
+			{duration = 0.5, method = "SpiderSpit"},
+		},
+	},
+	{
+		name = "teleport",
+		triggerOnly = true,
+		cancelOnTargetLoss = false,
+		onFinish = "SpiderEndBurrow",
+		phases = {
+			{duration = 0, method = "SpiderBurrow"},
+			{duration = 0, method = "SpiderEmerge"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/darkmessiah/spider_regular.mdl"
@@ -126,78 +166,71 @@ function ENT:STALKERNPCThinkEnemyValid()
 end
 
 function ENT:STALKERNPCThink()
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 and self:GetEnemy() then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-
-		self:STALKERNPCPlayAnimation("attack_2",4)
-		self:STALKERNPCMakeMeleeAttack(4)
-		self:EmitSound("Stalker.Rodent.Melee2")
-		self.isAttacking = 2
+	-- A queued teleport waits for the current attack to finish.
+	if self.TeleportPending and self:STALKERNPCTriggerAbility("teleport") then
+		self.TeleportPending = false
 	end
+end
 
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
+-- Healthy spiders leap; wounded ones spit instead.
+function ENT:SpiderCanLeap()
+	return self:Health() > self.navigationLeapHealthFraction * self:GetMaxHealth()
+end
 
-	if (!self.PlayingAnimation) then
-		if (self.IsTeleporting == 1) then
-			self:STALKERNPCPlayAnimation("desummoned")
-			local _, dur = self:LookupSequence("desummoned")
-			self.IsTeleporting = 2
-			self.TeleportTimer = CurTime()+dur+0.8
-			self:EmitSound("Stalker.Spider.Spider")
-			self.ShouldEmitSound = false
-			self.OldCollisionGroup = self:GetCollisionGroup()
-			self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
-		end
-	end
+function ENT:SpiderCanSpit()
+	return not self.cotzUnreachableRecovery and not self:SpiderCanLeap()
+end
 
-	if (self.IsTeleporting == 2 and self.TeleportTimer < CurTime()) then
-		self:DoTeleport()
-		self:STALKERNPCPlayAnimation("summoned")
-		self.IsTeleporting = 3
-		self.ShouldEmitSound = true
-		self:SetCollisionGroup(self.OldCollisionGroup)
-		self:EmitSound("Stalker.Spider.Burrow")
+function ENT:SpiderSpitAim(enemy)
+	local origin = self:GetPos() + Vector(0, 0, SPIT_OFFSET_UP) + self:GetForward() * SPIT_OFFSET_FORWARD
+	local arc = Vector(0, 0, self:GetPos():Distance(enemy:GetPos()) / SPIT_ARC_DIVISOR)
 
-		local _, dur = self:LookupSequence("summoned")
-		self.TeleportTimer = CurTime()+dur
+	return origin, enemy:GetPos() + enemy:OBBCenter() + arc
+end
 
-	end
+function ENT:SpiderAimSpit(enemy)
+	if not enemy then return end
 
-	if( self.IsTeleporting == 3 and self.TeleportTimer < CurTime()) then
-		self:STALKERNPCClearAnimation()
-		self.IsTeleporting = 0
-	end
+	local origin, target = self:SpiderSpitAim(enemy)
+	local angles = self:GetAngles()
+	local yaw = (target - origin):GetNormalized():Angle().y
+	self:SetAngles(Angle(angles.p, yaw, angles.r))
+end
 
-	if (self.IsSpitting == 1 and self.spitting < CurTime()) then
-		self.IsSpitting = 2
-		self.spitting = CurTime() + 0.5
+function ENT:SpiderSpit(enemy)
+	if not enemy or not enemy:Visible(self) then return end
 
-		local TEMP_POORGUY = self:GetEnemy()
-		if IsValid(TEMP_POORGUY) and TEMP_POORGUY:Visible(self) then
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			local TEMP_ShootPoint = TEMP_POORGUY:GetPos()+TEMP_POORGUY:OBBCenter()+Vector(0,0,distance/8)
+	local origin, target = self:SpiderSpitAim(enemy)
+	local projectile = ents.Create("ent_spider_ball")
+	if not IsValid(projectile) then return end
+	projectile:SetPos(origin)
+	projectile:SetAngles((target - origin):Angle())
+	projectile:Spawn()
+	projectile:SetOwner(self)
+	local physics = projectile:GetPhysicsObject()
+	if IsValid(physics) then physics:SetVelocity((target - origin):GetNormalized() * SPIT_SPEED) end
+end
 
-			local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-					
-			local TEMP_Grav = ents.Create("ent_spider_ball")
-			TEMP_Grav:SetPos(TEMP_ShootPos)
-			TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
-			TEMP_Grav:Spawn()
-							
-			TEMP_Grav:SetOwner(self)
-							
-			TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*1500)
-		end
-	end
+function ENT:SpiderBurrow(_, state)
+	local _, duration = self:LookupSequence("desummoned")
+	self:STALKERNPCAbilityPlaySequence(state, "desummoned", duration + BURROW_HOLD)
+	self:EmitSound("Stalker.Spider.Spider")
+	self.ShouldEmitSound = false
+	state.collisionGroup = self:GetCollisionGroup()
+	self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+end
 
-	if( self.IsSpitting == 2 and self.spitting < CurTime()) then
-		self.IsSpitting = 0
-		self:STALKERNPCClearAnimation()
-	end
+function ENT:SpiderEmerge(_, state)
+	self:DoTeleport()
+	local _, duration = self:LookupSequence("summoned")
+	self:STALKERNPCAbilityPlaySequence(state, "summoned", duration)
+	self:SpiderEndBurrow(state)
+	self:EmitSound("Stalker.Spider.Burrow")
+end
+
+function ENT:SpiderEndBurrow(state)
+	self.ShouldEmitSound = true
+	self:SetCollisionGroup(state.collisionGroup)
 end
 
 function ENT:STALKERNPCOnDeath()
@@ -207,7 +240,7 @@ end
 function ENT:STALKERNPCDamageTake(dmginfo,mul)
 
 	if( math.random(100) > 70) and self.CanTeleportTimer < CurTime() then
-		self.IsTeleporting = 1
+		self.TeleportPending = true
 		self.CanTeleportTimer = CurTime() + 15
 	end
 
@@ -217,47 +250,6 @@ end
 function ENT:DoTeleport()
 	self:SetPos(self:GetTeleportLocation())
 end
-
-//little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if(self.PlayingAnimation==false) then
-		if self:Health() > self.navigationLeapHealthFraction * self:GetMaxHealth() then
-
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance < self.navigationLeapRange and distance > self.navigationLeapMinRange then
-				if(self.CanJump<CurTime()) then
-					local TEMP_Rand = math.random(1,5)
-			
-					if TEMP_Rand == 1 or forceJump then
-						self.CanJump = CurTime()+3
-						self.isAttacking = 1
-						self.jumping1 = CurTime()+0.2
-						self.jumping2 = CurTime()+5
-					end
-				end
-			end
-		else
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if self.CanSpit < CurTime() and distance < self.navigationRangedRange then
-				self.CanSpit = CurTime() + 4
-				self.spitting = CurTime() + 0.8
-				self.IsSpitting = 1
-				self:STALKERNPCPlayAnimation("attack_web")
-
-				
-				local TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()+Vector(0,0,distance/8)
-
-				local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-				local _, yaw, _ = (TEMP_ShootPoint-TEMP_ShootPos):GetNormalized():Angle():Unpack()
-				local pitch, _, roll = self:GetAngles():Unpack()
-
-				self:SetAngles(Angle(pitch,yaw,roll))
-			end
-		end
-	end
-end
-
 
 function ENT:GetTeleportLocation( )
 	local tracegood = false

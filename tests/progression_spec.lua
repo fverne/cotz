@@ -605,10 +605,10 @@ local request = ix.progression.definitions.journalRewardsFixture
 local journal = ix.progression.DescribeTask(request, request.keyNpc, {}, journalOwner)
 local requiredAt, rewardsAt = journal:find("REQUIRED ITEMS:", 1, true), journal:find("Rewards:", 1, true)
 check(requiredAt and rewardsAt and requiredAt < rewardsAt, "requirements precede a distinct Rewards section")
+-- The payment line is intentionally hidden in GetBenefitSummary; payment itself is unchanged.
 check(journal:find("Purchase access:", 1, true) > rewardsAt
-	and journal:find("Stock capacity:", 1, true) > rewardsAt
-	and journal:find("60% of the accepted hand-in value", 1, true) > rewardsAt,
-	"purchase access, stock capacity and money all appear under Rewards")
+	and journal:find("Stock capacity:", 1, true) > rewardsAt,
+	"purchase access and stock capacity appear under Rewards")
 check(not ix.progression.BuildDeliveryResponse(request, request.keyNpc, {}, journalOwner):find("Purchase access:", 1, true),
 	"required-item text never includes purchase rewards")
 
