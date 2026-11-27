@@ -1,9 +1,11 @@
 include( "shared.lua" )
 
-ENT.RenderGroup = RENDERGROUP_BOTH
+-- Mutants use translucent render modes and client material effects. RENDERGROUP_BOTH drew each one
+-- twice per frame (Draw in the opaque pass, then DrawTranslucent); the translucent pass alone is enough.
+ENT.RenderGroup = RENDERGROUP_TRANSLUCENT
 
 function ENT:Draw()
-	self.Entity:DrawModel()
+	self:DrawModel()
 end
 
 function ENT:DrawTranslucent()

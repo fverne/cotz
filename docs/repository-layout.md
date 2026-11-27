@@ -17,6 +17,7 @@ Moved Lua files retain their original contents; loaders, documentation, and tool
 | `lua/cotz/` | Standard-Lua data files included explicitly, such as the [attachment placement](attachment-placement.md) policy. |
 | `lua/cw/`, `lua/ecw/`, `lua/tfa/` | Weapon framework support at paths expected by those frameworks. |
 | `lua/entities/`, `lua/weapons/`, `lua/effects/` | Registered entities, SWEPs, and effects; paths determine class names. |
+| `lua/entities/stalker_ai/` | Shared mutant base: combat, sleep, navigation, declarative abilities and flight. See the [mutant base](mutant-base.md). |
 | `lua/stalkernpcbasevars.lua` | Shared NPC definitions included by the NPC autorun files. |
 | `docs/` | Project guides and balance tooling, inputs, historical baselines, and tests. |
 | `tests/` | Standalone Lua regression checks. |

@@ -74,7 +74,7 @@ function ENT:STALKERNPCNavigationGround(position)
 end
 
 function ENT:STALKERNPCNavigationBusy()
-	if self.PlayingAnimation then return true end
+	if self.PlayingAnimation or self.cotzAbility then return true end
 	for _, field in ipairs(BUSY_FIELDS) do
 		if (self[field] or 0) ~= 0 then return true end
 	end

@@ -6,6 +6,5 @@ end
 
 function ENT:Draw()
 	
-	self:SetModel("models/monsters/skelet.mdl")
 	self:DrawModel()
 end

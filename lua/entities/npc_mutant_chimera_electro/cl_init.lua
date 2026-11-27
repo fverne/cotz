@@ -9,6 +9,5 @@ function ENT:Draw()
 	if not self.particle:IsValid() then
 		self.particle = CreateParticleSystem( self, "electra_static", PATTACH_ABSORIGIN_FOLLOW, 0, Vector(0,0,16) )
 	end
-	self:SetModel("models/monsters/chimera2.mdl")
 	self:DrawModel()
 end

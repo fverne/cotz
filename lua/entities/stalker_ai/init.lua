@@ -9,6 +9,8 @@ include( "shared.lua" )
 include("sv_performance.lua")
 include("sv_summoning.lua")
 include("sv_navigation.lua")
+include("sv_abilities.lua")
+include("sv_flight.lua")
 include( "schedules.lua" )
 include( "tasks.lua" )
 
@@ -126,6 +128,9 @@ function ENT:STALKERNPCInit(VEC,MTYPE,CAPS)
 	duplicator.RegisterEntityClass( self:GetClass(), function( ply, data )
 		duplicator.GenericDuplicatorFunction( ply, data )
 	end, "Data" )
+
+	if self.Abilities then self:STALKERNPCInitAbilities() end
+	if self.MovementMode == "fly" then self:STALKERNPCInitFlight() end
 
 
 	if(self.SNPCClass=="C_ZOMBIE") then
@@ -374,6 +379,7 @@ function ENT:STALKERNPCKill(dmginfo)
 
 	if(self.IsAlive==true) then
 		self.IsAlive = false
+		self.cotzAbility = nil
 
 		self:STALKERNPCStopAllTimers()
 		self.Animation = ""
@@ -963,6 +969,7 @@ local PENDING_TARGET_ABILITIES = {"isAttacking", "IsJumping", "IsLongJumping", "
 function ENT:STALKERNPCCancelPendingTargetAbilities()
 	if IsValid(self:GetEnemy()) then return end
 
+	self:STALKERNPCCancelAbilityWindup()
 	local cancelled = false
 	for _, field in ipairs(PENDING_TARGET_ABILITIES) do
 		-- State 1 is the windup; later states must still run their landing/recovery cleanup.
@@ -986,6 +993,7 @@ function ENT:Think()
 	if(GetConVar("ai_disabled"):GetInt()==0&&self.IsAlive==true) then
 
 		self:STALKERNPCCancelPendingTargetAbilities()
+		if self.cotzAbility then self:STALKERNPCUpdateAbility() end
 		self:STALKERNPCThink()
 
 		if(self.PlayingAnimation==true) then
@@ -1003,8 +1011,8 @@ function ENT:Think()
 		if(self:GetEnemy()&&IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL&&
 		(self:STALKERNPCIsEnemyNPC(self:GetEnemy())||self:STALKERNPCIsEnemyPlayer(self:GetEnemy()))
 		and self.cotzPlayerVisible ~= false) then
-			if(self:IsOnGround()) then
-				if(self.PlayingAnimation==false) then
+			if self.cotzFlying or self:IsOnGround() then
+				if self.PlayingAnimation == false and not self.cotzAbility then
 
 					if(self:GetEnemy():Visible(self)) then
 						local TEMP_MaxMeleeDistance = self.MeleeAttackDistance
@@ -1015,7 +1023,10 @@ function ENT:Think()
 
 						local TEMP_DistanceForMelee, TEMP_DistToEnemy = self:STALKERNPCEnemyInMeleeRange(self:GetEnemy(),self.MeleeAttackDistanceMin,TEMP_MaxMeleeDistance)
 
-						if(TEMP_DistanceForMelee==2) then
+						if self.Abilities and not self.cotzNavigationRetreat
+							and self:STALKERNPCTryAbilities(self:GetEnemy(), TEMP_DistanceForMelee) then
+							-- The started ability owns this tick.
+						elseif(TEMP_DistanceForMelee==2) then
 							local TEMP_IND = self:STALKERNPCSelectMeleeAttack()
 							self:STALKERNPCMeleePlay(TEMP_IND)
 						elseif(TEMP_DistanceForMelee==1) then
@@ -1046,6 +1057,8 @@ function ENT:Think()
 
 			self:STALKERNPCThinkNoEnemy()
 		end
+
+		if self.cotzFlying then self:STALKERNPCUpdateFlight() end
 	end
 
 	self:NextThink(CurTime() + self:STALKERNPCGetThinkInterval())

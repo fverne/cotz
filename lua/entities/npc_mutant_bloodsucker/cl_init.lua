@@ -5,7 +5,6 @@ function ENT:Initialize()
 end
 
 function ENT:Draw()
-	self:SetModel("models/monsters/krovosos.mdl")
 	local TEMP_SelfMat = self:GetMaterial()
 	local distance = (self:GetPos():Distance(LocalPlayer():GetPos()))
 	if distance > 150 then

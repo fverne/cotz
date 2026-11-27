@@ -41,7 +41,7 @@ local function cellKey(position)
 end
 
 local function targetBusy(actor)
-	if actor.PlayingAnimation then return true end
+	if actor.PlayingAnimation or actor.cotzAbility then return true end
 	for _, field in ipairs(TARGET_ABILITIES) do
 		if (actor[field] or 0) ~= 0 then return true end
 	end

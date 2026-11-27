@@ -9,6 +9,5 @@ function ENT:Draw()
 	self:SetColor(Color(255,255,255,220))
 	self:DrawShadow( false ) 
 
-	self:SetModel("models/monsters/psydog.mdl")
 	self:DrawModel()
 end

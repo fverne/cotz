@@ -90,6 +90,8 @@ end
 
 function ENT:RunAI( strExp )
 	if self.cotzSleeping or self.IsAlive == false or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
+	-- Flyers steer from Think; returning nothing keeps the engine from running ground schedules.
+	if self.cotzFlying then return end
 	local recovering = self:STALKERNPCUpdateNavigation()
 	local retreating = not self.cotzNavigationRecovery and self:STALKERNPCUpdateRetreat()
 	if recovering or retreating then
@@ -126,6 +128,7 @@ end
 
 function ENT:SelectSchedule( iNPCState )
 	if self.cotzSleeping or self.IsAlive == false or GetConVar("ai_disabled"):GetInt() ~= 0 then return end
+	if self.cotzFlying then return end
 	if self:STALKERNPCNavigationBusy() then return end
 	if self.cotzNavigationRetreat and self:STALKERNPCUpdateRetreat() then return end
 	if ix and ix.eventController then

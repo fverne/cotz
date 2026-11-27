@@ -51,6 +51,5 @@ function ENT:Draw()
 		end
 	end
 
-	self:SetModel("models/maver1k_XVII/Stalker/mutants/karlik.mdl")
 	self:DrawModel()
 end

@@ -23,10 +23,6 @@ ENT.CanSpecial = true
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.CanShield = 0
-ENT.CanGrab = 0
-ENT.CanPush = 0
-
 ENT.hp = 600
 ENT.hpvar = 50
 
@@ -34,22 +30,58 @@ ENT.FBR = 6
 ENT.FBRAP = 10
 ENT.BR = 30
 
-ENT.MustShield = 0
-ENT.IsShielding = 0
-
-ENT.shield1 = 0
-ENT.shield2 = 0
-ENT.shield3 = 0
-
-ENT.IsStamAttack = 0
-ENT.stam1 = 0
-ENT.stam2 = 0
-
-ENT.IsBlast = 0
-ENT.blast1 = 0
-ENT.blast2 = 0
-
 ENT.NextAbilityTime = 0
+
+local BLAST_OFFSET = Vector(15, 0, 50)
+local BLAST_SPEED = 2000
+local STAMINA_DRAIN = 80
+local STAMINA_PUNCH = 40
+local SHIELD_ODDS = 3
+local SHIELD_DAMAGE_SCALE = 0.1
+local SHIELD_AIRBOAT_SCALE = 0.5
+local SHIELD_EFFECT_OFFSET = 20
+
+ENT.Abilities = {
+	{
+		name = "stamina",
+		canUse = "BurerCanDrainStamina",
+		meleeRange = "outside",
+		chance = 0.4,
+		cooldown = 15,
+		initialCooldown = 1,
+		recovery = 0.5,
+		cancelOnTargetLoss = false,
+		phases = {
+			{duration = 0.4, animation = "S_Stamina_Attack"},
+			{duration = 1.8, method = "BurerDrainStamina"},
+		},
+	},
+	{
+		name = "blast",
+		meleeRange = "outside",
+		chance = 0.5,
+		cooldown = 5,
+		initialCooldown = 1,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.9, animation = "S_Power_Attack"},
+			{duration = 1.3, method = "BurerBlast"},
+		},
+	},
+	{
+		name = "shield",
+		triggerOnly = true,
+		interrupts = true,
+		cooldown = 10,
+		initialCooldown = 1,
+		cancelOnTargetLoss = false,
+		phases = {
+			{duration = 0.6, animation = "S_Shield_Start"},
+			{duration = {1.4, 3.4}, animation = "S_Shield_Idle"},
+			{duration = 0.3, animation = "S_Shield_End"},
+		},
+	},
+}
 
 ENT.MinRangeDist = 800
 ENT.MaxRangeDist = 1500
@@ -93,14 +125,6 @@ function ENT:Initialize()
 	
 	self:SetMaxHealth(self:Health())
 
-	self.CanShield = CurTime()+1
-	self.CanGrab = CurTime()+1
-	self.CanPush = CurTime()+1
-	
-	self.NextAbilityTime = CurTime()+1
-	
-	self.MustShield = 0
-	
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
 end
 
@@ -108,167 +132,44 @@ function ENT:STALKERNPCThinkEnemyValid()
 	
 end
 
-function ENT:STALKERNPCThink()
-	-- SHIELDING
-	if self.shield1 < CurTime() && self.IsShielding == 1 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCPlayAnimation("S_Shield_Idle",1)
-			self.IsShielding = 2
-		end
-	end
+function ENT:BurerCanDrainStamina(enemy)
+	if not enemy:IsPlayer() then return false end
+	local weapon = enemy:GetActiveWeapon()
 
-	if self.shield2 < CurTime() && self.IsShielding == 2 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCPlayAnimation("S_Shield_End",1)
-			self.IsShielding = 3
-		end
-	end
-
-	if self.shield3 < CurTime() && self.IsShielding == 3 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCStopAllTimers()
-			self:STALKERNPCClearAnimation()
-			self.IsShielding = 0
-		end
-	end
-	-- SHIELDING END
-
-	-- STAMINA ATTACK
-	if self.stam1 < CurTime() and self.IsStamAttack == 1 then
-		local enemy = self:GetEnemy()
-		if IsValid(enemy) and enemy:IsPlayer() then
-			enemy:ViewPunch(Angle(math.random(-1, 1) * 40, math.random(-1, 1) * 40, math.random(-1, 1) * 40))
-			enemy:RestoreStamina(-80)
-		end
-		self.IsStamAttack = 2
-	end
-
-	if self.stam2 < CurTime() && self.IsStamAttack == 2 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCStopAllTimers()
-			self:STALKERNPCClearAnimation()
-			self.NextAbilityTime = CurTime()+0.5
-			self.IsStamAttack = 0
-		end
-	end
-	-- STAMINA ATTACK END 
-
-
-	-- BLAST
-	if self.blast1 < CurTime() && self.IsBlast == 1 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			local TEMP_ShootPoint = self:GetPos()+(self:GetForward()*1000)
-						
-			if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-				TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
-			end
-						
-			local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-					
-			local TEMP_Grav = ents.Create("ent_burer_wave")
-			TEMP_Grav:SetPos(TEMP_ShootPos)
-			TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
-			TEMP_Grav:Spawn()
-							
-			TEMP_Grav:SetOwner(self)
-							
-							
-			TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2000)
-							
-			self:STALKERNPCPlaySoundRandom(100,"Stalker.Burer.Push",1,1)
-
-			self.IsBlast = 2
-		end
-	end
-
-	if self.blast2 < CurTime() && self.IsBlast == 2 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCStopAllTimers()
-			self:STALKERNPCClearAnimation()
-			self.NextAbilityTime = CurTime()+0.5
-
-			self.IsBlast = 0
-		end
-	end
-	-- BLAST END
+	return IsValid(weapon) and weapon:GetNoDraw() == false
 end
 
+function ENT:BurerDrainStamina(enemy)
+	if not enemy or not enemy:IsPlayer() then return end
 
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if(self.MustShield>CurTime()&&self.PlayingAnimation==false) then
-		self:STALKERNPCPlayAnimation("S_Shield_Start",1)
-		self.IsShielding = 1
-		self.CanShield = CurTime()+10
-	end
-		
-	if(self.PlayingAnimation==false) then
-		if(self.CanGrab<CurTime()) then
-			local TEMP_Rand = math.random(1,5)
-		
-			if(TEMP_Rand==1) then
-				local enemy = self:GetEnemy()
-				if IsValid(enemy) and enemy:IsPlayer()
-					and IsValid(enemy:GetActiveWeapon()) and enemy:GetActiveWeapon():GetNoDraw() == false then
-					
-					self.CanGrab = CurTime()+15
-					
-					self:STALKERNPCPlayAnimation("S_Stamina_Attack",1)
-
-					self.stam1 = CurTime() + 0.4
-					self.stam2 = CurTime() + 2.2
-					self.IsStamAttack = 1
-				end
-			end
-		end
-	end
-
-	if(self.PlayingAnimation==false) then
-		if(self.CanPush<CurTime()) then
-			local TEMP_Rand = math.random(1,5)
-			
-			if(TEMP_Rand==1) then
-				self.CanPush = CurTime()+5
-					
-				self:STALKERNPCPlayAnimation("S_Power_Attack",1)
-
-				self.IsBlast = 1
-				self.blast1 = CurTime() + 0.9
-				self.blast2 = CurTime() + 2.2
-					
-			end
-		end
-	end
+	local punch = Angle(
+		math.random(-1, 1) * STAMINA_PUNCH,
+		math.random(-1, 1) * STAMINA_PUNCH,
+		math.random(-1, 1) * STAMINA_PUNCH
+	)
+	enemy:ViewPunch(punch)
+	enemy:RestoreStamina(-STAMINA_DRAIN)
 end
 
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(self.CanShield<CurTime()) then
-		local TEMP_Rand = math.random(1,3)
-		
-		if(TEMP_Rand==1) then
-			self.MustShield = CurTime()+1
-			self.IsShielding = 1
-			self.shield1 = CurTime()+0.6
-			self.shield2 = CurTime()+math.random(2,4)
-			self.shield3 = self.shield2+0.3
-		end
-	end
-	
-	if(self.Animation=="S_Shield_Idle") then
-		local TEMP_DMGDIST = dmginfo:GetDamagePosition()-(self:GetPos()+self:OBBCenter())
-		
-		local TEMP_Effect = EffectData()
-		TEMP_Effect:SetOrigin((self:GetPos()+self:OBBCenter())+(TEMP_DMGDIST:GetNormalized()*20))
-		TEMP_Effect:SetEntity(self)
-		TEMP_Effect:SetAngles(TEMP_DMGDIST:Angle())
-		TEMP_Effect:SetScale(5)
-		util.Effect("cball_bounce", TEMP_Effect,false,true)
-		
-		if(dmginfo:GetDamageType() == DMG_AIRBOAT) then
-			return 0.5
-		end
+function ENT:BurerBlast(enemy)
+	self:STALKERNPCAbilityLaunchProjectile("ent_burer_wave", enemy, BLAST_SPEED, BLAST_OFFSET)
+	self:STALKERNPCPlaySoundRandom(100, "Stalker.Burer.Push", 1, 1)
+end
 
-		return 0.1
-	end
-	
-	return mul
+function ENT:STALKERNPCDamageTake(dmginfo, mul)
+	if math.random(1, SHIELD_ODDS) == 1 then self:STALKERNPCTriggerAbility("shield") end
+	if self.Animation ~= "S_Shield_Idle" then return mul end
+
+	local center = self:GetPos() + self:OBBCenter()
+	local offset = dmginfo:GetDamagePosition() - center
+	local effect = EffectData()
+	effect:SetOrigin(center + offset:GetNormalized() * SHIELD_EFFECT_OFFSET)
+	effect:SetEntity(self)
+	effect:SetAngles(offset:Angle())
+	effect:SetScale(5)
+	util.Effect("cball_bounce", effect, false, true)
+
+	if dmginfo:GetDamageType() == DMG_AIRBOAT then return SHIELD_AIRBOAT_SCALE end
+
+	return SHIELD_DAMAGE_SCALE
 end

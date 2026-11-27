@@ -6,6 +6,5 @@ end
 
 function ENT:Draw()
 	
-	self:SetModel("models/monsters/cat.mdl")
 	self:DrawModel()
 end

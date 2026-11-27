@@ -34,6 +34,5 @@ function ENT:Draw()
 		return
 	end
 
-	self:SetModel("models/gsc/s.t.a.l.k.e.r/monsters/burer.mdl")
 	self:DrawModel()
 end

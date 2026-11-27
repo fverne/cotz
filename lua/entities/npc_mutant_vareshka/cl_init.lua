@@ -5,6 +5,5 @@ function ENT:Initialize()
 end
 
 function ENT:Draw()
-	self:SetModel("models/monsters/vareshka.mdl")
 	self:DrawModel()
 end
