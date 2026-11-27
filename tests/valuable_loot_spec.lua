@@ -10,12 +10,12 @@ for key, pool in pairs(ix.progression.itemPools) do
 	end
 end
 local questItems = {}
-local questFiles = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/quests"))
+local questFiles = assert(io.popen("rg --files gamemodes/ix_cotz/schema/items/zquests"))
 for path in questFiles:lines() do questItems[assert(path:match("/sh_(.+)%.lua$"))] = true end
 questFiles:close()
 local files = assert(io.popen(
 	"rg --files gamemodes/ix_cotz/schema/items/valuables_test "
-		.. "gamemodes/ix_cotz/schema/items/valuable gamemodes/ix_cotz/schema/items/quests"
+		.. "gamemodes/ix_cotz/schema/items/valuable gamemodes/ix_cotz/schema/items/zquests"
 ))
 for path in files:lines() do
 	local itemID = path:match("/sh_(.+)%.lua$")

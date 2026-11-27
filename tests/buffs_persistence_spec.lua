@@ -41,6 +41,8 @@ ix = {
 		character.weightUpdates = (character.weightUpdates or 0) + 1
 	end},
 	util = {},
+	command = {Add = function() end},
+	type = {player = 1, string = 2, optional = 64},
 }
 ix.util.PlayerPerformBlackScreenAction = function() end
 ix.util.PlayerActionInterrupt = function() end
@@ -130,7 +132,7 @@ for name in pairs(buffs.buffs) do
 	near(snapshot.buffs[name][1], 47.5, name .. " saves remaining duration")
 	check(snapshot.buffs[name][2].nested.value == 7, name .. " saves parameters")
 end
-check(count == 17, "all registered buffs and debuffs exercised")
+check(count == 18, "all registered buffs and debuffs exercised")
 snapshot.buffs.buff_slowheal[2].nested.value = 99
 check(client:HasBuff("buff_slowheal")[2].nested.value == 7, "save parameters are copied")
 near(client:GetNWFloat("ixflatpsyres"), 11, "psyblock initially applied")

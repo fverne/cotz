@@ -1,7 +1,10 @@
 -- Declarative mutant abilities. A class lists them in ENT.Abilities; see docs/mutant-base.md.
 -- Phases advance from Think by timestamp comparison, so abilities create no timers and no per-tick tables.
 local DEFAULT_CHECK_INTERVAL = 0.2
-local DEFAULT_LANDING_TIMEOUT = 3
+local DEFAULT_WAIT_TIMEOUT = 3
+local DEFAULT_ATTACK_INDEX = 1
+local DUST_HEIGHT_MIN, DUST_HEIGHT_MAX = -100, 170
+local DUST_SCALE, DUST_RADIUS, DUST_MAGNITUDE = 200, 16, 8
 local MELEE_IN_RANGE = 2
 
 local validatedDefinitions = setmetatable({}, {__mode = "k"})
@@ -31,6 +34,11 @@ local function validateDefinitions(actor, abilities)
 			if not validPhaseDuration(phase.duration) then
 				return false, ability.name .. " phase " .. phaseIndex .. " needs a duration or {min, max}"
 			end
+		end
+	end
+	for _, ability in ipairs(abilities) do
+		for name in pairs(ability.linkedCooldowns or {}) do
+			if not names[name] then return false, ability.name .. " links an unknown cooldown " .. name end
 		end
 	end
 
@@ -91,6 +99,8 @@ end
 
 function ENT:STALKERNPCCanStartAbility(ability, enemy, distanceSqr, meleeRange, now)
 	if ability.triggerOnly or self.cotzAbilityReady[ability.name] > now then return false end
+	-- Navigation recovery starts leaps itself once it has checked the arc.
+	if ability.navigationLeap and self.cotzUnreachableRecovery then return false end
 	if ability.meleeRange == "outside" and meleeRange == MELEE_IN_RANGE then return false end
 	if ability.meleeRange == "inside" and meleeRange ~= MELEE_IN_RANGE then return false end
 	if ability.minRange and distanceSqr < ability.minRange ^ 2 then return false end
@@ -123,14 +133,22 @@ function ENT:STALKERNPCTriggerAbility(name)
 	if not self.Abilities or self.IsAlive == false or self.cotzSleeping then return false end
 	local ability = self.cotzAbilityByName[name]
 	if not ability or self.cotzAbilityReady[name] > CurTime() then return false end
-	if not ability.interrupts and (self.cotzAbility or self.PlayingAnimation) then return false end
 
 	return self:STALKERNPCStartAbility(ability, currentEnemy(self))
+end
+
+-- The leap navigation recovery may start once its arc check passes: "short" below the short-leap range.
+function ENT:STALKERNPCNavigationLeapAbility(shortJump)
+	local wanted = shortJump and "short" or "long"
+	for _, ability in ipairs(self.Abilities) do
+		if ability.navigationLeap == wanted then return ability end
+	end
 end
 
 function ENT:STALKERNPCStartAbility(ability, enemy)
 	if self.cotzAbility or self.PlayingAnimation then
 		if not ability.interrupts then return false end
+		if self.cotzAbility and self.cotzAbility.definition.uninterruptible then return false end
 		self:STALKERNPCFinishAbility(true)
 		-- Pending melee hits belong to the interrupted animation.
 		self.meleeAttackTimers = {}
@@ -140,6 +158,9 @@ function ENT:STALKERNPCStartAbility(ability, enemy)
 
 	local now = CurTime()
 	self.cotzAbilityReady[ability.name] = now + (ability.cooldown or 0)
+	for name, delay in pairs(ability.linkedCooldowns or {}) do
+		self.cotzAbilityReady[name] = math.max(self.cotzAbilityReady[name], now + delay)
+	end
 	local state = {definition = ability, enemy = enemy, phase = 0}
 	self.cotzAbility = state
 	self:STALKERNPCSetAbilityPhase(state, 1, now)
@@ -152,24 +173,43 @@ function ENT:STALKERNPCSetAbilityPhase(state, index, start)
 	state.phase = index
 	state.phaseStart = start
 	state.phaseEnd = start + phaseDuration(phase)
-	if phase.animation then
-		state.animated = true
-		self:STALKERNPCPlayAnimation(phase.animation, 1)
+	local enemy = currentEnemy(self)
+	if phase.leap and enemy then
+		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(enemy, phase.leap == "short"))
 	end
-	runCallback(self, phase.method, currentEnemy(self), state)
+	if phase.melee then
+		state.animated = true
+		self:STALKERNPCPlayAnimation(self.MeleeAttackSequence[phase.melee], phase.melee)
+		self:STALKERNPCMakeMeleeAttack(phase.melee)
+	elseif phase.animation then
+		state.animated = true
+		self:STALKERNPCPlayAnimation(phase.animation, phase.attackIndex or DEFAULT_ATTACK_INDEX)
+	end
+	if phase.sound then self:EmitSound(phase.sound) end
+	runCallback(self, phase.method, enemy, state)
+end
+
+local function phaseWaiting(actor, phase)
+	return phase.untilGrounded and not actor:IsOnGround() or phase.untilAnimationDone and actor.PlayingAnimation
 end
 
 function ENT:STALKERNPCUpdateAbility()
 	local state = self.cotzAbility
+	local validate = state.definition.validate
+	if validate and not runCallback(self, validate, state) then
+		self:STALKERNPCFinishAbility(true)
+		return
+	end
+
 	local now = CurTime()
 	-- Idle think intervals can skip past several short phases; run each phase's method in order.
 	while self.cotzAbility == state and now >= state.phaseEnd do
 		local phases = state.definition.phases
 		local phase = phases[state.phase]
 		local start = state.phaseEnd
-		if phase.untilGrounded then
-			local landingTimeout = state.phaseStart + (phase.maxDuration or DEFAULT_LANDING_TIMEOUT)
-			if not self:IsOnGround() and now < landingTimeout then return end
+		if phase.untilGrounded or phase.untilAnimationDone then
+			local timeout = state.phaseStart + (phase.maxDuration or DEFAULT_WAIT_TIMEOUT)
+			if phaseWaiting(self, phase) and now < timeout then return end
 			start = now
 		end
 		if state.phase >= #phases then
@@ -194,6 +234,15 @@ function ENT:STALKERNPCFinishAbility(cancelled)
 	if ability.recovery then
 		self.NextAbilityTime = math.max(self.NextAbilityTime or 0, CurTime() + ability.recovery)
 	end
+end
+
+-- Death, removal and sleep drop the ability without animation work, but still release what it holds.
+function ENT:STALKERNPCAbandonAbility()
+	local state = self.cotzAbility
+	if not state then return end
+
+	self.cotzAbility = nil
+	runCallback(self, state.definition.onFinish, state, true)
 end
 
 -- Only the first phase is a windup. Later phases have already acted and finish their recovery.
@@ -241,6 +290,39 @@ function ENT:STALKERNPCAbilityPulse(radius, damage, damageType, requireVisible)
 	end
 
 	return hits
+end
+
+function ENT:STALKERNPCAbilityDust()
+	local position = self:GetPos()
+	local effect = EffectData()
+	effect:SetStart(position + Vector(0, 0, math.Rand(DUST_HEIGHT_MIN, DUST_HEIGHT_MAX)))
+	effect:SetOrigin(position + Vector(0, 0, math.Rand(DUST_HEIGHT_MIN, DUST_HEIGHT_MAX)))
+	effect:SetNormal(self:GetUp())
+	effect:SetScale(DUST_SCALE)
+	effect:SetRadius(DUST_RADIUS)
+	effect:SetMagnitude(DUST_MAGNITUDE)
+	util.Effect("ThumperDust", effect)
+end
+
+-- A landing shockwave with linear falloff. Like the original leaps, it reaches every entity in range.
+function ENT:STALKERNPCAbilityGroundSlam(radius, damage, damageType)
+	self:STALKERNPCAbilityDust()
+
+	local origin = self:GetPos()
+	local center = origin + self:OBBCenter()
+	for _, target in ipairs(ents.FindInSphere(origin, radius)) do
+		local falloff = (radius - origin:Distance(target:GetPos())) / radius
+		if target ~= self and falloff > 0 then
+			local info = DamageInfo()
+			info:SetDamage(damage * falloff)
+			info:SetDamageType(damageType)
+			info:SetAttacker(self)
+			info:SetInflictor(self)
+			info:SetDamagePosition(target:NearestPoint(center))
+			info:SetDamageForce((target:GetPos() + self:OBBCenter() - origin):GetNormalized())
+			target:TakeDamageInfo(info)
+		end
+	end
 end
 
 function ENT:STALKERNPCAbilityLeap(enemy, aimHeight, speedScale)

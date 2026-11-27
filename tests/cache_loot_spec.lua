@@ -14,7 +14,7 @@ dofile(root .. "cache_misc.lua")
 local prices = {}
 local files = assert(io.popen(
 	"rg --files gamemodes/ix_cotz/schema/items/valuables_test "
-		.. "gamemodes/ix_cotz/schema/items/valuable gamemodes/ix_cotz/schema/items/quests"
+		.. "gamemodes/ix_cotz/schema/items/valuable gamemodes/ix_cotz/schema/items/zquests"
 ))
 for path in files:lines() do
 	local id = path:match("/sh_([^/]+)%.lua$")

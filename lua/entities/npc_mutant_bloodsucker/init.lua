@@ -29,9 +29,6 @@ ENT.CanSpecial = true
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.CanJump = 0
-ENT.CanSuck = 0
-
 ENT.hp = 300
 ENT.hpvar = 25
 ENT.injuredact = ACT_RUN_AIM_PISTOL
@@ -47,26 +44,52 @@ ENT.MaxRangeDist = 1200
 ENT.VisibleSchedule = SCHED_RUN_RANDOM
 ENT.RangeSchedule = SCHED_CHASE_ENEMY
 
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-ENT.IsJumping = 0
-ENT.succing1 = 0
-ENT.succing2 = 0
-ENT.succing3 = 0
-ENT.succing4 = 0
-ENT.IsSuccing = 0
-
 ENT.PostSuccRunFinish = 0
-
-ENT.SuccVictim = nil
-
-TEMP_TargetDamage = 0
-distance = 0
 
 ENT.navigationLeapRange = 100
 
 ENT.navigationLeapAimHeight = 96
 ENT.navigationLeapSpeed = 2
+
+local FEED_HEAL = 125
+local FEED_FLEE_SECONDS = 10
+
+ENT.Abilities = {
+	{
+		name = "jump",
+		navigationLeap = "long",
+		meleeRange = "outside",
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 9,
+		recovery = 1,
+		phases = {
+			{duration = 0.2},
+			{
+				duration = 0.8, leap = "long", melee = 4, sound = "Stalker.Bloodsucker.Hit1",
+				untilGrounded = true, maxDuration = 5,
+			},
+		},
+	},
+	{
+		name = "feed",
+		meleeRange = "outside",
+		maxRange = 75,
+		chance = 0.5,
+		cooldown = 15,
+		recovery = 1,
+		cancelOnTargetLoss = false,
+		validate = "BloodsuckerHasVictim",
+		onFinish = "BloodsuckerReleaseVictim",
+		phases = {
+			{duration = 0.2, melee = 6, method = "BloodsuckerSeize"},
+			{duration = 1, sound = "Stalker.Bloodsucker.Feed", method = "BloodsuckerFeed"},
+			{duration = 1, method = "BloodsuckerFeed"},
+			{duration = 1, method = "BloodsuckerFeed"},
+			{duration = 0, method = "BloodsuckerFinishFeed", untilAnimationDone = true, maxDuration = 3},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/krovosos.mdl"
@@ -139,8 +162,6 @@ function ENT:Initialize()
 	
 	self:SetMaxHealth(self:Health())
 
-	self.CanJump = CurTime()+1
-
 	self.NextAbilityTime = CurTime()+1
 	
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
@@ -161,144 +182,30 @@ function ENT:STALKERNPCThink()
 	else
 		self.RangeSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 	end
-
-	-- JUMP
-	if self.jumping1 < CurTime() && self.IsJumping == 1 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-
-			self:STALKERNPCPlayAnimation("stand_attack_run_0",4)
-			self:STALKERNPCMakeMeleeAttack(4)
-			self:EmitSound("Stalker.Bloodsucker.Hit1")
-			self.IsJumping = 2
-		end
-	end
-
-	if self.jumping2 < CurTime() && self.IsJumping == 2 and self:IsOnGround() then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCStopAllTimers()
-			self:STALKERNPCClearAnimation()
-			self.NextAbilityTime = CurTime()+1
-			self.IsJumping = 0
-		end
-	end
-	-- JUMP END
-
-	-- SUCC
-	if self.IsSuccing ~= 0 and not IsValid(self.SuccVictim) then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime() + 1
-		self.SuccVictim = nil
-		self.IsSuccing = 0
-	end
-
-	if self.succing1 < CurTime() && self.IsSuccing == 1 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:EmitSound("Stalker.Bloodsucker.Feed")
-			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-			self.IsSuccing = 2
-		end
-	end
-	if self.succing2 < CurTime() && self.IsSuccing == 2 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-			self.IsSuccing = 3
-		end
-	end
-
-	if self.succing3 < CurTime() && self.IsSuccing == 3 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-			self.IsSuccing = 4
-		end
-	end
-
-	if self.succing4 < CurTime() && self.IsSuccing == 4 then
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self.NextAbilityTime = CurTime()+1
-
-			self:SetHealth(math.Clamp(self:Health()+125,0,self:GetMaxHealth()))
-			if IsValid(self.SuccVictim) and self.SuccVictim:IsPlayer() then
-				self.SuccVictim:Freeze(false)
-			end
-			self.SuccVictim = nil
-			self.IsSuccing = 0
-
-			self.PostSuccRunFinish = CurTime() + 10
-
-		end
-	end
-	-- SUCC END
 end
 
-//little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if self.NextAbilityTime < CurTime() then
-		if(self.PlayingAnimation==false) then
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance < self.navigationLeapRange then
-				if(self.CanJump<CurTime()) then
-					local TEMP_Rand = math.random(1,5)
-				
-					if TEMP_Rand == 1 or forceJump then
-						self.CanJump = CurTime()+9
-						self.NextAbilityTime = CurTime()+4
-
-						self.jumping1 = CurTime() + 0.2
-						self.jumping2 = CurTime() + 1
-						self.IsJumping = 1
-
-					end
-				end
-			end
-		end
-
-		if forceJump then return end
-
-		if(self.PlayingAnimation==false) then
-			distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance < 75 then
-				if(self.CanSuck<CurTime()) then
-					local TEMP_Rand = math.random(1,5)
-				
-					if(TEMP_Rand==1) then		
-						self.CanSuck = CurTime()+15
-
-						local target = self:GetEnemy()
-						if target:IsPlayer() then
-							target:Freeze(true)
-						end
-
-						self.SuccVictim = target
-
-						self.NextAbilityTime = CurTime()+4
-
-						self:STALKERNPCPlayAnimation("vampire",6)
-						self:STALKERNPCMakeMeleeAttack(6)
-
-						self.succing1 = CurTime() + 0.2
-						self.succing2 = CurTime() + 1.2
-						self.succing3 = CurTime() + 2.2
-						self.succing4 = CurTime() + 3.2
-						self.IsSuccing = 1
-	
-					end
-				end
-			end
-		end
-	end
+function ENT:BloodsuckerSeize(enemy, state)
+	state.victim = enemy
+	if enemy and enemy:IsPlayer() then enemy:Freeze(true) end
 end
 
-function ENT:STALKERNPCOnKilled()
-	if IsValid(self.SuccVictim) and self.SuccVictim:IsPlayer() then
-		self.SuccVictim:Freeze(false)
-	end
+-- A victim that disappears mid-feed ends it; after the release, the bite animation may finish.
+function ENT:BloodsuckerHasVictim(state)
+	return state.released or IsValid(state.victim)
 end
 
-function ENT:STALKERNPCRemove() 
-	if IsValid(self.SuccVictim) and self.SuccVictim:IsPlayer() then
-		self.SuccVictim:Freeze(false)
-	end
+function ENT:BloodsuckerFeed()
+	self:SetHealth(math.Clamp(self:Health() + FEED_HEAL, 0, self:GetMaxHealth()))
+end
+
+function ENT:BloodsuckerFinishFeed(_, state)
+	self:BloodsuckerFeed()
+	self:BloodsuckerReleaseVictim(state)
+	self.PostSuccRunFinish = CurTime() + FEED_FLEE_SECONDS
+end
+
+function ENT:BloodsuckerReleaseVictim(state)
+	local victim = state.victim
+	state.victim, state.released = nil, true
+	if IsValid(victim) and victim:IsPlayer() then victim:Freeze(false) end
 end

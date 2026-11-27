@@ -175,22 +175,33 @@ The remaining rules are proposed project defaults.
   Follow the affected plugin's README for its relevant specs.
 - Balance tooling tests use `python -m unittest discover -s docs/balance/tests -v` in an environment
   with `docs/balance/requirements.txt` installed. Do not assume a machine-specific virtualenv exists.
+- The specs are development tooling only: `tests/` is never loaded by Garry's Mod, and passing specs do not
+  prove in-game behavior. Spend test effort where a silent regression is costly, not on every edit.
+- Test tooling requires `luatex`, `rg` (ripgrep), and Python 3 (Debian/Ubuntu:
+  `sudo apt install texlive-binaries ripgrep`). `tests/run.sh` checks for them first and exits with code 3
+  and a one-line message when any is missing. If that happens, report it and continue without tests.
+  Do not search for, download, or build substitute Lua interpreters, and do not invoke specs outside
+  the runner to work around missing tools.
 - Test cadence:
   - Small edits: do not run tests automatically. Make the change and summarize the expected verification.
-  - Run a targeted spec only when the touched file has an obvious nearby spec, the change affects shared
-    behavior (schema libraries, item bases, shared `ix.cotz*` helpers), or the user asks.
+  - Run a targeted spec only when the change touches persistence, rewards, inventories, permissions, or
+    networking, or shared behavior (schema libraries, item bases, shared `ix.cotz*` helpers) with a nearby
+    spec, or when the user asks.
+  - UI, visuals, models, sounds, NPC/mutant behavior tuning, and dialogue changes: prefer a stated in-game
+    check over specs; run a spec only if one directly covers the changed logic.
   - Run the full suite (`tests/run.sh` plus `tests/run.sh --balance` when balance tooling is affected) only
-    before handoff or a commit, or after changes touching persistence, rewards, inventories, permissions,
-    networking, or shared utilities.
+    before a commit the user asked for, or after changes touching persistence, rewards, inventories,
+    permissions, networking, or shared utilities.
   - Prefer the cheapest check first: `tests/run.sh --syntax <file>` for standard-Lua files, then one spec,
     then the full suite. The syntax check rejects GMod-only operators, so skip it for legacy files using them.
 - Run tests through `tests/run.sh`, which writes full output to `outputs/test-logs/` and prints one line per
   test with a short excerpt for each failure. Open the full log only when the excerpt does not explain it.
   The runner also fails any test that modifies tracked files; it does not restore them, so review `git diff`.
-  Several specs and generators discover files with `rg`; without ripgrep installed they fail or, in
-  `tests/fts_delivery_balance_spec.py`, rewrite `sh_requirementpools.lua` with empty pools.
+  The FTS loot snapshot and delivery balance tool refuse to run on an empty file listing, so a missing `rg`
+  can no longer rewrite `sh_requirementpools.lua` with empty pools; still review `git diff` after tests.
 - If a test fails, stop after one focused investigation pass and report the failing command, likely cause,
-  and proposed next action instead of entering a long debug loop.
+  and proposed next action instead of entering a long debug loop. A spec that fails before and after your
+  change is pre-existing: report it, do not fix it unless asked.
 - Standalone tests use mocks and do not establish Garry's Mod runtime correctness.
   For realm, UI, networking, loading, or database changes, identify and perform relevant multiplayer
   checks when a development session is available; otherwise state what remains unverified.

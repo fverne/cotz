@@ -24,11 +24,11 @@ local function read(path)
 
 	return source
 end
-local function loadNPC(name, offsets, cleanup)
+local function loadNPC(name, offsets, cleanup, spawner)
 	local source = read("lua/entities/npc_mutant_" .. name .. "/init.lua")
 	local definitions = assert(source:match("(local " .. offsets .. " = %b{})"))
 	local radius = assert(source:match("ENT.summonSpawnRadius = (%d+)"))
-	local start = assert(source:find("function ENT:STALKERNPCThink()", 1, true))
+	local start = assert(source:find("function ENT:" .. spawner .. "()", 1, true))
 	local finish = assert(source:find("\nfunction ENT:", start + 1, true))
 	local cleanupStart = assert(source:find("function ENT:" .. cleanup .. "()", 1, true))
 	local cleanupFinish = source:find("\nfunction ENT:", cleanupStart + 1, true)
@@ -40,8 +40,8 @@ local function loadNPC(name, offsets, cleanup)
 
 	return ENT
 end
-local psydog = loadNPC("psydog", "CLONE_OFFSETS", "STALKERNPCOnDeath")
-local controller = loadNPC("controller", "ZOMBIE_OFFSETS", "STALKERNPCRemove")
+local psydog = loadNPC("psydog", "CLONE_OFFSETS", "STALKERNPCRemove", "PsydogSummon")
+local controller = loadNPC("controller", "ZOMBIE_OFFSETS", "STALKERNPCRemove", "STALKERNPCThink")
 local created, placements, registered = {}, 0, 0
 local capacity, safePosition, creationFails, reject = true, true, false, false
 local populationLimit
@@ -74,7 +74,7 @@ ents = {Create = function(class)
 			self.spawned = true
 		end,
 		DropToFloor = function(self) self.grounded = true end,
-		TakeDamage = function(self) self.damaged = true end,
+		Disperse = function(self) self.dispersed = true end,
 		STALKERNPCKill = function(self) self.killed = true end,
 	}
 	created[#created + 1] = entity
@@ -90,28 +90,26 @@ local function makeOwner(definition)
 		GetRight = function() return Vector(0, 1, 0) end, GetUp = function() return Vector(0, 0, 1) end,
 		Health = function() return 100 end, GetMaxHealth = function() return 100 end,
 		STALKERNPCClearAnimation = function() end, STALKERNPCPlayAnimation = function() end,
-		PsiAttackCancel = 0, CanSpawn = true, NextSpawn = now + 100,
-		jumping1 = 0, jumping2 = 0, isAttacking = 0,
 		farttimer = now + 100, GoingToSpawnThem = false, CanSpecialTimer = now + 100,
 		special1 = 0, special2 = 0, SpecialAttack = 0,
 	}, {__index = definition})
 end
 local dog = makeOwner(psydog)
-dog:STALKERNPCThink()
-check(#created == 4 and registered == 4 and not dog.CanSpawn, "psydog fills its four original clone slots once")
+dog:PsydogSummon()
+check(#created == 4 and registered == 4, "psydog fills its four original clone slots once")
 for index = 1, 4 do
 	local child = dog["Clone" .. index]
 	check(child == created[index] and child.class == "npc_mutant_psydog_phantom"
 		and child.cotzCombatPack == dog.cotzCombatPack and child.angles == dog:GetAngles() and child.grounded,
 		"phantoms keep their owner's pack, angles, grounded position and cleanup references")
 end
-dog.Clone2.valid, dog.CanSpawn = false, true
-dog:STALKERNPCThink()
+dog.Clone2.valid = false
+dog:PsydogSummon()
 check(#created == 5 and dog.Clone2 == created[5] and dog.Clone1 == created[1],
 	"psydog replaces only missing clone slots")
-dog:STALKERNPCOnDeath()
-check(dog.Clone1.damaged and dog.Clone2.damaged and dog.Clone3.damaged and dog.Clone4.damaged,
-	"psydog death still cleans up every current phantom")
+dog:STALKERNPCRemove()
+check(dog.Clone1.dispersed and dog.Clone2.dispersed and dog.Clone3.dispersed and dog.Clone4.dispersed,
+	"psydog removal disperses every current phantom")
 
 local mutant = makeOwner(controller)
 mutant.NextSpawn = 0
@@ -147,7 +145,7 @@ reject = false
 populationLimit = registered + 2
 local limitedDog = makeOwner(psydog)
 before = #created
-limitedDog:STALKERNPCThink()
+limitedDog:PsydogSummon()
 check(#created == before + 2 and limitedDog.Clone1 and limitedDog.Clone2
 	and not limitedDog.Clone3 and not limitedDog.Clone4,
 	"immediate registration limits a summon group to remaining population capacity")

@@ -31,11 +31,6 @@ ENT.hp = 4000
 ENT.hpvar = 100
 ENT.injuredact = ACT_DOD_PRONE_ZOOM_BAZOOKA
 
-ENT.CanSlam = 0
-ENT.isSlamming = 0
-ENT.slamming1 = 0
-ENT.slamming2 = 0
-
 ENT.NextAbilityTime = 0
 
 ENT.MinRangeDist = 800
@@ -46,6 +41,27 @@ ENT.RangeSchedule = SCHED_CHASE_ENEMY
 ENT.FBR = 15
 ENT.FBRAP = 5
 ENT.BR = 12
+
+local SLAM_RADIUS = 512
+local SLAM_DAMAGE = 350
+local SLAM_FORCE = 400
+local SLAM_PUSH = 500
+local SLAM_AIM_HEIGHT = Vector(0, 0, 160)
+
+ENT.Abilities = {
+	{
+		name = "slam",
+		meleeRange = "outside",
+		maxRange = 300,
+		chance = 0.5,
+		cooldown = 9,
+		phases = {
+			{duration = 0.3},
+			{duration = 1.5, melee = 5, sound = "Stalker.Pseudogiant.Idle1", untilGrounded = true, maxDuration = 5},
+			{duration = 0, method = "PseudogiantSlam"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant3.mdl"
@@ -125,77 +141,33 @@ function ENT:STALKERNPCThink()
 	if self:Health() < (self:GetMaxHealth() * 0.33) then
 		self:SetMovementActivity(self.injuredact)
 	end
+end
 
-	-- SLAM 
-	if (self.slamming1 < CurTime() and self.isSlamming == 1 and self:GetEnemy()) then
-		self:EmitSound("Stalker.Pseudogiant.Idle1")
-		self:STALKERNPCPlayAnimation("stand_kick_0",5)
-		self:STALKERNPCMakeMeleeAttack(5)
-		self.isSlamming = 2
-	end
+-- The kick throws everything nearby away from the right hand, which is the original's launch point.
+function ENT:PseudogiantSlam()
+	self:STALKERNPCAbilityDust()
 
-	if (self.slamming2 < CurTime() and self.isSlamming == 2 and self:IsOnGround()) then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-
-		
-
-		local effectdata = EffectData()
-		effectdata:SetOrigin( self:GetPos() + Vector(0,0,-16) )
-		effectdata:SetStart( self:GetPos() + Vector( 0, 0, math.Rand( -100, 170) ) )
-		effectdata:SetOrigin( self:GetPos() + Vector( 0, 0, math.Rand( -100, 170) ))
-		effectdata:SetNormal(  self:GetUp() )
-		effectdata:SetScale( 200 )
-		effectdata:SetRadius( 16 )
-		effectdata:SetMagnitude( 8 )
-		util.Effect( "ThumperDust", effectdata )
-
-		for _,v in pairs(ents.FindInSphere( self:GetPos(), 512 )) do
-			if(v == self) then continue end
-
-			local bonepos = self:GetBonePosition( self:LookupBone("righthand") )
-
-			local distance = self:GetPos():Distance(v:GetPos())
-			local dirvector = ((v:GetPos()+Vector(0,0,160)) - (bonepos)):GetNormal()
-
-			local fulldamage = 350
-			TEMP_TargetDamage = DamageInfo()
-									
-			TEMP_TargetDamage:SetDamage(fulldamage * ((512-distance)/512))
-			TEMP_TargetDamage:SetInflictor(self)
-			TEMP_TargetDamage:SetDamageType(DMG_CLUB)
-			TEMP_TargetDamage:SetAttacker(self)
-			TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(bonepos+self:OBBCenter()))
-			TEMP_TargetDamage:SetDamageForce(dirvector*400)
-
-			v:TakeDamageInfo(TEMP_TargetDamage)
-			v:SetVelocity(dirvector*500)
+	local origin = self:GetPos()
+	local hand = self:GetBonePosition(self:LookupBone("righthand"))
+	for _, target in ipairs(ents.FindInSphere(origin, SLAM_RADIUS)) do
+		local falloff = (SLAM_RADIUS - origin:Distance(target:GetPos())) / SLAM_RADIUS
+		if target ~= self and falloff > 0 then
+			local direction = (target:GetPos() + SLAM_AIM_HEIGHT - hand):GetNormalized()
+			local info = DamageInfo()
+			info:SetDamage(SLAM_DAMAGE * falloff)
+			info:SetInflictor(self)
+			info:SetDamageType(DMG_CLUB)
+			info:SetAttacker(self)
+			info:SetDamagePosition(target:NearestPoint(hand + self:OBBCenter()))
+			info:SetDamageForce(direction * SLAM_FORCE)
+			target:TakeDamageInfo(info)
+			target:SetVelocity(direction * SLAM_PUSH)
 		end
-
-		self.isSlamming = 0
 	end
 end
 
 function ENT:STALKERNPCOnDeath()
 
-end
-
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < 300 then
-			if(self.CanSlam<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-				
-				if(TEMP_Rand==1) then		
-					self.CanSlam = CurTime()+9
-					self.isSlamming = 1
-					self.slamming1 = CurTime()+0.3
-					self.slamming2 = CurTime()+1.8
-				end
-			end
-		end
-	end
 end
 
 function ENT:STALKERNPCDamageTake(dmginfo,mul) 

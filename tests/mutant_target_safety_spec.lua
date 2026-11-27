@@ -85,19 +85,18 @@ end
 
 local originalRandom = math.random
 math.random = function() return 1 end
-for _, name in ipairs({"bloodsucker", "skeleton"}) do
+-- Bloodsucker feeding moved to the ability runner; tests/mutant_complex_abilities_spec.lua covers it.
+for _, name in ipairs({"skeleton"}) do
 	local think = loadMethod(name, "STALKERNPCThink")
 	local attack = loadMethod(name, "STALKERNPCDistanceForMeleeTooBig")
-	local victimField = name == "bloodsucker" and "SuccVictim" or "GrabTarget"
-	local stateField = name == "bloodsucker" and "IsSuccing" or "IsGrabbing"
+	local victimField = "GrabTarget"
+	local stateField = "IsGrabbing"
 	local function makeGrabber()
 		local actor = makeActor()
 		actor.navigationLeapRange = 100
-		actor.NextAbilityTime, actor.CanJump, actor.CanSuck, actor.CanGrab = 0, 100, 0, 0
+		actor.NextAbilityTime, actor.CanJump, actor.CanGrab = 0, 100, 0
 		actor.PlayingAnimation, actor.FakeDeath = false, 0
 		actor.jumping1, actor.jumping2, actor.IsJumping = 0, 0, 0
-		actor.PostSuccRunFinish = 0
-		actor.succing1, actor.succing2, actor.succing3, actor.succing4 = 0, 0, 0, 0
 		actor.grabbing1, actor.grabbing2 = 0, 0
 		actor[stateField] = 0
 
@@ -115,7 +114,7 @@ for _, name in ipairs({"bloodsucker", "skeleton"}) do
 		think(actor)
 		assert(actor[stateField] == 0 and actor[victimField] == nil, name .. " completes the grab")
 		assert((isPlayer and target.frozen == false or not isPlayer and target.frozen == nil), name .. " releases players")
-		if name == "skeleton" then assert(target.hits == 2, "NPC and player grab damage stays intact") end
+		assert(target.hits == 2, "NPC and player grab damage stays intact")
 		for _, method in ipairs({"STALKERNPCOnKilled", "STALKERNPCRemove"}) do
 			actor[victimField] = target
 			target.frozen = isPlayer and true or nil
@@ -127,20 +126,18 @@ for _, name in ipairs({"bloodsucker", "skeleton"}) do
 			target.valid = true
 		end
 	end
-	for _, stage in ipairs(name == "bloodsucker" and {1, 2, 3, 4} or {1, 2}) do
+	for _, stage in ipairs({1, 2}) do
 		local actor = makeGrabber()
 		actor[stateField], actor[victimField] = stage, {valid = false}
 		think(actor)
 		assert(actor[stateField] == 0 and actor[victimField] == nil and actor.stopped,
 			name .. " recovers when a captured target disappears at any stage")
 	end
-	if name == "skeleton" then
-		local actor, target = makeGrabber(), makeTarget(false)
-		actor.IsGrabbing, actor.GrabTarget = 1, target
-		target.TakeDamageInfo = function(self) self.valid = false end
-		think(actor)
-		assert(actor.IsGrabbing == 0, "a first hit that removes the target cannot break the second hit")
-	end
+	local actor, target = makeGrabber(), makeTarget(false)
+	actor.IsGrabbing, actor.GrabTarget = 1, target
+	target.TakeDamageInfo = function(self) self.valid = false end
+	think(actor)
+	assert(actor.IsGrabbing == 0, "a first hit that removes the target cannot break the second hit")
 end
 math.random = originalRandom
 
@@ -167,43 +164,5 @@ for _, enemy in ipairs({{valid = false}, false, makeTarget(false)}) do
 	assert(actor.IsSpitting == 0, "spider recovers after a missed spit")
 end
 
-for _, name in ipairs({"controller", "controller_fast", "controller_electro", "controller_swamp"}) do
-	-- Exercise the real special-attack section without unrelated aura loops using GLua continue.
-	local source = readSource(name)
-	local start = assert(source:find("\tif(self.CanSpecialTimer", 1, true))
-	local finish = assert(source:find("\nfunction ENT:", start, true))
-	local think = compile("function ENT:STALKERNPCThink()\n" .. source:sub(start, finish - 1)).STALKERNPCThink
-	for _, enemy in ipairs({{valid = false}, false}) do
-		local actor = makeActor()
-		actor.enemy, actor.CanSpecialTimer = enemy or nil, 100
-		actor.special1, actor.special2, actor.SpecialAttack = 0, now + 1, 1
-		think(actor)
-		assert(actor.SpecialAttack == 2, name .. " advances to recovery without a target")
-		now = now + 2
-		think(actor)
-		assert(actor.SpecialAttack == 0, name .. " finishes recovery without a target")
-	end
-end
-
-do
-	-- The ranged section precedes a separate knockback loop using GLua continue.
-	local source = readSource("karlik")
-	local start = assert(source:find("function ENT:STALKERNPCThink()", 1, true))
-	local finish = assert(source:find("\tif self.secondKnock", start, true))
-	local think = compile(source:sub(start, finish - 1) .. "end").STALKERNPCThink
-	for _, enemy in ipairs({{valid = false}, false, makeTarget(false)}) do
-		local actor = makeActor()
-		actor.enemy, actor.MinRangeDist = enemy or nil, 100
-		actor.CanWarp, actor.IsWarping, actor.warpdelay = 1000, 0, 1000
-		actor.CanKnock, actor.WantToKnock = 1000, false
-		actor.throw1_1, actor.throw2_1, actor.throw2_2 = 0, 0, 0
-		actor.IsThrow1, actor.IsThrow2 = 1, 1
-		local before = projectiles
-		think(actor)
-		assert(projectiles == before + 3, "Karlik's three shots have valid aim points after target loss")
-		assert(actor.IsThrow1 == 0 and actor.IsThrow2 == 0, "Karlik ranged attacks finish normally")
-	end
-	assert(TEMP_ShootPoint == nil, "Karliks cannot share a stale global aim point")
-end
-
+-- Controller and karlik specials are covered by tests/mutant_complex_abilities_spec.lua.
 print("Mutant target safety regression checks passed")

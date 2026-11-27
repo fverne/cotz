@@ -379,7 +379,7 @@ function ENT:STALKERNPCKill(dmginfo)
 
 	if(self.IsAlive==true) then
 		self.IsAlive = false
-		self.cotzAbility = nil
+		self:STALKERNPCAbandonAbility()
 
 		self:STALKERNPCStopAllTimers()
 		self.Animation = ""
@@ -942,6 +942,7 @@ end
 
 //Base functions
 function ENT:OnRemove()
+	self:STALKERNPCAbandonAbility()
 	self:STALKERNPCStopAllTimers(ALL)
 	self:STALKERNPCRemove()
 end

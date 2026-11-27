@@ -236,9 +236,11 @@ local rows = {}
 for _, row in ipairs(ix.itemProperties.GetProtection(suit)) do rows[row.id] = row.text end
 for _, definition in ipairs(ix.suits.GetProtectionFamilies()) do
 	local reduction = suit[definition.field] / 2
+	local flat = suit:getFAR(definition.flatField)
 	local expected
-	if reduction ~= 0 then
+	if reduction ~= 0 or flat ~= 0 then
 		expected = definition.name .. ": " .. ix.itemProperties.Format(definition.network, reduction)
+			.. " + " .. ix.itemProperties.Format("number", math.Round(flat, 1))
 	end
 	check(rows["protection/" .. definition.network] == expected, "Tooltip effective protection: " .. definition.name)
 end

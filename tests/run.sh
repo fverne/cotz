@@ -31,6 +31,18 @@ if command -v timeout >/dev/null 2>&1; then
 	timeoutPrefix=(timeout "$SPEC_TIMEOUT")
 fi
 
+# Lua specs, syntax checks and balance tooling run under luatex; spec helpers and loot snapshots
+# discover files with ripgrep and silently see no files without it. Stop with one line instead of
+# reporting every spec as failed.
+missingTools=()
+for tool in luatex rg "$PYTHON"; do
+	command -v "$tool" >/dev/null 2>&1 || missingTools+=("$tool")
+done
+if [[ ${#missingTools[@]} -gt 0 && "${1:-}" != "-h" && "${1:-}" != "--help" ]]; then
+	echo "test runner unavailable: missing ${missingTools[*]} (Debian/Ubuntu: sudo apt install texlive-binaries ripgrep)" >&2
+	exit 3
+fi
+
 # Print the most informative lines of a failed log: error-looking lines first, else the tail.
 summarize() {
 	local log="$1"

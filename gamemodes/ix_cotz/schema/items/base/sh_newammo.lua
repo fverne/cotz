@@ -33,7 +33,7 @@ if (CLIENT) then
 end
 
 function ITEM:PopulateTooltip(tooltip)
-    if (!self.entity) then
+    if (not self.entity) then
         ix.util.PropertyDesc(tooltip, "Ammunition", Color(64, 224, 208))
     end
 
@@ -50,7 +50,7 @@ end
 
 function ITEM:OnInstanced(invID, x, y)
 
-	if !self:GetData("quantity") then
+	if not self:GetData("quantity") then
 		self:SetData("quantity", self.ammoAmount)
 	end
 end
@@ -87,7 +87,7 @@ ITEM.functions.split = {
 			return false
 		end
 
-		return (!IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID())
+		return (not IsValid(item.entity) and item.invID == item.player:GetCharacter():GetInventory():GetID())
 	end,
 	OnRun = function(item, data)
 		-- The client chooses data, so only accept an amount the menu could have offered.

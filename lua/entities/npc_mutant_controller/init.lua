@@ -22,17 +22,10 @@ ENT.FBR = 3
 ENT.FBRAP = 10
 ENT.BR = 5
 
-ENT.CanSpecial = true
-
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
 ENT.Victims = {}
 ENT.MaxVictims = 10
-
-ENT.CanSpecialTimer = 0
-ENT.SpecialAttack = 0
-ENT.special1 = 0
-ENT.special2 = 0
 
 ENT.farttimer = 0
 ENT.summonSpawnRadius = 256
@@ -49,6 +42,24 @@ local ZOMBIE_OFFSETS = {
 ENT.sndGeigerHeavy = {"geiger/heavy/geiger_heavy_1.wav", "geiger/heavy/geiger_heavy_2.wav", "geiger/heavy/geiger_heavy_3.wav", "geiger/heavy/geiger_heavy_4.wav", "geiger/heavy/geiger_heavy_5.wav" }
 
 ENT.navigationRangedRange = 1500
+
+local PSY_DAMAGE = 15
+local PSY_FORCE = 1000
+local PUNCH_PITCH_MIN, PUNCH_PITCH_MAX = -40, -30
+local PUNCH_YAW = 23
+
+ENT.Abilities = {
+	{
+		name = "psyAttack",
+		meleeRange = "outside",
+		cooldown = 5,
+		cancelOnTargetLoss = false,
+		phases = {
+			{duration = 3, animation = "psy_attack_0", attackIndex = 0, method = "ControllerPsyWindup"},
+			{duration = 0.5, method = "ControllerPsyStrike"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/controler.mdl"
@@ -155,42 +166,28 @@ function ENT:STALKERNPCThink()
 			self.NextSpawn = CurTime() + 60
 		end
 	end
+end
 
-	if(self.CanSpecialTimer < CurTime()) then
-		self.CanSpecial = true
+function ENT:ControllerPsyWindup(enemy)
+	self:STALKERNPCPlaySoundRandom(100, "Stalker.Controller.SpecialAttack", 1, 1)
+	self:ControllerPlaySoundToPlayer(enemy, "Stalker.Controller.Control.1")
+end
+
+function ENT:ControllerPsyStrike(enemy)
+	self:ControllerPlaySoundToPlayer(enemy, "Stalker.Controller.Control.4")
+	if not enemy or not enemy:Visible(self) then return end
+
+	if enemy:IsPlayer() and enemy:Alive() then
+		enemy:ViewPunch(Angle(math.random(PUNCH_PITCH_MIN, PUNCH_PITCH_MAX), math.random(-PUNCH_YAW, PUNCH_YAW), 0))
 	end
-
-
-	if (self.special1 < CurTime() and self.SpecialAttack == 1) then
-		self:ControllerPlaySoundToPlayer(self:GetEnemy(),"Stalker.Controller.Control.4")	
-		
-		if (IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=nil) then
-			local TEMP_POORGUY = self:GetEnemy()
-			if(TEMP_POORGUY:Visible(self)) then		
-				if(TEMP_POORGUY:IsPlayer()&&TEMP_POORGUY:Alive()) then
-					TEMP_POORGUY:ViewPunch(Angle(math.random(-40,-30),math.random(-23,23),0))
-				end
-			
-				local TEMP_TargetDamage = DamageInfo()
-								
-				TEMP_TargetDamage:SetDamage(15)
-				TEMP_TargetDamage:SetInflictor(self)
-				TEMP_TargetDamage:SetDamageType(DMG_SONIC)
-				TEMP_TargetDamage:SetAttacker(self)
-				TEMP_TargetDamage:SetDamagePosition(TEMP_POORGUY:NearestPoint(self:GetPos()+self:OBBCenter()))
-				TEMP_TargetDamage:SetDamageForce(self:GetForward()*1000)
-			
-				TEMP_POORGUY:TakeDamageInfo(TEMP_TargetDamage)
-			end
-
-		end
-		self.SpecialAttack = 2
-	end
-
-	if (self.special2 < CurTime() and self.SpecialAttack == 2) then
-		self:STALKERNPCClearAnimation()
-		self.SpecialAttack = 0
-	end
+	local info = DamageInfo()
+	info:SetDamage(PSY_DAMAGE)
+	info:SetInflictor(self)
+	info:SetDamageType(DMG_SONIC)
+	info:SetAttacker(self)
+	info:SetDamagePosition(enemy:NearestPoint(self:GetPos() + self:OBBCenter()))
+	info:SetDamageForce(self:GetForward() * PSY_FORCE)
+	enemy:TakeDamageInfo(info)
 end
 
 function ENT:ControllerPlaySoundToPlayer(ent,SND)
@@ -210,22 +207,6 @@ function ENT:ControllerPlaySoundToPlayer(ent,SND)
 	end
 	
 	return TEMP_SOUND
-end
-
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if(self.CanSpecial==true) then
-		self:STALKERNPCPlayAnimation("psy_attack_0")
-		
-		self:STALKERNPCPlaySoundRandom(100,"Stalker.Controller.SpecialAttack",1,1)
-		self:ControllerPlaySoundToPlayer(self:GetEnemy(),"Stalker.Controller.Control.1")
-
-		self.special1 = CurTime() + 3.0
-		self.special2 = CurTime() + 3.5
-		self.SpecialAttack = 1
-
-		self.CanSpecial = false
-		self.CanSpecialTimer = CurTime()+5
-	end
 end
 
 function ENT:STALKERNPCRemove()

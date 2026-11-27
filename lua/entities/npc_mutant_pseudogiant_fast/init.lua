@@ -30,16 +30,6 @@ ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 ENT.hp = 2500
 ENT.hpvar = 100
 
-ENT.CanJump = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-
-ENT.CanBigJump = 0
-ENT.isBigJumping = 0
-ENT.bigjumping1 = 0
-ENT.bigjumping2 = 0
-
 ENT.NextAbilityTime = 0
 
 ENT.MinRangeDist = 800
@@ -59,7 +49,39 @@ ENT.navigationLeapAimHeight = 48
 ENT.navigationLeapSpeed = 2
 ENT.navigationShortLeapAimHeight = 32
 ENT.navigationShortLeapSpeed = 3
-ENT.navigationLeapCooldown = "CanBigJump"
+
+local LANDING_RADIUS = 512
+local LANDING_DAMAGE = 60
+
+ENT.Abilities = {
+	{
+		name = "shortJump",
+		navigationLeap = "short",
+		meleeRange = "outside",
+		maxRange = ENT.navigationShortLeapRange,
+		chance = 0.5,
+		cooldown = 6,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.3},
+			{duration = 0.5, leap = "short", melee = 6, sound = "Stalker.Pseudogiant.Melee1"},
+		},
+	},
+	{
+		name = "bigJump",
+		navigationLeap = "long",
+		meleeRange = "outside",
+		minRange = ENT.navigationLeapMinRange,
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 10,
+		phases = {
+			{duration = 0.3, melee = 5, sound = "Stalker.Pseudogiant.Idle1"},
+			{duration = 0.5, leap = "long", untilGrounded = true, maxDuration = 5},
+			{duration = 0, method = "PseudogiantLand"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/gigant.mdl"
@@ -137,103 +159,10 @@ function ENT:STALKERNPCThinkEnemyValid()
 	
 end
 
-function ENT:STALKERNPCThink()
-
-	-- BIG JUMP 
-	if (self.bigjumping1 < CurTime() and self.isBigJumping == 1 and self:GetEnemy()) then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-
-		self.isBigJumping = 2
-	end
-
-	if (self.bigjumping2 < CurTime() and self.isBigJumping == 2 and self:IsOnGround()) then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-
-		local effectdata = EffectData()
-		effectdata:SetOrigin( self:GetPos() + Vector(0,0,-16) )
-		effectdata:SetStart( self:GetPos() + Vector( 0, 0, math.Rand( -100, 170) ) )
-		effectdata:SetOrigin( self:GetPos() + Vector( 0, 0, math.Rand( -100, 170) ))
-		effectdata:SetNormal(  self:GetUp() )
-		effectdata:SetScale( 200 )
-		effectdata:SetRadius( 16 )
-		effectdata:SetMagnitude( 8 )
-		util.Effect( "ThumperDust", effectdata )
-
-		for _,v in pairs(ents.FindInSphere( self:GetPos(), 512 )) do
-			if(v == self) then continue end
-			local distance = self:GetPos():Distance(v:GetPos())
-
-			local fulldamage = 60
-			TEMP_TargetDamage = DamageInfo()
-									
-			TEMP_TargetDamage:SetDamage(fulldamage * ((512-distance)/512))
-			TEMP_TargetDamage:SetInflictor(self)
-			TEMP_TargetDamage:SetDamageType(DMG_CLUB)
-			TEMP_TargetDamage:SetAttacker(self)
-			TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(self:GetPos()+self:OBBCenter()))
-			TEMP_TargetDamage:SetDamageForce(((v:GetPos() + self:OBBCenter()) - (self:GetPos())):GetNormal())
-
-			v:TakeDamageInfo(TEMP_TargetDamage)
-		end
-
-		self.isBigJumping = 0
-	end
-
-	-- SMALL JUMP
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), true))
-
-		self:STALKERNPCPlayAnimation("stand_attack_run_0",6)
-		self:STALKERNPCMakeMeleeAttack(6)
-		self:EmitSound("Stalker.Pseudogiant.Melee1")
-		self.isAttacking = 2
-	end
-
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
+function ENT:PseudogiantLand()
+	self:STALKERNPCAbilityGroundSlam(LANDING_RADIUS, LANDING_DAMAGE, DMG_CLUB)
 end
 
 function ENT:STALKERNPCOnDeath()
 
-end
-
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < self.navigationShortLeapRange then
-			if(self.CanJump<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-				
-				if TEMP_Rand == 1 or forceJump then
-					self.CanJump = CurTime()+6
-					self.isAttacking = 1
-					self.jumping1 = CurTime()+0.3
-					self.jumping2 = CurTime()+0.8
-				end
-			end
-		end
-
-		if (distance > self.navigationLeapMinRange and distance < self.navigationLeapRange) then
-			if(self.CanBigJump<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-
-				if TEMP_Rand == 1 or forceJump then
-					self.CanBigJump = CurTime()+10
-					self.isBigJumping = 1
-					self.bigjumping1 = CurTime()+0.3
-					self.bigjumping2 = CurTime()+0.8
-
-					self:EmitSound("Stalker.Pseudogiant.Idle1")
-					self:STALKERNPCPlayAnimation("jump_attack_0",5)
-					self:STALKERNPCMakeMeleeAttack(5)
-				end
-			end
-		end
-	end
 end

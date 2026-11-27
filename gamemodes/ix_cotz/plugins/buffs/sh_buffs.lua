@@ -166,12 +166,12 @@ PLUGIN.buffs[ "leghurt" ] = {
 	name = "Leg Injury",
 	desc = "Your legs are injured and your movement has been handicapped.",
 	onbuffed = function( player, parameter )
-		if !player:HasBuff( "leghurt" ) then
+		if not player:HasBuff( "leghurt" ) then
 			player:ChatPrint( nut.lang.Get("buff_legs_injured") )
 		end
 	end,
 	ondebuffed = function( player, parameter )
-		if !player:Alive() then return end
+		if not player:Alive() then return end
 		if player:HasBuff( "leghurt" ) then
 			player:ChatPrint( nut.lang.Get("buff_legs_restored") )
 		end
@@ -265,8 +265,8 @@ PLUGIN.buffs[ "buff_meditation" ] = {
 		player.timeNextMeditatonTick = player.timeNextMeditatonTick or CurTime() + 1
 		player.timeNextMeditatonTickSound = player.timeNextMeditatonTickSound or CurTime()
 
-		if (player:Health() < player.meditationHealth and !parameter.damageNoStop) 
-		or (player:Health() == player:GetMaxHealth() and !parameter.healthNoStop) 
+		if (player:Health() < player.meditationHealth and not parameter.damageNoStop) 
+		or (player:Health() == player:GetMaxHealth() and not parameter.healthNoStop) 
 		or not player:GetNetVar("ix_hasBlackScreen") then 
 			player:RemoveBuff("buff_meditation")  
 		end

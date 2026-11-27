@@ -29,16 +29,6 @@ ENT.CanSpecial = true
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.CanJump = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-ENT.CanLongJump = 0
-
-ENT.IsLongJumping = 0
-ENT.longjumping1 = 0
-ENT.longjumping2 = 0
-
 ENT.hp = 400
 ENT.hpvar = 50
 
@@ -61,7 +51,47 @@ ENT.navigationLeapAimHeight = 128
 ENT.navigationLeapSpeed = 1.5
 ENT.navigationShortLeapAimHeight = 32
 ENT.navigationShortLeapSpeed = 3
-ENT.navigationLeapCooldown = "CanLongJump"
+
+local LANDING_RADIUS = 512
+local LANDING_DAMAGE = 25
+
+ENT.Abilities = {
+	{
+		name = "longJump",
+		navigationLeap = "long",
+		meleeRange = "outside",
+		minRange = ENT.navigationLeapMinRange,
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 6,
+		linkedCooldowns = {shortJump = 3},
+		recovery = 1.5,
+		phases = {
+			{duration = 0.01},
+			{
+				duration = 0.49, leap = "long", melee = 3, sound = "Stalker.Vareshka.Hit1",
+				untilGrounded = true, maxDuration = 5,
+			},
+			{duration = 0, method = "VareshkaLand"},
+		},
+	},
+	{
+		name = "shortJump",
+		navigationLeap = "short",
+		meleeRange = "outside",
+		maxRange = ENT.navigationShortLeapRange,
+		chance = 0.5,
+		cooldown = 3,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.2},
+			{
+				duration = 0, leap = "short", melee = 3, sound = "Stalker.Vareshka.Chase4",
+				untilAnimationDone = true, maxDuration = 4.8,
+			},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/vareshka.mdl"
@@ -103,8 +133,6 @@ function ENT:Initialize()
 	
 	self:SetMaxHealth(self:Health())
 
-	self.CanJump = CurTime()+1
-
 	self.NextAbilityTime = CurTime()+1
 	
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
@@ -114,112 +142,6 @@ function ENT:STALKERNPCThinkEnemyValid()
 	
 end
 
-function ENT:STALKERNPCThink()
-	-- LONGJUMP
-	if self.longjumping1 < CurTime() && self.IsLongJumping == 1 then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) and self:GetEnemy() then
-			self:STALKERNPCClearAnimation()
-			self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-			self:STALKERNPCPlayAnimation("attack_1",3)
-			self:STALKERNPCMakeMeleeAttack(3)
-			self:EmitSound("Stalker.Vareshka.Hit1")
-			self.IsLongJumping = 2
-		end
-			
-	end
-
-	if self.longjumping2 < CurTime() && self.IsLongJumping == 2 and self:IsOnGround() then 
-		if(IsValid(self)&&self!=nil&&self!=NULL) then
-			self:STALKERNPCStopAllTimers()
-			self:STALKERNPCClearAnimation()
-			self.NextAbilityTime = CurTime()+1.5
-			self.IsLongJumping = 0
-
-			for _,v in pairs(ents.FindInSphere( self:GetPos(), 512 )) do
-				if(v == self) then continue end
-				local distance = self:GetPos():Distance(v:GetPos())
-
-				local fulldamage = 25
-				TEMP_TargetDamage = DamageInfo()
-									
-				TEMP_TargetDamage:SetDamage(fulldamage * ((512-distance)/512))
-				TEMP_TargetDamage:SetInflictor(self)
-				TEMP_TargetDamage:SetDamageType(DMG_CLUB)
-				TEMP_TargetDamage:SetAttacker(self)
-				TEMP_TargetDamage:SetDamagePosition(v:NearestPoint(self:GetPos()+self:OBBCenter()))
-				TEMP_TargetDamage:SetDamageForce(((v:GetPos() + self:OBBCenter()) - (self:GetPos())):GetNormal())
-
-				v:TakeDamageInfo(TEMP_TargetDamage)
-			end
-
-			local effectdata = EffectData()
-			effectdata:SetOrigin( self:GetPos() + Vector(0,0,-16) )
-			effectdata:SetStart( self:GetPos() + Vector( 0, 0, math.Rand( -100, 170) ) )
-			effectdata:SetOrigin( self:GetPos() + Vector( 0, 0, math.Rand( -100, 170) ))
-			effectdata:SetNormal(  self:GetUp() )
-			effectdata:SetScale( 200 )
-			effectdata:SetRadius( 16 )
-			effectdata:SetMagnitude( 8 )
-			util.Effect( "ThumperDust", effectdata )
-		end
-	end
-	-- LONGJUMP END
-
-
-	-- SMALL JUMP
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), true))
-		self:STALKERNPCPlayAnimation("attack_1",3)
-		self:STALKERNPCMakeMeleeAttack(3)
-		self:EmitSound("Stalker.Vareshka.Chase4")
-		self.isAttacking = 2		
-	end
-
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
-end
-
-
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if(self.PlayingAnimation==false) then
-		if(self.CanLongJump<CurTime()) then
-			local TEMP_Rand = math.random(1,5)
-
-			local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-			if distance > self.navigationLeapMinRange and distance < self.navigationLeapRange then
-				if TEMP_Rand == 1 or forceJump then
-					self.CanLongJump = CurTime()+6
-					self.CanJump = CurTime()+3
-
-					self.IsLongJumping = 1
-
-					self.longjumping1 = CurTime()+0.01
-					self.longjumping2 = CurTime()+0.5
-
-				end
-			end
-		end
-
-	end
-
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < self.navigationShortLeapRange then
-			if(self.CanJump<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-			
-				if TEMP_Rand == 1 or forceJump then
-					self.CanJump = CurTime()+3
-					self.isAttacking = 1
-					self.jumping1 = CurTime()+0.2
-					self.jumping2 = CurTime()+5
-				end
-			end
-		end
-	end
+function ENT:VareshkaLand()
+	self:STALKERNPCAbilityGroundSlam(LANDING_RADIUS, LANDING_DAMAGE, DMG_CLUB)
 end

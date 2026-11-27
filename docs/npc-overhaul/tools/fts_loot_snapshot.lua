@@ -54,6 +54,8 @@ for path in files:lines() do
 end
 files:close()
 local contacts = PLUGIN.contacts
+-- An empty listing means ripgrep is missing; continuing would let callers rewrite pools from no data.
+assert(next(contacts), "no contact definitions found; is ripgrep (rg) installed?")
 PLUGIN = {}
 dofile(root .. "townnpcs/definitions/sh_config.lua")
 local settings = PLUGIN.settings

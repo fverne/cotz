@@ -35,18 +35,9 @@ ENT.FBR = 2
 ENT.FBRAP = 8
 ENT.BR = 30
 
-ENT.CanJump = 0
-ENT.isAttacking = 0
-ENT.jumping1 = 0
-ENT.jumping2 = 0
-
 ENT.NextAbilityTime = 0
 ENT.PackTimer = 0
 
-ENT.NextSpawn = 0
-ENT.CanSpawn = false
-
-ENT.PsiAttackCancel = 0
 ENT.summonSpawnRadius = 256
 
 local CLONE_OFFSETS = {
@@ -66,6 +57,35 @@ ENT.navigationLeapRange = 200
 ENT.navigationLeapAimHeight = 32
 ENT.navigationLeapSpeed = 3
 
+ENT.Abilities = {
+	{
+		name = "jump",
+		navigationLeap = "long",
+		meleeRange = "outside",
+		maxRange = ENT.navigationLeapRange,
+		chance = 0.5,
+		cooldown = 3,
+		recovery = 0.5,
+		phases = {
+			{duration = 0.2},
+			{
+				duration = 0, leap = "long", melee = 3, sound = "Stalker.Pseudodog.Melee1",
+				untilAnimationDone = true, maxDuration = 4.8,
+			},
+		},
+	},
+	{
+		name = "summon",
+		triggerOnly = true,
+		cancelOnTargetLoss = false,
+		cooldown = 10,
+		phases = {
+			{duration = 3, animation = "stand_psi_attack_1", attackIndex = 0},
+			{duration = 0, method = "PsydogSummon"},
+		},
+	},
+}
+
 function ENT:Initialize()
 	self.Model = "models/monsters/psydog.mdl"
 	self:STALKERNPCInit(Vector(-24,-24,70),MOVETYPE_STEP)
@@ -77,7 +97,6 @@ function ENT:Initialize()
 	self:DropToFloor()
 
 	self.GoingToSpawnThem = false
-	self.NextSpawn = 0
 
 	local TEMP_MeleeHitTable = { "Stalker.Claw.Hit" }
 	
@@ -103,8 +122,6 @@ function ENT:Initialize()
 	TEMP_MeleeTable.bone[1] = "bip01_head"
 	self:STALKERNPCSetMeleeParams(3,"jump_attack_all",1, TEMP_MeleeTable,TEMP_MeleeHitTable,TEMP_MeleeMissTable)
 
-	self.PsiAttackCancel = CurTime() + 10
-
 	self:SetHealth(self.hp + math.random(-self.hpvar, self.hpvar))
 	self:SetMaxHealth(self:Health())
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
@@ -114,66 +131,24 @@ function ENT:STALKERNPCThinkEnemyValid()
 	
 end
 
+-- Psydogs summon in and out of combat whenever a phantom slot is empty, as the original did.
 function ENT:STALKERNPCThink()
-	-- npc wounded animation -- no good for this
-	-- if self:Health() < (self:GetMaxHealth() * 0.33) then
-	-- 	self:SetMovementActivity(self.injuredact)
-	-- end
-
-	if self.PsiAttackCancel < CurTime() and self.CanSpawn then
-		self:STALKERNPCClearAnimation()
-
-		for index, offset in ipairs(CLONE_OFFSETS) do
-			local field = "Clone" .. index
-			if not IsValid(self[field]) then
-				self[field] = self:STALKERNPCSpawnSummon("npc_mutant_psydog_phantom", offset)
-			end
-		end
-		self.CanSpawn = false
-	end
-
-	if self.NextSpawn < CurTime() then
-		if (!IsValid(self.Clone1)) or (!IsValid(self.Clone2)) or (!IsValid(self.Clone3)) or (!IsValid(self.Clone4)) then
-			self:STALKERNPCPlayAnimation("stand_psi_attack_1")
-			self.PsiAttackCancel = CurTime() + 3
-			self.NextSpawn = CurTime() + 10
-			self.CanSpawn = true
-		end
-	end
-
-
-	if (self.jumping1 < CurTime()) and self.isAttacking == 1 then
-		self:SetVelocity(self:STALKERNPCNavigationJumpVelocity(self:GetEnemy(), false))
-		
-		self:STALKERNPCPlayAnimation("jump_attack_all",3)
-		self:STALKERNPCMakeMeleeAttack(3)
-		self:EmitSound("Stalker.Pseudodog.Melee1")
-		self.isAttacking = 2
-	end
-	if (self.jumping2 < CurTime()) and self.isAttacking == 2 then
-		self:STALKERNPCStopAllTimers()
-		self:STALKERNPCClearAnimation()
-		self.NextAbilityTime = CurTime()+0.5
-		self.isAttacking = 0
-	end
+	if self:PsydogMissingClone() then self:STALKERNPCTriggerAbility("summon") end
 end
 
-//little aggressive jump
-function ENT:STALKERNPCDistanceForMeleeTooBig(_, forceJump)
-	if (self.cotzUnreachableRecovery or self.cotzNavigationRetreat) and not forceJump then return end
-	if(self.PlayingAnimation==false) then
-		local distance = (self:GetPos():Distance(self:GetEnemy():GetPos()))
-		if distance < self.navigationLeapRange then
-			if(self.CanJump<CurTime()) then
-				local TEMP_Rand = math.random(1,5)
-			
-				if TEMP_Rand == 1 or forceJump then
-					self.CanJump = CurTime()+3
-					self.isAttacking = 1
-					self.jumping1 = CurTime()+0.2
-					self.jumping2 = CurTime()+5
-				end
-			end
+function ENT:PsydogMissingClone()
+	for index = 1, #CLONE_OFFSETS do
+		if not IsValid(self["Clone" .. index]) then return true end
+	end
+
+	return false
+end
+
+function ENT:PsydogSummon()
+	for index, offset in ipairs(CLONE_OFFSETS) do
+		local field = "Clone" .. index
+		if not IsValid(self[field]) then
+			self[field] = self:STALKERNPCSpawnSummon("npc_mutant_psydog_phantom", offset)
 		end
 	end
 end

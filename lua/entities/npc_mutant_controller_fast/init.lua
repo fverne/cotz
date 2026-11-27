@@ -22,14 +22,7 @@ ENT.FBR = 5
 ENT.FBRAP = 12
 ENT.BR = 15
 
-ENT.CanSpecial = true
-
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
-
-ENT.CanSpecialTimer = 0
-ENT.SpecialAttack = 0
-ENT.special1 = 0
-ENT.special2 = 0
 
 ENT.farttimer = 0
 
@@ -39,6 +32,25 @@ ENT.VisibleSchedule = SCHED_RUN_FROM_ENEMY_FALLBACK
 ENT.RangeSchedule = SCHED_RUN_RANDOM
 
 ENT.navigationRangedRange = 1500
+
+local SHOT_HEIGHT = Vector(0, 0, 50)
+local SHOT_FORWARD = 15
+local AIM_FALLBACK_DISTANCE = 1000
+local PROJECTILE_OFFSET = Vector(SHOT_FORWARD, 0, 50)
+local PROJECTILE_SPEED = 2500
+
+ENT.Abilities = {
+	{
+		name = "psyAttack",
+		meleeRange = "outside",
+		cooldown = 9,
+		cancelOnTargetLoss = false,
+		phases = {
+			{duration = 2.7, animation = "psy_attack_0", attackIndex = 0, method = "ControllerPsyWindup"},
+			{duration = 0.8, method = "ControllerPsyStrike"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/monsters/controler_fast.mdl"
@@ -113,40 +125,21 @@ function ENT:STALKERNPCThink()
 
 		self.farttimer = CurTime() + 1
 	end
+end
 
-	if(self.CanSpecialTimer < CurTime()) then
-		self.CanSpecial = true
-	end
+function ENT:ControllerPsyWindup(enemy)
+	local origin = self:GetPos() + SHOT_HEIGHT + self:GetForward() * SHOT_FORWARD
+	local target = enemy and enemy:WorldSpaceCenter() or self:GetPos() + self:GetForward() * AIM_FALLBACK_DISTANCE
+	local angles = self:GetAngles()
+	self:SetAngles(Angle(angles.p, (target - origin):Angle().y, angles.r))
+	self:STALKERNPCPlaySoundRandom(100, "Stalker.Controller.SpecialAttack", 1, 1)
+end
 
+function ENT:ControllerPsyStrike(enemy)
+	self:ControllerPlaySoundToPlayer(enemy, "Stalker.Controller.Control.3")
+	if not enemy or not enemy:Visible(self) then return end
 
-	if (self.special1 < CurTime() and self.SpecialAttack == 1) then
-		self:ControllerPlaySoundToPlayer(self:GetEnemy(),"Stalker.Controller.Control.3")	
-		
-		if (IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=nil) then
-			local TEMP_POORGUY = self:GetEnemy()
-			if(TEMP_POORGUY:Visible(self)) then	
-				local TEMP_ShootPoint = TEMP_POORGUY:GetPos()+TEMP_POORGUY:OBBCenter()
-
-				local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-					
-				local TEMP_Grav = ents.Create("ent_fastcontroller_ball")
-				TEMP_Grav:SetPos(TEMP_ShootPos)
-				TEMP_Grav:SetAngles((TEMP_ShootPoint-TEMP_ShootPos):Angle())
-				TEMP_Grav:Spawn()
-							
-				TEMP_Grav:SetOwner(self)
-							
-				TEMP_Grav:GetPhysicsObject():SetVelocity((TEMP_ShootPoint-TEMP_ShootPos):GetNormalized()*2500)
-			end
-
-		end
-		self.SpecialAttack = 2
-	end
-
-	if (self.special2 < CurTime() and self.SpecialAttack == 2) then
-		self:STALKERNPCClearAnimation()
-		self.SpecialAttack = 0
-	end
+	self:STALKERNPCAbilityLaunchProjectile("ent_fastcontroller_ball", enemy, PROJECTILE_SPEED, PROJECTILE_OFFSET)
 end
 
 function ENT:ControllerPlaySoundToPlayer(ent,SND)
@@ -166,32 +159,6 @@ function ENT:ControllerPlaySoundToPlayer(ent,SND)
 	end
 	
 	return TEMP_SOUND
-end
-
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if(self.CanSpecial==true) then
-		local TEMP_ShootPoint = self:GetPos()+(self:GetForward()*1000)
-		if(self:GetEnemy()) then
-			TEMP_ShootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
-		end
-		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-
-		local _, yaw, _ = (TEMP_ShootPoint-TEMP_ShootPos):GetNormalized():Angle():Unpack()
-		local pitch, _, roll = self:GetAngles():Unpack()
-
-		self:SetAngles(Angle(pitch,yaw,roll))
-
-		self:STALKERNPCPlayAnimation("psy_attack_0")
-		
-		self:STALKERNPCPlaySoundRandom(100,"Stalker.Controller.SpecialAttack",1,1)
-
-		self.special1 = CurTime() + 2.7
-		self.special2 = CurTime() + 3.5
-		self.SpecialAttack = 1
-
-		self.CanSpecial = false
-		self.CanSpecialTimer = CurTime()+9
-	end
 end
 
 function ENT:STALKERNPCRemove()

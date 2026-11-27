@@ -61,7 +61,11 @@ local source = file:read("*a")
 file:close()
 source = source:gsub("!=", "~="):gsub("&&", " and "):gsub("||", " or "):gsub("!", "not ")
 ENT = {}
+function isstring(value) return type(value) == "string" end
+function istable(value) return type(value) == "table" end
+function ErrorNoHalt(message) error(message) end
 dofile("lua/entities/stalker_ai/sv_navigation.lua")
+dofile("lua/entities/stalker_ai/sv_abilities.lua")
 assert(load(source, "@lua/entities/stalker_ai/schedules.lua"))()
 local mutantMeta = ENT
 
@@ -149,6 +153,26 @@ local function applySpecies(entity, name)
 		if line:match("^ENT%.navigation") then declarations[#declarations + 1] = line end
 	end
 	assert(load(table.concat(declarations, "\n"), "@" .. name, "t", {ENT = entity}))()
+	entity.CanJump, entity.CanLongJump, entity.CanBigJump, entity.NextAbilityTime = 0, 0, 0, 0
+	entity.CanSuck = 1000
+	if contents:find("\nENT.Abilities = {", 1, true) then
+		-- Run the file-scope definitions so ability tables can reference the navigation fields.
+		local header = contents:sub(1, contents:find("\nfunction ENT:", 1, true)):gsub("^\239\187\191", "")
+		local class = setmetatable({}, {__index = function(definitions, key)
+			local value = {}
+			rawset(definitions, key, value)
+
+			return value
+		end})
+		local environment = setmetatable({ENT = class, include = function() end, AddCSLuaFile = function() end},
+			{__index = _G})
+		assert(load(header, "@" .. name .. ":header", "t", environment))()
+		entity.Abilities = rawget(class, "Abilities")
+		entity.MeleeAttackSequence = {}
+		entity:STALKERNPCInitAbilities()
+
+		return
+	end
 	local start = assert(contents:find("function ENT:STALKERNPCDistanceForMeleeTooBig(", 1, true))
 	local finish = contents:find("\nfunction ENT:", start + 1, true)
 	local callback = contents:sub(start, finish and finish - 1 or #contents)
@@ -157,8 +181,6 @@ local function applySpecies(entity, name)
 	local methods = {}
 	assert(load(callback, "@" .. name .. ":attack", "t", setmetatable({ENT = methods}, {__index = _G})))()
 	entity.STALKERNPCDistanceForMeleeTooBig = methods.STALKERNPCDistanceForMeleeTooBig
-	entity.CanJump, entity.CanLongJump, entity.CanBigJump, entity.NextAbilityTime = 0, 0, 0, 0
-	entity.CanSuck = 1000
 end
 
 for _, isPlayer in ipairs({true, false}) do
@@ -255,7 +277,8 @@ for _, name in ipairs({"snork", "vareshka", "pseudogiant_fast"}) do
 	applySpecies(actor, name)
 	actor.enemy.position = Vector(actor.navigationShortLeapRange / 2)
 	selectAt(actor, 1)
-	check(actor.isAttacking == 1, name .. " chooses its native short jump below the long-jump minimum")
+	check(actor.cotzAbility and actor.cotzAbility.definition.navigationLeap == "short",
+		name .. " chooses its short jump below the long-jump minimum")
 end
 
 actor = mutant(target(true))
@@ -282,7 +305,7 @@ actor = mutant(target(true))
 applySpecies(actor, "bloodsucker")
 actor.enemy.position = Vector(50)
 selectAt(actor, 1)
-check(not actor.isAttacking, "a jump that falls below the target before arrival is rejected despite being in range")
+check(not actor.cotzAbility, "a jump that falls below the target before arrival is rejected despite being in range")
 math.random = formerRandom
 
 noGround = false

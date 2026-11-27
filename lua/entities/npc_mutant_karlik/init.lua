@@ -23,8 +23,6 @@ ENT.CanSpecial = true
 --ENT.SNPCClass="C_MONSTER_LAB"
 ENT.SNPCClass="C_MONSTER_PLAYERFOCUS"
 
-ENT.CanWarp = 0
-
 ENT.hp = 1200
 ENT.hpvar = 50
 
@@ -32,23 +30,7 @@ ENT.FBR = 10
 ENT.FBRAP = 15
 ENT.BR = 10
 
-ENT.WantToWarp = false
-ENT.IsWarping = 0
-ENT.warpdelay = 0
-
-ENT.CanThrow = 0
-
-ENT.IsThrow1 = 0
-ENT.throw1_1 = 0
-
-ENT.IsThrow2 = 0
-ENT.throw2_1 = 0
-ENT.throw2_2 = 0
-
 ENT.WantToKnock = false
-ENT.CanKnock = 0
-ENT.knocking = 0
-ENT.secondKnock = 0
 
 ENT.NextAbilityTime = 0
 
@@ -58,6 +40,67 @@ ENT.VisibleSchedule = SCHED_ALERT_FACE
 ENT.RangeSchedule = SCHED_IDLE_STAND
 
 ENT.navigationRangedRange = 1500
+
+local PROJECTILE_OFFSET = Vector(15, 0, 50)
+local PROJECTILE_SPEED = 2000
+local KNOCK_SPEED = 700
+local KNOCK_ORIGIN_DROP = Vector(0, 0, 96)
+local TELEPORT_EFFECT_OFFSET = Vector(0, 0, 45)
+local WARP_ODDS = 3
+
+ENT.Abilities = {
+	{
+		name = "warp",
+		triggerOnly = true,
+		interrupts = true,
+		uninterruptible = true,
+		cancelOnTargetLoss = false,
+		-- Ten seconds after the teleport, as in the original.
+		cooldown = 11.2,
+		initialCooldown = 1,
+		phases = {
+			{duration = 1.2, animation = "stand_blinded_2"},
+			{duration = 0, method = "KarlikWarp"},
+		},
+	},
+	{
+		name = "knock",
+		triggerOnly = true,
+		interrupts = true,
+		cancelOnTargetLoss = false,
+		cooldown = 10,
+		initialCooldown = 1,
+		phases = {
+			{duration = 1.6, animation = "stand_attack_3"},
+			{duration = 0, method = "KarlikKnock"},
+		},
+	},
+	{
+		name = "throw",
+		meleeRange = "outside",
+		chance = 0.4,
+		cooldown = 4,
+		linkedCooldowns = {volley = 4},
+		cancelOnTargetLoss = false,
+		phases = {
+			{duration = 1.1, animation = "stand_attack_0"},
+			{duration = 0, method = "KarlikThrow"},
+		},
+	},
+	{
+		name = "volley",
+		meleeRange = "outside",
+		chance = 0.34,
+		cooldown = 6,
+		linkedCooldowns = {throw = 6},
+		cancelOnTargetLoss = false,
+		phases = {
+			{duration = 0.7, animation = "stand_attack_1"},
+			{duration = 0.7, method = "KarlikThrow"},
+			{duration = 0, method = "KarlikThrow"},
+		},
+	},
+}
 
 function ENT:Initialize()
 	self.Model = "models/maver1k_XVII/Stalker/mutants/karlik.mdl"
@@ -89,13 +132,7 @@ function ENT:Initialize()
 	
 	self:SetMaxHealth(self:Health())
 
-	self.CanWarp = CurTime()+1
-	self.CanThrow = CurTime()+1
-	self.CanKnock = CurTime()+1
-	
 	self.NextAbilityTime = CurTime()+1
-	
-	self.MustWarp = 0
 	
 	self:SetRenderMode(RENDERMODE_TRANSALPHA)
 end
@@ -104,187 +141,49 @@ function ENT:STALKERNPCThinkEnemyValid()
 	
 end
 
+-- Enemies that come close queue a knockback, which fires as soon as its cooldown allows.
 function ENT:STALKERNPCThink()
-	if( self.CanWarp < CurTime() && self.WantToWarp && self.IsWarping == 0) then
-		self:STALKERNPCClearAnimation()
-		self:STALKERNPCPlayAnimation("stand_blinded_2",1)
-		self.IsWarping = 1
-		self.warpdelay = CurTime() + 1.2
+	local enemy = self:GetEnemy()
+	if IsValid(enemy) and self:GetPos():Distance(enemy:GetPos()) < self.MinRangeDist / 2 then
+		self.WantToKnock = true
 	end
-
-	if(self.warpdelay < CurTime() && self.IsWarping == 1) then
-		sound.Play("Stalker.Controller.Control.3",self:GetPos())
-		self.Entity:SetNWBool( "Teleport", true )
-		self.Entity:SetNWVector( "OldPos", self:GetPos()+Vector(0,0,45))
-
-		self:SetPos(self:GetTeleportLocation())
-		self.IsWarping = 0
-		self.WantToWarp = false
-		self.CanWarp = CurTime()+10
-		self:STALKERNPCClearAnimation()
-	end
-
-	if IsValid(self:GetEnemy()) then
-		local dist = self:GetPos():Distance(self:GetEnemy():GetPos())
-
-		if dist < self.MinRangeDist/2 then
-			self.WantToKnock = true
-		end
-	end
-
-	if self.throw1_1 < CurTime() && self.IsThrow1 == 1 then
-		self.IsThrow1 = 0
-
-		local shootPoint = self:GetPos() + self:GetForward() * 1000
-		if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-			shootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
-		end
-
-		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
-
-		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-					
-		local TEMP_Grav = ents.Create("ent_karlik_ball")
-		TEMP_Grav:SetPos(TEMP_ShootPos)
-		TEMP_Grav:SetAngles((shootPoint-TEMP_ShootPos):Angle())
-		TEMP_Grav:Spawn()
-							
-		TEMP_Grav:SetOwner(self)
-							
-		TEMP_Grav:GetPhysicsObject():SetVelocity((shootPoint-TEMP_ShootPos):GetNormalized()*2000)
-
-		self:STALKERNPCClearAnimation()
-
-	end
-
-	if self.throw2_1 < CurTime() && self.IsThrow2 == 1 then
-		self.IsThrow2 = 2
-
-		local shootPoint = self:GetPos() + self:GetForward() * 1000
-		if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-			shootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
-		end
-
-		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
-
-		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-					
-		local TEMP_Grav = ents.Create("ent_karlik_ball")
-		TEMP_Grav:SetPos(TEMP_ShootPos)
-		TEMP_Grav:SetAngles((shootPoint-TEMP_ShootPos):Angle())
-		TEMP_Grav:Spawn()
-							
-		TEMP_Grav:SetOwner(self)
-							
-		TEMP_Grav:GetPhysicsObject():SetVelocity((shootPoint-TEMP_ShootPos):GetNormalized()*2000)
-
-	end
-
-	if self.throw2_2 < CurTime() && self.IsThrow2 == 2 then
-		self.IsThrow2 = 0
-
-		local shootPoint = self:GetPos() + self:GetForward() * 1000
-		if(IsValid(self:GetEnemy())&&self:GetEnemy()!=nil&&self:GetEnemy()!=NULL) then
-			shootPoint = self:GetEnemy():GetPos()+self:GetEnemy():OBBCenter()
-		end
-
-		self:STALKERNPCPlaySoundRandom(100,"Stalker.Karlik.Push",1,1)
-
-		local TEMP_ShootPos = self:GetPos()+Vector(0,0,50)+(self:GetForward()*15)
-					
-		local TEMP_Grav = ents.Create("ent_karlik_ball")
-		TEMP_Grav:SetPos(TEMP_ShootPos)
-		TEMP_Grav:SetAngles((shootPoint-TEMP_ShootPos):Angle())
-		TEMP_Grav:Spawn()
-							
-		TEMP_Grav:SetOwner(self)
-							
-		TEMP_Grav:GetPhysicsObject():SetVelocity((shootPoint-TEMP_ShootPos):GetNormalized()*2000)
-
-		self:STALKERNPCClearAnimation()
-	end
-
-	if self.WantToKnock && self.CanKnock < CurTime() then
-		self:STALKERNPCClearAnimation()
-		self:STALKERNPCPlayAnimation("stand_attack_3",1)
-
-		self.CanKnock = CurTime() + 10
-		self.secondKnock = CurTime() + 1.6
-		
-		self.WantToKnock = false
-		self.knocking = 1
-	end
-
-	if self.secondKnock < CurTime() && self.knocking == 1 then
-		for k,v in pairs(ents.FindInSphere( self:GetPos(), self.MinRangeDist )) do
-			if(v == self) then continue end
-			local dirnormal =((v:GetPos() + self:OBBCenter()) - (self:GetPos() - Vector(0,0,96))):GetNormal()
-
-			local phys = v:GetPhysicsObject()
-			if IsValid(phys) then
-				v:GetPhysicsObject():SetVelocity(dirnormal*700)
-			end
-			if v:IsPlayer() then
-				v:SetVelocity(dirnormal*700)
-			end
-
-			
-		end
-
-		self.Entity:SetNWBool( "Knocking", true )
-
-		self.knocking = 0
-		self:STALKERNPCClearAnimation()
-	end
+	if self.WantToKnock and self:STALKERNPCTriggerAbility("knock") then self.WantToKnock = false end
 end
 
+function ENT:KarlikWarp()
+	sound.Play("Stalker.Controller.Control.3", self:GetPos())
+	self:SetNWBool("Teleport", true)
+	self:SetNWVector("OldPos", self:GetPos() + TELEPORT_EFFECT_OFFSET)
+	self:SetPos(self:GetTeleportLocation())
+end
+
+function ENT:KarlikKnock()
+	local origin = self:GetPos() - KNOCK_ORIGIN_DROP
+	for _, target in ipairs(ents.FindInSphere(self:GetPos(), self.MinRangeDist)) do
+		if target ~= self then
+			local direction = (target:GetPos() + self:OBBCenter() - origin):GetNormalized()
+			local physics = target:GetPhysicsObject()
+			if IsValid(physics) then physics:SetVelocity(direction * KNOCK_SPEED) end
+			if target:IsPlayer() then target:SetVelocity(direction * KNOCK_SPEED) end
+		end
+	end
+	self:SetNWBool("Knocking", true)
+end
+
+function ENT:KarlikThrow(enemy)
+	self:STALKERNPCPlaySoundRandom(100, "Stalker.Karlik.Push", 1, 1)
+	self:STALKERNPCAbilityLaunchProjectile("ent_karlik_ball", enemy, PROJECTILE_SPEED, PROJECTILE_OFFSET)
+end
 
 function ENT:STALKERNPCDistanceForMeleeTooSmall()
 
 end
 
-function ENT:STALKERNPCDistanceForMeleeTooBig() 
-	if(self.PlayingAnimation==false) then
+function ENT:STALKERNPCDamageTake(dmginfo, mul)
+	if math.random(1, WARP_ODDS) == 1 then self:STALKERNPCTriggerAbility("warp") end
 
-		if(self.CanThrow < CurTime()) then
-			local TEMP_Rand = math.random(1,9)
-			
-			if(TEMP_Rand < 3) then
-				self.CanThrow = CurTime() + 4
-				
-				self:STALKERNPCPlayAnimation("stand_attack_0", 1 )
-
-				self.IsThrow1 = 1
-				self.throw1_1 = CurTime() + 1.1
-					
-			end
-
-			if(TEMP_Rand == 7) then
-				self.CanThrow = CurTime() + 6
-				
-				self:STALKERNPCPlayAnimation("stand_attack_1", 1 )
-
-				self.IsThrow2 = 1
-				self.throw2_1 = CurTime() + 0.7
-				self.throw2_2 = CurTime() + 1.4
-					
-			end
-		end
-	end
-end
-
-function ENT:STALKERNPCDamageTake(dmginfo,mul)
-	if(self.CanWarp < CurTime()) then
-		local TEMP_Rand = math.random(1,3)
-		
-		if(TEMP_Rand==1) then
-			self.WantToWarp = true
-		end
-	end
-	
 	return mul
 end
-
 
 function ENT:GetTeleportLocation( )
 	local enemy = self:GetEnemy()

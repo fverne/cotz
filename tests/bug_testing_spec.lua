@@ -15,7 +15,8 @@ local function method(path, name)
 end
 Schema, PLUGIN, SWEP = {}, {}, {}
 method("gamemodes/ix_cotz/schema/sh_hooks.lua", "function Schema:CanPlayerInteractItem(")
-local client = {Alive = function() return false end, GetLocalVar = function() return false end}
+local client = {Alive = function() return false end, GetLocalVar = function() return false end,
+	GetNetVar = function() return nil end}
 isentity = function(value) return type(value) == "table" and value.isEntity end
 isnumber = function(value) return type(value) == "number" end
 ix = {item = {instances = {[1] = {invID = 10}, [2] = {invID = 0}}}}
@@ -72,7 +73,7 @@ function npc:GetNetVar(key, default) return self.vars[key] or default end
 function npc:SetNetVar(key, value) self.vars[key] = value end
 function npc:SetTownSpawnAnim(animation) self.spawnAnimation = animation end
 function npc:SetAnim() end
-ix = {type = {string = 1}, command = {Add = function(name, data) commands[name] = data end},
+ix = {type = {string = 1, optional = 64}, command = {Add = function(name, data) commands[name] = data end},
 	progression = {GetNPCFromName = function() return npc end}}
 game = {GetMap = function() return "test" end}
 local contact = {id = "mute", name = "Mute", map = "test"}
@@ -88,6 +89,7 @@ table.Copy = function(value)
 	return result
 end
 util = {AddNetworkString = function() end}
+bit = {bor = function(a, b) return a | b end}
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sh_commands.lua")
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_spawnpoints.lua")
 dofile("gamemodes/ix_cotz/plugins/townnpcs/libs/sv_sites.lua")

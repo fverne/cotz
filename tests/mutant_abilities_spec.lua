@@ -201,4 +201,99 @@ do
 	check(actor:STALKERNPCAbilityPulse(300, 25, DMG_SONIC, false) == 2, "pulses can ignore line of sight")
 end
 
+do
+	fixture.now = 100
+	local actor = newActor({
+		{
+			name = "pounce", navigationLeap = "short", cooldown = 2, linkedCooldowns = {roar = 5},
+			phases = {
+				{duration = 0.1},
+				{duration = 0, leap = "short", melee = 4, sound = "Pounce", untilAnimationDone = true, maxDuration = 2},
+			},
+		},
+		{name = "roar", navigationLeap = "long", phases = {{duration = 1, animation = "S_Roar", attackIndex = 0}}},
+	})
+	actor.MeleeAttackSequence = {[4] = "S_Pounce"}
+	actor.enemy = close
+	check(actor:STALKERNPCNavigationLeapAbility(true).name == "pounce"
+		and actor:STALKERNPCNavigationLeapAbility(false).name == "roar", "navigation finds short and long leaps")
+	actor.cotzUnreachableRecovery = {}
+	check(not actor:STALKERNPCTryAbilities(close, 0), "leaps wait for navigation during unreachable recovery")
+	actor.cotzUnreachableRecovery = nil
+	actor.cotzNextAbilityCheck = 0
+	check(actor:STALKERNPCTryAbilities(close, 0), "leaps start normally outside recovery")
+	check(actor.cotzAbilityReady.roar == 105, "linked cooldowns delay related abilities")
+	fixture.now = 100.2
+	actor:STALKERNPCUpdateAbility()
+	check(actor.velocities[1].x == 1 and actor.Animation == "S_Pounce" and actor.AttackIndex == 4
+		and actor.meleeAttacks[1] == 4 and actor.sounds[1] == "Pounce", "leap phases jump, swing and sound together")
+	fixture.now = 101
+	actor:STALKERNPCUpdateAbility()
+	check(actor.cotzAbility ~= nil, "the phase waits for the melee animation to finish")
+	actor.PlayingAnimation = false
+	fixture.now = 101.1
+	actor:STALKERNPCUpdateAbility()
+	check(actor.cotzAbility == nil, "the phase ends once the animation finishes")
+	actor.enemy = nil
+	fixture.now = 110
+	actor:STALKERNPCTriggerAbility("roar")
+	check(actor.AttackIndex == 0, "phases can play animations without turning towards the target")
+	actor.cotzAbility, actor.PlayingAnimation = nil, false
+	actor:STALKERNPCStartAbility(actor.cotzAbilityByName.pounce, nil)
+	fixture.now = 110.2
+	actor:STALKERNPCUpdateAbility()
+	check(#actor.velocities == 1, "leaps without a target do not launch")
+end
+
+do
+	fixture.now = 100
+	local finished = {}
+	base.Hold = function(_, state) return state.holding end
+	base.Release = function(_, state, cancelled) finished[#finished + 1] = cancelled end
+	local actor = newActor({
+		{
+			name = "grab", triggerOnly = true, uninterruptible = true, validate = "Hold", onFinish = "Release",
+			phases = {{duration = 5, animation = "S_Grab"}},
+		},
+		{name = "flinch", triggerOnly = true, interrupts = true, phases = {{duration = 1}}},
+	})
+	actor:STALKERNPCTriggerAbility("grab")
+	actor.cotzAbility.holding = true
+	check(not actor:STALKERNPCTriggerAbility("flinch"), "uninterruptible abilities block interruptions")
+	actor:STALKERNPCUpdateAbility()
+	check(actor.cotzAbility ~= nil, "a passing validation keeps the ability")
+	actor.cotzAbility.holding = false
+	actor:STALKERNPCUpdateAbility()
+	check(actor.cotzAbility == nil and finished[1] == true and actor.cleared == 1,
+		"failed validation cancels and cleans up")
+	fixture.now = 200
+	actor:STALKERNPCTriggerAbility("grab")
+	local cleared = actor.cleared
+	actor:STALKERNPCAbandonAbility()
+	check(actor.cotzAbility == nil and finished[2] == true and actor.cleared == cleared,
+		"abandoning releases held state without animation work")
+	actor:STALKERNPCAbandonAbility()
+	check(#finished == 2, "abandoning twice is harmless")
+
+	local broken = fixture.Actor(base, {Abilities = {
+		{name = "a", linkedCooldowns = {missing = 1}, phases = {{duration = 1}}},
+	}})
+	local errors = #fixture.errors
+	broken:STALKERNPCInitAbilities()
+	check(broken.Abilities == nil and #fixture.errors == errors + 1, "unknown linked cooldowns are rejected")
+end
+
+do
+	local effects = 0
+	EffectData = function() return setmetatable({}, {__index = function() return function() end end}) end
+	util = {Effect = function() effects = effects + 1 end}
+	local actor = newActor()
+	local near = fixture.Target(Vector(128), {NearestPoint = function(self) return self.position end})
+	local edge = fixture.Target(Vector(600), {NearestPoint = function(self) return self.position end})
+	ents = {FindInSphere = function() return {actor, near, edge} end}
+	actor:STALKERNPCAbilityGroundSlam(512, 40, 1)
+	check(effects == 1 and near.damage[1].Damage == 30 and #edge.damage == 0,
+		"ground slams fall off with distance and skip entities beyond the radius")
+end
+
 print("mutant ability checks passed: " .. checks)

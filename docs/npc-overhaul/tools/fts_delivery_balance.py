@@ -242,6 +242,8 @@ def lua_text(key, text, indent=3):
 
 def apply_plan(data, rates, bands):
     import re
+    if not data["contacts"]:
+        raise ValueError("Snapshot has no contacts; refusing to rewrite requirement pools from empty data.")
     if any(step.get("branch") for contact in data["contacts"].values() for step in contact["progression"]):
         raise ValueError("Branch requirements are authored directly. Use --inspect to review availability; legacy --write is disabled.")
     supply = totals(rates)

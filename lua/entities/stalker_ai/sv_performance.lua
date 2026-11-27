@@ -61,7 +61,7 @@ function ENT:STALKERNPCUpdateSleep()
 	if self.STALKERNPCStopAllTimers then self:STALKERNPCStopAllTimers(true) end
 	if self.STALKERNPCClearAnimation then self:STALKERNPCClearAnimation() end
 	self.isAttacking, self.IsJumping, self.IsLongJumping, self.isBigJumping = 0, 0, 0, 0
-	self.cotzAbility = nil
+	if self.STALKERNPCAbandonAbility then self:STALKERNPCAbandonAbility() end
 	if self.cotzFlying then self:STALKERNPCStopFlight() end
 	self:StopMoving()
 	clearSchedules(self)
