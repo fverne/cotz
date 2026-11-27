@@ -55,6 +55,7 @@ ZIP and tarball downloads omit development tools, tests, workflows, planning doc
 - **Helix**, included in this repository under `gamemodes/helix/`.
 - **MySQL** and the [mySQLOO](https://github.com/FredyH/MySQLOO) module for the recommended database configuration, particularly for cross-server features.
 - **The Anomaly CW 2.0 pack** (models and sounds live in `cotz_general` and materials in `cotz_wepmats`; its Lua, meaning the attachment entities, sound and ammo registrations, hands definitions and `cotz_anomaly/` helpers, lives in this repo) supplies the models, sounds, materials, attachment entities and sound registrations for the Anomaly SWEPs in `lua/weapons/cw_anomaly_*`, including the standalone Bolt SWEP. The legacy `stalker_bolt` class inherits `cw_anomaly_bolt`.
+- **`cotz_mutantnpc`** supplies the models, materials, sounds and spawn icons for mutant NPCs, including assets reserved for future mutants. Mount it on the server and clients alongside `cotz_general`. Some effects shared with anomalies remain in `cotz_general`.
 - **Devices of Anomaly Redone** supplies the Echo, Bear, and Veles models. Both throw inputs play the detector's own `anm_throw_s` and `anm_throw_e` sequences. The server releases the bolt at the detector's configured point in `anm_throw_e`.
 - **Compatible maps, models, sounds, materials, weapons, and other assets** referenced by the schema. Not all required assets are necessarily included in this code repository; examine the schema and your server's content setup before deployment.
 

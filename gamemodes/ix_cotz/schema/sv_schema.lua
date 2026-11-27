@@ -8,6 +8,7 @@ ix.db.type.cotzMediumText = "MEDIUMTEXT"
 -- Workshop Items ( 2290918731 ) --
 
 resource.AddWorkshop( '2290932721' ) -- cotz_general
+resource.AddWorkshop( '3846751485' ) -- cotz_mutantnpc
 resource.AddWorkshop( '2290941798' ) -- cotz_wepmats
 resource.AddWorkshop( '2290960561' ) -- cotz_wepmats2
 resource.AddWorkshop( '2290872628' ) -- cotz_playermodels

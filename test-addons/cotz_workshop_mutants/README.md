@@ -8,7 +8,7 @@ The roster includes internal variants and summons from the original, alongside i
 ## Install
 
 1. Extract `cotz_workshop_mutants` into `garrysmod/addons/` on the test server or listen host.
-2. Mount COTZ and the `cotz_general`, `cotz_projectstalker`, and `cotz_humannpc` content packs.
+2. Mount COTZ and the `cotz_general`, `cotz_mutantnpc`, `cotz_projectstalker`, and `cotz_humannpc` content packs.
    Players need the same assets. The server sends the addon’s shared and client Lua.
 3. Restart and open **NPCs → COTZ Workshop Mutants**. Use your usual COTZ NPC-spawn permissions.
 

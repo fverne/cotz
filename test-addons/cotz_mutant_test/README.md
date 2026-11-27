@@ -1,7 +1,7 @@
 # COTZ Mutant Tests
 
 Copy the `cotz_mutant_test` folder into `garrysmod/addons/` on the test server or listen host and
-restart the session. Mount COTZ (including `stalker_ai`), its usual Helix setup and `cotz_general`
+restart the session. Mount COTZ (including `stalker_ai`), its usual Helix setup, `cotz_general` and `cotz_mutantnpc`
 on the server and clients. The server sends the addon’s client Lua. Deliver the models, materials
 and sounds through your existing COTZ content setup. The addon has no VJ runtime dependency.
 
