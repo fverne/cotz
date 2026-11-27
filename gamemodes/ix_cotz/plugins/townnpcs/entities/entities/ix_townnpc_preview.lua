@@ -21,9 +21,8 @@ function ENT:Use(activator)
 end
 
 if CLIENT then
+	-- Previews have no speech bubble or ambient sounds.
 	function ENT:Think()
-		local animation = self:GetTownSpawnAnim()
-		if self.townSpawnAnim ~= animation or self:IsSequenceFinished() then self:SetAnim() end
 		self:SetNextClientThink(CurTime())
 
 		return true

@@ -8,11 +8,10 @@ end
 AddCSLuaFile = function() end
 IsValid = function(entity) return entity.valid == true end
 MOVETYPE_NONE, MOVETYPE_VPHYSICS, SIMPLE_USE = 0, 6, 3
-local registered, pending = {}, {}
+local registered = {}
 scripted_ents = {GetStored = function(class) return registered[class] end}
 -- Plugin entities are registered, but the separate engine baseclass cache is still empty.
 baseclass = {Get = function() return {} end}
-timer = {Simple = function(_, callback) pending[#pending + 1] = callback end}
 local paths = {
 	{"ix_hideout_vendor", "hideouts"},
 	{"ix_sherpa_vendor", "sherpas"},
@@ -20,7 +19,7 @@ local paths = {
 }
 
 local function makeEntity(class)
-	local entity = setmetatable({valid = true, moves = {}, animations = 0}, {
+	local entity = setmetatable({valid = true, moves = {}, useTypes = 0}, {
 		__index = function(_, key)
 			local definition = registered[class].t
 			while definition do
@@ -29,7 +28,11 @@ local function makeEntity(class)
 			end
 		end,
 	})
-	for _, name in ipairs({"Model", "UseType", "DisplayName", "Description", "Sherpa", "SoundGroup"}) do
+	function entity:SetUseType(value)
+		self.UseType = value
+		self.useTypes = self.useTypes + 1
+	end
+	for _, name in ipairs({"Model", "DisplayName", "Description", "Sherpa", "SoundGroup"}) do
 		entity["Set" .. name] = function(self, value) self[name] = value end
 	end
 	function entity:SetMoveType(value) self.moves[#self.moves + 1] = value end
@@ -37,14 +40,12 @@ local function makeEntity(class)
 	function entity:InitPhysObj() self.physicsInitialized = true end
 	function entity:AddCallback() end
 	function entity:SetNWBool() end
-	function entity:SetAnim() self.animations = self.animations + 1 end
-
 	return entity
 end
 
 for _, server in ipairs({true, false}) do
 	SERVER, CLIENT = server, not server
-	registered, pending = {}, {}
+	registered = {}
 	-- Load children before their parents, as can happen during Helix plugin discovery.
 	for _, entry in ipairs(paths) do
 		ENT = {}
@@ -55,7 +56,7 @@ for _, server in ipairs({true, false}) do
 	for _, class in ipairs({"ix_hideout_vendor", "ix_sherpa_vendor"}) do
 		local entity = makeEntity(class)
 		entity:Initialize()
-		check(#pending == 1, class .. " initializes the advanced vendor exactly once")
+		check(entity.useTypes == (SERVER and 1 or 0), class .. " initializes the advanced vendor exactly once")
 		if SERVER then
 			check(entity.physicsInitialized and entity.UseType == SIMPLE_USE, "base physics and use are initialized")
 			check(entity.items and entity.messages and entity.factions and entity.classes and entity.receivers,
@@ -68,12 +69,6 @@ for _, server in ipairs({true, false}) do
 		else
 			check(entity.items == nil and #entity.moves == 0, "client initialization leaves server state alone")
 		end
-		pending[1]()
-		check(entity.animations == 1, "delayed animation initialization reaches the derived entity")
-		entity.valid = false
-		pending[1]()
-		check(entity.animations == 1, "animation callback tolerates removal before it runs")
-		pending = {}
 	end
 end
 print("PASS: " .. checks .. " hideout and Sherpa vendor initialization checks")

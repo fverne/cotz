@@ -256,25 +256,41 @@ check(townPlugin.spawnPoints[map].mute == nil and townPlugin.lastSpawnPositions[
 	"clear removes both points and restart history")
 check(npc.position.x == 1000, "clear leaves the live NPC in place")
 
+local serverNPC = setmetatable(copy(npc), {__index = ENT})
+CurTime = function() return 10 end
+function serverNPC:NextThink() end
+serverNPC.nextAnimCheck = 100
+serverNPC.spawnAnim, serverNPC.townSpawnAnim = "sit", "work"
+serverNPC:Think()
+check(serverNPC.sequence == 2, "server reacts to a changed placement animation before its periodic check")
+resets = serverNPC.resets
+serverNPC.finished = true
+serverNPC:Think()
+check(serverNPC.resets == resets + 1, "server loops a finished placement sequence without waiting 15 seconds")
+serverNPC:Think()
+check(serverNPC.resets == resets + 1, "server leaves an unfinished placement sequence playing")
+serverNPC.spawnAnim = ""
+serverNPC:Think()
+check(serverNPC.sequence == 3, "server returns to ordinary vendor idle when the override disappears")
+resets = serverNPC.resets
+serverNPC.nextAnimCheck = 0
+serverNPC:Think()
+check(serverNPC.resets == resets, "periodic checks leave an idle that is already playing")
+serverNPC.sequence, serverNPC.nextAnimCheck = 9, 0
+serverNPC:Think()
+check(serverNPC.sequence == 3, "periodic checks replace a stale sequence")
+
 SERVER, CLIENT = false, true
 ENT = {}
 dofile(base .. "vendor_adv/entities/entities/ix_vendor_adv.lua")
-local clientNPC = setmetatable(copy(npc), {__index = ENT})
-CurTime = function() return 10 end
+local clientNPC = setmetatable(copy(serverNPC), {__index = ENT})
 function clientNPC:GetNoBubble() return true end
 function clientNPC:SetNextClientThink() end
-clientNPC.nextNoise, clientNPC.nextAnimCheck = 100, 100
-clientNPC.spawnAnim, clientNPC.townSpawnAnim = "sit", "work"
+function clientNPC:PlayerNearby() return true end
+function clientNPC:MakeNoise() end
+math.random = function(low) return low end
+clientNPC.nextNoise, clientNPC.nextAnimCheck, clientNPC.sequence = 0, 0, 9
 clientNPC:Think()
-check(clientNPC.sequence == 2, "client reacts to the networked placement animation before its periodic check")
-resets = clientNPC.resets
-clientNPC.finished = true
-clientNPC:Think()
-check(clientNPC.resets == resets + 1, "client loops a finished placement sequence without waiting 15 seconds")
-clientNPC:Think()
-check(clientNPC.resets == resets + 1, "client leaves an unfinished placement sequence playing")
-clientNPC.spawnAnim = ""
-clientNPC:Think()
-check(clientNPC.sequence == 3, "client returns to ordinary vendor idle when the override disappears")
+check(clientNPC.sequence == 9, "clients keep the networked sequence, even when a player is nearby")
 
 print("town_spawnpoints_spec: " .. checks .. " checks passed")

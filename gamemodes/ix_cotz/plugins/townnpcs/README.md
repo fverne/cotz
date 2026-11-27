@@ -1039,6 +1039,9 @@ Selections send sequence names for server lookup. Rejected access or unavailable
 produce a notification; a rejected selection leaves the current animation unchanged.
 The session animation uses a separate NWString because the vendor already occupies all four string
 datatable slots. Restart the map after updating this registration; existing entities keep old accessors.
+Only the server selects vendor sequences, including idles and animation-group gestures; clients play the
+networked sequence. Client-side selection is overwritten when the engine resends an entity, so it made
+distant players see a different animation. Check in game by watching a placed contact from afar and up close.
 Run `luatex --luaonly tests/town_animation_network_spec.lua` for slot limits, identity isolation,
 networked pose switching and the actual vendor animation consumer.
 

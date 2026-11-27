@@ -8,6 +8,8 @@ ENT.isVendor = true
 ENT.bNoPersist = true
 ENT.AutomaticFrameAdvance = true
 
+local ANIM_CHECK_INTERVAL = 15
+
 function ENT:SetupDataTables()
 	self:NetworkVar("Bool", 0, "NoBubble")
 	self:NetworkVar("Bool", 1, "BuyAll")
@@ -56,12 +58,6 @@ function ENT:Initialize()
 
 		self.ShouldResetSequence = false
 	end
-
-	timer.Simple(1, function()
-		if IsValid(self) then
-			self:SetAnim()
-		end
-	end)
 end
 
 function ENT:InitPhysObj()
@@ -216,6 +212,12 @@ function ENT:HasMoney(amount)
 	return true
 end
 
+local function playIdle(entity, sequence)
+	if entity:GetSequence() == sequence and not entity:IsSequenceFinished() then return end
+	entity:ResetSequence(sequence)
+	entity:SetCycle(0)
+end
+
 function ENT:SetAnim()
 	-- A placement pose must take priority over random gestures from the vendor's animation group.
 	local spawnAnim = self:GetTownSpawnAnim()
@@ -250,13 +252,13 @@ function ENT:SetAnim()
 	if self:GetIdleAnim() == "" then
 		for k, v in ipairs(self:GetSequenceList()) do
 			if v:lower():find("idle") and v ~= "idlenoise" then
-				return self:ResetSequence(k)
+				return playIdle(self, k)
 			end
 		end
 	else
 		local seq, dur = self:LookupSequence(self:GetIdleAnim())
 
-		return self:ResetSequence(seq)
+		return playIdle(self, seq)
 	end
 
 	if self:GetSequenceCount() > 1 then
@@ -371,7 +373,16 @@ if SERVER then
 		return self:TakeStock(uniqueID, value, character)
 	end
 
+	-- Only the server selects sequences. A client-side choice is lost whenever the engine resends the entity,
+	-- which shows distant players whatever sequence the server last set.
 	function ENT:Think()
+		local spawnAnim = self:GetTownSpawnAnim()
+		if (self.nextAnimCheck or 0) <= CurTime() or self.ShouldResetSequence
+			or self.townSpawnAnim ~= spawnAnim or (spawnAnim ~= "" and self:IsSequenceFinished()) then
+			self:SetAnim()
+			self.nextAnimCheck = CurTime() + ANIM_CHECK_INTERVAL
+		end
+
 		self:NextThink(CurTime())
 
 		return true
@@ -418,16 +429,8 @@ else
 			self:CreateBubble()
 		end
 
-		local spawnAnim = self:GetTownSpawnAnim()
-		if (self.nextAnimCheck or 0) < CurTime() or self.ShouldResetSequence
-			or self.townSpawnAnim ~= spawnAnim or (spawnAnim ~= "" and self:IsSequenceFinished()) then
-			self:SetAnim()
-			self.nextAnimCheck = CurTime() + 15
-		end
-
 		if ((self.nextNoise or 0) < CurTime()) and self:PlayerNearby() then
 			self:MakeNoise()
-			self:SetAnim()
 			self.nextNoise = CurTime() + math.random(15, 45)
 		end
 
@@ -505,6 +508,7 @@ function ENT:LoadTemplate(templateName)
 		self:SetSoundGroup(template.soundgroup or self:GetSoundGroup())
 		self:SetAnimGroupId(template.animgroup or self:GetAnimGroupId())
 		self:SetIdleAnim(template.idleanim or "")
+		self.nextAnimCheck = 0
 	end
 end
 
