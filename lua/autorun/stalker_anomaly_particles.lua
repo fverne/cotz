@@ -1,5 +1,6 @@
 if SERVER then
 	AddCSLuaFile("cotz/anomalies/cl_idle.lua")
+	AddCSLuaFile("cotz/anomalies/cl_psy.lua")
 else
 	-- These resource entities also run outside Helix, so use the engine hook dispatcher.
 	hook.Add("NotifyShouldTransmit", "cotz/anomalies/idle-transmission", function(entity, shouldTransmit)
@@ -12,6 +13,22 @@ else
 			entity:SetNextClientThink(CurTime())
 		end
 	end)
+end
+
+-- Field anomaly effects, built from the cotz_general particle packs by tools/anomaly_pcf.py.
+game.AddParticles("particles/cotz_anomalies.pcf")
+game.AddParticles("particles/anarchycell_bloodspash.pcf")
+for _, name in ipairs({
+	"cotz_anom_burner_idle", "cotz_anom_burner_flame", "cotz_anom_steam_idle", "cotz_anom_steam_jet",
+	"cotz_anom_electra_idle", "cotz_anom_electra_idle_2", "cotz_anom_electra_blast", "cotz_anom_electra_blast_2",
+	"cotz_anom_electra_hit", "cotz_anom_fruitpunch_idle", "cotz_anom_kisel_idle", "cotz_anom_acid_burst",
+	"cotz_anom_bubble_idle", "cotz_anom_bubble_idle_2", "cotz_anom_gravity_shield", "cotz_anom_vortex_idle", "cotz_anom_vortex_blast",
+	"cotz_anom_karusel_idle", "cotz_anom_karusel_charge", "cotz_anom_karusel_swirl", "cotz_anom_springboard_idle",
+	"cotz_anom_tramplin_blast", "cotz_anom_tesla_idle", "cotz_anom_tesla_charge", "cotz_anom_tesla_blast",
+	"cotz_anom_psy_idle", "cotz_anom_psy_glow", "cotz_anom_psy_pulse", "cotz_anom_zone_fire", "cotz_anom_zone_acid",
+	"cotz_anom_zone_electro", "cotz_anom_comet_fire", "cotz_anom_comet_electra", "wick_gore_bloodsplash_new",
+}) do
+	PrecacheParticleSystem(name)
 end
 
 game.AddParticles("particles/stalker_anomaly.pcf")

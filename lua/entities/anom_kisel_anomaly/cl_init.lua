@@ -9,7 +9,7 @@ sound.Add({
 	sound = "anomaly/buzz_idle.wav",
 })
 
-ENT.IdleParticle = "kisel"
+ENT.IdleParticle = "cotz_anom_kisel_idle"
 ENT.IdleSound = "buzz_idle"
 ENT.IdleLight = "chemical"
 

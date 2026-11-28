@@ -9,8 +9,10 @@ sound.Add({
 	sound = "anomaly/electra_idle1.wav",
 })
 
-ENT.IdleParticle = "electra"
+ENT.IdleParticle = "cotz_anom_electra_idle_2"
 ENT.IdleSound = "electra_idle"
+ENT.IdleLight = "electric"
+ENT.IdleLightOffset = Vector(0, 0, 30)
 
 ENT.IdleRestartTranslucent = true
 ENT.IdleRestartModel = "models/anomaly/anomaly_fix.mdl"

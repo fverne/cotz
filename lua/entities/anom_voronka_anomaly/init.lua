@@ -2,7 +2,12 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
+local fx = include("cotz/anomalies/sv_fx.lua")
+
 local mutantCapture = include("cotz/anomalies/sv_mutantcapture.lua")
+
+-- Matches the burst inside cotz_anom_vortex_blast; its flash is over 0.3 s later.
+local BURST_TIME = 2.3
 
 hook.Add( "OnDamagedByExplosion", "DisableSound", function()
 	return true
@@ -68,7 +73,9 @@ function ENT:StartTouch(ent)
 	timer.Create("voronka_activated_once" .. self:EntIndex(), 0.01, 1, function()
 		if not IsValid(self) then return end
 		self:EmitSound("voronka_blast");
-		ParticleEffect( "voronka_activated", self:GetPos(), Angle( 0, 0, 0 ) )
+		-- One system plays the whole pull-in and burst.
+		fx.Burst("cotz_anom_vortex_blast", self:GetPos())
+		fx.Flash(self, BURST_TIME + 0.3)
 		self:StopParticles()
 		self:SetNWBool("StopParticle", true)
 		self:StopSound("voronka_idle")
@@ -79,9 +86,8 @@ function ENT:StartTouch(ent)
 		self:SetNWBool("StopParticle", false)
 		self.Active = true
 	end)
-	timer.Create("voronka_activated"..self:EntIndex(), 2.0, 1, function()
+	timer.Create("voronka_activated"..self:EntIndex(), BURST_TIME, 1, function()
 		if not IsValid(self) then return end
-		ParticleEffect( "voronka_blast", self:GetPos(), Angle( 0, 0, 0 ) )
 		local damageOrigin = self:GetPos()
 		local damageInfo = DamageInfo()
 		damageInfo:SetDamage(150)
@@ -125,4 +131,5 @@ function ENT:OnRemove()
 	timer.Remove(self.Timer)
 	timer.Remove("voronka_recharge"..self:EntIndex())
 	timer.Remove("voronka_activated"..self:EntIndex())
+	fx.Clear(self)
 end

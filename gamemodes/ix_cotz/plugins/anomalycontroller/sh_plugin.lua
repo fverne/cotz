@@ -4,9 +4,11 @@ PLUGIN.author = "gumlefar"
 PLUGIN.desc = "Allows for randomly spawning anomaly entities"
 
 PLUGIN.anomalydefs = PLUGIN.anomalydefs or {}
-PLUGIN.anomalypoints = PLUGIN.anomalypoints or {} -- ANOMALYPOINTS STRUCTURE table.insert( PLUGIN.eventpoints, { position, radius, anoms } )
+-- Points are { position, radius, selection }; see ResolveAnomalySelection for the selection format.
+PLUGIN.anomalypoints = PLUGIN.anomalypoints or {}
 
 ix.util.Include("sh_anomalydefs.lua")
+ix.util.Include("sh_anomalyselection.lua")
 
 if CLIENT then
 	ix.option.Add("anomalyLights", ix.type.bool, true, {
@@ -136,39 +138,95 @@ if SERVER then
 		return n
 	end
 
-	-- Function that will spawn anomalies
-	-- It will populate all spawnpoints with valid anomalies
+	-- Used for anomaly classes whose definition has no triggerRadius: the 60-unit trigger box's half-diagonal.
+	local DEFAULT_TRIGGER_RADIUS = 85
+	-- Anomalies further apart than this vertically are on different floors and may overlap horizontally.
+	local PLACEMENT_VERTICAL_CLEARANCE = 128
+	local PLACEMENT_ATTEMPTS = 8
+
+	-- Collects the anomalies already in the world, skipping those removed this frame by cleanAnomalies.
+	function PLUGIN:GetPlacedAnomalies()
+		local radii = {}
+
+		for _, definition in ipairs(self.anomalydefs) do
+			radii[definition.entityname] = definition.triggerRadius
+		end
+
+		local placed = {}
+
+		for _, entity in ents.Iterator() do
+			local class = entity:GetClass()
+
+			if string.sub(class, 1, 5) == "anom_" and not entity:IsMarkedForDeletion() then
+				placed[#placed + 1] = {position = entity:GetPos(), radius = radii[class] or DEFAULT_TRIGGER_RADIUS}
+			end
+		end
+
+		return placed
+	end
+
+	function PLUGIN:IsAnomalyPositionClear(position, radius, placed)
+		for _, other in ipairs(placed) do
+			local offset = other.position - position
+			local reach = radius + other.radius
+
+			if math.abs(offset.z) < PLACEMENT_VERTICAL_CLEARANCE and offset.x ^ 2 + offset.y ^ 2 < reach ^ 2 then
+				return false
+			end
+		end
+
+		local trace = util.TraceHull({
+			start = position,
+			endpos = position,
+			mins = Vector(-16, -16, 0),
+			maxs = Vector(16, 16, 71),
+		})
+
+		return not trace.Entity:IsValid()
+	end
+
+	-- Finds a spot inside the point whose trigger does not overlap any placed anomaly, or nil if none was found.
+	function PLUGIN:FindAnomalyPosition(point, radius, placed)
+		for _ = 1, PLACEMENT_ATTEMPTS do
+			local position = self:GetSpawnLocation(point[1], point[2])
+
+			if position and self:IsAnomalyPositionClear(position, radius, placed) then
+				return position
+			end
+		end
+	end
+
+	-- Populates every spawn point with one of the anomalies its selection allows.
 	function PLUGIN:spawnAnomalies()
 		if CurTime() > 5 then
 			spawntime = 1
 		end
-			
-		for k, v in pairs(self.anomalypoints[game.GetMap()]) do
-			local selectedAnoms = {}
-			for i=1, #self.anomalydefs do
-				if string.sub(v[3],i,i) == "1" then
-					table.insert( selectedAnoms, self.anomalydefs[i])
-				end
+
+		local placed = self:GetPlacedAnomalies()
+
+		for _, point in pairs(self.anomalypoints[game.GetMap()]) do
+			local definitions, unknown = self:ResolveAnomalySelection(point[3])
+
+			if #unknown > 0 then
+				ErrorNoHalt(string.format("[anomalycontroller] Unknown anomaly selection '%s' at %s\n",
+					table.concat(unknown, " "), tostring(point[1])))
 			end
 
-			local entity = table.Random(selectedAnoms)
-			for i = 1, math.ceil(v[2]/entity.interval) do
-				local position = self:GetSpawnLocation( v[1], v[2] )
-				local data = {}
-				data.start = position
-				data.endpos = position
-				data.mins = Vector(-16, -16, 0)
-				data.maxs = Vector(16, 16, 71)
-				local trace = util.TraceHull(data)
+			if #definitions == 0 then continue end
 
-				if trace.Entity:IsValid() then
-					continue
-				end
-				
-				local spawnedent = ents.Create(entity.entityname)
-				spawnedent:SetPos(position)
-				spawnedent:Spawn()
-				spawnedent:DropToFloor()
+			local definition = definitions[math.random(#definitions)]
+			local radius = definition.triggerRadius or DEFAULT_TRIGGER_RADIUS
+
+			for _ = 1, math.ceil(point[2] / definition.interval) do
+				local position = self:FindAnomalyPosition(point, radius, placed)
+
+				if not position then continue end
+
+				local entity = ents.Create(definition.entityname)
+				entity:SetPos(position)
+				entity:Spawn()
+
+				placed[#placed + 1] = {position = position, radius = radius}
 			end
 		end
 	end
@@ -186,44 +244,38 @@ if SERVER then
 		self:SetData(self.anomalypoints)
 	end
 
-	function PLUGIN:GetSpawnLocation( pos , radius )
-		local tracegood = false
-		local teleres
-		local tracecnt = 0
+	-- Height of an anomaly's origin above the ground, matching the bottom of most trigger boxes.
+	local GROUND_OFFSET = 5
+	-- How far above a spawn point the ground search starts, to cover terrain rising within its radius.
+	local GROUND_SEARCH_UP = 128
+	local GROUND_SEARCH_DOWN = 400
 
-		local firstTrace = util.TraceLine( {
-				start = pos + Vector(0,0,64),
-				endpos = pos + Vector(0,0,512),
-				mask = MASK_ALL,
-				ignoreworld = false
-			} )
+	local function hitsWorldOnly(entity)
+		return entity:IsWorld()
+	end
 
-		repeat
-			local trace = util.TraceHull( {
-				start = firstTrace.HitPos - Vector(0,0,64),
-				endpos = pos + Vector(math.random(-radius,radius),math.random(-radius,radius),-400),
-				mins = Vector( -32, -32, 0 ),
-				maxs = Vector( 32, 32, 64 ),
-				mask = MASK_ALL,
-				ignoreworld = false
-			} )
+	-- Picks a random spot in the radius and returns it at ground level, or nil if there is no ground there.
+	-- A thin vertical trace keeps trigger bounds, other anomalies and slopes from raising the result.
+	function PLUGIN:GetSpawnLocation(origin, radius)
+		local ceiling = util.TraceLine({
+			start = origin,
+			endpos = origin + Vector(0, 0, GROUND_SEARCH_UP),
+			mask = MASK_SOLID,
+			filter = hitsWorldOnly,
+		})
+		local offset = Vector(math.Rand(-radius, radius), math.Rand(-radius, radius), 0)
+		local start = ceiling.HitPos - Vector(0, 0, 1) + offset
 
-			if not trace.HitSky then
-				tracegood = true
-				teleres = trace.HitPos + ( trace.HitNormal * 32 )
-			end
+		local ground = util.TraceLine({
+			start = start,
+			endpos = Vector(start.x, start.y, origin.z - GROUND_SEARCH_DOWN),
+			mask = MASK_SOLID,
+			filter = hitsWorldOnly,
+		})
 
-			tracecnt = tracecnt + 1
+		if ground.StartSolid or not ground.Hit or ground.HitSky then return end
 
-			if tracecnt > 50 then
-				tracegood = true
-				teleres = pos + Vector(0,0,64) -- Teleport to original position if we cant find a position
-			end
-
-		until tracegood
-
-
-		return teleres
+		return ground.HitPos + Vector(0, 0, GROUND_OFFSET)
 	end
 
 else
@@ -245,29 +297,41 @@ else
 	end)
 end
 
--- Adds a point to to the list of anomaly spawnpoints
--- Example : /anomalyadd 256 111
--- Will add a point at the users crosshair with a radius of 256
--- (meaning it will spawn anomalies in a 256 unit radius around the point)
--- allowing the first three anomaly definitions to spawn there
+local DEFAULT_POINT_RADIUS = 128
+
+-- Adds a spawn point at the crosshair. An optional leading radius (default 128) is followed by any mix of
+-- categories and anomaly names; each spawn picks one of the selected anomalies.
+-- Example : /anomalyadd fire
+-- Example : /anomalyadd 256 burner1 "burner 2" electro2
 ix.command.Add("anomalyadd", {
+	description = "Adds an anomaly spawn point: [radius] followed by categories and/or anomaly names.",
 	superAdminOnly = true,
 	arguments = {
-		ix.type.number,
-		ix.type.string
+		ix.type.text
 	},
-	OnRun = function(self, client, radius, anomalies)
-		local trace = client:GetEyeTraceNoCursor()
-		local hitpos = trace.HitPos + trace.HitNormal*5
-		local radius = radius or 128
-		local anomalies = anomalies or 1111111111111111111
-		if (!radius or !isnumber(radius) or radius < 0) then
-			return "@invalidArg", 2
+	OnRun = function(self, client, selection)
+		local radius, selectors, unknown = PLUGIN:ParseAnomalySelection(selection)
+		radius = radius or DEFAULT_POINT_RADIUS
+
+		if radius <= 0 then
+			return "@invalidArg", 1
 		end
 
-		
-		table.insert( PLUGIN.anomalypoints[game.GetMap()], { hitpos, radius, anomalies } )
-		client:Notify( "Anomaly point successfully added" )
+		if #unknown > 0 or #selectors == 0 then
+			local categories, anomalies = PLUGIN:GetAnomalySelectorNames()
+			local prefix = #unknown > 0 and ("Unknown anomaly selection: " .. table.concat(unknown, ", ") .. ". ")
+				or "Choose at least one category or anomaly. "
+
+			return prefix .. "Categories: " .. table.concat(categories, ", ") .. ". Anomalies: "
+				.. table.concat(anomalies, ", ") .. "."
+		end
+
+		local trace = client:GetEyeTraceNoCursor()
+		local hitpos = trace.HitPos + trace.HitNormal * 5
+		local stored = table.concat(selectors, " ")
+
+		table.insert(PLUGIN.anomalypoints[game.GetMap()], {hitpos, radius, stored})
+		client:Notify("Anomaly point added with radius " .. radius .. ": " .. stored)
 	end
 })
 

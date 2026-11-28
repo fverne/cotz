@@ -175,7 +175,7 @@ value without brackets. Quote names containing spaces.
 
 | System | Add command | Inspect / remove | FTS record shape |
 | --- | --- | --- | --- |
-| Anomalies | `/anomalyadd <radius> <mask>` | `/anomalydisplay`, `/anomalyremove <radius>` | `{Vector(...), radius, "mask"}` |
+| Anomalies | `/anomalyadd [radius] <selection...>` | `/anomalydisplay`, `/anomalyremove <radius>` | `{Vector(...), radius, "selection"}` |
 | Breakable loot boxes | `/boxspawnadd <type> [pool]` | `/boxspawndisplay`, `/boxspawnremove [radius]` | `{Vector(...), type}` or `{Vector(...), type, "pool"}` |
 | Routine mutants | `/eventadd "Area name" <difficulty>` | `/eventdisplay` | `{Vector(...), "Area name", difficulty}` |
 | Advanced events | `/eventadvadd "Area name" <internalID>` | `/eventadvdisplay` | `["internalID"] = {Vector(...), "Area name"}` |
@@ -190,16 +190,27 @@ server before relying on them; edit/export the point tables directly if needed.
 `loadzoneadd` and `loadzoneremove` are registered only while `DEBUGSETUP` is true
 in `simplecrossserver/sh_plugin.lua` (currently true).
 
-### Hazard masks
+### Hazard selections
 
-Masks are **strings of selection flags**, not class names or numeric bitmasks.
-Character `i` enables definition `i` when it is `1`; one enabled definition is
-chosen randomly for that point/field. Read the ordered definitions in
-[`anomalycontroller/sh_anomalydefs.lua`](../gamemodes/ix_cotz/plugins/anomalycontroller/sh_anomalydefs.lua)
-and [`radiationcontroller/sh_radiationdefs.lua`](../gamemodes/ix_cotz/plugins/radiationcontroller/sh_radiationdefs.lua).
-Keep masks quoted in Lua so leading zeroes survive, and enable at least one valid
-entry. Some radiation definitions are deliberately named `Nil`, allowing an
-empty result. An anomaly radius controls field placement; a radiation record
+Anomaly points take a **selection**: categories and/or anomaly names, separated by spaces, with an
+optional leading radius (default 128). `/anomalyadd fire` allows both burners;
+`/anomalyadd 256 burner1 "burner 2" electro2` allows exactly those three; categories and names mix freely.
+Names ignore case, spaces and punctuation. The categories are `fire`, `electro`, `gravity`, `acid` and
+`all`; the names are the `name` fields of the categorised definitions in
+[`anomalycontroller/sh_anomalydefs.lua`](../gamemodes/ix_cotz/plugins/anomalycontroller/sh_anomalydefs.lua).
+An unknown word makes the command list the valid choices. Each spawn picks one allowed anomaly for the
+point, and anomalies are placed so their trigger areas do not overlap one another; spawns with no room are
+skipped. The record stores the selection as typed, so a category point picks up anomalies added to that
+category later.
+
+Radiation, and anomaly records written before selections existed, use **masks**: strings of selection
+flags, not class names or numeric bitmasks. Character `i` enables definition `i` when it is `1`; one
+enabled definition is chosen randomly for that point/field. Read the ordered definitions in
+`sh_anomalydefs.lua` and
+[`radiationcontroller/sh_radiationdefs.lua`](../gamemodes/ix_cotz/plugins/radiationcontroller/sh_radiationdefs.lua).
+Anomaly records still accept masks, which is what the shipped presets use. Keep masks quoted in Lua so
+leading zeroes survive, and enable at least one valid entry. Some radiation definitions are deliberately
+named `Nil`, allowing an empty result. An anomaly radius controls field placement; a radiation record
 has no radius field.
 
 Point editing changes configuration, not necessarily existing spawned hazards.

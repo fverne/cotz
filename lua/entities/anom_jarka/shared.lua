@@ -20,8 +20,10 @@ if CLIENT then
 		sound = "anomaly/par_idle.wav",
 	})
 
-	ENT.IdleParticle = "jarka_inactive"
+	ENT.IdleParticle = "cotz_anom_burner_idle"
 	ENT.IdleSound = "par_idle"
+	ENT.IdleLight = "thermal"
+	ENT.IdleLightOffset = Vector(0, 0, 40)
 
 	include("cotz/anomalies/cl_idle.lua")
 end

@@ -40,6 +40,9 @@ local SHIELD_ODDS = 3
 local SHIELD_DAMAGE_SCALE = 0.1
 local SHIELD_AIRBOAT_SCALE = 0.5
 local SHIELD_EFFECT_OFFSET = 20
+local SHIELD_EFFECT = "cotz_anom_gravity_shield"
+-- Shotgun pellets and rapid fire would otherwise stack a smoke-trailing effect per hit.
+local SHIELD_EFFECT_INTERVAL = 0.1
 
 ENT.Abilities = {
 	{
@@ -160,14 +163,13 @@ function ENT:STALKERNPCDamageTake(dmginfo, mul)
 	if math.random(1, SHIELD_ODDS) == 1 then self:STALKERNPCTriggerAbility("shield") end
 	if self.Animation ~= "S_Shield_Idle" then return mul end
 
-	local center = self:GetPos() + self:OBBCenter()
-	local offset = dmginfo:GetDamagePosition() - center
-	local effect = EffectData()
-	effect:SetOrigin(center + offset:GetNormalized() * SHIELD_EFFECT_OFFSET)
-	effect:SetEntity(self)
-	effect:SetAngles(offset:Angle())
-	effect:SetScale(5)
-	util.Effect("cball_bounce", effect, false, true)
+	if CurTime() >= (self.nextShieldEffect or 0) then
+		self.nextShieldEffect = CurTime() + SHIELD_EFFECT_INTERVAL
+
+		local center = self:GetPos() + self:OBBCenter()
+		local offset = dmginfo:GetDamagePosition() - center
+		ParticleEffect(SHIELD_EFFECT, center + offset:GetNormalized() * SHIELD_EFFECT_OFFSET, offset:Angle())
+	end
 
 	if dmginfo:GetDamageType() == DMG_AIRBOAT then return SHIELD_AIRBOAT_SCALE end
 

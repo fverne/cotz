@@ -9,9 +9,10 @@ sound.Add({
 	sound = "anomaly/myasorubka_idle.wav",
 })
 
-ENT.IdleParticle = "myasorubka"
+ENT.IdleParticle = "cotz_anom_bubble_idle"
 ENT.IdleSound = "myasorubka_idle"
-ENT.IdleLight = "activation"
+ENT.IdleLight = "gravity"
+ENT.IdleLightOffset = Vector(0, 0, 40)
 
 ENT.IdleRestartTranslucent = true
 

@@ -2,7 +2,14 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
+local fx = include("cotz/anomalies/sv_fx.lua")
+
 local mutantCapture = include("cotz/anomalies/sv_mutantcapture.lua")
+
+-- Matches the burst inside cotz_anom_karusel_charge.
+local BURST_TIME = 6.15
+-- The charge never ends on its own. Stop it once the burst has emitted, before the idle effect returns.
+local CHARGE_END_TIME = 6.5
 
 hook.Add( "OnDamagedByExplosion", "DisableSound", function()
 	return true
@@ -84,8 +91,10 @@ function ENT:StartBlastCycle(ent)
 	timer.Create("tramplin_activated_once" .. self:EntIndex(), 0.01, 1, function()
 		if not IsValid(self) then return end
 		self:EmitSound("tramplin_blast");
-		ParticleEffect( "tramplin_activated", self:GetPos(), Angle( 0, 0, 0 ) )
 		self:StopParticles()
+		ParticleEffectAttach("cotz_anom_karusel_charge", PATTACH_ABSORIGIN_FOLLOW, self, 0)
+		ParticleEffectAttach("cotz_anom_karusel_swirl", PATTACH_ABSORIGIN_FOLLOW, self, 0)
+		fx.Flash(self, 6.5)
 		self:StopSound("tramplin_idle")
 		self:SetNWBool("StopParticle", true)
 		self.Active = true
@@ -99,9 +108,11 @@ function ENT:StartBlastCycle(ent)
 		self:SetNWBool("StopParticle", false)
 		self.Active = restingActive
 	end)
-	timer.Create("tramplin_activated"..self:EntIndex(), 6, 1, function()
+	timer.Create("tramplin_charge_end"..self:EntIndex(), CHARGE_END_TIME, 1, function()
+		if IsValid(self) then self:StopParticles() end
+	end)
+	timer.Create("tramplin_activated"..self:EntIndex(), BURST_TIME, 1, function()
 		if not IsValid(self) then return end
-		ParticleEffect( "tramplin_blast", self:GetPos(), Angle( 0, 0, 0 ) )
 		local damageOrigin = self:GetPos() + Vector(50, 50, 300)
 		local damageInfo = DamageInfo()
 		damageInfo:SetDamage(400)
@@ -133,4 +144,6 @@ function ENT:OnRemove()
 	timer.Remove("tramplin_recharge"..self:EntIndex())
 	timer.Remove("tramplin_activated"..self:EntIndex())
 	timer.Remove("tramplin_stop_sound"..self:EntIndex())
+	timer.Remove("tramplin_charge_end"..self:EntIndex())
+	fx.Clear(self)
 end

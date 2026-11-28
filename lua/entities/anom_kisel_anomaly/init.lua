@@ -2,6 +2,8 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
+local fx = include("cotz/anomalies/sv_fx.lua")
+
 -- Explicit balancing parameters used by the spreadsheet export/import tool.
 ENT.BalanceDamage = 40
 ENT.BalanceCooldown = 0.65
@@ -48,6 +50,7 @@ function ENT:Touch(ent)
 			if not IsValid(self) then return end
 			self:SetNWBool("Activated", true)
 			self:EmitSound("bfuzz_hit");
+			fx.Burst("cotz_anom_acid_burst", self:GetPos())
 		end)	
 		self.ActiveOnce = false	
 	end

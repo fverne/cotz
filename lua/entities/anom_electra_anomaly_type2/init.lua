@@ -2,6 +2,8 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
+local fx = include("cotz/anomalies/sv_fx.lua")
+
 -- Explicit balancing parameters used by the spreadsheet export/import tool.
 ENT.BalanceDamage = 70
 ENT.BalanceCooldown = 1.9
@@ -49,7 +51,8 @@ function ENT:Touch(ent)
 		timer.Create(self:EntIndex().."_electra_activated_sound_type2", 0, 1, function()
 			if not IsValid(self) then return end
 		self:EmitSound("electra_blast")
-		ParticleEffect( "electra_activated", self:GetPos(), Angle( 0, 0, 0 ) )
+		fx.Burst("cotz_anom_electra_blast_2", self:GetPos())
+		fx.Flash(self, 0.5)
 		self:StopParticles()
 		self:SetNWBool("StopParticle", true)
  		self:StopSound("electra_idle")
@@ -65,6 +68,7 @@ function ENT:Touch(ent)
 		dmg:SetDamageType(DMG_SHOCK)
 		dmg:SetInflictor(self)
 		ent:TakeDamageInfo(dmg)
+		if fx.IsCreature(ent) then fx.Hit(ent, "cotz_anom_electra_hit") end
 		if IsValid(ent) and ent:IsRagdoll() and ent:GetNetVar("player") == nil then
 			local bodyexplodesounds = {"anomaly/anomaly_body_tear_1.wav", "anomaly/anomaly_body_tear_2.wav"}
 			ent:EmitSound(table.Random(bodyexplodesounds),100,98,1,CHAN_AUTO)
@@ -103,4 +107,5 @@ function ENT:OnRemove()
 	self.Timer = self:EntIndex().."_electra_cooldown_type2"
 	self:StopSound("electra_idle")
 	timer.Stop(self.Timer)
+	fx.Clear(self)
 end

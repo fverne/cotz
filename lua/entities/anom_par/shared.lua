@@ -11,7 +11,7 @@ ENT.AutomaticFrameAdvance = true
 if CLIENT then
 	language.Add("par", "Steam Anomaly")
 
-	ENT.IdleParticle = "jarka_inactive"
+	ENT.IdleParticle = "cotz_anom_steam_idle"
 	ENT.IdleSound = "par_idle"
 	ENT.IdleRestartTranslucent = true
 

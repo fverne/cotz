@@ -9,9 +9,10 @@ sound.Add({
 	sound = "anomaly/voronka_idle.wav",
 })
 
-ENT.IdleParticle = "voronka"
+ENT.IdleParticle = "cotz_anom_vortex_idle"
 ENT.IdleSound = "voronka_idle"
-ENT.IdleLight = "activation"
+ENT.IdleLight = "gravity"
+ENT.IdleLightOffset = Vector(0, 0, 50)
 ENT.IdleModel = "models/anomaly/anomaly_fix.mdl"
 
 ENT.IdleRestartTranslucent = true

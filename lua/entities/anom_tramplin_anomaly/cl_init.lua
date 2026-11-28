@@ -9,9 +9,10 @@ sound.Add({
 	sound = "anomaly/voronka_idle.wav",
 })
 
-ENT.IdleParticle = "tramplin"
+ENT.IdleParticle = "cotz_anom_karusel_idle"
 ENT.IdleSound = "tramplin_idle"
-ENT.IdleLight = "activation"
+ENT.IdleLight = "gravity"
+ENT.IdleLightOffset = Vector(0, 0, 300)
 ENT.IdleModel = "models/anomaly/anomaly_fix.mdl"
 
 ENT.IdleRestartTranslucent = true

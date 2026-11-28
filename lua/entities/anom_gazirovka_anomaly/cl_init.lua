@@ -9,8 +9,9 @@ sound.Add({
 	sound = "anomaly/buzz_idle.wav",
 })
 
-ENT.IdleParticle = "gazirovka"
+ENT.IdleParticle = "cotz_anom_fruitpunch_idle"
 ENT.IdleSound = "buzz_idle"
+ENT.IdleLight = "acid"
 
 ENT.IdleRestartTranslucent = true
 ENT.IdleRestartModel = "models/anomaly/anomaly_fix.mdl"

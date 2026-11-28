@@ -9,9 +9,10 @@ sound.Add({
 	sound = "anomaly/electra_idle1.wav",
 })
 
-ENT.IdleParticle = "electra_static"
+ENT.IdleParticle = "cotz_anom_electra_idle"
 ENT.IdleSound = "electra_idle"
-ENT.IdleLight = "activation"
+ENT.IdleLight = "electric"
+ENT.IdleLightOffset = Vector(0, 0, 30)
 
 include("cotz/anomalies/cl_idle.lua")
 

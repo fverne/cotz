@@ -15,7 +15,7 @@ end
 
 local function execute(path, environment)
 	local source = read(path):gsub("/%*.-%*/", "")
-	assert(load(source, "@" .. path, "t", environment))()
+	return assert(load(source, "@" .. path, "t", environment))()
 end
 
 local vectorMeta = {}
@@ -24,21 +24,32 @@ function vectorMeta:DistToSqr(other)
 	return (self.x - other.x) ^ 2
 end
 
+function vectorMeta:Distance(other)
+	return math.abs(self.x - other.x)
+end
+
 local function vector(x)
 	return setmetatable({x = x or 0}, vectorMeta)
 end
 
+vectorMeta.__add = function(left, right) return vector(left.x + right.x) end
+
 local definitions = {
-	{"anom_electra_anomaly", "electra_static", "electra_idle", "activation"},
-	{"anom_electra_anomaly_type2", "electra", "electra_idle"},
-	{"anom_gazirovka_anomaly", "gazirovka", "buzz_idle"},
-	{"anom_kisel_anomaly", "kisel", "buzz_idle", "chemical"},
-	{"anom_maysorubka_anomaly", "myasorubka", "myasorubka_idle", "activation"},
-	{"anom_maysorubka_anomaly_type2", "tramplin_type2", "myasorubka_idle", "activation"},
-	{"anom_voronka_anomaly", "voronka", "voronka_idle", "activation"},
-	{"anom_tramplin_anomaly", "tramplin", "tramplin_idle", "activation"},
-	{"anom_jarka", "jarka_inactive", "par_idle"},
-	{"anom_par", "jarka_inactive", "par_idle"},
+	{"anom_electra_anomaly", "cotz_anom_electra_idle", "electra_idle", "electric"},
+	{"anom_electra_anomaly_type2", "cotz_anom_electra_idle_2", "electra_idle", "electric"},
+	{"anom_gazirovka_anomaly", "cotz_anom_fruitpunch_idle", "buzz_idle", "acid"},
+	{"anom_kisel_anomaly", "cotz_anom_kisel_idle", "buzz_idle", "chemical"},
+	{"anom_maysorubka_anomaly", "cotz_anom_bubble_idle", "myasorubka_idle", "gravity"},
+	{"anom_maysorubka_anomaly_type2", "cotz_anom_bubble_idle_2", "myasorubka_idle", "gravity"},
+	{"anom_voronka_anomaly", "cotz_anom_vortex_idle", "voronka_idle", "gravity"},
+	{"anom_tramplin_anomaly", "cotz_anom_karusel_idle", "tramplin_idle", "gravity"},
+	{"anom_jarka", "cotz_anom_burner_idle", "par_idle", "thermal"},
+	{"anom_par", "cotz_anom_steam_idle", "par_idle"},
+	{"anom_zone_fire", "cotz_anom_zone_fire", "cotz_zone_fire_idle", "smoulder", base = "cotz_anomaly_base"},
+	{"anom_zone_acid", "cotz_anom_zone_acid", "cotz_zone_acid_idle", base = "cotz_anomaly_base"},
+	{"anom_zone_electro", "cotz_anom_zone_electro", "cotz_zone_electro_idle", base = "cotz_anomaly_base"},
+	{"anom_springboard", "cotz_anom_springboard_idle", "cotz_springboard_idle", "gravity", base = "cotz_anomaly_base"},
+	{"anom_tesla", "cotz_anom_tesla_idle", "cotz_tesla_idle", "tesla", base = "cotz_anomaly_base"},
 }
 
 local function fixture(definition)
@@ -48,7 +59,7 @@ local function fixture(definition)
 		if state.noView then return end
 
 		return view
-	end}
+	end, GetPos = function() return vector(state.viewerX) end}
 	local options = {Get = function(key, default)
 		check(key == "anomalyLights" and default == true, "lighting reads the Helix option with an enabled default")
 
@@ -68,7 +79,9 @@ local function fixture(definition)
 		IsValid = function(value) return type(value) == "table" and value.valid ~= false end,
 		ix = {option = options},
 		CreateParticleSystem = function(_, name)
-			check(name == definition[2], "each class retains its original particle")
+			local layer = false
+			for _, layerName in ipairs(definition.layers or {}) do layer = layer or name == layerName end
+			check(name == definition[2] or layer, "each class creates its own idle particles")
 			state.starts = state.starts + 1
 			if state.failParticle then return end
 			local particle = {valid = true, IsValid = function(self) return self.valid end}
@@ -87,12 +100,21 @@ local function fixture(definition)
 			return state.light
 		end,
 	}, {__index = _G})
-	local root = "lua/entities/" .. definition[1] .. "/"
+	state.hooks = {}
+	environment.hook = {Add = function(event, _, callback) state.hooks[event] = callback end}
+	local root
 	environment.include = function(path)
-		execute(path == "shared.lua" and root .. path or "lua/" .. path, environment)
+		return execute(path == "shared.lua" and root .. path or "lua/" .. path, environment)
 	end
+	-- Entity inheritance is resolved by the engine; the spec loads the base into the same table first.
+	if definition.base then
+		root = "lua/entities/" .. definition.base .. "/"
+		execute(root .. "cl_init.lua", environment)
+	end
+	root = "lua/entities/" .. definition[1] .. "/"
 	execute(root .. ((definition[1] == "anom_jarka" or definition[1] == "anom_par")
 		and "shared.lua" or "cl_init.lua"), environment)
+	check(environment.ENT.IdleLight == definition[4], "each class uses its light preset")
 	local entity = setmetatable({
 		GetPos = function() return vector(0) end,
 		EntIndex = function() return 1 end,
@@ -204,19 +226,54 @@ electro:Think()
 check(electroState.lights == 0, "inactive electrical anomalies never request invisible lights")
 electroState.Activated = true
 electro:Think()
-check(electroState.lights == 1 and electroState.light.size == 1024, "activation creates one electrical light")
+check(electroState.lights == 1 and electroState.light.size == 420 and electroState.light.b == 255,
+	"activation creates one electrical light")
 electroState.failParticle = true
 electro.particle.valid = false
 electro:Think()
 electro:Think()
 check(electro.particle == nil, "failed particle creation remains nil-safe on later thinks")
 
+local psyDefinition = {"anom_psyfield", "cotz_anom_psy_idle", "cotz_psy_idle", "psy", base = "cotz_anomaly_base",
+	layers = {"cotz_anom_psy_glow"}}
+local field, fieldState, fieldEnvironment = fixture(psyDefinition)
+local blur
+fieldEnvironment.DrawMotionBlur = function(_, amount) blur = amount end
+fieldEnvironment.DrawColorModify = function() end
+local render = fieldState.hooks.RenderScreenspaceEffects
+check(render ~= nil, "the psy field registers one screen effect")
+fieldState.viewerX = 0
+field:Initialize()
+field:Think()
+check(fieldState.starts == 2 and #field.particleLayers == 1, "layered anomalies create each idle system once")
+check(fieldState.lights == 1 and fieldState.light.r == 150, "psy fields light their surroundings while idle")
+field:Think()
+check(fieldState.starts == 2, "awake layered anomalies reuse their systems")
+render()
+check(blur and blur > 0.59, "standing at the centre gives the full distortion")
+fieldState.viewerX = 175
+field:Think()
+blur = nil
+render()
+check(blur and math.abs(blur - 0.3) < 0.01, "distortion fades towards the edge")
+fieldState.StopParticle = true
+field:Think()
+check(fieldState.stops == 2 and #field.particleLayers == 0, "cooldown stops every layer")
+fieldState.StopParticle = false
+field:Think()
+check(fieldState.starts == 4, "cooldown completion restores every layer")
+fieldState.viewerX = 2751
+field:Think()
+blur = nil
+render()
+check(fieldState.stops == 4 and field.IsSleeping and blur == nil, "sleep stops layers and clears the distortion")
+
 local entity, transmissionState, environment = fixture(definitions[1])
 local transmissionHook
-local distributed
+local distributed = {}
 local function loadAutorun(server)
 	environment.SERVER = server
-	environment.AddCSLuaFile = function(path) distributed = path end
+	environment.AddCSLuaFile = function(path) distributed[path] = true end
 	environment.game = {AddParticles = function() end}
 	environment.PrecacheParticleSystem = function() end
 	environment.hook = {Add = function(event, _, callback)
@@ -226,7 +283,8 @@ local function loadAutorun(server)
 	execute("lua/autorun/stalker_anomaly_particles.lua", environment)
 end
 loadAutorun(true)
-check(distributed == "cotz/anomalies/cl_idle.lua", "server distributes the client helper")
+check(distributed["cotz/anomalies/cl_idle.lua"] and distributed["cotz/anomalies/cl_psy.lua"],
+	"server distributes the client helpers")
 loadAutorun(false)
 transmissionState.viewerX = 0
 entity:Initialize()

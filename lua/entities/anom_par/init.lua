@@ -1,9 +1,13 @@
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 
+local fx = include("cotz/anomalies/sv_fx.lua")
+
 -- Explicit balancing parameters used by the spreadsheet export/import tool.
 ENT.BalanceDamage = 30
 ENT.BalanceCooldown = 0.5
+-- Seconds the flare keeps burning after the last contact.
+ENT.FlareTime = 3
 
 ENT.cooldown = 0
 
@@ -49,7 +53,7 @@ function ENT:Touch(ent)
 		timer.Create(self:EntIndex().."_par_activated_sound", 0, 1, function()
 			if not IsValid(self) then return end
 			self:EmitSound("par_blast")
-			ParticleEffectAttach( "par_anomaly", PATTACH_ABSORIGIN_FOLLOW, self, 1 )
+			ParticleEffectAttach("cotz_anom_steam_jet", PATTACH_ABSORIGIN_FOLLOW, self, 0)
 		end)	
 		self.ActiveOnce = false
 	end
@@ -78,7 +82,8 @@ function ENT:Touch(ent)
 		self.Active = true
 	end)
 
-	timer.Create(self:EntIndex().."_par_sound_cooldown", 11, 1, function()
+	fx.Flash(self, self.FlareTime)
+	timer.Create(self:EntIndex().."_par_sound_cooldown", self.FlareTime, 1, function()
 		if not IsValid(self) then return end
 		self:StopSound("par_blast")
 		self:StopParticles()
@@ -107,4 +112,5 @@ function ENT:OnRemove()
 	self:StopSound("par_blast")
 	timer.Stop(self:EntIndex().."_par_cooldown")
 	timer.Stop(self:EntIndex().."_par_sound_cooldown")
+	fx.Clear(self)
 end

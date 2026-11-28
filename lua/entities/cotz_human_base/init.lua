@@ -613,6 +613,7 @@ function ENT:KilledDan(damage)
 		ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 		-- The looting plugin identifies corpses by this, so any model in models.lua works.
 		ragdoll.cotzHumanCorpse = true
+		self.cotzRagdoll = ragdoll
 		cleanup.ReplaceEntity(self, ragdoll)
 		undo.ReplaceEntity(self, ragdoll)
 		if self:IsOnFire() then ragdoll:Ignite(math.Rand(8, 10), 0) end
