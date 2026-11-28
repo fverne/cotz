@@ -29,14 +29,14 @@ function ENT:Initialize()
 	self:SetMoveType(MOVETYPE_VPHYSICS)  
 	self:SetSolid(SOLID_BBOX)	
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
-	self:SetName("Electra Anomaly")
+	self:SetName("Voronka Anomaly")
 	self:SetTrigger(1)
 	self.Active = true
 	self:SetCollisionBounds( Vector( -120, -120, -5 ), Vector( 120, 120, 80 ) )
 	self:SetNWBool("StopParticle", false)
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 
 	self:SetColor(Color(0,0,0,0))
-	self.Power = Vector(3.5,3.5,1)
+	self.Power = Vector(3,3,1)
 	
     local phys = self:GetPhysicsObject()
 	if (phys:IsValid()) then
