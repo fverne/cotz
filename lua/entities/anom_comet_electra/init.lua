@@ -10,6 +10,7 @@ ENT.BalanceRadius = 220
 
 -- Faster and less predictable than the Comet: fewer, sharper turns.
 ENT.Speed = 190
+ENT.HitRadius = 60
 ENT.Waypoints = 5
 ENT.CometDamageType = DMG_SHOCK
 ENT.CometHitParticle = "cotz_anom_electra_hit"

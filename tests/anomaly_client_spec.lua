@@ -187,11 +187,11 @@ local chemical, state = fixture(definitions[4])
 chemical:Initialize()
 state.viewerX = 0
 chemical:Think()
-check(state.lights == 1 and state.light.size == 128, "chemical anomaly requests one idle light")
+check(state.lights == 0, "chemical anomaly requests no light while idle")
 state.Activated = true
 chemical:Think()
-check(state.lights == 2 and state.light.size == 170 and state.light.brightness == 4,
-	"activation updates one light with the existing chemical strength")
+check(state.lights == 1 and state.light.size == 170 and state.light.brightness == 4,
+	"activation creates one light with the existing chemical strength")
 state.lighting = false
 chemical:Think()
 check(state.light.size == 0 and state.light.brightness == 0, "lighting toggle clears a live light")
@@ -204,6 +204,7 @@ check(state.lights == count + 1, "lighting can be restored without respawning")
 local standalone, standaloneState, standaloneEnvironment = fixture(definitions[4])
 standaloneEnvironment.ix = nil
 standaloneState.viewerX = 0
+standaloneState.Activated = true
 standalone:Initialize()
 standalone:Think()
 check(standaloneState.lights == 1, "lighting remains enabled outside Helix")
@@ -246,7 +247,7 @@ fieldState.viewerX = 0
 field:Initialize()
 field:Think()
 check(fieldState.starts == 2 and #field.particleLayers == 1, "layered anomalies create each idle system once")
-check(fieldState.lights == 1 and fieldState.light.r == 150, "psy fields light their surroundings while idle")
+check(fieldState.lights == 0, "psy fields stay dark while idle")
 field:Think()
 check(fieldState.starts == 2, "awake layered anomalies reuse their systems")
 render()

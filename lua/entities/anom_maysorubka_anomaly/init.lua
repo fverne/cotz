@@ -32,7 +32,7 @@ function ENT:Initialize()
 	self:SetTrigger(1)
 	self.Active = true
 	self.ActiveOnce = true
-	self:SetCollisionBounds( Vector( -60, -60, -5 ), Vector( 60, 60, 40 ) )
+	self:SetCollisionBounds( Vector( -120, -120, -5 ), Vector( 120, 120, 40 ) )
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 
 	self:SetColor(Color(0,0,0,0))
 	self:SetNWBool("StopParticle", false)

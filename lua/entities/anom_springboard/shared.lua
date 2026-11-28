@@ -5,8 +5,8 @@ ENT.Spawnable = true
 ENT.AdminSpawnable = true
 ENT.Category = "S.T.A.L.K.E.R. Anomalies"
 
-ENT.TriggerMins = Vector(-55, -55, -5)
-ENT.TriggerMaxs = Vector(55, 55, 50)
+ENT.TriggerMins = Vector(-80, -80, -5)
+ENT.TriggerMaxs = Vector(80, 80, 50)
 
 sound.Add({
 	name = "cotz_springboard_idle",

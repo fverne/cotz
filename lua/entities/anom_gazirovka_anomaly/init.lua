@@ -32,7 +32,7 @@ function ENT:Initialize()
 	self.ActiveOnce = true
 	self:SetTrigger(1)
 	self:SetName("Gazirovka Anomaly")
-	self:SetCollisionBounds( Vector( -60, -60, -5 ), Vector( 60, 60, 80 ) )
+	self:SetCollisionBounds( Vector( -90, -90, -5 ), Vector( 90, 90, 80 ) )
 	self:SetNWBool("StopParticle", false)
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 
 	self:SetColor(Color(0,0,0,0))

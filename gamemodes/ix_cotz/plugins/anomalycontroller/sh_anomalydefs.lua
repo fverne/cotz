@@ -22,7 +22,7 @@ PLUGIN.anomalydefs[1] = {
 	entityname = "anom_jarka",
 	category = "fire",
 	interval = 128,
-	triggerRadius = 85,
+	triggerRadius = 43,
 	commonArtifacts = {
 		"artifact_droplet",
 		"artifact_bolt",
@@ -42,7 +42,7 @@ PLUGIN.anomalydefs[2] = {
 	entityname = "anom_par",
 	category = "fire",
 	interval = 128,
-	triggerRadius = 85,
+	triggerRadius = 43,
 	commonArtifacts = {
 		"artifact_droplet",
 		"artifact_bolt",
@@ -84,7 +84,7 @@ PLUGIN.anomalydefs[4] = {
 	entityname = "anom_electra_anomaly_type2",
 	category = "electro",
 	interval = 256,
-	triggerRadius = 85,
+	triggerRadius = 99,
 	commonArtifacts = {
 		"artifact_battery",
 		"artifact_blowncap",
@@ -106,7 +106,7 @@ PLUGIN.anomalydefs[5] = {
 	entityname = "anom_maysorubka_anomaly",
 	category = "gravity",
 	interval = 128,
-	triggerRadius = 85,
+	triggerRadius = 170,
 	commonArtifacts = {
 		"artifact_mementomori",
 		-- "nightstar",
@@ -127,7 +127,7 @@ PLUGIN.anomalydefs[6] = {
 	entityname = "anom_maysorubka_anomaly_type2",
 	category = "gravity",
 	interval = 128,
-	triggerRadius = 85,
+	triggerRadius = 114,
 	commonArtifacts = {
 		"artifact_mementomori",
 		"artifact_bolt",
@@ -147,7 +147,7 @@ PLUGIN.anomalydefs[7] = {
 	entityname = "anom_voronka_anomaly",
 	category = "gravity",
 	interval = 256,
-	triggerRadius = 142,
+	triggerRadius = 170,
 	commonArtifacts = {
 		"artifact_mementomori",
 		"artifact_thorn",
@@ -168,7 +168,7 @@ PLUGIN.anomalydefs[8] = {
 	entityname = "anom_gazirovka_anomaly",
 	category = "acid",
 	interval = 128,
-	triggerRadius = 85,
+	triggerRadius = 128,
 	commonArtifacts = {
 		"artifact_mycelia",
 		"artifact_slime",
@@ -190,7 +190,7 @@ PLUGIN.anomalydefs[9] = {
 	entityname = "anom_kisel_anomaly",
 	category = "acid",
 	interval = 128,
-	triggerRadius = 85,
+	triggerRadius = 71,
 	commonArtifacts = {
 		"artifact_cell",
 		"artifact_mementomori",
@@ -236,6 +236,7 @@ PLUGIN.anomalydefs[11] = {
 	name = "Springboard",
 	entityname = "anom_springboard",
 	interval = 160,
+	triggerRadius = 114,
 	commonArtifacts = {
 		"artifact_mementomori",
 		"artifact_bolt",

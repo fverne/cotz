@@ -30,7 +30,7 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self:SetName("Tramplin Anomaly 2")
 	self:SetTrigger(1)
-	self:SetCollisionBounds( Vector( -60, -60, -5 ), Vector( 60, 60, 40 ) )
+	self:SetCollisionBounds( Vector( -80, -80, -5 ), Vector( 80, 80, 40 ) )
 	self.Active = true
 	self.ActiveOnce = true
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 

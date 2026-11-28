@@ -8,6 +8,8 @@ local fx = include("cotz/anomalies/sv_fx.lua")
 ENT.BalanceDamage = 45
 ENT.BalanceCooldown = 9
 ENT.BalanceRadius = 320
+-- Entering this range starts the charge; it matches the idle effect, while the discharge reaches further.
+ENT.DetectRadius = 150
 
 -- Warning between the crackle and the discharge, long enough to reach cover.
 ENT.ChargeTime = 2.5
@@ -38,9 +40,9 @@ function ENT:IsExposed(victim, core)
 	return not trace.Hit
 end
 
-function ENT:FindVictims()
+function ENT:FindVictims(radius)
 	local victims = {}
-	for _, entity in ipairs(ents.FindInSphere(self:GetPos(), self.BalanceRadius)) do
+	for _, entity in ipairs(ents.FindInSphere(self:GetPos(), radius)) do
 		if fx.IsCreature(entity) then
 			victims[#victims + 1] = entity
 		end
@@ -54,7 +56,7 @@ function ENT:Discharge()
 	self:EmitSound("cotz_tesla_blast")
 	fx.Burst("cotz_anom_tesla_blast", core)
 
-	for _, victim in ipairs(self:FindVictims()) do
+	for _, victim in ipairs(self:FindVictims(self.BalanceRadius)) do
 		if self:IsExposed(victim, core) then
 			local share = 1 - (1 - self.EdgeDamage) * math.min(victim:GetPos():Distance(core) / self.BalanceRadius, 1)
 			fx.Damage(self, victim, self.BalanceDamage * share, DMG_SHOCK, core)
@@ -86,7 +88,7 @@ function ENT:Think()
 		return true
 	end
 
-	if not self.charging and CurTime() >= self.nextDischarge and #self:FindVictims() > 0 then
+	if not self.charging and CurTime() >= self.nextDischarge and #self:FindVictims(self.DetectRadius) > 0 then
 		self:StartCharge()
 	end
 	self:NextThink(CurTime() + SCAN_INTERVAL)

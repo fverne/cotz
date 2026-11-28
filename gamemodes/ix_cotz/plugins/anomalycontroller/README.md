@@ -4,6 +4,26 @@ The controller owns field placement and artifact spawning. The field anomaly cla
 `lua/entities/`; their client definitions include `lua/cotz/anomalies/cl_idle.lua` into their `ENT` tables.
 The ten original classes keep their IDs, bases, field density, damage amounts, cooldowns and artifact settings.
 
+## Trigger sizes
+
+Triggers follow the idle particle: the horizontal area it spawns in, or the main sprite for effects emitted
+from one point. Soft glow edges and drifting embers do not count. When an idle system changes, update its
+trigger and the definition's `triggerRadius`. Values are box half-widths unless noted.
+
+| Anomaly | Units |
+| --- | --- |
+| Burner, Burner 2 | 30 |
+| Electro, Electro 2 | 60, 70 |
+| Bubble, Bubble 2 | 120, 80 |
+| Whirlgig (box, player and prop pull, corpse capture) | 120 |
+| Fruitpunch, Fruitpunch 2 | 90, 50 |
+| Karusel (box only; its 300-unit pull is unchanged) | 90 |
+| Springboard (box; the launch still reaches 110) | 80 |
+| Tesla (`DetectRadius`, sphere) | 150 |
+| Psy Pocket (`BalanceRadius`, sphere: drain and distortion) | 150 |
+| Smouldering Ground, Acid Mist, Static Ground | 130 |
+| Comet, Ball Lightning (`HitRadius`, sphere) | 80, 60 |
+
 ## Anomaly types
 
 | # | Definition | Class | Behaviour |
@@ -16,7 +36,7 @@ The ten original classes keep their IDs, bases, field density, damage amounts, c
 | 8, 9 | Fruitpunch, Fruitpunch 2 | `anom_gazirovka_anomaly`, `anom_kisel_anomaly` | Acid burst on contact |
 | 10 | Karusel | `anom_tramplin_anomaly` | Lifts and blasts everything around it |
 | 11 | Springboard | `anom_springboard` | Throws everything nearby up and away after a short wind-up |
-| 12 | Tesla | `anom_tesla` | Crackles for 2.5 s when someone enters its 320-unit field, then shocks everyone not behind cover |
+| 12 | Tesla | `anom_tesla` | Crackles for 2.5 s when someone comes within 150 units, then shocks everyone within 320 not behind cover |
 | 13 | Psy Pocket | `anom_psyfield` | Drains PsyHealth from players inside, with periodic voice pulses and screen distortion |
 | 14-16 | Smouldering Ground, Acid Mist, Static Ground | `anom_zone_fire`, `_acid`, `_electro` | Wide patches that hurt whatever stands in them every second |
 | 17 | Comet | `anom_comet` | Burning sphere that circles its spawn point and scorches what it passes |
@@ -52,8 +72,8 @@ added to the category later. Strings of only `0` and `1` are the old per-index m
 definitions 5-7); the shipped presets and older saves use them and they still resolve.
 
 Each spawn picks one of the point's allowed anomalies and places `ceil(radius / interval)` of it. Every
-definition declares a `triggerRadius`: the reach of its trigger box (85, the half-diagonal of the 60-unit
-box), the Whirlgig's 100-unit box and pull (142), or the Karusel's 300-unit pull. A spot is rejected when
+field definition with a category, and the Springboard, declares a `triggerRadius`: the half-diagonal of its
+trigger box (43 to 170), or the Karusel's 300-unit pull. Other definitions use 85. A spot is rejected when
 its trigger would overlap one of an anomaly already placed, from this point, another point or an earlier
 spawn, unless the two are at least 128 units apart vertically. Each anomaly tries eight spots, then is
 skipped rather than stacked, so a crowded point can spawn fewer anomalies than before. Anomalies removed
@@ -118,7 +138,7 @@ including crush from physics impacts.
 
 ## NPCs in pulling anomalies
 
-Whirlgig and Karusel kill any live `npc_mutant_*` or `npc_human_*` inside their pull sphere (100 units around
+Whirlgig and Karusel kill any live `npc_mutant_*` or `npc_human_*` inside their pull sphere (120 units around
 the Whirlgig; 300 units around the Karusel's core, 300 above it), regardless of health, resistances or damage
 immunities. Bears and both pseudogiants are exempt: they are never captured and only take the blast's ordinary
 damage. A captured corpse is dragged to the core and held there, slowly spinning, without gravity until the next
@@ -143,9 +163,9 @@ particles, sound and lighting. Activation effects remain server-triggered. Burne
 let the client recreate their idle particles instead of creating a second server-driven idle system.
 
 Dynamic lights update once per awake check, only when visible lighting is required. Each class names a light
-preset in `cl_idle.lua`: most only light up while the server flags the anomaly as activated (the burner's
-flare, an electrical discharge, a gravity burst), while Kisel, Tesla, Psy Pocket, Smouldering Ground and the
-comets glow while idle. A class can add `IdleLayers`, extra systems started and stopped with its idle particle. Clients can toggle
+preset in `cl_idle.lua`. A light only shows while the server flags the anomaly as activated (the burner's
+flare, an electrical discharge, a gravity burst, Kisel's chemical flare, Tesla's discharge, Psy Pocket's
+surge). Idle anomalies emit no dynamic light, and floating beads never do. A class can add `IdleLayers`, extra systems started and stopped with its idle particle. Clients can toggle
 **Anomaly Lights** under **Performance** in the Helix settings. The option is saved locally and
 defaults to enabled. Outside Helix, or before its option library is available, lighting stays enabled. It does not hide anomaly particles or affect damage.
 Floating beads, hoverstones and warp entities have separate effects and are outside this helper.

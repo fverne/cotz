@@ -33,7 +33,7 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self:SetName("Tramplin Anomaly")
 	self:SetTrigger(1)
-	self:SetCollisionBounds( Vector( -60, -60, -5 ), Vector( 60, 60, 80 ) )
+	self:SetCollisionBounds( Vector( -90, -90, -5 ), Vector( 90, 90, 80 ) )
 	self:SetNWBool("StopParticle", false)
 	self.Active = true
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 

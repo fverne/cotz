@@ -32,7 +32,7 @@ function ENT:Initialize()
 	self:SetName("Electra Anomaly")
 	self:SetTrigger(1)
 	self.Active = true
-	self:SetCollisionBounds( Vector( -100, -100, -5 ), Vector( 100, 100, 80 ) )
+	self:SetCollisionBounds( Vector( -120, -120, -5 ), Vector( 120, 120, 80 ) )
 	self:SetNWBool("StopParticle", false)
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 
 	self:SetColor(Color(0,0,0,0))
@@ -51,9 +51,9 @@ function ENT:Think()
 
 		return true
 	end
-	mutantCapture.Update(self, self:GetPos(), 100, self:GetPos() + Vector(0, 0, 50),
+	mutantCapture.Update(self, self:GetPos(), 120, self:GetPos() + Vector(0, 0, 50),
 		"voronka_recharge" .. self:EntIndex(), function(ragdoll) self:StartTouch(ragdoll) end)
-	for _, v in ipairs(ents.FindInSphere(self:GetPos(),100)) do
+	for _, v in ipairs(ents.FindInSphere(self:GetPos(),120)) do
 		if v:IsPlayer() then
 			v:SetVelocity( (self:GetPos() - v:GetPos()) * self.Power)
 		else

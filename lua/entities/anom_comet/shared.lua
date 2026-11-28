@@ -16,7 +16,6 @@ sound.Add({
 
 if CLIENT then
 	ENT.IdleParticle = "cotz_anom_comet_fire"
-	ENT.IdleLayers = {"cotz_anom_burner_idle"}
 	ENT.IdleSound = "cotz_comet_idle"
 	ENT.IdleLight = "cometFire"
 end

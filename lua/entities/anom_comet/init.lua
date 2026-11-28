@@ -9,6 +9,7 @@ ENT.BalanceCooldown = 1
 ENT.BalanceRadius = 260
 
 ENT.Speed = 140
+ENT.HitRadius = 80
 ENT.CometDamageType = DMG_BURN
 ENT.CometHitParticle = "cotz_anom_gravity_shield"
 ENT.CometHitSound = "ambient/fire/ignite.wav"

@@ -5,23 +5,23 @@ local SLEEP_MARGIN = 250
 local PARTICLE_OFFSET = Vector(0, 0, 0)
 local INVISIBLE_COLOR = Color(0, 0, 0, 0)
 
--- Light presets. "idle" lights stay on while the anomaly is awake; the rest only show while the server
--- flags the anomaly as activated. Active values fall back to the idle ones.
+-- Light presets. Lights only show while the server flags the anomaly as activated. Active values fall
+-- back to the base values when a preset does not set them.
 local LIGHTS = {
-	chemical = {r = 137, g = 244, b = 66, size = 128, brightness = 1, decay = 500, idle = true,
+	chemical = {r = 137, g = 244, b = 66, size = 128, brightness = 1, decay = 500,
 		activeSize = 170, activeBrightness = 4, activeDecay = 1000},
 	activation = {r = 30, g = 30, b = 90, size = 1024, brightness = 1, decay = 500, innerAngle = 1},
 	electric = {r = 110, g = 140, b = 255, size = 420, brightness = 3, decay = 1500},
 	thermal = {r = 255, g = 120, b = 30, size = 300, brightness = 3, decay = 800},
 	acid = {r = 120, g = 255, b = 60, size = 220, brightness = 3, decay = 1200},
 	gravity = {r = 255, g = 200, b = 140, size = 260, brightness = 2, decay = 1500},
-	tesla = {r = 90, g = 110, b = 255, size = 160, brightness = 0.6, decay = 500, idle = true,
+	tesla = {r = 90, g = 110, b = 255, size = 160, brightness = 0.6, decay = 500,
 		activeSize = 700, activeBrightness = 4, activeDecay = 2000},
-	psy = {r = 150, g = 70, b = 230, size = 260, brightness = 0.8, decay = 500, idle = true,
+	psy = {r = 150, g = 70, b = 230, size = 260, brightness = 0.8, decay = 500,
 		activeSize = 420, activeBrightness = 3, activeDecay = 1500},
-	smoulder = {r = 255, g = 110, b = 30, size = 180, brightness = 0.5, decay = 500, idle = true},
-	cometFire = {r = 255, g = 110, b = 25, size = 300, brightness = 3, decay = 500, idle = true},
-	cometElectric = {r = 120, g = 150, b = 255, size = 300, brightness = 3, decay = 500, idle = true},
+	smoulder = {r = 255, g = 110, b = 30, size = 180, brightness = 0.5, decay = 500},
+	cometFire = {r = 255, g = 110, b = 25, size = 300, brightness = 3, decay = 500},
+	cometElectric = {r = 120, g = 150, b = 255, size = 300, brightness = 3, decay = 500},
 }
 
 ENT.WakeRange = 2500
@@ -87,7 +87,7 @@ local function updateLight(entity, now)
 	local preset = LIGHTS[entity.IdleLight]
 	local activated = entity:GetNWBool("Activated", false)
 	local lightsEnabled = not ix or not ix.option or ix.option.Get("anomalyLights", true)
-	if not lightsEnabled or not preset or not (preset.idle or activated) then
+	if not lightsEnabled or not preset or not activated then
 		clearLight(entity)
 		return
 	end

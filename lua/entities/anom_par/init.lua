@@ -33,7 +33,7 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 	self:SetName("Steam Anomaly")
 	self:SetTrigger(1)
-	self:SetCollisionBounds( Vector( -60, -60, -5 ), Vector( 60, 60, 80 ) )
+	self:SetCollisionBounds( Vector( -30, -30, -5 ), Vector( 30, 30, 80 ) )
 	self.Active = true
 	self.ActiveOnce = true
 	self:SetRenderMode( RENDERMODE_TRANSTEXTURE ) 

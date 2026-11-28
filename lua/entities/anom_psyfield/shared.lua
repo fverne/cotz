@@ -9,7 +9,7 @@ ENT.TriggerMins = Vector(-20, -20, 0)
 ENT.TriggerMaxs = Vector(20, 20, 60)
 
 -- Explicit balancing parameter used by the spreadsheet export/import tool; clients use it for the distortion.
-ENT.BalanceRadius = 350
+ENT.BalanceRadius = 150
 
 sound.Add({
 	name = "cotz_psy_idle",
