@@ -17,6 +17,7 @@ local CROUCH_MUZZLE_HEIGHT = Vector(0, 0, 30)
 local MELEE_WINDUP = 0.45
 local MELEE_RECOVERY = 1.7
 local MELEE_REACH = 76
+local MELEE_HIT_REACH = 190
 local DROP_HEIGHT = Vector(0, 0, 32)
 local RAISE_SECONDS = 0.6
 local SNEAK_RANGE = 1200
@@ -676,7 +677,7 @@ function ENT:UpdateMeleeCombat(enemy, controller, now, distance)
 		end
 		if now < self.swingAt then return end
 		self.swingAt, self.swingTarget = nil, nil
-		if distance > MELEE_REACH ^ 2 or not self:FaceCombatTarget(enemy) then return end
+		if distance > MELEE_HIT_REACH ^ 2 or not self:FaceCombatTarget(enemy) then return end
 		local clear, _, hitPosition = self:GetCombatLane(enemy, controller)
 		if not clear then return end
 

@@ -7,6 +7,9 @@ ENT.PolterSkin = 1
 ENT.ElementImmunity = DMG_BURN
 ENT.DeathParticle = "wick_art_fire_smoke"
 
+ENT.PainSoundEnabled = true
+ENT.PainSound = {name = "Stalker.Poltergeist.Pain", min = 1, max = 2}
+
 local LEAD_SECONDS = 0.35
 local GROUND_PROBE_UP = Vector(0, 0, 24)
 local GROUND_PROBE_DOWN = Vector(0, 0, 256)

@@ -1,7 +1,11 @@
-﻿AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "shared.lua" )
+﻿AddCSLuaFile( "shared.lua" )
 include('shared.lua')
 include("STALKERNPCBaseVars.lua")
+
+ENT.PainSoundEnabled = true
+ENT.PainSound.name = "Stalker.Bloodsucker.Pain"
+ENT.PainSound.min = 1
+ENT.PainSound.max = 3
 
 ENT.DieSoundEnabled = true
 ENT.DieSound.name = "Stalker.Bloodsucker.Die"
@@ -23,6 +27,8 @@ ENT.ChasingSound.name = "Stalker.Bloodsucker.Chase"
 ENT.ChasingSound.min = 1
 ENT.ChasingSound.max = 3
 ENT.ChasingSound.chance = 20
+ENT.ChasingSound.noCooldown = true
+ENT.ChasingSound.interval = 3
 
 ENT.CanSpecial = true
 
@@ -53,6 +59,9 @@ ENT.navigationLeapSpeed = 2
 
 local FEED_HEAL = 125
 local FEED_FLEE_SECONDS = 10
+local CLOAK_RANGE_SQR = 225 ^ 2
+local CLOAK_ALPHA = 55
+local CLOAK_CHECK_INTERVAL = 0.35
 
 ENT.Abilities = {
 	{
@@ -163,8 +172,28 @@ function ENT:Initialize()
 	self:SetMaxHealth(self:Health())
 
 	self.NextAbilityTime = CurTime()+1
-	
-	self:SetRenderMode(RENDERMODE_TRANSALPHA)
+
+	self:SetRenderMode(RENDERMODE_TRANSCOLOR)
+	self:DrawShadow(false)
+	self:SetCloakAlpha(255)
+end
+
+-- Server-side alpha, networked through the entity color, so every client sees the same cloak.
+function ENT:SetCloakAlpha(alpha)
+	if self.cloakAlpha == alpha then return end
+	self.cloakAlpha = alpha
+	self:SetColor(Color(255, 255, 255, alpha))
+end
+
+-- Cloaked until the enemy comes close or the bloodsucker is mid-ability, which reveals it.
+function ENT:UpdateCloak()
+	local now = CurTime()
+	if now < (self.cloakNextCheck or 0) then return end
+	self.cloakNextCheck = now + CLOAK_CHECK_INTERVAL
+
+	local target = self:GetEnemy()
+	local near = IsValid(target) and self:GetPos():DistToSqr(target:GetPos()) <= CLOAK_RANGE_SQR
+	self:SetCloakAlpha((near or self.PlayingAnimation) and 255 or CLOAK_ALPHA)
 end
 
 function ENT:STALKERNPCThinkEnemyValid()
@@ -176,6 +205,8 @@ function ENT:STALKERNPCThink()
 	if self:Health() < (self:GetMaxHealth() * 0.33) then
 		self:SetMovementActivity(self.injuredact)
 	end
+
+	self:UpdateCloak()
 
 	if(self.PostSuccRunFinish<CurTime()) then
 		self.RangeSchedule = SCHED_CHASE_ENEMY

@@ -5,6 +5,8 @@ include("shared.lua")
 ENT.StartHealth = 100
 ENT.flatbulletresistance = 10
 ENT.percentbulletresistance = 20
+ENT.lootChance = 60
+ENT.lootGroup = "bandit_pistol_loot"
 
 ENT.ModelGroup = "bandit"
 
@@ -12,17 +14,17 @@ ENT.ModelGroup = "bandit"
 ENT.MeleeLoadouts = {
 	{
 		model = "models/weapons/tfa_nmrih/w_me_crowbar.mdl",
-		damage = 6,
+		damage = 30,
 		hand = {pos = {-3.92, -3.29, -4.93}, ang = {-5.1, -0.6, 178.1}},
 	},
 	{
 		model = "models/weapons/tfa_nmrih/w_me_pipe_lead.mdl",
-		damage = 7,
+		damage = 30,
 		hand = {pos = {-3.85, -3.43, -3.82}, ang = {-5.1, -0.6, 178.1}},
 	},
 	{
 		model = "models/weapons/tfa_nmrih/w_me_bat_metal.mdl",
-		damage = 8,
+		damage = 30,
 		hand = {pos = {-3.14, -0.34, -3.65}, ang = {-5.1, -0.6, 178.1}},
 	},
 }

@@ -826,6 +826,27 @@ function ENT:STALKERNPCPlaySoundRandom(CH,SNDNM,IMIN,IMAX,CHAN)
 	end
 end
 
+-- Pain has its own cooldown, separate from NextSoundCanPlayTime, and no chance roll: every hit
+-- plays it unless the previous pain is still cooling down.
+function ENT:STALKERNPCPlayPainSound()
+	if((self.NextPainSoundTime or 0)>CurTime()) then return end
+
+	self:EmitSound(self.PainSound.name..math.random(self.PainSound.min,self.PainSound.max))
+	self.NextPainSoundTime = CurTime()+self.PainSoundCooldown
+end
+
+-- Chasing sounds with noCooldown neither wait for nor set NextSoundCanPlayTime, so other sounds are unaffected.
+-- The chance is rolled at most once per ChasingSound.interval seconds, so clips do not stack.
+function ENT:STALKERNPCPlayChasingSoundNoCooldown()
+	if((self.NextChasingSoundTime or 0)>CurTime()) then return end
+
+	self.NextChasingSoundTime = CurTime()+self.ChasingSound.interval
+
+	if(math.random(1,100)<self.ChasingSound.chance) then
+		self:EmitSound(self.ChasingSound.name..math.random(self.ChasingSound.min,self.ChasingSound.max))
+	end
+end
+
 function ENT:STALKERNPCStopPreviousSound()
 	self:StopSound(self.LastPlayedSound)
 	self.LastPlayedSound = ""
@@ -1033,7 +1054,11 @@ function ENT:Think()
 					self:STALKERNPCThinkEnemyValid()
 
 					if(self.ChasingSoundEnabled==true&&self:IsCurrentSchedule(SCHED_CHASE_ENEMY)) then
-						self:STALKERNPCPlaySoundRandom(self.ChasingSound.chance,self.ChasingSound.name,self.ChasingSound.min,self.ChasingSound.max)
+						if(self.ChasingSound.noCooldown==true) then
+							self:STALKERNPCPlayChasingSoundNoCooldown()
+						else
+							self:STALKERNPCPlaySoundRandom(self.ChasingSound.chance,self.ChasingSound.name,self.ChasingSound.min,self.ChasingSound.max)
+						end
 					end
 
 				else
@@ -1173,7 +1198,7 @@ function ENT:OnTakeDamage(dmginfo)
 
 	if(self:Health()>0) then
 		if(self.PainSoundEnabled==true) then
-			self:STALKERNPCPlaySoundRandom(33,self.PainSound.name,self.PainSound.min,self.PainSound.max)
+			self:STALKERNPCPlayPainSound()
 		end
 	elseif(self:Health()<1&&self.IsAlive==true) then
 		self:STALKERNPCKill(dmginfo)

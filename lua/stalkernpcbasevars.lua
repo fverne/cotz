@@ -45,6 +45,7 @@ ENT.PainSound = {}
 ENT.PainSound.name = ""
 ENT.PainSound.min = 1
 ENT.PainSound.max = 1
+ENT.PainSoundCooldown = 5
 
 ENT.DieSoundEnabled = false
 ENT.DieSound = {}

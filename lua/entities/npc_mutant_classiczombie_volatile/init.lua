@@ -13,6 +13,11 @@ ENT.HitBoxToHitGroup = {
 	[8] = HITGROUP_LEFTLEG
 }
 
+ENT.PainSoundEnabled = true
+ENT.PainSound.name = "Stalker.Zombie.Pain"
+ENT.PainSound.min = 1
+ENT.PainSound.max = 6
+
 ENT.DieSoundEnabled = true
 ENT.DieSound.name = "Stalker.Zombie.Die"
 ENT.DieSound.min = 1

@@ -7,6 +7,9 @@ ENT.PolterSkin = 4
 ENT.ElementImmunity = DMG_SHOCK
 ENT.DeathParticle = "wick_anomaly_electra_activated"
 
+ENT.PainSoundEnabled = true
+ENT.PainSound = {name = "Stalker.Poltergeist.Pain", min = 1, max = 2}
+
 local DISCHARGE_RADIUS = 220
 local DISCHARGE_DAMAGE = 18
 local CHARGE_PARTICLE = "wick_art_electro_sparks"

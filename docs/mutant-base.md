@@ -276,7 +276,7 @@ in a multiplayer session:
    and the rodent uses its `attack3` animation.
 4. A test flyer (any mutant with `MovementMode = "fly"`) takes off, pursues around corners and over
    walls, holds for melee, follows a hidden player to the last seen position, sleeps and wakes.
-5. Swamp bloodsucker: wears skin 2 or 5, cloaks beyond 150 units, lunges, never freezes players, and its
+5. Swamp bloodsucker: wears skin 2 or 5, cloaks until its enemy is within 225 units or it lunges, lunges, never freezes players, and its
    corpse yields the swamp harvest.
 6. Mimic: arrives from a searched cyclical container with its call and goes for the opener; stays put in the
    air while perched, indoors and out; orbs lower health and PsyHealth; it lands and runs again; a mimic shot

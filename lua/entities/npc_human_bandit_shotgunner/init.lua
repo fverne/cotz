@@ -5,7 +5,7 @@ include("shared.lua")
 ENT.StartHealth = 100
 ENT.flatbulletresistance = 10
 ENT.percentbulletresistance = 20
-ENT.lootChance = 33
+ENT.lootChance = 60
 ENT.lootGroup = "bandit_shotgun_loot"
 
 ENT.CombatRole = "shotgunner"

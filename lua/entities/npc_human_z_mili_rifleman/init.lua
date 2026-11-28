@@ -5,7 +5,7 @@ include("shared.lua")
 ENT.StartHealth = 150
 ENT.flatbulletresistance = 15
 ENT.percentbulletresistance = 20
-ENT.lootChance = 33
+ENT.lootChance = 60
 ENT.lootGroup = "z_mili_rifle_loot"
 
 -- Zombies do not take cover, crouch or sneak.

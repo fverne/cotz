@@ -3,6 +3,11 @@ AddCSLuaFile( "shared.lua" )
 include('shared.lua')
 include("STALKERNPCBaseVars.lua")
 
+ENT.PainSoundEnabled = true
+ENT.PainSound.name = "Stalker.Chimera.Pain"
+ENT.PainSound.min = 1
+ENT.PainSound.max = 5
+
 ENT.DieSoundEnabled = true
 ENT.DieSound.name = "Stalker.Chimera.Die"
 ENT.DieSound.min = 1

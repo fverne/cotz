@@ -88,6 +88,24 @@ PLUGIN.eventdefs["Dog5"] = {
 bloodsuckers
 ---------------------------------------------------------------------------]]
 
+PLUGIN.eventdefs["bloodsucker0"] = {
+	entities = {
+		{"npc_mutant_bloodsucker_swamp", 1}, 
+	},
+	pdabroadcast = "There's been sightings of a swamp bloodsucker %s, any stalkers brave enough to take it out?",
+	difficulty = {"swamp_outside_easy", "swamp_building", "swamp_underground"},
+	lootChance = 10,
+}
+
+PLUGIN.eventdefs["bloodsucker0"] = {
+	entities = {
+		{"npc_mutant_bloodsucker_swamp", 2}, 
+	},
+	pdabroadcast = "There's been sightings of a swamp bloodsucker hunting pack %s. Dont be a prey, stalker.",
+	difficulty = {"swamp_outside_hard", "swamp_building", "swamp_underground"},
+	lootChance = 10,
+}
+
 PLUGIN.eventdefs["bloodsucker1"] = {
 	entities = {
 		{"npc_mutant_bloodsucker", 1}, 
@@ -1062,6 +1080,15 @@ PLUGIN.eventdefs["garbage_bandit_patrol_heavy"] = {
 PLUGIN.eventdefs["bandit0"] = {
 	entities = {
 		{"npc_human_bandit_pistolman", 1},
+		{"npc_human_bandit_melee", 1},
+	},
+	pdabroadcast = "Bandit scouts spotted %s. Take care.",
+	difficulty = {"swamps_outside_easy"},
+}
+
+PLUGIN.eventdefs["bandit0"] = {
+	entities = {
+		{"npc_human_bandit_melee", 1},
 	},
 	pdabroadcast = "Bandit scout spotted %s. Take care.",
 	difficulty = {"swamps_outside_easy"},
@@ -1070,6 +1097,7 @@ PLUGIN.eventdefs["bandit0"] = {
 PLUGIN.eventdefs["bandit1"] = {
 	entities = {
 		{"npc_human_bandit_pistolman", 2},
+		{"npc_human_bandit_melee", 1},
 		{"npc_human_bandit_shotgunner", 1}
 	},
 	pdabroadcast = "Bandits spotted %s. Take care.",
@@ -1085,6 +1113,7 @@ PLUGIN.eventdefs["bandit1"] = {
 PLUGIN.eventdefs["bandit2"] = {
 	entities = {
 		{"npc_human_bandit_pistolman", 1},
+		{"npc_human_bandit_melee", 1},
 		{"npc_human_bandit_shotgunner", 1},
 		{"npc_human_bandit_rifleman", 2},
 	},
